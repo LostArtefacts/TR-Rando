@@ -1,13 +1,13 @@
 ﻿namespace TRLevelControl.Model;
 
-public class TR4Entity : TREntity<TR4Type>, ICloneable
+public class TR5Entity : TREntity<TR5Type>, ICloneable
 {
     public short Intensity { get; set; }
     public short OCB { get; set; }
 
-    public TR4Entity Clone()
+    public TR5Entity Clone()
     {
-        return (TR4Entity)MemberwiseClone();
+        return (TR5Entity)MemberwiseClone();
     }
 
     object ICloneable.Clone()

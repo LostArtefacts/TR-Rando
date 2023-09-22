@@ -10,8 +10,8 @@ public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        TREntity enemy = level.Entities[EntityIndex];
-        TR1Type enemyEntity = (TR1Type)enemy.TypeID;
+        TR1Entity enemy = level.Entities[EntityIndex];
+        TR1Type enemyEntity = enemy.TypeID;
         bool isWaterEnemy = TR1TypeUtilities.IsWaterLandCreatureEquivalent(enemyEntity);
 
         // If the index doesn't point to an enemy or if we only want to move land creatures
@@ -24,7 +24,7 @@ public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
         // If the level has water creatures available, and we want to switch it, do so.
         if (AttemptWaterCreature)
         {
-            TREntity waterEnemy = level.Entities.ToList().Find(e => TR1TypeUtilities.IsWaterCreature((TR1Type)e.TypeID));
+            TR1Entity waterEnemy = level.Entities.Find(e => TR1TypeUtilities.IsWaterCreature(e.TypeID));
             if (waterEnemy != null)
             {
                 enemy.TypeID = waterEnemy.TypeID;
@@ -39,7 +39,7 @@ public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
     public override void ApplyToLevel(TR2Level level)
     {
         TR2Entity enemy = level.Entities[EntityIndex];
-        TR2Type enemyEntity = (TR2Type)enemy.TypeID;
+        TR2Type enemyEntity = enemy.TypeID;
         bool isWaterEnemy = TR2TypeUtilities.IsWaterCreature(enemyEntity);
 
         // If the index doesn't point to an enemy or if we only want to move land creatures
@@ -52,7 +52,7 @@ public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
         // If the level has water creatures available, and we want to switch it, do so.
         if (AttemptWaterCreature)
         {
-            TR2Entity waterEnemy = level.Entities.ToList().Find(e => TR2TypeUtilities.IsWaterCreature((TR2Type)e.TypeID));
+            TR2Entity waterEnemy = level.Entities.Find(e => TR2TypeUtilities.IsWaterCreature(e.TypeID));
             if (waterEnemy != null)
             {
                 enemy.TypeID = waterEnemy.TypeID;
@@ -66,8 +66,8 @@ public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        TR2Entity enemy = level.Entities[EntityIndex];
-        TR3Type enemyEntity = (TR3Type)enemy.TypeID;
+        TR3Entity enemy = level.Entities[EntityIndex];
+        TR3Type enemyEntity = enemy.TypeID;
         bool isWaterEnemy = TR3TypeUtilities.IsWaterCreature(enemyEntity);
 
         // If the index doesn't point to an enemy or if we only want to move land creatures
@@ -80,7 +80,7 @@ public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
         // If the level has water creatures available, and we want to switch it, do so.
         if (AttemptWaterCreature)
         {
-            TR2Entity waterEnemy = level.Entities.ToList().Find(e => TR3TypeUtilities.IsWaterCreature((TR3Type)e.TypeID));
+            TR3Entity waterEnemy = level.Entities.Find(e => TR3TypeUtilities.IsWaterCreature(e.TypeID));
             if (waterEnemy != null)
             {
                 enemy.TypeID = waterEnemy.TypeID;

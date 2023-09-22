@@ -41,19 +41,4 @@ internal static class TRFileReadUtilities
             OverlapIndex = reader.ReadUInt16()
         };
     }
-
-    public static TREntity ReadEntity(BinaryReader reader)
-    {
-        return new TREntity()
-        {
-            TypeID = reader.ReadInt16(),
-            Room = reader.ReadInt16(),
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            Angle = reader.ReadInt16(),
-            Intensity = reader.ReadInt16(),
-            Flags = reader.ReadUInt16()
-        };
-    }
 }

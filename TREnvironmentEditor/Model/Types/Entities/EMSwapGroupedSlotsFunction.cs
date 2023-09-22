@@ -21,7 +21,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         Dictionary<short, SlotInfo> slotInfo = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
-            TREntity entity = level.Entities[entityIndex];
+            TR1Entity entity = level.Entities[entityIndex];
             TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
             slotInfo[entityIndex] = new SlotInfo
             {
@@ -87,7 +87,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         Dictionary<short, SlotInfo> slotInfo = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
-            TR2Entity entity = level.Entities[entityIndex];
+            TR3Entity entity = level.Entities[entityIndex];
             TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
             slotInfo[entityIndex] = new SlotInfo
             {
@@ -135,7 +135,8 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         floorData.Entries[slotInfo2.FDIndex].AddRange(slotInfo1.Triggers);
     }
 
-    private static void MoveSlot(TREntity entity, EMLocation location)
+    private static void MoveSlot<T>(TREntity<T> entity, EMLocation location)
+        where T : Enum
     {
         entity.X = location.X;
         entity.Y = location.Y;
@@ -144,30 +145,10 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         entity.Angle = location.Angle;
     }
 
-    private static void MoveSlot(TR2Entity entity, EMLocation location)
+    private static EMLocation GetLocation<T>(TREntity<T> entity)
+        where T : Enum
     {
-        entity.X = location.X;
-        entity.Y = location.Y;
-        entity.Z = location.Z;
-        entity.Room = location.Room;
-        entity.Angle = location.Angle;
-    }
-
-    private static EMLocation GetLocation(TREntity entity)
-    {
-        return new EMLocation
-        {
-            X = entity.X,
-            Y = entity.Y,
-            Z = entity.Z,
-            Room = entity.Room,
-            Angle = entity.Angle
-        };
-    }
-
-    private static EMLocation GetLocation(TR2Entity entity)
-    {
-        return new EMLocation
+        return new()
         {
             X = entity.X,
             Y = entity.Y,

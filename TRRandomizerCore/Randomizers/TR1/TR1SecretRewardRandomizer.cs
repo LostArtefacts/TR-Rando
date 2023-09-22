@@ -34,20 +34,20 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
             return;
         }
 
-        TRSecretMapping<TREntity> secretMapping = TRSecretMapping<TREntity>.Get(GetResourcePath(@"TR1\SecretMapping\" + level.Name + "-SecretMapping.json"));
+        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath(@"TR1\SecretMapping\" + level.Name + "-SecretMapping.json"));
 
         List<TR1Type> stdItemTypes = TR1TypeUtilities.GetStandardPickupTypes();
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P); // Sprite/model not available
         stdItemTypes.Remove(TR1Type.Pistols_S_P); // A bit cruel as a reward?
 
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (!secretMapping.RewardEntities.Contains(i))
             {
                 continue;
             }
 
-            level.Data.Entities[i].TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+            level.Data.Entities[i].TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
         }
     }
 }

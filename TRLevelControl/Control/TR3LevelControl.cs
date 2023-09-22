@@ -289,13 +289,8 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         }
 
         //Entities
-        _level.NumEntities = reader.ReadUInt32();
-        _level.Entities = new TR2Entity[_level.NumEntities];
-
-        for (int i = 0; i < _level.NumEntities; i++)
-        {
-            _level.Entities[i] = TR2FileReadUtilities.ReadEntity(reader);
-        }
+        uint numEntities = reader.ReadUInt32();
+        _level.Entities = reader.ReadTR3Entities(numEntities);
 
         _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
 
@@ -408,8 +403,8 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write(_level.NumObjectTextures);
         foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
 
-        writer.Write(_level.NumEntities);
-        foreach (TR2Entity entity in _level.Entities) { writer.Write(entity.Serialize()); }
+        writer.Write((uint)_level.Entities.Count);
+        writer.Write(_level.Entities);
 
         Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
         writer.Write(_level.LightMap.ToArray());

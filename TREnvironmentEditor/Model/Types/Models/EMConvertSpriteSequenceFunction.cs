@@ -37,24 +37,35 @@ public class EMConvertSpriteSequenceFunction : BaseEMFunction
         }
     }
 
-    private void UpdateSpriteEntities(TREntity[] entities)
+    private void UpdateSpriteEntities(List<TR1Entity> entities)
     {
-        foreach (TREntity entity in entities)
+        foreach (TR1Entity entity in entities)
         {
-            if (entity.TypeID == OldSpriteID)
+            if (entity.TypeID == (TR1Type)OldSpriteID)
             {
-                entity.TypeID = NewSpriteID;
+                entity.TypeID = (TR1Type)NewSpriteID;
             }
         }
     }
 
-    private void UpdateSpriteEntities(TR2Entity[] entities)
+    private void UpdateSpriteEntities(IEnumerable<TR2Entity> entities)
     {
         foreach (TR2Entity entity in entities)
         {
-            if (entity.TypeID == OldSpriteID)
+            if (entity.TypeID == (TR2Type)OldSpriteID)
             {
-                entity.TypeID = NewSpriteID;
+                entity.TypeID = (TR2Type)NewSpriteID;
+            }
+        }
+    }
+
+    private void UpdateSpriteEntities(IEnumerable<TR3Entity> entities)
+    {
+        foreach (TR3Entity entity in entities)
+        {
+            if (entity.TypeID == (TR3Type)OldSpriteID)
+            {
+                entity.TypeID = (TR3Type)NewSpriteID;
             }
         }
     }

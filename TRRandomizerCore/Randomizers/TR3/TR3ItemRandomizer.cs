@@ -24,7 +24,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     private static readonly int _ANY_ROOM_ALLOWED = 2048;  //Max rooms is 1024 - so this should never be possible.
 
     // Track the pistols so they remain a weapon type and aren't moved
-    private TR2Entity _unarmedLevelPistols;
+    private TR3Entity _unarmedLevelPistols;
 
     // Secret reward items handled in separate class, so track the reward entities
     private TRSecretMapping<TR2Entity> _secretMapping;
@@ -135,8 +135,8 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     {
         if (level.Script.RemovesWeapons)
         {
-            List<TR2Entity> pistolEntities = level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)TR3Type.Pistols_P);
-            foreach (TR2Entity pistols in pistolEntities)
+            List<TR3Entity> pistolEntities = level.Data.Entities.FindAll(e => e.TypeID == TR3Type.Pistols_P);
+            foreach (TR3Entity pistols in pistolEntities)
             {
                 int match = _pistolLocations[level.Name].FindIndex
                 (
@@ -163,7 +163,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     {
         List<TR3Type> stdItemTypes = TR3TypeUtilities.GetStandardPickupTypes();
 
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (_secretMapping != null && _secretMapping.RewardEntities.Contains(i))
             {
@@ -171,8 +171,8 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            TR2Entity ent = level.Data.Entities[i];
-            TR3Type currentType = (TR3Type)ent.TypeID;
+            TR3Entity ent = level.Data.Entities[i];
+            TR3Type currentType = ent.TypeID;
             // If this is an unarmed level's pistols, make sure they're replaced with another weapon.
             // Similar case for the assault course, so that Lara can still shoot Winnie.
             if ((ent == _unarmedLevelPistols && Settings.GiveUnarmedItems)
@@ -180,19 +180,19 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             {
                 do
                 {
-                    ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                    ent.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                 }
-                while (!TR3TypeUtilities.IsWeaponPickup((TR3Type)ent.TypeID));
+                while (!TR3TypeUtilities.IsWeaponPickup(ent.TypeID));
 
                 if (level.IsAssault)
                 {
                     // Add some extra ammo too
-                    level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3TypeUtilities.GetWeaponAmmo((TR3Type)ent.TypeID)), 20);
+                    level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3TypeUtilities.GetWeaponAmmo(ent.TypeID)), 20);
                 }
             }
             else if (TR3TypeUtilities.IsStandardPickupType(currentType))
             {
-                ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                ent.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
             }
         }
     }
@@ -203,7 +203,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         if (_unarmedLevelPistols != null)
         {
             // These will be excluded, but track their type before looking at other items.
-            oneOfEachType.Add((TR3Type)_unarmedLevelPistols.TypeID);
+            oneOfEachType.Add(_unarmedLevelPistols.TypeID);
         }
 
         // FD for removing crystal triggers if applicable.
@@ -211,16 +211,16 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         floorData.ParseFromLevel(level.Data);
 
         // Look for extra utility/ammo items and hide them
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            TR2Entity ent = level.Data.Entities[i];
+            TR3Entity ent = level.Data.Entities[i];
             if ((_secretMapping != null && _secretMapping.RewardEntities.Contains(i)) || ent == _unarmedLevelPistols)
             {
                 // Rewards and unarmed level weapons excluded
                 continue;
             }
 
-            TR3Type eType = (TR3Type)ent.TypeID;
+            TR3Type eType = ent.TypeID;
             if (TR3TypeUtilities.IsStandardPickupType(eType) || TR3TypeUtilities.IsCrystalPickup(eType))
             {
                 if (!oneOfEachType.Add(eType))
@@ -247,7 +247,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
         List<Location> locations = GetItemLocationPool(level);
 
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (_secretMapping.RewardEntities.Contains(i)
                 || ItemFactory.IsItemLocked(_levelInstance.Name, i))
@@ -255,9 +255,9 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            TR2Entity ent = level.Data.Entities[i];
+            TR3Entity ent = level.Data.Entities[i];
             // Move standard items only, excluding any unarmed level pistols, and reward items
-            if (TR3TypeUtilities.IsStandardPickupType((TR3Type)ent.TypeID) && ent != _unarmedLevelPistols)
+            if (TR3TypeUtilities.IsStandardPickupType(ent.TypeID) && ent != _unarmedLevelPistols)
             {
                 Location location = locations[_generator.Next(0, locations.Count)];
                 ent.X = location.X;
@@ -285,9 +285,9 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             exclusions.AddRange(_excludedLocations[level.Name]);
         }
 
-        foreach (TR2Entity entity in level.Data.Entities)
+        foreach (TR3Entity entity in level.Data.Entities)
         {
-            if (!TR3TypeUtilities.CanSharePickupSpace((TR3Type)entity.TypeID))
+            if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(new Location
                 {
@@ -339,10 +339,10 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         //Get all locations that have a KeyItemGroupID - e.g. intended for key items
         List<Location> levelLocations = _locations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
 
-        foreach (TR2Entity ent in level.Data.Entities)
+        foreach (TR3Entity ent in level.Data.Entities)
         {
             //Calculate its alias
-            TR3Type AliasedKeyItemID = (TR3Type)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));
+            TR3Type AliasedKeyItemID = ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name);
 
             //Any special handling for key item entities
             switch (AliasedKeyItemID)
@@ -359,7 +359,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
             //Is entity one we are allowed/expected to move? (is the alias and base type correct?)
             if (_keyItemZones[level.Name].AliasedExpectedKeyItems.Contains(AliasedKeyItemID) &&
-                _keyItemZones[level.Name].BaseExpectedKeyItems.Contains((TR3Type)ent.TypeID))
+                _keyItemZones[level.Name].BaseExpectedKeyItems.Contains(ent.TypeID))
             {
                 do
                 {

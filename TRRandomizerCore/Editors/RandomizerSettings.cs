@@ -61,6 +61,9 @@ public class RandomizerSettings
     public bool ProtectMonks { get; set; }
     public bool DocileWillard { get; set; }
     public BirdMonsterBehaviour BirdMonsterBehaviour { get; set; }
+    public bool DefaultChickens => BirdMonsterBehaviour == BirdMonsterBehaviour.Default;
+    public bool DocileChickens => BirdMonsterBehaviour == BirdMonsterBehaviour.Docile;
+    public bool UnconditionalChickens => BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional;
     public RandoDifficulty RandoEnemyDifficulty { get; set; }
     public DragonSpawnType DragonSpawnType { get; set; }
     public bool UseEnemyExclusions { get; set; }

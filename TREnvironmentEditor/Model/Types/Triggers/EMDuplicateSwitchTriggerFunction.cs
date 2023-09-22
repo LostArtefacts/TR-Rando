@@ -72,10 +72,10 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         control.WriteToLevel(level);
     }
 
-    private void SetupLocations(EMLevelData data, TREntity[] entities)
+    private void SetupLocations(EMLevelData data, List<TR1Entity> entities)
     {
         // Get a location for the switch we're interested in
-        TREntity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];
+        TR1Entity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];
         Locations = new List<EMLocation>
         {
             new EMLocation
@@ -98,10 +98,36 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         };
     }
 
-    private void SetupLocations(EMLevelData data, TR2Entity[] entities)
+    private void SetupLocations(EMLevelData data, List<TR2Entity> entities)
     {
         // Get a location for the switch we're interested in
         TR2Entity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];
+        Locations = new List<EMLocation>
+        {
+            new EMLocation
+            {
+                X = switchEntity.X,
+                Y = switchEntity.Y,
+                Z = switchEntity.Z,
+                Room = data.ConvertRoom(switchEntity.Room)
+            }
+        };
+
+        // Get the location of the old switch
+        switchEntity = entities[data.ConvertEntity(OldSwitchIndex)];
+        BaseLocation = new EMLocation
+        {
+            X = switchEntity.X,
+            Y = switchEntity.Y,
+            Z = switchEntity.Z,
+            Room = data.ConvertRoom(switchEntity.Room)
+        };
+    }
+
+    private void SetupLocations(EMLevelData data, List<TR3Entity> entities)
+    {
+        // Get a location for the switch we're interested in
+        TR3Entity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];
         Locations = new List<EMLocation>
         {
             new EMLocation

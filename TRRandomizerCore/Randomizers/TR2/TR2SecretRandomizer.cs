@@ -155,21 +155,20 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
                 [TR2Type.GoldSecret_S_P] = goldLocation
             };
 
-            List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
             foreach (TR2Type secretType in secretMap.Keys)
             {
                 //Does the level contain an entity for this type?
-                TR2Entity secretEntity = Array.Find(_levelInstance.Data.Entities, ent => ent.TypeID == (short)secretType);
+                TR2Entity secretEntity = _levelInstance.Data.Entities.Find(ent => ent.TypeID == secretType);
 
                 //If not, create a placeholder entity for now
                 if (secretEntity == null)
                 {
-                    ents.Add(secretEntity = new TR2Entity());
+                    _levelInstance.Data.Entities.Add(secretEntity = new());
                 }
 
                 // Move it to the new location and ensure it has the correct type set
                 Location location = secretMap[secretType];
-                secretEntity.TypeID = (short)secretType;
+                secretEntity.TypeID = secretType;
                 secretEntity.Room = (short)location.Room;
                 secretEntity.X = location.X;
                 secretEntity.Y = location.Y;
@@ -179,9 +178,6 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
                 secretEntity.Angle = 0;
                 secretEntity.Flags = 0;
             }
-
-            _levelInstance.Data.Entities = ents.ToArray();
-            _levelInstance.Data.NumEntities = (uint)ents.Count;
 
             FixSecretTextures();
             CheckForSecretDamage(secretMap);
@@ -200,13 +196,11 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
 
         ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), LevelLocations, ZonePopulationMethod.SecretsOnly);
 
-        List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-
         // Store existing secret indices for re-use (avoids FD problems when the originals are removed)
         Queue<int> existingIndices = new();
-        for (int i = 0; i < ents.Count; i++)
+        for (int i = 0; i < _levelInstance.Data.Entities.Count; i++)
         {
-            if (TR2TypeUtilities.IsSecretType((TR2Type)ents[i].TypeID))
+            if (TR2TypeUtilities.IsSecretType(_levelInstance.Data.Entities[i].TypeID))
             {
                 existingIndices.Enqueue(i);
             }
@@ -231,14 +225,14 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
                     TR2Entity entity;
                     if (existingIndices.Count > 0)
                     {
-                        entity = ents[existingIndices.Dequeue()];
+                        entity = _levelInstance.Data.Entities[existingIndices.Dequeue()];
                     }
                     else
                     {
-                        ents.Add(entity = new TR2Entity());
+                        _levelInstance.Data.Entities.Add(entity = new());
                     }
 
-                    entity.TypeID = (short)secretType;
+                    entity.TypeID = secretType;
                     entity.Room = (short)copy.Room;
                     entity.X = copy.X;
                     entity.Y = copy.Y;
@@ -250,9 +244,6 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
                 }
             }
         }
-
-        _levelInstance.Data.NumEntities = (uint)ents.Count;
-        _levelInstance.Data.Entities = ents.ToArray();
 
         FixSecretTextures();
     }

@@ -158,11 +158,11 @@ public static class TR1EnemyUtilities
         return entities;
     }
 
-    public static void SetEntityTriggers(TR1Level level, TREntity entity)
+    public static void SetEntityTriggers(TR1Level level, TR1Entity entity)
     {
-        if (_oneShotEnemies.Contains((TR1Type)entity.TypeID))
+        if (_oneShotEnemies.Contains(entity.TypeID))
         {
-            int entityID = level.Entities.ToList().IndexOf(entity);
+            int entityID = level.Entities.IndexOf(entity);
 
             FDControl fdControl = new();
             fdControl.ParseFromLevel(level);
@@ -177,7 +177,7 @@ public static class TR1EnemyUtilities
         }
     }
 
-    public static EnemyDifficulty GetEnemyDifficulty(List<TREntity> enemyEntities)
+    public static EnemyDifficulty GetEnemyDifficulty(List<TR1Entity> enemyEntities)
     {
         if (enemyEntities.Count == 0)
         {
@@ -185,12 +185,12 @@ public static class TR1EnemyUtilities
         }
 
         int weight = 0;
-        foreach (TREntity enemyEntity in enemyEntities)
+        foreach (TR1Entity enemyEntity in enemyEntities)
         {
             EnemyDifficulty enemyDifficulty = EnemyDifficulty.Medium;
             foreach (EnemyDifficulty difficulty in _enemyDifficulties.Keys)
             {
-                if (_enemyDifficulties[difficulty].Contains((TR1Type)enemyEntity.TypeID))
+                if (_enemyDifficulties[difficulty].Contains(enemyEntity.TypeID))
                 {
                     enemyDifficulty = difficulty;
                     break;

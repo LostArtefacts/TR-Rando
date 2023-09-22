@@ -62,7 +62,7 @@ public static class VehicleUtilities
 
         foreach (TR2Entity entity in level.Data.Entities)
         {
-            if (secretTypes.Contains((TR2Type)entity.TypeID))
+            if (secretTypes.Contains(entity.TypeID))
             {
                 Location usedlocation = levelLocations
                     .Find(l => l.X == entity.X && l.Y == entity.Y && l.Z == entity.Z && l.Room == entity.Room && l.VehicleRequired);

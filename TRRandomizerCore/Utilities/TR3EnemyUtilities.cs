@@ -158,38 +158,24 @@ public static class TR3EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR3CombinedLevel level)
     {
-        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR3TypeUtilities.IsEnemyType((TR3Type)e.TypeID));
-        foreach (TR2Entity entityInstance in enemies)
-        {
-            List<TR2Entity> sharedItems = new(Array.FindAll
-            (
-                level.Data.Entities,
-                e =>
-                    e.X == entityInstance.X &&
-                    e.Y == entityInstance.Y &&
-                    e.Z == entityInstance.Z
-            ));
-            if (sharedItems.Count > 1)
-            {
-                // Are any entities that are sharing a location a droppable pickup?
-                foreach (TR2Entity ent in sharedItems)
-                {
-                    if (TR3TypeUtilities.IsAnyPickupType((TR3Type)ent.TypeID))
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
+        return level.Data.Entities
+            .Where(e => TR3TypeUtilities.IsEnemyType(e.TypeID))
+            .Any(enemy => level.Data.Entities.Any(item => HasDropItem(enemy, item)));
     }
 
-    public static void SetEntityTriggers(TR3Level level, TR2Entity entity)
+    public static bool HasDropItem(TR3Entity enemy, TR3Entity item)
     {
-        if (_oneShotEnemies.Contains((TR3Type)entity.TypeID))
+        return TR3TypeUtilities.IsAnyPickupType(item.TypeID)
+            && item.X == enemy.X
+            && item.Y == enemy.Y
+            && item.Z == enemy.Z;
+    }
+
+    public static void SetEntityTriggers(TR3Level level, TR3Entity entity)
+    {
+        if (_oneShotEnemies.Contains(entity.TypeID))
         {
-            int entityID = level.Entities.ToList().IndexOf(entity);
+            int entityID = level.Entities.IndexOf(entity);
 
             FDControl fdControl = new();
             fdControl.ParseFromLevel(level);
@@ -204,7 +190,7 @@ public static class TR3EnemyUtilities
         }
     }
 
-    public static EnemyDifficulty GetEnemyDifficulty(List<TR2Entity> enemyEntities)
+    public static EnemyDifficulty GetEnemyDifficulty(List<TR3Entity> enemyEntities)
     {
         if (enemyEntities.Count == 0)
         {
@@ -212,12 +198,12 @@ public static class TR3EnemyUtilities
         }
 
         int weight = 0;
-        foreach (TR2Entity enemyEntity in enemyEntities)
+        foreach (TR3Entity enemyEntity in enemyEntities)
         {
             EnemyDifficulty enemyDifficulty = EnemyDifficulty.Medium;
             foreach (EnemyDifficulty difficulty in _enemyDifficulties.Keys)
             {
-                if (_enemyDifficulties[difficulty].Contains((TR3Type)enemyEntity.TypeID))
+                if (_enemyDifficulties[difficulty].Contains(enemyEntity.TypeID))
                 {
                     enemyDifficulty = difficulty;
                     break;

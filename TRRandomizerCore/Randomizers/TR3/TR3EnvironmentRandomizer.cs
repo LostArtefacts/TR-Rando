@@ -219,14 +219,14 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
         // Do a global check for monkeys that may be sitting on more than one pickup.
         // This has to happen after item, enemy and environment rando to account for
         // any shifted, converted and added items.
-        TR2Entity[] monkeys = Array.FindAll(level.Data.Entities, e => e.TypeID == (short)TR3Type.Monkey);
-        foreach (TR2Entity monkey in monkeys)
+        List<TR3Entity> monkeys = level.Data.Entities.FindAll(e => e.TypeID == TR3Type.Monkey);
+        foreach (TR3Entity monkey in monkeys)
         {
-            List<TR2Entity> pickups = Array.FindAll(level.Data.Entities, e =>
+            List<TR3Entity> pickups = level.Data.Entities.FindAll(e =>
                     e.X == monkey.X &&
                     e.Y == monkey.Y &&
                     e.Z == monkey.Z &&
-                    TR3TypeUtilities.IsAnyPickupType((TR3Type)e.TypeID)).ToList();
+                    TR3TypeUtilities.IsAnyPickupType(e.TypeID)).ToList();
 
             if (pickups.Count == 1)
             {
@@ -235,7 +235,7 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
 
             // Leave one item to drop, favouring key items. The others will be shifted
             // slightly so the monkey doesn't pick them up.
-            pickups.Sort((e1, e2) => TR3TypeUtilities.IsKeyItemType((TR3Type)e1.TypeID) ? 1 : -1);
+            pickups.Sort((e1, e2) => TR3TypeUtilities.IsKeyItemType(e1.TypeID) ? 1 : -1);
             for (int i = 0; i < pickups.Count - 1; i++)
             {
                 ++pickups[i].X;

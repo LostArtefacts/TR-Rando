@@ -90,11 +90,11 @@ public class EMMirrorFunction : BaseEMFunction
             _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
         }
 
-        TR2Entity puna = Array.Find(level.Entities, e => e.TypeID == (short)TR3Type.Puna);
+        TR3Entity puna = level.Entities.Find(e => e.TypeID == TR3Type.Puna);
         if (puna != null)
         {
             // Rebuild the world around Puna's Lizard
-            TR2Entity lizardMan = Array.Find(level.Entities, e => e.Room == puna.Room && e.TypeID == (short)TR3Type.LizardMan);
+            TR3Entity lizardMan = level.Entities.Find(e => e.Room == puna.Room && e.TypeID == TR3Type.LizardMan);
             _xAdjustment = lizardMan.X - FlipWorldX(lizardMan.X);
         }
     }
@@ -608,13 +608,13 @@ public class EMMirrorFunction : BaseEMFunction
 
     private void MirrorEntities(TR1Level level)
     {
-        foreach (TREntity entity in level.Entities)
+        foreach (TR1Entity entity in level.Entities)
         {
             entity.X = FlipWorldX(entity.X);
             AdjustTR1EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR1TypeUtilities.IsDoorType((TR1Type)e.TypeID)));
+        AdjustDoors(level.Entities.FindAll(e => TR1TypeUtilities.IsDoorType(e.TypeID)));
     }
 
     private void MirrorEntities(TR2Level level)
@@ -625,25 +625,25 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR2EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR2TypeUtilities.IsDoorType((TR2Type)e.TypeID)));
+        AdjustDoors(level.Entities.FindAll(e => TR2TypeUtilities.IsDoorType(e.TypeID)));
     }
 
     private void MirrorEntities(TR3Level level)
     {
-        foreach (TR2Entity entity in level.Entities)
+        foreach (TR3Entity entity in level.Entities)
         {
             entity.X = FlipWorldX(entity.X);
             AdjustTR3EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR3TypeUtilities.IsDoorType((TR3Type)e.TypeID)));
+        AdjustDoors(level.Entities.FindAll(e => TR3TypeUtilities.IsDoorType(e.TypeID)));
     }
 
-    private static void AdjustTR1EntityPosition(TREntity entity)
+    private static void AdjustTR1EntityPosition(TR1Entity entity)
     {
         entity.Angle *= -1;
 
-        switch ((TR1Type)entity.TypeID)
+        switch (entity.TypeID)
         {
             case TR1Type.Animating1:
             case TR1Type.Animating2:
@@ -711,7 +711,7 @@ public class EMMirrorFunction : BaseEMFunction
             entity.Angle *= -1;
         }
 
-        switch ((TR2Type)entity.TypeID)
+        switch (entity.TypeID)
         {
             // These take up 2 tiles so need some fiddling
             case TR2Type.Elevator:
@@ -824,12 +824,12 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private static void AdjustTR3EntityPosition(TR2Entity entity)
+    private static void AdjustTR3EntityPosition(TR3Entity entity)
     {
         // Flip the angle - north and south remain, everything else moves appropriately
         entity.Angle *= -1;
 
-        switch ((TR3Type)entity.TypeID)
+        switch (entity.TypeID)
         {
             // These take up several tiles so need some fiddling
             case TR3Type.SpikyVertWallOrTunnelBorer:
@@ -909,14 +909,16 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private static void AdjustDoors(List<TREntity> doors)
+    private static void AdjustDoors<T>(IEnumerable<TREntity<T>> allDoors)
+        where T : Enum
     {
         // Double doors need to be swapped otherwise they open in the wrong direction.
         // Iterate backwards and try to find doors that are next to each other.
         // If found, swap their types.
+        List<TREntity<T>> doors = new(allDoors);
         for (int i = doors.Count - 1; i >= 0; i--)
         {
-            TREntity door1 = doors[i];
+            TREntity<T> door1 = doors[i];
             for (int j = doors.Count - 1; j >= 0; j--)
             {
                 if (j == i)
@@ -924,7 +926,7 @@ public class EMMirrorFunction : BaseEMFunction
                     continue;
                 }
 
-                TREntity door2 = doors[j];
+                TREntity<T> door2 = doors[j];
 
                 if (AreDoubleDoors(door1, door2))
                 {
@@ -938,55 +940,16 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private static void AdjustDoors(List<TR2Entity> doors)
-    {
-        // Double doors need to be swapped otherwise they open in the wrong direction.
-        // Iterate backwards and try to find doors that are next to each other.
-        // If found, swap their types.
-        for (int i = doors.Count - 1; i >= 0; i--)
-        {
-            TR2Entity door1 = doors[i];
-            for (int j = doors.Count - 1; j >= 0; j--)
-            {
-                if (j == i)
-                {
-                    continue;
-                }
-
-                TR2Entity door2 = doors[j];
-
-                if (AreDoubleDoors(door1, door2))
-                {
-                    (door2.TypeID, door1.TypeID) = (door1.TypeID, door2.TypeID);
-
-                    // Don't process these doors again, so just remove the first
-                    doors.RemoveAt(i);
-                    break;
-                }
-            }
-        }
-    }
-
-    private static bool AreDoubleDoors(TREntity door1, TREntity door2)
+    private static bool AreDoubleDoors<T>(TREntity<T> door1, TREntity<T> door2)
+        where T : Enum
     {
         // If the difference between X or Z position is one sector size, they share the same Y val,
         // and they are facing the same diretion, then they're double doors.
-        return door1.Room == door2.Room &&
-            door1.TypeID != door2.TypeID &&
-            door1.Y == door2.Y &&
-            door1.Angle == door2.Angle &&
-            (Math.Abs(door1.X - door2.X) == SectorSize || Math.Abs(door1.Z - door2.Z) == SectorSize);
-    }
-
-    private static bool AreDoubleDoors(TR2Entity door1, TR2Entity door2)
-    {
-        // If the difference between X or Z position is one sector size, they share the same Y val,
-        // and they are facing the same diretion, then they're double doors.
-        return door1.Room == door2.Room &&
-            door1.TypeID != door2.TypeID &&
-            door1.Y == door2.Y &&
-            door1.Angle == door2.Angle &&
-            (Math.Abs(door1.X - door2.X) == SectorSize || Math.Abs(door1.Z - door2.Z) == SectorSize);
+        return !EqualityComparer<T>.Default.Equals(door1.TypeID, door2.TypeID)
+            && door1.Room == door2.Room
+            && door1.Y == door2.Y
+            && door1.Angle == door2.Angle
+            && (Math.Abs(door1.X - door2.X) == SectorSize || Math.Abs(door1.Z - door2.Z) == SectorSize);
     }
 
     private void MirrorNullMeshes(TR1Level level)

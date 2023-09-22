@@ -107,4 +107,150 @@ public class TRLevelWriter : BinaryWriter
         Write(colour.Blue);
         Write(colour.Alpha);
     }
+
+    public void Write(IEnumerable<TR1Entity> entities)
+    {
+        foreach (TR1Entity entity in entities)
+        {
+            Write(entity);
+        }
+    }
+
+    public void Write(TR1Entity entity)
+    {
+        Write((short)entity.TypeID);
+        Write(entity.Room);
+        Write(entity.X);
+        Write(entity.Y);
+        Write(entity.Z);
+        Write(entity.Angle);
+        Write(entity.Intensity);
+        Write(entity.Flags);
+    }
+
+    public void Write(IEnumerable<TR2Entity> entities)
+    {
+        foreach (TR2Entity entity in entities)
+        {
+            Write(entity);
+        }
+    }
+
+    public void Write(TR2Entity entity)
+    {
+        Write((short)entity.TypeID);
+        Write(entity.Room);
+        Write(entity.X);
+        Write(entity.Y);
+        Write(entity.Z);
+        Write(entity.Angle);
+        Write(entity.Intensity1);
+        Write(entity.Intensity2);
+        Write(entity.Flags);
+    }
+
+    public void Write(IEnumerable<TR3Entity> entities)
+    {
+        foreach (TR3Entity entity in entities)
+        {
+            Write(entity);
+        }
+    }
+
+    public void Write(TR3Entity entity)
+    {
+        Write((short)entity.TypeID);
+        Write(entity.Room);
+        Write(entity.X);
+        Write(entity.Y);
+        Write(entity.Z);
+        Write(entity.Angle);
+        Write(entity.Intensity1);
+        Write(entity.Intensity2);
+        Write(entity.Flags);
+    }
+
+    public void Write(IEnumerable<TR4Entity> entities)
+    {
+        foreach (TR4Entity entity in entities)
+        {
+            Write(entity);
+        }
+    }
+
+    public void Write(TR4Entity entity)
+    {
+        Write((short)entity.TypeID);
+        Write(entity.Room);
+        Write(entity.X);
+        Write(entity.Y);
+        Write(entity.Z);
+        Write(entity.Angle);
+        Write(entity.Intensity);
+        Write(entity.OCB);
+        Write(entity.Flags);
+    }
+
+    public void Write(IEnumerable<TR4AIEntity> entities)
+    {
+        foreach (TR4AIEntity entity in entities)
+        {
+            Write(entity);
+        }
+    }
+
+    public void Write(TR4AIEntity entity)
+    {
+        Write((short)entity.TypeID);
+        Write(entity.Room);
+        Write(entity.X);
+        Write(entity.Y);
+        Write(entity.Z);
+        Write(entity.OCB);
+        Write(entity.Flags);
+        Write(entity.Angle);
+        Write(entity.Box);
+    }
+
+    public void Write(IEnumerable<TR5Entity> entities)
+    {
+        foreach (TR5Entity entity in entities)
+        {
+            Write(entity);
+        }
+    }
+
+    public void Write(TR5Entity entity)
+    {
+        Write((short)entity.TypeID);
+        Write(entity.Room);
+        Write(entity.X);
+        Write(entity.Y);
+        Write(entity.Z);
+        Write(entity.Angle);
+        Write(entity.Intensity);
+        Write(entity.OCB);
+        Write(entity.Flags);
+    }
+
+    public void Write(IEnumerable<TR5AIEntity> entities)
+    {
+        foreach (TR5AIEntity entity in entities)
+        {
+            Write(entity);
+        }
+    }
+
+    public void Write(TR5AIEntity entity)
+    {
+        Write((short)entity.TypeID);
+        Write(entity.Room);
+        Write(entity.X);
+        Write(entity.Y);
+        Write(entity.Z);
+        Write(entity.OCB);
+        Write(entity.Flags);
+        Write(entity.Angle);
+        Write(entity.Box);
+    }
 }

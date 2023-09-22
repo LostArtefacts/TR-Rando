@@ -40,13 +40,14 @@ public class TR2StartPositionRandomizer : BaseTR2Randomizer
             return;
         }
 
-        List<TR2Entity> entities = level.Data.Entities.ToList();
-        TR2Entity lara = entities.Find(e => e.TypeID == (short)TR2Type.Lara);
+        TR2Entity lara = level.Data.Entities.Find(e => e.TypeID == (short)TR2Type.Lara);
 
         // We only change position if there is not a secret in the same room as Lara, This is just in case it ends up
         // where she starts on a slope (GW or Opera House for example), as its X,Y,Z values may not be identical to Lara's,
         // or she may have to jump on the first frame to get it.
-        if (!Settings.DevelopmentMode && entities.Find(e => e.Room == lara.Room && TR2TypeUtilities.IsSecretType((TR2Type)e.TypeID)) != null)
+        if (!Settings.DevelopmentMode
+            && level.Data.Entities.Find(e => e.Room == lara.Room
+            && TR2TypeUtilities.IsSecretType(e.TypeID)) != null)
         {
             return;
         }
@@ -60,7 +61,7 @@ public class TR2StartPositionRandomizer : BaseTR2Randomizer
             {
                 foreach (Location loc in locations)
                 {
-                    entities.Add(new TR2Entity
+                    level.Data.Entities.Add(new()
                     {
                         TypeID = (short)TR2Type.Lara,
                         Room = Convert.ToInt16(loc.Room),
@@ -86,12 +87,6 @@ public class TR2StartPositionRandomizer : BaseTR2Randomizer
         }
 
         RotateLara(lara, level);
-
-        if (Settings.DevelopmentMode)
-        {
-            level.Data.Entities = entities.ToArray();
-            level.Data.NumEntities = (uint)entities.Count;
-        }
     }
 
     private void RotateLara(TR2Entity lara, TR2CombinedLevel level)
@@ -107,7 +102,7 @@ public class TR2StartPositionRandomizer : BaseTR2Randomizer
         // Spin the boat around too
         if (level.Is(TR2LevelNames.BARTOLI))
         {
-            TR2Entity boat = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Type.Boat);
+            TR2Entity boat = level.Data.Entities.Find(e => e.TypeID == TR2Type.Boat);
             boat.Angle = lara.Angle;
         }
     }

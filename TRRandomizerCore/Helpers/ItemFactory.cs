@@ -36,12 +36,17 @@ public class ItemFactory
         return _availableItems[lvl];
     }
 
-    public int GetNextIndex(string lvl, List<TREntity> allItems, bool allowLimitBreak = false)
+    public int GetNextIndex(string lvl, List<TR1Entity> allItems, bool allowLimitBreak = false)
     {
         return GetNextIndex(lvl, allItems.Count, allowLimitBreak);
     }
 
     public int GetNextIndex(string lvl, List<TR2Entity> allItems, bool allowLimitBreak = false)
+    {
+        return GetNextIndex(lvl, allItems.Count, allowLimitBreak);
+    }
+
+    public int GetNextIndex(string lvl, List<TR3Entity> allItems, bool allowLimitBreak = false)
     {
         return GetNextIndex(lvl, allItems.Count, allowLimitBreak);
     }
@@ -57,12 +62,17 @@ public class ItemFactory
         return (totalItemCount < _entityLimit || allowLimitBreak) ? totalItemCount : -1;
     }
 
-    public bool CanCreateItem(string lvl, List<TREntity> allItems, bool allowLimitBreak = false)
+    public bool CanCreateItem(string lvl, List<TR1Entity> allItems, bool allowLimitBreak = false)
     {
         return GetNextIndex(lvl, allItems, allowLimitBreak) != -1;
     }
 
     public bool CanCreateItem(string lvl, List<TR2Entity> allItems, bool allowLimitBreak = false)
+    {
+        return GetNextIndex(lvl, allItems, allowLimitBreak) != -1;
+    }
+
+    public bool CanCreateItem(string lvl, List<TR3Entity> allItems, bool allowLimitBreak = false)
     {
         return GetNextIndex(lvl, allItems, allowLimitBreak) != -1;
     }
@@ -74,9 +84,16 @@ public class ItemFactory
         return allItems.Count + count <= _entityLimit || allowLimitBreak;
     }
 
-    public TREntity CreateItem(string lvl, List<TREntity> allItems, Location location = null, bool allowLimitBreak = false)
+    public bool CanCreateItems(string lvl, List<TR3Entity> allItems, int count, bool allowLimitBreak = false)
     {
-        TREntity item;
+        int reusableCount = GetItemPool(lvl).Count;
+        count -= Math.Min(count, reusableCount);
+        return allItems.Count + count <= _entityLimit || allowLimitBreak;
+    }
+
+    public TR1Entity CreateItem(string lvl, List<TR1Entity> allItems, Location location = null, bool allowLimitBreak = false)
+    {
+        TR1Entity item;
         Queue<int> pool = GetItemPool(lvl);
         if (pool.Count > 0)
         {
@@ -86,7 +103,7 @@ public class ItemFactory
         {
             if (allItems.Count < _entityLimit || allowLimitBreak)
             {
-                allItems.Add(item = new TREntity());
+                allItems.Add(item = new());
             }
             else
             {
@@ -121,7 +138,42 @@ public class ItemFactory
         {
             if (allItems.Count < _entityLimit || allowLimitBreak)
             {
-                allItems.Add(item = new TR2Entity());
+                allItems.Add(item = new());
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        if (location != null)
+        {
+            item.X = location.X;
+            item.Y = location.Y;
+            item.Z = location.Z;
+            item.Room = (short)location.Room;
+            item.Angle = location.Angle;
+        }
+
+        // Set some defaults
+        item.Intensity1 = item.Intensity2 = -1;
+        item.Flags = 0;
+        return item;
+    }
+
+    public TR3Entity CreateItem(string lvl, List<TR3Entity> allItems, Location location = null, bool allowLimitBreak = false)
+    {
+        TR3Entity item;
+        Queue<int> pool = GetItemPool(lvl);
+        if (pool.Count > 0)
+        {
+            item = allItems[pool.Dequeue()];
+        }
+        else
+        {
+            if (allItems.Count < _entityLimit || allowLimitBreak)
+            {
+                allItems.Add(item = new());
             }
             else
             {

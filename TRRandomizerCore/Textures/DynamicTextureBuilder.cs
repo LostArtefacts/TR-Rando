@@ -81,7 +81,7 @@ public class DynamicTextureBuilder
             {
                 // Only add ones that aren't also pickups
                 if (Array.Find(level.Data.SpriteSequences, s => s.Offset == sprite.Texture 
-                    && Array.Find(level.Data.Entities, e => e.TypeID == s.SpriteID) != null) == null)
+                    && level.Data.Entities.Find(e => e.TypeID == (TR1Type)s.SpriteID) != null) == null)
                 {
                     defaultSpriteTextures.Add(sprite.Texture);
                 }
@@ -180,7 +180,7 @@ public class DynamicTextureBuilder
             }
 
             // Find an entity of this type and check if it's a secret
-            TREntity keyInstance = Array.Find(level.Data.Entities, e => e.TypeID == (short)pickupType);
+            TR1Entity keyInstance = level.Data.Entities.Find(e => e.TypeID == pickupType);
             if (keyInstance != null)
             {
                 TRRoomSector sector = FDUtilities.GetRoomSector(keyInstance.X, keyInstance.Y, keyInstance.Z, keyInstance.Room, level.Data, floorData);
@@ -232,7 +232,7 @@ public class DynamicTextureBuilder
             return;
         }
 
-        if (modelID == TR1Type.CentaurStatue && Array.Find(level.Entities, e => e.TypeID == model.ID) == null)
+        if (modelID == TR1Type.CentaurStatue && !level.Entities.Any(e => e.TypeID == modelID))
         {
             // Can happen in ToT if the centaur statue was "removed", in which case we don't want to
             // change any object textures that were repurposed for new enemies.

@@ -158,8 +158,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             if (SeraphInMonastery)
             {
                 // Get all visible pickups in the level (there may be invisible ones if using OneItem mode)
-                List<TR2Entity> entities = _levelInstance.Data.Entities.ToList();
-                List<TR2Entity> pickups = entities.FindAll(e => !e.Invisible && stdItemTypes.Contains((TR2Type)e.TypeID));
+                List<TR2Entity> pickups = _levelInstance.Data.Entities.FindAll(e => !e.Invisible && stdItemTypes.Contains(e.TypeID));
                 List<TR2Entity> replacementCandidates = new(pickups);
 
                 // Eliminate any that share a tile with an enemy in case of pacifist runs/unable to find guns
@@ -170,8 +169,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     TR2Entity pickup = replacementCandidates[i];
                     TRRoomSector pickupTile = FDUtilities.GetRoomSector(pickup.X, pickup.Y, pickup.Z, pickup.Room, _levelInstance.Data, floorData);
                     // Does an enemy share this tile? If so, remove it from the candidate list
-                    if (entities.Find(e => e != pickup
-                        && TR2TypeUtilities.IsEnemyType((TR2Type)e.TypeID)
+                    if (_levelInstance.Data.Entities.Find(e => e != pickup
+                        && TR2TypeUtilities.IsEnemyType(e.TypeID)
                         && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, _levelInstance.Data, floorData) == pickupTile) != null)
                     {
                         replacementCandidates.RemoveAt(i);
@@ -189,7 +188,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     // We couldn't find anything, but because The Deck has been processed first, we should
                     // add The Seraph somewhere to remain consistent - default to the puzzle slot itself and
                     // just move an item to the same tile. This will be extremely rare.
-                    TR2Entity slot4 = entities.Find(e => e.TypeID == (short)TR2Type.PuzzleHole4);
+                    TR2Entity slot4 = _levelInstance.Data.Entities.Find(e => e.TypeID == TR2Type.PuzzleHole4);
                     entityToReplace = pickups[_generator.Next(0, pickups.Count)];
                     entityToReplace.X = slot4.X;
                     entityToReplace.Y = slot4.Y;
@@ -198,7 +197,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 }
 
                 // Change the pickup type to The Seraph, and remove The Seraph from the inventory
-                entityToReplace.TypeID = (short)TR2Type.Puzzle4_S_P;
+                entityToReplace.TypeID = TR2Type.Puzzle4_S_P;
                 _levelInstance.Script.RemoveStartInventoryItem(TRGE.Core.Item.Enums.TR2Items.Puzzle4);
             }
         }
@@ -234,11 +233,11 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             {
                 //Replace Seraph by a pickup 
 
-                TR2Entity seraph = _levelInstance.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Type.Puzzle4_S_P);
+                TR2Entity seraph = _levelInstance.Data.Entities.Find(e => e.TypeID == TR2Type.Puzzle4_S_P);
 
                 if (seraph != null)
                 {
-                    seraph.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                    seraph.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                 }
             }
         }
@@ -277,17 +276,15 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void PlaceAllItems(List<Location> locations, TR2Type entityToAdd = TR2Type.LargeMed_S_P, bool transformToLevelSpace = true)
     {
-        List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-
         foreach (Location loc in locations)
         {
             Location copy = transformToLevelSpace ? SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info) : loc;
 
             if (_devRooms == null || _devRooms.Contains(copy.Room))
             {
-                ents.Add(new TR2Entity
+                _levelInstance.Data.Entities.Add(new()
                 {
-                    TypeID = (short)entityToAdd,
+                    TypeID = entityToAdd,
                     Room = Convert.ToInt16(copy.Room),
                     X = copy.X,
                     Y = copy.Y,
@@ -299,9 +296,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 });
             }
         }
-
-        _levelInstance.Data.NumEntities = (uint)ents.Count;
-        _levelInstance.Data.Entities = ents.ToArray();
     }
 
     private void RepositionItems(List<Location> ItemLocs)
@@ -337,21 +331,21 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             ZonedLocationCollection ZonedLocations = new();
             ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), ItemLocs, ZonePopulationMethod.KeyPuzzleQuestOnly);
 
-            for (int i = 0; i < _levelInstance.Data.Entities.Length; i++)
+            for (int i = 0; i < _levelInstance.Data.Entities.Count; i++)
             {
                 if (ItemFactory.IsItemLocked(_levelInstance.Name, i))
                 {
                     continue;
                 }
 
-                if (targetents.Contains((TR2Type)_levelInstance.Data.Entities[i].TypeID) && (i != _unarmedLevelPistolIndex))
+                if (targetents.Contains(_levelInstance.Data.Entities[i].TypeID) && (i != _unarmedLevelPistolIndex))
                 {
                     Location RandomLocation = new();
                     bool FoundPossibleLocation = false;
 
-                    if (TR2TypeUtilities.IsKeyItemType((TR2Type)_levelInstance.Data.Entities[i].TypeID))
+                    if (TR2TypeUtilities.IsKeyItemType(_levelInstance.Data.Entities[i].TypeID))
                     {
-                        TR2Type type = (TR2Type)_levelInstance.Data.Entities[i].TypeID;
+                        TR2Type type = _levelInstance.Data.Entities[i].TypeID;
 
                         // Apply zoning for key items
                         switch (type)
@@ -543,10 +537,10 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         List<TR2Type> stdItemTypes = TR2TypeUtilities.GetGunTypes();
         stdItemTypes.AddRange(TR2TypeUtilities.GetAmmoTypes());
 
-        for (int i = 0; i < _levelInstance.Data.NumEntities; i++)
+        for (int i = 0; i < _levelInstance.Data.Entities.Count; i++)
         {
             TR2Entity entity = _levelInstance.Data.Entities[i];
-            TR2Type currentType = (TR2Type)entity.TypeID;
+            TR2Type currentType = entity.TypeID;
 
             if (i == _unarmedLevelPistolIndex)
             {
@@ -555,7 +549,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             }
             else if (stdItemTypes.Contains(currentType))
             {
-                entity.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                entity.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
             }
         }
     }
@@ -563,12 +557,11 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     private void EnforceOneLimit()
     {
         List<TR2Type> oneOfEachType = new();
-        List<TR2Entity> allEntities = _levelInstance.Data.Entities.ToList();
 
         // look for extra utility/ammo items and hide them
-        foreach (TR2Entity ent in allEntities)
+        foreach (TR2Entity ent in _levelInstance.Data.Entities)
         {
-            TR2Type eType = (TR2Type)ent.TypeID;
+            TR2Type eType = ent.TypeID;
             if (TR2TypeUtilities.IsUtilityType(eType) ||
                 TR2TypeUtilities.IsGunType(eType))
             {
@@ -577,7 +570,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     ItemUtilities.HideEntity(ent);
                 }
                 else
-                    oneOfEachType.Add((TR2Type)ent.TypeID);
+                    oneOfEachType.Add(ent.TypeID);
             }
         }
     }
@@ -594,8 +587,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
         if (_levelInstance.Script.RemovesWeapons && _pistolLocations.ContainsKey(_levelInstance.Name))
         {
-            short pistolID = (short)TR2Type.Pistols_S_P;
-            int pistolIndex = _levelInstance.Data.Entities.ToList().FindIndex(e => e.TypeID == pistolID);
+            int pistolIndex = _levelInstance.Data.Entities.FindIndex(e => e.TypeID == TR2Type.Pistols_S_P);
             if (pistolIndex != -1)
             {
                 // Sanity check that the location is one that we expect
@@ -701,7 +693,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             }
 
             TR2Entity unarmedLevelWeapons = _levelInstance.Data.Entities[_unarmedLevelPistolIndex];
-            unarmedLevelWeapons.TypeID = (short)weaponType;
+            unarmedLevelWeapons.TypeID = weaponType;
 
             if (weaponType != TR2Type.Pistols_S_P)
             {
@@ -730,14 +722,11 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void CopyEntity(TR2Entity entity, TR2Type newType)
     {
-        List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-        if (ents.Count < _levelInstance.GetMaximumEntityLimit())
+        if (_levelInstance.Data.Entities.Count < _levelInstance.GetMaximumEntityLimit())
         {
             TR2Entity copy = entity.Clone();
-            copy.TypeID = (short)newType;
-            ents.Add(copy);
-            _levelInstance.Data.NumEntities++;
-            _levelInstance.Data.Entities = ents.ToArray();
+            copy.TypeID = newType;
+            _levelInstance.Data.Entities.Add(copy);
         }
     }
 
@@ -780,20 +769,19 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
         TR2Type replacementAmmo = GetWeaponAmmo(replacementWeapon);
 
-        List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
         TR2Entity harpoonWeapon = null;
         List<TR2Type> oneOfEachType = new();
-        foreach (TR2Entity entity in ents)
+        foreach (TR2Entity entity in _levelInstance.Data.Entities)
         {
             if (entity.Room != 57)
             {
                 continue;
             }
 
-            TR2Type entityType = (TR2Type)entity.TypeID;
+            TR2Type entityType = entity.TypeID;
             if (TR2TypeUtilities.IsGunType(entityType))
             {
-                entity.TypeID = (short)replacementWeapon;
+                entity.TypeID = replacementWeapon;
 
                 if (replacementWeapon == TR2Type.Harpoon_S_P || (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit && replacementWeapon != TR2Type.Pistols_S_P))
                 {
@@ -802,13 +790,13 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             }
             else if (TR2TypeUtilities.IsAmmoType(entityType) && replacementWeapon != TR2Type.Pistols_S_P)
             {
-                entity.TypeID = (short)replacementAmmo;
+                entity.TypeID = replacementAmmo;
             }
 
             if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
             {
                 // look for extra utility/ammo items and hide them
-                TR2Type eType = (TR2Type)entity.TypeID;
+                TR2Type eType = entity.TypeID;
                 if (TR2TypeUtilities.IsUtilityType(eType) ||
                     TR2TypeUtilities.IsGunType(eType))
                 {
@@ -817,7 +805,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                         ItemUtilities.HideEntity(entity);
                     }
                     else
-                        oneOfEachType.Add((TR2Type)entity.TypeID);
+                        oneOfEachType.Add(entity.TypeID);
                 }
             }
         }
@@ -842,12 +830,11 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             PopulateVehicleLocation(TR2Type.RedSnowmobile, vehicles);
         }
 
-        List<TR2Entity> levelEntities = _levelInstance.Data.Entities.ToList();
         int entityLimit = _levelInstance.GetMaximumEntityLimit();
 
-        TR2Entity[] boatToMove = Array.FindAll(_levelInstance.Data.Entities, e => e.TypeID == (short)TR2Type.Boat);
+        List<TR2Entity> boatToMove = _levelInstance.Data.Entities.FindAll(e => e.TypeID == TR2Type.Boat);
 
-        if (vehicles.Count == 0 || vehicles.Count - boatToMove.Length + levelEntities.Count > entityLimit)
+        if (vehicles.Count == 0 || vehicles.Count - boatToMove.Count + _levelInstance.Data.Entities.Count > entityLimit)
         {
             return;
         }
@@ -870,7 +857,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             // looping on boats and or skidoo
             foreach (TR2Type entity in vehicles.Keys)
             {
-                if (levelEntities.Count == entityLimit)
+                if (_levelInstance.Data.Entities.Count == entityLimit)
                 {
                     break;
                 }
@@ -882,12 +869,12 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     location = RoomWaterUtilities.MoveToTheSurface(location, _levelInstance.Data);
                 }
 
-                if (boatToMove.Length == 0)
+                if (boatToMove.Count == 0)
                 {
                     //Creation new entity
-                    levelEntities.Add(new TR2Entity
+                    _levelInstance.Data.Entities.Add(new()
                     {
-                        TypeID = (short)entity,
+                        TypeID = entity,
                         Room = (short)location.Room,
                         X = location.X,
                         Y = location.Y,
@@ -901,7 +888,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 else
                 {
                     //I am in a level with 1 or 2 boat(s) to move
-                    for (int i = 0; i < boatToMove.Length; i++)
+                    for (int i = 0; i < boatToMove.Count; i++)
                     {
                         if (i == 0) // for the first one i take the vehicle value
                         {
@@ -947,12 +934,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
                     }
                 }
-            }
-
-            if (levelEntities.Count > _levelInstance.Data.NumEntities)
-            {
-                _levelInstance.Data.Entities = levelEntities.ToArray();
-                _levelInstance.Data.NumEntities = (uint)levelEntities.Count;
             }
         }
         catch (PackingException)

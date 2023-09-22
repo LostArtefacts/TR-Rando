@@ -319,25 +319,15 @@ internal static class TR4FileReadUtilities
         }
     }
 
-    public static void PopulateEntitiesAndAI(BinaryReader reader, TR4Level lvl)
+    public static void PopulateEntitiesAndAI(TRLevelReader reader, TR4Level lvl)
     {
         //Entities
-        lvl.LevelDataChunk.NumEntities = reader.ReadUInt32();
-        lvl.LevelDataChunk.Entities = new TR4Entity[lvl.LevelDataChunk.NumEntities];
-
-        for (int i = 0; i < lvl.LevelDataChunk.NumEntities; i++)
-        {
-            lvl.LevelDataChunk.Entities[i] = TR4FileReadUtilities.ReadEntity(reader);
-        }
+        uint numEntities = reader.ReadUInt32();
+        lvl.LevelDataChunk.Entities = reader.ReadTR4Entities(numEntities);
 
         //AIObjects
-        lvl.LevelDataChunk.NumAIObjects = reader.ReadUInt32();
-        lvl.LevelDataChunk.AIObjects = new TR4AIObject[lvl.LevelDataChunk.NumAIObjects];
-
-        for (int i = 0; i < lvl.LevelDataChunk.NumAIObjects; i++)
-        {
-            lvl.LevelDataChunk.AIObjects[i] = TR4FileReadUtilities.ReadAIObject(reader);
-        }
+        numEntities = reader.ReadUInt32();
+        lvl.LevelDataChunk.AIEntities = reader.ReadTR4AIEntities(numEntities);
     }
 
     public static void PopulateDemoSoundSampleIndices(BinaryReader reader, TR4Level lvl)
@@ -739,37 +729,6 @@ internal static class TR4FileReadUtilities
             OriginalV = reader.ReadUInt32(),
             WidthMinusOne = reader.ReadUInt32(),
             HeightMinusOne = reader.ReadUInt32()
-        };
-    }
-
-    public static TR4Entity ReadEntity(BinaryReader reader)
-    {
-        return new TR4Entity()
-        {
-            TypeID = reader.ReadInt16(),
-            Room = reader.ReadInt16(),
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            Angle = reader.ReadInt16(),
-            Intensity = reader.ReadInt16(),
-            OCB = reader.ReadInt16(),
-            Flags = reader.ReadUInt16()
-        };
-    }
-
-    public static TR4AIObject ReadAIObject(BinaryReader reader)
-    {
-        return new TR4AIObject()
-        {
-            TypeID = reader.ReadUInt16(),
-            Room = reader.ReadUInt16(),
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            OCB = reader.ReadInt16(),
-            Flags = reader.ReadUInt16(),
-            Angle = reader.ReadInt32()
         };
     }
 }

@@ -49,7 +49,7 @@ public class EMTriggerFunction : BaseEMFunction
 
         if (EntityLocation.HasValue)
         {
-            TREntity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+            TR1Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
             TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
             CreateTrigger(sector, control, triggerEntry);
         }
@@ -142,7 +142,7 @@ public class EMTriggerFunction : BaseEMFunction
 
         if (EntityLocation.HasValue)
         {
-            TR2Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+            TR3Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
             TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
             CreateTrigger(sector, control, triggerEntry);
         }
@@ -194,6 +194,17 @@ public class EMTriggerFunction : BaseEMFunction
     private static void SetEnemyClearBodies(IEnumerable<TR2Entity> levelEntities)
     {
         foreach (TR2Entity entity in levelEntities)
+        {
+            if (TR2TypeUtilities.IsEnemyType(entity.TypeID))
+            {
+                entity.ClearBody = true;
+            }
+        }
+    }
+
+    private static void SetEnemyClearBodies(IEnumerable<TR3Entity> levelEntities)
+    {
+        foreach (TR3Entity entity in levelEntities)
         {
             if (TR2TypeUtilities.IsEnemyType((TR2Type)entity.TypeID))
             {

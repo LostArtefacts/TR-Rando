@@ -82,28 +82,28 @@ public class TR2SavegameTester
         size += (int)level.NumCameras * _cameraSize;
 
         // Expand the entity list to simulate everything that could actually be present
-        List<TR2Entity> entities = level.Entities.ToList();
+        List<TR2Entity> entities = new(level.Entities);
         foreach (TR2Entity entity in level.Entities)
         {
-            TR2Type type = (TR2Type)entity.TypeID;
+            TR2Type type = entity.TypeID;
             if (type == TR2Type.MercSnowmobDriver)
             {
-                entities.Add(new TR2Entity { TypeID = (short)TR2Type.BlackSnowmob });
+                entities.Add(new() { TypeID = TR2Type.BlackSnowmob });
             }
             else if (type == TR2Type.MarcoBartoli)
             {
-                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonFront_H });
-                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonBack_H });
-                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonExplosion1_H });
-                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonExplosion2_H });
-                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonExplosion3_H });
+                entities.Add(new() { TypeID = TR2Type.DragonFront_H });
+                entities.Add(new() { TypeID = TR2Type.DragonBack_H });
+                entities.Add(new() { TypeID = TR2Type.DragonExplosion1_H });
+                entities.Add(new() { TypeID = TR2Type.DragonExplosion2_H });
+                entities.Add(new() { TypeID = TR2Type.DragonExplosion3_H });
             }
             else if (type == TR2Type.Knifethrower)
             {
                 // Assume each knifethrower has 2 active knives
                 for (int i = 0; i < 2; i++)
                 {
-                    entities.Add(new TR2Entity { TypeID = (short)TR2Type.KnifeProjectile_H });
+                    entities.Add(new() { TypeID = TR2Type.KnifeProjectile_H });
                 }
             }
             else if (type == TR2Type.ScubaDiver)
@@ -111,23 +111,23 @@ public class TR2SavegameTester
                 // Assume every Steve has fired 3 harpoons
                 for (int i = 0; i < 3; i++)
                 {
-                    entities.Add(new TR2Entity { TypeID = (short)TR2Type.ScubaHarpoonProjectile_H });
+                    entities.Add(new() { TypeID = TR2Type.ScubaHarpoonProjectile_H });
                 }
             }
             else if (type == TR2Type.Lara)
             {
                 // Assume Lara has fired a grenade and 3 harpoons (imposssible, probably, but we are trying to be cautious)
-                entities.Add(new TR2Entity { TypeID = (short)TR2Type.GrenadeProjectile_H });
+                entities.Add(new() { TypeID = TR2Type.GrenadeProjectile_H });
                 for (int i = 0; i < 3; i++)
                 {
-                    entities.Add(new TR2Entity { TypeID = (short)TR2Type.HarpoonProjectile_H });
+                    entities.Add(new() { TypeID = TR2Type.HarpoonProjectile_H });
                 }
             }
         }
 
         foreach (TR2Entity entity in entities)
         {
-            TR2Type type = (TR2Type)entity.TypeID;
+            TR2Type type = entity.TypeID;
             SGFlags saveFlags = SGFlags.None;
             
             if (TR2TypeUtilities.IsEnemyType(type))

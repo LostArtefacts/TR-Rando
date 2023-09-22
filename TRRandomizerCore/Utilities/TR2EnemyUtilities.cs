@@ -39,7 +39,7 @@ public static class TR2EnemyUtilities
     {
         foreach (TR2Entity entityInstance in level.Data.Entities)
         {
-            TR2Type entity = (TR2Type)entityInstance.TypeID;
+            TR2Type entity = entityInstance.TypeID;
             if (TR2TypeUtilities.IsWaterCreature(entity))
             {
                 if (!level.CanPerformDraining(entityInstance.Room))
@@ -54,40 +54,17 @@ public static class TR2EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR2CombinedLevel level)
     {
-        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR2TypeUtilities.IsEnemyType((TR2Type)e.TypeID));
-        foreach (TR2Entity entityInstance in enemies)
-        {
-            List<TR2Entity> sharedItems = new(Array.FindAll
-            (
-                level.Data.Entities,
-                e =>
-                (
-                    e.X == entityInstance.X &&
-                    e.Y == entityInstance.Y &&
-                    e.Z == entityInstance.Z
-                )
-            ));
-            if (sharedItems.Count > 1)
-            {
-                // Are any entities that are sharing a location a droppable pickup?
-                foreach (TR2Entity ent in sharedItems)
-                {
-                    TR2Type EntType = (TR2Type)ent.TypeID;
+        return level.Data.Entities
+            .Where(e => TR2TypeUtilities.IsEnemyType(e.TypeID))
+            .Any(enemy => level.Data.Entities.Any(item => HasDropItem(enemy, item)));
+    }
 
-                    if
-                    (
-                        TR2TypeUtilities.IsUtilityType(EntType) ||
-                        TR2TypeUtilities.IsGunType(EntType) ||
-                        TR2TypeUtilities.IsKeyItemType(EntType)
-                    )
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
+    public static bool HasDropItem(TR2Entity enemy, TR2Entity item)
+    {
+        return TR2TypeUtilities.IsAnyPickupType(item.TypeID)
+            && item.X == enemy.X
+            && item.Y == enemy.Y
+            && item.Z == enemy.Z;
     }
 
     public static bool IsEnemySupported(string lvlName, TR2Type entity, RandoDifficulty difficulty, bool protectMonks)
@@ -251,7 +228,7 @@ public static class TR2EnemyUtilities
         }
 
         ISet<TR2Type> enemyEntities = new HashSet<TR2Type>();
-        enemies.ForEach(e => enemyEntities.Add((TR2Type)e.TypeID));
+        enemies.ForEach(e => enemyEntities.Add(e.TypeID));
 
         int weight = 0;
         foreach (TR2Type enemyEntity in enemyEntities)
@@ -511,9 +488,9 @@ public static class TR2EnemyUtilities
 
     public static void SetEntityTriggers(TR2Level level, TR2Entity entity)
     {
-        if (_oneShotEnemies.Contains((TR2Type)entity.TypeID))
+        if (_oneShotEnemies.Contains(entity.TypeID))
         {
-            int entityID = level.Entities.ToList().IndexOf(entity);
+            int entityID = level.Entities.IndexOf(entity);
 
             FDControl fdControl = new();
             fdControl.ParseFromLevel(level);

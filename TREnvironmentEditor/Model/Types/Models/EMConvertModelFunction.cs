@@ -37,24 +37,35 @@ public class EMConvertModelFunction : BaseEMFunction
         }
     }
 
-    private void UpdateModelEntities(TREntity[] entities)
+    private void UpdateModelEntities(List<TR1Entity> entities)
     {
-        foreach (TREntity entity in entities)
+        foreach (TR1Entity entity in entities)
         {
-            if (entity.TypeID == OldModelID)
+            if (entity.TypeID == (TR1Type)OldModelID)
             {
-                entity.TypeID = (short)NewModelID;
+                entity.TypeID = (TR1Type)NewModelID;
             }
         }
     }
 
-    private void UpdateModelEntities(TR2Entity[] entities)
+    private void UpdateModelEntities(IEnumerable<TR2Entity> entities)
     {
         foreach (TR2Entity entity in entities)
         {
-            if (entity.TypeID == OldModelID)
+            if (entity.TypeID == (TR2Type)OldModelID)
             {
-                entity.TypeID = (short)NewModelID;
+                entity.TypeID = (TR2Type)NewModelID;
+            }
+        }
+    }
+
+    private void UpdateModelEntities(IEnumerable<TR3Entity> entities)
+    {
+        foreach (TR3Entity entity in entities)
+        {
+            if (entity.TypeID == (TR3Type)OldModelID)
+            {
+                entity.TypeID = (TR3Type)NewModelID;
             }
         }
     }

@@ -19,7 +19,7 @@ public class EMAddEntityFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         int limit = _isCommunityPatch ? 10240 : _defaultEntityLimit;
-        if (level.NumEntities < limit)
+        if (level.Entities.Count < limit)
         {
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
@@ -28,7 +28,7 @@ public class EMAddEntityFunction : BaseEMFunction
                 floorData.ParseFromLevel(level);
                 short room = data.ConvertRoom(Location.Room);
                 TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);
-                foreach (TREntity entity in level.Entities)
+                foreach (TR1Entity entity in level.Entities)
                 {
                     if (entity.Room == room && FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData) == sector)
                     {
@@ -40,16 +40,13 @@ public class EMAddEntityFunction : BaseEMFunction
                 }
             }
 
-            List<TREntity> entities = level.Entities.ToList();
-            entities.Add(CreateTREntity(data));
-            level.Entities = entities.ToArray();
-            level.NumEntities++;
+            level.Entities.Add(CreateTREntity(data));
         }
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        if (level.NumEntities < _defaultEntityLimit)
+        if (level.Entities.Count < _defaultEntityLimit)
         {
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
@@ -70,17 +67,14 @@ public class EMAddEntityFunction : BaseEMFunction
                 }
             }
 
-            List<TR2Entity> entities = level.Entities.ToList();
-            entities.Add(CreateTR2Entity(data));
-            level.Entities = entities.ToArray();
-            level.NumEntities++;
+            level.Entities.Add(CreateTR2Entity(data));
         }
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         int limit = _isCommunityPatch ? 1024 : _defaultEntityLimit;
-        if (level.NumEntities < limit)
+        if (level.Entities.Count < limit)
         {
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
@@ -89,7 +83,7 @@ public class EMAddEntityFunction : BaseEMFunction
                 floorData.ParseFromLevel(level);
                 short room = data.ConvertRoom(Location.Room);
                 TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);
-                foreach (TR2Entity entity in level.Entities)
+                foreach (TR3Entity entity in level.Entities)
                 {
                     if (entity.Room == room && FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData) == sector)
                     {
@@ -101,18 +95,15 @@ public class EMAddEntityFunction : BaseEMFunction
                 }
             }
 
-            List<TR2Entity> entities = level.Entities.ToList();
-            entities.Add(CreateTR2Entity(data));
-            level.Entities = entities.ToArray();
-            level.NumEntities++;
+            level.Entities.Add(CreateTR3Entity(data));
         }
     }
 
-    private TREntity CreateTREntity(EMLevelData data)
+    private TR1Entity CreateTREntity(EMLevelData data)
     {
-        return new TREntity
+        return new()
         {
-            TypeID = TypeID,
+            TypeID = (TR1Type)TypeID,
             X = Location.X,
             Y = Location.Y,
             Z = Location.Z,
@@ -125,9 +116,25 @@ public class EMAddEntityFunction : BaseEMFunction
 
     private TR2Entity CreateTR2Entity(EMLevelData data)
     {
-        return new TR2Entity
+        return new()
         {
-            TypeID = TypeID,
+            TypeID = (TR2Type)TypeID,
+            X = Location.X,
+            Y = Location.Y,
+            Z = Location.Z,
+            Room = data.ConvertRoom(Location.Room),
+            Angle = Location.Angle,
+            Flags = Flags,
+            Intensity1 = Intensity ?? -1,
+            Intensity2 = Intensity ?? -1
+        };
+    }
+
+    private TR3Entity CreateTR3Entity(EMLevelData data)
+    {
+        return new()
+        {
+            TypeID = (TR3Type)TypeID,
             X = Location.X,
             Y = Location.Y,
             Z = Location.Z,

@@ -5,7 +5,7 @@ namespace TREnvironmentEditor.Helpers;
 public class EMLevelData
 {
     public uint NumCameras { get; set; }
-    public uint NumEntities { get; set; }
+    public int NumEntities { get; set; }
     public uint NumRooms { get; set; }
 
     /// <summary>
@@ -35,7 +35,7 @@ public class EMLevelData
         return Convert(room, NumRooms);
     }
 
-    public static short Convert(int itemIndex, uint numItems)
+    public static short Convert(int itemIndex, long numItems)
     {
         return (short)(itemIndex < 0 ? numItems + itemIndex : itemIndex);
     }
@@ -45,7 +45,7 @@ public class EMLevelData
         return new EMLevelData
         {
             NumCameras = level.NumCameras,
-            NumEntities = level.NumEntities,
+            NumEntities = level.Entities.Count,
             NumRooms = level.NumRooms
         };
     }
@@ -55,7 +55,7 @@ public class EMLevelData
         return new EMLevelData
         {
             NumCameras = level.NumCameras,
-            NumEntities = level.NumEntities,
+            NumEntities = level.Entities.Count,
             NumRooms = level.NumRooms
         };
     }
@@ -65,7 +65,7 @@ public class EMLevelData
         return new EMLevelData
         {
             NumCameras = level.NumCameras,
-            NumEntities = level.NumEntities,
+            NumEntities = level.Entities.Count,
             NumRooms = level.NumRooms
         };
     }

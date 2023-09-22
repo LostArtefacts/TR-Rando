@@ -149,9 +149,9 @@ class Program
             exclusions.AddRange(_allTR1Exclusions[lvl]);
         }
 
-        foreach (TREntity entity in level.Entities)
+        foreach (TR1Entity entity in level.Entities)
         {
-            if (!TR1TypeUtilities.CanSharePickupSpace((TR1Type)entity.TypeID))
+            if (!TR1TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(new Location
                 {
@@ -176,9 +176,9 @@ class Program
             exclusions.AddRange(_allTR3Exclusions[lvl]);
         }
 
-        foreach (TR2Entity entity in level.Entities)
+        foreach (TR3Entity entity in level.Entities)
         {
-            if (!TR3TypeUtilities.CanSharePickupSpace((TR3Type)entity.TypeID))
+            if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(new Location
                 {

@@ -20,7 +20,7 @@ public class EMMoveSlotFunction : BaseEMFunction
         FDControl control = new();
         control.ParseFromLevel(level);
 
-        TREntity slot = level.Entities[EntityIndex];
+        TR1Entity slot = level.Entities[EntityIndex];
         TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
         short roomNumber = data.ConvertRoom(Location.Room);
         TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
@@ -65,7 +65,7 @@ public class EMMoveSlotFunction : BaseEMFunction
         }
 
         // Make sure there isn't a static enemy on the same sector e.g. MorayEel
-        List<TR2Entity> staticEnemies = level.Entities.ToList().FindAll(e => e.Room == roomNumber && TR2TypeUtilities.IsStaticCreature((TR2Type)e.TypeID));
+        List<TR2Entity> staticEnemies = level.Entities.FindAll(e => e.Room == roomNumber && TR2TypeUtilities.IsStaticCreature(e.TypeID));
         foreach (TR2Entity staticEnemy in staticEnemies)
         {
             TRRoomSector enemySector = FDUtilities.GetRoomSector(staticEnemy.X, staticEnemy.Y, staticEnemy.Z, staticEnemy.Room, level, control);
@@ -90,7 +90,7 @@ public class EMMoveSlotFunction : BaseEMFunction
         FDControl control = new();
         control.ParseFromLevel(level);
 
-        TR2Entity slot = level.Entities[EntityIndex];
+        TR3Entity slot = level.Entities[EntityIndex];
         TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
         short roomNumber = data.ConvertRoom(Location.Room);
         TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
@@ -111,30 +111,9 @@ public class EMMoveSlotFunction : BaseEMFunction
         }
     }
 
-    protected bool MoveSlot(FDControl control, TREntity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
-    {
-        slot.X = Location.X;
-        slot.Y = Location.Y;
-        slot.Z = Location.Z;
-        slot.Room = roomNumber;
-        slot.Angle = Location.Angle;
-
-        if (newSector != currentSector && currentSector.FDIndex != 0)
-        {
-            MoveTriggers(control, currentSector, newSector);
-
-            if (currentFlipSector != null && newFlipSector != null && currentFlipSector.FDIndex != 0)
-            {
-                MoveTriggers(control, currentFlipSector, newFlipSector);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    protected bool MoveSlot(FDControl control, TR2Entity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
+    protected bool MoveSlot<T>(FDControl control, TREntity<T> slot, short roomNumber, 
+        TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
+        where T : Enum
     {
         slot.X = Location.X;
         slot.Y = Location.Y;

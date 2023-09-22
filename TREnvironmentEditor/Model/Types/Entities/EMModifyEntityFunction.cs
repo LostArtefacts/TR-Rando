@@ -30,16 +30,9 @@ public class EMModifyEntityFunction : BaseEMFunction
         ModifyEntity(level.Entities[data.ConvertEntity(EntityIndex)]);
     }
 
-    private void ModifyEntity(TREntity entity)
+    private void ModifyEntity(TR1Entity entity)
     {
-        if (Invisible.HasValue)
-        {
-            entity.Invisible = Invisible.Value;
-        }
-        if (ClearBody.HasValue)
-        {
-            entity.ClearBody = ClearBody.Value;
-        }
+        ModifyEntity<TR1Type>(entity);
         if (Intensity1.HasValue)
         {
             entity.Intensity = Intensity1.Value;
@@ -48,13 +41,36 @@ public class EMModifyEntityFunction : BaseEMFunction
         {
             entity.Intensity = Intensity2.Value;
         }
-        if (Flags.HasValue)
-        {
-            entity.Flags = Flags.Value;
-        }
     }
 
     private void ModifyEntity(TR2Entity entity)
+    {
+        ModifyEntity<TR2Type>(entity);
+        if (Intensity1.HasValue)
+        {
+            entity.Intensity1 = Intensity1.Value;
+        }
+        if (Intensity2.HasValue)
+        {
+            entity.Intensity2 = Intensity2.Value;
+        }
+    }
+
+    private void ModifyEntity(TR3Entity entity)
+    {
+        ModifyEntity<TR3Type>(entity);
+        if (Intensity1.HasValue)
+        {
+            entity.Intensity1 = Intensity1.Value;
+        }
+        if (Intensity2.HasValue)
+        {
+            entity.Intensity2 = Intensity2.Value;
+        }
+    }
+
+    private void ModifyEntity<T>(TREntity<T> entity)
+        where T : Enum
     {
         if (Invisible.HasValue)
         {
@@ -63,14 +79,6 @@ public class EMModifyEntityFunction : BaseEMFunction
         if (ClearBody.HasValue)
         {
             entity.ClearBody = ClearBody.Value;
-        }
-        if (Intensity1.HasValue)
-        {
-            entity.Intensity1 = Intensity1.Value;
-        }
-        if (Intensity2.HasValue)
-        {
-            entity.Intensity2 = Intensity2.Value;
         }
         if (Flags.HasValue)
         {

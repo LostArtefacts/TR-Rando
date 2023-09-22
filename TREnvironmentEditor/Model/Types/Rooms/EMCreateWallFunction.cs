@@ -26,7 +26,7 @@ public class EMCreateWallFunction : BaseEMFunction
             // Move any entities that share the same floor sector somewhere else
             if (EntityMoveLocation != null)
             {
-                foreach (TREntity entity in level.Entities)
+                foreach (TR1Entity entity in level.Entities)
                 {
                     if (entity.Room == roomIndex)
                     {
@@ -98,7 +98,7 @@ public class EMCreateWallFunction : BaseEMFunction
             // Move any entities that share the same floor sector somewhere else
             if (EntityMoveLocation != null)
             {
-                foreach (TR2Entity entity in level.Entities)
+                foreach (TR3Entity entity in level.Entities)
                 {
                     if (entity.Room == roomIndex)
                     {

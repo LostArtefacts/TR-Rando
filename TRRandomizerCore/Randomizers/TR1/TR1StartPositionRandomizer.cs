@@ -35,8 +35,7 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
 
     private void RandomizeStartPosition(TR1CombinedLevel level)
     {
-        List<TREntity> entities = level.Data.Entities.ToList();
-        TREntity lara = entities.Find(e => e.TypeID == (short)TR1Type.Lara);
+        TR1Entity lara = level.Data.Entities.Find(e => e.TypeID == (short)TR1Type.Lara);
 
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
@@ -50,7 +49,7 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
             {
                 foreach (Location loc in locations)
                 {
-                    entities.Add(new TREntity
+                    level.Data.Entities.Add(new()
                     {
                         TypeID = (short)TR1Type.Lara,
                         X = loc.X,
@@ -85,12 +84,6 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
                 lara.Angle = (short)(_generator.Next(0, 8) * _rotation);
             }
             while (lara.Angle == currentAngle);
-        }
-
-        if (Settings.DevelopmentMode)
-        {
-            level.Data.Entities = entities.ToArray();
-            level.Data.NumEntities = (uint)entities.Count;
         }
     }
 }

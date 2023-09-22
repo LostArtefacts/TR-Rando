@@ -31,13 +31,12 @@ public class EMConvertEnemyFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         ConvertIndices(data);
 
-        TREntity enemyMatch = null;
-        List<TREntity> entities = level.Entities.ToList();
+        TR1Entity enemyMatch = null;
         if (potentialTypes.Contains((TR1Type)PreferredType))
         {
-            enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
+            enemyMatch = level.Entities.Find(e => (short)e.TypeID == PreferredType && !EntityIndices.Contains(level.Entities.IndexOf(e)));
         }
-        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TR1Type)e.TypeID));
+        enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains(e.TypeID));
 
         if (enemyMatch != null)
         {
@@ -71,12 +70,11 @@ public class EMConvertEnemyFunction : BaseEMFunction
         ConvertIndices(data);
 
         TR2Entity enemyMatch = null;
-        List<TR2Entity> entities = level.Entities.ToList();
         if (potentialTypes.Contains((TR2Type)PreferredType))
         {
-            enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
+            enemyMatch = level.Entities.Find(e => (short)e.TypeID == PreferredType && !EntityIndices.Contains(level.Entities.IndexOf(e)));
         }
-        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TR2Type)e.TypeID));
+        enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains(e.TypeID));
 
         if (enemyMatch != null)
         {
@@ -107,13 +105,12 @@ public class EMConvertEnemyFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         ConvertIndices(data);
 
-        TR2Entity enemyMatch = null;
-        List<TR2Entity> entities = level.Entities.ToList();
+        TR3Entity enemyMatch = null;
         if (potentialTypes.Contains((TR3Type)PreferredType))
         {
-            enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
+            enemyMatch = level.Entities.Find(e => (short)e.TypeID == PreferredType && !EntityIndices.Contains(level.Entities.IndexOf(e)));
         }
-        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TR3Type)e.TypeID));
+        enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains(e.TypeID));
 
         if (enemyMatch != null)
         {

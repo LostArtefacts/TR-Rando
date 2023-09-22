@@ -103,14 +103,8 @@ public class TR5LevelDataChunk
     public uint NumObjectTextures { get; set; }
 
     public TR5ObjectTexture[] ObjectTextures { get; set; }
-
-    public uint NumEntities { get; set; }
-
-    public TR4Entity[] Entities { get; set; }
-
-    public uint NumAIObjects { get; set; }
-
-    public TR4AIObject[] AIObjects { get; set; }
+    public List<TR5Entity> Entities { get; set; }
+    public List<TR5AIEntity> AIEntities { get; set; }
 
     public ushort NumDemoData { get; set; }
 
@@ -134,7 +128,7 @@ public class TR5LevelDataChunk
     public byte[] Serialize()
     {
         using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
+        using (TRLevelWriter writer = new(stream))
         {
             writer.Write(Unused);
             writer.Write(NumRooms);
@@ -291,19 +285,11 @@ public class TR5LevelDataChunk
                 writer.Write(otex.Serialize());
             }
 
-            writer.Write(NumEntities);
+            writer.Write((uint)Entities.Count);
+            writer.Write(Entities);
 
-            foreach (TR4Entity ent in Entities)
-            {
-                writer.Write(ent.Serialize());
-            }
-
-            writer.Write(NumAIObjects);
-
-            foreach (TR4AIObject ai in AIObjects)
-            {
-                writer.Write(ai.Serialize());
-            }
+            writer.Write((uint)AIEntities.Count);
+            writer.Write(AIEntities);
 
             writer.Write(NumDemoData);
             writer.Write(DemoData);
