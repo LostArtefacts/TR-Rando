@@ -48,11 +48,11 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         {
             // Keep a reference to the first dragon level if we are removing the dagger from the dressing gown. This needs to be done
             // based on the level sequencing.
-            levels.Sort(delegate (TR2CombinedLevel lvl1, TR2CombinedLevel lvl2)
+            levels.Sort((lvl1, lvl2) =>
             {
                 return lvl1.Sequence.CompareTo(lvl2.Sequence);
             });
-            _firstDragonLevel = levels.Find(l => l.Data.Entities.FindIndex(e => e.TypeID == TR2Type.MarcoBartoli) != -1);
+            _firstDragonLevel = levels.Find(l => l.Data.Entities.Any(e => e.TypeID == TR2Type.MarcoBartoli));
         }
 
         // Sort the levels so each thread has a fairly equal weight in terms of import cost/time
