@@ -515,9 +515,6 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         // Get a list of current enemy entities
         List<TR2Entity> enemyEntities = level.GetEnemyEntities();
 
-        // Keep track of any new entities added (e.g. Skidoo)
-        List<TR2Entity> newEntities = new();
-
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
         // #148 If it's HSH and we have been able to import cross-level, we will add 15
@@ -529,7 +526,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         {
             for (int i = 0; i < 15; i++)
             {
-                newEntities.Add(new TR2Entity
+                level.Data.Entities.Add(new()
                 {
                     TypeID = TR2Type.Doberman,
                     Room = 85,
@@ -787,7 +784,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                     angle = mercDriver.Angle;
                 }
 
-                newEntities.Add(new TR2Entity
+                level.Data.Entities.Add(new()
                 {
                     TypeID = TR2Type.RedSnowmobile,
                     Room = room,
@@ -832,12 +829,6 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 }                    
             }
 
-        }
-
-        // Did we add any new entities?
-        if (newEntities.Count > 0)
-        {
-            level.Data.Entities.AddRange(newEntities);
         }
 
         // Check in case there are too many skidoo drivers

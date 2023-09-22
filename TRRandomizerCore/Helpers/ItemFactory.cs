@@ -103,7 +103,7 @@ public class ItemFactory
         {
             if (allItems.Count < _entityLimit || allowLimitBreak)
             {
-                allItems.Add(item = new TR1Entity());
+                allItems.Add(item = new());
             }
             else
             {
@@ -138,7 +138,7 @@ public class ItemFactory
         {
             if (allItems.Count < _entityLimit || allowLimitBreak)
             {
-                allItems.Add(item = new TR2Entity());
+                allItems.Add(item = new());
             }
             else
             {

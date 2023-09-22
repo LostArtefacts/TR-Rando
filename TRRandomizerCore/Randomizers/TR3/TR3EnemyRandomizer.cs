@@ -365,9 +365,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         List<TR3Type> allEnemies = TR3TypeUtilities.GetFullListOfEnemies();
         List<TR3Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
 
-        // Keep track of any new entities added (e.g. Lizard for Puna)
-        List<TR3Entity> newEntities = new();
-
         // First iterate through any enemies that are restricted by room
         Dictionary<TR3Type, List<int>> enemyRooms = TR3EnemyUtilities.GetRestrictedEnemyRooms(level.Name, Settings.RandoEnemyDifficulty);
         if (enemyRooms != null)
