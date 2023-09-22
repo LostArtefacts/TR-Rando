@@ -99,7 +99,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
 
         // Track enemies whose counts across the game are restricted
-        _gameEnemyTracker = TR2EnemyUtilities.PrepareEnemyGameTracker(Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile, Settings.RandoEnemyDifficulty);
+        _gameEnemyTracker = TR2EnemyUtilities.PrepareEnemyGameTracker(Settings.DocileChickens, Settings.RandoEnemyDifficulty);
         
         // #272 Selective enemy pool - convert the shorts in the settings to actual entity types
         _excludedEnemies = Settings.UseEnemyExclusions ? 
@@ -191,7 +191,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             newEntities.Remove(TR2Type.StickWieldingGoon1);
             newEntities.Add(newGoon);
 
-            if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile)
+            if (Settings.DocileChickens)
             {
                 newEntities.Remove(TR2Type.MaskedGoon1);
                 newEntities.Add(TR2Type.BirdMonster);
@@ -215,7 +215,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
             if (droppableEnemyRequired)
             {
-                List<TR2Type> droppableEnemies = TR2TypeUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional);
+                List<TR2Type> droppableEnemies = TR2TypeUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.UnconditionalChickens);
                 newEntities.Add(SelectRequiredEnemy(droppableEnemies, level, difficulty));
             }
 
@@ -291,13 +291,13 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                         newEntities.Clear();
                         newEntities.AddRange(restrictedCombinations[_generator.Next(0, restrictedCombinations.Count)]);
                     }
-                    while (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && newEntities.Contains(TR2Type.BirdMonster) && chickenGuisers.All(g => newEntities.Contains(g))
+                    while (Settings.DocileChickens && newEntities.Contains(TR2Type.BirdMonster) && chickenGuisers.All(g => newEntities.Contains(g))
                        || (newEntities.Any(_excludedEnemies.Contains) && restrictedCombinations.Any(c => !c.Any(_excludedEnemies.Contains))));
                     break;
                 }
 
                 // If it's the chicken in HSH with default behaviour, we don't want it ending the level
-                if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Default && entity == TR2Type.BirdMonster && level.Is(TR2LevelNames.HOME) && allEnemies.Except(newEntities).Count() > 1)
+                if (Settings.DefaultChickens && entity == TR2Type.BirdMonster && level.Is(TR2LevelNames.HOME) && allEnemies.Except(newEntities).Count() > 1)
                 {
                     continue;
                 }
@@ -332,7 +332,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 {
                     // #144 We can include docile chickens provided we aren't including everything
                     // that can be disguised as a chicken.
-                    if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile)
+                    if (Settings.DocileChickens)
                     {
                         bool guisersAvailable = !chickenGuisers.All(g => newEntities.Contains(g));
                         // If the selected entity is the chicken, it can be added provided there are
@@ -362,7 +362,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         Dictionary<TR2Type, List<int>> restrictedRoomEnemies = TR2EnemyUtilities.GetRestrictedEnemyRooms(level.Name, difficulty);
         if (restrictedRoomEnemies != null && newEntities.All(e => restrictedRoomEnemies.ContainsKey(e)))
         {
-            List<TR2Type> pool = TR2TypeUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional);
+            List<TR2Type> pool = TR2TypeUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.UnconditionalChickens);
             do
             {
                 TR2Type fallbackEnemy;
@@ -390,7 +390,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
 
         // #144 Decide at this point who will be guising unless it has already been decided above (e.g. HSH)          
-        if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && newEntities.Contains(TR2Type.BirdMonster) && chickenGuiser == TR2Type.BirdMonster)
+        if (Settings.DocileChickens && newEntities.Contains(TR2Type.BirdMonster) && chickenGuiser == TR2Type.BirdMonster)
         {
             int guiserIndex = chickenGuisers.FindIndex(g => !newEntities.Contains(g));
             if (guiserIndex != -1)
@@ -459,7 +459,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         List<TR2Type> droppableEnemies = TR2TypeUtilities.DroppableEnemyTypes()[level.Name];
         List<TR2Type> waterEnemies = TR2TypeUtilities.FilterWaterEnemies(availableEnemyTypes);
 
-        if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && level.Is(TR2LevelNames.CHICKEN))
+        if (Settings.DocileChickens && level.Is(TR2LevelNames.CHICKEN))
         {
             DisguiseEntity(level, TR2Type.MaskedGoon1, TR2Type.BirdMonster);
         }
@@ -641,7 +641,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
 
                 //Do we need to ensure the enemy can drop the item on the same tile?
-                if (!TR2TypeUtilities.CanDropPickups(newEntityType, !Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional) && isPickupItem)
+                if (!TR2TypeUtilities.CanDropPickups(newEntityType, !Settings.ProtectMonks, Settings.UnconditionalChickens) && isPickupItem)
                 {
                     //Ensure the new random entity can drop pickups
                     newEntityType = enemies.Droppable[_generator.Next(0, enemies.Droppable.Count)];
@@ -738,7 +738,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
             // #144 Disguise something as the Chicken. Pre-checks will have been done to ensure
             // the guiser is suitable for the level.
-            if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && newEntityType == TR2Type.BirdMonster)
+            if (Settings.DocileChickens && newEntityType == TR2Type.BirdMonster)
             {
                 newEntityType = enemies.BirdMonsterGuiser;
             }
@@ -849,7 +849,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             RandomizeEnemyMeshes(level, enemies);
         }
 
-        if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional)
+        if (Settings.UnconditionalChickens)
         {
             MakeChickensUnconditional(level);
         }
@@ -958,7 +958,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         
         List<TR2Type> laraClones = new();
         const int chance = 2;
-        if (Settings.BirdMonsterBehaviour != BirdMonsterBehaviour.Docile)
+        if (!Settings.DocileChickens)
         {
             AddRandomLaraClone(enemies, TR2Type.MonkWithKnifeStick, laraClones, chance);
             AddRandomLaraClone(enemies, TR2Type.MonkWithLongStick, laraClones, chance);
@@ -1154,12 +1154,12 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                         EnemyRandomizationCollection enemies = new()
                         {
                             Available = importedCollection.EntitiesToImport,
-                            Droppable = TR2TypeUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional),
+                            Droppable = TR2TypeUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.UnconditionalChickens),
                             Water = TR2TypeUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport),
                             All = new List<TR2Type>(importedCollection.EntitiesToImport)
                         };
 
-                        if (_outer.Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && importedCollection.BirdMonsterGuiser != TR2Type.BirdMonster)
+                        if (_outer.Settings.DocileChickens && importedCollection.BirdMonsterGuiser != TR2Type.BirdMonster)
                         {
                             DisguiseEntity(level, importedCollection.BirdMonsterGuiser, TR2Type.BirdMonster);
                             enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
