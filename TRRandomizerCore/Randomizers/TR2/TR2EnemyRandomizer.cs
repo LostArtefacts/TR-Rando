@@ -611,46 +611,15 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 continue;
             }
 
-            //#45 - Check to see if any items are at the same location as the enemy.
-            //If there are we need to ensure that the new random enemy type is one that can drop items.
-            List<TR2Entity> sharedItems = level.Data.Entities.FindAll(e =>
-                e.X == currentEntity.X
-                && e.Y == currentEntity.Y
-                && e.Z == currentEntity.Z
-            );
+            // Generate a new type, ensuring to test for item drops
+            newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
+            bool hasPickupItem = level.Data.Entities
+                .Any(item => TR2EnemyUtilities.HasDropItem(currentEntity, item));
 
-            //Do multiple entities share one location?
-            bool isPickupItem = false;
-            if (sharedItems.Count > 1 && enemies.Droppable.Count != 0)
+            if (hasPickupItem
+                && !TR2TypeUtilities.CanDropPickups(newEntityType, !Settings.ProtectMonks, Settings.UnconditionalChickens))
             {
-                //Are any entities sharing a location a droppable pickup?
-                
-                foreach (TR2Entity ent in sharedItems)
-                {
-                    TR2Type entType = ent.TypeID;
-
-                    isPickupItem = TR2TypeUtilities.IsUtilityType(entType) ||
-                                   TR2TypeUtilities.IsGunType(entType) ||
-                                   TR2TypeUtilities.IsKeyItemType(entType);
-
-                    if (isPickupItem)
-                        break;
-                }
-
-                //Generate a new type
-                newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
-
-                //Do we need to ensure the enemy can drop the item on the same tile?
-                if (!TR2TypeUtilities.CanDropPickups(newEntityType, !Settings.ProtectMonks, Settings.UnconditionalChickens) && isPickupItem)
-                {
-                    //Ensure the new random entity can drop pickups
-                    newEntityType = enemies.Droppable[_generator.Next(0, enemies.Droppable.Count)];
-                }
-            }
-            else
-            {
-                //Generate a new type
-                newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
+                newEntityType = enemies.Droppable[_generator.Next(0, enemies.Droppable.Count)];
             }
 
             short roomIndex = currentEntity.Room;
@@ -691,7 +660,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
             // Ensure that if we have to pick a different enemy at this point that we still
             // honour any pickups in the same spot.
-            List<TR2Type> enemyPool = isPickupItem ? enemies.Droppable : enemies.Available;
+            List<TR2Type> enemyPool = hasPickupItem ? enemies.Droppable : enemies.Available;
 
             if (newEntityType == TR2Type.ShotgunGoon && shotgunGoonSeen) // HSH only
             {
@@ -832,7 +801,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
 
         // Check in case there are too many skidoo drivers
-        if (level.Data.Entities.Find(e => e.TypeID == TR2Type.MercSnowmobDriver) != null)
+        if (level.Data.Entities.Any(e => e.TypeID == TR2Type.MercSnowmobDriver))
         {
             LimitSkidooEntities(level);
         }

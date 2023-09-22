@@ -450,33 +450,19 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            List<TR3Type> enemyPool;
+            List<TR3Type> enemyPool = enemies.Available;
 
             // Check if the enemy drops an item
-            TR3Entity pickupEntity = level.Data.Entities.Find
-            (
-                e =>
-                    e != currentEntity &&
-                    e.X == currentEntity.X &&
-                    e.Y == currentEntity.Y &&
-                    e.Z == currentEntity.Z &&
-                    TR3TypeUtilities.IsAnyPickupType(e.TypeID)
-            );
+            bool hasPickupItem = level.Data.Entities
+                .Any(item => TR3EnemyUtilities.HasDropItem(currentEntity, item));
 
-            if (pickupEntity != null)
+            if (hasPickupItem)
             {
-                // Make sure this enemy can also drop
                 enemyPool = enemies.Droppable;
             }
             else if (TR3TypeUtilities.IsWaterCreature(currentEntityType))
             {
-                // Make sure we replace with another water enemy
                 enemyPool = enemies.Water;
-            }
-            else
-            {
-                // Otherwise we can pick any other available enemy
-                enemyPool = enemies.Available;
             }
 
             // Pick a new type

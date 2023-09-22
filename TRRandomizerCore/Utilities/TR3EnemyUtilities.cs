@@ -158,28 +158,17 @@ public static class TR3EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR3CombinedLevel level)
     {
-        List<TR3Entity> enemies = level.Data.Entities.FindAll(e => TR3TypeUtilities.IsEnemyType(e.TypeID));
-        foreach (TR3Entity entityInstance in enemies)
-        {
-            List<TR3Entity> sharedItems = level.Data.Entities.FindAll(e =>
-                e.X == entityInstance.X
-                && e.Y == entityInstance.Y
-                && e.Z == entityInstance.Z
-            );
-            if (sharedItems.Count > 1)
-            {
-                // Are any entities that are sharing a location a droppable pickup?
-                foreach (TR3Entity ent in sharedItems)
-                {
-                    if (TR3TypeUtilities.IsAnyPickupType(ent.TypeID))
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
+        return level.Data.Entities
+            .Where(e => TR3TypeUtilities.IsEnemyType(e.TypeID))
+            .Any(enemy => level.Data.Entities.Any(item => HasDropItem(enemy, item)));
+    }
 
-        return false;
+    public static bool HasDropItem(TR3Entity enemy, TR3Entity item)
+    {
+        return TR3TypeUtilities.IsAnyPickupType(item.TypeID)
+            && item.X == enemy.X
+            && item.Y == enemy.Y
+            && item.Z == enemy.Z;
     }
 
     public static void SetEntityTriggers(TR3Level level, TR3Entity entity)

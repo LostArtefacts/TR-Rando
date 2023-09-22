@@ -54,35 +54,17 @@ public static class TR2EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR2CombinedLevel level)
     {
-        List<TR2Entity> enemies = level.Data.Entities.FindAll(e => TR2TypeUtilities.IsEnemyType(e.TypeID));
-        foreach (TR2Entity entityInstance in enemies)
-        {
-            List<TR2Entity> sharedItems = level.Data.Entities.FindAll(e =>
-                e.X == entityInstance.X
-                && e.Y == entityInstance.Y
-                && e.Z == entityInstance.Z
-            );
-            if (sharedItems.Count > 1)
-            {
-                // Are any entities that are sharing a location a droppable pickup?
-                foreach (TR2Entity ent in sharedItems)
-                {
-                    TR2Type EntType = ent.TypeID;
+        return level.Data.Entities
+            .Where(e => TR2TypeUtilities.IsEnemyType(e.TypeID))
+            .Any(enemy => level.Data.Entities.Any(item => HasDropItem(enemy, item)));
+    }
 
-                    if
-                    (
-                        TR2TypeUtilities.IsUtilityType(EntType) ||
-                        TR2TypeUtilities.IsGunType(EntType) ||
-                        TR2TypeUtilities.IsKeyItemType(EntType)
-                    )
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
+    public static bool HasDropItem(TR2Entity enemy, TR2Entity item)
+    {
+        return TR2TypeUtilities.IsAnyPickupType(item.TypeID)
+            && item.X == enemy.X
+            && item.Y == enemy.Y
+            && item.Z == enemy.Z;
     }
 
     public static bool IsEnemySupported(string lvlName, TR2Type entity, RandoDifficulty difficulty, bool protectMonks)
