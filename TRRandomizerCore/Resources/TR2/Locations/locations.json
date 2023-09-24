@@ -4831,9 +4831,9 @@
       "VehicleRequired": true
     },
     {
-      "X": 92653,
-      "Y": -4477,
-      "Z": 8719,
+      "X": 92707,
+      "Y": -4421,
+      "Z": 8803,
       "Room": 77,
       "Difficulty": "Hard",
       "RequiresGlitch": true
@@ -4843,21 +4843,24 @@
       "Y": 4607,
       "Z": 57276,
       "Room": 50,
-      "RequiresGlitch": true
+      "RequiresGlitch": true,
+      "VehicleRequired": true
     },
     {
       "X": 89059,
       "Y": 5120,
       "Z": 86049,
       "Room": 44,
-      "RequiresGlitch": true
+      "RequiresGlitch": true,
+      "VehicleRequired": true
     },
     {
       "X": 90078,
       "Y": 5392,
       "Z": 73760,
       "Room": 42,
-      "RequiresGlitch": true
+      "RequiresGlitch": true,
+      "VehicleRequired": true
     },
     {
       "X": 47390,
@@ -4866,14 +4869,16 @@
       "Room": 60,
       "Difficulty": "Hard",
       "PackID": "apel",
-      "RequiresGlitch": true
+      "RequiresGlitch": true,
+      "VehicleRequired": true
     },
     {
       "X": 16384,
       "Y": 6129,
       "Z": 45105,
       "Room": 89,
-      "RequiresGlitch": true
+      "RequiresGlitch": true,
+      "VehicleRequired": true
     },
     {
       "X": 31734,
