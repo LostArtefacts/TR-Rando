@@ -700,6 +700,7 @@
       "Y": 638,
       "Z": 69120,
       "Room": 109,
+      "TargetType": 14,
       "VehicleRequired": true
     },
     {
@@ -1107,7 +1108,9 @@
       "Room": 152,
       "Difficulty": "Hard",
       "PackID": "apel",
-      "RequiresGlitch": true
+      "RequiresGlitch": true,
+      "TargetType": 14,
+      "VehicleRequired": true
     },
     {
       "X": 25647,
@@ -4565,6 +4568,7 @@
       "Y": 0,
       "Z": 47003,
       "Room": 3,
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4650,6 +4654,7 @@
       "Z": 49199,
       "Room": 6,
       "Difficulty": "Hard",
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4658,6 +4663,7 @@
       "Z": 17923,
       "Room": 76,
       "Difficulty": "Hard",
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4666,6 +4672,7 @@
       "Z": 32289,
       "Room": 23,
       "Difficulty": "Hard",
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4674,6 +4681,7 @@
       "Z": 28614,
       "Room": 25,
       "Difficulty": "Hard",
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4724,6 +4732,7 @@
       "Z": 58372,
       "Room": 67,
       "Difficulty": "Hard",
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4828,6 +4837,7 @@
       "Z": 2622,
       "Room": 107,
       "Difficulty": "Hard",
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4844,6 +4854,7 @@
       "Z": 57276,
       "Room": 50,
       "RequiresGlitch": true,
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4852,6 +4863,7 @@
       "Z": 86049,
       "Room": 44,
       "RequiresGlitch": true,
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4860,6 +4872,7 @@
       "Z": 73760,
       "Room": 42,
       "RequiresGlitch": true,
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4870,6 +4883,7 @@
       "Difficulty": "Hard",
       "PackID": "apel",
       "RequiresGlitch": true,
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {
@@ -4878,6 +4892,7 @@
       "Z": 45105,
       "Room": 89,
       "RequiresGlitch": true,
+      "TargetType": 13,
       "VehicleRequired": true
     },
     {

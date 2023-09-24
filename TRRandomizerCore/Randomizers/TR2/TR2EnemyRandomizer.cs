@@ -730,74 +730,53 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             TR2Entity mercDriver = level.Data.Entities.Find(e => e.TypeID == TR2Type.MercSnowmobDriver);
             if (mercDriver != null)
             {
-                short room, angle;
-                int x, y, z;
+                TR2Entity skidoo = new()
+                {
+                    TypeID = TR2Type.RedSnowmobile,
+                    Intensity1 = -1,
+                    Intensity2 = -1
+                };
+                level.Data.Entities.Add(skidoo);
 
-                // we will only spawn one skidoo, so only need one random location
                 Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Type.RedSnowmobile, _generator);
                 if (randomLocation != null)
                 {
-                    room = (short)randomLocation.Room;
-                    x = randomLocation.X;
-                    y = randomLocation.Y;
-                    z = randomLocation.Z;
-                    angle = randomLocation.Angle;
+                    skidoo.Room = (short)randomLocation.Room;
+                    skidoo.X = randomLocation.X;
+                    skidoo.Y = randomLocation.Y;
+                    skidoo.Z = randomLocation.Z;
+                    skidoo.Angle = randomLocation.Angle;
                 }
                 else
                 {
-                    // if the level does not have skidoo locations for some reason, just spawn it on the MercSnowMobDriver
-                    room = mercDriver.Room;
-                    x = mercDriver.X;
-                    y = mercDriver.Y;
-                    z = mercDriver.Z;
-                    angle = mercDriver.Angle;
+                    skidoo.Room = mercDriver.Room;
+                    skidoo.X = mercDriver.X;
+                    skidoo.Y = mercDriver.Y;
+                    skidoo.Z = mercDriver.Z;
+                    skidoo.Angle = mercDriver.Angle;
                 }
-
-                level.Data.Entities.Add(new()
-                {
-                    TypeID = TR2Type.RedSnowmobile,
-                    Room = room,
-                    X = x,
-                    Y = y,
-                    Z = z,
-                    Angle = angle,
-                    Flags = 0,
-                    Intensity1 = -1,
-                    Intensity2 = -1
-                });
             }
         }
-        else //For Tibet level 
+        else
         {
-            TR2Entity Skidoo = level.Data.Entities.Find(e => e.TypeID == TR2Type.RedSnowmobile);
-
-            if (Skidoo != null)
+            TR2Entity skidoo = level.Data.Entities.Find(e => e.TypeID == TR2Type.RedSnowmobile);
+            if (skidoo != null)
             {
-                short room, angle;
-                int x, y, z;
-
-                // we will only spawn one skidoo, so only need one random location
                 Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Type.RedSnowmobile, _generator);
                 if (randomLocation != null)
                 {
-                    room = (short)randomLocation.Room;
-                    x = randomLocation.X;
-                    y = randomLocation.Y;
-                    z = randomLocation.Z;
-                    angle = randomLocation.Angle;
-
-                    //Update Skidoo info
-                    Skidoo.Room = room;
-                    Skidoo.X = x;
-                    Skidoo.Y = y;
-                    Skidoo.Z = z;
-                    Skidoo.Angle = angle;
-                    Skidoo.Flags = 0;
-                    Skidoo.Intensity1 = -1;
-                    Skidoo.Intensity2 = -1;
-                }                    
+                    skidoo.Room = (short)randomLocation.Room;
+                    skidoo.X = randomLocation.X;
+                    skidoo.Y = randomLocation.Y;
+                    skidoo.Z = randomLocation.Z;
+                    skidoo.Angle = randomLocation.Angle;
+                }
+                else
+                {
+                    // A secret depends on this skidoo, so just rotate it for variety.
+                    skidoo.Angle = (short)(_generator.Next(0, 8) * (ushort.MaxValue + 1) / 8);
+                }
             }
-
         }
 
         // Check in case there are too many skidoo drivers
