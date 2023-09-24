@@ -639,6 +639,15 @@
       "Room": 24
     },
     {
+      "X": 32768,
+      "Y": -1859,
+      "Z": 71670,
+      "Room": 17,
+      "Difficulty": "Hard",
+      "LevelState": "NotMirrored",
+      "RequiresGlitch": true
+    },
+    {
       "X": 35879,
       "Y": 3828,
       "Z": 54295,
@@ -667,6 +676,18 @@
       "Y": 3328,
       "Z": 34798,
       "Room": 51
+    },
+    {
+      "X": 46098,
+      "Y": 2784,
+      "Z": 36807,
+      "Room": 51
+    },
+    {
+      "X": 35970,
+      "Y": 2128,
+      "Z": 17402,
+      "Room": 58
     },
     {
       "X": 50130,
@@ -1320,6 +1341,27 @@
       "Y": -256,
       "Z": 67636,
       "Room": 1
+    },
+    {
+      "X": 43071,
+      "Y": -283,
+      "Z": 68560,
+      "Room": 1,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 42963,
+      "Y": 31,
+      "Z": 68595,
+      "Room": 2,
+      "Difficulty": "Hard"
+    },
+    {
+      "X": 38941,
+      "Y": -226,
+      "Z": 36820,
+      "Room": 14
     },
     {
       "X": 41019,
@@ -3763,6 +3805,15 @@
   ],
   "LEVEL10C.PHD": [
     {
+      "X": 62976,
+      "Y": -10240,
+      "Z": 9728,
+      "Room": 4,
+      "Difficulty": "Hard",
+      "PackID": "Lahm",
+      "RequiresGlitch": true
+    },
+    {
       "X": 69622,
       "Y": -12544,
       "Z": 19478,
@@ -4004,7 +4055,6 @@
       "Z": 22016,
       "Room": 8,
       "Difficulty": "Hard",
-      "PackID": "Lahm",
       "RequiresDamage": true
     },
     {
