@@ -227,7 +227,7 @@
           "Intensity2": 6400,
           "MeshID": 35
         },
-        "IgnoreSectorEntities": true
+        "IgnoreSectorEntities": false
       }
     ],
     [

@@ -2034,6 +2034,30 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if a specific secret is present.",
+        "ConditionType": 1,
+        "RoomIndex": 88
+      },
+      "OnTrue": [
+        {
+          "Comments": "Undo any flooding that may have been performed.",
+          "EMType": 3,
+          "RoomNumbers": [
+            76,
+            23,
+            88
+          ],
+          "WaterTextures": [
+            1366,
+            1562,
+            1563,
+            1564
+          ]
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],
