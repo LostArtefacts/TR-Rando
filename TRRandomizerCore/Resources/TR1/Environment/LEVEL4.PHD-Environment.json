@@ -4290,6 +4290,55 @@
             "Z": 36352,
             "Room": 1
           }
+        },
+        {
+          "Comments": "Make a room to house a boulder.",
+          "EMType": 126,
+          "Location": {
+            "X": 24576,
+            "Y": -6656,
+            "Z": 44032
+          },
+          "LinkedLocation": {
+            "X": 25088,
+            "Y": -3072,
+            "Z": 43520,
+            "Room": 1
+          },
+          "Textures": {
+            "Floor": 18,
+            "Ceiling": 18,
+            "WallAlignment": 4,
+            "Wall4": 18
+          },
+          "DefaultVertex": {},
+          "Lights": [],
+          "Height": 4,
+          "Width": 3,
+          "Depth": 3
+        },
+        {
+          "Comments": "Add the boulder.",
+          "EMType": 51,
+          "TypeID": 38,
+          "Location": {
+            "X": 26112,
+            "Y": -6656,
+            "Z": 45568,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Boulder triggers the pushblock.",
+          "EMType": 61,
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 5,
+            "Mask": 31,
+            "Actions": [
+              {}
+            ]
+          }
         }
       ],
       "Followers": [
@@ -4331,10 +4380,13 @@
             ],
             "Trigger": {
               "TrigType": 2,
+              "OneShot": true,
               "Mask": 31,
               "SwitchOrKeyRef": -1,
               "Actions": [
-                {}
+                {
+                  "Parameter": -2
+                }
               ]
             }
           }
@@ -4362,10 +4414,13 @@
             ],
             "Trigger": {
               "TrigType": 2,
+              "OneShot": true,
               "Mask": 31,
               "SwitchOrKeyRef": -1,
               "Actions": [
-                {}
+                {
+                  "Parameter": -2
+                }
               ]
             }
           }
@@ -4393,10 +4448,13 @@
             ],
             "Trigger": {
               "TrigType": 2,
+              "OneShot": true,
               "Mask": 31,
               "SwitchOrKeyRef": -1,
               "Actions": [
-                {}
+                {
+                  "Parameter": -2
+                }
               ]
             }
           }
@@ -4424,10 +4482,13 @@
             ],
             "Trigger": {
               "TrigType": 2,
+              "OneShot": true,
               "Mask": 31,
               "SwitchOrKeyRef": -1,
               "Actions": [
-                {}
+                {
+                  "Parameter": -2
+                }
               ]
             }
           }
@@ -4455,10 +4516,13 @@
             ],
             "Trigger": {
               "TrigType": 2,
+              "OneShot": true,
               "Mask": 31,
               "SwitchOrKeyRef": -1,
               "Actions": [
-                {}
+                {
+                  "Parameter": -2
+                }
               ]
             }
           }
@@ -4486,10 +4550,13 @@
             ],
             "Trigger": {
               "TrigType": 2,
+              "OneShot": true,
               "Mask": 31,
               "SwitchOrKeyRef": -1,
               "Actions": [
-                {}
+                {
+                  "Parameter": -2
+                }
               ]
             }
           }
@@ -4517,10 +4584,13 @@
             ],
             "Trigger": {
               "TrigType": 2,
+              "OneShot": true,
               "Mask": 31,
               "SwitchOrKeyRef": -1,
               "Actions": [
-                {}
+                {
+                  "Parameter": -2
+                }
               ]
             }
           }
@@ -4548,10 +4618,13 @@
             ],
             "Trigger": {
               "TrigType": 2,
+              "OneShot": true,
               "Mask": 31,
               "SwitchOrKeyRef": -1,
               "Actions": [
-                {}
+                {
+                  "Parameter": -2
+                }
               ]
             }
           }

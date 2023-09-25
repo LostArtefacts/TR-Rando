@@ -9,4 +9,6 @@ public enum T1MInjectionType
     FDFix,
     LaraAnims,
     LaraJumps,
+    ItemRotation,
+    PS1Enemy,
 }

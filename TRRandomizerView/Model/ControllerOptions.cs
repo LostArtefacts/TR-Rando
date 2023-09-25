@@ -843,6 +843,39 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    private bool _fixBearAI;
+    public bool FixBearAi
+    {
+        get => _fixBearAI;
+        set
+        {
+            _fixBearAI = value;
+            FirePropertyChanged();
+        }
+    }
+
+    private bool _loadCurrentMusic;
+    public bool LoadCurrentMusic
+    {
+        get => _loadCurrentMusic;
+        set
+        {
+            _loadCurrentMusic = value;
+            FirePropertyChanged();
+        }
+    }
+
+    private bool _loadMusicTriggers;
+    public bool LoadMusicTriggers
+    {
+        get => _loadMusicTriggers;
+        set
+        {
+            _loadMusicTriggers = value;
+            FirePropertyChanged();
+        }
+    }
+
     #endregion
 
     public int TotalLevelCount
@@ -3318,6 +3351,9 @@ public class ControllerOptions : INotifyPropertyChanged
             CameraSpeed = _controller.CameraSpeed;
             EnableSwingCancel = _controller.EnableSwingCancel;
             EnableTr2Jumping = _controller.EnableTr2Jumping;
+            FixBearAi = _controller.FixBearAi;
+            LoadCurrentMusic = _controller.LoadCurrentMusic;
+            LoadMusicTriggers = _controller.LoadMusicTriggers;
         }
 
         FireSupportPropertiesChanged();
@@ -3608,6 +3644,9 @@ public class ControllerOptions : INotifyPropertyChanged
             _controller.CameraSpeed = CameraSpeed;
             _controller.EnableSwingCancel = EnableSwingCancel;
             _controller.EnableTr2Jumping = EnableTr2Jumping;
+            _controller.FixBearAi = FixBearAi;
+            _controller.LoadCurrentMusic = LoadCurrentMusic;
+            _controller.LoadMusicTriggers = LoadMusicTriggers;
         }
     }
 
