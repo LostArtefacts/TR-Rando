@@ -1167,6 +1167,41 @@ public class TRRandomizerController
         }
     }
 
+    public bool FixBearAi
+    {
+        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixBearAi;
+        set
+        {
+            if (ScriptEditor is TR1ScriptEditor tr1Editor)
+            {
+                tr1Editor.FixBearAi = value;
+            }
+        }
+    }
+
+    public bool LoadCurrentMusic
+    {
+        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.LoadCurrentMusic;
+        set
+        {
+            if (ScriptEditor is TR1ScriptEditor tr1Editor)
+            {
+                tr1Editor.LoadCurrentMusic = value;
+            }
+        }
+    }
+
+    public bool LoadMusicTriggers
+    {
+        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.LoadMusicTriggers;
+        set
+        {
+            if (ScriptEditor is TR1ScriptEditor tr1Editor)
+            {
+                tr1Editor.LoadMusicTriggers = value;
+            }
+        }
+    }
     #endregion
 
     #region LevelRandomizer Passthrough

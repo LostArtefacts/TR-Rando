@@ -503,6 +503,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -541,13 +542,29 @@
 
                         <Border Grid.Row="2"
                                 Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixBearAi, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix bear AI" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Fixes bear pat attack so it does not miss Lara."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixBridgeCollision, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
                                        Content="Fix bridge collision" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="2"
+                        <Border Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -555,7 +572,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="3"
+                        <Border Grid.Row="4"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixDescendingGlitch, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -563,7 +580,7 @@
                                        Content="Fix descending glitch *" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="3"
+                        <Border Grid.Row="4"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -571,7 +588,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="4"
+                        <Border Grid.Row="5"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixPyramidSecretTrigger, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -579,7 +596,7 @@
                                        Content="Fix Pyramid secret trigger *" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="4"
+                        <Border Grid.Row="5"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -587,7 +604,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="5"
+                        <Border Grid.Row="6"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixQwopGlitch, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -595,7 +612,7 @@
                                        Content="Fix QWOP glitch *" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="5"
+                        <Border Grid.Row="6"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -603,7 +620,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="6"
+                        <Border Grid.Row="7"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixTihocanSecretSound, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -611,7 +628,7 @@
                                        Content="Fix Tihocan secret sound" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="6"
+                        <Border Grid.Row="7"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -619,7 +636,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="7"
+                        <Border Grid.Row="8"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixWallJumpGlitch, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -627,7 +644,7 @@
                                        Content="Fix wall jump glitch *" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="7"
+                        <Border Grid.Row="8"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -1162,6 +1179,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -1169,6 +1188,37 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Margin="0">
+                            <CheckBox IsChecked="{Binding ControllerProxy.LoadCurrentMusic, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Load music track" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Loads the music track that was playing when the game was saved."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.LoadMusicTriggers, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Remember played music" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Loads previously triggered music so music tracks do not replay."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableMusicInInventory, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
@@ -1176,13 +1226,14 @@
                             </CheckBox>
                         </Border>
                         <Border Grid.Column="1"
-                                Margin="0">
+                                Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
                                 <Run Text="Allows game sounds to continue to play in the inventory screen."/>
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="1"
+                        <Border Grid.Row="3"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableMusicInMenu, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -1190,7 +1241,7 @@
                                        Content="Enable music in main menu" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="1"
+                        <Border Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -1198,7 +1249,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="2"
+                        <Border Grid.Row="4"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnablePitchedSounds, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -1206,7 +1257,7 @@
                                        Content="Enable pitched sounds *" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="2"
+                        <Border Grid.Row="4"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -1214,7 +1265,7 @@
                             </TextBlock>
                         </Border>
                         
-                        <Border Grid.Row="3"
+                        <Border Grid.Row="5"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixSecretsKillingMusic, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -1222,7 +1273,7 @@
                                        Content="Fix secrets killing music" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="3"
+                        <Border Grid.Row="5"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -1230,7 +1281,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="4"
+                        <Border Grid.Row="6"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixSpeechesKillingMusic, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -1238,7 +1289,7 @@
                                        Content="Fix speech killing music" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="4"
+                        <Border Grid.Row="6"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
