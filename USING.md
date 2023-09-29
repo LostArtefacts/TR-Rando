@@ -87,6 +87,18 @@ If you wish to restore your game folder to its original state, click on the `Too
 ![Restore](Resources/Using/restore.png)
 
 ## Troubleshooting
+
+### .NET Core
+You may see the following error message when you try to launch the randomizer - this means that your system is missing the .NET Core Runtime, which the randomizer needs in order to run. Simply follow the prompt to install the runtime, and then launch the randomizer again.
+
+![.NET Core missing](Resources/Using/netcore.png)
+
+If however the randomizer doesn't launch, but you don't see the above error, you can install the runtime manually. Use one of the following links depending on your system.
+
+- x64: https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x64.exe
+- x86: https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x86.exe
+
+### General issues
 If you encounter error messages during randomization, the most likely cause is unclean data files. In this case, you should follow these steps.
 
 1. Click on the `Tools` menu and select `Delete Backup`.
