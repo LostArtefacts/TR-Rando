@@ -20,7 +20,7 @@
     <SelfContained>false</SelfContained>
     <ApplicationIcon>Resources\rando.ico</ApplicationIcon>
 
-    <Version>1.7.2</Version>
+    <Version>1.7.3</Version>
     <Product>Tomb Raider Randomizer</Product>
     <Copyright>Copyright © Tomb Raider Community 2023</Copyright>
   </PropertyGroup>
