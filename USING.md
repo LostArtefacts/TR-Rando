@@ -2,6 +2,10 @@
 
 To play the randomizer, you will need to have the relevant TR1, TR2 or TR3 game(s) installed on your PC. It is important that the data files for these games are "clean", meaning that they should not have been modified by any other custom tool. If you are in any doubt about this, the first step you should take is reinstalling the game (for example in Steam or GoG).
 
+Following is a brief video explanation of the setup, but be sure to read each of the following points as well.
+
+https://user-images.githubusercontent.com/9203254/148436641-6dd771ad-7b41-422e-a938-1fb70a3d279c.mp4
+
 ## Prerequisites
 
 Before you launch the randomizer for the first time, you should carry out a few steps as follows.
