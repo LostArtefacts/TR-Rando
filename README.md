@@ -1,18 +1,20 @@
-# TR-Rando
-Tomb Raider Game Randomizer
+<p align="center">
+   <img alt="TR Rando" src="Resources/randomizerlogo.png"/>
+</p>
 
-![TR Rando](Resources/Screenshots/Compressed/TR2_1.jpg)
+TR Rando is a randomizer tool for the classic Tomb Raider series (TR 1-3). It allows you to change many aspects of the
+original levels, such as item pickups, secrets, enemies, Lara's appearance, level order, text...[and so much more](#features).
 
-# Installation
-Please follow the steps provided in this video:
+## Installation
 
-https://user-images.githubusercontent.com/9203254/148436641-6dd771ad-7b41-422e-a938-1fb70a3d279c.mp4
+1. Download the [latest version](https://github.com/LostArtefacts/TR-Rando/releases/latest), making sure to select the `TRRando` zip and not the source code.
+2. Extract.
+3. Run `TRRandomizer.exe` and follow the instructions.
+4. Play and enjoy!
 
-Download latest release here: https://github.com/LostArtefacts/TR-Rando/releases/latest
+See [USING.md](USING.md) for a more detailed setup guide.
 
-View [detailed user guide](USING.md).
-
-# Features
+## Features
 ![TR Rando UI](Resources/UI.png)
 
 * **Secrets** - Randomizes locations of secrets and their rewards.
@@ -30,23 +32,16 @@ View [detailed user guide](USING.md).
 * **Environment** - Modifies the level environment, such as mixing up water levels, mirroring levels, moving keyholes, randomizing traps and adding new puzzle/challenge areas.
 * And more!
 
-# Getting Started
-1. Download the latest version from https://github.com/LostArtefacts/TR-Rando/releases/latest. Make sure to download the `TRRando` zip and not the source code.
-2. Extract.
-3. Run "TRRandomizer.exe" and follow the instructions.
-4. Play and enjoy!
-
-View [detailed user guide](USING.md).
-
-# Discord
+## Discord
 We have a friendly community Discord server [here](https://discord.gg/f4bUqwgcCN).
 
-# Tracker
+## Tracker
 For keeping track of levels while you play, check out the [TRRandoTracker](https://github.com/LostArtefacts/TRRandoTracker).
 
-# Screenies
+## Showcase
 ![TR1 Rando](Resources/Screenshots/Compressed/TR1_3.jpg)
 ![TR1 Rando](Resources/Screenshots/Compressed/TR1_4.jpg)
+![TR2 Rando](Resources/Screenshots/Compressed/TR2_1.jpg)
 ![TR2 Rando](Resources/Screenshots/Compressed/TR2_4.jpg)
 ![TR2 Rando](Resources/Screenshots/Compressed/TR2_5.jpg)
 ![TR3 Rando](Resources/Screenshots/Compressed/TR3_2.jpg)
@@ -54,7 +49,7 @@ For keeping track of levels while you play, check out the [TRRandoTracker](https
 
 [View all](Resources/Screenshots).
 
-# Development
+## Development
 You will need the following dependencies:
 
 ### NuGet Packages
@@ -65,7 +60,7 @@ You will need the following dependencies:
 * https://github.com/LostArtefacts/TRGameflowEditor/releases/latest - TRGameflowEditor by Lahm.
 * https://github.com/lahm86/RectanglePacker/releases/latest - RectanglePacker by Lahm.
 
-# Thanks
+## Thanks
 * Everyone - For playing and reporting bugs/areas for improvement. Rando wouldn't be where it is today without exceptional support from players.
 * Danza - For founding the project; developing robust level reading/writing libraries and tools; adding dozens of features, bug fixes and improvements; and continuing to support the Randomizer project as it evolves.
 * Eycore - Lots of ideas and locations, huge help for zoning key items.
