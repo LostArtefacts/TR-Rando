@@ -14,6 +14,8 @@ original levels, such as item pickups, secrets, enemies, Lara's appearance, leve
 
 See [USING.md](USING.md) for a more detailed setup guide.
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) if you are interested in participating in the development of the project.
+
 ## Features
 ![TR Rando UI](Resources/UI.png)
 
@@ -49,17 +51,6 @@ For keeping track of levels while you play, check out the [TRRandoTracker](https
 
 [View all](Resources/Screenshots).
 
-## Development
-You will need the following dependencies:
-
-### NuGet Packages
-* https://github.com/icsharpcode/SharpZipLib - Used for Zlib functions.
-* https://github.com/JamesNK/Newtonsoft.Json - Serialization/de-serialization of data.
-
-### Additional Build Dependencies
-* https://github.com/LostArtefacts/TRGameflowEditor/releases/latest - TRGameflowEditor by Lahm.
-* https://github.com/lahm86/RectanglePacker/releases/latest - RectanglePacker by Lahm.
-
 ## Thanks
 * Everyone - For playing and reporting bugs/areas for improvement. Rando wouldn't be where it is today without exceptional support from players.
 * Danza - For founding the project; developing robust level reading/writing libraries and tools; adding dozens of features, bug fixes and improvements; and continuing to support the Randomizer project as it evolves.
@@ -93,4 +84,3 @@ You will need the following dependencies:
     * Portuguese - Fuse & Jumica
     * Russian - Fetch
     * Swedish - Pikkufighter & Woof Smit
-
