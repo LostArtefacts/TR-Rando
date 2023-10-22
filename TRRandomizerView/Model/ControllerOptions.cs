@@ -25,7 +25,7 @@ public class ControllerOptions : INotifyPropertyChanged
 
     private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl, _randomStartControl, _randomEnvironmentControl;
 
-    private bool _disableDemos, _autoLaunchGame, _puristMode;
+    private bool _addReturnPaths, _fixOGBugs, _disableDemos, _autoLaunchGame;
 
     private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels;
     private TRSecretCountMode _secretCountMode;
@@ -37,7 +37,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
     private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
     private BoolItemControlClass _rotateStartPosition;
-    private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps, _randomizeChallengeRooms, _hardEnvironmentMode;
+    private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps, _randomizeChallengeRooms, _hardEnvironmentMode, _blockShortcuts;
     private BoolItemControlClass _disableHealingBetweenLevels, _disableMedpacks;
     private BoolItemControlClass _rainyAssaultCourse, _snowyAssaultCourse, _coldAssaultCourse;
     private uint _mirroredLevelCount;
@@ -1987,6 +1987,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public BoolItemControlClass BlockShortcuts
+    {
+        get => _blockShortcuts;
+        set
+        {
+            _blockShortcuts = value;
+            FirePropertyChanged();
+        }
+    }
+
     public uint MirroredLevelCount
     {
         get => _mirroredLevelCount;
@@ -2014,6 +2024,26 @@ public class ControllerOptions : INotifyPropertyChanged
         set
         {
             _developmentMode = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public bool AddReturnPaths
+    {
+        get => _addReturnPaths;
+        set
+        {
+            _addReturnPaths = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public bool FixOGBugs
+    {
+        get => _fixOGBugs;
+        set
+        {
+            _fixOGBugs = value;
             FirePropertyChanged();
         }
     }
@@ -2384,16 +2414,6 @@ public class ControllerOptions : INotifyPropertyChanged
         set
         {
             _autoLaunchGame = value;
-            FirePropertyChanged();
-        }
-    }
-
-    public bool PuristMode
-    {
-        get => _puristMode;
-        set
-        {
-            _puristMode = value;
             FirePropertyChanged();
         }
     }
@@ -2962,7 +2982,14 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "Allow more difficult puzzles, rooms and other environmental changes."
         };
         BindingOperations.SetBinding(HardEnvironmentMode, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
+        BlockShortcuts = new()
+        {
+            Title = "Allow shortcut fixes",
+            Description = "Allow environment changes that may block classic level shortcuts.",
+        };
+        BindingOperations.SetBinding(BlockShortcuts, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
 
+        // Health
         Binding randomizeHealthBinding = new(nameof(RandomizeHealth)) { Source = this };
         DisableHealingBetweenLevels = new BoolItemControlClass
         {
@@ -3035,7 +3062,7 @@ public class ControllerOptions : INotifyPropertyChanged
         EnvironmentBoolItemControls = new List<BoolItemControlClass>
         {
             _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps,
-            _randomizeChallengeRooms, _hardEnvironmentMode
+            _randomizeChallengeRooms, _hardEnvironmentMode, _blockShortcuts
         };
         HealthBoolItemControls = new List<BoolItemControlClass>
         {
@@ -3270,13 +3297,15 @@ public class ControllerOptions : INotifyPropertyChanged
         RandomizeTraps.Value = _controller.RandomizeTraps;
         RandomizeChallengeRooms.Value = _controller.RandomizeChallengeRooms;
         HardEnvironmentMode.Value = _controller.HardEnvironmentMode;
+        BlockShortcuts.Value = _controller.BlockShortcuts;
         MirroredLevelCount = _controller.MirroredLevelCount;
         MirrorAssaultCourse = _controller.MirrorAssaultCourse;
 
         DevelopmentMode = _controller.DevelopmentMode;
         DisableDemos = _controller.DisableDemos;
         AutoLaunchGame = _controller.AutoLaunchGame;
-        PuristMode = _controller.PuristMode;
+        AddReturnPaths = _controller.AddReturnPaths;
+        FixOGBugs = _controller.FixOGBugs;
         UseRecommendedCommunitySettings = _controller.UseRecommendedCommunitySettings;
 
         SpriteRandoMode = _controller.SpriteRandoMode;
@@ -3563,13 +3592,15 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.RandomizeTraps = RandomizeTraps.Value;
         _controller.RandomizeChallengeRooms = RandomizeChallengeRooms.Value;
         _controller.HardEnvironmentMode = HardEnvironmentMode.Value;
+        _controller.BlockShortcuts = BlockShortcuts.Value;
         _controller.MirroredLevelCount = MirroredLevelCount;
         _controller.MirrorAssaultCourse = MirrorAssaultCourse;
 
         _controller.DevelopmentMode = DevelopmentMode;
         _controller.DisableDemos = DisableDemos;
         _controller.AutoLaunchGame = AutoLaunchGame;
-        _controller.PuristMode = PuristMode;
+        _controller.AddReturnPaths = AddReturnPaths;
+        _controller.FixOGBugs = FixOGBugs;
         _controller.UseRecommendedCommunitySettings = UseRecommendedCommunitySettings;
 
         _controller.SpriteRandoMode = SpriteRandoMode;

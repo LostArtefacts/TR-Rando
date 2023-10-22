@@ -52,6 +52,14 @@
                         CanExecute="GlobalSeedCommandBinding_CanExecute"
                         Executed="GlobalSeedCommandBinding_Executed"/>
 
+        <CommandBinding Command="cmds:WindowCommands.OpenGlobalSettingsCommand"
+                        CanExecute="GlobalSettingsCommandBinding_CanExecute"
+                        Executed="GlobalSettingsCommandBinding_Executed"/>
+        
+        <CommandBinding Command="cmds:WindowCommands.LaunchGameCommand"
+                        CanExecute="LaunchGameCommandBinding_CanExecute"
+                        Executed="LaunchGameCommandBinding_Executed"/>
+
         <CommandBinding Command="cmds:WindowCommands.EditCommunitySettings"
                         CanExecute="EditCommunitySettingsCommandBinding_CanExecute"
                         Executed="EditCommunitySettingsCommandBinding_Executed"/>
