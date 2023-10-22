@@ -15,7 +15,6 @@ public class EnvironmentEditComponent : IDrawable
 
     private EMAllControl? _allControl;
     private EMConditionalAllControl? _conditionalAllControl;
-    private EMNonPuristControl? _nonPuristControl;
     private EMAnyControl? _anyControl;
     private EMAllWithinControl? _allWithinControl;
     private EMConditionalAllWithinControl? _conditionalAllWithinControl;
@@ -64,14 +63,6 @@ public class EnvironmentEditComponent : IDrawable
                     ImGui.SetNextWindowSize(new Vector2(400, 600));
                     ImGui.Begin("Conditional All Properties", ImGuiWindowFlags.HorizontalScrollbar);
                     _conditionalAllControl?.Draw();
-                    ImGui.End();
-                }
-                
-                if (_mapping.NonPurist.Any())
-                {
-                    ImGui.SetNextWindowSize(new Vector2(400, 600));
-                    ImGui.Begin("Non Purist Properties", ImGuiWindowFlags.HorizontalScrollbar);
-                    _nonPuristControl?.Draw();
                     ImGui.End();
                 }
                 
@@ -126,7 +117,6 @@ public class EnvironmentEditComponent : IDrawable
         _mapping = EMEditorMapping.Get(_name);
         _allControl = new EMAllControl(_mapping.All);
         _conditionalAllControl = new EMConditionalAllControl(_mapping.ConditionalAll);
-        _nonPuristControl = new EMNonPuristControl(_mapping.NonPurist);
         _anyControl = new EMAnyControl(_mapping.Any);
         _allWithinControl = new EMAllWithinControl(_mapping.AllWithin);
         _conditionalAllWithinControl = new EMConditionalAllWithinControl(_mapping.ConditionalAllWithin);

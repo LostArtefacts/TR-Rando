@@ -11,4 +11,7 @@ public enum EMTag
     Hard,
     CommunityPatchOnly,
     NonCommunityPatchOnly,
+    ReturnPath,
+    GeneralBugFix,
+    ShortcutFix,
 }

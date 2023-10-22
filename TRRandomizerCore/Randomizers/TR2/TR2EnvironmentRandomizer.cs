@@ -112,25 +112,15 @@ public class TR2EnvironmentRandomizer : BaseTR2Randomizer, IMirrorControl
         {
             Generator = _generator
         };
+        picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
 
-        // Process enforced packs first. We do not pass disallowed types here.
-        // These generally fix OG issues such as problems with box overlaps and
-        // textures.
+        // These are applied whether or not environment randomization is enabled,
+        // but tags can still be used to filter out based on user preferences.
         mapping.All.ApplyToLevel(level.Data, picker.Options);
-        
-        if (!EnforcedModeOnly || !Settings.PuristMode)
-        {
-            // Non-purist packs generally make return paths available.
-            // These are applied only if Purist mode is off or if Environment
-            // rando is on as a whole, because some other categories may rely
-            // on these changes having been made.
-            mapping.NonPurist.ApplyToLevel(level.Data, picker.Options);
-        }
 
         if (!EnforcedModeOnly)
         {
-            picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
             picker.Options.ExclusionMode = EMExclusionMode.BreakOnAny;
 
             // Run a random selection of Any.

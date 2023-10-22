@@ -15,7 +15,6 @@ public class EMEditorMapping
     };
 
     public EMEditorSet All { get; set; }
-    public EMEditorSet NonPurist { get; set; }
     public List<EMEditorSet> Any { get; set; }
     public List<List<EMEditorSet>> AllWithin { get; set; }
     public List<EMEditorGroupedSet> OneOf { get; set; }
@@ -29,7 +28,6 @@ public class EMEditorMapping
     {
         All = new EMEditorSet();
         ConditionalAll = new List<EMConditionalSingleEditorSet>();
-        NonPurist = new EMEditorSet();
         Any = new List<EMEditorSet>();
         AllWithin = new List<List<EMEditorSet>>();
         ConditionalAllWithin = new List<EMConditionalEditorSet>();
@@ -67,7 +65,6 @@ public class EMEditorMapping
 
         All?.RemapTextures(AlternativeTextures);
         ConditionalAll?.ForEach(s => s.RemapTextures(AlternativeTextures));
-        NonPurist?.RemapTextures(AlternativeTextures);
         Any?.ForEach(s => s.RemapTextures(AlternativeTextures));
         AllWithin?.ForEach(a => a.ForEach(s => s.RemapTextures(AlternativeTextures)));
         ConditionalAllWithin?.ForEach(s => s.RemapTextures(AlternativeTextures));
@@ -80,7 +77,6 @@ public class EMEditorMapping
     {
         All?.SetCommunityPatch(isCommunityPatch);
         ConditionalAll?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
-        NonPurist?.SetCommunityPatch(isCommunityPatch);
         Any?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
         AllWithin?.ForEach(a => a.ForEach(s => s.SetCommunityPatch(isCommunityPatch)));
         ConditionalAllWithin?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
