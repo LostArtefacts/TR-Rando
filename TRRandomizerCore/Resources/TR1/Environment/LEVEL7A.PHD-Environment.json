@@ -1,9 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Add a pushblock to allow returning to the start.",
       "EMType": 51,
+      "Tags": [
+        9
+      ],
       "TypeID": 48,
       "Intensity": -1,
       "Location": {

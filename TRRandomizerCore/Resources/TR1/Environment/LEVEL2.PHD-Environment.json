@@ -1,9 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Fix an out of place texture in room 26.",
       "EMType": 21,
+      "Tags": [
+        10
+      ],
       "TextureMap": {
         "2": {
           "26": {

@@ -1,38 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
-    {
-      "Comments": "Anti-speedrun barriers.",
-      "EMType": 24,
-      "Locations": [
-        {
-          "X": 55808,
-          "Y": -3072,
-          "Z": 54784,
-          "Room": 17
-        },
-        {
-          "X": 54784,
-          "Y": -3072,
-          "Z": 54784,
-          "Room": 17
-        },
-        {
-          "X": 56832,
-          "Y": -3072,
-          "Z": 54784,
-          "Room": 17
-        }
-      ],
-      "Mesh": {
-        "Intensity1": 5632,
-        "MeshID": 19
-      },
-      "IgnoreSectorEntities": true
-    },
+  "All": [
     {
       "Comments": "Fix the gap in the wall in room 35.",
       "EMType": 26,
+      "Tags": [
+        10
+      ],
       "Triangles": {
         "35": [
           {
@@ -47,205 +20,11 @@
       }
     },
     {
-      "Comments": "Increase the slope near the boat.",
-      "EMType": 7,
-      "Location": {
-        "X": 47616,
-        "Y": -6400,
-        "Z": 26112,
-        "Room": 3
-      },
-      "FloorClicks": -1,
-      "SlantType": 1,
-      "XSlant": -3
-    },
-    {
-      "EMType": 7,
-      "Location": {
-        "X": 47616,
-        "Y": -6400,
-        "Z": 26112,
-        "Room": 16
-      },
-      "FloorClicks": -1,
-      "SlantType": 1,
-      "XSlant": -3
-    },
-    {
-      "EMType": 7,
-      "Location": {
-        "X": 46592,
-        "Y": -6144,
-        "Z": 26112,
-        "Room": 3
-      },
-      "FloorClicks": -1,
-      "SlantType": 1,
-      "XSlant": 5
-    },
-    {
-      "EMType": 7,
-      "Location": {
-        "X": 46592,
-        "Y": -6144,
-        "Z": 26112,
-        "Room": 16
-      },
-      "FloorClicks": -1,
-      "SlantType": 1,
-      "XSlant": 5
-    },
-    {
-      "Comments": "Move some faces to fit the ramp.",
-      "EMType": 23,
-      "Modifications": [
-        {
-          "RoomNumber": 3,
-          "FaceIndex": 117,
-          "VertexChanges": {
-            "1": {
-              "Y": -256
-            },
-            "2": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 16,
-          "FaceIndex": 117,
-          "VertexChanges": {
-            "1": {
-              "Y": -256
-            },
-            "2": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 3,
-          "FaceType": 1,
-          "FaceIndex": 17,
-          "VertexChanges": {
-            "2": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 3,
-          "FaceType": 1,
-          "FaceIndex": 11,
-          "VertexChanges": {
-            "0": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 16,
-          "FaceType": 1,
-          "FaceIndex": 17,
-          "VertexChanges": {
-            "2": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 16,
-          "FaceType": 1,
-          "FaceIndex": 11,
-          "VertexChanges": {
-            "0": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 3,
-          "FaceIndex": 119,
-          "VertexChanges": {
-            "0": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 16,
-          "FaceIndex": 119,
-          "VertexChanges": {
-            "0": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 3,
-          "FaceIndex": 87,
-          "VertexChanges": {
-            "2": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 16,
-          "FaceIndex": 87,
-          "VertexChanges": {
-            "2": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 3,
-          "FaceIndex": 82,
-          "VertexChanges": {
-            "2": {
-              "Y": -256
-            },
-            "3": {
-              "Y": -256
-            }
-          }
-        },
-        {
-          "RoomNumber": 16,
-          "FaceIndex": 82,
-          "VertexChanges": {
-            "2": {
-              "Y": -256
-            },
-            "3": {
-              "Y": -256
-            }
-          }
-        }
-      ]
-    },
-    {
-      "Comments": "Any pickups on the old slope will be moved to the floor.",
-      "EMType": 43,
-      "SectorLocations": [
-        {
-          "X": 47616,
-          "Y": -6400,
-          "Z": 26112,
-          "Room": 3
-        }
-      ],
-      "TargetLocation": {
-        "X": 46592,
-        "Y": -5632,
-        "Z": 25088,
-        "Room": 3
-      }
-    },
-    {
       "Comments": "Move the boat camera so you don't see the already moved boat in the flipmap.",
       "EMType": 129,
+      "Tags": [
+        10
+      ],
       "CameraIndex": 7,
       "NewLocation": {
         "X": 53760,
@@ -257,6 +36,9 @@
     {
       "Comments": "Fix the z-fighting in room 55.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 55,
@@ -732,6 +514,257 @@
               "Parameter": 58
             }
           ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Anti-speedrun barriers.",
+        "EMType": 24,
+        "Tags": [
+          11
+        ],
+        "Locations": [
+          {
+            "X": 55808,
+            "Y": -3072,
+            "Z": 54784,
+            "Room": 17
+          },
+          {
+            "X": 54784,
+            "Y": -3072,
+            "Z": 54784,
+            "Room": 17
+          },
+          {
+            "X": 56832,
+            "Y": -3072,
+            "Z": 54784,
+            "Room": 17
+          }
+        ],
+        "Mesh": {
+          "Intensity1": 5632,
+          "MeshID": 19
+        },
+        "IgnoreSectorEntities": true
+      }
+    ],
+    [
+      {
+        "Comments": "Increase the slope near the boat.",
+        "EMType": 7,
+        "Tags": [
+          11
+        ],
+        "Location": {
+          "X": 47616,
+          "Y": -6400,
+          "Z": 26112,
+          "Room": 3
+        },
+        "FloorClicks": -1,
+        "SlantType": 1,
+        "XSlant": -3
+      },
+      {
+        "EMType": 7,
+        "Tags": [
+          11
+        ],
+        "Location": {
+          "X": 47616,
+          "Y": -6400,
+          "Z": 26112,
+          "Room": 16
+        },
+        "FloorClicks": -1,
+        "SlantType": 1,
+        "XSlant": -3
+      },
+      {
+        "EMType": 7,
+        "Tags": [
+          11
+        ],
+        "Location": {
+          "X": 46592,
+          "Y": -6144,
+          "Z": 26112,
+          "Room": 3
+        },
+        "FloorClicks": -1,
+        "SlantType": 1,
+        "XSlant": 5
+      },
+      {
+        "EMType": 7,
+        "Tags": [
+          11
+        ],
+        "Location": {
+          "X": 46592,
+          "Y": -6144,
+          "Z": 26112,
+          "Room": 16
+        },
+        "FloorClicks": -1,
+        "SlantType": 1,
+        "XSlant": 5
+      },
+      {
+        "Comments": "Move some faces to fit the ramp.",
+        "EMType": 23,
+        "Tags": [
+          11
+        ],
+        "Modifications": [
+          {
+            "RoomNumber": 3,
+            "FaceIndex": 117,
+            "VertexChanges": {
+              "1": {
+                "Y": -256
+              },
+              "2": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 16,
+            "FaceIndex": 117,
+            "VertexChanges": {
+              "1": {
+                "Y": -256
+              },
+              "2": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 3,
+            "FaceType": 1,
+            "FaceIndex": 17,
+            "VertexChanges": {
+              "2": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 3,
+            "FaceType": 1,
+            "FaceIndex": 11,
+            "VertexChanges": {
+              "0": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 16,
+            "FaceType": 1,
+            "FaceIndex": 17,
+            "VertexChanges": {
+              "2": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 16,
+            "FaceType": 1,
+            "FaceIndex": 11,
+            "VertexChanges": {
+              "0": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 3,
+            "FaceIndex": 119,
+            "VertexChanges": {
+              "0": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 16,
+            "FaceIndex": 119,
+            "VertexChanges": {
+              "0": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 3,
+            "FaceIndex": 87,
+            "VertexChanges": {
+              "2": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 16,
+            "FaceIndex": 87,
+            "VertexChanges": {
+              "2": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 3,
+            "FaceIndex": 82,
+            "VertexChanges": {
+              "2": {
+                "Y": -256
+              },
+              "3": {
+                "Y": -256
+              }
+            }
+          },
+          {
+            "RoomNumber": 16,
+            "FaceIndex": 82,
+            "VertexChanges": {
+              "2": {
+                "Y": -256
+              },
+              "3": {
+                "Y": -256
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Comments": "Any pickups on the old slope will be moved to the floor.",
+        "EMType": 43,
+        "Tags": [
+          11
+        ],
+        "SectorLocations": [
+          {
+            "X": 47616,
+            "Y": -6400,
+            "Z": 26112,
+            "Room": 3
+          }
+        ],
+        "TargetLocation": {
+          "X": 46592,
+          "Y": -5632,
+          "Z": 25088,
+          "Room": 3
         }
       }
     ]

@@ -1,9 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Remove the music action from the end keyholes - they don't work because of the mask so just kill the ambient track.",
       "EMType": 71,
+      "Tags": [
+        10
+      ],
       "Locations": [
         {
           "X": 31232,
@@ -38,6 +40,9 @@
     {
       "Comments": "Add it instead to the hidden boulder room so it activates when all keys are used.",
       "EMType": 61,
+      "Tags": [
+        10
+      ],
       "Locations": [
         {
           "X": 28160,
@@ -60,6 +65,9 @@
     {
       "Comments": "Make a return path available.",
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 29696,
         "Y": 11008,
@@ -110,6 +118,9 @@
     },
     {
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 27648,
         "Y": 7424,
@@ -157,6 +168,9 @@
     },
     {
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 25600,
         "Y": 3840,
@@ -209,6 +223,9 @@
     },
     {
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 24576,
         "Y": 1280,
@@ -263,6 +280,9 @@
     },
     {
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 23552,
         "Y": 512,
@@ -311,6 +331,9 @@
     },
     {
       "EMType": 81,
+      "Tags": [
+        9
+      ],
       "Portals": [
         {
           "BaseRoom": 41,
@@ -658,6 +681,9 @@
     },
     {
       "EMType": 82,
+      "Tags": [
+        9
+      ],
       "Portals": {
         "41": {
           "-5": [
@@ -770,6 +796,9 @@
     },
     {
       "EMType": 23,
+      "Tags": [
+        9
+      ],
       "Modifications": [
         {
           "RoomNumber": -5,
@@ -827,6 +856,9 @@
     },
     {
       "EMType": 21,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "57": {
           "-5": {
@@ -860,6 +892,9 @@
     },
     {
       "EMType": 22,
+      "Tags": [
+        9
+      ],
       "GeometryMap": {
         "41": {
           "Rectangles": [
@@ -901,6 +936,9 @@
     {
       "Comments": "Add a door.",
       "EMType": 51,
+      "Tags": [
+        9
+      ],
       "TypeID": 63,
       "Intensity": 6912,
       "Location": {
@@ -913,6 +951,9 @@
     {
       "Comments": "Trigger the door.",
       "EMType": 61,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 25088,
@@ -931,6 +972,9 @@
     },
     {
       "EMType": 51,
+      "Tags": [
+        9
+      ],
       "TypeID": 93,
       "Intensity": 4096,
       "Location": {

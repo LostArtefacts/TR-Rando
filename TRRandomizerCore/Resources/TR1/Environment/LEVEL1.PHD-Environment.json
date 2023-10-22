@@ -1,9 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Patch two holes in the roof in room 10 and another in room 1.",
       "EMType": 26,
+      "Tags": [
+        10
+      ],
       "Quads": {
         "1": [
           {
@@ -59,6 +61,9 @@
     {
       "Comments": "Patch a hole in the wall in room 14.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 14,
@@ -77,6 +82,9 @@
     {
       "Comments": "Reopen the doors in room 26 to make a return path possible.",
       "EMType": 61,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 26112,
@@ -99,8 +107,11 @@
       }
     },
     {
-      "Comments": "Refacing for above and to fix a quad in room 6.",
+      "Comments": "Refacing for the return path.",
       "EMType": 21,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "82": {
           "31": {
@@ -108,7 +119,16 @@
               8
             ]
           }
-        },
+        }
+      }
+    },
+    {
+      "Comments": "Refacing to fix a quad in room 6.",
+      "EMType": 21,
+      "Tags": [
+        10
+      ],
+      "TextureMap": {
         "27": {
           "6": {
             "Rectangles": [
