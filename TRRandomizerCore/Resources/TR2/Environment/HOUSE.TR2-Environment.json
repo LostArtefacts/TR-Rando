@@ -1,6 +1,5 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Reposition the unused maze button to the bedroom.",
       "EMType": 44,
@@ -16,14 +15,7 @@
     {
       "Comments": "Use it to turn off the alarms.",
       "EMType": 61,
-      "Locations": [
-        {
-          "X": 39424,
-          "Y": 256,
-          "Z": 60928,
-          "Room": 52
-        }
-      ],
+      "EntityLocation": 107,
       "Trigger": {
         "TrigType": 2,
         "Mask": 31,
@@ -34,6 +26,99 @@
           },
           {
             "Parameter": 33
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Make an unreachable room for a boulder trigger.",
+      "EMType": 126,
+      "Location": {
+        "X": 67584,
+        "Y": 2560,
+        "Z": 79872
+      },
+      "LinkedLocation": {
+        "X": 67072,
+        "Y": 2560,
+        "Z": 79360,
+        "Room": 85
+      },
+      "Textures": {
+        "Floor": 1387,
+        "Ceiling": 1387,
+        "WallAlignment": 4,
+        "Wall4": 1387
+      },
+      "DefaultVertex": {
+        "Lighting": 7000,
+        "Lighting2": 7000,
+        "Attributes": 16
+      },
+      "Lights": [],
+      "Height": 4,
+      "Width": 3,
+      "Depth": 3
+    },
+    {
+      "Comments": "Import the boulder model.",
+      "EMType": 145,
+      "Data": [
+        {
+          "ModelID": 60,
+          "TexturedFace3": 10
+        }
+      ]
+    },
+    {
+      "Comments": "Add a boulder to the hidden room.",
+      "EMType": 51,
+      "TypeID": 60,
+      "Location": {
+        "X": 69120,
+        "Y": 2560,
+        "Z": 81408,
+        "Room": -1
+      }
+    },
+    {
+      "Comments": "Move the initial trigger under Lara to the boulder.",
+      "EMType": 67,
+      "BaseLocation": {
+        "X": 34304,
+        "Y": 256,
+        "Z": 62976,
+        "Room": 52
+      },
+      "EntityLocation": -1
+    },
+    {
+      "Comments": "Make it heavy.",
+      "EMType": 69,
+      "Location": {
+        "X": 69120,
+        "Y": 2560,
+        "Z": 81408,
+        "Room": -1
+      },
+      "TrigType": 5
+    },
+    {
+      "Comments": "Trigger the boulder from the start position. All in all, this means the alarms won't get turned back on.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 34304,
+          "Y": 256,
+          "Z": 62976,
+          "Room": 52
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
           }
         ]
       }
