@@ -11,6 +11,7 @@ public class EMSlantFunction : EMClickFunction
     public FDSlantEntryType SlantType { get; set; }
     public sbyte? XSlant { get; set; }
     public sbyte? ZSlant { get; set; }
+    public bool RemoveSlant { get; set; }
 
     public override void ApplyToLevel(TR1Level level)
     {
@@ -23,7 +24,7 @@ public class EMSlantFunction : EMClickFunction
         foreach (EMLocation location in _locations)
         {
             TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-            CreateSlantEntry(sector, floorData);
+            UpdateSlantEntry(sector, floorData);
         }
 
         floorData.WriteToLevel(level);
@@ -39,7 +40,7 @@ public class EMSlantFunction : EMClickFunction
         foreach (EMLocation location in _locations)
         {
             TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-            CreateSlantEntry(sector, floorData);
+            UpdateSlantEntry(sector, floorData);
         }
 
         floorData.WriteToLevel(level);
@@ -55,10 +56,38 @@ public class EMSlantFunction : EMClickFunction
         foreach (EMLocation location in _locations)
         {
             TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-            CreateSlantEntry(sector, floorData);
+            UpdateSlantEntry(sector, floorData);
         }
 
         floorData.WriteToLevel(level);
+    }
+
+    private void UpdateSlantEntry(TRRoomSector sector, FDControl floorData)
+    {
+        if (RemoveSlant)
+        {
+            RemoveSlantEntry(sector, floorData);
+        }
+        else
+        {
+            CreateSlantEntry(sector, floorData);
+        }
+    }
+
+    private void RemoveSlantEntry(TRRoomSector sector, FDControl floorData)
+    {
+        if (sector.FDIndex == 0)
+        {
+            return;
+        }
+
+        List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+        entries.RemoveAll(e => e is FDSlantEntry slant && slant.Type == SlantType);
+
+        if (entries.Count == 0)
+        {
+            floorData.RemoveFloorData(sector);
+        }
     }
 
     private void CreateSlantEntry(TRRoomSector sector, FDControl floorData)
