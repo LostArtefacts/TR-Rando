@@ -911,15 +911,6 @@
     },
     {
       "OriginalTile": 10,
-      "OriginalIndex": 906,
-      "OriginalBounds": "176, 144, 16, 16",
-      "NewTile": 10,
-      "NewIndex": 858,
-      "NewBounds": "240, 136, 16, 16",
-      "AdjustmentPoint": "240, 136"
-    },
-    {
-      "OriginalTile": 10,
       "OriginalIndex": 858,
       "OriginalBounds": "240, 136, 16, 16",
       "NewTile": 12,
