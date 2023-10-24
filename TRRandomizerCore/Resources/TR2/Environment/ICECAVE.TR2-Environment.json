@@ -1,6 +1,31 @@
 {
-  "All": [],
-  "NonPurist": [],
+  "All": [
+    {
+      "Comments": "Add a ladder to room 34 as a return path.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1387": {
+          "34": {
+            "Rectangles": [
+              95,
+              96,
+              97
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 55808,
+        "Y": 6656,
+        "Z": 54784,
+        "Room": 34
+      },
+      "IsNegativeZ": true
+    }
+  ],
   "Any": [
     [
       {
@@ -1876,14 +1901,7 @@
         {
           "Comments": "Make a new trigger to open the final door.",
           "EMType": 61,
-          "Locations": [
-            {
-              "X": 62976,
-              "Y": 11520,
-              "Z": 44544,
-              "Room": 138
-            }
-          ],
+          "EntityLocation": 10,
           "Trigger": {
             "TrigType": 3,
             "Mask": 31,
@@ -1909,14 +1927,7 @@
         {
           "Comments": "Picking it up will end the level.",
           "EMType": 61,
-          "Locations": [
-            {
-              "X": 64000,
-              "Y": 7424,
-              "Z": 43520,
-              "Room": -1
-            }
-          ],
+          "EntityLocation": 145,
           "Trigger": {
             "TrigType": 4,
             "Mask": 31,

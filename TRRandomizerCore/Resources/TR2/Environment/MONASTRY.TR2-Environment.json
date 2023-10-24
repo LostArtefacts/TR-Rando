@@ -3,13 +3,15 @@
     {
       "Comments": "Fix the texture corruption in room 5 by making the skybox visible.",
       "EMType": 121,
+      "Tags": [
+        10
+      ],
       "Rooms": [
         5
       ],
       "IsSkyboxVisible": true
     }
   ],
-  "NonPurist": [],
   "Any": [
     [
       {
