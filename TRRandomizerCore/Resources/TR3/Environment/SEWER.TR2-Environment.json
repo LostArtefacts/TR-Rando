@@ -1,8 +1,11 @@
 {
   "All": [
     {
-      "Comments": "Fix a missig flipmap trigger for keyhole 85/door 56.",
+      "Comments": "Fix a missing flipmap trigger for keyhole 85/door 56.",
       "EMType": 63,
+      "Tags": [
+        10
+      ],
       "Locations": [
         {
           "X": 46592,
@@ -19,7 +22,6 @@
       }
     }
   ],
-  "NonPurist": [],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

@@ -1,11 +1,11 @@
 {
   "All": [],
-  "NonPurist": [],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Move door #35 otherwise Lara can't pass.",

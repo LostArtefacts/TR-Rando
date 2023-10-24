@@ -3,6 +3,9 @@
     {
       "Comments": "Make a ladder in room 213 to return to the left crawlspace.",
       "EMType": 0,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "2338": {
           "213": {
@@ -23,6 +26,9 @@
     {
       "Comments": "Make a ladder in room 213 to return to the right crawlspace.",
       "EMType": 0,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "2338": {
           "213": {
@@ -43,6 +49,9 @@
     {
       "Comments": "Remove the antitriggers for doors 197, 198, 173 and 174.",
       "EMType": 62,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 31232,
@@ -73,6 +82,9 @@
     {
       "Comments": "Rotate door 197, 198, 173 and 174 180 deg.",
       "EMType": 44,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 197,
       "TargetLocation": {
         "X": 32256,
@@ -84,6 +96,9 @@
     },
     {
       "EMType": 44,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 198,
       "TargetLocation": {
         "X": 32256,
@@ -95,6 +110,9 @@
     },
     {
       "EMType": 44,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 173,
       "TargetLocation": {
         "X": 45568,
@@ -106,6 +124,9 @@
     },
     {
       "EMType": 44,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 174,
       "TargetLocation": {
         "X": 45568,
@@ -118,6 +139,9 @@
     {
       "Comments": "Return/link paths.",
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 64512,
         "Y": 3840,
@@ -195,6 +219,9 @@
     {
       "Comments": "Return/link paths.",
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 54272,
         "Y": 4608,
@@ -252,6 +279,9 @@
     {
       "Comments": "Return/link paths.",
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 45056,
         "Y": -256,
@@ -309,6 +339,9 @@
     {
       "Comments": "Return/link paths.",
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 45056,
         "Y": 8960,
@@ -361,6 +394,9 @@
     {
       "Comments": "Return/link paths.",
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 46080,
         "Y": 8960,
@@ -447,6 +483,9 @@
     {
       "Comments": "Return/link paths.",
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 45056,
         "Y": 1280,
@@ -525,6 +564,9 @@
     },
     {
       "EMType": 82,
+      "Tags": [
+        9
+      ],
       "Portals": {
         "196": {
           "-1": [
@@ -651,6 +693,9 @@
     {
       "Comments": "Vertical portals.",
       "EMType": 83,
+      "Tags": [
+        9
+      ],
       "Ceiling": {
         "X": 46592,
         "Y": -256,
@@ -666,6 +711,9 @@
     },
     {
       "EMType": 83,
+      "Tags": [
+        9
+      ],
       "Ceiling": {
         "X": 55808,
         "Y": 7168,
@@ -682,6 +730,9 @@
     },
     {
       "EMType": 83,
+      "Tags": [
+        9
+      ],
       "Ceiling": {
         "X": 66048,
         "Y": 3840,
@@ -698,6 +749,9 @@
     },
     {
       "EMType": 81,
+      "Tags": [
+        9
+      ],
       "Portals": [
         {
           "BaseRoom": 196,
@@ -1284,6 +1338,9 @@
     {
       "Comments": "Ladders for some of the routes.",
       "EMType": 0,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "2338": {
           "-5": {
@@ -1313,6 +1370,9 @@
     {
       "Comments": "Ladders for some of the routes.",
       "EMType": 0,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "2338": {
           "77": {
@@ -1347,6 +1407,9 @@
     {
       "Comments": "Adjust faces for a portals.",
       "EMType": 23,
+      "Tags": [
+        9
+      ],
       "Modifications": [
         {
           "RoomNumber": 196,
@@ -1377,6 +1440,9 @@
     {
       "Comments": "Avoid squishing for above.",
       "EMType": 21,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "2288": {
           "196": {
@@ -1404,6 +1470,9 @@
     {
       "Comments": "Remove faces for portals.",
       "EMType": 22,
+      "Tags": [
+        9
+      ],
       "GeometryMap": {
         "196": {
           "Rectangles": [
@@ -1482,6 +1551,9 @@
     {
       "Comments": "Generate light in the link rooms.",
       "EMType": 128,
+      "Tags": [
+        9
+      ],
       "RoomIndices": [
         -1,
         -2,
@@ -1494,6 +1566,9 @@
     {
       "Comments": "Flood some of the link rooms.",
       "EMType": 2,
+      "Tags": [
+        9
+      ],
       "RoomNumbers": [
         -2,
         -3
@@ -1505,6 +1580,9 @@
     {
       "Comments": "Raise a platoform slightly in room 82.",
       "EMType": 5,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 55808,
         "Y": 7168,
@@ -1516,6 +1594,9 @@
     {
       "Comments": "Move some faces for above.",
       "EMType": 23,
+      "Tags": [
+        9
+      ],
       "Modifications": [
         {
           "RoomNumber": 82,
@@ -1568,6 +1649,9 @@
     {
       "Comments": "Move some doors to block the paths until they're needed.",
       "EMType": 44,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 117,
       "TargetLocation": {
         "X": 46592,
@@ -1579,16 +1663,25 @@
     },
     {
       "EMType": 45,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 117,
       "NewEntityType": 139
     },
     {
       "EMType": 45,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 116,
       "NewEntityType": 139
     },
     {
       "EMType": 44,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 116,
       "TargetLocation": {
         "X": 55808,
@@ -1600,6 +1693,9 @@
     },
     {
       "EMType": 44,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 120,
       "TargetLocation": {
         "X": 57856,
@@ -1611,11 +1707,17 @@
     },
     {
       "EMType": 45,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 121,
       "NewEntityType": 132
     },
     {
       "EMType": 44,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 121,
       "TargetLocation": {
         "X": 54784,
@@ -1627,6 +1729,9 @@
     },
     {
       "EMType": 51,
+      "Tags": [
+        9
+      ],
       "TypeID": 132,
       "Intensity": 7399,
       "Location": {
@@ -1640,6 +1745,9 @@
     {
       "Comments": "Remove old door triggers.",
       "EMType": 62,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 49664,
@@ -1681,6 +1789,9 @@
     },
     {
       "EMType": 61,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 48640,
@@ -1703,6 +1814,9 @@
     },
     {
       "EMType": 61,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 67072,
@@ -1723,6 +1837,9 @@
     {
       "Comments": "Extra dummy trapdoor trigger.",
       "EMType": 61,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 55808,
@@ -1744,6 +1861,9 @@
     {
       "Comments": "Extra dummy trapdoor trigger.",
       "EMType": 61,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 46592,
@@ -1764,6 +1884,9 @@
     },
     {
       "EMType": 68,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 58880,
         "Y": 3584,
@@ -1778,6 +1901,9 @@
     },
     {
       "EMType": 68,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 48640,
         "Y": 256,
@@ -1792,6 +1918,9 @@
     },
     {
       "EMType": 61,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 54784,
@@ -1811,6 +1940,9 @@
     },
     {
       "EMType": 61,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 55808,
@@ -1830,7 +1962,6 @@
       }
     }
   ],
-  "NonPurist": [],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
