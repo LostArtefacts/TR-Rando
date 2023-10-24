@@ -82,7 +82,8 @@ public class EMGenerateLightFunction : BaseEMFunction
                     }
                 }
 
-                vertex.Lighting = room.ContainsWater ? (short)(8192 - nearestLight.Intensity1) :
+                vertex.Lighting = vertex.Lighting2 = 
+                    room.ContainsWater ? (short)(8192 - nearestLight.Intensity1) :
                     GenerateLight(nearestLight.Intensity1, nearestLight.Fade1, smallestDistance);
             }
         }
