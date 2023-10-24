@@ -1,6 +1,182 @@
 {
-  "All": [],
-  "NonPurist": [],
+  "All": [
+    {
+      "Comments": "Fix some facing before making a return path.",
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 21,
+          "FaceIndex": 113,
+          "VertexChanges": {
+            "2": {
+              "Y": -1024
+            },
+            "3": {
+              "Y": -1024
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "More face fixes.",
+      "EMType": 26,
+      "Tags": [
+        9
+      ],
+      "Quads": {
+        "21": [
+          {
+            "Vertices": [
+              226,
+              225,
+              113,
+              114
+            ],
+            "Texture": 1438
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Raise a block in room 21 to allow returning to the start.",
+      "EMType": 1,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 66048,
+        "Y": -3584,
+        "Z": 75264,
+        "Room": 21
+      },
+      "Clicks": -2,
+      "FloorTexture": 1438,
+      "SideTexture": 1460,
+      "Flags": 15
+    },
+    {
+      "Comments": "Add a ladder to one side of the block.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1438": {
+          "21": {
+            "Rectangles": [
+              194,
+              113
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 65024,
+        "Y": -3584,
+        "Z": 75264,
+        "Room": 21
+      },
+      "IsPositiveX": true
+    },
+    {
+      "Comments": "Remove the trapdoor triggers in rooms 29/30.",
+      "EMType": 62,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 75264,
+          "Y": -1792,
+          "Z": 49664,
+          "Room": 29
+        },
+        {
+          "X": 74240,
+          "Y": -3840,
+          "Z": 48640,
+          "Room": 30
+        }
+      ]
+    },
+    {
+      "Comments": "Switch off the flames from switch 28 permanently.",
+      "EMType": 68,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 75264,
+        "Y": -3840,
+        "Z": 54784,
+        "Room": 28
+      },
+      "Actions": [
+        {
+          "Parameter": 22
+        },
+        {
+          "Parameter": 23
+        },
+        {
+          "Parameter": 24
+        },
+        {
+          "Parameter": 25
+        }
+      ]
+    },
+    {
+      "Comments": "Add a ladder to room 36.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1438": {
+          "36": {
+            "Rectangles": [
+              14
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 79360,
+        "Y": -10496,
+        "Z": 41472,
+        "Room": 36
+      },
+      "IsNegativeX": true
+    },
+    {
+      "Comments": "And its flipped room.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1438": {
+          "71": {
+            "Rectangles": [
+              13
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 79360,
+        "Y": -10496,
+        "Z": 41472,
+        "Room": 71
+      },
+      "IsNegativeX": true
+    }
+  ],
   "Any": [
     [
       {
