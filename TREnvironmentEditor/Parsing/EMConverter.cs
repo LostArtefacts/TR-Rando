@@ -59,6 +59,7 @@ public class EMConverter : JsonConverter
             EMType.AddRoomSprite => JsonConvert.DeserializeObject<EMAddRoomSpriteFunction>(jo.ToString(), this),
             EMType.SwapFace => JsonConvert.DeserializeObject<EMSwapFaceFunction>(jo.ToString(), this),
             EMType.ImportTexture => JsonConvert.DeserializeObject<EMImportTextureFunction>(jo.ToString(), this),
+            EMType.CreateStaticMesh => JsonConvert.DeserializeObject<EMCreateStaticMeshFunction>(jo.ToString(), this),
 
             // Entity types
             EMType.MoveSlot => JsonConvert.DeserializeObject<EMMoveSlotFunction>(jo.ToString(), this),
