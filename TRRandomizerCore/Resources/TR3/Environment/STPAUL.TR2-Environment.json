@@ -1,5 +1,356 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Create a return path to get back out of the cathedral.",
+      "EMType": 126,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 36864,
+        "Y": -7424,
+        "Z": 52224
+      },
+      "LinkedLocation": {
+        "X": 40448,
+        "Y": -7424,
+        "Z": 53760,
+        "Room": 2
+      },
+      "Textures": {
+        "Floor": 1519,
+        "Ceiling": 1707,
+        "WallAlignment": 5,
+        "Wall4": 1707,
+        "Wall3": 1705
+      },
+      "AmbientLighting": 8191,
+      "DefaultVertex": {
+        "Lighting": 3170,
+        "Attributes": 16,
+        "Colour": 3170
+      },
+      "Lights": [
+        {
+          "X": 1536,
+          "Y": -768,
+          "Z": 1536,
+          "Intensity1": 512,
+          "Fade1": 4096,
+          "Colour": {
+            "Red": 255,
+            "Green": 255,
+            "Blue": 255
+          },
+          "LightProperties": [
+            -1688,
+            -1,
+            732,
+            0
+          ]
+        }
+      ],
+      "Height": 11,
+      "Width": 4,
+      "Depth": 5,
+      "FloorHeights": {
+        "-4": [
+          13
+        ]
+      },
+      "CeilingHeights": {
+        "9": [
+          11
+        ],
+        "7": [
+          6,
+          7
+        ],
+        "3": [
+          8
+        ],
+        "-127": [
+          12
+        ]
+      }
+    },
+    {
+      "Comments": "Make visibility portals.",
+      "EMType": 81,
+      "Tags": [
+        9
+      ],
+      "Portals": [
+        {
+          "BaseRoom": 2,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "X": 1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": -7936,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -7936,
+              "Z": 2048
+            },
+            {
+              "X": 1024,
+              "Y": -7424,
+              "Z": 2048
+            },
+            {
+              "X": 1024,
+              "Y": -7424,
+              "Z": 1024
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": 2,
+          "Normal": {
+            "X": -1
+          },
+          "Vertices": [
+            {
+              "X": 3072,
+              "Y": -7936,
+              "Z": 2048
+            },
+            {
+              "X": 3072,
+              "Y": -7936,
+              "Z": 1024
+            },
+            {
+              "X": 3072,
+              "Y": -7424,
+              "Z": 1024
+            },
+            {
+              "X": 3072,
+              "Y": -7424,
+              "Z": 2048
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": 49,
+          "Normal": {
+            "X": -1
+          },
+          "Vertices": [
+            {
+              "X": 3072,
+              "Y": -10240,
+              "Z": 4096
+            },
+            {
+              "X": 3072,
+              "Y": -10240,
+              "Z": 3072
+            },
+            {
+              "X": 3072,
+              "Y": -9216,
+              "Z": 3072
+            },
+            {
+              "X": 3072,
+              "Y": -9216,
+              "Z": 4096
+            }
+          ]
+        },
+        {
+          "BaseRoom": 49,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "X": 1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": -10240,
+              "Z": 2048
+            },
+            {
+              "X": 1024,
+              "Y": -10240,
+              "Z": 3072
+            },
+            {
+              "X": 1024,
+              "Y": -9216,
+              "Z": 3072
+            },
+            {
+              "X": 1024,
+              "Y": -9216,
+              "Z": 2048
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Comments": "Horizontal portals.",
+      "EMType": 82,
+      "Tags": [
+        9
+      ],
+      "Portals": {
+        "2": {
+          "-1": [
+            {
+              "X": 39424,
+              "Z": 53760
+            }
+          ]
+        },
+        "-1": {
+          "2": [
+            {
+              "X": 40448,
+              "Z": 53760
+            }
+          ],
+          "49": [
+            {
+              "X": 40448,
+              "Z": 55808
+            }
+          ]
+        },
+        "49": {
+          "-1": [
+            {
+              "X": 39424,
+              "Z": 55808
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Adjust faces to fit the portals.",
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 2,
+          "FaceIndex": 2,
+          "VertexChanges": {
+            "0": {
+              "Y": -512
+            },
+            "1": {
+              "Y": -512
+            }
+          }
+        },
+        {
+          "RoomNumber": 49,
+          "FaceIndex": 6,
+          "VertexChanges": {
+            "2": {
+              "Y": -1024
+            },
+            "3": {
+              "Y": -1024
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Refacing to avoid squishing.",
+      "EMType": 21,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1704": {
+          "49": {
+            "Rectangles": [
+              6
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Comments": "Remove faces on portals.",
+      "EMType": 22,
+      "Tags": [
+        9
+      ],
+      "GeometryMap": {
+        "-1": {
+          "Rectangles": [
+            20,
+            28
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Add a door.",
+      "EMType": 51,
+      "Tags": [
+        9
+      ],
+      "TypeID": 131,
+      "Intensity": -1,
+      "Location": {
+        "X": 40448,
+        "Y": -9216,
+        "Z": 55808,
+        "Room": 49,
+        "Angle": 16384
+      }
+    },
+    {
+      "Comments": "Trigger it.",
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 38400,
+          "Z": 55808,
+          "Room": -1
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Generate lighting.",
+      "EMType": 128,
+      "Tags": [
+        9
+      ],
+      "RoomIndices": [
+        -1
+      ]
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
