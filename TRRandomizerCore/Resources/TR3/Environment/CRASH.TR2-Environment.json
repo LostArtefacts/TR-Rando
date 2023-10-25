@@ -1,5 +1,83 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Tweak a slope to make it standable to allow returning to the swamp.",
+      "EMType": 7,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 38400,
+        "Y": -640,
+        "Z": 80384,
+        "Room": 44
+      },
+      "SlantType": 1,
+      "XSlant": -1
+    },
+    {
+      "Comments": "Amend faces for above.",
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 44,
+          "FaceIndex": 52,
+          "VertexChanges": {
+            "0": {
+              "Y": -512
+            },
+            "3": {
+              "Y": -512
+            }
+          }
+        },
+        {
+          "RoomNumber": 44,
+          "FaceIndex": 57,
+          "VertexChanges": {
+            "2": {
+              "Y": -512
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Patch gaps.",
+      "EMType": 26,
+      "Tags": [
+        9
+      ],
+      "Quads": {
+        "44": [
+          {
+            "Vertices": [
+              391,
+              392,
+              84,
+              82
+            ],
+            "Texture": 1619
+          }
+        ]
+      },
+      "Triangles": {
+        "44": [
+          {
+            "Vertices": [
+              62,
+              391,
+              82
+            ],
+            "Texture": 1646
+          }
+        ]
+      }
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

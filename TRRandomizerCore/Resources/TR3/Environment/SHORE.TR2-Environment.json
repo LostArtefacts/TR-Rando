@@ -1,5 +1,174 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Add a ladder to get back to the beach.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 15872,
+        "Y": 1920,
+        "Z": 49664,
+        "Room": 20
+      },
+      "IsPositiveZ": true
+    },
+    {
+      "Comments": "Ladder meshes.",
+      "EMType": 24,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 15872,
+          "Y": 2048,
+          "Z": 50560,
+          "Room": 20
+        },
+        {
+          "X": 15872,
+          "Y": 1024,
+          "Z": 50560,
+          "Room": 20
+        },
+        {
+          "X": 15872,
+          "Z": 50560,
+          "Room": 2
+        },
+        {
+          "X": 15872,
+          "Y": -1024,
+          "Z": 50560,
+          "Room": 2
+        },
+        {
+          "X": 15872,
+          "Y": -2048,
+          "Z": 50560,
+          "Room": 2
+        },
+        {
+          "X": 15872,
+          "Y": -3072,
+          "Z": 50560,
+          "Room": 2
+        }
+      ],
+      "Mesh": {
+        "Intensity1": 15855,
+        "MeshID": 30
+      }
+    },
+    {
+      "Comments": "Add a switch for the serpent doors to allow leaving the village.",
+      "EMType": 51,
+      "Tags": [
+        9
+      ],
+      "TypeID": 128,
+      "Intensity": -1,
+      "Location": {
+        "X": 44544,
+        "Y": -2048,
+        "Z": 91648,
+        "Room": 115,
+        "Angle": -16384
+      }
+    },
+    {
+      "Comments": "Add a trigger for it.",
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "EntityLocation": -1,
+      "Trigger": {
+        "TrigType": 2,
+        "Mask": 31,
+        "SwitchOrKeyRef": -1,
+        "Actions": [
+          {
+            "Parameter": 129
+          },
+          {
+            "Parameter": 130
+          },
+          {
+            "Parameter": 133
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Add ladders to reach the doors.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1533": {
+          "117": {
+            "Rectangles": [
+              4,
+              5,
+              11,
+              12,
+              13
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 43520,
+        "Y": -1408,
+        "Z": 94720,
+        "Room": 117
+      },
+      "IsPositiveZ": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1699": {
+          "117": {
+            "Triangles": [
+              1
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 42496,
+        "Y": -1408,
+        "Z": 94720,
+        "Room": 117
+      },
+      "IsPositiveZ": true
+    },
+    {
+      "Comments": "Raise the floor to be able to get back to the doors above.",
+      "EMType": 1,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 54784,
+        "Z": 83456,
+        "Room": 112
+      },
+      "Clicks": -4,
+      "FloorTexture": 1545,
+      "SideTexture": 1545,
+      "Flags": 15
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
