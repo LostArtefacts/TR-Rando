@@ -84,8 +84,13 @@
                 Content="Add return paths"/>
             <TextBlock
                 Grid.Row="2"
-                Grid.Column="1"
-                Text="Add paths to allow returning to the start of the level (where possible)."/>
+                Grid.Column="1">
+                Add paths to allow returning to the start of the level (where possible). See
+                <Hyperlink
+                    ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/RETURNPATHS.md"
+                    NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/RETURNPATHS.md"
+                    RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink> for details.
+            </TextBlock>
 
             <CheckBox
                 Grid.Row="3"

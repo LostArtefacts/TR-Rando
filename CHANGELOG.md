@@ -1,8 +1,10 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.7.3...master) - xxxx-xx-xx
 - added a TR2 secret pack (Eycore) (#559)
 - added a TR2 secret pack (Towandaa) (#558)
+- added more return paths to TR2 and TR3 (#563)
 - fixed spelling mistakes in TR1 French gamestring localization (#560)
 - improved changelog, readme and contributing documentation
+- replaced purist mode with explicit options for adding return paths, fixing OG bugs, and fixing shortcuts (#563)
 
 ## [V1.7.3](https://github.com/LostArtefacts/TR-Rando/compare/V1.7.2...V1.7.3) - 2023-09-30
 - added a secret pack mode, to allow picking a selection of secrets from specific authors (#510)

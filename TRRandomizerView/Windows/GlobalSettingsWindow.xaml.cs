@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Navigation;
 using TRRandomizerView.Model;
 using TRRandomizerView.Utilities;
 
@@ -17,5 +18,11 @@ public partial class GlobalSettingsWindow : Window
     private void OKButton_Click(object sender, RoutedEventArgs e)
     {
         DialogResult = true;
+    }
+
+    private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+    {
+        ProcessUtils.OpenURL(e.Uri.AbsoluteUri);
+        e.Handled = true;
     }
 }
