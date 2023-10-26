@@ -5,6 +5,7 @@ using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Randomizers;
 using TRRandomizerCore.Utilities;
 
 namespace LocationExport;
@@ -175,7 +176,7 @@ class Program
         {
             if (!TR1TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(GenerateExcludedLocation(entity, loc =>
+                exclusions.Add(LocationPicker.CreateExcludedLocation(entity, loc =>
                     FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
             }
         }
@@ -199,7 +200,7 @@ class Program
         {
             if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(GenerateExcludedLocation(entity, loc =>
+                exclusions.Add(LocationPicker.CreateExcludedLocation(entity, loc =>
                     FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
             }
         }
@@ -223,36 +224,13 @@ class Program
         {
             if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(GenerateExcludedLocation(entity, loc =>
+                exclusions.Add(LocationPicker.CreateExcludedLocation(entity, loc =>
                     FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
             }
         }
 
         TR3LocationGenerator generator = new();
         return generator.Generate(level, exclusions);
-    }
-
-    private static Location GenerateExcludedLocation<T>(TREntity<T> entity, Func<Location, TRRoomSector> sectorFunc)
-        where T : Enum
-    {
-        Location location = new()
-        {
-            X = entity.X,
-            Y = entity.Y,
-            Z = entity.Z,
-            Room = entity.Room,
-        };
-
-        TRRoomSector sector = sectorFunc(location);
-        while (sector.RoomBelow != TRConsts.NoRoom)
-        {
-            location.Y = (sector.Floor + 1) * TRConsts.Step1;
-            location.Room = sector.RoomBelow;
-            sector = sectorFunc(location);
-        }
-
-        location.Y = sector.Floor * TRConsts.Step1;
-        return location;
     }
 
     private static void Usage()
