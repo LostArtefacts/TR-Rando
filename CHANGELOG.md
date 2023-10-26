@@ -4,6 +4,7 @@
 - added more return paths to TR2 and TR3 (#563)
 - fixed spelling mistakes in TR1 French gamestring localization (#560)
 - improved changelog, readme and contributing documentation
+- improved item location generation in TR1-3, and added item randomization to Home Sweet Home (#474)
 - replaced purist mode with explicit options for adding return paths, fixing OG bugs, and fixing shortcuts (#563)
 
 ## [V1.7.3](https://github.com/LostArtefacts/TR-Rando/compare/V1.7.2...V1.7.3) - 2023-09-30
