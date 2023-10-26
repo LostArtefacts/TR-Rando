@@ -1896,6 +1896,12 @@ public class TRRandomizerController
         set => LevelRandomizer.HardEnvironmentMode = value;
     }
 
+    public bool BlockShortcuts
+    {
+        get => LevelRandomizer.BlockShortcuts;
+        set => LevelRandomizer.BlockShortcuts = value;
+    }
+
     public uint MirroredLevelCount
     {
         get => LevelRandomizer.MirroredLevelCount;
@@ -1914,10 +1920,16 @@ public class TRRandomizerController
         set => LevelRandomizer.EnvironmentSeed = value;
     }
 
-    public bool PuristMode
+    public bool AddReturnPaths
     {
-        get => LevelRandomizer.PuristMode;
-        set => LevelRandomizer.PuristMode = value;
+        get => LevelRandomizer.AddReturnPaths;
+        set => LevelRandomizer.AddReturnPaths = value;
+    }
+
+    public bool FixOGBugs
+    {
+        get => LevelRandomizer.FixOGBugs;
+        set => LevelRandomizer.FixOGBugs = value;
     }
 
     public bool RandomizeVfx

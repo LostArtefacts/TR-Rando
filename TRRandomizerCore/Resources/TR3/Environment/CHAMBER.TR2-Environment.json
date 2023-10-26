@@ -1,6 +1,371 @@
 {
-  "All": [],
-  "NonPurist": [],
+  "All": [
+    {
+      "Comments": "Add ladders to return up the slope near the end.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 43520,
+        "Room": 18
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 43520,
+        "Room": 18
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 44544,
+        "Room": 18
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 44544,
+        "Room": 18
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 45568,
+        "Room": 18
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 45568,
+        "Room": 18
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 46592,
+        "Room": 18
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 46592,
+        "Room": 18
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 47616,
+        "Room": 18
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 47616,
+        "Room": 18
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 48640,
+        "Room": 18
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 48640,
+        "Room": 18
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 49664,
+        "Room": 18
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 49664,
+        "Room": 18
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 50688,
+        "Room": 17
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 50688,
+        "Room": 17
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 51712,
+        "Room": 17
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 51712,
+        "Room": 17
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 52736,
+        "Room": 17
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 52736,
+        "Room": 17
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 53760,
+        "Room": 17
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 53760,
+        "Room": 17
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 54784,
+        "Room": 17
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 54784,
+        "Room": 17
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 55808,
+        "Room": 17
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 55808,
+        "Room": 17
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 55808,
+        "Z": 56832,
+        "Room": 17
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 56832,
+        "Z": 56832,
+        "Room": 17
+      },
+      "IsPositiveX": true
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

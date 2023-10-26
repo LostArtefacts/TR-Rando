@@ -3,6 +3,9 @@
     {
       "Comments": "Add extra triggers for the mines in case the main route is not taken.",
       "EMType": 61,
+      "Tags": [
+        10
+      ],
       "Locations": [
         {
           "X": 29184,
@@ -36,7 +39,6 @@
       }
     }
   ],
-  "NonPurist": [],
   "Any": [],
   "AllWithin": [
     [

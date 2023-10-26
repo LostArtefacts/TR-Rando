@@ -23,6 +23,18 @@ public class EnvironmentPicker
     public void LoadTags(RandomizerSettings settings, bool isCommunityPatch)
     {
         List<EMTag> excludedTags = new();
+        if (!settings.AddReturnPaths)
+        {
+            excludedTags.Add(EMTag.ReturnPath);
+        }
+        if (!settings.FixOGBugs)
+        {
+            excludedTags.Add(EMTag.GeneralBugFix);
+        }
+        if (!settings.BlockShortcuts)
+        {
+            excludedTags.Add(EMTag.ShortcutFix);
+        }
         if (!settings.RandomizeLadders)
         {
             excludedTags.Add(EMTag.LadderChange);

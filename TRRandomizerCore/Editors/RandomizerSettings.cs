@@ -122,10 +122,12 @@ public class RandomizerSettings
     public bool RandomizeTraps { get; set; }
     public bool RandomizeChallengeRooms { get; set; }
     public bool HardEnvironmentMode { get; set; }
+    public bool BlockShortcuts { get; set; }
     public uint MirroredLevelCount { get; set; }
     public bool MirrorAssaultCourse { get; set; }
     public bool AutoLaunchGame { get; set; }
-    public bool PuristMode { get; set; }
+    public bool AddReturnPaths { get; set; }
+    public bool FixOGBugs { get; set; }
 
     public bool RandomizeItemTypes { get; set; }
     public bool RandomizeItemPositions { get; set; }
@@ -295,12 +297,14 @@ public class RandomizerSettings
         RandomizeTraps = config.GetBool(nameof(RandomizeTraps), true);
         RandomizeChallengeRooms = config.GetBool(nameof(RandomizeChallengeRooms), true);
         HardEnvironmentMode = config.GetBool(nameof(HardEnvironmentMode));
+        BlockShortcuts = config.GetBool(nameof(BlockShortcuts), true);
         MirroredLevelCount = config.GetUInt(nameof(MirroredLevelCount), 9);
         MirrorAssaultCourse = config.GetBool(nameof(MirrorAssaultCourse), true);
 
         DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
         AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
-        PuristMode = config.GetBool(nameof(PuristMode));
+        AddReturnPaths = config.GetBool(nameof(AddReturnPaths), true);
+        FixOGBugs = config.GetBool(nameof(FixOGBugs), true);
 
         RandomizeSecretRewardsPhysical = config.GetBool(nameof(RandomizeSecretRewardsPhysical));
         SecretRewardsPhysicalSeed = config.GetInt(nameof(SecretRewardsPhysicalSeed), defaultSeed);
@@ -448,12 +452,14 @@ public class RandomizerSettings
         config[nameof(RandomizeTraps)] = RandomizeTraps;
         config[nameof(RandomizeChallengeRooms)] = RandomizeChallengeRooms;
         config[nameof(HardEnvironmentMode)] = HardEnvironmentMode;
+        config[nameof(BlockShortcuts)] = BlockShortcuts;
         config[nameof(MirroredLevelCount)] = MirroredLevelCount;
         config[nameof(MirrorAssaultCourse)] = MirrorAssaultCourse;
 
         config[nameof(DevelopmentMode)] = DevelopmentMode;
         config[nameof(AutoLaunchGame)] = AutoLaunchGame;
-        config[nameof(PuristMode)] = PuristMode;
+        config[nameof(AddReturnPaths)] = AddReturnPaths;
+        config[nameof(FixOGBugs)] = FixOGBugs;
 
         config[nameof(RandomizeSecretRewardsPhysical)] = RandomizeSecretRewardsPhysical;
         config[nameof(SecretRewardsPhysicalSeed)] = SecretRewardsPhysicalSeed;

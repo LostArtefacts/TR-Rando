@@ -1,0 +1,126 @@
+﻿<Window
+    x:Class="TRRandomizerView.Windows.GlobalSettingsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cvt="clr-namespace:TRRandomizerView.Converters"
+    mc:Ignorable="d"
+    Icon="..\Resources\rando.ico"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner"
+    ShowInTaskbar="False"
+    Title="Global Settings"
+    SizeToContent="WidthAndHeight">
+    <Grid x:Name="_content">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Margin="10,5"
+            Text="Configure settings that affect general experience and gameplay."/>
+
+        <Grid
+            Grid.Row="1"
+            Margin="10,5,10,10">
+            <Grid.Resources>
+                <Style TargetType="{x:Type CheckBox}">
+                    <Setter
+                        Property="VerticalContentAlignment"
+                        Value="Bottom" />
+                    <Setter
+                        Property="Margin"
+                        Value="0,5,0,10" />
+                </Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter
+                        Property="Margin"
+                        Value="20,5,0,10" />
+                    <Setter
+                        Property="Padding"
+                        Value="0" />
+                    <Setter
+                        Property="FontStyle"
+                        Value="Italic" />
+                </Style>
+                <cvt:BoolToVisibilityConverter x:Key="BoolToCollapsedConverter" />
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <CheckBox
+                Visibility="{Binding IsDisableDemosTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                IsChecked="{Binding DisableDemos, Mode=TwoWay}"
+                Content="Disable demos"/>
+            <TextBlock
+                Visibility="{Binding IsDisableDemosTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                Grid.Column="1"
+                Text="Prevent demos from showing in the title screen to prevent spoilers."/>
+
+            <CheckBox
+                Grid.Row="1"
+                IsChecked="{Binding AutoLaunchGame, Mode=TwoWay}"
+                Content="Auto-launch game"/>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="Launch the game automatically following successful randomization."/>
+
+            <CheckBox
+                Grid.Row="2"
+                IsChecked="{Binding AddReturnPaths, Mode=TwoWay}"
+                Content="Add return paths"/>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1">
+                Add paths to allow returning to the start of the level (where possible). See
+                <Hyperlink
+                    ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/RETURNPATHS.md"
+                    NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/RETURNPATHS.md"
+                    RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink> for details.
+            </TextBlock>
+
+            <CheckBox
+                Grid.Row="3"
+                IsChecked="{Binding FixOGBugs, Mode=TwoWay}"
+                Content="Fix original game issues"/>
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="Fix original level bugs and oversights, such as missing textures or untriggered enemies."/>
+        </Grid>
+        
+        <Border
+            BorderThickness="0,1,0,0"
+            BorderBrush="#CCC"
+            Background="#EEE"
+            Grid.Row="2">
+
+            <StackPanel
+                Width="80" 
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+                <Button 
+                    Content="_OK"
+                    IsDefault="True"
+                    Width="70"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="0,10,10,10"
+                    Click="OKButton_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

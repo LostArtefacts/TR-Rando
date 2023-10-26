@@ -11,6 +11,7 @@
         <Brush x:Key="ThemeColour6">#14A60D</Brush>
         <Brush x:Key="ThemeColour7">#094577</Brush>
         <Brush x:Key="ThemeColour8">#0D60A6</Brush>
+        <Brush x:Key="ThemeColour9">#D8FCD6</Brush>
         
         <!-- This is targeted at elements within EditorControl -->
         <Style TargetType="Border" x:Key="RandoElementBorder">
@@ -143,6 +144,65 @@
             <Style.Triggers>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style
+            x:Key="BulletButtonStyle"
+            TargetType="Button">
+            <Setter
+                Property="Background"
+                Value="Transparent"/>
+            <Setter
+                Property="BorderThickness"
+                Value="0"/>
+            <Setter
+                Property="Foreground"
+                Value="{StaticResource ThemeColour7}"/>
+            <Setter
+                Property="Cursor"
+                Value="Hand"/>
+            <Setter
+                Property="FontWeight"
+                Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <BulletDecorator Width="Auto" Margin="5,2,0,0">
+                            <BulletDecorator.Bullet>
+                                <Ellipse
+                                    x:Name="bullet"
+                                    Fill="{StaticResource ThemeColour7}"
+                                    Width="5"
+                                    Height="5"/>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"/>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter
+                                    Property="Fill"
+                                    TargetName="bullet"
+                                    Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter
+                        Property="Foreground"
+                        Value="{StaticResource ThemeColour2}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter
+                        Property="Foreground"
+                        Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>

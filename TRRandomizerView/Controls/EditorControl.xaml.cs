@@ -181,7 +181,7 @@ public partial class EditorControl : UserControl
         return false;
     }
 
-    private void LaunchGame()
+    public void LaunchGame()
     {
         try
         {
@@ -433,6 +433,12 @@ public partial class EditorControl : UserControl
             _options.SetGlobalSeed(gsw.Seed);
             _lastGlobalSeed = gsw.Seed;
         }
+    }
+
+    public void EditGlobalSettings()
+    {
+        GlobalSettingsWindow gsw = new(_options);
+        gsw.ShowDialog();
     }
 
     public void EditCommunitySettings()

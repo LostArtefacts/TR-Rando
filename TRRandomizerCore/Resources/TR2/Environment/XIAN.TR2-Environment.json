@@ -1,11 +1,126 @@
 {
-  "All": [],
-  "NonPurist": [],
+  "All": [
+    {
+      "Comments": "Tweak the slopes leading to the arena to allow exiting.",
+      "EMType": 7,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 51712,
+        "Z": 59904,
+        "Room": 2
+      },
+      "SlantType": 1,
+      "ZSlant": 2
+    },
+    {
+      "EMType": 7,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 53760,
+        "Z": 59904,
+        "Room": 2
+      },
+      "SlantType": 1,
+      "ZSlant": 2
+    },
+    {
+      "Comments": "Amend faces for above.",
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 2,
+          "FaceIndices": [
+            0,
+            57
+          ],
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 2,
+          "FaceIndex": 2,
+          "VertexChanges": {
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 2,
+          "FaceIndex": 75,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceIndices": [
+            89,
+            147
+          ],
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Patch gaps.",
+      "EMType": 26,
+      "Tags": [
+        9
+      ],
+      "Triangles": {
+        "2": [
+          {
+            "Vertices": [
+              18,
+              109,
+              21
+            ],
+            "Texture": 1497
+          },
+          {
+            "Vertices": [
+              57,
+              112,
+              56
+            ],
+            "Texture": 1497
+          }
+        ]
+      }
+    }
+  ],
   "Any": [
     [
       {
         "Comments": "Xian Jumping Puzzle and Smaller Dragon Arena",
         "EMType": 1,
+        "Tags": [
+          5,
+          6
+        ],
         "Location": {
           "X": 59984,
           "Y": -7168,
@@ -18,7 +133,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 58960,
@@ -32,7 +146,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 57936,
@@ -46,7 +159,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 56912,
@@ -60,7 +172,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 55888,
@@ -74,7 +185,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 54864,
@@ -88,7 +198,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 53840,
@@ -102,7 +211,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 52816,
@@ -116,7 +224,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 51792,
@@ -130,7 +237,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 50768,
@@ -144,7 +250,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 49744,
@@ -158,7 +263,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 48720,
@@ -172,7 +276,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 47696,
@@ -186,7 +289,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 46672,
@@ -200,7 +302,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 45648,
@@ -214,7 +315,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 44624,
@@ -228,7 +328,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 43600,
@@ -242,7 +341,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 42576,
@@ -256,7 +354,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 49684,
@@ -270,7 +367,6 @@
         "Flags": 15
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 45281,
@@ -284,7 +380,6 @@
         "Flags": 15
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 43612,
@@ -298,7 +393,6 @@
         "Flags": 15
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 52716,
@@ -312,7 +406,6 @@
         "Flags": 15
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 51755,
@@ -326,7 +419,6 @@
         "Flags": 15
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 52799,
@@ -340,7 +432,6 @@
         "Flags": 15
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 53803,
@@ -354,7 +445,6 @@
         "Flags": 15
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 44532,
@@ -368,7 +458,6 @@
         "Flags": 5
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 44532,
@@ -382,7 +471,6 @@
         "Flags": 7
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 44532,
@@ -396,7 +484,6 @@
         "Flags": 7
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 45556,
@@ -410,7 +497,6 @@
         "Flags": 13
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 45556,
@@ -424,7 +510,6 @@
         "Flags": 13
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 45556,
@@ -438,7 +523,6 @@
         "Flags": 13
       },
       {
-        "Comments": "",
         "EMType": 1,
         "Location": {
           "X": 46580,
@@ -470,6 +554,9 @@
       {
         "Comments": "Make some blocks before the arena.",
         "EMType": 1,
+        "Tags": [
+          5
+        ],
         "Location": {
           "X": 53834,
           "Y": -9216,

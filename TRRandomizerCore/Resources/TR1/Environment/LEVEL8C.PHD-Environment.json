@@ -1,9 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Ensure the enemies in room 15 are always triggered rather than only from the invisible platform.",
       "EMType": 63,
+      "Tags": [
+        10
+      ],
       "Locations": [
         {
           "X": 47616,
@@ -21,6 +23,9 @@
     },
     {
       "EMType": 69,
+      "Tags": [
+        10
+      ],
       "Location": {
         "X": 47616,
         "Y": -5376,
@@ -31,6 +36,9 @@
     },
     {
       "EMType": 71,
+      "Tags": [
+        10
+      ],
       "Locations": [
         {
           "X": 47616,
@@ -45,6 +53,9 @@
     },
     {
       "EMType": 71,
+      "Tags": [
+        10
+      ],
       "Locations": [
         {
           "X": 47616,
@@ -60,6 +71,9 @@
     {
       "Comments": "Patch the hole in the sphinx.",
       "EMType": 26,
+      "Tags": [
+        10
+      ],
       "Triangles": {
         "0": [
           {
@@ -76,6 +90,9 @@
     {
       "Comments": "Unstretch a face in the sphinx flipmap area.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 54,
@@ -94,6 +111,9 @@
     {
       "Comments": "Add triangles to patch gaps in the sphinx area.",
       "EMType": 26,
+      "Tags": [
+        10
+      ],
       "Triangles": {
         "53": [
           {
@@ -115,78 +135,6 @@
             "Texture": 11
           }
         ]
-      }
-    },
-    {
-      "Comments": "Amend the slant near door 27 to get rid of the shortcut.",
-      "EMType": 7,
-      "Location": {
-        "X": 35328,
-        "Y": -10240,
-        "Z": 55808,
-        "Room": 12
-      },
-      "SlantType": 1,
-      "XSlant": -3
-    },
-    {
-      "Comments": "Modify the faces to match the slant.",
-      "EMType": 23,
-      "Modifications": [
-        {
-          "RoomNumber": 12,
-          "FaceIndices": [
-            49,
-            53
-          ],
-          "VertexChanges": {
-            "1": {
-              "Y": 256
-            }
-          }
-        },
-        {
-          "RoomNumber": 12,
-          "FaceIndex": 47,
-          "VertexChanges": {
-            "1": {
-              "Y": 256
-            },
-            "2": {
-              "Y": 256
-            }
-          }
-        },
-        {
-          "RoomNumber": 3,
-          "FaceIndex": 41,
-          "VertexChanges": {
-            "0": {
-              "Y": 256
-            },
-            "1": {
-              "Y": 256
-            }
-          }
-        }
-      ]
-    },
-    {
-      "Comments": "Any pickups on the old slope will be moved to the floor.",
-      "EMType": 43,
-      "SectorLocations": [
-        {
-          "X": 35328,
-          "Y": -10240,
-          "Z": 55808,
-          "Room": 12
-        }
-      ],
-      "TargetLocation": {
-        "X": 34304,
-        "Y": -10496,
-        "Z": 55808,
-        "Room": 12
       }
     }
   ],
@@ -1405,6 +1353,89 @@
               "Texture": 681
             }
           ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Amend the slant near door 27 to get rid of the shortcut.",
+        "EMType": 7,
+        "Tags": [
+          11
+        ],
+        "Location": {
+          "X": 35328,
+          "Y": -10240,
+          "Z": 55808,
+          "Room": 12
+        },
+        "SlantType": 1,
+        "XSlant": -3
+      },
+      {
+        "Comments": "Modify the faces to match the slant.",
+        "EMType": 23,
+        "Tags": [
+          11
+        ],
+        "Modifications": [
+          {
+            "RoomNumber": 12,
+            "FaceIndices": [
+              49,
+              53
+            ],
+            "VertexChanges": {
+              "1": {
+                "Y": 256
+              }
+            }
+          },
+          {
+            "RoomNumber": 12,
+            "FaceIndex": 47,
+            "VertexChanges": {
+              "1": {
+                "Y": 256
+              },
+              "2": {
+                "Y": 256
+              }
+            }
+          },
+          {
+            "RoomNumber": 3,
+            "FaceIndex": 41,
+            "VertexChanges": {
+              "0": {
+                "Y": 256
+              },
+              "1": {
+                "Y": 256
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Comments": "Any pickups on the old slope will be moved to the floor.",
+        "EMType": 43,
+        "Tags": [
+          11
+        ],
+        "SectorLocations": [
+          {
+            "X": 35328,
+            "Y": -10240,
+            "Z": 55808,
+            "Room": 12
+          }
+        ],
+        "TargetLocation": {
+          "X": 34304,
+          "Y": -10496,
+          "Z": 55808,
+          "Room": 12
         }
       }
     ]

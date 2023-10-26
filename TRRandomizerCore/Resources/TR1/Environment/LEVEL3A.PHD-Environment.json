@@ -1,9 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Patch the hole in the wall in room 27.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 27,
@@ -22,6 +24,9 @@
     {
       "Comments": "Fix the out of place ToQ texture.",
       "EMType": 21,
+      "Tags": [
+        10
+      ],
       "TextureMap": {
         "69": {
           "6": {
@@ -35,6 +40,9 @@
     {
       "Comments": "Patch the hole in the wall in room 51.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 51,
@@ -53,6 +61,9 @@
     {
       "Comments": "Add the missing underwater texture when entering the tomb and at the top of the waterfall.",
       "EMType": 26,
+      "Tags": [
+        10
+      ],
       "Quads": {
         "90": [
           {

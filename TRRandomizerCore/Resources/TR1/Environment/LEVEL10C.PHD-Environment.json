@@ -14,12 +14,13 @@
         "Action": 10,
         "Parameter": 2
       }
-    }
-  ],
-  "NonPurist": [
+    },
     {
       "Comments": "Fix the out of place texture in room 2.",
       "EMType": 21,
+      "Tags": [
+        10
+      ],
       "TextureMap": {
         "2": {
           "2": {
@@ -33,6 +34,9 @@
     {
       "Comments": "Add a missing face at the very end of the level.",
       "EMType": 26,
+      "Tags": [
+        10
+      ],
       "Quads": {
         "66": [
           {
@@ -50,12 +54,18 @@
     {
       "Comments": "Convert Adam's door into the same style as the one in Atlantis.",
       "EMType": 45,
+      "Tags": [
+        10
+      ],
       "EntityIndex": 86,
       "NewEntityType": 57
     },
     {
       "Comments": "Fix the bad geometry in room 25.",
       "EMType": 7,
+      "Tags": [
+        10
+      ],
       "Location": {
         "X": 30208,
         "Y": -3584,
@@ -69,6 +79,9 @@
     {
       "Comments": "Modify faces to fit above.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 25,
@@ -98,6 +111,9 @@
     {
       "Comments": "Patch gaps for above.",
       "EMType": 26,
+      "Tags": [
+        10
+      ],
       "Triangles": {
         "25": [
           {

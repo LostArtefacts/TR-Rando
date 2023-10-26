@@ -25,6 +25,7 @@ public enum EMType
     AddRoomSprite = 31,
     SwapFace = 32,
     ImportTexture = 33,
+    CreateStaticMesh = 34,
 
     // Entity types 41-60
     MoveSlot = 41,

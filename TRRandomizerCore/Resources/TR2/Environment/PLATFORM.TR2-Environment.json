@@ -3,6 +3,9 @@
     {
       "Comments": "Fixes original game texture rotation issues in room 23.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Rotations": [
         {
           "RoomNumber": 23,
@@ -23,6 +26,9 @@
     {
       "Comments": "Fixes the green triangle in room 52.",
       "EMType": 21,
+      "Tags": [
+        10
+      ],
       "TextureMap": {
         "1899": {
           "52": {
@@ -32,146 +38,585 @@
           }
         }
       }
-    }
-  ],
-  "NonPurist": [
+    },
     {
-      "Comments": "Adds some ladders to allow returning to the initial area before the acid.",
+      "Comments": "Make a return path across the acid pit.",
+      "EMType": 126,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 17408,
+        "Y": 4352,
+        "Z": 59392
+      },
+      "LinkedLocation": {
+        "X": 18944,
+        "Y": 4352,
+        "Z": 72192,
+        "Room": 57
+      },
+      "Textures": {
+        "Floor": 1916,
+        "Ceiling": 1905,
+        "WallAlignment": 4,
+        "Wall4": 1907
+      },
+      "AmbientLighting": 7584,
+      "DefaultVertex": {
+        "Lighting": 5258,
+        "Lighting2": 6000,
+        "Attributes": 16
+      },
+      "Lights": [
+        {
+          "X": 1536,
+          "Y": -512,
+          "Z": 1536,
+          "Intensity1": 4096,
+          "Intensity2": 4096,
+          "Fade1": 4096,
+          "Fade2": 4096
+        },
+        {
+          "X": 1536,
+          "Y": -4608,
+          "Z": 1536,
+          "Intensity1": 4096,
+          "Intensity2": 4096,
+          "Fade1": 4096,
+          "Fade2": 4096
+        },
+        {
+          "X": 1536,
+          "Y": -512,
+          "Z": 11776,
+          "Intensity1": 1792,
+          "Intensity2": 1792,
+          "Fade1": 4096,
+          "Fade2": 4096
+        }
+      ],
+      "Height": 20,
+      "Width": 3,
+      "Depth": 13,
+      "CeilingHeights": {
+        "16": [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ]
+      }
+    },
+    {
+      "Comments": "Make a return path to get back across the acid pit.",
+      "EMType": 126,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 17408,
+        "Y": -768,
+        "Z": 59392
+      },
+      "LinkedLocation": {
+        "X": 18944,
+        "Y": 4352,
+        "Z": 72192,
+        "Room": 57
+      },
+      "Textures": {
+        "Floor": 1916,
+        "Ceiling": 1905,
+        "WallAlignment": 4,
+        "Wall4": 1907
+      },
+      "AmbientLighting": 7584,
+      "DefaultVertex": {
+        "Lighting": 6000,
+        "Lighting2": 6000,
+        "Attributes": 16
+      },
+      "Lights": [
+        {
+          "X": 1536,
+          "Y": -512,
+          "Z": 1536,
+          "Intensity1": 3583,
+          "Fade1": 5120
+        },
+        {
+          "X": 6656,
+          "Y": -512,
+          "Z": 1536,
+          "Intensity1": 1024,
+          "Fade1": 4096
+        }
+      ],
+      "Height": 4,
+      "Width": 8,
+      "Depth": 3
+    },
+    {
+      "Comments": "Make visibility portals.",
+      "EMType": 81,
+      "Tags": [
+        9
+      ],
+      "Portals": [
+        {
+          "BaseRoom": 56,
+          "AdjoiningRoom": -2,
+          "Normal": {
+            "Z": 1
+          },
+          "Vertices": [
+            {
+              "X": 2048,
+              "Y": 3328,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": 3328,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": 4352,
+              "Z": 1024
+            },
+            {
+              "X": 2048,
+              "Y": 4352,
+              "Z": 1024
+            }
+          ]
+        },
+        {
+          "BaseRoom": -2,
+          "AdjoiningRoom": 56,
+          "Normal": {
+            "Z": -1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": 3328,
+              "Z": 12288
+            },
+            {
+              "X": 2048,
+              "Y": 3328,
+              "Z": 12288
+            },
+            {
+              "X": 2048,
+              "Y": 4352,
+              "Z": 12288
+            },
+            {
+              "X": 1024,
+              "Y": 4352,
+              "Z": 12288
+            }
+          ]
+        },
+        {
+          "BaseRoom": -2,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "Y": 1
+          },
+          "Vertices": [
+            {
+              "X": 2048,
+              "Y": -768,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -768,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -768,
+              "Z": 2048
+            },
+            {
+              "X": 2048,
+              "Y": -768,
+              "Z": 2048
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": -2,
+          "Normal": {
+            "Y": -1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": -768,
+              "Z": 2048
+            },
+            {
+              "X": 2048,
+              "Y": -768,
+              "Z": 2048
+            },
+            {
+              "X": 2048,
+              "Y": -768,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -768,
+              "Z": 1024
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": 48,
+          "Normal": {
+            "Y": -1
+          },
+          "Vertices": [
+            {
+              "X": 6144,
+              "Y": -768,
+              "Z": 2048
+            },
+            {
+              "X": 7168,
+              "Y": -768,
+              "Z": 2048
+            },
+            {
+              "X": 7168,
+              "Y": -768,
+              "Z": 1024
+            },
+            {
+              "X": 6144,
+              "Y": -768,
+              "Z": 1024
+            }
+          ]
+        },
+        {
+          "BaseRoom": 48,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "Y": 1
+          },
+          "Vertices": [
+            {
+              "X": 2048,
+              "Y": -768,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -768,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -768,
+              "Z": 2048
+            },
+            {
+              "X": 2048,
+              "Y": -768,
+              "Z": 2048
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Comments": "Make horizontal portals.",
+      "EMType": 82,
+      "Tags": [
+        9
+      ],
+      "Portals": {
+        "56": {
+          "-2": [
+            {
+              "X": 18944,
+              "Y": 4352,
+              "Z": 71168
+            }
+          ]
+        },
+        "-2": {
+          "56": [
+            {
+              "X": 18944,
+              "Y": 4352,
+              "Z": 72192
+            }
+          ],
+          "-1": [
+            {
+              "X": 19968,
+              "Y": 4352,
+              "Z": 60928
+            }
+          ]
+        },
+        "48": {
+          "-1": [
+            {
+              "X": 23040,
+              "Z": 60928
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Make vertical portals.",
+      "EMType": 83,
+      "Tags": [
+        9
+      ],
+      "Ceiling": {
+        "X": 18944,
+        "Y": -768,
+        "Z": 60928,
+        "Room": -1
+      },
+      "Floor": {
+        "X": 18944,
+        "Y": 256,
+        "Z": 60928,
+        "Room": -2
+      },
+      "InheritFloorBox": true
+    },
+    {
+      "EMType": 83,
+      "Tags": [
+        9
+      ],
+      "Ceiling": {
+        "X": 24064,
+        "Y": -768,
+        "Z": 60928,
+        "Room": -1
+      },
+      "Floor": {
+        "X": 24064,
+        "Y": 256,
+        "Z": 60928,
+        "Room": 48
+      },
+      "InheritFloorBox": true
+    },
+    {
+      "Comments": "Add a ladder.",
       "EMType": 0,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
-        "1925": {
-          "48": {
+        "1911": {
+          "-2": {
             "Rectangles": [
-              45,
-              41,
-              37,
-              33,
-              27,
-              21,
+              16,
               17,
-              13,
-              10,
-              7,
+              18,
+              19,
+              20
+            ]
+          },
+          "-1": {
+            "Rectangles": [
+              4
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 18944,
+        "Y": 4352,
+        "Z": 60928,
+        "Room": -2
+      },
+      "IsNegativeZ": true
+    },
+    {
+      "Comments": "Remove redundant faces.",
+      "EMType": 22,
+      "Tags": [
+        9
+      ],
+      "GeometryMap": {
+        "56": {
+          "Rectangles": [
+            3
+          ]
+        },
+        "-2": {
+          "Rectangles": [
+            1,
+            60
+          ]
+        },
+        "-1": {
+          "Rectangles": [
+            0,
+            21
+          ]
+        },
+        "48": {
+          "Rectangles": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Add a trapdoor.",
+      "EMType": 51,
+      "Tags": [
+        9
+      ],
+      "TypeID": 115,
+      "Intensity": -1,
+      "Location": {
+        "X": 24064,
+        "Y": -768,
+        "Z": 60928,
+        "Room": 48
+      }
+    },
+    {
+      "Comments": "Add a dummy trigger.",
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "EntityLocation": -1,
+      "Trigger": {
+        "TrigType": 8,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "And a regular trigger.",
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 20992,
+          "Y": -768,
+          "Z": 60928,
+          "Room": -1
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Remove the antitriggers for door 21 to allow returning.",
+      "EMType": 62,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 39424,
+          "Y": -5120,
+          "Z": 79360,
+          "Room": 15
+        },
+        {
+          "X": 38400,
+          "Y": -5120,
+          "Z": 79360,
+          "Room": 15
+        },
+        {
+          "X": 39424,
+          "Y": -5120,
+          "Z": 75264,
+          "Room": 15
+        },
+        {
+          "X": 38400,
+          "Y": -5120,
+          "Z": 75264,
+          "Room": 15
+        }
+      ]
+    },
+    {
+      "Comments": "Generate lighting.",
+      "EMType": 128,
+      "Tags": [
+        9
+      ],
+      "RoomIndices": [
+        -1,
+        -2
+      ]
+    },
+    {
+      "Comments": "Add a ladder in rooms 3/4.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1911": {
+          "4": {
+            "Rectangles": [
+              2
+            ]
+          }
+        },
+        "1947": {
+          "3": {
+            "Rectangles": [
               2
             ]
           }
         }
       },
       "Location": {
-        "X": 23775,
-        "Y": 6400,
-        "Z": 71257,
-        "Room": 81
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23775,
-        "Y": 6400,
-        "Z": 70233,
-        "Room": 81
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23775,
-        "Y": 6400,
-        "Z": 69209,
-        "Room": 81
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23775,
-        "Y": 6400,
-        "Z": 68185,
-        "Room": 81
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23775,
-        "Y": 6400,
-        "Z": 67161,
-        "Room": 81
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23735,
-        "Y": 3577,
-        "Z": 65868,
-        "Room": 48
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23716,
-        "Y": 2853,
-        "Z": 64903,
-        "Room": 48
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23745,
-        "Y": 2109,
-        "Z": 63911,
-        "Room": 48
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23773,
-        "Y": 1337,
-        "Z": 62881,
-        "Room": 48
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23788,
-        "Y": 1024,
-        "Z": 61880,
-        "Room": 48
-      },
-      "IsNegativeX": true
-    },
-    {
-      "EMType": 0,
-      "TextureMap": {},
-      "Location": {
-        "X": 23715,
-        "Y": 1024,
-        "Z": 60908,
-        "Room": 48
+        "X": 46592,
+        "Y": 3584,
+        "Z": 61952,
+        "Room": 3
       },
       "IsNegativeX": true
     }
@@ -1839,7 +2284,7 @@
           "EMType": 82,
           "Portals": {
             "95": {
-              "96": [
+              "-1": [
                 {
                   "X": 66048,
                   "Y": 4864,
@@ -1847,7 +2292,7 @@
                 }
               ]
             },
-            "96": {
+            "-1": {
               "95": [
                 {
                   "X": 66048,
@@ -1864,7 +2309,7 @@
           "Portals": [
             {
               "BaseRoom": 95,
-              "AdjoiningRoom": 96,
+              "AdjoiningRoom": -1,
               "Normal": {
                 "Z": 1
               },
@@ -1892,7 +2337,7 @@
               ]
             },
             {
-              "BaseRoom": 96,
+              "BaseRoom": -1,
               "AdjoiningRoom": 95,
               "Normal": {
                 "Z": -1
@@ -1930,7 +2375,7 @@
           ],
           "TextureMap": {
             "1911": {
-              "96": {
+              "-1": {
                 "Rectangles": [
                   954,
                   972
@@ -1942,7 +2387,7 @@
             "X": 66048,
             "Y": 8192,
             "Z": 56832,
-            "Room": 96
+            "Room": -1
           },
           "IsPositiveZ": true
         },
@@ -1955,7 +2400,7 @@
                 3
               ]
             },
-            "96": {
+            "-1": {
               "Rectangles": [
                 990
               ]
@@ -1976,7 +2421,7 @@
             "X": 75264,
             "Y": 8192,
             "Z": 48128,
-            "Room": 96,
+            "Room": -1,
             "Angle": -16384
           }
         },
@@ -1988,7 +2433,7 @@
               "X": 74749,
               "Y": 11776,
               "Z": 48130,
-              "Room": 96
+              "Room": -1
             }
           ],
           "Mesh": {
@@ -2005,28 +2450,28 @@
               "X": 70144,
               "Y": 8192,
               "Z": 51712,
-              "Room": 96,
+              "Room": -1,
               "Angle": 16384
             },
             {
               "X": 70144,
               "Y": 8192,
               "Z": 44544,
-              "Room": 96,
+              "Room": -1,
               "Angle": 16384
             },
             {
               "X": 79360,
               "Y": 8192,
               "Z": 44544,
-              "Room": 96,
+              "Room": -1,
               "Angle": -16384
             },
             {
               "X": 79360,
               "Y": 8192,
               "Z": 51712,
-              "Room": 96,
+              "Room": -1,
               "Angle": -16384
             }
           ],
@@ -2040,7 +2485,7 @@
           "Comments": "Add heavy triggers so the dragon will trigger the end-level enemies and monk.",
           "EMType": 61,
           "Rooms": [
-            96
+            -1
           ],
           "Trigger": {
             "TrigType": 5,
@@ -2064,12 +2509,12 @@
           "Camera": {
             "X": 59626,
             "Y": 2251,
-            "Z": 52893,
+            "Z": 54941,
             "Room": 77
           },
           "LookAtItem": 117,
           "AttachToRooms": [
-            96
+            -1
           ],
           "CameraAction": {
             "Value": 2,

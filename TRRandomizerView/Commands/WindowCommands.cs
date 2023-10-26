@@ -58,4 +58,6 @@ public static class WindowCommands
 
     // Other
     public static readonly RoutedUICommand OpenAdvancedWindowCommand = new();
+    public static readonly RoutedUICommand OpenGlobalSettingsCommand = new();
+    public static readonly RoutedUICommand LaunchGameCommand = new();
 }

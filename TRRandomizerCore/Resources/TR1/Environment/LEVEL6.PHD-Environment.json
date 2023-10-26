@@ -1,9 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Patch holes in the wall in rooms 13, 5 and 30.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 13,
@@ -209,6 +211,9 @@
     {
       "Comments": "Raise the visibility portals between 9 and 13 to match the face re-arrangement above.",
       "EMType": 84,
+      "Tags": [
+        10
+      ],
       "BaseRoom": 9,
       "AdjoiningRoom": 13,
       "VertexChanges": {
@@ -223,6 +228,9 @@
     {
       "Comments": "Raise the visibility portals between 13 and 9 to match the face re-arrangement above.",
       "EMType": 84,
+      "Tags": [
+        10
+      ],
       "BaseRoom": 13,
       "AdjoiningRoom": 9,
       "VertexChanges": {
@@ -237,6 +245,9 @@
     {
       "Comments": "Add the missing faces in the pit in the OG secret garden area and room 53.",
       "EMType": 26,
+      "Tags": [
+        10
+      ],
       "Quads": {
         "2": [
           {
@@ -268,95 +279,6 @@
               13
             ],
             "Texture": 7
-          }
-        ]
-      }
-    },
-    {
-      "Comments": "Remove the shortcut to the levers.",
-      "EMType": 5,
-      "Location": {
-        "X": 16896,
-        "Y": -6400,
-        "Z": 46592,
-        "Room": 34
-      },
-      "FloorClicks": 2
-    },
-    {
-      "Comments": "Move some faces to fit above.",
-      "EMType": 23,
-      "Modifications": [
-        {
-          "RoomNumber": 34,
-          "VertexChanges": {
-            "0": {
-              "Y": 512
-            },
-            "1": {
-              "Y": 512
-            },
-            "2": {
-              "Y": 512
-            },
-            "3": {
-              "Y": 512
-            }
-          }
-        },
-        {
-          "RoomNumber": 34,
-          "FaceIndices": [
-            26
-          ],
-          "VertexChanges": {
-            "2": {
-              "Y": 512
-            },
-            "3": {
-              "Y": 512
-            }
-          }
-        },
-        {
-          "RoomNumber": 34,
-          "FaceIndex": 3,
-          "VertexChanges": {
-            "0": {
-              "Y": 512
-            },
-            "1": {
-              "Y": 512
-            }
-          }
-        },
-        {
-          "RoomNumber": 34,
-          "FaceIndex": 7,
-          "VertexChanges": {
-            "0": {
-              "Y": 512
-            },
-            "3": {
-              "Y": 512
-            }
-          }
-        }
-      ]
-    },
-    {
-      "Comments": "Add a face to patch the gap created from above.",
-      "EMType": 26,
-      "Quads": {
-        "34": [
-          {
-            "Vertices": [
-              12,
-              13,
-              92,
-              91
-            ],
-            "Texture": 30
           }
         ]
       }
@@ -619,6 +541,106 @@
           73,
           79
         ]
+      }
+    ],
+    [
+      {
+        "Comments": "Remove the shortcut to the levers.",
+        "EMType": 5,
+        "Tags": [
+          11
+        ],
+        "Location": {
+          "X": 16896,
+          "Y": -6400,
+          "Z": 46592,
+          "Room": 34
+        },
+        "FloorClicks": 2
+      },
+      {
+        "Comments": "Move some faces to fit above.",
+        "EMType": 23,
+        "Tags": [
+          11
+        ],
+        "Modifications": [
+          {
+            "RoomNumber": 34,
+            "VertexChanges": {
+              "0": {
+                "Y": 512
+              },
+              "1": {
+                "Y": 512
+              },
+              "2": {
+                "Y": 512
+              },
+              "3": {
+                "Y": 512
+              }
+            }
+          },
+          {
+            "RoomNumber": 34,
+            "FaceIndices": [
+              26
+            ],
+            "VertexChanges": {
+              "2": {
+                "Y": 512
+              },
+              "3": {
+                "Y": 512
+              }
+            }
+          },
+          {
+            "RoomNumber": 34,
+            "FaceIndex": 3,
+            "VertexChanges": {
+              "0": {
+                "Y": 512
+              },
+              "1": {
+                "Y": 512
+              }
+            }
+          },
+          {
+            "RoomNumber": 34,
+            "FaceIndex": 7,
+            "VertexChanges": {
+              "0": {
+                "Y": 512
+              },
+              "3": {
+                "Y": 512
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Comments": "Add a face to patch the gap created from above.",
+        "EMType": 26,
+        "Tags": [
+          11
+        ],
+        "Quads": {
+          "34": [
+            {
+              "Vertices": [
+                12,
+                13,
+                92,
+                91
+              ],
+              "Texture": 30
+            }
+          ]
+        }
       }
     ]
   ],

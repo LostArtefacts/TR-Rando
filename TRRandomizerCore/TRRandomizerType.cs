@@ -58,4 +58,7 @@ public enum TRRandomizerType
     ChallengeRooms,
     DynamicEnemyTextures,
     ClonedEnemies,
+    ReturnPaths,
+    GeneralBugFixes,
+    ShortcutFixes,
 }

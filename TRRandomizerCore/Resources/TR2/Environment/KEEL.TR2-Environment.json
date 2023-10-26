@@ -1,9 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Make ladders for the first big drop.",
       "EMType": 0,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "1719": {
           "44": {
@@ -31,6 +33,9 @@
     },
     {
       "EMType": 0,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "1719": {
           "44": {
@@ -59,6 +64,9 @@
     {
       "Comments": "Make it possible to return to the piston room from below. The fake ladder here becomes real.",
       "EMType": 0,
+      "Tags": [
+        9
+      ],
       "TextureMap": {
         "1720": {
           "27": {
@@ -79,6 +87,9 @@
     {
       "Comments": "Make a block to be able to climb onto the ladder.",
       "EMType": 1,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 56826,
         "Y": 3840,
@@ -1302,6 +1313,9 @@
         {
           "Comments": "Convert one of the circuit breaker flames into a door.",
           "EMType": 45,
+          "Tags": [
+            11
+          ],
           "EntityIndex": 18,
           "NewEntityType": 111
         },

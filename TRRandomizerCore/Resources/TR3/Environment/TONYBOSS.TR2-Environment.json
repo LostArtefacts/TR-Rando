@@ -1,6 +1,92 @@
 {
-  "All": [],
-  "NonPurist": [],
+  "All": [
+    {
+      "Comments": "Add a pushblock in the snake pit to allow climbing back out.",
+      "EMType": 51,
+      "Tags": [
+        9
+      ],
+      "TypeID": 97,
+      "Intensity": 10438,
+      "Location": {
+        "X": 24064,
+        "Y": -6912,
+        "Z": 55808,
+        "Room": 4
+      }
+    },
+    {
+      "Comments": "Add a ladder, reachable from the block when shifted.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 24064,
+        "Y": -6912,
+        "Z": 56832,
+        "Room": 4
+      },
+      "IsNegativeX": true
+    },
+    {
+      "Comments": "Add another ladder in room 24.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 40448,
+        "Y": -4864,
+        "Z": 52736,
+        "Room": 24
+      },
+      "IsNegativeX": true
+    },
+    {
+      "Comments": "Ladder meshes - no suitable texture by default.",
+      "EMType": 24,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 23168,
+          "Y": -8960,
+          "Z": 56832,
+          "Room": 4,
+          "Angle": -16384
+        },
+        {
+          "X": 23168,
+          "Y": -9984,
+          "Z": 56832,
+          "Room": 4,
+          "Angle": -16384
+        },
+        {
+          "X": 39552,
+          "Y": -4864,
+          "Z": 52736,
+          "Room": 24,
+          "Angle": -16384
+        },
+        {
+          "X": 39552,
+          "Y": -5888,
+          "Z": 52736,
+          "Room": 24,
+          "Angle": -16384
+        }
+      ],
+      "Mesh": {
+        "Intensity1": 15855,
+        "MeshID": 30
+      }
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

@@ -41,7 +41,8 @@ public class MassTR2ModelExporter : AbstractMassTRModelExporter<TR2Type, TR2Leve
         [TR2LevelNames.GW] = new List<TR2Type>
         {
             TR2Type.Pistols_M_H, TR2Type.Shotgun_M_H, TR2Type.Uzi_M_H, TR2Type.Autos_M_H, TR2Type.Harpoon_M_H, TR2Type.M16_M_H, TR2Type.GrenadeLauncher_M_H,
-            TR2Type.LaraSun, TR2Type.Crow, TR2Type.Spider, TR2Type.BengalTiger, TR2Type.TRex
+            TR2Type.LaraSun, TR2Type.Crow, TR2Type.Spider, TR2Type.BengalTiger, TR2Type.TRex,
+            TR2Type.RollingBall
         },
         [TR2LevelNames.VENICE] = new List<TR2Type>
         {

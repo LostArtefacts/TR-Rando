@@ -1,6 +1,23 @@
 {
-  "All": [],
-  "NonPurist": [],
+  "All": [
+    {
+      "Comments": "Raise the floor in room 65 to reach the ladder out.",
+      "EMType": 1,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 59904,
+        "Y": 6144,
+        "Z": 34304,
+        "Room": 65
+      },
+      "Clicks": -1,
+      "FloorTexture": 65535,
+      "SideTexture": 2023,
+      "Flags": 15
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

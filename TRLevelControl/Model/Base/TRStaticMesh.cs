@@ -3,7 +3,7 @@ using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TRStaticMesh : ISerializableCompact
+public class TRStaticMesh : ISerializableCompact, ICloneable
 {
     public uint ID { get; set; }
 
@@ -46,6 +46,21 @@ public class TRStaticMesh : ISerializableCompact
             }
         }
     }
+
+    public TRStaticMesh Clone()
+    {
+        return new()
+        {
+            ID = ID,
+            Mesh = Mesh,
+            VisibilityBox = VisibilityBox.Clone(),
+            CollisionBox = CollisionBox.Clone(),
+            Flags = Flags
+        };
+    }
+
+    object ICloneable.Clone()
+        => Clone();
 
     public byte[] Serialize()
     {

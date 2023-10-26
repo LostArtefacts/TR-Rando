@@ -1,9 +1,11 @@
 {
-  "All": [],
-  "NonPurist": [
+  "All": [
     {
       "Comments": "Fix the incorrect texture in the starting flip map room.",
       "EMType": 21,
+      "Tags": [
+        10
+      ],
       "TextureMap": {
         "84": {
           "85": {
@@ -17,6 +19,9 @@
     {
       "Comments": "Fix a quad in room 27.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 27,
@@ -33,127 +38,11 @@
       ]
     },
     {
-      "Comments": "Modify the shortcut slope in room 40.",
-      "EMType": 7,
-      "Location": {
-        "X": 51712,
-        "Y": 768,
-        "Z": 56832,
-        "Room": 40
-      },
-      "FloorClicks": -6,
-      "SlantType": 1,
-      "XSlant": -3,
-      "ZSlant": -3
-    },
-    {
-      "Comments": "Any pickups on the old slope will be moved nearby",
-      "EMType": 43,
-      "SectorLocations": [
-        {
-          "X": 51712,
-          "Y": 768,
-          "Z": 56832,
-          "Room": 40
-        }
-      ],
-      "TargetLocation": {
-        "X": 50688,
-        "Y": 768,
-        "Z": 56832,
-        "Room": 40
-      }
-    },
-    {
-      "Comments": "Modify faces to fit.",
-      "EMType": 23,
-      "Modifications": [
-        {
-          "RoomNumber": 40,
-          "FaceIndex": 57,
-          "VertexChanges": {
-            "0": {
-              "Y": -1280
-            },
-            "1": {
-              "Y": -512
-            },
-            "2": {
-              "Y": -768
-            },
-            "3": {
-              "Y": -1536
-            }
-          }
-        },
-        {
-          "RoomNumber": 40,
-          "FaceIndex": 87,
-          "VertexChanges": {
-            "0": {
-              "Y": 512
-            }
-          }
-        }
-      ]
-    },
-    {
-      "Comments": "Patch the gaps in the walls.",
-      "EMType": 26,
-      "Quads": {
-        "40": [
-          {
-            "Vertices": [
-              484,
-              483,
-              87,
-              486
-            ],
-            "Texture": 26
-          },
-          {
-            "Vertices": [
-              483,
-              482,
-              38,
-              87
-            ],
-            "Texture": 67
-          },
-          {
-            "Vertices": [
-              482,
-              485,
-              35,
-              38
-            ],
-            "Texture": 27
-          },
-          {
-            "Vertices": [
-              485,
-              484,
-              85,
-              35
-            ],
-            "Texture": 27
-          }
-        ]
-      }
-    },
-    {
-      "EMType": 44,
-      "EntityIndex": 87,
-      "TargetLocation": {
-        "X": 54784,
-        "Y": 2432,
-        "Z": 56832,
-        "Room": 40
-      }
-    },
-    {
       "Comments": "Make a return path possible.",
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 50176,
         "Y": -7424,
@@ -197,6 +86,9 @@
     },
     {
       "EMType": 126,
+      "Tags": [
+        9
+      ],
       "Location": {
         "X": 50176,
         "Y": 3840,
@@ -240,6 +132,9 @@
     },
     {
       "EMType": 83,
+      "Tags": [
+        9
+      ],
       "Ceiling": {
         "X": 51712,
         "Y": -18688,
@@ -255,6 +150,9 @@
     },
     {
       "EMType": 83,
+      "Tags": [
+        9
+      ],
       "Ceiling": {
         "X": 51712,
         "Y": -7424,
@@ -270,6 +168,9 @@
     },
     {
       "EMType": 83,
+      "Tags": [
+        9
+      ],
       "Ceiling": {
         "X": 51712,
         "Y": 3840,
@@ -285,6 +186,9 @@
     },
     {
       "EMType": 81,
+      "Tags": [
+        9
+      ],
       "Portals": [
         {
           "BaseRoom": 50,
@@ -465,6 +369,9 @@
     {
       "Comments": "Remove faces no longer required.",
       "EMType": 22,
+      "Tags": [
+        9
+      ],
       "GeometryMap": {
         "30": {
           "Rectangles": [
@@ -493,6 +400,9 @@
     {
       "Comments": "Any pickups will be moved nearby.",
       "EMType": 43,
+      "Tags": [
+        9
+      ],
       "SectorLocations": [
         {
           "X": 51712,
@@ -511,6 +421,9 @@
     {
       "Comments": "Remove the triggers that close door 143.",
       "EMType": 62,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 45568,
@@ -547,6 +460,9 @@
     {
       "Comments": "Make a timed trigger for the door to open/close.",
       "EMType": 61,
+      "Tags": [
+        9
+      ],
       "Locations": [
         {
           "X": 47616,
@@ -568,6 +484,9 @@
     {
       "Comments": "Don't activate the door by default.",
       "EMType": 48,
+      "Tags": [
+        9
+      ],
       "EntityIndex": 143,
       "Flags": 0
     }
@@ -692,6 +611,143 @@
         "EntityMap": {
           "113": 114,
           "114": 113
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Modify the shortcut slope in room 40.",
+        "EMType": 7,
+        "Tags": [
+          11
+        ],
+        "Location": {
+          "X": 51712,
+          "Y": 768,
+          "Z": 56832,
+          "Room": 40
+        },
+        "FloorClicks": -6,
+        "SlantType": 1,
+        "XSlant": -3,
+        "ZSlant": -3
+      },
+      {
+        "Comments": "Any pickups on the old slope will be moved nearby",
+        "EMType": 43,
+        "Tags": [
+          11
+        ],
+        "SectorLocations": [
+          {
+            "X": 51712,
+            "Y": 768,
+            "Z": 56832,
+            "Room": 40
+          }
+        ],
+        "TargetLocation": {
+          "X": 50688,
+          "Y": 768,
+          "Z": 56832,
+          "Room": 40
+        }
+      },
+      {
+        "Comments": "Modify faces to fit.",
+        "EMType": 23,
+        "Tags": [
+          11
+        ],
+        "Modifications": [
+          {
+            "RoomNumber": 40,
+            "FaceIndex": 57,
+            "VertexChanges": {
+              "0": {
+                "Y": -1280
+              },
+              "1": {
+                "Y": -512
+              },
+              "2": {
+                "Y": -768
+              },
+              "3": {
+                "Y": -1536
+              }
+            }
+          },
+          {
+            "RoomNumber": 40,
+            "FaceIndex": 87,
+            "VertexChanges": {
+              "0": {
+                "Y": 512
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Comments": "Patch the gaps in the walls.",
+        "EMType": 26,
+        "Tags": [
+          11
+        ],
+        "Quads": {
+          "40": [
+            {
+              "Vertices": [
+                484,
+                483,
+                87,
+                486
+              ],
+              "Texture": 26
+            },
+            {
+              "Vertices": [
+                483,
+                482,
+                38,
+                87
+              ],
+              "Texture": 67
+            },
+            {
+              "Vertices": [
+                482,
+                485,
+                35,
+                38
+              ],
+              "Texture": 27
+            },
+            {
+              "Vertices": [
+                485,
+                484,
+                85,
+                35
+              ],
+              "Texture": 27
+            }
+          ]
+        }
+      },
+      {
+        "Comments": "Move the egg so it's not embedded in the new slope.",
+        "EMType": 44,
+        "Tags": [
+          11
+        ],
+        "EntityIndex": 87,
+        "TargetLocation": {
+          "X": 54784,
+          "Y": 2432,
+          "Z": 56832,
+          "Room": 40
         }
       }
     ]

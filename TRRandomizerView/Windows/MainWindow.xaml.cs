@@ -346,6 +346,16 @@ public partial class MainWindow : Window, IRecentFolderOpener
         e.CanExecute = IsEditorActive;
     }
 
+    private void GlobalSettingsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = IsEditorActive;
+    }
+
+    private void GlobalSettingsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        _editorControl.EditGlobalSettings();
+    }
+
     private void EditCommunitySettingsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
     {
         e.CanExecute = IsEditorActive && _editorControl.CanEditCommunitySettings();
@@ -419,6 +429,20 @@ public partial class MainWindow : Window, IRecentFolderOpener
     {
         ProcessUtils.OpenURL(e.Uri.AbsoluteUri);
         e.Handled = true;
+    }
+
+    private void LaunchGameCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        // Launch if we've randomized at least once
+        e.CanExecute = IsEditorActive && EditorCanExport;
+    }
+
+    private void LaunchGameCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        if (ConfirmEditorSaveState())
+        {
+            _editorControl.LaunchGame();
+        }
     }
     #endregion
 

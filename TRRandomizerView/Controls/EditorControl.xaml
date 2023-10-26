@@ -504,15 +504,10 @@
         </ctrl:ManagedSeedAdvancedControl>
 
         <Border
-            Grid.RowSpan="5"
+            Grid.RowSpan="3"
             Grid.Column="3"
             Margin="0">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50*"/>
-                    <RowDefinition Height="50*"/>
-                </Grid.RowDefinitions>
-
                 <Popup
                     x:Name="_feedbackPopup"
                     StaysOpen="False"
@@ -542,11 +537,10 @@
                         </Grid>
                     </Border>
                 </Popup>
-
                 <Border
-                    BorderBrush="#0E7709"
+                    BorderBrush="{StaticResource ThemeColour2}"
                     BorderThickness="1"
-                    Background="#D8FCD6"
+                    Background="{StaticResource ThemeColour1}"
                     CornerRadius="5"
                     Margin="5">
                     <Grid Margin="10,9,10,10">
@@ -560,10 +554,12 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label
-                            Content="Global Options"
+                            Content="Global Settings"
                             Padding="0,0,0,5"
                             FontWeight="Bold"/>
 
@@ -575,7 +571,7 @@
 
                         <Button
                             Grid.Row="2"
-                            Margin="0,0,0,18"
+                            Margin="0,0,0,12"
                             Content="Randomize Seeds" 
                             Style="{StaticResource AltCallToAction}"
                             Command="cmds:WindowCommands.RandomizeSeeds"/>
@@ -588,7 +584,7 @@
 
                         <Button
                             Grid.Row="4"
-                            Margin="0,0,0,18"
+                            Margin="0,0,0,12"
                             Content="Randomize Options" 
                             Style="{StaticResource AltCallToAction}"
                             Command="cmds:WindowCommands.RandomizeOptions"/>
@@ -601,50 +597,70 @@
 
                         <Button
                             Grid.Row="6"
-                            Margin="0,0,0,18"
+                            Margin="0,0,0,12"
                             Content="Apply a Global Seed" 
                             Style="{StaticResource AltCallToAction}"
                             Command="cmds:WindowCommands.CreateGlobalSeed"/>
 
                         <TextBlock
-                            Visibility="{Binding IsTR1Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                             Grid.Row="7"
+                            Margin="0,0,0,5"
+                            Text="Configure settings that affect general experience and gameplay."
+                            TextWrapping="Wrap"/>
+                    
+                        <Button
+                            Grid.Row="8"
+                            Margin="0,0,0,12"
+                            Content="Global Settings" 
+                            Style="{StaticResource AltCallToAction}"
+                            Command="cmds:WindowCommands.OpenGlobalSettingsCommand"/>
+
+                        <TextBlock
+                            Visibility="{Binding IsTR1Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                            Grid.Row="9"
                             Margin="0,0,0,5"
                             Text="Configure extra settings specific to Tomb1Main."
                             TextWrapping="Wrap"/>
 
                         <Button
                             Visibility="{Binding IsTR1Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
-                            Grid.Row="8"
-                            Margin="0,0,0,18"
+                            Grid.Row="10"
+                            Margin="0,0,0,12"
                             Content="Tomb1Main Settings" 
                             Style="{StaticResource AltCallToAction}"
                             Command="cmds:WindowCommands.EditCommunitySettings"/>
 
                         <TextBlock
                             Visibility="{Binding IsTR3Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
-                            Grid.Row="7"
-                            Margin="0,0,0,5"
+                            Grid.Row="9"
+                            Margin="0,0,0,2"
                             Text="Configure extra settings specific to tomb3."
                             TextWrapping="Wrap"/>
 
                         <Button
                             Visibility="{Binding IsTR3Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
-                            Grid.Row="8"
-                            Margin="0,0,0,18"
+                            Grid.Row="10"
+                            Margin="0,0,0,10"
                             Content="tomb3 Settings" 
                             Style="{StaticResource AltCallToAction}"
                             Command="cmds:WindowCommands.EditCommunitySettings"/>
                     </Grid>
-                </Border>
+                </Border>                
+            </Grid>
+        </Border>
 
+        <Border
+            Grid.Row="3"
+    Grid.Column="3"
+    Margin="0">
+            <Grid>
+                
                 <Border
-                    Grid.Row="2"
-                    BorderBrush="#0E7709"
-                    BorderThickness="1"
-                    Background="#D8FCD6"
-                    CornerRadius="5"
-                    Margin="5">
+            BorderBrush="{StaticResource ThemeColour2}"
+            BorderThickness="1"
+            Background="{StaticResource ThemeColour1}"
+            CornerRadius="5"
+            Margin="5">
                     <Grid Margin="10,9,10,10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -653,77 +669,77 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label
-                            Content="Apply Randomization"
-                            Padding="0,0,0,5"
+                        <TextBlock
+                            Margin="0,0,0,5"
+                            Text="Tools"
                             FontWeight="Bold"/>
-
-                        <TextBlock
-                            Grid.Row="1"
-                            Margin="0,0,0,5"
-                            Visibility="{Binding IsEnvironmentTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
-                            IsEnabled="{Binding RandomizeEnvironment, Converter={StaticResource InverseBooleanConverter}}"
-                            Text="Do not apply default environment changes such as return paths."
-                            TextWrapping="Wrap"
-                            Style="{StaticResource StatusAwareTextBlock}"/>
-
-                        <CheckBox
-                            Grid.Row="2"
-                            Margin="0,0,0,20"
-                            Visibility="{Binding IsEnvironmentTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
-                            IsEnabled="{Binding RandomizeEnvironment, Converter={StaticResource InverseBooleanConverter}}"
-                            IsChecked="{Binding PuristMode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                            <Label 
-                                Padding="0"
-                                Content="Purist Mode"/>
-                        </CheckBox>
-
-                        <TextBlock
-                            Grid.Row="3"
-                            Margin="0,0,0,5"
-                            Visibility="{Binding IsDisableDemosTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
-                            Text="Disable demos from showing in the title screen to prevent spoilers."
-                            TextWrapping="Wrap"/>
-
-                        <CheckBox
-                            Grid.Row="4"
-                            Margin="0,0,0,20"
-                            Content="Disable Demos"
-                            Visibility="{Binding IsDisableDemosTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
-                            IsChecked="{Binding DisableDemos, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-
-                        <TextBlock
-                            Grid.Row="5"
-                            Margin="0,0,0,5"
-                            Text="Launch the game automatically following successful randomization."
-                            TextWrapping="Wrap"/>
-
-                        <CheckBox
-                            Grid.Row="6"
-                            Content="Auto-launch Game"
-                            IsChecked="{Binding AutoLaunchGame, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-
-                        <TextBlock
-                            Grid.Row="7"
-                            Margin="0,0,0,5"
-                            Text="Hit Randomize to apply your chosen settings and start playing."
-                            TextWrapping="Wrap"/>
-
                         <Button
-                            Grid.Row="8"
-                            Style="{StaticResource CallToAction}"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontSize="24"                        
-                            Content="Randomize!"
-                            Command="cmds:WindowCommands.Randomize"/>
+                            Grid.Row="1"
+                            Style="{StaticResource BulletButtonStyle}"
+                            Content="Import settings"
+                            Command="cmds:WindowCommands.ImportSettings"/>
+                        <Button
+                            Grid.Row="2"
+                            Style="{StaticResource BulletButtonStyle}"
+                            Content="Export settings"
+                            Command="cmds:WindowCommands.ExportSettings"/>
+                        <Button
+                            Grid.Row="3"
+                            Style="{StaticResource BulletButtonStyle}"
+                            Content="Reset settings"
+                            Command="cmds:WindowCommands.ResetSettings"/>
+                        <Button
+                            Grid.Row="4"
+                            Style="{StaticResource BulletButtonStyle}"
+                            Content="Launch game"
+                            Command="cmds:WindowCommands.LaunchGameCommand"/>
+                        <Button
+                            Grid.Row="5"
+                            Style="{StaticResource BulletButtonStyle}"
+                            Content="Help"
+                            Command="cmds:WindowCommands.Discord"/>
                     </Grid>
                 </Border>
+            </Grid>
+        </Border>
+
+        <Border
+            Grid.Column="3"
+            Grid.Row="4"
+            BorderBrush="{StaticResource ThemeColour5}"
+            BorderThickness="1"
+            Background="{StaticResource ThemeColour9}"
+            CornerRadius="5"
+            Margin="5">
+            <Grid Margin="10,9,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label
+                    Content="Apply Randomization"
+                    Padding="0,0,0,5"
+                    FontWeight="Bold"/>
+
+                <TextBlock
+                    Grid.Row="1"
+                    Margin="0,0,0,5"
+                    Text="Hit Randomize to apply your chosen settings and start playing."
+                    TextWrapping="Wrap"/>
+
+                <Button
+                    Grid.Row="3"
+                    Style="{StaticResource CallToAction}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom"
+                    FontSize="24"                        
+                    Content="Randomize!"
+                    Command="cmds:WindowCommands.Randomize"/>
             </Grid>
         </Border>
     </Grid>

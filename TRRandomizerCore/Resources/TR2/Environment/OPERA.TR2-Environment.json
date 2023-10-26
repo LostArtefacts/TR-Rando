@@ -1,19 +1,13 @@
 {
-  "All": [
-    {
-      "Comments": "Raises the ceiling on top of the dome - if the dragon ends up here, he will still be able to breathe fire.",
-      "EMType": 4,
-      "CeilingHeights": {
-        "12": -127
-      }
-    }
-  ],
-  "NonPurist": [],
+  "All": [],
   "Any": [
     [
       {
-        "Comments": "Goodbye, Opera skip.",
+        "Comments": "Move glass shards to the balcony inside the opera house.",
         "EMType": 44,
+        "Tags": [
+          11
+        ],
         "EntityIndex": 181,
         "TargetLocation": {
           "X": 74240,
@@ -24,6 +18,9 @@
       },
       {
         "EMType": 44,
+        "Tags": [
+          11
+        ],
         "EntityIndex": 182,
         "TargetLocation": {
           "X": 73216,
@@ -35,6 +32,9 @@
       {
         "Comments": "Kill Lara where the shards used to be.",
         "EMType": 70,
+        "Tags": [
+          11
+        ],
         "Locations": [
           {
             "X": 71168,
@@ -121,6 +121,9 @@
       {
         "Comments": "Move the swinging box in the dome room.",
         "EMType": 44,
+        "Tags": [
+          4
+        ],
         "EntityIndex": 10,
         "TargetLocation": {
           "X": 74240,
@@ -135,6 +138,9 @@
       {
         "Comments": "Move dome room glass around.",
         "EMType": 44,
+        "Tags": [
+          4
+        ],
         "EntityIndex": 174,
         "TargetLocation": {
           "X": 85504,
@@ -146,6 +152,9 @@
       {
         "Comments": "Move dome room glass around.",
         "EMType": 44,
+        "Tags": [
+          4
+        ],
         "EntityIndex": 175,
         "TargetLocation": {
           "X": 84480,
@@ -159,6 +168,9 @@
       {
         "Comments": "Move dome room glass around.",
         "EMType": 44,
+        "Tags": [
+          4
+        ],
         "EntityIndex": 176,
         "TargetLocation": {
           "X": 86528,
@@ -170,6 +182,9 @@
       {
         "Comments": "Move dome room glass around.",
         "EMType": 44,
+        "Tags": [
+          4
+        ],
         "EntityIndex": 177,
         "TargetLocation": {
           "X": 86528,
@@ -181,6 +196,9 @@
       {
         "Comments": "Move dome room glass around.",
         "EMType": 44,
+        "Tags": [
+          4
+        ],
         "EntityIndex": 178,
         "TargetLocation": {
           "X": 86528,
@@ -194,6 +212,9 @@
       {
         "Comments": "Convert swinging sandbag to swinging box.",
         "EMType": 45,
+        "Tags": [
+          4
+        ],
         "EntityIndex": 94,
         "NewEntityType": 96
       }
@@ -325,6 +346,599 @@
           "Room": 123
         },
         "IfLandCreature": true
+      }
+    ],
+    [
+      {
+        "Comments": "Create some walls as part of the balcony skip block.",
+        "EMType": 127,
+        "Tags": [
+          11
+        ],
+        "Locations": [
+          {
+            "X": 75264,
+            "Y": 2048,
+            "Z": 50688,
+            "Room": 5
+          },
+          {
+            "X": 74240,
+            "Y": 2048,
+            "Z": 50688,
+            "Room": 5
+          },
+          {
+            "X": 73216,
+            "Y": 2048,
+            "Z": 50688,
+            "Room": 5
+          }
+        ]
+      },
+      {
+        "Comments": "Remove some vertical portals.",
+        "EMType": 86,
+        "Tags": [
+          11
+        ],
+        "Location1": {
+          "X": 75264,
+          "Y": 2048,
+          "Z": 50688,
+          "Room": 5
+        },
+        "Location2": {
+          "X": 75264,
+          "Y": 3072,
+          "Z": 50688,
+          "Room": 53
+        }
+      },
+      {
+        "EMType": 86,
+        "Tags": [
+          11
+        ],
+        "Location1": {
+          "X": 74240,
+          "Y": 2048,
+          "Z": 50688,
+          "Room": 5
+        },
+        "Location2": {
+          "X": 74240,
+          "Y": 3072,
+          "Z": 50688,
+          "Room": 53
+        }
+      },
+      {
+        "EMType": 86,
+        "Tags": [
+          11
+        ],
+        "Location1": {
+          "X": 73216,
+          "Y": 2048,
+          "Z": 50688,
+          "Room": 5
+        },
+        "Location2": {
+          "X": 73216,
+          "Y": 3072,
+          "Z": 50688,
+          "Room": 53
+        }
+      },
+      {
+        "Comments": "Adjust faces to match the geometry.",
+        "EMType": 23,
+        "Tags": [
+          11
+        ],
+        "Modifications": [
+          {
+            "RoomNumber": 5,
+            "FaceIndex": 38,
+            "VertexChanges": {
+              "1": {
+                "Y": -256
+              },
+              "2": {
+                "Y": -256,
+                "Z": 1024
+              },
+              "3": {
+                "Z": 1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 5,
+            "FaceIndex": 39,
+            "VertexChanges": {
+              "0": {
+                "Z": 1024
+              },
+              "1": {
+                "Y": -256,
+                "Z": 1024
+              },
+              "2": {
+                "Y": -256,
+                "Z": 1024
+              },
+              "3": {
+                "Y": -256,
+                "Z": 1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 5,
+            "FaceIndex": 42,
+            "VertexChanges": {
+              "0": {
+                "X": -1024,
+                "Z": 1024
+              },
+              "1": {
+                "X": -1024,
+                "Z": 1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 5,
+            "FaceIndex": 20,
+            "VertexChanges": {
+              "2": {
+                "Y": -256,
+                "Z": 1024
+              },
+              "3": {
+                "Y": 512,
+                "Z": 1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 5,
+            "FaceIndex": 1,
+            "VertexChanges": {
+              "0": {
+                "X": 1024,
+                "Z": 1024
+              },
+              "3": {
+                "X": 1024,
+                "Z": 1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 5,
+            "FaceIndex": 43,
+            "VertexChanges": {
+              "0": {
+                "X": -2048,
+                "Y": 768
+              },
+              "1": {
+                "X": -2048,
+                "Y": 1024,
+                "Z": 1024
+              },
+              "2": {
+                "X": -1024,
+                "Y": 256,
+                "Z": 1024
+              },
+              "3": {
+                "X": -1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 53,
+            "FaceIndex": 16,
+            "VertexChanges": {
+              "0": {
+                "X": -2048
+              },
+              "1": {
+                "X": -2048
+              },
+              "2": {
+                "X": -2048
+              },
+              "3": {
+                "X": -2048
+              }
+            }
+          },
+          {
+            "RoomNumber": 53,
+            "FaceIndex": 24,
+            "VertexChanges": {
+              "0": {
+                "X": -1024
+              },
+              "1": {
+                "X": -1024
+              },
+              "2": {
+                "X": -1024
+              },
+              "3": {
+                "X": -1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 53,
+            "FaceIndex": 3,
+            "VertexChanges": {
+              "0": {
+                "Y": -512
+              },
+              "1": {
+                "Y": -512
+              }
+            }
+          },
+          {
+            "RoomNumber": 53,
+            "FaceIndex": 2,
+            "VertexChanges": {
+              "0": {
+                "Z": 1024
+              },
+              "1": {
+                "Z": 1024
+              },
+              "2": {
+                "Y": -512
+              },
+              "3": {
+                "Y": -512
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Comments": "Patch a couple of holes.",
+        "EMType": 26,
+        "Tags": [
+          11
+        ],
+        "Quads": {
+          "53": [
+            {
+              "Vertices": [
+                125,
+                120,
+                123,
+                126
+              ],
+              "Texture": 1666
+            },
+            {
+              "Vertices": [
+                59,
+                124,
+                127,
+                57
+              ],
+              "Texture": 1666
+            }
+          ]
+        }
+      },
+      {
+        "Comments": "Change some textures.",
+        "EMType": 21,
+        "Tags": [
+          11
+        ],
+        "TextureMap": {
+          "1690": {
+            "5": {
+              "Rectangles": [
+                43
+              ]
+            }
+          },
+          "1666": {
+            "53": {
+              "Rectangles": [
+                2
+              ]
+            }
+          }
+        }
+      },
+      {
+        "Comments": "Remove unneeded faces.",
+        "EMType": 22,
+        "Tags": [
+          11
+        ],
+        "GeometryMap": {
+          "5": {
+            "Rectangles": [
+              0,
+              2,
+              21
+            ],
+            "Triangles": [
+              0,
+              3,
+              6
+            ]
+          }
+        }
+      },
+      {
+        "Comments": "Add some extra static meshes for good measure.",
+        "EMType": 24,
+        "Tags": [
+          11
+        ],
+        "Locations": [
+          {
+            "X": 73216,
+            "Y": 3584,
+            "Z": 50670,
+            "Room": 53,
+            "Angle": -32768
+          },
+          {
+            "X": 74240,
+            "Y": 3584,
+            "Z": 50670,
+            "Room": 53,
+            "Angle": -32768
+          }
+        ],
+        "Mesh": {
+          "Intensity1": 7168,
+          "Intensity2": 4096,
+          "MeshID": 37
+        },
+        "IgnoreSectorEntities": true
+      },
+      {
+        "EMType": 24,
+        "Tags": [
+          11
+        ],
+        "Locations": [
+          {
+            "X": 72192,
+            "Y": 3584,
+            "Z": 51712,
+            "Room": 53,
+            "Angle": 16384
+          },
+          {
+            "X": 72192,
+            "Y": 3584,
+            "Z": 51712,
+            "Room": 53
+          }
+        ],
+        "Mesh": {
+          "Intensity1": 7168,
+          "Intensity2": 4096,
+          "MeshID": 38
+        },
+        "IgnoreSectorEntities": true
+      },
+      {
+        "EMType": 24,
+        "Tags": [
+          11
+        ],
+        "Locations": [
+          {
+            "X": 73216,
+            "Y": 3712,
+            "Z": 50688,
+            "Room": 53,
+            "Angle": -16384
+          }
+        ],
+        "Mesh": {
+          "Intensity1": 7168,
+          "Intensity2": 4096,
+          "MeshID": 36
+        },
+        "IgnoreSectorEntities": true
+      },
+      {
+        "EMType": 34,
+        "Tags": [
+          11
+        ],
+        "Mesh": {
+          "Centre": {},
+          "Vertices": [],
+          "Normals": [],
+          "Lights": [],
+          "TexturedRectangles": [],
+          "TexturedTriangles": [],
+          "ColouredRectangles": [],
+          "ColouredTriangles": []
+        },
+        "Info": {
+          "ID": 27,
+          "VisibilityBox": {
+            "MinX": -512,
+            "MaxX": 2560,
+            "MinY": -1536,
+            "MinZ": 512,
+            "MaxZ": 768
+          },
+          "CollisionBox": {
+            "MinX": -512,
+            "MaxX": 2560,
+            "MinY": -1536,
+            "MinZ": 512,
+            "MaxZ": 768
+          },
+          "Flags": 2,
+          "Visible": true
+        }
+      },
+      {
+        "EMType": 24,
+        "Tags": [
+          11
+        ],
+        "Locations": [
+          {
+            "X": 73216,
+            "Y": 3712,
+            "Z": 50688,
+            "Room": 53,
+            "Angle": -32768
+          }
+        ],
+        "Mesh": {
+          "Intensity1": 7168,
+          "Intensity2": 4096,
+          "MeshID": 27
+        },
+        "IgnoreSectorEntities": true
+      }
+    ],
+    [
+      {
+        "Comments": "Remove portals near the dome to the shard room.",
+        "EMType": 86,
+        "Tags": [
+          11
+        ],
+        "Location1": {
+          "X": 83456,
+          "Y": -768,
+          "Z": 45568,
+          "Room": 13
+        },
+        "Location2": {
+          "X": 83456,
+          "Y": 256,
+          "Z": 45568,
+          "Room": 38
+        }
+      },
+      {
+        "Comments": "Remove portals near the dome to the shard room.",
+        "EMType": 86,
+        "Tags": [
+          11
+        ],
+        "Location1": {
+          "X": 82432,
+          "Y": -768,
+          "Z": 45568,
+          "Room": 13
+        },
+        "Location2": {
+          "X": 82432,
+          "Y": 256,
+          "Z": 45568,
+          "Room": 38
+        }
+      },
+      {
+        "Comments": "Remove portals near the dome to the shard room.",
+        "EMType": 86,
+        "Tags": [
+          11
+        ],
+        "Location1": {
+          "X": 81408,
+          "Y": -768,
+          "Z": 45568,
+          "Room": 13
+        },
+        "Location2": {
+          "X": 81408,
+          "Y": 256,
+          "Z": 45568,
+          "Room": 38
+        }
+      },
+      {
+        "Comments": "Texturing for above.",
+        "EMType": 26,
+        "Tags": [
+          11
+        ],
+        "Quads": {
+          "13": [
+            {
+              "Vertices": [
+                108,
+                98,
+                99,
+                109
+              ],
+              "Texture": 1233
+            },
+            {
+              "Vertices": [
+                98,
+                87,
+                88,
+                99
+              ],
+              "Texture": 1233
+            },
+            {
+              "Vertices": [
+                87,
+                73,
+                74,
+                88
+              ],
+              "Texture": 1233
+            }
+          ],
+          "38": [
+            {
+              "Vertices": [
+                61,
+                76,
+                77,
+                62
+              ],
+              "Texture": 1234
+            },
+            {
+              "Vertices": [
+                41,
+                61,
+                62,
+                44
+              ],
+              "Texture": 1234
+            },
+            {
+              "Vertices": [
+                42,
+                41,
+                44,
+                43
+              ],
+              "Texture": 1234
+            }
+          ]
+        }
       }
     ]
   ],
@@ -1309,7 +1923,24 @@
     }
   ],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If enemy 20 is a dragon, raise the ceiling to allow him to breathe fire.",
+        "ConditionType": 0,
+        "EntityIndex": 20,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 4,
+          "CeilingHeights": {
+            "12": -30
+          }
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": [
     {

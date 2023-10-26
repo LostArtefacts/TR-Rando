@@ -1,6 +1,86 @@
 {
-  "All": [],
-  "NonPurist": [],
+  "All": [
+    {
+      "Comments": "Tweak slopes in room 0 to allow returning back up from the trapdoor drop.",
+      "EMType": 7,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 40448,
+        "Y": -1152,
+        "Z": 66048
+      },
+      "SlantType": 1,
+      "RemoveSlant": true
+    },
+    {
+      "EMType": 7,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 39424,
+        "Y": -1152,
+        "Z": 66048
+      },
+      "SlantType": 1,
+      "RemoveSlant": true
+    },
+    {
+      "Comments": "Adjust faces to fit.",
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "FaceIndices": [
+            133,
+            152
+          ],
+          "VertexChanges": {
+            "2": {
+              "Y": -768
+            },
+            "3": {
+              "Y": -768
+            }
+          }
+        },
+        {
+          "FaceIndices": [
+            136,
+            154
+          ],
+          "VertexChanges": {
+            "0": {
+              "Y": -768
+            },
+            "1": {
+              "Y": -768
+            }
+          }
+        },
+        {
+          "FaceIndex": 175,
+          "VertexChanges": {
+            "1": {
+              "Y": -768
+            }
+          }
+        },
+        {
+          "FaceIndex": 134,
+          "VertexChanges": {
+            "0": {
+              "Y": -768
+            }
+          }
+        }
+      ]
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

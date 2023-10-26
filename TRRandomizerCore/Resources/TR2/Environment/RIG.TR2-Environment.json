@@ -1,6 +1,24 @@
 {
-  "All": [],
-  "NonPurist": [],
+  "All": [
+    {
+      "Comments": "Keep the first door open once we've cleared the timed run.",
+      "EMType": 68,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 44544,
+        "Y": -1536,
+        "Z": 95744,
+        "Room": 10
+      },
+      "Actions": [
+        {
+          "Parameter": 19
+        }
+      ]
+    }
+  ],
   "Any": [
     [
       {

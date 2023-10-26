@@ -3,6 +3,9 @@
     {
       "Comments": "Move a face in room 143 to plug an OG gap.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 143,
@@ -29,6 +32,9 @@
     {
       "Comments": "Make a new face to plug the gap we've created.",
       "EMType": 26,
+      "Tags": [
+        10
+      ],
       "Quads": {
         "143": [
           {
@@ -46,6 +52,9 @@
     {
       "Comments": "Add missing trapdoor triggers in the flipmap room.",
       "EMType": 61,
+      "Tags": [
+        10
+      ],
       "Locations": [
         {
           "X": 15872,
@@ -71,6 +80,9 @@
     {
       "Comments": "Add missing trapdoor triggers in the flipmap room.",
       "EMType": 61,
+      "Tags": [
+        10
+      ],
       "Locations": [
         {
           "X": 17920,
@@ -92,87 +104,174 @@
           }
         ]
       }
-    }
-  ],
-  "NonPurist": [
-    {
-      "Comments": "Red skidoo return path.",
-      "EMType": 1,
-      "Location": {
-        "X": 42425,
-        "Y": 2816,
-        "Z": 55795,
-        "Room": 53
-      },
-      "Clicks": -6,
-      "FloorTexture": 65535,
-      "SideTexture": 1289,
-      "Flags": 15
     },
     {
-      "EMType": 1,
+      "Comments": "Make some slopes for a red skidoo return path.",
+      "EMType": 5,
+      "Tags": [
+        9
+      ],
       "Location": {
-        "X": 42637,
-        "Y": 2816,
-        "Z": 56799,
+        "X": 41472,
+        "Y": 2304,
+        "Z": 53760,
         "Room": 53
       },
-      "Clicks": -5,
-      "FloorTexture": 65535,
-      "SideTexture": 1287,
-      "Flags": 15
+      "FloorClicks": -2
     },
     {
-      "EMType": 1,
+      "EMType": 7,
+      "Tags": [
+        9
+      ],
       "Location": {
-        "X": 42637,
-        "Y": 2816,
-        "Z": 57823,
+        "X": 41472,
+        "Y": 2304,
+        "Z": 54784,
         "Room": 53
       },
-      "Clicks": -4,
-      "FloorTexture": 65535,
-      "SideTexture": 1287,
-      "Flags": 15
+      "FloorClicks": -2,
+      "SlantType": 1,
+      "ZSlant": -2
     },
     {
-      "EMType": 1,
+      "EMType": 7,
+      "Tags": [
+        9
+      ],
       "Location": {
-        "X": 41613,
-        "Y": 2816,
-        "Z": 57823,
+        "X": 41472,
+        "Y": 2304,
+        "Z": 55808,
         "Room": 53
       },
-      "Clicks": -3,
-      "FloorTexture": 65535,
-      "SideTexture": 1290,
-      "Flags": 15
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "ZSlant": -1
     },
     {
-      "EMType": 1,
-      "Location": {
-        "X": 41613,
-        "Y": 2816,
-        "Z": 56799,
-        "Room": 53
-      },
-      "Clicks": -2,
-      "FloorTexture": 65535,
-      "SideTexture": 1287,
-      "Flags": 15
+      "Comments": "Move some faces for the new slopes.",
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 53,
+          "FaceIndex": 69,
+          "VertexChanges": {
+            "0": {
+              "Y": -512
+            },
+            "1": {
+              "Y": -512
+            },
+            "2": {
+              "Y": -512
+            },
+            "3": {
+              "Y": -512
+            }
+          }
+        },
+        {
+          "RoomNumber": 53,
+          "FaceIndex": 72,
+          "VertexChanges": {
+            "0": {
+              "Y": -512
+            },
+            "1": {
+              "Y": -512
+            },
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 53,
+          "FaceIndex": 75,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        }
+      ]
     },
     {
-      "EMType": 1,
-      "Location": {
-        "X": 41613,
-        "Y": 2816,
-        "Z": 55775,
-        "Room": 53
+      "Comments": "And add some faces to fill gaps.",
+      "EMType": 26,
+      "Tags": [
+        9
+      ],
+      "Quads": {
+        "53": [
+          {
+            "Vertices": [
+              211,
+              214,
+              101,
+              100
+            ],
+            "Texture": 1332
+          },
+          {
+            "Vertices": [
+              213,
+              212,
+              69,
+              70
+            ],
+            "Texture": 1332
+          },
+          {
+            "Vertices": [
+              215,
+              218,
+              103,
+              101
+            ],
+            "Texture": 1332
+          },
+          {
+            "Vertices": [
+              217,
+              216,
+              70,
+              72
+            ],
+            "Texture": 1332
+          }
+        ]
       },
-      "Clicks": -1,
-      "FloorTexture": 65535,
-      "SideTexture": 1442,
-      "Flags": 15
+      "Triangles": {
+        "53": [
+          {
+            "Vertices": [
+              219,
+              106,
+              103
+            ],
+            "Texture": 1407
+          },
+          {
+            "Vertices": [
+              72,
+              76,
+              220
+            ],
+            "Texture": 1407
+          }
+        ]
+      }
     }
   ],
   "Any": [

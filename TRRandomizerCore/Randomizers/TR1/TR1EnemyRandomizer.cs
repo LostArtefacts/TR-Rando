@@ -705,7 +705,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             _resultantEnemies.Add(newEntityType);
         }
 
-        if (level.Is(TR1LevelNames.COLOSSEUM) && !Settings.PuristMode)
+        if (level.Is(TR1LevelNames.COLOSSEUM) && Settings.FixOGBugs)
         {
             FixColosseumBats(level);
         }

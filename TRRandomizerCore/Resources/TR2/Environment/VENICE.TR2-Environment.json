@@ -1,6 +1,388 @@
 {
-  "All": [],
-  "NonPurist": [],
+  "All": [
+    {
+      "Comments": "Shift the rectangle in room 101 up to make way for a doorway.",
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 101,
+          "FaceIndex": 2,
+          "VertexChanges": {
+            "0": {
+              "Y": -1024
+            },
+            "1": {
+              "Y": -1024
+            }
+          }
+        },
+        {
+          "RoomNumber": 22,
+          "FaceIndex": 211,
+          "VertexChanges": {
+            "0": {
+              "Y": 512
+            },
+            "1": {
+              "Y": 512
+            }
+          }
+        },
+        {
+          "RoomNumber": 22,
+          "FaceIndex": 212,
+          "VertexChanges": {
+            "2": {
+              "Y": -512
+            },
+            "3": {
+              "Y": -512
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Refacing for above so textures aren't squashed.",
+      "EMType": 21,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1575": {
+          "101": {
+            "Rectangles": [
+              2
+            ]
+          }
+        },
+        "1612": {
+          "22": {
+            "Rectangles": [
+              212
+            ]
+          }
+        },
+        "1613": {
+          "22": {
+            "Rectangles": [
+              211
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Comments": "Make visibility portals between rooms 101 & 121.",
+      "EMType": 81,
+      "Tags": [
+        9
+      ],
+      "Portals": [
+        {
+          "BaseRoom": 101,
+          "AdjoiningRoom": 121,
+          "Normal": {
+            "X": 1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": 2304,
+              "Z": 2048
+            },
+            {
+              "X": 1024,
+              "Y": 2304,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": 1024,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": 1024,
+              "Z": 2048
+            }
+          ]
+        },
+        {
+          "BaseRoom": 121,
+          "AdjoiningRoom": 101,
+          "Normal": {
+            "X": -1
+          },
+          "Vertices": [
+            {
+              "X": 12288,
+              "Y": 1280,
+              "Z": 4096
+            },
+            {
+              "X": 12288,
+              "Y": 1280,
+              "Z": 3072
+            },
+            {
+              "X": 12288,
+              "Y": 2304,
+              "Z": 3072
+            },
+            {
+              "X": 12288,
+              "Y": 2304,
+              "Z": 4096
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Comments": "Make visibility portals between rooms 22 & 121.",
+      "EMType": 81,
+      "Tags": [
+        9
+      ],
+      "Portals": [
+        {
+          "BaseRoom": 22,
+          "AdjoiningRoom": 121,
+          "Normal": {
+            "X": -1
+          },
+          "Vertices": [
+            {
+              "X": 13312,
+              "Y": 1024,
+              "Z": 2048
+            },
+            {
+              "X": 13312,
+              "Y": 1024,
+              "Z": 3072
+            },
+            {
+              "X": 13312,
+              "Y": 2048,
+              "Z": 3072
+            },
+            {
+              "X": 13312,
+              "Y": 2048,
+              "Z": 2048
+            }
+          ]
+        },
+        {
+          "BaseRoom": 121,
+          "AdjoiningRoom": 22,
+          "Normal": {
+            "X": 1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": 1024,
+              "Z": 4096
+            },
+            {
+              "X": 1024,
+              "Y": 1024,
+              "Z": 5120
+            },
+            {
+              "X": 1024,
+              "Y": 2048,
+              "Z": 5120
+            },
+            {
+              "X": 1024,
+              "Y": 2048,
+              "Z": 4096
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Comments": "Make collisional portals between rooms 101 & 121.",
+      "EMType": 82,
+      "Tags": [
+        9
+      ],
+      "Portals": {
+        "101": {
+          "121": [
+            {
+              "X": 66467,
+              "Y": 2304,
+              "Z": 32272
+            }
+          ]
+        },
+        "121": {
+          "101": [
+            {
+              "X": 66669,
+              "Y": 2304,
+              "Z": 32257
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Make collisional portals between rooms 22 & 121.",
+      "EMType": 82,
+      "Tags": [
+        9
+      ],
+      "Portals": {
+        "22": {
+          "121": [
+            {
+              "X": 55360,
+              "Y": 2048,
+              "Z": 33280
+            }
+          ]
+        },
+        "121": {
+          "22": [
+            {
+              "X": 55229,
+              "Y": 2048,
+              "Z": 33280
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Render the skybox in room 22, 101 and 106 to avoid issues when looking into the glass room.",
+      "EMType": 121,
+      "Tags": [
+        9
+      ],
+      "Rooms": [
+        22,
+        101,
+        106
+      ],
+      "IsSkyboxVisible": true
+    },
+    {
+      "Comments": "Add a breeze.",
+      "EMType": 121,
+      "Tags": [
+        9
+      ],
+      "Rooms": [
+        121
+      ],
+      "IsWindy": true
+    },
+    {
+      "Comments": "Remove some rectangles we no longer need.",
+      "EMType": 22,
+      "Tags": [
+        9
+      ],
+      "GeometryMap": {
+        "121": {
+          "Rectangles": [
+            118,
+            12
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Convert a window into a door.",
+      "EMType": 45,
+      "Tags": [
+        9
+      ],
+      "EntityIndex": 29,
+      "NewEntityType": 109
+    },
+    {
+      "Comments": "Change its lighting.",
+      "EMType": 48,
+      "Tags": [
+        9
+      ],
+      "EntityIndex": 29,
+      "Intensity1": 4096,
+      "Intensity2": 4096
+    },
+    {
+      "Comments": "Move the door to the first portal.",
+      "EMType": 44,
+      "Tags": [
+        9
+      ],
+      "EntityIndex": 29,
+      "TargetLocation": {
+        "X": 67072,
+        "Y": 2304,
+        "Z": 32256,
+        "Room": 101,
+        "Angle": 16384
+      }
+    },
+    {
+      "Comments": "Move the trigger for what's now the door. Only usable from one side.",
+      "EMType": 67,
+      "Tags": [
+        9
+      ],
+      "BaseLocation": {
+        "X": 44543,
+        "Y": -1280,
+        "Z": 41503,
+        "Room": 24
+      },
+      "NewLocation": {
+        "X": 62986,
+        "Y": 2304,
+        "Z": 32257,
+        "Room": 121
+      }
+    },
+    {
+      "Comments": "Duplicate the trigger to span the whole room.",
+      "EMType": 63,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 62986,
+          "Y": 2304,
+          "Z": 31233,
+          "Room": 121
+        },
+        {
+          "X": 62986,
+          "Y": 2304,
+          "Z": 30209,
+          "Room": 121
+        }
+      ],
+      "BaseLocation": {
+        "X": 62986,
+        "Y": 2304,
+        "Z": 32257,
+        "Room": 121
+      }
+    }
+  ],
   "Any": [
     [
       {
@@ -153,324 +535,6 @@
           "Room": 22
         },
         "IsNegativeZ": true
-      }
-    ],
-    [
-      {
-        "Comments": "Shift the rectangle in room 101 up to make way for a doorway.",
-        "EMType": 23,
-        "Modifications": [
-          {
-            "RoomNumber": 101,
-            "FaceIndex": 2,
-            "VertexChanges": {
-              "0": {
-                "Y": -1024
-              },
-              "1": {
-                "Y": -1024
-              }
-            }
-          },
-          {
-            "RoomNumber": 22,
-            "FaceIndex": 211,
-            "VertexChanges": {
-              "0": {
-                "Y": 512
-              },
-              "1": {
-                "Y": 512
-              }
-            }
-          },
-          {
-            "RoomNumber": 22,
-            "FaceIndex": 212,
-            "VertexChanges": {
-              "2": {
-                "Y": -512
-              },
-              "3": {
-                "Y": -512
-              }
-            }
-          }
-        ]
-      },
-      {
-        "Comments": "Refacing for above so textures aren't squashed.",
-        "EMType": 21,
-        "TextureMap": {
-          "1575": {
-            "101": {
-              "Rectangles": [
-                2
-              ]
-            }
-          },
-          "1612": {
-            "22": {
-              "Rectangles": [
-                212
-              ]
-            }
-          },
-          "1613": {
-            "22": {
-              "Rectangles": [
-                211
-              ]
-            }
-          }
-        }
-      },
-      {
-        "Comments": "Make visibility portals between rooms 101 & 121.",
-        "EMType": 81,
-        "Portals": [
-          {
-            "BaseRoom": 101,
-            "AdjoiningRoom": 121,
-            "Normal": {
-              "X": 1
-            },
-            "Vertices": [
-              {
-                "X": 1024,
-                "Y": 2304,
-                "Z": 2048
-              },
-              {
-                "X": 1024,
-                "Y": 2304,
-                "Z": 1024
-              },
-              {
-                "X": 1024,
-                "Y": 1024,
-                "Z": 1024
-              },
-              {
-                "X": 1024,
-                "Y": 1024,
-                "Z": 2048
-              }
-            ]
-          },
-          {
-            "BaseRoom": 121,
-            "AdjoiningRoom": 101,
-            "Normal": {
-              "X": -1
-            },
-            "Vertices": [
-              {
-                "X": 12288,
-                "Y": 1280,
-                "Z": 4096
-              },
-              {
-                "X": 12288,
-                "Y": 1280,
-                "Z": 3072
-              },
-              {
-                "X": 12288,
-                "Y": 2304,
-                "Z": 3072
-              },
-              {
-                "X": 12288,
-                "Y": 2304,
-                "Z": 4096
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "Comments": "Make visibility portals between rooms 22 & 121.",
-        "EMType": 81,
-        "Portals": [
-          {
-            "BaseRoom": 22,
-            "AdjoiningRoom": 121,
-            "Normal": {
-              "X": -1
-            },
-            "Vertices": [
-              {
-                "X": 13312,
-                "Y": 1024,
-                "Z": 2048
-              },
-              {
-                "X": 13312,
-                "Y": 1024,
-                "Z": 3072
-              },
-              {
-                "X": 13312,
-                "Y": 2048,
-                "Z": 3072
-              },
-              {
-                "X": 13312,
-                "Y": 2048,
-                "Z": 2048
-              }
-            ]
-          },
-          {
-            "BaseRoom": 121,
-            "AdjoiningRoom": 22,
-            "Normal": {
-              "X": 1
-            },
-            "Vertices": [
-              {
-                "X": 1024,
-                "Y": 1024,
-                "Z": 4096
-              },
-              {
-                "X": 1024,
-                "Y": 1024,
-                "Z": 5120
-              },
-              {
-                "X": 1024,
-                "Y": 2048,
-                "Z": 5120
-              },
-              {
-                "X": 1024,
-                "Y": 2048,
-                "Z": 4096
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "Comments": "Make collisional portals between rooms 101 & 121.",
-        "EMType": 82,
-        "Portals": {
-          "101": {
-            "121": [
-              {
-                "X": 66467,
-                "Y": 2304,
-                "Z": 32272
-              }
-            ]
-          },
-          "121": {
-            "101": [
-              {
-                "X": 66669,
-                "Y": 2304,
-                "Z": 32257
-              }
-            ]
-          }
-        }
-      },
-      {
-        "Comments": "Make collisional portals between rooms 22 & 121.",
-        "EMType": 82,
-        "Portals": {
-          "22": {
-            "121": [
-              {
-                "X": 55360,
-                "Y": 2048,
-                "Z": 33280
-              }
-            ]
-          },
-          "121": {
-            "22": [
-              {
-                "X": 55229,
-                "Y": 2048,
-                "Z": 33280
-              }
-            ]
-          }
-        }
-      },
-      {
-        "Comments": "Render the skybox in room 22, 101 and 106 to avoid issues when looking into the glass room.",
-        "EMType": 121,
-        "Rooms": [
-          22,
-          101,
-          106
-        ],
-        "IsSkyboxVisible": true
-      },
-      {
-        "Comments": "Add a breeze.",
-        "EMType": 121,
-        "Rooms": [
-          121
-        ],
-        "IsWindy": true
-      },
-      {
-        "Comments": "Remove some rectangles we no longer need.",
-        "EMType": 22,
-        "GeometryMap": {
-          "121": {
-            "Rectangles": [
-              118,
-              12
-            ]
-          }
-        }
-      },
-      {
-        "Comments": "Convert a window into a door.",
-        "EMType": 45,
-        "EntityIndex": 29,
-        "NewEntityType": 109
-      },
-      {
-        "Comments": "Change its lighting.",
-        "EMType": 48,
-        "EntityIndex": 29,
-        "Intensity1": 4096,
-        "Intensity2": 4096
-      },
-      {
-        "Comments": "Move the door to the first portal.",
-        "EMType": 44,
-        "EntityIndex": 29,
-        "TargetLocation": {
-          "X": 67072,
-          "Y": 2304,
-          "Z": 32256,
-          "Room": 101,
-          "Angle": 16384
-        }
-      },
-      {
-        "Comments": "Move the trigger for what's now the door. Only usable from one side.",
-        "EMType": 67,
-        "BaseLocation": {
-          "X": 44543,
-          "Y": -1280,
-          "Z": 41503,
-          "Room": 24
-        },
-        "NewLocation": {
-          "X": 66058,
-          "Y": 2304,
-          "Z": 32257,
-          "Room": 121
-        }
       }
     ]
   ],

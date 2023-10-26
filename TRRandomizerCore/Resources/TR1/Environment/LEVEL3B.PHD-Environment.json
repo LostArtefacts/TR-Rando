@@ -19,12 +19,13 @@
       "Swaps": {
         "27": 42
       }
-    }
-  ],
-  "NonPurist": [
+    },
     {
       "Comments": "Patch holes in the wall in room 8.",
       "EMType": 23,
+      "Tags": [
+        10
+      ],
       "Modifications": [
         {
           "RoomNumber": 8,
@@ -49,6 +50,25 @@
               "Y": 256
             }
           }
+        }
+      ]
+    },
+    {
+      "Comments": "Remove antipads after picking up the scion that normally shut off the tomb.",
+      "EMType": 62,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 64000,
+          "Z": 61952,
+          "Room": 47
+        },
+        {
+          "X": 61952,
+          "Z": 61952,
+          "Room": 47
         }
       ]
     }

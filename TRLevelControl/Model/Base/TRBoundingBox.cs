@@ -3,7 +3,7 @@ using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TRBoundingBox : ISerializableCompact
+public class TRBoundingBox : ISerializableCompact, ICloneable
 {
     public short MinX { get; set; }
 
@@ -16,6 +16,22 @@ public class TRBoundingBox : ISerializableCompact
     public short MinZ { get; set; }
 
     public short MaxZ { get; set; }
+
+    public TRBoundingBox Clone()
+    {
+        return new()
+        {
+            MinX = MinX,
+            MaxX = MaxX,
+            MinY = MinY,
+            MaxY = MaxY,
+            MinZ = MinZ,
+            MaxZ = MaxZ
+        };
+    }
+
+    object ICloneable.Clone()
+        => Clone();
 
     public override string ToString()
     {

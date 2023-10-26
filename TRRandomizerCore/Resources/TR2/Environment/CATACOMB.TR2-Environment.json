@@ -3,6 +3,9 @@
     {
       "Comments": "Fix OG issue of incorrect box overlaps between rooms 74 & 35.",
       "EMType": 122,
+      "Tags": [
+        10
+      ],
       "RemoveLinks": {
         "466": [
           704
@@ -15,9 +18,273 @@
           467
         ]
       }
+    },
+    {
+      "Comments": "Add some return ladders from the first pool drop.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1273": {
+          "19": {
+            "Rectangles": [
+              3,
+              2
+            ]
+          },
+          "125": {
+            "Rectangles": [
+              3,
+              4
+            ]
+          },
+          "117": {
+            "Rectangles": [
+              19
+            ]
+          }
+        },
+        "1433": {
+          "19": {
+            "Rectangles": [
+              1
+            ]
+          },
+          "125": {
+            "Rectangles": [
+              2
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 28160,
+        "Y": 10752,
+        "Z": 40448,
+        "Room": 19
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1273": {
+          "19": {
+            "Rectangles": [
+              9,
+              10
+            ]
+          },
+          "125": {
+            "Rectangles": [
+              11,
+              12
+            ]
+          },
+          "117": {
+            "Rectangles": [
+              21
+            ]
+          }
+        },
+        "1433": {
+          "19": {
+            "Rectangles": [
+              8
+            ]
+          },
+          "125": {
+            "Rectangles": [
+              10
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 28160,
+        "Y": 10752,
+        "Z": 41472,
+        "Room": 19
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 27136,
+        "Y": 7424,
+        "Z": 39424,
+        "Room": 117
+      },
+      "IsNegativeX": true,
+      "IsNegativeZ": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 27136,
+        "Y": 7424,
+        "Z": 40448,
+        "Room": 117
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 27136,
+        "Y": 7424,
+        "Z": 41472,
+        "Room": 117
+      },
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 27136,
+        "Y": 7424,
+        "Z": 42496,
+        "Room": 117
+      },
+      "IsPositiveZ": true,
+      "IsNegativeX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 28160,
+        "Y": 7424,
+        "Z": 39424,
+        "Room": 117
+      },
+      "IsNegativeZ": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 28160,
+        "Y": 7424,
+        "Z": 42496,
+        "Room": 117
+      },
+      "IsPositiveZ": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 29184,
+        "Y": 7424,
+        "Z": 39424,
+        "Room": 117
+      },
+      "IsNegativeZ": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 29184,
+        "Y": 7424,
+        "Z": 42496,
+        "Room": 117
+      },
+      "IsPositiveZ": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 30208,
+        "Y": 7424,
+        "Z": 39424,
+        "Room": 117
+      },
+      "IsPositiveX": true,
+      "IsNegativeZ": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 30208,
+        "Y": 7424,
+        "Z": 40448,
+        "Room": 117
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 30208,
+        "Y": 7424,
+        "Z": 41472,
+        "Room": 117
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 30208,
+        "Y": 7424,
+        "Z": 42496,
+        "Room": 117
+      },
+      "IsPositiveX": true,
+      "IsPositiveZ": true
     }
   ],
-  "NonPurist": [],
   "Any": [
     [
       {
