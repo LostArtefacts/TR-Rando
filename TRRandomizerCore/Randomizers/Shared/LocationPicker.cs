@@ -17,6 +17,11 @@ public class LocationPicker
         _generator = generator;
     }
 
+    public List<Location> GetLocations()
+    {
+        return _locations;
+    }
+
     public Location GetPickupLocation()
     {
         return _locations[_generator.Next(0, _locations.Count)];

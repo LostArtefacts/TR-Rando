@@ -702,6 +702,116 @@ public static class TR2TypeUtilities
         return DoorTypes().Contains(type);
     }
 
+    public static List<TR2Type> TrapdoorTypes()
+    {
+        return new()
+        {
+            TR2Type.Trapdoor1,
+            TR2Type.Trapdoor2,
+            TR2Type.Trapdoor3,
+        };
+    }
+
+    public static bool IsTrapdoorType(TR2Type type)
+    {
+        return TrapdoorTypes().Contains(type);
+    }
+
+    public static List<TR2Type> BreakableWindows()
+    {
+        return new()
+        {
+            TR2Type.BreakableWindow1,
+            TR2Type.BreakableWindow2,
+            TR2Type.BreakableWindow3,
+            TR2Type.BreakableWindow4,
+        };
+    }
+
+    public static bool IsBridgeType(TR2Type type)
+    {
+        return Bridges().Contains(type);
+    }
+
+    public static List<TR2Type> Bridges()
+    {
+        return new()
+        {
+            TR2Type.BridgeFlat,
+            TR2Type.BridgeTilt1,
+            TR2Type.BridgeTilt2,
+        };
+    }
+
+    public static bool IsBreakableWindowType(TR2Type type)
+    {
+        return BreakableWindows().Contains(type);
+    }
+
+    public static List<TR2Type> UnrenderedTypes()
+    {
+        return new()
+        {
+            TR2Type.CameraTarget_N,
+            TR2Type.AlarmBell_N,
+            TR2Type.Alarm_N,
+            TR2Type.DoorBell_N,
+            TR2Type.DrippingWater_N,
+            TR2Type.BartoliHideoutClock_N,
+            TR2Type.SingingBirds_N,
+        };
+    }
+
+    public static bool IsUnrenderedType(TR2Type type)
+    {
+        return UnrenderedTypes().Contains(type);
+    }
+
+    public static List<TR2Type> VehicleTypes()
+    {
+        return new()
+        {
+            TR2Type.Boat,
+            TR2Type.RedSnowmobile,
+            TR2Type.BlackSnowmob,
+        };
+    }
+
+    public static bool IsVehicleType(TR2Type type)
+    {
+        return VehicleTypes().Contains(type);
+    }
+
+    public static bool CanSharePickupSpace(TR2Type type)
+    {
+        // Can we place a standard pickup on the same tile as this entity type?
+        return IsAnyPickupType(type)
+            || CanDropPickups(type, false, false)
+            || (TypeFamilies.ContainsKey(type) && TypeFamilies[type].Any(e => CanDropPickups(e, false, false)))
+            || (IsSwitchType(type) && type != TR2Type.UnderwaterSwitch)
+            || IsKeyholeType(type)
+            || IsSlotType(type)
+            || IsPushblockType(type)
+            || IsDoorType(type)
+            || IsTrapdoorType(type)
+            || IsUnrenderedType(type)
+            || IsVehicleType(type)
+            || IsBreakableWindowType(type)
+            || IsBridgeType(type)
+            || type == TR2Type.Lara
+            || type == TR2Type.Drawbridge
+            || type == TR2Type.FallingBlock
+            || type == TR2Type.LooseBoards
+            || type == TR2Type.RollingBall
+            || type == TR2Type.BouldersOrSnowballs
+            || type == TR2Type.RollingStorageDrums
+            || type == TR2Type.WaterfallMist_N
+            || type == TR2Type.Gondola
+            || type == TR2Type.ZiplineHandle
+            || type == TR2Type.Discgun
+            || type == TR2Type.StatueWithKnifeBlade;
+    }
+
     public static Dictionary<string, List<TR2Type>> DroppableEnemyTypes()
     {
         return new Dictionary<string, List<TR2Type>>

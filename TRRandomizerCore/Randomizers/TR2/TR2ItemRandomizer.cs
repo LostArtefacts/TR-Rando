@@ -7,6 +7,7 @@ using TRLevelControl.Model;
 using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
 using TRRandomizerCore.Utilities;
 using TRRandomizerCore.Zones;
@@ -21,20 +22,22 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
     // into predefined locations. See FindUnarmedPistolsLocation below.
     private int _unarmedLevelPistolIndex;
+    private readonly Dictionary<string, List<Location>> _excludedLocations;
     private readonly Dictionary<string, List<Location>> _pistolLocations;
 
+    private readonly LocationPicker _picker;
     private ItemSpriteRandomizer<TR2Type> _spriteRandomizer;
 
     public TR2ItemRandomizer()
     {
+        _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\invalid_item_locations.json"));
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\unarmed_locations.json"));
+        _picker = new();
     }
 
     public override void Randomize(int seed)
     {
         _generator = new Random(seed);
-
-        Dictionary<string, List<Location>> locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\item_locations.json"));
 
         foreach (TR2ScriptedLevel lvl in Levels)
         {
@@ -43,8 +46,10 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
             FindUnarmedPistolsLocation();
 
+            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
+
             //Apply the modifications
-            RepositionItems(locations[_levelInstance.Name]);
+            RandomizeItemLocations(_levelInstance);
 
             if (Settings.RandomizeItemTypes)
                 RandomizeItemTypes();
@@ -55,9 +60,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             RandomizeVehicles();
 
             RandomizeSeraph();
-
-           // if (Settings.RandomizeItemSprites)
-             //   RandomizeSprites();
 
             //Write back the level file
             SaveLevelInstance();
@@ -71,12 +73,11 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     public void RandomizeLevelsSprites()
     {
-       
         foreach (TR2ScriptedLevel lvl in Levels)
         {
             //Read the level into a combined data/script level object
             LoadLevelInstance(lvl);
-           
+
             RandomizeSprites();
 
             //Write back the level file
@@ -87,16 +88,37 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 break;
             }
         }
-
     }
 
+    private List<Location> GetItemLocationPool(TR2CombinedLevel level)
+    {
+        List<Location> exclusions = new();
+        if (_excludedLocations.ContainsKey(level.Name))
+        {
+            exclusions.AddRange(_excludedLocations[level.Name]);
+        }
+
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level.Data);
+
+        foreach (TR2Entity entity in level.Data.Entities)
+        {
+            if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
+            {
+                exclusions.Add(LocationPicker.CreateExcludedLocation(entity, loc =>
+                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData)));
+            }
+        }
+
+        TR2LocationGenerator generator = new();
+        return generator.Generate(level.Data, exclusions);
+    }
 
     private void RandomizeSprites()
     {
         // If the _spriteRandomizer doesn't exists it gets fed all the settings of the rando and Lists of the game once. 
         if (_spriteRandomizer == null)
         {
-
             _spriteRandomizer = new ItemSpriteRandomizer<TR2Type>
             {
                 StandardItemTypes = TR2TypeUtilities.GetGunTypes().Concat(TR2TypeUtilities.GetAmmoTypes()).ToList(),
@@ -267,227 +289,194 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
     }
 
-    private void RepositionItems(List<Location> ItemLocs)
+    public void RandomizeItemLocations(TR2CombinedLevel level)
     {
-        if (ItemLocs.Count > 0)
+        if (level.IsAssault)
         {
-            //We are currently looking guns + ammo
-            List<TR2Type> targetents = new();
-            if (Settings.RandomizeItemPositions)
+            return;
+        }
+
+        List<TR2Type> targetTypes = new();
+        if (Settings.RandomizeItemPositions)
+        {
+            targetTypes.AddRange(TR2TypeUtilities.GetGunTypes());
+            targetTypes.AddRange(TR2TypeUtilities.GetAmmoTypes());
+        }
+
+        if (Settings.IncludeKeyItems)
+        {
+            targetTypes.AddRange(TR2TypeUtilities.GetKeyItemTypes());
+        }
+
+        if (targetTypes.Count == 0)
+        {
+            return;
+        }
+
+        ZonedLocationCollection zonedLocations = new();
+        zonedLocations.PopulateZones(GetResourcePath($@"TR2\Zones\{level.Name}-Zones.json"), _picker.GetLocations(), ZonePopulationMethod.KeyPuzzleQuestOnly);
+
+        for (int i = 0; i < level.Data.Entities.Count; i++)
+        {
+            TR2Entity entity = level.Data.Entities[i];
+            if (!targetTypes.Contains(entity.TypeID)
+                || ItemFactory.IsItemLocked(_levelInstance.Name, i)
+                || i == _unarmedLevelPistolIndex)
             {
-                targetents.AddRange(TR2TypeUtilities.GetGunTypes());
-                targetents.AddRange(TR2TypeUtilities.GetAmmoTypes());
+                continue;
             }
 
-            //And also key items...
-            if (Settings.IncludeKeyItems)
+            Location location = TR2TypeUtilities.IsKeyItemType(entity.TypeID)
+                ? GetKeyItemLocation(entity, i, zonedLocations)
+                : _picker.GetPickupLocation();
+
+            if (location != null)
             {
-                targetents.AddRange(TR2TypeUtilities.GetKeyItemTypes());
+                _picker.SetLocation(entity, location);
             }
+        }
+    }
 
-            if (targetents.Count == 0)
-            {
-                return;
-            }
+    private Location GetKeyItemLocation(TR2Entity entity, int index, ZonedLocationCollection zonedLocations)
+    {
+        Location location = null;
 
-            //It's important to now start zoning key items as softlocks must be avoided.
-            ZonedLocationCollection ZonedLocations = new();
-            ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), ItemLocs, ZonePopulationMethod.KeyPuzzleQuestOnly);
-
-            for (int i = 0; i < _levelInstance.Data.Entities.Count; i++)
-            {
-                if (ItemFactory.IsItemLocked(_levelInstance.Name, i))
+        switch (entity.TypeID)
+        {
+            case TR2Type.Puzzle1_S_P:
+                if (zonedLocations.Puzzle1Zone.Count > 0)
                 {
-                    continue;
-                }
-
-                if (targetents.Contains(_levelInstance.Data.Entities[i].TypeID) && (i != _unarmedLevelPistolIndex))
-                {
-                    Location RandomLocation = new();
-                    bool FoundPossibleLocation = false;
-
-                    if (TR2TypeUtilities.IsKeyItemType(_levelInstance.Data.Entities[i].TypeID))
+                    if (_levelInstance.Name == TR2LevelNames.DA)
                     {
-                        TR2Type type = _levelInstance.Data.Entities[i].TypeID;
+                        int burnerChipID = 120;
+                        int consoleChipID = 7;
 
-                        // Apply zoning for key items
-                        switch (type)
+                        //Special case - multiple chips
+                        if (index == burnerChipID)
                         {
-                            case TR2Type.Puzzle1_S_P:
-                                if (ZonedLocations.Puzzle1Zone.Count > 0)
-                                {
-                                    if (_levelInstance.Name == TR2LevelNames.DA)
-                                    {
-                                        int burnerChipID = 120;
-                                        int consoleChipID = 7;
-
-                                        RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
-
-                                        //Special case - multiple chips
-                                        if (i == burnerChipID)
-                                        {
-                                            //Burner Chip
-                                            List<int> AllowedBurnerRooms = new() { 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 29, 32, 75, 80, 83, 84, 85, 86, 87, 88, 89 };
-
-                                            while (!AllowedBurnerRooms.Contains(RandomLocation.Room))
-                                            {
-                                                RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
-                                            }
-
-                                            FoundPossibleLocation = true;
-                                        }
-                                        else if (i == consoleChipID)
-                                        {
-                                            //Center Console Chip
-                                            List<int> AllowedConsoleRooms = new() { 2, 12, 13, 14, 15, 16, 17, 21, 22, 23, 24, 25, 26, 29, 30, 32, 34, 35, 64, 65, 66, 68, 69, 70, 75, 80, 82, 83, 84, 85, 86, 87, 88, 89 };
-
-                                            while (!AllowedConsoleRooms.Contains(RandomLocation.Room))
-                                            {
-                                                RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
-                                            }
-
-                                            FoundPossibleLocation = true;
-                                        }
-                                        else
-                                        {
-                                            RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
-                                            FoundPossibleLocation = true;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
-                                        FoundPossibleLocation = true;
-                                    }
-                                }
-                                break;
-                            case TR2Type.Puzzle2_S_P:
-                                if (ZonedLocations.Puzzle2Zone.Count > 0)
-                                {
-                                    RandomLocation = ZonedLocations.Puzzle2Zone[_generator.Next(0, ZonedLocations.Puzzle2Zone.Count)];
-                                    FoundPossibleLocation = true;
-                                }
-                                break;
-                            case TR2Type.Puzzle3_S_P:
-                                if (ZonedLocations.Puzzle3Zone.Count > 0)
-                                {
-                                    RandomLocation = ZonedLocations.Puzzle3Zone[_generator.Next(0, ZonedLocations.Puzzle3Zone.Count)];
-                                    FoundPossibleLocation = true;
-                                }
-                                break;
-                            case TR2Type.Puzzle4_S_P:
-                                if (ZonedLocations.Puzzle4Zone.Count > 0)
-                                {
-                                    RandomLocation = ZonedLocations.Puzzle4Zone[_generator.Next(0, ZonedLocations.Puzzle4Zone.Count)];
-                                    FoundPossibleLocation = true;
-                                }
-                                break;
-                            case TR2Type.Key1_S_P:
-                                if (ZonedLocations.Key1Zone.Count > 0)
-                                {
-                                    if (_levelInstance.Name == TR2LevelNames.OPERA)
-                                    {
-                                        int startKeyID = 172;
-                                        int fanKeyID = 118;
-
-                                        //Special case - multiple keys
-                                        if (i == startKeyID)
-                                        {
-                                            //Start key
-                                            List<int> AllowedStartRooms = new() { 10, 23, 25, 27, 29, 30, 31, 32, 33, 35, 127, 162, 163 };
-
-                                            while (!AllowedStartRooms.Contains(RandomLocation.Room))
-                                            {
-                                                RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
-                                            }
-
-                                            FoundPossibleLocation = true;
-                                        }
-                                        else if (i == fanKeyID)
-                                        {
-                                            //Fan area key
-                                            List<int> AllowedFanRooms = new() { 1, 5, 8, 16, 37, 38, 44, 46, 47, 48, 49, 50, 52, 53, 55, 57, 59, 60, 63, 65, 66, 67, 68, 69, 70, 71, 72, 75, 76, 77, 78, 82, 83, 86, 87, 88, 89, 90, 93, 95, 96, 100, 102, 103, 105, 107, 109, 111, 120, 132, 139, 141, 143, 144, 151, 153, 154, 155, 156, 158, 159, 161, 174, 176, 177, 178, 179, 183, 185, 187, 188, 189 };
-
-                                            while (!AllowedFanRooms.Contains(RandomLocation.Room))
-                                            {
-                                                RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
-                                            }
-
-                                            FoundPossibleLocation = true;
-                                        }
-                                        else
-                                        {
-                                            RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
-                                            FoundPossibleLocation = true;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
-                                        FoundPossibleLocation = true;
-                                    }
-                                }
-                                break;
-                            case TR2Type.Key2_S_P:
-                                if (ZonedLocations.Key2Zone.Count > 0)
-                                {
-                                    RandomLocation = ZonedLocations.Key2Zone[_generator.Next(0, ZonedLocations.Key2Zone.Count)];
-                                    FoundPossibleLocation = true;
-                                }
-                                break;
-                            case TR2Type.Key3_S_P:
-                                if (ZonedLocations.Key3Zone.Count > 0)
-                                {
-                                    RandomLocation = ZonedLocations.Key3Zone[_generator.Next(0, ZonedLocations.Key3Zone.Count)];
-                                    FoundPossibleLocation = true;
-                                }
-                                break;
-                            case TR2Type.Key4_S_P:
-                                if (ZonedLocations.Key4Zone.Count > 0)
-                                {
-                                    RandomLocation = ZonedLocations.Key4Zone[_generator.Next(0, ZonedLocations.Key4Zone.Count)];
-                                    FoundPossibleLocation = true;
-                                }
-                                break;
-                            case TR2Type.Quest1_S_P:
-                                if (ZonedLocations.Quest1Zone.Count > 0)
-                                {
-                                    RandomLocation = ZonedLocations.Quest1Zone[_generator.Next(0, ZonedLocations.Quest1Zone.Count)];
-                                    FoundPossibleLocation = true;
-                                }
-                                break;
-                            case TR2Type.Quest2_S_P:
-                                if (ZonedLocations.Quest2Zone.Count > 0)
-                                {
-                                    RandomLocation = ZonedLocations.Quest2Zone[_generator.Next(0, ZonedLocations.Quest2Zone.Count)];
-                                    FoundPossibleLocation = true;
-                                }
-                                break;
-                            default:
-                                break;
+                            //Burner Chip
+                            List<int> allowedBurnerRooms = new() { 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 29, 32, 75, 80, 83, 84, 85, 86, 87, 88, 89 };
+                            do
+                            {
+                                location = zonedLocations.Puzzle1Zone[_generator.Next(0, zonedLocations.Puzzle1Zone.Count)];
+                            }
+                            while (!allowedBurnerRooms.Contains(location.Room));
+                        }
+                        else if (index == consoleChipID)
+                        {
+                            //Center Console Chip
+                            List<int> allowedConsoleRooms = new() { 2, 12, 13, 14, 15, 16, 17, 21, 22, 23, 24, 25, 26, 29, 30, 32, 34, 35, 64, 65, 66, 68, 69, 70, 75, 80, 82, 83, 84, 85, 86, 87, 88, 89 };
+                            do
+                            {
+                                location = zonedLocations.Puzzle1Zone[_generator.Next(0, zonedLocations.Puzzle1Zone.Count)];
+                            }
+                            while (!allowedConsoleRooms.Contains(location.Room));
+                        }
+                        else
+                        {
+                            location = zonedLocations.Puzzle1Zone[_generator.Next(0, zonedLocations.Puzzle1Zone.Count)];
                         }
                     }
                     else
                     {
-                        //Place standard items as normal for now
-                        RandomLocation = ItemLocs[_generator.Next(0, ItemLocs.Count)];
-                        FoundPossibleLocation = true;
-                    }
-
-                    if (FoundPossibleLocation)
-                    {
-                        Location GlobalizedRandomLocation = SpatialConverters.TransformToLevelSpace(RandomLocation, _levelInstance.Data.Rooms[RandomLocation.Room].Info);
-
-                        _levelInstance.Data.Entities[i].Room = Convert.ToInt16(GlobalizedRandomLocation.Room);
-                        _levelInstance.Data.Entities[i].X = GlobalizedRandomLocation.X;
-                        _levelInstance.Data.Entities[i].Y = GlobalizedRandomLocation.Y;
-                        _levelInstance.Data.Entities[i].Z = GlobalizedRandomLocation.Z;
-                        _levelInstance.Data.Entities[i].Intensity1 = -1;
-                        _levelInstance.Data.Entities[i].Intensity2 = -1;
+                        location = zonedLocations.Puzzle1Zone[_generator.Next(0, zonedLocations.Puzzle1Zone.Count)];
                     }
                 }
-            }
+                break;
+            case TR2Type.Puzzle2_S_P:
+                if (zonedLocations.Puzzle2Zone.Count > 0)
+                {
+                    location = zonedLocations.Puzzle2Zone[_generator.Next(0, zonedLocations.Puzzle2Zone.Count)];
+                }
+                break;
+            case TR2Type.Puzzle3_S_P:
+                if (zonedLocations.Puzzle3Zone.Count > 0)
+                {
+                    location = zonedLocations.Puzzle3Zone[_generator.Next(0, zonedLocations.Puzzle3Zone.Count)];
+                }
+                break;
+            case TR2Type.Puzzle4_S_P:
+                if (zonedLocations.Puzzle4Zone.Count > 0)
+                {
+                    location = zonedLocations.Puzzle4Zone[_generator.Next(0, zonedLocations.Puzzle4Zone.Count)];
+                }
+                break;
+            case TR2Type.Key1_S_P:
+                if (zonedLocations.Key1Zone.Count > 0)
+                {
+                    if (_levelInstance.Name == TR2LevelNames.OPERA)
+                    {
+                        int startKeyID = 172;
+                        int fanKeyID = 118;
+
+                        //Special case - multiple keys
+                        if (index == startKeyID)
+                        {
+                            //Start key
+                            List<int> allowedStartRooms = new() { 10, 23, 25, 27, 29, 30, 31, 32, 33, 35, 127, 162, 163 };
+                            do
+                            {
+                                location = zonedLocations.Key1Zone[_generator.Next(0, zonedLocations.Key1Zone.Count)];
+                            }
+                            while (!allowedStartRooms.Contains(location.Room));
+                        }
+                        else if (index == fanKeyID)
+                        {
+                            //Fan area key
+                            List<int> allowedFanRooms = new() { 1, 5, 8, 16, 37, 38, 44, 46, 47, 48, 49, 50, 52, 53, 55, 57, 59, 60, 63, 65, 66, 67, 68, 69, 70, 71, 72, 75, 76, 77, 78, 82, 83, 86, 87, 88, 89, 90, 93, 95, 96, 100, 102, 103, 105, 107, 109, 111, 120, 132, 139, 141, 143, 144, 151, 153, 154, 155, 156, 158, 159, 161, 174, 176, 177, 178, 179, 183, 185, 187, 188, 189 };
+
+                            do
+                            {
+                                location = zonedLocations.Key1Zone[_generator.Next(0, zonedLocations.Key1Zone.Count)];
+                            }
+                            while (!allowedFanRooms.Contains(location.Room));
+                        }
+                        else
+                        {
+                            location = zonedLocations.Key1Zone[_generator.Next(0, zonedLocations.Key1Zone.Count)];
+                        }
+                    }
+                    else
+                    {
+                        location = zonedLocations.Key1Zone[_generator.Next(0, zonedLocations.Key1Zone.Count)];
+                    }
+                }
+                break;
+            case TR2Type.Key2_S_P:
+                if (zonedLocations.Key2Zone.Count > 0)
+                {
+                    location = zonedLocations.Key2Zone[_generator.Next(0, zonedLocations.Key2Zone.Count)];
+                }
+                break;
+            case TR2Type.Key3_S_P:
+                if (zonedLocations.Key3Zone.Count > 0)
+                {
+                    location = zonedLocations.Key3Zone[_generator.Next(0, zonedLocations.Key3Zone.Count)];
+                }
+                break;
+            case TR2Type.Key4_S_P:
+                if (zonedLocations.Key4Zone.Count > 0)
+                {
+                    location = zonedLocations.Key4Zone[_generator.Next(0, zonedLocations.Key4Zone.Count)];
+                }
+                break;
+            case TR2Type.Quest1_S_P:
+                if (zonedLocations.Quest1Zone.Count > 0)
+                {
+                    location = zonedLocations.Quest1Zone[_generator.Next(0, zonedLocations.Quest1Zone.Count)];
+                }
+                break;
+            case TR2Type.Quest2_S_P:
+                if (zonedLocations.Quest2Zone.Count > 0)
+                {
+                    location = zonedLocations.Quest2Zone[_generator.Next(0, zonedLocations.Quest2Zone.Count)];
+                }
+                break;
+            default:
+                break;
         }
+
+        return location;
     }
 
     private void RandomizeItemTypes()

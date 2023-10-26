@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using TRFDControl;
+using TRFDControl.Utilities;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -10,8 +12,10 @@ namespace LocationExport;
 class Program
 {
     private static TR1LevelControl _reader1;
+    private static TR2LevelControl _reader2;
     private static TR3LevelControl _reader3;
     private static Dictionary<string, List<Location>> _allTR1Exclusions;
+    private static Dictionary<string, List<Location>> _allTR2Exclusions;
     private static Dictionary<string, List<Location>> _allTR3Exclusions;
 
     static void Main(string[] args)
@@ -23,8 +27,10 @@ class Program
         }
 
         _reader1 = new();
+        _reader2 = new();
         _reader3 = new();
         _allTR1Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\invalid_item_locations.json"));
+        _allTR2Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\invalid_item_locations.json"));
         _allTR3Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR3\Locations\invalid_item_locations.json"));
         Dictionary<string, List<Location>> allLocations = new();
 
@@ -47,9 +53,23 @@ class Program
         else if (levelType.EndsWith(".TR2"))
         {
             TRFileVersion version = DetectVersion(args[0]);
-            if (version == TRFileVersion.TR3a || version == TRFileVersion.TR3b)
+            if (version == TRFileVersion.TR2)
+            {
+                allLocations[levelType] = ExportTR2Locations(levelType);
+            }
+            else if (version == TRFileVersion.TR3a || version == TRFileVersion.TR3b)
             {
                 allLocations[levelType] = ExportTR3Locations(levelType);
+            }
+        }
+        else if (levelType == "TR2")
+        {
+            foreach (string lvl in TR2LevelNames.AsList)
+            {
+                if (File.Exists(lvl))
+                {
+                    allLocations[lvl] = ExportTR2Locations(lvl);
+                }
             }
         }
         else if (levelType == "TR3")
@@ -143,6 +163,8 @@ class Program
     private static List<Location> ExportTR1Locations(string lvl)
     {
         TR1Level level = _reader1.Read(lvl);
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level);
         List<Location> exclusions = new();
         if (_allTR1Exclusions.ContainsKey(lvl))
         {
@@ -153,13 +175,8 @@ class Program
         {
             if (!TR1TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(new Location
-                {
-                    X = entity.X,
-                    Y = entity.Y,
-                    Z = entity.Z,
-                    Room = entity.Room
-                });
+                exclusions.Add(GenerateExcludedLocation(entity, loc =>
+                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
             }
         }
 
@@ -167,9 +184,35 @@ class Program
         return generator.Generate(level, exclusions);
     }
 
+    private static List<Location> ExportTR2Locations(string lvl)
+    {
+        TR2Level level = _reader2.Read(lvl);
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level);
+        List<Location> exclusions = new();
+        if (_allTR2Exclusions.ContainsKey(lvl))
+        {
+            exclusions.AddRange(_allTR2Exclusions[lvl]);
+        }
+
+        foreach (TR2Entity entity in level.Entities)
+        {
+            if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
+            {
+                exclusions.Add(GenerateExcludedLocation(entity, loc =>
+                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
+            }
+        }
+
+        TR2LocationGenerator generator = new();
+        return generator.Generate(level, exclusions);
+    }
+
     private static List<Location> ExportTR3Locations(string lvl)
     {
         TR3Level level = _reader3.Read(lvl);
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level);
         List<Location> exclusions = new();
         if (_allTR3Exclusions.ContainsKey(lvl))
         {
@@ -180,13 +223,8 @@ class Program
         {
             if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(new Location
-                {
-                    X = entity.X,
-                    Y = entity.Y,
-                    Z = entity.Z,
-                    Room = entity.Room
-                });
+                exclusions.Add(GenerateExcludedLocation(entity, loc =>
+                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
             }
         }
 
@@ -194,16 +232,42 @@ class Program
         return generator.Generate(level, exclusions);
     }
 
+    private static Location GenerateExcludedLocation<T>(TREntity<T> entity, Func<Location, TRRoomSector> sectorFunc)
+        where T : Enum
+    {
+        Location location = new()
+        {
+            X = entity.X,
+            Y = entity.Y,
+            Z = entity.Z,
+            Room = entity.Room,
+        };
+
+        TRRoomSector sector = sectorFunc(location);
+        while (sector.RoomBelow != TRConsts.NoRoom)
+        {
+            location.Y = (sector.Floor + 1) * TRConsts.Step1;
+            location.Room = sector.RoomBelow;
+            sector = sectorFunc(location);
+        }
+
+        location.Y = sector.Floor * TRConsts.Step1;
+        return location;
+    }
+
     private static void Usage()
     {
         Console.WriteLine();
-        Console.WriteLine("Usage: LocationExport [tr3 | tr3g | *.tr2] [export_path.json] [previous_path.json]");
+        Console.WriteLine("Usage: LocationExport [tr1 | tr2 | tr3 | tr3g | *.phd | *.tr2] [export_path.json] [previous_path.json]");
         Console.WriteLine();
 
         Console.WriteLine("Target Levels");
+        Console.WriteLine("\ttr1      - The original TR1 levels.");
+        Console.WriteLine("\ttr2      - The original TR2 levels.");
         Console.WriteLine("\ttr3      - The original TR3 levels.");
         Console.WriteLine("\ttr3g     - The TR3 Lost Artefact levels.");
-        Console.WriteLine("\t*.tr2    - Use a specific TR3 level file.");
+        Console.WriteLine("\t*.phd    - Use a specific TR1 level file.");
+        Console.WriteLine("\t*.tr2    - Use a specific TR2/TR3 level file.");
         Console.WriteLine();
 
         Console.WriteLine("Export Path");
