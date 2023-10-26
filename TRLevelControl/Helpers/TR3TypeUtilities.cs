@@ -650,6 +650,12 @@ public static class TR3TypeUtilities
             || IsKeyholeType(type)
             || IsSlotType(type)
             || IsLightType(type)
+            || IsBridge(type)
+            || IsTrapdoor(type)
+            || IsDoorType(type)
+            || IsPushblockType(type)
+            || type == TR3Type.FallingBlock
+            || type == TR3Type.RollingBallOrBarrel
             || type == TR3Type.Lara;
     }
 
