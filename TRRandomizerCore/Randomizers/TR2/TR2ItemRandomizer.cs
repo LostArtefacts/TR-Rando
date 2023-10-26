@@ -292,8 +292,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     public void RandomizeItemLocations(TR2CombinedLevel level)
     {
-        if (level.IsAssault
-            || (level.Is(TR2LevelNames.HOME) && (level.Script.RemovesWeapons || level.Script.RemovesAmmo)))
+        if (level.Is(TR2LevelNames.HOME) && (level.Script.RemovesWeapons || level.Script.RemovesAmmo))
         {
             return;
         }
@@ -316,7 +315,10 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
 
         ZonedLocationCollection zonedLocations = new();
-        zonedLocations.PopulateZones(GetResourcePath($@"TR2\Zones\{level.Name}-Zones.json"), _picker.GetLocations(), ZonePopulationMethod.KeyPuzzleQuestOnly);
+        if (!level.IsAssault)
+        {
+            zonedLocations.PopulateZones(GetResourcePath($@"TR2\Zones\{level.Name}-Zones.json"), _picker.GetLocations(), ZonePopulationMethod.KeyPuzzleQuestOnly);
+        }
 
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {

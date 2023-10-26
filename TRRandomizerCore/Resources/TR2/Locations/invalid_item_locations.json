@@ -5358,5 +5358,171 @@
       "Z": 70144,
       "Room": 9
     }
+  ],
+  "ASSAULT.TR2": [
+    {
+      "X": 60928,
+      "Y": 2560,
+      "Z": 79360,
+      "Room": 98,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 30208,
+      "Y": 256,
+      "Z": 65024,
+      "Room": 60
+    },
+    {
+      "X": 59904,
+      "Y": -1024,
+      "Z": 61952,
+      "Room": 20,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 59904,
+      "Y": -1024,
+      "Z": 60928,
+      "Room": 31,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 39424,
+      "Y": -1024,
+      "Z": 53760,
+      "Room": 30,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 31232,
+      "Y": 0,
+      "Z": 56832,
+      "Room": 29,
+      "Validated": false
+    },
+    {
+      "X": 27136,
+      "Y": -1024,
+      "Z": 53760,
+      "Room": 28,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 15872,
+      "Y": -1024,
+      "Z": 64000,
+      "Room": 27,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 15872,
+      "Y": -1024,
+      "Z": 82432,
+      "Room": 26,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 38400,
+      "Y": -1024,
+      "Z": 53760,
+      "Room": 29,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 15872,
+      "Y": -1024,
+      "Z": 96768,
+      "Room": 25,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 24064,
+      "Y": -1024,
+      "Z": 97792,
+      "Room": 24,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 25088,
+      "Y": 0,
+      "Z": 95744,
+      "Room": 36,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 38400,
+      "Y": -1024,
+      "Z": 97792,
+      "Room": 23,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 37376,
+      "Y": 0,
+      "Z": 95744,
+      "Room": 37,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 52736,
+      "Y": -1024,
+      "Z": 97792,
+      "Room": 22,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 59904,
+      "Y": -1024,
+      "Z": 85504,
+      "Room": 21,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 45568,
+      "Y": -4480,
+      "Z": 64000,
+      "Room": 40,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 36352,
+      "Y": -5376,
+      "Z": 59904,
+      "Room": 39,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 45568,
+      "Y": -5504,
+      "Z": 73216,
+      "Room": 38,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 32256,
+      "Y": -3840,
+      "Z": 75264,
+      "Room": 32,
+      "InvalidatesRoom": true
+    },
+    {
+      "X": 45568,
+      "Y": -384,
+      "Z": 71168,
+      "Room": 9
+    },
+    {
+      "X": 45568,
+      "Y": -384,
+      "Z": 70144,
+      "Room": 9
+    },
+    {
+      "X": 22016,
+      "Y": 2560,
+      "Z": 95744,
+      "Room": 16
+    }
   ]
 }
