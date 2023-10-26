@@ -15,8 +15,6 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR2ItemRandomizer : BaseTR2Randomizer
 {
-    private static readonly List<int> _devRooms = null;
-
     internal TR2TextureMonitorBroker TextureMonitor { get; set; }
     public ItemFactory ItemFactory { get; set; }
 
@@ -251,11 +249,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             //Read the level into a combined data/script level object
             LoadLevelInstance(lvl);
 
-            if (Settings.DevelopmentMode && _pistolLocations.ContainsKey(_levelInstance.Name))
-            {
-                PlaceAllItems(_pistolLocations[_levelInstance.Name], TR2Type.Pistols_S_P, false);
-            }
-
             FindUnarmedPistolsLocation();
 
             //#44 - Randomize unarmed level weapon type
@@ -274,38 +267,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
     }
 
-    private void PlaceAllItems(List<Location> locations, TR2Type entityToAdd = TR2Type.LargeMed_S_P, bool transformToLevelSpace = true)
-    {
-        foreach (Location loc in locations)
-        {
-            Location copy = transformToLevelSpace ? SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info) : loc;
-
-            if (_devRooms == null || _devRooms.Contains(copy.Room))
-            {
-                _levelInstance.Data.Entities.Add(new()
-                {
-                    TypeID = entityToAdd,
-                    Room = Convert.ToInt16(copy.Room),
-                    X = copy.X,
-                    Y = copy.Y,
-                    Z = copy.Z,
-                    Angle = 0,
-                    Intensity1 = -1,
-                    Intensity2 = -1,
-                    Flags = 0
-                });
-            }
-        }
-    }
-
     private void RepositionItems(List<Location> ItemLocs)
     {
-        if (Settings.DevelopmentMode)
-        {
-            PlaceAllItems(ItemLocs);
-            return;
-        }
-
         if (ItemLocs.Count > 0)
         {
             //We are currently looking guns + ammo
