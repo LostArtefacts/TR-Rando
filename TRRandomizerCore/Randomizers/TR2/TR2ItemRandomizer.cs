@@ -268,20 +268,21 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     {
         foreach (TR2ScriptedLevel lvl in Levels)
         {
-            //Read the level into a combined data/script level object
             LoadLevelInstance(lvl);
 
             FindUnarmedPistolsLocation();
 
-            //#44 - Randomize unarmed level weapon type
-            if (lvl.RemovesWeapons) { RandomizeUnarmedLevelWeapon(); }
+            if (lvl.RemovesWeapons)
+            {
+                RandomizeUnarmedLevelWeapon();
+            }
 
-            //#47 - Randomize the HSH weapon closet
-            if (lvl.Is(TR2LevelNames.HOME)) { PopulateHSHCloset(); }
+            if (lvl.Is(TR2LevelNames.HOME))
+            {
+                PopulateHSHCloset();
+            }
 
-            //Write back the level file
             SaveLevelInstance();
-
             if (!TriggerProgress())
             {
                 break;
@@ -291,7 +292,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     public void RandomizeItemLocations(TR2CombinedLevel level)
     {
-        if (level.IsAssault)
+        if (level.IsAssault
+            || (level.Is(TR2LevelNames.HOME) && (level.Script.RemovesWeapons || level.Script.RemovesAmmo)))
         {
             return;
         }
@@ -320,7 +322,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         {
             TR2Entity entity = level.Data.Entities[i];
             if (!targetTypes.Contains(entity.TypeID)
-                || ItemFactory.IsItemLocked(_levelInstance.Name, i)
+                || ItemFactory.IsItemLocked(level.Name, i)
                 || i == _unarmedLevelPistolIndex)
             {
                 continue;
@@ -481,7 +483,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void RandomizeItemTypes()
     {
-        if (_levelInstance.IsAssault || _levelInstance.Is(TR2LevelNames.HOME))
+        if (_levelInstance.IsAssault
+            || (_levelInstance.Is(TR2LevelNames.HOME) && (_levelInstance.Script.RemovesWeapons || _levelInstance.Script.RemovesAmmo)))
         {
             return;
         }
@@ -705,6 +708,12 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void PopulateHSHCloset()
     {
+        // Special handling for HSH to keep everything in the closet, but only if Lara loses guns or ammo.
+        if (!_levelInstance.Script.RemovesAmmo && !_levelInstance.Script.RemovesWeapons)
+        {
+            return;
+        }
+
         List<TR2Type> replacementWeapons = TR2TypeUtilities.GetGunTypes();
         if (_levelInstance.Script.RemovesWeapons)
         {
@@ -725,7 +734,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         List<TR2Type> oneOfEachType = new();
         foreach (TR2Entity entity in _levelInstance.Data.Entities)
         {
-            if (entity.Room != 57)
+            if (!TR2TypeUtilities.IsAnyPickupType(entity.TypeID))
             {
                 continue;
             }

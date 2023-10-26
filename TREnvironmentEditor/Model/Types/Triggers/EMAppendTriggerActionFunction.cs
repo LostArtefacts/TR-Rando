@@ -11,6 +11,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     public EMLocation Location { get; set; }
     public List<EMLocation> Locations { get; set; }
     public EMLocationExpander LocationExpander { get; set; }
+    public int? EntityLocation { get; set; }
     public List<EMTriggerAction> Actions { get; set; }
     public List<FDTrigType> TargetTypes { get; set; }
 
@@ -18,7 +19,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
         List<FDActionListItem> actions = InitialiseActionItems(data);
-        List<EMLocation> locations = InitialiseLocations();
+        List<EMLocation> locations = InitialiseLocations<TR1Type, TR1Entity>(level.Entities);
 
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -36,7 +37,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
         List<FDActionListItem> actions = InitialiseActionItems(data);
-        List<EMLocation> locations = InitialiseLocations();
+        List<EMLocation> locations = InitialiseLocations<TR2Type, TR2Entity>(level.Entities);
 
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -54,7 +55,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
         List<FDActionListItem> actions = InitialiseActionItems(data);
-        List<EMLocation> locations = InitialiseLocations();
+        List<EMLocation> locations = InitialiseLocations<TR3Type, TR3Entity>(level.Entities);
 
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -68,7 +69,9 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         floorData.WriteToLevel(level);
     }
 
-    private List<EMLocation> InitialiseLocations()
+    private List<EMLocation> InitialiseLocations<T, E>(List<E> entities)
+        where E : TREntity<T>
+        where T : Enum
     {
         List<EMLocation> locations = new();
         if (Location != null)
@@ -82,6 +85,17 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         if (LocationExpander != null)
         {
             locations.AddRange(LocationExpander.Expand());
+        }
+        if (EntityLocation.HasValue)
+        {
+            E entity = entities[EntityLocation.Value];
+            locations.Add(new()
+            {
+                X = entity.X,
+                Y = entity.Y,
+                Z = entity.Z,
+                Room = entity.Room,
+            });
         }
 
         return locations;
