@@ -15,7 +15,7 @@ Following are details on the return paths that are available. See `Global Settin
 | Colosseum | _Not required_ |
 | Palace Midas | _Not required_ |
 | The Cistern | A pushblock is added to return to the starting area. |
-| Tomb of Tihocan | Links rooms added between rooms 17 and 38, and 81 and 90. |
+| Tomb of Tihocan | Link rooms added between rooms 17 and 38, and 81 and 90. |
 | City of Khamoon | Some slopes are adjusted to make returning to the start possible, and a trapdoor in room 42 will always remain raised to allow climbing out. |
 | Obelisk of Khamoon | _Not required_ |
 | Sanctuary of the Scion | _Not required_ |
@@ -49,7 +49,7 @@ Following are details on the return paths that are available. See `Global Settin
 | Level | Description |
 |-|-|
 | Jungle | Link rooms added between rooms 4 and 135. |
-| Temple Ruins | Links rooms added between rooms 35 and 77; rooms 82, 196, and 197; rooms 104 and 161; ladders added in room 213 to allow returning. |
+| Temple Ruins | Link rooms added between rooms 35 and 77; rooms 82, 196, and 197; rooms 104 and 161; ladders added in room 213 to allow returning. |
 | The River Ganges | Platforms added between rooms 10 and 70 to cross the river on-foot; trapdoors added to rooms 25, 105, 114 and 152; ladder added to room 163. |
 | Caves of Kaliya | Pushblock and ladder added to room 4 to allow exiting; ladder added to room 24; point of no return remains in the boss room. |
 | Coastal Village | Ladder added to room 20; switch added to room 115 to open the gates from the village side; platform added to room 112 to reach switch area. |
