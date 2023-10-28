@@ -642,7 +642,7 @@ public static class TR3TypeUtilities
     public static bool CanSharePickupSpace(TR3Type type)
     {
         // Can we place a standard pickup on the same tile as this type?
-        return IsStandardPickupType(type)
+        return IsAnyPickupType(type)
             || IsCrystalPickup(type)
             || IsUnrenderedType(type)
             || CanDropPickups(type, true)

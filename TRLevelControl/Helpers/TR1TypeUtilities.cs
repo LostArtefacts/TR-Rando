@@ -477,7 +477,7 @@ public static class TR1TypeUtilities
     public static bool CanSharePickupSpace(TR1Type type)
     {
         // Can we place a standard pickup on the same tile as this type?
-        return IsStandardPickupType(type)
+        return IsAnyPickupType(type)
             || IsCrystalPickup(type)
             || IsSwitchType(type)
             || IsKeyholeType(type)
