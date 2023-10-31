@@ -19,6 +19,12 @@ public class TR3LocationGenerator : AbstractLocationGenerator<TR3Level>
         return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, _floorData);
     }
 
+    protected override TRRoomSector GetSector(int x, int z, int roomIndex, TR3Level level)
+    {
+        TR3Room room = level.Rooms[roomIndex];
+        return FDUtilities.GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
+    }
+
     protected override List<TRRoomSector> GetRoomSectors(TR3Level level, int room)
     {
         return level.Rooms[room].Sectors.ToList();
@@ -79,5 +85,10 @@ public class TR3LocationGenerator : AbstractLocationGenerator<TR3Level>
     protected override Vector2 GetRoomPosition(TR3Level level, short room)
     {
         return new Vector2(level.Rooms[room].Info.X, level.Rooms[room].Info.Z);
+    }
+
+    protected override int GetHeight(TR3Level level, Location location)
+    {
+        return FDUtilities.GetHeight(location.X, location.Z, (short)location.Room, level, _floorData);
     }
 }

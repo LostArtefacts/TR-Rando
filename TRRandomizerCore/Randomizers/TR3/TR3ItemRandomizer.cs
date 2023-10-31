@@ -15,12 +15,11 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR3ItemRandomizer : BaseTR3Randomizer
 {
-    private Dictionary<string, LevelPickupZoneDescriptor> _keyItemZones;
-    private Dictionary<string, List<Location>> _locations;
-    private Dictionary<string, List<Location>> _excludedLocations;
-    private Dictionary<string, List<Location>> _pistolLocations;
+    private readonly Dictionary<string, LevelPickupZoneDescriptor> _keyItemZones;
+    private readonly Dictionary<string, List<Location>> _keyItemLocations;
+    private readonly Dictionary<string, List<Location>> _excludedLocations;
+    private readonly Dictionary<string, List<Location>> _pistolLocations;
 
-    private static readonly int _ROTATION = -8192;
     private static readonly int _ANY_ROOM_ALLOWED = 2048;  //Max rooms is 1024 - so this should never be possible.
 
     // Track the pistols so they remain a weapon type and aren't moved
@@ -29,22 +28,31 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     // Secret reward items handled in separate class, so track the reward entities
     private TRSecretMapping<TR2Entity> _secretMapping;
 
+    private readonly LocationPicker _picker;
+
     public ItemFactory ItemFactory { get; set; }
+
+    public TR3ItemRandomizer()
+    {
+        _keyItemZones = JsonConvert.DeserializeObject<Dictionary<string, LevelPickupZoneDescriptor>>(ReadResource(@"TR3\Locations\Zones.json"));
+        _keyItemLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\item_locations.json"));
+        _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\invalid_item_locations.json"));
+        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
+        _picker = new();
+    }
 
     public override void Randomize(int seed)
     {
         _generator = new Random(seed);
-        _keyItemZones = JsonConvert.DeserializeObject<Dictionary<string, LevelPickupZoneDescriptor>>(ReadResource(@"TR3\Locations\Zones.json"));
-        _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\item_locations.json"));
-        _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\invalid_item_locations.json"));
-        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
-
+        
         foreach (TR3ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
-            _secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath(@"TR3\SecretMapping\" + _levelInstance.Name + "-SecretMapping.json"));
 
             FindUnarmedLevelPistols(_levelInstance);
+
+            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
+            _secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath($@"TR3\SecretMapping\{_levelInstance.Name}-SecretMapping.json"));
 
             // #312 If this is the assault course, import required models. On failure, don't perform any item rando.
             if (_levelInstance.IsAssault && !ImportAssaultModels(_levelInstance))
@@ -245,8 +253,6 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             return;
         }
 
-        List<Location> locations = GetItemLocationPool(level);
-
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (_secretMapping.RewardEntities.Contains(i)
@@ -259,20 +265,8 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             // Move standard items only, excluding any unarmed level pistols, and reward items
             if (TR3TypeUtilities.IsStandardPickupType(ent.TypeID) && ent != _unarmedLevelPistols)
             {
-                Location location = locations[_generator.Next(0, locations.Count)];
-                ent.X = location.X;
-                ent.Y = location.Y;
-                ent.Z = location.Z;
-                ent.Room = (short)location.Room;
-                ent.Angle = location.Angle;
-
-                // Anything other than -1 means a sloped sector and so the location generator
-                // will have picked a suitable angle for it. For flat sectors, spin the entities
-                // around randomly for variety.
-                if (ent.Angle == -1)
-                {
-                    ent.Angle = (short)(_generator.Next(0, 8) * _ROTATION);
-                }
+                Location location = _picker.GetPickupLocation();
+                _picker.SetLocation(ent, location);
             }
         }
     }
@@ -285,24 +279,22 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             exclusions.AddRange(_excludedLocations[level.Name]);
         }
 
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level.Data);
+
         foreach (TR3Entity entity in level.Data.Entities)
         {
             if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(new Location
-                {
-                    X = entity.X,
-                    Y = entity.Y,
-                    Z = entity.Z,
-                    Room = entity.Room
-                });
+                exclusions.Add(LocationPicker.CreateExcludedLocation(entity, loc =>
+                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData)));
             }
         }
 
         if (Settings.RandomizeSecrets && level.HasSecrets)
         {
             // Make sure to exclude the reward room
-            exclusions.Add(new Location
+            exclusions.Add(new()
             {
                 Room = RoomWaterUtilities.DefaultRoomCountDictionary[level.Name],
                 InvalidatesRoom = true
@@ -316,7 +308,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             {
                 if (level.Data.Rooms[i].ContainsWater)
                 {
-                    exclusions.Add(new Location
+                    exclusions.Add(new()
                     {
                         Room = i,
                         InvalidatesRoom = true
@@ -331,51 +323,48 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     public void RandomizeKeyItems(TR3CombinedLevel level)
     {
-        if (!_locations.ContainsKey(level.Name))
+        if (!_keyItemLocations.ContainsKey(level.Name))
         {
             return;
         }
 
         //Get all locations that have a KeyItemGroupID - e.g. intended for key items
-        List<Location> levelLocations = _locations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
+        List<Location> levelLocations = _keyItemLocations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
 
-        foreach (TR3Entity ent in level.Data.Entities)
+        foreach (TR3Entity entity in level.Data.Entities)
         {
             //Calculate its alias
-            TR3Type AliasedKeyItemID = ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name);
+            TR3Type aliasedKeyItemID = entity.TypeID + entity.Room + GetLevelKeyItemBaseAlias(level.Name);
 
             //Any special handling for key item entities
-            switch (AliasedKeyItemID)
+            switch (aliasedKeyItemID)
             {
                 case TR3Type.DetonatorKey:
-                    ent.Invisible = false;
+                    entity.Invisible = false;
                     break;
                 default:
                     break;
             }
 
-            if (AliasedKeyItemID < TR3Type.JungleKeyItemBase)
+            if (aliasedKeyItemID < TR3Type.JungleKeyItemBase)
                 throw new NotSupportedException("Level does not have key item alias group defined");
 
             //Is entity one we are allowed/expected to move? (is the alias and base type correct?)
-            if (_keyItemZones[level.Name].AliasedExpectedKeyItems.Contains(AliasedKeyItemID) &&
-                _keyItemZones[level.Name].BaseExpectedKeyItems.Contains(ent.TypeID))
+            if (_keyItemZones[level.Name].AliasedExpectedKeyItems.Contains(aliasedKeyItemID) &&
+                _keyItemZones[level.Name].BaseExpectedKeyItems.Contains(entity.TypeID))
             {
                 do
                 {
                     //Only get locations that are to position the intended key item.
                     //We can probably get rid of the do while loop as any location in this list should be valid
-                    List<Location> KeyItemLocations = levelLocations.Where(i => i.KeyItemGroupID == (int)AliasedKeyItemID).ToList();
+                    List<Location> keyItemLocations = levelLocations.Where(i => i.KeyItemGroupID == (int)aliasedKeyItemID).ToList();
                             
-                    Location loc = KeyItemLocations[_generator.Next(0, KeyItemLocations.Count)];
+                    Location location = keyItemLocations[_generator.Next(0, keyItemLocations.Count)];
 
-                    ent.X = loc.X;
-                    ent.Y = loc.Y;
-                    ent.Z = loc.Z;
-                    ent.Room = (short)loc.Room;
+                    _picker.SetLocation(entity, location);
 
-                } while (!_keyItemZones[level.Name].AllowedRooms[AliasedKeyItemID].Contains(ent.Room) &&
-                        (!_keyItemZones[level.Name].AllowedRooms[AliasedKeyItemID].Contains(_ANY_ROOM_ALLOWED)));
+                } while (!_keyItemZones[level.Name].AllowedRooms[aliasedKeyItemID].Contains(entity.Room) &&
+                        (!_keyItemZones[level.Name].AllowedRooms[aliasedKeyItemID].Contains(_ANY_ROOM_ALLOWED)));
                 //Try generating locations until it is in the zone - if list contains 2048 then any room is allowed.
             }
         }

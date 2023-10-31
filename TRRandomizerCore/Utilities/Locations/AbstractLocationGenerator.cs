@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
+using TRLevelControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
@@ -8,13 +9,11 @@ namespace TRRandomizerCore.Utilities;
 
 public abstract class AbstractLocationGenerator<L> where L : class
 {
-    protected static readonly byte _noRoom = 255;
-    protected static readonly int _fullSectorSize = 1024;
-    protected static readonly int _halfSectorSize = 512;
-    protected static readonly int _qrtSectorSize = 256;
+    protected static readonly int _standardHeight = TRConsts.Step3;
+    protected static readonly int _crawlspaceHeight = TRConsts.Step2;
     protected static readonly int _slantLimit = 3;
-    protected static readonly int _fenceMinLimit = 256;
-    protected static readonly int _fenceMaxLimit = 1000;
+    protected static readonly int _fenceMinLimit = TRConsts.Step1;
+    protected static readonly int _fenceMaxLimit = TRConsts.Step4 - 24;
 
     protected FDControl _floorData;
     protected ISet<TRRoomSector> _excludedSectors, _antiExcludedSectors; // Anti-excluded => not necessarily included
@@ -68,6 +67,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
             if (flipRoom != -1)
             {
                 ExcludeRoom(level, flipRoom);
+                ExcludeFlipSectors(level, r, flipRoom);
             }
 
             // Exclude the room if it has no collisional portals
@@ -101,24 +101,35 @@ public abstract class AbstractLocationGenerator<L> where L : class
 
     protected List<TRStaticMesh> GetCollidableStaticMeshes(L level)
     {
-        List<TRStaticMesh> meshes = new();
+        return GetStaticMeshes(level)
+            .Where(m => !IsPermittableMesh(m))
+            .ToList();
+    }
 
-        foreach (TRStaticMesh mesh in GetStaticMeshes(level))
+    private static bool IsPermittableMesh(TRStaticMesh mesh)
+    {
+        // TR1/2 use a hitbox flag
+        if (mesh.NonCollidable)
         {
-            if (!mesh.NonCollidable)
-            {
-                // Is it a fence/barrier? If so, we can allow it
-                int width = mesh.CollisionBox.MaxX - mesh.CollisionBox.MinX;
-                int depth = mesh.CollisionBox.MaxZ - mesh.CollisionBox.MinZ;
-                if ((width <= _fenceMinLimit && depth >= _fenceMaxLimit) || (width >= _fenceMaxLimit && depth <= _fenceMinLimit))
-                {
-                    continue;
-                }
-                meshes.Add(mesh);
-            }
+            return true;
         }
 
-        return meshes;
+        // TR3+ uses a null hitbox
+        int width = mesh.CollisionBox.MaxX - mesh.CollisionBox.MinX;
+        int depth = mesh.CollisionBox.MaxZ - mesh.CollisionBox.MinZ;
+        if (width == 0 && depth == 0)
+        {
+            return true;
+        }
+
+        // Allow fences/barriers
+        if ((width <= _fenceMinLimit && depth >= _fenceMaxLimit)
+            || (width >= _fenceMaxLimit && depth <= _fenceMinLimit))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private bool RoomHasCollisionalPortal(L level, short room)
@@ -131,7 +142,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
             }
 
             // Vertical?
-            if (sector.RoomAbove != _noRoom || sector.RoomBelow != _noRoom)
+            if (sector.RoomAbove != TRConsts.NoRoom || sector.RoomBelow != TRConsts.NoRoom)
             {
                 return true;
             }
@@ -144,6 +155,12 @@ public abstract class AbstractLocationGenerator<L> where L : class
                     return true;
                 }
             }
+        }
+
+        short flipRoom = GetFlipMapRoom(level, room);
+        if (flipRoom != -1)
+        {
+            return RoomHasCollisionalPortal(level, flipRoom);
         }
 
         return false;
@@ -162,6 +179,31 @@ public abstract class AbstractLocationGenerator<L> where L : class
         }
     }
 
+    protected void ExcludeFlipSectors(L level, short room, short flipRoom)
+    {
+        // Exclude sectors in unflipped rooms where the floor isn't
+        // identical in the flipped state.
+        List<TRRoomSector> roomSectors = GetRoomSectors(level, room);
+        List<TRRoomSector> flipSectors = GetRoomSectors(level, flipRoom);
+
+        for (int sectorIndex = 0; sectorIndex < roomSectors.Count; sectorIndex++)
+        {
+            TRRoomSector roomSector = roomSectors[sectorIndex];
+            Location roomLoc = CreateLocation(level, room, sectorIndex, roomSector);
+            if (roomLoc == null)
+                continue;
+
+            TRRoomSector flipSector = GetSector(roomLoc.X, roomLoc.Z, flipRoom, level);
+            int flipIndex = flipSectors.IndexOf(flipSector);
+
+            Location flipLoc = CreateLocation(level, flipRoom, flipIndex, flipSector);
+            if (flipLoc == null || flipLoc.Y != roomLoc.Y || flipSector.IsImpenetrable)
+            {
+                _excludedSectors.Add(roomSector);
+            }
+        }
+    }
+
     private List<Location> GetValidLocations(L level)
     {
         List<Location> locations = new();
@@ -171,109 +213,139 @@ public abstract class AbstractLocationGenerator<L> where L : class
             for (int sectorIndex = 0; sectorIndex < sectors.Count; sectorIndex++)
             {
                 TRRoomSector sector = sectors[sectorIndex];
-
                 // Basic exclusion checks
                 if (IsSectorInvalid(sector))
                 {
                     continue;
                 }
 
-                // Default position adjustments for a flat sector
-                int dx = _halfSectorSize;
-                int dz = _halfSectorSize;
-                int dy = 0;
-                short angle = -1;
-
-                bool isTrianglePortal = false;
-
-                // Check the floor data, if there is any
-                if (sector.FDIndex != 0)
+                Location location = CreateLocation(level, r, sectorIndex, sector);
+                if (location != null)
                 {
-                    List<FDEntry> entries = _floorData.Entries[sector.FDIndex];
-                    bool invalidFloorData = false;
-                    foreach (FDEntry entry in entries)
-                    {
-                        if (entry is FDTriggerEntry trigger)
-                        {
-                            // Basic trigger checks - e.g. end level, underwater current
-                            if (IsTriggerInvalid(trigger))
-                            {
-                                invalidFloorData = true;
-                                break;
-                            }
-                        }
-                        else if (entry is FDKillLaraEntry)
-                        {
-                            // For obvious reasons
-                            invalidFloorData = true;
-                            break;
-                        }
-                        else if (entry is FDSlantEntry slant && slant.Type == FDSlantEntryType.FloorSlant)
-                        {
-                            // NB It's only ever FDSlantEntry or TR3TriangulationEntry (or neither) for TR3-5                                
-                            Vector4? bestMidpoint = GetBestSlantMidpoint(slant);
-                            if (bestMidpoint.HasValue)
-                            {
-                                dx = (int)bestMidpoint.Value.X;
-                                dy = (int)bestMidpoint.Value.Y;
-                                dz = (int)bestMidpoint.Value.Z;
-                                angle = (short)bestMidpoint.Value.W;
-                            }
-                            else
-                            {
-                                // Too much of a slope
-                                invalidFloorData = true;
-                                break;
-                            }
-                        }
-                        else if (entry is TR3TriangulationEntry triangulation && triangulation.IsFloorTriangulation)
-                        {
-                            Vector4? bestMidpoint = GetBestTriangleMidpoint(sector, triangulation, sectorIndex, GetRoomDepth(level, r), GetRoomYTop(level, r));
-                            if (bestMidpoint.HasValue)
-                            {
-                                dx = (int)(bestMidpoint.Value.X * _qrtSectorSize);
-                                dy = (int)(bestMidpoint.Value.Y * _qrtSectorSize);
-                                dz = (int)(bestMidpoint.Value.Z * _qrtSectorSize);
-                                angle = (short)bestMidpoint.Value.W;
-
-                                isTrianglePortal = triangulation.IsFloorPortal;
-                            }
-                            else
-                            {
-                                // Either both triangles were too sloped, or one was too sloped and the other was
-                                // a collisional portal.
-                                invalidFloorData = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    // Bail out if we don't like the look of the FD here
-                    if (invalidFloorData)
-                    {
-                        continue;
-                    }
+                    locations.Add(location);
                 }
-
-                // Final check for vertical portals - if a triangulation entry was detected and one
-                // of the triangles is a portal, we can allow it but if there are no triangles, this
-                // sector is in mid-air.
-                if (sector.RoomBelow != _noRoom && !isTrianglePortal)
-                {
-                    continue;
-                }
-
-                // Make the location and adjust the positioning on this tile
-                Location location = CreateLocation(r, sector, sectorIndex, GetRoomDepth(level, r), GetRoomPosition(level, r));
-                location.X += dx;
-                location.Y += dy;
-                location.Z += dz;
-                location.Angle = angle;
-                locations.Add(location);
             }
         }
 
         return locations;
+    }
+
+    private Location CreateLocation(L level, short roomIndex, int sectorIndex, TRRoomSector sector)
+    {
+        // Default position adjustments for a flat sector
+        int dx = TRConsts.Step2;
+        int dz = TRConsts.Step2;
+        int dy = 0;
+        short angle = -1;
+
+        bool isTrianglePortal = false;
+
+        // Check the floor data, if there is any
+        if (sector.FDIndex != 0)
+        {
+            List<FDEntry> entries = _floorData.Entries[sector.FDIndex];
+            bool invalidFloorData = false;
+            foreach (FDEntry entry in entries)
+            {
+                if (entry is FDTriggerEntry trigger)
+                {
+                    // Basic trigger checks - e.g. end level, underwater current
+                    if (IsTriggerInvalid(trigger))
+                    {
+                        invalidFloorData = true;
+                        break;
+                    }
+                }
+                else if (entry is FDKillLaraEntry)
+                {
+                    // For obvious reasons
+                    invalidFloorData = true;
+                    break;
+                }
+                else if (entry is FDSlantEntry slant && slant.Type == FDSlantEntryType.FloorSlant)
+                {
+                    // NB It's only ever FDSlantEntry or TR3TriangulationEntry (or neither) for TR3-5                                
+                    Vector4? bestMidpoint = GetBestSlantMidpoint(slant);
+                    if (bestMidpoint.HasValue)
+                    {
+                        dx = (int)bestMidpoint.Value.X;
+                        dy = (int)bestMidpoint.Value.Y;
+                        dz = (int)bestMidpoint.Value.Z;
+                        angle = (short)bestMidpoint.Value.W;
+                    }
+                    else
+                    {
+                        // Too much of a slope
+                        invalidFloorData = true;
+                        break;
+                    }
+                }
+                else if (entry is TR3TriangulationEntry triangulation && triangulation.IsFloorTriangulation)
+                {
+                    Vector4? bestMidpoint = GetBestTriangleMidpoint(sector, triangulation, sectorIndex, GetRoomDepth(level, roomIndex), GetRoomYTop(level, roomIndex));
+                    if (bestMidpoint.HasValue)
+                    {
+                        dx = (int)(bestMidpoint.Value.X * TRConsts.Step1);
+                        dy = (int)(bestMidpoint.Value.Y * TRConsts.Step1);
+                        dz = (int)(bestMidpoint.Value.Z * TRConsts.Step1);
+                        angle = (short)bestMidpoint.Value.W;
+
+                        isTrianglePortal = triangulation.IsFloorPortal;
+                    }
+                    else
+                    {
+                        // Either both triangles were too sloped, or one was too sloped and the other was
+                        // a collisional portal.
+                        invalidFloorData = true;
+                        break;
+                    }
+                }
+            }
+
+            // Bail out if we don't like the look of the FD here
+            if (invalidFloorData)
+            {
+                return null;
+            }
+        }
+
+        // Final check for vertical portals - if a triangulation entry was detected and one
+        // of the triangles is a portal, we can allow it but if there are no triangles, this
+        // sector is in mid-air.
+        if (sector.RoomBelow != TRConsts.NoRoom && !isTrianglePortal)
+        {
+            return null;
+        }
+
+        // Make the location and adjust the positioning on this tile
+        Location location = CreateLocation(roomIndex, sector, sectorIndex, GetRoomDepth(level, roomIndex), GetRoomPosition(level, roomIndex));
+        location.X += dx;
+        location.Y += dy;
+        location.Z += dz;
+        location.Angle = angle;
+
+        // Check the absolute height from floor to ceiling to ensure Lara can be here.
+        // Test around the mid-point for cases of steep ceiling slopes.
+        Location testLocation = new()
+        {
+            Y = location.Y,
+            Room = location.Room
+        };
+        for (int x = -1; x < 2; x++)
+        {
+            for (int z = -1; z < 2; z++)
+            {
+                testLocation.X = location.X + x * TRConsts.Step1 / 2;
+                testLocation.Z = location.Z + z * TRConsts.Step1 / 2;
+                int height = GetHeight(level, testLocation);
+                if (height < (CrawlspacesAllowed ? _crawlspaceHeight : _standardHeight))
+                {
+                    return null;
+                }
+            }
+        }
+
+        return location;
     }
 
     private bool IsSectorInvalid(TRRoomSector sector)
@@ -281,8 +353,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
         // Inside a wall, on a "normal" slope, or too near the ceiling
         return _excludedSectors.Contains(sector)
             || sector.IsImpenetrable
-            || sector.IsSlipperySlope
-            || ((sector.Floor - sector.Ceiling) < (CrawlspacesAllowed ? 2 : 4) && sector.RoomAbove == _noRoom);
+            || sector.IsSlipperySlope;
     }
 
     private static bool IsTriggerInvalid(FDTriggerEntry trigger)
@@ -360,8 +431,8 @@ public abstract class AbstractLocationGenerator<L> where L : class
             }
         }
 
-        dy = (dy * _qrtSectorSize) / 2; // Half-way down the slope
-        return new Vector4(_halfSectorSize, dy, _halfSectorSize, angle);
+        dy = (dy * TRConsts.Step1) / 2; // Half-way down the slope
+        return new Vector4(TRConsts.Step2, dy, TRConsts.Step2, angle);
     }
 
     // Returned vector contains x, y, z and angle adjustments for midpoint
@@ -398,8 +469,8 @@ public abstract class AbstractLocationGenerator<L> where L : class
         Vector3 triSum1, triSum2;
         Vector4? bestMatch = null;
 
-        int sectorXPos = sectorIndex / roomDepth * _fullSectorSize;
-        int sectorZPos = sectorIndex % roomDepth * _fullSectorSize;
+        int sectorXPos = sectorIndex / roomDepth * TRConsts.Step4;
+        int sectorZPos = sectorIndex % roomDepth * TRConsts.Step4;
 
         FDFunctions func = (FDFunctions)triangulation.Setup.Function;
         switch (func)
@@ -423,15 +494,15 @@ public abstract class AbstractLocationGenerator<L> where L : class
                 triSum1 = (triangle1[0] + triangle1[1] + triangle1[2]) / 3;
                 triSum2 = (triangle2[0] + triangle2[1] + triangle2[2]) / 3;
 
-                x1 = (int)(sectorXPos + triSum1.X * _qrtSectorSize);
-                z1 = (int)(sectorZPos + triSum1.Z * _qrtSectorSize);
+                x1 = (int)(sectorXPos + triSum1.X * TRConsts.Step1);
+                z1 = (int)(sectorZPos + triSum1.Z * TRConsts.Step1);
 
                 // Which quarter of the tile are we in?
-                dx1 = x1 & (_fullSectorSize - 1);
-                dz1 = z1 & (_fullSectorSize - 1);
+                dx1 = x1 & (TRConsts.Step4 - 1);
+                dz1 = z1 & (TRConsts.Step4 - 1);
 
                 // Is this the top triangle?
-                if (dx1 <= (_fullSectorSize - dz1))
+                if (dx1 <= (TRConsts.Step4 - dz1))
                 {
                     xoff1 = t2 - t1;
                     zoff1 = t0 - t1;
@@ -442,12 +513,12 @@ public abstract class AbstractLocationGenerator<L> where L : class
                     zoff1 = t3 - t2;
                 }
 
-                x2 = (int)(sectorXPos + triSum2.X * _qrtSectorSize);
-                z2 = (int)(sectorZPos + triSum2.Z * _qrtSectorSize);
-                dx2 = x2 & (_fullSectorSize - 1);
-                dz2 = z2 & (_fullSectorSize - 1);
+                x2 = (int)(sectorXPos + triSum2.X * TRConsts.Step1);
+                z2 = (int)(sectorZPos + triSum2.Z * TRConsts.Step1);
+                dx2 = x2 & (TRConsts.Step4 - 1);
+                dz2 = z2 & (TRConsts.Step4 - 1);
 
-                if (dx2 <= (_fullSectorSize - dz2))
+                if (dx2 <= (TRConsts.Step4 - dz2))
                 {
                     xoff2 = t2 - t1;
                     zoff2 = t0 - t1;
@@ -460,7 +531,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
 
                 // Eliminate hidden flat triangles on shore lines, otherwise the location will be OOB.
                 // See geometry in room 44 in Coastal Village for example.
-                if (sector.Floor * _qrtSectorSize == roomYTop)
+                if (sector.Floor * TRConsts.Step1 == roomYTop)
                 {
                     if (xoff1 == 0 && zoff1 == 0)
                     {
@@ -518,10 +589,10 @@ public abstract class AbstractLocationGenerator<L> where L : class
                 triSum1 = (triangle1[0] + triangle1[1] + triangle1[2]) / 3;
                 triSum2 = (triangle2[0] + triangle2[1] + triangle2[2]) / 3;
 
-                x1 = (int)(sectorXPos + triSum1.X * _qrtSectorSize);
-                z1 = (int)(sectorZPos + triSum1.Z * _qrtSectorSize);
-                dx1 = x1 & (_fullSectorSize - 1);
-                dz1 = z1 & (_fullSectorSize - 1);
+                x1 = (int)(sectorXPos + triSum1.X * TRConsts.Step1);
+                z1 = (int)(sectorZPos + triSum1.Z * TRConsts.Step1);
+                dx1 = x1 & (TRConsts.Step4 - 1);
+                dz1 = z1 & (TRConsts.Step4 - 1);
 
                 if (dx1 <= dz1)
                 {
@@ -534,10 +605,10 @@ public abstract class AbstractLocationGenerator<L> where L : class
                     zoff1 = t0 - t1;
                 }
 
-                x2 = (int)(sectorXPos + triSum2.X * _qrtSectorSize);
-                z2 = (int)(sectorZPos + triSum2.Z * _qrtSectorSize);
-                dx2 = x2 & (_fullSectorSize - 1);
-                dz2 = z2 & (_fullSectorSize - 1);
+                x2 = (int)(sectorXPos + triSum2.X * TRConsts.Step1);
+                z2 = (int)(sectorZPos + triSum2.Z * TRConsts.Step1);
+                dx2 = x2 & (TRConsts.Step4 - 1);
+                dz2 = z2 & (TRConsts.Step4 - 1);
 
                 if (dx2 <= dz2)
                 {
@@ -550,7 +621,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
                     zoff2 = t0 - t1;
                 }
 
-                if (sector.Floor * _qrtSectorSize == roomYTop)
+                if (sector.Floor * TRConsts.Step1 == roomYTop)
                 {
                     if (xoff1 == 0 && zoff1 == 0)
                     {
@@ -599,9 +670,9 @@ public abstract class AbstractLocationGenerator<L> where L : class
     private static Location CreateLocation(short roomIndex, TRRoomSector sector, int sectorIndex, ushort roomDepth, Vector2 roomPosition)
     {
         // Get the sector's position in its room
-        int x = sectorIndex / roomDepth * _fullSectorSize;
-        int z = sectorIndex % roomDepth * _fullSectorSize;
-        int y = sector.Floor * _qrtSectorSize;
+        int x = sectorIndex / roomDepth * TRConsts.Step4;
+        int z = sectorIndex % roomDepth * TRConsts.Step4;
+        int y = sector.Floor * TRConsts.Step1;
 
         // Move into world space
         x += (int)roomPosition.X;
@@ -618,6 +689,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
 
     protected abstract void ReadFloorData(L level);
     protected abstract TRRoomSector GetSector(Location location, L level);
+    protected abstract TRRoomSector GetSector(int x, int z, int roomIndex, L level);
     protected abstract List<TRRoomSector> GetRoomSectors(L level, int room);
     protected abstract List<TRStaticMesh> GetStaticMeshes(L level);
     protected abstract int GetRoomCount(L level);
@@ -627,5 +699,6 @@ public abstract class AbstractLocationGenerator<L> where L : class
     protected abstract ushort GetRoomDepth(L level, short room);
     protected abstract int GetRoomYTop(L level, short room);
     protected abstract Vector2 GetRoomPosition(L level, short room);
+    protected abstract int GetHeight(L level, Location location);
     public abstract bool CrawlspacesAllowed { get; }
 }

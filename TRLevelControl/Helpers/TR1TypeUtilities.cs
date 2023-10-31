@@ -477,14 +477,23 @@ public static class TR1TypeUtilities
     public static bool CanSharePickupSpace(TR1Type type)
     {
         // Can we place a standard pickup on the same tile as this type?
-        return IsStandardPickupType(type)
+        return IsAnyPickupType(type)
             || IsCrystalPickup(type)
             || IsSwitchType(type)
             || IsKeyholeType(type)
             || IsSlotType(type)
             || IsEnemyType(type)
+            || IsBridge(type)
+            || IsTrapdoor(type)
+            || IsDoorType(type)
+            || IsPushblockType(type)
             || type == TR1Type.CameraTarget_N
             || type == TR1Type.Earthquake_N
+            || type == TR1Type.WaterfallMist_N
+            || type == TR1Type.FallingBlock
+            || type == TR1Type.Barricade
+            || type == TR1Type.RollingBall
+            || type == TR1Type.MovingBlock
             || type == TR1Type.Lara;
     }
 
@@ -495,6 +504,21 @@ public static class TR1TypeUtilities
             TR1Type.Door1, TR1Type.Door2, TR1Type.Door3,
             TR1Type.Door4, TR1Type.Door5, TR1Type.Door6,
             TR1Type.Door7, TR1Type.Door8
+        };
+    }
+
+    public static bool IsTrapdoorType(TR1Type type)
+    {
+        return TrapdoorTypes().Contains(type);
+    }
+
+    public static List<TR1Type> TrapdoorTypes()
+    {
+        return new()
+        {
+            TR1Type.Trapdoor1,
+            TR1Type.Trapdoor2,
+            TR1Type.Trapdoor3,
         };
     }
 

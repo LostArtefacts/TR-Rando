@@ -71,14 +71,32 @@
       ]
     },
     {
-      "Comments": "Add a boulder to the hidden room.",
-      "EMType": 51,
-      "TypeID": 60,
-      "Location": {
+      "Comments": "Convert the zipline handle into a boulder (so we can track the index elsewhere).",
+      "EMType": 45,
+      "EntityIndex": 23,
+      "NewEntityType": 60
+    },
+    {
+      "Comments": "Move it to the hidden room.",
+      "EMType": 44,
+      "EntityIndex": 23,
+      "TargetLocation": {
         "X": 69120,
         "Y": 2560,
         "Z": 81408,
         "Room": -1
+      }
+    },
+    {
+      "Comments": "Put a new zipline handle in its place.",
+      "EMType": 51,
+      "TypeID": 102,
+      "Intensity": -1,
+      "Location": {
+        "X": 32256,
+        "Z": 56832,
+        "Room": 28,
+        "Angle": 16384
       }
     },
     {
@@ -90,7 +108,7 @@
         "Z": 62976,
         "Room": 52
       },
-      "EntityLocation": -1
+      "EntityLocation": 23
     },
     {
       "Comments": "Make it heavy.",
@@ -118,7 +136,7 @@
         "Mask": 31,
         "Actions": [
           {
-            "Parameter": -1
+            "Parameter": 23
           }
         ]
       }
@@ -497,6 +515,49 @@
             "Room": 48,
             "Angle": -16384
           }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item 63 is not in this position, it means all items in the closet are randomized (this position is off-centre, so is not rando-created).",
+        "ConditionType": 0,
+        "EntityIndex": 63,
+        "X": 30208,
+        "Y": -256,
+        "Z": 65664
+      },
+      "OnFalse": [
+        {
+          "Comments": "Clear the triggers from the closet and the tile in front of it.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 31232,
+              "Y": 256,
+              "Z": 64000,
+              "Room": 52
+            }
+          ],
+          "Rooms": [
+            57
+          ]
+        },
+        {
+          "Comments": "Append the actions from the closet triggers to the heavy trigger on level start.",
+          "EMType": 68,
+          "EntityLocation": 23,
+          "Actions": [
+            {
+              "Parameter": 38
+            },
+            {
+              "Parameter": 21
+            },
+            {
+              "Parameter": 42
+            }
+          ]
         }
       ]
     }
