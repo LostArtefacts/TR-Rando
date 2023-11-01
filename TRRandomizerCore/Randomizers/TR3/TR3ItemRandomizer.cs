@@ -65,11 +65,6 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 RandomizeItemTypes(_levelInstance);
             }
 
-            if (Settings.IncludeKeyItems)
-            {
-                RandomizeKeyItems(_levelInstance);
-            }
-
             if (Settings.RandomizeItemPositions)
             {
                 RandomizeItemLocations(_levelInstance);
@@ -79,6 +74,22 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             {
                 EnforceOneLimit(_levelInstance);
             }
+
+            SaveLevelInstance();
+            if (!TriggerProgress())
+            {
+                break;
+            }
+        }
+    }
+
+    public void RandomizeKeyItems()
+    {
+        foreach (TR3ScriptedLevel lvl in Levels)
+        {
+            LoadLevelInstance(lvl);
+            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
+            RandomizeKeyItems(_levelInstance);
 
             SaveLevelInstance();
             if (!TriggerProgress())

@@ -95,11 +95,6 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                 RandomizeItemTypes(_levelInstance);
             }
 
-            if (Settings.IncludeKeyItems)
-            {
-                RandomizeKeyItems(_levelInstance);
-            }
-
             if (Settings.RandomizeItemPositions)
             {
                 RandomizeItemLocations(_levelInstance);
@@ -126,6 +121,22 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         {
             (ScriptEditor.Script as TR1Script).Enable3dPickups = false;
             ScriptEditor.SaveScript();
+        }
+    }
+
+    public void RandomizeKeyItems()
+    {
+        foreach (TR1ScriptedLevel lvl in Levels)
+        {
+            LoadLevelInstance(lvl);
+            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
+            RandomizeKeyItems(_levelInstance);
+
+            SaveLevelInstance();
+            if (!TriggerProgress())
+            {
+                break;
+            }
         }
     }
 

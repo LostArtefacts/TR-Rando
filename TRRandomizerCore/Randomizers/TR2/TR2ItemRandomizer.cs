@@ -52,11 +52,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 RandomizeItemLocations(_levelInstance);
             }
 
-            if (Settings.IncludeKeyItems)
-            {
-                RandomizeKeyItems(_levelInstance);
-            }
-
             if (Settings.RandomizeItemTypes)
             {
                 RandomizeItemTypes(_levelInstance);
@@ -95,6 +90,22 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             {
                 PopulateHSHCloset();
             }
+
+            SaveLevelInstance();
+            if (!TriggerProgress())
+            {
+                break;
+            }
+        }
+    }
+
+    public void RandomizeKeyItems()
+    {
+        foreach (TR2ScriptedLevel lvl in Levels)
+        {
+            LoadLevelInstance(lvl);
+            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
+            RandomizeKeyItems(_levelInstance);
 
             SaveLevelInstance();
             if (!TriggerProgress())
