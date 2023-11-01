@@ -879,7 +879,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                         {
                             Location location2ndBoat = vehicles[entity];
                             int checkCount = 0;
-                            while (location2ndBoat.IsTheSame(vehicles[entity]) && checkCount < 5)//compare locations in bottom of water ( authorize 5 round max in case there is only 1 valid location)
+                            while (location2ndBoat.IsEquivalent(vehicles[entity]) && checkCount < 5)//compare locations in bottom of water ( authorize 5 round max in case there is only 1 valid location)
                             {
                                 location2ndBoat = VehicleUtilities.GetRandomLocation(_levelInstance, TR2Type.Boat, _generator, false);
                                 checkCount++;

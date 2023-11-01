@@ -359,6 +359,8 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
+        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
+
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR1Entity entity = level.Data.Entities[i];
@@ -367,22 +369,10 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                 continue;
             }
 
-            // Only move a key item if there is at least one location defined for it. Any triggers below the
-            // item will be handled by default environment mods, so don't place an item in the same sector as a secret.
-            // The only one we don't currently move is MinesFuseNearConveyor - potential FlipMap complications.
             int itemID = 10000 + ((level.Script.OriginalSequence - 1) * 1000) + (int)entity.TypeID + entity.Room;
             List<Location> pool = locations.FindAll(l => l.KeyItemGroupID == itemID);
-            if (pool.Count > 0)
-            {
-                Location location;
-                do
-                {
-                    location = pool[_generator.Next(0, pool.Count)];
-                }
-                while (location.ContainsSecret(level.Data, floorData));
-
-                _picker.SetLocation(entity, location);
-            }
+            Location location = _picker.GetKeyItemLocation(locations, entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData));
+            _picker.SetLocation(entity, location);
         }
     }
 

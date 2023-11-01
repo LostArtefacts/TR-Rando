@@ -343,11 +343,17 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             return;
         }
 
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level.Data);
+
+        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
+
         //Get all locations that have a KeyItemGroupID - e.g. intended for key items
         List<Location> levelLocations = _keyItemLocations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
 
-        foreach (TR3Entity entity in level.Data.Entities)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
+            TR3Entity entity = level.Data.Entities[i];
             //Calculate its alias
             TR3Type aliasedKeyItemID = entity.TypeID + entity.Room + GetLevelKeyItemBaseAlias(level.Name);
 
@@ -373,9 +379,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                     //Only get locations that are to position the intended key item.
                     //We can probably get rid of the do while loop as any location in this list should be valid
                     List<Location> keyItemLocations = levelLocations.Where(i => i.KeyItemGroupID == (int)aliasedKeyItemID).ToList();
-                            
-                    Location location = keyItemLocations[_generator.Next(0, keyItemLocations.Count)];
-
+                    Location location = _picker.GetKeyItemLocation(keyItemLocations, entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData));
                     _picker.SetLocation(entity, location);
 
                 } while (!_keyItemZones[level.Name].AllowedRooms[aliasedKeyItemID].Contains(entity.Room) &&

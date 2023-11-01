@@ -32,6 +32,92 @@ public static class LocationUtilities
         return false;
     }
 
+    public static bool HasPickupTriger(TR1Entity entity, int entityIndex, TR1Level level, FDControl floorData)
+    {
+        TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+        bool hasTrigger = HasPickupTrigger(sector, entityIndex, floorData);
+        if (level.Rooms[entity.Room].AlternateRoom != -1)
+        {
+            sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, level.Rooms[entity.Room].AlternateRoom, level, floorData);
+            hasTrigger |= HasPickupTrigger(sector, entityIndex, floorData);
+        }
+        return hasTrigger;
+    }
+
+    public static bool HasAnyTrigger(Location location, TR1Level level, FDControl floorData)
+    {
+        TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);
+        bool hasTrigger = HasAnyTrigger(sector, floorData);
+        if (level.Rooms[location.Room].AlternateRoom != -1)
+        {
+            sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, level.Rooms[location.Room].AlternateRoom, level, floorData);
+            hasTrigger |= HasAnyTrigger(sector, floorData);
+        }
+        return hasTrigger;
+    }
+
+    public static bool HasPickupTriger(TR2Entity entity, int entityIndex, TR2Level level, FDControl floorData)
+    {
+        TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+        bool hasTrigger = HasPickupTrigger(sector, entityIndex, floorData);
+        if (level.Rooms[entity.Room].AlternateRoom != -1)
+        {
+            sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, level.Rooms[entity.Room].AlternateRoom, level, floorData);
+            hasTrigger |= HasPickupTrigger(sector, entityIndex, floorData);
+        }
+        return hasTrigger;
+    }
+
+    public static bool HasAnyTrigger(Location location, TR2Level level, FDControl floorData)
+    {
+        TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);
+        bool hasTrigger = HasAnyTrigger(sector, floorData);
+        if (level.Rooms[location.Room].AlternateRoom != -1)
+        {
+            sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, level.Rooms[location.Room].AlternateRoom, level, floorData);
+            hasTrigger |= HasAnyTrigger(sector, floorData);
+        }
+        return hasTrigger;
+    }
+
+    public static bool HasPickupTriger(TR3Entity entity, int entityIndex, TR3Level level, FDControl floorData)
+    {
+        TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+        bool hasTrigger = HasPickupTrigger(sector, entityIndex, floorData);
+        if (level.Rooms[entity.Room].AlternateRoom != -1)
+        {
+            sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, level.Rooms[entity.Room].AlternateRoom, level, floorData);
+            hasTrigger |= HasPickupTrigger(sector, entityIndex, floorData);
+        }
+        return hasTrigger;
+    }
+
+    public static bool HasAnyTrigger(Location location, TR3Level level, FDControl floorData)
+    {
+        TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);
+        bool hasTrigger = HasAnyTrigger(sector, floorData);
+        if (level.Rooms[location.Room].AlternateRoom != -1)
+        {
+            sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, level.Rooms[location.Room].AlternateRoom, level, floorData);
+            hasTrigger |= HasAnyTrigger(sector, floorData);
+        }
+        return hasTrigger;
+    }
+
+    public static bool HasPickupTrigger(TRRoomSector sector, int entityIndex, FDControl floorData)
+    {
+        return sector.FDIndex != 0
+            && floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+            && trigger.TrigType == FDTrigType.Pickup
+            && trigger.TrigActionList[0].Parameter == entityIndex;
+    }
+
+    public static bool HasAnyTrigger(TRRoomSector sector, FDControl floorData)
+    {
+        return sector.FDIndex != 0
+            && floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger;
+    }
+
     public static bool SectorIsSlipperySlope(TRRoomSector sector, FDControl floorData)
     {
         return sector.FDIndex != 0
