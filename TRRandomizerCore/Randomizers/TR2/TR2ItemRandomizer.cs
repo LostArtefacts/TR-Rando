@@ -345,7 +345,13 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 continue;
             }
 
-            Location location = GetKeyItemLocation(entity, i, zonedLocations);
+            Location location;
+            do
+            {
+                location = GetKeyItemLocation(entity, i, zonedLocations);
+            }
+            while (location != null && !TestKeyItemLocation(location, level));
+
             if (location != null)
             {
                 _picker.SetLocation(entity, location);
@@ -496,6 +502,22 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
 
         return location;
+    }
+
+    private bool TestKeyItemLocation(Location location, TR2CombinedLevel level)
+    {
+        // Make sure if we're placing on the same tile as an enemy, that the
+        // enemy can drop the item.
+        TR2Entity enemy = level.Data.Entities
+            .FindAll(e => TR2TypeUtilities.IsEnemyType(e.TypeID))
+            .Find(e => e.GetLocation().IsEquivalent(location));
+
+        return enemy == null || TR2TypeUtilities.CanDropPickups
+        (
+            TR2TypeUtilities.GetAliasForLevel(level.Name, enemy.TypeID), 
+            Settings.RandomizeEnemies && !Settings.ProtectMonks,
+            Settings.RandomizeEnemies && Settings.UnconditionalChickens
+        );
     }
 
     private void RandomizeItemTypes(TR2CombinedLevel level)

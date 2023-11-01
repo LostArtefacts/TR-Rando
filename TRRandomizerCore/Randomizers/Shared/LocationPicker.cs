@@ -1,6 +1,7 @@
 ﻿using TRLevelControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers;
 
@@ -13,6 +14,7 @@ public class LocationPicker
     private Random _generator;
 
     public Func<Location, bool> TriggerTestAction { get; set; }
+    public Func<Location, bool> KeyItemTestAction { get; set; }
 
     public void Initialise(List<Location> globalLocations, Random generator)
     {
@@ -42,13 +44,7 @@ public class LocationPicker
             return locations[_generator.Next(0, locations.Count)];
         }
 
-        Location currentLocation = new()
-        {
-            X = entity.X,
-            Y = entity.Y,
-            Z = entity.Z,
-            Room = entity.Room,
-        };
+        Location currentLocation = entity.GetLocation();
 
         // If there is a trigger for this key item that will be shifted by environment
         // changes, make sure to select a location that doesn't already have a trigger.
@@ -62,7 +58,8 @@ public class LocationPicker
                 break;
             }
         }
-        while (TriggerTestAction.Invoke(location) || _usedTriggerLocations.Contains(location));
+        while (TriggerTestAction(location) || _usedTriggerLocations.Contains(location) 
+            || (KeyItemTestAction != null && !KeyItemTestAction(location)));
 
         _usedTriggerLocations.Add(location);
         return location;
@@ -89,13 +86,7 @@ public class LocationPicker
     public static Location CreateExcludedLocation<T>(TREntity<T> entity, Func<Location, TRRoomSector> sectorFunc)
         where T : Enum
     {
-        Location location = new()
-        {
-            X = entity.X,
-            Y = entity.Y,
-            Z = entity.Z,
-            Room = entity.Room,
-        };
+        Location location = entity.GetLocation();
 
         TRRoomSector sector = sectorFunc(location);
         while (sector.RoomBelow != TRConsts.NoRoom)

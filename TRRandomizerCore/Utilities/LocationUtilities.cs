@@ -8,6 +8,19 @@ namespace TRRandomizerCore.Utilities;
 
 public static class LocationUtilities
 {
+    public static Location GetLocation<T>(this TREntity<T> entity)
+        where T : Enum
+    {
+        return new()
+        {
+            X = entity.X,
+            Y = entity.Y,
+            Z = entity.Z,
+            Room = entity.Room,
+            Angle = entity.Angle,
+        };
+    }
+
     public static bool ContainsSecret(this Location location, TR1Level level, FDControl floorData)
     {
         TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);

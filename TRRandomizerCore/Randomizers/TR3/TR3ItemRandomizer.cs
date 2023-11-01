@@ -347,6 +347,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         floorData.ParseFromLevel(level.Data);
 
         _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
+        _picker.KeyItemTestAction = location => TestKeyItemLocation(location, level);
 
         //Get all locations that have a KeyItemGroupID - e.g. intended for key items
         List<Location> levelLocations = _keyItemLocations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
@@ -387,6 +388,21 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 //Try generating locations until it is in the zone - if list contains 2048 then any room is allowed.
             }
         }
+    }
+
+    private bool TestKeyItemLocation(Location location, TR3CombinedLevel level)
+    {
+        // Make sure if we're placing on the same tile as an enemy, that the
+        // enemy can drop the item.
+        TR3Entity enemy = level.Data.Entities
+            .FindAll(e => TR3TypeUtilities.IsEnemyType(e.TypeID))
+            .Find(e => e.GetLocation().IsEquivalent(location));
+
+        return enemy == null || TR3TypeUtilities.CanDropPickups
+        (
+            TR3TypeUtilities.GetAliasForLevel(level.Name, enemy.TypeID),
+            !Settings.RandomizeEnemies || Settings.ProtectMonks
+        );
     }
 
     private static int GetLevelKeyItemBaseAlias(string name)
