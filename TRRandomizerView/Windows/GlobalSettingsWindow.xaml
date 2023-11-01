@@ -87,8 +87,8 @@
                 Grid.Column="1">
                 Add paths to allow returning to the start of the level (where possible). See
                 <Hyperlink
-                    ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/RETURNPATHS.md"
-                    NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/RETURNPATHS.md"
+                    ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/RETURNPATHS.md"
+                    NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/RETURNPATHS.md"
                     RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink> for details.
             </TextBlock>
 
