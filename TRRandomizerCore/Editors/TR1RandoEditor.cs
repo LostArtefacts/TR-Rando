@@ -103,7 +103,7 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
         }
 
         // Environment randomizer always runs
-        target += numLevels;
+        target += numLevels * 2;
 
         return target;
     }
@@ -281,6 +281,12 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing key items");
                 itemRandomizer.RandomizeKeyItems();
+            }
+
+            if (!monitor.IsCancelled)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Finalizing environment changes");
+                environmentRandomizer.FinalizeEnvironment();
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeOutfits)
