@@ -82,21 +82,4 @@ public class LocationPicker
             entity.Angle = (short)(_generator.Next(0, 8) * _rotation);
         }
     }
-
-    public static Location CreateExcludedLocation<T>(TREntity<T> entity, Func<Location, TRRoomSector> sectorFunc)
-        where T : Enum
-    {
-        Location location = entity.GetLocation();
-
-        TRRoomSector sector = sectorFunc(location);
-        while (sector.RoomBelow != TRConsts.NoRoom)
-        {
-            location.Y = (sector.Floor + 1) * TRConsts.Step1;
-            location.Room = sector.RoomBelow;
-            sector = sectorFunc(location);
-        }
-
-        location.Y = sector.Floor * TRConsts.Step1;
-        return location;
-    }
 }
