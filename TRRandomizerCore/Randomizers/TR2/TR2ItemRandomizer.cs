@@ -37,33 +37,66 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     public override void Randomize(int seed)
     {
-        _generator = new Random(seed);
+        _generator = new(seed);
 
         foreach (TR2ScriptedLevel lvl in Levels)
         {
-            //Read the level into a combined data/script level object
             LoadLevelInstance(lvl);
 
             FindUnarmedPistolsLocation();
 
             _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
 
-            //Apply the modifications
-            RandomizeItemLocations(_levelInstance);
+            if (Settings.RandomizeItemPositions)
+            {
+                RandomizeItemLocations(_levelInstance);
+            }
+
+            if (Settings.IncludeKeyItems)
+            {
+                RandomizeKeyItems(_levelInstance);
+            }
 
             if (Settings.RandomizeItemTypes)
-                RandomizeItemTypes();
+            {
+                RandomizeItemTypes(_levelInstance);
+            }
 
             if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
-                EnforceOneLimit();
+            {
+                EnforceOneLimit(_levelInstance);
+            }
 
             RandomizeVehicles();
 
-            RandomizeSeraph();
-
-            //Write back the level file
             SaveLevelInstance();
+            if (!TriggerProgress())
+            {
+                break;
+            }
+        }
+    }
 
+    // Called post enemy randomization if used to allow accurate enemy scoring
+    public void RandomizeAmmo()
+    {
+        foreach (TR2ScriptedLevel lvl in Levels)
+        {
+            LoadLevelInstance(lvl);
+
+            FindUnarmedPistolsLocation();
+
+            if (lvl.RemovesWeapons)
+            {
+                RandomizeUnarmedLevelWeapon();
+            }
+
+            if (lvl.Is(TR2LevelNames.HOME))
+            {
+                PopulateHSHCloset();
+            }
+
+            SaveLevelInstance();
             if (!TriggerProgress())
             {
                 break;
@@ -75,14 +108,10 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     {
         foreach (TR2ScriptedLevel lvl in Levels)
         {
-            //Read the level into a combined data/script level object
             LoadLevelInstance(lvl);
-
             RandomizeSprites();
 
-            //Write back the level file
             SaveLevelInstance();
-
             if (!TriggerProgress())
             {
                 break;
@@ -263,33 +292,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
     }
 
-    // Called post enemy randomization if used to allow accurate enemy scoring
-    public void RandomizeAmmo()
-    {
-        foreach (TR2ScriptedLevel lvl in Levels)
-        {
-            LoadLevelInstance(lvl);
-
-            FindUnarmedPistolsLocation();
-
-            if (lvl.RemovesWeapons)
-            {
-                RandomizeUnarmedLevelWeapon();
-            }
-
-            if (lvl.Is(TR2LevelNames.HOME))
-            {
-                PopulateHSHCloset();
-            }
-
-            SaveLevelInstance();
-            if (!TriggerProgress())
-            {
-                break;
-            }
-        }
-    }
-
     public void RandomizeItemLocations(TR2CombinedLevel level)
     {
         if (level.Is(TR2LevelNames.HOME) && (level.Script.RemovesWeapons || level.Script.RemovesAmmo))
@@ -297,23 +299,26 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             return;
         }
 
-        List<TR2Type> targetTypes = new();
-        if (Settings.RandomizeItemPositions)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            targetTypes.AddRange(TR2TypeUtilities.GetGunTypes());
-            targetTypes.AddRange(TR2TypeUtilities.GetAmmoTypes());
-        }
+            TR2Entity entity = level.Data.Entities[i];
+            if (!TR2TypeUtilities.IsStandardPickupType(entity.TypeID)
+                || ItemFactory.IsItemLocked(level.Name, i)
+                || i == _unarmedLevelPistolIndex)
+            {
+                continue;
+            }
 
-        if (Settings.IncludeKeyItems)
-        {
-            targetTypes.AddRange(TR2TypeUtilities.GetKeyItemTypes());
+            Location location = _picker.GetPickupLocation();
+            if (location != null)
+            {
+                _picker.SetLocation(entity, location);
+            }
         }
+    }
 
-        if (targetTypes.Count == 0)
-        {
-            return;
-        }
-
+    private void RandomizeKeyItems(TR2CombinedLevel level)
+    {
         ZonedLocationCollection zonedLocations = new();
         if (!level.IsAssault)
         {
@@ -323,22 +328,21 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR2Entity entity = level.Data.Entities[i];
-            if (!targetTypes.Contains(entity.TypeID)
-                || ItemFactory.IsItemLocked(level.Name, i)
-                || i == _unarmedLevelPistolIndex)
+            if (!TR2TypeUtilities.IsKeyItemType(entity.TypeID)
+                || ItemFactory.IsItemLocked(level.Name, i))
             {
                 continue;
             }
 
-            Location location = TR2TypeUtilities.IsKeyItemType(entity.TypeID)
-                ? GetKeyItemLocation(entity, i, zonedLocations)
-                : _picker.GetPickupLocation();
-
+            Location location = GetKeyItemLocation(entity, i, zonedLocations);
             if (location != null)
             {
                 _picker.SetLocation(entity, location);
             }
         }
+
+        // Special case for the Seraph in Deck/Barkhang
+        RandomizeSeraph();
     }
 
     private Location GetKeyItemLocation(TR2Entity entity, int index, ZonedLocationCollection zonedLocations)
@@ -483,51 +487,44 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         return location;
     }
 
-    private void RandomizeItemTypes()
+    private void RandomizeItemTypes(TR2CombinedLevel level)
     {
-        if (_levelInstance.IsAssault
-            || (_levelInstance.Is(TR2LevelNames.HOME) && (_levelInstance.Script.RemovesWeapons || _levelInstance.Script.RemovesAmmo)))
+        if (level.IsAssault
+            || (level.Is(TR2LevelNames.HOME) && (level.Script.RemovesWeapons || level.Script.RemovesAmmo)))
         {
             return;
         }
 
-        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetGunTypes();
-        stdItemTypes.AddRange(TR2TypeUtilities.GetAmmoTypes());
+        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetStandardPickupTypes();
 
-        for (int i = 0; i < _levelInstance.Data.Entities.Count; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            TR2Entity entity = _levelInstance.Data.Entities[i];
-            TR2Type currentType = entity.TypeID;
-
+            TR2Entity entity = level.Data.Entities[i];
             if (i == _unarmedLevelPistolIndex)
             {
                 // Handled separately in RandomizeAmmo
                 continue;
             }
-            else if (stdItemTypes.Contains(currentType))
+            else if (stdItemTypes.Contains(entity.TypeID))
             {
                 entity.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
             }
         }
     }
 
-    private void EnforceOneLimit()
+    private void EnforceOneLimit(TR2CombinedLevel level)
     {
-        List<TR2Type> oneOfEachType = new();
+        HashSet<TR2Type> uniqueTypes = new();
 
-        // look for extra utility/ammo items and hide them
-        foreach (TR2Entity ent in _levelInstance.Data.Entities)
+        // Look for extra utility/ammo items and hide them
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            TR2Type eType = ent.TypeID;
-            if (TR2TypeUtilities.IsUtilityType(eType) ||
-                TR2TypeUtilities.IsGunType(eType))
+            TR2Entity entity = level.Data.Entities[i];
+            if (TR2TypeUtilities.IsStandardPickupType(entity.TypeID)
+                && !uniqueTypes.Add(entity.TypeID))
             {
-                if (oneOfEachType.Contains(eType))
-                {
-                    ItemUtilities.HideEntity(ent);
-                }
-                else
-                    oneOfEachType.Add(ent.TypeID);
+                ItemUtilities.HideEntity(entity);
+                ItemFactory.FreeItem(level.Name, i);
             }
         }
     }

@@ -74,7 +74,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
     public override void Randomize(int seed)
     {
-        _generator = new Random(seed);
+        _generator = new(seed);
 
         foreach (TR1ScriptedLevel lvl in Levels)
         {
@@ -86,27 +86,36 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             _secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($@"TR1\SecretMapping\{_levelInstance.Name}-SecretMapping.json"));
 
             if (Settings.IncludeExtraPickups)
+            {
                 AddExtraPickups(_levelInstance);
+            }
 
             if (Settings.RandomizeItemTypes)
+            {
                 RandomizeItemTypes(_levelInstance);
+            }
 
-            // Do key items before standard items because we exclude
-            // key item tiles from the valid pickup location pool
             if (Settings.IncludeKeyItems)
+            {
                 RandomizeKeyItems(_levelInstance);
+            }
 
             if (Settings.RandomizeItemPositions)
+            {
                 RandomizeItemLocations(_levelInstance);
+            }
 
             if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
+            {
                 EnforceOneLimit(_levelInstance);
+            }
 
             if (Settings.RandomizeItemSprites)
+            {
                 RandomizeSprites();
+            }
 
             SaveLevelInstance();
-
             if (!TriggerProgress())
             {
                 break;
@@ -235,31 +244,28 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             return;
         }
 
-        ISet<TR1Type> oneOfEachType = new HashSet<TR1Type>();
+        HashSet<TR1Type> uniqueTypes = new();
         if (_unarmedLevelPistols != null)
         {
             // These will be excluded, but track their type before looking at other items.
-            oneOfEachType.Add(_unarmedLevelPistols.TypeID);
+            uniqueTypes.Add(_unarmedLevelPistols.TypeID);
         }
 
         // Look for extra utility/ammo items and hide them
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            TR1Entity ent = level.Data.Entities[i];
-            if (_secretMapping.RewardEntities.Contains(i) || ent == _unarmedLevelPistols)
+            TR1Entity entity = level.Data.Entities[i];
+            if (_secretMapping.RewardEntities.Contains(i) || entity == _unarmedLevelPistols)
             {
                 // Rewards and unarmed level weapons excluded
                 continue;
             }
             
-            TR1Type eType = ent.TypeID;
-            if (TR1TypeUtilities.IsStandardPickupType(eType) || TR1TypeUtilities.IsCrystalPickup(eType))
+            if ((TR1TypeUtilities.IsStandardPickupType(entity.TypeID) || TR1TypeUtilities.IsCrystalPickup(entity.TypeID))
+                && !uniqueTypes.Add(entity.TypeID))
             {
-                if (!oneOfEachType.Add(eType))
-                {
-                    ItemUtilities.HideEntity(ent);
-                    ItemFactory.FreeItem(level.Name, i);
-                }
+                ItemUtilities.HideEntity(entity);
+                ItemFactory.FreeItem(level.Name, i);
             }
         }
     }
@@ -345,8 +351,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR1Entity entity = level.Data.Entities[i];
-            TR1Type type = entity.TypeID;
-            if (!TR1TypeUtilities.IsKeyItemType(type) || IsSecretItem(entity, i, level.Data, floorData))
+            if (!TR1TypeUtilities.IsKeyItemType(entity.TypeID) || IsSecretItem(entity, i, level.Data, floorData))
             {
                 continue;
             }

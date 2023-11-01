@@ -43,7 +43,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     public override void Randomize(int seed)
     {
-        _generator = new Random(seed);
+        _generator = new(seed);
         
         foreach (TR3ScriptedLevel lvl in Levels)
         {
@@ -56,24 +56,31 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
             // #312 If this is the assault course, import required models. On failure, don't perform any item rando.
             if (_levelInstance.IsAssault && !ImportAssaultModels(_levelInstance))
+            {
                 continue;
+            }
 
             if (Settings.RandomizeItemTypes)
+            {
                 RandomizeItemTypes(_levelInstance);
+            }
 
-            // Do key items before standard items because we exclude
-            // key item tiles from the valid pickup location pool
             if (Settings.IncludeKeyItems)
+            {
                 RandomizeKeyItems(_levelInstance);
+            }
 
             if (Settings.RandomizeItemPositions)
+            {
                 RandomizeItemLocations(_levelInstance);
+            }
 
             if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
+            {
                 EnforceOneLimit(_levelInstance);
+            }
 
             SaveLevelInstance();
-
             if (!TriggerProgress())
             {
                 break;
@@ -207,11 +214,11 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     public void EnforceOneLimit(TR3CombinedLevel level)
     {
-        ISet<TR3Type> oneOfEachType = new HashSet<TR3Type>();
+        HashSet<TR3Type> uniqueTypes = new();
         if (_unarmedLevelPistols != null)
         {
             // These will be excluded, but track their type before looking at other items.
-            oneOfEachType.Add(_unarmedLevelPistols.TypeID);
+            uniqueTypes.Add(_unarmedLevelPistols.TypeID);
         }
 
         // FD for removing crystal triggers if applicable.
@@ -221,25 +228,22 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         // Look for extra utility/ammo items and hide them
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            TR3Entity ent = level.Data.Entities[i];
-            if ((_secretMapping != null && _secretMapping.RewardEntities.Contains(i)) || ent == _unarmedLevelPistols)
+            TR3Entity entity = level.Data.Entities[i];
+            if ((_secretMapping != null && _secretMapping.RewardEntities.Contains(i)) || entity == _unarmedLevelPistols)
             {
                 // Rewards and unarmed level weapons excluded
                 continue;
             }
 
-            TR3Type eType = ent.TypeID;
-            if (TR3TypeUtilities.IsStandardPickupType(eType) || TR3TypeUtilities.IsCrystalPickup(eType))
+            if ((TR3TypeUtilities.IsStandardPickupType(entity.TypeID) || TR3TypeUtilities.IsCrystalPickup(entity.TypeID))
+                && !uniqueTypes.Add(entity.TypeID))
             {
-                if (!oneOfEachType.Add(eType))
+                ItemUtilities.HideEntity(entity);
+                ItemFactory.FreeItem(level.Name, i);
+                if (TR3TypeUtilities.IsCrystalPickup(entity.TypeID))
                 {
-                    ItemUtilities.HideEntity(ent);
-                    ItemFactory.FreeItem(level.Name, i);
-                    if (TR3TypeUtilities.IsCrystalPickup(eType))
-                    {
-                        FDUtilities.RemoveEntityTriggers(level.Data, i, floorData);
-                    }
-                }    
+                    FDUtilities.RemoveEntityTriggers(level.Data, i, floorData);
+                }
             }
         }
 
