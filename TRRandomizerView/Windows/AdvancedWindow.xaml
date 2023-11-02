@@ -490,8 +490,8 @@
                             <Label.Content>
                                 <TextBlock>
                                     Standard restrictions will apply for cross-level enemies. See
-                                    <Hyperlink ToolTip="https://github.com/DanzaG/TR2-Rando/blob/master/TRRandomizerCore/Resources/Documentation/ENEMIES.md"
-                                               NavigateUri="https://github.com/DanzaG/TR2-Rando/blob/master/TRRandomizerCore/Resources/Documentation/ENEMIES.md"
+                                    <Hyperlink ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/ENEMIES.md"
+                                               NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/ENEMIES.md"
                                                RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
                                     for details.
                                 </TextBlock>
@@ -1623,8 +1623,8 @@
                             <TextBlock>
                                 Use a pre-defined secret pack, compiled by community members. This may enforce glitched/hard secrets, and may
                                 <LineBreak/>modify level environments to match. See
-                                <Hyperlink ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/SECRETS.md#secret-packs"
-                                           NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/SECRETS.md#secret-packs"
+                                <Hyperlink ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/SECRETS.md#secret-packs"
+                                           NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/SECRETS.md#secret-packs"
                                            RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink> for full details.
                             </TextBlock>
                         </Label>

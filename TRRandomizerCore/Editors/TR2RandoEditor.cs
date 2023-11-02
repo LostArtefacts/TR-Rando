@@ -31,15 +31,81 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
 
     protected override int GetSaveTarget(int numLevels)
     {
-        int target = base.GetSaveTarget(numLevels) + Settings.GetSaveTarget(numLevels);
-        if (Settings.RandomizeItems && Settings.RandomizeItemSprites)
+        int target = base.GetSaveTarget(numLevels);
+
+        if (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames)
+        {
+            target++;
+        }
+
+        if (Settings.RandomizeNightMode)
+        {
+            target += numLevels;
+            if (!Settings.RandomizeTextures)
+            {
+                // Texture randomizer will run if night mode is on to ensure skyboxes and such like match
+                target += numLevels;
+            }
+        }
+
+        if (Settings.RandomizeSecrets)
         {
             target += numLevels;
         }
+
+        if (Settings.RandomizeAudio)
+        {
+            target += numLevels;
+        }
+
+        if (Settings.RandomizeItems)
+        {
+            // Standard/key item rando followed by unarmed logic after enemy rando
+            target += numLevels * 2;
+            if (Settings.RandomizeItemSprites)
+            {
+                target += numLevels;
+            }
+            if (Settings.IncludeKeyItems)
+            {
+                target += numLevels;
+            }
+        }
+
+        if (Settings.RandomizeStartPosition)
+        {
+            target += numLevels;
+        }
+
+        if (Settings.DeduplicateTextures)
+        {
+            // *2 because of multithreaded approach
+            target += numLevels * 2;
+        }
+
         if (Settings.RandomizeEnemies)
         {
-            target += numLevels; // Used to eliminate unused enemies prior to any other processing
+            // *4 => 3 for multithreading work, 1 for ModelAdjuster
+            target += Settings.CrossLevelEnemies ? numLevels * 4 : numLevels;
+            // And again for eliminating unused enemies
+            target += numLevels;
         }
+
+        if (Settings.RandomizeTextures)
+        {
+            // *3 because of multithreaded approach
+            target += numLevels * 3;
+        }
+
+        if (Settings.RandomizeOutfits)
+        {
+            // *2 because of multithreaded approach
+            target += numLevels * 2;
+        }
+
+        // Environment randomizer always runs
+        target += numLevels * 2;
+
         return target;
     }
 
@@ -68,6 +134,19 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
 
         ItemFactory itemFactory = new();
         TR2TextureMonitorBroker textureMonitor = new();
+
+        TR2ItemRandomizer itemRandomizer = new()
+        {
+            ScriptEditor = tr23ScriptEditor,
+            Levels = levels,
+            BasePath = wipDirectory,
+            BackupPath = backupDirectory,
+            SaveMonitor = monitor,
+            Settings = Settings,
+            TextureMonitor = textureMonitor,
+            ItemFactory = itemFactory,
+        };
+
         TR2EnvironmentRandomizer environmentRandomizer = new()
         {
             ScriptEditor = tr23ScriptEditor,
@@ -143,21 +222,10 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
                 }.Randomize(Settings.SecretSeed);
             }
 
-            TR2ItemRandomizer itemRandomizer = null;
             if (!monitor.IsCancelled && Settings.RandomizeItems)
             {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, string.Format("Randomizing standard{0} items", Settings.IncludeKeyItems ? " and key" : string.Empty));
-                (itemRandomizer = new TR2ItemRandomizer
-                {
-                    ScriptEditor = tr23ScriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings,
-                    TextureMonitor = textureMonitor,
-                    ItemFactory = itemFactory,
-                }).Randomize(Settings.ItemSeed);
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing standard items");
+                itemRandomizer.Randomize(Settings.ItemSeed);
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeEnemies)
@@ -215,6 +283,18 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, Settings.RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
                 environmentRandomizer.Randomize(Settings.EnvironmentSeed);
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeItems && Settings.IncludeKeyItems)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing key items");
+                itemRandomizer.RandomizeKeyItems();
+            }
+
+            if (!monitor.IsCancelled)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Finalizing environment changes");
+                environmentRandomizer.FinalizeEnvironment();
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeAudio)

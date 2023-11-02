@@ -176,7 +176,7 @@ class Program
         {
             if (!TR1TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(LocationPicker.CreateExcludedLocation(entity, loc =>
+                exclusions.Add(entity.GetFloorLocation(loc =>
                     FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
             }
         }
@@ -200,7 +200,7 @@ class Program
         {
             if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(LocationPicker.CreateExcludedLocation(entity, loc =>
+                exclusions.Add(entity.GetFloorLocation(loc =>
                     FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
             }
         }
@@ -224,7 +224,7 @@ class Program
         {
             if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(LocationPicker.CreateExcludedLocation(entity, loc =>
+                exclusions.Add(entity.GetFloorLocation(loc =>
                     FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
             }
         }

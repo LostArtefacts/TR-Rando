@@ -487,6 +487,16 @@ public static class TR2TypeUtilities
                 type == TR2Type.Grenades_S_P);
     }
 
+    public static List<TR2Type> GetStandardPickupTypes()
+    {
+        return GetGunTypes().Concat(GetAmmoTypes()).ToList();
+    }
+
+    public static bool IsStandardPickupType(TR2Type type)
+    {
+        return GetStandardPickupTypes().Contains(type);
+    }
+
     public static List<TR2Type> GetKeyItemTypes()
     {
         return new()

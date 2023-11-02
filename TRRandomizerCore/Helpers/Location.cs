@@ -69,19 +69,11 @@ public class Location
         PackID = DefaultPackID;
     }
 
-    /// <summary>
-    /// Compare the location to the location in parameter only in a matter of X;Y;Z and Room
-    /// </summary>
-    /// <param name="locationToTest"></param>
-    /// <returns>True if they are the same</returns>
-    public bool IsTheSame(Location locationToTest)
+    public bool IsEquivalent(Location other)
     {
-        if (X == locationToTest.X &&
-            Y == locationToTest.Y &&
-            Z == locationToTest.Z &&
-            Room == locationToTest.Room) return true;
-        else return false;
+        return other.X == X
+            && other.Y == Y
+            && other.Z == Z
+            && other.Room == Room;
     }
-
-
 }

@@ -64,6 +64,10 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
         if (Settings.RandomizeItems)
         {
             target += numLevels;
+            if (Settings.IncludeKeyItems)
+            {
+                target += numLevels;
+            }
         }
 
         if (Settings.RandomizeSecretRewardsPhysical)
@@ -99,7 +103,7 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
         }
 
         // Environment randomizer always runs
-        target += numLevels;
+        target += numLevels * 2;
 
         return target;
     }
@@ -132,6 +136,17 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
 
         ItemFactory itemFactory = new(@"Resources\TR1\Items\repurposable_items.json");
         TR1TextureMonitorBroker textureMonitor = new();
+
+        TR1ItemRandomizer itemRandomizer = new()
+        {
+            ScriptEditor = scriptEditor,
+            Levels = levels,
+            BasePath = wipDirectory,
+            BackupPath = backupDirectory,
+            SaveMonitor = monitor,
+            Settings = Settings,
+            ItemFactory = itemFactory
+        };
 
         TR1EnvironmentRandomizer environmentRandomizer = new()
         {
@@ -224,17 +239,8 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
             // - this allows for accounting for newly added items.
             if (!monitor.IsCancelled && Settings.RandomizeItems)
             {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
-                new TR1ItemRandomizer
-                {
-                    ScriptEditor = scriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings,
-                    ItemFactory = itemFactory
-                }.Randomize(Settings.ItemSeed);
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing standard items");
+                itemRandomizer.Randomize(Settings.ItemSeed);
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeSecretRewardsPhysical)
@@ -269,6 +275,18 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, Settings.RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
                 environmentRandomizer.Randomize(Settings.EnvironmentSeed);
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeItems && Settings.IncludeKeyItems)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing key items");
+                itemRandomizer.RandomizeKeyItems();
+            }
+
+            if (!monitor.IsCancelled)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Finalizing environment changes");
+                environmentRandomizer.FinalizeEnvironment();
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeOutfits)
