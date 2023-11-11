@@ -13,13 +13,11 @@ public class Location
     public int Room { get; set; }
     public bool RequiresGlitch { get; set; }
     public Difficulty Difficulty { get; set; }
-    public bool IsInRoomSpace { get; set; }
     public ItemRange Range { get; set; }
     public RoomType RoomType { get; set; }
     public bool VehicleRequired { get; set; }
     public bool RequiresDamage { get; set; }
     public bool InvalidatesRoom { get; set; }
-    public int KeyItemGroupID { get; set; }
     public bool RequiresReturnPath { get; set; }
     public LevelState LevelState { get; set; }
 
