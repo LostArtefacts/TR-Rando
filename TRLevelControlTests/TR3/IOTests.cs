@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TRFDControl;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Base.Enums;
@@ -217,7 +218,7 @@ public class IOTests : TestBase
         for (int totalSecrets = 1; totalSecrets <= 21; totalSecrets++)
         {
             // The number of doors determines the trigger masks
-            int requiredDoors = (int)Math.Ceiling((double)totalSecrets / TRSecretPlacement<TR3Type>.MaskBits);
+            int requiredDoors = (int)Math.Ceiling((double)totalSecrets / TRConsts.MaskBits);
             List<int> doors = new(requiredDoors);
             for (int i = 0; i < requiredDoors; i++)
             {
@@ -245,7 +246,7 @@ public class IOTests : TestBase
                 int mask = 0;
                 doorTriggers.ForEach(s => mask += s.TriggerMask);
 
-                Assert.AreEqual(TRSecretPlacement<TR3Type>.FullActivation, mask);
+                Assert.AreEqual(TRConsts.FullMask, mask);
             }
         }
     }
