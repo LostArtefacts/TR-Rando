@@ -18,19 +18,19 @@ public abstract class AbstractLocationGenerator<L> where L : class
     protected FDControl _floorData;
     protected ISet<TRRoomSector> _excludedSectors, _antiExcludedSectors; // Anti-excluded => not necessarily included
 
-    public List<Location> Generate(L level, List<Location> exclusions)
+    public List<Location> Generate(L level, List<Location> exclusions, bool keyItemMode = false)
     {
         _floorData = new FDControl();
         ReadFloorData(level);
 
         // Manual exclusions or known rooms such as swamps we wish to eliminate first
-        DetermineBaseExcludedSectors(level, exclusions);
+        DetermineBaseExcludedSectors(level, exclusions, keyItemMode);
 
         // Check all remaining sectors and build a list of valid locations
         return GetValidLocations(level);
     }
 
-    protected void DetermineBaseExcludedSectors(L level, List<Location> exclusions)
+    protected void DetermineBaseExcludedSectors(L level, List<Location> exclusions, bool keyItemMode)
     {
         _excludedSectors = new HashSet<TRRoomSector>();
         _antiExcludedSectors = new HashSet<TRRoomSector>();
@@ -44,8 +44,10 @@ public abstract class AbstractLocationGenerator<L> where L : class
             _antiExcludedSectors.Add(GetSector(location, level));
         }
 
-        // Check all other room or individual location exclusions
-        List<Location> mainExclusions = exclusions.FindAll(l => l.Validated);
+        // Check all other room or individual location exclusions. If TargetType is set,
+        // it applies only to key item mode.
+        List<Location> mainExclusions = exclusions.FindAll(
+            l => l.Validated && (l.TargetType == -1 || keyItemMode));
         foreach (Location location in mainExclusions)
         {
             if (location.InvalidatesRoom)
@@ -136,11 +138,6 @@ public abstract class AbstractLocationGenerator<L> where L : class
     {
         foreach (TRRoomSector sector in GetRoomSectors(level, room))
         {
-            if (sector.IsImpenetrable)
-            {
-                continue;
-            }
-
             // Vertical?
             if (sector.RoomAbove != TRConsts.NoRoom || sector.RoomBelow != TRConsts.NoRoom)
             {
@@ -148,12 +145,10 @@ public abstract class AbstractLocationGenerator<L> where L : class
             }
 
             // Horizontal?
-            if (sector.FDIndex != 0)
+            if (sector.FDIndex != 0
+                && _floorData.Entries[sector.FDIndex].Any(e => e is FDPortalEntry))
             {
-                if (_floorData.Entries[sector.FDIndex].Any(e => e is FDPortalEntry))
-                {
-                    return true;
-                }
+                return true;
             }
         }
 
@@ -197,7 +192,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
             int flipIndex = flipSectors.IndexOf(flipSector);
 
             Location flipLoc = CreateLocation(level, flipRoom, flipIndex, flipSector);
-            if (flipLoc == null || flipLoc.Y != roomLoc.Y || flipSector.IsImpenetrable)
+            if (flipLoc == null || roomLoc.ToVector() != flipLoc.ToVector() || flipSector.IsImpenetrable)
             {
                 _excludedSectors.Add(roomSector);
             }
@@ -245,8 +240,9 @@ public abstract class AbstractLocationGenerator<L> where L : class
         {
             List<FDEntry> entries = _floorData.Entries[sector.FDIndex];
             bool invalidFloorData = false;
-            foreach (FDEntry entry in entries)
+            for (int i = 0; i < entries.Count; i++)
             {
+                FDEntry entry = entries[i];
                 if (entry is FDTriggerEntry trigger)
                 {
                     // Basic trigger checks - e.g. end level, underwater current
@@ -255,6 +251,11 @@ public abstract class AbstractLocationGenerator<L> where L : class
                         invalidFloorData = true;
                         break;
                     }
+                }
+                else if (entry is FDPortalEntry)
+                {
+                    invalidFloorData = true;
+                    break;
                 }
                 else if (entry is FDKillLaraEntry)
                 {
@@ -300,6 +301,11 @@ public abstract class AbstractLocationGenerator<L> where L : class
                         break;
                     }
                 }
+                else if (entry is TR3MinecartRotateLeftEntry && i < entries.Count - 1 && entries[i + 1] is TR3MinecartRotateRightEntry)
+                {
+                    // Minecart stops here, so block this tile.
+                    invalidFloorData = true;
+                }
             }
 
             // Bail out if we don't like the look of the FD here
@@ -324,6 +330,15 @@ public abstract class AbstractLocationGenerator<L> where L : class
         location.Z += dz;
         location.Angle = angle;
 
+        if (!WadingAllowed)
+        {
+            int waterHeight = GetHeight(level, location, true);
+            if (waterHeight != TRConsts.NoHeight && waterHeight < _standardHeight)
+            {
+                return null;
+            }
+        }
+
         // Check the absolute height from floor to ceiling to ensure Lara can be here.
         // Test around the mid-point for cases of steep ceiling slopes.
         Location testLocation = new()
@@ -337,7 +352,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
             {
                 testLocation.X = location.X + x * TRConsts.Step1 / 2;
                 testLocation.Z = location.Z + z * TRConsts.Step1 / 2;
-                int height = GetHeight(level, testLocation);
+                int height = GetHeight(level, testLocation, false);
                 if (height < (CrawlspacesAllowed ? _crawlspaceHeight : _standardHeight))
                 {
                     return null;
@@ -352,20 +367,18 @@ public abstract class AbstractLocationGenerator<L> where L : class
     {
         // Inside a wall, on a "normal" slope, or too near the ceiling
         return _excludedSectors.Contains(sector)
-            || sector.IsImpenetrable
+            || sector.Floor == TRConsts.WallClicks
+            || sector.Ceiling == TRConsts.WallClicks
             || sector.IsSlipperySlope;
     }
 
     private static bool IsTriggerInvalid(FDTriggerEntry trigger)
     {
         // Any trigger types where we don't want items placed
-        return trigger.TrigType == FDTrigType.Pickup
-            || trigger.TrigActionList.Any
-            (
-                a =>
-                    a.TrigAction == FDTrigAction.UnderwaterCurrent
-                 || a.TrigAction == FDTrigAction.EndLevel
-            );
+        return trigger.TrigActionList.Any(a =>
+            a.TrigAction == FDTrigAction.UnderwaterCurrent
+            || a.TrigAction == FDTrigAction.EndLevel
+        );
     }
 
     public Vector4? GetBestSlantMidpoint(FDSlantEntry slant)
@@ -699,6 +712,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
     protected abstract ushort GetRoomDepth(L level, short room);
     protected abstract int GetRoomYTop(L level, short room);
     protected abstract Vector2 GetRoomPosition(L level, short room);
-    protected abstract int GetHeight(L level, Location location);
+    protected abstract int GetHeight(L level, Location location, bool waterOnly);
     public abstract bool CrawlspacesAllowed { get; }
+    public abstract bool WadingAllowed { get; }
 }

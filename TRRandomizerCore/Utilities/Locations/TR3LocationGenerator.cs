@@ -8,6 +8,7 @@ namespace TRRandomizerCore.Utilities;
 public class TR3LocationGenerator : AbstractLocationGenerator<TR3Level>
 {
     public override bool CrawlspacesAllowed => true;
+    public override bool WadingAllowed => true;
 
     protected override void ReadFloorData(TR3Level level)
     {
@@ -87,8 +88,8 @@ public class TR3LocationGenerator : AbstractLocationGenerator<TR3Level>
         return new Vector2(level.Rooms[room].Info.X, level.Rooms[room].Info.Z);
     }
 
-    protected override int GetHeight(TR3Level level, Location location)
+    protected override int GetHeight(TR3Level level, Location location, bool waterOnly)
     {
-        return FDUtilities.GetHeight(location.X, location.Z, (short)location.Room, level, _floorData);
+        return FDUtilities.GetHeight(location.X, location.Z, (short)location.Room, level, _floorData, waterOnly);
     }
 }
