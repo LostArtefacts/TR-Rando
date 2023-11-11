@@ -474,6 +474,21 @@ public static class TR1TypeUtilities
         return GetPushblockTypes().Contains(type);
     }
 
+    public static List<TR1Type> GetCogMachineTypes()
+    {
+        return new()
+        {
+            TR1Type.Animating1,
+            TR1Type.Animating2,
+            TR1Type.Animating3,
+        };
+    }
+
+    public static bool IsCogMachineType(TR1Type type)
+    {
+        return GetCogMachineTypes().Contains(type);
+    }
+
     public static bool CanSharePickupSpace(TR1Type type)
     {
         // Can we place a standard pickup on the same tile as this type?
@@ -487,6 +502,7 @@ public static class TR1TypeUtilities
             || IsTrapdoor(type)
             || IsDoorType(type)
             || IsPushblockType(type)
+            || IsCogMachineType(type)
             || type == TR1Type.CameraTarget_N
             || type == TR1Type.Earthquake_N
             || type == TR1Type.WaterfallMist_N
@@ -494,6 +510,7 @@ public static class TR1TypeUtilities
             || type == TR1Type.Barricade
             || type == TR1Type.RollingBall
             || type == TR1Type.MovingBlock
+            || type == TR1Type.SwingingBlade
             || type == TR1Type.Lara;
     }
 
