@@ -2,6 +2,7 @@
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
+using TRGE.Core.Item.Enums;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Packing;
@@ -10,12 +11,19 @@ using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
 using TRRandomizerCore.Utilities;
-using TRRandomizerCore.Zones;
 
 namespace TRRandomizerCore.Randomizers;
 
 public class TR2ItemRandomizer : BaseTR2Randomizer
 {
+    private static readonly Location _barkhangSeraphLocation = new()
+    {
+        X = 35328,
+        Y = 768,
+        Z = 17920,
+        Room = 43
+    };
+
     internal TR2TextureMonitorBroker TextureMonitor { get; set; }
     public ItemFactory ItemFactory { get; set; }
 
@@ -32,7 +40,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     {
         _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\invalid_item_locations.json"));
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\unarmed_locations.json"));
-        _picker = new();
+        _picker = new(GetResourcePath(@"TR2\Locations\routes.json"));
     }
 
     public override void Randomize(int seed)
@@ -45,7 +53,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
             FindUnarmedPistolsLocation();
 
-            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
+            _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, false), Settings, _generator);
 
             if (Settings.RandomizeItemPositions)
             {
@@ -104,7 +112,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         foreach (TR2ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
-            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
             RandomizeKeyItems(_levelInstance);
 
             SaveLevelInstance();
@@ -130,7 +137,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
     }
 
-    private List<Location> GetItemLocationPool(TR2CombinedLevel level)
+    private List<Location> GetItemLocationPool(TR2CombinedLevel level, bool keyItemMode)
     {
         List<Location> exclusions = new();
         if (_excludedLocations.ContainsKey(level.Name))
@@ -151,7 +158,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
 
         TR2LocationGenerator generator = new();
-        return generator.Generate(level.Data, exclusions);
+        return generator.Generate(level.Data, exclusions, keyItemMode);
     }
 
     private void RandomizeSprites()
@@ -188,121 +195,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         _levelInstance.Data.SpriteTextures = _spriteRandomizer.Textures.ToArray();
     }
 
-    /// <summary>
-    /// If Deck is before monastery Nothing happens... 
-    /// If monastery is before deck the Seraph becomes a pickup in monastery and the Deck finishes normally without Seraph pickup
-    /// We are mindfull of Tibet inventory forcing Seraph in Vanilla and leave it only when it has been picked up previously
-    /// </summary>
-    private void RandomizeSeraph()
-    {
-        bool SeraphInMonastery = false;
-
-        //List of pickup items
-        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetGunTypes();
-        stdItemTypes.AddRange(TR2TypeUtilities.GetAmmoTypes());
-
-        if (_levelInstance.Is(TR2LevelNames.MONASTERY))
-        {
-            TR2ScriptedLevel theDeck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
-
-            // if The deck is included in levels I check if its after monastery 
-            if (theDeck != null)
-            {
-                if (theDeck.Sequence > _levelInstance.Sequence) SeraphInMonastery = true;
-            }
-            else // Id Deck is not included we force the seraph in monastery
-            {
-                SeraphInMonastery = true;
-            }
-
-            if (SeraphInMonastery)
-            {
-                // Get all visible pickups in the level (there may be invisible ones if using OneItem mode)
-                List<TR2Entity> pickups = _levelInstance.Data.Entities.FindAll(e => !e.Invisible && stdItemTypes.Contains(e.TypeID));
-                List<TR2Entity> replacementCandidates = new(pickups);
-
-                // Eliminate any that share a tile with an enemy in case of pacifist runs/unable to find guns
-                FDControl floorData = new();
-                floorData.ParseFromLevel(_levelInstance.Data);
-                for (int i = replacementCandidates.Count - 1; i >= 0; i--)
-                {
-                    TR2Entity pickup = replacementCandidates[i];
-                    TRRoomSector pickupTile = FDUtilities.GetRoomSector(pickup.X, pickup.Y, pickup.Z, pickup.Room, _levelInstance.Data, floorData);
-                    // Does an enemy share this tile? If so, remove it from the candidate list
-                    if (_levelInstance.Data.Entities.Find(e => e != pickup
-                        && TR2TypeUtilities.IsEnemyType(e.TypeID)
-                        && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, _levelInstance.Data, floorData) == pickupTile) != null)
-                    {
-                        replacementCandidates.RemoveAt(i);
-                    }
-                }
-
-                TR2Entity entityToReplace;
-                if (replacementCandidates.Count > 0)
-                {
-                    // We have at least one pickup that's visible and not under an enemy, so pick one at random
-                    entityToReplace = replacementCandidates[_generator.Next(0, replacementCandidates.Count)];
-                }
-                else
-                {
-                    // We couldn't find anything, but because The Deck has been processed first, we should
-                    // add The Seraph somewhere to remain consistent - default to the puzzle slot itself and
-                    // just move an item to the same tile. This will be extremely rare.
-                    TR2Entity slot4 = _levelInstance.Data.Entities.Find(e => e.TypeID == TR2Type.PuzzleHole4);
-                    entityToReplace = pickups[_generator.Next(0, pickups.Count)];
-                    entityToReplace.X = slot4.X;
-                    entityToReplace.Y = slot4.Y;
-                    entityToReplace.Z = slot4.Z;
-                    entityToReplace.Room = slot4.Room;
-                }
-
-                // Change the pickup type to The Seraph, and remove The Seraph from the inventory
-                entityToReplace.TypeID = TR2Type.Puzzle4_S_P;
-                _levelInstance.Script.RemoveStartInventoryItem(TRGE.Core.Item.Enums.TR2Items.Puzzle4);
-            }
-        }
-        else if (_levelInstance.Is(TR2LevelNames.TIBET))
-        {
-            TR2ScriptedLevel deck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
-            TR2ScriptedLevel monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
-
-            // Deck not present => Barkhang pickup and used instant (if it's not present its never picked up anyway)
-            // Deck present but Barkhang absent => Seraph picked up at Deck and never consumed
-            // Deck and Barkhang presents => remove Seraph from Tibet if comes before deck or after barkhang
-            if (deck == null ||
-               (monastery == null && _levelInstance.Script.Sequence < deck.Sequence) ||
-               (monastery != null && (_levelInstance.Script.Sequence < deck.Sequence || _levelInstance.Script.Sequence < monastery.Sequence)))
-            {
-                _levelInstance.Script.RemoveStartInventoryItem(TRGE.Core.Item.Enums.TR2Items.Puzzle4);
-            }
-        }
-        else if (_levelInstance.Is(TR2LevelNames.DECK))
-        {
-            TR2ScriptedLevel monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
-
-            if (monastery != null)
-            {
-                if (monastery.Sequence < _levelInstance.Sequence) SeraphInMonastery = true;
-            }
-            else // Id Monastery is not included we stay as before
-            {
-                SeraphInMonastery = false;
-            }
-
-            if (SeraphInMonastery)
-            {
-                //Replace Seraph by a pickup 
-
-                TR2Entity seraph = _levelInstance.Data.Entities.Find(e => e.TypeID == TR2Type.Puzzle4_S_P);
-
-                if (seraph != null)
-                {
-                    seraph.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
-                }
-            }
-        }
-    }
-
     public void RandomizeItemLocations(TR2CombinedLevel level)
     {
         if (level.Is(TR2LevelNames.HOME) && (level.Script.RemovesWeapons || level.Script.RemovesAmmo))
@@ -320,21 +212,26 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 continue;
             }
 
-            Location location = _picker.GetPickupLocation();
-            if (location != null)
-            {
-                _picker.SetLocation(entity, location);
-            }
+            _picker.RandomizePickupLocation(entity);
         }
     }
 
     private void RandomizeKeyItems(TR2CombinedLevel level)
     {
-        ZonedLocationCollection zonedLocations = new();
-        if (!level.IsAssault)
-        {
-            zonedLocations.PopulateZones(GetResourcePath($@"TR2\Zones\{level.Name}-Zones.json"), _picker.GetLocations(), ZonePopulationMethod.KeyPuzzleQuestOnly);
-        }
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level.Data);
+
+        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
+        _picker.KeyItemTestAction = location => TestKeyItemLocation(location, level);
+        _picker.RoomInfos = level.Data.Rooms
+            .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
+            .ToList();
+
+        _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, true), Settings, _generator);
+
+        // The Seraph may be removed from The Deck and added to Barkhang. Do that first to allow
+        // its location to be changed.
+        AdjustSeraphContinuity(level);
 
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
@@ -345,163 +242,61 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 continue;
             }
 
-            Location location;
-            do
-            {
-                location = GetKeyItemLocation(entity, i, zonedLocations);
-            }
-            while (location != null && !TestKeyItemLocation(location, level));
-
-            if (location != null)
-            {
-                _picker.SetLocation(entity, location);
-            }
+            _picker.RandomizeKeyItemLocation(
+                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData),
+                level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
         }
-
-        // Special case for the Seraph in Deck/Barkhang
-        RandomizeSeraph();
     }
 
-    private Location GetKeyItemLocation(TR2Entity entity, int index, ZonedLocationCollection zonedLocations)
+    private void AdjustSeraphContinuity(TR2CombinedLevel level)
     {
-        Location location = null;
-
-        switch (entity.TypeID)
+        if (!Settings.MaintainKeyContinuity)
         {
-            case TR2Type.Puzzle1_S_P:
-                if (zonedLocations.Puzzle1Zone.Count > 0)
-                {
-                    if (_levelInstance.Name == TR2LevelNames.DA)
-                    {
-                        int burnerChipID = 120;
-                        int consoleChipID = 7;
-
-                        //Special case - multiple chips
-                        if (index == burnerChipID)
-                        {
-                            //Burner Chip
-                            List<int> allowedBurnerRooms = new() { 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 29, 32, 75, 80, 83, 84, 85, 86, 87, 88, 89 };
-                            do
-                            {
-                                location = zonedLocations.Puzzle1Zone[_generator.Next(0, zonedLocations.Puzzle1Zone.Count)];
-                            }
-                            while (!allowedBurnerRooms.Contains(location.Room));
-                        }
-                        else if (index == consoleChipID)
-                        {
-                            //Center Console Chip
-                            List<int> allowedConsoleRooms = new() { 2, 12, 13, 14, 15, 16, 17, 21, 22, 23, 24, 25, 26, 29, 30, 32, 34, 35, 64, 65, 66, 68, 69, 70, 75, 80, 82, 83, 84, 85, 86, 87, 88, 89 };
-                            do
-                            {
-                                location = zonedLocations.Puzzle1Zone[_generator.Next(0, zonedLocations.Puzzle1Zone.Count)];
-                            }
-                            while (!allowedConsoleRooms.Contains(location.Room));
-                        }
-                        else
-                        {
-                            location = zonedLocations.Puzzle1Zone[_generator.Next(0, zonedLocations.Puzzle1Zone.Count)];
-                        }
-                    }
-                    else
-                    {
-                        location = zonedLocations.Puzzle1Zone[_generator.Next(0, zonedLocations.Puzzle1Zone.Count)];
-                    }
-                }
-                break;
-            case TR2Type.Puzzle2_S_P:
-                if (zonedLocations.Puzzle2Zone.Count > 0)
-                {
-                    location = zonedLocations.Puzzle2Zone[_generator.Next(0, zonedLocations.Puzzle2Zone.Count)];
-                }
-                break;
-            case TR2Type.Puzzle3_S_P:
-                if (zonedLocations.Puzzle3Zone.Count > 0)
-                {
-                    location = zonedLocations.Puzzle3Zone[_generator.Next(0, zonedLocations.Puzzle3Zone.Count)];
-                }
-                break;
-            case TR2Type.Puzzle4_S_P:
-                if (zonedLocations.Puzzle4Zone.Count > 0)
-                {
-                    location = zonedLocations.Puzzle4Zone[_generator.Next(0, zonedLocations.Puzzle4Zone.Count)];
-                }
-                break;
-            case TR2Type.Key1_S_P:
-                if (zonedLocations.Key1Zone.Count > 0)
-                {
-                    if (_levelInstance.Name == TR2LevelNames.OPERA)
-                    {
-                        int startKeyID = 172;
-                        int fanKeyID = 118;
-
-                        //Special case - multiple keys
-                        if (index == startKeyID)
-                        {
-                            //Start key
-                            List<int> allowedStartRooms = new() { 10, 23, 25, 27, 29, 30, 31, 32, 33, 35, 127, 162, 163 };
-                            do
-                            {
-                                location = zonedLocations.Key1Zone[_generator.Next(0, zonedLocations.Key1Zone.Count)];
-                            }
-                            while (!allowedStartRooms.Contains(location.Room));
-                        }
-                        else if (index == fanKeyID)
-                        {
-                            //Fan area key
-                            List<int> allowedFanRooms = new() { 1, 5, 8, 16, 37, 38, 44, 46, 47, 48, 49, 50, 52, 53, 55, 57, 59, 60, 63, 65, 66, 67, 68, 69, 70, 71, 72, 75, 76, 77, 78, 82, 83, 86, 87, 88, 89, 90, 93, 95, 96, 100, 102, 103, 105, 107, 109, 111, 120, 132, 139, 141, 143, 144, 151, 153, 154, 155, 156, 158, 159, 161, 174, 176, 177, 178, 179, 183, 185, 187, 188, 189 };
-
-                            do
-                            {
-                                location = zonedLocations.Key1Zone[_generator.Next(0, zonedLocations.Key1Zone.Count)];
-                            }
-                            while (!allowedFanRooms.Contains(location.Room));
-                        }
-                        else
-                        {
-                            location = zonedLocations.Key1Zone[_generator.Next(0, zonedLocations.Key1Zone.Count)];
-                        }
-                    }
-                    else
-                    {
-                        location = zonedLocations.Key1Zone[_generator.Next(0, zonedLocations.Key1Zone.Count)];
-                    }
-                }
-                break;
-            case TR2Type.Key2_S_P:
-                if (zonedLocations.Key2Zone.Count > 0)
-                {
-                    location = zonedLocations.Key2Zone[_generator.Next(0, zonedLocations.Key2Zone.Count)];
-                }
-                break;
-            case TR2Type.Key3_S_P:
-                if (zonedLocations.Key3Zone.Count > 0)
-                {
-                    location = zonedLocations.Key3Zone[_generator.Next(0, zonedLocations.Key3Zone.Count)];
-                }
-                break;
-            case TR2Type.Key4_S_P:
-                if (zonedLocations.Key4Zone.Count > 0)
-                {
-                    location = zonedLocations.Key4Zone[_generator.Next(0, zonedLocations.Key4Zone.Count)];
-                }
-                break;
-            case TR2Type.Quest1_S_P:
-                if (zonedLocations.Quest1Zone.Count > 0)
-                {
-                    location = zonedLocations.Quest1Zone[_generator.Next(0, zonedLocations.Quest1Zone.Count)];
-                }
-                break;
-            case TR2Type.Quest2_S_P:
-                if (zonedLocations.Quest2Zone.Count > 0)
-                {
-                    location = zonedLocations.Quest2Zone[_generator.Next(0, zonedLocations.Quest2Zone.Count)];
-                }
-                break;
-            default:
-                break;
+            return;
         }
 
-        return location;
+        if (level.Is(TR2LevelNames.MONASTERY))
+        {
+            TR2ScriptedLevel theDeck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
+            if ((theDeck == null || theDeck.Sequence > level.Sequence)
+                && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
+            {
+                // Place The Seraph inside Barkhang. This location determines the key item ID to
+                // therefore allow it to be randomized.
+                TR2Entity seraph = ItemFactory.CreateItem(level.Name, level.Data.Entities, _barkhangSeraphLocation);
+                seraph.TypeID = TR2Type.Puzzle4_S_P;
+                level.Script.RemoveStartInventoryItem(TR2Items.Puzzle4);
+            }
+        }
+        else if (level.Is(TR2LevelNames.TIBET))
+        {
+            TR2ScriptedLevel deck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
+            TR2ScriptedLevel monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
+
+            // Deck not present => Barkhang pickup only
+            // Deck present but Barkhang absent => Deck pickup, carried to Tibet if sequence is after
+            // Deck and Barkhang present => remove Seraph from Tibet unless it comes between these levels
+            if (deck == null ||
+               (monastery == null && level.Script.Sequence < deck.Sequence) ||
+               (monastery != null && (level.Script.Sequence < deck.Sequence || level.Script.Sequence > monastery.Sequence)))
+            {
+                level.Script.RemoveStartInventoryItem(TR2Items.Puzzle4);
+            }
+        }
+        else if (level.Is(TR2LevelNames.DECK))
+        {
+            TR2ScriptedLevel monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
+            if (monastery != null && monastery.Sequence < level.Sequence)
+            {
+                // Anticlimactic regular item pickup to end the level
+                TR2Entity seraph = level.Data.Entities.Find(e => e.TypeID == TR2Type.Puzzle4_S_P);
+                if (seraph != null)
+                {
+                    List<TR2Type> stdItemTypes = TR2TypeUtilities.GetStandardPickupTypes();
+                    seraph.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                }
+            }
+        }
     }
 
     private bool TestKeyItemLocation(Location location, TR2CombinedLevel level)
@@ -512,12 +307,12 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             .FindAll(e => TR2TypeUtilities.IsEnemyType(e.TypeID))
             .Find(e => e.GetLocation().IsEquivalent(location));
 
-        return enemy == null || TR2TypeUtilities.CanDropPickups
+        return enemy == null || (Settings.AllowEnemyKeyDrops && TR2TypeUtilities.CanDropPickups
         (
             TR2TypeUtilities.GetAliasForLevel(level.Name, enemy.TypeID), 
             Settings.RandomizeEnemies && !Settings.ProtectMonks,
             Settings.RandomizeEnemies && Settings.UnconditionalChickens
-        );
+        ));
     }
 
     private void RandomizeItemTypes(TR2CombinedLevel level)

@@ -1,14 +1,70 @@
-﻿using TRRandomizerCore.Editors;
+﻿using System.Diagnostics;
+using TRLevelControl.Model;
+using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Randomizers;
 
 public class SecretPicker
 {
+    private const int _maxRetryLimit = 500;
+    private const float _distanceStep = 1.0f;
+    private const float _minDistanceDivisor = _distanceStep * 3;
+    private static readonly List<int> _retryTolerances = new()
+    {
+        10, 25, 50
+    };
+
+    private int _proxEvaluationCount;
+    private float _distanceDivisor;
+
     public RandomizerSettings Settings { get; set; }
     public Random Generator { get; set; }
     public IMirrorControl Mirrorer { get; set; }
     public ItemFactory ItemFactory { get; set; }
+    public IRouteManager RouteManager { get; set; }
+    public Func<Location, TRRoomSector> SectorAction { get; set; }
+    public Func<Location, bool> PlacementTestAction { get; set; }
+
+    public List<Location> GetLocations(List<Location> allLocations, bool isMirrored, int totalCount)
+    {
+        ResetEvaluators(totalCount);
+
+        List<Location> locations = new();
+        Queue<Location> guaranteedLocations = GetGuaranteedLocations(allLocations, isMirrored, totalCount, location =>
+        {
+            bool result = TestLocation(location, locations, isMirrored, totalCount);
+            if (result)
+            {
+                locations.Add(location);
+            }
+            return result;
+        });
+
+        for (int i = 0; i < totalCount; i++)
+        {
+            Location location;
+            if (guaranteedLocations.Count > 0)
+            {
+                location = guaranteedLocations.Dequeue();
+            }
+            else
+            {
+                do
+                {
+                    location = allLocations[Generator.Next(0, allLocations.Count)];
+                }
+                while (!TestLocation(location, locations, isMirrored, totalCount));
+            }
+
+            if (!locations.Contains(location))
+            {
+                locations.Add(location);
+            }
+        }
+
+        return locations;
+    }
 
     public Queue<Location> GetGuaranteedLocations(IEnumerable<Location> allLocations, bool isMirrored, int totalCount, Func<Location, bool> validCallback = null)
     {
@@ -94,6 +150,69 @@ public class SecretPicker
         return locations;
     }
 
+    public bool TestLocation(Location location, List<Location> usedLocations, bool isMirrored, int totalCount)
+    {
+        if (location.Difficulty == Difficulty.Hard && !Settings.HardSecrets)
+        {
+            return false;
+        }
+
+        if (location.RequiresGlitch && !Settings.GlitchedSecrets)
+        {
+            return false;
+        }
+
+        if (isMirrored && location.LevelState == LevelState.NotMirrored)
+        {
+            return false;
+        }
+
+        if (!isMirrored && location.LevelState == LevelState.Mirrored)
+        {
+            return false;
+        }
+
+        if (!PlacementTestAction?.Invoke(location) ?? false)
+        {
+            return false;
+        }
+
+        if (usedLocations.Count == 0 || usedLocations == null)
+        {
+            ResetEvaluators(totalCount);
+            return true;
+        }
+
+        _proxEvaluationCount++;
+        if (_retryTolerances.Contains(_proxEvaluationCount) || _proxEvaluationCount > _retryTolerances.Max())
+        {
+            _distanceDivisor += _distanceStep;
+        }
+
+        float minProximity = RouteManager.LevelSize / _distanceDivisor;
+
+        TRRoomSector newSector = SectorAction(location);
+        foreach (Location used in usedLocations)
+        {
+            int proximity = RouteManager.GetProximity(location, used);
+            if ((proximity >= 0 && proximity < minProximity)
+                || newSector == SectorAction(used)
+                || (used.Room == location.Room && _proxEvaluationCount < _maxRetryLimit))
+            {
+                return false;
+            }
+        }
+
+        ResetEvaluators(totalCount);
+        return true;
+    }
+
+    private void ResetEvaluators(int totalCount)
+    {
+        _proxEvaluationCount = 0;
+        _distanceDivisor = Math.Max(_minDistanceDivisor, totalCount);
+    }
+
     public void FinaliseSecretPool(IEnumerable<Location> usedLocations, string level)
     {
         // Secrets in packs are permitted to enforce level state
@@ -111,6 +230,10 @@ public class SecretPicker
             // Indicates that a secret relies on another item to remain in its original position
             ItemFactory.LockItem(level, location.EntityIndex);
         }
+
+#if DEBUG
+        Debug.WriteLine(level + ": " + DescribeLocations(usedLocations));
+#endif
     }
 
     private static IEnumerable<Location> FilterLocations(IEnumerable<Location> locations, bool isMirrored, Difficulty difficulty, bool glitched)

@@ -91,6 +91,36 @@ public class ItemFactory
         return allItems.Count + count <= _entityLimit || allowLimitBreak;
     }
 
+    public TR1Entity CreateLockedItem(string lvl, List<TR1Entity> allItems, Location location = null, bool allowLimitBreak = false)
+    {
+        TR1Entity entity = CreateItem(lvl, allItems, location, allowLimitBreak);
+        if (entity != null)
+        {
+            LockItem(lvl, allItems.IndexOf(entity));
+        }
+        return entity;
+    }
+
+    public TR2Entity CreateLockedItem(string lvl, List<TR2Entity> allItems, Location location = null, bool allowLimitBreak = false)
+    {
+        TR2Entity entity = CreateItem(lvl, allItems, location, allowLimitBreak);
+        if (entity != null)
+        {
+            LockItem(lvl, allItems.IndexOf(entity));
+        }
+        return entity;
+    }
+
+    public TR3Entity CreateLockedItem(string lvl, List<TR3Entity> allItems, Location location = null, bool allowLimitBreak = false)
+    {
+        TR3Entity entity = CreateItem(lvl, allItems, location, allowLimitBreak);
+        if (entity != null)
+        {
+            LockItem(lvl, allItems.IndexOf(entity));
+        }
+        return entity;
+    }
+
     public TR1Entity CreateItem(string lvl, List<TR1Entity> allItems, Location location = null, bool allowLimitBreak = false)
     {
         TR1Entity item;
