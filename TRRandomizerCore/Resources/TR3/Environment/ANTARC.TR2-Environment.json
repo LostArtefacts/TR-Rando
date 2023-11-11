@@ -117,6 +117,70 @@
           ]
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #55 is in its default position. If not, ensure it is visible and remove its old trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 55,
+        "X": 68096,
+        "Y": -3840,
+        "Z": 28160,
+        "Room": 87
+      },
+      "OnFalse": [
+        {
+          "EMType": 48,
+          "EntityIndex": 55,
+          "Invisible": false
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 68096,
+              "Y": -3840,
+              "Z": 28160,
+              "Room": 87
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 55
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #66 is in its default position. If not, ensure it is visible and remove its old trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 66,
+        "X": 54784,
+        "Y": -6144,
+        "Z": 47616,
+        "Room": 93
+      },
+      "OnFalse": [
+        {
+          "EMType": 48,
+          "EntityIndex": 66,
+          "Invisible": false
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 54784,
+              "Y": -6144,
+              "Z": 47616,
+              "Room": 93
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 66
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],

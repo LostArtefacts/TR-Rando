@@ -277,6 +277,38 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #86 is in its default position. If not, ensure it is visible and remove its old trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 86,
+        "X": 62976,
+        "Y": 768,
+        "Z": 56832,
+        "Room": 42
+      },
+      "OnFalse": [
+        {
+          "EMType": 48,
+          "EntityIndex": 86,
+          "Invisible": false
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 42496,
+              "Y": 768,
+              "Z": 58880,
+              "Room": 68
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 86
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],

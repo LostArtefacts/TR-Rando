@@ -79,6 +79,23 @@
           }
         }
       ]
+    },
+    {
+      "Comments": "Make a step in room 64 to allow climbing back outside.",
+      "EMType": 1,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 34304,
+        "Y": 5632,
+        "Z": 60928,
+        "Room": 64
+      },
+      "Clicks": -1,
+      "FloorTexture": 1918,
+      "SideTexture": 2245,
+      "Flags": 15
     }
   ],
   "Any": [],
