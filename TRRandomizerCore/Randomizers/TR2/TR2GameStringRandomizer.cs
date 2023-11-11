@@ -40,7 +40,7 @@ public class TR2GameStringRandomizer : BaseTR2Randomizer
             }
         }
 
-        if (Settings.ReassignPuzzleNames)
+        if (Settings.ReassignPuzzleItems)
         {
             // This is specific to the Dagger of Xian if it appears in other levels with the dragon. We'll just
             // use whatever has already been allocated as the dagger name in Lair.

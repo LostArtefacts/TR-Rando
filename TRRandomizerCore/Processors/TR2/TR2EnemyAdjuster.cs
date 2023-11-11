@@ -3,6 +3,7 @@ using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
+using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Processors;
 
@@ -13,6 +14,8 @@ public class TR2EnemyAdjuster : TR2LevelProcessor
         [TR2LevelNames.OPERA] = new List<int> { 127 },
         [TR2LevelNames.MONASTERY] = new List<int> { 38, 39, 118 }
     };
+
+    public ItemFactory ItemFactory { get; set; }
 
     public void AdjustEnemies()
     {
@@ -43,6 +46,7 @@ public class TR2EnemyAdjuster : TR2LevelProcessor
         {
             _levelInstance.Data.Entities[enemyIndex].TypeID = TR2Type.CameraTarget_N;
             FDUtilities.RemoveEntityTriggers(_levelInstance.Data, enemyIndex, floorData);
+            ItemFactory?.FreeItem(_levelInstance.Name, enemyIndex);
         }
 
         floorData.WriteToLevel(_levelInstance.Data);

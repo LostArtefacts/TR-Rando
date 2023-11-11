@@ -35,7 +35,7 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
         // randomizers are implemented, just call Settings.GetSaveTarget(numLevels) per TR2.
         int target = base.GetSaveTarget(numLevels);
 
-        if (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames)
+        if (Settings.RandomizeGameStrings)
         {
             target++;
         }
@@ -159,7 +159,7 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
 
         using (textureMonitor)
         {
-            if (!monitor.IsCancelled && (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames))
+            if (!monitor.IsCancelled && Settings.RandomizeGameStrings)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting game strings");
                 new TR3GameStringRandomizer

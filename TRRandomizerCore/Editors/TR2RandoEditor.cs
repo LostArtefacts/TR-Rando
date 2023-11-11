@@ -33,7 +33,7 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
     {
         int target = base.GetSaveTarget(numLevels);
 
-        if (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames)
+        if (Settings.RandomizeGameStrings || Settings.ReassignPuzzleItems)
         {
             target++;
         }
@@ -83,10 +83,16 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
             target += numLevels * 2;
         }
 
+        if (Settings.ReassignPuzzleItems)
+        {
+            // For TR2ModelAdjuster
+            target += numLevels;
+        }
+
         if (Settings.RandomizeEnemies)
         {
-            // *4 => 3 for multithreading work, 1 for ModelAdjuster
-            target += Settings.CrossLevelEnemies ? numLevels * 4 : numLevels;
+            // 3 for multithreading cross-level work
+            target += Settings.CrossLevelEnemies ? numLevels * 3 : numLevels;
             // And again for eliminating unused enemies
             target += numLevels;
         }
@@ -172,11 +178,12 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
                     Levels = levels,
                     BasePath = wipDirectory,
                     BackupPath = backupDirectory,
-                    SaveMonitor = monitor
+                    SaveMonitor = monitor,
+                    ItemFactory = itemFactory,
                 }.AdjustEnemies();
             }
 
-            if (!monitor.IsCancelled && (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames))
+            if (!monitor.IsCancelled && (Settings.RandomizeGameStrings || Settings.ReassignPuzzleItems))
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting game strings");
                 new TR2GameStringRandomizer
@@ -228,23 +235,23 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
                 itemRandomizer.Randomize(Settings.ItemSeed);
             }
 
+            if (!monitor.IsCancelled && Settings.ReassignPuzzleItems)
+            {
+                // P2 items are converted to P3 in case the dragon is present as the dagger type is hardcoded.
+                // Must take place before enemy randomization. OG P2 key items must be zoned based on being P3.
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting level models");
+                new TR2ModelAdjuster
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    BackupPath = backupDirectory,
+                    SaveMonitor = monitor
+                }.AdjustModels();
+            }
+
             if (!monitor.IsCancelled && Settings.RandomizeEnemies)
             {
-                if (Settings.CrossLevelEnemies)
-                {
-                    // For now all P2 items become P3 to avoid dragon issues. This must take place after Item
-                    // randomization for P2/3 zoning because P2 entities will become P3.
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting level models");
-                    new TR2ModelAdjuster
-                    {
-                        ScriptEditor = tr23ScriptEditor,
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        BackupPath = backupDirectory,
-                        SaveMonitor = monitor
-                    }.AdjustModels();
-                }
-
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
                 new TR2EnemyRandomizer
                 {

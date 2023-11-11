@@ -12,31 +12,28 @@ public class TR3GameStringRandomizer : BaseTR3Randomizer
 
     public override void Randomize(int seed)
     {
-        if (Settings.RandomizeGameStrings)
+        _generator = new(seed);
+        _g11n = new(G11NGame.TR3);
+
+        if (!Settings.GameStringLanguage.IsHybrid)
         {
-            _generator = new Random(seed);
-            _g11n = new G11N(G11NGame.TR3);
+            _gameStrings = _g11n.GetGameStrings(Settings.GameStringLanguage) as TR23GameStrings;
+        }
+        _defaultGameStrings = _g11n.GetDefaultGameStrings() as TR23GameStrings;
 
-            if (!Settings.GameStringLanguage.IsHybrid)
-            {
-                _gameStrings = _g11n.GetGameStrings(Settings.GameStringLanguage) as TR23GameStrings;
-            }
-            _defaultGameStrings = _g11n.GetDefaultGameStrings() as TR23GameStrings;
+        TR23Script script = ScriptEditor.Script as TR23Script;
+        List<string> gamestrings1 = new(script.GameStrings1);
+        List<string> gamestrings2 = new(script.GameStrings2);
 
-            TR23Script script = ScriptEditor.Script as TR23Script;
-            List<string> gamestrings1 = new(script.GameStrings1);
-            List<string> gamestrings2 = new(script.GameStrings2);
+        ProcessGlobalStrings(0, gamestrings1);
+        ProcessGlobalStrings(1, gamestrings2);
 
-            ProcessGlobalStrings(0, gamestrings1);
-            ProcessGlobalStrings(1, gamestrings2);
+        script.GameStrings1 = gamestrings1.ToArray();
+        script.GameStrings2 = gamestrings2.ToArray();
 
-            script.GameStrings1 = gamestrings1.ToArray();
-            script.GameStrings2 = gamestrings2.ToArray();
-
-            foreach (AbstractTRScriptedLevel level in ScriptEditor.ScriptedLevels)
-            {
-                ProcessLevelStrings(level);
-            }
+        foreach (AbstractTRScriptedLevel level in ScriptEditor.ScriptedLevels)
+        {
+            ProcessLevelStrings(level);
         }
 
         SaveScript();
