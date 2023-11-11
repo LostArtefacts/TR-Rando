@@ -74,6 +74,7 @@ internal class TRVersionSupport
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
         TRRandomizerType.Item,
+        TRRandomizerType.KeyContinuity,
         TRRandomizerType.KeyItems,
         TRRandomizerType.KeyItemTextures,
         TRRandomizerType.Ladders,

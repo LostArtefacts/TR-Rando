@@ -55,6 +55,10 @@ public class EnvironmentPicker
         {
             excludedTags.Add(EMTag.PuzzleRoom);
         }
+        if (!settings.RandomizeItems || !settings.IncludeKeyItems)
+        {
+            excludedTags.Add(EMTag.KeyItemFix);
+        }
 
         // If we're using a community patch, exclude mods that
         // only apply to non-community patch and vice-versa.
