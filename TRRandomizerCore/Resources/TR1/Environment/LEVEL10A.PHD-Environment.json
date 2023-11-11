@@ -53,6 +53,146 @@
           }
         }
       ]
+    },
+    {
+      "Comments": "Add some trapdoors as return paths near the TNT.",
+      "EMType": 51,
+      "Tags": [
+        9
+      ],
+      "TypeID": 66,
+      "Flags": 15872,
+      "Location": {
+        "X": 92672,
+        "Y": 6144,
+        "Z": 62976,
+        "Room": 48,
+        "Angle": -16384
+      }
+    },
+    {
+      "EMType": 51,
+      "Tags": [
+        9
+      ],
+      "TypeID": 66,
+      "Flags": 15872,
+      "Location": {
+        "X": 82432,
+        "Y": 3584,
+        "Z": 68096,
+        "Room": 50
+      }
+    },
+    {
+      "Comments": "Add dummy triggers.",
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "EntityLocation": -2,
+      "Trigger": {
+        "TrigType": 8,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -2
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 82432,
+          "Y": 3584,
+          "Z": 68096,
+          "Room": 84
+        }
+      ],
+      "EntityLocation": -1,
+      "Trigger": {
+        "TrigType": 8,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "And regular triggers.",
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 92672,
+          "Y": 5888,
+          "Z": 64000,
+          "Room": 48
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -2
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 83456,
+          "Y": 3584,
+          "Z": 67072,
+          "Room": 51
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Reset the boulder trap too.",
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 82432,
+          "Y": 4224,
+          "Z": 58880,
+          "Room": 46
+        }
+      ],
+      "Trigger": {
+        "TrigType": 6,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 86
+          }
+        ]
+      }
     }
   ],
   "Any": [
@@ -421,7 +561,7 @@
         }
       },
       {
-        "Comments": "Add a keyhole - the key itself will be added in ConditionalAllWithin.",
+        "Comments": "Add a keyhole.",
         "EMType": 51,
         "TypeID": 137,
         "Intensity": -1,
@@ -465,6 +605,18 @@
               "Parameter": -1
             }
           ]
+        }
+      },
+      {
+        "Comments": "Default key location - key item rando can move this.",
+        "EMType": 51,
+        "TypeID": 129,
+        "Intensity": 4096,
+        "Location": {
+          "X": 53760,
+          "Y": -7168,
+          "Z": 24064,
+          "Room": 3
         }
       }
     ],
@@ -7452,166 +7604,7 @@
       ]
     }
   ],
-  "ConditionalAllWithin": [
-    {
-      "Condition": {
-        "Comments": "If the portal between rooms 21 and 17 has been reduced, a key is now needed to pass.",
-        "ConditionType": 23,
-        "Location": {
-          "X": 60928,
-          "Y": -3584,
-          "Z": 49664,
-          "Room": 21
-        }
-      },
-      "OnTrue": [
-        [
-          {
-            "Comments": "Potential key location.",
-            "EMType": 51,
-            "TypeID": 129,
-            "Intensity": 4096,
-            "Location": {
-              "X": 53760,
-              "Y": -7168,
-              "Z": 24064,
-              "Room": 3
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Put the key in the shack.",
-            "EMType": 51,
-            "TypeID": 129,
-            "Flags": 256,
-            "Intensity": 4096,
-            "Location": {
-              "X": 68096,
-              "Y": -7168,
-              "Z": 28160,
-              "Room": 94
-            }
-          },
-          {
-            "Comments": "Trigger the key once the fuses are used (same method as pistols).",
-            "EMType": 68,
-            "Locations": [
-              {
-                "X": 66048,
-                "Y": -7296,
-                "Z": 32256,
-                "Room": 96
-              },
-              {
-                "X": 67072,
-                "Y": -7168,
-                "Z": 32256,
-                "Room": 96
-              },
-              {
-                "X": 68096,
-                "Y": -7296,
-                "Z": 32256,
-                "Room": 97
-              },
-              {
-                "X": 69120,
-                "Y": -7296,
-                "Z": 32256,
-                "Room": 97
-              },
-              {
-                "X": 70144,
-                "Y": -7680,
-                "Z": 32256,
-                "Room": 98
-              },
-              {
-                "X": 71168,
-                "Y": -7808,
-                "Z": 32256,
-                "Room": 98
-              },
-              {
-                "X": 72192,
-                "Y": -7424,
-                "Z": 32256,
-                "Room": 98
-              },
-              {
-                "X": 73216,
-                "Y": -7808,
-                "Z": 32256,
-                "Room": 98
-              }
-            ],
-            "Actions": [
-              {
-                "Parameter": -1
-              }
-            ]
-          }
-        ],
-        [
-          {
-            "Comments": "Potential key location.",
-            "EMType": 51,
-            "TypeID": 129,
-            "Intensity": 4096,
-            "Location": {
-              "X": 61952,
-              "Y": -10496,
-              "Z": 29184,
-              "Room": 32
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential key location.",
-            "EMType": 51,
-            "TypeID": 129,
-            "Intensity": 4096,
-            "Location": {
-              "X": 77312,
-              "Y": -10240,
-              "Z": 24064,
-              "Room": 42
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential key location.",
-            "EMType": 51,
-            "TypeID": 129,
-            "Intensity": 4096,
-            "Location": {
-              "X": 82432,
-              "Y": -10240,
-              "Z": 27136,
-              "Room": 35
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential key location.",
-            "EMType": 51,
-            "TypeID": 129,
-            "Intensity": 4096,
-            "Location": {
-              "X": 99840,
-              "Y": -7808,
-              "Z": 31232,
-              "Room": 37
-            }
-          }
-        ]
-      ]
-    }
-  ],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {

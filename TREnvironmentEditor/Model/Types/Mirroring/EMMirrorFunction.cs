@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
@@ -944,12 +945,19 @@ public class EMMirrorFunction : BaseEMFunction
         where T : Enum
     {
         // If the difference between X or Z position is one sector size, they share the same Y val,
-        // and they are facing the same diretion, then they're double doors.
-        return !EqualityComparer<T>.Default.Equals(door1.TypeID, door2.TypeID)
-            && door1.Room == door2.Room
-            && door1.Y == door2.Y
-            && door1.Angle == door2.Angle
-            && (Math.Abs(door1.X - door2.X) == SectorSize || Math.Abs(door1.Z - door2.Z) == SectorSize);
+        // and they are facing the same direction, then they're double doors.
+        if (EqualityComparer<T>.Default.Equals(door1.TypeID, door2.TypeID)
+            || door1.Room != door2.Room
+            || door1.Y != door2.Y
+            || door1.Angle != door2.Angle)
+        {
+            return false;
+        }
+
+        // Be careful not to shift doors that are in front of each other, like at the end of Vilcabamba.
+        return (door1.Angle == _north || door1.Angle == _south)
+            ? Math.Abs(door1.X - door2.X) == TRConsts.Step4
+            : Math.Abs(door1.Z - door2.Z) == TRConsts.Step4;
     }
 
     private void MirrorNullMeshes(TR1Level level)

@@ -4053,6 +4053,25 @@
           }
         },
         {
+          "Comments": "Open the door from the other side, just in case.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 28160,
+              "Y": -384,
+              "Z": 6656
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
           "Comments": "Ensure the swinging blade model is available.",
           "EMType": 145,
           "Data": [

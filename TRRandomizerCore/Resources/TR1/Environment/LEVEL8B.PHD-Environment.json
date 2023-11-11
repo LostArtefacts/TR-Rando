@@ -270,7 +270,7 @@
         "Intensity1": 4096
       },
       {
-        "Comments": "Move it somewhere reachable. Conditional changes below may shift it elsewhere.",
+        "Comments": "Move it somewhere reachable - key item rando can move this.",
         "EMType": 44,
         "EntityIndex": 12,
         "TargetLocation": {
@@ -4148,74 +4148,6 @@
     }
   ],
   "ConditionalAllWithin": [
-    {
-      "Condition": {
-        "Comments": "If the spare switch from City is now a key, relocate it.",
-        "ConditionType": 0,
-        "EntityIndex": 12,
-        "EntityType": 129
-      },
-      "OnTrue": [
-        [
-          {
-            "Comments": "Default location from Any.",
-            "EMType": 1000
-          }
-        ],
-        [
-          {
-            "Comments": "Potential key location.",
-            "EMType": 44,
-            "EntityIndex": 12,
-            "TargetLocation": {
-              "X": 37376,
-              "Y": -1280,
-              "Z": 31232,
-              "Room": 67
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential key location.",
-            "EMType": 44,
-            "EntityIndex": 12,
-            "TargetLocation": {
-              "X": 36352,
-              "Y": -3072,
-              "Z": 39424,
-              "Room": 59
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential key location.",
-            "EMType": 44,
-            "EntityIndex": 12,
-            "TargetLocation": {
-              "X": 48640,
-              "Y": 7680,
-              "Z": 50688,
-              "Room": 63
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential key location.",
-            "EMType": 44,
-            "EntityIndex": 12,
-            "TargetLocation": {
-              "X": 34304,
-              "Y": 1024,
-              "Z": 40448,
-              "Room": 62
-            }
-          }
-        ]
-      ]
-    },
     {
       "Condition": {
         "Comments": "Check if room 3 contains water and move the slots accordingly.",
