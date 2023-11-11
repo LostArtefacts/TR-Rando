@@ -19,7 +19,7 @@ Following are details on the return paths that are available. See `Global Settin
 | City of Khamoon | Some slopes are adjusted to make returning to the start possible, and a trapdoor in room 42 will always remain raised to allow climbing out. |
 | Obelisk of Khamoon | _Not required_ |
 | Sanctuary of the Scion | _Not required_ |
-| Natla's Mines | _Not required_ |
+| Natla's Mines | Trapdoors added in the TNT area to return back across the lava or back to the start. |
 | Atlantis | Link rooms added between rooms 30 and 50. |
 | The Great Pyramid | _Not implemented due to trap behaviour._ |
 
@@ -29,17 +29,17 @@ Following are details on the return paths that are available. See `Global Settin
 | Great Wall | Ladder added to room 3 to allow returning to the beginning. Other points of no return remain. |
 | Venice | _Not required_ |
 | Bartoli's Hideout | Links added between rooms 22, 101, and 121. |
-| Opera House | _Not required_ |
+| Opera House | Link room added between rooms 6 and 50; and a ladder added from room 5 to 61. |
 | Offshore Rig | Door 19 will remain open after passing through it. |
 | Diving Area | Link rooms added between rooms 48 and 56; door 22 will remain open after passing through it; and a ladder is added to room 3. |
 | 40 Fathoms | Ladders added to rooms 21 and 36; trapdoor 30 will always remain open. |
-| Wreck of the Maria Doria | Ladders added to rooms 43 and 27-30. |
+| Wreck of the Maria Doria | Slopes adjusted in room 43, and ladders added to rooms 43 and 27-30. |
 | Living Quarters | Portal added between rooms 18 and 33. |
-| The Deck | _Not required_ |
-| Tibetan Foothills | Ramp added to room 53 to allow returning with the red skidoo. |
+| The Deck | Ladder added between rooms 30 and 86. |
+| Tibetan Foothills | Ramp added to room 53 to allow returning with the red skidoo; ladders added in rooms 78/79 to return to the start; link rooms added between rooms 18 and 81. |
 | Barkhang Monastery | _Not required_ |
 | Catacombs of the Talion | Ladders added to rooms 19 and 117. |
-| Ice Palace | Ladder added to room 34. _Point of no return above the gong remains._ |
+| Ice Palace | Ladder added to room 34. Link rooms added between rooms 61 and 103. |
 | Temple of Xian | Link rooms added between rooms 3 and 190. |
 | Floating Islands | _Not required_ |
 | Dragon's Lair | Slopes adjusted in room 2 to allow exiting the main arena. |
@@ -57,14 +57,14 @@ Following are details on the return paths that are available. See `Global Settin
 | Madubu Gorge | _Not implemented_ |
 | Temple of Puna | _Not implemented_ |
 | Thames Wharf | _Not implemented_ |
-| Aldwych | _Not implemented_ |
-| Lud's Gate | _Not implemented_ |
+| Aldwych | _Not required_ |
+| Lud's Gate | Ladders added between rooms 69 and 72. |
 | City | _Not required_ |
 | Nevada Desert | Link room added between rooms 18 and 26. |
-| High Security Compound | _Not required_ |
-| Area 51 | Slopes adjusted in room 0 to allow returning to room 4. |
+| High Security Compound | Link room added between rooms 38 and 129. |
+| Area 51 | Slopes adjusted in room 0 to allow returning to room 4; step added in room 64 to allow climbing out to room 63. |
 | Antarctica | _Not required_ |
 | RX-Tech Mines | Platform added to room 65 to allow reaching the ladder above. |
 | Lost City of Tinnos | Trapdoor added to room 44 to allow returning across the bridge. Each element room can be re-visited. |
 | Meteorite Cavern | Ladders added to rooms 17 and 18 to allow returning up the slope. |
-| All Hallows | Link room added between rooms 2 and 49. |
+| All Hallows | Link room added between rooms 2 and 49; plus, the zipline will reset after having used it. |

@@ -1,12 +1,16 @@
 # Secrets
 
 Jump to:
+* [Placement](#placement)
 * [TR1](#tr1)
 * [TR2](#tr2)
 * [TR3](#tr3)
 * [Generating Locations](#generating-locations)
 
-# TR1
+## Placement
+Refer to [zones](ZONES.MD) for details on how secret locations are selected.
+
+## TR1
 Original secret triggers are removed during randomization and artefacts are instead added to the level for Lara to collect. Once she collects all of the secrets in a level, a door will open to a new room where the rewards she would otherwise have collected can be found. When picking up a secret, a camera hint will show you the location of this room.
 
 The imported artefacts become either a key type, puzzle type or quest type, whichever is available in the level to re-purpose.
@@ -34,9 +38,6 @@ The artefact types to collect will change per level. This is in place to ensure 
 | Atlantis | Gold Idol |
 | Pyramid | Gold Idol |
 
-### Zoning
-Secrets are positioned by proximity so that they are fairly equally spread out across the level.
-
 ### Secret Count
 If [Tomb1Main](https://github.com/rr-/Tomb1Main) is being used, the number of secrets to collect per level can be changed. When you start a level, check Lara's compass to find out how many secrets you need to collect.
 
@@ -48,13 +49,12 @@ The options are:
 | Shuffled | Use the secret count from another level - the total number of secrets in the game will remain the same. |
 | Custom | Allocate a number of secrets of your choice (the maximum is currently 5 due to the current reward room implementations). |
 
-
 ----
 # TR2
-Zoning details for TR2 can be found at https://github.com/DanzaG/TR2-Rando/wiki/Zones#secrets
+The standard Stone, Jade and Gold dragons will be placed in each level.
 
 ----
-# TR3
+## TR3
 Secret randomization logic in TR3 works in exactly the same way as TR1.
 
 ### Artefacts
@@ -71,7 +71,7 @@ Several artefacts are imported per level. This will depend on the secret count a
 Currently, the number of secrets per level is hard-coded to the level's original sequence.
 
 ----
-# Generating Locations
+## Generating Locations
 Use trview to generate secret locations by making use of the available [randomizer settings](https://github.com/chreden/trview#randomizer-integration) feature. The file below should be copied locally to `%LOCALAPPDATA%/trview`.
 
 https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Shared/randomizer.json
@@ -120,9 +120,6 @@ Be careful not to enforce a mirrored secret and non-mirrored in the same level. 
 Note that in normal mode, secrets whose states do not match the level are simply skipped and another is chosen.
 
 Other environment changes should also be kept in mind when placing secrets; for example, rooms may be flooded/drained or some geometry may change. Refer to the specific level environment files in each case. Conditional changes can be made to either undo other environment modifications, or to add your own changes to fit your secrets. Conditional changes are performed following all other standard environment changes, aside from level mirroring, which is always performed last.
-
-### TR2 Zoning
-As pre-defined secrets may not necessarily fall into the default [zones](https://github.com/LostArtefacts/TR-Rando/wiki/Zones#secrets), you should position your waypoints manually in stone-jade-gold order instead. For TR1 and TR3, this is not important due to the different zoning technique and the arbitrary artefact types.
 
 ### Underwater Corner Secrets
 When placing secrets in corners underwater, there is a minimum distance from each wall the secret will need to be positioned - this is 130 units. Any closer to the wall and Lara won't pick the secret up.

@@ -2,9 +2,15 @@
 - added a TR2 secret pack (Eycore) (#559)
 - added a TR2 secret pack (Towandaa) (#558)
 - added more return paths to TR2 and TR3 (#563)
+- added an option to control whether or not key items can be allocated to enemies (#474)
+- added an option to control the range in which key items can appear (#474)
+- added an option to control whether or not key items can be placed in locations that rely on return paths (#474)
+- added an option to control key item continuity e.g. The Seraph being placed as an item in Barkhang Monastery if The Deck hasn't been visited (#474)
+- added item randomization to Home Sweet Home, provided the level starts with weapons and ammo already (#474)
 - fixed spelling mistakes in TR1 French gamestring localization (#560)
+- fixed a key item softlock in Diving Area (#564)
 - improved changelog, readme and contributing documentation
-- improved item location generation in TR1-3, and added item randomization to Home Sweet Home (#474)
+- improved regular item, key item, and secret item location generation and selection in TR1-3 (#474)
 - replaced purist mode with explicit options for adding return paths, fixing OG bugs, and fixing shortcuts (#563)
 
 ## [V1.7.3](https://github.com/LostArtefacts/TR-Rando/compare/V1.7.2...V1.7.3) - 2023-09-30
