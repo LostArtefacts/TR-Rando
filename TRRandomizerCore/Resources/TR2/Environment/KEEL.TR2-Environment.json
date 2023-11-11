@@ -62,6 +62,92 @@
       "IsNegativeZ": true
     },
     {
+      "Comments": "Modify the slopes to allow climbing back up.",
+      "EMType": 7,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 64000,
+        "Y": -2688,
+        "Z": 42496,
+        "Room": 43
+      },
+      "SlantType": 1,
+      "ZSlant": -2
+    },
+    {
+      "EMType": 7,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 62976,
+        "Y": -2688,
+        "Z": 42496,
+        "Room": 43
+      },
+      "SlantType": 1,
+      "ZSlant": -2
+    },
+    {
+      "Comments": "Move some faces for the new slopes.",
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 43,
+          "FaceIndices": [
+            8,
+            30
+          ],
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 43,
+          "FaceIndices": [
+            15,
+            33
+          ],
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 43,
+          "FaceIndex": 10,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 43,
+          "FaceIndex": 41,
+          "VertexChanges": {
+            "3": {
+              "Y": -256
+            }
+          }
+        }
+      ]
+    },
+    {
       "Comments": "Make it possible to return to the piston room from below. The fake ladder here becomes real.",
       "EMType": 0,
       "Tags": [

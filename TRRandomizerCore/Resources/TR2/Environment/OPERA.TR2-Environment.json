@@ -1,5 +1,486 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Create a return path from inside the opera house to the start area.",
+      "EMType": 126,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 83968,
+        "Y": 512,
+        "Z": 41984
+      },
+      "LinkedLocation": {
+        "X": 85504,
+        "Y": 2304,
+        "Z": 45568,
+        "Room": 50
+      },
+      "Textures": {
+        "Floor": 1699,
+        "Ceiling": 1672,
+        "WallAlignment": 5,
+        "Wall4": 1672,
+        "Wall1": 1700
+      },
+      "AmbientLighting": 8047,
+      "DefaultVertex": {
+        "Lighting": 6697,
+        "Lighting2": 6000,
+        "Attributes": 16
+      },
+      "Lights": [
+        {
+          "X": 1536,
+          "Y": -512,
+          "Z": 3584,
+          "Intensity1": 2048,
+          "Intensity2": 2048,
+          "Fade1": 1024,
+          "Fade2": 1024
+        }
+      ],
+      "Height": 5,
+      "Width": 4,
+      "Depth": 5,
+      "FloorHeights": {
+        "-1": [
+          12,
+          13
+        ]
+      },
+      "CeilingHeights": {
+        "-127": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "Comments": "Make visibility portals.",
+      "EMType": 81,
+      "Tags": [
+        9
+      ],
+      "Portals": [
+        {
+          "BaseRoom": 50,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "Y": 1
+          },
+          "Vertices": [
+            {
+              "X": 3072,
+              "Y": 512,
+              "Z": 2048
+            },
+            {
+              "X": 2048,
+              "Y": 512,
+              "Z": 2048
+            },
+            {
+              "X": 2048,
+              "Y": 512,
+              "Z": 3072
+            },
+            {
+              "X": 3072,
+              "Y": 512,
+              "Z": 3072
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": 50,
+          "Normal": {
+            "Y": -1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": 512,
+              "Z": 4096
+            },
+            {
+              "X": 2048,
+              "Y": 512,
+              "Z": 4096
+            },
+            {
+              "X": 2048,
+              "Y": 512,
+              "Z": 3072
+            },
+            {
+              "X": 1024,
+              "Y": 512,
+              "Z": 3072
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": 6,
+          "Normal": {
+            "Y": -1
+          },
+          "Vertices": [
+            {
+              "X": 2048,
+              "Y": 512,
+              "Z": 2048
+            },
+            {
+              "X": 3072,
+              "Y": 512,
+              "Z": 2048
+            },
+            {
+              "X": 3072,
+              "Y": 512,
+              "Z": 1024
+            },
+            {
+              "X": 2048,
+              "Y": 512,
+              "Z": 1024
+            }
+          ]
+        },
+        {
+          "BaseRoom": 6,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "Y": 1
+          },
+          "Vertices": [
+            {
+              "X": 3072,
+              "Y": 512,
+              "Z": 7168
+            },
+            {
+              "X": 2048,
+              "Y": 512,
+              "Z": 7168
+            },
+            {
+              "X": 2048,
+              "Y": 512,
+              "Z": 8192
+            },
+            {
+              "X": 3072,
+              "Y": 512,
+              "Z": 8192
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Comments": "Make horizontal portals.",
+      "EMType": 82,
+      "Tags": [
+        9
+      ],
+      "Portals": {
+        "50": {
+          "-1": [
+            {
+              "X": 86528,
+              "Z": 45568
+            }
+          ]
+        },
+        "6": {
+          "-1": [
+            {
+              "X": 86528,
+              "Z": 44544
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Make vertical portals.",
+      "EMType": 83,
+      "Tags": [
+        9
+      ],
+      "Ceiling": {
+        "X": 85504,
+        "Y": 512,
+        "Z": 45568,
+        "Room": -1
+      },
+      "Floor": {
+        "X": 85504,
+        "Y": 1536,
+        "Z": 45568,
+        "Room": 50
+      },
+      "InheritFloorBox": true
+    },
+    {
+      "Comments": "Make vertical portals.",
+      "EMType": 83,
+      "Tags": [
+        9
+      ],
+      "Ceiling": {
+        "X": 86528,
+        "Y": 512,
+        "Z": 43520,
+        "Room": -1
+      },
+      "Floor": {
+        "X": 86528,
+        "Y": 1536,
+        "Z": 43520,
+        "Room": 6
+      },
+      "InheritFloorBox": true
+    },
+    {
+      "Comments": "Add a ladder.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1702": {
+          "50": {
+            "Rectangles": [
+              29
+            ]
+          }
+        },
+        "1765": {
+          "50": {
+            "Rectangles": [
+              21
+            ]
+          }
+        },
+        "1769": {
+          "-1": {
+            "Rectangles": [
+              6
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 85504,
+        "Y": 2304,
+        "Z": 45568,
+        "Room": 50
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1702": {
+          "5": {
+            "Rectangles": [
+              109
+            ]
+          }
+        },
+        "1682": {
+          "5": {
+            "Rectangles": [
+              110
+            ]
+          }
+        },
+        "1769": {
+          "5": {
+            "Rectangles": [
+              108
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 82432,
+        "Y": 2304,
+        "Z": 52736,
+        "Room": 5
+      },
+      "IsPositiveX": true
+    },
+    {
+      "Comments": "Adjust faces to fit the ladder.",
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 50,
+          "FaceIndex": 29,
+          "VertexChanges": {
+            "0": {
+              "Y": 768
+            },
+            "1": {
+              "Y": 768
+            }
+          }
+        },
+        {
+          "RoomNumber": 50,
+          "FaceIndex": 21,
+          "VertexChanges": {
+            "0": {
+              "X": 1024
+            },
+            "1": {
+              "X": 1024
+            },
+            "2": {
+              "Y": 768
+            },
+            "3": {
+              "Y": 768
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Remove redundant faces.",
+      "EMType": 22,
+      "Tags": [
+        9
+      ],
+      "GeometryMap": {
+        "-1": {
+          "Rectangles": [
+            0,
+            9
+          ]
+        },
+        "6": {
+          "Rectangles": [
+            40
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Convert a fan into a trapdoor.",
+      "EMType": 45,
+      "Tags": [
+        9
+      ],
+      "EntityIndex": 153,
+      "NewEntityType": 114
+    },
+    {
+      "Comments": "Kill Lara where the fan used to be.",
+      "EMType": 70,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 61952,
+          "Y": 11136,
+          "Z": 34304,
+          "Room": 128
+        }
+      ]
+    },
+    {
+      "Comments": "Move the door to block the path from the start side.",
+      "EMType": 44,
+      "Tags": [
+        9
+      ],
+      "EntityIndex": 153,
+      "TargetLocation": {
+        "X": 86528,
+        "Y": 512,
+        "Z": 43520,
+        "Room": 6,
+        "Angle": -32768
+      }
+    },
+    {
+      "Comments": "Remove its old trigger action.",
+      "EMType": 72,
+      "Tags": [
+        9
+      ],
+      "Entities": [
+        153
+      ]
+    },
+    {
+      "Comments": "Add a dummy trigger for it.",
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "EntityLocation": 153,
+      "Trigger": {
+        "TrigType": 8,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 153
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "And a regular trigger for it, plus door 11 in case it was skipped.",
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 86528,
+          "Z": 44544,
+          "Room": -1
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 153
+          },
+          {
+            "Parameter": 11
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Generate lighting.",
+      "EMType": 128,
+      "Tags": [
+        9
+      ],
+      "RoomIndices": [
+        -1
+      ]
+    }
+  ],
   "Any": [
     [
       {

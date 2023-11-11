@@ -1,5 +1,79 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Tweak a slope at the end for easier key item exploration, if enabled.",
+      "EMType": 7,
+      "Tags": [
+        12
+      ],
+      "Location": {
+        "X": 24064,
+        "Y": -8448,
+        "Z": 73216,
+        "Room": 40
+      },
+      "SlantType": 1,
+      "XSlant": 0,
+      "ZSlant": -1
+    },
+    {
+      "EMType": 23,
+      "Tags": [
+        12
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 40,
+          "FaceIndices": [
+            82,
+            83
+          ],
+          "VertexChanges": {
+            "0": {
+              "Y": -768
+            },
+            "1": {
+              "Y": -768
+            }
+          }
+        },
+        {
+          "RoomNumber": 40,
+          "FaceType": 1,
+          "FaceIndex": 12,
+          "VertexChanges": {
+            "0": {
+              "Y": -256,
+              "Z": -1024
+            },
+            "1": {
+              "Y": -256,
+              "Z": -1024
+            },
+            "2": {
+              "Y": -256,
+              "Z": -1024
+            }
+          }
+        }
+      ]
+    },
+    {
+      "EMType": 21,
+      "Tags": [
+        12
+      ],
+      "TextureMap": {
+        "1557": {
+          "40": {
+            "Triangles": [
+              12
+            ]
+          }
+        }
+      }
+    }
+  ],
   "Any": [
     [
       {
@@ -29,6 +103,98 @@
         "FloorTexture": 1709,
         "SideTexture": 1863,
         "Flags": 7
+      }
+    ],
+    [
+      {
+        "Comments": "Move the end trigger.",
+        "EMType": 67,
+        "BaseLocation": {
+          "X": 22115,
+          "Y": -7424,
+          "Z": 64052,
+          "Room": 40
+        },
+        "NewLocation": {
+          "X": 22167,
+          "Y": -7424,
+          "Z": 61012,
+          "Room": 161
+        }
+      },
+      {
+        "Comments": "Deactivate the door into Lair.",
+        "EMType": 48,
+        "EntityIndex": 37,
+        "Flags": 0
+      },
+      {
+        "Comments": "Flip the door around so the portal's on the right side.",
+        "EMType": 44,
+        "EntityIndex": 37,
+        "TargetLocation": {
+          "X": 22016,
+          "Y": -7424,
+          "Z": 65024,
+          "Room": 40
+        }
+      },
+      {
+        "Comments": "Convert some spikes into a mystic plaque slot.",
+        "EMType": 45,
+        "EntityIndex": 58,
+        "NewEntityType": 182
+      },
+      {
+        "Comments": "Reposition it to the Lair door.",
+        "EMType": 44,
+        "EntityIndex": 58,
+        "TargetLocation": {
+          "X": 22016,
+          "Y": -7424,
+          "Z": 65024,
+          "Room": 40,
+          "Angle": 16384
+        }
+      },
+      {
+        "Comments": "Make a trigger to open the door.",
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 22016,
+            "Y": -7424,
+            "Z": 65024,
+            "Room": 40
+          }
+        ],
+        "Trigger": {
+          "TrigType": 3,
+          "Mask": 31,
+          "SwitchOrKeyRef": 58,
+          "Actions": [
+            {
+              "Parameter": 37
+            }
+          ]
+        }
+      },
+      {
+        "Comments": "Convert some other spikes into a mystic plaque.",
+        "EMType": 45,
+        "EntityIndex": 57,
+        "NewEntityType": 174
+      },
+      {
+        "Comments": "Default position for the new mystic plaque - key item rando can move this.",
+        "EMType": 44,
+        "EntityIndex": 57,
+        "TargetLocation": {
+          "X": 26482,
+          "Y": -8636,
+          "Z": 72639,
+          "Room": 144
+        }
       }
     ]
   ],
@@ -2110,156 +2276,6 @@
           }
         ]
       ]
-    },
-    {
-      "Leader": [
-        {
-          "Comments": "Move the end trigger.",
-          "EMType": 67,
-          "BaseLocation": {
-            "X": 22115,
-            "Y": -7424,
-            "Z": 64052,
-            "Room": 40
-          },
-          "NewLocation": {
-            "X": 22167,
-            "Y": -7424,
-            "Z": 61012,
-            "Room": 161
-          }
-        },
-        {
-          "Comments": "Deactivate the door into Lair.",
-          "EMType": 48,
-          "EntityIndex": 37,
-          "Flags": 0
-        },
-        {
-          "Comments": "Flip the door around so the portal's on the right side.",
-          "EMType": 44,
-          "EntityIndex": 37,
-          "TargetLocation": {
-            "X": 22016,
-            "Y": -7424,
-            "Z": 65024,
-            "Room": 40
-          }
-        },
-        {
-          "Comments": "Convert some spikes into a mystic plaque slot.",
-          "EMType": 45,
-          "EntityIndex": 58,
-          "NewEntityType": 182
-        },
-        {
-          "Comments": "Reposition it to the Lair door.",
-          "EMType": 44,
-          "EntityIndex": 58,
-          "TargetLocation": {
-            "X": 22016,
-            "Y": -7424,
-            "Z": 65024,
-            "Room": 40,
-            "Angle": 16384
-          }
-        },
-        {
-          "Comments": "Make a trigger to open the door.",
-          "EMType": 61,
-          "Locations": [
-            {
-              "X": 22016,
-              "Y": -7424,
-              "Z": 65024,
-              "Room": 40
-            }
-          ],
-          "Trigger": {
-            "TrigType": 3,
-            "Mask": 31,
-            "SwitchOrKeyRef": 58,
-            "Actions": [
-              {
-                "Parameter": 37
-              }
-            ]
-          }
-        },
-        {
-          "Comments": "Convert some other spikes into a mystic plaque.",
-          "EMType": 45,
-          "EntityIndex": 57,
-          "NewEntityType": 174
-        }
-      ],
-      "Followers": [
-        [
-          {
-            "Comments": "Default position for the new mystic plaque.",
-            "EMType": 44,
-            "EntityIndex": 57,
-            "TargetLocation": {
-              "X": 26482,
-              "Y": -8636,
-              "Z": 72639,
-              "Room": 144
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential position for the new mystic plaque.",
-            "EMType": 44,
-            "EntityIndex": 57,
-            "TargetLocation": {
-              "X": 23062,
-              "Y": -4484,
-              "Z": 67097,
-              "Room": 124
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential position for the new mystic plaque.",
-            "EMType": 44,
-            "EntityIndex": 57,
-            "TargetLocation": {
-              "X": 26358,
-              "Y": -5796,
-              "Z": 64409,
-              "Room": 159
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential position for the new mystic plaque.",
-            "EMType": 44,
-            "EntityIndex": 57,
-            "TargetLocation": {
-              "X": 33294,
-              "Y": -8351,
-              "Z": 64069,
-              "Room": 159
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential position for the new mystic plaque.",
-            "EMType": 44,
-            "EntityIndex": 57,
-            "TargetLocation": {
-              "X": 35268,
-              "Y": -9984,
-              "Z": 62927,
-              "Room": 41
-            }
-          }
-        ]
-      ]
     }
   ],
   "ConditionalAllWithin": [],
@@ -2605,6 +2621,7 @@
     "1688": 1704,
     "1863": 1879,
     "1709": 1725,
-    "1678": 1694
+    "1678": 1694,
+    "1557": 1573
   }
 }

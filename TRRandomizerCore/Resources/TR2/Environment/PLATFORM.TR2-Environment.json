@@ -944,6 +944,8 @@
         "Comments": "Adjust a secret.",
         "EMType": 43,
         "Types": [
+          192,
+          191,
           190
         ],
         "SectorLocations": [
@@ -965,6 +967,8 @@
         "Comments": "Floors another secret.",
         "EMType": 43,
         "Types": [
+          192,
+          191,
           190
         ],
         "SectorLocations": [
@@ -980,6 +984,8 @@
         "Comments": "Floors another secret.",
         "EMType": 43,
         "Types": [
+          192,
+          191,
           190
         ],
         "SectorLocations": [
@@ -995,6 +1001,8 @@
         "Comments": "Floors another secret.",
         "EMType": 43,
         "Types": [
+          192,
+          191,
           190
         ],
         "SectorLocations": [

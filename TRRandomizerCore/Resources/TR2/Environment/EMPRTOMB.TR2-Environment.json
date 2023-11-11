@@ -1,6 +1,96 @@
 {
   "All": [
     {
+      "Comments": "Convert door 191's activation if key item rando is enabled.",
+      "EMType": 48,
+      "Tags": [
+        12
+      ],
+      "EntityIndex": 191,
+      "Flags": 0
+    },
+    {
+      "EMType": 68,
+      "Tags": [
+        12
+      ],
+      "Location": {
+        "X": 47616,
+        "Y": 18944,
+        "Z": 44544,
+        "Room": 168
+      },
+      "Actions": [
+        {
+          "Parameter": 191
+        }
+      ]
+    },
+    {
+      "EMType": 69,
+      "Tags": [
+        12
+      ],
+      "Location": {
+        "X": 48640,
+        "Y": 18944,
+        "Z": 34304,
+        "Room": 116
+      },
+      "TrigType": 9
+    },
+    {
+      "Comments": "It's entirely possible to softlock in OG in the main chamber area, so prevent that by adjusting some triggers for trapdoors 79 and 144.",
+      "EMType": 71,
+      "Locations": [
+        {
+          "X": 25088,
+          "Y": -1792,
+          "Z": 67072,
+          "Room": 90
+        }
+      ],
+      "ActionItem": {
+        "Parameter": 79
+      }
+    },
+    {
+      "EMType": 71,
+      "Locations": [
+        {
+          "X": 25088,
+          "Y": -1792,
+          "Z": 67072,
+          "Room": 90
+        }
+      ],
+      "ActionItem": {
+        "Parameter": 145
+      }
+    },
+    {
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 26112,
+          "Y": -11264,
+          "Z": 66048,
+          "Room": 135
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 79
+          },
+          {
+            "Parameter": 145
+          }
+        ]
+      }
+    },
+    {
       "Comments": "Create a return path from the top of the waterfall to the very beginning.",
       "EMType": 126,
       "Tags": [
@@ -4686,7 +4776,9 @@
             "Comments": "A glitched secret may be in the unreachable room, so move it to another glitched location.",
             "EMType": 43,
             "Types": [
-              192
+              192,
+              191,
+              190
             ],
             "SectorLocations": [
               {
@@ -4757,7 +4849,9 @@
             "Comments": "A glitched secret may be in the unreachable room, so move it to another glitched location.",
             "EMType": 43,
             "Types": [
-              192
+              192,
+              191,
+              190
             ],
             "SectorLocations": [
               {

@@ -1,5 +1,45 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Replace the trigger under the cabin key with a pad (only if key item rando is enabled).",
+      "EMType": 69,
+      "Tags": [
+        12
+      ],
+      "Location": {
+        "X": 61952,
+        "Y": 5376,
+        "Z": 49664,
+        "Room": 15
+      },
+      "TrigType": 1
+    },
+    {
+      "Comments": "Make a ladder from the stern back to the first deck, in case the stern key is there and was missed.",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1713": {
+          "86": {
+            "Rectangles": [
+              85,
+              86,
+              87
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 39424,
+        "Y": 3072,
+        "Z": 36352,
+        "Room": 86
+      },
+      "IsPositiveZ": true
+    }
+  ],
   "Any": [
     [
       {
