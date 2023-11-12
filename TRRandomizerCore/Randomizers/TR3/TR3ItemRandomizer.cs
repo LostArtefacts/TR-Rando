@@ -22,7 +22,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     private TR3Entity _unarmedLevelPistols;
 
     // Secret reward items handled in separate class, so track the reward entities
-    private TRSecretMapping<TR2Entity> _secretMapping;
+    private TR3SecretMapping _secretMapping;
 
     private readonly LocationPicker _picker;
 
@@ -46,7 +46,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             FindUnarmedLevelPistols(_levelInstance);
 
             _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, false), Settings, _generator);
-            _secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath($@"TR3\SecretMapping\{_levelInstance.Name}-SecretMapping.json"));
+            _secretMapping = TR3SecretMapping.Get(GetResourcePath($@"TR3\SecretMapping\{_levelInstance.Name}-SecretMapping.json"), IsJPVersion);
 
             // #312 If this is the assault course, import required models. On failure, don't perform any item rando.
             if (_levelInstance.IsAssault && !ImportAssaultModels(_levelInstance))

@@ -34,7 +34,7 @@ public class TR3SecretRewardRandomizer : BaseTR3Randomizer
             return;
         }
 
-        TRSecretMapping<TR2Entity> secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath(@"TR3\SecretMapping\" + level.Name + "-SecretMapping.json"));
+        TR3SecretMapping secretMapping = TR3SecretMapping.Get(GetResourcePath($@"TR3\SecretMapping\{level.Name}-SecretMapping.json"), IsJPVersion);
 
         List<TR3Type> stdItemTypes = TR3TypeUtilities.GetStandardPickupTypes();
         // A bit cruel as rewards?
