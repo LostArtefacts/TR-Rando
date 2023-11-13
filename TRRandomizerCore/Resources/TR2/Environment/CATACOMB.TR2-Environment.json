@@ -113,6 +113,130 @@
       "IsNegativeX": true
     },
     {
+      "Comments": "Restore missing breakable tile triggers in flip room 116.",
+      "EMType": 63,
+      "Locations": [
+        {
+          "X": 34304,
+          "Y": 3840,
+          "Z": 44544,
+          "Room": 116
+        }
+      ],
+      "BaseLocation": {
+        "X": 34304,
+        "Y": 3840,
+        "Z": 44544,
+        "Room": 98
+      }
+    },
+    {
+      "EMType": 63,
+      "Locations": [
+        {
+          "X": 35328,
+          "Y": 3840,
+          "Z": 44544,
+          "Room": 116
+        }
+      ],
+      "BaseLocation": {
+        "X": 35328,
+        "Y": 3840,
+        "Z": 44544,
+        "Room": 98
+      }
+    },
+    {
+      "EMType": 63,
+      "Locations": [
+        {
+          "X": 36352,
+          "Y": 3840,
+          "Z": 44544,
+          "Room": 116
+        }
+      ],
+      "BaseLocation": {
+        "X": 36352,
+        "Y": 3840,
+        "Z": 44544,
+        "Room": 98
+      }
+    },
+    {
+      "Comments": "Restore missing enemy triggers in flip room 116.",
+      "EMType": 63,
+      "Locations": [
+        {
+          "X": 32256,
+          "Y": 5376,
+          "Z": 37376,
+          "Room": 116
+        },
+        {
+          "X": 32256,
+          "Y": 5376,
+          "Z": 38400,
+          "Room": 116
+        },
+        {
+          "X": 32256,
+          "Y": 5376,
+          "Z": 39424,
+          "Room": 116
+        },
+        {
+          "X": 32256,
+          "Y": 5376,
+          "Z": 40448,
+          "Room": 116
+        },
+        {
+          "X": 32256,
+          "Y": 5376,
+          "Z": 41472,
+          "Room": 116
+        },
+        {
+          "X": 32256,
+          "Y": 5376,
+          "Z": 42496,
+          "Room": 116
+        },
+        {
+          "X": 32256,
+          "Y": 5376,
+          "Z": 43520,
+          "Room": 116
+        },
+        {
+          "X": 32256,
+          "Y": 5376,
+          "Z": 44544,
+          "Room": 116
+        }
+      ],
+      "BaseLocation": {
+        "X": 32256,
+        "Y": 5376,
+        "Z": 37376,
+        "Room": 98
+      }
+    },
+    {
+      "Comments": "Restore the missing ladder FD in room 116.",
+      "EMType": 0,
+      "TextureMap": {},
+      "Location": {
+        "X": 36352,
+        "Y": 5376,
+        "Z": 44544,
+        "Room": 116
+      },
+      "IsPositiveX": true
+    },
+    {
       "EMType": 0,
       "Tags": [
         9
@@ -2705,6 +2829,52 @@
           "EMType": 146,
           "BaseSpriteID": 190,
           "TargetSpriteID": 175
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #9 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 9,
+        "X": 27136,
+        "Y": 1024,
+        "Z": 44544,
+        "Room": 2
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 27136,
+            "Y": 1024,
+            "Z": 44544,
+            "Room": 2
+          },
+          "EntityLocation": 9
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #112 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 112,
+        "X": 19968,
+        "Y": 10496,
+        "Z": 54784,
+        "Room": 67
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 19968,
+            "Y": 10496,
+            "Z": 54784,
+            "Room": 67
+          },
+          "EntityLocation": 112
         }
       ]
     }

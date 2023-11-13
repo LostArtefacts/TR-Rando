@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Numerics;
 
 namespace TRRandomizerCore.Helpers;
 
@@ -7,36 +8,24 @@ public class Location
     public const string DefaultPackID = "TRRando";
 
     public int X { get; set; }
-
     public int Y { get; set; }
-
     public int Z { get; set; }
-
     public int Room { get; set; }
+    public bool RequiresGlitch { get; set; }
+    public Difficulty Difficulty { get; set; }
+    public ItemRange Range { get; set; }
+    public RoomType RoomType { get; set; }
+    public bool VehicleRequired { get; set; }
+    public bool RequiresDamage { get; set; }
+    public bool InvalidatesRoom { get; set; }
+    public bool RequiresReturnPath { get; set; }
+    public LevelState LevelState { get; set; }
 
     [DefaultValue(16384)]
     public short Angle { get; set; }
 
-    public bool RequiresGlitch { get; set; }
-
-    public Difficulty Difficulty { get; set; }
-
-    public bool IsInRoomSpace { get; set; }
-
-    public bool IsItem { get; set; }
-
-    public bool VehicleRequired { get; set; }
-
     [DefaultValue(true)]
     public bool Validated { get; set; }
-
-    public bool RequiresDamage { get; set; }
-
-    public int KeyItemGroupID { get; set; }
-
-    public bool InvalidatesRoom { get; set; }
-
-    public LevelState LevelState { get; set; }
 
     [DefaultValue(-1)]
     public int EntityIndex { get; set; }
@@ -47,26 +36,21 @@ public class Location
     [DefaultValue(DefaultPackID)]
     public string PackID { get; set; }
 
+    [DefaultValue("")]
+    public string KeyItemsLow { get; set; }
+
+    [DefaultValue("")]
+    public string KeyItemsHigh { get; set; }
+
     public Location()
     {
-        X = 0;
-        Y = 0;
-        Z = 0;
-        Room = 0;
         Angle = 16384;
-        RequiresGlitch = false;
-        Difficulty = Difficulty.Easy;
-        IsInRoomSpace = false;
-        IsItem = false;
-        VehicleRequired = false;
         Validated = true;
-        RequiresDamage = false;
-        KeyItemGroupID = 0;
-        InvalidatesRoom = false;
-        LevelState = LevelState.Any;
         EntityIndex = -1;
         TargetType = -1;
         PackID = DefaultPackID;
+        KeyItemsLow = string.Empty;
+        KeyItemsHigh = string.Empty;
     }
 
     public bool IsEquivalent(Location other)
@@ -75,5 +59,15 @@ public class Location
             && other.Y == Y
             && other.Z == Z
             && other.Room == Room;
+    }
+
+    public Vector3 ToVector()
+    {
+        return new(X, Y, Z);
+    }
+
+    public override string ToString()
+    {
+        return $"{base.ToString()} X: {X} Y: {Y} Z: {Z} Room: {Room} Angle: {Angle}";
     }
 }

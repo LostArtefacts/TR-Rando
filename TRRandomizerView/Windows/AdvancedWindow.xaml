@@ -90,6 +90,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -121,7 +122,7 @@
                                 <Border Margin="0,10,0,0">
                                     <CheckBox IsEnabled="{Binding IsActive}"
                                               IsChecked="{Binding Value, Mode=TwoWay}"
-                                              VerticalAlignment="Center">
+                                              VerticalAlignment="Top">
                                         <Label Padding="0"
                                                Content="{Binding Title}" />
                                     </CheckBox>
@@ -197,8 +198,55 @@
                 </Grid>
             </StackPanel>
 
+            <!-- (Key Item) Difficulty -->
+            <StackPanel
+                Grid.Row="3"
+                IsEnabled="{Binding ControllerProxy.IncludeKeyItems.Value}"
+                Visibility="{Binding HasItemDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock
+                    Style="{StaticResource HeaderStyle}"
+                    Text="Key Item Range" />
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <ComboBox
+                            ItemsSource="{Binding ControllerProxy.ItemRanges}"
+                            SelectedItem="{Binding ControllerProxy.KeyItemRange, Mode=TwoWay}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"/>
+                    </Border>
+
+                    <Border
+                        Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <Label.Content>
+                                <TextBlock>
+                                    Sets the general range within a level in which key items can appear. See
+                                    <Hyperlink
+                                        ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/ZONES.md"
+                                        NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/ZONES.md"
+                                        RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink> for details.
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
             <!-- (Item) SpriteRandomization -->
-            <StackPanel Grid.Row="3"
+            <StackPanel Grid.Row="4"
                         Visibility="{Binding HasItemSpriteRandomization, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />

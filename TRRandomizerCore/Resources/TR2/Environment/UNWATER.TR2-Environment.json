@@ -392,7 +392,9 @@
         "Comments": "Several secret adjustments are needed.",
         "EMType": 43,
         "Types": [
-          192
+          192,
+          191,
+          190
         ],
         "SectorLocations": [
           {
@@ -412,7 +414,9 @@
       {
         "EMType": 43,
         "Types": [
-          192
+          192,
+          191,
+          190
         ],
         "SectorLocations": [
           {
@@ -432,7 +436,9 @@
       {
         "EMType": 43,
         "Types": [
-          192
+          192,
+          191,
+          190
         ],
         "SectorLocations": [
           {
@@ -452,7 +458,9 @@
       {
         "EMType": 43,
         "Types": [
-          192
+          192,
+          191,
+          190
         ],
         "SectorLocations": [
           {
@@ -473,7 +481,9 @@
       {
         "EMType": 43,
         "Types": [
-          192
+          192,
+          191,
+          190
         ],
         "SectorLocations": [
           {
@@ -494,7 +504,9 @@
       {
         "EMType": 43,
         "Types": [
-          192
+          192,
+          191,
+          190
         ],
         "SectorLocations": [
           {
@@ -508,7 +520,9 @@
       {
         "EMType": 43,
         "Types": [
-          192
+          192,
+          191,
+          190
         ],
         "SectorLocations": [
           {
@@ -535,7 +549,9 @@
       {
         "EMType": 43,
         "Types": [
-          192
+          192,
+          191,
+          190
         ],
         "SectorLocations": [
           {

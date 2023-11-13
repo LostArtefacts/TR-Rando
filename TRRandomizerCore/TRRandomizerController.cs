@@ -1453,6 +1453,30 @@ public class TRRandomizerController
         set => LevelRandomizer.IncludeKeyItems = value;
     }
 
+    public bool AllowReturnPathLocations
+    {
+        get => LevelRandomizer.AllowReturnPathLocations;
+        set => LevelRandomizer.AllowReturnPathLocations = value;
+    }
+
+    public ItemRange KeyItemRange
+    {
+        get => LevelRandomizer.KeyItemRange;
+        set => LevelRandomizer.KeyItemRange = value;
+    }
+
+    public bool AllowEnemyKeyDrops
+    {
+        get => LevelRandomizer.AllowEnemyKeyDrops;
+        set => LevelRandomizer.AllowEnemyKeyDrops = value;
+    }
+
+    public bool MaintainKeyContinuity
+    {
+        get => LevelRandomizer.MaintainKeyContinuity;
+        set => LevelRandomizer.MaintainKeyContinuity = value;
+    }
+
     public bool IncludeExtraPickups
     {
         get => LevelRandomizer.IncludeExtraPickups;

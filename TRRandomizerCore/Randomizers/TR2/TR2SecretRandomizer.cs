@@ -1,28 +1,36 @@
 ﻿using Newtonsoft.Json;
-using System.Diagnostics;
+using TRFDControl;
+using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Levels;
 using TRRandomizerCore.Utilities;
-using TRRandomizerCore.Zones;
 
 namespace TRRandomizerCore.Randomizers;
 
 public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
 {
-    private static readonly List<int> _devRooms = null;
     private static readonly int _levelSecretCount = 3;
+    private static readonly List<string> _textureFixLevels = new()
+    {
+        TR2LevelNames.FLOATER,
+        TR2LevelNames.LAIR,
+        TR2LevelNames.HOME
+    };
 
     private readonly Dictionary<string, List<Location>> _locations;
-    private SecretPicker _picker;
+    private readonly LocationPicker _routePicker;
+    private SecretPicker<TR2Entity> _secretPicker;
 
     public IMirrorControl Mirrorer { get; set; }
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR2Entity> ItemFactory { get; set; }
 
     public TR2SecretRandomizer()
     {
         _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\locations.json"));
+        _routePicker = new(GetResourcePath(@"TR2\Locations\routes.json"));
     }
 
     public IEnumerable<string> GetPacks()
@@ -33,259 +41,35 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
             .Distinct();
     }
 
-    private void RandomizeSecrets(List<Location> LevelLocations)
-    {
-        if (LevelLocations.Count > 2)
-        {
-            if (Settings.DevelopmentMode)
-            {
-                PlaceAllSecrets(LevelLocations);
-                return;
-            }
-
-            Location goldLocation = null;
-            Location jadeLocation = null;
-            Location stoneLocation = null;
-
-            // Applied guaranteed logic first.
-            Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(LevelLocations, false, _levelSecretCount);
-
-            //Apply zoning to the locations to ensure they are spread out.                
-            List<Location> stoneZone, jadeZone, goldZone;
-            bool secretPackMode = Settings.UseSecretPack && LevelLocations.Any(l => l.PackID != Location.DefaultPackID);
-            if (secretPackMode)
-            {
-                stoneZone = jadeZone = goldZone = LevelLocations;
-                guaranteedLocations = new(guaranteedLocations.Reverse());
-            }
-            else
-            {
-                ZonedLocationCollection zones = new();
-                zones.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), LevelLocations, ZonePopulationMethod.SecretsOnly);
-                stoneZone = zones.StoneZone;
-                jadeZone = zones.JadeZone;
-                goldZone = zones.GoldZone;
-            }
-
-            bool TestLocation(Location location, params Location[] setLocations)
-            {
-                if (secretPackMode)
-                {
-                    return true;
-                }
-
-                bool valid = true;
-                foreach (Location setLocation in setLocations)
-                {
-                    valid &= setLocation == null || setLocation.Room != location.Room;
-                }
-
-                return valid;
-            }
-
-            while (guaranteedLocations.Count > 0)
-            {
-                Location location = guaranteedLocations.Dequeue();
-                if (goldZone.Contains(location) && goldLocation == null)
-                {
-                    if (TestLocation(location, stoneLocation, jadeLocation))
-                    {
-                        goldLocation = location;
-                    }
-                }
-                else if (jadeZone.Contains(location) && jadeLocation == null)
-                {
-                    if (TestLocation(location, stoneLocation, goldLocation))
-                    {
-                        jadeLocation = location;
-                    }
-                }
-                else if (stoneLocation == null)
-                {
-                    if (TestLocation(location, jadeLocation, goldLocation))
-                    {
-                        stoneLocation = location;
-                    }
-                }
-            }
-
-            //Find suitable locations for those not allocated yet, ensuring they are zoned, do not share a room and difficulty.
-
-            if (goldLocation == null)
-            {
-                do
-                {
-                    goldLocation = goldZone[_generator.Next(0, goldZone.Count)];
-                } while ((goldLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
-                        (goldLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
-            }
-
-            if (jadeLocation == null)
-            {
-                do
-                {
-                    jadeLocation = jadeZone[_generator.Next(0, jadeZone.Count)];
-                } while ((jadeLocation.Room == goldLocation.Room) ||
-                        (jadeLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
-                        (jadeLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
-            }
-
-            if (stoneLocation == null)
-            {
-                do
-                {
-                    stoneLocation = stoneZone[_generator.Next(0, stoneZone.Count)];
-                } while ((stoneLocation.Room == goldLocation.Room) ||
-                        (stoneLocation.Room == jadeLocation.Room) ||
-                        (stoneLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
-                        (stoneLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
-            }
-
-            //Due to TRMod only accepting room space coords entities are actually stored in level space. So include some
-            //calls to support a transformation of any locations that are specified in room space to maintain backwards compatbility
-            //with older locations and support locations that are specified in both level or room space.
-            goldLocation = SpatialConverters.TransformToLevelSpace(goldLocation, _levelInstance.Data.Rooms[goldLocation.Room].Info);
-            jadeLocation = SpatialConverters.TransformToLevelSpace(jadeLocation, _levelInstance.Data.Rooms[jadeLocation.Room].Info);
-            stoneLocation = SpatialConverters.TransformToLevelSpace(stoneLocation, _levelInstance.Data.Rooms[stoneLocation.Room].Info);
-
-            Dictionary<TR2Type, Location> secretMap = new()
-            {
-                [TR2Type.StoneSecret_S_P] = stoneLocation,
-                [TR2Type.JadeSecret_S_P] = jadeLocation,
-                [TR2Type.GoldSecret_S_P] = goldLocation
-            };
-
-            foreach (TR2Type secretType in secretMap.Keys)
-            {
-                //Does the level contain an entity for this type?
-                TR2Entity secretEntity = _levelInstance.Data.Entities.Find(ent => ent.TypeID == secretType);
-
-                //If not, create a placeholder entity for now
-                if (secretEntity == null)
-                {
-                    _levelInstance.Data.Entities.Add(secretEntity = new());
-                }
-
-                // Move it to the new location and ensure it has the correct type set
-                Location location = secretMap[secretType];
-                secretEntity.TypeID = secretType;
-                secretEntity.Room = (short)location.Room;
-                secretEntity.X = location.X;
-                secretEntity.Y = location.Y;
-                secretEntity.Z = location.Z;
-                secretEntity.Intensity1 = -1;
-                secretEntity.Intensity2 = -1;
-                secretEntity.Angle = 0;
-                secretEntity.Flags = 0;
-            }
-
-            FixSecretTextures();
-            CheckForSecretDamage(secretMap);
-
-            _picker.FinaliseSecretPool(secretMap.Values, _levelInstance.Name);
-
-#if DEBUG
-            Debug.WriteLine(_levelInstance.Name + ": " + SecretPicker.DescribeLocations(secretMap.Values));
-#endif
-        }
-    }
-
-    private void PlaceAllSecrets(List<Location> LevelLocations)
-    {
-        ZonedLocationCollection ZonedLocations = new();
-
-        ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), LevelLocations, ZonePopulationMethod.SecretsOnly);
-
-        // Store existing secret indices for re-use (avoids FD problems when the originals are removed)
-        Queue<int> existingIndices = new();
-        for (int i = 0; i < _levelInstance.Data.Entities.Count; i++)
-        {
-            if (TR2TypeUtilities.IsSecretType(_levelInstance.Data.Entities[i].TypeID))
-            {
-                existingIndices.Enqueue(i);
-            }
-        }
-
-        //Add new entities
-        Dictionary<TR2Type, List<Location>> secretMap = new()
-        {
-            [TR2Type.StoneSecret_S_P] = ZonedLocations.StoneZone,
-            [TR2Type.JadeSecret_S_P] = ZonedLocations.JadeZone,
-            [TR2Type.GoldSecret_S_P] = ZonedLocations.GoldZone
-        };
-
-        foreach (TR2Type secretType in secretMap.Keys)
-        {
-            foreach (Location loc in secretMap[secretType])
-            {
-                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
-
-                if (_devRooms == null || _devRooms.Contains(copy.Room))
-                {
-                    TR2Entity entity;
-                    if (existingIndices.Count > 0)
-                    {
-                        entity = _levelInstance.Data.Entities[existingIndices.Dequeue()];
-                    }
-                    else
-                    {
-                        _levelInstance.Data.Entities.Add(entity = new());
-                    }
-
-                    entity.TypeID = secretType;
-                    entity.Room = (short)copy.Room;
-                    entity.X = copy.X;
-                    entity.Y = copy.Y;
-                    entity.Z = copy.Z;
-                    entity.Angle = 0;
-                    entity.Intensity1 = -1;
-                    entity.Intensity2 = -1;
-                    entity.Flags = 0;
-                }
-            }
-        }
-
-        FixSecretTextures();
-    }
-
-    private void FixSecretTextures()
-    {
-        if (_levelInstance.Is(TR2LevelNames.FLOATER) || _levelInstance.Is(TR2LevelNames.LAIR) || _levelInstance.Is(TR2LevelNames.HOME))
-        {
-            // Swap Stone and Jade textures - OG has them the wrong way around.
-            // SpriteSequence offsets have to remain in order, so swap the texture targets instead.
-            TRSpriteSequence stoneSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Type.StoneSecret_S_P);
-            TRSpriteSequence jadeSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Type.JadeSecret_S_P);
-
-            TRSpriteTexture[] textures = _levelInstance.Data.SpriteTextures;
-            (textures[jadeSequence.Offset], textures[stoneSequence.Offset]) 
-                = (textures[stoneSequence.Offset], textures[jadeSequence.Offset]);
-        }
-    }
-
     public override void Randomize(int seed)
     {
-        _generator = new Random(seed);
-        _picker = new SecretPicker
+        _generator = new(seed);
+        _secretPicker = new()
         {
             Settings = Settings,
             Generator = _generator,
             ItemFactory = ItemFactory,
             Mirrorer = Mirrorer,
+            RouteManager = _routePicker
         };
 
         foreach (TR2ScriptedLevel lvl in Levels)
         {
-            //Read the level into a level object
             LoadLevelInstance(lvl);
             if (_locations.ContainsKey(_levelInstance.Name))
             {
-                //Apply the modifications
-                RandomizeSecrets(_locations[_levelInstance.Name]);
-
-                //Write back the level file
-                SaveLevelInstance();
+                if (Settings.DevelopmentMode)
+                {
+                    PlaceAllSecrets(_levelInstance);
+                }
+                else
+                {
+                    RandomizeSecrets(_levelInstance);
+                }
             }
+
+            FixSecretTextures(_levelInstance);
+            SaveLevelInstance();
 
             if (!TriggerProgress())
             {
@@ -294,34 +78,137 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
         }
     }
 
-    private void CheckForSecretDamage(Dictionary<TR2Type, Location> secretMap)
+    private void PlaceAllSecrets(TR2CombinedLevel level)
     {
-        uint easyDamageCount = 0;
-        uint hardDamageCount = 0;
-
-        foreach (TR2Type secretType in secretMap.Keys)
+        Queue<int> existingIndices = new();
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            Location location = secretMap[secretType];
-            
-            if (location.RequiresDamage)
+            if (TR2TypeUtilities.IsSecretType(level.Data.Entities[i].TypeID))
             {
-                if (location.Difficulty == Difficulty.Hard)
-                    hardDamageCount++;
-                else
-                    easyDamageCount++;
+                existingIndices.Enqueue(i);
             }
         }
 
-        //  If we found some secrets needing damage
-        if (hardDamageCount > 0 || easyDamageCount > 0)
-        {
-            // If this an unarmed level I add one hard damage
-            if (_levelInstance.Script.RemovesWeapons) hardDamageCount++;
-            // If its one of the firsts level I add one easy damage
-            if (_levelInstance.Sequence < 2) easyDamageCount++;
+        _routePicker.Initialise(level.Name, _locations[level.Name], Settings, _generator);
 
-            _levelInstance.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Type.LargeMed_S_P), hardDamageCount);
-            _levelInstance.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Type.SmallMed_S_P), easyDamageCount);
+        // Simulate zoning of sorts by splitting the route equally. This of course doesn't guarantee
+        // what will be assigned in regular mode.
+        List<int> routeRooms = _routePicker.GetRouteRooms();
+        List<List<int>> zones = routeRooms.Split(_levelSecretCount);
+        List<TR2Type> secretTypes = TR2TypeUtilities.GetSecretTypes();
+
+        foreach (Location location in _locations[level.Name])
+        {
+            TR2Entity entity;
+            if (existingIndices.Count > 0)
+            {
+                entity = level.Data.Entities[existingIndices.Dequeue()];
+            }
+            else
+            {
+                level.Data.Entities.Add(entity = new());
+            }
+
+            int zone = zones.FindIndex(z => z.Contains(location.Room));
+            PlaceSecret(entity, secretTypes[zone], location);
         }
+
+        AddDamageControl(level, _locations[level.Name]);
+    }
+
+    private void RandomizeSecrets(TR2CombinedLevel level)
+    {
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level.Data);
+
+        List<Location> locations = _locations[level.Name];
+        locations.Shuffle(_generator);
+
+        _secretPicker.SectorAction = loc 
+            => FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
+        _routePicker.RoomInfos = level.Data.Rooms
+            .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
+            .ToList();
+
+        _routePicker.Initialise(level.Name, locations, Settings, _generator);
+
+        // Organise picked locations according to route position to allow classic Stone/Jade/Gold order.
+        List<Location> pickedLocations = _secretPicker.GetLocations(locations, Mirrorer.IsMirrored(level.Name), _levelSecretCount);
+        List<TR2Type> secretTypes = TR2TypeUtilities.GetSecretTypes();
+        pickedLocations.Sort((l1, l2) => 
+            _routePicker.GetRoutePosition(l1).CompareTo(_routePicker.GetRoutePosition(l2)));
+
+        for (int i = 0; i < pickedLocations.Count; i++)
+        {
+            TR2Entity entity = level.Data.Entities.Find(e => e.TypeID == secretTypes[i]);
+            entity ??= ItemFactory.CreateItem(level.Name, level.Data.Entities);
+            PlaceSecret(entity, secretTypes[i], pickedLocations[i]);
+        }
+
+        AddDamageControl(level, pickedLocations);
+        _secretPicker.FinaliseSecretPool(pickedLocations, level.Name);
+    }
+
+    private void PlaceSecret(TR2Entity entity, TR2Type type, Location location)
+    {
+        _routePicker.SetLocation(entity, location);
+        entity.TypeID = type;
+        entity.Intensity1 = -1;
+        entity.Intensity2 = -1;
+        entity.Flags = 0;
+    }
+
+    private static void FixSecretTextures(TR2CombinedLevel level)
+    {
+        if (!_textureFixLevels.Contains(level.Name))
+        {
+            return;
+        }
+
+        // Swap Stone and Jade textures - OG has them the wrong way around.
+        // SpriteSequence offsets have to remain in order, so swap the texture targets instead.
+        TRSpriteSequence stoneSequence = Array.Find(level.Data.SpriteSequences, s => s.SpriteID == (int)TR2Type.StoneSecret_S_P);
+        TRSpriteSequence jadeSequence = Array.Find(level.Data.SpriteSequences, s => s.SpriteID == (int)TR2Type.JadeSecret_S_P);
+
+        TRSpriteTexture[] textures = level.Data.SpriteTextures;
+        (textures[jadeSequence.Offset], textures[stoneSequence.Offset])
+            = (textures[stoneSequence.Offset], textures[jadeSequence.Offset]);
+    }
+
+    private static void AddDamageControl(TR2CombinedLevel level, List<Location> locations)
+    {
+        IEnumerable<Location> damagingLocations = locations.Where(l => l.RequiresDamage);
+        if (!damagingLocations.Any())
+        {
+            return;
+        }
+
+        uint easyDamageCount = 0;
+        uint hardDamageCount = 0;
+
+        foreach (Location location in damagingLocations)
+        {
+            if (location.Difficulty == Difficulty.Hard)
+            {
+                hardDamageCount++;
+            }
+            else
+            {
+                easyDamageCount++;
+            }
+        }
+
+        if (level.Script.RemovesWeapons)
+        {
+            hardDamageCount++;
+        }
+
+        if (level.Sequence < 2)
+        {
+            easyDamageCount++;
+        }
+
+        level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Type.LargeMed_S_P), hardDamageCount);
+        level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Type.SmallMed_S_P), easyDamageCount);
     }
 }

@@ -15,30 +15,24 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR3ItemRandomizer : BaseTR3Randomizer
 {
-    private readonly Dictionary<string, LevelPickupZoneDescriptor> _keyItemZones;
-    private readonly Dictionary<string, List<Location>> _keyItemLocations;
     private readonly Dictionary<string, List<Location>> _excludedLocations;
     private readonly Dictionary<string, List<Location>> _pistolLocations;
-
-    private static readonly int _ANY_ROOM_ALLOWED = 2048;  //Max rooms is 1024 - so this should never be possible.
 
     // Track the pistols so they remain a weapon type and aren't moved
     private TR3Entity _unarmedLevelPistols;
 
     // Secret reward items handled in separate class, so track the reward entities
-    private TRSecretMapping<TR2Entity> _secretMapping;
+    private TR3SecretMapping _secretMapping;
 
     private readonly LocationPicker _picker;
 
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR3Entity> ItemFactory { get; set; }
 
     public TR3ItemRandomizer()
     {
-        _keyItemZones = JsonConvert.DeserializeObject<Dictionary<string, LevelPickupZoneDescriptor>>(ReadResource(@"TR3\Locations\Zones.json"));
-        _keyItemLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\item_locations.json"));
         _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\invalid_item_locations.json"));
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
-        _picker = new();
+        _picker = new(GetResourcePath(@"TR3\Locations\routes.json"));
     }
 
     public override void Randomize(int seed)
@@ -51,8 +45,8 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
             FindUnarmedLevelPistols(_levelInstance);
 
-            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
-            _secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath($@"TR3\SecretMapping\{_levelInstance.Name}-SecretMapping.json"));
+            _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, false), Settings, _generator);
+            _secretMapping = TR3SecretMapping.Get(GetResourcePath($@"TR3\SecretMapping\{_levelInstance.Name}-SecretMapping.json"), IsJPVersion);
 
             // #312 If this is the assault course, import required models. On failure, don't perform any item rando.
             if (_levelInstance.IsAssault && !ImportAssaultModels(_levelInstance))
@@ -88,7 +82,6 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         foreach (TR3ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
-            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
             RandomizeKeyItems(_levelInstance);
 
             SaveLevelInstance();
@@ -276,17 +269,16 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            TR3Entity ent = level.Data.Entities[i];
+            TR3Entity entity = level.Data.Entities[i];
             // Move standard items only, excluding any unarmed level pistols, and reward items
-            if (TR3TypeUtilities.IsStandardPickupType(ent.TypeID) && ent != _unarmedLevelPistols)
+            if (TR3TypeUtilities.IsStandardPickupType(entity.TypeID) && entity != _unarmedLevelPistols)
             {
-                Location location = _picker.GetPickupLocation();
-                _picker.SetLocation(ent, location);
+                _picker.RandomizePickupLocation(entity);
             }
         }
     }
 
-    private List<Location> GetItemLocationPool(TR3CombinedLevel level)
+    private List<Location> GetItemLocationPool(TR3CombinedLevel level, bool keyItemMode)
     {
         List<Location> exclusions = new();
         if (_excludedLocations.ContainsKey(level.Name))
@@ -333,60 +325,34 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         }
 
         TR3LocationGenerator generator = new();
-        return generator.Generate(level.Data, exclusions);
+        return generator.Generate(level.Data, exclusions, keyItemMode);
     }
 
     public void RandomizeKeyItems(TR3CombinedLevel level)
     {
-        if (!_keyItemLocations.ContainsKey(level.Name))
-        {
-            return;
-        }
-
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
         _picker.KeyItemTestAction = location => TestKeyItemLocation(location, level);
+        _picker.RoomInfos = level.Data.Rooms
+            .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
+            .ToList();
 
-        //Get all locations that have a KeyItemGroupID - e.g. intended for key items
-        List<Location> levelLocations = _keyItemLocations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
+        _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, true), Settings, _generator);
 
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR3Entity entity = level.Data.Entities[i];
-            //Calculate its alias
-            TR3Type aliasedKeyItemID = entity.TypeID + entity.Room + GetLevelKeyItemBaseAlias(level.Name);
-
-            //Any special handling for key item entities
-            switch (aliasedKeyItemID)
+            if (!TR3TypeUtilities.IsKeyItemType(entity.TypeID)
+                || ItemFactory.IsItemLocked(level.Name, i))
             {
-                case TR3Type.DetonatorKey:
-                    entity.Invisible = false;
-                    break;
-                default:
-                    break;
+                continue;
             }
 
-            if (aliasedKeyItemID < TR3Type.JungleKeyItemBase)
-                throw new NotSupportedException("Level does not have key item alias group defined");
-
-            //Is entity one we are allowed/expected to move? (is the alias and base type correct?)
-            if (_keyItemZones[level.Name].AliasedExpectedKeyItems.Contains(aliasedKeyItemID) &&
-                _keyItemZones[level.Name].BaseExpectedKeyItems.Contains(entity.TypeID))
-            {
-                do
-                {
-                    //Only get locations that are to position the intended key item.
-                    //We can probably get rid of the do while loop as any location in this list should be valid
-                    List<Location> keyItemLocations = levelLocations.Where(i => i.KeyItemGroupID == (int)aliasedKeyItemID).ToList();
-                    Location location = _picker.GetKeyItemLocation(keyItemLocations, entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData));
-                    _picker.SetLocation(entity, location);
-
-                } while (!_keyItemZones[level.Name].AllowedRooms[aliasedKeyItemID].Contains(entity.Room) &&
-                        (!_keyItemZones[level.Name].AllowedRooms[aliasedKeyItemID].Contains(_ANY_ROOM_ALLOWED)));
-                //Try generating locations until it is in the zone - if list contains 2048 then any room is allowed.
-            }
+            _picker.RandomizeKeyItemLocation(
+                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData),
+                level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
         }
     }
 
@@ -398,40 +364,10 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             .FindAll(e => TR3TypeUtilities.IsEnemyType(e.TypeID))
             .Find(e => e.GetLocation().IsEquivalent(location));
 
-        return enemy == null || TR3TypeUtilities.CanDropPickups
+        return enemy == null || (Settings.AllowEnemyKeyDrops && TR3TypeUtilities.CanDropPickups
         (
             TR3TypeUtilities.GetAliasForLevel(level.Name, enemy.TypeID),
             !Settings.RandomizeEnemies || Settings.ProtectMonks
-        );
-    }
-
-    private static int GetLevelKeyItemBaseAlias(string name)
-    {
-        TR3Type alias = name switch
-        {
-            TR3LevelNames.JUNGLE => TR3Type.JungleKeyItemBase,
-            TR3LevelNames.RUINS => TR3Type.TempleKeyItemBase,
-            TR3LevelNames.GANGES => TR3Type.GangesKeyItemBase,
-            TR3LevelNames.CAVES => TR3Type.KaliyaKeyItemBase,
-            TR3LevelNames.NEVADA => TR3Type.NevadaKeyItemBase,
-            TR3LevelNames.HSC => TR3Type.HSCKeyItemBase,
-            TR3LevelNames.AREA51 => TR3Type.Area51KeyItemBase,
-            TR3LevelNames.COASTAL => TR3Type.CoastalKeyItemBase,
-            TR3LevelNames.CRASH => TR3Type.CrashKeyItemBase,
-            TR3LevelNames.MADUBU => TR3Type.MadubuKeyItemBase,
-            TR3LevelNames.PUNA => TR3Type.PunaKeyItemBase,
-            TR3LevelNames.THAMES => TR3Type.ThamesKeyItemBase,
-            TR3LevelNames.ALDWYCH => TR3Type.AldwychKeyItemBase,
-            TR3LevelNames.LUDS => TR3Type.LudsKeyItemBase,
-            TR3LevelNames.CITY => TR3Type.CityKeyItemBase,
-            TR3LevelNames.ANTARC => TR3Type.AntarcticaKeyItemBase,
-            TR3LevelNames.RXTECH => TR3Type.RXKeyItemBase,
-            TR3LevelNames.TINNOS => TR3Type.TinnosKeyItemBase,
-            TR3LevelNames.WILLIE => TR3Type.CavernKeyItemBase,
-            TR3LevelNames.HALLOWS => TR3Type.HallowsKeyItemBase,
-            _ => default,
-        };
-
-        return (int)alias;
+        ));
     }
 }

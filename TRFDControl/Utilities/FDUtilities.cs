@@ -513,15 +513,23 @@ public static class FDUtilities
         return 0;
     }
 
-    public static int GetHeight(int x, int z, short roomIndex, TR1Level level, FDControl floorData)
+    public static int GetHeight(int x, int z, short roomIndex, TR1Level level, FDControl floorData, bool waterOnly)
     {
         TRRoom room = level.Rooms[roomIndex];
-        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
+        if (waterOnly && !room.ContainsWater)
+        {
+            return TRConsts.NoHeight;
+        }
 
+        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         TRRoomSector floorSector = baseSector;
         while (floorSector.RoomBelow != TRConsts.NoRoom)
         {
             room = level.Rooms[floorSector.RoomBelow];
+            if (waterOnly && !room.ContainsWater)
+            {
+                break;
+            }
             floorSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 
@@ -529,21 +537,33 @@ public static class FDUtilities
         while (ceilingSector.RoomAbove != TRConsts.NoRoom)
         {
             room = level.Rooms[ceilingSector.RoomAbove];
+            if (waterOnly && !room.ContainsWater)
+            {
+                break;
+            }
             ceilingSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 
         return GetHeight(x, z, floorSector, ceilingSector, floorData);
     }
 
-    public static int GetHeight(int x, int z, short roomIndex, TR2Level level, FDControl floorData)
+    public static int GetHeight(int x, int z, short roomIndex, TR2Level level, FDControl floorData, bool waterOnly)
     {
         TR2Room room = level.Rooms[roomIndex];
-        TRRoomSector baseSector = GetRoomSector(x, z, room.SectorList, room.Info, room.NumZSectors);
+        if (waterOnly && !room.ContainsWater)
+        {
+            return TRConsts.NoHeight;
+        }
 
+        TRRoomSector baseSector = GetRoomSector(x, z, room.SectorList, room.Info, room.NumZSectors);
         TRRoomSector floorSector = baseSector;
         while (floorSector.RoomBelow != TRConsts.NoRoom)
         {
             room = level.Rooms[floorSector.RoomBelow];
+            if (waterOnly && !room.ContainsWater)
+            {
+                break;
+            }
             floorSector = GetRoomSector(x, z, room.SectorList, room.Info, room.NumZSectors);
         }
 
@@ -551,21 +571,33 @@ public static class FDUtilities
         while (ceilingSector.RoomAbove != TRConsts.NoRoom)
         {
             room = level.Rooms[ceilingSector.RoomAbove];
+            if (waterOnly && !room.ContainsWater)
+            {
+                break;
+            }
             ceilingSector = GetRoomSector(x, z, room.SectorList, room.Info, room.NumZSectors);
         }
 
         return GetHeight(x, z, floorSector, ceilingSector, floorData);
     }
 
-    public static int GetHeight(int x, int z, short roomIndex, TR3Level level, FDControl floorData)
+    public static int GetHeight(int x, int z, short roomIndex, TR3Level level, FDControl floorData, bool waterOnly)
     {
         TR3Room room = level.Rooms[roomIndex];
-        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
+        if (waterOnly && !room.ContainsWater)
+        {
+            return TRConsts.NoHeight;
+        }
 
+        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         TRRoomSector floorSector = baseSector;
         while (floorSector.RoomBelow != TRConsts.NoRoom)
         {
             room = level.Rooms[floorSector.RoomBelow];
+            if (waterOnly && !room.ContainsWater)
+            {
+                break;
+            }
             floorSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 
@@ -573,6 +605,10 @@ public static class FDUtilities
         while (ceilingSector.RoomAbove != TRConsts.NoRoom)
         {
             room = level.Rooms[ceilingSector.RoomAbove];
+            if (waterOnly && !room.ContainsWater)
+            {
+                break;
+            }
             ceilingSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 

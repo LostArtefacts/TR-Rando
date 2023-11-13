@@ -38,6 +38,11 @@ public class RandomizerSettings
     public GlobeDisplayOption GlobeDisplay { get; set; }
     public bool HardSecrets { get; set; }
     public bool IncludeKeyItems { get; set; }
+    public bool AllowReturnPathLocations { get; set; }
+    public ItemRange KeyItemRange { get; set; }
+    public bool AllowEnemyKeyDrops { get; set; }
+    public bool MaintainKeyContinuity { get; set; }
+    public bool IncludeReturnPathLocations => AllowReturnPathLocations && AddReturnPaths;
     public bool IncludeExtraPickups { get; set; }
     public bool DevelopmentMode { get; set; }
     public ItemDifficulty RandoItemDifficulty { get; set; }
@@ -133,7 +138,7 @@ public class RandomizerSettings
     public bool RandomizeItemPositions { get; set; }
 
     public bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;// || RandomizeEnvironment; // Not needed until trap model import takes place
-    public bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
+    public bool ReassignPuzzleItems => (RandomizeEnemies && CrossLevelEnemies) || (RandomizeItems && IncludeKeyItems);
 
     public bool RandomizeVfx { get; set; }
     public Color VfxFilterColor { get; set; }
@@ -199,6 +204,10 @@ public class RandomizerSettings
         RandomizeItems = config.GetBool(nameof(RandomizeItems));
         ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
         IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
+        KeyItemRange = (ItemRange)config.GetEnum(nameof(KeyItemRange), typeof(ItemRange), ItemRange.Medium);
+        AllowEnemyKeyDrops = config.GetBool(nameof(AllowEnemyKeyDrops), true);
+        MaintainKeyContinuity = config.GetBool(nameof(MaintainKeyContinuity), true);
+        AllowReturnPathLocations = config.GetBool(nameof(AllowReturnPathLocations), true);
         IncludeExtraPickups = config.GetBool(nameof(IncludeExtraPickups), true);
         RandoItemDifficulty = (ItemDifficulty)config.GetEnum(nameof(RandoItemDifficulty), typeof(ItemDifficulty), ItemDifficulty.Default);
         RandomizeItemTypes = config.GetBool(nameof(RandomizeItemTypes), true);
@@ -359,6 +368,10 @@ public class RandomizerSettings
         config[nameof(RandomizeItems)] = RandomizeItems;
         config[nameof(ItemSeed)] = ItemSeed;
         config[nameof(IncludeKeyItems)] = IncludeKeyItems;
+        config[nameof(KeyItemRange)] = KeyItemRange;
+        config[nameof(AllowEnemyKeyDrops)] = AllowEnemyKeyDrops;
+        config[nameof(MaintainKeyContinuity)] = MaintainKeyContinuity;
+        config[nameof(AllowReturnPathLocations)] = AllowReturnPathLocations;
         config[nameof(IncludeExtraPickups)] = IncludeExtraPickups;
         config[nameof(RandoItemDifficulty)] = RandoItemDifficulty;
         config[nameof(RandomizeItemTypes)] = RandomizeItemTypes;

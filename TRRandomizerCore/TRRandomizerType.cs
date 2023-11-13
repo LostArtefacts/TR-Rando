@@ -61,4 +61,5 @@ public enum TRRandomizerType
     ReturnPaths,
     GeneralBugFixes,
     ShortcutFixes,
+    KeyContinuity,
 }

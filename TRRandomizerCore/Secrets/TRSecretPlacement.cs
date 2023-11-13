@@ -1,12 +1,10 @@
-﻿using TRRandomizerCore.Helpers;
+﻿using TRLevelControl;
+using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Secrets;
 
 public class TRSecretPlacement<E> where E : Enum
 {
-    public static readonly int MaskBits = 5;
-    public static readonly int FullActivation = (1 << MaskBits) - 1;
-
     public Location Location { get; set; }
     public E PickupType { get; set; }
     public ushort EntityIndex { get; set; }
@@ -21,7 +19,7 @@ public class TRSecretPlacement<E> where E : Enum
     public TRSecretPlacement()
     {
         // Default to standard mask and no door
-        TriggerMask = (byte)FullActivation;
+        TriggerMask = TRConsts.FullMask;
         DoorIndex = ushort.MaxValue;
         CameraIndex = ushort.MaxValue;
     }
@@ -50,7 +48,7 @@ public class TRSecretPlacement<E> where E : Enum
         int alignedIndex = SecretIndex + 1;
         if (alignedIndex == secretCount || alignedIndex % split == 0)
         {
-            while (++position < MaskBits)
+            while (++position < TRConsts.MaskBits)
             {
                 mask |= 1 << position;
             }

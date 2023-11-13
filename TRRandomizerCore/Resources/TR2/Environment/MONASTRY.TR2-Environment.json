@@ -10,6 +10,20 @@
         5
       ],
       "IsSkyboxVisible": true
+    },
+    {
+      "Comments": "Replace the trigger under the flame room prayer wheel with a pad (only if key item rando is enabled).",
+      "EMType": 69,
+      "Tags": [
+        12
+      ],
+      "Location": {
+        "X": 34304,
+        "Y": -1024,
+        "Z": 34304,
+        "Room": 54
+      },
+      "TrigType": 1
     }
   ],
   "Any": [

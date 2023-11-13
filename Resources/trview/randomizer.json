@@ -31,11 +31,6 @@
       "display": "Requires Damage",
       "type": "boolean"
     },
-    "KeyItemGroupID": {
-      "default": 0,
-      "display": "Key Item Group ID",
-      "type": "number"
-    },
     "LevelState": {
       "default": "Any",
       "display": "Level State",
@@ -68,6 +63,33 @@
         "Lahm",
         "TowandAA"
       ],
+      "type": "string"
+    },
+    "RequiresReturnPath": {
+      "default": false,
+      "display": "Requires Return Path",
+      "type": "boolean"
+    },
+    "Range": {
+      "default": "Small",
+      "display": "Range",
+      "options": [ "Small", "Medium", "Large" ],
+      "type": "string"
+    },
+    "RoomType": {
+      "default": "Normal",
+      "display": "Room Type",
+      "options": [ "Normal", "ReturnPath", "Challenge", "Reward" ],
+      "type": "string"
+    },
+    "KeyItemsLow": {
+      "default": "",
+      "display": "Key IDs (min room inc.)",
+      "type": "string"
+    },
+    "KeyItemsHigh": {
+      "default": "",
+      "display": "Key IDs (max room exc.)",
       "type": "string"
     }
   }

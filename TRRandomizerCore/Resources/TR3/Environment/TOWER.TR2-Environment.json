@@ -1,5 +1,104 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Make ladders in rooms 69 and 72",
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1996": {
+          "72": {
+            "Rectangles": [
+              81
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 54784,
+        "Y": -5376,
+        "Z": 35328,
+        "Room": 69
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {
+        "1996": {
+          "72": {
+            "Rectangles": [
+              79
+            ]
+          }
+        }
+      },
+      "Location": {
+        "X": 54784,
+        "Y": -5376,
+        "Z": 34304,
+        "Room": 69
+      },
+      "IsPositiveX": true
+    },
+    {
+      "Comments": "Make a block to reach the ladder.",
+      "EMType": 1,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 53760,
+        "Y": -6656,
+        "Z": 35328,
+        "Room": 69
+      },
+      "Clicks": -4,
+      "FloorTexture": 2029,
+      "SideTexture": 2029,
+      "Flags": 15
+    },
+    {
+      "Comments": "Alter door 211 to avoid softlock if exploring the area before it again.",
+      "EMType": 48,
+      "Tags": [
+        9
+      ],
+      "EntityIndex": 211,
+      "Flags": 0
+    },
+    {
+      "Comments": "Adjust its triggers.",
+      "EMType": 62,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 56832,
+          "Y": -1536,
+          "Z": 32256,
+          "Room": 198
+        }
+      ]
+    },
+    {
+      "EMType": 68,
+      "Tags": [
+        9
+      ],
+      "EntityLocation": 109,
+      "Actions": [
+        {
+          "Parameter": 211
+        }
+      ]
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

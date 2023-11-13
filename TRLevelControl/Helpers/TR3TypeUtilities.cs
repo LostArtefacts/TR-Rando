@@ -559,7 +559,8 @@ public static class TR3TypeUtilities
             TR3Type.SmallWallSwitch,
             TR3Type.PushButtonSwitch,
             TR3Type.WallSwitch,
-            TR3Type.UnderwaterSwitch
+            TR3Type.UnderwaterSwitch,
+            TR3Type.ValveWheelOrPulley,
         };
     }
 
@@ -654,8 +655,12 @@ public static class TR3TypeUtilities
             || IsTrapdoor(type)
             || IsDoorType(type)
             || IsPushblockType(type)
+            || (IsVehicleType(type) && type != TR3Type.MineCart)
             || type == TR3Type.FallingBlock
             || type == TR3Type.RollingBallOrBarrel
+            || type == TR3Type.ZiplineHandle
+            || type == TR3Type.WaterfallMist_H
+            || type == TR3Type.DestroyableBoardedUpWindow
             || type == TR3Type.Lara;
     }
 

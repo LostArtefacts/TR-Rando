@@ -1,6 +1,26 @@
 {
   "All": [
     {
+      "Comments": "Allow resetting the zipline to avoid softlocks.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 41472,
+          "Y": -3840,
+          "Z": 53760,
+          "Room": 55
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 9
+          }
+        ]
+      }
+    },
+    {
       "Comments": "Create a return path to get back out of the cathedral.",
       "EMType": 126,
       "Tags": [

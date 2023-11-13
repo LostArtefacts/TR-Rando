@@ -14,4 +14,5 @@ public enum EMTag
     ReturnPath,
     GeneralBugFix,
     ShortcutFix,
+    KeyItemFix,
 }

@@ -769,6 +769,7 @@ public static class TR2TypeUtilities
             TR2Type.DrippingWater_N,
             TR2Type.BartoliHideoutClock_N,
             TR2Type.SingingBirds_N,
+            TR2Type.DragonExplosionEmitter_N,
         };
     }
 

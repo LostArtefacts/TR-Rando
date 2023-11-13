@@ -973,13 +973,240 @@
           }
         ]
       }
+    },
+    {
+      "Comments": "Replace the trigger under the wind mask with a pickup trigger, only if key item rando is enabled.",
+      "EMType": 61,
+      "Tags": [
+        12
+      ],
+      "EntityLocation": 76,
+      "Trigger": {
+        "TrigType": 4,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 76
+          },
+          {
+            "Parameter": 77
+          }
+        ]
+      },
+      "Replace": true
+    },
+    {
+      "Comments": "Convert the exit door for the wind maze into a lifting type as it will no longer close.",
+      "EMType": 45,
+      "Tags": [
+        12
+      ],
+      "EntityIndex": 77,
+      "NewEntityType": 133
+    },
+    {
+      "Comments": "Replace the trigger under the fire mask with a pickup trigger, only if key item rando is enabled.",
+      "EMType": 61,
+      "Tags": [
+        12
+      ],
+      "EntityLocation": 105,
+      "Trigger": {
+        "TrigType": 4,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 105
+          },
+          {
+            "Parameter": 106
+          }
+        ]
+      },
+      "Replace": true
+    },
+    {
+      "Comments": "Convert the exit door for the fire room into a lifting type as it will no longer close.",
+      "EMType": 45,
+      "Tags": [
+        12
+      ],
+      "EntityIndex": 106,
+      "NewEntityType": 133
+    },
+    {
+      "Comments": "Replace the trigger near the water mask with a pickup trigger for the mask, only if key item rando is enabled.",
+      "EMType": 61,
+      "Tags": [
+        12
+      ],
+      "EntityLocation": 73,
+      "Trigger": {
+        "TrigType": 4,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 73
+          },
+          {
+            "Parameter": 120
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Remove the switch trigger.",
+      "EMType": 62,
+      "Tags": [
+        12
+      ],
+      "Locations": [
+        {
+          "X": 37376,
+          "Y": -2048,
+          "Z": 89600,
+          "Room": 109
+        }
+      ]
+    },
+    {
+      "Comments": "Replace the switch with a pickup.",
+      "EMType": 45,
+      "Tags": [
+        12
+      ],
+      "EntityIndex": 94,
+      "NewEntityType": 177
+    },
+    {
+      "Comments": "Put it where the mask was.",
+      "EMType": 44,
+      "Tags": [
+        12
+      ],
+      "EntityIndex": 94,
+      "TargetLocation": {
+        "X": 35328,
+        "Y": -2560,
+        "Z": 89600,
+        "Room": 94
+      }
+    },
+    {
+      "Comments": "Replace the wall texture.",
+      "EMType": 21,
+      "Tags": [
+        12
+      ],
+      "TextureMap": {
+        "1889": {
+          "109": {
+            "Rectangles": [
+              4
+            ]
+          }
+        }
+      }
     }
   ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If the earth mask has been moved, move its trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 108,
+        "X": 44544,
+        "Y": -8192,
+        "Z": 77312,
+        "Room": 120
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 44544,
+            "Y": -8192,
+            "Z": 77312,
+            "Room": 120
+          },
+          "EntityLocation": 108
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If the wind mask has been moved, move its trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 76,
+        "X": 8704,
+        "Y": -12032,
+        "Z": 54784,
+        "Room": 97
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 8704,
+            "Y": -12032,
+            "Z": 54784,
+            "Room": 97
+          },
+          "EntityLocation": 76
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If the water mask has been moved, move its trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 73,
+        "X": 35328,
+        "Y": -2560,
+        "Z": 89600,
+        "Room": 94
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 35328,
+            "Y": -2560,
+            "Z": 89600,
+            "Room": 94
+          },
+          "EntityLocation": 73
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If the fire mask has been moved, move its trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 105,
+        "X": 16896,
+        "Y": 512,
+        "Z": 80384,
+        "Room": 119
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 16896,
+            "Y": 512,
+            "Z": 80384,
+            "Room": 119
+          },
+          "EntityLocation": 105
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": []
 }

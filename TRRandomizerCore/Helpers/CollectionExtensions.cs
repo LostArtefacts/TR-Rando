@@ -56,4 +56,19 @@ public static class CollectionExtensions
             iterList.Remove(item);
         }
     }
+
+    public static List<List<T>> Split<T>(this List<T> list, int parts)
+    {
+        int boundary = (int)Math.Ceiling(list.Count / (double)parts);
+        List<List<T>> splits = new();
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (i % boundary == 0)
+            {
+                splits.Add(new());
+            }
+            splits[^1].Add(list[i]);
+        }
+        return splits;
+    }
 }

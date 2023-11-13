@@ -30,7 +30,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels;
     private TRSecretCountMode _secretCountMode;
     private uint _minSecretCount, _maxSecretCount;
-    private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
+    private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity;
     private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems;
     private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures, _retainLaraTextures;
     private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
@@ -84,10 +84,12 @@ public class ControllerOptions : INotifyPropertyChanged
 
     private RandoDifficulty _randoEnemyDifficulty;
     private ItemDifficulty _randoItemDifficulty;
+    private ItemRange _keyItemRange;
     private GlobeDisplayOption _globeDisplayOption;
     private BirdMonsterBehaviour _birdMonsterBehaviour;
     private DragonSpawnType _dragonSpawnType;
 
+    private ItemRange[] _itemRanges;
     private Language[] _availableLanguages;
     private Language _gameStringLanguage;
 
@@ -1617,6 +1619,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public BoolItemControlClass AllowReturnPathLocations
+    {
+        get => _allowReturnPathLocations;
+        set
+        {
+            _allowReturnPathLocations = value;
+            FirePropertyChanged();
+        }
+    }
+
     public BoolItemControlClass IncludeExtraPickups
     {
         get => _includeExtraPickups;
@@ -1653,6 +1665,46 @@ public class ControllerOptions : INotifyPropertyChanged
         set
         {
             _randoItemDifficulty = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public ItemRange KeyItemRange
+    {
+        get => _keyItemRange;
+        set
+        {
+            _keyItemRange = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public ItemRange[] ItemRanges
+    {
+        get => _itemRanges;
+        set
+        {
+            _itemRanges = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public BoolItemControlClass AllowEnemyKeyDrops
+    {
+        get => _allowEnemyKeyDrops;
+        set
+        {
+            _allowEnemyKeyDrops = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public BoolItemControlClass MaintainKeyContinuity
+    {
+        get => _maintainKeyContinuity;
+        set
+        {
+            _maintainKeyContinuity = value;
             FirePropertyChanged();
         }
     }
@@ -2730,15 +2782,35 @@ public class ControllerOptions : INotifyPropertyChanged
         IncludeKeyItems = new BoolItemControlClass()
         {
             Title = "Include key items",
-            Description = "Most key item positions will be randomized. Keys will spawn before their respective locks."
+            Description = "The positions of key item pickups will be randomized. Items will be placed before their respective locks/slots."
         };
         BindingOperations.SetBinding(IncludeKeyItems, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+        AllowReturnPathLocations = new()
+        {
+            Title = "Allow return path locations",
+            Description = "Allows key items to be placed before points of no return, provided that return paths are enabled (see Global Settings)."
+        };
+        BindingOperations.SetBinding(AllowReturnPathLocations, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+        AllowEnemyKeyDrops = new()
+        {
+            Title = "Allow enemy key item drops",
+            Description = "Allows key items to be allocated to enemies who will drop them when killed."
+        };
+        BindingOperations.SetBinding(AllowEnemyKeyDrops, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+        MaintainKeyContinuity = new()
+        {
+            Title = "Maintain key item continuity",
+            Description = $"Maintains continuity for key items when level sequencing changes.{Environment.NewLine}e.g. The Seraph will become a pickup in Barkhang Monastery if The Deck has not yet been visited."
+        };
+        BindingOperations.SetBinding(MaintainKeyContinuity, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
         IncludeExtraPickups = new BoolItemControlClass
         {
             Title = "Add extra pickups",
             Description = "Add more weapon, ammo and medi items to some levels for Lara to find."
         };
         BindingOperations.SetBinding(IncludeExtraPickups, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+
+        IncludeKeyItems.PropertyChanged += IncludeKeyItems_PropertyChanged;
 
         // Enemies
         Binding randomizeEnemiesBinding = new(nameof(RandomizeEnemies)) { Source = this };
@@ -3032,7 +3104,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         ItemBoolItemControls = new List<BoolItemControlClass>()
         {
-            _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _includeExtraPickups
+            _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _allowReturnPathLocations, _allowEnemyKeyDrops, _maintainKeyContinuity, _includeExtraPickups
         };
         EnemyBoolItemControls = new List<BoolItemControlClass>()
         {
@@ -3074,6 +3146,12 @@ public class ControllerOptions : INotifyPropertyChanged
         };
     }
 
+    private void IncludeKeyItems_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        AllowReturnPathLocations.IsActive = IncludeKeyItems.Value;
+        AllowEnemyKeyDrops.IsActive = IncludeKeyItems.Value;
+    }
+
     private void SecretCategory_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         GuaranteeSecrets.IsActive = IsGlitchedSecrets.Value || IsHardSecrets.Value;
@@ -3103,6 +3181,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _docileWillard.IsAvailable = IsTR3;
 
         _includeKeyItems.IsAvailable = IsKeyItemTypeSupported;
+        _maintainKeyContinuity.IsAvailable = IsKeyContinuityTypeSupported;
         _includeExtraPickups.IsAvailable = IsExtraPickupsTypeSupported;
 
         _allowGlitched.IsAvailable = IsGlitchedSecretsSupported;
@@ -3203,10 +3282,15 @@ public class ControllerOptions : INotifyPropertyChanged
         RandomizeItems = _controller.RandomizeItems;
         ItemSeed = _controller.ItemSeed;
         IncludeKeyItems.Value = _controller.IncludeKeyItems;
+        AllowReturnPathLocations.Value = _controller.AllowReturnPathLocations;
         IncludeExtraPickups.Value = _controller.IncludeExtraPickups;
         RandomizeItemTypes.Value = _controller.RandomizeItemTypes;
         RandomizeItemPositions.Value = _controller.RandomizeItemPositions;
         RandoItemDifficulty = _controller.RandoItemDifficulty;
+        ItemRanges = Enum.GetValues<ItemRange>();
+        KeyItemRange = _controller.KeyItemRange;
+        AllowEnemyKeyDrops.Value = _controller.AllowEnemyKeyDrops;
+        MaintainKeyContinuity.Value = _controller.MaintainKeyContinuity;
 
         RandomizeEnemies = _controller.RandomizeEnemies;
         EnemySeed = _controller.EnemySeed;
@@ -3502,10 +3586,14 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.RandomizeItems = RandomizeItems;
         _controller.ItemSeed = ItemSeed;
         _controller.IncludeKeyItems = IncludeKeyItems.Value;
+        _controller.AllowReturnPathLocations = AllowReturnPathLocations.Value;
         _controller.IncludeExtraPickups = IncludeExtraPickups.Value;
         _controller.RandomizeItemTypes = RandomizeItemTypes.Value;
         _controller.RandomizeItemPositions = RandomizeItemPositions.Value;
         _controller.RandoItemDifficulty = RandoItemDifficulty;
+        _controller.KeyItemRange = KeyItemRange;
+        _controller.AllowEnemyKeyDrops = AllowEnemyKeyDrops.Value;
+        _controller.MaintainKeyContinuity = MaintainKeyContinuity.Value;
 
         _controller.RandomizeEnemies = RandomizeEnemies;
         _controller.EnemySeed = EnemySeed;
@@ -3712,6 +3800,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
     public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
     public bool IsKeyItemTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItems);
+    public bool IsKeyContinuityTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyContinuity);
     public bool IsExtraPickupsTypeSupported => IsRandomizationSupported(TRRandomizerType.ExtraPickups);
     public bool IsEnemyTypeSupported => IsRandomizationSupported(TRRandomizerType.Enemy);
     public bool IsTextureTypeSupported => IsRandomizationSupported(TRRandomizerType.Texture);

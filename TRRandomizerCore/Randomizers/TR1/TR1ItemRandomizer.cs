@@ -49,7 +49,6 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             = 0,  // Default = 21
     };
 
-    private readonly Dictionary<string, List<Location>> _keyItemLocations;
     private readonly Dictionary<string, List<Location>> _excludedLocations;
     private readonly Dictionary<string, List<Location>> _pistolLocations;
 
@@ -62,14 +61,13 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
     private readonly LocationPicker _picker;
     private ItemSpriteRandomizer<TR1Type> _spriteRandomizer;
 
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR1Entity> ItemFactory { get; set; }
 
     public TR1ItemRandomizer()
     {
-        _keyItemLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\item_locations.json"));
         _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\invalid_item_locations.json"));
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
-        _picker = new();
+        _picker = new(GetResourcePath(@"TR1\Locations\routes.json"));
     }
 
     public override void Randomize(int seed)
@@ -82,7 +80,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
             FindUnarmedLevelPistols(_levelInstance);
 
-            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
+            _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, false), Settings, _generator);
             _secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($@"TR1\SecretMapping\{_levelInstance.Name}-SecretMapping.json"));
 
             if (Settings.IncludeExtraPickups)
@@ -129,7 +127,6 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         foreach (TR1ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
-            _picker.Initialise(GetItemLocationPool(_levelInstance), _generator);
             RandomizeKeyItems(_levelInstance);
 
             SaveLevelInstance();
@@ -187,7 +184,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                 break;
             }
 
-            TR1Entity newItem = ItemFactory.CreateItem(level.Name, level.Data.Entities, _picker.GetPickupLocation());
+            TR1Entity newItem = ItemFactory.CreateItem(level.Name, level.Data.Entities, _picker.GetRandomLocation());
             newItem.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
         }
     }
@@ -300,8 +297,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             // Move standard items only, excluding any unarmed level pistols, and reward items
             if (TR1TypeUtilities.IsStandardPickupType(entity.TypeID) && entity != _unarmedLevelPistols)
             {
-                Location location = _picker.GetPickupLocation();
-                _picker.SetLocation(entity, location);
+                _picker.RandomizePickupLocation(entity);
                 entity.Intensity = 0;
             }
         }
@@ -314,7 +310,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         }
     }
 
-    private List<Location> GetItemLocationPool(TR1CombinedLevel level)
+    private List<Location> GetItemLocationPool(TR1CombinedLevel level, bool keyItemMode)
     {
         List<Location> exclusions = new();
         if (_excludedLocations.ContainsKey(level.Name))
@@ -345,34 +341,33 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         }
 
         TR1LocationGenerator generator = new();
-        return generator.Generate(level.Data, exclusions);
+        return generator.Generate(level.Data, exclusions, keyItemMode);
     }
 
     private void RandomizeKeyItems(TR1CombinedLevel level)
     {
-        List<Location> locations;
-        if (!_keyItemLocations.ContainsKey(level.Name) || (locations = _keyItemLocations[level.Name]).Count == 0)
-        {
-            return;
-        }
-
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
+        _picker.RoomInfos = level.Data.Rooms
+            .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
+            .ToList();
+
+        _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, true), Settings, _generator);
 
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR1Entity entity = level.Data.Entities[i];
-            if (!TR1TypeUtilities.IsKeyItemType(entity.TypeID) || IsSecretItem(entity, i, level.Data, floorData))
+            if (!TR1TypeUtilities.IsKeyItemType(entity.TypeID)
+                || ItemFactory.IsItemLocked(level.Name, i))
             {
                 continue;
             }
 
-            int itemID = 10000 + ((level.Script.OriginalSequence - 1) * 1000) + (int)entity.TypeID + entity.Room;
-            List<Location> pool = locations.FindAll(l => l.KeyItemGroupID == itemID);
-            Location location = _picker.GetKeyItemLocation(locations, entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData));
-            _picker.SetLocation(entity, location);
+            _picker.RandomizeKeyItemLocation(
+                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData),
+                level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
         }
     }
 

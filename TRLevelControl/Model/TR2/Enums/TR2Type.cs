@@ -402,4 +402,78 @@ public enum TR2Type
 
     Puzzle1_M_H_Dagger            = 3513,
     Puzzle2_M_H_Dagger            = 3514,
+
+    // Key item aliases
+    GW_K1_GuardhouseKey           = 10291,
+    GW_K2_RustyKey                = 10250,
+
+    Venice_K1_BoathouseKey        = 11210,
+    Venice_K2_SteelKey            = 11353,
+    Venice_K3_IronKey             = 11502,
+
+    Bartoli_K1_LibraryKey         = 12241,
+    Bartoli_K2_DetonatorKey       = 12385,
+
+    Opera_K1_OrnateKeyFans        = 13449,
+    Opera_K1_OrnateKeyStart       = 13544,
+    Opera_P1_RelayBox             = 13395,
+    Opera_P2_CircuitBoard         = 13377,
+
+    Rig_K1_RedPassCard            = 14238,
+    Rig_K2_YellowPassCard         = 14193,
+    Rig_K3_GreenPassCard          = 14240,
+
+    DA_K1_RedPassCard             = 15250,
+    DA_K4_BluePassCard            = 15301,
+    DA_P1_MachineChipChopper      = 15299,
+    DA_P1_MachineChipMiddleRoom   = 15206,
+
+    Wreck_K1_RestRoomKey          = 17407,
+    Wreck_K2_RustyKey             = 17343,
+    Wreck_K3_CabinKey             = 17324,
+    Wreck_P1_RestroomBreaker      = 17298,
+    Wreck_P1_ShardRoomBreaker     = 17349,
+    Wreck_P1_StaircaseBreaker     = 17304,
+
+    LQ_K1_TheatreKey              = 18300,
+
+    Deck_K2_SternKey              = 19368,
+    Deck_K3_StorageKey            = 19385,
+    Deck_K4_CabinKey              = 19262,
+    Deck_P4_TheSeraph             = 19400,
+
+    Tibet_K1_DrawbridgeKey        = 20379,
+    Tibet_K2_HutKey               = 20348,
+
+    Barkhang_K1_StrongroomKey     = 21328,
+    Barkhang_K2_TrapdoorKey       = 21501,
+    Barkhang_K3_RooftopsKey       = 21225,
+    Barkhang_K4_MainHallKey       = 21464,
+    Barkhang_P1_BurnerRoomWheel   = 21306,
+    Barkhang_P1_LadderTowerWheel  = 21415,
+    Barkhang_P1_OutsideWheel      = 21431,
+    Barkhang_P1_PoolWheel         = 21485,
+    Barkhang_P1_RooftopWheel      = 21330,
+    Barkhang_P2_EastGemstone      = 21338,
+    Barkhang_P2_WestGemstone      = 21332,
+    Barkhang_P4_TheSeraph         = 21273,
+
+    CoT_P1_TibetanMaskStart       = 22222,
+    CoT_P1_TibetanMaskUnderwater  = 22357,
+    CoT_Q1_GongHammer             = 22342,
+
+    Chicken_K2_GongHammer         = 23315,
+    Chicken_P1_TibetanMask        = 23379,
+    Chicken_Q2_Talion             = 23503,
+
+    Xian_K2_GoldKey               = 24427,
+    Xian_K3_SilverKey             = 24582,
+    Xian_K4_MainChamberKey        = 24436,
+    Xian_P1_TheDragonSeal         = 24387,
+
+    Floater_P1_MysticPlaqueAltEnd = 25443,
+    Floater_P1_MysticPlaqueWest   = 25232,
+    Floater_P2_MysticPlaqueEast   = 25160,
+
+    Lair_P1_MysticPlaque          = 26145,
 }
