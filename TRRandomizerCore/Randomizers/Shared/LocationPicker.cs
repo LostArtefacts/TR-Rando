@@ -60,7 +60,8 @@ public class LocationPicker : IRouteManager
         }
 
         // Dynamic locations can indicate return paths or even added puzzle/challenge rooms.
-        // If we cannot match them precisely to a room that's been added, mark them as invalid.
+        // If we cannot match them precisely to a room that's been added, or if they are return
+        // paths but we don't want items there, mark them as invalid.
         // This assumes our level design does not overlap rooms anywhere.
         List<Location> dynamicLocations = _currentRoute
             .FindAll(l => l.RoomType == RoomType.ReturnPath || l.RoomType == RoomType.Challenge);
@@ -68,22 +69,15 @@ public class LocationPicker : IRouteManager
         foreach (Location location in dynamicLocations)
         {
             List<ExtRoomInfo> matchingInfos = RoomInfos.FindAll(r => r.Contains(location));
-            if (matchingInfos.Count == 1)
+            if (matchingInfos.Count != 1
+                || (!_settings.IncludeReturnPathLocations
+                && (location.RoomType == RoomType.ReturnPath || location.RequiresReturnPath)))
             {
-                if ((location.RoomType == RoomType.ReturnPath || location.RequiresReturnPath)
-                    && !_settings.IncludeReturnPathLocations)
-                {
-                    // Return paths may be present, but the user doesn't want items placed here.
-                    InvalidateLocation(location);
-                }
-                else
-                {
-                    location.Room = RoomInfos.IndexOf(matchingInfos[0]);
-                }
+                InvalidateLocation(location);
             }
             else
             {
-                InvalidateLocation(location);
+                location.Room = RoomInfos.IndexOf(matchingInfos[0]);
             }
         }
     }
