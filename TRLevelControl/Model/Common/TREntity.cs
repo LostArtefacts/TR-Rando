@@ -1,6 +1,6 @@
 ﻿namespace TRLevelControl.Model;
 
-public class TREntity<T>
+public class TREntity<T> : ITREntity
     where T : Enum
 {
     public T TypeID { get; set; }
@@ -51,6 +51,11 @@ public class TREntity<T>
             Flags = (ushort)(Flags & ~(Flags & 0x3E00));
             Flags |= (ushort)(value << 9);
         }
+    }
+
+    public object Clone()
+    {
+        return MemberwiseClone();
     }
 
     public override string ToString()

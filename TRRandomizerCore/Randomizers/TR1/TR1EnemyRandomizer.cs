@@ -35,7 +35,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     private ISet<TR1Type> _resultantEnemies;
 
     internal TR1TextureMonitorBroker TextureMonitor { get; set; }
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR1Entity> ItemFactory { get; set; }
 
     public override void Randomize(int seed)
     {
@@ -1302,7 +1302,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     });
                 }
 
-                TR1Entity clone = enemy.Clone();
+                TR1Entity clone = (TR1Entity)enemy.Clone();
                 level.Data.Entities.Add(clone);
 
                 if (enemy.TypeID != TR1Type.AtlanteanEgg

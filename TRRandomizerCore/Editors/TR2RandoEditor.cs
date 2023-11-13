@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using TRGE.Coord;
 using TRGE.Core;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
@@ -138,7 +139,10 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
             scriptEditor.SaveScript();
         }
 
-        ItemFactory itemFactory = new();
+        ItemFactory<TR2Entity> itemFactory = new()
+        {
+            DefaultItem = new() { Intensity1 = -1, Intensity2 = -1 }
+        };
         TR2TextureMonitorBroker textureMonitor = new();
 
         TR2ItemRandomizer itemRandomizer = new()

@@ -49,7 +49,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     public RandomizerSettings Settings { get; set; }
     public TR3TextureMonitorBroker TextureMonitor { get; set; }
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR3Entity> ItemFactory { get; set; }
 
     public void Run()
     {

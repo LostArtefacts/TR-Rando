@@ -25,10 +25,10 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private readonly Dictionary<string, List<Location>> _locations, _unarmedLocations;
     private readonly LocationPicker _routePicker;
-    private SecretPicker _secretPicker;
+    private SecretPicker<TR3Entity> _secretPicker;
 
     internal TR3TextureMonitorBroker TextureMonitor { get; set; }
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR3Entity> ItemFactory { get; set; }
     public IMirrorControl Mirrorer { get; set; }
 
     public TR3SecretRandomizer()

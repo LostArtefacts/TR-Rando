@@ -26,7 +26,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     private readonly LocationPicker _picker;
 
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR3Entity> ItemFactory { get; set; }
 
     public TR3ItemRandomizer()
     {

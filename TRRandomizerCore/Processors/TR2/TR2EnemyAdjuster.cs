@@ -15,7 +15,7 @@ public class TR2EnemyAdjuster : TR2LevelProcessor
         [TR2LevelNames.MONASTERY] = new List<int> { 38, 39, 118 }
     };
 
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR2Entity> ItemFactory { get; set; }
 
     public void AdjustEnemies()
     {

@@ -5,7 +5,8 @@ using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class SecretPicker
+public class SecretPicker<T>
+    where T : class, ITREntity, new()
 {
     private const int _maxRetryLimit = 500;
     private const float _distanceStep = 1.0f;
@@ -21,7 +22,7 @@ public class SecretPicker
     public RandomizerSettings Settings { get; set; }
     public Random Generator { get; set; }
     public IMirrorControl Mirrorer { get; set; }
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<T> ItemFactory { get; set; }
     public IRouteManager RouteManager { get; set; }
     public Func<Location, TRRoomSector> SectorAction { get; set; }
     public Func<Location, bool> PlacementTestAction { get; set; }

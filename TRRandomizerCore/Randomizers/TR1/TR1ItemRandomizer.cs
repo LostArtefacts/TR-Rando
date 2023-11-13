@@ -61,7 +61,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
     private readonly LocationPicker _picker;
     private ItemSpriteRandomizer<TR1Type> _spriteRandomizer;
 
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR1Entity> ItemFactory { get; set; }
 
     public TR1ItemRandomizer()
     {

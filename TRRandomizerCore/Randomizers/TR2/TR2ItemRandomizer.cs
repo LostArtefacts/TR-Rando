@@ -25,7 +25,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     };
 
     internal TR2TextureMonitorBroker TextureMonitor { get; set; }
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR2Entity> ItemFactory { get; set; }
 
     // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
     // into predefined locations. See FindUnarmedPistolsLocation below.
@@ -506,7 +506,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     {
         if (_levelInstance.Data.Entities.Count < _levelInstance.GetMaximumEntityLimit())
         {
-            TR2Entity copy = entity.Clone();
+            TR2Entity copy = (TR2Entity)entity.Clone();
             copy.TypeID = newType;
             _levelInstance.Data.Entities.Add(copy);
         }

@@ -2,6 +2,7 @@
 using System.Drawing;
 using TRGE.Coord;
 using TRGE.Core;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
@@ -134,7 +135,7 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
             scriptEditor.SaveScript();
         }
 
-        ItemFactory itemFactory = new(@"Resources\TR1\Items\repurposable_items.json");
+        ItemFactory<TR1Entity> itemFactory = new(@"Resources\TR1\Items\repurposable_items.json");
         TR1TextureMonitorBroker textureMonitor = new();
 
         TR1ItemRandomizer itemRandomizer = new()

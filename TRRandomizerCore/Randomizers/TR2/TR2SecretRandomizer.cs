@@ -22,10 +22,10 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
 
     private readonly Dictionary<string, List<Location>> _locations;
     private readonly LocationPicker _routePicker;
-    private SecretPicker _secretPicker;
+    private SecretPicker<TR2Entity> _secretPicker;
 
     public IMirrorControl Mirrorer { get; set; }
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR2Entity> ItemFactory { get; set; }
 
     public TR2SecretRandomizer()
     {

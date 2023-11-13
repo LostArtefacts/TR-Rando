@@ -20,7 +20,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
     private ISet<TR3Type> _resultantEnemies;
 
     internal TR3TextureMonitorBroker TextureMonitor { get; set; }
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR3Entity> ItemFactory { get; set; }
 
     public override void Randomize(int seed)
     {

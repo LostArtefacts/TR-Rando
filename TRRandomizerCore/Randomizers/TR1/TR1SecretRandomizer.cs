@@ -26,9 +26,9 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     private readonly Dictionary<string, List<Location>> _locations, _unarmedLocations;
     private readonly LocationPicker _routePicker;
-    private SecretPicker _secretPicker;
+    private SecretPicker<TR1Entity> _secretPicker;
 
-    public ItemFactory ItemFactory { get; set; }
+    public ItemFactory<TR1Entity> ItemFactory { get; set; }
     public IMirrorControl Mirrorer { get; set; }
 
     public TR1SecretRandomizer()

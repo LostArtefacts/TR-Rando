@@ -3,13 +3,16 @@ using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Helpers;
 
-public class ItemFactory
+public class ItemFactory<T>
+    where T : class, ITREntity, new()
 {
     private static readonly int _entityLimit = 256;
 
     private readonly Dictionary<string, List<int>> _reusableItemDefaults;
     private readonly Dictionary<string, Queue<int>> _availableItems;
     private readonly Dictionary<string, HashSet<int>> _lockedItems;
+
+    public T DefaultItem { get; set; }
 
     public ItemFactory(string dataPath = null)
     {
@@ -36,22 +39,7 @@ public class ItemFactory
         return _availableItems[lvl];
     }
 
-    public int GetNextIndex(string lvl, List<TR1Entity> allItems, bool allowLimitBreak = false)
-    {
-        return GetNextIndex(lvl, allItems.Count, allowLimitBreak);
-    }
-
-    public int GetNextIndex(string lvl, List<TR2Entity> allItems, bool allowLimitBreak = false)
-    {
-        return GetNextIndex(lvl, allItems.Count, allowLimitBreak);
-    }
-
-    public int GetNextIndex(string lvl, List<TR3Entity> allItems, bool allowLimitBreak = false)
-    {
-        return GetNextIndex(lvl, allItems.Count, allowLimitBreak);
-    }
-
-    public int GetNextIndex(string lvl, int totalItemCount, bool allowLimitBreak)
+    public int GetNextIndex(string lvl, List<T> allItems, bool allowLimitBreak = false)
     {
         Queue<int> pool = GetItemPool(lvl);
         if (pool.Count > 0)
@@ -59,41 +47,24 @@ public class ItemFactory
             return pool.Peek();
         }
 
-        return (totalItemCount < _entityLimit || allowLimitBreak) ? totalItemCount : -1;
+        return (allItems.Count < _entityLimit || allowLimitBreak) ? allItems.Count : -1;
     }
 
-    public bool CanCreateItem(string lvl, List<TR1Entity> allItems, bool allowLimitBreak = false)
+    public bool CanCreateItem(string lvl, List<T> allItems, bool allowLimitBreak = false)
     {
         return GetNextIndex(lvl, allItems, allowLimitBreak) != -1;
     }
 
-    public bool CanCreateItem(string lvl, List<TR2Entity> allItems, bool allowLimitBreak = false)
-    {
-        return GetNextIndex(lvl, allItems, allowLimitBreak) != -1;
-    }
-
-    public bool CanCreateItem(string lvl, List<TR3Entity> allItems, bool allowLimitBreak = false)
-    {
-        return GetNextIndex(lvl, allItems, allowLimitBreak) != -1;
-    }
-
-    public bool CanCreateItems(string lvl, List<TR2Entity> allItems, int count, bool allowLimitBreak = false)
+    public bool CanCreateItems(string lvl, List<T> allItems, int count, bool allowLimitBreak = false)
     {
         int reusableCount = GetItemPool(lvl).Count;
         count -= Math.Min(count, reusableCount);
         return allItems.Count + count <= _entityLimit || allowLimitBreak;
     }
 
-    public bool CanCreateItems(string lvl, List<TR3Entity> allItems, int count, bool allowLimitBreak = false)
+    public T CreateLockedItem(string lvl, List<T> allItems, Location location = null, bool allowLimitBreak = false)
     {
-        int reusableCount = GetItemPool(lvl).Count;
-        count -= Math.Min(count, reusableCount);
-        return allItems.Count + count <= _entityLimit || allowLimitBreak;
-    }
-
-    public TR1Entity CreateLockedItem(string lvl, List<TR1Entity> allItems, Location location = null, bool allowLimitBreak = false)
-    {
-        TR1Entity entity = CreateItem(lvl, allItems, location, allowLimitBreak);
+        T entity = CreateItem(lvl, allItems, location, allowLimitBreak);
         if (entity != null)
         {
             LockItem(lvl, allItems.IndexOf(entity));
@@ -101,44 +72,21 @@ public class ItemFactory
         return entity;
     }
 
-    public TR2Entity CreateLockedItem(string lvl, List<TR2Entity> allItems, Location location = null, bool allowLimitBreak = false)
+    public T CreateItem(string lvl, List<T> allItems, Location location = null, bool allowLimitBreak = false)
     {
-        TR2Entity entity = CreateItem(lvl, allItems, location, allowLimitBreak);
-        if (entity != null)
-        {
-            LockItem(lvl, allItems.IndexOf(entity));
-        }
-        return entity;
-    }
-
-    public TR3Entity CreateLockedItem(string lvl, List<TR3Entity> allItems, Location location = null, bool allowLimitBreak = false)
-    {
-        TR3Entity entity = CreateItem(lvl, allItems, location, allowLimitBreak);
-        if (entity != null)
-        {
-            LockItem(lvl, allItems.IndexOf(entity));
-        }
-        return entity;
-    }
-
-    public TR1Entity CreateItem(string lvl, List<TR1Entity> allItems, Location location = null, bool allowLimitBreak = false)
-    {
-        TR1Entity item;
+        T item = (T)DefaultItem?.Clone() ?? new();
         Queue<int> pool = GetItemPool(lvl);
         if (pool.Count > 0)
         {
-            item = allItems[pool.Dequeue()];
+            allItems[pool.Dequeue()] = item;
+        }
+        else if (allItems.Count < _entityLimit || allowLimitBreak)
+        {
+            allItems.Add(item);
         }
         else
         {
-            if (allItems.Count < _entityLimit || allowLimitBreak)
-            {
-                allItems.Add(item = new());
-            }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         if (location != null)
@@ -150,79 +98,6 @@ public class ItemFactory
             item.Angle = location.Angle;
         }
 
-        // Set some defaults
-        item.Intensity = 0;
-        item.Flags = 0;
-        return item;
-    }
-
-    public TR2Entity CreateItem(string lvl, List<TR2Entity> allItems, Location location = null, bool allowLimitBreak = false)
-    {
-        TR2Entity item;
-        Queue<int> pool = GetItemPool(lvl);
-        if (pool.Count > 0)
-        {
-            item = allItems[pool.Dequeue()];
-        }
-        else
-        {
-            if (allItems.Count < _entityLimit || allowLimitBreak)
-            {
-                allItems.Add(item = new());
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        if (location != null)
-        {
-            item.X = location.X;
-            item.Y = location.Y;
-            item.Z = location.Z;
-            item.Room = (short)location.Room;
-            item.Angle = location.Angle;
-        }
-
-        // Set some defaults
-        item.Intensity1 = item.Intensity2 = -1;
-        item.Flags = 0;
-        return item;
-    }
-
-    public TR3Entity CreateItem(string lvl, List<TR3Entity> allItems, Location location = null, bool allowLimitBreak = false)
-    {
-        TR3Entity item;
-        Queue<int> pool = GetItemPool(lvl);
-        if (pool.Count > 0)
-        {
-            item = allItems[pool.Dequeue()];
-        }
-        else
-        {
-            if (allItems.Count < _entityLimit || allowLimitBreak)
-            {
-                allItems.Add(item = new());
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        if (location != null)
-        {
-            item.X = location.X;
-            item.Y = location.Y;
-            item.Z = location.Z;
-            item.Room = (short)location.Room;
-            item.Angle = location.Angle;
-        }
-
-        // Set some defaults
-        item.Intensity1 = item.Intensity2 = -1;
-        item.Flags = 0;
         return item;
     }
 

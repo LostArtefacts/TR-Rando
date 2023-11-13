@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using TRGE.Coord;
 using TRGE.Core;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
@@ -131,7 +132,10 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
         }
 
         // Shared tracker objects between randomizers
-        ItemFactory itemFactory = new(@"Resources\TR3\Items\repurposable_items.json");
+        ItemFactory<TR3Entity> itemFactory = new(@"Resources\TR3\Items\repurposable_items.json")
+        {
+            DefaultItem = new() { Intensity1 = -1, Intensity2 = -1 }
+        };
         TR3TextureMonitorBroker textureMonitor = new();
 
         TR3ItemRandomizer itemRandomizer = new()
