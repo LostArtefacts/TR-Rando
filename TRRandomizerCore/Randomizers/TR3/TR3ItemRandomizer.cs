@@ -334,7 +334,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         floorData.ParseFromLevel(level.Data);
 
         _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
-        _picker.KeyItemTestAction = location => TestKeyItemLocation(location, level);
+        _picker.KeyItemTestAction = (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, level);
         _picker.RoomInfos = level.Data.Rooms
             .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
             .ToList();
@@ -356,7 +356,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         }
     }
 
-    private bool TestKeyItemLocation(Location location, TR3CombinedLevel level)
+    private bool TestKeyItemLocation(Location location, bool hasPickupTrigger, TR3CombinedLevel level)
     {
         // Make sure if we're placing on the same tile as an enemy, that the
         // enemy can drop the item.
@@ -364,7 +364,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             .FindAll(e => TR3TypeUtilities.IsEnemyType(e.TypeID))
             .Find(e => e.GetLocation().IsEquivalent(location));
 
-        return enemy == null || (Settings.AllowEnemyKeyDrops && TR3TypeUtilities.CanDropPickups
+        return enemy == null || (Settings.AllowEnemyKeyDrops && !hasPickupTrigger && TR3TypeUtilities.CanDropPickups
         (
             TR3TypeUtilities.GetAliasForLevel(level.Name, enemy.TypeID),
             !Settings.RandomizeEnemies || Settings.ProtectMonks
