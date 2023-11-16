@@ -115,6 +115,10 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         if (Settings.UseRecommendedCommunitySettings)
         {
             script.Enable3dPickups = false;
+            if (Settings.HardSecrets || Settings.GlitchedSecrets)
+            {
+                script.EnableBuffering = true;
+            }
         }
 
         if (Settings.GlitchedSecrets)

@@ -52,7 +52,12 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             RandomizeExistingEnemies();
         }
 
-        (ScriptEditor.Script as TR1Script).DisableTrexCollision = true;
+        TR1Script script = ScriptEditor.Script as TR1Script;
+        script.DisableTrexCollision = true;
+        if (Settings.UseRecommendedCommunitySettings)
+        {
+            script.ConvertDroppedGuns = true;
+        }
     }
 
     private void RandomizeExistingEnemies()

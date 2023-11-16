@@ -124,6 +124,7 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
         if (Settings.DevelopmentMode)
         {
             scriptEd.EnableCheats = true;
+            scriptEd.EnableConsole = true;
             scriptEditor.SaveScript();
         }
 

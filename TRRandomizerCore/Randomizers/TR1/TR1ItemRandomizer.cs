@@ -117,7 +117,9 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
         if (Settings.UseRecommendedCommunitySettings)
         {
-            (ScriptEditor.Script as TR1Script).Enable3dPickups = false;
+            TR1Script script = ScriptEditor.Script as TR1Script;
+            script.Enable3dPickups = false;
+            script.ConvertDroppedGuns = true;
             ScriptEditor.SaveScript();
         }
     }

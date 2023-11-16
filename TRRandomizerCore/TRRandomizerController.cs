@@ -800,6 +800,42 @@ public class TRRandomizerController
         get => (ScriptEditor as TR1ScriptEditor).LoadMusicTriggers;
         set => (ScriptEditor as TR1ScriptEditor).LoadMusicTriggers = value;
     }
+
+    public bool ConvertDroppedGuns
+    {
+        get => (ScriptEditor as TR1ScriptEditor).ConvertDroppedGuns;
+        set => (ScriptEditor as TR1ScriptEditor).ConvertDroppedGuns = value;
+    }
+
+    public bool EnableUwRoll
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableUwRoll;
+        set => (ScriptEditor as TR1ScriptEditor).EnableUwRoll = value;
+    }
+
+    public bool EnableEidosLogo
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableEidosLogo;
+        set => (ScriptEditor as TR1ScriptEditor).EnableEidosLogo = value;
+    }
+
+    public bool EnableBuffering
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableBuffering;
+        set => (ScriptEditor as TR1ScriptEditor).EnableBuffering = value;
+    }
+
+    public bool EnableLeanJumping
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableLeanJumping;
+        set => (ScriptEditor as TR1ScriptEditor).EnableLeanJumping = value;
+    }
+
+    public bool EnableConsole
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableConsole;
+        set => (ScriptEditor as TR1ScriptEditor).EnableConsole = value;
+    }
     #endregion
 
     #region LevelRandomizer Passthrough
