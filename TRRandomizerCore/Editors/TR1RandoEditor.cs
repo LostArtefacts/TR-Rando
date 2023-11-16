@@ -39,11 +39,8 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
         // String rando always runs
         target++;
 
-        if (_edition.IsCommunityPatch)
-        {
-            // Injection checks
-            target += numLevels;
-        }
+        // Injection checks
+        target += numLevels;
 
         if (Settings.RandomizeStartingHealth)
         {
@@ -123,15 +120,10 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
         string backupDirectory = _io.BackupDirectory.FullName;
         string wipDirectory = _io.WIPOutputDirectory.FullName;
 
-        bool isTR1X = scriptEditor.Edition.IsCommunityPatch;
-        if (isTR1X)
+        TR1ScriptEditor scriptEd = scriptEditor as TR1ScriptEditor;
+        if (Settings.DevelopmentMode)
         {
-            TR1ScriptEditor scriptEd = scriptEditor as TR1ScriptEditor;
-            if (Settings.DevelopmentMode)
-            {
-                scriptEd.EnableCheats = true;
-            }
-
+            scriptEd.EnableCheats = true;
             scriptEditor.SaveScript();
         }
 
@@ -177,7 +169,7 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
                 }.Randomize(Settings.GameStringsSeed);
             }
 
-            if (!monitor.IsCancelled && isTR1X)
+            if (!monitor.IsCancelled)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Validating data injections");
                 new TR1InjectionProcessor
@@ -350,10 +342,7 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
             }
         }
 
-        if (isTR1X)
-        {
-            AmendTitleAndCredits(scriptEditor, monitor);
-        }
+        AmendTitleAndCredits(scriptEditor, monitor);
     }
 
     private void AmendTitleAndCredits(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)

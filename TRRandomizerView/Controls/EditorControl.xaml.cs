@@ -253,7 +253,7 @@ public partial class EditorControl : UserControl
 
     public bool CanEditCommunitySettings()
     {
-        return _options.IsTR1X || _options.IsTR3Main;
+        return _options.IsTR1 || _options.IsTR3Main;
     }
 
     public void OpenBackupFolder()
@@ -443,7 +443,7 @@ public partial class EditorControl : UserControl
 
     public void EditCommunitySettings()
     {
-        if (_options.IsTR1X)
+        if (_options.IsTR1)
         {
             LaunchTR1XSettings();
         }

@@ -3397,7 +3397,7 @@ public class ControllerOptions : INotifyPropertyChanged
         RandomizeKeyItemSprites = _controller.RandomizeKeyItemSprites;
         RandomizeSecretSprites = _controller.RandomizeSecretSprites;
 
-        if (IsTR1X)
+        if (IsTR1)
         {
             EnableGameModes = _controller.EnableGameModes;
             EnableSaveCrystals = _controller.EnableSaveCrystals;
@@ -3696,7 +3696,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.RandomizeKeyItemSprites = RandomizeKeyItemSprites;
         _controller.RandomizeSecretSprites = RandomizeSecretSprites;
 
-        if (IsTR1X)
+        if (IsTR1)
         {
             _controller.EnableGameModes = EnableGameModes;
             _controller.EnableSaveCrystals = EnableSaveCrystals;
@@ -3778,7 +3778,6 @@ public class ControllerOptions : INotifyPropertyChanged
     private static readonly string _supportPropertyFormat = "Is{0}TypeSupported";
 
     public bool IsTR1 => _controller != null && _controller.IsTR1;
-    public bool IsTR1X => IsTR1 && _controller.IsCommunityPatch;
     public bool IsTR2 => _controller != null && _controller.IsTR2;
     public bool IsTR3 => _controller != null && _controller.IsTR3;
     public bool IsTR3Main => IsTR3 && _controller.IsCommunityPatch;
@@ -3853,7 +3852,6 @@ public class ControllerOptions : INotifyPropertyChanged
         FirePropertyChanged(nameof(IsTR2));
         FirePropertyChanged(nameof(IsTR3));
 
-        FirePropertyChanged(nameof(IsTR1X));
         FirePropertyChanged(nameof(IsTR3Main));
 
         AdjustAvailableOptions();

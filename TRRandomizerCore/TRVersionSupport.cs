@@ -6,9 +6,14 @@ internal class TRVersionSupport
 {
     private static readonly List<TRRandomizerType> _tr1Types = new()
     {
+        TRRandomizerType.AmbientTracks,
+        TRRandomizerType.Ammoless,
         TRRandomizerType.AtlanteanEggBehaviour,
         TRRandomizerType.Audio,
+        TRRandomizerType.Braid,
         TRRandomizerType.ChallengeRooms,
+        TRRandomizerType.ClonedEnemies,
+        TRRandomizerType.DisableDemos,
         TRRandomizerType.DynamicTextures,
         TRRandomizerType.DynamicEnemyTextures,
         TRRandomizerType.Enemy,
@@ -19,42 +24,33 @@ internal class TRVersionSupport
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardEnvironment,
         TRRandomizerType.HardSecrets,
+        TRRandomizerType.Health,
         TRRandomizerType.HiddenEnemies,
         TRRandomizerType.Item,
         TRRandomizerType.ItemSprite,
         TRRandomizerType.KeyItems,
         TRRandomizerType.KeyItemTextures,
         TRRandomizerType.LarsonBehaviour,
+        TRRandomizerType.LevelSequence,
+        TRRandomizerType.Mediless,
         TRRandomizerType.MeshSwaps,
         TRRandomizerType.NightMode,
         TRRandomizerType.Outfit,
         TRRandomizerType.ReturnPaths,
         TRRandomizerType.RewardRooms,
         TRRandomizerType.Secret,
+        TRRandomizerType.SecretCount,
         TRRandomizerType.SecretModels,
         TRRandomizerType.SecretReward,
         TRRandomizerType.SecretTextures,
         TRRandomizerType.ShortcutFixes,
         TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
-        TRRandomizerType.Traps,
-        TRRandomizerType.Texture
-    };
-
-    private static readonly List<TRRandomizerType> _tr1xTypes = new()
-    {
-        TRRandomizerType.AmbientTracks,
-        TRRandomizerType.Ammoless,
-        TRRandomizerType.Braid,
-        TRRandomizerType.ClonedEnemies,
-        TRRandomizerType.DisableDemos,
-        TRRandomizerType.Health,
-        TRRandomizerType.LevelSequence,
-        TRRandomizerType.Mediless,
-        TRRandomizerType.SecretCount,
         TRRandomizerType.Text,
+        TRRandomizerType.Texture,
+        TRRandomizerType.Traps,
         TRRandomizerType.Unarmed,
-        TRRandomizerType.WaterColour
+        TRRandomizerType.WaterColour,
     };
 
     private static readonly List<TRRandomizerType> _tr2Types = new()
@@ -139,16 +135,15 @@ internal class TRVersionSupport
 
     private static readonly Dictionary<TRVersion, TRVersionSupportGroup> _supportedTypes = new()
     {
-        [TRVersion.TR1] = new TRVersionSupportGroup
+        [TRVersion.TR1] = new()
         {
-            DefaultSupport = _tr1Types,
-            PatchSupport = _tr1xTypes
+            DefaultSupport = _tr1Types
         },
-        [TRVersion.TR2] = new TRVersionSupportGroup
+        [TRVersion.TR2] = new()
         {
             DefaultSupport = _tr2Types
         },
-        [TRVersion.TR3] = new TRVersionSupportGroup
+        [TRVersion.TR3] = new()
         {
             DefaultSupport = _tr3Types,
             PatchSupport = _tr3MainTypes

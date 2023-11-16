@@ -111,18 +111,9 @@ public static class TR1EnemyUtilities
         return tracker;
     }
 
-    public static bool IsEnemySupported(string lvlName, TR1Type entity, RandoDifficulty difficulty, bool isTR1X)
+    public static bool IsEnemySupported(string lvlName, TR1Type entity, RandoDifficulty difficulty)
     {
-        bool supported;
-        if (!isTR1X && _atiEnemyRestrictions.ContainsKey(entity))
-        {
-            supported = _atiEnemyRestrictions[entity] == lvlName;
-        }
-        else
-        {
-            supported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesTechnical);
-        }
-
+        bool supported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesTechnical);
         if (difficulty == RandoDifficulty.Default)
         {
             // a level may exist in both technical and difficulty dicts, so we check both
@@ -341,99 +332,99 @@ public static class TR1EnemyUtilities
 
     private static readonly Dictionary<string, List<RestrictedEnemyGroup>> _restrictedEnemyGroupCounts = new()
     {
-        [TR1LevelNames.CAVES] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.CAVES] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 5,
                 Enemies = _allAtlanteans
             }
         },
-        [TR1LevelNames.VILCABAMBA] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.VILCABAMBA] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 10,
                 Enemies = _allAtlanteans
             }
         },
-        [TR1LevelNames.VALLEY] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.VALLEY] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 5,
                 Enemies = _allAtlanteans
             }
         },
-        [TR1LevelNames.QUALOPEC] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.QUALOPEC] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 0,
                 Enemies = new List<TR1Type> { TR1Type.Larson }
             },
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 3,
                 Enemies = _allAtlanteans
             }
         },
-        [TR1LevelNames.FOLLY] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.FOLLY] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 10,
                 Enemies = _allAtlanteans
             }
         },
-        [TR1LevelNames.COLOSSEUM] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.COLOSSEUM] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 11,
                 Enemies = _allAtlanteans
             }
         },
-        [TR1LevelNames.MIDAS] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.MIDAS] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 15,
                 Enemies = _allAtlanteans
             },
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 10,
-                Enemies = new List<TR1Type> { TR1Type.TRex }
+                Enemies = new() { TR1Type.TRex }
             }
         },
-        [TR1LevelNames.CISTERN] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.CISTERN] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 13,
                 Enemies = _allAtlanteans
             }
         },
-        [TR1LevelNames.TIHOCAN] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.TIHOCAN] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 9,
                 Enemies = _allAtlanteans
             }
         },
-        [TR1LevelNames.KHAMOON] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.KHAMOON] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 6,
                 Enemies = _allAtlanteans
             }
         },
-        [TR1LevelNames.OBELISK] = new List<RestrictedEnemyGroup>
+        [TR1LevelNames.OBELISK] = new()
         {
-            new RestrictedEnemyGroup
+            new()
             {
                 MaximumCount = 6,
                 Enemies = _allAtlanteans
@@ -441,16 +432,9 @@ public static class TR1EnemyUtilities
         },
     };
 
-    // These enemies are unsupported due to technical reasons, NOT difficulty reasons (TR1X only).
+    // These enemies are unsupported due to technical reasons, NOT difficulty reasons.
     private static readonly Dictionary<string, List<TR1Type>> _unsupportedEnemiesTechnical = new()
     {
-    };
-
-    // SkaterBoy and Natla can appear only in their OG levels in TombATI.
-    private static readonly Dictionary<TR1Type, string> _atiEnemyRestrictions = new()
-    {
-        [TR1Type.SkateboardKid] = TR1LevelNames.MINES,
-        [TR1Type.Natla] = TR1LevelNames.PYRAMID,
     };
 
     private static readonly Dictionary<string, List<TR1Type>> _unsupportedEnemiesDefault = new()

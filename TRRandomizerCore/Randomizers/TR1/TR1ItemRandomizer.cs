@@ -115,7 +115,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             }
         }
 
-        if (ScriptEditor.Edition.IsCommunityPatch && Settings.UseRecommendedCommunitySettings)
+        if (Settings.UseRecommendedCommunitySettings)
         {
             (ScriptEditor.Script as TR1Script).Enable3dPickups = false;
             ScriptEditor.SaveScript();
@@ -302,12 +302,9 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             }
         }
 
-        if (ScriptEditor.Edition.IsCommunityPatch)
-        {
-            // TR1X allows us to keep the end-level stats accurate. All generated locations
-            // should be reachable.
-            level.Script.UnobtainablePickups = null;
-        }
+        // TR1X allows us to keep the end-level stats accurate. All generated locations
+        // should be reachable.
+        level.Script.UnobtainablePickups = null;
     }
 
     private List<Location> GetItemLocationPool(TR1CombinedLevel level, bool keyItemMode)
@@ -373,8 +370,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
     private void RandomizeSprites()
     {
-        if (ScriptEditor.Edition.IsCommunityPatch
-            && !Settings.UseRecommendedCommunitySettings
+        if (!Settings.UseRecommendedCommunitySettings
             && (ScriptEditor.Script as TR1Script).Enable3dPickups)
         {
             // With 3D pickups enabled, sprite randomization is meaningless

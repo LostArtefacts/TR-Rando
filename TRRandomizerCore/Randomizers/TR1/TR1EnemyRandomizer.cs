@@ -52,10 +52,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             RandomizeExistingEnemies();
         }
 
-        if (ScriptEditor.Edition.IsCommunityPatch)
-        {
-            (ScriptEditor.Script as TR1Script).DisableTrexCollision = true;
-        }
+        (ScriptEditor.Script as TR1Script).DisableTrexCollision = true;
     }
 
     private void RandomizeExistingEnemies()
@@ -239,14 +236,13 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // looping infinitely if it's not possible to fill to capacity
         ISet<TR1Type> testedEntities = new HashSet<TR1Type>();
         List<TR1Type> eggEntities = TR1TypeUtilities.GetAtlanteanEggEnemies();
-        bool isTR1X = ScriptEditor.Edition.IsCommunityPatch;
         while (newEntities.Count < newEntities.Capacity && testedEntities.Count < allEnemies.Count)
         {
             TR1Type entity = allEnemies[_generator.Next(0, allEnemies.Count)];
             testedEntities.Add(entity);
 
             // Make sure this isn't known to be unsupported in the level
-            if (!TR1EnemyUtilities.IsEnemySupported(level.Name, entity, difficulty, isTR1X))
+            if (!TR1EnemyUtilities.IsEnemySupported(level.Name, entity, difficulty))
             {
                 continue;
             }
@@ -323,7 +319,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             // Make sure we have an unrestricted enemy available for the individual level conditions. This will
             // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
             bool RestrictionCheck(TR1Type e) =>
-                !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, isTR1X)
+                !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty)
                 || newEntities.Contains(e)
                 || TR1TypeUtilities.IsWaterCreature(e)
                 || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)
@@ -380,7 +376,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
     private TR1Type SelectRequiredEnemy(List<TR1Type> pool, TR1CombinedLevel level, RandoDifficulty difficulty)
     {
-        pool.RemoveAll(e => !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, ScriptEditor.Edition.IsCommunityPatch));
+        pool.RemoveAll(e => !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty));
 
         TR1Type entity;
         if (pool.All(_excludedEnemies.Contains))
@@ -689,7 +685,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 // of runaway Pierres is awkward - only one can be active at a time.
 
                 // He is hard-coded to drop Key1, so add a string if this level doesn't have one.
-                if (ScriptEditor.Edition.IsCommunityPatch && level.Script.Keys.Count == 0)
+                if (level.Script.Keys.Count == 0)
                 {
                     level.Script.Keys.Add("Pierre's Spare Key");
                 }
@@ -733,7 +729,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         // Add extra ammo based on this level's difficulty
-        if (Settings.CrossLevelEnemies && ScriptEditor.Edition.IsCommunityPatch && level.Script.RemovesWeapons)
+        if (Settings.CrossLevelEnemies && level.Script.RemovesWeapons)
         {
             AddUnarmedLevelAmmo(level);
         }
@@ -1360,7 +1356,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         importModels.Add(TR1Type.Missile3_H);
                     }
 
-                    TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                    TR1ModelImporter importer = new(true)
                     {
                         EntitiesToImport = importModels,
                         EntitiesToRemove = enemies.EntitiesToRemove,

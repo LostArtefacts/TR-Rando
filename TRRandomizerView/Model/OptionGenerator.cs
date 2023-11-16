@@ -166,7 +166,7 @@ public class OptionGenerator
         {
             RandomizeEnvironmentOptions();
         }
-        if (_options.IsTR1X)
+        if (_options.IsTR1)
         {
             RandomizeTR1XOptions();
         }
