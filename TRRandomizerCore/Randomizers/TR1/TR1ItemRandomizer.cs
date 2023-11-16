@@ -304,7 +304,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
         if (ScriptEditor.Edition.IsCommunityPatch)
         {
-            // T1M allows us to keep the end-level stats accurate. All generated locations
+            // TR1X allows us to keep the end-level stats accurate. All generated locations
             // should be reachable.
             level.Script.UnobtainablePickups = null;
         }

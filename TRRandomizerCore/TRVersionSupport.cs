@@ -41,7 +41,7 @@ internal class TRVersionSupport
         TRRandomizerType.Texture
     };
 
-    private static readonly List<TRRandomizerType> _tr1MainTypes = new()
+    private static readonly List<TRRandomizerType> _tr1xTypes = new()
     {
         TRRandomizerType.AmbientTracks,
         TRRandomizerType.Ammoless,
@@ -142,7 +142,7 @@ internal class TRVersionSupport
         [TRVersion.TR1] = new TRVersionSupportGroup
         {
             DefaultSupport = _tr1Types,
-            PatchSupport = _tr1MainTypes
+            PatchSupport = _tr1xTypes
         },
         [TRVersion.TR2] = new TRVersionSupportGroup
         {
@@ -157,9 +157,9 @@ internal class TRVersionSupport
 
     private static readonly Dictionary<TRVersion, List<string>> _versionExes = new()
     {
-        [TRVersion.TR1] = new List<string> { "Tomb1Main.exe", "tombati.exe" },
-        [TRVersion.TR2] = new List<string> { "Tomb2.exe" },
-        [TRVersion.TR3] = new List<string> { "Tomb3.exe" }
+        [TRVersion.TR1] = new() { "TR1X.exe" },
+        [TRVersion.TR2] = new() { "Tomb2.exe" },
+        [TRVersion.TR3] = new() { "Tomb3.exe" }
     };
 
     public static bool IsRandomizationSupported(TREdition edition)

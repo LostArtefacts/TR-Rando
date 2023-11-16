@@ -123,8 +123,8 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
         string backupDirectory = _io.BackupDirectory.FullName;
         string wipDirectory = _io.WIPOutputDirectory.FullName;
 
-        bool isTomb1Main = scriptEditor.Edition.IsCommunityPatch;
-        if (isTomb1Main)
+        bool isTR1X = scriptEditor.Edition.IsCommunityPatch;
+        if (isTR1X)
         {
             TR1ScriptEditor scriptEd = scriptEditor as TR1ScriptEditor;
             if (Settings.DevelopmentMode)
@@ -177,7 +177,7 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
                 }.Randomize(Settings.GameStringsSeed);
             }
 
-            if (!monitor.IsCancelled && isTomb1Main)
+            if (!monitor.IsCancelled && isTR1X)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Validating data injections");
                 new TR1InjectionProcessor
@@ -350,7 +350,7 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
             }
         }
 
-        if (isTomb1Main)
+        if (isTR1X)
         {
             AmendTitleAndCredits(scriptEditor, monitor);
         }

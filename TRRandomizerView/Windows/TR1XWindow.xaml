@@ -1,17 +1,16 @@
-﻿<Window x:Class="TRRandomizerView.Windows.Tomb1MainWindow"
+﻿<Window x:Class="TRRandomizerView.Windows.TR1XWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
-        xmlns:cvt="clr-namespace:TRRandomizerView.Converters"
         mc:Ignorable="d"
         Icon="..\Resources\rando.ico"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         Loaded="Window_Loaded"
-        Title="Tomb1Main Settings"
+        Title="TR1X Settings"
         SizeToContent="WidthAndHeight"
         MinWidth="1050"
         MinHeight="750">
@@ -33,9 +32,9 @@
 
             <StackPanel Grid.ColumnSpan="2">
                 <TextBlock Margin="0,0,0,5">
-                    <Run Text="Edit the settings available in Tomb1Main as standard (see"/>
-                    <Hyperlink ToolTip="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg" 
-                               NavigateUri="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg"
+                    <Run Text="Edit the settings available in TR1X as standard (see"/>
+                    <Hyperlink ToolTip="https://github.com/LostArtefacts/TR1X/tree/stable/bin/cfg" 
+                               NavigateUri="https://github.com/LostArtefacts/TR1X/tree/stable/bin/cfg"
                                RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink><Run Text=")."/>
                     <LineBreak/>
                     <Run Text="Settings marked with * may be overridden directly during randomization to meet certain criteria."/>

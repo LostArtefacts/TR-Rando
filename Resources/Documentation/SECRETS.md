@@ -39,7 +39,7 @@ The artefact types to collect will change per level. This is in place to ensure 
 | Pyramid | Gold Idol |
 
 ### Secret Count
-If [Tomb1Main](https://github.com/rr-/Tomb1Main) is being used, the number of secrets to collect per level can be changed. When you start a level, check Lara's compass to find out how many secrets you need to collect.
+If [TR1X](https://github.com/LostArtefacts/TR1X) is being used, the number of secrets to collect per level can be changed. When you start a level, check Lara's compass to find out how many secrets you need to collect.
 
 The options are:
 

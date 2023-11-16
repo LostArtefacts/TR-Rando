@@ -239,14 +239,14 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // looping infinitely if it's not possible to fill to capacity
         ISet<TR1Type> testedEntities = new HashSet<TR1Type>();
         List<TR1Type> eggEntities = TR1TypeUtilities.GetAtlanteanEggEnemies();
-        bool isTomb1Main = ScriptEditor.Edition.IsCommunityPatch;
+        bool isTR1X = ScriptEditor.Edition.IsCommunityPatch;
         while (newEntities.Count < newEntities.Capacity && testedEntities.Count < allEnemies.Count)
         {
             TR1Type entity = allEnemies[_generator.Next(0, allEnemies.Count)];
             testedEntities.Add(entity);
 
             // Make sure this isn't known to be unsupported in the level
-            if (!TR1EnemyUtilities.IsEnemySupported(level.Name, entity, difficulty, isTomb1Main))
+            if (!TR1EnemyUtilities.IsEnemySupported(level.Name, entity, difficulty, isTR1X))
             {
                 continue;
             }
@@ -323,7 +323,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             // Make sure we have an unrestricted enemy available for the individual level conditions. This will
             // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
             bool RestrictionCheck(TR1Type e) =>
-                !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, isTomb1Main)
+                !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, isTR1X)
                 || newEntities.Contains(e)
                 || TR1TypeUtilities.IsWaterCreature(e)
                 || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)

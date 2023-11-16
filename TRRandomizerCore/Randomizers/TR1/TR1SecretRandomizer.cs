@@ -495,7 +495,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             }
             else if (ScriptEditor.Edition.IsCommunityPatch)
             {
-                level.Script.AddStartInventoryItem(TR1Items.LargeMedi);
+                level.Script.AddStartInventoryItem(TR1Items.LargeMed_S_P);
             }
         }
 
@@ -503,7 +503,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         // medi as these tend to occur where Lara has to drop far after picking them up.
         if (locations.Any(l => l.RequiresDamage && l.RequiresGlitch) && ScriptEditor.Edition.IsCommunityPatch)
         {
-            level.Script.AddStartInventoryItem(TR1Items.SmallMedi);
+            level.Script.AddStartInventoryItem(TR1Items.SmallMed_S_P);
         }
     }
 
@@ -890,7 +890,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
                         if (secretModelType == TR1Type.SecretScion_M_H && _outer.Are3DPickupsEnabled())
                         {
-                            // T1M embeds scions into the ground when they are puzzle/key types in 3D mode,
+                            // TR1X embeds scions into the ground when they are puzzle/key types in 3D mode,
                             // so we counteract that here to avoid uncollectable items.
                             TRMesh scionMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, puzzleModelType);
                             foreach (TRVertex vertex in scionMesh.Vertices)

@@ -6,27 +6,27 @@ namespace TRRandomizerCore.Processors;
 
 public class TR1InjectionProcessor : TR1LevelProcessor
 {
-    private static readonly uint _t1mMagic = 'T' | ('1' << 8) | ('M' << 16) | ('J' << 24);
-    private static readonly Version _minT1MVersion = new(2, 15);
-    private static readonly List<T1MInjectionType> _permittedInjections = new()
+    private static readonly uint _tr1xMagic = 'T' | ('1' << 8) | ('M' << 16) | ('J' << 24);
+    private static readonly Version _minTR1XVersion = new(3, 0);
+    private static readonly List<TR1XInjectionType> _permittedInjections = new()
     {
-        T1MInjectionType.LaraAnims,
-        T1MInjectionType.LaraJumps,
+        TR1XInjectionType.LaraAnims,
+        TR1XInjectionType.LaraJumps,
     };
 
     public void Run()
     {
         TR1Script script = ScriptEditor.Script as TR1Script;
 
-        bool t1mVersionSupported = script.Edition.ExeVersion != null
-            && script.Edition.ExeVersion >= _minT1MVersion;
-        script.Injections = t1mVersionSupported ?
+        bool tr1xVersionSupported = script.Edition.ExeVersion != null
+            && script.Edition.ExeVersion >= _minTR1XVersion;
+        script.Injections = tr1xVersionSupported ?
             GetSupportedInjections(script.Injections) : null;
 
         foreach (TR1ScriptedLevel level in Levels)
         {
             LoadLevelInstance(level);
-            AdjustInjections(_levelInstance, t1mVersionSupported);
+            AdjustInjections(_levelInstance, tr1xVersionSupported);
             SaveLevelInstance();
 
             if (!TriggerProgress())
@@ -38,9 +38,9 @@ public class TR1InjectionProcessor : TR1LevelProcessor
         SaveScript();
     }
 
-    private void AdjustInjections(TR1CombinedLevel level, bool t1mVersionSupported)
+    private void AdjustInjections(TR1CombinedLevel level, bool tr1xVersionSupported)
     {
-        if (!t1mVersionSupported)
+        if (!tr1xVersionSupported)
         {
             level.Script.ResetInjections();
             return;
@@ -72,13 +72,13 @@ public class TR1InjectionProcessor : TR1LevelProcessor
             }
 
             using BinaryReader reader = new(File.OpenRead(path));
-            if (reader.ReadUInt32() != _t1mMagic)
+            if (reader.ReadUInt32() != _tr1xMagic)
             {
                 continue;
             }
 
             reader.ReadUInt32(); // Skip version
-            if (_permittedInjections.Contains((T1MInjectionType)reader.ReadUInt32()))
+            if (_permittedInjections.Contains((TR1XInjectionType)reader.ReadUInt32()))
             {
                 validInjections.Add(injection);
             }

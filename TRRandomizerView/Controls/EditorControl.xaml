@@ -616,17 +616,17 @@
                             Command="cmds:WindowCommands.OpenGlobalSettingsCommand"/>
 
                         <TextBlock
-                            Visibility="{Binding IsTR1Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                            Visibility="{Binding IsTR1X, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                             Grid.Row="9"
                             Margin="0,0,0,5"
-                            Text="Configure extra settings specific to Tomb1Main."
+                            Text="Configure extra settings specific to TR1X."
                             TextWrapping="Wrap"/>
 
                         <Button
-                            Visibility="{Binding IsTR1Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                            Visibility="{Binding IsTR1X, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                             Grid.Row="10"
                             Margin="0,0,0,12"
-                            Content="Tomb1Main Settings" 
+                            Content="TR1X Settings" 
                             Style="{StaticResource AltCallToAction}"
                             Command="cmds:WindowCommands.EditCommunitySettings"/>
 

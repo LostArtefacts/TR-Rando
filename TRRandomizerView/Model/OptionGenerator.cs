@@ -166,9 +166,9 @@ public class OptionGenerator
         {
             RandomizeEnvironmentOptions();
         }
-        if (_options.IsTR1Main)
+        if (_options.IsTR1X)
         {
-            RandomizeT1MOptions();
+            RandomizeTR1XOptions();
         }
     }
 
@@ -343,7 +343,7 @@ public class OptionGenerator
         _options.MirrorAssaultCourse = GetRandomBool();
     }
 
-    private void RandomizeT1MOptions()
+    private void RandomizeTR1XOptions()
     {
         _options.AirbarColor = GetRandomEnumValue<TRUIColour>(typeof(TRUIColour));
         _options.AirbarLocation = GetRandomEnumValue<TRUILocation>(typeof(TRUILocation));

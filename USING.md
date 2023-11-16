@@ -11,9 +11,7 @@ https://user-images.githubusercontent.com/9203254/148436641-6dd771ad-7b41-422e-a
 Before you launch the randomizer for the first time, you should carry out a few steps as follows.
 ***
 > ### TR1
-> It is **strongly** recommended that you use [Tomb1Main](https://github.com/LostArtefacts/Tomb1Main). Follow the installation guide on the Tomb1Main GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs) for guidance. Note that if using the Tomb1Main installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
-> 
-> The use of [TombATI](https://github.com/Carlmundo/TombRaider-AutomatedFix) is also supported but this is limited in terms of the options available and is not as customizable as Tomb1Main.
+> You must use [TR1X](https://github.com/LostArtefacts/TR1X) to be able to randomize Tomb Raider 1. Follow the installation guide on the TR1X GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs) for guidance. Note that if using the TR1X installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
 ***
 > ### TR2
 > Use the [Version Swapper](https://github.com/TombRunners/tr2-version-swapper) or install and configure [TR2Main](https://github.com/Arsunt/TR2Main).

@@ -459,8 +459,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
 
             // Not supported before 2.13, so don't make any changes to Lara here.
-            Version t1mVersion = _outer.ScriptEditor.Edition.ExeVersion;
-            if (t1mVersion == null || t1mVersion < _minBraidCutsceneVersion)
+            Version tr1xVersion = _outer.ScriptEditor.Edition.ExeVersion;
+            if (tr1xVersion == null || tr1xVersion < _minBraidCutsceneVersion)
             {
                 return false;
             }

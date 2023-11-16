@@ -26,10 +26,10 @@ Pierre will always be killable, as allocating runaway Pierres using current enem
 By default, Larson will end the level in Tomb of Qualopec when he is killed. This can be disabled by selecting `Replace required enemies` in the enemy options window. In this case, an alternative level ending will be added to this level. If this option is *not* enabled, the single default Larson will appear when `Default` restrictions mode is selected; in `No restrictions` mode, he can appear anywhere in the level, and the level will end wherever he is killed.
 
 ### SkateboardKid
-SkateboardKid is restricted to only appear in Natla's Mines, *unless Tomb1Main is being used*. This is because of an OG bug that can cause a crash, which is present in TombATI but is fixed in Tomb1Main.
+SkateboardKid is restricted to only appear in Natla's Mines, *unless TR1X is being used*. This is because of an OG bug that can cause a crash, which is present in TombATI but is fixed in TR1X.
 
 ### Natla
-Natla is restricted to only appear in Great Pyramid, *unless Tomb1Main is being used*. This is because of an OG bug that can cause a crash, which is present in TombATI but is fixed in Tomb1Main.
+Natla is restricted to only appear in Great Pyramid, *unless TR1X is being used*. This is because of an OG bug that can cause a crash, which is present in TombATI but is fixed in TR1X.
 
 ### Atlanteans
 Collectively, there are some limits on Atlanteans per level to avoid extremely difficult areas. There will be a maximum grouping count for the following levels of any of the following enemies.
@@ -60,7 +60,7 @@ Note that mummies can appear as flying mutants in other levels. This model is pr
 Bacon Lara will always appear in her OG room in Atlantis, *unless the level is mirrored and TombATI is being used*. In this case, an alternative way to open the door will be provided.
 
 ## No Restrictions Mode
-In Tomb1Main, "No Restrictions" mode will switch off each of the above restrictions, apart from Pierre always being killable.
+In TR1X, "No Restrictions" mode will switch off each of the above restrictions, apart from Pierre always being killable.
 
 In TombATI, the following restrictions will always remain:
 * Pierre always being killable

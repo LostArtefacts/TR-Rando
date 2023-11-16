@@ -20,7 +20,7 @@ public enum TRRandomizerType
     Outfit,
     Text,
     Environment,
-    Health, // Distinct from ammoless in Tomb1Main
+    Health, // Distinct from ammoless in TR1X
     Weather,
 
     // Individual settings

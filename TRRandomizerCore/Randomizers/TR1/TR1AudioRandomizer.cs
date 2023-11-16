@@ -303,7 +303,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             return;
         }
 
-        // T1M can play enemy speeches as SFX to avoid killing the current
+        // TR1X can play enemy speeches as SFX to avoid killing the current
         // track, so ensure that the required data is in the level if any
         // of these are used on the floor.
 

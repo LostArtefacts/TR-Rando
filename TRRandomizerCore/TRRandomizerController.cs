@@ -381,7 +381,7 @@ public class TRRandomizerController
     }
     #endregion
 
-    #region T1M Specifics
+    #region TR1X Specifics
     public bool EnableGameModes
     {
         get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableGameModes;

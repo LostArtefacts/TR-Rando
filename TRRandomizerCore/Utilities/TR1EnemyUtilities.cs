@@ -111,10 +111,10 @@ public static class TR1EnemyUtilities
         return tracker;
     }
 
-    public static bool IsEnemySupported(string lvlName, TR1Type entity, RandoDifficulty difficulty, bool isTomb1Main)
+    public static bool IsEnemySupported(string lvlName, TR1Type entity, RandoDifficulty difficulty, bool isTR1X)
     {
         bool supported;
-        if (!isTomb1Main && _atiEnemyRestrictions.ContainsKey(entity))
+        if (!isTR1X && _atiEnemyRestrictions.ContainsKey(entity))
         {
             supported = _atiEnemyRestrictions[entity] == lvlName;
         }
@@ -441,7 +441,7 @@ public static class TR1EnemyUtilities
         },
     };
 
-    // These enemies are unsupported due to technical reasons, NOT difficulty reasons (T1M only).
+    // These enemies are unsupported due to technical reasons, NOT difficulty reasons (TR1X only).
     private static readonly Dictionary<string, List<TR1Type>> _unsupportedEnemiesTechnical = new()
     {
     };
