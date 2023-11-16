@@ -4014,7 +4014,7 @@
       "Y": 1024,
       "Z": 1536,
       "Room": 20,
-      "KeyItemsLow": "18133,18277,18267,18389",
+      "KeyItemsLow": "18133,18277,18267,18389,18444",
       "Range": "Large",
       "RequiresReturnPath": true
     },
@@ -4434,7 +4434,7 @@
       "Z": 68096,
       "Room": 77,
       "KeyItemsHigh": "18133",
-      "KeyItemsLow": "18389",
+      "KeyItemsLow": "18389,18444",
       "Range": "Medium",
       "RequiresReturnPath": true
     },
@@ -4552,7 +4552,7 @@
       "Y": 6656,
       "Z": 67840,
       "Room": 99,
-      "KeyItemsLow": "18389",
+      "KeyItemsLow": "18389,18444",
       "Range": "Medium"
     },
     {
@@ -4560,7 +4560,7 @@
       "Y": 6656,
       "Z": 68096,
       "Room": 99,
-      "KeyItemsLow": "18389",
+      "KeyItemsLow": "18389,18444",
       "Range": "Large"
     },
     {
@@ -4640,14 +4640,14 @@
       "Y": 7168,
       "Z": 78336,
       "Room": 98,
-      "KeyItemsLow": "18389"
+      "KeyItemsLow": "18389,18444"
     },
     {
       "X": 28160,
       "Y": 7168,
       "Z": 78336,
       "Room": 98,
-      "KeyItemsLow": "18389",
+      "KeyItemsLow": "18389,18444",
       "RequiresReturnPath": true
     },
     {
@@ -4712,14 +4712,14 @@
       "Y": 3840,
       "Z": 94720,
       "Room": 112,
-      "KeyItemsHigh": "18389"
+      "KeyItemsHigh": "18389,18444"
     },
     {
       "X": 32256,
       "Y": 3840,
       "Z": 94720,
       "Room": 112,
-      "KeyItemsHigh": "18389",
+      "KeyItemsHigh": "18389,18444",
       "RequiresReturnPath": true
     },
     {
@@ -4727,7 +4727,7 @@
       "Y": 3840,
       "Z": 94720,
       "Room": 112,
-      "KeyItemsHigh": "18389",
+      "KeyItemsHigh": "18389,18444",
       "Range": "Medium"
     },
     {
@@ -4735,7 +4735,7 @@
       "Y": 3840,
       "Z": 94976,
       "Room": 112,
-      "KeyItemsHigh": "18389",
+      "KeyItemsHigh": "18389,18444",
       "Range": "Medium",
       "RequiresReturnPath": true
     },
@@ -4744,7 +4744,7 @@
       "Y": 3840,
       "Z": 94976,
       "Room": 112,
-      "KeyItemsHigh": "18389",
+      "KeyItemsHigh": "18389,18444",
       "Range": "Large"
     },
     {
@@ -4752,7 +4752,7 @@
       "Y": 3840,
       "Z": 94976,
       "Room": 112,
-      "KeyItemsHigh": "18389",
+      "KeyItemsHigh": "18389,18444",
       "Range": "Large",
       "RequiresReturnPath": true
     }

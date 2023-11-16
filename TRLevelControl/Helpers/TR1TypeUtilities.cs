@@ -408,6 +408,12 @@ public static class TR1TypeUtilities
         };
     }
 
+    public static bool IsEggType(TR1Type type)
+    {
+        return type == TR1Type.AtlanteanEgg
+            || type == TR1Type.AdamEgg;
+    }
+
     public static List<TR1Type> GetSwitchTypes()
     {
         return new()

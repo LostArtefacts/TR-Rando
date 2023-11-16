@@ -314,6 +314,7 @@ public enum TR1Type
     Tihocan_K1_GoldKeyPierre      = 18389,
     Tihocan_K2_RustyKeyBoulders   = 18277,
     Tihocan_K2_RustyKeyClangClang = 18267,
+    Tihocan_Scion_EndRoom         = 18444,
 
     KhamoonKeyItemBase            = 19000,
     Khamoon_K1_SapphireKeyEnd     = 19193,

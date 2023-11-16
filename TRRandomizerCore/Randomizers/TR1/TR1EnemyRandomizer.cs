@@ -446,6 +446,9 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     {
         AmendAtlanteanModels(level, enemies);
 
+        // Clear all default enemy item drops
+        level.Script.ItemDrops.Clear();
+
         // Get a list of current enemy entities
         List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
         List<TR1Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
@@ -647,7 +650,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         }
                     }
 
-                    currentEntity.CodeBits = AtlanteanToCodeBits(spawnType);
+                    currentEntity.CodeBits = TR1EnemyUtilities.AtlanteanToCodeBits(spawnType);
                     if (eggLocation != null)
                     {
                         currentEntity.X = eggLocation.X;
@@ -684,18 +687,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 currentEntity.Invisible = true;
             }
 
-            if (newEntityType == TR1Type.Pierre)
-            {
-                // Pierre will always be OneShot (see SetEntityTriggers) for the time being, because placement
-                // of runaway Pierres is awkward - only one can be active at a time.
-
-                // He is hard-coded to drop Key1, so add a string if this level doesn't have one.
-                if (level.Script.Keys.Count == 0)
-                {
-                    level.Script.Keys.Add("Pierre's Spare Key");
-                }
-            }
-
             // Make sure to convert back to the actual type
             currentEntity.TypeID = TR1TypeUtilities.TranslateAlias(newEntityType);
 
@@ -711,18 +702,19 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             FixColosseumBats(level);
         }
 
-        if (level.Is(TR1LevelNames.TIHOCAN) && level.Data.Entities[82].TypeID != TR1Type.Pierre)
+        if (level.Is(TR1LevelNames.TIHOCAN) && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
         {
-            // Add a guaranteed key at the end of the level. Item rando can reposition it.
-            level.Data.Entities.Add(new()
+            if (TR1EnemyUtilities.CanDropItems(level.Data.Entities[82], level, floorData))
             {
-                TypeID = TR1Type.Key1_S_P,
-                X = 30208,
-                Y = 2560,
-                Z = 91648,
-                Room = 110,
-                Intensity = 6144
-            });
+                // Whichever enemy has taken Pierre's place will drop the items.
+                level.Script.AddItemDrops(82, TR1ItemRandomizer.TihocanEndItems
+                    .Select(e => ItemUtilities.ConvertToScriptItem(e.TypeID)));
+            }
+            else
+            {
+                // Add physical pickups - this means item rando is off, so these won't move.
+                level.Data.Entities.AddRange(TR1ItemRandomizer.TihocanEndItems);
+            }
         }
 
         // Fix missing OG animation SFX
@@ -758,7 +750,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
             else if (type == TR1Type.AdamEgg || type == TR1Type.AtlanteanEgg)
             {
-                TR1Type eggType = CodeBitsToAtlantean(entity.CodeBits);
+                TR1Type eggType = TR1EnemyUtilities.CodeBitsToAtlantean(entity.CodeBits);
                 if (eggType == translatedType && Array.Find(level.Data.Models, m => m.ID == (uint)eggType) != null)
                 {
                     count++;
@@ -766,30 +758,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
         }
         return count;
-    }
-
-    private static ushort AtlanteanToCodeBits(TR1Type atlantean)
-    {
-        return atlantean switch
-        {
-            TR1Type.ShootingAtlantean_N => 1,
-            TR1Type.Centaur => 2,
-            TR1Type.Adam => 4,
-            TR1Type.NonShootingAtlantean_N => 8,
-            _ => 0,
-        };
-    }
-
-    private static TR1Type CodeBitsToAtlantean(ushort codeBits)
-    {
-        return codeBits switch
-        {
-            1 => TR1Type.ShootingAtlantean_N,
-            2 => TR1Type.Centaur,
-            4 => TR1Type.Adam,
-            8 => TR1Type.NonShootingAtlantean_N,
-            _ => TR1Type.FlyingAtlantean,
-        };
     }
 
     private static bool IsEnemyInOrAboveWater(TR1Entity entity, TR1Level level, FDControl floorData)
@@ -1010,7 +978,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             {
                 TR1Entity resultantEnemy = new()
                 {
-                    TypeID = CodeBitsToAtlantean(entity.CodeBits)
+                    TypeID = TR1EnemyUtilities.CodeBitsToAtlantean(entity.CodeBits)
                 };
 
                 // Only include it if the model is present i.e. it's not an empty egg.
@@ -1271,7 +1239,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // entities inside the egg that will have already been accounted for.
         TR1Entity adamEgg = level.Data.Entities.Find(e => e.TypeID == TR1Type.AdamEgg);
         if (adamEgg != null
-            && CodeBitsToAtlantean(adamEgg.CodeBits) == TR1Type.Adam
+            && TR1EnemyUtilities.CodeBitsToAtlantean(adamEgg.CodeBits) == TR1Type.Adam
             && Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.Adam) != null)
         {
             enemies.Add(adamEgg);

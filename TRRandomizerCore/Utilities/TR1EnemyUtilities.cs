@@ -5,6 +5,7 @@ using TRFDControl.Utilities;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Levels;
 
 namespace TRRandomizerCore.Utilities;
 
@@ -545,6 +546,57 @@ public static class TR1EnemyUtilities
         (
             File.ReadAllText(@"Resources\TR1\Restrictions\enemy_restrictions_technical.json")
         );
+    }
+
+    public static ushort AtlanteanToCodeBits(TR1Type atlantean)
+    {
+        return atlantean switch
+        {
+            TR1Type.ShootingAtlantean_N => 1,
+            TR1Type.Centaur => 2,
+            TR1Type.Adam => 4,
+            TR1Type.NonShootingAtlantean_N => 8,
+            _ => 0,
+        };
+    }
+
+    public static TR1Type CodeBitsToAtlantean(ushort codeBits)
+    {
+        return codeBits switch
+        {
+            1 => TR1Type.ShootingAtlantean_N,
+            2 => TR1Type.Centaur,
+            4 => TR1Type.Adam,
+            8 => TR1Type.NonShootingAtlantean_N,
+            _ => TR1Type.FlyingAtlantean,
+        };
+    }
+
+    public static bool IsEmptyEgg(TR1Entity entity, TR1CombinedLevel level)
+    {
+        if (!TR1TypeUtilities.IsEggType(entity.TypeID))
+        {
+            return false;
+        }
+
+        TR1Type type = CodeBitsToAtlantean(entity.CodeBits);
+        return Array.Find(level.Data.Models, m => m.ID == (uint)type) == null;
+    }
+
+    public static bool CanDropItems(TR1Entity entity, TR1CombinedLevel level, FDControl floorData)
+    {
+        if (IsEmptyEgg(entity, level))
+        {
+            return false;
+        }
+
+        if (entity.TypeID == TR1Type.Pierre)
+        {
+            return FDUtilities.GetEntityTriggers(floorData, level.Data.Entities.IndexOf(entity))
+                .All(t => t.TrigSetup.OneShot);
+        }
+
+        return TR1TypeUtilities.IsEnemyType(entity.TypeID);
     }
 }
 
