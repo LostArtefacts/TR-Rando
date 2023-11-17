@@ -40,7 +40,7 @@ public class EMTriggerFunction : BaseEMFunction
             {
                 foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                 {
-                    if (!sector.IsImpenetrable && sector.RoomBelow == TRConsts.NoRoom)
+                    if (!sector.IsWall && sector.RoomBelow == TRConsts.NoRoom)
                     {
                         CreateTrigger(sector, control, triggerEntry);
                     }
@@ -81,7 +81,7 @@ public class EMTriggerFunction : BaseEMFunction
             {
                 foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].SectorList)
                 {
-                    if (!sector.IsImpenetrable && sector.RoomBelow == TRConsts.NoRoom)
+                    if (!sector.IsWall && sector.RoomBelow == TRConsts.NoRoom)
                     {
                         CreateTrigger(sector, control, triggerEntry);
                     }
@@ -133,7 +133,7 @@ public class EMTriggerFunction : BaseEMFunction
             {
                 foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                 {
-                    if (!sector.IsImpenetrable && sector.RoomBelow == TRConsts.NoRoom)
+                    if (!sector.IsWall && sector.RoomBelow == TRConsts.NoRoom)
                     {
                         CreateTrigger(sector, control, triggerEntry);
                     }

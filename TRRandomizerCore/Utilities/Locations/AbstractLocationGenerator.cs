@@ -192,7 +192,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
             int flipIndex = flipSectors.IndexOf(flipSector);
 
             Location flipLoc = CreateLocation(level, flipRoom, flipIndex, flipSector);
-            if (flipLoc == null || roomLoc.ToVector() != flipLoc.ToVector() || flipSector.IsImpenetrable)
+            if (flipLoc == null || roomLoc.ToVector() != flipLoc.ToVector() || flipSector.IsWall)
             {
                 _excludedSectors.Add(roomSector);
             }

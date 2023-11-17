@@ -19,7 +19,7 @@ public class EMCeilingFunction : BaseEMFunction
             int min = int.MaxValue;
             foreach (TRRoomSector sector in room.Sectors)
             {
-                if (!sector.IsImpenetrable)
+                if (!sector.IsWall)
                 {
                     sector.Ceiling = CeilingHeights[roomNumber];
                     min = Math.Min(min, sector.Ceiling);
@@ -50,7 +50,7 @@ public class EMCeilingFunction : BaseEMFunction
             int min = int.MaxValue;
             foreach (TRRoomSector sector in room.SectorList)
             {
-                if (!sector.IsImpenetrable)
+                if (!sector.IsWall)
                 {
                     sector.Ceiling = CeilingHeights[roomNumber];
                     min = Math.Min(min, sector.Ceiling);
@@ -81,7 +81,7 @@ public class EMCeilingFunction : BaseEMFunction
             int min = int.MaxValue;
             foreach (TRRoomSector sector in room.Sectors)
             {
-                if (!sector.IsImpenetrable)
+                if (!sector.IsWall)
                 {
                     sector.Ceiling = CeilingHeights[roomNumber];
                     min = Math.Min(min, sector.Ceiling);

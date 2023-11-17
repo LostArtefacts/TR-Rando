@@ -491,7 +491,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             floor = (sbyte)(oldRoomInfo.YBottom / TRConsts.Step1);
             floor += customHeight.Value;
 
-            if (originalSector.IsImpenetrable)
+            if (originalSector.IsWall)
             {
                 // This is effectively a promise that this sector is no longer
                 // going to be a wall, so reset it to a standard sector.
@@ -499,7 +499,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                 sectorYDiff = ydiff / TRConsts.Step1;
             }
 
-            wallOpened = originalSector.IsImpenetrable || originalSector.BoxIndex == ushort.MaxValue;
+            wallOpened = originalSector.IsWall || originalSector.BoxIndex == ushort.MaxValue;
         }
 
         TRRoomSector newSector = new()

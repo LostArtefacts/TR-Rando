@@ -343,7 +343,7 @@ public class EMCreateRoomFunction : BaseEMFunction
             for (int z = 0; z < Depth; z++)
             {
                 TRRoomSector sector = sectors[x * Depth + z];
-                if (sector.IsImpenetrable)
+                if (sector.IsWall)
                 {
                     continue;
                 }

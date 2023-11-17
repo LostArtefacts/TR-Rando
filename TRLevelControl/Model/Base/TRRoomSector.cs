@@ -17,7 +17,7 @@ public class TRRoomSector : ISerializableCompact
 
     public sbyte Ceiling { get; set; }
 
-    public bool IsImpenetrable => Floor == TRConsts.WallClicks && Ceiling == TRConsts.WallClicks;
+    public bool IsWall => Floor == TRConsts.WallClicks && Ceiling == TRConsts.WallClicks;
     public bool IsSlipperySlope => (BoxIndex & 0x7FF0) >> 4 == 2047;
 
     public override string ToString()

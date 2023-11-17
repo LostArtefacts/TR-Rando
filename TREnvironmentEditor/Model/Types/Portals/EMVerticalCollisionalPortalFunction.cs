@@ -27,7 +27,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
         {
             foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
             {
-                if (!sector.IsImpenetrable && sector.RoomBelow != TRConsts.NoRoom)
+                if (!sector.IsWall && sector.RoomBelow != TRConsts.NoRoom)
                 {
                     sector.RoomBelow = (byte)floorRoom;
                 }
@@ -35,7 +35,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
 
             foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
             {
-                if (!sector.IsImpenetrable && sector.RoomAbove != TRConsts.NoRoom)
+                if (!sector.IsWall && sector.RoomAbove != TRConsts.NoRoom)
                 {
                     sector.RoomAbove = (byte)ceilingRoom;
                 }
@@ -73,7 +73,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
         {
             foreach (TRRoomSector sector in level.Rooms[ceilingRoom].SectorList)
             {
-                if (!sector.IsImpenetrable && sector.RoomBelow != TRConsts.NoRoom)
+                if (!sector.IsWall && sector.RoomBelow != TRConsts.NoRoom)
                 {
                     sector.RoomBelow = (byte)floorRoom;
                 }
@@ -81,7 +81,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
 
             foreach (TRRoomSector sector in level.Rooms[floorRoom].SectorList)
             {
-                if (!sector.IsImpenetrable && sector.RoomAbove != TRConsts.NoRoom)
+                if (!sector.IsWall && sector.RoomAbove != TRConsts.NoRoom)
                 {
                     sector.RoomAbove = (byte)ceilingRoom;
                 }
@@ -119,7 +119,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
         {
             foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
             {
-                if (!sector.IsImpenetrable && sector.RoomBelow != TRConsts.NoRoom)
+                if (!sector.IsWall && sector.RoomBelow != TRConsts.NoRoom)
                 {
                     sector.RoomBelow = (byte)floorRoom;
                 }
@@ -127,7 +127,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
 
             foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
             {
-                if (!sector.IsImpenetrable && sector.RoomAbove != TRConsts.NoRoom)
+                if (!sector.IsWall && sector.RoomAbove != TRConsts.NoRoom)
                 {
                     sector.RoomAbove = (byte)ceilingRoom;
                 }

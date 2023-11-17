@@ -12,20 +12,20 @@ public class EMSectorIsWallCondition : BaseEMCondition
     {
         EMLevelData data = EMLevelData.GetData(level);
         TRRoom room = level.Rooms[data.ConvertRoom(Location.Room)];
-        return room.Sectors[GetSectorIndex(room.Info, Location, room.NumZSectors)].IsImpenetrable;
+        return room.Sectors[GetSectorIndex(room.Info, Location, room.NumZSectors)].IsWall;
     }
     protected override bool Evaluate(TR2Level level)
     {
         EMLevelData data = EMLevelData.GetData(level);
         TR2Room room = level.Rooms[data.ConvertRoom(Location.Room)];
-        return room.SectorList[GetSectorIndex(room.Info, Location, room.NumZSectors)].IsImpenetrable;
+        return room.SectorList[GetSectorIndex(room.Info, Location, room.NumZSectors)].IsWall;
     }
 
     protected override bool Evaluate(TR3Level level)
     {
         EMLevelData data = EMLevelData.GetData(level);
         TR3Room room = level.Rooms[data.ConvertRoom(Location.Room)];
-        return room.Sectors[GetSectorIndex(room.Info, Location, room.NumZSectors)].IsImpenetrable;
+        return room.Sectors[GetSectorIndex(room.Info, Location, room.NumZSectors)].IsWall;
     }
 
     private static int GetSectorIndex(TRRoomInfo roomInfo, EMLocation location, int roomDepth)

@@ -145,7 +145,7 @@ public class EMClickFunction : BaseEMFunction
 
     private void MoveSector(TRRoomSector sector, TRRoomInfo roomInfo)
     {
-        if (sector.IsImpenetrable)
+        if (sector.IsWall)
         {
             sector.Ceiling = (sbyte)(roomInfo.YTop / TRConsts.Step1);
             sector.Floor = (sbyte)(roomInfo.YBottom / TRConsts.Step1);
