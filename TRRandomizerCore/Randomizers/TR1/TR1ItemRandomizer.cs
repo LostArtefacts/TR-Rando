@@ -14,6 +14,8 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR1ItemRandomizer : BaseTR1Randomizer
 {
+    public const int TihocanPierreIndex = 82;
+
     public static readonly List<TR1Entity> TihocanEndItems = new()
     {
         new()
@@ -401,9 +403,9 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         {
             // Enemy rando may not be selected or Pierre may have ended up at the
             // end as usual. Remove his key and scion drops and place them as items.
-            if (level.Data.Entities[82].TypeID == TR1Type.Pierre)
+            if (level.Data.Entities[TihocanPierreIndex].TypeID == TR1Type.Pierre)
             {
-                level.Script.ItemDrops.Find(d => d.EnemyNum == 82)?.ObjectIds
+                level.Script.ItemDrops.Find(d => d.EnemyNum == TihocanPierreIndex)?.ObjectIds
                     .RemoveAll(e => TihocanEndItems.Select(i => ItemUtilities.ConvertToScriptItem(i.TypeID)).Contains(e));
             }
             level.Data.Entities.AddRange(TihocanEndItems);

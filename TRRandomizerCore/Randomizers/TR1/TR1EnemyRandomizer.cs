@@ -704,10 +704,10 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         if (level.Is(TR1LevelNames.TIHOCAN) && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
         {
-            if (TR1EnemyUtilities.CanDropItems(level.Data.Entities[82], level, floorData))
+            if (TR1EnemyUtilities.CanDropItems(level.Data.Entities[TR1ItemRandomizer.TihocanPierreIndex], level, floorData))
             {
                 // Whichever enemy has taken Pierre's place will drop the items.
-                level.Script.AddItemDrops(82, TR1ItemRandomizer.TihocanEndItems
+                level.Script.AddItemDrops(TR1ItemRandomizer.TihocanPierreIndex, TR1ItemRandomizer.TihocanEndItems
                     .Select(e => ItemUtilities.ConvertToScriptItem(e.TypeID)));
             }
             else
