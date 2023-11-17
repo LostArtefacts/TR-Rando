@@ -106,7 +106,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
         EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath(@"TR1\Environment\" + level.Name + "-Environment.json"));
         if (mapping != null)
         {
-            mapping.SetCommunityPatch(ScriptEditor.Edition.IsCommunityPatch);
+            mapping.SetCommunityPatch(true);
             ApplyMappingToLevel(level, mapping);
         }
 
@@ -128,7 +128,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
         {
             Generator = _generator
         };
-        picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
+        picker.LoadTags(Settings, true);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
 
         // These are applied whether or not environment randomization is enabled,
@@ -188,13 +188,8 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
         }
     }
 
-    private void UpdateDoppelgangerScript(TR1CombinedLevel level)
+    private static void UpdateDoppelgangerScript(TR1CombinedLevel level)
     {
-        if (!ScriptEditor.Edition.IsCommunityPatch)
-        {
-            return;
-        }
-
         // Bacon Lara may have been added as a trap/puzzle, so we need to ensure the script knows
         // where to set her up. The mods will have stored this in a temporary flag as the entity
         // starting room may not necessarily be where her positioning should be calculated from.
@@ -236,11 +231,11 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
         EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($@"TR1\Environment\{level.Name}-Environment.json"));
         EnvironmentPicker picker = new(Settings.HardEnvironmentMode);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
-        picker.ResetTags(ScriptEditor.Edition.IsCommunityPatch);
+        picker.ResetTags(true);
 
         if (mapping != null)
         {
-            mapping.SetCommunityPatch(ScriptEditor.Edition.IsCommunityPatch);
+            mapping.SetCommunityPatch(true);
 
             // Similar to All, but these mods will have conditions configured so may
             // or may not apply. Process these last so that conditions based on other
@@ -263,11 +258,8 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
             TextureMonitor<TR1Type> monitor = TextureMonitor.CreateMonitor(level.Name);
             monitor.UseMirroring = true;
 
-            if (ScriptEditor.Edition.IsCommunityPatch)
-            {
-                // Remove the demo if it's set as it can crash the game
-                level.Script.Demo = null;
-            }
+            // Remove the demo if it's set as it can crash the game
+            level.Script.Demo = null;
         }
     }
 }

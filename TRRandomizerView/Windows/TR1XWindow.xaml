@@ -1,17 +1,16 @@
-﻿<Window x:Class="TRRandomizerView.Windows.Tomb1MainWindow"
+﻿<Window x:Class="TRRandomizerView.Windows.TR1XWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
-        xmlns:cvt="clr-namespace:TRRandomizerView.Converters"
         mc:Ignorable="d"
         Icon="..\Resources\rando.ico"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         Loaded="Window_Loaded"
-        Title="Tomb1Main Settings"
+        Title="TR1X Settings"
         SizeToContent="WidthAndHeight"
         MinWidth="1050"
         MinHeight="750">
@@ -33,9 +32,9 @@
 
             <StackPanel Grid.ColumnSpan="2">
                 <TextBlock Margin="0,0,0,5">
-                    <Run Text="Edit the settings available in Tomb1Main as standard (see"/>
-                    <Hyperlink ToolTip="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg" 
-                               NavigateUri="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg"
+                    <Run Text="Edit the settings available in TR1X as standard (see"/>
+                    <Hyperlink ToolTip="https://github.com/LostArtefacts/TR1X/tree/stable/bin/cfg" 
+                               NavigateUri="https://github.com/LostArtefacts/TR1X/tree/stable/bin/cfg"
                                RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink><Run Text=")."/>
                     <LineBreak/>
                     <Run Text="Settings marked with * may be overridden directly during randomization to meet certain criteria."/>
@@ -667,6 +666,9 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -690,7 +692,47 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="1"
+                        <Border
+                            Grid.Row="1"
+                            Style="{StaticResource SeparatorBorder}">
+                            <CheckBox
+                                IsChecked="{Binding ControllerProxy.EnableBuffering, Mode=TwoWay}"
+                                VerticalAlignment="Center">
+                                <Label
+                                    Padding="0"
+                                    Content="Enable buffering **" />
+                            </CheckBox>
+                        </Border>
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables F-key (1-frame) and inventory (2-frame) buffering to achieve precise control of Lara's movement."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border
+                            Grid.Row="2"
+                            Style="{StaticResource SeparatorBorder}">
+                            <CheckBox
+                                IsChecked="{Binding ControllerProxy.EnableEidosLogo, Mode=TwoWay}"
+                                VerticalAlignment="Center">
+                                <Label
+                                    Padding="0"
+                                    Content="Enable EIDOS logo" />
+                            </CheckBox>
+                        </Border>
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables the EIDOS logo at the game start."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableCine, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -698,7 +740,7 @@
                                        Content="Enable cinematics" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="1"
+                        <Border Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -706,7 +748,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="2"
+                        <Border Grid.Row="4"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableFmv, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -714,7 +756,7 @@
                                        Content="Enable FMVs" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="2"
+                        <Border Grid.Row="4"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -722,7 +764,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="3"
+                        <Border Grid.Row="5"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableCheats, Mode=TwoWay}"
                                       VerticalAlignment="top">
@@ -730,7 +772,7 @@
                                        Content="Enable cheats" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="3"
+                        <Border Grid.Row="5"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -750,7 +792,31 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="4"
+                        <Border
+                            Grid.Row="6"
+                            Style="{StaticResource SeparatorBorder}">
+                            <CheckBox
+                                IsChecked="{Binding ControllerProxy.EnableConsole, Mode=TwoWay}"
+                                VerticalAlignment="Center">
+                                <Label
+                                    Padding="0"
+                                    Content="Enable console" />
+                            </CheckBox>
+                        </Border>
+                        <Border
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables a developer console in-game. See"/>
+                                <Hyperlink
+                                    ToolTip="https://github.com/LostArtefacts/TR1X/blob/stable/COMMANDS.md" 
+                                    NavigateUri="https://github.com/LostArtefacts/TR1X/blob/stable/COMMANDS.md"
+                                    RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink><Run Text=" for details."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="7"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableGameModes, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -758,7 +824,7 @@
                                        Content="Enable game modes" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="4"
+                        <Border Grid.Row="7"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -766,7 +832,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="5"
+                        <Border Grid.Row="8"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableSaveCrystals, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -774,7 +840,7 @@
                                        Content="Enable save crystals" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="5"
+                        <Border Grid.Row="8"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -782,7 +848,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="6"
+                        <Border Grid.Row="9"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableTimerInInventory, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -790,7 +856,7 @@
                                        Content="Enable timer in inventory" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="6"
+                        <Border Grid.Row="9"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -798,7 +864,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="7"
+                        <Border Grid.Row="10"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.DisableTRexCollision, Mode=TwoWay}"
                                       VerticalAlignment="Top">
@@ -806,7 +872,7 @@
                                        Content="Disable T-Rex collision *" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="7"
+                        <Border Grid.Row="10"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -816,7 +882,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="8"
+                        <Border Grid.Row="11"
                                 Style="{StaticResource SeparatorBorder}">
                             <StackPanel>
                                 <Label Content="FoV Value"
@@ -826,7 +892,7 @@
                                                     MaxValue="255"/>
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="8"
+                        <Border Grid.Row="11"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -834,7 +900,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="9"
+                        <Border Grid.Row="12"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FovVertical, Mode=TwoWay}"
                                       VerticalAlignment="Top">
@@ -842,7 +908,7 @@
                                        Content="FoV Vertical" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="9"
+                        <Border Grid.Row="12"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -852,7 +918,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="10"
+                        <Border Grid.Row="13"
                                 Style="{StaticResource SeparatorBorder}">
                             <StackPanel>
                                 <Label Content="Camera speed"
@@ -862,7 +928,7 @@
                                                     MaxValue="10"/>
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="10"
+                        <Border Grid.Row="13"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -874,6 +940,7 @@
                     <!-- 4. Guns/Items -->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -1008,11 +1075,34 @@
                                 <Run Text="Shotgun no longer fires when a locked target moves out of Lara's sight like other guns."/>
                             </TextBlock>
                         </Border>
+
+                        <Border
+                            Grid.Row="7"
+                            Style="{StaticResource SeparatorBorder}">
+                            <CheckBox
+                                IsChecked="{Binding ControllerProxy.ConvertDroppedGuns, Mode=TwoWay}"
+                                VerticalAlignment="Center">
+                                <Label
+                                    Padding="0"
+                                    Content="Convert dropped guns **" />
+                            </CheckBox>
+                        </Border>
+                        <Border
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Style="{StaticResource SeparatorBorder}">
+                            <TextBlock
+                                Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="If an enemy drops a gun that Lara already has in her inventory, it will be converted to the equivalent ammo."/>
+                            </TextBlock>
+                        </Border>
                     </Grid>
                     
                     <!-- 5. Lara -->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -1154,7 +1244,49 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="8"
+                        <Border
+                            Grid.Row="8"
+                            Style="{StaticResource SeparatorBorder}">
+                            <CheckBox
+                                IsChecked="{Binding ControllerProxy.EnableUwRoll, Mode=TwoWay}"
+                                VerticalAlignment="Center">
+                                <Label
+                                    Padding="0"
+                                    Content="Enable rolling underwater" />
+                            </CheckBox>
+                        </Border>
+                        <Border
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            Style="{StaticResource SeparatorBorder}">
+                            <TextBlock
+                                Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Allows Lara to roll while underwater, similar to TR2+."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border
+                            Grid.Row="9"
+                            Style="{StaticResource SeparatorBorder}">
+                            <CheckBox
+                                IsChecked="{Binding ControllerProxy.EnableLeanJumping, Mode=TwoWay}"
+                                VerticalAlignment="Center">
+                                <Label
+                                    Padding="0"
+                                    Content="Enable lean jumping" />
+                            </CheckBox>
+                        </Border>
+                        <Border
+                            Grid.Row="9"
+                            Grid.Column="1"
+                            Style="{StaticResource SeparatorBorder}">
+                            <TextBlock
+                                Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Allows Lara to creep forwards or backwards further when performing neutral jumps, similar to TR2+."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="10"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableInvertedLook, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -1162,7 +1294,7 @@
                                        Content="Enable inverted look" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="8"
+                        <Border Grid.Row="10"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">

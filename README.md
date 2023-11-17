@@ -66,7 +66,7 @@ For keeping track of levels while you play, check out the [TRRandoTracker](https
 * Trxye - Lots of ideas and development help.
 * Towandaa - Lots of ideas and contributions, including secret, vehicle and sprite randomization.
 * Leoc1995 - For TR1 puzzle inspiration and contributing enemy variants from his [TRLEs](https://trcustoms.org/users/854).
-* Dash and Walkawayy - For providing great support and rando-related additions to [Tomb1Main](https://github.com/LostArtefacts/Tomb1Main).
+* Dash and Walkawayy - For providing great support and rando-related additions to [TR1X](https://github.com/LostArtefacts/TR1X).
 * Jimmy Beon - Providing us with an excellent assortment of custom textures for use in rando.
 * Topixtor - For endless testing to fix issues such as the opera house/barkhang entity freeze and mirrored levels, and providing enemy variations from his [TRLEs](https://trcustoms.org/users/927).
 * Radgryd - For endless TR1 testing and lots of great ideas for the rando.

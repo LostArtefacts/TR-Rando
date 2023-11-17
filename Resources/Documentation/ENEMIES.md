@@ -20,16 +20,14 @@ The following enemy restrictions are in place when using "Default" restriction m
 Torso is restricted to appear only in certain rooms where there is a little more space to fight. He will always appear in Great Pyramid in the usual place to activate the door, unless `Replace required enemies` is enabled. In this case, an alternative way to open the door will be provided.
 
 ### Pierre
-Pierre will always be killable, as allocating runaway Pierres using current enemy positioning is awkward, given that when they spawn they deactivate the previous one (or with TombATI the newly triggered one doesn't replace the existing). Pierre will also always drop the scion, magnums and a key. If Pierre is not present at the end of Tihocan, a key will be added to pickup (this location will be randomized if key item randomization is enabled).
+Pierre will always be killable, as allocating runaway Pierres using current enemy positioning is awkward, given that when they spawn they deactivate the previous one. Where Pierre is needed at the end of Tomb of Tihocan, there are different outcomes depending on which settings you have enabled.
+- If key item randomization is enabled, then a key and the scion will be added as physical items to collect, and their location will be randomized.
+- If key item randomization is not enabled:
+  - Whichever enemy is in Pierre's place will drop the key items, if that enemy is capable of dropping items.
+  - Otherwise, physical pickups are added per above, but their locations are fixed.
 
 ### Larson
 By default, Larson will end the level in Tomb of Qualopec when he is killed. This can be disabled by selecting `Replace required enemies` in the enemy options window. In this case, an alternative level ending will be added to this level. If this option is *not* enabled, the single default Larson will appear when `Default` restrictions mode is selected; in `No restrictions` mode, he can appear anywhere in the level, and the level will end wherever he is killed.
-
-### SkateboardKid
-SkateboardKid is restricted to only appear in Natla's Mines, *unless Tomb1Main is being used*. This is because of an OG bug that can cause a crash, which is present in TombATI but is fixed in Tomb1Main.
-
-### Natla
-Natla is restricted to only appear in Great Pyramid, *unless Tomb1Main is being used*. This is because of an OG bug that can cause a crash, which is present in TombATI but is fixed in Tomb1Main.
 
 ### Atlanteans
 Collectively, there are some limits on Atlanteans per level to avoid extremely difficult areas. There will be a maximum grouping count for the following levels of any of the following enemies.
@@ -57,17 +55,15 @@ Collectively, there are some limits on Atlanteans per level to avoid extremely d
 Note that mummies can appear as flying mutants in other levels. This model is present in City of Khamoon but is unused in the original game.
 
 ### Bacon Lara
-Bacon Lara will always appear in her OG room in Atlantis, *unless the level is mirrored and TombATI is being used*. In this case, an alternative way to open the door will be provided.
+Bacon Lara will always appear in her OG room in Atlantis. She may also appear in other levels if puzzle/challenge room randomization is enabled.
 
 ## No Restrictions Mode
-In Tomb1Main, "No Restrictions" mode will switch off each of the above restrictions, apart from Pierre always being killable.
-
-In TombATI, the following restrictions will always remain:
-* Pierre always being killable
-* SkateboardKid appearing in Natla's Mines only
-* Natla appearing in Great Pyramid only
+"No Restrictions" mode will switch off each of the above restrictions, apart from Pierre always being killable.
 
 This mode will also allow land enemies to appear underwater as the engine does not kill them (as in TR2 onwards).
+
+## Item drops
+In the original TR1, Pierre, Cowboy, Skateboard Kid and Kold are hard-coded to drop items when they are killed. This is not the case in the randomizer if enemy randomization is enabled. There does however remain a chance for items to be allocated to _any_ suitable enemy type, so make sure to keep your eyes peeled for pickups. See https://github.com/LostArtefacts/TR1X/blob/stable/GAMEFLOW.md#item-drops for more information.
 
 ## Enemy Types
 Some levels have their total enemy types count increased for more variety. This is a maximum rather than a guaranteed number of types (e.g. for Caves, 5 models will always be imported, but no checks are performed to ensure at least one of each is assigned to entities). Levels in _italics_ remain unchanged.

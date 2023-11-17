@@ -11,11 +11,11 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-public partial class Tomb1MainWindow : Window
+public partial class TR1XWindow : Window
 {
     public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
     (
-        nameof(ControllerProxy), typeof(ControllerOptions), typeof(Tomb1MainWindow)
+        nameof(ControllerProxy), typeof(ControllerOptions), typeof(TR1XWindow)
     );
 
     public ControllerOptions ControllerProxy
@@ -24,7 +24,7 @@ public partial class Tomb1MainWindow : Window
         set => SetValue(ControllerProperty, value);
     }
 
-    public Tomb1MainWindow(ControllerOptions proxy)
+    public TR1XWindow(ControllerOptions proxy)
     {
         InitializeComponent();
         InitializeComboBoxes();

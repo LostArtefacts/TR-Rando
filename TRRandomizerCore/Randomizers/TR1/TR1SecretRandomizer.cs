@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
-using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model.Types;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
@@ -58,7 +57,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             RouteManager = _routePicker,
         };
 
-        if (ScriptEditor.Edition.IsCommunityPatch && !Settings.UseSecretPack)
+        if (!Settings.UseSecretPack)
         {
             SetSecretCounts();
         }
@@ -110,31 +109,31 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
         _processingException?.Throw();
 
-        if (ScriptEditor.Edition.IsCommunityPatch)
+        TR1Script script = ScriptEditor.Script as TR1Script;
+        script.FixPyramidSecretTrigger = false;
+
+        if (Settings.UseRecommendedCommunitySettings)
         {
-            TR1Script script = ScriptEditor.Script as TR1Script;
-            script.FixPyramidSecretTrigger = false;
-
-            if (Settings.UseRecommendedCommunitySettings)
+            script.Enable3dPickups = false;
+            if (Settings.HardSecrets || Settings.GlitchedSecrets)
             {
-                script.Enable3dPickups = false;
+                script.EnableBuffering = true;
             }
-
-            if (Settings.GlitchedSecrets)
-            {
-                script.FixDescendingGlitch = false;
-                script.FixQwopGlitch = false;
-                script.FixWallJumpGlitch = false;
-            }
-
-            ScriptEditor.SaveScript();
         }
+
+        if (Settings.GlitchedSecrets)
+        {
+            script.FixDescendingGlitch = false;
+            script.FixQwopGlitch = false;
+            script.FixWallJumpGlitch = false;
+        }
+
+        ScriptEditor.SaveScript();
     }
 
     private bool Are3DPickupsEnabled()
     {
-        return ScriptEditor.Edition.IsCommunityPatch
-            && !Settings.UseRecommendedCommunitySettings
+        return !Settings.UseRecommendedCommunitySettings
             && (ScriptEditor.Script as TR1Script).Enable3dPickups;
     }
 
@@ -356,9 +355,9 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
     {
         new EMTriggerFunction
         {
-            Locations = new List<EMLocation>
+            Locations = new()
             {
-                new EMLocation
+                new()
                 {
                     X = door.X,
                     Y = door.Y,
@@ -366,12 +365,12 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                     Room = door.Room
                 }
             },
-            Trigger = new EMTrigger
+            Trigger = new()
             {
                 TrigType = FDTrigType.Dummy,
-                Actions = new List<EMTriggerAction>
+                Actions = new()
                 {
-                    new EMTriggerAction
+                    new()
                     {
                         Parameter = (short)doorIndex
                     }
@@ -493,17 +492,17 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                 TR1Entity medi = ItemFactory.CreateItem(level.Name, level.Data.Entities, location, Settings.DevelopmentMode);
                 medi.TypeID = TR1Type.LargeMed_S_P;
             }
-            else if (ScriptEditor.Edition.IsCommunityPatch)
+            else
             {
-                level.Script.AddStartInventoryItem(TR1Items.LargeMedi);
+                level.Script.AddStartInventoryItem(TR1Items.LargeMed_S_P);
             }
         }
 
         // If we have also used a secret that requires damage and is glitched, add an additional
         // medi as these tend to occur where Lara has to drop far after picking them up.
-        if (locations.Any(l => l.RequiresDamage && l.RequiresGlitch) && ScriptEditor.Edition.IsCommunityPatch)
+        if (locations.Any(l => l.RequiresDamage && l.RequiresGlitch))
         {
-            level.Script.AddStartInventoryItem(TR1Items.SmallMedi);
+            level.Script.AddStartInventoryItem(TR1Items.SmallMed_S_P);
         }
     }
 
@@ -634,8 +633,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
 
         // Turn off walk-to-items in TR1X if we are placing on a slope above water.
-        if (ScriptEditor.Edition.IsCommunityPatch 
-            && !level.Data.Rooms[secret.Location.Room].ContainsWater
+        if (!level.Data.Rooms[secret.Location.Room].ContainsWater
             && secret.Location.IsSlipperySlope(level.Data, floorData))
         {
             (ScriptEditor as TR1ScriptEditor).WalkToItems = false;
@@ -864,7 +862,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                     TRSecretModelAllocation<TR1Type> allocation = _importAllocations[level];
 
                     // Get the artefacts into the level and refresh the model list
-                    TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                    TR1ModelImporter importer = new(true)
                     {
                         Level = level.Data,
                         LevelName = level.Name,
@@ -890,7 +888,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
                         if (secretModelType == TR1Type.SecretScion_M_H && _outer.Are3DPickupsEnabled())
                         {
-                            // T1M embeds scions into the ground when they are puzzle/key types in 3D mode,
+                            // TR1X embeds scions into the ground when they are puzzle/key types in 3D mode,
                             // so we counteract that here to avoid uncollectable items.
                             TRMesh scionMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, puzzleModelType);
                             foreach (TRVertex vertex in scionMesh.Vertices)

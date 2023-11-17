@@ -171,7 +171,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             _persistentWireColour = _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
         }
 
-        bool has3DPickups = ScriptEditor.Edition.IsCommunityPatch && (ScriptEditor as TR1ScriptEditor).Enable3dPickups;
+        bool has3DPickups = (ScriptEditor as TR1ScriptEditor).Enable3dPickups;
         foreach (WireframeData data in _wireframeData.Values.ToList())
         {
             data.Has3DPickups = has3DPickups;
@@ -269,7 +269,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
 
     private void RandomizeWater(TR1CombinedLevel level)
     {
-        if (!Settings.RandomizeWaterColour || !ScriptEditor.Edition.IsCommunityPatch)
+        if (!Settings.RandomizeWaterColour)
         {
             return;
         }
@@ -306,12 +306,12 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
         internal TextureProcessor(TR1TextureRandomizer outer)
             : base(outer)
         {
-            _holders = new Dictionary<TR1CombinedLevel, TextureHolder<TR1Type, TR1Level>>();
-            _landmarkImporter = new TR1LandmarkImporter
+            _holders = new();
+            _landmarkImporter = new()
             {
-                IsCommunityPatch = _outer.ScriptEditor.Edition.IsCommunityPatch
+                IsCommunityPatch = true
             };
-            _wireframer = new TR1Wireframer();
+            _wireframer = new();
         }
 
         internal void AddLevel(TR1CombinedLevel level)
@@ -341,7 +341,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             DynamicTextureBuilder dynamicBuilder = new()
             {
                 RetainMainTextures = _outer.Settings.RetainMainLevelTextures,
-                IsCommunityPatch = _outer.ScriptEditor.Edition.IsCommunityPatch
+                IsCommunityPatch = true
             };
             foreach (TR1CombinedLevel level in levels)
             {

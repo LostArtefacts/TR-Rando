@@ -156,7 +156,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
         }
 
-        if (ScriptEditor.Edition.IsCommunityPatch && _braidLevels.Count > 0)
+        if (_braidLevels.Count > 0)
         {
             (ScriptEditor.Script as TR1Script).EnableBraid = true;
         }
@@ -164,7 +164,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
     private bool IsBraidLevel(TR1ScriptedLevel lvl)
     {
-        return ScriptEditor.Edition.IsCommunityPatch && _braidLevels.Contains(lvl);
+        return _braidLevels.Contains(lvl);
     }
 
     private bool IsInvisibleLevel(TR1ScriptedLevel lvl)
@@ -289,7 +289,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private void ImportBraid(TR1CombinedLevel level)
         {
-            TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
+            TR1ModelImporter importer = new(true)
             {
                 Level = level.Data,
                 LevelName = level.Name,
@@ -381,7 +381,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             ponytail.NumMeshes *= 2;
         }
 
-        private void HideEntities(TR1CombinedLevel level, IEnumerable<TR1Type> entities)
+        private static void HideEntities(TR1CombinedLevel level, IEnumerable<TR1Type> entities)
         {
             MeshEditor editor = new();
             foreach (TR1Type ent in entities)
@@ -459,8 +459,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
 
             // Not supported before 2.13, so don't make any changes to Lara here.
-            Version t1mVersion = _outer.ScriptEditor.Edition.ExeVersion;
-            if (t1mVersion == null || t1mVersion < _minBraidCutsceneVersion)
+            Version tr1xVersion = _outer.ScriptEditor.Edition.ExeVersion;
+            if (tr1xVersion == null || tr1xVersion < _minBraidCutsceneVersion)
             {
                 return false;
             }
@@ -587,7 +587,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             if (level.HasCutScene)
             {
-                TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                TR1ModelImporter importer = new(true)
                 {
                     Level = level.CutSceneLevel.Data,
                     LevelName = level.CutSceneLevel.Name,
@@ -667,7 +667,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             if (level.HasCutScene)
             {
-                TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                TR1ModelImporter importer = new(true)
                 {
                     Level = level.CutSceneLevel.Data,
                     LevelName = level.CutSceneLevel.Name,
@@ -851,7 +851,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             if (level.HasCutScene && !level.Is(TR1LevelNames.MINES))
             {
-                TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                TR1ModelImporter importer = new(true)
                 {
                     Level = level.CutSceneLevel.Data,
                     LevelName = level.CutSceneLevel.Name,

@@ -101,7 +101,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private SpriteRandoMode _spriteRandoMode;
     private bool _randomizeItemSprites, _randomizeKeyItemSprites, _randomizeSecretSprites;
 
-    #region T1M Sepcifics
+    #region TR1X Sepcifics
 
     private bool _enableGameModes;
     public bool EnableGameModes
@@ -874,6 +874,72 @@ public class ControllerOptions : INotifyPropertyChanged
         set
         {
             _loadMusicTriggers = value;
+            FirePropertyChanged();
+        }
+    }
+
+    private bool _convertDroppedGuns;
+    public bool ConvertDroppedGuns
+    {
+        get => _convertDroppedGuns;
+        set
+        {
+            _convertDroppedGuns = value;
+            FirePropertyChanged();
+        }
+    }
+
+    private bool _enableUwRoll;
+    public bool EnableUwRoll
+    {
+        get => _enableUwRoll;
+        set
+        {
+            _enableUwRoll = value;
+            FirePropertyChanged();
+        }
+    }
+
+    private bool _enableEidosLogo;
+    public bool EnableEidosLogo
+    {
+        get => _enableEidosLogo;
+        set
+        {
+            _enableEidosLogo = value;
+            FirePropertyChanged();
+        }
+    }
+
+    private bool _enableBuffering;
+    public bool EnableBuffering
+    {
+        get => _enableBuffering;
+        set
+        {
+            _enableBuffering = value;
+            FirePropertyChanged();
+        }
+    }
+
+    private bool _enableLeanJumping;
+    public bool EnableLeanJumping
+    {
+        get => _enableLeanJumping;
+        set
+        {
+            _enableLeanJumping = value;
+            FirePropertyChanged();
+        }
+    }
+
+    private bool _enableConsole;
+    public bool EnableConsole
+    {
+        get => _enableConsole;
+        set
+        {
+            _enableConsole = value;
             FirePropertyChanged();
         }
     }
@@ -3397,7 +3463,7 @@ public class ControllerOptions : INotifyPropertyChanged
         RandomizeKeyItemSprites = _controller.RandomizeKeyItemSprites;
         RandomizeSecretSprites = _controller.RandomizeSecretSprites;
 
-        if (IsTR1Main)
+        if (IsTR1)
         {
             EnableGameModes = _controller.EnableGameModes;
             EnableSaveCrystals = _controller.EnableSaveCrystals;
@@ -3467,6 +3533,12 @@ public class ControllerOptions : INotifyPropertyChanged
             FixBearAi = _controller.FixBearAi;
             LoadCurrentMusic = _controller.LoadCurrentMusic;
             LoadMusicTriggers = _controller.LoadMusicTriggers;
+            ConvertDroppedGuns = _controller.ConvertDroppedGuns;
+            EnableUwRoll = _controller.EnableUwRoll;
+            EnableEidosLogo = _controller.EnableEidosLogo;
+            EnableBuffering = _controller.EnableBuffering;
+            EnableLeanJumping = _controller.EnableLeanJumping;
+            EnableConsole = _controller.EnableConsole;
         }
 
         FireSupportPropertiesChanged();
@@ -3696,7 +3768,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.RandomizeKeyItemSprites = RandomizeKeyItemSprites;
         _controller.RandomizeSecretSprites = RandomizeSecretSprites;
 
-        if (IsTR1Main)
+        if (IsTR1)
         {
             _controller.EnableGameModes = EnableGameModes;
             _controller.EnableSaveCrystals = EnableSaveCrystals;
@@ -3766,6 +3838,12 @@ public class ControllerOptions : INotifyPropertyChanged
             _controller.FixBearAi = FixBearAi;
             _controller.LoadCurrentMusic = LoadCurrentMusic;
             _controller.LoadMusicTriggers = LoadMusicTriggers;
+            _controller.ConvertDroppedGuns = ConvertDroppedGuns;
+            _controller.EnableUwRoll = EnableUwRoll;
+            _controller.EnableEidosLogo = EnableEidosLogo;
+            _controller.EnableBuffering = EnableBuffering;
+            _controller.EnableLeanJumping = EnableLeanJumping;
+            _controller.EnableConsole = EnableConsole;
         }
     }
 
@@ -3778,7 +3856,6 @@ public class ControllerOptions : INotifyPropertyChanged
     private static readonly string _supportPropertyFormat = "Is{0}TypeSupported";
 
     public bool IsTR1 => _controller != null && _controller.IsTR1;
-    public bool IsTR1Main => IsTR1 && _controller.IsCommunityPatch;
     public bool IsTR2 => _controller != null && _controller.IsTR2;
     public bool IsTR3 => _controller != null && _controller.IsTR3;
     public bool IsTR3Main => IsTR3 && _controller.IsCommunityPatch;
@@ -3853,7 +3930,6 @@ public class ControllerOptions : INotifyPropertyChanged
         FirePropertyChanged(nameof(IsTR2));
         FirePropertyChanged(nameof(IsTR3));
 
-        FirePropertyChanged(nameof(IsTR1Main));
         FirePropertyChanged(nameof(IsTR3Main));
 
         AdjustAvailableOptions();

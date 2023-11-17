@@ -14,6 +14,30 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR1ItemRandomizer : BaseTR1Randomizer
 {
+    public const int TihocanPierreIndex = 82;
+
+    public static readonly List<TR1Entity> TihocanEndItems = new()
+    {
+        new()
+        {
+            TypeID = TR1Type.Key1_S_P,
+            X = 30208,
+            Y = 2560,
+            Z = 91648,
+            Room = 110,
+            Intensity = 6144
+        },
+        new ()
+        {
+            TypeID = TR1Type.ScionPiece2_S_P,
+            X = 34304,
+            Y = 2560,
+            Z = 91648,
+            Room = 110,
+            Intensity = 6144
+        }
+    };
+
     // The number of extra pickups to add per level
     private static readonly Dictionary<string, int> _extraItemCounts = new()
     {
@@ -115,9 +139,11 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             }
         }
 
-        if (ScriptEditor.Edition.IsCommunityPatch && Settings.UseRecommendedCommunitySettings)
+        if (Settings.UseRecommendedCommunitySettings)
         {
-            (ScriptEditor.Script as TR1Script).Enable3dPickups = false;
+            TR1Script script = ScriptEditor.Script as TR1Script;
+            script.Enable3dPickups = false;
+            script.ConvertDroppedGuns = true;
             ScriptEditor.SaveScript();
         }
     }
@@ -198,6 +224,21 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
         List<TR1Type> stdItemTypes = TR1TypeUtilities.GetStandardPickupTypes();
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P); // Sprite/model not available
+
+        // Randomize scripted item drops if we have default enemies.
+        foreach (TR1Entity enemy in level.Data.Entities.Where(e => TR1TypeUtilities.IsEnemyType(e.TypeID)))
+        {
+            int enemyIndex = level.Data.Entities.IndexOf(enemy);
+            TR1ItemDrop drop = level.Script.ItemDrops.Find(d => d.EnemyNum == enemyIndex);
+            for (int i = 0; i < drop?.ObjectIds.Count; i++)
+            {
+                TR1Type dropType = ItemUtilities.ConvertToEntity(drop.ObjectIds[i]);
+                if (stdItemTypes.Contains(dropType))
+                {
+                    drop.ObjectIds[i] = ItemUtilities.ConvertToScriptItem(stdItemTypes[_generator.Next(0, stdItemTypes.Count)]);
+                }
+            }
+        }
 
         bool hasPistols = level.Data.Entities.Any(e => e.TypeID == TR1Type.Pistols_S_P);
 
@@ -285,6 +326,14 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             return;
         }
 
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level.Data);
+
+        // TR1X allows us to keep the end-level stats accurate. All generated locations
+        // should be reachable, but this may be modifed in TestEnemyItemDrop where items
+        // are hidden.
+        level.Script.UnobtainablePickups = null;
+
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (_secretMapping.RewardEntities.Contains(i)
@@ -299,14 +348,8 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             {
                 _picker.RandomizePickupLocation(entity);
                 entity.Intensity = 0;
+                TestEnemyItemDrop(level, entity, floorData);
             }
-        }
-
-        if (ScriptEditor.Edition.IsCommunityPatch)
-        {
-            // T1M allows us to keep the end-level stats accurate. All generated locations
-            // should be reachable.
-            level.Script.UnobtainablePickups = null;
         }
     }
 
@@ -356,25 +399,83 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
         _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, true), Settings, _generator);
 
+        if (level.Is(TR1LevelNames.TIHOCAN))
+        {
+            // Enemy rando may not be selected or Pierre may have ended up at the
+            // end as usual. Remove his key and scion drops and place them as items.
+            if (level.Data.Entities[TihocanPierreIndex].TypeID == TR1Type.Pierre)
+            {
+                level.Script.ItemDrops.Find(d => d.EnemyNum == TihocanPierreIndex)?.ObjectIds
+                    .RemoveAll(e => TihocanEndItems.Select(i => ItemUtilities.ConvertToScriptItem(i.TypeID)).Contains(e));
+            }
+            level.Data.Entities.AddRange(TihocanEndItems);
+        }
+
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR1Entity entity = level.Data.Entities[i];
-            if (!TR1TypeUtilities.IsKeyItemType(entity.TypeID)
+            if (!IsMovableKeyItem(level, entity)
                 || ItemFactory.IsItemLocked(level.Name, i))
             {
                 continue;
             }
 
-            _picker.RandomizeKeyItemLocation(
-                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData),
+            bool hasPickupTrigger = LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData);
+            _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger,
                 level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
+
+            if (Settings.AllowEnemyKeyDrops && !hasPickupTrigger)
+            {
+                TestEnemyItemDrop(level, entity, floorData);
+            }
         }
+    }
+
+    private void TestEnemyItemDrop(TR1CombinedLevel level, TR1Entity entity, FDControl floorData)
+    {
+        TRRoomSector sectorFunc(Location loc) =>
+            FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
+
+        // There may be several enemies in one spot e.g. in cloned enemy mode. Pick one
+        // at random for each call of this method. Always exclude empty eggs.
+
+        Location floor = entity.GetFloorLocation(sectorFunc);
+        List<TR1Entity> enemies = level.Data.Entities
+            .FindAll(e => TR1TypeUtilities.IsEnemyType(e.TypeID) || e.TypeID == TR1Type.AdamEgg)
+            .FindAll(e => e.GetFloorLocation(sectorFunc).IsEquivalent(floor));
+
+        if (enemies.Count == 0 || enemies.All(e => !TR1EnemyUtilities.CanDropItems(e, level, floorData)))
+        {
+            return;
+        }
+
+        TR1Entity enemy;
+        do
+        {
+            enemy = enemies[_generator.Next(0, enemies.Count)];
+        }
+        while (!TR1EnemyUtilities.CanDropItems(enemy, level, floorData));
+
+        level.Script.AddItemDrops(level.Data.Entities.IndexOf(enemy), ItemUtilities.ConvertToScriptItem(entity.TypeID));
+        ItemUtilities.HideEntity(entity);
+
+        // Retain the type for quick lookup in trview, but mark it as OOB for the stats.
+        if (!level.Script.UnobtainablePickups.HasValue)
+        {
+            level.Script.UnobtainablePickups = 0;
+        }
+        level.Script.UnobtainablePickups++;
+    }
+
+    private static bool IsMovableKeyItem(TR1CombinedLevel level, TR1Entity entity)
+    {
+        return TR1TypeUtilities.IsKeyItemType(entity.TypeID)
+            || (level.Is(TR1LevelNames.TIHOCAN) && entity.TypeID == TR1Type.ScionPiece2_S_P);
     }
 
     private void RandomizeSprites()
     {
-        if (ScriptEditor.Edition.IsCommunityPatch
-            && !Settings.UseRecommendedCommunitySettings
+        if (!Settings.UseRecommendedCommunitySettings
             && (ScriptEditor.Script as TR1Script).Enable3dPickups)
         {
             // With 3D pickups enabled, sprite randomization is meaningless

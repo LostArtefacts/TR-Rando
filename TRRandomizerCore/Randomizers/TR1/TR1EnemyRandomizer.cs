@@ -52,9 +52,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             RandomizeExistingEnemies();
         }
 
-        if (ScriptEditor.Edition.IsCommunityPatch)
+        TR1Script script = ScriptEditor.Script as TR1Script;
+        script.DisableTrexCollision = true;
+        if (Settings.UseRecommendedCommunitySettings)
         {
-            (ScriptEditor.Script as TR1Script).DisableTrexCollision = true;
+            script.ConvertDroppedGuns = true;
         }
     }
 
@@ -239,14 +241,13 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // looping infinitely if it's not possible to fill to capacity
         ISet<TR1Type> testedEntities = new HashSet<TR1Type>();
         List<TR1Type> eggEntities = TR1TypeUtilities.GetAtlanteanEggEnemies();
-        bool isTomb1Main = ScriptEditor.Edition.IsCommunityPatch;
         while (newEntities.Count < newEntities.Capacity && testedEntities.Count < allEnemies.Count)
         {
             TR1Type entity = allEnemies[_generator.Next(0, allEnemies.Count)];
             testedEntities.Add(entity);
 
             // Make sure this isn't known to be unsupported in the level
-            if (!TR1EnemyUtilities.IsEnemySupported(level.Name, entity, difficulty, isTomb1Main))
+            if (!TR1EnemyUtilities.IsEnemySupported(level.Name, entity, difficulty))
             {
                 continue;
             }
@@ -323,7 +324,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             // Make sure we have an unrestricted enemy available for the individual level conditions. This will
             // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
             bool RestrictionCheck(TR1Type e) =>
-                !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, isTomb1Main)
+                !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty)
                 || newEntities.Contains(e)
                 || TR1TypeUtilities.IsWaterCreature(e)
                 || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)
@@ -380,7 +381,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
     private TR1Type SelectRequiredEnemy(List<TR1Type> pool, TR1CombinedLevel level, RandoDifficulty difficulty)
     {
-        pool.RemoveAll(e => !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, ScriptEditor.Edition.IsCommunityPatch));
+        pool.RemoveAll(e => !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty));
 
         TR1Type entity;
         if (pool.All(_excludedEnemies.Contains))
@@ -444,6 +445,9 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     private void RandomizeEnemies(TR1CombinedLevel level, EnemyRandomizationCollection enemies)
     {
         AmendAtlanteanModels(level, enemies);
+
+        // Clear all default enemy item drops
+        level.Script.ItemDrops.Clear();
 
         // Get a list of current enemy entities
         List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
@@ -646,7 +650,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         }
                     }
 
-                    currentEntity.CodeBits = AtlanteanToCodeBits(spawnType);
+                    currentEntity.CodeBits = TR1EnemyUtilities.AtlanteanToCodeBits(spawnType);
                     if (eggLocation != null)
                     {
                         currentEntity.X = eggLocation.X;
@@ -683,18 +687,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 currentEntity.Invisible = true;
             }
 
-            if (newEntityType == TR1Type.Pierre)
-            {
-                // Pierre will always be OneShot (see SetEntityTriggers) for the time being, because placement
-                // of runaway Pierres is awkward - only one can be active at a time.
-
-                // He is hard-coded to drop Key1, so add a string if this level doesn't have one.
-                if (ScriptEditor.Edition.IsCommunityPatch && level.Script.Keys.Count == 0)
-                {
-                    level.Script.Keys.Add("Pierre's Spare Key");
-                }
-            }
-
             // Make sure to convert back to the actual type
             currentEntity.TypeID = TR1TypeUtilities.TranslateAlias(newEntityType);
 
@@ -710,18 +702,19 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             FixColosseumBats(level);
         }
 
-        if (level.Is(TR1LevelNames.TIHOCAN) && level.Data.Entities[82].TypeID != TR1Type.Pierre)
+        if (level.Is(TR1LevelNames.TIHOCAN) && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
         {
-            // Add a guaranteed key at the end of the level. Item rando can reposition it.
-            level.Data.Entities.Add(new()
+            if (TR1EnemyUtilities.CanDropItems(level.Data.Entities[TR1ItemRandomizer.TihocanPierreIndex], level, floorData))
             {
-                TypeID = TR1Type.Key1_S_P,
-                X = 30208,
-                Y = 2560,
-                Z = 91648,
-                Room = 110,
-                Intensity = 6144
-            });
+                // Whichever enemy has taken Pierre's place will drop the items.
+                level.Script.AddItemDrops(TR1ItemRandomizer.TihocanPierreIndex, TR1ItemRandomizer.TihocanEndItems
+                    .Select(e => ItemUtilities.ConvertToScriptItem(e.TypeID)));
+            }
+            else
+            {
+                // Add physical pickups - this means item rando is off, so these won't move.
+                level.Data.Entities.AddRange(TR1ItemRandomizer.TihocanEndItems);
+            }
         }
 
         // Fix missing OG animation SFX
@@ -733,7 +726,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         // Add extra ammo based on this level's difficulty
-        if (Settings.CrossLevelEnemies && ScriptEditor.Edition.IsCommunityPatch && level.Script.RemovesWeapons)
+        if (Settings.CrossLevelEnemies && level.Script.RemovesWeapons)
         {
             AddUnarmedLevelAmmo(level);
         }
@@ -757,7 +750,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
             else if (type == TR1Type.AdamEgg || type == TR1Type.AtlanteanEgg)
             {
-                TR1Type eggType = CodeBitsToAtlantean(entity.CodeBits);
+                TR1Type eggType = TR1EnemyUtilities.CodeBitsToAtlantean(entity.CodeBits);
                 if (eggType == translatedType && Array.Find(level.Data.Models, m => m.ID == (uint)eggType) != null)
                 {
                     count++;
@@ -765,30 +758,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
         }
         return count;
-    }
-
-    private static ushort AtlanteanToCodeBits(TR1Type atlantean)
-    {
-        return atlantean switch
-        {
-            TR1Type.ShootingAtlantean_N => 1,
-            TR1Type.Centaur => 2,
-            TR1Type.Adam => 4,
-            TR1Type.NonShootingAtlantean_N => 8,
-            _ => 0,
-        };
-    }
-
-    private static TR1Type CodeBitsToAtlantean(ushort codeBits)
-    {
-        return codeBits switch
-        {
-            1 => TR1Type.ShootingAtlantean_N,
-            2 => TR1Type.Centaur,
-            4 => TR1Type.Adam,
-            8 => TR1Type.NonShootingAtlantean_N,
-            _ => TR1Type.FlyingAtlantean,
-        };
     }
 
     private static bool IsEnemyInOrAboveWater(TR1Entity entity, TR1Level level, FDControl floorData)
@@ -1009,7 +978,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             {
                 TR1Entity resultantEnemy = new()
                 {
-                    TypeID = CodeBitsToAtlantean(entity.CodeBits)
+                    TypeID = TR1EnemyUtilities.CodeBitsToAtlantean(entity.CodeBits)
                 };
 
                 // Only include it if the model is present i.e. it's not an empty egg.
@@ -1270,7 +1239,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // entities inside the egg that will have already been accounted for.
         TR1Entity adamEgg = level.Data.Entities.Find(e => e.TypeID == TR1Type.AdamEgg);
         if (adamEgg != null
-            && CodeBitsToAtlantean(adamEgg.CodeBits) == TR1Type.Adam
+            && TR1EnemyUtilities.CodeBitsToAtlantean(adamEgg.CodeBits) == TR1Type.Adam
             && Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.Adam) != null)
         {
             enemies.Add(adamEgg);
@@ -1360,7 +1329,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         importModels.Add(TR1Type.Missile3_H);
                     }
 
-                    TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                    TR1ModelImporter importer = new(true)
                     {
                         EntitiesToImport = importModels,
                         EntitiesToRemove = enemies.EntitiesToRemove,

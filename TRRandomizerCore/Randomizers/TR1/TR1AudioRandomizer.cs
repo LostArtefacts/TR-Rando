@@ -297,13 +297,12 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
 
     private void ImportSpeechSFX(TR1CombinedLevel level)
     {
-        if (!ScriptEditor.Edition.IsCommunityPatch
-            || !(ScriptEditor as TR1ScriptEditor).FixSpeechesKillingMusic)
+        if (!(ScriptEditor as TR1ScriptEditor).FixSpeechesKillingMusic)
         {
             return;
         }
 
-        // T1M can play enemy speeches as SFX to avoid killing the current
+        // TR1X can play enemy speeches as SFX to avoid killing the current
         // track, so ensure that the required data is in the level if any
         // of these are used on the floor.
 
@@ -352,11 +351,8 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
                 details.Wibble = true;
             }
 
-            if (ScriptEditor.Edition.IsCommunityPatch)
-            {
-                (ScriptEditor.Script as TR1Script).EnablePitchedSounds = true;
-                ScriptEditor.SaveScript();
-            }
+            (ScriptEditor as TR1ScriptEditor).EnablePitchedSounds = true;
+            ScriptEditor.SaveScript();
         }
     }
 }

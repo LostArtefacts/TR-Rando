@@ -381,75 +381,45 @@ public class TRRandomizerController
     }
     #endregion
 
-    #region T1M Specifics
+    #region TR1X Specifics
     public bool EnableGameModes
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableGameModes;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableGameModes = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableGameModes;
+        set => (ScriptEditor as TR1ScriptEditor).EnableGameModes = value;
     }
 
     public bool EnableSaveCrystals
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableSaveCrystals;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableSaveCrystals = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableSaveCrystals;
+        set => (ScriptEditor as TR1ScriptEditor).EnableSaveCrystals = value;
     }
 
     public double DemoDelay
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.DemoTime : -1;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.DemoTime = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).DemoTime;
+        set => (ScriptEditor as TR1ScriptEditor).DemoTime = value;
     }
 
     public double DrawDistanceFade
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.DrawDistanceFade : -1;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.DrawDistanceFade = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).DrawDistanceFade;
+        set => (ScriptEditor as TR1ScriptEditor).DrawDistanceFade = value;
     }
 
     public double DrawDistanceMax
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.DrawDistanceMax : -1;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.DrawDistanceMax = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).DrawDistanceMax;
+        set => (ScriptEditor as TR1ScriptEditor).DrawDistanceMax = value;
     }
 
     public double[] WaterColor
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.WaterColor : null;
+        get => (ScriptEditor as TR1ScriptEditor).WaterColor;
         set
         {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor && value.Length == 3)
+            if (value.Length == 3)
             {
-                tr1Editor.WaterColor = new double[]
+                (ScriptEditor as TR1ScriptEditor).WaterColor = new double[]
                 {
                     Math.Round(value[0], 2),
                     Math.Round(value[1], 2),
@@ -461,746 +431,410 @@ public class TRRandomizerController
 
     public bool DisableMagnums
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableMagnums;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.DisableMagnums = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).DisableMagnums;
+        set => (ScriptEditor as TR1ScriptEditor).DisableMagnums = value;
     }
 
     public bool DisableUzis
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableUzis;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.DisableUzis = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).DisableUzis;
+        set => (ScriptEditor as TR1ScriptEditor).DisableUzis = value;
     }
 
     public bool DisableShotgun
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableShotgun;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.DisableShotgun = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).DisableShotgun;
+        set => (ScriptEditor as TR1ScriptEditor).DisableShotgun = value;
     }
 
     public bool EnableDeathsCounter
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableDeathsCounter;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableDeathsCounter = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableDeathsCounter;
+        set => (ScriptEditor as TR1ScriptEditor).EnableDeathsCounter = value;
     }
 
     public bool EnableEnemyHealthbar
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableEnemyHealthbar;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableEnemyHealthbar = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableEnemyHealthbar;
+        set => (ScriptEditor as TR1ScriptEditor).EnableEnemyHealthbar = value;
     }
 
     public bool EnableEnhancedLook
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableEnhancedLook;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableEnhancedLook = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableEnhancedLook;
+        set => (ScriptEditor as TR1ScriptEditor).EnableEnhancedLook = value;
     }
 
     public bool EnableShotgunFlash
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableShotgunFlash;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableShotgunFlash = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableShotgunFlash;
+        set => (ScriptEditor as TR1ScriptEditor).EnableShotgunFlash = value;
     }
 
     public bool FixShotgunTargeting
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixShotgunTargeting;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixShotgunTargeting = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixShotgunTargeting;
+        set => (ScriptEditor as TR1ScriptEditor).FixShotgunTargeting = value;
     }
 
     public bool EnableNumericKeys
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableNumericKeys;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableNumericKeys = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableNumericKeys;
+        set => (ScriptEditor as TR1ScriptEditor).EnableNumericKeys = value;
     }
 
     public bool EnableTr3Sidesteps
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableTr3Sidesteps;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableTr3Sidesteps = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableTr3Sidesteps;
+        set => (ScriptEditor as TR1ScriptEditor).EnableTr3Sidesteps = value;
     }
 
     public bool EnableCheats
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableCheats;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableCheats = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableCheats;
+        set => (ScriptEditor as TR1ScriptEditor).EnableCheats = value;
     }
 
     public bool EnableDetailedStats
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableDetailedStats;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableDetailedStats = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableDetailedStats;
+        set => (ScriptEditor as TR1ScriptEditor).EnableDetailedStats = value;
     }
 
     public bool EnableCompassStats
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableCompassStats;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableCompassStats = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableCompassStats;
+        set => (ScriptEditor as TR1ScriptEditor).EnableCompassStats = value;
     }
 
     public bool EnableTotalStats
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableTotalStats;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableTotalStats = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableTotalStats;
+        set => (ScriptEditor as TR1ScriptEditor).EnableTotalStats = value;
     }
 
     public bool EnableTimerInInventory
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableTimerInInventory;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableTimerInInventory = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableTimerInInventory;
+        set => (ScriptEditor as TR1ScriptEditor).EnableTimerInInventory = value;
     }
 
     public bool EnableSmoothBars
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableSmoothBars;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableSmoothBars = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableSmoothBars;
+        set => (ScriptEditor as TR1ScriptEditor).EnableSmoothBars = value;
     }
 
     public bool EnableFadeEffects
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableFadeEffects;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableFadeEffects = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableFadeEffects;
+        set => (ScriptEditor as TR1ScriptEditor).EnableFadeEffects = value;
     }
 
     public TRMenuStyle MenuStyle
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.MenuStyle : TRMenuStyle.PC;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.MenuStyle = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).MenuStyle;
+        set => (ScriptEditor as TR1ScriptEditor).MenuStyle = value;
     }
 
     public TRHealthbarMode HealthbarShowingMode
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.HealthbarShowingMode : TRHealthbarMode.FlashingOrDefault;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.HealthbarShowingMode = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).HealthbarShowingMode;
+        set => (ScriptEditor as TR1ScriptEditor).HealthbarShowingMode = value;
     }
 
     public TRUILocation HealthbarLocation
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.HealthbarLocation : TRUILocation.TopLeft;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.HealthbarLocation = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).HealthbarLocation;
+        set => (ScriptEditor as TR1ScriptEditor).HealthbarLocation = value;
     }
 
     public TRUIColour HealthbarColor
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.HealthbarColor : TRUIColour.Red;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.HealthbarColor = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).HealthbarColor;
+        set => (ScriptEditor as TR1ScriptEditor).HealthbarColor = value;
     }
 
     public TRAirbarMode AirbarShowingMode
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AirbarShowingMode : TRAirbarMode.Default;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.AirbarShowingMode = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).AirbarShowingMode;
+        set => (ScriptEditor as TR1ScriptEditor).AirbarShowingMode = value;
     }
 
     public TRUILocation AirbarLocation
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AirbarLocation : TRUILocation.TopRight;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.AirbarLocation = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).AirbarLocation;
+        set => (ScriptEditor as TR1ScriptEditor).AirbarLocation = value;
     }
 
     public TRUIColour AirbarColor
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AirbarColor : TRUIColour.Blue;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.AirbarColor = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).AirbarColor;
+        set => (ScriptEditor as TR1ScriptEditor).AirbarColor = value;
     }
 
     public TRUILocation EnemyHealthbarLocation
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.EnemyHealthbarLocation : TRUILocation.BottomLeft;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnemyHealthbarLocation = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnemyHealthbarLocation;
+        set => (ScriptEditor as TR1ScriptEditor).EnemyHealthbarLocation = value;
     }
 
     public TRUIColour EnemyHealthbarColor
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.EnemyHealthbarColor : TRUIColour.Grey;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnemyHealthbarColor = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnemyHealthbarColor;
+        set => (ScriptEditor as TR1ScriptEditor).EnemyHealthbarColor = value;
     }
 
     public bool FixTihocanSecretSound
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixTihocanSecretSound;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixTihocanSecretSound = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixTihocanSecretSound;
+        set => (ScriptEditor as TR1ScriptEditor).FixTihocanSecretSound = value;
     }
 
     public bool FixPyramidSecretTrigger
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixPyramidSecretTrigger;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixPyramidSecretTrigger = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixPyramidSecretTrigger;
+        set => (ScriptEditor as TR1ScriptEditor).FixPyramidSecretTrigger = value;
     }
 
     public bool FixSecretsKillingMusic
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixSecretsKillingMusic;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixSecretsKillingMusic = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixSecretsKillingMusic;
+        set => (ScriptEditor as TR1ScriptEditor).FixSecretsKillingMusic = value;
     }
 
     public bool FixSpeechesKillingMusic
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixSpeechesKillingMusic;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixSpeechesKillingMusic = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixSpeechesKillingMusic;
+        set => (ScriptEditor as TR1ScriptEditor).FixSpeechesKillingMusic = value;
     }
 
     public bool FixDescendingGlitch
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixDescendingGlitch;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixDescendingGlitch = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixDescendingGlitch;
+        set => (ScriptEditor as TR1ScriptEditor).FixDescendingGlitch = value;
     }
 
     public bool FixWallJumpGlitch
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixWallJumpGlitch;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixWallJumpGlitch = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixWallJumpGlitch;
+        set => (ScriptEditor as TR1ScriptEditor).FixWallJumpGlitch = value;
     }
 
     public bool FixBridgeCollision
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixBridgeCollision;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixBridgeCollision = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixBridgeCollision;
+        set => (ScriptEditor as TR1ScriptEditor).FixBridgeCollision = value;
     }
 
     public bool FixQwopGlitch
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixQwopGlitch;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixQwopGlitch = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixQwopGlitch;
+        set => (ScriptEditor as TR1ScriptEditor).FixQwopGlitch = value;
     }
 
     public bool FixAlligatorAi
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixAlligatorAi;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixAlligatorAi = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixAlligatorAi;
+        set => (ScriptEditor as TR1ScriptEditor).FixAlligatorAi = value;
     }
 
     public bool ChangePierreSpawn
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.ChangePierreSpawn;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.ChangePierreSpawn = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).ChangePierreSpawn;
+        set => (ScriptEditor as TR1ScriptEditor).ChangePierreSpawn = value;
     }
 
     public int FovValue
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.FovValue : -1;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FovValue = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FovValue;
+        set => (ScriptEditor as TR1ScriptEditor).FovValue = value;
     }
 
     public bool FovVertical
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FovVertical;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FovVertical = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FovVertical;
+        set => (ScriptEditor as TR1ScriptEditor).FovVertical = value;
     }
 
     public bool EnableFmv
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableFmv;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableFmv = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableFmv;
+        set => (ScriptEditor as TR1ScriptEditor).EnableFmv = value;
     }
 
     public bool EnableCine
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableCine;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableCine = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableCine;
+        set => (ScriptEditor as TR1ScriptEditor).EnableCine = value;
     }
 
     public bool EnableMusicInMenu
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableMusicInMenu;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableMusicInMenu = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableMusicInMenu;
+        set => (ScriptEditor as TR1ScriptEditor).EnableMusicInMenu = value;
     }
 
     public bool EnableMusicInInventory
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableMusicInInventory;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableMusicInInventory = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableMusicInInventory;
+        set => (ScriptEditor as TR1ScriptEditor).EnableMusicInInventory = value;
     }
 
     public bool DisableTRexCollision
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableTrexCollision;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.DisableTrexCollision = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).DisableTrexCollision;
+        set => (ScriptEditor as TR1ScriptEditor).DisableTrexCollision = value;
     }
 
     public double AnisotropyFilter
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AnisotropyFilter : -1;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.AnisotropyFilter = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).AnisotropyFilter;
+        set => (ScriptEditor as TR1ScriptEditor).AnisotropyFilter = value;
     }
 
     public int ResolutionWidth
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.ResolutionWidth : -1;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.ResolutionWidth = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).ResolutionWidth;
+        set => (ScriptEditor as TR1ScriptEditor).ResolutionWidth = value;
     }
 
     public int ResolutionHeight
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.ResolutionHeight : -1;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.ResolutionHeight = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).ResolutionHeight;
+        set => (ScriptEditor as TR1ScriptEditor).ResolutionHeight = value;
     }
 
     public bool EnableRoundShadow
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableRoundShadow;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableRoundShadow = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableRoundShadow;
+        set => (ScriptEditor as TR1ScriptEditor).EnableRoundShadow = value;
     }
 
     public bool Enable3dPickups
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.Enable3dPickups;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.Enable3dPickups = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).Enable3dPickups;
+        set => (ScriptEditor as TR1ScriptEditor).Enable3dPickups = value;
     }
 
     public TRScreenshotFormat ScreenshotFormat
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.ScreenshotFormat : TRScreenshotFormat.JPG;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.ScreenshotFormat = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).ScreenshotFormat;
+        set => (ScriptEditor as TR1ScriptEditor).ScreenshotFormat = value;
     }
 
     public bool WalkToItems
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.WalkToItems;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.WalkToItems = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).WalkToItems;
+        set => (ScriptEditor as TR1ScriptEditor).WalkToItems = value;
     }
 
     public int MaximumSaveSlots
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.MaximumSaveSlots : 25;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.MaximumSaveSlots = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).MaximumSaveSlots;
+        set => (ScriptEditor as TR1ScriptEditor).MaximumSaveSlots = value;
     }
 
     public bool RevertToPistols
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.RevertToPistols;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.RevertToPistols = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).RevertToPistols;
+        set => (ScriptEditor as TR1ScriptEditor).RevertToPistols = value;
     }
 
     public bool EnableEnhancedSaves
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableEnhancedSaves;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableEnhancedSaves = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableEnhancedSaves;
+        set => (ScriptEditor as TR1ScriptEditor).EnableEnhancedSaves = value;
     }
 
     public bool EnablePitchedSounds
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnablePitchedSounds;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnablePitchedSounds = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnablePitchedSounds;
+        set => (ScriptEditor as TR1ScriptEditor).EnablePitchedSounds = value;
     }
 
     public bool EnableJumpTwists
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableJumpTwists;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableJumpTwists = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableJumpTwists;
+        set => (ScriptEditor as TR1ScriptEditor).EnableJumpTwists = value;
     }
 
     public bool EnableInvertedLook
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableInvertedLook;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableInvertedLook = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableInvertedLook;
+        set => (ScriptEditor as TR1ScriptEditor).EnableInvertedLook = value;
     }
 
     public int CameraSpeed
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.CameraSpeed : -1;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.CameraSpeed = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).CameraSpeed;
+        set => (ScriptEditor as TR1ScriptEditor).CameraSpeed = value;
     }
 
     public bool EnableSwingCancel
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableSwingCancel;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableSwingCancel = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableSwingCancel;
+        set => (ScriptEditor as TR1ScriptEditor).EnableSwingCancel = value;
     }
 
     public bool EnableTr2Jumping
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableTr2Jumping;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.EnableTr2Jumping = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).EnableTr2Jumping;
+        set => (ScriptEditor as TR1ScriptEditor).EnableTr2Jumping = value;
     }
 
     public bool FixBearAi
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixBearAi;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.FixBearAi = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).FixBearAi;
+        set => (ScriptEditor as TR1ScriptEditor).FixBearAi = value;
     }
 
     public bool LoadCurrentMusic
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.LoadCurrentMusic;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.LoadCurrentMusic = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).LoadCurrentMusic;
+        set => (ScriptEditor as TR1ScriptEditor).LoadCurrentMusic = value;
     }
 
     public bool LoadMusicTriggers
     {
-        get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.LoadMusicTriggers;
-        set
-        {
-            if (ScriptEditor is TR1ScriptEditor tr1Editor)
-            {
-                tr1Editor.LoadMusicTriggers = value;
-            }
-        }
+        get => (ScriptEditor as TR1ScriptEditor).LoadMusicTriggers;
+        set => (ScriptEditor as TR1ScriptEditor).LoadMusicTriggers = value;
+    }
+
+    public bool ConvertDroppedGuns
+    {
+        get => (ScriptEditor as TR1ScriptEditor).ConvertDroppedGuns;
+        set => (ScriptEditor as TR1ScriptEditor).ConvertDroppedGuns = value;
+    }
+
+    public bool EnableUwRoll
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableUwRoll;
+        set => (ScriptEditor as TR1ScriptEditor).EnableUwRoll = value;
+    }
+
+    public bool EnableEidosLogo
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableEidosLogo;
+        set => (ScriptEditor as TR1ScriptEditor).EnableEidosLogo = value;
+    }
+
+    public bool EnableBuffering
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableBuffering;
+        set => (ScriptEditor as TR1ScriptEditor).EnableBuffering = value;
+    }
+
+    public bool EnableLeanJumping
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableLeanJumping;
+        set => (ScriptEditor as TR1ScriptEditor).EnableLeanJumping = value;
+    }
+
+    public bool EnableConsole
+    {
+        get => (ScriptEditor as TR1ScriptEditor).EnableConsole;
+        set => (ScriptEditor as TR1ScriptEditor).EnableConsole = value;
     }
     #endregion
 

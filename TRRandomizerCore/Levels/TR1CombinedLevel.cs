@@ -14,7 +14,7 @@ public class TR1CombinedLevel
     public TR1Level Data { get; set; }
 
     /// <summary>
-    /// The scripting information for the level stored in Tomb1Main_gameflow.json5.
+    /// The scripting information for the level stored in TR1X_gameflow.json5.
     /// </summary>
     public TR1ScriptedLevel Script { get; set; }
 
