@@ -159,8 +159,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
                     TrigSetup = new FDTrigSetup { Value = 15872 },
                     TrigActionList = new List<FDActionListItem>
                     {
-                        new FDActionListItem
-                        {
+                        new() {
                             TrigAction = FDTrigAction.Object,
                             Parameter = (ushort)entityIndex
                         },

@@ -461,26 +461,22 @@ internal static class TR5FileReadUtilities
             NewFlags = reader.ReadUInt16(),
             Vertices = new TRObjectTextureVert[]
             {
-                new TRObjectTextureVert
-                {
+                new() {
                     XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
                     YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                 },
 
-                new TRObjectTextureVert
-                {
+                new() {
                     XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
                     YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                 },
 
-                new TRObjectTextureVert
-                {
+                new() {
                     XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
                     YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                 },
 
-                new TRObjectTextureVert
-                {
+                new() {
                     XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
                     YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                 }

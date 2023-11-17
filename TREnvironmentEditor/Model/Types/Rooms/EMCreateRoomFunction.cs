@@ -500,26 +500,22 @@ public class EMCreateRoomFunction : BaseEMFunction
     {
         return new List<TRVertex>
         {
-            new TRVertex
-            {
+            new() {
                 X = (short)(x * 1024),
                 Y = (short)y,
                 Z = (short)((z + 1) * 1024)
             },
-            new TRVertex
-            {
+            new() {
                 X = (short)((x + 1) * 1024),
                 Y = (short)y,
                 Z = (short)((z + 1) * 1024)
             },
-            new TRVertex
-            {
+            new() {
                 X = (short)((x + 1) * 1024),
                 Y = (short)y,
                 Z = (short)(z * 1024)
             },
-            new TRVertex
-            {
+            new() {
                 X = (short)(x * 1024),
                 Y = (short)y,
                 Z = (short)(z * 1024)
@@ -531,26 +527,22 @@ public class EMCreateRoomFunction : BaseEMFunction
     {
         return new List<TRVertex>
         {
-            new TRVertex
-            {
+            new() {
                 X = (short)(x * 1024),
                 Y = (short)(y - height),
                 Z = (short)(z * 1024)
             },
-            new TRVertex
-            {
+            new() {
                 X = (short)(x * 1024),
                 Y = (short)(y - height),
                 Z = (short)((z + 1) * 1024)
             },
-            new TRVertex
-            {
+            new() {
                 X = (short)(x * 1024),
                 Y = (short)y,
                 Z = (short)((z + 1) * 1024)
             },
-            new TRVertex
-            {
+            new() {
                 X = (short)(x * 1024),
                 Y = (short)y,
                 Z = (short)(z * 1024)
@@ -562,26 +554,22 @@ public class EMCreateRoomFunction : BaseEMFunction
     {
         return new List<TRVertex>
         {
-            new TRVertex
-            {
+            new() {
                 X = (short)(x * 1024),
                 Y = (short)(y - height),
                 Z = (short)(z * 1024)
             },
-            new TRVertex
-            {
+            new() {
                 X = (short)((x + 1) * 1024),
                 Y = (short)(y - height),
                 Z = (short)(z * 1024)
             },
-            new TRVertex
-            {
+            new() {
                 X = (short)((x + 1) * 1024),
                 Y = (short)y,
                 Z = (short)(z * 1024)
             },
-            new TRVertex
-            {
+            new() {
                 X = (short)(x * 1024),
                 Y = (short)y,
                 Z = (short)(z * 1024)

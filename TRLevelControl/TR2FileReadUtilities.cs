@@ -19,10 +19,10 @@ internal static class TR2FileReadUtilities
 
             Vertices = new TRVertex[]
             {
-                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
             }
         };
     }
@@ -224,26 +224,22 @@ internal static class TR2FileReadUtilities
             AtlasAndFlag = reader.ReadUInt16(),
             Vertices = new TRObjectTextureVert[]
             {
-                new TRObjectTextureVert 
-                {
+                new() {
                     XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
                     YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                 },
 
-                new TRObjectTextureVert
-                {
+                new() {
                     XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
                     YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                 },
 
-                new TRObjectTextureVert
-                {
+                new() {
                     XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
                     YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                 },
 
-                new TRObjectTextureVert
-                {
+                new() {
                     XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
                     YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                 }

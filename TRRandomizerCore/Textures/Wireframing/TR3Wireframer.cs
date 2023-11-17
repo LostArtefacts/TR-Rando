@@ -228,10 +228,10 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
             case SpecialTextureMode.CrashPadDiamond:
                 frame.Graphics.FillPolygon(pen.Brush, new Point[]
                 {
-                    new Point(32, 16),
-                    new Point(48, 32),
-                    new Point(32, 48),
-                    new Point(16, 32),
+                    new(32, 16),
+                    new(48, 32),
+                    new(32, 48),
+                    new(16, 32),
                 });
                 break;
         }

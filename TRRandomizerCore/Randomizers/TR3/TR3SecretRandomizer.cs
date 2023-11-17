@@ -295,8 +295,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             TrigType = FDTrigType.Dummy,
             TrigActionList = new List<FDActionListItem>
             {
-                new FDActionListItem
-                {
+                new() {
                     TrigAction = FDTrigAction.Object,
                     Parameter = doorIndex
                 }

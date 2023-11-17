@@ -78,8 +78,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         TR1Entity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];
         Locations = new List<EMLocation>
         {
-            new EMLocation
-            {
+            new() {
                 X = switchEntity.X,
                 Y = switchEntity.Y,
                 Z = switchEntity.Z,
@@ -104,8 +103,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         TR2Entity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];
         Locations = new List<EMLocation>
         {
-            new EMLocation
-            {
+            new() {
                 X = switchEntity.X,
                 Y = switchEntity.Y,
                 Z = switchEntity.Z,
@@ -130,8 +128,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         TR3Entity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];
         Locations = new List<EMLocation>
         {
-            new EMLocation
-            {
+            new() {
                 X = switchEntity.X,
                 Y = switchEntity.Y,
                 Z = switchEntity.Z,
