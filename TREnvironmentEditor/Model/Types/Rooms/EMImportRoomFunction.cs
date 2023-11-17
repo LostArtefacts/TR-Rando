@@ -12,7 +12,6 @@ namespace TREnvironmentEditor.Model.Types;
 public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 {
     private static readonly sbyte _solidSector = -127;
-    private static readonly byte _noRoom = 255;
 
     public byte RoomNumber { get; set; }
     public EMLocation NewLocation { get; set; }
@@ -242,8 +241,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 Ceiling = (sbyte)(roomDef.Room.SectorList[i].Ceiling + sectorYDiff),
                 FDIndex = 0, // Initialise to no FD
                 Floor = (sbyte)(roomDef.Room.SectorList[i].Floor + sectorYDiff),
-                RoomAbove = PreservePortals ? roomDef.Room.SectorList[i].RoomAbove : _noRoom,
-                RoomBelow = PreservePortals ? roomDef.Room.SectorList[i].RoomBelow : _noRoom
+                RoomAbove = PreservePortals ? roomDef.Room.SectorList[i].RoomAbove : (byte)TRConsts.NoRoom,
+                RoomBelow = PreservePortals ? roomDef.Room.SectorList[i].RoomBelow : (byte)TRConsts.NoRoom
             };
 
             // Duplicate the FD too for everything except triggers. Track any portals
@@ -515,8 +514,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 Ceiling = (sbyte)(roomDef.Room.Sectors[i].Ceiling + sectorYDiff),
                 FDIndex = 0, // Initialise to no FD
                 Floor = (sbyte)(roomDef.Room.Sectors[i].Floor + sectorYDiff),
-                RoomAbove = PreservePortals ? roomDef.Room.Sectors[i].RoomAbove : _noRoom,
-                RoomBelow = PreservePortals ? roomDef.Room.Sectors[i].RoomBelow : _noRoom
+                RoomAbove = PreservePortals ? roomDef.Room.Sectors[i].RoomAbove : (byte)TRConsts.NoRoom,
+                RoomBelow = PreservePortals ? roomDef.Room.Sectors[i].RoomBelow : (byte)TRConsts.NoRoom
             };
 
             // Duplicate the FD too for everything except triggers. Track any portals

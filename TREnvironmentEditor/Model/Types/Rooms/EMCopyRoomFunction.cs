@@ -12,7 +12,6 @@ public class EMCopyRoomFunction : BaseEMFunction
 {
     // Floor and ceiling of -127 on sectors means impenetrable walls around it
     private static readonly sbyte _solidSector = -127;
-    private static readonly byte _noRoom = 255;
 
     public short RoomIndex { get; set; }
     public EMLocation NewLocation { get; set; }
@@ -512,8 +511,8 @@ public class EMCopyRoomFunction : BaseEMFunction
             Ceiling = (sbyte)(ceiling + sectorYDiff),
             FDIndex = 0, // Initialise to no FD
             Floor = (sbyte)(floor + sectorYDiff),
-            RoomAbove = _noRoom,
-            RoomBelow = _noRoom
+            RoomAbove = TRConsts.NoRoom,
+            RoomBelow = TRConsts.NoRoom
         };
 
         // Duplicate the FD too for everything except triggers. Track any portals

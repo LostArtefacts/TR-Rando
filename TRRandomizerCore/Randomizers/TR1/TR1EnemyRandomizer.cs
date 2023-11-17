@@ -769,7 +769,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         // Example where we have to search is Midas room 21
         TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y - TRConsts.Step1, entity.Z, entity.Room, level, floorData);
-        while (sector.RoomBelow != 255)
+        while (sector.RoomBelow != TRConsts.NoRoom)
         {
             if (level.Rooms[sector.RoomBelow].ContainsWater)
             {
@@ -905,7 +905,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         int y = entity.Y;
         short room = entity.Room;
         TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, y, entity.Z, room, level, floorData);
-        while (sector.RoomBelow != 255)
+        while (sector.RoomBelow != TRConsts.NoRoom)
         {
             y = (sector.Floor + 1) * TRConsts.Step1;
             room = sector.RoomBelow;

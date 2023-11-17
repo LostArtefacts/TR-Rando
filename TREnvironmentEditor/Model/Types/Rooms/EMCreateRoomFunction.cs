@@ -311,8 +311,8 @@ public class EMCreateRoomFunction : BaseEMFunction
                     BoxIndex = ushort.MaxValue,
                     Ceiling = sectorCeiling,
                     Floor = sectorFloor,
-                    RoomAbove = 255,
-                    RoomBelow = 255
+                    RoomAbove = TRConsts.NoRoom,
+                    RoomBelow = TRConsts.NoRoom
                 });
             }
         }

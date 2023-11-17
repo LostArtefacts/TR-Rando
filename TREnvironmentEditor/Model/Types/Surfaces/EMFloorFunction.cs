@@ -190,7 +190,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         // Now shift the actual sector info and adjust the box if necessary.
         // Make the floor solid too.
         sector.Floor += Clicks;
-        sector.RoomBelow = 255;
+        sector.RoomBelow = TRConsts.NoRoom;
         AlterSectorBox(level, room, sectorIndex);
 
         // Move any entities that share the same floor sector up or down the relevant number of clicks
@@ -427,7 +427,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         // Now shift the actual sector info and adjust the box if necessary.
         // Make the floor solid too.
         sector.Floor += Clicks;
-        sector.RoomBelow = 255;
+        sector.RoomBelow = TRConsts.NoRoom;
         AlterSectorBox(level, room, sectorIndex);
 
         // Move any entities that share the same floor sector up or down the relevant number of clicks

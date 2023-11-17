@@ -107,7 +107,7 @@ public abstract class BaseEMFunction
         foreach (TRRoomSector sector in sectors)
         {
             byte roomNumber = above ? sector.RoomAbove : sector.RoomBelow;
-            if (roomNumber != 255)
+            if (roomNumber != TRConsts.NoRoom)
             {
                 rooms.Add(roomNumber);
             }

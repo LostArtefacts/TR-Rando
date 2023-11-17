@@ -8,8 +8,6 @@ namespace TRRandomizerCore.Utilities;
 
 public static class FaceUtilities
 {
-    private static readonly byte _noRoom = 255;
-
     public static List<TRFace4> GetTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
         FDControl floorData = new();
@@ -173,7 +171,7 @@ public static class FaceUtilities
                 }
             }
 
-            if (sector.RoomAbove != _noRoom)
+            if (sector.RoomAbove != TRConsts.NoRoom)
             {
                 TR2Room roomAbove = level.Rooms[sector.RoomAbove];
                 int wx = room.Info.X + x;
@@ -224,7 +222,7 @@ public static class FaceUtilities
                 }
             }
 
-            if (sector.RoomAbove != _noRoom)
+            if (sector.RoomAbove != TRConsts.NoRoom)
             {
                 TR3Room roomAbove = level.Rooms[sector.RoomAbove];
                 int wx = room.Info.X + x;
@@ -276,7 +274,7 @@ public static class FaceUtilities
                 }
             }
 
-            if (sector.RoomAbove != _noRoom)
+            if (sector.RoomAbove != TRConsts.NoRoom)
             {
                 TR3Room roomAbove = level.Rooms[sector.RoomAbove];
                 int wx = room.Info.X + x;

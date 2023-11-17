@@ -88,11 +88,11 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
     {
         if (sector.RoomBelow == Location1.Room || sector.RoomBelow == Location2.Room)
         {
-            sector.RoomBelow = 255;
+            sector.RoomBelow = TRConsts.NoRoom;
         }
         if (sector.RoomAbove == Location1.Room || sector.RoomAbove == Location2.Room)
         {
-            sector.RoomAbove = 255;
+            sector.RoomAbove = TRConsts.NoRoom;
         }
     }
 
