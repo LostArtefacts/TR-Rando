@@ -329,7 +329,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             }
         }
 
-        private void HideEntities(TR2CombinedLevel level, IEnumerable<TR2Type> entities)
+        private static void HideEntities(TR2CombinedLevel level, IEnumerable<TR2Type> entities)
         {
             MeshEditor editor = new();
             foreach (TR2Type ent in entities)

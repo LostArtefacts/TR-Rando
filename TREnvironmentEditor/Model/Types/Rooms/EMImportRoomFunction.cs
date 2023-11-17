@@ -3,6 +3,7 @@ using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
@@ -10,9 +11,6 @@ namespace TREnvironmentEditor.Model.Types;
 
 public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 {
-    private static readonly sbyte _solidSector = -127;
-    private static readonly byte _noRoom = 255;
-
     public byte RoomNumber { get; set; }
     public EMLocation NewLocation { get; set; }
     public EMLocation LinkedLocation { get; set; }
@@ -200,8 +198,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
 
             // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / SectorSize);
-            byte zmin = (byte)(newRoom.Info.Z / SectorSize);
+            byte xmin = (byte)(newRoom.Info.X / TRConsts.Step4);
+            byte zmin = (byte)(newRoom.Info.Z / TRConsts.Step4);
             byte xmax = (byte)(xmin + newRoom.NumXSectors);
             byte zmax = (byte)(zmin + newRoom.NumZSectors);
             TR2Box box = new()
@@ -226,9 +224,9 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             int sectorYDiff = 0;
             ushort sectorBoxIndex = roomDef.Room.SectorList[i].BoxIndex;
             // Only change the sector if it's not impenetrable and we don't want to preserve the existing zoning
-            if (roomDef.Room.SectorList[i].Ceiling != _solidSector || roomDef.Room.SectorList[i].Floor != _solidSector)
+            if (roomDef.Room.SectorList[i].Ceiling != TRConsts.WallClicks || roomDef.Room.SectorList[i].Floor != TRConsts.WallClicks)
             {
-                sectorYDiff = ydiff / ClickSize;
+                sectorYDiff = ydiff / TRConsts.Step1;
                 if (!PreserveBoxes)
                 {
                     sectorBoxIndex = newBoxIndex;
@@ -241,8 +239,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 Ceiling = (sbyte)(roomDef.Room.SectorList[i].Ceiling + sectorYDiff),
                 FDIndex = 0, // Initialise to no FD
                 Floor = (sbyte)(roomDef.Room.SectorList[i].Floor + sectorYDiff),
-                RoomAbove = PreservePortals ? roomDef.Room.SectorList[i].RoomAbove : _noRoom,
-                RoomBelow = PreservePortals ? roomDef.Room.SectorList[i].RoomBelow : _noRoom
+                RoomAbove = PreservePortals ? roomDef.Room.SectorList[i].RoomAbove : (byte)TRConsts.NoRoom,
+                RoomBelow = PreservePortals ? roomDef.Room.SectorList[i].RoomBelow : (byte)TRConsts.NoRoom
             };
 
             // Duplicate the FD too for everything except triggers. Track any portals
@@ -259,7 +257,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                         case FDFunctions.PortalSector:
                             // This portal will no longer be valid in the new room's position,
                             // so block off the wall
-                            newRoom.SectorList[i].Floor = newRoom.SectorList[i].Ceiling = _solidSector;
+                            newRoom.SectorList[i].Floor = newRoom.SectorList[i].Ceiling = TRConsts.WallClicks;
                             break;
                         case FDFunctions.FloorSlant:
                             FDSlantEntry slantEntry = entry as FDSlantEntry;
@@ -468,8 +466,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
 
             // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / SectorSize);
-            byte zmin = (byte)(newRoom.Info.Z / SectorSize);
+            byte xmin = (byte)(newRoom.Info.X / TRConsts.Step4);
+            byte zmin = (byte)(newRoom.Info.Z / TRConsts.Step4);
             byte xmax = (byte)(xmin + newRoom.NumXSectors);
             byte zmax = (byte)(zmin + newRoom.NumZSectors);
             TR2Box box = new()
@@ -499,9 +497,9 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             int sectorYDiff = 0;
             ushort sectorBoxIndex = roomDef.Room.Sectors[i].BoxIndex;
             // Only change the sector if it's not impenetrable
-            if (roomDef.Room.Sectors[i].Ceiling != _solidSector || roomDef.Room.Sectors[i].Floor != _solidSector)
+            if (roomDef.Room.Sectors[i].Ceiling != TRConsts.WallClicks || roomDef.Room.Sectors[i].Floor != TRConsts.WallClicks)
             {
-                sectorYDiff = ydiff / ClickSize;
+                sectorYDiff = ydiff / TRConsts.Step1;
                 if (!PreserveBoxes)
                 {
                     sectorBoxIndex = newBoxIndex;
@@ -514,8 +512,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 Ceiling = (sbyte)(roomDef.Room.Sectors[i].Ceiling + sectorYDiff),
                 FDIndex = 0, // Initialise to no FD
                 Floor = (sbyte)(roomDef.Room.Sectors[i].Floor + sectorYDiff),
-                RoomAbove = PreservePortals ? roomDef.Room.Sectors[i].RoomAbove : _noRoom,
-                RoomBelow = PreservePortals ? roomDef.Room.Sectors[i].RoomBelow : _noRoom
+                RoomAbove = PreservePortals ? roomDef.Room.Sectors[i].RoomAbove : (byte)TRConsts.NoRoom,
+                RoomBelow = PreservePortals ? roomDef.Room.Sectors[i].RoomBelow : (byte)TRConsts.NoRoom
             };
 
             // Duplicate the FD too for everything except triggers. Track any portals
@@ -532,7 +530,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                         case FDFunctions.PortalSector:
                             // This portal will no longer be valid in the new room's position,
                             // so block off the wall
-                            newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = _solidSector;
+                            newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = TRConsts.WallClicks;
                             break;
                         case FDFunctions.FloorSlant:
                             FDSlantEntry slantEntry = entry as FDSlantEntry;

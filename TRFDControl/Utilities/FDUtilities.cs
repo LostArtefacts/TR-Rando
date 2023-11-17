@@ -451,14 +451,14 @@ public static class FDUtilities
         if (floorData.Entries[sector.FDIndex].Find(e => e is TR3TriangulationEntry) is TR3TriangulationEntry triangulation)
         {
             FDFunctions func = (FDFunctions)triangulation.Setup.Value;
-            int dx = x & 1023;
-            int dz = z & 1023;
+            int dx = x & (TRConsts.Step4 - 1);
+            int dz = z & (TRConsts.Step4 - 1);
 
-            if (func == FDFunctions.FloorTriangulationNWSE_SW && dx <= (1024 - dz))
+            if (func == FDFunctions.FloorTriangulationNWSE_SW && dx <= (TRConsts.Step4 - dz))
             {
                 return -1;
             }
-            else if (func == FDFunctions.FloorTriangulationNWSE_NE && dx > (1024 - dz))
+            else if (func == FDFunctions.FloorTriangulationNWSE_NE && dx > (TRConsts.Step4 - dz))
             {
                 return -1;
             }
@@ -487,14 +487,14 @@ public static class FDUtilities
         if (floorData.Entries[sector.FDIndex].Find(e => e is TR3TriangulationEntry) is TR3TriangulationEntry triangulation)
         {
             FDFunctions func = (FDFunctions)triangulation.Setup.Value;
-            int dx = x & 1023;
-            int dz = z & 1023;
+            int dx = x & (TRConsts.Step4 - 1);
+            int dz = z & (TRConsts.Step4 - 1);
 
-            if (func == FDFunctions.CeilingTriangulationNW_SW && dx <= (1024 - dz))
+            if (func == FDFunctions.CeilingTriangulationNW_SW && dx <= (TRConsts.Step4 - dz))
             {
                 return -1;
             }
-            else if (func == FDFunctions.CeilingTriangulationNW_NE && dx > (1024 - dz))
+            else if (func == FDFunctions.CeilingTriangulationNW_NE && dx > (TRConsts.Step4 - dz))
             {
                 return -1;
             }

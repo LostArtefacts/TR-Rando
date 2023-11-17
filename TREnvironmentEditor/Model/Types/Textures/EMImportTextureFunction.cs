@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using TRLevelControl;
 using TRLevelControl.Model;
 using TRTexture16Importer;
 using TRTexture16Importer.Helpers;
@@ -30,7 +31,7 @@ public class EMImportTextureFunction : BaseEMFunction
                 c = palette[colIndex];
             }
 
-            level.Images8[Tile].Pixels[(y + Y) * 256 + x + X] = (byte)colIndex;
+            level.Images8[Tile].Pixels[(y + Y) * TRConsts.TPageWidth + x + X] = (byte)colIndex;
             return c;
         });
     }

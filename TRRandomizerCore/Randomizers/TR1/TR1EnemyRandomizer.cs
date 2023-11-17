@@ -768,14 +768,14 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         // Example where we have to search is Midas room 21
-        TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y - 256, entity.Z, entity.Room, level, floorData);
-        while (sector.RoomBelow != 255)
+        TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y - TRConsts.Step1, entity.Z, entity.Room, level, floorData);
+        while (sector.RoomBelow != TRConsts.NoRoom)
         {
             if (level.Rooms[sector.RoomBelow].ContainsWater)
             {
                 return true;
             }
-            sector = FDUtilities.GetRoomSector(entity.X, (sector.Floor + 1) * 256, entity.Z, sector.RoomBelow, level, floorData);
+            sector = FDUtilities.GetRoomSector(entity.X, (sector.Floor + 1) * TRConsts.Step1, entity.Z, sector.RoomBelow, level, floorData);
         }
         return false;
     }
@@ -838,8 +838,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             {
                 TypeID = TR1Type.Adam,
                 X = egg.X,
-                Y = egg.Y - i * 1024,
-                Z = egg.Z - 1024,
+                Y = egg.Y - i * TRConsts.Step4,
+                Z = egg.Z - TRConsts.Step4,
                 Room = egg.Room,
                 Angle = egg.Angle,
                 Intensity = egg.Intensity,
@@ -905,14 +905,14 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         int y = entity.Y;
         short room = entity.Room;
         TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, y, entity.Z, room, level, floorData);
-        while (sector.RoomBelow != 255)
+        while (sector.RoomBelow != TRConsts.NoRoom)
         {
-            y = (sector.Floor + 1) * 256;
+            y = (sector.Floor + 1) * TRConsts.Step1;
             room = sector.RoomBelow;
             sector = FDUtilities.GetRoomSector(entity.X, y, entity.Z, room, level, floorData);
         }
 
-        entity.Y = sector.Floor * 256;
+        entity.Y = sector.Floor * TRConsts.Step1;
         entity.Room = room;
 
         if (sector.FDIndex != 0)

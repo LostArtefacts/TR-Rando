@@ -1,4 +1,6 @@
-﻿namespace TREnvironmentEditor.Helpers;
+﻿using TRLevelControl;
+
+namespace TREnvironmentEditor.Helpers;
 
 public class EMLocationExpander
 {
@@ -13,11 +15,11 @@ public class EMLocationExpander
         {
             for (int j = 0; j < ExpandZ; j++)
             {
-                locs.Add(new EMLocation
+                locs.Add(new()
                 {
-                    X = Location.X + i * 1024,
+                    X = Location.X + i * TRConsts.Step4,
                     Y = Location.Y,
-                    Z = Location.Z + j * 1024,
+                    Z = Location.Z + j * TRConsts.Step4,
                     Room = Location.Room,
                     Angle = Location.Angle
                 });

@@ -37,25 +37,25 @@ public class Box
     public TRBox ToTRBox(TRRoomInfo roomInfo)
     {
         // World coordinates and max points are 1 unit shy off edge
-        uint xmin = (uint)(roomInfo.X + MinX * 1024);
-        uint zmin = (uint)(roomInfo.Z + MinZ * 1024);
-        uint xmax = (uint)(xmin + (MaxX - MinX) * 1024) - 1;
-        uint zmax = (uint)(zmin + (MaxZ - MinZ) * 1024) - 1;
+        uint xmin = (uint)(roomInfo.X + MinX * TRConsts.Step4);
+        uint zmin = (uint)(roomInfo.Z + MinZ * TRConsts.Step4);
+        uint xmax = (uint)(xmin + (MaxX - MinX) * TRConsts.Step4) - 1;
+        uint zmax = (uint)(zmin + (MaxZ - MinZ) * TRConsts.Step4) - 1;
         return new TRBox
         {
             XMin = xmin,
             ZMin = zmin,
             XMax = xmax,
             ZMax = zmax,
-            TrueFloor = (short)(Floor * 256)
+            TrueFloor = (short)(Floor * TRConsts.Step1)
         };
     }
 
     public TR2Box ToTR2Box(TRRoomInfo roomInfo)
     {
         // Sector counts
-        byte xmin = (byte)(roomInfo.X / 1024 + MinX);
-        byte zmin = (byte)(roomInfo.Z / 1024 + MinZ);
+        byte xmin = (byte)(roomInfo.X / TRConsts.Step4 + MinX);
+        byte zmin = (byte)(roomInfo.Z / TRConsts.Step4 + MinZ);
         byte xmax = (byte)(xmin + (MaxX - MinX));
         byte zmax = (byte)(zmin + (MaxZ - MinZ));
         return new TR2Box
@@ -64,7 +64,7 @@ public class Box
             ZMin = zmin,
             XMax = xmax,
             ZMax = zmax,
-            TrueFloor = (short)(Floor * 256)
+            TrueFloor = (short)(Floor * TRConsts.Step1)
         };
     }
 

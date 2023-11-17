@@ -253,8 +253,7 @@ public class IOTests : TestBase
             TrigSetup = new FDTrigSetup(),
             TrigActionList = new List<FDActionListItem>
             {
-                new FDActionListItem
-                {
+                new() {
                     TrigAction = FDTrigAction.PlaySoundtrack,
                     Parameter = 40
                 }
@@ -369,8 +368,7 @@ public class IOTests : TestBase
             TrigSetup = new FDTrigSetup(),
             TrigActionList = new List<FDActionListItem>
             {
-                new FDActionListItem
-                {
+                new() {
                     TrigAction = FDTrigAction.PlaySoundtrack,
                     Parameter = 40
                 }
@@ -430,8 +428,7 @@ public class IOTests : TestBase
             TrigSetup = new FDTrigSetup(),
             TrigActionList = new List<FDActionListItem>
             {
-                new FDActionListItem
-                {
+                new() {
                     TrigAction = FDTrigAction.PlaySoundtrack,
                     Parameter = 40
                 }

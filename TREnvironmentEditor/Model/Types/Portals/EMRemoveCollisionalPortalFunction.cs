@@ -1,6 +1,7 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -87,11 +88,11 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
     {
         if (sector.RoomBelow == Location1.Room || sector.RoomBelow == Location2.Room)
         {
-            sector.RoomBelow = 255;
+            sector.RoomBelow = TRConsts.NoRoom;
         }
         if (sector.RoomAbove == Location1.Room || sector.RoomAbove == Location2.Room)
         {
-            sector.RoomAbove = 255;
+            sector.RoomAbove = TRConsts.NoRoom;
         }
     }
 
@@ -106,7 +107,7 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         if (entries.RemoveAll(e => e is FDPortalEntry portal && (portal.Room == Location1.Room || portal.Room == Location2.Room)) > 0)
         {
             // Ensure it's a wall and remove all FD - don't leave nospace in our trails
-            sector.Floor = sector.Ceiling = -127;
+            sector.Floor = sector.Ceiling = TRConsts.WallClicks;
             entries.Clear();
         }
         if (entries.Count == 0)
@@ -117,8 +118,8 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
 
     private static int GetSectorIndex(TRRoomInfo roomInfo, EMLocation location, int roomDepth)
     {
-        int x = (location.X - roomInfo.X) / 1024;
-        int z = (location.Z - roomInfo.Z) / 1024;
+        int x = (location.X - roomInfo.X) / TRConsts.Step4;
+        int z = (location.Z - roomInfo.Z) / TRConsts.Step4;
         return x * roomDepth + z;
     }
 }

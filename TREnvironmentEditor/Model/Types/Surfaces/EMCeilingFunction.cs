@@ -1,4 +1,5 @@
 ﻿using TREnvironmentEditor.Helpers;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -18,13 +19,13 @@ public class EMCeilingFunction : BaseEMFunction
             int min = int.MaxValue;
             foreach (TRRoomSector sector in room.Sectors)
             {
-                if (!sector.IsImpenetrable)
+                if (!sector.IsWall)
                 {
                     sector.Ceiling = CeilingHeights[roomNumber];
                     min = Math.Min(min, sector.Ceiling);
                 }
             }
-            room.Info.YTop = min * ClickSize;
+            room.Info.YTop = min * TRConsts.Step1;
 
             if (AmendVertices)
             {
@@ -49,13 +50,13 @@ public class EMCeilingFunction : BaseEMFunction
             int min = int.MaxValue;
             foreach (TRRoomSector sector in room.SectorList)
             {
-                if (!sector.IsImpenetrable)
+                if (!sector.IsWall)
                 {
                     sector.Ceiling = CeilingHeights[roomNumber];
                     min = Math.Min(min, sector.Ceiling);
                 }
             }
-            room.Info.YTop = min * ClickSize;
+            room.Info.YTop = min * TRConsts.Step1;
 
             if (AmendVertices)
             {
@@ -80,13 +81,13 @@ public class EMCeilingFunction : BaseEMFunction
             int min = int.MaxValue;
             foreach (TRRoomSector sector in room.Sectors)
             {
-                if (!sector.IsImpenetrable)
+                if (!sector.IsWall)
                 {
                     sector.Ceiling = CeilingHeights[roomNumber];
                     min = Math.Min(min, sector.Ceiling);
                 }
             }
-            room.Info.YTop = min * ClickSize;
+            room.Info.YTop = min * TRConsts.Step1;
 
             if (AmendVertices)
             {

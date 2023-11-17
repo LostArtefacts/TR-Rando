@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using TREnvironmentEditor.Model.Types;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Helpers;
@@ -36,7 +37,7 @@ public class EMTextureGroup
     {
         List<ushort> temp = new() { Wall1, Wall2, Wall3, Wall4 };
         ushort result = ushort.MaxValue;
-        int clicks = Math.Min(height / 256, 4);
+        int clicks = Math.Min(height / TRConsts.Step1, 4);
         
         for (int i = 0; i < temp.Count; i++)
         {
@@ -101,7 +102,7 @@ public class EMTextureGroup
                 break;
         }
 
-        if (remap != null && height == 1024)
+        if (remap != null && height == TRConsts.Step4)
         {
             face.Vertices = EMModifyFaceFunction.RotateVertices(face.Vertices, new EMFaceRotation
             {

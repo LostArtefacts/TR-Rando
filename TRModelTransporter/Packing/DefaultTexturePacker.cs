@@ -1,5 +1,6 @@
 ﻿using RectanglePacker;
 using RectanglePacker.Organisation;
+using TRLevelControl;
 using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Packing;
@@ -12,8 +13,8 @@ public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSeg
 
     public DefaultTexturePacker()
     {
-        TileWidth = 256;
-        TileHeight = 256;
+        TileWidth = TRConsts.TPageWidth;
+        TileHeight = TRConsts.TPageHeight;
         MaximumTiles = 16;
 
         Options = new PackingOptions

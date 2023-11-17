@@ -192,7 +192,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
             int flipIndex = flipSectors.IndexOf(flipSector);
 
             Location flipLoc = CreateLocation(level, flipRoom, flipIndex, flipSector);
-            if (flipLoc == null || roomLoc.ToVector() != flipLoc.ToVector() || flipSector.IsImpenetrable)
+            if (flipLoc == null || roomLoc.ToVector() != flipLoc.ToVector() || flipSector.IsWall)
             {
                 _excludedSectors.Add(roomSector);
             }
@@ -493,15 +493,15 @@ public abstract class AbstractLocationGenerator<L> where L : class
             case FDFunctions.FloorTriangulationNWSE_NE:
                 triangle1 = new List<Vector3>
                 {
-                    new Vector3(0, corners[0], 0),
-                    new Vector3(0, corners[1], 4),
-                    new Vector3(4, corners[2], 0)
+                    new(0, corners[0], 0),
+                    new(0, corners[1], 4),
+                    new(4, corners[2], 0)
                 };
                 triangle2 = new List<Vector3>
                 {
-                    new Vector3(0, corners[1], 4),
-                    new Vector3(4, corners[2], 0),
-                    new Vector3(4, corners[3], 4)
+                    new(0, corners[1], 4),
+                    new(4, corners[2], 0),
+                    new(4, corners[3], 4)
                 };
 
                 triSum1 = (triangle1[0] + triangle1[1] + triangle1[2]) / 3;
@@ -588,15 +588,15 @@ public abstract class AbstractLocationGenerator<L> where L : class
             case FDFunctions.FloorTriangulationNESW_NW:
                 triangle1 = new List<Vector3>
                 {
-                    new Vector3(0, corners[0], 0),
-                    new Vector3(4, corners[2], 0),
-                    new Vector3(4, corners[3], 4)
+                    new(0, corners[0], 0),
+                    new(4, corners[2], 0),
+                    new(4, corners[3], 4)
                 };
                 triangle2 = new List<Vector3>
                 {
-                    new Vector3(0, corners[0], 0),
-                    new Vector3(0, corners[1], 4),
-                    new Vector3(4, corners[3], 4)
+                    new(0, corners[0], 0),
+                    new(0, corners[1], 4),
+                    new(4, corners[3], 4)
                 };
 
                 triSum1 = (triangle1[0] + triangle1[1] + triangle1[2]) / 3;

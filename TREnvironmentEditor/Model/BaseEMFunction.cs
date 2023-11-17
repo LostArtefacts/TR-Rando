@@ -1,16 +1,12 @@
 ﻿using Newtonsoft.Json;
 using TREnvironmentEditor.Helpers;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model;
 
 public abstract class BaseEMFunction
 {
-    // Y click size
-    public static readonly int ClickSize = 256;
-    // Sector X/Z length
-    public static readonly int SectorSize = 1024;
-
     [JsonProperty(Order = -2)]
     public string Comments { get; set; }
     [JsonProperty(Order = -2, DefaultValueHandling = DefaultValueHandling.Include)]
@@ -37,10 +33,10 @@ public abstract class BaseEMFunction
     {
         List<TRVertex> vertices = new()
         {
-            new TRVertex { X = (short)(x + SectorSize), Y = y, Z = z },
+            new TRVertex { X = (short)(x + TRConsts.Step4), Y = y, Z = z },
             new TRVertex { X = x, Y = y, Z = z },
-            new TRVertex { X = x, Y = y, Z = (short)(z + SectorSize) },
-            new TRVertex { X = (short)(x + SectorSize), Y = y, Z = (short)(z + SectorSize) }
+            new TRVertex { X = x, Y = y, Z = (short)(z + TRConsts.Step4) },
+            new TRVertex { X = (short)(x + TRConsts.Step4), Y = y, Z = (short)(z + TRConsts.Step4) }
         };
 
         if (asCeiling)
@@ -111,7 +107,7 @@ public abstract class BaseEMFunction
         foreach (TRRoomSector sector in sectors)
         {
             byte roomNumber = above ? sector.RoomAbove : sector.RoomBelow;
-            if (roomNumber != 255)
+            if (roomNumber != TRConsts.NoRoom)
             {
                 rooms.Add(roomNumber);
             }

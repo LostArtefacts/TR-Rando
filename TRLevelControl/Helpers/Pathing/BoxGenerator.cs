@@ -58,7 +58,7 @@ public class BoxGenerator
         ushort linkedMaterial = (ushort)(linkedSector.BoxIndex & 0x000F); // TR3-5 store material in bits 0-3 - wood, mud etc
         foreach (TRRoomSector sector in boxRoom.Sectors)
         {
-            if (!sector.IsImpenetrable)
+            if (!sector.IsWall)
             {
                 sector.BoxIndex <<= 4;
                 sector.BoxIndex |= linkedMaterial;

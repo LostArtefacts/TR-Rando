@@ -177,8 +177,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
             BaseLocation = NewLocation,
             Locations = new List<EMLocation>
             {
-                new EMLocation
-                {
+                new() {
                     X = NewLocation.X,
                     Y = NewLocation.Y,
                     Z = NewLocation.Z,

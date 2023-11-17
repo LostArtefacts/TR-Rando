@@ -2,6 +2,7 @@
 using System.Drawing;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
+using TRLevelControl;
 using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
@@ -223,11 +224,11 @@ public abstract class AbstractLandmarkImporter<E, L>
 
     protected short? GetSectorPortalRoom(TRRoomSector sector, FDControl floorData, PortalDirection direction)
     {
-        if (direction == PortalDirection.Up && sector.RoomAbove != 255)
+        if (direction == PortalDirection.Up && sector.RoomAbove != TRConsts.NoRoom)
         {
             return sector.RoomAbove;
         }
-        else if (direction == PortalDirection.Down && sector.RoomBelow != 255)
+        else if (direction == PortalDirection.Down && sector.RoomBelow != TRConsts.NoRoom)
         {
             return sector.RoomBelow;
         }

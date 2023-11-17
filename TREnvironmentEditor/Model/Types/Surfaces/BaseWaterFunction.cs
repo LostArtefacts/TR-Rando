@@ -1,5 +1,6 @@
 ﻿using TRFDControl;
 using TRFDControl.FDEntryTypes;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -29,9 +30,9 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
 
             if (ceilingMatch || floorMatch)
             {
-                short x = (short)(i / room.NumZSectors * SectorSize);
-                short z = (short)(i % room.NumZSectors * SectorSize);
-                short y = (short)((ceilingMatch ? sector.Ceiling : sector.Floor) * ClickSize);
+                short x = (short)(i / room.NumZSectors * TRConsts.Step4);
+                short z = (short)(i % room.NumZSectors * TRConsts.Step4);
+                short y = (short)((ceilingMatch ? sector.Ceiling : sector.Floor) * TRConsts.Step1);
 
                 List<ushort> vertIndices = new();
 
@@ -87,9 +88,9 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
 
             if (ceilingMatch || floorMatch)
             {
-                short x = (short)(i / room.NumZSectors * SectorSize);
-                short z = (short)(i % room.NumZSectors * SectorSize);
-                short y = (short)((ceilingMatch ? sector.Ceiling : sector.Floor) * ClickSize);
+                short x = (short)(i / room.NumZSectors * TRConsts.Step4);
+                short z = (short)(i % room.NumZSectors * TRConsts.Step4);
+                short y = (short)((ceilingMatch ? sector.Ceiling : sector.Floor) * TRConsts.Step1);
 
                 List<ushort> vertIndices = new();
 
@@ -149,9 +150,9 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
 
             if (!isTriangle && (ceilingMatch || floorMatch))
             {
-                short x = (short)(i / room.NumZSectors * SectorSize);
-                short z = (short)(i % room.NumZSectors * SectorSize);
-                short y = (short)((ceilingMatch ? sector.Ceiling : sector.Floor) * ClickSize);
+                short x = (short)(i / room.NumZSectors * TRConsts.Step4);
+                short z = (short)(i % room.NumZSectors * TRConsts.Step4);
+                short y = (short)((ceilingMatch ? sector.Ceiling : sector.Floor) * TRConsts.Step1);
 
                 List<ushort> vertIndices = new();
 

@@ -713,7 +713,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     private static bool IsInvalidNeighbour(TRRoomSector neighbour)
     {
-        return neighbour.Floor == -127 && neighbour.Ceiling == -127; // Inside a wall
+        return neighbour.Floor == TRConsts.WallClicks && neighbour.Ceiling == TRConsts.WallClicks; // Inside a wall
     }
 
     private void CreateSecretTrigger(TR1CombinedLevel level, TRSecretPlacement<TR1Type> secret, short room, FDControl floorData, TRRoomSector sector)

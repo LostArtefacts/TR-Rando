@@ -5,8 +5,6 @@ namespace TRLevelControl.Model;
 
 public class TRRoomSector : ISerializableCompact
 {
-    private static readonly sbyte _impenetrable = -127;
-
     public ushort FDIndex { get; set; }
 
     public ushort BoxIndex { get; set; }
@@ -19,7 +17,7 @@ public class TRRoomSector : ISerializableCompact
 
     public sbyte Ceiling { get; set; }
 
-    public bool IsImpenetrable => Floor == _impenetrable && Ceiling == _impenetrable;
+    public bool IsWall => Floor == TRConsts.WallClicks && Ceiling == TRConsts.WallClicks;
     public bool IsSlipperySlope => (BoxIndex & 0x7FF0) >> 4 == 2047;
 
     public override string ToString()

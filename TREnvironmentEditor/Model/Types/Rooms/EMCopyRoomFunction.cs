@@ -2,6 +2,7 @@
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Helpers.Pathing;
 using TRLevelControl.Model;
 
@@ -9,10 +10,6 @@ namespace TREnvironmentEditor.Model.Types;
 
 public class EMCopyRoomFunction : BaseEMFunction
 {
-    // Floor and ceiling of -127 on sectors means impenetrable walls around it
-    private static readonly sbyte _solidSector = -127;
-    private static readonly byte _noRoom = 255;
-
     public short RoomIndex { get; set; }
     public EMLocation NewLocation { get; set; }
     public EMLocation LinkedLocation { get; set; }
@@ -479,9 +476,9 @@ public class EMCopyRoomFunction : BaseEMFunction
     {
         int sectorYDiff = 0;
         // Only change the sector if it's not impenetrable
-        if (originalSector.Ceiling != _solidSector || originalSector.Floor != _solidSector)
+        if (originalSector.Ceiling != TRConsts.WallClicks || originalSector.Floor != TRConsts.WallClicks)
         {
-            sectorYDiff = ydiff / ClickSize;
+            sectorYDiff = ydiff / TRConsts.Step1;
         }
 
         sbyte ceiling = originalSector.Ceiling;
@@ -491,18 +488,18 @@ public class EMCopyRoomFunction : BaseEMFunction
         bool wallOpened = false;
         if (customHeight.HasValue)
         {
-            floor = (sbyte)(oldRoomInfo.YBottom / ClickSize);
+            floor = (sbyte)(oldRoomInfo.YBottom / TRConsts.Step1);
             floor += customHeight.Value;
 
-            if (originalSector.IsImpenetrable)
+            if (originalSector.IsWall)
             {
                 // This is effectively a promise that this sector is no longer
                 // going to be a wall, so reset it to a standard sector.
-                ceiling = (sbyte)(oldRoomInfo.YTop / ClickSize);
-                sectorYDiff = ydiff / ClickSize;
+                ceiling = (sbyte)(oldRoomInfo.YTop / TRConsts.Step1);
+                sectorYDiff = ydiff / TRConsts.Step1;
             }
 
-            wallOpened = originalSector.IsImpenetrable || originalSector.BoxIndex == ushort.MaxValue;
+            wallOpened = originalSector.IsWall || originalSector.BoxIndex == ushort.MaxValue;
         }
 
         TRRoomSector newSector = new()
@@ -511,8 +508,8 @@ public class EMCopyRoomFunction : BaseEMFunction
             Ceiling = (sbyte)(ceiling + sectorYDiff),
             FDIndex = 0, // Initialise to no FD
             Floor = (sbyte)(floor + sectorYDiff),
-            RoomAbove = _noRoom,
-            RoomBelow = _noRoom
+            RoomAbove = TRConsts.NoRoom,
+            RoomBelow = TRConsts.NoRoom
         };
 
         // Duplicate the FD too for everything except triggers. Track any portals
@@ -530,7 +527,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                         // so block off the wall provided we haven't opened the wall above.
                         if (!wallOpened)
                         {
-                            newSector.Floor = newSector.Ceiling = _solidSector;
+                            newSector.Floor = newSector.Ceiling = TRConsts.WallClicks;
                         }
                         break;
                     case FDFunctions.FloorSlant:

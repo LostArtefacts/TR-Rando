@@ -2,6 +2,7 @@
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -172,6 +173,6 @@ public class EMSlantFunction : EMClickFunction
         }
 
         // Half-way down the slope
-        return (clicks * 256) + (corners.Max() - corners.Min()) * 256 / 2;
+        return (clicks * TRConsts.Step1) + (corners.Max() - corners.Min()) * TRConsts.Step1 / 2;
     }
 }

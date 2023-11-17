@@ -10,6 +10,7 @@ using TRLevelControl.Model;
 using TRModelTransporter.Handlers;
 using TRRandomizerCore.Helpers;
 using System.Numerics;
+using TRLevelControl;
 
 namespace TRRandomizerCore.Randomizers;
 
@@ -94,8 +95,8 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
                 // Get the midpoint of the tile in world coordinates
                 return new Vector2
                 (
-                    AudioRandomizer.HalfSectorSize + room.Info.X + sectorIndex / room.NumZSectors * AudioRandomizer.FullSectorSize,
-                    AudioRandomizer.HalfSectorSize + room.Info.Z + sectorIndex % room.NumZSectors * AudioRandomizer.FullSectorSize
+                    TRConsts.Step2 + room.Info.X + sectorIndex / room.NumZSectors * TRConsts.Step4,
+                    TRConsts.Step2 + room.Info.Z + sectorIndex % room.NumZSectors * TRConsts.Step4
                 );
             });
         }
@@ -159,8 +160,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
                     TrigSetup = new FDTrigSetup { Value = 15872 },
                     TrigActionList = new List<FDActionListItem>
                     {
-                        new FDActionListItem
-                        {
+                        new() {
                             TrigAction = FDTrigAction.Object,
                             Parameter = (ushort)entityIndex
                         },

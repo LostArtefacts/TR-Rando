@@ -68,7 +68,7 @@ public class EMMirrorFunction : BaseEMFunction
         _xAdjustment = 0;
         foreach (TRRoom room in level.Rooms)
         {
-            _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
+            _worldWidth = Math.Max(_worldWidth, room.Info.X + TRConsts.Step4 * room.NumXSectors);
         }
     }
 
@@ -78,7 +78,7 @@ public class EMMirrorFunction : BaseEMFunction
         _xAdjustment = 0;
         foreach (TR2Room room in level.Rooms)
         {
-            _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
+            _worldWidth = Math.Max(_worldWidth, room.Info.X + TRConsts.Step4 * room.NumXSectors);
         }
     }
 
@@ -88,7 +88,7 @@ public class EMMirrorFunction : BaseEMFunction
         _xAdjustment = 0;
         foreach (TR3Room room in level.Rooms)
         {
-            _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
+            _worldWidth = Math.Max(_worldWidth, room.Info.X + TRConsts.Step4 * room.NumXSectors);
         }
 
         TR3Entity puna = level.Entities.Find(e => e.TypeID == TR3Type.Puna);
@@ -302,7 +302,7 @@ public class EMMirrorFunction : BaseEMFunction
         {
             int oldRoomX = room.Info.X;
             room.Info.X = FlipWorldX(oldRoomX);
-            room.Info.X -= room.NumXSectors * SectorSize;
+            room.Info.X -= room.NumXSectors * TRConsts.Step4;
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
             List<TRRoomVertex> processedVerts = new();
@@ -328,9 +328,9 @@ public class EMMirrorFunction : BaseEMFunction
                     continue;
                 }
 
-                int sectorX = vert.Vertex.X / SectorSize;
+                int sectorX = vert.Vertex.X / TRConsts.Step4;
                 int newSectorX = room.NumXSectors - sectorX;
-                vert.Vertex.X = (short)(newSectorX * SectorSize);
+                vert.Vertex.X = (short)(newSectorX * TRConsts.Step4);
                 Debug.Assert(vert.Vertex.X >= 0);
             }
 
@@ -339,9 +339,9 @@ public class EMMirrorFunction : BaseEMFunction
             {
                 foreach (TRVertex vert in portal.Vertices)
                 {
-                    int sectorX = (int)Math.Round((double)vert.X / SectorSize);
+                    int sectorX = (int)Math.Round((double)vert.X / TRConsts.Step4);
                     int newSectorX = room.NumXSectors - sectorX;
-                    vert.X = (short)(newSectorX * SectorSize);
+                    vert.X = (short)(newSectorX * TRConsts.Step4);
                     Debug.Assert(vert.X >= 0);
                 }
                 portal.Normal.X *= -1;
@@ -376,7 +376,7 @@ public class EMMirrorFunction : BaseEMFunction
         {
             int oldRoomX = room.Info.X;
             room.Info.X = FlipWorldX(oldRoomX);
-            room.Info.X -= room.NumXSectors * SectorSize;
+            room.Info.X -= room.NumXSectors * TRConsts.Step4;
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
             List<TR2RoomVertex> processedVerts = new();
@@ -402,9 +402,9 @@ public class EMMirrorFunction : BaseEMFunction
                     continue;
                 }
 
-                int sectorX = vert.Vertex.X / SectorSize;
+                int sectorX = vert.Vertex.X / TRConsts.Step4;
                 int newSectorX = room.NumXSectors - sectorX;
-                vert.Vertex.X = (short)(newSectorX * SectorSize);
+                vert.Vertex.X = (short)(newSectorX * TRConsts.Step4);
                 Debug.Assert(vert.Vertex.X >= 0);
             }
 
@@ -413,9 +413,9 @@ public class EMMirrorFunction : BaseEMFunction
             {
                 foreach (TRVertex vert in portal.Vertices)
                 {
-                    int sectorX = (int)Math.Round((double)vert.X / SectorSize);
+                    int sectorX = (int)Math.Round((double)vert.X / TRConsts.Step4);
                     int newSectorX = room.NumXSectors - sectorX;
-                    vert.X = (short)(newSectorX * SectorSize);
+                    vert.X = (short)(newSectorX * TRConsts.Step4);
                     Debug.Assert(vert.X >= 0);
                 }
                 portal.Normal.X *= -1;
@@ -450,7 +450,7 @@ public class EMMirrorFunction : BaseEMFunction
         {
             int oldRoomX = room.Info.X;
             room.Info.X = FlipWorldX(oldRoomX);
-            room.Info.X -= room.NumXSectors * SectorSize;
+            room.Info.X -= room.NumXSectors * TRConsts.Step4;
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
             List<TR3RoomVertex> processedVerts = new();
@@ -476,9 +476,9 @@ public class EMMirrorFunction : BaseEMFunction
                     continue;
                 }
 
-                int sectorX = vert.Vertex.X / SectorSize;
+                int sectorX = vert.Vertex.X / TRConsts.Step4;
                 int newSectorX = room.NumXSectors - sectorX;
-                vert.Vertex.X = (short)(newSectorX * SectorSize);
+                vert.Vertex.X = (short)(newSectorX * TRConsts.Step4);
                 Debug.Assert(vert.Vertex.X >= 0);
             }
 
@@ -487,9 +487,9 @@ public class EMMirrorFunction : BaseEMFunction
             {
                 foreach (TRVertex vert in portal.Vertices)
                 {
-                    int sectorX = (int)Math.Round((double)vert.X / SectorSize);
+                    int sectorX = (int)Math.Round((double)vert.X / TRConsts.Step4);
                     int newSectorX = room.NumXSectors - sectorX;
-                    vert.X = (short)(newSectorX * SectorSize);
+                    vert.X = (short)(newSectorX * TRConsts.Step4);
                     Debug.Assert(vert.X >= 0);
                 }
                 portal.Normal.X *= -1;
@@ -551,8 +551,8 @@ public class EMMirrorFunction : BaseEMFunction
         // to world coordinates, flipping them over X and then swapping them.
         foreach (TR2Box box in boxes)
         {
-            byte newMaxX = (byte)(FlipWorldX(box.XMin * SectorSize) / SectorSize);
-            byte newMinX = (byte)(FlipWorldX(box.XMax * SectorSize) / SectorSize);
+            byte newMaxX = (byte)(FlipWorldX(box.XMin * TRConsts.Step4) / TRConsts.Step4);
+            byte newMinX = (byte)(FlipWorldX(box.XMax * TRConsts.Step4) / TRConsts.Step4);
             Debug.Assert(newMaxX >= newMinX);
             box.XMin = newMinX;
             box.XMax = newMaxX;
@@ -653,16 +653,16 @@ public class EMMirrorFunction : BaseEMFunction
                 switch (entity.Angle)
                 {
                     case _east:
-                        entity.Z -= SectorSize;
+                        entity.Z -= TRConsts.Step4;
                         break;
                     case _west:
-                        entity.Z += SectorSize;
+                        entity.Z += TRConsts.Step4;
                         break;
                     case _north:
-                        entity.X += SectorSize;
+                        entity.X += TRConsts.Step4;
                         break;
                     case _south:
-                        entity.X -= SectorSize;
+                        entity.X -= TRConsts.Step4;
                         break;
                 }
                 break;
@@ -670,16 +670,16 @@ public class EMMirrorFunction : BaseEMFunction
                 switch (entity.Angle)
                 {
                     case _east:
-                        entity.Z -= SectorSize * 2;
+                        entity.Z -= TRConsts.Step4 * 2;
                         break;
                     case _west:
-                        entity.Z += SectorSize * 2;
+                        entity.Z += TRConsts.Step4 * 2;
                         break;
                     case _north:
-                        entity.X += SectorSize * 2;
+                        entity.X += TRConsts.Step4 * 2;
                         break;
                     case _south:
-                        entity.X -= SectorSize * 2;
+                        entity.X -= TRConsts.Step4 * 2;
                         break;
                 }
                 break;
@@ -721,16 +721,16 @@ public class EMMirrorFunction : BaseEMFunction
                 switch (entity.Angle)
                 {
                     case _south:
-                        entity.X += SectorSize;
+                        entity.X += TRConsts.Step4;
                         break;
                     case _west:
-                        entity.Z -= SectorSize;
+                        entity.Z -= TRConsts.Step4;
                         break;
                     case _north:
-                        entity.X -= SectorSize;
+                        entity.X -= TRConsts.Step4;
                         break;
                     case _east:
-                        entity.Z += SectorSize;
+                        entity.Z += TRConsts.Step4;
                         break;
                 }
                 break;
@@ -738,16 +738,16 @@ public class EMMirrorFunction : BaseEMFunction
                 switch (entity.Angle)
                 {
                     case _south:
-                        entity.X -= SectorSize;
+                        entity.X -= TRConsts.Step4;
                         break;
                     case _west:
-                        entity.Z += SectorSize;
+                        entity.Z += TRConsts.Step4;
                         break;
                     case _north:
-                        entity.X += SectorSize;
+                        entity.X += TRConsts.Step4;
                         break;
                     case _east:
-                        entity.Z -= SectorSize;
+                        entity.Z -= TRConsts.Step4;
                         break;
                 }
                 break;
@@ -756,12 +756,12 @@ public class EMMirrorFunction : BaseEMFunction
                 if (entity.Angle == _east)
                 {
                     entity.Angle = _west;
-                    entity.X += SectorSize;
+                    entity.X += TRConsts.Step4;
                 }
                 else if (entity.Angle == _west)
                 {
                     entity.Angle = _east;
-                    entity.X -= SectorSize;
+                    entity.X -= TRConsts.Step4;
                 }
                 break;
 
@@ -802,7 +802,7 @@ public class EMMirrorFunction : BaseEMFunction
             case TR2Type.PowerSaw:
                 if (entity.Angle == _north)
                 {
-                    entity.X += SectorSize;
+                    entity.X += TRConsts.Step4;
                 }
                 break;
 
@@ -810,8 +810,8 @@ public class EMMirrorFunction : BaseEMFunction
                 if (entity.Angle == _west)
                 {
                     entity.Angle = _north;
-                    entity.X += SectorSize;
-                    entity.Z += SectorSize;
+                    entity.X += TRConsts.Step4;
+                    entity.Z += TRConsts.Step4;
                 }
                 break;
 
@@ -820,7 +820,7 @@ public class EMMirrorFunction : BaseEMFunction
                 // so we need to move him 512 in the +X to avoid him ending up either
                 // OOB or in mid-air.
                 // item->pos.x_pos -= STEP_L*2;
-                entity.X += SectorSize / 2;
+                entity.X += TRConsts.Step2;
                 break;
         }
     }
@@ -839,16 +839,16 @@ public class EMMirrorFunction : BaseEMFunction
                 switch (entity.Angle)
                 {
                     case _north:
-                        entity.X -= SectorSize;
+                        entity.X -= TRConsts.Step4;
                         break;
                     case _east:
-                        entity.Z += SectorSize;
+                        entity.Z += TRConsts.Step4;
                         break;
                     case _south:
-                        entity.X += SectorSize;
+                        entity.X += TRConsts.Step4;
                         break;
                     case _west:
-                        entity.Z -= SectorSize;
+                        entity.Z -= TRConsts.Step4;
                         break;
                 }
                 break;
@@ -857,10 +857,10 @@ public class EMMirrorFunction : BaseEMFunction
                 switch (entity.Angle)
                 {
                     case _north:
-                        entity.X += SectorSize;
+                        entity.X += TRConsts.Step4;
                         break;
                     case _west:
-                        entity.Z += SectorSize;
+                        entity.Z += TRConsts.Step4;
                         break;
                 }
                 break;
@@ -869,7 +869,7 @@ public class EMMirrorFunction : BaseEMFunction
                 switch (entity.Angle)
                 {
                     case _east:
-                        entity.Z -= SectorSize;
+                        entity.Z -= TRConsts.Step4;
                         break;
                 }
                 break;
@@ -900,10 +900,10 @@ public class EMMirrorFunction : BaseEMFunction
                 switch (entity.Angle)
                 {
                     case _east:
-                        entity.Z -= 3 * SectorSize;
+                        entity.Z -= 3 * TRConsts.Step4;
                         break;
                     case _south:
-                        entity.X -= 3 * SectorSize;
+                        entity.X -= 3 * TRConsts.Step4;
                         break;
                 }
                 break;
