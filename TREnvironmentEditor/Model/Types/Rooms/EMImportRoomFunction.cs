@@ -11,8 +11,6 @@ namespace TREnvironmentEditor.Model.Types;
 
 public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 {
-    private static readonly sbyte _solidSector = -127;
-
     public byte RoomNumber { get; set; }
     public EMLocation NewLocation { get; set; }
     public EMLocation LinkedLocation { get; set; }
@@ -226,7 +224,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             int sectorYDiff = 0;
             ushort sectorBoxIndex = roomDef.Room.SectorList[i].BoxIndex;
             // Only change the sector if it's not impenetrable and we don't want to preserve the existing zoning
-            if (roomDef.Room.SectorList[i].Ceiling != _solidSector || roomDef.Room.SectorList[i].Floor != _solidSector)
+            if (roomDef.Room.SectorList[i].Ceiling != TRConsts.WallClicks || roomDef.Room.SectorList[i].Floor != TRConsts.WallClicks)
             {
                 sectorYDiff = ydiff / TRConsts.Step1;
                 if (!PreserveBoxes)
@@ -259,7 +257,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                         case FDFunctions.PortalSector:
                             // This portal will no longer be valid in the new room's position,
                             // so block off the wall
-                            newRoom.SectorList[i].Floor = newRoom.SectorList[i].Ceiling = _solidSector;
+                            newRoom.SectorList[i].Floor = newRoom.SectorList[i].Ceiling = TRConsts.WallClicks;
                             break;
                         case FDFunctions.FloorSlant:
                             FDSlantEntry slantEntry = entry as FDSlantEntry;
@@ -499,7 +497,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             int sectorYDiff = 0;
             ushort sectorBoxIndex = roomDef.Room.Sectors[i].BoxIndex;
             // Only change the sector if it's not impenetrable
-            if (roomDef.Room.Sectors[i].Ceiling != _solidSector || roomDef.Room.Sectors[i].Floor != _solidSector)
+            if (roomDef.Room.Sectors[i].Ceiling != TRConsts.WallClicks || roomDef.Room.Sectors[i].Floor != TRConsts.WallClicks)
             {
                 sectorYDiff = ydiff / TRConsts.Step1;
                 if (!PreserveBoxes)
@@ -532,7 +530,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                         case FDFunctions.PortalSector:
                             // This portal will no longer be valid in the new room's position,
                             // so block off the wall
-                            newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = _solidSector;
+                            newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = TRConsts.WallClicks;
                             break;
                         case FDFunctions.FloorSlant:
                             FDSlantEntry slantEntry = entry as FDSlantEntry;

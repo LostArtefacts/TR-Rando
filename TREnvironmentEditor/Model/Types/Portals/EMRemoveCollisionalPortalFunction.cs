@@ -107,7 +107,7 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         if (entries.RemoveAll(e => e is FDPortalEntry portal && (portal.Room == Location1.Room || portal.Room == Location2.Room)) > 0)
         {
             // Ensure it's a wall and remove all FD - don't leave nospace in our trails
-            sector.Floor = sector.Ceiling = -127;
+            sector.Floor = sector.Ceiling = TRConsts.WallClicks;
             entries.Clear();
         }
         if (entries.Count == 0)

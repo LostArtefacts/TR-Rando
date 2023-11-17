@@ -624,7 +624,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private static bool IsInvalidNeighbour(TRRoomSector baseSector, TRRoomSector neighbour)
     {
-        return (neighbour.Floor == -127 && neighbour.Ceiling == -127) // Inside a wall
+        return (neighbour.Floor == TRConsts.WallClicks && neighbour.Ceiling == TRConsts.WallClicks) // Inside a wall
             || (neighbour.RoomBelow != baseSector.RoomBelow)          // Mid-air
             ||
             (

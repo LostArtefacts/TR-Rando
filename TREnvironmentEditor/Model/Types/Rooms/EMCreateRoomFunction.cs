@@ -292,17 +292,17 @@ public class EMCreateRoomFunction : BaseEMFunction
                 if (!isWall)
                 {
                     sbyte height = GetSectorHeight(sectorIndex, FloorHeights);
-                    sectorFloor = height == -127 ? height : (sbyte)(sectorFloor + height);
+                    sectorFloor = height == TRConsts.WallClicks ? height : (sbyte)(sectorFloor + height);
                 }
                 if (!isWall)
                 {
                     sbyte height = GetSectorHeight(sectorIndex, CeilingHeights);
-                    sectorCeiling = height == -127 ? height : (sbyte)(sectorCeiling + height);
+                    sectorCeiling = height == TRConsts.WallClicks ? height : (sbyte)(sectorCeiling + height);
                 }
 
-                if (isWall || sectorFloor == -127 || sectorCeiling == -127)
+                if (isWall || sectorFloor == TRConsts.WallClicks || sectorCeiling == TRConsts.WallClicks)
                 {
-                    sectorFloor = sectorCeiling = -127;
+                    sectorFloor = sectorCeiling = TRConsts.WallClicks;
                 }
 
                 sectors.Add(new TRRoomSector
@@ -414,7 +414,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
     private void BuildWallFaces(List<TRFace4> faces, List<TRVertex> vertices, int x, int z, int topY, int bottomY, int ceiling, Direction direction)
     {
-        if (topY == -127)
+        if (topY == TRConsts.WallClicks)
         {
             topY = ceiling;
         }

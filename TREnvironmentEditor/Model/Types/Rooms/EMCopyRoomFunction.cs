@@ -10,9 +10,6 @@ namespace TREnvironmentEditor.Model.Types;
 
 public class EMCopyRoomFunction : BaseEMFunction
 {
-    // Floor and ceiling of -127 on sectors means impenetrable walls around it
-    private static readonly sbyte _solidSector = -127;
-
     public short RoomIndex { get; set; }
     public EMLocation NewLocation { get; set; }
     public EMLocation LinkedLocation { get; set; }
@@ -479,7 +476,7 @@ public class EMCopyRoomFunction : BaseEMFunction
     {
         int sectorYDiff = 0;
         // Only change the sector if it's not impenetrable
-        if (originalSector.Ceiling != _solidSector || originalSector.Floor != _solidSector)
+        if (originalSector.Ceiling != TRConsts.WallClicks || originalSector.Floor != TRConsts.WallClicks)
         {
             sectorYDiff = ydiff / TRConsts.Step1;
         }
@@ -530,7 +527,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                         // so block off the wall provided we haven't opened the wall above.
                         if (!wallOpened)
                         {
-                            newSector.Floor = newSector.Ceiling = _solidSector;
+                            newSector.Floor = newSector.Ceiling = TRConsts.WallClicks;
                         }
                         break;
                     case FDFunctions.FloorSlant:

@@ -1,6 +1,7 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -120,7 +121,7 @@ public class EMCreateWallFunction : BaseEMFunction
 
     private static void BlockSector(TRRoomSector sector, FDControl floorData)
     {
-        sector.Floor = sector.Ceiling = -127;
+        sector.Floor = sector.Ceiling = TRConsts.WallClicks;
         sector.BoxIndex = ushort.MaxValue;
         if (sector.FDIndex != 0)
         {
