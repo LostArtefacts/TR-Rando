@@ -1,6 +1,7 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -146,8 +147,8 @@ public class EMClickFunction : BaseEMFunction
     {
         if (sector.IsImpenetrable)
         {
-            sector.Ceiling = (sbyte)(roomInfo.YTop / 256);
-            sector.Floor = (sbyte)(roomInfo.YBottom / 256);
+            sector.Ceiling = (sbyte)(roomInfo.YTop / TRConsts.Step1);
+            sector.Floor = (sbyte)(roomInfo.YBottom / TRConsts.Step1);
         }
         
         if (FloorClicks.HasValue)
@@ -162,6 +163,6 @@ public class EMClickFunction : BaseEMFunction
 
     protected virtual int GetEntityYShift(int clicks)
     {
-        return clicks * 256;
+        return clicks * TRConsts.Step1;
     }
 }

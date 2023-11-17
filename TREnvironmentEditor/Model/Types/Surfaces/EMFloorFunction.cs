@@ -1,6 +1,7 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
@@ -44,7 +45,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
     private void MoveFloor(TR1Level level)
     {
-        int clickChange = Clicks * ClickSize;
+        int clickChange = Clicks * TRConsts.Step1;
 
         EMLevelData data = GetData(level);
 
@@ -57,9 +58,9 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         int sectorIndex = room.Sectors.ToList().IndexOf(sector);
 
         // Find the current vertices for this tile
-        short x = (short)(sectorIndex / room.NumZSectors * SectorSize);
-        short z = (short)(sectorIndex % room.NumZSectors * SectorSize);
-        short y = (short)(sector.Floor * ClickSize);
+        short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
+        short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
+        short y = (short)(sector.Floor * TRConsts.Step1);
 
         List<TRRoomVertex> vertices = room.RoomData.Vertices.ToList();
         List<ushort> oldVertIndices = new();
@@ -218,7 +219,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         {
             // The box used by this sector is unique to this sector, so we can
             // simply change the existing floor height to match the sector.
-            level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * ClickSize);
+            level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * TRConsts.Step1);
         }
         else
         {
@@ -232,17 +233,17 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             GenerateOverlaps(level, sector.BoxIndex, newBoxIndex);
 
             // Make a new box for the sector.
-            uint xmin = (uint)(room.Info.X + (sectorIndex / room.NumZSectors) * SectorSize);
-            uint zmin = (uint)(room.Info.Z + (sectorIndex % room.NumZSectors) * SectorSize);
-            uint xmax = (uint)(xmin + SectorSize);
-            uint zmax = (uint)(zmin + SectorSize);
+            uint xmin = (uint)(room.Info.X + (sectorIndex / room.NumZSectors) * TRConsts.Step4);
+            uint zmin = (uint)(room.Info.Z + (sectorIndex % room.NumZSectors) * TRConsts.Step4);
+            uint xmax = (uint)(xmin + TRConsts.Step4);
+            uint zmax = (uint)(zmin + TRConsts.Step4);
             TRBox box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
                 XMax = xmax,
                 ZMax = zmax,
-                TrueFloor = (short)(sector.Floor * ClickSize)
+                TrueFloor = (short)(sector.Floor * TRConsts.Step1)
             };
 
             // Point the sector to the new box, and save it to the level
@@ -281,7 +282,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         // vertices on top and make new TRFace4 entries for the sides so the platform isn't floating.
         // TODO: how to handle raising/lowering slants, all of this assumes a flat floor to begin with.
 
-        int clickChange = Clicks * ClickSize;
+        int clickChange = Clicks * TRConsts.Step1;
 
         EMLevelData data = GetData(level);
 
@@ -294,9 +295,9 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         int sectorIndex = room.SectorList.ToList().IndexOf(sector);
 
         // Find the current vertices for this tile
-        short x = (short)(sectorIndex / room.NumZSectors * SectorSize);
-        short z = (short)(sectorIndex % room.NumZSectors * SectorSize);
-        short y = (short)(sector.Floor * ClickSize);
+        short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
+        short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
+        short y = (short)(sector.Floor * TRConsts.Step1);
 
         List<TR2RoomVertex> vertices = room.RoomData.Vertices.ToList();
         List<ushort> oldVertIndices = new();
@@ -455,7 +456,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         {
             // The box used by this sector is unique to this sector, so we can
             // simply change the existing floor height to match the sector.
-            level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * ClickSize);
+            level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * TRConsts.Step1);
         }
         else
         {
@@ -469,15 +470,15 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             GenerateOverlaps(level, sector.BoxIndex, newBoxIndex);
 
             // Make a new box for the sector.
-            byte xmin = (byte)((room.Info.X / SectorSize) + (sectorIndex / room.NumZSectors));
-            byte zmin = (byte)((room.Info.Z / SectorSize) + (sectorIndex % room.NumZSectors));
+            byte xmin = (byte)((room.Info.X / TRConsts.Step4) + (sectorIndex / room.NumZSectors));
+            byte zmin = (byte)((room.Info.Z / TRConsts.Step4) + (sectorIndex % room.NumZSectors));
             TR2Box box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
                 XMax = (byte)(xmin + 1), // Only 1 tile
                 ZMax = (byte)(zmin + 1),
-                TrueFloor = (short)(sector.Floor * ClickSize)
+                TrueFloor = (short)(sector.Floor * TRConsts.Step1)
             };
 
             // Point the sector to the new box, and save it to the level
@@ -538,7 +539,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         // vertices on top and make new TRFace4 entries for the sides so the platform isn't floating.
         // TODO: how to handle raising/lowering slants, all of this assumes a flat floor to begin with.
 
-        int clickChange = Clicks * ClickSize;
+        int clickChange = Clicks * TRConsts.Step1;
 
         EMLevelData data = GetData(level);
 
@@ -551,9 +552,9 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         int sectorIndex = room.Sectors.ToList().IndexOf(sector);
 
         // Find the current vertices for this tile
-        short x = (short)(sectorIndex / room.NumZSectors * SectorSize);
-        short z = (short)(sectorIndex % room.NumZSectors * SectorSize);
-        short y = (short)(sector.Floor * ClickSize);
+        short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
+        short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
+        short y = (short)(sector.Floor * TRConsts.Step1);
 
         List<TR3RoomVertex> vertices = room.RoomData.Vertices.ToList();
         List<ushort> oldVertIndices = new();
@@ -708,7 +709,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         {
             // The box used by this sector is unique to this sector, so we can
             // simply change the existing floor height to match the sector.
-            level.Boxes[currentBoxIndex].TrueFloor = (short)(sector.Floor * ClickSize);
+            level.Boxes[currentBoxIndex].TrueFloor = (short)(sector.Floor * TRConsts.Step1);
         }
         else
         {
@@ -721,15 +722,15 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             GenerateOverlaps(level, currentBoxIndex, newBoxIndex);
 
             // Make a new box for the sector.
-            byte xmin = (byte)((room.Info.X / SectorSize) + (sectorIndex / room.NumZSectors));
-            byte zmin = (byte)((room.Info.Z / SectorSize) + (sectorIndex % room.NumZSectors));
+            byte xmin = (byte)((room.Info.X / TRConsts.Step4) + (sectorIndex / room.NumZSectors));
+            byte zmin = (byte)((room.Info.Z / TRConsts.Step4) + (sectorIndex % room.NumZSectors));
             TR2Box box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
                 XMax = (byte)(xmin + 1), // Only 1 tile
                 ZMax = (byte)(zmin + 1),
-                TrueFloor = (short)(sector.Floor * ClickSize)
+                TrueFloor = (short)(sector.Floor * TRConsts.Step1)
             };
 
             // Point the sector to the new box, and save it to the level

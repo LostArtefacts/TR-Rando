@@ -1,4 +1,5 @@
 ﻿using TREnvironmentEditor.Helpers;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Conditions;
@@ -29,8 +30,8 @@ public class EMSectorIsWallCondition : BaseEMCondition
 
     private static int GetSectorIndex(TRRoomInfo roomInfo, EMLocation location, int roomDepth)
     {
-        int x = (location.X - roomInfo.X) / 1024;
-        int z = (location.Z - roomInfo.Z) / 1024;
+        int x = (location.X - roomInfo.X) / TRConsts.Step4;
+        int z = (location.Z - roomInfo.Z) / TRConsts.Step4;
         return x * roomDepth + z;
     }
 }

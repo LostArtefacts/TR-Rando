@@ -216,13 +216,13 @@ public static class LocationUtilities
                     corner3 -= slant.ZSlant;
                 }
 
-                if ((x & 1023) < 512)
+                if ((x & (TRConsts.Step4 - 1)) < TRConsts.Step2)
                 {
-                    floor = (z & 1023) < 512 ? corner0 : corner1;
+                    floor = (z & (TRConsts.Step4 - 1)) < TRConsts.Step2 ? corner0 : corner1;
                 }
                 else
                 {
-                    floor = (z & 1023) < 512 ? corner3 : corner2;
+                    floor = (z & (TRConsts.Step4 - 1)) < TRConsts.Step2 ? corner3 : corner2;
                 }
             }
             else if (entry is TR3TriangulationEntry triangulation)
@@ -244,17 +244,17 @@ public static class LocationUtilities
                     (sbyte)(max - triangleCorners[3])
                 };
 
-                if ((x & 1023) < 512)
+                if ((x & (TRConsts.Step4 - 1)) < TRConsts.Step2)
                 {
-                    floor += (z & 1023) < 512 ? corners[0] : corners[1];
+                    floor += (z & (TRConsts.Step4 - 1)) < TRConsts.Step2 ? corners[0] : corners[1];
                 }
                 else
                 {
-                    floor += (z & 1023) < 512 ? corners[2] : corners[3];
+                    floor += (z & (TRConsts.Step4 - 1)) < TRConsts.Step2 ? corners[2] : corners[3];
                 }
             }
         }
 
-        return floor * 256;
+        return floor * TRConsts.Step1;
     }
 }

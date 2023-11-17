@@ -2,6 +2,7 @@
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
+using TRLevelControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.SFX;
@@ -10,9 +11,6 @@ namespace TRRandomizerCore.Randomizers;
 
 public class AudioRandomizer
 {
-    public static readonly int FullSectorSize = 1024;
-    public static readonly int HalfSectorSize = 512;
-
     private readonly IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> _tracks;
     private readonly Dictionary<Vector2, ushort> _trackMap;
 
@@ -64,8 +62,8 @@ public class AudioRandomizer
             {
                 for (int zNorm = -1; zNorm < 2; zNorm++)
                 {
-                    int x2 = x + xNorm * FullSectorSize;
-                    int z2 = z + zNorm * FullSectorSize;
+                    int x2 = x + xNorm * TRConsts.Step4;
+                    int z2 = z + zNorm * TRConsts.Step4;
                     Vector2 p2 = new(x2, z2);
                     if (!_trackMap.ContainsKey(p2))
                     {

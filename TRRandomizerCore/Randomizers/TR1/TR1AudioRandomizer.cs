@@ -132,8 +132,8 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
                     // Get the midpoint of the tile in world coordinates
                     return new Vector2
                     (
-                        AudioRandomizer.HalfSectorSize + room.Info.X + sectorIndex / room.NumZSectors * AudioRandomizer.FullSectorSize,
-                        AudioRandomizer.HalfSectorSize + room.Info.Z + sectorIndex % room.NumZSectors * AudioRandomizer.FullSectorSize
+                        TRConsts.Step2 + room.Info.X + sectorIndex / room.NumZSectors * TRConsts.Step4,
+                        TRConsts.Step2 + room.Info.Z + sectorIndex % room.NumZSectors * TRConsts.Step4
                     );
                 });
             }

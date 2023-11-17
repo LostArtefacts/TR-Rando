@@ -3,6 +3,7 @@ using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
@@ -200,8 +201,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
 
             // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / SectorSize);
-            byte zmin = (byte)(newRoom.Info.Z / SectorSize);
+            byte xmin = (byte)(newRoom.Info.X / TRConsts.Step4);
+            byte zmin = (byte)(newRoom.Info.Z / TRConsts.Step4);
             byte xmax = (byte)(xmin + newRoom.NumXSectors);
             byte zmax = (byte)(zmin + newRoom.NumZSectors);
             TR2Box box = new()
@@ -228,7 +229,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             // Only change the sector if it's not impenetrable and we don't want to preserve the existing zoning
             if (roomDef.Room.SectorList[i].Ceiling != _solidSector || roomDef.Room.SectorList[i].Floor != _solidSector)
             {
-                sectorYDiff = ydiff / ClickSize;
+                sectorYDiff = ydiff / TRConsts.Step1;
                 if (!PreserveBoxes)
                 {
                     sectorBoxIndex = newBoxIndex;
@@ -468,8 +469,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
 
             // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / SectorSize);
-            byte zmin = (byte)(newRoom.Info.Z / SectorSize);
+            byte xmin = (byte)(newRoom.Info.X / TRConsts.Step4);
+            byte zmin = (byte)(newRoom.Info.Z / TRConsts.Step4);
             byte xmax = (byte)(xmin + newRoom.NumXSectors);
             byte zmax = (byte)(zmin + newRoom.NumZSectors);
             TR2Box box = new()
@@ -501,7 +502,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             // Only change the sector if it's not impenetrable
             if (roomDef.Room.Sectors[i].Ceiling != _solidSector || roomDef.Room.Sectors[i].Floor != _solidSector)
             {
-                sectorYDiff = ydiff / ClickSize;
+                sectorYDiff = ydiff / TRConsts.Step1;
                 if (!PreserveBoxes)
                 {
                     sectorBoxIndex = newBoxIndex;

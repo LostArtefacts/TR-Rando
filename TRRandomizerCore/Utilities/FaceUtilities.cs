@@ -1,6 +1,7 @@
 ﻿using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Utilities;
@@ -8,8 +9,6 @@ namespace TRRandomizerCore.Utilities;
 public static class FaceUtilities
 {
     private static readonly byte _noRoom = 255;
-    private static readonly int _fullSectorSize = 1024;
-    private static readonly int _qrtSectorSize = 256;
 
     public static List<TRFace4> GetTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
@@ -113,9 +112,9 @@ public static class FaceUtilities
             if ((entries.Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger && triggerMatches.Contains(trigger.TrigType))
                 || (includeDeathTiles && entries.Any(e => e is FDKillLaraEntry)))
             {
-                short x = (short)(i / roomDepth * _fullSectorSize);
-                short z = (short)(i % roomDepth * _fullSectorSize);
-                short y = (short)(sector.Floor * _qrtSectorSize);
+                short x = (short)(i / roomDepth * TRConsts.Step4);
+                short z = (short)(i % roomDepth * TRConsts.Step4);
+                short y = (short)(sector.Floor * TRConsts.Step1);
 
                 List<TRVertex> vertMatches = GetFloorOrCeilingVerticesToMatch(x, z);
 
@@ -150,8 +149,8 @@ public static class FaceUtilities
         if (entry is FDClimbEntry climbEntry)
         {
             int sectorIndex = room.SectorList.ToList().IndexOf(sector);
-            short x = (short)(sectorIndex / room.NumZSectors * _fullSectorSize);
-            short z = (short)(sectorIndex % room.NumZSectors * _fullSectorSize);
+            short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
+            short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
 
             List<TRVertex> vertMatches = GetVerticesToMatch(climbEntry, x, z);
 
@@ -179,7 +178,7 @@ public static class FaceUtilities
                 TR2Room roomAbove = level.Rooms[sector.RoomAbove];
                 int wx = room.Info.X + x;
                 int wz = room.Info.Z + z;
-                int wy = (sector.Ceiling - 1) * _qrtSectorSize;
+                int wy = (sector.Ceiling - 1) * TRConsts.Step1;
                 TRRoomSector sectorAbove = FDUtilities.GetRoomSector(wx, wy, wz, sector.RoomAbove, level, floorData);
                 if (sector != sectorAbove)
                 {
@@ -201,8 +200,8 @@ public static class FaceUtilities
         if (entry is FDClimbEntry climbEntry)
         {
             int sectorIndex = room.Sectors.ToList().IndexOf(sector);
-            short x = (short)(sectorIndex / room.NumZSectors * _fullSectorSize);
-            short z = (short)(sectorIndex % room.NumZSectors * _fullSectorSize);
+            short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
+            short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
 
             List<TRVertex> vertMatches = GetVerticesToMatch(climbEntry, x, z);
 
@@ -230,7 +229,7 @@ public static class FaceUtilities
                 TR3Room roomAbove = level.Rooms[sector.RoomAbove];
                 int wx = room.Info.X + x;
                 int wz = room.Info.Z + z;
-                int wy = (sector.Ceiling - 1) * _qrtSectorSize;
+                int wy = (sector.Ceiling - 1) * TRConsts.Step1;
                 TRRoomSector sectorAbove = FDUtilities.GetRoomSector(wx, wy, wz, sector.RoomAbove, level, floorData);
                 if (sector != sectorAbove)
                 {
@@ -252,9 +251,9 @@ public static class FaceUtilities
         if (entry is TR3MonkeySwingEntry monkeyEntry)
         {
             int sectorIndex = room.Sectors.ToList().IndexOf(sector);
-            short x = (short)(sectorIndex / room.NumZSectors * _fullSectorSize);
-            short z = (short)(sectorIndex % room.NumZSectors * _fullSectorSize);
-            short y = (short)(sector.Floor * _qrtSectorSize);
+            short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
+            short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
+            short y = (short)(sector.Floor * TRConsts.Step1);
 
             List<TRVertex> vertMatches = GetFloorOrCeilingVerticesToMatch(x, z);
 
@@ -282,7 +281,7 @@ public static class FaceUtilities
                 TR3Room roomAbove = level.Rooms[sector.RoomAbove];
                 int wx = room.Info.X + x;
                 int wz = room.Info.Z + z;
-                int wy = (sector.Ceiling - 1) * _qrtSectorSize;
+                int wy = (sector.Ceiling - 1) * TRConsts.Step1;
                 TRRoomSector sectorAbove = FDUtilities.GetRoomSector(wx, wy, wz, sector.RoomAbove, level, floorData);
                 if (sector != sectorAbove)
                 {
@@ -305,20 +304,20 @@ public static class FaceUtilities
             vertMatches.Add(new TRVertex
             {
                 X = x,
-                Z = (short)(z + _fullSectorSize)
+                Z = (short)(z + TRConsts.Step4)
             });
         }
         if (climbEntry.IsPositiveX)
         {
             vertMatches.Add(new TRVertex
             {
-                X = (short)(x + _fullSectorSize),
+                X = (short)(x + TRConsts.Step4),
                 Z = z
             });
             vertMatches.Add(new TRVertex
             {
-                X = (short)(x + _fullSectorSize),
-                Z = (short)(z + _fullSectorSize)
+                X = (short)(x + TRConsts.Step4),
+                Z = (short)(z + TRConsts.Step4)
             });
         }
         if (climbEntry.IsNegativeZ)
@@ -330,7 +329,7 @@ public static class FaceUtilities
             });
             vertMatches.Add(new TRVertex
             {
-                X = (short)(x + _fullSectorSize),
+                X = (short)(x + TRConsts.Step4),
                 Z = z
             });
         }
@@ -339,12 +338,12 @@ public static class FaceUtilities
             vertMatches.Add(new TRVertex
             {
                 X = x,
-                Z = (short)(z + _fullSectorSize)
+                Z = (short)(z + TRConsts.Step4)
             });
             vertMatches.Add(new TRVertex
             {
-                X = (short)(x + _fullSectorSize),
-                Z = (short)(z + _fullSectorSize)
+                X = (short)(x + TRConsts.Step4),
+                Z = (short)(z + TRConsts.Step4)
             });
         }
 
@@ -362,18 +361,18 @@ public static class FaceUtilities
             },
             new TRVertex
             {
-                X = (short)(x + _fullSectorSize),
+                X = (short)(x + TRConsts.Step4),
                 Z = z
             },
             new TRVertex
             {
                 X = x,
-                Z = (short)(z + _fullSectorSize)
+                Z = (short)(z + TRConsts.Step4)
             },
             new TRVertex
             {
-                X = (short)(x + _fullSectorSize),
-                Z = (short)(z + _fullSectorSize)
+                X = (short)(x + TRConsts.Step4),
+                Z = (short)(z + TRConsts.Step4)
             }
         };            
 

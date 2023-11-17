@@ -1,4 +1,5 @@
 ﻿using TREnvironmentEditor.Helpers;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -24,7 +25,7 @@ public class EMCeilingFunction : BaseEMFunction
                     min = Math.Min(min, sector.Ceiling);
                 }
             }
-            room.Info.YTop = min * ClickSize;
+            room.Info.YTop = min * TRConsts.Step1;
 
             if (AmendVertices)
             {
@@ -55,7 +56,7 @@ public class EMCeilingFunction : BaseEMFunction
                     min = Math.Min(min, sector.Ceiling);
                 }
             }
-            room.Info.YTop = min * ClickSize;
+            room.Info.YTop = min * TRConsts.Step1;
 
             if (AmendVertices)
             {
@@ -86,7 +87,7 @@ public class EMCeilingFunction : BaseEMFunction
                     min = Math.Min(min, sector.Ceiling);
                 }
             }
-            room.Info.YTop = min * ClickSize;
+            room.Info.YTop = min * TRConsts.Step1;
 
             if (AmendVertices)
             {

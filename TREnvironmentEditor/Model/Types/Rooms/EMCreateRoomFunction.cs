@@ -1,6 +1,7 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Helpers.Pathing;
 using TRLevelControl.Model;
 
@@ -37,7 +38,7 @@ public class EMCreateRoomFunction : BaseEMFunction
             {
                 X = Location.X,
                 YBottom = Location.Y,
-                YTop = Location.Y - Height * 256,
+                YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
             RoomData = new TRRoomData
@@ -64,8 +65,8 @@ public class EMCreateRoomFunction : BaseEMFunction
             };
         }
 
-        sbyte ceiling = (sbyte)(room.Info.YTop / 256);
-        sbyte floor = (sbyte)(room.Info.YBottom / 256);
+        sbyte ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1);
+        sbyte floor = (sbyte)(room.Info.YBottom / TRConsts.Step1);
 
         List<TRFace4> faces = new();
         List<TRVertex> vertices = new();
@@ -120,7 +121,7 @@ public class EMCreateRoomFunction : BaseEMFunction
             {
                 X = Location.X,
                 YBottom = Location.Y,
-                YTop = Location.Y - Height * 256,
+                YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
             RoomData = new TR2RoomData
@@ -149,8 +150,8 @@ public class EMCreateRoomFunction : BaseEMFunction
             };
         }
 
-        sbyte ceiling = (sbyte)(room.Info.YTop / 256);
-        sbyte floor = (sbyte)(room.Info.YBottom / 256);
+        sbyte ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1);
+        sbyte floor = (sbyte)(room.Info.YBottom / TRConsts.Step1);
 
         List<TRFace4> faces = new();
         List<TRVertex> vertices = new();
@@ -207,7 +208,7 @@ public class EMCreateRoomFunction : BaseEMFunction
             {
                 X = Location.X,
                 YBottom = Location.Y,
-                YTop = Location.Y - Height * 256,
+                YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
             RoomData = new TR3RoomData
@@ -235,8 +236,8 @@ public class EMCreateRoomFunction : BaseEMFunction
             };
         }
 
-        sbyte ceiling = (sbyte)(room.Info.YTop / 256);
-        sbyte floor = (sbyte)(room.Info.YBottom / 256);
+        sbyte ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1);
+        sbyte floor = (sbyte)(room.Info.YBottom / TRConsts.Step1);
 
         List<TRFace4> faces = new();
         List<TRVertex> vertices = new();
@@ -352,8 +353,8 @@ public class EMCreateRoomFunction : BaseEMFunction
                 TRRoomSector eastNeighbour = sectors[(x + 1) * Depth + z];
                 TRRoomSector southNeighbour = sectors[x * Depth + (z - 1)];
 
-                BuildFace(faces, vertices, x, z, sector.Floor * 256, Direction.Down);
-                BuildFace(faces, vertices, x, z, sector.Ceiling * 256, Direction.Up);
+                BuildFace(faces, vertices, x, z, sector.Floor * TRConsts.Step1, Direction.Down);
+                BuildFace(faces, vertices, x, z, sector.Ceiling * TRConsts.Step1, Direction.Up);
 
                 if (westNeighbour.Floor < sector.Floor)
                 {
@@ -425,11 +426,11 @@ public class EMCreateRoomFunction : BaseEMFunction
         //    => One 1024 x 512 face
 
         int yChange = bottomY - topY;
-        int height = yChange * 256;
-        int squareCount = height / 1024;
-        int offset = height % 1024;
+        int height = yChange * TRConsts.Step1;
+        int squareCount = height / TRConsts.Step4;
+        int offset = height % TRConsts.Step4;
 
-        int y = bottomY * 256;
+        int y = bottomY * TRConsts.Step1;
 
         if (Textures.WallAlignment == Direction.Down && offset > 0)
         {
@@ -439,17 +440,17 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         for (int i = 0; i < squareCount; i++)
         {
-            BuildFace(faces, vertices, x, z, y - i * 1024, direction);
+            BuildFace(faces, vertices, x, z, y - i * TRConsts.Step4, direction);
         }
 
         if (Textures.WallAlignment != Direction.Down && offset > 0)
         {
-            y -= squareCount * 1024;
+            y -= squareCount * TRConsts.Step4;
             BuildFace(faces, vertices, x, z, y, direction, offset);
         }
     }
 
-    private void BuildFace(List<TRFace4> faces, List<TRVertex> vertices, int x, int z, int y, Direction direction, int height = 1024)
+    private void BuildFace(List<TRFace4> faces, List<TRVertex> vertices, int x, int z, int y, Direction direction, int height = TRConsts.Step4)
     {
         ushort texture = direction switch
         {
@@ -501,24 +502,24 @@ public class EMCreateRoomFunction : BaseEMFunction
         return new List<TRVertex>
         {
             new() {
-                X = (short)(x * 1024),
+                X = (short)(x * TRConsts.Step4),
                 Y = (short)y,
-                Z = (short)((z + 1) * 1024)
+                Z = (short)((z + 1) * TRConsts.Step4)
             },
             new() {
-                X = (short)((x + 1) * 1024),
+                X = (short)((x + 1) * TRConsts.Step4),
                 Y = (short)y,
-                Z = (short)((z + 1) * 1024)
+                Z = (short)((z + 1) * TRConsts.Step4)
             },
             new() {
-                X = (short)((x + 1) * 1024),
+                X = (short)((x + 1) * TRConsts.Step4),
                 Y = (short)y,
-                Z = (short)(z * 1024)
+                Z = (short)(z * TRConsts.Step4)
             },
             new() {
-                X = (short)(x * 1024),
+                X = (short)(x * TRConsts.Step4),
                 Y = (short)y,
-                Z = (short)(z * 1024)
+                Z = (short)(z * TRConsts.Step4)
             }
         };
     }
@@ -528,24 +529,24 @@ public class EMCreateRoomFunction : BaseEMFunction
         return new List<TRVertex>
         {
             new() {
-                X = (short)(x * 1024),
+                X = (short)(x * TRConsts.Step4),
                 Y = (short)(y - height),
-                Z = (short)(z * 1024)
+                Z = (short)(z * TRConsts.Step4)
             },
             new() {
-                X = (short)(x * 1024),
+                X = (short)(x * TRConsts.Step4),
                 Y = (short)(y - height),
-                Z = (short)((z + 1) * 1024)
+                Z = (short)((z + 1) * TRConsts.Step4)
             },
             new() {
-                X = (short)(x * 1024),
+                X = (short)(x * TRConsts.Step4),
                 Y = (short)y,
-                Z = (short)((z + 1) * 1024)
+                Z = (short)((z + 1) * TRConsts.Step4)
             },
             new() {
-                X = (short)(x * 1024),
+                X = (short)(x * TRConsts.Step4),
                 Y = (short)y,
-                Z = (short)(z * 1024)
+                Z = (short)(z * TRConsts.Step4)
             }
         };
     }
@@ -555,24 +556,24 @@ public class EMCreateRoomFunction : BaseEMFunction
         return new List<TRVertex>
         {
             new() {
-                X = (short)(x * 1024),
+                X = (short)(x * TRConsts.Step4),
                 Y = (short)(y - height),
-                Z = (short)(z * 1024)
+                Z = (short)(z * TRConsts.Step4)
             },
             new() {
-                X = (short)((x + 1) * 1024),
+                X = (short)((x + 1) * TRConsts.Step4),
                 Y = (short)(y - height),
-                Z = (short)(z * 1024)
+                Z = (short)(z * TRConsts.Step4)
             },
             new() {
-                X = (short)((x + 1) * 1024),
+                X = (short)((x + 1) * TRConsts.Step4),
                 Y = (short)y,
-                Z = (short)(z * 1024)
+                Z = (short)(z * TRConsts.Step4)
             },
             new() {
-                X = (short)(x * 1024),
+                X = (short)(x * TRConsts.Step4),
                 Y = (short)y,
-                Z = (short)(z * 1024)
+                Z = (short)(z * TRConsts.Step4)
             }
         };
     }

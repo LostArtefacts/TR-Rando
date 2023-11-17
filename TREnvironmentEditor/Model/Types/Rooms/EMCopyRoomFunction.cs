@@ -2,6 +2,7 @@
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Helpers.Pathing;
 using TRLevelControl.Model;
 
@@ -481,7 +482,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         // Only change the sector if it's not impenetrable
         if (originalSector.Ceiling != _solidSector || originalSector.Floor != _solidSector)
         {
-            sectorYDiff = ydiff / ClickSize;
+            sectorYDiff = ydiff / TRConsts.Step1;
         }
 
         sbyte ceiling = originalSector.Ceiling;
@@ -491,15 +492,15 @@ public class EMCopyRoomFunction : BaseEMFunction
         bool wallOpened = false;
         if (customHeight.HasValue)
         {
-            floor = (sbyte)(oldRoomInfo.YBottom / ClickSize);
+            floor = (sbyte)(oldRoomInfo.YBottom / TRConsts.Step1);
             floor += customHeight.Value;
 
             if (originalSector.IsImpenetrable)
             {
                 // This is effectively a promise that this sector is no longer
                 // going to be a wall, so reset it to a standard sector.
-                ceiling = (sbyte)(oldRoomInfo.YTop / ClickSize);
-                sectorYDiff = ydiff / ClickSize;
+                ceiling = (sbyte)(oldRoomInfo.YTop / TRConsts.Step1);
+                sectorYDiff = ydiff / TRConsts.Step1;
             }
 
             wallOpened = originalSector.IsImpenetrable || originalSector.BoxIndex == ushort.MaxValue;

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
 using TRGE.Core;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Transport;
@@ -547,7 +548,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             else if (level.Is(TR3LevelNames.THAMES) && (currentEntity.Room == 61 || currentEntity.Room == 62) && newEntityType == TR3Type.Monkey)
             {
                 // #286 Move the monkeys away from the AI entities
-                currentEntity.Z -= 1024;
+                currentEntity.Z -= TRConsts.Step4;
             }
             
             // Make sure to convert back to the actual type

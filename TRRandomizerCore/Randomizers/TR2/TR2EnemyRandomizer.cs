@@ -4,6 +4,7 @@ using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRGE.Core;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Packing;
@@ -857,7 +858,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 {
                     // Make sure the pickup is pickupable
                     TRRoomSector sector = FDUtilities.GetRoomSector(skidMan.X, skidMan.Y, skidMan.Z, skidMan.Room, level.Data, floorData);
-                    skidMan.Y = sector.Floor * 256;
+                    skidMan.Y = sector.Floor * TRConsts.Step1;
                     skidMan.Invisible = false;
 
                     if (sector.FDIndex != 0)

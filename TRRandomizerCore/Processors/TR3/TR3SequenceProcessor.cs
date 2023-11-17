@@ -5,6 +5,7 @@ using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRGE.Core;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Transport;
@@ -18,8 +19,6 @@ namespace TRRandomizerCore.Processors;
 
 public class TR3SequenceProcessor : TR3LevelProcessor
 {
-    private static readonly int _spikeHeightChange = -768;
-
     private static readonly Dictionary<TR3Type, TR3Type> _artefactAssignment = new()
     {
         [TR3Type.Infada_P] = TR3Type.Key1_P,
@@ -342,7 +341,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         {
             if (level.Is(TR3LevelNames.MADUBU) || entity.CodeBits == 31)
             {
-                entity.Y += _spikeHeightChange;
+                entity.Y -= TRConsts.Step3;
             }
             if (level.Is(TR3LevelNames.MADUBU))
             {

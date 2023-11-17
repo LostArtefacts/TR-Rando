@@ -17,8 +17,8 @@ public class Room
     {
         return new Room
         {
-            Floor = (sbyte)(room.Info.YBottom / 256),
-            Ceiling = (sbyte)(room.Info.YTop / 256),
+            Floor = (sbyte)(room.Info.YBottom / TRConsts.Step1),
+            Ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1),
             NumXSectors = room.NumXSectors,
             NumZSectors = room.NumZSectors,
             Sectors = room.Sectors.ToList(),
@@ -31,8 +31,8 @@ public class Room
     {
         return new Room
         {
-            Floor = (sbyte)(room.Info.YBottom / 256),
-            Ceiling = (sbyte)(room.Info.YTop / 256),
+            Floor = (sbyte)(room.Info.YBottom / TRConsts.Step1),
+            Ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1),
             NumXSectors = room.NumXSectors,
             NumZSectors = room.NumZSectors,
             Sectors = room.SectorList.ToList(),
@@ -45,8 +45,8 @@ public class Room
     {
         return new Room
         {
-            Floor = (sbyte)(room.Info.YBottom / 256),
-            Ceiling = (sbyte)(room.Info.YTop / 256),
+            Floor = (sbyte)(room.Info.YBottom / TRConsts.Step1),
+            Ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1),
             NumXSectors = room.NumXSectors,
             NumZSectors = room.NumZSectors,
             Sectors = room.Sectors.ToList(),
