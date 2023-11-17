@@ -6,7 +6,7 @@ public class TRTexImage16 : TRTexImage<ushort>
 {
     public Textile16Pixel[] To32BPPFormat()
     {
-        Textile16Pixel[] pixels = new Textile16Pixel[256 * 256];
+        Textile16Pixel[] pixels = new Textile16Pixel[TRConsts.TPageSize];
 
         for (int i = 0; i < pixels.Length; i++)
         {

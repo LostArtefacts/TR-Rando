@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRModelTransporter.Model.Textures;
@@ -25,7 +26,7 @@ public class IndexedTRSpriteTexture : AbstractIndexedTRTexture
 
     protected override void GetBoundsFromTexture()
     {
-        _bounds = new Rectangle(Texture.X, Texture.Y, (Texture.Width + 1) / 256, (Texture.Height + 1) / 256);
+        _bounds = new(Texture.X, Texture.Y, (Texture.Width + 1) / TRConsts.TPageWidth, (Texture.Height + 1) / TRConsts.TPageHeight);
     }
 
     protected override void ApplyBoundDiffToTexture(int xDiff, int yDiff)

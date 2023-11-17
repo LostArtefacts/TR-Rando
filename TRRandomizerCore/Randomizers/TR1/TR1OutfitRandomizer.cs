@@ -640,10 +640,10 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                                 if (c.A != 0 && index == -1)
                                 {
                                     // Top-left is skin tone in each of these cases.
-                                    index = level.Data.Images8[tile.Index].Pixels[y * 256 + x];
+                                    index = level.Data.Images8[tile.Index].Pixels[y * TRConsts.TPageWidth + x];
                                 }
 
-                                level.Data.Images8[tile.Index].Pixels[y * 256 + x] = (byte)(c.A == 0 ? 0 : index);
+                                level.Data.Images8[tile.Index].Pixels[y * TRConsts.TPageWidth + x] = (byte)(c.A == 0 ? 0 : index);
                             }
                             return c;
                         });

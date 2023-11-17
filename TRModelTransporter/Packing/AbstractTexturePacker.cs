@@ -2,6 +2,7 @@
 using RectanglePacker.Events;
 using RectanglePacker.Organisation;
 using System.Drawing;
+using TRLevelControl;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
@@ -27,8 +28,8 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     public AbstractTexturePacker(L level, int maximumTiles = 16, ITextureClassifier classifier = null)
     {
-        TileWidth = 256;
-        TileHeight = 256;
+        TileWidth = TRConsts.TPageWidth;
+        TileHeight = TRConsts.TPageHeight;
         MaximumTiles = maximumTiles;
 
         Options = new PackingOptions
