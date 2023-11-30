@@ -246,7 +246,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
                 if (entry is FDTriggerEntry trigger)
                 {
                     // Basic trigger checks - e.g. end level, underwater current
-                    if (IsTriggerInvalid(trigger))
+                    if (IsTriggerInvalid(level, trigger))
                     {
                         invalidFloorData = true;
                         break;
@@ -372,13 +372,18 @@ public abstract class AbstractLocationGenerator<L> where L : class
             || sector.IsSlipperySlope;
     }
 
-    private static bool IsTriggerInvalid(FDTriggerEntry trigger)
+    private bool IsTriggerInvalid(L level, FDTriggerEntry trigger)
     {
         // Any trigger types where we don't want items placed
         return trigger.TrigActionList.Any(a =>
             a.TrigAction == FDTrigAction.UnderwaterCurrent
             || a.TrigAction == FDTrigAction.EndLevel
-        );
+        ) || !TriggerSupportsItems(level, trigger);
+    }
+
+    protected virtual bool TriggerSupportsItems(L level, FDTriggerEntry trigger)
+    {
+        return true;
     }
 
     public Vector4? GetBestSlantMidpoint(FDSlantEntry slant)

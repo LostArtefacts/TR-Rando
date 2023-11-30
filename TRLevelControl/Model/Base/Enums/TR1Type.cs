@@ -345,4 +345,16 @@ public enum TR1Type
     AtlantisKeyItemBase           = 23000,
 
     PyramidKeyItemBase            = 24000,
+
+    EgyptKeyItemBase              = 25000,
+    Egypt_K1_GoldKey              = 25192,
+
+    CatKeyItemBase                = 26000,
+    Cat_K1_OrnateKeyPyramid       = 26146,
+    Cat_K1_OrnateKeyCrocPool      = 26196,
+    Cat_K1_OrnateKeyTierSouth     = 26192,
+    Cat_K1_OrnateKeyTierNorth     = 26303,
+    Cat_K1_OrnateKeyCubbySouth    = 26269,
+    Cat_K1_OrnateKeyCubbyNorth    = 26365,
+    Cat_K1_OrnateKeyCatStatue     = 26206,
 }
