@@ -6,6 +6,7 @@ namespace TREnvironmentEditor.Model.Types;
 public class EMModifyEntityFunction : BaseEMFunction
 {
     public int EntityIndex { get; set; }
+    public EMEntityFinder EntityFinder { get; set; }
     public bool? Invisible { get; set; }
     public bool? ClearBody { get; set; }
     public short? Intensity1 { get; set; }
@@ -15,19 +16,22 @@ public class EMModifyEntityFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        ModifyEntity(level.Entities[data.ConvertEntity(EntityIndex)]);
+        int entityIndex = EntityFinder?.GetEntity(level) ?? EntityIndex;
+        ModifyEntity(level.Entities[data.ConvertEntity(entityIndex)]);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        ModifyEntity(level.Entities[data.ConvertEntity(EntityIndex)]);            
+        int entityIndex = EntityFinder?.GetEntity(level) ?? EntityIndex;
+        ModifyEntity(level.Entities[data.ConvertEntity(entityIndex)]);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        ModifyEntity(level.Entities[data.ConvertEntity(EntityIndex)]);
+        int entityIndex = EntityFinder?.GetEntity(level) ?? EntityIndex;
+        ModifyEntity(level.Entities[data.ConvertEntity(entityIndex)]);
     }
 
     private void ModifyEntity(TR1Entity entity)

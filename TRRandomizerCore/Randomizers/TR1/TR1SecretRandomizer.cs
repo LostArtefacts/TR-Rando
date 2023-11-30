@@ -779,7 +779,8 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         existingActions.Add(actionItem);
                     }
                 }
-                else
+                else if (!Settings.UseRewardRoomCameras
+                    || (actionItem.TrigAction != FDTrigAction.Camera && actionItem.TrigAction != FDTrigAction.LookAtItem))
                 {
                     existingActions.Add(actionItem);
                 }

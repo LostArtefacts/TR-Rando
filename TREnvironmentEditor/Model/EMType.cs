@@ -58,6 +58,7 @@ public enum EMType
     RemoveTriggerAction = 71,
     RemoveEntityTriggers = 72,
     MergeTriggers = 73,
+    ResetPickupTrigger = 74,
 
     // Portal types 81-100
     VisibilityPortal = 81,

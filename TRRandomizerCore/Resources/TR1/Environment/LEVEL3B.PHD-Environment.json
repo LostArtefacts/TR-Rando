@@ -5987,6 +5987,59 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If a particular secret is present, hide it until the level is flipped.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 73216,
+          "Y": 4608,
+          "Z": 69120,
+          "Room": 38
+        }
+      },
+      "OnTrue": [
+        {
+          "EMType": 48,
+          "EntityFinder": {
+            "Location": {
+              "X": 73216,
+              "Y": 4608,
+              "Z": 69120,
+              "Room": 38
+            },
+            "Type": 2
+          },
+          "Invisible": true
+        },
+        {
+          "EMType": 74,
+          "Locations": [
+            {
+              "X": 73216,
+              "Y": 4608,
+              "Z": 69120,
+              "Room": 38
+            }
+          ]
+        },
+        {
+          "EMType": 73,
+          "BaseLocation": {
+            "X": 72772,
+            "Y": 4608,
+            "Z": 68738,
+            "Room": 38
+          },
+          "TargetLocation": {
+            "X": 73216,
+            "Y": 3584,
+            "Z": 61952,
+            "Room": 5
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],
