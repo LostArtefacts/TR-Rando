@@ -5,6 +5,7 @@ using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Handlers;
+using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Sound;
 using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
@@ -13,21 +14,19 @@ using TRRandomizerCore.Levels;
 using TRRandomizerCore.Meshes;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Textures;
+using TRTexture16Importer.Helpers;
 using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Randomizers;
 
 public class TR1OutfitRandomizer : BaseTR1Randomizer
 {
+    private static readonly string _gymOutfitHash = "7866a39d5dd37c89a4f20df3b074788e";
     private static readonly Version _minBraidCutsceneVersion = new(2, 13, 0);
     private static readonly short[] _barefootSfxIDs = new short[] { 0, 4 };
     private static readonly double _mauledLaraChance = (double)1 / 3;
     private static readonly double _partialGymChance = (double)1 / 3;
-    private static readonly List<string> _permittedGymLevels = new()
-    {
-        TR1LevelNames.CAVES, TR1LevelNames.VILCABAMBA, TR1LevelNames.FOLLY,
-        TR1LevelNames.COLOSSEUM, TR1LevelNames.CISTERN, TR1LevelNames.TIHOCAN
-    };
+    private static readonly Color _midasGoldColour = Color.FromArgb(252, 236, 136);
 
     internal TR1TextureMonitorBroker TextureMonitor { get; set; }
 
@@ -100,13 +99,12 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         if (Settings.AllowGymOutfit)
         {
-            // Gym outfits are only available in some levels and we can only use it
-            // if the T-Rex isn't present because that overwrites the MiscAnim's textures.
-            _gymLevels = Levels.FindAll(l => _permittedGymLevels.Contains(l.LevelFileBaseName.ToUpper()));
+            // Gym outfits are only available if the T-Rex isn't present because that overwrites the MiscAnim's textures.
+            _gymLevels = Levels.FindAll(l => LevelSupportsGymOutfit(l) && !l.Is(TR1LevelNames.ASSAULT));
             if (_gymLevels.Count > 0)
             {
                 _gymLevels = _gymLevels.RandomSelection(_generator, _generator.Next(1, _gymLevels.Count + 1));
-                _partialGymLevels = new List<TR1ScriptedLevel>();
+                _partialGymLevels = new();
                 for (int i = _gymLevels.Count - 1; i >= 0; i--)
                 {
                     if (_generator.NextDouble() < _partialGymChance)
@@ -119,7 +117,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             // Cache Lara's barefoot SFX from the original Gym.
             TR1Level gym = new TR1LevelControl().Read(Path.Combine(BackupPath, TR1LevelNames.ASSAULT));
-            _barefootSfx = new Dictionary<short, List<byte[]>>();
+            _barefootSfx = new();
             foreach (short soundID in _barefootSfxIDs)
             {
                 TRSoundDetails footstepDetails = gym.SoundDetails[gym.SoundMap[soundID]];
@@ -129,7 +127,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
         }
 
         // Add a chance of Lara's mauled outfit being used.
-        _mauledLevels = new List<TR1ScriptedLevel>();
+        _mauledLevels = new();
         foreach (TR1ScriptedLevel level in Levels)
         {
             if (IsInvisibleLevel(level) || IsGymLevel(level) || level.Is(TR1LevelNames.MIDAS))
@@ -160,6 +158,22 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
         {
             (ScriptEditor.Script as TR1Script).EnableBraid = true;
         }
+    }
+
+    private bool LevelSupportsGymOutfit(TR1ScriptedLevel scriptedLevel)
+    {
+        if (IsInvisibleLevel(scriptedLevel))
+        {
+            return false;
+        }
+
+        TR1CombinedLevel level = LoadCombinedLevel(scriptedLevel);
+        if (level.IsCutScene)
+        {
+            level = level.ParentLevel;
+        }
+
+        return !level.Data.Entities.Any(e => e.TypeID == TR1Type.TRex);
     }
 
     private bool IsBraidLevel(TR1ScriptedLevel lvl)
@@ -408,8 +422,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private void AmendBackpack(TR1CombinedLevel level)
         {
-            bool trexPresent = Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.TRex) != null ||
-                (level.IsCutScene && Array.Find(level.ParentLevel.Data.Models, m => m.ID == (uint)TR1Type.TRex) != null);
+            bool trexPresent = level.Data.Entities.Any(e => e.TypeID == TR1Type.TRex)
+                || (level.IsCutScene && level.ParentLevel.Data.Entities.Any(e => e.TypeID == TR1Type.TRex));
             bool braidLevel = _outer.IsBraidLevel(level.Script) || (level.IsCutScene && _outer.IsBraidLevel(level.ParentLevel.Script));
             bool invisibleLevel = _outer.IsInvisibleLevel(level.Script) || (level.IsCutScene && _outer.IsInvisibleLevel(level.ParentLevel.Script));
             bool gymLevel = _outer.IsGymLevel(level.Script) || _outer.IsPartialGymLevel(level.Script) ||
@@ -478,8 +492,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private void ConvertToGymOutfit(TR1CombinedLevel level)
         {
-            if (Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.TRex) != null
-                || (level.IsCutScene && Array.Find(level.ParentLevel.Data.Models, m => m.ID == (uint)TR1Type.TRex) != null))
+            if (!ImportGymOutfit(level))
             {
                 return;
             }
@@ -505,12 +518,15 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             int[] thighs = new int[] { 1, 4 };
             foreach (int thigh in thighs)
             {
-                // Empty holsters
+                // Empty holsters. The ToQ cutscene actor model is notoriously awkward, hence
+                // special handling here to ensure we pick the right quads.
+                bool qualopec_cut = level.Is(TR1LevelNames.QUALOPEC_CUT) && thigh == 1;
                 CopyMeshParts(level.Data, new MeshCopyData
                 {
                     BaseMesh = lara[thigh],
                     NewMesh = laraMisc[thigh],
-                    ColourFaceCopies = Enumerable.Range(8, 6)
+                    ColourFaceCopies = Enumerable.Range(qualopec_cut ? 2 : 8, 6),
+                    TextureFaceCopies = qualopec_cut ? Enumerable.Range(1, 5) : null
                 });
 
                 // Holstered pistols
@@ -585,32 +601,20 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 }
             }
 
+            // If there is a Midas hand present, convert the LaraMiscAnim gym textures to gold. For meshes 1, 4, and 14
+            // we use Lara's main model as a base to ensure it matches previous edits.
+            List<int> laraBaseIndices = new() { 1, 4, 14 };
+            CreateGoldGymOutfit(level, laraMisc, i => laraBaseIndices.Contains(i) ? lara[i] : laraMisc[i]);
+
             if (level.HasCutScene)
             {
-                TR1ModelImporter importer = new(true)
-                {
-                    Level = level.CutSceneLevel.Data,
-                    LevelName = level.CutSceneLevel.Name,
-                    ClearUnusedSprites = false,
-                    EntitiesToImport = new List<TR1Type> { TR1Type.LaraMiscAnim_H_General },
-                    DataFolder = _outer.GetResourcePath(@"TR1\Models")
-                };
-
-                string remapPath = _outer.GetResourcePath(@"TR1\Textures\Deduplication\" + level.CutSceneLevel.Name + "-TextureRemap.json");
-                if (File.Exists(remapPath))
-                {
-                    importer.TextureRemapPath = remapPath;
-                }
-
-                importer.Import();
                 ConvertToGymOutfit(level.CutSceneLevel);
             }
         }
 
         private void ConvertToPartialGymOutfit(TR1CombinedLevel level)
         {
-            if (Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.TRex) != null
-                || (level.IsCutScene && Array.Find(level.ParentLevel.Data.Models, m => m.ID == (uint)TR1Type.TRex) != null))
+            if (!ImportGymOutfit(level))
             {
                 return;
             }
@@ -665,25 +669,100 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             // in texture randomization.
             _outer.TextureMonitor.CreateMonitor(level.Name).UseLaraOutfitTextures = false;
 
+            // If there is a Midas hand present, revert the LaraMiscAnim gym textures to standard gold.
+            CreateGoldGymOutfit(level, laraMisc, i => lara[i]);
+
             if (level.HasCutScene)
             {
-                TR1ModelImporter importer = new(true)
-                {
-                    Level = level.CutSceneLevel.Data,
-                    LevelName = level.CutSceneLevel.Name,
-                    ClearUnusedSprites = false,
-                    EntitiesToImport = new List<TR1Type> { TR1Type.LaraMiscAnim_H_General },
-                    DataFolder = _outer.GetResourcePath(@"TR1\Models")
-                };
+                ConvertToPartialGymOutfit(level.CutSceneLevel);
+            }
+        }
 
-                string remapPath = _outer.GetResourcePath(@"TR1\Textures\Deduplication\" + level.CutSceneLevel.Name + "-TextureRemap.json");
-                if (File.Exists(remapPath))
+        private static void CreateGoldGymOutfit(TR1CombinedLevel level, TRMesh[] laraMisc, Func<int, TRMesh> cloneBaseFunc)
+        {
+            if (!level.Data.Entities.Any(e => e.TypeID == TR1Type.MidasHand_N))
+            {
+                return;
+            }
+
+            int goldIndex = level.Data.Palette.Select(c => c.ToTR1Color())
+                    .FindClosest(_midasGoldColour, 1);
+            MeshEditor editor = new();
+
+            for (int i = 0; i < laraMisc.Length; i++)
+            {
+                TRMesh mesh = laraMisc[i];
+                TRMeshUtilities.DuplicateMesh(level.Data, mesh, MeshEditor.CloneMesh(cloneBaseFunc(i)));
+                editor.Mesh = mesh;
+
+                foreach (TRFace4 face in mesh.TexturedRectangles)
                 {
-                    importer.TextureRemapPath = remapPath;
+                    editor.AddColouredRectangle(face);
+                }
+                foreach (TRFace3 face in mesh.TexturedTriangles)
+                {
+                    editor.AddColouredTriangle(face);
                 }
 
+                editor.ClearTexturedRectangles();
+                editor.ClearTexturedTriangles();
+
+                editor.Mesh.ColouredRectangles.ToList().ForEach(f => f.Texture = (ushort)goldIndex);
+                editor.Mesh.ColouredTriangles.ToList().ForEach(f => f.Texture = (ushort)goldIndex);
+            }
+        }
+
+        private bool ImportGymOutfit(TR1CombinedLevel level)
+        {
+            if (level.Is(TR1LevelNames.MINES_CUT))
+            {
+                // Lara isn't here.
+                return false;
+            }
+
+            TRModel existingModel = Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.LaraMiscAnim_H);
+            if (existingModel != null)
+            {
+                // If we already have the gym outfit available, we're done.
+                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, existingModel);
+                if (meshes.ComputeSkeletonHash() == _gymOutfitHash)
+                {
+                    return true;
+                }
+            }
+
+            TR1ModelImporter importer = new(true)
+            {
+                Level = level.Data,
+                LevelName = level.Name,
+                ClearUnusedSprites = false,
+                EntitiesToImport = new List<TR1Type> { TR1Type.LaraMiscAnim_H_General },
+                DataFolder = _outer.GetResourcePath(@"TR1\Models")
+            };
+
+            string remapPath = _outer.GetResourcePath($@"TR1\Textures\Deduplication\{level.Name}-TextureRemap.json");
+            if (File.Exists(remapPath))
+            {
+                importer.TextureRemapPath = remapPath;
+            }
+
+            try
+            {
                 importer.Import();
-                ConvertToPartialGymOutfit(level.CutSceneLevel);
+                // If we already have an existing model, restore the animation and frames
+                // e.g. for Adam death animation and scion pickups.
+                if (existingModel != null)
+                {
+                    TRModel newModel = Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.LaraMiscAnim_H);
+                    newModel.Animation = existingModel.Animation;
+                    newModel.FrameOffset = existingModel.FrameOffset;
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 

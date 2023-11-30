@@ -1,4 +1,6 @@
-﻿using TRLevelControl.Model;
+﻿using System.Security.Cryptography;
+using System.Text;
+using TRLevelControl.Model;
 
 namespace TRModelTransporter.Helpers;
 
@@ -250,5 +252,33 @@ public static class TRModelExtensions
         }
 
         return defaultToOriginal ? textureReference : (ushort)0;
+    }
+
+    public static string ComputeSkeletonHash(this TRMesh[] meshes)
+    {
+        using MemoryStream ms = new();
+        using BinaryWriter writer = new(ms);
+        using MD5 md5 = MD5.Create();
+
+        // We only care about the structure, so reset all texture references
+        // as there is no guarantee these will match across levels.
+        foreach (TRMesh mesh in meshes)
+        {
+            TRMesh clone = mesh.Clone();
+            clone.TexturedRectangles.ToList().ForEach(t => t.Texture = 0);
+            clone.TexturedTriangles.ToList().ForEach(t => t.Texture = 0);
+            clone.ColouredRectangles.ToList().ForEach(t => t.Texture = 0);
+            clone.ColouredTriangles.ToList().ForEach(t => t.Texture = 0);
+            writer.Write(clone.Serialize());
+        }
+
+        byte[] hash = md5.ComputeHash(ms.ToArray());
+        StringBuilder sb = new();
+        for (int i = 0; i < hash.Length; i++)
+        {
+            sb.Append(hash[i].ToString("x2"));
+        }
+
+        return sb.ToString();
     }
 }

@@ -130,75 +130,25 @@ public class MeshEditor
         Mesh.NumTexturedTriangles = (short)triangles.Count;
     }
 
+    public void AddColouredRectangle(TRFace4 face)
+    {
+        List<TRFace4> rectangles = Mesh.ColouredRectangles.ToList();
+        rectangles.Add(face);
+        Mesh.ColouredRectangles = rectangles.ToArray();
+        Mesh.NumColouredRectangles = (short)rectangles.Count;
+    }
+
+    public void AddColouredTriangle(TRFace3 face)
+    {
+        List<TRFace3> triangles = Mesh.ColouredTriangles.ToList();
+        triangles.Add(face);
+        Mesh.ColouredTriangles = triangles.ToArray();
+        Mesh.NumColouredTriangles = (short)triangles.Count;
+    }
+
     public static TRMesh CloneMesh(TRMesh mesh)
     {
-        TRMesh clone = new()
-        {
-            Centre = mesh.Centre,
-            CollRadius = mesh.CollRadius,
-            ColouredRectangles = new TRFace4[mesh.NumColouredRectangles],
-            ColouredTriangles = new TRFace3[mesh.NumColouredTriangles],
-            Lights = mesh.Lights,
-            Normals = mesh.Normals,
-            NumColouredRectangles = mesh.NumColouredRectangles,
-            NumColouredTriangles = mesh.NumColouredTriangles,
-            NumNormals = mesh.NumNormals,
-            NumTexturedRectangles = mesh.NumTexturedRectangles,
-            NumTexturedTriangles = mesh.NumTexturedTriangles,
-            NumVertices = mesh.NumVertices,
-            Pointer = mesh.Pointer,
-            TexturedRectangles = new TRFace4[mesh.NumTexturedRectangles],
-            TexturedTriangles = new TRFace3[mesh.NumTexturedTriangles],
-            Vertices = new TRVertex[mesh.NumVertices]
-        };
-
-        for (int i = 0; i < mesh.NumColouredRectangles; i++)
-        {
-            clone.ColouredRectangles[i] = new TRFace4
-            {
-                Texture = mesh.ColouredRectangles[i].Texture,
-                Vertices = new List<ushort>(mesh.ColouredRectangles[i].Vertices).ToArray()
-            };
-        }
-
-        for (int i = 0; i < mesh.NumColouredTriangles; i++)
-        {
-            clone.ColouredTriangles[i] = new TRFace3
-            {
-                Texture = mesh.ColouredTriangles[i].Texture,
-                Vertices = new List<ushort>(mesh.ColouredTriangles[i].Vertices).ToArray()
-            };
-        }
-
-        for (int i = 0; i < mesh.NumTexturedRectangles; i++)
-        {
-            clone.TexturedRectangles[i] = new TRFace4
-            {
-                Texture = mesh.TexturedRectangles[i].Texture,
-                Vertices = new List<ushort>(mesh.TexturedRectangles[i].Vertices).ToArray()
-            };
-        }
-
-        for (int i = 0; i < mesh.NumTexturedTriangles; i++)
-        {
-            clone.TexturedTriangles[i] = new TRFace3
-            {
-                Texture = mesh.TexturedTriangles[i].Texture,
-                Vertices = new List<ushort>(mesh.TexturedTriangles[i].Vertices).ToArray()
-            };
-        }
-
-        for (int i = 0; i < mesh.NumVertices; i++)
-        {
-            clone.Vertices[i] = new TRVertex
-            {
-                X = mesh.Vertices[i].X,
-                Y = mesh.Vertices[i].Y,
-                Z = mesh.Vertices[i].Z
-            };
-        }
-
-        return clone;
+        return mesh.Clone();
     }
 
     public static TRMesh CloneMeshAsColoured(TRMesh mesh, ushort paletteIndex)
