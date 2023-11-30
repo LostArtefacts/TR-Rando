@@ -32,7 +32,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         TR1Type.Missile1_H, TR1Type.Missile2_H, TR1Type.Missile3_H,
         TR1Type.CutsceneActor2, TR1Type.CutsceneActor3, TR1Type.CutsceneActor4,
         TR1Type.AdamEgg, TR1Type.ScionHolder, TR1Type.ScionPiece3_S_P, TR1Type.ScionPiece4_S_P,
-        TR1Type.Skateboard
+        TR1Type.Skateboard, TR1Type.Doppelganger
     };
 
     private static readonly List<TR1Type> _pickupModels = new()
@@ -67,7 +67,8 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
             || TR1TypeUtilities.IsKeyholeType(type)
             || TR1TypeUtilities.IsSlotType(type)
             || TR1TypeUtilities.IsPushblockType(type)
-            || type == TR1Type.Barricade;
+            || type == TR1Type.Barricade
+            || type == TR1Type.Compass_M_H;
     }
 
     protected override bool ShouldSolidifyModel(TRModel model)

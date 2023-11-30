@@ -8,6 +8,7 @@ public class WireframeData
     /// Textures that will be retained, such as water surfaces.
     /// </summary>
     public List<ushort> ExcludedTextures { get; set; }
+    public List<ushort> DeathTextures { get; set; }
 
     /// <summary>
     /// Textures that require specific processing.
@@ -87,17 +88,18 @@ public class WireframeData
 
     public WireframeData()
     {
-        ExcludedTextures = new List<ushort>();
-        SpecialTextures = new List<SpecialTextureHandling>();
-        ForcedOverrides = new List<ushort>();
+        ExcludedTextures = new();
+        DeathTextures = new();
+        SpecialTextures = new();
+        ForcedOverrides = new();
         HighlightColour = Color.White;
         TriggerColour = Color.White;
         DeathColour = Color.White;
         SolidLara = false;
         SolidEnemies = false;
-        SolidModels = new List<uint>();
-        ModelColours = new Dictionary<uint, Color>();
-        ManualClips = new List<WireframeClip>();
+        SolidModels = new();
+        ModelColours = new();
+        ManualClips = new();
         HighlightLadders = false;
         Has3DPickups = false;
     }
