@@ -917,6 +917,135 @@
           -1
         ]
       }
+    ],
+    [
+      {
+        "Comments": "Add an earthquake.",
+        "EMType": 145,
+        "Tags": [
+          4
+        ],
+        "Data": [
+          {
+            "ModelID": 183,
+            "TextureMap": {}
+          }
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 183,
+        "Location": {
+          "X": 35328,
+          "Y": 2048,
+          "Z": 72192,
+          "Room": 35
+        }
+      },
+      {
+        "EMType": 68,
+        "Locations": [
+          {
+            "X": 34304,
+            "Y": 2048,
+            "Z": 77312,
+            "Room": 35
+          },
+          {
+            "X": 33280,
+            "Y": 2048,
+            "Z": 77312,
+            "Room": 35
+          }
+        ],
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Comments": "Import the flame emitter model.",
+        "EMType": 141,
+        "Tags": [
+          4
+        ],
+        "Models": [
+          179
+        ]
+      },
+      {
+        "Comments": "Add some flame traps.",
+        "EMType": 51,
+        "TypeID": 179,
+        "Location": {
+          "X": 34304,
+          "Y": 2048,
+          "Z": 77312,
+          "Room": 35
+        },
+        "TargetRelocation": {
+          "X": 34304,
+          "Y": 2048,
+          "Z": 76288,
+          "Room": 35
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 179,
+        "Location": {
+          "X": 33280,
+          "Y": 2048,
+          "Z": 77312,
+          "Room": 35
+        },
+        "TargetRelocation": {
+          "X": 34304,
+          "Y": 2048,
+          "Z": 76288,
+          "Room": 35
+        }
+      },
+      {
+        "EMType": 61,
+        "ExpandedLocations": {
+          "Location": {
+            "X": 32256,
+            "Y": 2304,
+            "Z": 78336,
+            "Room": 34
+          },
+          "ExpandX": 4,
+          "ExpandZ": 1
+        },
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -2
+            },
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      },
+      {
+        "EMType": 21,
+        "TextureMap": {
+          "707": {
+            "35": {
+              "Rectangles": [
+                48,
+                68
+              ]
+            }
+          }
+        }
+      }
     ]
   ],
   "AllWithin": [

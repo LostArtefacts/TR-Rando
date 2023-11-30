@@ -125,7 +125,7 @@ public class DynamicTextureBuilder
         else
         {
             hips = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.Lara)[0];
-            if (level.Is(TR1LevelNames.MIDAS))
+            if (level.Data.Entities.Any(e => e.TypeID == TR1Type.MidasHand_N))
             {
                 modelIDs.Add(TR1Type.LaraMiscAnim_H);
                 modelIDs.Add(TR1Type.LaraPonytail_H_U);

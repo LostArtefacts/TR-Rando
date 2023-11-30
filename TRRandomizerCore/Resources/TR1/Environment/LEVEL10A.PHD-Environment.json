@@ -1135,7 +1135,7 @@
               "Y": -512,
               "Z": 2048,
               "Intensity1": 2048,
-              "Fade1": 387
+              "Fade1": 1024
             }
           ],
           "Height": 44,
@@ -1168,11 +1168,18 @@
           },
           "Lights": [
             {
-              "X": 2560,
-              "Y": -1024,
+              "X": 1536,
+              "Y": -1536,
               "Z": 2048,
-              "Intensity1": 4096,
+              "Intensity1": 2048,
               "Fade1": 1024
+            },
+            {
+              "X": 3584,
+              "Y": -1792,
+              "Z": 2560,
+              "Intensity1": 4096,
+              "Fade1": 2048
             }
           ],
           "Height": 8,
@@ -1215,8 +1222,8 @@
               "X": 4096,
               "Y": -1024,
               "Z": 4096,
-              "Intensity1": 3072,
-              "Fade1": 3072
+              "Intensity1": 6144,
+              "Fade1": 2048
             },
             {
               "X": 4096,
@@ -1224,6 +1231,13 @@
               "Z": 7168,
               "Intensity1": 4096,
               "Fade1": 4096
+            },
+            {
+              "X": 1536,
+              "Y": -256,
+              "Z": 6656,
+              "Intensity1": 4096,
+              "Fade1": 2048
             }
           ],
           "Height": 24,
@@ -1287,7 +1301,7 @@
               "Y": -1024,
               "Z": 2048,
               "Intensity1": 4096,
-              "Fade1": 3072
+              "Fade1": 4096
             }
           ],
           "Height": 8,
@@ -1954,6 +1968,16 @@
           }
         },
         {
+          "Comments": "Auto-generate vertex lighting in the new rooms.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1,
+            -2,
+            -3,
+            -4
+          ]
+        },
+        {
           "Comments": "Flood the second room.",
           "EMType": 2,
           "RoomNumbers": [
@@ -2353,9 +2377,9 @@
         {
           "EMType": 65,
           "Camera": {
-            "X": 30928,
-            "Y": -5122,
-            "Z": 86775,
+            "X": 30208,
+            "Y": -5378,
+            "Z": 88576,
             "Room": -2
           },
           "LookAtItem": 65535,
@@ -2424,16 +2448,6 @@
             },
             "Timer": 17
           }
-        },
-        {
-          "Comments": "Auto-generate vertex lighting in the new rooms.",
-          "EMType": 128,
-          "RoomIndices": [
-            -1,
-            -2,
-            -3,
-            -4
-          ]
         }
       ],
       [
@@ -2478,7 +2492,14 @@
               "Y": -1280,
               "Z": 1536,
               "Intensity1": 4096,
-              "Fade1": 387
+              "Fade1": 2048
+            },
+            {
+              "X": 2048,
+              "Y": -256,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 1024
             }
           ],
           "Height": 44,
@@ -2500,10 +2521,10 @@
             "Room": 82
           },
           "Textures": {
-            "Floor": 147,
+            "Floor": 125,
             "Ceiling": 5,
             "WallAlignment": 4,
-            "Wall4": 147,
+            "Wall4": 125,
             "RandomRotationSeed": 18541712
           },
           "AmbientLighting": 7680,
@@ -2513,10 +2534,17 @@
           "Lights": [
             {
               "X": 2048,
-              "Y": -1024,
+              "Y": -1792,
               "Z": 2048,
               "Intensity1": 4096,
               "Fade1": 1024
+            },
+            {
+              "X": 4608,
+              "Y": -1792,
+              "Z": 2560,
+              "Intensity1": 4096,
+              "Fade1": 2048
             }
           ],
           "Height": 8,
@@ -2544,10 +2572,10 @@
             "Room": 82
           },
           "Textures": {
-            "Floor": 147,
-            "Ceiling": 147,
+            "Floor": 125,
+            "Ceiling": 125,
             "WallAlignment": 4,
-            "Wall4": 147,
+            "Wall4": 125,
             "RandomRotationSeed": 18541712
           },
           "AmbientLighting": 7680,
@@ -2556,46 +2584,74 @@
           },
           "Lights": [
             {
-              "X": 2560,
+              "X": 1536,
               "Y": -768,
-              "Z": 5632,
+              "Z": 12800,
               "Intensity1": 4096,
-              "Fade1": 1024
+              "Fade1": 2048
             },
             {
               "X": 6656,
               "Y": -768,
               "Z": 11776,
-              "Intensity1": 4096,
+              "Intensity1": 4864,
               "Fade1": 1024
             },
             {
-              "X": 4608,
+              "X": 10752,
               "Y": -768,
-              "Z": 8704,
+              "Z": 10752,
               "Intensity1": 4096,
               "Fade1": 1024
             },
             {
-              "X": 11776,
+              "X": 12800,
               "Y": -768,
               "Z": 12800,
-              "Intensity1": 4096,
-              "Fade1": 1024
+              "Intensity1": 5120,
+              "Fade1": 2048
+            },
+            {
+              "X": 1536,
+              "Y": -768,
+              "Z": 7680,
+              "Intensity1": 5120,
+              "Fade1": 2048
             },
             {
               "X": 10752,
               "Y": -768,
               "Z": 5632,
               "Intensity1": 4096,
-              "Fade1": 1024
+              "Fade1": 2048
             },
             {
-              "X": 7680,
+              "X": 9728,
               "Y": -768,
               "Z": 1536,
-              "Intensity1": 4096,
-              "Fade1": 1024
+              "Intensity1": 4608,
+              "Fade1": 2048
+            },
+            {
+              "X": 6656,
+              "Y": -768,
+              "Z": 3584,
+              "Intensity1": 3072,
+              "Fade1": 2048
+            },
+            {
+              "X": 3584,
+              "Y": -768,
+              "Z": 1536,
+              "Intensity1": 768,
+              "Fade1": 2048
+            },
+            {
+              "X": 10752,
+              "Y": -768,
+              "Z": 7680,
+              "Intensity1": 768,
+              "Fade1": 2048
             }
           ],
           "Height": 4,
@@ -2697,9 +2753,16 @@
             {
               "X": 1536,
               "Y": -1024,
-              "Z": 2048,
+              "Z": 1792,
               "Intensity1": 4096,
               "Fade1": 3072
+            },
+            {
+              "X": 1536,
+              "Y": -256,
+              "Z": 4608,
+              "Intensity1": 5120,
+              "Fade1": 2048
             }
           ],
           "Height": 5,
@@ -2741,12 +2804,12 @@
             {
               "X": 11776,
               "Y": -768,
-              "Z": 3584,
+              "Z": 3840,
               "Intensity1": 4096,
               "Fade1": 3072
             },
             {
-              "X": 2560,
+              "X": 3584,
               "Y": -768,
               "Z": 2560,
               "Intensity1": 4096,
@@ -2765,6 +2828,20 @@
               "Z": 2560,
               "Intensity1": 4096,
               "Fade1": 1024
+            },
+            {
+              "X": 1536,
+              "Y": -768,
+              "Z": 6912,
+              "Intensity1": 1024,
+              "Fade1": 1024
+            },
+            {
+              "X": 1536,
+              "Y": -768,
+              "Z": 3328,
+              "Intensity1": 4096,
+              "Fade1": 2048
             }
           ],
           "Height": 4,
@@ -2829,11 +2906,18 @@
           },
           "Lights": [
             {
-              "X": 2560,
-              "Y": -1024,
-              "Z": 1536,
+              "X": 4608,
+              "Y": -768,
+              "Z": 1280,
               "Intensity1": 4096,
-              "Fade1": 1024
+              "Fade1": 2048
+            },
+            {
+              "X": 1536,
+              "Y": -1024,
+              "Z": 2560,
+              "Intensity1": 4096,
+              "Fade1": 2048
             }
           ],
           "Height": 7,
@@ -2889,6 +2973,13 @@
               "Z": 2048,
               "Intensity1": 4096,
               "Fade1": 3072
+            },
+            {
+              "X": 2560,
+              "Y": -256,
+              "Z": 8704,
+              "Intensity1": 3072,
+              "Fade1": 2048
             }
           ],
           "Height": 9,
@@ -3714,6 +3805,16 @@
                   12
                 ]
               }
+            },
+            "141": {
+              "-5": {
+                "Rectangles": [
+                  31,
+                  72,
+                  268,
+                  251
+                ]
+              }
             }
           }
         },
@@ -3761,6 +3862,19 @@
               ]
             }
           }
+        },
+        {
+          "Comments": "Auto-generate vertex lighting in the new rooms.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1,
+            -2,
+            -3,
+            -4,
+            -5,
+            -6,
+            -7
+          ]
         },
         {
           "Comments": "Flood the pool after the drop and the maze.",
@@ -3842,7 +3956,7 @@
               "Z": 90624,
               "Room": -3
             },
-            "Timer": 28
+            "Timer": 30
           }
         },
         {
@@ -3884,19 +3998,6 @@
             "Z": 82432,
             "Room": -5
           }
-        },
-        {
-          "Comments": "Auto-generate vertex lighting in the new rooms.",
-          "EMType": 128,
-          "RoomIndices": [
-            -1,
-            -2,
-            -3,
-            -4,
-            -5,
-            -6,
-            -7
-          ]
         }
       ],
       [
@@ -5929,13 +6030,6 @@
           }
         },
         {
-          "Comments": "Flood the second room.",
-          "EMType": 2,
-          "RoomNumbers": [
-            -5
-          ]
-        },
-        {
           "Comments": "Generate light.",
           "EMType": 128,
           "RoomIndices": [
@@ -5945,6 +6039,13 @@
             -4,
             -5,
             -6
+          ]
+        },
+        {
+          "Comments": "Flood the second room.",
+          "EMType": 2,
+          "RoomNumbers": [
+            -5
           ]
         }
       ]

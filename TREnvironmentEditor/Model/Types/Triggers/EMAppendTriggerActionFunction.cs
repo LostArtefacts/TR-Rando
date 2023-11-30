@@ -19,7 +19,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
         List<FDActionListItem> actions = InitialiseActionItems(data);
-        List<EMLocation> locations = InitialiseLocations<TR1Type, TR1Entity>(level.Entities);
+        List<EMLocation> locations = InitialiseLocations<TR1Type, TR1Entity>(level.Entities, data);
 
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -37,7 +37,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
         List<FDActionListItem> actions = InitialiseActionItems(data);
-        List<EMLocation> locations = InitialiseLocations<TR2Type, TR2Entity>(level.Entities);
+        List<EMLocation> locations = InitialiseLocations<TR2Type, TR2Entity>(level.Entities, data);
 
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -55,7 +55,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
         List<FDActionListItem> actions = InitialiseActionItems(data);
-        List<EMLocation> locations = InitialiseLocations<TR3Type, TR3Entity>(level.Entities);
+        List<EMLocation> locations = InitialiseLocations<TR3Type, TR3Entity>(level.Entities, data);
 
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -69,7 +69,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         floorData.WriteToLevel(level);
     }
 
-    private List<EMLocation> InitialiseLocations<T, E>(List<E> entities)
+    private List<EMLocation> InitialiseLocations<T, E>(List<E> entities, EMLevelData data)
         where E : TREntity<T>
         where T : Enum
     {
@@ -88,7 +88,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         }
         if (EntityLocation.HasValue)
         {
-            E entity = entities[EntityLocation.Value];
+            E entity = entities[data.ConvertEntity(EntityLocation.Value)];
             locations.Add(new()
             {
                 X = entity.X,

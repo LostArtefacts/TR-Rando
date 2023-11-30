@@ -57,6 +57,7 @@ public enum EMType
     KillLara = 70,
     RemoveTriggerAction = 71,
     RemoveEntityTriggers = 72,
+    MergeTriggers = 73,
 
     // Portal types 81-100
     VisibilityPortal = 81,

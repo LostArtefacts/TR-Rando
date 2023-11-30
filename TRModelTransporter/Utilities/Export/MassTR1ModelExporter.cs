@@ -66,7 +66,7 @@ public class MassTR1ModelExporter : AbstractMassTRModelExporter<TR1Type, TR1Leve
         },
         [TR1LevelNames.MIDAS] = new List<TR1Type>
         {
-            TR1Type.PushBlock2
+            TR1Type.PushBlock2, TR1Type.Door7, TR1Type.FlameEmitter_N, TR1Type.MidasHand_N
         },
         [TR1LevelNames.CISTERN] = new List<TR1Type>
         {
@@ -91,15 +91,15 @@ public class MassTR1ModelExporter : AbstractMassTRModelExporter<TR1Type, TR1Leve
         },
         [TR1LevelNames.MINES] = new List<TR1Type>
         {
-            TR1Type.CowboyOG, TR1Type.Kold, TR1Type.SkateboardKid
+            TR1Type.CowboyOG, TR1Type.Kold, TR1Type.SkateboardKid, TR1Type.LavaEmitter_N
         },
         [TR1LevelNames.ATLANTIS] = new List<TR1Type>
         {
-            TR1Type.Doppelganger, TR1Type.AtlanteanEgg
+            TR1Type.Doppelganger, TR1Type.AtlanteanEgg, TR1Type.AtlanteanLava
         },
         [TR1LevelNames.PYRAMID] = new List<TR1Type>
         {
-            TR1Type.Adam, TR1Type.AdamEgg, TR1Type.Natla
+            TR1Type.Adam, TR1Type.AdamEgg, TR1Type.Natla, TR1Type.Earthquake_N
         },
         ["LEOC.PHD"] = new List<TR1Type>
         {

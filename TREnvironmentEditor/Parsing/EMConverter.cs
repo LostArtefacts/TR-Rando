@@ -91,6 +91,7 @@ public class EMConverter : JsonConverter
             EMType.KillLara => JsonConvert.DeserializeObject<EMKillLaraFunction>(jo.ToString(), this),
             EMType.RemoveTriggerAction => JsonConvert.DeserializeObject<EMRemoveTriggerActionFunction>(jo.ToString(), this),
             EMType.RemoveEntityTriggers => JsonConvert.DeserializeObject<EMRemoveEntityTriggersFunction>(jo.ToString(), this),
+            EMType.MergeTriggers => JsonConvert.DeserializeObject<EMMergeTriggersFunction>(jo.ToString(), this),
 
             // Portals
             EMType.VisibilityPortal => JsonConvert.DeserializeObject<EMVisibilityPortalFunction>(jo.ToString(), this),
