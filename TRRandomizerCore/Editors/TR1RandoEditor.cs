@@ -13,6 +13,9 @@ namespace TRRandomizerCore.Editors;
 
 public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
 {
+    private static readonly Point _regularBadgePos = new(706, 537);
+    private static readonly Point _goldBadgePos = new(498, 445);
+
     public RandomizerSettings Settings { get; private set; }
 
     public TR1RandoEditor(TRDirectoryIOArgs args, TREdition edition)
@@ -357,7 +360,16 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
             string editedTitle = Path.Combine(GetWriteBasePath(), mainMenuPic);
             using BitmapGraphics bg = new(new Bitmap(backupTitle));
             using Bitmap badge = new(@"Resources\Shared\Graphics\goldbadge-small.png");
-            bg.Graphics.DrawImage(badge, new Rectangle(706, 537, badge.Width, badge.Height));
+            bg.Graphics.DrawImage(badge, new Rectangle(
+                scriptEditor.GameMode == GameMode.Gold ? _goldBadgePos : _regularBadgePos, 
+                new Size(badge.Width, badge.Height)));
+
+            if (scriptEditor.GameMode == GameMode.Combined)
+            {
+                using Bitmap comboBadge = new(@"Resources\Shared\Graphics\rando-business.png");
+                bg.Graphics.DrawImage(comboBadge, new Rectangle(29, 880, comboBadge.Width, comboBadge.Height));
+            }
+
             bg.Bitmap.Save(editedTitle);
         }
 

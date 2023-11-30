@@ -26,7 +26,7 @@ public class OptionGenerator
 
     public void SetSeeds(int seed)
     {
-        if (_options.RandomizeLevelSequencing)
+        if (_options.RandomizeGameMode)
         {
             _options.LevelSequencingSeed = InterpretSeed(seed);
         }
@@ -98,9 +98,9 @@ public class OptionGenerator
 
     public void RandomizeActiveOptions()
     {
-        if (_options.RandomizeLevelSequencing)
+        if (_options.RandomizeGameMode)
         {
-            RandomizeLevelSequencing_options();
+            RandomizeLevelSequencingOptions();
         }
         if (_options.RandomizeUnarmedLevels)
         {
@@ -172,8 +172,14 @@ public class OptionGenerator
         }
     }
 
-    private void RandomizeLevelSequencing_options()
+    private void RandomizeLevelSequencingOptions()
     {
+        if (_options.IsGameModeTypeSupported)
+        {
+            _options.GameMode = GetRandomEnumValue<GameMode>(typeof(GameMode));
+        }
+
+        _options.RandomizeLevelSequencing.Value = GetRandomBool();
         _options.PlayableLevelCount = GetRandomUInt(1, _options.TotalLevelCount);
         if (_options.IsGlobeDisplayTypeSupported)
         {

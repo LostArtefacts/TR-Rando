@@ -24,6 +24,16 @@ public partial class AdvancedWindow : Window
         nameof(BoolItemsSource), typeof(List<BoolItemControlClass>), typeof(AdvancedWindow)
     );
 
+    public static readonly DependencyProperty HasGameModeOptionsProperty = DependencyProperty.Register
+    (
+        nameof(HasGameModeOptions), typeof(bool), typeof(AdvancedWindow)
+    );
+
+    public static readonly DependencyProperty HasLevelCountProperty = DependencyProperty.Register
+    (
+        nameof(HasLevelCount), typeof(bool), typeof(AdvancedWindow)
+    );
+
     public static readonly DependencyProperty HasBoolItemsProperty = DependencyProperty.Register
     (
         nameof(HasBoolItems), typeof(bool), typeof(AdvancedWindow)
@@ -140,6 +150,18 @@ public partial class AdvancedWindow : Window
     {
         get => (bool)GetValue(HasBoolItemsProperty);
         set => SetValue(HasBoolItemsProperty, value);
+    }
+
+    public bool HasGameModeOptions
+    {
+        get => (bool)GetValue(HasGameModeOptionsProperty);
+        set => SetValue(HasGameModeOptionsProperty, value);
+    }
+
+    public bool HasLevelCount
+    {
+        get => (bool)GetValue(HasLevelCountProperty);
+        set => SetValue(HasLevelCountProperty, value);
     }
 
     public bool HasItemDifficulty

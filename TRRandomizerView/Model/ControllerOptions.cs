@@ -20,13 +20,16 @@ public class ControllerOptions : INotifyPropertyChanged
     private readonly OptionGenerator _optionRandomizer;
 
     private readonly ManagedSeed _secretRewardsControl;
-    private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl, _nightLevelsControl;
-    private readonly ManagedSeedBool _audioTrackControl, _healthLevelsControl, _weatherControl;
+    private readonly ManagedSeedNumeric _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl, _nightLevelsControl;
+    private readonly ManagedSeedBool _gameModeControl, _audioTrackControl, _healthLevelsControl, _weatherControl;
 
     private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl, _randomStartControl, _randomEnvironmentControl;
 
+    private GameMode _gameMode;
+    private GameMode[] _gameModes;
     private bool _addReturnPaths, _fixOGBugs, _disableDemos, _autoLaunchGame;
 
+    private BoolItemControlClass _randomizeLevelSequencing;
     private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels;
     private TRSecretCountMode _secretCountMode;
     private uint _minSecretCount, _maxSecretCount;
@@ -40,6 +43,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps, _randomizeChallengeRooms, _hardEnvironmentMode, _blockShortcuts;
     private BoolItemControlClass _disableHealingBetweenLevels, _disableMedpacks;
     private BoolItemControlClass _rainyAssaultCourse, _snowyAssaultCourse, _coldAssaultCourse;
+    private uint _playableLevelCount;
     private uint _mirroredLevelCount;
     private bool _mirrorAssaultCourse;
     private uint _haircutLevelCount;
@@ -78,7 +82,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private bool _cloneOriginalEnemies;
     private bool _useKillableClonePierres;
 
-    private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls, _healthBoolItemControls, _weatherBoolItemControls;
+    private List<BoolItemControlClass> _gameOrderBoolItemControls, _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls, _healthBoolItemControls, _weatherBoolItemControls;
     private List<BoolItemIDControlClass> _selectableEnemies;
     private bool _useEnemyExclusions, _showExclusionWarnings;
 
@@ -93,7 +97,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private Language[] _availableLanguages;
     private Language _gameStringLanguage;
 
-    private int _levelCount, _maximumLevelCount, _defaultUnarmedLevelCount, _defaultAmmolessLevelCount, _defaultSunsetCount;
+    private int _maximumLevelCount;
 
     private uint _minStartingHealth, _maxStartingHealth, _medilessLevelCount;
     private bool _useRecommendedCommunitySettings;
@@ -948,12 +952,7 @@ public class ControllerOptions : INotifyPropertyChanged
 
     public int TotalLevelCount
     {
-        get => _levelCount;
-        private set
-        {
-            _levelCount = value;
-            FirePropertyChanged();
-        }
+        get => _controller?.GetTotalLevelCount(RandomizeGameMode ? _gameMode : GameMode.Normal) ?? 0;
     }
 
     public int MaximumLevelCount
@@ -968,37 +967,22 @@ public class ControllerOptions : INotifyPropertyChanged
 
     public int DefaultUnarmedLevelCount
     {
-        get => _defaultUnarmedLevelCount;
-        private set
-        {
-            _defaultUnarmedLevelCount = value;
-            FirePropertyChanged();
-        }
+        get => _controller?.GetDefaultUnarmedLevelCount(_gameMode) ?? 0;
     }
 
     public int DefaultAmmolessLevelCount
     {
-        get => _defaultAmmolessLevelCount;
-        private set
-        {
-            _defaultAmmolessLevelCount = value;
-            FirePropertyChanged();
-        }
+        get => _controller?.GetDefaultAmmolessLevelCount(_gameMode) ?? 0;
     }
 
     public int DefaultSunsetCount
     {
-        get => _defaultSunsetCount;
-        private set
-        {
-            _defaultSunsetCount = value;
-            FirePropertyChanged();
-        }
+        get => _controller?.GetDefaultSunsetLevelCount(_gameMode) ?? 0;
     }
 
     private void UpdateMaximumLevelCount()
     {
-        MaximumLevelCount = RandomizeLevelSequencing ? (int)PlayableLevelCount : TotalLevelCount;
+        MaximumLevelCount = RandomizeGameMode ? (int)PlayableLevelCount : TotalLevelCount;
         UnarmedLevelCount = (uint)Math.Min(UnarmedLevelCount, MaximumLevelCount);
         AmmolessLevelCount = (uint)Math.Min(AmmolessLevelCount, MaximumLevelCount);
         SunsetCount = (uint)Math.Min(SunsetCount, MaximumLevelCount);
@@ -1016,19 +1000,53 @@ public class ControllerOptions : INotifyPropertyChanged
 
     public bool RandomizationPossible
     {
-        get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeHealth || RandomizeSunsets ||
+        get => RandomizeGameMode || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeHealth || RandomizeSunsets ||
                RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits ||
                RandomizeText || RandomizeNightMode || RandomizeStartPosition || RandomizeEnvironment || RandomizeWeather;
     }
 
-    public bool RandomizeLevelSequencing
+    public bool RandomizeGameMode
     {
-        get => _levelSequencingControl.IsActive;
+        get => _gameModeControl.IsActive;
         set
         {
-            _levelSequencingControl.IsActive = value;
+            _gameModeControl.IsActive = value;
             FirePropertyChanged();
             UpdateMaximumLevelCount();
+        }
+    }
+
+    public BoolItemControlClass RandomizeLevelSequencing
+    {
+        get => _randomizeLevelSequencing;
+        set
+        {
+            _randomizeLevelSequencing = value;
+        }
+    }
+
+    public GameMode GameMode
+    {
+        get => _gameMode;
+        set
+        {
+            _gameMode = value;
+            FirePropertyChanged();
+            FirePropertyChanged(nameof(TotalLevelCount));
+            FirePropertyChanged(nameof(DefaultUnarmedLevelCount));
+            FirePropertyChanged(nameof(DefaultAmmolessLevelCount));
+            FirePropertyChanged(nameof(DefaultSunsetCount));
+            PlayableLevelCount = (uint)TotalLevelCount;
+        }
+    }
+
+    public GameMode[] GameModes
+    {
+        get => _gameModes;
+        set
+        {
+            _gameModes = value;
+            FirePropertyChanged();
         }
     }
 
@@ -1044,20 +1062,20 @@ public class ControllerOptions : INotifyPropertyChanged
 
     public int LevelSequencingSeed
     {
-        get => _levelSequencingControl.Seed;
+        get => _gameModeControl.Seed;
         set
         {
-            _levelSequencingControl.Seed = value;
+            _gameModeControl.Seed = value;
             FirePropertyChanged();
         }
     }
 
     public uint PlayableLevelCount
     {
-        get => (uint)_levelSequencingControl.CustomInt;
+        get => _playableLevelCount;
         set
         {
-            _levelSequencingControl.CustomInt = (int)value;
+            _playableLevelCount = value;
             FirePropertyChanged();
             UpdateMaximumLevelCount();
         }
@@ -2536,6 +2554,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public List<BoolItemControlClass> GameOrderBoolItemControls
+    {
+        get => _gameOrderBoolItemControls;
+        set
+        {
+            _gameOrderBoolItemControls = value;
+            FirePropertyChanged();
+        }
+    }
+
     public List<BoolItemControlClass> SecretBoolItemControls
     {
         get => _secretBoolItemControls;
@@ -2776,7 +2804,7 @@ public class ControllerOptions : INotifyPropertyChanged
     {
         _optionRandomizer = new OptionGenerator(this);
 
-        _levelSequencingControl = new ManagedSeedNumeric();
+        _gameModeControl = new ManagedSeedBool();
         _unarmedLevelsControl = new ManagedSeedNumeric();
         _ammolessLevelsControl = new ManagedSeedNumeric();
         _secretRewardsControl = new ManagedSeed();
@@ -2794,6 +2822,15 @@ public class ControllerOptions : INotifyPropertyChanged
         _randomTextControl = new ManagedSeedBool();
         _randomStartControl = new ManagedSeedBool();
         _randomEnvironmentControl = new ManagedSeedBool();
+
+        // Game mode
+        Binding randomizeGameModeBinding = new(nameof(RandomizeGameMode)) { Source = this };
+        RandomizeLevelSequencing = new BoolItemControlClass()
+        {
+            Title = "Randomize level order",
+            Description = "Shuffle the order in which levels are played."
+        };
+        BindingOperations.SetBinding(RandomizeLevelSequencing, BoolItemControlClass.IsActiveProperty, randomizeGameModeBinding);
 
         // Secrets
         Binding randomizeSecretsBinding = new(nameof(RandomizeSecrets)) { Source = this };
@@ -3164,6 +3201,10 @@ public class ControllerOptions : INotifyPropertyChanged
         BindingOperations.SetBinding(ColdAssaultCourse, BoolItemControlClass.IsActiveProperty, randomizeWeatherBinding);
 
         // all item controls
+        GameOrderBoolItemControls = new()
+        {
+            _randomizeLevelSequencing
+        };
         SecretBoolItemControls = new List<BoolItemControlClass>()
         {
             _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels
@@ -3174,7 +3215,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         EnemyBoolItemControls = new List<BoolItemControlClass>()
         {
-            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems
+            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems,_allowEnemyKeyDrops
         };
         TextureBoolItemControls = new List<BoolItemControlClass>()
         {
@@ -3272,12 +3313,10 @@ public class ControllerOptions : INotifyPropertyChanged
     {
         _controller = controller;
 
-        TotalLevelCount = _controller.LevelCount;
-        DefaultUnarmedLevelCount = _controller.DefaultUnarmedLevelCount;
-        DefaultAmmolessLevelCount = _controller.DefaultAmmolessLevelCount;
-        DefaultSunsetCount = _controller.DefaultSunsetCount;
-
-        RandomizeLevelSequencing = _controller.RandomizeLevelSequencing;
+        RandomizeGameMode = _controller.RandomizeGameMode;
+        GameModes = Enum.GetValues<GameMode>();
+        GameMode = _controller.GameMode;
+        RandomizeLevelSequencing.Value = _controller.RandomizeSequencing;
         LevelSequencingSeed = _controller.LevelSequencingSeed;
         PlayableLevelCount = _controller.PlayableLevelCount;
         GlobeDisplay = _controller.GlobeDisplay;
@@ -3581,18 +3620,12 @@ public class ControllerOptions : INotifyPropertyChanged
 
     public void Save()
     {
-        _controller.RandomizeLevelSequencing = RandomizeLevelSequencing;
+        _controller.RandomizeGameMode = RandomizeGameMode;
+        _controller.GameMode = GameMode;
+        _controller.RandomizeSequencing = RandomizeLevelSequencing.Value;
         _controller.LevelSequencingSeed = LevelSequencingSeed;
-
-        // While this can be separated into its own option, for now it's combined with sequencing
-        _controller.RandomizePlayableLevels = RandomizeLevelSequencing;
-        _controller.PlayableLevelsSeed = LevelSequencingSeed;
         _controller.PlayableLevelCount = PlayableLevelCount;
         _controller.GlobeDisplay = GlobeDisplay;
-
-        _controller.RandomizePlayableLevels = RandomizeLevelSequencing;
-        _controller.PlayableLevelsSeed = LevelSequencingSeed;
-        _controller.PlayableLevelCount = PlayableLevelCount;
 
         _controller.RandomizeUnarmedLevels = RandomizeUnarmedLevels;
         _controller.UnarmedLevelsSeed = UnarmedLevelsSeed;
@@ -3859,6 +3892,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsTR2 => _controller != null && _controller.IsTR2;
     public bool IsTR3 => _controller != null && _controller.IsTR3;
     public bool IsTR3Main => IsTR3 && _controller.IsCommunityPatch;
+    public bool IsGameModeTypeSupported => IsRandomizationSupported(TRRandomizerType.GameMode);
     public bool IsLevelSequenceTypeSupported => IsRandomizationSupported(TRRandomizerType.LevelSequence);
     public bool IsGlobeDisplayTypeSupported => IsRandomizationSupported(TRRandomizerType.GlobeDisplay);
     public bool IsUnarmedTypeSupported => IsRandomizationSupported(TRRandomizerType.Unarmed);
@@ -3939,7 +3973,7 @@ public class ControllerOptions : INotifyPropertyChanged
     {
         if (IsLevelSequenceTypeSupported)
         {
-            RandomizeLevelSequencing = enabled;
+            RandomizeGameMode = enabled;
         }
         if (IsUnarmedTypeSupported)
         {
@@ -4013,7 +4047,7 @@ public class ControllerOptions : INotifyPropertyChanged
 
         if (IsLevelSequenceTypeSupported)
         {
-            result &= RandomizeLevelSequencing;
+            result &= RandomizeGameMode;
         }
         if (IsUnarmedTypeSupported)
         {

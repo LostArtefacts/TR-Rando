@@ -8,6 +8,7 @@ namespace TRRandomizerCore.Editors;
 
 public class RandomizerSettings
 {
+    public bool RandomizeGameMode { get; set; }
     public bool RandomizeSecrets { get; set; }
     public bool RandomizeItems { get; set; }
     public bool RandomizeEnemies { get; set; }
@@ -35,6 +36,7 @@ public class RandomizerSettings
     // Although stored in the script config, this is needed in case sequencing
     // mods are needed per level.
     public bool RandomizeSequencing { get; set; }
+    public GameMode GameMode { get; set; }
     public GlobeDisplayOption GlobeDisplay { get; set; }
     public bool HardSecrets { get; set; }
     public bool IncludeKeyItems { get; set; }
@@ -186,6 +188,9 @@ public class RandomizerSettings
     {
         int defaultSeed = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
 
+        RandomizeGameMode = config.GetBool(nameof(RandomizeGameMode));
+        GameMode = (GameMode)config.GetEnum(nameof(GameMode), typeof(GameMode), GameMode.Normal);
+        RandomizeSequencing = config.GetBool(nameof(RandomizeSequencing), true);
         GlobeDisplay = (GlobeDisplayOption)config.GetEnum(nameof(GlobeDisplay), typeof(GlobeDisplayOption), GlobeDisplayOption.Area);
 
         RandomizeSecrets = config.GetBool(nameof(RandomizeSecrets));
@@ -350,6 +355,9 @@ public class RandomizerSettings
 
     public void StoreConfig(Config config)
     {
+        config[nameof(RandomizeGameMode)] = RandomizeGameMode;
+        config[nameof(RandomizeSequencing)] = RandomizeSequencing;
+        config[nameof(GameMode)] = GameMode;
         config[nameof(GlobeDisplay)] = GlobeDisplay;
 
         config[nameof(RandomizeSecrets)] = RandomizeSecrets;

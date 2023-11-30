@@ -67,6 +67,8 @@ public class TR1CombinedLevel
     /// </summary>
     public bool IsSteamPyramid => Is(TR1LevelNames.PYRAMID) && Checksum == _steamPyramidChecksum;
 
+    public bool IsExpansion => TR1LevelNames.AsListGold.Contains(Name);
+
     /// <summary>
     /// Returns {Name}-Steam if IsSteamPyramid, otherwise just {Name}.
     /// </summary>
