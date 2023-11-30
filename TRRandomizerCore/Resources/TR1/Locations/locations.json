@@ -2742,16 +2742,6 @@
       "Room": 89
     },
     {
-      "X": 29696,
-      "Y": -4352,
-      "Z": 68096,
-      "Room": 89,
-      "Difficulty": "Hard",
-      "LevelState": "NotMirrored",
-      "PackID": "Lahm",
-      "RequiresGlitch": true
-    },
-    {
       "X": 31808,
       "Y": -4096,
       "Z": 70721,
@@ -2782,6 +2772,15 @@
       "Z": 69603,
       "Room": 89,
       "Difficulty": "Hard"
+    },
+    {
+      "X": 29696,
+      "Y": -6144,
+      "Z": 61952,
+      "Room": 79,
+      "Difficulty": "Hard",
+      "PackID": "Lahm",
+      "RequiresDamage": true
     },
     {
       "X": 23509,
@@ -4262,6 +4261,14 @@
       "Z": 86998,
       "Room": 58,
       "Difficulty": "Hard",
+      "PackID": "Lahm",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 66693,
+      "Y": -8960,
+      "Z": 32923,
+      "Room": 30,
       "RequiresGlitch": true
     },
     {
@@ -4408,14 +4415,6 @@
       "Y": -6656,
       "Z": 26665,
       "Room": 31,
-      "RequiresGlitch": true
-    },
-    {
-      "X": 46112,
-      "Y": -10760,
-      "Z": 96235,
-      "Room": 80,
-      "PackID": "Lahm",
       "RequiresGlitch": true
     },
     {
