@@ -505,6 +505,50 @@
         "It's a Trap",
         "Give Torso a Hug"
       ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Back again?",
+        "FLOODED",
+        "Winking Sphinx"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Mind the Boulders",
+          "Blue Room Access",
+          "Sapphire Key"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Looking Good, Feline Good",
+        "Temple of Cat-astrophe",
+        "Just Kitten Around",
+        "catJAM",
+        "MEOW.PHD"
+      ],
+      "KeyItems": {
+        "key1": [
+          "You'll Need Seven",
+          "Fancy Key",
+          "Let Me In!"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "But Wait, There's More...",
+        "Natla's Empire",
+        "The Aftermath"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "The End?",
+        "Best Boulder Puzzle",
+        "Goodbye, Atlantis"
+      ]
     }
   }
 }
