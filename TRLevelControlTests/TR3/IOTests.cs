@@ -57,25 +57,69 @@ public class IOTests : TestBase
     }
 
     [TestMethod]
-    public void Floordata_ReadWrite_DefaultTest()
+    [DataRow(TR3LevelNames.ASSAULT)]
+    [DataRow(TR3LevelNames.JUNGLE)]
+    [DataRow(TR3LevelNames.JUNGLE_CUT)]
+    [DataRow(TR3LevelNames.RUINS)]
+    [DataRow(TR3LevelNames.RUINS_CUT)]
+    [DataRow(TR3LevelNames.GANGES)]
+    [DataRow(TR3LevelNames.CAVES)]
+    [DataRow(TR3LevelNames.COASTAL)]
+    [DataRow(TR3LevelNames.COASTAL_CUT)]
+    [DataRow(TR3LevelNames.CRASH)]
+    [DataRow(TR3LevelNames.CRASH_CUT)]
+    [DataRow(TR3LevelNames.MADUBU)]
+    [DataRow(TR3LevelNames.PUNA)]
+    [DataRow(TR3LevelNames.THAMES)]
+    [DataRow(TR3LevelNames.THAMES_CUT)]
+    [DataRow(TR3LevelNames.ALDWYCH)]
+    [DataRow(TR3LevelNames.ALDWYCH_CUT)]
+    [DataRow(TR3LevelNames.LUDS)]
+    [DataRow(TR3LevelNames.LUDS_CUT)]
+    [DataRow(TR3LevelNames.CITY)]
+    [DataRow(TR3LevelNames.HALLOWS)]
+    [DataRow(TR3LevelNames.NEVADA)]
+    [DataRow(TR3LevelNames.NEVADA_CUT)]
+    [DataRow(TR3LevelNames.HSC)]
+    [DataRow(TR3LevelNames.HSC_CUT)]
+    [DataRow(TR3LevelNames.AREA51)]
+    [DataRow(TR3LevelNames.ANTARC)]
+    [DataRow(TR3LevelNames.ANTARC_CUT)]
+    [DataRow(TR3LevelNames.RXTECH)]
+    [DataRow(TR3LevelNames.TINNOS)]
+    [DataRow(TR3LevelNames.TINNOS_CUT)]
+    [DataRow(TR3LevelNames.WILLIE)]
+    [DataRow(TR3LevelNames.FLING)]
+    [DataRow(TR3LevelNames.LAIR)]
+    [DataRow(TR3LevelNames.CLIFF)]
+    [DataRow(TR3LevelNames.FISHES)]
+    [DataRow(TR3LevelNames.MADHOUSE)]
+    [DataRow(TR3LevelNames.REUNION)]
+    public void TestFloorData(string levelName)
     {
-        TR3Level lvl = GetTR3Level(TR3LevelNames.RXTECH);
+        TR3Level level = GetTR3Level(levelName);
 
-        //Store the original floordata from the level
-        ushort[] originalFData = new ushort[lvl.NumFloorData];
-        Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
+        List<ushort> originalData = new(level.FloorData);
 
-        //Parse the floordata using FDControl and re-write the parsed data back
-        FDControl fdataReader = new();
-        fdataReader.ParseFromLevel(lvl);
-        fdataReader.WriteToLevel(lvl);
+        FDControl fdControl = new();
+        
+        if (levelName == TR3LevelNames.ANTARC)
+        {
+            // Antarctica has a single ceiling triangulation entry that is not referenced by any
+            // room sector. It precedes the entry for room 69 [7,2], and there is a room above
+            // with a regular ceiling slant. We will modify that sector to include the extra entry
+            // for the sake of this test. FDControl by design strips out unused data.
+            IEnumerable<TRRoomSector> allSectors = level.Rooms.SelectMany(r => r.Sectors);
+            Assert.IsFalse(allSectors.Any(s => s.FDIndex == 8142));
+            TRRoomSector sector = allSectors.First(s => s.FDIndex == 8144);
+            Assert.IsNotNull(sector);
+            sector.FDIndex = 8142;
+        }
 
-        //Store the new floordata written back by FDControl
-        ushort[] newFData = lvl.FloorData;
+        fdControl.ParseFromLevel(level);
+        fdControl.WriteToLevel(level);
 
-        //Compare to make sure the original fdata was written back.
-        CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
-        Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
+        CollectionAssert.AreEqual(originalData, level.FloorData);
     }
 
     [TestMethod]
