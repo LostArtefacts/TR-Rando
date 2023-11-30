@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Linq;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
@@ -573,6 +574,20 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         if (Settings.CrossLevelEnemies && level.Script.RemovesWeapons)
         {
             AddUnarmedLevelAmmo(level);
+        }
+
+        if (!Settings.AllowEnemyKeyDrops && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
+        {
+            // Shift enemies who are on top of key items so they don't pick them up.
+            IEnumerable<TR3Entity> keyEnemies = level.Data.Entities.Where(enemy => TR3TypeUtilities.IsEnemyType(enemy.TypeID)
+                  && level.Data.Entities.Any(key => TR3TypeUtilities.IsKeyItemType(key.TypeID)
+                  && key.GetLocation().IsEquivalent(enemy.GetLocation()))
+            );
+
+            foreach (TR3Entity enemy in keyEnemies)
+            {
+                enemy.X++;
+            }
         }
     }
 

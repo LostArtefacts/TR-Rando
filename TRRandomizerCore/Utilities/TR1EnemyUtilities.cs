@@ -80,7 +80,7 @@ public static class TR1EnemyUtilities
         return -1;
     }
 
-    public static Dictionary<TR1Type, List<string>> PrepareEnemyGameTracker(RandoDifficulty difficulty)
+    public static Dictionary<TR1Type, List<string>> PrepareEnemyGameTracker(RandoDifficulty difficulty, IEnumerable<string> levelNames)
     {
         Dictionary<TR1Type, List<string>> tracker = new();
 
@@ -98,7 +98,7 @@ public static class TR1EnemyUtilities
         }
 
         // Pre-populate required enemies
-        foreach (string level in _requiredEnemies.Keys)
+        foreach (string level in _requiredEnemies.Keys.Where(levelNames.Contains))
         {
             foreach (TR1Type enemy in _requiredEnemies[level])
             {
@@ -150,22 +150,17 @@ public static class TR1EnemyUtilities
         return entities;
     }
 
-    public static void SetEntityTriggers(TR1Level level, TR1Entity entity)
+    public static void SetEntityTriggers(TR1Level level, TR1Entity entity, FDControl floorData)
     {
         if (_oneShotEnemies.Contains(entity.TypeID))
         {
             int entityID = level.Entities.IndexOf(entity);
 
-            FDControl fdControl = new();
-            fdControl.ParseFromLevel(level);
-
-            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdControl, entityID);
+            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(floorData, entityID);
             foreach (FDTriggerEntry trigger in triggers)
             {
                 trigger.TrigSetup.OneShot = true;
             }
-
-            fdControl.WriteToLevel(level);
         }
     }
 
@@ -492,7 +487,15 @@ public static class TR1EnemyUtilities
         [TR1LevelNames.ATLANTIS]
             = 1, // Defaults: 5 types, 32 enemies
         [TR1LevelNames.PYRAMID]
-            = 0  // Defaults: 2 types, 4 enemies
+            = 0,  // Defaults: 2 types, 4 enemies
+        [TR1LevelNames.EGYPT]
+            = 3,  // Defaults: 3 types, 42 enemies
+        [TR1LevelNames.CAT]
+            = 3,  // Defaults: 3 types, 44 enemies
+        [TR1LevelNames.STRONGHOLD]
+            = 2,  // Defaults: 4 types, 39 enemies
+        [TR1LevelNames.HIVE]
+            = 2,  // Defaults: 4 types, 56 enemies
     };
 
     // Enemies who can only spawn once.

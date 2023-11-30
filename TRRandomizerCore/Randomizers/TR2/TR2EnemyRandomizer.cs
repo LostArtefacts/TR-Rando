@@ -802,6 +802,20 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         {
             MakeChickensUnconditional(level);
         }
+
+        if (!Settings.AllowEnemyKeyDrops && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
+        {
+            // Shift enemies who are on top of key items so they don't pick them up.
+            IEnumerable<TR2Entity> keyEnemies = level.Data.Entities.Where(enemy => TR2TypeUtilities.IsEnemyType(enemy.TypeID)
+                  && level.Data.Entities.Any(key => TR2TypeUtilities.IsKeyItemType(key.TypeID) 
+                  && key.GetLocation().IsEquivalent(enemy.GetLocation()))
+            );
+
+            foreach (TR2Entity enemy in keyEnemies)
+            {
+                enemy.X++;
+            }
+        }
     }
 
     private void LimitSkidooEntities(TR2CombinedLevel level)
