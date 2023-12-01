@@ -250,7 +250,8 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
                     BasePath = wipDirectory,
                     BackupPath = backupDirectory,
                     SaveMonitor = monitor,
-                    Settings = Settings
+                    Settings = Settings,
+                    ItemFactory = itemFactory,
                 }.Randomize(Settings.SecretRewardsPhysicalSeed);
             }
 
