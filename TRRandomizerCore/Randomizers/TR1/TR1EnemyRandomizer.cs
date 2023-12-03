@@ -49,6 +49,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     private Dictionary<TR1Type, List<string>> _gameEnemyTracker;
     private Dictionary<string, List<Location>> _pistolLocations;
     private Dictionary<string, List<Location>> _eggLocations;
+    private Dictionary<string, List<Location>> _pierreLocations;
     private List<TR1Type> _excludedEnemies;
     private ISet<TR1Type> _resultantEnemies;
 
@@ -60,6 +61,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         _generator = new Random(seed);
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
         _eggLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\egg_locations.json"));
+        _pierreLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\pierre_locations.json"));
 
         if (Settings.CrossLevelEnemies)
         {
@@ -580,6 +582,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 continue;
             }
 
+            int entityIndex = level.Data.Entities.IndexOf(currentEntity);
             TR1Type currentEntityType = currentEntity.TypeID;
             TR1Type newEntityType = currentEntityType;
 
@@ -671,7 +674,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 List<TR1Type> spawnTypes = enemies.Available.FindAll(allEggTypes.Contains);
                 TR1Type spawnType = TR1TypeUtilities.TranslateAlias(spawnTypes[_generator.Next(0, spawnTypes.Count)]);
 
-                int entityIndex = level.Data.Entities.IndexOf(currentEntity);
                 Location eggLocation = _eggLocations.ContainsKey(level.Name)
                     ? _eggLocations[level.Name].Find(l => l.EntityIndex == entityIndex)
                     : null;
@@ -746,6 +748,15 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
             // #146 Ensure OneShot triggers are set for this enemy if needed
             TR1EnemyUtilities.SetEntityTriggers(level.Data, currentEntity, floorData);
+
+            if (currentEntity.TypeID == TR1Type.Pierre
+                && _pierreLocations.ContainsKey(level.Name)
+                && _pierreLocations[level.Name].Find(l => l.EntityIndex == entityIndex) is Location location)
+            {
+                // Pierre is the only enemy who cannot be underwater, so location shifts have been predefined
+                // for specific entities.
+                currentEntity.SetLocation(location);
+            }
 
             // Track every enemy type across the game
             _resultantEnemies.Add(newEntityType);

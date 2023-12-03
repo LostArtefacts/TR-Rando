@@ -7283,6 +7283,90 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If enemy #43 is Pierre, we can't use a one-shot timed switch to activate him, plus this will result in softlock as the door will only open once.",
+        "ConditionType": 0,
+        "EntityIndex": 43,
+        "EntityType": 28
+      },
+      "OnTrue": [
+        {
+          "Comments": "Add a boulder with a heavy trigger to activate Pierre, and remove the one-shot flag from the switch.",
+          "EMType": 126,
+          "Location": {
+            "X": 96256,
+            "Y": -5632,
+            "Z": 64512
+          },
+          "LinkedLocation": {
+            "X": 94720,
+            "Y": -5760,
+            "Z": 66048
+          },
+          "Height": 4,
+          "Width": 3,
+          "Depth": 3
+        },
+        {
+          "EMType": 51,
+          "TypeID": 38,
+          "Location": {
+            "X": 97792,
+            "Y": -5632,
+            "Z": 66048,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 61,
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 5,
+            "OneShot": true,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 43
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 69,
+          "Location": {
+            "X": 91648,
+            "Y": -384,
+            "Z": 60928,
+            "Room": 15
+          },
+          "OneShot": false
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 91648,
+              "Y": -384,
+              "Z": 60928,
+              "Room": 15
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 43
+          }
+        },
+        {
+          "EMType": 68,
+          "EntityLocation": 25,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [

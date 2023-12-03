@@ -1,5 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.7.3...master) - xxxx-xx-xx
-- added support for Unfinished Business (#580)
+- added support for Unfinished Business and playing in combined game mode for TR1 (#580)
 - added a TR2 secret pack (Eycore) (#559)
 - added a TR2 secret pack (Towandaa) (#558)
 - added more return paths to TR2 and TR3 (#563)
@@ -12,6 +12,8 @@
 - added support for Lara's gym outfit in all levels in TR1 (#580)
 - fixed spelling mistakes in TR1 French gamestring localization (#560)
 - fixed a key item softlock in Diving Area (#564)
+- fixed Pierre not spawning if he is positioned underwater (he will now always spawn on land) (#580)
+- fixed certain enemy combinations causing import failures in TR2 (#577)
 - improved secret reward allocation in TR1 to be fairer (#580)
 - improved changelog, readme and contributing documentation
 - improved regular item, key item, and secret item location generation and selection in TR1-3 (#474)
