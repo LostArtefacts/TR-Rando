@@ -1,6 +1,22 @@
 {
   "All": [
     {
+      "Comments": "Convert music triggers to oneshot.",
+      "EMType": 69,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 35328,
+          "Y": 11008,
+          "Z": 41472,
+          "Room": 18
+        }
+      ],
+      "OneShot": true
+    },
+    {
       "Comments": "Remove the music action from the end keyholes - they don't work because of the mask so just kill the ambient track.",
       "EMType": 71,
       "Tags": [

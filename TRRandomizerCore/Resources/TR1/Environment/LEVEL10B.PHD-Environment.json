@@ -1,6 +1,22 @@
 {
   "All": [
     {
+      "Comments": "Convert music triggers to oneshot.",
+      "EMType": 69,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 42496,
+          "Y": -13056,
+          "Z": 62976,
+          "Room": 59
+        }
+      ],
+      "OneShot": true
+    },
+    {
       "Comments": "Fix the incorrect texture in the starting flip map room.",
       "EMType": 21,
       "Tags": [

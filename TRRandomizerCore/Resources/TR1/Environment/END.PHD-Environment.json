@@ -1,6 +1,46 @@
 {
   "All": [
     {
+      "Comments": "Convert music triggers to oneshot.",
+      "EMType": 69,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 51712,
+          "Y": -28160,
+          "Z": 48640,
+          "Room": 13
+        },
+        {
+          "X": 51712,
+          "Y": -28160,
+          "Z": 47616,
+          "Room": 13
+        },
+        {
+          "X": 66048,
+          "Y": -25088,
+          "Z": 59904,
+          "Room": 17
+        },
+        {
+          "X": 24064,
+          "Y": -13184,
+          "Z": 47616,
+          "Room": 20
+        },
+        {
+          "X": 36352,
+          "Y": -18176,
+          "Z": 65024,
+          "Room": 25
+        }
+      ],
+      "OneShot": true
+    },
+    {
       "Comments": "Make link rooms between rooms 4 and 15.",
       "EMType": 126,
       "Tags": [

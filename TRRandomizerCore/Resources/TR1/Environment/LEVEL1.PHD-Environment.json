@@ -1,6 +1,40 @@
 {
   "All": [
     {
+      "Comments": "Convert music triggers to oneshot.",
+      "EMType": 69,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 35328,
+          "Y": 4736,
+          "Z": 89600,
+          "Room": 34
+        },
+        {
+          "X": 34304,
+          "Y": 4864,
+          "Z": 89600,
+          "Room": 34
+        },
+        {
+          "X": 33280,
+          "Y": 4864,
+          "Z": 89600,
+          "Room": 34
+        },
+        {
+          "X": 32256,
+          "Y": 5120,
+          "Z": 89600,
+          "Room": 34
+        }
+      ],
+      "OneShot": true
+    },
+    {
       "Comments": "Patch two holes in the roof in room 10 and another in room 1.",
       "EMType": 26,
       "Tags": [

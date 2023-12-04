@@ -1,6 +1,27 @@
 {
   "All": [
     {
+      "Comments": "Convert music triggers to oneshot.",
+      "EMType": 69,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 30208,
+          "Y": -2944,
+          "Z": 26112,
+          "Room": 12
+        },
+        {
+          "X": 55808,
+          "Z": 50688,
+          "Room": 32
+        }
+      ],
+      "OneShot": true
+    },
+    {
       "Comments": "Remove the trigger for keyhole 3 in City otherwise glitched secrets can become glitchless (e.g. if Pierre drops the key).",
       "EMType": 62,
       "Locations": [
