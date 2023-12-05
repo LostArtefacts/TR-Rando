@@ -919,6 +919,52 @@
           "Room": 3
         }
       }
+    ],
+    [
+      {
+        "Comments": "Add a ToQ mummy.",
+        "EMType": 141,
+        "Tags": [
+          4
+        ],
+        "Models": [
+          24
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 24,
+        "Intensity": -1,
+        "Location": {
+          "X": 61952,
+          "Y": -3584,
+          "Z": 46592,
+          "Room": 21,
+          "Angle": -32768
+        },
+        "TargetRelocation": {
+          "X": 59904,
+          "Y": -3840,
+          "Z": 44544,
+          "Room": 13
+        }
+      },
+      {
+        "EMType": 68,
+        "Locations": [
+          {
+            "X": 59904,
+            "Y": -3840,
+            "Z": 44544,
+            "Room": 13
+          }
+        ],
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
     ]
   ],
   "AllWithin": [

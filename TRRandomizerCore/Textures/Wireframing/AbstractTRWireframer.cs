@@ -51,6 +51,7 @@ public abstract class AbstractTRWireframer<E, L>
         _allTextures = new SortedSet<ushort>();
         _data = data;
 
+        RetainCustomTextures(level);
         ScanRooms(level);
         ScanMeshes(level);
 
@@ -140,6 +141,18 @@ public abstract class AbstractTRWireframer<E, L>
         TidyModels(level);
         SetSkyboxVisible(level);
         DeleteAnimatedTextures(level);
+    }
+
+    private void RetainCustomTextures(L level)
+    {
+        TRObjectTexture[] textures = GetObjectTextures(level);
+        for (ushort i = 0; i < textures.Length; i++)
+        {
+            if (textures[i].Attribute == (ushort)TRBlendingMode.Unused01)
+            {
+                _data.ExcludedTextures.Add(i);
+            }
+        }
     }
 
     private void ScanRooms(L level)

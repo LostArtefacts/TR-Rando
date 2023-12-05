@@ -1080,6 +1080,102 @@
           }
         }
       }
+    ],
+    [
+      {
+        "Comments": "Add a ToQ mummy.",
+        "EMType": 141,
+        "Tags": [
+          4
+        ],
+        "Models": [
+          24
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 24,
+        "Intensity": -1,
+        "Location": {
+          "X": 49664,
+          "Y": 4608,
+          "Z": 78336,
+          "Room": 33,
+          "Angle": 16384
+        },
+        "TargetRelocation": {
+          "X": 50688,
+          "Y": 4608,
+          "Z": 76288,
+          "Room": 33
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 50688,
+            "Y": 4608,
+            "Z": 78336,
+            "Room": 33
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the boulder model is available.",
+        "EMType": 145,
+        "Tags": [
+          4
+        ],
+        "Data": [
+          {
+            "ModelID": 38,
+            "TexturedFace3": 33,
+            "TexturedFace4": 1
+          }
+        ]
+      },
+      {
+        "Comments": "Add a boulder.",
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 36352,
+          "Y": 2816,
+          "Z": 66048,
+          "Room": 32
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 36352,
+            "Y": 4608,
+            "Z": 68096,
+            "Room": 32
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
     ]
   ],
   "AllWithin": [

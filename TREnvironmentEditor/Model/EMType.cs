@@ -26,6 +26,7 @@ public enum EMType
     SwapFace = 32,
     ImportTexture = 33,
     CreateStaticMesh = 34,
+    CreateTexture = 36,
 
     // Entity types 41-60
     MoveSlot = 41,
@@ -83,6 +84,7 @@ public enum EMType
     CreateWall = 127,
     GenerateLight = 128,
     MoveCamera = 129,
+    LockMusic = 130,
 
     // Models
     ImportModel = 141,

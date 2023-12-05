@@ -1326,6 +1326,75 @@
     ],
     [
       {
+        "Comments": "Add some boulders.",
+        "EMType": 51,
+        "Tags": [
+          4
+        ],
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 24064,
+          "Y": -10624,
+          "Z": 47616,
+          "Room": 11,
+          "Angle": 16384
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 24064,
+          "Y": -12672,
+          "Z": 47616,
+          "Room": 11,
+          "Angle": 16384
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 30208,
+            "Y": -9088,
+            "Z": 47616,
+            "Room": 9
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -2
+            }
+          ]
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 41472,
+            "Y": -6400,
+            "Z": 47616,
+            "Room": 74
+          }
+        ],
+        "Trigger": {
+          "TrigType": 5,
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
         "Comments": "Block the entrance to room 6.",
         "EMType": 51,
         "Tags": [

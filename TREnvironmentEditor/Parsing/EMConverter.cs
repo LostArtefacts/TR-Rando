@@ -60,6 +60,7 @@ public class EMConverter : JsonConverter
             EMType.SwapFace => JsonConvert.DeserializeObject<EMSwapFaceFunction>(jo.ToString(), this),
             EMType.ImportTexture => JsonConvert.DeserializeObject<EMImportTextureFunction>(jo.ToString(), this),
             EMType.CreateStaticMesh => JsonConvert.DeserializeObject<EMCreateStaticMeshFunction>(jo.ToString(), this),
+            EMType.CreateTexture => JsonConvert.DeserializeObject<EMCreateTextureFunction>(jo.ToString(), this),
 
             // Entity types
             EMType.MoveSlot => JsonConvert.DeserializeObject<EMMoveSlotFunction>(jo.ToString(), this),
@@ -117,6 +118,7 @@ public class EMConverter : JsonConverter
             EMType.CreateWall => JsonConvert.DeserializeObject<EMCreateWallFunction>(jo.ToString(), this),
             EMType.GenerateLight => JsonConvert.DeserializeObject<EMGenerateLightFunction>(jo.ToString(), this),
             EMType.MoveCamera => JsonConvert.DeserializeObject<EMMoveCameraFunction>(jo.ToString(), this),
+            EMType.LockMusic => JsonConvert.DeserializeObject<EMLockMusicFunction>(jo.ToString(), this),
 
             // Models
             EMType.ImportModel => JsonConvert.DeserializeObject<EMImportModelFunction>(jo.ToString(), this),
