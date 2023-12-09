@@ -538,6 +538,77 @@
       ]
     },
     {
+      "EMType": 5,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 38400,
+        "Y": -6656,
+        "Z": 72192,
+        "Room": 89
+      },
+      "FloorClicks": -1
+    },
+    {
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 89,
+          "FaceIndex": 15,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 89,
+          "FaceType": 1,
+          "FaceIndices": [
+            0,
+            1
+          ],
+          "VertexChanges": {
+            "1": {
+              "Y": -256,
+              "Z": -1024
+            }
+          }
+        },
+        {
+          "RoomNumber": 89,
+          "FaceIndex": 20,
+          "VertexChanges": {
+            "0": {
+              "Z": -1024
+            },
+            "1": {
+              "Z": -1024
+            },
+            "2": {
+              "Z": -1024
+            },
+            "3": {
+              "Z": -1024
+            }
+          }
+        }
+      ]
+    },
+    {
       "Comments": "Patch some gaps in room 75.",
       "EMType": 26,
       "Tags": [

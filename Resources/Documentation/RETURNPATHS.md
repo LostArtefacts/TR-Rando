@@ -23,7 +23,7 @@ Following are details on the return paths that are available. See `Global Settin
 | Atlantis | Link rooms added between rooms 30 and 50. |
 | The Great Pyramid | _Not implemented due to trap behaviour._ |
 | Return to Egypt | Door added between rooms 73 and 75. |
-| Temple of the Cat | Link rooms added between rooms 0 and 32. |
+| Temple of the Cat | Link rooms added between rooms 0 and 32; step added in room 89. |
 | Atlantean Stronghold | Door added between rooms 6 and 62; link room added between rooms 4 and 15. |
 | The Hive | Link rooms added between rooms 20 and 23, and 29 and 37. Point of no return remains at room 10. |
 
