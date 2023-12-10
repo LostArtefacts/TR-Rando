@@ -1,4 +1,6 @@
-## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.7.3...master) - xxxx-xx-xx
+## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.0...master) - xxxx-xx-xx
+
+## [V1.8.0](https://github.com/LostArtefacts/TR-Rando/compare/V1.7.3...V1.8.0) - 2023-12-10
 - added support for Unfinished Business and playing in combined game mode for TR1 (#580)
 - added a TR2 secret pack (Eycore) (#559)
 - added a TR2 secret pack (Towandaa) (#558)
