@@ -52,7 +52,7 @@ public class TR3ModelImporter : AbstractTRModelImporter<TR3Type, TR3Level, TR3Mo
             }
             MeshTransportHandler.Import(Level, definition);
             AnimationTransportHandler.Import(Level, definition);
-            CinematicTransportHandler.Import(Level, definition);
+            CinematicTransportHandler.Import(Level, definition, ForceCinematicOverwrite);
             ModelTransportHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants(), Data.GetUnsafeModelReplacements());
         }
 

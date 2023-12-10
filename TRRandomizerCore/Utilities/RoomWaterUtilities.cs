@@ -120,6 +120,10 @@ public static class RoomWaterUtilities
         { TR1LevelNames.ATLANTIS, 101 },
         { TR1LevelNames.PYRAMID, 67 },
         { TR1LevelNames.ASSAULT, 18 },
+        { TR1LevelNames.EGYPT, 106 },
+        { TR1LevelNames.CAT, 108 },
+        { TR1LevelNames.STRONGHOLD, 76 },
+        { TR1LevelNames.HIVE, 44 },
 
         { TR3LevelNames.JUNGLE, 165 },
         { TR3LevelNames.RUINS, 224 },

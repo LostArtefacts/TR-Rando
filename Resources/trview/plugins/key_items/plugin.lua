@@ -62,6 +62,14 @@ m_KeyNames[1][22183] = "P1 Fuse (conveyor)"
 m_KeyNames[1][22148] = "P1 Fuse (Cowboy)"
 m_KeyNames[1][22146] = "P1 Fuse (Cowboy, alt)"
 m_KeyNames[1][22216] = "P2 Pyramid Key"
+m_KeyNames[1][25192] = "K1 Gold Key"
+m_KeyNames[1][26146] = "K1 Ornate Key (near pyramid)"
+m_KeyNames[1][26196] = "K1 Ornate Key (croc pool)"
+m_KeyNames[1][26192] = "K1 Ornate Key (tiers south)"
+m_KeyNames[1][26303] = "K1 Ornate Key (tiers north)"
+m_KeyNames[1][26269] = "K1 Ornate Key (cubby south)"
+m_KeyNames[1][26365] = "K1 Ornate Key (cubby north)"
+m_KeyNames[1][26206] = "K1 Ornate Key (cat statue)"
 
 -- TR2
 m_KeyNames[2] = {}

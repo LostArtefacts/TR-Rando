@@ -62,4 +62,5 @@ public enum TRRandomizerType
     GeneralBugFixes,
     ShortcutFixes,
     KeyContinuity,
+    GameMode,
 }

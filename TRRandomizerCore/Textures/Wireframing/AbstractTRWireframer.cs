@@ -31,7 +31,7 @@ public abstract class AbstractTRWireframer<E, L>
 
     protected virtual bool IsTextureExcluded(ushort texture)
     {
-        return _data.ExcludedTextures.Contains(texture);
+        return _data.ExcludedTextures.Contains(texture) || _data.DeathTextures.Contains(texture);
     }
 
     protected virtual bool IsTextureOverriden(ushort texture)
@@ -51,6 +51,7 @@ public abstract class AbstractTRWireframer<E, L>
         _allTextures = new SortedSet<ushort>();
         _data = data;
 
+        RetainCustomTextures(level);
         ScanRooms(level);
         ScanMeshes(level);
 
@@ -142,6 +143,18 @@ public abstract class AbstractTRWireframer<E, L>
         DeleteAnimatedTextures(level);
     }
 
+    private void RetainCustomTextures(L level)
+    {
+        TRObjectTexture[] textures = GetObjectTextures(level);
+        for (ushort i = 0; i < textures.Length; i++)
+        {
+            if (textures[i].Attribute == (ushort)TRBlendingMode.Unused01)
+            {
+                _data.ExcludedTextures.Add(i);
+            }
+        }
+    }
+
     private void ScanRooms(L level)
     {
         foreach (IEnumerable<TRFace4> roomRects in GetRoomFace4s(level))
@@ -162,7 +175,7 @@ public abstract class AbstractTRWireframer<E, L>
                 continue;
 
             ushort texture = (ushort)(face.Texture & 0x0fff);
-            if (!IsTextureExcluded(texture))
+            if (!IsTextureExcluded(texture) || (_data.DeathTextures.Contains(texture) && !_deathFaces.Contains(face)))
             {
                 _roomFace4s[face] = GetTextureSize(level, texture);
             }
@@ -174,7 +187,7 @@ public abstract class AbstractTRWireframer<E, L>
         foreach (TRFace3 face in faces)
         {
             ushort texture = (ushort)(face.Texture & 0x0fff);
-            if (!IsTextureExcluded(texture))
+            if (!IsTextureExcluded(texture) || _data.DeathTextures.Contains(texture))
             {
                 _roomFace3s[face] = GetTextureSize(level, texture);
             }

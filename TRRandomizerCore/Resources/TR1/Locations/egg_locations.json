@@ -508,7 +508,40 @@
       "EntityIndex": 37
     }
   ],
-  "LEVEL7B.PHD": [],
+  "LEVEL7B.PHD": [
+    {
+      "X": 51712,
+      "Y": -3840,
+      "Z": 75264,
+      "Room": 70,
+      "Angle": -32768,
+      "EntityIndex": 40
+    },
+    {
+      "X": 30208,
+      "Y": 1280,
+      "Z": 93696,
+      "Room": 111,
+      "Angle": -32768,
+      "EntityIndex": 82
+    },
+    {
+      "X": 27136,
+      "Y": 3328,
+      "Z": 83456,
+      "Room": 90,
+      "Angle": -16384,
+      "EntityIndex": 73
+    },
+    {
+      "X": 39424,
+      "Y": -4352,
+      "Z": 64000,
+      "Room": 77,
+      "Angle": -16384,
+      "EntityIndex": 46
+    }
+  ],
   "LEVEL8A.PHD": [
     {
       "X": 31232,
@@ -648,7 +681,169 @@
       "EntityIndex": 51
     }
   ],
-  "LEVEL10A.PHD": [],
-  "LEVEL10B.PHD": [],
-  "LEVEL10C.PHD": []
+  "LEVEL10A.PHD": [
+    {
+      "X": 56832,
+      "Y": 1024,
+      "Z": 97280,
+      "Room": 60,
+      "EntityIndex": 50
+    },
+    {
+      "X": 37376,
+      "Y": -11008,
+      "Z": 85504,
+      "Room": 76,
+      "Angle": 0,
+      "EntityIndex": 75
+    }
+  ],
+  "EGYPT.PHD": [
+    {
+      "X": 45568,
+      "Y": -4096,
+      "Z": 12800,
+      "Room": 8,
+      "Angle": -16384,
+      "EntityIndex": 59
+    },
+    {
+      "X": 77312,
+      "Y": -1280,
+      "Z": 11776,
+      "Room": 15,
+      "Angle": -32768,
+      "EntityIndex": 10
+    },
+    {
+      "X": 79360,
+      "Y": -2048,
+      "Z": 15872,
+      "Room": 19,
+      "Angle": 0,
+      "EntityIndex": 34
+    },
+    {
+      "X": 78336,
+      "Y": 1024,
+      "Z": 44544,
+      "Room": 91,
+      "Angle": -32768,
+      "EntityIndex": 62
+    },
+    {
+      "X": 77312,
+      "Y": -3072,
+      "Z": 68096,
+      "Room": 102,
+      "Angle": -32768,
+      "EntityIndex": 141
+    },
+    {
+      "X": 87552,
+      "Y": -5120,
+      "Z": 72192,
+      "Room": 74,
+      "EntityIndex": 142
+    },
+    {
+      "X": 84480,
+      "Y": -7168,
+      "Z": 70144,
+      "Room": 75,
+      "Angle": 0,
+      "EntityIndex": 155
+    },
+    {
+      "X": 75264,
+      "Y": -7936,
+      "Z": 70144,
+      "Room": 75,
+      "Angle": 0,
+      "EntityIndex": 165
+    }
+  ],
+  "CAT.PHD": [
+    {
+      "X": 96768,
+      "Y": 1280,
+      "Z": 42496,
+      "Room": 14,
+      "Angle": 0,
+      "EntityIndex": 19
+    },
+    {
+      "X": 40448,
+      "Y": -5888,
+      "Z": 59904,
+      "Room": 32,
+      "EntityIndex": 61
+    },
+    {
+      "X": 28672,
+      "Y": -11520,
+      "Z": 54784,
+      "Room": 103,
+      "Angle": 0,
+      "EntityIndex": 193
+    },
+    {
+      "X": 74240,
+      "Y": -7120,
+      "Z": 46592,
+      "Room": 0,
+      "EntityIndex": 140
+    },
+    {
+      "X": 79360,
+      "Y": -9216,
+      "Z": 61440,
+      "Room": 4,
+      "EntityIndex": 4
+    }
+  ],
+  "END.PHD": [
+    {
+      "X": 62976,
+      "Y": -27136,
+      "Z": 45568,
+      "Room": 14,
+      "Angle": -16384,
+      "EntityIndex": 40
+    },
+    {
+      "X": 53760,
+      "Y": -20736,
+      "Z": 50688,
+      "Room": 4,
+      "Angle": 0,
+      "EntityIndex": 7
+    },
+    {
+      "X": 49664,
+      "Y": -24320,
+      "Z": 44544,
+      "Room": 4,
+      "Angle": 0,
+      "EntityIndex": 3
+    }
+  ],
+  "END2.PHD": [
+    {
+      "X": 25088,
+      "Y": 0,
+      "Z": 42496,
+      "Room": 22,
+      "Angle": -32768,
+      "EntityIndex": 101
+    },
+    {
+      "X": 39424,
+      "Y": 2560,
+      "Z": 36352,
+      "Room": 0,
+      "Angle": -16384,
+      "EntityIndex": 99
+    }
+  ]
 }

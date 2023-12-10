@@ -64,7 +64,7 @@ public class TR2ModelImporter : AbstractTRModelImporter<TR2Type, TR2Level, TR2Mo
             AnimationTransportHandler.Import(Level, definition);
 
             // Cinematic frames
-            CinematicTransportHandler.Import(Level, definition);
+            CinematicTransportHandler.Import(Level, definition, ForceCinematicOverwrite);
 
             // Add the model, which will have the correct StartingMesh, MeshTree, Frame and Animation offset.
             ModelTransportHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());

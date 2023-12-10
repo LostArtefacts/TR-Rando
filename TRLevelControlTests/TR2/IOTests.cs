@@ -50,51 +50,45 @@ public class IOTests : TestBase
     }
 
     [TestMethod]
-    public void FloorData_ReadWriteTest()
+    [DataRow(TR2LevelNames.ASSAULT)]
+    [DataRow(TR2LevelNames.GW)]
+    [DataRow(TR2LevelNames.GW_CUT)]
+    [DataRow(TR2LevelNames.VENICE)]
+    [DataRow(TR2LevelNames.BARTOLI)]
+    [DataRow(TR2LevelNames.OPERA)]
+    [DataRow(TR2LevelNames.OPERA_CUT)]
+    [DataRow(TR2LevelNames.RIG)]
+    [DataRow(TR2LevelNames.DA)]
+    [DataRow(TR2LevelNames.DA_CUT)]
+    [DataRow(TR2LevelNames.FATHOMS)]
+    [DataRow(TR2LevelNames.DORIA)]
+    [DataRow(TR2LevelNames.LQ)]
+    [DataRow(TR2LevelNames.DECK)]
+    [DataRow(TR2LevelNames.TIBET)]
+    [DataRow(TR2LevelNames.MONASTERY)]
+    [DataRow(TR2LevelNames.COT)]
+    [DataRow(TR2LevelNames.CHICKEN)]
+    [DataRow(TR2LevelNames.XIAN)]
+    [DataRow(TR2LevelNames.XIAN_CUT)]
+    [DataRow(TR2LevelNames.FLOATER)]
+    [DataRow(TR2LevelNames.LAIR)]
+    [DataRow(TR2LevelNames.HOME)]
+    [DataRow(TR2LevelNames.COLDWAR)]
+    [DataRow(TR2LevelNames.FOOLGOLD)]
+    [DataRow(TR2LevelNames.FURNACE)]
+    [DataRow(TR2LevelNames.KINGDOM)]
+    [DataRow(TR2LevelNames.VEGAS)]
+    public void TestFloorData(string levelName)
     {
-        //Read Dragons Lair data
-        TR2Level lvl = GetTR2Level(TR2LevelNames.LAIR);
+        TR2Level level = GetTR2Level(levelName);
 
-        //Store the original floordata from the level
-        ushort[] originalFData = new ushort[lvl.NumFloorData];
-        Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
+        List<ushort> originalData = new(level.FloorData);
 
-        //Parse the floordata using FDControl and re-write the parsed data back
-        FDControl fdataReader = new();
-        fdataReader.ParseFromLevel(lvl);
-        fdataReader.WriteToLevel(lvl);
+        FDControl fdControl = new();
+        fdControl.ParseFromLevel(level);
+        fdControl.WriteToLevel(level);
 
-        //Store the new floordata written back by FDControl
-        ushort[] newFData = lvl.FloorData;
-
-        //Compare to make sure the original fdata was written back.
-        CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
-        Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
-
-        //Now modify an entry, and ensure it is different to the original data.
-        FDPortalEntry portal = fdataReader.Entries[3][0] as FDPortalEntry;
-        portal.Room = 42;
-        fdataReader.WriteToLevel(lvl);
-
-        //Test. FDIndex 3 of Dragon's Lair is a portal to room 3, which is being modified to Room 42.
-        //Data should be:
-        //New - [3] = 0x8001 and [4] = 0x002A
-
-        //Get ref to new data
-        newFData = lvl.FloorData;
-
-        Assert.AreEqual(newFData[3], (ushort)0x8001);
-        Assert.AreEqual(newFData[4], (ushort)0x002A);
-
-        //Compare to make sure the modified fdata was written back.
-        CollectionAssert.AreNotEqual(originalFData, newFData, "Floordata matches, change unsuccessful");
-        Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
-
-        //Test pattern/type matching example for fdata.
-        bool isPortal = fdataReader.Entries.Values
-            .Any(entries => entries.Any(entry => entry is FDPortalEntry));
-
-        Assert.IsTrue(isPortal);
+        CollectionAssert.AreEqual(originalData, level.FloorData);
     }
 
     [TestMethod]

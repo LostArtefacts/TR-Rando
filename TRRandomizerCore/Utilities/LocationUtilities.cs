@@ -22,6 +22,16 @@ public static class LocationUtilities
         };
     }
 
+    public static void SetLocation<T>(this TREntity<T> entity, Location location)
+        where T : Enum
+    {
+        entity.X = location.X;
+        entity.Y = location.Y;
+        entity.Z = location.Z;
+        entity.Room = (short)location.Room;
+        entity.Angle = location.Angle;
+    }
+
     public static Location GetFloorLocation<T>(this TREntity<T> entity, Func<Location, TRRoomSector> sectorFunc)
         where T : Enum
     {

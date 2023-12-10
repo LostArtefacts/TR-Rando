@@ -1,4 +1,6 @@
 ﻿using System.Numerics;
+using TRFDControl;
+using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -49,6 +51,13 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Level>
     protected override bool IsRoomValid(TR1Level level, short room)
     {
         return true;
+    }
+
+    protected override bool TriggerSupportsItems(TR1Level level, FDTriggerEntry trigger)
+    {
+        // Assume a Thor hammer trigger is directly below the hammer head.
+        return !trigger.TrigActionList.Any(a => a.TrigAction == FDTrigAction.Object
+            && level.Entities[a.Parameter].TypeID == TR1Type.ThorHammerHandle);
     }
 
     protected override Dictionary<ushort, List<Location>> GetRoomStaticMeshLocations(TR1Level level, short room)

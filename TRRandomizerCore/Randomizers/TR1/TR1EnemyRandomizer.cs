@@ -28,9 +28,28 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         EntitiesToRemove = new()
     };
 
+    private static readonly int _unkillableEgyptMummy = 163;
+    private static readonly Location _egyptMummyLocation = new()
+    {
+        X = 66048,
+        Y = -2304,
+        Z = 73216,
+        Room = 78
+    };
+
+    private static readonly int _unreachableStrongholdRoom = 18;
+    private static readonly Location _strongholdCentaurLocation = new()
+    {
+        X = 57856,
+        Y = -26880,
+        Z = 43520,
+        Room = 14
+    };
+
     private Dictionary<TR1Type, List<string>> _gameEnemyTracker;
     private Dictionary<string, List<Location>> _pistolLocations;
     private Dictionary<string, List<Location>> _eggLocations;
+    private Dictionary<string, List<Location>> _pierreLocations;
     private List<TR1Type> _excludedEnemies;
     private ISet<TR1Type> _resultantEnemies;
 
@@ -42,6 +61,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         _generator = new Random(seed);
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
         _eggLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\egg_locations.json"));
+        _pierreLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\pierre_locations.json"));
 
         if (Settings.CrossLevelEnemies)
         {
@@ -111,7 +131,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         // Track enemies whose counts across the game are restricted
-        _gameEnemyTracker = TR1EnemyUtilities.PrepareEnemyGameTracker(Settings.RandoEnemyDifficulty);
+        _gameEnemyTracker = TR1EnemyUtilities.PrepareEnemyGameTracker(Settings.RandoEnemyDifficulty, Levels.Select(l => l.Name));
 
         // #272 Selective enemy pool - convert the shorts in the settings to actual entity types
         _excludedEnemies = Settings.UseEnemyExclusions ?
@@ -164,6 +184,37 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
     }
 
+    private void AdjustUnkillableEnemies(TR1CombinedLevel level)
+    {
+        if (level.Is(TR1LevelNames.EGYPT))
+        {
+            // The OG mummy normally falls out of sight when triggered, so move it.
+            level.Data.Entities[_unkillableEgyptMummy].SetLocation(_egyptMummyLocation);
+        }
+        else if (level.Is(TR1LevelNames.STRONGHOLD))
+        {
+            // There is a triggered centaur in room 18, plus several untriggered eggs for show.
+            // Move the centaur, and free the eggs to be repurposed elsewhere.
+            FDControl floorData = new();
+            floorData.ParseFromLevel(level.Data);
+            foreach (TR1Entity enemy in level.Data.Entities.Where(e => e.Room == _unreachableStrongholdRoom))
+            {
+                int index = level.Data.Entities.IndexOf(enemy);
+                if (FDUtilities.GetEntityTriggers(floorData, index).Count == 0)
+                {
+                    enemy.TypeID = TR1Type.CameraTarget_N;
+                    ItemFactory.FreeItem(level.Name, index);
+                }
+                else
+                {
+                    enemy.SetLocation(_strongholdCentaurLocation);
+                }
+            }
+        }
+
+        level.Script.UnobtainableKills = null;
+    }
+
     private EnemyTransportCollection SelectCrossLevelEnemies(TR1CombinedLevel level)
     {
         // For the assault course, nothing will be imported for the time being
@@ -171,6 +222,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         {
             return null;
         }
+
+        AdjustUnkillableEnemies(level);
 
         if (Settings.UseEnemyClones && Settings.CloneOriginalEnemies)
         {
@@ -427,6 +480,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             return;
         }
 
+        AdjustUnkillableEnemies(level);
         EnemyRandomizationCollection enemies = new()
         {
             Available = new(),
@@ -505,7 +559,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     targetEntity.TypeID = TR1TypeUtilities.TranslateAlias(entity);
 
                     // #146 Ensure OneShot triggers are set for this enemy if needed
-                    TR1EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
+                    TR1EnemyUtilities.SetEntityTriggers(level.Data, targetEntity, floorData);
 
                     if (Settings.HideEnemiesUntilTriggered || entity == TR1Type.Adam)
                     {
@@ -528,6 +582,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 continue;
             }
 
+            int entityIndex = level.Data.Entities.IndexOf(currentEntity);
             TR1Type currentEntityType = currentEntity.TypeID;
             TR1Type newEntityType = currentEntityType;
 
@@ -619,8 +674,9 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 List<TR1Type> spawnTypes = enemies.Available.FindAll(allEggTypes.Contains);
                 TR1Type spawnType = TR1TypeUtilities.TranslateAlias(spawnTypes[_generator.Next(0, spawnTypes.Count)]);
 
-                int entityIndex = level.Data.Entities.IndexOf(currentEntity);
-                Location eggLocation = _eggLocations[level.Name].Find(l => l.EntityIndex == entityIndex);
+                Location eggLocation = _eggLocations.ContainsKey(level.Name)
+                    ? _eggLocations[level.Name].Find(l => l.EntityIndex == entityIndex)
+                    : null;
 
                 if (eggLocation != null || currentEntityType == newEntityType)
                 {
@@ -691,7 +747,16 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             currentEntity.TypeID = TR1TypeUtilities.TranslateAlias(newEntityType);
 
             // #146 Ensure OneShot triggers are set for this enemy if needed
-            TR1EnemyUtilities.SetEntityTriggers(level.Data, currentEntity);
+            TR1EnemyUtilities.SetEntityTriggers(level.Data, currentEntity, floorData);
+
+            if (currentEntity.TypeID == TR1Type.Pierre
+                && _pierreLocations.ContainsKey(level.Name)
+                && _pierreLocations[level.Name].Find(l => l.EntityIndex == entityIndex) is Location location)
+            {
+                // Pierre is the only enemy who cannot be underwater, so location shifts have been predefined
+                // for specific entities.
+                currentEntity.SetLocation(location);
+            }
 
             // Track every enemy type across the game
             _resultantEnemies.Add(newEntityType);
@@ -704,18 +769,34 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         if (level.Is(TR1LevelNames.TIHOCAN) && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
         {
-            if (TR1EnemyUtilities.CanDropItems(level.Data.Entities[TR1ItemRandomizer.TihocanPierreIndex], level, floorData))
+            TR1Entity pierreReplacement = level.Data.Entities[TR1ItemRandomizer.TihocanPierreIndex];
+            if (Settings.AllowEnemyKeyDrops
+                && TR1EnemyUtilities.CanDropItems(pierreReplacement, level, floorData))
             {
-                // Whichever enemy has taken Pierre's place will drop the items.
+                // Whichever enemy has taken Pierre's place will drop the items. Move the pickups to the enemy for trview lookup.
                 level.Script.AddItemDrops(TR1ItemRandomizer.TihocanPierreIndex, TR1ItemRandomizer.TihocanEndItems
                     .Select(e => ItemUtilities.ConvertToScriptItem(e.TypeID)));
+                foreach (TR1Entity drop in TR1ItemRandomizer.TihocanEndItems)
+                {
+                    level.Data.Entities.Add(new()
+                    {
+                        TypeID = drop.TypeID,
+                        X = pierreReplacement.X,
+                        Y = pierreReplacement.Y,
+                        Z = pierreReplacement.Z,
+                        Room = pierreReplacement.Room,
+                    });
+                    ItemUtilities.HideEntity(level.Data.Entities[^1]);
+                }
             }
             else
             {
-                // Add physical pickups - this means item rando is off, so these won't move.
+                // Add Pierre's pickups in a default place. Allows pacifist runs effectively.
                 level.Data.Entities.AddRange(TR1ItemRandomizer.TihocanEndItems);
             }
         }
+
+        floorData.WriteToLevel(level.Data);
 
         // Fix missing OG animation SFX
         FixEnemyAnimations(level);

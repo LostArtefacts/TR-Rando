@@ -31,7 +31,7 @@ public class TR1GameStringRandomizer : BaseTR1Randomizer
             ProcessLevelStrings(ScriptEditor.AssaultLevel);
             script.Strings["INV_ITEM_LARAS_HOME"] = ScriptEditor.AssaultLevel.Name;
 
-            foreach (AbstractTRScriptedLevel level in ScriptEditor.ScriptedLevels)
+            foreach (AbstractTRScriptedLevel level in ScriptEditor.EnabledScriptedLevels)
             {
                 ProcessLevelStrings(level);
             }
@@ -49,6 +49,10 @@ public class TR1GameStringRandomizer : BaseTR1Randomizer
         List<AbstractTRScriptedLevel> levels = ScriptEditor.Levels.ToList();
         AbstractTRScriptedLevel cistern = levels.Find(l => l.Is(TR1LevelNames.CISTERN));
         AbstractTRScriptedLevel mines = levels.Find(l => l.Is(TR1LevelNames.MINES));
+        if (cistern == null || mines == null)
+        {
+            return;
+        }
 
         // Duplicate whatever Cistern has for "Rusty Key" into Mines
         mines.Keys.Add(cistern.Keys.Count > 2 ? cistern.Keys[2] : "Rusty Key");
@@ -73,7 +77,12 @@ public class TR1GameStringRandomizer : BaseTR1Randomizer
 
     private TR1LevelStrings GetLevelStrings(string lvlName)
     {
-        return GetGameStrings().LevelStrings[lvlName];
+        TR1GameStrings strings = GetGameStrings();
+        if (!strings.LevelStrings.ContainsKey(lvlName))
+        {
+            strings = _defaultGameStrings;
+        }
+        return strings.LevelStrings[lvlName];
     }
 
     private void ProcessGlobalStrings(Dictionary<string, string> scriptStrings)

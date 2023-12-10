@@ -1,6 +1,40 @@
 {
   "All": [
     {
+      "Comments": "Convert music triggers to oneshot.",
+      "EMType": 69,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 35328,
+          "Y": 4736,
+          "Z": 89600,
+          "Room": 34
+        },
+        {
+          "X": 34304,
+          "Y": 4864,
+          "Z": 89600,
+          "Room": 34
+        },
+        {
+          "X": 33280,
+          "Y": 4864,
+          "Z": 89600,
+          "Room": 34
+        },
+        {
+          "X": 32256,
+          "Y": 5120,
+          "Z": 89600,
+          "Room": 34
+        }
+      ],
+      "OneShot": true
+    },
+    {
       "Comments": "Patch two holes in the roof in room 10 and another in room 1.",
       "EMType": 26,
       "Tags": [
@@ -916,6 +950,231 @@
         "RoomIndices": [
           -1
         ]
+      }
+    ],
+    [
+      {
+        "Comments": "Add an earthquake.",
+        "EMType": 145,
+        "Tags": [
+          4
+        ],
+        "Data": [
+          {
+            "ModelID": 183,
+            "TextureMap": {}
+          }
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 183,
+        "Location": {
+          "X": 35328,
+          "Y": 2048,
+          "Z": 72192,
+          "Room": 35
+        }
+      },
+      {
+        "EMType": 68,
+        "Locations": [
+          {
+            "X": 34304,
+            "Y": 2048,
+            "Z": 77312,
+            "Room": 35
+          },
+          {
+            "X": 33280,
+            "Y": 2048,
+            "Z": 77312,
+            "Room": 35
+          }
+        ],
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Comments": "Import the flame emitter model.",
+        "EMType": 141,
+        "Tags": [
+          4
+        ],
+        "Models": [
+          179
+        ]
+      },
+      {
+        "Comments": "Add some flame traps.",
+        "EMType": 51,
+        "TypeID": 179,
+        "Location": {
+          "X": 34304,
+          "Y": 2048,
+          "Z": 77312,
+          "Room": 35
+        },
+        "TargetRelocation": {
+          "X": 34304,
+          "Y": 2048,
+          "Z": 76288,
+          "Room": 35
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 179,
+        "Location": {
+          "X": 33280,
+          "Y": 2048,
+          "Z": 77312,
+          "Room": 35
+        },
+        "TargetRelocation": {
+          "X": 34304,
+          "Y": 2048,
+          "Z": 76288,
+          "Room": 35
+        }
+      },
+      {
+        "EMType": 61,
+        "ExpandedLocations": {
+          "Location": {
+            "X": 32256,
+            "Y": 2304,
+            "Z": 78336,
+            "Room": 34
+          },
+          "ExpandX": 4,
+          "ExpandZ": 1
+        },
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -2
+            },
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      },
+      {
+        "EMType": 21,
+        "TextureMap": {
+          "707": {
+            "35": {
+              "Rectangles": [
+                48,
+                68
+              ]
+            }
+          }
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Add a ToQ mummy.",
+        "EMType": 141,
+        "Tags": [
+          4
+        ],
+        "Models": [
+          24
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 24,
+        "Intensity": -1,
+        "Location": {
+          "X": 49664,
+          "Y": 4608,
+          "Z": 78336,
+          "Room": 33,
+          "Angle": 16384
+        },
+        "TargetRelocation": {
+          "X": 50688,
+          "Y": 4608,
+          "Z": 76288,
+          "Room": 33
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 50688,
+            "Y": 4608,
+            "Z": 78336,
+            "Room": 33
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the boulder model is available.",
+        "EMType": 145,
+        "Tags": [
+          4
+        ],
+        "Data": [
+          {
+            "ModelID": 38,
+            "TexturedFace3": 33,
+            "TexturedFace4": 1
+          }
+        ]
+      },
+      {
+        "Comments": "Add a boulder.",
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 36352,
+          "Y": 2816,
+          "Z": 66048,
+          "Room": 32
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 36352,
+            "Y": 4608,
+            "Z": 68096,
+            "Room": 32
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
       }
     ]
   ],

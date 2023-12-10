@@ -12,6 +12,8 @@ Before you launch the randomizer for the first time, you should carry out a few 
 ***
 > ### TR1
 > You must use [TR1X](https://github.com/LostArtefacts/TR1X) to be able to randomize Tomb Raider 1. Follow the installation guide on the TR1X GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs) for guidance. Note that if using the TR1X installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
+> 
+> You must also ensure that you have the Unfinished Business levels files in your installation. These are available when using the TR1X installer, and we recommend that you choose the set that contains music triggers. The level files are also available to download manually from https://lostartefacts.dev/aux/tr1x/trub-music.zip - you can then simply extract the files into your TR1X data folder.
 ***
 > ### TR2
 > Use the [Version Swapper](https://github.com/TombRunners/tr2-version-swapper) or install and configure [TR2Main](https://github.com/Arsunt/TR2Main).

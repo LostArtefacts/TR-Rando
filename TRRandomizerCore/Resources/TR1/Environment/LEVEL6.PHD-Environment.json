@@ -642,6 +642,117 @@
           ]
         }
       }
+    ],
+    [
+      {
+        "Comments": "Import the lava emitter model.",
+        "EMType": 141,
+        "Tags": [
+          4
+        ],
+        "Models": [
+          177
+        ]
+      },
+      {
+        "Comments": "Add some ember trap.",
+        "EMType": 51,
+        "TypeID": 177,
+        "Location": {
+          "X": 37376,
+          "Y": -6528,
+          "Z": 42496,
+          "Room": 9
+        },
+        "TargetRelocation": {
+          "X": 29184,
+          "Y": -4352,
+          "Z": 41472,
+          "Room": 29
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 177,
+        "Location": {
+          "X": 35328,
+          "Y": -6528,
+          "Z": 41472,
+          "Room": 9
+        },
+        "TargetRelocation": {
+          "X": 29184,
+          "Y": -4352,
+          "Z": 41472,
+          "Room": 29
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 177,
+        "Location": {
+          "X": 34304,
+          "Y": -6528,
+          "Z": 42496,
+          "Room": 9
+        },
+        "TargetRelocation": {
+          "X": 29184,
+          "Y": -4352,
+          "Z": 41472,
+          "Room": 29
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 177,
+        "Location": {
+          "X": 32256,
+          "Y": -6528,
+          "Z": 41472,
+          "Room": 9
+        },
+        "TargetRelocation": {
+          "X": 29184,
+          "Y": -4352,
+          "Z": 41472,
+          "Room": 29
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 39424,
+            "Y": -4352,
+            "Z": 41472,
+            "Room": 9
+          },
+          {
+            "X": 39424,
+            "Y": -4352,
+            "Z": 42496,
+            "Room": 9
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -4
+            },
+            {
+              "Parameter": -3
+            },
+            {
+              "Parameter": -2
+            },
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
     ]
   ],
   "AllWithin": [

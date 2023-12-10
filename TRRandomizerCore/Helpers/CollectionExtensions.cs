@@ -2,6 +2,8 @@
 
 public static class CollectionExtensions
 {
+    private const int _defaultShuffleCount = 5;
+
     public static List<T> RandomSelection<T>(this List<T> list, Random rand, int count, bool allowDuplicates = false, ISet<T> exclusions = null)
     {
         count = Math.Abs(count);
@@ -43,7 +45,15 @@ public static class CollectionExtensions
         return resultSet;
     }
 
-    public static void Shuffle<T>(this List<T> list, Random rand)
+    public static void Shuffle<T>(this List<T> list, Random rand, int count = _defaultShuffleCount)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            ShuffleImpl(list, rand);
+        }
+    }
+
+    private static void ShuffleImpl<T>(List<T> list, Random rand)
     {
         List<T> iterList = new(list);
         list.Clear();

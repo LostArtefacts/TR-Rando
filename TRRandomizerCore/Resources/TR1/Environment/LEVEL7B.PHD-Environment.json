@@ -47,6 +47,21 @@
       ]
     },
     {
+      "Comments": "Rotate door 12.",
+      "EMType": 44,
+      "Tags": [
+        10
+      ],
+      "EntityIndex": 12,
+      "TargetLocation": {
+        "X": 52736,
+        "Y": -7936,
+        "Z": 76288,
+        "Room": 15,
+        "Angle": -32768
+      }
+    },
+    {
       "Comments": "Create rooms for a return path (scythe room to the beginning).",
       "EMType": 126,
       "Tags": [
@@ -5007,14 +5022,6 @@
             "Z": 1536,
             "Room": 19
           },
-          "Textures": {
-            "WallAlignment": 4
-          },
-          "AmbientLighting": 7168,
-          "DefaultVertex": {
-            "Lighting": 7680
-          },
-          "Lights": [],
           "Height": 4,
           "Width": 3,
           "Depth": 3
@@ -5244,17 +5251,6 @@
             "Z": 1536,
             "Room": 19
           },
-          "Textures": {
-            "Floor": 7,
-            "Ceiling": 7,
-            "WallAlignment": 4,
-            "Wall4": 7
-          },
-          "AmbientLighting": 7168,
-          "DefaultVertex": {
-            "Lighting": 7680
-          },
-          "Lights": [],
           "Height": 4,
           "Width": 9,
           "Depth": 3
@@ -7618,7 +7614,517 @@
     }
   ],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If there is a particular secret present, adjust some triggers and add some additional medis. This one is particularly mean.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 29696,
+          "Y": -6144,
+          "Z": 61952,
+          "Room": 79
+        }
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make a side trap room to house the medis. You get nothing for free.",
+          "EMType": 126,
+          "Location": {
+            "X": 26624,
+            "Y": -6144,
+            "Z": 54272
+          },
+          "LinkedLocation": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
+          },
+          "Textures": {
+            "Floor": 7,
+            "Ceiling": 14,
+            "WallAlignment": 4,
+            "Wall4": 10
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6832
+          },
+          "Lights": [
+            {
+              "X": 1536,
+              "Y": -768,
+              "Z": 1536,
+              "Intensity1": 4096,
+              "Fade1": 1536
+            },
+            {
+              "X": 1536,
+              "Y": -768,
+              "Z": 5632,
+              "Intensity1": 2048,
+              "Fade1": 1536
+            }
+          ],
+          "Height": 8,
+          "Width": 3,
+          "Depth": 7,
+          "CeilingHeights": {
+            "4": [
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        },
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 79,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": -7168,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -7168,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -6144,
+                  "Z": 1024
+                },
+                {
+                  "X": 3072,
+                  "Y": -6144,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": 79,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -7168,
+                  "Z": 6144
+                },
+                {
+                  "X": 2048,
+                  "Y": -7168,
+                  "Z": 6144
+                },
+                {
+                  "X": 2048,
+                  "Y": -6144,
+                  "Z": 6144
+                },
+                {
+                  "X": 1024,
+                  "Y": -6144,
+                  "Z": 6144
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "EMType": 82,
+          "Portals": {
+            "-1": {
+              "79": [
+                {
+                  "X": 28160,
+                  "Z": 60928
+                }
+              ]
+            },
+            "79": {
+              "-1": [
+                {
+                  "X": 28160,
+                  "Z": 59904
+                }
+              ]
+            }
+          }
+        },
+        {
+          "EMType": 21,
+          "TextureMap": {
+            "5": {
+              "-1": {
+                "Rectangles": [
+                  9,
+                  17
+                ]
+              }
+            },
+            "13": {
+              "-1": {
+                "Rectangles": [
+                  2,
+                  5,
+                  15,
+                  16,
+                  23,
+                  25
+                ]
+              }
+            }
+          }
+        },
+        {
+          "EMType": 22,
+          "GeometryMap": {
+            "-1": {
+              "Rectangles": [
+                24
+              ]
+            },
+            "79": {
+              "Rectangles": [
+                13
+              ]
+            }
+          }
+        },
+        {
+          "EMType": 128,
+          "RoomIndices": [
+            -1
+          ]
+        },
+        {
+          "Comments": "Adjust the triggers around the original clang-clangs.",
+          "EMType": 69,
+          "Location": {
+            "X": 31232,
+            "Y": -6144,
+            "Z": 61952,
+            "Room": 79
+          },
+          "TrigType": 0,
+          "Timer": 0
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 30208,
+              "Y": -6144,
+              "Z": 61952,
+              "Room": 79
+            },
+            {
+              "X": 29184,
+              "Y": -6144,
+              "Z": 61952,
+              "Room": 79
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 64
+          }
+        },
+        {
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 29184,
+              "Y": -6144,
+              "Z": 62976,
+              "Room": 79
+            },
+            {
+              "X": 29184,
+              "Y": -6144,
+              "Z": 60928,
+              "Room": 79
+            }
+          ]
+        },
+        {
+          "EMType": 51,
+          "TypeID": 38,
+          "Intensity": -1,
+          "Location": {
+            "X": 28160,
+            "Y": -7424,
+            "Z": 55808,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 42,
+          "Intensity": -1,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 58880,
+            "Room": -1,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 42,
+          "Intensity": -1,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 57856,
+            "Room": -1,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "EntityLocation": -2,
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -3
+              },
+              {
+                "Parameter": -2
+              },
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 28160,
+              "Y": -6144,
+              "Z": 59904,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "TrigType": 6,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -2
+              },
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 27776,
+            "Y": -6144,
+            "Z": 55808,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 27776,
+            "Y": -6144,
+            "Z": 55808,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 27776,
+            "Y": -6144,
+            "Z": 55808,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 27776,
+            "Y": -6144,
+            "Z": 55808,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 55424,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 55424,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 55424,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 55424,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 93,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 55808,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 56192,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 56192,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 56192,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28160,
+            "Y": -6144,
+            "Z": 56192,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28544,
+            "Y": -6144,
+            "Z": 55808,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28544,
+            "Y": -6144,
+            "Z": 55808,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28544,
+            "Y": -6144,
+            "Z": 55808,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28544,
+            "Y": -6144,
+            "Z": 55808,
+            "Room": -1
+          }
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": []
 }

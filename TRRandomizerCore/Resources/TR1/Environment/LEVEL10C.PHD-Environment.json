@@ -1,6 +1,22 @@
 {
   "All": [
     {
+      "Comments": "Convert music triggers to oneshot.",
+      "EMType": 69,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 58880,
+          "Y": -15616,
+          "Z": 11776,
+          "Room": 36
+        }
+      ],
+      "OneShot": true
+    },
+    {
       "Comments": "Fix the final secret if secret randomization is not enabled (if the trigger isn't there, nothing is done).",
       "EMType": 66,
       "Locations": [

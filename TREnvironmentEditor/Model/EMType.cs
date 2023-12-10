@@ -26,6 +26,7 @@ public enum EMType
     SwapFace = 32,
     ImportTexture = 33,
     CreateStaticMesh = 34,
+    CreateTexture = 36,
 
     // Entity types 41-60
     MoveSlot = 41,
@@ -57,6 +58,8 @@ public enum EMType
     KillLara = 70,
     RemoveTriggerAction = 71,
     RemoveEntityTriggers = 72,
+    MergeTriggers = 73,
+    ResetPickupTrigger = 74,
 
     // Portal types 81-100
     VisibilityPortal = 81,
@@ -81,6 +84,7 @@ public enum EMType
     CreateWall = 127,
     GenerateLight = 128,
     MoveCamera = 129,
+    LockMusic = 130,
 
     // Models
     ImportModel = 141,

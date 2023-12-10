@@ -55,7 +55,7 @@ public class TRRandomizerController
     #endregion
 
     #region ScriptEditor Passthrough
-    private Organisation _extLevelOrganisation, _extPlayableOrganisation, _extUnarmedOrganisation, _extAmmolessOrganisation, _extMedilessOrganisation, _extSecretRewardsOrganisation, _extSunsetOrganisation, _extAudioOrganisation;
+    private Organisation _extUnarmedOrganisation, _extAmmolessOrganisation, _extMedilessOrganisation, _extSecretRewardsOrganisation, _extSunsetOrganisation, _extAudioOrganisation;
 
     /// <summary>
     /// We need to store any organisation values that aren't random so if randomization is turned off for the 
@@ -64,8 +64,6 @@ public class TRRandomizerController
     /// </summary>
     private void StoreExternalOrganisations()
     {
-        _extLevelOrganisation = RandomizeLevelSequencing ? Organisation.Default : ScriptEditor.LevelSequencingOrganisation;
-        _extPlayableOrganisation = RandomizePlayableLevels ? Organisation.Default : ScriptEditor.EnabledLevelOrganisation;
         _extSunsetOrganisation = RandomizeSunsets ? Organisation.Default : ScriptEditor.LevelSunsetOrganisation;
         _extAudioOrganisation = ChangeAmbientTracks ? Organisation.Default : ScriptEditor.GameTrackOrganisation;
 
@@ -87,37 +85,53 @@ public class TRRandomizerController
         }
     }
 
-    public int LevelCount => ScriptEditor.ScriptedLevels.Count;
-    public int DefaultUnarmedLevelCount => ScriptEditor.Edition.UnarmedLevelCount;
-    public int DefaultAmmolessLevelCount => ScriptEditor.Edition.AmmolessLevelCount;
-    public int DefaultSunsetCount => ScriptEditor.Edition.SunsetLevelCount;
-
-    public bool RandomizeLevelSequencing
+    private void SetScriptSequencing()
     {
-        get => ScriptEditor.LevelSequencingOrganisation == Organisation.Random;
-        set
+        if (RandomizeGameMode)
         {
-            ScriptEditor.LevelSequencingOrganisation = value ? Organisation.Random : _extLevelOrganisation;
-            LevelRandomizer.RandomizeSequencing = value;
+            ScriptEditor.LevelSequencingOrganisation = RandomizeSequencing ? Organisation.Random : Organisation.Default;
+            ScriptEditor.EnabledLevelOrganisation = Organisation.Random;
+            ScriptEditor.GameMode = LevelRandomizer.GameMode;
         }
+        else
+        {
+            ScriptEditor.LevelSequencingOrganisation = Organisation.Default;
+            ScriptEditor.EnabledLevelOrganisation = Organisation.Default;
+            ScriptEditor.GameMode = GameMode.Normal;
+        }
+    }
+
+    public int GetTotalLevelCount(GameMode mode) => ScriptEditor.GetTotalLevelCount(mode);
+    public int GetDefaultUnarmedLevelCount(GameMode mode) => ScriptEditor.GetDefaultUnarmedLevelCount(mode);
+    public int GetDefaultAmmolessLevelCount(GameMode mode) => ScriptEditor.GetDefaultAmmolessLevelCount(mode);
+    public int GetDefaultSunsetLevelCount(GameMode mode) => ScriptEditor.GetDefaultSunsetLevelCount(mode);
+
+    public bool RandomizeGameMode
+    {
+        get => LevelRandomizer.RandomizeGameMode;
+        set => LevelRandomizer.RandomizeGameMode = value;
+    }
+
+    public GameMode GameMode
+    {
+        get => LevelRandomizer.GameMode;
+        set => LevelRandomizer.GameMode = value;
+    }
+
+    public bool RandomizeSequencing
+    {
+        get => LevelRandomizer.RandomizeSequencing;
+        set => LevelRandomizer.RandomizeSequencing = value;
     }
 
     public int LevelSequencingSeed
     {
         get => ScriptEditor.LevelSequencingRNG.Value;
-        set => ScriptEditor.LevelSequencingRNG = new RandomGenerator(value);
-    }
-
-    public bool RandomizePlayableLevels
-    {
-        get => ScriptEditor.EnabledLevelOrganisation == Organisation.Random;
-        set => ScriptEditor.EnabledLevelOrganisation = value ? Organisation.Random : _extPlayableOrganisation;
-    }
-
-    public int PlayableLevelsSeed
-    {
-        get => ScriptEditor.EnabledLevelRNG.Value;
-        set => ScriptEditor.EnabledLevelRNG = new RandomGenerator(value);
+        set
+        {
+            ScriptEditor.LevelSequencingRNG = new(value);
+            ScriptEditor.EnabledLevelRNG = new(value);
+        }
     }
 
     public uint PlayableLevelCount
@@ -1708,10 +1722,8 @@ public class TRRandomizerController
 
     public void Randomize()
     {
-        // TREditor will first save the script file, process any initial level file modifications 
-        // (e.g. adding pistols to unarmed levels) and then will pass control to TR2LevelRandomizer
-        // -> SaveImpl to begin the main randomization.
-        _randoEventArgs = new TRRandomizationEventArgs();
+        SetScriptSequencing();
+        _randoEventArgs = new();
         _editor.Save();
     }
 

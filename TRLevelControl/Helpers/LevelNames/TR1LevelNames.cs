@@ -35,6 +35,10 @@ public static class TR1LevelNames
         .Concat(Atlantis)
         .ToList();
 
+    public static List<string> AsListWithGold => AsList
+        .Concat(AsListGold)
+        .ToList();
+
     public static List<string> AsListWithAssault => AsList
         .Prepend(ASSAULT)
         .ToList();

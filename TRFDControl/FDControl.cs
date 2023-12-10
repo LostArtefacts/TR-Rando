@@ -49,198 +49,148 @@ public class FDControl
         }
     }
 
-    public void ParseFromLevel (TR1Level lvl)
+    public void ParseFromLevel (TR1Level level)
     {
-        _entries = new SortedDictionary<int, List<FDEntry>>();
+        ParseLevel(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
+    }
 
-        foreach (TRRoom room in lvl.Rooms)
+    public void ParseFromLevel(TR2Level level)
+    {
+        ParseLevel(level.Rooms.SelectMany(r => r.SectorList), level.FloorData);
+    }
+
+    public void ParseFromLevel(TR3Level level)
+    {
+        ParseLevel(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
+    }
+
+    public void ParseFromLevel(TR4Level level)
+    {
+        ParseLevel(level.LevelDataChunk.Rooms.SelectMany(r => r.Sectors), level.LevelDataChunk.Floordata);
+    }
+
+    public void ParseFromLevel(TR5Level level)
+    {
+        ParseLevel(level.LevelDataChunk.Rooms.SelectMany(r => r.RoomData.SectorList), level.LevelDataChunk.Floordata);
+    }
+
+    private void ParseLevel(IEnumerable<TRRoomSector> roomSectors, ushort[] floorData)
+    {
+        _entries = new();
+        foreach (TRRoomSector sector in roomSectors)
         {
-            foreach (TRRoomSector sector in room.Sectors)
-            {
-                ParseFromSector(sector, lvl.FloorData, lvl.NumFloorData);
-            }
+            ParseFromSector(sector, floorData);
         }
     }
 
-    public void ParseFromLevel(TR2Level lvl)
+    private void ParseFromSector(TRRoomSector sector, ushort[] floorData)
     {
-        _entries = new SortedDictionary<int, List<FDEntry>>();
-
-        foreach (TR2Room room in lvl.Rooms)
-        {
-            foreach (TRRoomSector sector in room.SectorList)
-            {
-                ParseFromSector(sector, lvl.FloorData, lvl.NumFloorData);
-            }
-        }
-    }
-
-    public void ParseFromLevel(TR3Level lvl)
-    {
-        _entries = new SortedDictionary<int, List<FDEntry>>();
-
-        foreach (TR3Room room in lvl.Rooms)
-        {
-            foreach (TRRoomSector sector in room.Sectors)
-            {
-                ParseFromSector(sector, lvl.FloorData, lvl.NumFloorData);
-            }
-        }
-    }
-
-    public void ParseFromLevel(TR4Level lvl)
-    {
-        _entries = new SortedDictionary<int, List<FDEntry>>();
-
-        foreach (TR4Room room in lvl.LevelDataChunk.Rooms)
-        {
-            foreach (TRRoomSector sector in room.Sectors)
-            {
-                ParseFromSector(sector, lvl.LevelDataChunk.Floordata, lvl.LevelDataChunk.NumFloorData);
-            }
-        }
-    }
-
-    public void ParseFromLevel(TR5Level lvl)
-    {
-        _entries = new SortedDictionary<int, List<FDEntry>>();
-
-        foreach (TR5Room room in lvl.LevelDataChunk.Rooms)
-        {
-            foreach (TRRoomSector sector in room.RoomData.SectorList)
-            {
-                ParseFromSector(sector, lvl.LevelDataChunk.Floordata, lvl.LevelDataChunk.NumFloorData);
-            }
-        }
-    }
-
-    private void ParseFromSector(TRRoomSector sector, ushort[] FloorData, uint NumFloorData)
-    {
-        //Index into FData is FDIndex
         ushort index = sector.FDIndex;
-
-        //Index 0 is a dummy
+        // Index 0 is always dummy, so NOOP.
         if (index == 0)
         {
             return;
         }
 
-        //List of floordata functions for the sector
-        List<FDEntry> floordataFunctions = new();
+        // List of floordata functions for this sector.
+        List<FDEntry> functions = new();
+        _entries[sector.FDIndex] = functions;
 
         while (true)
         {
             FDSetup data = new()
             {
-                Value = FloorData[index]
+                Value = floorData[index]
             };
 
             switch ((FDFunctions)data.Function)
             {
                 case FDFunctions.PortalSector:
-
-                    FDPortalEntry portal = new()
+                    functions.Add(new FDPortalEntry
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] },
-                        Room = FloorData[++index]
-                    };
-
-                    floordataFunctions.Add(portal);
-
+                        Setup = new() { Value = floorData[index] },
+                        Room = floorData[++index]
+                    });
                     break;
+
                 case FDFunctions.FloorSlant:
-
-                    FDSlantEntry floorSlant = new()
+                    functions.Add(new FDSlantEntry
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] },
-                        SlantValue = FloorData[++index],
+                        Setup = new() { Value = floorData[index] },
+                        SlantValue = floorData[++index],
                         Type = FDSlantEntryType.FloorSlant
-                    };
-
-                    floordataFunctions.Add(floorSlant);
-
+                    });
                     break;
+
                 case FDFunctions.CeilingSlant:
-
-                    FDSlantEntry ceilingSlant = new()
+                    functions.Add(new FDSlantEntry
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] },
-                        SlantValue = FloorData[++index],
+                        Setup = new() { Value = floorData[index] },
+                        SlantValue = floorData[++index],
                         Type = FDSlantEntryType.CeilingSlant
-                    };
-
-                    floordataFunctions.Add(ceilingSlant);
-
+                    });
                     break;
+
                 case FDFunctions.Trigger:
 
                     FDTriggerEntry trig = new()
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] },
-                        TrigSetup = new FDTrigSetup() {  Value = FloorData[++index] }
+                        Setup = new FDSetup() { Value = floorData[index] },
+                        TrigSetup = new FDTrigSetup() {  Value = floorData[++index] }
                     };
+                    functions.Add(trig);
 
                     if (trig.TrigType == FDTrigType.Switch || trig.TrigType == FDTrigType.Key)
                     {
-                        //First entry in action list is reference to switch/key entity for switch/key types.
-                        trig.SwitchOrKeyRef = FloorData[++index];
+                        // First entry in action list is reference to switch/key entity for switch/key types.
+                        trig.SwitchOrKeyRef = floorData[++index];
                     }
 
-                    //We don't know if there are any more yet.
+                    // We don't know if there are any more yet.
                     bool continueFDParse;
 
-                    //Do not enter do...while if key/switch ref uint16 does not set continue
+                    // Do not enter do...while if key/switch ref uint16 does not set continue
                     if (trig.SwitchKeyContinue)
                     {
-                        //Parse trigactions
+                        // Parse trigactions
                         do
                         {
-                            //New trigger action
-                            FDActionListItem action = new() { Value = FloorData[++index] };
+                            // New trigger action
+                            FDActionListItem action = new() { Value = floorData[++index] };
+                            trig.TrigActionList.Add(action);
 
                             continueFDParse = action.Continue;
 
                             if (action.TrigAction == FDTrigAction.Camera || action.TrigAction == FDTrigAction.Flyby)
                             {
-                                //Camera trig actions have a special extra uint16...
-                                FDCameraAction camAction = new() { Value = FloorData[++index] };
+                                // Camera trig actions have a special extra uint16...
+                                FDCameraAction camAction = new() { Value = floorData[++index] };
 
-                                //store associated camera action
+                                // store associated camera action
                                 action.CamAction = camAction;
 
-                                //Is there more?
+                                // Is there more?
                                 continueFDParse = camAction.Continue;
                             }
-
-                            //add action
-                            trig.TrigActionList.Add(action);
-
-                        } while (index < NumFloorData && continueFDParse);
+                        }
+                        while (index < floorData.Length && continueFDParse);
                     }
-
-                    floordataFunctions.Add(trig);
-
                     break;
+
                 case FDFunctions.KillLara:
-
-                    FDKillLaraEntry kill = new()
+                    functions.Add(new FDKillLaraEntry
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] }
-                    };
-
-                    floordataFunctions.Add(kill);
-
+                        Setup = new() { Value = floorData[index] }
+                    });
                     break;
+
                 case FDFunctions.ClimbableWalls:
-
-                    FDClimbEntry climb = new()
+                    functions.Add(new FDClimbEntry
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] }
-                    };
-
-                    floordataFunctions.Add(climb);
-
+                        Setup = new() { Value = floorData[index] }
+                    });
                     break;
+
                 case FDFunctions.FloorTriangulationNWSE_Solid:
                 case FDFunctions.FloorTriangulationNESW_Solid:
                 case FDFunctions.CeilingTriangulationNW_Solid:
@@ -253,435 +203,147 @@ public class FDControl
                 case FDFunctions.CeilingTriangulationNW_NE:
                 case FDFunctions.CeilingTriangulationNE_NW:
                 case FDFunctions.CeilingTriangulationNE_SE:
-
-                    TR3TriangulationEntry tri = new()
+                    functions.Add(new TR3TriangulationEntry
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] },
-                        TriData = new FDTriangulationData() { Value = FloorData[++index] }
-                    };
-
-                    floordataFunctions.Add(tri);
-
+                        Setup = new() { Value = floorData[index] },
+                        TriData = new() { Value = floorData[++index] }
+                    });
                     break;
+
                 case FDFunctions.Monkeyswing:
-
-                    TR3MonkeySwingEntry swing = new()
+                    functions.Add(new TR3MonkeySwingEntry
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] },
-                    };
-
-                    floordataFunctions.Add(swing);
-
+                        Setup = new() { Value = floorData[index] },
+                    });
                     break;
+
                 case FDFunctions.DeferredTriggeringOrMinecartRotateLeft:
-
-                    TR3MinecartRotateLeftEntry mineleft = new()
+                    functions.Add(new TR3MinecartRotateLeftEntry
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] },
-                    };
-
-                    floordataFunctions.Add(mineleft);
-
+                        Setup = new() { Value = floorData[index] },
+                    });
                     break;
+
                 case FDFunctions.MechBeetleOrMinecartRotateRight:
-
-                    TR3MinecartRotateRightEntry mineright = new()
+                    functions.Add(new TR3MinecartRotateRightEntry
                     {
-                        Setup = new FDSetup() { Value = FloorData[index] },
-                    };
-
-                    floordataFunctions.Add(mineright);
-
+                        Setup = new() { Value = floorData[index] },
+                    });
                     break;
+
                 default:
                     break;
             }
 
             if (data.EndData)
             {
-                //End data (from what I understand) means there is no further functions for this sector.
-                //E.G. Sector 52 on Xian has a slant function and portal function. EndData is not set on
-                //slant function, but is on portal function as there are no further functions.
+                // End data (from what I understand) means there is no further functions for this sector.
+                // E.G. Sector 52 on Xian has a slant function and portal function. EndData is not set on
+                // slant function, but is on portal function as there are no further functions.
                 break;
             }
             else
             {
-                //There are further functions for this sector - continue parsing.
+                // There are further functions for this sector - continue parsing.
                 index++;
             }
         }
-
-        //Store the sector index and all of its associated functions
-        _entries.Add(sector.FDIndex, floordataFunctions);
     }
 
-    public void WriteToLevel(TR1Level lvl)
+    public void WriteToLevel(TR1Level level)
+    {
+        List<ushort> data = Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData[0]);
+        level.FloorData = data.ToArray();
+        level.NumFloorData = (uint)data.Count;
+    }
+
+    public void WriteToLevel(TR2Level level)
+    {
+        List<ushort> data = Flatten(level.Rooms.SelectMany(r => r.SectorList), level.FloorData[0]);
+        level.FloorData = data.ToArray();
+        level.NumFloorData = (uint)data.Count;
+    }
+
+    public void WriteToLevel(TR3Level level)
+    {
+        List<ushort> data = Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData[0]);
+        level.FloorData = data.ToArray();
+        level.NumFloorData = (uint)data.Count;
+    }
+
+    public void WriteToLevel(TR4Level level)
+    {
+        List<ushort> data = Flatten(level.LevelDataChunk.Rooms.SelectMany(r => r.Sectors), level.LevelDataChunk.Floordata[0]);
+        level.LevelDataChunk.Floordata = data.ToArray();
+        level.LevelDataChunk.NumFloorData = (uint)data.Count;
+    }
+
+    public void WriteToLevel(TR5Level level)
+    {
+        List<ushort> data = Flatten(level.LevelDataChunk.Rooms.SelectMany(r => r.RoomData.SectorList), level.LevelDataChunk.Floordata[0]);
+        level.LevelDataChunk.Floordata = data.ToArray();
+        level.LevelDataChunk.NumFloorData = (uint)data.Count;
+    }
+
+    private List<ushort> Flatten(IEnumerable<TRRoomSector> sectors, ushort dummyEntry)
     {
         List<ushort> data = new()
         {
-            lvl.FloorData[0] // Index 0 is always dummy
+            dummyEntry
         };
 
-        Dictionary<int, int> entryLengths = new();
-
-        foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
-        {
-            //Get the list of functions per sector
-            List<FDEntry> functions = entry.Value;
-
-            //Get the initial sector index into fdata
-            int index = entry.Key;
-            //Track the total length of the entry
-            int entryLength = 0;
-
-            for (int i = 0; i < functions.Count; i++)
-            {
-                FDEntry function = functions[i];
-
-                // Ensure EndData is set on the last function in the list only
-                function.Setup.EndData = i == functions.Count - 1;
-
-                //Convert function to ushort array
-                ushort[] fdata = function.Flatten();
-                data.AddRange(fdata);
-
-                //Store how many shorts there are
-                entryLength += fdata.Length;
-            }
-
-            // Map the current index to its FD length
-            entryLengths.Add(index, entryLength);
-        }
-
-        // Recalculate the indices based on the length of the floor data for each.
-        // This allows for new entries to be added (or their entries added to) or removed.
+        // Flatten each entry list and map old indices to new.
         Dictionary<int, int> newIndices = new();
-        int newIndex = 1; // Always start at 1 as 0 is dummy data
-        foreach (int index in entryLengths.Keys)
+        foreach (int currentIndex in _entries.Keys)
         {
-            newIndices.Add(index, newIndex);
-            // The next index will be this index plus the number of ushorts against it in the FD
-            newIndex += entryLengths[index];
+            List<ushort> sectorData = Flatten(_entries[currentIndex]);
+            if (sectorData.Count > 0)
+            {
+                newIndices.Add(currentIndex, data.Count);
+                data.AddRange(sectorData);
+            }
         }
 
         // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
-        foreach (TRRoom room in lvl.Rooms)
+        SortedDictionary<int, List<FDEntry>> updatedEntries = new();
+        foreach (TRRoomSector sector in sectors)
         {
-            foreach (TRRoomSector sector in room.Sectors)
+            ushort index = sector.FDIndex;
+            if (newIndices.ContainsKey(index))
             {
-                ushort index = sector.FDIndex;
-                if (newIndices.ContainsKey(index))
-                {
-                    sector.FDIndex = (ushort)newIndices[index];
+                sector.FDIndex = (ushort)newIndices[index];
 
-                    // Map the list of entries against the new index
-                    _updatedEntries.Add(sector.FDIndex, _entries[index]);
-                }
+                // Map the list of entries against the new index
+                updatedEntries[sector.FDIndex] = _entries[index];
+            }
+            else if (_entries.ContainsKey(index))
+            {
+                // FD has been removed - we only reset it if it was a valid entry before
+                // because some levels, e.g. most of TRUB, have stale data.
+                sector.FDIndex = 0;
             }
         }
 
-        // Update the raw floor data in the level
-        lvl.FloorData = data.ToArray();
-        lvl.NumFloorData = (uint)data.Count;
-
         // Update the stored values in case of further changes
-        _entries = _updatedEntries;
+        _entries = updatedEntries;
+        return data;
     }
 
-    public void WriteToLevel(TR2Level lvl)
+    public static List<ushort> Flatten(List<FDEntry> entries)
     {
-        List<ushort> data = new()
+        List<ushort> data = new();
+        for (int i = 0; i < entries.Count; i++)
         {
-            lvl.FloorData[0] // Index 0 is always dummy
-        };
+            FDEntry function = entries[i];
 
-        Dictionary<int, int> entryLengths = new();
+            // Ensure EndData is set on the last function in the list only
+            function.Setup.EndData = i == entries.Count - 1;
 
-        foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
-        {
-            //Get the list of functions per sector
-            List<FDEntry> functions = entry.Value;
-
-            //Get the initial sector index into fdata
-            int index = entry.Key;
-            //Track the total length of the entry
-            int entryLength = 0;
-
-            for (int i = 0; i < functions.Count; i++)
-            {
-                FDEntry function = functions[i];
-
-                // Ensure EndData is set on the last function in the list only
-                function.Setup.EndData = i == functions.Count - 1;
-
-                //Convert function to ushort array
-                ushort[] fdata = function.Flatten();
-                data.AddRange(fdata);
-
-                //Store how many shorts there are
-                entryLength += fdata.Length;
-            }
-
-            // Map the current index to its FD length
-            entryLengths.Add(index, entryLength);
+            //Convert function to ushort array
+            ushort[] fdata = function.Flatten();
+            data.AddRange(fdata);
         }
 
-        // Recalculate the indices based on the length of the floor data for each.
-        // This allows for new entries to be added (or their entries added to) or removed.
-        Dictionary<int, int> newIndices = new();
-        int newIndex = 1; // Always start at 1 as 0 is dummy data
-        foreach (int index in entryLengths.Keys)
-        {
-            newIndices.Add(index, newIndex);
-            // The next index will be this index plus the number of ushorts against it in the FD
-            newIndex += entryLengths[index];
-        }
-
-        // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
-        foreach (TR2Room room in lvl.Rooms)
-        {
-            foreach (TRRoomSector sector in room.SectorList)
-            {
-                ushort index = sector.FDIndex;
-                if (newIndices.ContainsKey(index))
-                {
-                    sector.FDIndex = (ushort)newIndices[index];
-
-                    // Map the list of entries against the new index
-                    _updatedEntries.Add(sector.FDIndex, _entries[index]);
-                }
-            }
-        }
-
-        // Update the raw floor data in the level
-        lvl.FloorData = data.ToArray();
-        lvl.NumFloorData = (uint)data.Count;
-
-        // Update the stored values in case of further changes
-        _entries = _updatedEntries;
-    }
-
-    public void WriteToLevel(TR3Level lvl)
-    {
-        List<ushort> data = new()
-        {
-            lvl.FloorData[0] // Index 0 is always dummy
-        };
-
-        Dictionary<int, int> entryLengths = new();
-
-        foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
-        {
-            //Get the list of functions per sector
-            List<FDEntry> functions = entry.Value;
-
-            //Get the initial sector index into fdata
-            int index = entry.Key;
-            //Track the total length of the entry
-            int entryLength = 0;
-
-            for (int i = 0; i < functions.Count; i++)
-            {
-                FDEntry function = functions[i];
-
-                // Ensure EndData is set on the last function in the list only
-                function.Setup.EndData = i == functions.Count - 1;
-
-                //Convert function to ushort array
-                ushort[] fdata = function.Flatten();
-                data.AddRange(fdata);
-
-                //Store how many shorts there are
-                entryLength += fdata.Length;
-            }
-
-            // Map the current index to its FD length
-            entryLengths.Add(index, entryLength);
-        }
-
-        // Recalculate the indices based on the length of the floor data for each.
-        // This allows for new entries to be added (or their entries added to) or removed.
-        Dictionary<int, int> newIndices = new();
-        int newIndex = 1; // Always start at 1 as 0 is dummy data
-        foreach (int index in entryLengths.Keys)
-        {
-            newIndices.Add(index, newIndex);
-            // The next index will be this index plus the number of ushorts against it in the FD
-            newIndex += entryLengths[index];
-        }
-
-        // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
-        foreach (TR3Room room in lvl.Rooms)
-        {
-            foreach (TRRoomSector sector in room.Sectors)
-            {
-                ushort index = sector.FDIndex;
-                if (newIndices.ContainsKey(index))
-                {
-                    sector.FDIndex = (ushort)newIndices[index];
-
-                    // Map the list of entries against the new index
-                    _updatedEntries.Add(sector.FDIndex, _entries[index]);
-                }
-            }
-        }
-
-        // Update the raw floor data in the level
-        lvl.FloorData = data.ToArray();
-        lvl.NumFloorData = (uint)data.Count;
-
-        // Update the stored values in case of further changes
-        _entries = _updatedEntries;
-    }
-
-    public void WriteToLevel(TR4Level lvl)
-    {
-        List<ushort> data = new()
-        {
-            lvl.LevelDataChunk.Floordata[0] // Index 0 is always dummy
-        };
-
-        Dictionary<int, int> entryLengths = new();
-
-        foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
-        {
-            //Get the list of functions per sector
-            List<FDEntry> functions = entry.Value;
-
-            //Get the initial sector index into fdata
-            int index = entry.Key;
-            //Track the total length of the entry
-            int entryLength = 0;
-
-            for (int i = 0; i < functions.Count; i++)
-            {
-                FDEntry function = functions[i];
-
-                // Ensure EndData is set on the last function in the list only
-                function.Setup.EndData = i == functions.Count - 1;
-
-                //Convert function to ushort array
-                ushort[] fdata = function.Flatten();
-                data.AddRange(fdata);
-
-                //Store how many shorts there are
-                entryLength += fdata.Length;
-            }
-
-            // Map the current index to its FD length
-            entryLengths.Add(index, entryLength);
-        }
-
-        // Recalculate the indices based on the length of the floor data for each.
-        // This allows for new entries to be added (or their entries added to) or removed.
-        Dictionary<int, int> newIndices = new();
-        int newIndex = 1; // Always start at 1 as 0 is dummy data
-        foreach (int index in entryLengths.Keys)
-        {
-            newIndices.Add(index, newIndex);
-            // The next index will be this index plus the number of ushorts against it in the FD
-            newIndex += entryLengths[index];
-        }
-
-        // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
-        foreach (TR4Room room in lvl.LevelDataChunk.Rooms)
-        {
-            foreach (TRRoomSector sector in room.Sectors)
-            {
-                ushort index = sector.FDIndex;
-                if (newIndices.ContainsKey(index))
-                {
-                    sector.FDIndex = (ushort)newIndices[index];
-
-                    // Map the list of entries against the new index
-                    _updatedEntries.Add(sector.FDIndex, _entries[index]);
-                }
-            }
-        }
-
-        // Update the raw floor data in the level
-        lvl.LevelDataChunk.Floordata = data.ToArray();
-        lvl.LevelDataChunk.NumFloorData = (uint)data.Count;
-
-        // Update the stored values in case of further changes
-        _entries = _updatedEntries;
-    }
-
-    public void WriteToLevel(TR5Level lvl)
-    {
-        List<ushort> data = new()
-        {
-            lvl.LevelDataChunk.Floordata[0] // Index 0 is always dummy
-        };
-
-        Dictionary<int, int> entryLengths = new();
-
-        foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
-        {
-            //Get the list of functions per sector
-            List<FDEntry> functions = entry.Value;
-
-            //Get the initial sector index into fdata
-            int index = entry.Key;
-            //Track the total length of the entry
-            int entryLength = 0;
-
-            for (int i = 0; i < functions.Count; i++)
-            {
-                FDEntry function = functions[i];
-
-                // Ensure EndData is set on the last function in the list only
-                function.Setup.EndData = i == functions.Count - 1;
-
-                //Convert function to ushort array
-                ushort[] fdata = function.Flatten();
-                data.AddRange(fdata);
-
-                //Store how many shorts there are
-                entryLength += fdata.Length;
-            }
-
-            // Map the current index to its FD length
-            entryLengths.Add(index, entryLength);
-        }
-
-        // Recalculate the indices based on the length of the floor data for each.
-        // This allows for new entries to be added (or their entries added to) or removed.
-        Dictionary<int, int> newIndices = new();
-        int newIndex = 1; // Always start at 1 as 0 is dummy data
-        foreach (int index in entryLengths.Keys)
-        {
-            newIndices.Add(index, newIndex);
-            // The next index will be this index plus the number of ushorts against it in the FD
-            newIndex += entryLengths[index];
-        }
-
-        // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
-        foreach (TR5Room room in lvl.LevelDataChunk.Rooms)
-        {
-            foreach (TRRoomSector sector in room.RoomData.SectorList)
-            {
-                ushort index = sector.FDIndex;
-                if (newIndices.ContainsKey(index))
-                {
-                    sector.FDIndex = (ushort)newIndices[index];
-
-                    // Map the list of entries against the new index
-                    _updatedEntries.Add(sector.FDIndex, _entries[index]);
-                }
-            }
-        }
-
-        // Update the raw floor data in the level
-        lvl.LevelDataChunk.Floordata = data.ToArray();
-        lvl.LevelDataChunk.NumFloorData = (uint)data.Count;
-
-        // Update the stored values in case of further changes
-        _entries = _updatedEntries;
+        return data;
     }
 }

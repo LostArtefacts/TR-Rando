@@ -35,10 +35,18 @@ public class ChecksumTester : IChecksumTester
         "d2f20f38289a074a103ac9806b0dcd77", // CUT4.PHD
         "34f8df1e38a7abca354c3a076816d653", // LEVEL10C.PHD (TombATI)
         "2205228f27e5ff5eb9912d8ec0f001ef", // LEVEL10C.PHD (Steam/GOG)
+
+        // TRUB (fan music triggers)
         "7bb60bcb2eb0578af47c47b441f88627", // EGYPT.PHD
         "447975e2cdff542093d203e6d851b785", // CAT.PHD
         "2b7c9fc8ad5a9edd58ea59fb0cc50022", // END.PHD
         "b5e9e7f01cf071438cf6175954a0a5c6", // END2.PHD
+
+        // TRUB (no music)
+        "c1f883e4d0b49b34bbe2ff74e81e8adb", // EGYPT.PHD
+        "84df21d3c2abd4e36b72ec9f030b1de3", // CAT.PHD
+        "7f7c535bcab001698a1f965053972f49", // END.PHD
+        "f03f7a545330d5ba30e2aec62d47b4a3", // END2.PHD
 
         // TR2
         "d6f218e32d172e67db60daa35ef7e114", // ASSAULT.TR2

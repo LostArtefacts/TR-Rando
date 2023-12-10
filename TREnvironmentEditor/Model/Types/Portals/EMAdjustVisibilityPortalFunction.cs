@@ -11,36 +11,34 @@ public class EMAdjustVisibilityPortalFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        EMLevelData data = new() { NumRooms = level.NumRooms };
-        AdjustPortal(Array.Find(level.Rooms[data.ConvertRoom(BaseRoom)].Portals, p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));
+        EMLevelData data = GetData(level);
+        AdjustPortals(level.Rooms[data.ConvertRoom(BaseRoom)].Portals.Where(p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        EMLevelData data = new() { NumRooms = level.NumRooms };
-        AdjustPortal(Array.Find(level.Rooms[data.ConvertRoom(BaseRoom)].Portals, p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));
+        EMLevelData data = GetData(level);
+        AdjustPortals(level.Rooms[data.ConvertRoom(BaseRoom)].Portals.Where(p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        EMLevelData data = new() { NumRooms = level.NumRooms };
-        AdjustPortal(Array.Find(level.Rooms[data.ConvertRoom(BaseRoom)].Portals, p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));
+        EMLevelData data = GetData(level);
+        AdjustPortals(level.Rooms[data.ConvertRoom(BaseRoom)].Portals.Where(p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));
     }
 
-    private void AdjustPortal(TRRoomPortal portal)
+    private void AdjustPortals(IEnumerable<TRRoomPortal> portals)
     {
-        if (portal == null)
+        foreach (TRRoomPortal portal in portals)
         {
-            return;
-        }
-
-        foreach (int vertexIndex in VertexChanges.Keys)
-        {
-            TRVertex currentVertex = portal.Vertices[vertexIndex];
-            TRVertex vertexChange = VertexChanges[vertexIndex];
-            currentVertex.X += vertexChange.X;
-            currentVertex.Y += vertexChange.Y;
-            currentVertex.Z += vertexChange.Z;
+            foreach (int vertexIndex in VertexChanges.Keys)
+            {
+                TRVertex currentVertex = portal.Vertices[vertexIndex];
+                TRVertex vertexChange = VertexChanges[vertexIndex];
+                currentVertex.X += vertexChange.X;
+                currentVertex.Y += vertexChange.Y;
+                currentVertex.Z += vertexChange.Z;
+            }
         }
     }
 }

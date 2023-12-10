@@ -31,6 +31,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
         TileWidth = TRConsts.TPageWidth;
         TileHeight = TRConsts.TPageHeight;
         MaximumTiles = maximumTiles;
+        AllowEmptyPacking = true;
 
         Options = new PackingOptions
         {

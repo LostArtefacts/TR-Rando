@@ -617,6 +617,14 @@ public static class TR1TypeUtilities
         [TR1LevelNames.ATLANTIS]
             = TR1Type.SecretGoldIdol_M_H,
         [TR1LevelNames.PYRAMID]
-            = TR1Type.SecretGoldIdol_M_H
+            = TR1Type.SecretGoldIdol_M_H,
+        [TR1LevelNames.EGYPT]
+            = TR1Type.SecretLeadBar_M_H,
+        [TR1LevelNames.CAT]
+            = TR1Type.SecretLeadBar_M_H,
+        [TR1LevelNames.STRONGHOLD]
+            = TR1Type.SecretGoldBar_M_H,
+        [TR1LevelNames.HIVE]
+            = TR1Type.SecretGoldIdol_M_H,
     };
 }

@@ -55,22 +55,6 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             = 11, // Default = 7
         [TR1LevelNames.MIDAS]
             = 4,  // Default = 12
-        [TR1LevelNames.CISTERN]
-            = 0,  // Default = 16
-        [TR1LevelNames.TIHOCAN]
-            = 0,  // Default = 16
-        [TR1LevelNames.KHAMOON]
-            = 0,  // Default = 18
-        [TR1LevelNames.OBELISK]
-            = 0,  // Default = 26
-        [TR1LevelNames.SANCTUARY]
-            = 0,  // Default = 22
-        [TR1LevelNames.MINES]
-            = 0,  // Default = 16
-        [TR1LevelNames.ATLANTIS]
-            = 0,  // Default = 44
-        [TR1LevelNames.PYRAMID]
-            = 0,  // Default = 21
     };
 
     private readonly Dictionary<string, List<Location>> _excludedLocations;
@@ -411,6 +395,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             level.Data.Entities.AddRange(TihocanEndItems);
         }
 
+        int sequence = GetKeyItemLevelSequence(level);
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR1Entity entity = level.Data.Entities[i];
@@ -422,13 +407,26 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
             bool hasPickupTrigger = LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData);
             _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger,
-                level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
+                sequence, level.Data.Rooms[entity.Room].Info);
 
             if (Settings.AllowEnemyKeyDrops && !hasPickupTrigger)
             {
                 TestEnemyItemDrop(level, entity, floorData);
             }
         }
+    }
+
+    private int GetKeyItemLevelSequence(TR1CombinedLevel level)
+    {
+        int sequence = level.Script.OriginalSequence;
+        if (Settings.GameMode != GameMode.Normal && level.IsExpansion)
+        {
+            // The original sequence is always 1-based regardless of how we have
+            // combined, so we need to manually shift. This ensures there are no
+            // clashes in TR1Type between regular and expansion levels.
+            sequence += TR1LevelNames.AsList.Count;
+        }
+        return sequence;
     }
 
     private void TestEnemyItemDrop(TR1CombinedLevel level, TR1Entity entity, FDControl floorData)

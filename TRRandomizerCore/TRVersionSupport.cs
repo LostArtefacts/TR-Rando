@@ -19,6 +19,7 @@ internal class TRVersionSupport
         TRRandomizerType.Enemy,
         TRRandomizerType.Environment,
         TRRandomizerType.ExtraPickups,
+        TRRandomizerType.GameMode,
         TRRandomizerType.GeneralBugFixes,
         TRRandomizerType.GymOutfit,
         TRRandomizerType.GlitchedSecrets,

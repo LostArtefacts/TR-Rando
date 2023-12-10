@@ -1,6 +1,22 @@
 {
   "All": [
     {
+      "Comments": "Convert music triggers to oneshot.",
+      "EMType": 69,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 35328,
+          "Y": 11008,
+          "Z": 41472,
+          "Room": 18
+        }
+      ],
+      "OneShot": true
+    },
+    {
       "Comments": "Remove the music action from the end keyholes - they don't work because of the mask so just kill the ambient track.",
       "EMType": 71,
       "Tags": [
@@ -95,10 +111,17 @@
       "Lights": [
         {
           "X": 1536,
-          "Y": -3072,
+          "Y": -4096,
+          "Z": 1536,
+          "Intensity1": 5120,
+          "Fade1": 2048
+        },
+        {
+          "X": 2816,
+          "Y": -768,
           "Z": 2560,
-          "Intensity1": 2815,
-          "Fade1": 9066
+          "Intensity1": 3584,
+          "Fade1": 2048
         }
       ],
       "Height": 18,
@@ -147,11 +170,18 @@
       },
       "Lights": [
         {
-          "X": 1536,
-          "Y": -3072,
+          "X": 2560,
+          "Y": -512,
+          "Z": 1536,
+          "Intensity1": 5120,
+          "Fade1": 2048
+        },
+        {
+          "X": 2560,
+          "Y": -4096,
           "Z": 2560,
-          "Intensity1": 2815,
-          "Fade1": 9066
+          "Intensity1": 5120,
+          "Fade1": 1024
         }
       ],
       "Height": 18,
@@ -197,11 +227,18 @@
       },
       "Lights": [
         {
-          "X": 3584,
+          "X": 4608,
+          "Y": -512,
+          "Z": 1536,
+          "Intensity1": 5120,
+          "Fade1": 1024
+        },
+        {
+          "X": 1536,
           "Y": -3072,
-          "Z": 2560,
-          "Intensity1": 2815,
-          "Fade1": 9066
+          "Z": 3584,
+          "Intensity1": 5120,
+          "Fade1": 2048
         }
       ],
       "Height": 14,
@@ -253,10 +290,17 @@
       "Lights": [
         {
           "X": 2560,
-          "Y": -1280,
+          "Y": -512,
+          "Z": 1536,
+          "Intensity1": 5120,
+          "Fade1": 2048
+        },
+        {
+          "X": 1536,
+          "Y": -1536,
           "Z": 3584,
-          "Intensity1": 2815,
-          "Fade1": 9066
+          "Intensity1": 3072,
+          "Fade1": 1024
         }
       ],
       "Height": 8,
@@ -310,9 +354,16 @@
         {
           "X": 1536,
           "Y": -768,
-          "Z": 3584,
-          "Intensity1": 2815,
-          "Fade1": 9066
+          "Z": 4608,
+          "Intensity1": 3072,
+          "Fade1": 1024
+        },
+        {
+          "X": 1536,
+          "Y": -1024,
+          "Z": 1536,
+          "Intensity1": 3584,
+          "Fade1": 1024
         }
       ],
       "Height": 6,
@@ -983,6 +1034,19 @@
         "Z": 42496,
         "Room": -3
       }
+    },
+    {
+      "EMType": 128,
+      "Tags": [
+        9
+      ],
+      "RoomIndices": [
+        -1,
+        -2,
+        -3,
+        -4,
+        -5
+      ]
     }
   ],
   "Any": [
@@ -4349,14 +4413,6 @@
             "Z": 43520,
             "Room": 1
           },
-          "Textures": {
-            "Floor": 18,
-            "Ceiling": 18,
-            "WallAlignment": 4,
-            "Wall4": 18
-          },
-          "DefaultVertex": {},
-          "Lights": [],
           "Height": 4,
           "Width": 3,
           "Depth": 3

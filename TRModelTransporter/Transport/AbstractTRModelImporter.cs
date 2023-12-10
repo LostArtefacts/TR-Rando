@@ -16,6 +16,7 @@ public abstract class AbstractTRModelImporter<E, L, D> : AbstractTRModelTranspor
     public ITexturePositionMonitor<E> TexturePositionMonitor { get; set; }
     public bool SortModels { get; set; }
     public bool IgnoreGraphics { get; set; }
+    public bool ForceCinematicOverwrite { get; set; }
 
     protected AbstractTextureImportHandler<E, L, D> _textureHandler;
 

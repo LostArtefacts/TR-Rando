@@ -3163,7 +3163,191 @@
       ]
     }
   ],
-  "ConditionalAllWithin": [],
+  "ConditionalAllWithin": [
+    {
+      "Condition": {
+        "Comments": "If there is no T-Rex or Adam models present (required LaraMiscAnims), potentially import the Midas touch as a trap.",
+        "ConditionType": 41,
+        "Or": [
+          {
+            "ConditionType": 41,
+            "ModelID": 34
+          }
+        ],
+        "ModelID": 18
+      },
+      "OnFalse": [
+        [
+          {
+            "Comments": "Do nothing.",
+            "EMType": 1000
+          }
+        ],
+        [
+          {
+            "Comments": "Import the hand model.",
+            "EMType": 141,
+            "Tags": [
+              4
+            ],
+            "Models": [
+              128
+            ],
+            "AliasPriority": {
+              "5": 2003
+            },
+            "ForceCinematicOverwrite": true
+          },
+          {
+            "Comments": "Add a hand.",
+            "EMType": 51,
+            "TypeID": 128,
+            "Intensity": -1,
+            "Location": {
+              "X": 32256,
+              "Y": -1024,
+              "Z": 29184,
+              "Room": 36
+            },
+            "TargetRelocation": {
+              "X": 33280,
+              "Y": -1024,
+              "Z": 29184,
+              "Room": 36
+            }
+          },
+          {
+            "Comments": "Make a suspicious platform for it.",
+            "EMType": 1,
+            "Location": {
+              "X": 32256,
+              "Y": -1024,
+              "Z": 29184,
+              "Room": 36
+            },
+            "Clicks": -1,
+            "FloorTexture": 129,
+            "SideTexture": 160,
+            "Flags": 15
+          },
+          {
+            "EMType": 23,
+            "Rotations": [
+              {
+                "RoomNumber": 36,
+                "FaceIndices": [
+                  35
+                ],
+                "VertexRemap": {
+                  "0": 1,
+                  "1": 2,
+                  "2": 3,
+                  "3": 0
+                }
+              }
+            ]
+          },
+          {
+            "Comments": "Add a large medi room sprite as bait.",
+            "EMType": 31,
+            "Texture": 8,
+            "Vertex": {
+              "Lighting": 4096
+            },
+            "Locations": [
+              {
+                "X": 32256,
+                "Y": -1280,
+                "Z": 29184,
+                "Room": 36
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "Comments": "Import the hand model.",
+            "EMType": 141,
+            "Tags": [
+              4
+            ],
+            "Models": [
+              128
+            ],
+            "AliasPriority": {
+              "5": 2003
+            },
+            "ForceCinematicOverwrite": true
+          },
+          {
+            "Comments": "Add a hand.",
+            "EMType": 51,
+            "TypeID": 128,
+            "Intensity": -1,
+            "Location": {
+              "X": 32256,
+              "Y": -1024,
+              "Z": 29184,
+              "Room": 36
+            },
+            "TargetRelocation": {
+              "X": 33280,
+              "Y": -1024,
+              "Z": 29184,
+              "Room": 36
+            }
+          },
+          {
+            "Comments": "Make a suspicious platform for it.",
+            "EMType": 1,
+            "Location": {
+              "X": 32256,
+              "Y": -1024,
+              "Z": 29184,
+              "Room": 36
+            },
+            "Clicks": -1,
+            "FloorTexture": 183,
+            "SideTexture": 17,
+            "Flags": 15
+          },
+          {
+            "EMType": 23,
+            "Rotations": [
+              {
+                "RoomNumber": 36,
+                "FaceIndices": [
+                  35
+                ],
+                "VertexRemap": {
+                  "0": 1,
+                  "1": 2,
+                  "2": 3,
+                  "3": 0
+                }
+              }
+            ]
+          },
+          {
+            "Comments": "Add a gold idol room sprite as bait.",
+            "EMType": 31,
+            "Texture": 9,
+            "Vertex": {
+              "Lighting": 4096
+            },
+            "Locations": [
+              {
+                "X": 32256,
+                "Y": -1280,
+                "Z": 29184,
+                "Room": 36
+              }
+            ]
+          }
+        ]
+      ]
+    }
+  ],
   "ConditionalAll": [
     {
       "Condition": {

@@ -43,25 +43,62 @@ public class IOTests : TestBase
     }
 
     [TestMethod]
-    public void Floordata_ReadWrite_DefaultTest()
+    [DataRow(TR1LevelNames.ASSAULT)]
+    [DataRow(TR1LevelNames.CAVES)]
+    [DataRow(TR1LevelNames.VILCABAMBA)]
+    [DataRow(TR1LevelNames.VALLEY)]
+    [DataRow(TR1LevelNames.QUALOPEC)]
+    [DataRow(TR1LevelNames.QUALOPEC_CUT)]
+    [DataRow(TR1LevelNames.FOLLY)]
+    [DataRow(TR1LevelNames.COLOSSEUM)]
+    [DataRow(TR1LevelNames.MIDAS)]
+    [DataRow(TR1LevelNames.CISTERN)]
+    [DataRow(TR1LevelNames.TIHOCAN)]
+    [DataRow(TR1LevelNames.TIHOCAN_CUT)]
+    [DataRow(TR1LevelNames.KHAMOON)]
+    [DataRow(TR1LevelNames.OBELISK)]
+    [DataRow(TR1LevelNames.SANCTUARY)]
+    [DataRow(TR1LevelNames.MINES)]
+    [DataRow(TR1LevelNames.MINES_CUT)]
+    [DataRow(TR1LevelNames.ATLANTIS)]
+    [DataRow(TR1LevelNames.ATLANTIS_CUT)]
+    [DataRow(TR1LevelNames.PYRAMID)]
+    public void TestFloorData(string levelName)
     {
-        TR1Level lvl = GetTR1Level(TR1LevelNames.ATLANTIS);
+        TR1Level level = GetTR1Level(levelName);
 
-        //Store the original floordata from the level
-        ushort[] originalFData = new ushort[lvl.NumFloorData];
-        Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
+        // Store the original floordata from the level
+        List<ushort> originalFData = new(level.FloorData);
 
-        //Parse the floordata using FDControl and re-write the parsed data back
-        FDControl fdataReader = new();
-        fdataReader.ParseFromLevel(lvl);
-        fdataReader.WriteToLevel(lvl);
+        // Parse the floordata using FDControl and re-write the parsed data back
+        FDControl fdControl = new();
+        fdControl.ParseFromLevel(level);
+        fdControl.WriteToLevel(level);
 
-        //Store the new floordata written back by FDControl
-        ushort[] newFData = lvl.FloorData;
+        // Compare to make sure the original fdata was written back.
+        CollectionAssert.AreEqual(originalFData, level.FloorData, $"Floordata in {levelName} does not match after read/write.");
+    }
 
-        //Compare to make sure the original fdata was written back.
-        CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
-        Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
+    [TestMethod]
+    [DataRow(TR1LevelNames.EGYPT)]
+    [DataRow(TR1LevelNames.CAT)]
+    [DataRow(TR1LevelNames.STRONGHOLD)]
+    [DataRow(TR1LevelNames.HIVE)]
+    public void TestAgressiveFloorData(string levelName)
+    {
+        // The UB levels seem to have been compiled with agressive FD packing.
+        // Our library will expand and so byte-for-byte checks can't be done.
+        // We will instead verify that every sector points to a valid FD entry.
+        TR1Level level = GetTR1Level(levelName);
+
+        FDControl fdControl = new();
+        fdControl.ParseFromLevel(level);
+        fdControl.WriteToLevel(level);
+
+        foreach (TRRoomSector sector in level.Rooms.SelectMany(r => r.Sectors.Where(s => s.FDIndex != 0)))
+        {
+            Assert.IsTrue(fdControl.Entries.ContainsKey(sector.FDIndex));
+        }
     }
 
     [TestMethod]

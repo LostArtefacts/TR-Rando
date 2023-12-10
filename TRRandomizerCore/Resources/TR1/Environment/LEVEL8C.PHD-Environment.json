@@ -1,6 +1,61 @@
 {
   "All": [
     {
+      "Comments": "Convert music triggers to oneshot.",
+      "EMType": 69,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 42496,
+          "Y": -2048,
+          "Z": 40448
+        },
+        {
+          "X": 42496,
+          "Y": -768,
+          "Z": 41472
+        },
+        {
+          "X": 42496,
+          "Y": -768,
+          "Z": 42496
+        },
+        {
+          "X": 43520,
+          "Y": -1152,
+          "Z": 54784
+        },
+        {
+          "X": 44544,
+          "Y": -1280,
+          "Z": 54784
+        },
+        {
+          "X": 43520,
+          "Y": -896,
+          "Z": 55808
+        },
+        {
+          "X": 44544,
+          "Y": -896,
+          "Z": 55808
+        },
+        {
+          "X": 43520,
+          "Y": -768,
+          "Z": 56832
+        },
+        {
+          "X": 44544,
+          "Y": -768,
+          "Z": 56832
+        }
+      ],
+      "OneShot": true
+    },
+    {
       "Comments": "Ensure the enemies in room 15 are always triggered rather than only from the invisible platform.",
       "EMType": 63,
       "Tags": [

@@ -147,6 +147,8 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TR1Type>
             = new TR1Type[] { TR1Type.MeatyFlyer },
         [TR1Type.MeatyFlyer]
             = new TR1Type[] { TR1Type.Missile2_H, TR1Type.Missile3_H },
+        [TR1Type.MidasHand_N]
+            = new TR1Type[] { TR1Type.LaraMiscAnim_H_Midas },
         [TR1Type.Natla]
             = new TR1Type[] { TR1Type.Missile2_H, TR1Type.Missile3_H },
         [TR1Type.Pierre]
@@ -214,16 +216,26 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TR1Type>
             = new List<TR1Type> { TR1Type.Explosion1_S_H },
         [TR1Type.Missile3_H]
             = new List<TR1Type> { TR1Type.Explosion1_S_H },
+        [TR1Type.FlameEmitter_N]
+            = new() { TR1Type.Flame_S_H },
+        [TR1Type.MidasHand_N]
+            = new() { TR1Type.Sparkles_S_H },
+        [TR1Type.LavaEmitter_N]
+            = new() { TR1Type.LavaParticles_S_H },
+        [TR1Type.AtlanteanLava]
+            = new() { TR1Type.Flame_S_H }
     };
 
     private static readonly List<TR1Type> _cinematicEntities = new()
     {
+        TR1Type.MidasHand_N
     };
 
     // These are models that use Lara's hips as placeholders
     private static readonly List<TR1Type> _laraDependentModels = new()
     {
-        TR1Type.NonShootingAtlantean_N, TR1Type.ShootingAtlantean_N
+        TR1Type.NonShootingAtlantean_N, TR1Type.ShootingAtlantean_N, TR1Type.Earthquake_N, TR1Type.FlameEmitter_N,
+        TR1Type.LavaEmitter_N, TR1Type.AtlanteanLava, TR1Type.MidasHand_N
     };
 
     private static readonly Dictionary<TR1Type, List<TR1Type>> _entityAliases = new()
@@ -278,8 +290,11 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TR1Type>
         [TR1Type.Centaur] = new short[] { 104 },
         [TR1Type.DamoclesSword] = new short[] { 103 },
         [TR1Type.DartEmitter] = new short[] { 151 },
+        [TR1Type.Earthquake_N] = new short[] { 70, 147 },
+        [TR1Type.FlameEmitter_N] = new short[] { 150 },
         [TR1Type.Gorilla] = new short[] { 90, 91, 101 },
         [TR1Type.Larson] = new short[] { 78 },
+        [TR1Type.LavaEmitter_N] = new short[] { 149 },
         [TR1Type.Lion] = new short[] { 85, 86, 87 },
         [TR1Type.Lioness] = new short[] { 85, 86, 87 },
         [TR1Type.MeatyAtlantean] = new short[] { 104 },
@@ -298,15 +313,23 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TR1Type>
     private static readonly Dictionary<TR1Type, List<int>> _ignoreEntityTextures = new()
     {
         [TR1Type.LaraMiscAnim_H]
-            = new List<int>(), // empty list indicates to ignore everything
+            = new(), // empty list indicates to ignore everything
+        [TR1Type.Earthquake_N]
+            = new(),
+        [TR1Type.FlameEmitter_N]
+            = new() { 179, 180, 181, 183, 184, 185, 188, 189, 194 },
+        [TR1Type.MidasHand_N]
+            = new() { 179, 180, 181, 183, 184, 185, 188, 189, 194 },
+        [TR1Type.LavaEmitter_N]
+            = new() { 184, 185, 188, 189, 190, 192, 193, 195, 197 },
         [TR1Type.NonShootingAtlantean_N]
-            = new List<int>(),
+            = new(),
         [TR1Type.ShootingAtlantean_N]
-            = new List<int>(),
+            = new(),
         [TR1Type.Mummy]
-            = new List<int> { 130, 131, 132, 133, 134, 135, 136, 137, 140, 141 },
+            = new() { 130, 131, 132, 133, 134, 135, 136, 137, 140, 141 },
         [TR1Type.ThorLightning]
-            = new List<int> { 150, 151, 154, 155, 156, 157, 158, 159, 160, 161 }
+            = new() { 150, 151, 154, 155, 156, 157, 158, 159, 160, 161 }
     };
 
     #endregion

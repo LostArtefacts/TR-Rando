@@ -338,6 +338,11 @@ public class EMCreateRoomFunction : BaseEMFunction
 
     private void GenerateFaces(List<TRRoomSector> sectors, List<TRFace4> faces, List<TRVertex> vertices)
     {
+        if (Textures == null)
+        {
+            return;
+        }
+
         for (int x = 0; x < Width; x++)
         {
             for (int z = 0; z < Depth; z++)

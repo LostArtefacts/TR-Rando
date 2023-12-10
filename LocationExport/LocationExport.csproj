@@ -4,6 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <WarningLevel>4</WarningLevel>
     <OutputType>Exe</OutputType>
+    <SelfContained>false</SelfContained>
     <Copyright>Copyright © Tomb Raider Community 2023</Copyright>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>

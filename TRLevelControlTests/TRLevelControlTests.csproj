@@ -6,6 +6,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <SelfContained>false</SelfContained>
     <Copyright>Copyright © Tomb Raider Community 2023</Copyright>
   </PropertyGroup>
   <ItemGroup>
