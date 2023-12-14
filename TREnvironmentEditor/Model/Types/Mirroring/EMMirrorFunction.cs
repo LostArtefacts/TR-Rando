@@ -183,7 +183,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
 
         // Change slants and climbable entries
-        foreach (TRRoomSector sector in sectors)
+        foreach (TRRoomSector sector in sectors.DistinctBy(s => s.FDIndex))
         {
             if (sector.FDIndex != 0)
             {
