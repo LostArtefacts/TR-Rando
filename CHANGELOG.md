@@ -1,5 +1,6 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.0...master) - xxxx-xx-xx
 - fixed floor data issues in mirrored levels in TRUB (#583)
+- fixed a softlock in Temple Ruins if using the return paths in a certain way (#584)
 
 ## [V1.8.0](https://github.com/LostArtefacts/TR-Rando/compare/V1.7.3...V1.8.0) - 2023-12-10
 - added support for Unfinished Business and playing in combined game mode for TR1 (#580)
