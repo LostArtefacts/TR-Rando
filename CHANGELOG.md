@@ -1,4 +1,6 @@
-## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.0...master) - xxxx-xx-xx
+## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.1...master) - xxxx-xx-xx
+
+## [V1.8.1](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.0...V1.8.1) - 2023-12-15
 - fixed floor data issues in mirrored levels in TRUB (#583)
 - fixed a softlock in Temple Ruins if using the return paths in a certain way (#584)
 - fixed "Restore to Default" missing gold level files and the assault course (#585)
