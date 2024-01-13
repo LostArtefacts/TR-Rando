@@ -285,6 +285,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         }
 
         // Look for extra utility/ammo items and hide them
+        level.Script.UnobtainablePickups ??= 0;
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR1Entity entity = level.Data.Entities[i];
@@ -299,6 +300,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             {
                 ItemUtilities.HideEntity(entity);
                 ItemFactory.FreeItem(level.Name, i);
+                level.Script.UnobtainablePickups++;
             }
         }
     }

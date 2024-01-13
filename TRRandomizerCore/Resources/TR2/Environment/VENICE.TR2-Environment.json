@@ -2096,6 +2096,32 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "ConditionType": 0,
+        "EntityIndex": 125,
+        "X": 36352,
+        "Y": -256,
+        "Z": 35328,
+        "Room": 131
+      },
+      "OnFalse": [
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 37376,
+              "Y": 3840,
+              "Z": 18944,
+              "Room": 73
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 125
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],

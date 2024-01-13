@@ -552,6 +552,30 @@
     ],
     [
       {
+        "Comments": "Move any pickups before making new walls.",
+        "EMType": 43,
+        "SectorLocations": [
+          {
+            "X": 53834,
+            "Y": -9216,
+            "Z": 61058,
+            "Room": 2
+          },
+          {
+            "X": 51702,
+            "Y": -9216,
+            "Z": 60953,
+            "Room": 2
+          }
+        ],
+        "TargetLocation": {
+          "X": 52736,
+          "Y": -9216,
+          "Z": 62976,
+          "Room": 2
+        }
+      },
+      {
         "Comments": "Make some blocks before the arena.",
         "EMType": 1,
         "Tags": [

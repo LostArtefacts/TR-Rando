@@ -837,64 +837,56 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             }
         }
 
-        if (skidooRemovalCount > 0)
+        if (skidooRemovalCount == 0)
         {
-            FDControl floorData = new();
-            floorData.ParseFromLevel(level.Data);
-            TR2LocationGenerator locationGenerator = new();
-            List<TR2Type> replacementPool;
-            if (!Settings.RandomizeItems || Settings.RandoItemDifficulty == ItemDifficulty.Default)
-            {
-                // The user is not specifically attempting one-item rando, so we can add anything as replacements
-                replacementPool = TR2TypeUtilities.GetAmmoTypes();
-            }
-            else
-            {
-                // Camera targets don't take up any savegame space, so in one-item mode use these as replacements
-                replacementPool = new List<TR2Type> { TR2Type.CameraTarget_N };
-            }
-
-            List<TR2Entity> skidMen;
-            for (int i = 0; i < skidooRemovalCount; i++)
-            {
-                skidMen = level.Data.Entities.FindAll(e => e.TypeID == TR2Type.MercSnowmobDriver);
-                if (skidMen.Count == 0)
-                {
-                    break;
-                }
-
-                // Select a random Skidoo driver and convert him into something else
-                TR2Entity skidMan = skidMen[_generator.Next(0, skidMen.Count)];
-                TR2Type newType = replacementPool[_generator.Next(0, replacementPool.Count)];
-                skidMan.TypeID = newType;
-
-                if (TR2TypeUtilities.IsAnyPickupType(newType))
-                {
-                    // Make sure the pickup is pickupable
-                    TRRoomSector sector = FDUtilities.GetRoomSector(skidMan.X, skidMan.Y, skidMan.Z, skidMan.Room, level.Data, floorData);
-                    skidMan.Y = sector.Floor * TRConsts.Step1;
-                    skidMan.Invisible = false;
-
-                    if (sector.FDIndex != 0)
-                    {
-                        FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == FDSlantEntryType.FloorSlant);
-                        if (entry is FDSlantEntry slant)
-                        {
-                            Vector4? bestMidpoint = locationGenerator.GetBestSlantMidpoint(slant);
-                            if (bestMidpoint.HasValue)
-                            {
-                                skidMan.Y += (int)bestMidpoint.Value.Y;
-                            }
-                        }
-                    }
-                }
-
-                // Get rid of the old enemy's triggers
-                FDUtilities.RemoveEntityTriggers(level.Data, level.Data.Entities.IndexOf(skidMan), floorData);
-            }
-
-            floorData.WriteToLevel(level.Data);
+            return;
         }
+
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level.Data);
+        List<Location> pickupLocations = level.Data.Entities
+            .Where(e => TR2TypeUtilities.IsAnyPickupType(e.TypeID) && !TR2TypeUtilities.IsSecretType(e.TypeID))
+            .Select(e => e.GetLocation())
+            .ToList();
+
+        List<TR2Type> replacementPool;
+        if (!Settings.RandomizeItems || Settings.RandoItemDifficulty == ItemDifficulty.Default)
+        {
+            // The user is not specifically attempting one-item rando, so we can add anything as replacements
+            replacementPool = TR2TypeUtilities.GetAmmoTypes();
+        }
+        else
+        {
+            // Camera targets don't take up any savegame space, so in one-item mode use these as replacements
+            replacementPool = new() { TR2Type.CameraTarget_N };
+        }
+
+        List<TR2Entity> skidMen;
+        for (int i = 0; i < skidooRemovalCount; i++)
+        {
+            skidMen = level.Data.Entities.FindAll(e => e.TypeID == TR2Type.MercSnowmobDriver);
+            if (skidMen.Count == 0)
+            {
+                break;
+            }
+
+            // Select a random Skidoo driver and convert him into something else
+            TR2Entity skidMan = skidMen[_generator.Next(0, skidMen.Count)];
+            TR2Type newType = replacementPool[_generator.Next(0, replacementPool.Count)];
+            skidMan.TypeID = newType;
+            skidMan.Invisible = false;
+
+            if (TR2TypeUtilities.IsAnyPickupType(newType))
+            {
+                // Move the pickup to another pickup location
+                skidMan.SetLocation(pickupLocations[_generator.Next(0, pickupLocations.Count)]);
+            }
+
+            // Get rid of the old enemy's triggers
+            FDUtilities.RemoveEntityTriggers(level.Data, level.Data.Entities.IndexOf(skidMan), floorData);
+        }
+
+        floorData.WriteToLevel(level.Data);
     }
 
     private void LimitFriendlyEnemies(TR2CombinedLevel level, List<TR2Type> pool, List<TR2Type> friends)

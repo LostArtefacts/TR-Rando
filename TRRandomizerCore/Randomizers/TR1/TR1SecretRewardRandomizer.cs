@@ -48,9 +48,11 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P); // Sprite/model not available
         stdItemTypes.Remove(TR1Type.Pistols_S_P); // A bit cruel as a reward?
 
-        int secretRoom = RoomWaterUtilities.DefaultRoomCountDictionary[level.Name];
-        List<Location> rewardPositions = secretMapping.Rooms.First().RewardPositions;
         List<int> rewardIndices = new(secretMapping.RewardEntities);
+
+        // Pile extra pickups on top of existing ones, either in their default spots
+        // or in the generated reward rooms.
+        List<Location> rewardPositions = new(rewardIndices.Select(i => level.Data.Entities[i].GetLocation()));
 
         // Give at least one item per secret, never less than the original reward item count,
         // and potentially some extra bonus items.
@@ -68,9 +70,10 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
 
         while (rewardIndices.Count < rewardCount)
         {
-            TR1Entity item = ItemFactory.CreateItem(level.Name, level.Data.Entities, rewardPositions[_generator.Next(0, rewardPositions.Count)], true);
+            Location location = rewardPositions[_generator.Next(0, rewardPositions.Count)];
+            TR1Entity item = ItemFactory.CreateItem(level.Name, level.Data.Entities, location, true);
             rewardIndices.Add(level.Data.Entities.IndexOf(item));
-            item.Room = (short)secretRoom;
+            item.Room = (short)location.Room;
         }
 
         foreach (int rewardIndex in rewardIndices)

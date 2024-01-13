@@ -1,4 +1,8 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.1...master) - xxxx-xx-xx
+- fixed some pickups appearing in unreachable locations in TR2 (#591)
+- fixed inaccurate pickup statistics in TR1 when playing one-item mode (#591)
+- fixed additional secret rewards being placed in non-existent rooms when not randomizing secrets in TR1 (#591)
+- fixed a secret becoming invisible after blowing up the final area in Bartoli's Hideout (#591)
 
 ## [V1.8.1](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.0...V1.8.1) - 2023-12-15
 - fixed floor data issues in mirrored levels in TRUB (#583)
