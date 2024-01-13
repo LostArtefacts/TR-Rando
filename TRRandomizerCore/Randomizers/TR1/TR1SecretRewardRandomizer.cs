@@ -48,7 +48,6 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P); // Sprite/model not available
         stdItemTypes.Remove(TR1Type.Pistols_S_P); // A bit cruel as a reward?
 
-        int secretRoom = RoomWaterUtilities.DefaultRoomCountDictionary[level.Name];
         List<int> rewardIndices = new(secretMapping.RewardEntities);
 
         // Pile extra pickups on top of existing ones, either in their default spots
