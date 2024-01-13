@@ -239,6 +239,14 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             AmendToQLarson(level);
         }
 
+        if (level.IsExpansion)
+        {
+            // Ensure big eggs are randomized by converting to normal ones because
+            // big eggs are never part of the enemy pool.
+            level.Data.Entities.FindAll(e => e.TypeID == TR1Type.AdamEgg)
+                .ForEach(e => e.TypeID = TR1Type.AtlanteanEgg);
+        }
+
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
         // Get the list of enemy types currently in the level
