@@ -1,4 +1,6 @@
-## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.1...master) - xxxx-xx-xx
+## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.2...master) - xxxx-xx-xx
+
+## [V1.8.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.1...V1.8.2) - 2024-01-14
 - fixed some pickups appearing in unreachable locations in TR2 (#591)
 - fixed inaccurate pickup statistics in TR1 when playing one-item mode (#591)
 - fixed additional secret rewards being placed in non-existent rooms when not randomizing secrets in TR1 (#591)
