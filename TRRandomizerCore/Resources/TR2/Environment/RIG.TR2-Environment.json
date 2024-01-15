@@ -1492,9 +1492,15 @@
   "ConditionalOneOf": [
     {
       "Condition": {
-        "Comments": "If room 2 does not contain a secret, drain the plane area.",
+        "Comments": "If neither rooms 2 nor 96 contain a secret, drain the plane area.",
         "ConditionType": 1,
-        "RoomIndex": 2
+        "RoomIndex": 2,
+        "Or": [
+          {
+            "ConditionType": 1,
+            "RoomIndex": 96
+          }
+        ]
       },
       "OnFalse": {
         "Leader": [
