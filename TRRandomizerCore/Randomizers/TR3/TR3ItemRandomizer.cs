@@ -46,7 +46,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             FindUnarmedLevelPistols(_levelInstance);
 
             _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, false), Settings, _generator);
-            _secretMapping = TR3SecretMapping.Get(GetResourcePath($@"TR3\SecretMapping\{_levelInstance.Name}-SecretMapping.json"), IsJPVersion);
+            _secretMapping = TR3SecretMapping.Get(_levelInstance);
 
             // #312 If this is the assault course, import required models. On failure, don't perform any item rando.
             if (_levelInstance.IsAssault && !ImportAssaultModels(_levelInstance))

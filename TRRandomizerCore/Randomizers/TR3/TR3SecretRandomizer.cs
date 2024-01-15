@@ -174,7 +174,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private void ActualiseRewardRoom(TR3CombinedLevel level, TRSecretRoom<TR2Entity> placeholder)
     {
-        TR3SecretMapping secretMapping = TR3SecretMapping.Get(GetResourcePath($@"TR3\SecretMapping\{level.Name}-SecretMapping.json"), IsJPVersion);
+        TR3SecretMapping secretMapping = TR3SecretMapping.Get(level);
         if (secretMapping == null)
         {
             return;
