@@ -1,4 +1,6 @@
-## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.2...master) - xxxx-xx-xx
+## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.3...master) - xxxx-xx-xx
+
+## [V1.8.3](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.2...V1.8.3) - 2024-01-21
 - fixed incorrect items sometimes being allocated as secret rewards in Thames Wharf (#597)
 - fixed an inaccessible secret in Offshore Rig when the main area is drained (#597)
 - fixed a key item softlock in Floating Islands (#599)
