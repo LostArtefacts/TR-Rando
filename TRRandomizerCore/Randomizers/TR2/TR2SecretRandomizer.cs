@@ -146,7 +146,25 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
         }
 
         AddDamageControl(level, pickedLocations);
-        _secretPicker.FinaliseSecretPool(pickedLocations, level.Name);
+        _secretPicker.FinaliseSecretPool(pickedLocations, level.Name, itemIndex => GetDependentLockedItems(level, itemIndex));
+    }
+
+    private static List<int> GetDependentLockedItems(TR2CombinedLevel level, int itemIndex)
+    {
+        // We may be locking an enemy, so be sure to also lock their pickups.
+        List<int> items = new() { itemIndex };
+        
+        if (TR2TypeUtilities.IsEnemyType(level.Data.Entities[itemIndex].TypeID))
+        {
+            Location enemyLocation = level.Data.Entities[itemIndex].GetLocation();
+            List<TR2Entity> pickups = level.Data.Entities
+                .FindAll(e => TR2TypeUtilities.IsAnyPickupType(e.TypeID))
+                .FindAll(e => e.GetLocation().IsEquivalent(enemyLocation));
+
+            items.AddRange(pickups.Select(p => level.Data.Entities.IndexOf(p)));
+        }
+
+        return items;
     }
 
     private void PlaceSecret(TR2Entity entity, TR2Type type, Location location)

@@ -189,6 +189,20 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             }
         }
 
+        // Some secrets may have locked enemies in place - we must retain those types
+        foreach (int itemIndex in ItemFactory.GetLockedItems(level.Name))
+        {
+            TR3Entity item = level.Data.Entities[itemIndex];
+            if (TR3TypeUtilities.IsEnemyType(item.TypeID))
+            {
+                List<TR3Type> family = TR3TypeUtilities.GetFamily(TR3TypeUtilities.GetAliasForLevel(level.Name, item.TypeID));
+                if (!newEntities.Any(family.Contains))
+                {
+                    newEntities.Add(family[_generator.Next(0, family.Count)]);
+                }
+            }
+        }
+
         if (!Settings.DocileWillard || Settings.OneEnemyMode || Settings.IncludedEnemies.Count < newEntities.Capacity)
         {
             // Willie isn't excludable in his own right because supporting a Willie-only game is impossible
@@ -445,9 +459,11 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         {
             TR3Type currentEntityType = currentEntity.TypeID;
             TR3Type newEntityType = currentEntityType;
+            int enemyIndex = level.Data.Entities.IndexOf(currentEntity);
 
             // If it's an existing enemy that has to remain in the same spot, skip it
-            if (TR3EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType))
+            if (TR3EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType)
+                || ItemFactory.IsItemLocked(level.Name, enemyIndex))
             {
                 continue;
             }

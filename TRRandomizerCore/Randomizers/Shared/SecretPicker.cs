@@ -214,7 +214,7 @@ public class SecretPicker<T>
         _distanceDivisor = Math.Max(_minDistanceDivisor, totalCount);
     }
 
-    public void FinaliseSecretPool(IEnumerable<Location> usedLocations, string level)
+    public void FinaliseSecretPool(IEnumerable<Location> usedLocations, string level, Func<int, List<int>> lockedItemAction)
     {
         // Secrets in packs are permitted to enforce level state
         if (usedLocations.Any(l => l.LevelState == LevelState.Mirrored))
@@ -229,7 +229,10 @@ public class SecretPicker<T>
         foreach (Location location in usedLocations.Where(l => l.EntityIndex != -1))
         {
             // Indicates that a secret relies on another item to remain in its original position
-            ItemFactory.LockItem(level, location.EntityIndex);
+            foreach (int itemIndex in lockedItemAction(location.EntityIndex))
+            {
+                ItemFactory.LockItem(level, itemIndex);
+            }
         }
 
 #if DEBUG

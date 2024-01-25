@@ -1145,7 +1145,7 @@
       "Z": 22580,
       "Room": 91,
       "Difficulty": "Hard",
-      "EntityIndex": 79,
+      "EntityIndex": 78,
       "PackID": "apel",
       "RequiresGlitch": true
     },
@@ -1597,7 +1597,7 @@
       "X": 66560,
       "Y": -840,
       "Z": 25692,
-      "Room": 98,
+      "Room": 103,
       "Difficulty": "Hard",
       "PackID": "apel",
       "RequiresGlitch": true
@@ -1635,7 +1635,7 @@
       "X": 41877,
       "Y": -3761,
       "Z": 31643,
-      "Room": 130,
+      "Room": 135,
       "Difficulty": "Hard",
       "PackID": "apel",
       "RequiresGlitch": true
@@ -3721,7 +3721,7 @@
       "Z": 86650,
       "Room": 0,
       "Difficulty": "Hard",
-      "EntityIndex": 4,
+      "EntityIndex": 3,
       "PackID": "apel"
     },
     {

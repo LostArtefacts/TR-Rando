@@ -1,10 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Numerics;
 using TRFDControl;
-using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRGE.Core;
-using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Packing;
@@ -25,6 +22,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
     internal int MaxPackingAttempts { get; set; }
     internal TR2TextureMonitorBroker TextureMonitor { get; set; }
+    public ItemFactory<TR2Entity> ItemFactory { get; set; }
 
     public TR2EnemyRandomizer()
     {
@@ -226,6 +224,20 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 if (!newEntities.Contains(entity))
                 {
                     newEntities.Add(entity);
+                }
+            }
+
+            // Some secrets may have locked enemies in place - we must retain those types
+            foreach (int itemIndex in ItemFactory.GetLockedItems(level.Name))
+            {
+                TR2Entity item = level.Data.Entities[itemIndex];
+                if (TR2TypeUtilities.IsEnemyType(item.TypeID))
+                {
+                    List<TR2Type> family = TR2TypeUtilities.GetFamily(TR2TypeUtilities.GetAliasForLevel(level.Name, item.TypeID));
+                    if (!newEntities.Any(family.Contains))
+                    {
+                        newEntities.Add(family[_generator.Next(0, family.Count)]);
+                    }
                 }
             }
 
@@ -607,7 +619,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             int enemyIndex = level.Data.Entities.IndexOf(currentEntity);
 
             // If it's an existing enemy that has to remain in the same spot, skip it
-            if (TR2EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType))
+            if (TR2EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType)
+                || ItemFactory.IsItemLocked(level.Name, enemyIndex))
             {
                 continue;
             }

@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.3...master) - xxxx-xx-xx
+- fixed item locking logic so that secrets that rely on specific enemies will always be obtainable (#570)
 
 ## [V1.8.3](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.2...V1.8.3) - 2024-01-21
 - fixed incorrect items sometimes being allocated as secret rewards in Thames Wharf (#597)
