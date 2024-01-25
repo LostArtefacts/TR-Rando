@@ -402,7 +402,25 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         floorData.WriteToLevel(level.Data);
 
         AddDamageControl(level, pickupTypes, pickedLocations);
-        _secretPicker.FinaliseSecretPool(pickedLocations, level.Name);
+        _secretPicker.FinaliseSecretPool(pickedLocations, level.Name, itemIndex => GetDependentLockedItems(level, itemIndex));
+    }
+
+    private static List<int> GetDependentLockedItems(TR3CombinedLevel level, int itemIndex)
+    {
+        // We may be locking an enemy, so be sure to also lock their pickups.
+        List<int> items = new() { itemIndex };
+
+        if (TR3TypeUtilities.IsEnemyType(level.Data.Entities[itemIndex].TypeID))
+        {
+            Location enemyLocation = level.Data.Entities[itemIndex].GetLocation();
+            List<TR3Entity> pickups = level.Data.Entities
+                .FindAll(e => TR3TypeUtilities.IsAnyPickupType(e.TypeID))
+                .FindAll(e => e.GetLocation().IsEquivalent(enemyLocation));
+
+            items.AddRange(pickups.Select(p => level.Data.Entities.IndexOf(p)));
+        }
+
+        return items;
     }
 
     private void AddDamageControl(TR3CombinedLevel level, List<TR3Type> pickupTypes, List<Location> locations)

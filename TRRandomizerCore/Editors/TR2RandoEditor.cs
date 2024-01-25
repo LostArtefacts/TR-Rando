@@ -136,6 +136,7 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
         if (Settings.DevelopmentMode)
         {
             (tr23ScriptEditor.Script as TR23Script).LevelSelectEnabled = true;
+            (tr23ScriptEditor.Script as TR23Script).DozyEnabled = true;
             scriptEditor.SaveScript();
         }
 
@@ -265,7 +266,8 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
                     BackupPath = backupDirectory,
                     SaveMonitor = monitor,
                     Settings = Settings,
-                    TextureMonitor = textureMonitor
+                    TextureMonitor = textureMonitor,
+                    ItemFactory = itemFactory,
                 }.Randomize(Settings.EnemySeed);
             }
 

@@ -475,7 +475,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         floorData.WriteToLevel(level.Data);
 
         AddDamageControl(level, pickedLocations);
-        _secretPicker.FinaliseSecretPool(pickedLocations, level.Name);
+        _secretPicker.FinaliseSecretPool(pickedLocations, level.Name, itemIndex => new() { itemIndex });
     }
 
     private void AddDamageControl(TR1CombinedLevel level, List<Location> locations)

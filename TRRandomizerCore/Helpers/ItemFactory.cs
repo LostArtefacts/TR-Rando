@@ -119,4 +119,9 @@ public class ItemFactory<T>
     {
         return _lockedItems.ContainsKey(level) && _lockedItems[level].Contains(itemIndex);
     }
+
+    public List<int> GetLockedItems(string level)
+    {
+        return _lockedItems.ContainsKey(level) ? new(_lockedItems[level]) : new();
+    }
 }
