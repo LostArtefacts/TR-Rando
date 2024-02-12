@@ -213,6 +213,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             }
 
             _picker.RandomizePickupLocation(entity);
+            entity.Intensity1 = entity.Intensity2 = -1;
         }
     }
 
@@ -245,6 +246,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             _picker.RandomizeKeyItemLocation(
                 entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData),
                 level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
+            entity.Intensity1 = entity.Intensity2 = -1;
         }
     }
 
