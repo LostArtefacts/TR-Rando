@@ -6465,7 +6465,8 @@
       "Y": -5632,
       "Z": 69633,
       "Room": 92,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 33718,
