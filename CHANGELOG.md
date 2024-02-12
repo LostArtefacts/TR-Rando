@@ -1,5 +1,11 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.3...master) - xxxx-xx-xx
 - fixed item locking logic so that secrets that rely on specific enemies will always be obtainable (#570)
+- fixed a crash at the end of Diving Area if a skidoo driver is replaced by a pickup (#604)
+- fixed the submarine in the Diving Area cutscene using Lara's meshes (#605)
+- fixed some awkwardly placed enemies in TR2, which could either block puzzle slots/keyholes or otherwise prove difficult to kill (#606)
+- fixed pickup item lighting in TR2 (#607)
+- fixed a secret in Temple of Xian that requires a glitch but was marked as glitchless (#608)
+- fixed an item location in Wreck of the Maria Doria that required forced flame damage (#609)
 
 ## [V1.8.3](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.2...V1.8.3) - 2024-01-21
 - fixed incorrect items sometimes being allocated as secret rewards in Thames Wharf (#597)
