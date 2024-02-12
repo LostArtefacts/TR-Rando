@@ -1056,6 +1056,27 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If enemy 103's type has been randomized, move him outside for some breathing space.",
+        "ConditionType": 0,
+        "EntityIndex": 103,
+        "EntityType": 32
+      },
+      "OnFalse": [
+        {
+          "EMType": 44,
+          "EntityIndex": 103,
+          "TargetLocation": {
+            "X": 43520,
+            "Y": -10240,
+            "Z": 69120,
+            "Room": 114,
+            "Angle": 16384
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],

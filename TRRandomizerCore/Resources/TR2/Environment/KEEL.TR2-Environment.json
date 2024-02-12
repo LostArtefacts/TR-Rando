@@ -1894,6 +1894,47 @@
           "NewDoorType": 111
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If enemy 46 is a t-rex or chicken, drain the nearby pool and put him there.",
+        "ConditionType": 0,
+        "Or": [
+          {
+            "ConditionType": 0,
+            "EntityIndex": 46,
+            "EntityType": 46
+          }
+        ],
+        "EntityIndex": 46,
+        "EntityType": 214
+      },
+      "OnTrue": [
+        {
+          "EMType": 3,
+          "RoomNumbers": [
+            85,
+            94
+          ],
+          "WaterTextures": [
+            1730,
+            1764,
+            1769,
+            1770
+          ]
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 46,
+          "TargetLocation": {
+            "X": 58880,
+            "Y": 4480,
+            "Z": 33280,
+            "Room": 94,
+            "Angle": -16384
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],

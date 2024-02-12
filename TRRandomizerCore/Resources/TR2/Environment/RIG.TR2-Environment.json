@@ -1494,13 +1494,13 @@
       "Condition": {
         "Comments": "If neither rooms 2 nor 96 contain a secret, drain the plane area.",
         "ConditionType": 1,
-        "RoomIndex": 2,
         "Or": [
           {
             "ConditionType": 1,
             "RoomIndex": 96
           }
-        ]
+        ],
+        "RoomIndex": 2
       },
       "OnFalse": {
         "Leader": [
