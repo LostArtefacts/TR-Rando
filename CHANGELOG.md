@@ -1,4 +1,6 @@
-## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.3...master) - xxxx-xx-xx
+## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.4...master) - xxxx-xx-xx
+
+## [V1.8.4](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.3...V1.8.4) - 2024-02-12
 - fixed item locking logic so that secrets that rely on specific enemies will always be obtainable (#570)
 - fixed a crash at the end of Diving Area if a skidoo driver is replaced by a pickup (#604)
 - fixed the submarine in the Diving Area cutscene using Lara's meshes (#605)
