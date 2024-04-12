@@ -9,18 +9,18 @@ using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Editors;
 
-public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
+public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 {
     public RandomizerSettings Settings { get; private set; }
 
-    public TR3RandoEditor(TRDirectoryIOArgs args, TREdition edition)
+    public TR2ClassicEditor(TRDirectoryIOArgs args, TREdition edition)
         : base(args, edition) { }
 
     protected override void ApplyConfig(Config config)
     {
-        Settings = new RandomizerSettings
+        Settings = new()
         {
-            ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText(@"Resources\TR3\Restrictions\excludable_enemies.json"))
+            ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText(@"Resources\TR2\Restrictions\excludable_enemies.json"))
         };
         Settings.ApplyConfig(config);
     }
@@ -32,33 +32,26 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
 
     protected override int GetSaveTarget(int numLevels)
     {
-        // Add to the target as appropriate when each randomizer is implemented. Once all
-        // randomizers are implemented, just call Settings.GetSaveTarget(numLevels) per TR2.
         int target = base.GetSaveTarget(numLevels);
 
-        if (Settings.RandomizeGameStrings)
+        if (Settings.RandomizeGameStrings || Settings.ReassignPuzzleItems)
         {
             target++;
         }
 
-        if (_edition.IsCommunityPatch && Settings.RandomizeWeather)
+        if (Settings.RandomizeNightMode)
         {
             target += numLevels;
+            if (!Settings.RandomizeTextures)
+            {
+                // Texture randomizer will run if night mode is on to ensure skyboxes and such like match
+                target += numLevels;
+            }
         }
-
-        // Sequencing checks
-        target += numLevels;
 
         if (Settings.RandomizeSecrets)
         {
-            // *3 for multithreaded work
-            target += numLevels * 3;
-        }
-
-        if (Settings.RandomizeEnemies)
-        {
-            // *3 for multithreaded work
-            target += Settings.CrossLevelEnemies ? numLevels * 3 : numLevels;
+            target += numLevels;
         }
 
         if (Settings.RandomizeAudio)
@@ -66,28 +59,42 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
             target += numLevels;
         }
 
-        if (Settings.RandomizeOutfits)
-        {
-            // *2 because of multithreaded approach
-            target += numLevels * 2;
-        }
-
         if (Settings.RandomizeItems)
         {
-            target += numLevels;
+            // Standard/key item rando followed by unarmed logic after enemy rando
+            target += numLevels * 2;
+            if (Settings.RandomizeItemSprites)
+            {
+                target += numLevels;
+            }
             if (Settings.IncludeKeyItems)
             {
                 target += numLevels;
             }
         }
 
-        if (Settings.RandomizeSecretRewardsPhysical)
+        if (Settings.RandomizeStartPosition)
         {
             target += numLevels;
         }
 
-        if (Settings.RandomizeNightMode)
+        if (Settings.DeduplicateTextures)
         {
+            // *2 because of multithreaded approach
+            target += numLevels * 2;
+        }
+
+        if (Settings.ReassignPuzzleItems)
+        {
+            // For TR2ModelAdjuster
+            target += numLevels;
+        }
+
+        if (Settings.RandomizeEnemies)
+        {
+            // 3 for multithreading cross-level work
+            target += Settings.CrossLevelEnemies ? numLevels * 3 : numLevels;
+            // And again for eliminating unused enemies
             target += numLevels;
         }
 
@@ -97,9 +104,10 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
             target += numLevels * 3;
         }
 
-        if (Settings.RandomizeStartPosition)
+        if (Settings.RandomizeOutfits)
         {
-            target += numLevels;
+            // *2 because of multithreaded approach
+            target += numLevels * 2;
         }
 
         // Environment randomizer always runs
@@ -110,13 +118,13 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
 
     protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
     {
-        List<TR3ScriptedLevel> levels = new(
-            scriptEditor.EnabledScriptedLevels.Cast<TR3ScriptedLevel>().ToList()
+        List<TR2ScriptedLevel> levels = new(
+            scriptEditor.EnabledScriptedLevels.Cast<TR2ScriptedLevel>().ToList()
         );
 
         if (scriptEditor.GymAvailable)
         {
-            levels.Add(scriptEditor.AssaultLevel as TR3ScriptedLevel);
+            levels.Add(scriptEditor.AssaultLevel as TR2ScriptedLevel);
         }
 
         // Each processor will have a reference to the script editor, so can
@@ -128,17 +136,17 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
         if (Settings.DevelopmentMode)
         {
             (tr23ScriptEditor.Script as TR23Script).LevelSelectEnabled = true;
+            (tr23ScriptEditor.Script as TR23Script).DozyEnabled = true;
             scriptEditor.SaveScript();
         }
 
-        // Shared tracker objects between randomizers
-        ItemFactory<TR3Entity> itemFactory = new(@"Resources\TR3\Items\repurposable_items.json")
+        ItemFactory<TR2Entity> itemFactory = new()
         {
             DefaultItem = new() { Intensity1 = -1, Intensity2 = -1 }
         };
-        TR3TextureMonitorBroker textureMonitor = new();
+        TR2TextureMonitorBroker textureMonitor = new();
 
-        TR3ItemRandomizer itemRandomizer = new()
+        TR2ItemRandomizer itemRandomizer = new()
         {
             ScriptEditor = tr23ScriptEditor,
             Levels = levels,
@@ -146,10 +154,11 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
             BackupPath = backupDirectory,
             SaveMonitor = monitor,
             Settings = Settings,
-            ItemFactory = itemFactory
+            TextureMonitor = textureMonitor,
+            ItemFactory = itemFactory,
         };
 
-        TR3EnvironmentRandomizer environmentRandomizer = new()
+        TR2EnvironmentRandomizer environmentRandomizer = new()
         {
             ScriptEditor = tr23ScriptEditor,
             Levels = levels,
@@ -161,12 +170,28 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
         };
         environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed);
 
+        // Texture monitoring is needed between enemy and texture randomization
+        // to track where imported enemies are placed.
         using (textureMonitor)
         {
-            if (!monitor.IsCancelled && Settings.RandomizeGameStrings)
+            if (!monitor.IsCancelled && Settings.RandomizeEnemies)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting enemy entities");
+                new TR2EnemyAdjuster
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    BackupPath = backupDirectory,
+                    SaveMonitor = monitor,
+                    ItemFactory = itemFactory,
+                }.AdjustEnemies();
+            }
+
+            if (!monitor.IsCancelled && (Settings.RandomizeGameStrings || Settings.ReassignPuzzleItems))
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting game strings");
-                new TR3GameStringRandomizer
+                new TR2GameStringRandomizer
                 {
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
@@ -177,24 +202,26 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
                 }.Randomize(Settings.GameStringsSeed);
             }
 
-            if (!monitor.IsCancelled && _edition.IsCommunityPatch && Settings.RandomizeWeather)
+            if (!monitor.IsCancelled && Settings.DeduplicateTextures)
             {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing weather");
-                new TR3WeatherRandomizer
+                // This is needed to make as much space as possible available for cross-level enemies.
+                // We do this if we are implementing cross-level enemies OR if randomizing textures,
+                // as the texture mapping is optimised for levels that have been deduplicated.
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Deduplicating textures");
+                new TR2TextureDeduplicator
                 {
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
                     BasePath = wipDirectory,
                     BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings
-                }.Randomize(Settings.WeatherSeed);
+                    SaveMonitor = monitor
+                }.Deduplicate();
             }
 
-            if (!monitor.IsCancelled)
+            if (!monitor.IsCancelled && Settings.RandomizeSecrets)
             {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Running level sequence checks");
-                new TR3SequenceProcessor
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
+                new TR2SecretRandomizer
                 {
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
@@ -202,15 +229,36 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
                     BackupPath = backupDirectory,
                     SaveMonitor = monitor,
                     Settings = Settings,
-                    TextureMonitor = textureMonitor,
-                    ItemFactory = itemFactory
-                }.Run();
+                    Mirrorer = environmentRandomizer,
+                    ItemFactory = itemFactory,
+                }.Randomize(Settings.SecretSeed);
             }
 
-            if (!monitor.IsCancelled && Settings.RandomizeSecrets)
+            if (!monitor.IsCancelled && Settings.RandomizeItems)
             {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
-                new TR3SecretRandomizer
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing standard items");
+                itemRandomizer.Randomize(Settings.ItemSeed);
+            }
+
+            if (!monitor.IsCancelled && Settings.ReassignPuzzleItems)
+            {
+                // P2 items are converted to P3 in case the dragon is present as the dagger type is hardcoded.
+                // Must take place before enemy randomization. OG P2 key items must be zoned based on being P3.
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting level models");
+                new TR2ModelAdjuster
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    BackupPath = backupDirectory,
+                    SaveMonitor = monitor
+                }.AdjustModels();
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeEnemies)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
+                new TR2EnemyRandomizer
                 {
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
@@ -220,52 +268,20 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
                     Settings = Settings,
                     TextureMonitor = textureMonitor,
                     ItemFactory = itemFactory,
-                    Mirrorer = environmentRandomizer
-                }.Randomize(Settings.SecretSeed);
+                }.Randomize(Settings.EnemySeed);
             }
 
-            //Ensure item rando executes before enemy rando - as enemies may be assigned key items
-            //so we need to make sure the enemy rando can know this in advance.
+            // Randomize ammo/weapon in unarmed levels post enemy randomization
             if (!monitor.IsCancelled && Settings.RandomizeItems)
             {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing standard items");
-                itemRandomizer.Randomize(Settings.ItemSeed);
-            }
-
-            if (!monitor.IsCancelled && Settings.RandomizeSecretRewardsPhysical)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secret rewards");
-                new TR3SecretRewardRandomizer
-                {
-                    ScriptEditor = scriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings
-                }.Randomize(Settings.SecretRewardsPhysicalSeed);
-            }
-
-            if (!monitor.IsCancelled && Settings.RandomizeEnemies)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
-                new TR3EnemyRandomizer
-                {
-                    ScriptEditor = tr23ScriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings,
-                    TextureMonitor = textureMonitor,
-                    ItemFactory = itemFactory
-                }.Randomize(Settings.EnemySeed);
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing unarmed level items");
+                itemRandomizer.RandomizeAmmo();
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeStartPosition)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
-                new TR3StartPositionRandomizer
+                new TR2StartPositionRandomizer
                 {
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
@@ -297,7 +313,7 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
             if (!monitor.IsCancelled && Settings.RandomizeAudio)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
-                new TR3AudioRandomizer
+                new TR2AudioRandomizer
                 {
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
@@ -311,7 +327,7 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
             if (!monitor.IsCancelled && Settings.RandomizeOutfits)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing outfits");
-                new TR3OutfitRandomizer
+                new TR2OutfitRandomizer
                 {
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
@@ -323,10 +339,10 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
                 }.Randomize(Settings.OutfitSeed);
             }
 
-            if (!monitor.IsCancelled && Settings.RandomizeNightMode && !Settings.RandomizeVfx)
+            if (!monitor.IsCancelled && Settings.RandomizeNightMode)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
-                new TR3NightModeRandomizer
+                new TR2NightModeRandomizer
                 {
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
@@ -338,26 +354,12 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
                 }.Randomize(Settings.NightModeSeed);
             }
 
-            if (!monitor.IsCancelled && Settings.RandomizeNightMode && Settings.RandomizeVfx)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing VFX");
-                new TR3VfxRandomizer
-                {
-                    ScriptEditor = tr23ScriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings
-                }.Randomize(Settings.NightModeSeed);
-            }
-
             if (!monitor.IsCancelled)
             {
                 if (Settings.RandomizeTextures)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
-                    new TR3TextureRandomizer
+                    new TR2TextureRandomizer
                     {
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
@@ -368,10 +370,10 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
                         TextureMonitor = textureMonitor
                     }.Randomize(Settings.TextureSeed);
                 }
-                else if (Settings.RandomizeNightMode && !Settings.RandomizeVfx)
+                else if (Settings.RandomizeNightMode)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode textures");
-                    new TR3TextureRandomizer
+                    new TR2TextureRandomizer
                     {
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
@@ -382,6 +384,12 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
                         TextureMonitor = textureMonitor
                     }.Randomize(Settings.NightModeSeed);
                 }
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeItems && Settings.RandomizeItemSprites)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing Sprites");
+                itemRandomizer.RandomizeLevelsSprites();
             }
         }
     }

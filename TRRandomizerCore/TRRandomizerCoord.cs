@@ -53,13 +53,12 @@ public class TRRandomizerCoord
         TRInterop.SecretRewardsSupported = true;
         TRInterop.ChecksumTester = new ChecksumTester();
 
-        TRLevelEditorFactory.RegisterEditor(TRVersion.TR1, typeof(TR1RandoEditor));
-        TRLevelEditorFactory.RegisterEditor(TRVersion.TR2, typeof(TR2RandoEditor));
-        TRLevelEditorFactory.RegisterEditor(TRVersion.TR3, typeof(TR3RandoEditor));
-
-        // Not yet fully supported i.e. no locations, textures etc defined
-        //TRLevelEditorFactory.RegisterEditor(TRVersion.TR2G, typeof(TR2RandoEditor));
-        //TRLevelEditorFactory.RegisterEditor(TRVersion.TR3G, typeof(TR3RandoEditor));
+        TRLevelEditorFactory.RegisterEditor(TREdition.TR1PC, typeof(TR1ClassicEditor));
+        TRLevelEditorFactory.RegisterEditor(TREdition.TR2PC, typeof(TR2ClassicEditor));
+        TRLevelEditorFactory.RegisterEditor(TREdition.TR3PC, typeof(TR3ClassicEditor));
+        TRLevelEditorFactory.RegisterEditor(TREdition.TR1RM, typeof(TR1RemasteredEditor));
+        TRLevelEditorFactory.RegisterEditor(TREdition.TR2RM, typeof(TR2RemasteredEditor));
+        TRLevelEditorFactory.RegisterEditor(TREdition.TR3RM, typeof(TR3RemasteredEditor));
 
         // #125 Invoke TRCoord.Instance after defining TRInterop.ExecutingVersionName otherwise
         // TRGE will not know the config file name to look for.
@@ -71,8 +70,8 @@ public class TRRandomizerCoord
 
     public TRRandomizerController Open(string directoryPath, bool performChecksumTest)
     {
-        _openEventArgs = new TROpenRestoreEventArgs();
-        return new TRRandomizerController(directoryPath, performChecksumTest);
+        _openEventArgs = new();
+        return new(directoryPath, performChecksumTest);
     }
 
     public static void ClearHistory()
