@@ -9,7 +9,7 @@ using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class TR1StartPositionRandomizer : BaseTR1Randomizer
+public class TR1RStartPositionRandomizer : BaseTR1RRandomizer
 {
     private Dictionary<string, List<Location>> _startLocations;
 
@@ -18,7 +18,7 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
         _generator = new Random(seed);
         _startLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\start_positions.json"));
 
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (TRRScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
             RandomizeStartPosition(_levelInstance);
@@ -31,15 +31,13 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
         }
     }
 
-    private void RandomizeStartPosition(TR1CombinedLevel level)
+    private void RandomizeStartPosition(TR1RCombinedLevel level)
     {
         TR1Entity lara = level.Data.Entities.Find(e => e.TypeID == TR1Type.Lara);
 
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
-        // If we haven't defined anything for a level, Lara will just be rotated. This is most likely where there are
-        // triggers just after Lara's starting spot, so we just skip them here.
         if (!Settings.RotateStartPositionOnly && _startLocations.ContainsKey(level.Name))
         {
             List<Location> locations = _startLocations[level.Name];
