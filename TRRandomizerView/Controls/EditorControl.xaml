@@ -38,6 +38,7 @@
         </Grid.ColumnDefinitions>
 
         <ctrl:ManagedSeedAdvancedControl
+            Visibility="{Binding IsLevelCountTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
             IsEnabled="{Binding IsLevelSequenceTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeGameMode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Playable Levels and Sequencing"
@@ -52,7 +53,7 @@
                 <windows:AdvancedWindow Title="Randomize Playable Levels and Sequencing (Advanced)"
                                 MainDescription="Customize level order randomization."
                                 HasBoolItems="True"
-                                HasLevelCount ="True"
+                                HasLevelCount ="{Binding Data.IsLevelCountTypeSupported, Source={StaticResource proxy}}"
                                 HasGameModeOptions ="{Binding Data.IsGameModeTypeSupported, Source={StaticResource proxy}}"
                                 HasGlobeOptions="{Binding Data.IsGlobeDisplayTypeSupported, Source={StaticResource proxy}}"
                                 BoolItemsSource="{Binding Data.GameOrderBoolItemControls, Source={StaticResource proxy}}"
@@ -60,6 +61,16 @@
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
+
+        <ctrl:ManagedSeedControl
+            Visibility="{Binding IsLevelCountTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
+            IsEnabled="{Binding IsLevelSequenceTypeSupported, UpdateSourceTrigger=PropertyChanged}"
+            IsActive="{Binding RandomizeGameMode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Level Sequencing"
+            Text="Randomize the order in which levels are played."
+            SeedMinValue="1"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
+            SeedValue="{Binding LevelSequencingSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
         <ctrl:ManagedSeedIntControl 
             Grid.Row="1"
@@ -202,39 +213,12 @@
         </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedAdvancedControl
-            Visibility="{Binding IsRewardRoomsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
             Grid.Row="0"
             Grid.Column="1"
             IsEnabled="{Binding IsSecretTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Secrets"
-            Text="Randomize secret locations. You should expect to find Stone, then Jade, then Gold."
-            SeedMinValue="1"
-            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
-            SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-            <ctrl:ManagedSeedAdvancedControl.Resources>
-                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
-            </ctrl:ManagedSeedAdvancedControl.Resources>
-            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
-                <windows:AdvancedWindow Title="Randomize Secrets (Advanced)"
-                                        MainDescription="Customize the secret randomization."
-                                        BoolItemsSource="{Binding Data.SecretBoolItemControls, Source={StaticResource proxy}}"
-                                        HasBoolItems="True"
-                                        HasSecretPackMode="{Binding Data.IsSecretPackTypeSupported, Source={StaticResource proxy}}"
-                                        HasSecretCountMode="{Binding Data.IsSecretCountTypeSupported, Source={StaticResource proxy}}"
-                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
-                </windows:AdvancedWindow>
-            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
-        </ctrl:ManagedSeedAdvancedControl>
-
-        <ctrl:ManagedSeedAdvancedControl
-            Visibility="{Binding IsRewardRoomsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
-            Grid.Row="0"
-            Grid.Column="1"
-            IsEnabled="{Binding IsSecretTypeSupported, UpdateSourceTrigger=PropertyChanged}"
-            IsActive="{Binding RandomizeSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            Title="Randomize Secrets"
-            Text="Randomize secret locations. Artefacts will be added as pickups and reward rooms created for collecting all secrets."
+            Text="{Binding RandomizeSecretsText}"
             SeedMinValue="1"
             SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
@@ -343,22 +327,10 @@
 
         <ctrl:ManagedSeedControl
             Grid.Column="2"
-            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
             IsEnabled="{Binding IsSecretRewardTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeSecretRewards, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Secret Rewards"
-            Text="Randomize the rewards given for finding secrets in each level."
-            SeedMinValue="1"
-            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
-            SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-
-        <ctrl:ManagedSeedControl
-            Grid.Column="2"
-            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
-            IsEnabled="{Binding IsSecretRewardTypeSupported, UpdateSourceTrigger=PropertyChanged}"
-            IsActive="{Binding RandomizeSecretRewards, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            Title="Randomize Secret Rewards"
-            Text="Randomize the rewards for collecting all secrets in each level. Rewards are selected randomly on a generosity scale."
+            Text="Randomize the rewards given for finding all secrets in each level."
             SeedMinValue="1"
             SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
@@ -366,11 +338,10 @@
         <ctrl:ManagedSeedAdvancedControl
             Grid.Row="1"
             Grid.Column="2"
-            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
             IsEnabled="{Binding IsAudioTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeAudioTracks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Audio"
-            Text="Randomize the tracks for the title screen, level ambience and triggers, as well as general sound effects."
+            Text="Randomize the audio tracks and general sound effects throughout the game."
             SeedMinValue="1"
             SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
@@ -383,31 +354,7 @@
                                         BoolItemsSource="{Binding Data.AudioBoolItemControls, Source={StaticResource proxy}}"
                                         HasBoolItems="True"
                                         HasAudioOptions="True"
-                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
-                </windows:AdvancedWindow>
-            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
-        </ctrl:ManagedSeedAdvancedControl>
-
-        <ctrl:ManagedSeedAdvancedControl
-            Grid.Row="1"
-            Grid.Column="2"
-            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
-            IsEnabled="{Binding IsAudioTypeSupported, UpdateSourceTrigger=PropertyChanged}"
-            IsActive="{Binding RandomizeAudioTracks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            Title="Randomize Audio"
-            Text="Randomize the tracks for the title screen, level ambience, triggers and secrets, as well as general sound effects."
-            SeedMinValue="1"
-            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
-            SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-            <ctrl:ManagedSeedAdvancedControl.Resources>
-                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
-            </ctrl:ManagedSeedAdvancedControl.Resources>
-            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
-                <windows:AdvancedWindow Title="Randomize Audio (Advanced)"
-                                        MainDescription="Customize the audio randomization."
-                                        BoolItemsSource="{Binding Data.AudioBoolItemControls, Source={StaticResource proxy}}"
-                                        HasBoolItems="True"
-                                        HasAudioOptions="True"
+                                        HasSFXOptions="{Binding Data.IsSFXTypeSupported, Source={StaticResource proxy}}"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
@@ -599,14 +546,14 @@
                             Command="cmds:WindowCommands.OpenGlobalSettingsCommand"/>
 
                         <TextBlock
-                            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                            Visibility="{Binding IsTR1Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                             Grid.Row="9"
                             Margin="0,0,0,5"
                             Text="Configure extra settings specific to TR1X."
                             TextWrapping="Wrap"/>
 
                         <Button
-                            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                            Visibility="{Binding IsTR1Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                             Grid.Row="10"
                             Margin="0,0,0,12"
                             Content="TR1X Settings" 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
@@ -185,22 +186,8 @@ public partial class EditorControl : UserControl
     {
         try
         {
-            string exePath = null;
-            foreach (string exe in Controller.GetExecutables())
-            {
-                string path = Path.GetFullPath(Path.Combine(DataFolder, @"..\" + exe));
-                if (File.Exists(path))
-                {
-                    exePath = path;
-                    break;
-                }
-            }
-            
-            if (exePath == null)
-            {
-                throw new IOException("The game could not be launched automatically as no suitable executable was found.");
-            }
-
+            string exePath = Controller.GetExecutables(DataFolder).FirstOrDefault(p => File.Exists(p))
+                ?? throw new IOException("The game could not be launched automatically as no suitable executable was found.");
             ProcessUtils.OpenFile(exePath);
         }
         catch (Exception e)
@@ -253,7 +240,7 @@ public partial class EditorControl : UserControl
 
     public bool CanEditCommunitySettings()
     {
-        return _options.IsTR1 || _options.IsTR3Main;
+        return _options.IsTR1Main || _options.IsTR3Main;
     }
 
     public void OpenBackupFolder()
@@ -443,7 +430,7 @@ public partial class EditorControl : UserControl
 
     public void EditCommunitySettings()
     {
-        if (_options.IsTR1)
+        if (_options.IsTR1Main)
         {
             LaunchTR1XSettings();
         }

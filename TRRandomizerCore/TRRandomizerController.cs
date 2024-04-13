@@ -43,9 +43,9 @@ public class TRRandomizerController
         return TRVersionSupport.IsRandomizationSupported(_editor.Edition, randomizerType);
     }
 
-    public List<string> GetExecutables()
+    public List<string> GetExecutables(string dataFolder)
     {
-        return TRVersionSupport.GetExecutables(_editor.Edition);
+        return TRVersionSupport.GetExecutables(_editor.Edition, dataFolder);
     }
 
     public bool IsTR1 => _editor.Edition.Version == TRVersion.TR1;
@@ -89,7 +89,7 @@ public class TRRandomizerController
     {
         if (RandomizeGameMode)
         {
-            ScriptEditor.LevelSequencingOrganisation = RandomizeSequencing ? Organisation.Random : Organisation.Default;
+            ScriptEditor.LevelSequencingOrganisation = (RandomizeSequencing || _editor.Edition.Remastered) ? Organisation.Random : Organisation.Default;
             ScriptEditor.EnabledLevelOrganisation = Organisation.Random;
             ScriptEditor.GameMode = LevelRandomizer.GameMode;
         }

@@ -63,4 +63,6 @@ public enum TRRandomizerType
     ShortcutFixes,
     KeyContinuity,
     GameMode,
+    ItemDrops,
+    LevelCount,
 }

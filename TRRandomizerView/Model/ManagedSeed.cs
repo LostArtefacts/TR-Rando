@@ -3,6 +3,6 @@
 public class ManagedSeed
 {
     public bool IsActive { get; set; }
-
     public int Seed { get; set; }
+    public string Description { get; set; }
 }
