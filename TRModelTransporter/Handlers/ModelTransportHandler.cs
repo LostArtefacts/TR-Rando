@@ -60,13 +60,10 @@ public class ModelTransportHandler
 
     public static void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Type, TR2Type> aliasPriority, IEnumerable<TR2Type> laraDependants)
     {
-        List<TRModel> levelModels = level.Models.ToList();
-        int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
+        int i = level.Models.FindIndex(m => m.ID == (short)definition.Entity);
         if (i == -1)
         {
-            levelModels.Add(definition.Model);
-            level.Models = levelModels.ToArray();
-            level.NumModels++;
+            level.Models.Add(definition.Model);
         }
         else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
         {
@@ -82,7 +79,7 @@ public class ModelTransportHandler
         // their starting mesh and mesh tree indices are just remapped to Lara's.
         if (definition.Entity == TR2Type.Lara && laraDependants != null)
         {
-            ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+            ReplaceLaraDependants(level.Models, definition.Model, laraDependants.Select(e => (short)e));
         }
     }
 
