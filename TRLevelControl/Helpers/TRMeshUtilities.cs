@@ -6,7 +6,7 @@ public static class TRMeshUtilities
 {
     public static TRMesh GetModelFirstMesh(TR1Level level, TR1Type entity)
     {
-        TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
+        TRModel model = level.Models.Find(e => e.ID == (uint)entity);
         if (model != null)
         {
             return GetModelFirstMesh(level, model);
@@ -16,7 +16,7 @@ public static class TRMeshUtilities
 
     public static TRMesh GetModelFirstMesh(TR2Level level, TR2Type entity)
     {
-        TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
+        TRModel model = level.Models.Find(e => e.ID == (uint)entity);
         if (model != null)
         {
             return GetModelFirstMesh(level, model);
@@ -26,7 +26,7 @@ public static class TRMeshUtilities
 
     public static TRMesh GetModelFirstMesh(TR3Level level, TR3Type entity)
     {
-        TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
+        TRModel model = level.Models.Find(e => e.ID == (uint)entity);
         if (model != null)
         {
             return GetModelFirstMesh(level, model);

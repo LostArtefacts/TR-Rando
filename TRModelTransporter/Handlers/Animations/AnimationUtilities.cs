@@ -14,12 +14,12 @@ public static class AnimationUtilities
 
     public static int GetModelAnimationCount(TR2Level level, TRModel model)
     {
-        return GetModelAnimationCount(level.Models.ToList(), model, level.Animations.Count);
+        return GetModelAnimationCount(level.Models, model, level.Animations.Count);
     }
 
     public static int GetModelAnimationCount(TR3Level level, TRModel model)
     {
-        return GetModelAnimationCount(level.Models.ToList(), model, level.Animations.Count);
+        return GetModelAnimationCount(level.Models, model, level.Animations.Count);
     }
 
     public static int GetModelAnimationCount(List<TRModel> models, TRModel model, int totalAnimations)
@@ -266,17 +266,17 @@ public static class AnimationUtilities
 
     public static ushort[] GetAnimationFrames(TR2Level level, TRModel model)
     {
-        return GetAnimationFrames(model, level.Models.ToList(), level.Frames.ToList());
+        return GetAnimationFrames(model, level.Models, level.Frames.ToList());
     }
 
     public static ushort[] GetAnimationFrames(TR3Level level, TRModel model)
     {
-        return GetAnimationFrames(model, level.Models.ToList(), level.Frames.ToList());
+        return GetAnimationFrames(model, level.Models, level.Frames.ToList());
     }
 
     public static ushort[] GetAnimationFrames(TRModel model, List<TRModel> allModels, List<ushort> allFrames)
     {
-        int modelIndex = allModels.ToList().IndexOf(model);
+        int modelIndex = allModels.IndexOf(model);
         uint endFrame = 0;
         if (modelIndex == allModels.Count - 1)
         {

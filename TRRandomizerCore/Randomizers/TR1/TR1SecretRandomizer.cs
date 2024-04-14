@@ -837,11 +837,9 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
                 // Work out which models are available to replace as secret pickups.
                 // We exclude current puzzle/key items from the available switching pool.
-                List<TRModel> models = level.Data.Models.ToList();
-
                 foreach (TR1Type puzzleType in _modelReplacements.Keys)
                 {
-                    if (models.Find(m => m.ID == (uint)puzzleType) == null)
+                    if (level.Data.Models.Find(m => m.ID == (uint)puzzleType) == null)
                     {
                         allocation.AvailablePickupModels.Add(puzzleType);
                     }

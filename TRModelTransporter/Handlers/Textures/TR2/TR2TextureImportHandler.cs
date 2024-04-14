@@ -78,7 +78,7 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2
         if
         (
             _definitions.ToList().FindIndex(d => flameEnemies.Contains(d.Entity)) != -1 ||
-            _level.Models.ToList().FindIndex(m => flameEnemies.Contains((TR2Type)m.ID)) != -1
+            _level.Models.FindIndex(m => flameEnemies.Contains((TR2Type)m.ID)) != -1
         )
         {
             List<TRSpriteSequence> sequences = _level.SpriteSequences.ToList();

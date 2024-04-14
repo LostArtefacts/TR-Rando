@@ -691,11 +691,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     if (Settings.AllowEmptyEggs)
                     {
                         // Add 1/4 chance of an empty egg, provided at least one spawn model is not available
-                        List<TR1Type> allModels = new();
-                        foreach (TRModel model in level.Data.Models)
-                        {
-                            allModels.Add((TR1Type)model.ID);
-                        }
+                        IEnumerable<TR1Type> allModels = level.Data.Models.Select(m => (TR1Type)m.ID);
 
                         // We can add Adam to make it possible for a dud spawn - he's not normally available for eggs because
                         // of his own restrictions.

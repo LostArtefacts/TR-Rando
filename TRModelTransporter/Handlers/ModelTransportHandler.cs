@@ -20,9 +20,9 @@ public class ModelTransportHandler
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
 
-    private static TRModel GetTRModel(IEnumerable<TRModel> models, short entityID)
+    private static TRModel GetTRModel(List<TRModel> models, short entityID)
     {
-        TRModel model = models.ToList().Find(m => m.ID == entityID);
+        TRModel model = models.Find(m => m.ID == entityID);
         return model ?? throw new ArgumentException($"The model for {entityID} could not be found.");
     }
 

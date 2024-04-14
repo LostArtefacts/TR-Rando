@@ -32,7 +32,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        List<EMMeshTextureData> data = PrepareImportData(level.Models.ToList());
+        List<EMMeshTextureData> data = PrepareImportData(level.Models);
         if (data.Count == 0)
         {
             return;
@@ -53,7 +53,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<EMMeshTextureData> data = PrepareImportData(level.Models.ToList());
+        List<EMMeshTextureData> data = PrepareImportData(level.Models);
         if (data.Count == 0)
         {
             return;

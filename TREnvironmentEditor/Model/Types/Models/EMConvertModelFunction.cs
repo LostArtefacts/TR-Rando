@@ -15,13 +15,13 @@ public class EMConvertModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        ConvertModel(level.Models.ToList());
+        ConvertModel(level.Models);
         UpdateModelEntities(level.Entities);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        ConvertModel(level.Models.ToList());
+        ConvertModel(level.Models);
         UpdateModelEntities(level.Entities);
     }
 
