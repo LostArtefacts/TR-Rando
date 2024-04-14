@@ -240,55 +240,54 @@ internal static class TR5FileReadUtilities
     public static void PopulateAnimations(BinaryReader reader, TR5Level lvl)
     {
         //Animations
-        lvl.LevelDataChunk.NumAnimations = reader.ReadUInt32();
-        lvl.LevelDataChunk.Animations = new TR4Animation[lvl.LevelDataChunk.NumAnimations];
-        for (int i = 0; i < lvl.LevelDataChunk.NumAnimations; i++)
+        uint numAnimations = reader.ReadUInt32();
+        lvl.LevelDataChunk.Animations = new();
+        for (int i = 0; i < numAnimations; i++)
         {
-            lvl.LevelDataChunk.Animations[i] = TR4FileReadUtilities.ReadAnimation(reader);
+            lvl.LevelDataChunk.Animations.Add(TR4FileReadUtilities.ReadAnimation(reader));
         }
 
         //State Changes
-        lvl.LevelDataChunk.NumStateChanges = reader.ReadUInt32();
-        lvl.LevelDataChunk.StateChanges = new TRStateChange[lvl.LevelDataChunk.NumStateChanges];
-        for (int i = 0; i < lvl.LevelDataChunk.NumStateChanges; i++)
+        uint numStateChanges = reader.ReadUInt32();
+        lvl.LevelDataChunk.StateChanges = new();
+        for (int i = 0; i < numStateChanges; i++)
         {
-            lvl.LevelDataChunk.StateChanges[i] = TR2FileReadUtilities.ReadStateChange(reader);
+            lvl.LevelDataChunk.StateChanges.Add(TR2FileReadUtilities.ReadStateChange(reader));
         }
 
         //Animation Dispatches
-        lvl.LevelDataChunk.NumAnimDispatches = reader.ReadUInt32();
-        lvl.LevelDataChunk.AnimDispatches = new TRAnimDispatch[lvl.LevelDataChunk.NumAnimDispatches];
-        for (int i = 0; i < lvl.LevelDataChunk.NumAnimDispatches; i++)
+        uint numAnimDispatches = reader.ReadUInt32();
+        lvl.LevelDataChunk.AnimDispatches = new();
+        for (int i = 0; i < numAnimDispatches; i++)
         {
-            lvl.LevelDataChunk.AnimDispatches[i] = TR2FileReadUtilities.ReadAnimDispatch(reader);
+            lvl.LevelDataChunk.AnimDispatches.Add(TR2FileReadUtilities.ReadAnimDispatch(reader));
         }
 
         //Animation Commands
-        lvl.LevelDataChunk.NumAnimCommands = reader.ReadUInt32();
-        lvl.LevelDataChunk.AnimCommands = new TRAnimCommand[lvl.LevelDataChunk.NumAnimCommands];
-        for (int i = 0; i < lvl.LevelDataChunk.NumAnimCommands; i++)
+        uint numAnimCommands = reader.ReadUInt32();
+        lvl.LevelDataChunk.AnimCommands = new();
+        for (int i = 0; i < numAnimCommands; i++)
         {
-            lvl.LevelDataChunk.AnimCommands[i] = TR2FileReadUtilities.ReadAnimCommand(reader);
+            lvl.LevelDataChunk.AnimCommands.Add(TR2FileReadUtilities.ReadAnimCommand(reader));
         }
     }
 
     public static void PopulateMeshTreesFramesModels(BinaryReader reader, TR5Level lvl)
     {
         //Mesh Trees
-        lvl.LevelDataChunk.NumMeshTrees = reader.ReadUInt32();
-        lvl.LevelDataChunk.NumMeshTrees /= 4;
-        lvl.LevelDataChunk.MeshTrees = new TRMeshTreeNode[lvl.LevelDataChunk.NumMeshTrees];
-        for (int i = 0; i < lvl.LevelDataChunk.NumMeshTrees; i++)
+        uint numMeshTrees = reader.ReadUInt32() / 4;
+        lvl.LevelDataChunk.MeshTrees = new();
+        for (int i = 0; i < numMeshTrees; i++)
         {
-            lvl.LevelDataChunk.MeshTrees[i] = TR2FileReadUtilities.ReadMeshTreeNode(reader);
+            lvl.LevelDataChunk.MeshTrees.Add(TR2FileReadUtilities.ReadMeshTreeNode(reader));
         }
 
         //Frames
-        lvl.LevelDataChunk.NumFrames = reader.ReadUInt32();
-        lvl.LevelDataChunk.Frames = new ushort[lvl.LevelDataChunk.NumFrames];
-        for (int i = 0; i < lvl.LevelDataChunk.NumFrames; i++)
+        uint numFrames = reader.ReadUInt32();
+        lvl.LevelDataChunk.Frames = new();
+        for (int i = 0; i < numFrames; i++)
         {
-            lvl.LevelDataChunk.Frames[i] = reader.ReadUInt16();
+            lvl.LevelDataChunk.Frames.Add(reader.ReadUInt16());
         }
 
         //Models
