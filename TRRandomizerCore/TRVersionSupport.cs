@@ -58,8 +58,10 @@ internal class TRVersionSupport
 
     private static readonly List<TRRandomizerType> _tr1RTypes = new()
     {
+        TRRandomizerType.Audio,
         TRRandomizerType.Item,
         TRRandomizerType.KeyItems,
+        TRRandomizerType.SecretAudio,
         TRRandomizerType.StartPosition,
     };
 
@@ -108,9 +110,12 @@ internal class TRVersionSupport
 
     private static readonly List<TRRandomizerType> _tr2RTypes = new()
     {
+        TRRandomizerType.Audio,
         TRRandomizerType.Item,
         TRRandomizerType.ItemDrops,
         TRRandomizerType.KeyItems,
+        TRRandomizerType.SecretAudio,
+        TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
     };
 
@@ -157,9 +162,12 @@ internal class TRVersionSupport
 
     private static readonly List<TRRandomizerType> _tr3RTypes = new()
     {
+        TRRandomizerType.Audio,
         TRRandomizerType.Item,
         TRRandomizerType.ItemDrops,
         TRRandomizerType.KeyItems,
+        TRRandomizerType.SecretAudio,
+        TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
     };
 

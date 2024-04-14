@@ -228,8 +228,7 @@
       "Offset": 183093060,
       "Length": 9212874,
       "Categories": [
-        7,
-        4
+        7
       ],
       "PrimaryCategory": 7
     },
@@ -240,7 +239,6 @@
       "Length": 6919674,
       "Categories": [
         8,
-        4,
         7
       ],
       "PrimaryCategory": 8
@@ -272,6 +270,7 @@
       "Length": 2359146,
       "Categories": [
         5,
+        4,
         7
       ],
       "PrimaryCategory": 5

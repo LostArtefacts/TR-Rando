@@ -14,20 +14,28 @@ class Program
         }
 
         string file = args[0];
-        string exportDir = args[1];
-        if (Directory.Exists(exportDir))
+        TRGameVersion version = Enum.Parse<TRGameVersion>(args[1]);
+        if (!Enum.IsDefined(typeof(TRGameVersion), version))
         {
-            Directory.Delete(exportDir, true);
+            Console.WriteLine("Unrecognised game verion.");
+            return;
         }
-        Directory.CreateDirectory(exportDir);
+
+        if (Directory.Exists(version.ToString()))
+        {
+            Directory.Delete(version.ToString(), true);
+        }
+        Directory.CreateDirectory(version.ToString());
+
+        bool remaster = args.Length > 2 && args[2].ToUpper() == "REMASTER";
 
         switch (Path.GetExtension(file).ToUpper())
         {
             case ".SFX":
-                ExtractFromSFX(file, exportDir);
+                ExtractFromSFX(file, version, remaster);
                 break;
             case ".PHD":
-                ExtractFromPHD(file, exportDir);
+                ExtractFromPHD(file, version);
                 break;
             default:
                 Console.WriteLine("Unsupported file.");
@@ -35,10 +43,17 @@ class Program
         }
     }
 
-    private static void ExtractFromSFX(string file, string exportDir)
+    private static void ExtractFromSFX(string file, TRGameVersion version, bool remaster)
     {
         int sample = 0;
         using BinaryReader reader = new(File.Open(file, FileMode.Open));
+
+        if (remaster)
+        {
+            // Header remains unknown for now
+            reader.BaseStream.Position = version == TRGameVersion.TR1 ? 0x200 : 0x2E4;
+        }
+        
         while (reader.BaseStream.Position < reader.BaseStream.Length)
         {
             uint[] header = new uint[11];
@@ -47,7 +62,7 @@ class Program
                 header[i] = reader.ReadUInt32();
             }
 
-            using BinaryWriter writer = new(File.Create(Path.Combine(exportDir, sample++ + ".wav")));
+            using BinaryWriter writer = new(File.Create(Path.Combine(version.ToString(), sample++ + ".wav")));
             for (int i = 0; i < header.Length; i++)
             {
                 writer.Write(header[i]);
@@ -61,7 +76,7 @@ class Program
         }
     }
 
-    private static void ExtractFromPHD(string file, string exportDir)
+    private static void ExtractFromPHD(string file, TRGameVersion version)
     {
         TR1Level level = new TR1LevelControl().Read(file);
         for (int i = 0; i < level.NumSampleIndices; i++)
@@ -73,7 +88,7 @@ class Program
                 sampleEnd = (uint)level.Samples.Length;
             }
 
-            using BinaryWriter writer = new(File.Create(Path.Combine(exportDir, i + ".wav")));
+            using BinaryWriter writer = new(File.Create(Path.Combine(version.ToString(), i + ".wav")));
             for (uint j = sampleStart; j < sampleEnd; j++)
             {
                 writer.Write(level.Samples[j]);
@@ -84,7 +99,7 @@ class Program
     private static void Usage()
     {
         Console.WriteLine();
-        Console.WriteLine("Usage: SFXExport [*.SFX|*.PHD] [EXPORT_DIR]");
+        Console.WriteLine("Usage: SFXExport [*.SFX|*.PHD] [TR1|TR2|TR3] [REMASTER|CLASSIC]");
         Console.WriteLine();
 
         Console.WriteLine("Example");

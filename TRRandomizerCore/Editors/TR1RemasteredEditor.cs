@@ -36,6 +36,11 @@ public class TR1RemasteredEditor : TR1ClassicEditor
             target += numLevels;
         }
 
+        if (Settings.RandomizeAudio)
+        {
+            target += numLevels;
+        }
+
         // Environment randomizer always runs
         target += numLevels * 2;
 
@@ -114,6 +119,20 @@ public class TR1RemasteredEditor : TR1ClassicEditor
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Finalizing environment changes");
             environmentRandomizer.FinalizeEnvironment();
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeAudio)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
+            new TR1RAudioRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings
+            }.Randomize(Settings.AudioSeed);
         }
     }
 }
