@@ -840,7 +840,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             else if (type == TR1Type.AdamEgg || type == TR1Type.AtlanteanEgg)
             {
                 TR1Type eggType = TR1EnemyUtilities.CodeBitsToAtlantean(entity.CodeBits);
-                if (eggType == translatedType && Array.Find(level.Data.Models, m => m.ID == (uint)eggType) != null)
+                if (eggType == translatedType && level.Data.Models.Find(m => m.ID == (uint)eggType) != null)
                 {
                     count++;
                 }
@@ -871,7 +871,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
     private static void AmendToQLarson(TR1CombinedLevel level)
     {
-        TRModel larsonModel = Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.Larson);
+        TRModel larsonModel = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Larson);
         if (larsonModel != null)
         {
             // Convert the Larson model into the Great Pyramid scion to allow ending the level. Larson will
@@ -944,12 +944,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // If non-shooting grounded Atlanteans are present, we can just duplicate the model to make shooting Atlanteans
         if (enemies.Available.Any(TR1TypeUtilities.GetFamily(TR1Type.ShootingAtlantean_N).Contains))
         {
-            List<TRModel> models = level.Data.Models.ToList();
-            TRModel shooter = models.Find(m => m.ID == (uint)TR1Type.ShootingAtlantean_N);
-            TRModel nonShooter = models.Find(m => m.ID == (uint)TR1Type.NonShootingAtlantean_N);
+            TRModel shooter = level.Data.Models.Find(m => m.ID == (uint)TR1Type.ShootingAtlantean_N);
+            TRModel nonShooter = level.Data.Models.Find(m => m.ID == (uint)TR1Type.NonShootingAtlantean_N);
             if (shooter == null && nonShooter != null)
             {
-                models.Add(new TRModel
+                level.Data.Models.Add(new()
                 {
                     ID = (uint)TR1Type.ShootingAtlantean_N,
                     Animation = nonShooter.Animation,
@@ -958,9 +957,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     NumMeshes = nonShooter.NumMeshes,
                     StartingMesh = nonShooter.StartingMesh
                 });
-
-                level.Data.Models = models.ToArray();
-                level.Data.NumModels++;
 
                 enemies.Available.Add(TR1Type.ShootingAtlantean_N);
             }
@@ -1071,7 +1067,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 };
 
                 // Only include it if the model is present i.e. it's not an empty egg.
-                if (Array.Find(level.Data.Models, m => (TR1Type)m.ID == resultantEnemy.TypeID) != null)
+                if (level.Data.Models.Find(m => (TR1Type)m.ID == resultantEnemy.TypeID) != null)
                 {
                     levelEnemies.Add(resultantEnemy);
                 }
@@ -1329,7 +1325,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         TR1Entity adamEgg = level.Data.Entities.Find(e => e.TypeID == TR1Type.AdamEgg);
         if (adamEgg != null
             && TR1EnemyUtilities.CodeBitsToAtlantean(adamEgg.CodeBits) == TR1Type.Adam
-            && Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.Adam) != null)
+            && level.Data.Models.Find(m => m.ID == (uint)TR1Type.Adam) != null)
         {
             enemies.Add(adamEgg);
         }

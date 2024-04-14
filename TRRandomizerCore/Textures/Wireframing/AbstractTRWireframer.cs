@@ -727,7 +727,7 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract Dictionary<E, TRMesh[]> GetModelMeshes(L level);
     protected abstract int GetBlackPaletteIndex(L level);
     protected abstract int ImportColour(L level, Color c);
-    protected abstract TRModel[] GetModels(L level);
+    protected abstract List<TRModel> GetModels(L level);
     protected abstract TRMesh[] GetModelMeshes(L level, TRModel model);
     protected abstract TRMesh[] GetLevelMeshes(L level);
     protected abstract TRStaticMesh[] GetStaticMeshes(L level);

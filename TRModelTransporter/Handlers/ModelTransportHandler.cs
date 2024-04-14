@@ -28,13 +28,10 @@ public class ModelTransportHandler
 
     public static void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TR1Type, TR1Type> aliasPriority, IEnumerable<TR1Type> laraDependants)
     {
-        List<TRModel> levelModels = level.Models.ToList();
-        int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
+        int i = level.Models.FindIndex(m => m.ID == (short)definition.Entity);
         if (i == -1)
         {
-            levelModels.Add(definition.Model);
-            level.Models = levelModels.ToArray();
-            level.NumModels++;
+            level.Models.Add(definition.Model);
         }
         else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
         {
@@ -52,11 +49,11 @@ public class ModelTransportHandler
         {
             if (definition.Entity == TR1Type.Lara)
             {
-                ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+                ReplaceLaraDependants(level.Models, definition.Model, laraDependants.Select(e => (short)e));
             }
             else if (laraDependants.Contains((TR1Type)definition.Model.ID))
             {
-                ReplaceLaraDependants(levelModels, levelModels.Find(m => m.ID == (uint)TR1Type.Lara), new short[] { (short)definition.Model.ID });
+                ReplaceLaraDependants(level.Models, level.Models.Find(m => m.ID == (uint)TR1Type.Lara), new short[] { (short)definition.Model.ID });
             }
         }
     }

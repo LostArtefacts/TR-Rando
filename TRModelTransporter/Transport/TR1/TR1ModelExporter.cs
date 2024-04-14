@@ -98,7 +98,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
 
     public static void AmendPierreGunshot(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.Pierre);
+        TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Pierre);
         // Get his shooting animation
         TRAnimation anim = level.Animations[model.Animation + 10];
         anim.AnimCommand = (ushort)level.AnimCommands.Count;
@@ -112,7 +112,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
 
     public static void AmendPierreDeath(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.Pierre);
+        TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Pierre);
         // Get his death animation
         TRAnimation anim = level.Animations[model.Animation + 12];
         anim.NumAnimCommands++;
@@ -128,7 +128,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
 
     public static void AmendLarsonDeath(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.Larson);
+        TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Larson);
         // Get his death animation
         TRAnimation anim = level.Animations[model.Animation + 15];
         anim.NumAnimCommands++;
@@ -144,7 +144,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
 
     public static void AmendSkaterBoyDeath(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.SkateboardKid);
+        TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.SkateboardKid);
         // Get his death animation
         TRAnimation anim = level.Animations[model.Animation + 13];
         // Play the death sound on the 2nd frame (doesn't work on the 1st, which is OG).
@@ -153,7 +153,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
 
     public static void AmendNatlaDeath(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.Natla);
+        TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Natla);
         // Get her death animation
         TRAnimation anim = level.Animations[model.Animation + 13];
         anim.NumAnimCommands++;
@@ -178,7 +178,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
             SoundUtilities.ImportLevelSound(level, vilcabamba, new short[] { 162 });
         }
 
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.MovingBlock);
+        TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.MovingBlock);
         for (int i = 2; i < 4; i++)
         {
             TRAnimation anim = level.Animations[model.Animation + i];

@@ -141,12 +141,12 @@ public static class TRMeshUtilities
 
     public static TRMeshTreeNode[] GetModelMeshTrees(TR2Level level, TRModel model)
     {
-        return GetModelMeshTrees(level.MeshTrees.ToList(), model);
+        return GetModelMeshTrees(level.MeshTrees, model);
     }
 
     public static TRMeshTreeNode[] GetModelMeshTrees(TR3Level level, TRModel model)
     {
-        return GetModelMeshTrees(level.MeshTrees.ToList(), model);
+        return GetModelMeshTrees(level.MeshTrees, model);
     }
 
     public static TRMeshTreeNode[] GetModelMeshTrees(List<TRMeshTreeNode> meshTrees, TRModel model)

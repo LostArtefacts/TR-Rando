@@ -178,12 +178,11 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         }
 
         //Models
-        _level.NumModels = reader.ReadUInt32();
-        _level.Models = new TRModel[_level.NumModels];
-
-        for (int i = 0; i < _level.NumModels; i++)
+        uint numModels = reader.ReadUInt32();
+        _level.Models = new();
+        for (int i = 0; i < numModels; i++)
         {
-            _level.Models[i] = TR2FileReadUtilities.ReadModel(reader);
+            _level.Models.Add(TR2FileReadUtilities.ReadModel(reader));
         }
 
         //Static Meshes
@@ -364,7 +363,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write((uint)_level.Frames.Count);
         foreach (ushort frame in _level.Frames) { writer.Write(frame); }
 
-        writer.Write(_level.NumModels);
+        writer.Write((uint)_level.Models.Count);
         foreach (TRModel model in _level.Models) { writer.Write(model.Serialize()); }
         writer.Write(_level.NumStaticMeshes);
         foreach (TRStaticMesh mesh in _level.StaticMeshes) { writer.Write(mesh.Serialize()); }

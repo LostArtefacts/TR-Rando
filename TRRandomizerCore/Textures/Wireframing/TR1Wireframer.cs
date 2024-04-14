@@ -110,7 +110,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return TRMeshUtilities.GetModelMeshes(level, model);
     }
 
-    protected override TRModel[] GetModels(TR1Level level)
+    protected override List<TRModel> GetModels(TR1Level level)
     {
         return level.Models;
     }
