@@ -57,65 +57,12 @@ public class TR3Level : TRLevelBase
     /// </summary>
     public uint[] MeshPointers { get; set; }
 
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumAnimations { get; set; }
-
-    /// <summary>
-    /// NumAnimations * 32 bytes
-    /// </summary>
-    public TRAnimation[] Animations { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumStateChanges { get; set; }
-
-    /// <summary>
-    /// NumStateChanges * 6 bytes
-    /// </summary>
-    public TRStateChange[] StateChanges { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumAnimDispatches { get; set; }
-
-    /// <summary>
-    /// NumAnimDispatches * 8 bytes
-    /// </summary>
-    public TRAnimDispatch[] AnimDispatches { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumAnimCommands { get; set; }
-
-    /// <summary>
-    /// NumAnimCommands * 2 bytes
-    /// </summary>
-    public TRAnimCommand[] AnimCommands { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumMeshTrees { get; set; }
-
-    /// <summary>
-    /// NumMeshTrees * 4 bytes
-    /// </summary>
-    public TRMeshTreeNode[] MeshTrees { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumFrames { get; set; }
-
-    /// <summary>
-    /// NumFrames * 2 bytes
-    /// </summary>
-    public ushort[] Frames { get; set; }
+    public List<TRAnimation> Animations { get; set; }
+    public List<TRStateChange> StateChanges { get; set; }
+    public List<TRAnimDispatch> AnimDispatches { get; set; }
+    public List<TRAnimCommand> AnimCommands { get; set; }
+    public List<TRMeshTreeNode> MeshTrees { get; set; }
+    public List<ushort> Frames { get; set; }
 
     /// <summary>
     /// 4 bytes

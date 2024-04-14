@@ -174,16 +174,12 @@ public class AnimationTransportHandler
         bool firstAnimationConfigured = false;
         Dictionary<int, int> indexMap = new();
 
-        List<TRAnimDispatch> animDispatches = level.AnimDispatches.ToList();
-        List<TRStateChange> stateChanges = level.StateChanges.ToList();
-        List<TRAnimCommand> animCommands = level.AnimCommands.ToList();
-
         foreach (int oldAnimationIndex in animations.Keys)
         {
             TR3PackedAnimation packedAnimation = animations[oldAnimationIndex];
-            AnimationUtilities.UnpackStateChanges(animDispatches, stateChanges, packedAnimation);
+            AnimationUtilities.UnpackStateChanges(level.AnimDispatches, level.StateChanges, packedAnimation);
             AnimationUtilities.UnpackAnimSounds(level, packedAnimation);
-            AnimationUtilities.UnpackAnimCommands(animCommands, packedAnimation);
+            AnimationUtilities.UnpackAnimCommands(level.AnimCommands, packedAnimation);
 
             int newAnimationIndex = AnimationUtilities.UnpackAnimation(level, packedAnimation);
             indexMap[oldAnimationIndex] = newAnimationIndex;
@@ -194,15 +190,6 @@ public class AnimationTransportHandler
                 firstAnimationConfigured = true;
             }
         }
-
-        level.AnimDispatches = animDispatches.ToArray();
-        level.NumAnimDispatches = (uint)animDispatches.Count;
-
-        level.StateChanges = stateChanges.ToArray();
-        level.NumStateChanges = (uint)stateChanges.Count;
-
-        level.AnimCommands = animCommands.ToArray();
-        level.NumAnimCommands = (uint)animCommands.Count;
 
         foreach (TR3PackedAnimation packedAnimation in animations.Values)
         {

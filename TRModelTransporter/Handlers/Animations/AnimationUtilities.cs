@@ -19,7 +19,7 @@ public static class AnimationUtilities
 
     public static int GetModelAnimationCount(TR3Level level, TRModel model)
     {
-        return GetModelAnimationCount(level.Models, model, level.NumAnimations);
+        return GetModelAnimationCount(level.Models, model, (uint)level.Animations.Count);
     }
 
     public static int GetModelAnimationCount(TRModel[] models, TRModel model, uint totalAnimations)
@@ -491,12 +491,8 @@ public static class AnimationUtilities
 
     public static int UnpackAnimation(TR3Level level, TR3PackedAnimation animation)
     {
-        List<TRAnimation> levelAnimations = level.Animations.ToList();
-        levelAnimations.Add(animation.Animation);
-        level.Animations = levelAnimations.ToArray();
-        level.NumAnimations++;
-
-        return levelAnimations.Count - 1;
+        level.Animations.Add(animation.Animation);
+        return level.Animations.Count - 1;
     }
 
     public static void ImportAnimationFrames(TR1Level level, TR1ModelDefinition definition)
@@ -523,12 +519,8 @@ public static class AnimationUtilities
 
     public static void ImportAnimationFrames(TR3Level level, TR3ModelDefinition definition)
     {
-        List<ushort> levelFrames = level.Frames.ToList();
-        definition.Model.FrameOffset = (uint)levelFrames.Count * 2;
-
-        levelFrames.AddRange(definition.AnimationFrames);
-        level.Frames = levelFrames.ToArray();
-        level.NumFrames = (uint)levelFrames.Count;
+        definition.Model.FrameOffset = (uint)level.Frames.Count * 2;
+        level.Frames.AddRange(definition.AnimationFrames);
 
         foreach (TR3PackedAnimation packedAnimation in definition.Animations.Values)
         {
