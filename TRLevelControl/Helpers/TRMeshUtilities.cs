@@ -418,12 +418,8 @@ public static class TRMeshUtilities
 
     public static int InsertMeshTreeNode(TR2Level level, TRMeshTreeNode newNode)
     {
-        List<TRMeshTreeNode> nodes = level.MeshTrees.ToList();
-        nodes.Add(newNode);
-        level.MeshTrees = nodes.ToArray();
-        level.NumMeshTrees++;
-
-        return level.MeshTrees.Length - 1;
+        level.MeshTrees.Add(newNode);
+        return level.MeshTrees.Count - 1;
     }
 
     public static int InsertMeshTreeNode(TR3Level level, TRMeshTreeNode newNode)
