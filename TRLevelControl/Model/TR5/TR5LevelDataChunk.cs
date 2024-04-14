@@ -34,10 +34,7 @@ public class TR5LevelDataChunk
     public List<TRAnimCommand> AnimCommands { get; set; }
     public List<TRMeshTreeNode> MeshTrees { get; set; }
     public List<ushort> Frames { get; set; }
-
-    public uint NumModels { get; set; }
-
-    public TR5Model[] Models { get; set; }
+    public List<TR5Model> Models { get; set; }
 
     public uint NumStaticMeshes { get; set; }
 
@@ -178,8 +175,7 @@ public class TR5LevelDataChunk
                 writer.Write(frame);
             }
 
-            writer.Write(NumModels);
-
+            writer.Write((uint)Models.Count);
             foreach (TR5Model model in Models)
             {
                 writer.Write(model.Serialize());

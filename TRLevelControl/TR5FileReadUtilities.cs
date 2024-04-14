@@ -291,12 +291,11 @@ internal static class TR5FileReadUtilities
         }
 
         //Models
-        lvl.LevelDataChunk.NumModels = reader.ReadUInt32();
-        lvl.LevelDataChunk.Models = new TR5Model[lvl.LevelDataChunk.NumModels];
-
-        for (int i = 0; i < lvl.LevelDataChunk.NumModels; i++)
+        uint numModels = reader.ReadUInt32();
+        lvl.LevelDataChunk.Models = new();
+        for (int i = 0; i < numModels; i++)
         {
-            lvl.LevelDataChunk.Models[i] = ReadTR5Model(reader);
+            lvl.LevelDataChunk.Models.Add(ReadTR5Model(reader));
         }
     }
 

@@ -35,10 +35,7 @@ public class TR4LevelDataChunk : ISerializableCompact
     public List<TRAnimCommand> AnimCommands { get; set; }
     public List<TRMeshTreeNode> MeshTrees { get; set; }
     public List<ushort> Frames { get; set; }
-
-    public uint NumModels { get; set; }
-
-    public TRModel[] Models { get; set; }
+    public List<TRModel> Models { get; set; }
 
     public uint NumStaticMeshes { get; set; }
 
@@ -179,8 +176,7 @@ public class TR4LevelDataChunk : ISerializableCompact
                 writer.Write(frame);
             }
 
-            writer.Write(NumModels);
-
+            writer.Write((uint)Models.Count);
             foreach (TRModel model in Models)
             {
                 writer.Write(model.Serialize());

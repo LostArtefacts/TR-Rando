@@ -174,12 +174,11 @@ internal static class TR4FileReadUtilities
         }
 
         //Models
-        lvl.LevelDataChunk.NumModels = reader.ReadUInt32();
-        lvl.LevelDataChunk.Models = new TRModel[lvl.LevelDataChunk.NumModels];
-
-        for (int i = 0; i < lvl.LevelDataChunk.NumModels; i++)
+        uint numModels = reader.ReadUInt32();
+        lvl.LevelDataChunk.Models = new();
+        for (int i = 0; i < numModels; i++)
         {
-            lvl.LevelDataChunk.Models[i] = TR2FileReadUtilities.ReadModel(reader);
+            lvl.LevelDataChunk.Models.Add(TR2FileReadUtilities.ReadModel(reader));
         }
     }
 
