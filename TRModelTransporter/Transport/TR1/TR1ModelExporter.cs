@@ -101,17 +101,13 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.Pierre);
         // Get his shooting animation
         TRAnimation anim = level.Animations[model.Animation + 10];
-        List<TRAnimCommand> cmds = level.AnimCommands.ToList();
-        anim.AnimCommand = (ushort)cmds.Count;
+        anim.AnimCommand = (ushort)level.AnimCommands.Count;
         anim.NumAnimCommands = 1;
 
         // On the 2nd frame, play SFX 44 (magnums)
-        cmds.Add(new TRAnimCommand { Value = 5 });
-        cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart + 1) });
-        cmds.Add(new TRAnimCommand { Value = 44 });
-
-        level.AnimCommands = cmds.ToArray();
-        level.NumAnimCommands = (uint)cmds.Count;
+        level.AnimCommands.Add(new() { Value = 5 });
+        level.AnimCommands.Add(new() { Value = (short)(anim.FrameStart + 1) });
+        level.AnimCommands.Add(new() { Value = 44 });
     }
 
     public static void AmendPierreDeath(TR1Level level)
@@ -121,17 +117,13 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRAnimation anim = level.Animations[model.Animation + 12];
         anim.NumAnimCommands++;
 
-        List<TRAnimCommand> cmds = level.AnimCommands.ToList();
-        anim.AnimCommand = (ushort)cmds.Count;
-        cmds.Add(new TRAnimCommand { Value = 4 }); // Death
+        anim.AnimCommand = (ushort)level.AnimCommands.Count;
+        level.AnimCommands.Add(new() { Value = 4 }); // Death
 
         // On the 61st frame, play SFX 159 (death)
-        cmds.Add(new TRAnimCommand { Value = 5 });
-        cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart + 60) });
-        cmds.Add(new TRAnimCommand { Value = 159 });
-
-        level.AnimCommands = cmds.ToArray();
-        level.NumAnimCommands = (uint)cmds.Count;
+        level.AnimCommands.Add(new() { Value = 5 });
+        level.AnimCommands.Add(new() { Value = (short)(anim.FrameStart + 60) });
+        level.AnimCommands.Add(new() { Value = 159 });
     }
 
     public static void AmendLarsonDeath(TR1Level level)
@@ -141,17 +133,13 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRAnimation anim = level.Animations[model.Animation + 15];
         anim.NumAnimCommands++;
 
-        List<TRAnimCommand> cmds = level.AnimCommands.ToList();
-        anim.AnimCommand = (ushort)cmds.Count;
-        cmds.Add(new TRAnimCommand { Value = 4 }); // Death
+        anim.AnimCommand = (ushort)level.AnimCommands.Count;
+        level.AnimCommands.Add(new() { Value = 4 }); // Death
 
         // On the 2nd frame, play SFX 158 (death)
-        cmds.Add(new TRAnimCommand { Value = 5 });
-        cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart + 1) });
-        cmds.Add(new TRAnimCommand { Value = 158 });
-
-        level.AnimCommands = cmds.ToArray();
-        level.NumAnimCommands = (uint)cmds.Count;
+        level.AnimCommands.Add(new() { Value = 5 });
+        level.AnimCommands.Add(new() { Value = (short)(anim.FrameStart + 1) });
+        level.AnimCommands.Add(new() { Value = 158 });
     }
 
     public static void AmendSkaterBoyDeath(TR1Level level)
@@ -170,17 +158,13 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRAnimation anim = level.Animations[model.Animation + 13];
         anim.NumAnimCommands++;
 
-        List<TRAnimCommand> cmds = level.AnimCommands.ToList();
-        anim.AnimCommand = (ushort)cmds.Count;
-        cmds.Add(new TRAnimCommand { Value = 4 }); // Death
+        anim.AnimCommand = (ushort)level.AnimCommands.Count;
+        level.AnimCommands.Add(new() { Value = 4 }); // Death
 
         // On the 5th frame, play SFX 160 (death)
-        cmds.Add(new TRAnimCommand { Value = 5 });
-        cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart + 4) });
-        cmds.Add(new TRAnimCommand { Value = 160 });
-
-        level.AnimCommands = cmds.ToArray();
-        level.NumAnimCommands = (uint)cmds.Count;
+        level.AnimCommands.Add(new() { Value = 5 });
+        level.AnimCommands.Add(new() { Value = (short)(anim.FrameStart + 4) });
+        level.AnimCommands.Add(new() { Value = 160 });
     }
 
     public static void AddMovingBlockSFX(TR1Level level)
@@ -195,22 +179,18 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         }
 
         TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.MovingBlock);
-        List<TRAnimCommand> cmds = level.AnimCommands.ToList();
         for (int i = 2; i < 4; i++)
         {
             TRAnimation anim = level.Animations[model.Animation + i];
             anim.NumAnimCommands++;
 
-            anim.AnimCommand = (ushort)cmds.Count;
-            cmds.Add(new TRAnimCommand { Value = 4 }); // KillItem
+            anim.AnimCommand = (ushort)level.AnimCommands.Count;
+            level.AnimCommands.Add(new() { Value = 4 }); // KillItem
 
             // On the 1st frame, play SFX 162
-            cmds.Add(new TRAnimCommand { Value = 5 });
-            cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart) });
-            cmds.Add(new TRAnimCommand { Value = 162 });
-        }            
-
-        level.AnimCommands = cmds.ToArray();
-        level.NumAnimCommands = (uint)cmds.Count;
+            level.AnimCommands.Add(new() { Value = 5 });
+            level.AnimCommands.Add(new() { Value = (short)anim.FrameStart });
+            level.AnimCommands.Add(new() { Value = 162 });
+        }
     }
 }

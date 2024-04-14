@@ -9,7 +9,7 @@ public static class AnimationUtilities
 {
     public static int GetModelAnimationCount(TR1Level level, TRModel model)
     {
-        return GetModelAnimationCount(level.Models, model, level.NumAnimations);
+        return GetModelAnimationCount(level.Models, model, (uint)level.Animations.Count);
     }
 
     public static int GetModelAnimationCount(TR2Level level, TRModel model)
@@ -108,15 +108,15 @@ public static class AnimationUtilities
 
     public static void PackAnimCommands(TR2Level level, TRAnimation animation, TR2PackedAnimation packedAnimation)
     {
-        packedAnimation.Commands = PackAnimCommands(level.AnimCommands, animation);
+        packedAnimation.Commands = PackAnimCommands(level.AnimCommands.ToList(), animation);
     }
 
     public static void PackAnimCommands(TR3Level level, TRAnimation animation, TR3PackedAnimation packedAnimation)
     {
-        packedAnimation.Commands = PackAnimCommands(level.AnimCommands, animation);
+        packedAnimation.Commands = PackAnimCommands(level.AnimCommands.ToList(), animation);
     }
 
-    private static Dictionary<int, TR1PackedAnimationCommand> PackAnimCommands(TRAnimCommand[] animCommands, TRAnimation animation)
+    private static Dictionary<int, TR1PackedAnimationCommand> PackAnimCommands(List<TRAnimCommand> animCommands, TRAnimation animation)
     {
         Dictionary<int, TR1PackedAnimationCommand> cmds = new();
 
@@ -266,21 +266,21 @@ public static class AnimationUtilities
 
     public static ushort[] GetAnimationFrames(TR2Level level, TRModel model)
     {
-        return GetAnimationFrames(model, level.Models, level.Frames);
+        return GetAnimationFrames(model, level.Models, level.Frames.ToList());
     }
 
     public static ushort[] GetAnimationFrames(TR3Level level, TRModel model)
     {
-        return GetAnimationFrames(model, level.Models, level.Frames);
+        return GetAnimationFrames(model, level.Models, level.Frames.ToList());
     }
 
-    public static ushort[] GetAnimationFrames(TRModel model, TRModel[] allModels, ushort[] allFrames)
+    public static ushort[] GetAnimationFrames(TRModel model, TRModel[] allModels, List<ushort> allFrames)
     {
         int modelIndex = allModels.ToList().IndexOf(model);
         uint endFrame = 0;
         if (modelIndex == allModels.Length - 1)
         {
-            endFrame = (uint)allFrames.Length;
+            endFrame = (uint)allFrames.Count;
         }
         else
         {
@@ -291,7 +291,7 @@ public static class AnimationUtilities
         }
 
         List<ushort> frames = new();
-        for (uint i = model.FrameOffset / 2; i < endFrame; i++)
+        for (int i = (int)model.FrameOffset / 2; i < endFrame; i++)
         {
             frames.Add(allFrames[i]);
         }
@@ -479,12 +479,8 @@ public static class AnimationUtilities
 
     public static int UnpackAnimation(TR1Level level, TR1PackedAnimation animation)
     {
-        List<TRAnimation> levelAnimations = level.Animations.ToList();
-        levelAnimations.Add(animation.Animation);
-        level.Animations = levelAnimations.ToArray();
-        level.NumAnimations++;
-
-        return levelAnimations.Count - 1;
+        level.Animations.Add(animation.Animation);
+        return level.Animations.Count - 1;
     }
 
     public static int UnpackAnimation(TR2Level level, TR2PackedAnimation animation)
@@ -509,12 +505,8 @@ public static class AnimationUtilities
 
     public static void ImportAnimationFrames(TR1Level level, TR1ModelDefinition definition)
     {
-        List<ushort> levelFrames = level.Frames.ToList();
-        definition.Model.FrameOffset = (uint)levelFrames.Count * 2;
-
-        levelFrames.AddRange(definition.AnimationFrames);
-        level.Frames = levelFrames.ToArray();
-        level.NumFrames = (uint)levelFrames.Count;
+        definition.Model.FrameOffset = (uint)level.Frames.Count * 2;
+        level.Frames.AddRange(definition.AnimationFrames);
 
         foreach (TR1PackedAnimation packedAnimation in definition.Animations.Values)
         {

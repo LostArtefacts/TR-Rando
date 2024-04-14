@@ -141,22 +141,22 @@ public static class TRMeshUtilities
 
     public static TRMeshTreeNode[] GetModelMeshTrees(TR2Level level, TRModel model)
     {
-        return GetModelMeshTrees(level.MeshTrees, model);
+        return GetModelMeshTrees(level.MeshTrees.ToList(), model);
     }
 
     public static TRMeshTreeNode[] GetModelMeshTrees(TR3Level level, TRModel model)
     {
-        return GetModelMeshTrees(level.MeshTrees, model);
+        return GetModelMeshTrees(level.MeshTrees.ToList(), model);
     }
 
-    public static TRMeshTreeNode[] GetModelMeshTrees(TRMeshTreeNode[] meshTrees, TRModel model)
+    public static TRMeshTreeNode[] GetModelMeshTrees(List<TRMeshTreeNode> meshTrees, TRModel model)
     {
         List<TRMeshTreeNode> nodes = new();
         int index = (int)model.MeshTree / 4;
         for (int i = 0; i < model.NumMeshes; i++)
         {
             int offset = index + i;
-            if (offset < meshTrees.Length)
+            if (offset < meshTrees.Count)
             {
                 nodes.Add(meshTrees[offset]);
             }
@@ -412,12 +412,8 @@ public static class TRMeshUtilities
     /// </summary>
     public static int InsertMeshTreeNode(TR1Level level, TRMeshTreeNode newNode)
     {
-        List<TRMeshTreeNode> nodes = level.MeshTrees.ToList();
-        nodes.Add(newNode);
-        level.MeshTrees = nodes.ToArray();
-        level.NumMeshTrees++;
-
-        return level.MeshTrees.Length - 1;
+        level.MeshTrees.Add(newNode);
+        return level.MeshTrees.Count - 1;
     }
 
     public static int InsertMeshTreeNode(TR2Level level, TRMeshTreeNode newNode)
