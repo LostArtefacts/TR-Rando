@@ -1653,6 +1653,11 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public string RandomizeSecretsText
+    {
+        get => _randomSecretsControl.Description;
+    }
+
     public int SecretSeed
     {
         get => _randomSecretsControl.Seed;
@@ -3277,7 +3282,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _includeBlankTracks.IsAvailable = IsAmbientTracksTypeSupported;
         _separateSecretTracks.IsAvailable = IsSecretAudioSupported;
 
-        _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
+        _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = _changeDoorSFX.IsAvailable = IsSFXTypeSupported;
 
         _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
         _useRandomSecretModels.IsAvailable = IsSecretModelsTypeSupported;
@@ -3290,6 +3295,8 @@ public class ControllerOptions : INotifyPropertyChanged
         _includeKeyItems.IsAvailable = IsKeyItemTypeSupported;
         _maintainKeyContinuity.IsAvailable = IsKeyContinuityTypeSupported;
         _includeExtraPickups.IsAvailable = IsExtraPickupsTypeSupported;
+        _allowEnemyKeyDrops.IsAvailable = IsItemDropsTypeSupported;
+        _allowReturnPathLocations.IsAvailable = IsReturnPathsTypeSupported;
 
         _allowGlitched.IsAvailable = IsGlitchedSecretsSupported;
         _isHardSecrets.IsAvailable = IsHardSecretsSupported;
@@ -3502,7 +3509,7 @@ public class ControllerOptions : INotifyPropertyChanged
         RandomizeKeyItemSprites = _controller.RandomizeKeyItemSprites;
         RandomizeSecretSprites = _controller.RandomizeSecretSprites;
 
-        if (IsTR1)
+        if (IsTR1Main)
         {
             EnableGameModes = _controller.EnableGameModes;
             EnableSaveCrystals = _controller.EnableSaveCrystals;
@@ -3801,7 +3808,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.RandomizeKeyItemSprites = RandomizeKeyItemSprites;
         _controller.RandomizeSecretSprites = RandomizeSecretSprites;
 
-        if (IsTR1)
+        if (IsTR1Main)
         {
             _controller.EnableGameModes = EnableGameModes;
             _controller.EnableSaveCrystals = EnableSaveCrystals;
@@ -3891,9 +3898,11 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsTR1 => _controller != null && _controller.IsTR1;
     public bool IsTR2 => _controller != null && _controller.IsTR2;
     public bool IsTR3 => _controller != null && _controller.IsTR3;
+    public bool IsTR1Main => IsTR1 && _controller.IsCommunityPatch;
     public bool IsTR3Main => IsTR3 && _controller.IsCommunityPatch;
     public bool IsGameModeTypeSupported => IsRandomizationSupported(TRRandomizerType.GameMode);
     public bool IsLevelSequenceTypeSupported => IsRandomizationSupported(TRRandomizerType.LevelSequence);
+    public bool IsLevelCountTypeSupported => IsRandomizationSupported(TRRandomizerType.LevelCount);
     public bool IsGlobeDisplayTypeSupported => IsRandomizationSupported(TRRandomizerType.GlobeDisplay);
     public bool IsUnarmedTypeSupported => IsRandomizationSupported(TRRandomizerType.Unarmed);
     public bool IsAmmolessTypeSupported => IsRandomizationSupported(TRRandomizerType.Ammoless);
@@ -3910,6 +3919,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsSecretPackTypeSupported => AvailableSecretPacks?.Length > 0;
     public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
     public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
+    public bool IsItemDropsTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemDrops);
     public bool IsKeyItemTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItems);
     public bool IsKeyContinuityTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyContinuity);
     public bool IsExtraPickupsTypeSupported => IsRandomizationSupported(TRRandomizerType.ExtraPickups);
@@ -3919,7 +3929,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsAudioTypeSupported => IsRandomizationSupported(TRRandomizerType.Audio);
     public bool IsAmbientTracksTypeSupported => IsRandomizationSupported(TRRandomizerType.AmbientTracks);
     public bool IsSecretAudioSupported => IsRandomizationSupported(TRRandomizerType.SecretAudio);
-    public bool IsSFXSupported => IsRandomizationSupported(TRRandomizerType.SFX);
+    public bool IsSFXTypeSupported => IsRandomizationSupported(TRRandomizerType.SFX);
     public bool IsVFXTypeSupported => IsRandomizationSupported(TRRandomizerType.VFX);
     public bool IsOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.Outfit);
     public bool IsGymOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.GymOutfit);
@@ -3946,6 +3956,8 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsClonedEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.ClonedEnemies);
     public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
     public bool IsItemSpriteTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemSprite);
+    public bool IsReturnPathsTypeSupported => IsRandomizationSupported(TRRandomizerType.ReturnPaths);
+    public bool IsGeneralBugFixesTypeSupported => IsRandomizationSupported(TRRandomizerType.GeneralBugFixes);
 
     private bool IsRandomizationSupported(TRRandomizerType randomizerType)
     {
@@ -3964,8 +3976,23 @@ public class ControllerOptions : INotifyPropertyChanged
         FirePropertyChanged(nameof(IsTR2));
         FirePropertyChanged(nameof(IsTR3));
 
+        FirePropertyChanged(nameof(IsTR1Main));
         FirePropertyChanged(nameof(IsTR3Main));
 
+        if (IsTR2)
+        {
+            _randomSecretsControl.Description = "Randomize secret locations. You should expect to find Stone, then Jade, then Gold.";
+        }
+        else if (IsTR1Main || IsTR3Main)
+        {
+            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and reward rooms created for collecting all secrets.";
+        }
+        else
+        {
+            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and rewards will appear when all secrets are collected.";
+        }
+
+        FirePropertyChanged(nameof(RandomizeSecretsText));
         AdjustAvailableOptions();
     }
 

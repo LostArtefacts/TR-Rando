@@ -1390,7 +1390,7 @@
 
             <!-- SFX -->
             <StackPanel Grid.Row="17"
-                        Visibility="{Binding HasAudioOptions, Converter={StaticResource BoolToCollapsedConverter}}">
+                        Visibility="{Binding HasSFXOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Uncontrolled SFX"/>

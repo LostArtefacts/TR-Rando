@@ -11,19 +11,19 @@ using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Editors;
 
-public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
+public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
 {
     private static readonly Point _regularBadgePos = new(706, 537);
     private static readonly Point _goldBadgePos = new(498, 445);
 
     public RandomizerSettings Settings { get; private set; }
 
-    public TR1RandoEditor(TRDirectoryIOArgs args, TREdition edition)
+    public TR1ClassicEditor(TRDirectoryIOArgs args, TREdition edition)
         : base(args, edition) { }
 
     protected override void ApplyConfig(Config config)
     {
-        Settings = new RandomizerSettings()
+        Settings = new()
         {
             ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText(@"Resources\TR1\Restrictions\excludable_enemies.json"))
         };

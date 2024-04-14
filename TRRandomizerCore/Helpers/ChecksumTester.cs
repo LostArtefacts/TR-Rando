@@ -48,6 +48,44 @@ public class ChecksumTester : IChecksumTester
         "7f7c535bcab001698a1f965053972f49", // END.PHD
         "f03f7a545330d5ba30e2aec62d47b4a3", // END2.PHD
 
+        // TR1R V1.0+
+        "16e1ec56fe8f00c97fb618e16f58ceed", // GYM.PHD
+        "b58c2461c5b01c378317f2f8a1a1fc55", // LEVEL1.PHD
+        "24ae96520c0f041d166f1ce3be09db84", // LEVEL2.PHD
+        "83b2e26a60a5fb30b19153c1ee945d5f", // LEVEL3A.PHD
+        "41949bf9de7ad208379491d20781c074", // LEVEL3B.PHD
+        "e7a2fed3f3b40c3367def9d6dfdd98e9", // LEVEL4.PHD
+        "115519647c6aa7e7c6da38dd00c55f26", // LEVEL5.PHD
+        "bd78c050343d8ff69de6fc8805e8dd18", // LEVEL6.PHD
+        "a02bcb8de92fa9dc9e410d5f8795537f", // LEVEL7A.PHD
+        "e9cee17932c3b6bb02e5a9beea1742b2", // LEVEL7B.PHD
+        "51a8aaa4a5f510fb6f4eeeea1985a4d9", // LEVEL8A.PHD
+        "58f050471880ba5d0c9677aaadf1ac4a", // LEVEL8B.PHD
+        "0cc53fac2255b1be1dbc032b0d5cdc01", // LEVEL8C.PHD
+        "cd134e858da2137b7c9601b8e9c3d273", // LEVEL10A.PHD
+        "ec8b196335968127c515739d7af3f55e", // LEVEL10B.PHD
+        "11a4d4674ba47dbe2da19c64eb7e5970", // CUT4.PHD
+        "c750c2fe90ab7d51dcfa2a9f35cbfe55", // LEVEL10C.PHD
+        "94ae1b3e5438457db2c110be20e5a93c", // EGYPT.PHD
+        "43072a2205d4af2d2fdba63e4ebf5c11", // CAT.PHD
+        "cba8ce583dbab726ffa2f0a3798a1572", // END.PHD
+        "2292ba13707de8524c51b1ffa9a95446", // END2.PHD
+
+        // TR1R V1.1+
+        "ed82f9c85457e4ec85b47f66090d1a11", // LEVEL1.PHD
+        "8124261717c6cd71ddc9eb95d76ef5e0", // LEVEL3B.PHD
+        "4f4304771122d0679826dfbf586f9d91", // LEVEL4.PHD
+        "f4144cba464d7eb8ecd4d37c57174ea8", // LEVEL5.PHD
+        "e06a9a1123b6cb1b1c57893bc1f1b0d1", // LEVEL8B.PHD
+        "9e5e30e25087490f0e9654e23951ccc6", // LEVEL8C.PHD
+        "126658bcdc6a6a32e8809d0b29c6a993", // LEVEL10A.PHD
+        "3d7fa5acc7d78c7f809ef08077a99fea", // LEVEL10B.PHD
+        "e3ad7ded14954ece42abf0d41f7ab55f", // LEVEL10C.PHD
+
+        // TR1R V1.2+
+        "8376349b1989024228f7135f9c7187a6", // LEVEL3A.PHD
+        "0878ce6127a93335b6a96f4dfbe61fb9", // LEVEL8C.PHD
+
         // TR2
         "d6f218e32d172e67db60daa35ef7e114", // ASSAULT.TR2
         "da1e01683dad5fabbfff89c267b75b9e", // WALL.TR2
@@ -78,6 +116,35 @@ public class ChecksumTester : IChecksumTester
         "ca4294e3bd8835ebf06e114b479a22c2", // LEVEL3.TR2
         "63ff8be5c7abf37d7065456afeda029f", // LEVEL4.TR2
         "88c8124b6d152b9f3fe1c4eeec4428a5", // LEVEL5.TR2
+
+        // TR2R V1.0+
+        "eaa29bf1528f38230d7333689d047272", // WALL.TR2
+        "3aaf0aee44fbd2f52b3e17cb44b98e3b", // BOAT.TR2
+        "cab8e60a93bf0d57e6596770060cc174", // VENICE.TR2
+        "e2c74ab8e0fb81c45e85d1644392812a", // OPERA.TR2
+        "7eee55f021b37a71068f4df9e628268d", // RIG.TR2
+        "4edcca946398df186af62a50a5a0efcc", // PLATFORM.TR2
+        "54b750469b48153af58af6922b4c1dff", // UNWATER.TR2
+        "90b734cbe488b2a926a8d02d7c7b24f8", // KEEL.TR2
+        "3bb6c263b3758e781e0823cd0e4e5366", // LIVING.TR2
+        "5f3b660dac21f1ff182eef75343913f4", // DECK.TR2
+        "f60792466773c2fdd476ae11f9ad22e7", // SKIDOO.TR2
+        "742ae5026fd241558c473ff89e6b868e", // MONASTRY.TR2
+        "629eefb9558a215e452c87c35bfcc95a", // CATACOMB.TR2
+        "e26bf56e74719cd4f7a11c2d1135143a", // ICECAVE.TR2
+        "3d3413eb305b54e0fc67d028accf413b", // EMPRTOMB.TR2
+        "4756d792860b1a8bb86effa7bdd0ce80", // FLOATING.TR2
+        "25c5f07faecbe656e1c2190378d01e34", // XIAN.TR2
+        "07f7fde736c6a3a9c46f877bf275e1aa", // HOUSE.TR2
+        "ecf84476a8ca3eb1330d0078203d36e3", // LEVEL1.TR2
+        "338df62a6a7bd6eb4b7d2f303eeec429", // LEVEL2.TR2
+        "f0cb2aafd4ddbb6cd09b1d21d9eda8c6", // LEVEL3.TR2
+        "a43bacce79dd110f55fdf635b95523bf", // LEVEL4.TR2
+        "e05c5ec3c10e3043a42791a1b649ddc7", // LEVEL5.TR2
+
+        // TR2R V1.1+
+        "79e3f05f963acac6f864ba81555cc15d", // MONASTRY.TR2
+        "cf4f784bdfa0b5794b3437e4d9ed04d8", // ICECAVE.TR2
 
         // TR3
         "5e11d251ddb12b98ebead1883dc12d2a", // HOUSE.TR2
@@ -126,5 +193,39 @@ public class ChecksumTester : IChecksumTester
         "a83c32d6306e18e0a15d79138ac131cb", // UNDERSEA.TR2
         "7cfb31fbd9031900c602eea32d1543ec", // ZOO.TR2
         "17286cb4cd4f079cf208fdaf38e53d2b", // SLINC.TR2
+
+        // TR3R V1.0+
+        "7894cb25312114d969b79d7a7fb17f67", // HOUSE.TR2
+        "d9d5f08872ee43f6c27cf3b22cb9ae6d", // JUNGLE.TR2
+        "21577b6e5828f1535ece0ca45b63ad5a", // CUT6.TR2
+        "b7af59e80ae03e05202754764a8fb132", // TEMPLE.TR2
+        "e4d88cb486c8054f7db6076ab9748792", // QUADCHAS.TR2
+        "a0f0372b444a01676d99c7a0f49ad24e", // TONYBOSS.TR2
+        "8080e2eb148541bc44a74317fbb93ad2", // SHORE.TR2
+        "005183d2dd54f5fbb4ccf3293d643964", // CRASH.TR2
+        "0cebb72fee215b40b722f0e96106a3a9", // RAPIDS.TR2
+        "5c18e057ea40e4c1ceecebc5a9d9cd65", // TRIBOSS.TR2
+        "633b0245e14c5b7faab90d1f549ac488", // ROOFS.TR2
+        "864a61e73a371dfe0c593f8a233930ec", // SEWER.TR2
+        "57a207f21c00362ce60f0ad3f5455a07", // TOWER.TR2
+        "69a07074215c08a547a0055b774bacec", // OFFICE.TR2
+        "1c4249c0fff242da45728f5177122c10", // STPAUL.TR2
+        "62893b73166013b21e2fb3d9c8d9d606", // NEVADA.TR2
+        "150b8eae81456cc7b928a40c1c9992ce", // COMPOUND.TR2
+        "5e4d62be8333842ef61ac6720b8b77c3", // AREA51.TR2
+        "42fd4ca5aa5c02bc4478bbd583689c1a", // ANTARC.TR2
+        "d107f57cecfc03b53d00a46a0111dce5", // MINES.TR2
+        "436620ba935ffc3cd798cf598ee46ae4", // CITY.TR2
+        "ee94ce8722881ab7a1c66cda17bef933", // CHAMBER.TR2
+        "1c4249c0fff242da45728f5177122c10", // STPAUL.TR2
+        "6efcc71cace4527a0b79128111910eb7", // SCOTLAND.TR2
+        "8dc5ff814b23b0654a0b261e501d0320", // WILLSDEN.TR2
+        "b99c1af5f462344c267a2141b238fcb4", // CHUNNEL.TR2
+        "5d002059f337f165066474a902796d0b", // UNDERSEA.TR2
+        "ef8d013cf1fb6495943d9dd74ee09588", // ZOO.TR2
+        "ac3b508ae772b3fbd4b16b83b829dfc6", // SLINC.TR2
+
+        // TR3R V1.1+
+        "9a1f7162eb7e2b3a57a17e92e0edfbb6", // ANTARC.TR2
     };
 }

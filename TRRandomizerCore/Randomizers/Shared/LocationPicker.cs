@@ -9,8 +9,6 @@ namespace TRRandomizerCore.Randomizers;
 
 public class LocationPicker : IRouteManager
 {
-    private static readonly int _rotation = -8192;
-
     private readonly Dictionary<string, List<Location>> _routes;
 
     private List<Location> _locations, _usedTriggerLocations, _currentRoute;
@@ -333,7 +331,7 @@ public class LocationPicker : IRouteManager
         // around randomly for variety.
         if (entity.Angle == -1)
         {
-            entity.Angle = (short)(_generator.Next(0, 8) * _rotation);
+            entity.Angle = (short)(_generator.Next(0, 8) * -TRConsts.Angle45);
         }
     }
 

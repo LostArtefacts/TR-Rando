@@ -94,6 +94,11 @@ public partial class AdvancedWindow : Window
         nameof(HasAudioOptions), typeof(bool), typeof(AdvancedWindow)
     );
 
+    public static readonly DependencyProperty HasSFXOptionsProperty = DependencyProperty.Register
+    (
+        nameof(HasSFXOptions), typeof(bool), typeof(AdvancedWindow)
+    );
+
     public static readonly DependencyProperty HasBirdMonsterBehaviourProperty = DependencyProperty.Register
     (
         nameof(HasBirdMonsterBehaviour), typeof(bool), typeof(AdvancedWindow)
@@ -228,6 +233,12 @@ public partial class AdvancedWindow : Window
     {
         get => (bool)GetValue(HasAudioOptionsProperty);
         set => SetValue(HasAudioOptionsProperty, value);
+    }
+
+    public bool HasSFXOptions
+    {
+        get => (bool)GetValue(HasSFXOptionsProperty);
+        set => SetValue(HasSFXOptionsProperty, value);
     }
 
     public bool HasBirdMonsterBehaviour

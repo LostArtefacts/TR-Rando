@@ -22,4 +22,6 @@ public static class TRConsts
 
     public const int MaskBits = 5;
     public const int FullMask = (1 << MaskBits) - 1;
+
+    public const int Angle45 = 8192;
 }

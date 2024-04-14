@@ -8,7 +8,7 @@ using TRRandomizerCore.Levels;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class TR3StartPositionRandomizer : BaseTR3Randomizer
+public class TR3RStartPositionRandomizer : BaseTR3RRandomizer
 {
     private Dictionary<string, List<Location>> _startLocations;
 
@@ -17,7 +17,7 @@ public class TR3StartPositionRandomizer : BaseTR3Randomizer
         _generator = new(seed);
         _startLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\start_positions.json"));
 
-        foreach (TR3ScriptedLevel lvl in Levels)
+        foreach (TRRScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
             RandomizeStartPosition(_levelInstance);
@@ -30,12 +30,10 @@ public class TR3StartPositionRandomizer : BaseTR3Randomizer
         }
     }
 
-    private void RandomizeStartPosition(TR3CombinedLevel level)
+    private void RandomizeStartPosition(TR3RCombinedLevel level)
     {
         TR3Entity lara = level.Data.Entities.Find(e => e.TypeID == TR3Type.Lara);
 
-        // If we haven't defined anything for a level, Lara will just be rotated. This is most likely where there are
-        // triggers just after Lara's starting spot, so we just skip them here.
         if (!Settings.RotateStartPositionOnly && _startLocations.ContainsKey(level.Name))
         {
             List<Location> locations = _startLocations[level.Name];
@@ -46,7 +44,6 @@ public class TR3StartPositionRandomizer : BaseTR3Randomizer
             }
             while (!location.Validated);
 
-            // If there are any triggers below Lara, move them
             new EMMoveTriggerFunction
             {
                 BaseLocation = new()

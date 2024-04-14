@@ -80,11 +80,13 @@
 
             <CheckBox
                 Grid.Row="2"
+                Visibility="{Binding IsReturnPathsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                 IsChecked="{Binding AddReturnPaths, Mode=TwoWay}"
                 Content="Add return paths"/>
             <TextBlock
                 Grid.Row="2"
-                Grid.Column="1">
+                Grid.Column="1"
+                Visibility="{Binding IsReturnPathsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}">
                 Add paths to allow returning to the start of the level (where possible). See
                 <Hyperlink
                     ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/RETURNPATHS.md"
@@ -94,11 +96,13 @@
 
             <CheckBox
                 Grid.Row="3"
+                Visibility="{Binding IsGeneralBugFixesTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                 IsChecked="{Binding FixOGBugs, Mode=TwoWay}"
                 Content="Fix original game issues"/>
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="1"
+                Visibility="{Binding IsGeneralBugFixesTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                 Text="Fix original level bugs and oversights, such as missing textures or untriggered enemies."/>
         </Grid>
         
