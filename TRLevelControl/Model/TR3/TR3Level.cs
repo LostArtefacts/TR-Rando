@@ -63,16 +63,7 @@ public class TR3Level : TRLevelBase
     public List<TRAnimCommand> AnimCommands { get; set; }
     public List<TRMeshTreeNode> MeshTrees { get; set; }
     public List<ushort> Frames { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumModels { get; set; }
-
-    /// <summary>
-    /// NumModels * 18 bytes
-    /// </summary>
-    public TRModel[] Models { get; set; }
+    public List<TRModel> Models { get; set; }
 
     /// <summary>
     /// 4 bytes

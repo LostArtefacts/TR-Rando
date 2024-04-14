@@ -129,12 +129,6 @@ public class TR3CombinedLevel
 
     public void RemoveModel(TR3Type type)
     {
-        List<TRModel> models = Data.Models.ToList();
-        if (models.Find(m => m.ID == (uint)type) is TRModel model)
-        {
-            models.Remove(model);
-            Data.Models = models.ToArray();
-            Data.NumModels--;
-        }
+        Data.Models.RemoveAll(m => m.ID == (uint)type);
     }
 }

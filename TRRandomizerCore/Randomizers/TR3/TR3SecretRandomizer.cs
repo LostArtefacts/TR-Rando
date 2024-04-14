@@ -449,7 +449,6 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         {
             // If we have a spare model slot, duplicate one of the artefacts into this so that
             // we can add a hint with the item name. Otherwise, just re-use a puzzle item.
-            List<TRModel> models = level.Data.Models.ToList();
             Dictionary<TR3Type, TR3Type> artefacts = TR3TypeUtilities.GetArtefactReplacements();
 
             TR3Type availablePickupType = default;
@@ -457,7 +456,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             foreach (TR3Type pickupType in artefacts.Keys)
             {
                 TR3Type menuType = artefacts[pickupType];
-                if (models.Find(m => m.ID == (uint)menuType) == null)
+                if (level.Data.Models.Find(m => m.ID == (uint)menuType) == null)
                 {
                     availablePickupType = pickupType;
                     availableMenuType = menuType;
@@ -469,8 +468,8 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             {
                 // We have a free slot, so duplicate a model
                 TR3Type baseArtefact = pickupTypes[_generator.Next(0, pickupTypes.Count)];
-                TRModel artefactMenuModel = models.Find(m => m.ID == (uint)artefacts[baseArtefact]);
-                models.Add(new TRModel
+                TRModel artefactMenuModel = level.Data.Models.Find(m => m.ID == (uint)artefacts[baseArtefact]);
+                level.Data.Models.Add(new()
                 {
                     Animation = artefactMenuModel.Animation,
                     FrameOffset = artefactMenuModel.FrameOffset,
@@ -479,9 +478,6 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                     NumMeshes = artefactMenuModel.NumMeshes,
                     StartingMesh = artefactMenuModel.StartingMesh
                 });
-
-                level.Data.Models = models.ToArray();
-                level.Data.NumModels++;
 
                 // Add a script name - pull from GamestringRando once translations completed
                 SetPuzzleTypeName(level, availablePickupType, "Infinite Medi Packs");
@@ -833,10 +829,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         DataFolder = _outer.GetResourcePath(@"TR3\Models"),
                         TexturePositionMonitor = monitor
                     };
-
                     importer.Import();
-
-                    List<TRModel> models = level.Data.Models.ToList();
 
                     // Redefine the artefacts as puzzle models otherwise the level ends on pickup
                     foreach (TR3Type artefactPickupType in allocation.ImportModels)
@@ -846,13 +839,13 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         TR3Type puzzlePickupType = allocation.AvailablePickupModels.First();
                         TR3Type puzzleMenuType = _artefactReplacements[puzzlePickupType];
 
-                        models.Find(m => m.ID == (uint)artefactPickupType).ID = (uint)puzzlePickupType;
+                        level.Data.Models.Find(m => m.ID == (uint)artefactPickupType).ID = (uint)puzzlePickupType;
 
                         // #277 Most levels (beyond India) have the artefacts as menu models so we need
                         // to duplicate the models instead of replacing them, otherwise the carried-over
                         // artefacts from previous levels are invisible.
-                        TRModel menuModel = models.Find(m => m.ID == (uint)artefactMenuType);
-                        models.Add(new TRModel
+                        TRModel menuModel = level.Data.Models.Find(m => m.ID == (uint)artefactMenuType);
+                        level.Data.Models.Add(new()
                         {
                             Animation = menuModel.Animation,
                             FrameOffset = menuModel.FrameOffset,
@@ -875,9 +868,6 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         monitor.EntityMap[artefactPickupType] = puzzlePickupType;
                         monitor.EntityMap[artefactMenuType] = puzzleMenuType;
                     }
-
-                    level.Data.Models = models.ToArray();
-                    level.Data.NumModels = (uint)models.Count;
                 }
 
                 if (!_outer.TriggerProgress())

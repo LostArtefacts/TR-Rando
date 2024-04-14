@@ -85,13 +85,10 @@ public class ModelTransportHandler
 
     public static void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Type, TR3Type> aliasPriority, IEnumerable<TR3Type> laraDependants, IEnumerable<TR3Type> unsafeReplacements)
     {
-        List<TRModel> levelModels = level.Models.ToList();
-        int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
+        int i = level.Models.FindIndex(m => m.ID == (short)definition.Entity);
         if (i == -1)
         {
-            levelModels.Add(definition.Model);
-            level.Models = levelModels.ToArray();
-            level.NumModels++;
+            level.Models.Add(definition.Model);
         }
         else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
         {
@@ -113,7 +110,7 @@ public class ModelTransportHandler
 
         if (definition.Entity == TR3Type.Lara && laraDependants != null)
         {
-            ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+            ReplaceLaraDependants(level.Models, definition.Model, laraDependants.Select(e => (short)e));
         }
     }
 
