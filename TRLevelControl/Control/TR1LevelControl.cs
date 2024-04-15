@@ -26,8 +26,10 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         uint numImages = reader.ReadUInt32();
         _level.Images8 = reader.ReadImage8s(numImages);
 
+        // Unused, always 0 in OG
+        _level.Version.LevelNumber = reader.ReadUInt32();
+
         //Rooms
-        _level.Unused = reader.ReadUInt32();
         _level.NumRooms = reader.ReadUInt16();
         _level.Rooms = new TRRoom[_level.NumRooms];
 
@@ -337,7 +339,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write((uint)_level.Images8.Count);
         writer.Write(_level.Images8);
 
-        writer.Write(_level.Unused);
+        writer.Write(_level.Version.LevelNumber);
 
         writer.Write(_level.NumRooms);
         foreach (TRRoom room in _level.Rooms) { writer.Write(room.Serialize()); }

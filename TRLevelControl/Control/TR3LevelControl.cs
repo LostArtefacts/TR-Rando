@@ -31,8 +31,10 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         _level.Images8 = reader.ReadImage8s(numImages);
         _level.Images16 = reader.ReadImage16s(numImages);
 
+        // Unused, always 0 in OG
+        _level.Version.LevelNumber = reader.ReadUInt32();
+
         //Rooms
-        _level.Unused = reader.ReadUInt32();
         _level.NumRooms = reader.ReadUInt16();
         _level.Rooms = new TR3Room[_level.NumRooms];
 
@@ -348,7 +350,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write(_level.Images8);
         writer.Write(_level.Images16);
 
-        writer.Write(_level.Unused);
+        writer.Write(_level.Version.LevelNumber);
 
         writer.Write(_level.NumRooms);
         foreach (TR3Room room in _level.Rooms) { writer.Write(room.Serialize()); }

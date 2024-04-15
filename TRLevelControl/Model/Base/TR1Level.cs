@@ -5,11 +5,6 @@ public class TR1Level : TRLevelBase
     public List<TRTexImage8> Images8 { get; set; }
 
     /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint Unused { get; set; }
-
-    /// <summary>
     /// 2 bytes
     /// </summary>
     public ushort NumRooms { get; set; }
