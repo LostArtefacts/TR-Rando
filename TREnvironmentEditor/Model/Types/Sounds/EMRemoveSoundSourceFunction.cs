@@ -8,43 +8,22 @@ public class EMRemoveSoundSourceFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        // Can't remove by index in case several are called in succession
-        List<TRSoundSource> sources = level.SoundSources.ToList();
-        if (RemoveSource(sources))
-        {
-            level.SoundSources = sources.ToArray();
-            level.NumSoundSources--;
-        }
+        RemoveSource(level.SoundSources);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        // Can't remove by index in case several are called in succession
-        List<TRSoundSource> sources = level.SoundSources.ToList();
-        if (RemoveSource(sources))
-        {
-            level.SoundSources = sources.ToArray();
-            level.NumSoundSources--;
-        }
+        RemoveSource(level.SoundSources);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<TRSoundSource> sources = level.SoundSources.ToList();
-        if (RemoveSource(sources))
-        {
-            level.SoundSources = sources.ToArray();
-            level.NumSoundSources--;
-        }
+        RemoveSource(level.SoundSources);
     }
 
     private bool RemoveSource(List<TRSoundSource> sources)
     {
         TRSoundSource source = sources.Find(s => s.X == Source.X && s.Y == Source.Y && s.Z == Source.Z);
-        if (source != null)
-        {
-            return sources.Remove(source);
-        }
-        return false;
+        return source != null && sources.Remove(source);
     }
 }

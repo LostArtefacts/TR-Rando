@@ -10,7 +10,7 @@ internal class TRSoundControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Sound Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Sound sources count: " + IOManager.CurrentLevelAsTR1?.NumSoundSources);
+            ImGui.Text("Sound sources count: " + IOManager.CurrentLevelAsTR1?.SoundSources.Count);
             ImGui.Text("Sound details count: " + IOManager.CurrentLevelAsTR1?.NumSoundDetails);
             ImGui.Text("Sound samples count: " + IOManager.CurrentLevelAsTR1?.NumSamples);
             ImGui.Text("Sound sample indices count: " + IOManager.CurrentLevelAsTR1?.NumSampleIndices);

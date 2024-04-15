@@ -43,10 +43,7 @@ public class TR4LevelDataChunk : ISerializableCompact
     public TRSpriteSequence[] SpriteSequences { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TR4FlyByCamera> FlybyCameras { get; set; }
-
-    public uint NumSoundSources { get; set; }
-
-    public TRSoundSource[] SoundSources { get; set; }
+    public List<TRSoundSource> SoundSources { get; set; }
     public List<TR2Box> Boxes { get; set; }
     public List<ushort> Overlaps { get; set; }
     public List<short> Zones { get; set; }
@@ -190,8 +187,7 @@ public class TR4LevelDataChunk : ISerializableCompact
                 writer.Write(flycam.Serialize());
             }
 
-            writer.Write(NumSoundSources);
-
+            writer.Write((uint)SoundSources.Count);
             foreach (TRSoundSource ssrc in SoundSources)
             {
                 writer.Write(ssrc.Serialize());

@@ -247,12 +247,12 @@ internal static class TR4FileReadUtilities
     public static void PopulateSoundSources(BinaryReader reader, TR4Level lvl)
     {
         //Sound Sources
-        lvl.LevelDataChunk.NumSoundSources = reader.ReadUInt32();
-        lvl.LevelDataChunk.SoundSources = new TRSoundSource[lvl.LevelDataChunk.NumSoundSources];
+        uint numSoundSources = reader.ReadUInt32();
+        lvl.LevelDataChunk.SoundSources = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumSoundSources; i++)
+        for (int i = 0; i < numSoundSources; i++)
         {
-            lvl.LevelDataChunk.SoundSources[i] = TR2FileReadUtilities.ReadSoundSource(reader);
+            lvl.LevelDataChunk.SoundSources.Add(TR2FileReadUtilities.ReadSoundSource(reader));
         }
     }
 

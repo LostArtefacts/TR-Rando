@@ -73,16 +73,7 @@ public class TR2Level : TRLevelBase
     /// </summary>
     public TRSpriteSequence[] SpriteSequences { get; set; }
     public List<TRCamera> Cameras { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumSoundSources { get; set; }
-
-    /// <summary>
-    /// NumSoundSources * 16 bytes
-    /// </summary>
-    public TRSoundSource[] SoundSources { get; set; }
+    public List<TRSoundSource> SoundSources { get; set; }
     public List<TR2Box> Boxes { get; set; }
     public List<ushort> Overlaps { get; set; }
     public List<TR2ZoneGroup> Zones { get; set; }
