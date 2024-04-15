@@ -73,31 +73,9 @@ public class TR3Level : TRLevelBase
     /// NumSoundSources * 16 bytes
     /// </summary>
     public TRSoundSource[] SoundSources { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumBoxes { get; set; }
-
-    /// <summary>
-    /// NumBoxes * 8 bytes
-    /// </summary>
-    public TR2Box[] Boxes { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumOverlaps { get; set; }
-
-    /// <summary>
-    /// NumOverlaps * 2 bytes
-    /// </summary>
-    public ushort[] Overlaps { get; set; }
-
-    /// <summary>
-    /// NumBoxes * 20 bytes (double check this)
-    /// </summary>
-    public TR2ZoneGroup[] Zones { get; set; }
+    public List<TR2Box> Boxes { get; set; }
+    public List<ushort> Overlaps { get; set; }
+    public List<TR2ZoneGroup> Zones { get; set; }
 
     /// <summary>
     /// 4 bytes

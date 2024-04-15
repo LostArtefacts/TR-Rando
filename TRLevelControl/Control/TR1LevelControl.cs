@@ -232,29 +232,19 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         }
 
         //Boxes
-        _level.NumBoxes = reader.ReadUInt32();
-        _level.Boxes = new TRBox[_level.NumBoxes];
-
-        for (int i = 0; i < _level.NumBoxes; i++)
+        uint numBoxes = reader.ReadUInt32();
+        _level.Boxes = new();
+        for (int i = 0; i < numBoxes; i++)
         {
-            _level.Boxes[i] = TRFileReadUtilities.ReadBox(reader);
+            _level.Boxes.Add(TRFileReadUtilities.ReadBox(reader));
         }
 
         //Overlaps & Zones
-        _level.NumOverlaps = reader.ReadUInt32();
-        _level.Overlaps = new ushort[_level.NumOverlaps];
+        uint numOverlaps = reader.ReadUInt32();
+        _level.Overlaps = reader.ReadUInt16s(numOverlaps).ToList();
 
-        for (int i = 0; i < _level.NumOverlaps; i++)
-        {
-            _level.Overlaps[i] = reader.ReadUInt16();
-        }
-
-        ushort[] zoneData = new ushort[_level.NumBoxes * 6];
-        for (int i = 0; i < zoneData.Length; i++)
-        {
-            zoneData[i] = reader.ReadUInt16();
-        }
-        _level.Zones = TR1BoxUtilities.ReadZones(_level.NumBoxes, zoneData);
+        ushort[] zoneData = reader.ReadUInt16s(numBoxes * 6);
+        _level.Zones = TR1BoxUtilities.ReadZones(numBoxes, zoneData);
 
         //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)
         //followed by a ushort to describe the number of actual texture group objects.
@@ -372,11 +362,11 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write(_level.NumSoundSources);
         foreach (TRSoundSource src in _level.SoundSources) { writer.Write(src.Serialize()); }
 
-        writer.Write(_level.NumBoxes);
+        writer.Write((uint)_level.Boxes.Count);
         foreach (TRBox box in _level.Boxes) { writer.Write(box.Serialize()); }
-        writer.Write(_level.NumOverlaps);
-        foreach (ushort overlap in _level.Overlaps) { writer.Write(overlap); }
-        foreach (ushort zone in TR1BoxUtilities.FlattenZones(_level.Zones)) { writer.Write(zone); }
+        writer.Write((uint)_level.Overlaps.Count);
+        writer.Write(_level.Overlaps);
+        writer.Write(TR1BoxUtilities.FlattenZones(_level.Zones));
 
         writer.Write(_level.NumAnimatedTextures);
         writer.Write((ushort)_level.AnimatedTextures.Length);

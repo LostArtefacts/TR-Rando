@@ -224,7 +224,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         else
         {
             ushort currentBoxIndex = sector.BoxIndex;
-            ushort newBoxIndex = (ushort)level.NumBoxes;
+            ushort newBoxIndex = (ushort)level.Boxes.Count;
 
             // Make a new zone to match the addition of a new box.
             TR1BoxUtilities.DuplicateZone(level, sector.BoxIndex);
@@ -248,10 +248,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
             // Point the sector to the new box, and save it to the level
             sector.BoxIndex = newBoxIndex;
-            List<TRBox> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+            level.Boxes.Add(box);
 
             // Finally add the previous box as a neighbour to the new one.
             TR1BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { currentBoxIndex });
@@ -260,7 +257,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
     private static void GenerateOverlaps(TR1Level level, ushort currentBoxIndex, ushort newBoxIndex)
     {
-        for (int i = 0; i < level.NumBoxes; i++)
+        for (int i = 0; i < level.Boxes.Count; i++)
         {
             TRBox box = level.Boxes[i];
             // Anything that has the current box as an overlap will need
@@ -461,7 +458,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         else
         {
             ushort currentBoxIndex = sector.BoxIndex;
-            ushort newBoxIndex = (ushort)level.NumBoxes;
+            ushort newBoxIndex = (ushort)level.Boxes.Count;
 
             // Make a new zone to match the addition of a new box.
             TR2BoxUtilities.DuplicateZone(level, sector.BoxIndex);
@@ -483,10 +480,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
             // Point the sector to the new box, and save it to the level
             sector.BoxIndex = newBoxIndex;
-            List<TR2Box> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+            level.Boxes.Add(box);
 
             // Finally add the previous box as a neighbour to the new one.
             TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { currentBoxIndex });
@@ -495,7 +489,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
     private static void GenerateOverlaps(TR2Level level, ushort currentBoxIndex, ushort newBoxIndex)
     {
-        for (int i = 0; i < level.NumBoxes; i++)
+        for (int i = 0; i < level.Boxes.Count; i++)
         {
             TR2Box box = level.Boxes[i];
             // Anything that has the current box as an overlap will need
@@ -713,7 +707,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
         else
         {
-            ushort newBoxIndex = (ushort)level.NumBoxes;
+            ushort newBoxIndex = (ushort)level.Boxes.Count;
 
             // Make a new zone to match the addition of a new box.
             TR2BoxUtilities.DuplicateZone(level, currentBoxIndex);
@@ -737,10 +731,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             newBoxIndex <<= 4;
             newBoxIndex |= (ushort)currentMaterial;
             sector.BoxIndex = newBoxIndex;
-            List<TR2Box> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+            level.Boxes.Add(box);
 
             // Finally add the previous box as a neighbour to the new one.
             TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { currentBoxIndex });
@@ -749,7 +740,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
     private static void GenerateOverlaps(TR3Level level, ushort currentBoxIndex, ushort newBoxIndex)
     {
-        for (int i = 0; i < level.NumBoxes; i++)
+        for (int i = 0; i < level.Boxes.Count; i++)
         {
             TR2Box box = level.Boxes[i];
             // Anything that has the current box as an overlap will need

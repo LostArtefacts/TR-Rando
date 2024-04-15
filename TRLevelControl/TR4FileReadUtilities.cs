@@ -259,28 +259,29 @@ internal static class TR4FileReadUtilities
     public static void PopulateBoxesOverlapsZones(BinaryReader reader, TR4Level lvl)
     {
         //Boxes
-        lvl.LevelDataChunk.NumBoxes = reader.ReadUInt32();
-        lvl.LevelDataChunk.Boxes = new TR2Box[lvl.LevelDataChunk.NumBoxes];
+        uint numBoxes = reader.ReadUInt32();
+        lvl.LevelDataChunk.Boxes = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumBoxes; i++)
+        for (int i = 0; i < numBoxes; i++)
         {
-            lvl.LevelDataChunk.Boxes[i] = TR2FileReadUtilities.ReadBox(reader);
+            lvl.LevelDataChunk.Boxes.Add(TR2FileReadUtilities.ReadBox(reader));
         }
 
         //Overlaps & Zones
-        lvl.LevelDataChunk.NumOverlaps = reader.ReadUInt32();
-        lvl.LevelDataChunk.Overlaps = new ushort[lvl.LevelDataChunk.NumOverlaps];
-        lvl.LevelDataChunk.Zones = new short[10 * lvl.LevelDataChunk.NumBoxes];
+        uint numOverlaps = reader.ReadUInt32();
+        lvl.LevelDataChunk.Overlaps = new();
+        short[] zones = new short[10 * numBoxes];
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumOverlaps; i++)
+        for (int i = 0; i < numOverlaps; i++)
         {
-            lvl.LevelDataChunk.Overlaps[i] = reader.ReadUInt16();
+            lvl.LevelDataChunk.Overlaps.Add(reader.ReadUInt16());
         }
 
-        for (int i = 0; i < lvl.LevelDataChunk.Zones.Length; i++)
+        for (int i = 0; i < zones.Length; i++)
         {
-            lvl.LevelDataChunk.Zones[i] = reader.ReadInt16();
+            zones[i] = reader.ReadInt16();
         }
+        lvl.LevelDataChunk.Zones = new(zones);
     }
 
     public static void PopulateAnimatedTextures(BinaryReader reader, TR4Level lvl)

@@ -80,28 +80,9 @@ public class TR1Level : TRLevelBase
     /// NumSoundSources * 16 bytes
     /// </summary>
     public TRSoundSource[] SoundSources { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumBoxes { get; set; }
-
-    /// <summary>
-    /// NumBoxes * 8 bytes
-    /// </summary>
-    public TRBox[] Boxes { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumOverlaps { get; set; }
-
-    /// <summary>
-    /// NumOverlaps * 2 bytes
-    /// </summary>
-    public ushort[] Overlaps { get; set; }
-
-    public TRZoneGroup[] Zones { get; set; }
+    public List<TRBox> Boxes { get; set; }
+    public List<ushort> Overlaps { get; set; }
+    public List<TRZoneGroup> Zones { get; set; }
 
     /// <summary>
     /// 4 bytes

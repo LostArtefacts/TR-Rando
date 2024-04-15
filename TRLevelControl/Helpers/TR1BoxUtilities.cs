@@ -14,26 +14,24 @@ public static class TR1BoxUtilities
     public static void DuplicateZone(TR1Level level, int boxIndex)
     {
         TRZoneGroup zoneGroup = level.Zones[boxIndex];
-        List<TRZoneGroup> zones = level.Zones.ToList();
-        zones.Add(new TRZoneGroup
+        level.Zones.Add(new()
         {
             NormalZone = zoneGroup.NormalZone.Clone(),
             AlternateZone = zoneGroup.AlternateZone.Clone()
         });
-        level.Zones = zones.ToArray();
     }
 
-    public static TRZoneGroup[] ReadZones(uint numBoxes, ushort[] zoneData)
+    public static List<TRZoneGroup> ReadZones(uint numBoxes, ushort[] zoneData)
     {
         // Initialise the zone groups - one for every box.
-        TRZoneGroup[] zones = new TRZoneGroup[numBoxes];
-        for (int i = 0; i < zones.Length; i++)
+        List<TRZoneGroup> zones = new();
+        for (int i = 0; i < numBoxes; i++)
         {
-            zones[i] = new TRZoneGroup
+            zones.Add(new()
             {
-                NormalZone = new TRZone(),
-                AlternateZone = new TRZone()
-            };
+                NormalZone = new(),
+                AlternateZone = new()
+            });
         }
 
         // Build the zones, mapping the multidimensional ushort structures into the corresponding
@@ -46,13 +44,13 @@ public static class TR1BoxUtilities
         {
             foreach (TRZones zone in zoneValues)
             {
-                for (int box = 0; box < zones.Length; box++)
+                for (int box = 0; box < zones.Count; box++)
                 {
                     zones[box][flip].GroundZones[zone] = zoneData[valueIndex++];
                 }
             }
 
-            for (int box = 0; box < zones.Length; box++)
+            for (int box = 0; box < zones.Count; box++)
             {
                 zones[box][flip].FlyZone = zoneData[valueIndex++];
             }
@@ -61,7 +59,7 @@ public static class TR1BoxUtilities
         return zones;
     }
 
-    public static ushort[] FlattenZones(TRZoneGroup[] zoneGroups)
+    public static List<ushort> FlattenZones(List<TRZoneGroup> zoneGroups)
     {
         // Convert the zone objects back into a flat ushort list.
         IEnumerable<FlipStatus> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<FlipStatus>();
@@ -73,19 +71,19 @@ public static class TR1BoxUtilities
         {
             foreach (TRZones zone in zoneValues)
             {
-                for (int box = 0; box < zoneGroups.Length; box++)
+                for (int box = 0; box < zoneGroups.Count; box++)
                 {
                     zones.Add(zoneGroups[box][flip].GroundZones[zone]);
                 }
             }
 
-            for (int box = 0; box < zoneGroups.Length; box++)
+            for (int box = 0; box < zoneGroups.Count; box++)
             {
                 zones.Add(zoneGroups[box][flip].FlyZone);
             }
         }
 
-        return zones.ToArray();
+        return zones;
     }
 
     public static int GetSectorCount(TR1Level level, int boxIndex)
@@ -141,8 +139,8 @@ public static class TR1BoxUtilities
         }
 
         // Update the level data
-        level.Overlaps = newOverlaps.ToArray();
-        level.NumOverlaps = (uint)newOverlaps.Count;
+        level.Overlaps.Clear();
+        level.Overlaps.AddRange(newOverlaps);
     }
 
     private static void UpdateOverlaps(TRBox lvlBox, List<ushort> boxOverlaps, List<ushort> newOverlaps, short noOverlap)

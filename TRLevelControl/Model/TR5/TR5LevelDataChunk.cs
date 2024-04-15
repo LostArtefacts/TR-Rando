@@ -44,16 +44,9 @@ public class TR5LevelDataChunk
     public uint NumSoundSources { get; set; }
 
     public TRSoundSource[] SoundSources { get; set; }
-
-    public uint NumBoxes { get; set; }
-
-    public TR2Box[] Boxes { get; set; }
-
-    public uint NumOverlaps { get; set; }
-
-    public ushort[] Overlaps { get; set; }
-
-    public short[] Zones { get; set; }
+    public List<TR2Box> Boxes { get; set; }
+    public List<ushort> Overlaps { get; set; }
+    public List<short> Zones { get; set; }
 
     public uint NumAnimatedTextures { get; set; }
 
@@ -201,15 +194,13 @@ public class TR5LevelDataChunk
                 writer.Write(ssrc.Serialize());
             }
 
-            writer.Write(NumBoxes);
-
+            writer.Write((uint)Boxes.Count);
             foreach (TR2Box box in Boxes)
             {
                 writer.Write(box.Serialize());
             }
 
-            writer.Write(NumOverlaps);
-
+            writer.Write((uint)Overlaps.Count);
             foreach (ushort overlap in Overlaps)
             {
                 writer.Write(overlap);
