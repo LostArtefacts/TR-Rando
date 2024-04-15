@@ -79,7 +79,7 @@ public class TR2SavegameTester
         size += _flipmapStatus;
         size += _cdTrackStatus;
 
-        size += (int)level.NumCameras * _cameraSize;
+        size += level.Cameras.Count * _cameraSize;
 
         // Expand the entity list to simulate everything that could actually be present
         List<TR2Entity> entities = new(level.Entities);

@@ -38,14 +38,8 @@ public class TR5LevelDataChunk
     public uint NumSpriteSequences { get; set; }
 
     public TRSpriteSequence[] SpriteSequences { get; set; }
-
-    public uint NumCameras { get; set; }
-
-    public TRCamera[] Cameras { get; set; }
-
-    public uint NumFlybyCameras { get; set; }
-
-    public TR4FlyByCamera[] FlybyCameras { get; set; }
+    public List<TRCamera> Cameras { get; set; }
+    public List<TR4FlyByCamera> FlybyCameras { get; set; }
 
     public uint NumSoundSources { get; set; }
 
@@ -188,15 +182,13 @@ public class TR5LevelDataChunk
                 writer.Write(seq.Serialize());
             }
 
-            writer.Write(NumCameras);
-
+            writer.Write((uint)Cameras.Count);
             foreach (TRCamera cam in Cameras)
             {
                 writer.Write(cam.Serialize());
             }
 
-            writer.Write(NumFlybyCameras);
-
+            writer.Write((uint)FlybyCameras.Count);
             foreach (TR4FlyByCamera flycam in FlybyCameras)
             {
                 writer.Write(flycam.Serialize());

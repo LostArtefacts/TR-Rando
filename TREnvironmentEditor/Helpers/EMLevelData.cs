@@ -4,9 +4,9 @@ namespace TREnvironmentEditor.Helpers;
 
 public class EMLevelData
 {
-    public uint NumCameras { get; set; }
+    public int NumCameras { get; set; }
     public int NumEntities { get; set; }
-    public uint NumRooms { get; set; }
+    public int NumRooms { get; set; }
 
     /// <summary>
     /// Negative values will imply a backwards search against NumCameras.
@@ -42,31 +42,31 @@ public class EMLevelData
 
     public static EMLevelData GetData(TR1Level level)
     {
-        return new EMLevelData
+        return new()
         {
-            NumCameras = level.NumCameras,
+            NumCameras = level.Cameras.Count,
             NumEntities = level.Entities.Count,
-            NumRooms = (uint)level.Rooms.Count
+            NumRooms = level.Rooms.Count
         };
     }
 
     public static EMLevelData GetData(TR2Level level)
     {
-        return new EMLevelData
+        return new()
         {
-            NumCameras = level.NumCameras,
+            NumCameras = level.Cameras.Count,
             NumEntities = level.Entities.Count,
-            NumRooms = (uint)level.Rooms.Count
+            NumRooms = level.Rooms.Count
         };
     }
 
     public static EMLevelData GetData(TR3Level level)
     {
-        return new EMLevelData
+        return new()
         {
-            NumCameras = level.NumCameras,
+            NumCameras = level.Cameras.Count,
             NumEntities = level.Entities.Count,
-            NumRooms = (uint)level.Rooms.Count
+            NumRooms = level.Rooms.Count
         };
     }
 }

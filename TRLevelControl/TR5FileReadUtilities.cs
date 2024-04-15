@@ -358,21 +358,21 @@ internal static class TR5FileReadUtilities
     public static void PopulateCameras(BinaryReader reader, TR5Level lvl)
     {
         //Cameras
-        lvl.LevelDataChunk.NumCameras = reader.ReadUInt32();
-        lvl.LevelDataChunk.Cameras = new TRCamera[lvl.LevelDataChunk.NumCameras];
+        uint numCameras = reader.ReadUInt32();
+        lvl.LevelDataChunk.Cameras = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumCameras; i++)
+        for (int i = 0; i < numCameras; i++)
         {
-            lvl.LevelDataChunk.Cameras[i] = TR2FileReadUtilities.ReadCamera(reader);
+            lvl.LevelDataChunk.Cameras.Add(TR2FileReadUtilities.ReadCamera(reader));
         }
 
         //Flyby Cameras
-        lvl.LevelDataChunk.NumFlybyCameras = reader.ReadUInt32();
-        lvl.LevelDataChunk.FlybyCameras = new TR4FlyByCamera[lvl.LevelDataChunk.NumFlybyCameras];
+        uint numFlybyCameras = reader.ReadUInt32();
+        lvl.LevelDataChunk.FlybyCameras = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumFlybyCameras; i++)
+        for (int i = 0; i < numFlybyCameras; i++)
         {
-            lvl.LevelDataChunk.FlybyCameras[i] = TR4FileReadUtilities.ReadFlybyCamera(reader);
+            lvl.LevelDataChunk.FlybyCameras.Add(TR4FileReadUtilities.ReadFlybyCamera(reader));
         }
     }
 

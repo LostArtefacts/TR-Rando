@@ -62,16 +62,7 @@ public class TR3Level : TRLevelBase
     /// NumSpriteSequences * 8 bytes
     /// </summary>
     public TRSpriteSequence[] SpriteSequences { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumCameras { get; set; }
-
-    /// <summary>
-    /// NumCameras * 16 bytes
-    /// </summary>
-    public TRCamera[] Cameras { get; set; }
+    public List<TRCamera> Cameras { get; set; }
 
     /// <summary>
     /// 4 bytes
@@ -129,16 +120,7 @@ public class TR3Level : TRLevelBase
     public TRObjectTexture[] ObjectTextures { get; set; }
     public List<TR3Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }
-
-    /// <summary>
-    /// 2 bytes
-    /// </summary>
-    public ushort NumCinematicFrames { get; set; }
-
-    /// <summary>
-    /// NumCinematicFrames * 16 bytes
-    /// </summary>
-    public TRCinematicFrame[] CinematicFrames { get; set; }
+    public List<TRCinematicFrame> CinematicFrames { get; set; }
 
     /// <summary>
     /// 2 bytes

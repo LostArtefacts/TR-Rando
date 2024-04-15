@@ -232,15 +232,11 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         {
             double countedSecrets = Settings.DevelopmentMode ? _devModeSecretCount : level.Script.NumSecrets;
             rewardRoom.CameraIndices = new List<int>();
-            List<TRCamera> cameras = level.Data.Cameras.ToList();
             for (int i = 0; i < countedSecrets; i++)
             {
-                rewardRoom.CameraIndices.Add(cameras.Count);
-                cameras.Add(rewardRoom.Cameras[i % rewardRoom.Cameras.Count]);
+                rewardRoom.CameraIndices.Add(level.Data.Cameras.Count);
+                level.Data.Cameras.Add(rewardRoom.Cameras[i % rewardRoom.Cameras.Count]);
             }
-
-            level.Data.Cameras = cameras.ToArray();
-            level.Data.NumCameras = (uint)cameras.Count;
 
             FDControl floorData = new();
             floorData.ParseFromLevel(level.Data);

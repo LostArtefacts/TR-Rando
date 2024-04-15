@@ -10,7 +10,7 @@ internal class TRCinematicsControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Cinematic Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Cinematic frame Count: " + IOManager.CurrentLevelAsTR1?.NumCinematicFrames);
+            ImGui.Text("Cinematic frame Count: " + IOManager.CurrentLevelAsTR1?.CinematicFrames.Count);
             ImGui.TreePop();
         }
     }

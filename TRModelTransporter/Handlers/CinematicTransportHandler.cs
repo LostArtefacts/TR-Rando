@@ -41,28 +41,25 @@ public class CinematicTransportHandler
     public static void Import(TR1Level level, TR1ModelDefinition definition, bool forceOverwrite)
     {
         // We only import frames if the level doesn't have any already.
-        if (level.NumCinematicFrames == 0 || forceOverwrite)
+        if (level.CinematicFrames.Count == 0 || forceOverwrite)
         {
-            level.CinematicFrames = definition.CinematicFrames;
-            level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
+            level.CinematicFrames = new(definition.CinematicFrames);
         }
     }
 
     public static void Import(TR2Level level, TR2ModelDefinition definition, bool forceOverwrite)
     {
-        if (level.NumCinematicFrames == 0 || forceOverwrite)
+        if (level.CinematicFrames.Count == 0 || forceOverwrite)
         {
-            level.CinematicFrames = definition.CinematicFrames;
-            level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
+            level.CinematicFrames = new(definition.CinematicFrames);
         }
     }
 
     public static void Import(TR3Level level, TR3ModelDefinition definition, bool forceOverwrite)
     {
-        if (level.NumCinematicFrames == 0 || forceOverwrite)
+        if (level.CinematicFrames.Count == 0 || forceOverwrite)
         {
-            level.CinematicFrames = definition.CinematicFrames;
-            level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
+            level.CinematicFrames = new(definition.CinematicFrames);
         }
     }
 }

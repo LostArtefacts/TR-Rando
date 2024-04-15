@@ -221,13 +221,11 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.SpriteSequences[i] = TR2FileReadUtilities.ReadSpriteSequence(reader);
         }
 
-        //Cameras
-        _level.NumCameras = reader.ReadUInt32();
-        _level.Cameras = new TRCamera[_level.NumCameras];
-
-        for (int i = 0; i < _level.NumCameras; i++)
+        uint numCameras = reader.ReadUInt32();
+        _level.Cameras = new();
+        for (int i = 0; i < numCameras; i++)
         {
-            _level.Cameras[i] = TR2FileReadUtilities.ReadCamera(reader);
+            _level.Cameras.Add(TR2FileReadUtilities.ReadCamera(reader));
         }
 
         //Sound Sources
@@ -284,12 +282,11 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
 
         //Cinematic Frames
-        _level.NumCinematicFrames = reader.ReadUInt16();
-        _level.CinematicFrames = new TRCinematicFrame[_level.NumCinematicFrames];
-
-        for (int i = 0; i < _level.NumCinematicFrames; i++)
+        ushort numCinematicFrames = reader.ReadUInt16();
+        _level.CinematicFrames = new();
+        for (int i = 0; i < numCinematicFrames; i++)
         {
-            _level.CinematicFrames[i] = TR2FileReadUtilities.ReadCinematicFrame(reader);
+            _level.CinematicFrames.Add(TR2FileReadUtilities.ReadCinematicFrame(reader));
         }
 
         //Demo Data
@@ -377,7 +374,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write(_level.NumSpriteSequences);
         foreach (TRSpriteSequence sequence in _level.SpriteSequences) { writer.Write(sequence.Serialize()); }
 
-        writer.Write(_level.NumCameras);
+        writer.Write((uint)_level.Cameras.Count);
         foreach (TRCamera cam in _level.Cameras) { writer.Write(cam.Serialize()); }
 
         writer.Write(_level.NumSoundSources);
@@ -399,7 +396,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
         writer.Write(_level.LightMap.ToArray());
 
-        writer.Write(_level.NumCinematicFrames);
+        writer.Write((ushort)_level.CinematicFrames.Count);
         foreach (TRCinematicFrame cineframe in _level.CinematicFrames) { writer.Write(cineframe.Serialize()); }
 
         writer.Write(_level.NumDemoData);
