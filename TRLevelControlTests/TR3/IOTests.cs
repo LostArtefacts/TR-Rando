@@ -128,20 +128,15 @@ public class IOTests : TestBase
         TR3Level lvl = GetTR3Level(TR3LevelNames.THAMES);
 
         //Store the original floordata from the level
-        ushort[] originalFData = new ushort[lvl.NumFloorData];
-        Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
+        List<ushort> originalFData = new(lvl.FloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
         FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
         fdataReader.WriteToLevel(lvl);
 
-        //Store the new floordata written back by FDControl
-        ushort[] newFData = lvl.FloorData;
-
         //Compare to make sure the original fdata was written back.
-        CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
-        Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
+        CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");;
     }
 
     [TestMethod]

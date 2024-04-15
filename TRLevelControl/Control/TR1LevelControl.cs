@@ -96,14 +96,8 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
             room.Flags = reader.ReadInt16();
         }
 
-        //Floordata
-        _level.NumFloorData = reader.ReadUInt32();
-        _level.FloorData = new ushort[_level.NumFloorData];
-
-        for (int i = 0; i < _level.NumFloorData; i++)
-        {
-            _level.FloorData[i] = reader.ReadUInt16();
-        }
+        uint numFloorData = reader.ReadUInt32();
+        _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
 
         //Mesh Data
         //This tells us how much mesh data (# of words/uint16s) coming up
@@ -342,8 +336,8 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write((ushort)_level.Rooms.Count);
         foreach (TRRoom room in _level.Rooms) { writer.Write(room.Serialize()); }
 
-        writer.Write(_level.NumFloorData);
-        foreach (ushort data in _level.FloorData) { writer.Write(data); }
+        writer.Write((uint)_level.FloorData.Count);
+        writer.Write(_level.FloorData);
 
         writer.Write(_level.NumMeshData);
         foreach (TRMesh mesh in _level.Meshes) { writer.Write(mesh.Serialize()); }

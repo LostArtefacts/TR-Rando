@@ -66,15 +66,15 @@ public class FDControl
 
     public void ParseFromLevel(TR4Level level)
     {
-        ParseLevel(level.LevelDataChunk.Rooms.SelectMany(r => r.Sectors), level.LevelDataChunk.Floordata);
+        ParseLevel(level.LevelDataChunk.Rooms.SelectMany(r => r.Sectors), level.LevelDataChunk.FloorData);
     }
 
     public void ParseFromLevel(TR5Level level)
     {
-        ParseLevel(level.LevelDataChunk.Rooms.SelectMany(r => r.RoomData.SectorList), level.LevelDataChunk.Floordata);
+        ParseLevel(level.LevelDataChunk.Rooms.SelectMany(r => r.RoomData.SectorList), level.LevelDataChunk.FloorData);
     }
 
-    private void ParseLevel(IEnumerable<TRRoomSector> roomSectors, ushort[] floorData)
+    private void ParseLevel(IEnumerable<TRRoomSector> roomSectors, List<ushort> floorData)
     {
         _entries = new();
         foreach (TRRoomSector sector in roomSectors)
@@ -83,7 +83,7 @@ public class FDControl
         }
     }
 
-    private void ParseFromSector(TRRoomSector sector, ushort[] floorData)
+    private void ParseFromSector(TRRoomSector sector, List<ushort> floorData)
     {
         ushort index = sector.FDIndex;
         // Index 0 is always dummy, so NOOP.
@@ -173,7 +173,7 @@ public class FDControl
                                 continueFDParse = camAction.Continue;
                             }
                         }
-                        while (index < floorData.Length && continueFDParse);
+                        while (index < floorData.Count && continueFDParse);
                     }
                     break;
 
@@ -252,45 +252,34 @@ public class FDControl
 
     public void WriteToLevel(TR1Level level)
     {
-        List<ushort> data = Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData[0]);
-        level.FloorData = data.ToArray();
-        level.NumFloorData = (uint)data.Count;
+        Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
     }
 
     public void WriteToLevel(TR2Level level)
     {
-        List<ushort> data = Flatten(level.Rooms.SelectMany(r => r.SectorList), level.FloorData[0]);
-        level.FloorData = data.ToArray();
-        level.NumFloorData = (uint)data.Count;
+        Flatten(level.Rooms.SelectMany(r => r.SectorList), level.FloorData);
     }
 
     public void WriteToLevel(TR3Level level)
     {
-        List<ushort> data = Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData[0]);
-        level.FloorData = data.ToArray();
-        level.NumFloorData = (uint)data.Count;
+        Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
     }
 
     public void WriteToLevel(TR4Level level)
     {
-        List<ushort> data = Flatten(level.LevelDataChunk.Rooms.SelectMany(r => r.Sectors), level.LevelDataChunk.Floordata[0]);
-        level.LevelDataChunk.Floordata = data.ToArray();
-        level.LevelDataChunk.NumFloorData = (uint)data.Count;
+        Flatten(level.LevelDataChunk.Rooms.SelectMany(r => r.Sectors), level.LevelDataChunk.FloorData);
     }
 
     public void WriteToLevel(TR5Level level)
     {
-        List<ushort> data = Flatten(level.LevelDataChunk.Rooms.SelectMany(r => r.RoomData.SectorList), level.LevelDataChunk.Floordata[0]);
-        level.LevelDataChunk.Floordata = data.ToArray();
-        level.LevelDataChunk.NumFloorData = (uint)data.Count;
+        Flatten(level.LevelDataChunk.Rooms.SelectMany(r => r.RoomData.SectorList), level.LevelDataChunk.FloorData);
     }
 
-    private List<ushort> Flatten(IEnumerable<TRRoomSector> sectors, ushort dummyEntry)
+    private void Flatten(IEnumerable<TRRoomSector> sectors, List<ushort> data)
     {
-        List<ushort> data = new()
-        {
-            dummyEntry
-        };
+        ushort dummyEntry = data.Count > 0 ? data[0] : (ushort)0;
+        data.Clear();
+        data.Add(dummyEntry);
 
         // Flatten each entry list and map old indices to new.
         Dictionary<int, int> newIndices = new();
@@ -326,7 +315,6 @@ public class FDControl
 
         // Update the stored values in case of further changes
         _entries = updatedEntries;
-        return data;
     }
 
     public static List<ushort> Flatten(List<FDEntry> entries)

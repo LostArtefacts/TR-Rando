@@ -201,12 +201,12 @@ internal static class TR5FileReadUtilities
 
     public static void PopulateFloordata(BinaryReader reader, TR5Level lvl)
     {
-        lvl.LevelDataChunk.NumFloorData = reader.ReadUInt32();
-        lvl.LevelDataChunk.Floordata = new ushort[lvl.LevelDataChunk.NumFloorData];
+        uint numFloorData = reader.ReadUInt32();
+        lvl.LevelDataChunk.FloorData = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumFloorData; i++)
+        for (int i = 0; i < numFloorData; i++)
         {
-            lvl.LevelDataChunk.Floordata[i] = reader.ReadUInt16();
+            lvl.LevelDataChunk.FloorData.Add(reader.ReadUInt16());
         }
     }
 

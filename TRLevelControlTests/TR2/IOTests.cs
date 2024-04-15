@@ -338,8 +338,7 @@ public class IOTests : TestBase
         TR2Level lvl = GetTR2Level(TR2LevelNames.LAIR);
 
         //Store the original floordata from the level
-        ushort[] originalFData = new ushort[lvl.NumFloorData];
-        Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
+        List<ushort> originalFData = new(lvl.FloorData);
 
         //Parse the floordata using FDControl
         FDControl fdataReader = new();
@@ -402,7 +401,6 @@ public class IOTests : TestBase
 
         //Finally compare to make sure the original fdata was written back.
         CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");
-        Assert.AreEqual((uint)lvl.FloorData.Length, lvl.NumFloorData);
     }
 
     [TestMethod]

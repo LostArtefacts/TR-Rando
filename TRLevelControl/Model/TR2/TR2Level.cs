@@ -7,16 +7,7 @@ public class TR2Level : TRLevelBase
     public List<TRTexImage8> Images8 { get; set; }
     public List<TRTexImage16> Images16 { get; set; }
     public List<TR2Room> Rooms { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumFloorData { get; set; }
-
-    /// <summary>
-    /// NumFloorData * 2 bytes
-    /// </summary>
-    public ushort[] FloorData { get; set; }
+    public List<ushort> FloorData { get; set; }
 
     /// <summary>
     /// 4 bytes

@@ -8,10 +8,7 @@ public class TR5LevelDataChunk
 
     public uint Unused { get; set; }
     public List<TR5Room> Rooms { get; set; }
-
-    public uint NumFloorData { get; set; }
-
-    public ushort[] Floordata { get; set; }
+    public List<ushort> FloorData { get; set; }
 
     public uint NumMeshData { get; set; }
 
@@ -113,12 +110,8 @@ public class TR5LevelDataChunk
                 writer.Write(room.Serialize());
             }
 
-            writer.Write(NumFloorData);
-
-            foreach (ushort data in Floordata)
-            {
-                writer.Write(data);
-            }
+            writer.Write((uint)FloorData.Count);
+            writer.Write(FloorData);
 
             writer.Write(NumMeshData);
 

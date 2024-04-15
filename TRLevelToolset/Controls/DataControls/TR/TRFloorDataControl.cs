@@ -10,7 +10,7 @@ internal class TRFloorDataControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Floor Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Floor Data Size: " + IOManager.CurrentLevelAsTR1?.NumFloorData + " uint16s.");
+            ImGui.Text("Floor Data Size: " + IOManager.CurrentLevelAsTR1?.FloorData.Count + " uint16s.");
 
             ImGui.TreePop();
         }
