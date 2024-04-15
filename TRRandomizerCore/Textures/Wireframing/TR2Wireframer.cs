@@ -117,7 +117,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
     }
 
-    protected override TRStaticMesh[] GetStaticMeshes(TR2Level level)
+    protected override List<TRStaticMesh> GetStaticMeshes(TR2Level level)
     {
         return level.StaticMeshes;
     }

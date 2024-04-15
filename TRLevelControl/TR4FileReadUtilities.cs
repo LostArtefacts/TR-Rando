@@ -184,12 +184,12 @@ internal static class TR4FileReadUtilities
 
     public static void PopulateStaticMeshes(BinaryReader reader, TR4Level lvl)
     {
-        lvl.LevelDataChunk.NumStaticMeshes = reader.ReadUInt32();
-        lvl.LevelDataChunk.StaticMeshes = new TRStaticMesh[lvl.LevelDataChunk.NumStaticMeshes];
+        uint numStaticMeshes = reader.ReadUInt32();
+        lvl.LevelDataChunk.StaticMeshes = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumStaticMeshes; i++)
+        for (int i = 0; i < numStaticMeshes; i++)
         {
-            lvl.LevelDataChunk.StaticMeshes[i] = TR2FileReadUtilities.ReadStaticMesh(reader);
+            lvl.LevelDataChunk.StaticMeshes.Add(TR2FileReadUtilities.ReadStaticMesh(reader));
         }
     }
 

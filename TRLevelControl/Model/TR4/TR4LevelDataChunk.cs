@@ -30,10 +30,7 @@ public class TR4LevelDataChunk : ISerializableCompact
     public List<TRMeshTreeNode> MeshTrees { get; set; }
     public List<ushort> Frames { get; set; }
     public List<TRModel> Models { get; set; }
-
-    public uint NumStaticMeshes { get; set; }
-
-    public TRStaticMesh[] StaticMeshes { get; set; }
+    public List<TRStaticMesh> StaticMeshes { get; set; }
 
     public byte[] SPRMarker { get; set; }
 
@@ -172,8 +169,7 @@ public class TR4LevelDataChunk : ISerializableCompact
                 writer.Write(model.Serialize());
             }
 
-            writer.Write(NumStaticMeshes);
-
+            writer.Write((uint)StaticMeshes.Count);
             foreach (TRStaticMesh sm in StaticMeshes)
             {
                 writer.Write(sm.Serialize());

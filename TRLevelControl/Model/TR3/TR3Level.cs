@@ -41,16 +41,7 @@ public class TR3Level : TRLevelBase
     public List<TRMeshTreeNode> MeshTrees { get; set; }
     public List<ushort> Frames { get; set; }
     public List<TRModel> Models { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumStaticMeshes { get; set; }
-
-    /// <summary>
-    /// NumStaticMeshes * 32 bytes
-    /// </summary>
-    public TRStaticMesh[] StaticMeshes { get; set; }
+    public List<TRStaticMesh> StaticMeshes { get; set; }
 
     /// <summary>
     /// 4 bytes

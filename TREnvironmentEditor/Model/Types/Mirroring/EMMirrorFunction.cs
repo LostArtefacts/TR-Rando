@@ -583,7 +583,7 @@ public class EMMirrorFunction : BaseEMFunction
         });
     }
 
-    private static void MirrorStaticMeshes(TRStaticMesh[] staticMeshes, Func<TRStaticMesh, TRMesh> meshFunc)
+    private static void MirrorStaticMeshes(List<TRStaticMesh> staticMeshes, Func<TRStaticMesh, TRMesh> meshFunc)
     {
         foreach (TRStaticMesh staticMesh in staticMeshes)
         {
