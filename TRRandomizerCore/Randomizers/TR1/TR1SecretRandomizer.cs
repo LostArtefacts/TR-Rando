@@ -837,11 +837,9 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
                 // Work out which models are available to replace as secret pickups.
                 // We exclude current puzzle/key items from the available switching pool.
-                List<TRModel> models = level.Data.Models.ToList();
-
                 foreach (TR1Type puzzleType in _modelReplacements.Keys)
                 {
-                    if (models.Find(m => m.ID == (uint)puzzleType) == null)
+                    if (level.Data.Models.Find(m => m.ID == (uint)puzzleType) == null)
                     {
                         allocation.AvailablePickupModels.Add(puzzleType);
                     }
@@ -873,7 +871,6 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
                     importer.Import();
 
-                    List<TRModel> models = level.Data.Models.ToList();
                     List<TRSpriteSequence> sequences = level.Data.SpriteSequences.ToList();
 
                     // Redefine the artefacts as puzzle models
@@ -884,7 +881,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         TR1Type puzzleModelType = allocation.AvailablePickupModels.First();
                         TR1Type puzzlePickupType = _modelReplacements[puzzleModelType];
 
-                        models.Find(m => m.ID == (uint)secretModelType).ID = (uint)puzzleModelType;
+                        level.Data.Models.Find(m => m.ID == (uint)secretModelType).ID = (uint)puzzleModelType;
                         sequences.Find(s => s.SpriteID == (int)secretPickupType).SpriteID = (int)puzzlePickupType;
 
                         if (secretModelType == TR1Type.SecretScion_M_H && _outer.Are3DPickupsEnabled())
@@ -907,9 +904,6 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         // Assign a name for the script
                         SetPuzzleTypeName(level, puzzlePickupType, _pickupNames[secretModelType]);
                     }
-
-                    level.Data.Models = models.ToArray();
-                    level.Data.NumModels = (uint)models.Count;
                 }
 
                 if (!_outer.TriggerProgress())

@@ -136,7 +136,7 @@ public class DynamicTextureBuilder
         // Lara will be partially re-textured.
         foreach (TR1Type modelID in modelIDs)
         {
-            TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)modelID);
+            TRModel model = level.Data.Models.Find(m => m.ID == (uint)modelID);
             if (model != null)
             {
                 AddModelTextures(level.Data, model, hips, defaultObjectTextures, modelMeshes);
@@ -145,7 +145,7 @@ public class DynamicTextureBuilder
 
         foreach (TR1Type modelID in _enemyIDs)
         {
-            TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)modelID);
+            TRModel model = level.Data.Models.Find(m => m.ID == (uint)modelID);
             if (model != null)
             {
                 AddModelTextures(level.Data, model, hips, enemyObjectTextures, modelMeshes);
@@ -173,7 +173,7 @@ public class DynamicTextureBuilder
         Dictionary<TR1Type, TR1Type> keyItems = TR1TypeUtilities.GetKeyItemMap();
         foreach (TR1Type pickupType in keyItems.Keys)
         {
-            TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)keyItems[pickupType]);
+            TRModel model = level.Data.Models.Find(m => m.ID == (uint)keyItems[pickupType]);
             if (model == null)
             {
                 continue;

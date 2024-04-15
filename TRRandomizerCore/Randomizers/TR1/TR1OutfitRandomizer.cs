@@ -379,7 +379,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             TRMesh goldenHips = TRMeshUtilities.GetModelFirstMesh(level.Data, TR1Type.LaraMiscAnim_H);
             ushort goldPalette = goldenHips.ColouredRectangles[0].Texture;
 
-            TRModel ponytail = Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.LaraPonytail_H_U);
+            TRModel ponytail = level.Data.Models.Find(m => m.ID == (uint)TR1Type.LaraPonytail_H_U);
             TRMesh[] ponytailMeshes = TRMeshUtilities.GetModelMeshes(level.Data, ponytail);
             MeshEditor editor = new();
             foreach (TRMesh mesh in ponytailMeshes)
@@ -388,10 +388,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 TRMeshUtilities.InsertMesh(level.Data, clonedMesh);
             }
 
-            List<TRMeshTreeNode> nodes = level.Data.MeshTrees.ToList();
-            nodes.AddRange(TRMeshUtilities.GetModelMeshTrees(level.Data, ponytail));
-            level.Data.MeshTrees = nodes.ToArray();
-            level.Data.NumMeshTrees += ponytail.NumMeshes;
+            level.Data.MeshTrees.AddRange(TRMeshUtilities.GetModelMeshTrees(level.Data, ponytail));
             ponytail.NumMeshes *= 2;
         }
 
@@ -720,7 +717,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 return false;
             }
 
-            TRModel existingModel = Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.LaraMiscAnim_H);
+            TRModel existingModel = level.Data.Models.Find(m => m.ID == (uint)TR1Type.LaraMiscAnim_H);
             if (existingModel != null)
             {
                 // If we already have the gym outfit available, we're done.
@@ -753,7 +750,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 // e.g. for Adam death animation and scion pickups.
                 if (existingModel != null)
                 {
-                    TRModel newModel = Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.LaraMiscAnim_H);
+                    TRModel newModel = level.Data.Models.Find(m => m.ID == (uint)TR1Type.LaraMiscAnim_H);
                     newModel.Animation = existingModel.Animation;
                     newModel.FrameOffset = existingModel.FrameOffset;
                 }

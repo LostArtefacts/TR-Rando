@@ -10,7 +10,7 @@ internal class TRModelControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Model Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Model count: " + IOManager.CurrentLevelAsTR1?.NumModels);
+            ImGui.Text("Model count: " + IOManager.CurrentLevelAsTR1?.Models.Count);
 
             ImGui.TreePop();
         }

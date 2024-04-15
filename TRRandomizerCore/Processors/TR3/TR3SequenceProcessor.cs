@@ -272,14 +272,12 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private void AmendWillardBoss(TR3CombinedLevel level)
     {
-        List<TRModel> models = level.Data.Models.ToList();
-
         // Add new duplicate models for keys, so secret rando doesn't replace the originals.
         foreach (TR3Type artefact in _artefactAssignment.Keys)
         {
             TR3Type replacement = _artefactAssignment[artefact];
-            TRModel artefactModel = models.Find(m => m.ID == (uint)artefact);
-            models.Add(new TRModel
+            TRModel artefactModel = level.Data.Models.Find(m => m.ID == (uint)artefact);
+            level.Data.Models.Add(new()
             {
                 Animation = artefactModel.Animation,
                 FrameOffset = artefactModel.FrameOffset,
@@ -299,9 +297,6 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         {
             level.Script.Keys[i] = ScriptEditor.Script.GameStrings1[80 + i];
         }
-
-        level.Data.Models = models.ToArray();
-        level.Data.NumModels = (uint)models.Count;
 
         // Apply any changes needed for the boss fight
         AmendBossFight(level);

@@ -25,11 +25,11 @@ public class EMConvertModelFunction : BaseEMFunction
         UpdateModelEntities(level.Entities);
     }
 
-    private void ConvertModel(TRModel[] models)
+    private void ConvertModel(List<TRModel> models)
     {
-        if (Array.Find(models, m => m.ID == NewModelID) == null)
+        if (models.Find(m => m.ID == NewModelID) == null)
         {
-            TRModel oldModel = Array.Find(models, m => m.ID == OldModelID);
+            TRModel oldModel = models.Find(m => m.ID == OldModelID);
             if (oldModel != null)
             {
                 oldModel.ID = NewModelID;

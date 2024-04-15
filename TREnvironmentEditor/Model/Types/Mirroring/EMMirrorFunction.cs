@@ -1263,7 +1263,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private static void MirrorDependentFaces(TRModel[] models, ISet<ushort> textureReferences, Func<uint, TRMesh[]> meshAction)
+    private static void MirrorDependentFaces(IEnumerable<TRModel> models, ISet<ushort> textureReferences, Func<uint, TRMesh[]> meshAction)
     {
         foreach (TRModel model in models)
         {

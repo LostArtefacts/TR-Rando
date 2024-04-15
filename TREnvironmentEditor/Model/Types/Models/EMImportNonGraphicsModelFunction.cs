@@ -72,12 +72,12 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID));
     }
 
-    private List<EMMeshTextureData> PrepareImportData(TRModel[] existingModels)
+    private List<EMMeshTextureData> PrepareImportData(List<TRModel> existingModels)
     {
         List<EMMeshTextureData> importData = new();
         foreach (EMMeshTextureData data in Data)
         {
-            if (Array.Find(existingModels, m => m.ID == data.ModelID) == null)
+            if (existingModels.Find(m => m.ID == data.ModelID) == null)
             {
                 importData.Add(data);
             }

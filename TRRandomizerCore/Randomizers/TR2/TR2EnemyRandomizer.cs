@@ -489,19 +489,18 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
     private static void DisguiseEntity(TR2CombinedLevel level, TR2Type guiser, TR2Type targetEntity)
     {
-        List<TRModel> models = level.Data.Models.ToList();
-        int existingIndex = models.FindIndex(m => m.ID == (short)guiser);
+        int existingIndex = level.Data.Models.FindIndex(m => m.ID == (short)guiser);
         if (existingIndex != -1)
         {
-            models.RemoveAt(existingIndex);
+            level.Data.Models.RemoveAt(existingIndex);
         }
 
-        TRModel disguiseAsModel = models[models.FindIndex(m => m.ID == (short)targetEntity)];
+        TRModel disguiseAsModel = level.Data.Models.Find(m => m.ID == (short)targetEntity);
         if (targetEntity == TR2Type.BirdMonster && level.Is(TR2LevelNames.CHICKEN))
         {
             // We have to keep the original model for the boss, so in
             // this instance we just clone the model for the guiser
-            models.Add(new TRModel
+            level.Data.Models.Add(new()
             {
                 Animation = disguiseAsModel.Animation,
                 FrameOffset = disguiseAsModel.FrameOffset,
@@ -515,9 +514,6 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         {
             disguiseAsModel.ID = (uint)guiser;
         }
-
-        level.Data.Models = models.ToArray();
-        level.Data.NumModels = (uint)models.Count;
     }
 
     private void RandomizeEnemies(TR2CombinedLevel level, EnemyRandomizationCollection enemies)
@@ -978,7 +974,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         // #327 Trick the game into never reaching the final frame of the death animation.
         // This results in a very abrupt death but avoids the level ending. For Ice Palace,
         // environment modifications will be made to enforce an alternative ending.
-        TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)TR2Type.BirdMonster);
+        TRModel model = level.Data.Models.Find(m => m.ID == (uint)TR2Type.BirdMonster);
         if (model != null)
         {
             level.Data.Animations[model.Animation + 20].FrameEnd = level.Data.Animations[model.Animation + 19].FrameEnd;

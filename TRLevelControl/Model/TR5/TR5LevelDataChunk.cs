@@ -28,33 +28,13 @@ public class TR5LevelDataChunk
 
     public uint[] MeshPointers { get; set; }
 
-    public uint NumAnimations { get; set; }
-
-    public TR4Animation[] Animations { get; set; }
-
-    public uint NumStateChanges { get; set; }
-
-    public TRStateChange[] StateChanges { get; set; }
-
-    public uint NumAnimDispatches { get; set; }
-
-    public TRAnimDispatch[] AnimDispatches { get; set; }
-
-    public uint NumAnimCommands { get; set; }
-
-    public TRAnimCommand[] AnimCommands { get; set; }
-
-    public uint NumMeshTrees { get; set; }
-
-    public TRMeshTreeNode[] MeshTrees { get; set; }
-
-    public uint NumFrames { get; set; }
-
-    public ushort[] Frames { get; set; }
-
-    public uint NumModels { get; set; }
-
-    public TR5Model[] Models { get; set; }
+    public List<TR4Animation> Animations { get; set; }
+    public List<TRStateChange> StateChanges { get; set; }
+    public List<TRAnimDispatch> AnimDispatches { get; set; }
+    public List<TRAnimCommand> AnimCommands { get; set; }
+    public List<TRMeshTreeNode> MeshTrees { get; set; }
+    public List<ushort> Frames { get; set; }
+    public List<TR5Model> Models { get; set; }
 
     public uint NumStaticMeshes { get; set; }
 
@@ -159,50 +139,43 @@ public class TR5LevelDataChunk
                 writer.Write(data);
             }
 
-            writer.Write(NumAnimations);
-
+            writer.Write((uint)Animations.Count);
             foreach (TR4Animation anim in Animations)
             {
                 writer.Write(anim.Serialize());
             }
 
-            writer.Write(NumStateChanges);
-
+            writer.Write((uint)StateChanges.Count);
             foreach (TRStateChange sc in StateChanges)
             {
                 writer.Write(sc.Serialize());
             }
 
-            writer.Write(NumAnimDispatches);
-
+            writer.Write((uint)AnimDispatches.Count);
             foreach (TRAnimDispatch ad in AnimDispatches)
             {
                 writer.Write(ad.Serialize());
             }
 
-            writer.Write(NumAnimCommands);
-
+            writer.Write((uint)AnimCommands.Count);
             foreach (TRAnimCommand ac in AnimCommands)
             {
                 writer.Write(ac.Serialize());
             }
 
-            writer.Write(NumMeshTrees * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
-
+            writer.Write((uint)MeshTrees.Count * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
             foreach (TRMeshTreeNode node in MeshTrees)
             {
                 writer.Write(node.Serialize());
             }
 
-            writer.Write(NumFrames);
-
+            writer.Write((uint)Frames.Count);
             foreach (ushort frame in Frames)
             {
                 writer.Write(frame);
             }
 
-            writer.Write(NumModels);
-
+            writer.Write((uint)Models.Count);
             foreach (TR5Model model in Models)
             {
                 writer.Write(model.Serialize());

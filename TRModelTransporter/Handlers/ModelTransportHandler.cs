@@ -20,21 +20,18 @@ public class ModelTransportHandler
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
 
-    private static TRModel GetTRModel(IEnumerable<TRModel> models, short entityID)
+    private static TRModel GetTRModel(List<TRModel> models, short entityID)
     {
-        TRModel model = models.ToList().Find(m => m.ID == entityID);
+        TRModel model = models.Find(m => m.ID == entityID);
         return model ?? throw new ArgumentException($"The model for {entityID} could not be found.");
     }
 
     public static void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TR1Type, TR1Type> aliasPriority, IEnumerable<TR1Type> laraDependants)
     {
-        List<TRModel> levelModels = level.Models.ToList();
-        int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
+        int i = level.Models.FindIndex(m => m.ID == (short)definition.Entity);
         if (i == -1)
         {
-            levelModels.Add(definition.Model);
-            level.Models = levelModels.ToArray();
-            level.NumModels++;
+            level.Models.Add(definition.Model);
         }
         else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
         {
@@ -52,24 +49,21 @@ public class ModelTransportHandler
         {
             if (definition.Entity == TR1Type.Lara)
             {
-                ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+                ReplaceLaraDependants(level.Models, definition.Model, laraDependants.Select(e => (short)e));
             }
             else if (laraDependants.Contains((TR1Type)definition.Model.ID))
             {
-                ReplaceLaraDependants(levelModels, levelModels.Find(m => m.ID == (uint)TR1Type.Lara), new short[] { (short)definition.Model.ID });
+                ReplaceLaraDependants(level.Models, level.Models.Find(m => m.ID == (uint)TR1Type.Lara), new short[] { (short)definition.Model.ID });
             }
         }
     }
 
     public static void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Type, TR2Type> aliasPriority, IEnumerable<TR2Type> laraDependants)
     {
-        List<TRModel> levelModels = level.Models.ToList();
-        int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
+        int i = level.Models.FindIndex(m => m.ID == (short)definition.Entity);
         if (i == -1)
         {
-            levelModels.Add(definition.Model);
-            level.Models = levelModels.ToArray();
-            level.NumModels++;
+            level.Models.Add(definition.Model);
         }
         else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
         {
@@ -85,19 +79,16 @@ public class ModelTransportHandler
         // their starting mesh and mesh tree indices are just remapped to Lara's.
         if (definition.Entity == TR2Type.Lara && laraDependants != null)
         {
-            ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+            ReplaceLaraDependants(level.Models, definition.Model, laraDependants.Select(e => (short)e));
         }
     }
 
     public static void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Type, TR3Type> aliasPriority, IEnumerable<TR3Type> laraDependants, IEnumerable<TR3Type> unsafeReplacements)
     {
-        List<TRModel> levelModels = level.Models.ToList();
-        int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
+        int i = level.Models.FindIndex(m => m.ID == (short)definition.Entity);
         if (i == -1)
         {
-            levelModels.Add(definition.Model);
-            level.Models = levelModels.ToArray();
-            level.NumModels++;
+            level.Models.Add(definition.Model);
         }
         else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
         {
@@ -119,7 +110,7 @@ public class ModelTransportHandler
 
         if (definition.Entity == TR3Type.Lara && laraDependants != null)
         {
-            ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+            ReplaceLaraDependants(level.Models, definition.Model, laraDependants.Select(e => (short)e));
         }
     }
 

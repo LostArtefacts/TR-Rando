@@ -137,61 +137,59 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         _level.Meshes = ConstructMeshData(_level.MeshPointers, _level.RawMeshData);
 
         //Animations
-        _level.NumAnimations = reader.ReadUInt32();
-        _level.Animations = new TRAnimation[_level.NumAnimations];
-        for (int i = 0; i < _level.NumAnimations; i++)
+        uint numAnimations = reader.ReadUInt32();
+        _level.Animations = new();
+        for (int i = 0; i < numAnimations; i++)
         {
-            _level.Animations[i] = TR2FileReadUtilities.ReadAnimation(reader);
+            _level.Animations.Add(TR2FileReadUtilities.ReadAnimation(reader));
         }
 
         //State Changes
-        _level.NumStateChanges = reader.ReadUInt32();
-        _level.StateChanges = new TRStateChange[_level.NumStateChanges];
-        for (int i = 0; i < _level.NumStateChanges; i++)
+        uint numStateChanges = reader.ReadUInt32();
+        _level.StateChanges = new();
+        for (int i = 0; i < numStateChanges; i++)
         {
-            _level.StateChanges[i] = TR2FileReadUtilities.ReadStateChange(reader);
+            _level.StateChanges.Add(TR2FileReadUtilities.ReadStateChange(reader));
         }
 
         //Animation Dispatches
-        _level.NumAnimDispatches = reader.ReadUInt32();
-        _level.AnimDispatches = new TRAnimDispatch[_level.NumAnimDispatches];
-        for (int i = 0; i < _level.NumAnimDispatches; i++)
+        uint numAnimDispatches = reader.ReadUInt32();
+        _level.AnimDispatches = new();
+        for (int i = 0; i < numAnimDispatches; i++)
         {
-            _level.AnimDispatches[i] = TR2FileReadUtilities.ReadAnimDispatch(reader);
+            _level.AnimDispatches.Add(TR2FileReadUtilities.ReadAnimDispatch(reader));
         }
 
         //Animation Commands
-        _level.NumAnimCommands = reader.ReadUInt32();
-        _level.AnimCommands = new TRAnimCommand[_level.NumAnimCommands];
-        for (int i = 0; i < _level.NumAnimCommands; i++)
+        uint numAnimCommands = reader.ReadUInt32();
+        _level.AnimCommands = new();
+        for (int i = 0; i < numAnimCommands; i++)
         {
-            _level.AnimCommands[i] = TR2FileReadUtilities.ReadAnimCommand(reader);
+            _level.AnimCommands.Add(TR2FileReadUtilities.ReadAnimCommand(reader));
         }
 
         //Mesh Trees
-        _level.NumMeshTrees = reader.ReadUInt32();
-        _level.NumMeshTrees /= 4;
-        _level.MeshTrees = new TRMeshTreeNode[_level.NumMeshTrees];
-        for (int i = 0; i < _level.NumMeshTrees; i++)
+        uint numMeshTrees = reader.ReadUInt32() / 4;
+        _level.MeshTrees = new();
+        for (int i = 0; i < numMeshTrees; i++)
         {
-            _level.MeshTrees[i] = TR2FileReadUtilities.ReadMeshTreeNode(reader);
+            _level.MeshTrees.Add(TR2FileReadUtilities.ReadMeshTreeNode(reader));
         }
 
         //Frames
-        _level.NumFrames = reader.ReadUInt32();
-        _level.Frames = new ushort[_level.NumFrames];
-        for (int i = 0; i < _level.NumFrames; i++)
+        uint numFrames = reader.ReadUInt32();
+        _level.Frames = new();
+        for (int i = 0; i < numFrames; i++)
         {
-            _level.Frames[i] = reader.ReadUInt16();
+            _level.Frames.Add(reader.ReadUInt16());
         }
 
         //Models
-        _level.NumModels = reader.ReadUInt32();
-        _level.Models = new TRModel[_level.NumModels];
-
-        for (int i = 0; i < _level.NumModels; i++)
+        uint numModels = reader.ReadUInt32();
+        _level.Models = new();
+        for (int i = 0; i < numModels; i++)
         {
-            _level.Models[i] = TR2FileReadUtilities.ReadModel(reader);
+            _level.Models.Add(TR2FileReadUtilities.ReadModel(reader));
         }
 
         //Static Meshes
@@ -360,20 +358,20 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write(_level.NumMeshPointers);
         foreach (uint ptr in _level.MeshPointers) { writer.Write(ptr); }
 
-        writer.Write(_level.NumAnimations);
+        writer.Write((uint)_level.Animations.Count);
         foreach (TRAnimation anim in _level.Animations) { writer.Write(anim.Serialize()); }
-        writer.Write(_level.NumStateChanges);
+        writer.Write((uint)_level.StateChanges.Count);
         foreach (TRStateChange statec in _level.StateChanges) { writer.Write(statec.Serialize()); }
-        writer.Write(_level.NumAnimDispatches);
+        writer.Write((uint)_level.AnimDispatches.Count);
         foreach (TRAnimDispatch dispatch in _level.AnimDispatches) { writer.Write(dispatch.Serialize()); }
-        writer.Write(_level.NumAnimCommands);
+        writer.Write((uint)_level.AnimCommands.Count);
         foreach (TRAnimCommand cmd in _level.AnimCommands) { writer.Write(cmd.Serialize()); }
-        writer.Write(_level.NumMeshTrees * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
+        writer.Write((uint)_level.MeshTrees.Count * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
         foreach (TRMeshTreeNode node in _level.MeshTrees) { writer.Write(node.Serialize()); }
-        writer.Write(_level.NumFrames);
+        writer.Write((uint)_level.Frames.Count);
         foreach (ushort frame in _level.Frames) { writer.Write(frame); }
 
-        writer.Write(_level.NumModels);
+        writer.Write((uint)_level.Models.Count);
         foreach (TRModel model in _level.Models) { writer.Write(model.Serialize()); }
         writer.Write(_level.NumStaticMeshes);
         foreach (TRStaticMesh mesh in _level.StaticMeshes) { writer.Write(mesh.Serialize()); }
