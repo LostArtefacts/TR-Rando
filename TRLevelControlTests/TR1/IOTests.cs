@@ -110,33 +110,30 @@ public class IOTests : TestBase
         // for comparison.
         Dictionary<int, byte[]> flipOffZones = new();
         Dictionary<int, byte[]> flipOnZones = new();
-        for (int i = 0; i < lvl.NumBoxes; i++)
+        for (int i = 0; i < lvl.Boxes.Count; i++)
         {
             flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
             flipOnZones[i] = lvl.Zones[i][FlipStatus.On].Serialize();
         }
 
         // Add a new box
-        List<TRBox> boxes = lvl.Boxes.ToList();
-        boxes.Add(boxes[0]);
-        lvl.Boxes = boxes.ToArray();
-        lvl.NumBoxes++;
+        lvl.Boxes.Add(lvl.Boxes[0]);
 
         // Add a new zone for the box and store its serialized form for comparison
-        int newBoxIndex = (int)(lvl.NumBoxes - 1);
+        int newBoxIndex = (int)(lvl.Boxes.Count - 1);
         TR1BoxUtilities.DuplicateZone(lvl, 0);
         flipOffZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.Off].Serialize();
         flipOnZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.On].Serialize();
 
         // Verify the number of zone ushorts matches what's expected for the box count
-        Assert.AreEqual(TR1BoxUtilities.FlattenZones(lvl.Zones).Length, (int)(6 * lvl.NumBoxes));
+        Assert.AreEqual(TR1BoxUtilities.FlattenZones(lvl.Zones).Count, (int)(6 * lvl.Boxes.Count));
 
         // Write and re-read the level
         lvl = WriteReadTempLevel(lvl);
 
         // Capture all of the zones again. Make sure the addition of the zone above didn't
         // affect any of the others and that the addition itself matches after IO.
-        for (int i = 0; i < lvl.NumBoxes; i++)
+        for (int i = 0; i < lvl.Boxes.Count; i++)
         {
             byte[] flipOff = lvl.Zones[i][FlipStatus.Off].Serialize();
             Assert.IsTrue(flipOffZones.ContainsKey(i));

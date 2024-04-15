@@ -96,13 +96,13 @@ public class IOTests : TestBase
     {
         TR4Level level = GetTR4Level(levelName);
 
-        List<ushort> originalData = new(level.LevelDataChunk.Floordata);
+        List<ushort> originalData = new(level.LevelDataChunk.FloorData);
 
         FDControl fdControl = new();
         fdControl.ParseFromLevel(level);
         fdControl.WriteToLevel(level);
 
-        CollectionAssert.AreEqual(originalData, level.LevelDataChunk.Floordata);
+        CollectionAssert.AreEqual(originalData, level.LevelDataChunk.FloorData);
     }
 
     [TestMethod]
@@ -111,20 +111,15 @@ public class IOTests : TestBase
         TR4Level lvl = GetTR4Level(TR4LevelNames.CLEOPATRA);
 
         //Store the original floordata from the level
-        ushort[] originalFData = new ushort[lvl.LevelDataChunk.NumFloorData];
-        Array.Copy(lvl.LevelDataChunk.Floordata, originalFData, lvl.LevelDataChunk.NumFloorData);
+        List<ushort> originalFData = new(lvl.LevelDataChunk.FloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
         FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
         fdataReader.WriteToLevel(lvl);
 
-        //Store the new floordata written back by FDControl
-        ushort[] newFData = lvl.LevelDataChunk.Floordata;
-
         //Compare to make sure the original fdata was written back.
-        CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
-        Assert.AreEqual((uint)newFData.Length, lvl.LevelDataChunk.NumFloorData);
+        CollectionAssert.AreEqual(originalFData, lvl.LevelDataChunk.FloorData, "Floordata does not match");
     }
 
     [TestMethod]
@@ -133,19 +128,14 @@ public class IOTests : TestBase
         TR4Level lvl = GetTR4Level(TR4LevelNames.ALEXANDRIA);
 
         //Store the original floordata from the level
-        ushort[] originalFData = new ushort[lvl.LevelDataChunk.NumFloorData];
-        Array.Copy(lvl.LevelDataChunk.Floordata, originalFData, lvl.LevelDataChunk.NumFloorData);
+        List<ushort> originalFData = new(lvl.LevelDataChunk.FloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
         FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
         fdataReader.WriteToLevel(lvl);
 
-        //Store the new floordata written back by FDControl
-        ushort[] newFData = lvl.LevelDataChunk.Floordata;
-
         //Compare to make sure the original fdata was written back.
-        CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
-        Assert.AreEqual((uint)newFData.Length, lvl.LevelDataChunk.NumFloorData);
+        CollectionAssert.AreEqual(originalFData, lvl.LevelDataChunk.FloorData, "Floordata does not match");
     }
 }

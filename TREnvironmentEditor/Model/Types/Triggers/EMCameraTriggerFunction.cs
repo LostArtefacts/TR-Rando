@@ -27,12 +27,8 @@ public class EMCameraTriggerFunction : BaseEMFunction
         ushort cameraIndex;
         if (Camera != null)
         {
-            List<TRCamera> cameras = level.Cameras.ToList();
-            cameras.Add(CreateCamera(data));
-            level.Cameras = cameras.ToArray();
-
-            cameraIndex = (ushort)level.NumCameras;
-            level.NumCameras++;
+            cameraIndex = (ushort)level.Cameras.Count;
+            level.Cameras.Add(CreateCamera(data));
         }
         else
         {
@@ -81,12 +77,8 @@ public class EMCameraTriggerFunction : BaseEMFunction
         ushort cameraIndex;
         if (Camera != null)
         {
-            List<TRCamera> cameras = level.Cameras.ToList();
-            cameras.Add(CreateCamera(data));
-            level.Cameras = cameras.ToArray();
-
-            cameraIndex = (ushort)level.NumCameras;
-            level.NumCameras++;
+            cameraIndex = (ushort)level.Cameras.Count;
+            level.Cameras.Add(CreateCamera(data));
         }
         else
         {
@@ -135,12 +127,8 @@ public class EMCameraTriggerFunction : BaseEMFunction
         ushort cameraIndex;
         if (Camera != null)
         {
-            List<TRCamera> cameras = level.Cameras.ToList();
-            cameras.Add(CreateCamera(data));
-            level.Cameras = cameras.ToArray();
-
-            cameraIndex = (ushort)level.NumCameras;
-            level.NumCameras++;
+            cameraIndex = (ushort)level.Cameras.Count;
+            level.Cameras.Add(CreateCamera(data));
         }
         else
         {

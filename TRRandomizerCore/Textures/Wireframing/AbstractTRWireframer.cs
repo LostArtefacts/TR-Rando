@@ -730,7 +730,7 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract List<TRModel> GetModels(L level);
     protected abstract TRMesh[] GetModelMeshes(L level, TRModel model);
     protected abstract TRMesh[] GetLevelMeshes(L level);
-    protected abstract TRStaticMesh[] GetStaticMeshes(L level);
+    protected abstract List<TRStaticMesh> GetStaticMeshes(L level);
     protected abstract TRMesh GetStaticMesh(L level, TRStaticMesh staticMesh);
     protected abstract bool IsSkybox(TRModel model);
     protected abstract bool IsLaraModel(TRModel model);

@@ -530,7 +530,7 @@ public class EMMirrorFunction : BaseEMFunction
         MirrorBoxes(level.Boxes);
     }
 
-    private void MirrorBoxes(TRBox[] boxes)
+    private void MirrorBoxes(List<TRBox> boxes)
     {
         // TR1 boxes are in world coordinate values
         foreach (TRBox box in boxes)
@@ -543,7 +543,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void MirrorBoxes(TR2Box[] boxes)
+    private void MirrorBoxes(List<TR2Box> boxes)
     {
         // Boxes do not necessarily cover only one sector and several sectors can point
         // to the same box. So we need to work out the smallest new X position for shared
@@ -583,7 +583,7 @@ public class EMMirrorFunction : BaseEMFunction
         });
     }
 
-    private static void MirrorStaticMeshes(TRStaticMesh[] staticMeshes, Func<TRStaticMesh, TRMesh> meshFunc)
+    private static void MirrorStaticMeshes(List<TRStaticMesh> staticMeshes, Func<TRStaticMesh, TRMesh> meshFunc)
     {
         foreach (TRStaticMesh staticMesh in staticMeshes)
         {

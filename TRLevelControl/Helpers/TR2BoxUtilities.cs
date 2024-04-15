@@ -18,38 +18,34 @@ public class TR2BoxUtilities
     public static void DuplicateZone(TR2Level level, int boxIndex)
     {
         TR2ZoneGroup zoneGroup = level.Zones[boxIndex];
-        List<TR2ZoneGroup> zones = level.Zones.ToList();
-        zones.Add(new TR2ZoneGroup
+        level.Zones.Add(new()
         {
             NormalZone = zoneGroup.NormalZone.Clone(),
             AlternateZone = zoneGroup.AlternateZone.Clone()
         });
-        level.Zones = zones.ToArray();
     }
 
     public static void DuplicateZone(TR3Level level, int boxIndex)
     {
         TR2ZoneGroup zoneGroup = level.Zones[boxIndex];
-        List<TR2ZoneGroup> zones = level.Zones.ToList();
-        zones.Add(new TR2ZoneGroup
+        level.Zones.Add(new()
         {
             NormalZone = zoneGroup.NormalZone.Clone(),
             AlternateZone = zoneGroup.AlternateZone.Clone()
         });
-        level.Zones = zones.ToArray();
     }
 
-    public static TR2ZoneGroup[] ReadZones(uint numBoxes, ushort[] zoneData)
+    public static List<TR2ZoneGroup> ReadZones(uint numBoxes, ushort[] zoneData)
     {
         // Initialise the zone groups - one for every box.
-        TR2ZoneGroup[] zones = new TR2ZoneGroup[numBoxes];
-        for (int i = 0; i < zones.Length; i++)
+        List<TR2ZoneGroup> zones = new();
+        for (int i = 0; i < numBoxes; i++)
         {
-            zones[i] = new TR2ZoneGroup
+            zones.Add(new()
             {
-                NormalZone = new TR2Zone(),
-                AlternateZone = new TR2Zone()
-            };
+                NormalZone = new(),
+                AlternateZone = new()
+            });
         }
 
         // Build the zones, mapping the multidimensional ushort structures into the corresponding
@@ -62,13 +58,13 @@ public class TR2BoxUtilities
         {
             foreach (TR2Zones zone in zoneValues)
             {
-                for (int box = 0; box < zones.Length; box++)
+                for (int box = 0; box < zones.Count; box++)
                 {
                     zones[box][flip].GroundZones[zone] = zoneData[valueIndex++];
                 }
             }
 
-            for (int box = 0; box < zones.Length; box++)
+            for (int box = 0; box < zones.Count; box++)
             {
                 zones[box][flip].FlyZone = zoneData[valueIndex++];
             }
@@ -77,7 +73,7 @@ public class TR2BoxUtilities
         return zones;
     }
 
-    public static ushort[] FlattenZones(TR2ZoneGroup[] zoneGroups)
+    public static List<ushort> FlattenZones(List<TR2ZoneGroup> zoneGroups)
     {
         // Convert the zone objects back into a flat ushort list.
         IEnumerable<FlipStatus> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<FlipStatus>();
@@ -89,19 +85,19 @@ public class TR2BoxUtilities
         {
             foreach (TR2Zones zone in zoneValues)
             {
-                for (int box = 0; box < zoneGroups.Length; box++)
+                for (int box = 0; box < zoneGroups.Count; box++)
                 {
                     zones.Add(zoneGroups[box][flip].GroundZones[zone]);
                 }
             }
 
-            for (int box = 0; box < zoneGroups.Length; box++)
+            for (int box = 0; box < zoneGroups.Count; box++)
             {
                 zones.Add(zoneGroups[box][flip].FlyZone);
             }
         }
 
-        return zones.ToArray();
+        return zones;
     }
 
     public static int GetSectorCount(TR2Level level, int boxIndex)
@@ -146,7 +142,7 @@ public class TR2BoxUtilities
         return GetOverlaps(level.Overlaps, box, TR3NoOverlap);
     }
 
-    private static List<ushort> GetOverlaps(ushort[] allOverlaps, TR2Box box, short noOverlap)
+    private static List<ushort> GetOverlaps(List<ushort> allOverlaps, TR2Box box, short noOverlap)
     {
         List<ushort> overlaps = new();
 
@@ -183,8 +179,8 @@ public class TR2BoxUtilities
         }
 
         // Update the level data
-        level.Overlaps = newOverlaps.ToArray();
-        level.NumOverlaps = (uint)newOverlaps.Count;
+        level.Overlaps.Clear();
+        level.Overlaps.AddRange(newOverlaps);
     }
 
     public static void UpdateOverlaps(TR3Level level, TR2Box box, List<ushort> overlaps)
@@ -197,8 +193,8 @@ public class TR2BoxUtilities
         }
 
         // Update the level data
-        level.Overlaps = newOverlaps.ToArray();
-        level.NumOverlaps = (uint)newOverlaps.Count;
+        level.Overlaps.Clear();
+        level.Overlaps.AddRange(newOverlaps);
     }
 
     private static void UpdateOverlaps(TR2Box lvlBox, List<ushort> boxOverlaps, List<ushort> newOverlaps, short noOverlap)

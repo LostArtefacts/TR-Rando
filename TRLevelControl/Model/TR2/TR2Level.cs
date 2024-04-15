@@ -6,31 +6,8 @@ public class TR2Level : TRLevelBase
     public List<TRColour4> Palette16 { get; set; }
     public List<TRTexImage8> Images8 { get; set; }
     public List<TRTexImage16> Images16 { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint Unused { get; set; }
-
-    /// <summary>
-    /// 2 bytes
-    /// </summary>
-    public ushort NumRooms { get; set; }
-
-    /// <summary>
-    /// Variable
-    /// </summary>
-    public TR2Room[] Rooms { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumFloorData { get; set; }
-
-    /// <summary>
-    /// NumFloorData * 2 bytes
-    /// </summary>
-    public ushort[] FloorData { get; set; }
+    public List<TR2Room> Rooms { get; set; }
+    public List<ushort> FloorData { get; set; }
 
     /// <summary>
     /// 4 bytes
@@ -64,16 +41,7 @@ public class TR2Level : TRLevelBase
     public List<TRMeshTreeNode> MeshTrees { get; set; }
     public List<ushort> Frames { get; set; }
     public List<TRModel> Models { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumStaticMeshes { get; set; }
-
-    /// <summary>
-    /// NumStaticMeshes * 32 bytes
-    /// </summary>
-    public TRStaticMesh[] StaticMeshes { get; set; }
+    public List<TRStaticMesh> StaticMeshes { get; set; }
 
     /// <summary>
     /// 4 bytes
@@ -104,51 +72,11 @@ public class TR2Level : TRLevelBase
     /// NumSpriteSequences * 8 bytes
     /// </summary>
     public TRSpriteSequence[] SpriteSequences { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumCameras { get; set; }
-
-    /// <summary>
-    /// NumCameras * 16 bytes
-    /// </summary>
-    public TRCamera[] Cameras { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumSoundSources { get; set; }
-
-    /// <summary>
-    /// NumSoundSources * 16 bytes
-    /// </summary>
-    public TRSoundSource[] SoundSources { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumBoxes { get; set; }
-
-    /// <summary>
-    /// NumBoxes * 8 bytes
-    /// </summary>
-    public TR2Box[] Boxes { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumOverlaps { get; set; }
-
-    /// <summary>
-    /// NumOverlaps * 2 bytes
-    /// </summary>
-    public ushort[] Overlaps { get; set; }
-
-    /// <summary>
-    /// NumBoxes * 20 bytes (double check this)
-    /// </summary>
-    public TR2ZoneGroup[] Zones { get; set; }
+    public List<TRCamera> Cameras { get; set; }
+    public List<TRSoundSource> SoundSources { get; set; }
+    public List<TR2Box> Boxes { get; set; }
+    public List<ushort> Overlaps { get; set; }
+    public List<TR2ZoneGroup> Zones { get; set; }
 
     /// <summary>
     /// 4 bytes
@@ -161,16 +89,7 @@ public class TR2Level : TRLevelBase
     public TRAnimatedTexture[] AnimatedTextures { get; set; }
     public List<TR2Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }
-
-    /// <summary>
-    /// 2 bytes
-    /// </summary>
-    public ushort NumCinematicFrames { get; set; }
-
-    /// <summary>
-    /// NumCinematicFrames * 16 bytes
-    /// </summary>
-    public TRCinematicFrame[] CinematicFrames { get; set; }
+    public List<TRCinematicFrame> CinematicFrames { get; set; }
 
     /// <summary>
     /// 2 bytes

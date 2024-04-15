@@ -23,7 +23,7 @@ internal class TRCamerasControl : IDrawable, IModelUpdater
         
         if (ImGui.TreeNodeEx("Camera Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Camera count: " + IOManager.CurrentLevelAsTR1?.NumCameras);
+            ImGui.Text("Camera count: " + IOManager.CurrentLevelAsTR1?.Cameras.Count);
 
             ImGui.BeginChild("cam_property_display", new Vector2(400, 200), true);
             
@@ -63,8 +63,8 @@ internal class TRCamerasControl : IDrawable, IModelUpdater
             _index = 0;
 
         TR1Level level = IOManager.CurrentLevelAsTR1;
-        if (_index >= level.NumCameras)
-            _index = (int)(level.NumCameras - 1);
+        if (_index >= level.Cameras.Count)
+            _index = (level.Cameras.Count - 1);
     }
 
     public void Populate()
@@ -72,7 +72,7 @@ internal class TRCamerasControl : IDrawable, IModelUpdater
         if (IOManager.CurrentLevelAsTR1 is null)
             return;
         
-        if (IOManager.CurrentLevelAsTR1?.NumCameras == 0)
+        if (IOManager.CurrentLevelAsTR1?.Cameras.Count == 0)
             return;
         
         _camera = IOManager.CurrentLevelAsTR1?.Cameras[_index];
@@ -93,7 +93,7 @@ internal class TRCamerasControl : IDrawable, IModelUpdater
         if (IOManager.CurrentLevelAsTR1 is null || _camera is null)
             return;
         
-        if (IOManager.CurrentLevelAsTR1?.NumCameras == 0)
+        if (IOManager.CurrentLevelAsTR1?.Cameras.Count == 0)
             return;
         
         _camera.X = _x;

@@ -8,25 +8,16 @@ public class EMAddSoundSourceFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        List<TRSoundSource> soundSources = level.SoundSources.ToList();
-        soundSources.Add(Source);
-        level.SoundSources = soundSources.ToArray();
-        level.NumSoundSources++;
+        level.SoundSources.Add(Source);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        List<TRSoundSource> soundSources = level.SoundSources.ToList();
-        soundSources.Add(Source);
-        level.SoundSources = soundSources.ToArray();
-        level.NumSoundSources++;
+        level.SoundSources.Add(Source);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<TRSoundSource> soundSources = level.SoundSources.ToList();
-        soundSources.Add(Source);
-        level.SoundSources = soundSources.ToArray();
-        level.NumSoundSources++;
+        level.SoundSources.Add(Source);
     }
 }

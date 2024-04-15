@@ -98,10 +98,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
 
-        List<TRRoom> rooms = level.Rooms.ToList();
-        rooms.Add(room);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(room);
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -185,10 +182,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
 
-        List<TR2Room> rooms = level.Rooms.ToList();
-        rooms.Add(room);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(room);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -271,10 +265,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
 
-        List<TR3Room> rooms = level.Rooms.ToList();
-        rooms.Add(room);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(room);
     }
 
     private List<TRRoomSector> GenerateSectors(sbyte ceiling, sbyte floor)

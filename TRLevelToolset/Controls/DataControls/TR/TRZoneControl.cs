@@ -10,9 +10,9 @@ internal class TRZoneControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Zone Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Box count: " + IOManager.CurrentLevelAsTR1?.NumBoxes);
-            ImGui.Text("Overlap count: " + IOManager.CurrentLevelAsTR1?.NumOverlaps);
-            ImGui.Text("Zone Group count: " + IOManager.CurrentLevelAsTR1?.Zones.Length);
+            ImGui.Text("Box count: " + IOManager.CurrentLevelAsTR1?.Boxes.Count);
+            ImGui.Text("Overlap count: " + IOManager.CurrentLevelAsTR1?.Overlaps.Count);
+            ImGui.Text("Zone Group count: " + IOManager.CurrentLevelAsTR1?.Zones.Count);
             ImGui.TreePop();
         }
     }

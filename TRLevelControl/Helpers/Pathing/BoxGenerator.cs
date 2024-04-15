@@ -8,15 +8,12 @@ public class BoxGenerator
     public static void Generate(TRRoom room, TR1Level level, TRRoomSector linkedSector)
     {
         Room boxRoom = Room.Create(room);
-        Generate(boxRoom, (int)level.NumBoxes);
+        Generate(boxRoom, level.Boxes.Count);
 
-        List<TRBox> boxes = level.Boxes.ToList();
         foreach (Box box in boxRoom.Boxes)
         {
             TRBox trBox = box.ToTRBox(room.Info);
-            boxes.Add(trBox);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+            level.Boxes.Add(trBox);
             TR1BoxUtilities.UpdateOverlaps(level, trBox, box.Overlaps.Select(o => (ushort)o.Index).ToList());
             TR1BoxUtilities.DuplicateZone(level, linkedSector.BoxIndex);
         }
@@ -25,15 +22,12 @@ public class BoxGenerator
     public static void Generate(TR2Room room, TR2Level level, TRRoomSector linkedSector)
     {
         Room boxRoom = Room.Create(room);
-        Generate(boxRoom, (int)level.NumBoxes);
+        Generate(boxRoom, level.Boxes.Count);
 
-        List<TR2Box> boxes = level.Boxes.ToList();
         foreach (Box box in boxRoom.Boxes)
         {
             TR2Box trBox = box.ToTR2Box(room.Info);
-            boxes.Add(trBox);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+            level.Boxes.Add(trBox);
             TR2BoxUtilities.UpdateOverlaps(level, trBox, box.Overlaps.Select(o => (ushort)o.Index).ToList());
             TR2BoxUtilities.DuplicateZone(level, linkedSector.BoxIndex);
         }
@@ -42,15 +36,12 @@ public class BoxGenerator
     public static void Generate(TR3Room room, TR3Level level, TRRoomSector linkedSector)
     {
         Room boxRoom = Room.Create(room);
-        Generate(boxRoom, (int)level.NumBoxes);
+        Generate(boxRoom, (int)level.Boxes.Count);
 
-        List<TR2Box> boxes = level.Boxes.ToList();
         foreach (Box box in boxRoom.Boxes)
         {
             TR2Box trBox = box.ToTR2Box(room.Info);
-            boxes.Add(trBox);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+            level.Boxes.Add(trBox);
             TR2BoxUtilities.UpdateOverlaps(level, trBox, box.Overlaps.Select(o => (ushort)o.Index).ToList());
             TR2BoxUtilities.DuplicateZone(level, (linkedSector.BoxIndex & 0x7FF0) >> 4);
         }

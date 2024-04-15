@@ -220,7 +220,7 @@ public class IOTests : TestBase
 
         //Find a sector that currently has no floor data
         int room, roomSector = -1;
-        for (room = 0; room < lvl.NumRooms; room++)
+        for (room = 0; room < lvl.Rooms.Count; room++)
         {
             roomSector = lvl.Rooms[room].SectorList.ToList().FindIndex(s => s.FDIndex == 0);
             if (roomSector != -1)
@@ -295,7 +295,7 @@ public class IOTests : TestBase
 
         //Find a sector that currently has floor data
         int room, roomSector = -1;
-        for (room = 0; room < lvl.NumRooms; room++)
+        for (room = 0; room < lvl.Rooms.Count; room++)
         {
             roomSector = lvl.Rooms[room].SectorList.ToList().FindIndex(s => s.FDIndex > 0);
             if (roomSector != -1)
@@ -338,8 +338,7 @@ public class IOTests : TestBase
         TR2Level lvl = GetTR2Level(TR2LevelNames.LAIR);
 
         //Store the original floordata from the level
-        ushort[] originalFData = new ushort[lvl.NumFloorData];
-        Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
+        List<ushort> originalFData = new(lvl.FloorData);
 
         //Parse the floordata using FDControl
         FDControl fdataReader = new();
@@ -402,7 +401,6 @@ public class IOTests : TestBase
 
         //Finally compare to make sure the original fdata was written back.
         CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");
-        Assert.AreEqual((uint)lvl.FloorData.Length, lvl.NumFloorData);
     }
 
     [TestMethod]
@@ -859,33 +857,30 @@ public class IOTests : TestBase
         // for comparison.
         Dictionary<int, byte[]> flipOffZones = new();
         Dictionary<int, byte[]> flipOnZones = new();
-        for (int i = 0; i < lvl.NumBoxes; i++)
+        for (int i = 0; i < lvl.Boxes.Count; i++)
         {
             flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
             flipOnZones[i] = lvl.Zones[i][FlipStatus.On].Serialize();
         }
 
         // Add a new box
-        List<TR2Box> boxes = lvl.Boxes.ToList();
-        boxes.Add(boxes[0]);
-        lvl.Boxes = boxes.ToArray();
-        lvl.NumBoxes++;
+        lvl.Boxes.Add(lvl.Boxes[0]);
 
         // Add a new zone for the box and store its serialized form for comparison
-        int newBoxIndex = (int)(lvl.NumBoxes - 1);
+        int newBoxIndex = (int)(lvl.Boxes.Count - 1);
         TR2BoxUtilities.DuplicateZone(lvl, 0);
         flipOffZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.Off].Serialize();
         flipOnZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.On].Serialize();
 
         // Verify the number of zone ushorts matches what's expected for the box count
-        Assert.AreEqual(TR2BoxUtilities.FlattenZones(lvl.Zones).Length, (int)(10 * lvl.NumBoxes));
+        Assert.AreEqual(TR2BoxUtilities.FlattenZones(lvl.Zones).Count, (int)(10 * lvl.Boxes.Count));
 
         // Write and re-read the level
         lvl = WriteReadTempLevel(lvl);
 
         // Capture all of the zones again. Make sure the addition of the zone above didn't
         // affect any of the others and that the addition itself matches after IO.
-        for (int i = 0; i < lvl.NumBoxes; i++)
+        for (int i = 0; i < lvl.Boxes.Count; i++)
         {
             byte[] flipOff = lvl.Zones[i][FlipStatus.Off].Serialize();
             Assert.IsTrue(flipOffZones.ContainsKey(i));
@@ -909,7 +904,7 @@ public class IOTests : TestBase
         // index itself (which also stores Blockable/Blocked bits).
         Dictionary<int, List<ushort>> boxOverlaps = new();
         Dictionary<int, short> boxOverlapIndices = new();
-        for (int i = 0; i < lvl.NumBoxes; i++)
+        for (int i = 0; i < lvl.Boxes.Count; i++)
         {
             boxOverlaps[i] = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
             boxOverlapIndices[i] = lvl.Boxes[i].OverlapIndex;
@@ -918,10 +913,10 @@ public class IOTests : TestBase
         // Confirm the total matches the total number of overlaps in the level.
         int total = 0;
         boxOverlaps.Values.ToList().ForEach(v => total += v.Count);
-        Assert.AreEqual(lvl.NumOverlaps, (uint)total);
+        Assert.AreEqual(lvl.Overlaps.Count, total);
 
         // Write everything back with no changes.
-        for (int i = 0; i < lvl.NumBoxes; i++)
+        for (int i = 0; i < lvl.Boxes.Count; i++)
         {
             TR2BoxUtilities.UpdateOverlaps(lvl, lvl.Boxes[i], boxOverlaps[i]);
         }
@@ -930,13 +925,13 @@ public class IOTests : TestBase
         CollectionAssert.AreEqual(originalOverlaps, lvl.Overlaps.ToList());
 
         // Confirm the box overlap indices are identical
-        for (int i = 0; i < lvl.NumBoxes; i++)
+        for (int i = 0; i < lvl.Boxes.Count; i++)
         {
             Assert.AreEqual(boxOverlapIndices[i], lvl.Boxes[i].OverlapIndex);
         }
 
         // Add a new overlap to the first box, selecting a box that isn't already there.
-        for (ushort i = 1; i < lvl.NumBoxes; i++)
+        for (ushort i = 1; i < lvl.Boxes.Count; i++)
         {
             if (!boxOverlaps[0].Contains(i))
             {
@@ -954,7 +949,7 @@ public class IOTests : TestBase
         // Capture all of the overlaps again and confirm the numbers are what we expect i.e.
         // the new overlap for box 0 exists and none of the other overlaps were affected by
         // the addition.
-        for (int i = 0; i < lvl.NumBoxes; i++)
+        for (int i = 0; i < lvl.Boxes.Count; i++)
         {
             List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
             Assert.IsTrue(boxOverlaps.ContainsKey(i));

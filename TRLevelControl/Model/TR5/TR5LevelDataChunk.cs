@@ -7,16 +7,8 @@ public class TR5LevelDataChunk
     public uint CompressedSize { get; set; }
 
     public uint Unused { get; set; }
-
-    //It says ushort in TRosettaStone, but looking at level files in HxD it seems there is always
-    //"00 00" before the first XELA landmark. Based on that NumRooms will be read as a uint.
-    public uint NumRooms { get; set; }
-
-    public TR5Room[] Rooms { get; set; }
-
-    public uint NumFloorData { get; set; }
-
-    public ushort[] Floordata { get; set; }
+    public List<TR5Room> Rooms { get; set; }
+    public List<ushort> FloorData { get; set; }
 
     public uint NumMeshData { get; set; }
 
@@ -35,10 +27,7 @@ public class TR5LevelDataChunk
     public List<TRMeshTreeNode> MeshTrees { get; set; }
     public List<ushort> Frames { get; set; }
     public List<TR5Model> Models { get; set; }
-
-    public uint NumStaticMeshes { get; set; }
-
-    public TRStaticMesh[] StaticMeshes { get; set; }
+    public List<TRStaticMesh> StaticMeshes { get; set; }
 
     public byte[] SPRMarker { get; set; }
 
@@ -49,28 +38,12 @@ public class TR5LevelDataChunk
     public uint NumSpriteSequences { get; set; }
 
     public TRSpriteSequence[] SpriteSequences { get; set; }
-
-    public uint NumCameras { get; set; }
-
-    public TRCamera[] Cameras { get; set; }
-
-    public uint NumFlybyCameras { get; set; }
-
-    public TR4FlyByCamera[] FlybyCameras { get; set; }
-
-    public uint NumSoundSources { get; set; }
-
-    public TRSoundSource[] SoundSources { get; set; }
-
-    public uint NumBoxes { get; set; }
-
-    public TR2Box[] Boxes { get; set; }
-
-    public uint NumOverlaps { get; set; }
-
-    public ushort[] Overlaps { get; set; }
-
-    public short[] Zones { get; set; }
+    public List<TRCamera> Cameras { get; set; }
+    public List<TR4FlyByCamera> FlybyCameras { get; set; }
+    public List<TRSoundSource> SoundSources { get; set; }
+    public List<TR2Box> Boxes { get; set; }
+    public List<ushort> Overlaps { get; set; }
+    public List<short> Zones { get; set; }
 
     public uint NumAnimatedTextures { get; set; }
 
@@ -111,19 +84,15 @@ public class TR5LevelDataChunk
         using (TRLevelWriter writer = new(stream))
         {
             writer.Write(Unused);
-            writer.Write(NumRooms);
 
+            writer.Write((uint)Rooms.Count);
             foreach (TR5Room room in Rooms)
             {
                 writer.Write(room.Serialize());
             }
 
-            writer.Write(NumFloorData);
-
-            foreach (ushort data in Floordata)
-            {
-                writer.Write(data);
-            }
+            writer.Write((uint)FloorData.Count);
+            writer.Write(FloorData);
 
             writer.Write(NumMeshData);
 
@@ -181,8 +150,7 @@ public class TR5LevelDataChunk
                 writer.Write(model.Serialize());
             }
 
-            writer.Write(NumStaticMeshes);
-
+            writer.Write((uint)StaticMeshes.Count);
             foreach (TRStaticMesh sm in StaticMeshes)
             {
                 writer.Write(sm.Serialize());
@@ -204,36 +172,31 @@ public class TR5LevelDataChunk
                 writer.Write(seq.Serialize());
             }
 
-            writer.Write(NumCameras);
-
+            writer.Write((uint)Cameras.Count);
             foreach (TRCamera cam in Cameras)
             {
                 writer.Write(cam.Serialize());
             }
 
-            writer.Write(NumFlybyCameras);
-
+            writer.Write((uint)FlybyCameras.Count);
             foreach (TR4FlyByCamera flycam in FlybyCameras)
             {
                 writer.Write(flycam.Serialize());
             }
 
-            writer.Write(NumSoundSources);
-
+            writer.Write((uint)SoundSources.Count);
             foreach (TRSoundSource ssrc in SoundSources)
             {
                 writer.Write(ssrc.Serialize());
             }
 
-            writer.Write(NumBoxes);
-
+            writer.Write((uint)Boxes.Count);
             foreach (TR2Box box in Boxes)
             {
                 writer.Write(box.Serialize());
             }
 
-            writer.Write(NumOverlaps);
-
+            writer.Write((uint)Overlaps.Count);
             foreach (ushort overlap in Overlaps)
             {
                 writer.Write(overlap);

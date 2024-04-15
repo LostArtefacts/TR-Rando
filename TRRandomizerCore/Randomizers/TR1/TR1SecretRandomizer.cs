@@ -254,7 +254,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
 
         rewardRoom.Room.ApplyToLevel(level.Data);
-        short roomIndex = (short)(level.Data.NumRooms - 1);
+        short roomIndex = (short)(level.Data.Rooms.Count - 1);
 
         // Convert the temporary doors
         rewardRoom.DoorIndices = placeholder.DoorIndices;
@@ -297,15 +297,11 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         {
             double countedSecrets = Settings.DevelopmentMode ? _maxSecretCount : level.Script.NumSecrets;
             rewardRoom.CameraIndices = new List<int>();
-            List<TRCamera> cameras = level.Data.Cameras.ToList();
             for (int i = 0; i < countedSecrets; i++)
             {
-                rewardRoom.CameraIndices.Add(cameras.Count);
-                cameras.Add(rewardRoom.Cameras[i % rewardRoom.Cameras.Count]);
+                rewardRoom.CameraIndices.Add(level.Data.Cameras.Count);
+                level.Data.Cameras.Add(rewardRoom.Cameras[i % rewardRoom.Cameras.Count]);
             }
-
-            level.Data.Cameras = cameras.ToArray();
-            level.Data.NumCameras = (uint)cameras.Count;
 
             ushort cameraTarget;
             if (rewardRoom.CameraTarget != null && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
@@ -536,7 +532,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
     private bool TestSecretPlacement(TR1CombinedLevel level, Location location, FDControl floorData)
     {
         // Check if this secret is being added to a flipped room, as that won't work
-        for (int i = 0; i < level.Data.NumRooms; i++)
+        for (int i = 0; i < level.Data.Rooms.Count; i++)
         {
             if (level.Data.Rooms[i].AlternateRoom == location.Room)
             {

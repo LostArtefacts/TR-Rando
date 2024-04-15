@@ -26,12 +26,12 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         uint numImages = reader.ReadUInt32();
         _level.Images8 = reader.ReadImage8s(numImages);
 
-        //Rooms
-        _level.Unused = reader.ReadUInt32();
-        _level.NumRooms = reader.ReadUInt16();
-        _level.Rooms = new TRRoom[_level.NumRooms];
+        // Unused, always 0 in OG
+        _level.Version.LevelNumber = reader.ReadUInt32();
 
-        for (int i = 0; i < _level.NumRooms; i++)
+        ushort numRooms = reader.ReadUInt16();
+        _level.Rooms = new();
+        for (int i = 0; i < numRooms; i++)
         {
             TRRoom room = new()
             {
@@ -47,6 +47,8 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
                 //Grab data
                 NumDataWords = reader.ReadUInt32()
             };
+            _level.Rooms.Add(room);
+
             room.Data = new ushort[room.NumDataWords];
             for (int j = 0; j < room.NumDataWords; j++)
             {
@@ -92,18 +94,10 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
             room.AlternateRoom = reader.ReadInt16();
             room.Flags = reader.ReadInt16();
-
-            _level.Rooms[i] = room;
         }
 
-        //Floordata
-        _level.NumFloorData = reader.ReadUInt32();
-        _level.FloorData = new ushort[_level.NumFloorData];
-
-        for (int i = 0; i < _level.NumFloorData; i++)
-        {
-            _level.FloorData[i] = reader.ReadUInt16();
-        }
+        uint numFloorData = reader.ReadUInt32();
+        _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
 
         //Mesh Data
         //This tells us how much mesh data (# of words/uint16s) coming up
@@ -186,12 +180,11 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         }
 
         //Static Meshes
-        _level.NumStaticMeshes = reader.ReadUInt32();
-        _level.StaticMeshes = new TRStaticMesh[_level.NumStaticMeshes];
-
-        for (int i = 0; i < _level.NumStaticMeshes; i++)
+        uint numStaticMeshes = reader.ReadUInt32();
+        _level.StaticMeshes = new();
+        for (int i = 0; i < numStaticMeshes; i++)
         {
-            _level.StaticMeshes[i] = TR2FileReadUtilities.ReadStaticMesh(reader);
+            _level.StaticMeshes.Add(TR2FileReadUtilities.ReadStaticMesh(reader));
         }
 
         //Object Textures
@@ -222,47 +215,34 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         }
 
         //Cameras
-        _level.NumCameras = reader.ReadUInt32();
-        _level.Cameras = new TRCamera[_level.NumCameras];
-
-        for (int i = 0; i < _level.NumCameras; i++)
+        uint numCameras = reader.ReadUInt32();
+        _level.Cameras = new();
+        for (int i = 0; i < numCameras; i++)
         {
-            _level.Cameras[i] = TR2FileReadUtilities.ReadCamera(reader);
+            _level.Cameras.Add(TR2FileReadUtilities.ReadCamera(reader));
         }
 
-        //Sound Sources
-        _level.NumSoundSources = reader.ReadUInt32();
-        _level.SoundSources = new TRSoundSource[_level.NumSoundSources];
-
-        for (int i = 0; i < _level.NumSoundSources; i++)
+        uint numSoundSources = reader.ReadUInt32();
+        _level.SoundSources = new();
+        for (int i = 0; i < numSoundSources; i++)
         {
-            _level.SoundSources[i] = TR2FileReadUtilities.ReadSoundSource(reader);
+            _level.SoundSources.Add(TR2FileReadUtilities.ReadSoundSource(reader));
         }
 
         //Boxes
-        _level.NumBoxes = reader.ReadUInt32();
-        _level.Boxes = new TRBox[_level.NumBoxes];
-
-        for (int i = 0; i < _level.NumBoxes; i++)
+        uint numBoxes = reader.ReadUInt32();
+        _level.Boxes = new();
+        for (int i = 0; i < numBoxes; i++)
         {
-            _level.Boxes[i] = TRFileReadUtilities.ReadBox(reader);
+            _level.Boxes.Add(TRFileReadUtilities.ReadBox(reader));
         }
 
         //Overlaps & Zones
-        _level.NumOverlaps = reader.ReadUInt32();
-        _level.Overlaps = new ushort[_level.NumOverlaps];
+        uint numOverlaps = reader.ReadUInt32();
+        _level.Overlaps = reader.ReadUInt16s(numOverlaps).ToList();
 
-        for (int i = 0; i < _level.NumOverlaps; i++)
-        {
-            _level.Overlaps[i] = reader.ReadUInt16();
-        }
-
-        ushort[] zoneData = new ushort[_level.NumBoxes * 6];
-        for (int i = 0; i < zoneData.Length; i++)
-        {
-            zoneData[i] = reader.ReadUInt16();
-        }
-        _level.Zones = TR1BoxUtilities.ReadZones(_level.NumBoxes, zoneData);
+        ushort[] zoneData = reader.ReadUInt16s(numBoxes * 6);
+        _level.Zones = TR1BoxUtilities.ReadZones(numBoxes, zoneData);
 
         //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)
         //followed by a ushort to describe the number of actual texture group objects.
@@ -281,12 +261,11 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         _level.Palette = reader.ReadColours(TRConsts.PaletteSize);
 
         //Cinematic Frames
-        _level.NumCinematicFrames = reader.ReadUInt16();
-        _level.CinematicFrames = new TRCinematicFrame[_level.NumCinematicFrames];
-
-        for (int i = 0; i < _level.NumCinematicFrames; i++)
+        ushort numCinematicFrames = reader.ReadUInt16();
+        _level.CinematicFrames = new();
+        for (int i = 0; i < numCinematicFrames; i++)
         {
-            _level.CinematicFrames[i] = TR2FileReadUtilities.ReadCinematicFrame(reader);
+            _level.CinematicFrames.Add(TR2FileReadUtilities.ReadCinematicFrame(reader));
         }
 
         //Demo Data
@@ -337,13 +316,13 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write((uint)_level.Images8.Count);
         writer.Write(_level.Images8);
 
-        writer.Write(_level.Unused);
+        writer.Write(_level.Version.LevelNumber);
 
-        writer.Write(_level.NumRooms);
+        writer.Write((ushort)_level.Rooms.Count);
         foreach (TRRoom room in _level.Rooms) { writer.Write(room.Serialize()); }
 
-        writer.Write(_level.NumFloorData);
-        foreach (ushort data in _level.FloorData) { writer.Write(data); }
+        writer.Write((uint)_level.FloorData.Count);
+        writer.Write(_level.FloorData);
 
         writer.Write(_level.NumMeshData);
         foreach (TRMesh mesh in _level.Meshes) { writer.Write(mesh.Serialize()); }
@@ -365,7 +344,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
         writer.Write((uint)_level.Models.Count);
         foreach (TRModel model in _level.Models) { writer.Write(model.Serialize()); }
-        writer.Write(_level.NumStaticMeshes);
+        writer.Write((uint)_level.StaticMeshes.Count);
         foreach (TRStaticMesh mesh in _level.StaticMeshes) { writer.Write(mesh.Serialize()); }
 
         writer.Write(_level.NumObjectTextures);
@@ -375,17 +354,17 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write(_level.NumSpriteSequences);
         foreach (TRSpriteSequence sequence in _level.SpriteSequences) { writer.Write(sequence.Serialize()); }
 
-        writer.Write(_level.NumCameras);
+        writer.Write((uint)_level.Cameras.Count);
         foreach (TRCamera cam in _level.Cameras) { writer.Write(cam.Serialize()); }
 
-        writer.Write(_level.NumSoundSources);
+        writer.Write((uint)_level.SoundSources.Count);
         foreach (TRSoundSource src in _level.SoundSources) { writer.Write(src.Serialize()); }
 
-        writer.Write(_level.NumBoxes);
+        writer.Write((uint)_level.Boxes.Count);
         foreach (TRBox box in _level.Boxes) { writer.Write(box.Serialize()); }
-        writer.Write(_level.NumOverlaps);
-        foreach (ushort overlap in _level.Overlaps) { writer.Write(overlap); }
-        foreach (ushort zone in TR1BoxUtilities.FlattenZones(_level.Zones)) { writer.Write(zone); }
+        writer.Write((uint)_level.Overlaps.Count);
+        writer.Write(_level.Overlaps);
+        writer.Write(TR1BoxUtilities.FlattenZones(_level.Zones));
 
         writer.Write(_level.NumAnimatedTextures);
         writer.Write((ushort)_level.AnimatedTextures.Length);
@@ -399,7 +378,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write(_level.LightMap.ToArray());
         writer.Write(_level.Palette);
 
-        writer.Write(_level.NumCinematicFrames);
+        writer.Write((ushort)_level.CinematicFrames.Count);
         foreach (TRCinematicFrame cineframe in _level.CinematicFrames) { writer.Write(cineframe.Serialize()); }
 
         writer.Write(_level.NumDemoData);

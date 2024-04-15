@@ -10,7 +10,7 @@ internal class TRStaticMeshControls : IDrawable
     {
         if (ImGui.TreeNodeEx("Static Mesh Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Static mesh count: " + IOManager.CurrentLevelAsTR1?.NumStaticMeshes);
+            ImGui.Text("Static mesh count: " + IOManager.CurrentLevelAsTR1?.StaticMeshes.Count);
 
             ImGui.TreePop();
         }

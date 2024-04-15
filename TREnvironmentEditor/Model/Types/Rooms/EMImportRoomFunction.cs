@@ -188,7 +188,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         if (!PreserveBoxes)
         {
             TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            newBoxIndex = (ushort)level.NumBoxes;
+            newBoxIndex = (ushort)level.Boxes.Count;
             int linkedBoxIndex = linkedSector.BoxIndex;
 
             TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
@@ -209,11 +209,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 XMax = xmax,
                 ZMax = zmax,
                 TrueFloor = (short)newRoom.Info.YBottom
-            };
-            List<TR2Box> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+            };            
+            level.Boxes.Add(box);
 
             // Link the box to the room we're joining to
             TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
@@ -302,10 +299,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
         floorData.WriteToLevel(level);
 
-        List<TR2Room> rooms = level.Rooms.ToList();
-        rooms.Add(newRoom);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(newRoom);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -456,7 +450,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
         if (!PreserveBoxes)
         {
-            newBoxIndex = (ushort)level.NumBoxes;
+            newBoxIndex = (ushort)level.Boxes.Count;
 
             // Duplicate the zone for the new box and link the current box to the new room
             TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
@@ -478,10 +472,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 ZMax = zmax,
                 TrueFloor = (short)newRoom.Info.YBottom
             };
-            List<TR2Box> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+            level.Boxes.Add(box);
 
             // Link the box to the room we're joining to
             TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
@@ -612,10 +603,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
         floorData.WriteToLevel(level);
 
-        List<TR3Room> rooms = level.Rooms.ToList();
-        rooms.Add(newRoom);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(newRoom);
     }
 
     public void RemapTextures(Dictionary<ushort, ushort> indexMap)

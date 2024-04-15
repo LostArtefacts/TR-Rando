@@ -81,10 +81,9 @@ public class TR3WeatherRandomizer : BaseTR3Randomizer
         }
     }
 
-    private static void SetWeatherRooms(TR3Room[] rooms)
+    private static void SetWeatherRooms(List<TR3Room> rooms)
     {
-        rooms.Where(r => r.IsSkyboxVisible)
-            .ToList()
+        rooms.FindAll(r => r.IsSkyboxVisible)
             .ForEach(r => r.IsWindy = true);
     }
 }

@@ -79,7 +79,7 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
         short intensity1 = (short)(TR2Room.DarknessIntensity1 * scale);
         ushort intensity2 = (ushort)(TR2Room.DarknessIntensity2 * (2 - scale));
 
-        for (int i = 0; i < level.Data.NumRooms; i++)
+        for (int i = 0; i < level.Data.Rooms.Count; i++)
         {
             if (_excludedRooms.ContainsKey(level.Name) && _excludedRooms[level.Name].Contains(i))
             {
