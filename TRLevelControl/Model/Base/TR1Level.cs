@@ -3,16 +3,7 @@
 public class TR1Level : TRLevelBase
 {
     public List<TRTexImage8> Images8 { get; set; }
-
-    /// <summary>
-    /// 2 bytes
-    /// </summary>
-    public ushort NumRooms { get; set; }
-
-    /// <summary>
-    /// Variable
-    /// </summary>
-    public TRRoom[] Rooms { get; set; }
+    public List<TRRoom> Rooms { get; set; }
 
     /// <summary>
     /// 4 bytes

@@ -189,7 +189,7 @@ public static class FDUtilities
 
             sector = room.Sectors[xFloor + yFloor * room.NumZSectors];
             data = GetDoor(sector, floorData);
-            if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Length - 1)
+            if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Count - 1)
             {
                 room = level.Rooms[data];
             }
@@ -276,7 +276,7 @@ public static class FDUtilities
 
             sector = room.SectorList[xFloor + yFloor * room.NumZSectors];
             data = GetDoor(sector, floorData);
-            if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Length - 1)
+            if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Count - 1)
             {
                 room = level.Rooms[data];
             }
@@ -363,7 +363,7 @@ public static class FDUtilities
 
             sector = room.Sectors[xFloor + yFloor * room.NumZSectors];
             data = GetDoor(sector, floorData);
-            if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Length - 1)
+            if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Count - 1)
             {
                 room = level.Rooms[data];
             }

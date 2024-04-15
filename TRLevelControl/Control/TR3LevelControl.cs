@@ -35,10 +35,9 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         _level.Version.LevelNumber = reader.ReadUInt32();
 
         //Rooms
-        _level.NumRooms = reader.ReadUInt16();
-        _level.Rooms = new TR3Room[_level.NumRooms];
-
-        for (int i = 0; i < _level.NumRooms; i++)
+        ushort numRooms = reader.ReadUInt16();
+        _level.Rooms = new();
+        for (int i = 0; i < numRooms; i++)
         {
             TR3Room room = new()
             {
@@ -54,6 +53,8 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
                 //Grab data
                 NumDataWords = reader.ReadUInt32()
             };
+            _level.Rooms.Add(room);
+
             room.Data = new ushort[room.NumDataWords];
             for (int j = 0; j < room.NumDataWords; j++)
             {
@@ -105,8 +106,6 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
             room.WaterScheme = reader.ReadByte();
             room.ReverbInfo = reader.ReadByte();
             room.Filler = reader.ReadByte();
-
-            _level.Rooms[i] = room;
         }
 
         //Floordata
@@ -352,7 +351,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         writer.Write(_level.Version.LevelNumber);
 
-        writer.Write(_level.NumRooms);
+        writer.Write((ushort)_level.Rooms.Count);
         foreach (TR3Room room in _level.Rooms) { writer.Write(room.Serialize()); }
         writer.Write(_level.NumFloorData);
         foreach (ushort data in _level.FloorData) { writer.Write(data); }

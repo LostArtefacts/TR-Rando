@@ -9,14 +9,15 @@ internal static class TR5FileReadUtilities
     public static void PopulateRooms(BinaryReader reader, TR5Level lvl)
     {
         lvl.LevelDataChunk.Unused = reader.ReadUInt32();
-        lvl.LevelDataChunk.NumRooms = reader.ReadUInt32();
-        lvl.LevelDataChunk.Rooms = new TR5Room[lvl.LevelDataChunk.NumRooms];
-        for (int i = 0; i < lvl.LevelDataChunk.NumRooms; i++)
+        uint numRooms = reader.ReadUInt32();
+        lvl.LevelDataChunk.Rooms = new();
+        for (int i = 0; i < numRooms; i++)
         {
             TR5Room room = new()
             {
                 XELALandmark = reader.ReadBytes(4)
             };
+            lvl.LevelDataChunk.Rooms.Add(room);
 
             Debug.Assert(room.XELALandmark[0] == 'X');
             Debug.Assert(room.XELALandmark[1] == 'E');
@@ -122,7 +123,6 @@ internal static class TR5FileReadUtilities
             PopulateLightsBulbsAndSectors(room, data);
 
             room.RoomData = data;
-            lvl.LevelDataChunk.Rooms[i] = room;
         }
     }
 

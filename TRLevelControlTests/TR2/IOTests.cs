@@ -220,7 +220,7 @@ public class IOTests : TestBase
 
         //Find a sector that currently has no floor data
         int room, roomSector = -1;
-        for (room = 0; room < lvl.NumRooms; room++)
+        for (room = 0; room < lvl.Rooms.Count; room++)
         {
             roomSector = lvl.Rooms[room].SectorList.ToList().FindIndex(s => s.FDIndex == 0);
             if (roomSector != -1)
@@ -295,7 +295,7 @@ public class IOTests : TestBase
 
         //Find a sector that currently has floor data
         int room, roomSector = -1;
-        for (room = 0; room < lvl.NumRooms; room++)
+        for (room = 0; room < lvl.Rooms.Count; room++)
         {
             roomSector = lvl.Rooms[room].SectorList.ToList().FindIndex(s => s.FDIndex > 0);
             if (roomSector != -1)

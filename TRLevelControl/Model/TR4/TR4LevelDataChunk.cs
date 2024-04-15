@@ -10,10 +10,7 @@ public class TR4LevelDataChunk : ISerializableCompact
     public uint CompressedSize { get; set; }
 
     public uint Unused { get; set; }
-
-    public ushort NumRooms { get; set; }
-
-    public TR4Room[] Rooms { get; set; }
+    public List<TR4Room> Rooms { get; set; }
 
     public uint NumFloorData { get; set; }
 
@@ -112,8 +109,8 @@ public class TR4LevelDataChunk : ISerializableCompact
         using (TRLevelWriter writer = new(stream))
         {
             writer.Write(Unused);
-            writer.Write(NumRooms);
 
+            writer.Write((ushort)Rooms.Count);
             foreach (TR4Room room in Rooms)
             {
                 writer.Write(room.Serialize());

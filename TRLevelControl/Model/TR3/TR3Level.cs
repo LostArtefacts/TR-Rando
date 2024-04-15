@@ -6,16 +6,7 @@ public class TR3Level : TRLevelBase
     public List<TRColour4> Palette16 { get; set; }
     public List<TRTexImage8> Images8 { get; set; }
     public List<TRTexImage16> Images16 { get; set; }
-
-    /// <summary>
-    /// 2 bytes
-    /// </summary>
-    public ushort NumRooms { get; set; }
-
-    /// <summary>
-    /// Variable
-    /// </summary>
-    public TR3Room[] Rooms { get; set; }
+    public List<TR3Room> Rooms { get; set; }
 
     /// <summary>
     /// 4 bytes

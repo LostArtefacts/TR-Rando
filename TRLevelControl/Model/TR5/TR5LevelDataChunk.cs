@@ -7,12 +7,7 @@ public class TR5LevelDataChunk
     public uint CompressedSize { get; set; }
 
     public uint Unused { get; set; }
-
-    //It says ushort in TRosettaStone, but looking at level files in HxD it seems there is always
-    //"00 00" before the first XELA landmark. Based on that NumRooms will be read as a uint.
-    public uint NumRooms { get; set; }
-
-    public TR5Room[] Rooms { get; set; }
+    public List<TR5Room> Rooms { get; set; }
 
     public uint NumFloorData { get; set; }
 
@@ -111,8 +106,8 @@ public class TR5LevelDataChunk
         using (TRLevelWriter writer = new(stream))
         {
             writer.Write(Unused);
-            writer.Write(NumRooms);
 
+            writer.Write((uint)Rooms.Count);
             foreach (TR5Room room in Rooms)
             {
                 writer.Write(room.Serialize());

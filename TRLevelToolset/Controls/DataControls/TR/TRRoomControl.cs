@@ -10,7 +10,7 @@ internal class TRRoomControl : IDrawable
     {      
         if (ImGui.TreeNodeEx("Room Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Number of Rooms: " + IOManager.CurrentLevelAsTR1?.NumRooms);
+            ImGui.Text("Number of Rooms: " + IOManager.CurrentLevelAsTR1?.Rooms.Count);
 
             ImGui.TreePop();
         }

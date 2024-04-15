@@ -193,7 +193,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
         // Bacon Lara may have been added as a trap/puzzle, so we need to ensure the script knows
         // where to set her up. The mods will have stored this in a temporary flag as the entity
         // starting room may not necessarily be where her positioning should be calculated from.
-        int anchorRoom = Array.FindIndex(level.Data.Rooms, r => (r.Flags & EMAddDoppelgangerFunction.AnchorRoomFlag) > 0);
+        int anchorRoom = level.Data.Rooms.FindIndex(r => (r.Flags & EMAddDoppelgangerFunction.AnchorRoomFlag) > 0);
         if (anchorRoom == -1 && level.Is(TR1LevelNames.ATLANTIS))
         {
             // Extra check for OG Atlantis to ensure the script is configured properly.

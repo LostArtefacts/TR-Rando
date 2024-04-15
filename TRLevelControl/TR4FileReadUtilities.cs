@@ -9,10 +9,10 @@ internal static class TR4FileReadUtilities
     public static void PopulateRooms(BinaryReader reader, TR4Level lvl)
     {
         lvl.LevelDataChunk.Unused = reader.ReadUInt32();
-        lvl.LevelDataChunk.NumRooms = reader.ReadUInt16();
-        lvl.LevelDataChunk.Rooms = new TR4Room[lvl.LevelDataChunk.NumRooms];
+        ushort numRooms = reader.ReadUInt16();
+        lvl.LevelDataChunk.Rooms = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumRooms; i++)
+        for (int i = 0; i < numRooms; i++)
         {
             TR4Room room = new()
             {
@@ -28,6 +28,8 @@ internal static class TR4FileReadUtilities
                 //Grab data
                 NumDataWords = reader.ReadUInt32()
             };
+            lvl.LevelDataChunk.Rooms.Add(room);
+
             room.Data = new ushort[room.NumDataWords];
             for (int j = 0; j < room.NumDataWords; j++)
             {
@@ -77,8 +79,6 @@ internal static class TR4FileReadUtilities
             room.WaterScheme = reader.ReadByte();
             room.ReverbInfo = reader.ReadByte();
             room.Filler = reader.ReadByte();
-
-            lvl.LevelDataChunk.Rooms[i] = room;
         }
     }
 

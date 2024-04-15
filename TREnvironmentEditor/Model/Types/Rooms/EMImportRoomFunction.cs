@@ -302,10 +302,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
         floorData.WriteToLevel(level);
 
-        List<TR2Room> rooms = level.Rooms.ToList();
-        rooms.Add(newRoom);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(newRoom);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -612,10 +609,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
         floorData.WriteToLevel(level);
 
-        List<TR3Room> rooms = level.Rooms.ToList();
-        rooms.Add(newRoom);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(newRoom);
     }
 
     public void RemapTextures(Dictionary<ushort, ushort> indexMap)

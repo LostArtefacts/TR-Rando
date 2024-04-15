@@ -157,10 +157,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
-        List<TRRoom> rooms = level.Rooms.ToList();
-        rooms.Add(newRoom);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(newRoom);
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -311,10 +308,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
-        List<TR2Room> rooms = level.Rooms.ToList();
-        rooms.Add(newRoom);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(newRoom);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -466,10 +460,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
-        List<TR3Room> rooms = level.Rooms.ToList();
-        rooms.Add(newRoom);
-        level.Rooms = rooms.ToArray();
-        level.NumRooms++;
+        level.Rooms.Add(newRoom);
     }
 
     private TRRoomSector RebuildSector(TRRoomSector originalSector, int sectorIndex, FDControl floorData, int ydiff, TRRoomInfo oldRoomInfo)

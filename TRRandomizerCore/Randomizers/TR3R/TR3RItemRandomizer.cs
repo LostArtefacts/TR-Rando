@@ -115,7 +115,7 @@ public class TR3RItemRandomizer : BaseTR3RRandomizer
         if (level.Script.HasColdWater)
         {
             // Don't put items underwater if it's too cold
-            for (int i = 0; i < level.Data.NumRooms; i++)
+            for (int i = 0; i < level.Data.Rooms.Count; i++)
             {
                 if (level.Data.Rooms[i].ContainsWater)
                 {

@@ -46,7 +46,7 @@ public class EMLevelData
         {
             NumCameras = level.NumCameras,
             NumEntities = level.Entities.Count,
-            NumRooms = level.NumRooms
+            NumRooms = (uint)level.Rooms.Count
         };
     }
 
@@ -56,7 +56,7 @@ public class EMLevelData
         {
             NumCameras = level.NumCameras,
             NumEntities = level.Entities.Count,
-            NumRooms = level.NumRooms
+            NumRooms = (uint)level.Rooms.Count
         };
     }
 
@@ -66,7 +66,7 @@ public class EMLevelData
         {
             NumCameras = level.NumCameras,
             NumEntities = level.Entities.Count,
-            NumRooms = level.NumRooms
+            NumRooms = (uint)level.Rooms.Count
         };
     }
 }

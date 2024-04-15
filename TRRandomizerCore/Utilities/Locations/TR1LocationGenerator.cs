@@ -40,7 +40,7 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Level>
 
     protected override int GetRoomCount(TR1Level level)
     {
-        return level.NumRooms;
+        return level.Rooms.Count;
     }
 
     protected override short GetFlipMapRoom(TR1Level level, short room)
