@@ -23,43 +23,34 @@ public class SoundUnpacker
     {
         Dictionary<uint, uint> sampleDataMap = ImportSamples(level, sound.Samples);
         GenerateSampleMap(level.SampleIndices, sound.SampleIndices, sampleDataMap);
-        List<TRSoundDetails> soundDetails = GenerateSoundDetailsMap(level.SoundDetails, sound.SoundDetails);
+        GenerateSoundDetailsMap(level.SoundDetails, sound.SoundDetails);
         GenerateSoundIndexMap(level, retainInternalIndices, sound.SoundMapIndices);
 
-        level.Samples = _samples.ToArray();
-        level.NumSamples = (uint)_samples.Count;
+        level.Samples.Clear();
+        level.Samples.AddRange(_samples);
 
-        level.SampleIndices = _sampleIndices.ToArray();
-        level.NumSampleIndices = (uint)_sampleIndices.Count;
-
-        level.SoundDetails = soundDetails.ToArray();
-        level.NumSoundDetails = (uint)soundDetails.Count;
+        level.SampleIndices.Clear();
+        level.SampleIndices.AddRange(_sampleIndices);
     }
 
     public void Unpack(TR2PackedSound sound, TR2Level level, bool retainInternalIndices = false)
     {
         GenerateSampleMap(level.SampleIndices, sound.SampleIndices);
-        List<TRSoundDetails> soundDetails = GenerateSoundDetailsMap(level.SoundDetails, sound.SoundDetails);
+        GenerateSoundDetailsMap(level.SoundDetails, sound.SoundDetails);
         GenerateSoundIndexMap(level, retainInternalIndices, sound.SoundMapIndices);
 
-        level.SampleIndices = _sampleIndices.ToArray();
-        level.NumSampleIndices = (uint)_sampleIndices.Count;
-
-        level.SoundDetails = soundDetails.ToArray();
-        level.NumSoundDetails = (uint)soundDetails.Count;
+        level.SampleIndices.Clear();
+        level.SampleIndices.AddRange(_sampleIndices);
     }
 
     public void Unpack(TR3PackedSound sound, TR3Level level, bool retainInternalIndices = false)
     {
         GenerateSampleMap(level.SampleIndices, sound.SampleIndices);
-        List<TR3SoundDetails> soundDetails = GenerateSoundDetailsMap(level.SoundDetails, sound.SoundDetails);
+        GenerateSoundDetailsMap(level.SoundDetails, sound.SoundDetails);
         GenerateSoundIndexMap(level, retainInternalIndices, sound.SoundMapIndices);
 
-        level.SampleIndices = _sampleIndices.ToArray();
-        level.NumSampleIndices = (uint)_sampleIndices.Count;
-
-        level.SoundDetails = soundDetails.ToArray();
-        level.NumSoundDetails = (uint)soundDetails.Count;
+        level.SampleIndices.Clear();
+        level.SampleIndices.AddRange(_sampleIndices);
     }
 
     private Dictionary<uint, uint> ImportSamples(TR1Level level, Dictionary<uint, byte[]> sampleData)
@@ -78,7 +69,7 @@ public class SoundUnpacker
         return sampleMap;
     }
 
-    private void GenerateSampleMap(uint[] sampleIndices, Dictionary<ushort, uint[]> packedIndices, Dictionary<uint, uint> sampleKeyMap = null)
+    private void GenerateSampleMap(List<uint> sampleIndices, Dictionary<ushort, uint[]> packedIndices, Dictionary<uint, uint> sampleKeyMap = null)
     {
         // Insert each required SampleIndex value, which are the values that point into
         // MAIN.SFX (or Samples[] in TR1). Note the first inserted index for updating
@@ -121,11 +112,10 @@ public class SoundUnpacker
     }
 
     // TR1-2
-    private List<TRSoundDetails> GenerateSoundDetailsMap(TRSoundDetails[] currentSoundDetails, Dictionary<int, TRSoundDetails> packedSoundDetails)
+    private void GenerateSoundDetailsMap(List<TRSoundDetails> soundDetails, Dictionary<int, TRSoundDetails> packedSoundDetails)
     {
         // Update each SoundDetails.Sample with the new SampleIndex values. Store
         // a map of old SoundsDetails indices to new.
-        List<TRSoundDetails> soundDetails = currentSoundDetails.ToList();
         _soundDetailsMap = new Dictionary<int, int>();
 
         foreach (int soundDetailsIndex in packedSoundDetails.Keys)
@@ -144,14 +134,11 @@ public class SoundUnpacker
                 _soundDetailsMap[soundDetailsIndex] = currentIndex;
             }
         }
-
-        return soundDetails;
     }
 
     // TR3+
-    private List<TR3SoundDetails> GenerateSoundDetailsMap(TR3SoundDetails[] currentSoundDetails, Dictionary<int, TR3SoundDetails> packedSoundDetails)
+    private void GenerateSoundDetailsMap(List<TR3SoundDetails> soundDetails, Dictionary<int, TR3SoundDetails> packedSoundDetails)
     {
-        List<TR3SoundDetails> soundDetails = currentSoundDetails.ToList();
         _soundDetailsMap = new Dictionary<int, int>();
 
         foreach (int soundDetailsIndex in packedSoundDetails.Keys)
@@ -170,8 +157,6 @@ public class SoundUnpacker
                 _soundDetailsMap[soundDetailsIndex] = currentIndex;
             }
         }
-
-        return soundDetails;
     }
 
     private static int FindSoundDetailsIndex(TRSoundDetails details, List<TRSoundDetails> allDetails)

@@ -39,16 +39,9 @@ public class TR4LevelDataChunk : ISerializableCompact
     public List<TR4Entity> Entities { get; set; }
     public List<TR4AIEntity> AIEntities { get; set; }
     public byte[] DemoData { get; set; }
-
     public short[] SoundMap { get; set; }
-
-    public uint NumSoundDetails { get; set; }
-
-    public TR3SoundDetails[] SoundDetails { get; set; }
-
-    public uint NumSampleIndices { get; set; }
-
-    public uint[] SampleIndices { get; set; }
+    public List<TR3SoundDetails> SoundDetails { get; set; }
+    public List<uint> SampleIndices { get; set; }
 
     public byte[] Seperator { get; set; }
 
@@ -206,15 +199,13 @@ public class TR4LevelDataChunk : ISerializableCompact
                 writer.Write(sound);
             }
 
-            writer.Write(NumSoundDetails);
-
+            writer.Write((uint)SoundDetails.Count);
             foreach (TR3SoundDetails snd in SoundDetails)
             {
                 writer.Write(snd.Serialize());
             }
 
-            writer.Write(NumSampleIndices);
-
+            writer.Write((uint)SampleIndices.Count);
             foreach (uint sampleindex in SampleIndices)
             {
                 writer.Write(sampleindex);

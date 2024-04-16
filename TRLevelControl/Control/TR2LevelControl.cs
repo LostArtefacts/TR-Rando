@@ -261,22 +261,15 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.SoundMap[i] = reader.ReadInt16();
         }
 
-        _level.NumSoundDetails = reader.ReadUInt32();
-        _level.SoundDetails = new TRSoundDetails[_level.NumSoundDetails];
-
-        for (int i = 0; i < _level.NumSoundDetails; i++)
+        uint numSoundDetails = reader.ReadUInt32();
+        _level.SoundDetails = new();
+        for (int i = 0; i < numSoundDetails; i++)
         {
-            _level.SoundDetails[i] = TR2FileReadUtilities.ReadSoundDetails(reader);
+            _level.SoundDetails.Add(TR2FileReadUtilities.ReadSoundDetails(reader));
         }
 
-        //Samples
-        _level.NumSampleIndices = reader.ReadUInt32();
-        _level.SampleIndices = new uint[_level.NumSampleIndices];
-
-        for (int i = 0; i < _level.NumSampleIndices; i++)
-        {
-            _level.SampleIndices[i] = reader.ReadUInt32();
-        }
+        uint numSampleIndices = reader.ReadUInt32();
+        _level.SampleIndices = reader.ReadUInt32s(numSampleIndices).ToList();
     }
 
     protected override void Write(TRLevelWriter writer)
@@ -360,10 +353,10 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write(_level.DemoData);
 
         foreach (short sound in _level.SoundMap) { writer.Write(sound); }
-        writer.Write(_level.NumSoundDetails);
+        writer.Write((uint)_level.SoundDetails.Count);
         foreach (TRSoundDetails snddetail in _level.SoundDetails) { writer.Write(snddetail.Serialize()); }
-        writer.Write(_level.NumSampleIndices);
-        foreach (uint index in _level.SampleIndices) { writer.Write(index); }
+        writer.Write((uint)_level.SampleIndices.Count);
+        writer.Write(_level.SampleIndices);
     }
 
     private static TR2RoomData ConvertToRoomData(TR2Room room)

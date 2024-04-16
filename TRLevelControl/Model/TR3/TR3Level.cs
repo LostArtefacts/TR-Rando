@@ -31,29 +31,7 @@ public class TR3Level : TRLevelBase
     public List<byte> LightMap { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }
     public byte[] DemoData { get; set; }
-
-    /// <summary>
-    /// 370 entries of 2 bytes each = 740 bytes
-    /// </summary>
     public short[] SoundMap { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumSoundDetails { get; set; }
-
-    /// <summary>
-    /// NumSoundDetails * 8 bytes
-    /// </summary>
-    public TR3SoundDetails[] SoundDetails { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumSampleIndices { get; set; }
-
-    /// <summary>
-    /// NumSampleIndices * 4 bytes
-    /// </summary>
-    public uint[] SampleIndices { get; set; }
+    public List<TR3SoundDetails> SoundDetails { get; set; }
+    public List<uint> SampleIndices { get; set; }
 }

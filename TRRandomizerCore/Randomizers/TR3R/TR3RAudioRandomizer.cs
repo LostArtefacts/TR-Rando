@@ -149,11 +149,12 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
         if (IsUncontrolledLevel(level.Script))
         {
             HashSet<uint> indices = new();
-            while (indices.Count < level.Data.NumSampleIndices)
+            while (indices.Count < level.Data.SampleIndices.Count)
             {
                 indices.Add((uint)_generator.Next(0, _maxSample + 1));
             }
-            level.Data.SampleIndices = indices.ToArray();
+            level.Data.SampleIndices.Clear();
+            level.Data.SampleIndices.AddRange(indices);
         }
         else
         {
@@ -206,24 +207,18 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
             return -1;
         }
 
-        List<uint> levelSamples = level.SampleIndices.ToList();
         List<TR3SoundDetails> levelSoundDetails = level.SoundDetails.ToList();
 
         uint minSample = newDefinition.SampleIndices.Min();
-        if (levelSamples.Contains(minSample))
+        if (level.SampleIndices.Contains(minSample))
         {
-            return (short)levelSoundDetails.FindIndex(d => levelSamples[d.Sample] == minSample);
+            return (short)levelSoundDetails.FindIndex(d => level.SampleIndices[d.Sample] == minSample);
         }
 
-        ushort newSampleIndex = (ushort)levelSamples.Count;
-        List<uint> sortedSamples = new(newDefinition.SampleIndices);
-        sortedSamples.Sort();
-        levelSamples.AddRange(sortedSamples);
+        ushort newSampleIndex = (ushort)level.SampleIndices.Count;
+        level.SampleIndices.AddRange(newDefinition.SampleIndices);
 
-        level.SampleIndices = levelSamples.ToArray();
-        level.NumSampleIndices = (uint)levelSamples.Count;
-
-        levelSoundDetails.Add(new TR3SoundDetails
+        level.SoundDetails.Add(new TR3SoundDetails
         {
             Chance = currentDefinition.Details.Chance,
             Characteristics = newDefinition.Details.Characteristics,
@@ -233,10 +228,7 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
             Volume = newDefinition.Details.Volume
         });
 
-        level.SoundDetails = levelSoundDetails.ToArray();
-        level.NumSoundDetails++;
-
-        return (short)(level.NumSoundDetails - 1);
+        return (short)(level.SoundDetails.Count - 1);
     }
 
     private void RandomizeWibble(TR3RCombinedLevel level)

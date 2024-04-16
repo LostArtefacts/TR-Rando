@@ -79,19 +79,19 @@ class Program
     private static void ExtractFromPHD(string file, TRGameVersion version)
     {
         TR1Level level = new TR1LevelControl().Read(file);
-        for (int i = 0; i < level.NumSampleIndices; i++)
+        for (int i = 0; i < level.SampleIndices.Count; i++)
         {
             uint sampleStart = level.SampleIndices[i];
-            uint sampleEnd = i < level.NumSampleIndices - 1 ? level.SampleIndices[i + 1] : (uint)level.Samples.Length;
-            if (sampleEnd > level.Samples.Length)
+            uint sampleEnd = i < level.SampleIndices.Count - 1 ? level.SampleIndices[i + 1] : (uint)level.Samples.Count;
+            if (sampleEnd > level.Samples.Count)
             {
-                sampleEnd = (uint)level.Samples.Length;
+                sampleEnd = (uint)level.Samples.Count;
             }
 
             using BinaryWriter writer = new(File.Create(Path.Combine(version.ToString(), i + ".wav")));
             for (uint j = sampleStart; j < sampleEnd; j++)
             {
-                writer.Write(level.Samples[j]);
+                writer.Write(level.Samples[(int)j]);
             }
         }
     }

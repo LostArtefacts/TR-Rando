@@ -29,33 +29,8 @@ public class TR1Level : TRLevelBase
     public List<TRColour> Palette { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }
     public byte[] DemoData { get; set; }
-
-    /// <summary>
-    /// 370 entries of 2 bytes each = 740 bytes
-    /// </summary>
     public short[] SoundMap { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumSoundDetails { get; set; }
-
-    /// <summary>
-    /// NumSoundDetails * 8 bytes
-    /// </summary>
-    public TRSoundDetails[] SoundDetails { get; set; }
-
-    public uint NumSamples { get; set; }
-
-    public byte[] Samples { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumSampleIndices { get; set; }
-
-    /// <summary>
-    /// NumSampleIndices * 4 bytes
-    /// </summary>
-    public uint[] SampleIndices { get; set; }
+    public List<TRSoundDetails> SoundDetails { get; set; }
+    public List<byte> Samples { get; set; }
+    public List<uint> SampleIndices { get; set; }
 }

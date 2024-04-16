@@ -174,12 +174,13 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
         if (IsUncontrolledLevel(level.Script))
         {
             // Choose a random sample for each current entry and replace the entire index list.
-            ISet<uint> indices = new HashSet<uint>();
-            while (indices.Count < level.Data.NumSampleIndices)
+            HashSet<uint> indices = new();
+            while (indices.Count < level.Data.SampleIndices.Count)
             {
                 indices.Add((uint)_generator.Next(0, _maxSample + 1));
             }
-            level.Data.SampleIndices = indices.ToArray();
+            level.Data.SampleIndices.Clear();
+            level.Data.SampleIndices.AddRange(indices);
         }
         else
         {
@@ -243,31 +244,18 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
             return -1;
         }
 
-        List<uint> levelSamples = level.SampleIndices.ToList();
         List<TR3SoundDetails> levelSoundDetails = level.SoundDetails.ToList();
 
         uint minSample = newDefinition.SampleIndices.Min();
-        if (levelSamples.Contains(minSample))
+        if (level.SampleIndices.Contains(minSample))
         {
-            // This index is already defined, so locate the TRSoundDetails that references it
-            // and return its index.
-            return (short)levelSoundDetails.FindIndex(d => levelSamples[d.Sample] == minSample);
+            return (short)levelSoundDetails.FindIndex(d => level.SampleIndices[d.Sample] == minSample);
         }
 
-        // Otherwise, we need to import the samples, create a sound details object to 
-        // point to the first sample, and then return the new index. Make sure the 
-        // samples are sorted first.
-        ushort newSampleIndex = (ushort)levelSamples.Count;
-        List<uint> sortedSamples = new(newDefinition.SampleIndices);
-        sortedSamples.Sort();
-        levelSamples.AddRange(sortedSamples);
+        ushort newSampleIndex = (ushort)level.SampleIndices.Count;
+        level.SampleIndices.AddRange(newDefinition.SampleIndices);
 
-        level.SampleIndices = levelSamples.ToArray();
-        level.NumSampleIndices = (uint)levelSamples.Count;
-
-        // Make a new details object, but make sure to use the same chance as the current definition otherwise the
-        // likes of the Coastal Village "Sheila" guy will say "Hey" continuously.
-        levelSoundDetails.Add(new TR3SoundDetails
+        level.SoundDetails.Add(new TR3SoundDetails
         {
             Chance = currentDefinition.Details.Chance,
             Characteristics = newDefinition.Details.Characteristics,
@@ -277,10 +265,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
             Volume = newDefinition.Details.Volume
         });
 
-        level.SoundDetails = levelSoundDetails.ToArray();
-        level.NumSoundDetails++;
-
-        return (short)(level.NumSoundDetails - 1);
+        return (short)(level.SoundDetails.Count - 1);
     }
 
     private void RandomizeWibble(TR3CombinedLevel level)

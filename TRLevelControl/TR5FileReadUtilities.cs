@@ -496,21 +496,20 @@ internal static class TR5FileReadUtilities
             lvl.LevelDataChunk.SoundMap[i] = reader.ReadInt16();
         }
 
-        lvl.LevelDataChunk.NumSoundDetails = reader.ReadUInt32();
-        lvl.LevelDataChunk.SoundDetails = new TR3SoundDetails[lvl.LevelDataChunk.NumSoundDetails];
+        uint numSoundDetails = reader.ReadUInt32();
+        lvl.LevelDataChunk.SoundDetails = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumSoundDetails; i++)
+        for (int i = 0; i < numSoundDetails; i++)
         {
-            lvl.LevelDataChunk.SoundDetails[i] = TR3FileReadUtilities.ReadSoundDetails(reader);
+            lvl.LevelDataChunk.SoundDetails.Add(TR3FileReadUtilities.ReadSoundDetails(reader));
         }
 
-        //Samples
-        lvl.LevelDataChunk.NumSampleIndices = reader.ReadUInt32();
-        lvl.LevelDataChunk.SampleIndices = new uint[lvl.LevelDataChunk.NumSampleIndices];
+        uint numSampleIndices = reader.ReadUInt32();
+        lvl.LevelDataChunk.SampleIndices = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumSampleIndices; i++)
+        for (int i = 0; i < numSampleIndices; i++)
         {
-            lvl.LevelDataChunk.SampleIndices[i] = reader.ReadUInt32();
+            lvl.LevelDataChunk.SampleIndices.Add(reader.ReadUInt32());
         }
     }
 

@@ -58,19 +58,16 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         //Decompress
         DecompressLevelDataChunk(_level);
 
-        //Samples
-        _level.NumSamples = reader.ReadUInt32();
-        _level.Samples = new TR4Sample[_level.NumSamples];
+        uint numSamples = reader.ReadUInt32();
+        _level.Samples = new();
 
-        for (int i = 0; i < _level.NumSamples; i++)
+        for (int i = 0; i < numSamples; i++)
         {
-            TR4Sample sample = new()
+            _level.Samples.Add(new()
             {
                 UncompSize = reader.ReadUInt32(),
                 CompSize = reader.ReadUInt32(),
-            };
-
-            _level.Samples[i] = sample;
+            });
 
             //Compressed chunk is actually NOT zlib compressed - it is simply a WAV file.
             _level.Samples[i].CompressedChunk = reader.ReadBytes((int)_level.Samples[i].CompSize);
@@ -112,8 +109,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         writer.Write(_level.LevelDataChunk.CompressedSize);
         writer.Write(chunk);
 
-        writer.Write(_level.NumSamples);
-
+        writer.Write((uint)_level.Samples.Count);
         foreach (TR4Sample sample in _level.Samples)
         {
             writer.Write(sample.UncompSize);

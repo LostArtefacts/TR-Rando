@@ -592,7 +592,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                         byte[] replacementSfx = _outer._barefootSfx[soundID][i];
                         for (int j = 0; j < replacementSfx.Length; j++)
                         {
-                            level.Data.Samples[samplePointer + j] = replacementSfx[j];
+                            level.Data.Samples[(int)samplePointer + j] = replacementSfx[j];
                         }
                     }
                 }

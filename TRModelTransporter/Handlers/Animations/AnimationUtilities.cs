@@ -165,7 +165,7 @@ public static class AnimationUtilities
     }
 
     // Covers TR1
-    private static void PackAnimSounds(short[] soundMap, TRSoundDetails[] soundDetails, uint[] sampleIndices, byte[] wavSamples, TR1PackedAnimation packedAnimation)
+    private static void PackAnimSounds(short[] soundMap, List<TRSoundDetails> soundDetails, List<uint> sampleIndices, List<byte> wavSamples, TR1PackedAnimation packedAnimation)
     {
         foreach (TR1PackedAnimationCommand cmd in packedAnimation.Commands.Values)
         {
@@ -185,7 +185,7 @@ public static class AnimationUtilities
                         ushort sampleIndex = (ushort)(details.Sample + i);
                         samples[i] = sampleIndices[sampleIndex];
 
-                        uint nextIndex = sampleIndex == sampleIndices.Length - 1 ? (uint)sampleIndices.Length : sampleIndices[sampleIndex + 1];
+                        uint nextIndex = sampleIndex == sampleIndices.Count - 1 ? (uint)sampleIndices.Count : sampleIndices[sampleIndex + 1];
                         packedAnimation.Sound.Samples[samples[i]] = GetSample(samples[i], nextIndex, wavSamples);
                     }
 
@@ -195,18 +195,18 @@ public static class AnimationUtilities
         }
     }
 
-    public static byte[] GetSample(uint offset, uint endOffset, byte[] wavSamples)
+    public static byte[] GetSample(uint offset, uint endOffset, List<byte> wavSamples)
     {
         List<byte> data = new();
         for (uint i = offset; i < endOffset; i++)
         {
-            data.Add(wavSamples[i]);
+            data.Add(wavSamples[(int)i]);
         }
         return data.ToArray();
     }
 
     // Covers TR2
-    private static void PackAnimSounds(short[] soundMap, TRSoundDetails[] soundDetails, uint[] sampleIndices, TR2PackedAnimation packedAnimation)
+    private static void PackAnimSounds(short[] soundMap, List<TRSoundDetails> soundDetails, List<uint> sampleIndices, TR2PackedAnimation packedAnimation)
     {
         foreach (TR1PackedAnimationCommand cmd in packedAnimation.Commands.Values)
         {
@@ -233,7 +233,7 @@ public static class AnimationUtilities
     }
 
     // Covers TR3-5
-    private static void PackAnimSounds(short[] soundMap, TR3SoundDetails[] soundDetails, uint[] sampleIndices, TR3PackedAnimation packedAnimation)
+    private static void PackAnimSounds(short[] soundMap, List<TR3SoundDetails> soundDetails, List<uint> sampleIndices, TR3PackedAnimation packedAnimation)
     {
         foreach (TR1PackedAnimationCommand cmd in packedAnimation.Commands.Values)
         {
