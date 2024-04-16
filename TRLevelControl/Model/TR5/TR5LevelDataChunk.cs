@@ -35,9 +35,6 @@ public class TR5LevelDataChunk
     public List<TR5ObjectTexture> ObjectTextures { get; set; }
     public List<TR5Entity> Entities { get; set; }
     public List<TR5AIEntity> AIEntities { get; set; }
-
-    public ushort NumDemoData { get; set; }
-
     public byte[] DemoData { get; set; }
 
     public short[] SoundMap { get; set; }
@@ -198,7 +195,7 @@ public class TR5LevelDataChunk
             writer.Write((uint)AIEntities.Count);
             writer.Write(AIEntities);
 
-            writer.Write(NumDemoData);
+            writer.Write((ushort)DemoData.Length);
             writer.Write(DemoData);
 
             foreach (short sound in SoundMap)

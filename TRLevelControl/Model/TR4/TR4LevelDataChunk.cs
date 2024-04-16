@@ -38,9 +38,6 @@ public class TR4LevelDataChunk : ISerializableCompact
     public List<TR4ObjectTexture> ObjectTextures { get; set; }
     public List<TR4Entity> Entities { get; set; }
     public List<TR4AIEntity> AIEntities { get; set; }
-
-    public ushort NumDemoData { get; set; }
-
     public byte[] DemoData { get; set; }
 
     public short[] SoundMap { get; set; }
@@ -201,7 +198,7 @@ public class TR4LevelDataChunk : ISerializableCompact
             writer.Write((uint)AIEntities.Count);
             writer.Write(AIEntities);
 
-            writer.Write(NumDemoData);
+            writer.Write((ushort)DemoData.Length);
             writer.Write(DemoData);
 
             foreach (short sound in SoundMap)

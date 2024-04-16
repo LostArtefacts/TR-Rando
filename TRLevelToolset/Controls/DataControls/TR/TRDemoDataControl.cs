@@ -10,7 +10,7 @@ internal class TRDemoDataControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Demo Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Demo Data Size: " + IOManager.CurrentLevelAsTR1?.NumDemoData);
+            ImGui.Text("Demo Data Size: " + IOManager.CurrentLevelAsTR1?.DemoData.Length);
             ImGui.TreePop();
         }
     }

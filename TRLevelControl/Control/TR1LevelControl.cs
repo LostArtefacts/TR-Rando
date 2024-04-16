@@ -246,14 +246,8 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
             _level.CinematicFrames.Add(TR2FileReadUtilities.ReadCinematicFrame(reader));
         }
 
-        //Demo Data
-        _level.NumDemoData = reader.ReadUInt16();
-        _level.DemoData = new byte[_level.NumDemoData];
-
-        for (int i = 0; i < _level.NumDemoData; i++)
-        {
-            _level.DemoData[i] = reader.ReadByte();
-        }
+        ushort numDemoData = reader.ReadUInt16();
+        _level.DemoData = reader.ReadBytes(numDemoData);
 
         //Sound Map & Sound Details
         _level.SoundMap = new short[256];
@@ -361,7 +355,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write((ushort)_level.CinematicFrames.Count);
         foreach (TRCinematicFrame cineframe in _level.CinematicFrames) { writer.Write(cineframe.Serialize()); }
 
-        writer.Write(_level.NumDemoData);
+        writer.Write((ushort)_level.DemoData.Length);
         writer.Write(_level.DemoData);
 
         foreach (short sound in _level.SoundMap) { writer.Write(sound); }

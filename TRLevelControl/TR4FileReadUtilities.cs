@@ -317,14 +317,8 @@ internal static class TR4FileReadUtilities
 
     public static void PopulateDemoSoundSampleIndices(BinaryReader reader, TR4Level lvl)
     {
-        //Demo Data
-        lvl.LevelDataChunk.NumDemoData = reader.ReadUInt16();
-        lvl.LevelDataChunk.DemoData = new byte[lvl.LevelDataChunk.NumDemoData];
-
-        for (int i = 0; i < lvl.LevelDataChunk.NumDemoData; i++)
-        {
-            lvl.LevelDataChunk.DemoData[i] = reader.ReadByte();
-        }
+        ushort numDemoData = reader.ReadUInt16();
+        lvl.LevelDataChunk.DemoData = reader.ReadBytes(numDemoData);
 
         //Sound Map (370 shorts) & Sound Details
         lvl.LevelDataChunk.SoundMap = new short[370];

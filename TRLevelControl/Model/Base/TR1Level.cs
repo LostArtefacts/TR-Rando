@@ -28,15 +28,6 @@ public class TR1Level : TRLevelBase
     public List<byte> LightMap { get; set; }
     public List<TRColour> Palette { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }
-
-    /// <summary>
-    /// 2 bytes
-    /// </summary>
-    public ushort NumDemoData { get; set; }
-
-    /// <summary>
-    /// NumDemoData bytes
-    /// </summary>
     public byte[] DemoData { get; set; }
 
     /// <summary>
