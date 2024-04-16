@@ -245,7 +245,7 @@ public class DynamicTextureBuilder
             return;
         }
 
-        TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level, model);
+        List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level, model);
         List<TRMesh> excludedMeshes = new() { dummyMesh };
 
         if (modelID == TR1Type.Adam)
@@ -272,7 +272,7 @@ public class DynamicTextureBuilder
             }
         }
         else if ((modelID == TR1Type.ScionPiece3_S_P || modelID == TR1Type.ScionPiece4_S_P)
-            && meshes.Length == 1 && meshes[0].NumNormals != 123)
+            && meshes.Count == 1 && meshes[0].NumNormals != 123)
         {
             try
             {

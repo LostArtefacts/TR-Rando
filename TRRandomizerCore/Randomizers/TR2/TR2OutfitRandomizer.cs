@@ -311,9 +311,9 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         {
             if (clones.Count > 0)
             {
-                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraModel);
+                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraModel);
                 int firstMeshIndex = -1;
-                for (int i = 0; i < meshes.Length; i++)
+                for (int i = 0; i < meshes.Count; i++)
                 {
                     int insertedIndex = TRMeshUtilities.InsertMesh(level.Data, MeshEditor.CloneMesh(meshes[i]));
                     if (firstMeshIndex == -1)
@@ -334,7 +334,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             MeshEditor editor = new();
             foreach (TR2Type ent in entities)
             {
-                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
+                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
                 if (meshes != null)
                 {
                     foreach (TRMesh mesh in meshes)

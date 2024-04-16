@@ -64,10 +64,10 @@ public class TRPalette8Control : IDisposable
 
         // Grab meshes we aren't interested in - but don't remove Lara's hips e.g. Atlantean spawns
         List<TRMesh> ignoredMeshes = new();
-        TRMesh[] laraMeshes = TRMeshUtilities.GetModelMeshes(Level, TR1Type.Lara);
+        List<TRMesh> laraMeshes = TRMeshUtilities.GetModelMeshes(Level, TR1Type.Lara);
         foreach (TR1Type entity in ObsoleteModels)
         {
-            TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(Level, entity);
+            List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(Level, entity);
             if (meshes != null)
             {
                 foreach (TRMesh mesh in meshes)

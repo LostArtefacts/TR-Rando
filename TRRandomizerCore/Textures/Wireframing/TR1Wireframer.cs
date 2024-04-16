@@ -86,26 +86,12 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return level.GetInvalidObjectTextureIndices();
     }
 
-    protected override TRMesh[] GetLevelMeshes(TR1Level level)
+    protected override List<TRMesh> GetLevelMeshes(TR1Level level)
     {
         return level.Meshes;
     }
 
-    protected override Dictionary<TR1Type, TRMesh[]> GetModelMeshes(TR1Level level)
-    {
-        Dictionary<TR1Type, TRMesh[]> modelMeshes = new();
-        foreach (TRModel model in level.Models)
-        {
-            TRMesh[] meshes = GetModelMeshes(level, model);
-            if (meshes != null)
-            {
-                modelMeshes[(TR1Type)model.ID] = meshes;
-            }
-        }
-        return modelMeshes;
-    }
-
-    protected override TRMesh[] GetModelMeshes(TR1Level level, TRModel model)
+    protected override List<TRMesh> GetModelMeshes(TR1Level level, TRModel model)
     {
         return TRMeshUtilities.GetModelMeshes(level, model);
     }

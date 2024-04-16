@@ -9,17 +9,8 @@ public class TR5LevelDataChunk
     public uint Unused { get; set; }
     public List<TR5Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
-
-    public uint NumMeshData { get; set; }
-
-    public ushort[] RawMeshData { get; set; }
-
-    public TR4Mesh[] Meshes { get; set; }
-
-    public uint NumMeshPointers { get; set; }
-
-    public uint[] MeshPointers { get; set; }
-
+    public List<TR4Mesh> Meshes { get; set; }
+    public List<uint> MeshPointers { get; set; }
     public List<TR4Animation> Animations { get; set; }
     public List<TRStateChange> StateChanges { get; set; }
     public List<TRAnimDispatch> AnimDispatches { get; set; }
@@ -94,15 +85,11 @@ public class TR5LevelDataChunk
             writer.Write((uint)FloorData.Count);
             writer.Write(FloorData);
 
-            writer.Write(NumMeshData);
+            List<byte> meshData = Meshes.SelectMany(m => m.Serialize()).ToList();
+            writer.Write((uint)meshData.Count / 2);
+            writer.Write(meshData.ToArray());
 
-            foreach (TR4Mesh mesh in Meshes)
-            {
-                writer.Write(mesh.Serialize());
-            }
-
-            writer.Write(NumMeshPointers);
-
+            writer.Write((uint)MeshPointers.Count);
             foreach (uint data in MeshPointers)
             {
                 writer.Write(data);

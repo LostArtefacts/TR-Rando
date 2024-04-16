@@ -99,29 +99,14 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         uint numFloorData = reader.ReadUInt32();
         _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
 
-        //Mesh Data
-        //This tells us how much mesh data (# of words/uint16s) coming up
-        //just like the rooms previously.
-        _level.NumMeshData = reader.ReadUInt32();
-        _level.RawMeshData = new ushort[_level.NumMeshData];
-
-        for (int i = 0; i < _level.NumMeshData; i++)
-        {
-            _level.RawMeshData[i] = reader.ReadUInt16();
-        }
+        uint numMeshData = reader.ReadUInt32();
+        ushort[] rawMeshData = reader.ReadUInt16s(numMeshData);
 
         //Mesh Pointers
-        _level.NumMeshPointers = reader.ReadUInt32();
-        _level.MeshPointers = new uint[_level.NumMeshPointers];
+        uint numMeshPointers = reader.ReadUInt32();
+        _level.MeshPointers = reader.ReadUInt32s(numMeshPointers).ToList();
 
-        for (int i = 0; i < _level.NumMeshPointers; i++)
-        {
-            _level.MeshPointers[i] = reader.ReadUInt32();
-        }
-
-        //Mesh Construction
-        //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, level.RawMeshData);
-        _level.Meshes = ConstructMeshData(_level.MeshPointers, _level.RawMeshData);
+        _level.Meshes = ConstructMeshData(_level.MeshPointers, rawMeshData);
 
         //Animations
         uint numAnimations = reader.ReadUInt32();
@@ -324,10 +309,11 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write((uint)_level.FloorData.Count);
         writer.Write(_level.FloorData);
 
-        writer.Write(_level.NumMeshData);
-        foreach (TRMesh mesh in _level.Meshes) { writer.Write(mesh.Serialize()); }
-        writer.Write(_level.NumMeshPointers);
-        foreach (uint ptr in _level.MeshPointers) { writer.Write(ptr); }
+        List<byte> meshData = _level.Meshes.SelectMany(m => m.Serialize()).ToList();
+        writer.Write((uint)meshData.Count / 2);
+        writer.Write(meshData.ToArray());
+        writer.Write((uint)_level.MeshPointers.Count);
+        writer.Write(_level.MeshPointers);
 
         writer.Write((uint)_level.Animations.Count);
         foreach (TRAnimation anim in _level.Animations) { writer.Write(anim.Serialize()); }
@@ -500,21 +486,21 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         return RoomData;
     }
 
-    private static TRMesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
+    private static List<TRMesh> ConstructMeshData(List<uint> meshPointers, ushort[] rawMeshData)
     {
         byte[] target = new byte[rawMeshData.Length * 2];
         Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
 
         // The mesh pointer list can contain duplicates so we must make
         // sure to iterate over distinct values only
-        meshPointers = meshPointers.Distinct().ToArray();
+        meshPointers = new(meshPointers.Distinct());
 
         List<TRMesh> meshes = new();
 
         using (MemoryStream ms = new(target))
         using (BinaryReader br = new(ms))
         {
-            for (int i = 0; i < meshPointers.Length; i++)
+            for (int i = 0; i < meshPointers.Count; i++)
             {
                 TRMesh mesh = new();
                 meshes.Add(mesh);
@@ -599,6 +585,6 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
             }
         }
 
-        return meshes.ToArray();
+        return meshes;
     }
 }

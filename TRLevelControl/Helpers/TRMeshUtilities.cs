@@ -49,7 +49,7 @@ public static class TRMeshUtilities
         return GetMesh(level, model.StartingMesh);
     }
 
-    public static TRMesh[] GetModelMeshes(TR1Level level, TR1Type entity)
+    public static List<TRMesh> GetModelMeshes(TR1Level level, TR1Type entity)
     {
         TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
         if (model != null)
@@ -59,7 +59,7 @@ public static class TRMeshUtilities
         return null;
     }
 
-    public static TRMesh[] GetModelMeshes(TR2Level level, TR2Type entity)
+    public static List<TRMesh> GetModelMeshes(TR2Level level, TR2Type entity)
     {
         TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
         if (model != null)
@@ -69,7 +69,7 @@ public static class TRMeshUtilities
         return null;
     }
 
-    public static TRMesh[] GetModelMeshes(TR3Level level, TR3Type entity)
+    public static List<TRMesh> GetModelMeshes(TR3Level level, TR3Type entity)
     {
         TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
         if (model != null)
@@ -79,45 +79,45 @@ public static class TRMeshUtilities
         return null;
     }
 
-    public static TRMesh[] GetModelMeshes(TR1Level level, TRModel model)
+    public static List<TRMesh> GetModelMeshes(TR1Level level, TRModel model)
     {
         return GetModelMeshes(level.Meshes, level.MeshPointers, model);
     }
 
-    public static TRMesh[] GetModelMeshes(TR2Level level, TRModel model)
+    public static List<TRMesh> GetModelMeshes(TR2Level level, TRModel model)
     {
         return GetModelMeshes(level.Meshes, level.MeshPointers, model);
     }
 
-    public static TRMesh[] GetModelMeshes(TR3Level level, TRModel model)
+    public static List<TRMesh> GetModelMeshes(TR3Level level, TRModel model)
     {
         return GetModelMeshes(level.Meshes, level.MeshPointers, model);
     }
 
-    public static TRMesh[] GetModelMeshes(IEnumerable<TRMesh> meshes, uint[] meshPointers, TRModel model)
+    public static List<TRMesh> GetModelMeshes(IEnumerable<TRMesh> meshes, List<uint> meshPointers, TRModel model)
     {
         List<TRMesh> modelMeshes = new();
-        uint meshPointer = model.StartingMesh;
-        for (uint j = 0; j < model.NumMeshes; j++)
+        int meshPointer = model.StartingMesh;
+        for (int j = 0; j < model.NumMeshes; j++)
         {
             modelMeshes.Add(GetMesh(meshes, meshPointers[meshPointer + j]));
         }
-        return modelMeshes.ToArray();
+        return modelMeshes;
     }
 
     public static TRMesh GetMesh(TR1Level level, uint meshPointer)
     {
-        return GetMesh(level.Meshes, level.MeshPointers[meshPointer]);
+        return GetMesh(level.Meshes, level.MeshPointers[(int)meshPointer]);
     }
 
     public static TRMesh GetMesh(TR2Level level, uint meshPointer)
     {
-        return GetMesh(level.Meshes, level.MeshPointers[meshPointer]);
+        return GetMesh(level.Meshes, level.MeshPointers[(int)meshPointer]);
     }
 
     public static TRMesh GetMesh(TR3Level level, uint meshPointer)
     {
-        return GetMesh(level.Meshes, level.MeshPointers[meshPointer]);
+        return GetMesh(level.Meshes, level.MeshPointers[(int)meshPointer]);
     }
 
     public static TRMesh GetMesh(IEnumerable<TRMesh> meshes, uint offset)
@@ -164,76 +164,20 @@ public static class TRMeshUtilities
         return nodes.ToArray();
     }
 
-    /// <summary>
-    /// Inserts a new mesh and returns its index in MeshPointers.
-    /// </summary>
     public static int InsertMesh(TR1Level level, TRMesh newMesh)
-    {
-        //get the final mesh we currently have
-        if(level.Meshes.Length > 0)
-        {
-            TRMesh lastMesh = level.Meshes[^1];
-            //new mesh pointer will be the current final mesh's pointer plus its length
-            newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
-        }
-        else
-        {
-            newMesh.Pointer = 0;
-        }
-
-        List<TRMesh> meshes = level.Meshes.ToList();
-        meshes.Add(newMesh);
-        level.Meshes = meshes.ToArray();
-
-        List<uint> pointers = level.MeshPointers.ToList();
-        pointers.Add(newMesh.Pointer);
-        level.MeshPointers = pointers.ToArray();
-        level.NumMeshPointers++;
-
-        //NumMeshData needs the additional mesh size added
-        level.NumMeshData += (uint)newMesh.Serialize().Length / 2;
-
-        //the pointer index will be the final index in the array
-        return level.MeshPointers.Length - 1;
-    }
+        => InsertMesh(newMesh, level.Meshes, level.MeshPointers);
 
     public static int InsertMesh(TR2Level level, TRMesh newMesh)
-    {
-        //get the final mesh we currently have
-        if (level.Meshes.Length > 0)
-        {
-            TRMesh lastMesh = level.Meshes[^1];
-            //new mesh pointer will be the current final mesh's pointer plus its length
-            newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
-        }
-        else
-        {
-            newMesh.Pointer = 0;
-        }
-
-        List<TRMesh> meshes = level.Meshes.ToList();
-        meshes.Add(newMesh);
-        level.Meshes = meshes.ToArray();
-
-        List<uint> pointers = level.MeshPointers.ToList();
-        pointers.Add(newMesh.Pointer);
-        level.MeshPointers = pointers.ToArray();
-        level.NumMeshPointers++;
-
-        //NumMeshData needs the additional mesh size added
-        level.NumMeshData += (uint)newMesh.Serialize().Length / 2;
-
-        //the pointer index will be the final index in the array
-        return level.MeshPointers.Length - 1;
-    }
+        => InsertMesh(newMesh, level.Meshes, level.MeshPointers);
 
     public static int InsertMesh(TR3Level level, TRMesh newMesh)
+        => InsertMesh(newMesh, level.Meshes, level.MeshPointers);
+
+    private static int InsertMesh(TRMesh newMesh, List<TRMesh> meshes, List<uint> meshPointers)
     {
-        //get the final mesh we currently have
-        if (level.Meshes.Length > 0)
+        if (meshes.Count > 0)
         {
-            TRMesh lastMesh = level.Meshes[^1];
-            //new mesh pointer will be the current final mesh's pointer plus its length
+            TRMesh lastMesh = meshes[^1];
             newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
         }
         else
@@ -241,20 +185,10 @@ public static class TRMeshUtilities
             newMesh.Pointer = 0;
         }
 
-        List<TRMesh> meshes = level.Meshes.ToList();
         meshes.Add(newMesh);
-        level.Meshes = meshes.ToArray();
+        meshPointers.Add(newMesh.Pointer);
 
-        List<uint> pointers = level.MeshPointers.ToList();
-        pointers.Add(newMesh.Pointer);
-        level.MeshPointers = pointers.ToArray();
-        level.NumMeshPointers++;
-
-        //NumMeshData needs the additional mesh size added
-        level.NumMeshData += (uint)newMesh.Serialize().Length / 2;
-
-        //the pointer index will be the final index in the array
-        return level.MeshPointers.Length - 1;
+        return meshPointers.Count - 1;
     }
 
     /// <summary>
@@ -326,10 +260,8 @@ public static class TRMeshUtilities
             }
         }
 
-        level.MeshPointers = pointers.ToArray();
-
-        int numMeshData = (int)level.NumMeshData + lengthDiff / 2;
-        level.NumMeshData = (uint)numMeshData;
+        level.MeshPointers.Clear();
+        level.MeshPointers.AddRange(pointers);
 
         // While the Pointer property on meshes is only for convenience and not
         // written to the level, we need to update them regardless in case of
@@ -358,10 +290,8 @@ public static class TRMeshUtilities
             }
         }
 
-        level.MeshPointers = pointers.ToArray();
-
-        int numMeshData = (int)level.NumMeshData + lengthDiff / 2;
-        level.NumMeshData = (uint)numMeshData;
+        level.MeshPointers.Clear();
+        level.MeshPointers.AddRange(pointers);
 
         // While the Pointer property on meshes is only for convenience and not
         // written to the level, we need to update them regardless in case of
@@ -390,10 +320,8 @@ public static class TRMeshUtilities
             }
         }
 
-        level.MeshPointers = pointers.ToArray();
-
-        int numMeshData = (int)level.NumMeshData + lengthDiff / 2;
-        level.NumMeshData = (uint)numMeshData;
+        level.MeshPointers.Clear();
+        level.MeshPointers.AddRange(pointers);
 
         // While the Pointer property on meshes is only for convenience and not
         // written to the level, we need to update them regardless in case of

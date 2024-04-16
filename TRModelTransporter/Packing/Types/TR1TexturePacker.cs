@@ -58,7 +58,7 @@ public class TR1TexturePacker : AbstractTexturePacker<TR1Type, TR1Level>
         return textures;
     }
 
-    protected override TRMesh[] GetModelMeshes(TR1Type modelEntity)
+    protected override List<TRMesh> GetModelMeshes(TR1Type modelEntity)
     {
         return TRMeshUtilities.GetModelMeshes(Level, modelEntity);
     }

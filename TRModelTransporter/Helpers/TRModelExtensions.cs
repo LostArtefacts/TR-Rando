@@ -254,7 +254,7 @@ public static class TRModelExtensions
         return defaultToOriginal ? textureReference : (ushort)0;
     }
 
-    public static string ComputeSkeletonHash(this TRMesh[] meshes)
+    public static string ComputeSkeletonHash(this IEnumerable<TRMesh> meshes)
     {
         using MemoryStream ms = new();
         using BinaryWriter writer = new(ms);

@@ -42,7 +42,7 @@ public class TR3TextureMapping : AbstractTextureMapping<TR3Type, TR3Level>
         return _paletteTracker.Import(colour);
     }
 
-    protected override TRMesh[] GetModelMeshes(TR3Type entity)
+    protected override List<TRMesh> GetModelMeshes(TR3Type entity)
     {
         return TRMeshUtilities.GetModelMeshes(_level, entity);
     }

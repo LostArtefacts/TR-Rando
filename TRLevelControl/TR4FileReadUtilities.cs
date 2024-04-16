@@ -95,29 +95,23 @@ internal static class TR4FileReadUtilities
 
     public static void PopulateMeshes(BinaryReader reader, TR4Level lvl)
     {
-        //Mesh Data
-        //This tells us how much mesh data (# of words/uint16s) coming up
-        //just like the rooms previously.
-        lvl.LevelDataChunk.NumMeshData = reader.ReadUInt32();
-        lvl.LevelDataChunk.RawMeshData = new ushort[lvl.LevelDataChunk.NumMeshData];
+        uint numMeshData = reader.ReadUInt32();
+        ushort[] rawMeshData = new ushort[numMeshData];
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumMeshData; i++)
+        for (int i = 0; i < numMeshData; i++)
         {
-            lvl.LevelDataChunk.RawMeshData[i] = reader.ReadUInt16();
+            rawMeshData[i] = reader.ReadUInt16();
         }
 
-        //Mesh Pointers
-        lvl.LevelDataChunk.NumMeshPointers = reader.ReadUInt32();
-        lvl.LevelDataChunk.MeshPointers = new uint[lvl.LevelDataChunk.NumMeshPointers];
+        uint numMeshPointers = reader.ReadUInt32();
+        lvl.LevelDataChunk.MeshPointers = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumMeshPointers; i++)
+        for (int i = 0; i < numMeshPointers; i++)
         {
-            lvl.LevelDataChunk.MeshPointers[i] = reader.ReadUInt32();
+            lvl.LevelDataChunk.MeshPointers.Add(reader.ReadUInt32());
         }
 
-        //Mesh Construction
-        //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, level.RawMeshData);
-        lvl.LevelDataChunk.Meshes = ConstructMeshData(lvl.LevelDataChunk.MeshPointers, lvl.LevelDataChunk.RawMeshData);
+        lvl.LevelDataChunk.Meshes = ConstructMeshData(lvl.LevelDataChunk.MeshPointers, rawMeshData);
     }
 
     public static void PopulateAnimations(BinaryReader reader, TR4Level lvl)
@@ -515,21 +509,21 @@ internal static class TR4FileReadUtilities
         };
     }
 
-    public static TR4Mesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
+    public static List<TR4Mesh> ConstructMeshData(List<uint> meshPointers, ushort[] rawMeshData)
     {
         byte[] target = new byte[rawMeshData.Length * 2];
         Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
 
         // The mesh pointer list can contain duplicates so we must make
         // sure to iterate over distinct values only
-        meshPointers = meshPointers.Distinct().ToArray();
+        meshPointers = new(meshPointers.Distinct());
 
         List<TR4Mesh> meshes = new();
 
         using (MemoryStream ms = new(target))
         using (BinaryReader br = new(ms))
         {
-            for (int i = 0; i < meshPointers.Length; i++)
+            for (int i = 0; i < meshPointers.Count; i++)
             {
                 TR4Mesh mesh = new();
                 meshes.Add(mesh);
@@ -598,7 +592,7 @@ internal static class TR4FileReadUtilities
             }
         }
 
-        return meshes.ToArray();
+        return meshes;
     }
 
     public static TR4MeshFace4 ReadTR4MeshFace4(BinaryReader reader)

@@ -8,32 +8,8 @@ public class TR2Level : TRLevelBase
     public List<TRTexImage16> Images16 { get; set; }
     public List<TR2Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumMeshData { get; set; }
-
-    /// <summary>
-    /// 2 * NumMeshData, holds the raw data stored in Meshes
-    /// </summary>
-    public ushort[] RawMeshData { get; set; }
-
-    /// <summary>
-    /// Variable
-    /// </summary>
-    public TRMesh[] Meshes { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumMeshPointers { get; set; }
-
-    /// <summary>
-    /// NumMeshPointers * 4 bytes
-    /// </summary>
-    public uint[] MeshPointers { get; set; }
-
+    public List<TRMesh> Meshes { get; set; }
+    public List<uint> MeshPointers { get; set; }
     public List<TRAnimation> Animations { get; set; }
     public List<TRStateChange> StateChanges { get; set; }
     public List<TRAnimDispatch> AnimDispatches { get; set; }

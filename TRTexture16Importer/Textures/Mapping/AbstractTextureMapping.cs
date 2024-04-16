@@ -30,7 +30,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         _committed = false;
     }
 
-    protected abstract TRMesh[] GetModelMeshes(E entity);
+    protected abstract List<TRMesh> GetModelMeshes(E entity);
     protected abstract List<TRColour> GetPalette8();
     protected abstract List<TRColour4> GetPalette16();
     protected abstract int ImportColour(Color colour);
@@ -302,7 +302,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 {
                     translatedEntity = EntityMap[entity];
                 }
-                TRMesh[] meshes = GetModelMeshes(translatedEntity);
+                List<TRMesh> meshes = GetModelMeshes(translatedEntity);
                 ISet<int> colourIndices = new HashSet<int>();
                 foreach (TRMesh mesh in meshes)
                 {
@@ -364,8 +364,8 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 {
                     translatedEntity = EntityMap[entity];
                 }
-                TRMesh[] meshes = GetModelMeshes(translatedEntity);
-                if (meshes == null || meshes.Length == 0)
+                List<TRMesh> meshes = GetModelMeshes(translatedEntity);
+                if (meshes == null || meshes.Count == 0)
                 {
                     continue;
                 }

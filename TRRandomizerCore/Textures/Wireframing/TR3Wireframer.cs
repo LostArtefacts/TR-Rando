@@ -53,26 +53,12 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return level.GetInvalidObjectTextureIndices();
     }
 
-    protected override TRMesh[] GetLevelMeshes(TR3Level level)
+    protected override List<TRMesh> GetLevelMeshes(TR3Level level)
     {
         return level.Meshes;
     }
 
-    protected override Dictionary<TR3Type, TRMesh[]> GetModelMeshes(TR3Level level)
-    {
-        Dictionary<TR3Type, TRMesh[]> modelMeshes = new();
-        foreach (TRModel model in level.Models)
-        {
-            TRMesh[] meshes = GetModelMeshes(level, model);
-            if (meshes != null)
-            {
-                modelMeshes[(TR3Type)model.ID] = meshes;
-            }
-        }
-        return modelMeshes;
-    }
-
-    protected override TRMesh[] GetModelMeshes(TR3Level level, TRModel model)
+    protected override List<TRMesh> GetModelMeshes(TR3Level level, TRModel model)
     {
         return TRMeshUtilities.GetModelMeshes(level, model);
     }

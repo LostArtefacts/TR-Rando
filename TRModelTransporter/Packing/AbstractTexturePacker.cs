@@ -93,7 +93,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
     public Dictionary<TexturedTile, List<TexturedTileSegment>> GetModelSegments(E modelEntity)
     {
         Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new();
-        TRMesh[] meshes = GetModelMeshes(modelEntity);
+        List<TRMesh> meshes = GetModelMeshes(modelEntity);
         if (meshes != null)
         {
             IEnumerable<int> indices = GetMeshTextureIndices(meshes);
@@ -125,7 +125,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
         return segmentMap;
     }
 
-    protected abstract TRMesh[] GetModelMeshes(E modelEntity);
+    protected abstract List<TRMesh> GetModelMeshes(E modelEntity);
 
     public Dictionary<TexturedTile, List<TexturedTileSegment>> GetSpriteSegments(E entity)
     {
@@ -169,7 +169,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     protected abstract TRSpriteSequence GetSpriteSequence(E entity);
 
-    protected IEnumerable<int> GetMeshTextureIndices(TRMesh[] meshes)
+    protected IEnumerable<int> GetMeshTextureIndices(List<TRMesh> meshes)
     {
         ISet<int> textureIndices = new SortedSet<int>();
         foreach (TRMesh mesh in meshes)

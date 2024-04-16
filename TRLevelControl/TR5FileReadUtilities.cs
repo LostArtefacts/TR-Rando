@@ -212,29 +212,23 @@ internal static class TR5FileReadUtilities
 
     public static void PopulateMeshes(BinaryReader reader, TR5Level lvl)
     {
-        //Mesh Data
-        //This tells us how much mesh data (# of words/uint16s) coming up
-        //just like the rooms previously.
-        lvl.LevelDataChunk.NumMeshData = reader.ReadUInt32();
-        lvl.LevelDataChunk.RawMeshData = new ushort[lvl.LevelDataChunk.NumMeshData];
+        uint numMeshData = reader.ReadUInt32();
+        ushort[] rawMeshData = new ushort[numMeshData];
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumMeshData; i++)
+        for (int i = 0; i < numMeshData; i++)
         {
-            lvl.LevelDataChunk.RawMeshData[i] = reader.ReadUInt16();
+            rawMeshData[i] = reader.ReadUInt16();
         }
 
-        //Mesh Pointers
-        lvl.LevelDataChunk.NumMeshPointers = reader.ReadUInt32();
-        lvl.LevelDataChunk.MeshPointers = new uint[lvl.LevelDataChunk.NumMeshPointers];
+        uint numMeshPointers = reader.ReadUInt32();
+        lvl.LevelDataChunk.MeshPointers = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumMeshPointers; i++)
+        for (int i = 0; i < numMeshPointers; i++)
         {
-            lvl.LevelDataChunk.MeshPointers[i] = reader.ReadUInt32();
+            lvl.LevelDataChunk.MeshPointers.Add(reader.ReadUInt32());
         }
 
-        //Mesh Construction
-        //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, level.RawMeshData);
-        lvl.LevelDataChunk.Meshes = TR4FileReadUtilities.ConstructMeshData(lvl.LevelDataChunk.MeshPointers, lvl.LevelDataChunk.RawMeshData);
+        lvl.LevelDataChunk.Meshes = TR4FileReadUtilities.ConstructMeshData(lvl.LevelDataChunk.MeshPointers, rawMeshData);
     }
 
     public static void PopulateAnimations(BinaryReader reader, TR5Level lvl)

@@ -45,7 +45,7 @@ public class TR1TextureMapping : AbstractTextureMapping<TR1Type, TR1Level>
         return PaletteManager.AddPredefinedColour(colour);
     }
 
-    protected override TRMesh[] GetModelMeshes(TR1Type entity)
+    protected override List<TRMesh> GetModelMeshes(TR1Type entity)
     {
         return TRMeshUtilities.GetModelMeshes(_level, entity);
     }

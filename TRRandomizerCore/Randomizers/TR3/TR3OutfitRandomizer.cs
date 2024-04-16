@@ -271,7 +271,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
             MeshEditor editor = new();
             foreach (TR3Type ent in entities)
             {
-                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
+                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
                 if (meshes != null)
                 {
                     foreach (TRMesh mesh in meshes)

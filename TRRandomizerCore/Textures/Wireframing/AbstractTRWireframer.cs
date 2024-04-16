@@ -724,12 +724,11 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract IEnumerable<int> GetInvalidObjectTextureIndices(L level);
     protected abstract TRObjectTexture[] GetObjectTextures(L level);
     protected abstract void SetObjectTextures(L level, IEnumerable<TRObjectTexture> textures);
-    protected abstract Dictionary<E, TRMesh[]> GetModelMeshes(L level);
     protected abstract int GetBlackPaletteIndex(L level);
     protected abstract int ImportColour(L level, Color c);
     protected abstract List<TRModel> GetModels(L level);
-    protected abstract TRMesh[] GetModelMeshes(L level, TRModel model);
-    protected abstract TRMesh[] GetLevelMeshes(L level);
+    protected abstract List<TRMesh> GetModelMeshes(L level, TRModel model);
+    protected abstract List<TRMesh> GetLevelMeshes(L level);
     protected abstract List<TRStaticMesh> GetStaticMeshes(L level);
     protected abstract TRMesh GetStaticMesh(L level, TRStaticMesh staticMesh);
     protected abstract bool IsSkybox(TRModel model);

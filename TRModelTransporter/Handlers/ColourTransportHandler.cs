@@ -21,7 +21,7 @@ public class ColourTransportHandler
         definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
     }
 
-    private static Dictionary<int, TRColour> GetUsedMeshColours(TRMesh[] meshes, List<TRColour> colours)
+    private static Dictionary<int, TRColour> GetUsedMeshColours(List<TRMesh> meshes, List<TRColour> colours)
     {
         ISet<int> colourIndices = GetAllColourIndices(meshes, false);
 
@@ -34,7 +34,7 @@ public class ColourTransportHandler
         return usedColours;
     }
 
-    private static Dictionary<int, TRColour4> GetUsedMeshColours(TRMesh[] meshes, List<TRColour4> colours)
+    private static Dictionary<int, TRColour4> GetUsedMeshColours(List<TRMesh> meshes, List<TRColour4> colours)
     {
         ISet<int> colourIndices = GetAllColourIndices(meshes, true);
 
@@ -47,7 +47,7 @@ public class ColourTransportHandler
         return usedColours;
     }
 
-    private static ISet<int> GetAllColourIndices(TRMesh[] meshes, bool has16Bit)
+    private static ISet<int> GetAllColourIndices(List<TRMesh> meshes, bool has16Bit)
     {
         ISet<int> colourIndices = new SortedSet<int>();
         foreach (TRMesh mesh in meshes)
@@ -107,7 +107,7 @@ public class ColourTransportHandler
         ReindexMeshTextures(definition.Meshes, indexMap, true);
     }
 
-    private static void ReindexMeshTextures(TRMesh[] meshes, Dictionary<int, int> indexMap, bool has16Bit)
+    private static void ReindexMeshTextures(List<TRMesh> meshes, Dictionary<int, int> indexMap, bool has16Bit)
     {
         foreach (TRMesh mesh in meshes)
         {

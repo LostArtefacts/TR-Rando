@@ -85,11 +85,11 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         return importData;
     }
 
-    private static void RemapFaces(List<EMMeshTextureData> data, uint maximumTexture, Func<short, TRMesh[]> meshAction)
+    private static void RemapFaces(List<EMMeshTextureData> data, uint maximumTexture, Func<short, List<TRMesh>> meshAction)
     {
         foreach (EMMeshTextureData textureData in data)
         {
-            TRMesh[] meshes = meshAction.Invoke(textureData.ModelID);
+            List<TRMesh> meshes = meshAction.Invoke(textureData.ModelID);
             foreach (TRMesh mesh in meshes)
             {
                 foreach (TRFace3 face in mesh.ColouredTriangles)

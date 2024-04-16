@@ -58,26 +58,12 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return level.GetInvalidObjectTextureIndices();
     }
 
-    protected override TRMesh[] GetLevelMeshes(TR2Level level)
+    protected override List<TRMesh> GetLevelMeshes(TR2Level level)
     {
         return level.Meshes;
     }
 
-    protected override Dictionary<TR2Type, TRMesh[]> GetModelMeshes(TR2Level level)
-    {
-        Dictionary<TR2Type, TRMesh[]> modelMeshes = new();
-        foreach (TRModel model in level.Models)
-        {
-            TRMesh[] meshes = GetModelMeshes(level, model);
-            if (meshes != null)
-            {
-                modelMeshes[(TR2Type)model.ID] = meshes;
-            }
-        }
-        return modelMeshes;
-    }
-
-    protected override TRMesh[] GetModelMeshes(TR2Level level, TRModel model)
+    protected override List<TRMesh> GetModelMeshes(TR2Level level, TRModel model)
     {
         return TRMeshUtilities.GetModelMeshes(level, model);
     }
