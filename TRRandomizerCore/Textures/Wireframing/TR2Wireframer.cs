@@ -153,14 +153,8 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return FaceUtilities.GetTriggerFaces(level, new List<FDTrigType>(), true);
     }
 
-    protected override TRAnimatedTexture[] GetAnimatedTextures(TR2Level level)
+    protected override List<TRAnimatedTexture> GetAnimatedTextures(TR2Level level)
     {
         return level.AnimatedTextures;
-    }
-
-    protected override void SetAnimatedTextures(TR2Level level, TRAnimatedTexture[] animatedTextures, ushort length)
-    {
-        level.AnimatedTextures = animatedTextures;
-        level.NumAnimatedTextures = length;
     }
 }

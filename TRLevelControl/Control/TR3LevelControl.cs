@@ -226,13 +226,12 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         ushort[] zoneData = reader.ReadUInt16s(numBoxes * 10);
         _level.Zones = TR2BoxUtilities.ReadZones(numBoxes, zoneData);
 
-        //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)
-        //followed by a ushort to describe the number of actual texture group objects.
-        _level.NumAnimatedTextures = reader.ReadUInt32();
-        _level.AnimatedTextures = new TRAnimatedTexture[reader.ReadUInt16()];
-        for (int i = 0; i < _level.AnimatedTextures.Length; i++)
+        reader.ReadUInt32(); // Total count of ushorts
+        ushort numGroups = reader.ReadUInt16();
+        _level.AnimatedTextures = new();
+        for (int i = 0; i < numGroups; i++)
         {
-            _level.AnimatedTextures[i] = TR2FileReadUtilities.ReadAnimatedTexture(reader);
+            _level.AnimatedTextures.Add(TR2FileReadUtilities.ReadAnimatedTexture(reader));
         }
 
         //Object Textures - in TR3 this is now after animated textures
@@ -353,9 +352,11 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write(_level.Overlaps);
         writer.Write(TR2BoxUtilities.FlattenZones(_level.Zones));
 
-        writer.Write(_level.NumAnimatedTextures);
-        writer.Write((ushort)_level.AnimatedTextures.Length);
-        foreach (TRAnimatedTexture texture in _level.AnimatedTextures) { writer.Write(texture.Serialize()); }
+        byte[] animTextureData = _level.AnimatedTextures.SelectMany(a => a.Serialize()).ToArray();
+        writer.Write((uint)(animTextureData.Length / sizeof(ushort)) + 1);
+        writer.Write((ushort)_level.AnimatedTextures.Count);
+        writer.Write(animTextureData);
+
         writer.Write((uint)_level.ObjectTextures.Count);
         foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
 

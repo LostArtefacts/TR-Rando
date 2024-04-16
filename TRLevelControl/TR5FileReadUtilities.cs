@@ -410,11 +410,12 @@ internal static class TR5FileReadUtilities
 
     public static void PopulateAnimatedTextures(BinaryReader reader, TR5Level lvl)
     {
-        lvl.LevelDataChunk.NumAnimatedTextures = reader.ReadUInt32();
-        lvl.LevelDataChunk.AnimatedTextures = new TRAnimatedTexture[reader.ReadUInt16()];
-        for (int i = 0; i < lvl.LevelDataChunk.AnimatedTextures.Length; i++)
+        reader.ReadUInt32(); // Total count of ushorts
+        ushort numGroups = reader.ReadUInt16();
+        lvl.LevelDataChunk.AnimatedTextures = new();
+        for (int i = 0; i < numGroups; i++)
         {
-            lvl.LevelDataChunk.AnimatedTextures[i] = TR2FileReadUtilities.ReadAnimatedTexture(reader);
+            lvl.LevelDataChunk.AnimatedTextures.Add(TR2FileReadUtilities.ReadAnimatedTexture(reader));
         }
 
         //TR4+ Specific

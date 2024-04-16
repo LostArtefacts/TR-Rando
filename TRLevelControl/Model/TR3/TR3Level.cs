@@ -25,16 +25,7 @@ public class TR3Level : TRLevelBase
     public List<TR2Box> Boxes { get; set; }
     public List<ushort> Overlaps { get; set; }
     public List<TR2ZoneGroup> Zones { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumAnimatedTextures { get; set; }
-
-    /// <summary>
-    /// NumAnimatesTextures * 2 bytes
-    /// </summary>
-    public TRAnimatedTexture[] AnimatedTextures { get; set; }
+    public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public List<TRObjectTexture> ObjectTextures { get; set; }
     public List<TR3Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }

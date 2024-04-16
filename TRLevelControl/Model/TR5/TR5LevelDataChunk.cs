@@ -29,11 +29,7 @@ public class TR5LevelDataChunk
     public List<TR2Box> Boxes { get; set; }
     public List<ushort> Overlaps { get; set; }
     public List<short> Zones { get; set; }
-
-    public uint NumAnimatedTextures { get; set; }
-
-    public TRAnimatedTexture[] AnimatedTextures { get; set; }
-
+    public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public byte AnimatedTexturesUVCount { get; set; }
 
     public byte[] TEXMarker { get; set; }
@@ -183,9 +179,10 @@ public class TR5LevelDataChunk
                 writer.Write(zone);
             }
 
-            writer.Write(NumAnimatedTextures);
-            writer.Write((ushort)AnimatedTextures.Length);
-            foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }
+            byte[] animTextureData = AnimatedTextures.SelectMany(a => a.Serialize()).ToArray();
+            writer.Write((uint)(animTextureData.Length / sizeof(ushort)) + 1);
+            writer.Write((ushort)AnimatedTextures.Count);
+            writer.Write(animTextureData);
             writer.Write(AnimatedTexturesUVCount);
 
             writer.Write(TEXMarker);

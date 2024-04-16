@@ -679,37 +679,24 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void DeleteAnimatedTextures(L level)
     {
-        List<TRAnimatedTexture> animatedTextures = GetAnimatedTextures(level).ToList();
+        List<TRAnimatedTexture> animatedTextures = GetAnimatedTextures(level);
 
         for (int i = animatedTextures.Count - 1; i >= 0; i--)
         {
             TRAnimatedTexture animatedTexture = animatedTextures[i];
-            List<ushort> textures = animatedTexture.Textures.ToList();
-            for (int j = textures.Count - 1; j >= 0; j--)
+            for (int j = animatedTexture.Textures.Count - 1; j >= 0; j--)
             {
-                if (!IsTextureExcluded(textures[j]))
+                if (!IsTextureExcluded(animatedTexture.Textures[j]))
                 {
-                    textures.RemoveAt(j);
+                    animatedTexture.Textures.RemoveAt(j);
                 }
             }
 
-            if (textures.Count < 2)
+            if (animatedTexture.Textures.Count < 2)
             {
                 animatedTextures.RemoveAt(i);
             }
-            else
-            {
-                animatedTexture.Textures = textures.ToArray();
-            }
         }
-
-        int length = 1;
-        foreach (TRAnimatedTexture animatedTexture in animatedTextures)
-        {
-            length += animatedTexture.NumTextures + 2;
-        }
-
-        SetAnimatedTextures(level, animatedTextures.ToArray(), (ushort)length);
     }
 
     protected abstract Dictionary<TRFace4, List<TRVertex>> CollectLadders(L level);
@@ -735,8 +722,7 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract bool IsInteractableModel(TRModel model);
     protected virtual bool ShouldSolidifyModel(TRModel model) => false;
     protected abstract void SetSkyboxVisible(L level);
-    protected abstract TRAnimatedTexture[] GetAnimatedTextures(L level);
-    protected abstract void SetAnimatedTextures(L level, TRAnimatedTexture[] animatedTextures, ushort length);
+    protected abstract List<TRAnimatedTexture> GetAnimatedTextures(L level);
 
     public virtual bool Is8BitPalette { get; }
     protected virtual void ResetPaletteTracking(L level) { }

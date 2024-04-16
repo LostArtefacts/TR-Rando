@@ -162,13 +162,13 @@ public static class TRModelExtensions
         List<TRObjectTexture> textures = level.ObjectTextures.ToList();
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 anim.Textures[i] = ConvertTextureReference(anim.Textures[i], indexMap, defaultToOriginal);
             }
 
             ushort previousIndex = anim.Textures[0];
-            for (int i = 1; i < anim.Textures.Length; i++)
+            for (int i = 1; i < anim.Textures.Count; i++)
             {
                 if (anim.Textures[i] == previousIndex && textures.Count < 2048)
                 {
@@ -220,13 +220,13 @@ public static class TRModelExtensions
         List<TRObjectTexture> textures = level.ObjectTextures.ToList();
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 anim.Textures[i] = ConvertTextureReference(anim.Textures[i], indexMap, defaultToOriginal);
             }
 
             ushort previousIndex = anim.Textures[0];
-            for (int i = 1; i < anim.Textures.Length; i++)
+            for (int i = 1; i < anim.Textures.Count; i++)
             {
                 if (anim.Textures[i] == previousIndex && textures.Count < 2048)
                 {

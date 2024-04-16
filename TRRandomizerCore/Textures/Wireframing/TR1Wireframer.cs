@@ -186,15 +186,9 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return FaceUtilities.GetTriggerFaces(level, new List<FDTrigType>(), true);
     }
 
-    protected override TRAnimatedTexture[] GetAnimatedTextures(TR1Level level)
+    protected override List<TRAnimatedTexture> GetAnimatedTextures(TR1Level level)
     {
         return level.AnimatedTextures;
-    }
-
-    protected override void SetAnimatedTextures(TR1Level level, TRAnimatedTexture[] animatedTextures, ushort length)
-    {
-        level.AnimatedTextures = animatedTextures;
-        level.NumAnimatedTextures = length;
     }
 
     protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TR1Level level, Pen pen)

@@ -312,11 +312,12 @@ internal static class TR2FileReadUtilities
 
     public static TRAnimatedTexture ReadAnimatedTexture(BinaryReader reader)
     {
-        ushort numTextures = reader.ReadUInt16(); // Actually num textures - 1, see https://opentomb.github.io/TRosettaStone3/trosettastone.html#_animated_textures_2
-        ushort[] textures = new ushort[numTextures + 1];
-        for (int i = 0; i < textures.Length; i++)
+        // See https://opentomb.github.io/TRosettaStone3/trosettastone.html#_animated_textures_2
+        int numTextures = reader.ReadUInt16() + 1;
+        List<ushort> textures = new();
+        for (int i = 0; i < numTextures; i++)
         {
-            textures[i] = reader.ReadUInt16();
+            textures.Add(reader.ReadUInt16());
         }
 
         return new TRAnimatedTexture

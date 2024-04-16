@@ -156,7 +156,7 @@ public class DynamicTextureBuilder
         // textures from the same animation list.
         foreach (int texture in defaultObjectTextures.ToList())
         {
-            TRAnimatedTexture anim = Array.Find(level.Data.AnimatedTextures, a => a.Textures.Contains((ushort)texture));
+            TRAnimatedTexture anim = level.Data.AnimatedTextures.Find(a => a.Textures.Contains((ushort)texture));
             if (anim != null)
             {
                 foreach (ushort animTexture in anim.Textures)

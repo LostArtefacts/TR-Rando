@@ -1080,7 +1080,7 @@ public class EMMirrorFunction : BaseEMFunction
         // Include all animated texture references too
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 textureReferences.Add(anim.Textures[i]);
             }
@@ -1161,7 +1161,7 @@ public class EMMirrorFunction : BaseEMFunction
         // Include all animated texture references too
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 textureReferences.Add(anim.Textures[i]);
             }
@@ -1232,7 +1232,7 @@ public class EMMirrorFunction : BaseEMFunction
 
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 textureReferences.Add(anim.Textures[i]);
             }
