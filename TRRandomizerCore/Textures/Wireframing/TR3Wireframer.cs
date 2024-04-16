@@ -65,7 +65,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
 
     protected override List<TRModel> GetModels(TR3Level level)
     {
-        return level.Models.ToList();
+        return level.Models;
     }
 
     protected override List<TRObjectTexture> GetObjectTextures(TR3Level level)

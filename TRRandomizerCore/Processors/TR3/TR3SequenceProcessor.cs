@@ -246,11 +246,10 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private void ImportArtefactMenuModels(TR3CombinedLevel level)
     {
-        List<TRModel> models = level.Data.Models.ToList();
         List<TR3Type> imports = new();
         foreach (TR3Type artefactMenuModel in TR3TypeUtilities.GetArtefactMenuModels())
         {
-            if (models.Find(m => m.ID == (uint)artefactMenuModel) == null)
+            if (level.Data.Models.Find(m => m.ID == (uint)artefactMenuModel) == null)
             {
                 imports.Add(artefactMenuModel);
             }
