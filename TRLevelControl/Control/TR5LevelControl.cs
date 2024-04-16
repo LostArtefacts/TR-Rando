@@ -138,13 +138,13 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         TR5FileReadUtilities.PopulateAnimations(lvlChunkReader, lvl);
         TR5FileReadUtilities.PopulateMeshTreesFramesModels(lvlChunkReader, lvl);
         TR5FileReadUtilities.PopulateStaticMeshes(lvlChunkReader, lvl);
-        TR5FileReadUtilities.VerifySPRMarker(lvlChunkReader, lvl);
+        TR5FileReadUtilities.VerifySPRMarker(lvlChunkReader);
         TR5FileReadUtilities.PopulateSprites(lvlChunkReader, lvl);
         TR5FileReadUtilities.PopulateCameras(lvlChunkReader, lvl);
         TR5FileReadUtilities.PopulateSoundSources(lvlChunkReader, lvl);
         TR5FileReadUtilities.PopulateBoxesOverlapsZones(lvlChunkReader, lvl);
         TR5FileReadUtilities.PopulateAnimatedTextures(lvlChunkReader, lvl);
-        TR5FileReadUtilities.VerifyTEXMarker(lvlChunkReader, lvl);
+        TR5FileReadUtilities.VerifyTEXMarker(lvlChunkReader);
         TR5FileReadUtilities.PopulateObjectTextures(lvlChunkReader, lvl);
         TR5FileReadUtilities.PopulateEntitiesAndAI(lvlChunkReader, lvl);
         TR5FileReadUtilities.PopulateDemoSoundSampleIndices(lvlChunkReader, lvl);

@@ -187,13 +187,10 @@ internal static class TR4FileReadUtilities
         }
     }
 
-    public static void VerifySPRMarker(BinaryReader reader, TR4Level lvl)
+    public static void VerifySPRMarker(BinaryReader reader)
     {
-        lvl.LevelDataChunk.SPRMarker = reader.ReadBytes(3);
-
-        Debug.Assert(lvl.LevelDataChunk.SPRMarker[0] == 0x53);
-        Debug.Assert(lvl.LevelDataChunk.SPRMarker[1] == 0x50);
-        Debug.Assert(lvl.LevelDataChunk.SPRMarker[2] == 0x52);
+        string sprMarker = new(reader.ReadChars(TR4LevelDataChunk.SPRMarker.Length));
+        Debug.Assert(sprMarker == TR4LevelDataChunk.SPRMarker);
     }
 
     public static void PopulateSprites(BinaryReader reader, TR4Level lvl)
@@ -290,13 +287,10 @@ internal static class TR4FileReadUtilities
         lvl.LevelDataChunk.AnimatedTexturesUVCount = reader.ReadByte();
     }
 
-    public static void VerifyTEXMarker(BinaryReader reader, TR4Level lvl)
+    public static void VerifyTEXMarker(BinaryReader reader)
     {
-        lvl.LevelDataChunk.TEXMarker = reader.ReadBytes(3);
-
-        Debug.Assert(lvl.LevelDataChunk.TEXMarker[0] == 0x54);
-        Debug.Assert(lvl.LevelDataChunk.TEXMarker[1] == 0x45);
-        Debug.Assert(lvl.LevelDataChunk.TEXMarker[2] == 0x58);
+        string texMarker = new(reader.ReadChars(TR4LevelDataChunk.TEXMarker.Length));
+        Debug.Assert(texMarker == TR4LevelDataChunk.TEXMarker);
     }
 
     public static void PopulateObjectTextures(BinaryReader reader, TR4Level lvl)

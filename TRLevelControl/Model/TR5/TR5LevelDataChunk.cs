@@ -2,6 +2,9 @@
 
 public class TR5LevelDataChunk
 {
+    public static readonly string SPRMarker = "SPR\0";
+    public static readonly string TEXMarker = "TEX\0";
+
     public uint UncompressedSize { get; set; }
 
     public uint CompressedSize { get; set; }
@@ -19,8 +22,6 @@ public class TR5LevelDataChunk
     public List<ushort> Frames { get; set; }
     public List<TR5Model> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
-
-    public byte[] SPRMarker { get; set; }
     public List<TRSpriteTexture> SpriteTextures { get; set; }
     public List<TRSpriteSequence> SpriteSequences { get; set; }
     public List<TRCamera> Cameras { get; set; }
@@ -31,8 +32,6 @@ public class TR5LevelDataChunk
     public List<short> Zones { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public byte AnimatedTexturesUVCount { get; set; }
-
-    public byte[] TEXMarker { get; set; }
     public List<TR5ObjectTexture> ObjectTextures { get; set; }
     public List<TR5Entity> Entities { get; set; }
     public List<TR5AIEntity> AIEntities { get; set; }
@@ -130,7 +129,7 @@ public class TR5LevelDataChunk
                 writer.Write(sm.Serialize());
             }
 
-            writer.Write(SPRMarker);
+            writer.Write(SPRMarker.ToCharArray());
 
             writer.Write((uint)SpriteTextures.Count);
             foreach (TRSpriteTexture st in SpriteTextures)
@@ -185,7 +184,7 @@ public class TR5LevelDataChunk
             writer.Write(animTextureData);
             writer.Write(AnimatedTexturesUVCount);
 
-            writer.Write(TEXMarker);
+            writer.Write(TEXMarker.ToCharArray());
 
             writer.Write((uint)ObjectTextures.Count);
             foreach (TR5ObjectTexture otex in ObjectTextures)

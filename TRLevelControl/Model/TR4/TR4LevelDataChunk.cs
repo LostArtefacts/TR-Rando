@@ -5,6 +5,9 @@ namespace TRLevelControl.Model;
 
 public class TR4LevelDataChunk : ISerializableCompact
 {
+    public static readonly string SPRMarker = "SPR";
+    public static readonly string TEXMarker = "TEX";
+
     public uint UncompressedSize { get; set; }
 
     public uint CompressedSize { get; set; }
@@ -22,8 +25,6 @@ public class TR4LevelDataChunk : ISerializableCompact
     public List<ushort> Frames { get; set; }
     public List<TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
-
-    public byte[] SPRMarker { get; set; }
     public List<TRSpriteTexture> SpriteTextures { get; set; }
     public List<TRSpriteSequence> SpriteSequences { get; set; }
     public List<TRCamera> Cameras { get; set; }
@@ -34,8 +35,6 @@ public class TR4LevelDataChunk : ISerializableCompact
     public List<short> Zones { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public byte AnimatedTexturesUVCount { get; set; }
-
-    public byte[] TEXMarker { get; set; }
     public List<TR4ObjectTexture> ObjectTextures { get; set; }
     public List<TR4Entity> Entities { get; set; }
     public List<TR4AIEntity> AIEntities { get; set; }
@@ -133,7 +132,7 @@ public class TR4LevelDataChunk : ISerializableCompact
                 writer.Write(sm.Serialize());
             }
 
-            writer.Write(SPRMarker);
+            writer.Write(SPRMarker.ToCharArray());
 
             writer.Write((uint)SpriteTextures.Count);
             foreach (TRSpriteTexture st in SpriteTextures)
@@ -188,7 +187,7 @@ public class TR4LevelDataChunk : ISerializableCompact
             writer.Write(animTextureData);
             writer.Write(AnimatedTexturesUVCount);
 
-            writer.Write(TEXMarker);
+            writer.Write(TEXMarker.ToCharArray());
 
             writer.Write((uint)ObjectTextures.Count);
             foreach (TR4ObjectTexture otex in ObjectTextures)
