@@ -185,22 +185,18 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.ObjectTextures.Add(TR2FileReadUtilities.ReadObjectTexture(reader));
         }
 
-        //Sprite Textures
-        _level.NumSpriteTextures = reader.ReadUInt32();
-        _level.SpriteTextures = new TRSpriteTexture[_level.NumSpriteTextures];
-
-        for (int i = 0; i < _level.NumSpriteTextures; i++)
+        uint numSpriteTextures = reader.ReadUInt32();
+        _level.SpriteTextures = new();
+        for (int i = 0; i < numSpriteTextures; i++)
         {
-            _level.SpriteTextures[i] = TR2FileReadUtilities.ReadSpriteTexture(reader);
+            _level.SpriteTextures.Add(TR2FileReadUtilities.ReadSpriteTexture(reader));
         }
 
-        //Sprite Sequences
-        _level.NumSpriteSequences = reader.ReadUInt32();
-        _level.SpriteSequences = new TRSpriteSequence[_level.NumSpriteSequences];
-
-        for (int i = 0; i < _level.NumSpriteSequences; i++)
+        uint numSpriteSequences = reader.ReadUInt32();
+        _level.SpriteSequences = new();
+        for (int i = 0; i < numSpriteSequences; i++)
         {
-            _level.SpriteSequences[i] = TR2FileReadUtilities.ReadSpriteSequence(reader);
+            _level.SpriteSequences.Add(TR2FileReadUtilities.ReadSpriteSequence(reader));
         }
 
         uint numCameras = reader.ReadUInt32();
@@ -336,9 +332,9 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         writer.Write((uint)_level.ObjectTextures.Count);
         foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
-        writer.Write(_level.NumSpriteTextures);
+        writer.Write((uint)_level.SpriteTextures.Count);
         foreach (TRSpriteTexture tex in _level.SpriteTextures) { writer.Write(tex.Serialize()); }
-        writer.Write(_level.NumSpriteSequences);
+        writer.Write((uint)_level.SpriteSequences.Count);
         foreach (TRSpriteSequence sequence in _level.SpriteSequences) { writer.Write(sequence.Serialize()); }
 
         writer.Write((uint)_level.Cameras.Count);

@@ -47,12 +47,12 @@ public class TR3TextureMapping : AbstractTextureMapping<TR3Type, TR3Level>
         return TRMeshUtilities.GetModelMeshes(_level, entity);
     }
 
-    protected override TRSpriteSequence[] GetSpriteSequences()
+    protected override List<TRSpriteSequence> GetSpriteSequences()
     {
         return _level.SpriteSequences;
     }
 
-    protected override TRSpriteTexture[] GetSpriteTextures()
+    protected override List<TRSpriteTexture> GetSpriteTextures()
     {
         return _level.SpriteTextures;
     }

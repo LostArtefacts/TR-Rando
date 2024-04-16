@@ -198,22 +198,20 @@ internal static class TR4FileReadUtilities
 
     public static void PopulateSprites(BinaryReader reader, TR4Level lvl)
     {
-        //Sprite Textures
-        lvl.LevelDataChunk.NumSpriteTextures = reader.ReadUInt32();
-        lvl.LevelDataChunk.SpriteTextures = new TRSpriteTexture[lvl.LevelDataChunk.NumSpriteTextures];
+        uint numSpriteTextures = reader.ReadUInt32();
+        lvl.LevelDataChunk.SpriteTextures = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumSpriteTextures; i++)
+        for (int i = 0; i < numSpriteTextures; i++)
         {
-            lvl.LevelDataChunk.SpriteTextures[i] = TR2FileReadUtilities.ReadSpriteTexture(reader);
+            lvl.LevelDataChunk.SpriteTextures.Add(TR2FileReadUtilities.ReadSpriteTexture(reader));
         }
 
-        //Sprite Sequences
-        lvl.LevelDataChunk.NumSpriteSequences = reader.ReadUInt32();
-        lvl.LevelDataChunk.SpriteSequences = new TRSpriteSequence[lvl.LevelDataChunk.NumSpriteSequences];
+        uint numSpriteSequences = reader.ReadUInt32();
+        lvl.LevelDataChunk.SpriteSequences = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumSpriteSequences; i++)
+        for (int i = 0; i < numSpriteSequences; i++)
         {
-            lvl.LevelDataChunk.SpriteSequences[i] = TR2FileReadUtilities.ReadSpriteSequence(reader);
+            lvl.LevelDataChunk.SpriteSequences.Add(TR2FileReadUtilities.ReadSpriteSequence(reader));
         }
     }
 

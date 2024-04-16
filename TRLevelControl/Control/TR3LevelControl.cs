@@ -183,24 +183,18 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
             _level.StaticMeshes.Add(TR2FileReadUtilities.ReadStaticMesh(reader));
         }
 
-        //Object Textures - in TR3 this is now after animated textures
-
-        //Sprite Textures
-        _level.NumSpriteTextures = reader.ReadUInt32();
-        _level.SpriteTextures = new TRSpriteTexture[_level.NumSpriteTextures];
-
-        for (int i = 0; i < _level.NumSpriteTextures; i++)
+        uint numSpriteTextures = reader.ReadUInt32();
+        _level.SpriteTextures = new();
+        for (int i = 0; i < numSpriteTextures; i++)
         {
-            _level.SpriteTextures[i] = TR2FileReadUtilities.ReadSpriteTexture(reader);
+            _level.SpriteTextures.Add(TR2FileReadUtilities.ReadSpriteTexture(reader));
         }
 
-        //Sprite Sequences
-        _level.NumSpriteSequences = reader.ReadUInt32();
-        _level.SpriteSequences = new TRSpriteSequence[_level.NumSpriteSequences];
-
-        for (int i = 0; i < _level.NumSpriteSequences; i++)
+        uint numSpriteSequences = reader.ReadUInt32();
+        _level.SpriteSequences = new();
+        for (int i = 0; i < numSpriteSequences; i++)
         {
-            _level.SpriteSequences[i] = TR2FileReadUtilities.ReadSpriteSequence(reader);
+            _level.SpriteSequences.Add(TR2FileReadUtilities.ReadSpriteSequence(reader));
         }
 
         uint numCameras = reader.ReadUInt32();
@@ -342,9 +336,9 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write((uint)_level.StaticMeshes.Count);
         foreach (TRStaticMesh mesh in _level.StaticMeshes) { writer.Write(mesh.Serialize()); }
 
-        writer.Write(_level.NumSpriteTextures);
+        writer.Write((uint)_level.SpriteTextures.Count);
         foreach (TRSpriteTexture tex in _level.SpriteTextures) { writer.Write(tex.Serialize()); }
-        writer.Write(_level.NumSpriteSequences);
+        writer.Write((uint)_level.SpriteSequences.Count);
         foreach (TRSpriteSequence sequence in _level.SpriteSequences) { writer.Write(sequence.Serialize()); }
         
         writer.Write((uint)_level.Cameras.Count);

@@ -21,14 +21,8 @@ public class TR5LevelDataChunk
     public List<TRStaticMesh> StaticMeshes { get; set; }
 
     public byte[] SPRMarker { get; set; }
-
-    public uint NumSpriteTextures { get; set; }
-
-    public TRSpriteTexture[] SpriteTextures { get; set; }
-
-    public uint NumSpriteSequences { get; set; }
-
-    public TRSpriteSequence[] SpriteSequences { get; set; }
+    public List<TRSpriteTexture> SpriteTextures { get; set; }
+    public List<TRSpriteSequence> SpriteSequences { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TR4FlyByCamera> FlybyCameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
@@ -142,15 +136,13 @@ public class TR5LevelDataChunk
 
             writer.Write(SPRMarker);
 
-            writer.Write(NumSpriteTextures);
-
+            writer.Write((uint)SpriteTextures.Count);
             foreach (TRSpriteTexture st in SpriteTextures)
             {
                 writer.Write(st.Serialize());
             }
 
-            writer.Write(NumSpriteSequences);
-
+            writer.Write((uint)SpriteSequences.Count);
             foreach (TRSpriteSequence seq in SpriteSequences)
             {
                 writer.Write(seq.Serialize());

@@ -25,11 +25,11 @@ public class EMConvertSpriteSequenceFunction : BaseEMFunction
         UpdateSpriteEntities(level.Entities);
     }
 
-    private void ConvertSpriteSequence(TRSpriteSequence[] sequences)
+    private void ConvertSpriteSequence(List<TRSpriteSequence> sequences)
     {
-        if (Array.Find(sequences, s => s.SpriteID == NewSpriteID) == null)
+        if (sequences.Find(s => s.SpriteID == NewSpriteID) == null)
         {
-            TRSpriteSequence oldSequence = Array.Find(sequences, s => s.SpriteID == OldSpriteID);
+            TRSpriteSequence oldSequence = sequences.Find(s => s.SpriteID == OldSpriteID);
             if (oldSequence != null)
             {
                 oldSequence.SpriteID = NewSpriteID;

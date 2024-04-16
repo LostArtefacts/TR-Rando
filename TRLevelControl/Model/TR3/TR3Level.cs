@@ -18,26 +18,8 @@ public class TR3Level : TRLevelBase
     public List<ushort> Frames { get; set; }
     public List<TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumSpriteTextures { get; set; }
-
-    /// <summary>
-    /// NumSpriteTextures * 16 bytes
-    /// </summary>
-    public TRSpriteTexture[] SpriteTextures { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumSpriteSequences { get; set; }
-
-    /// <summary>
-    /// NumSpriteSequences * 8 bytes
-    /// </summary>
-    public TRSpriteSequence[] SpriteSequences { get; set; }
+    public List<TRSpriteTexture> SpriteTextures { get; set; }
+    public List<TRSpriteSequence> SpriteSequences { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
     public List<TR2Box> Boxes { get; set; }

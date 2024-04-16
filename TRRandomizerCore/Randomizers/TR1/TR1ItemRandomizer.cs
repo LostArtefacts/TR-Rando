@@ -523,12 +523,10 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             }
         }
 
-        _spriteRandomizer.Sequences = _levelInstance.Data.SpriteSequences.ToList();
-        _spriteRandomizer.Textures = _levelInstance.Data.SpriteTextures.ToList();
+        _spriteRandomizer.Sequences = _levelInstance.Data.SpriteSequences;
+        _spriteRandomizer.Textures = _levelInstance.Data.SpriteTextures;
 
         _spriteRandomizer.Randomize(_generator);
-
-        _levelInstance.Data.SpriteTextures = _spriteRandomizer.Textures.ToArray();
     }
 
     private static bool IsSecretItem(TR1Entity entity, int entityIndex, TR1Level level, FDControl floorData)

@@ -232,8 +232,8 @@ public abstract class AbstractTextureImportHandler<E, L, D>
 
     protected virtual void MergeSpriteTextures()
     {
-        List<TRSpriteTexture> levelSpriteTextures = GetExistingSpriteTextures().ToList();
-        List<TRSpriteSequence> levelSpriteSequences = GetExistingSpriteSequences().ToList();
+        List<TRSpriteTexture> levelSpriteTextures = GetExistingSpriteTextures();
+        List<TRSpriteSequence> levelSpriteSequences = GetExistingSpriteSequences();
 
         foreach (D definition in _definitions)
         {
@@ -264,14 +264,11 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                 }
             }
         }
-
-        WriteSpriteTextures(levelSpriteTextures);
-        WriteSpriteSequences(levelSpriteSequences);
     }
 
-    protected abstract IEnumerable<TRSpriteSequence> GetExistingSpriteSequences();
+    protected abstract List<TRSpriteSequence> GetExistingSpriteSequences();
 
-    protected abstract IEnumerable<TRSpriteTexture> GetExistingSpriteTextures();
+    protected abstract List<TRSpriteTexture> GetExistingSpriteTextures();
 
     protected abstract AbstractTexturePacker<E, L> CreatePacker();
 
@@ -280,10 +277,6 @@ public abstract class AbstractTextureImportHandler<E, L, D>
     protected abstract List<TRObjectTexture> GetExistingObjectTextures();
 
     protected abstract IEnumerable<int> GetInvalidObjectTextureIndices();
-
-    protected abstract void WriteSpriteTextures(IEnumerable<TRSpriteTexture> spriteTextures);
-
-    protected abstract void WriteSpriteSequences(IEnumerable<TRSpriteSequence> spriteSequences);
 
     protected abstract void RemapMeshTextures(Dictionary<D, Dictionary<int, int>> indexMap);
 

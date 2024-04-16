@@ -80,7 +80,7 @@ public class DynamicTextureBuilder
             foreach (TRRoomSprite sprite in room.RoomData.Sprites)
             {
                 // Only add ones that aren't also pickups
-                if (Array.Find(level.Data.SpriteSequences, s => s.Offset == sprite.Texture 
+                if (level.Data.SpriteSequences.Find(s => s.Offset == sprite.Texture 
                     && level.Data.Entities.Find(e => e.TypeID == (TR1Type)s.SpriteID) != null) == null)
                 {
                     defaultSpriteTextures.Add(sprite.Texture);
@@ -383,7 +383,7 @@ public class DynamicTextureBuilder
 
     private static void AddSpriteTextures(TR1Level level, TR1Type spriteID, ISet<int> textures)
     {
-        TRSpriteSequence sequence = Array.Find(level.SpriteSequences, s => s.SpriteID == (int)spriteID);
+        TRSpriteSequence sequence = level.SpriteSequences.Find(s => s.SpriteID == (int)spriteID);
         if (sequence != null)
         {
             for (int i = 0; i < sequence.NegativeLength * -1; i++)

@@ -9,26 +9,17 @@ public class EMCopySpriteSequenceFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        List<TRSpriteSequence> sequences = level.SpriteSequences.ToList();
-        CopySpriteSequence(sequences);
-        level.SpriteSequences = sequences.ToArray();
-        level.NumSpriteSequences = (uint)sequences.Count;
+        CopySpriteSequence(level.SpriteSequences);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        List<TRSpriteSequence> sequences = level.SpriteSequences.ToList();
-        CopySpriteSequence(sequences);
-        level.SpriteSequences = sequences.ToArray();
-        level.NumSpriteSequences = (uint)sequences.Count;
+        CopySpriteSequence(level.SpriteSequences);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<TRSpriteSequence> sequences = level.SpriteSequences.ToList();
-        CopySpriteSequence(sequences);
-        level.SpriteSequences = sequences.ToArray();
-        level.NumSpriteSequences = (uint)sequences.Count;
+        CopySpriteSequence(level.SpriteSequences);
     }
 
     private void CopySpriteSequence(List<TRSpriteSequence> sequences)
