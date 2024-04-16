@@ -42,14 +42,11 @@ public class TR2ModelAdjuster : TR2LevelProcessor
             return;
         }
 
-        List<TRModel> models = _levelInstance.Data.Models.ToList();
-        List<TRSpriteSequence> sprites = _levelInstance.Data.SpriteSequences.ToList();
-
         // Point the old models to the new ones, and any matching entities that are instances
         // of the old model, should also point to the new model type.
         foreach (TR2Type oldEntity in _modelRemap.Keys)
         {
-            TRModel model = models.Find(m => m.ID == (short)oldEntity);
+            TRModel model = _levelInstance.Data.Models.Find(m => m.ID == (short)oldEntity);
             if (model != null)
             {
                 model.ID = (uint)_modelRemap[oldEntity];
@@ -65,7 +62,7 @@ public class TR2ModelAdjuster : TR2LevelProcessor
         // Repeat for sprites
         foreach (TR2Type oldEntity in _spriteRemap.Keys)
         {
-            TRSpriteSequence sprite = sprites.Find(s => s.SpriteID == (short)oldEntity);
+            TRSpriteSequence sprite = _levelInstance.Data.SpriteSequences.Find(s => s.SpriteID == (short)oldEntity);
             if (sprite != null)
             {
                 sprite.SpriteID = (short)_spriteRemap[oldEntity];

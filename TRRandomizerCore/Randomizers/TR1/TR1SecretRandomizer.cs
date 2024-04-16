@@ -867,8 +867,6 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
                     importer.Import();
 
-                    List<TRSpriteSequence> sequences = level.Data.SpriteSequences.ToList();
-
                     // Redefine the artefacts as puzzle models
                     foreach (TR1Type secretModelType in allocation.ImportModels)
                     {
@@ -878,7 +876,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         TR1Type puzzlePickupType = _modelReplacements[puzzleModelType];
 
                         level.Data.Models.Find(m => m.ID == (uint)secretModelType).ID = (uint)puzzleModelType;
-                        sequences.Find(s => s.SpriteID == (int)secretPickupType).SpriteID = (int)puzzlePickupType;
+                        level.Data.SpriteSequences.Find(s => s.SpriteID == (int)secretPickupType).SpriteID = (int)puzzlePickupType;
 
                         if (secretModelType == TR1Type.SecretScion_M_H && _outer.Are3DPickupsEnabled())
                         {

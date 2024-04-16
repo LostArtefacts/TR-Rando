@@ -2,6 +2,9 @@
 
 public class TR5LevelDataChunk
 {
+    public static readonly string SPRMarker = "SPR\0";
+    public static readonly string TEXMarker = "TEX\0";
+
     public uint UncompressedSize { get; set; }
 
     public uint CompressedSize { get; set; }
@@ -9,17 +12,8 @@ public class TR5LevelDataChunk
     public uint Unused { get; set; }
     public List<TR5Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
-
-    public uint NumMeshData { get; set; }
-
-    public ushort[] RawMeshData { get; set; }
-
-    public TR4Mesh[] Meshes { get; set; }
-
-    public uint NumMeshPointers { get; set; }
-
-    public uint[] MeshPointers { get; set; }
-
+    public List<TR4Mesh> Meshes { get; set; }
+    public List<uint> MeshPointers { get; set; }
     public List<TR4Animation> Animations { get; set; }
     public List<TRStateChange> StateChanges { get; set; }
     public List<TRAnimDispatch> AnimDispatches { get; set; }
@@ -28,50 +22,24 @@ public class TR5LevelDataChunk
     public List<ushort> Frames { get; set; }
     public List<TR5Model> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
-
-    public byte[] SPRMarker { get; set; }
-
-    public uint NumSpriteTextures { get; set; }
-
-    public TRSpriteTexture[] SpriteTextures { get; set; }
-
-    public uint NumSpriteSequences { get; set; }
-
-    public TRSpriteSequence[] SpriteSequences { get; set; }
+    public List<TRSpriteTexture> SpriteTextures { get; set; }
+    public List<TRSpriteSequence> SpriteSequences { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TR4FlyByCamera> FlybyCameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
     public List<TR2Box> Boxes { get; set; }
     public List<ushort> Overlaps { get; set; }
     public List<short> Zones { get; set; }
-
-    public uint NumAnimatedTextures { get; set; }
-
-    public TRAnimatedTexture[] AnimatedTextures { get; set; }
-
+    public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public byte AnimatedTexturesUVCount { get; set; }
-
-    public byte[] TEXMarker { get; set; }
-
-    public uint NumObjectTextures { get; set; }
-
-    public TR5ObjectTexture[] ObjectTextures { get; set; }
+    public List<TR5ObjectTexture> ObjectTextures { get; set; }
     public List<TR5Entity> Entities { get; set; }
     public List<TR5AIEntity> AIEntities { get; set; }
-
-    public ushort NumDemoData { get; set; }
-
     public byte[] DemoData { get; set; }
 
     public short[] SoundMap { get; set; }
-
-    public uint NumSoundDetails { get; set; }
-
-    public TR3SoundDetails[] SoundDetails { get; set; }
-
-    public uint NumSampleIndices { get; set; }
-
-    public uint[] SampleIndices { get; set; }
+    public List<TR3SoundDetails> SoundDetails { get; set; }
+    public List<uint> SampleIndices { get; set; }
 
     public byte[] Seperator { get; set; }
 
@@ -94,15 +62,11 @@ public class TR5LevelDataChunk
             writer.Write((uint)FloorData.Count);
             writer.Write(FloorData);
 
-            writer.Write(NumMeshData);
+            List<byte> meshData = Meshes.SelectMany(m => m.Serialize()).ToList();
+            writer.Write((uint)meshData.Count / 2);
+            writer.Write(meshData.ToArray());
 
-            foreach (TR4Mesh mesh in Meshes)
-            {
-                writer.Write(mesh.Serialize());
-            }
-
-            writer.Write(NumMeshPointers);
-
+            writer.Write((uint)MeshPointers.Count);
             foreach (uint data in MeshPointers)
             {
                 writer.Write(data);
@@ -156,17 +120,15 @@ public class TR5LevelDataChunk
                 writer.Write(sm.Serialize());
             }
 
-            writer.Write(SPRMarker);
+            writer.Write(SPRMarker.ToCharArray());
 
-            writer.Write(NumSpriteTextures);
-
+            writer.Write((uint)SpriteTextures.Count);
             foreach (TRSpriteTexture st in SpriteTextures)
             {
                 writer.Write(st.Serialize());
             }
 
-            writer.Write(NumSpriteSequences);
-
+            writer.Write((uint)SpriteSequences.Count);
             foreach (TRSpriteSequence seq in SpriteSequences)
             {
                 writer.Write(seq.Serialize());
@@ -207,15 +169,15 @@ public class TR5LevelDataChunk
                 writer.Write(zone);
             }
 
-            writer.Write(NumAnimatedTextures);
-            writer.Write((ushort)AnimatedTextures.Length);
-            foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }
+            byte[] animTextureData = AnimatedTextures.SelectMany(a => a.Serialize()).ToArray();
+            writer.Write((uint)(animTextureData.Length / sizeof(ushort)) + 1);
+            writer.Write((ushort)AnimatedTextures.Count);
+            writer.Write(animTextureData);
             writer.Write(AnimatedTexturesUVCount);
 
-            writer.Write(TEXMarker);
+            writer.Write(TEXMarker.ToCharArray());
 
-            writer.Write(NumObjectTextures);
-
+            writer.Write((uint)ObjectTextures.Count);
             foreach (TR5ObjectTexture otex in ObjectTextures)
             {
                 writer.Write(otex.Serialize());
@@ -227,7 +189,7 @@ public class TR5LevelDataChunk
             writer.Write((uint)AIEntities.Count);
             writer.Write(AIEntities);
 
-            writer.Write(NumDemoData);
+            writer.Write((ushort)DemoData.Length);
             writer.Write(DemoData);
 
             foreach (short sound in SoundMap)
@@ -235,15 +197,13 @@ public class TR5LevelDataChunk
                 writer.Write(sound);
             }
 
-            writer.Write(NumSoundDetails);
-
+            writer.Write((uint)SoundDetails.Count);
             foreach (TR3SoundDetails snd in SoundDetails)
             {
                 writer.Write(snd.Serialize());
             }
 
-            writer.Write(NumSampleIndices);
-
+            writer.Write((uint)SampleIndices.Count);
             foreach (uint sampleindex in SampleIndices)
             {
                 writer.Write(sampleindex);

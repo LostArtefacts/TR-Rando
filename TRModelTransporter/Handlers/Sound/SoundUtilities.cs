@@ -12,7 +12,7 @@ public static class SoundUtilities
         SoundUtilities.ResortSoundIndices(baseLevel);
     }
 
-    public static TR1PackedSound BuildPackedSound(short[] soundMap, TRSoundDetails[] soundDetails, uint[] sampleIndices, byte[] wavSamples, short[] hardcodedSounds)
+    public static TR1PackedSound BuildPackedSound(short[] soundMap, List<TRSoundDetails> soundDetails, List<uint> sampleIndices, List<byte> wavSamples, short[] hardcodedSounds)
     {
         if (hardcodedSounds == null || hardcodedSounds.Length == 0)
         {
@@ -39,7 +39,7 @@ public static class SoundUtilities
                 ushort sampleIndex = (ushort)(details.Sample + i);
                 samples[i] = sampleIndices[sampleIndex];
 
-                uint nextIndex = sampleIndex == sampleIndices.Length - 1 ? (uint)wavSamples.Length : sampleIndices[sampleIndex + 1];
+                uint nextIndex = sampleIndex == sampleIndices.Count - 1 ? (uint)wavSamples.Count : sampleIndices[sampleIndex + 1];
                 packedSound.Samples[samples[i]] = AnimationUtilities.GetSample(samples[i], nextIndex, wavSamples);
             }
 
@@ -58,7 +58,7 @@ public static class SoundUtilities
         return packedSound;
     }
 
-    public static TR2PackedSound BuildPackedSound(short[] soundMap, TRSoundDetails[] soundDetails, uint[] sampleIndices, short[] hardcodedSounds)
+    public static TR2PackedSound BuildPackedSound(short[] soundMap, List<TRSoundDetails> soundDetails, List<uint> sampleIndices, short[] hardcodedSounds)
     {
         if (hardcodedSounds == null || hardcodedSounds.Length == 0)
         {
@@ -100,7 +100,7 @@ public static class SoundUtilities
         return packedSound;
     }
 
-    public static TR3PackedSound BuildPackedSound(short[] soundMap, TR3SoundDetails[] soundDetails, uint[] sampleIndices, short[] hardcodedSounds)
+    public static TR3PackedSound BuildPackedSound(short[] soundMap, List<TR3SoundDetails> soundDetails, List<uint> sampleIndices, short[] hardcodedSounds)
     {
         if (hardcodedSounds == null || hardcodedSounds.Length == 0)
         {
@@ -169,7 +169,7 @@ public static class SoundUtilities
                     ushort samplePointerIndex = (ushort)(oldSample + i);
 
                     uint oldSampleIndex = level.SampleIndices[oldSample + i];
-                    uint nextSampleIndex = samplePointerIndex == level.SampleIndices.Length - 1 ? (uint)level.Samples.Length : level.SampleIndices[samplePointerIndex + 1];
+                    uint nextSampleIndex = samplePointerIndex == level.SampleIndices.Count - 1 ? (uint)level.Samples.Count : level.SampleIndices[samplePointerIndex + 1];
 
                     newSampleIndices.Add((uint)newSamples.Count);
                     newSamples.AddRange(AnimationUtilities.GetSample(oldSampleIndex, nextSampleIndex, level.Samples));
@@ -178,38 +178,37 @@ public static class SoundUtilities
         }
 
         level.SoundMap = newSoundMap.ToArray();
-        level.SoundDetails = newSoundDetails.ToArray();
-        level.SampleIndices = newSampleIndices.ToArray();
-        level.Samples = newSamples.ToArray();
 
-        level.NumSoundDetails = (uint)newSoundDetails.Count;
-        level.NumSampleIndices = (uint)newSampleIndices.Count;
-        level.NumSamples = (uint)newSamples.Count;
+        level.SoundDetails.Clear();
+        level.SampleIndices.Clear();
+        level.Samples.Clear();
+
+        level.SoundDetails.AddRange(newSoundDetails);
+        level.SampleIndices.AddRange(newSampleIndices);
+        level.Samples.AddRange(newSamples);
     }
 
     public static void ResortSoundIndices(TR2Level level)
     {
-        List<uint> sampleIndices = level.SampleIndices.ToList();
         List<TRSoundDetails> soundDetails = level.SoundDetails.ToList();
         List<short> soundMap = level.SoundMap.ToList();
 
-        ResortSoundIndices(sampleIndices, soundDetails, soundMap);
+        ResortSoundIndices(level.SampleIndices, soundDetails, soundMap);
 
-        level.SampleIndices = sampleIndices.ToArray();
-        level.SoundDetails = soundDetails.ToArray();
+        level.SoundDetails.Clear();
+        level.SoundDetails.AddRange(soundDetails);
         level.SoundMap = soundMap.ToArray();
     }
 
     public static void ResortSoundIndices(TR3Level level)
     {
-        List<uint> sampleIndices = level.SampleIndices.ToList();
         List<TR3SoundDetails> soundDetails = level.SoundDetails.ToList();
         List<short> soundMap = level.SoundMap.ToList();
 
-        ResortSoundIndices(sampleIndices, soundDetails, soundMap);
+        ResortSoundIndices(level.SampleIndices, soundDetails, soundMap);
 
-        level.SampleIndices = sampleIndices.ToArray();
-        level.SoundDetails = soundDetails.ToArray();
+        level.SoundDetails.Clear();
+        level.SoundDetails.AddRange(soundDetails);
         level.SoundMap = soundMap.ToArray();
     }
 

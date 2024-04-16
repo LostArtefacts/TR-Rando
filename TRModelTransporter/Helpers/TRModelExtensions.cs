@@ -109,10 +109,10 @@ public static class TRModelExtensions
         return GetInvalidObjectTextureIndices(level.ObjectTextures);
     }
 
-    private static List<int> GetInvalidObjectTextureIndices(TRObjectTexture[] objectTextures)
+    private static List<int> GetInvalidObjectTextureIndices(List<TRObjectTexture> objectTextures)
     {
         List<int> reusableIndices = new();
-        for (int i = 0; i < objectTextures.Length; i++)
+        for (int i = 0; i < objectTextures.Count; i++)
         {
             if (!objectTextures[i].IsValid())
             {
@@ -162,13 +162,13 @@ public static class TRModelExtensions
         List<TRObjectTexture> textures = level.ObjectTextures.ToList();
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 anim.Textures[i] = ConvertTextureReference(anim.Textures[i], indexMap, defaultToOriginal);
             }
 
             ushort previousIndex = anim.Textures[0];
-            for (int i = 1; i < anim.Textures.Length; i++)
+            for (int i = 1; i < anim.Textures.Count; i++)
             {
                 if (anim.Textures[i] == previousIndex && textures.Count < 2048)
                 {
@@ -179,10 +179,10 @@ public static class TRModelExtensions
             }
         }
 
-        if (textures.Count > level.NumObjectTextures)
+        if (textures.Count > level.ObjectTextures.Count)
         {
-            level.ObjectTextures = textures.ToArray();
-            level.NumObjectTextures = (uint)textures.Count;
+            level.ObjectTextures.Clear();
+            level.ObjectTextures.AddRange(textures);
         }
     }
 
@@ -220,13 +220,13 @@ public static class TRModelExtensions
         List<TRObjectTexture> textures = level.ObjectTextures.ToList();
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 anim.Textures[i] = ConvertTextureReference(anim.Textures[i], indexMap, defaultToOriginal);
             }
 
             ushort previousIndex = anim.Textures[0];
-            for (int i = 1; i < anim.Textures.Length; i++)
+            for (int i = 1; i < anim.Textures.Count; i++)
             {
                 if (anim.Textures[i] == previousIndex && textures.Count < 2048)
                 {
@@ -237,10 +237,10 @@ public static class TRModelExtensions
             }
         }
 
-        if (textures.Count > level.NumObjectTextures)
+        if (textures.Count > level.ObjectTextures.Count)
         {
-            level.ObjectTextures = textures.ToArray();
-            level.NumObjectTextures = (uint)textures.Count;
+            level.ObjectTextures.Clear();
+            level.ObjectTextures.AddRange(textures);
         }
     }
 
@@ -254,7 +254,7 @@ public static class TRModelExtensions
         return defaultToOriginal ? textureReference : (ushort)0;
     }
 
-    public static string ComputeSkeletonHash(this TRMesh[] meshes)
+    public static string ComputeSkeletonHash(this IEnumerable<TRMesh> meshes)
     {
         using MemoryStream ms = new();
         using BinaryWriter writer = new(ms);

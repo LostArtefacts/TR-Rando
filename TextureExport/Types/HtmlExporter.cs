@@ -183,7 +183,7 @@ public static class HtmlExporter
         }
     }
 
-    private static Dictionary<int, TRColour4> GetSkyBoxColours(TRMesh[] meshes, List<TRColour4> palette16)
+    private static Dictionary<int, TRColour4> GetSkyBoxColours(List<TRMesh> meshes, List<TRColour4> palette16)
     {
         Dictionary<int, TRColour4> colours = new();
         if (meshes != null)

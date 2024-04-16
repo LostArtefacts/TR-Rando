@@ -27,7 +27,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         };
         importer.Import();
 
-        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID));
+        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID));
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -48,7 +48,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         };
         importer.Import();
 
-        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID));
+        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID));
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -69,7 +69,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         };
         importer.Import();
 
-        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID));
+        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID));
     }
 
     private List<EMMeshTextureData> PrepareImportData(List<TRModel> existingModels)
@@ -85,11 +85,11 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         return importData;
     }
 
-    private static void RemapFaces(List<EMMeshTextureData> data, uint maximumTexture, Func<short, TRMesh[]> meshAction)
+    private static void RemapFaces(List<EMMeshTextureData> data, int maximumTexture, Func<short, List<TRMesh>> meshAction)
     {
         foreach (EMMeshTextureData textureData in data)
         {
-            TRMesh[] meshes = meshAction.Invoke(textureData.ModelID);
+            List<TRMesh> meshes = meshAction.Invoke(textureData.ModelID);
             foreach (TRMesh mesh in meshes)
             {
                 foreach (TRFace3 face in mesh.ColouredTriangles)
@@ -112,7 +112,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         }
     }
 
-    private static ushort SelectReplacementTexture(EMMeshTextureData data, ushort currentTexture, int defaultTexture, uint maximumTexture)
+    private static ushort SelectReplacementTexture(EMMeshTextureData data, ushort currentTexture, int defaultTexture, int maximumTexture)
     {
         if (data.TextureMap != null && data.TextureMap.ContainsKey(currentTexture))
         {

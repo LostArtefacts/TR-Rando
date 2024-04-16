@@ -10,7 +10,7 @@ internal class TRAnimatedTextureControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Animated Textures", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Animated Texture Count: " + IOManager.CurrentLevelAsTR1?.NumAnimatedTextures);
+            ImGui.Text("Animated Texture Count: " + IOManager.CurrentLevelAsTR1?.AnimatedTextures.Count);
 
             ImGui.TreePop();
         }

@@ -14,15 +14,9 @@ public class TR2LandmarkImporter : AbstractLandmarkImporter<TR2Type, TR2Level>
         return new TR2TexturePacker(level);
     }
 
-    protected override TRObjectTexture[] GetObjectTextures(TR2Level level)
+    protected override List<TRObjectTexture> GetObjectTextures(TR2Level level)
     {
         return level.ObjectTextures;
-    }
-
-    protected override void SetObjectTextures(TR2Level level, IEnumerable<TRObjectTexture> textures)
-    {
-        level.ObjectTextures = textures.ToArray();
-        level.NumObjectTextures = (uint)level.ObjectTextures.Length;
     }
 
     protected override void SetRoomTexture(TR2Level level, int roomIndex, int rectangleIndex, ushort textureIndex)

@@ -930,13 +930,12 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         AddRandomLaraClone(enemies, TR2Type.Yeti, laraClones, chance);
 
-        List<TRModel> levelModels = level.Data.Models.ToList();
         if (laraClones.Count > 0)
         {
-            TRModel laraModel = levelModels.Find(m => m.ID == (uint)TR2Type.Lara);
+            TRModel laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
             foreach (TR2Type enemyType in laraClones)
             {
-                TRModel enemyModel = levelModels.Find(m => m.ID == (uint)enemyType);
+                TRModel enemyModel = level.Data.Models.Find(m => m.ID == (uint)enemyType);
                 enemyModel.MeshTree = laraModel.MeshTree;
                 enemyModel.StartingMesh = laraModel.StartingMesh;
                 enemyModel.NumMeshes = laraModel.NumMeshes;
@@ -951,8 +950,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             && _generator.Next(0, chance) == 0)
         {
             // Make Marco look and behave like Winston, until Lara gets too close
-            TRModel marcoModel = levelModels.Find(m => m.ID == (uint)TR2Type.MarcoBartoli);
-            TRModel winnieModel = levelModels.Find(m => m.ID == (uint)TR2Type.Winston);
+            TRModel marcoModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.MarcoBartoli);
+            TRModel winnieModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Winston);
             marcoModel.Animation = winnieModel.Animation;
             marcoModel.FrameOffset = winnieModel.FrameOffset;
             marcoModel.MeshTree = winnieModel.MeshTree;

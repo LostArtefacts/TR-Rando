@@ -762,15 +762,13 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 // We exclude artefacts from import if this level already has an 
                 // actual artefact model, and we exclude current puzzle/key items
                 // from the available switching pool.
-                List<TRModel> models = level.Data.Models.ToList();
-
                 if (level.Is(TR3LevelNames.CRASH))
                 {
                     // Special case for Crash Site, which is the only level that uses Quest1 (the swamp map).
                     // We want to reallocate this as a key to allow us to reuse Quest1 on import. Amend the
                     // models to become Key3 and update the script to match.
-                    models.Find(m => m.ID == (uint)TR3Type.Quest1_P).ID = (uint)TR3Type.Key3_P;
-                    models.Find(m => m.ID == (uint)TR3Type.Quest1_M_H).ID = (uint)TR3Type.Key3_M_H;
+                    level.Data.Models.Find(m => m.ID == (uint)TR3Type.Quest1_P).ID = (uint)TR3Type.Key3_P;
+                    level.Data.Models.Find(m => m.ID == (uint)TR3Type.Quest1_M_H).ID = (uint)TR3Type.Key3_M_H;
                     level.Script.Keys[2] = level.Script.Pickups[0];
                     level.Script.SetStartInventoryItems(new Dictionary<TR3Items, int>
                     {
@@ -780,7 +778,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
                 foreach (TR3Type puzzleType in _artefactReplacements.Keys)
                 {
-                    if (models.Find(m => m.ID == (uint)puzzleType) == null)
+                    if (level.Data.Models.Find(m => m.ID == (uint)puzzleType) == null)
                     {
                         allocation.AvailablePickupModels.Add(puzzleType);
                     }
@@ -790,7 +788,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 for (int i = artefactTypes.Count - 1; i >= 0; i--)
                 {
                     TR3Type artefactType = artefactTypes[i];
-                    if (models.Find(m => m.ID == (uint)artefactType) != null)
+                    if (level.Data.Models.Find(m => m.ID == (uint)artefactType) != null)
                     {
                         artefactTypes.RemoveAt(i);
                     }

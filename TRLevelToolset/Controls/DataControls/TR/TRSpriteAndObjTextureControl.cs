@@ -10,9 +10,9 @@ internal class TRSpriteAndObjTextureControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Sprite and Object Texture Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Object texture count: " + IOManager.CurrentLevelAsTR1?.NumObjectTextures);
-            ImGui.Text("Sprite texture count: " + IOManager.CurrentLevelAsTR1?.NumSpriteTextures);
-            ImGui.Text("Sprite sequence count: " + IOManager.CurrentLevelAsTR1?.NumSpriteSequences);
+            ImGui.Text("Object texture count: " + IOManager.CurrentLevelAsTR1?.ObjectTextures.Count);
+            ImGui.Text("Sprite texture count: " + IOManager.CurrentLevelAsTR1?.SpriteTextures.Count);
+            ImGui.Text("Sprite sequence count: " + IOManager.CurrentLevelAsTR1?.SpriteSequences.Count);
 
             ImGui.TreePop();
         }

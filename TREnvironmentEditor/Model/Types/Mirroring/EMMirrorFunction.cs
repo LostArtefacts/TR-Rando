@@ -1080,7 +1080,7 @@ public class EMMirrorFunction : BaseEMFunction
         // Include all animated texture references too
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 textureReferences.Add(anim.Textures[i]);
             }
@@ -1161,7 +1161,7 @@ public class EMMirrorFunction : BaseEMFunction
         // Include all animated texture references too
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 textureReferences.Add(anim.Textures[i]);
             }
@@ -1232,7 +1232,7 @@ public class EMMirrorFunction : BaseEMFunction
 
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {
-            for (int i = 0; i < anim.Textures.Length; i++)
+            for (int i = 0; i < anim.Textures.Count; i++)
             {
                 textureReferences.Add(anim.Textures[i]);
             }
@@ -1241,7 +1241,7 @@ public class EMMirrorFunction : BaseEMFunction
         MirrorObjectTextures(textureReferences, level.ObjectTextures);
     }
 
-    private static void MirrorObjectTextures(ISet<ushort> textureReferences, TRObjectTexture[] objectTextures)
+    private static void MirrorObjectTextures(ISet<ushort> textureReferences, List<TRObjectTexture> objectTextures)
     {
         // Flip the object texture vertices in the same way as done for faces
         foreach (ushort textureRef in textureReferences)
@@ -1263,11 +1263,11 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private static void MirrorDependentFaces(IEnumerable<TRModel> models, ISet<ushort> textureReferences, Func<uint, TRMesh[]> meshAction)
+    private static void MirrorDependentFaces(IEnumerable<TRModel> models, ISet<ushort> textureReferences, Func<uint, List<TRMesh>> meshAction)
     {
         foreach (TRModel model in models)
         {
-            TRMesh[] meshes = meshAction.Invoke(model.ID);
+            List<TRMesh> meshes = meshAction.Invoke(model.ID);
             if (meshes == null)
             {
                 continue;

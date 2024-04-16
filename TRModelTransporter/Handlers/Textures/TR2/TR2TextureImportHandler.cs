@@ -7,26 +7,14 @@ namespace TRModelTransporter.Handlers;
 
 public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2Level, TR2ModelDefinition>
 {
-    protected override IEnumerable<TRSpriteSequence> GetExistingSpriteSequences()
+    protected override List<TRSpriteSequence> GetExistingSpriteSequences()
     {
         return _level.SpriteSequences;
     }
 
-    protected override void WriteSpriteSequences(IEnumerable<TRSpriteSequence> spriteSequences)
+    protected override List<TRSpriteTexture> GetExistingSpriteTextures()
     {
-        _level.SpriteSequences = spriteSequences.ToArray();
-        _level.NumSpriteSequences = (uint)_level.SpriteSequences.Length;
-    }
-
-    protected override IEnumerable<TRSpriteTexture> GetExistingSpriteTextures()
-    {
-        return _level.SpriteTextures.ToList();
-    }
-
-    protected override void WriteSpriteTextures(IEnumerable<TRSpriteTexture> spriteTextures)
-    {
-        _level.SpriteTextures = spriteTextures.ToArray();
-        _level.NumSpriteTextures = (uint)_level.SpriteTextures.Length;
+        return _level.SpriteTextures;
     }
 
     protected override AbstractTexturePacker<TR2Type, TR2Level> CreatePacker()
@@ -81,30 +69,26 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2
             _level.Models.FindIndex(m => flameEnemies.Contains((TR2Type)m.ID)) != -1
         )
         {
-            List<TRSpriteSequence> sequences = _level.SpriteSequences.ToList();
-            int blastSequence = sequences.FindIndex(s => s.SpriteID == (int)TR2Type.FireBlast_S_H);
-            int grenadeSequence = sequences.FindIndex(s => s.SpriteID == (int)TR2Type.Explosion_S_H);
+            int blastSequence = _level.SpriteSequences.FindIndex(s => s.SpriteID == (int)TR2Type.FireBlast_S_H);
+            int grenadeSequence = _level.SpriteSequences.FindIndex(s => s.SpriteID == (int)TR2Type.Explosion_S_H);
 
             if (grenadeSequence != -1)
             {
                 if (blastSequence == -1)
                 {
-                    TRSpriteSequence grenadeBlast = sequences[grenadeSequence];
-                    sequences.Add(new TRSpriteSequence
+                    TRSpriteSequence grenadeBlast = _level.SpriteSequences[grenadeSequence];
+                    _level.SpriteSequences.Add(new TRSpriteSequence
                     {
                         SpriteID = (int)TR2Type.FireBlast_S_H,
                         NegativeLength = grenadeBlast.NegativeLength,
                         Offset = grenadeBlast.Offset
                     });
-
-                    _level.SpriteSequences = sequences.ToArray();
-                    _level.NumSpriteSequences++;
                 }
                 else
                 {
                     // #275 Rather than just pointing the blast sequence offset to the grenade sequence offset,
                     // retain the original sprite texture objects but just remap where they point in the tiles.
-                    for (int i = 0; i < sequences[grenadeSequence].NegativeLength * -1; i++)
+                    for (int i = 0; i < _level.SpriteSequences[grenadeSequence].NegativeLength * -1; i++)
                     {
                         _level.SpriteTextures[_level.SpriteSequences[blastSequence].Offset + i] = _level.SpriteTextures[_level.SpriteSequences[grenadeSequence].Offset + i];
                     }
@@ -139,20 +123,14 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2
         packer.RemoveSpriteSegments(unusedItems);
     }
 
-    protected override IEnumerable<TRObjectTexture> GetExistingObjectTextures()
+    protected override List<TRObjectTexture> GetExistingObjectTextures()
     {
-        return _level.ObjectTextures.ToList();
+        return _level.ObjectTextures;
     }
 
     protected override IEnumerable<int> GetInvalidObjectTextureIndices()
     {
         return _level.GetInvalidObjectTextureIndices();
-    }
-
-    protected override void WriteObjectTextures(IEnumerable<TRObjectTexture> objectTextures)
-    {
-        _level.ObjectTextures = objectTextures.ToArray();
-        _level.NumObjectTextures = (uint)_level.ObjectTextures.Length;
     }
 
     protected override void RemapMeshTextures(Dictionary<TR2ModelDefinition, Dictionary<int, int>> indexMap)

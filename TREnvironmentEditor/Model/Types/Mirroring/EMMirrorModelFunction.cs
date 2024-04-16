@@ -13,8 +13,8 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID);
-            if (modelMeshes == null || modelMeshes.Length > 1)
+            List<TRMesh> modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID);
+            if (modelMeshes == null || modelMeshes.Count > 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");
             }
@@ -30,8 +30,8 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID);
-            if (modelMeshes == null || modelMeshes.Length > 1)
+            List<TRMesh> modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID);
+            if (modelMeshes == null || modelMeshes.Count > 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");
             }
@@ -47,8 +47,8 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID);
-            if (modelMeshes == null || modelMeshes.Length > 1)
+            List<TRMesh> modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID);
+            if (modelMeshes == null || modelMeshes.Count> 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");
             }
@@ -106,7 +106,7 @@ public class EMMirrorModelFunction : BaseEMFunction
         return textureReferences;
     }
 
-    private static void MirrorObjectTextures(ISet<ushort> textureReferences, TRObjectTexture[] objectTextures)
+    private static void MirrorObjectTextures(ISet<ushort> textureReferences, List<TRObjectTexture> objectTextures)
     {
         foreach (ushort textureRef in textureReferences)
         {

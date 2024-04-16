@@ -107,29 +107,13 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         uint numFloorData = reader.ReadUInt32();
         _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
 
-        //Mesh Data
-        //This tells us how much mesh data (# of words/uint16s) coming up
-        //just like the rooms previously.
-        _level.NumMeshData = reader.ReadUInt32();
-        _level.RawMeshData = new ushort[_level.NumMeshData];
+        uint numMeshData = reader.ReadUInt32();
+        ushort[] rawMeshData = reader.ReadUInt16s(numMeshData);
 
-        for (int i = 0; i < _level.NumMeshData; i++)
-        {
-            _level.RawMeshData[i] = reader.ReadUInt16();
-        }
+        uint numMeshPointers = reader.ReadUInt32();
+        _level.MeshPointers = reader.ReadUInt32s(numMeshPointers).ToList();
 
-        //Mesh Pointers
-        _level.NumMeshPointers = reader.ReadUInt32();
-        _level.MeshPointers = new uint[_level.NumMeshPointers];
-
-        for (int i = 0; i < _level.NumMeshPointers; i++)
-        {
-            _level.MeshPointers[i] = reader.ReadUInt32();
-        }
-
-        //Mesh Construction
-        //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, level.RawMeshData);
-        _level.Meshes = ConstructMeshData(_level.MeshPointers, _level.RawMeshData);
+        _level.Meshes = ConstructMeshData(_level.MeshPointers, rawMeshData);
 
         //Animations
         uint numAnimations = reader.ReadUInt32();
@@ -194,31 +178,25 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.StaticMeshes.Add(TR2FileReadUtilities.ReadStaticMesh(reader));
         }
 
-        //Object Textures
-        _level.NumObjectTextures = reader.ReadUInt32();
-        _level.ObjectTextures = new TRObjectTexture[_level.NumObjectTextures];
-
-        for (int i = 0; i < _level.NumObjectTextures; i++)
+        uint numObjectTextures = reader.ReadUInt32();
+        _level.ObjectTextures = new();
+        for (int i = 0; i < numObjectTextures; i++)
         {
-            _level.ObjectTextures[i] = TR2FileReadUtilities.ReadObjectTexture(reader);
+            _level.ObjectTextures.Add(TR2FileReadUtilities.ReadObjectTexture(reader));
         }
 
-        //Sprite Textures
-        _level.NumSpriteTextures = reader.ReadUInt32();
-        _level.SpriteTextures = new TRSpriteTexture[_level.NumSpriteTextures];
-
-        for (int i = 0; i < _level.NumSpriteTextures; i++)
+        uint numSpriteTextures = reader.ReadUInt32();
+        _level.SpriteTextures = new();
+        for (int i = 0; i < numSpriteTextures; i++)
         {
-            _level.SpriteTextures[i] = TR2FileReadUtilities.ReadSpriteTexture(reader);
+            _level.SpriteTextures.Add(TR2FileReadUtilities.ReadSpriteTexture(reader));
         }
 
-        //Sprite Sequences
-        _level.NumSpriteSequences = reader.ReadUInt32();
-        _level.SpriteSequences = new TRSpriteSequence[_level.NumSpriteSequences];
-
-        for (int i = 0; i < _level.NumSpriteSequences; i++)
+        uint numSpriteSequences = reader.ReadUInt32();
+        _level.SpriteSequences = new();
+        for (int i = 0; i < numSpriteSequences; i++)
         {
-            _level.SpriteSequences[i] = TR2FileReadUtilities.ReadSpriteSequence(reader);
+            _level.SpriteSequences.Add(TR2FileReadUtilities.ReadSpriteSequence(reader));
         }
 
         uint numCameras = reader.ReadUInt32();
@@ -250,13 +228,12 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         ushort[] zoneData = reader.ReadUInt16s(numBoxes * 10);
         _level.Zones = TR2BoxUtilities.ReadZones(numBoxes, zoneData);
 
-        //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)
-        //followed by a ushort to describe the number of actual texture group objects.
-        _level.NumAnimatedTextures = reader.ReadUInt32();
-        _level.AnimatedTextures = new TRAnimatedTexture[reader.ReadUInt16()];
-        for (int i = 0; i < _level.AnimatedTextures.Length; i++)
+        reader.ReadUInt32(); // Total count of ushorts
+        ushort numGroups = reader.ReadUInt16();
+        _level.AnimatedTextures = new();
+        for (int i = 0; i < numGroups; i++)
         {
-            _level.AnimatedTextures[i] = TR2FileReadUtilities.ReadAnimatedTexture(reader);
+            _level.AnimatedTextures.Add(TR2FileReadUtilities.ReadAnimatedTexture(reader));
         }
 
         //Entities
@@ -273,14 +250,8 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.CinematicFrames.Add(TR2FileReadUtilities.ReadCinematicFrame(reader));
         }
 
-        //Demo Data
-        _level.NumDemoData = reader.ReadUInt16();
-        _level.DemoData = new byte[_level.NumDemoData];
-
-        for (int i = 0; i < _level.NumDemoData; i++)
-        {
-            _level.DemoData[i] = reader.ReadByte();
-        }
+        ushort numDemoData = reader.ReadUInt16();
+        _level.DemoData = reader.ReadBytes(numDemoData);
 
         //Sound Map (370 shorts = 740 bytes) & Sound Details
         _level.SoundMap = new short[370];
@@ -290,22 +261,15 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.SoundMap[i] = reader.ReadInt16();
         }
 
-        _level.NumSoundDetails = reader.ReadUInt32();
-        _level.SoundDetails = new TRSoundDetails[_level.NumSoundDetails];
-
-        for (int i = 0; i < _level.NumSoundDetails; i++)
+        uint numSoundDetails = reader.ReadUInt32();
+        _level.SoundDetails = new();
+        for (int i = 0; i < numSoundDetails; i++)
         {
-            _level.SoundDetails[i] = TR2FileReadUtilities.ReadSoundDetails(reader);
+            _level.SoundDetails.Add(TR2FileReadUtilities.ReadSoundDetails(reader));
         }
 
-        //Samples
-        _level.NumSampleIndices = reader.ReadUInt32();
-        _level.SampleIndices = new uint[_level.NumSampleIndices];
-
-        for (int i = 0; i < _level.NumSampleIndices; i++)
-        {
-            _level.SampleIndices[i] = reader.ReadUInt32();
-        }
+        uint numSampleIndices = reader.ReadUInt32();
+        _level.SampleIndices = reader.ReadUInt32s(numSampleIndices).ToList();
     }
 
     protected override void Write(TRLevelWriter writer)
@@ -328,10 +292,11 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write((uint)_level.FloorData.Count);
         writer.Write(_level.FloorData);
 
-        writer.Write(_level.NumMeshData);
-        foreach (TRMesh mesh in _level.Meshes) { writer.Write(mesh.Serialize()); }
-        writer.Write(_level.NumMeshPointers);
-        foreach (uint ptr in _level.MeshPointers) { writer.Write(ptr); }
+        List<byte> meshData = _level.Meshes.SelectMany(m => m.Serialize()).ToList();
+        writer.Write((uint)meshData.Count / 2);
+        writer.Write(meshData.ToArray());
+        writer.Write((uint)_level.MeshPointers.Count);
+        writer.Write(_level.MeshPointers);
 
         writer.Write((uint)_level.Animations.Count);
         foreach (TRAnimation anim in _level.Animations) { writer.Write(anim.Serialize()); }
@@ -351,11 +316,11 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write((uint)_level.StaticMeshes.Count);
         foreach (TRStaticMesh mesh in _level.StaticMeshes) { writer.Write(mesh.Serialize()); }
 
-        writer.Write(_level.NumObjectTextures);
+        writer.Write((uint)_level.ObjectTextures.Count);
         foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
-        writer.Write(_level.NumSpriteTextures);
+        writer.Write((uint)_level.SpriteTextures.Count);
         foreach (TRSpriteTexture tex in _level.SpriteTextures) { writer.Write(tex.Serialize()); }
-        writer.Write(_level.NumSpriteSequences);
+        writer.Write((uint)_level.SpriteSequences.Count);
         foreach (TRSpriteSequence sequence in _level.SpriteSequences) { writer.Write(sequence.Serialize()); }
 
         writer.Write((uint)_level.Cameras.Count);
@@ -370,10 +335,11 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write(_level.Overlaps);
         writer.Write(TR2BoxUtilities.FlattenZones(_level.Zones));
 
-        writer.Write(_level.NumAnimatedTextures);
-        writer.Write((ushort)_level.AnimatedTextures.Length);
-        foreach (TRAnimatedTexture texture in _level.AnimatedTextures) { writer.Write(texture.Serialize()); }
-        
+        byte[] animTextureData = _level.AnimatedTextures.SelectMany(a => a.Serialize()).ToArray();
+        writer.Write((uint)(animTextureData.Length / sizeof(ushort)) + 1);
+        writer.Write((ushort)_level.AnimatedTextures.Count);
+        writer.Write(animTextureData);
+
         writer.Write((uint)_level.Entities.Count);
         writer.Write(_level.Entities);
 
@@ -383,14 +349,14 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write((ushort)_level.CinematicFrames.Count);
         foreach (TRCinematicFrame cineframe in _level.CinematicFrames) { writer.Write(cineframe.Serialize()); }
 
-        writer.Write(_level.NumDemoData);
+        writer.Write((ushort)_level.DemoData.Length);
         writer.Write(_level.DemoData);
 
         foreach (short sound in _level.SoundMap) { writer.Write(sound); }
-        writer.Write(_level.NumSoundDetails);
+        writer.Write((uint)_level.SoundDetails.Count);
         foreach (TRSoundDetails snddetail in _level.SoundDetails) { writer.Write(snddetail.Serialize()); }
-        writer.Write(_level.NumSampleIndices);
-        foreach (uint index in _level.SampleIndices) { writer.Write(index); }
+        writer.Write((uint)_level.SampleIndices.Count);
+        writer.Write(_level.SampleIndices);
     }
 
     private static TR2RoomData ConvertToRoomData(TR2Room room)
@@ -504,21 +470,21 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         return RoomData;
     }
 
-    private static TRMesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
+    private static List<TRMesh> ConstructMeshData(List<uint> meshPointers, ushort[] rawMeshData)
     {
         byte[] target = new byte[rawMeshData.Length * 2];
         Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
 
         // The mesh pointer list can contain duplicates so we must make
         // sure to iterate over distinct values only
-        meshPointers = meshPointers.Distinct().ToArray();
+        meshPointers = new(meshPointers.Distinct());
 
         List<TRMesh> meshes = new();
 
         using (MemoryStream ms = new(target))
         using (BinaryReader br = new(ms))
         {
-            for (int i = 0; i < meshPointers.Length; i++)
+            for (int i = 0; i < meshPointers.Count; i++)
             {
                 TRMesh mesh = new();
                 meshes.Add(mesh);
@@ -603,6 +569,6 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             }
         }
 
-        return meshes.ToArray();
+        return meshes;
     }
 }

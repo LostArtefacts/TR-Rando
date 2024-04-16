@@ -80,7 +80,7 @@ public class DynamicTextureBuilder
             foreach (TRRoomSprite sprite in room.RoomData.Sprites)
             {
                 // Only add ones that aren't also pickups
-                if (Array.Find(level.Data.SpriteSequences, s => s.Offset == sprite.Texture 
+                if (level.Data.SpriteSequences.Find(s => s.Offset == sprite.Texture 
                     && level.Data.Entities.Find(e => e.TypeID == (TR1Type)s.SpriteID) != null) == null)
                 {
                     defaultSpriteTextures.Add(sprite.Texture);
@@ -156,7 +156,7 @@ public class DynamicTextureBuilder
         // textures from the same animation list.
         foreach (int texture in defaultObjectTextures.ToList())
         {
-            TRAnimatedTexture anim = Array.Find(level.Data.AnimatedTextures, a => a.Textures.Contains((ushort)texture));
+            TRAnimatedTexture anim = level.Data.AnimatedTextures.Find(a => a.Textures.Contains((ushort)texture));
             if (anim != null)
             {
                 foreach (ushort animTexture in anim.Textures)
@@ -245,7 +245,7 @@ public class DynamicTextureBuilder
             return;
         }
 
-        TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level, model);
+        List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level, model);
         List<TRMesh> excludedMeshes = new() { dummyMesh };
 
         if (modelID == TR1Type.Adam)
@@ -272,7 +272,7 @@ public class DynamicTextureBuilder
             }
         }
         else if ((modelID == TR1Type.ScionPiece3_S_P || modelID == TR1Type.ScionPiece4_S_P)
-            && meshes.Length == 1 && meshes[0].NumNormals != 123)
+            && meshes.Count == 1 && meshes[0].NumNormals != 123)
         {
             try
             {
@@ -329,7 +329,6 @@ public class DynamicTextureBuilder
         packer.Pack(true);
 
         // Map the packed segments to object textures.
-        List<TRObjectTexture> levelObjectTextures = level.ObjectTextures.ToList();
         Queue<int> reusableIndices = new(level.GetInvalidObjectTextureIndices());
         Dictionary<int, int> reindex = new();
         foreach (TexturedTileSegment segment in duplicates)
@@ -345,12 +344,12 @@ public class DynamicTextureBuilder
                 if (reusableIndices.Count > 0)
                 {
                     newIndex = reusableIndices.Dequeue();
-                    levelObjectTextures[newIndex] = objTexture.Texture;
+                    level.ObjectTextures[newIndex] = objTexture.Texture;
                 }
-                else if (levelObjectTextures.Count < maximumObjects)
+                else if (level.ObjectTextures.Count < maximumObjects)
                 {
-                    levelObjectTextures.Add(objTexture.Texture);
-                    newIndex = levelObjectTextures.Count - 1;
+                    level.ObjectTextures.Add(objTexture.Texture);
+                    newIndex = level.ObjectTextures.Count - 1;
                 }
                 else
                 {
@@ -371,8 +370,6 @@ public class DynamicTextureBuilder
             f.Texture = (ushort)reindex[f.Texture];
         }
 
-        level.ObjectTextures = levelObjectTextures.ToArray();
-        level.NumObjectTextures = (uint)levelObjectTextures.Count;
         level.ResetUnusedTextures();
     }
 
@@ -386,7 +383,7 @@ public class DynamicTextureBuilder
 
     private static void AddSpriteTextures(TR1Level level, TR1Type spriteID, ISet<int> textures)
     {
-        TRSpriteSequence sequence = Array.Find(level.SpriteSequences, s => s.SpriteID == (int)spriteID);
+        TRSpriteSequence sequence = level.SpriteSequences.Find(s => s.SpriteID == (int)spriteID);
         if (sequence != null)
         {
             for (int i = 0; i < sequence.NegativeLength * -1; i++)

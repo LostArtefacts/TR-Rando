@@ -18,8 +18,6 @@ public static class FaceMapper
         using TR1TexturePacker packer = new(level);
         packer.MaximumTiles = 255;
 
-        List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
-
         Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
         Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
 
@@ -50,8 +48,8 @@ public static class FaceMapper
                     TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex, true);
                     packer.AddRectangle(newSegment);
 
-                    newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
-                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                    newRectFaces[roomNumber][rectIndex] = level.ObjectTextures.Count;
+                    level.ObjectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
                 }
             }
 
@@ -63,8 +61,8 @@ public static class FaceMapper
                     TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex, true);
                     packer.AddRectangle(newSegment);
 
-                    newTriFaces[roomNumber][triIndex] = objectTextures.Count;
-                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                    newTriFaces[roomNumber][triIndex] = level.ObjectTextures.Count;
+                    level.ObjectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
                 }
             }
         }
@@ -82,9 +80,6 @@ public static class FaceMapper
                 level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
             }
         }
-
-        level.ObjectTextures = objectTextures.ToArray();
-        level.NumObjectTextures = (uint)objectTextures.Count;
 
         Directory.CreateDirectory(@"TR1\Faces");
         new TR1LevelControl().Write(level, @"TR1\Faces\" + lvl);
@@ -95,8 +90,6 @@ public static class FaceMapper
         using TR2TexturePacker packer = new(level);
         packer.MaximumTiles = 255;
 
-        List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
-
         Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
         Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
 
@@ -127,8 +120,8 @@ public static class FaceMapper
                     TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex);
                     packer.AddRectangle(newSegment);
 
-                    newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
-                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                    newRectFaces[roomNumber][rectIndex] = level.ObjectTextures.Count;
+                    level.ObjectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
                 }
             }
 
@@ -140,8 +133,8 @@ public static class FaceMapper
                     TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex);
                     packer.AddRectangle(newSegment);
 
-                    newTriFaces[roomNumber][triIndex] = objectTextures.Count;
-                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                    newTriFaces[roomNumber][triIndex] = level.ObjectTextures.Count;
+                    level.ObjectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
                 }
             }
         }
@@ -159,9 +152,6 @@ public static class FaceMapper
                 level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
             }
         }
-
-        level.ObjectTextures = objectTextures.ToArray();
-        level.NumObjectTextures = (uint)objectTextures.Count;
 
         Directory.CreateDirectory(@"TR2\Faces");
         new TR2LevelControl().Write(level, @"TR2\Faces\" + lvl);
@@ -172,8 +162,6 @@ public static class FaceMapper
         using TR3TexturePacker packer = new(level);
         packer.MaximumTiles = 255;
 
-        List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
-
         Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
         Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
 
@@ -204,8 +192,8 @@ public static class FaceMapper
                     TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex);
                     packer.AddRectangle(newSegment);
 
-                    newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
-                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                    newRectFaces[roomNumber][rectIndex] = level.ObjectTextures.Count;
+                    level.ObjectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
                 }
             }
 
@@ -217,8 +205,8 @@ public static class FaceMapper
                     TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex);
                     packer.AddRectangle(newSegment);
 
-                    newTriFaces[roomNumber][triIndex] = objectTextures.Count;
-                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                    newTriFaces[roomNumber][triIndex] = level.ObjectTextures.Count;
+                    level.ObjectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
                 }
             }
         }
@@ -236,9 +224,6 @@ public static class FaceMapper
                 level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
             }
         }
-
-        level.ObjectTextures = objectTextures.ToArray();
-        level.NumObjectTextures = (uint)objectTextures.Count;
 
         Directory.CreateDirectory(@"TR3\Faces");
         new TR3LevelControl().Write(level, @"TR3\Faces\" + lvl);
@@ -252,7 +237,6 @@ public static class FaceMapper
         Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
         Dictionary<int, Dictionary<int, int>> newRectFaces = new();
 
-        List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
         FDControl control = new();
         control.ParseFromLevel(level);
 
@@ -276,8 +260,8 @@ public static class FaceMapper
                 TexturedTileSegment newSegment = DrawNewFace(segment, GetBoxDescription(level, control, roomNumber, rectIndex));
                 packer.AddRectangle(newSegment);
 
-                newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
-                objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                newRectFaces[roomNumber][rectIndex] = level.ObjectTextures.Count;
+                level.ObjectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
             }
         }
 
@@ -290,9 +274,6 @@ public static class FaceMapper
                 level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
             }
         }
-
-        level.ObjectTextures = objectTextures.ToArray();
-        level.NumObjectTextures = (uint)objectTextures.Count;
 
         Directory.CreateDirectory(@"TR2\Boxes");
         new TR2LevelControl().Write(level, @"TR2\Boxes\" + lvl);

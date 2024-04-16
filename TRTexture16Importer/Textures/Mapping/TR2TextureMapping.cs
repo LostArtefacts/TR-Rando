@@ -41,17 +41,17 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Type, TR2Level>
         return _paletteTracker.Import(colour);
     }
 
-    protected override TRMesh[] GetModelMeshes(TR2Type entity)
+    protected override List<TRMesh> GetModelMeshes(TR2Type entity)
     {
         return TRMeshUtilities.GetModelMeshes(_level, entity);
     }
 
-    protected override TRSpriteSequence[] GetSpriteSequences()
+    protected override List<TRSpriteSequence> GetSpriteSequences()
     {
         return _level.SpriteSequences;
     }
 
-    protected override TRSpriteTexture[] GetSpriteTextures()
+    protected override List<TRSpriteTexture> GetSpriteTextures()
     {
         return _level.SpriteTextures;
     }

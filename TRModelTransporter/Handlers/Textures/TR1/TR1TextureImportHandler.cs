@@ -10,10 +10,10 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TR1Type, TR1
 {
     public TRPalette8Control PaletteManager { get; set; }
 
-    protected override IEnumerable<TRSpriteSequence> GetExistingSpriteSequences()
+    protected override List<TRSpriteSequence> GetExistingSpriteSequences()
     {
         // Allow replacing the Explosion sequence in Vilcabamba (it's there but empty)
-        List<TRSpriteSequence> sequences = _level.SpriteSequences.ToList();
+        List<TRSpriteSequence> sequences = _level.SpriteSequences;
         TRSpriteSequence explosion = sequences.Find(s => s.SpriteID == (int)TR1Type.Explosion1_S_H);
         if (explosion != null && explosion.NegativeLength == -1)
         {
@@ -22,21 +22,9 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TR1Type, TR1
         return sequences;
     }
 
-    protected override void WriteSpriteSequences(IEnumerable<TRSpriteSequence> spriteSequences)
+    protected override List<TRSpriteTexture> GetExistingSpriteTextures()
     {
-        _level.SpriteSequences = spriteSequences.ToArray();
-        _level.NumSpriteSequences = (uint)_level.SpriteSequences.Length;
-    }
-
-    protected override IEnumerable<TRSpriteTexture> GetExistingSpriteTextures()
-    {
-        return _level.SpriteTextures.ToList();
-    }
-
-    protected override void WriteSpriteTextures(IEnumerable<TRSpriteTexture> spriteTextures)
-    {
-        _level.SpriteTextures = spriteTextures.ToArray();
-        _level.NumSpriteTextures = (uint)_level.SpriteTextures.Length;
+        return _level.SpriteTextures;
     }
 
     protected override AbstractTexturePacker<TR1Type, TR1Level> CreatePacker()
@@ -92,20 +80,14 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TR1Type, TR1
         packer.RemoveSpriteSegments(unusedItems);
     }
 
-    protected override IEnumerable<TRObjectTexture> GetExistingObjectTextures()
+    protected override List<TRObjectTexture> GetExistingObjectTextures()
     {
-        return _level.ObjectTextures.ToList();
+        return _level.ObjectTextures;
     }
 
     protected override IEnumerable<int> GetInvalidObjectTextureIndices()
     {
         return _level.GetInvalidObjectTextureIndices();
-    }
-
-    protected override void WriteObjectTextures(IEnumerable<TRObjectTexture> objectTextures)
-    {
-        _level.ObjectTextures = objectTextures.ToArray();
-        _level.NumObjectTextures = (uint)_level.ObjectTextures.Length;
     }
 
     protected override void RemapMeshTextures(Dictionary<TR1ModelDefinition, Dictionary<int, int>> indexMap)

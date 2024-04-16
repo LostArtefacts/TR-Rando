@@ -95,29 +95,23 @@ internal static class TR4FileReadUtilities
 
     public static void PopulateMeshes(BinaryReader reader, TR4Level lvl)
     {
-        //Mesh Data
-        //This tells us how much mesh data (# of words/uint16s) coming up
-        //just like the rooms previously.
-        lvl.LevelDataChunk.NumMeshData = reader.ReadUInt32();
-        lvl.LevelDataChunk.RawMeshData = new ushort[lvl.LevelDataChunk.NumMeshData];
+        uint numMeshData = reader.ReadUInt32();
+        ushort[] rawMeshData = new ushort[numMeshData];
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumMeshData; i++)
+        for (int i = 0; i < numMeshData; i++)
         {
-            lvl.LevelDataChunk.RawMeshData[i] = reader.ReadUInt16();
+            rawMeshData[i] = reader.ReadUInt16();
         }
 
-        //Mesh Pointers
-        lvl.LevelDataChunk.NumMeshPointers = reader.ReadUInt32();
-        lvl.LevelDataChunk.MeshPointers = new uint[lvl.LevelDataChunk.NumMeshPointers];
+        uint numMeshPointers = reader.ReadUInt32();
+        lvl.LevelDataChunk.MeshPointers = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumMeshPointers; i++)
+        for (int i = 0; i < numMeshPointers; i++)
         {
-            lvl.LevelDataChunk.MeshPointers[i] = reader.ReadUInt32();
+            lvl.LevelDataChunk.MeshPointers.Add(reader.ReadUInt32());
         }
 
-        //Mesh Construction
-        //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, level.RawMeshData);
-        lvl.LevelDataChunk.Meshes = ConstructMeshData(lvl.LevelDataChunk.MeshPointers, lvl.LevelDataChunk.RawMeshData);
+        lvl.LevelDataChunk.Meshes = ConstructMeshData(lvl.LevelDataChunk.MeshPointers, rawMeshData);
     }
 
     public static void PopulateAnimations(BinaryReader reader, TR4Level lvl)
@@ -193,33 +187,28 @@ internal static class TR4FileReadUtilities
         }
     }
 
-    public static void VerifySPRMarker(BinaryReader reader, TR4Level lvl)
+    public static void VerifySPRMarker(BinaryReader reader)
     {
-        lvl.LevelDataChunk.SPRMarker = reader.ReadBytes(3);
-
-        Debug.Assert(lvl.LevelDataChunk.SPRMarker[0] == 0x53);
-        Debug.Assert(lvl.LevelDataChunk.SPRMarker[1] == 0x50);
-        Debug.Assert(lvl.LevelDataChunk.SPRMarker[2] == 0x52);
+        string sprMarker = new(reader.ReadChars(TR4LevelDataChunk.SPRMarker.Length));
+        Debug.Assert(sprMarker == TR4LevelDataChunk.SPRMarker);
     }
 
     public static void PopulateSprites(BinaryReader reader, TR4Level lvl)
     {
-        //Sprite Textures
-        lvl.LevelDataChunk.NumSpriteTextures = reader.ReadUInt32();
-        lvl.LevelDataChunk.SpriteTextures = new TRSpriteTexture[lvl.LevelDataChunk.NumSpriteTextures];
+        uint numSpriteTextures = reader.ReadUInt32();
+        lvl.LevelDataChunk.SpriteTextures = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumSpriteTextures; i++)
+        for (int i = 0; i < numSpriteTextures; i++)
         {
-            lvl.LevelDataChunk.SpriteTextures[i] = TR2FileReadUtilities.ReadSpriteTexture(reader);
+            lvl.LevelDataChunk.SpriteTextures.Add(TR2FileReadUtilities.ReadSpriteTexture(reader));
         }
 
-        //Sprite Sequences
-        lvl.LevelDataChunk.NumSpriteSequences = reader.ReadUInt32();
-        lvl.LevelDataChunk.SpriteSequences = new TRSpriteSequence[lvl.LevelDataChunk.NumSpriteSequences];
+        uint numSpriteSequences = reader.ReadUInt32();
+        lvl.LevelDataChunk.SpriteSequences = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumSpriteSequences; i++)
+        for (int i = 0; i < numSpriteSequences; i++)
         {
-            lvl.LevelDataChunk.SpriteSequences[i] = TR2FileReadUtilities.ReadSpriteSequence(reader);
+            lvl.LevelDataChunk.SpriteSequences.Add(TR2FileReadUtilities.ReadSpriteSequence(reader));
         }
     }
 
@@ -286,35 +275,32 @@ internal static class TR4FileReadUtilities
 
     public static void PopulateAnimatedTextures(BinaryReader reader, TR4Level lvl)
     {
-        lvl.LevelDataChunk.NumAnimatedTextures = reader.ReadUInt32();
-        lvl.LevelDataChunk.AnimatedTextures = new TRAnimatedTexture[reader.ReadUInt16()];
-        for (int i = 0; i < lvl.LevelDataChunk.AnimatedTextures.Length; i++)
+        reader.ReadUInt32(); // Total count of ushorts
+        ushort numGroups = reader.ReadUInt16();
+        lvl.LevelDataChunk.AnimatedTextures = new();
+        for (int i = 0; i < numGroups; i++)
         {
-            lvl.LevelDataChunk.AnimatedTextures[i] = TR2FileReadUtilities.ReadAnimatedTexture(reader);
+            lvl.LevelDataChunk.AnimatedTextures.Add(TR2FileReadUtilities.ReadAnimatedTexture(reader));
         }
 
         //TR4+ Specific
         lvl.LevelDataChunk.AnimatedTexturesUVCount = reader.ReadByte();
     }
 
-    public static void VerifyTEXMarker(BinaryReader reader, TR4Level lvl)
+    public static void VerifyTEXMarker(BinaryReader reader)
     {
-        lvl.LevelDataChunk.TEXMarker = reader.ReadBytes(3);
-
-        Debug.Assert(lvl.LevelDataChunk.TEXMarker[0] == 0x54);
-        Debug.Assert(lvl.LevelDataChunk.TEXMarker[1] == 0x45);
-        Debug.Assert(lvl.LevelDataChunk.TEXMarker[2] == 0x58);
+        string texMarker = new(reader.ReadChars(TR4LevelDataChunk.TEXMarker.Length));
+        Debug.Assert(texMarker == TR4LevelDataChunk.TEXMarker);
     }
 
     public static void PopulateObjectTextures(BinaryReader reader, TR4Level lvl)
     {
-        //Object Textures
-        lvl.LevelDataChunk.NumObjectTextures = reader.ReadUInt32();
-        lvl.LevelDataChunk.ObjectTextures = new TR4ObjectTexture[lvl.LevelDataChunk.NumObjectTextures];
+        uint numObjectTextures = reader.ReadUInt32();
+        lvl.LevelDataChunk.ObjectTextures = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumObjectTextures; i++)
+        for (int i = 0; i < numObjectTextures; i++)
         {
-            lvl.LevelDataChunk.ObjectTextures[i] = TR4FileReadUtilities.ReadObjectTexture(reader);
+            lvl.LevelDataChunk.ObjectTextures.Add(ReadObjectTexture(reader));
         }
     }
 
@@ -331,14 +317,8 @@ internal static class TR4FileReadUtilities
 
     public static void PopulateDemoSoundSampleIndices(BinaryReader reader, TR4Level lvl)
     {
-        //Demo Data
-        lvl.LevelDataChunk.NumDemoData = reader.ReadUInt16();
-        lvl.LevelDataChunk.DemoData = new byte[lvl.LevelDataChunk.NumDemoData];
-
-        for (int i = 0; i < lvl.LevelDataChunk.NumDemoData; i++)
-        {
-            lvl.LevelDataChunk.DemoData[i] = reader.ReadByte();
-        }
+        ushort numDemoData = reader.ReadUInt16();
+        lvl.LevelDataChunk.DemoData = reader.ReadBytes(numDemoData);
 
         //Sound Map (370 shorts) & Sound Details
         lvl.LevelDataChunk.SoundMap = new short[370];
@@ -348,21 +328,20 @@ internal static class TR4FileReadUtilities
             lvl.LevelDataChunk.SoundMap[i] = reader.ReadInt16();
         }
 
-        lvl.LevelDataChunk.NumSoundDetails = reader.ReadUInt32();
-        lvl.LevelDataChunk.SoundDetails = new TR3SoundDetails[lvl.LevelDataChunk.NumSoundDetails];
+        uint numSoundDetails = reader.ReadUInt32();
+        lvl.LevelDataChunk.SoundDetails = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumSoundDetails; i++)
+        for (int i = 0; i < numSoundDetails; i++)
         {
-            lvl.LevelDataChunk.SoundDetails[i] = TR3FileReadUtilities.ReadSoundDetails(reader);
+            lvl.LevelDataChunk.SoundDetails.Add(TR3FileReadUtilities.ReadSoundDetails(reader));
         }
 
-        //Samples
-        lvl.LevelDataChunk.NumSampleIndices = reader.ReadUInt32();
-        lvl.LevelDataChunk.SampleIndices = new uint[lvl.LevelDataChunk.NumSampleIndices];
+        uint numSampleIndices = reader.ReadUInt32();
+        lvl.LevelDataChunk.SampleIndices = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumSampleIndices; i++)
+        for (int i = 0; i < numSampleIndices; i++)
         {
-            lvl.LevelDataChunk.SampleIndices[i] = reader.ReadUInt32();
+            lvl.LevelDataChunk.SampleIndices.Add(reader.ReadUInt32());
         }
     }
 
@@ -515,21 +494,21 @@ internal static class TR4FileReadUtilities
         };
     }
 
-    public static TR4Mesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
+    public static List<TR4Mesh> ConstructMeshData(List<uint> meshPointers, ushort[] rawMeshData)
     {
         byte[] target = new byte[rawMeshData.Length * 2];
         Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
 
         // The mesh pointer list can contain duplicates so we must make
         // sure to iterate over distinct values only
-        meshPointers = meshPointers.Distinct().ToArray();
+        meshPointers = new(meshPointers.Distinct());
 
         List<TR4Mesh> meshes = new();
 
         using (MemoryStream ms = new(target))
         using (BinaryReader br = new(ms))
         {
-            for (int i = 0; i < meshPointers.Length; i++)
+            for (int i = 0; i < meshPointers.Count; i++)
             {
                 TR4Mesh mesh = new();
                 meshes.Add(mesh);
@@ -598,7 +577,7 @@ internal static class TR4FileReadUtilities
             }
         }
 
-        return meshes.ToArray();
+        return meshes;
     }
 
     public static TR4MeshFace4 ReadTR4MeshFace4(BinaryReader reader)

@@ -30,12 +30,12 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         _committed = false;
     }
 
-    protected abstract TRMesh[] GetModelMeshes(E entity);
+    protected abstract List<TRMesh> GetModelMeshes(E entity);
     protected abstract List<TRColour> GetPalette8();
     protected abstract List<TRColour4> GetPalette16();
     protected abstract int ImportColour(Color colour);
-    protected abstract TRSpriteSequence[] GetSpriteSequences();
-    protected abstract TRSpriteTexture[] GetSpriteTextures();
+    protected abstract List<TRSpriteSequence> GetSpriteSequences();
+    protected abstract List<TRSpriteTexture> GetSpriteTextures();
     protected abstract Bitmap GetTile(int tileIndex);
     protected abstract void SetTile(int tileIndex, Bitmap bitmap);
 
@@ -302,7 +302,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 {
                     translatedEntity = EntityMap[entity];
                 }
-                TRMesh[] meshes = GetModelMeshes(translatedEntity);
+                List<TRMesh> meshes = GetModelMeshes(translatedEntity);
                 ISet<int> colourIndices = new HashSet<int>();
                 foreach (TRMesh mesh in meshes)
                 {
@@ -364,8 +364,8 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 {
                     translatedEntity = EntityMap[entity];
                 }
-                TRMesh[] meshes = GetModelMeshes(translatedEntity);
-                if (meshes == null || meshes.Length == 0)
+                List<TRMesh> meshes = GetModelMeshes(translatedEntity);
+                if (meshes == null || meshes.Count == 0)
                 {
                     continue;
                 }
@@ -433,8 +433,8 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
             throw new ArgumentException(string.Format("SpriteSequence {0} cannot be dynamically mapped without at least one source rectangle.", source.SpriteSequence));
         }
 
-        List<TRSpriteSequence> spriteSequences = GetSpriteSequences().ToList();
-        TRSpriteTexture[] spriteTextures = GetSpriteTextures();
+        List<TRSpriteSequence> spriteSequences = GetSpriteSequences();
+        List<TRSpriteTexture> spriteTextures = GetSpriteTextures();
 
         int spriteID = Convert.ToInt32(source.SpriteSequence);
         TRSpriteSequence sequence = spriteSequences.Find(s => s.SpriteID == spriteID);

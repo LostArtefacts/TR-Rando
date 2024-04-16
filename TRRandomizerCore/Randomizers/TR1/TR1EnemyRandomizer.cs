@@ -879,7 +879,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 .ForEach(e => e.TypeID = TR1Type.Raptor);
 
             // Make the scion invisible.
-            TRMesh[] larsonMeshes = TRMeshUtilities.GetModelMeshes(level.Data, larsonModel);
+            List<TRMesh> larsonMeshes = TRMeshUtilities.GetModelMeshes(level.Data, larsonModel);
             MeshEditor editor = new();
             foreach (TRMesh mesh in larsonMeshes)
             {
@@ -961,7 +961,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // If we're using flying mummies, add a chance that they'll have proper wings
         if (enemies.Available.Contains(TR1Type.BandagedFlyer) && _generator.NextDouble() < 0.5)
         {
-            TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.FlyingAtlantean);
+            List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.FlyingAtlantean);
             ushort bandageTexture = meshes[1].TexturedRectangles[3].Texture;
             for (int i = 15; i < 21; i++)
             {
@@ -1141,19 +1141,19 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 [TR1Type.CassettePlayer_M_H] = 1
             };
 
-            TRMesh[] scion = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.ScionPiece4_S_P);
+            List<TRMesh> scion = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.ScionPiece4_S_P);
             List<TR1Type> replacementKeys = scionSwaps.Keys.ToList();
             TR1Type replacement = replacementKeys[_generator.Next(0, replacementKeys.Count)];
 
-            TRMesh[] replacementMeshes = TRMeshUtilities.GetModelMeshes(level.Data, replacement);
+            List<TRMesh> replacementMeshes = TRMeshUtilities.GetModelMeshes(level.Data, replacement);
             int colRadius = scion[0].CollRadius;
             TRMeshUtilities.DuplicateMesh(level.Data, scion[0], replacementMeshes[scionSwaps[replacement]]);
             scion[0].CollRadius = colRadius; // Retain original as Lara may need to shoot it
 
             // Cutscene head swaps
-            TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TR1Type.CutsceneActor1);
-            TRMesh[] natla = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TR1Type.CutsceneActor3);
-            TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TR1Type.Pierre);
+            List<TRMesh> lara = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TR1Type.CutsceneActor1);
+            List<TRMesh> natla = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TR1Type.CutsceneActor3);
+            List<TRMesh> pierre = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TR1Type.Pierre);
 
             switch (_generator.Next(0, 6))
             {
@@ -1191,7 +1191,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (availableEnemies.Contains(TR1Type.Adam) && _generator.NextDouble() < 0.4)
         {
             // Replace Adam's head with a much larger version of Natla's, Larson's or normal/angry Lara's.
-            TRMesh[] adam = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.Adam);
+            List<TRMesh> adam = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.Adam);
             TRMesh replacement;
             if (availableEnemies.Contains(TR1Type.Natla) && _generator.NextDouble() < 0.5)
             {
@@ -1239,9 +1239,9 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (availableEnemies.Contains(TR1Type.Pierre) && _generator.NextDouble() < 0.25)
         {
             // Replace Pierre's head with a slightly bigger version of Lara's (either angry Lara or normal Lara)
-            TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.Pierre);
-            TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.Lara);
-            TRMesh[] laraUziAnim = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.LaraUziAnimation_H);
+            List<TRMesh> pierre = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.Pierre);
+            List<TRMesh> lara = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.Lara);
+            List<TRMesh> laraUziAnim = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.LaraUziAnimation_H);
 
             TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], MeshEditor.CloneMesh(_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]));
             foreach (TRVertex vertex in pierre[8].Vertices)

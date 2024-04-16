@@ -10,7 +10,5 @@ public class TR4Level : TRLevelBase
 
     public TR4LevelDataChunk LevelDataChunk { get; set; }
 
-    public uint NumSamples { get; set; }
-
-    public TR4Sample[] Samples { get; set; }
+    public List<TR4Sample> Samples { get; set; }
 }

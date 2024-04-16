@@ -12,7 +12,7 @@ public class TR1ModelDefinition : AbstractTRModelDefinition<TR1Type>
     public TRCinematicFrame[] CinematicFrames { get; set; }
     public Dictionary<int, TRColour> Colours { get; set; }
     public TR1PackedSound HardcodedSound { get; set; }
-    public TRMesh[] Meshes { get; set; }
+    public List<TRMesh> Meshes { get; set; }
     public TRMeshTreeNode[] MeshTrees { get; set; }
     public TRModel Model { get; set; }
 

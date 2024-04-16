@@ -211,12 +211,13 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         if (IsUncontrolledLevel(level.Script))
         {
             // Choose a random sample for each current entry and replace the entire index list.
-            ISet<uint> indices = new HashSet<uint>();
-            while (indices.Count < level.Data.NumSampleIndices)
+            HashSet<uint> indices = new();
+            while (indices.Count < level.Data.SampleIndices.Count)
             {
                 indices.Add((uint)_generator.Next(0, _maxSample + 1));
             }
-            level.Data.SampleIndices = indices.ToArray();
+            level.Data.SampleIndices.Clear();
+            level.Data.SampleIndices.AddRange(indices);
         }
         else
         {
@@ -280,29 +281,18 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
             return -1;
         }
 
-        List<uint> levelSamples = level.SampleIndices.ToList();
         List<TRSoundDetails> levelSoundDetails = level.SoundDetails.ToList();
 
         uint minSample = definition.SampleIndices.Min();
-        if (levelSamples.Contains(minSample))
+        if (level.SampleIndices.Contains(minSample))
         {
-            // This index is already defined, so locate the TRSoundDetails that references it
-            // and return its index.
-            return (short)levelSoundDetails.FindIndex(d => levelSamples[d.Sample] == minSample);
+            return (short)levelSoundDetails.FindIndex(d => level.SampleIndices[d.Sample] == minSample);
         }
 
-        // Otherwise, we need to import the samples, create a sound details object to 
-        // point to the first sample, and then return the new index. Make sure the 
-        // samples are sorted first.
-        ushort newSampleIndex = (ushort)levelSamples.Count;
-        List<uint> sortedSamples = new(definition.SampleIndices);
-        sortedSamples.Sort();
-        levelSamples.AddRange(sortedSamples);
+        ushort newSampleIndex = (ushort)level.SampleIndices.Count;
+        level.SampleIndices.AddRange(definition.SampleIndices);
 
-        level.SampleIndices = levelSamples.ToArray();
-        level.NumSampleIndices = (uint)levelSamples.Count;
-
-        levelSoundDetails.Add(new TRSoundDetails
+        level.SoundDetails.Add(new TRSoundDetails
         {
             Chance = definition.Details.Chance,
             Characteristics = definition.Details.Characteristics,
@@ -310,10 +300,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
             Volume = definition.Details.Volume
         });
 
-        level.SoundDetails = levelSoundDetails.ToArray();
-        level.NumSoundDetails++;
-
-        return (short)(level.NumSoundDetails - 1);
+        return (short)(level.SoundDetails.Count - 1);
     }
 
     private void RandomizeWibble(TR2CombinedLevel level)

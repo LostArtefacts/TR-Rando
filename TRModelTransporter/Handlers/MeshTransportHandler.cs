@@ -38,7 +38,7 @@ public class MeshTransportHandler
             }
         }
 
-        for (int i = 0; i < definition.Meshes.Length; i++)
+        for (int i = 0; i < definition.Meshes.Count; i++)
         {
             int insertedIndex = TRMeshUtilities.InsertMesh(level, definition.Meshes[i]);
             if (i == 0)
@@ -59,7 +59,7 @@ public class MeshTransportHandler
             }
         }
 
-        for (int i = 0; i < definition.Meshes.Length; i++)
+        for (int i = 0; i < definition.Meshes.Count; i++)
         {
             int insertedIndex = TRMeshUtilities.InsertMesh(level, definition.Meshes[i]);
             if (i == 0)
@@ -80,7 +80,7 @@ public class MeshTransportHandler
             }
         }
 
-        for (int i = 0; i < definition.Meshes.Length; i++)
+        for (int i = 0; i < definition.Meshes.Count; i++)
         {
             int insertedIndex = TRMeshUtilities.InsertMesh(level, definition.Meshes[i]);
             if (i == 0)

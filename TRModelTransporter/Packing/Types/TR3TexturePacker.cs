@@ -19,8 +19,8 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Type, TR3Level>
 
     protected override List<AbstractIndexedTRTexture> LoadObjectTextures()
     {
-        List<AbstractIndexedTRTexture> textures = new((int)Level.NumObjectTextures);
-        for (int i = 0; i < Level.NumObjectTextures; i++)
+        List<AbstractIndexedTRTexture> textures = new(Level.ObjectTextures.Count);
+        for (int i = 0; i < Level.ObjectTextures.Count; i++)
         {
             TRObjectTexture texture = Level.ObjectTextures[i];
             if (texture.IsValid())
@@ -38,8 +38,8 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Type, TR3Level>
 
     protected override List<AbstractIndexedTRTexture> LoadSpriteTextures()
     {
-        List<AbstractIndexedTRTexture> textures = new((int)Level.NumSpriteTextures);
-        for (int i = 0; i < Level.NumSpriteTextures; i++)
+        List<AbstractIndexedTRTexture> textures = new(Level.SpriteTextures.Count);
+        for (int i = 0; i < Level.SpriteTextures.Count; i++)
         {
             TRSpriteTexture texture = Level.SpriteTextures[i];
             if (texture.IsValid())
@@ -55,14 +55,14 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Type, TR3Level>
         return textures;
     }
 
-    protected override TRMesh[] GetModelMeshes(TR3Type modelEntity)
+    protected override List<TRMesh> GetModelMeshes(TR3Type modelEntity)
     {
         return TRMeshUtilities.GetModelMeshes(Level, modelEntity);
     }
 
     protected override TRSpriteSequence GetSpriteSequence(TR3Type entity)
     {
-        return Level.SpriteSequences.ToList().Find(s => s.SpriteID == (int)entity);
+        return Level.SpriteSequences.Find(s => s.SpriteID == (int)entity);
     }
 
     protected override IEnumerable<TR3Type> GetAllModelTypes()

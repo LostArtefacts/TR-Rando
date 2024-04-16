@@ -53,36 +53,22 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return level.GetInvalidObjectTextureIndices();
     }
 
-    protected override TRMesh[] GetLevelMeshes(TR3Level level)
+    protected override List<TRMesh> GetLevelMeshes(TR3Level level)
     {
         return level.Meshes;
     }
 
-    protected override Dictionary<TR3Type, TRMesh[]> GetModelMeshes(TR3Level level)
-    {
-        Dictionary<TR3Type, TRMesh[]> modelMeshes = new();
-        foreach (TRModel model in level.Models)
-        {
-            TRMesh[] meshes = GetModelMeshes(level, model);
-            if (meshes != null)
-            {
-                modelMeshes[(TR3Type)model.ID] = meshes;
-            }
-        }
-        return modelMeshes;
-    }
-
-    protected override TRMesh[] GetModelMeshes(TR3Level level, TRModel model)
+    protected override List<TRMesh> GetModelMeshes(TR3Level level, TRModel model)
     {
         return TRMeshUtilities.GetModelMeshes(level, model);
     }
 
     protected override List<TRModel> GetModels(TR3Level level)
     {
-        return level.Models.ToList();
+        return level.Models;
     }
 
-    protected override TRObjectTexture[] GetObjectTextures(TR3Level level)
+    protected override List<TRObjectTexture> GetObjectTextures(TR3Level level)
     {
         return level.ObjectTextures;
     }
@@ -150,12 +136,6 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         level.ResetUnusedTextures();
     }
 
-    protected override void SetObjectTextures(TR3Level level, IEnumerable<TRObjectTexture> textures)
-    {
-        level.ObjectTextures = textures.ToArray();
-        level.NumObjectTextures = (uint)level.ObjectTextures.Length;
-    }
-
     protected override void SetSkyboxVisible(TR3Level level)
     {
         foreach (TR3Room room in level.Rooms)
@@ -179,15 +159,9 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return FaceUtilities.GetTriggerFaces(level, new List<FDTrigType>(), true);
     }
 
-    protected override TRAnimatedTexture[] GetAnimatedTextures(TR3Level level)
+    protected override List<TRAnimatedTexture> GetAnimatedTextures(TR3Level level)
     {
         return level.AnimatedTextures;
-    }
-
-    protected override void SetAnimatedTextures(TR3Level level, TRAnimatedTexture[] animatedTextures, ushort length)
-    {
-        level.AnimatedTextures = animatedTextures;
-        level.NumAnimatedTextures = length;
     }
 
     protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TR3Level level, Pen pen)

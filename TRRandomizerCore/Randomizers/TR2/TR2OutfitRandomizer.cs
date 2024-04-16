@@ -229,9 +229,8 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
 
         private bool Import(TR2CombinedLevel level, TR2Type lara)
         {
-            List<TRModel> models = level.Data.Models.ToList();
-            TRModel laraModel = models.Find(m => m.ID == (uint)TR2Type.Lara);
-            List<TRModel> laraClones = models.FindAll(m => m.MeshTree == laraModel.MeshTree && m != laraModel);
+            TRModel laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
+            List<TRModel> laraClones = level.Data.Models.FindAll(m => m.MeshTree == laraModel.MeshTree && m != laraModel);
 
             if (lara == TR2Type.LaraInvisible)
             {
@@ -276,8 +275,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // #314 Any clones of Lara should copy her new style
                 if (laraClones.Count > 0)
                 {
-                    models = level.Data.Models.ToList();
-                    laraModel = models.Find(m => m.ID == (uint)TR2Type.Lara);
+                    laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
                     foreach (TRModel model in laraClones)
                     {
                         model.MeshTree = laraModel.MeshTree;
@@ -311,9 +309,9 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         {
             if (clones.Count > 0)
             {
-                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraModel);
+                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraModel);
                 int firstMeshIndex = -1;
-                for (int i = 0; i < meshes.Length; i++)
+                for (int i = 0; i < meshes.Count; i++)
                 {
                     int insertedIndex = TRMeshUtilities.InsertMesh(level.Data, MeshEditor.CloneMesh(meshes[i]));
                     if (firstMeshIndex == -1)
@@ -334,7 +332,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             MeshEditor editor = new();
             foreach (TR2Type ent in entities)
             {
-                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
+                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
                 if (meshes != null)
                 {
                     foreach (TRMesh mesh in meshes)
@@ -420,9 +418,8 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // into the diving suit, but model ID 99 is the one before. We always want the cutscene actor to
                 // match DA, but this unfortunately means she'll leave the cutscene in the same outfit. She just
                 // didn't like the look of any of the alternatives...
-                List<TRModel> models = level.Data.Models.ToList();
-                TRModel actorLara = models.Find(m => m.ID == (short)TR2Type.CutsceneActor3);
-                TRModel realLara = models.Find(m => m.ID == (short)TR2Type.Lara);
+                TRModel actorLara = level.Data.Models.Find(m => m.ID == (short)TR2Type.CutsceneActor3);
+                TRModel realLara = level.Data.Models.Find(m => m.ID == (short)TR2Type.Lara);
 
                 actorLara.MeshTree = realLara.MeshTree;
                 actorLara.NumMeshes = realLara.NumMeshes;

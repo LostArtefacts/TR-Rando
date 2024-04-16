@@ -58,36 +58,22 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return level.GetInvalidObjectTextureIndices();
     }
 
-    protected override TRMesh[] GetLevelMeshes(TR2Level level)
+    protected override List<TRMesh> GetLevelMeshes(TR2Level level)
     {
         return level.Meshes;
     }
 
-    protected override Dictionary<TR2Type, TRMesh[]> GetModelMeshes(TR2Level level)
-    {
-        Dictionary<TR2Type, TRMesh[]> modelMeshes = new();
-        foreach (TRModel model in level.Models)
-        {
-            TRMesh[] meshes = GetModelMeshes(level, model);
-            if (meshes != null)
-            {
-                modelMeshes[(TR2Type)model.ID] = meshes;
-            }
-        }
-        return modelMeshes;
-    }
-
-    protected override TRMesh[] GetModelMeshes(TR2Level level, TRModel model)
+    protected override List<TRMesh> GetModelMeshes(TR2Level level, TRModel model)
     {
         return TRMeshUtilities.GetModelMeshes(level, model);
     }
 
     protected override List<TRModel> GetModels(TR2Level level)
     {
-        return level.Models.ToList();
+        return level.Models;
     }
 
-    protected override TRObjectTexture[] GetObjectTextures(TR2Level level)
+    protected override List<TRObjectTexture> GetObjectTextures(TR2Level level)
     {
         return level.ObjectTextures;
     }
@@ -144,12 +130,6 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         level.ResetUnusedTextures();
     }
 
-    protected override void SetObjectTextures(TR2Level level, IEnumerable<TRObjectTexture> textures)
-    {
-        level.ObjectTextures = textures.ToArray();
-        level.NumObjectTextures = (uint)level.ObjectTextures.Length;
-    }
-
     protected override void SetSkyboxVisible(TR2Level level)
     {
         foreach (TR2Room room in level.Rooms)
@@ -173,14 +153,8 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return FaceUtilities.GetTriggerFaces(level, new List<FDTrigType>(), true);
     }
 
-    protected override TRAnimatedTexture[] GetAnimatedTextures(TR2Level level)
+    protected override List<TRAnimatedTexture> GetAnimatedTextures(TR2Level level)
     {
         return level.AnimatedTextures;
-    }
-
-    protected override void SetAnimatedTextures(TR2Level level, TRAnimatedTexture[] animatedTextures, ushort length)
-    {
-        level.AnimatedTextures = animatedTextures;
-        level.NumAnimatedTextures = length;
     }
 }

@@ -158,7 +158,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             ISet<string> usedSamples = new HashSet<string>();
 
             // Replace each sample but be sure to avoid duplicates
-            for (int i = 0; i < level.Data.NumSampleIndices; i++)
+            for (int i = 0; i < level.Data.SampleIndices.Count; i++)
             {
                 byte[] sample;
                 string id;
@@ -177,9 +177,10 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
                 newSamples.AddRange(sample);
             }
 
-            level.Data.SampleIndices = newSampleIndices.ToArray();
-            level.Data.Samples = newSamples.ToArray();
-            level.Data.NumSamples = (uint)newSamples.Count;
+            level.Data.SampleIndices.Clear();
+            level.Data.SampleIndices.AddRange(newSampleIndices);
+            level.Data.Samples.Clear();
+            level.Data.Samples.AddRange(newSamples);
         }
         else
         {
@@ -259,22 +260,19 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         // This may result in duplicate WAV data if a sound definition is imported more than
         // once, but ResortSoundIndices will tidy the data such that only the required WAV
         // file is retained in the end.
-        List<byte> levelSamples = level.Samples.ToList();
-        List<uint> levelSampleIndices = level.SampleIndices.ToList();
-
-        foreach (byte[] sample in definition.SoundData.Samples.Values)
-        {
-            levelSampleIndices.Add((uint)levelSamples.Count);
-            levelSamples.AddRange(sample);
-        }
-
         newDetails = new TRSoundDetails
         {
             Chance = defDetails.Chance,
             Characteristics = defDetails.Characteristics,
-            Sample = (ushort)level.SampleIndices.Length,
+            Sample = (ushort)level.SampleIndices.Count,
             Volume = defDetails.Volume
         };
+
+        foreach (byte[] sample in definition.SoundData.Samples.Values)
+        {
+            level.SampleIndices.Add((uint)level.Samples.Count);
+            level.Samples.AddRange(sample);
+        }
 
         if (category == TRSFXGeneralCategory.StandardWeaponFiring
             || category == TRSFXGeneralCategory.FastWeaponFiring)
@@ -282,18 +280,8 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             newDetails.LoopingMode = 1; // OneShotRewound
         }
 
-        level.Samples = levelSamples.ToArray();
-        level.NumSamples = (uint)levelSamples.Count;
-
-        level.SampleIndices = levelSampleIndices.ToArray();
-        level.NumSampleIndices = (uint)levelSampleIndices.Count;
-
-        List<TRSoundDetails> levelSoundDetails = level.SoundDetails.ToList();
-        levelSoundDetails.Add(newDetails);
-        level.SoundDetails = levelSoundDetails.ToArray();
-        level.NumSoundDetails++;
-
-        return (short)(level.NumSoundDetails - 1);
+        level.SoundDetails.Add(newDetails);
+        return (short)(level.SoundDetails.Count - 1);
     }
 
     private void ImportSpeechSFX(TR1CombinedLevel level)
