@@ -19,8 +19,8 @@ public class TR2TexturePacker : AbstractTexturePacker<TR2Type, TR2Level>
 
     protected override List<AbstractIndexedTRTexture> LoadObjectTextures()
     {
-        List<AbstractIndexedTRTexture> textures = new((int)Level.NumObjectTextures);
-        for (int i = 0; i < Level.NumObjectTextures; i++)
+        List<AbstractIndexedTRTexture> textures = new(Level.ObjectTextures.Count);
+        for (int i = 0; i < Level.ObjectTextures.Count; i++)
         {
             TRObjectTexture texture = Level.ObjectTextures[i];
             if (texture.IsValid())

@@ -73,7 +73,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return level.Models.ToList();
     }
 
-    protected override TRObjectTexture[] GetObjectTextures(TR2Level level)
+    protected override List<TRObjectTexture> GetObjectTextures(TR2Level level)
     {
         return level.ObjectTextures;
     }
@@ -128,12 +128,6 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
     protected override void ResetUnusedTextures(TR2Level level)
     {
         level.ResetUnusedTextures();
-    }
-
-    protected override void SetObjectTextures(TR2Level level, IEnumerable<TRObjectTexture> textures)
-    {
-        level.ObjectTextures = textures.ToArray();
-        level.NumObjectTextures = (uint)level.ObjectTextures.Length;
     }
 
     protected override void SetSkyboxVisible(TR2Level level)

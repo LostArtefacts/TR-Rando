@@ -302,13 +302,12 @@ internal static class TR4FileReadUtilities
 
     public static void PopulateObjectTextures(BinaryReader reader, TR4Level lvl)
     {
-        //Object Textures
-        lvl.LevelDataChunk.NumObjectTextures = reader.ReadUInt32();
-        lvl.LevelDataChunk.ObjectTextures = new TR4ObjectTexture[lvl.LevelDataChunk.NumObjectTextures];
+        uint numObjectTextures = reader.ReadUInt32();
+        lvl.LevelDataChunk.ObjectTextures = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumObjectTextures; i++)
+        for (int i = 0; i < numObjectTextures; i++)
         {
-            lvl.LevelDataChunk.ObjectTextures[i] = TR4FileReadUtilities.ReadObjectTexture(reader);
+            lvl.LevelDataChunk.ObjectTextures.Add(ReadObjectTexture(reader));
         }
     }
 

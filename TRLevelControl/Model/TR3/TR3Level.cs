@@ -53,16 +53,7 @@ public class TR3Level : TRLevelBase
     /// NumAnimatesTextures * 2 bytes
     /// </summary>
     public TRAnimatedTexture[] AnimatedTextures { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumObjectTextures { get; set; }
-
-    /// <summary>
-    /// NumObjectTextures * 20 bytes
-    /// </summary>
-    public TRObjectTexture[] ObjectTextures { get; set; }
+    public List<TRObjectTexture> ObjectTextures { get; set; }
     public List<TR3Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }

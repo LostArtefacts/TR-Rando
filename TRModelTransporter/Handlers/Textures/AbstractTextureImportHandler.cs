@@ -183,7 +183,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
     {
         // Add each ObjectTexture to the level and store a map of old index to new index.
         // Make use of any invalid texture first because we are limited to 2048 entries
-        List<TRObjectTexture> levelObjectTextures = GetExistingObjectTextures().ToList();
+        List<TRObjectTexture> levelObjectTextures = GetExistingObjectTextures();
         Queue<int> reusableIndices = new(GetInvalidObjectTextureIndices());
 
         Dictionary<D, Dictionary<int, int>> indexMap = new();
@@ -224,9 +224,6 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                 }
             }
         }
-
-        // Save the new textures in the level
-        WriteObjectTextures(levelObjectTextures);
 
         // Change the definition's meshes so that the textured rectangles and triangles point
         // to the correct object texture.
@@ -280,11 +277,9 @@ public abstract class AbstractTextureImportHandler<E, L, D>
 
     protected abstract void ProcessRemovals(AbstractTexturePacker<E, L> packer);
 
-    protected abstract IEnumerable<TRObjectTexture> GetExistingObjectTextures();
+    protected abstract List<TRObjectTexture> GetExistingObjectTextures();
 
     protected abstract IEnumerable<int> GetInvalidObjectTextureIndices();
-
-    protected abstract void WriteObjectTextures(IEnumerable<TRObjectTexture> objectTextures);
 
     protected abstract void WriteSpriteTextures(IEnumerable<TRSpriteTexture> spriteTextures);
 

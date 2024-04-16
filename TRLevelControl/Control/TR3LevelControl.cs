@@ -242,12 +242,11 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         }
 
         //Object Textures - in TR3 this is now after animated textures
-        _level.NumObjectTextures = reader.ReadUInt32();
-        _level.ObjectTextures = new TRObjectTexture[_level.NumObjectTextures];
-
-        for (int i = 0; i < _level.NumObjectTextures; i++)
+        uint numObjectTextures = reader.ReadUInt32();
+        _level.ObjectTextures = new();
+        for (int i = 0; i < numObjectTextures; i++)
         {
-            _level.ObjectTextures[i] = TR2FileReadUtilities.ReadObjectTexture(reader);
+            _level.ObjectTextures.Add(TR2FileReadUtilities.ReadObjectTexture(reader));
         }
 
         //Entities
@@ -363,7 +362,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write(_level.NumAnimatedTextures);
         writer.Write((ushort)_level.AnimatedTextures.Length);
         foreach (TRAnimatedTexture texture in _level.AnimatedTextures) { writer.Write(texture.Serialize()); }
-        writer.Write(_level.NumObjectTextures);
+        writer.Write((uint)_level.ObjectTextures.Count);
         foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
 
         writer.Write((uint)_level.Entities.Count);

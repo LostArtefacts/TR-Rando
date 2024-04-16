@@ -435,13 +435,12 @@ internal static class TR5FileReadUtilities
 
     public static void PopulateObjectTextures(BinaryReader reader, TR5Level lvl)
     {
-        //Object Textures
-        lvl.LevelDataChunk.NumObjectTextures = reader.ReadUInt32();
-        lvl.LevelDataChunk.ObjectTextures = new TR5ObjectTexture[lvl.LevelDataChunk.NumObjectTextures];
+        uint numObjectTextures = reader.ReadUInt32();
+        lvl.LevelDataChunk.ObjectTextures = new();
 
-        for (int i = 0; i < lvl.LevelDataChunk.NumObjectTextures; i++)
+        for (int i = 0; i < numObjectTextures; i++)
         {
-            lvl.LevelDataChunk.ObjectTextures[i] = ReadTR5ObjectTexture(reader);
+            lvl.LevelDataChunk.ObjectTextures.Add(ReadTR5ObjectTexture(reader));
         }
     }
 

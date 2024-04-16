@@ -22,7 +22,7 @@ public class EMMirrorObjectTexture : BaseEMFunction
         MirrorObjectTextures(level.ObjectTextures);
     }
 
-    private void MirrorObjectTextures(TRObjectTexture[] levelTextures)
+    private void MirrorObjectTextures(List<TRObjectTexture> levelTextures)
     {
         foreach (ushort textureRef in Textures)
         {

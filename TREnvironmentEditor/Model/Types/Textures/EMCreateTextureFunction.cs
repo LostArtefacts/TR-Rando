@@ -16,10 +16,7 @@ public class EMCreateTextureFunction : BaseEMFunction
         TR1TexturePacker packer = new(level);
         List<TRObjectTexture> textures = new(level.ObjectTextures);
 
-        List<EMTextureMap> mapping = BuildAndPackTextures(packer, textures);
-        level.ObjectTextures = textures.ToArray();
-        level.NumObjectTextures = (uint)textures.Count;
-
+        List<EMTextureMap> mapping = BuildAndPackTextures(packer, level.ObjectTextures);
         mapping.ForEach(m => new EMRefaceFunction
         {
             TextureMap = m
@@ -31,10 +28,7 @@ public class EMCreateTextureFunction : BaseEMFunction
         TR2TexturePacker packer = new(level);
         List<TRObjectTexture> textures = new(level.ObjectTextures);
 
-        List<EMTextureMap> mapping = BuildAndPackTextures(packer, textures);
-        level.ObjectTextures = textures.ToArray();
-        level.NumObjectTextures = (uint)textures.Count;
-
+        List<EMTextureMap> mapping = BuildAndPackTextures(packer, level.ObjectTextures);
         mapping.ForEach(m => new EMRefaceFunction
         {
             TextureMap = m
@@ -46,10 +40,7 @@ public class EMCreateTextureFunction : BaseEMFunction
         TR3TexturePacker packer = new(level);
         List<TRObjectTexture> textures = new(level.ObjectTextures);
 
-        List<EMTextureMap> mapping = BuildAndPackTextures(packer, textures);
-        level.ObjectTextures = textures.ToArray();
-        level.NumObjectTextures = (uint)textures.Count;
-
+        List<EMTextureMap> mapping = BuildAndPackTextures(packer, level.ObjectTextures);
         mapping.ForEach(m => new EMRefaceFunction
         {
             TextureMap = m

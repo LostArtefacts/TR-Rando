@@ -178,13 +178,11 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.StaticMeshes.Add(TR2FileReadUtilities.ReadStaticMesh(reader));
         }
 
-        //Object Textures
-        _level.NumObjectTextures = reader.ReadUInt32();
-        _level.ObjectTextures = new TRObjectTexture[_level.NumObjectTextures];
-
-        for (int i = 0; i < _level.NumObjectTextures; i++)
+        uint numObjectTextures = reader.ReadUInt32();
+        _level.ObjectTextures = new();
+        for (int i = 0; i < numObjectTextures; i++)
         {
-            _level.ObjectTextures[i] = TR2FileReadUtilities.ReadObjectTexture(reader);
+            _level.ObjectTextures.Add(TR2FileReadUtilities.ReadObjectTexture(reader));
         }
 
         //Sprite Textures
@@ -336,7 +334,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write((uint)_level.StaticMeshes.Count);
         foreach (TRStaticMesh mesh in _level.StaticMeshes) { writer.Write(mesh.Serialize()); }
 
-        writer.Write(_level.NumObjectTextures);
+        writer.Write((uint)_level.ObjectTextures.Count);
         foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
         writer.Write(_level.NumSpriteTextures);
         foreach (TRSpriteTexture tex in _level.SpriteTextures) { writer.Write(tex.Serialize()); }

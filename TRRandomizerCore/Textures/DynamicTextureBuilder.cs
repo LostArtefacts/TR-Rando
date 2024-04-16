@@ -329,7 +329,6 @@ public class DynamicTextureBuilder
         packer.Pack(true);
 
         // Map the packed segments to object textures.
-        List<TRObjectTexture> levelObjectTextures = level.ObjectTextures.ToList();
         Queue<int> reusableIndices = new(level.GetInvalidObjectTextureIndices());
         Dictionary<int, int> reindex = new();
         foreach (TexturedTileSegment segment in duplicates)
@@ -345,12 +344,12 @@ public class DynamicTextureBuilder
                 if (reusableIndices.Count > 0)
                 {
                     newIndex = reusableIndices.Dequeue();
-                    levelObjectTextures[newIndex] = objTexture.Texture;
+                    level.ObjectTextures[newIndex] = objTexture.Texture;
                 }
-                else if (levelObjectTextures.Count < maximumObjects)
+                else if (level.ObjectTextures.Count < maximumObjects)
                 {
-                    levelObjectTextures.Add(objTexture.Texture);
-                    newIndex = levelObjectTextures.Count - 1;
+                    level.ObjectTextures.Add(objTexture.Texture);
+                    newIndex = level.ObjectTextures.Count - 1;
                 }
                 else
                 {
@@ -371,8 +370,6 @@ public class DynamicTextureBuilder
             f.Texture = (ushort)reindex[f.Texture];
         }
 
-        level.ObjectTextures = levelObjectTextures.ToArray();
-        level.NumObjectTextures = (uint)levelObjectTextures.Count;
         level.ResetUnusedTextures();
     }
 

@@ -139,20 +139,14 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2
         packer.RemoveSpriteSegments(unusedItems);
     }
 
-    protected override IEnumerable<TRObjectTexture> GetExistingObjectTextures()
+    protected override List<TRObjectTexture> GetExistingObjectTextures()
     {
-        return _level.ObjectTextures.ToList();
+        return _level.ObjectTextures;
     }
 
     protected override IEnumerable<int> GetInvalidObjectTextureIndices()
     {
         return _level.GetInvalidObjectTextureIndices();
-    }
-
-    protected override void WriteObjectTextures(IEnumerable<TRObjectTexture> objectTextures)
-    {
-        _level.ObjectTextures = objectTextures.ToArray();
-        _level.NumObjectTextures = (uint)_level.ObjectTextures.Length;
     }
 
     protected override void RemapMeshTextures(Dictionary<TR2ModelDefinition, Dictionary<int, int>> indexMap)

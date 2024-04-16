@@ -18,16 +18,7 @@ public class TR2Level : TRLevelBase
     public List<ushort> Frames { get; set; }
     public List<TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumObjectTextures { get; set; }
-
-    /// <summary>
-    /// NumObjectTextures * 20 bytes
-    /// </summary>
-    public TRObjectTexture[] ObjectTextures { get; set; }
+    public List<TRObjectTexture> ObjectTextures { get; set; }
 
     /// <summary>
     /// 4 bytes

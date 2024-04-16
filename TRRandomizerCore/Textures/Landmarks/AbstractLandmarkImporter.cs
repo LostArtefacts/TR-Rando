@@ -20,8 +20,7 @@ public abstract class AbstractLandmarkImporter<E, L>
     protected abstract int MaxTextures { get; }
 
     protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
-    protected abstract TRObjectTexture[] GetObjectTextures(L level);
-    protected abstract void SetObjectTextures(L level, IEnumerable<TRObjectTexture> textures);
+    protected abstract List<TRObjectTexture> GetObjectTextures(L level);
     protected abstract void SetRoomTexture(L level, int roomIndex, int rectangleIndex, ushort textureIndex);
     protected abstract short? GetRoomFromPortal(L level, PortalSector portalSector, bool isLevelMirrored);
 
@@ -31,7 +30,7 @@ public abstract class AbstractLandmarkImporter<E, L>
         mapping.CommitGraphics();
 
         // If we are already at the maximum number of textures, bail out.
-        List<TRObjectTexture> textures = GetObjectTextures(level).ToList();
+        List<TRObjectTexture> textures = GetObjectTextures(level);
         if (textures.Count == MaxTextures)
         {
             return false;
@@ -163,8 +162,6 @@ public abstract class AbstractLandmarkImporter<E, L>
                     }
                 }
             }
-
-            SetObjectTextures(level, textures);
 
             return true;
         }

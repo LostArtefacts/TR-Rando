@@ -46,10 +46,7 @@ public class TR4LevelDataChunk : ISerializableCompact
     public byte AnimatedTexturesUVCount { get; set; }
 
     public byte[] TEXMarker { get; set; }
-
-    public uint NumObjectTextures { get; set; }
-
-    public TR4ObjectTexture[] ObjectTextures { get; set; }
+    public List<TR4ObjectTexture> ObjectTextures { get; set; }
     public List<TR4Entity> Entities { get; set; }
     public List<TR4AIEntity> AIEntities { get; set; }
 
@@ -204,8 +201,7 @@ public class TR4LevelDataChunk : ISerializableCompact
 
             writer.Write(TEXMarker);
 
-            writer.Write(NumObjectTextures);
-
+            writer.Write((uint)ObjectTextures.Count);
             foreach (TR4ObjectTexture otex in ObjectTextures)
             {
                 writer.Write(otex.Serialize());

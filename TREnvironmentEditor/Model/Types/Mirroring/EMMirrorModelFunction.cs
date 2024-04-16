@@ -106,7 +106,7 @@ public class EMMirrorModelFunction : BaseEMFunction
         return textureReferences;
     }
 
-    private static void MirrorObjectTextures(ISet<ushort> textureReferences, TRObjectTexture[] objectTextures)
+    private static void MirrorObjectTextures(ISet<ushort> textureReferences, List<TRObjectTexture> objectTextures)
     {
         foreach (ushort textureRef in textureReferences)
         {

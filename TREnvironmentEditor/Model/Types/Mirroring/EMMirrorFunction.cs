@@ -1241,7 +1241,7 @@ public class EMMirrorFunction : BaseEMFunction
         MirrorObjectTextures(textureReferences, level.ObjectTextures);
     }
 
-    private static void MirrorObjectTextures(ISet<ushort> textureReferences, TRObjectTexture[] objectTextures)
+    private static void MirrorObjectTextures(ISet<ushort> textureReferences, List<TRObjectTexture> objectTextures)
     {
         // Flip the object texture vertices in the same way as done for faces
         foreach (ushort textureRef in textureReferences)

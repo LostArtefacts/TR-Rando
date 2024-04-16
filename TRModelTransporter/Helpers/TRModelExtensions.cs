@@ -109,10 +109,10 @@ public static class TRModelExtensions
         return GetInvalidObjectTextureIndices(level.ObjectTextures);
     }
 
-    private static List<int> GetInvalidObjectTextureIndices(TRObjectTexture[] objectTextures)
+    private static List<int> GetInvalidObjectTextureIndices(List<TRObjectTexture> objectTextures)
     {
         List<int> reusableIndices = new();
-        for (int i = 0; i < objectTextures.Length; i++)
+        for (int i = 0; i < objectTextures.Count; i++)
         {
             if (!objectTextures[i].IsValid())
             {
@@ -179,10 +179,10 @@ public static class TRModelExtensions
             }
         }
 
-        if (textures.Count > level.NumObjectTextures)
+        if (textures.Count > level.ObjectTextures.Count)
         {
-            level.ObjectTextures = textures.ToArray();
-            level.NumObjectTextures = (uint)textures.Count;
+            level.ObjectTextures.Clear();
+            level.ObjectTextures.AddRange(textures);
         }
     }
 
@@ -237,10 +237,10 @@ public static class TRModelExtensions
             }
         }
 
-        if (textures.Count > level.NumObjectTextures)
+        if (textures.Count > level.ObjectTextures.Count)
         {
-            level.ObjectTextures = textures.ToArray();
-            level.NumObjectTextures = (uint)textures.Count;
+            level.ObjectTextures.Clear();
+            level.ObjectTextures.AddRange(textures);
         }
     }
 

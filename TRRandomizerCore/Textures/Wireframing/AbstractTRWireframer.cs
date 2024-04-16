@@ -102,7 +102,7 @@ public abstract class AbstractTRWireframer<E, L>
         packer.Pack(true);
 
         Queue<int> reusableTextures = new(GetInvalidObjectTextureIndices(level));
-        List<TRObjectTexture> levelObjectTextures = GetObjectTextures(level).ToList();
+        List<TRObjectTexture> levelObjectTextures = GetObjectTextures(level);
 
         ushort roomTextureIndex = (ushort)reusableTextures.Dequeue();
         levelObjectTextures[roomTextureIndex] = roomTexture.Texture;
@@ -134,8 +134,6 @@ public abstract class AbstractTRWireframer<E, L>
             }
         }
 
-        SetObjectTextures(level, levelObjectTextures);
-
         ResetRoomTextures(roomTextureIndex, ladderTextureIndex, triggerTextureIndex, deathTextureIndex, specialTextureRemap);
         ResetMeshTextures(modelRemap, specialTextureRemap);
         TidyModels(level);
@@ -145,8 +143,8 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void RetainCustomTextures(L level)
     {
-        TRObjectTexture[] textures = GetObjectTextures(level);
-        for (ushort i = 0; i < textures.Length; i++)
+        List<TRObjectTexture> textures = GetObjectTextures(level);
+        for (ushort i = 0; i < textures.Count; i++)
         {
             if (textures[i].Attribute == (ushort)TRBlendingMode.Unused01)
             {
@@ -355,7 +353,7 @@ public abstract class AbstractTRWireframer<E, L>
     {
         // Some animated textures are shared in segments e.g. 4 32x32 segments within a 64x64 container,
         // so in instances where we only want to wireframe a section of these, we use manual clipping.
-        TRObjectTexture[] textures = GetObjectTextures(level);
+        List<TRObjectTexture> textures = GetObjectTextures(level);
         foreach (WireframeClip clip in _data.ManualClips)
         {
             BitmapGraphics frame = CreateFrame(clip.Clip.Width, clip.Clip.Height, pen, mode, true);
@@ -722,8 +720,7 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(L level);
     protected abstract void ResetUnusedTextures(L level);
     protected abstract IEnumerable<int> GetInvalidObjectTextureIndices(L level);
-    protected abstract TRObjectTexture[] GetObjectTextures(L level);
-    protected abstract void SetObjectTextures(L level, IEnumerable<TRObjectTexture> textures);
+    protected abstract List<TRObjectTexture> GetObjectTextures(L level);
     protected abstract int GetBlackPaletteIndex(L level);
     protected abstract int ImportColour(L level, Color c);
     protected abstract List<TRModel> GetModels(L level);
