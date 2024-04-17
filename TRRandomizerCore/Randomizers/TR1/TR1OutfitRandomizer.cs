@@ -23,7 +23,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 {
     private static readonly string _gymOutfitHash = "7866a39d5dd37c89a4f20df3b074788e";
     private static readonly Version _minBraidCutsceneVersion = new(2, 13, 0);
-    private static readonly short[] _barefootSfxIDs = new short[] { 0, 4 };
+    private static readonly TR1SFX[] _barefootSfxIDs = new TR1SFX[] { TR1SFX.LaraFeet, TR1SFX.LaraLand };
     private static readonly double _mauledLaraChance = (double)1 / 3;
     private static readonly double _partialGymChance = (double)1 / 3;
     private static readonly Color _midasGoldColour = Color.FromArgb(252, 236, 136);
@@ -35,7 +35,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
     private List<TR1ScriptedLevel> _gymLevels, _partialGymLevels;
     private List<TR1ScriptedLevel> _mauledLevels;
 
-    private Dictionary<short, List<byte[]>> _barefootSfx;
+    private Dictionary<TR1SFX, TR1SoundEffect> _barefootSfx;
 
     public override void Randomize(int seed)
     {
@@ -118,11 +118,10 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             // Cache Lara's barefoot SFX from the original Gym.
             TR1Level gym = new TR1LevelControl().Read(Path.Combine(BackupPath, TR1LevelNames.ASSAULT));
             _barefootSfx = new();
-            foreach (short soundID in _barefootSfxIDs)
+            foreach (TR1SFX sfxID in _barefootSfxIDs)
             {
-                TRSoundDetails footstepDetails = gym.SoundDetails[gym.SoundMap[soundID]];
-                TR1PackedSound sound = SoundUtilities.BuildPackedSound(gym.SoundMap, gym.SoundDetails, gym.SampleIndices, gym.Samples, new short[] { soundID });
-                _barefootSfx[soundID] = sound.Samples.Values.ToList();
+                _barefootSfx[sfxID] = gym.SoundEffects[sfxID];
+                _barefootSfx[sfxID].Volume += 3072; // This actually reduces the volume
             }
         }
 
@@ -575,27 +574,9 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
 
             // Replace Lara's footstep SFX. This is done independently of Audio rando in case that is not enabled.
-            // The original volume from Gym is a bit much, so we just increase each slightly.
-            foreach (short soundID in _outer._barefootSfx.Keys)
+            foreach (TR1SFX sfxID in _outer._barefootSfx.Keys)
             {
-                if (level.Data.SoundMap[soundID] == -1)
-                    continue;
-
-                TRSoundDetails footstepDetails = level.Data.SoundDetails[level.Data.SoundMap[soundID]];
-                footstepDetails.Volume += 3072;
-
-                if (footstepDetails.NumSounds == _outer._barefootSfx[soundID].Count)
-                {
-                    for (int i = 0; i < footstepDetails.NumSounds; i++)
-                    {
-                        uint samplePointer = level.Data.SampleIndices[footstepDetails.Sample + i];
-                        byte[] replacementSfx = _outer._barefootSfx[soundID][i];
-                        for (int j = 0; j < replacementSfx.Length; j++)
-                        {
-                            level.Data.Samples[(int)samplePointer + j] = replacementSfx[j];
-                        }
-                    }
-                }
+                level.Data.SoundEffects[sfxID] = _outer._barefootSfx[sfxID];
             }
 
             // If there is a Midas hand present, convert the LaraMiscAnim gym textures to gold. For meshes 1, 4, and 14

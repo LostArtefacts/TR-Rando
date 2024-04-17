@@ -1,6 +1,5 @@
 ﻿using TRLevelControl.Model;
 using TRModelTransporter.Model.Animations;
-using TRModelTransporter.Model.Sound;
 
 namespace TRModelTransporter.Model.Definitions;
 
@@ -11,10 +10,10 @@ public class TR1ModelDefinition : AbstractTRModelDefinition<TR1Type>
     public ushort[] AnimationFrames { get; set; }
     public TRCinematicFrame[] CinematicFrames { get; set; }
     public Dictionary<int, TRColour> Colours { get; set; }
-    public TR1PackedSound HardcodedSound { get; set; }
     public List<TRMesh> Meshes { get; set; }
     public TRMeshTreeNode[] MeshTrees { get; set; }
     public TRModel Model { get; set; }
+    public SortedDictionary<TR1SFX, TR1SoundEffect> SoundEffects { get; set; }
 
     public override bool Equals(object obj)
     {

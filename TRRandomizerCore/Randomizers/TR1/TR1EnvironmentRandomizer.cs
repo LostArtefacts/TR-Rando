@@ -115,13 +115,12 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
 
     private void ApplyMappingToLevel(TR1CombinedLevel level, EMEditorMapping mapping)
     {
-        if ((level.Is(TR1LevelNames.CAVES) || level.Is(TR1LevelNames.FOLLY)) && level.Data.SoundMap[65] == -1)
+        if ((level.Is(TR1LevelNames.CAVES) || level.Is(TR1LevelNames.FOLLY)) && !level.Data.SoundEffects.ContainsKey(TR1SFX.PendulumBlades))
         {
             // Caves and Folly have the swinging blade model (unused) but its SFX are missing - import here in case
             // any mods want to make use of the model.
             TR1Level vilcabamba = new TR1LevelControl().Read(Path.Combine(BackupPath, TR1LevelNames.VILCABAMBA));
-            SoundUtilities.ImportLevelSound(level.Data, vilcabamba, new short[] { 65 });
-            SoundUtilities.ResortSoundIndices(level.Data);
+            level.Data.SoundEffects[TR1SFX.PendulumBlades] = vilcabamba.SoundEffects[TR1SFX.PendulumBlades];
         }
 
         EnvironmentPicker picker = new(Settings.HardEnvironmentMode)

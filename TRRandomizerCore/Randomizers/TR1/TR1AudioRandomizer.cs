@@ -7,7 +7,6 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Handlers;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.SFX;
@@ -17,8 +16,8 @@ namespace TRRandomizerCore.Randomizers;
 public class TR1AudioRandomizer : BaseTR1Randomizer
 {
     private static readonly List<int> _speechTracks = Enumerable.Range(51, 6).ToList();
-    private static readonly short _sfxFirstSpeechID = 199;
-    private static readonly short _sfxUziID = 43;
+    private static readonly TR1SFX _sfxFirstSpeechID = TR1SFX.BaldySpeech;
+    private static readonly TR1SFX _sfxUziID = TR1SFX.LaraUziFire;
 
     private AudioRandomizer _audioRandomizer;
 
@@ -86,7 +85,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             }
 
             TR1Level level = levels[definition.SourceLevel];
-            definition.SoundData = SoundUtilities.BuildPackedSound(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, new short[] { definition.InternalIndex });
+            definition.SoundEffect = level.SoundEffects[definition.InternalIndex];
         }
 
         // PS uzis need some manual setup. Make a copy of the standard uzi definition
@@ -94,11 +93,9 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         TR1Level caves = levels[TR1LevelNames.CAVES];
         _psUziDefinition = new TR1SFXDefinition
         {
-            InternalIndex = -1,
-            SoundData = SoundUtilities.BuildPackedSound(caves.SoundMap, caves.SoundDetails, caves.SampleIndices, caves.Samples, new short[] { _sfxUziID })
+            SoundEffect = caves.SoundEffects[_sfxUziID]
         };
-        uint sample = _psUziDefinition.SoundData.Samples.Keys.First();
-        _psUziDefinition.SoundData.Samples[sample] = File.ReadAllBytes(GetResourcePath(@"TR1\Audio\ps_uzis.wav"));
+        _psUziDefinition.SoundEffect.Samples = new() { File.ReadAllBytes(GetResourcePath(@"TR1\Audio\ps_uzis.wav")) };
     }
 
     private void ChooseUncontrolledLevels()
@@ -153,41 +150,36 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
 
         if (IsUncontrolledLevel(level.Script))
         {
-            List<uint> newSampleIndices = new();
-            List<byte> newSamples = new();
-            ISet<string> usedSamples = new HashSet<string>();
+            HashSet<string> usedSamples = new();
 
             // Replace each sample but be sure to avoid duplicates
-            for (int i = 0; i < level.Data.SampleIndices.Count; i++)
+            foreach (TR1SoundEffect effect in level.Data.SoundEffects.Values)
             {
-                byte[] sample;
-                string id;
-                do
+                for (int i = 0; i < effect.Samples.Count; i++)
                 {
-                    TR1SFXDefinition definition = _soundEffects[_generator.Next(0, _soundEffects.Count)];
-                    List<byte[]> samples = definition.SoundData.Samples.Values.ToList();
-                    int sampleIndex = _generator.Next(0, samples.Count);
-                    sample = samples[sampleIndex];
+                    byte[] sample;
+                    string id;
+                    do
+                    {
+                        TR1SFXDefinition definition = _soundEffects[_generator.Next(0, _soundEffects.Count)];
+                        int sampleIndex = _generator.Next(0, definition.SoundEffect.Samples.Count);
+                        sample = definition.SoundEffect.Samples[sampleIndex];
 
-                    id = definition.InternalIndex + "_" + sampleIndex;
+                        id = definition.InternalIndex + "_" + sampleIndex;
+                    }
+                    while (!usedSamples.Add(id));
+
+                    effect.Samples[i] = sample;
                 }
-                while (!usedSamples.Add(id));
-
-                newSampleIndices.Add((uint)newSamples.Count);
-                newSamples.AddRange(sample);
             }
-
-            level.Data.SampleIndices.Clear();
-            level.Data.SampleIndices.AddRange(newSampleIndices);
-            level.Data.Samples.Clear();
-            level.Data.Samples.AddRange(newSamples);
         }
         else
         {
-            for (int internalIndex = 0; internalIndex < level.Data.SoundMap.Length; internalIndex++)
+            foreach (TR1SFX internalIndex in Enum.GetValues<TR1SFX>())
             {
                 TR1SFXDefinition definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
-                if (level.Data.SoundMap[internalIndex] == -1 || definition == null || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
+                if (!level.Data.SoundEffects.ContainsKey(internalIndex) || definition == null 
+                    || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
                 {
                     continue;
                 }
@@ -216,7 +208,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
                 if (internalIndex == _sfxUziID && _generator.NextDouble() < 0.4)
                 {
                     // 2/5 chance of PS uzis replacing original uzis, but they won't be used for anything else
-                    otherDefinitions = new List<TR1SFXDefinition> { _psUziDefinition };
+                    otherDefinitions = new() { _psUziDefinition };
                 }
                 else
                 {
@@ -232,56 +224,16 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
                     TR1SFXDefinition nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
                     if (nextDefinition != definition)
                     {
-                        short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition, definition.PrimaryCategory);
-                        if (soundDetailsIndex != -1)
+                        level.Data.SoundEffects[internalIndex] = nextDefinition.SoundEffect.Clone();
+                        if (definition.PrimaryCategory == TRSFXGeneralCategory.StandardWeaponFiring
+                            || definition.PrimaryCategory == TRSFXGeneralCategory.FastWeaponFiring)
                         {
-                            // Only change it if the import succeeded
-                            level.Data.SoundMap[internalIndex] = soundDetailsIndex;
+                            level.Data.SoundEffects[internalIndex].Mode = TR1SFXMode.Restart;
                         }
                     }
                 }
             }
         }
-
-        // Sample indices have to be in ascending order. Sort the level data only once.
-        SoundUtilities.ResortSoundIndices(level.Data);
-    }
-
-    private static short ImportSoundEffect(TR1Level level, TR1SFXDefinition definition, TRSFXGeneralCategory category)
-    {
-        if (definition.SoundData.SampleIndices.Count == 0)
-        {
-            return -1;
-        }
-
-        TRSoundDetails defDetails = definition.SoundData.SoundDetails.Values.First();
-        TRSoundDetails newDetails;
-
-        // This may result in duplicate WAV data if a sound definition is imported more than
-        // once, but ResortSoundIndices will tidy the data such that only the required WAV
-        // file is retained in the end.
-        newDetails = new TRSoundDetails
-        {
-            Chance = defDetails.Chance,
-            Characteristics = defDetails.Characteristics,
-            Sample = (ushort)level.SampleIndices.Count,
-            Volume = defDetails.Volume
-        };
-
-        foreach (byte[] sample in definition.SoundData.Samples.Values)
-        {
-            level.SampleIndices.Add((uint)level.Samples.Count);
-            level.Samples.AddRange(sample);
-        }
-
-        if (category == TRSFXGeneralCategory.StandardWeaponFiring
-            || category == TRSFXGeneralCategory.FastWeaponFiring)
-        {
-            newDetails.LoopingMode = 1; // OneShotRewound
-        }
-
-        level.SoundDetails.Add(newDetails);
-        return (short)(level.SoundDetails.Count - 1);
     }
 
     private void ImportSpeechSFX(TR1CombinedLevel level)
@@ -311,22 +263,16 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
 
         foreach (ushort trackID in usedSpeechTracks)
         {
-            int sfxID = _sfxFirstSpeechID + trackID - _speechTracks.First();
+            TR1SFX sfxID = (TR1SFX)((int)_sfxFirstSpeechID + trackID - _speechTracks.First());
             TR1SFXDefinition definition;
-            if (level.Data.SoundMap[sfxID] != -1 
+            if (level.Data.SoundEffects.ContainsKey(sfxID)
                 || (definition = _soundEffects.Find(sfx => sfx.InternalIndex == sfxID)) == null)
             {
                 continue;
             }
 
-            short detailsIndex = ImportSoundEffect(level.Data, definition, definition.PrimaryCategory);
-            if (detailsIndex != -1)
-            {
-                level.Data.SoundMap[sfxID] = detailsIndex;
-            }
+            level.Data.SoundEffects[sfxID] = definition.SoundEffect;
         }
-
-        SoundUtilities.ResortSoundIndices(level.Data);
     }
 
     private void RandomizeWibble(TR1CombinedLevel level)
@@ -335,9 +281,9 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         {
             // The engine does the actual randomization, we just tell it that every
             // sound effect should be included.
-            foreach (TRSoundDetails details in level.Data.SoundDetails)
+            foreach (TR1SoundEffect effect in level.Data.SoundEffects.Values)
             {
-                details.Wibble = true;
+                effect.RandomizePitch = true;
             }
 
             (ScriptEditor as TR1ScriptEditor).EnablePitchedSounds = true;

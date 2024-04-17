@@ -1268,10 +1268,10 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             TR1ModelExporter.AmendPierreDeath(level.Data);
 
             // Non one-shot-Pierre levels won't have the death sound by default, so borrow it from ToT.
-            if (level.Data.SoundMap[159] == -1)
+            if (!level.Data.SoundEffects.ContainsKey(TR1SFX.PierreDeath))
             {
                 TR1Level tihocan = new TR1LevelControl().Read(Path.Combine(BackupPath, TR1LevelNames.TIHOCAN));
-                SoundUtilities.ImportLevelSound(level.Data, tihocan, new short[] { 159 });
+                level.Data.SoundEffects[TR1SFX.PierreDeath] = tihocan.SoundEffects[TR1SFX.PierreDeath];
             }
         }
 

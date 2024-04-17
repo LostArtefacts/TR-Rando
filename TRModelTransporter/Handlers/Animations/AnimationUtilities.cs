@@ -149,9 +149,22 @@ public static class AnimationUtilities
         return cmds;
     }
 
-    public static void PackAnimSounds(TR1Level level, TR1PackedAnimation packedAnimation)
+    public static void PackAnimSounds(TR1Level level, TR1ModelDefinition definition, TR1PackedAnimation packedAnimation)
     {
-        PackAnimSounds(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, packedAnimation);
+        definition.SoundEffects ??= new();
+        foreach (TR1PackedAnimationCommand cmd in packedAnimation.Commands.Values)
+        {
+            if (cmd.Command != TRAnimCommandTypes.PlaySound)
+            {
+                continue;
+            }
+
+            TR1SFX sfxID = (TR1SFX)(cmd.Params[1] & 0x3FFF);
+            if (level.SoundEffects.ContainsKey(sfxID))
+            {
+                definition.SoundEffects[sfxID] = level.SoundEffects[sfxID];
+            }
+        }
     }
 
     public static void PackAnimSounds(TR2Level level, TR2PackedAnimation packedAnimation)
@@ -162,37 +175,6 @@ public static class AnimationUtilities
     public static void PackAnimSounds(TR3Level level, TR3PackedAnimation packedAnimation)
     {
         PackAnimSounds(level.SoundMap, level.SoundDetails, level.SampleIndices, packedAnimation);
-    }
-
-    // Covers TR1
-    private static void PackAnimSounds(short[] soundMap, List<TRSoundDetails> soundDetails, List<uint> sampleIndices, List<byte> wavSamples, TR1PackedAnimation packedAnimation)
-    {
-        foreach (TR1PackedAnimationCommand cmd in packedAnimation.Commands.Values)
-        {
-            if (cmd.Command == TRAnimCommandTypes.PlaySound)
-            {
-                int soundMapIndex = cmd.Params[1] & 0x3fff;
-                short soundDetailsIndex = soundMap[soundMapIndex];
-                packedAnimation.Sound.SoundMapIndices[soundMapIndex] = soundDetailsIndex;
-                if (soundDetailsIndex != -1)
-                {
-                    TRSoundDetails details = soundDetails[soundDetailsIndex];
-                    packedAnimation.Sound.SoundDetails[soundDetailsIndex] = details;
-
-                    uint[] samples = new uint[details.NumSounds];
-                    for (int i = 0; i < details.NumSounds; i++)
-                    {
-                        ushort sampleIndex = (ushort)(details.Sample + i);
-                        samples[i] = sampleIndices[sampleIndex];
-
-                        uint nextIndex = sampleIndex == sampleIndices.Count - 1 ? (uint)sampleIndices.Count : sampleIndices[sampleIndex + 1];
-                        packedAnimation.Sound.Samples[samples[i]] = GetSample(samples[i], nextIndex, wavSamples);
-                    }
-
-                    packedAnimation.Sound.SampleIndices[details.Sample] = samples;
-                }
-            }
-        }
     }
 
     public static byte[] GetSample(uint offset, uint endOffset, List<byte> wavSamples)
@@ -436,13 +418,6 @@ public static class AnimationUtilities
                 levelAnimCommands.Add(new TRAnimCommand { Value = param });
             }
         }
-    }
-
-    public static void UnpackAnimSounds(TR1Level level, TR1PackedAnimation packedAnimation)
-    {
-        SoundUnpacker soundUnpacker = new();
-        soundUnpacker.Unpack(packedAnimation.Sound, level, false);
-        RemapSoundIndices(packedAnimation.Commands.Values, soundUnpacker.SoundIndexMap);
     }
 
     public static void UnpackAnimSounds(TR2Level level, TR2PackedAnimation packedAnimation)

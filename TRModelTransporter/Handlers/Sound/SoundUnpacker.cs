@@ -5,33 +5,17 @@ namespace TRModelTransporter.Handlers;
 
 public class SoundUnpacker
 {
-    private static readonly int _maxTR1Sounds = 256;
     private static readonly int _maxTR2Sounds = 370;
     private static readonly int _maxTR3Sounds = 450; // TR3+
 
     private List<uint> _sampleIndices;
     private List<short> _soundMap;
-    private List<byte> _samples;
 
     private Dictionary<uint, ushort> _sampleMap;
     private Dictionary<int, int> _soundDetailsMap;
     private Dictionary<int, int> _soundIndexMap;
 
     public IReadOnlyDictionary<int, int> SoundIndexMap => _soundIndexMap;
-
-    public void Unpack(TR1PackedSound sound, TR1Level level, bool retainInternalIndices = false)
-    {
-        Dictionary<uint, uint> sampleDataMap = ImportSamples(level, sound.Samples);
-        GenerateSampleMap(level.SampleIndices, sound.SampleIndices, sampleDataMap);
-        GenerateSoundDetailsMap(level.SoundDetails, sound.SoundDetails);
-        GenerateSoundIndexMap(level, retainInternalIndices, sound.SoundMapIndices);
-
-        level.Samples.Clear();
-        level.Samples.AddRange(_samples);
-
-        level.SampleIndices.Clear();
-        level.SampleIndices.AddRange(_sampleIndices);
-    }
 
     public void Unpack(TR2PackedSound sound, TR2Level level, bool retainInternalIndices = false)
     {
@@ -51,22 +35,6 @@ public class SoundUnpacker
 
         level.SampleIndices.Clear();
         level.SampleIndices.AddRange(_sampleIndices);
-    }
-
-    private Dictionary<uint, uint> ImportSamples(TR1Level level, Dictionary<uint, byte[]> sampleData)
-    {
-        // For TR1, sample WAVs are stored in the level files so we need to import each one provided
-        // they don't already exist. Remap the sound keys to the new offset into Samples[].
-        Dictionary<uint, uint> sampleMap = new();
-        _samples = level.Samples.ToList();
-
-        foreach (uint sampleIndex in sampleData.Keys)
-        {
-            sampleMap[sampleIndex] = (uint)_samples.Count;
-            _samples.AddRange(sampleData[sampleIndex]);
-        }
-
-        return sampleMap;
     }
 
     private void GenerateSampleMap(List<uint> sampleIndices, Dictionary<ushort, uint[]> packedIndices, Dictionary<uint, uint> sampleKeyMap = null)
@@ -182,50 +150,6 @@ public class SoundUnpacker
                 d.Sample == details.Sample &&
                 d.Volume == details.Volume
         );
-    }
-
-    private void GenerateSoundIndexMap(TR1Level level, bool retainInternalIndices, Dictionary<int, short> packedSoundMapIndices)
-    {
-        _soundIndexMap = new Dictionary<int, int>();
-        if (retainInternalIndices)
-        {
-            // This covers instances where internal sound indices are hard-coded in the game so
-            // we have to retain those indices, but simply point them to the new SoundDetails
-            foreach (int soundMapIndex in packedSoundMapIndices.Keys)
-            {
-                level.SoundMap[soundMapIndex] = (short)_soundDetailsMap[packedSoundMapIndices[soundMapIndex]];
-                _soundIndexMap[soundMapIndex] = level.SoundMap[soundMapIndex];
-            }
-        }
-        else
-        {
-            _soundMap = level.SoundMap.ToList();
-            foreach (int soundMapIndex in packedSoundMapIndices.Keys)
-            {
-                // Sanity check
-                if (soundMapIndex < 0 || soundMapIndex > _maxTR1Sounds - 1)
-                {
-                    continue;
-                }
-
-                short currentSoundDetailsIndex = packedSoundMapIndices[soundMapIndex];
-                // For null indices, just point to the first existing null in the level
-                if (currentSoundDetailsIndex == -1)
-                {
-                    _soundIndexMap[soundMapIndex] = _soundMap.FindIndex(i => i == -1);
-                }
-                else
-                {
-                    // Only insert the new SoundDetails index provided there isn't something there already
-                    if (_soundMap[soundMapIndex] == -1)
-                    {
-                        short newSoundDetailsIndex = (short)_soundDetailsMap[currentSoundDetailsIndex];
-                        level.SoundMap[soundMapIndex] = _soundMap[soundMapIndex] = newSoundDetailsIndex;
-                    }
-                    _soundIndexMap[soundMapIndex] = soundMapIndex;
-                }
-            }
-        }
     }
 
     private void GenerateSoundIndexMap(TR2Level level, bool retainInternalIndices, Dictionary<int, short> packedSoundMapIndices)

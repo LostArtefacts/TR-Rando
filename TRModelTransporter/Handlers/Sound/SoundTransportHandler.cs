@@ -7,7 +7,20 @@ public class SoundTransportHandler
 {
     public static void Export(TR1Level level, TR1ModelDefinition definition, short[] hardcodedSounds)
     {
-        definition.HardcodedSound = SoundUtilities.BuildPackedSound(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, hardcodedSounds);
+        if (hardcodedSounds == null || hardcodedSounds.Length == 0)
+        {
+            return;
+        }
+
+        definition.SoundEffects ??= new();
+        foreach (short soundID in hardcodedSounds)
+        {
+            TR1SFX sfxID = (TR1SFX)soundID;
+            if (level.SoundEffects.ContainsKey(sfxID))
+            {
+                definition.SoundEffects[sfxID] = level.SoundEffects[sfxID];
+            }
+        }
     }
 
     public static void Export(TR2Level level, TR2ModelDefinition definition, short[] hardcodedSounds)
@@ -22,12 +35,16 @@ public class SoundTransportHandler
 
     public static void Import(TR1Level level, IEnumerable<TR1ModelDefinition> definitions)
     {
-        SoundUnpacker unpacker = new();
         foreach (TR1ModelDefinition definition in definitions)
         {
-            if (definition.HardcodedSound != null)
+            if (definition.SoundEffects == null)
             {
-                unpacker.Unpack(definition.HardcodedSound, level, true);
+                continue;
+            }
+
+            foreach (TR1SFX sfxID in definition.SoundEffects.Keys)
+            {
+                level.SoundEffects[sfxID] = definition.SoundEffects[sfxID];
             }
         }
     }

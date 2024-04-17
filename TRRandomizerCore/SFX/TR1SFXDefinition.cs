@@ -1,19 +1,19 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
-using TRModelTransporter.Model.Sound;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.SFX;
 
 public class TR1SFXDefinition
 {
-    public short InternalIndex { get; set; }
+    public TR1SFX InternalIndex { get; set; }
     public string Description { get; set; }
     public TRSFXCreatureCategory Creature { get; set; }
     public List<TRSFXGeneralCategory> Categories { get; set; }
     public string SourceLevel { get; set; }
 
     [JsonIgnore]
-    public TR1PackedSound SoundData { get; set; }
+    public TR1SoundEffect SoundEffect { get; set; }
 
     [JsonIgnore]
     public TRSFXGeneralCategory PrimaryCategory
