@@ -41,17 +41,4 @@ internal static class TR3FileReadUtilities
             MeshID = reader.ReadUInt16()
         };
     }
-
-    public static TR3SoundDetails ReadSoundDetails(BinaryReader reader)
-    {
-        return new TR3SoundDetails()
-        {
-            Sample = reader.ReadUInt16(),
-            Volume = reader.ReadByte(),
-            Range = reader.ReadByte(),
-            Chance = reader.ReadByte(),
-            Pitch = reader.ReadByte(),
-            Characteristics = reader.ReadInt16()
-        };
-    }
 }
