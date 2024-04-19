@@ -8,6 +8,8 @@ public class TR45Observer : ObserverBase
     private readonly Dictionary<TRChunkType, ZipWrapper> _inflatedReads = new();
     private readonly Dictionary<TRChunkType, ZipWrapper> _inflatedWrites = new();
 
+    private readonly Dictionary<uint, List<byte>> _meshPadding = new();
+
     public override void TestOutput(byte[] input, byte[] output)
     {
         CollectionAssert.AreEquivalent(_inflatedReads.Keys, _inflatedWrites.Keys);
@@ -36,6 +38,16 @@ public class TR45Observer : ObserverBase
             StreamEnd = endPosition,
             Data = data
         };
+    }
+
+    public override void OnMeshPaddingRead(uint meshPointer, List<byte> values)
+    {
+        _meshPadding[meshPointer] = values;
+    }
+
+    public override List<byte> GetMeshPadding(uint meshPointer)
+    {
+        return _meshPadding.ContainsKey(meshPointer) ? _meshPadding[meshPointer] : null;
     }
 
     class ZipWrapper

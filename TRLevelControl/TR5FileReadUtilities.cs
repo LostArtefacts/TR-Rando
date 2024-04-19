@@ -212,27 +212,6 @@ internal static class TR5FileReadUtilities
         }
     }
 
-    public static void PopulateMeshes(BinaryReader reader, TR5Level lvl)
-    {
-        uint numMeshData = reader.ReadUInt32();
-        ushort[] rawMeshData = new ushort[numMeshData];
-
-        for (int i = 0; i < numMeshData; i++)
-        {
-            rawMeshData[i] = reader.ReadUInt16();
-        }
-
-        uint numMeshPointers = reader.ReadUInt32();
-        lvl.MeshPointers = new();
-
-        for (int i = 0; i < numMeshPointers; i++)
-        {
-            lvl.MeshPointers.Add(reader.ReadUInt32());
-        }
-
-        lvl.Meshes = TR4FileReadUtilities.ConstructMeshData(lvl.MeshPointers, rawMeshData);
-    }
-
     public static void PopulateAnimations(BinaryReader reader, TR5Level lvl)
     {
         //Animations

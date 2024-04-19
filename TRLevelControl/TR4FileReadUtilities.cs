@@ -95,27 +95,6 @@ internal static class TR4FileReadUtilities
         }
     }
 
-    public static void PopulateMeshes(BinaryReader reader, TR4Level lvl)
-    {
-        uint numMeshData = reader.ReadUInt32();
-        ushort[] rawMeshData = new ushort[numMeshData];
-
-        for (int i = 0; i < numMeshData; i++)
-        {
-            rawMeshData[i] = reader.ReadUInt16();
-        }
-
-        uint numMeshPointers = reader.ReadUInt32();
-        lvl.MeshPointers = new();
-
-        for (int i = 0; i < numMeshPointers; i++)
-        {
-            lvl.MeshPointers.Add(reader.ReadUInt32());
-        }
-
-        lvl.Meshes = ConstructMeshData(lvl.MeshPointers, rawMeshData);
-    }
-
     public static void PopulateAnimations(BinaryReader reader, TR4Level lvl)
     {
         //Animations
@@ -476,92 +455,6 @@ internal static class TR4FileReadUtilities
             Dy = reader.ReadSingle(),
             Dz = reader.ReadSingle()
         };
-    }
-
-    public static List<TR4Mesh> ConstructMeshData(List<uint> meshPointers, ushort[] rawMeshData)
-    {
-        byte[] target = new byte[rawMeshData.Length * 2];
-        Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
-
-        // The mesh pointer list can contain duplicates so we must make
-        // sure to iterate over distinct values only
-        meshPointers = new(meshPointers.Distinct());
-
-        List<TR4Mesh> meshes = new();
-
-        using (MemoryStream ms = new(target))
-        using (BinaryReader br = new(ms))
-        {
-            for (int i = 0; i < meshPointers.Count; i++)
-            {
-                TR4Mesh mesh = new();
-                meshes.Add(mesh);
-
-                uint meshPointer = meshPointers[i];
-                br.BaseStream.Position = meshPointer;
-
-                //Pointer
-                mesh.Pointer = meshPointer;
-
-                //Centre
-                mesh.Centre = TR2FileReadUtilities.ReadVertex(br);
-
-                //CollRadius
-                mesh.CollRadius = br.ReadInt32();
-
-                //Vertices
-                mesh.NumVertices = br.ReadInt16();
-                mesh.Vertices = new TRVertex[mesh.NumVertices];
-                for (int j = 0; j < mesh.NumVertices; j++)
-                {
-                    mesh.Vertices[j] = TR2FileReadUtilities.ReadVertex(br);
-                }
-
-                //Lights or Normals
-                mesh.NumNormals = br.ReadInt16();
-                if (mesh.NumNormals > 0)
-                {
-                    mesh.Normals = new TRVertex[mesh.NumNormals];
-                    for (int j = 0; j < mesh.NumNormals; j++)
-                    {
-                        mesh.Normals[j] = TR2FileReadUtilities.ReadVertex(br);
-                    }
-                }
-                else
-                {
-                    mesh.Lights = new short[Math.Abs(mesh.NumNormals)];
-                    for (int j = 0; j < mesh.Lights.Length; j++)
-                    {
-                        mesh.Lights[j] = br.ReadInt16();
-                    }
-                }
-
-                //Textured Rectangles
-                mesh.NumTexturedRectangles = br.ReadInt16();
-                mesh.TexturedRectangles = new TR4MeshFace4[mesh.NumTexturedRectangles];
-                for (int j = 0; j < mesh.NumTexturedRectangles; j++)
-                {
-                    mesh.TexturedRectangles[j] = TR4FileReadUtilities.ReadTR4MeshFace4(br);
-                }
-
-                //Textured Triangles
-                mesh.NumTexturedTriangles = br.ReadInt16();
-                mesh.TexturedTriangles = new TR4MeshFace3[mesh.NumTexturedTriangles];
-                for (int j = 0; j < mesh.NumTexturedTriangles; j++)
-                {
-                    mesh.TexturedTriangles[j] = TR4FileReadUtilities.ReadTR4MeshFace3(br);
-                }
-
-                // There may be alignment padding at the end of the mesh, but rather than
-                // storing it, when the mesh is serialized the alignment should be considered.
-                // It seems to be 4-byte alignment for mesh data. The basestream position is
-                // moved to the next pointer in the next iteration, so we don't need to process
-                // the additional data here.
-                // See https://www.tombraiderforums.com/archive/index.php/t-215247.html
-            }
-        }
-
-        return meshes;
     }
 
     public static TR4MeshFace4 ReadTR4MeshFace4(BinaryReader reader)

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using TRLevelControl.Build;
 using TRLevelControl.Model;
 
 namespace TRLevelControl;
@@ -145,10 +146,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
         WriteSoundEffects(writer);
 
-        for (ushort u = 0; u < 3; u++)
-        {
-            writer.Write(u);
-        }
+        writer.Write(Enumerable.Repeat((ushort)0, 3).ToArray());
 
         mainWriter.Deflate(writer, TRChunkType.LevelData);
     }
@@ -173,13 +171,18 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadMeshData(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateMeshes(reader, _level);
-        TR4FileReadUtilities.PopulateAnimations(reader, _level);        
+        TRObjectMeshBuilder builder = new(_observer);
+        builder.BuildObjectMeshes(reader);
+
+        _level.Meshes = builder.Meshes;
+        _level.MeshPointers = builder.MeshPointers;
     }
 
     private void WriteMeshData(TRLevelWriter writer)
     {
-        List<byte> meshData = _level.Meshes.SelectMany(m => m.Serialize()).ToList();
+        TRObjectMeshBuilder builder = new(_observer);
+        List<byte> meshData = _level.Meshes.SelectMany(m => builder.Serialize(m)).ToList();
+
         writer.Write((uint)meshData.Count / 2);
         writer.Write(meshData.ToArray());
 
@@ -192,6 +195,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadModelData(TRLevelReader reader)
     {
+        TR4FileReadUtilities.PopulateAnimations(reader, _level);
         TR4FileReadUtilities.PopulateMeshTreesFramesModels(reader, _level);
     }
 

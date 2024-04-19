@@ -16,4 +16,10 @@ public class ObserverBase : ITRLevelObserver
 
     public virtual void OnChunkWritten(long startPosition, long endPosition, TRChunkType chunkType, byte[] data)
     { }
+
+    public virtual void OnMeshPaddingRead(uint meshPointer, List<byte> values)
+    { }
+
+    public virtual List<byte> GetMeshPadding(uint meshPointer)
+        => null;
 }
