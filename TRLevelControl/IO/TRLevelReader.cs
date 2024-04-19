@@ -89,12 +89,17 @@ public class TRLevelReader : BinaryReader
         List<TRTexImage32> images = new((int)numImages);
         for (long i = 0; i < numImages; i++)
         {
-            images.Add(new()
-            {
-                Pixels = ReadUInt32s(TRConsts.TPageSize)
-            });
+            images.Add(ReadImage32());
         }
         return images;
+    }
+
+    public TRTexImage32 ReadImage32()
+    {
+        return new()
+        {
+            Pixels = ReadUInt32s(TRConsts.TPageSize)
+        };
     }
 
     public List<TRColour> ReadColours(long numColours)

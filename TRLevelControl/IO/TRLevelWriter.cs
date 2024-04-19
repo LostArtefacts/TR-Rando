@@ -65,8 +65,13 @@ public class TRLevelWriter : BinaryWriter
     {
         foreach (TRTexImage32 image in images)
         {
-            Write(image.Pixels);
+            Write(image);
         }
+    }
+
+    public void Write(TRTexImage32 image)
+    {
+        Write(image.Pixels);
     }
 
     public void Write(IEnumerable<TRColour> colours)

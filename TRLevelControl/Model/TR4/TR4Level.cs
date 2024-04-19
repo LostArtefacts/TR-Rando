@@ -2,10 +2,7 @@
 
 public class TR4Level : TRLevelBase
 {
-    public TR4Texture32Chunk Texture32Chunk { get; set; }
-    public TR4Texture16Chunk Texture16Chunk { get; set; }
-    public TR4SkyAndFont32Chunk SkyAndFont32Chunk { get; set; }
-
+    public TR4Textiles Images { get; set; }
     public List<TR4Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
     public List<TR4Mesh> Meshes { get; set; }
@@ -35,6 +32,5 @@ public class TR4Level : TRLevelBase
     public short[] SoundMap { get; set; }
     public List<TR3SoundDetails> SoundDetails { get; set; }
     public List<uint> SampleIndices { get; set; }
-
     public List<TR4Sample> Samples { get; set; }
 }

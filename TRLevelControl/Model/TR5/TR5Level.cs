@@ -2,13 +2,9 @@
 
 public class TR5Level : TRLevelBase
 {
-    public TR4Texture32Chunk Texture32Chunk { get; set; }
-    public TR4Texture16Chunk Texture16Chunk { get; set; }
-    public TR4SkyAndFont32Chunk SkyAndFont32Chunk { get; set; }
-
+    public TR5Textiles Images { get; set; }
     public ushort LaraType { get; set; }
     public ushort WeatherType { get; set; }
-
     public List<TR5Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
     public List<TR4Mesh> Meshes { get; set; }

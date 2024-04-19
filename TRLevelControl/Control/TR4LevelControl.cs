@@ -36,52 +36,51 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadImages(TRLevelReader reader)
     {
+        _level.Images = new();
         ushort roomCount = reader.ReadUInt16();
         ushort objectCount = reader.ReadUInt16();
         ushort bumpCount = reader.ReadUInt16();
 
-        _level.Texture32Chunk = new();
         using TRLevelReader reader32 = reader.Inflate();
-        _level.Texture32Chunk.Rooms = reader32.ReadImage32s(roomCount);
-        _level.Texture32Chunk.Objects = reader32.ReadImage32s(objectCount);
-        _level.Texture32Chunk.Bump = reader32.ReadImage32s(bumpCount);
+        _level.Images.Rooms.Images32 = reader32.ReadImage32s(roomCount);
+        _level.Images.Objects.Images32 = reader32.ReadImage32s(objectCount);
+        _level.Images.Bump.Images32 = reader32.ReadImage32s(bumpCount);
 
-        _level.Texture16Chunk = new();
         using TRLevelReader reader16 = reader.Inflate();
-        _level.Texture16Chunk.Rooms = reader16.ReadImage16s(roomCount);
-        _level.Texture16Chunk.Objects = reader16.ReadImage16s(objectCount);
-        _level.Texture16Chunk.Bump = reader16.ReadImage16s(bumpCount);
+        _level.Images.Rooms.Images16 = reader16.ReadImage16s(roomCount);
+        _level.Images.Objects.Images16 = reader16.ReadImage16s(objectCount);
+        _level.Images.Bump.Images16 = reader16.ReadImage16s(bumpCount);
 
-        _level.SkyAndFont32Chunk = new();
         using TRLevelReader skyReader = reader.Inflate();
-        _level.SkyAndFont32Chunk.Textiles = skyReader.ReadImage32s(2);
+        _level.Images.Font = skyReader.ReadImage32();
+        _level.Images.Sky = skyReader.ReadImage32();
     }
 
     private void WriteImages(TRLevelWriter writer)
     {
-        Debug.Assert(_level.Texture32Chunk.Rooms.Count == _level.Texture16Chunk.Rooms.Count);
-        Debug.Assert(_level.Texture32Chunk.Objects.Count == _level.Texture16Chunk.Objects.Count);
-        Debug.Assert(_level.Texture32Chunk.Bump.Count == _level.Texture16Chunk.Bump.Count);
-        Debug.Assert(_level.SkyAndFont32Chunk.Textiles.Count == 2);
+        Debug.Assert(_level.Images.Rooms.Images32.Count == _level.Images.Rooms.Images16.Count);
+        Debug.Assert(_level.Images.Objects.Images32.Count == _level.Images.Objects.Images16.Count);
+        Debug.Assert(_level.Images.Bump.Images32.Count == _level.Images.Bump.Images16.Count);
 
-        writer.Write((ushort)_level.Texture32Chunk.Rooms.Count);
-        writer.Write((ushort)_level.Texture32Chunk.Objects.Count);
-        writer.Write((ushort)_level.Texture32Chunk.Bump.Count);
+        writer.Write((ushort)_level.Images.Rooms.Images32.Count);
+        writer.Write((ushort)_level.Images.Objects.Images32.Count);
+        writer.Write((ushort)_level.Images.Bump.Images32.Count);
 
         using TRLevelWriter writer32 = new();
-        writer32.Write(_level.Texture32Chunk.Rooms);
-        writer32.Write(_level.Texture32Chunk.Objects);
-        writer32.Write(_level.Texture32Chunk.Bump);
+        writer32.Write(_level.Images.Rooms.Images32);
+        writer32.Write(_level.Images.Objects.Images32);
+        writer32.Write(_level.Images.Bump.Images32);
         writer.Deflate(writer32);
 
         using TRLevelWriter writer16 = new();
-        writer16.Write(_level.Texture16Chunk.Rooms);
-        writer16.Write(_level.Texture16Chunk.Objects);
-        writer16.Write(_level.Texture16Chunk.Bump);
+        writer16.Write(_level.Images.Rooms.Images16);
+        writer16.Write(_level.Images.Objects.Images16);
+        writer16.Write(_level.Images.Bump.Images16);
         writer.Deflate(writer16);
 
         using TRLevelWriter skyWriter = new();
-        skyWriter.Write(_level.SkyAndFont32Chunk.Textiles);
+        skyWriter.Write(_level.Images.Font);
+        skyWriter.Write(_level.Images.Sky);
         writer.Deflate(skyWriter);
     }
 
