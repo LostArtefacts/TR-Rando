@@ -16,7 +16,7 @@ public class TRLevelWriter : BinaryWriter
         _observer = observer;
     }
 
-    public void Deflate(TRLevelWriter inflatedWriter)
+    public void Deflate(TRLevelWriter inflatedWriter, TRChunkType chunkType)
     {
         byte[] data = (inflatedWriter.BaseStream as MemoryStream).ToArray();
 
@@ -32,6 +32,8 @@ public class TRLevelWriter : BinaryWriter
         Write((uint)data.Length);
         Write((uint)zippedData.Length);
         Write(zippedData);
+
+        _observer?.OnChunkWritten(startPosition, BaseStream.Position, chunkType, data);
     }
 
     public void Write(IEnumerable<ushort> data)

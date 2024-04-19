@@ -13,8 +13,9 @@ public class TRLevelReader : BinaryReader
         _observer = observer;
     }
 
-    public TRLevelReader Inflate()
+    public TRLevelReader Inflate(TRChunkType chunkType)
     {
+        long position = BaseStream.Position;
         uint expectedLength = ReadUInt32();
         uint compressedLength = ReadUInt32();
 
@@ -31,6 +32,8 @@ public class TRLevelReader : BinaryReader
         using InflaterInputStream inflater = new(ms);
 
         inflater.CopyTo(inflatedStream);
+
+        _observer?.OnChunkRead(position, BaseStream.Position, chunkType, inflatedStream.ToArray());
 
         if (inflatedStream.Length != expectedLength)
         {

@@ -44,17 +44,17 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         ushort objectCount = reader.ReadUInt16();
         ushort bumpCount = reader.ReadUInt16();
 
-        using TRLevelReader reader32 = reader.Inflate();
+        using TRLevelReader reader32 = reader.Inflate(TRChunkType.Images32);
         _level.Images.Rooms.Images32 = reader32.ReadImage32s(roomCount);
         _level.Images.Objects.Images32 = reader32.ReadImage32s(objectCount);
         _level.Images.Bump.Images32 = reader32.ReadImage32s(bumpCount);
 
-        using TRLevelReader reader16 = reader.Inflate();
+        using TRLevelReader reader16 = reader.Inflate(TRChunkType.Images16);
         _level.Images.Rooms.Images16 = reader16.ReadImage16s(roomCount);
         _level.Images.Objects.Images16 = reader16.ReadImage16s(objectCount);
         _level.Images.Bump.Images16 = reader16.ReadImage16s(bumpCount);
 
-        using TRLevelReader skyReader = reader.Inflate();
+        using TRLevelReader skyReader = reader.Inflate(TRChunkType.SkyFont);
         _level.Images.Font = skyReader.ReadImage32();
         _level.Images.Sky = skyReader.ReadImage32();
     }
@@ -73,23 +73,23 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         writer32.Write(_level.Images.Rooms.Images32);
         writer32.Write(_level.Images.Objects.Images32);
         writer32.Write(_level.Images.Bump.Images32);
-        writer.Deflate(writer32);
+        writer.Deflate(writer32, TRChunkType.Images32);
 
         using TRLevelWriter writer16 = new();
         writer16.Write(_level.Images.Rooms.Images16);
         writer16.Write(_level.Images.Objects.Images16);
         writer16.Write(_level.Images.Bump.Images16);
-        writer.Deflate(writer16);
+        writer.Deflate(writer16, TRChunkType.Images16);
 
         using TRLevelWriter skyWriter = new();
         skyWriter.Write(_level.Images.Font);
         skyWriter.Write(_level.Images.Sky);
-        writer.Deflate(skyWriter);
+        writer.Deflate(skyWriter, TRChunkType.SkyFont);
     }
 
     private void ReadLevelDataChunk(TRLevelReader mainReader)
     {
-        using TRLevelReader reader = mainReader.Inflate();
+        using TRLevelReader reader = mainReader.Inflate(TRChunkType.LevelData);
 
         reader.ReadUInt32(); // Unused, always 0
 
@@ -150,7 +150,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
             writer.Write(u);
         }
 
-        mainWriter.Deflate(writer);
+        mainWriter.Deflate(writer, TRChunkType.LevelData);
     }
 
     private void ReadRooms(TRLevelReader reader)

@@ -1,6 +1,9 @@
-﻿namespace TRLevelControl;
+﻿using TRLevelControl.Model;
+
+namespace TRLevelControl;
 
 public interface ITRLevelObserver
 {
-    
+    void OnChunkRead(long startPosition, long endPosition, TRChunkType chunkType, byte[] data);
+    void OnChunkWritten(long startPosition, long endPosition, TRChunkType chunkType, byte[] data);
 }

@@ -44,15 +44,15 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         ushort objectCount = reader.ReadUInt16();
         reader.ReadUInt16(); // Previously bump in TR4, no longer used
 
-        using TRLevelReader reader32 = reader.Inflate();
+        using TRLevelReader reader32 = reader.Inflate(TRChunkType.Images32);
         _level.Images.Rooms.Images32 = reader32.ReadImage32s(roomCount);
         _level.Images.Objects.Images32 = reader32.ReadImage32s(objectCount);
 
-        using TRLevelReader reader16 = reader.Inflate();
+        using TRLevelReader reader16 = reader.Inflate(TRChunkType.Images16);
         _level.Images.Rooms.Images16 = reader16.ReadImage16s(roomCount);
         _level.Images.Objects.Images16 = reader16.ReadImage16s(objectCount);
 
-        using TRLevelReader skyReader = reader.Inflate();
+        using TRLevelReader skyReader = reader.Inflate(TRChunkType.SkyFont);
         _level.Images.Shine = skyReader.ReadImage32();
         _level.Images.Font = skyReader.ReadImage32();
         _level.Images.Sky = skyReader.ReadImage32();
@@ -70,18 +70,18 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         using TRLevelWriter writer32 = new();
         writer32.Write(_level.Images.Rooms.Images32);
         writer32.Write(_level.Images.Objects.Images32);
-        writer.Deflate(writer32);
+        writer.Deflate(writer32, TRChunkType.Images32);
 
         using TRLevelWriter writer16 = new();
         writer16.Write(_level.Images.Rooms.Images16);
         writer16.Write(_level.Images.Objects.Images16);
-        writer.Deflate(writer16);
+        writer.Deflate(writer16, TRChunkType.Images16);
 
         using TRLevelWriter skyWriter = new();
         skyWriter.Write(_level.Images.Shine);
         skyWriter.Write(_level.Images.Font);
         skyWriter.Write(_level.Images.Sky);
-        writer.Deflate(skyWriter);
+        writer.Deflate(skyWriter, TRChunkType.SkyFont);
     }
 
     private void ReadLaraAndWeather(TRLevelReader reader)

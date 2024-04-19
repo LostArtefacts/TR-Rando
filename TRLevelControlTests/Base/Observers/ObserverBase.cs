@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TRLevelControl;
+using TRLevelControl.Model;
 
 namespace TRLevelControlTests;
 
@@ -9,4 +10,10 @@ public class ObserverBase : ITRLevelObserver
     {
         CollectionAssert.AreEqual(input, output);
     }
+
+    public virtual void OnChunkRead(long startPosition, long endPosition, TRChunkType chunkType, byte[] data)
+    { }
+
+    public virtual void OnChunkWritten(long startPosition, long endPosition, TRChunkType chunkType, byte[] data)
+    { }
 }

@@ -19,7 +19,7 @@ public abstract class TRLevelControlBase<L>
 
     public L Read(Stream stream)
     {
-        using TRLevelReader reader = new(stream);
+        using TRLevelReader reader = new(stream, _observer);
 
         _level = CreateLevel((TRFileVersion)reader.ReadUInt32());
         Read(reader);
@@ -33,7 +33,7 @@ public abstract class TRLevelControlBase<L>
 
     public void Write(L level, Stream outputStream)
     {
-        using TRLevelWriter writer = new(outputStream);
+        using TRLevelWriter writer = new(outputStream, _observer);
 
         writer.Write((uint)level.Version.File);
 
