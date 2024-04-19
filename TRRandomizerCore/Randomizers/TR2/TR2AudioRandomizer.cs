@@ -223,7 +223,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
             // Choose a random but unique pointer into MAIN.SFX for each sample.
             int maxSample = Enum.GetValues<TR2SFX>().Length;
             HashSet<uint> indices = new();
-            foreach (TR2SoundEffect effect in level.Data.SoundEffects.Values)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
                 for (int i = 0; i < effect.Samples.Count; i++)
                 {
@@ -292,7 +292,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
     {
         if (Settings.RandomizeWibble)
         {
-            foreach (TR2SoundEffect effect in level.Data.SoundEffects.Values)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
                 effect.RandomizePitch = true;
             }

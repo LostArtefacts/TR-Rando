@@ -110,7 +110,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
     {
         if (Settings.RandomizeWibble)
         {
-            foreach (TR1SoundEffect effect in level.Data.SoundEffects.Values)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
                 effect.RandomizePitch = true;
             }

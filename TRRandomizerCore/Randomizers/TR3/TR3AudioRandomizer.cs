@@ -187,7 +187,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
             // Choose a random sample for each current entry and replace the entire index list.
             int maxSample = Enum.GetValues<TR3SFX>().Length;
             HashSet<uint> indices = new();
-            foreach (TR3SoundEffect effect in level.Data.SoundEffects.Values)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
                 for (int i = 0; i < effect.Samples.Count; i++)
                 {
@@ -256,9 +256,9 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
     {
         if (Settings.RandomizeWibble)
         {
-            foreach (TR3SoundEffect details in level.Data.SoundEffects.Values)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
-                details.RandomizePitch = true;
+                effect.RandomizePitch = true;
             }
         }
     }

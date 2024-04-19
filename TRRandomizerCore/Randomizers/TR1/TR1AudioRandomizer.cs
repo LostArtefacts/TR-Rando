@@ -153,7 +153,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             HashSet<string> usedSamples = new();
 
             // Replace each sample but be sure to avoid duplicates
-            foreach (TR1SoundEffect effect in level.Data.SoundEffects.Values)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
                 for (int i = 0; i < effect.Samples.Count; i++)
                 {
@@ -281,7 +281,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         {
             // The engine does the actual randomization, we just tell it that every
             // sound effect should be included.
-            foreach (TR1SoundEffect effect in level.Data.SoundEffects.Values)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
                 effect.RandomizePitch = true;
             }

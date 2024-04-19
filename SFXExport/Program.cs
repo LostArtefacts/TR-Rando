@@ -79,13 +79,12 @@ class Program
     private static void ExtractFromPHD(string file, TRGameVersion version)
     {
         TR1Level level = new TR1LevelControl().Read(file);
-        foreach (TR1SFX sfxID in level.SoundEffects.Keys)
+        foreach (var (sfxID, effect) in level.SoundEffects)
         {
-            TR1SoundEffect sfx = level.SoundEffects[sfxID];
-            for (int i = 0; i < sfx.Samples.Count; i++)
+            for (int i = 0; i < effect.Samples.Count; i++)
             {
                 string path = Path.Combine(version.ToString(), $"{((int)sfxID).ToString().PadLeft(3, '0')}_{i}.wav");
-                File.WriteAllBytes(path, sfx.Samples[i]);
+                File.WriteAllBytes(path, effect.Samples[i]);
             }
         }
     }

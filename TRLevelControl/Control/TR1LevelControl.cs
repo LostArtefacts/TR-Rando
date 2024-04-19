@@ -614,14 +614,14 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         }
 
         writer.Write((uint)_level.SoundEffects.Count);
-        foreach (TR1SoundEffect details in _level.SoundEffects.Values)
+        foreach (var (_, effect) in _level.SoundEffects)
         {
             writer.Write((ushort)samplePointers.Count);
-            writer.Write(details.Volume);
-            writer.Write(details.Chance);
-            writer.Write(details.GetFlags());
+            writer.Write(effect.Volume);
+            writer.Write(effect.Chance);
+            writer.Write(effect.GetFlags());
 
-            foreach (byte[] wav in details.Samples)
+            foreach (byte[] wav in effect.Samples)
             {
                 samplePointers.Add((uint)wavData.Count);
                 wavData.AddRange(wav);

@@ -161,7 +161,7 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
         {
             int maxSample = Enum.GetValues<TR3SFX>().Length;
             HashSet<uint> indices = new();
-            foreach (TR3SoundEffect effect in level.Data.SoundEffects.Values)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
                 for (int i = 0; i < effect.Samples.Count; i++)
                 {
@@ -221,9 +221,9 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
     {
         if (Settings.RandomizeWibble)
         {
-            foreach (TR3SoundEffect details in level.Data.SoundEffects.Values)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
-                details.RandomizePitch = true;
+                effect.RandomizePitch = true;
             }
         }
     }

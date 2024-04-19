@@ -619,17 +619,17 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         }
 
         List<uint> samplePointers = new();
-        foreach (TR3SoundEffect details in _level.SoundEffects.Values)
+        foreach (var (_, effect) in _level.SoundEffects)
         {
-            if (!samplePointers.Contains(details.Samples.First()))
+            if (!samplePointers.Contains(effect.Samples.First()))
             {
-                samplePointers.AddRange(details.Samples);
+                samplePointers.AddRange(effect.Samples);
             }
         }
         samplePointers.Sort();
 
         writer.Write((uint)_level.SoundEffects.Count);
-        foreach (TR3SoundEffect effect in _level.SoundEffects.Values)
+        foreach (var (_, effect) in _level.SoundEffects)
         {
             uint firstSample = effect.Samples.First();
             writer.Write((ushort)samplePointers.IndexOf(firstSample));
