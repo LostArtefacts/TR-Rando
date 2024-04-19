@@ -18,6 +18,27 @@ public class TR45Observer : ObserverBase
         {
             CollectionAssert.AreEqual(_inflatedReads[type].Data, _inflatedWrites[type].Data);
         }
+
+        // At this stage, everything zipped matches. We want to check for unzipped matches, so do
+        // so by stripping out everything that has been zipped from both streams.
+        List<byte> oldData = new(input);
+        List<byte> newData = new(output);
+
+        List<ZipWrapper> unzips = new(_inflatedReads.Values);
+        unzips.Sort((z1, z2) => z2.StreamEnd.CompareTo(z1.StreamEnd));
+        foreach (ZipWrapper zip in unzips)
+        {
+            oldData.RemoveRange((int)zip.StreamStart, (int)(zip.StreamEnd - zip.StreamStart));
+        }
+
+        unzips = new(_inflatedWrites.Values);
+        unzips.Sort((z1, z2) => z2.StreamEnd.CompareTo(z1.StreamEnd));
+        foreach (ZipWrapper zip in unzips)
+        {
+            newData.RemoveRange((int)zip.StreamStart, (int)(zip.StreamEnd - zip.StreamStart));
+        }
+
+        CollectionAssert.AreEqual(oldData, newData);
     }
 
     public override void OnChunkRead(long startPosition, long endPosition, TRChunkType chunkType, byte[] data)
