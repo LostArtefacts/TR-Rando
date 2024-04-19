@@ -74,7 +74,7 @@ public class AnimationTransportHandler
 
             AnimationUtilities.PackStateChanges(level, animation, packedAnimation);
             AnimationUtilities.PackAnimCommands(level, animation, packedAnimation);
-            AnimationUtilities.PackAnimSounds(level, packedAnimation);
+            AnimationUtilities.PackAnimSounds(level, definition, packedAnimation);
         }
 
         foreach (TR3PackedAnimation anim in definition.Animations.Values)
@@ -170,7 +170,6 @@ public class AnimationTransportHandler
         {
             TR3PackedAnimation packedAnimation = animations[oldAnimationIndex];
             AnimationUtilities.UnpackStateChanges(level.AnimDispatches, level.StateChanges, packedAnimation);
-            AnimationUtilities.UnpackAnimSounds(level, packedAnimation);
             AnimationUtilities.UnpackAnimCommands(level.AnimCommands, packedAnimation);
 
             int newAnimationIndex = AnimationUtilities.UnpackAnimation(level, packedAnimation);
@@ -197,8 +196,6 @@ public class AnimationTransportHandler
                 }
             }
         }
-
-        SoundUtilities.ResortSoundIndices(level);
 
         AnimationUtilities.ImportAnimationFrames(level, definition);
     }

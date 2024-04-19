@@ -6,19 +6,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 89,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 19,
-      "Characteristics": 24592
-    },
-    "SampleIndices": [
-      0,
-      1,
-      2,
-      3
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 1,
@@ -27,16 +15,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 6,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      4
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 2,
@@ -45,16 +24,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 91,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      5
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 3,
@@ -63,16 +33,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 51,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 76,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      6
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 4,
@@ -81,16 +42,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 165,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      7
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 5,
@@ -99,16 +51,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 165,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 6,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      8
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 6,
@@ -117,16 +60,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 63,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      9
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 7,
@@ -135,16 +69,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 51,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 76,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      10
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 8,
@@ -153,16 +78,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 242,
-      "Range": 6,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 6
-    },
-    "SampleIndices": [
-      11
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 9,
@@ -171,16 +87,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 242,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      12
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 10,
@@ -189,17 +96,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 13,
-      "Chance": 25,
-      "Pitch": 0,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      13,
-      14
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 11,
@@ -208,16 +105,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 63,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      15
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 12,
@@ -226,16 +114,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 51,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      16
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 13,
@@ -244,16 +123,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      17
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 14,
@@ -262,16 +132,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 51,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      18
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 15,
@@ -280,16 +141,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 216,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      19
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 16,
@@ -298,16 +150,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 12,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      20
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 17,
@@ -316,19 +159,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24592
-    },
-    "SampleIndices": [
-      21,
-      22,
-      23,
-      24
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 18,
@@ -337,16 +168,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      25
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 20,
@@ -355,16 +177,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      26
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 21,
@@ -373,16 +186,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      27
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 22,
@@ -391,16 +195,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 12,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      28
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 23,
@@ -409,16 +204,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      29
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 24,
@@ -427,17 +213,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 51,
-      "Range": 6,
-      "Chance": 0,
-      "Pitch": 29,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      30,
-      31
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 25,
@@ -448,16 +224,7 @@
       285,
       286
     ],
-    "Details": {
-      "Volume": 140,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      32
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 26,
@@ -466,16 +233,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 140,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 7,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      33
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 29,
@@ -484,16 +242,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 13,
-      "Chance": 127,
-      "Pitch": 12,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      34
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 30,
@@ -502,16 +251,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      35
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 31,
@@ -520,17 +260,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 13,
-      "Chance": 102,
-      "Pitch": 38,
-      "Characteristics": 16392
-    },
-    "SampleIndices": [
-      36,
-      37
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 32,
@@ -539,16 +269,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 89,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 19,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      38
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 33,
@@ -557,16 +278,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 242,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      39
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 34,
@@ -575,16 +287,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      40
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 35,
@@ -593,16 +296,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 237,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      41
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 36,
@@ -611,16 +305,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      42
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 38,
@@ -631,16 +316,7 @@
       285,
       286
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      43
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 39,
@@ -649,16 +325,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      44
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 41,
@@ -667,16 +334,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      45
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 42,
@@ -685,16 +343,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      46
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 43,
@@ -703,16 +352,7 @@
     "Categories": [
       22
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      47
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 44,
@@ -721,16 +361,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      48
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 45,
@@ -739,16 +370,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      49
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 46,
@@ -757,16 +379,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 140,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16390
-    },
-    "SampleIndices": [
-      50
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 47,
@@ -775,17 +388,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 140,
-      "Range": 13,
-      "Chance": 127,
-      "Pitch": 0,
-      "Characteristics": 16394
-    },
-    "SampleIndices": [
-      51,
-      52
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 49,
@@ -794,16 +397,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 25,
-      "Range": 13,
-      "Chance": 127,
-      "Pitch": 88,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      53
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 51,
@@ -812,17 +406,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16394
-    },
-    "SampleIndices": [
-      54,
-      55
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 52,
@@ -831,16 +415,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      56
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 53,
@@ -849,16 +424,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      57
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 54,
@@ -867,16 +433,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 63,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      58
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 55,
@@ -885,16 +442,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 13,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      59
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 56,
@@ -903,16 +451,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 165,
-      "Range": 6,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      60
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 58,
@@ -921,16 +460,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      61
-    ]
+    "SourceLevel": "CHAMBER.TR2"
   },
   {
     "InternalIndex": 59,
@@ -939,16 +469,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 9,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      62
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 60,
@@ -957,16 +478,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 180,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      63
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 61,
@@ -977,16 +489,7 @@
       285,
       286
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      64
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 63,
@@ -996,16 +499,7 @@
       282,
       281
     ],
-    "Details": {
-      "Volume": 117,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 6,
-      "Characteristics": 6
-    },
-    "SampleIndices": [
-      65
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 65,
@@ -1014,16 +508,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 9,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      66
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 66,
@@ -1032,16 +517,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      67
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 67,
@@ -1050,16 +526,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      68
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 68,
@@ -1068,16 +535,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 180,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      69
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 69,
@@ -1086,16 +544,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      70
-    ]
+    "SourceLevel": "RAPIDS.TR2"
   },
   {
     "InternalIndex": 70,
@@ -1104,17 +553,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 12,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      71,
-      72
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 71,
@@ -1123,16 +562,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 51,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 244,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      73
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 72,
@@ -1141,16 +571,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 216,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      74
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 73,
@@ -1159,16 +580,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      75
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 74,
@@ -1177,16 +589,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 4,
-      "Chance": 0,
-      "Pitch": 180,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      76
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 75,
@@ -1195,16 +598,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 9,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      77
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 76,
@@ -1213,16 +607,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      78
-    ]
+    "SourceLevel": "TONYBOSS.TR2"
   },
   {
     "InternalIndex": 77,
@@ -1231,16 +616,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 3,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      79
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 78,
@@ -1249,16 +625,7 @@
     "Categories": [
       22
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 88,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      80
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 79,
@@ -1267,16 +634,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      81
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 80,
@@ -1285,16 +643,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      82
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 81,
@@ -1303,16 +652,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      83
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 82,
@@ -1321,16 +661,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 155,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      84
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 83,
@@ -1339,16 +670,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 155,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      85
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 84,
@@ -1357,16 +679,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      86
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 86,
@@ -1375,16 +688,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4103
-    },
-    "SampleIndices": [
-      87
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 87,
@@ -1393,16 +697,7 @@
     "Categories": [
       171
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 14,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      88
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 88,
@@ -1411,16 +706,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 14,
-      "Chance": 0,
-      "Pitch": 155,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      89
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 89,
@@ -1429,16 +715,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 20,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      90
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 91,
@@ -1447,16 +724,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 30,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      91
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 92,
@@ -1465,16 +733,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 8,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      92
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 93,
@@ -1483,18 +742,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 15,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 24588
-    },
-    "SampleIndices": [
-      93,
-      94,
-      95
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 94,
@@ -1503,16 +751,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 244,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      96
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 95,
@@ -1521,16 +760,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      97
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 96,
@@ -1539,16 +769,7 @@
     "Categories": [
       261
     ],
-    "Details": {
-      "Volume": 89,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 244,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      98
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 97,
@@ -1558,16 +779,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 127,
-      "Pitch": 50,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      99
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 98,
@@ -1576,16 +788,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      100
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 99,
@@ -1595,16 +798,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      101
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 100,
@@ -1614,16 +808,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      102
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 101,
@@ -1633,16 +818,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      103
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 102,
@@ -1651,16 +827,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      104
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 103,
@@ -1670,16 +837,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 25,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      105
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 104,
@@ -1688,16 +846,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      106
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 105,
@@ -1706,16 +855,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 20,
-      "Chance": 0,
-      "Pitch": 63,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      107
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 106,
@@ -1724,16 +864,7 @@
     "Categories": [
       51
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 24,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      108
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 107,
@@ -1742,16 +873,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      109
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 108,
@@ -1760,16 +882,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 51,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 78,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      110
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 109,
@@ -1778,16 +891,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 6,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      111
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 111,
@@ -1796,16 +900,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 140,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 17,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      112
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 112,
@@ -1814,16 +909,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 89,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 17,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      113
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 114,
@@ -1832,16 +918,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      114
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 115,
@@ -1850,16 +927,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      115
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 116,
@@ -1868,16 +936,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 29,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      116
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 117,
@@ -1886,16 +945,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 68,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      117
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 119,
@@ -1904,17 +954,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 12,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      118,
-      119
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 120,
@@ -1923,16 +963,7 @@
     "Categories": [
       53
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 12,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      120
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 121,
@@ -1941,16 +972,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      121
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 123,
@@ -1959,16 +981,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 88,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      122
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 124,
@@ -1977,16 +990,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      123
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 125,
@@ -1995,16 +999,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      124
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 126,
@@ -2013,16 +1008,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      125
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 127,
@@ -2031,16 +1017,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      126
-    ]
+    "SourceLevel": "TRIBOSS.TR2"
   },
   {
     "InternalIndex": 128,
@@ -2049,18 +1026,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 127,
-      "Pitch": 0,
-      "Characteristics": 24588
-    },
-    "SampleIndices": [
-      127,
-      128,
-      129
-    ]
+    "SourceLevel": "TRIBOSS.TR2"
   },
   {
     "InternalIndex": 129,
@@ -2069,18 +1035,7 @@
     "Categories": [
       231
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 2,
-      "Pitch": 0,
-      "Characteristics": 16398
-    },
-    "SampleIndices": [
-      130,
-      131,
-      132
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 130,
@@ -2089,16 +1044,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      133
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 131,
@@ -2107,16 +1053,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 8,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      134
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 132,
@@ -2125,16 +1062,7 @@
     "Categories": [
       171
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 76,
-      "Pitch": 231,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      135
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 133,
@@ -2143,16 +1071,7 @@
     "Categories": [
       261
     ],
-    "Details": {
-      "Volume": 63,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 168,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      136
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 134,
@@ -2161,16 +1080,7 @@
     "Categories": [
       171
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      137
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 135,
@@ -2179,16 +1089,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      138
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 136,
@@ -2197,16 +1098,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 38,
-      "Range": 5,
-      "Chance": 0,
-      "Pitch": 180,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      139
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 137,
@@ -2215,16 +1107,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      140
-    ]
+    "SourceLevel": "AREA51.TR2"
   },
   {
     "InternalIndex": 138,
@@ -2234,16 +1117,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      141
-    ]
+    "SourceLevel": "RAPIDS.TR2"
   },
   {
     "InternalIndex": 139,
@@ -2253,16 +1127,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 76,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      142
-    ]
+    "SourceLevel": "RAPIDS.TR2"
   },
   {
     "InternalIndex": 140,
@@ -2271,16 +1136,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      143
-    ]
+    "SourceLevel": "RAPIDS.TR2"
   },
   {
     "InternalIndex": 141,
@@ -2290,16 +1146,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 76,
-      "Pitch": 218,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      144
-    ]
+    "SourceLevel": "RAPIDS.TR2"
   },
   {
     "InternalIndex": 142,
@@ -2308,16 +1155,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      145
-    ]
+    "SourceLevel": "RAPIDS.TR2"
   },
   {
     "InternalIndex": 143,
@@ -2326,16 +1164,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      146
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 145,
@@ -2344,16 +1173,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      147
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 147,
@@ -2362,16 +1182,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 8,
-      "Chance": 0,
-      "Pitch": 168,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      148
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 148,
@@ -2380,16 +1191,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 15,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      149
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 149,
@@ -2398,16 +1200,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      150
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 150,
@@ -2416,16 +1209,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 24583
-    },
-    "SampleIndices": [
-      151
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 152,
@@ -2434,16 +1218,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      152
-    ]
+    "SourceLevel": "QUADCHAS.TR2"
   },
   {
     "InternalIndex": 153,
@@ -2452,16 +1227,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      153
-    ]
+    "SourceLevel": "QUADCHAS.TR2"
   },
   {
     "InternalIndex": 154,
@@ -2470,16 +1236,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      154
-    ]
+    "SourceLevel": "QUADCHAS.TR2"
   },
   {
     "InternalIndex": 155,
@@ -2488,16 +1245,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      155
-    ]
+    "SourceLevel": "QUADCHAS.TR2"
   },
   {
     "InternalIndex": 156,
@@ -2506,16 +1254,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      156
-    ]
+    "SourceLevel": "QUADCHAS.TR2"
   },
   {
     "InternalIndex": 157,
@@ -2524,23 +1263,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 12,
-      "Characteristics": 24608
-    },
-    "SampleIndices": [
-      157,
-      158,
-      159,
-      160,
-      161,
-      162,
-      163,
-      164
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 158,
@@ -2549,16 +1272,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 4,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      165
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 159,
@@ -2567,16 +1281,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 168,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      166
-    ]
+    "SourceLevel": "COMPOUND.TR2"
   },
   {
     "InternalIndex": 160,
@@ -2585,16 +1290,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 168,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      167
-    ]
+    "SourceLevel": "COMPOUND.TR2"
   },
   {
     "InternalIndex": 161,
@@ -2604,16 +1300,7 @@
       282,
       281
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      168
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 162,
@@ -2623,16 +1310,7 @@
       283,
       281
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      169
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 163,
@@ -2641,16 +1319,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 174,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      170
-    ]
+    "SourceLevel": "RAPIDS.TR2"
   },
   {
     "InternalIndex": 164,
@@ -2660,16 +1329,7 @@
       141,
       171
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      171
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 165,
@@ -2678,16 +1338,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      172
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 166,
@@ -2697,16 +1348,7 @@
       141,
       171
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      173
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 167,
@@ -2716,16 +1358,7 @@
       141,
       171
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      174
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 168,
@@ -2734,16 +1367,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      175
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 169,
@@ -2753,16 +1377,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      176
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 170,
@@ -2771,16 +1386,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      177
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 171,
@@ -2789,16 +1395,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 12,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      178
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 172,
@@ -2807,16 +1404,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      179
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 173,
@@ -2825,16 +1413,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      180
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 174,
@@ -2843,16 +1422,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 88,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      181
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 175,
@@ -2862,16 +1432,7 @@
       141,
       171
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      182
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 176,
@@ -2880,17 +1441,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 16392
-    },
-    "SampleIndices": [
-      183,
-      184
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 177,
@@ -2899,16 +1450,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      185
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 178,
@@ -2917,16 +1459,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 244,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      186
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 179,
@@ -2935,16 +1468,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      187
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 180,
@@ -2953,16 +1477,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      188
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 181,
@@ -2971,17 +1486,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      189,
-      190
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 182,
@@ -2990,16 +1495,7 @@
     "Categories": [
       261
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      191
-    ]
+    "SourceLevel": "QUADCHAS.TR2"
   },
   {
     "InternalIndex": 183,
@@ -3009,17 +1505,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 16392
-    },
-    "SampleIndices": [
-      192,
-      193
-    ]
+    "SourceLevel": "QUADCHAS.TR2"
   },
   {
     "InternalIndex": 184,
@@ -3028,16 +1514,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 244,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      194
-    ]
+    "SourceLevel": "QUADCHAS.TR2"
   },
   {
     "InternalIndex": 185,
@@ -3046,16 +1523,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 102,
-      "Pitch": 218,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      195
-    ]
+    "SourceLevel": "QUADCHAS.TR2"
   },
   {
     "InternalIndex": 186,
@@ -3064,16 +1532,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      196
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 187,
@@ -3082,16 +1541,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      197
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 188,
@@ -3100,16 +1550,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      198
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 189,
@@ -3118,16 +1559,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      199
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 190,
@@ -3136,17 +1568,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16392
-    },
-    "SampleIndices": [
-      200,
-      201
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 191,
@@ -3155,16 +1577,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 9,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      202
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 192,
@@ -3173,16 +1586,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      203
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 193,
@@ -3191,16 +1595,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      204
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 194,
@@ -3209,16 +1604,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 193,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      205
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 195,
@@ -3227,16 +1613,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      206
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 196,
@@ -3245,16 +1622,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      207
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 197,
@@ -3263,16 +1631,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 173,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      208
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 198,
@@ -3281,16 +1640,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      209
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 199,
@@ -3299,16 +1649,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      210
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 200,
@@ -3317,16 +1658,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 15,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      211
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 201,
@@ -3335,16 +1667,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 244,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      212
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 202,
@@ -3353,16 +1676,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      213
-    ]
+    "SourceLevel": "STPAUL.TR2"
   },
   {
     "InternalIndex": 203,
@@ -3371,16 +1685,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      214
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 204,
@@ -3389,16 +1694,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      215
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 205,
@@ -3407,16 +1703,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      216
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 206,
@@ -3425,16 +1712,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 12,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      217
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 207,
@@ -3443,16 +1721,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      218
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 208,
@@ -3461,16 +1730,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 11,
-      "Chance": 0,
-      "Pitch": 199,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      219
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 209,
@@ -3479,16 +1739,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      220
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 210,
@@ -3497,16 +1748,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      221
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 211,
@@ -3517,16 +1759,7 @@
       285,
       286
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      222
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 212,
@@ -3535,16 +1768,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      223
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 213,
@@ -3553,16 +1777,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      224
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 214,
@@ -3571,16 +1786,7 @@
     "Categories": [
       53
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      225
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 215,
@@ -3589,16 +1795,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      226
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 219,
@@ -3607,16 +1804,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      227
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 220,
@@ -3625,16 +1813,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 244,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      228
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 221,
@@ -3644,16 +1823,7 @@
       282,
       281
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 240,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      229
-    ]
+    "SourceLevel": "COMPOUND.TR2"
   },
   {
     "InternalIndex": 222,
@@ -3662,16 +1832,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      230
-    ]
+    "SourceLevel": "COMPOUND.TR2"
   },
   {
     "InternalIndex": 223,
@@ -3680,16 +1841,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      231
-    ]
+    "SourceLevel": "COMPOUND.TR2"
   },
   {
     "InternalIndex": 224,
@@ -3698,16 +1850,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      232
-    ]
+    "SourceLevel": "COMPOUND.TR2"
   },
   {
     "InternalIndex": 231,
@@ -3716,16 +1859,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 9,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      233
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 232,
@@ -3734,16 +1868,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 9,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      234
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 233,
@@ -3752,16 +1877,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 8,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      235
-    ]
+    "SourceLevel": "COMPOUND.TR2"
   },
   {
     "InternalIndex": 234,
@@ -3770,16 +1886,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      236
-    ]
+    "SourceLevel": "TONYBOSS.TR2"
   },
   {
     "InternalIndex": 235,
@@ -3788,16 +1895,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      237
-    ]
+    "SourceLevel": "TONYBOSS.TR2"
   },
   {
     "InternalIndex": 236,
@@ -3806,16 +1904,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      238
-    ]
+    "SourceLevel": "TONYBOSS.TR2"
   },
   {
     "InternalIndex": 237,
@@ -3824,16 +1913,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      239
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 238,
@@ -3842,16 +1922,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 63,
-      "Range": 5,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      240
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 239,
@@ -3860,16 +1931,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      241
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 240,
@@ -3878,16 +1940,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      242
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 241,
@@ -3896,16 +1949,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 76,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      243
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 242,
@@ -3914,16 +1958,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      244
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 243,
@@ -3932,17 +1967,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      245,
-      246
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 244,
@@ -3951,16 +1976,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 244,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      247
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 245,
@@ -3970,17 +1986,7 @@
       141,
       171
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 16392
-    },
-    "SampleIndices": [
-      248,
-      249
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 246,
@@ -3989,17 +1995,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 255,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      250,
-      251
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 247,
@@ -4008,16 +2004,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 88,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      252
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 248,
@@ -4026,16 +2013,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      253
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 249,
@@ -4045,16 +2023,7 @@
       141,
       171
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 51,
-      "Pitch": 0,
-      "Characteristics": 16388
-    },
-    "SampleIndices": [
-      254
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 250,
@@ -4063,17 +2032,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 20,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      255,
-      256
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 251,
@@ -4083,16 +2042,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 25,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      257
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 252,
@@ -4102,16 +2052,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      258
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 253,
@@ -4121,16 +2062,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      259
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 254,
@@ -4140,16 +2072,7 @@
       141,
       171
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 8,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      260
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 255,
@@ -4158,16 +2081,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 20,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      261
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 256,
@@ -4176,16 +2090,7 @@
     "Categories": [
       1111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 20,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      262
-    ]
+    "SourceLevel": "CRASH.TR2"
   },
   {
     "InternalIndex": 257,
@@ -4194,16 +2099,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      263
-    ]
+    "SourceLevel": "AREA51.TR2"
   },
   {
     "InternalIndex": 258,
@@ -4212,16 +2108,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      264
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 259,
@@ -4230,16 +2117,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      265
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 260,
@@ -4248,16 +2126,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 237,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      266
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 261,
@@ -4266,16 +2135,7 @@
     "Categories": [
       82
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      267
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 262,
@@ -4284,16 +2144,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 237,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      268
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 263,
@@ -4302,16 +2153,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      269
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 264,
@@ -4320,17 +2162,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      270,
-      271
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 265,
@@ -4339,17 +2171,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      272,
-      273
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 266,
@@ -4359,17 +2181,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      274,
-      275
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 267,
@@ -4378,16 +2190,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      276
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 268,
@@ -4396,16 +2199,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      277
-    ]
+    "SourceLevel": "MINES.TR2"
   },
   {
     "InternalIndex": 269,
@@ -4415,16 +2209,7 @@
       286,
       284
     ],
-    "Details": {
-      "Volume": 140,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      278
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 270,
@@ -4433,19 +2218,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 16
-    },
-    "SampleIndices": [
-      279,
-      280,
-      281,
-      282
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 271,
@@ -4455,17 +2228,7 @@
       201,
       171
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      283,
-      284
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 272,
@@ -4474,16 +2237,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      285
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 273,
@@ -4492,16 +2246,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      286
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 274,
@@ -4510,16 +2255,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      287
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 275,
@@ -4528,16 +2264,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      288
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 276,
@@ -4546,16 +2273,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      289
-    ]
+    "SourceLevel": "CITY.TR2"
   },
   {
     "InternalIndex": 278,
@@ -4565,16 +2283,7 @@
       282,
       281
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 20,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      290
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 279,
@@ -4583,16 +2292,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      291
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 280,
@@ -4601,16 +2301,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      292
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 281,
@@ -4619,16 +2310,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      293
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 282,
@@ -4637,16 +2319,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 5,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      294
-    ]
+    "SourceLevel": "COMPOUND.TR2"
   },
   {
     "InternalIndex": 283,
@@ -4655,16 +2328,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      295
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 284,
@@ -4673,17 +2337,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 127,
-      "Pitch": 231,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      296,
-      297
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 285,
@@ -4692,17 +2346,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      298,
-      299
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 286,
@@ -4711,16 +2355,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 127,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      300
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 287,
@@ -4729,16 +2364,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 204,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      301
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 288,
@@ -4747,17 +2373,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 38,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      302,
-      303
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 289,
@@ -4766,17 +2382,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 50,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      304,
-      305
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 290,
@@ -4785,17 +2391,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      306,
-      307
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 291,
@@ -4804,17 +2400,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 63,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 63,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      308,
-      309
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 292,
@@ -4823,17 +2409,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 16392
-    },
-    "SampleIndices": [
-      310,
-      311
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 293,
@@ -4842,18 +2418,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 89,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 24588
-    },
-    "SampleIndices": [
-      312,
-      313,
-      314
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 294,
@@ -4862,17 +2427,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 6,
-      "Chance": 0,
-      "Pitch": 237,
-      "Characteristics": 16392
-    },
-    "SampleIndices": [
-      315,
-      316
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 295,
@@ -4881,16 +2436,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      317
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 296,
@@ -4899,16 +2445,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 180,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      318
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 297,
@@ -4917,16 +2454,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      319
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 298,
@@ -4935,16 +2463,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      320
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 299,
@@ -4953,18 +2472,7 @@
     "Categories": [
       231
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24588
-    },
-    "SampleIndices": [
-      321,
-      322,
-      323
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 300,
@@ -4973,17 +2481,7 @@
     "Categories": [
       231
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      324,
-      325
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 301,
@@ -4992,16 +2490,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      326
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 302,
@@ -5010,16 +2499,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 6,
-      "Chance": 0,
-      "Pitch": 164,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      327
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 303,
@@ -5029,17 +2509,7 @@
       201,
       171
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      328,
-      329
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 304,
@@ -5048,16 +2518,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      330
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 305,
@@ -5066,16 +2527,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      331
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 306,
@@ -5084,16 +2536,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 244,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      332
-    ]
+    "SourceLevel": "ROOFS.TR2"
   },
   {
     "InternalIndex": 307,
@@ -5102,16 +2545,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 7,
-      "Chance": 0,
-      "Pitch": 155,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      333
-    ]
+    "SourceLevel": "AREA51.TR2"
   },
   {
     "InternalIndex": 308,
@@ -5120,17 +2554,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      334,
-      335
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 309,
@@ -5139,17 +2563,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 63,
-      "Range": 10,
-      "Chance": 229,
-      "Pitch": 0,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      336,
-      337
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 310,
@@ -5161,18 +2575,7 @@
       141,
       201
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 25,
-      "Pitch": 231,
-      "Characteristics": 12
-    },
-    "SampleIndices": [
-      338,
-      339,
-      340
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 311,
@@ -5181,16 +2584,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      341
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 312,
@@ -5199,17 +2593,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      342,
-      343
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 313,
@@ -5221,18 +2605,7 @@
       141,
       201
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 12
-    },
-    "SampleIndices": [
-      344,
-      345,
-      346
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 314,
@@ -5244,18 +2617,7 @@
       141,
       201
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 218,
-      "Characteristics": 12
-    },
-    "SampleIndices": [
-      347,
-      348,
-      349
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 315,
@@ -5264,17 +2626,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 76,
-      "Range": 10,
-      "Chance": 10,
-      "Pitch": 244,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      350,
-      351
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 316,
@@ -5283,16 +2635,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 8,
-      "Chance": 0,
-      "Pitch": 180,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      352
-    ]
+    "SourceLevel": "SHORE.TR2"
   },
   {
     "InternalIndex": 317,
@@ -5301,16 +2644,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 76,
-      "Pitch": 218,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      353
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 318,
@@ -5319,16 +2653,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 51,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 63,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      354
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 319,
@@ -5337,16 +2662,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 25,
-      "Pitch": 142,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      355
-    ]
+    "SourceLevel": "AREA51.TR2"
   },
   {
     "InternalIndex": 320,
@@ -5355,16 +2671,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 114,
-      "Range": 14,
-      "Chance": 0,
-      "Pitch": 155,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      356
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 321,
@@ -5373,17 +2680,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 7,
-      "Chance": 38,
-      "Pitch": 168,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      357,
-      358
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 322,
@@ -5392,16 +2689,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      359
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 323,
@@ -5410,17 +2698,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 193,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      360,
-      361
-    ]
+    "SourceLevel": "COMPOUND.TR2"
   },
   {
     "InternalIndex": 324,
@@ -5430,16 +2708,7 @@
       141,
       201
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 5,
-      "Chance": 0,
-      "Pitch": 101,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      362
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 325,
@@ -5448,16 +2717,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 8,
-      "Chance": 0,
-      "Pitch": 63,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      363
-    ]
+    "SourceLevel": "TEMPLE.TR2"
   },
   {
     "InternalIndex": 326,
@@ -5467,16 +2727,7 @@
       201,
       171
     ],
-    "Details": {
-      "Volume": 89,
-      "Range": 9,
-      "Chance": 102,
-      "Pitch": 76,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      364
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 327,
@@ -5487,16 +2738,7 @@
       282,
       283
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 180,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      365
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 328,
@@ -5507,17 +2749,7 @@
       282,
       283
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 7,
-      "Chance": 127,
-      "Pitch": 63,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      366,
-      367
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 330,
@@ -5526,16 +2758,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 180,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      368
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 331,
@@ -5544,16 +2767,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 8,
-      "Chance": 0,
-      "Pitch": 168,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      369
-    ]
+    "SourceLevel": "ANTARC.TR2"
   },
   {
     "InternalIndex": 332,
@@ -5562,16 +2776,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 4,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      370
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 333,
@@ -5580,16 +2785,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 4,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      371
-    ]
+    "SourceLevel": "SEWER.TR2"
   },
   {
     "InternalIndex": 337,
@@ -5598,16 +2794,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 5,
-      "Chance": 0,
-      "Pitch": 147,
-      "Characteristics": 4103
-    },
-    "SampleIndices": [
-      372
-    ]
+    "SourceLevel": "JUNGLE.TR2"
   },
   {
     "InternalIndex": 338,
@@ -5616,16 +2803,7 @@
     "Categories": [
       82
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 24580
-    },
-    "SampleIndices": [
-      373
-    ]
+    "SourceLevel": "CHAMBER.TR2"
   },
   {
     "InternalIndex": 339,
@@ -5636,17 +2814,7 @@
       171,
       141
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 178,
-      "Pitch": 0,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      374,
-      375
-    ]
+    "SourceLevel": "CHAMBER.TR2"
   },
   {
     "InternalIndex": 340,
@@ -5657,18 +2825,7 @@
       171,
       141
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 229,
-      "Pitch": 0,
-      "Characteristics": 24588
-    },
-    "SampleIndices": [
-      376,
-      377,
-      378
-    ]
+    "SourceLevel": "CHAMBER.TR2"
   },
   {
     "InternalIndex": 341,
@@ -5677,18 +2834,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 102,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 12
-    },
-    "SampleIndices": [
-      379,
-      380,
-      381
-    ]
+    "SourceLevel": "CHAMBER.TR2"
   },
   {
     "InternalIndex": 342,
@@ -5697,16 +2843,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 168,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      382
-    ]
+    "SourceLevel": "CHAMBER.TR2"
   },
   {
     "InternalIndex": 343,
@@ -5715,16 +2852,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      383
-    ]
+    "SourceLevel": "CHAMBER.TR2"
   },
   {
     "InternalIndex": 344,
@@ -5734,17 +2862,7 @@
       141,
       171
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 102,
-      "Pitch": 193,
-      "Characteristics": 24584
-    },
-    "SampleIndices": [
-      384,
-      385
-    ]
+    "SourceLevel": "CHAMBER.TR2"
   },
   {
     "InternalIndex": 345,
@@ -5753,16 +2871,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 38,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      386
-    ]
+    "SourceLevel": "CHAMBER.TR2"
   },
   {
     "InternalIndex": 346,
@@ -5771,16 +2880,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 7
-    },
-    "SampleIndices": [
-      387
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 347,
@@ -5789,16 +2889,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      388
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 348,
@@ -5807,16 +2898,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 153,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      389
-    ]
+    "SourceLevel": "TOWER.TR2"
   },
   {
     "InternalIndex": 349,
@@ -5825,16 +2907,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      390
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 350,
@@ -5843,16 +2916,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      391
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 351,
@@ -5861,16 +2925,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 252,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 231,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      392
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 352,
@@ -5879,16 +2934,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 168,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      393
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 353,
@@ -5898,16 +2944,7 @@
       171,
       141
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      394
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 354,
@@ -5916,16 +2953,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      395
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 355,
@@ -5934,16 +2962,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 168,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      396
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 356,
@@ -5952,16 +2971,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      397
-    ]
+    "SourceLevel": "OFFICE.TR2"
   },
   {
     "InternalIndex": 357,
@@ -5970,16 +2980,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      398
-    ]
+    "SourceLevel": "NEVADA.TR2"
   },
   {
     "InternalIndex": 358,
@@ -5988,16 +2989,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 180,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      399
-    ]
+    "SourceLevel": "RAPIDS.TR2"
   },
   {
     "InternalIndex": 359,
@@ -6006,16 +2998,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 127,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 206,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      400
-    ]
+    "SourceLevel": "TRIBOSS.TR2"
   },
   {
     "InternalIndex": 360,
@@ -6025,17 +3008,7 @@
       201,
       171
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      401,
-      402
-    ]
+    "SourceLevel": "TRIBOSS.TR2"
   },
   {
     "InternalIndex": 361,
@@ -6045,17 +3018,7 @@
       171,
       201
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      403,
-      404
-    ]
+    "SourceLevel": "TRIBOSS.TR2"
   },
   {
     "InternalIndex": 362,
@@ -6064,16 +3027,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      405
-    ]
+    "SourceLevel": "TRIBOSS.TR2"
   },
   {
     "InternalIndex": 363,
@@ -6082,16 +3036,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      406
-    ]
+    "SourceLevel": "TRIBOSS.TR2"
   },
   {
     "InternalIndex": 364,
@@ -6100,16 +3045,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      407
-    ]
+    "SourceLevel": "TRIBOSS.TR2"
   },
   {
     "InternalIndex": 365,
@@ -6120,16 +3056,7 @@
       282,
       283
     ],
-    "Details": {
-      "Volume": 178,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 4
-    },
-    "SampleIndices": [
-      408
-    ]
+    "SourceLevel": "TRIBOSS.TR2"
   },
   {
     "InternalIndex": 366,
@@ -6138,16 +3065,7 @@
     "Categories": [
       51
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      409
-    ]
+    "SourceLevel": "TONYBOSS.TR2"
   },
   {
     "InternalIndex": 367,
@@ -6156,16 +3074,7 @@
     "Categories": [
       51
     ],
-    "Details": {
-      "Volume": 229,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      410
-    ]
+    "SourceLevel": "TONYBOSS.TR2"
   },
   {
     "InternalIndex": 368,
@@ -6174,16 +3083,7 @@
     "Categories": [
       51
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8196
-    },
-    "SampleIndices": [
-      411
-    ]
+    "SourceLevel": "TONYBOSS.TR2"
   },
   {
     "InternalIndex": 369,
@@ -6192,16 +3092,6 @@
     "Categories": [
       171
     ],
-    "Details": {
-      "Volume": 204,
-      "Range": 10,
-      "Chance": 0,
-      "Pitch": 0,
-      "Characteristics": 8
-    },
-    "SampleIndices": [
-      412,
-      413
-    ]
+    "SourceLevel": "TONYBOSS.TR2"
   }
 ]

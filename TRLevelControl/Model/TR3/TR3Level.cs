@@ -31,7 +31,5 @@ public class TR3Level : TRLevelBase
     public List<byte> LightMap { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }
     public byte[] DemoData { get; set; }
-    public short[] SoundMap { get; set; }
-    public List<TR3SoundDetails> SoundDetails { get; set; }
-    public List<uint> SampleIndices { get; set; }
+    public SortedDictionary<TR3SFX, TR3SoundEffect> SoundEffects { get; set; }
 }
