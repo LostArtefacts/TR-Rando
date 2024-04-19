@@ -96,13 +96,13 @@ public class IOTests : TestBase
     {
         TR4Level level = GetTR4Level(levelName);
 
-        List<ushort> originalData = new(level.LevelDataChunk.FloorData);
+        List<ushort> originalData = new(level.FloorData);
 
         FDControl fdControl = new();
         fdControl.ParseFromLevel(level);
         fdControl.WriteToLevel(level);
 
-        CollectionAssert.AreEqual(originalData, level.LevelDataChunk.FloorData);
+        CollectionAssert.AreEqual(originalData, level.FloorData);
     }
 
     [TestMethod]
@@ -111,7 +111,7 @@ public class IOTests : TestBase
         TR4Level lvl = GetTR4Level(TR4LevelNames.CLEOPATRA);
 
         //Store the original floordata from the level
-        List<ushort> originalFData = new(lvl.LevelDataChunk.FloorData);
+        List<ushort> originalFData = new(lvl.FloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
         FDControl fdataReader = new();
@@ -119,7 +119,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         //Compare to make sure the original fdata was written back.
-        CollectionAssert.AreEqual(originalFData, lvl.LevelDataChunk.FloorData, "Floordata does not match");
+        CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");
     }
 
     [TestMethod]
@@ -128,7 +128,7 @@ public class IOTests : TestBase
         TR4Level lvl = GetTR4Level(TR4LevelNames.ALEXANDRIA);
 
         //Store the original floordata from the level
-        List<ushort> originalFData = new(lvl.LevelDataChunk.FloorData);
+        List<ushort> originalFData = new(lvl.FloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
         FDControl fdataReader = new();
@@ -136,6 +136,6 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         //Compare to make sure the original fdata was written back.
-        CollectionAssert.AreEqual(originalFData, lvl.LevelDataChunk.FloorData, "Floordata does not match");
+        CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");
     }
 }

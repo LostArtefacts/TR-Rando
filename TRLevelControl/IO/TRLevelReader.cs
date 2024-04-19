@@ -8,21 +8,28 @@ public class TRLevelReader : BinaryReader
     public TRLevelReader(Stream stream)
         : base(stream) { }
 
-    public TRLevelReader Inflate(TR4Chunk chunk)
+    public TRLevelReader Inflate()
     {
-        chunk.UncompressedSize = ReadUInt32();
-        chunk.CompressedSize = ReadUInt32();
-        chunk.CompressedChunk = ReadBytes((int)chunk.CompressedSize);
+        uint expectedLength = ReadUInt32();
+        uint compressedLength = ReadUInt32();
 
-        MemoryStream inflatedStream = new();
-        using MemoryStream ms = new(chunk.CompressedChunk);
+        byte[] data = new byte[compressedLength];
+        for (uint i = 0; i < compressedLength; i++)
+        {
+            data[i] = ReadByte();
+        }
+
+        MemoryStream inflatedStream;
+
+        inflatedStream = new();
+        using MemoryStream ms = new(data);
         using InflaterInputStream inflater = new(ms);
+
         inflater.CopyTo(inflatedStream);
 
-        if (inflatedStream.Length != chunk.UncompressedSize)
+        if (inflatedStream.Length != expectedLength)
         {
-            throw new InvalidDataException(
-                $"Inflated stream length mismatch: got {inflatedStream.Length}, expected {chunk.UncompressedSize}");
+            throw new InvalidDataException($"Inflated stream length mismatch: got {inflatedStream.Length}, expected {expectedLength}");
         }
 
         inflatedStream.Position = 0;

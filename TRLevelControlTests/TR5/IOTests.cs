@@ -46,12 +46,12 @@ public class IOTests : TestBase
     {
         TR5Level level = GetTR5Level(levelName);
 
-        List<ushort> originalData = new(level.LevelDataChunk.FloorData);
+        List<ushort> originalData = new(level.FloorData);
 
         FDControl fdControl = new();
         fdControl.ParseFromLevel(level);
         fdControl.WriteToLevel(level);
 
-        CollectionAssert.AreEqual(originalData, level.LevelDataChunk.FloorData);
+        CollectionAssert.AreEqual(originalData, level.FloorData);
     }
 }

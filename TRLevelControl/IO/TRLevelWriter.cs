@@ -11,30 +11,22 @@ public class TRLevelWriter : BinaryWriter
     public TRLevelWriter(Stream stream)
         : base(stream) { }
 
-    public void Deflate(TRLevelWriter inflatedWriter, TR4Chunk chunk)
+    public void Deflate(TRLevelWriter inflatedWriter)
     {
+        byte[] data = (inflatedWriter.BaseStream as MemoryStream).ToArray();
+
         using MemoryStream outStream = new();
         using DeflaterOutputStream deflater = new(outStream);
+        using MemoryStream inStream = new(data);
 
-        long position = inflatedWriter.BaseStream.Position;
-        try
-        {
-            inflatedWriter.BaseStream.Position = 0;
-            inflatedWriter.BaseStream.CopyTo(deflater);
-            deflater.Finish();
+        inStream.CopyTo(deflater);
+        deflater.Finish();
 
-            byte[] zippedData = outStream.ToArray();
-            chunk.UncompressedSize = (uint)inflatedWriter.BaseStream.Length;
-            chunk.CompressedSize = (uint)zippedData.Length;
-
-            Write(chunk.UncompressedSize);
-            Write(chunk.CompressedSize);
-            Write(zippedData);
-        }
-        finally
-        {
-            inflatedWriter.BaseStream.Position = position;
-        }
+        byte[] zippedData = outStream.ToArray();
+        long startPosition = BaseStream.Position;
+        Write((uint)data.Length);
+        Write((uint)zippedData.Length);
+        Write(zippedData);
     }
 
     public void Write(IEnumerable<ushort> data)

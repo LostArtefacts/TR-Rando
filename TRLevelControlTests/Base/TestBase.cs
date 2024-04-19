@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TRLevelControl;
-using TRLevelControl.Compression;
 using TRLevelControl.Model;
 
 namespace TRLevelControlTests;
@@ -117,33 +116,21 @@ public class TestBase
         TR4LevelControl control = new();
 
         string pathI = GetReadPath(levelName, TRGameVersion.TR4);
-        using MemoryStream outputStream = new();
+        using MemoryStream outputStream1 = new();
+        using MemoryStream outputStream2 = new();
 
-        // ZLib produces a slightly more optimal output than OG so we can't compare byte-for-byte
         TR4Level level = control.Read(pathI);
-        TR45LevelSummary originalSummary = new()
-        {
-            LevelChunkUncompressedSize = level.LevelDataChunk.UncompressedSize,
-            Tex32ChunkUncompressedSize = level.Texture32Chunk.UncompressedSize,
-            Tex16ChunkUncompressedSize = level.Texture16Chunk.UncompressedSize,
-            Tex32MChunkUncompressedSize = level.SkyAndFont32Chunk.UncompressedSize
-        };
+        control.Write(level, outputStream1);
 
-        control.Write(level, outputStream);
+        byte[] output1 = outputStream1.ToArray();
+
         // Read in again what we wrote out
-        TR4Level level2 = control.Read(new MemoryStream(outputStream.ToArray()));
+        TR4Level level2 = control.Read(new MemoryStream(output1));
+        control.Write(level2, outputStream2);
 
-        // Verify - have we lost any data?
-        Assert.AreEqual(originalSummary.LevelChunkUncompressedSize, (uint)TRZlib.Decompress(level2.LevelDataChunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex32ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture32Chunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex16ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture16Chunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex32MChunkUncompressedSize, (uint)TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk).Length);
+        byte[] output2 = outputStream2.ToArray();
 
-        // Test compression against original
-        CollectionAssert.AreEqual(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, level2.LevelDataChunk.Seperator);
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.Texture32Chunk.CompressedChunk), TRZlib.Decompress(level2.Texture32Chunk.CompressedChunk));
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.Texture16Chunk.CompressedChunk), TRZlib.Decompress(level2.Texture16Chunk.CompressedChunk));
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk));
+        CollectionAssert.AreEqual(output1, output2);
     }
 
     public static void ReadWriteTR5Level(string levelName)
@@ -151,33 +138,21 @@ public class TestBase
         TR5LevelControl control = new();
 
         string pathI = GetReadPath(levelName, TRGameVersion.TR5);
-        using MemoryStream outputStream = new();
+        using MemoryStream outputStream1 = new();
+        using MemoryStream outputStream2 = new();
 
-        // ZLib produces a slightly more optimal output than OG so we can't compare byte-for-byte
         TR5Level level = control.Read(pathI);
-        TR45LevelSummary originalSummary = new()
-        {
-            LevelChunkUncompressedSize = level.LevelDataChunk.UncompressedSize,
-            Tex32ChunkUncompressedSize = level.Texture32Chunk.UncompressedSize,
-            Tex16ChunkUncompressedSize = level.Texture16Chunk.UncompressedSize,
-            Tex32MChunkUncompressedSize = level.SkyAndFont32Chunk.UncompressedSize
-        };
+        control.Write(level, outputStream1);
 
-        control.Write(level, outputStream);
+        byte[] output1 = outputStream1.ToArray();
+
         // Read in again what we wrote out
-        TR5Level level2 = control.Read(new MemoryStream(outputStream.ToArray()));
+        TR5Level level2 = control.Read(new MemoryStream(output1));
+        control.Write(level2, outputStream2);
 
-        // Verify - have we lost any data?
-        Assert.AreEqual(originalSummary.LevelChunkUncompressedSize, (uint)level2.LevelDataChunk.CompressedChunk.Length);
-        Assert.AreEqual(originalSummary.Tex32ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture32Chunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex16ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture16Chunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex32MChunkUncompressedSize, (uint)TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk).Length);
+        byte[] output2 = outputStream2.ToArray();
 
-        // Test compression against original
-        CollectionAssert.AreEqual(new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD }, level2.LevelDataChunk.Seperator);
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.Texture32Chunk.CompressedChunk), TRZlib.Decompress(level2.Texture32Chunk.CompressedChunk));
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.Texture16Chunk.CompressedChunk), TRZlib.Decompress(level2.Texture16Chunk.CompressedChunk));
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk));
+        CollectionAssert.AreEqual(output1, output2);
     }
 
     public static TR1Level WriteReadTempLevel(TR1Level level)
