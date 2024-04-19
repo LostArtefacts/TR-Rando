@@ -6,7 +6,13 @@ namespace TRLevelControl;
 public abstract class TRLevelControlBase<L>
     where L : TRLevelBase
 {
+    protected ITRLevelObserver _observer;
     protected L _level;
+
+    public TRLevelControlBase(ITRLevelObserver observer = null)
+    {
+        _observer = observer;
+    }
 
     public L Read(string filePath)
         => Read(File.OpenRead(filePath));

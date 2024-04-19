@@ -50,7 +50,7 @@ public class IOTests : TestBase
     [DataRow(TR4LevelNames.TIMES)]
     public void TestReadWrite(string levelname)
     {
-        ReadWriteTR4Level(levelname);
+        ReadWriteLevel(levelname, TRGameVersion.TR4);
     }
 
     [TestMethod]

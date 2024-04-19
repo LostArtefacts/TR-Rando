@@ -5,8 +5,13 @@ namespace TRLevelControl;
 
 public class TRLevelReader : BinaryReader
 {
-    public TRLevelReader(Stream stream)
-        : base(stream) { }
+    private readonly ITRLevelObserver _observer;
+
+    public TRLevelReader(Stream stream, ITRLevelObserver observer = null)
+        : base(stream)
+    {
+        _observer = observer;
+    }
 
     public TRLevelReader Inflate()
     {

@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRLevelControlTests;
@@ -82,77 +81,52 @@ public class TestBase
     public static void ReadWriteLevel(string levelName, TRGameVersion version)
     {
         string pathI = GetReadPath(levelName, version);
+        using FileStream dataStream = File.OpenRead(pathI);
+        using MemoryStream inputStream = new();
         using MemoryStream outputStream = new();
 
+        dataStream.CopyTo(inputStream);
+        byte[] inputData = inputStream.ToArray();
+        inputStream.Position = 0;
+
+        ObserverBase observer;
         switch (version)
         {
             case TRGameVersion.TR1:
-                TR1LevelControl control1 = new();
-                TR1Level level1 = control1.Read(pathI);
+                observer = new();
+                TR1LevelControl control1 = new(observer);
+                TR1Level level1 = control1.Read(inputStream);
                 control1.Write(level1, outputStream);
                 break;
             case TRGameVersion.TR2:
-                TR2LevelControl control2 = new();
+                observer = new();
+                TR2LevelControl control2 = new(observer);
                 TR2Level level2 = control2.Read(pathI);
                 control2.Write(level2, outputStream);
                 break;
             case TRGameVersion.TR3:
-                TR3LevelControl control3 = new();
+                observer = new();
+                TR3LevelControl control3 = new(observer);
                 TR3Level level3 = control3.Read(pathI);
                 control3.Write(level3, outputStream);
                 break;
+            case TRGameVersion.TR4:
+                observer = new TR45Observer();
+                TR4LevelControl control4 = new(observer);
+                TR4Level level4 = control4.Read(pathI);
+                control4.Write(level4, outputStream);
+                break;
+            case TRGameVersion.TR5:
+                observer = new TR45Observer();
+                TR5LevelControl control5 = new(observer);
+                TR5Level level5 = control5.Read(pathI);
+                control5.Write(level5, outputStream);
+                break;
             default:
-                throw new Exception("Utility IO method suitable only for TR1-3.");
+                throw new NotImplementedException();
         }
 
-        byte[] b1 = File.ReadAllBytes(pathI);
-        byte[] b2 = outputStream.ToArray();
-
-        CollectionAssert.AreEqual(b1, b2);
-    }
-
-    public static void ReadWriteTR4Level(string levelName)
-    {
-        TR4LevelControl control = new();
-
-        string pathI = GetReadPath(levelName, TRGameVersion.TR4);
-        using MemoryStream outputStream1 = new();
-        using MemoryStream outputStream2 = new();
-
-        TR4Level level = control.Read(pathI);
-        control.Write(level, outputStream1);
-
-        byte[] output1 = outputStream1.ToArray();
-
-        // Read in again what we wrote out
-        TR4Level level2 = control.Read(new MemoryStream(output1));
-        control.Write(level2, outputStream2);
-
-        byte[] output2 = outputStream2.ToArray();
-
-        CollectionAssert.AreEqual(output1, output2);
-    }
-
-    public static void ReadWriteTR5Level(string levelName)
-    {
-        TR5LevelControl control = new();
-
-        string pathI = GetReadPath(levelName, TRGameVersion.TR5);
-        using MemoryStream outputStream1 = new();
-        using MemoryStream outputStream2 = new();
-
-        TR5Level level = control.Read(pathI);
-        control.Write(level, outputStream1);
-
-        byte[] output1 = outputStream1.ToArray();
-
-        // Read in again what we wrote out
-        TR5Level level2 = control.Read(new MemoryStream(output1));
-        control.Write(level2, outputStream2);
-
-        byte[] output2 = outputStream2.ToArray();
-
-        CollectionAssert.AreEqual(output1, output2);
+        observer.TestOutput(inputData, outputStream.ToArray());
     }
 
     public static TR1Level WriteReadTempLevel(TR1Level level)

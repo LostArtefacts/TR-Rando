@@ -5,11 +5,16 @@ namespace TRLevelControl;
 
 public class TRLevelWriter : BinaryWriter
 {
-    public TRLevelWriter()
-        : base(new MemoryStream()) { }
+    private readonly ITRLevelObserver _observer;
 
-    public TRLevelWriter(Stream stream)
-        : base(stream) { }
+    public TRLevelWriter(ITRLevelObserver observer = null)
+        : this(new MemoryStream(), observer) { }
+
+    public TRLevelWriter(Stream input, ITRLevelObserver observer = null)
+        : base(input)
+    {
+        _observer = observer;
+    }
 
     public void Deflate(TRLevelWriter inflatedWriter)
     {

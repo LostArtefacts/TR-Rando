@@ -6,6 +6,9 @@ namespace TRLevelControl;
 
 public class TR2LevelControl : TRLevelControlBase<TR2Level>
 {
+    public TR2LevelControl(ITRLevelObserver observer = null)
+        : base(observer) { }
+
     protected override TR2Level CreateLevel(TRFileVersion version)
     {
         TR2Level level = new()

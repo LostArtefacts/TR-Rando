@@ -5,6 +5,9 @@ namespace TRLevelControl;
 
 public class TR5LevelControl : TRLevelControlBase<TR5Level>
 {
+    public TR5LevelControl(ITRLevelObserver observer = null)
+        : base(observer) { }
+
     protected override TR5Level CreateLevel(TRFileVersion version)
     {
         TR5Level level = new()

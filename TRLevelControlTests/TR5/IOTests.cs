@@ -25,7 +25,7 @@ public class IOTests : TestBase
     [DataRow(TR5LevelNames.REDALERT)]
     public void TestReadWrite(string levelName)
     {
-        ReadWriteTR5Level(levelName);
+        ReadWriteLevel(levelName, TRGameVersion.TR5);
     }
 
     [TestMethod]
