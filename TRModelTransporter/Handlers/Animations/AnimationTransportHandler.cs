@@ -48,7 +48,7 @@ public class AnimationTransportHandler
 
             AnimationUtilities.PackStateChanges(level, animation, packedAnimation);
             AnimationUtilities.PackAnimCommands(level, animation, packedAnimation);
-            AnimationUtilities.PackAnimSounds(level, packedAnimation);
+            AnimationUtilities.PackAnimSounds(level, definition, packedAnimation);
         }
 
         foreach (TR2PackedAnimation anim in definition.Animations.Values)
@@ -133,7 +133,6 @@ public class AnimationTransportHandler
         {
             TR2PackedAnimation packedAnimation = animations[oldAnimationIndex];
             AnimationUtilities.UnpackStateChanges(level.AnimDispatches, level.StateChanges, packedAnimation);
-            AnimationUtilities.UnpackAnimSounds(level, packedAnimation);
             AnimationUtilities.UnpackAnimCommands(level.AnimCommands, packedAnimation);
 
             int newAnimationIndex = AnimationUtilities.UnpackAnimation(level, packedAnimation);
@@ -157,10 +156,6 @@ public class AnimationTransportHandler
                 }
             }
         }
-
-        // Inserting SampleIndices will break the game unless they are sorted numerically
-        // so handle this outwith the main animation insertion loop for ease.
-        SoundUtilities.ResortSoundIndices(level);
 
         AnimationUtilities.ImportAnimationFrames(level, definition);
     }

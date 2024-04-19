@@ -90,18 +90,6 @@ public static class SoundUtilities
         return packedSound;
     }
 
-    public static void ResortSoundIndices(TR2Level level)
-    {
-        List<TRSoundDetails> soundDetails = level.SoundDetails.ToList();
-        List<short> soundMap = level.SoundMap.ToList();
-
-        ResortSoundIndices(level.SampleIndices, soundDetails, soundMap);
-
-        level.SoundDetails.Clear();
-        level.SoundDetails.AddRange(soundDetails);
-        level.SoundMap = soundMap.ToArray();
-    }
-
     public static void ResortSoundIndices(TR3Level level)
     {
         List<TR3SoundDetails> soundDetails = level.SoundDetails.ToList();
@@ -112,47 +100,6 @@ public static class SoundUtilities
         level.SoundDetails.Clear();
         level.SoundDetails.AddRange(soundDetails);
         level.SoundMap = soundMap.ToArray();
-    }
-
-    private static void ResortSoundIndices(List<uint> sampleIndices, List<TRSoundDetails> soundDetails, List<short> soundMap)
-    {
-        // Store the values from SampleIndices against their current positions
-        // in the list.             
-        Dictionary<int, uint> indexMap = new();
-        for (int i = 0; i < sampleIndices.Count; i++)
-        {
-            indexMap[i] = sampleIndices[i];
-        }
-
-        // Sort the indices to avoid the game crashing
-        sampleIndices.Sort();
-
-        // Remap each SoundDetail to use the new index of the sample it points to
-        foreach (TRSoundDetails details in soundDetails)
-        {
-            details.Sample = (ushort)sampleIndices.IndexOf(indexMap[details.Sample]);
-        }
-
-        // Repeat for SoundMap -> SoundDetails
-        Dictionary<int, TRSoundDetails> soundMapIndices = new();
-        for (int i = 0; i < soundMap.Count; i++)
-        {
-            if (soundMap[i] != -1)
-            {
-                soundMapIndices[i] = soundDetails[soundMap[i]];
-            }
-        }
-
-        soundDetails.Sort(delegate (TRSoundDetails d1, TRSoundDetails d2)
-        {
-            return d1.Sample.CompareTo(d2.Sample);
-        });
-
-        foreach (int mapIndex in soundMapIndices.Keys)
-        {
-            TRSoundDetails details = soundMapIndices[mapIndex];
-            soundMap[mapIndex] = (short)soundDetails.IndexOf(details);
-        }
     }
 
     private static void ResortSoundIndices(List<uint> sampleIndices, List<TR3SoundDetails> soundDetails, List<short> soundMap)
