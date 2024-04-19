@@ -340,15 +340,4 @@ internal static class TR2FileReadUtilities
             Roll = reader.ReadInt16()
         };
     }
-
-    public static TRSoundDetails ReadSoundDetails(BinaryReader reader)
-    {
-        return new TRSoundDetails()
-        {
-            Sample = reader.ReadUInt16(),
-            Volume = reader.ReadUInt16(),
-            Chance = reader.ReadUInt16(),
-            Characteristics = reader.ReadUInt16()
-        };
-    }
 }
