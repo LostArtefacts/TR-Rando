@@ -308,7 +308,7 @@ internal static class TR4FileReadUtilities
 
         for (int i = 0; i < numSoundDetails; i++)
         {
-            lvl.SoundDetails.Add(TR3FileReadUtilities.ReadSoundDetails(reader));
+            lvl.SoundDetails.Add(ReadSoundDetails(reader));
         }
 
         uint numSampleIndices = reader.ReadUInt32();
@@ -318,6 +318,19 @@ internal static class TR4FileReadUtilities
         {
             lvl.SampleIndices.Add(reader.ReadUInt32());
         }
+    }
+
+    public static TR4SoundDetails ReadSoundDetails(BinaryReader reader)
+    {
+        return new()
+        {
+            Sample = reader.ReadUInt16(),
+            Volume = reader.ReadByte(),
+            Range = reader.ReadByte(),
+            Chance = reader.ReadByte(),
+            Pitch = reader.ReadByte(),
+            Characteristics = reader.ReadInt16()
+        };
     }
 
     private static TR3RoomData ConvertToRoomData(TR4Room room)
