@@ -8,4 +8,6 @@ public interface ITRLevelObserver
     void OnChunkWritten(long startPosition, long endPosition, TRChunkType chunkType, byte[] data);
     void OnMeshPaddingRead(uint meshPointer, List<byte> values);
     List<byte> GetMeshPadding(uint meshPointer);
+    void OnSampleIndicesRead(uint[] sampleIndices);
+    IEnumerable<uint> GetSampleIndices();
 }

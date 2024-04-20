@@ -10,6 +10,8 @@ public class TR45Observer : ObserverBase
 
     private readonly Dictionary<uint, List<byte>> _meshPadding = new();
 
+    private uint[] _sampleIndices;
+
     public override void TestOutput(byte[] input, byte[] output)
     {
         CollectionAssert.AreEquivalent(_inflatedReads.Keys, _inflatedWrites.Keys);
@@ -69,6 +71,16 @@ public class TR45Observer : ObserverBase
     public override List<byte> GetMeshPadding(uint meshPointer)
     {
         return _meshPadding.ContainsKey(meshPointer) ? _meshPadding[meshPointer] : null;
+    }
+
+    public override void OnSampleIndicesRead(uint[] sampleIndices)
+    {
+        _sampleIndices = sampleIndices;
+    }
+
+    public override IEnumerable<uint> GetSampleIndices()
+    {
+        return _sampleIndices;
     }
 
     class ZipWrapper

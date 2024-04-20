@@ -22,4 +22,10 @@ public class ObserverBase : ITRLevelObserver
 
     public virtual List<byte> GetMeshPadding(uint meshPointer)
         => null;
+
+    public virtual void OnSampleIndicesRead(uint[] sampleIndices)
+    { }
+
+    public virtual IEnumerable<uint> GetSampleIndices()
+        => null;
 }

@@ -443,9 +443,10 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         }
 
         // Sample indices are discarded in game. The details point to the samples
-        // directly per ReadWAVData.
+        // directly per ReadWAVData. Observe the reads here only.
         uint numSampleIndices = reader.ReadUInt32();
-        reader.ReadUInt32s(numSampleIndices);
+        uint[] sampleIndices = reader.ReadUInt32s(numSampleIndices);
+        _observer?.OnSampleIndicesRead(sampleIndices);
 
         for (int i = 0; i < soundMap.Length; i++)
         {
@@ -514,8 +515,9 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
             sampleIndices.Add((uint)sampleIndex);
         }
 
-        writer.Write((uint)sampleIndices.Count);
-        writer.Write(sampleIndices);
+        IEnumerable<uint> outputIndices = _observer?.GetSampleIndices() ?? sampleIndices;
+        writer.Write((uint)outputIndices.Count());
+        writer.Write(outputIndices);
 
         writer.Write(Enumerable.Repeat((byte)0xCD, 6));
     }
