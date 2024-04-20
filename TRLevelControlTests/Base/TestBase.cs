@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TRLevelControl;
-using TRLevelControl.Compression;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRLevelControlTests;
@@ -83,101 +81,52 @@ public class TestBase
     public static void ReadWriteLevel(string levelName, TRGameVersion version)
     {
         string pathI = GetReadPath(levelName, version);
+        using FileStream dataStream = File.OpenRead(pathI);
+        using MemoryStream inputStream = new();
         using MemoryStream outputStream = new();
 
+        dataStream.CopyTo(inputStream);
+        byte[] inputData = inputStream.ToArray();
+        inputStream.Position = 0;
+
+        ObserverBase observer;
         switch (version)
         {
             case TRGameVersion.TR1:
-                TR1LevelControl control1 = new();
-                TR1Level level1 = control1.Read(pathI);
+                observer = new();
+                TR1LevelControl control1 = new(observer);
+                TR1Level level1 = control1.Read(inputStream);
                 control1.Write(level1, outputStream);
                 break;
             case TRGameVersion.TR2:
-                TR2LevelControl control2 = new();
+                observer = new();
+                TR2LevelControl control2 = new(observer);
                 TR2Level level2 = control2.Read(pathI);
                 control2.Write(level2, outputStream);
                 break;
             case TRGameVersion.TR3:
-                TR3LevelControl control3 = new();
+                observer = new();
+                TR3LevelControl control3 = new(observer);
                 TR3Level level3 = control3.Read(pathI);
                 control3.Write(level3, outputStream);
                 break;
+            case TRGameVersion.TR4:
+                observer = new TR45Observer();
+                TR4LevelControl control4 = new(observer);
+                TR4Level level4 = control4.Read(pathI);
+                control4.Write(level4, outputStream);
+                break;
+            case TRGameVersion.TR5:
+                observer = new TR45Observer();
+                TR5LevelControl control5 = new(observer);
+                TR5Level level5 = control5.Read(pathI);
+                control5.Write(level5, outputStream);
+                break;
             default:
-                throw new Exception("Utility IO method suitable only for TR1-3.");
+                throw new NotImplementedException();
         }
 
-        byte[] b1 = File.ReadAllBytes(pathI);
-        byte[] b2 = outputStream.ToArray();
-
-        CollectionAssert.AreEqual(b1, b2);
-    }
-
-    public static void ReadWriteTR4Level(string levelName)
-    {
-        TR4LevelControl control = new();
-
-        string pathI = GetReadPath(levelName, TRGameVersion.TR4);
-        using MemoryStream outputStream = new();
-
-        // ZLib produces a slightly more optimal output than OG so we can't compare byte-for-byte
-        TR4Level level = control.Read(pathI);
-        TR45LevelSummary originalSummary = new()
-        {
-            LevelChunkUncompressedSize = level.LevelDataChunk.UncompressedSize,
-            Tex32ChunkUncompressedSize = level.Texture32Chunk.UncompressedSize,
-            Tex16ChunkUncompressedSize = level.Texture16Chunk.UncompressedSize,
-            Tex32MChunkUncompressedSize = level.SkyAndFont32Chunk.UncompressedSize
-        };
-
-        control.Write(level, outputStream);
-        // Read in again what we wrote out
-        TR4Level level2 = control.Read(new MemoryStream(outputStream.ToArray()));
-
-        // Verify - have we lost any data?
-        Assert.AreEqual(originalSummary.LevelChunkUncompressedSize, (uint)TRZlib.Decompress(level2.LevelDataChunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex32ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture32Chunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex16ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture16Chunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex32MChunkUncompressedSize, (uint)TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk).Length);
-
-        // Test compression against original
-        CollectionAssert.AreEqual(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, level2.LevelDataChunk.Seperator);
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.Texture32Chunk.CompressedChunk), TRZlib.Decompress(level2.Texture32Chunk.CompressedChunk));
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.Texture16Chunk.CompressedChunk), TRZlib.Decompress(level2.Texture16Chunk.CompressedChunk));
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk));
-    }
-
-    public static void ReadWriteTR5Level(string levelName)
-    {
-        TR5LevelControl control = new();
-
-        string pathI = GetReadPath(levelName, TRGameVersion.TR5);
-        using MemoryStream outputStream = new();
-
-        // ZLib produces a slightly more optimal output than OG so we can't compare byte-for-byte
-        TR5Level level = control.Read(pathI);
-        TR45LevelSummary originalSummary = new()
-        {
-            LevelChunkUncompressedSize = level.LevelDataChunk.UncompressedSize,
-            Tex32ChunkUncompressedSize = level.Texture32Chunk.UncompressedSize,
-            Tex16ChunkUncompressedSize = level.Texture16Chunk.UncompressedSize,
-            Tex32MChunkUncompressedSize = level.SkyAndFont32Chunk.UncompressedSize
-        };
-
-        control.Write(level, outputStream);
-        // Read in again what we wrote out
-        TR5Level level2 = control.Read(new MemoryStream(outputStream.ToArray()));
-
-        // Verify - have we lost any data?
-        Assert.AreEqual(originalSummary.LevelChunkUncompressedSize, (uint)level2.LevelDataChunk.CompressedChunk.Length);
-        Assert.AreEqual(originalSummary.Tex32ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture32Chunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex16ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture16Chunk.CompressedChunk).Length);
-        Assert.AreEqual(originalSummary.Tex32MChunkUncompressedSize, (uint)TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk).Length);
-
-        // Test compression against original
-        CollectionAssert.AreEqual(new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD }, level2.LevelDataChunk.Seperator);
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.Texture32Chunk.CompressedChunk), TRZlib.Decompress(level2.Texture32Chunk.CompressedChunk));
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.Texture16Chunk.CompressedChunk), TRZlib.Decompress(level2.Texture16Chunk.CompressedChunk));
-        CollectionAssert.AreEqual(TRZlib.Decompress(level.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk));
+        observer.TestOutput(inputData, outputStream.ToArray());
     }
 
     public static TR1Level WriteReadTempLevel(TR1Level level)

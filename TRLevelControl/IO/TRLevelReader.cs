@@ -5,24 +5,39 @@ namespace TRLevelControl;
 
 public class TRLevelReader : BinaryReader
 {
-    public TRLevelReader(Stream stream)
-        : base(stream) { }
+    private readonly ITRLevelObserver _observer;
 
-    public TRLevelReader Inflate(TR4Chunk chunk)
+    public TRLevelReader(Stream stream, ITRLevelObserver observer = null)
+        : base(stream)
     {
-        chunk.UncompressedSize = ReadUInt32();
-        chunk.CompressedSize = ReadUInt32();
-        chunk.CompressedChunk = ReadBytes((int)chunk.CompressedSize);
+        _observer = observer;
+    }
 
-        MemoryStream inflatedStream = new();
-        using MemoryStream ms = new(chunk.CompressedChunk);
+    public TRLevelReader Inflate(TRChunkType chunkType)
+    {
+        long position = BaseStream.Position;
+        uint expectedLength = ReadUInt32();
+        uint compressedLength = ReadUInt32();
+
+        byte[] data = new byte[compressedLength];
+        for (uint i = 0; i < compressedLength; i++)
+        {
+            data[i] = ReadByte();
+        }
+
+        MemoryStream inflatedStream;
+
+        inflatedStream = new();
+        using MemoryStream ms = new(data);
         using InflaterInputStream inflater = new(ms);
+
         inflater.CopyTo(inflatedStream);
 
-        if (inflatedStream.Length != chunk.UncompressedSize)
+        _observer?.OnChunkRead(position, BaseStream.Position, chunkType, inflatedStream.ToArray());
+
+        if (inflatedStream.Length != expectedLength)
         {
-            throw new InvalidDataException(
-                $"Inflated stream length mismatch: got {inflatedStream.Length}, expected {chunk.UncompressedSize}");
+            throw new InvalidDataException($"Inflated stream length mismatch: got {inflatedStream.Length}, expected {expectedLength}");
         }
 
         inflatedStream.Position = 0;
@@ -82,12 +97,17 @@ public class TRLevelReader : BinaryReader
         List<TRTexImage32> images = new((int)numImages);
         for (long i = 0; i < numImages; i++)
         {
-            images.Add(new()
-            {
-                Pixels = ReadUInt32s(TRConsts.TPageSize)
-            });
+            images.Add(ReadImage32());
         }
         return images;
+    }
+
+    public TRTexImage32 ReadImage32()
+    {
+        return new()
+        {
+            Pixels = ReadUInt32s(TRConsts.TPageSize)
+        };
     }
 
     public List<TRColour> ReadColours(long numColours)

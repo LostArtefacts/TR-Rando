@@ -6,14 +6,20 @@ namespace TRLevelControl;
 public abstract class TRLevelControlBase<L>
     where L : TRLevelBase
 {
+    protected ITRLevelObserver _observer;
     protected L _level;
+
+    public TRLevelControlBase(ITRLevelObserver observer = null)
+    {
+        _observer = observer;
+    }
 
     public L Read(string filePath)
         => Read(File.OpenRead(filePath));
 
     public L Read(Stream stream)
     {
-        using TRLevelReader reader = new(stream);
+        using TRLevelReader reader = new(stream, _observer);
 
         _level = CreateLevel((TRFileVersion)reader.ReadUInt32());
         Read(reader);
@@ -27,7 +33,7 @@ public abstract class TRLevelControlBase<L>
 
     public void Write(L level, Stream outputStream)
     {
-        using TRLevelWriter writer = new(outputStream);
+        using TRLevelWriter writer = new(outputStream, _observer);
 
         writer.Write((uint)level.Version.File);
 

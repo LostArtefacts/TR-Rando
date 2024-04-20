@@ -5,36 +5,35 @@ namespace TRLevelControl;
 
 public class TRLevelWriter : BinaryWriter
 {
-    public TRLevelWriter()
-        : base(new MemoryStream()) { }
+    private readonly ITRLevelObserver _observer;
 
-    public TRLevelWriter(Stream stream)
-        : base(stream) { }
+    public TRLevelWriter(ITRLevelObserver observer = null)
+        : this(new MemoryStream(), observer) { }
 
-    public void Deflate(TRLevelWriter inflatedWriter, TR4Chunk chunk)
+    public TRLevelWriter(Stream input, ITRLevelObserver observer = null)
+        : base(input)
     {
+        _observer = observer;
+    }
+
+    public void Deflate(TRLevelWriter inflatedWriter, TRChunkType chunkType)
+    {
+        byte[] data = (inflatedWriter.BaseStream as MemoryStream).ToArray();
+
         using MemoryStream outStream = new();
         using DeflaterOutputStream deflater = new(outStream);
+        using MemoryStream inStream = new(data);
 
-        long position = inflatedWriter.BaseStream.Position;
-        try
-        {
-            inflatedWriter.BaseStream.Position = 0;
-            inflatedWriter.BaseStream.CopyTo(deflater);
-            deflater.Finish();
+        inStream.CopyTo(deflater);
+        deflater.Finish();
 
-            byte[] zippedData = outStream.ToArray();
-            chunk.UncompressedSize = (uint)inflatedWriter.BaseStream.Length;
-            chunk.CompressedSize = (uint)zippedData.Length;
+        byte[] zippedData = outStream.ToArray();
+        long startPosition = BaseStream.Position;
+        Write((uint)data.Length);
+        Write((uint)zippedData.Length);
+        Write(zippedData);
 
-            Write(chunk.UncompressedSize);
-            Write(chunk.CompressedSize);
-            Write(zippedData);
-        }
-        finally
-        {
-            inflatedWriter.BaseStream.Position = position;
-        }
+        _observer?.OnChunkWritten(startPosition, BaseStream.Position, chunkType, data);
     }
 
     public void Write(IEnumerable<ushort> data)
@@ -73,8 +72,13 @@ public class TRLevelWriter : BinaryWriter
     {
         foreach (TRTexImage32 image in images)
         {
-            Write(image.Pixels);
+            Write(image);
         }
+    }
+
+    public void Write(TRTexImage32 image)
+    {
+        Write(image.Pixels);
     }
 
     public void Write(IEnumerable<TRColour> colours)
