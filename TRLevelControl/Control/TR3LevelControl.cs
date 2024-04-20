@@ -262,23 +262,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         ushort numDemoData = reader.ReadUInt16();
         _level.DemoData = reader.ReadBytes(numDemoData);
 
-        //Sound Map (370 shorts = 740 bytes) & Sound Details
-        _level.SoundMap = new short[370];
-
-        for (int i = 0; i < _level.SoundMap.Length; i++)
-        {
-            _level.SoundMap[i] = reader.ReadInt16();
-        }
-
-        uint numSoundDetails = reader.ReadUInt32();
-        _level.SoundDetails = new();
-        for (int i = 0; i < numSoundDetails; i++)
-        {
-            _level.SoundDetails.Add(TR3FileReadUtilities.ReadSoundDetails(reader));
-        }
-
-        uint numSampleIndices = reader.ReadUInt32();
-        _level.SampleIndices = reader.ReadUInt32s(numSampleIndices).ToList();
+        ReadSoundEffects(reader);
     }
 
     protected override void Write(TRLevelWriter writer)
@@ -362,11 +346,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write((ushort)_level.DemoData.Length);
         writer.Write(_level.DemoData);
 
-        foreach (short sound in _level.SoundMap) { writer.Write(sound); }
-        writer.Write((uint)_level.SoundDetails.Count);
-        foreach (TR3SoundDetails snddetail in _level.SoundDetails) { writer.Write(snddetail.Serialize()); }
-        writer.Write((uint)_level.SampleIndices.Count);
-        writer.Write(_level.SampleIndices);
+        WriteSoundEffects(writer);
     }
 
     private static TR3RoomData ConvertToRoomData(TR3Room room)
@@ -580,5 +560,87 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         }
 
         return meshes;
+    }
+
+    private void ReadSoundEffects(TRLevelReader reader)
+    {
+        _level.SoundEffects = new();
+        short[] soundMap = reader.ReadInt16s(Enum.GetValues<TR3SFX>().Length);
+
+        uint numSoundDetails = reader.ReadUInt32();
+        List<TR3SoundEffect> sfx = new();
+
+        Dictionary<int, ushort> sampleMap = new();
+        for (int i = 0; i < numSoundDetails; i++)
+        {
+            sampleMap[i] = reader.ReadUInt16();
+            sfx.Add(new()
+            {
+                Volume = reader.ReadByte(),
+                Range = reader.ReadByte(),
+                Chance = reader.ReadByte(),
+                Pitch = reader.ReadByte(),
+                Samples = new()
+            });
+
+            sfx[i].SetFlags(reader.ReadUInt16());
+        }
+
+        uint numSampleIndices = reader.ReadUInt32();
+        uint[] sampleIndices = reader.ReadUInt32s(numSampleIndices);
+
+        foreach (int soundID in sampleMap.Keys)
+        {
+            TR3SoundEffect effect = sfx[soundID];
+            ushort baseIndex = sampleMap[soundID];
+            for (int i = 0; i < effect.Samples.Capacity; i++)
+            {
+                effect.Samples.Add(sampleIndices[baseIndex + i]);
+            }
+        }
+
+        for (int i = 0; i < soundMap.Length; i++)
+        {
+            if (soundMap[i] < 0 || soundMap[i] >= sfx.Count)
+            {
+                continue;
+            }
+
+            _level.SoundEffects[(TR3SFX)i] = sfx[soundMap[i]];
+        }
+    }
+
+    private void WriteSoundEffects(TRLevelWriter writer)
+    {
+        short detailsIndex = 0;
+        foreach (TR3SFX id in Enum.GetValues<TR3SFX>())
+        {
+            writer.Write(_level.SoundEffects.ContainsKey(id) ? detailsIndex++ : (short)-1);
+        }
+
+        List<uint> samplePointers = new();
+        foreach (var (_, effect) in _level.SoundEffects)
+        {
+            if (!samplePointers.Contains(effect.Samples.First()))
+            {
+                samplePointers.AddRange(effect.Samples);
+            }
+        }
+        samplePointers.Sort();
+
+        writer.Write((uint)_level.SoundEffects.Count);
+        foreach (var (_, effect) in _level.SoundEffects)
+        {
+            uint firstSample = effect.Samples.First();
+            writer.Write((ushort)samplePointers.IndexOf(firstSample));
+            writer.Write(effect.Volume);
+            writer.Write(effect.Range);
+            writer.Write(effect.Chance);
+            writer.Write(effect.Pitch);
+            writer.Write(effect.GetFlags());
+        }
+
+        writer.Write((uint)samplePointers.Count);
+        writer.Write(samplePointers);
     }
 }

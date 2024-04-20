@@ -29,8 +29,5 @@ public class TR1Level : TRLevelBase
     public List<TRColour> Palette { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }
     public byte[] DemoData { get; set; }
-    public short[] SoundMap { get; set; }
-    public List<TRSoundDetails> SoundDetails { get; set; }
-    public List<byte> Samples { get; set; }
-    public List<uint> SampleIndices { get; set; }
+    public SortedDictionary<TR1SFX, TR1SoundEffect> SoundEffects { get; set; }
 }

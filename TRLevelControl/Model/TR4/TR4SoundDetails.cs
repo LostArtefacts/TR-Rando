@@ -2,7 +2,7 @@
 
 namespace TRLevelControl.Model;
 
-public class TR3SoundDetails : ISerializableCompact
+public class TR4SoundDetails : ISerializableCompact
 {
     public ushort Sample { get; set; }
 

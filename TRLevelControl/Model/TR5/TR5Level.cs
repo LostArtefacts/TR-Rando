@@ -32,8 +32,7 @@ public class TR5Level : TRLevelBase
     public List<TR5AIEntity> AIEntities { get; set; }
     public byte[] DemoData { get; set; }
     public short[] SoundMap { get; set; }
-    public List<TR3SoundDetails> SoundDetails { get; set; }
+    public List<TR4SoundDetails> SoundDetails { get; set; }
     public List<uint> SampleIndices { get; set; }
-
     public List<TR4Sample> Samples { get; set; }
 }

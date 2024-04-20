@@ -144,24 +144,4 @@ public class IOTests : TestBase
             CollectionAssert.AreEqual(flipOnZones[i], flipOn);
         }
     }
-
-    [TestMethod]
-    public void ResortSoundsTest()
-    {
-        TR1Level lvl = GetTR1Level(TR1LevelNames.CAVES);
-
-        TR1LevelControl control = new();
-        using MemoryStream ms1 = new();
-        using MemoryStream ms2 = new();
-
-        control.Write(lvl, ms1);
-        byte[] lvlBeforeSort = ms1.ToArray();
-
-        SoundUtilities.ResortSoundIndices(lvl);
-
-        control.Write(lvl, ms2);
-        byte[] lvlAfterSort = ms2.ToArray();
-
-        CollectionAssert.AreEqual(lvlBeforeSort, lvlAfterSort);
-    }
 }

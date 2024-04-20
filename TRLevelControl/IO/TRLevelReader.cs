@@ -44,6 +44,28 @@ public class TRLevelReader : BinaryReader
         return new(inflatedStream);
     }
 
+    public byte[] ReadUInt8s(long numData)
+    {
+        byte[] data = new byte[numData];
+        for (int i = 0; i < numData; i++)
+        {
+            data[i] = ReadByte();
+        }
+
+        return data;
+    }
+
+    public short[] ReadInt16s(long numData)
+    {
+        short[] data = new short[numData];
+        for (int i = 0; i < numData; i++)
+        {
+            data[i] = ReadInt16();
+        }
+
+        return data;
+    }
+
     public ushort[] ReadUInt16s(long numData)
     {
         ushort[] data = new ushort[numData];

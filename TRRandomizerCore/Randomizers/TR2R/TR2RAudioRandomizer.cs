@@ -7,7 +7,6 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Handlers;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.SFX;
@@ -16,11 +15,9 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR2RAudioRandomizer : BaseTR2RRandomizer
 {
-    private const int _maxSample = 407;
-
     private AudioRandomizer _audioRandomizer;
 
-    private List<TRSFXDefinition<TRSoundDetails>> _soundEffects;
+    private List<TR2SFXDefinition> _soundEffects;
     private List<TRSFXGeneralCategory> _sfxCategories;
     private List<TRRScriptedLevel> _uncontrolledLevels;
 
@@ -175,7 +172,20 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
         _sfxCategories = AudioRandomizer.GetSFXCategories(Settings);
         if (_sfxCategories.Count > 0)
         {
-            _soundEffects = JsonConvert.DeserializeObject<List<TRSFXDefinition<TRSoundDetails>>>(ReadResource(@"TR2\Audio\sfx.json"));
+            _soundEffects = JsonConvert.DeserializeObject<List<TR2SFXDefinition>>(ReadResource(@"TR2\Audio\sfx.json"));
+
+            Dictionary<string, TR2Level> levels = new();
+            TR2LevelControl reader = new();
+            foreach (TR2SFXDefinition definition in _soundEffects)
+            {
+                if (!levels.ContainsKey(definition.SourceLevel))
+                {
+                    levels[definition.SourceLevel] = reader.Read(Path.Combine(BackupPath, definition.SourceLevel));
+                }
+
+                TR2Level level = levels[definition.SourceLevel];
+                definition.SoundEffect = level.SoundEffects[definition.InternalIndex];
+            }
         }
     }
 
@@ -188,25 +198,34 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
 
         if (IsUncontrolledLevel(level.Script))
         {
+            int maxSample = Enum.GetValues<TR2SFX>().Length;            
             HashSet<uint> indices = new();
-            while (indices.Count < level.Data.SampleIndices.Count)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
-                indices.Add((uint)_generator.Next(0, _maxSample + 1));
+                for (int i = 0; i < effect.Samples.Count; i++)
+                {
+                    uint sample;
+                    do
+                    {
+                        sample = (uint)_generator.Next(0, maxSample + 1);
+                    }
+                    while (!indices.Add(sample));
+                    effect.Samples[i] = sample;
+                }
             }
-            level.Data.SampleIndices.Clear();
-            level.Data.SampleIndices.AddRange(indices);
         }
         else
         {
-            for (int internalIndex = 0; internalIndex < level.Data.SoundMap.Length; internalIndex++)
+            foreach (TR2SFX internalIndex in Enum.GetValues<TR2SFX>())
             {
-                TRSFXDefinition<TRSoundDetails> definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
-                if (level.Data.SoundMap[internalIndex] == -1 || definition == null || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
+                TR2SFXDefinition definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
+                if (!level.Data.SoundEffects.ContainsKey(internalIndex) || definition == null
+                    || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
                 {
                     continue;
                 }
 
-                Predicate<TRSFXDefinition<TRSoundDetails>> pred;
+                Predicate<TR2SFXDefinition> pred;
                 if (Settings.LinkCreatureSFX && definition.Creature > TRSFXCreatureCategory.Lara)
                 {
                     pred = sfx =>
@@ -224,58 +243,26 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
                     pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && sfx != definition;
                 }
 
-                List<TRSFXDefinition<TRSoundDetails>> otherDefinitions = _soundEffects.FindAll(pred);
+                List<TR2SFXDefinition> otherDefinitions = _soundEffects.FindAll(pred);
                 if (otherDefinitions.Count > 0)
                 {
-                    TRSFXDefinition<TRSoundDetails> nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
-                    short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
-                    if (soundDetailsIndex != -1)
+                    TR2SFXDefinition nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
+                    if (nextDefinition != definition)
                     {
-                        level.Data.SoundMap[internalIndex] = soundDetailsIndex;
+                        level.Data.SoundEffects[internalIndex] = nextDefinition.SoundEffect;
                     }
                 }
             }
         }
-
-        SoundUtilities.ResortSoundIndices(level.Data);
-    }
-
-    private static short ImportSoundEffect(TR2Level level, TRSFXDefinition<TRSoundDetails> definition)
-    {
-        if (definition.SampleIndices.Count == 0)
-        {
-            return -1;
-        }
-
-        List<TRSoundDetails> levelSoundDetails = level.SoundDetails.ToList();
-
-        uint minSample = definition.SampleIndices.Min();
-        if (level.SampleIndices.Contains(minSample))
-        {
-            return (short)levelSoundDetails.FindIndex(d => level.SampleIndices[d.Sample] == minSample);
-        }
-
-        ushort newSampleIndex = (ushort)level.SampleIndices.Count;
-        level.SampleIndices.AddRange(definition.SampleIndices);
-
-        level.SoundDetails.Add(new TRSoundDetails
-        {
-            Chance = definition.Details.Chance,
-            Characteristics = definition.Details.Characteristics,
-            Sample = newSampleIndex,
-            Volume = definition.Details.Volume
-        });
-
-        return (short)(level.SoundDetails.Count - 1);
     }
 
     private void RandomizeWibble(TR2RCombinedLevel level)
     {
         if (Settings.RandomizeWibble)
         {
-            foreach (TRSoundDetails details in level.Data.SoundDetails)
+            foreach (var (_, effect) in level.Data.SoundEffects)
             {
-                details.Wibble = true;
+                effect.RandomizePitch = true;
             }
         }
     }

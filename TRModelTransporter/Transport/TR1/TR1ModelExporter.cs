@@ -107,7 +107,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         // On the 2nd frame, play SFX 44 (magnums)
         level.AnimCommands.Add(new() { Value = 5 });
         level.AnimCommands.Add(new() { Value = (short)(anim.FrameStart + 1) });
-        level.AnimCommands.Add(new() { Value = 44 });
+        level.AnimCommands.Add(new() { Value = (short)TR1SFX.LaraMagnums });
     }
 
     public static void AmendPierreDeath(TR1Level level)
@@ -123,7 +123,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         // On the 61st frame, play SFX 159 (death)
         level.AnimCommands.Add(new() { Value = 5 });
         level.AnimCommands.Add(new() { Value = (short)(anim.FrameStart + 60) });
-        level.AnimCommands.Add(new() { Value = 159 });
+        level.AnimCommands.Add(new() { Value = (short)TR1SFX.PierreDeath });
     }
 
     public static void AmendLarsonDeath(TR1Level level)
@@ -139,7 +139,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         // On the 2nd frame, play SFX 158 (death)
         level.AnimCommands.Add(new() { Value = 5 });
         level.AnimCommands.Add(new() { Value = (short)(anim.FrameStart + 1) });
-        level.AnimCommands.Add(new() { Value = 158 });
+        level.AnimCommands.Add(new() { Value = (short)TR1SFX.LarsonDeath });
     }
 
     public static void AmendSkaterBoyDeath(TR1Level level)
@@ -164,7 +164,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         // On the 5th frame, play SFX 160 (death)
         level.AnimCommands.Add(new() { Value = 5 });
         level.AnimCommands.Add(new() { Value = (short)(anim.FrameStart + 4) });
-        level.AnimCommands.Add(new() { Value = 160 });
+        level.AnimCommands.Add(new() { Value = (short)TR1SFX.NatlaDeath });
     }
 
     public static void AddMovingBlockSFX(TR1Level level)
@@ -172,10 +172,10 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         // ToQ moving blocks are silent but we want them to scrape along the floor when they move.
         // Import the trapdoor closing SFX from Vilcabamba and adjust the animations accordingly.
 
-        if (level.SoundMap[162] == -1)
+        if (!level.SoundEffects.ContainsKey(TR1SFX.TrapdoorClose))
         {
             TR1Level vilcabamba = new TR1LevelControl().Read(TR1LevelNames.VILCABAMBA);
-            SoundUtilities.ImportLevelSound(level, vilcabamba, new short[] { 162 });
+            level.SoundEffects[TR1SFX.TrapdoorClose] = vilcabamba.SoundEffects[TR1SFX.TrapdoorClose];
         }
 
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.MovingBlock);
@@ -190,7 +190,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
             // On the 1st frame, play SFX 162
             level.AnimCommands.Add(new() { Value = 5 });
             level.AnimCommands.Add(new() { Value = (short)anim.FrameStart });
-            level.AnimCommands.Add(new() { Value = 162 });
+            level.AnimCommands.Add(new() { Value = (short)TR1SFX.TrapdoorClose });
         }
     }
 }

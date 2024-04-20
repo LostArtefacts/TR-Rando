@@ -424,7 +424,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         }
 
         writer.Write((uint)_level.SoundDetails.Count);
-        foreach (TR3SoundDetails snd in _level.SoundDetails)
+        foreach (TR4SoundDetails snd in _level.SoundDetails)
         {
             writer.Write(snd.Serialize());
         }

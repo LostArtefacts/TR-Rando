@@ -36,6 +36,14 @@ public class TRLevelWriter : BinaryWriter
         _observer?.OnChunkWritten(startPosition, BaseStream.Position, chunkType, data);
     }
 
+    public void Write(IEnumerable<byte> data)
+    {
+        foreach (byte value in data)
+        {
+            Write(value);
+        }
+    }
+
     public void Write(IEnumerable<ushort> data)
     {
         foreach (ushort value in data)

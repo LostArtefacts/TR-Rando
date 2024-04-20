@@ -482,7 +482,7 @@ internal static class TR5FileReadUtilities
 
         for (int i = 0; i < numSoundDetails; i++)
         {
-            lvl.SoundDetails.Add(TR3FileReadUtilities.ReadSoundDetails(reader));
+            lvl.SoundDetails.Add(TR4FileReadUtilities.ReadSoundDetails(reader));
         }
 
         uint numSampleIndices = reader.ReadUInt32();

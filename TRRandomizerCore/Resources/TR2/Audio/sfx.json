@@ -6,19 +6,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 21298,
-      "Chance": 0,
-      "Characteristics": 24592,
-      "NumSounds": 4
-    },
-    "SampleIndices": [
-      0,
-      1,
-      2,
-      3
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 1,
@@ -27,16 +15,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 26213,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      4
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 2,
@@ -45,16 +24,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 6,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      5
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 3,
@@ -63,16 +33,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 5,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      6
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 4,
@@ -81,16 +42,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      7
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 5,
@@ -99,16 +51,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      8
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 6,
@@ -117,16 +60,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 24575,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      9
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 7,
@@ -135,16 +69,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 24575,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      10
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 8,
@@ -153,16 +78,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 6,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      11
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 9,
@@ -171,16 +87,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 31128,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      12
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 10,
@@ -189,17 +96,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 3276,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      13,
-      14
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 11,
@@ -208,16 +105,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      15
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 12,
@@ -226,32 +114,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 14745,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      16
-    ]
-  },
-  {
-    "InternalIndex": 13,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
-  },
-  {
-    "InternalIndex": 14,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 15,
@@ -260,16 +123,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      17
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 16,
@@ -278,16 +132,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      18
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 17,
@@ -296,19 +141,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 24592,
-      "NumSounds": 4
-    },
-    "SampleIndices": [
-      19,
-      20,
-      21,
-      22
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 18,
@@ -317,25 +150,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      23,
-      24
-    ]
-  },
-  {
-    "InternalIndex": 19,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 20,
@@ -344,16 +159,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      25
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 21,
@@ -362,16 +168,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      26
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 22,
@@ -380,16 +177,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      27
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 23,
@@ -398,16 +186,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      28
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 24,
@@ -417,16 +196,7 @@
       51,
       52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      29
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 25,
@@ -437,16 +207,7 @@
       285,
       286
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 24575,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      30
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 26,
@@ -455,16 +216,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      31
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 27,
@@ -473,17 +225,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      32,
-      33
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 28,
@@ -492,17 +234,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 14745,
-      "Chance": 0,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      34,
-      35
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 29,
@@ -511,16 +243,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 16383,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      36
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 30,
@@ -529,16 +252,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      37
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 31,
@@ -547,17 +261,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 16383,
-      "Characteristics": 24585,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      38,
-      39
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 32,
@@ -566,16 +270,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      40
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 33,
@@ -584,16 +279,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      41
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 34,
@@ -602,16 +288,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      42
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 35,
@@ -620,16 +297,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      43
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 36,
@@ -638,16 +306,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      44
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 37,
@@ -656,16 +315,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      45
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 38,
@@ -675,16 +325,7 @@
       286,
       284
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      46
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 39,
@@ -693,16 +334,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      47
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 40,
@@ -711,16 +343,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      48
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 41,
@@ -729,16 +352,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      49
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 42,
@@ -747,16 +361,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      50
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 43,
@@ -765,16 +370,7 @@
     "Categories": [
       22
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 28834,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      51
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 44,
@@ -783,16 +379,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      52
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 45,
@@ -801,16 +388,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      53
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 46,
@@ -819,16 +397,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24582,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      54
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 47,
@@ -837,18 +406,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 16383,
-      "Characteristics": 24590,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      55,
-      56,
-      57
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 48,
@@ -857,16 +415,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      58
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 49,
@@ -875,16 +424,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 16383,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      59
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 50,
@@ -893,16 +433,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 16383,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      60
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 51,
@@ -911,16 +442,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24582,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      61
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 52,
@@ -929,16 +451,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      62
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 53,
@@ -947,16 +460,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      63
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 54,
@@ -965,16 +469,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 21298,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      64
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 55,
@@ -983,16 +478,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      65
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 56,
@@ -1001,16 +487,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      66
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 57,
@@ -1020,16 +497,7 @@
       285,
       284
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      67
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 58,
@@ -1038,16 +506,7 @@
     "Categories": [
       53
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      68
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 59,
@@ -1056,16 +515,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 4103,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      69
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 60,
@@ -1074,16 +524,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      70
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 61,
@@ -1094,16 +535,7 @@
       285,
       286
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      71
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 62,
@@ -1112,16 +544,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      72
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 63,
@@ -1130,16 +553,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24582,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      73
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 64,
@@ -1149,16 +563,7 @@
       282,
       281
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      74
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 65,
@@ -1167,16 +572,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      75
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 66,
@@ -1185,16 +581,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      76
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 67,
@@ -1203,16 +590,7 @@
     "Categories": [
       53
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      77
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 68,
@@ -1222,16 +600,7 @@
       51,
       52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      78
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 69,
@@ -1240,18 +609,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 21298,
-      "Chance": 0,
-      "Characteristics": 24588,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      79,
-      80,
-      81
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 70,
@@ -1261,16 +619,7 @@
       171,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 13106,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      82
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 71,
@@ -1279,16 +628,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      83
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 72,
@@ -1297,16 +637,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      84
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 73,
@@ -1315,16 +646,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      85
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 74,
@@ -1334,16 +656,7 @@
       171,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      86
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 75,
@@ -1353,16 +666,7 @@
       171,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      87
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 76,
@@ -1372,16 +676,7 @@
       171,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      88
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 77,
@@ -1390,16 +685,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      89
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 78,
@@ -1408,16 +694,7 @@
     "Categories": [
       22
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      90
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 79,
@@ -1426,16 +703,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      91
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 80,
@@ -1444,16 +712,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 24575,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      92
-    ]
+    "SourceLevel": "VENICE.TR2"
   },
   {
     "InternalIndex": 81,
@@ -1462,16 +721,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      93
-    ]
+    "SourceLevel": "VENICE.TR2"
   },
   {
     "InternalIndex": 82,
@@ -1480,16 +730,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      94
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 83,
@@ -1498,24 +739,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      95
-    ]
-  },
-  {
-    "InternalIndex": 83,
-    "Description": "Vertical gate closing",
-    "Creature": 0,
-    "Categories": [
-      1
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 84,
@@ -1524,16 +748,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      96
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 85,
@@ -1542,18 +757,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24588,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      97,
-      98,
-      99
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 86,
@@ -1562,16 +766,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      100
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 87,
@@ -1580,18 +775,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 24588,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      101,
-      102,
-      103
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 88,
@@ -1600,16 +784,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      104
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 89,
@@ -1618,18 +793,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24588,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      105,
-      106,
-      107
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 90,
@@ -1638,16 +802,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 16383,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      108
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 91,
@@ -1656,18 +811,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 24588,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      109,
-      110,
-      111
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 92,
@@ -1676,16 +820,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      112
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 93,
@@ -1694,16 +829,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      113
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 94,
@@ -1713,16 +839,7 @@
       141,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      114
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 95,
@@ -1731,16 +848,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      115
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 96,
@@ -1749,16 +857,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      116
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 97,
@@ -1768,17 +867,7 @@
       171,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 16383,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      117,
-      118
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 98,
@@ -1787,16 +876,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      119
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 99,
@@ -1805,16 +885,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      120
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 100,
@@ -1823,16 +894,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      121
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 101,
@@ -1841,16 +903,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      122
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 102,
@@ -1859,16 +912,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      123
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 103,
@@ -1877,16 +921,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      124
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 104,
@@ -1895,16 +930,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      125
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 105,
@@ -1913,17 +939,7 @@
     "Categories": [
       51
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      126,
-      127
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 106,
@@ -1932,16 +948,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      128
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 107,
@@ -1950,16 +957,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      129
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 108,
@@ -1968,16 +966,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      130
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 109,
@@ -1986,24 +975,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      131
-    ]
-  },
-  {
-    "InternalIndex": 110,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 111,
@@ -2012,16 +984,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      132
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 112,
@@ -2030,16 +993,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      133
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 113,
@@ -2048,16 +1002,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 16383,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      134
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 114,
@@ -2066,16 +1011,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      135
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 115,
@@ -2084,16 +1020,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 24575,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      136
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 116,
@@ -2102,16 +1029,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      137
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 117,
@@ -2120,19 +1038,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 24592,
-      "NumSounds": 4
-    },
-    "SampleIndices": [
-      138,
-      139,
-      140,
-      141
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 118,
@@ -2141,17 +1047,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8200,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      142,
-      143
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 119,
@@ -2160,16 +1056,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      144
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 120,
@@ -2178,16 +1065,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      145
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 121,
@@ -2196,16 +1074,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      146
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 122,
@@ -2214,16 +1083,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      147
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 123,
@@ -2232,16 +1092,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      148
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 124,
@@ -2250,16 +1101,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      149
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 125,
@@ -2268,16 +1110,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      150
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 126,
@@ -2286,16 +1119,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      151
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 127,
@@ -2304,16 +1128,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      152
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 128,
@@ -2322,16 +1137,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      153
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 129,
@@ -2340,16 +1146,7 @@
     "Categories": [
       171
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      154
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 130,
@@ -2358,16 +1155,7 @@
     "Categories": [
       261
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      155
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 131,
@@ -2376,16 +1164,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      156
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 132,
@@ -2394,16 +1173,7 @@
     "Categories": [
       171
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      157
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 133,
@@ -2412,16 +1182,7 @@
     "Categories": [
       261
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      158
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 134,
@@ -2430,16 +1191,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      159
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 135,
@@ -2448,16 +1200,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      160
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 136,
@@ -2466,16 +1209,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      161
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 137,
@@ -2484,16 +1218,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      162
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 138,
@@ -2502,16 +1227,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      163
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 139,
@@ -2520,16 +1236,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      164
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 140,
@@ -2538,16 +1245,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 16383,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      165
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 141,
@@ -2556,16 +1254,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 13106,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      166
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 142,
@@ -2574,16 +1263,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      167
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 143,
@@ -2592,24 +1272,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      168
-    ]
-  },
-  {
-    "InternalIndex": 144,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 145,
@@ -2618,16 +1281,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      169
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 146,
@@ -2636,16 +1290,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      170
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 147,
@@ -2654,16 +1299,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      171
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 148,
@@ -2672,16 +1308,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      172
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 149,
@@ -2690,16 +1317,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      173
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 150,
@@ -2708,24 +1326,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      174
-    ]
-  },
-  {
-    "InternalIndex": 151,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 152,
@@ -2734,16 +1335,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      175
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 153,
@@ -2752,16 +1344,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 31128,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      176
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 154,
@@ -2770,16 +1353,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 31128,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      177
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 155,
@@ -2788,16 +1362,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      178
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 156,
@@ -2806,16 +1371,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 28834,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      179
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 157,
@@ -2824,16 +1380,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      180
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 158,
@@ -2842,16 +1389,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      181
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 159,
@@ -2860,16 +1398,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 16383,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      182
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 160,
@@ -2878,16 +1407,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      183
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 161,
@@ -2897,16 +1417,7 @@
       282,
       281
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      184
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 162,
@@ -2916,16 +1427,7 @@
       283,
       281
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      185
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 163,
@@ -2934,17 +1436,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      186,
-      187
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 164,
@@ -2953,16 +1445,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      188
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 165,
@@ -2971,16 +1454,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      189
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 166,
@@ -2989,16 +1463,7 @@
     "Categories": [
       171
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      190
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 167,
@@ -3007,16 +1472,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      191
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 168,
@@ -3025,16 +1481,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      192
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 169,
@@ -3043,16 +1490,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      193
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 170,
@@ -3061,16 +1499,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      194
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 171,
@@ -3079,16 +1508,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      195
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 172,
@@ -3097,16 +1517,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      196
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 173,
@@ -3115,17 +1526,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      197,
-      198
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 174,
@@ -3134,16 +1535,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      199
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 175,
@@ -3152,16 +1544,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      200
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 176,
@@ -3170,16 +1553,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      201
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 177,
@@ -3188,16 +1562,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      202
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 178,
@@ -3206,16 +1571,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      203
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 179,
@@ -3224,16 +1580,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      204
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 180,
@@ -3242,16 +1589,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      205
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 181,
@@ -3260,16 +1598,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      206
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 182,
@@ -3278,16 +1607,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      207
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 183,
@@ -3296,16 +1616,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      208
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 184,
@@ -3314,24 +1625,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      209
-    ]
-  },
-  {
-    "InternalIndex": 185,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 186,
@@ -3340,24 +1634,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      210
-    ]
-  },
-  {
-    "InternalIndex": 187,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 188,
@@ -3366,24 +1643,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      211
-    ]
-  },
-  {
-    "InternalIndex": 189,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 190,
@@ -3392,16 +1652,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      212
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 191,
@@ -3410,16 +1661,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 24575,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      213
-    ]
+    "SourceLevel": "LIVING.TR2"
   },
   {
     "InternalIndex": 192,
@@ -3428,16 +1670,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      214
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 193,
@@ -3446,16 +1679,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      215
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 194,
@@ -3464,16 +1688,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      216
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 195,
@@ -3482,16 +1697,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      217
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 196,
@@ -3500,16 +1706,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 30473,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      218
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 197,
@@ -3518,16 +1715,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27196,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      219
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 198,
@@ -3536,16 +1724,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      220
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 199,
@@ -3554,16 +1733,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 28834,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      221
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 200,
@@ -3572,70 +1742,37 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      222
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 201,
     "Description": "Skidoo Clatter 1",
     "Creature": 0,
     "Categories": [
-      1, 52
+      1,
+      52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      223
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 202,
     "Description": "Skidoo Clatter 2",
     "Creature": 0,
     "Categories": [
-      1, 52
+      1,
+      52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      224
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 203,
     "Description": "Skidoo Clatter 3",
     "Creature": 0,
     "Categories": [
-      1, 52
+      1,
+      52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      225
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 204,
@@ -3644,16 +1781,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      226
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 205,
@@ -3662,17 +1790,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      227,
-      228
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 206,
@@ -3681,16 +1799,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      229
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 207,
@@ -3699,16 +1808,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      230
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 208,
@@ -3717,16 +1817,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 16388,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      231
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 209,
@@ -3735,16 +1826,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      232
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 210,
@@ -3753,16 +1835,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24583,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      233
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 211,
@@ -3771,16 +1844,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      234
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 212,
@@ -3789,16 +1853,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      235
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 213,
@@ -3807,24 +1862,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      236
-    ]
-  },
-  {
-    "InternalIndex": 214,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 215,
@@ -3833,24 +1871,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      237
-    ]
-  },
-  {
-    "InternalIndex": 216,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 217,
@@ -3859,16 +1880,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      238
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 218,
@@ -3877,16 +1889,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      239
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 219,
@@ -3895,16 +1898,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      240
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 220,
@@ -3913,16 +1907,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      241
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 221,
@@ -3931,16 +1916,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      242
-    ]
+    "SourceLevel": "ASSAULT.TR2"
   },
   {
     "InternalIndex": 222,
@@ -3949,16 +1925,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      243
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 223,
@@ -3967,16 +1934,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      244
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 224,
@@ -3985,16 +1943,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      245
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 225,
@@ -4003,16 +1952,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      246
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 226,
@@ -4021,16 +1961,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      247
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 227,
@@ -4039,16 +1970,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      248
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 228,
@@ -4057,16 +1979,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      249
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 229,
@@ -4075,16 +1988,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      250
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 230,
@@ -4093,16 +1997,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      251
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 231,
@@ -4111,16 +2006,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 24575,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      252
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 232,
@@ -4129,16 +2015,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      253
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 233,
@@ -4147,16 +2024,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      254
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 234,
@@ -4165,16 +2033,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      255
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 235,
@@ -4183,16 +2042,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      256
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 236,
@@ -4201,16 +2051,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      257
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 237,
@@ -4220,16 +2061,7 @@
       282,
       281
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      258
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 238,
@@ -4238,19 +2070,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 24592,
-      "NumSounds": 4
-    },
-    "SampleIndices": [
-      259,
-      260,
-      261,
-      262
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 239,
@@ -4259,16 +2079,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      263
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 240,
@@ -4277,16 +2088,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      264
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 241,
@@ -4295,18 +2097,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8204,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      265,
-      266,
-      267
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 242,
@@ -4315,18 +2106,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8204,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      268,
-      269,
-      270
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 243,
@@ -4335,18 +2115,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8204,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      271,
-      272,
-      273
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 244,
@@ -4355,18 +2124,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8204,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      274,
-      275,
-      276
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 245,
@@ -4375,17 +2133,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      277,
-      278
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 246,
@@ -4395,16 +2143,7 @@
       141,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      279
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 247,
@@ -4413,16 +2152,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 27851,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      280
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 248,
@@ -4431,16 +2161,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 21298,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      281
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 249,
@@ -4449,18 +2170,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24588,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      282,
-      283,
-      284
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 250,
@@ -4469,16 +2179,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      285
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 251,
@@ -4487,16 +2188,7 @@
     "Categories": [
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      286
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 252,
@@ -4505,16 +2197,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      287
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 253,
@@ -4523,16 +2206,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      288
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 254,
@@ -4542,16 +2216,7 @@
       1,
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      289
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 255,
@@ -4560,19 +2225,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 24592,
-      "NumSounds": 4
-    },
-    "SampleIndices": [
-      290,
-      291,
-      292,
-      293
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 256,
@@ -4582,16 +2235,7 @@
       171,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      294
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 257,
@@ -4600,16 +2244,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      295
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 258,
@@ -4619,16 +2254,7 @@
       1,
       21
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      296
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 259,
@@ -4637,16 +2263,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      297
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 260,
@@ -4655,18 +2272,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8204,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      298,
-      299,
-      300
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 261,
@@ -4675,16 +2281,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      301
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 262,
@@ -4693,17 +2290,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8200,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      302,
-      303
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 263,
@@ -4712,16 +2299,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      304
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 264,
@@ -4730,18 +2308,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8204,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      305,
-      306,
-      307
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 265,
@@ -4750,24 +2317,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      308
-    ]
-  },
-  {
-    "InternalIndex": 266,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 267,
@@ -4776,16 +2326,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      309
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 268,
@@ -4794,16 +2335,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      310
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 269,
@@ -4814,80 +2346,7 @@
       285,
       286
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      311
-    ]
-  },
-  {
-    "InternalIndex": 270,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
-  },
-  {
-    "InternalIndex": 271,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
-  },
-  {
-    "InternalIndex": 272,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
-  },
-  {
-    "InternalIndex": 273,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
-  },
-  {
-    "InternalIndex": 274,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
-  },
-  {
-    "InternalIndex": 275,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
-  },
-  {
-    "InternalIndex": 276,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
-  },
-  {
-    "InternalIndex": 277,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 278,
@@ -4896,16 +2355,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      312
-    ]
+    "SourceLevel": "VENICE.TR2"
   },
   {
     "InternalIndex": 279,
@@ -4914,16 +2364,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      313
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 280,
@@ -4932,16 +2373,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 24575,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      314
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 281,
@@ -4950,16 +2382,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      315
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 282,
@@ -4968,16 +2391,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      316
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 283,
@@ -4986,16 +2400,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      317
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 284,
@@ -5004,16 +2409,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      318
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 285,
@@ -5022,16 +2418,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      319
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 286,
@@ -5041,16 +2428,7 @@
       282,
       281
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      320
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 287,
@@ -5060,16 +2438,7 @@
       283,
       281
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      321
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 288,
@@ -5078,16 +2447,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      322
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 289,
@@ -5096,16 +2456,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      323
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 290,
@@ -5114,16 +2465,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      324
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 291,
@@ -5132,16 +2474,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      325
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 292,
@@ -5150,18 +2483,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8204,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      326,
-      327,
-      328
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 293,
@@ -5170,16 +2492,7 @@
     "Categories": [
       141
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      329
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 294,
@@ -5188,16 +2501,7 @@
     "Categories": [
       82
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      330
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 295,
@@ -5206,16 +2510,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      331
-    ]
+    "SourceLevel": "ICECAVE.TR2"
   },
   {
     "InternalIndex": 296,
@@ -5224,16 +2519,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      332
-    ]
+    "SourceLevel": "EMPRTOMB.TR2"
   },
   {
     "InternalIndex": 297,
@@ -5242,16 +2528,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      333
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 298,
@@ -5261,16 +2538,7 @@
       82,
       51
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      334
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 299,
@@ -5279,16 +2547,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      335
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 300,
@@ -5297,16 +2556,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      336
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 301,
@@ -5316,16 +2566,7 @@
       51,
       52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      337
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 302,
@@ -5334,16 +2575,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      338
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 303,
@@ -5352,16 +2584,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      339
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 304,
@@ -5370,16 +2593,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      340
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 305,
@@ -5388,16 +2602,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      341
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 306,
@@ -5406,16 +2611,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      342
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 307,
@@ -5424,16 +2620,7 @@
     "Categories": [
       51
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      343
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 308,
@@ -5442,17 +2629,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      344,
-      345
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 309,
@@ -5461,24 +2638,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      346
-    ]
-  },
-  {
-    "InternalIndex": 310,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 311,
@@ -5487,16 +2647,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      347
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 312,
@@ -5505,16 +2656,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      348
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 313,
@@ -5523,16 +2665,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      349
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 314,
@@ -5541,16 +2674,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      350
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 315,
@@ -5559,17 +2683,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      351,
-      352
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 316,
@@ -5578,17 +2692,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 16383,
-      "Chance": 0,
-      "Characteristics": 24584,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      353,
-      354
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 317,
@@ -5597,16 +2701,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      355
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 318,
@@ -5615,18 +2710,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 12,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      356,
-      357,
-      358
-    ]
+    "SourceLevel": "FLOATING.TR2"
   },
   {
     "InternalIndex": 319,
@@ -5636,16 +2720,7 @@
       282,
       281
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      359
-    ]
+    "SourceLevel": "PLATFORM.TR2"
   },
   {
     "InternalIndex": 320,
@@ -5654,16 +2729,7 @@
     "Categories": [
       52
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      360
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 321,
@@ -5672,16 +2738,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      361
-    ]
+    "SourceLevel": "EMPRTOMB.TR2"
   },
   {
     "InternalIndex": 322,
@@ -5690,19 +2747,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 24592,
-      "NumSounds": 4
-    },
-    "SampleIndices": [
-      362,
-      363,
-      364,
-      365
-    ]
+    "SourceLevel": "EMPRTOMB.TR2"
   },
   {
     "InternalIndex": 323,
@@ -5711,16 +2756,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      366
-    ]
+    "SourceLevel": "EMPRTOMB.TR2"
   },
   {
     "InternalIndex": 324,
@@ -5729,16 +2765,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      367
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 325,
@@ -5747,16 +2774,7 @@
     "Categories": [
       82
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      368
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 326,
@@ -5765,16 +2783,7 @@
     "Categories": [
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      369
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 327,
@@ -5783,24 +2792,7 @@
     "Categories": [
       111
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      370
-    ]
-  },
-  {
-    "InternalIndex": 328,
-    "Description": "Unused",
-    "Creature": 0,
-    "Categories": [
-      0
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 329,
@@ -5809,18 +2801,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 21298,
-      "Chance": 0,
-      "Characteristics": 24588,
-      "NumSounds": 3
-    },
-    "SampleIndices": [
-      371,
-      372,
-      373
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 330,
@@ -5829,16 +2810,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 21298,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      374
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 331,
@@ -5847,16 +2819,7 @@
     "Categories": [
       281
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      375
-    ]
+    "SourceLevel": "MONASTRY.TR2"
   },
   {
     "InternalIndex": 332,
@@ -5865,16 +2828,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      376
-    ]
+    "SourceLevel": "RIG.TR2"
   },
   {
     "InternalIndex": 333,
@@ -5883,16 +2837,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 21298,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      377
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 334,
@@ -5901,16 +2846,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      378
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 335,
@@ -5919,16 +2855,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      379
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 336,
@@ -5937,16 +2864,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 27851,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      380
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 337,
@@ -5955,16 +2873,7 @@
     "Categories": [
       53
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      381
-    ]
+    "SourceLevel": "BOAT.TR2"
   },
   {
     "InternalIndex": 338,
@@ -5973,16 +2882,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      382
-    ]
+    "SourceLevel": "KEEL.TR2"
   },
   {
     "InternalIndex": 339,
@@ -5991,16 +2891,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      383
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 340,
@@ -6009,16 +2900,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      384
-    ]
+    "SourceLevel": "OPERA.TR2"
   },
   {
     "InternalIndex": 341,
@@ -6027,16 +2909,7 @@
     "Categories": [
       51
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      385
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 342,
@@ -6045,16 +2918,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 4915,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      386
-    ]
+    "SourceLevel": "ASSAULT.TR2"
   },
   {
     "InternalIndex": 343,
@@ -6063,16 +2927,7 @@
     "Categories": [
       81
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 6553,
-      "Chance": 0,
-      "Characteristics": 24580,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      387
-    ]
+    "SourceLevel": "ASSAULT.TR2"
   },
   {
     "InternalIndex": 344,
@@ -6084,20 +2939,7 @@
       141,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 19660,
-      "Characteristics": 24596,
-      "NumSounds": 5
-    },
-    "SampleIndices": [
-      388,
-      389,
-      390,
-      391,
-      392
-    ]
+    "SourceLevel": "ASSAULT.TR2"
   },
   {
     "InternalIndex": 345,
@@ -6109,19 +2951,7 @@
       141,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 16383,
-      "Characteristics": 8208,
-      "NumSounds": 4
-    },
-    "SampleIndices": [
-      393,
-      394,
-      395,
-      396
-    ]
+    "SourceLevel": "ASSAULT.TR2"
   },
   {
     "InternalIndex": 346,
@@ -6133,17 +2963,7 @@
       141,
       201
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 8200,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      397,
-      398
-    ]
+    "SourceLevel": "ASSAULT.TR2"
   },
   {
     "InternalIndex": 347,
@@ -6152,17 +2972,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 19660,
-      "Chance": 0,
-      "Characteristics": 16392,
-      "NumSounds": 2
-    },
-    "SampleIndices": [
-      399,
-      400
-    ]
+    "SourceLevel": "ASSAULT.TR2"
   },
   {
     "InternalIndex": 348,
@@ -6173,16 +2983,7 @@
       52,
       53
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      401
-    ]
+    "SourceLevel": "SKIDOO.TR2"
   },
   {
     "InternalIndex": 349,
@@ -6191,16 +2992,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 22936,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      402
-    ]
+    "SourceLevel": "WALL.TR2"
   },
   {
     "InternalIndex": 350,
@@ -6209,16 +3001,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      403
-    ]
+    "SourceLevel": "UNWATER.TR2"
   },
   {
     "InternalIndex": 351,
@@ -6227,16 +3010,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 7,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      404
-    ]
+    "SourceLevel": "EMPRTOMB.TR2"
   },
   {
     "InternalIndex": 352,
@@ -6245,16 +3019,7 @@
     "Categories": [
       51
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 29490,
-      "Chance": 0,
-      "Characteristics": 8196,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      405
-    ]
+    "SourceLevel": "XIAN.TR2"
   },
   {
     "InternalIndex": 353,
@@ -6263,16 +3028,7 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 32767,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      406
-    ]
+    "SourceLevel": "HOUSE.TR2"
   },
   {
     "InternalIndex": 354,
@@ -6281,15 +3037,6 @@
     "Categories": [
       1
     ],
-    "Details": {
-      "Sample": 0,
-      "Volume": 26213,
-      "Chance": 0,
-      "Characteristics": 4,
-      "NumSounds": 1
-    },
-    "SampleIndices": [
-      407
-    ]
+    "SourceLevel": "VENICE.TR2"
   }
 ]
