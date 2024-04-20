@@ -463,31 +463,4 @@ internal static class TR5FileReadUtilities
         numEntities = reader.ReadUInt32();
         lvl.AIEntities = reader.ReadTR5AIEntities(numEntities);
     }
-
-    public static void PopulateDemoSoundSampleIndices(BinaryReader reader, TR5Level lvl)
-    {
-        //Sound Map (370 shorts) & Sound Details
-        lvl.SoundMap = new short[450];
-
-        for (int i = 0; i < lvl.SoundMap.Length; i++)
-        {
-            lvl.SoundMap[i] = reader.ReadInt16();
-        }
-
-        uint numSoundDetails = reader.ReadUInt32();
-        lvl.SoundDetails = new();
-
-        for (int i = 0; i < numSoundDetails; i++)
-        {
-            lvl.SoundDetails.Add(TR4FileReadUtilities.ReadSoundDetails(reader));
-        }
-
-        uint numSampleIndices = reader.ReadUInt32();
-        lvl.SampleIndices = new();
-
-        for (int i = 0; i < numSampleIndices; i++)
-        {
-            lvl.SampleIndices.Add(reader.ReadUInt32());
-        }
-    }
 }

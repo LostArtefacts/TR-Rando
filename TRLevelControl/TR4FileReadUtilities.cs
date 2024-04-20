@@ -290,33 +290,6 @@ internal static class TR4FileReadUtilities
         lvl.AIEntities = reader.ReadTR4AIEntities(numEntities);
     }
 
-    public static void PopulateDemoSoundSampleIndices(BinaryReader reader, TR4Level lvl)
-    {
-        //Sound Map (370 shorts) & Sound Details
-        lvl.SoundMap = new short[370];
-
-        for (int i = 0; i < lvl.SoundMap.Length; i++)
-        {
-            lvl.SoundMap[i] = reader.ReadInt16();
-        }
-
-        uint numSoundDetails = reader.ReadUInt32();
-        lvl.SoundDetails = new();
-
-        for (int i = 0; i < numSoundDetails; i++)
-        {
-            lvl.SoundDetails.Add(ReadSoundDetails(reader));
-        }
-
-        uint numSampleIndices = reader.ReadUInt32();
-        lvl.SampleIndices = new();
-
-        for (int i = 0; i < numSampleIndices; i++)
-        {
-            lvl.SampleIndices.Add(reader.ReadUInt32());
-        }
-    }
-
     public static TR4SoundDetails ReadSoundDetails(BinaryReader reader)
     {
         return new()

@@ -401,54 +401,121 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadSoundEffects(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateDemoSoundSampleIndices(reader, _level);
+        _level.SoundEffects = new();
+        short[] soundMap = reader.ReadInt16s(Enum.GetValues<TR4SFX>().Length);
+
+        uint numSoundDetails = reader.ReadUInt32();
+        List<TR4SoundEffect> sfx = new();
+
+        Dictionary<int, ushort> sampleMap = new();
+        for (int i = 0; i < numSoundDetails; i++)
+        {
+            sampleMap[i] = reader.ReadUInt16();
+            sfx.Add(new()
+            {
+                Volume = reader.ReadByte(),
+                Range = reader.ReadByte(),
+                Chance = reader.ReadByte(),
+                Pitch = reader.ReadByte(),
+                Samples = new()
+            });
+
+            sfx[i].SetFlags(reader.ReadUInt16());
+        }
+
+        // Sample indices are discarded in game. The details point to the samples
+        // directly per ReadWAVData.
+        uint numSampleIndices = reader.ReadUInt32();
+        reader.ReadUInt32s(numSampleIndices);
+
+        for (int i = 0; i < soundMap.Length; i++)
+        {
+            if (soundMap[i] < 0 || soundMap[i] >= sfx.Count)
+            {
+                continue;
+            }
+
+            _level.SoundEffects[(TR4SFX)i] = sfx[soundMap[i]];
+        }
     }
 
     private void WriteSoundEffects(TRLevelWriter writer)
     {
-        foreach (short sound in _level.SoundMap)
+        short detailsIndex = 0;
+        List<uint> sampleIndices = new();
+        List<TR4Sample> samples = new();
+
+        foreach (TR4SFX id in Enum.GetValues<TR4SFX>())
         {
-            writer.Write(sound);
+            writer.Write(_level.SoundEffects.ContainsKey(id) ? detailsIndex++ : (short)-1);
         }
 
-        writer.Write((uint)_level.SoundDetails.Count);
-        foreach (TR4SoundDetails snd in _level.SoundDetails)
+        writer.Write((uint)_level.SoundEffects.Count);
+        foreach (TR4SoundEffect details in _level.SoundEffects.Values)
         {
-            writer.Write(snd.Serialize());
+            TR4Sample firstSample = details.Samples.First();
+            int sampleIndex = samples.IndexOf(firstSample);
+            if (sampleIndex == -1)
+            {
+                sampleIndex = samples.Count;
+                samples.AddRange(details.Samples);
+            }
+
+            writer.Write((ushort)sampleIndex);
+            writer.Write(details.Volume);
+            writer.Write(details.Range);
+            writer.Write(details.Chance);
+            writer.Write(details.Pitch);
+            writer.Write(details.GetFlags());
+
+            sampleIndices.Add((uint)sampleIndex);
         }
 
-        writer.Write((uint)_level.SampleIndices.Count);
-        foreach (uint sampleindex in _level.SampleIndices)
-        {
-            writer.Write(sampleindex);
-        }
+        // Sample indices are not required, but write them anyway to match OG
+        writer.Write((uint)sampleIndices.Count);
+        writer.Write(sampleIndices);
     }
 
     private void ReadWAVData(TRLevelReader reader)
     {
         uint numSamples = reader.ReadUInt32();
-        _level.Samples = new();
+        List<TR4Sample> samples = new();
 
         for (int i = 0; i < numSamples; i++)
         {
-            _level.Samples.Add(new()
+            TR4Sample sample = new()
             {
-                UncompSize = reader.ReadUInt32(),
-                CompSize = reader.ReadUInt32(),
-            });
+                InflatedLength = reader.ReadUInt32()
+            };
+            samples.Add(sample);
 
-            _level.Samples[i].CompressedChunk = reader.ReadBytes((int)_level.Samples[i].CompSize);
+            uint compressedSize = reader.ReadUInt32();
+            sample.Data = reader.ReadUInt8s(compressedSize);
+        }
+
+        int pos = 0;
+        foreach (TR4SoundEffect sfx in _level.SoundEffects.Values)
+        {
+            for (int i = 0; i < sfx.Samples.Capacity; i++)
+            {
+                sfx.Samples.Add(samples[pos++]);
+            }
         }
     }
 
     private void WriteWAVData(TRLevelWriter writer)
     {
-        writer.Write((uint)_level.Samples.Count);
-        foreach (TR4Sample sample in _level.Samples)
+        List<TR4Sample> samples = _level.SoundEffects.Values
+            .SelectMany(s => s.Samples)
+            .Distinct()
+            .ToList();
+
+        writer.Write((uint)samples.Count);
+        foreach (TR4Sample sample in samples)
         {
-            writer.Write(sample.UncompSize);
-            writer.Write(sample.CompSize);
-            writer.Write(sample.CompressedChunk);
+            writer.Write(sample.InflatedLength);
+            writer.Write((uint)sample.Data.Length);
+            writer.Write(sample.Data);
         }
     }
 }
