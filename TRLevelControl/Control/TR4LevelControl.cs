@@ -113,6 +113,8 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
         ReadEntities(reader);
 
+        ReadDemoData(reader);
+
         ReadSoundEffects(reader);
 
         reader.ReadUInt16s(3); // Always 0s
@@ -143,6 +145,8 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         WriteObjectTextures(writer);
 
         WriteEntities(writer);
+
+        WriteDemoData(writer);
 
         WriteSoundEffects(writer);
 
@@ -383,6 +387,18 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         writer.Write(_level.AIEntities);
     }
 
+    private void ReadDemoData(TRLevelReader reader)
+    {
+        ushort numDemoData = reader.ReadUInt16();
+        _level.DemoData = reader.ReadBytes(numDemoData);
+    }
+
+    private void WriteDemoData(TRLevelWriter writer)
+    {
+        writer.Write((ushort)_level.DemoData.Length);
+        writer.Write(_level.DemoData);
+    }
+
     private void ReadSoundEffects(TRLevelReader reader)
     {
         TR4FileReadUtilities.PopulateDemoSoundSampleIndices(reader, _level);
@@ -390,9 +406,6 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void WriteSoundEffects(TRLevelWriter writer)
     {
-        writer.Write((ushort)_level.DemoData.Length);
-        writer.Write(_level.DemoData);
-
         foreach (short sound in _level.SoundMap)
         {
             writer.Write(sound);

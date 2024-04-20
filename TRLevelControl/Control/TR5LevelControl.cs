@@ -129,7 +129,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         ReadEntities(reader);
 
-        //reader.ReadUInt16(); // Unused, always 0 //IF we eliminate demodata
+        ReadDemoData(reader);
 
         ReadSoundEffects(reader);
         ReadWAVData(reader);
@@ -160,7 +160,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         WriteEntities(writer);
 
-        //writer.Write((ushort)0); //IF we eliminate demodata
+        WriteDemoData(writer);
 
         WriteSoundEffects(writer);
 
@@ -407,6 +407,18 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         writer.Write(_level.AIEntities);
     }
 
+    private void ReadDemoData(TRLevelReader reader)
+    {
+        ushort numDemoData = reader.ReadUInt16();
+        _level.DemoData = reader.ReadBytes(numDemoData);
+    }
+
+    private void WriteDemoData(TRLevelWriter writer)
+    {
+        writer.Write((ushort)_level.DemoData.Length);
+        writer.Write(_level.DemoData);
+    }
+
     private void ReadSoundEffects(TRLevelReader reader)
     {
         TR5FileReadUtilities.PopulateDemoSoundSampleIndices(reader, _level);
@@ -415,9 +427,6 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void WriteSoundEffects(TRLevelWriter writer)
     {
-        writer.Write((ushort)_level.DemoData.Length);
-        writer.Write(_level.DemoData);
-
         foreach (short sound in _level.SoundMap)
         {
             writer.Write(sound);
