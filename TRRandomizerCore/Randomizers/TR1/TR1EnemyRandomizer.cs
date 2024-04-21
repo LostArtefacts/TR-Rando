@@ -9,7 +9,6 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Handlers;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
@@ -966,13 +965,9 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             for (int i = 15; i < 21; i++)
             {
                 TRMesh mesh = meshes[i];
-                foreach (TRFace4 f in mesh.TexturedRectangles)
+                foreach (TRMeshFace face in mesh.TexturedFaces)
                 {
-                    f.Texture = bandageTexture;
-                }
-                foreach (TRFace3 f in mesh.TexturedTriangles)
-                {
-                    f.Texture = bandageTexture;
+                    face.Texture = bandageTexture;
                 }
             }
         }
@@ -1225,13 +1220,13 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             // Replace the neck texture to suit the head
             for (int i = 1; i < 3; i++)
             {
-                foreach (TRFace3 f in adam[i].TexturedTriangles)
+                foreach (TRMeshFace face in adam[i].TexturedTriangles)
                 {
-                    f.Texture = adam[0].TexturedTriangles[0].Texture;
+                    face.Texture = adam[0].TexturedTriangles[0].Texture;
                 }
-                foreach (TRFace4 f in adam[i].TexturedRectangles)
+                foreach (TRMeshFace face in adam[i].TexturedRectangles)
                 {
-                    f.Texture = adam[0].TexturedRectangles[0].Texture;
+                    face.Texture = adam[0].TexturedRectangles[0].Texture;
                 }
             }
         }

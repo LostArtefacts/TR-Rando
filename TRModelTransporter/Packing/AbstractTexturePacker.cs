@@ -174,13 +174,9 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
         ISet<int> textureIndices = new SortedSet<int>();
         foreach (TRMesh mesh in meshes)
         {
-            foreach (TRFace4 rect in mesh.TexturedRectangles)
+            foreach (TRMeshFace face in mesh.TexturedFaces)
             {
-                textureIndices.Add(rect.Texture);
-            }
-            foreach (TRFace3 tri in mesh.TexturedTriangles)
-            {
-                textureIndices.Add(tri.Texture);
+                textureIndices.Add(face.Texture);
             }
         }
         return textureIndices;

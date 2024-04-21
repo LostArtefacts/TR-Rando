@@ -51,32 +51,27 @@ public class EMMirrorStaticMeshFunction : BaseEMFunction
                 }
             }
 
-            foreach (TRFace4 f in mesh.TexturedRectangles)
+            foreach (TRMeshFace face in mesh.TexturedRectangles)
             {
-                Swap(f.Vertices, 0, 3);
-                Swap(f.Vertices, 1, 2);
+                face.SwapVertices(0, 3);
+                face.SwapVertices(1, 2);
             }
 
-            foreach (TRFace4 f in mesh.ColouredRectangles)
+            foreach (TRMeshFace face in mesh.ColouredRectangles)
             {
-                Swap(f.Vertices, 0, 3);
-                Swap(f.Vertices, 1, 2);
+                face.SwapVertices(0, 3);
+                face.SwapVertices(1, 2);
             }
 
-            foreach (TRFace3 f in mesh.TexturedTriangles)
+            foreach (TRMeshFace face in mesh.TexturedTriangles)
             {
-                Swap(f.Vertices, 0, 2);
+                face.SwapVertices(0, 2);
             }
 
-            foreach (TRFace3 f in mesh.ColouredTriangles)
+            foreach (TRMeshFace face in mesh.ColouredTriangles)
             {
-                Swap(f.Vertices, 0, 2);
+                face.SwapVertices(0, 2);
             }
         }
-    }
-
-    private static void Swap<T>(T[] arr, int pos1, int pos2)
-    {
-        (arr[pos2], arr[pos1]) = (arr[pos1], arr[pos2]);
     }
 }

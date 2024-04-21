@@ -10,10 +10,16 @@ public class TRMesh : ICloneable
     public List<TRVertex> Vertices { get; set; }
     public List<TRVertex> Normals { get; set; }
     public List<short> Lights { get; set; }
-    public List<TRFace4> TexturedRectangles { get; set; }
-    public List<TRFace3> TexturedTriangles { get; set; }
-    public List<TRFace4> ColouredRectangles { get; set; } = new();
-    public List<TRFace3> ColouredTriangles { get; set; } = new();
+    public List<TRMeshFace> TexturedRectangles { get; set; }
+    public List<TRMeshFace> TexturedTriangles { get; set; }
+    public List<TRMeshFace> ColouredRectangles { get; set; } = new();
+    public List<TRMeshFace> ColouredTriangles { get; set; } = new();
+
+    public IEnumerable<TRMeshFace> TexturedFaces
+        => TexturedRectangles.Concat(TexturedTriangles);
+
+    public IEnumerable<TRMeshFace> ColouredFaces
+        => ColouredRectangles.Concat(ColouredTriangles);
 
     public TRMesh Clone()
     {

@@ -343,4 +343,50 @@ public class TRLevelReader : BinaryReader
             Box = ReadInt16()
         };
     }
+
+    public List<TRMeshFace> ReadMeshFaces(long numFaces, TRFaceType type, TRGameVersion version)
+    {
+        List<TRMeshFace> faces = new();
+        for (int i = 0; i < numFaces; i++)
+        {
+            faces.Add(ReadMeshFace(type, version));
+        }
+        return faces;
+    }
+
+    public TRMeshFace ReadMeshFace(TRFaceType type, TRGameVersion version)
+    {
+        TRMeshFace face = new()
+        {
+            Type = type,
+            Vertices = new(ReadUInt16s((int)type)),
+        };
+
+        ReadFaceTexture(face, version);
+        if (version >= TRGameVersion.TR4)
+        {
+            face.Effects = ReadUInt16();
+        }
+
+        return face;
+    }
+
+    private void ReadFaceTexture(TRFace face, TRGameVersion version)
+    {
+        ushort texture = ReadUInt16();
+        if (version < TRGameVersion.TR3)
+        {
+            // No extra flags
+            face.Texture = texture;
+        }
+        else
+        {
+            face.Texture = (ushort)(texture & (version == TRGameVersion.TR5 ? 0x3FFF : 0x7FFF));
+            face.DoubleSided = (texture & 0x8000) > 0;
+            if (version == TRGameVersion.TR5)
+            {
+                face.UnknownFlag = (texture & 0x4000) > 0;
+            }
+        }
+    }
 }

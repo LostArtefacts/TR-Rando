@@ -671,11 +671,11 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 TRMeshUtilities.DuplicateMesh(level.Data, mesh, MeshEditor.CloneMesh(cloneBaseFunc(i)));
                 editor.Mesh = mesh;
 
-                foreach (TRFace4 face in mesh.TexturedRectangles)
+                foreach (TRMeshFace face in mesh.TexturedRectangles)
                 {
                     editor.AddColouredRectangle(face);
                 }
-                foreach (TRFace3 face in mesh.TexturedTriangles)
+                foreach (TRMeshFace face in mesh.TexturedTriangles)
                 {
                     editor.AddColouredTriangle(face);
                 }
@@ -751,7 +751,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             {
                 foreach (int faceIndex in data.TextureFaceCopies)
                 {
-                    TRFace4 face = data.BaseMesh.TexturedRectangles[faceIndex];
+                    TRMeshFace face = data.BaseMesh.TexturedRectangles[faceIndex];
                     ushort[] vertexPointers = new ushort[4];
                     for (int j = 0; j < vertexPointers.Length; j++)
                     {
@@ -772,7 +772,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                     editor.Mesh.TexturedRectangles.Add(new()
                     {
                         Texture = face.Texture,
-                        Vertices = vertexPointers
+                        Vertices = vertexPointers.ToList()
                     });
                 }
             }
@@ -781,7 +781,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             {
                 foreach (int faceIndex in data.ColourFaceCopies)
                 {
-                    TRFace4 face = data.BaseMesh.ColouredRectangles[faceIndex];
+                    TRMeshFace face = data.BaseMesh.ColouredRectangles[faceIndex];
                     ushort[] vertexPointers = new ushort[4];
                     for (int j = 0; j < vertexPointers.Length; j++)
                     {
@@ -802,7 +802,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                     editor.Mesh.ColouredRectangles.Add(new()
                     {
                         Texture = face.Texture,
-                        Vertices = vertexPointers
+                        Vertices = vertexPointers.ToList()
                     });
                 }
             }
@@ -911,7 +911,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private static void ReplaceTexture(TRMesh baseMesh, TRMesh copyMesh, int baseIndex, int copyIndex, int rotations)
         {
-            TRFace4 face = baseMesh.TexturedRectangles[baseIndex];
+            TRMeshFace face = baseMesh.TexturedRectangles[baseIndex];
             face.Texture = copyMesh.TexturedRectangles[copyIndex].Texture;
 
             RotateFace(face, rotations);
@@ -919,7 +919,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private static void ConvertColourToTexture(TRMesh baseMesh, TRMesh copyMesh, int baseIndex, int copyIndex, int rotations)
         {
-            TRFace4 face = baseMesh.ColouredRectangles[baseIndex];
+            TRMeshFace face = baseMesh.ColouredRectangles[baseIndex];
             baseMesh.ColouredRectangles.Remove(face);
             baseMesh.TexturedRectangles.Add(face);
             face.Texture = copyMesh.TexturedRectangles[copyIndex].Texture;
@@ -940,7 +940,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             List<ushort> vertices = new();
             foreach (int index in indices)
             {
-                TRFace3 face = baseMesh.ColouredTriangles[index];
+                TRMeshFace face = baseMesh.ColouredTriangles[index];
                 foreach (ushort vert in face.Vertices)
                 {
                     if (!vertices.Contains(vert))
@@ -958,7 +958,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             baseMesh.ColouredRectangles.Add(new()
             {
-                Vertices = vertices.ToArray()
+                Vertices = vertices
             });
 
             editor.WriteToLevel(level);
@@ -966,7 +966,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             ConvertColourToTexture(baseMesh, copyMesh, baseMesh.ColouredRectangles.Count - 1, copyIndex, rotations);
         }
 
-        private static void RotateFace(TRFace4 face, int rotations)
+        private static void RotateFace(TRMeshFace face, int rotations)
         {
             if (rotations > 0)
             {
@@ -980,7 +980,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                     rotations--;
                 }
 
-                face.Vertices = queue.ToArray();
+                face.Vertices = queue.ToList();
             }
         }
     }

@@ -361,13 +361,9 @@ public class DynamicTextureBuilder
         }
 
         // Remap the mesh's faces.
-        foreach (TRFace4 f in mesh.TexturedRectangles)
+        foreach (TRMeshFace face in mesh.TexturedFaces)
         {
-            f.Texture = (ushort)reindex[f.Texture];
-        }
-        foreach (TRFace3 f in mesh.TexturedTriangles)
-        {
-            f.Texture = (ushort)reindex[f.Texture];
+            face.Texture = (ushort)reindex[face.Texture];
         }
 
         level.ResetUnusedTextures();
@@ -375,10 +371,10 @@ public class DynamicTextureBuilder
 
     private static void AddMeshTextures(TRMesh mesh, ISet<int> textures)
     {
-        foreach (TRFace3 f in mesh.TexturedTriangles)
-            textures.Add(f.Texture);
-        foreach (TRFace4 f in mesh.TexturedRectangles)
-            textures.Add(f.Texture);
+        foreach (TRMeshFace face in mesh.TexturedFaces)
+        {
+            textures.Add(face.Texture);
+        }
     }
 
     private static void AddSpriteTextures(TR1Level level, TR1Type spriteID, ISet<int> textures)

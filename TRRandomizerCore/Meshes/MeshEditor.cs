@@ -86,22 +86,22 @@ public class MeshEditor
         RemovePolygons(Mesh.ColouredTriangles, indices);
     }
 
-    public void AddTexturedRectangle(TRFace4 face)
+    public void AddTexturedRectangle(TRMeshFace face)
     {
         Mesh.TexturedRectangles.Add(face);
     }
 
-    public void AddTexturedTriangle(TRFace3 face)
+    public void AddTexturedTriangle(TRMeshFace face)
     {
         Mesh.TexturedTriangles.Add(face);
     }
 
-    public void AddColouredRectangle(TRFace4 face)
+    public void AddColouredRectangle(TRMeshFace face)
     {
         Mesh.ColouredRectangles.Add(face);
     }
 
-    public void AddColouredTriangle(TRFace3 face)
+    public void AddColouredTriangle(TRMeshFace face)
     {
         Mesh.ColouredTriangles.Add(face);
     }

@@ -96,13 +96,9 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TR1Type, TR1
         {
             foreach (TRMesh mesh in definition.Meshes)
             {
-                foreach (TRFace4 rect in mesh.TexturedRectangles)
+                foreach (TRMeshFace face in mesh.TexturedFaces)
                 {
-                    rect.Texture = ConvertTextureReference(rect.Texture, indexMap[definition]);
-                }
-                foreach (TRFace3 tri in mesh.TexturedTriangles)
-                {
-                    tri.Texture = ConvertTextureReference(tri.Texture, indexMap[definition]);
+                    face.Texture = ConvertTextureReference(face.Texture, indexMap[definition]);
                 }
             }
         }

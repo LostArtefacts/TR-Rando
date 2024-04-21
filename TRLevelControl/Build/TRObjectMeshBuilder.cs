@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using TRLevelControl.Model;
 
 namespace TRLevelControl.Build;
@@ -196,32 +195,16 @@ public class TRObjectMeshBuilder
             }
 
             short numFaces = br.ReadInt16();
-            mesh.TexturedRectangles = new();
-            for (int j = 0; j < numFaces; j++)
-            {
-                mesh.TexturedRectangles.Add(TR2FileReadUtilities.ReadTRFace4(br));
-            }
+            mesh.TexturedRectangles = br.ReadMeshFaces(numFaces, TRFaceType.Rectangle, TRGameVersion.TR1);
 
             numFaces = br.ReadInt16();
-            mesh.TexturedTriangles = new();
-            for (int j = 0; j < numFaces; j++)
-            {
-                mesh.TexturedTriangles.Add(TR2FileReadUtilities.ReadTRFace3(br));
-            }
+            mesh.TexturedTriangles = br.ReadMeshFaces(numFaces, TRFaceType.Triangle, TRGameVersion.TR1);
 
             numFaces = br.ReadInt16();
-            mesh.ColouredRectangles = new();
-            for (int j = 0; j < numFaces; j++)
-            {
-                mesh.ColouredRectangles.Add(TR2FileReadUtilities.ReadTRFace4(br));
-            }
+            mesh.ColouredRectangles = br.ReadMeshFaces(numFaces, TRFaceType.Rectangle, TRGameVersion.TR1);
 
             numFaces = br.ReadInt16();
-            mesh.ColouredTriangles = new();
-            for (int j = 0; j < numFaces; j++)
-            {
-                mesh.ColouredTriangles.Add(TR2FileReadUtilities.ReadTRFace3(br));
-            }
+            mesh.ColouredTriangles = br.ReadMeshFaces(numFaces, TRFaceType.Triangle, TRGameVersion.TR1);
         }
 
         return meshes;
@@ -257,28 +240,16 @@ public class TRObjectMeshBuilder
         }
 
         writer.Write((short)mesh.TexturedRectangles.Count);
-        foreach (TRFace4 face in mesh.TexturedRectangles)
-        {
-            writer.Write(face.Serialize());
-        }
+        writer.Write(mesh.TexturedRectangles, TRGameVersion.TR1);
 
         writer.Write((short)mesh.TexturedTriangles.Count);
-        foreach (TRFace3 face in mesh.TexturedTriangles)
-        {
-            writer.Write(face.Serialize());
-        }
+        writer.Write(mesh.TexturedTriangles, TRGameVersion.TR1);
 
         writer.Write((short)mesh.ColouredRectangles.Count);
-        foreach (TRFace4 face in mesh.ColouredRectangles)
-        {
-            writer.Write(face.Serialize());
-        }
+        writer.Write(mesh.ColouredRectangles, TRGameVersion.TR1);
 
         writer.Write((short)mesh.ColouredTriangles.Count);
-        foreach (TRFace3 face in mesh.ColouredTriangles)
-        {
-            writer.Write(face.Serialize());
-        }
+        writer.Write(mesh.ColouredTriangles, TRGameVersion.TR1);
 
         // 4-byte alignment for mesh data
         int paddingSize = (int)writer.BaseStream.Position % 4;

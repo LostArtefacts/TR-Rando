@@ -52,13 +52,9 @@ public class ColourTransportHandler
         ISet<int> colourIndices = new SortedSet<int>();
         foreach (TRMesh mesh in meshes)
         {
-            foreach (TRFace4 rect in mesh.ColouredRectangles)
+            foreach (TRMeshFace face in mesh.ColouredFaces)
             {
-                colourIndices.Add(has16Bit ? rect.Texture >> 8 : rect.Texture);
-            }
-            foreach (TRFace3 tri in mesh.ColouredTriangles)
-            {
-                colourIndices.Add(has16Bit ? tri.Texture >> 8 : tri.Texture);
+                colourIndices.Add(has16Bit ? face.Texture >> 8 : face.Texture);
             }
         }
 
@@ -111,13 +107,9 @@ public class ColourTransportHandler
     {
         foreach (TRMesh mesh in meshes)
         {
-            foreach (TRFace4 rect in mesh.ColouredRectangles)
+            foreach (TRMeshFace face in mesh.ColouredFaces)
             {
-                rect.Texture = ReindexTexture(rect.Texture, indexMap, has16Bit);
-            }
-            foreach (TRFace3 tri in mesh.ColouredTriangles)
-            {
-                tri.Texture = ReindexTexture(tri.Texture, indexMap, has16Bit);
+                face.Texture = ReindexTexture(face.Texture, indexMap, has16Bit);
             }
         }
     }

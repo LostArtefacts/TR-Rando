@@ -88,11 +88,7 @@ public class TRPalette8Control : IDisposable
                 continue;
             }
 
-            foreach (TRFace4 face in mesh.ColouredRectangles)
-            {
-                face.Texture = GetMeshFaceColour(face.Texture);
-            }
-            foreach (TRFace3 face in mesh.ColouredTriangles)
+            foreach (TRMeshFace face in mesh.ColouredFaces)
             {
                 face.Texture = GetMeshFaceColour(face.Texture);
             }
@@ -165,11 +161,7 @@ public class TRPalette8Control : IDisposable
 
         foreach (TRMesh mesh in Level.Meshes)
         {
-            foreach (TRFace4 face in mesh.ColouredRectangles)
-            {
-                face.Texture = GetMeshFaceColour(face.Texture);
-            }
-            foreach (TRFace3 face in mesh.ColouredTriangles)
+            foreach (TRMeshFace face in mesh.ColouredFaces)
             {
                 face.Texture = GetMeshFaceColour(face.Texture);
             }

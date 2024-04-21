@@ -370,13 +370,9 @@ public abstract class AbstractTextureImportHandler<E, L, D>
     {
         foreach (TRMesh mesh in meshes)
         {
-            foreach (TRFace4 rect in mesh.TexturedRectangles)
+            foreach (TRMeshFace face in mesh.TexturedFaces)
             {
-                rect.Texture = ConvertTextureReference(rect.Texture, indexMap);
-            }
-            foreach (TRFace3 tri in mesh.TexturedTriangles)
-            {
-                tri.Texture = ConvertTextureReference(tri.Texture, indexMap);
+                face.Texture = ConvertTextureReference(face.Texture, indexMap);
             }
         }
     }

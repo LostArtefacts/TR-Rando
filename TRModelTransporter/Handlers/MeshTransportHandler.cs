@@ -45,6 +45,7 @@ public class MeshTransportHandler
             {
                 definition.Model.StartingMesh = (ushort)insertedIndex;
             }
+            SetFaceTypes(definition.Meshes[i]);
         }
     }
 
@@ -66,6 +67,7 @@ public class MeshTransportHandler
             {
                 definition.Model.StartingMesh = (ushort)insertedIndex;
             }
+            SetFaceTypes(definition.Meshes[i]);
         }
     }
 
@@ -87,6 +89,19 @@ public class MeshTransportHandler
             {
                 definition.Model.StartingMesh = (ushort)insertedIndex;
             }
+            SetFaceTypes(definition.Meshes[i]);
         }
+    }
+
+    private static void SetFaceTypes(TRMesh mesh)
+    {
+        // Temporary until this library is redesigned, so to avoid re-writing
+        // exported data.
+        mesh.ColouredRectangles.Concat(mesh.TexturedRectangles)
+            .ToList()
+            .ForEach(face => face.Type = TRFaceType.Rectangle);
+        mesh.ColouredTriangles.Concat(mesh.TexturedTriangles)
+            .ToList()
+            .ForEach(face => face.Type = TRFaceType.Triangle);
     }
 }
