@@ -3,14 +3,24 @@ using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-//6 bytes
-public class TRVertex : ISerializableCompact
+public class TRVertex : ISerializableCompact, ICloneable
 {
     public short X { get; set; }
-
     public short Y { get; set; }
-
     public short Z { get; set; }
+
+    public TRVertex Clone()
+    {
+        return new()
+        {
+            X = X,
+            Y = Y,
+            Z = Z
+        };
+    }
+
+    object ICloneable.Clone()
+        => Clone();
 
     public override string ToString()
     {

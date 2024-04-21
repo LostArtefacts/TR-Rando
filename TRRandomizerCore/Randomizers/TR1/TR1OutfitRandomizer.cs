@@ -119,7 +119,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             foreach (TR1SFX sfxID in _barefootSfxIDs)
             {
                 _barefootSfx[sfxID] = gym.SoundEffects[sfxID];
-                _barefootSfx[sfxID].Volume += 3072; // This actually reduces the volume
+                _barefootSfx[sfxID].Volume /= 2;
             }
         }
 
@@ -683,8 +683,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 editor.ClearTexturedRectangles();
                 editor.ClearTexturedTriangles();
 
-                editor.Mesh.ColouredRectangles.ToList().ForEach(f => f.Texture = (ushort)goldIndex);
-                editor.Mesh.ColouredTriangles.ToList().ForEach(f => f.Texture = (ushort)goldIndex);
+                editor.Mesh.ColouredRectangles.ForEach(f => f.Texture = (ushort)goldIndex);
+                editor.Mesh.ColouredTriangles.ForEach(f => f.Texture = (ushort)goldIndex);
             }
         }
 
@@ -747,12 +747,6 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             MeshEditor editor = new();
             TRMeshUtilities.InsertMesh(level, editor.Mesh = MeshEditor.CloneMesh(data.NewMesh));
 
-            List<TRFace4> texturedQuads = editor.Mesh.TexturedRectangles.ToList();
-            List<TRFace4> colouredQuads = editor.Mesh.ColouredRectangles.ToList();
-
-            List<TRVertex> vertices = editor.Mesh.Vertices.ToList();
-            List<TRVertex> normals = editor.Mesh.Normals.ToList();
-
             if (data.TextureFaceCopies != null)
             {
                 foreach (int faceIndex in data.TextureFaceCopies)
@@ -762,20 +756,20 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                     for (int j = 0; j < vertexPointers.Length; j++)
                     {
                         TRVertex origVertex = data.BaseMesh.Vertices[face.Vertices[j]];
-                        int newVertIndex = vertices.FindIndex(v => v.X == origVertex.X && v.Y == origVertex.Y && v.Z == origVertex.Z);
+                        int newVertIndex = editor.Mesh.Vertices.FindIndex(v => v.X == origVertex.X && v.Y == origVertex.Y && v.Z == origVertex.Z);
                         if (newVertIndex == -1)
                         {
-                            newVertIndex = vertices.Count;
-                            vertices.Add(origVertex);
-                            if (face.Vertices[j] < data.BaseMesh.Normals.Length)
+                            newVertIndex = editor.Mesh.Vertices.Count;
+                            editor.Mesh.Vertices.Add(origVertex);
+                            if (face.Vertices[j] < data.BaseMesh.Normals.Count)
                             {
-                                normals.Add(data.BaseMesh.Normals[face.Vertices[j]]);
+                                editor.Mesh.Normals.Add(data.BaseMesh.Normals[face.Vertices[j]]);
                             }
                         }
                         vertexPointers[j] = (ushort)newVertIndex;
                     }
 
-                    texturedQuads.Add(new TRFace4
+                    editor.Mesh.TexturedRectangles.Add(new()
                     {
                         Texture = face.Texture,
                         Vertices = vertexPointers
@@ -792,38 +786,26 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                     for (int j = 0; j < vertexPointers.Length; j++)
                     {
                         TRVertex origVertex = data.BaseMesh.Vertices[face.Vertices[j]];
-                        int newVertIndex = vertices.FindIndex(v => v.X == origVertex.X && v.Y == origVertex.Y && v.Z == origVertex.Z);
+                        int newVertIndex = editor.Mesh.Vertices.FindIndex(v => v.X == origVertex.X && v.Y == origVertex.Y && v.Z == origVertex.Z);
                         if (newVertIndex == -1)
                         {
-                            newVertIndex = vertices.Count;
-                            vertices.Add(origVertex);
-                            if (face.Vertices[j] < data.BaseMesh.Normals.Length)
+                            newVertIndex = editor.Mesh.Vertices.Count;
+                            editor.Mesh.Vertices.Add(origVertex);
+                            if (face.Vertices[j] < data.BaseMesh.Normals.Count)
                             {
-                                normals.Add(data.BaseMesh.Normals[face.Vertices[j]]);
+                                editor.Mesh.Normals.Add(data.BaseMesh.Normals[face.Vertices[j]]);
                             }
                         }
                         vertexPointers[j] = (ushort)newVertIndex;
                     }
 
-                    colouredQuads.Add(new TRFace4
+                    editor.Mesh.ColouredRectangles.Add(new()
                     {
                         Texture = face.Texture,
                         Vertices = vertexPointers
                     });
                 }
             }
-
-            editor.Mesh.TexturedRectangles = texturedQuads.ToArray();
-            editor.Mesh.NumTexturedRectangles = (short)texturedQuads.Count;
-
-            editor.Mesh.ColouredRectangles = colouredQuads.ToArray();
-            editor.Mesh.NumColouredRectangles = (short)colouredQuads.Count;
-
-            editor.Mesh.Vertices = vertices.ToArray();
-            editor.Mesh.NumVertices = (short)vertices.Count;
-
-            editor.Mesh.Normals = normals.ToArray();
-            editor.Mesh.NumNormals = (short)normals.Count;
 
             editor.Mesh.CollRadius = data.BaseMesh.CollRadius;
             editor.WriteToLevel(level);
@@ -937,19 +919,10 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private static void ConvertColourToTexture(TRMesh baseMesh, TRMesh copyMesh, int baseIndex, int copyIndex, int rotations)
         {
-            List<TRFace4> texturedQuads = baseMesh.TexturedRectangles.ToList();
-            List<TRFace4> colouredQuads = baseMesh.ColouredRectangles.ToList();
-
-            TRFace4 face = colouredQuads[baseIndex];
-            colouredQuads.Remove(face);
-            texturedQuads.Add(face);
+            TRFace4 face = baseMesh.ColouredRectangles[baseIndex];
+            baseMesh.ColouredRectangles.Remove(face);
+            baseMesh.TexturedRectangles.Add(face);
             face.Texture = copyMesh.TexturedRectangles[copyIndex].Texture;
-
-            baseMesh.ColouredRectangles = colouredQuads.ToArray();
-            baseMesh.NumColouredRectangles--;
-
-            baseMesh.TexturedRectangles = texturedQuads.ToArray();
-            baseMesh.NumTexturedRectangles++;
 
             RotateFace(face, rotations);
         }
@@ -961,16 +934,13 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 Mesh = baseMesh
             };
 
-            List<TRFace3> colouredTris = baseMesh.ColouredTriangles.ToList();
-            List<TRFace4> colouredQuads = baseMesh.ColouredRectangles.ToList();
-
             List<int> indices = triangleIndices.ToList();
             indices.Sort();
 
             List<ushort> vertices = new();
             foreach (int index in indices)
             {
-                TRFace3 face = colouredTris[index];
+                TRFace3 face = baseMesh.ColouredTriangles[index];
                 foreach (ushort vert in face.Vertices)
                 {
                     if (!vertices.Contains(vert))
@@ -983,23 +953,17 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             indices.Reverse();
             foreach (int index in indices)
             {
-                colouredTris.RemoveAt(index);
+                baseMesh.ColouredTriangles.RemoveAt(index);
             }
 
-            colouredQuads.Add(new TRFace4
+            baseMesh.ColouredRectangles.Add(new()
             {
                 Vertices = vertices.ToArray()
             });
 
-            baseMesh.ColouredTriangles = colouredTris.ToArray();
-            baseMesh.NumColouredTriangles -= (short)indices.Count;
-
-            baseMesh.ColouredRectangles = colouredQuads.ToArray();
-            baseMesh.NumColouredRectangles++;
-
             editor.WriteToLevel(level);
 
-            ConvertColourToTexture(baseMesh, copyMesh, baseMesh.NumColouredRectangles - 1, copyIndex, rotations);
+            ConvertColourToTexture(baseMesh, copyMesh, baseMesh.ColouredRectangles.Count - 1, copyIndex, rotations);
         }
 
         private static void RotateFace(TRFace4 face, int rotations)

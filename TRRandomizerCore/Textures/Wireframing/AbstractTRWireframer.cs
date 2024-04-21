@@ -599,16 +599,12 @@ public abstract class AbstractTRWireframer<E, L>
                 // Solidify the skybox as it will become the backdrop for every room
                 foreach (TRMesh mesh in GetModelMeshes(level, model))
                 {
-                    List<TRFace4> rects = mesh.ColouredRectangles.ToList();
                     foreach (TRFace4 rect in mesh.TexturedRectangles)
                     {
                         rect.Texture = mesh.ColouredTriangles[0].Texture;
-                        rects.Add(rect);
+                        mesh.ColouredRectangles.Add(rect);
                     }
-                    mesh.TexturedRectangles = Array.Empty<TRFace4>();
-                    mesh.NumTexturedRectangles = 0;
-                    mesh.ColouredRectangles = rects.ToArray();
-                    mesh.NumColouredRectangles = (short)rects.Count;
+                    mesh.TexturedRectangles.Clear();
                 }
             }
             else if
@@ -634,24 +630,14 @@ public abstract class AbstractTRWireframer<E, L>
                     {
                         // Convert all textured polygons to coloured ones, and reset the
                         // palette index they point to.
-                        List<TRFace4> rects = mesh.ColouredRectangles.ToList();
-                        rects.AddRange(mesh.TexturedRectangles);
+                        mesh.ColouredRectangles.AddRange(mesh.TexturedRectangles);
+                        mesh.ColouredTriangles.AddRange(mesh.TexturedTriangles);
 
-                        List<TRFace3> tris = mesh.ColouredTriangles.ToList();
-                        tris.AddRange(mesh.TexturedTriangles);
+                        SetFace4Colours(mesh.ColouredRectangles, paletteIndex);
+                        SetFace3Colours(mesh.ColouredTriangles, paletteIndex);
 
-                        SetFace4Colours(rects, paletteIndex);
-                        SetFace3Colours(tris, paletteIndex);
-
-                        mesh.TexturedRectangles = Array.Empty<TRFace4>();
-                        mesh.NumTexturedRectangles = 0;
-                        mesh.ColouredRectangles = rects.ToArray();
-                        mesh.NumColouredRectangles = (short)rects.Count;
-
-                        mesh.TexturedTriangles = Array.Empty<TRFace3>();
-                        mesh.NumTexturedTriangles = 0;
-                        mesh.ColouredTriangles = tris.ToArray();
-                        mesh.NumColouredTriangles = (short)tris.Count;
+                        mesh.TexturedRectangles.Clear();
+                        mesh.TexturedTriangles.Clear();
                     }
                 }
             }

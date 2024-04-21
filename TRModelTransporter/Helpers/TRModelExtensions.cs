@@ -265,10 +265,10 @@ public static class TRModelExtensions
         foreach (TRMesh mesh in meshes)
         {
             TRMesh clone = mesh.Clone();
-            clone.TexturedRectangles.ToList().ForEach(t => t.Texture = 0);
-            clone.TexturedTriangles.ToList().ForEach(t => t.Texture = 0);
-            clone.ColouredRectangles.ToList().ForEach(t => t.Texture = 0);
-            clone.ColouredTriangles.ToList().ForEach(t => t.Texture = 0);
+            clone.TexturedRectangles.ForEach(t => t.Texture = 0);
+            clone.TexturedTriangles.ForEach(t => t.Texture = 0);
+            clone.ColouredRectangles.ForEach(t => t.Texture = 0);
+            clone.ColouredTriangles.ForEach(t => t.Texture = 0);
             writer.Write(clone.Serialize());
         }
 

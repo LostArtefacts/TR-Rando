@@ -44,6 +44,14 @@ public class TRLevelWriter : BinaryWriter
         }
     }
 
+    public void Write(IEnumerable<short> data)
+    {
+        foreach (short value in data)
+        {
+            Write(value);
+        }
+    }
+
     public void Write(IEnumerable<ushort> data)
     {
         foreach (ushort value in data)

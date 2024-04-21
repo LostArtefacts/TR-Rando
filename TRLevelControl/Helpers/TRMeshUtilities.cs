@@ -224,21 +224,7 @@ public static class TRMeshUtilities
 
     private static void ReplaceMesh(TRMesh originalMesh, TRMesh replacementMesh)
     {
-        originalMesh.Centre = replacementMesh.Centre;
-        originalMesh.CollRadius = replacementMesh.CollRadius;
-        originalMesh.ColouredRectangles = replacementMesh.ColouredRectangles;
-        originalMesh.ColouredTriangles = replacementMesh.ColouredTriangles;
-        originalMesh.Lights = replacementMesh.Lights;
-        originalMesh.Normals = replacementMesh.Normals;
-        originalMesh.NumColouredRectangles = replacementMesh.NumColouredRectangles;
-        originalMesh.NumColouredTriangles = replacementMesh.NumColouredTriangles;
-        originalMesh.NumNormals = replacementMesh.NumNormals;
-        originalMesh.NumTexturedRectangles = replacementMesh.NumTexturedRectangles;
-        originalMesh.NumTexturedTriangles = replacementMesh.NumTexturedTriangles;
-        originalMesh.NumVertices = replacementMesh.NumVertices;
-        originalMesh.TexturedRectangles = replacementMesh.TexturedRectangles;
-        originalMesh.TexturedTriangles = replacementMesh.TexturedTriangles;
-        originalMesh.Vertices = replacementMesh.Vertices;
+        replacementMesh.CopyInto(originalMesh);
     }
 
     /// <summary>

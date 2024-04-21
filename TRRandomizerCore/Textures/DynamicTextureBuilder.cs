@@ -239,7 +239,7 @@ public class DynamicTextureBuilder
             return;
         }
 
-        if (modelID == TR1Type.Cowboy && TRMeshUtilities.GetModelMeshes(level, TR1Type.Cowboy)[2].NumTexturedRectangles > 0)
+        if (modelID == TR1Type.Cowboy && TRMeshUtilities.GetModelMeshes(level, TR1Type.Cowboy)[2].TexturedRectangles.Count > 0)
         {
             // We only want to target LeoC's headless cowboy - in this case the cowboy is OG.
             return;
@@ -272,7 +272,7 @@ public class DynamicTextureBuilder
             }
         }
         else if ((modelID == TR1Type.ScionPiece3_S_P || modelID == TR1Type.ScionPiece4_S_P)
-            && meshes.Count == 1 && meshes[0].NumNormals != 123)
+            && meshes.Count == 1 && meshes[0].Normals.Count != 123)
         {
             try
             {
