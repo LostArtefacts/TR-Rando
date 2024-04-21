@@ -290,19 +290,6 @@ internal static class TR4FileReadUtilities
         lvl.AIEntities = reader.ReadTR4AIEntities(numEntities);
     }
 
-    public static TR4SoundDetails ReadSoundDetails(BinaryReader reader)
-    {
-        return new()
-        {
-            Sample = reader.ReadUInt16(),
-            Volume = reader.ReadByte(),
-            Range = reader.ReadByte(),
-            Chance = reader.ReadByte(),
-            Pitch = reader.ReadByte(),
-            Characteristics = reader.ReadInt16()
-        };
-    }
-
     private static TR3RoomData ConvertToRoomData(TR4Room room)
     {
         int RoomDataOffset = 0;

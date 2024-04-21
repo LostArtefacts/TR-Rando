@@ -147,34 +147,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRFace4 ReadTRFace4(BinaryReader reader)
-    {
-        return new TRFace4
-        {
-            Vertices = ReadVertices(reader, 4),
-            Texture = reader.ReadUInt16()
-        };
-    }
-
-    public static TRFace3 ReadTRFace3(BinaryReader reader)
-    {
-        return new TRFace3
-        {
-            Vertices = ReadVertices(reader, 3),
-            Texture = reader.ReadUInt16()
-        };
-    }
-
-    private static ushort[] ReadVertices(BinaryReader reader, int count)
-    {
-        ushort[] vertices = new ushort[count];
-        for (int i = 0; i < count; i++)
-        {
-            vertices[i] = reader.ReadUInt16();
-        }
-        return vertices;
-    }
-
     public static TRModel ReadModel(BinaryReader reader)
     {
         return new TRModel()
