@@ -29,8 +29,5 @@ public class TR4Level : TRLevelBase
     public List<TR4Entity> Entities { get; set; }
     public List<TR4AIEntity> AIEntities { get; set; }
     public byte[] DemoData { get; set; }
-    public short[] SoundMap { get; set; }
-    public List<TR4SoundDetails> SoundDetails { get; set; }
-    public List<uint> SampleIndices { get; set; }
-    public List<TR4Sample> Samples { get; set; }
+    public SortedDictionary<TR4SFX, TR4SoundEffect> SoundEffects { get; set; }
 }
