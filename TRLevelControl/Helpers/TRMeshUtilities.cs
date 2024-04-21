@@ -1,9 +1,20 @@
-﻿using TRLevelControl.Model;
+﻿using TRLevelControl.Build;
+using TRLevelControl.Model;
 
 namespace TRLevelControl.Helpers;
 
 public static class TRMeshUtilities
 {
+    // Temporary - we only need to serialize to work out new pointers
+    // but this will eventually be eliminated and worked out on write.
+    // This passes TR1 to the builder by default but covers TR1-3.
+    // TR4/5 not yet required (and shouldn't be).
+    public static byte[] Serialize(TRMesh mesh, TRGameVersion version = TRGameVersion.TR1)
+    {
+        TRObjectMeshBuilder builder = new(version);
+        return builder.Serialize(mesh);
+    }
+
     public static TRMesh GetModelFirstMesh(TR1Level level, TR1Type entity)
     {
         TRModel model = level.Models.Find(e => e.ID == (uint)entity);
@@ -129,7 +140,7 @@ public static class TRMeshUtilities
             {
                 return mesh;
             }
-            length += mesh.Serialize().Length;
+            length += Serialize(mesh).Length;
         }
         return null;
     }
@@ -178,7 +189,7 @@ public static class TRMeshUtilities
         if (meshes.Count > 0)
         {
             TRMesh lastMesh = meshes[^1];
-            newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
+            newMesh.Pointer = lastMesh.Pointer + (uint)Serialize(lastMesh).Length;
         }
         else
         {
@@ -197,7 +208,7 @@ public static class TRMeshUtilities
     /// </summary>
     public static void DuplicateMesh(TR1Level level, TRMesh originalMesh, TRMesh replacementMesh)
     {
-        int oldLength = originalMesh.Serialize().Length;
+        int oldLength = Serialize(originalMesh).Length;
         ReplaceMesh(originalMesh, replacementMesh);
 
         // The length will have changed so all pointers above the original one will need adjusting
@@ -206,7 +217,7 @@ public static class TRMeshUtilities
 
     public static void DuplicateMesh(TR2Level level, TRMesh originalMesh, TRMesh replacementMesh)
     {
-        int oldLength = originalMesh.Serialize().Length;
+        int oldLength = Serialize(originalMesh).Length;
         ReplaceMesh(originalMesh, replacementMesh);
 
         // The length will have changed so all pointers above the original one will need adjusting
@@ -215,7 +226,7 @@ public static class TRMeshUtilities
 
     public static void DuplicateMesh(TR3Level level, TRMesh originalMesh, TRMesh replacementMesh)
     {
-        int oldLength = originalMesh.Serialize().Length;
+        int oldLength = Serialize(originalMesh).Length;
         ReplaceMesh(originalMesh, replacementMesh);
 
         // The length will have changed so all pointers above the original one will need adjusting
@@ -233,7 +244,7 @@ public static class TRMeshUtilities
     /// </summary>
     public static void UpdateMeshPointers(TR1Level level, TRMesh modifiedMesh, int previousMeshLength)
     {
-        int lengthDiff = modifiedMesh.Serialize().Length - previousMeshLength;
+        int lengthDiff = Serialize(modifiedMesh).Length - previousMeshLength;
         List<uint> pointers = level.MeshPointers.ToList();
         int pointerIndex = pointers.IndexOf(modifiedMesh.Pointer);
         Dictionary<uint, uint> pointerMap = new();
@@ -263,7 +274,7 @@ public static class TRMeshUtilities
 
     public static void UpdateMeshPointers(TR2Level level, TRMesh modifiedMesh, int previousMeshLength)
     {
-        int lengthDiff = modifiedMesh.Serialize().Length - previousMeshLength;
+        int lengthDiff = Serialize(modifiedMesh).Length - previousMeshLength;
         List<uint> pointers = level.MeshPointers.ToList();
         int pointerIndex = pointers.IndexOf(modifiedMesh.Pointer);
         Dictionary<uint, uint> pointerMap = new();
@@ -293,7 +304,7 @@ public static class TRMeshUtilities
 
     public static void UpdateMeshPointers(TR3Level level, TRMesh modifiedMesh, int previousMeshLength)
     {
-        int lengthDiff = modifiedMesh.Serialize().Length - previousMeshLength;
+        int lengthDiff = Serialize(modifiedMesh).Length - previousMeshLength;
         List<uint> pointers = level.MeshPointers.ToList();
         int pointerIndex = pointers.IndexOf(modifiedMesh.Pointer);
         Dictionary<uint, uint> pointerMap = new();

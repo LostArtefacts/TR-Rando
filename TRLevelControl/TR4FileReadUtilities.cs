@@ -440,36 +440,6 @@ internal static class TR4FileReadUtilities
         };
     }
 
-    public static TR4MeshFace4 ReadTR4MeshFace4(BinaryReader reader)
-    {
-        return new TR4MeshFace4
-        {
-            Vertices = ReadVertices(reader, 4),
-            Texture = reader.ReadUInt16(),
-            Effects = reader.ReadUInt16()
-        };
-    }
-
-    public static TR4MeshFace3 ReadTR4MeshFace3(BinaryReader reader)
-    {
-        return new TR4MeshFace3
-        {
-            Vertices = ReadVertices(reader, 3),
-            Texture = reader.ReadUInt16(),
-            Effects = reader.ReadUInt16()
-        };
-    }
-
-    private static ushort[] ReadVertices(BinaryReader reader, int count)
-    {
-        ushort[] vertices = new ushort[count];
-        for (int i = 0; i < count; i++)
-        {
-            vertices[i] = reader.ReadUInt16();
-        }
-        return vertices;
-    }
-
     public static TR4Animation ReadAnimation(BinaryReader reader)
     {
         return new TR4Animation

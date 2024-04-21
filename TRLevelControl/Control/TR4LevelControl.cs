@@ -175,7 +175,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadMeshData(TRLevelReader reader)
     {
-        TRObjectMeshBuilder builder = new(_observer);
+        TRObjectMeshBuilder builder = new(TRGameVersion.TR4, _observer);
         builder.BuildObjectMeshes(reader);
 
         _level.Meshes = builder.Meshes;
@@ -184,17 +184,8 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void WriteMeshData(TRLevelWriter writer)
     {
-        TRObjectMeshBuilder builder = new(_observer);
-        List<byte> meshData = _level.Meshes.SelectMany(m => builder.Serialize(m)).ToList();
-
-        writer.Write((uint)meshData.Count / 2);
-        writer.Write(meshData.ToArray());
-
-        writer.Write((uint)_level.MeshPointers.Count);
-        foreach (uint data in _level.MeshPointers)
-        {
-            writer.Write(data);
-        }
+        TRObjectMeshBuilder builder = new(TRGameVersion.TR4, _observer);
+        builder.WriteObjectMeshes(writer, _level.Meshes, _level.MeshPointers);
     }
 
     private void ReadModelData(TRLevelReader reader)

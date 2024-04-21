@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TRModelTransporter.Helpers;
@@ -261,7 +262,7 @@ public static class TRModelExtensions
             clone.TexturedTriangles.ForEach(t => t.Texture = 0);
             clone.ColouredRectangles.ForEach(t => t.Texture = 0);
             clone.ColouredTriangles.ForEach(t => t.Texture = 0);
-            writer.Write(clone.Serialize());
+            writer.Write(TRMeshUtilities.Serialize(clone));
         }
 
         byte[] hash = md5.ComputeHash(ms.ToArray());

@@ -52,8 +52,4 @@ public class TRMesh : ICloneable
 
     object ICloneable.Clone()
         => Clone();
-
-    // Temporary
-    public byte[] Serialize()
-        => TRObjectMeshBuilder.Serialize(this);
 }

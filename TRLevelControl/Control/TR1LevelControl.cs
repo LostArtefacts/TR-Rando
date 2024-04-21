@@ -325,27 +325,17 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
     private void ReadMeshData(TRLevelReader reader)
     {
-        uint numMeshData = reader.ReadUInt32();
-        ushort[] rawMeshData = reader.ReadUInt16s(numMeshData);
+        TRObjectMeshBuilder builder = new(TRGameVersion.TR1, _observer);
+        builder.BuildObjectMeshes(reader);
 
-        uint numMeshPointers = reader.ReadUInt32();
-        _level.MeshPointers = reader.ReadUInt32s(numMeshPointers).ToList();
-
-        _level.Meshes = TRObjectMeshBuilder.ConstructMeshData(_level.MeshPointers, rawMeshData);
+        _level.Meshes = builder.Meshes;
+        _level.MeshPointers = builder.MeshPointers;
     }
 
     private void WriteMeshData(TRLevelWriter writer)
     {
-        List<byte> meshData = _level.Meshes.SelectMany(m => TRObjectMeshBuilder.Serialize(m)).ToList();
-
-        writer.Write((uint)meshData.Count / 2);
-        writer.Write(meshData.ToArray());
-
-        writer.Write((uint)_level.MeshPointers.Count);
-        foreach (uint data in _level.MeshPointers)
-        {
-            writer.Write(data);
-        }
+        TRObjectMeshBuilder builder = new(TRGameVersion.TR1, _observer);
+        builder.WriteObjectMeshes(writer, _level.Meshes, _level.MeshPointers);
     }
 
     private static TRRoomData ConvertToRoomData(TRRoom room)
