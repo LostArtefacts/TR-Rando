@@ -204,8 +204,8 @@ public class TRModelBuilder
 
     public List<ushort> ReadFrames(TRLevelReader reader)
     {
-        uint numFrmaes = reader.ReadUInt32();
-        return new(reader.ReadUInt16s(numFrmaes));
+        uint numFrames = reader.ReadUInt32();
+        return new(reader.ReadUInt16s(numFrames));
     }
 
     public void Write(List<ushort> frames, TRLevelWriter writer)
