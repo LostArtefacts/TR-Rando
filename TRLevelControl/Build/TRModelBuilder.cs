@@ -52,7 +52,7 @@ public class TRModelBuilder
         return animations;
     }
 
-    public void WriteAnimations(List<TRAnimation> animations, TRLevelWriter writer)
+    public void Write(List<TRAnimation> animations, TRLevelWriter writer)
     {
         writer.Write((uint)animations.Count);
 
@@ -100,7 +100,7 @@ public class TRModelBuilder
         return stateChanges;
     }
 
-    public void WriteStateChanges(List<TRStateChange> stateChanges, TRLevelWriter writer)
+    public void Write(List<TRStateChange> stateChanges, TRLevelWriter writer)
     {
         writer.Write((uint)stateChanges.Count);
 
@@ -131,7 +131,7 @@ public class TRModelBuilder
         return dispatches;
     }
 
-    public void WriteDispatches(List<TRAnimDispatch> dispatches, TRLevelWriter writer)
+    public void Write(List<TRAnimDispatch> dispatches, TRLevelWriter writer)
     {
         writer.Write((uint)dispatches.Count);
 
@@ -160,7 +160,7 @@ public class TRModelBuilder
         return commands;
     }
 
-    public void WriteCommands(List<TRAnimCommand> commands, TRLevelWriter writer)
+    public void Write(List<TRAnimCommand> commands, TRLevelWriter writer)
     {
         writer.Write((uint)commands.Count);
 
@@ -189,7 +189,7 @@ public class TRModelBuilder
         return trees;
     }
 
-    public void WriteTrees(List<TRMeshTreeNode> trees, TRLevelWriter writer)
+    public void Write(List<TRMeshTreeNode> trees, TRLevelWriter writer)
     {
         writer.Write((uint)trees.Count * sizeof(int));
 
@@ -208,7 +208,7 @@ public class TRModelBuilder
         return new(reader.ReadUInt16s(numFrmaes));
     }
 
-    public void WriteFrames(List<ushort> frames, TRLevelWriter writer)
+    public void Write(List<ushort> frames, TRLevelWriter writer)
     {
         writer.Write((uint)frames.Count);
         writer.Write(frames);
@@ -242,7 +242,7 @@ public class TRModelBuilder
         return models;
     }
 
-    public void WriteModels(List<TRModel> models, TRLevelWriter writer)
+    public void Write(List<TRModel> models, TRLevelWriter writer)
     {
         writer.Write((uint)models.Count);
 

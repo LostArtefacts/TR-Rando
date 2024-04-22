@@ -291,7 +291,6 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     private void ReadModelData(TRLevelReader reader)
     {
         TRModelBuilder builder = new(TRGameVersion.TR3);
-
         _level.Animations = builder.ReadAnimations(reader);
         _level.StateChanges = builder.ReadStateChanges(reader);
         _level.AnimDispatches = builder.ReadDispatches(reader);
@@ -304,14 +303,13 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     private void WriteModelData(TRLevelWriter writer)
     {
         TRModelBuilder builder = new(TRGameVersion.TR3);
-
-        builder.WriteAnimations(_level.Animations, writer);
-        builder.WriteStateChanges(_level.StateChanges, writer);
-        builder.WriteDispatches(_level.AnimDispatches, writer);
-        builder.WriteCommands(_level.AnimCommands, writer);
-        builder.WriteTrees(_level.MeshTrees, writer);
-        builder.WriteFrames(_level.Frames, writer);
-        builder.WriteModels(_level.Models, writer);
+        builder.Write(_level.Animations, writer);
+        builder.Write(_level.StateChanges, writer);
+        builder.Write(_level.AnimDispatches, writer);
+        builder.Write(_level.AnimCommands, writer);
+        builder.Write(_level.MeshTrees, writer);
+        builder.Write(_level.Frames, writer);
+        builder.Write(_level.Models, writer);
     }
 
     private static TR3RoomData ConvertToRoomData(TR3Room room)
