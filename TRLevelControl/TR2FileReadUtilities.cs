@@ -68,17 +68,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRMeshTreeNode ReadMeshTreeNode(BinaryReader reader)
-    {
-        return new TRMeshTreeNode()
-        {
-            Flags = reader.ReadUInt32(),
-            OffsetX = reader.ReadInt32(),
-            OffsetY = reader.ReadInt32(),
-            OffsetZ = reader.ReadInt32()
-        };
-    }
-
     public static TRVertex ReadVertex(BinaryReader reader)
     {
         return new TRVertex

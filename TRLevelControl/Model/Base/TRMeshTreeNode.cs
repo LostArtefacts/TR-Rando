@@ -1,9 +1,8 @@
 ﻿using System.Text;
-using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TRMeshTreeNode : ISerializableCompact
+public class TRMeshTreeNode
 {
     public uint Flags { get; set; }
 
@@ -23,19 +22,5 @@ public class TRMeshTreeNode : ISerializableCompact
         sb.Append(" OffsetZ: " + OffsetZ);
 
         return sb.ToString();
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(Flags);
-            writer.Write(OffsetX);
-            writer.Write(OffsetY);
-            writer.Write(OffsetZ);
-        }
-
-        return stream.ToArray();
     }
 }

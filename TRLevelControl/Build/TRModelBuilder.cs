@@ -170,6 +170,38 @@ public class TRModelBuilder
         }
     }
 
+    public List<TRMeshTreeNode> ReadTrees(TRLevelReader reader)
+    {
+        uint numMeshTrees = reader.ReadUInt32() / sizeof(int);
+        List<TRMeshTreeNode> trees = new();
+
+        for (int i = 0; i < numMeshTrees; i++)
+        {
+            trees.Add(new()
+            {
+                Flags = reader.ReadUInt32(),
+                OffsetX = reader.ReadInt32(),
+                OffsetY = reader.ReadInt32(),
+                OffsetZ = reader.ReadInt32(),
+            });
+        }
+
+        return trees;
+    }
+
+    public void WriteTrees(List<TRMeshTreeNode> trees, TRLevelWriter writer)
+    {
+        writer.Write((uint)trees.Count * sizeof(int));
+
+        foreach (TRMeshTreeNode tree in trees)
+        {
+            writer.Write(tree.Flags);
+            writer.Write(tree.OffsetX);
+            writer.Write(tree.OffsetY);
+            writer.Write(tree.OffsetZ);
+        }
+    }
+
     public List<TRModel> ReadModels(TRLevelReader reader)
     {
         uint numModels = reader.ReadUInt32();
