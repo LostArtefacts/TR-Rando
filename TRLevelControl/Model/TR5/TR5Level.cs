@@ -15,7 +15,7 @@ public class TR5Level : TRLevelBase
     public List<TRAnimCommand> AnimCommands { get; set; }
     public List<TRMeshTreeNode> MeshTrees { get; set; }
     public List<ushort> Frames { get; set; }
-    public List<TR5Model> Models { get; set; }
+    public List<TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
     public List<TRSpriteTexture> SpriteTextures { get; set; }
     public List<TRSpriteSequence> SpriteSequences { get; set; }

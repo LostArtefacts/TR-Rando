@@ -207,12 +207,32 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void ReadModelData(TRLevelReader reader)
     {
+        TRModelBuilder builder = new(TRGameVersion.TR5);
         TR5FileReadUtilities.PopulateAnimations(reader, _level);
-        TR5FileReadUtilities.PopulateMeshTreesFramesModels(reader, _level);
+
+        //Mesh Trees
+        uint numMeshTrees = reader.ReadUInt32() / 4;
+        _level.MeshTrees = new();
+        for (int i = 0; i < numMeshTrees; i++)
+        {
+            _level.MeshTrees.Add(TR2FileReadUtilities.ReadMeshTreeNode(reader));
+        }
+
+        //Frames
+        uint numFrames = reader.ReadUInt32();
+        _level.Frames = new();
+        for (int i = 0; i < numFrames; i++)
+        {
+            _level.Frames.Add(reader.ReadUInt16());
+        }
+
+        _level.Models = builder.ReadModels(reader);
     }
 
     private void WriteModelData(TRLevelWriter writer)
     {
+        TRModelBuilder builder = new(TRGameVersion.TR5);
+
         writer.Write((uint)_level.Animations.Count);
         foreach (TR4Animation anim in _level.Animations)
         {
@@ -249,11 +269,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
             writer.Write(frame);
         }
 
-        writer.Write((uint)_level.Models.Count);
-        foreach (TR5Model model in _level.Models)
-        {
-            writer.Write(model.Serialize());
-        }
+        builder.WriteModels(_level.Models, writer);
     }
 
     private void ReadStaticMeshes(TRLevelReader reader)

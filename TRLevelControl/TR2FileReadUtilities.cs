@@ -147,19 +147,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRModel ReadModel(BinaryReader reader)
-    {
-        return new TRModel()
-        {
-            ID = reader.ReadUInt32(),
-            NumMeshes = reader.ReadUInt16(),
-            StartingMesh = reader.ReadUInt16(),
-            MeshTree = reader.ReadUInt32(),
-            FrameOffset = reader.ReadUInt32(),
-            Animation = reader.ReadUInt16()
-        };
-    }
-
     public static TRStaticMesh ReadStaticMesh(BinaryReader reader)
     {
         return new TRStaticMesh()

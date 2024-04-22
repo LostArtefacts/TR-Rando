@@ -247,47 +247,6 @@ internal static class TR5FileReadUtilities
         }
     }
 
-    public static void PopulateMeshTreesFramesModels(BinaryReader reader, TR5Level lvl)
-    {
-        //Mesh Trees
-        uint numMeshTrees = reader.ReadUInt32() / 4;
-        lvl.MeshTrees = new();
-        for (int i = 0; i < numMeshTrees; i++)
-        {
-            lvl.MeshTrees.Add(TR2FileReadUtilities.ReadMeshTreeNode(reader));
-        }
-
-        //Frames
-        uint numFrames = reader.ReadUInt32();
-        lvl.Frames = new();
-        for (int i = 0; i < numFrames; i++)
-        {
-            lvl.Frames.Add(reader.ReadUInt16());
-        }
-
-        //Models
-        uint numModels = reader.ReadUInt32();
-        lvl.Models = new();
-        for (int i = 0; i < numModels; i++)
-        {
-            lvl.Models.Add(ReadTR5Model(reader));
-        }
-    }
-
-    private static TR5Model ReadTR5Model(BinaryReader reader)
-    {
-        return new TR5Model()
-        {
-            ID = reader.ReadUInt32(),
-            NumMeshes = reader.ReadUInt16(),
-            StartingMesh = reader.ReadUInt16(),
-            MeshTree = reader.ReadUInt32(),
-            FrameOffset = reader.ReadUInt32(),
-            Animation = reader.ReadUInt16(),
-            Filler = reader.ReadUInt16()
-        };
-    }
-
     public static void PopulateStaticMeshes(BinaryReader reader, TR5Level lvl)
     {
         uint numStaticMeshes = reader.ReadUInt32();
