@@ -68,16 +68,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRStateChange ReadStateChange(BinaryReader reader)
-    {
-        return new TRStateChange()
-        {
-            StateID = reader.ReadUInt16(),
-            NumAnimDispatches = reader.ReadUInt16(),
-            AnimDispatch = reader.ReadUInt16()
-        };
-    }
-
     public static TRAnimDispatch ReadAnimDispatch(BinaryReader reader)
     {
         return new TRAnimDispatch()

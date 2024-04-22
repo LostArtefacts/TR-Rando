@@ -82,6 +82,36 @@ public class TRModelBuilder
         }
     }
 
+    public List<TRStateChange> ReadStateChanges(TRLevelReader reader)
+    {
+        uint numStateChanges = reader.ReadUInt32();
+        List<TRStateChange> stateChanges = new();
+
+        for (int i = 0; i < numStateChanges; i++)
+        {
+            stateChanges.Add(new()
+            {
+                StateID = reader.ReadUInt16(),
+                NumAnimDispatches = reader.ReadUInt16(),
+                AnimDispatch = reader.ReadUInt16(),
+            });
+        }
+
+        return stateChanges;
+    }
+
+    public void WriteStateChanges(List<TRStateChange> stateChanges, TRLevelWriter writer)
+    {
+        writer.Write((uint)stateChanges.Count);
+
+        foreach (TRStateChange stateChange in stateChanges)
+        {
+            writer.Write(stateChange.StateID);
+            writer.Write(stateChange.NumAnimDispatches);
+            writer.Write(stateChange.AnimDispatch);
+        }
+    }
+
     public List<TRModel> ReadModels(TRLevelReader reader)
     {
         uint numModels = reader.ReadUInt32();
