@@ -288,14 +288,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         _level.Animations = builder.ReadAnimations(reader);
         _level.StateChanges = builder.ReadStateChanges(reader);
         _level.AnimDispatches = builder.ReadDispatches(reader);
-
-        //Animation Commands
-        uint numAnimCommands = reader.ReadUInt32();
-        _level.AnimCommands = new();
-        for (int i = 0; i < numAnimCommands; i++)
-        {
-            _level.AnimCommands.Add(TR2FileReadUtilities.ReadAnimCommand(reader));
-        }
+        _level.AnimCommands = builder.ReadCommands(reader);
 
         //Mesh Trees
         uint numMeshTrees = reader.ReadUInt32() / 4;
@@ -323,9 +316,8 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         builder.WriteAnimations(_level.Animations, writer);
         builder.WriteStateChanges(_level.StateChanges, writer);
         builder.WriteDispatches(_level.AnimDispatches, writer);
+        builder.WriteCommands(_level.AnimCommands, writer);
 
-        writer.Write((uint)_level.AnimCommands.Count);
-        foreach (TRAnimCommand cmd in _level.AnimCommands) { writer.Write(cmd.Serialize()); }
         writer.Write((uint)(_level.MeshTrees.Count * 4)); //To get the correct number /= 4 is done during read, make sure to reverse it here.
         foreach (TRMeshTreeNode node in _level.MeshTrees) { writer.Write(node.Serialize()); }
         writer.Write((uint)_level.Frames.Count);

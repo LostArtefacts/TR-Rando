@@ -68,14 +68,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRAnimCommand ReadAnimCommand(BinaryReader reader)
-    {
-        return new TRAnimCommand()
-        {
-            Value = reader.ReadInt16()
-        };
-    }
-
     public static TRMeshTreeNode ReadMeshTreeNode(BinaryReader reader)
     {
         return new TRMeshTreeNode()

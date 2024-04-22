@@ -144,6 +144,32 @@ public class TRModelBuilder
         }
     }
 
+    public List<TRAnimCommand> ReadCommands(TRLevelReader reader)
+    {
+        uint numAnimCommands = reader.ReadUInt32();
+        List<TRAnimCommand> commands = new();
+
+        for (int i = 0; i < numAnimCommands; i++)
+        {
+            commands.Add(new()
+            {
+                Value = reader.ReadInt16(),
+            });
+        }
+
+        return commands;
+    }
+
+    public void WriteCommands(List<TRAnimCommand> commands, TRLevelWriter writer)
+    {
+        writer.Write((uint)commands.Count);
+
+        foreach (TRAnimCommand command in commands)
+        {
+            writer.Write(command.Value);
+        }
+    }
+
     public List<TRModel> ReadModels(TRLevelReader reader)
     {
         uint numModels = reader.ReadUInt32();
