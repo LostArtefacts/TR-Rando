@@ -68,17 +68,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRAnimDispatch ReadAnimDispatch(BinaryReader reader)
-    {
-        return new TRAnimDispatch()
-        {
-            Low = reader.ReadInt16(),
-            High = reader.ReadInt16(),
-            NextAnimation = reader.ReadInt16(),
-            NextFrame = reader.ReadInt16()
-        };
-    }
-
     public static TRAnimCommand ReadAnimCommand(BinaryReader reader)
     {
         return new TRAnimCommand()

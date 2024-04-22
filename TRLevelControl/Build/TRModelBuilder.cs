@@ -112,6 +112,38 @@ public class TRModelBuilder
         }
     }
 
+    public List<TRAnimDispatch> ReadDispatches(TRLevelReader reader)
+    {
+        uint numAnimDispatches = reader.ReadUInt32();
+        List<TRAnimDispatch> dispatches = new();
+
+        for (int i = 0; i < numAnimDispatches; i++)
+        {
+            dispatches.Add(new()
+            {
+                Low = reader.ReadInt16(),
+                High = reader.ReadInt16(),
+                NextAnimation = reader.ReadInt16(),
+                NextFrame = reader.ReadInt16(),
+            });
+        }
+
+        return dispatches;
+    }
+
+    public void WriteDispatches(List<TRAnimDispatch> dispatches, TRLevelWriter writer)
+    {
+        writer.Write((uint)dispatches.Count);
+
+        foreach (TRAnimDispatch dispatch in dispatches)
+        {
+            writer.Write(dispatch.Low);
+            writer.Write(dispatch.High);
+            writer.Write(dispatch.NextAnimation);
+            writer.Write(dispatch.NextFrame);
+        }
+    }
+
     public List<TRModel> ReadModels(TRLevelReader reader)
     {
         uint numModels = reader.ReadUInt32();
