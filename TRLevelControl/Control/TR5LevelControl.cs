@@ -213,7 +213,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         _level.AnimDispatches = builder.ReadDispatches(reader);
         _level.AnimCommands = builder.ReadCommands(reader);
         _level.MeshTrees = builder.ReadTrees(reader);
-        _level.Frames = builder.ReadFrmaes(reader);
+        _level.Frames = builder.ReadFrames(reader);
         _level.Models = builder.ReadModels(reader);
     }
 

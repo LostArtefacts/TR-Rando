@@ -279,7 +279,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         _level.AnimDispatches = builder.ReadDispatches(reader);
         _level.AnimCommands = builder.ReadCommands(reader);
         _level.MeshTrees = builder.ReadTrees(reader);
-        _level.Frames = builder.ReadFrmaes(reader);
+        _level.Frames = builder.ReadFrames(reader);
         _level.Models = builder.ReadModels(reader);
     }
 
