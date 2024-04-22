@@ -365,45 +365,6 @@ internal static class TR4FileReadUtilities
         };
     }
 
-    public static TR4Animation ReadAnimation(BinaryReader reader)
-    {
-        return new TR4Animation
-        {
-            FrameOffset = reader.ReadUInt32(),
-            FrameRate = reader.ReadByte(),
-            FrameSize = reader.ReadByte(),
-            StateID = reader.ReadUInt16(),
-            Speed = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            Accel = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            SpeedLateral = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            AccelLateral = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            FrameStart = reader.ReadUInt16(),
-            FrameEnd = reader.ReadUInt16(),
-            NextAnimation = reader.ReadUInt16(),
-            NextFrame = reader.ReadUInt16(),
-            NumStateChanges = reader.ReadUInt16(),
-            StateChangeOffset = reader.ReadUInt16(),
-            NumAnimCommands = reader.ReadUInt16(),
-            AnimCommand = reader.ReadUInt16()
-        };
-    }
-
     public static TR4FlyByCamera ReadFlybyCamera(BinaryReader reader)
     {
         return new TR4FlyByCamera

@@ -192,12 +192,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
     {
         TRModelBuilder builder = new(TRGameVersion.TR4);
 
-        uint numAnimations = reader.ReadUInt32();
-        _level.Animations = new();
-        for (int i = 0; i < numAnimations; i++)
-        {
-            _level.Animations.Add(TR4FileReadUtilities.ReadAnimation(reader));
-        }
+        _level.Animations = builder.ReadAnimations(reader);
 
         uint numStateChanges = reader.ReadUInt32();
         _level.StateChanges = new();
@@ -241,11 +236,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
     {
         TRModelBuilder builder = new(TRGameVersion.TR4);
 
-        writer.Write((uint)_level.Animations.Count);
-        foreach (TR4Animation anim in _level.Animations)
-        {
-            writer.Write(anim.Serialize());
-        }
+        builder.WriteAnimations(_level.Animations, writer);
 
         writer.Write((uint)_level.StateChanges.Count);
         foreach (TRStateChange sc in _level.StateChanges)

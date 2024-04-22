@@ -14,6 +14,74 @@ public class TRModelBuilder
         _version = version;
     }
 
+    public List<TRAnimation> ReadAnimations(TRLevelReader reader)
+    {
+        uint numAnimations = reader.ReadUInt32();
+        List<TRAnimation> animations = new();
+
+        for (int i = 0; i < numAnimations; i++)
+        {
+            TRAnimation animation = new()
+            {
+                FrameOffset = reader.ReadUInt32(),
+                FrameRate = reader.ReadByte(),
+                FrameSize = reader.ReadByte(),
+                StateID = reader.ReadUInt16(),
+                Speed = reader.ReadFixed32(),
+                Accel = reader.ReadFixed32(),
+            };
+
+            if (_version >= TRGameVersion.TR4)
+            {
+                animation.SpeedLateral = reader.ReadFixed32();
+                animation.AccelLateral = reader.ReadFixed32();
+            }
+
+            animation.FrameStart = reader.ReadUInt16();
+            animation.FrameEnd = reader.ReadUInt16();
+            animation.NextAnimation = reader.ReadUInt16();
+            animation.NextFrame = reader.ReadUInt16();
+            animation.NumStateChanges = reader.ReadUInt16();
+            animation.StateChangeOffset = reader.ReadUInt16();
+            animation.NumAnimCommands = reader.ReadUInt16();
+            animation.AnimCommand = reader.ReadUInt16();
+
+            animations.Add(animation);
+        }
+
+        return animations;
+    }
+
+    public void WriteAnimations(List<TRAnimation> animations, TRLevelWriter writer)
+    {
+        writer.Write((uint)animations.Count);
+
+        foreach (TRAnimation animation in animations)
+        {
+            writer.Write(animation.FrameOffset);
+            writer.Write(animation.FrameRate);
+            writer.Write(animation.FrameSize);
+            writer.Write(animation.StateID);
+            writer.Write(animation.Speed);
+            writer.Write(animation.Accel);
+
+            if (_version >= TRGameVersion.TR4)
+            {
+                writer.Write(animation.SpeedLateral);
+                writer.Write(animation.AccelLateral);
+            }
+
+            writer.Write(animation.FrameStart);
+            writer.Write(animation.FrameEnd);
+            writer.Write(animation.NextAnimation);
+            writer.Write(animation.NextFrame);
+            writer.Write(animation.NumStateChanges);
+            writer.Write(animation.StateChangeOffset);
+            writer.Write(animation.NumAnimCommands);
+            writer.Write(animation.AnimCommand);
+        }
+    }
+
     public List<TRModel> ReadModels(TRLevelReader reader)
     {
         uint numModels = reader.ReadUInt32();

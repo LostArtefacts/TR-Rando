@@ -389,4 +389,13 @@ public class TRLevelReader : BinaryReader
             }
         }
     }
+
+    public FixedFloat32 ReadFixed32()
+    {
+        return new()
+        {
+            Whole = ReadInt16(),
+            Fraction = ReadUInt16()
+        };
+    }
 }

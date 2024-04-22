@@ -68,35 +68,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRAnimation ReadAnimation(BinaryReader reader)
-    {
-        return new TRAnimation
-        {
-            FrameOffset = reader.ReadUInt32(),
-            FrameRate = reader.ReadByte(),
-            FrameSize = reader.ReadByte(),
-            StateID = reader.ReadUInt16(),
-            Speed = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            Accel = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            FrameStart = reader.ReadUInt16(),
-            FrameEnd = reader.ReadUInt16(),
-            NextAnimation = reader.ReadUInt16(),
-            NextFrame = reader.ReadUInt16(),
-            NumStateChanges = reader.ReadUInt16(),
-            StateChangeOffset = reader.ReadUInt16(),
-            NumAnimCommands = reader.ReadUInt16(),
-            AnimCommand = reader.ReadUInt16()
-        };
-    }
-
     public static TRStateChange ReadStateChange(BinaryReader reader)
     {
         return new TRStateChange()
