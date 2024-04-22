@@ -208,9 +208,35 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
     private void ReadModelData(TRLevelReader reader)
     {
         TRModelBuilder builder = new(TRGameVersion.TR5);
-        TR5FileReadUtilities.PopulateAnimations(reader, _level);
 
-        //Mesh Trees
+        uint numAnimations = reader.ReadUInt32();
+        _level.Animations = new();
+        for (int i = 0; i < numAnimations; i++)
+        {
+            _level.Animations.Add(TR4FileReadUtilities.ReadAnimation(reader));
+        }
+
+        uint numStateChanges = reader.ReadUInt32();
+        _level.StateChanges = new();
+        for (int i = 0; i < numStateChanges; i++)
+        {
+            _level.StateChanges.Add(TR2FileReadUtilities.ReadStateChange(reader));
+        }
+
+        uint numAnimDispatches = reader.ReadUInt32();
+        _level.AnimDispatches = new();
+        for (int i = 0; i < numAnimDispatches; i++)
+        {
+            _level.AnimDispatches.Add(TR2FileReadUtilities.ReadAnimDispatch(reader));
+        }
+
+        uint numAnimCommands = reader.ReadUInt32();
+        _level.AnimCommands = new();
+        for (int i = 0; i < numAnimCommands; i++)
+        {
+            _level.AnimCommands.Add(TR2FileReadUtilities.ReadAnimCommand(reader));
+        }
+
         uint numMeshTrees = reader.ReadUInt32() / 4;
         _level.MeshTrees = new();
         for (int i = 0; i < numMeshTrees; i++)
@@ -218,7 +244,6 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
             _level.MeshTrees.Add(TR2FileReadUtilities.ReadMeshTreeNode(reader));
         }
 
-        //Frames
         uint numFrames = reader.ReadUInt32();
         _level.Frames = new();
         for (int i = 0; i < numFrames; i++)
