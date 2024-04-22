@@ -191,13 +191,9 @@ public static class HtmlExporter
             ISet<int> colourIndices = new SortedSet<int>();
             foreach (TRMesh mesh in meshes)
             {
-                foreach (TRFace4 t in mesh.ColouredRectangles)
+                foreach (TRMeshFace face in mesh.ColouredFaces)
                 {
-                    colourIndices.Add(BitConverter.GetBytes(t.Texture)[1]);
-                }
-                foreach (TRFace3 t in mesh.ColouredTriangles)
-                {
-                    colourIndices.Add(BitConverter.GetBytes(t.Texture)[1]);
+                    colourIndices.Add(BitConverter.GetBytes(face.Texture)[1]);
                 }
             }
 

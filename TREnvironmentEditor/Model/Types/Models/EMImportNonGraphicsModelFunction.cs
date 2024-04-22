@@ -92,19 +92,19 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             List<TRMesh> meshes = meshAction.Invoke(textureData.ModelID);
             foreach (TRMesh mesh in meshes)
             {
-                foreach (TRFace3 face in mesh.ColouredTriangles)
+                foreach (TRMeshFace face in mesh.ColouredTriangles)
                 {
                     face.Texture = SelectReplacementTexture(textureData, face.Texture, textureData.ColouredFace3, maximumTexture);
                 }
-                foreach (TRFace4 face in mesh.ColouredRectangles)
+                foreach (TRMeshFace face in mesh.ColouredRectangles)
                 {
                     face.Texture = SelectReplacementTexture(textureData, face.Texture, textureData.ColouredFace4, maximumTexture);
                 }
-                foreach (TRFace3 face in mesh.TexturedTriangles)
+                foreach (TRMeshFace face in mesh.TexturedTriangles)
                 {
                     face.Texture = SelectReplacementTexture(textureData, face.Texture, textureData.TexturedFace3, maximumTexture);
                 }
-                foreach (TRFace4 face in mesh.TexturedRectangles)
+                foreach (TRMeshFace face in mesh.TexturedRectangles)
                 {
                     face.Texture = SelectReplacementTexture(textureData, face.Texture, textureData.TexturedFace4, maximumTexture);
                 }

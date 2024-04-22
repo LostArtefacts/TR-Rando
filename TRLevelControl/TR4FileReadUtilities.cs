@@ -290,19 +290,6 @@ internal static class TR4FileReadUtilities
         lvl.AIEntities = reader.ReadTR4AIEntities(numEntities);
     }
 
-    public static TR4SoundDetails ReadSoundDetails(BinaryReader reader)
-    {
-        return new()
-        {
-            Sample = reader.ReadUInt16(),
-            Volume = reader.ReadByte(),
-            Range = reader.ReadByte(),
-            Chance = reader.ReadByte(),
-            Pitch = reader.ReadByte(),
-            Characteristics = reader.ReadInt16()
-        };
-    }
-
     private static TR3RoomData ConvertToRoomData(TR4Room room)
     {
         int RoomDataOffset = 0;
@@ -438,36 +425,6 @@ internal static class TR4FileReadUtilities
             Dy = reader.ReadSingle(),
             Dz = reader.ReadSingle()
         };
-    }
-
-    public static TR4MeshFace4 ReadTR4MeshFace4(BinaryReader reader)
-    {
-        return new TR4MeshFace4
-        {
-            Vertices = ReadVertices(reader, 4),
-            Texture = reader.ReadUInt16(),
-            Effects = reader.ReadUInt16()
-        };
-    }
-
-    public static TR4MeshFace3 ReadTR4MeshFace3(BinaryReader reader)
-    {
-        return new TR4MeshFace3
-        {
-            Vertices = ReadVertices(reader, 3),
-            Texture = reader.ReadUInt16(),
-            Effects = reader.ReadUInt16()
-        };
-    }
-
-    private static ushort[] ReadVertices(BinaryReader reader, int count)
-    {
-        ushort[] vertices = new ushort[count];
-        for (int i = 0; i < count; i++)
-        {
-            vertices[i] = reader.ReadUInt16();
-        }
-        return vertices;
     }
 
     public static TR4Animation ReadAnimation(BinaryReader reader)

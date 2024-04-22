@@ -1,16 +1,19 @@
-﻿using TRLevelControl.Model;
+﻿using System.Diagnostics;
+using TRLevelControl.Model;
 
 namespace TRLevelControl.Build;
 
 public class TRObjectMeshBuilder
 {
+    private readonly TRGameVersion _version;
     private readonly ITRLevelObserver _observer;
 
-    public List<TR4Mesh> Meshes { get; private set; }
+    public List<TRMesh> Meshes { get; private set; }
     public List<uint> MeshPointers { get; private set; }
 
-    public TRObjectMeshBuilder(ITRLevelObserver observer = null)
+    public TRObjectMeshBuilder(TRGameVersion version, ITRLevelObserver observer = null)
     {
+        _version = version;
         _observer = observer;
     }
 
@@ -36,51 +39,47 @@ public class TRObjectMeshBuilder
             uint meshPointer = pointers[i];
             meshReader.BaseStream.Position = meshPointer;
 
-            TR4Mesh mesh = new();
+            TRMesh mesh = new();
             Meshes.Add(mesh);
 
             mesh.Pointer = meshPointer;
-
             mesh.Centre = TR2FileReadUtilities.ReadVertex(meshReader);
             mesh.CollRadius = meshReader.ReadInt32();
 
-            mesh.NumVertices = meshReader.ReadInt16();
-            mesh.Vertices = new TRVertex[mesh.NumVertices];
-            for (int j = 0; j < mesh.NumVertices; j++)
+            short numVertices = meshReader.ReadInt16();
+            mesh.Vertices = new();
+            for (int j = 0; j < numVertices; j++)
             {
-                mesh.Vertices[j] = TR2FileReadUtilities.ReadVertex(meshReader);
+                mesh.Vertices.Add(TR2FileReadUtilities.ReadVertex(meshReader));
             }
 
-            mesh.NumNormals = meshReader.ReadInt16();
-            if (mesh.NumNormals > 0)
+            short numNormals = meshReader.ReadInt16();
+            if (numNormals > 0)
             {
-                mesh.Normals = new TRVertex[mesh.NumNormals];
-                for (int j = 0; j < mesh.NumNormals; j++)
+                mesh.Normals = new();
+                for (int j = 0; j < numNormals; j++)
                 {
-                    mesh.Normals[j] = TR2FileReadUtilities.ReadVertex(meshReader);
+                    mesh.Normals.Add(TR2FileReadUtilities.ReadVertex(meshReader));
                 }
             }
             else
             {
-                mesh.Lights = new short[Math.Abs(mesh.NumNormals)];
-                for (int j = 0; j < mesh.Lights.Length; j++)
-                {
-                    mesh.Lights[j] = meshReader.ReadInt16();
-                }
+                mesh.Lights = meshReader.ReadInt16s(Math.Abs(numNormals)).ToList();
             }
 
-            mesh.NumTexturedRectangles = meshReader.ReadInt16();
-            mesh.TexturedRectangles = new TR4MeshFace4[mesh.NumTexturedRectangles];
-            for (int j = 0; j < mesh.NumTexturedRectangles; j++)
-            {
-                mesh.TexturedRectangles[j] = TR4FileReadUtilities.ReadTR4MeshFace4(meshReader);
-            }
+            short numFaces = meshReader.ReadInt16();
+            mesh.TexturedRectangles = meshReader.ReadMeshFaces(numFaces, TRFaceType.Rectangle, _version);
 
-            mesh.NumTexturedTriangles = meshReader.ReadInt16();
-            mesh.TexturedTriangles = new TR4MeshFace3[mesh.NumTexturedTriangles];
-            for (int j = 0; j < mesh.NumTexturedTriangles; j++)
+            numFaces = meshReader.ReadInt16();
+            mesh.TexturedTriangles = meshReader.ReadMeshFaces(numFaces, TRFaceType.Triangle, _version);
+
+            if (_version < TRGameVersion.TR4)
             {
-                mesh.TexturedTriangles[j] = TR4FileReadUtilities.ReadTR4MeshFace3(meshReader);
+                numFaces = meshReader.ReadInt16();
+                mesh.ColouredRectangles = meshReader.ReadMeshFaces(numFaces, TRFaceType.Rectangle, _version);
+
+                numFaces = meshReader.ReadInt16();
+                mesh.ColouredTriangles = meshReader.ReadMeshFaces(numFaces, TRFaceType.Triangle, _version);
             }
 
             // Padding - TR1-3 use 0s, TR4 and 5 use random values. This allows tests to observe and restore.
@@ -93,7 +92,18 @@ public class TRObjectMeshBuilder
         }
     }
 
-    public byte[] Serialize(TR4Mesh mesh)
+    public void WriteObjectMeshes(TRLevelWriter writer, IEnumerable<TRMesh> meshes, List<uint> meshPointers)
+    {
+        List<byte> meshData = meshes.SelectMany(m => Serialize(m)).ToList();
+
+        writer.Write((uint)meshData.Count / sizeof(short));
+        writer.Write(meshData);
+
+        writer.Write((uint)meshPointers.Count);
+        writer.Write(meshPointers);
+    }
+
+    public byte[] Serialize(TRMesh mesh)
     {
         using MemoryStream stream = new();
         TRLevelWriter writer = new(stream);
@@ -101,15 +111,16 @@ public class TRObjectMeshBuilder
         writer.Write(mesh.Centre.Serialize());
         writer.Write(mesh.CollRadius);
 
-        writer.Write(mesh.NumVertices);
+        writer.Write((short)mesh.Vertices.Count);
         foreach (TRVertex vert in mesh.Vertices)
         {
             writer.Write(vert.Serialize());
         }
 
-        writer.Write(mesh.NumNormals);
-        if (mesh.NumNormals > 0)
+        Debug.Assert(mesh.Normals == null ^ mesh.Lights == null);
+        if (mesh.Normals != null)
         {
+            writer.Write((short)mesh.Normals.Count);
             foreach (TRVertex normal in mesh.Normals)
             {
                 writer.Write(normal.Serialize());
@@ -117,22 +128,23 @@ public class TRObjectMeshBuilder
         }
         else
         {
-            foreach (short light in mesh.Lights)
-            {
-                writer.Write(light);
-            }
+            writer.Write((short)-mesh.Lights.Count);
+            writer.Write(mesh.Lights);
         }
 
-        writer.Write(mesh.NumTexturedRectangles);
-        foreach (TR4MeshFace4 face in mesh.TexturedRectangles)
-        {
-            writer.Write(face.Serialize());
-        }
+        writer.Write((short)mesh.TexturedRectangles.Count);
+        writer.Write(mesh.TexturedRectangles, _version);
 
-        writer.Write(mesh.NumTexturedTriangles);
-        foreach (TR4MeshFace3 face in mesh.TexturedTriangles)
+        writer.Write((short)mesh.TexturedTriangles.Count);
+        writer.Write(mesh.TexturedTriangles, _version);
+
+        if (_version < TRGameVersion.TR4)
         {
-            writer.Write(face.Serialize());
+            writer.Write((short)mesh.ColouredRectangles.Count);
+            writer.Write(mesh.ColouredRectangles, _version);
+
+            writer.Write((short)mesh.ColouredTriangles.Count);
+            writer.Write(mesh.ColouredTriangles, _version);
         }
 
         // 4-byte alignment for mesh data
@@ -141,7 +153,7 @@ public class TRObjectMeshBuilder
         {
             IEnumerable<byte> padding = _observer?.GetMeshPadding(mesh.Pointer) ??
                 Enumerable.Repeat((byte)0, paddingSize);
-            writer.Write(padding.ToArray());
+            writer.Write(padding);
         }
 
         return stream.ToArray();

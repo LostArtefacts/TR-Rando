@@ -21,10 +21,12 @@ public abstract class AbstractTRWireframer<E, L>
         FDTrigType.HeavyTrigger, FDTrigType.Pad
     };
 
-    private Dictionary<TRFace3, TRSize> _roomFace3s, _meshFace3s;
-    private Dictionary<TRFace4, TRSize> _roomFace4s, _meshFace4s;
+    private Dictionary<TRFace3, TRSize> _roomFace3s;
+    private Dictionary<TRFace4, TRSize> _roomFace4s;
     private Dictionary<TRFace4, List<TRVertex>> _ladderFace4s;
     private List<TRFace4> _triggerFaces, _deathFaces;
+
+    private Dictionary<TRMeshFace, TRSize> _meshFaces;
 
     private ISet<ushort> _allTextures;
     protected WireframeData _data;
@@ -41,13 +43,12 @@ public abstract class AbstractTRWireframer<E, L>
 
     public void Apply(L level, WireframeData data)
     {
-        _roomFace3s = new Dictionary<TRFace3, TRSize>();
-        _roomFace4s = new Dictionary<TRFace4, TRSize>();
-        _meshFace3s = new Dictionary<TRFace3, TRSize>();
-        _meshFace4s = new Dictionary<TRFace4, TRSize>();
-        _ladderFace4s = data.HighlightLadders ? CollectLadders(level) : new Dictionary<TRFace4, List<TRVertex>>();
-        _triggerFaces = data.HighlightTriggers ? CollectTriggerFaces(level, _highlightTriggerTypes) : new List<TRFace4>();
-        _deathFaces = data.HighlightDeathTiles ? CollectDeathFaces(level) : new List<TRFace4>();
+        _roomFace3s = new();
+        _roomFace4s = new();
+        _meshFaces = new();
+        _ladderFace4s = data.HighlightLadders ? CollectLadders(level) : new();
+        _triggerFaces = data.HighlightTriggers ? CollectTriggerFaces(level, _highlightTriggerTypes) : new();
+        _deathFaces = data.HighlightDeathTiles ? CollectDeathFaces(level) : new();
         _allTextures = new SortedSet<ushort>();
         _data = data;
 
@@ -56,7 +57,7 @@ public abstract class AbstractTRWireframer<E, L>
         ScanMeshes(level);
 
         ISet<TRSize> roomSizes = new SortedSet<TRSize>(_roomFace3s.Values.Concat(_roomFace4s.Values));
-        ISet<TRSize> meshSizes = new SortedSet<TRSize>(_meshFace3s.Values.Concat(_meshFace4s.Values));
+        ISet<TRSize> meshSizes = new SortedSet<TRSize>(_meshFaces.Values);
 
         Pen roomPen = new(_data.HighlightColour, 1)
         {
@@ -202,14 +203,9 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void ScanMesh(L level, TRMesh mesh)
     {
-        foreach (TRFace4 face in mesh.TexturedRectangles)
+        foreach (TRMeshFace face in mesh.TexturedFaces)
         {
-            _meshFace4s[face] = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
-        }
-
-        foreach (TRFace3 face in mesh.TexturedTriangles)
-        {
-            _meshFace3s[face] = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
+            _meshFaces[face] = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
         }
     }
 
@@ -507,7 +503,7 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void ResetMeshTextures(Dictionary<TRSize, IndexedTRObjectTexture> sizeRemap, Dictionary<ushort, ushort> specialTextureRemap)
     {
-        foreach (TRFace3 face in _meshFace3s.Keys)
+        foreach (TRMeshFace face in _meshFaces.Keys)
         {
             ushort currentTexture = (ushort)(face.Texture & 0x0fff);
             if (IsTextureExcluded(currentTexture))
@@ -520,32 +516,7 @@ public abstract class AbstractTRWireframer<E, L>
             }
             else
             {
-                TRSize size = _meshFace3s[face];
-                if (!size.Equals(_nullSize))
-                {
-                    if (!sizeRemap.ContainsKey(size))
-                    {
-                        size = Find(size, sizeRemap);
-                    }
-                    face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
-                }
-            }
-        }
-
-        foreach (TRFace4 face in _meshFace4s.Keys)
-        {
-            ushort currentTexture = (ushort)(face.Texture & 0x0fff);
-            if (IsTextureExcluded(currentTexture))
-            {
-                continue;
-            }
-            if (specialTextureRemap.ContainsKey(currentTexture))
-            {
-                face.Texture = RemapTexture(face.Texture, specialTextureRemap[currentTexture]);
-            }
-            else
-            {
-                TRSize size = _meshFace4s[face];
+                TRSize size = _meshFaces[face];
                 if (!size.Equals(_nullSize))
                 {
                     if (!sizeRemap.ContainsKey(size))
@@ -599,16 +570,12 @@ public abstract class AbstractTRWireframer<E, L>
                 // Solidify the skybox as it will become the backdrop for every room
                 foreach (TRMesh mesh in GetModelMeshes(level, model))
                 {
-                    List<TRFace4> rects = mesh.ColouredRectangles.ToList();
-                    foreach (TRFace4 rect in mesh.TexturedRectangles)
+                    foreach (TRMeshFace rect in mesh.TexturedRectangles)
                     {
                         rect.Texture = mesh.ColouredTriangles[0].Texture;
-                        rects.Add(rect);
+                        mesh.ColouredRectangles.Add(rect);
                     }
-                    mesh.TexturedRectangles = Array.Empty<TRFace4>();
-                    mesh.NumTexturedRectangles = 0;
-                    mesh.ColouredRectangles = rects.ToArray();
-                    mesh.NumColouredRectangles = (short)rects.Count;
+                    mesh.TexturedRectangles.Clear();
                 }
             }
             else if
@@ -634,24 +601,14 @@ public abstract class AbstractTRWireframer<E, L>
                     {
                         // Convert all textured polygons to coloured ones, and reset the
                         // palette index they point to.
-                        List<TRFace4> rects = mesh.ColouredRectangles.ToList();
-                        rects.AddRange(mesh.TexturedRectangles);
+                        mesh.ColouredRectangles.AddRange(mesh.TexturedRectangles);
+                        mesh.ColouredTriangles.AddRange(mesh.TexturedTriangles);
 
-                        List<TRFace3> tris = mesh.ColouredTriangles.ToList();
-                        tris.AddRange(mesh.TexturedTriangles);
+                        SetFace4Colours(mesh.ColouredRectangles, paletteIndex);
+                        SetFace3Colours(mesh.ColouredTriangles, paletteIndex);
 
-                        SetFace4Colours(rects, paletteIndex);
-                        SetFace3Colours(tris, paletteIndex);
-
-                        mesh.TexturedRectangles = Array.Empty<TRFace4>();
-                        mesh.NumTexturedRectangles = 0;
-                        mesh.ColouredRectangles = rects.ToArray();
-                        mesh.NumColouredRectangles = (short)rects.Count;
-
-                        mesh.TexturedTriangles = Array.Empty<TRFace3>();
-                        mesh.NumTexturedTriangles = 0;
-                        mesh.ColouredTriangles = tris.ToArray();
-                        mesh.NumColouredTriangles = (short)tris.Count;
+                        mesh.TexturedRectangles.Clear();
+                        mesh.TexturedTriangles.Clear();
                     }
                 }
             }
@@ -661,17 +618,17 @@ public abstract class AbstractTRWireframer<E, L>
         ResetPaletteTracking(level);
     }
 
-    private void SetFace4Colours(IEnumerable<TRFace4> faces, int colourIndex)
+    private void SetFace4Colours(IEnumerable<TRMeshFace> faces, int colourIndex)
     {
-        foreach (TRFace4 face in faces)
+        foreach (TRMeshFace face in faces)
         {
             face.Texture = (ushort)(Is8BitPalette ? colourIndex : (colourIndex << 8 | (face.Texture & 0xFF)));
         }
     }
 
-    private void SetFace3Colours(IEnumerable<TRFace3> faces, int colourIndex)
+    private void SetFace3Colours(IEnumerable<TRMeshFace> faces, int colourIndex)
     {
-        foreach (TRFace3 face in faces)
+        foreach (TRMeshFace face in faces)
         {
             face.Texture = (ushort)(Is8BitPalette ? colourIndex : (colourIndex << 8 | (face.Texture & 0xFF)));
         }

@@ -1,6 +1,7 @@
 ﻿using RectanglePacker;
 using RectanglePacker.Events;
 using RectanglePacker.Organisation;
+using System.Collections.Immutable;
 using System.Drawing;
 using TRLevelControl;
 using TRLevelControl.Model;
@@ -96,7 +97,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
         List<TRMesh> meshes = GetModelMeshes(modelEntity);
         if (meshes != null)
         {
-            IEnumerable<int> indices = GetMeshTextureIndices(meshes);
+            ISet<int> indices = meshes.SelectMany(m => m.TexturedFaces.Select(f => (int)f.Texture)).ToImmutableSortedSet();
             foreach (TexturedTile tile in _tiles)
             {
                 List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
@@ -168,23 +169,6 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
     }
 
     protected abstract TRSpriteSequence GetSpriteSequence(E entity);
-
-    protected IEnumerable<int> GetMeshTextureIndices(List<TRMesh> meshes)
-    {
-        ISet<int> textureIndices = new SortedSet<int>();
-        foreach (TRMesh mesh in meshes)
-        {
-            foreach (TRFace4 rect in mesh.TexturedRectangles)
-            {
-                textureIndices.Add(rect.Texture);
-            }
-            foreach (TRFace3 tri in mesh.TexturedTriangles)
-            {
-                textureIndices.Add(tri.Texture);
-            }
-        }
-        return textureIndices;
-    }
 
     public void RemoveModelSegments(IEnumerable<E> modelEntitiesToRemove, AbstractTextureRemapGroup<E, L> remapGroup)
     {

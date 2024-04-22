@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using TRLevelControl.Build;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
@@ -102,14 +103,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         uint numFloorData = reader.ReadUInt32();
         _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
 
-        uint numMeshData = reader.ReadUInt32();
-        ushort[] rawMeshData = reader.ReadUInt16s(numMeshData);
-
-        //Mesh Pointers
-        uint numMeshPointers = reader.ReadUInt32();
-        _level.MeshPointers = reader.ReadUInt32s(numMeshPointers).ToList();
-
-        _level.Meshes = ConstructMeshData(_level.MeshPointers, rawMeshData);
+        ReadMeshData(reader);
 
         //Animations
         uint numAnimations = reader.ReadUInt32();
@@ -268,11 +262,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write((uint)_level.FloorData.Count);
         writer.Write(_level.FloorData);
 
-        List<byte> meshData = _level.Meshes.SelectMany(m => m.Serialize()).ToList();
-        writer.Write((uint)meshData.Count / 2);
-        writer.Write(meshData.ToArray());
-        writer.Write((uint)_level.MeshPointers.Count);
-        writer.Write(_level.MeshPointers);
+        WriteMeshData(writer);
 
         writer.Write((uint)_level.Animations.Count);
         foreach (TRAnimation anim in _level.Animations) { writer.Write(anim.Serialize()); }
@@ -331,6 +321,21 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write(_level.DemoData);
 
         WriteSoundEffects(writer);
+    }
+
+    private void ReadMeshData(TRLevelReader reader)
+    {
+        TRObjectMeshBuilder builder = new(TRGameVersion.TR1, _observer);
+        builder.BuildObjectMeshes(reader);
+
+        _level.Meshes = builder.Meshes;
+        _level.MeshPointers = builder.MeshPointers;
+    }
+
+    private void WriteMeshData(TRLevelWriter writer)
+    {
+        TRObjectMeshBuilder builder = new(TRGameVersion.TR1, _observer);
+        builder.WriteObjectMeshes(writer, _level.Meshes, _level.MeshPointers);
     }
 
     private static TRRoomData ConvertToRoomData(TRRoom room)
@@ -438,108 +443,6 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         Debug.Assert(RoomDataOffset == room.NumDataWords);
 
         return RoomData;
-    }
-
-    private static List<TRMesh> ConstructMeshData(List<uint> meshPointers, ushort[] rawMeshData)
-    {
-        byte[] target = new byte[rawMeshData.Length * 2];
-        Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
-
-        // The mesh pointer list can contain duplicates so we must make
-        // sure to iterate over distinct values only
-        meshPointers = new(meshPointers.Distinct());
-
-        List<TRMesh> meshes = new();
-
-        using (MemoryStream ms = new(target))
-        using (BinaryReader br = new(ms))
-        {
-            for (int i = 0; i < meshPointers.Count; i++)
-            {
-                TRMesh mesh = new();
-                meshes.Add(mesh);
-
-                uint meshPointer = meshPointers[i];
-                br.BaseStream.Position = meshPointer;
-
-                //Pointer
-                mesh.Pointer = meshPointer;
-
-                //Centre
-                mesh.Centre = TR2FileReadUtilities.ReadVertex(br);
-
-                //CollRadius
-                mesh.CollRadius = br.ReadInt32();
-
-                //Vertices
-                mesh.NumVertices = br.ReadInt16();
-                mesh.Vertices = new TRVertex[mesh.NumVertices];
-                for (int j = 0; j < mesh.NumVertices; j++)
-                {
-                    mesh.Vertices[j] = TR2FileReadUtilities.ReadVertex(br);
-                }
-
-                //Lights or Normals
-                mesh.NumNormals = br.ReadInt16();
-                if (mesh.NumNormals > 0)
-                {
-                    mesh.Normals = new TRVertex[mesh.NumNormals];
-                    for (int j = 0; j < mesh.NumNormals; j++)
-                    {
-                        mesh.Normals[j] = TR2FileReadUtilities.ReadVertex(br);
-                    }
-                }
-                else
-                {
-                    mesh.Lights = new short[Math.Abs(mesh.NumNormals)];
-                    for (int j = 0; j < mesh.Lights.Length; j++)
-                    {
-                        mesh.Lights[j] = br.ReadInt16();
-                    }
-                }
-
-                //Textured Rectangles
-                mesh.NumTexturedRectangles = br.ReadInt16();
-                mesh.TexturedRectangles = new TRFace4[mesh.NumTexturedRectangles];
-                for (int j = 0; j < mesh.NumTexturedRectangles; j++)
-                {
-                    mesh.TexturedRectangles[j] = TR2FileReadUtilities.ReadTRFace4(br);
-                }
-
-                //Textured Triangles
-                mesh.NumTexturedTriangles = br.ReadInt16();
-                mesh.TexturedTriangles = new TRFace3[mesh.NumTexturedTriangles];
-                for (int j = 0; j < mesh.NumTexturedTriangles; j++)
-                {
-                    mesh.TexturedTriangles[j] = TR2FileReadUtilities.ReadTRFace3(br);
-                }
-
-                //Coloured Rectangles
-                mesh.NumColouredRectangles = br.ReadInt16();
-                mesh.ColouredRectangles = new TRFace4[mesh.NumColouredRectangles];
-                for (int j = 0; j < mesh.NumColouredRectangles; j++)
-                {
-                    mesh.ColouredRectangles[j] = TR2FileReadUtilities.ReadTRFace4(br);
-                }
-
-                //Coloured Triangles
-                mesh.NumColouredTriangles = br.ReadInt16();
-                mesh.ColouredTriangles = new TRFace3[mesh.NumColouredTriangles];
-                for (int j = 0; j < mesh.NumColouredTriangles; j++)
-                {
-                    mesh.ColouredTriangles[j] = TR2FileReadUtilities.ReadTRFace3(br);
-                }
-
-                // There may be alignment padding at the end of the mesh, but rather than
-                // storing it, when the mesh is serialized the alignment should be considered.
-                // It seems to be 4-byte alignment for mesh data. The basestream position is
-                // moved to the next pointer in the next iteration, so we don't need to process
-                // the additional data here.
-                // See https://www.tombraiderforums.com/archive/index.php/t-215247.html
-            }
-        }
-
-        return meshes;
     }
 
     private void ReadSoundEffects(TRLevelReader reader)

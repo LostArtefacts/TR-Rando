@@ -207,13 +207,9 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
 
         foreach (TRMesh mesh in meshes)
         {
-            foreach (TRFace4 f in mesh.ColouredRectangles)
+            foreach (TRMeshFace face in mesh.ColouredFaces)
             {
-                colourIndices.Add(f.Texture);
-            }
-            foreach (TRFace3 f in mesh.ColouredTriangles)
-            {
-                colourIndices.Add(f.Texture);
+                colourIndices.Add(face.Texture);
             }
         }
 
@@ -235,18 +231,11 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
 
         foreach (TRMesh mesh in meshes)
         {
-            foreach (TRFace4 f in mesh.ColouredRectangles)
+            foreach (TRMeshFace face in mesh.ColouredFaces)
             {
-                if (remapIndices.ContainsKey(f.Texture))
+                if (remapIndices.ContainsKey(face.Texture))
                 {
-                    f.Texture = (ushort)remapIndices[f.Texture];
-                }
-            }
-            foreach (TRFace3 f in mesh.ColouredTriangles)
-            {
-                if (remapIndices.ContainsKey(f.Texture))
-                {
-                    f.Texture = (ushort)remapIndices[f.Texture];
+                    face.Texture = (ushort)remapIndices[face.Texture];
                 }
             }
         }
@@ -306,13 +295,9 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 ISet<int> colourIndices = new HashSet<int>();
                 foreach (TRMesh mesh in meshes)
                 {
-                    foreach (TRFace4 t in mesh.ColouredRectangles)
+                    foreach (TRMeshFace face in mesh.ColouredFaces)
                     {
-                        colourIndices.Add(BitConverter.GetBytes(t.Texture)[1]);
-                    }
-                    foreach (TRFace3 t in mesh.ColouredTriangles)
-                    {
-                        colourIndices.Add(BitConverter.GetBytes(t.Texture)[1]);
+                        colourIndices.Add(BitConverter.GetBytes(face.Texture)[1]);
                     }
                 }
 
@@ -343,13 +328,9 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 // Remap the affected mesh textures to the newly inserted colours
                 foreach (TRMesh mesh in meshes)
                 {
-                    foreach (TRFace4 t in mesh.ColouredRectangles)
+                    foreach (TRMeshFace face in mesh.ColouredFaces)
                     {
-                        t.Texture = ConvertMeshTexture(t.Texture, remapIndices);
-                    }
-                    foreach (TRFace3 t in mesh.ColouredTriangles)
-                    {
-                        t.Texture = ConvertMeshTexture(t.Texture, remapIndices);
+                        face.Texture = ConvertMeshTexture(face.Texture, remapIndices);
                     }
                 }
             }
@@ -389,18 +370,11 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
 
                 foreach (TRMesh mesh in meshes)
                 {
-                    foreach (TRFace4 f in mesh.ColouredRectangles)
+                    foreach (TRMeshFace face in mesh.ColouredFaces)
                     {
-                        if (remapIndices.ContainsKey(f.Texture))
+                        if (remapIndices.ContainsKey(face.Texture))
                         {
-                            f.Texture = (ushort)remapIndices[f.Texture];
-                        }
-                    }
-                    foreach (TRFace3 f in mesh.ColouredTriangles)
-                    {
-                        if (remapIndices.ContainsKey(f.Texture))
-                        {
-                            f.Texture = (ushort)remapIndices[f.Texture];
+                            face.Texture = (ushort)remapIndices[face.Texture];
                         }
                     }
                 }

@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using System.Diagnostics;
 using TRLevelControl.Model;
 
 namespace TRLevelControl;
@@ -39,6 +40,14 @@ public class TRLevelWriter : BinaryWriter
     public void Write(IEnumerable<byte> data)
     {
         foreach (byte value in data)
+        {
+            Write(value);
+        }
+    }
+
+    public void Write(IEnumerable<short> data)
+    {
+        foreach (short value in data)
         {
             Write(value);
         }
@@ -264,5 +273,42 @@ public class TRLevelWriter : BinaryWriter
         Write(entity.Flags);
         Write(entity.Angle);
         Write(entity.Box);
+    }
+
+    public void Write(IEnumerable<TRMeshFace> faces, TRGameVersion version)
+    {
+        foreach (TRMeshFace face in faces)
+        {
+            Write(face, version);
+        }
+    }
+
+    public void Write(TRMeshFace face, TRGameVersion version)
+    {
+        Debug.Assert(face.Vertices.Count == (int)face.Type);
+        Write(face.Vertices);
+        WriteFaceTexture(face, version);
+        if (version >= TRGameVersion.TR4)
+        {
+            Write(face.Effects);
+        }
+    }
+
+    private void WriteFaceTexture(TRFace face, TRGameVersion version)
+    {
+        ushort texture = face.Texture;
+        if (version >= TRGameVersion.TR3)
+        {
+            texture &= (ushort)(version == TRGameVersion.TR5 ? 0x3FFF : 0x7FFF);
+            if (face.DoubleSided)
+            {
+                texture |= 0x8000;
+            }
+            if (face.UnknownFlag && version == TRGameVersion.TR5)
+            {
+                texture |= 0x4000;
+            }
+        }
+        Write(texture);
     }
 }
