@@ -197,14 +197,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         _level.AnimDispatches = builder.ReadDispatches(reader);
         _level.AnimCommands = builder.ReadCommands(reader);
         _level.MeshTrees = builder.ReadTrees(reader);
-
-        uint numFrames = reader.ReadUInt32();
-        _level.Frames = new();
-        for (int i = 0; i < numFrames; i++)
-        {
-            _level.Frames.Add(reader.ReadUInt16());
-        }
-
+        _level.Frames = builder.ReadFrmaes(reader);
         _level.Models = builder.ReadModels(reader);
     }
 
@@ -217,13 +210,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         builder.WriteDispatches(_level.AnimDispatches, writer);
         builder.WriteCommands(_level.AnimCommands, writer);
         builder.WriteTrees(_level.MeshTrees, writer);
-
-        writer.Write((uint)_level.Frames.Count);
-        foreach (ushort frame in _level.Frames)
-        {
-            writer.Write(frame);
-        }
-
+        builder.WriteFrames(_level.Frames, writer);
         builder.WriteModels(_level.Models, writer);
     }
 
