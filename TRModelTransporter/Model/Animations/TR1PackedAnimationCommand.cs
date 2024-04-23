@@ -1,4 +1,4 @@
-﻿using TRLevelControl.Model.Enums;
+﻿using TRLevelControl.Model;
 
 namespace TRModelTransporter.Model.Animations;
 

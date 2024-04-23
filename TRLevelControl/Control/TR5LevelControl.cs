@@ -211,7 +211,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         builder.ReadAnimations(reader);
         builder.ReadStateChanges(reader);
         builder.ReadDispatches(reader);
-        _level.AnimCommands = builder.ReadCommands(reader);
+        builder.ReadCommands(reader);
         _level.MeshTrees = builder.ReadTrees(reader);
         _level.Frames = builder.ReadFrames(reader);
         _level.Models = builder.ReadModels(reader);
@@ -223,7 +223,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         builder.Write(_level.Models.SelectMany(m => m.Animations).ToList(), writer);
         builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Changes).ToList(), writer);
         builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Changes).SelectMany(c => c.Dispatches).ToList(), writer);
-        builder.Write(_level.AnimCommands, writer);
+        builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Commands).ToList(), writer);
         builder.Write(_level.MeshTrees, writer);
         builder.Write(_level.Frames, writer);
         builder.Write(_level.Models, writer);

@@ -170,7 +170,7 @@ public class TRModelBuilder
         }
     }
 
-    public List<TRAnimCommand> ReadCommands(TRLevelReader reader)
+    public void ReadCommands(TRLevelReader reader)
     {
         uint numAnimCommands = reader.ReadUInt32();
         List<TRAnimCommand> commands = new();
@@ -183,7 +183,45 @@ public class TRModelBuilder
             });
         }
 
-        return commands;
+        foreach (TRAnimation animation in _animations)
+        {
+            int offset = animation.AnimCommand;
+            if (animation.NumAnimCommands < commands.Count)
+            {
+                for (int i = 0; i < animation.NumAnimCommands; i++)
+                {
+                    int additionalValues = 0;
+                    TRAnimCommandTypes type = (TRAnimCommandTypes)commands[offset].Value;
+                    switch (type)
+                    {
+                        case TRAnimCommandTypes.SetPosition:
+                            additionalValues = 3;
+                            break;
+                        case TRAnimCommandTypes.JumpDistance:
+                        case TRAnimCommandTypes.PlaySound:
+                        case TRAnimCommandTypes.FlipEffect:
+                            additionalValues = 2;
+                            break;
+
+                    }
+
+                    animation.Commands.Add(commands[offset++]);
+                    for (int j = 0; j < additionalValues; j++)
+                    {
+                        animation.Commands.Add(commands[offset++]);
+                    }
+                }
+            }
+            else
+            {
+                // TR4/5 have some crazy out of range offset pointers. To be observed for tests.
+            }
+        }
+
+        if (_version < TRGameVersion.TR4)
+        {
+            Debug.Assert(commands.Count == _animations.Sum(a => a.Commands.Count));
+        }
     }
 
     public void Write(List<TRAnimCommand> commands, TRLevelWriter writer)

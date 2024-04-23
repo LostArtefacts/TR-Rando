@@ -1,11 +1,12 @@
-﻿namespace TRLevelControl.Model.Enums;
+﻿namespace TRLevelControl.Model;
 
 public enum TRAnimCommandTypes
 {
-    SetPosition = 1,
+    Null         = 0,
+    SetPosition  = 1,
     JumpDistance = 2,
-    EmptyHands = 3,
-    Kill = 4,
-    PlaySound = 5,
-    FlipEffect = 6
+    EmptyHands   = 3,
+    Kill         = 4,
+    PlaySound    = 5,
+    FlipEffect   = 6,
 }
