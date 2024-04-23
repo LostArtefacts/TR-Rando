@@ -82,7 +82,7 @@ public class TRModelBuilder
         }
     }
 
-    public List<TRStateChange> ReadStateChanges(TRLevelReader reader)
+    public void ReadStateChanges(TRLevelReader reader)
     {
         uint numStateChanges = reader.ReadUInt32();
         List<TRStateChange> stateChanges = new();
@@ -97,7 +97,21 @@ public class TRModelBuilder
             });
         }
 
-        return stateChanges;
+        foreach (TRAnimation animation in _animations)
+        {
+            for (int i = 0; i < animation.NumStateChanges; i++)
+            {
+                int changeOffset = animation.StateChangeOffset + i;
+                animation.Changes.Add(stateChanges[changeOffset]);
+            }
+        }
+
+        if (_version != TRGameVersion.TR5)
+        {
+            // Some TR5 levels contain an unused change at the end of the list.
+            // Figure out test observation things later.
+            Debug.Assert(stateChanges.Count == _animations.Sum(a => a.Changes.Count));
+        }
     }
 
     public void Write(List<TRStateChange> stateChanges, TRLevelWriter writer)

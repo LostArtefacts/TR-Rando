@@ -29,4 +29,5 @@ public class TRAnimation
     public ushort NumAnimCommands { get; set; }
 
     public ushort AnimCommand { get; set; }
+    public List<TRStateChange> Changes { get; set; } = new();
 }
