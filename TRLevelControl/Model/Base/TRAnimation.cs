@@ -31,4 +31,5 @@ public class TRAnimation
     public ushort AnimCommand { get; set; }
     public List<TRStateChange> Changes { get; set; } = new();
     public List<TRAnimCommand> Commands { get; set; } = new();
+    public List<ushort> Frames { get; set; } = new();
 }

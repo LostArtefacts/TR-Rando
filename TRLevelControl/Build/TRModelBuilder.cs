@@ -265,10 +265,23 @@ public class TRModelBuilder
         }
     }
 
-    public List<ushort> ReadFrames(TRLevelReader reader)
+    public void ReadFrames(TRLevelReader reader)
     {
         uint numFrames = reader.ReadUInt32();
-        return new(reader.ReadUInt16s(numFrames));
+        List<ushort> frames = new(reader.ReadUInt16s(numFrames));
+
+        for (int i = 0; i < _animations.Count; i++)
+        {
+            TRAnimation animation = _animations[i];
+            int offset = (int)animation.FrameOffset / sizeof(ushort);
+            int nextOffset = i == _animations.Count - 1
+                ? frames.Count
+                : (int)_animations[i + 1].FrameOffset / sizeof(ushort);
+
+            animation.Frames = frames.GetRange(offset, nextOffset - offset);
+        }
+
+        Debug.Assert(frames.Count == _animations.Sum(a => a.Frames.Count));
     }
 
     public void Write(List<ushort> frames, TRLevelWriter writer)

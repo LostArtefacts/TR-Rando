@@ -289,7 +289,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         builder.ReadDispatches(reader);
         builder.ReadCommands(reader);
         builder.ReadTrees(reader);
-        _level.Frames = builder.ReadFrames(reader);
+        builder.ReadFrames(reader);
         _level.Models = builder.ReadModels(reader);
     }
 
@@ -301,7 +301,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Changes).SelectMany(c => c.Dispatches).ToList(), writer);
         builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Commands).ToList(), writer);
         builder.Write(_level.Models.SelectMany(m => m.MeshTrees).ToList(), writer);
-        builder.Write(_level.Frames, writer);
+        builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Frames).ToList(), writer);
         builder.Write(_level.Models, writer);
     }
 
