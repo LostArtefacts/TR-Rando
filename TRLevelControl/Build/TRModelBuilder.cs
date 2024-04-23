@@ -126,7 +126,7 @@ public class TRModelBuilder
         }
     }
 
-    public List<TRAnimDispatch> ReadDispatches(TRLevelReader reader)
+    public void ReadDispatches(TRLevelReader reader)
     {
         uint numAnimDispatches = reader.ReadUInt32();
         List<TRAnimDispatch> dispatches = new();
@@ -142,7 +142,19 @@ public class TRModelBuilder
             });
         }
 
-        return dispatches;
+        foreach (TRStateChange change in _animations.SelectMany(a => a.Changes))
+        {
+            for (int i = 0; i < change.NumAnimDispatches; i++)
+            {
+                change.Dispatches.Add(dispatches[change.AnimDispatch + i]);
+            }
+        }
+
+        if (_version != TRGameVersion.TR5)
+        {
+            // More unused TR5 data
+            Debug.Assert(dispatches.Count == _animations.Sum(a => a.Changes.Sum(c => c.Dispatches.Count)));
+        }
     }
 
     public void Write(List<TRAnimDispatch> dispatches, TRLevelWriter writer)

@@ -5,6 +5,7 @@ namespace TRLevelControl.Model;
 public class TRStateChange
 {
     public ushort StateID { get; set; }
+    public List<TRAnimDispatch> Dispatches { get; set; } = new();
 
     public ushort NumAnimDispatches { get; set; }
 
