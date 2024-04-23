@@ -292,7 +292,7 @@ public class TRModelBuilder
     private void ReadFrames(TRLevelReader reader)
     {
         uint numFrames = reader.ReadUInt32();
-        List<ushort> frames = new(reader.ReadUInt16s(numFrames));
+        List<short> frames = new(reader.ReadInt16s(numFrames));
 
         for (int i = 0; i < _animations.Count; i++)
         {
@@ -308,7 +308,7 @@ public class TRModelBuilder
         Debug.Assert(frames.Count == _animations.Sum(a => a.Frames.Count));
     }
 
-    private void Write(List<ushort> frames, TRLevelWriter writer)
+    private void Write(List<short> frames, TRLevelWriter writer)
     {
         writer.Write((uint)frames.Count);
         writer.Write(frames);
