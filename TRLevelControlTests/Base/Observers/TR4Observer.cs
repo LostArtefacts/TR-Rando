@@ -3,12 +3,13 @@ using TRLevelControl.Model;
 
 namespace TRLevelControlTests;
 
-public class TR45Observer : ObserverBase
+public class TR4Observer : TR2Observer
 {
     private readonly Dictionary<TRChunkType, ZipWrapper> _inflatedReads = new();
     private readonly Dictionary<TRChunkType, ZipWrapper> _inflatedWrites = new();
 
     private readonly Dictionary<uint, List<byte>> _meshPadding = new();
+    private readonly Dictionary<int, ushort> _badAnimCmdCounts = new();
 
     private uint[] _sampleIndices;
 
@@ -71,6 +72,16 @@ public class TR45Observer : ObserverBase
     public override List<byte> GetMeshPadding(uint meshPointer)
     {
         return _meshPadding.ContainsKey(meshPointer) ? _meshPadding[meshPointer] : null;
+    }
+
+    public override void OnBadAnimCommandRead(int animIndex, ushort numAnimCommands)
+    {
+        _badAnimCmdCounts[animIndex] = numAnimCommands;
+    }
+
+    public override ushort? GetNumAnimCommands(int animIndex)
+    {
+        return _badAnimCmdCounts.ContainsKey(animIndex) ? _badAnimCmdCounts[animIndex] : null;
     }
 
     public override void OnSampleIndicesRead(uint[] sampleIndices)

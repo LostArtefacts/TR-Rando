@@ -1,24 +1,19 @@
-﻿using System.Text;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TRStateChange
+public class TRStateChange : ICloneable
 {
     public ushort StateID { get; set; }
     public List<TRAnimDispatch> Dispatches { get; set; } = new();
 
-    public ushort NumAnimDispatches { get; set; }
-
-    public ushort AnimDispatch { get; set; }
-
-    public override string ToString()
+    public TRStateChange Clone()
     {
-        StringBuilder sb = new(base.ToString());
-
-        sb.Append(" StateID: " + StateID);
-        sb.Append(" NumAnimDispatches: " + NumAnimDispatches);
-        sb.Append(" AnimDispatch: " + AnimDispatch);
-
-        return sb.ToString();
+        return new()
+        {
+            StateID = StateID,
+            Dispatches = new(Dispatches.Select(c => c.Clone())),
+        };
     }
+
+    object ICloneable.Clone()
+        => Clone();
 }

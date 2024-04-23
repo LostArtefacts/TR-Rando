@@ -99,12 +99,17 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Pierre);
         // Get his shooting animation
         TRAnimation anim = model.Animations[10];
-        anim.NumAnimCommands = 1;
 
         // On the 2nd frame, play SFX 44 (magnums)
-        anim.Commands.Add(new() { Value = 5 });
-        anim.Commands.Add(new() { Value = (short)(anim.FrameStart + 1) });
-        anim.Commands.Add(new() { Value = (short)TR1SFX.LaraMagnums });
+        anim.Commands.Add(new()
+        {
+            Type = TRAnimCommandType.PlaySound,
+            Params = new()
+            {
+                1,
+                (short)TR1SFX.LaraMagnums,
+            }
+        });
     }
 
     public static void AmendPierreDeath(TR1Level level)
@@ -112,12 +117,17 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Pierre);
         // Get his death animation
         TRAnimation anim = model.Animations[12];
-        anim.NumAnimCommands++;
 
         // On the 61st frame, play SFX 159 (death)
-        anim.Commands.Add(new() { Value = 5 });
-        anim.Commands.Add(new() { Value = (short)(anim.FrameStart + 60) });
-        anim.Commands.Add(new() { Value = (short)TR1SFX.PierreDeath });
+        anim.Commands.Add(new()
+        {
+            Type = TRAnimCommandType.PlaySound,
+            Params = new()
+            {
+                60,
+                (short)TR1SFX.PierreDeath,
+            }
+        });
     }
 
     public static void AmendLarsonDeath(TR1Level level)
@@ -125,12 +135,17 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Larson);
         // Get his death animation
         TRAnimation anim = model.Animations[15];
-        anim.NumAnimCommands++;
 
         // On the 2nd frame, play SFX 158 (death)
-        anim.Commands.Add(new() { Value = 5 });
-        anim.Commands.Add(new() { Value = (short)(anim.FrameStart + 1) });
-        anim.Commands.Add(new() { Value = (short)TR1SFX.LarsonDeath });
+        anim.Commands.Add(new()
+        {
+            Type = TRAnimCommandType.PlaySound,
+            Params = new()
+            {
+                1,
+                (short)TR1SFX.LarsonDeath,
+            }
+        });
     }
 
     public static void AmendSkaterBoyDeath(TR1Level level)
@@ -139,7 +154,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         // Get his death animation
         TRAnimation anim = model.Animations[13];
         // Play the death sound on the 2nd frame (doesn't work on the 1st, which is OG).
-        anim.Commands[2].Value++;
+        anim.Commands[2].Params[0]++;
     }
 
     public static void AmendNatlaDeath(TR1Level level)
@@ -147,12 +162,17 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Natla);
         // Get her death animation
         TRAnimation anim = model.Animations[13];
-        anim.NumAnimCommands++;
 
         // On the 5th frame, play SFX 160 (death)
-        anim.Commands.Add(new() { Value = 5 });
-        anim.Commands.Add(new() { Value = (short)(anim.FrameStart + 4) });
-        anim.Commands.Add(new() { Value = (short)TR1SFX.NatlaDeath });
+        anim.Commands.Add(new()
+        {
+            Type = TRAnimCommandType.PlaySound,
+            Params = new()
+            {
+                4,
+                (short)TR1SFX.NatlaDeath,
+            }
+        });
     }
 
     public static void AddMovingBlockSFX(TR1Level level)
@@ -170,12 +190,17 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         for (int i = 2; i < 4; i++)
         {
             TRAnimation anim = model.Animations[i];
-            anim.NumAnimCommands++;
 
             // On the 1st frame, play SFX 162
-            anim.Commands.Add(new() { Value = 5 });
-            anim.Commands.Add(new() { Value = (short)anim.FrameStart });
-            anim.Commands.Add(new() { Value = (short)TR1SFX.TrapdoorClose });
+            anim.Commands.Add(new()
+            {
+                Type = TRAnimCommandType.PlaySound,
+                Params = new()
+                {
+                    0,
+                    (short)TR1SFX.TrapdoorClose,
+                }
+            });
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace TRLevelControl.Model;
 
-public enum TRAnimCommandTypes
+public enum TRAnimCommandType
 {
     Null         = 0,
     SetPosition  = 1,

@@ -1,17 +1,19 @@
-﻿using System.Text;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TRAnimCommand
+public class TRAnimCommand : ICloneable
 {
-    public short Value { get; set; }
+    public TRAnimCommandType Type { get; set; }
+    public List<short> Params { get; set; } = new();
 
-    public override string ToString()
+    public TRAnimCommand Clone()
     {
-        StringBuilder sb = new(base.ToString());
-
-        sb.Append(" Value: " + Value.ToString("X4"));
-
-        return sb.ToString();
+        return new()
+        {
+            Type = Type,
+            Params = new(Params),
+        };
     }
+
+    object ICloneable.Clone()
+        => Clone();
 }

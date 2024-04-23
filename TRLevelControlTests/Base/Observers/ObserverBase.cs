@@ -23,6 +23,36 @@ public class ObserverBase : ITRLevelObserver
     public virtual List<byte> GetMeshPadding(uint meshPointer)
         => null;
 
+    public virtual void OnBadDispatchLinkRead(int dispatchIndex, short animLink, short frameLink)
+    { }
+
+    public virtual Tuple<short, short> GetDispatchLink(int dispatchIndex)
+        => null;
+
+    public virtual void OnBadAnimLinkRead(int animIndex, ushort animLink, ushort frameLink)
+    { }
+
+    public virtual Tuple<ushort, ushort> GetAnimLink(int animIndex)
+        => null;
+
+    public virtual void OnBadAnimCommandRead(int animIndex, ushort numAnimCommands)
+    { }
+
+    public virtual ushort? GetNumAnimCommands(int animIndex)
+        => null;
+
+    public virtual void OnAnimCommandPaddingRead(short padding)
+    { }
+
+    public virtual short? GetAnimCommandPadding()
+        => null;
+
+    public virtual void OnUnusedStateChangeRead(Tuple<ushort, ushort> padding)
+    { }
+
+    public virtual Tuple<ushort, ushort> GetUnusedStateChange()
+        => null;
+
     public virtual void OnSampleIndicesRead(uint[] sampleIndices)
     { }
 

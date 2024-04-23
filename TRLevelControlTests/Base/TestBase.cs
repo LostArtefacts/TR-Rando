@@ -93,31 +93,31 @@ public class TestBase
         switch (version)
         {
             case TRGameVersion.TR1:
-                observer = new();
+                observer = new TR1Observer();
                 TR1LevelControl control1 = new(observer);
                 TR1Level level1 = control1.Read(inputStream);
                 control1.Write(level1, outputStream);
                 break;
             case TRGameVersion.TR2:
-                observer = new();
+                observer = new TR2Observer();
                 TR2LevelControl control2 = new(observer);
                 TR2Level level2 = control2.Read(pathI);
                 control2.Write(level2, outputStream);
                 break;
             case TRGameVersion.TR3:
-                observer = new();
+                observer = new TR2Observer();
                 TR3LevelControl control3 = new(observer);
                 TR3Level level3 = control3.Read(pathI);
                 control3.Write(level3, outputStream);
                 break;
             case TRGameVersion.TR4:
-                observer = new TR45Observer();
+                observer = new TR4Observer();
                 TR4LevelControl control4 = new(observer);
                 TR4Level level4 = control4.Read(pathI);
                 control4.Write(level4, outputStream);
                 break;
             case TRGameVersion.TR5:
-                observer = new TR45Observer();
+                observer = new TR5Observer();
                 TR5LevelControl control5 = new(observer);
                 TR5Level level5 = control5.Read(pathI);
                 control5.Write(level5, outputStream);
