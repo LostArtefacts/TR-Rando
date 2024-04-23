@@ -190,26 +190,14 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadModelData(TRLevelReader reader)
     {
-        TRModelBuilder builder = new(TRGameVersion.TR4);
-        builder.ReadAnimations(reader);
-        builder.ReadStateChanges(reader);
-        builder.ReadDispatches(reader);
-        builder.ReadCommands(reader);
-        builder.ReadTrees(reader);
-        builder.ReadFrames(reader);
-        _level.Models = builder.ReadModels(reader);
+        TRModelBuilder builder = new(TRGameVersion.TR4, _observer);
+        _level.Models = builder.ReadModelData(reader);
     }
 
     private void WriteModelData(TRLevelWriter writer)
     {
-        TRModelBuilder builder = new(TRGameVersion.TR4);
-        builder.Write(_level.Models.SelectMany(m => m.Animations).ToList(), writer);
-        builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Changes).ToList(), writer);
-        builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Changes).SelectMany(c => c.Dispatches).ToList(), writer);
-        builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Commands).ToList(), writer);
-        builder.Write(_level.Models.SelectMany(m => m.MeshTrees).ToList(), writer);
-        builder.Write(_level.Models.SelectMany(m => m.Animations).SelectMany(a => a.Frames).ToList(), writer);
-        builder.Write(_level.Models, writer);
+        TRModelBuilder builder = new(TRGameVersion.TR4, _observer);
+        builder.WriteModelData(writer, _level.Models);
     }
 
     private void ReadStaticMeshes(TRLevelReader reader)

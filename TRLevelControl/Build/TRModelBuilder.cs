@@ -8,16 +8,40 @@ public class TRModelBuilder
     private static readonly ushort _tr5ModelPadding = 0xFFEF;
 
     private readonly TRGameVersion _version;
+    private readonly ITRLevelObserver _observer;
 
     private List<TRAnimation> _animations;
     private List<TRMeshTreeNode> _trees;
 
-    public TRModelBuilder(TRGameVersion version)
+    public TRModelBuilder(TRGameVersion version, ITRLevelObserver observer = null)
     {
         _version = version;
+        _observer = observer;
     }
 
-    public void ReadAnimations(TRLevelReader reader)
+    public List<TRModel> ReadModelData(TRLevelReader reader)
+    {
+        ReadAnimations(reader);
+        ReadStateChanges(reader);
+        ReadDispatches(reader);
+        ReadCommands(reader);
+        ReadTrees(reader);
+        ReadFrames(reader);
+        return ReadModels(reader);
+    }
+
+    public void WriteModelData(TRLevelWriter writer, List<TRModel> models)
+    {
+        Write(models.SelectMany(m => m.Animations).ToList(), writer);
+        Write(models.SelectMany(m => m.Animations).SelectMany(a => a.Changes).ToList(), writer);
+        Write(models.SelectMany(m => m.Animations).SelectMany(a => a.Changes).SelectMany(c => c.Dispatches).ToList(), writer);
+        Write(models.SelectMany(m => m.Animations).SelectMany(a => a.Commands).ToList(), writer);
+        Write(models.SelectMany(m => m.MeshTrees).ToList(), writer);
+        Write(models.SelectMany(m => m.Animations).SelectMany(a => a.Frames).ToList(), writer);
+        Write(models, writer);
+    }
+
+    private void ReadAnimations(TRLevelReader reader)
     {
         uint numAnimations = reader.ReadUInt32();
         _animations = new();
@@ -53,7 +77,7 @@ public class TRModelBuilder
         }
     }
 
-    public void Write(List<TRAnimation> animations, TRLevelWriter writer)
+    private void Write(List<TRAnimation> animations, TRLevelWriter writer)
     {
         writer.Write((uint)animations.Count);
 
@@ -83,7 +107,7 @@ public class TRModelBuilder
         }
     }
 
-    public void ReadStateChanges(TRLevelReader reader)
+    private void ReadStateChanges(TRLevelReader reader)
     {
         uint numStateChanges = reader.ReadUInt32();
         List<TRStateChange> stateChanges = new();
@@ -115,7 +139,7 @@ public class TRModelBuilder
         }
     }
 
-    public void Write(List<TRStateChange> stateChanges, TRLevelWriter writer)
+    private void Write(List<TRStateChange> stateChanges, TRLevelWriter writer)
     {
         writer.Write((uint)stateChanges.Count);
 
@@ -127,7 +151,7 @@ public class TRModelBuilder
         }
     }
 
-    public void ReadDispatches(TRLevelReader reader)
+    private void ReadDispatches(TRLevelReader reader)
     {
         uint numAnimDispatches = reader.ReadUInt32();
         List<TRAnimDispatch> dispatches = new();
@@ -158,7 +182,7 @@ public class TRModelBuilder
         }
     }
 
-    public void Write(List<TRAnimDispatch> dispatches, TRLevelWriter writer)
+    private void Write(List<TRAnimDispatch> dispatches, TRLevelWriter writer)
     {
         writer.Write((uint)dispatches.Count);
 
@@ -171,7 +195,7 @@ public class TRModelBuilder
         }
     }
 
-    public void ReadCommands(TRLevelReader reader)
+    private void ReadCommands(TRLevelReader reader)
     {
         uint numAnimCommands = reader.ReadUInt32();
         List<TRAnimCommand> commands = new();
@@ -225,7 +249,7 @@ public class TRModelBuilder
         }
     }
 
-    public void Write(List<TRAnimCommand> commands, TRLevelWriter writer)
+    private void Write(List<TRAnimCommand> commands, TRLevelWriter writer)
     {
         writer.Write((uint)commands.Count);
 
@@ -235,7 +259,7 @@ public class TRModelBuilder
         }
     }
 
-    public void ReadTrees(TRLevelReader reader)
+    private void ReadTrees(TRLevelReader reader)
     {
         uint numMeshTrees = reader.ReadUInt32() / sizeof(int);
         _trees = new();
@@ -252,7 +276,7 @@ public class TRModelBuilder
         }
     }
 
-    public void Write(List<TRMeshTreeNode> trees, TRLevelWriter writer)
+    private void Write(List<TRMeshTreeNode> trees, TRLevelWriter writer)
     {
         writer.Write((uint)trees.Count * sizeof(int));
 
@@ -265,7 +289,7 @@ public class TRModelBuilder
         }
     }
 
-    public void ReadFrames(TRLevelReader reader)
+    private void ReadFrames(TRLevelReader reader)
     {
         uint numFrames = reader.ReadUInt32();
         List<ushort> frames = new(reader.ReadUInt16s(numFrames));
@@ -284,13 +308,13 @@ public class TRModelBuilder
         Debug.Assert(frames.Count == _animations.Sum(a => a.Frames.Count));
     }
 
-    public void Write(List<ushort> frames, TRLevelWriter writer)
+    private void Write(List<ushort> frames, TRLevelWriter writer)
     {
         writer.Write((uint)frames.Count);
         writer.Write(frames);
     }
 
-    public List<TRModel> ReadModels(TRLevelReader reader)
+    private List<TRModel> ReadModels(TRLevelReader reader)
     {
         uint numModels = reader.ReadUInt32();
         List<TRModel> models = new();
@@ -344,7 +368,7 @@ public class TRModelBuilder
         return models;
     }
 
-    public void Write(List<TRModel> models, TRLevelWriter writer)
+    private void Write(List<TRModel> models, TRLevelWriter writer)
     {
         writer.Write((uint)models.Count);
 
