@@ -23,7 +23,6 @@ public abstract class AbstractTRModelTransport<E, L, D>
 
     public string DataFolder { get; set; }
 
-    protected readonly AnimationTransportHandler _animationHandler;
     protected readonly CinematicTransportHandler _cinematicHandler;
     protected readonly MeshTransportHandler _meshHandler;
     protected readonly ModelTransportHandler _modelHandler;
@@ -34,7 +33,6 @@ public abstract class AbstractTRModelTransport<E, L, D>
     {
         DataFolder = _defaultDataFolder;
 
-        _animationHandler = new AnimationTransportHandler();
         _cinematicHandler = new CinematicTransportHandler();
         _meshHandler = new MeshTransportHandler();
         _modelHandler = new ModelTransportHandler();

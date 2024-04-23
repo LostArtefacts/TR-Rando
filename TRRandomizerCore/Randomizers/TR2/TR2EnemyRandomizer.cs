@@ -976,7 +976,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         TRModel model = level.Data.Models.Find(m => m.ID == (uint)TR2Type.BirdMonster);
         if (model != null)
         {
-            level.Data.Animations[model.Animation + 20].FrameEnd = level.Data.Animations[model.Animation + 19].FrameEnd;
+            model.Animations[20].FrameEnd = model.Animations[19].FrameEnd;
         }
     }
 

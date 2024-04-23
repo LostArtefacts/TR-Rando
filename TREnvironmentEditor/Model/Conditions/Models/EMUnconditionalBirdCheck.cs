@@ -14,7 +14,7 @@ public class EMUnconditionalBirdCheck : BaseEMCondition
         TRModel model = level.Models.Find(m => m.ID == (uint)TR2Type.BirdMonster);
         if (model != null)
         {
-            return level.Animations[model.Animation + 20].FrameEnd == level.Animations[model.Animation + 19].FrameEnd;
+            return model.Animations[20].FrameEnd == model.Animations[19].FrameEnd;
         }
         return false;
     }

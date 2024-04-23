@@ -9,15 +9,17 @@ public class TRModelBuilder
 
     private readonly TRGameVersion _version;
 
+    private List<TRAnimation> _animations;
+
     public TRModelBuilder(TRGameVersion version)
     {
         _version = version;
     }
 
-    public List<TRAnimation> ReadAnimations(TRLevelReader reader)
+    public void ReadAnimations(TRLevelReader reader)
     {
         uint numAnimations = reader.ReadUInt32();
-        List<TRAnimation> animations = new();
+        _animations = new();
 
         for (int i = 0; i < numAnimations; i++)
         {
@@ -46,10 +48,8 @@ public class TRModelBuilder
             animation.NumAnimCommands = reader.ReadUInt16();
             animation.AnimCommand = reader.ReadUInt16();
 
-            animations.Add(animation);
+            _animations.Add(animation);
         }
-
-        return animations;
     }
 
     public void Write(List<TRAnimation> animations, TRLevelWriter writer)
@@ -238,6 +238,23 @@ public class TRModelBuilder
 
             models.Add(model);
         }
+
+        List<TRModel> animatedModels = models.FindAll(m => m.Animation != TRConsts.NoAnimation);
+        for (int i = 0; i < animatedModels.Count; i++)
+        {
+            TRModel model = animatedModels[i];
+            int nextOffset = i == animatedModels.Count - 1
+                ? _animations.Count
+                : animatedModels[i + 1].Animation;
+            int animCount = nextOffset - model.Animation;
+
+            for (int j = 0; j < animCount; j++)
+            {
+                model.Animations.Add(_animations[model.Animation + j]);
+            }
+        }
+
+        Debug.Assert(_animations.Count == models.Sum(m => m.Animations.Count));
 
         return models;
     }

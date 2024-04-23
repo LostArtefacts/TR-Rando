@@ -36,7 +36,6 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         MeshTransportHandler.Export(level, definition);
         ColourTransportHandler.Export(level, definition);
         _textureHandler.Export(level, definition, TextureClassifier, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
-        AnimationTransportHandler.Export(level, definition);
         CinematicTransportHandler.Export(level, definition, Data.GetCinematicEntities());
         SoundTransportHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));
 
@@ -100,7 +99,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
     {
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Pierre);
         // Get his shooting animation
-        TRAnimation anim = level.Animations[model.Animation + 10];
+        TRAnimation anim = model.Animations[10];
         anim.AnimCommand = (ushort)level.AnimCommands.Count;
         anim.NumAnimCommands = 1;
 
@@ -114,7 +113,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
     {
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Pierre);
         // Get his death animation
-        TRAnimation anim = level.Animations[model.Animation + 12];
+        TRAnimation anim = model.Animations[12];
         anim.NumAnimCommands++;
 
         anim.AnimCommand = (ushort)level.AnimCommands.Count;
@@ -130,7 +129,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
     {
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Larson);
         // Get his death animation
-        TRAnimation anim = level.Animations[model.Animation + 15];
+        TRAnimation anim = model.Animations[15];
         anim.NumAnimCommands++;
 
         anim.AnimCommand = (ushort)level.AnimCommands.Count;
@@ -146,7 +145,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
     {
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.SkateboardKid);
         // Get his death animation
-        TRAnimation anim = level.Animations[model.Animation + 13];
+        TRAnimation anim = model.Animations[13];
         // Play the death sound on the 2nd frame (doesn't work on the 1st, which is OG).
         level.AnimCommands[anim.AnimCommand + 2].Value++;
     }
@@ -155,7 +154,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
     {
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.Natla);
         // Get her death animation
-        TRAnimation anim = level.Animations[model.Animation + 13];
+        TRAnimation anim = model.Animations[13];
         anim.NumAnimCommands++;
 
         anim.AnimCommand = (ushort)level.AnimCommands.Count;
@@ -181,7 +180,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRModel model = level.Models.Find(m => m.ID == (uint)TR1Type.MovingBlock);
         for (int i = 2; i < 4; i++)
         {
-            TRAnimation anim = level.Animations[model.Animation + i];
+            TRAnimation anim = model.Animations[i];
             anim.NumAnimCommands++;
 
             anim.AnimCommand = (ushort)level.AnimCommands.Count;
