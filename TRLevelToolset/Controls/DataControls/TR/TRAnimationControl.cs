@@ -14,7 +14,7 @@ internal class TRANimationControl : IDrawable
             ImGui.Text("State change count: " + IOManager.CurrentLevelAsTR1?.Models.Sum(m => m.Animations.Sum(a => a.Changes.Count)));
             ImGui.Text("Animation dispatch count: " + IOManager.CurrentLevelAsTR1?.Models.Sum(m => m.Animations.Sum(a => a.Changes.Sum(c => c.Dispatches.Count))));
             ImGui.Text("Animation command count: " + IOManager.CurrentLevelAsTR1?.Models.Sum(m => m.Animations.Sum(a => a.Commands.Count)));
-            ImGui.Text("Mesh tree count: " + IOManager.CurrentLevelAsTR1?.MeshTrees.Count);
+            ImGui.Text("Mesh tree count: " + IOManager.CurrentLevelAsTR1?.Models.Sum(m => m.MeshTrees.Count));
             ImGui.Text("Total frames count: " + IOManager.CurrentLevelAsTR1?.Frames.Count);
 
             ImGui.TreePop();

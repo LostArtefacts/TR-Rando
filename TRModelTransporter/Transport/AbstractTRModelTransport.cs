@@ -24,7 +24,6 @@ public abstract class AbstractTRModelTransport<E, L, D>
     public string DataFolder { get; set; }
 
     protected readonly CinematicTransportHandler _cinematicHandler;
-    protected readonly MeshTransportHandler _meshHandler;
     protected readonly ModelTransportHandler _modelHandler;
     protected readonly ColourTransportHandler _colourHandler;
     protected readonly SoundTransportHandler _soundHandler;
@@ -34,7 +33,6 @@ public abstract class AbstractTRModelTransport<E, L, D>
         DataFolder = _defaultDataFolder;
 
         _cinematicHandler = new CinematicTransportHandler();
-        _meshHandler = new MeshTransportHandler();
         _modelHandler = new ModelTransportHandler();
         _colourHandler = new ColourTransportHandler();
         _soundHandler = new SoundTransportHandler();

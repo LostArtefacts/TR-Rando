@@ -145,36 +145,6 @@ public static class TRMeshUtilities
         return null;
     }
 
-    public static TRMeshTreeNode[] GetModelMeshTrees(TR1Level level, TRModel model)
-    {
-        return GetModelMeshTrees(level.MeshTrees, model);
-    }
-
-    public static TRMeshTreeNode[] GetModelMeshTrees(TR2Level level, TRModel model)
-    {
-        return GetModelMeshTrees(level.MeshTrees, model);
-    }
-
-    public static TRMeshTreeNode[] GetModelMeshTrees(TR3Level level, TRModel model)
-    {
-        return GetModelMeshTrees(level.MeshTrees, model);
-    }
-
-    public static TRMeshTreeNode[] GetModelMeshTrees(List<TRMeshTreeNode> meshTrees, TRModel model)
-    {
-        List<TRMeshTreeNode> nodes = new();
-        int index = (int)model.MeshTree / 4;
-        for (int i = 0; i < model.NumMeshes; i++)
-        {
-            int offset = index + i;
-            if (offset < meshTrees.Count)
-            {
-                nodes.Add(meshTrees[offset]);
-            }
-        }
-        return nodes.ToArray();
-    }
-
     public static int InsertMesh(TR1Level level, TRMesh newMesh)
         => InsertMesh(newMesh, level.Meshes, level.MeshPointers);
 
@@ -330,26 +300,5 @@ public static class TRMeshUtilities
                 mesh.Pointer = pointerMap[mesh.Pointer];
             }
         }
-    }
-
-    /// <summary>
-    /// Inserts a new mesh tree node and returns its index in MeshTrees. 
-    /// </summary>
-    public static int InsertMeshTreeNode(TR1Level level, TRMeshTreeNode newNode)
-    {
-        level.MeshTrees.Add(newNode);
-        return level.MeshTrees.Count - 1;
-    }
-
-    public static int InsertMeshTreeNode(TR2Level level, TRMeshTreeNode newNode)
-    {
-        level.MeshTrees.Add(newNode);
-        return level.MeshTrees.Count - 1;
-    }
-
-    public static int InsertMeshTreeNode(TR3Level level, TRMeshTreeNode newNode)
-    {
-        level.MeshTrees.Add(newNode);
-        return level.MeshTrees.Count - 1;
     }
 }

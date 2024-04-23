@@ -63,7 +63,6 @@ public class TR1ModelImporter : AbstractTRModelImporter<TR1Type, TR1Level, TR1Mo
             {
                 ColourTransportHandler.Import(definition, PaletteManager);
             }
-            MeshTransportHandler.Import(Level, definition);
             CinematicTransportHandler.Import(Level, definition, ForceCinematicOverwrite);
             ModelTransportHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
         }

@@ -10,6 +10,7 @@ public class TRModelBuilder
     private readonly TRGameVersion _version;
 
     private List<TRAnimation> _animations;
+    private List<TRMeshTreeNode> _trees;
 
     public TRModelBuilder(TRGameVersion version)
     {
@@ -234,14 +235,14 @@ public class TRModelBuilder
         }
     }
 
-    public List<TRMeshTreeNode> ReadTrees(TRLevelReader reader)
+    public void ReadTrees(TRLevelReader reader)
     {
         uint numMeshTrees = reader.ReadUInt32() / sizeof(int);
-        List<TRMeshTreeNode> trees = new();
+        _trees = new();
 
         for (int i = 0; i < numMeshTrees; i++)
         {
-            trees.Add(new()
+            _trees.Add(new()
             {
                 Flags = reader.ReadUInt32(),
                 OffsetX = reader.ReadInt32(),
@@ -249,8 +250,6 @@ public class TRModelBuilder
                 OffsetZ = reader.ReadInt32(),
             });
         }
-
-        return trees;
     }
 
     public void Write(List<TRMeshTreeNode> trees, TRLevelWriter writer)
@@ -301,7 +300,16 @@ public class TRModelBuilder
             }
 
             models.Add(model);
+
+            // Everything has a dummy mesh tree
+            int treePointer = (int)model.MeshTree / sizeof(int);
+            for (int j = 1; j < model.NumMeshes; j++)
+            {
+                model.MeshTrees.Add(_trees[treePointer + j - 1]);
+            }
         }
+
+        Debug.Assert(_trees.Count == models.Sum(m => m.MeshTrees.Count));
 
         List<TRModel> animatedModels = models.FindAll(m => m.Animation != TRConsts.NoAnimation);
         for (int i = 0; i < animatedModels.Count; i++)

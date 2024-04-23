@@ -31,7 +31,6 @@ public class TR2ModelExporter : AbstractTRModelExporter<TR2Type, TR2Level, TR2Mo
         }
 
         ModelTransportHandler.Export(level, definition, modelEntity);
-        MeshTransportHandler.Export(level, definition);
         ColourTransportHandler.Export(level, definition);
         _textureHandler.Export(level, definition, TextureClassifier, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
         CinematicTransportHandler.Export(level, definition, Data.GetCinematicEntities());
