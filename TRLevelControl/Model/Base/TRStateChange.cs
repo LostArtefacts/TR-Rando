@@ -1,9 +1,8 @@
 ﻿using System.Text;
-using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TRStateChange : ISerializableCompact
+public class TRStateChange
 {
     public ushort StateID { get; set; }
 
@@ -20,18 +19,5 @@ public class TRStateChange : ISerializableCompact
         sb.Append(" AnimDispatch: " + AnimDispatch);
 
         return sb.ToString();
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(StateID);
-            writer.Write(NumAnimDispatches);
-            writer.Write(AnimDispatch);
-        }
-
-        return stream.ToArray();
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System.Text;
-using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TRModel : ISerializableCompact
+public class TRModel
 {
     public uint ID { get; set; }
 
@@ -29,21 +28,5 @@ public class TRModel : ISerializableCompact
         sb.Append(" Animation: " + Animation);
 
         return sb.ToString();
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(ID);
-            writer.Write(NumMeshes);
-            writer.Write(StartingMesh);
-            writer.Write(MeshTree);
-            writer.Write(FrameOffset);
-            writer.Write(Animation);
-        }
-
-        return stream.ToArray();
     }
 }

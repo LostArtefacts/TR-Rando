@@ -1,9 +1,8 @@
 ﻿using System.Text;
-using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TRAnimDispatch : ISerializableCompact
+public class TRAnimDispatch
 {
     public short Low { get; set; }
 
@@ -23,19 +22,5 @@ public class TRAnimDispatch : ISerializableCompact
         sb.Append(" NextFrame: " + NextFrame);
 
         return sb.ToString();
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(Low);
-            writer.Write(High);
-            writer.Write(NextAnimation);
-            writer.Write(NextFrame);
-        }
-
-        return stream.ToArray();
     }
 }

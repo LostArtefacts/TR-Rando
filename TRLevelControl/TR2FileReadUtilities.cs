@@ -68,75 +68,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRAnimation ReadAnimation(BinaryReader reader)
-    {
-        return new TRAnimation
-        {
-            FrameOffset = reader.ReadUInt32(),
-            FrameRate = reader.ReadByte(),
-            FrameSize = reader.ReadByte(),
-            StateID = reader.ReadUInt16(),
-            Speed = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            Accel = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            FrameStart = reader.ReadUInt16(),
-            FrameEnd = reader.ReadUInt16(),
-            NextAnimation = reader.ReadUInt16(),
-            NextFrame = reader.ReadUInt16(),
-            NumStateChanges = reader.ReadUInt16(),
-            StateChangeOffset = reader.ReadUInt16(),
-            NumAnimCommands = reader.ReadUInt16(),
-            AnimCommand = reader.ReadUInt16()
-        };
-    }
-
-    public static TRStateChange ReadStateChange(BinaryReader reader)
-    {
-        return new TRStateChange()
-        {
-            StateID = reader.ReadUInt16(),
-            NumAnimDispatches = reader.ReadUInt16(),
-            AnimDispatch = reader.ReadUInt16()
-        };
-    }
-
-    public static TRAnimDispatch ReadAnimDispatch(BinaryReader reader)
-    {
-        return new TRAnimDispatch()
-        {
-            Low = reader.ReadInt16(),
-            High = reader.ReadInt16(),
-            NextAnimation = reader.ReadInt16(),
-            NextFrame = reader.ReadInt16()
-        };
-    }
-
-    public static TRAnimCommand ReadAnimCommand(BinaryReader reader)
-    {
-        return new TRAnimCommand()
-        {
-            Value = reader.ReadInt16()
-        };
-    }
-
-    public static TRMeshTreeNode ReadMeshTreeNode(BinaryReader reader)
-    {
-        return new TRMeshTreeNode()
-        {
-            Flags = reader.ReadUInt32(),
-            OffsetX = reader.ReadInt32(),
-            OffsetY = reader.ReadInt32(),
-            OffsetZ = reader.ReadInt32()
-        };
-    }
-
     public static TRVertex ReadVertex(BinaryReader reader)
     {
         return new TRVertex
@@ -144,19 +75,6 @@ internal static class TR2FileReadUtilities
             X = reader.ReadInt16(),
             Y = reader.ReadInt16(),
             Z = reader.ReadInt16()
-        };
-    }
-
-    public static TRModel ReadModel(BinaryReader reader)
-    {
-        return new TRModel()
-        {
-            ID = reader.ReadUInt32(),
-            NumMeshes = reader.ReadUInt16(),
-            StartingMesh = reader.ReadUInt16(),
-            MeshTree = reader.ReadUInt32(),
-            FrameOffset = reader.ReadUInt32(),
-            Animation = reader.ReadUInt16()
         };
     }
 

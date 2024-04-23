@@ -1,9 +1,8 @@
 ﻿using System.Text;
-using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TRAnimCommand : ISerializableCompact
+public class TRAnimCommand
 {
     public short Value { get; set; }
 
@@ -14,16 +13,5 @@ public class TRAnimCommand : ISerializableCompact
         sb.Append(" Value: " + Value.ToString("X4"));
 
         return sb.ToString();
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(Value);
-        }
-
-        return stream.ToArray();
     }
 }

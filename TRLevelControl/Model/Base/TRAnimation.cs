@@ -1,8 +1,6 @@
-﻿using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TRAnimation : ISerializableCompact
+public class TRAnimation
 {
     public uint FrameOffset { get; set; }
 
@@ -11,12 +9,10 @@ public class TRAnimation : ISerializableCompact
     public byte FrameSize { get; set; }
 
     public ushort StateID { get; set; }
-
-    //fixed Speed - 4 bytes (2 for whole 2 for frac);
     public FixedFloat32 Speed { get; set; }
-
-    //fixed Accel - 4 bytes (2 for whole 2 for frac);
     public FixedFloat32 Accel { get; set; }
+    public FixedFloat32 SpeedLateral { get; set; }
+    public FixedFloat32 AccelLateral { get; set; }
 
     public ushort FrameStart { get; set; }
 
@@ -33,28 +29,4 @@ public class TRAnimation : ISerializableCompact
     public ushort NumAnimCommands { get; set; }
 
     public ushort AnimCommand { get; set; }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(FrameOffset);
-            writer.Write(FrameRate);
-            writer.Write(FrameSize);
-            writer.Write(StateID);
-            writer.Write(Speed.Serialize());
-            writer.Write(Accel.Serialize());
-            writer.Write(FrameStart);
-            writer.Write(FrameEnd);
-            writer.Write(NextAnimation);
-            writer.Write(NextFrame);
-            writer.Write(NumStateChanges);
-            writer.Write(StateChangeOffset);
-            writer.Write(NumAnimCommands);
-            writer.Write(AnimCommand);
-        }
-
-        return stream.ToArray();
-    }
 }

@@ -190,53 +190,26 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadModelData(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateAnimations(reader, _level);
-        TR4FileReadUtilities.PopulateMeshTreesFramesModels(reader, _level);
+        TRModelBuilder builder = new(TRGameVersion.TR4);
+        _level.Animations = builder.ReadAnimations(reader);
+        _level.StateChanges = builder.ReadStateChanges(reader);
+        _level.AnimDispatches = builder.ReadDispatches(reader);
+        _level.AnimCommands = builder.ReadCommands(reader);
+        _level.MeshTrees = builder.ReadTrees(reader);
+        _level.Frames = builder.ReadFrames(reader);
+        _level.Models = builder.ReadModels(reader);
     }
 
     private void WriteModelData(TRLevelWriter writer)
     {
-        writer.Write((uint)_level.Animations.Count);
-        foreach (TR4Animation anim in _level.Animations)
-        {
-            writer.Write(anim.Serialize());
-        }
-
-        writer.Write((uint)_level.StateChanges.Count);
-        foreach (TRStateChange sc in _level.StateChanges)
-        {
-            writer.Write(sc.Serialize());
-        }
-
-        writer.Write((uint)_level.AnimDispatches.Count);
-        foreach (TRAnimDispatch ad in _level.AnimDispatches)
-        {
-            writer.Write(ad.Serialize());
-        }
-
-        writer.Write((uint)_level.AnimCommands.Count);
-        foreach (TRAnimCommand ac in _level.AnimCommands)
-        {
-            writer.Write(ac.Serialize());
-        }
-
-        writer.Write((uint)_level.MeshTrees.Count * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
-        foreach (TRMeshTreeNode node in _level.MeshTrees)
-        {
-            writer.Write(node.Serialize());
-        }
-
-        writer.Write((uint)_level.Frames.Count);
-        foreach (ushort frame in _level.Frames)
-        {
-            writer.Write(frame);
-        }
-
-        writer.Write((uint)_level.Models.Count);
-        foreach (TRModel model in _level.Models)
-        {
-            writer.Write(model.Serialize());
-        }
+        TRModelBuilder builder = new(TRGameVersion.TR4);
+        builder.Write(_level.Animations, writer);
+        builder.Write(_level.StateChanges, writer);
+        builder.Write(_level.AnimDispatches, writer);
+        builder.Write(_level.AnimCommands, writer);
+        builder.Write(_level.MeshTrees, writer);
+        builder.Write(_level.Frames, writer);
+        builder.Write(_level.Models, writer);
     }
 
     private void ReadStaticMeshes(TRLevelReader reader)

@@ -311,4 +311,10 @@ public class TRLevelWriter : BinaryWriter
         }
         Write(texture);
     }
+
+    public void Write(FixedFloat32 fixedFloat)
+    {
+        Write(fixedFloat.Whole);
+        Write(fixedFloat.Fraction);
+    }
 }

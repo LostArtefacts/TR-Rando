@@ -95,68 +95,6 @@ internal static class TR4FileReadUtilities
         }
     }
 
-    public static void PopulateAnimations(BinaryReader reader, TR4Level lvl)
-    {
-        //Animations
-        uint numAnimations = reader.ReadUInt32();
-        lvl.Animations = new();
-        for (int i = 0; i < numAnimations; i++)
-        {
-            lvl.Animations.Add(ReadAnimation(reader));
-        }
-
-        //State Changes
-        uint numStateChanges = reader.ReadUInt32();
-        lvl.StateChanges = new();
-        for (int i = 0; i < numStateChanges; i++)
-        {
-            lvl.StateChanges.Add(TR2FileReadUtilities.ReadStateChange(reader));
-        }
-
-        //Animation Dispatches
-        uint numAnimDispatches = reader.ReadUInt32();
-        lvl.AnimDispatches = new();
-        for (int i = 0; i < numAnimDispatches; i++)
-        {
-            lvl.AnimDispatches.Add(TR2FileReadUtilities.ReadAnimDispatch(reader));
-        }
-
-        //Animation Commands
-        uint numAnimCommands = reader.ReadUInt32();
-        lvl.AnimCommands = new();
-        for (int i = 0; i < numAnimCommands; i++)
-        {
-            lvl.AnimCommands.Add(TR2FileReadUtilities.ReadAnimCommand(reader));
-        }
-    }
-
-    public static void PopulateMeshTreesFramesModels(BinaryReader reader, TR4Level lvl)
-    {
-        //Mesh Trees
-        uint numMeshTrees = reader.ReadUInt32() / 4;
-        lvl.MeshTrees = new();
-        for (int i = 0; i < numMeshTrees; i++)
-        {
-            lvl.MeshTrees.Add(TR2FileReadUtilities.ReadMeshTreeNode(reader));
-        }
-
-        //Frames
-        uint numFrames = reader.ReadUInt32();
-        lvl.Frames = new();
-        for (int i = 0; i < numFrames; i++)
-        {
-            lvl.Frames.Add(reader.ReadUInt16());
-        }
-
-        //Models
-        uint numModels = reader.ReadUInt32();
-        lvl.Models = new();
-        for (int i = 0; i < numModels; i++)
-        {
-            lvl.Models.Add(TR2FileReadUtilities.ReadModel(reader));
-        }
-    }
-
     public static void PopulateStaticMeshes(BinaryReader reader, TR4Level lvl)
     {
         uint numStaticMeshes = reader.ReadUInt32();
@@ -424,45 +362,6 @@ internal static class TR4FileReadUtilities
             Dx = reader.ReadSingle(),
             Dy = reader.ReadSingle(),
             Dz = reader.ReadSingle()
-        };
-    }
-
-    public static TR4Animation ReadAnimation(BinaryReader reader)
-    {
-        return new TR4Animation
-        {
-            FrameOffset = reader.ReadUInt32(),
-            FrameRate = reader.ReadByte(),
-            FrameSize = reader.ReadByte(),
-            StateID = reader.ReadUInt16(),
-            Speed = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            Accel = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            SpeedLateral = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            AccelLateral = new FixedFloat32
-            {
-                Whole = reader.ReadInt16(),
-                Fraction = reader.ReadUInt16()
-            },
-            FrameStart = reader.ReadUInt16(),
-            FrameEnd = reader.ReadUInt16(),
-            NextAnimation = reader.ReadUInt16(),
-            NextFrame = reader.ReadUInt16(),
-            NumStateChanges = reader.ReadUInt16(),
-            StateChangeOffset = reader.ReadUInt16(),
-            NumAnimCommands = reader.ReadUInt16(),
-            AnimCommand = reader.ReadUInt16()
         };
     }
 
