@@ -335,35 +335,69 @@ public class TRModelBuilder
         }
         else
         {
-            for (int i = 0; i < placeholderAnimation.NumAnimCommands; i++)
+            for (int i = 0; i < placeholderAnimation.NumAnimCommands && offset < _commands.Count; i++)
             {
-                TRAnimCommand command = new()
-                {
-                    Type = (TRAnimCommandType)_commands[offset++]
-                };
-                switch (command.Type)
+                TRAnimCommand command;
+                TRAnimCommandType type = (TRAnimCommandType)_commands[offset++];
+                switch (type)
                 {
                     case TRAnimCommandType.SetPosition:
-                        command.Params = new()
+                        command = new TRSetPositionCommand
                         {
-                            _commands[offset++], // X
-                            _commands[offset++], // Y
-                            _commands[offset++], // Z
+                            X = _commands[offset++],
+                            Y = _commands[offset++],
+                            Z = _commands[offset++],
                         };
                         break;
                     case TRAnimCommandType.JumpDistance:
-                        command.Params = new()
+                        command = new TRJumpDistanceCommand
                         {
-                            _commands[offset++], // VerticalSpeed
-                            _commands[offset++], // HorizontalSpeed
+                            VerticalSpeed = _commands[offset++],
+                            HorizontalSpeed = _commands[offset++],
                         };
                         break;
+                    case TRAnimCommandType.EmptyHands:
+                        command = new TREmptyHandsCommand();
+                        break;
+                    case TRAnimCommandType.Kill:
+                        command = new TRKillCommand();
+                        break;
                     case TRAnimCommandType.PlaySound:
-                    case TRAnimCommandType.FlipEffect:
-                        command.Params = new()
+                        short sfxFrame = (short)(_commands[offset++] - animation.FrameStart);
+                        short sfxID = _commands[offset++];
+                        command = new TRSFXCommand
                         {
-                            (short)(_commands[offset++] - animation.FrameStart), // Frame number, make it relative
-                            _commands[offset++], // (S)FX ID
+                            FrameNumber = sfxFrame,
+                            SoundID = (short)(sfxID & 0x3FFF),
+                            Environment = _version == TRGameVersion.TR1 ? TRSFXEnvironment.Any : (TRSFXEnvironment)(sfxID & 0xC000)
+                        };
+                        break;
+                    case TRAnimCommandType.FlipEffect:
+                        short fxFrame = (short)(_commands[offset++] - animation.FrameStart);
+                        short fxID = _commands[offset++];
+                        if (_version > TRGameVersion.TR2 && (fxID & 0x3FFF) == (int)TR3FX.Footprint)
+                        {
+                            command = new TRFootprintCommand
+                            {
+                                FrameNumber = fxFrame,
+                                Foot = (TRFootprint)(fxID & 0xC000),
+                            };
+                        }
+                        else
+                        {
+                            command = new TRFXCommand
+                            {
+                                FrameNumber = fxFrame,
+                                EffectID = fxID,
+                            };
+                        }
+                        break;
+                    default:
+                        // Karnak and Citadel Gate have these. Easier to store than observe as
+                        // index tracking gets far too complex.
+                        command = new TRNullCommand
+                        {
+                            Value = (short)type,
                         };
                         break;
                 }
@@ -455,22 +489,57 @@ public class TRModelBuilder
     {
         // NumAnimCommands may have been wrong on read, so test observers can restore.
         placeholderAnimation.AnimCommand = (ushort)_commands.Count;
-        placeholderAnimation.NumAnimCommands = _observer?.GetNumAnimCommands(_placeholderAnimations.Count - 1) ?? (ushort)animation.Commands.Count;
+        ushort commandCount = 0;
 
         foreach (TRAnimCommand cmd in animation.Commands)
         {
-            _commands.Add((short)cmd.Type);
-            if (cmd.Type == TRAnimCommandType.PlaySound || cmd.Type == TRAnimCommandType.FlipEffect)
+            List<short> values = new();
+            bool validCommand = true;
+
+            switch (cmd)
             {
-                Debug.Assert(cmd.Params.Count == 2);
-                _commands.Add((short)(cmd.Params[0] + placeholderAnimation.RelFrameStart));
-                _commands.Add(cmd.Params[1]);
+                case TRSetPositionCommand setCmd:
+                    values.Add(setCmd.X);
+                    values.Add(setCmd.Y);
+                    values.Add(setCmd.Z);
+                    break;
+                case TRJumpDistanceCommand jumpCmd:
+                    values.Add(jumpCmd.VerticalSpeed);
+                    values.Add(jumpCmd.HorizontalSpeed);
+                    break;
+                case TRFXCommand flipCmd:
+                    values.Add((short)(flipCmd.FrameNumber + placeholderAnimation.RelFrameStart));
+                    values.Add(flipCmd.EffectID);
+                    break;
+                case TRFootprintCommand footCmd:
+                    if (validCommand = _version >= TRGameVersion.TR3)
+                    {
+                        values.Add((short)(footCmd.FrameNumber + placeholderAnimation.RelFrameStart));
+                        values.Add((short)((int)TR3FX.Footprint | (int)footCmd.Foot));
+                    }
+                    break;
+                case TRSFXCommand sfxCmd:
+                    {
+                        short soundID = sfxCmd.SoundID;
+                        if (_version > TRGameVersion.TR1)
+                        {
+                            soundID = (short)((int)soundID | (int)sfxCmd.Environment);
+                        }
+                        values.Add((short)(sfxCmd.FrameNumber + placeholderAnimation.RelFrameStart));
+                        values.Add(soundID);
+                        break;
+                    }
             }
-            else
+
+            if (validCommand)
             {
-                _commands.AddRange(cmd.Params);
+                _commands.Add(cmd is TRNullCommand nullCmd ? nullCmd.Value : (short)cmd.Type);
+                _commands.AddRange(values);
+                commandCount++;
             }
         }
+
+        placeholderAnimation.NumAnimCommands = _observer?.GetNumAnimCommands(_placeholderAnimations.Count - 1) ?? commandCount;
     }
 
     private void RestoreTR5Extras()
