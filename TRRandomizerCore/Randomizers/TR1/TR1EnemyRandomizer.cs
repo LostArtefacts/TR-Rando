@@ -943,16 +943,9 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             TRModel nonShooter = level.Data.Models.Find(m => m.ID == (uint)TR1Type.NonShootingAtlantean_N);
             if (shooter == null && nonShooter != null)
             {
-                level.Data.Models.Add(new()
-                {
-                    ID = (uint)TR1Type.ShootingAtlantean_N,
-                    Animation = nonShooter.Animation,
-                    FrameOffset = nonShooter.FrameOffset,
-                    MeshTree = nonShooter.MeshTree,
-                    NumMeshes = nonShooter.NumMeshes,
-                    StartingMesh = nonShooter.StartingMesh
-                });
-
+                shooter = nonShooter.Clone();
+                shooter.ID = (uint)TR1Type.ShootingAtlantean_N;
+                level.Data.Models.Add(shooter);
                 enemies.Available.Add(TR1Type.ShootingAtlantean_N);
             }
         }

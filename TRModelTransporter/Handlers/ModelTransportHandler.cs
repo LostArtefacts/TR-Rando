@@ -38,7 +38,7 @@ public class ModelTransportHandler
             if (!definition.HasGraphics)
             {
                 // The original mesh data may still be needed so don't overwrite
-                definition.Model.MeshTree = level.Models[i].MeshTree;
+                definition.Model.MeshTrees = level.Models[i].MeshTrees;
                 definition.Model.NumMeshes = level.Models[i].NumMeshes;
                 definition.Model.StartingMesh = level.Models[i].StartingMesh;
             }
@@ -103,8 +103,7 @@ public class ModelTransportHandler
                 // at 0, so because these don't change per skin, we just replace the meshes and frames here.
                 level.Models[i].NumMeshes = definition.Model.NumMeshes;
                 level.Models[i].StartingMesh = definition.Model.StartingMesh;
-                level.Models[i].MeshTree = definition.Model.MeshTree;
-                level.Models[i].FrameOffset = definition.Model.FrameOffset;
+                level.Models[i].MeshTrees = definition.Model.MeshTrees;
             }
         }
 
@@ -121,7 +120,7 @@ public class ModelTransportHandler
             TRModel dependentModel = models.Find(m => m.ID == dependant);
             if (dependentModel != null)
             {
-                dependentModel.MeshTree = lara.MeshTree;
+                dependentModel.MeshTrees = lara.MeshTrees;
                 dependentModel.StartingMesh = lara.StartingMesh;
             }
         }

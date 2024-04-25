@@ -500,15 +500,9 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         {
             // We have to keep the original model for the boss, so in
             // this instance we just clone the model for the guiser
-            level.Data.Models.Add(new()
-            {
-                Animation = disguiseAsModel.Animation,
-                FrameOffset = disguiseAsModel.FrameOffset,
-                ID = (uint)guiser,
-                MeshTree = disguiseAsModel.MeshTree,
-                NumMeshes = disguiseAsModel.NumMeshes,
-                StartingMesh = disguiseAsModel.StartingMesh
-            });
+            TRModel guiserModel = disguiseAsModel.Clone();
+            guiserModel.ID = (uint)guiser;
+            level.Data.Models.Add(guiserModel);
         }
         else
         {
@@ -936,7 +930,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             foreach (TR2Type enemyType in laraClones)
             {
                 TRModel enemyModel = level.Data.Models.Find(m => m.ID == (uint)enemyType);
-                enemyModel.MeshTree = laraModel.MeshTree;
+                enemyModel.MeshTrees = laraModel.MeshTrees;
                 enemyModel.StartingMesh = laraModel.StartingMesh;
                 enemyModel.NumMeshes = laraModel.NumMeshes;
             }
@@ -952,9 +946,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             // Make Marco look and behave like Winston, until Lara gets too close
             TRModel marcoModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.MarcoBartoli);
             TRModel winnieModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Winston);
-            marcoModel.Animation = winnieModel.Animation;
-            marcoModel.FrameOffset = winnieModel.FrameOffset;
-            marcoModel.MeshTree = winnieModel.MeshTree;
+            marcoModel.Animations = winnieModel.Animations;
+            marcoModel.MeshTrees = winnieModel.MeshTrees;
             marcoModel.StartingMesh = winnieModel.StartingMesh;
             marcoModel.NumMeshes = winnieModel.NumMeshes;
         }

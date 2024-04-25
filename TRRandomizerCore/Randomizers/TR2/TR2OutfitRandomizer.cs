@@ -230,7 +230,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         private bool Import(TR2CombinedLevel level, TR2Type lara)
         {
             TRModel laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
-            List<TRModel> laraClones = level.Data.Models.FindAll(m => m.MeshTree == laraModel.MeshTree && m != laraModel);
+            List<TRModel> laraClones = level.Data.Models.FindAll(m => m.MeshTrees.FirstOrDefault() == laraModel.MeshTrees.FirstOrDefault() && m != laraModel);
 
             if (lara == TR2Type.LaraInvisible)
             {
@@ -278,7 +278,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                     laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
                     foreach (TRModel model in laraClones)
                     {
-                        model.MeshTree = laraModel.MeshTree;
+                        model.MeshTrees = laraModel.MeshTrees;
                         model.StartingMesh = laraModel.StartingMesh;
                         model.NumMeshes = laraModel.NumMeshes;
                     }
@@ -421,7 +421,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 TRModel actorLara = level.Data.Models.Find(m => m.ID == (short)TR2Type.CutsceneActor3);
                 TRModel realLara = level.Data.Models.Find(m => m.ID == (short)TR2Type.Lara);
 
-                actorLara.MeshTree = realLara.MeshTree;
+                actorLara.MeshTrees = realLara.MeshTrees;
                 actorLara.NumMeshes = realLara.NumMeshes;
                 actorLara.StartingMesh = realLara.StartingMesh;
             }

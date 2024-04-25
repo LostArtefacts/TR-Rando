@@ -1,17 +1,13 @@
 ﻿using TRLevelControl.Model;
-using TRModelTransporter.Model.Animations;
 
 namespace TRModelTransporter.Model.Definitions;
 
 public class TR1ModelDefinition : AbstractTRModelDefinition<TR1Type>
 {
     public override TR1Type Entity => (TR1Type)Model.ID;
-    public Dictionary<int, TR1PackedAnimation> Animations { get; set; }
-    public ushort[] AnimationFrames { get; set; }
     public TRCinematicFrame[] CinematicFrames { get; set; }
     public Dictionary<int, TRColour> Colours { get; set; }
     public List<TRMesh> Meshes { get; set; }
-    public TRMeshTreeNode[] MeshTrees { get; set; }
     public TRModel Model { get; set; }
     public SortedDictionary<TR1SFX, TR1SoundEffect> SoundEffects { get; set; }
 

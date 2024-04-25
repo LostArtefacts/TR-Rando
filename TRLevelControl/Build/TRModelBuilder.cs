@@ -223,9 +223,6 @@ public class TRModelBuilder
             ID = placeholder.ID,
             NumMeshes = placeholder.NumMeshes,
             StartingMesh = placeholder.StartingMesh,
-            MeshTree = placeholder.MeshTree,
-            FrameOffset = placeholder.FrameOffset,
-            Animation = placeholder.Animation,
         };
 
         // Everything has a dummy mesh tree, so load one less than the mesh count
