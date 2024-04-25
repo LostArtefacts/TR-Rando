@@ -1,32 +1,43 @@
 ﻿namespace TRLevelControl.Model;
 
-public class TRAnimation
+public class TRAnimation : ICloneable
 {
-    public uint FrameOffset { get; set; }
-
     public byte FrameRate { get; set; }
-
     public byte FrameSize { get; set; }
-
     public ushort StateID { get; set; }
     public FixedFloat32 Speed { get; set; }
     public FixedFloat32 Accel { get; set; }
     public FixedFloat32 SpeedLateral { get; set; }
     public FixedFloat32 AccelLateral { get; set; }
-
     public ushort FrameStart { get; set; }
-
     public ushort FrameEnd { get; set; }
-
     public ushort NextAnimation { get; set; }
-
     public ushort NextFrame { get; set; }
+    public List<TRStateChange> Changes { get; set; } = new();
+    public List<TRAnimCommand> Commands { get; set; } = new();
+    public List<short> Frames { get; set; } = new();
 
-    public ushort NumStateChanges { get; set; }
+    public TRAnimation Clone()
+    {
+        return new()
+        {
+            StateID = StateID,
+            FrameRate = FrameRate,
+            FrameStart = FrameStart,
+            FrameEnd = FrameEnd,
+            FrameSize = FrameSize,
+            Speed = Speed,
+            Accel = Accel,
+            SpeedLateral = SpeedLateral,
+            AccelLateral = AccelLateral,
+            NextAnimation = NextAnimation,
+            NextFrame = NextFrame,
+            Frames = new(Frames),
+            Changes = new(Changes.Select(c => c.Clone())),
+            Commands = new(Commands.Select(c => c.Clone()))
+        };
+    }
 
-    public ushort StateChangeOffset { get; set; }
-
-    public ushort NumAnimCommands { get; set; }
-
-    public ushort AnimCommand { get; set; }
+    object ICloneable.Clone()
+        => Clone();
 }

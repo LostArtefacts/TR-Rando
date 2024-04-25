@@ -10,12 +10,6 @@ public class TR2Level : TRLevelBase
     public List<ushort> FloorData { get; set; }
     public List<TRMesh> Meshes { get; set; }
     public List<uint> MeshPointers { get; set; }
-    public List<TRAnimation> Animations { get; set; }
-    public List<TRStateChange> StateChanges { get; set; }
-    public List<TRAnimDispatch> AnimDispatches { get; set; }
-    public List<TRAnimCommand> AnimCommands { get; set; }
-    public List<TRMeshTreeNode> MeshTrees { get; set; }
-    public List<ushort> Frames { get; set; }
     public List<TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
     public List<TRObjectTexture> ObjectTextures { get; set; }

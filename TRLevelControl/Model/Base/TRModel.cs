@@ -4,6 +4,8 @@ namespace TRLevelControl.Model;
 
 public class TRModel
 {
+    public List<TRAnimation> Animations { get; set; } = new();
+    public List<TRMeshTreeNode> MeshTrees { get; set; } = new();
     public uint ID { get; set; }
 
     public ushort NumMeshes { get; set; }

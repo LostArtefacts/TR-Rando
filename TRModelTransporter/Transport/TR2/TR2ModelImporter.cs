@@ -55,12 +55,6 @@ public class TR2ModelImporter : AbstractTRModelImporter<TR2Type, TR2Level, TR2Mo
                 ColourTransportHandler.Import(Level, definition);
             }
 
-            // Meshes and trees should now be remapped, so import into the level
-            MeshTransportHandler.Import(Level, definition);
-
-            // Animations, AnimCommands, AnimDispatches, Sounds, StateChanges and Frames
-            AnimationTransportHandler.Import(Level, definition);
-
             // Cinematic frames
             CinematicTransportHandler.Import(Level, definition, ForceCinematicOverwrite);
 

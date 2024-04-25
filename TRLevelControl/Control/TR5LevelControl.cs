@@ -207,26 +207,14 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void ReadModelData(TRLevelReader reader)
     {
-        TRModelBuilder builder = new(TRGameVersion.TR5);
-        _level.Animations = builder.ReadAnimations(reader);
-        _level.StateChanges = builder.ReadStateChanges(reader);
-        _level.AnimDispatches = builder.ReadDispatches(reader);
-        _level.AnimCommands = builder.ReadCommands(reader);
-        _level.MeshTrees = builder.ReadTrees(reader);
-        _level.Frames = builder.ReadFrames(reader);
-        _level.Models = builder.ReadModels(reader);
+        TRModelBuilder builder = new(TRGameVersion.TR5, _observer);
+        _level.Models = builder.ReadModelData(reader);
     }
 
     private void WriteModelData(TRLevelWriter writer)
     {
-        TRModelBuilder builder = new(TRGameVersion.TR5);
-        builder.Write(_level.Animations, writer);
-        builder.Write(_level.StateChanges, writer);
-        builder.Write(_level.AnimDispatches, writer);
-        builder.Write(_level.AnimCommands, writer);
-        builder.Write(_level.MeshTrees, writer);
-        builder.Write(_level.Frames, writer);
-        builder.Write(_level.Models, writer);
+        TRModelBuilder builder = new(TRGameVersion.TR5, _observer);
+        builder.WriteModelData(writer, _level.Models);
     }
 
     private void ReadStaticMeshes(TRLevelReader reader)

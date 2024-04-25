@@ -24,4 +24,6 @@ public static class TRConsts
     public const int FullMask = (1 << MaskBits) - 1;
 
     public const int Angle45 = 8192;
+
+    public const ushort NoAnimation = ushort.MaxValue;
 }

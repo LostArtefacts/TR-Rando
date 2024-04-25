@@ -1,26 +1,23 @@
-﻿using System.Text;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TRAnimDispatch
+public class TRAnimDispatch : ICloneable
 {
     public short Low { get; set; }
-
     public short High { get; set; }
-
     public short NextAnimation { get; set; }
-
     public short NextFrame { get; set; }
 
-    public override string ToString()
+    public TRAnimDispatch Clone()
     {
-        StringBuilder sb = new(base.ToString());
-
-        sb.Append(" Low: " + Low);
-        sb.Append(" High: " + High);
-        sb.Append(" NextAnimation: " + NextAnimation);
-        sb.Append(" NextFrame: " + NextFrame);
-
-        return sb.ToString();
+        return new()
+        {
+            Low = Low,
+            High = High,
+            NextAnimation = NextAnimation,
+            NextFrame = NextFrame
+        };
     }
+
+    object ICloneable.Clone()
+        => Clone();
 }

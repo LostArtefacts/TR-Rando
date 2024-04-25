@@ -385,7 +385,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 TRMeshUtilities.InsertMesh(level.Data, clonedMesh);
             }
 
-            level.Data.MeshTrees.AddRange(TRMeshUtilities.GetModelMeshTrees(level.Data, ponytail));
+            ponytail.MeshTrees.AddRange(ponytail.MeshTrees);
             ponytail.NumMeshes *= 2;
         }
 
