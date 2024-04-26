@@ -3,7 +3,6 @@
 public class TRAnimation : ICloneable
 {
     public byte FrameRate { get; set; }
-    public byte FrameSize { get; set; }
     public ushort StateID { get; set; }
     public FixedFloat32 Speed { get; set; }
     public FixedFloat32 Accel { get; set; }
@@ -15,7 +14,7 @@ public class TRAnimation : ICloneable
     public ushort NextFrame { get; set; }
     public List<TRStateChange> Changes { get; set; } = new();
     public List<TRAnimCommand> Commands { get; set; } = new();
-    public List<short> Frames { get; set; } = new();
+    public List<TRAnimFrame> Frames { get; set; } = new();
 
     public TRAnimation Clone()
     {
@@ -25,14 +24,13 @@ public class TRAnimation : ICloneable
             FrameRate = FrameRate,
             FrameStart = FrameStart,
             FrameEnd = FrameEnd,
-            FrameSize = FrameSize,
             Speed = Speed,
             Accel = Accel,
             SpeedLateral = SpeedLateral,
             AccelLateral = AccelLateral,
             NextAnimation = NextAnimation,
             NextFrame = NextFrame,
-            Frames = new(Frames),
+            Frames = new(Frames.Select(f => f.Clone())),
             Changes = new(Changes.Select(c => c.Clone())),
             Commands = new(Commands.Select(c => c.Clone()))
         };

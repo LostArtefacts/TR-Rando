@@ -2,15 +2,24 @@
 
 public class TR2Observer : TR1Observer
 {
-    private readonly Dictionary<int, Tuple<ushort, ushort>> _animLinks = new();
+    private readonly Dictionary<int, Dictionary<int, List<short>>> _framePadding = new();
 
-    public override void OnBadAnimLinkRead(int animIndex, ushort animLink, ushort frameLink)
+    public override void OnFramePaddingRead(int animIndex, int frameIndex, List<short> values)
     {
-        _animLinks[animIndex] = new(animLink, frameLink);
+        if (!_framePadding.ContainsKey(animIndex))
+        {
+            _framePadding[animIndex] = new();
+        }
+        _framePadding[animIndex][frameIndex] = values;
     }
 
-    public override Tuple<ushort, ushort> GetAnimLink(int animIndex)
+    public override List<short> GetFramePadding(int animIndex, int frameIndex)
     {
-        return _animLinks.ContainsKey(animIndex) ? _animLinks[animIndex] : null;
+        if (_framePadding.ContainsKey(animIndex)
+            && _framePadding[animIndex].ContainsKey(frameIndex))
+        {
+            return _framePadding[animIndex][frameIndex];
+        }
+        return null;
     }
 }

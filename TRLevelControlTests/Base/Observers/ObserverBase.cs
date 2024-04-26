@@ -53,6 +53,18 @@ public class ObserverBase : ITRLevelObserver
     public virtual Tuple<ushort, ushort> GetUnusedStateChange()
         => null;
 
+    public virtual void OnEmptyAnimFramesRead(int animIndex, byte frameSize)
+    { }
+
+    public virtual byte? GetEmptyAnimFrameSize(int animIndex)
+        => null;
+
+    public virtual void OnFramePaddingRead(int animIndex, int frameIndex, List<short> values)
+    { }
+
+    public virtual List<short> GetFramePadding(int animIndex, int frameIndex)
+        => null;
+
     public virtual void OnSampleIndicesRead(uint[] sampleIndices)
     { }
 

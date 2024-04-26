@@ -105,7 +105,7 @@ public class TestBase
                 control2.Write(level2, outputStream);
                 break;
             case TRGameVersion.TR3:
-                observer = new TR2Observer();
+                observer = new TR3Observer();
                 TR3LevelControl control3 = new(observer);
                 TR3Level level3 = control3.Read(pathI);
                 control3.Write(level3, outputStream);

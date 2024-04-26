@@ -18,6 +18,10 @@ public interface ITRLevelObserver
     short? GetAnimCommandPadding();
     void OnUnusedStateChangeRead(Tuple<ushort, ushort> padding);
     Tuple<ushort, ushort> GetUnusedStateChange();
+    void OnEmptyAnimFramesRead(int animIndex, byte frameSize);
+    byte? GetEmptyAnimFrameSize(int animIndex);
+    void OnFramePaddingRead(int animIndex, int frameIndex, List<short> values);
+    List<short> GetFramePadding(int animIndex, int frameIndex);
     void OnSampleIndicesRead(uint[] sampleIndices);
     IEnumerable<uint> GetSampleIndices();
 }
