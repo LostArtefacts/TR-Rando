@@ -345,9 +345,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // otherwise the dressing gown hips are rendered, but the mesh is completely different for this, plus
                 // its textures will have been removed.
                 TRModel laraMiscModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.LaraMiscAnim_H);
-                TRMesh laraMiscMesh = laraMiscModel.Meshes[0];
-                TRMesh laraHipsMesh = laraModel.Meshes[0];
-                TRMeshUtilities.DuplicateMesh(level.Data, laraMiscMesh, laraHipsMesh);
+                laraModel.Meshes[0].CopyInto(laraMiscModel.Meshes[0]);
             }
 
             if (_outer.Settings.RemoveRobeDagger)

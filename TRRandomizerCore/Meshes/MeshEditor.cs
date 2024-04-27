@@ -94,14 +94,9 @@ public class MeshEditor
         Mesh.ColouredTriangles.Add(face);
     }
 
-    public static TRMesh CloneMesh(TRMesh mesh)
-    {
-        return mesh.Clone();
-    }
-
     public static TRMesh CloneMeshAsColoured(TRMesh mesh, ushort paletteIndex)
     {
-        TRMesh clone = CloneMesh(mesh);
+        TRMesh clone = mesh.Clone();
 
         clone.ColouredRectangles.Clear();
         clone.ColouredTriangles.Clear();

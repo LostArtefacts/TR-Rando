@@ -1133,7 +1133,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
             List<TRMesh> replacementMeshes = level.Data.Models.Find(m => m.ID == (uint)replacement).Meshes;
             int colRadius = scion[0].CollRadius;
-            TRMeshUtilities.DuplicateMesh(level.Data, scion[0], replacementMeshes[scionSwaps[replacement]]);
+            replacementMeshes[scionSwaps[replacement]].CopyInto(scion[0]);
             scion[0].CollRadius = colRadius; // Retain original as Lara may need to shoot it
 
             // Cutscene head swaps
@@ -1145,31 +1145,28 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             {
                 case 0:
                     // Natla becomes Lara
-                    TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], lara[14]);
+                    lara[14].CopyInto(natla[8]);
                     break;
                 case 1:
                     // Lara becomes Natla
-                    TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], natla[8]);
+                    natla[8].CopyInto(lara[14]);
                     break;
                 case 2:
                     // Switch Lara and Natla
-                    TRMesh laraHead = MeshEditor.CloneMesh(lara[14]);
-                    TRMesh natlaHead = MeshEditor.CloneMesh(natla[8]);
-                    TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], natlaHead);
-                    TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], laraHead);
+                    (natla[8], lara[14]) = (lara[14], natla[8]);
                     break;
                 case 3:
                     // Natla becomes Pierre
-                    TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], pierre[8]);
+                    pierre[8].CopyInto(natla[8]);
                     break;
                 case 4:
                     // Lara becomes Pierre
-                    TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], pierre[8]);
+                    pierre[8].CopyInto(lara[14]);
                     break;
                 case 5:
                     // Two Pierres
-                    TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], pierre[8]);
-                    TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], pierre[8]);
+                    pierre[8].CopyInto(natla[8]);
+                    pierre[8].CopyInto(lara[14]);
                     break;
             }
         }
@@ -1197,7 +1194,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 replacement = level.Data.Models.Find(m => m.ID == (uint)laraSwapType).Meshes[14];                
             }
 
-            TRMeshUtilities.DuplicateMesh(level.Data, adam[3], MeshEditor.CloneMesh(replacement));
+            adam[3] = replacement.Clone();
 
             // Enlarge and rotate about Y
             foreach (TRVertex vertex in adam[3].Vertices)
@@ -1230,7 +1227,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             List<TRMesh> lara = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Lara).Meshes;
             List<TRMesh> laraUziAnim = level.Data.Models.Find(m => m.ID == (uint)TR1Type.LaraUziAnimation_H).Meshes;
 
-            TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], MeshEditor.CloneMesh(_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]));
+            pierre[8] = (_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]).Clone();
             foreach (TRVertex vertex in pierre[8].Vertices)
             {
                 vertex.X = (short)(vertex.X * 1.5 + 6);

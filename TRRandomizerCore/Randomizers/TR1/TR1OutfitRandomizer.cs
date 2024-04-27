@@ -19,7 +19,7 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR1OutfitRandomizer : BaseTR1Randomizer
 {
-    private static readonly string _gymOutfitHash = "7866a39d5dd37c89a4f20df3b074788e";
+    private static readonly string _gymOutfitHash = "6523d69dbf1f0ab671f5f877afe6ff35";
     private static readonly Version _minBraidCutsceneVersion = new(2, 13, 0);
     private static readonly TR1SFX[] _barefootSfxIDs = new TR1SFX[] { TR1SFX.LaraFeet, TR1SFX.LaraLand };
     private static readonly double _mauledLaraChance = (double)1 / 3;
@@ -495,7 +495,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             int[] basicLaraIndices = new int[] { 0, 2, 3, 5, 6, 7, 8, 9, 11, 12 };
             foreach (int index in basicLaraIndices)
             {
-                TRMeshUtilities.DuplicateMesh(level.Data, lara[index], laraMisc[index]);
+                laraMisc[index].CopyInto(lara[index]);
             }
 
             // Copy the guns and holsters from the original models and paste them
@@ -507,7 +507,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 // Empty holsters. The ToQ cutscene actor model is notoriously awkward, hence
                 // special handling here to ensure we pick the right quads.
                 bool qualopec_cut = level.Is(TR1LevelNames.QUALOPEC_CUT) && thigh == 1;
-                CopyMeshParts(level.Data, new MeshCopyData
+                CopyMeshParts(new()
                 {
                     BaseMesh = lara[thigh],
                     NewMesh = laraMisc[thigh],
@@ -518,7 +518,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 // Holstered pistols
                 if (laraPistol != null)
                 {
-                    CopyMeshParts(level.Data, new MeshCopyData
+                    CopyMeshParts(new()
                     {
                         BaseMesh = laraPistol[thigh],
                         NewMesh = laraMisc[thigh],
@@ -530,7 +530,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 // Holstered magnums
                 if (laraMagnums != null)
                 {
-                    CopyMeshParts(level.Data, new MeshCopyData
+                    CopyMeshParts(new()
                     {
                         BaseMesh = laraMagnums[thigh],
                         NewMesh = laraMisc[thigh],
@@ -542,7 +542,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 // Holstered uzis
                 if (laraUzis != null)
                 {
-                    CopyMeshParts(level.Data, new MeshCopyData
+                    CopyMeshParts(new()
                     {
                         BaseMesh = laraUzis[thigh],
                         NewMesh = laraMisc[thigh],
@@ -555,7 +555,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             // Don't forget the shotgun on her back
             if (laraShotgun != null)
             {
-                CopyMeshParts(level.Data, new MeshCopyData
+                CopyMeshParts(new()
                 {
                     BaseMesh = laraShotgun[7],
                     NewMesh = laraMisc[7],
@@ -592,7 +592,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             List<TRMesh> laraMisc = level.Data.Models.Find(m => m.ID == (uint)TR1Type.LaraMiscAnim_H).Meshes;
 
             // Just the torso
-            TRMeshUtilities.DuplicateMesh(level.Data, lara[7], laraMisc[7]);
+            laraMisc[7].CopyInto(lara[7]);
             
             using (TR1TexturePacker packer = new(level.Data))
             {
@@ -625,7 +625,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             if (laraShotgun != null)
             {
-                CopyMeshParts(level.Data, new MeshCopyData
+                CopyMeshParts(new()
                 {
                     BaseMesh = laraShotgun[7],
                     NewMesh = laraMisc[7],
@@ -659,15 +659,13 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             for (int i = 0; i < laraMisc.Count; i++)
             {
-                TRMesh mesh = laraMisc[i];
-                TRMeshUtilities.DuplicateMesh(level.Data, mesh, MeshEditor.CloneMesh(cloneBaseFunc(i)));
-                editor.Mesh = mesh;
+                editor.Mesh = laraMisc[i] = cloneBaseFunc(i).Clone();
 
-                foreach (TRMeshFace face in mesh.TexturedRectangles)
+                foreach (TRMeshFace face in laraMisc[i].TexturedRectangles)
                 {
                     editor.AddColouredRectangle(face);
                 }
-                foreach (TRMeshFace face in mesh.TexturedTriangles)
+                foreach (TRMeshFace face in laraMisc[i].TexturedTriangles)
                 {
                     editor.AddColouredTriangle(face);
                 }
@@ -732,10 +730,12 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
         }
 
-        private static void CopyMeshParts(TR1Level level, MeshCopyData data)
+        private static void CopyMeshParts(MeshCopyData data)
         {
-            MeshEditor editor = new();
-            TRMeshUtilities.InsertMesh(level, editor.Mesh = MeshEditor.CloneMesh(data.NewMesh));
+            MeshEditor editor = new()
+            {
+                Mesh = data.NewMesh.Clone()
+            };
 
             if (data.TextureFaceCopies != null)
             {
@@ -799,7 +799,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             editor.Mesh.CollRadius = data.BaseMesh.CollRadius;
 
-            TRMeshUtilities.DuplicateMesh(level, data.BaseMesh, editor.Mesh);
+            editor.Mesh.CopyInto(data.BaseMesh);
         }
 
         private void ConvertToMauledOutfit(TR1CombinedLevel level)
@@ -816,7 +816,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 foreach (int index in meshIndices)
                 {
                     int colRad = lara[index].CollRadius;
-                    TRMeshUtilities.DuplicateMesh(level.Data, lara[index], laraMisc[index]);
+                    laraMisc[index].CopyInto(lara[index]);
                     lara[index].CollRadius = colRad;
                 }
             }
