@@ -1,10 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TRFDControl;
-using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Base.Enums;
-using TRModelTransporter.Handlers;
 
 namespace TRLevelControlTests.TR1;
 

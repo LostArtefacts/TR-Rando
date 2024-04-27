@@ -1,6 +1,4 @@
-﻿using TRLevelControl.Build;
-
-namespace TRLevelControl.Model;
+﻿namespace TRLevelControl.Model;
 
 public class TRMesh : ICloneable
 {

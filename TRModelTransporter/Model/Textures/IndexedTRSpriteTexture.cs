@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRModelTransporter.Model.Textures;
