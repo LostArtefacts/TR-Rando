@@ -398,4 +398,17 @@ public class TRLevelReader : BinaryReader
             Fraction = ReadUInt16()
         };
     }
+
+    public TRBoundingBox ReadBoundingBox()
+    {
+        return new()
+        {
+            MinX = ReadInt16(),
+            MaxX = ReadInt16(),
+            MinY = ReadInt16(),
+            MaxY = ReadInt16(),
+            MinZ = ReadInt16(),
+            MaxZ = ReadInt16()
+        };
+    }
 }

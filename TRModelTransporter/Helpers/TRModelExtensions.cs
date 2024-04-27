@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using TRLevelControl.Helpers;
+using TRLevelControl.Build;
 using TRLevelControl.Model;
 
 namespace TRModelTransporter.Helpers;
@@ -132,7 +132,7 @@ public static class TRModelExtensions
             return;
         }
 
-        foreach (TRMesh mesh in level.Meshes)
+        foreach (TRMesh mesh in level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh)))
         {
             foreach (TRMeshFace face in mesh.TexturedFaces)
             {
@@ -190,7 +190,7 @@ public static class TRModelExtensions
             return;
         }
 
-        foreach (TRMesh mesh in level.Meshes)
+        foreach (TRMesh mesh in level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh)))
         {
             foreach (TRMeshFace face in mesh.TexturedFaces)
             {
@@ -247,7 +247,7 @@ public static class TRModelExtensions
         return defaultToOriginal ? textureReference : (ushort)0;
     }
 
-    public static string ComputeSkeletonHash(this IEnumerable<TRMesh> meshes)
+    public static string ComputeSkeletonHash(this IEnumerable<TRMesh> meshes, TRGameVersion version)
     {
         using MemoryStream ms = new();
         using BinaryWriter writer = new(ms);
@@ -255,14 +255,18 @@ public static class TRModelExtensions
 
         // We only care about the structure, so reset all texture references
         // as there is no guarantee these will match across levels.
+        TRObjectMeshBuilder builder = new(version);
         foreach (TRMesh mesh in meshes)
         {
             TRMesh clone = mesh.Clone();
             clone.TexturedRectangles.ForEach(t => t.Texture = 0);
             clone.TexturedTriangles.ForEach(t => t.Texture = 0);
-            clone.ColouredRectangles.ForEach(t => t.Texture = 0);
-            clone.ColouredTriangles.ForEach(t => t.Texture = 0);
-            writer.Write(TRMeshUtilities.Serialize(clone));
+            if (version >= TRGameVersion.TR4)
+            {
+                clone.ColouredRectangles.ForEach(t => t.Texture = 0);
+                clone.ColouredTriangles.ForEach(t => t.Texture = 0);
+            }
+            writer.Write(builder.Serialize(clone));
         }
 
         byte[] hash = md5.ComputeHash(ms.ToArray());

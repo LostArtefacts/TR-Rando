@@ -875,14 +875,15 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         TR1Type puzzleModelType = allocation.AvailablePickupModels.First();
                         TR1Type puzzlePickupType = _modelReplacements[puzzleModelType];
 
-                        level.Data.Models.Find(m => m.ID == (uint)secretModelType).ID = (uint)puzzleModelType;
+                        TRModel puzzleModel = level.Data.Models.Find(m => m.ID == (uint)secretModelType);
+                        puzzleModel.ID = (uint)puzzleModelType;
                         level.Data.SpriteSequences.Find(s => s.SpriteID == (int)secretPickupType).SpriteID = (int)puzzlePickupType;
 
                         if (secretModelType == TR1Type.SecretScion_M_H && _outer.Are3DPickupsEnabled())
                         {
                             // TR1X embeds scions into the ground when they are puzzle/key types in 3D mode,
                             // so we counteract that here to avoid uncollectable items.
-                            TRMesh scionMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, puzzleModelType);
+                            TRMesh scionMesh = puzzleModel.Meshes[0];
                             foreach (TRVertex vertex in scionMesh.Vertices)
                             {
                                 vertex.Y -= 90;

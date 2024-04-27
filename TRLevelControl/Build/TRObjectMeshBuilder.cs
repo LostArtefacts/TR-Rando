@@ -3,13 +3,17 @@ using TRLevelControl.Model;
 
 namespace TRLevelControl.Build;
 
-public class TRObjectMeshBuilder
+public class TRObjectMeshBuilder : IMeshProvider
 {
     private readonly TRGameVersion _version;
     private readonly ITRLevelObserver _observer;
 
-    public List<TRMesh> Meshes { get; private set; }
-    public List<uint> MeshPointers { get; private set; }
+    private uint[] _meshPointers;
+    private Dictionary<long, TRMesh> _objectMeshes;
+    private Dictionary<uint, ushort> _staticMeshPointers;
+
+    public TRMesh GetObjectMesh(long pointer)
+        => _objectMeshes[_meshPointers[pointer]];
 
     public TRObjectMeshBuilder(TRGameVersion version, ITRLevelObserver observer = null)
     {
@@ -23,13 +27,13 @@ public class TRObjectMeshBuilder
         byte[] meshData = reader.ReadBytes((int)numMeshData * sizeof(short));
 
         uint numMeshPointers = reader.ReadUInt32();
-        MeshPointers = new(reader.ReadUInt32s(numMeshPointers));
+        _meshPointers = reader.ReadUInt32s(numMeshPointers);
 
         // The mesh pointer list can contain duplicates so we must make
         // sure to iterate over distinct values only
-        uint[] pointers = MeshPointers.Distinct().ToArray();
+        uint[] pointers = _meshPointers.Distinct().ToArray();
 
-        Meshes = new();
+        _objectMeshes = new();
 
         using MemoryStream ms = new(meshData);
         using TRLevelReader meshReader = new(ms);
@@ -40,9 +44,8 @@ public class TRObjectMeshBuilder
             meshReader.BaseStream.Position = meshPointer;
 
             TRMesh mesh = new();
-            Meshes.Add(mesh);
+            _objectMeshes[meshPointer] = mesh;
 
-            mesh.Pointer = meshPointer;
             mesh.Centre = TR2FileReadUtilities.ReadVertex(meshReader);
             mesh.CollRadius = meshReader.ReadInt32();
 
@@ -92,9 +95,39 @@ public class TRObjectMeshBuilder
         }
     }
 
-    public void WriteObjectMeshes(TRLevelWriter writer, IEnumerable<TRMesh> meshes, List<uint> meshPointers)
+    public void WriteObjectMeshes(TRLevelWriter writer, IEnumerable<TRMesh> objectMeshes, List<TRStaticMesh> staticMeshes)
     {
-        List<byte> meshData = meshes.SelectMany(m => Serialize(m)).ToList();
+        List<TRMesh> cachedMeshes = new();
+        List<uint> meshPointers = new();
+        List<byte> meshData = new();
+        _staticMeshPointers = new();
+
+        void StoreMesh(TRMesh m)
+        {
+            int index = cachedMeshes.IndexOf(m);
+            if (index == -1)
+            {
+                cachedMeshes.Add(m);
+                uint pointer = (uint)meshData.Count;
+                meshPointers.Add(pointer);
+                meshData.AddRange(Serialize(m, pointer));
+            }
+            else
+            {
+                meshPointers.Add(meshPointers[index]);
+            }
+        }
+
+        foreach (TRMesh mesh in objectMeshes)
+        {
+            StoreMesh(mesh);
+        }
+
+        foreach (TRStaticMesh staticMesh in staticMeshes)
+        {
+            _staticMeshPointers[staticMesh.ID] = (ushort)meshPointers.Count;
+            StoreMesh(staticMesh.Mesh);
+        }
 
         writer.Write((uint)meshData.Count / sizeof(short));
         writer.Write(meshData);
@@ -103,7 +136,41 @@ public class TRObjectMeshBuilder
         writer.Write(meshPointers);
     }
 
-    public byte[] Serialize(TRMesh mesh)
+    public List<TRStaticMesh> ReadStaticMeshes(TRLevelReader reader)
+    {
+        uint numMeshes = reader.ReadUInt32();
+        List<TRStaticMesh> meshes = new();
+
+        for (int i = 0; i < numMeshes; i++)
+        {
+            meshes.Add(new()
+            {
+                ID = reader.ReadUInt32(),
+                Mesh = GetObjectMesh(reader.ReadUInt16()),
+                VisibilityBox = reader.ReadBoundingBox(),
+                CollisionBox = reader.ReadBoundingBox(),
+                Flags = reader.ReadUInt16()
+            });
+        }
+
+        return meshes;
+    }
+
+    public void WriteStaticMeshes(TRLevelWriter writer, List<TRStaticMesh> staticMeshes)
+    {
+        writer.Write((uint)staticMeshes.Count);
+        foreach (TRStaticMesh staticMesh in staticMeshes)
+        {
+            writer.Write(staticMesh.ID);
+            writer.Write(_staticMeshPointers[staticMesh.ID]);
+            writer.Write(staticMesh.VisibilityBox);
+            writer.Write(staticMesh.CollisionBox);
+            writer.Write(staticMesh.Flags);
+        }
+    }
+
+    // The pointer here is only required if original mesh padding has been observed.
+    public byte[] Serialize(TRMesh mesh, uint meshPointer = 0)
     {
         using MemoryStream stream = new();
         TRLevelWriter writer = new(stream);
@@ -151,7 +218,7 @@ public class TRObjectMeshBuilder
         int paddingSize = (int)writer.BaseStream.Position % 4;
         if (paddingSize != 0)
         {
-            IEnumerable<byte> padding = _observer?.GetMeshPadding(mesh.Pointer) ??
+            IEnumerable<byte> padding = _observer?.GetMeshPadding(meshPointer) ??
                 Enumerable.Repeat((byte)0, paddingSize);
             writer.Write(padding);
         }

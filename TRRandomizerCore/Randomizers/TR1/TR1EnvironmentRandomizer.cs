@@ -6,7 +6,6 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Handlers;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;

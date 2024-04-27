@@ -1,4 +1,5 @@
-﻿using TRLevelControl.Model;
+﻿using System.Diagnostics;
+using TRLevelControl.Model;
 using TRModelTransporter.Model.Definitions;
 
 namespace TRModelTransporter.Handlers;
@@ -39,8 +40,7 @@ public class ModelTransportHandler
             {
                 // The original mesh data may still be needed so don't overwrite
                 definition.Model.MeshTrees = level.Models[i].MeshTrees;
-                definition.Model.NumMeshes = level.Models[i].NumMeshes;
-                definition.Model.StartingMesh = level.Models[i].StartingMesh;
+                definition.Model.Meshes = level.Models[i].Meshes;
             }
             level.Models[i] = definition.Model;
         }
@@ -101,8 +101,7 @@ public class ModelTransportHandler
                 // #234 Replacing Lara entirely can cause locking issues after pressing buttons or crouching
                 // where she refuses to come out of her stance. TR3 seems bound to having Lara's animations start
                 // at 0, so because these don't change per skin, we just replace the meshes and frames here.
-                level.Models[i].NumMeshes = definition.Model.NumMeshes;
-                level.Models[i].StartingMesh = definition.Model.StartingMesh;
+                level.Models[i].Meshes = definition.Model.Meshes;
                 level.Models[i].MeshTrees = definition.Model.MeshTrees;
             }
         }
@@ -120,8 +119,9 @@ public class ModelTransportHandler
             TRModel dependentModel = models.Find(m => m.ID == dependant);
             if (dependentModel != null)
             {
+                Debug.Assert(dependentModel.Meshes.Count == 1);
                 dependentModel.MeshTrees = lara.MeshTrees;
-                dependentModel.StartingMesh = lara.StartingMesh;
+                dependentModel.Meshes = new() { lara.Meshes.First() };
             }
         }
     }

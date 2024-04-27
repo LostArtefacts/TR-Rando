@@ -235,7 +235,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             if (lara == TR2Type.LaraInvisible)
             {
                 // #314 Ensure cloned Laras remain visible
-                CloneLaraMeshes(level, laraClones, laraModel);
+                CloneLaraMeshes(laraClones, laraModel);
                 // No import needed, just clear each of Lara's meshes. A haircut is implied
                 // with this and we don't need to alter the outfit.
                 HideEntities(level, _invisibleLaraEntities);
@@ -279,8 +279,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                     foreach (TRModel model in laraClones)
                     {
                         model.MeshTrees = laraModel.MeshTrees;
-                        model.StartingMesh = laraModel.StartingMesh;
-                        model.NumMeshes = laraModel.NumMeshes;
+                        model.Meshes = laraModel.Meshes;
                     }
                 }
 
@@ -305,25 +304,12 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             }
         }
 
-        private static void CloneLaraMeshes(TR2CombinedLevel level, List<TRModel> clones, TRModel laraModel)
+        private static void CloneLaraMeshes(List<TRModel> clones, TRModel laraModel)
         {
-            if (clones.Count > 0)
+            IEnumerable<TRMesh> clonedMeshes = laraModel.Meshes.Select(m => m.Clone());
+            foreach (TRModel model in clones)
             {
-                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraModel);
-                int firstMeshIndex = -1;
-                for (int i = 0; i < meshes.Count; i++)
-                {
-                    int insertedIndex = TRMeshUtilities.InsertMesh(level.Data, MeshEditor.CloneMesh(meshes[i]));
-                    if (firstMeshIndex == -1)
-                    {
-                        firstMeshIndex = insertedIndex;
-                    }
-                }
-
-                foreach (TRModel model in clones)
-                {
-                    model.StartingMesh = (ushort)firstMeshIndex;
-                }
+                model.Meshes = new(clonedMeshes);
             }
         }
 
@@ -332,14 +318,13 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             MeshEditor editor = new();
             foreach (TR2Type ent in entities)
             {
-                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
+                List<TRMesh> meshes = level.Data.Models.Find(m => m.ID == (uint)ent)?.Meshes;
                 if (meshes != null)
                 {
                     foreach (TRMesh mesh in meshes)
                     {
                         editor.Mesh = mesh;
                         editor.ClearAllPolygons();
-                        editor.WriteToLevel(level.Data);
                     }
                 }
             }
@@ -353,14 +338,14 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
 
         private void AdjustOutfit(TR2CombinedLevel level, TR2Type lara)
         {
+            TRModel laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
             if (level.Is(TR2LevelNames.HOME) && lara != TR2Type.LaraHome)
             {
                 // This ensures that Lara's hips match the new outfit for the starting animation and shower cutscene,
                 // otherwise the dressing gown hips are rendered, but the mesh is completely different for this, plus
                 // its textures will have been removed.
-                TRMesh laraMiscMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Type.LaraMiscAnim_H);
-                TRMesh laraHipsMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Type.Lara);
-                TRMeshUtilities.DuplicateMesh(level.Data, laraMiscMesh, laraHipsMesh);
+                TRModel laraMiscModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.LaraMiscAnim_H);
+                laraModel.Meshes[0].CopyInto(laraMiscModel.Meshes[0]);
             }
 
             if (_outer.Settings.RemoveRobeDagger)
@@ -377,12 +362,11 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                     {
                         MeshEditor editor = new()
                         {
-                            Mesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Type.Lara)
+                            Mesh = laraModel.Meshes[0]
                         };
 
                         editor.RemoveTexturedRectangleRange(9, 43);
                         editor.RemoveTexturedTriangleRange(18, 38);
-                        editor.WriteToLevel(level.Data);
                     }
 
                     // If it's HSH, go one step further and remove the model itself, so Lara is imagining what the dagger
@@ -393,20 +377,18 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                         // so we basically just retain the hand.
                         MeshEditor editor = new()
                         {
-                            Mesh = TRMeshUtilities.GetModelMeshes(level.Data, TR2Type.LaraMiscAnim_H)[10]
+                            Mesh = level.Data.Models.Find(m => m.ID == (uint)TR2Type.LaraMiscAnim_H).Meshes[10]
                         };
 
                         editor.RemoveTexturedRectangleRange(6, 20);
                         editor.ClearTexturedTriangles();
-                        editor.WriteToLevel(level.Data);
 
                         // And hide it from the inventory
-                        foreach (TRMesh mesh in TRMeshUtilities.GetModelMeshes(level.Data, TR2Type.Puzzle1_M_H))
+                        foreach (TRMesh mesh in level.Data.Models.Find(m => m.ID == (uint)TR2Type.Puzzle1_M_H).Meshes)
                         {
                             editor.Mesh = mesh;
                             editor.ClearTexturedRectangles();
                             editor.ClearTexturedTriangles();
-                            editor.WriteToLevel(level.Data);
                         }
                     }
                 }
@@ -422,8 +404,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 TRModel realLara = level.Data.Models.Find(m => m.ID == (short)TR2Type.Lara);
 
                 actorLara.MeshTrees = realLara.MeshTrees;
-                actorLara.NumMeshes = realLara.NumMeshes;
-                actorLara.StartingMesh = realLara.StartingMesh;
+                actorLara.Meshes = realLara.Meshes;
             }
         }
     }

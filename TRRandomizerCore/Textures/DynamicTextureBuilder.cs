@@ -89,13 +89,12 @@ public class DynamicTextureBuilder
         }
 
         // Include all static mesh textures
-        foreach (TRStaticMesh smesh in level.Data.StaticMeshes)
+        foreach (TRStaticMesh staticMesh in level.Data.StaticMeshes)
         {
-            TRMesh mesh = TRMeshUtilities.GetMesh(level.Data, smesh.Mesh);
-            AddMeshTextures(mesh, defaultObjectTextures);
+            AddMeshTextures(staticMesh.Mesh, defaultObjectTextures);
             if (!RetainMainTextures)
             {
-                modelMeshes.Add(mesh);
+                modelMeshes.Add(staticMesh.Mesh);
             }
         }
 
@@ -124,7 +123,7 @@ public class DynamicTextureBuilder
         }
         else
         {
-            hips = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.Lara)[0];
+            hips = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Lara).Meshes[0];
             if (level.Data.Entities.Any(e => e.TypeID == TR1Type.MidasHand_N))
             {
                 modelIDs.Add(TR1Type.LaraMiscAnim_H);
@@ -239,13 +238,12 @@ public class DynamicTextureBuilder
             return;
         }
 
-        if (modelID == TR1Type.Cowboy && TRMeshUtilities.GetModelMeshes(level, TR1Type.Cowboy)[2].TexturedRectangles.Count > 0)
+        if (modelID == TR1Type.Cowboy && level.Models.Find(m => m.ID == (uint)TR1Type.Cowboy).Meshes[2].TexturedRectangles.Count > 0)
         {
             // We only want to target LeoC's headless cowboy - in this case the cowboy is OG.
             return;
         }
 
-        List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level, model);
         List<TRMesh> excludedMeshes = new() { dummyMesh };
 
         if (modelID == TR1Type.Adam)
@@ -255,35 +253,35 @@ public class DynamicTextureBuilder
                 DataFolder = @"Resources\TR1\Models"
             }.LoadDefinition(modelID);
 
-            if (meshes[3].CollRadius != adam.Meshes[3].CollRadius)
+            if (model.Meshes[3].CollRadius != adam.Meshes[3].CollRadius)
             {
                 try
                 {
                     // Adam's head may have been replaced by Lara's, Pierre's etc. Try to
                     // create duplicates of the mesh's textures so we don't corrupt the
                     // original model.
-                    DuplicateMeshTextures(level, meshes[3]);
+                    DuplicateMeshTextures(level, model.Meshes[3]);
                 }
                 catch
                 {
                     // If packing failed, just exclude this particular mesh.
-                    excludedMeshes.Add(meshes[3]);
+                    excludedMeshes.Add(model.Meshes[3]);
                 }
             }
         }
         else if ((modelID == TR1Type.ScionPiece3_S_P || modelID == TR1Type.ScionPiece4_S_P)
-            && meshes.Count == 1 && meshes[0].Normals.Count != 123)
+            && model.Meshes.Count == 1 && model.Meshes[0].Normals.Count != 123)
         {
             try
             {
                 // The scion is something else so try to duplicate it to avoid original
                 // model issues.
-                DuplicateMeshTextures(level, meshes[0]);
+                DuplicateMeshTextures(level, model.Meshes[0]);
             }
             catch
             {
                 // If packing failed, just exclude this particular mesh.
-                excludedMeshes.Add(meshes[0]);
+                excludedMeshes.Add(model.Meshes[0]);
             }
         }
         else if (modelID == TR1Type.LaraPonytail_H_U)
@@ -292,11 +290,11 @@ public class DynamicTextureBuilder
             // been created by outfit rando.
             for (int i = 0; i < 6; i++)
             {
-                excludedMeshes.Add(meshes[i]);
+                excludedMeshes.Add(model.Meshes[i]);
             }
         }
 
-        foreach (TRMesh mesh in meshes)
+        foreach (TRMesh mesh in model.Meshes)
         {
             if (!excludedMeshes.Contains(mesh))
             {

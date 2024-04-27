@@ -1,5 +1,4 @@
-﻿using TRLevelControl.Helpers;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -10,60 +9,30 @@ public class EMMirrorModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        List<TRMesh> meshes = new();
-        foreach (uint modelID in ModelIDs)
-        {
-            List<TRMesh> modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID);
-            if (modelMeshes == null || modelMeshes.Count > 1)
-            {
-                throw new NotSupportedException("Only models with single meshes can be mirrored.");
-            }
-
-            meshes.Add(modelMeshes[0]);
-        }
-
-        MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
+        IEnumerable<TRModel> models = level.Models
+            .Where(m => ModelIDs.Contains(m.ID) && m.Meshes.Count == 1);
+        MirrorObjectTextures(MirrorMeshes(models), level.ObjectTextures);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        List<TRMesh> meshes = new();
-        foreach (uint modelID in ModelIDs)
-        {
-            List<TRMesh> modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID);
-            if (modelMeshes == null || modelMeshes.Count > 1)
-            {
-                throw new NotSupportedException("Only models with single meshes can be mirrored.");
-            }
-
-            meshes.Add(modelMeshes[0]);
-        }
-
-        MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
+        IEnumerable<TRModel> models = level.Models
+            .Where(m => ModelIDs.Contains(m.ID) && m.Meshes.Count == 1);
+        MirrorObjectTextures(MirrorMeshes(models), level.ObjectTextures);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<TRMesh> meshes = new();
-        foreach (uint modelID in ModelIDs)
-        {
-            List<TRMesh> modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID);
-            if (modelMeshes == null || modelMeshes.Count> 1)
-            {
-                throw new NotSupportedException("Only models with single meshes can be mirrored.");
-            }
-
-            meshes.Add(modelMeshes[0]);
-        }
-
-        MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
+        IEnumerable<TRModel> models = level.Models
+            .Where(m => ModelIDs.Contains(m.ID) && m.Meshes.Count == 1);
+        MirrorObjectTextures(MirrorMeshes(models), level.ObjectTextures);
     }
 
-    private static ISet<ushort> MirrorMeshes(List<TRMesh> meshes)
+    private static ISet<ushort> MirrorMeshes(IEnumerable<TRModel> models)
     {
         ISet<ushort> textureReferences = new HashSet<ushort>();
 
-        foreach (TRMesh mesh in meshes)
+        foreach (TRMesh mesh in models.SelectMany(m => m.Meshes))
         {
             foreach (TRVertex vert in mesh.Vertices)
             {

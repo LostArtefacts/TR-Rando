@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using TRLevelControl;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
@@ -57,7 +56,7 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Type, TR3Level>
 
     protected override List<TRMesh> GetModelMeshes(TR3Type modelEntity)
     {
-        return TRMeshUtilities.GetModelMeshes(Level, modelEntity);
+        return Level.Models.Find(m => m.ID == (uint)modelEntity)?.Meshes;
     }
 
     protected override TRSpriteSequence GetSpriteSequence(TR3Type entity)

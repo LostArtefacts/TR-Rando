@@ -1,10 +1,7 @@
-﻿using TRLevelControl.Build;
-
-namespace TRLevelControl.Model;
+﻿namespace TRLevelControl.Model;
 
 public class TRMesh : ICloneable
 {
-    public uint Pointer { get; set; } // Temporarily retained
     public TRVertex Centre { get; set; }
     public int CollRadius { get; set; }
     public List<TRVertex> Vertices { get; set; }

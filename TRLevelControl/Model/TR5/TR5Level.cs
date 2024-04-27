@@ -7,8 +7,6 @@ public class TR5Level : TRLevelBase
     public ushort WeatherType { get; set; }
     public List<TR5Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
-    public List<TRMesh> Meshes { get; set; }
-    public List<uint> MeshPointers { get; set; }
     public List<TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
     public List<TRSpriteTexture> SpriteTextures { get; set; }

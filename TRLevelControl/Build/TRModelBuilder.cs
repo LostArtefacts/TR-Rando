@@ -29,7 +29,7 @@ public class TRModelBuilder
         _observer = observer;
     }
 
-    public List<TRModel> ReadModelData(TRLevelReader reader)
+    public List<TRModel> ReadModelData(TRLevelReader reader, IMeshProvider meshProvider)
     {
         ReadAnimations(reader);
         ReadStateChanges(reader);
@@ -42,7 +42,7 @@ public class TRModelBuilder
         List<TRModel> models = new();
         foreach (PlaceholderModel placeholder in _placeholderModels)
         {
-            models.Add(BuildModel(placeholder));
+            models.Add(BuildModel(placeholder, meshProvider));
         }
 
         TestTR5Changes(models);
@@ -212,21 +212,23 @@ public class TRModelBuilder
         }
     }
 
-    private TRModel BuildModel(PlaceholderModel placeholder)
+    private TRModel BuildModel(PlaceholderModel placeholder, IMeshProvider meshProvider)
     {
         TRModel model = new()
         {
             // To be eliminated
             ID = placeholder.ID,
-            NumMeshes = placeholder.NumMeshes,
-            StartingMesh = placeholder.StartingMesh,
         };
 
         // Everything has a dummy mesh tree, so load one less than the mesh count
         int treePointer = (int)placeholder.MeshTree / sizeof(int);
-        for (int i = 0; i < placeholder.NumMeshes - 1; i++)
+        for (int i = 0; i < placeholder.NumMeshes; i++)
         {
-            model.MeshTrees.Add(_trees[treePointer + i]);
+            if (i < placeholder.NumMeshes - 1)
+            {
+                model.MeshTrees.Add(_trees[treePointer + i]);
+            }
+            model.Meshes.Add(meshProvider.GetObjectMesh(placeholder.StartingMesh + i));
         }
 
         for (int i = 0; i < placeholder.AnimCount; i++)
@@ -539,8 +541,7 @@ public class TRModelBuilder
             ID = model.ID,
             Animation = model.Animations.Count == 0 ? TRConsts.NoAnimation : (ushort)_placeholderAnimations.Count,
             FrameOffset = (uint)_frames.Count * sizeof(short),
-            NumMeshes = model.NumMeshes,
-            StartingMesh = model.StartingMesh,
+            NumMeshes = (ushort)model.Meshes.Count,
         };
         _placeholderModels.Add(placeholderModel);
 
@@ -861,13 +862,14 @@ public class TRModelBuilder
         writer.Write((uint)models.Count);
 
         uint treePointer = 0;
+        ushort startingMesh = 0;
         foreach (TRModel model in models)
         {
             PlaceholderModel placeholderModel = _placeholderModels.Find(m => m.ID == model.ID);
 
             writer.Write(placeholderModel.ID);
-            writer.Write(model.NumMeshes);
-            writer.Write(model.StartingMesh);
+            writer.Write(placeholderModel.NumMeshes);
+            writer.Write(startingMesh);
             writer.Write(treePointer);
             writer.Write(placeholderModel.FrameOffset);
             writer.Write(placeholderModel.Animation);
@@ -878,6 +880,7 @@ public class TRModelBuilder
             }
 
             treePointer += (uint)(model.MeshTrees.Count * sizeof(int));
+            startingMesh += placeholderModel.NumMeshes;
         }
     }
 

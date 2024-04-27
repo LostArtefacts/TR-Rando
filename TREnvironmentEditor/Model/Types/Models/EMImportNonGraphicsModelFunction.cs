@@ -1,5 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Transport;
 
@@ -27,7 +26,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         };
         importer.Import();
 
-        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID));
+        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => level.Models.Find(m => m.ID == modelID));
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -48,7 +47,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         };
         importer.Import();
 
-        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID));
+        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => level.Models.Find(m => m.ID == modelID));
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -69,7 +68,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         };
         importer.Import();
 
-        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID));
+        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => level.Models.Find(m => m.ID == modelID));
     }
 
     private List<EMMeshTextureData> PrepareImportData(List<TRModel> existingModels)
@@ -85,12 +84,12 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         return importData;
     }
 
-    private static void RemapFaces(List<EMMeshTextureData> data, int maximumTexture, Func<short, List<TRMesh>> meshAction)
+    private static void RemapFaces(List<EMMeshTextureData> data, int maximumTexture, Func<short, TRModel> modelAction)
     {
         foreach (EMMeshTextureData textureData in data)
         {
-            List<TRMesh> meshes = meshAction.Invoke(textureData.ModelID);
-            foreach (TRMesh mesh in meshes)
+            TRModel model= modelAction.Invoke(textureData.ModelID);
+            foreach (TRMesh mesh in model.Meshes)
             {
                 foreach (TRMeshFace face in mesh.ColouredTriangles)
                 {

@@ -931,8 +931,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             {
                 TRModel enemyModel = level.Data.Models.Find(m => m.ID == (uint)enemyType);
                 enemyModel.MeshTrees = laraModel.MeshTrees;
-                enemyModel.StartingMesh = laraModel.StartingMesh;
-                enemyModel.NumMeshes = laraModel.NumMeshes;
+                enemyModel.Meshes = laraModel.Meshes;
             }
 
             // Remove texture randomization for this enemy as it's no longer required
@@ -948,8 +947,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             TRModel winnieModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Winston);
             marcoModel.Animations = winnieModel.Animations;
             marcoModel.MeshTrees = winnieModel.MeshTrees;
-            marcoModel.StartingMesh = winnieModel.StartingMesh;
-            marcoModel.NumMeshes = winnieModel.NumMeshes;
+            marcoModel.Meshes = winnieModel.Meshes;
         }
     }
 

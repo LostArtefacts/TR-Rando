@@ -292,6 +292,11 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                     translatedEntity = EntityMap[entity];
                 }
                 List<TRMesh> meshes = GetModelMeshes(translatedEntity);
+                if (meshes == null)
+                {
+                    continue;
+                }
+
                 ISet<int> colourIndices = new HashSet<int>();
                 foreach (TRMesh mesh in meshes)
                 {

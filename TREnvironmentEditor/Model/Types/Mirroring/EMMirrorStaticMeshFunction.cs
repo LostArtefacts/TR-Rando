@@ -1,5 +1,4 @@
-﻿using TRLevelControl.Helpers;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
 
@@ -11,7 +10,7 @@ public class EMMirrorStaticMeshFunction : BaseEMFunction
     {
         IEnumerable<TRMesh> meshes = level.StaticMeshes.ToList()
             .FindAll(s => MeshIDs.Contains(s.ID))
-            .Select(s => TRMeshUtilities.GetMesh(level, s.Mesh));
+            .Select(s => s.Mesh);
 
         MirrorMeshes(meshes);
     }
@@ -20,7 +19,7 @@ public class EMMirrorStaticMeshFunction : BaseEMFunction
     {
         IEnumerable<TRMesh> meshes = level.StaticMeshes.ToList()
             .FindAll(s => MeshIDs.Contains(s.ID))
-            .Select(s => TRMeshUtilities.GetMesh(level, s.Mesh));
+            .Select(s => s.Mesh);
 
         MirrorMeshes(meshes);
     }
@@ -29,7 +28,7 @@ public class EMMirrorStaticMeshFunction : BaseEMFunction
     {
         IEnumerable<TRMesh> meshes = level.StaticMeshes.ToList()
             .FindAll(s => MeshIDs.Contains(s.ID))
-            .Select(s => TRMeshUtilities.GetMesh(level, s.Mesh));
+            .Select(s => s.Mesh);
 
         MirrorMeshes(meshes);
     }

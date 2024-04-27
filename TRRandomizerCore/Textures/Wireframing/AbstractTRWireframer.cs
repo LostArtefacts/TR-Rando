@@ -568,7 +568,7 @@ public abstract class AbstractTRWireframer<E, L>
             if (IsSkybox(model))
             {
                 // Solidify the skybox as it will become the backdrop for every room
-                foreach (TRMesh mesh in GetModelMeshes(level, model))
+                foreach (TRMesh mesh in model.Meshes)
                 {
                     foreach (TRMeshFace rect in mesh.TexturedRectangles)
                     {
@@ -595,7 +595,7 @@ public abstract class AbstractTRWireframer<E, L>
                     paletteIndex = blackIndex;
                 }
 
-                foreach (TRMesh mesh in GetModelMeshes(level, model))
+                foreach (TRMesh mesh in model.Meshes)
                 {
                     if (processedModelMeshes.Add(mesh))
                     {
@@ -668,10 +668,7 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract int GetBlackPaletteIndex(L level);
     protected abstract int ImportColour(L level, Color c);
     protected abstract List<TRModel> GetModels(L level);
-    protected abstract List<TRMesh> GetModelMeshes(L level, TRModel model);
-    protected abstract List<TRMesh> GetLevelMeshes(L level);
-    protected abstract List<TRStaticMesh> GetStaticMeshes(L level);
-    protected abstract TRMesh GetStaticMesh(L level, TRStaticMesh staticMesh);
+    protected abstract IEnumerable<TRMesh> GetLevelMeshes(L level);
     protected abstract bool IsSkybox(TRModel model);
     protected abstract bool IsLaraModel(TRModel model);
     protected abstract bool IsEnemyModel(TRModel model);
