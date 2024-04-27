@@ -386,7 +386,6 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
 
             ponytail.MeshTrees.AddRange(ponytail.MeshTrees);
-            ponytail.NumMeshes *= 2;
         }
 
         private static void HideEntities(TR1CombinedLevel level, IEnumerable<TR1Type> entities)

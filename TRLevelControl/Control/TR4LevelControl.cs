@@ -6,8 +6,13 @@ namespace TRLevelControl;
 
 public class TR4LevelControl : TRLevelControlBase<TR4Level>
 {
+    private readonly TRObjectMeshBuilder _meshBuilder;
+
     public TR4LevelControl(ITRLevelObserver observer = null)
-        : base(observer) { }
+        : base(observer)
+    {
+        _meshBuilder = new(TRGameVersion.TR4, _observer);
+    }
 
     protected override TR4Level CreateLevel(TRFileVersion version)
     {
@@ -175,23 +180,18 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadMeshData(TRLevelReader reader)
     {
-        TRObjectMeshBuilder builder = new(TRGameVersion.TR4, _observer);
-        builder.BuildObjectMeshes(reader);
-
-        _level.Meshes = builder.Meshes;
-        _level.MeshPointers = builder.MeshPointers;
+        _meshBuilder.BuildObjectMeshes(reader);
     }
 
     private void WriteMeshData(TRLevelWriter writer)
     {
-        TRObjectMeshBuilder builder = new(TRGameVersion.TR4, _observer);
-        builder.WriteObjectMeshes(writer, _level.Meshes, _level.MeshPointers);
+        _meshBuilder.WriteObjectMeshes(writer, _level.Models.SelectMany(m => m.Meshes), _level.StaticMeshes);
     }
 
     private void ReadModelData(TRLevelReader reader)
     {
         TRModelBuilder builder = new(TRGameVersion.TR4, _observer);
-        _level.Models = builder.ReadModelData(reader);
+        _level.Models = builder.ReadModelData(reader, _meshBuilder);
     }
 
     private void WriteModelData(TRLevelWriter writer)
@@ -202,16 +202,12 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadStaticMeshes(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateStaticMeshes(reader, _level);
+        _level.StaticMeshes = _meshBuilder.ReadStaticMeshes(reader);
     }
 
     private void WriteStaticMeshes(TRLevelWriter writer)
     {
-        writer.Write((uint)_level.StaticMeshes.Count);
-        foreach (TRStaticMesh sm in _level.StaticMeshes)
-        {
-            writer.Write(sm.Serialize());
-        }
+        _meshBuilder.WriteStaticMeshes(writer, _level.StaticMeshes);
     }
 
     private void ReadSprites(TRLevelReader reader)

@@ -81,7 +81,7 @@ public class TRPalette8Control : IDisposable
         }
 
         // Update all colours used in all meshes
-        foreach (TRMesh mesh in Level.Meshes)
+        foreach (TRMesh mesh in Level.Models.SelectMany(m => m.Meshes).Concat(Level.StaticMeshes.Select(s => s.Mesh)))
         {
             if (ignoredMeshes.Contains(mesh))
             {
@@ -159,7 +159,7 @@ public class TRPalette8Control : IDisposable
             }
         }
 
-        foreach (TRMesh mesh in Level.Meshes)
+        foreach (TRMesh mesh in Level.Models.SelectMany(m => m.Meshes).Concat(Level.StaticMeshes.Select(s => s.Mesh)))
         {
             foreach (TRMeshFace face in mesh.ColouredFaces)
             {

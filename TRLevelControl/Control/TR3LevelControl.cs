@@ -7,8 +7,13 @@ namespace TRLevelControl;
 
 public class TR3LevelControl : TRLevelControlBase<TR3Level>
 {
+    private readonly TRObjectMeshBuilder _meshBuilder;
+
     public TR3LevelControl(ITRLevelObserver observer = null)
-        : base(observer) { }
+        : base(observer)
+    {
+        _meshBuilder = new(TRGameVersion.TR3, _observer);
+    }
 
     protected override TR3Level CreateLevel(TRFileVersion version)
     {
@@ -116,16 +121,9 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
 
         ReadMeshData(reader);
-
         ReadModelData(reader);
 
-        //Static Meshes
-        uint numStaticMeshes = reader.ReadUInt32();
-        _level.StaticMeshes = new();
-        for (int i = 0; i < numStaticMeshes; i++)
-        {
-            _level.StaticMeshes.Add(TR2FileReadUtilities.ReadStaticMesh(reader));
-        }
+        ReadStaticMeshes(reader);
 
         uint numSpriteTextures = reader.ReadUInt32();
         _level.SpriteTextures = new();
@@ -227,11 +225,9 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write(_level.FloorData);
 
         WriteMeshData(writer);
-
         WriteModelData(writer);
 
-        writer.Write((uint)_level.StaticMeshes.Count);
-        foreach (TRStaticMesh mesh in _level.StaticMeshes) { writer.Write(mesh.Serialize()); }
+        WriteStaticMeshes(writer);
 
         writer.Write((uint)_level.SpriteTextures.Count);
         foreach (TRSpriteTexture tex in _level.SpriteTextures) { writer.Write(tex.Serialize()); }
@@ -275,29 +271,34 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
     private void ReadMeshData(TRLevelReader reader)
     {
-        TRObjectMeshBuilder builder = new(TRGameVersion.TR3, _observer);
-        builder.BuildObjectMeshes(reader);
-
-        _level.Meshes = builder.Meshes;
-        _level.MeshPointers = builder.MeshPointers;
+        _meshBuilder.BuildObjectMeshes(reader);
     }
 
     private void WriteMeshData(TRLevelWriter writer)
     {
-        TRObjectMeshBuilder builder = new(TRGameVersion.TR3, _observer);
-        builder.WriteObjectMeshes(writer, _level.Meshes, _level.MeshPointers);
+        _meshBuilder.WriteObjectMeshes(writer, _level.Models.SelectMany(m => m.Meshes), _level.StaticMeshes);
     }
 
     private void ReadModelData(TRLevelReader reader)
     {
         TRModelBuilder builder = new(TRGameVersion.TR3, _observer);
-        _level.Models = builder.ReadModelData(reader);
+        _level.Models = builder.ReadModelData(reader, _meshBuilder);
     }
 
     private void WriteModelData(TRLevelWriter writer)
     {
         TRModelBuilder builder = new(TRGameVersion.TR3, _observer);
         builder.WriteModelData(writer, _level.Models);
+    }
+
+    private void ReadStaticMeshes(TRLevelReader reader)
+    {
+        _level.StaticMeshes = _meshBuilder.ReadStaticMeshes(reader);
+    }
+
+    private void WriteStaticMeshes(TRLevelWriter writer)
+    {
+        _meshBuilder.WriteStaticMeshes(writer, _level.StaticMeshes);
     }
 
     private static TR3RoomData ConvertToRoomData(TR3Room room)

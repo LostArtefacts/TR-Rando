@@ -669,9 +669,7 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract int ImportColour(L level, Color c);
     protected abstract List<TRModel> GetModels(L level);
     protected abstract List<TRMesh> GetModelMeshes(L level, TRModel model);
-    protected abstract List<TRMesh> GetLevelMeshes(L level);
-    protected abstract List<TRStaticMesh> GetStaticMeshes(L level);
-    protected abstract TRMesh GetStaticMesh(L level, TRStaticMesh staticMesh);
+    protected abstract IEnumerable<TRMesh> GetLevelMeshes(L level);
     protected abstract bool IsSkybox(TRModel model);
     protected abstract bool IsLaraModel(TRModel model);
     protected abstract bool IsEnemyModel(TRModel model);

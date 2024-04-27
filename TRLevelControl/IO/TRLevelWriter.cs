@@ -317,4 +317,14 @@ public class TRLevelWriter : BinaryWriter
         Write(fixedFloat.Whole);
         Write(fixedFloat.Fraction);
     }
+
+    public void Write(TRBoundingBox box)
+    {
+        Write(box.MinX);
+        Write(box.MaxX);
+        Write(box.MinY);
+        Write(box.MaxY);
+        Write(box.MinZ);
+        Write(box.MaxZ);
+    }
 }

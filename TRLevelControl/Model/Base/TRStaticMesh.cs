@@ -1,18 +1,11 @@
-﻿using System.Text;
-using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TRStaticMesh : ISerializableCompact, ICloneable
+public class TRStaticMesh : ICloneable
 {
     public uint ID { get; set; }
-
-    public ushort Mesh { get; set; }
-
+    public TRMesh Mesh { get; set; }
     public TRBoundingBox VisibilityBox { get; set; }
-
     public TRBoundingBox CollisionBox { get; set; }
-
     public ushort Flags { get; set; }
 
     public bool NonCollidable
@@ -52,7 +45,7 @@ public class TRStaticMesh : ISerializableCompact, ICloneable
         return new()
         {
             ID = ID,
-            Mesh = Mesh,
+            Mesh = Mesh.Clone(),
             VisibilityBox = VisibilityBox.Clone(),
             CollisionBox = CollisionBox.Clone(),
             Flags = Flags
@@ -61,32 +54,4 @@ public class TRStaticMesh : ISerializableCompact, ICloneable
 
     object ICloneable.Clone()
         => Clone();
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(ID);
-            writer.Write(Mesh);
-            writer.Write(VisibilityBox.Serialize());
-            writer.Write(CollisionBox.Serialize());
-            writer.Write(Flags);
-        }
-
-        return stream.ToArray();
-    }
-
-    public override string ToString()
-    {
-        StringBuilder sb = new(base.ToString());
-
-        sb.Append(" ID: " + ID);
-        sb.Append(" Mesh: " + Mesh);
-        sb.Append(" VisibilityBox: {" + VisibilityBox.ToString() + "} ");
-        sb.Append(" CollisionBox: {" + CollisionBox.ToString() + "} ");
-        sb.Append(" Flags: " + Flags.ToString("X4"));
-
-        return sb.ToString();
-    }
 }

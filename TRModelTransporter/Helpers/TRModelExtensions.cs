@@ -132,7 +132,7 @@ public static class TRModelExtensions
             return;
         }
 
-        foreach (TRMesh mesh in level.Meshes)
+        foreach (TRMesh mesh in level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh)))
         {
             foreach (TRMeshFace face in mesh.TexturedFaces)
             {
@@ -190,7 +190,7 @@ public static class TRModelExtensions
             return;
         }
 
-        foreach (TRMesh mesh in level.Meshes)
+        foreach (TRMesh mesh in level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh)))
         {
             foreach (TRMeshFace face in mesh.TexturedFaces)
             {

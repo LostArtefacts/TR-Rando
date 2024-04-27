@@ -86,9 +86,9 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return level.GetInvalidObjectTextureIndices();
     }
 
-    protected override List<TRMesh> GetLevelMeshes(TR1Level level)
+    protected override IEnumerable<TRMesh> GetLevelMeshes(TR1Level level)
     {
-        return level.Meshes;
+        return level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh));
     }
 
     protected override List<TRMesh> GetModelMeshes(TR1Level level, TRModel model)
@@ -124,16 +124,6 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
             faces.Add(room.RoomData.Rectangles.ToList());
         }
         return faces;
-    }
-
-    protected override TRMesh GetStaticMesh(TR1Level level, TRStaticMesh staticMesh)
-    {
-        return TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
-    }
-
-    protected override List<TRStaticMesh> GetStaticMeshes(TR1Level level)
-    {
-        return level.StaticMeshes;
     }
 
     protected override int ImportColour(TR1Level level, Color c)

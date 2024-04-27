@@ -561,35 +561,24 @@ public class EMMirrorFunction : BaseEMFunction
 
     private static void MirrorStaticMeshes(TR1Level level)
     {
-        MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
-        {
-            return TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
-        });
+        MirrorStaticMeshes(level.StaticMeshes);
     }
 
     private static void MirrorStaticMeshes(TR2Level level)
     {
-        MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
-        {
-            return TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
-        });
+        MirrorStaticMeshes(level.StaticMeshes);
     }
 
     private static void MirrorStaticMeshes(TR3Level level)
     {
-        MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
-        {
-            return TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
-        });
+        MirrorStaticMeshes(level.StaticMeshes);
     }
 
-    private static void MirrorStaticMeshes(List<TRStaticMesh> staticMeshes, Func<TRStaticMesh, TRMesh> meshFunc)
+    private static void MirrorStaticMeshes(List<TRStaticMesh> staticMeshes)
     {
         foreach (TRStaticMesh staticMesh in staticMeshes)
         {
-            TRMesh mesh = meshFunc(staticMesh);
-
-            foreach (TRVertex vert in mesh.Vertices)
+            foreach (TRVertex vert in staticMesh.Mesh.Vertices)
             {
                 vert.X *= -1;
             }
@@ -1048,29 +1037,27 @@ public class EMMirrorFunction : BaseEMFunction
                     continue;
                 }
 
-                TRMesh mesh = TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
-
                 // Flip the faces and store texture references
-                foreach (TRMeshFace face in mesh.TexturedRectangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.TexturedRectangles)
                 {
                     face.SwapVertices(0, 3);
                     face.SwapVertices(1, 2);
                     textureReferences.Add(face.Texture);
                 }
 
-                foreach (TRMeshFace face in mesh.ColouredRectangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.ColouredRectangles)
                 {
                     face.SwapVertices(0, 3);
                     face.SwapVertices(1, 2);
                 }
 
-                foreach (TRMeshFace face in mesh.TexturedTriangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.TexturedTriangles)
                 {
                     face.SwapVertices(0, 2);
                     textureReferences.Add(face.Texture);
                 }
 
-                foreach (TRMeshFace face in mesh.ColouredTriangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.ColouredTriangles)
                 {
                     face.SwapVertices(0, 2);
                 }
@@ -1129,29 +1116,27 @@ public class EMMirrorFunction : BaseEMFunction
                     continue;
                 }
 
-                TRMesh mesh = TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
-
                 // Flip the faces and store texture references
-                foreach (TRMeshFace face in mesh.TexturedRectangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.TexturedRectangles)
                 {
                     face.SwapVertices(0, 3);
                     face.SwapVertices(1, 2);
                     textureReferences.Add(face.Texture);
                 }
 
-                foreach (TRMeshFace face in mesh.ColouredRectangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.ColouredRectangles)
                 {
                     face.SwapVertices(0, 3);
                     face.SwapVertices(1, 2);
                 }
 
-                foreach (TRMeshFace face in mesh.TexturedTriangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.TexturedTriangles)
                 {
                     face.SwapVertices(0, 2);
                     textureReferences.Add(face.Texture);
                 }
 
-                foreach (TRMeshFace face in mesh.ColouredTriangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.ColouredTriangles)
                 {
                     face.SwapVertices(0, 2);
                 }
@@ -1201,29 +1186,27 @@ public class EMMirrorFunction : BaseEMFunction
                     continue;
                 }
 
-                TRMesh mesh = TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
-
                 // Flip the faces and store texture references
-                foreach (TRMeshFace face in mesh.TexturedRectangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.TexturedRectangles)
                 {
                     face.SwapVertices(0, 3);
                     face.SwapVertices(1, 2);
                     textureReferences.Add((ushort)(face.Texture & 0x0fff));
                 }
 
-                foreach (TRMeshFace face in mesh.ColouredRectangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.ColouredRectangles)
                 {
                     face.SwapVertices(0, 3);
                     face.SwapVertices(1, 2);
                 }
 
-                foreach (TRMeshFace face in mesh.TexturedTriangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.TexturedTriangles)
                 {
                     face.SwapVertices(0, 2);
                     textureReferences.Add((ushort)(face.Texture & 0x0fff));
                 }
 
-                foreach (TRMeshFace face in mesh.ColouredTriangles)
+                foreach (TRMeshFace face in staticMesh.Mesh.ColouredTriangles)
                 {
                     face.SwapVertices(0, 2);
                 }

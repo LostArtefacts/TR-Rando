@@ -235,7 +235,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             if (lara == TR2Type.LaraInvisible)
             {
                 // #314 Ensure cloned Laras remain visible
-                CloneLaraMeshes(level, laraClones, laraModel);
+                CloneLaraMeshes(laraClones, laraModel);
                 // No import needed, just clear each of Lara's meshes. A haircut is implied
                 // with this and we don't need to alter the outfit.
                 HideEntities(level, _invisibleLaraEntities);
@@ -279,8 +279,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                     foreach (TRModel model in laraClones)
                     {
                         model.MeshTrees = laraModel.MeshTrees;
-                        model.StartingMesh = laraModel.StartingMesh;
-                        model.NumMeshes = laraModel.NumMeshes;
+                        model.Meshes = laraModel.Meshes;
                     }
                 }
 
@@ -305,25 +304,12 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             }
         }
 
-        private static void CloneLaraMeshes(TR2CombinedLevel level, List<TRModel> clones, TRModel laraModel)
+        private static void CloneLaraMeshes(List<TRModel> clones, TRModel laraModel)
         {
-            if (clones.Count > 0)
+            IEnumerable<TRMesh> clonedMeshes = laraModel.Meshes.Select(m => m.Clone());
+            foreach (TRModel model in clones)
             {
-                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraModel);
-                int firstMeshIndex = -1;
-                for (int i = 0; i < meshes.Count; i++)
-                {
-                    int insertedIndex = TRMeshUtilities.InsertMesh(level.Data, MeshEditor.CloneMesh(meshes[i]));
-                    if (firstMeshIndex == -1)
-                    {
-                        firstMeshIndex = insertedIndex;
-                    }
-                }
-
-                foreach (TRModel model in clones)
-                {
-                    model.StartingMesh = (ushort)firstMeshIndex;
-                }
+                model.Meshes = new(clonedMeshes);
             }
         }
 
@@ -422,8 +408,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 TRModel realLara = level.Data.Models.Find(m => m.ID == (short)TR2Type.Lara);
 
                 actorLara.MeshTrees = realLara.MeshTrees;
-                actorLara.NumMeshes = realLara.NumMeshes;
-                actorLara.StartingMesh = realLara.StartingMesh;
+                actorLara.Meshes = realLara.Meshes;
             }
         }
     }

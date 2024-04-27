@@ -8,8 +8,6 @@ public class TR2Level : TRLevelBase
     public List<TRTexImage16> Images16 { get; set; }
     public List<TR2Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
-    public List<TRMesh> Meshes { get; set; }
-    public List<uint> MeshPointers { get; set; }
     public List<TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
     public List<TRObjectTexture> ObjectTextures { get; set; }

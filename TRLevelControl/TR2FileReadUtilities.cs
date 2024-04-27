@@ -78,34 +78,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRStaticMesh ReadStaticMesh(BinaryReader reader)
-    {
-        return new TRStaticMesh()
-        {
-            ID = reader.ReadUInt32(),
-            Mesh = reader.ReadUInt16(),
-            VisibilityBox = new TRBoundingBox
-            {
-                MinX = reader.ReadInt16(),
-                MaxX = reader.ReadInt16(),
-                MinY = reader.ReadInt16(),
-                MaxY = reader.ReadInt16(),
-                MinZ = reader.ReadInt16(),
-                MaxZ = reader.ReadInt16()
-            },
-            CollisionBox = new TRBoundingBox
-            {
-                MinX = reader.ReadInt16(),
-                MaxX = reader.ReadInt16(),
-                MinY = reader.ReadInt16(),
-                MaxY = reader.ReadInt16(),
-                MinZ = reader.ReadInt16(),
-                MaxZ = reader.ReadInt16()
-            },
-            Flags = reader.ReadUInt16()
-        };
-    }
-
     public static TRObjectTexture ReadObjectTexture(BinaryReader reader)
     {
         return new TRObjectTexture()

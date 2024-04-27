@@ -95,17 +95,6 @@ internal static class TR4FileReadUtilities
         }
     }
 
-    public static void PopulateStaticMeshes(BinaryReader reader, TR4Level lvl)
-    {
-        uint numStaticMeshes = reader.ReadUInt32();
-        lvl.StaticMeshes = new();
-
-        for (int i = 0; i < numStaticMeshes; i++)
-        {
-            lvl.StaticMeshes.Add(TR2FileReadUtilities.ReadStaticMesh(reader));
-        }
-    }
-
     public static void PopulateSprites(BinaryReader reader, TR4Level lvl)
     {
         string sprMarker = new(reader.ReadChars(SPRMarker.Length));
