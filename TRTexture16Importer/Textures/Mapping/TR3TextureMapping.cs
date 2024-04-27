@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRTexture16Importer.Helpers;
 
@@ -44,7 +43,7 @@ public class TR3TextureMapping : AbstractTextureMapping<TR3Type, TR3Level>
 
     protected override List<TRMesh> GetModelMeshes(TR3Type entity)
     {
-        return TRMeshUtilities.GetModelMeshes(_level, entity);
+        return _level.Models.Find(m => m.ID == (uint)entity).Meshes;
     }
 
     protected override List<TRSpriteSequence> GetSpriteSequences()

@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRTexture16Importer.Helpers;
 
@@ -43,7 +42,7 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Type, TR2Level>
 
     protected override List<TRMesh> GetModelMeshes(TR2Type entity)
     {
-        return TRMeshUtilities.GetModelMeshes(_level, entity);
+        return _level.Models.Find(m => m.ID == (uint)entity).Meshes;
     }
 
     protected override List<TRSpriteSequence> GetSpriteSequences()

@@ -1,22 +1,10 @@
-﻿using TRLevelControl.Helpers;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Helpers;
 
 public class MeshEditor
 {
-    private int _oldLength;
-    private TRMesh _mesh;
-
-    public TRMesh Mesh
-    {
-        get => _mesh;
-        set
-        {
-            _mesh = value;
-            _oldLength = TRMeshUtilities.Serialize(_mesh).Length;
-        }
-    }
+    public TRMesh Mesh { get; set; }
 
     public void ClearAllPolygons()
     {
@@ -128,24 +116,6 @@ public class MeshEditor
         clone.ColouredTriangles.ForEach(f => f.Texture = paletteIndex);
 
         return clone;
-    }
-
-    public void WriteToLevel(TR1Level level)
-    {
-        TRMeshUtilities.UpdateMeshPointers(level, Mesh, _oldLength);
-        _oldLength = TRMeshUtilities.Serialize(_mesh).Length; // in case of any further changes without changing the mesh var
-    }
-
-    public void WriteToLevel(TR2Level level)
-    {
-        TRMeshUtilities.UpdateMeshPointers(level, Mesh, _oldLength);
-        _oldLength = TRMeshUtilities.Serialize(_mesh).Length; // in case of any further changes without changing the mesh var
-    }
-
-    public void WriteToLevel(TR3Level level)
-    {
-        TRMeshUtilities.UpdateMeshPointers(level, Mesh, _oldLength);
-        _oldLength = TRMeshUtilities.Serialize(_mesh).Length; // in case of any further changes without changing the mesh var
     }
 
     private static void RemovePolygons<T>(List<T> polygons, IEnumerable<int> indices)

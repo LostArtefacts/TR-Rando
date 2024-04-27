@@ -63,11 +63,6 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh));
     }
 
-    protected override List<TRMesh> GetModelMeshes(TR2Level level, TRModel model)
-    {
-        return TRMeshUtilities.GetModelMeshes(level, model);
-    }
-
     protected override List<TRModel> GetModels(TR2Level level)
     {
         return level.Models;

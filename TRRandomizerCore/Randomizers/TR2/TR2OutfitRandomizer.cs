@@ -318,14 +318,13 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             MeshEditor editor = new();
             foreach (TR2Type ent in entities)
             {
-                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
+                List<TRMesh> meshes = level.Data.Models.Find(m => m.ID == (uint)ent)?.Meshes;
                 if (meshes != null)
                 {
                     foreach (TRMesh mesh in meshes)
                     {
                         editor.Mesh = mesh;
                         editor.ClearAllPolygons();
-                        editor.WriteToLevel(level.Data);
                     }
                 }
             }
@@ -339,13 +338,15 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
 
         private void AdjustOutfit(TR2CombinedLevel level, TR2Type lara)
         {
+            TRModel laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
             if (level.Is(TR2LevelNames.HOME) && lara != TR2Type.LaraHome)
             {
                 // This ensures that Lara's hips match the new outfit for the starting animation and shower cutscene,
                 // otherwise the dressing gown hips are rendered, but the mesh is completely different for this, plus
                 // its textures will have been removed.
-                TRMesh laraMiscMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Type.LaraMiscAnim_H);
-                TRMesh laraHipsMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Type.Lara);
+                TRModel laraMiscModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.LaraMiscAnim_H);
+                TRMesh laraMiscMesh = laraMiscModel.Meshes[0];
+                TRMesh laraHipsMesh = laraModel.Meshes[0];
                 TRMeshUtilities.DuplicateMesh(level.Data, laraMiscMesh, laraHipsMesh);
             }
 
@@ -363,12 +364,11 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                     {
                         MeshEditor editor = new()
                         {
-                            Mesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Type.Lara)
+                            Mesh = laraModel.Meshes[0]
                         };
 
                         editor.RemoveTexturedRectangleRange(9, 43);
                         editor.RemoveTexturedTriangleRange(18, 38);
-                        editor.WriteToLevel(level.Data);
                     }
 
                     // If it's HSH, go one step further and remove the model itself, so Lara is imagining what the dagger
@@ -379,20 +379,18 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                         // so we basically just retain the hand.
                         MeshEditor editor = new()
                         {
-                            Mesh = TRMeshUtilities.GetModelMeshes(level.Data, TR2Type.LaraMiscAnim_H)[10]
+                            Mesh = level.Data.Models.Find(m => m.ID == (uint)TR2Type.LaraMiscAnim_H).Meshes[10]
                         };
 
                         editor.RemoveTexturedRectangleRange(6, 20);
                         editor.ClearTexturedTriangles();
-                        editor.WriteToLevel(level.Data);
 
                         // And hide it from the inventory
-                        foreach (TRMesh mesh in TRMeshUtilities.GetModelMeshes(level.Data, TR2Type.Puzzle1_M_H))
+                        foreach (TRMesh mesh in level.Data.Models.Find(m => m.ID == (uint)TR2Type.Puzzle1_M_H).Meshes)
                         {
                             editor.Mesh = mesh;
                             editor.ClearTexturedRectangles();
                             editor.ClearTexturedTriangles();
-                            editor.WriteToLevel(level.Data);
                         }
                     }
                 }

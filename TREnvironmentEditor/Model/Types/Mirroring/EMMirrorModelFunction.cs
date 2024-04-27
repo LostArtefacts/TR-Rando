@@ -1,5 +1,4 @@
-﻿using TRLevelControl.Helpers;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -13,13 +12,13 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            List<TRMesh> modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID);
-            if (modelMeshes == null || modelMeshes.Count > 1)
+            TRModel model = level.Models.Find(m => m.ID == modelID);
+            if (model == null || model.Meshes.Count > 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");
             }
 
-            meshes.Add(modelMeshes[0]);
+            meshes.Add(model.Meshes[0]);
         }
 
         MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
@@ -30,13 +29,13 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            List<TRMesh> modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID);
-            if (modelMeshes == null || modelMeshes.Count > 1)
+            TRModel model = level.Models.Find(m => m.ID == modelID);
+            if (model == null || model.Meshes.Count > 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");
             }
 
-            meshes.Add(modelMeshes[0]);
+            meshes.Add(model.Meshes[0]);
         }
 
         MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
@@ -47,13 +46,13 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            List<TRMesh> modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID);
-            if (modelMeshes == null || modelMeshes.Count> 1)
+            TRModel model = level.Models.Find(m => m.ID == modelID);
+            if (model == null || model.Meshes.Count > 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");
             }
 
-            meshes.Add(modelMeshes[0]);
+            meshes.Add(model.Meshes[0]);
         }
 
         MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);

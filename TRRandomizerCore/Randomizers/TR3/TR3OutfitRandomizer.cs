@@ -271,14 +271,13 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
             MeshEditor editor = new();
             foreach (TR3Type ent in entities)
             {
-                List<TRMesh> meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
+                List<TRMesh> meshes = level.Data.Models.Find(m => m.ID == (uint)ent)?.Meshes;
                 if (meshes != null)
                 {
                     foreach (TRMesh mesh in meshes)
                     {
                         editor.Mesh = mesh;
                         editor.ClearAllPolygons();
-                        editor.WriteToLevel(level.Data);
                     }
                 }
             }

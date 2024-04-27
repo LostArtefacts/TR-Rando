@@ -91,11 +91,6 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh));
     }
 
-    protected override List<TRMesh> GetModelMeshes(TR1Level level, TRModel model)
-    {
-        return TRMeshUtilities.GetModelMeshes(level, model);
-    }
-
     protected override List<TRModel> GetModels(TR1Level level)
     {
         return level.Models;
@@ -293,7 +288,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
                 continue;
             }
 
-            foreach (TRMesh mesh in TRMeshUtilities.GetModelMeshes(level, type))
+            foreach (TRMesh mesh in level.Models.Find(m => m.ID == (uint)type).Meshes)
             {
                 if (mesh.TexturedRectangles.Any(f => f.Texture == textureIndex))
                 {

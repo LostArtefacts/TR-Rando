@@ -169,7 +169,8 @@ public class TRObjectMeshBuilder : IMeshProvider
         }
     }
 
-    public byte[] Serialize(TRMesh mesh, uint meshPointer)
+    // The pointer here is only required if original mesh padding has been observed.
+    public byte[] Serialize(TRMesh mesh, uint meshPointer = 0)
     {
         using MemoryStream stream = new();
         TRLevelWriter writer = new(stream);
