@@ -9,23 +9,23 @@ public class EMMirrorModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        IEnumerable<TRModel> meshes = level.Models
+        IEnumerable<TRModel> models = level.Models
             .Where(m => ModelIDs.Contains(m.ID) && m.Meshes.Count == 1);
-        MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
+        MirrorObjectTextures(MirrorMeshes(models), level.ObjectTextures);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        IEnumerable<TRModel> meshes = level.Models
+        IEnumerable<TRModel> models = level.Models
             .Where(m => ModelIDs.Contains(m.ID) && m.Meshes.Count == 1);
-        MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
+        MirrorObjectTextures(MirrorMeshes(models), level.ObjectTextures);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        IEnumerable<TRModel> meshes = level.Models
+        IEnumerable<TRModel> models = level.Models
             .Where(m => ModelIDs.Contains(m.ID) && m.Meshes.Count == 1);
-        MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
+        MirrorObjectTextures(MirrorMeshes(models), level.ObjectTextures);
     }
 
     private static ISet<ushort> MirrorMeshes(IEnumerable<TRModel> models)
