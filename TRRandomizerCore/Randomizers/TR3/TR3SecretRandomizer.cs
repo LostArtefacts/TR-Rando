@@ -465,15 +465,9 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 // We have a free slot, so duplicate a model
                 TR3Type baseArtefact = pickupTypes[_generator.Next(0, pickupTypes.Count)];
                 TRModel artefactMenuModel = level.Data.Models.Find(m => m.ID == (uint)artefacts[baseArtefact]);
-                level.Data.Models.Add(new()
-                {
-                    Animation = artefactMenuModel.Animation,
-                    FrameOffset = artefactMenuModel.FrameOffset,
-                    ID = (uint)availableMenuType,
-                    MeshTree = artefactMenuModel.MeshTree,
-                    NumMeshes = artefactMenuModel.NumMeshes,
-                    StartingMesh = artefactMenuModel.StartingMesh
-                });
+                TRModel availableModel = artefactMenuModel.Clone();
+                availableModel.ID = (uint)availableMenuType;
+                level.Data.Models.Add(availableModel);
 
                 // Add a script name - pull from GamestringRando once translations completed
                 SetPuzzleTypeName(level, availablePickupType, "Infinite Medi Packs");
@@ -839,15 +833,9 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         // to duplicate the models instead of replacing them, otherwise the carried-over
                         // artefacts from previous levels are invisible.
                         TRModel menuModel = level.Data.Models.Find(m => m.ID == (uint)artefactMenuType);
-                        level.Data.Models.Add(new()
-                        {
-                            Animation = menuModel.Animation,
-                            FrameOffset = menuModel.FrameOffset,
-                            ID = (uint)puzzleMenuType,
-                            MeshTree = menuModel.MeshTree,
-                            NumMeshes = menuModel.NumMeshes,
-                            StartingMesh = menuModel.StartingMesh
-                        });
+                        TRModel newModel = menuModel.Clone();
+                        newModel.ID = (uint)puzzleMenuType;
+                        level.Data.Models.Add(newModel);
 
                         // Remove this puzzle type from the available pool
                         allocation.AvailablePickupModels.RemoveAt(0);

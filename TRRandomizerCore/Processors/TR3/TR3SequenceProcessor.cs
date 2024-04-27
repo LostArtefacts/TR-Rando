@@ -276,15 +276,9 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         {
             TR3Type replacement = _artefactAssignment[artefact];
             TRModel artefactModel = level.Data.Models.Find(m => m.ID == (uint)artefact);
-            level.Data.Models.Add(new()
-            {
-                Animation = artefactModel.Animation,
-                FrameOffset = artefactModel.FrameOffset,
-                ID = (uint)replacement,
-                MeshTree = artefactModel.MeshTree,
-                NumMeshes = artefactModel.NumMeshes,
-                StartingMesh = artefactModel.StartingMesh
-            });
+            TRModel replacementModel = artefactModel.Clone();
+            replacementModel.ID = (uint)replacement;
+            level.Data.Models.Add(replacementModel);
 
             level.Data.Entities
                 .FindAll(e => e.TypeID == artefact)

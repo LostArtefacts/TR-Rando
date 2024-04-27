@@ -1,18 +1,10 @@
 ﻿namespace TRLevelControl.Model;
 
-public class TRAnimCommand : ICloneable
+public abstract class TRAnimCommand : ICloneable
 {
-    public TRAnimCommandType Type { get; set; }
-    public List<short> Params { get; set; } = new();
+    public abstract TRAnimCommandType Type { get; }
 
-    public TRAnimCommand Clone()
-    {
-        return new()
-        {
-            Type = Type,
-            Params = new(Params),
-        };
-    }
+    public abstract TRAnimCommand Clone();
 
     object ICloneable.Clone()
         => Clone();

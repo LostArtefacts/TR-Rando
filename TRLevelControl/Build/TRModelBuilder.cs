@@ -93,7 +93,7 @@ public class TRModelBuilder
 
             placeholder.FrameOffset = reader.ReadUInt32();
             animation.FrameRate = reader.ReadByte();
-            animation.FrameSize = reader.ReadByte();
+            placeholder.FrameSize = reader.ReadByte();
             animation.StateID = reader.ReadUInt16();
             animation.Speed = reader.ReadFixed32();
             animation.Accel = reader.ReadFixed32();
@@ -113,9 +113,6 @@ public class TRModelBuilder
             placeholder.ChangeOffset = reader.ReadUInt16();
             placeholder.NumAnimCommands = reader.ReadUInt16();
             placeholder.AnimCommand = reader.ReadUInt16();
-
-            animation.Changes = new();
-            animation.Commands = new();
         }
     }
 
@@ -223,16 +220,13 @@ public class TRModelBuilder
             ID = placeholder.ID,
             NumMeshes = placeholder.NumMeshes,
             StartingMesh = placeholder.StartingMesh,
-            MeshTree = placeholder.MeshTree,
-            FrameOffset = placeholder.FrameOffset,
-            Animation = placeholder.Animation,
         };
 
         // Everything has a dummy mesh tree, so load one less than the mesh count
         int treePointer = (int)placeholder.MeshTree / sizeof(int);
-        for (int j = 0; j < placeholder.NumMeshes - 1; j++)
+        for (int i = 0; i < placeholder.NumMeshes - 1; i++)
         {
-            model.MeshTrees.Add(_trees[treePointer + j]);
+            model.MeshTrees.Add(_trees[treePointer + i]);
         }
 
         for (int i = 0; i < placeholder.AnimCount; i++)
@@ -269,12 +263,49 @@ public class TRModelBuilder
         animation.FrameEnd -= animation.FrameStart;
         animation.FrameStart = 0;
 
-        int offset = (int)placeholderAnimation.FrameOffset / sizeof(short);
-        int nextOffset = globalAnimIndex == _animations.Count - 1
-            ? _frames.Count
-            : (int)_placeholderAnimations[globalAnimIndex + 1].FrameOffset / sizeof(short);
+        animation.Frames = new();
+        int frameIndex = (int)placeholderAnimation.FrameOffset / sizeof(short);
+        uint numAnimFrames = 0;
 
-        animation.Frames = _frames.GetRange(offset, nextOffset - offset);
+        if (placeholderAnimation.FrameSize == 0)
+        {
+            if (_version == TRGameVersion.TR1)
+            {
+                numAnimFrames = (uint)(Math.Ceiling((animation.FrameEnd - animation.FrameStart) / (float)animation.FrameRate) + 1);
+            }
+        }
+        else
+        {
+            uint nextOffset = globalAnimIndex == _animations.Count - 1
+                ? (uint)(_frames.Count * sizeof(short))
+                : _placeholderAnimations[globalAnimIndex + 1].FrameOffset;
+
+            numAnimFrames = (nextOffset - placeholderAnimation.FrameOffset) / (uint)(sizeof(short) * placeholderAnimation.FrameSize);
+            if (numAnimFrames == 0)
+            {
+                // TR4 Lara anim 63 for example. Allow it to be observed, it will be zeroed on write.
+                _observer?.OnEmptyAnimFramesRead(globalAnimIndex, placeholderAnimation.FrameSize);
+            }
+        }
+
+        for (int i = 0; i < numAnimFrames; i++)
+        {
+            int frameIndexStart = frameIndex;
+            animation.Frames.Add(BuildFrame(ref frameIndex, placeholderModel.NumMeshes));
+
+            if (_version != TRGameVersion.TR1)
+            {
+                // All frames in an animation are aligned to the size of the largest one in TR2+. In addition, TR5 has frames aligned to 2 shorts,
+                // so we need to ensure the final frame is also padded. The padding is random, so it can be observed. Zeroed on write.
+                int padding = Math.Max(0, placeholderAnimation.FrameSize - frameIndex + frameIndexStart);
+                if (_version == TRGameVersion.TR5 && padding == 0 && _frames.Count % 2 == 0 && frameIndex == _frames.Count - 1)
+                {
+                    padding = 1;
+                }
+                _observer?.OnFramePaddingRead(globalAnimIndex, i, _frames.GetRange(frameIndex, padding));
+                frameIndex += padding;
+            }
+        }
 
         return animation;
     }
@@ -338,35 +369,69 @@ public class TRModelBuilder
         }
         else
         {
-            for (int i = 0; i < placeholderAnimation.NumAnimCommands; i++)
+            for (int i = 0; i < placeholderAnimation.NumAnimCommands && offset < _commands.Count; i++)
             {
-                TRAnimCommand command = new()
-                {
-                    Type = (TRAnimCommandType)_commands[offset++]
-                };
-                switch (command.Type)
+                TRAnimCommand command;
+                TRAnimCommandType type = (TRAnimCommandType)_commands[offset++];
+                switch (type)
                 {
                     case TRAnimCommandType.SetPosition:
-                        command.Params = new()
+                        command = new TRSetPositionCommand
                         {
-                            _commands[offset++], // X
-                            _commands[offset++], // Y
-                            _commands[offset++], // Z
+                            X = _commands[offset++],
+                            Y = _commands[offset++],
+                            Z = _commands[offset++],
                         };
                         break;
                     case TRAnimCommandType.JumpDistance:
-                        command.Params = new()
+                        command = new TRJumpDistanceCommand
                         {
-                            _commands[offset++], // VerticalSpeed
-                            _commands[offset++], // HorizontalSpeed
+                            VerticalSpeed = _commands[offset++],
+                            HorizontalSpeed = _commands[offset++],
                         };
                         break;
+                    case TRAnimCommandType.EmptyHands:
+                        command = new TREmptyHandsCommand();
+                        break;
+                    case TRAnimCommandType.Kill:
+                        command = new TRKillCommand();
+                        break;
                     case TRAnimCommandType.PlaySound:
-                    case TRAnimCommandType.FlipEffect:
-                        command.Params = new()
+                        short sfxFrame = (short)(_commands[offset++] - animation.FrameStart);
+                        short sfxID = _commands[offset++];
+                        command = new TRSFXCommand
                         {
-                            (short)(_commands[offset++] - animation.FrameStart), // Frame number, make it relative
-                            _commands[offset++], // (S)FX ID
+                            FrameNumber = sfxFrame,
+                            SoundID = (short)(sfxID & 0x3FFF),
+                            Environment = _version == TRGameVersion.TR1 ? TRSFXEnvironment.Any : (TRSFXEnvironment)(sfxID & 0xC000)
+                        };
+                        break;
+                    case TRAnimCommandType.FlipEffect:
+                        short fxFrame = (short)(_commands[offset++] - animation.FrameStart);
+                        short fxID = _commands[offset++];
+                        if (_version > TRGameVersion.TR2 && (fxID & 0x3FFF) == (int)TR3FX.Footprint)
+                        {
+                            command = new TRFootprintCommand
+                            {
+                                FrameNumber = fxFrame,
+                                Foot = (TRFootprint)(fxID & 0xC000),
+                            };
+                        }
+                        else
+                        {
+                            command = new TRFXCommand
+                            {
+                                FrameNumber = fxFrame,
+                                EffectID = fxID,
+                            };
+                        }
+                        break;
+                    default:
+                        // Karnak and Citadel Gate have these. Easier to store than observe as
+                        // index tracking gets far too complex.
+                        command = new TRNullCommand
+                        {
+                            Value = (short)type,
                         };
                         break;
                 }
@@ -381,6 +446,73 @@ public class TRModelBuilder
         }
 
         return animCommands;
+    }
+
+    private TRAnimFrame BuildFrame(ref int frameIndex, int numRotations)
+    {
+        TRAnimFrame frame = new()
+        {
+            Bounds = new()
+            {
+                MinX = _frames[frameIndex++],
+                MaxX = _frames[frameIndex++],
+                MinY = _frames[frameIndex++],
+                MaxY = _frames[frameIndex++],
+                MinZ = _frames[frameIndex++],
+                MaxZ = _frames[frameIndex++],
+            },
+            OffsetX = _frames[frameIndex++],
+            OffsetY = _frames[frameIndex++],
+            OffsetZ = _frames[frameIndex++],
+        };
+
+        // TR1 stores the mesh count, but this always matches the model mesh count
+        if (_version == TRGameVersion.TR1)
+        {
+            frameIndex++;
+        }
+
+        frame.Rotations = new();
+        for (int i = 0; i < numRotations; i++)
+        {
+            TRAnimFrameRotation rot = new();
+            frame.Rotations.Add(rot);
+
+            short rot0, rot1;
+            TRAngleMode rotMode = TRAngleMode.All;
+            if (_version == TRGameVersion.TR1)
+            {
+                // Reversed words
+                rot1 = _frames[frameIndex++];
+                rot0 = _frames[frameIndex++];
+            }
+            else
+            {
+                rot0 = _frames[frameIndex++];
+                rotMode = (TRAngleMode)(rot0 & 0xC000);
+                rot1 = rotMode == TRAngleMode.All
+                    ? _frames[frameIndex++]
+                    : GetSingleRotation(rot0);
+            }
+
+            switch (rotMode)
+            {
+                case TRAngleMode.X:
+                    rot.X = rot1;
+                    break;
+                case TRAngleMode.Y:
+                    rot.Y = rot1;
+                    break;
+                case TRAngleMode.Z:
+                    rot.Z = rot1;
+                    break;
+                default:
+                    UnpackRotation(rot, rot0, rot1);
+                    break;
+            }
+        }
+
+        return frame;
     }
 
     private void TestTR5Changes(List<TRModel> models)
@@ -428,8 +560,8 @@ public class TRModelBuilder
             {
                 frameBase += (ushort)(animation.FrameEnd + 1);
             }
-            _frames.AddRange(animation.Frames);
 
+            DeconstructFrames(placeholderAnimation, animation);
             DeconstructCommands(placeholderAnimation, animation);
 
             placeholderAnimation.ChangeOffset = (ushort)_placeholderChanges.Count;
@@ -454,26 +586,148 @@ public class TRModelBuilder
         }
     }
 
+    private void DeconstructFrames(PlaceholderAnimation placeholderAnimation, TRAnimation animation)
+    {
+        List<List<short>> unpaddedFrames = new();
+        int longestSet = 0;
+        foreach (TRAnimFrame frame in animation.Frames)
+        {
+            List<short> frameSet = Flatten(frame);
+            unpaddedFrames.Add(frameSet);
+            longestSet = Math.Max(longestSet, frameSet.Count);
+        }
+
+        if (_version != TRGameVersion.TR1)
+        {
+            placeholderAnimation.FrameSize = _observer?.GetEmptyAnimFrameSize(_placeholderAnimations.Count - 1) 
+                ?? (byte)longestSet;
+        }
+
+        for (int i = 0; i < unpaddedFrames.Count; i++)
+        {
+            List<short> frameSet = unpaddedFrames[i];
+            if (_version != TRGameVersion.TR1)
+            {
+                // Pad so that all frames are the same size as the largest one.
+                frameSet.AddRange(_observer?.GetFramePadding(_placeholderAnimations.Count - 1, i)
+                    ?? Enumerable.Repeat((short)0, longestSet - frameSet.Count));
+            }
+            _frames.AddRange(frameSet);
+        }
+    }
+
+    public List<short> Flatten(TRAnimFrame frame)
+    {
+        List<short> frames = new()
+        {
+            frame.Bounds.MinX,
+            frame.Bounds.MaxX,
+            frame.Bounds.MinY,
+            frame.Bounds.MaxY,
+            frame.Bounds.MinZ,
+            frame.Bounds.MaxZ,
+            frame.OffsetX,
+            frame.OffsetY,
+            frame.OffsetZ,
+        };
+
+        if (_version == TRGameVersion.TR1)
+        {
+            frames.Add((short)frame.Rotations.Count);
+        }
+
+        foreach (TRAnimFrameRotation rot in frame.Rotations)
+        {
+            int rotX = rot.X & 0x03FF;
+            int rotY = rot.Y & 0x03FF;
+            int rotZ = rot.Z & 0x03FF;
+
+            if (_version == TRGameVersion.TR1)
+            {
+                // Reverse order
+                frames.Add(PackYZRotation(rotY, rotZ));
+                frames.Add(PackXYRotation(rotX, rotY));
+            }
+            else
+            {
+                TRAngleMode mode = GetMode(rot);
+                switch (mode)
+                {
+                    case TRAngleMode.X:
+                        frames.Add(MaskSingleRotation(rot.X, mode));
+                        break;
+                    case TRAngleMode.Y:
+                        frames.Add(MaskSingleRotation(rot.Y, mode));
+                        break;
+                    case TRAngleMode.Z:
+                        frames.Add(MaskSingleRotation(rot.Z, mode));
+                        break;
+                    default:
+                        frames.Add(PackXYRotation(rotX, rotY));
+                        frames.Add(PackYZRotation(rotY, rotZ));
+                        break;
+                }
+            }
+        }
+
+        return frames;
+    }
+
     private void DeconstructCommands(PlaceholderAnimation placeholderAnimation, TRAnimation animation)
     {
         // NumAnimCommands may have been wrong on read, so test observers can restore.
         placeholderAnimation.AnimCommand = (ushort)_commands.Count;
-        placeholderAnimation.NumAnimCommands = _observer?.GetNumAnimCommands(_placeholderAnimations.Count - 1) ?? (ushort)animation.Commands.Count;
+        ushort commandCount = 0;
 
         foreach (TRAnimCommand cmd in animation.Commands)
         {
-            _commands.Add((short)cmd.Type);
-            if (cmd.Type == TRAnimCommandType.PlaySound || cmd.Type == TRAnimCommandType.FlipEffect)
+            List<short> values = new();
+            bool validCommand = true;
+
+            switch (cmd)
             {
-                Debug.Assert(cmd.Params.Count == 2);
-                _commands.Add((short)(cmd.Params[0] + placeholderAnimation.RelFrameStart));
-                _commands.Add(cmd.Params[1]);
+                case TRSetPositionCommand setCmd:
+                    values.Add(setCmd.X);
+                    values.Add(setCmd.Y);
+                    values.Add(setCmd.Z);
+                    break;
+                case TRJumpDistanceCommand jumpCmd:
+                    values.Add(jumpCmd.VerticalSpeed);
+                    values.Add(jumpCmd.HorizontalSpeed);
+                    break;
+                case TRFXCommand flipCmd:
+                    values.Add((short)(flipCmd.FrameNumber + placeholderAnimation.RelFrameStart));
+                    values.Add(flipCmd.EffectID);
+                    break;
+                case TRFootprintCommand footCmd:
+                    if (validCommand = _version >= TRGameVersion.TR3)
+                    {
+                        values.Add((short)(footCmd.FrameNumber + placeholderAnimation.RelFrameStart));
+                        values.Add((short)((int)TR3FX.Footprint | (int)footCmd.Foot));
+                    }
+                    break;
+                case TRSFXCommand sfxCmd:
+                    {
+                        short soundID = sfxCmd.SoundID;
+                        if (_version > TRGameVersion.TR1)
+                        {
+                            soundID = (short)((int)soundID | (int)sfxCmd.Environment);
+                        }
+                        values.Add((short)(sfxCmd.FrameNumber + placeholderAnimation.RelFrameStart));
+                        values.Add(soundID);
+                        break;
+                    }
             }
-            else
+
+            if (validCommand)
             {
-                _commands.AddRange(cmd.Params);
+                _commands.Add(cmd is TRNullCommand nullCmd ? nullCmd.Value : (short)cmd.Type);
+                _commands.AddRange(values);
+                commandCount++;
             }
         }
+
+        placeholderAnimation.NumAnimCommands = _observer?.GetNumAnimCommands(_placeholderAnimations.Count - 1) ?? commandCount;
     }
 
     private void RestoreTR5Extras()
@@ -523,7 +777,7 @@ public class TRModelBuilder
 
                 writer.Write(placeholderAnimation.FrameOffset);
                 writer.Write(animation.FrameRate);
-                writer.Write(animation.FrameSize);
+                writer.Write(placeholderAnimation.FrameSize);
                 writer.Write(animation.StateID);
                 writer.Write(animation.Speed);
                 writer.Write(animation.Accel);
@@ -627,6 +881,60 @@ public class TRModelBuilder
         }
     }
 
+    private static TRAngleMode GetMode(TRAnimFrameRotation rot)
+    {
+        if (rot.X == 0 && rot.Y == 0)
+        {
+            return TRAngleMode.Z;
+        }
+        if (rot.X == 0 && rot.Z == 0)
+        {
+            return TRAngleMode.Y;
+        }
+        if (rot.Y == 0 && rot.Z == 0)
+        {
+            return TRAngleMode.X;
+        }
+        return TRAngleMode.All;
+    }
+
+    private static void UnpackRotation(TRAnimFrameRotation rot, short rot0, short rot1)
+    {
+        rot.X = (short)((rot0 & 0x3FF0) >> 4);
+        rot.Y = (short)(((rot0 & 0x000F) << 6) | ((rot1 & 0xFC00) >> 10));
+        rot.Z = (short)(rot1 & 0x03FF);
+    }
+
+    private static short PackXYRotation(int x, int y)
+    {
+        return (short)((x << 4) | ((y & 0x0FC0) >> 6));
+    }
+
+    private static short PackYZRotation(int y, int z)
+    {
+        return (short)(((y & 0x003F) << 10) | (z & 0x03FF));
+    }
+
+    private short GetSingleRotation(int angle)
+    {
+        if (_version < TRGameVersion.TR4)
+        {
+            return (short)(angle & 0x03FF);
+        }
+
+        return (short)(angle & 0x0FFF);
+    }
+
+    private short MaskSingleRotation(int angle, TRAngleMode mode)
+    {
+        if (_version < TRGameVersion.TR4)
+        {
+            return (short)((angle & 0x03FF) | (int)mode);
+        }
+
+        return (short)((angle & 0x0FFF) | (int)mode);
+    }
+
     // Information we need for building, but do not want to retain.
     class PlaceholderModel
     {
@@ -641,6 +949,7 @@ public class TRModelBuilder
 
     class PlaceholderAnimation
     {
+        public byte FrameSize { get; set; }
         public uint FrameOffset { get; set; }
         public ushort RelFrameStart { get; set; }
         public ushort NumStateChanges { get; set; }

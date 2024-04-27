@@ -1,8 +1,6 @@
-﻿using System.Text;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TRModel
+public class TRModel : ICloneable
 {
     public List<TRAnimation> Animations { get; set; } = new();
     public List<TRMeshTreeNode> MeshTrees { get; set; } = new();
@@ -12,23 +10,18 @@ public class TRModel
 
     public ushort StartingMesh { get; set; }
 
-    public uint MeshTree { get; set; }
-
-    public uint FrameOffset { get; set; }
-
-    public ushort Animation { get; set; }
-
-    public override string ToString()
+    public TRModel Clone()
     {
-        StringBuilder sb = new(base.ToString());
-
-        sb.Append(" ID: " + ID);
-        sb.Append(" NumMeshes: " + NumMeshes);
-        sb.Append(" StartingMesh: " + StartingMesh);
-        sb.Append(" MeshTree: " + MeshTree);
-        sb.Append(" FrameOffset: " + FrameOffset);
-        sb.Append(" Animation: " + Animation);
-
-        return sb.ToString();
+        return new()
+        {
+            Animations = new(Animations.Select(a => a.Clone())),
+            MeshTrees = new(MeshTrees.Select(m => m.Clone())),
+            ID = ID,
+            NumMeshes = NumMeshes,
+            StartingMesh = StartingMesh,
+        };
     }
+
+    object ICloneable.Clone()
+        => Clone();
 }

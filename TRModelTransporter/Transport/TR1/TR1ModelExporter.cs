@@ -101,14 +101,10 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRAnimation anim = model.Animations[10];
 
         // On the 2nd frame, play SFX 44 (magnums)
-        anim.Commands.Add(new()
+        anim.Commands.Add(new TRSFXCommand
         {
-            Type = TRAnimCommandType.PlaySound,
-            Params = new()
-            {
-                1,
-                (short)TR1SFX.LaraMagnums,
-            }
+            FrameNumber = 1,
+            SoundID = (short)TR1SFX.LaraMagnums,
         });
     }
 
@@ -119,14 +115,10 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRAnimation anim = model.Animations[12];
 
         // On the 61st frame, play SFX 159 (death)
-        anim.Commands.Add(new()
+        anim.Commands.Add(new TRSFXCommand
         {
-            Type = TRAnimCommandType.PlaySound,
-            Params = new()
-            {
-                60,
-                (short)TR1SFX.PierreDeath,
-            }
+            FrameNumber = 60,
+            SoundID = (short)TR1SFX.PierreDeath,
         });
     }
 
@@ -137,14 +129,10 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRAnimation anim = model.Animations[15];
 
         // On the 2nd frame, play SFX 158 (death)
-        anim.Commands.Add(new()
+        anim.Commands.Add(new TRSFXCommand
         {
-            Type = TRAnimCommandType.PlaySound,
-            Params = new()
-            {
-                1,
-                (short)TR1SFX.LarsonDeath,
-            }
+            FrameNumber = 1,
+            SoundID = (short)TR1SFX.LarsonDeath,
         });
     }
 
@@ -154,7 +142,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         // Get his death animation
         TRAnimation anim = model.Animations[13];
         // Play the death sound on the 2nd frame (doesn't work on the 1st, which is OG).
-        anim.Commands[2].Params[0]++;
+        (anim.Commands[2] as TRSFXCommand).FrameNumber++;
     }
 
     public static void AmendNatlaDeath(TR1Level level)
@@ -164,14 +152,10 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         TRAnimation anim = model.Animations[13];
 
         // On the 5th frame, play SFX 160 (death)
-        anim.Commands.Add(new()
+        anim.Commands.Add(new TRSFXCommand
         {
-            Type = TRAnimCommandType.PlaySound,
-            Params = new()
-            {
-                4,
-                (short)TR1SFX.NatlaDeath,
-            }
+            FrameNumber = 4,
+            SoundID = (short)TR1SFX.NatlaDeath,
         });
     }
 
@@ -192,14 +176,9 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
             TRAnimation anim = model.Animations[i];
 
             // On the 1st frame, play SFX 162
-            anim.Commands.Add(new()
+            anim.Commands.Add(new TRSFXCommand
             {
-                Type = TRAnimCommandType.PlaySound,
-                Params = new()
-                {
-                    0,
-                    (short)TR1SFX.TrapdoorClose,
-                }
+                SoundID = (short)TR1SFX.TrapdoorClose,
             });
         }
     }

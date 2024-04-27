@@ -3,13 +3,14 @@ using TRLevelControl.Model;
 
 namespace TRLevelControlTests;
 
-public class TR4Observer : TR2Observer
+public class TR4Observer : TR3Observer
 {
     private readonly Dictionary<TRChunkType, ZipWrapper> _inflatedReads = new();
     private readonly Dictionary<TRChunkType, ZipWrapper> _inflatedWrites = new();
 
     private readonly Dictionary<uint, List<byte>> _meshPadding = new();
     private readonly Dictionary<int, ushort> _badAnimCmdCounts = new();
+    private readonly Dictionary<int, byte> _emptyAnimFrameSizes = new();
 
     private uint[] _sampleIndices;
 
@@ -82,6 +83,16 @@ public class TR4Observer : TR2Observer
     public override ushort? GetNumAnimCommands(int animIndex)
     {
         return _badAnimCmdCounts.ContainsKey(animIndex) ? _badAnimCmdCounts[animIndex] : null;
+    }
+
+    public override void OnEmptyAnimFramesRead(int animIndex, byte frameSize)
+    {
+        _emptyAnimFrameSizes[animIndex] = frameSize;
+    }
+
+    public override byte? GetEmptyAnimFrameSize(int animIndex)
+    {
+        return _emptyAnimFrameSizes.ContainsKey(animIndex) ? _emptyAnimFrameSizes[animIndex] : null;
     }
 
     public override void OnSampleIndicesRead(uint[] sampleIndices)

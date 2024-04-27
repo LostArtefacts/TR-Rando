@@ -1,38 +1,25 @@
-﻿using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TRAnimFrame : ISerializableCompact
+public class TRAnimFrame : ICloneable
 {
-    public TRBoundingBox Box { get; set; }
-
+    public TRBoundingBox Bounds { get; set; }
     public short OffsetX { get; set; }
-
     public short OffsetY { get; set; }
-
     public short OffsetZ { get; set; }
+    public List<TRAnimFrameRotation> Rotations { get; set; }
 
-    public short NumValues { get; set; }
-
-    public ushort[] AngleSets { get; set; }
-
-    public byte[] Serialize()
+    public TRAnimFrame Clone()
     {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
+        return new()
         {
-            writer.Write(Box.Serialize());
-            writer.Write(OffsetX);
-            writer.Write(OffsetY);
-            writer.Write(OffsetZ);
-            writer.Write(NumValues);
-
-            foreach (ushort val in AngleSets)
-            {
-                writer.Write(val);
-            }
-        }
-
-        return stream.ToArray();
+            Bounds = Bounds.Clone(),
+            OffsetX = OffsetX,
+            OffsetY = OffsetY,
+            OffsetZ = OffsetZ,
+            Rotations = new(Rotations.Select(r => r.Clone()))
+        };
     }
+
+    object ICloneable.Clone()
+        => Clone();
 }

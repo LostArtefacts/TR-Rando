@@ -730,8 +730,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 if (existingModel != null)
                 {
                     TRModel newModel = level.Data.Models.Find(m => m.ID == (uint)TR1Type.LaraMiscAnim_H);
-                    newModel.Animation = existingModel.Animation;
-                    newModel.FrameOffset = existingModel.FrameOffset;
+                    newModel.Animations = existingModel.Animations;
                 }
 
                 return true;
