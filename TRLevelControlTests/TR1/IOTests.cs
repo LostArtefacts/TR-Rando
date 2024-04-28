@@ -10,57 +10,19 @@ namespace TRLevelControlTests.TR1;
 [TestCategory("OriginalIO")]
 public class IOTests : TestBase
 {
+    public static IEnumerable<object[]> GetAllLevels() => GetLevelNames(TR1LevelNames.AsOrderedList);
+    public static IEnumerable<object[]> GetBaseLevels() => GetLevelNames(TR1LevelNames.AsOrderedList.Except(TR1LevelNames.AsListGold));
+    public static IEnumerable<object[]> GetGoldLevels() => GetLevelNames(TR1LevelNames.AsListGold);
+
     [TestMethod]
-    [DataRow(TR1LevelNames.ASSAULT)]
-    [DataRow(TR1LevelNames.CAVES)]
-    [DataRow(TR1LevelNames.VILCABAMBA)]
-    [DataRow(TR1LevelNames.VALLEY)]
-    [DataRow(TR1LevelNames.QUALOPEC)]
-    [DataRow(TR1LevelNames.QUALOPEC_CUT)]
-    [DataRow(TR1LevelNames.FOLLY)]
-    [DataRow(TR1LevelNames.COLOSSEUM)]
-    [DataRow(TR1LevelNames.MIDAS)]
-    [DataRow(TR1LevelNames.CISTERN)]
-    [DataRow(TR1LevelNames.TIHOCAN)]
-    [DataRow(TR1LevelNames.TIHOCAN_CUT)]
-    [DataRow(TR1LevelNames.KHAMOON)]
-    [DataRow(TR1LevelNames.OBELISK)]
-    [DataRow(TR1LevelNames.SANCTUARY)]
-    [DataRow(TR1LevelNames.MINES)]
-    [DataRow(TR1LevelNames.MINES_CUT)]
-    [DataRow(TR1LevelNames.ATLANTIS)]
-    [DataRow(TR1LevelNames.ATLANTIS_CUT)]
-    [DataRow(TR1LevelNames.PYRAMID)]
-    [DataRow(TR1LevelNames.EGYPT)]
-    [DataRow(TR1LevelNames.CAT)]
-    [DataRow(TR1LevelNames.HIVE)]
-    [DataRow(TR1LevelNames.STRONGHOLD)]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
     public void TestReadWrite(string levelName)
     {
         ReadWriteLevel(levelName, TRGameVersion.TR1);
     }
 
     [TestMethod]
-    [DataRow(TR1LevelNames.ASSAULT)]
-    [DataRow(TR1LevelNames.CAVES)]
-    [DataRow(TR1LevelNames.VILCABAMBA)]
-    [DataRow(TR1LevelNames.VALLEY)]
-    [DataRow(TR1LevelNames.QUALOPEC)]
-    [DataRow(TR1LevelNames.QUALOPEC_CUT)]
-    [DataRow(TR1LevelNames.FOLLY)]
-    [DataRow(TR1LevelNames.COLOSSEUM)]
-    [DataRow(TR1LevelNames.MIDAS)]
-    [DataRow(TR1LevelNames.CISTERN)]
-    [DataRow(TR1LevelNames.TIHOCAN)]
-    [DataRow(TR1LevelNames.TIHOCAN_CUT)]
-    [DataRow(TR1LevelNames.KHAMOON)]
-    [DataRow(TR1LevelNames.OBELISK)]
-    [DataRow(TR1LevelNames.SANCTUARY)]
-    [DataRow(TR1LevelNames.MINES)]
-    [DataRow(TR1LevelNames.MINES_CUT)]
-    [DataRow(TR1LevelNames.ATLANTIS)]
-    [DataRow(TR1LevelNames.ATLANTIS_CUT)]
-    [DataRow(TR1LevelNames.PYRAMID)]
+    [DynamicData(nameof(GetBaseLevels), DynamicDataSourceType.Method)]
     public void TestFloorData(string levelName)
     {
         TR1Level level = GetTR1Level(levelName);
@@ -78,10 +40,7 @@ public class IOTests : TestBase
     }
 
     [TestMethod]
-    [DataRow(TR1LevelNames.EGYPT)]
-    [DataRow(TR1LevelNames.CAT)]
-    [DataRow(TR1LevelNames.STRONGHOLD)]
-    [DataRow(TR1LevelNames.HIVE)]
+    [DynamicData(nameof(GetGoldLevels), DynamicDataSourceType.Method)]
     public void TestAgressiveFloorData(string levelName)
     {
         // The UB levels seem to have been compiled with agressive FD packing.

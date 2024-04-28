@@ -168,4 +168,12 @@ public class TestBase
         control.Write(level, ms);
         return control.Read(new MemoryStream(ms.ToArray()));
     }
+
+    public static IEnumerable<object[]> GetLevelNames(IEnumerable<string> names)
+    {
+        foreach (string lvl in names)
+        {
+            yield return new object[] { lvl };
+        }
+    }
 }
