@@ -123,7 +123,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             floorData.ParseFromLevel(level.Data);
 
             _audioRandomizer.ResetFloorMap();
-            foreach (TRRoom room in level.Data.Rooms.Where(r => (r.Flags & EMLockMusicFunction.LockedMusicFlag) == 0))
+            foreach (TR1Room room in level.Data.Rooms.Where(r => (r.Flags & EMLockMusicFunction.LockedMusicFlag) == 0))
             {
                 _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
                 {

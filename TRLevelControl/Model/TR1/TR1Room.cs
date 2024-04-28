@@ -2,7 +2,7 @@
 
 namespace TRLevelControl.Model;
 
-public class TRRoom : ISerializableCompact
+public class TR1Room : ISerializableCompact
 {
     public TRRoomInfo Info { get; set; }
 
@@ -10,7 +10,7 @@ public class TRRoom : ISerializableCompact
 
     public ushort[] Data { get; set; }
 
-    public TRRoomData RoomData { get; set; }
+    public TR1RoomData RoomData { get; set; }
 
     public ushort NumPortals { get; set; }
 
@@ -26,11 +26,11 @@ public class TRRoom : ISerializableCompact
 
     public ushort NumLights { get; set; }
 
-    public TRRoomLight[] Lights { get; set; }
+    public TR1RoomLight[] Lights { get; set; }
 
     public ushort NumStaticMeshes { get; set; }
 
-    public TRRoomStaticMesh[] StaticMeshes { get; set; }
+    public TR1RoomStaticMesh[] StaticMeshes { get; set; }
 
     public short AlternateRoom { get; set; }
 
@@ -61,7 +61,7 @@ public class TRRoom : ISerializableCompact
     //Light intensity = 0 (dark) - 0x1FFF (bright)!!!
     public void SetLights(ushort val)
     {
-        foreach (TRRoomLight light in Lights)
+        foreach (TR1RoomLight light in Lights)
         {
             light.Intensity = val;
         }
@@ -69,7 +69,7 @@ public class TRRoom : ISerializableCompact
 
     public void SetStaticMeshLights(ushort val)
     {
-        foreach (TRRoomStaticMesh mesh in StaticMeshes)
+        foreach (TR1RoomStaticMesh mesh in StaticMeshes)
         {
             mesh.Intensity = val;
         }
@@ -77,7 +77,7 @@ public class TRRoom : ISerializableCompact
 
     public void SetVertexLight(short val)
     {
-        foreach (TRRoomVertex vert in RoomData.Vertices)
+        foreach (TR1RoomVertex vert in RoomData.Vertices)
         {
             vert.Lighting = val;
         }
@@ -115,14 +115,14 @@ public class TRRoom : ISerializableCompact
             writer.Write(AmbientIntensity);
             writer.Write(NumLights);
 
-            foreach (TRRoomLight light in Lights)
+            foreach (TR1RoomLight light in Lights)
             {
                 writer.Write(light.Serialize());
             }
 
             writer.Write(NumStaticMeshes);
 
-            foreach (TRRoomStaticMesh mesh in StaticMeshes)
+            foreach (TR1RoomStaticMesh mesh in StaticMeshes)
             {
                 writer.Write(mesh.Serialize());
             }

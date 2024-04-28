@@ -86,7 +86,7 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
                 continue;
             }
 
-            TRRoom room = level.Data.Rooms[i];
+            TR1Room room = level.Data.Rooms[i];
             room.SetAmbient(intensity1);
             room.SetLights(intensity2);
             room.SetStaticMeshLights((ushort)intensity1);

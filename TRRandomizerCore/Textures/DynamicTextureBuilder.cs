@@ -71,7 +71,7 @@ public class DynamicTextureBuilder
         ISet<TRMesh> modelMeshes = new HashSet<TRMesh>();
 
         // Collect unique room and room sprite textures
-        foreach (TRRoom room in level.Data.Rooms)
+        foreach (TR1Room room in level.Data.Rooms)
         {
             foreach (TRFace3 f in room.RoomData.Triangles)
                 defaultObjectTextures.Add(f.Texture);

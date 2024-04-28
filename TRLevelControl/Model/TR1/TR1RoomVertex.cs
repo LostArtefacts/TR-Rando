@@ -2,7 +2,7 @@
 
 namespace TRLevelControl.Model;
 
-public class TRRoomVertex : ISerializableCompact
+public class TR1RoomVertex : ISerializableCompact
 {
     public TRVertex Vertex { get; set; }
 

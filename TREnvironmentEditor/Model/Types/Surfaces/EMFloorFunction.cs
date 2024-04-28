@@ -53,7 +53,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         fdc.ParseFromLevel(level);
 
         short roomNumber = data.ConvertRoom(Location.Room);
-        TRRoom room = level.Rooms[roomNumber];
+        TR1Room room = level.Rooms[roomNumber];
         TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, fdc);
         int sectorIndex = room.Sectors.ToList().IndexOf(sector);
 
@@ -62,7 +62,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
         short y = (short)(sector.Floor * TRConsts.Step1);
 
-        List<TRRoomVertex> vertices = room.RoomData.Vertices.ToList();
+        List<TR1RoomVertex> vertices = room.RoomData.Vertices.ToList();
         List<ushort> oldVertIndices = new();
 
         List<TRVertex> defVerts = GetTileVertices(x, y, z, false);
@@ -92,7 +92,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
-            TRRoomVertex oldRoomVertex = vertices[vert];
+            TR1RoomVertex oldRoomVertex = vertices[vert];
             TRVertex oldVert = vertices[vert].Vertex;
             TRVertex newVertex = new()
             {
@@ -207,7 +207,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private static void AlterSectorBox(TR1Level level, TRRoom room, int sectorIndex)
+    private static void AlterSectorBox(TR1Level level, TR1Room room, int sectorIndex)
     {
         TRRoomSector sector = room.Sectors[sectorIndex];
         if (sector.BoxIndex == ushort.MaxValue)

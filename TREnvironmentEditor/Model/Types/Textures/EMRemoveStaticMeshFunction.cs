@@ -14,14 +14,14 @@ public class EMRemoveStaticMeshFunction : BaseEMFunction
 
         if (Location != null)
         {
-            TRRoom room = level.Rooms[data.ConvertRoom(Location.Room)];
-            List<TRRoomStaticMesh> meshes = room.StaticMeshes.ToList();
+            TR1Room room = level.Rooms[data.ConvertRoom(Location.Room)];
+            List<TR1RoomStaticMesh> meshes = room.StaticMeshes.ToList();
 
             uint x = (uint)Location.X;
             uint y = (uint)(Location.Y < 0 ? uint.MaxValue + Location.Y : Location.Y);
             uint z = (uint)Location.Z;
 
-            TRRoomStaticMesh match = meshes.Find(m => m.X == x && m.Y == y && m.Z == z);
+            TR1RoomStaticMesh match = meshes.Find(m => m.X == x && m.Y == y && m.Z == z);
             if (match != null)
             {
                 meshes.Remove(match);
@@ -36,8 +36,8 @@ public class EMRemoveStaticMeshFunction : BaseEMFunction
             {
                 foreach (int roomNumber in ClearFromRooms[meshID])
                 {
-                    TRRoom room = level.Rooms[data.ConvertRoom(roomNumber)];
-                    List<TRRoomStaticMesh> meshes = room.StaticMeshes.ToList();
+                    TR1Room room = level.Rooms[data.ConvertRoom(roomNumber)];
+                    List<TR1RoomStaticMesh> meshes = room.StaticMeshes.ToList();
                     if (meshes.RemoveAll(m => m.MeshID == meshID) > 0)
                     {
                         room.StaticMeshes = meshes.ToArray();

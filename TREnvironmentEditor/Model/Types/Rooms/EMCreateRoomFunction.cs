@@ -23,7 +23,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        TRRoom room = new()
+        TR1Room room = new()
         {
             NumXSectors = Width,
             NumZSectors = Depth,
@@ -33,7 +33,7 @@ public class EMCreateRoomFunction : BaseEMFunction
             NumPortals = 0,
             NumStaticMeshes = 0,
             Portals = Array.Empty<TRRoomPortal>(),
-            StaticMeshes = Array.Empty<TRRoomStaticMesh>(),
+            StaticMeshes = Array.Empty<TR1RoomStaticMesh>(),
             Info = new TRRoomInfo
             {
                 X = Location.X,
@@ -41,7 +41,7 @@ public class EMCreateRoomFunction : BaseEMFunction
                 YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
-            RoomData = new TRRoomData
+            RoomData = new TR1RoomData
             {
                 // Ignored for now
                 NumSprites = 0,
@@ -51,11 +51,11 @@ public class EMCreateRoomFunction : BaseEMFunction
             }
         };
 
-        room.Lights = new TRRoomLight[room.NumLights];
+        room.Lights = new TR1RoomLight[room.NumLights];
         for (int i = 0; i < room.NumLights; i++)
         {
             EMRoomLight light = Lights[i];
-            room.Lights[i] = new TRRoomLight
+            room.Lights[i] = new TR1RoomLight
             {
                 X = light.X + Location.X,
                 Y = light.Y + Location.Y,
@@ -90,7 +90,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         room.RoomData.NumRectangles = (short)faces.Count;
         room.RoomData.NumVertices = (short)vertices.Count;
         room.RoomData.Rectangles = faces.ToArray();
-        room.RoomData.Vertices = vertices.Select(v => new TRRoomVertex
+        room.RoomData.Vertices = vertices.Select(v => new TR1RoomVertex
         {
             Lighting = DefaultVertex.Lighting,
             Vertex = v

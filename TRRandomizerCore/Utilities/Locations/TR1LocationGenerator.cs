@@ -24,7 +24,7 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Level>
 
     protected override TRRoomSector GetSector(int x, int z, int roomIndex, TR1Level level)
     {
-        TRRoom room = level.Rooms[roomIndex];
+        TR1Room room = level.Rooms[roomIndex];
         return FDUtilities.GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
     }
 
@@ -63,7 +63,7 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Level>
     protected override Dictionary<ushort, List<Location>> GetRoomStaticMeshLocations(TR1Level level, short room)
     {
         Dictionary<ushort, List<Location>> locations = new();
-        foreach (TRRoomStaticMesh staticMesh in level.Rooms[room].StaticMeshes)
+        foreach (TR1RoomStaticMesh staticMesh in level.Rooms[room].StaticMeshes)
         {
             if (!locations.ContainsKey(staticMesh.MeshID))
             {

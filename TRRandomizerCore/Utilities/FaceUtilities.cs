@@ -14,7 +14,7 @@ public static class FaceUtilities
         floorData.ParseFromLevel(level);
 
         List<TRFace4> faces = new();
-        foreach (TRRoom room in level.Rooms)
+        foreach (TR1Room room in level.Rooms)
         {
             faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
             {

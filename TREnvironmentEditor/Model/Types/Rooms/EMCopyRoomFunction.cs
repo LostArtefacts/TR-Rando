@@ -18,13 +18,13 @@ public class EMCopyRoomFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        TRRoom baseRoom = level.Rooms[data.ConvertRoom(RoomIndex)];
+        TR1Room baseRoom = level.Rooms[data.ConvertRoom(RoomIndex)];
 
         int xdiff = NewLocation.X - baseRoom.Info.X;
         int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
         int zdiff = NewLocation.Z - baseRoom.Info.Z;
 
-        TRRoom newRoom = new()
+        TR1Room newRoom = new()
         {
             AlternateRoom = -1,
             AmbientIntensity = baseRoom.AmbientIntensity,
@@ -36,7 +36,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                 YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
                 Z = NewLocation.Z
             },
-            Lights = new TRRoomLight[baseRoom.NumLights],
+            Lights = new TR1RoomLight[baseRoom.NumLights],
             
             NumDataWords = baseRoom.NumDataWords,
             NumLights = baseRoom.NumLights,
@@ -45,7 +45,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
             Portals = Array.Empty<TRRoomPortal>(),
-            RoomData = new TRRoomData
+            RoomData = new TR1RoomData
             {
                 NumRectangles = baseRoom.RoomData.NumRectangles,
                 NumSprites = baseRoom.RoomData.NumSprites,
@@ -54,16 +54,16 @@ public class EMCopyRoomFunction : BaseEMFunction
                 Rectangles = new TRFace4[baseRoom.RoomData.NumRectangles],
                 Sprites = new TRRoomSprite[baseRoom.RoomData.NumSprites],
                 Triangles = new TRFace3[baseRoom.RoomData.NumTriangles],
-                Vertices = new TRRoomVertex[baseRoom.RoomData.NumVertices]
+                Vertices = new TR1RoomVertex[baseRoom.RoomData.NumVertices]
             },
             Sectors = new TRRoomSector[baseRoom.Sectors.Length],
-            StaticMeshes = new TRRoomStaticMesh[baseRoom.NumStaticMeshes]
+            StaticMeshes = new TR1RoomStaticMesh[baseRoom.NumStaticMeshes]
         };
 
         // Lights
         for (int i = 0; i < newRoom.Lights.Length; i++)
         {
-            newRoom.Lights[i] = new TRRoomLight
+            newRoom.Lights[i] = new TR1RoomLight
             {
                 Fade = baseRoom.Lights[i].Fade,
                 Intensity = baseRoom.Lights[i].Intensity,
@@ -103,7 +103,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         // Vertices
         for (int i = 0; i < newRoom.RoomData.Vertices.Length; i++)
         {
-            newRoom.RoomData.Vertices[i] = new TRRoomVertex
+            newRoom.RoomData.Vertices[i] = new TR1RoomVertex
             {
                 Lighting = baseRoom.RoomData.Vertices[i].Lighting,
                 Vertex = new TRVertex
@@ -128,7 +128,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         // Static Meshes
         for (int i = 0; i < newRoom.NumStaticMeshes; i++)
         {
-            newRoom.StaticMeshes[i] = new TRRoomStaticMesh
+            newRoom.StaticMeshes[i] = new TR1RoomStaticMesh
             {
                 Intensity = baseRoom.StaticMeshes[i].Intensity,
                 MeshID = baseRoom.StaticMeshes[i].MeshID,

@@ -2,11 +2,11 @@
 
 namespace TRLevelControl.Model;
 
-public class TRRoomData : ISerializableCompact
+public class TR1RoomData : ISerializableCompact
 {
     public short NumVertices { get; set; }
 
-    public TRRoomVertex[] Vertices { get; set; }
+    public TR1RoomVertex[] Vertices { get; set; }
 
     public short NumRectangles { get; set; }
 
@@ -27,7 +27,7 @@ public class TRRoomData : ISerializableCompact
         {
             writer.Write(NumVertices);
 
-            foreach (TRRoomVertex vert in Vertices)
+            foreach (TR1RoomVertex vert in Vertices)
             {
                 writer.Write(vert.Serialize());
             }

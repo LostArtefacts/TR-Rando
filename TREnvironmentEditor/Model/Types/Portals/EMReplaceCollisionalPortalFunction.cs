@@ -19,7 +19,7 @@ public class EMReplaceCollisionalPortalFunction : BaseEMFunction
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        TRRoom room = level.Rooms[data.ConvertRoom(Room)];
+        TR1Room room = level.Rooms[data.ConvertRoom(Room)];
         TRRoomSector sector = room.Sectors[X * room.NumZSectors + Z];
         ReplacePortal(sector, (ushort)data.ConvertRoom(AdjoiningRoom), floorData);
 

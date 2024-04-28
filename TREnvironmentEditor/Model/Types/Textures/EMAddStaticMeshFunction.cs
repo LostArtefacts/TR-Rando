@@ -21,7 +21,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             short roomNumber = data.ConvertRoom(location.Room);
-            TRRoom room = level.Rooms[roomNumber];
+            TR1Room room = level.Rooms[roomNumber];
 
             // Only add this mesh if there is nothing else in the same sector.
             if (!IgnoreSectorEntities)
@@ -47,8 +47,8 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 }
             }
 
-            List<TRRoomStaticMesh> meshes = room.StaticMeshes.ToList();
-            meshes.Add(new TRRoomStaticMesh
+            List<TR1RoomStaticMesh> meshes = room.StaticMeshes.ToList();
+            meshes.Add(new()
             {
                 X = (uint)location.X,
                 Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
@@ -100,7 +100,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
             }
 
             List<TR2RoomStaticMesh> meshes = room.StaticMeshes.ToList();
-            meshes.Add(new TR2RoomStaticMesh
+            meshes.Add(new()
             {
                 X = (uint)location.X,
                 Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
@@ -153,7 +153,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
             }
 
             List<TR3RoomStaticMesh> meshes = room.StaticMeshes.ToList();
-            meshes.Add(new TR3RoomStaticMesh
+            meshes.Add(new()
             {
                 X = (uint)location.X,
                 Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),

@@ -17,7 +17,7 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
         {
             foreach (short roomNumber in FaceMap.Keys)
             {
-                TRRoom room = level.Rooms[data.ConvertRoom(roomNumber)];
+                TR1Room room = level.Rooms[data.ConvertRoom(roomNumber)];
                 foreach (EMTextureFaceType faceType in FaceMap[roomNumber].Keys)
                 {
                     foreach (int baseFaceIndex in FaceMap[roomNumber][faceType].Keys)
@@ -39,8 +39,8 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
 
                         for (int i = 0; i < baseVertices.Length; i++)
                         {
-                            TRRoomVertex baseVertex = room.RoomData.Vertices[baseVertices[i]];
-                            TRRoomVertex copyVertex = room.RoomData.Vertices[copyVertices[i]];
+                            TR1RoomVertex baseVertex = room.RoomData.Vertices[baseVertices[i]];
+                            TR1RoomVertex copyVertex = room.RoomData.Vertices[copyVertices[i]];
                             CopyAttributes(baseVertex, copyVertex);
                         }
                     }
@@ -53,8 +53,8 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
         {
             foreach (short roomNumber in RoomMap.Keys)
             {
-                TRRoom room = level.Rooms[data.ConvertRoom(roomNumber)];
-                foreach (TRRoomVertex copyVertex in room.RoomData.Vertices)
+                TR1Room room = level.Rooms[data.ConvertRoom(roomNumber)];
+                foreach (TR1RoomVertex copyVertex in room.RoomData.Vertices)
                 {
                     CopyAttributes(RoomMap[roomNumber], copyVertex);
                 }
@@ -171,12 +171,12 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
     }
 
     // TR3RoomVertex is a placeholder in the data to cover all levels
-    private static void CopyAttributes(TR3RoomVertex baseVertex, TRRoomVertex copyVertex)
+    private static void CopyAttributes(TR3RoomVertex baseVertex, TR1RoomVertex copyVertex)
     {
         copyVertex.Lighting = baseVertex.Lighting;
     }
 
-    private static void CopyAttributes(TRRoomVertex baseVertex, TRRoomVertex copyVertex)
+    private static void CopyAttributes(TR1RoomVertex baseVertex, TR1RoomVertex copyVertex)
     {
         copyVertex.Lighting = baseVertex.Lighting;
     }

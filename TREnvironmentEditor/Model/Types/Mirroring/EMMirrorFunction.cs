@@ -66,7 +66,7 @@ public class EMMirrorFunction : BaseEMFunction
     {
         _worldWidth = 0;
         _xAdjustment = 0;
-        foreach (TRRoom room in level.Rooms)
+        foreach (TR1Room room in level.Rooms)
         {
             _worldWidth = Math.Max(_worldWidth, room.Info.X + TRConsts.Step4 * room.NumXSectors);
         }
@@ -121,7 +121,7 @@ public class EMMirrorFunction : BaseEMFunction
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        foreach (TRRoom room in level.Rooms)
+        foreach (TR1Room room in level.Rooms)
         {
             List<TRRoomSector> sectors = room.Sectors.ToList();
             MirrorSectors(sectors, room.NumXSectors, room.NumZSectors, floorData);
@@ -298,17 +298,17 @@ public class EMMirrorFunction : BaseEMFunction
 
     private void MirrorRooms(TR1Level level)
     {
-        foreach (TRRoom room in level.Rooms)
+        foreach (TR1Room room in level.Rooms)
         {
             int oldRoomX = room.Info.X;
             room.Info.X = FlipWorldX(oldRoomX);
             room.Info.X -= room.NumXSectors * TRConsts.Step4;
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
-            List<TRRoomVertex> processedVerts = new();
+            List<TR1RoomVertex> processedVerts = new();
             foreach (TRRoomSprite sprite in room.RoomData.Sprites)
             {
-                TRRoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
+                TR1RoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
 
                 // Flip the old world coordinate, then subtract the new room position
                 int x = oldRoomX + roomVertex.Vertex.X;
@@ -321,7 +321,7 @@ public class EMMirrorFunction : BaseEMFunction
             }
             
             // Flip the face vertices
-            foreach (TRRoomVertex vert in room.RoomData.Vertices)
+            foreach (TR1RoomVertex vert in room.RoomData.Vertices)
             {
                 if (processedVerts.Contains(vert))
                 {
@@ -348,13 +348,13 @@ public class EMMirrorFunction : BaseEMFunction
             }
 
             // Move the lights to their new spots
-            foreach (TRRoomLight light in room.Lights)
+            foreach (TR1RoomLight light in room.Lights)
             {
                 light.X = FlipWorldX(light.X);
             }
 
             // Move the static meshes
-            foreach (TRRoomStaticMesh mesh in room.StaticMeshes)
+            foreach (TR1RoomStaticMesh mesh in room.StaticMeshes)
             {
                 mesh.X = (uint)FlipWorldX((int)mesh.X);
 
@@ -1013,7 +1013,7 @@ public class EMMirrorFunction : BaseEMFunction
         List<TRStaticMesh> staticMeshes = level.StaticMeshes.ToList();
         ISet<TRStaticMesh> processedMeshes = new HashSet<TRStaticMesh>();
 
-        foreach (TRRoom room in level.Rooms)
+        foreach (TR1Room room in level.Rooms)
         {
             // Invert the faces, otherwise they are inside out
             foreach (TRFace4 f in room.RoomData.Rectangles)
@@ -1029,7 +1029,7 @@ public class EMMirrorFunction : BaseEMFunction
                 textureReferences.Add(f.Texture);
             }
 
-            foreach (TRRoomStaticMesh roomStaticMesh in room.StaticMeshes)
+            foreach (TR1RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
                 TRStaticMesh staticMesh = staticMeshes.Find(m => m.ID == roomStaticMesh.MeshID);
                 if (!processedMeshes.Add(staticMesh))

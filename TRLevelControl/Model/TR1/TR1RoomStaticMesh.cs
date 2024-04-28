@@ -2,17 +2,19 @@
 
 namespace TRLevelControl.Model;
 
-public class TRRoomLight : ISerializableCompact
+public class TR1RoomStaticMesh : ISerializableCompact
 {
-    public int X { get; set; }
+    public uint X { get; set; }
 
-    public int Y { get; set; }
+    public uint Y { get; set; }
 
-    public int Z { get; set; }
+    public uint Z { get; set; }
+
+    public ushort Rotation { get; set; }
 
     public ushort Intensity { get; set; }
 
-    public uint Fade { get; set; }
+    public ushort MeshID { get; set; }
 
     public byte[] Serialize()
     {
@@ -22,8 +24,9 @@ public class TRRoomLight : ISerializableCompact
             writer.Write(X);
             writer.Write(Y);
             writer.Write(Z);
+            writer.Write(Rotation);
             writer.Write(Intensity);
-            writer.Write(Fade);
+            writer.Write(MeshID);
         }
 
         return stream.ToArray();

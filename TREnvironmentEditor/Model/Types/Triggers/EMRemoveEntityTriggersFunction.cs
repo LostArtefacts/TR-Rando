@@ -19,7 +19,7 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        foreach (TRRoom room in level.Rooms)
+        foreach (TR1Room room in level.Rooms)
         {
             RemoveSectorTriggers(floorData, room.Sectors, entities, excludedTypes);
         }

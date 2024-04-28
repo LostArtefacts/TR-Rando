@@ -13,7 +13,7 @@ public class EMRemoveFaceFunction : BaseEMFunction
 
         foreach (int roomNumber in GeometryMap.Keys)
         {
-            TRRoom room = level.Rooms[data.ConvertRoom(roomNumber)];
+            TR1Room room = level.Rooms[data.ConvertRoom(roomNumber)];
             List<int> rectangleRemovals = new();
             List<int> triangleRemovals = new();
 
