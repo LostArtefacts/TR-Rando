@@ -47,10 +47,10 @@ public static class TR2LevelNames
 
     public static List<string> AsOrderedList => GreatWallWithCutscenes
         .Prepend(ASSAULT)
-        .Concat(Italy)
-        .Concat(Offshore)
+        .Concat(ItalyWithCutscenes)
+        .Concat(OffshoreWithCutscenes)
         .Concat(Tibet)
-        .Concat(China)
+        .Concat(ChinaWithCutscenes)
         .Append(HOME)
         .Concat(AsListGold)
         .ToList();

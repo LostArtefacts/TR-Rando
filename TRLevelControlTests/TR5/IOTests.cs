@@ -9,39 +9,17 @@ namespace TRLevelControlTests.TR5;
 [TestCategory("OriginalIO")]
 public class IOTests : TestBase
 {
+    public static IEnumerable<object[]> GetAllLevels() => GetLevelNames(TR5LevelNames.AsList);
+
     [TestMethod]
-    [DataRow(TR5LevelNames.ROME)]
-    [DataRow(TR5LevelNames.MARKETS)]
-    [DataRow(TR5LevelNames.COLOSSEUM)]
-    [DataRow(TR5LevelNames.BASE)]
-    [DataRow(TR5LevelNames.SUBMARINE)]
-    [DataRow(TR5LevelNames.DEEPSEA)]
-    [DataRow(TR5LevelNames.SINKING)]
-    [DataRow(TR5LevelNames.GALLOWS)]
-    [DataRow(TR5LevelNames.LABYRINTH)]
-    [DataRow(TR5LevelNames.MILL)]
-    [DataRow(TR5LevelNames.FLOOR13)]
-    [DataRow(TR5LevelNames.ESCAPE)]
-    [DataRow(TR5LevelNames.REDALERT)]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
     public void TestReadWrite(string levelName)
     {
         ReadWriteLevel(levelName, TRGameVersion.TR5);
     }
 
     [TestMethod]
-    [DataRow(TR5LevelNames.ROME)]
-    [DataRow(TR5LevelNames.MARKETS)]
-    [DataRow(TR5LevelNames.COLOSSEUM)]
-    [DataRow(TR5LevelNames.BASE)]
-    [DataRow(TR5LevelNames.SUBMARINE)]
-    [DataRow(TR5LevelNames.DEEPSEA)]
-    [DataRow(TR5LevelNames.SINKING)]
-    [DataRow(TR5LevelNames.GALLOWS)]
-    [DataRow(TR5LevelNames.LABYRINTH)]
-    [DataRow(TR5LevelNames.MILL)]
-    [DataRow(TR5LevelNames.FLOOR13)]
-    [DataRow(TR5LevelNames.ESCAPE)]
-    [DataRow(TR5LevelNames.REDALERT)]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
     public void TestFloorData(string levelName)
     {
         TR5Level level = GetTR5Level(levelName);
