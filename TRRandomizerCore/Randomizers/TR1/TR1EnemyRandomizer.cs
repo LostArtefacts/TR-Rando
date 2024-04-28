@@ -656,7 +656,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             // hybrid, otherwise allow land creatures underwater (which works, but is obviously more difficult).
             if (difficulty == RandoDifficulty.Default)
             {
-                TRRoom currentRoom = level.Data.Rooms[currentEntity.Room];
+                TR1Room currentRoom = level.Data.Rooms[currentEntity.Room];
                 if (currentRoom.AlternateRoom != -1 && level.Data.Rooms[currentRoom.AlternateRoom].ContainsWater && TR1TypeUtilities.IsWaterLandCreatureEquivalent(currentEntityType) && !TR1TypeUtilities.IsWaterLandCreatureEquivalent(newEntityType))
                 {
                     Dictionary<TR1Type, TR1Type> hybrids = TR1TypeUtilities.GetWaterEnemyLandCreatures();

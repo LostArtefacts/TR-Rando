@@ -13,7 +13,7 @@ public class Room
     public List<FloorPlan> FloorPlan { get; set; }
     public List<Box> Boxes { get; set; }
 
-    public static Room Create(TRRoom room)
+    public static Room Create(TR1Room room)
     {
         return new Room
         {

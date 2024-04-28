@@ -104,7 +104,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
     protected override IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(TR1Level level)
     {
         List<List<TRFace3>> faces = new();
-        foreach (TRRoom room in level.Rooms)
+        foreach (TR1Room room in level.Rooms)
         {
             faces.Add(room.RoomData.Triangles.ToList());
         }
@@ -114,7 +114,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
     protected override IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(TR1Level level)
     {
         List<List<TRFace4>> faces = new();
-        foreach (TRRoom room in level.Rooms)
+        foreach (TR1Room room in level.Rooms)
         {
             faces.Add(room.RoomData.Rectangles.ToList());
         }

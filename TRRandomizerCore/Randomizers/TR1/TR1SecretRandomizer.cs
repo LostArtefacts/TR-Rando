@@ -173,7 +173,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         floorData.ParseFromLevel(level.Data);
 
         // Scan all rooms and remove any existing secret triggers.
-        foreach (TRRoom room in level.Data.Rooms)
+        foreach (TR1Room room in level.Data.Rooms)
         {
             foreach (TRRoomSector sector in room.Sectors)
             {

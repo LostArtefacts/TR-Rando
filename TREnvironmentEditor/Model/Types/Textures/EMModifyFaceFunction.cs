@@ -16,7 +16,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         {
             foreach (EMFaceModification mod in Modifications)
             {
-                TRRoom room = level.Rooms[data.ConvertRoom(mod.RoomNumber)];
+                TR1Room room = level.Rooms[data.ConvertRoom(mod.RoomNumber)];
                 switch (mod.FaceType)
                 {
                     case EMTextureFaceType.Rectangles:
@@ -33,7 +33,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         {
             foreach (EMFaceRotation rot in Rotations)
             {
-                TRRoom room = level.Rooms[data.ConvertRoom(rot.RoomNumber)];
+                TR1Room room = level.Rooms[data.ConvertRoom(rot.RoomNumber)];
                 switch (rot.FaceType)
                 {
                     case EMTextureFaceType.Rectangles:
@@ -125,17 +125,17 @@ public class EMModifyFaceFunction : BaseEMFunction
         }
     }
 
-    private static void ModifyRectangles(TRRoom room, EMFaceModification mod)
+    private static void ModifyRectangles(TR1Room room, EMFaceModification mod)
     {
-        List<TRRoomVertex> allVertices = room.RoomData.Vertices.ToList();
+        List<TR1RoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
         {
             TRFace4 rect = room.RoomData.Rectangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TRRoomVertex currentRoomVertex = allVertices[rect.Vertices[vertIndex]];
+                TR1RoomVertex currentRoomVertex = allVertices[rect.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
-                TRRoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
+                TR1RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
                 rect.Vertices[vertIndex] = (ushort)allVertices.Count;
@@ -194,17 +194,17 @@ public class EMModifyFaceFunction : BaseEMFunction
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
-    private static void ModifyTriangles(TRRoom room, EMFaceModification mod)
+    private static void ModifyTriangles(TR1Room room, EMFaceModification mod)
     {
-        List<TRRoomVertex> allVertices = room.RoomData.Vertices.ToList();
+        List<TR1RoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
         {
             TRFace3 tri = room.RoomData.Triangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TRRoomVertex currentRoomVertex = allVertices[tri.Vertices[vertIndex]];
+                TR1RoomVertex currentRoomVertex = allVertices[tri.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
-                TRRoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
+                TR1RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
                 tri.Vertices[vertIndex] = (ushort)allVertices.Count;
@@ -263,15 +263,15 @@ public class EMModifyFaceFunction : BaseEMFunction
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
-    private static TRRoomVertex GenerateRoomVertex(TRRoomVertex currentRoomVertex, TRVertex newVertex)
+    private static TR1RoomVertex GenerateRoomVertex(TR1RoomVertex currentRoomVertex, TRVertex newVertex)
     {
         // We create a new vertex because we can't guarantee nothing else is using it.
         // Note the vertex values in the mod are added to the existing values, so we
         // don't have to define those we aren't changing.
-        return new TRRoomVertex
+        return new()
         {
             Lighting = currentRoomVertex.Lighting,
-            Vertex = new TRVertex
+            Vertex = new()
             {
                 X = (short)(currentRoomVertex.Vertex.X + newVertex.X),
                 Y = (short)(currentRoomVertex.Vertex.Y + newVertex.Y),
@@ -282,15 +282,12 @@ public class EMModifyFaceFunction : BaseEMFunction
 
     private static TR2RoomVertex GenerateRoomVertex(TR2RoomVertex currentRoomVertex, TRVertex newVertex)
     {
-        // We create a new vertex because we can't guarantee nothing else is using it.
-        // Note the vertex values in the mod are added to the existing values, so we
-        // don't have to define those we aren't changing.
-        return new TR2RoomVertex
+        return new()
         {
             Attributes = currentRoomVertex.Attributes,
             Lighting = currentRoomVertex.Lighting,
             Lighting2 = currentRoomVertex.Lighting2,
-            Vertex = new TRVertex
+            Vertex = new()
             {
                 X = (short)(currentRoomVertex.Vertex.X + newVertex.X),
                 Y = (short)(currentRoomVertex.Vertex.Y + newVertex.Y),
@@ -301,15 +298,12 @@ public class EMModifyFaceFunction : BaseEMFunction
 
     private static TR3RoomVertex GenerateRoomVertex(TR3RoomVertex currentRoomVertex, TRVertex newVertex)
     {
-        // We create a new vertex because we can't guarantee nothing else is using it.
-        // Note the vertex values in the mod are added to the existing values, so we
-        // don't have to define those we aren't changing.
-        return new TR3RoomVertex
+        return new()
         {
             Attributes = currentRoomVertex.Attributes,
             Lighting = currentRoomVertex.Lighting,
             Colour = currentRoomVertex.Colour,
-            Vertex = new TRVertex
+            Vertex = new()
             {
                 X = (short)(currentRoomVertex.Vertex.X + newVertex.X),
                 Y = (short)(currentRoomVertex.Vertex.Y + newVertex.Y),

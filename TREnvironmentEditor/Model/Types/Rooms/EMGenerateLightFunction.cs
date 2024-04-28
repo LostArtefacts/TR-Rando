@@ -13,20 +13,20 @@ public class EMGenerateLightFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         foreach (short roomIndex in RoomIndices)
         {
-            TRRoom room = level.Rooms[data.ConvertRoom(roomIndex)];
+            TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
             if (room.NumLights == 0)
             {
                 continue;
             }
 
-            Dictionary<TRRoomLight, Vector3> lightPositions = new();
-            foreach (TRRoomVertex vertex in room.RoomData.Vertices)
+            Dictionary<TR1RoomLight, Vector3> lightPositions = new();
+            foreach (TR1RoomVertex vertex in room.RoomData.Vertices)
             {
                 // Several lights per room - for now just use whichever is nearest this point
                 Vector3 vertexPosition = new(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);
                 double smallestDistance = double.MaxValue;
-                TRRoomLight nearestLight = room.Lights[0];
-                foreach (TRRoomLight light in room.Lights)
+                TR1RoomLight nearestLight = room.Lights[0];
+                foreach (TR1RoomLight light in room.Lights)
                 {
                     if (!lightPositions.ContainsKey(light))
                     {

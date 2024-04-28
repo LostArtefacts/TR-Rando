@@ -14,7 +14,7 @@ public class EMCeilingFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         foreach (int roomNumber in CeilingHeights.Keys)
         {
-            TRRoom room = level.Rooms[data.ConvertRoom(roomNumber)];
+            TR1Room room = level.Rooms[data.ConvertRoom(roomNumber)];
             int oldYTop = room.Info.YTop;
             int min = int.MaxValue;
             foreach (TRRoomSector sector in room.Sectors)
@@ -29,7 +29,7 @@ public class EMCeilingFunction : BaseEMFunction
 
             if (AmendVertices)
             {
-                foreach (TRRoomVertex vertex in room.RoomData.Vertices)
+                foreach (TR1RoomVertex vertex in room.RoomData.Vertices)
                 {
                     if (vertex.Vertex.Y == oldYTop)
                     {

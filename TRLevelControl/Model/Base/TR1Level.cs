@@ -3,7 +3,7 @@
 public class TR1Level : TRLevelBase
 {
     public List<TRTexImage8> Images8 { get; set; }
-    public List<TRRoom> Rooms { get; set; }
+    public List<TR1Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
     public List<TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }

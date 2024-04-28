@@ -42,7 +42,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         _level.Rooms = new();
         for (int i = 0; i < numRooms; i++)
         {
-            TRRoom room = new()
+            TR1Room room = new()
             {
                 //Grab info
                 Info = new TRRoomInfo
@@ -87,18 +87,18 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
             //Lighting
             room.AmbientIntensity = reader.ReadInt16();
             room.NumLights = reader.ReadUInt16();
-            room.Lights = new TRRoomLight[room.NumLights];
+            room.Lights = new TR1RoomLight[room.NumLights];
             for (int j = 0; j < room.NumLights; j++)
             {
-                room.Lights[j] = TRFileReadUtilities.ReadRoomLight(reader);
+                room.Lights[j] = TR1FileReadUtilities.ReadRoomLight(reader);
             }
 
             //Static meshes
             room.NumStaticMeshes = reader.ReadUInt16();
-            room.StaticMeshes = new TRRoomStaticMesh[room.NumStaticMeshes];
+            room.StaticMeshes = new TR1RoomStaticMesh[room.NumStaticMeshes];
             for (int j = 0; j < room.NumStaticMeshes; j++)
             {
-                room.StaticMeshes[j] = TRFileReadUtilities.ReadRoomStaticMesh(reader);
+                room.StaticMeshes[j] = TR1FileReadUtilities.ReadRoomStaticMesh(reader);
             }
 
             room.AlternateRoom = reader.ReadInt16();
@@ -154,7 +154,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         _level.Boxes = new();
         for (int i = 0; i < numBoxes; i++)
         {
-            _level.Boxes.Add(TRFileReadUtilities.ReadBox(reader));
+            _level.Boxes.Add(TR1FileReadUtilities.ReadBox(reader));
         }
 
         //Overlaps & Zones
@@ -201,7 +201,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write(_level.Version.LevelNumber);
 
         writer.Write((ushort)_level.Rooms.Count);
-        foreach (TRRoom room in _level.Rooms) { writer.Write(room.Serialize()); }
+        foreach (TR1Room room in _level.Rooms) { writer.Write(room.Serialize()); }
 
         writer.Write((uint)_level.FloorData.Count);
         writer.Write(_level.FloorData);
@@ -284,23 +284,23 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         _meshBuilder.WriteStaticMeshes(writer, _level.StaticMeshes);
     }
 
-    private static TRRoomData ConvertToRoomData(TRRoom room)
+    private static TR1RoomData ConvertToRoomData(TR1Room room)
     {
         int RoomDataOffset = 0;
 
         //Grab detailed room data
-        TRRoomData RoomData = new()
+        TR1RoomData RoomData = new()
         {
             //Room vertices
             NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset])
         };
-        RoomData.Vertices = new TRRoomVertex[RoomData.NumVertices];
+        RoomData.Vertices = new TR1RoomVertex[RoomData.NumVertices];
 
         RoomDataOffset++;
 
         for (int j = 0; j < RoomData.NumVertices; j++)
         {
-            TRRoomVertex vertex = new()
+            TR1RoomVertex vertex = new()
             {
                 Vertex = new TRVertex()
             };

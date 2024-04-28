@@ -12,10 +12,10 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         foreach (short roomIndex in Relocations.Keys)
         {
-            TRRoom room = level.Rooms[data.ConvertRoom(roomIndex)];
+            TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
             foreach (int meshIndex in Relocations[roomIndex].Keys)
             {
-                TRRoomStaticMesh mesh = room.StaticMeshes[meshIndex];
+                TR1RoomStaticMesh mesh = room.StaticMeshes[meshIndex];
                 EMLocation location = new()
                 {
                     X = (int)mesh.X,

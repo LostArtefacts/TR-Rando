@@ -29,7 +29,7 @@ public class TR1LandmarkImporter : AbstractLandmarkImporter<TR1Type, TR1Level>
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        TRRoom room = level.Rooms[portalSector.Room];
+        TR1Room room = level.Rooms[portalSector.Room];
         int x = isLevelMirrored ? (room.NumXSectors - portalSector.X - 1) : portalSector.X;
         TRRoomSector sector = room.Sectors[x * room.NumZSectors + portalSector.Z];
 

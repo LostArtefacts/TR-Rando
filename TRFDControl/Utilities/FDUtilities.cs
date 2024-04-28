@@ -81,7 +81,7 @@ public static class FDUtilities
 
     public static void RemoveEntityTriggers(TR1Level level, int entityIndex, FDControl control)
     {
-        foreach (TRRoom room in level.Rooms)
+        foreach (TR1Room room in level.Rooms)
         {
             RemoveEntityTriggers(room.Sectors, entityIndex, control);
         }
@@ -144,7 +144,7 @@ public static class FDUtilities
     public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR1Level level, FDControl floorData)
     {
         int xFloor, yFloor;
-        TRRoom room = level.Rooms[roomNumber];
+        TR1Room room = level.Rooms[roomNumber];
         TRRoomSector sector;
         short data;
 
@@ -515,7 +515,7 @@ public static class FDUtilities
 
     public static int GetHeight(int x, int z, short roomIndex, TR1Level level, FDControl floorData, bool waterOnly)
     {
-        TRRoom room = level.Rooms[roomIndex];
+        TR1Room room = level.Rooms[roomIndex];
         if (waterOnly && !room.ContainsWater)
         {
             return TRConsts.NoHeight;

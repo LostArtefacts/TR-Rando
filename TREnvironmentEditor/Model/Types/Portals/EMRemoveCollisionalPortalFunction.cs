@@ -20,8 +20,8 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        TRRoom room1 = level.Rooms[Location1.Room];
-        TRRoom room2 = level.Rooms[Location2.Room];
+        TR1Room room1 = level.Rooms[Location1.Room];
+        TR1Room room2 = level.Rooms[Location2.Room];
 
         TRRoomSector sector1 = room1.Sectors[GetSectorIndex(room1.Info, Location1, room1.NumZSectors)];
         TRRoomSector sector2 = room2.Sectors[GetSectorIndex(room2.Info, Location2, room2.NumZSectors)];

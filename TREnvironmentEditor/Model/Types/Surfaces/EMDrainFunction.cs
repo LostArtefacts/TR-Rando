@@ -19,12 +19,12 @@ public class EMDrainFunction : BaseWaterFunction
 
         foreach (int roomNumber in RoomNumbers)
         {
-            TRRoom room = level.Rooms[data.ConvertRoom(roomNumber)];
+            TR1Room room = level.Rooms[data.ConvertRoom(roomNumber)];
 
             ISet<byte> roomsBelow = GetAdjacentRooms(room.Sectors, false);
             foreach (byte roomBelowNumber in roomsBelow)
             {
-                TRRoom roomBelow = level.Rooms[roomBelowNumber];
+                TR1Room roomBelow = level.Rooms[roomBelowNumber];
                 if (roomBelow.ContainsWater)
                 {
                     AddWaterSurface(room, false, RoomNumbers);
@@ -35,7 +35,7 @@ public class EMDrainFunction : BaseWaterFunction
             ISet<byte> roomsAbove = GetAdjacentRooms(room.Sectors, true);
             foreach (byte roomAboveNumber in roomsAbove)
             {
-                TRRoom roomAbove = level.Rooms[roomAboveNumber];
+                TR1Room roomAbove = level.Rooms[roomAboveNumber];
                 if (!roomAbove.ContainsWater)
                 {
                     RemoveWaterSurface(room);

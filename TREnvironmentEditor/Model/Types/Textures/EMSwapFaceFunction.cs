@@ -12,7 +12,7 @@ public class EMSwapFaceFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        TRRoom room = level.Rooms[data.ConvertRoom(RoomIndex)];
+        TR1Room room = level.Rooms[data.ConvertRoom(RoomIndex)];
         if (FaceType == EMTextureFaceType.Rectangles)
         {
             foreach (int originalIndex in Swaps.Keys)

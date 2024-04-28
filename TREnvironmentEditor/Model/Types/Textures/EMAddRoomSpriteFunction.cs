@@ -14,18 +14,18 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         foreach (EMLocation location in Locations)
         {
-            TRRoom room = level.Rooms[data.ConvertRoom(location.Room)];
-            List<TRRoomVertex> vertices = room.RoomData.Vertices.ToList();
+            TR1Room room = level.Rooms[data.ConvertRoom(location.Room)];
+            List<TR1RoomVertex> vertices = room.RoomData.Vertices.ToList();
             List<TRRoomSprite> sprites = room.RoomData.Sprites.ToList();
-            sprites.Add(new TRRoomSprite
+            sprites.Add(new()
             {
                 Texture = Texture,
                 Vertex = (short)vertices.Count
             });
-            vertices.Add(new TRRoomVertex
+            vertices.Add(new()
             {
                 Lighting = Vertex.Lighting,
-                Vertex = new TRVertex
+                Vertex = new()
                 {
                     X = (short)(location.X - room.Info.X),
                     Y = (short)location.Y,
@@ -50,17 +50,17 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
             TR2Room room = level.Rooms[data.ConvertRoom(location.Room)];
             List<TR2RoomVertex> vertices = room.RoomData.Vertices.ToList();
             List<TRRoomSprite> sprites = room.RoomData.Sprites.ToList();
-            sprites.Add(new TRRoomSprite
+            sprites.Add(new()
             {
                 Texture = Texture,
                 Vertex = (short)vertices.Count
             });
-            vertices.Add(new TR2RoomVertex
+            vertices.Add(new()
             {
                 Lighting = Vertex.Lighting,
                 Lighting2 = Vertex.Lighting2,
                 Attributes = Vertex.Attributes,
-                Vertex = new TRVertex
+                Vertex = new()
                 {
                     X = (short)(location.X - room.Info.X),
                     Y = (short)location.Y,
@@ -85,17 +85,17 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
             TR3Room room = level.Rooms[data.ConvertRoom(location.Room)];
             List<TR3RoomVertex> vertices = room.RoomData.Vertices.ToList();
             List<TRRoomSprite> sprites = room.RoomData.Sprites.ToList();
-            sprites.Add(new TRRoomSprite
+            sprites.Add(new()
             {
                 Texture = Texture,
                 Vertex = (short)vertices.Count
             });
-            vertices.Add(new TR3RoomVertex
+            vertices.Add(new()
             {
                 Lighting = Vertex.Lighting,
                 Attributes = Vertex.Attributes,
                 Colour = Vertex.Colour,
-                Vertex = new TRVertex
+                Vertex = new()
                 {
                     X = (short)(location.X - room.Info.X),
                     Y = (short)location.Y,
