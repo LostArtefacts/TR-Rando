@@ -103,7 +103,7 @@ public class TR3VfxRandomizer : BaseTR3Randomizer
 
     private static void SetColourFilter(TR3Room room, Color col, bool replace, bool enableCaustics, bool enableWave)
     {
-        foreach (TR3RoomVertex vert in room.RoomData.Vertices)
+        foreach (TR3RoomVertex vert in room.Mesh.Vertices)
         {
             byte curRed = (byte)((vert.Colour & 0x7C00) >> 10);
             byte curGreen = (byte)((vert.Colour & 0x03E0) >> 5);

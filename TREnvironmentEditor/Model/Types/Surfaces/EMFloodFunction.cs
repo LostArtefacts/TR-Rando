@@ -98,7 +98,7 @@ public class EMFloodFunction : BaseWaterFunction
         {
             TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
             room.ContainsWater = true;
-            foreach (TR3RoomVertex vertex in room.RoomData.Vertices)
+            foreach (TR3RoomVertex vertex in room.Mesh.Vertices)
             {
                 vertex.UseCaustics = true;
             }

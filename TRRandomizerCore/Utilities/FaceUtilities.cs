@@ -16,9 +16,9 @@ public static class FaceUtilities
         List<TRFace4> faces = new();
         foreach (TR1Room room in level.Rooms)
         {
-            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
+            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
             {
-                return room.RoomData.Vertices[v].Vertex;
+                return room.Mesh.Vertices[v].Vertex;
             }));
         }
 
@@ -33,9 +33,9 @@ public static class FaceUtilities
         List<TRFace4> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
-            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
+            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
             {
-                return room.RoomData.Vertices[v].Vertex;
+                return room.Mesh.Vertices[v].Vertex;
             }));
         }
 
@@ -50,9 +50,9 @@ public static class FaceUtilities
         List<TRFace4> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
-            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
+            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
             {
-                return room.RoomData.Vertices[v].Vertex;
+                return room.Mesh.Vertices[v].Vertex;
             }));
         }
 
@@ -152,7 +152,7 @@ public static class FaceUtilities
 
             List<TRVertex> vertMatches = GetVerticesToMatch(climbEntry, x, z);
 
-            foreach (TRFace4 face in room.RoomData.Rectangles)
+            foreach (TRFace4 face in room.Mesh.Rectangles)
             {
                 if (faces.ContainsKey(face))
                 {
@@ -162,7 +162,7 @@ public static class FaceUtilities
                 List<TRVertex> faceVertices = new();
                 foreach (ushort v in face.Vertices)
                 {
-                    faceVertices.Add(room.RoomData.Vertices[v].Vertex);
+                    faceVertices.Add(room.Mesh.Vertices[v].Vertex);
                 }
 
                 if (IsWallMatch(vertMatches, faceVertices))
@@ -203,7 +203,7 @@ public static class FaceUtilities
 
             List<TRVertex> vertMatches = GetVerticesToMatch(climbEntry, x, z);
 
-            foreach (TRFace4 face in room.RoomData.Rectangles)
+            foreach (TRFace4 face in room.Mesh.Rectangles)
             {
                 if (faces.ContainsKey(face))
                 {
@@ -213,7 +213,7 @@ public static class FaceUtilities
                 List<TRVertex> faceVertices = new();
                 foreach (ushort v in face.Vertices)
                 {
-                    faceVertices.Add(room.RoomData.Vertices[v].Vertex);
+                    faceVertices.Add(room.Mesh.Vertices[v].Vertex);
                 }
 
                 if (IsWallMatch(vertMatches, faceVertices))
@@ -255,7 +255,7 @@ public static class FaceUtilities
 
             List<TRVertex> vertMatches = GetFloorOrCeilingVerticesToMatch(x, z);
 
-            foreach (TRFace4 face in room.RoomData.Rectangles)
+            foreach (TRFace4 face in room.Mesh.Rectangles)
             {
                 if (faces.ContainsKey(face))
                 {
@@ -265,7 +265,7 @@ public static class FaceUtilities
                 List<TRVertex> faceVertices = new();
                 foreach (ushort v in face.Vertices)
                 {
-                    faceVertices.Add(room.RoomData.Vertices[v].Vertex);
+                    faceVertices.Add(room.Mesh.Vertices[v].Vertex);
                 }
 
                 if (IsCeilingMatch(vertMatches, faceVertices, y))

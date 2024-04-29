@@ -20,7 +20,7 @@ public class EMGenerateLightFunction : BaseEMFunction
             }
 
             Dictionary<TR1RoomLight, Vector3> lightPositions = new();
-            foreach (TR1RoomVertex vertex in room.RoomData.Vertices)
+            foreach (TR1RoomVertex vertex in room.Mesh.Vertices)
             {
                 // Several lights per room - for now just use whichever is nearest this point
                 Vector3 vertexPosition = new(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);
@@ -60,7 +60,7 @@ public class EMGenerateLightFunction : BaseEMFunction
             }
 
             Dictionary<TR2RoomLight, Vector3> lightPositions = new();
-            foreach (TR2RoomVertex vertex in room.RoomData.Vertices)
+            foreach (TR2RoomVertex vertex in room.Mesh.Vertices)
             {
                 // Several lights per room - for now just use whichever is nearest this point
                 Vector3 vertexPosition = new(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);
@@ -101,7 +101,7 @@ public class EMGenerateLightFunction : BaseEMFunction
             }
 
             Dictionary<TR3RoomLight, Vector3> lightPositions = new();
-            foreach (TR3RoomVertex vertex in room.RoomData.Vertices)
+            foreach (TR3RoomVertex vertex in room.Mesh.Vertices)
             {
                 // Several lights per room - for now just use whichever is nearest this point
                 Vector3 vertexPosition = new(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);

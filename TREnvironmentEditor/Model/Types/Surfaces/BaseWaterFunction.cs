@@ -38,19 +38,19 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                 for (int k = 0; k < defaultVerts.Count; k++)
                 {
                     TRVertex vert = defaultVerts[k];
-                    int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+                    int vi = room.Mesh.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
                     if (vi == -1)
                     {
                         vi = CreateRoomVertex(room, vert);
                     }
                     else
                     {
-                        TR1RoomVertex exVert = room.RoomData.Vertices[vi];
+                        TR1RoomVertex exVert = room.Mesh.Vertices[vi];
                     }
                     vertIndices.Add((ushort)vi);
                 }
 
-                room.RoomData.Rectangles.Add(new()
+                room.Mesh.Rectangles.Add(new()
                 {
                     Texture = WaterTextures[0],
                     Vertices = vertIndices.ToArray()
@@ -87,20 +87,20 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                 for (int k = 0; k < defaultVerts.Count; k++)
                 {
                     TRVertex vert = defaultVerts[k];
-                    int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+                    int vi = room.Mesh.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
                     if (vi == -1)
                     {
                         vi = CreateRoomVertex(room, vert);
                     }
                     else
                     {
-                        TR2RoomVertex exVert = room.RoomData.Vertices[vi];
+                        TR2RoomVertex exVert = room.Mesh.Vertices[vi];
                         exVert.Attributes = 32784; // Stop the shimmering
                     }
                     vertIndices.Add((ushort)vi);
                 }
 
-                room.RoomData.Rectangles.Add(new()
+                room.Mesh.Rectangles.Add(new()
                 {
                     Texture = WaterTextures[0],
                     Vertices = vertIndices.ToArray()
@@ -140,7 +140,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                 for (int k = 0; k < defaultVerts.Count; k++)
                 {
                     TRVertex vert = defaultVerts[k];
-                    int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+                    int vi = room.Mesh.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
                     if (vi == -1)
                     {
                         vi = CreateRoomVertex(room, vert, useCaustics:true, useWaveMovement:true);
@@ -148,7 +148,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                     vertIndices.Add((ushort)vi);
                 }
 
-                room.RoomData.Rectangles.Add(new()
+                room.Mesh.Rectangles.Add(new()
                 {
                     Texture = (ushort)(WaterTextures[count++ % WaterTextures.Length] | 0x8000), // Cycle through the textures and make them double-sided
                     Vertices = vertIndices.ToArray()
@@ -159,17 +159,17 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
 
     public void RemoveWaterSurface(TR1Room room)
     {
-        RemoveWaterSurfaces(room.RoomData.Rectangles);
+        RemoveWaterSurfaces(room.Mesh.Rectangles);
     }
 
     public void RemoveWaterSurface(TR2Room room)
     {
-        RemoveWaterSurfaces(room.RoomData.Rectangles);
+        RemoveWaterSurfaces(room.Mesh.Rectangles);
     }
 
     public void RemoveWaterSurface(TR3Room room)
     {
-        RemoveWaterSurfaces(room.RoomData.Rectangles);
+        RemoveWaterSurfaces(room.Mesh.Rectangles);
     }
 
     public void RemoveWaterSurfaces(List<TRFace4> faces)

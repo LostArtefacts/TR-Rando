@@ -38,7 +38,7 @@ public class EMCreateRoomFunction : BaseEMFunction
                 YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
-            RoomData = new()
+            Mesh = new()
             {
                 Rectangles = new(),
                 Triangles = new(),
@@ -77,9 +77,9 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         // Stride the sectors again and make faces
         List<TRVertex> vertices = new();
-        GenerateFaces(room.Sectors, room.RoomData.Rectangles, vertices);
+        GenerateFaces(room.Sectors, room.Mesh.Rectangles, vertices);
 
-        room.RoomData.Vertices.AddRange(vertices.Select(v => new TR1RoomVertex
+        room.Mesh.Vertices.AddRange(vertices.Select(v => new TR1RoomVertex
         {
             Lighting = DefaultVertex.Lighting,
             Vertex = v
@@ -105,7 +105,7 @@ public class EMCreateRoomFunction : BaseEMFunction
                 YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
-            RoomData = new()
+            Mesh = new()
             {
                 Rectangles = new(),
                 Triangles = new(),
@@ -146,9 +146,9 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         // Stride the sectors again and make faces
         List<TRVertex> vertices = new();
-        GenerateFaces(room.Sectors, room.RoomData.Rectangles, vertices);
+        GenerateFaces(room.Sectors, room.Mesh.Rectangles, vertices);
 
-        room.RoomData.Vertices.AddRange(vertices.Select(v => new TR2RoomVertex
+        room.Mesh.Vertices.AddRange(vertices.Select(v => new TR2RoomVertex
         {
             Lighting = DefaultVertex.Lighting,
             Lighting2 = DefaultVertex.Lighting2,
@@ -176,7 +176,7 @@ public class EMCreateRoomFunction : BaseEMFunction
                 YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
-            RoomData = new()
+            Mesh = new()
             {
                 Rectangles = new(),
                 Triangles = new(),
@@ -216,9 +216,9 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         // Stride the sectors again and make faces
         List<TRVertex> vertices = new();
-        GenerateFaces(room.Sectors, room.RoomData.Rectangles, vertices);
+        GenerateFaces(room.Sectors, room.Mesh.Rectangles, vertices);
 
-        room.RoomData.Vertices.AddRange(vertices.Select(v => new TR3RoomVertex
+        room.Mesh.Vertices.AddRange(vertices.Select(v => new TR3RoomVertex
         {
             Lighting = DefaultVertex.Lighting,
             Attributes = DefaultVertex.Attributes,

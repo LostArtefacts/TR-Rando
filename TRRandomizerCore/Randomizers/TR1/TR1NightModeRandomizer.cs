@@ -89,7 +89,7 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
             room.AmbientIntensity = intensity1;
             room.Lights.ForEach(l => l.Intensity = intensity2);
             room.StaticMeshes.ForEach(s => s.Intensity = (ushort)intensity1);
-            room.RoomData.Vertices.ForEach(v => v.Lighting = intensity1);
+            room.Mesh.Vertices.ForEach(v => v.Lighting = intensity1);
         }
     }
 }

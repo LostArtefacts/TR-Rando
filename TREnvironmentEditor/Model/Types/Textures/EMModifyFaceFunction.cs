@@ -37,10 +37,10 @@ public class EMModifyFaceFunction : BaseEMFunction
                 switch (rot.FaceType)
                 {
                     case EMTextureFaceType.Rectangles:
-                        RotateRectangles(room.RoomData.Rectangles, rot);
+                        RotateRectangles(room.Mesh.Rectangles, rot);
                         break;
                     case EMTextureFaceType.Triangles:
-                        RotateTriangles(room.RoomData.Triangles, rot);
+                        RotateTriangles(room.Mesh.Triangles, rot);
                         break;
                 }
             }
@@ -76,10 +76,10 @@ public class EMModifyFaceFunction : BaseEMFunction
                 switch (rot.FaceType)
                 {
                     case EMTextureFaceType.Rectangles:
-                        RotateRectangles(room.RoomData.Rectangles, rot);
+                        RotateRectangles(room.Mesh.Rectangles, rot);
                         break;
                     case EMTextureFaceType.Triangles:
-                        RotateTriangles(room.RoomData.Triangles, rot);
+                        RotateTriangles(room.Mesh.Triangles, rot);
                         break;
                 }
             }
@@ -115,10 +115,10 @@ public class EMModifyFaceFunction : BaseEMFunction
                 switch (rot.FaceType)
                 {
                     case EMTextureFaceType.Rectangles:
-                        RotateRectangles(room.RoomData.Rectangles, rot);
+                        RotateRectangles(room.Mesh.Rectangles, rot);
                         break;
                     case EMTextureFaceType.Triangles:
-                        RotateTriangles(room.RoomData.Triangles, rot);
+                        RotateTriangles(room.Mesh.Triangles, rot);
                         break;
                 }
             }
@@ -129,16 +129,16 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace4 rect = room.RoomData.Rectangles[faceIndex];
+            TRFace4 rect = room.Mesh.Rectangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TR1RoomVertex currentRoomVertex = room.RoomData.Vertices[rect.Vertices[vertIndex]];
+                TR1RoomVertex currentRoomVertex = room.Mesh.Vertices[rect.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
                 TR1RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
-                rect.Vertices[vertIndex] = (ushort)room.RoomData.Vertices.Count;
-                room.RoomData.Vertices.Add(newRoomVertex);
+                rect.Vertices[vertIndex] = (ushort)room.Mesh.Vertices.Count;
+                room.Mesh.Vertices.Add(newRoomVertex);
             }
         }
     }
@@ -147,16 +147,16 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace4 rect = room.RoomData.Rectangles[faceIndex];
+            TRFace4 rect = room.Mesh.Rectangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TR2RoomVertex currentRoomVertex = room.RoomData.Vertices[rect.Vertices[vertIndex]];
+                TR2RoomVertex currentRoomVertex = room.Mesh.Vertices[rect.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
                 TR2RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
-                rect.Vertices[vertIndex] = (ushort)room.RoomData.Vertices.Count;
-                room.RoomData.Vertices.Add(newRoomVertex);
+                rect.Vertices[vertIndex] = (ushort)room.Mesh.Vertices.Count;
+                room.Mesh.Vertices.Add(newRoomVertex);
             }
         }
     }
@@ -165,16 +165,16 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace4 rect = room.RoomData.Rectangles[faceIndex];
+            TRFace4 rect = room.Mesh.Rectangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TR3RoomVertex currentRoomVertex = room.RoomData.Vertices[rect.Vertices[vertIndex]];
+                TR3RoomVertex currentRoomVertex = room.Mesh.Vertices[rect.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
                 TR3RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
-                rect.Vertices[vertIndex] = (ushort)room.RoomData.Vertices.Count;
-                room.RoomData.Vertices.Add(newRoomVertex);
+                rect.Vertices[vertIndex] = (ushort)room.Mesh.Vertices.Count;
+                room.Mesh.Vertices.Add(newRoomVertex);
             }
         }
     }
@@ -183,16 +183,16 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace3 tri = room.RoomData.Triangles[faceIndex];
+            TRFace3 tri = room.Mesh.Triangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TR1RoomVertex currentRoomVertex = room.RoomData.Vertices[tri.Vertices[vertIndex]];
+                TR1RoomVertex currentRoomVertex = room.Mesh.Vertices[tri.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
                 TR1RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
-                tri.Vertices[vertIndex] = (ushort)room.RoomData.Vertices.Count;
-                room.RoomData.Vertices.Add(newRoomVertex);
+                tri.Vertices[vertIndex] = (ushort)room.Mesh.Vertices.Count;
+                room.Mesh.Vertices.Add(newRoomVertex);
             }
         }
     }
@@ -201,16 +201,16 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace3 tri = room.RoomData.Triangles[faceIndex];
+            TRFace3 tri = room.Mesh.Triangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TR2RoomVertex currentRoomVertex = room.RoomData.Vertices[tri.Vertices[vertIndex]];
+                TR2RoomVertex currentRoomVertex = room.Mesh.Vertices[tri.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
                 TR2RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
-                tri.Vertices[vertIndex] = (ushort)room.RoomData.Vertices.Count;
-                room.RoomData.Vertices.Add(newRoomVertex);
+                tri.Vertices[vertIndex] = (ushort)room.Mesh.Vertices.Count;
+                room.Mesh.Vertices.Add(newRoomVertex);
             }
         }
     }
@@ -219,16 +219,16 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace3 tri = room.RoomData.Triangles[faceIndex];
+            TRFace3 tri = room.Mesh.Triangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TR3RoomVertex currentRoomVertex = room.RoomData.Vertices[tri.Vertices[vertIndex]];
+                TR3RoomVertex currentRoomVertex = room.Mesh.Vertices[tri.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
                 TR3RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
-                tri.Vertices[vertIndex] = (ushort)room.RoomData.Vertices.Count;
-                room.RoomData.Vertices.Add(newRoomVertex);
+                tri.Vertices[vertIndex] = (ushort)room.Mesh.Vertices.Count;
+                room.Mesh.Vertices.Add(newRoomVertex);
             }
         }
     }

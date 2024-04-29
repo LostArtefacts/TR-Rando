@@ -107,7 +107,7 @@ public class EMDrainFunction : BaseWaterFunction
             room.ContainsWater = false;
 
             // Remove all wave movements and caustics by default
-            foreach (TR3RoomVertex vertex in room.RoomData.Vertices)
+            foreach (TR3RoomVertex vertex in room.Mesh.Vertices)
             {
                 vertex.UseWaveMovement = vertex.UseCaustics = false;
             }

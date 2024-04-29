@@ -15,12 +15,12 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             TR1Room room = level.Rooms[data.ConvertRoom(location.Room)];
-            room.RoomData.Sprites.Add(new()
+            room.Mesh.Sprites.Add(new()
             {
                 Texture = Texture,
-                Vertex = (short)room.RoomData.Vertices.Count
+                Vertex = (short)room.Mesh.Vertices.Count
             });
-            room.RoomData.Vertices.Add(new()
+            room.Mesh.Vertices.Add(new()
             {
                 Lighting = Vertex.Lighting,
                 Vertex = new()
@@ -39,12 +39,12 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             TR2Room room = level.Rooms[data.ConvertRoom(location.Room)];
-            room.RoomData.Sprites.Add(new()
+            room.Mesh.Sprites.Add(new()
             {
                 Texture = Texture,
-                Vertex = (short)room.RoomData.Vertices.Count
+                Vertex = (short)room.Mesh.Vertices.Count
             });
-            room.RoomData.Vertices.Add(new()
+            room.Mesh.Vertices.Add(new()
             {
                 Lighting = Vertex.Lighting,
                 Lighting2 = Vertex.Lighting2,
@@ -65,12 +65,12 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             TR3Room room = level.Rooms[data.ConvertRoom(location.Room)];
-            room.RoomData.Sprites.Add(new()
+            room.Mesh.Sprites.Add(new()
             {
                 Texture = Texture,
-                Vertex = (short)room.RoomData.Vertices.Count
+                Vertex = (short)room.Mesh.Vertices.Count
             });
-            room.RoomData.Vertices.Add(new()
+            room.Mesh.Vertices.Add(new()
             {
                 Lighting = Vertex.Lighting,
                 Attributes = Vertex.Attributes,

@@ -74,7 +74,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         for (int i = 0; i < defVerts.Count; i++)
         {
             TRVertex vert = defVerts[i];
-            int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+            int vi = room.Mesh.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
             if (vi != -1)
             {
                 oldVertIndices.Add((ushort)vi);
@@ -90,8 +90,8 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
-            TR1RoomVertex oldRoomVertex = room.RoomData.Vertices[vert];
-            TRVertex oldVert = room.RoomData.Vertices[vert].Vertex;
+            TR1RoomVertex oldRoomVertex = room.Mesh.Vertices[vert];
+            TRVertex oldVert = room.Mesh.Vertices[vert].Vertex;
             TRVertex newVertex = new()
             {
                 X = oldVert.X,
@@ -102,15 +102,15 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
 
         // Get the tile face that matches the vertex list
-        TRFace4 floorFace = room.RoomData.Rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
+        TRFace4 floorFace = room.Mesh.Rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
 
         // If the floor has been lowered (remember +Clicks = move down, -Clicks = move up)
         // then the sides will also need lowering.
         if (Clicks > 0)
         {
             // Find faces that share 2 of the old vertices
-            int floorY = room.RoomData.Vertices[floorFace.Vertices[0]].Vertex.Y;
-            foreach (TRFace4 face in room.RoomData.Rectangles)
+            int floorY = room.Mesh.Vertices[floorFace.Vertices[0]].Vertex.Y;
+            foreach (TRFace4 face in room.Mesh.Rectangles)
             {
                 if (face == floorFace)
                 {
@@ -125,10 +125,10 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                     foreach (ushort sharedVert in sharedVerts)
                     {
                         int i = faceVerts.IndexOf(sharedVert);
-                        TRVertex oldVert = room.RoomData.Vertices[sharedVert].Vertex;
+                        TRVertex oldVert = room.Mesh.Vertices[sharedVert].Vertex;
                         foreach (ushort newVert in newVertIndices)
                         {
-                            TRVertex newVertex = room.RoomData.Vertices[newVert].Vertex;
+                            TRVertex newVertex = room.Mesh.Vertices[newVert].Vertex;
                             if (newVertex.X == oldVert.X && newVertex.Z == oldVert.Z)
                             {
                                 faceVerts[i] = newVert;
@@ -159,7 +159,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                 if (((1 << i) & Flags) > 0)
                 {
                     int j = i == 3 ? 0 : (i + 1);
-                    room.RoomData.Rectangles.Add(new()
+                    room.Mesh.Rectangles.Add(new()
                     {
                         Texture = SideTexture,
                         Vertices = new ushort[]
@@ -296,7 +296,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         for (int i = 0; i < defVerts.Count; i++)
         {
             TRVertex vert = defVerts[i];
-            int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+            int vi = room.Mesh.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
             if (vi != -1)
             {
                 oldVertIndices.Add((ushort)vi);
@@ -312,8 +312,8 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
-            TR2RoomVertex oldRoomVertex = room.RoomData.Vertices[vert];
-            TRVertex oldVert = room.RoomData.Vertices[vert].Vertex;
+            TR2RoomVertex oldRoomVertex = room.Mesh.Vertices[vert];
+            TRVertex oldVert = room.Mesh.Vertices[vert].Vertex;
             TRVertex newVertex = new()
             {
                 X = oldVert.X,
@@ -324,15 +324,15 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
 
         // Get the tile face that matches the vertex list
-        TRFace4 floorFace = room.RoomData.Rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
+        TRFace4 floorFace = room.Mesh.Rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
 
         // If the floor has been lowered (remember +Clicks = move down, -Clicks = move up)
         // then the sides will also need lowering.
         if (Clicks > 0)
         {
             // Find faces that share 2 of the old vertices
-            int floorY = room.RoomData.Vertices[floorFace.Vertices[0]].Vertex.Y;
-            foreach (TRFace4 face in room.RoomData.Rectangles)
+            int floorY = room.Mesh.Vertices[floorFace.Vertices[0]].Vertex.Y;
+            foreach (TRFace4 face in room.Mesh.Rectangles)
             {
                 if (face == floorFace)
                 {
@@ -347,10 +347,10 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                     foreach (ushort sharedVert in sharedVerts)
                     {
                         int i = faceVerts.IndexOf(sharedVert);
-                        TRVertex oldVert = room.RoomData.Vertices[sharedVert].Vertex;
+                        TRVertex oldVert = room.Mesh.Vertices[sharedVert].Vertex;
                         foreach (ushort newVert in newVertIndices)
                         {
-                            TRVertex newVertex = room.RoomData.Vertices[newVert].Vertex;
+                            TRVertex newVertex = room.Mesh.Vertices[newVert].Vertex;
                             if (newVertex.X == oldVert.X && newVertex.Z == oldVert.Z)
                             {
                                 faceVerts[i] = newVert;
@@ -381,7 +381,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                 if (((1 << i) & Flags) > 0)
                 {
                     int j = i == 3 ? 0 : (i + 1);
-                    room.RoomData.Rectangles.Add(new()
+                    room.Mesh.Rectangles.Add(new()
                     {
                         Texture = SideTexture,
                         Vertices = new ushort[]
@@ -537,7 +537,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         for (int i = 0; i < defVerts.Count; i++)
         {
             TRVertex vert = defVerts[i];
-            int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+            int vi = room.Mesh.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
             if (vi != -1)
             {
                 oldVertIndices.Add((ushort)vi);
@@ -549,8 +549,8 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
-            TR3RoomVertex oldRoomVertex = room.RoomData.Vertices[vert];
-            TRVertex oldVert = room.RoomData.Vertices[vert].Vertex;
+            TR3RoomVertex oldRoomVertex = room.Mesh.Vertices[vert];
+            TRVertex oldVert = room.Mesh.Vertices[vert].Vertex;
             TRVertex newVertex = new()
             {
                 X = oldVert.X,
@@ -561,15 +561,15 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
 
         // Get the tile face that matches the vertex list
-        TRFace4 floorFace = room.RoomData.Rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
+        TRFace4 floorFace = room.Mesh.Rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
 
         // If the floor has been lowered (remember +Clicks = move down, -Clicks = move up)
         // then the sides will also need lowering.
         if (Clicks > 0)
         {
             // Find faces that share 2 of the old vertices
-            int floorY = room.RoomData.Vertices[floorFace.Vertices[0]].Vertex.Y;
-            foreach (TRFace4 face in room.RoomData.Rectangles)
+            int floorY = room.Mesh.Vertices[floorFace.Vertices[0]].Vertex.Y;
+            foreach (TRFace4 face in room.Mesh.Rectangles)
             {
                 if (face == floorFace)
                 {
@@ -584,10 +584,10 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                     foreach (ushort sharedVert in sharedVerts)
                     {
                         int i = faceVerts.IndexOf(sharedVert);
-                        TRVertex oldVert = room.RoomData.Vertices[sharedVert].Vertex;
+                        TRVertex oldVert = room.Mesh.Vertices[sharedVert].Vertex;
                         foreach (ushort newVert in newVertIndices)
                         {
-                            TRVertex newVertex = room.RoomData.Vertices[newVert].Vertex;
+                            TRVertex newVertex = room.Mesh.Vertices[newVert].Vertex;
                             if (newVertex.X == oldVert.X && newVertex.Z == oldVert.Z)
                             {
                                 faceVerts[i] = newVert;
@@ -618,7 +618,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                 if (((1 << i) & Flags) > 0)
                 {
                     int j = i == 3 ? 0 : (i + 1);
-                    room.RoomData.Rectangles.Add(new()
+                    room.Mesh.Rectangles.Add(new()
                     {
                         Texture = SideTexture,
                         Vertices = new ushort[]

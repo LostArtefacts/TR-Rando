@@ -29,7 +29,7 @@ public class EMCeilingFunction : BaseEMFunction
 
             if (AmendVertices)
             {
-                foreach (TR1RoomVertex vertex in room.RoomData.Vertices)
+                foreach (TR1RoomVertex vertex in room.Mesh.Vertices)
                 {
                     if (vertex.Vertex.Y == oldYTop)
                     {
@@ -60,7 +60,7 @@ public class EMCeilingFunction : BaseEMFunction
 
             if (AmendVertices)
             {
-                foreach (TR2RoomVertex vertex in room.RoomData.Vertices)
+                foreach (TR2RoomVertex vertex in room.Mesh.Vertices)
                 {
                     if (vertex.Vertex.Y == oldYTop)
                     {
@@ -91,7 +91,7 @@ public class EMCeilingFunction : BaseEMFunction
 
             if (AmendVertices)
             {
-                foreach (TR3RoomVertex vertex in room.RoomData.Vertices)
+                foreach (TR3RoomVertex vertex in room.Mesh.Vertices)
                 {
                     if (vertex.Vertex.Y == oldYTop)
                     {

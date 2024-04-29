@@ -5,11 +5,11 @@ namespace TRLevelControl;
 
 internal static class TR3FileReadUtilities
 {
-    public static TR3RoomData ConvertToRoomData(ushort[] rawData)
+    public static TR3RoomMesh ConvertToRoomData(ushort[] rawData)
     {
         // This approach is temporarily retained
 
-        TR3RoomData roomData = new()
+        TR3RoomMesh roomData = new()
         {
             Vertices = new()
         };

@@ -67,7 +67,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         List<List<TRFace3>> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
-            faces.Add(room.RoomData.Triangles.ToList());
+            faces.Add(room.Mesh.Triangles.ToList());
         }
         return faces;
     }
@@ -77,7 +77,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         List<List<TRFace4>> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
-            faces.Add(room.RoomData.Rectangles.ToList());
+            faces.Add(room.Mesh.Rectangles.ToList());
         }
         return faces;
     }
