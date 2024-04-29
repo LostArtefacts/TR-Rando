@@ -16,7 +16,7 @@ public static class FaceUtilities
         List<TRFace4> faces = new();
         foreach (TR1Room room in level.Rooms)
         {
-            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles.ToArray(), v =>
+            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
             {
                 return room.RoomData.Vertices[v].Vertex;
             }));
@@ -33,7 +33,7 @@ public static class FaceUtilities
         List<TRFace4> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
-            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles.ToArray(), v =>
+            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
             {
                 return room.RoomData.Vertices[v].Vertex;
             }));
@@ -95,7 +95,7 @@ public static class FaceUtilities
     }
 
     private static List<TRFace4> ScanTriggerFaces
-        (FDControl floorData, List<FDTrigType> triggerMatches, bool includeDeathTiles, List<TRRoomSector> sectors, ushort roomDepth, TRFace4[] roomFaces, Func<ushort, TRVertex> vertexAction)
+        (FDControl floorData, List<FDTrigType> triggerMatches, bool includeDeathTiles, List<TRRoomSector> sectors, ushort roomDepth, List<TRFace4> roomFaces, Func<ushort, TRVertex> vertexAction)
     {
         List<TRFace4> faces = new();
         for (int i = 0; i < sectors.Count; i++)

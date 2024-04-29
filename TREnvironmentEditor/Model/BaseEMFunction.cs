@@ -71,7 +71,7 @@ public abstract class BaseEMFunction
 
     public static int CreateRoomVertex(TR3Room room, TRVertex vert, short lighting = 6574, ushort colour = 6574, bool useCaustics = false, bool useWaveMovement = false)
     {
-        TR3RoomVertex v = new()
+        room.RoomData.Vertices.Add(new()
         {
             Attributes = 32784,
             Lighting = lighting,
@@ -79,13 +79,8 @@ public abstract class BaseEMFunction
             UseCaustics = useCaustics,
             UseWaveMovement = useWaveMovement,
             Vertex = vert
-        };
-
-        List<TR3RoomVertex> verts = room.RoomData.Vertices.ToList();
-        verts.Add(v);
-        room.RoomData.Vertices = verts.ToArray();
-        room.RoomData.NumVertices++;
-        return verts.Count - 1;
+        });
+        return room.RoomData.Vertices.Count - 1;
     }
 
     /// <summary>

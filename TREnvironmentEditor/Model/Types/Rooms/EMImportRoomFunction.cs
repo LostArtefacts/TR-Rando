@@ -329,14 +329,10 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             ReverbInfo = roomDef.Room.ReverbInfo,
             RoomData = new()
             {
-                NumRectangles = roomDef.Room.RoomData.NumRectangles,
-                NumSprites = roomDef.Room.RoomData.NumSprites,
-                NumTriangles = roomDef.Room.RoomData.NumTriangles,
-                NumVertices = roomDef.Room.RoomData.NumVertices,
-                Rectangles = new TRFace4[roomDef.Room.RoomData.NumRectangles],
-                Sprites = new TRRoomSprite[roomDef.Room.RoomData.NumSprites],
-                Triangles = new TRFace3[roomDef.Room.RoomData.NumTriangles],
-                Vertices = new TR3RoomVertex[roomDef.Room.RoomData.NumVertices]
+                Rectangles = new(),
+                Triangles = new(),
+                Vertices = new(),
+                Sprites = new(),
             },
             Sectors = new(),
             StaticMeshes = new(),
@@ -358,26 +354,26 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         }
 
         // Faces
-        for (int i = 0; i < newRoom.RoomData.NumRectangles; i++)
+        for (int i = 0; i < roomDef.Room.RoomData.Rectangles.Count; i++)
         {
-            newRoom.RoomData.Rectangles[i] = new TRFace4
+            newRoom.RoomData.Rectangles.Add(new()
             {
                 Texture = RectangleTexture == ushort.MaxValue ? roomDef.Room.RoomData.Rectangles[i].Texture : RectangleTexture,
                 Vertices = new ushort[roomDef.Room.RoomData.Rectangles[i].Vertices.Length]
-            };
+            });
             for (int j = 0; j < newRoom.RoomData.Rectangles[i].Vertices.Length; j++)
             {
                 newRoom.RoomData.Rectangles[i].Vertices[j] = roomDef.Room.RoomData.Rectangles[i].Vertices[j];
             }
         }
 
-        for (int i = 0; i < newRoom.RoomData.NumTriangles; i++)
+        for (int i = 0; i < roomDef.Room.RoomData.Triangles.Count; i++)
         {
-            newRoom.RoomData.Triangles[i] = new TRFace3
+            newRoom.RoomData.Triangles.Add(new()
             {
                 Texture = TriangleTexture == ushort.MaxValue ? roomDef.Room.RoomData.Triangles[i].Texture : TriangleTexture,
                 Vertices = new ushort[roomDef.Room.RoomData.Triangles[i].Vertices.Length]
-            };
+            });
             for (int j = 0; j < newRoom.RoomData.Triangles[i].Vertices.Length; j++)
             {
                 newRoom.RoomData.Triangles[i].Vertices[j] = roomDef.Room.RoomData.Triangles[i].Vertices[j];
@@ -385,9 +381,9 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         }
 
         // Vertices
-        for (int i = 0; i < newRoom.RoomData.Vertices.Length; i++)
+        for (int i = 0; i < roomDef.Room.RoomData.Vertices.Count; i++)
         {
-            newRoom.RoomData.Vertices[i] = new TR3RoomVertex
+            newRoom.RoomData.Vertices.Add(new()
             {
                 Attributes = roomDef.Room.RoomData.Vertices[i].Attributes,
                 Colour = roomDef.Room.RoomData.Vertices[i].Colour,
@@ -398,17 +394,17 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                     Y = (short)(roomDef.Room.RoomData.Vertices[i].Vertex.Y + ydiff),
                     Z = roomDef.Room.RoomData.Vertices[i].Vertex.Z
                 }
-            };
+            });
         }
 
         // Sprites
-        for (int i = 0; i < newRoom.RoomData.NumSprites; i++)
+        for (int i = 0; i < roomDef.Room.RoomData.Sprites.Count; i++)
         {
-            newRoom.RoomData.Sprites[i] = new TRRoomSprite
+            newRoom.RoomData.Sprites.Add(new()
             {
                 Texture = roomDef.Room.RoomData.Sprites[i].Texture,
                 Vertex = roomDef.Room.RoomData.Sprites[i].Vertex
-            };
+            });
         }
 
         // Static Meshes

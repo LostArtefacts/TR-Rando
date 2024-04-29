@@ -178,11 +178,10 @@ public class EMCreateRoomFunction : BaseEMFunction
             },
             RoomData = new()
             {
-                // Ignored for now
-                NumSprites = 0,
-                NumTriangles = 0,
-                Sprites = Array.Empty<TRRoomSprite>(),
-                Triangles = Array.Empty<TRFace3>(),
+                Rectangles = new(),
+                Triangles = new(),
+                Vertices = new(),
+                Sprites = new(),
             },
             Lights = new()
         };
@@ -204,9 +203,6 @@ public class EMCreateRoomFunction : BaseEMFunction
         sbyte ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1);
         sbyte floor = (sbyte)(room.Info.YBottom / TRConsts.Step1);
 
-        List<TRFace4> faces = new();
-        List<TRVertex> vertices = new();
-
         // Make the sectors first
         room.Sectors = GenerateSectors(ceiling, floor);
 
@@ -219,19 +215,16 @@ public class EMCreateRoomFunction : BaseEMFunction
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
-        GenerateFaces(room.Sectors, faces, vertices);
+        List<TRVertex> vertices = new();
+        GenerateFaces(room.Sectors, room.RoomData.Rectangles, vertices);
 
-        // Write it all to the room
-        room.RoomData.NumRectangles = (short)faces.Count;
-        room.RoomData.NumVertices = (short)vertices.Count;
-        room.RoomData.Rectangles = faces.ToArray();
-        room.RoomData.Vertices = vertices.Select(v => new TR3RoomVertex
+        room.RoomData.Vertices.AddRange(vertices.Select(v => new TR3RoomVertex
         {
             Lighting = DefaultVertex.Lighting,
             Attributes = DefaultVertex.Attributes,
             Colour = DefaultVertex.Colour,
             Vertex = v
-        }).ToArray();
+        }));
 
         level.Rooms.Add(room);
     }

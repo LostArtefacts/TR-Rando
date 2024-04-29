@@ -39,7 +39,7 @@ internal static class TR4FileReadUtilities
             }
 
             //Store what we just read
-            room.RoomData = ConvertToRoomData(room);
+            room.RoomData = TR3FileReadUtilities.ConvertToRoomData(room.Data);
 
             //Portals
             room.NumPortals = reader.ReadUInt16();
@@ -193,117 +193,6 @@ internal static class TR4FileReadUtilities
         //AIObjects
         numEntities = reader.ReadUInt32();
         lvl.AIEntities = reader.ReadTR4AIEntities(numEntities);
-    }
-
-    private static TR3RoomData ConvertToRoomData(TR4Room room)
-    {
-        int RoomDataOffset = 0;
-
-        //Grab detailed room data
-        TR3RoomData RoomData = new()
-        {
-            //Room vertices
-            NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset])
-        };
-        RoomData.Vertices = new TR3RoomVertex[RoomData.NumVertices];
-
-        RoomDataOffset++;
-
-        for (int j = 0; j < RoomData.NumVertices; j++)
-        {
-            TR3RoomVertex vertex = new()
-            {
-                Vertex = new TRVertex()
-            };
-
-            vertex.Vertex.X = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
-            vertex.Vertex.Y = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
-            vertex.Vertex.Z = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
-            vertex.Lighting = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
-            vertex.Attributes = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            vertex.Colour = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-
-            RoomData.Vertices[j] = vertex;
-        }
-
-        //Room rectangles
-        RoomData.NumRectangles = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-        RoomData.Rectangles = new TRFace4[RoomData.NumRectangles];
-
-        RoomDataOffset++;
-
-        for (int j = 0; j < RoomData.NumRectangles; j++)
-        {
-            TRFace4 face = new()
-            {
-                Vertices = new ushort[4]
-            };
-            face.Vertices[0] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[1] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[2] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[3] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Texture = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-
-            RoomData.Rectangles[j] = face;
-        }
-
-        //Room triangles
-        RoomData.NumTriangles = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-        RoomData.Triangles = new TRFace3[RoomData.NumTriangles];
-
-        RoomDataOffset++;
-
-        for (int j = 0; j < RoomData.NumTriangles; j++)
-        {
-            TRFace3 face = new()
-            {
-                Vertices = new ushort[3]
-            };
-            face.Vertices[0] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[1] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[2] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Texture = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-
-            RoomData.Triangles[j] = face;
-        }
-
-        //Room sprites
-        RoomData.NumSprites = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-        RoomData.Sprites = new TRRoomSprite[RoomData.NumSprites];
-
-        RoomDataOffset++;
-
-        for (int j = 0; j < RoomData.NumSprites; j++)
-        {
-            TRRoomSprite face = new()
-            {
-                Vertex = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset])
-            };
-            RoomDataOffset++;
-            face.Texture = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
-
-            RoomData.Sprites[j] = face;
-        }
-
-        Debug.Assert(RoomDataOffset == room.NumDataWords);
-
-        return RoomData;
     }
 
     private static TR4RoomLight ReadRoomLight(BinaryReader reader)

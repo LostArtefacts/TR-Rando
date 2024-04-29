@@ -95,16 +95,8 @@ public class EMRemoveFaceFunction : BaseEMFunction
                 }
             }
 
-            List<TRFace4> tempQuads = room.RoomData.Rectangles.ToList();
-            List<TRFace3> tempTris = room.RoomData.Triangles.ToList();
-
-            RemoveEntries(tempQuads, rectangleRemovals);
-            RemoveEntries(tempTris, triangleRemovals);
-
-            room.RoomData.Rectangles = tempQuads.ToArray();
-            room.RoomData.Triangles = tempTris.ToArray();
-            room.RoomData.NumRectangles = (short)room.RoomData.Rectangles.Length;
-            room.RoomData.NumTriangles = (short)room.RoomData.Triangles.Length;
+            RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
+            RemoveEntries(room.RoomData.Triangles, triangleRemovals);
         }
     }
 

@@ -64,7 +64,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
             _level.Rooms.Add(room);
 
             uint numWords = reader.ReadUInt32();
-            room.RoomData = ConvertToRoomData(reader.ReadUInt16s(numWords));
+            room.RoomData = TR3FileReadUtilities.ConvertToRoomData(reader.ReadUInt16s(numWords));
 
             //Portals
             ushort numPortals = reader.ReadUInt16();
@@ -288,117 +288,6 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     private void WriteSprites(TRLevelWriter writer)
     {
         _spriteBuilder.WriteSprites(writer, _level.Sprites);
-    }
-
-    private static TR3RoomData ConvertToRoomData(ushort[] rawData)
-    {
-        int offset = 0;
-
-        //Grab detailed room data
-        TR3RoomData roomData = new()
-        {
-            //Room vertices
-            NumVertices = UnsafeConversions.UShortToShort(rawData[offset])
-        };
-        roomData.Vertices = new TR3RoomVertex[roomData.NumVertices];
-
-        offset++;
-
-        for (int j = 0; j < roomData.NumVertices; j++)
-        {
-            TR3RoomVertex vertex = new()
-            {
-                Vertex = new TRVertex()
-            };
-
-            vertex.Vertex.X = UnsafeConversions.UShortToShort(rawData[offset]);
-            offset++;
-            vertex.Vertex.Y = UnsafeConversions.UShortToShort(rawData[offset]);
-            offset++;
-            vertex.Vertex.Z = UnsafeConversions.UShortToShort(rawData[offset]);
-            offset++;
-            vertex.Lighting = UnsafeConversions.UShortToShort(rawData[offset]);
-            offset++;
-            vertex.Attributes = rawData[offset];
-            offset++;
-            vertex.Colour = rawData[offset];
-            offset++;
-
-            roomData.Vertices[j] = vertex;
-        }
-
-        //Room rectangles
-        roomData.NumRectangles = UnsafeConversions.UShortToShort(rawData[offset]);
-        roomData.Rectangles = new TRFace4[roomData.NumRectangles];
-
-        offset++;
-
-        for (int j = 0; j < roomData.NumRectangles; j++)
-        {
-            TRFace4 face = new()
-            {
-                Vertices = new ushort[4]
-            };
-            face.Vertices[0] = rawData[offset];
-            offset++;
-            face.Vertices[1] = rawData[offset];
-            offset++;
-            face.Vertices[2] = rawData[offset];
-            offset++;
-            face.Vertices[3] = rawData[offset];
-            offset++;
-            face.Texture = rawData[offset];
-            offset++;
-
-            roomData.Rectangles[j] = face;
-        }
-
-        //Room triangles
-        roomData.NumTriangles = UnsafeConversions.UShortToShort(rawData[offset]);
-        roomData.Triangles = new TRFace3[roomData.NumTriangles];
-
-        offset++;
-
-        for (int j = 0; j < roomData.NumTriangles; j++)
-        {
-            TRFace3 face = new()
-            {
-                Vertices = new ushort[3]
-            };
-            face.Vertices[0] = rawData[offset];
-            offset++;
-            face.Vertices[1] = rawData[offset];
-            offset++;
-            face.Vertices[2] = rawData[offset];
-            offset++;
-            face.Texture = rawData[offset];
-            offset++;
-
-            roomData.Triangles[j] = face;
-        }
-
-        //Room sprites
-        roomData.NumSprites = UnsafeConversions.UShortToShort(rawData[offset]);
-        roomData.Sprites = new TRRoomSprite[roomData.NumSprites];
-
-        offset++;
-
-        for (int j = 0; j < roomData.NumSprites; j++)
-        {
-            TRRoomSprite face = new()
-            {
-                Vertex = UnsafeConversions.UShortToShort(rawData[offset])
-            };
-            offset++;
-            face.Texture = UnsafeConversions.UShortToShort(rawData[offset]);
-            offset++;
-
-            roomData.Sprites[j] = face;
-        }
-
-        Debug.Assert(offset == rawData.Length);
-
-        return roomData;
     }
 
     private void ReadSoundEffects(TRLevelReader reader)
