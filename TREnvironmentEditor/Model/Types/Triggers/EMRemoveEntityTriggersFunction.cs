@@ -38,7 +38,7 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
 
         foreach (TR2Room room in level.Rooms)
         {
-            RemoveSectorTriggers(floorData, room.SectorList, entities, excludedTypes);
+            RemoveSectorTriggers(floorData, room.Sectors, entities, excludedTypes);
         }
 
         floorData.WriteToLevel(level);

@@ -25,9 +25,9 @@ public class AudioRandomizer
         _trackMap.Clear();
     }
 
-    public void RandomizeFloorTracks(TRRoomSector[] sectors, FDControl floorData, Random generator, Func<int, Vector2> positionAction)
+    public void RandomizeFloorTracks(List<TRRoomSector> sectors, FDControl floorData, Random generator, Func<int, Vector2> positionAction)
     {
-        for (int i = 0; i < sectors.Length; i++)
+        for (int i = 0; i < sectors.Count; i++)
         {
             TRRoomSector sector = sectors[i];
             FDActionListItem trackItem = null;

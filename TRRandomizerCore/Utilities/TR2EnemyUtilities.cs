@@ -37,19 +37,7 @@ public static class TR2EnemyUtilities
 
     public static bool IsWaterEnemyRequired(TR2CombinedLevel level)
     {
-        foreach (TR2Entity entityInstance in level.Data.Entities)
-        {
-            TR2Type entity = entityInstance.TypeID;
-            if (TR2TypeUtilities.IsWaterCreature(entity))
-            {
-                if (!level.CanPerformDraining(entityInstance.Room))
-                {
-                    // Draining cannot be performed so we need to ensure we get at least one water enemy
-                    return true;
-                }
-            }
-        }
-        return false;
+        return level.Data.Entities.Any(e => TR2TypeUtilities.IsWaterCreature(e.TypeID));
     }
 
     public static bool IsDroppableEnemyRequired(TR2CombinedLevel level)

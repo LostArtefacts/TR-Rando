@@ -31,7 +31,7 @@ public class TR2LandmarkImporter : AbstractLandmarkImporter<TR2Type, TR2Level>
 
         TR2Room room = level.Rooms[portalSector.Room];
         int x = isLevelMirrored ? (room.NumXSectors - portalSector.X - 1) : portalSector.X;
-        TRRoomSector sector = room.SectorList[x * room.NumZSectors + portalSector.Z];
+        TRRoomSector sector = room.Sectors[x * room.NumZSectors + portalSector.Z];
 
         return GetSectorPortalRoom(sector, floorData, portalSector.Direction);
     }

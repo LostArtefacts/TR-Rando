@@ -111,7 +111,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
         {
             foreach (short room in AttachToRooms)
             {
-                foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].SectorList)
+                foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                 {
                     AttachToSector(sector, control, cameraIndex, data);
                 }

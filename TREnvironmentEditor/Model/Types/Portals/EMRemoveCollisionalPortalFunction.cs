@@ -43,8 +43,8 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         TR2Room room1 = level.Rooms[Location1.Room];
         TR2Room room2 = level.Rooms[Location2.Room];
 
-        TRRoomSector sector1 = room1.SectorList[GetSectorIndex(room1.Info, Location1, room1.NumZSectors)];
-        TRRoomSector sector2 = room2.SectorList[GetSectorIndex(room2.Info, Location2, room2.NumZSectors)];
+        TRRoomSector sector1 = room1.Sectors[GetSectorIndex(room1.Info, Location1, room1.NumZSectors)];
+        TRRoomSector sector2 = room2.Sectors[GetSectorIndex(room2.Info, Location2, room2.NumZSectors)];
 
         RemovePortals(sector1, sector2, floorData);
 

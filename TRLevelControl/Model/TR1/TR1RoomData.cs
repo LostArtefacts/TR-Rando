@@ -4,50 +4,35 @@ namespace TRLevelControl.Model;
 
 public class TR1RoomData : ISerializableCompact
 {
-    public short NumVertices { get; set; }
-
-    public TR1RoomVertex[] Vertices { get; set; }
-
-    public short NumRectangles { get; set; }
-
-    public TRFace4[] Rectangles { get; set; }
-
-    public short NumTriangles { get; set; }
-
-    public TRFace3[] Triangles { get; set; }
-
-    public short NumSprites { get; set; }
-
-    public TRRoomSprite[] Sprites { get; set; }
+    public List<TR1RoomVertex> Vertices { get; set; }
+    public List<TRFace4> Rectangles { get; set; }
+    public List<TRFace3> Triangles { get; set; }
+    public List<TRRoomSprite> Sprites { get; set; }
 
     public byte[] Serialize()
     {
         using MemoryStream stream = new();
         using (BinaryWriter writer = new(stream))
         {
-            writer.Write(NumVertices);
-
+            writer.Write((short)Vertices.Count);
             foreach (TR1RoomVertex vert in Vertices)
             {
                 writer.Write(vert.Serialize());
             }
 
-            writer.Write(NumRectangles);
-
+            writer.Write((short)Rectangles.Count);
             foreach (TRFace4 face in Rectangles)
             {
                 writer.Write(face.Serialize());
             }
 
-            writer.Write(NumTriangles);
-
+            writer.Write((short)Triangles.Count);
             foreach (TRFace3 face in Triangles)
             {
                 writer.Write(face.Serialize());
             }
 
-            writer.Write(NumSprites);
-
+            writer.Write((short)Sprites.Count);
             foreach (TRRoomSprite sprite in Sprites)
             {
                 writer.Write(sprite.Serialize());

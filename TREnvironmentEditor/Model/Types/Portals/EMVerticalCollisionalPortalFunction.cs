@@ -71,7 +71,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
 
         if (AllSectors)
         {
-            foreach (TRRoomSector sector in level.Rooms[ceilingRoom].SectorList)
+            foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
             {
                 if (!sector.IsWall && sector.RoomBelow != TRConsts.NoRoom)
                 {
@@ -79,7 +79,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
                 }
             }
 
-            foreach (TRRoomSector sector in level.Rooms[floorRoom].SectorList)
+            foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
             {
                 if (!sector.IsWall && sector.RoomAbove != TRConsts.NoRoom)
                 {

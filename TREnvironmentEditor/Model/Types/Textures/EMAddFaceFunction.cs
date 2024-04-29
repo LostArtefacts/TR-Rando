@@ -17,13 +17,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Quads.Keys)
             {
                 TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                List<TRFace4> faces = room.RoomData.Rectangles.ToList();
-                faces.AddRange(Quads[roomIndex]);
-
-                room.RoomData.Rectangles = faces.ToArray();
-                room.RoomData.NumRectangles = (short)faces.Count;
-
-                room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+                room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
             }
         }
 
@@ -32,13 +26,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Triangles.Keys)
             {
                 TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                List<TRFace3> faces = room.RoomData.Triangles.ToList();
-                faces.AddRange(Triangles[roomIndex]);
-
-                room.RoomData.Triangles = faces.ToArray();
-                room.RoomData.NumTriangles = (short)faces.Count;
-
-                room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+                room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
             }
         }
     }
@@ -52,13 +40,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Quads.Keys)
             {
                 TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                List<TRFace4> faces = room.RoomData.Rectangles.ToList();
-                faces.AddRange(Quads[roomIndex]);
-
-                room.RoomData.Rectangles = faces.ToArray();
-                room.RoomData.NumRectangles = (short)faces.Count;
-
-                room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+                room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
             }
         }
 
@@ -67,13 +49,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Triangles.Keys)
             {
                 TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                List<TRFace3> faces = room.RoomData.Triangles.ToList();
-                faces.AddRange(Triangles[roomIndex]);
-
-                room.RoomData.Triangles = faces.ToArray();
-                room.RoomData.NumTriangles = (short)faces.Count;
-
-                room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+                room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
             }
         }
     }
@@ -87,13 +63,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Quads.Keys)
             {
                 TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                List<TRFace4> faces = room.RoomData.Rectangles.ToList();
-                faces.AddRange(Quads[roomIndex]);
-
-                room.RoomData.Rectangles = faces.ToArray();
-                room.RoomData.NumRectangles = (short)faces.Count;
-
-                room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+                room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
             }
         }
 
@@ -102,13 +72,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Triangles.Keys)
             {
                 TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                List<TRFace3> faces = room.RoomData.Triangles.ToList();
-                faces.AddRange(Triangles[roomIndex]);
-
-                room.RoomData.Triangles = faces.ToArray();
-                room.RoomData.NumTriangles = (short)faces.Count;
-
-                room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+                room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
             }
         }
     }
@@ -117,7 +81,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
     {
         if (Quads != null)
         {
-            foreach (List<TRFace4> faces in Quads.Values)
+            foreach (List<TRFace4> faces in Quads?.Values)
             {
                 foreach (TRFace4 face in faces)
                 {
@@ -131,7 +95,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
 
         if (Triangles != null)
         {
-            foreach (List<TRFace3> faces in Triangles.Values)
+            foreach (List<TRFace3> faces in Triangles?.Values)
             {
                 foreach (TRFace3 face in faces)
                 {

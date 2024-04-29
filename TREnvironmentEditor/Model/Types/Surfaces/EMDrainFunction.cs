@@ -14,7 +14,7 @@ public class EMDrainFunction : BaseWaterFunction
         
         foreach (int roomNumber in RoomNumbers)
         {
-            level.Rooms[data.ConvertRoom(roomNumber)].Drain();
+            level.Rooms[data.ConvertRoom(roomNumber)].ContainsWater = false;
         }
 
         foreach (int roomNumber in RoomNumbers)
@@ -53,7 +53,7 @@ public class EMDrainFunction : BaseWaterFunction
         // determining which rooms have water.
         foreach (int roomNumber in RoomNumbers)
         {
-            level.Rooms[data.ConvertRoom(roomNumber)].Drain();
+            level.Rooms[data.ConvertRoom(roomNumber)].ContainsWater = false;
         }
 
         // Work out rooms above and below and what needs water textures as ceilings
@@ -62,7 +62,7 @@ public class EMDrainFunction : BaseWaterFunction
         {
             TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
 
-            ISet<byte> roomsBelow = GetAdjacentRooms(room.SectorList, false);
+            ISet<byte> roomsBelow = GetAdjacentRooms(room.Sectors, false);
             foreach (byte roomBelowNumber in roomsBelow)
             {
                 TR2Room roomBelow = level.Rooms[roomBelowNumber];
@@ -73,7 +73,7 @@ public class EMDrainFunction : BaseWaterFunction
                 }
             }
 
-            ISet<byte> roomsAbove = GetAdjacentRooms(room.SectorList, true);
+            ISet<byte> roomsAbove = GetAdjacentRooms(room.Sectors, true);
             foreach (byte roomAboveNumber in roomsAbove)
             {
                 TR2Room roomAbove = level.Rooms[roomAboveNumber];

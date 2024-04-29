@@ -29,51 +29,43 @@ public class EMCreateRoomFunction : BaseEMFunction
             NumZSectors = Depth,
             AlternateRoom = -1,
             AmbientIntensity = AmbientLighting,
-            NumLights = (ushort)(Lights == null ? 0 : Lights.Length),
-            NumPortals = 0,
-            NumStaticMeshes = 0,
-            Portals = Array.Empty<TRRoomPortal>(),
-            StaticMeshes = Array.Empty<TR1RoomStaticMesh>(),
-            Info = new TRRoomInfo
+            Portals = new(),
+            StaticMeshes = new(),
+            Info = new()
             {
                 X = Location.X,
                 YBottom = Location.Y,
                 YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
-            RoomData = new TR1RoomData
+            RoomData = new()
             {
-                // Ignored for now
-                NumSprites = 0,
-                NumTriangles = 0,
-                Sprites = Array.Empty<TRRoomSprite>(),
-                Triangles = Array.Empty<TRFace3>(),
-            }
+                Rectangles = new(),
+                Triangles = new(),
+                Vertices = new(),
+                Sprites = new(),
+            },
+            Lights = new()
         };
 
-        room.Lights = new TR1RoomLight[room.NumLights];
-        for (int i = 0; i < room.NumLights; i++)
+        for (int i = 0; i < Lights?.Length; i++)
         {
             EMRoomLight light = Lights[i];
-            room.Lights[i] = new TR1RoomLight
+            room.Lights.Add(new()
             {
                 X = light.X + Location.X,
                 Y = light.Y + Location.Y,
                 Z = light.Z + Location.Z,
                 Fade = light.Fade1,
                 Intensity = light.Intensity1
-            };
+            });
         }
 
         sbyte ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1);
         sbyte floor = (sbyte)(room.Info.YBottom / TRConsts.Step1);
 
-        List<TRFace4> faces = new();
-        List<TRVertex> vertices = new();
-
         // Make the sectors first
-        List<TRRoomSector> sectors = GenerateSectors(ceiling, floor);
-        room.Sectors = sectors.ToArray();
+        room.Sectors = GenerateSectors(ceiling, floor);
 
         // Generate the box, zone and overlap data
         FDControl floorData = new();
@@ -84,19 +76,14 @@ public class EMCreateRoomFunction : BaseEMFunction
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
-        GenerateFaces(sectors, faces, vertices);
+        List<TRVertex> vertices = new();
+        GenerateFaces(room.Sectors, room.RoomData.Rectangles, vertices);
 
-        // Write it all to the room
-        room.RoomData.NumRectangles = (short)faces.Count;
-        room.RoomData.NumVertices = (short)vertices.Count;
-        room.RoomData.Rectangles = faces.ToArray();
-        room.RoomData.Vertices = vertices.Select(v => new TR1RoomVertex
+        room.RoomData.Vertices.AddRange(vertices.Select(v => new TR1RoomVertex
         {
             Lighting = DefaultVertex.Lighting,
             Vertex = v
-        }).ToArray();
-
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+        }));
 
         level.Rooms.Add(room);
     }
@@ -109,33 +96,29 @@ public class EMCreateRoomFunction : BaseEMFunction
             NumZSectors = Depth,
             AlternateRoom = -1,
             AmbientIntensity = AmbientLighting,
-            NumLights = (ushort)(Lights == null ? 0 : Lights.Length),
-            NumPortals = 0,
-            NumStaticMeshes = 0,
-            Portals = Array.Empty<TRRoomPortal>(),
-            StaticMeshes = Array.Empty<TR2RoomStaticMesh>(),
-            Info = new TRRoomInfo
+            Portals = new(),
+            StaticMeshes = new(),
+            Info = new()
             {
                 X = Location.X,
                 YBottom = Location.Y,
                 YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
-            RoomData = new TR2RoomData
+            RoomData = new()
             {
-                // Ignored for now
-                NumSprites = 0,
-                NumTriangles = 0,
-                Sprites = Array.Empty<TRRoomSprite>(),
-                Triangles = Array.Empty<TRFace3>(),
-            }
+                Rectangles = new(),
+                Triangles = new(),
+                Vertices = new(),
+                Sprites = new(),
+            },
+            Lights = new()
         };
 
-        room.Lights = new TR2RoomLight[room.NumLights];
-        for (int i = 0; i < room.NumLights; i++)
+        for (int i = 0; i < Lights?.Length; i++)
         {
             EMRoomLight light = Lights[i];
-            room.Lights[i] = new TR2RoomLight
+            room.Lights.Add(new()
             {
                 X = light.X + Location.X,
                 Y = light.Y + Location.Y,
@@ -144,18 +127,14 @@ public class EMCreateRoomFunction : BaseEMFunction
                 Fade2 = light.Fade2,
                 Intensity1 = light.Intensity1,
                 Intensity2 = light.Intensity2,
-            };
+            });
         }
 
         sbyte ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1);
         sbyte floor = (sbyte)(room.Info.YBottom / TRConsts.Step1);
 
-        List<TRFace4> faces = new();
-        List<TRVertex> vertices = new();
-
         // Make the sectors first
-        List<TRRoomSector> sectors = GenerateSectors(ceiling, floor);
-        room.SectorList = sectors.ToArray();
+        room.Sectors = GenerateSectors(ceiling, floor);
 
         // Generate the box, zone and overlap data
         FDControl floorData = new();
@@ -166,21 +145,16 @@ public class EMCreateRoomFunction : BaseEMFunction
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
-        GenerateFaces(sectors, faces, vertices);
+        List<TRVertex> vertices = new();
+        GenerateFaces(room.Sectors, room.RoomData.Rectangles, vertices);
 
-        // Write it all to the room
-        room.RoomData.NumRectangles = (short)faces.Count;
-        room.RoomData.NumVertices = (short)vertices.Count;
-        room.RoomData.Rectangles = faces.ToArray();
-        room.RoomData.Vertices = vertices.Select(v => new TR2RoomVertex
+        room.RoomData.Vertices.AddRange(vertices.Select(v => new TR2RoomVertex
         {
             Lighting = DefaultVertex.Lighting,
             Lighting2 = DefaultVertex.Lighting2,
             Attributes = DefaultVertex.Attributes,
             Vertex = v
-        }).ToArray();
-
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+        }));
 
         level.Rooms.Add(room);
     }
@@ -193,33 +167,29 @@ public class EMCreateRoomFunction : BaseEMFunction
             NumZSectors = Depth,
             AlternateRoom = -1,
             AmbientIntensity = AmbientLighting,
-            NumLights = (ushort)(Lights == null ? 0 : Lights.Length),
-            NumPortals = 0,
-            NumStaticMeshes = 0,
-            Portals = Array.Empty<TRRoomPortal>(),
-            StaticMeshes = Array.Empty<TR3RoomStaticMesh>(),
-            Info = new TRRoomInfo
+            Portals = new(),
+            StaticMeshes = new(),
+            Info = new()
             {
                 X = Location.X,
                 YBottom = Location.Y,
                 YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
-            RoomData = new TR3RoomData
+            RoomData = new()
             {
-                // Ignored for now
-                NumSprites = 0,
-                NumTriangles = 0,
-                Sprites = Array.Empty<TRRoomSprite>(),
-                Triangles = Array.Empty<TRFace3>(),
-            }
+                Rectangles = new(),
+                Triangles = new(),
+                Vertices = new(),
+                Sprites = new(),
+            },
+            Lights = new()
         };
 
-        room.Lights = new TR3RoomLight[room.NumLights];
-        for (int i = 0; i < room.NumLights; i++)
+        for (int i = 0; i < Lights?.Length; i++)
         {
             EMRoomLight light = Lights[i];
-            room.Lights[i] = new TR3RoomLight
+            room.Lights.Add(new()
             {
                 X = light.X + Location.X,
                 Y = light.Y + Location.Y,
@@ -227,18 +197,14 @@ public class EMCreateRoomFunction : BaseEMFunction
                 Colour = light.Colour,
                 LightProperties = light.LightProperties,
                 LightType = light.LightType,
-            };
+            });
         }
 
         sbyte ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1);
         sbyte floor = (sbyte)(room.Info.YBottom / TRConsts.Step1);
 
-        List<TRFace4> faces = new();
-        List<TRVertex> vertices = new();
-
         // Make the sectors first
-        List<TRRoomSector> sectors = GenerateSectors(ceiling, floor);
-        room.Sectors = sectors.ToArray();
+        room.Sectors = GenerateSectors(ceiling, floor);
 
         // Generate the box, zone and overlap data
         FDControl floorData = new();
@@ -249,21 +215,16 @@ public class EMCreateRoomFunction : BaseEMFunction
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
-        GenerateFaces(sectors, faces, vertices);
+        List<TRVertex> vertices = new();
+        GenerateFaces(room.Sectors, room.RoomData.Rectangles, vertices);
 
-        // Write it all to the room
-        room.RoomData.NumRectangles = (short)faces.Count;
-        room.RoomData.NumVertices = (short)vertices.Count;
-        room.RoomData.Rectangles = faces.ToArray();
-        room.RoomData.Vertices = vertices.Select(v => new TR3RoomVertex
+        room.RoomData.Vertices.AddRange(vertices.Select(v => new TR3RoomVertex
         {
             Lighting = DefaultVertex.Lighting,
             Attributes = DefaultVertex.Attributes,
             Colour = DefaultVertex.Colour,
             Vertex = v
-        }).ToArray();
-
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+        }));
 
         level.Rooms.Add(room);
     }

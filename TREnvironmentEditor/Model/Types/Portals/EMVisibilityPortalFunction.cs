@@ -14,11 +14,7 @@ public class EMVisibilityPortalFunction : BaseEMFunction
         foreach (EMVisibilityPortal emPortal in Portals)
         {
             TRRoomPortal portal = emPortal.ToPortal(data);
-            TR1Room room = level.Rooms[emPortal.BaseRoom];
-            List<TRRoomPortal> portals = room.Portals.ToList();
-            portals.Add(portal);
-            room.Portals = portals.ToArray();
-            room.NumPortals++;
+            level.Rooms[emPortal.BaseRoom].Portals.Add(portal);
         }
     }
 
@@ -29,11 +25,7 @@ public class EMVisibilityPortalFunction : BaseEMFunction
         foreach (EMVisibilityPortal emPortal in Portals)
         {
             TRRoomPortal portal = emPortal.ToPortal(data);
-            TR2Room room = level.Rooms[emPortal.BaseRoom];
-            List<TRRoomPortal> portals = room.Portals.ToList();
-            portals.Add(portal);
-            room.Portals = portals.ToArray();
-            room.NumPortals++;
+            level.Rooms[emPortal.BaseRoom].Portals.Add(portal);
         }
     }
 
@@ -44,11 +36,7 @@ public class EMVisibilityPortalFunction : BaseEMFunction
         foreach (EMVisibilityPortal emPortal in Portals)
         {
             TRRoomPortal portal = emPortal.ToPortal(data);
-            TR3Room room = level.Rooms[emPortal.BaseRoom];
-            List<TRRoomPortal> portals = room.Portals.ToList();
-            portals.Add(portal);
-            room.Portals = portals.ToArray();
-            room.NumPortals++;
+            level.Rooms[emPortal.BaseRoom].Portals.Add(portal);
         }
     }
 }

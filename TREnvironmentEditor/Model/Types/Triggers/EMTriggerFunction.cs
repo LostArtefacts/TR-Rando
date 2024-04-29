@@ -79,7 +79,7 @@ public class EMTriggerFunction : BaseEMFunction
         {
             foreach (short room in Rooms)
             {
-                foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].SectorList)
+                foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                 {
                     if (!sector.IsWall && sector.RoomBelow == TRConsts.NoRoom)
                     {

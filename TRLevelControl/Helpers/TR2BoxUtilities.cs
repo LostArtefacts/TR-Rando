@@ -105,7 +105,7 @@ public class TR2BoxUtilities
         int count = 0;
         foreach (TR2Room room in level.Rooms)
         {
-            foreach (TRRoomSector sector in room.SectorList)
+            foreach (TRRoomSector sector in room.Sectors)
             {
                 if (sector.BoxIndex == boxIndex)
                 {

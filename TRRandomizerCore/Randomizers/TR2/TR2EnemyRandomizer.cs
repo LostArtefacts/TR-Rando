@@ -642,7 +642,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                     roomDrainIndex = room.AlternateRoom;
                 }
                 
-                if (roomDrainIndex != -1 && !level.PerformDraining(roomDrainIndex))
+                if (roomDrainIndex != -1)
                 {
                     // Draining cannot be performed so make the entity a water creature.
                     // The list of provided water creatures will either be those native

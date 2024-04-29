@@ -64,7 +64,7 @@ public class EMRefaceFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private static void ApplyTextures(ushort texture, Dictionary<EMTextureFaceType, int[]> faceMap, TRFace4[] rectangles, TRFace3[] triangles)
+    private static void ApplyTextures(ushort texture, Dictionary<EMTextureFaceType, int[]> faceMap, List<TRFace4> rectangles, List<TRFace3> triangles)
     {
         foreach (EMTextureFaceType faceType in faceMap.Keys)
         {

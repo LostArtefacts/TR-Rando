@@ -84,7 +84,7 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
         _audioRandomizer.ResetFloorMap();
         foreach (TR2Room room in level.Rooms)
         {
-            _audioRandomizer.RandomizeFloorTracks(room.SectorList, floorData, _generator, sectorIndex =>
+            _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
             {
                 return new Vector2
                 (

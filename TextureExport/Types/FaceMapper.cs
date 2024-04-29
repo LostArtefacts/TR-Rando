@@ -31,11 +31,11 @@ public static class FaceMapper
             newRectFaces[roomNumber] = new Dictionary<int, int>();
             newTriFaces[roomNumber] = new Dictionary<int, int>();
 
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Rectangles.Count; i++)
             {
                 rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
             }
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumTriangles; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Triangles.Count; i++)
             {
                 triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
             }
@@ -103,11 +103,11 @@ public static class FaceMapper
             newRectFaces[roomNumber] = new Dictionary<int, int>();
             newTriFaces[roomNumber] = new Dictionary<int, int>();
 
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Rectangles.Count; i++)
             {
                 rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
             }
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumTriangles; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Triangles.Count; i++)
             {
                 triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
             }
@@ -175,11 +175,11 @@ public static class FaceMapper
             newRectFaces[roomNumber] = new Dictionary<int, int>();
             newTriFaces[roomNumber] = new Dictionary<int, int>();
 
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Rectangles.Count; i++)
             {
                 rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
             }
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumTriangles; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Triangles.Count; i++)
             {
                 triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
             }
@@ -245,7 +245,7 @@ public static class FaceMapper
             rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
             newRectFaces[roomNumber] = new Dictionary<int, int>();
 
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Rectangles.Count; i++)
             {
                 TexturedTileSegment seg = GetBoxFaceSegment(level.Rooms[roomNumber], i, packer.Tiles);
                 if (seg != null)

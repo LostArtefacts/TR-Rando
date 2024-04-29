@@ -33,13 +33,8 @@ public class EMRemoveFaceFunction : BaseEMFunction
                 }
             }
 
-            room.RoomData.Rectangles = RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
-            room.RoomData.Triangles = RemoveEntries(room.RoomData.Triangles, triangleRemovals);
-
-            room.RoomData.NumRectangles = (short)room.RoomData.Rectangles.Length;
-            room.RoomData.NumTriangles = (short)room.RoomData.Triangles.Length;
-
-            room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+            RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
+            RemoveEntries(room.RoomData.Triangles, triangleRemovals);
         }
     }
 
@@ -69,13 +64,8 @@ public class EMRemoveFaceFunction : BaseEMFunction
                 }
             }
 
-            room.RoomData.Rectangles = RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
-            room.RoomData.Triangles = RemoveEntries(room.RoomData.Triangles, triangleRemovals);
-
-            room.RoomData.NumRectangles = (short)room.RoomData.Rectangles.Length;
-            room.RoomData.NumTriangles = (short)room.RoomData.Triangles.Length;
-
-            room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+            RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
+            RemoveEntries(room.RoomData.Triangles, triangleRemovals);
         }
     }
 
@@ -105,17 +95,12 @@ public class EMRemoveFaceFunction : BaseEMFunction
                 }
             }
 
-            room.RoomData.Rectangles = RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
-            room.RoomData.Triangles = RemoveEntries(room.RoomData.Triangles, triangleRemovals);
-
-            room.RoomData.NumRectangles = (short)room.RoomData.Rectangles.Length;
-            room.RoomData.NumTriangles = (short)room.RoomData.Triangles.Length;
-
-            room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+            RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
+            RemoveEntries(room.RoomData.Triangles, triangleRemovals);
         }
     }
 
-    private static T[] RemoveEntries<T>(T[] items, List<int> indices)
+    private static void RemoveEntries<T>(List<T> items, List<int> indices)
     {
         List<T> itemList = items.ToList();
         
@@ -124,7 +109,5 @@ public class EMRemoveFaceFunction : BaseEMFunction
         {
             itemList.RemoveAt(indices[i]);
         }
-
-        return itemList.ToArray();
     }
 }

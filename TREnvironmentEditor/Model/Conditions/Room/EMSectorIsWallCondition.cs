@@ -18,7 +18,7 @@ public class EMSectorIsWallCondition : BaseEMCondition
     {
         EMLevelData data = EMLevelData.GetData(level);
         TR2Room room = level.Rooms[data.ConvertRoom(Location.Room)];
-        return room.SectorList[GetSectorIndex(room.Info, Location, room.NumZSectors)].IsWall;
+        return room.Sectors[GetSectorIndex(room.Info, Location, room.NumZSectors)].IsWall;
     }
 
     protected override bool Evaluate(TR3Level level)
