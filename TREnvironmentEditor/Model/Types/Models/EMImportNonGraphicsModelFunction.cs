@@ -10,8 +10,8 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        List<EMMeshTextureData> data = PrepareImportData(level.Models);
-        if (data.Count == 0)
+        IEnumerable<EMMeshTextureData> data = PrepareImportData(level.Models);
+        if (!data.Any())
         {
             return;
         }
@@ -26,13 +26,13 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         };
         importer.Import();
 
-        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => level.Models.Find(m => m.ID == modelID));
+        RemapFaces(data, level.ObjectTextures.Count - 1, level.Models);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        List<EMMeshTextureData> data = PrepareImportData(level.Models);
-        if (data.Count == 0)
+        IEnumerable<EMMeshTextureData> data = PrepareImportData(level.Models);
+        if (!data.Any())
         {
             return;
         }
@@ -47,13 +47,13 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         };
         importer.Import();
 
-        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => level.Models.Find(m => m.ID == modelID));
+        RemapFaces(data, level.ObjectTextures.Count - 1, level.Models);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<EMMeshTextureData> data = PrepareImportData(level.Models);
-        if (data.Count == 0)
+        IEnumerable<EMMeshTextureData> data = PrepareImportData(level.Models);
+        if (!data.Any())
         {
             return;
         }
@@ -68,27 +68,21 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         };
         importer.Import();
 
-        RemapFaces(data, level.ObjectTextures.Count - 1, modelID => level.Models.Find(m => m.ID == modelID));
+        RemapFaces(data, level.ObjectTextures.Count - 1, level.Models);
     }
 
-    private List<EMMeshTextureData> PrepareImportData(List<TRModel> existingModels)
+    private IEnumerable<EMMeshTextureData> PrepareImportData<T>(SortedDictionary<T, TRModel> existingModels)
+        where T : Enum
     {
-        List<EMMeshTextureData> importData = new();
-        foreach (EMMeshTextureData data in Data)
-        {
-            if (existingModels.Find(m => m.ID == data.ModelID) == null)
-            {
-                importData.Add(data);
-            }
-        }
-        return importData;
+        return Data.Where(d => !existingModels.ContainsKey((T)(object)d.ModelID));
     }
 
-    private static void RemapFaces(List<EMMeshTextureData> data, int maximumTexture, Func<short, TRModel> modelAction)
+    private static void RemapFaces<T>(IEnumerable<EMMeshTextureData> data, int maximumTexture, SortedDictionary<T, TRModel> models)
+        where T : Enum
     {
         foreach (EMMeshTextureData textureData in data)
         {
-            TRModel model= modelAction.Invoke(textureData.ModelID);
+            TRModel model = models[(T)(object)textureData.ModelID];
             foreach (TRMesh mesh in model.Meshes)
             {
                 foreach (TRMeshFace face in mesh.ColouredTriangles)

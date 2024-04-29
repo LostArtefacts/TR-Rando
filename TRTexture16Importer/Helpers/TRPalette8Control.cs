@@ -63,24 +63,26 @@ public class TRPalette8Control : IDisposable
 
         // Grab meshes we aren't interested in - but don't remove Lara's hips e.g. Atlantean spawns
         List<TRMesh> ignoredMeshes = new();
-        List<TRMesh> laraMeshes = Level.Models.Find(m => m.ID == (uint)TR1Type.Lara)?.Meshes;
+        Level.Models.TryGetValue(TR1Type.Lara, out TRModel lara);
         foreach (TR1Type entity in ObsoleteModels)
         {
-            List<TRMesh> meshes = Level.Models.Find(m => m.ID == (uint)entity)?.Meshes;
-            if (meshes != null)
+            Level.Models.TryGetValue(entity, out TRModel model);
+            if (model == null)
             {
-                foreach (TRMesh mesh in meshes)
+                continue;
+            }
+
+            foreach (TRMesh mesh in model.Meshes)
+            {
+                if (lara == null || !lara.Meshes.Contains(mesh))
                 {
-                    if (laraMeshes == null || !laraMeshes.Contains(mesh))
-                    {
-                        ignoredMeshes.AddRange(meshes);
-                    }
+                    ignoredMeshes.AddRange(model.Meshes);
                 }
             }
         }
 
         // Update all colours used in all meshes
-        foreach (TRMesh mesh in Level.Models.SelectMany(m => m.Meshes).Concat(Level.StaticMeshes.Select(s => s.Mesh)))
+        foreach (TRMesh mesh in Level.DistinctMeshes)
         {
             if (ignoredMeshes.Contains(mesh))
             {
@@ -158,7 +160,7 @@ public class TRPalette8Control : IDisposable
             }
         }
 
-        foreach (TRMesh mesh in Level.Models.SelectMany(m => m.Meshes).Concat(Level.StaticMeshes.Select(s => s.Mesh)))
+        foreach (TRMesh mesh in Level.DistinctMeshes)
         {
             foreach (TRMeshFace face in mesh.ColouredFaces)
             {

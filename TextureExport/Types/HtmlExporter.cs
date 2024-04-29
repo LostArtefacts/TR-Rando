@@ -43,7 +43,7 @@ public static class HtmlExporter
         BuildLevelSelect(levelSel, lvlName, TR2LevelNames.AsOrderedList);
 
         StringBuilder skyboxInfo = new();
-        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(level.Models.Find(m => m.ID == (uint)TR2Type.Skybox_H)?.Meshes, level.Palette16);
+        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(level.Models[TR2Type.Skybox_H]?.Meshes, level.Palette16);
         BuildSkyBox(skyboxInfo, skyColours);
 
         Write("TR2", lvlName, tiles, levelSel, skyboxInfo);
@@ -59,7 +59,7 @@ public static class HtmlExporter
         BuildLevelSelect(levelSel, lvlName, TR3LevelNames.AsOrderedList);
 
         StringBuilder skyboxInfo = new();
-        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(level.Models.Find(m => m.ID == (uint)TR3Type.Skybox_H)?.Meshes, level.Palette16);
+        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(level.Models[TR3Type.Skybox_H]?.Meshes, level.Palette16);
         BuildSkyBox(skyboxInfo, skyColours);
 
         Write("TR3", lvlName, tiles, levelSel, skyboxInfo);

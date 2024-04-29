@@ -17,7 +17,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
     private static readonly Color[] _wireframeColours = ColorUtilities.GetWireframeColours();
 
     private readonly Dictionary<AbstractTextureSource, string> _persistentVariants;
-    private readonly Dictionary<string, WireframeData> _wireframeData;
+    private readonly Dictionary<string, WireframeData<TR1Type>> _wireframeData;
     private readonly object _drawLock;
     private TR1TextureDatabase _textureDatabase;
     private Dictionary<TextureCategory, bool> _textureOptions;
@@ -31,7 +31,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
     public TR1TextureRandomizer()
     {
         _persistentVariants = new Dictionary<AbstractTextureSource, string>();
-        _wireframeData = JsonConvert.DeserializeObject<Dictionary<string, WireframeData>>(ReadResource(@"TR1\Textures\wireframing.json"));
+        _wireframeData = JsonConvert.DeserializeObject<Dictionary<string, WireframeData<TR1Type>>>(ReadResource(@"TR1\Textures\wireframing.json"));
         _drawLock = new object();
     }
 
@@ -172,14 +172,14 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
         }
 
         bool has3DPickups = (ScriptEditor as TR1ScriptEditor).Enable3dPickups;
-        foreach (WireframeData data in _wireframeData.Values.ToList())
+        foreach (WireframeData<TR1Type> data in _wireframeData.Values)
         {
             data.Has3DPickups = has3DPickups;
             data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
             data.SolidInteractables = Settings.UseSolidInteractableWireframing;
             foreach (SpecialTextureHandling special in data.SpecialTextures)
             {
-                List<SpecialTextureMode> modes = WireframeData.GetDrawModes(special.Type);
+                List<SpecialTextureMode> modes = WireframeData<TR1Type>.GetDrawModes(special.Type);
                 special.Mode = modes[_generator.Next(0, modes.Count)];
             }
         }
@@ -255,7 +255,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             (_solidLaraLevels.Contains(lvl.Script) || (lvl.IsCutScene && _solidLaraLevels.Contains(lvl.ParentLevel.Script)));
     }
 
-    private WireframeData GetWireframeData(TR1CombinedLevel lvl)
+    private WireframeData<TR1Type> GetWireframeData(TR1CombinedLevel lvl)
     {
         return IsWireframeLevel(lvl) ? _wireframeData[lvl.Name] : null;
     }
@@ -365,11 +365,11 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
 
                     if (_outer.IsWireframeLevel(level))
                     {
-                        WireframeData data = _outer.GetWireframeData(level);
+                        WireframeData<TR1Type> data = _outer.GetWireframeData(level);
                         data.SolidEnemies = _outer.Settings.UseSolidEnemyWireframing;
                         if (level.IsCutScene)
                         {
-                            WireframeData parentData = _outer.GetWireframeData(level.ParentLevel);
+                            WireframeData<TR1Type> parentData = _outer.GetWireframeData(level.ParentLevel);
                             data.HighlightColour = parentData.HighlightColour;
                             data.SolidLara = parentData.SolidLara;
                         }
@@ -401,9 +401,9 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
 
                         if (_outer.Settings.UseDifferentWireframeColours)
                         {
-                            foreach (TRModel model in level.Data.Models)
+                            foreach (TR1Type type in level.Data.Models.Keys)
                             {
-                                data.ModelColours[model.ID] = _outer.GetWireframeVariant();
+                                data.ModelColours[type] = _outer.GetWireframeVariant();
                             }
                         }
                     }

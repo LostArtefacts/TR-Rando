@@ -4,7 +4,6 @@ namespace TRModelTransporter.Model.Definitions;
 
 public class TR2ModelDefinition : AbstractTRModelDefinition<TR2Type>
 {
-    public override TR2Type Entity => (TR2Type)Model.ID;
     public TRCinematicFrame[] CinematicFrames { get; set; }
     public Dictionary<int, TRColour4> Colours { get; set; }
     public List<TRMesh> Meshes { get; set; }

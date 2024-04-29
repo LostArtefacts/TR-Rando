@@ -690,7 +690,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     if (Settings.AllowEmptyEggs)
                     {
                         // Add 1/4 chance of an empty egg, provided at least one spawn model is not available
-                        IEnumerable<TR1Type> allModels = level.Data.Models.Select(m => (TR1Type)m.ID);
+                        List<TR1Type> allModels = level.Data.Models.Keys.ToList();
 
                         // We can add Adam to make it possible for a dud spawn - he's not normally available for eggs because
                         // of his own restrictions.
@@ -835,7 +835,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             else if (type == TR1Type.AdamEgg || type == TR1Type.AtlanteanEgg)
             {
                 TR1Type eggType = TR1EnemyUtilities.CodeBitsToAtlantean(entity.CodeBits);
-                if (eggType == translatedType && level.Data.Models.Find(m => m.ID == (uint)eggType) != null)
+                if (eggType == translatedType && level.Data.Models.ContainsKey(eggType))
                 {
                     count++;
                 }
@@ -866,24 +866,24 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
     private static void AmendToQLarson(TR1CombinedLevel level)
     {
-        TRModel larsonModel = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Larson);
-        if (larsonModel != null)
+        // Convert the Larson model into the Great Pyramid scion to allow ending the level. Larson will
+        // become a raptor to allow for normal randomization. Environment mods will handle the specifics here.
+        if (!level.Data.Models.ChangeKey(TR1Type.Larson, TR1Type.ScionPiece3_S_P))
         {
-            // Convert the Larson model into the Great Pyramid scion to allow ending the level. Larson will
-            // become a raptor to allow for normal randomization. Environment mods will handle the specifics here. 
-            larsonModel.ID = (uint)TR1Type.ScionPiece3_S_P;
-            level.Data.Entities
-                .Where(e => e.TypeID == TR1Type.Larson)
-                .ToList()
-                .ForEach(e => e.TypeID = TR1Type.Raptor);
+            return;
+        }
 
-            // Make the scion invisible.
-            MeshEditor editor = new();
-            foreach (TRMesh mesh in larsonModel.Meshes)
-            {
-                editor.Mesh = mesh;
-                editor.ClearAllPolygons();
-            }
+        level.Data.Entities
+            .Where(e => e.TypeID == TR1Type.Larson)
+            .ToList()
+            .ForEach(e => e.TypeID = TR1Type.Raptor);
+
+        // Make the scion invisible.
+        MeshEditor editor = new();
+        foreach (TRMesh mesh in level.Data.Models[TR1Type.ScionPiece3_S_P].Meshes)
+        {
+            editor.Mesh = mesh;
+            editor.ClearAllPolygons();
         }
     }
 
@@ -891,7 +891,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     {
         // We want to keep Adam's egg, but simulate something else hatching.
         // In hard mode, two enemies take his place.
-        level.RemoveModel(TR1Type.Adam);
+        level.Data.Models.Remove(TR1Type.Adam);
         
         TR1Entity egg = level.Data.Entities.Find(e => e.TypeID == TR1Type.AdamEgg);
         TR1Entity lara = level.Data.Entities.Find(e => e.TypeID == TR1Type.Lara);
@@ -937,13 +937,12 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // If non-shooting grounded Atlanteans are present, we can just duplicate the model to make shooting Atlanteans
         if (enemies.Available.Any(TR1TypeUtilities.GetFamily(TR1Type.ShootingAtlantean_N).Contains))
         {
-            TRModel shooter = level.Data.Models.Find(m => m.ID == (uint)TR1Type.ShootingAtlantean_N);
-            TRModel nonShooter = level.Data.Models.Find(m => m.ID == (uint)TR1Type.NonShootingAtlantean_N);
+            TRModel shooter = level.Data.Models[TR1Type.ShootingAtlantean_N];
+            TRModel nonShooter = level.Data.Models[TR1Type.NonShootingAtlantean_N];
             if (shooter == null && nonShooter != null)
             {
                 shooter = nonShooter.Clone();
-                shooter.ID = (uint)TR1Type.ShootingAtlantean_N;
-                level.Data.Models.Add(shooter);
+                level.Data.Models[TR1Type.ShootingAtlantean_N] = shooter;
                 enemies.Available.Add(TR1Type.ShootingAtlantean_N);
             }
         }
@@ -951,7 +950,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // If we're using flying mummies, add a chance that they'll have proper wings
         if (enemies.Available.Contains(TR1Type.BandagedFlyer) && _generator.NextDouble() < 0.5)
         {
-            List<TRMesh> meshes = level.Data.Models.Find(m => m.ID == (uint)TR1Type.FlyingAtlantean).Meshes;
+            List<TRMesh> meshes = level.Data.Models[TR1Type.FlyingAtlantean].Meshes;
             ushort bandageTexture = meshes[1].TexturedRectangles[3].Texture;
             for (int i = 15; i < 21; i++)
             {
@@ -1049,7 +1048,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 };
 
                 // Only include it if the model is present i.e. it's not an empty egg.
-                if (level.Data.Models.Find(m => (TR1Type)m.ID == resultantEnemy.TypeID) != null)
+                if (level.Data.Models.ContainsKey(resultantEnemy.TypeID))
                 {
                     levelEnemies.Add(resultantEnemy);
                 }
@@ -1127,19 +1126,19 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 [TR1Type.CassettePlayer_M_H] = 1
             };
 
-            List<TRMesh> scion = level.Data.Models.Find(m => m.ID == (uint)TR1Type.ScionPiece4_S_P).Meshes;
+            List<TRMesh> scion = level.Data.Models[TR1Type.ScionPiece4_S_P].Meshes;
             List<TR1Type> replacementKeys = scionSwaps.Keys.ToList();
             TR1Type replacement = replacementKeys[_generator.Next(0, replacementKeys.Count)];
 
-            List<TRMesh> replacementMeshes = level.Data.Models.Find(m => m.ID == (uint)replacement).Meshes;
+            List<TRMesh> replacementMeshes = level.Data.Models[replacement].Meshes;
             int colRadius = scion[0].CollRadius;
             replacementMeshes[scionSwaps[replacement]].CopyInto(scion[0]);
             scion[0].CollRadius = colRadius; // Retain original as Lara may need to shoot it
 
             // Cutscene head swaps
-            List<TRMesh> lara = level.Data.Models.Find(m => m.ID == (uint)TR1Type.CutsceneActor1).Meshes;
-            List<TRMesh> natla = level.Data.Models.Find(m => m.ID == (uint)TR1Type.CutsceneActor3).Meshes;
-            List<TRMesh> pierre = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Pierre).Meshes;
+            List<TRMesh> lara = level.CutSceneLevel.Data.Models[TR1Type.CutsceneActor1].Meshes;
+            List<TRMesh> natla = level.CutSceneLevel.Data.Models[TR1Type.CutsceneActor3].Meshes;
+            List<TRMesh> pierre = level.CutSceneLevel.Data.Models[TR1Type.Pierre].Meshes;
 
             switch (_generator.Next(0, 6))
             {
@@ -1174,24 +1173,24 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (availableEnemies.Contains(TR1Type.Adam) && _generator.NextDouble() < 0.4)
         {
             // Replace Adam's head with a much larger version of Natla's, Larson's or normal/angry Lara's.
-            List<TRMesh> adam = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Adam).Meshes;
+            List<TRMesh> adam = level.Data.Models[TR1Type.Adam].Meshes;
             TRMesh replacement;
             if (availableEnemies.Contains(TR1Type.Natla) && _generator.NextDouble() < 0.5)
             {
-                replacement = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Natla).Meshes[2];
+                replacement = level.Data.Models[TR1Type.Natla].Meshes[2];
             }
             else if (availableEnemies.Contains(TR1Type.Larson) && _generator.NextDouble() < 0.5)
             {
-                replacement = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Larson).Meshes[8];
+                replacement = level.Data.Models[TR1Type.Larson].Meshes[8];
             }
             else if (availableEnemies.Contains(TR1Type.Pierre) && _generator.NextDouble() < 0.5)
             {
-                replacement = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Pierre).Meshes[8];
+                replacement = level.Data.Models[TR1Type.Pierre].Meshes[8];
             }
             else
             {
                 TR1Type laraSwapType = _generator.NextDouble() < 0.5 ? TR1Type.LaraUziAnimation_H : TR1Type.Lara;
-                replacement = level.Data.Models.Find(m => m.ID == (uint)laraSwapType).Meshes[14];                
+                replacement = level.Data.Models[laraSwapType].Meshes[14];                
             }
 
             adam[3] = replacement.Clone();
@@ -1223,9 +1222,9 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (availableEnemies.Contains(TR1Type.Pierre) && _generator.NextDouble() < 0.25)
         {
             // Replace Pierre's head with a slightly bigger version of Lara's (either angry Lara or normal Lara)
-            List<TRMesh> pierre = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Pierre).Meshes;
-            List<TRMesh> lara = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Lara).Meshes;
-            List<TRMesh> laraUziAnim = level.Data.Models.Find(m => m.ID == (uint)TR1Type.LaraUziAnimation_H).Meshes;
+            List<TRMesh> pierre = level.Data.Models[TR1Type.Pierre].Meshes;
+            List<TRMesh> lara = level.Data.Models[TR1Type.Lara].Meshes;
+            List<TRMesh> laraUziAnim = level.Data.Models[TR1Type.LaraUziAnimation_H].Meshes;
 
             pierre[8] = (_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]).Clone();
             foreach (TRVertex vertex in pierre[8].Vertices)
@@ -1243,9 +1242,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     {
         // Model transport will handle these missing SFX by default, but we need to fix them in
         // the levels where these enemies already exist.
-        List<TR1Type> entities = level.Data.Models.Select(m => (TR1Type)m.ID).ToList();
-
-        if (entities.Contains(TR1Type.Pierre)
+        if (level.Data.Models.ContainsKey(TR1Type.Pierre)
             && (level.Is(TR1LevelNames.FOLLY) || level.Is(TR1LevelNames.COLOSSEUM) || level.Is(TR1LevelNames.CISTERN) || level.Is(TR1LevelNames.TIHOCAN)))
         {
             TR1ModelExporter.AmendPierreGunshot(level.Data);
@@ -1259,17 +1256,17 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
         }
 
-        if (entities.Contains(TR1Type.Larson) && level.Is(TR1LevelNames.SANCTUARY))
+        if (level.Data.Models.ContainsKey(TR1Type.Larson) && level.Is(TR1LevelNames.SANCTUARY))
         {
             TR1ModelExporter.AmendLarsonDeath(level.Data);
         }
 
-        if (entities.Contains(TR1Type.SkateboardKid) && level.Is(TR1LevelNames.MINES))
+        if (level.Data.Models.ContainsKey(TR1Type.SkateboardKid) && level.Is(TR1LevelNames.MINES))
         {
             TR1ModelExporter.AmendSkaterBoyDeath(level.Data);
         }
 
-        if (entities.Contains(TR1Type.Natla) && level.Is(TR1LevelNames.PYRAMID))
+        if (level.Data.Models.ContainsKey(TR1Type.Natla) && level.Is(TR1LevelNames.PYRAMID))
         {
             TR1ModelExporter.AmendNatlaDeath(level.Data);
         }
@@ -1305,7 +1302,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         TR1Entity adamEgg = level.Data.Entities.Find(e => e.TypeID == TR1Type.AdamEgg);
         if (adamEgg != null
             && TR1EnemyUtilities.CodeBitsToAtlantean(adamEgg.CodeBits) == TR1Type.Adam
-            && level.Data.Models.Find(m => m.ID == (uint)TR1Type.Adam) != null)
+            && level.Data.Models.ContainsKey(TR1Type.Adam))
         {
             enemies.Add(adamEgg);
         }

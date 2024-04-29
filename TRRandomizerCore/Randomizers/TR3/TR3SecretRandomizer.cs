@@ -452,7 +452,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             foreach (TR3Type pickupType in artefacts.Keys)
             {
                 TR3Type menuType = artefacts[pickupType];
-                if (level.Data.Models.Find(m => m.ID == (uint)menuType) == null)
+                if (!level.Data.Models.ContainsKey(menuType))
                 {
                     availablePickupType = pickupType;
                     availableMenuType = menuType;
@@ -464,10 +464,8 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             {
                 // We have a free slot, so duplicate a model
                 TR3Type baseArtefact = pickupTypes[_generator.Next(0, pickupTypes.Count)];
-                TRModel artefactMenuModel = level.Data.Models.Find(m => m.ID == (uint)artefacts[baseArtefact]);
-                TRModel availableModel = artefactMenuModel.Clone();
-                availableModel.ID = (uint)availableMenuType;
-                level.Data.Models.Add(availableModel);
+                TRModel artefactMenuModel = level.Data.Models[artefacts[baseArtefact]];
+                level.Data.Models[availableMenuType] = artefactMenuModel.Clone();
 
                 // Add a script name - pull from GamestringRando once translations completed
                 SetPuzzleTypeName(level, availablePickupType, "Infinite Medi Packs");
@@ -486,15 +484,15 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
     {
         if (TR3TypeUtilities.IsKeyType(itemType))
         {
-            level.Script.Keys[itemType - TR3Type.Key1_P] = name;
+            level.Script.Keys[(int)(itemType - TR3Type.Key1_P)] = name;
         }
         else if (TR3TypeUtilities.IsPuzzleType(itemType))
         {
-            level.Script.Puzzles[itemType - TR3Type.Puzzle1_P] = name;
+            level.Script.Puzzles[(int)(itemType - TR3Type.Puzzle1_P)] = name;
         }
         else if (TR3TypeUtilities.IsQuestType(itemType))
         {
-            level.Script.Pickups[itemType - TR3Type.Quest1_P] = name;
+            level.Script.Pickups[(int)(itemType - TR3Type.Quest1_P)] = name;
         }
     }
 
@@ -761,32 +759,20 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                     // Special case for Crash Site, which is the only level that uses Quest1 (the swamp map).
                     // We want to reallocate this as a key to allow us to reuse Quest1 on import. Amend the
                     // models to become Key3 and update the script to match.
-                    level.Data.Models.Find(m => m.ID == (uint)TR3Type.Quest1_P).ID = (uint)TR3Type.Key3_P;
-                    level.Data.Models.Find(m => m.ID == (uint)TR3Type.Quest1_M_H).ID = (uint)TR3Type.Key3_M_H;
+                    level.Data.Models.ChangeKey(TR3Type.Quest1_P, TR3Type.Key3_P);
+                    level.Data.Models.ChangeKey(TR3Type.Quest1_M_H, TR3Type.Key3_M_H);
                     level.Script.Keys[2] = level.Script.Pickups[0];
-                    level.Script.SetStartInventoryItems(new Dictionary<TR3Items, int>
+                    level.Script.SetStartInventoryItems(new()
                     {
                         [TR3Items.Key3] = 1
                     });
                 }
 
-                foreach (TR3Type puzzleType in _artefactReplacements.Keys)
-                {
-                    if (level.Data.Models.Find(m => m.ID == (uint)puzzleType) == null)
-                    {
-                        allocation.AvailablePickupModels.Add(puzzleType);
-                    }
-                }
+                allocation.AvailablePickupModels.AddRange(_artefactReplacements.Keys
+                    .Where(a => !level.Data.Models.ContainsKey(a)));
 
                 List<TR3Type> artefactTypes = _artefactPickups.Keys.ToList();
-                for (int i = artefactTypes.Count - 1; i >= 0; i--)
-                {
-                    TR3Type artefactType = artefactTypes[i];
-                    if (level.Data.Models.Find(m => m.ID == (uint)artefactType) != null)
-                    {
-                        artefactTypes.RemoveAt(i);
-                    }
-                }
+                artefactTypes.RemoveAll(a => level.Data.Models.ContainsKey(a));
 
                 // How many models do we actually need?
                 int modelImportCount = Math.Min(_outer.Settings.DevelopmentMode ? _devModeSecretCount : level.Script.NumSecrets, allocation.AvailablePickupModels.Count);
@@ -827,15 +813,12 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         TR3Type puzzlePickupType = allocation.AvailablePickupModels.First();
                         TR3Type puzzleMenuType = _artefactReplacements[puzzlePickupType];
 
-                        level.Data.Models.Find(m => m.ID == (uint)artefactPickupType).ID = (uint)puzzlePickupType;
+                        level.Data.Models.ChangeKey(artefactPickupType, puzzlePickupType);
 
                         // #277 Most levels (beyond India) have the artefacts as menu models so we need
                         // to duplicate the models instead of replacing them, otherwise the carried-over
                         // artefacts from previous levels are invisible.
-                        TRModel menuModel = level.Data.Models.Find(m => m.ID == (uint)artefactMenuType);
-                        TRModel newModel = menuModel.Clone();
-                        newModel.ID = (uint)puzzleMenuType;
-                        level.Data.Models.Add(newModel);
+                        level.Data.Models[puzzleMenuType] = level.Data.Models[artefactMenuType].Clone();
 
                         // Remove this puzzle type from the available pool
                         allocation.AvailablePickupModels.RemoveAt(0);

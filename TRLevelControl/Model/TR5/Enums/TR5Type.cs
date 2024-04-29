@@ -1,6 +1,6 @@
 ﻿namespace TRLevelControl.Model;
 
-public enum TR5Type
+public enum TR5Type : uint
 {
     Lara                 = 0,
     LaraPistolAnim       = 1,

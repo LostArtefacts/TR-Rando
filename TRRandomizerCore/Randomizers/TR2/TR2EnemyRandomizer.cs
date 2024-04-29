@@ -487,26 +487,17 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         });
     }
 
-    private static void DisguiseEntity(TR2CombinedLevel level, TR2Type guiser, TR2Type targetEntity)
+    private static void DisguiseEntity(TR2CombinedLevel level, TR2Type guiser, TR2Type targetType)
     {
-        int existingIndex = level.Data.Models.FindIndex(m => m.ID == (short)guiser);
-        if (existingIndex != -1)
-        {
-            level.Data.Models.RemoveAt(existingIndex);
-        }
-
-        TRModel disguiseAsModel = level.Data.Models.Find(m => m.ID == (short)targetEntity);
-        if (targetEntity == TR2Type.BirdMonster && level.Is(TR2LevelNames.CHICKEN))
+        if (targetType == TR2Type.BirdMonster && level.Is(TR2LevelNames.CHICKEN))
         {
             // We have to keep the original model for the boss, so in
             // this instance we just clone the model for the guiser
-            TRModel guiserModel = disguiseAsModel.Clone();
-            guiserModel.ID = (uint)guiser;
-            level.Data.Models.Add(guiserModel);
+            level.Data.Models[guiser] = level.Data.Models[targetType].Clone();
         }
         else
         {
-            disguiseAsModel.ID = (uint)guiser;
+            level.Data.Models.ChangeKey(targetType, guiser);
         }
     }
 
@@ -926,10 +917,10 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         if (laraClones.Count > 0)
         {
-            TRModel laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
+            TRModel laraModel = level.Data.Models[TR2Type.Lara];
             foreach (TR2Type enemyType in laraClones)
             {
-                TRModel enemyModel = level.Data.Models.Find(m => m.ID == (uint)enemyType);
+                TRModel enemyModel = level.Data.Models[enemyType];
                 enemyModel.MeshTrees = laraModel.MeshTrees;
                 enemyModel.Meshes = laraModel.Meshes;
             }
@@ -943,8 +934,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             && _generator.Next(0, chance) == 0)
         {
             // Make Marco look and behave like Winston, until Lara gets too close
-            TRModel marcoModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.MarcoBartoli);
-            TRModel winnieModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Winston);
+            TRModel marcoModel = level.Data.Models[TR2Type.MarcoBartoli];
+            TRModel winnieModel = level.Data.Models[TR2Type.Winston];
             marcoModel.Animations = winnieModel.Animations;
             marcoModel.MeshTrees = winnieModel.MeshTrees;
             marcoModel.Meshes = winnieModel.Meshes;
@@ -964,7 +955,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         // #327 Trick the game into never reaching the final frame of the death animation.
         // This results in a very abrupt death but avoids the level ending. For Ice Palace,
         // environment modifications will be made to enforce an alternative ending.
-        TRModel model = level.Data.Models.Find(m => m.ID == (uint)TR2Type.BirdMonster);
+        TRModel model = level.Data.Models[TR2Type.BirdMonster];
         if (model != null)
         {
             model.Animations[20].FrameEnd = model.Animations[19].FrameEnd;

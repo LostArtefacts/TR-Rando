@@ -126,9 +126,4 @@ public class TR3CombinedLevel
             return TR3Adventure.India;
         }
     }
-
-    public void RemoveModel(TR3Type type)
-    {
-        Data.Models.RemoveAll(m => m.ID == (uint)type);
-    }
 }

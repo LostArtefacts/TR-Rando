@@ -34,9 +34,8 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return new TR3TexturePacker(level);
     }
 
-    protected override bool IsInteractableModel(TRModel model)
+    protected override bool IsInteractableModel(TR3Type type)
     {
-        TR3Type type = (TR3Type)model.ID;
         return TR3TypeUtilities.IsSwitchType(type)
             || TR3TypeUtilities.IsKeyholeType(type)
             || TR3TypeUtilities.IsSlotType(type)
@@ -53,12 +52,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return level.GetInvalidObjectTextureIndices();
     }
 
-    protected override IEnumerable<TRMesh> GetLevelMeshes(TR3Level level)
-    {
-        return level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh));
-    }
-
-    protected override List<TRModel> GetModels(TR3Level level)
+    protected override TRDictionary<TR3Type, TRModel> GetModels(TR3Level level)
     {
         return level.Models;
     }
@@ -94,25 +88,23 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return _paletteTracker.Import(c);
     }
 
-    protected override bool IsLaraModel(TRModel model)
+    protected override bool IsLaraModel(TR3Type type)
     {
-        return _laraEntities.Contains((TR3Type)model.ID);
+        return _laraEntities.Contains(type);
     }
 
-    protected override bool IsEnemyModel(TRModel model)
+    protected override bool IsEnemyModel(TR3Type type)
     {
-        TR3Type id = (TR3Type)model.ID;
-        return TR3TypeUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
+        return TR3TypeUtilities.IsEnemyType(type) || _additionalEnemyEntities.Contains(type);
     }
 
-    protected override bool IsSkybox(TRModel model)
+    protected override bool IsSkybox(TR3Type type)
     {
-        return (TR3Type)model.ID == TR3Type.Skybox_H;
+        return type == TR3Type.Skybox_H;
     }
 
-    protected override bool ShouldSolidifyModel(TRModel model)
+    protected override bool ShouldSolidifyModel(TR3Type type)
     {
-        TR3Type type = (TR3Type)model.ID;
         return TR3TypeUtilities.IsAnyPickupType(type) || TR3TypeUtilities.IsCrystalPickup(type);
     }
 

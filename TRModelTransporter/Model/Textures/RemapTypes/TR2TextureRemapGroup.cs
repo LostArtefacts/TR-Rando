@@ -7,12 +7,7 @@ public class TR2TextureRemapGroup : AbstractTextureRemapGroup<TR2Type, TR2Level>
 {
     protected override IEnumerable<TR2Type> GetModelTypes(TR2Level level)
     {
-        List<TR2Type> types = new();
-        foreach (TRModel model in level.Models)
-        {
-            types.Add((TR2Type)model.ID);
-        }
-        return types;
+        return level.Models.Keys.ToList();
     }
 
     protected override AbstractTexturePacker<TR2Type, TR2Level> CreatePacker(TR2Level level)

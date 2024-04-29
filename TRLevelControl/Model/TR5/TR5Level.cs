@@ -7,7 +7,7 @@ public class TR5Level : TRLevelBase
     public ushort WeatherType { get; set; }
     public List<TR5Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
-    public List<TRModel> Models { get; set; }
+    public TRDictionary<TR5Type, TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
     public List<TRSpriteTexture> SpriteTextures { get; set; }
     public List<TRSpriteSequence> SpriteSequences { get; set; }
@@ -24,4 +24,8 @@ public class TR5Level : TRLevelBase
     public List<TR5AIEntity> AIEntities { get; set; }
     public byte[] DemoData { get; set; }
     public SortedDictionary<TR5SFX, TR4SoundEffect> SoundEffects { get; set; }
+
+    public override IEnumerable<TRMesh> DistinctMeshes => Models.Values.SelectMany(m => m.Meshes)
+        .Concat(StaticMeshes.Select(s => s.Mesh))
+        .Distinct();
 }

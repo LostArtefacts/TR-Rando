@@ -9,63 +9,35 @@ public class EMConvertModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        ConvertModel(level.Models);
-        UpdateModelEntities(level.Entities);
+        ConvertModel(level.Models, level.Entities);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        ConvertModel(level.Models);
-        UpdateModelEntities(level.Entities);
+        ConvertModel(level.Models, level.Entities);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        ConvertModel(level.Models);
-        UpdateModelEntities(level.Entities);
+        ConvertModel(level.Models, level.Entities);
     }
 
-    private void ConvertModel(List<TRModel> models)
+    private void ConvertModel<T, E>(TRDictionary<T, TRModel> models, List<E> entities)
+        where T : Enum
+        where E : TREntity<T>
     {
-        if (models.Find(m => m.ID == NewModelID) == null)
+        T oldID = (T)(object)OldModelID;
+        T newID = (T)(object)NewModelID;
+        if (!models.ChangeKey(oldID, newID))
         {
-            TRModel oldModel = models.Find(m => m.ID == OldModelID);
-            if (oldModel != null)
-            {
-                oldModel.ID = NewModelID;
-            }
+            return;
         }
-    }
 
-    private void UpdateModelEntities(List<TR1Entity> entities)
-    {
-        foreach (TR1Entity entity in entities)
+        foreach (E entity in entities)
         {
-            if (entity.TypeID == (TR1Type)OldModelID)
+            if (EqualityComparer<T>.Default.Equals(entity.TypeID, oldID))
             {
-                entity.TypeID = (TR1Type)NewModelID;
-            }
-        }
-    }
-
-    private void UpdateModelEntities(IEnumerable<TR2Entity> entities)
-    {
-        foreach (TR2Entity entity in entities)
-        {
-            if (entity.TypeID == (TR2Type)OldModelID)
-            {
-                entity.TypeID = (TR2Type)NewModelID;
-            }
-        }
-    }
-
-    private void UpdateModelEntities(IEnumerable<TR3Entity> entities)
-    {
-        foreach (TR3Entity entity in entities)
-        {
-            if (entity.TypeID == (TR3Type)OldModelID)
-            {
-                entity.TypeID = (TR3Type)NewModelID;
+                entity.TypeID = newID;
             }
         }
     }

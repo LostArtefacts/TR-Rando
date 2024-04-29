@@ -34,14 +34,13 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return new TR2TexturePacker(level);
     }
 
-    protected override bool IsSkybox(TRModel model)
+    protected override bool IsSkybox(TR2Type type)
     {
-        return (TR2Type)model.ID == TR2Type.Skybox_H;
+        return type == TR2Type.Skybox_H;
     }
 
-    protected override bool IsInteractableModel(TRModel model)
+    protected override bool IsInteractableModel(TR2Type type)
     {
-        TR2Type type = (TR2Type)model.ID;
         return TR2TypeUtilities.IsSwitchType(type)
             || TR2TypeUtilities.IsKeyholeType(type)
             || TR2TypeUtilities.IsSlotType(type)
@@ -58,12 +57,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return level.GetInvalidObjectTextureIndices();
     }
 
-    protected override IEnumerable<TRMesh> GetLevelMeshes(TR2Level level)
-    {
-        return level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh));
-    }
-
-    protected override List<TRModel> GetModels(TR2Level level)
+    protected override TRDictionary<TR2Type, TRModel> GetModels(TR2Level level)
     {
         return level.Models;
     }
@@ -99,15 +93,14 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return _paletteTracker.Import(c);
     }
 
-    protected override bool IsLaraModel(TRModel model)
+    protected override bool IsLaraModel(TR2Type type)
     {
-        return _laraEntities.Contains((TR2Type)model.ID);
+        return _laraEntities.Contains(type);
     }
 
-    protected override bool IsEnemyModel(TRModel model)
+    protected override bool IsEnemyModel(TR2Type type)
     {
-        TR2Type id = (TR2Type)model.ID;
-        return TR2TypeUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
+        return TR2TypeUtilities.IsEnemyType(type) || _additionalEnemyEntities.Contains(type);
     }
 
     protected override void ResetUnusedTextures(TR2Level level)

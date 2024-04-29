@@ -229,8 +229,10 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
 
         private bool Import(TR2CombinedLevel level, TR2Type lara)
         {
-            TRModel laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
-            List<TRModel> laraClones = level.Data.Models.FindAll(m => m.MeshTrees.FirstOrDefault() == laraModel.MeshTrees.FirstOrDefault() && m != laraModel);
+            TRModel laraModel = level.Data.Models[TR2Type.Lara];
+            List<TRModel> laraClones = level.Data.Models.Values
+                .Where(m => m.MeshTrees.FirstOrDefault() == laraModel.MeshTrees.FirstOrDefault() && m != laraModel)
+                .ToList();
 
             if (lara == TR2Type.LaraInvisible)
             {
@@ -275,7 +277,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // #314 Any clones of Lara should copy her new style
                 if (laraClones.Count > 0)
                 {
-                    laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
+                    laraModel = level.Data.Models[TR2Type.Lara];
                     foreach (TRModel model in laraClones)
                     {
                         model.MeshTrees = laraModel.MeshTrees;
@@ -318,7 +320,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             MeshEditor editor = new();
             foreach (TR2Type ent in entities)
             {
-                List<TRMesh> meshes = level.Data.Models.Find(m => m.ID == (uint)ent)?.Meshes;
+                List<TRMesh> meshes = level.Data.Models[ent]?.Meshes;
                 if (meshes != null)
                 {
                     foreach (TRMesh mesh in meshes)
@@ -338,13 +340,13 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
 
         private void AdjustOutfit(TR2CombinedLevel level, TR2Type lara)
         {
-            TRModel laraModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.Lara);
+            TRModel laraModel = level.Data.Models[TR2Type.Lara];
             if (level.Is(TR2LevelNames.HOME) && lara != TR2Type.LaraHome)
             {
                 // This ensures that Lara's hips match the new outfit for the starting animation and shower cutscene,
                 // otherwise the dressing gown hips are rendered, but the mesh is completely different for this, plus
                 // its textures will have been removed.
-                TRModel laraMiscModel = level.Data.Models.Find(m => m.ID == (uint)TR2Type.LaraMiscAnim_H);
+                TRModel laraMiscModel = level.Data.Models[TR2Type.LaraMiscAnim_H];
                 laraModel.Meshes[0].CopyInto(laraMiscModel.Meshes[0]);
             }
 
@@ -377,14 +379,14 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                         // so we basically just retain the hand.
                         MeshEditor editor = new()
                         {
-                            Mesh = level.Data.Models.Find(m => m.ID == (uint)TR2Type.LaraMiscAnim_H).Meshes[10]
+                            Mesh = level.Data.Models[TR2Type.LaraMiscAnim_H].Meshes[10]
                         };
 
                         editor.RemoveTexturedRectangleRange(6, 20);
                         editor.ClearTexturedTriangles();
 
                         // And hide it from the inventory
-                        foreach (TRMesh mesh in level.Data.Models.Find(m => m.ID == (uint)TR2Type.Puzzle1_M_H).Meshes)
+                        foreach (TRMesh mesh in level.Data.Models[TR2Type.Puzzle1_M_H].Meshes)
                         {
                             editor.Mesh = mesh;
                             editor.ClearTexturedRectangles();
@@ -400,8 +402,8 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // into the diving suit, but model ID 99 is the one before. We always want the cutscene actor to
                 // match DA, but this unfortunately means she'll leave the cutscene in the same outfit. She just
                 // didn't like the look of any of the alternatives...
-                TRModel actorLara = level.Data.Models.Find(m => m.ID == (short)TR2Type.CutsceneActor3);
-                TRModel realLara = level.Data.Models.Find(m => m.ID == (short)TR2Type.Lara);
+                TRModel actorLara = level.Data.Models[TR2Type.CutsceneActor3];
+                TRModel realLara = level.Data.Models[TR2Type.Lara];
 
                 actorLara.MeshTrees = realLara.MeshTrees;
                 actorLara.Meshes = realLara.Meshes;

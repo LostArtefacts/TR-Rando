@@ -3,7 +3,8 @@ using TRLevelControl.Model;
 
 namespace TRLevelControl.Build;
 
-public class TRModelBuilder
+public class TRModelBuilder<T>
+    where T : Enum
 {
     private static readonly ushort _tr5ModelPadding = 0xFFEF;
 
@@ -29,7 +30,7 @@ public class TRModelBuilder
         _observer = observer;
     }
 
-    public List<TRModel> ReadModelData(TRLevelReader reader, IMeshProvider meshProvider)
+    public TRDictionary<T, TRModel> ReadModelData(TRLevelReader reader, IMeshProvider meshProvider)
     {
         ReadAnimations(reader);
         ReadStateChanges(reader);
@@ -39,18 +40,18 @@ public class TRModelBuilder
         ReadFrames(reader);
         ReadModels(reader);
 
-        List<TRModel> models = new();
+        TRDictionary<T, TRModel> models = new();
         foreach (PlaceholderModel placeholder in _placeholderModels)
         {
-            models.Add(BuildModel(placeholder, meshProvider));
+            models[(T)(object)placeholder.ID] = BuildModel(placeholder, meshProvider);
         }
 
-        TestTR5Changes(models);
+        TestTR5Changes(models.Values);
 
         return models;
     }
 
-    public void WriteModelData(TRLevelWriter writer, List<TRModel> models)
+    public void WriteModelData(TRLevelWriter writer, TRDictionary<T, TRModel> models)
     {
         _placeholderAnimations = new();
         _placeholderChanges = new();
@@ -62,9 +63,9 @@ public class TRModelBuilder
         _dispatchToAnimMap = new();
         _dispatchFrameBase = new();
 
-        foreach (TRModel model in models)
+        foreach (var (type, model) in models)
         {
-            DeconstructModel(model);
+            DeconstructModel(type, model);
         }
 
         RestoreTR5Extras();
@@ -214,11 +215,7 @@ public class TRModelBuilder
 
     private TRModel BuildModel(PlaceholderModel placeholder, IMeshProvider meshProvider)
     {
-        TRModel model = new()
-        {
-            // To be eliminated
-            ID = placeholder.ID,
-        };
+        TRModel model = new();
 
         // Everything has a dummy mesh tree, so load one less than the mesh count
         int treePointer = (int)placeholder.MeshTree / sizeof(int);
@@ -517,7 +514,7 @@ public class TRModelBuilder
         return frame;
     }
 
-    private void TestTR5Changes(List<TRModel> models)
+    private void TestTR5Changes(IEnumerable<TRModel> models)
     {
         if (_observer == null || _version != TRGameVersion.TR5)
         {
@@ -534,11 +531,11 @@ public class TRModelBuilder
         }
     }
 
-    private void DeconstructModel(TRModel model)
+    private void DeconstructModel(T type, TRModel model)
     {
         PlaceholderModel placeholderModel = new()
         {
-            ID = model.ID,
+            ID = (uint)(object)type,
             Animation = model.Animations.Count == 0 ? TRConsts.NoAnimation : (ushort)_placeholderAnimations.Count,
             FrameOffset = (uint)_frames.Count * sizeof(short),
             NumMeshes = (ushort)model.Meshes.Count,
@@ -755,12 +752,12 @@ public class TRModelBuilder
         }
     }
 
-    private void WriteAnimations(TRLevelWriter writer, List<TRModel> models)
+    private void WriteAnimations(TRLevelWriter writer, TRDictionary<T, TRModel> models)
     {
         writer.Write((uint)_placeholderAnimations.Count);
-        foreach (TRModel model in models)
+        foreach (var (type, model) in models)
         {
-            PlaceholderModel placeholderModel = _placeholderModels.Find(m => m.ID == model.ID);
+            PlaceholderModel placeholderModel = _placeholderModels.Find(m => m.ID == (uint)(object)type);
 
             for (int i = 0; i < model.Animations.Count; i++)
             {
@@ -857,15 +854,15 @@ public class TRModelBuilder
         writer.Write(_frames);
     }
 
-    private void WriteModels(TRLevelWriter writer, List<TRModel> models)
+    private void WriteModels(TRLevelWriter writer, TRDictionary<T, TRModel> models)
     {
         writer.Write((uint)models.Count);
 
         uint treePointer = 0;
         ushort startingMesh = 0;
-        foreach (TRModel model in models)
+        foreach (var (type, model) in models)
         {
-            PlaceholderModel placeholderModel = _placeholderModels.Find(m => m.ID == model.ID);
+            PlaceholderModel placeholderModel = _placeholderModels.Find(m => m.ID == (uint)(object)type);
 
             writer.Write(placeholderModel.ID);
             writer.Write(placeholderModel.NumMeshes);
