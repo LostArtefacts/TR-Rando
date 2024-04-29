@@ -59,19 +59,14 @@ public abstract class BaseEMFunction
 
     public static int CreateRoomVertex(TR2Room room, TRVertex vert, short lighting = 6574, short lighting2 = 6574)
     {
-        TR2RoomVertex v = new()
+        room.RoomData.Vertices.Add(new()
         {
             Attributes = 32784, // This stops it shimmering if viewed from underwater, should be configurable
             Lighting = lighting,
             Lighting2 = lighting2,
             Vertex = vert
-        };
-
-        List<TR2RoomVertex> verts = room.RoomData.Vertices.ToList();
-        verts.Add(v);
-        room.RoomData.Vertices = verts.ToArray();
-        room.RoomData.NumVertices++;
-        return verts.Count - 1;
+        });
+        return room.RoomData.Vertices.Count - 1;
     }
 
     public static int CreateRoomVertex(TR3Room room, TRVertex vert, short lighting = 6574, ushort colour = 6574, bool useCaustics = false, bool useWaveMovement = false)

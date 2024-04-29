@@ -181,14 +181,10 @@ public class EMCopyRoomFunction : BaseEMFunction
             Portals = new(),
             RoomData = new()
             {
-                NumRectangles = baseRoom.RoomData.NumRectangles,
-                NumSprites = baseRoom.RoomData.NumSprites,
-                NumTriangles = baseRoom.RoomData.NumTriangles,
-                NumVertices = baseRoom.RoomData.NumVertices,
-                Rectangles = new TRFace4[baseRoom.RoomData.NumRectangles],
-                Sprites = new TRRoomSprite[baseRoom.RoomData.NumSprites],
-                Triangles = new TRFace3[baseRoom.RoomData.NumTriangles],
-                Vertices = new TR2RoomVertex[baseRoom.RoomData.NumVertices]
+                Rectangles = new(),
+                Sprites = new(),
+                Triangles = new(),
+                Vertices = new(),
             },
             Sectors = new(),
             StaticMeshes = new()
@@ -210,26 +206,26 @@ public class EMCopyRoomFunction : BaseEMFunction
         }
 
         // Faces
-        for (int i = 0; i < newRoom.RoomData.NumRectangles; i++)
+        for (int i = 0; i < baseRoom.RoomData.Rectangles.Count; i++)
         {
-            newRoom.RoomData.Rectangles[i] = new TRFace4
+            newRoom.RoomData.Rectangles.Add(new()
             {
                 Texture = baseRoom.RoomData.Rectangles[i].Texture,
                 Vertices = new ushort[baseRoom.RoomData.Rectangles[i].Vertices.Length]
-            };
+            });
             for (int j = 0; j < newRoom.RoomData.Rectangles[i].Vertices.Length; j++)
             {
                 newRoom.RoomData.Rectangles[i].Vertices[j] = baseRoom.RoomData.Rectangles[i].Vertices[j];
             }
         }
 
-        for (int i = 0; i < newRoom.RoomData.NumTriangles; i++)
+        for (int i = 0; i < baseRoom.RoomData.Triangles.Count; i++)
         {
-            newRoom.RoomData.Triangles[i] = new TRFace3
+            newRoom.RoomData.Triangles.Add(new()
             {
                 Texture = baseRoom.RoomData.Triangles[i].Texture,
                 Vertices = new ushort[baseRoom.RoomData.Triangles[i].Vertices.Length]
-            };
+            });
             for (int j = 0; j < newRoom.RoomData.Triangles[i].Vertices.Length; j++)
             {
                 newRoom.RoomData.Triangles[i].Vertices[j] = baseRoom.RoomData.Triangles[i].Vertices[j];
@@ -237,9 +233,9 @@ public class EMCopyRoomFunction : BaseEMFunction
         }
 
         // Vertices
-        for (int i = 0; i < newRoom.RoomData.Vertices.Length; i++)
+        for (int i = 0; i < baseRoom.RoomData.Vertices.Count; i++)
         {
-            newRoom.RoomData.Vertices[i] = new TR2RoomVertex
+            newRoom.RoomData.Vertices.Add(new()
             {
                 Attributes = baseRoom.RoomData.Vertices[i].Attributes,
                 Lighting = baseRoom.RoomData.Vertices[i].Lighting,
@@ -250,17 +246,17 @@ public class EMCopyRoomFunction : BaseEMFunction
                     Y = (short)(baseRoom.RoomData.Vertices[i].Vertex.Y + ydiff),
                     Z = baseRoom.RoomData.Vertices[i].Vertex.Z
                 }
-            };
+            });
         }
 
         // Sprites
-        for (int i = 0; i < newRoom.RoomData.NumSprites; i++)
+        for (int i = 0; i < baseRoom.RoomData.Sprites.Count; i++)
         {
-            newRoom.RoomData.Sprites[i] = new TRRoomSprite
+            newRoom.RoomData.Sprites.Add(new()
             {
                 Texture = baseRoom.RoomData.Sprites[i].Texture,
                 Vertex = baseRoom.RoomData.Sprites[i].Vertex
-            };
+            });
         }
 
         // Static Meshes
