@@ -12,16 +12,22 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
     {
         EMLevelData data = GetData(level);
 
-        foreach (short roomIndex in Quads?.Keys)
+        if (Quads != null)
         {
-            TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-            room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
+            foreach (short roomIndex in Quads.Keys)
+            {
+                TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
+                room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
+            }
         }
 
-        foreach (short roomIndex in Triangles?.Keys)
+        if (Triangles != null)
         {
-            TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-            room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
+            foreach (short roomIndex in Triangles.Keys)
+            {
+                TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
+                room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
+            }
         }
     }
 
@@ -29,16 +35,22 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
     {
         EMLevelData data = GetData(level);
 
-        foreach (short roomIndex in Quads?.Keys)
+        if (Quads != null)
         {
-            TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-            room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
+            foreach (short roomIndex in Quads.Keys)
+            {
+                TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
+                room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
+            }
         }
 
-        foreach (short roomIndex in Triangles?.Keys)
+        if (Triangles != null)
         {
-            TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-            room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
+            foreach (short roomIndex in Triangles.Keys)
+            {
+                TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
+                room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
+            }
         }
     }
 
@@ -46,39 +58,51 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
     {
         EMLevelData data = GetData(level);
 
-        foreach (short roomIndex in Quads?.Keys)
+        if (Quads != null)
         {
-            TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-            room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
+            foreach (short roomIndex in Quads.Keys)
+            {
+                TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
+                room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
+            }
         }
 
-        foreach (short roomIndex in Triangles?.Keys)
+        if (Triangles != null)
         {
-            TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-            room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
+            foreach (short roomIndex in Triangles.Keys)
+            {
+                TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
+                room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
+            }
         }
     }
 
     public void RemapTextures(Dictionary<ushort, ushort> indexMap)
     {
-        foreach (List<TRFace4> faces in Quads?.Values)
+        if (Quads != null)
         {
-            foreach (TRFace4 face in faces)
+            foreach (List<TRFace4> faces in Quads?.Values)
             {
-                if (indexMap.ContainsKey(face.Texture))
+                foreach (TRFace4 face in faces)
                 {
-                    face.Texture = indexMap[face.Texture];
+                    if (indexMap.ContainsKey(face.Texture))
+                    {
+                        face.Texture = indexMap[face.Texture];
+                    }
                 }
             }
         }
 
-        foreach (List<TRFace3> faces in Triangles?.Values)
+        if (Triangles != null)
         {
-            foreach (TRFace3 face in faces)
+            foreach (List<TRFace3> faces in Triangles?.Values)
             {
-                if (indexMap.ContainsKey(face.Texture))
+                foreach (TRFace3 face in faces)
                 {
-                    face.Texture = indexMap[face.Texture];
+                    if (indexMap.ContainsKey(face.Texture))
+                    {
+                        face.Texture = indexMap[face.Texture];
+                    }
                 }
             }
         }

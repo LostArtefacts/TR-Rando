@@ -62,7 +62,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
         short y = (short)(sector.Floor * TRConsts.Step1);
 
-        List<TR1RoomVertex> vertices = room.RoomData.Vertices.ToList();
         List<ushort> oldVertIndices = new();
 
         List<TRVertex> defVerts = GetTileVertices(x, y, z, false);
@@ -75,7 +74,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         for (int i = 0; i < defVerts.Count; i++)
         {
             TRVertex vert = defVerts[i];
-            int vi = vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+            int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
             if (vi != -1)
             {
                 oldVertIndices.Add((ushort)vi);
@@ -83,7 +82,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             else
             {
                 oldVertIndices.Add((ushort)CreateRoomVertex(room, vert));
-                vertices = room.RoomData.Vertices.ToList();
             }
         }
 
@@ -92,8 +90,8 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
-            TR1RoomVertex oldRoomVertex = vertices[vert];
-            TRVertex oldVert = vertices[vert].Vertex;
+            TR1RoomVertex oldRoomVertex = room.RoomData.Vertices[vert];
+            TRVertex oldVert = room.RoomData.Vertices[vert].Vertex;
             TRVertex newVertex = new()
             {
                 X = oldVert.X,
@@ -102,9 +100,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             };
             newVertIndices.Add((ushort)CreateRoomVertex(room, newVertex, oldRoomVertex.Lighting));
         }
-
-        // Refresh
-        vertices = room.RoomData.Vertices.ToList();
 
         // Get the tile face that matches the vertex list
         TRFace4 floorFace = room.RoomData.Rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
@@ -130,10 +125,10 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                     foreach (ushort sharedVert in sharedVerts)
                     {
                         int i = faceVerts.IndexOf(sharedVert);
-                        TRVertex oldVert = vertices[sharedVert].Vertex;
+                        TRVertex oldVert = room.RoomData.Vertices[sharedVert].Vertex;
                         foreach (ushort newVert in newVertIndices)
                         {
-                            TRVertex newVertex = vertices[newVert].Vertex;
+                            TRVertex newVertex = room.RoomData.Vertices[newVert].Vertex;
                             if (newVertex.X == oldVert.X && newVertex.Z == oldVert.Z)
                             {
                                 faceVerts[i] = newVert;
@@ -289,7 +284,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
         short y = (short)(sector.Floor * TRConsts.Step1);
 
-        List<TR2RoomVertex> vertices = room.RoomData.Vertices.ToList();
         List<ushort> oldVertIndices = new();
 
         List<TRVertex> defVerts = GetTileVertices(x, y, z, false);
@@ -302,7 +296,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         for (int i = 0; i < defVerts.Count; i++)
         {
             TRVertex vert = defVerts[i];
-            int vi = vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+            int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
             if (vi != -1)
             {
                 oldVertIndices.Add((ushort)vi);
@@ -310,7 +304,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             else
             {
                 oldVertIndices.Add((ushort)CreateRoomVertex(room, vert));
-                vertices = room.RoomData.Vertices.ToList();
             }
         }
 
@@ -319,8 +312,8 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
-            TR2RoomVertex oldRoomVertex = vertices[vert];
-            TRVertex oldVert = vertices[vert].Vertex;
+            TR2RoomVertex oldRoomVertex = room.RoomData.Vertices[vert];
+            TRVertex oldVert = room.RoomData.Vertices[vert].Vertex;
             TRVertex newVertex = new()
             {
                 X = oldVert.X,
@@ -329,9 +322,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             };
             newVertIndices.Add((ushort)CreateRoomVertex(room, newVertex, oldRoomVertex.Lighting, oldRoomVertex.Lighting2));
         }
-
-        // Refresh
-        vertices = room.RoomData.Vertices.ToList();
 
         // Get the tile face that matches the vertex list
         TRFace4 floorFace = room.RoomData.Rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
@@ -357,10 +347,10 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                     foreach (ushort sharedVert in sharedVerts)
                     {
                         int i = faceVerts.IndexOf(sharedVert);
-                        TRVertex oldVert = vertices[sharedVert].Vertex;
+                        TRVertex oldVert = room.RoomData.Vertices[sharedVert].Vertex;
                         foreach (ushort newVert in newVertIndices)
                         {
-                            TRVertex newVertex = vertices[newVert].Vertex;
+                            TRVertex newVertex = room.RoomData.Vertices[newVert].Vertex;
                             if (newVertex.X == oldVert.X && newVertex.Z == oldVert.Z)
                             {
                                 faceVerts[i] = newVert;
@@ -535,7 +525,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         short z = (short)(sectorIndex % room.NumZSectors * TRConsts.Step4);
         short y = (short)(sector.Floor * TRConsts.Step1);
 
-        List<TR3RoomVertex> vertices = room.RoomData.Vertices.ToList();
         List<ushort> oldVertIndices = new();
 
         List<TRVertex> defVerts = GetTileVertices(x, y, z, false);
@@ -548,7 +537,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         for (int i = 0; i < defVerts.Count; i++)
         {
             TRVertex vert = defVerts[i];
-            int vi = vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+            int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
             if (vi != -1)
             {
                 oldVertIndices.Add((ushort)vi);
@@ -560,8 +549,8 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
-            TR3RoomVertex oldRoomVertex = vertices[vert];
-            TRVertex oldVert = vertices[vert].Vertex;
+            TR3RoomVertex oldRoomVertex = room.RoomData.Vertices[vert];
+            TRVertex oldVert = room.RoomData.Vertices[vert].Vertex;
             TRVertex newVertex = new()
             {
                 X = oldVert.X,
@@ -570,9 +559,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             };
             newVertIndices.Add((ushort)CreateRoomVertex(room, newVertex, oldRoomVertex.Lighting, oldRoomVertex.Colour, oldRoomVertex.UseCaustics, oldRoomVertex.UseWaveMovement));
         }
-
-        // Refresh
-        vertices = room.RoomData.Vertices.ToList();
 
         // Get the tile face that matches the vertex list
         TRFace4 floorFace = room.RoomData.Rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
@@ -598,10 +584,10 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                     foreach (ushort sharedVert in sharedVerts)
                     {
                         int i = faceVerts.IndexOf(sharedVert);
-                        TRVertex oldVert = vertices[sharedVert].Vertex;
+                        TRVertex oldVert = room.RoomData.Vertices[sharedVert].Vertex;
                         foreach (ushort newVert in newVertIndices)
                         {
-                            TRVertex newVertex = vertices[newVert].Vertex;
+                            TRVertex newVertex = room.RoomData.Vertices[newVert].Vertex;
                             if (newVertex.X == oldVert.X && newVertex.Z == oldVert.Z)
                             {
                                 faceVerts[i] = newVert;
