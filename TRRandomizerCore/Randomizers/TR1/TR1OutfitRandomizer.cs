@@ -690,7 +690,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             if (existingModel != null)
             {
                 // If we already have the gym outfit available, we're done.
-                if (existingModel.Meshes.ComputeSkeletonHash(TRGameVersion.TR1) == _gymOutfitHash)
+                if (existingModel.Meshes.ComputeSkeletonHash() == _gymOutfitHash)
                 {
                     return true;
                 }

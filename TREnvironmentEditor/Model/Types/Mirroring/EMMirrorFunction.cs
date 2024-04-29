@@ -561,20 +561,20 @@ public class EMMirrorFunction : BaseEMFunction
 
     private static void MirrorStaticMeshes(TR1Level level)
     {
-        MirrorStaticMeshes(level.StaticMeshes);
+        MirrorStaticMeshes(level.StaticMeshes.Values);
     }
 
     private static void MirrorStaticMeshes(TR2Level level)
     {
-        MirrorStaticMeshes(level.StaticMeshes);
+        MirrorStaticMeshes(level.StaticMeshes.Values);
     }
 
     private static void MirrorStaticMeshes(TR3Level level)
     {
-        MirrorStaticMeshes(level.StaticMeshes);
+        MirrorStaticMeshes(level.StaticMeshes.Values);
     }
 
-    private static void MirrorStaticMeshes(List<TRStaticMesh> staticMeshes)
+    private static void MirrorStaticMeshes(IEnumerable<TRStaticMesh> staticMeshes)
     {
         foreach (TRStaticMesh staticMesh in staticMeshes)
         {
@@ -1010,7 +1010,6 @@ public class EMMirrorFunction : BaseEMFunction
 
         // Keep track of static meshes so they are only processed once,
         // and so we only target those actually in use in rooms.
-        List<TRStaticMesh> staticMeshes = level.StaticMeshes.ToList();
         ISet<TRStaticMesh> processedMeshes = new HashSet<TRStaticMesh>();
 
         foreach (TR1Room room in level.Rooms)
@@ -1031,7 +1030,8 @@ public class EMMirrorFunction : BaseEMFunction
 
             foreach (TR1RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
-                TRStaticMesh staticMesh = staticMeshes.Find(m => m.ID == roomStaticMesh.MeshID);
+                TR1Type id = roomStaticMesh.MeshID + TR1Type.SceneryBase;
+                TRStaticMesh staticMesh = level.StaticMeshes[id];
                 if (!processedMeshes.Add(staticMesh))
                 {
                     continue;
@@ -1088,7 +1088,6 @@ public class EMMirrorFunction : BaseEMFunction
 
         // Keep track of static meshes so they are only processed once,
         // and so we only target those actually in use in rooms.
-        List<TRStaticMesh> staticMeshes = level.StaticMeshes.ToList();
         ISet<TRStaticMesh> processedMeshes = new HashSet<TRStaticMesh>();
 
         foreach (TR2Room room in level.Rooms)
@@ -1109,7 +1108,8 @@ public class EMMirrorFunction : BaseEMFunction
 
             foreach (TR2RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
-                TRStaticMesh staticMesh = staticMeshes.Find(m => m.ID == roomStaticMesh.MeshID);
+                TR2Type id = roomStaticMesh.MeshID + TR2Type.SceneryBase;
+                TRStaticMesh staticMesh = level.StaticMeshes[id];
                 if (!processedMeshes.Add(staticMesh))
                 {
                     continue;
@@ -1158,7 +1158,6 @@ public class EMMirrorFunction : BaseEMFunction
     {
         ISet<ushort> textureReferences = new HashSet<ushort>();
 
-        List<TRStaticMesh> staticMeshes = level.StaticMeshes.ToList();
         ISet<TRStaticMesh> processedMeshes = new HashSet<TRStaticMesh>();
 
         foreach (TR3Room room in level.Rooms)
@@ -1179,7 +1178,8 @@ public class EMMirrorFunction : BaseEMFunction
 
             foreach (TR3RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
-                TRStaticMesh staticMesh = staticMeshes.Find(m => m.ID == roomStaticMesh.MeshID);
+                TR3Type id = roomStaticMesh.MeshID + TR3Type.SceneryBase;
+                TRStaticMesh staticMesh = level.StaticMeshes[id];
                 if (!processedMeshes.Add(staticMesh))
                 {
                     continue;

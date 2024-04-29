@@ -7,7 +7,7 @@ using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Utilities;
 
-public class TR1LocationGenerator : AbstractLocationGenerator<TR1Level>
+public class TR1LocationGenerator : AbstractLocationGenerator<TR1Type, TR1Level>
 {
     public override bool CrawlspacesAllowed => false;
     public override bool WadingAllowed => false;
@@ -33,9 +33,9 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Level>
         return level.Rooms[room].Sectors.ToList();
     }
 
-    protected override List<TRStaticMesh> GetStaticMeshes(TR1Level level)
+    protected override TRDictionary<TR1Type, TRStaticMesh> GetStaticMeshes(TR1Level level)
     {
-        return level.StaticMeshes.ToList();
+        return level.StaticMeshes;
     }
 
     protected override int GetRoomCount(TR1Level level)
@@ -60,17 +60,14 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Level>
             && level.Entities[a.Parameter].TypeID == TR1Type.ThorHammerHandle);
     }
 
-    protected override Dictionary<ushort, List<Location>> GetRoomStaticMeshLocations(TR1Level level, short room)
+    protected override Dictionary<TR1Type, List<Location>> GetRoomStaticMeshLocations(TR1Level level, short room)
     {
-        Dictionary<ushort, List<Location>> locations = new();
+        Dictionary<TR1Type, List<Location>> locations = new();
         foreach (TR1RoomStaticMesh staticMesh in level.Rooms[room].StaticMeshes)
         {
-            if (!locations.ContainsKey(staticMesh.MeshID))
-            {
-                locations[staticMesh.MeshID] = new List<Location>();
-            }
-
-            locations[staticMesh.MeshID].Add(new Location
+            TR1Type id = staticMesh.MeshID + TR1Type.SceneryBase;
+            locations[id] ??= new();
+            locations[id].Add(new()
             {
                 X = (int)staticMesh.X,
                 Y = (int)staticMesh.Y,

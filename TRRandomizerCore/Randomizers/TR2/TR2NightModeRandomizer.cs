@@ -118,10 +118,9 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
         // Hide any static meshes
         if (_staticMeshesToHide.ContainsKey(levelName))
         {
-            List<TRStaticMesh> staticMeshes = level.StaticMeshes.ToList();
-            foreach (uint meshID in _staticMeshesToHide[levelName])
+            foreach (TR2Type type in _staticMeshesToHide[levelName])
             {
-                TRStaticMesh mesh = staticMeshes.Find(m => m.ID == meshID);
+                TRStaticMesh mesh = level.StaticMeshes[type];
                 if (mesh != null)
                 {
                     mesh.NonCollidable = true;
@@ -136,13 +135,13 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
         [TR2Type.SingingBirds_N] = TR2Type.Flares_S_P // Birds don't sing at night
     };
 
-    private static readonly Dictionary<string, uint[]> _staticMeshesToHide = new()
+    private static readonly Dictionary<string, TR2Type[]> _staticMeshesToHide = new()
     {
         // The washing lines come in at night
         [TR2LevelNames.VENICE] = 
-            new uint[] { 32, 33 },
+            new TR2Type[] { TR2Type.Architecture2, TR2Type.Architecture3 },
         // The monks are washing their prayer flags
         [TR2LevelNames.MONASTERY] = 
-            new uint[] { 36 }
+            new TR2Type[] { TR2Type.Architecture6 }
     };
 }

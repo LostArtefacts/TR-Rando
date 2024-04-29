@@ -7,7 +7,9 @@ using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Utilities;
 
-public abstract class AbstractLocationGenerator<L> where L : class
+public abstract class AbstractLocationGenerator<T, L>
+    where L : TRLevelBase
+    where T : Enum
 {
     protected static readonly int _standardHeight = TRConsts.Step3;
     protected static readonly int _crawlspaceHeight = TRConsts.Step2;
@@ -60,7 +62,10 @@ public abstract class AbstractLocationGenerator<L> where L : class
             }
         }
 
-        List<TRStaticMesh> collidableMeshes = GetCollidableStaticMeshes(level);
+        List<T> collidableMeshes = GetStaticMeshes(level)
+            .Where(kvp => !IsPermittableMesh(kvp.Value))
+            .Select(kvp => kvp.Key)
+            .ToList();
 
         for (short r = 0; r < GetRoomCount(level); r++)
         {
@@ -87,25 +92,18 @@ public abstract class AbstractLocationGenerator<L> where L : class
             }
 
             // If there are any collidable static meshes in this room, exclude the sectors they're on
-            Dictionary<ushort, List<Location>> meshLocations = GetRoomStaticMeshLocations(level, r);
-            foreach (ushort meshID in meshLocations.Keys)
+            Dictionary<T, List<Location>> meshLocations = GetRoomStaticMeshLocations(level, r);
+            foreach (var (type, locations) in meshLocations)
             {
-                if (collidableMeshes.Find(m => m.ID == meshID) != null)
+                if (collidableMeshes.Contains(type))
                 {
-                    foreach (Location location in meshLocations[meshID])
+                    foreach (Location location in locations)
                     {
                         _excludedSectors.Add(GetSector(location, level));
                     }
                 }
             }
         }
-    }
-
-    protected List<TRStaticMesh> GetCollidableStaticMeshes(L level)
-    {
-        return GetStaticMeshes(level)
-            .Where(m => !IsPermittableMesh(m))
-            .ToList();
     }
 
     private static bool IsPermittableMesh(TRStaticMesh mesh)
@@ -709,11 +707,11 @@ public abstract class AbstractLocationGenerator<L> where L : class
     protected abstract TRRoomSector GetSector(Location location, L level);
     protected abstract TRRoomSector GetSector(int x, int z, int roomIndex, L level);
     protected abstract List<TRRoomSector> GetRoomSectors(L level, int room);
-    protected abstract List<TRStaticMesh> GetStaticMeshes(L level);
+    protected abstract TRDictionary<T, TRStaticMesh> GetStaticMeshes(L level);
     protected abstract int GetRoomCount(L level);
     protected abstract short GetFlipMapRoom(L level, short room);
     protected abstract bool IsRoomValid(L level, short room);
-    protected abstract Dictionary<ushort, List<Location>> GetRoomStaticMeshLocations(L level, short room);
+    protected abstract Dictionary<T, List<Location>> GetRoomStaticMeshLocations(L level, short room);
     protected abstract ushort GetRoomDepth(L level, short room);
     protected abstract int GetRoomYTop(L level, short room);
     protected abstract Vector2 GetRoomPosition(L level, short room);

@@ -247,7 +247,7 @@ public static class TRModelExtensions
         return defaultToOriginal ? textureReference : (ushort)0;
     }
 
-    public static string ComputeSkeletonHash(this IEnumerable<TRMesh> meshes, TRGameVersion version)
+    public static string ComputeSkeletonHash(this IEnumerable<TRMesh> meshes)
     {
         using MemoryStream ms = new();
         using BinaryWriter writer = new(ms);
@@ -255,17 +255,14 @@ public static class TRModelExtensions
 
         // We only care about the structure, so reset all texture references
         // as there is no guarantee these will match across levels.
-        TRObjectMeshBuilder builder = new(version);
+        TRObjectMeshBuilder<TR1Type> builder = new(TRGameVersion.TR1);
         foreach (TRMesh mesh in meshes)
         {
             TRMesh clone = mesh.Clone();
             clone.TexturedRectangles.ForEach(t => t.Texture = 0);
             clone.TexturedTriangles.ForEach(t => t.Texture = 0);
-            if (version >= TRGameVersion.TR4)
-            {
-                clone.ColouredRectangles.ForEach(t => t.Texture = 0);
-                clone.ColouredTriangles.ForEach(t => t.Texture = 0);
-            }
+            clone.ColouredRectangles?.ForEach(t => t.Texture = 0);
+            clone.ColouredTriangles?.ForEach(t => t.Texture = 0);
             writer.Write(builder.Serialize(clone));
         }
 

@@ -8,27 +8,27 @@ public class EMMirrorStaticMeshFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        IEnumerable<TRMesh> meshes = level.StaticMeshes.ToList()
-            .FindAll(s => MeshIDs.Contains(s.ID))
-            .Select(s => s.Mesh);
+        IEnumerable<TRMesh> meshes = level.StaticMeshes
+            .Where(kvp => MeshIDs.Contains(kvp.Key - TR1Type.SceneryBase))
+            .Select(kvp => kvp.Value.Mesh);
 
         MirrorMeshes(meshes);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        IEnumerable<TRMesh> meshes = level.StaticMeshes.ToList()
-            .FindAll(s => MeshIDs.Contains(s.ID))
-            .Select(s => s.Mesh);
+        IEnumerable<TRMesh> meshes = level.StaticMeshes
+            .Where(kvp => MeshIDs.Contains(kvp.Key - TR2Type.SceneryBase))
+            .Select(kvp => kvp.Value.Mesh);
 
         MirrorMeshes(meshes);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        IEnumerable<TRMesh> meshes = level.StaticMeshes.ToList()
-            .FindAll(s => MeshIDs.Contains(s.ID))
-            .Select(s => s.Mesh);
+        IEnumerable<TRMesh> meshes = level.StaticMeshes
+            .Where(kvp => MeshIDs.Contains(kvp.Key - TR3Type.SceneryBase))
+            .Select(kvp => kvp.Value.Mesh);
 
         MirrorMeshes(meshes);
     }
