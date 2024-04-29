@@ -89,8 +89,6 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
             room.RoomData.Sprites = sprites.ToArray();
             room.RoomData.NumSprites++;
             room.RoomData.NumVertices++;
-
-            room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
         }
     }
 }

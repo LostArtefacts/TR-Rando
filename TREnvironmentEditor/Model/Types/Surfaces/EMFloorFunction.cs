@@ -652,9 +652,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         room.RoomData.Rectangles = rectangles.ToArray();
         room.RoomData.NumRectangles = (short)rectangles.Count;
 
-        // Account for the added faces
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
-
         // Now shift the actual sector info and adjust the box if necessary
         sector.Floor += Clicks;
         AlterSectorBox(level, room, sectorIndex);

@@ -125,7 +125,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             _audioRandomizer.ResetFloorMap();
             foreach (TR1Room room in level.Data.Rooms.Where(r => (r.Flags & EMLockMusicFunction.LockedMusicFlag) == 0))
             {
-                _audioRandomizer.RandomizeFloorTracks(room.Sectors.ToArray(), floorData, _generator, sectorIndex =>
+                _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
                 {
                     // Get the midpoint of the tile in world coordinates
                     return new Vector2

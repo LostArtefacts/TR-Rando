@@ -65,7 +65,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
         _audioRandomizer.ResetFloorMap();
         foreach (TR1Room room in level.Rooms.Where(r => (r.Flags & EMLockMusicFunction.LockedMusicFlag) == 0))
         {
-            _audioRandomizer.RandomizeFloorTracks(room.Sectors.ToArray(), floorData, _generator, sectorIndex =>
+            _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
             {
                 return new Vector2
                 (

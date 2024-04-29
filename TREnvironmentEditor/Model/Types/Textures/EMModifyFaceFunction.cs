@@ -181,7 +181,6 @@ public class EMModifyFaceFunction : BaseEMFunction
 
         room.RoomData.Vertices = allVertices.ToArray();
         room.RoomData.NumVertices = (short)allVertices.Count;
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
     private static void ModifyTriangles(TR1Room room, EMFaceModification mod)
@@ -240,7 +239,6 @@ public class EMModifyFaceFunction : BaseEMFunction
 
         room.RoomData.Vertices = allVertices.ToArray();
         room.RoomData.NumVertices = (short)allVertices.Count;
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
     private static TR1RoomVertex GenerateRoomVertex(TR1RoomVertex currentRoomVertex, TRVertex newVertex)

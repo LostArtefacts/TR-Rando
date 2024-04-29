@@ -134,7 +134,7 @@ public static class FDUtilities
         }
     }
 
-    public static TRRoomSector GetRoomSector(int x, int z, TRRoomSector[] sectors, TRRoomInfo info, ushort roomDepth)
+    public static TRRoomSector GetRoomSector(int x, int z, List<TRRoomSector> sectors, TRRoomInfo info, ushort roomDepth)
     {
         int xFloor = (x - info.X) >> TRConsts.WallShift;
         int zFloor = (z - info.Z) >> TRConsts.WallShift;
@@ -521,7 +521,7 @@ public static class FDUtilities
             return TRConsts.NoHeight;
         }
 
-        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors.ToArray(), room.Info, room.NumZSectors);
+        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         TRRoomSector floorSector = baseSector;
         while (floorSector.RoomBelow != TRConsts.NoRoom)
         {
@@ -530,7 +530,7 @@ public static class FDUtilities
             {
                 break;
             }
-            floorSector = GetRoomSector(x, z, room.Sectors.ToArray(), room.Info, room.NumZSectors);
+            floorSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 
         TRRoomSector ceilingSector = baseSector;
@@ -541,7 +541,7 @@ public static class FDUtilities
             {
                 break;
             }
-            ceilingSector = GetRoomSector(x, z, room.Sectors.ToArray(), room.Info, room.NumZSectors);
+            ceilingSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 
         return GetHeight(x, z, floorSector, ceilingSector, floorData);
@@ -555,7 +555,7 @@ public static class FDUtilities
             return TRConsts.NoHeight;
         }
 
-        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors.ToArray(), room.Info, room.NumZSectors);
+        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         TRRoomSector floorSector = baseSector;
         while (floorSector.RoomBelow != TRConsts.NoRoom)
         {
@@ -564,7 +564,7 @@ public static class FDUtilities
             {
                 break;
             }
-            floorSector = GetRoomSector(x, z, room.Sectors.ToArray(), room.Info, room.NumZSectors);
+            floorSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 
         TRRoomSector ceilingSector = baseSector;
@@ -575,7 +575,7 @@ public static class FDUtilities
             {
                 break;
             }
-            ceilingSector = GetRoomSector(x, z, room.Sectors.ToArray(), room.Info, room.NumZSectors);
+            ceilingSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 
         return GetHeight(x, z, floorSector, ceilingSector, floorData);

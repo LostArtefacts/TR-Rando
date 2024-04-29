@@ -321,17 +321,13 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 YTop = NewLocation.Y + (roomDef.Room.Info.YTop - roomDef.Room.Info.YBottom),
                 Z = NewLocation.Z
             },
-            Lights = new TR3RoomLight[roomDef.Room.NumLights],
+            Lights = new(),
             LightMode = roomDef.Room.LightMode,
-            NumDataWords = roomDef.Room.NumDataWords,
-            NumLights = roomDef.Room.NumLights,
-            NumPortals = 0,
-            NumStaticMeshes = roomDef.Room.NumStaticMeshes,
             NumXSectors = roomDef.Room.NumXSectors,
             NumZSectors = roomDef.Room.NumZSectors,
-            Portals = Array.Empty<TRRoomPortal>(),
+            Portals = new(),
             ReverbInfo = roomDef.Room.ReverbInfo,
-            RoomData = new TR3RoomData
+            RoomData = new()
             {
                 NumRectangles = roomDef.Room.RoomData.NumRectangles,
                 NumSprites = roomDef.Room.RoomData.NumSprites,
@@ -342,15 +338,15 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 Triangles = new TRFace3[roomDef.Room.RoomData.NumTriangles],
                 Vertices = new TR3RoomVertex[roomDef.Room.RoomData.NumVertices]
             },
-            Sectors = new TRRoomSector[roomDef.Room.Sectors.Length],
-            StaticMeshes = new TR3RoomStaticMesh[roomDef.Room.NumStaticMeshes],
+            Sectors = new(),
+            StaticMeshes = new(),
             WaterScheme = roomDef.Room.WaterScheme
         };
 
         // Lights
-        for (int i = 0; i < newRoom.Lights.Length; i++)
+        for (int i = 0; i < roomDef.Room.Lights.Count; i++)
         {
-            newRoom.Lights[i] = new TR3RoomLight
+            newRoom.Lights.Add(new()
             {
                 Colour = roomDef.Room.Lights[i].Colour,
                 LightProperties = roomDef.Room.Lights[i].LightProperties,
@@ -358,7 +354,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 X = roomDef.Room.Lights[i].X + xdiff,
                 Y = roomDef.Room.Lights[i].Y + ydiff,
                 Z = roomDef.Room.Lights[i].Z + zdiff
-            };
+            });
         }
 
         // Faces
@@ -416,9 +412,9 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         }
 
         // Static Meshes
-        for (int i = 0; i < newRoom.NumStaticMeshes; i++)
+        for (int i = 0; i < roomDef.Room.StaticMeshes.Count; i++)
         {
-            newRoom.StaticMeshes[i] = new TR3RoomStaticMesh
+            newRoom.StaticMeshes.Add(new()
             {
                 Colour = roomDef.Room.StaticMeshes[i].Colour,
                 MeshID = roomDef.Room.StaticMeshes[i].MeshID,
@@ -427,7 +423,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 X = (uint)(roomDef.Room.StaticMeshes[i].X + xdiff),
                 Y = (uint)(roomDef.Room.StaticMeshes[i].Y + ydiff),
                 Z = (uint)(roomDef.Room.StaticMeshes[i].Z + zdiff)
-            };
+            });
         }
 
         // Boxes, zones and sectors
@@ -475,7 +471,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         newBoxIndex <<= 4;
         newBoxIndex |= (ushort)linkedMaterial;
 
-        for (int i = 0; i < newRoom.Sectors.Length; i++)
+        for (int i = 0; i < newRoom.Sectors.Count; i++)
         {
             int sectorYDiff = 0;
             ushort sectorBoxIndex = roomDef.Room.Sectors[i].BoxIndex;

@@ -310,24 +310,20 @@ public class EMCopyRoomFunction : BaseEMFunction
             AmbientIntensity = baseRoom.AmbientIntensity,
             Filler = baseRoom.Filler,
             Flags = baseRoom.Flags,
-            Info = new TRRoomInfo
+            Info = new()
             {
                 X = NewLocation.X,
                 YBottom = NewLocation.Y,
                 YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
                 Z = NewLocation.Z
             },
-            Lights = new TR3RoomLight[baseRoom.NumLights],
+            Lights = new(),
             LightMode = baseRoom.LightMode,
-            NumDataWords = baseRoom.NumDataWords,
-            NumLights = baseRoom.NumLights,
-            NumPortals = 0,
-            NumStaticMeshes = baseRoom.NumStaticMeshes,
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
-            Portals = Array.Empty<TRRoomPortal>(),
+            Portals = new(),
             ReverbInfo = baseRoom.ReverbInfo,
-            RoomData = new TR3RoomData
+            RoomData = new()
             {
                 NumRectangles = baseRoom.RoomData.NumRectangles,
                 NumSprites = baseRoom.RoomData.NumSprites,
@@ -338,15 +334,15 @@ public class EMCopyRoomFunction : BaseEMFunction
                 Triangles = new TRFace3[baseRoom.RoomData.NumTriangles],
                 Vertices = new TR3RoomVertex[baseRoom.RoomData.NumVertices]
             },
-            Sectors = new TRRoomSector[baseRoom.Sectors.Length],
-            StaticMeshes = new TR3RoomStaticMesh[baseRoom.NumStaticMeshes],
+            Sectors = new(),
+            StaticMeshes = new(),
             WaterScheme = baseRoom.WaterScheme
         };
 
         // Lights
-        for (int i = 0; i < newRoom.Lights.Length; i++)
+        for (int i = 0; i < baseRoom.Lights.Count; i++)
         {
-            newRoom.Lights[i] = new TR3RoomLight
+            newRoom.Lights.Add(new()
             {
                 Colour = baseRoom.Lights[i].Colour,
                 LightProperties = baseRoom.Lights[i].LightProperties,
@@ -354,7 +350,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                 X = baseRoom.Lights[i].X + xdiff,
                 Y = baseRoom.Lights[i].Y + ydiff,
                 Z = baseRoom.Lights[i].Z + zdiff
-            };
+            });
         }
 
         // Faces
@@ -412,9 +408,9 @@ public class EMCopyRoomFunction : BaseEMFunction
         }
 
         // Static Meshes
-        for (int i = 0; i < newRoom.NumStaticMeshes; i++)
+        for (int i = 0; i < baseRoom.StaticMeshes.Count; i++)
         {
-            newRoom.StaticMeshes[i] = new TR3RoomStaticMesh
+            newRoom.StaticMeshes.Add(new()
             {
                 Colour = baseRoom.StaticMeshes[i].Colour,
                 MeshID = baseRoom.StaticMeshes[i].MeshID,
@@ -423,16 +419,16 @@ public class EMCopyRoomFunction : BaseEMFunction
                 X = (uint)(baseRoom.StaticMeshes[i].X + xdiff),
                 Y = (uint)(baseRoom.StaticMeshes[i].Y + ydiff),
                 Z = (uint)(baseRoom.StaticMeshes[i].Z + zdiff)
-            };
+            });
         }
 
         // Rebuild the sectors
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        for (int i = 0; i < newRoom.Sectors.Length; i++)
+        for (int i = 0; i < baseRoom.Sectors.Count; i++)
         {
-            newRoom.Sectors[i] = RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info);
+            newRoom.Sectors.Add(RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info));
         }
 
         floorData.WriteToLevel(level);

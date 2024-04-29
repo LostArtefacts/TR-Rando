@@ -149,9 +149,7 @@ public class EMMirrorFunction : BaseEMFunction
 
         foreach (TR3Room room in level.Rooms)
         {
-            List<TRRoomSector> sectors = room.Sectors.ToList();
-            MirrorSectors(sectors, room.NumXSectors, room.NumZSectors, floorData);
-            room.Sectors = sectors.ToArray();
+            MirrorSectors(room.Sectors, room.NumXSectors, room.NumZSectors, floorData);
         }
 
         floorData.WriteToLevel(level);
