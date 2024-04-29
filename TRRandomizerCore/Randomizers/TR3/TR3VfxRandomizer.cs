@@ -79,7 +79,7 @@ public class TR3VfxRandomizer : BaseTR3Randomizer
     {
         foreach (TR3Room room in level.Rooms)
         {
-            room.SetColourFilter(Settings.VfxFilterColor, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
+            SetColourFilter(room, Settings.VfxFilterColor, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
         }
     }
 
@@ -87,7 +87,7 @@ public class TR3VfxRandomizer : BaseTR3Randomizer
     {
         foreach (TR3Room room in level.Rooms)
         {
-            room.SetColourFilter(col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
+            SetColourFilter(room, col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
         }
     }
 
@@ -97,7 +97,59 @@ public class TR3VfxRandomizer : BaseTR3Randomizer
         {
             Color col = _colors[_generator.Next(0, _colors.Length - 1)];
 
-            room.SetColourFilter(col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
+            SetColourFilter(room, col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
         }
+    }
+
+    private static void SetColourFilter(TR3Room room, Color col, bool replace, bool enableCaustics, bool enableWave)
+    {
+        foreach (TR3RoomVertex vert in room.RoomData.Vertices)
+        {
+            byte curRed = (byte)((vert.Colour & 0x7C00) >> 10);
+            byte curGreen = (byte)((vert.Colour & 0x03E0) >> 5);
+            byte curBlue = (byte)(vert.Colour & 0x001F);
+
+            byte newRed = ConvertColorChannelToRGB555(col.R);
+            byte newGreen = ConvertColorChannelToRGB555(col.G);
+            byte newBlue = ConvertColorChannelToRGB555(col.B);
+
+            if (replace)
+            {
+                byte applyR = curRed;
+                byte applyG = curGreen;
+                byte applyB = curBlue;
+
+                if (newRed > 0)
+                    applyR = newRed;
+
+                if (newGreen > 0)
+                    applyG = newGreen;
+
+                if (newBlue > 0)
+                    applyB = newBlue;
+
+                vert.Colour = (ushort)((applyR << 10) | (applyG << 5) | (applyB));
+            }
+            else
+            {
+                vert.Colour = (ushort)((Blend(curRed, newRed) << 10) | (Blend(curGreen, newGreen) << 5) | (Blend(curBlue, newBlue)));
+            }
+
+            // #296 Retain original caustics and waves for water/swamp rooms
+            if (!vert.UseCaustics)
+                vert.UseCaustics = enableCaustics;
+            if (!vert.UseWaveMovement)
+                vert.UseWaveMovement = enableWave;
+        }
+    }
+
+    private static byte ConvertColorChannelToRGB555(byte col)
+    {
+        return (byte)(((col - byte.MinValue) * (31 - 0)) / (byte.MaxValue - byte.MinValue) + 0);
+    }
+
+    private static byte Blend(byte curChannel, byte newChannel)
+    {
+        return Math.Min((byte)((newChannel * 0.1) + curChannel * (1 - 0.1)), (byte)31);
     }
 }

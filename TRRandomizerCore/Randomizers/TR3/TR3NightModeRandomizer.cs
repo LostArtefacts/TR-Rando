@@ -70,7 +70,25 @@ public class TR3NightModeRandomizer : BaseTR3Randomizer
     {
         foreach (TR3Room room in level.Rooms)
         {
-            room.SetVertexLight((short)(Settings.NightModeDarkness * 10));
+            SetVertexLight(room, (short)(Settings.NightModeDarkness * 10));
+        }
+    }
+
+    private static void SetVertexLight(TR3Room room, short val)
+    {
+        foreach (TR3RoomVertex vert in room.RoomData.Vertices)
+        {
+            vert.Lighting = val;
+
+            byte red = (byte)((vert.Colour & 0x7C00) >> 10);
+            byte green = (byte)((vert.Colour & 0x03E0) >> 5);
+            byte blue = (byte)(vert.Colour & 0x001F);
+
+            red -= (byte)(red * val / 100);
+            green -= (byte)(green * val / 100);
+            blue -= (byte)(blue * val / 100);
+
+            vert.Colour = (ushort)((red << 10) | (green << 5) | (blue));
         }
     }
 }
