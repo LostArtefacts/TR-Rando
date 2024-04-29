@@ -8,11 +8,13 @@ namespace TRLevelControl;
 public class TR3LevelControl : TRLevelControlBase<TR3Level>
 {
     private readonly TRObjectMeshBuilder _meshBuilder;
+    private readonly TRSpriteBuilder<TR3Type> _spriteBuilder;
 
     public TR3LevelControl(ITRLevelObserver observer = null)
         : base(observer)
     {
         _meshBuilder = new(TRGameVersion.TR3, _observer);
+        _spriteBuilder = new(TRGameVersion.TR3);
     }
 
     protected override TR3Level CreateLevel(TRFileVersion version)
@@ -125,19 +127,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         ReadStaticMeshes(reader);
 
-        uint numSpriteTextures = reader.ReadUInt32();
-        _level.SpriteTextures = new();
-        for (int i = 0; i < numSpriteTextures; i++)
-        {
-            _level.SpriteTextures.Add(TR2FileReadUtilities.ReadSpriteTexture(reader));
-        }
-
-        uint numSpriteSequences = reader.ReadUInt32();
-        _level.SpriteSequences = new();
-        for (int i = 0; i < numSpriteSequences; i++)
-        {
-            _level.SpriteSequences.Add(TR2FileReadUtilities.ReadSpriteSequence(reader));
-        }
+        ReadSprites(reader);
 
         uint numCameras = reader.ReadUInt32();
         _level.Cameras = new();
@@ -218,6 +208,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         writer.Write(_level.Version.LevelNumber);
 
+        _spriteBuilder.CacheSpriteOffsets(_level.Sprites);
         writer.Write((ushort)_level.Rooms.Count);
         foreach (TR3Room room in _level.Rooms) { writer.Write(room.Serialize()); }
 
@@ -229,11 +220,8 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         WriteStaticMeshes(writer);
 
-        writer.Write((uint)_level.SpriteTextures.Count);
-        foreach (TRSpriteTexture tex in _level.SpriteTextures) { writer.Write(tex.Serialize()); }
-        writer.Write((uint)_level.SpriteSequences.Count);
-        foreach (TRSpriteSequence sequence in _level.SpriteSequences) { writer.Write(sequence.Serialize()); }
-        
+        WriteSprites(writer);
+
         writer.Write((uint)_level.Cameras.Count);
         foreach (TRCamera cam in _level.Cameras) { writer.Write(cam.Serialize()); }
 
@@ -299,6 +287,16 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     private void WriteStaticMeshes(TRLevelWriter writer)
     {
         _meshBuilder.WriteStaticMeshes(writer, _level.StaticMeshes);
+    }
+
+    private void ReadSprites(TRLevelReader reader)
+    {
+        _level.Sprites = _spriteBuilder.ReadSprites(reader);
+    }
+
+    private void WriteSprites(TRLevelWriter writer)
+    {
+        _spriteBuilder.WriteSprites(writer, _level.Sprites);
     }
 
     private static TR3RoomData ConvertToRoomData(TR3Room room)

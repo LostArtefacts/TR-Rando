@@ -12,6 +12,6 @@ public class TR3TextureExportHandler : AbstractTextureExportHandler<TR3Type, TR3
     }
     protected override TRSpriteSequence GetSprite(TR3Type entity)
     {
-        return _level.SpriteSequences.Find(s => s.SpriteID == (int)entity);
+        return _level.Sprites[entity];
     }
 }

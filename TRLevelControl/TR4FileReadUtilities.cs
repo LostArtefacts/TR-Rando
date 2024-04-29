@@ -95,28 +95,6 @@ internal static class TR4FileReadUtilities
         }
     }
 
-    public static void PopulateSprites(BinaryReader reader, TR4Level lvl)
-    {
-        string sprMarker = new(reader.ReadChars(SPRMarker.Length));
-        Debug.Assert(sprMarker == SPRMarker);
-
-        uint numSpriteTextures = reader.ReadUInt32();
-        lvl.SpriteTextures = new();
-
-        for (int i = 0; i < numSpriteTextures; i++)
-        {
-            lvl.SpriteTextures.Add(TR2FileReadUtilities.ReadSpriteTexture(reader));
-        }
-
-        uint numSpriteSequences = reader.ReadUInt32();
-        lvl.SpriteSequences = new();
-
-        for (int i = 0; i < numSpriteSequences; i++)
-        {
-            lvl.SpriteSequences.Add(TR2FileReadUtilities.ReadSpriteSequence(reader));
-        }
-    }
-
     public static void PopulateCameras(BinaryReader reader, TR4Level lvl)
     {
         //Cameras

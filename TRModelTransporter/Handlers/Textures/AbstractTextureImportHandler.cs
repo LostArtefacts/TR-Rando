@@ -71,7 +71,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
         _importSegments = new Dictionary<D, List<TexturedTileSegment>>();
 
         // Track existing sprite sequences to avoid duplication
-        List<TRSpriteSequence> spriteSequences = new(GetExistingSpriteSequences());
+        List<E> existingSequences = GetExistingSpriteSequences().Keys.ToList();
         foreach (D definition in _definitions)
         {
             if (!definition.HasGraphics || definition.IsDependencyOnly)
@@ -101,8 +101,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             List<E> spriteEntities = new(definition.SpriteSequences.Keys);
             foreach (E spriteEntity in spriteEntities)
             {
-                TRSpriteSequence existingSequence = spriteSequences.Find(s => s.SpriteID == Convert.ToInt32(spriteEntity));
-                if (existingSequence != null)
+                if (existingSequences.Contains(spriteEntity))
                 {
                     definition.SpriteSequences.Remove(spriteEntity);
                     continue;
@@ -111,7 +110,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                 {
                     // Add it to the tracking list in case we are importing 2 or more models
                     // that share a sequence e.g. Dragon/Flamethrower and Flame_S_H
-                    spriteSequences.Add(new TRSpriteSequence { SpriteID = Convert.ToInt32(spriteEntity) });
+                    existingSequences.Add(spriteEntity);
                 }
 
                 // The sequence will be merged later when we know the sprite texture offsets.
@@ -232,8 +231,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
 
     protected virtual void MergeSpriteTextures()
     {
-        List<TRSpriteTexture> levelSpriteTextures = GetExistingSpriteTextures();
-        List<TRSpriteSequence> levelSpriteSequences = GetExistingSpriteSequences();
+        TRDictionary<E, TRSpriteSequence> levelSpriteSequences = GetExistingSpriteSequences();
 
         foreach (D definition in _definitions)
         {
@@ -245,30 +243,18 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             foreach (E spriteEntity in definition.SpriteSequences.Keys)
             {
                 TRSpriteSequence sequence = definition.SpriteSequences[spriteEntity];
-                sequence.Offset = -1;
-                levelSpriteSequences.Add(sequence);
+                levelSpriteSequences[spriteEntity] = new();
 
                 foreach (int bitmapIndex in definition.SpriteTextures[spriteEntity].Keys)
                 {
                     List<IndexedTRSpriteTexture> textures = definition.SpriteTextures[spriteEntity][bitmapIndex];
-
-                    for (int i = 0; i < textures.Count; i++)
-                    {
-                        if (sequence.Offset == -1)
-                        {
-                            // mark the position of the first sprite only
-                            sequence.Offset = (short)levelSpriteTextures.Count;
-                        }
-                        levelSpriteTextures.Add(textures[i].Texture);
-                    }
+                    levelSpriteSequences[spriteEntity].Textures.AddRange(textures.Select(t => t.Texture));
                 }
             }
         }
     }
 
-    protected abstract List<TRSpriteSequence> GetExistingSpriteSequences();
-
-    protected abstract List<TRSpriteTexture> GetExistingSpriteTextures();
+    protected abstract TRDictionary<E, TRSpriteSequence> GetExistingSpriteSequences();
 
     protected abstract AbstractTexturePacker<E, L> CreatePacker();
 

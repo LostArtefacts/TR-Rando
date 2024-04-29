@@ -1,37 +1,17 @@
-﻿using System.Text;
-using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TRSpriteSequence : ISerializableCompact
+public class TRSpriteSequence : ICloneable
 {
-    public int SpriteID { get; set; }
+    public List<TRSpriteTexture> Textures { get; set; } = new();
 
-    public short NegativeLength { get; set; }
-
-    public short Offset { get; set; }
-
-    public override string ToString()
+    public TRSpriteSequence Clone()
     {
-        StringBuilder sb = new(base.ToString());
-
-        sb.Append(" SpriteID: " + SpriteID);
-        sb.Append(" NegativeLength: " + NegativeLength);
-        sb.Append(" Offset: " + Offset);
-
-        return sb.ToString();
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
+        return new()
         {
-            writer.Write(SpriteID);
-            writer.Write(NegativeLength);
-            writer.Write(Offset);
-        }
-
-        return stream.ToArray();
+            Textures = new(Textures.Select(t => t.Clone()))
+        };
     }
+
+    object ICloneable.Clone()
+        => Clone();
 }

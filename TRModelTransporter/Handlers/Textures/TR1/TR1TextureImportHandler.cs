@@ -10,21 +10,14 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TR1Type, TR1
 {
     public TRPalette8Control PaletteManager { get; set; }
 
-    protected override List<TRSpriteSequence> GetExistingSpriteSequences()
+    protected override TRDictionary<TR1Type, TRSpriteSequence> GetExistingSpriteSequences()
     {
-        // Allow replacing the Explosion sequence in Vilcabamba (it's there but empty)
-        List<TRSpriteSequence> sequences = _level.SpriteSequences;
-        TRSpriteSequence explosion = sequences.Find(s => s.SpriteID == (int)TR1Type.Explosion1_S_H);
-        if (explosion != null && explosion.NegativeLength == -1)
+        if (_level.Sprites[TR1Type.Explosion1_S_H]?.Textures.Count == 1)
         {
-            sequences.Remove(explosion);
+            // Allow replacing the Explosion sequence in Vilcabamba (it's there but empty, originally dynamite?)
+            _level.Sprites.Remove(TR1Type.Explosion1_S_H);
         }
-        return sequences;
-    }
-
-    protected override List<TRSpriteTexture> GetExistingSpriteTextures()
-    {
-        return _level.SpriteTextures;
+        return _level.Sprites;
     }
 
     protected override AbstractTexturePacker<TR1Type, TR1Level> CreatePacker()

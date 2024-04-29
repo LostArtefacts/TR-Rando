@@ -7,11 +7,13 @@ namespace TRLevelControl;
 public class TR4LevelControl : TRLevelControlBase<TR4Level>
 {
     private readonly TRObjectMeshBuilder _meshBuilder;
+    private readonly TRSpriteBuilder<TR4Type> _spriteBuilder;
 
     public TR4LevelControl(ITRLevelObserver observer = null)
         : base(observer)
     {
         _meshBuilder = new(TRGameVersion.TR4, _observer);
+        _spriteBuilder = new(TRGameVersion.TR4);
     }
 
     protected override TR4Level CreateLevel(TRFileVersion version)
@@ -168,6 +170,8 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void WriteRooms(TRLevelWriter writer)
     {
+        _spriteBuilder.CacheSpriteOffsets(_level.Sprites);
+
         writer.Write((ushort)_level.Rooms.Count);
         foreach (TR4Room room in _level.Rooms)
         {
@@ -212,24 +216,12 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadSprites(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateSprites(reader, _level);
+        _level.Sprites = _spriteBuilder.ReadSprites(reader);
     }
 
     private void WriteSprites(TRLevelWriter writer)
     {
-        writer.Write(TR4FileReadUtilities.SPRMarker.ToCharArray());
-
-        writer.Write((uint)_level.SpriteTextures.Count);
-        foreach (TRSpriteTexture st in _level.SpriteTextures)
-        {
-            writer.Write(st.Serialize());
-        }
-
-        writer.Write((uint)_level.SpriteSequences.Count);
-        foreach (TRSpriteSequence seq in _level.SpriteSequences)
-        {
-            writer.Write(seq.Serialize());
-        }
+        _spriteBuilder.WriteSprites(writer, _level.Sprites);
     }
 
     private void ReadCameras(TRLevelReader reader)

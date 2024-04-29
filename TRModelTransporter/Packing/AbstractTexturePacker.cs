@@ -130,27 +130,20 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     public Dictionary<TexturedTile, List<TexturedTileSegment>> GetSpriteSegments(E entity)
     {
-        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new();
         TRSpriteSequence sequence = GetSpriteSequence(entity);
-        if (sequence != null)
+        Dictionary<TexturedTile, List<TexturedTileSegment>> regionMap = new();
+        foreach (TexturedTile tile in _tiles)
         {
-            List<int> indices = new();
-            for (int j = 0; j < sequence.NegativeLength * -1; j++)
+            List<TexturedTileSegment> regions = tile.Rectangles
+                .Where(r => r.Textures.Any(s => s is IndexedTRSpriteTexture spr && sequence.Textures.Contains(spr.Texture)))
+                .ToList();
+            if (regions.Count > 0)
             {
-                indices.Add(sequence.Offset + j);
-            }
-
-            foreach (TexturedTile tile in _tiles)
-            {
-                List<TexturedTileSegment> segments = tile.GetSpriteTextureIndexSegments(indices);
-                if (segments.Count > 0)
-                {
-                    segmentMap[tile] = segments;
-                }
+                regionMap[tile] = regions;
             }
         }
 
-        return segmentMap;
+        return regionMap;
     }
 
     public Dictionary<TexturedTile, List<TexturedTileSegment>> GetSpriteTextureSegments(IEnumerable<int> indices)

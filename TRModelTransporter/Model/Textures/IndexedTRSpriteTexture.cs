@@ -40,18 +40,7 @@ public class IndexedTRSpriteTexture : AbstractIndexedTRTexture
         {
             Index = Index,
             Classification = Classification,
-            Texture = new TRSpriteTexture
-            {
-                Atlas = Texture.Atlas,
-                BottomSide = Texture.BottomSide,
-                Height = Texture.Height,
-                Width = Texture.Width,
-                LeftSide = Texture.LeftSide,
-                RightSide = Texture.RightSide,
-                TopSide = Texture.TopSide,
-                X = Texture.X,
-                Y = Texture.Y
-            }
+            Texture = _texture.Clone(),
         };
     }
 }

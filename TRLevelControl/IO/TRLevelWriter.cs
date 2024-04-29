@@ -327,4 +327,39 @@ public class TRLevelWriter : BinaryWriter
         Write(box.MinZ);
         Write(box.MaxZ);
     }
+
+    public void Write(IEnumerable<TRSpriteTexture> textures, TRGameVersion version)
+    {
+        foreach (TRSpriteTexture texture in textures)
+        {
+            Write(texture, version);
+        }
+    }
+
+    public void Write(TRSpriteTexture texture, TRGameVersion version)
+    {
+        Write(texture.Atlas);
+        if (version < TRGameVersion.TR4)
+        {
+            Write(texture.X);
+            Write(texture.Y);
+            Write((ushort)(texture.Width * TRConsts.TPageWidth - 1));
+            Write((ushort)(texture.Height * TRConsts.TPageHeight - 1));
+            Write(texture.Alignment.Left);
+            Write(texture.Alignment.Top);
+            Write(texture.Alignment.Right);
+            Write(texture.Alignment.Bottom);
+        }
+        else
+        {
+            Write((byte)texture.Alignment.Left);
+            Write((byte)texture.Alignment.Top);
+            Write((ushort)((texture.Width - 1) * TRConsts.TPageWidth));
+            Write((ushort)((texture.Height - 1) * TRConsts.TPageHeight));
+            Write((short)texture.X);
+            Write((short)texture.Y);
+            Write(texture.Alignment.Right);
+            Write(texture.Alignment.Bottom);
+        }
+    }
 }

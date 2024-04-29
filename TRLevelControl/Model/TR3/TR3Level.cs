@@ -10,8 +10,7 @@ public class TR3Level : TRLevelBase
     public List<ushort> FloorData { get; set; }
     public TRDictionary<TR3Type, TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
-    public List<TRSpriteTexture> SpriteTextures { get; set; }
-    public List<TRSpriteSequence> SpriteSequences { get; set; }
+    public TRDictionary<TR3Type, TRSpriteSequence> Sprites { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
     public List<TR2Box> Boxes { get; set; }

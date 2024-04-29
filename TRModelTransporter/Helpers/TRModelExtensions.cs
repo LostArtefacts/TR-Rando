@@ -12,19 +12,19 @@ public static class TRModelExtensions
     public static void ResetUnusedTextures(this TR1Level level)
     {
         ResetUnusedObjectTextures(level.ObjectTextures);
-        ResetUnusedSpriteTextures(level.SpriteTextures);
+        ResetUnusedSpriteTextures(level.Sprites.SelectMany(s => s.Value.Textures));
     }
 
     public static void ResetUnusedTextures(this TR2Level level)
     {
         ResetUnusedObjectTextures(level.ObjectTextures);
-        ResetUnusedSpriteTextures(level.SpriteTextures);
+        ResetUnusedSpriteTextures(level.Sprites.SelectMany(s => s.Value.Textures));
     }
 
     public static void ResetUnusedTextures(this TR3Level level)
     {
         ResetUnusedObjectTextures(level.ObjectTextures);
-        ResetUnusedSpriteTextures(level.SpriteTextures);
+        ResetUnusedSpriteTextures(level.Sprites.SelectMany(s => s.Value.Textures));
     }
 
     private static void ResetUnusedObjectTextures(IEnumerable<TRObjectTexture> objectTextures)

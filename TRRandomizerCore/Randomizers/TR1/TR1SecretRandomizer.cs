@@ -876,7 +876,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         TR1Type puzzlePickupType = _modelReplacements[puzzleModelType];
 
                         level.Data.Models.ChangeKey(secretModelType, puzzleModelType);
-                        level.Data.SpriteSequences.Find(s => s.SpriteID == (int)secretPickupType).SpriteID = (int)puzzlePickupType;
+                        level.Data.Sprites.ChangeKey(secretPickupType, puzzlePickupType);
 
                         if (secretModelType == TR1Type.SecretScion_M_H && _outer.Are3DPickupsEnabled())
                         {

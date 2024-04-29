@@ -1,76 +1,28 @@
 ﻿using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
-/// <summary>
-/// Class used to Randomize the sprites of pickups and maybe keys items and/or secret items according to global settings chosen by the user
-/// Today this class is usable by TR1 and TR2 randomizer with E=proper Entity type
-/// </summary>
 namespace TRRandomizerCore.Randomizers;
 
-public class ItemSpriteRandomizer<E> where E : Enum
+public class ItemSpriteRandomizer<T>
+    where T : Enum
 {
-    /// <summary>
-    /// Used only if the sprite randomisation is active and is in OneItemPerGame Mode
-    /// </summary>
-    private E _randomSpriteID = default;
+    private T _randomSpriteID = default;
 
-    /// <summary>
-    /// List of pichups and weapons of the game
-    /// </summary>
-    public List<E> StandardItemTypes { get; set; }
-
-    /// <summary>
-    /// List of key items from the game
-    /// </summary>
-    public List<E> KeyItemTypes { get; set; }
-
-    /// <summary>
-    /// List of secret items 
-    /// </summary>
-    public List<E> SecretItemTypes { get; set; }
-
-    /// <summary>
-    /// Sprite Sequence of the current level (should be left untouched it's just to ensure what types are in the level)
-    /// </summary>
-    public List<TRSpriteSequence> Sequences { get; set; }
-
-    /// <summary>
-    /// Sprite Textures of the current level (will be changed) 
-    /// </summary>
-    public List<TRSpriteTexture> Textures { get; set; }
-
-    /// <summary>
-    /// Debug event
-    /// </summary>
-    public event EventHandler<SpriteEventArgs<E>> TextureChanged;
-
-
-    /// <summary>
-    /// Setting entered by the user in Item Rando Window
-    /// It allows the sprite randomization to include key items in the mix
-    /// </summary>
+    public List<T> StandardItemTypes { get; set; }
+    public List<T> KeyItemTypes { get; set; }
+    public List<T> SecretItemTypes { get; set; }
+    public TRDictionary<T, TRSpriteSequence> Sequences { get; set; }
     public bool RandomizeKeyItemSprites { get; set; }
-    /// <summary>
-    /// Setting entered by the user in Item Rando Window 
-    /// It allows the sprite randomization to include secrets items in the mix
-    /// </summary>
     public bool RandomizeSecretSprites { get; set; }
-
-    /// <summary>
-    /// Setting entered by the user in Item Rando Window
-    /// Is set the randomization logic
-    /// </summary>
     public SpriteRandoMode Mode { get; set; }
 
-    /// <summary>
-    /// Apply the randomization of sprites according to settings
-    /// </summary>
-    /// <param name="generator">Random generator</param>
+    public event EventHandler<SpriteEventArgs<T>> TextureChanged;
+
     public void Randomize(Random generator)
     {
-        List<E> replacementCandidates = new(); // Unique list of item types we wish to target in this level
-        List<E> commonTypesInAllLevels = new();// for 1 item per game
-        Dictionary<E, TRSpriteTexture> spriteTextures = new();
+        List<T> replacementCandidates = new();
+        List<T> commonTypesInAllLevels = new();
+        Dictionary<T, TRSpriteTexture> spriteTextures = new();
 
         commonTypesInAllLevels.AddRange(StandardItemTypes);
         replacementCandidates.AddRange(StandardItemTypes);
@@ -91,50 +43,45 @@ public class ItemSpriteRandomizer<E> where E : Enum
         // E.g. on one iteration the grenade launcher may be changed to the small med; on the next,
         // the autos may be changed to the grenade launcher, but that has already changed to the small
         // med - by caching we can repurpose those that have already changed.
-        foreach (E entityType in replacementCandidates)
+        foreach (T entityType in replacementCandidates)
         {
-            TRSpriteSequence spriteSequence = Sequences.Find(s => s.SpriteID == Convert.ToInt32(entityType));
+            TRSpriteSequence spriteSequence = Sequences[entityType];
             if (spriteSequence != null)
             {
-                spriteTextures[entityType] = Textures[spriteSequence.Offset];
+                spriteTextures[entityType] = spriteSequence.Textures.First();
             }
         }
 
         // The cache indicates exacty what's in the level, so the keys become the candidate list
         replacementCandidates = spriteTextures.Keys.ToList();
 
-        E replacementSpriteID = default;
+        T replacementSpriteID = default;
         if (Mode == SpriteRandoMode.OneSpritePerGame)
         {
-            if (EqualityComparer<E>.Default.Equals(_randomSpriteID, default))
+            if (EqualityComparer<T>.Default.Equals(_randomSpriteID, default))
             {
-                // I choose just once among pickups that should be in everylevel
                 _randomSpriteID = commonTypesInAllLevels[generator.Next(0, commonTypesInAllLevels.Count)];
             }
             replacementSpriteID = _randomSpriteID;
         }
         else if (Mode == SpriteRandoMode.OneSpritePerLevel)
         {
-            //I chose 1 random type among the items to switch
             replacementSpriteID = replacementCandidates[generator.Next(0, replacementCandidates.Count)];
         }
 
-        // Carry out the actual replacements
-        foreach (E entityType in replacementCandidates)
+        foreach (T entityType in replacementCandidates)
         {
             if (Mode == SpriteRandoMode.Default)
             {
-                //I Chose the random item to replace with (there is a small chance it gets replaced with itslef... but i think thats ok :D )       
                 replacementSpriteID = replacementCandidates[generator.Next(0, replacementCandidates.Count)];
             }
 
-            // Get this type's current sequence
-            TRSpriteSequence currentSpriteSequence = Sequences.Find(s => s.SpriteID == Convert.ToInt32(entityType));
-            // Get the replacement texture and replace this type's texture with it if it exists
+            TRSpriteSequence currentSpriteSequence = Sequences[entityType];
             if (spriteTextures.ContainsKey(replacementSpriteID))
             {
-                Textures[currentSpriteSequence.Offset] = spriteTextures[replacementSpriteID];
-                TextureChanged?.Invoke(this, new SpriteEventArgs<E>
+                currentSpriteSequence.Textures.Clear();
+                currentSpriteSequence.Textures.Add(spriteTextures[replacementSpriteID]);
+                TextureChanged?.Invoke(this, new()
                 {
                     OldSprite = entityType,
                     NewSprite = replacementSpriteID

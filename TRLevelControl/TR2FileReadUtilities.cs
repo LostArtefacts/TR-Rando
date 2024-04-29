@@ -109,32 +109,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRSpriteTexture ReadSpriteTexture(BinaryReader reader)
-    {
-        return new TRSpriteTexture()
-        {
-            Atlas = reader.ReadUInt16(),
-            X = reader.ReadByte(),
-            Y = reader.ReadByte(),
-            Width = reader.ReadUInt16(),
-            Height = reader.ReadUInt16(),
-            LeftSide = reader.ReadInt16(),
-            TopSide = reader.ReadInt16(),
-            RightSide = reader.ReadInt16(),
-            BottomSide = reader.ReadInt16()
-        };
-    }
-
-    public static TRSpriteSequence ReadSpriteSequence(BinaryReader reader)
-    {
-        return new TRSpriteSequence()
-        {
-            SpriteID = reader.ReadInt32(),
-            NegativeLength = reader.ReadInt16(),
-            Offset = reader.ReadInt16()
-        };
-    }
-
     public static TRCamera ReadCamera(BinaryReader reader)
     {
         return new TRCamera()

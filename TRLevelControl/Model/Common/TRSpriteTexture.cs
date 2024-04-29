@@ -1,61 +1,42 @@
-﻿using System.Text;
-using TRLevelControl.Serialization;
+﻿using System.Drawing;
 
 namespace TRLevelControl.Model;
 
-public class TRSpriteTexture : ISerializableCompact
+public class TRSpriteTexture : TRTexture
 {
-    public ushort Atlas { get; set; }
-
     public byte X { get; set; }
-
     public byte Y { get; set; }
-
     public ushort Width { get; set; }
-
     public ushort Height { get; set; }
+    public TRSpriteAlignment Alignment { get; set; }
 
-    public short LeftSide { get; set; }
-
-    public short TopSide { get; set; }
-
-    public short RightSide { get; set; }
-
-    public short BottomSide { get; set; }
-
-    public override string ToString()
+    protected override Rectangle GetBounds()
     {
-        StringBuilder sb = new(base.ToString());
-
-        sb.Append(" Atlas: " + Atlas);
-        sb.Append(" X: " + X);
-        sb.Append(" Y: " + Y);
-        sb.Append(" Width: " + Width);
-        sb.Append(" Height: " + Height);
-        sb.Append(" LeftSide: " + LeftSide);
-        sb.Append(" TopSide: " + TopSide);
-        sb.Append(" RightSide: " + RightSide);
-        sb.Append(" BottomSide: " + BottomSide);
-
-        return sb.ToString();
+        return new(X, Y, Width, Height);
     }
 
-    public byte[] Serialize()
+    protected override void SetPosition(Point position)
     {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(Atlas);
-            writer.Write(X);
-            writer.Write(Y);
-            writer.Write(Width);
-            writer.Write(Height);
-            writer.Write(LeftSide);
-            writer.Write(TopSide);
-            writer.Write(RightSide);
-            writer.Write(BottomSide);
-        }
+        X = (byte)position.X;
+        Y = (byte)position.Y;
+    }
 
-        return stream.ToArray();
+    protected override void SetSize(Size size)
+    {
+        Width = (ushort)size.Width;
+        Height = (ushort)size.Height;
+    }
+
+    public override TRSpriteTexture Clone()
+    {
+        return new()
+        {
+            Atlas = Atlas,
+            X = X,
+            Y = Y,
+            Width = Width,
+            Height = Height,
+            Alignment = Alignment?.Clone(),
+        };
     }
 }

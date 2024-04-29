@@ -45,14 +45,9 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Type, TR2Level>
         return _level.Models.ContainsKey(entity) ? _level.Models[entity].Meshes : null;
     }
 
-    protected override List<TRSpriteSequence> GetSpriteSequences()
+    protected override TRDictionary<TR2Type, TRSpriteSequence> GetSpriteSequences()
     {
-        return _level.SpriteSequences;
-    }
-
-    protected override List<TRSpriteTexture> GetSpriteTextures()
-    {
-        return _level.SpriteTextures;
+        return _level.Sprites;
     }
 
     protected override Bitmap GetTile(int tileIndex)

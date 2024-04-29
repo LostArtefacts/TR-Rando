@@ -7,14 +7,9 @@ namespace TRModelTransporter.Handlers;
 
 public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2Level, TR2ModelDefinition>
 {
-    protected override List<TRSpriteSequence> GetExistingSpriteSequences()
+    protected override TRDictionary<TR2Type, TRSpriteSequence> GetExistingSpriteSequences()
     {
-        return _level.SpriteSequences;
-    }
-
-    protected override List<TRSpriteTexture> GetExistingSpriteTextures()
-    {
-        return _level.SpriteTextures;
+        return _level.Sprites;
     }
 
     protected override AbstractTexturePacker<TR2Type, TR2Level> CreatePacker()
@@ -69,30 +64,12 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2
             _level.Models.Keys.Any(flameEnemies.Contains)
         )
         {
-            int blastSequence = _level.SpriteSequences.FindIndex(s => s.SpriteID == (int)TR2Type.FireBlast_S_H);
-            int grenadeSequence = _level.SpriteSequences.FindIndex(s => s.SpriteID == (int)TR2Type.Explosion_S_H);
+            TRSpriteSequence blastSequence = _level.Sprites[TR2Type.FireBlast_S_H];
+            TRSpriteSequence explosionSequence = _level.Sprites[TR2Type.Explosion_S_H];
 
-            if (grenadeSequence != -1)
+            if (blastSequence != null)
             {
-                if (blastSequence == -1)
-                {
-                    TRSpriteSequence grenadeBlast = _level.SpriteSequences[grenadeSequence];
-                    _level.SpriteSequences.Add(new TRSpriteSequence
-                    {
-                        SpriteID = (int)TR2Type.FireBlast_S_H,
-                        NegativeLength = grenadeBlast.NegativeLength,
-                        Offset = grenadeBlast.Offset
-                    });
-                }
-                else
-                {
-                    // #275 Rather than just pointing the blast sequence offset to the grenade sequence offset,
-                    // retain the original sprite texture objects but just remap where they point in the tiles.
-                    for (int i = 0; i < _level.SpriteSequences[grenadeSequence].NegativeLength * -1; i++)
-                    {
-                        _level.SpriteTextures[_level.SpriteSequences[blastSequence].Offset + i] = _level.SpriteTextures[_level.SpriteSequences[grenadeSequence].Offset + i];
-                    }
-                }
+                _level.Sprites[TR2Type.Explosion_S_H] = blastSequence;
             }
         }
     }
