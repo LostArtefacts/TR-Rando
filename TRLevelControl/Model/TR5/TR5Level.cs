@@ -9,8 +9,7 @@ public class TR5Level : TRLevelBase
     public List<ushort> FloorData { get; set; }
     public TRDictionary<TR5Type, TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
-    public List<TRSpriteTexture> SpriteTextures { get; set; }
-    public List<TRSpriteSequence> SpriteSequences { get; set; }
+    public TRDictionary<TR5Type, TRSpriteSequence> Sprites { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TR4FlyByCamera> FlybyCameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }

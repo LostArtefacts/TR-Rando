@@ -183,12 +183,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 #endif
         }
 
-        // The _spriteRandomizer exists so it gets all the SpriteSquence and SpriteTexture from the level
-        // We cannot pass the level itself as ItemSpriteRandomizer is a shared class 
-        _spriteRandomizer.Sequences = _levelInstance.Data.SpriteSequences;
-        _spriteRandomizer.Textures = _levelInstance.Data.SpriteTextures;
-
-        //Calling the actual randomization
+        _spriteRandomizer.Sequences = _levelInstance.Data.Sprites;
         _spriteRandomizer.Randomize(_generator);
     }
 

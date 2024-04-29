@@ -40,10 +40,11 @@ public class TR1TexturePacker : AbstractTexturePacker<TR1Type, TR1Level>
 
     protected override List<AbstractIndexedTRTexture> LoadSpriteTextures()
     {
-        List<AbstractIndexedTRTexture> textures = new(Level.SpriteTextures.Count);
-        for (int i = 0; i < Level.SpriteTextures.Count; i++)
+        List<TRSpriteTexture> sprites = Level.Sprites.SelectMany(s => s.Value.Textures).ToList();
+        List<AbstractIndexedTRTexture> textures = new();
+        for (int i = 0; i < sprites.Count; i++)
         {
-            TRSpriteTexture texture = Level.SpriteTextures[i];
+            TRSpriteTexture texture = sprites[i];
             if (texture.IsValid())
             {
                 textures.Add(new IndexedTRSpriteTexture
@@ -64,7 +65,7 @@ public class TR1TexturePacker : AbstractTexturePacker<TR1Type, TR1Level>
 
     protected override TRSpriteSequence GetSpriteSequence(TR1Type entity)
     {
-        return Level.SpriteSequences.Find(s => s.SpriteID == (int)entity);
+        return Level.Sprites[entity];
     }
 
     protected override IEnumerable<TR1Type> GetAllModelTypes()

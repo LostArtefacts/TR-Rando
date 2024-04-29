@@ -6,7 +6,6 @@ namespace TRLevelControl;
 
 internal static class TR5FileReadUtilities
 {
-    public static readonly string SPRMarker = "SPR\0";
     public static readonly string TEXMarker = "TEX\0";
 
     public static void PopulateRooms(BinaryReader reader, TR5Level lvl)
@@ -209,31 +208,6 @@ internal static class TR5FileReadUtilities
         for (int i = 0; i < numFloorData; i++)
         {
             lvl.FloorData.Add(reader.ReadUInt16());
-        }
-    }
-
-    public static void VerifySPRMarker(BinaryReader reader)
-    {
-        string sprMarker = new(reader.ReadChars(SPRMarker.Length));
-        Debug.Assert(sprMarker == SPRMarker);
-    }
-
-    public static void PopulateSprites(BinaryReader reader, TR5Level lvl)
-    {
-        uint numSpriteTextures = reader.ReadUInt32();
-        lvl.SpriteTextures = new();
-
-        for (int i = 0; i < numSpriteTextures; i++)
-        {
-            lvl.SpriteTextures.Add(TR2FileReadUtilities.ReadSpriteTexture(reader));
-        }
-
-        uint numSpriteSequences = reader.ReadUInt32();
-        lvl.SpriteSequences = new();
-
-        for (int i = 0; i < numSpriteSequences; i++)
-        {
-            lvl.SpriteSequences.Add(TR2FileReadUtilities.ReadSpriteSequence(reader));
         }
     }
 

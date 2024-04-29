@@ -523,9 +523,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             }
         }
 
-        _spriteRandomizer.Sequences = _levelInstance.Data.SpriteSequences;
-        _spriteRandomizer.Textures = _levelInstance.Data.SpriteTextures;
-
+        _spriteRandomizer.Sequences = _levelInstance.Data.Sprites;
         _spriteRandomizer.Randomize(_generator);
     }
 

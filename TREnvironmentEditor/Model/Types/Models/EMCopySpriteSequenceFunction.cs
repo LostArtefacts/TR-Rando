@@ -9,32 +9,29 @@ public class EMCopySpriteSequenceFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        CopySpriteSequence(level.SpriteSequences);
+        CopySpriteSequence(level.Sprites);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        CopySpriteSequence(level.SpriteSequences);
+        CopySpriteSequence(level.Sprites);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        CopySpriteSequence(level.SpriteSequences);
+        CopySpriteSequence(level.Sprites);
     }
 
-    private void CopySpriteSequence(List<TRSpriteSequence> sequences)
+    private void CopySpriteSequence<T>(TRDictionary<T, TRSpriteSequence> sequences)
+        where T : Enum
     {
-        TRSpriteSequence baseSequence = sequences.Find(s => s.SpriteID == BaseSpriteID);
-        TRSpriteSequence targetSequence = sequences.Find(s => s.SpriteID == TargetSpriteID);
-
-        if (baseSequence != null && targetSequence == null)
+        T baseID = (T)(object)BaseSpriteID;
+        T targetID = (T)(object)TargetSpriteID;
+        if (!sequences.ContainsKey(baseID) || sequences.ContainsKey(targetID))
         {
-            sequences.Add(new()
-            {
-                NegativeLength = baseSequence.NegativeLength,
-                Offset = baseSequence.Offset,
-                SpriteID = TargetSpriteID
-            });
+            return;
         }
+
+        sequences[targetID] = sequences[baseID];
     }
 }

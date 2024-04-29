@@ -48,28 +48,26 @@ public class TR2ModelAdjuster : TR2LevelProcessor
         {
             if (_levelInstance.Data.Models.ChangeKey(oldEntity, _modelRemap[oldEntity]))
             {
-                List<TR2Entity> modelEntities = _levelInstance.Data.Entities.FindAll(e => e.TypeID == oldEntity);
-                foreach (TR2Entity entity in modelEntities)
-                {
-                    entity.TypeID = _modelRemap[oldEntity];
-                }
+                ConvertEntities(oldEntity, _modelRemap[oldEntity]);
             }
         }
 
         // Repeat for sprites
         foreach (TR2Type oldEntity in _spriteRemap.Keys)
         {
-            TRSpriteSequence sprite = _levelInstance.Data.SpriteSequences.Find(s => s.SpriteID == (short)oldEntity);
-            if (sprite != null)
+            if (_levelInstance.Data.Sprites.ChangeKey(oldEntity, _spriteRemap[oldEntity]))
             {
-                sprite.SpriteID = (short)_spriteRemap[oldEntity];
-
-                List<TR2Entity> spriteEntities = _levelInstance.Data.Entities.FindAll(e => e.TypeID == oldEntity);
-                foreach (TR2Entity entity in spriteEntities)
-                {
-                    entity.TypeID = _spriteRemap[oldEntity];
-                }
+                ConvertEntities(oldEntity, _spriteRemap[oldEntity]);
             }
+        }
+    }
+
+    private void ConvertEntities(TR2Type oldType, TR2Type newType)
+    {
+        IEnumerable<TR2Entity> spriteEntities = _levelInstance.Data.Entities.Where(e => e.TypeID == oldType);
+        foreach (TR2Entity entity in spriteEntities)
+        {
+            entity.TypeID = newType;
         }
     }
 }

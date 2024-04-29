@@ -13,6 +13,6 @@ public class TR2TextureExportHandler : AbstractTextureExportHandler<TR2Type, TR2
 
     protected override TRSpriteSequence GetSprite(TR2Type entity)
     {
-        return _level.SpriteSequences.Find(s => s.SpriteID == (int)entity);
+        return _level.Sprites[entity];
     }
 }

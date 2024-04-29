@@ -64,9 +64,6 @@ public class TR2ModelExporter : AbstractTRModelExporter<TR2Type, TR2Level, TR2Mo
         }
 
         // Ensures the flame sprite is aligned to OG - required for texture monitoring
-        TRSpriteSequence seq = definition.SpriteSequences[TR2Type.Flame_S_H];
-        seq.Offset += 22;
-
         Dictionary<int, List<IndexedTRSpriteTexture>> defaultSprites = definition.SpriteTextures[TR2Type.Flame_S_H];
         foreach (int id in defaultSprites.Keys)
         {

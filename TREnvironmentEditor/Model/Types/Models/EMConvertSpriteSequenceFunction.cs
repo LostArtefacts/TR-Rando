@@ -9,63 +9,35 @@ public class EMConvertSpriteSequenceFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        ConvertSpriteSequence(level.SpriteSequences);
-        UpdateSpriteEntities(level.Entities);
+        ConvertSpriteSequence(level.Sprites, level.Entities);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        ConvertSpriteSequence(level.SpriteSequences);
-        UpdateSpriteEntities(level.Entities);
+        ConvertSpriteSequence(level.Sprites, level.Entities);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        ConvertSpriteSequence(level.SpriteSequences);
-        UpdateSpriteEntities(level.Entities);
+        ConvertSpriteSequence(level.Sprites, level.Entities);
     }
 
-    private void ConvertSpriteSequence(List<TRSpriteSequence> sequences)
+    private void ConvertSpriteSequence<T, E>(TRDictionary<T, TRSpriteSequence> sequences, List<E> entities)
+        where T : Enum
+        where E : TREntity<T>
     {
-        if (sequences.Find(s => s.SpriteID == NewSpriteID) == null)
+        T oldID = (T)(object)OldSpriteID;
+        T newID = (T)(object)NewSpriteID;
+        if (!sequences.ChangeKey(oldID, newID))
         {
-            TRSpriteSequence oldSequence = sequences.Find(s => s.SpriteID == OldSpriteID);
-            if (oldSequence != null)
-            {
-                oldSequence.SpriteID = NewSpriteID;
-            }
+            return;
         }
-    }
 
-    private void UpdateSpriteEntities(List<TR1Entity> entities)
-    {
-        foreach (TR1Entity entity in entities)
+        foreach (E entity in entities)
         {
-            if (entity.TypeID == (TR1Type)OldSpriteID)
+            if (EqualityComparer<T>.Default.Equals(entity.TypeID, oldID))
             {
-                entity.TypeID = (TR1Type)NewSpriteID;
-            }
-        }
-    }
-
-    private void UpdateSpriteEntities(IEnumerable<TR2Entity> entities)
-    {
-        foreach (TR2Entity entity in entities)
-        {
-            if (entity.TypeID == (TR2Type)OldSpriteID)
-            {
-                entity.TypeID = (TR2Type)NewSpriteID;
-            }
-        }
-    }
-
-    private void UpdateSpriteEntities(IEnumerable<TR3Entity> entities)
-    {
-        foreach (TR3Entity entity in entities)
-        {
-            if (entity.TypeID == (TR3Type)OldSpriteID)
-            {
-                entity.TypeID = (TR3Type)NewSpriteID;
+                entity.TypeID = newID;
             }
         }
     }

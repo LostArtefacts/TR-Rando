@@ -8,8 +8,7 @@ public class TR1Level : TRLevelBase
     public TRDictionary<TR1Type, TRModel> Models { get; set; }
     public List<TRStaticMesh> StaticMeshes { get; set; }
     public List<TRObjectTexture> ObjectTextures { get; set; }
-    public List<TRSpriteTexture> SpriteTextures { get; set; }
-    public List<TRSpriteSequence> SpriteSequences { get; set; }
+    public TRDictionary<TR1Type, TRSpriteSequence> Sprites { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
     public List<TRBox> Boxes { get; set; }

@@ -7,14 +7,9 @@ namespace TRModelTransporter.Handlers;
 
 public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Type, TR3Level, TR3ModelDefinition>
 {
-    protected override List<TRSpriteSequence> GetExistingSpriteSequences()
+    protected override TRDictionary<TR3Type, TRSpriteSequence> GetExistingSpriteSequences()
     {
-        return _level.SpriteSequences;
-    }
-
-    protected override List<TRSpriteTexture> GetExistingSpriteTextures()
-    {
-        return _level.SpriteTextures;
+        return _level.Sprites;
     }
 
     protected override AbstractTexturePacker<TR3Type, TR3Level> CreatePacker()

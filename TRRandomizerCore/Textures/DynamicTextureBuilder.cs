@@ -79,9 +79,21 @@ public class DynamicTextureBuilder
                 defaultObjectTextures.Add(f.Texture);
             foreach (TRRoomSprite sprite in room.RoomData.Sprites)
             {
+                // Temporary until room sprites store type IDs and not offsets
+                TR1Type spriteID = default;
+                int offset = 0;
+                foreach (var (type, sequence) in level.Data.Sprites)
+                {
+                    if (sprite.Texture >= offset && sprite.Texture < offset + sequence.Textures.Count)
+                    {
+                        spriteID = type;
+                        break;
+                    }
+                    offset += sequence.Textures.Count;
+                }
+
                 // Only add ones that aren't also pickups
-                if (level.Data.SpriteSequences.Find(s => s.Offset == sprite.Texture 
-                    && level.Data.Entities.Find(e => e.TypeID == (TR1Type)s.SpriteID) != null) == null)
+                if (spriteID != default && !level.Data.Entities.Any(e => e.TypeID == spriteID))
                 {
                     defaultSpriteTextures.Add(sprite.Texture);
                 }
@@ -376,13 +388,19 @@ public class DynamicTextureBuilder
 
     private static void AddSpriteTextures(TR1Level level, TR1Type spriteID, ISet<int> textures)
     {
-        TRSpriteSequence sequence = level.SpriteSequences.Find(s => s.SpriteID == (int)spriteID);
-        if (sequence != null)
+        // Temporary until texture packing doesn't need index references
+        int offset = 0;
+        foreach (var (type, sequence) in level.Sprites)
         {
-            for (int i = 0; i < sequence.NegativeLength * -1; i++)
+            if (type == spriteID)
             {
-                textures.Add(sequence.Offset + i);
+                for (int i = 0; i < sequence.Textures.Count; i++)
+                {
+                    textures.Add(offset + i);
+                }
+                return;
             }
+            offset += sequence.Textures.Count;
         }
     }
 

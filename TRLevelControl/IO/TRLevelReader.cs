@@ -411,4 +411,62 @@ public class TRLevelReader : BinaryReader
             MaxZ = ReadInt16()
         };
     }
+
+    public List<TRSpriteTexture> ReadSpriteTextures(long numTextures, TRGameVersion version)
+    {
+        List<TRSpriteTexture> textures = new();
+        for (int i = 0; i < numTextures; i++)
+        {
+            textures.Add(ReadSpriteTexture(version));
+        }
+        return textures;
+    }
+
+    public TRSpriteTexture ReadSpriteTexture(TRGameVersion version)
+    {
+        TRSpriteTexture sprite = new()
+        {
+            Atlas = ReadUInt16(),
+        };
+
+        byte x = ReadByte();
+        byte y = ReadByte();
+        ushort width = ReadUInt16();
+        ushort height = ReadUInt16();
+        short left = ReadInt16();
+        short top = ReadInt16();
+        short right = ReadInt16();
+        short bottom = ReadInt16();
+
+        if (version < TRGameVersion.TR4)
+        {
+            sprite.X = x;
+            sprite.Y = y;
+            sprite.Width = (ushort)((width + 1) / TRConsts.TPageWidth);
+            sprite.Height = (ushort)((height + 1) / TRConsts.TPageHeight);
+            sprite.Alignment = new()
+            {
+                Left = left,
+                Top = top,
+                Right = right,
+                Bottom = bottom
+            };
+        }
+        else
+        {
+            sprite.X = (byte)left;
+            sprite.Y = (byte)top;
+            sprite.Width = (ushort)(width / TRConsts.TPageWidth + 1);
+            sprite.Height = (ushort)(height / TRConsts.TPageHeight + 1);
+            sprite.Alignment = new()
+            {
+                Left = x,
+                Top = y,
+                Right = right,
+                Bottom = bottom
+            };
+        }
+
+        return sprite;
+    }
 }

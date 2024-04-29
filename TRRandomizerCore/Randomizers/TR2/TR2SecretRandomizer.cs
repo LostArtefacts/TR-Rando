@@ -184,13 +184,8 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
         }
 
         // Swap Stone and Jade textures - OG has them the wrong way around.
-        // SpriteSequence offsets have to remain in order, so swap the texture targets instead.
-        TRSpriteSequence stoneSequence = level.Data.SpriteSequences.Find(s => s.SpriteID == (int)TR2Type.StoneSecret_S_P);
-        TRSpriteSequence jadeSequence = level.Data.SpriteSequences.Find(s => s.SpriteID == (int)TR2Type.JadeSecret_S_P);
-
-        List<TRSpriteTexture> textures = level.Data.SpriteTextures;
-        (textures[jadeSequence.Offset], textures[stoneSequence.Offset])
-            = (textures[stoneSequence.Offset], textures[jadeSequence.Offset]);
+        (level.Data.Sprites[TR2Type.JadeSecret_S_P].Textures, level.Data.Sprites[TR2Type.StoneSecret_S_P].Textures)
+            = (level.Data.Sprites[TR2Type.StoneSecret_S_P].Textures, level.Data.Sprites[TR2Type.JadeSecret_S_P].Textures);
     }
 
     private static void AddDamageControl(TR2CombinedLevel level, List<Location> locations)
