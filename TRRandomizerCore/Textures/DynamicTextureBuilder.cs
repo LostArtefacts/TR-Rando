@@ -73,11 +73,11 @@ public class DynamicTextureBuilder
         // Collect unique room and room sprite textures
         foreach (TR1Room room in level.Data.Rooms)
         {
-            foreach (TRFace3 f in room.RoomData.Triangles)
+            foreach (TRFace3 f in room.Mesh.Triangles)
                 defaultObjectTextures.Add(f.Texture);
-            foreach (TRFace4 f in room.RoomData.Rectangles)
+            foreach (TRFace4 f in room.Mesh.Rectangles)
                 defaultObjectTextures.Add(f.Texture);
-            foreach (TRRoomSprite sprite in room.RoomData.Sprites)
+            foreach (TRRoomSprite sprite in room.Mesh.Sprites)
             {
                 // Temporary until room sprites store type IDs and not offsets
                 TR1Type spriteID = default;

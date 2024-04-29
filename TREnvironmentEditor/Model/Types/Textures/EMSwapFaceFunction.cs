@@ -19,8 +19,8 @@ public class EMSwapFaceFunction : BaseEMFunction
             {
                 int targetIndex = Swaps[originalIndex];
                 // Swap their positions in the list
-                (room.RoomData.Rectangles[targetIndex], room.RoomData.Rectangles[originalIndex])
-                    = (room.RoomData.Rectangles[originalIndex], room.RoomData.Rectangles[targetIndex]);
+                (room.Mesh.Rectangles[targetIndex], room.Mesh.Rectangles[originalIndex])
+                    = (room.Mesh.Rectangles[originalIndex], room.Mesh.Rectangles[targetIndex]);
             }
         }
         else
@@ -29,8 +29,8 @@ public class EMSwapFaceFunction : BaseEMFunction
             {
                 int targetIndex = Swaps[originalIndex];
                 // Swap their positions in the list
-                (room.RoomData.Triangles[targetIndex], room.RoomData.Triangles[originalIndex])
-                    = (room.RoomData.Triangles[originalIndex], room.RoomData.Triangles[targetIndex]);
+                (room.Mesh.Triangles[targetIndex], room.Mesh.Triangles[originalIndex])
+                    = (room.Mesh.Triangles[originalIndex], room.Mesh.Triangles[targetIndex]);
             }
         }
     }
@@ -45,8 +45,8 @@ public class EMSwapFaceFunction : BaseEMFunction
             {
                 int targetIndex = Swaps[originalIndex];
                 // Swap their positions in the list
-                (room.RoomData.Rectangles[targetIndex], room.RoomData.Rectangles[originalIndex])
-                    = (room.RoomData.Rectangles[originalIndex], room.RoomData.Rectangles[targetIndex]);
+                (room.Mesh.Rectangles[targetIndex], room.Mesh.Rectangles[originalIndex])
+                    = (room.Mesh.Rectangles[originalIndex], room.Mesh.Rectangles[targetIndex]);
             }
         }
         else
@@ -55,8 +55,8 @@ public class EMSwapFaceFunction : BaseEMFunction
             {
                 int targetIndex = Swaps[originalIndex];
                 // Swap their positions in the list
-                (room.RoomData.Triangles[targetIndex], room.RoomData.Triangles[originalIndex])
-                    = (room.RoomData.Triangles[originalIndex], room.RoomData.Triangles[targetIndex]);
+                (room.Mesh.Triangles[targetIndex], room.Mesh.Triangles[originalIndex])
+                    = (room.Mesh.Triangles[originalIndex], room.Mesh.Triangles[targetIndex]);
             }
         }
     }
@@ -71,8 +71,8 @@ public class EMSwapFaceFunction : BaseEMFunction
             {
                 int targetIndex = Swaps[originalIndex];
                 // Swap their positions in the list
-                (room.RoomData.Rectangles[targetIndex], room.RoomData.Rectangles[originalIndex])
-                    = (room.RoomData.Rectangles[originalIndex], room.RoomData.Rectangles[targetIndex]);
+                (room.Mesh.Rectangles[targetIndex], room.Mesh.Rectangles[originalIndex])
+                    = (room.Mesh.Rectangles[originalIndex], room.Mesh.Rectangles[targetIndex]);
             }
         }
         else
@@ -81,8 +81,8 @@ public class EMSwapFaceFunction : BaseEMFunction
             {
                 int targetIndex = Swaps[originalIndex];
                 // Swap their positions in the list
-                (room.RoomData.Triangles[targetIndex], room.RoomData.Triangles[originalIndex])
-                    = (room.RoomData.Triangles[originalIndex], room.RoomData.Triangles[targetIndex]);
+                (room.Mesh.Triangles[targetIndex], room.Mesh.Triangles[originalIndex])
+                    = (room.Mesh.Triangles[originalIndex], room.Mesh.Triangles[targetIndex]);
             }
         }
     }

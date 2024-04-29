@@ -2,9 +2,9 @@
 
 namespace TRLevelControl.Model;
 
-public class TR3RoomData : ISerializableCompact
+public class TR2RoomMesh : ISerializableCompact
 {
-    public List<TR3RoomVertex> Vertices { get; set; }
+    public List<TR2RoomVertex> Vertices { get; set; }
     public List<TRFace4> Rectangles { get; set; }
     public List<TRFace3> Triangles { get; set; }
     public List<TRRoomSprite> Sprites { get; set; }
@@ -15,7 +15,7 @@ public class TR3RoomData : ISerializableCompact
         using (BinaryWriter writer = new(stream))
         {
             writer.Write((short)Vertices.Count);
-            foreach (TR3RoomVertex vert in Vertices)
+            foreach (TR2RoomVertex vert in Vertices)
             {
                 writer.Write(vert.Serialize());
             }

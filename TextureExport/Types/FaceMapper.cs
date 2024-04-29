@@ -31,13 +31,13 @@ public static class FaceMapper
             newRectFaces[roomNumber] = new Dictionary<int, int>();
             newTriFaces[roomNumber] = new Dictionary<int, int>();
 
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Rectangles.Count; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].Mesh.Rectangles.Count; i++)
             {
-                rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
+                rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].Mesh.Rectangles[i].Texture, packer.Tiles);
             }
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Triangles.Count; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].Mesh.Triangles.Count; i++)
             {
-                triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
+                triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].Mesh.Triangles[i].Texture, packer.Tiles);
             }
 
             foreach (int rectIndex in rectFaces[roomNumber].Keys)
@@ -73,11 +73,11 @@ public static class FaceMapper
         {
             foreach (int rectIndex in newRectFaces[roomNumber].Keys)
             {
-                level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+                level.Rooms[roomNumber].Mesh.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
             }
             foreach (int triIndex in newTriFaces[roomNumber].Keys)
             {
-                level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
+                level.Rooms[roomNumber].Mesh.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
             }
         }
 
@@ -103,13 +103,13 @@ public static class FaceMapper
             newRectFaces[roomNumber] = new Dictionary<int, int>();
             newTriFaces[roomNumber] = new Dictionary<int, int>();
 
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Rectangles.Count; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].Mesh.Rectangles.Count; i++)
             {
-                rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
+                rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].Mesh.Rectangles[i].Texture, packer.Tiles);
             }
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Triangles.Count; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].Mesh.Triangles.Count; i++)
             {
-                triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
+                triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].Mesh.Triangles[i].Texture, packer.Tiles);
             }
 
             foreach (int rectIndex in rectFaces[roomNumber].Keys)
@@ -145,11 +145,11 @@ public static class FaceMapper
         {
             foreach (int rectIndex in newRectFaces[roomNumber].Keys)
             {
-                level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+                level.Rooms[roomNumber].Mesh.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
             }
             foreach (int triIndex in newTriFaces[roomNumber].Keys)
             {
-                level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
+                level.Rooms[roomNumber].Mesh.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
             }
         }
 
@@ -175,13 +175,13 @@ public static class FaceMapper
             newRectFaces[roomNumber] = new Dictionary<int, int>();
             newTriFaces[roomNumber] = new Dictionary<int, int>();
 
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Rectangles.Count; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].Mesh.Rectangles.Count; i++)
             {
-                rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
+                rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].Mesh.Rectangles[i].Texture, packer.Tiles);
             }
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Triangles.Count; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].Mesh.Triangles.Count; i++)
             {
-                triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
+                triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].Mesh.Triangles[i].Texture, packer.Tiles);
             }
 
             foreach (int rectIndex in rectFaces[roomNumber].Keys)
@@ -217,11 +217,11 @@ public static class FaceMapper
         {
             foreach (int rectIndex in newRectFaces[roomNumber].Keys)
             {
-                level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+                level.Rooms[roomNumber].Mesh.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
             }
             foreach (int triIndex in newTriFaces[roomNumber].Keys)
             {
-                level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
+                level.Rooms[roomNumber].Mesh.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
             }
         }
 
@@ -245,7 +245,7 @@ public static class FaceMapper
             rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
             newRectFaces[roomNumber] = new Dictionary<int, int>();
 
-            for (int i = 0; i < level.Rooms[roomNumber].RoomData.Rectangles.Count; i++)
+            for (int i = 0; i < level.Rooms[roomNumber].Mesh.Rectangles.Count; i++)
             {
                 TexturedTileSegment seg = GetBoxFaceSegment(level.Rooms[roomNumber], i, packer.Tiles);
                 if (seg != null)
@@ -271,7 +271,7 @@ public static class FaceMapper
         {
             foreach (int rectIndex in newRectFaces[roomNumber].Keys)
             {
-                level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+                level.Rooms[roomNumber].Mesh.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
             }
         }
 
@@ -356,14 +356,14 @@ public static class FaceMapper
 
     private static TexturedTileSegment GetBoxFaceSegment(TR2Room room, int rectIndex, IReadOnlyList<TexturedTile> tiles)
     {
-        TRFace4 face = room.RoomData.Rectangles[rectIndex];
+        TRFace4 face = room.Mesh.Rectangles[rectIndex];
 
         List<TRVertex> verts = new()
         {
-            room.RoomData.Vertices[face.Vertices[0]].Vertex,
-            room.RoomData.Vertices[face.Vertices[1]].Vertex,
-            room.RoomData.Vertices[face.Vertices[2]].Vertex,
-            room.RoomData.Vertices[face.Vertices[3]].Vertex
+            room.Mesh.Vertices[face.Vertices[0]].Vertex,
+            room.Mesh.Vertices[face.Vertices[1]].Vertex,
+            room.Mesh.Vertices[face.Vertices[2]].Vertex,
+            room.Mesh.Vertices[face.Vertices[3]].Vertex
         };
 
         // Ignore walls
@@ -387,13 +387,13 @@ public static class FaceMapper
     private static string GetBoxDescription(TR2Level level, FDControl control, int roomNumber, int rectIndex)
     {
         TR2Room room = level.Rooms[roomNumber];
-        TRFace4 face = room.RoomData.Rectangles[rectIndex];
+        TRFace4 face = room.Mesh.Rectangles[rectIndex];
         List<TRVertex> verts = new()
         {
-            room.RoomData.Vertices[face.Vertices[0]].Vertex,
-            room.RoomData.Vertices[face.Vertices[1]].Vertex,
-            room.RoomData.Vertices[face.Vertices[2]].Vertex,
-            room.RoomData.Vertices[face.Vertices[3]].Vertex
+            room.Mesh.Vertices[face.Vertices[0]].Vertex,
+            room.Mesh.Vertices[face.Vertices[1]].Vertex,
+            room.Mesh.Vertices[face.Vertices[2]].Vertex,
+            room.Mesh.Vertices[face.Vertices[3]].Vertex
         };
 
         int xmin = verts.Min(v => v.X) + room.Info.X;

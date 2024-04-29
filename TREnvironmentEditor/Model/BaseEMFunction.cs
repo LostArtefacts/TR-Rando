@@ -49,29 +49,29 @@ public abstract class BaseEMFunction
 
     public static int CreateRoomVertex(TR1Room room, TRVertex vert, short lighting = 6574)
     {
-        room.RoomData.Vertices.Add(new()
+        room.Mesh.Vertices.Add(new()
         {
             Lighting = lighting,
             Vertex = vert
         });
-        return room.RoomData.Vertices.Count - 1;
+        return room.Mesh.Vertices.Count - 1;
     }
 
     public static int CreateRoomVertex(TR2Room room, TRVertex vert, short lighting = 6574, short lighting2 = 6574)
     {
-        room.RoomData.Vertices.Add(new()
+        room.Mesh.Vertices.Add(new()
         {
             Attributes = 32784, // This stops it shimmering if viewed from underwater, should be configurable
             Lighting = lighting,
             Lighting2 = lighting2,
             Vertex = vert
         });
-        return room.RoomData.Vertices.Count - 1;
+        return room.Mesh.Vertices.Count - 1;
     }
 
     public static int CreateRoomVertex(TR3Room room, TRVertex vert, short lighting = 6574, ushort colour = 6574, bool useCaustics = false, bool useWaveMovement = false)
     {
-        room.RoomData.Vertices.Add(new()
+        room.Mesh.Vertices.Add(new()
         {
             Attributes = 32784,
             Lighting = lighting,
@@ -80,7 +80,7 @@ public abstract class BaseEMFunction
             UseWaveMovement = useWaveMovement,
             Vertex = vert
         });
-        return room.RoomData.Vertices.Count - 1;
+        return room.Mesh.Vertices.Count - 1;
     }
 
     /// <summary>

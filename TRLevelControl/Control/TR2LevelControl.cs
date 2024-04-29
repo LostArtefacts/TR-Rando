@@ -64,7 +64,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.Rooms.Add(room);
 
             uint numWords = reader.ReadUInt32();
-            room.RoomData = ConvertToRoomData(reader.ReadUInt16s(numWords));
+            room.Mesh = ConvertToRoomData(reader.ReadUInt16s(numWords));
 
             //Portals
             ushort numPortals = reader.ReadUInt16();
@@ -284,11 +284,11 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         _spriteBuilder.WriteSprites(writer, _level.Sprites);
     }
 
-    private static TR2RoomData ConvertToRoomData(ushort[] rawData)
+    private static TR2RoomMesh ConvertToRoomData(ushort[] rawData)
     {
         // This approach is temporarily retained
 
-        TR2RoomData roomData = new()
+        TR2RoomMesh roomData = new()
         {
             Vertices = new()
         };

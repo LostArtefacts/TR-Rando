@@ -31,7 +31,7 @@ public class EMRefaceFunction : BaseEMFunction, ITextureModifier
             foreach (int roomIndex in TextureMap[texture].Keys)
             {
                 TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+                ApplyTextures(texture, TextureMap[texture][roomIndex], room.Mesh.Rectangles, room.Mesh.Triangles);
             }
         }
     }
@@ -45,7 +45,7 @@ public class EMRefaceFunction : BaseEMFunction, ITextureModifier
             foreach (int roomIndex in TextureMap[texture].Keys)
             {
                 TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+                ApplyTextures(texture, TextureMap[texture][roomIndex], room.Mesh.Rectangles, room.Mesh.Triangles);
             }
         }
     }
@@ -59,7 +59,7 @@ public class EMRefaceFunction : BaseEMFunction, ITextureModifier
             foreach (int roomIndex in TextureMap[texture].Keys)
             {
                 TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+                ApplyTextures(texture, TextureMap[texture][roomIndex], room.Mesh.Rectangles, room.Mesh.Triangles);
             }
         }
     }

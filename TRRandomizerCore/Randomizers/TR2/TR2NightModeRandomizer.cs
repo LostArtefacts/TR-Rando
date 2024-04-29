@@ -112,7 +112,7 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
 
     private static void SetVertexLight(TR2Room room, short val)
     {
-        foreach (TR2RoomVertex vert in room.RoomData.Vertices)
+        foreach (TR2RoomVertex vert in room.Mesh.Vertices)
         {
             vert.Lighting = val;
             vert.Lighting2 = val;

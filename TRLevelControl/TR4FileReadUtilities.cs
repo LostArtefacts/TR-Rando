@@ -29,7 +29,7 @@ internal static class TR4FileReadUtilities
             lvl.Rooms.Add(room);
 
             uint numWords = reader.ReadUInt32();
-            room.RoomData = TR3FileReadUtilities.ConvertToRoomData(reader.ReadUInt16s(numWords));
+            room.Mesh = TR3FileReadUtilities.ConvertToRoomData(reader.ReadUInt16s(numWords));
 
             //Portals
             ushort numPortals = reader.ReadUInt16();

@@ -2,7 +2,7 @@
 
 namespace TRLevelControl.Model;
 
-public class TR1RoomData : ISerializableCompact
+public class TR1RoomMesh : ISerializableCompact
 {
     public List<TR1RoomVertex> Vertices { get; set; }
     public List<TRFace4> Rectangles { get; set; }

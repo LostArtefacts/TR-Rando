@@ -26,12 +26,12 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
                         switch (faceType)
                         {
                             case EMTextureFaceType.Rectangles:
-                                baseVertices = room.RoomData.Rectangles[baseFaceIndex].Vertices;
-                                copyVertices = room.RoomData.Rectangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
+                                baseVertices = room.Mesh.Rectangles[baseFaceIndex].Vertices;
+                                copyVertices = room.Mesh.Rectangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
                                 break;
                             case EMTextureFaceType.Triangles:
-                                baseVertices = room.RoomData.Triangles[baseFaceIndex].Vertices;
-                                copyVertices = room.RoomData.Triangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
+                                baseVertices = room.Mesh.Triangles[baseFaceIndex].Vertices;
+                                copyVertices = room.Mesh.Triangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
                                 break;
                             default:
                                 throw new ArgumentException($"Unknown face type {faceType}");
@@ -39,8 +39,8 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
 
                         for (int i = 0; i < baseVertices.Length; i++)
                         {
-                            TR1RoomVertex baseVertex = room.RoomData.Vertices[baseVertices[i]];
-                            TR1RoomVertex copyVertex = room.RoomData.Vertices[copyVertices[i]];
+                            TR1RoomVertex baseVertex = room.Mesh.Vertices[baseVertices[i]];
+                            TR1RoomVertex copyVertex = room.Mesh.Vertices[copyVertices[i]];
                             CopyAttributes(baseVertex, copyVertex);
                         }
                     }
@@ -54,7 +54,7 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
             foreach (short roomNumber in RoomMap.Keys)
             {
                 TR1Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                foreach (TR1RoomVertex copyVertex in room.RoomData.Vertices)
+                foreach (TR1RoomVertex copyVertex in room.Mesh.Vertices)
                 {
                     CopyAttributes(RoomMap[roomNumber], copyVertex);
                 }
@@ -80,12 +80,12 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
                         switch (faceType)
                         {
                             case EMTextureFaceType.Rectangles:
-                                baseVertices = room.RoomData.Rectangles[baseFaceIndex].Vertices;
-                                copyVertices = room.RoomData.Rectangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
+                                baseVertices = room.Mesh.Rectangles[baseFaceIndex].Vertices;
+                                copyVertices = room.Mesh.Rectangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
                                 break;
                             case EMTextureFaceType.Triangles:
-                                baseVertices = room.RoomData.Triangles[baseFaceIndex].Vertices;
-                                copyVertices = room.RoomData.Triangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
+                                baseVertices = room.Mesh.Triangles[baseFaceIndex].Vertices;
+                                copyVertices = room.Mesh.Triangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
                                 break;
                             default:
                                 throw new ArgumentException($"Unknown face type {faceType}");
@@ -93,8 +93,8 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
 
                         for (int i = 0; i < baseVertices.Length; i++)
                         {
-                            TR2RoomVertex baseVertex = room.RoomData.Vertices[baseVertices[i]];
-                            TR2RoomVertex copyVertex = room.RoomData.Vertices[copyVertices[i]];
+                            TR2RoomVertex baseVertex = room.Mesh.Vertices[baseVertices[i]];
+                            TR2RoomVertex copyVertex = room.Mesh.Vertices[copyVertices[i]];
                             CopyAttributes(baseVertex, copyVertex);
                         }
                     }
@@ -108,7 +108,7 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
             foreach (short roomNumber in RoomMap.Keys)
             {
                 TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                foreach (TR2RoomVertex copyVertex in room.RoomData.Vertices)
+                foreach (TR2RoomVertex copyVertex in room.Mesh.Vertices)
                 {
                     CopyAttributes(RoomMap[roomNumber], copyVertex);
                 }
@@ -134,12 +134,12 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
                         switch (faceType)
                         {
                             case EMTextureFaceType.Rectangles:
-                                baseVertices = room.RoomData.Rectangles[baseFaceIndex].Vertices;
-                                copyVertices = room.RoomData.Rectangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
+                                baseVertices = room.Mesh.Rectangles[baseFaceIndex].Vertices;
+                                copyVertices = room.Mesh.Rectangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
                                 break;
                             case EMTextureFaceType.Triangles:
-                                baseVertices = room.RoomData.Triangles[baseFaceIndex].Vertices;
-                                copyVertices = room.RoomData.Triangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
+                                baseVertices = room.Mesh.Triangles[baseFaceIndex].Vertices;
+                                copyVertices = room.Mesh.Triangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
                                 break;
                             default:
                                 throw new ArgumentException($"Unknown face type {faceType}");
@@ -147,8 +147,8 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
 
                         for (int i = 0; i < baseVertices.Length; i++)
                         {
-                            TR3RoomVertex baseVertex = room.RoomData.Vertices[baseVertices[i]];
-                            TR3RoomVertex copyVertex = room.RoomData.Vertices[copyVertices[i]];
+                            TR3RoomVertex baseVertex = room.Mesh.Vertices[baseVertices[i]];
+                            TR3RoomVertex copyVertex = room.Mesh.Vertices[copyVertices[i]];
                             CopyAttributes(baseVertex, copyVertex);
                         }
                     }
@@ -162,7 +162,7 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
             foreach (short roomNumber in RoomMap.Keys)
             {
                 TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                foreach (TR3RoomVertex copyVertex in room.RoomData.Vertices)
+                foreach (TR3RoomVertex copyVertex in room.Mesh.Vertices)
                 {
                     CopyAttributes(RoomMap[roomNumber], copyVertex);
                 }

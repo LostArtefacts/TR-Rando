@@ -17,7 +17,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Quads.Keys)
             {
                 TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
+                room.Mesh.Rectangles.AddRange(Quads[roomIndex]);
             }
         }
 
@@ -26,7 +26,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Triangles.Keys)
             {
                 TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
+                room.Mesh.Triangles.AddRange(Triangles[roomIndex]);
             }
         }
     }
@@ -40,7 +40,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Quads.Keys)
             {
                 TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
+                room.Mesh.Rectangles.AddRange(Quads[roomIndex]);
             }
         }
 
@@ -49,7 +49,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Triangles.Keys)
             {
                 TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
+                room.Mesh.Triangles.AddRange(Triangles[roomIndex]);
             }
         }
     }
@@ -63,7 +63,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Quads.Keys)
             {
                 TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                room.RoomData.Rectangles.AddRange(Quads[roomIndex]);
+                room.Mesh.Rectangles.AddRange(Quads[roomIndex]);
             }
         }
 
@@ -72,7 +72,7 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
             foreach (short roomIndex in Triangles.Keys)
             {
                 TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                room.RoomData.Triangles.AddRange(Triangles[roomIndex]);
+                room.Mesh.Triangles.AddRange(Triangles[roomIndex]);
             }
         }
     }

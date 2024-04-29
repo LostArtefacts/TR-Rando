@@ -33,8 +33,8 @@ public class EMRemoveFaceFunction : BaseEMFunction
                 }
             }
 
-            RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
-            RemoveEntries(room.RoomData.Triangles, triangleRemovals);
+            RemoveEntries(room.Mesh.Rectangles, rectangleRemovals);
+            RemoveEntries(room.Mesh.Triangles, triangleRemovals);
         }
     }
 
@@ -64,8 +64,8 @@ public class EMRemoveFaceFunction : BaseEMFunction
                 }
             }
 
-            RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
-            RemoveEntries(room.RoomData.Triangles, triangleRemovals);
+            RemoveEntries(room.Mesh.Rectangles, rectangleRemovals);
+            RemoveEntries(room.Mesh.Triangles, triangleRemovals);
         }
     }
 
@@ -95,8 +95,8 @@ public class EMRemoveFaceFunction : BaseEMFunction
                 }
             }
 
-            RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
-            RemoveEntries(room.RoomData.Triangles, triangleRemovals);
+            RemoveEntries(room.Mesh.Rectangles, rectangleRemovals);
+            RemoveEntries(room.Mesh.Triangles, triangleRemovals);
         }
     }
 

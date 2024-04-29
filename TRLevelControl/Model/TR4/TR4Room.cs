@@ -5,7 +5,7 @@ namespace TRLevelControl.Model;
 public class TR4Room : ISerializableCompact
 {
     public TRRoomInfo Info { get; set; }
-    public TR3RoomData RoomData { get; set; }
+    public TR3RoomMesh Mesh { get; set; }
     public List<TRRoomPortal> Portals { get; set; }
     public ushort NumZSectors { get; set; }
     public ushort NumXSectors { get; set; }
@@ -27,7 +27,7 @@ public class TR4Room : ISerializableCompact
         {
             writer.Write(Info.Serialize());
 
-            byte[] meshData = RoomData.Serialize();
+            byte[] meshData = Mesh.Serialize();
             writer.Write((uint)meshData.Length / sizeof(short));
             writer.Write(meshData);
 

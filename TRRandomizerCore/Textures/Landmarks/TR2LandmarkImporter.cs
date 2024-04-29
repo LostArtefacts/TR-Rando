@@ -21,7 +21,7 @@ public class TR2LandmarkImporter : AbstractLandmarkImporter<TR2Type, TR2Level>
 
     protected override void SetRoomTexture(TR2Level level, int roomIndex, int rectangleIndex, ushort textureIndex)
     {
-        level.Rooms[roomIndex].RoomData.Rectangles[rectangleIndex].Texture = textureIndex;
+        level.Rooms[roomIndex].Mesh.Rectangles[rectangleIndex].Texture = textureIndex;
     }
 
     protected override short? GetRoomFromPortal(TR2Level level, PortalSector portalSector, bool isLevelMirrored)
