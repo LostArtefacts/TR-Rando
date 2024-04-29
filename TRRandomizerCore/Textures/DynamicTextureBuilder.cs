@@ -101,7 +101,7 @@ public class DynamicTextureBuilder
         }
 
         // Include all static mesh textures
-        foreach (TRStaticMesh staticMesh in level.Data.StaticMeshes)
+        foreach (TRStaticMesh staticMesh in level.Data.StaticMeshes.Values)
         {
             AddMeshTextures(staticMesh.Mesh, defaultObjectTextures);
             if (!RetainMainTextures)

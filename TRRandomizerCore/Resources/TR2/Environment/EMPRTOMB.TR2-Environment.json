@@ -1931,6 +1931,7 @@
       {
         "Comments": "Create a dummy static mesh.",
         "EMType": 34,
+        "ID": 292,
         "Mesh": {
           "Centre": {},
           "Vertices": [],
@@ -1942,7 +1943,6 @@
           "ColouredTriangles": []
         },
         "Info": {
-          "ID": 27,
           "VisibilityBox": {
             "MinX": -3584,
             "MaxX": 512,

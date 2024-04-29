@@ -9,7 +9,7 @@ public class TR2Level : TRLevelBase
     public List<TR2Room> Rooms { get; set; }
     public List<ushort> FloorData { get; set; }
     public TRDictionary<TR2Type, TRModel> Models { get; set; }
-    public List<TRStaticMesh> StaticMeshes { get; set; }
+    public TRDictionary<TR2Type, TRStaticMesh> StaticMeshes { get; set; }
     public List<TRObjectTexture> ObjectTextures { get; set; }
     public TRDictionary<TR2Type, TRSpriteSequence> Sprites { get; set; }
     public List<TRCamera> Cameras { get; set; }
@@ -25,6 +25,6 @@ public class TR2Level : TRLevelBase
     public SortedDictionary<TR2SFX, TR2SoundEffect> SoundEffects { get; set; }
 
     public override IEnumerable<TRMesh> DistinctMeshes => Models.Values.SelectMany(m => m.Meshes)
-        .Concat(StaticMeshes.Select(s => s.Mesh))
+        .Concat(StaticMeshes.Values.Select(s => s.Mesh))
         .Distinct();
 }

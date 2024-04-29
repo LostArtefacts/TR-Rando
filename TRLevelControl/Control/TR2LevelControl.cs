@@ -7,7 +7,7 @@ namespace TRLevelControl;
 
 public class TR2LevelControl : TRLevelControlBase<TR2Level>
 {
-    private readonly TRObjectMeshBuilder _meshBuilder;
+    private readonly TRObjectMeshBuilder<TR2Type> _meshBuilder;
     private readonly TRSpriteBuilder<TR2Type> _spriteBuilder;
 
     public TR2LevelControl(ITRLevelObserver observer = null)
@@ -275,12 +275,12 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
     private void ReadStaticMeshes(TRLevelReader reader)
     {
-        _level.StaticMeshes = _meshBuilder.ReadStaticMeshes(reader);
+        _level.StaticMeshes = _meshBuilder.ReadStaticMeshes(reader, TR2Type.SceneryBase);
     }
 
     private void WriteStaticMeshes(TRLevelWriter writer)
     {
-        _meshBuilder.WriteStaticMeshes(writer, _level.StaticMeshes);
+        _meshBuilder.WriteStaticMeshes(writer, _level.StaticMeshes, TR2Type.SceneryBase);
     }
 
     private void ReadSprites(TRLevelReader reader)

@@ -3,14 +3,15 @@ using TRLevelControl.Model;
 
 namespace TRLevelControl.Build;
 
-public class TRObjectMeshBuilder : IMeshProvider
+public class TRObjectMeshBuilder<T> : IMeshProvider
+    where T : Enum
 {
     private readonly TRGameVersion _version;
     private readonly ITRLevelObserver _observer;
 
     private uint[] _meshPointers;
     private Dictionary<long, TRMesh> _objectMeshes;
-    private Dictionary<uint, ushort> _staticMeshPointers;
+    private Dictionary<T, ushort> _staticMeshPointers;
 
     public TRMesh GetObjectMesh(long pointer)
         => _objectMeshes[_meshPointers[pointer]];
@@ -95,7 +96,7 @@ public class TRObjectMeshBuilder : IMeshProvider
         }
     }
 
-    public void WriteObjectMeshes(TRLevelWriter writer, IEnumerable<TRMesh> objectMeshes, List<TRStaticMesh> staticMeshes)
+    public void WriteObjectMeshes(TRLevelWriter writer, IEnumerable<TRMesh> objectMeshes, TRDictionary<T, TRStaticMesh> staticMeshes)
     {
         List<TRMesh> cachedMeshes = new();
         List<uint> meshPointers = new();
@@ -123,9 +124,9 @@ public class TRObjectMeshBuilder : IMeshProvider
             StoreMesh(mesh);
         }
 
-        foreach (TRStaticMesh staticMesh in staticMeshes)
+        foreach (var (type, staticMesh) in staticMeshes)
         {
-            _staticMeshPointers[staticMesh.ID] = (ushort)meshPointers.Count;
+            _staticMeshPointers[type] = (ushort)meshPointers.Count;
             StoreMesh(staticMesh.Mesh);
         }
 
@@ -136,33 +137,36 @@ public class TRObjectMeshBuilder : IMeshProvider
         writer.Write(meshPointers);
     }
 
-    public List<TRStaticMesh> ReadStaticMeshes(TRLevelReader reader)
+    public TRDictionary<T, TRStaticMesh> ReadStaticMeshes(TRLevelReader reader, T sceneryBase)
     {
+        uint sceneryID = (uint)(object)sceneryBase;
         uint numMeshes = reader.ReadUInt32();
-        List<TRStaticMesh> meshes = new();
+        TRDictionary<T, TRStaticMesh> meshes = new();
 
         for (int i = 0; i < numMeshes; i++)
         {
-            meshes.Add(new()
+            T type = (T)(object)(reader.ReadUInt32() + sceneryID);
+            meshes[type] = new()
             {
-                ID = reader.ReadUInt32(),
                 Mesh = GetObjectMesh(reader.ReadUInt16()),
                 VisibilityBox = reader.ReadBoundingBox(),
                 CollisionBox = reader.ReadBoundingBox(),
                 Flags = reader.ReadUInt16()
-            });
+            };
         }
 
         return meshes;
     }
 
-    public void WriteStaticMeshes(TRLevelWriter writer, List<TRStaticMesh> staticMeshes)
+    public void WriteStaticMeshes(TRLevelWriter writer, TRDictionary<T, TRStaticMesh> staticMeshes, T sceneryBase)
     {
+        uint sceneryID = (uint)(object)sceneryBase;
         writer.Write((uint)staticMeshes.Count);
-        foreach (TRStaticMesh staticMesh in staticMeshes)
+        foreach (T staticType in staticMeshes.Keys)
         {
-            writer.Write(staticMesh.ID);
-            writer.Write(_staticMeshPointers[staticMesh.ID]);
+            TRStaticMesh staticMesh = staticMeshes[staticType];
+            writer.Write((uint)(object)staticType - sceneryID);
+            writer.Write(_staticMeshPointers[staticType]);
             writer.Write(staticMesh.VisibilityBox);
             writer.Write(staticMesh.CollisionBox);
             writer.Write(staticMesh.Flags);

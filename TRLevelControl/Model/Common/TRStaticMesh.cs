@@ -2,7 +2,6 @@
 
 public class TRStaticMesh : ICloneable
 {
-    public uint ID { get; set; }
     public TRMesh Mesh { get; set; }
     public TRBoundingBox VisibilityBox { get; set; }
     public TRBoundingBox CollisionBox { get; set; }
@@ -44,7 +43,6 @@ public class TRStaticMesh : ICloneable
     {
         return new()
         {
-            ID = ID,
             Mesh = Mesh.Clone(),
             VisibilityBox = VisibilityBox.Clone(),
             CollisionBox = CollisionBox.Clone(),
