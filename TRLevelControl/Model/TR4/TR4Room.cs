@@ -5,7 +5,7 @@ namespace TRLevelControl.Model;
 public class TR4Room : ISerializableCompact
 {
     public TRRoomInfo Info { get; set; }
-    public TR3RoomMesh Mesh { get; set; }
+    public TR4RoomMesh Mesh { get; set; }
     public List<TRRoomPortal> Portals { get; set; }
     public ushort NumZSectors { get; set; }
     public ushort NumXSectors { get; set; }

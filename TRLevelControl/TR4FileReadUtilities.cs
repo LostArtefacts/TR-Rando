@@ -29,7 +29,7 @@ internal static class TR4FileReadUtilities
             lvl.Rooms.Add(room);
 
             uint numWords = reader.ReadUInt32();
-            room.Mesh = TR3FileReadUtilities.ConvertToRoomData(reader.ReadUInt16s(numWords));
+            room.Mesh = ConvertToRoomData(reader.ReadUInt16s(numWords));
 
             //Portals
             ushort numPortals = reader.ReadUInt16();
@@ -72,6 +72,82 @@ internal static class TR4FileReadUtilities
             room.ReverbInfo = reader.ReadByte();
             room.Filler = reader.ReadByte();
         }
+    }
+
+    public static TR4RoomMesh ConvertToRoomData(ushort[] rawData)
+    {
+        // This approach is temporarily retained
+
+        TR4RoomMesh roomData = new()
+        {
+            Vertices = new()
+        };
+
+        int offset = 0;
+        ushort count = rawData[offset++];
+        for (int j = 0; j < count; j++)
+        {
+            roomData.Vertices.Add(new()
+            {
+                Vertex = new()
+                {
+                    X = UnsafeConversions.UShortToShort(rawData[offset++]),
+                    Y = UnsafeConversions.UShortToShort(rawData[offset++]),
+                    Z = UnsafeConversions.UShortToShort(rawData[offset++]),
+                },
+                Lighting = UnsafeConversions.UShortToShort(rawData[offset++]),
+                Attributes = rawData[offset++],
+                Colour = rawData[offset++],
+            });
+        }
+
+        count = rawData[offset++];
+        roomData.Rectangles = new();
+        for (int j = 0; j < count; j++)
+        {
+            roomData.Rectangles.Add(new()
+            {
+                Vertices = new ushort[]
+                {
+                    rawData[offset++],
+                    rawData[offset++],
+                    rawData[offset++],
+                    rawData[offset++],
+                },
+                Texture = rawData[offset++],
+            });
+        }
+
+        count = rawData[offset++];
+        roomData.Triangles = new();
+        for (int j = 0; j < count; j++)
+        {
+            roomData.Triangles.Add(new()
+            {
+                Vertices = new ushort[]
+                {
+                    rawData[offset++],
+                    rawData[offset++],
+                    rawData[offset++],
+                },
+                Texture = rawData[offset++],
+            });
+        }
+
+        count = rawData[offset++];
+        roomData.Sprites = new();
+        for (int j = 0; j < count; j++)
+        {
+            roomData.Sprites.Add(new()
+            {
+                Vertex = UnsafeConversions.UShortToShort(rawData[offset++]),
+                Texture = UnsafeConversions.UShortToShort(rawData[offset++]),
+            });
+        }
+
+        Debug.Assert(offset == rawData.Length);
+
+        return roomData;
     }
 
     public static void PopulateFloordata(BinaryReader reader, TR4Level lvl)
