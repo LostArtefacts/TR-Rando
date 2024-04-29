@@ -123,7 +123,7 @@ public class DynamicTextureBuilder
         }
         else
         {
-            hips = level.Data.Models.Find(m => m.ID == (uint)TR1Type.Lara).Meshes[0];
+            hips = level.Data.Models[TR1Type.Lara].Meshes[0];
             if (level.Data.Entities.Any(e => e.TypeID == TR1Type.MidasHand_N))
             {
                 modelIDs.Add(TR1Type.LaraMiscAnim_H);
@@ -135,19 +135,19 @@ public class DynamicTextureBuilder
         // Lara will be partially re-textured.
         foreach (TR1Type modelID in modelIDs)
         {
-            TRModel model = level.Data.Models.Find(m => m.ID == (uint)modelID);
+            TRModel model = level.Data.Models[modelID];
             if (model != null)
             {
-                AddModelTextures(level.Data, model, hips, defaultObjectTextures, modelMeshes);
+                AddModelTextures(level.Data, modelID, model, hips, defaultObjectTextures, modelMeshes);
             }
         }
 
         foreach (TR1Type modelID in _enemyIDs)
         {
-            TRModel model = level.Data.Models.Find(m => m.ID == (uint)modelID);
+            TRModel model = level.Data.Models[modelID];
             if (model != null)
             {
-                AddModelTextures(level.Data, model, hips, enemyObjectTextures, modelMeshes);
+                AddModelTextures(level.Data, modelID, model, hips, enemyObjectTextures, modelMeshes);
             }
         }
 
@@ -172,7 +172,7 @@ public class DynamicTextureBuilder
         Dictionary<TR1Type, TR1Type> keyItems = TR1TypeUtilities.GetKeyItemMap();
         foreach (TR1Type pickupType in keyItems.Keys)
         {
-            TRModel model = level.Data.Models.Find(m => m.ID == (uint)keyItems[pickupType]);
+            TRModel model = level.Data.Models[keyItems[pickupType]];
             if (model == null)
             {
                 continue;
@@ -185,14 +185,14 @@ public class DynamicTextureBuilder
                 TRRoomSector sector = FDUtilities.GetRoomSector(keyInstance.X, keyInstance.Y, keyInstance.Z, keyInstance.Room, level.Data, floorData);
                 if (LocationUtilities.SectorContainsSecret(sector, floorData))
                 {
-                    AddModelTextures(level.Data, model, hips, secretObjectTextures, modelMeshes);
+                    AddModelTextures(level.Data, pickupType, model, hips, secretObjectTextures, modelMeshes);
                     AddSpriteTextures(level.Data, pickupType, secretSpriteTextures);
                     continue;
                 }
             }
                 
             // Otherwise it's a regular key item
-            AddModelTextures(level.Data, model, hips, keyItemObjectTextures, modelMeshes);
+            AddModelTextures(level.Data, pickupType, model, hips, keyItemObjectTextures, modelMeshes);
             AddSpriteTextures(level.Data, pickupType, keyItemSpriteTextures);
         }
 
@@ -222,9 +222,8 @@ public class DynamicTextureBuilder
         };
     }
 
-    private void AddModelTextures(TR1Level level, TRModel model, TRMesh dummyMesh, ISet<int> textures, ISet<TRMesh> meshCollection)
+    private void AddModelTextures(TR1Level level, TR1Type modelID, TRModel model, TRMesh dummyMesh, ISet<int> textures, ISet<TRMesh> meshCollection)
     {
-        TR1Type modelID = (TR1Type)model.ID;
         if (TextureMonitor?.RemovedTextures?.Contains(modelID) ?? false)
         {
             // Don't include textures that may have been re-assigned to other imported models (e.g. enemies).
@@ -238,7 +237,7 @@ public class DynamicTextureBuilder
             return;
         }
 
-        if (modelID == TR1Type.Cowboy && level.Models.Find(m => m.ID == (uint)TR1Type.Cowboy).Meshes[2].TexturedRectangles.Count > 0)
+        if (modelID == TR1Type.Cowboy && level.Models[TR1Type.Cowboy].Meshes[2].TexturedRectangles.Count > 0)
         {
             // We only want to target LeoC's headless cowboy - in this case the cowboy is OG.
             return;

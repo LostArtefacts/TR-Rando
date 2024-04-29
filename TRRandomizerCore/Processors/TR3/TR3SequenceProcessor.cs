@@ -194,9 +194,8 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         // test here for the likes of Jungle.
         if (!Settings.RandomizeEnemies
             && level.Data.Entities.Any(e => e.TypeID == TR3Type.Monkey)
-            && level.Data.Models.Any(m => (TR3Type)m.ID == TR3Type.Tiger))
+            && level.Data.Models.Remove(TR3Type.Tiger))
         {
-            level.RemoveModel(TR3Type.Tiger);
             level.Data.Entities.Where(e => e.TypeID == TR3Type.Tiger)
                 .ToList()
                 .ForEach(e => e.TypeID = TR3Type.Monkey);
@@ -249,7 +248,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         List<TR3Type> imports = new();
         foreach (TR3Type artefactMenuModel in TR3TypeUtilities.GetArtefactMenuModels())
         {
-            if (level.Data.Models.Find(m => m.ID == (uint)artefactMenuModel) == null)
+            if (!level.Data.Models.ContainsKey(artefactMenuModel))
             {
                 imports.Add(artefactMenuModel);
             }
@@ -275,10 +274,8 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         foreach (TR3Type artefact in _artefactAssignment.Keys)
         {
             TR3Type replacement = _artefactAssignment[artefact];
-            TRModel artefactModel = level.Data.Models.Find(m => m.ID == (uint)artefact);
-            TRModel replacementModel = artefactModel.Clone();
-            replacementModel.ID = (uint)replacement;
-            level.Data.Models.Add(replacementModel);
+            TRModel artefactModel = level.Data.Models[artefact];
+            level.Data.Models[replacement] = artefactModel.Clone();
 
             level.Data.Entities
                 .FindAll(e => e.TypeID == artefact)

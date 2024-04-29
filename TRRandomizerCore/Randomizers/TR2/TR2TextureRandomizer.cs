@@ -17,7 +17,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
     private static readonly Color[] _wireframeColours = ColorUtilities.GetWireframeColours();
 
     private readonly Dictionary<AbstractTextureSource, string> _persistentVariants;
-    private readonly Dictionary<string, WireframeData> _wireframeData;
+    private readonly Dictionary<string, WireframeData<TR2Type>> _wireframeData;
     private readonly object _drawLock;
     private TR2TextureDatabase _textureDatabase;
     private Dictionary<TextureCategory, bool> _textureOptions;
@@ -31,7 +31,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
     public TR2TextureRandomizer()
     {
         _persistentVariants = new Dictionary<AbstractTextureSource, string>();
-        _wireframeData = JsonConvert.DeserializeObject<Dictionary<string, WireframeData>>(ReadResource(@"TR2\Textures\wireframing.json"));
+        _wireframeData = JsonConvert.DeserializeObject<Dictionary<string, WireframeData<TR2Type>>>(ReadResource(@"TR2\Textures\wireframing.json"));
         _drawLock = new object();
     }
 
@@ -171,7 +171,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
             _persistentWireColour = _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
         }
 
-        foreach (WireframeData data in _wireframeData.Values.ToList())
+        foreach (WireframeData<TR2Type> data in _wireframeData.Values)
         {
             data.HighlightLadders = Settings.UseWireframeLadders;
             data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
@@ -248,7 +248,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
             (_solidLaraLevels.Contains(lvl.Script) || (lvl.IsCutScene && _solidLaraLevels.Contains(lvl.ParentLevel.Script)));
     }
 
-    private WireframeData GetWireframeData(TR2CombinedLevel lvl)
+    private WireframeData<TR2Type> GetWireframeData(TR2CombinedLevel lvl)
     {
         return IsWireframeLevel(lvl) ? _wireframeData[lvl.JsonID] : null;
     }
@@ -314,11 +314,11 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
                     if (_outer.IsWireframeLevel(level))
                     {
-                        WireframeData data = _outer.GetWireframeData(level);
+                        WireframeData<TR2Type> data = _outer.GetWireframeData(level);
                         data.SolidEnemies = _outer.Settings.UseSolidEnemyWireframing;
                         if (level.IsCutScene)
                         {
-                            WireframeData parentData = _outer.GetWireframeData(level.ParentLevel);
+                            WireframeData<TR2Type> parentData = _outer.GetWireframeData(level.ParentLevel);
                             data.HighlightColour = parentData.HighlightColour;
                             data.SolidLara = parentData.SolidLara;
                         }
@@ -350,15 +350,15 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
                         if (_outer.Settings.UseDifferentWireframeColours)
                         {
-                            foreach (TRModel model in level.Data.Models)
+                            foreach (TR2Type type in level.Data.Models.Keys)
                             {
-                                data.ModelColours[model.ID] = _outer.GetWireframeVariant();
+                                data.ModelColours[type] = _outer.GetWireframeVariant();
                             }
 
                             // Make sure the front and back of the dragon match
-                            if (data.ModelColours.ContainsKey((uint)TR2Type.DragonFront_H))
+                            if (data.ModelColours.ContainsKey(TR2Type.DragonFront_H))
                             {
-                                data.ModelColours[(uint)TR2Type.DragonBack_H] = data.ModelColours[(uint)TR2Type.DragonFront_H];
+                                data.ModelColours[TR2Type.DragonBack_H] = data.ModelColours[TR2Type.DragonFront_H];
                             }
                         }
                     }

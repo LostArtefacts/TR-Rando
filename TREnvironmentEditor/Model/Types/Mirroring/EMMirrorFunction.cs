@@ -1078,7 +1078,7 @@ public class EMMirrorFunction : BaseEMFunction
         // Models such as doors may use textures also used on walls, but
         // these models aren't mirrored so the texture will end up being
         // upside down. Rotate the relevant mesh faces.
-        MirrorDependentFaces(level.Models, textureReferences);
+        MirrorDependentFaces(level.Models.Values, textureReferences);
     }
 
     private static void MirrorTextures(TR2Level level)
@@ -1247,19 +1247,14 @@ public class EMMirrorFunction : BaseEMFunction
 
     private static void MirrorDependentFaces(IEnumerable<TRModel> models, ISet<ushort> textureReferences)
     {
-        foreach (TRModel model in models)
+        IEnumerable<TRMeshFace> faces = models.SelectMany(m => m.Meshes)
+            .SelectMany(m => m.TexturedRectangles)
+            .Where(f => textureReferences.Contains(f.Texture))
+            .Distinct();
+        foreach (TRMeshFace face in faces)
         {
-            foreach (TRMesh mesh in model.Meshes)
-            {
-                foreach (TRMeshFace face in mesh.TexturedRectangles)
-                {
-                    if (textureReferences.Contains(face.Texture))
-                    {
-                        face.SwapVertices(0, 2);
-                        face.SwapVertices(1, 3);
-                    }
-                }
-            }
+            face.SwapVertices(0, 2);
+            face.SwapVertices(1, 3);
         }
     }
 }

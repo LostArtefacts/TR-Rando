@@ -12,7 +12,7 @@ namespace TRRandomizerCore.Textures;
 
 public abstract class AbstractTRWireframer<E, L>
     where E : Enum
-    where L : class
+    where L : TRLevelBase
 {
     protected static readonly TRSize _nullSize = new(0, 0);
     protected static readonly int _ladderRungs = 4;
@@ -29,7 +29,7 @@ public abstract class AbstractTRWireframer<E, L>
     private Dictionary<TRMeshFace, TRSize> _meshFaces;
 
     private ISet<ushort> _allTextures;
-    protected WireframeData _data;
+    protected WireframeData<E> _data;
 
     protected virtual bool IsTextureExcluded(ushort texture)
     {
@@ -41,7 +41,7 @@ public abstract class AbstractTRWireframer<E, L>
         return _data.ForcedOverrides.Contains(texture);
     }
 
-    public void Apply(L level, WireframeData data)
+    public void Apply(L level, WireframeData<E> data)
     {
         _roomFace3s = new();
         _roomFace4s = new();
@@ -195,7 +195,7 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void ScanMeshes(L level)
     {
-        foreach (TRMesh mesh in GetLevelMeshes(level))
+        foreach (TRMesh mesh in level.DistinctMeshes)
         {
             ScanMesh(level, mesh);
         }
@@ -556,16 +556,16 @@ public abstract class AbstractTRWireframer<E, L>
         int blackIndex = GetBlackPaletteIndex(level);
 
         // For most meshes, replace any colours with the default background
-        foreach (TRMesh mesh in GetLevelMeshes(level))
+        foreach (TRMesh mesh in level.DistinctMeshes)
         {
             SetFace4Colours(mesh.ColouredRectangles, blackIndex);
             SetFace3Colours(mesh.ColouredTriangles, blackIndex);
         }
 
         ISet<TRMesh> processedModelMeshes = new HashSet<TRMesh>();
-        foreach (TRModel model in GetModels(level))
+        foreach (var (type, model) in GetModels(level))
         {
-            if (IsSkybox(model))
+            if (IsSkybox(type))
             {
                 // Solidify the skybox as it will become the backdrop for every room
                 foreach (TRMesh mesh in model.Meshes)
@@ -580,14 +580,14 @@ public abstract class AbstractTRWireframer<E, L>
             }
             else if
             (
-                (_data.SolidLara && IsLaraModel(model)) ||
-                (_data.SolidEnemies && (IsEnemyModel(model) || _data.SolidModels.Contains(model.ID)) && !IsEnemyPlaceholderModel(model)) ||
-                (_data.SolidInteractables && IsInteractableModel(model)) ||
-                ShouldSolidifyModel(model)
+                (_data.SolidLara && IsLaraModel(type)) ||
+                (_data.SolidEnemies && (IsEnemyModel(type) || _data.SolidModels.Contains(type)) && !IsEnemyPlaceholderModel(type)) ||
+                (_data.SolidInteractables && IsInteractableModel(type)) ||
+                ShouldSolidifyModel(type)
             )
             {
-                int paletteIndex = ImportColour(level, !IsLaraModel(model) && _data.ModelColours.ContainsKey(model.ID) ?
-                    _data.ModelColours[model.ID] :
+                int paletteIndex = ImportColour(level, !IsLaraModel(type) && _data.ModelColours.ContainsKey(type) ?
+                    _data.ModelColours[type] :
                     _data.HighlightColour);
 
                 if (paletteIndex == -1)
@@ -667,14 +667,13 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract List<TRObjectTexture> GetObjectTextures(L level);
     protected abstract int GetBlackPaletteIndex(L level);
     protected abstract int ImportColour(L level, Color c);
-    protected abstract List<TRModel> GetModels(L level);
-    protected abstract IEnumerable<TRMesh> GetLevelMeshes(L level);
-    protected abstract bool IsSkybox(TRModel model);
-    protected abstract bool IsLaraModel(TRModel model);
-    protected abstract bool IsEnemyModel(TRModel model);
-    protected virtual bool IsEnemyPlaceholderModel(TRModel model) => false;
-    protected abstract bool IsInteractableModel(TRModel model);
-    protected virtual bool ShouldSolidifyModel(TRModel model) => false;
+    protected abstract TRDictionary<E, TRModel> GetModels(L level);
+    protected abstract bool IsSkybox(E type);
+    protected abstract bool IsLaraModel(E type);
+    protected abstract bool IsEnemyModel(E type);
+    protected virtual bool IsEnemyPlaceholderModel(E type) => false;
+    protected abstract bool IsInteractableModel(E type);
+    protected virtual bool ShouldSolidifyModel(E type) => false;
     protected abstract void SetSkyboxVisible(L level);
     protected abstract List<TRAnimatedTexture> GetAnimatedTextures(L level);
 

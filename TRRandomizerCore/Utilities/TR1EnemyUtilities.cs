@@ -583,7 +583,7 @@ public static class TR1EnemyUtilities
         }
 
         TR1Type type = CodeBitsToAtlantean(entity.CodeBits);
-        return level.Data.Models.Find(m => m.ID == (uint)type) == null;
+        return !level.Data.Models.ContainsKey(type);
     }
 
     public static bool CanDropItems(TR1Entity entity, TR1CombinedLevel level, FDControl floorData)

@@ -46,11 +46,8 @@ public class TR2ModelAdjuster : TR2LevelProcessor
         // of the old model, should also point to the new model type.
         foreach (TR2Type oldEntity in _modelRemap.Keys)
         {
-            TRModel model = _levelInstance.Data.Models.Find(m => m.ID == (short)oldEntity);
-            if (model != null)
+            if (_levelInstance.Data.Models.ChangeKey(oldEntity, _modelRemap[oldEntity]))
             {
-                model.ID = (uint)_modelRemap[oldEntity];
-
                 List<TR2Entity> modelEntities = _levelInstance.Data.Entities.FindAll(e => e.TypeID == oldEntity);
                 foreach (TR2Entity entity in modelEntities)
                 {

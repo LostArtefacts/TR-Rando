@@ -22,7 +22,7 @@ public class TR3ModelImporter : AbstractTRModelImporter<TR3Type, TR3Level, TR3Mo
 
     protected override List<TR3Type> GetExistingModelTypes()
     {
-        return Level.Models.Select(m => (TR3Type)m.ID).ToList();
+        return Level.Models.Keys.ToList();
     }
 
     protected override void Import(IEnumerable<TR3ModelDefinition> standardDefinitions, IEnumerable<TR3ModelDefinition> soundOnlyDefinitions)

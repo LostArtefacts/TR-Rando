@@ -21,7 +21,7 @@ public class TR2ModelImporter : AbstractTRModelImporter<TR2Type, TR2Level, TR2Mo
 
     protected override List<TR2Type> GetExistingModelTypes()
     {
-        return Level.Models.Select(m => (TR2Type)m.ID).ToList();
+        return Level.Models.Keys.ToList();
     }
 
     protected override void Import(IEnumerable<TR2ModelDefinition> standardDefinitions, IEnumerable<TR2ModelDefinition> soundOnlyDefinitions)

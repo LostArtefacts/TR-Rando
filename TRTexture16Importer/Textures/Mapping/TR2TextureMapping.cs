@@ -42,7 +42,7 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Type, TR2Level>
 
     protected override List<TRMesh> GetModelMeshes(TR2Type entity)
     {
-        return _level.Models.Find(m => m.ID == (uint)entity).Meshes;
+        return _level.Models.ContainsKey(entity) ? _level.Models[entity].Meshes : null;
     }
 
     protected override List<TRSpriteSequence> GetSpriteSequences()

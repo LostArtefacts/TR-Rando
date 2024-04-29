@@ -33,7 +33,7 @@ public class TR1ModelImporter : AbstractTRModelImporter<TR1Type, TR1Level, TR1Mo
 
     protected override List<TR1Type> GetExistingModelTypes()
     {
-        return Level.Models.Select(m => (TR1Type)m.ID).ToList();
+        return Level.Models.Keys.ToList();
     }
 
     protected override void Import(IEnumerable<TR1ModelDefinition> standardDefinitions, IEnumerable<TR1ModelDefinition> soundOnlyDefinitions)

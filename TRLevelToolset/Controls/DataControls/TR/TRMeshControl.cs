@@ -10,8 +10,7 @@ internal class TRMeshControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Mesh Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Mesh count: " + IOManager.CurrentLevelAsTR1?.Models.SelectMany(m => m.Meshes)
-                .Concat(IOManager.CurrentLevelAsTR1.StaticMeshes.Select(s => s.Mesh)).Count());
+            ImGui.Text("Mesh count: " + IOManager.CurrentLevelAsTR1?.DistinctMeshes.Count());
 
             ImGui.TreePop();
         }

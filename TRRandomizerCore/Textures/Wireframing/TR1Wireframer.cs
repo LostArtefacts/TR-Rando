@@ -43,7 +43,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         TR1Type.Puzzle1_M_H, TR1Type.Puzzle2_M_H, TR1Type.Puzzle3_M_H, TR1Type.Puzzle4_M_H,
         TR1Type.Key1_M_H, TR1Type.Key2_M_H, TR1Type.Key3_M_H, TR1Type.Key4_M_H,
         TR1Type.Quest1_M_H, TR1Type.Quest2_M_H,
-        TR1Type.ScionPiece_M_H
+        TR1Type.ScionPiece_M_H, TR1Type.LeadBar_M_H
     };
 
     public override bool Is8BitPalette => true;
@@ -55,14 +55,13 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return _packer = new TR1TexturePacker(level);
     }
 
-    protected override bool IsSkybox(TRModel model)
+    protected override bool IsSkybox(TR1Type type)
     {
         return false;
     }
 
-    protected override bool IsInteractableModel(TRModel model)
+    protected override bool IsInteractableModel(TR1Type type)
     {
-        TR1Type type = (TR1Type)model.ID;
         return TR1TypeUtilities.IsSwitchType(type)
             || TR1TypeUtilities.IsKeyholeType(type)
             || TR1TypeUtilities.IsSlotType(type)
@@ -71,9 +70,9 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
             || type == TR1Type.Compass_M_H;
     }
 
-    protected override bool ShouldSolidifyModel(TRModel model)
+    protected override bool ShouldSolidifyModel(TR1Type type)
     {
-        return _data.Has3DPickups && _pickupModels.Contains((TR1Type)model.ID);
+        return _data.Has3DPickups && _pickupModels.Contains(type);
     }
 
     protected override int GetBlackPaletteIndex(TR1Level level)
@@ -86,12 +85,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return level.GetInvalidObjectTextureIndices();
     }
 
-    protected override IEnumerable<TRMesh> GetLevelMeshes(TR1Level level)
-    {
-        return level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh));
-    }
-
-    protected override List<TRModel> GetModels(TR1Level level)
+    protected override TRDictionary<TR1Type, TRModel> GetModels(TR1Level level)
     {
         return level.Models;
     }
@@ -127,21 +121,19 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return _packer.PaletteManager.AddPredefinedColour(c);
     }
 
-    protected override bool IsLaraModel(TRModel model)
+    protected override bool IsLaraModel(TR1Type type)
     {
-        return _laraEntities.Contains((TR1Type)model.ID);
+        return _laraEntities.Contains(type);
     }
 
-    protected override bool IsEnemyModel(TRModel model)
+    protected override bool IsEnemyModel(TR1Type type)
     {
-        TR1Type id = (TR1Type)model.ID;
-        return TR1TypeUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
+        return TR1TypeUtilities.IsEnemyType(type) || _additionalEnemyEntities.Contains(type);
     }
 
-    protected override bool IsEnemyPlaceholderModel(TRModel model)
+    protected override bool IsEnemyPlaceholderModel(TR1Type type)
     {
-        TR1Type id = (TR1Type)model.ID;
-        return _enemyPlaceholderEntities.Contains(id);
+        return _enemyPlaceholderEntities.Contains(type);
     }
 
     protected override void ResetPaletteTracking(TR1Level level)
@@ -200,13 +192,13 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
 
     private TexturedTileSegment CreateMidasDoor(TR1Level level, Pen pen, ushort textureIndex, SpecialTextureMode mode)
     {
-        TRModel doorModel = FindDoorModel(level, textureIndex);
-        if (doorModel == null)
+        TR1Type doorType = FindDoorModel(level, textureIndex);
+        if (doorType == default)
         {
             return null;
         }
 
-        TR1Entity doorInstance = level.Entities.Find(e => e.TypeID == (TR1Type)doorModel.ID);
+        TR1Entity doorInstance = level.Entities.Find(e => e.TypeID == doorType);
         if (doorInstance == null)
         {
             return null;
@@ -278,25 +270,24 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return new TexturedTileSegment(texture, frame.Bitmap);
     }
 
-    private static TRModel FindDoorModel(TR1Level level, ushort textureIndex)
+    private static TR1Type FindDoorModel(TR1Level level, ushort textureIndex)
     {
-        foreach (TRModel model in level.Models)
+        foreach (var (type, model) in level.Models)
         {
-            TR1Type type = (TR1Type)model.ID;
             if (!TR1TypeUtilities.IsDoorType(type))
             {
                 continue;
             }
 
-            foreach (TRMesh mesh in level.Models.Find(m => m.ID == (uint)type).Meshes)
+            foreach (TRMesh mesh in model.Meshes)
             {
                 if (mesh.TexturedRectangles.Any(f => f.Texture == textureIndex))
                 {
-                    return model;
+                    return type;
                 }
             }
         }
 
-        return null;
+        return default;
     }
 }

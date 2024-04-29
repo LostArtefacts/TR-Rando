@@ -270,18 +270,18 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
     private void WriteMeshData(TRLevelWriter writer)
     {
-        _meshBuilder.WriteObjectMeshes(writer, _level.Models.SelectMany(m => m.Meshes), _level.StaticMeshes);
+        _meshBuilder.WriteObjectMeshes(writer, _level.Models.Values.SelectMany(m => m.Meshes), _level.StaticMeshes);
     }
 
     private void ReadModelData(TRLevelReader reader)
     {
-        TRModelBuilder builder = new(TRGameVersion.TR2, _observer);
+        TRModelBuilder<TR2Type> builder = new(TRGameVersion.TR2, _observer);
         _level.Models = builder.ReadModelData(reader, _meshBuilder);
     }
 
     private void WriteModelData(TRLevelWriter writer)
     {
-        TRModelBuilder builder = new(TRGameVersion.TR2, _observer);
+        TRModelBuilder<TR2Type> builder = new(TRGameVersion.TR2, _observer);
         builder.WriteModelData(writer, _level.Models);
     }
 

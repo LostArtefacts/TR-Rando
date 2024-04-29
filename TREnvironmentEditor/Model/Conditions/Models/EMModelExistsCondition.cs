@@ -8,19 +8,16 @@ public class EMModelExistsCondition : BaseEMCondition
 
     protected override bool Evaluate(TR1Level level)
     {
-        TRModel model = level.Models.Find(m => m.ID == ModelID);
-        return model != null;
+        return level.Models.ContainsKey((TR1Type)ModelID);
     }
 
     protected override bool Evaluate(TR2Level level)
     {
-        TRModel model = level.Models.Find(m => m.ID == ModelID);
-        return model != null;
+        return level.Models.ContainsKey((TR2Type)ModelID);
     }
 
     protected override bool Evaluate(TR3Level level)
     {
-        TRModel model = level.Models.Find(m => m.ID == ModelID);
-        return model != null;
+        return level.Models.ContainsKey((TR3Type)ModelID);
     }
 }

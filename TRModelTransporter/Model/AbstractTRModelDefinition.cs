@@ -8,7 +8,7 @@ namespace TRModelTransporter.Model;
 public abstract class AbstractTRModelDefinition<E> : IDisposable where E : Enum
 {
     [JsonIgnore]
-    public abstract E Entity { get; }
+    public E Entity { get; set; }
     [JsonIgnore]
     public E Alias { get; set; }
     [JsonIgnore]

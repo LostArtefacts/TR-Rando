@@ -360,7 +360,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         {
             TR3Type banishedType = _generator.NextDouble() < 0.5 ? TR3Type.Tiger : TR3Type.Monkey;
             availableEnemyTypes.Remove(banishedType);
-            level.RemoveModel(banishedType);
+            level.Data.Models.Remove(banishedType);
         }
 
         List<TR3Type> droppableEnemies = TR3TypeUtilities.FilterDroppableEnemies(availableEnemyTypes, Settings.ProtectMonks);
@@ -747,10 +747,9 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
                     // Remove stale tiger model if present to avoid friendly monkeys causing vehicle crashes.
                     if (level.HasVehicle
-                        && enemies.EntitiesToImport.Contains(TR3Type.Monkey)
-                        && level.Data.Models.Any(m => m.ID == (uint)TR3Type.Tiger))
+                        && enemies.EntitiesToImport.Contains(TR3Type.Monkey))
                     {
-                        level.RemoveModel(TR3Type.Tiger);
+                        level.Data.Models.Remove(TR3Type.Tiger);
                     }
                 }
 

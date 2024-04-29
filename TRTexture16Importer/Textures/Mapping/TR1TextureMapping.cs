@@ -46,7 +46,7 @@ public class TR1TextureMapping : AbstractTextureMapping<TR1Type, TR1Level>
 
     protected override List<TRMesh> GetModelMeshes(TR1Type entity)
     {
-        return _level.Models.Find(m => m.ID == (uint)entity)?.Meshes;
+        return _level.Models.ContainsKey(entity) ? _level.Models[entity].Meshes : null;
     }
 
     protected override List<TRSpriteSequence> GetSpriteSequences()

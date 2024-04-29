@@ -9,9 +9,9 @@ public static class DependencyExporter
     public static void Export(TR1Level level, string lvl)
     {
         TR1TextureRemapGroup remapGroup = new();
-        foreach (TRModel model in level.Models)
+        foreach (TR1Type type in level.Models.Keys)
         {
-            remapGroup.CalculateDependencies(level, (TR1Type)model.ID);
+            remapGroup.CalculateDependencies(level, type);
         }
 
         foreach (TextureDependency<TR1Type> dependency in remapGroup.Dependencies)
@@ -46,9 +46,9 @@ public static class DependencyExporter
     public static void Export(TR2Level level, string lvl)
     {
         TR2TextureRemapGroup remapGroup = new();
-        foreach (TRModel model in level.Models)
+        foreach (TR2Type type in level.Models.Keys)
         {
-            remapGroup.CalculateDependencies(level, (TR2Type)model.ID);
+            remapGroup.CalculateDependencies(level, type);
         }
 
         string dir = @"TR2\Deduplication";
@@ -59,9 +59,9 @@ public static class DependencyExporter
     public static void Export(TR3Level level, string lvl)
     {
         TR3TextureRemapGroup remapGroup = new();
-        foreach (TRModel model in level.Models)
+        foreach (TR3Type type in level.Models.Keys)
         {
-            remapGroup.CalculateDependencies(level, (TR3Type)model.ID);
+            remapGroup.CalculateDependencies(level, type);
         }
 
         remapGroup.Dependencies.Sort(delegate (TextureDependency<TR3Type> d1, TextureDependency<TR3Type> d2)

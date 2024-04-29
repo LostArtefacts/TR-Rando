@@ -9,10 +9,10 @@ public class TRPalette16Control
     private readonly Queue<int> _freeIndices;
 
     public TRPalette16Control(TR2Level level)
-        : this(level.Palette16, level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh))) { }
+        : this(level.Palette16, level.DistinctMeshes) { }
 
     public TRPalette16Control(TR3Level level)
-        : this(level.Palette16, level.Models.SelectMany(m => m.Meshes).Concat(level.StaticMeshes.Select(s => s.Mesh))) { }
+        : this(level.Palette16, level.DistinctMeshes) { }
 
     public TRPalette16Control(List<TRColour4> palette16, IEnumerable<TRMesh> meshes)
     {

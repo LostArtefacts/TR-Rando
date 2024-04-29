@@ -506,17 +506,17 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
     {
         if (TR1TypeUtilities.IsKeyType(itemType))
         {
-            PopulateScriptStrings(itemType - TR1Type.Key1_S_P, level.Script.Keys, "K");
+            PopulateScriptStrings((int)(itemType - TR1Type.Key1_S_P), level.Script.Keys, "K");
             level.Script.Keys.Add(name);
         }
         else if (TR1TypeUtilities.IsPuzzleType(itemType))
         {
-            PopulateScriptStrings(itemType - TR1Type.Puzzle1_S_P, level.Script.Puzzles, "P");
+            PopulateScriptStrings((int)(itemType - TR1Type.Puzzle1_S_P), level.Script.Puzzles, "P");
             level.Script.Puzzles.Add(name);
         }
         else if (TR1TypeUtilities.IsQuestType(itemType))
         {
-            PopulateScriptStrings(itemType - TR1Type.Quest1_S_P, level.Script.Pickups, "Q");
+            PopulateScriptStrings((int)(itemType - TR1Type.Quest1_S_P), level.Script.Pickups, "Q");
             level.Script.Pickups.Add(name);
         }
     }
@@ -835,7 +835,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                 // We exclude current puzzle/key items from the available switching pool.
                 foreach (TR1Type puzzleType in _modelReplacements.Keys)
                 {
-                    if (level.Data.Models.Find(m => m.ID == (uint)puzzleType) == null)
+                    if (!level.Data.Models.ContainsKey(puzzleType))
                     {
                         allocation.AvailablePickupModels.Add(puzzleType);
                     }
@@ -875,15 +875,14 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         TR1Type puzzleModelType = allocation.AvailablePickupModels.First();
                         TR1Type puzzlePickupType = _modelReplacements[puzzleModelType];
 
-                        TRModel puzzleModel = level.Data.Models.Find(m => m.ID == (uint)secretModelType);
-                        puzzleModel.ID = (uint)puzzleModelType;
+                        level.Data.Models.ChangeKey(secretModelType, puzzleModelType);
                         level.Data.SpriteSequences.Find(s => s.SpriteID == (int)secretPickupType).SpriteID = (int)puzzlePickupType;
 
                         if (secretModelType == TR1Type.SecretScion_M_H && _outer.Are3DPickupsEnabled())
                         {
                             // TR1X embeds scions into the ground when they are puzzle/key types in 3D mode,
                             // so we counteract that here to avoid uncollectable items.
-                            TRMesh scionMesh = puzzleModel.Meshes[0];
+                            TRMesh scionMesh = level.Data.Models[puzzleModelType].Meshes[0];
                             foreach (TRVertex vertex in scionMesh.Vertices)
                             {
                                 vertex.Y -= 90;

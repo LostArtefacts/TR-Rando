@@ -11,12 +11,8 @@ public class EMUnconditionalBirdCheck : BaseEMCondition
 
     protected override bool Evaluate(TR2Level level)
     {
-        TRModel model = level.Models.Find(m => m.ID == (uint)TR2Type.BirdMonster);
-        if (model != null)
-        {
-            return model.Animations[20].FrameEnd == model.Animations[19].FrameEnd;
-        }
-        return false;
+        TRModel model = level.Models[TR2Type.BirdMonster];
+        return model != null && model.Animations[20].FrameEnd == model.Animations[19].FrameEnd;
     }
 
     protected override bool Evaluate(TR3Level level)

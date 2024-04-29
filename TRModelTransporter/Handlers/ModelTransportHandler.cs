@@ -8,69 +8,61 @@ public class ModelTransportHandler
 {
     public static void Export(TR1Level level, TR1ModelDefinition definition, TR1Type entity)
     {
-        definition.Model = GetTRModel(level.Models, (short)entity);
+        definition.Model = level.Models[entity];
     }
 
     public static void Export(TR2Level level, TR2ModelDefinition definition, TR2Type entity)
     {
-        definition.Model = GetTRModel(level.Models, (short)entity);
+        definition.Model = level.Models[entity];
     }
 
     public static void Export(TR3Level level, TR3ModelDefinition definition, TR3Type entity)
     {
-        definition.Model = GetTRModel(level.Models, (short)entity);
-    }
-
-    private static TRModel GetTRModel(List<TRModel> models, short entityID)
-    {
-        TRModel model = models.Find(m => m.ID == entityID);
-        return model ?? throw new ArgumentException($"The model for {entityID} could not be found.");
+        definition.Model = level.Models[entity];
     }
 
     public static void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TR1Type, TR1Type> aliasPriority, IEnumerable<TR1Type> laraDependants)
     {
-        int i = level.Models.FindIndex(m => m.ID == (short)definition.Entity);
-        if (i == -1)
+        if (!level.Models.ContainsKey(definition.Entity))
         {
-            level.Models.Add(definition.Model);
+            level.Models[definition.Entity] = definition.Model;
         }
         else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
         {
             if (!definition.HasGraphics)
             {
                 // The original mesh data may still be needed so don't overwrite
-                definition.Model.MeshTrees = level.Models[i].MeshTrees;
-                definition.Model.Meshes = level.Models[i].Meshes;
+                definition.Model.MeshTrees = level.Models[definition.Entity].MeshTrees;
+                definition.Model.Meshes = level.Models[definition.Entity].Meshes;
             }
-            level.Models[i] = definition.Model;
+            level.Models[definition.Entity] = definition.Model;
         }
 
         if (laraDependants != null)
         {
             if (definition.Entity == TR1Type.Lara)
             {
-                ReplaceLaraDependants(level.Models, definition.Model, laraDependants.Select(e => (short)e));
+                ReplaceLaraDependants(level.Models, definition.Model, laraDependants);
             }
-            else if (laraDependants.Contains((TR1Type)definition.Model.ID))
+            else if (laraDependants.Contains(definition.Entity))
             {
-                ReplaceLaraDependants(level.Models, level.Models.Find(m => m.ID == (uint)TR1Type.Lara), new short[] { (short)definition.Model.ID });
+                ReplaceLaraDependants(level.Models, level.Models[TR1Type.Lara], new TR1Type[] { definition.Entity });
             }
         }
     }
 
     public static void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Type, TR2Type> aliasPriority, IEnumerable<TR2Type> laraDependants)
     {
-        int i = level.Models.FindIndex(m => m.ID == (short)definition.Entity);
-        if (i == -1)
+        if (!level.Models.ContainsKey(definition.Entity))
         {
-            level.Models.Add(definition.Model);
+            level.Models[definition.Entity] = definition.Model;
         }
         else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
         {
             // Replacement occurs for the likes of aliases taking the place of another
             // e.g. WhiteTiger replacing BengalTiger in GW, or if we have a specific
             // alias that should always have a higher priority than its peers.
-            level.Models[i] = definition.Model;
+            level.Models[definition.Entity] = definition.Model;
         }
 
         // If we have replaced Lara, we need to update models such as CameraTarget, FlameEmitter etc
@@ -79,44 +71,44 @@ public class ModelTransportHandler
         // their starting mesh and mesh tree indices are just remapped to Lara's.
         if (definition.Entity == TR2Type.Lara && laraDependants != null)
         {
-            ReplaceLaraDependants(level.Models, definition.Model, laraDependants.Select(e => (short)e));
+            ReplaceLaraDependants(level.Models, definition.Model, laraDependants);
         }
     }
 
     public static void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Type, TR3Type> aliasPriority, IEnumerable<TR3Type> laraDependants, IEnumerable<TR3Type> unsafeReplacements)
     {
-        int i = level.Models.FindIndex(m => m.ID == (short)definition.Entity);
-        if (i == -1)
+        if (!level.Models.ContainsKey(definition.Entity))
         {
-            level.Models.Add(definition.Model);
+            level.Models[definition.Entity] = definition.Model;
         }
         else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
         {
             if (!unsafeReplacements.Contains(definition.Entity))
             {
-                level.Models[i] = definition.Model;
+                level.Models[definition.Entity] = definition.Model;
             }
             else
             {
                 // #234 Replacing Lara entirely can cause locking issues after pressing buttons or crouching
                 // where she refuses to come out of her stance. TR3 seems bound to having Lara's animations start
                 // at 0, so because these don't change per skin, we just replace the meshes and frames here.
-                level.Models[i].Meshes = definition.Model.Meshes;
-                level.Models[i].MeshTrees = definition.Model.MeshTrees;
+                level.Models[definition.Entity].Meshes = definition.Model.Meshes;
+                level.Models[definition.Entity].MeshTrees = definition.Model.MeshTrees;
             }
         }
 
         if (definition.Entity == TR3Type.Lara && laraDependants != null)
         {
-            ReplaceLaraDependants(level.Models, definition.Model, laraDependants.Select(e => (short)e));
+            ReplaceLaraDependants(level.Models, definition.Model, laraDependants);
         }
     }
 
-    private static void ReplaceLaraDependants(List<TRModel> models, TRModel lara, IEnumerable<short> entityIDs)
+    private static void ReplaceLaraDependants<T>(SortedDictionary<T, TRModel> models, TRModel lara, IEnumerable<T> entityIDs)
+        where T : Enum
     {
-        foreach (short dependant in entityIDs)
+        foreach (T dependant in entityIDs)
         {
-            TRModel dependentModel = models.Find(m => m.ID == dependant);
+            models.TryGetValue(dependant, out TRModel dependentModel);
             if (dependentModel != null)
             {
                 Debug.Assert(dependentModel.Meshes.Count == 1);

@@ -56,7 +56,7 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Type, TR3Level>
 
     protected override List<TRMesh> GetModelMeshes(TR3Type modelEntity)
     {
-        return Level.Models.Find(m => m.ID == (uint)modelEntity)?.Meshes;
+        return Level.Models[modelEntity]?.Meshes;
     }
 
     protected override TRSpriteSequence GetSpriteSequence(TR3Type entity)
@@ -66,12 +66,7 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Type, TR3Level>
 
     protected override IEnumerable<TR3Type> GetAllModelTypes()
     {
-        List<TR3Type> modelIDs = new();
-        foreach (TRModel model in Level.Models)
-        {
-            modelIDs.Add((TR3Type)model.ID);
-        }
-        return modelIDs;
+        return Level.Models.Keys.ToList();
     }
 
     protected override void CreateImageSpace(int count)
