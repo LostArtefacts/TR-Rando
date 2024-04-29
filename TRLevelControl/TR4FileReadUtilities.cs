@@ -6,10 +6,9 @@ namespace TRLevelControl;
 
 internal static class TR4FileReadUtilities
 {
-    public static readonly string SPRMarker = "SPR";
     public static readonly string TEXMarker = "TEX";
 
-    public static void PopulateRooms(BinaryReader reader, TR4Level lvl)
+    public static void PopulateRooms(TRLevelReader reader, TR4Level lvl)
     {
         ushort numRooms = reader.ReadUInt16();
         lvl.Rooms = new();
@@ -26,54 +25,45 @@ internal static class TR4FileReadUtilities
                     YBottom = reader.ReadInt32(),
                     YTop = reader.ReadInt32()
                 },
-
-                //Grab data
-                NumDataWords = reader.ReadUInt32()
             };
             lvl.Rooms.Add(room);
 
-            room.Data = new ushort[room.NumDataWords];
-            for (int j = 0; j < room.NumDataWords; j++)
-            {
-                room.Data[j] = reader.ReadUInt16();
-            }
-
-            //Store what we just read
-            room.RoomData = TR3FileReadUtilities.ConvertToRoomData(room.Data);
+            uint numWords = reader.ReadUInt32();
+            room.RoomData = TR3FileReadUtilities.ConvertToRoomData(reader.ReadUInt16s(numWords));
 
             //Portals
-            room.NumPortals = reader.ReadUInt16();
-            room.Portals = new TRRoomPortal[room.NumPortals];
-            for (int j = 0; j < room.NumPortals; j++)
+            ushort numPortals = reader.ReadUInt16();
+            room.Portals = new();
+            for (int j = 0; j < numPortals; j++)
             {
-                room.Portals[j] = TR2FileReadUtilities.ReadRoomPortal(reader);
+                room.Portals.Add(TR2FileReadUtilities.ReadRoomPortal(reader));
             }
 
             //Sectors
             room.NumZSectors = reader.ReadUInt16();
             room.NumXSectors = reader.ReadUInt16();
-            room.Sectors = new TRRoomSector[room.NumXSectors * room.NumZSectors];
+            room.Sectors = new();
             for (int j = 0; j < (room.NumXSectors * room.NumZSectors); j++)
             {
-                room.Sectors[j] = TR2FileReadUtilities.ReadRoomSector(reader);
+                room.Sectors.Add(TR2FileReadUtilities.ReadRoomSector(reader));
             }
 
             //Lighting
             room.AmbientIntensity = reader.ReadInt16();
             room.LightMode = reader.ReadInt16();
-            room.NumLights = reader.ReadUInt16();
-            room.Lights = new TR4RoomLight[room.NumLights];
-            for (int j = 0; j < room.NumLights; j++)
+            ushort numLights = reader.ReadUInt16();
+            room.Lights = new();
+            for (int j = 0; j < numLights; j++)
             {
-                room.Lights[j] = ReadRoomLight(reader);
+                room.Lights.Add(ReadRoomLight(reader));
             }
 
             //Static meshes
-            room.NumStaticMeshes = reader.ReadUInt16();
-            room.StaticMeshes = new TR3RoomStaticMesh[room.NumStaticMeshes];
-            for (int j = 0; j < room.NumStaticMeshes; j++)
+            ushort numStaticMeshes = reader.ReadUInt16();
+            room.StaticMeshes = new();
+            for (int j = 0; j < numStaticMeshes; j++)
             {
-                room.StaticMeshes[j] = TR3FileReadUtilities.ReadRoomStaticMesh(reader);
+                room.StaticMeshes.Add(TR3FileReadUtilities.ReadRoomStaticMesh(reader));
             }
 
             room.AlternateRoom = reader.ReadInt16();
