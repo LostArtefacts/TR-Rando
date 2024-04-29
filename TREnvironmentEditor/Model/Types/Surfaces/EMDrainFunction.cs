@@ -14,7 +14,7 @@ public class EMDrainFunction : BaseWaterFunction
         
         foreach (int roomNumber in RoomNumbers)
         {
-            level.Rooms[data.ConvertRoom(roomNumber)].Drain();
+            level.Rooms[data.ConvertRoom(roomNumber)].ContainsWater = false;
         }
 
         foreach (int roomNumber in RoomNumbers)

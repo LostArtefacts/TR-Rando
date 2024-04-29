@@ -14,7 +14,7 @@ public class EMGenerateLightFunction : BaseEMFunction
         foreach (short roomIndex in RoomIndices)
         {
             TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-            if (room.NumLights == 0)
+            if (room.Lights.Count == 0)
             {
                 continue;
             }

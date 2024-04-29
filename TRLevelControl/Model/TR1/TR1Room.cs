@@ -5,87 +5,31 @@ namespace TRLevelControl.Model;
 public class TR1Room : ISerializableCompact
 {
     public TRRoomInfo Info { get; set; }
-
-    public uint NumDataWords { get; set; }
-
-    public ushort[] Data { get; set; }
-
     public TR1RoomData RoomData { get; set; }
-
-    public ushort NumPortals { get; set; }
-
-    public TRRoomPortal[] Portals { get; set; }
-
+    public List<TRRoomPortal> Portals { get; set; }
     public ushort NumZSectors { get; set; }
-
     public ushort NumXSectors { get; set; }
-
-    public TRRoomSector[] Sectors { get; set; }
-
+    public List<TRRoomSector> Sectors { get; set; }
     public short AmbientIntensity { get; set; }
-
-    public ushort NumLights { get; set; }
-
-    public TR1RoomLight[] Lights { get; set; }
-
-    public ushort NumStaticMeshes { get; set; }
-
-    public TR1RoomStaticMesh[] StaticMeshes { get; set; }
-
+    public List<TR1RoomLight> Lights { get; set; }
+    public List<TR1RoomStaticMesh> StaticMeshes { get; set; }
     public short AlternateRoom { get; set; }
-
     public short Flags { get; set; }
 
     public bool ContainsWater
     {
-        get
+        get => (Flags & 0x01) > 0;
+        set
         {
-            return (Flags & 0x01) > 0;
+            if (value)
+            {
+                Flags |= 0x01;
+            }
+            else
+            {
+                Flags &= ~0x01;
+            }
         }
-    }
-
-    public void Fill()
-    {
-        Flags |= 0x01;
-    }
-
-    public void Drain()
-    {
-        Flags &= ~0x01;
-    }
-
-    //Ambient Intensity = 0 (bright) - 0x1FFF (dark)
-    //Vertex Light = 0 (bright) - 0x1FFF (dark)
-    //RoomStaticMesh intensity = 0 (bright) - 0x1FFF (dark)
-    //but...
-    //Light intensity = 0 (dark) - 0x1FFF (bright)!!!
-    public void SetLights(ushort val)
-    {
-        foreach (TR1RoomLight light in Lights)
-        {
-            light.Intensity = val;
-        }
-    }
-
-    public void SetStaticMeshLights(ushort val)
-    {
-        foreach (TR1RoomStaticMesh mesh in StaticMeshes)
-        {
-            mesh.Intensity = val;
-        }
-    }
-
-    public void SetVertexLight(short val)
-    {
-        foreach (TR1RoomVertex vert in RoomData.Vertices)
-        {
-            vert.Lighting = val;
-        }
-    }
-
-    public void SetAmbient(short val)
-    {
-        AmbientIntensity = val;
     }
 
     public byte[] Serialize()
@@ -94,11 +38,12 @@ public class TR1Room : ISerializableCompact
         using (BinaryWriter writer = new(stream))
         {
             writer.Write(Info.Serialize());
-            writer.Write(NumDataWords);
 
-            writer.Write(RoomData.Serialize());
-            writer.Write(NumPortals);
+            byte[] meshData = RoomData.Serialize();
+            writer.Write((uint)meshData.Length / sizeof(short));
+            writer.Write(meshData);
 
+            writer.Write((ushort)Portals.Count);
             foreach (TRRoomPortal portal in Portals)
             {
                 writer.Write(portal.Serialize());
@@ -106,22 +51,20 @@ public class TR1Room : ISerializableCompact
 
             writer.Write(NumZSectors);
             writer.Write(NumXSectors);
-
             foreach (TRRoomSector sector in Sectors)
             {
                 writer.Write(sector.Serialize());
             }
 
             writer.Write(AmbientIntensity);
-            writer.Write(NumLights);
-
+            
+            writer.Write((ushort)Lights.Count);
             foreach (TR1RoomLight light in Lights)
             {
                 writer.Write(light.Serialize());
             }
 
-            writer.Write(NumStaticMeshes);
-
+            writer.Write((ushort)StaticMeshes.Count);
             foreach (TR1RoomStaticMesh mesh in StaticMeshes)
             {
                 writer.Write(mesh.Serialize());

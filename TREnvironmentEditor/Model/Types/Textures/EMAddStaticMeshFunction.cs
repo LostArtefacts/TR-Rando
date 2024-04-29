@@ -47,8 +47,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 }
             }
 
-            List<TR1RoomStaticMesh> meshes = room.StaticMeshes.ToList();
-            meshes.Add(new()
+            room.StaticMeshes.Add(new()
             {
                 X = (uint)location.X,
                 Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
@@ -57,9 +56,6 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 MeshID = Mesh.MeshID,
                 Rotation = (ushort)(location.Angle + short.MaxValue + 1)
             });
-
-            room.StaticMeshes = meshes.ToArray();
-            room.NumStaticMeshes = (ushort)meshes.Count;
         }
     }
 

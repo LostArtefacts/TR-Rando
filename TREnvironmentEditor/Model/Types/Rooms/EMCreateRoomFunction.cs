@@ -29,40 +29,37 @@ public class EMCreateRoomFunction : BaseEMFunction
             NumZSectors = Depth,
             AlternateRoom = -1,
             AmbientIntensity = AmbientLighting,
-            NumLights = (ushort)(Lights == null ? 0 : Lights.Length),
-            NumPortals = 0,
-            NumStaticMeshes = 0,
-            Portals = Array.Empty<TRRoomPortal>(),
-            StaticMeshes = Array.Empty<TR1RoomStaticMesh>(),
-            Info = new TRRoomInfo
+            Portals = new(),
+            StaticMeshes = new(),
+            Info = new()
             {
                 X = Location.X,
                 YBottom = Location.Y,
                 YTop = Location.Y - Height * TRConsts.Step1,
                 Z = Location.Z
             },
-            RoomData = new TR1RoomData
+            RoomData = new()
             {
                 // Ignored for now
                 NumSprites = 0,
                 NumTriangles = 0,
                 Sprites = Array.Empty<TRRoomSprite>(),
                 Triangles = Array.Empty<TRFace3>(),
-            }
+            },
+            Lights = new()
         };
 
-        room.Lights = new TR1RoomLight[room.NumLights];
-        for (int i = 0; i < room.NumLights; i++)
+        for (int i = 0; i < Lights?.Length; i++)
         {
             EMRoomLight light = Lights[i];
-            room.Lights[i] = new TR1RoomLight
+            room.Lights.Add(new()
             {
                 X = light.X + Location.X,
                 Y = light.Y + Location.Y,
                 Z = light.Z + Location.Z,
                 Fade = light.Fade1,
                 Intensity = light.Intensity1
-            };
+            });
         }
 
         sbyte ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1);
@@ -72,8 +69,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         List<TRVertex> vertices = new();
 
         // Make the sectors first
-        List<TRRoomSector> sectors = GenerateSectors(ceiling, floor);
-        room.Sectors = sectors.ToArray();
+        room.Sectors = GenerateSectors(ceiling, floor);
 
         // Generate the box, zone and overlap data
         FDControl floorData = new();
@@ -84,7 +80,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
-        GenerateFaces(sectors, faces, vertices);
+        GenerateFaces(room.Sectors, faces, vertices);
 
         // Write it all to the room
         room.RoomData.NumRectangles = (short)faces.Count;
@@ -95,8 +91,6 @@ public class EMCreateRoomFunction : BaseEMFunction
             Lighting = DefaultVertex.Lighting,
             Vertex = v
         }).ToArray();
-
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
 
         level.Rooms.Add(room);
     }

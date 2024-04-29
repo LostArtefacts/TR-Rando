@@ -21,7 +21,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
         List<TR1RoomVertex> vertices = room.RoomData.Vertices.ToList();
         List<TRFace4> rectangles = room.RoomData.Rectangles.ToList();
 
-        for (int i = 0; i < room.Sectors.Length; i++)
+        for (int i = 0; i < room.Sectors.Count; i++)
         {
             TRRoomSector sector = room.Sectors[i];
 
@@ -63,9 +63,6 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
 
         room.RoomData.Rectangles = rectangles.ToArray();
         room.RoomData.NumRectangles = (short)rectangles.Count;
-
-        // Account for the added faces
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
     public void AddWaterSurface(TR2Room room, bool asCeiling, IEnumerable<int> adjacentRooms)
@@ -196,8 +193,6 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
 
         room.RoomData.Rectangles = rs.ToArray();
         room.RoomData.NumRectangles = (short)rs.Count;
-
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
     public void RemoveWaterSurface(TR2Room room)
