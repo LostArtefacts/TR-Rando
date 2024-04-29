@@ -55,7 +55,7 @@ public class EMFloodFunction : BaseWaterFunction
         // determining which rooms have water.
         foreach (int roomNumber in RoomNumbers)
         {
-            level.Rooms[data.ConvertRoom(roomNumber)].Fill();
+            level.Rooms[data.ConvertRoom(roomNumber)].ContainsWater = true;
         }
 
         // Work out rooms above and below and what needs water textures as ceilings

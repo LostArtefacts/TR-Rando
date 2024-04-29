@@ -60,55 +60,46 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
                     YBottom = reader.ReadInt32(),
                     YTop = reader.ReadInt32()
                 },
-
-                //Grab data
-                NumDataWords = reader.ReadUInt32()
             };
             _level.Rooms.Add(room);
 
-            room.Data = new ushort[room.NumDataWords];
-            for (int j = 0; j < room.NumDataWords; j++)
-            {
-                room.Data[j] = reader.ReadUInt16();
-            }
-
-            //Store what we just read
-            room.RoomData = ConvertToRoomData(room);
+            uint numWords = reader.ReadUInt32();
+            room.RoomData = ConvertToRoomData(reader.ReadUInt16s(numWords));
 
             //Portals
-            room.NumPortals = reader.ReadUInt16();
-            room.Portals = new TRRoomPortal[room.NumPortals];
-            for (int j = 0; j < room.NumPortals; j++)
+            ushort numPortals = reader.ReadUInt16();
+            room.Portals = new();
+            for (int j = 0; j < numPortals; j++)
             {
-                room.Portals[j] = TR2FileReadUtilities.ReadRoomPortal(reader);
+                room.Portals.Add(TR2FileReadUtilities.ReadRoomPortal(reader));
             }
 
             //Sectors
             room.NumZSectors = reader.ReadUInt16();
             room.NumXSectors = reader.ReadUInt16();
-            room.Sectors = new TRRoomSector[room.NumXSectors * room.NumZSectors];
+            room.Sectors = new();
             for (int j = 0; j < (room.NumXSectors * room.NumZSectors); j++)
             {
-                room.Sectors[j] = TR2FileReadUtilities.ReadRoomSector(reader);
+                room.Sectors.Add(TR2FileReadUtilities.ReadRoomSector(reader));
             }
 
             //Lighting
             room.AmbientIntensity = reader.ReadInt16();
             room.AmbientIntensity2 = reader.ReadInt16();
             room.LightMode = reader.ReadInt16();
-            room.NumLights = reader.ReadUInt16();
-            room.Lights = new TR2RoomLight[room.NumLights];
-            for (int j = 0; j < room.NumLights; j++)
+            ushort numLights = reader.ReadUInt16();
+            room.Lights = new();
+            for (int j = 0; j < numLights; j++)
             {
-                room.Lights[j] = TR2FileReadUtilities.ReadRoomLight(reader);
+                room.Lights.Add(TR2FileReadUtilities.ReadRoomLight(reader));
             }
 
             //Static meshes
-            room.NumStaticMeshes = reader.ReadUInt16();
-            room.StaticMeshes = new TR2RoomStaticMesh[room.NumStaticMeshes];
-            for (int j = 0; j < room.NumStaticMeshes; j++)
+            ushort numStaticMeshes = reader.ReadUInt16();
+            room.StaticMeshes = new();
+            for (int j = 0; j < numStaticMeshes; j++)
             {
-                room.StaticMeshes[j] = TR2FileReadUtilities.ReadRoomStaticMesh(reader);
+                room.StaticMeshes.Add(TR2FileReadUtilities.ReadRoomStaticMesh(reader));
             }
 
             room.AlternateRoom = reader.ReadInt16();
@@ -293,115 +284,115 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         _spriteBuilder.WriteSprites(writer, _level.Sprites);
     }
 
-    private static TR2RoomData ConvertToRoomData(TR2Room room)
+    private static TR2RoomData ConvertToRoomData(ushort[] rawData)
     {
-        int RoomDataOffset = 0;
+        int offset = 0;
 
         //Grab detailed room data
-        TR2RoomData RoomData = new()
+        TR2RoomData roomData = new()
         {
             //Room vertices
-            NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset])
+            NumVertices = UnsafeConversions.UShortToShort(rawData[offset])
         };
-        RoomData.Vertices = new TR2RoomVertex[RoomData.NumVertices];
+        roomData.Vertices = new TR2RoomVertex[roomData.NumVertices];
 
-        RoomDataOffset++;
+        offset++;
 
-        for (int j = 0; j < RoomData.NumVertices; j++)
+        for (int j = 0; j < roomData.NumVertices; j++)
         {
             TR2RoomVertex vertex = new()
             {
                 Vertex = new TRVertex()
             };
 
-            vertex.Vertex.X = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
-            vertex.Vertex.Y = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
-            vertex.Vertex.Z = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
-            vertex.Lighting = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
-            vertex.Attributes = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            vertex.Lighting2 = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
+            vertex.Vertex.X = UnsafeConversions.UShortToShort(rawData[offset]);
+            offset++;
+            vertex.Vertex.Y = UnsafeConversions.UShortToShort(rawData[offset]);
+            offset++;
+            vertex.Vertex.Z = UnsafeConversions.UShortToShort(rawData[offset]);
+            offset++;
+            vertex.Lighting = UnsafeConversions.UShortToShort(rawData[offset]);
+            offset++;
+            vertex.Attributes = rawData[offset];
+            offset++;
+            vertex.Lighting2 = UnsafeConversions.UShortToShort(rawData[offset]);
+            offset++;
 
-            RoomData.Vertices[j] = vertex;
+            roomData.Vertices[j] = vertex;
         }
 
         //Room rectangles
-        RoomData.NumRectangles = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-        RoomData.Rectangles = new TRFace4[RoomData.NumRectangles];
+        roomData.NumRectangles = UnsafeConversions.UShortToShort(rawData[offset]);
+        roomData.Rectangles = new TRFace4[roomData.NumRectangles];
 
-        RoomDataOffset++;
+        offset++;
 
-        for (int j = 0; j < RoomData.NumRectangles; j++)
+        for (int j = 0; j < roomData.NumRectangles; j++)
         {
             TRFace4 face = new()
             {
                 Vertices = new ushort[4]
             };
-            face.Vertices[0] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[1] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[2] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[3] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Texture = room.Data[RoomDataOffset];
-            RoomDataOffset++;
+            face.Vertices[0] = rawData[offset];
+            offset++;
+            face.Vertices[1] = rawData[offset];
+            offset++;
+            face.Vertices[2] = rawData[offset];
+            offset++;
+            face.Vertices[3] = rawData[offset];
+            offset++;
+            face.Texture = rawData[offset];
+            offset++;
 
-            RoomData.Rectangles[j] = face;
+            roomData.Rectangles[j] = face;
         }
 
         //Room triangles
-        RoomData.NumTriangles = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-        RoomData.Triangles = new TRFace3[RoomData.NumTriangles];
+        roomData.NumTriangles = UnsafeConversions.UShortToShort(rawData[offset]);
+        roomData.Triangles = new TRFace3[roomData.NumTriangles];
 
-        RoomDataOffset++;
+        offset++;
 
-        for (int j = 0; j < RoomData.NumTriangles; j++)
+        for (int j = 0; j < roomData.NumTriangles; j++)
         {
             TRFace3 face = new()
             {
                 Vertices = new ushort[3]
             };
-            face.Vertices[0] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[1] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Vertices[2] = room.Data[RoomDataOffset];
-            RoomDataOffset++;
-            face.Texture = room.Data[RoomDataOffset];
-            RoomDataOffset++;
+            face.Vertices[0] = rawData[offset];
+            offset++;
+            face.Vertices[1] = rawData[offset];
+            offset++;
+            face.Vertices[2] = rawData[offset];
+            offset++;
+            face.Texture = rawData[offset];
+            offset++;
 
-            RoomData.Triangles[j] = face;
+            roomData.Triangles[j] = face;
         }
 
         //Room sprites
-        RoomData.NumSprites = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-        RoomData.Sprites = new TRRoomSprite[RoomData.NumSprites];
+        roomData.NumSprites = UnsafeConversions.UShortToShort(rawData[offset]);
+        roomData.Sprites = new TRRoomSprite[roomData.NumSprites];
 
-        RoomDataOffset++;
+        offset++;
 
-        for (int j = 0; j < RoomData.NumSprites; j++)
+        for (int j = 0; j < roomData.NumSprites; j++)
         {
             TRRoomSprite face = new()
             {
-                Vertex = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset])
+                Vertex = UnsafeConversions.UShortToShort(rawData[offset])
             };
-            RoomDataOffset++;
-            face.Texture = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
-            RoomDataOffset++;
+            offset++;
+            face.Texture = UnsafeConversions.UShortToShort(rawData[offset]);
+            offset++;
 
-            RoomData.Sprites[j] = face;
+            roomData.Sprites[j] = face;
         }
 
-        Debug.Assert(RoomDataOffset == room.NumDataWords);
+        Debug.Assert(offset == rawData.Length);
 
-        return RoomData;
+        return roomData;
     }
 
     private void ReadSoundEffects(TRLevelReader reader)

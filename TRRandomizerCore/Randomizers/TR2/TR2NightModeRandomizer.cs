@@ -9,8 +9,6 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR2NightModeRandomizer : BaseTR2Randomizer
 {
-    public const uint DarknessRange = 10; // 0 = Dusk, 10 = Night
-
     internal TR2TextureMonitorBroker TextureMonitor { get; set; }
 
     private List<TR2ScriptedLevel> _nightLevels;
@@ -19,7 +17,7 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
     {
         _generator = new Random(seed);
 
-        Settings.NightModeDarkness = Math.Min(Settings.NightModeDarkness, DarknessRange);
+        Settings.NightModeDarkness = Math.Min(Settings.NightModeDarkness, RandoConsts.DarknessRange);
 
         ChooseNightLevels();
 
@@ -74,17 +72,50 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
 
     private void DarkenRooms(TR2Level level)
     {
-        double scale = (100 - DarknessRange + Settings.NightModeDarkness) / 100d;
+        double scale = (100 - RandoConsts.DarknessRange + Settings.NightModeDarkness) / 100d;
 
-        short intensity1 = (short)(TR2Room.DarknessIntensity1 * scale);
-        ushort intensity2 = (ushort)(TR2Room.DarknessIntensity2 * (2 - scale));
+        short intensity1 = (short)(RandoConsts.DarknessIntensity1 * scale);
+        ushort intensity2 = (ushort)(RandoConsts.DarknessIntensity2 * (2 - scale));
 
         foreach (TR2Room room in level.Rooms)
         {
-            room.SetAmbient(intensity1);
-            room.SetLights(intensity2);
-            room.SetStaticMeshLights((ushort)intensity1);
-            room.SetVertexLight(intensity1);
+            SetAmbient(room, intensity1);
+            SetLights(room, intensity2);
+            SetStaticMeshLights(room, (ushort)intensity1);
+            SetVertexLight(room, intensity1);
+        }
+    }
+
+    private static void SetAmbient(TR2Room room, short val)
+    {
+        room.AmbientIntensity = val;
+        room.AmbientIntensity2 = val;
+    }
+
+    private static void SetLights(TR2Room room, ushort val)
+    {
+        foreach (TR2RoomLight light in room.Lights)
+        {
+            light.Intensity1 = val;
+            light.Intensity2 = val;
+        }
+    }
+
+    private static void SetStaticMeshLights(TR2Room room, ushort val)
+    {
+        foreach (TR2RoomStaticMesh mesh in room.StaticMeshes)
+        {
+            mesh.Intensity1 = val;
+            mesh.Intensity2 = val;
+        }
+    }
+
+    private static void SetVertexLight(TR2Room room, short val)
+    {
+        foreach (TR2RoomVertex vert in room.RoomData.Vertices)
+        {
+            vert.Lighting = val;
+            vert.Lighting2 = val;
         }
     }
 

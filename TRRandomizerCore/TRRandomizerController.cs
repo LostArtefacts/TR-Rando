@@ -1428,7 +1428,7 @@ public class TRRandomizerController
         set => LevelRandomizer.NightModeDarkness = value;
     }
 
-    public static uint NightModeDarknessRange => TR2NightModeRandomizer.DarknessRange;
+    public static uint NightModeDarknessRange => RandoConsts.DarknessRange;
 
     public bool NightModeAssaultCourse
     {

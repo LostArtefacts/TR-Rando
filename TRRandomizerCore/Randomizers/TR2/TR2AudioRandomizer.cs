@@ -87,7 +87,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         _audioRandomizer.ResetFloorMap();
         foreach (TR2Room room in level.Rooms)
         {
-            _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
+            _audioRandomizer.RandomizeFloorTracks(room.Sectors.ToArray(), floorData, _generator, sectorIndex =>
             {
                 // Get the midpoint of the tile in world coordinates
                 return new Vector2

@@ -39,8 +39,6 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
 
                 room.RoomData.Rectangles = faces.ToArray();
                 room.RoomData.NumRectangles = (short)faces.Count;
-
-                room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
             }
         }
 
@@ -54,8 +52,6 @@ public class EMAddFaceFunction : BaseEMFunction, ITextureModifier
 
                 room.RoomData.Triangles = faces.ToArray();
                 room.RoomData.NumTriangles = (short)faces.Count;
-
-                room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
             }
         }
     }

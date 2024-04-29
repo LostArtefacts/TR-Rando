@@ -163,7 +163,6 @@ public class EMModifyFaceFunction : BaseEMFunction
 
         room.RoomData.Vertices = allVertices.ToArray();
         room.RoomData.NumVertices = (short)allVertices.Count;
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
     private static void ModifyRectangles(TR3Room room, EMFaceModification mod)
@@ -227,7 +226,6 @@ public class EMModifyFaceFunction : BaseEMFunction
 
         room.RoomData.Vertices = allVertices.ToArray();
         room.RoomData.NumVertices = (short)allVertices.Count;
-        room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
     private static void ModifyTriangles(TR3Room room, EMFaceModification mod)

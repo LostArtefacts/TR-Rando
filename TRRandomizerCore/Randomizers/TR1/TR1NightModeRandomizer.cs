@@ -9,8 +9,6 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR1NightModeRandomizer : BaseTR1Randomizer
 {
-    public const uint DarknessRange = 10; // 0 = Dusk, 10 = Night
-
     private static readonly Dictionary<string, List<int>> _excludedRooms = new()
     {
         [TR1LevelNames.ATLANTIS]
@@ -25,7 +23,7 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
     {
         _generator = new Random(seed);
 
-        Settings.NightModeDarkness = Math.Min(Settings.NightModeDarkness, DarknessRange);
+        Settings.NightModeDarkness = Math.Min(Settings.NightModeDarkness, RandoConsts.DarknessRange);
 
         ChooseNightLevels();
 
@@ -74,10 +72,10 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
 
     private void DarkenRooms(TR1CombinedLevel level)
     {
-        double scale = (100 - DarknessRange + Settings.NightModeDarkness) / 100d;
+        double scale = (100 - RandoConsts.DarknessRange + Settings.NightModeDarkness) / 100d;
 
-        short intensity1 = (short)(TR2Room.DarknessIntensity1 * scale);
-        ushort intensity2 = (ushort)(TR2Room.DarknessIntensity2 * (2 - scale));
+        short intensity1 = (short)(RandoConsts.DarknessIntensity1 * scale);
+        ushort intensity2 = (ushort)(RandoConsts.DarknessIntensity2 * (2 - scale));
 
         for (int i = 0; i < level.Data.Rooms.Count; i++)
         {

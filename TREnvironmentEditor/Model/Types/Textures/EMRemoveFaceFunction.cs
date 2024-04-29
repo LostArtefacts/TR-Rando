@@ -74,8 +74,6 @@ public class EMRemoveFaceFunction : BaseEMFunction
             room.RoomData.Triangles = tempTris.ToArray();
             room.RoomData.NumRectangles = (short)room.RoomData.Rectangles.Length;
             room.RoomData.NumTriangles = (short)room.RoomData.Triangles.Length;
-
-            room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
         }
     }
 

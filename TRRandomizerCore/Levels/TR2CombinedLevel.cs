@@ -1,5 +1,4 @@
-﻿using TRRandomizerCore.Utilities;
-using TRGE.Core;
+﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
@@ -74,37 +73,6 @@ public class TR2CombinedLevel
     /// Checks if the current level is the assault course.
     /// </summary>
     public bool IsAssault => Is(TR2LevelNames.ASSAULT);
-
-    public bool CanPerformDraining(short room)
-    {
-        foreach (List<int> area in RoomWaterUtilities.RoomRemovalWaterMap[Name])
-        {
-            if (area.Contains(room))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public bool PerformDraining(short room)
-    {
-        foreach (List<int> area in RoomWaterUtilities.RoomRemovalWaterMap[Name])
-        {
-            if (area.Contains(room))
-            {
-                foreach (int filledRoom in area)
-                {
-                    Data.Rooms[filledRoom].Drain();
-                }
-
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     public List<TR2Entity> GetEnemyEntities()
     {
