@@ -31,7 +31,7 @@ public class EMRefaceFunction : BaseEMFunction, ITextureModifier
             foreach (int roomIndex in TextureMap[texture].Keys)
             {
                 TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+                ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles.ToArray(), room.RoomData.Triangles.ToArray());
             }
         }
     }

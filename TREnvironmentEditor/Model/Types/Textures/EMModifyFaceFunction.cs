@@ -37,10 +37,10 @@ public class EMModifyFaceFunction : BaseEMFunction
                 switch (rot.FaceType)
                 {
                     case EMTextureFaceType.Rectangles:
-                        RotateRectangles(room.RoomData.Rectangles, rot);
+                        RotateRectangles(room.RoomData.Rectangles.ToArray(), rot);
                         break;
                     case EMTextureFaceType.Triangles:
-                        RotateTriangles(room.RoomData.Triangles, rot);
+                        RotateTriangles(room.RoomData.Triangles.ToArray(), rot);
                         break;
                 }
             }
@@ -127,24 +127,20 @@ public class EMModifyFaceFunction : BaseEMFunction
 
     private static void ModifyRectangles(TR1Room room, EMFaceModification mod)
     {
-        List<TR1RoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
         {
             TRFace4 rect = room.RoomData.Rectangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TR1RoomVertex currentRoomVertex = allVertices[rect.Vertices[vertIndex]];
+                TR1RoomVertex currentRoomVertex = room.RoomData.Vertices[rect.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
                 TR1RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
-                rect.Vertices[vertIndex] = (ushort)allVertices.Count;
-                allVertices.Add(newRoomVertex);
+                rect.Vertices[vertIndex] = (ushort)room.RoomData.Vertices.Count;
+                room.RoomData.Vertices.Add(newRoomVertex);
             }
         }
-
-        room.RoomData.Vertices = allVertices.ToArray();
-        room.RoomData.NumVertices = (short)allVertices.Count;
     }
 
     private static void ModifyRectangles(TR2Room room, EMFaceModification mod)
@@ -195,24 +191,20 @@ public class EMModifyFaceFunction : BaseEMFunction
 
     private static void ModifyTriangles(TR1Room room, EMFaceModification mod)
     {
-        List<TR1RoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
         {
             TRFace3 tri = room.RoomData.Triangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
-                TR1RoomVertex currentRoomVertex = allVertices[tri.Vertices[vertIndex]];
+                TR1RoomVertex currentRoomVertex = room.RoomData.Vertices[tri.Vertices[vertIndex]];
                 TRVertex newVertex = mod.VertexChanges[vertIndex];
                 TR1RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
                 // Remap the face to use this vertex
-                tri.Vertices[vertIndex] = (ushort)allVertices.Count;
-                allVertices.Add(newRoomVertex);
+                tri.Vertices[vertIndex] = (ushort)room.RoomData.Vertices.Count;
+                room.RoomData.Vertices.Add(newRoomVertex);
             }
         }
-
-        room.RoomData.Vertices = allVertices.ToArray();
-        room.RoomData.NumVertices = (short)allVertices.Count;
     }
 
     private static void ModifyTriangles(TR2Room room, EMFaceModification mod)

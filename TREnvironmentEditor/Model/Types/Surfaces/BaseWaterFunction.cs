@@ -18,9 +18,6 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
             return;
         }
 
-        List<TR1RoomVertex> vertices = room.RoomData.Vertices.ToList();
-        List<TRFace4> rectangles = room.RoomData.Rectangles.ToList();
-
         for (int i = 0; i < room.Sectors.Count; i++)
         {
             TRRoomSector sector = room.Sectors[i];
@@ -41,7 +38,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                 for (int k = 0; k < defaultVerts.Count; k++)
                 {
                     TRVertex vert = defaultVerts[k];
-                    int vi = vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+                    int vi = room.RoomData.Vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
                     if (vi == -1)
                     {
                         vi = CreateRoomVertex(room, vert);
@@ -53,16 +50,13 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                     vertIndices.Add((ushort)vi);
                 }
 
-                rectangles.Add(new TRFace4
+                room.RoomData.Rectangles.Add(new()
                 {
                     Texture = WaterTextures[0],
                     Vertices = vertIndices.ToArray()
                 });
             }
         }
-
-        room.RoomData.Rectangles = rectangles.ToArray();
-        room.RoomData.NumRectangles = (short)rectangles.Count;
     }
 
     public void AddWaterSurface(TR2Room room, bool asCeiling, IEnumerable<int> adjacentRooms)
@@ -188,11 +182,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
 
     public void RemoveWaterSurface(TR1Room room)
     {
-        List<TRFace4> rs = room.RoomData.Rectangles.ToList();
-        RemoveWaterSurfaces(rs);
-
-        room.RoomData.Rectangles = rs.ToArray();
-        room.RoomData.NumRectangles = (short)rs.Count;
+        RemoveWaterSurfaces(room.RoomData.Rectangles);
     }
 
     public void RemoveWaterSurface(TR2Room room)

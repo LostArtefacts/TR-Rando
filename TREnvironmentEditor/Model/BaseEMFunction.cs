@@ -49,17 +49,12 @@ public abstract class BaseEMFunction
 
     public static int CreateRoomVertex(TR1Room room, TRVertex vert, short lighting = 6574)
     {
-        TR1RoomVertex v = new()
+        room.RoomData.Vertices.Add(new()
         {
             Lighting = lighting,
             Vertex = vert
-        };
-
-        List<TR1RoomVertex> verts = room.RoomData.Vertices.ToList();
-        verts.Add(v);
-        room.RoomData.Vertices = verts.ToArray();
-        room.RoomData.NumVertices++;
-        return verts.Count - 1;
+        });
+        return room.RoomData.Vertices.Count - 1;
     }
 
     public static int CreateRoomVertex(TR2Room room, TRVertex vert, short lighting = 6574, short lighting2 = 6574)

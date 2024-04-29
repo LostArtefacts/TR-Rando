@@ -15,14 +15,12 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             TR1Room room = level.Rooms[data.ConvertRoom(location.Room)];
-            List<TR1RoomVertex> vertices = room.RoomData.Vertices.ToList();
-            List<TRRoomSprite> sprites = room.RoomData.Sprites.ToList();
-            sprites.Add(new()
+            room.RoomData.Sprites.Add(new()
             {
                 Texture = Texture,
-                Vertex = (short)vertices.Count
+                Vertex = (short)room.RoomData.Vertices.Count
             });
-            vertices.Add(new()
+            room.RoomData.Vertices.Add(new()
             {
                 Lighting = Vertex.Lighting,
                 Vertex = new()
@@ -32,11 +30,6 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
                     Z = (short)(location.Z - room.Info.Z)
                 }
             });
-
-            room.RoomData.Vertices = vertices.ToArray();
-            room.RoomData.Sprites = sprites.ToArray();
-            room.RoomData.NumSprites++;
-            room.RoomData.NumVertices++;
         }
     }
 

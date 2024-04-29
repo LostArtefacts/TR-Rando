@@ -16,7 +16,7 @@ public static class FaceUtilities
         List<TRFace4> faces = new();
         foreach (TR1Room room in level.Rooms)
         {
-            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors.ToArray(), room.NumZSectors, room.RoomData.Rectangles, v =>
+            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors.ToArray(), room.NumZSectors, room.RoomData.Rectangles.ToArray(), v =>
             {
                 return room.RoomData.Vertices[v].Vertex;
             }));
