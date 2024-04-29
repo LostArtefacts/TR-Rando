@@ -35,7 +35,7 @@ public class Room
             Ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1),
             NumXSectors = room.NumXSectors,
             NumZSectors = room.NumZSectors,
-            Sectors = room.SectorList.ToList(),
+            Sectors = room.Sectors.ToList(),
             FloorPlan = new List<FloorPlan>(),
             Boxes = new List<Box>()
         };

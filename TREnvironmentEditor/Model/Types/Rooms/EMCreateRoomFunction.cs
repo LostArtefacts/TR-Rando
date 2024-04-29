@@ -142,7 +142,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         // Make the sectors first
         List<TRRoomSector> sectors = GenerateSectors(ceiling, floor);
-        room.SectorList = sectors.ToArray();
+        room.Sectors = sectors.ToArray();
 
         // Generate the box, zone and overlap data
         FDControl floorData = new();

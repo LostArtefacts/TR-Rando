@@ -59,7 +59,7 @@ public class EMRemoveTriggerFunction : BaseEMFunction
         {
             foreach (int roomNumber in Rooms)
             {
-                RemoveSectorListTriggers(level.Rooms[data.ConvertRoom(roomNumber)].SectorList, control);
+                RemoveSectorListTriggers(level.Rooms[data.ConvertRoom(roomNumber)].Sectors, control);
             }
         }
 

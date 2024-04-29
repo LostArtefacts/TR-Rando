@@ -48,7 +48,7 @@ public class EMCeilingFunction : BaseEMFunction
             TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
             int oldYTop = room.Info.YTop;
             int min = int.MaxValue;
-            foreach (TRRoomSector sector in room.SectorList)
+            foreach (TRRoomSector sector in room.Sectors)
             {
                 if (!sector.IsWall)
                 {

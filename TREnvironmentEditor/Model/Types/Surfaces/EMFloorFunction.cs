@@ -282,7 +282,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         short roomNumber = data.ConvertRoom(Location.Room);
         TR2Room room = level.Rooms[roomNumber];
         TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, fdc);
-        int sectorIndex = room.SectorList.ToList().IndexOf(sector);
+        int sectorIndex = room.Sectors.ToList().IndexOf(sector);
 
         // Find the current vertices for this tile
         short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
@@ -436,7 +436,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
     private static void AlterSectorBox(TR2Level level, TR2Room room, int sectorIndex)
     {
-        TRRoomSector sector = room.SectorList[sectorIndex];
+        TRRoomSector sector = room.Sectors[sectorIndex];
         if (sector.BoxIndex == ushort.MaxValue)
         {
             return;

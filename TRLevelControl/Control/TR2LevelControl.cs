@@ -86,10 +86,10 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             //Sectors
             room.NumZSectors = reader.ReadUInt16();
             room.NumXSectors = reader.ReadUInt16();
-            room.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
+            room.Sectors = new TRRoomSector[room.NumXSectors * room.NumZSectors];
             for (int j = 0; j < (room.NumXSectors * room.NumZSectors); j++)
             {
-                room.SectorList[j] = TR2FileReadUtilities.ReadRoomSector(reader);
+                room.Sectors[j] = TR2FileReadUtilities.ReadRoomSector(reader);
             }
 
             //Lighting

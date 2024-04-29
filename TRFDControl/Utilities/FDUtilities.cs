@@ -91,7 +91,7 @@ public static class FDUtilities
     {
         foreach (TR2Room room in level.Rooms)
         {
-            RemoveEntityTriggers(room.SectorList, entityIndex, control);
+            RemoveEntityTriggers(room.Sectors, entityIndex, control);
         }
     }
 
@@ -274,7 +274,7 @@ public static class FDUtilities
                 yFloor = room.NumXSectors - 1;
             }
 
-            sector = room.SectorList[xFloor + yFloor * room.NumZSectors];
+            sector = room.Sectors[xFloor + yFloor * room.NumZSectors];
             data = GetDoor(sector, floorData);
             if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Count - 1)
             {
@@ -293,7 +293,7 @@ public static class FDUtilities
                 }
 
                 room = level.Rooms[sector.RoomBelow];
-                sector = room.SectorList[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
+                sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
             }
             while (y >= (sector.Floor << 8));
         }
@@ -307,7 +307,7 @@ public static class FDUtilities
                 }
 
                 room = level.Rooms[sector.RoomAbove];
-                sector = room.SectorList[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
+                sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
             }
             while (y < (sector.RoomAbove << 8));
         }
@@ -555,7 +555,7 @@ public static class FDUtilities
             return TRConsts.NoHeight;
         }
 
-        TRRoomSector baseSector = GetRoomSector(x, z, room.SectorList, room.Info, room.NumZSectors);
+        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         TRRoomSector floorSector = baseSector;
         while (floorSector.RoomBelow != TRConsts.NoRoom)
         {
@@ -564,7 +564,7 @@ public static class FDUtilities
             {
                 break;
             }
-            floorSector = GetRoomSector(x, z, room.SectorList, room.Info, room.NumZSectors);
+            floorSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 
         TRRoomSector ceilingSector = baseSector;
@@ -575,7 +575,7 @@ public static class FDUtilities
             {
                 break;
             }
-            ceilingSector = GetRoomSector(x, z, room.SectorList, room.Info, room.NumZSectors);
+            ceilingSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
         }
 
         return GetHeight(x, z, floorSector, ceilingSector, floorData);

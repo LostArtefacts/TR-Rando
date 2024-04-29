@@ -33,7 +33,7 @@ public class TR2Room : ISerializableCompact
     public ushort NumXSectors { get; set; }
 
     //(Xs * Zs) * 8 bytes 
-    public TRRoomSector[] SectorList { get; set; }
+    public TRRoomSector[] Sectors { get; set; }
 
     //2 bytes
     public short AmbientIntensity { get; set; }
@@ -177,7 +177,7 @@ public class TR2Room : ISerializableCompact
             writer.Write(NumZSectors);
             writer.Write(NumXSectors);
 
-            foreach (TRRoomSector sector in SectorList)
+            foreach (TRRoomSector sector in Sectors)
             {
                 writer.Write(sector.Serialize());
             }

@@ -64,7 +64,7 @@ public class EMFloodFunction : BaseWaterFunction
         {
             TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
 
-            ISet<byte> roomsBelow = GetAdjacentRooms(room.SectorList, false);
+            ISet<byte> roomsBelow = GetAdjacentRooms(room.Sectors, false);
             foreach (byte roomBelowNumber in roomsBelow)
             {
                 TR2Room roomBelow = level.Rooms[roomBelowNumber];
@@ -75,7 +75,7 @@ public class EMFloodFunction : BaseWaterFunction
                 }
             }
 
-            ISet<byte> roomsAbove = GetAdjacentRooms(room.SectorList, true);
+            ISet<byte> roomsAbove = GetAdjacentRooms(room.Sectors, true);
             foreach (byte roomAboveNumber in roomsAbove)
             {
                 TR2Room roomAbove = level.Rooms[roomAboveNumber];

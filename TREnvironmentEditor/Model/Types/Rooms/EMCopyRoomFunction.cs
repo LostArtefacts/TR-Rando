@@ -194,7 +194,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                 Triangles = new TRFace3[baseRoom.RoomData.NumTriangles],
                 Vertices = new TR2RoomVertex[baseRoom.RoomData.NumVertices]
             },
-            SectorList = new TRRoomSector[baseRoom.SectorList.Length],
+            Sectors = new TRRoomSector[baseRoom.Sectors.Length],
             StaticMeshes = new TR2RoomStaticMesh[baseRoom.NumStaticMeshes]
         };
 
@@ -286,9 +286,9 @@ public class EMCopyRoomFunction : BaseEMFunction
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        for (int i = 0; i < newRoom.SectorList.Length; i++)
+        for (int i = 0; i < newRoom.Sectors.Length; i++)
         {
-            newRoom.SectorList[i] = RebuildSector(baseRoom.SectorList[i], i, floorData, ydiff, baseRoom.Info);
+            newRoom.Sectors[i] = RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info);
         }
 
         floorData.WriteToLevel(level);

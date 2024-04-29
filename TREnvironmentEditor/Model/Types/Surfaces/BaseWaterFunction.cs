@@ -70,9 +70,9 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
         List<TR2RoomVertex> vertices = room.RoomData.Vertices.ToList();
         List<TRFace4> rectangles = room.RoomData.Rectangles.ToList();
 
-        for (int i = 0; i < room.SectorList.Length; i++)
+        for (int i = 0; i < room.Sectors.Length; i++)
         {
-            TRRoomSector sector = room.SectorList[i];
+            TRRoomSector sector = room.Sectors[i];
 
             bool ceilingMatch = asCeiling && adjacentRooms.Contains(sector.RoomAbove);
             bool floorMatch = !asCeiling && adjacentRooms.Contains(sector.RoomBelow);

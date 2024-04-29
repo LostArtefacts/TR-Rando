@@ -170,7 +170,7 @@ public class IOTests : TestBase
         int room, roomSector = -1;
         for (room = 0; room < lvl.Rooms.Count; room++)
         {
-            roomSector = lvl.Rooms[room].SectorList.ToList().FindIndex(s => s.FDIndex == 0);
+            roomSector = lvl.Rooms[room].Sectors.ToList().FindIndex(s => s.FDIndex == 0);
             if (roomSector != -1)
             {
                 break;
@@ -182,7 +182,7 @@ public class IOTests : TestBase
             Assert.Fail("Could not locate a Room Sector that does not have floor data associated with it.");
         }
 
-        TRRoomSector sector = lvl.Rooms[room].SectorList[roomSector];
+        TRRoomSector sector = lvl.Rooms[room].Sectors[roomSector];
 
         // Create a slot in the FD for this sector
         fdataReader.CreateFloorData(sector);
@@ -209,7 +209,7 @@ public class IOTests : TestBase
         lvl = WriteReadTempLevel(lvl);
 
         //Reassign the sector
-        sector = lvl.Rooms[room].SectorList[roomSector];
+        sector = lvl.Rooms[room].Sectors[roomSector];
 
         fdataReader = new FDControl();
         fdataReader.ParseFromLevel(lvl);
@@ -245,7 +245,7 @@ public class IOTests : TestBase
         int room, roomSector = -1;
         for (room = 0; room < lvl.Rooms.Count; room++)
         {
-            roomSector = lvl.Rooms[room].SectorList.ToList().FindIndex(s => s.FDIndex > 0);
+            roomSector = lvl.Rooms[room].Sectors.ToList().FindIndex(s => s.FDIndex > 0);
             if (roomSector != -1)
             {
                 break;
@@ -257,7 +257,7 @@ public class IOTests : TestBase
             Assert.Fail("Could not locate a Room Sector that has floor data associated with it.");
         }
 
-        TRRoomSector sector = lvl.Rooms[room].SectorList[roomSector];
+        TRRoomSector sector = lvl.Rooms[room].Sectors[roomSector];
 
         // Remove the FD for this sector
         fdataReader.RemoveFloorData(sector);
@@ -270,7 +270,7 @@ public class IOTests : TestBase
         lvl = WriteReadTempLevel(lvl);
 
         //Reassign the sector
-        sector = lvl.Rooms[room].SectorList[roomSector];
+        sector = lvl.Rooms[room].Sectors[roomSector];
 
         fdataReader = new FDControl();
         fdataReader.ParseFromLevel(lvl);

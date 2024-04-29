@@ -77,7 +77,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 Triangles = new TRFace3[roomDef.Room.RoomData.NumTriangles],
                 Vertices = new TR2RoomVertex[roomDef.Room.RoomData.NumVertices]
             },
-            SectorList = new TRRoomSector[roomDef.Room.SectorList.Length],
+            Sectors = new TRRoomSector[roomDef.Room.Sectors.Length],
             StaticMeshes = new TR2RoomStaticMesh[roomDef.Room.NumStaticMeshes]
         };
 
@@ -216,12 +216,12 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
         }
 
-        for (int i = 0; i < newRoom.SectorList.Length; i++)
+        for (int i = 0; i < newRoom.Sectors.Length; i++)
         {
             int sectorYDiff = 0;
-            ushort sectorBoxIndex = roomDef.Room.SectorList[i].BoxIndex;
+            ushort sectorBoxIndex = roomDef.Room.Sectors[i].BoxIndex;
             // Only change the sector if it's not impenetrable and we don't want to preserve the existing zoning
-            if (roomDef.Room.SectorList[i].Ceiling != TRConsts.WallClicks || roomDef.Room.SectorList[i].Floor != TRConsts.WallClicks)
+            if (roomDef.Room.Sectors[i].Ceiling != TRConsts.WallClicks || roomDef.Room.Sectors[i].Floor != TRConsts.WallClicks)
             {
                 sectorYDiff = ydiff / TRConsts.Step1;
                 if (!PreserveBoxes)
@@ -230,19 +230,19 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 }
             }
 
-            newRoom.SectorList[i] = new TRRoomSector
+            newRoom.Sectors[i] = new TRRoomSector
             {
                 BoxIndex = sectorBoxIndex,
-                Ceiling = (sbyte)(roomDef.Room.SectorList[i].Ceiling + sectorYDiff),
+                Ceiling = (sbyte)(roomDef.Room.Sectors[i].Ceiling + sectorYDiff),
                 FDIndex = 0, // Initialise to no FD
-                Floor = (sbyte)(roomDef.Room.SectorList[i].Floor + sectorYDiff),
-                RoomAbove = PreservePortals ? roomDef.Room.SectorList[i].RoomAbove : (byte)TRConsts.NoRoom,
-                RoomBelow = PreservePortals ? roomDef.Room.SectorList[i].RoomBelow : (byte)TRConsts.NoRoom
+                Floor = (sbyte)(roomDef.Room.Sectors[i].Floor + sectorYDiff),
+                RoomAbove = PreservePortals ? roomDef.Room.Sectors[i].RoomAbove : (byte)TRConsts.NoRoom,
+                RoomBelow = PreservePortals ? roomDef.Room.Sectors[i].RoomBelow : (byte)TRConsts.NoRoom
             };
 
             // Duplicate the FD too for everything except triggers. Track any portals
             // so they can be blocked off.
-            ushort fdIndex = roomDef.Room.SectorList[i].FDIndex;
+            ushort fdIndex = roomDef.Room.Sectors[i].FDIndex;
             if (roomDef.FloorData.ContainsKey(fdIndex))
             {
                 List<FDEntry> entries = roomDef.FloorData[fdIndex];
@@ -254,7 +254,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                         case FDFunctions.PortalSector:
                             // This portal will no longer be valid in the new room's position,
                             // so block off the wall
-                            newRoom.SectorList[i].Floor = newRoom.SectorList[i].Ceiling = TRConsts.WallClicks;
+                            newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = TRConsts.WallClicks;
                             break;
                         case FDFunctions.FloorSlant:
                             FDSlantEntry slantEntry = entry as FDSlantEntry;
@@ -291,8 +291,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
                 if (newEntries.Count > 0)
                 {
-                    floorData.CreateFloorData(newRoom.SectorList[i]);
-                    floorData.Entries[newRoom.SectorList[i].FDIndex].AddRange(newEntries);
+                    floorData.CreateFloorData(newRoom.Sectors[i]);
+                    floorData.Entries[newRoom.Sectors[i].FDIndex].AddRange(newEntries);
                 }
             }
         }
