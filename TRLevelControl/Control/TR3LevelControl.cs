@@ -219,7 +219,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
                         Green = reader.ReadByte(),
                         Blue = reader.ReadByte()
                     },
-                    LightType = reader.ReadByte(),
+                    Type = (TR3RoomLightType)reader.ReadByte(),
                     LightProperties = reader.ReadInt16s(4)
                 });
             }
@@ -280,7 +280,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
                 writer.Write(light.Y);
                 writer.Write(light.Z);
                 writer.Write(light.Colour);
-                writer.Write(light.LightType);
+                writer.Write((byte)light.Type);
                 writer.Write(light.LightProperties);
             }
 

@@ -339,7 +339,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             {
                 Colour = roomDef.Room.Lights[i].Colour,
                 LightProperties = roomDef.Room.Lights[i].LightProperties,
-                LightType = roomDef.Room.Lights[i].LightType,
+                Type = roomDef.Room.Lights[i].Type,
                 X = roomDef.Room.Lights[i].X + xdiff,
                 Y = roomDef.Room.Lights[i].Y + ydiff,
                 Z = roomDef.Room.Lights[i].Z + zdiff

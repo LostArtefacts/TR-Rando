@@ -1,53 +1,18 @@
-﻿using System.Text;
-using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TR2RoomLight : ISerializableCompact
+public class TR2RoomLight : ICloneable
 {
     public int X { get; set; }
-
     public int Y { get; set; }
-
     public int Z { get; set; }
-
     public ushort Intensity1 { get; set; }
-
     public ushort Intensity2 { get; set; }
-
     public uint Fade1 { get; set; }
-
     public uint Fade2 { get; set; }
 
-    public override string ToString()
-    {
-        StringBuilder sb = new(base.ToString());
+    public TR2RoomLight Clone()
+        => (TR2RoomLight)MemberwiseClone();
 
-        sb.Append(" X: " + X);
-        sb.Append(" Y: " + Y);
-        sb.Append(" Z: " + Z);
-        sb.Append(" Int1: " + Intensity1);
-        sb.Append(" Int2: " + Intensity2);
-        sb.Append(" Fade1: " + Fade1);
-        sb.Append(" Fade2: " + Fade2);
-
-        return sb.ToString();
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(X);
-            writer.Write(Y);
-            writer.Write(Z);
-            writer.Write(Intensity1);
-            writer.Write(Intensity2);
-            writer.Write(Fade1);
-            writer.Write(Fade2);
-        }
-
-        return stream.ToArray();
-    }
+    object ICloneable.Clone()
+        => Clone();
 }

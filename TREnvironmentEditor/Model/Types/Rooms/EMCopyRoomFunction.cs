@@ -36,7 +36,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                 YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
                 Z = NewLocation.Z
             },
-            Lights = new(),
+            Lights = new(baseRoom.Lights.Select(l => l.Clone())),
             
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
@@ -46,20 +46,13 @@ public class EMCopyRoomFunction : BaseEMFunction
             StaticMeshes = new()
         };
 
-        // Lights
-        for (int i = 0; i < baseRoom.Lights.Count; i++)
+        foreach (TR1RoomLight light in newRoom.Lights)
         {
-            newRoom.Lights.Add(new()
-            {
-                Fade = baseRoom.Lights[i].Fade,
-                Intensity = baseRoom.Lights[i].Intensity,
-                X = baseRoom.Lights[i].X + xdiff,
-                Y = baseRoom.Lights[i].Y + ydiff,
-                Z = baseRoom.Lights[i].Z + zdiff
-            });
+            light.X += xdiff;
+            light.Y += ydiff;
+            light.Z += zdiff;
         }
 
-        // Vertices
         foreach (TRVertex vertex in newRoom.Mesh.Vertices.Select(v => v.Vertex))
         {
             vertex.Y += (short)ydiff;
@@ -122,7 +115,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                 YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
                 Z = NewLocation.Z
             },
-            Lights = new(),
+            Lights = new(baseRoom.Lights.Select(l => l.Clone())),
             LightMode = baseRoom.LightMode,
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
@@ -132,22 +125,13 @@ public class EMCopyRoomFunction : BaseEMFunction
             StaticMeshes = new()
         };
 
-        // Lights
-        for (int i = 0; i < baseRoom.Lights.Count; i++)
+        foreach (TR2RoomLight light in newRoom.Lights)
         {
-            newRoom.Lights.Add(new()
-            {
-                Fade1 = baseRoom.Lights[i].Fade1,
-                Fade2 = baseRoom.Lights[i].Fade2,
-                Intensity1 = baseRoom.Lights[i].Intensity1,
-                Intensity2 = baseRoom.Lights[i].Intensity2,
-                X = baseRoom.Lights[i].X + xdiff,
-                Y = baseRoom.Lights[i].Y + ydiff,
-                Z = baseRoom.Lights[i].Z + zdiff
-            });
+            light.X += xdiff;
+            light.Y += ydiff;
+            light.Z += zdiff;
         }
 
-        // Vertices
         foreach (TRVertex vertex in newRoom.Mesh.Vertices.Select(v => v.Vertex))
         {
             vertex.Y += (short)ydiff;
@@ -211,7 +195,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                 YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
                 Z = NewLocation.Z
             },
-            Lights = new(),
+            Lights = new(baseRoom.Lights.Select(l => l.Clone())),
             LightMode = baseRoom.LightMode,
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
@@ -223,21 +207,13 @@ public class EMCopyRoomFunction : BaseEMFunction
             WaterScheme = baseRoom.WaterScheme
         };
 
-        // Lights
-        for (int i = 0; i < baseRoom.Lights.Count; i++)
+        foreach (TR3RoomLight light in newRoom.Lights)
         {
-            newRoom.Lights.Add(new()
-            {
-                Colour = baseRoom.Lights[i].Colour,
-                LightProperties = baseRoom.Lights[i].LightProperties,
-                LightType = baseRoom.Lights[i].LightType,
-                X = baseRoom.Lights[i].X + xdiff,
-                Y = baseRoom.Lights[i].Y + ydiff,
-                Z = baseRoom.Lights[i].Z + zdiff
-            });
+            light.X += xdiff;
+            light.Y += ydiff;
+            light.Z += zdiff;
         }
 
-        // Vertices
         foreach (TRVertex vertex in newRoom.Mesh.Vertices.Select(v => v.Vertex))
         {
             vertex.Y += (short)ydiff;
