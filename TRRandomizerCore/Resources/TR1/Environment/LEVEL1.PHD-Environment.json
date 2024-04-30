@@ -2119,7 +2119,7 @@
         {
           "Comments": "Add some decoration.",
           "EMType": 31,
-          "Texture": 150,
+          "ID": 195,
           "Vertex": {
             "Lighting": 2048
           },
@@ -2140,7 +2140,7 @@
         },
         {
           "EMType": 31,
-          "Texture": 149,
+          "ID": 194,
           "Vertex": {
             "Lighting": 2048
           },
@@ -2155,7 +2155,7 @@
         },
         {
           "EMType": 31,
-          "Texture": 155,
+          "ID": 233,
           "Vertex": {
             "Lighting": 2048
           },

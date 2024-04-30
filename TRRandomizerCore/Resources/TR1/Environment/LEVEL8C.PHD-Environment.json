@@ -3005,7 +3005,7 @@
         {
           "Comments": "Add some troll items.",
           "EMType": 31,
-          "Texture": 8,
+          "ID": 94,
           "Vertex": {
             "Lighting": 4096
           },

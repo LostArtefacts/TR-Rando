@@ -2,7 +2,8 @@
 
 namespace TRLevelControl.Build;
 
-public abstract class TRRoomBuilder<V>
+public abstract class TRRoomBuilder<T, V>
+    where T : Enum
     where V : TRRoomVertex
 {
     protected readonly TRGameVersion _version;
@@ -22,7 +23,7 @@ public abstract class TRRoomBuilder<V>
     protected abstract List<V> ReadVertices(TRLevelReader reader);
     protected abstract void WriteVertices(TRLevelWriter writer, List<V> vertices);
 
-    public TRRoomMesh<V> BuildMesh(int roomIndex)
+    public TRRoomMesh<T, V> BuildMesh(int roomIndex, ISpriteProvider<T> spriteProvider)
     {
         ushort[] rawData = _rawMeshes[roomIndex];
         byte[] target = new byte[rawData.Length * sizeof(short)];
@@ -31,7 +32,7 @@ public abstract class TRRoomBuilder<V>
         using MemoryStream ms = new(target);
         using TRLevelReader reader = new(ms);
 
-        TRRoomMesh<V> mesh = new()
+        TRRoomMesh<T, V> mesh = new()
         {
             Vertices = ReadVertices(reader)
         };
@@ -66,14 +67,14 @@ public abstract class TRRoomBuilder<V>
             mesh.Sprites.Add(new()
             {
                 Vertex = reader.ReadInt16(),
-                ID = reader.ReadInt16()
+                ID = spriteProvider.FindSpriteType(reader.ReadInt16())
             });
         }
 
         return mesh;
     }
 
-    public void WriteMesh(TRLevelWriter writer, TRRoomMesh<V> mesh)
+    public void WriteMesh(TRLevelWriter writer, TRRoomMesh<T, V> mesh, ISpriteProvider<T> spriteProvider)
     {
         using MemoryStream stream = new();
         using TRLevelWriter meshWriter = new(stream);
@@ -95,10 +96,10 @@ public abstract class TRRoomBuilder<V>
         }
 
         meshWriter.Write((short)mesh.Sprites.Count);
-        foreach (TRRoomSprite sprite in mesh.Sprites)
+        foreach (TRRoomSprite<T> sprite in mesh.Sprites)
         {
             meshWriter.Write(sprite.Vertex);
-            meshWriter.Write(sprite.ID);
+            meshWriter.Write(spriteProvider.GetSpriteOffset(sprite.ID));
         }
 
         byte[] data = stream.ToArray();

@@ -259,7 +259,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         {
             writer.Write(room.Info, TRGameVersion.TR3);
 
-            _roomBuilder.WriteMesh(writer, room.Mesh);
+            _roomBuilder.WriteMesh(writer, room.Mesh, _spriteBuilder);
 
             writer.Write((ushort)room.Portals.Count);
             writer.Write(room.Portals);
@@ -343,7 +343,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         for (int i = 0; i < _level.Rooms.Count; i++)
         {
-            _level.Rooms[i].Mesh = _roomBuilder.BuildMesh(i);
+            _level.Rooms[i].Mesh = _roomBuilder.BuildMesh(i, _spriteBuilder);
         }
     }
 

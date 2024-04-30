@@ -300,7 +300,7 @@ public class EMMirrorFunction : BaseEMFunction
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
             List<TR1RoomVertex> processedVerts = new();
-            foreach (TRRoomSprite sprite in room.Mesh.Sprites)
+            foreach (TRRoomSprite<TR1Type> sprite in room.Mesh.Sprites)
             {
                 TR1RoomVertex roomVertex = room.Mesh.Vertices[sprite.Vertex];
 
@@ -361,7 +361,7 @@ public class EMMirrorFunction : BaseEMFunction
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
             List<TR2RoomVertex> processedVerts = new();
-            foreach (TRRoomSprite sprite in room.Mesh.Sprites)
+            foreach (TRRoomSprite<TR2Type> sprite in room.Mesh.Sprites)
             {
                 TR2RoomVertex roomVertex = room.Mesh.Vertices[sprite.Vertex];
 
@@ -422,7 +422,7 @@ public class EMMirrorFunction : BaseEMFunction
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
             List<TR3RoomVertex> processedVerts = new();
-            foreach (TRRoomSprite sprite in room.Mesh.Sprites)
+            foreach (TRRoomSprite<TR3Type> sprite in room.Mesh.Sprites)
             {
                 TR3RoomVertex roomVertex = room.Mesh.Vertices[sprite.Vertex];
 

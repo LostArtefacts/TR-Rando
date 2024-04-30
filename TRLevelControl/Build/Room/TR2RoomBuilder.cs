@@ -2,7 +2,7 @@
 
 namespace TRLevelControl.Build;
 
-public class TR2RoomBuilder : TRRoomBuilder<TR2RoomVertex>
+public class TR2RoomBuilder : TRRoomBuilder<TR2Type, TR2RoomVertex>
 {
     public TR2RoomBuilder()
         : base(TRGameVersion.TR2) { }
