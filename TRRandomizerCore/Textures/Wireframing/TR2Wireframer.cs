@@ -67,22 +67,22 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return level.ObjectTextures;
     }
 
-    protected override IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(TR2Level level)
+    protected override IEnumerable<IEnumerable<TRFace>> GetRoomFace3s(TR2Level level)
     {
-        List<List<TRFace3>> faces = new();
+        List<List<TRFace>> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
-            faces.Add(room.Mesh.Triangles.ToList());
+            faces.Add(room.Mesh.Triangles);
         }
         return faces;
     }
 
-    protected override IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(TR2Level level)
+    protected override IEnumerable<IEnumerable<TRFace>> GetRoomFace4s(TR2Level level)
     {
-        List<List<TRFace4>> faces = new();
+        List<List<TRFace>> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
-            faces.Add(room.Mesh.Rectangles.ToList());
+            faces.Add(room.Mesh.Rectangles);
         }
         return faces;
     }
@@ -116,19 +116,19 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         }
     }
 
-    protected override Dictionary<TRFace4, List<TRVertex>> CollectLadders(TR2Level level)
+    protected override Dictionary<TRFace, List<TRVertex>> CollectLadders(TR2Level level)
     {
         return FaceUtilities.GetClimbableFaces(level);
     }
 
-    protected override List<TRFace4> CollectTriggerFaces(TR2Level level, List<FDTrigType> triggerTypes)
+    protected override List<TRFace> CollectTriggerFaces(TR2Level level, List<FDTrigType> triggerTypes)
     {
         return FaceUtilities.GetTriggerFaces(level, triggerTypes, false);
     }
 
-    protected override List<TRFace4> CollectDeathFaces(TR2Level level)
+    protected override List<TRFace> CollectDeathFaces(TR2Level level)
     {
-        return FaceUtilities.GetTriggerFaces(level, new List<FDTrigType>(), true);
+        return FaceUtilities.GetTriggerFaces(level, new(), true);
     }
 
     protected override List<TRAnimatedTexture> GetAnimatedTextures(TR2Level level)

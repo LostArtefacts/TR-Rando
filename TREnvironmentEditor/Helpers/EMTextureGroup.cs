@@ -58,7 +58,7 @@ public class EMTextureGroup
         return result == ushort.MaxValue ? Floor : result;
     }
 
-    public void RandomizeRotation(TRFace4 face, int height)
+    public void RandomizeRotation(TRFace face, int height)
     {
         if (RandomRotationSeed <= 0)
         {
@@ -71,7 +71,7 @@ public class EMTextureGroup
         switch (_generator.Next(0, 4))
         {
             case 1:
-                remap = new Dictionary<int, int>
+                remap = new()
                 {
                     [0] = 1,
                     [1] = 2,
@@ -80,7 +80,7 @@ public class EMTextureGroup
                 };
                 break;
             case 2:
-                remap = new Dictionary<int, int>
+                remap = new()
                 {
                     [0] = 2,
                     [1] = 3,
@@ -89,7 +89,7 @@ public class EMTextureGroup
                 };
                 break;
             case 3:
-                remap = new Dictionary<int, int>
+                remap = new()
                 {
                     [0] = 3,
                     [1] = 0,
@@ -104,7 +104,7 @@ public class EMTextureGroup
 
         if (remap != null && height == TRConsts.Step4)
         {
-            face.Vertices = EMModifyFaceFunction.RotateVertices(face.Vertices, new EMFaceRotation
+            EMModifyFaceFunction.RotateVertices(face.Vertices, new()
             {
                 VertexRemap = remap
             });

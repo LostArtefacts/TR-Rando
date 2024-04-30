@@ -9,21 +9,6 @@ public class EMRefaceFunction : BaseEMFunction, ITextureModifier
 
     public override void ApplyToLevel(TR1Level level)
     {
-        ApplyTextures(level);
-    }
-
-    public override void ApplyToLevel(TR2Level level)
-    {
-        ApplyTextures(level);
-    }
-
-    public override void ApplyToLevel(TR3Level level)
-    {
-        ApplyTextures(level);
-    }
-
-    public void ApplyTextures(TR1Level level)
-    {
         EMLevelData data = GetData(level);
 
         foreach (ushort texture in TextureMap.Keys)
@@ -36,7 +21,7 @@ public class EMRefaceFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    public void ApplyTextures(TR2Level level)
+    public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
 
@@ -50,7 +35,7 @@ public class EMRefaceFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    public void ApplyTextures(TR3Level level)
+    public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
 
@@ -64,7 +49,7 @@ public class EMRefaceFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private static void ApplyTextures(ushort texture, Dictionary<EMTextureFaceType, int[]> faceMap, List<TRFace4> rectangles, List<TRFace3> triangles)
+    private static void ApplyTextures(ushort texture, Dictionary<EMTextureFaceType, int[]> faceMap, List<TRFace> rectangles, List<TRFace> triangles)
     {
         foreach (EMTextureFaceType faceType in faceMap.Keys)
         {

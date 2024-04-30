@@ -288,7 +288,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         return 0;
     }
 
-    private void GenerateFaces(List<TRRoomSector> sectors, List<TRFace4> faces, List<TRVertex> vertices)
+    private void GenerateFaces(List<TRRoomSector> sectors, List<TRFace> faces, List<TRVertex> vertices)
     {
         if (Textures == null)
         {
@@ -356,9 +356,9 @@ public class EMCreateRoomFunction : BaseEMFunction
             .Select(v => v.First())
             .ToList();
 
-        foreach (TRFace4 face in faces)
+        foreach (TRFace face in faces)
         {
-            for (int i = 0; i < face.Vertices.Length; i++)
+            for (int i = 0; i < face.Vertices.Count; i++)
             {
                 TRVertex vertex = vertices[face.Vertices[i]];
                 face.Vertices[i] = (ushort)distinctVertices.FindIndex(v => v.X == vertex.X && v.Y == vertex.Y && v.Z == vertex.Z);
@@ -369,7 +369,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         vertices.AddRange(distinctVertices);
     }
 
-    private void BuildWallFaces(List<TRFace4> faces, List<TRVertex> vertices, int x, int z, int topY, int bottomY, int ceiling, Direction direction)
+    private void BuildWallFaces(List<TRFace> faces, List<TRVertex> vertices, int x, int z, int topY, int bottomY, int ceiling, Direction direction)
     {
         if (topY == TRConsts.WallClicks)
         {
@@ -407,7 +407,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         }
     }
 
-    private void BuildFace(List<TRFace4> faces, List<TRVertex> vertices, int x, int z, int y, Direction direction, int height = TRConsts.Step4)
+    private void BuildFace(List<TRFace> faces, List<TRVertex> vertices, int x, int z, int y, Direction direction, int height = TRConsts.Step4)
     {
         ushort texture = direction switch
         {
@@ -415,10 +415,10 @@ public class EMCreateRoomFunction : BaseEMFunction
             Direction.Up => Textures.Ceiling,
             _ => Textures.GetWall(height),
         };
-        TRFace4 face = new()
+        TRFace face = new()
         {
             Texture = texture,
-            Vertices = new ushort[]
+            Vertices = new()
             {
                 (ushort)vertices.Count,
                 (ushort)(vertices.Count + 1),

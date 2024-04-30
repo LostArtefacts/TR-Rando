@@ -38,26 +38,10 @@ public abstract class TRRoomBuilder<T, V>
         };
 
         short numFaces = reader.ReadInt16();
-        mesh.Rectangles = new();
-        for (int i = 0; i < numFaces; i++)
-        {
-            mesh.Rectangles.Add(new()
-            {
-                Vertices = reader.ReadUInt16s(4),
-                Texture = reader.ReadUInt16(),
-            });
-        }
+        mesh.Rectangles = reader.ReadRoomFaces(numFaces, TRFaceType.Rectangle, _version);
 
         numFaces = reader.ReadInt16();
-        mesh.Triangles = new();
-        for (int i = 0; i < numFaces; i++)
-        {
-            mesh.Triangles.Add(new()
-            {
-                Vertices = reader.ReadUInt16s(3),
-                Texture = reader.ReadUInt16(),
-            });
-        }
+        mesh.Triangles = reader.ReadRoomFaces(numFaces, TRFaceType.Triangle, _version);
 
         short numSprites = reader.ReadInt16();
         mesh.Sprites = new();
@@ -82,18 +66,10 @@ public abstract class TRRoomBuilder<T, V>
         WriteVertices(meshWriter, mesh.Vertices);
 
         meshWriter.Write((short)mesh.Rectangles.Count);
-        foreach (TRFace4 face in mesh.Rectangles)
-        {
-            meshWriter.Write(face.Vertices);
-            meshWriter.Write(face.Texture);
-        }
+        meshWriter.Write(mesh.Rectangles, _version);
 
         meshWriter.Write((short)mesh.Triangles.Count);
-        foreach (TRFace3 face in mesh.Triangles)
-        {
-            meshWriter.Write(face.Vertices);
-            meshWriter.Write(face.Texture);
-        }
+        meshWriter.Write(mesh.Triangles, _version);
 
         meshWriter.Write((short)mesh.Sprites.Count);
         foreach (TRRoomSprite<T> sprite in mesh.Sprites)

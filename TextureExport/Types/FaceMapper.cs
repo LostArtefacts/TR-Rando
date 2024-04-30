@@ -356,7 +356,7 @@ public static class FaceMapper
 
     private static TexturedTileSegment GetBoxFaceSegment(TR2Room room, int rectIndex, IReadOnlyList<TexturedTile> tiles)
     {
-        TRFace4 face = room.Mesh.Rectangles[rectIndex];
+        TRFace face = room.Mesh.Rectangles[rectIndex];
 
         List<TRVertex> verts = new()
         {
@@ -387,7 +387,7 @@ public static class FaceMapper
     private static string GetBoxDescription(TR2Level level, FDControl control, int roomNumber, int rectIndex)
     {
         TR2Room room = level.Rooms[roomNumber];
-        TRFace4 face = room.Mesh.Rectangles[rectIndex];
+        TRFace face = room.Mesh.Rectangles[rectIndex];
         List<TRVertex> verts = new()
         {
             room.Mesh.Vertices[face.Vertices[0]].Vertex,

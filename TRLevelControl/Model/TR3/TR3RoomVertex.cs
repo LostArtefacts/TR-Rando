@@ -37,4 +37,15 @@ public class TR3RoomVertex : TRRoomVertex
             }
         }
     }
+
+    public override TRRoomVertex Clone()
+    {
+        return new TR3RoomVertex
+        {
+            Vertex = Vertex.Clone(),
+            Lighting = Lighting,
+            Attributes = Attributes,
+            Colour = Colour
+        };
+    }
 }

@@ -60,24 +60,25 @@ public class DynamicTextureBuilder
 
     public DynamicTextureTarget Build(TR1CombinedLevel level)
     {
-        ISet<int> defaultObjectTextures = new HashSet<int>();
-        ISet<int> defaultSpriteTextures = new HashSet<int>();
-        ISet<int> enemyObjectTextures = new HashSet<int>();
-        ISet<int> secretObjectTextures = new HashSet<int>();
-        ISet<int> secretSpriteTextures = new HashSet<int>();
-        ISet<int> keyItemObjectTextures = new HashSet<int>();
-        ISet<int> keyItemSpriteTextures = new HashSet<int>();
+        HashSet<int> defaultObjectTextures = new();
+        HashSet<int> defaultSpriteTextures = new();
+        HashSet<int> enemyObjectTextures = new();
+        HashSet<int> secretObjectTextures = new();
+        HashSet<int> secretSpriteTextures = new();
+        HashSet<int> keyItemObjectTextures = new();
+        HashSet<int> keyItemSpriteTextures = new();
 
-        ISet<TRMesh> modelMeshes = new HashSet<TRMesh>();
+        HashSet<TRMesh> modelMeshes = new();
 
         // Collect unique room and room sprite textures
         List<TR1Type> roomSprites = new();
         foreach (TR1Room room in level.Data.Rooms)
         {
-            foreach (TRFace3 f in room.Mesh.Triangles)
-                defaultObjectTextures.Add(f.Texture);
-            foreach (TRFace4 f in room.Mesh.Rectangles)
-                defaultObjectTextures.Add(f.Texture);
+            foreach (TRFace face in room.Mesh.Faces)
+            {
+                defaultObjectTextures.Add(face.Texture);
+            }
+
             foreach (TRRoomSprite<TR1Type> sprite in room.Mesh.Sprites)
             {
                 // Only add ones that aren't also pickups

@@ -54,7 +54,7 @@ public class EMMirrorModelFunction : BaseEMFunction
             {
                 face.SwapVertices(0, 3);
                 face.SwapVertices(1, 2);
-                textureReferences.Add((ushort)(face.Texture & 0x0fff));
+                textureReferences.Add(face.Texture);
             }
 
             foreach (TRMeshFace face in mesh.ColouredRectangles)
@@ -66,7 +66,7 @@ public class EMMirrorModelFunction : BaseEMFunction
             foreach (TRMeshFace face in mesh.TexturedTriangles)
             {
                 face.SwapVertices(0, 2);
-                textureReferences.Add((ushort)(face.Texture & 0x0fff));
+                textureReferences.Add(face.Texture);
             }
 
             foreach (TRMeshFace face in mesh.ColouredTriangles)

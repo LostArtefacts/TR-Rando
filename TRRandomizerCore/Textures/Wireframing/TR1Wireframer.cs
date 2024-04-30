@@ -95,22 +95,22 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return level.ObjectTextures;
     }
 
-    protected override IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(TR1Level level)
+    protected override IEnumerable<IEnumerable<TRFace>> GetRoomFace3s(TR1Level level)
     {
-        List<List<TRFace3>> faces = new();
+        List<List<TRFace>> faces = new();
         foreach (TR1Room room in level.Rooms)
         {
-            faces.Add(room.Mesh.Triangles.ToList());
+            faces.Add(room.Mesh.Triangles);
         }
         return faces;
     }
 
-    protected override IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(TR1Level level)
+    protected override IEnumerable<IEnumerable<TRFace>> GetRoomFace4s(TR1Level level)
     {
-        List<List<TRFace4>> faces = new();
+        List<List<TRFace>> faces = new();
         foreach (TR1Room room in level.Rooms)
         {
-            faces.Add(room.Mesh.Rectangles.ToList());
+            faces.Add(room.Mesh.Rectangles);
         }
         return faces;
     }
@@ -148,19 +148,19 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
 
     protected override void SetSkyboxVisible(TR1Level level) { }
 
-    protected override Dictionary<TRFace4, List<TRVertex>> CollectLadders(TR1Level level)
+    protected override Dictionary<TRFace, List<TRVertex>> CollectLadders(TR1Level level)
     {
-        return new Dictionary<TRFace4, List<TRVertex>>();
+        return new();
     }
 
-    protected override List<TRFace4> CollectTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes)
+    protected override List<TRFace> CollectTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes)
     {
         return FaceUtilities.GetTriggerFaces(level, triggerTypes, false);
     }
 
-    protected override List<TRFace4> CollectDeathFaces(TR1Level level)
+    protected override List<TRFace> CollectDeathFaces(TR1Level level)
     {
-        return FaceUtilities.GetTriggerFaces(level, new List<FDTrigType>(), true);
+        return FaceUtilities.GetTriggerFaces(level, new(), true);
     }
 
     protected override List<TRAnimatedTexture> GetAnimatedTextures(TR1Level level)

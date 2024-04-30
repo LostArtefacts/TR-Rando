@@ -53,7 +53,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                 room.Mesh.Rectangles.Add(new()
                 {
                     Texture = WaterTextures[0],
-                    Vertices = vertIndices.ToArray()
+                    Vertices = vertIndices
                 });
             }
         }
@@ -103,7 +103,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                 room.Mesh.Rectangles.Add(new()
                 {
                     Texture = WaterTextures[0],
-                    Vertices = vertIndices.ToArray()
+                    Vertices = vertIndices
                 });
             }
         }
@@ -150,8 +150,9 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
 
                 room.Mesh.Rectangles.Add(new()
                 {
-                    Texture = (ushort)(WaterTextures[count++ % WaterTextures.Length] | 0x8000), // Cycle through the textures and make them double-sided
-                    Vertices = vertIndices.ToArray()
+                    Texture = WaterTextures[count++ % WaterTextures.Length], // Cycle through the textures and make them double-sided
+                    DoubleSided = true,
+                    Vertices = vertIndices
                 });
             }
         }
@@ -172,12 +173,12 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
         RemoveWaterSurfaces(room.Mesh.Rectangles);
     }
 
-    public void RemoveWaterSurfaces(List<TRFace4> faces)
+    public void RemoveWaterSurfaces(List<TRFace> faces)
     {
         for (int i = faces.Count - 1; i >= 0; i--)
         {
-            TRFace4 face = faces[i];
-            if (WaterTextures.Contains((ushort)(face.Texture & 0x0fff)))
+            TRFace face = faces[i];
+            if (WaterTextures.Contains(face.Texture))
             {
                 faces.RemoveAt(i);
             }
