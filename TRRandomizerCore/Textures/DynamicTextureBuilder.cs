@@ -71,31 +71,19 @@ public class DynamicTextureBuilder
         ISet<TRMesh> modelMeshes = new HashSet<TRMesh>();
 
         // Collect unique room and room sprite textures
+        List<TR1Type> roomSprites = new();
         foreach (TR1Room room in level.Data.Rooms)
         {
             foreach (TRFace3 f in room.Mesh.Triangles)
                 defaultObjectTextures.Add(f.Texture);
             foreach (TRFace4 f in room.Mesh.Rectangles)
                 defaultObjectTextures.Add(f.Texture);
-            foreach (TRRoomSprite sprite in room.Mesh.Sprites)
+            foreach (TRRoomSprite<TR1Type> sprite in room.Mesh.Sprites)
             {
-                // Temporary until room sprites store type IDs and not offsets
-                TR1Type spriteID = default;
-                int offset = 0;
-                foreach (var (type, sequence) in level.Data.Sprites)
-                {
-                    if (sprite.Texture >= offset && sprite.Texture < offset + sequence.Textures.Count)
-                    {
-                        spriteID = type;
-                        break;
-                    }
-                    offset += sequence.Textures.Count;
-                }
-
                 // Only add ones that aren't also pickups
-                if (spriteID != default && !level.Data.Entities.Any(e => e.TypeID == spriteID))
+                if (!level.Data.Entities.Any(e => e.TypeID == sprite.ID))
                 {
-                    defaultSpriteTextures.Add(sprite.Texture);
+                    roomSprites.Add(sprite.ID);
                 }
             }
         }
@@ -111,7 +99,7 @@ public class DynamicTextureBuilder
         }
 
         // Collect standard sprite sequences
-        foreach (TR1Type spriteID in _spriteIDs)
+        foreach (TR1Type spriteID in _spriteIDs.Concat(roomSprites).Distinct())
         {
             AddSpriteTextures(level.Data, spriteID, defaultSpriteTextures);
         }

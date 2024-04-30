@@ -3,7 +3,7 @@
 public class TR1Room
 {
     public TRRoomInfo Info { get; set; }
-    public TRRoomMesh<TR1RoomVertex> Mesh { get; set; }
+    public TRRoomMesh<TR1Type, TR1RoomVertex> Mesh { get; set; }
     public List<TRRoomPortal> Portals { get; set; }
     public ushort NumZSectors { get; set; }
     public ushort NumXSectors { get; set; }

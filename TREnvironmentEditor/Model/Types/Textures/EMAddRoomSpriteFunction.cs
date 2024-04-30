@@ -5,7 +5,7 @@ namespace TREnvironmentEditor.Model.Types;
 
 public class EMAddRoomSpriteFunction : BaseEMFunction
 {
-    public short Texture { get; set; }
+    public uint ID { get; set; }
     public EMRoomVertex Vertex { get; set; }
     public List<EMLocation> Locations { get; set; }
 
@@ -17,7 +17,7 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
             TR1Room room = level.Rooms[data.ConvertRoom(location.Room)];
             room.Mesh.Sprites.Add(new()
             {
-                Texture = Texture,
+                ID = (TR1Type)ID,
                 Vertex = (short)room.Mesh.Vertices.Count
             });
             room.Mesh.Vertices.Add(new()
@@ -41,7 +41,7 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
             TR2Room room = level.Rooms[data.ConvertRoom(location.Room)];
             room.Mesh.Sprites.Add(new()
             {
-                Texture = Texture,
+                ID = (TR2Type)ID,
                 Vertex = (short)room.Mesh.Vertices.Count
             });
             room.Mesh.Vertices.Add(new()
@@ -67,7 +67,7 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
             TR3Room room = level.Rooms[data.ConvertRoom(location.Room)];
             room.Mesh.Sprites.Add(new()
             {
-                Texture = Texture,
+                ID = (TR3Type)ID,
                 Vertex = (short)room.Mesh.Vertices.Count
             });
             room.Mesh.Vertices.Add(new()

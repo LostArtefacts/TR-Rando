@@ -3250,7 +3250,7 @@
           {
             "Comments": "Add a large medi room sprite as bait.",
             "EMType": 31,
-            "Texture": 8,
+            "ID": 94,
             "Vertex": {
               "Lighting": 4096
             },
@@ -3331,7 +3331,7 @@
           {
             "Comments": "Add a gold idol room sprite as bait.",
             "EMType": 31,
-            "Texture": 9,
+            "ID": 110,
             "Vertex": {
               "Lighting": 4096
             },

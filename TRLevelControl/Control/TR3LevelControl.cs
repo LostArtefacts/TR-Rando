@@ -7,17 +7,12 @@ namespace TRLevelControl;
 
 public class TR3LevelControl : TRLevelControlBase<TR3Level>
 {
-    private readonly TRObjectMeshBuilder<TR3Type> _meshBuilder;
-    private readonly TRSpriteBuilder<TR3Type> _spriteBuilder;
-    private readonly TR3RoomBuilder _roomBuilder;
+    private TRObjectMeshBuilder<TR3Type> _meshBuilder;
+    private TRSpriteBuilder<TR3Type> _spriteBuilder;
+    private TR3RoomBuilder _roomBuilder;
 
     public TR3LevelControl(ITRLevelObserver observer = null)
-        : base(observer)
-    {
-        _meshBuilder = new(TRGameVersion.TR3, _observer);
-        _spriteBuilder = new(TRGameVersion.TR3);
-        _roomBuilder = new();
-    }
+        : base(observer) { }
 
     protected override TR3Level CreateLevel(TRFileVersion version)
     {
@@ -32,6 +27,13 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         TestVersion(level, TRFileVersion.TR3a, TRFileVersion.TR3b);
         return level;
+    }
+
+    protected override void Initialise()
+    {
+        _meshBuilder = new(TRGameVersion.TR3, _observer);
+        _spriteBuilder = new(TRGameVersion.TR3);
+        _roomBuilder = new();
     }
 
     protected override void Read(TRLevelReader reader)
@@ -259,7 +261,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         {
             writer.Write(room.Info, TRGameVersion.TR3);
 
-            _roomBuilder.WriteMesh(writer, room.Mesh);
+            _roomBuilder.WriteMesh(writer, room.Mesh, _spriteBuilder);
 
             writer.Write((ushort)room.Portals.Count);
             writer.Write(room.Portals);
@@ -343,7 +345,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         for (int i = 0; i < _level.Rooms.Count; i++)
         {
-            _level.Rooms[i].Mesh = _roomBuilder.BuildMesh(i);
+            _level.Rooms[i].Mesh = _roomBuilder.BuildMesh(i, _spriteBuilder);
         }
     }
 

@@ -4266,7 +4266,6 @@
             "ColouredTriangles": []
           },
           "Info": {
-            "Mesh": 260,
             "VisibilityBox": {
               "MinX": -166,
               "MaxX": 160,
@@ -4289,8 +4288,8 @@
         },
         {
           "EMType": 24,
-          "ID": 206,
-          "Intensity": 5120,
+          "MeshID": 206,
+          "Intensity": 4096,
           "Locations": [
             {
               "X": 77312,

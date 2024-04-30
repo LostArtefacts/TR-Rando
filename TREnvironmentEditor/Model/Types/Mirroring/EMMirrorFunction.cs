@@ -298,35 +298,8 @@ public class EMMirrorFunction : BaseEMFunction
             room.Info.X = FlipWorldX(oldRoomX);
             room.Info.X -= room.NumXSectors * TRConsts.Step4;
             Debug.Assert(room.Info.X >= 0);
-            // Flip room sprites separately as they don't sit on tile edges
-            List<TR1RoomVertex> processedVerts = new();
-            foreach (TRRoomSprite sprite in room.Mesh.Sprites)
-            {
-                TR1RoomVertex roomVertex = room.Mesh.Vertices[sprite.Vertex];
 
-                // Flip the old world coordinate, then subtract the new room position
-                int x = oldRoomX + roomVertex.Vertex.X;
-                x = FlipWorldX(x);
-                x -= room.Info.X;
-                roomVertex.Vertex.X = (short)x;
-
-                Debug.Assert(roomVertex.Vertex.X >= 0);
-                processedVerts.Add(roomVertex);
-            }
-            
-            // Flip the face vertices
-            foreach (TR1RoomVertex vert in room.Mesh.Vertices)
-            {
-                if (processedVerts.Contains(vert))
-                {
-                    continue;
-                }
-
-                int sectorX = vert.Vertex.X / TRConsts.Step4;
-                int newSectorX = room.NumXSectors - sectorX;
-                vert.Vertex.X = (short)(newSectorX * TRConsts.Step4);
-                Debug.Assert(vert.Vertex.X >= 0);
-            }
+            MirrorRoomMesh(room.Mesh, oldRoomX, room.Info.X, room.NumXSectors);
 
             // Change visibility portal vertices and flip the normal for X
             foreach (TRRoomPortal portal in room.Portals)
@@ -359,35 +332,8 @@ public class EMMirrorFunction : BaseEMFunction
             room.Info.X = FlipWorldX(oldRoomX);
             room.Info.X -= room.NumXSectors * TRConsts.Step4;
             Debug.Assert(room.Info.X >= 0);
-            // Flip room sprites separately as they don't sit on tile edges
-            List<TR2RoomVertex> processedVerts = new();
-            foreach (TRRoomSprite sprite in room.Mesh.Sprites)
-            {
-                TR2RoomVertex roomVertex = room.Mesh.Vertices[sprite.Vertex];
 
-                // Flip the old world coordinate, then subtract the new room position
-                int x = oldRoomX + roomVertex.Vertex.X;
-                x = FlipWorldX(x);
-                x -= room.Info.X;
-                roomVertex.Vertex.X = (short)x;
-
-                Debug.Assert(roomVertex.Vertex.X >= 0);
-                processedVerts.Add(roomVertex);
-            }
-
-            // Flip the face vertices
-            foreach (TR2RoomVertex vert in room.Mesh.Vertices)
-            {
-                if (processedVerts.Contains(vert))
-                {
-                    continue;
-                }
-
-                int sectorX = vert.Vertex.X / TRConsts.Step4;
-                int newSectorX = room.NumXSectors - sectorX;
-                vert.Vertex.X = (short)(newSectorX * TRConsts.Step4);
-                Debug.Assert(vert.Vertex.X >= 0);
-            }
+            MirrorRoomMesh(room.Mesh, oldRoomX, room.Info.X, room.NumXSectors);
 
             // Change visibility portal vertices and flip the normal for X
             foreach (TRRoomPortal portal in room.Portals)
@@ -420,35 +366,8 @@ public class EMMirrorFunction : BaseEMFunction
             room.Info.X = FlipWorldX(oldRoomX);
             room.Info.X -= room.NumXSectors * TRConsts.Step4;
             Debug.Assert(room.Info.X >= 0);
-            // Flip room sprites separately as they don't sit on tile edges
-            List<TR3RoomVertex> processedVerts = new();
-            foreach (TRRoomSprite sprite in room.Mesh.Sprites)
-            {
-                TR3RoomVertex roomVertex = room.Mesh.Vertices[sprite.Vertex];
 
-                // Flip the old world coordinate, then subtract the new room position
-                int x = oldRoomX + roomVertex.Vertex.X;
-                x = FlipWorldX(x);
-                x -= room.Info.X;
-                roomVertex.Vertex.X = (short)x;
-
-                Debug.Assert(roomVertex.Vertex.X >= 0);
-                processedVerts.Add(roomVertex);
-            }
-
-            // Flip the face vertices
-            foreach (TR3RoomVertex vert in room.Mesh.Vertices)
-            {
-                if (processedVerts.Contains(vert))
-                {
-                    continue;
-                }
-
-                int sectorX = vert.Vertex.X / TRConsts.Step4;
-                int newSectorX = room.NumXSectors - sectorX;
-                vert.Vertex.X = (short)(newSectorX * TRConsts.Step4);
-                Debug.Assert(vert.Vertex.X >= 0);
-            }
+            MirrorRoomMesh(room.Mesh, oldRoomX, room.Info.X, room.NumXSectors);
 
             // Change visibility portal vertices and flip the normal for X
             foreach (TRRoomPortal portal in room.Portals)
@@ -470,6 +389,41 @@ public class EMMirrorFunction : BaseEMFunction
             }
 
             MirrorRoomStaticMeshes(room.StaticMeshes);
+        }
+    }
+
+    private void MirrorRoomMesh<T, V>(TRRoomMesh<T, V> mesh, int oldRoomX, int newRoomX, ushort roomWidth)
+        where T : Enum
+        where V : TRRoomVertex
+    {
+        // Flip room sprites separately as they don't sit on tile edges
+        List<V> processedVerts = new();
+        foreach (TRRoomSprite<T> sprite in mesh.Sprites)
+        {
+            V roomVertex = mesh.Vertices[sprite.Vertex];
+
+            // Flip the old world coordinate, then subtract the new room position
+            int x = oldRoomX + roomVertex.Vertex.X;
+            x = FlipWorldX(x);
+            x -= newRoomX;
+            roomVertex.Vertex.X = (short)x;
+
+            Debug.Assert(roomVertex.Vertex.X >= 0);
+            processedVerts.Add(roomVertex);
+        }
+
+        // Flip the face vertices
+        foreach (V vert in mesh.Vertices)
+        {
+            if (processedVerts.Contains(vert))
+            {
+                continue;
+            }
+
+            int sectorX = vert.Vertex.X / TRConsts.Step4;
+            int newSectorX = roomWidth - sectorX;
+            vert.Vertex.X = (short)(newSectorX * TRConsts.Step4);
+            Debug.Assert(vert.Vertex.X >= 0);
         }
     }
 

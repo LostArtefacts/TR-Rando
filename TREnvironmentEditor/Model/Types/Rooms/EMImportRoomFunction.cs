@@ -150,7 +150,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         {
             newRoom.Mesh.Sprites.Add(new()
             {
-                Texture = roomDef.Room.Mesh.Sprites[i].Texture,
+                ID = roomDef.Room.Mesh.Sprites[i].ID,
                 Vertex = roomDef.Room.Mesh.Sprites[i].Vertex
             });
         }
@@ -402,7 +402,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         {
             newRoom.Mesh.Sprites.Add(new()
             {
-                Texture = roomDef.Room.Mesh.Sprites[i].Texture,
+                ID = roomDef.Room.Mesh.Sprites[i].ID,
                 Vertex = roomDef.Room.Mesh.Sprites[i].Vertex
             });
         }

@@ -6632,7 +6632,7 @@
           {
             "Comments": "Add a large medi room sprite as bait.",
             "EMType": 31,
-            "Texture": 8,
+            "ID": 94,
             "Vertex": {
               "Lighting": 4096
             },
@@ -6694,7 +6694,7 @@
           {
             "Comments": "Add a room sprite as bait.",
             "EMType": 31,
-            "Texture": 6,
+            "ID": 94,
             "Vertex": {
               "Lighting": 4096
             },

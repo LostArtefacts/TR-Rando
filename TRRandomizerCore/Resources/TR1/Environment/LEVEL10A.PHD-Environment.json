@@ -7834,7 +7834,7 @@
         {
           "Comments": "Add a sprite instead for the ammo.",
           "EMType": 31,
-          "Texture": 4,
+          "ID": 89,
           "Vertex": {
             "Lighting": 4096
           },
