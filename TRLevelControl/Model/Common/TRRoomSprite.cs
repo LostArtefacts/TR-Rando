@@ -3,5 +3,5 @@
 public class TRRoomSprite
 {
     public short Vertex { get; set; }
-    public short Texture { get; set; }
+    public short ID { get; set; }
 }

@@ -112,7 +112,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         {
             newRoom.Mesh.Sprites.Add(new()
             {
-                Texture = baseRoom.Mesh.Sprites[i].Texture,
+                ID = baseRoom.Mesh.Sprites[i].ID,
                 Vertex = baseRoom.Mesh.Sprites[i].Vertex
             });
         }
@@ -254,7 +254,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         {
             newRoom.Mesh.Sprites.Add(new()
             {
-                Texture = baseRoom.Mesh.Sprites[i].Texture,
+                ID = baseRoom.Mesh.Sprites[i].ID,
                 Vertex = baseRoom.Mesh.Sprites[i].Vertex
             });
         }
@@ -398,7 +398,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         {
             newRoom.Mesh.Sprites.Add(new()
             {
-                Texture = baseRoom.Mesh.Sprites[i].Texture,
+                ID = baseRoom.Mesh.Sprites[i].ID,
                 Vertex = baseRoom.Mesh.Sprites[i].Vertex
             });
         }

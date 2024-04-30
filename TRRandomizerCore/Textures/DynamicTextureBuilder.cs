@@ -84,7 +84,7 @@ public class DynamicTextureBuilder
                 int offset = 0;
                 foreach (var (type, sequence) in level.Data.Sprites)
                 {
-                    if (sprite.Texture >= offset && sprite.Texture < offset + sequence.Textures.Count)
+                    if (sprite.ID >= offset && sprite.ID < offset + sequence.Textures.Count)
                     {
                         spriteID = type;
                         break;
@@ -95,7 +95,7 @@ public class DynamicTextureBuilder
                 // Only add ones that aren't also pickups
                 if (spriteID != default && !level.Data.Entities.Any(e => e.TypeID == spriteID))
                 {
-                    defaultSpriteTextures.Add(sprite.Texture);
+                    defaultSpriteTextures.Add(sprite.ID);
                 }
             }
         }

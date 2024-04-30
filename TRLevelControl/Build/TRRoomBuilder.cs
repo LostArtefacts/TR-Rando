@@ -66,7 +66,7 @@ public abstract class TRRoomBuilder<V>
             mesh.Sprites.Add(new()
             {
                 Vertex = reader.ReadInt16(),
-                Texture = reader.ReadInt16()
+                ID = reader.ReadInt16()
             });
         }
 
@@ -98,7 +98,7 @@ public abstract class TRRoomBuilder<V>
         foreach (TRRoomSprite sprite in mesh.Sprites)
         {
             meshWriter.Write(sprite.Vertex);
-            meshWriter.Write(sprite.Texture);
+            meshWriter.Write(sprite.ID);
         }
 
         byte[] data = stream.ToArray();

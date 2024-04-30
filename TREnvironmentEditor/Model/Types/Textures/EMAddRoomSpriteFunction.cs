@@ -17,7 +17,7 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
             TR1Room room = level.Rooms[data.ConvertRoom(location.Room)];
             room.Mesh.Sprites.Add(new()
             {
-                Texture = Texture,
+                ID = Texture,
                 Vertex = (short)room.Mesh.Vertices.Count
             });
             room.Mesh.Vertices.Add(new()
@@ -41,7 +41,7 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
             TR2Room room = level.Rooms[data.ConvertRoom(location.Room)];
             room.Mesh.Sprites.Add(new()
             {
-                Texture = Texture,
+                ID = Texture,
                 Vertex = (short)room.Mesh.Vertices.Count
             });
             room.Mesh.Vertices.Add(new()
@@ -67,7 +67,7 @@ public class EMAddRoomSpriteFunction : BaseEMFunction
             TR3Room room = level.Rooms[data.ConvertRoom(location.Room)];
             room.Mesh.Sprites.Add(new()
             {
-                Texture = Texture,
+                ID = Texture,
                 Vertex = (short)room.Mesh.Vertices.Count
             });
             room.Mesh.Vertices.Add(new()
