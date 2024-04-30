@@ -283,7 +283,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
             }
 
             writer.Write((ushort)room.StaticMeshes.Count);
-            foreach (TR3RoomStaticMesh mesh in room.StaticMeshes)
+            foreach (TR4RoomStaticMesh mesh in room.StaticMeshes)
             {
                 writer.Write(mesh.X);
                 writer.Write(mesh.Y);

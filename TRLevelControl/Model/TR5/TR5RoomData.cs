@@ -14,7 +14,7 @@ public class TR5RoomData
 
     public ushort Seperator { get; set; }
 
-    public TR3RoomStaticMesh[] StaticMeshes { get; set; }
+    public TR5RoomStaticMesh[] StaticMeshes { get; set; }
 
     public TR5RoomLayer[] Layers { get; set; }
 

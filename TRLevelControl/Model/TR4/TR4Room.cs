@@ -11,7 +11,7 @@ public class TR4Room
     public short AmbientIntensity { get; set; }
     public short LightMode { get; set; }
     public List<TR4RoomLight> Lights { get; set; }    
-    public List<TR3RoomStaticMesh> StaticMeshes { get; set; }
+    public List<TR4RoomStaticMesh> StaticMeshes { get; set; }
     public short AlternateRoom { get; set; }
     public short Flags { get; set; }
     public byte WaterScheme { get; set; }
