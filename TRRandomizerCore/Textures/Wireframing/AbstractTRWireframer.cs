@@ -21,10 +21,10 @@ public abstract class AbstractTRWireframer<E, L>
         FDTrigType.HeavyTrigger, FDTrigType.Pad
     };
 
-    private Dictionary<TRFace3, TRSize> _roomFace3s;
-    private Dictionary<TRFace4, TRSize> _roomFace4s;
-    private Dictionary<TRFace4, List<TRVertex>> _ladderFace4s;
-    private List<TRFace4> _triggerFaces, _deathFaces;
+    private Dictionary<TRFace, TRSize> _roomFace3s;
+    private Dictionary<TRFace, TRSize> _roomFace4s;
+    private Dictionary<TRFace, List<TRVertex>> _ladderFace4s;
+    private List<TRFace> _triggerFaces, _deathFaces;
 
     private Dictionary<TRMeshFace, TRSize> _meshFaces;
 
@@ -156,19 +156,19 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void ScanRooms(L level)
     {
-        foreach (IEnumerable<TRFace4> roomRects in GetRoomFace4s(level))
+        foreach (IEnumerable<TRFace> roomRects in GetRoomFace4s(level))
         {
             ScanRoomFace4s(level, roomRects);
         }
-        foreach (IEnumerable<TRFace3> roomTris in GetRoomFace3s(level))
+        foreach (IEnumerable<TRFace> roomTris in GetRoomFace3s(level))
         {
             ScanRoomFace3s(level, roomTris);
         }
     }
 
-    private void ScanRoomFace4s(L level, IEnumerable<TRFace4> faces)
+    private void ScanRoomFace4s(L level, IEnumerable<TRFace> faces)
     {
-        foreach (TRFace4 face in faces)
+        foreach (TRFace face in faces)
         {
             if (_ladderFace4s.ContainsKey(face) || _triggerFaces.Contains(face) || _deathFaces.Contains(face))
                 continue;
@@ -181,9 +181,9 @@ public abstract class AbstractTRWireframer<E, L>
         }
     }
 
-    private void ScanRoomFace3s(L level, IEnumerable<TRFace3> faces)
+    private void ScanRoomFace3s(L level, IEnumerable<TRFace> faces)
     {
-        foreach (TRFace3 face in faces)
+        foreach (TRFace face in faces)
         {
             ushort texture = (ushort)(face.Texture & 0x0fff);
             if (!IsTextureExcluded(texture) || _data.DeathTextures.Contains(texture))
@@ -447,7 +447,7 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void ResetRoomTextures(ushort wireframeIndex, ushort ladderIndex, ushort triggerIndex, ushort deathIndex, Dictionary<ushort, ushort> specialTextureRemap)
     {
-        foreach (TRFace3 face in _roomFace3s.Keys)
+        foreach (TRFace face in _roomFace3s.Keys)
         {
             ushort currentTexture = (ushort)(face.Texture & 0x0fff);
             face.Texture = RemapTexture(face.Texture, specialTextureRemap.ContainsKey(currentTexture)
@@ -455,7 +455,7 @@ public abstract class AbstractTRWireframer<E, L>
                 : wireframeIndex);
         }
 
-        foreach (TRFace4 face in _roomFace4s.Keys)
+        foreach (TRFace face in _roomFace4s.Keys)
         {
             if (!_ladderFace4s.ContainsKey(face) && !_triggerFaces.Contains(face) && !_deathFaces.Contains(face))
             {
@@ -466,7 +466,7 @@ public abstract class AbstractTRWireframer<E, L>
             }
         }
 
-        foreach (TRFace4 face in _ladderFace4s.Keys)
+        foreach (TRFace face in _ladderFace4s.Keys)
         {
             face.Texture = RemapTexture(face.Texture, ladderIndex);
 
@@ -479,11 +479,11 @@ public abstract class AbstractTRWireframer<E, L>
             {
                 Queue<ushort> vertIndices = new(face.Vertices);
                 vertIndices.Enqueue(vertIndices.Dequeue());
-                face.Vertices = vertIndices.ToArray();
+                face.Vertices = new(vertIndices);
             }
         }
 
-        foreach (TRFace4 face in _triggerFaces)
+        foreach (TRFace face in _triggerFaces)
         {
             // Exclusion example is Bacon Lara's heavy trigger - we want to retain the Lava here
             if (!IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
@@ -492,7 +492,7 @@ public abstract class AbstractTRWireframer<E, L>
             }
         }
 
-        foreach (TRFace4 face in _deathFaces)
+        foreach (TRFace face in _deathFaces)
         {
             if (!IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
             {
@@ -656,12 +656,12 @@ public abstract class AbstractTRWireframer<E, L>
         }
     }
 
-    protected abstract Dictionary<TRFace4, List<TRVertex>> CollectLadders(L level);
-    protected abstract List<TRFace4> CollectTriggerFaces(L level, List<FDTrigType> triggerTypes);
-    protected abstract List<TRFace4> CollectDeathFaces(L level);
+    protected abstract Dictionary<TRFace, List<TRVertex>> CollectLadders(L level);
+    protected abstract List<TRFace> CollectTriggerFaces(L level, List<FDTrigType> triggerTypes);
+    protected abstract List<TRFace> CollectDeathFaces(L level);
     protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
-    protected abstract IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(L level);
-    protected abstract IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(L level);
+    protected abstract IEnumerable<IEnumerable<TRFace>> GetRoomFace4s(L level);
+    protected abstract IEnumerable<IEnumerable<TRFace>> GetRoomFace3s(L level);
     protected abstract void ResetUnusedTextures(L level);
     protected abstract IEnumerable<int> GetInvalidObjectTextureIndices(L level);
     protected abstract List<TRObjectTexture> GetObjectTextures(L level);

@@ -8,12 +8,12 @@ namespace TRRandomizerCore.Utilities;
 
 public static class FaceUtilities
 {
-    public static List<TRFace4> GetTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
+    public static List<TRFace> GetTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        List<TRFace4> faces = new();
+        List<TRFace> faces = new();
         foreach (TR1Room room in level.Rooms)
         {
             faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
@@ -25,12 +25,12 @@ public static class FaceUtilities
         return faces;
     }
 
-    public static List<TRFace4> GetTriggerFaces(TR2Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
+    public static List<TRFace> GetTriggerFaces(TR2Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        List<TRFace4> faces = new();
+        List<TRFace> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
             faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
@@ -42,12 +42,12 @@ public static class FaceUtilities
         return faces;
     }
 
-    public static List<TRFace4> GetTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
+    public static List<TRFace> GetTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        List<TRFace4> faces = new();
+        List<TRFace> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
             faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
@@ -59,12 +59,12 @@ public static class FaceUtilities
         return faces;
     }
 
-    public static Dictionary<TRFace4, List<TRVertex>> GetClimbableFaces(TR2Level level)
+    public static Dictionary<TRFace, List<TRVertex>> GetClimbableFaces(TR2Level level)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        Dictionary<TRFace4, List<TRVertex>> faces = new();
+        Dictionary<TRFace, List<TRVertex>> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
             foreach (TRRoomSector sector in room.Sectors)
@@ -76,12 +76,12 @@ public static class FaceUtilities
         return faces;
     }
 
-    public static Dictionary<TRFace4, List<TRVertex>> GetClimbableFaces(TR3Level level)
+    public static Dictionary<TRFace, List<TRVertex>> GetClimbableFaces(TR3Level level)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        Dictionary<TRFace4, List<TRVertex>> faces = new();
+        Dictionary<TRFace, List<TRVertex>> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
             foreach (TRRoomSector sector in room.Sectors)
@@ -94,10 +94,10 @@ public static class FaceUtilities
         return faces;
     }
 
-    private static List<TRFace4> ScanTriggerFaces
-        (FDControl floorData, List<FDTrigType> triggerMatches, bool includeDeathTiles, List<TRRoomSector> sectors, ushort roomDepth, List<TRFace4> roomFaces, Func<ushort, TRVertex> vertexAction)
+    private static List<TRFace> ScanTriggerFaces
+        (FDControl floorData, List<FDTrigType> triggerMatches, bool includeDeathTiles, List<TRRoomSector> sectors, ushort roomDepth, List<TRFace> roomFaces, Func<ushort, TRVertex> vertexAction)
     {
-        List<TRFace4> faces = new();
+        List<TRFace> faces = new();
         for (int i = 0; i < sectors.Count; i++)
         {
             TRRoomSector sector = sectors[i];
@@ -116,7 +116,7 @@ public static class FaceUtilities
 
                 List<TRVertex> vertMatches = GetFloorOrCeilingVerticesToMatch(x, z);
 
-                foreach (TRFace4 face in roomFaces)
+                foreach (TRFace face in roomFaces)
                 {
                     List<TRVertex> faceVertices = new();
                     foreach (ushort v in face.Vertices)
@@ -135,7 +135,7 @@ public static class FaceUtilities
         return faces;
     }
 
-    private static void ScanTR2SectorLadderFaces(Dictionary<TRFace4, List<TRVertex>> faces, TR2Level level, FDControl floorData, TR2Room room, TRRoomSector sector, FDEntry entry = null)
+    private static void ScanTR2SectorLadderFaces(Dictionary<TRFace, List<TRVertex>> faces, TR2Level level, FDControl floorData, TR2Room room, TRRoomSector sector, FDEntry entry = null)
     {
         if (entry == null && sector.FDIndex == 0)
         {
@@ -152,7 +152,7 @@ public static class FaceUtilities
 
             List<TRVertex> vertMatches = GetVerticesToMatch(climbEntry, x, z);
 
-            foreach (TRFace4 face in room.Mesh.Rectangles)
+            foreach (TRFace face in room.Mesh.Rectangles)
             {
                 if (faces.ContainsKey(face))
                 {
@@ -186,7 +186,7 @@ public static class FaceUtilities
         }
     }
 
-    private static void ScanTR3SectorLadderFaces(Dictionary<TRFace4, List<TRVertex>> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
+    private static void ScanTR3SectorLadderFaces(Dictionary<TRFace, List<TRVertex>> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
     {
         if (entry == null && sector.FDIndex == 0)
         {
@@ -203,7 +203,7 @@ public static class FaceUtilities
 
             List<TRVertex> vertMatches = GetVerticesToMatch(climbEntry, x, z);
 
-            foreach (TRFace4 face in room.Mesh.Rectangles)
+            foreach (TRFace face in room.Mesh.Rectangles)
             {
                 if (faces.ContainsKey(face))
                 {
@@ -237,7 +237,7 @@ public static class FaceUtilities
         }
     }
 
-    private static void ScanTR3SectorMonkeyFaces(Dictionary<TRFace4, List<TRVertex>> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
+    private static void ScanTR3SectorMonkeyFaces(Dictionary<TRFace, List<TRVertex>> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
     {
         if (entry == null && sector.FDIndex == 0)
         {
@@ -255,7 +255,7 @@ public static class FaceUtilities
 
             List<TRVertex> vertMatches = GetFloorOrCeilingVerticesToMatch(x, z);
 
-            foreach (TRFace4 face in room.Mesh.Rectangles)
+            foreach (TRFace face in room.Mesh.Rectangles)
             {
                 if (faces.ContainsKey(face))
                 {

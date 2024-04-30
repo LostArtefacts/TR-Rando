@@ -275,6 +275,21 @@ public class TRLevelWriter : BinaryWriter
         Write(entity.Box);
     }
 
+    public void Write(IEnumerable<TRFace> faces, TRGameVersion version)
+    {
+        foreach (TRFace face in faces)
+        {
+            Write(face, version);
+        }
+    }
+
+    public void Write(TRFace face, TRGameVersion version)
+    {
+        Debug.Assert(face.Vertices.Count == (int)face.Type);
+        Write(face.Vertices);
+        WriteFaceTexture(face, version);
+    }
+
     public void Write(IEnumerable<TRMeshFace> faces, TRGameVersion version)
     {
         foreach (TRMeshFace face in faces)

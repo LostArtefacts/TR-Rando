@@ -142,13 +142,9 @@ public static class TRModelExtensions
 
         foreach (TR2Room room in level.Rooms)
         {
-            foreach (TRFace4 rect in room.Mesh.Rectangles)
+            foreach (TRFace face in room.Mesh.Faces)
             {
-                rect.Texture = ConvertTextureReference(rect.Texture, indexMap, defaultToOriginal);
-            }
-            foreach (TRFace3 tri in room.Mesh.Triangles)
-            {
-                tri.Texture = ConvertTextureReference(tri.Texture, indexMap, defaultToOriginal);
+                face.Texture = ConvertTextureReference(face.Texture, indexMap, defaultToOriginal);
             }
         }
 
@@ -200,13 +196,9 @@ public static class TRModelExtensions
 
         foreach (TR3Room room in level.Rooms)
         {
-            foreach (TRFace4 rect in room.Mesh.Rectangles)
+            foreach (TRFace face in room.Mesh.Faces)
             {
-                rect.Texture = ConvertTextureReference(rect.Texture, indexMap, defaultToOriginal);
-            }
-            foreach (TRFace3 tri in room.Mesh.Triangles)
-            {
-                tri.Texture = ConvertTextureReference(tri.Texture, indexMap, defaultToOriginal);
+                face.Texture = ConvertTextureReference(face.Texture, indexMap, defaultToOriginal);
             }
         }
 

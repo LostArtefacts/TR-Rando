@@ -129,7 +129,7 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace4 rect = room.Mesh.Rectangles[faceIndex];
+            TRFace rect = room.Mesh.Rectangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
                 TR1RoomVertex currentRoomVertex = room.Mesh.Vertices[rect.Vertices[vertIndex]];
@@ -147,7 +147,7 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace4 rect = room.Mesh.Rectangles[faceIndex];
+            TRFace rect = room.Mesh.Rectangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
                 TR2RoomVertex currentRoomVertex = room.Mesh.Vertices[rect.Vertices[vertIndex]];
@@ -165,7 +165,7 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace4 rect = room.Mesh.Rectangles[faceIndex];
+            TRFace rect = room.Mesh.Rectangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
                 TR3RoomVertex currentRoomVertex = room.Mesh.Vertices[rect.Vertices[vertIndex]];
@@ -183,7 +183,7 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace3 tri = room.Mesh.Triangles[faceIndex];
+            TRFace tri = room.Mesh.Triangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
                 TR1RoomVertex currentRoomVertex = room.Mesh.Vertices[tri.Vertices[vertIndex]];
@@ -201,7 +201,7 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace3 tri = room.Mesh.Triangles[faceIndex];
+            TRFace tri = room.Mesh.Triangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
                 TR2RoomVertex currentRoomVertex = room.Mesh.Vertices[tri.Vertices[vertIndex]];
@@ -219,7 +219,7 @@ public class EMModifyFaceFunction : BaseEMFunction
     {
         foreach (int faceIndex in mod.GetIndices())
         {
-            TRFace3 tri = room.Mesh.Triangles[faceIndex];
+            TRFace tri = room.Mesh.Triangles[faceIndex];
             foreach (int vertIndex in mod.VertexChanges.Keys)
             {
                 TR3RoomVertex currentRoomVertex = room.Mesh.Vertices[tri.Vertices[vertIndex]];
@@ -282,40 +282,39 @@ public class EMModifyFaceFunction : BaseEMFunction
         };
     }
 
-    private static void RotateRectangles(List<TRFace4> rectangles, EMFaceRotation rot)
+    private static void RotateRectangles(List<TRFace> rectangles, EMFaceRotation rot)
     {
         foreach (int rectIndex in rot.FaceIndices)
         {
-            TRFace4 face = rectangles[rectIndex];
-            face.Vertices = RotateVertices(face.Vertices, rot);
+            RotateVertices(rectangles[rectIndex].Vertices, rot);
         }
     }
 
-    private static void RotateTriangles(List<TRFace3> triangles, EMFaceRotation rot)
+    private static void RotateTriangles(List<TRFace> triangles, EMFaceRotation rot)
     {
         foreach (int triIndex in rot.FaceIndices)
         {
-            TRFace3 face = triangles[triIndex];
-            face.Vertices = RotateVertices(face.Vertices, rot);
+            RotateVertices(triangles[triIndex].Vertices, rot);
         }
     }
 
-    public static ushort[] RotateVertices(ushort[] originalVertices, EMFaceRotation rot)
+    public static void RotateVertices(List<ushort> originalVertices, EMFaceRotation rot)
     {
-        ushort[] remappedVertices = new ushort[originalVertices.Length];
-        for (int i = 0; i < originalVertices.Length; i++)
+        List<ushort> remappedVertices = new();
+        for (int i = 0; i < originalVertices.Count; i++)
         {
             if (rot.VertexRemap.ContainsKey(i))
             {
-                remappedVertices[i] = originalVertices[rot.VertexRemap[i]];
+                remappedVertices.Add(originalVertices[rot.VertexRemap[i]]);
             }
             else
             {
-                remappedVertices[i] = originalVertices[i];
+                remappedVertices.Add(originalVertices[i]);
             }
         }
 
-        return remappedVertices;
+        originalVertices.Clear();
+        originalVertices.AddRange(remappedVertices);
     }
 }
 

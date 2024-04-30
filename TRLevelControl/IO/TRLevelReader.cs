@@ -344,6 +344,29 @@ public class TRLevelReader : BinaryReader
         };
     }
 
+    public List<TRFace> ReadRoomFaces(long numFaces, TRFaceType type, TRGameVersion version)
+    {
+        List<TRFace> faces = new();
+        for (int i = 0; i < numFaces; i++)
+        {
+            faces.Add(ReadRoomFace(type, version));
+        }
+        return faces;
+    }
+
+    public TRFace ReadRoomFace(TRFaceType type, TRGameVersion version)
+    {
+        TRFace face = new()
+        {
+            Type = type,
+            Vertices = new(ReadUInt16s((int)type)),
+        };
+
+        ReadFaceTexture(face, version);
+
+        return face;
+    }
+
     public List<TRMeshFace> ReadMeshFaces(long numFaces, TRFaceType type, TRGameVersion version)
     {
         List<TRMeshFace> faces = new();

@@ -35,7 +35,7 @@ public class EMLadderFunction : EMRefaceFunction
         // we can maybe look at generating a ladder texture with a transparent background for
         // each level, and then merging it with the wall in a particular room (similar to the way
         // landmarks are done), provided there is enough texture space.
-        ApplyTextures(level);
+        base.ApplyToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -50,7 +50,7 @@ public class EMLadderFunction : EMRefaceFunction
 
         control.WriteToLevel(level);
 
-        ApplyTextures(level);
+        base.ApplyToLevel(level);
     }
 
     private void ModifyLadder(TRRoomSector sector, FDControl control)

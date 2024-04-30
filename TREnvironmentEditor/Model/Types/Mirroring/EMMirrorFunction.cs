@@ -940,17 +940,17 @@ public class EMMirrorFunction : BaseEMFunction
         foreach (TR1Room room in level.Rooms)
         {
             // Invert the faces, otherwise they are inside out
-            foreach (TRFace4 f in room.Mesh.Rectangles)
+            foreach (TRFace face in room.Mesh.Rectangles)
             {
-                Swap(f.Vertices, 0, 3);
-                Swap(f.Vertices, 1, 2);
-                textureReferences.Add(f.Texture);
+                face.SwapVertices(0, 3);
+                face.SwapVertices(1, 2);
+                textureReferences.Add(face.Texture);
             }
 
-            foreach (TRFace3 f in room.Mesh.Triangles)
+            foreach (TRFace face in room.Mesh.Triangles)
             {
-                Swap(f.Vertices, 0, 2);
-                textureReferences.Add(f.Texture);
+                face.SwapVertices(0, 2);
+                textureReferences.Add(face.Texture);
             }
 
             foreach (TR1RoomStaticMesh roomStaticMesh in room.StaticMeshes)
@@ -1017,17 +1017,17 @@ public class EMMirrorFunction : BaseEMFunction
         foreach (TR2Room room in level.Rooms)
         {
             // Invert the faces, otherwise they are inside out
-            foreach (TRFace4 f in room.Mesh.Rectangles)
+            foreach (TRFace face in room.Mesh.Rectangles)
             {
-                Swap(f.Vertices, 0, 3);
-                Swap(f.Vertices, 1, 2);
-                textureReferences.Add(f.Texture);
+                face.SwapVertices(0, 3);
+                face.SwapVertices(1, 2);
+                textureReferences.Add(face.Texture);
             }
 
-            foreach (TRFace3 f in room.Mesh.Triangles)
+            foreach (TRFace face in room.Mesh.Triangles)
             {
-                Swap(f.Vertices, 0, 2);
-                textureReferences.Add(f.Texture);
+                face.SwapVertices(0, 2);
+                textureReferences.Add(face.Texture);
             }
 
             foreach (TR2RoomStaticMesh roomStaticMesh in room.StaticMeshes)
@@ -1086,17 +1086,17 @@ public class EMMirrorFunction : BaseEMFunction
         foreach (TR3Room room in level.Rooms)
         {
             // Invert the faces, otherwise they are inside out
-            foreach (TRFace4 f in room.Mesh.Rectangles)
+            foreach (TRFace face in room.Mesh.Rectangles)
             {
-                Swap(f.Vertices, 0, 3);
-                Swap(f.Vertices, 1, 2);
-                textureReferences.Add((ushort)(f.Texture & 0x0fff));
+                face.SwapVertices(0, 3);
+                face.SwapVertices(1, 2);
+                textureReferences.Add(face.Texture);
             }
 
-            foreach (TRFace3 f in room.Mesh.Triangles)
+            foreach (TRFace face in room.Mesh.Triangles)
             {
-                Swap(f.Vertices, 0, 2);
-                textureReferences.Add((ushort)(f.Texture & 0x0fff));
+                face.SwapVertices(0, 2);
+                textureReferences.Add(face.Texture);
             }
 
             foreach (TR3RoomStaticMesh roomStaticMesh in room.StaticMeshes)

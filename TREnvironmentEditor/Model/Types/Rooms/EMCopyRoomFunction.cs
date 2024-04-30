@@ -71,12 +71,8 @@ public class EMCopyRoomFunction : BaseEMFunction
             newRoom.Mesh.Rectangles.Add(new()
             {
                 Texture = baseRoom.Mesh.Rectangles[i].Texture,
-                Vertices = new ushort[baseRoom.Mesh.Rectangles[i].Vertices.Length]
+                Vertices = new(baseRoom.Mesh.Rectangles[i].Vertices)
             });
-            for (int j = 0; j < newRoom.Mesh.Rectangles[i].Vertices.Length; j++)
-            {
-                newRoom.Mesh.Rectangles[i].Vertices[j] = baseRoom.Mesh.Rectangles[i].Vertices[j];
-            }
         }
 
         for (int i = 0; i < baseRoom.Mesh.Triangles.Count; i++)
@@ -84,12 +80,8 @@ public class EMCopyRoomFunction : BaseEMFunction
             newRoom.Mesh.Triangles.Add(new()
             {
                 Texture = baseRoom.Mesh.Triangles[i].Texture,
-                Vertices = new ushort[baseRoom.Mesh.Triangles[i].Vertices.Length]
+                Vertices = new(baseRoom.Mesh.Triangles[i].Vertices)
             });
-            for (int j = 0; j < newRoom.Mesh.Triangles[i].Vertices.Length; j++)
-            {
-                newRoom.Mesh.Triangles[i].Vertices[j] = baseRoom.Mesh.Triangles[i].Vertices[j];
-            }
         }
 
         // Vertices
@@ -211,12 +203,8 @@ public class EMCopyRoomFunction : BaseEMFunction
             newRoom.Mesh.Rectangles.Add(new()
             {
                 Texture = baseRoom.Mesh.Rectangles[i].Texture,
-                Vertices = new ushort[baseRoom.Mesh.Rectangles[i].Vertices.Length]
+                Vertices = new(baseRoom.Mesh.Rectangles[i].Vertices)
             });
-            for (int j = 0; j < newRoom.Mesh.Rectangles[i].Vertices.Length; j++)
-            {
-                newRoom.Mesh.Rectangles[i].Vertices[j] = baseRoom.Mesh.Rectangles[i].Vertices[j];
-            }
         }
 
         for (int i = 0; i < baseRoom.Mesh.Triangles.Count; i++)
@@ -224,12 +212,8 @@ public class EMCopyRoomFunction : BaseEMFunction
             newRoom.Mesh.Triangles.Add(new()
             {
                 Texture = baseRoom.Mesh.Triangles[i].Texture,
-                Vertices = new ushort[baseRoom.Mesh.Triangles[i].Vertices.Length]
+                Vertices = new(baseRoom.Mesh.Triangles[i].Vertices)
             });
-            for (int j = 0; j < newRoom.Mesh.Triangles[i].Vertices.Length; j++)
-            {
-                newRoom.Mesh.Triangles[i].Vertices[j] = baseRoom.Mesh.Triangles[i].Vertices[j];
-            }
         }
 
         // Vertices
@@ -355,12 +339,8 @@ public class EMCopyRoomFunction : BaseEMFunction
             newRoom.Mesh.Rectangles.Add(new()
             {
                 Texture = baseRoom.Mesh.Rectangles[i].Texture,
-                Vertices = new ushort[baseRoom.Mesh.Rectangles[i].Vertices.Length]
+                Vertices = new(baseRoom.Mesh.Rectangles[i].Vertices)
             });
-            for (int j = 0; j < newRoom.Mesh.Rectangles[i].Vertices.Length; j++)
-            {
-                newRoom.Mesh.Rectangles[i].Vertices[j] = baseRoom.Mesh.Rectangles[i].Vertices[j];
-            }
         }
 
         for (int i = 0; i < baseRoom.Mesh.Triangles.Count; i++)
@@ -368,12 +348,8 @@ public class EMCopyRoomFunction : BaseEMFunction
             newRoom.Mesh.Triangles.Add(new()
             {
                 Texture = baseRoom.Mesh.Triangles[i].Texture,
-                Vertices = new ushort[baseRoom.Mesh.Triangles[i].Vertices.Length]
+                Vertices = new(baseRoom.Mesh.Triangles[i].Vertices)
             });
-            for (int j = 0; j < newRoom.Mesh.Triangles[i].Vertices.Length; j++)
-            {
-                newRoom.Mesh.Triangles[i].Vertices[j] = baseRoom.Mesh.Triangles[i].Vertices[j];
-            }
         }
 
         // Vertices
