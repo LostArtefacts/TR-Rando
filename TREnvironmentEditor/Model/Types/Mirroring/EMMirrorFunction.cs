@@ -1024,7 +1024,7 @@ public class EMMirrorFunction : BaseEMFunction
 
             foreach (TR1RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
-                TR1Type id = roomStaticMesh.MeshID + TR1Type.SceneryBase;
+                TR1Type id = roomStaticMesh.ID + TR1Type.SceneryBase;
                 TRStaticMesh staticMesh = level.StaticMeshes[id];
                 if (!processedMeshes.Add(staticMesh))
                 {
@@ -1102,7 +1102,7 @@ public class EMMirrorFunction : BaseEMFunction
 
             foreach (TR2RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
-                TR2Type id = roomStaticMesh.MeshID + TR2Type.SceneryBase;
+                TR2Type id = roomStaticMesh.ID + TR2Type.SceneryBase;
                 TRStaticMesh staticMesh = level.StaticMeshes[id];
                 if (!processedMeshes.Add(staticMesh))
                 {
@@ -1172,7 +1172,7 @@ public class EMMirrorFunction : BaseEMFunction
 
             foreach (TR3RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
-                TR3Type id = roomStaticMesh.MeshID + TR3Type.SceneryBase;
+                TR3Type id = roomStaticMesh.ID + TR3Type.SceneryBase;
                 TRStaticMesh staticMesh = level.StaticMeshes[id];
                 if (!processedMeshes.Add(staticMesh))
                 {

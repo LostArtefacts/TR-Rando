@@ -65,7 +65,7 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Type, TR1Level>
         Dictionary<TR1Type, List<Location>> locations = new();
         foreach (TR1RoomStaticMesh staticMesh in level.Rooms[room].StaticMeshes)
         {
-            TR1Type id = staticMesh.MeshID + TR1Type.SceneryBase;
+            TR1Type id = staticMesh.ID + TR1Type.SceneryBase;
             locations[id] ??= new();
             locations[id].Add(new()
             {

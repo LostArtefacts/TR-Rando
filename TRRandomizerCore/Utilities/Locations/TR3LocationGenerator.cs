@@ -56,7 +56,7 @@ public class TR3LocationGenerator : AbstractLocationGenerator<TR3Type, TR3Level>
         Dictionary<TR3Type, List<Location>> locations = new();
         foreach (TR3RoomStaticMesh staticMesh in level.Rooms[room].StaticMeshes)
         {
-            TR3Type id = staticMesh.MeshID + TR3Type.SceneryBase;
+            TR3Type id = staticMesh.ID + TR3Type.SceneryBase;
             locations[id] ??= new();
             locations[id].Add(new()
             {

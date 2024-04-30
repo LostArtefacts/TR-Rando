@@ -53,7 +53,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
                 Z = (uint)location.Z,
                 Intensity = Mesh.Intensity1,
-                MeshID = Mesh.MeshID,
+                ID = Mesh.ID,
                 Rotation = (ushort)(location.Angle + short.MaxValue + 1)
             });
         }
@@ -102,7 +102,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 Z = (uint)location.Z,
                 Intensity1 = Mesh.Intensity1,
                 Intensity2 = Mesh.Intensity2,
-                MeshID = Mesh.MeshID,
+                ID = Mesh.ID,
                 Rotation = (ushort)(location.Angle + short.MaxValue + 1)
             });
         }
@@ -150,7 +150,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
                 Z = (uint)location.Z,
                 Colour = Mesh.Intensity1,
-                MeshID = Mesh.MeshID,
+                ID = Mesh.ID,
                 Rotation = (ushort)(location.Angle + short.MaxValue + 1)
             });
         }

@@ -234,7 +234,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
                     Rotation = reader.ReadUInt16(),
                     Colour = reader.ReadUInt16(),
                     Unused = reader.ReadUInt16(),
-                    MeshID = reader.ReadUInt16()
+                    ID = reader.ReadUInt16()
                 });
             }
 
@@ -291,7 +291,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
                 writer.Write(mesh.Rotation);
                 writer.Write(mesh.Colour);
                 writer.Write(mesh.Unused);
-                writer.Write(mesh.MeshID);
+                writer.Write(mesh.ID);
             }
 
             writer.Write(room.AlternateRoom);

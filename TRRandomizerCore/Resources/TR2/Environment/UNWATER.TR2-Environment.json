@@ -276,7 +276,7 @@
         "Mesh": {
           "Intensity1": 6400,
           "Intensity2": 6400,
-          "MeshID": 10
+          "ID": 10
         },
         "IgnoreSectorEntities": true
       },

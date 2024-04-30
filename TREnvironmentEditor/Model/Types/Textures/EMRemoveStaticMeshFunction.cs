@@ -30,7 +30,7 @@ public class EMRemoveStaticMeshFunction : BaseEMFunction
                 foreach (int roomNumber in roomList)
                 {
                     TR1Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                    room.StaticMeshes.RemoveAll(m => m.MeshID == meshID);
+                    room.StaticMeshes.RemoveAll(m => m.ID == meshID);
                 }
             }
         }
@@ -58,7 +58,7 @@ public class EMRemoveStaticMeshFunction : BaseEMFunction
                 foreach (int roomNumber in ClearFromRooms[meshID])
                 {
                     TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                    room.StaticMeshes.RemoveAll(m => m.MeshID == meshID);
+                    room.StaticMeshes.RemoveAll(m => m.ID == meshID);
                 }
             }
         }
@@ -86,7 +86,7 @@ public class EMRemoveStaticMeshFunction : BaseEMFunction
                 foreach (int roomNumber in ClearFromRooms[meshID])
                 {
                     TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                    room.StaticMeshes.RemoveAll(m => m.MeshID == meshID);
+                    room.StaticMeshes.RemoveAll(m => m.ID == meshID);
                 }
             }
         }
