@@ -56,13 +56,12 @@ public class TR2LocationGenerator : AbstractLocationGenerator<TR2Type, TR2Level>
         Dictionary<TR2Type, List<Location>> locations = new();
         foreach (TR2RoomStaticMesh staticMesh in level.Rooms[room].StaticMeshes)
         {
-            TR2Type id = staticMesh.MeshID + TR2Type.SceneryBase;
-            locations[id] ??= new();
-            locations[id].Add(new()
+            locations[staticMesh.ID] ??= new();
+            locations[staticMesh.ID].Add(new()
             {
-                X = (int)staticMesh.X,
-                Y = (int)staticMesh.Y,
-                Z = (int)staticMesh.Z,
+                X = staticMesh.X,
+                Y = staticMesh.Y,
+                Z = staticMesh.Z,
                 Room = room
             });
         }

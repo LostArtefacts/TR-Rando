@@ -1368,6 +1368,8 @@
       {
         "Comments": "Add some more skis.",
         "EMType": 24,
+        "MeshID": 286,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 98778,
@@ -1376,18 +1378,15 @@
             "Room": 76,
             "Angle": 16384
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "MeshID": 21
-        }
+        ]
       }
     ],
     [
       {
         "Comments": "Add some more skis.",
         "EMType": 24,
+        "MeshID": 286,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 78414,
@@ -1396,12 +1395,7 @@
             "Room": 11,
             "Angle": 16384
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "MeshID": 21
-        }
+        ]
       }
     ],
     [

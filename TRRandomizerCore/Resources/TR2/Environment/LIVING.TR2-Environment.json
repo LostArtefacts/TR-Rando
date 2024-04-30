@@ -500,6 +500,8 @@
       {
         "Comments": "Replace one of the pillars with some barrels.",
         "EMType": 24,
+        "MeshID": 300,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 58879,
@@ -514,12 +516,7 @@
             "Room": 34,
             "Angle": 16384
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "MeshID": 35
-        }
+        ]
       }
     ],
     [
@@ -1717,8 +1714,10 @@
           }
         },
         {
-          "Comments": "Add a static meshe.",
+          "Comments": "Add a static mesh.",
           "EMType": 24,
+          "MeshID": 294,
+          "Intensity": 6400,
           "Locations": [
             {
               "X": 88060,
@@ -1727,11 +1726,6 @@
               "Room": 82
             }
           ],
-          "Mesh": {
-            "Intensity1": 6400,
-            "Intensity2": 6400,
-            "MeshID": 29
-          },
           "IgnoreSectorEntities": true
         },
         {

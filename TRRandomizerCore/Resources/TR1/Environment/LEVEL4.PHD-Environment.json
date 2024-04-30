@@ -6309,7 +6309,7 @@
       "Comments": "Mirror the door baricade static mesh again so it looks normal (barricades themselves can't currently be mirrored).",
       "EMType": 27,
       "MeshIDs": [
-        33
+        224
       ]
     },
     {

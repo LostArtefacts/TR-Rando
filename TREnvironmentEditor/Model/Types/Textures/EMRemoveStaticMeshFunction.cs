@@ -6,7 +6,7 @@ namespace TREnvironmentEditor.Model.Types;
 public class EMRemoveStaticMeshFunction : BaseEMFunction
 {
     public EMLocation Location { get; set; }
-    public Dictionary<ushort, List<int>> ClearFromRooms { get; set; }
+    public Dictionary<uint, List<int>> ClearFromRooms { get; set; }
 
     public override void ApplyToLevel(TR1Level level)
     {
@@ -15,12 +15,7 @@ public class EMRemoveStaticMeshFunction : BaseEMFunction
         if (Location != null)
         {
             TR1Room room = level.Rooms[data.ConvertRoom(Location.Room)];
-
-            uint x = (uint)Location.X;
-            uint y = (uint)(Location.Y < 0 ? uint.MaxValue + Location.Y : Location.Y);
-            uint z = (uint)Location.Z;
-
-            room.StaticMeshes.RemoveAll(m => m.X == x && m.Y == y && m.Z == z);
+            room.StaticMeshes.RemoveAll(m => m.X == Location.X && m.Y == Location.Y && m.Z == Location.Z);
         }
 
         if (ClearFromRooms != null)
@@ -30,7 +25,7 @@ public class EMRemoveStaticMeshFunction : BaseEMFunction
                 foreach (int roomNumber in roomList)
                 {
                     TR1Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                    room.StaticMeshes.RemoveAll(m => m.MeshID == meshID);
+                    room.StaticMeshes.RemoveAll(m => m.ID == (TR1Type)meshID);
                 }
             }
         }
@@ -43,22 +38,17 @@ public class EMRemoveStaticMeshFunction : BaseEMFunction
         if (Location != null)
         {
             TR2Room room = level.Rooms[data.ConvertRoom(Location.Room)];
-
-            uint x = (uint)Location.X;
-            uint y = (uint)(Location.Y < 0 ? uint.MaxValue + Location.Y : Location.Y);
-            uint z = (uint)Location.Z;
-
-            room.StaticMeshes.RemoveAll(m => m.X == x && m.Y == y && m.Z == z);
+            room.StaticMeshes.RemoveAll(m => m.X == Location.X && m.Y == Location.Y && m.Z == Location.Z);
         }
 
         if (ClearFromRooms != null)
         {
-            foreach (ushort meshID in ClearFromRooms.Keys)
+            foreach (var (meshID, roomList) in ClearFromRooms)
             {
-                foreach (int roomNumber in ClearFromRooms[meshID])
+                foreach (int roomNumber in roomList)
                 {
                     TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                    room.StaticMeshes.RemoveAll(m => m.MeshID == meshID);
+                    room.StaticMeshes.RemoveAll(m => m.ID == (TR2Type)meshID);
                 }
             }
         }
@@ -71,22 +61,17 @@ public class EMRemoveStaticMeshFunction : BaseEMFunction
         if (Location != null)
         {
             TR3Room room = level.Rooms[data.ConvertRoom(Location.Room)];
-
-            uint x = (uint)Location.X;
-            uint y = (uint)(Location.Y < 0 ? uint.MaxValue + Location.Y : Location.Y);
-            uint z = (uint)Location.Z;
-
-            room.StaticMeshes.RemoveAll(m => m.X == x && m.Y == y && m.Z == z);
+            room.StaticMeshes.RemoveAll(m => m.X == Location.X && m.Y == Location.Y && m.Z == Location.Z);
         }
 
         if (ClearFromRooms != null)
         {
-            foreach (ushort meshID in ClearFromRooms.Keys)
+            foreach (var (meshID, roomList) in ClearFromRooms)
             {
-                foreach (int roomNumber in ClearFromRooms[meshID])
+                foreach (int roomNumber in roomList)
                 {
                     TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                    room.StaticMeshes.RemoveAll(m => m.MeshID == meshID);
+                    room.StaticMeshes.RemoveAll(m => m.ID == (TR3Type)meshID);
                 }
             }
         }

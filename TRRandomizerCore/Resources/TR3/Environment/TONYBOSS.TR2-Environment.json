@@ -51,6 +51,8 @@
       "Tags": [
         9
       ],
+      "MeshID": 404,
+      "Intensity": 15855,
       "Locations": [
         {
           "X": 23168,
@@ -80,11 +82,7 @@
           "Room": 24,
           "Angle": -16384
         }
-      ],
-      "Mesh": {
-        "Intensity1": 15855,
-        "MeshID": 30
-      }
+      ]
     }
   ],
   "Any": [],

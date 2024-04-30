@@ -1680,6 +1680,8 @@
         },
         {
           "EMType": 24,
+          "MeshID": 201,
+          "Intensity": 4096,
           "Locations": [
             {
               "X": 41984,
@@ -1702,11 +1704,7 @@
               "Room": -3,
               "Angle": 16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 4096,
-            "MeshID": 10
-          }
+          ]
         },
         {
           "Comments": "Move the end-level triggers.",
@@ -3487,6 +3485,8 @@
         {
           "Comments": "Add some scenery.",
           "EMType": 24,
+          "MeshID": 199,
+          "Intensity": 5376,
           "Locations": [
             {
               "X": 50688,
@@ -3500,11 +3500,7 @@
               "Z": 92672,
               "Room": -2
             }
-          ],
-          "Mesh": {
-            "Intensity1": 5376,
-            "MeshID": 8
-          }
+          ]
         },
         {
           "Comments": "Ensure the trapdoor model is available.",

@@ -1,15 +1,9 @@
-﻿using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TR3RoomVertex : ISerializableCompact
+public class TR3RoomVertex : TRRoomVertex
 {
-    public TRVertex Vertex { get; set; }
-
     public short Lighting { get; set; }
-
     public ushort Attributes { get; set; }
-
     public ushort Colour { get; set; }
 
     public bool UseWaveMovement
@@ -42,19 +36,5 @@ public class TR3RoomVertex : ISerializableCompact
                 Attributes = (ushort)(Attributes & ~0x4000);
             }
         }
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(Vertex.Serialize());
-            writer.Write(Lighting);
-            writer.Write(Attributes);
-            writer.Write(Colour);
-        }
-
-        return stream.ToArray();
     }
 }

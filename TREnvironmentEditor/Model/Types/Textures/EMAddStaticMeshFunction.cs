@@ -7,8 +7,9 @@ namespace TREnvironmentEditor.Model.Types;
 
 public class EMAddStaticMeshFunction : BaseEMFunction
 {
+    public uint MeshID { get; set; }
+    public ushort Intensity { get; set; }
     public List<EMLocation> Locations { get; set; }
-    public TR2RoomStaticMesh Mesh { get; set; }
     public bool IgnoreSectorEntities { get; set; }
 
     public override void ApplyToLevel(TR1Level level)
@@ -49,12 +50,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
 
             room.StaticMeshes.Add(new()
             {
-                X = (uint)location.X,
-                Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
-                Z = (uint)location.Z,
-                Intensity = Mesh.Intensity1,
-                MeshID = Mesh.MeshID,
-                Rotation = (ushort)(location.Angle + short.MaxValue + 1)
+                X = location.X,
+                Y = location.Y,
+                Z = location.Z,
+                Intensity = Intensity,
+                ID = (TR1Type)MeshID,
+                Angle = location.Angle
             });
         }
     }
@@ -97,13 +98,13 @@ public class EMAddStaticMeshFunction : BaseEMFunction
 
             room.StaticMeshes.Add(new()
             {
-                X = (uint)location.X,
-                Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
-                Z = (uint)location.Z,
-                Intensity1 = Mesh.Intensity1,
-                Intensity2 = Mesh.Intensity2,
-                MeshID = Mesh.MeshID,
-                Rotation = (ushort)(location.Angle + short.MaxValue + 1)
+                X = location.X,
+                Y = location.Y,
+                Z = location.Z,
+                Intensity1 = Intensity,
+                Intensity2 = Intensity,
+                ID = (TR2Type)MeshID,
+                Angle = location.Angle
             });
         }
     }
@@ -146,12 +147,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
 
             room.StaticMeshes.Add(new()
             {
-                X = (uint)location.X,
-                Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
-                Z = (uint)location.Z,
-                Colour = Mesh.Intensity1,
-                MeshID = Mesh.MeshID,
-                Rotation = (ushort)(location.Angle + short.MaxValue + 1)
+                X = location.X,
+                Y = location.Y,
+                Z = location.Z,
+                Colour = Intensity,
+                ID = (TR3Type)MeshID,
+                Angle = location.Angle
             });
         }
     }

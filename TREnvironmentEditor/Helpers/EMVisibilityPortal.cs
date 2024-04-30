@@ -7,12 +7,12 @@ public class EMVisibilityPortal
     public short BaseRoom { get; set; }
     public short AdjoiningRoom { get; set; }
     public TRVertex Normal { get; set; }
-    public TRVertex[] Vertices { get; set; }
+    public List<TRVertex> Vertices { get; set; }
 
     public TRRoomPortal ToPortal(EMLevelData levelData)
     {
         BaseRoom = (short)(BaseRoom < 0 ? levelData.NumRooms + BaseRoom : BaseRoom);
-        return new TRRoomPortal
+        return new()
         {
             AdjoiningRoom = (ushort)(AdjoiningRoom < 0 ? levelData.NumRooms + AdjoiningRoom : AdjoiningRoom),
             Normal = Normal,
@@ -22,7 +22,7 @@ public class EMVisibilityPortal
 
     public static EMVisibilityPortal FromPortal(short baseRoom, TRRoomPortal portal)
     {
-        return new EMVisibilityPortal
+        return new()
         {
             BaseRoom = baseRoom,
             AdjoiningRoom = (short)portal.AdjoiningRoom,

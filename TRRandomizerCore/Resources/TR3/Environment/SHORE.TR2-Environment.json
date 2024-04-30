@@ -21,6 +21,8 @@
       "Tags": [
         9
       ],
+      "MeshID": 404,
+      "Intensity": 15855,
       "Locations": [
         {
           "X": 15872,
@@ -57,11 +59,7 @@
           "Z": 50560,
           "Room": 2
         }
-      ],
-      "Mesh": {
-        "Intensity1": 15855,
-        "MeshID": 30
-      }
+      ]
     },
     {
       "Comments": "Add a switch for the serpent doors to allow leaving the village.",

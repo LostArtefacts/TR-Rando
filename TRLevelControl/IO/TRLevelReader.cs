@@ -412,6 +412,86 @@ public class TRLevelReader : BinaryReader
         };
     }
 
+    public List<TRVertex> ReadVertices(long numVertices)
+    {
+        List<TRVertex> vertices = new();
+        for (int i = 0; i < numVertices; i++)
+        {
+            vertices.Add(ReadVertex());
+        }
+        return vertices;
+    }
+
+    public TRVertex ReadVertex()
+    {
+        return new()
+        {
+            X = ReadInt16(),
+            Y = ReadInt16(),
+            Z = ReadInt16()
+        };
+    }
+
+    public TRRoomInfo ReadRoomInfo(TRGameVersion version)
+    {
+        int x = ReadInt32();
+        if (version == TRGameVersion.TR5)
+        {
+            ReadInt32(); // Always 0
+        }
+
+        return new()
+        {
+            X = x,
+            Z = ReadInt32(),
+            YBottom = ReadInt32(),
+            YTop = ReadInt32()
+        };
+    }
+
+    public List<TRRoomPortal> ReadRoomPortals(long numPortals)
+    {
+        List<TRRoomPortal> portals = new();
+        for (int i = 0; i < numPortals; i++)
+        {
+            portals.Add(ReadRoomPortal());
+        }
+        return portals;
+    }
+
+    public TRRoomPortal ReadRoomPortal()
+    {
+        return new()
+        {
+            AdjoiningRoom = ReadUInt16(),
+            Normal = ReadVertex(),
+            Vertices = new(ReadVertices(4))
+        };
+    }
+
+    public List<TRRoomSector> ReadRoomSectors(long numSectors)
+    {
+        List<TRRoomSector> sectors = new();
+        for (int i = 0; i < numSectors; i++)
+        {
+            sectors.Add(ReadRoomSector());
+        }
+        return sectors;
+    }
+
+    public TRRoomSector ReadRoomSector()
+    {
+        return new()
+        {
+            FDIndex = ReadUInt16(),
+            BoxIndex = ReadUInt16(),
+            RoomBelow = ReadByte(),
+            Floor = ReadSByte(),
+            RoomAbove = ReadByte(),
+            Ceiling = ReadSByte()
+        };
+    }
+
     public List<TRSpriteTexture> ReadSpriteTextures(long numTextures, TRGameVersion version)
     {
         List<TRSpriteTexture> textures = new();

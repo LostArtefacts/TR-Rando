@@ -2863,6 +2863,8 @@
         {
           "Comments": "Add some static meshes.",
           "EMType": 24,
+          "MeshID": 202,
+          "Intensity": 6400,
           "Locations": [
             {
               "X": 31232,
@@ -2892,15 +2894,13 @@
               "Room": -1,
               "Angle": -16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 6400,
-            "MeshID": 11
-          }
+          ]
         },
         {
           "Comments": "Add some static meshes.",
           "EMType": 24,
+          "MeshID": 223,
+          "Intensity": 6400,
           "Locations": [
             {
               "X": 32256,
@@ -2915,11 +2915,7 @@
               "Room": -1,
               "Angle": -32768
             }
-          ],
-          "Mesh": {
-            "Intensity1": 6400,
-            "MeshID": 32
-          }
+          ]
         },
         {
           "Comments": "Add a pickup.",

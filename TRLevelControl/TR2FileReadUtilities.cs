@@ -4,29 +4,6 @@ namespace TRLevelControl;
 
 internal static class TR2FileReadUtilities
 {
-    public static TRRoomPortal ReadRoomPortal(BinaryReader reader)
-    {
-        return new TRRoomPortal
-        {
-            AdjoiningRoom = reader.ReadUInt16(),
-
-            Normal = new TRVertex
-            {
-                X = reader.ReadInt16(),
-                Y = reader.ReadInt16(),
-                Z = reader.ReadInt16()
-            },
-
-            Vertices = new TRVertex[]
-            {
-                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-            }
-        };
-    }
-
     public static TRRoomSector ReadRoomSector(BinaryReader reader)
     {
         return new TRRoomSector
@@ -37,44 +14,6 @@ internal static class TR2FileReadUtilities
             Floor = reader.ReadSByte(),
             RoomAbove = reader.ReadByte(),
             Ceiling = reader.ReadSByte()
-        };
-    }
-
-    public static TR2RoomLight ReadRoomLight(BinaryReader reader)
-    {
-        return new TR2RoomLight
-        {
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            Intensity1 = reader.ReadUInt16(),
-            Intensity2 = reader.ReadUInt16(),
-            Fade1 = reader.ReadUInt32(),
-            Fade2 = reader.ReadUInt32()
-        };
-    }
-
-    public static TR2RoomStaticMesh ReadRoomStaticMesh(BinaryReader reader)
-    {
-        return new TR2RoomStaticMesh
-        {
-            X = reader.ReadUInt32(),
-            Y = reader.ReadUInt32(),
-            Z = reader.ReadUInt32(),
-            Rotation = reader.ReadUInt16(),
-            Intensity1 = reader.ReadUInt16(),
-            Intensity2 = reader.ReadUInt16(),
-            MeshID = reader.ReadUInt16()
-        };
-    }
-
-    public static TRVertex ReadVertex(BinaryReader reader)
-    {
-        return new TRVertex
-        {
-            X = reader.ReadInt16(),
-            Y = reader.ReadInt16(),
-            Z = reader.ReadInt16()
         };
     }
 

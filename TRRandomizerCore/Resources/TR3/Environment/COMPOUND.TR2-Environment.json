@@ -543,7 +543,7 @@
           "Comments": "Remove the hand scanner static mesh.",
           "EMType": 25,
           "ClearFromRooms": {
-            "39": [
+            "413": [
               74
             ]
           }
@@ -640,7 +640,7 @@
           "Comments": "Remove the hand scanner static mesh.",
           "EMType": 25,
           "ClearFromRooms": {
-            "39": [
+            "413": [
               87
             ]
           }

@@ -8,12 +8,14 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 {
     private readonly TRObjectMeshBuilder<TR4Type> _meshBuilder;
     private readonly TRSpriteBuilder<TR4Type> _spriteBuilder;
+    private readonly TR4RoomBuilder _roomBuilder;
 
     public TR4LevelControl(ITRLevelObserver observer = null)
         : base(observer)
     {
         _meshBuilder = new(TRGameVersion.TR4, _observer);
         _spriteBuilder = new(TRGameVersion.TR4);
+        _roomBuilder = new();
     }
 
     protected override TR4Level CreateLevel(TRFileVersion version)
@@ -164,8 +166,80 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadRooms(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateRooms(reader, _level);
-        TR4FileReadUtilities.PopulateFloordata(reader, _level);
+        ushort numRooms = reader.ReadUInt16();
+        _level.Rooms = new();
+        for (int i = 0; i < numRooms; i++)
+        {
+            TR4Room room = new()
+            {
+                Info = reader.ReadRoomInfo(_level.Version.Game)
+            };
+            _level.Rooms.Add(room);
+
+            _roomBuilder.ReadRawMesh(reader);
+
+            ushort numPortals = reader.ReadUInt16();
+            room.Portals = reader.ReadRoomPortals(numPortals);
+
+            room.NumZSectors = reader.ReadUInt16();
+            room.NumXSectors = reader.ReadUInt16();
+            room.Sectors = reader.ReadRoomSectors(room.NumXSectors * room.NumZSectors);
+
+            room.AmbientIntensity = reader.ReadInt16();
+            room.LightMode = reader.ReadInt16();
+            ushort numLights = reader.ReadUInt16();
+            room.Lights = new();
+            for (int j = 0; j < numLights; j++)
+            {
+                room.Lights.Add(new()
+                {
+                    X = reader.ReadInt32(),
+                    Y = reader.ReadInt32(),
+                    Z = reader.ReadInt32(),
+                    Colour = new()
+                    {
+                        Red = reader.ReadByte(),
+                        Green = reader.ReadByte(),
+                        Blue = reader.ReadByte()
+                    },
+                    LightType = reader.ReadByte(),
+                    Unknown = reader.ReadByte(),
+                    Intensity = reader.ReadByte(),
+                    In = reader.ReadSingle(),
+                    Out = reader.ReadSingle(),
+                    Length = reader.ReadSingle(),
+                    CutOff = reader.ReadSingle(),
+                    Dx = reader.ReadSingle(),
+                    Dy = reader.ReadSingle(),
+                    Dz = reader.ReadSingle()
+                });
+            }
+
+            ushort numStaticMeshes = reader.ReadUInt16();
+            room.StaticMeshes = new();
+            for (int j = 0; j < numStaticMeshes; j++)
+            {
+                room.StaticMeshes.Add(new()
+                {
+                    X = reader.ReadInt32(),
+                    Y = reader.ReadInt32(),
+                    Z = reader.ReadInt32(),
+                    Angle = reader.ReadInt16(),
+                    Colour = reader.ReadUInt16(),
+                    Unused = reader.ReadUInt16(),
+                    ID = TR4Type.SceneryBase + reader.ReadUInt16()
+                });
+            }
+
+            room.AlternateRoom = reader.ReadInt16();
+            room.Flags = reader.ReadInt16();
+            room.WaterScheme = reader.ReadByte();
+            room.ReverbInfo = reader.ReadByte();
+            room.Filler = reader.ReadByte();
+        }
+
+        uint numFloorData = reader.ReadUInt32();
+        _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
     }
 
     private void WriteRooms(TRLevelWriter writer)
@@ -175,7 +249,56 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         writer.Write((ushort)_level.Rooms.Count);
         foreach (TR4Room room in _level.Rooms)
         {
-            writer.Write(room.Serialize());
+            writer.Write(room.Info, TRGameVersion.TR4);
+
+            _roomBuilder.WriteMesh(writer, room.Mesh);
+
+            writer.Write((ushort)room.Portals.Count);
+            writer.Write(room.Portals);
+
+            writer.Write(room.NumZSectors);
+            writer.Write(room.NumXSectors);
+            writer.Write(room.Sectors);
+
+            writer.Write(room.AmbientIntensity);
+            writer.Write(room.LightMode);
+
+            writer.Write((ushort)room.Lights.Count);
+            foreach (TR4RoomLight light in room.Lights)
+            {
+                writer.Write(light.X);
+                writer.Write(light.Y);
+                writer.Write(light.Z);
+                writer.Write(light.Colour);
+                writer.Write(light.LightType);
+                writer.Write(light.Unknown);
+                writer.Write(light.Intensity);
+                writer.Write(light.In);
+                writer.Write(light.Out);
+                writer.Write(light.Length);
+                writer.Write(light.CutOff);
+                writer.Write(light.Dx);
+                writer.Write(light.Dy);
+                writer.Write(light.Dz);
+            }
+
+            writer.Write((ushort)room.StaticMeshes.Count);
+            foreach (TR4RoomStaticMesh mesh in room.StaticMeshes)
+            {
+                writer.Write(mesh.X);
+                writer.Write(mesh.Y);
+                writer.Write(mesh.Z);
+                writer.Write(mesh.Angle);
+                writer.Write(mesh.Colour);
+                writer.Write(mesh.Unused);
+                writer.Write((ushort)(mesh.ID - TR4Type.SceneryBase));
+            }
+
+            writer.Write(room.AlternateRoom);
+            writer.Write(room.Flags);
+            writer.Write(room.WaterScheme);
+            writer.Write(room.ReverbInfo);
+            writer.Write(room.Filler);
         }
 
         writer.Write((uint)_level.FloorData.Count);
@@ -217,6 +340,11 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
     private void ReadSprites(TRLevelReader reader)
     {
         _level.Sprites = _spriteBuilder.ReadSprites(reader);
+
+        for (int i = 0; i < _level.Rooms.Count; i++)
+        {
+            _level.Rooms[i].Mesh = _roomBuilder.BuildMesh(i);
+        }
     }
 
     private void WriteSprites(TRLevelWriter writer)

@@ -88,6 +88,8 @@
       {
         "Comments": "Add some barrels",
         "EMType": 24,
+        "MeshID": 287,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 35324,
@@ -96,12 +98,7 @@
             "Room": 42,
             "Angle": 16384
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "MeshID": 22
-        }
+        ]
       }
     ],
     [

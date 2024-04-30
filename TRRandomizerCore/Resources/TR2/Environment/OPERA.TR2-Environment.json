@@ -1168,6 +1168,8 @@
         "Tags": [
           11
         ],
+        "MeshID": 302,
+        "Intensity": 7168,
         "Locations": [
           {
             "X": 73216,
@@ -1184,11 +1186,6 @@
             "Angle": -32768
           }
         ],
-        "Mesh": {
-          "Intensity1": 7168,
-          "Intensity2": 4096,
-          "MeshID": 37
-        },
         "IgnoreSectorEntities": true
       },
       {
@@ -1196,6 +1193,8 @@
         "Tags": [
           11
         ],
+        "MeshID": 303,
+        "Intensity": 7168,
         "Locations": [
           {
             "X": 72192,
@@ -1211,11 +1210,6 @@
             "Room": 53
           }
         ],
-        "Mesh": {
-          "Intensity1": 7168,
-          "Intensity2": 4096,
-          "MeshID": 38
-        },
         "IgnoreSectorEntities": true
       },
       {
@@ -1223,6 +1217,8 @@
         "Tags": [
           11
         ],
+        "MeshID": 301,
+        "Intensity": 7168,
         "Locations": [
           {
             "X": 73216,
@@ -1232,11 +1228,6 @@
             "Angle": -16384
           }
         ],
-        "Mesh": {
-          "Intensity1": 7168,
-          "Intensity2": 4096,
-          "MeshID": 36
-        },
         "IgnoreSectorEntities": true
       },
       {
@@ -1279,6 +1270,8 @@
         "Tags": [
           11
         ],
+        "MeshID": 292,
+        "Intensity": 7168,
         "Locations": [
           {
             "X": 73216,
@@ -1288,11 +1281,6 @@
             "Angle": -32768
           }
         ],
-        "Mesh": {
-          "Intensity1": 7168,
-          "Intensity2": 4096,
-          "MeshID": 27
-        },
         "IgnoreSectorEntities": true
       }
     ],

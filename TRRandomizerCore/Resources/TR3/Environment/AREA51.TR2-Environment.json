@@ -144,7 +144,7 @@
           "Comments": "Remove the hand scanner static mesh.",
           "EMType": 25,
           "ClearFromRooms": {
-            "43": [
+            "417": [
               0
             ]
           }
@@ -225,7 +225,7 @@
           "Comments": "Remove the hand scanner static mesh.",
           "EMType": 25,
           "ClearFromRooms": {
-            "43": [
+            "417": [
               1
             ]
           }
@@ -275,7 +275,7 @@
           "Comments": "Remove the hand scanner static mesh.",
           "EMType": 25,
           "ClearFromRooms": {
-            "43": [
+            "417": [
               9
             ]
           }
@@ -317,7 +317,7 @@
           "Comments": "Remove the hand scanner static mesh.",
           "EMType": 25,
           "ClearFromRooms": {
-            "43": [
+            "417": [
               12
             ]
           }
@@ -437,7 +437,7 @@
           "Comments": "Remove the hand scanner static mesh.",
           "EMType": 25,
           "ClearFromRooms": {
-            "43": [
+            "417": [
               120
             ]
           }
@@ -507,21 +507,21 @@
       "Comments": "Get rid of the missile static meshes.",
       "EMType": 25,
       "ClearFromRooms": {
-        "17": [
+        "391": [
           49,
           51,
           53
         ],
-        "18": [
+        "392": [
           147,
           148
         ],
-        "19": [
+        "393": [
           49,
           51,
           53
         ],
-        "20": [
+        "394": [
           49,
           51,
           53

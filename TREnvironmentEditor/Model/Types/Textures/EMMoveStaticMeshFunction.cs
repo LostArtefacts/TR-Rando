@@ -15,29 +15,9 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
             TR1Room room = level.Rooms[data.ConvertRoom(roomIndex)];
             foreach (int meshIndex in Relocations[roomIndex].Keys)
             {
-                TR1RoomStaticMesh mesh = room.StaticMeshes[meshIndex];
-                EMLocation location = new()
-                {
-                    X = (int)mesh.X,
-                    Y = (int)mesh.Y,
-                    Z = (int)mesh.Z,
-                };
-                EMLocation relocation = Relocations[roomIndex][meshIndex];
-                AmendLocation(location, relocation);
-
-                mesh.X = (uint)location.X;
-                mesh.Y = (uint)location.Y;
-                mesh.Z = (uint)location.Z;
-                mesh.Rotation = (ushort)(relocation.Angle + short.MaxValue + 1);
+                MoveMesh(room.StaticMeshes[meshIndex], Relocations[roomIndex][meshIndex]);
             }
         }
-    }
-
-    private static void AmendLocation(EMLocation location, EMLocation amendment)
-    {
-        location.X += amendment.X;
-        location.Y += amendment.Y;
-        location.Z += amendment.Z;
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -48,20 +28,7 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
             TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
             foreach (int meshIndex in Relocations[roomIndex].Keys)
             {
-                TR2RoomStaticMesh mesh = room.StaticMeshes[meshIndex];
-                EMLocation location = new()
-                {
-                    X = (int)mesh.X,
-                    Y = (int)mesh.Y,
-                    Z = (int)mesh.Z,
-                };
-                EMLocation relocation = Relocations[roomIndex][meshIndex];
-                AmendLocation(location, relocation);
-
-                mesh.X = (uint)location.X;
-                mesh.Y = (uint)location.Y;
-                mesh.Z = (uint)location.Z;
-                mesh.Rotation = (ushort)(relocation.Angle + short.MaxValue + 1);
+                MoveMesh(room.StaticMeshes[meshIndex], Relocations[roomIndex][meshIndex]);
             }
         }
     }
@@ -74,21 +41,17 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
             TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
             foreach (int meshIndex in Relocations[roomIndex].Keys)
             {
-                TR3RoomStaticMesh mesh = room.StaticMeshes[meshIndex];
-                EMLocation location = new()
-                {
-                    X = (int)mesh.X,
-                    Y = (int)mesh.Y,
-                    Z = (int)mesh.Z,
-                };
-                EMLocation relocation = Relocations[roomIndex][meshIndex];
-                AmendLocation(location, relocation);
-
-                mesh.X = (uint)location.X;
-                mesh.Y = (uint)location.Y;
-                mesh.Z = (uint)location.Z;
-                mesh.Rotation = (ushort)(relocation.Angle + short.MaxValue + 1);
+                MoveMesh(room.StaticMeshes[meshIndex], Relocations[roomIndex][meshIndex]);
             }
         }
+    }
+
+    private static void MoveMesh<T>(TRRoomStaticMesh<T> mesh, EMLocation amendment)
+        where T : Enum
+    {
+        mesh.X += amendment.X;
+        mesh.Y += amendment.Y;
+        mesh.Z += amendment.Z;
+        mesh.Angle = amendment.Angle;
     }
 }

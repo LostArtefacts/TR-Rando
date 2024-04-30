@@ -148,7 +148,7 @@
         "Comments": "Remove the grandfather clock from the hall.",
         "EMType": 25,
         "ClearFromRooms": {
-          "27": [
+          "292": [
             60
           ]
         }
@@ -156,6 +156,8 @@
       {
         "Comments": "Move it upstairs instead.",
         "EMType": 24,
+        "MeshID": 292,
+        "Intensity": 4096,
         "Locations": [
           {
             "X": 35328,
@@ -163,12 +165,7 @@
             "Room": 9,
             "Angle": -16384
           }
-        ],
-        "Mesh": {
-          "Intensity1": 4096,
-          "Intensity2": 4096,
-          "MeshID": 27
-        }
+        ]
       },
       {
         "Comments": "Move the ticking sound source too.",
@@ -181,6 +178,8 @@
       {
         "Comments": "Put a chaise longue where the clock used to be.",
         "EMType": 24,
+        "MeshID": 274,
+        "Intensity": 4096,
         "Locations": [
           {
             "X": 38400,
@@ -189,12 +188,7 @@
             "Room": 60,
             "Angle": -16384
           }
-        ],
-        "Mesh": {
-          "Intensity1": 4096,
-          "Intensity2": 4096,
-          "MeshID": 9
-        }
+        ]
       }
     ],
     [
@@ -350,6 +344,8 @@
         {
           "Comments": "Put a stereo in Lara's bedroom.",
           "EMType": 24,
+          "MeshID": 271,
+          "Intensity": 7936,
           "Locations": [
             {
               "X": 39424,
@@ -358,12 +354,7 @@
               "Room": 52,
               "Angle": 16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 7936,
-            "Intensity2": 4096,
-            "MeshID": 6
-          }
+          ]
         },
         {
           "Comments": "Amend the switch (see All) to play some nice tunes as well as turning off the alarms.",
@@ -398,6 +389,8 @@
         {
           "Comments": "Put plants beside the stereo.",
           "EMType": 24,
+          "MeshID": 265,
+          "Intensity": 7936,
           "Locations": [
             {
               "X": 39424,
@@ -413,11 +406,7 @@
               "Room": 52,
               "Angle": -32768
             }
-          ],
-          "Mesh": {
-            "Intensity1": 7936,
-            "Intensity2": 4096
-          }
+          ]
         }
       ],
       "Followers": [
@@ -567,6 +556,8 @@
     {
       "Comments": "Put a chair beside the bed for the starting cutscene.",
       "EMType": 24,
+      "MeshID": 275,
+      "Intensity": 7936,
       "Locations": [
         {
           "X": 33617,
@@ -575,12 +566,7 @@
           "Room": 52,
           "Angle": -16384
         }
-      ],
-      "Mesh": {
-        "Intensity1": 7936,
-        "Intensity2": 4096,
-        "MeshID": 10
-      }
+      ]
     },
     {
       "Comments": "Put a step below the chair so it's not floating.",
@@ -626,6 +612,8 @@
     {
       "Comments": "Put a plant beside the fire for the camera to look at.",
       "EMType": 24,
+      "MeshID": 266,
+      "Intensity": 7936,
       "Locations": [
         {
           "X": 33830,
@@ -633,12 +621,7 @@
           "Z": 60672,
           "Room": 52
         }
-      ],
-      "Mesh": {
-        "Intensity1": 7936,
-        "Intensity2": 4096,
-        "MeshID": 1
-      }
+      ]
     },
     {
       "Comments": "Move the shower shotgun animation to the other side of the bathroom.",

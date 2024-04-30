@@ -1474,6 +1474,8 @@
         {
           "Comments": "Add some skeletons.",
           "EMType": 24,
+          "MeshID": 236,
+          "Intensity": 4864,
           "Locations": [
             {
               "X": 60928,
@@ -1482,14 +1484,12 @@
               "Room": -1,
               "Angle": -32768
             }
-          ],
-          "Mesh": {
-            "Intensity1": 4864,
-            "MeshID": 45
-          }
+          ]
         },
         {
           "EMType": 24,
+          "MeshID": 239,
+          "Intensity": 5632,
           "Locations": [
             {
               "X": 62976,
@@ -1498,11 +1498,7 @@
               "Room": -1,
               "Angle": -16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 5632,
-            "MeshID": 48
-          }
+          ]
         },
         {
           "Comments": "Add breakable tiles to reach the levers.",
@@ -3828,6 +3824,8 @@
         {
           "Comments": "Add some statues.",
           "EMType": 24,
+          "MeshID": 203,
+          "Intensity": 5632,
           "Locations": [
             {
               "X": 46080,
@@ -3843,11 +3841,7 @@
               "Room": -2,
               "Angle": 16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 5632,
-            "MeshID": 12
-          }
+          ]
         },
         {
           "Comments": "Ensure Thor's hammer model is available.",
@@ -4638,6 +4632,8 @@
           {
             "Comments": "Add some fake levers.",
             "EMType": 24,
+            "MeshID": 206,
+            "Intensity": 5632,
             "Locations": [
               {
                 "X": 64000,
@@ -4727,11 +4723,7 @@
                 "Room": 43,
                 "Angle": -32768
               }
-            ],
-            "Mesh": {
-              "Intensity1": 5632,
-              "MeshID": 15
-            }
+            ]
           }
         ]
       ]
@@ -5844,6 +5836,8 @@
           {
             "Comments": "Add a fake lever.",
             "EMType": 24,
+            "MeshID": 206,
+            "Intensity": 5632,
             "Locations": [
               {
                 "X": 54784,
@@ -5851,11 +5845,7 @@
                 "Z": 45568,
                 "Room": 35
               }
-            ],
-            "Mesh": {
-              "Intensity1": 5632,
-              "MeshID": 15
-            }
+            ]
           },
           {
             "Comments": "Match the original lever style.",
@@ -5909,6 +5899,8 @@
         {
           "Comments": "Lara took so long to complete ToQ that Larson died.",
           "EMType": 24,
+          "MeshID": 205,
+          "Intensity": 5200,
           "Locations": [
             {
               "X": 39424,
@@ -5925,10 +5917,6 @@
               "Angle": -16384
             }
           ],
-          "Mesh": {
-            "Intensity1": 5200,
-            "MeshID": 14
-          },
           "IgnoreSectorEntities": true
         },
         {

@@ -76,6 +76,8 @@
       {
         "Comments": "Make a new bench near the exit.",
         "EMType": 24,
+        "MeshID": 284,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 33286,
@@ -84,18 +86,15 @@
             "Room": 60,
             "Angle": 16384
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "MeshID": 29
-        }
+        ]
       }
     ],
     [
       {
         "Comments": "Make a new bench beside the shark pool.",
         "EMType": 24,
+        "MeshID": 294,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 52685,
@@ -104,12 +103,7 @@
             "Room": 12,
             "Angle": -16384
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "MeshID": 29
-        }
+        ]
       }
     ],
     [

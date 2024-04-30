@@ -1,10 +1,11 @@
 ﻿namespace TRLevelControl.Model;
 
-public class TR1RoomLight
+public class TRRoomStaticMesh<T>
+    where T : Enum
 {
+    public T ID { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
     public int Z { get; set; }
-    public ushort Intensity { get; set; }
-    public uint Fade { get; set; }
+    public short Angle { get; set; }
 }
