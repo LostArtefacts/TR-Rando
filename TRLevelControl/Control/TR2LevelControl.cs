@@ -226,7 +226,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
                     X = reader.ReadInt32(),
                     Y = reader.ReadInt32(),
                     Z = reader.ReadInt32(),
-                    Rotation = reader.ReadInt16(),
+                    Angle = reader.ReadInt16(),
                     Intensity1 = reader.ReadUInt16(),
                     Intensity2 = reader.ReadUInt16(),
                     ID = reader.ReadUInt16()
@@ -281,7 +281,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
                 writer.Write(mesh.X);
                 writer.Write(mesh.Y);
                 writer.Write(mesh.Z);
-                writer.Write(mesh.Rotation);
+                writer.Write(mesh.Angle);
                 writer.Write(mesh.Intensity1);
                 writer.Write(mesh.Intensity2);
                 writer.Write(mesh.ID);

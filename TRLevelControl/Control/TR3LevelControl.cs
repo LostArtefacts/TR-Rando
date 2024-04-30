@@ -231,7 +231,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
                     X = reader.ReadInt32(),
                     Y = reader.ReadInt32(),
                     Z = reader.ReadInt32(),
-                    Rotation = reader.ReadInt16(),
+                    Angle = reader.ReadInt16(),
                     Colour = reader.ReadUInt16(),
                     Unused = reader.ReadUInt16(),
                     ID = reader.ReadUInt16()
@@ -288,7 +288,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
                 writer.Write(mesh.X);
                 writer.Write(mesh.Y);
                 writer.Write(mesh.Z);
-                writer.Write(mesh.Rotation);
+                writer.Write(mesh.Angle);
                 writer.Write(mesh.Colour);
                 writer.Write(mesh.Unused);
                 writer.Write(mesh.ID);

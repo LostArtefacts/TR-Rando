@@ -54,7 +54,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 Z = location.Z,
                 Intensity = Mesh.Intensity1,
                 ID = Mesh.ID,
-                Rotation = location.Angle
+                Angle = location.Angle
             });
         }
     }
@@ -103,7 +103,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 Intensity1 = Mesh.Intensity1,
                 Intensity2 = Mesh.Intensity2,
                 ID = Mesh.ID,
-                Rotation = location.Angle
+                Angle = location.Angle
             });
         }
     }
@@ -151,7 +151,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 Z = location.Z,
                 Colour = Mesh.Intensity1,
                 ID = Mesh.ID,
-                Rotation = location.Angle
+                Angle = location.Angle
             });
         }
     }

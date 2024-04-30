@@ -478,9 +478,9 @@ public class EMMirrorFunction : BaseEMFunction
         foreach (TRRoomStaticMesh mesh in meshes)
         {
             mesh.X = FlipWorldX(mesh.X);
-            if (mesh.Rotation == _east || mesh.Rotation == _west)
+            if (mesh.Angle == _east || mesh.Angle == _west)
             {
-                mesh.Rotation *= -1;
+                mesh.Angle *= -1;
             }
         }
     }

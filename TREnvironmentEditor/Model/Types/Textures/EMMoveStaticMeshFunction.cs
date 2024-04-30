@@ -51,6 +51,6 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
         mesh.X += amendment.X;
         mesh.Y += amendment.Y;
         mesh.Z += amendment.Z;
-        mesh.Rotation = amendment.Angle;
+        mesh.Angle = amendment.Angle;
     }
 }

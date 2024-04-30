@@ -214,7 +214,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
                     X = reader.ReadInt32(),
                     Y = reader.ReadInt32(),
                     Z = reader.ReadInt32(),
-                    Rotation = reader.ReadInt16(),
+                    Angle = reader.ReadInt16(),
                     Intensity = reader.ReadUInt16(),
                     ID = reader.ReadUInt16()
                 });
@@ -264,7 +264,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
                 writer.Write(mesh.X);
                 writer.Write(mesh.Y);
                 writer.Write(mesh.Z);
-                writer.Write(mesh.Rotation);
+                writer.Write(mesh.Angle);
                 writer.Write(mesh.Intensity);
                 writer.Write(mesh.ID);
             }

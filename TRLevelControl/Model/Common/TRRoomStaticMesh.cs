@@ -6,5 +6,5 @@ public class TRRoomStaticMesh
     public int X { get; set; }
     public int Y { get; set; }
     public int Z { get; set; }
-    public short Rotation { get; set; }
+    public short Angle { get; set; }
 }

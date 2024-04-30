@@ -163,7 +163,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 Intensity1 = roomDef.Room.StaticMeshes[i].Intensity1,
                 Intensity2 = roomDef.Room.StaticMeshes[i].Intensity2,
                 ID = roomDef.Room.StaticMeshes[i].ID,
-                Rotation = roomDef.Room.StaticMeshes[i].Rotation,
+                Angle = roomDef.Room.StaticMeshes[i].Angle,
                 X = roomDef.Room.StaticMeshes[i].X + xdiff,
                 Y = roomDef.Room.StaticMeshes[i].Y + ydiff,
                 Z = roomDef.Room.StaticMeshes[i].Z + zdiff
@@ -415,7 +415,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 Colour = roomDef.Room.StaticMeshes[i].Colour,
                 ID = roomDef.Room.StaticMeshes[i].ID,
                 Unused = roomDef.Room.StaticMeshes[i].Unused,
-                Rotation = roomDef.Room.StaticMeshes[i].Rotation,
+                Angle = roomDef.Room.StaticMeshes[i].Angle,
                 X = roomDef.Room.StaticMeshes[i].X + xdiff,
                 Y = roomDef.Room.StaticMeshes[i].Y + ydiff,
                 Z = roomDef.Room.StaticMeshes[i].Z + zdiff

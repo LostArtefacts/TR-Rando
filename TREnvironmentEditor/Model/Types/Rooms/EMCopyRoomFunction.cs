@@ -124,7 +124,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             {
                 Intensity = baseRoom.StaticMeshes[i].Intensity,
                 ID = baseRoom.StaticMeshes[i].ID,
-                Rotation = baseRoom.StaticMeshes[i].Rotation,
+                Angle = baseRoom.StaticMeshes[i].Angle,
                 X = baseRoom.StaticMeshes[i].X + xdiff,
                 Y = baseRoom.StaticMeshes[i].Y + ydiff,
                 Z = baseRoom.StaticMeshes[i].Z + zdiff
@@ -267,7 +267,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                 Intensity1 = baseRoom.StaticMeshes[i].Intensity1,
                 Intensity2 = baseRoom.StaticMeshes[i].Intensity2,
                 ID = baseRoom.StaticMeshes[i].ID,
-                Rotation = baseRoom.StaticMeshes[i].Rotation,
+                Angle = baseRoom.StaticMeshes[i].Angle,
                 X = baseRoom.StaticMeshes[i].X + xdiff,
                 Y = baseRoom.StaticMeshes[i].Y + ydiff,
                 Z = baseRoom.StaticMeshes[i].Z + zdiff
@@ -411,7 +411,7 @@ public class EMCopyRoomFunction : BaseEMFunction
                 Colour = baseRoom.StaticMeshes[i].Colour,
                 ID = baseRoom.StaticMeshes[i].ID,
                 Unused = baseRoom.StaticMeshes[i].Unused,
-                Rotation = baseRoom.StaticMeshes[i].Rotation,
+                Angle = baseRoom.StaticMeshes[i].Angle,
                 X = baseRoom.StaticMeshes[i].X + xdiff,
                 Y = baseRoom.StaticMeshes[i].Y + ydiff,
                 Z = baseRoom.StaticMeshes[i].Z + zdiff
