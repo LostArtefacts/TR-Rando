@@ -2,14 +2,10 @@
 
 namespace TRLevelControl.Model;
 
-public class TR3RoomVertex : ISerializableCompact
+public class TR3RoomVertex : TRRoomVertex, ISerializableCompact
 {
-    public TRVertex Vertex { get; set; }
-
     public short Lighting { get; set; }
-
     public ushort Attributes { get; set; }
-
     public ushort Colour { get; set; }
 
     public bool UseWaveMovement
@@ -44,6 +40,7 @@ public class TR3RoomVertex : ISerializableCompact
         }
     }
 
+    // Temp for TR4
     public byte[] Serialize()
     {
         using MemoryStream stream = new();

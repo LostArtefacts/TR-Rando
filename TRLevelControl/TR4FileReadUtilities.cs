@@ -63,7 +63,7 @@ internal static class TR4FileReadUtilities
             room.StaticMeshes = new();
             for (int j = 0; j < numStaticMeshes; j++)
             {
-                room.StaticMeshes.Add(TR3FileReadUtilities.ReadRoomStaticMesh(reader));
+                room.StaticMeshes.Add(ReadRoomStaticMesh(reader));
             }
 
             room.AlternateRoom = reader.ReadInt16();
@@ -148,6 +148,20 @@ internal static class TR4FileReadUtilities
         Debug.Assert(offset == rawData.Length);
 
         return roomData;
+    }
+
+    public static TR3RoomStaticMesh ReadRoomStaticMesh(BinaryReader reader)
+    {
+        return new TR3RoomStaticMesh
+        {
+            X = reader.ReadUInt32(),
+            Y = reader.ReadUInt32(),
+            Z = reader.ReadUInt32(),
+            Rotation = reader.ReadUInt16(),
+            Colour = reader.ReadUInt16(),
+            Unused = reader.ReadUInt16(),
+            MeshID = reader.ReadUInt16()
+        };
     }
 
     public static void PopulateFloordata(BinaryReader reader, TR4Level lvl)
