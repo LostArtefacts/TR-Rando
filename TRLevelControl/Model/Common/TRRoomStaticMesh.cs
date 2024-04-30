@@ -3,8 +3,8 @@
 public class TRRoomStaticMesh
 {
     public ushort ID { get; set; }
-    public uint X { get; set; }
-    public uint Y { get; set; }
-    public uint Z { get; set; }
-    public ushort Rotation { get; set; }
+    public int X { get; set; }
+    public int Y { get; set; }
+    public int Z { get; set; }
+    public short Rotation { get; set; }
 }

@@ -347,20 +347,7 @@ public class EMMirrorFunction : BaseEMFunction
                 light.X = FlipWorldX(light.X);
             }
 
-            // Move the static meshes
-            foreach (TR1RoomStaticMesh mesh in room.StaticMeshes)
-            {
-                mesh.X = (uint)FlipWorldX((int)mesh.X);
-
-                // Convert the angle to short units for consistency and then flip it if +/-X
-                int angle = mesh.Rotation + _south;
-                if (angle == _east || angle == _west)
-                {
-                    angle *= -1;
-                    angle -= _south;
-                    mesh.Rotation = (ushort)angle;
-                }
-            }
+            MirrorRoomStaticMeshes(room.StaticMeshes);
         }
     }
 
@@ -421,20 +408,7 @@ public class EMMirrorFunction : BaseEMFunction
                 light.X = FlipWorldX(light.X);
             }
 
-            // Move the static meshes
-            foreach (TR2RoomStaticMesh mesh in room.StaticMeshes)
-            {
-                mesh.X = (uint)FlipWorldX((int)mesh.X);
-
-                // Convert the angle to short units for consistency and then flip it if +/-X
-                int angle = mesh.Rotation + _south;
-                if (angle == _east || angle == _west)
-                {
-                    angle *= -1;
-                    angle -= _south;
-                    mesh.Rotation = (ushort)angle;
-                }
-            }
+            MirrorRoomStaticMeshes(room.StaticMeshes);
         }
     }
 
@@ -495,16 +469,18 @@ public class EMMirrorFunction : BaseEMFunction
                 light.X = FlipWorldX(light.X);
             }
 
-            // Move the static meshes
-            foreach (TR3RoomStaticMesh mesh in room.StaticMeshes)
-            {
-                mesh.X = (uint)FlipWorldX((int)mesh.X);
+            MirrorRoomStaticMeshes(room.StaticMeshes);
+        }
+    }
 
-                // Convert the angle to short units for consistency and then flip it
-                short angle = (short)(mesh.Rotation + _south);
-                angle *= -1;
-                angle -= _south;
-                mesh.Rotation = (ushort)angle;
+    private void MirrorRoomStaticMeshes(IEnumerable<TRRoomStaticMesh> meshes)
+    {
+        foreach (TRRoomStaticMesh mesh in meshes)
+        {
+            mesh.X = FlipWorldX(mesh.X);
+            if (mesh.Rotation == _east || mesh.Rotation == _west)
+            {
+                mesh.Rotation *= -1;
             }
         }
     }

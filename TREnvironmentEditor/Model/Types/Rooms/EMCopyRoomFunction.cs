@@ -125,9 +125,9 @@ public class EMCopyRoomFunction : BaseEMFunction
                 Intensity = baseRoom.StaticMeshes[i].Intensity,
                 ID = baseRoom.StaticMeshes[i].ID,
                 Rotation = baseRoom.StaticMeshes[i].Rotation,
-                X = (uint)(baseRoom.StaticMeshes[i].X + xdiff),
-                Y = (uint)(baseRoom.StaticMeshes[i].Y + ydiff),
-                Z = (uint)(baseRoom.StaticMeshes[i].Z + zdiff)
+                X = baseRoom.StaticMeshes[i].X + xdiff,
+                Y = baseRoom.StaticMeshes[i].Y + ydiff,
+                Z = baseRoom.StaticMeshes[i].Z + zdiff
             });
         }
 
@@ -268,9 +268,9 @@ public class EMCopyRoomFunction : BaseEMFunction
                 Intensity2 = baseRoom.StaticMeshes[i].Intensity2,
                 ID = baseRoom.StaticMeshes[i].ID,
                 Rotation = baseRoom.StaticMeshes[i].Rotation,
-                X = (uint)(baseRoom.StaticMeshes[i].X + xdiff),
-                Y = (uint)(baseRoom.StaticMeshes[i].Y + ydiff),
-                Z = (uint)(baseRoom.StaticMeshes[i].Z + zdiff)
+                X = baseRoom.StaticMeshes[i].X + xdiff,
+                Y = baseRoom.StaticMeshes[i].Y + ydiff,
+                Z = baseRoom.StaticMeshes[i].Z + zdiff
             });
         }
 
@@ -410,11 +410,11 @@ public class EMCopyRoomFunction : BaseEMFunction
             {
                 Colour = baseRoom.StaticMeshes[i].Colour,
                 ID = baseRoom.StaticMeshes[i].ID,
-                Rotation = baseRoom.StaticMeshes[i].Rotation,
                 Unused = baseRoom.StaticMeshes[i].Unused,
-                X = (uint)(baseRoom.StaticMeshes[i].X + xdiff),
-                Y = (uint)(baseRoom.StaticMeshes[i].Y + ydiff),
-                Z = (uint)(baseRoom.StaticMeshes[i].Z + zdiff)
+                Rotation = baseRoom.StaticMeshes[i].Rotation,
+                X = baseRoom.StaticMeshes[i].X + xdiff,
+                Y = baseRoom.StaticMeshes[i].Y + ydiff,
+                Z = baseRoom.StaticMeshes[i].Z + zdiff
             });
         }
 

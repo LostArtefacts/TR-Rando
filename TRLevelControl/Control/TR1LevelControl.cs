@@ -211,10 +211,10 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
             {
                 room.StaticMeshes.Add(new()
                 {
-                    X = reader.ReadUInt32(),
-                    Y = reader.ReadUInt32(),
-                    Z = reader.ReadUInt32(),
-                    Rotation = reader.ReadUInt16(),
+                    X = reader.ReadInt32(),
+                    Y = reader.ReadInt32(),
+                    Z = reader.ReadInt32(),
+                    Rotation = reader.ReadInt16(),
                     Intensity = reader.ReadUInt16(),
                     ID = reader.ReadUInt16()
                 });

@@ -49,12 +49,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
 
             room.StaticMeshes.Add(new()
             {
-                X = (uint)location.X,
-                Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
-                Z = (uint)location.Z,
+                X = location.X,
+                Y = location.Y,
+                Z = location.Z,
                 Intensity = Mesh.Intensity1,
                 ID = Mesh.ID,
-                Rotation = (ushort)(location.Angle + short.MaxValue + 1)
+                Rotation = location.Angle
             });
         }
     }
@@ -97,13 +97,13 @@ public class EMAddStaticMeshFunction : BaseEMFunction
 
             room.StaticMeshes.Add(new()
             {
-                X = (uint)location.X,
-                Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
-                Z = (uint)location.Z,
+                X = location.X,
+                Y = location.Y,
+                Z = location.Z,
                 Intensity1 = Mesh.Intensity1,
                 Intensity2 = Mesh.Intensity2,
                 ID = Mesh.ID,
-                Rotation = (ushort)(location.Angle + short.MaxValue + 1)
+                Rotation = location.Angle
             });
         }
     }
@@ -146,12 +146,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
 
             room.StaticMeshes.Add(new()
             {
-                X = (uint)location.X,
-                Y = (uint)(location.Y < 0 ? uint.MaxValue + location.Y : location.Y),
-                Z = (uint)location.Z,
+                X = location.X,
+                Y = location.Y,
+                Z = location.Z,
                 Colour = Mesh.Intensity1,
                 ID = Mesh.ID,
-                Rotation = (ushort)(location.Angle + short.MaxValue + 1)
+                Rotation = location.Angle
             });
         }
     }

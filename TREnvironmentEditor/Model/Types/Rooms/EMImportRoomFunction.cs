@@ -164,9 +164,9 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 Intensity2 = roomDef.Room.StaticMeshes[i].Intensity2,
                 ID = roomDef.Room.StaticMeshes[i].ID,
                 Rotation = roomDef.Room.StaticMeshes[i].Rotation,
-                X = (uint)(roomDef.Room.StaticMeshes[i].X + xdiff),
-                Y = (uint)(roomDef.Room.StaticMeshes[i].Y + ydiff),
-                Z = (uint)(roomDef.Room.StaticMeshes[i].Z + zdiff)
+                X = roomDef.Room.StaticMeshes[i].X + xdiff,
+                Y = roomDef.Room.StaticMeshes[i].Y + ydiff,
+                Z = roomDef.Room.StaticMeshes[i].Z + zdiff
             });
         }
 
@@ -414,11 +414,11 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             {
                 Colour = roomDef.Room.StaticMeshes[i].Colour,
                 ID = roomDef.Room.StaticMeshes[i].ID,
-                Rotation = roomDef.Room.StaticMeshes[i].Rotation,
                 Unused = roomDef.Room.StaticMeshes[i].Unused,
-                X = (uint)(roomDef.Room.StaticMeshes[i].X + xdiff),
-                Y = (uint)(roomDef.Room.StaticMeshes[i].Y + ydiff),
-                Z = (uint)(roomDef.Room.StaticMeshes[i].Z + zdiff)
+                Rotation = roomDef.Room.StaticMeshes[i].Rotation,
+                X = roomDef.Room.StaticMeshes[i].X + xdiff,
+                Y = roomDef.Room.StaticMeshes[i].Y + ydiff,
+                Z = roomDef.Room.StaticMeshes[i].Z + zdiff
             });
         }
 
