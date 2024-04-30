@@ -1,6 +1,6 @@
 ﻿namespace TRLevelControl.Model;
 
-public class TRMeshFace : TRFace, ICloneable
+public class TRMeshFace : TRFace
 {
     public ushort Effects { get; set; }
 
@@ -46,7 +46,7 @@ public class TRMeshFace : TRFace, ICloneable
         }
     }
 
-    public TRMeshFace Clone()
+    public new TRMeshFace Clone()
     {
         return new()
         {
@@ -58,7 +58,4 @@ public class TRMeshFace : TRFace, ICloneable
             Effects = Effects,
         };
     }
-
-    object ICloneable.Clone()
-        => Clone();
 }
