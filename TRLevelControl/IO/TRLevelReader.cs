@@ -465,7 +465,7 @@ public class TRLevelReader : BinaryReader
         {
             AdjoiningRoom = ReadUInt16(),
             Normal = ReadVertex(),
-            Vertices = ReadVertices(4).ToArray() //Temp!
+            Vertices = new(ReadVertices(4))
         };
     }
 

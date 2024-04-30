@@ -4,29 +4,6 @@ namespace TRLevelControl;
 
 internal static class TR2FileReadUtilities
 {
-    public static TRRoomPortal ReadRoomPortal(BinaryReader reader)
-    {
-        return new TRRoomPortal
-        {
-            AdjoiningRoom = reader.ReadUInt16(),
-
-            Normal = new TRVertex
-            {
-                X = reader.ReadInt16(),
-                Y = reader.ReadInt16(),
-                Z = reader.ReadInt16()
-            },
-
-            Vertices = new TRVertex[]
-            {
-                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                new() { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-            }
-        };
-    }
-
     public static TRRoomSector ReadRoomSector(BinaryReader reader)
     {
         return new TRRoomSector
@@ -37,16 +14,6 @@ internal static class TR2FileReadUtilities
             Floor = reader.ReadSByte(),
             RoomAbove = reader.ReadByte(),
             Ceiling = reader.ReadSByte()
-        };
-    }
-
-    public static TRVertex ReadVertex(BinaryReader reader)
-    {
-        return new TRVertex
-        {
-            X = reader.ReadInt16(),
-            Y = reader.ReadInt16(),
-            Z = reader.ReadInt16()
         };
     }
 

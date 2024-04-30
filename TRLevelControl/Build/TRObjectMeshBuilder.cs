@@ -47,14 +47,14 @@ public class TRObjectMeshBuilder<T> : IMeshProvider
             TRMesh mesh = new();
             _objectMeshes[meshPointer] = mesh;
 
-            mesh.Centre = TR2FileReadUtilities.ReadVertex(meshReader);
+            mesh.Centre = meshReader.ReadVertex();
             mesh.CollRadius = meshReader.ReadInt32();
 
             short numVertices = meshReader.ReadInt16();
             mesh.Vertices = new();
             for (int j = 0; j < numVertices; j++)
             {
-                mesh.Vertices.Add(TR2FileReadUtilities.ReadVertex(meshReader));
+                mesh.Vertices.Add(meshReader.ReadVertex());
             }
 
             short numNormals = meshReader.ReadInt16();
@@ -63,7 +63,7 @@ public class TRObjectMeshBuilder<T> : IMeshProvider
                 mesh.Normals = new();
                 for (int j = 0; j < numNormals; j++)
                 {
-                    mesh.Normals.Add(TR2FileReadUtilities.ReadVertex(meshReader));
+                    mesh.Normals.Add(meshReader.ReadVertex());
                 }
             }
             else
@@ -179,13 +179,13 @@ public class TRObjectMeshBuilder<T> : IMeshProvider
         using MemoryStream stream = new();
         TRLevelWriter writer = new(stream);
 
-        writer.Write(mesh.Centre.Serialize());
+        writer.Write(mesh.Centre);
         writer.Write(mesh.CollRadius);
 
         writer.Write((short)mesh.Vertices.Count);
         foreach (TRVertex vert in mesh.Vertices)
         {
-            writer.Write(vert.Serialize());
+            writer.Write(vert);
         }
 
         Debug.Assert(mesh.Normals == null ^ mesh.Lights == null);
@@ -194,7 +194,7 @@ public class TRObjectMeshBuilder<T> : IMeshProvider
             writer.Write((short)mesh.Normals.Count);
             foreach (TRVertex normal in mesh.Normals)
             {
-                writer.Write(normal.Serialize());
+                writer.Write(normal);
             }
         }
         else
