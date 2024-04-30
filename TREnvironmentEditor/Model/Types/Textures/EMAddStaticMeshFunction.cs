@@ -7,8 +7,9 @@ namespace TREnvironmentEditor.Model.Types;
 
 public class EMAddStaticMeshFunction : BaseEMFunction
 {
+    public uint MeshID { get; set; }
+    public ushort Intensity { get; set; }
     public List<EMLocation> Locations { get; set; }
-    public TR2RoomStaticMesh Mesh { get; set; }
     public bool IgnoreSectorEntities { get; set; }
 
     public override void ApplyToLevel(TR1Level level)
@@ -52,8 +53,8 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 X = location.X,
                 Y = location.Y,
                 Z = location.Z,
-                Intensity = Mesh.Intensity1,
-                ID = Mesh.ID,
+                Intensity = Intensity,
+                ID = (TR1Type)MeshID,
                 Angle = location.Angle
             });
         }
@@ -100,9 +101,9 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 X = location.X,
                 Y = location.Y,
                 Z = location.Z,
-                Intensity1 = Mesh.Intensity1,
-                Intensity2 = Mesh.Intensity2,
-                ID = Mesh.ID,
+                Intensity1 = Intensity,
+                Intensity2 = Intensity,
+                ID = (TR2Type)MeshID,
                 Angle = location.Angle
             });
         }
@@ -149,8 +150,8 @@ public class EMAddStaticMeshFunction : BaseEMFunction
                 X = location.X,
                 Y = location.Y,
                 Z = location.Z,
-                Colour = Mesh.Intensity1,
-                ID = Mesh.ID,
+                Colour = Intensity,
+                ID = (TR3Type)MeshID,
                 Angle = location.Angle
             });
         }

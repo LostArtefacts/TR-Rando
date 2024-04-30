@@ -227,7 +227,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
                     Angle = reader.ReadInt16(),
                     Colour = reader.ReadUInt16(),
                     Unused = reader.ReadUInt16(),
-                    ID = reader.ReadUInt16()
+                    ID = TR4Type.SceneryBase + reader.ReadUInt16()
                 });
             }
 
@@ -291,7 +291,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
                 writer.Write(mesh.Angle);
                 writer.Write(mesh.Colour);
                 writer.Write(mesh.Unused);
-                writer.Write(mesh.ID);
+                writer.Write((ushort)(mesh.ID - TR4Type.SceneryBase));
             }
 
             writer.Write(room.AlternateRoom);

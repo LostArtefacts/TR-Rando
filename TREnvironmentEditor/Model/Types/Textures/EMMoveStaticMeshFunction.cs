@@ -46,7 +46,8 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
         }
     }
 
-    private static void MoveMesh(TRRoomStaticMesh mesh, EMLocation amendment)
+    private static void MoveMesh<T>(TRRoomStaticMesh<T> mesh, EMLocation amendment)
+        where T : Enum
     {
         mesh.X += amendment.X;
         mesh.Y += amendment.Y;

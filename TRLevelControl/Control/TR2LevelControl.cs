@@ -229,7 +229,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
                     Angle = reader.ReadInt16(),
                     Intensity1 = reader.ReadUInt16(),
                     Intensity2 = reader.ReadUInt16(),
-                    ID = reader.ReadUInt16()
+                    ID = TR2Type.SceneryBase + reader.ReadUInt16()
                 });
             }
 
@@ -284,7 +284,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
                 writer.Write(mesh.Angle);
                 writer.Write(mesh.Intensity1);
                 writer.Write(mesh.Intensity2);
-                writer.Write(mesh.ID);
+                writer.Write((ushort)(mesh.ID - TR2Type.SceneryBase));
             }
 
             writer.Write(room.AlternateRoom);

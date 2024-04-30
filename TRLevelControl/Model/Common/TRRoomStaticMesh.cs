@@ -1,8 +1,9 @@
 ﻿namespace TRLevelControl.Model;
 
-public class TRRoomStaticMesh
+public class TRRoomStaticMesh<T>
+    where T : Enum
 {
-    public ushort ID { get; set; }
+    public T ID { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
     public int Z { get; set; }

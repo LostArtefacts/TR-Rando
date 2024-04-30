@@ -473,9 +473,10 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void MirrorRoomStaticMeshes(IEnumerable<TRRoomStaticMesh> meshes)
+    private void MirrorRoomStaticMeshes<T>(IEnumerable<TRRoomStaticMesh<T>> meshes)
+        where T : Enum
     {
-        foreach (TRRoomStaticMesh mesh in meshes)
+        foreach (TRRoomStaticMesh<T> mesh in meshes)
         {
             mesh.X = FlipWorldX(mesh.X);
             if (mesh.Angle == _east || mesh.Angle == _west)
@@ -1000,8 +1001,7 @@ public class EMMirrorFunction : BaseEMFunction
 
             foreach (TR1RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
-                TR1Type id = roomStaticMesh.ID + TR1Type.SceneryBase;
-                TRStaticMesh staticMesh = level.StaticMeshes[id];
+                TRStaticMesh staticMesh = level.StaticMeshes[roomStaticMesh.ID];
                 if (!processedMeshes.Add(staticMesh))
                 {
                     continue;
@@ -1078,8 +1078,7 @@ public class EMMirrorFunction : BaseEMFunction
 
             foreach (TR2RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
-                TR2Type id = roomStaticMesh.ID + TR2Type.SceneryBase;
-                TRStaticMesh staticMesh = level.StaticMeshes[id];
+                TRStaticMesh staticMesh = level.StaticMeshes[roomStaticMesh.ID];
                 if (!processedMeshes.Add(staticMesh))
                 {
                     continue;
@@ -1148,8 +1147,7 @@ public class EMMirrorFunction : BaseEMFunction
 
             foreach (TR3RoomStaticMesh roomStaticMesh in room.StaticMeshes)
             {
-                TR3Type id = roomStaticMesh.ID + TR3Type.SceneryBase;
-                TRStaticMesh staticMesh = level.StaticMeshes[id];
+                TRStaticMesh staticMesh = level.StaticMeshes[roomStaticMesh.ID];
                 if (!processedMeshes.Add(staticMesh))
                 {
                     continue;
