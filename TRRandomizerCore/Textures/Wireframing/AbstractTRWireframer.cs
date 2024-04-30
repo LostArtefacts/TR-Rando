@@ -173,10 +173,9 @@ public abstract class AbstractTRWireframer<E, L>
             if (_ladderFace4s.ContainsKey(face) || _triggerFaces.Contains(face) || _deathFaces.Contains(face))
                 continue;
 
-            ushort texture = (ushort)(face.Texture & 0x0fff);
-            if (!IsTextureExcluded(texture) || (_data.DeathTextures.Contains(texture) && !_deathFaces.Contains(face)))
+            if (!IsTextureExcluded(face.Texture) || (_data.DeathTextures.Contains(face.Texture) && !_deathFaces.Contains(face)))
             {
-                _roomFace4s[face] = GetTextureSize(level, texture);
+                _roomFace4s[face] = GetTextureSize(level, face.Texture);
             }
         }
     }
@@ -185,10 +184,9 @@ public abstract class AbstractTRWireframer<E, L>
     {
         foreach (TRFace face in faces)
         {
-            ushort texture = (ushort)(face.Texture & 0x0fff);
-            if (!IsTextureExcluded(texture) || _data.DeathTextures.Contains(texture))
+            if (!IsTextureExcluded(face.Texture) || _data.DeathTextures.Contains(face.Texture))
             {
-                _roomFace3s[face] = GetTextureSize(level, texture);
+                _roomFace3s[face] = GetTextureSize(level, face.Texture);
             }
         }
     }
@@ -205,7 +203,7 @@ public abstract class AbstractTRWireframer<E, L>
     {
         foreach (TRMeshFace face in mesh.TexturedFaces)
         {
-            _meshFaces[face] = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
+            _meshFaces[face] = GetTextureSize(level, face.Texture);
         }
     }
 
@@ -449,26 +447,24 @@ public abstract class AbstractTRWireframer<E, L>
     {
         foreach (TRFace face in _roomFace3s.Keys)
         {
-            ushort currentTexture = (ushort)(face.Texture & 0x0fff);
-            face.Texture = RemapTexture(face.Texture, specialTextureRemap.ContainsKey(currentTexture)
-                ? specialTextureRemap[currentTexture]
-                : wireframeIndex);
+            face.Texture = specialTextureRemap.ContainsKey(face.Texture)
+                ? specialTextureRemap[face.Texture]
+                : wireframeIndex;
         }
 
         foreach (TRFace face in _roomFace4s.Keys)
         {
             if (!_ladderFace4s.ContainsKey(face) && !_triggerFaces.Contains(face) && !_deathFaces.Contains(face))
             {
-                ushort currentTexture = (ushort)(face.Texture & 0x0fff);
-                face.Texture = RemapTexture(face.Texture, specialTextureRemap.ContainsKey(currentTexture)
-                    ? specialTextureRemap[currentTexture]
-                    : wireframeIndex);
+                face.Texture = specialTextureRemap.ContainsKey(face.Texture)
+                    ? specialTextureRemap[face.Texture]
+                    : wireframeIndex;
             }
         }
 
         foreach (TRFace face in _ladderFace4s.Keys)
         {
-            face.Texture = RemapTexture(face.Texture, ladderIndex);
+            face.Texture = ladderIndex;
 
             // Ensure the ladder isn't sideways - if the first two vertices don't have
             // the same Y val and it's a wall, rotate the face once.
@@ -486,17 +482,17 @@ public abstract class AbstractTRWireframer<E, L>
         foreach (TRFace face in _triggerFaces)
         {
             // Exclusion example is Bacon Lara's heavy trigger - we want to retain the Lava here
-            if (!IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
+            if (!IsTextureExcluded(face.Texture))
             {
-                face.Texture = RemapTexture(face.Texture, triggerIndex);
+                face.Texture = triggerIndex;
             }
         }
 
         foreach (TRFace face in _deathFaces)
         {
-            if (!IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
+            if (!IsTextureExcluded(face.Texture))
             {
-                face.Texture = RemapTexture(face.Texture, deathIndex);
+                face.Texture = deathIndex;
             }
         }
     }
@@ -505,14 +501,13 @@ public abstract class AbstractTRWireframer<E, L>
     {
         foreach (TRMeshFace face in _meshFaces.Keys)
         {
-            ushort currentTexture = (ushort)(face.Texture & 0x0fff);
-            if (IsTextureExcluded(currentTexture))
+            if (IsTextureExcluded(face.Texture))
             {
                 continue;
             }
-            if (specialTextureRemap.ContainsKey(currentTexture))
+            if (specialTextureRemap.ContainsKey(face.Texture))
             {
-                face.Texture = RemapTexture(face.Texture, specialTextureRemap[currentTexture]);
+                face.Texture = specialTextureRemap[face.Texture];
             }
             else
             {
@@ -523,7 +518,7 @@ public abstract class AbstractTRWireframer<E, L>
                     {
                         size = Find(size, sizeRemap);
                     }
-                    face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
+                    face.Texture = (ushort)sizeRemap[size].Index;
                 }
             }
         }
@@ -539,16 +534,6 @@ public abstract class AbstractTRWireframer<E, L>
             }
         }
         return s;
-    }
-
-    private static ushort RemapTexture(ushort currentTexture, ushort newTexture)
-    {
-        // Make sure double-sided textures are retained
-        if ((currentTexture & 0x8000) > 0)
-        {
-            newTexture |= 0x8000;
-        }
-        return newTexture;
     }
 
     private void TidyModels(L level)

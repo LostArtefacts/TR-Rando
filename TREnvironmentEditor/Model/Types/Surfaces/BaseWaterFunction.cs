@@ -178,7 +178,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
         for (int i = faces.Count - 1; i >= 0; i--)
         {
             TRFace face = faces[i];
-            if (WaterTextures.Contains((ushort)(face.Texture & 0x0fff)))
+            if (WaterTextures.Contains(face.Texture))
             {
                 faces.RemoveAt(i);
             }
