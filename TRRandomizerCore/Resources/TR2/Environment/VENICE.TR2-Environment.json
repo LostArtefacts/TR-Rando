@@ -2139,6 +2139,8 @@
     {
       "Comments": "Put some poles in place to support the blades.",
       "EMType": 24,
+      "MeshID": 286,
+      "Intensity": 7936,
       "Locations": [
         {
           "X": 29746,
@@ -2181,11 +2183,6 @@
           "Room": 140
         }
       ],
-      "Mesh": {
-        "Intensity1": 7936,
-        "Intensity2": 4096,
-        "ID": 21
-      },
       "IgnoreSectorEntities": true
     }
   ]

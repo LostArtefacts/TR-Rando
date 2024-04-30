@@ -1606,6 +1606,8 @@
       "Tags": [
         9
       ],
+      "MeshID": 285,
+      "Intensity": 5632,
       "Locations": [
         {
           "X": 15872,
@@ -1614,12 +1616,7 @@
           "Room": -8,
           "Angle": -16384
         }
-      ],
-      "Mesh": {
-        "Intensity1": 5632,
-        "Intensity2": 5632,
-        "ID": 20
-      }
+      ]
     },
     {
       "Comments": "Add some music for the climb.",
@@ -1834,6 +1831,8 @@
       {
         "Comments": "Add some random statues.",
         "EMType": 24,
+        "MeshID": 277,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 7680,
@@ -1848,18 +1847,15 @@
             "Z": 82432,
             "Room": 190
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "ID": 12
-        }
+        ]
       }
     ],
     [
       {
         "Comments": "Add some random statues.",
         "EMType": 24,
+        "MeshID": 277,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 8704,
@@ -1875,12 +1871,7 @@
             "Room": 190,
             "Angle": -16384
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "ID": 12
-        }
+        ]
       }
     ],
     [
@@ -1962,6 +1953,7 @@
       {
         "Comments": "Add the dummy static to block the bridge.",
         "EMType": 24,
+        "MeshID": 292,
         "Locations": [
           {
             "X": 18944,
@@ -1970,9 +1962,6 @@
             "Room": 8
           }
         ],
-        "Mesh": {
-          "ID": 27
-        },
         "IgnoreSectorEntities": true
       },
       {

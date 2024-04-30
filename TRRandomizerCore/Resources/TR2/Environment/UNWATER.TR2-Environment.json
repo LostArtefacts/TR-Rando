@@ -250,6 +250,8 @@
       {
         "Comments": "Add some extra barrels to prevent slope softlock.",
         "EMType": 24,
+        "MeshID": 275,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 51252,
@@ -273,11 +275,6 @@
             "Angle": 16384
           }
         ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "ID": 10
-        },
         "IgnoreSectorEntities": true
       },
       {

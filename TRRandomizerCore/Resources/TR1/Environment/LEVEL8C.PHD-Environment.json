@@ -2462,6 +2462,8 @@
         {
           "Comments": "Add a coffin.",
           "EMType": 24,
+          "MeshID": 226,
+          "Intensity": 5632,
           "Locations": [
             {
               "X": 18944,
@@ -2470,11 +2472,7 @@
               "Room": -1,
               "Angle": -16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 5632,
-            "ID": 35
-          }
+          ]
         },
         {
           "Comments": "Add a door to the new room.",
@@ -2949,6 +2947,8 @@
         {
           "Comments": "Add some coffins.",
           "EMType": 24,
+          "MeshID": 226,
+          "Intensity": 5632,
           "Locations": [
             {
               "X": 19968,
@@ -2978,15 +2978,13 @@
               "Room": -1,
               "Angle": 16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 5632,
-            "ID": 35
-          }
+          ]
         },
         {
           "Comments": "Add some pedestals.",
           "EMType": 24,
+          "MeshID": 204,
+          "Intensity": 5632,
           "Locations": [
             {
               "X": 22016,
@@ -3002,11 +3000,7 @@
               "Room": -1,
               "Angle": -16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 5632,
-            "ID": 13
-          }
+          ]
         },
         {
           "Comments": "Add some troll items.",
@@ -3879,7 +3873,7 @@
           "Comments": "Get rid of the pedestal.",
           "EMType": 25,
           "ClearFromRooms": {
-            "13": [
+            "204": [
               62
             ]
           }

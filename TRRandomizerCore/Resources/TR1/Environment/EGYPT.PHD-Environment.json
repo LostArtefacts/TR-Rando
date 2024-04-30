@@ -2171,6 +2171,8 @@
         },
         {
           "EMType": 24,
+          "MeshID": 222,
+          "Intensity": 5120,
           "Locations": [
             {
               "X": 22016,
@@ -2200,11 +2202,7 @@
               "Room": -1,
               "Angle": -16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 5120,
-            "ID": 31
-          }
+          ]
         },
         {
           "Comments": "Import Thor's hammer.",
@@ -4291,6 +4289,8 @@
         },
         {
           "EMType": 24,
+          "ID": 206,
+          "Intensity": 5120,
           "Locations": [
             {
               "X": 77312,
@@ -4401,11 +4401,7 @@
               "Room": -1,
               "Angle": 16384
             }
-          ],
-          "Mesh": {
-            "Intensity1": 5120,
-            "ID": 15
-          }
+          ]
         },
         {
           "EMType": 51,

@@ -862,6 +862,8 @@
       "Tags": [
         9
       ],
+      "MeshID": 384,
+      "Intensity": 15855,
       "Locations": [
         {
           "X": 26112,
@@ -1057,11 +1059,7 @@
           "Z": 58752,
           "Room": -5
         }
-      ],
-      "Mesh": {
-        "Intensity1": 15855,
-        "ID": 10
-      }
+      ]
     },
     {
       "Comments": "Remove faces on portals.",

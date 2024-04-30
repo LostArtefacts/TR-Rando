@@ -676,6 +676,8 @@
         "Tags": [
           11
         ],
+        "MeshID": 210,
+        "Intensity": 5632,
         "Locations": [
           {
             "X": 55808,
@@ -696,10 +698,6 @@
             "Room": 17
           }
         ],
-        "Mesh": {
-          "Intensity1": 5632,
-          "ID": 19
-        },
         "IgnoreSectorEntities": true
       }
     ],
@@ -7828,7 +7826,7 @@
           "Comments": "Remove the fuse static mesh from the conveyor belt.",
           "EMType": 25,
           "ClearFromRooms": {
-            "36": [
+            "227": [
               45
             ]
           }

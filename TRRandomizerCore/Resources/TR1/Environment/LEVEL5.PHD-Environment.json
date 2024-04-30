@@ -855,6 +855,8 @@
         "Tags": [
           11
         ],
+        "MeshID": 225,
+        "Intensity": 4096,
         "Locations": [
           {
             "X": 39269,
@@ -864,10 +866,6 @@
             "Angle": -32768
           }
         ],
-        "Mesh": {
-          "Intensity1": 4096,
-          "ID": 34
-        },
         "IgnoreSectorEntities": true
       }
     ]

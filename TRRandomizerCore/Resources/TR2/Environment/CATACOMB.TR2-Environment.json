@@ -414,6 +414,8 @@
       {
         "Comments": "Add a random gong.",
         "EMType": 24,
+        "MeshID": 303,
+        "Intensity": 6400,
         "Locations": [
           {
             "X": 39936,
@@ -421,12 +423,7 @@
             "Z": 60672,
             "Room": 46
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "ID": 38
-        }
+        ]
       }
     ],
     [
@@ -451,12 +448,7 @@
             "Z": 69120,
             "Room": 126
           }
-        ],
-        "Mesh": {
-          "Intensity1": 6400,
-          "Intensity2": 6400,
-          "ID": 37
-        }
+        ]
       }
     ],
     [
