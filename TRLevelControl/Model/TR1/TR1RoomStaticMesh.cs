@@ -1,34 +1,11 @@
-﻿using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TR1RoomStaticMesh : ISerializableCompact
+public class TR1RoomStaticMesh
 {
     public uint X { get; set; }
-
     public uint Y { get; set; }
-
     public uint Z { get; set; }
-
     public ushort Rotation { get; set; }
-
     public ushort Intensity { get; set; }
-
     public ushort MeshID { get; set; }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(X);
-            writer.Write(Y);
-            writer.Write(Z);
-            writer.Write(Rotation);
-            writer.Write(Intensity);
-            writer.Write(MeshID);
-        }
-
-        return stream.ToArray();
-    }
 }

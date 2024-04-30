@@ -4,31 +4,6 @@ namespace TRLevelControl;
 
 internal static class TR1FileReadUtilities
 {
-    public static TR1RoomLight ReadRoomLight(BinaryReader reader)
-    {
-        return new()
-        {
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            Intensity = reader.ReadUInt16(),
-            Fade = reader.ReadUInt32(),
-        };
-    }
-
-    public static TR1RoomStaticMesh ReadRoomStaticMesh(BinaryReader reader)
-    {
-        return new()
-        {
-            X = reader.ReadUInt32(),
-            Y = reader.ReadUInt32(),
-            Z = reader.ReadUInt32(),
-            Rotation = reader.ReadUInt16(),
-            Intensity = reader.ReadUInt16(),
-            MeshID = reader.ReadUInt16()
-        };
-    }
-
     public static TRBox ReadBox(BinaryReader reader)
     {
         return new()

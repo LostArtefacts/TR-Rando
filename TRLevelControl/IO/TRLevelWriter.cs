@@ -328,6 +328,66 @@ public class TRLevelWriter : BinaryWriter
         Write(box.MaxZ);
     }
 
+    public void Write(IEnumerable<TRVertex> vertices)
+    {
+        foreach (TRVertex vertex in vertices)
+        {
+            Write(vertex);
+        }
+    }
+
+    public void Write(TRVertex vertex)
+    {
+        Write(vertex.X);
+        Write(vertex.Y);
+        Write(vertex.Z);
+    }
+
+    public void Write(TRRoomInfo info, TRGameVersion version)
+    {
+        Write(info.X);
+        if (version == TRGameVersion.TR5)
+        {
+            Write(0);
+        }
+        Write(info.Z);
+        Write(info.YBottom);
+        Write(info.YTop);
+    }
+
+    public void Write(IEnumerable<TRRoomPortal> portals)
+    {
+        foreach (TRRoomPortal portal in portals)
+        {
+            Write(portal);
+        }
+    }
+
+    public void Write(TRRoomPortal portal)
+    {
+        Write(portal.AdjoiningRoom);
+        Write(portal.Normal);
+        Write(portal.Vertices);
+    }
+
+    public void Write(IEnumerable<TRRoomSector> sectors)
+    {
+        foreach (TRRoomSector sector in sectors)
+        {
+            Write(sector);
+        }
+    }
+
+    public void Write(TRRoomSector sector)
+    {
+        Write(sector.FDIndex);
+        Write(sector.BoxIndex);
+        Write(sector.RoomBelow);
+        Write(sector.Floor);
+        Write(sector.RoomAbove);
+        Write(sector.Ceiling);
+    }
+
     public void Write(IEnumerable<TRSpriteTexture> textures, TRGameVersion version)
     {
         foreach (TRSpriteTexture texture in textures)
