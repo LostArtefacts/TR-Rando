@@ -43,7 +43,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             Portals = new(),
             Mesh = baseRoom.Mesh.Clone(),
             Sectors = new(),
-            StaticMeshes = new()
+            StaticMeshes = new(baseRoom.StaticMeshes.Select(s => s.Clone()))
         };
 
         foreach (TR1RoomLight light in newRoom.Lights)
@@ -58,18 +58,11 @@ public class EMCopyRoomFunction : BaseEMFunction
             vertex.Y += (short)ydiff;
         }
 
-        // Static Meshes
-        for (int i = 0; i < baseRoom.StaticMeshes.Count; i++)
+        foreach (TR1RoomStaticMesh staticMesh in newRoom.StaticMeshes)
         {
-            newRoom.StaticMeshes.Add(new()
-            {
-                Intensity = baseRoom.StaticMeshes[i].Intensity,
-                ID = baseRoom.StaticMeshes[i].ID,
-                Angle = baseRoom.StaticMeshes[i].Angle,
-                X = baseRoom.StaticMeshes[i].X + xdiff,
-                Y = baseRoom.StaticMeshes[i].Y + ydiff,
-                Z = baseRoom.StaticMeshes[i].Z + zdiff
-            });
+            staticMesh.X += xdiff;
+            staticMesh.Y += ydiff;
+            staticMesh.Z += zdiff;
         }
 
         // Rebuild the sectors
@@ -122,7 +115,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             Portals = new(),
             Mesh = baseRoom.Mesh.Clone(),
             Sectors = new(),
-            StaticMeshes = new()
+            StaticMeshes = new(baseRoom.StaticMeshes.Select(s => s.Clone()))
         };
 
         foreach (TR2RoomLight light in newRoom.Lights)
@@ -137,19 +130,11 @@ public class EMCopyRoomFunction : BaseEMFunction
             vertex.Y += (short)ydiff;
         }
 
-        // Static Meshes
-        for (int i = 0; i < baseRoom.StaticMeshes.Count; i++)
+        foreach (TR2RoomStaticMesh staticMesh in newRoom.StaticMeshes)
         {
-            newRoom.StaticMeshes.Add(new()
-            {
-                Intensity1 = baseRoom.StaticMeshes[i].Intensity1,
-                Intensity2 = baseRoom.StaticMeshes[i].Intensity2,
-                ID = baseRoom.StaticMeshes[i].ID,
-                Angle = baseRoom.StaticMeshes[i].Angle,
-                X = baseRoom.StaticMeshes[i].X + xdiff,
-                Y = baseRoom.StaticMeshes[i].Y + ydiff,
-                Z = baseRoom.StaticMeshes[i].Z + zdiff
-            });
+            staticMesh.X += xdiff;
+            staticMesh.Y += ydiff;
+            staticMesh.Z += zdiff;
         }
 
         // Rebuild the sectors
@@ -203,7 +188,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             ReverbInfo = baseRoom.ReverbInfo,
             Mesh = baseRoom.Mesh.Clone(),
             Sectors = new(),
-            StaticMeshes = new(),
+            StaticMeshes = new(baseRoom.StaticMeshes.Select(s => s.Clone())),
             WaterScheme = baseRoom.WaterScheme
         };
 
@@ -219,19 +204,11 @@ public class EMCopyRoomFunction : BaseEMFunction
             vertex.Y += (short)ydiff;
         }
 
-        // Static Meshes
-        for (int i = 0; i < baseRoom.StaticMeshes.Count; i++)
+        foreach (TR3RoomStaticMesh staticMesh in newRoom.StaticMeshes)
         {
-            newRoom.StaticMeshes.Add(new()
-            {
-                Colour = baseRoom.StaticMeshes[i].Colour,
-                ID = baseRoom.StaticMeshes[i].ID,
-                Unused = baseRoom.StaticMeshes[i].Unused,
-                Angle = baseRoom.StaticMeshes[i].Angle,
-                X = baseRoom.StaticMeshes[i].X + xdiff,
-                Y = baseRoom.StaticMeshes[i].Y + ydiff,
-                Z = baseRoom.StaticMeshes[i].Z + zdiff
-            });
+            staticMesh.X += xdiff;
+            staticMesh.Y += ydiff;
+            staticMesh.Z += zdiff;
         }
 
         // Rebuild the sectors
