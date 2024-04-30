@@ -7,17 +7,12 @@ namespace TRLevelControl;
 
 public class TR2LevelControl : TRLevelControlBase<TR2Level>
 {
-    private readonly TRObjectMeshBuilder<TR2Type> _meshBuilder;
-    private readonly TRSpriteBuilder<TR2Type> _spriteBuilder;
-    private readonly TR2RoomBuilder _roomBuilder;
+    private TRObjectMeshBuilder<TR2Type> _meshBuilder;
+    private TRSpriteBuilder<TR2Type> _spriteBuilder;
+    private TR2RoomBuilder _roomBuilder;
 
     public TR2LevelControl(ITRLevelObserver observer = null)
-        : base(observer)
-    {
-        _meshBuilder = new(TRGameVersion.TR2, _observer);
-        _spriteBuilder = new(TRGameVersion.TR2);
-        _roomBuilder = new();
-    }
+        : base(observer) { }
 
     protected override TR2Level CreateLevel(TRFileVersion version)
     {
@@ -32,6 +27,13 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         TestVersion(level, TRFileVersion.TR2);
         return level;
+    }
+
+    protected override void Initialise()
+    {
+        _meshBuilder = new(TRGameVersion.TR2, _observer);
+        _spriteBuilder = new(TRGameVersion.TR2);
+        _roomBuilder = new();
     }
 
     protected override void Read(TRLevelReader reader)

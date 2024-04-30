@@ -6,15 +6,11 @@ namespace TRLevelControl;
 
 public class TR5LevelControl : TRLevelControlBase<TR5Level>
 {
-    private readonly TRObjectMeshBuilder<TR5Type> _meshBuilder;
-    private readonly TRSpriteBuilder<TR5Type> _spriteBuilder;
+    private TRObjectMeshBuilder<TR5Type> _meshBuilder;
+    private TRSpriteBuilder<TR5Type> _spriteBuilder;
 
     public TR5LevelControl(ITRLevelObserver observer = null)
-        : base(observer)
-    {
-        _meshBuilder = new(TRGameVersion.TR5, _observer);
-        _spriteBuilder = new(TRGameVersion.TR5);
-    }
+        : base(observer) { }
 
     protected override TR5Level CreateLevel(TRFileVersion version)
     {
@@ -29,6 +25,12 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         TestVersion(level, TRFileVersion.TR45);
         return level;
+    }
+
+    protected override void Initialise()
+    {
+        _meshBuilder = new(TRGameVersion.TR5, _observer);
+        _spriteBuilder = new(TRGameVersion.TR5);
     }
 
     protected override void Read(TRLevelReader reader)
