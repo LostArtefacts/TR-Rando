@@ -71,7 +71,7 @@ public class FDControl
 
     public void ParseFromLevel(TR5Level level)
     {
-        ParseLevel(level.Rooms.SelectMany(r => r.RoomData.SectorList), level.FloorData);
+        ParseLevel(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
     }
 
     private void ParseLevel(IEnumerable<TRRoomSector> roomSectors, List<ushort> floorData)
@@ -272,7 +272,7 @@ public class FDControl
 
     public void WriteToLevel(TR5Level level)
     {
-        Flatten(level.Rooms.SelectMany(r => r.RoomData.SectorList), level.FloorData);
+        Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
     }
 
     private void Flatten(IEnumerable<TRRoomSector> sectors, List<ushort> data)

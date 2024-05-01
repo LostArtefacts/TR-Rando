@@ -70,6 +70,22 @@ public class TRLevelWriter : BinaryWriter
         }
     }
 
+    public void Write(IEnumerable<int> data)
+    {
+        foreach (int value in data)
+        {
+            Write(value);
+        }
+    }
+
+    public void Write(IEnumerable<float> data)
+    {
+        foreach (float value in data)
+        {
+            Write(value);
+        }
+    }
+
     public void Write(IEnumerable<TRTexImage8> images)
     {
         foreach (TRTexImage8 image in images)
@@ -353,6 +369,13 @@ public class TRLevelWriter : BinaryWriter
     }
 
     public void Write(TRVertex vertex)
+    {
+        Write(vertex.X);
+        Write(vertex.Y);
+        Write(vertex.Z);
+    }
+
+    public void Write(TR5Vertex vertex)
     {
         Write(vertex.X);
         Write(vertex.Y);

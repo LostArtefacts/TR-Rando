@@ -183,19 +183,59 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void ReadRooms(TRLevelReader reader)
     {
-        TR5FileReadUtilities.PopulateRooms(reader, _level);
-        TR5FileReadUtilities.PopulateFloordata(reader, _level);
+        if (_observer?.UseTR5RawRooms ?? false)
+        {
+            ReadRawRooms(reader);
+            return;
+        }
+
+        _level.Rooms = TR5RoomBuilder.ReadRooms(reader);
+
+        uint numFloorData = reader.ReadUInt32();
+        _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
+    }
+
+    private void ReadRawRooms(TRLevelReader reader)
+    {
+        // The original TR5 room(let) structure is not supported, so this library will flatten
+        // into a manageable format. The raw approach here is intended only for byte-for-byte
+        // tests, other tests should focus on the converted structures.
+        List<byte> data = new();
+        uint numRooms = reader.ReadUInt32();
+        reader.BaseStream.Position -= sizeof(uint);
+        data.AddRange(reader.ReadBytes(sizeof(uint)));
+
+        for (int i = 0; i < numRooms; i++)
+        {
+            data.AddRange(reader.ReadBytes(4)); // XELA
+            uint roomSize = reader.ReadUInt32();
+            reader.BaseStream.Position -= sizeof(uint);
+            data.AddRange(reader.ReadBytes(sizeof(uint)));
+            for (uint j = 0; j < roomSize; j++)
+            {
+                data.Add(reader.ReadByte());
+            }
+        }
+
+        uint numFloorData = reader.ReadUInt32();
+        reader.BaseStream.Position -= sizeof(uint);
+        data.AddRange(reader.ReadBytes(sizeof(uint)));
+        data.AddRange(reader.ReadBytes((int)(numFloorData * sizeof(ushort))));
+
+        _observer?.OnRawTR5RoomsRead(data);
     }
 
     private void WriteRooms(TRLevelWriter writer)
     {
         _spriteBuilder.CacheSpriteOffsets(_level.Sprites);
 
-        writer.Write((uint)_level.Rooms.Count);
-        foreach (TR5Room room in _level.Rooms)
+        if (_observer?.UseTR5RawRooms ?? false)
         {
-            writer.Write(room.Serialize());
+            writer.Write(_observer.GetTR5Rooms());
+            return;
         }
+
+        TR5RoomBuilder.WriteRooms(writer, _level.Rooms);
 
         writer.Write((uint)_level.FloorData.Count);
         writer.Write(_level.FloorData);

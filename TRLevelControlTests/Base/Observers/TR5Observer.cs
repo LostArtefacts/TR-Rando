@@ -4,6 +4,19 @@ public class TR5Observer : TR4Observer
 {
     private Tuple<ushort, ushort> _unusedStateChange;
     private short? _animCommandPadding;
+    private List<byte> _rawRooms;
+
+    public override bool UseTR5RawRooms => true;
+
+    public override void OnRawTR5RoomsRead(List<byte> data)
+    {
+        _rawRooms = data;
+    }
+
+    public override List<byte> GetTR5Rooms()
+    {
+        return _rawRooms;
+    }
 
     public override void OnAnimCommandPaddingRead(short padding)
     {

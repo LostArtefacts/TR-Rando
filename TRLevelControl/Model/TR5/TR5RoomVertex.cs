@@ -1,25 +1,17 @@
-﻿using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TR5RoomVertex : ISerializableCompact
+public class TR5RoomVertex : TRRoomVertex
 {
-    public TR5Vertex Vert { get; set; }
+    public TR5Vertex Normal { get; set; }
+    public TRColour4 Colour { get; set; }
 
-    public TR5Vertex Norm { get; set; }
-
-    public uint Colour { get; set; }
-
-    public byte[] Serialize()
+    public override TRRoomVertex Clone()
     {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
+        return new TR5RoomVertex
         {
-            writer.Write(Vert.Serialize());
-            writer.Write(Norm.Serialize());
-            writer.Write(Colour);
-        }
-
-        return stream.ToArray();
+            Vertex = Vertex.Clone(),
+            Normal = Normal.Clone(),
+            Colour = Colour.Clone(),
+        };
     }
 }

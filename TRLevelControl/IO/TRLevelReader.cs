@@ -43,6 +43,15 @@ public class TRLevelReader : BinaryReader
         return new(inflatedStream);
     }
 
+    public void ReadUntil(long position)
+    {
+        long distance = position - BaseStream.Position;
+        for (long i = 0; i < distance; i++)
+        {
+            ReadByte();
+        }
+    }
+
     public byte[] ReadUInt8s(long numData)
     {
         byte[] data = new byte[numData];
@@ -76,6 +85,17 @@ public class TRLevelReader : BinaryReader
         return data;
     }
 
+    public int[] ReadInt32s(long numData)
+    {
+        int[] data = new int[numData];
+        for (int i = 0; i < numData; i++)
+        {
+            data[i] = ReadInt32();
+        }
+
+        return data;
+    }
+
     public uint[] ReadUInt32s(long numData)
     {
         uint[] data = new uint[numData];
@@ -84,6 +104,16 @@ public class TRLevelReader : BinaryReader
             data[i] = ReadUInt32();
         }
 
+        return data;
+    }
+
+    public float[] ReadSingles(long numData)
+    {
+        float[] data = new float[numData];
+        for (int i = 0; i < numData; i++)
+        {
+            data[i] = ReadSingle();
+        }
         return data;
     }
 
@@ -165,6 +195,16 @@ public class TRLevelReader : BinaryReader
             });
         }
         return colours;
+    }
+
+    public TR5Colour ReadTR5Colour()
+    {
+        return new()
+        {
+            R = ReadSingle(),
+            G = ReadSingle(),
+            B = ReadSingle(),
+        };
     }
 
     public List<TR1Entity> ReadTR1Entities(long numEntities)
@@ -456,6 +496,16 @@ public class TRLevelReader : BinaryReader
             X = ReadInt16(),
             Y = ReadInt16(),
             Z = ReadInt16()
+        };
+    }
+
+    public TR5Vertex ReadTR5Vertex()
+    {
+        return new()
+        {
+            X = ReadSingle(),
+            Y = ReadSingle(),
+            Z = ReadSingle()
         };
     }
 
