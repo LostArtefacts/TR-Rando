@@ -1,25 +1,14 @@
-﻿using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TR5Vertex : ISerializableCompact
+public class TR5Vertex : ICloneable
 {
     public float X { get; set; }
-
     public float Y { get; set; }
-
     public float Z { get; set; }
 
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(X);
-            writer.Write(Y);
-            writer.Write(Z);
-        }
+    public TR5Vertex Clone()
+        => (TR5Vertex)MemberwiseClone();
 
-        return stream.ToArray();
-    }
+    object ICloneable.Clone()
+        => Clone();
 }

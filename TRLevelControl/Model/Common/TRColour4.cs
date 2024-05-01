@@ -18,4 +18,7 @@ public class TRColour4 : TRColour
     {
         return (uint)((Alpha << 24) | (Red << 16) | (Green << 8) | Blue);
     }
+
+    public new TRColour4 Clone()
+        => (TRColour4)MemberwiseClone();
 }

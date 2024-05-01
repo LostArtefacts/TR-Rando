@@ -6,6 +6,9 @@ public interface ITRLevelObserver
 {
     void OnChunkRead(long startPosition, long endPosition, TRChunkType chunkType, byte[] data);
     void OnChunkWritten(long startPosition, long endPosition, TRChunkType chunkType, byte[] data);
+    bool UseTR5RawRooms { get; }
+    void OnRawTR5RoomsRead(List<byte> data);
+    List<byte> GetTR5Rooms();
     void OnMeshPaddingRead(uint meshPointer, List<byte> values);
     List<byte> GetMeshPadding(uint meshPointer);
     void OnBadDispatchLinkRead(int dispatchIndex, short animLink, short frameLink);

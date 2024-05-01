@@ -17,19 +17,4 @@ public class IOTests : TestBase
     {
         ReadWriteLevel(levelName, TRGameVersion.TR5);
     }
-
-    [TestMethod]
-    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
-    public void TestFloorData(string levelName)
-    {
-        TR5Level level = GetTR5Level(levelName);
-
-        List<ushort> originalData = new(level.FloorData);
-
-        FDControl fdControl = new();
-        fdControl.ParseFromLevel(level);
-        fdControl.WriteToLevel(level);
-
-        CollectionAssert.AreEqual(originalData, level.FloorData);
-    }
 }
