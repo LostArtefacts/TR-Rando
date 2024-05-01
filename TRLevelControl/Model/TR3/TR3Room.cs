@@ -8,6 +8,5 @@ public class TR3Room : TRRoom
     public List<TR3RoomLight> Lights { get; set; }
     public List<TR3RoomStaticMesh> StaticMeshes { get; set; }
     public byte WaterScheme { get; set; }
-    public byte ReverbInfo { get; set; }
-    public byte Filler { get; set; }
+    public TRPSXReverbMode ReverbMode { get; set; }
 }

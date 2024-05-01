@@ -244,8 +244,8 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
             room.Flags = (TRRoomFlag)reader.ReadInt16();
 
             room.WaterScheme = reader.ReadByte();
-            room.ReverbInfo = reader.ReadByte();
-            room.Filler = reader.ReadByte();
+            room.ReverbMode = (TRPSXReverbMode)reader.ReadByte();
+            reader.ReadByte();
         }
 
         uint numFloorData = reader.ReadUInt32();
@@ -299,8 +299,8 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
             writer.Write(room.AlternateRoom);
             writer.Write((short)room.Flags);
             writer.Write(room.WaterScheme);
-            writer.Write(room.ReverbInfo);
-            writer.Write(room.Filler);
+            writer.Write((byte)room.ReverbMode);
+            writer.Write((byte)0);
         }
 
         writer.Write((uint)_level.FloorData.Count);

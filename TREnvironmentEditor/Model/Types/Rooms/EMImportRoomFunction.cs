@@ -305,7 +305,6 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         {
             AlternateRoom = -1,
             AmbientIntensity = roomDef.Room.AmbientIntensity,
-            Filler = roomDef.Room.Filler,
             Flags = roomDef.Room.Flags,
             Info = new TRRoomInfo
             {
@@ -319,7 +318,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             NumXSectors = roomDef.Room.NumXSectors,
             NumZSectors = roomDef.Room.NumZSectors,
             Portals = new(),
-            ReverbInfo = roomDef.Room.ReverbInfo,
+            ReverbMode = roomDef.Room.ReverbMode,
             Mesh = new()
             {
                 Rectangles = new(),

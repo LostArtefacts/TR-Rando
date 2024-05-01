@@ -171,7 +171,6 @@ public class EMCopyRoomFunction : BaseEMFunction
         {
             AlternateRoom = -1,
             AmbientIntensity = baseRoom.AmbientIntensity,
-            Filler = baseRoom.Filler,
             Flags = baseRoom.Flags,
             Info = new()
             {
@@ -185,7 +184,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
             Portals = new(),
-            ReverbInfo = baseRoom.ReverbInfo,
+            ReverbMode = baseRoom.ReverbMode,
             Mesh = baseRoom.Mesh.Clone(),
             Sectors = new(),
             StaticMeshes = new(baseRoom.StaticMeshes.Select(s => s.Clone())),
