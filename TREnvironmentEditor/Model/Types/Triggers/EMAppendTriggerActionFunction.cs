@@ -18,7 +18,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        List<FDActionListItem> actions = InitialiseActionItems(data);
+        List<FDActionItem> actions = InitialiseActionItems(data);
         List<EMLocation> locations = InitialiseLocations<TR1Type, TR1Entity>(level.Entities, data);
 
         FDControl floorData = new();
@@ -36,7 +36,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        List<FDActionListItem> actions = InitialiseActionItems(data);
+        List<FDActionItem> actions = InitialiseActionItems(data);
         List<EMLocation> locations = InitialiseLocations<TR2Type, TR2Entity>(level.Entities, data);
 
         FDControl floorData = new();
@@ -54,7 +54,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        List<FDActionListItem> actions = InitialiseActionItems(data);
+        List<FDActionItem> actions = InitialiseActionItems(data);
         List<EMLocation> locations = InitialiseLocations<TR3Type, TR3Entity>(level.Entities, data);
 
         FDControl floorData = new();
@@ -101,9 +101,9 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         return locations;
     }
 
-    private List<FDActionListItem> InitialiseActionItems(EMLevelData data)
+    private List<FDActionItem> InitialiseActionItems(EMLevelData data)
     {
-        List<FDActionListItem> actions = new();
+        List<FDActionItem> actions = new();
         foreach (EMTriggerAction action in Actions)
         {
             actions.Add(action.ToFDAction(data));
@@ -111,12 +111,12 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         return actions;
     }
 
-    private void AppendActions(TRRoomSector sector, FDControl floorData, List<FDActionListItem> actions)
+    private void AppendActions(TRRoomSector sector, FDControl floorData, List<FDActionItem> actions)
     {
         if (sector.FDIndex != 0 && floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
             && (TargetTypes == null || TargetTypes.Contains(trigger.TrigType)))
         {
-            foreach (FDActionListItem item in actions)
+            foreach (FDActionItem item in actions)
             {
                 if (!trigger.TrigActionList.Any(a => a.TrigAction == item.TrigAction && a.Parameter == item.Parameter))
                 {

@@ -117,14 +117,14 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
                 control.CreateFloorData(sector);
             }
 
-            FDActionListItem currentObjectAction = null;
+            FDActionItem currentObjectAction = null;
             FDTriggerEntry currentTrigger = control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) as FDTriggerEntry;
             if (currentTrigger != null)
             {
                 currentObjectAction = currentTrigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Object);
             }
 
-            FDActionListItem newAction = new()
+            FDActionItem newAction = new()
             {
                 TrigAction = FDTrigAction.Object,
                 Parameter = (ushort)EntityIndex
@@ -144,7 +144,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
                 {
                     Setup = currentTriggers[0].Setup,
                     TrigSetup = currentTriggers[0].TrigSetup,
-                    TrigActionList = new List<FDActionListItem> { newAction }
+                    TrigActionList = new List<FDActionItem> { newAction }
                 });
             }
         }

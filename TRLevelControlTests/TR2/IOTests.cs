@@ -191,9 +191,9 @@ public class IOTests : TestBase
         // Add a music trigger
         fdataReader.Entries[sector.FDIndex].Add(new FDTriggerEntry
         {
-            Setup = new FDSetup(FDFunctions.Trigger),
+            Setup = new FDSetup(FDFunction.Trigger),
             TrigSetup = new FDTrigSetup(),
-            TrigActionList = new List<FDActionListItem>
+            TrigActionList = new List<FDActionItem>
             {
                 new() {
                     TrigAction = FDTrigAction.PlaySoundtrack,
@@ -225,7 +225,7 @@ public class IOTests : TestBase
         Assert.IsTrue(entry is FDTriggerEntry);
 
         FDTriggerEntry triggerEntry = entry as FDTriggerEntry;
-        Assert.IsTrue(triggerEntry.Setup.Function == (byte)FDFunctions.Trigger);
+        Assert.IsTrue(triggerEntry.Setup.Function == (byte)FDFunction.Trigger);
         Assert.IsTrue(triggerEntry.TrigActionList.Count == 1);
         Assert.IsTrue(triggerEntry.TrigActionList[0].TrigAction == FDTrigAction.PlaySoundtrack);
         Assert.IsTrue(triggerEntry.TrigActionList[0].Parameter == 40);
@@ -305,9 +305,9 @@ public class IOTests : TestBase
         //Add a music trigger to index 9
         fdataReader.Entries[9].Add(new FDTriggerEntry
         {
-            Setup = new FDSetup(FDFunctions.Trigger),
+            Setup = new FDSetup(FDFunction.Trigger),
             TrigSetup = new FDTrigSetup(),
-            TrigActionList = new List<FDActionListItem>
+            TrigActionList = new List<FDActionItem>
             {
                 new() {
                     TrigAction = FDTrigAction.PlaySoundtrack,
@@ -364,9 +364,9 @@ public class IOTests : TestBase
         //Add a music trigger to index 9
         fdataReader.Entries[9].Add(new FDTriggerEntry
         {
-            Setup = new FDSetup(FDFunctions.Trigger),
+            Setup = new FDSetup(FDFunction.Trigger),
             TrigSetup = new FDTrigSetup(),
-            TrigActionList = new List<FDActionListItem>
+            TrigActionList = new List<FDActionItem>
             {
                 new() {
                     TrigAction = FDTrigAction.PlaySoundtrack,
@@ -395,7 +395,7 @@ public class IOTests : TestBase
         Assert.IsTrue(entry is FDTriggerEntry);
 
         FDTriggerEntry triggerEntry = entry as FDTriggerEntry;
-        Assert.IsTrue(triggerEntry.Setup.Function == (byte)FDFunctions.Trigger);
+        Assert.IsTrue(triggerEntry.Setup.Function == (byte)FDFunction.Trigger);
         Assert.IsTrue(triggerEntry.TrigActionList.Count == 1);
         Assert.IsTrue(triggerEntry.TrigActionList[0].TrigAction == FDTrigAction.PlaySoundtrack);
         Assert.IsTrue(triggerEntry.TrigActionList[0].Parameter == 40);
@@ -414,7 +414,7 @@ public class IOTests : TestBase
         //Add a music action to the trigger at index 13
         FDTriggerEntry trigger = fdataReader.Entries[13][0] as FDTriggerEntry;
         Assert.AreEqual(trigger.TrigActionList.Count, 2);
-        trigger.TrigActionList.Add(new FDActionListItem
+        trigger.TrigActionList.Add(new FDActionItem
         {
             TrigAction = FDTrigAction.PlaySoundtrack,
             Parameter = 40
@@ -457,7 +457,7 @@ public class IOTests : TestBase
         Assert.IsNotNull(trigger.TrigActionList[1].CamAction);
         Assert.IsFalse(trigger.TrigActionList[1].CamAction.Continue);
 
-        trigger.TrigActionList.Add(new FDActionListItem
+        trigger.TrigActionList.Add(new FDActionItem
         {
             TrigAction = FDTrigAction.PlaySoundtrack,
             Parameter = 40
@@ -657,7 +657,7 @@ public class IOTests : TestBase
         slantEntry = new FDSlantEntry
         {
             Setup = new FDSetup { Value = 2 },
-            Type = FDSlantEntryType.FloorSlant,
+            Type = FDSlantType.FloorSlant,
             SlantValue = 0
         };
         fdataReader.Entries[sector.FDIndex].Add(slantEntry);

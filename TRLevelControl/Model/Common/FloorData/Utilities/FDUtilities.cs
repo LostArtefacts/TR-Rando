@@ -42,9 +42,9 @@ public static class FDUtilities
         return entries;
     }
 
-    public static List<FDActionListItem> GetActionListItems(FDControl control, FDTrigAction trigAction, int sectorIndex = -1)
+    public static List<FDActionItem> GetActionListItems(FDControl control, FDTrigAction trigAction, int sectorIndex = -1)
     {
-        List<FDActionListItem> items = new();
+        List<FDActionItem> items = new();
 
         List<List<FDEntry>> entrySearch;
         if (sectorIndex == -1)
@@ -65,7 +65,7 @@ public static class FDUtilities
             {
                 if (entry is FDTriggerEntry triggerEntry)
                 {
-                    foreach (FDActionListItem item in triggerEntry.TrigActionList)
+                    foreach (FDActionItem item in triggerEntry.TrigActionList)
                     {
                         if (item.TrigAction == trigAction)
                         {
@@ -269,25 +269,25 @@ public static class FDUtilities
             return 0; 
         }
 
-        if (floorData.Entries[sector.FDIndex].Find(e => e is TR3TriangulationEntry) is TR3TriangulationEntry triangulation)
+        if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriangulationEntry) is FDTriangulationEntry triangulation)
         {
-            FDFunctions func = (FDFunctions)triangulation.Setup.Value;
+            FDFunction func = (FDFunction)triangulation.Setup.Value;
             int dx = x & TRConsts.WallMask;
             int dz = z & TRConsts.WallMask;
 
-            if (func == FDFunctions.FloorTriangulationNWSE_SW && dx <= (TRConsts.Step4 - dz))
+            if (func == FDFunction.FloorTriangulationNWSE_SW && dx <= (TRConsts.Step4 - dz))
             {
                 return -1;
             }
-            else if (func == FDFunctions.FloorTriangulationNWSE_NE && dx > (TRConsts.Step4 - dz))
+            else if (func == FDFunction.FloorTriangulationNWSE_NE && dx > (TRConsts.Step4 - dz))
             {
                 return -1;
             }
-            else if (func == FDFunctions.FloorTriangulationNESW_SE && dx <= dz)
+            else if (func == FDFunction.FloorTriangulationNESW_SE && dx <= dz)
             {
                 return -1;
             }
-            else if (func == FDFunctions.FloorTriangulationNESW_NW && dx > dz)
+            else if (func == FDFunction.FloorTriangulationNESW_NW && dx > dz)
             {
                 return -1;
             }
@@ -305,25 +305,25 @@ public static class FDUtilities
             return 0;
         }
 
-        if (floorData.Entries[sector.FDIndex].Find(e => e is TR3TriangulationEntry) is TR3TriangulationEntry triangulation)
+        if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriangulationEntry) is FDTriangulationEntry triangulation)
         {
-            FDFunctions func = (FDFunctions)triangulation.Setup.Value;
+            FDFunction func = (FDFunction)triangulation.Setup.Value;
             int dx = x & TRConsts.WallMask;
             int dz = z & TRConsts.WallMask;
 
-            if (func == FDFunctions.CeilingTriangulationNW_SW && dx <= (TRConsts.Step4 - dz))
+            if (func == FDFunction.CeilingTriangulationNW_SW && dx <= (TRConsts.Step4 - dz))
             {
                 return -1;
             }
-            else if (func == FDFunctions.CeilingTriangulationNW_NE && dx > (TRConsts.Step4 - dz))
+            else if (func == FDFunction.CeilingTriangulationNW_NE && dx > (TRConsts.Step4 - dz))
             {
                 return -1;
             }
-            else if (func == FDFunctions.CeilingTriangulationNE_NW && dx <= dz)
+            else if (func == FDFunction.CeilingTriangulationNE_NW && dx <= dz)
             {
                 return -1;
             }
-            else if (func == FDFunctions.CeilingTriangulationNE_SE && dx > dz)
+            else if (func == FDFunction.CeilingTriangulationNE_SE && dx > dz)
             {
                 return -1;
             }
@@ -383,14 +383,14 @@ public static class FDUtilities
         int floor = TRConsts.Step1 * floorSector.Floor;
         int ceiling = TRConsts.Step1 * ceilingSector.Ceiling;
 
-        floor += GetHeightAdjustment(x, z, FDSlantEntryType.FloorSlant, floorSector, floorData);
-        ceiling += GetHeightAdjustment(x, z, FDSlantEntryType.CeilingSlant, ceilingSector, floorData);
+        floor += GetHeightAdjustment(x, z, FDSlantType.FloorSlant, floorSector, floorData);
+        ceiling += GetHeightAdjustment(x, z, FDSlantType.CeilingSlant, ceilingSector, floorData);
 
         int height = Math.Abs(floor - ceiling);
         return height + height % 2;
     }
 
-    public static int GetHeightAdjustment(int x, int z, FDSlantEntryType slantType, TRRoomSector sector, FDControl floorData)
+    public static int GetHeightAdjustment(int x, int z, FDSlantType slantType, TRRoomSector sector, FDControl floorData)
     {
         int adjustment = 0;
         if (sector.FDIndex == 0)
@@ -409,7 +409,7 @@ public static class FDUtilities
 
         if (xoff < 0)
         {
-            if (slantType == FDSlantEntryType.FloorSlant)
+            if (slantType == FDSlantType.FloorSlant)
             {
                 adjustment -= (xoff * (x & TRConsts.WallMask)) >> 2;
             }
@@ -420,7 +420,7 @@ public static class FDUtilities
         }
         else
         {
-            if (slantType == FDSlantEntryType.FloorSlant)
+            if (slantType == FDSlantType.FloorSlant)
             {
                 adjustment += (xoff * ((TRConsts.WallMask - x) & TRConsts.WallMask)) >> 2;
             }
@@ -432,7 +432,7 @@ public static class FDUtilities
 
         if (zoff < 0)
         {
-            if (slantType == FDSlantEntryType.FloorSlant)
+            if (slantType == FDSlantType.FloorSlant)
             {
                 adjustment -= (zoff * (z & TRConsts.WallMask)) >> 2;
             }
@@ -443,7 +443,7 @@ public static class FDUtilities
         }
         else
         {
-            if (slantType == FDSlantEntryType.FloorSlant)
+            if (slantType == FDSlantType.FloorSlant)
             {
                 adjustment += (zoff * ((TRConsts.WallMask - z) & TRConsts.WallMask)) >> 2;
             }

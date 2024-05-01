@@ -123,7 +123,7 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
                 }
             }
 
-            FDActionListItem musicAction = new()
+            FDActionItem musicAction = new()
             {
                 TrigAction = FDTrigAction.PlaySoundtrack,
                 Parameter = secretTracks[_generator.Next(0, secretTracks.Count)].ID
@@ -139,7 +139,7 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
                 {
                     Setup = new FDSetup { Value = 1028 },
                     TrigSetup = new FDTrigSetup { Value = 15872 },
-                    TrigActionList = new List<FDActionListItem>
+                    TrigActionList = new List<FDActionItem>
                     {
                         new() {
                             TrigAction = FDTrigAction.Object,

@@ -186,7 +186,7 @@ public static class LocationUtilities
     public static bool SectorIsSlipperySlope(TRRoomSector sector, FDControl floorData)
     {
         return sector.FDIndex != 0
-            && floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry slant && slant.Type == FDSlantEntryType.FloorSlant) is FDSlantEntry floorSlant
+            && floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry slant && slant.Type == FDSlantType.FloorSlant) is FDSlantEntry floorSlant
             && (Math.Abs(floorSlant.XSlant) > 2 || Math.Abs(floorSlant.ZSlant) > 2);
     }
 
@@ -195,8 +195,8 @@ public static class LocationUtilities
         sbyte floor = sector.Floor;
         if (sector.FDIndex != 0)
         {
-            FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => (e is FDSlantEntry s && s.Type == FDSlantEntryType.FloorSlant)
-                || (e is TR3TriangulationEntry tri && tri.IsFloorTriangulation));
+            FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => (e is FDSlantEntry s && s.Type == FDSlantType.FloorSlant)
+                || (e is FDTriangulationEntry tri && tri.IsFloorTriangulation));
             if (entry is FDSlantEntry slant)
             {
                 sbyte corner0 = sector.Floor;
@@ -235,7 +235,7 @@ public static class LocationUtilities
                     floor = (z & (TRConsts.Step4 - 1)) < TRConsts.Step2 ? corner3 : corner2;
                 }
             }
-            else if (entry is TR3TriangulationEntry triangulation)
+            else if (entry is FDTriangulationEntry triangulation)
             {
                 List<byte> triangleCorners = new()
                 {

@@ -23,7 +23,7 @@ public class EMTrigger
     {
         FDTriggerEntry entry = new()
         {
-            Setup = new FDSetup(FDFunctions.Trigger),
+            Setup = new FDSetup(FDFunction.Trigger),
             TrigType = TrigType,
             SwitchOrKeyRef = (ushort)levelData.ConvertEntity(SwitchOrKeyRef),
             TrigSetup = new FDTrigSetup
@@ -32,7 +32,7 @@ public class EMTrigger
                 Mask = Mask,
                 Timer = Timer
             },
-            TrigActionList = new List<FDActionListItem>()
+            TrigActionList = new List<FDActionItem>()
         };
 
         foreach (EMTriggerAction action in Actions)
@@ -55,7 +55,7 @@ public class EMTrigger
             Actions = new List<EMTriggerAction>()
         };
 
-        foreach (FDActionListItem action in entry.TrigActionList)
+        foreach (FDActionItem action in entry.TrigActionList)
         {
             trigger.Actions.Add(EMTriggerAction.FromFDAction(action));
         }

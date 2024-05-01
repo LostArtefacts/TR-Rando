@@ -1,6 +1,6 @@
 ﻿namespace TRFDControl;
 
-public class FDActionListItem
+public class FDActionItem
 {
     public ushort Value { get; set; }
 

@@ -983,7 +983,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         if (sector.FDIndex != 0)
         {
-            FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == FDSlantEntryType.FloorSlant);
+            FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == FDSlantType.FloorSlant);
             if (entry is FDSlantEntry slant)
             {
                 Vector4? bestMidpoint = locationGenerator.GetBestSlantMidpoint(slant);
@@ -1281,7 +1281,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         foreach (FDTriggerEntry trigger in FDUtilities.GetEntityTriggers(floorData, 74))
         {
-            List<FDActionListItem> actions = trigger.TrigActionList
+            List<FDActionItem> actions = trigger.TrigActionList
                 .FindAll(a => a.TrigAction == FDTrigAction.Object && a.Parameter == 74);
             if (actions.Count == 2)
             {

@@ -87,7 +87,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
                 continue;
             }
 
-            FDActionListItem musicAction = new()
+            FDActionItem musicAction = new()
             {
                 TrigAction = FDTrigAction.PlaySoundtrack,
                 Parameter = secretTrack.ID
@@ -96,7 +96,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
             List<FDTriggerEntry> triggers = FDUtilities.GetSecretTriggers(floorData, i);
             foreach (FDTriggerEntry trigger in triggers)
             {
-                FDActionListItem currentMusicAction = trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.PlaySoundtrack);
+                FDActionItem currentMusicAction = trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.PlaySoundtrack);
                 if (currentMusicAction == null)
                 {
                     trigger.TrigActionList.Add(musicAction);

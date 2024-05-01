@@ -103,9 +103,9 @@ public class FDControl
                 Value = floorData[index]
             };
 
-            switch ((FDFunctions)data.Function)
+            switch ((FDFunction)data.Function)
             {
-                case FDFunctions.PortalSector:
+                case FDFunction.PortalSector:
                     functions.Add(new FDPortalEntry
                     {
                         Setup = new() { Value = floorData[index] },
@@ -113,25 +113,25 @@ public class FDControl
                     });
                     break;
 
-                case FDFunctions.FloorSlant:
+                case FDFunction.FloorSlant:
                     functions.Add(new FDSlantEntry
                     {
                         Setup = new() { Value = floorData[index] },
                         SlantValue = floorData[++index],
-                        Type = FDSlantEntryType.FloorSlant
+                        Type = FDSlantType.FloorSlant
                     });
                     break;
 
-                case FDFunctions.CeilingSlant:
+                case FDFunction.CeilingSlant:
                     functions.Add(new FDSlantEntry
                     {
                         Setup = new() { Value = floorData[index] },
                         SlantValue = floorData[++index],
-                        Type = FDSlantEntryType.CeilingSlant
+                        Type = FDSlantType.CeilingSlant
                     });
                     break;
 
-                case FDFunctions.Trigger:
+                case FDFunction.Trigger:
 
                     FDTriggerEntry trig = new()
                     {
@@ -156,7 +156,7 @@ public class FDControl
                         do
                         {
                             // New trigger action
-                            FDActionListItem action = new() { Value = floorData[++index] };
+                            FDActionItem action = new() { Value = floorData[++index] };
                             trig.TrigActionList.Add(action);
 
                             continueFDParse = action.Continue;
@@ -177,54 +177,54 @@ public class FDControl
                     }
                     break;
 
-                case FDFunctions.KillLara:
+                case FDFunction.KillLara:
                     functions.Add(new FDKillLaraEntry
                     {
                         Setup = new() { Value = floorData[index] }
                     });
                     break;
 
-                case FDFunctions.ClimbableWalls:
+                case FDFunction.ClimbableWalls:
                     functions.Add(new FDClimbEntry
                     {
                         Setup = new() { Value = floorData[index] }
                     });
                     break;
 
-                case FDFunctions.FloorTriangulationNWSE_Solid:
-                case FDFunctions.FloorTriangulationNESW_Solid:
-                case FDFunctions.CeilingTriangulationNW_Solid:
-                case FDFunctions.CeilingTriangulationNE_Solid:
-                case FDFunctions.FloorTriangulationNWSE_SW:
-                case FDFunctions.FloorTriangulationNWSE_NE:
-                case FDFunctions.FloorTriangulationNESW_SE:
-                case FDFunctions.FloorTriangulationNESW_NW:
-                case FDFunctions.CeilingTriangulationNW_SW:
-                case FDFunctions.CeilingTriangulationNW_NE:
-                case FDFunctions.CeilingTriangulationNE_NW:
-                case FDFunctions.CeilingTriangulationNE_SE:
-                    functions.Add(new TR3TriangulationEntry
+                case FDFunction.FloorTriangulationNWSE_Solid:
+                case FDFunction.FloorTriangulationNESW_Solid:
+                case FDFunction.CeilingTriangulationNW_Solid:
+                case FDFunction.CeilingTriangulationNE_Solid:
+                case FDFunction.FloorTriangulationNWSE_SW:
+                case FDFunction.FloorTriangulationNWSE_NE:
+                case FDFunction.FloorTriangulationNESW_SE:
+                case FDFunction.FloorTriangulationNESW_NW:
+                case FDFunction.CeilingTriangulationNW_SW:
+                case FDFunction.CeilingTriangulationNW_NE:
+                case FDFunction.CeilingTriangulationNE_NW:
+                case FDFunction.CeilingTriangulationNE_SE:
+                    functions.Add(new FDTriangulationEntry
                     {
                         Setup = new() { Value = floorData[index] },
                         TriData = new() { Value = floorData[++index] }
                     });
                     break;
 
-                case FDFunctions.Monkeyswing:
-                    functions.Add(new TR3MonkeySwingEntry
+                case FDFunction.Monkeyswing:
+                    functions.Add(new FDMonkeySwingEntry
                     {
                         Setup = new() { Value = floorData[index] },
                     });
                     break;
 
-                case FDFunctions.DeferredTriggeringOrMinecartRotateLeft:
-                    functions.Add(new TR3MinecartRotateLeftEntry
+                case FDFunction.DeferredTriggeringOrMinecartRotateLeft:
+                    functions.Add(new FDMinecartEntry
                     {
                         Setup = new() { Value = floorData[index] },
                     });
                     break;
 
-                case FDFunctions.MechBeetleOrMinecartRotateRight:
+                case FDFunction.MechBeetleOrMinecartRotateRight:
                     functions.Add(new TR3MinecartRotateRightEntry
                     {
                         Setup = new() { Value = floorData[index] },

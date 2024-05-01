@@ -30,10 +30,10 @@ public class AudioRandomizer
         for (int i = 0; i < sectors.Count; i++)
         {
             TRRoomSector sector = sectors[i];
-            FDActionListItem trackItem = null;
+            FDActionItem trackItem = null;
             if (sector.FDIndex > 0)
             {
-                List<FDActionListItem> actions = FDUtilities.GetActionListItems(floorData, FDTrigAction.PlaySoundtrack, sector.FDIndex);
+                List<FDActionItem> actions = FDUtilities.GetActionListItems(floorData, FDTrigAction.PlaySoundtrack, sector.FDIndex);
                 if (actions.Count > 0)
                 {
                     trackItem = actions[0];

@@ -6,7 +6,7 @@ public class FDSetup
 
     public FDSetup() { }
 
-    public FDSetup(FDFunctions function)
+    public FDSetup(FDFunction function)
     {
         Value = (byte)function;
     }

@@ -9,7 +9,7 @@ namespace TREnvironmentEditor.Model.Types;
 
 public class EMSlantFunction : EMClickFunction
 {
-    public FDSlantEntryType SlantType { get; set; }
+    public FDSlantType SlantType { get; set; }
     public sbyte? XSlant { get; set; }
     public sbyte? ZSlant { get; set; }
     public bool RemoveSlant { get; set; }
@@ -100,7 +100,7 @@ public class EMSlantFunction : EMClickFunction
 
         FDSlantEntry newSlant = new()
         {
-            Setup = new FDSetup(SlantType == FDSlantEntryType.FloorSlant ? FDFunctions.FloorSlant : FDFunctions.CeilingSlant),
+            Setup = new FDSetup(SlantType == FDSlantType.FloorSlant ? FDFunction.FloorSlant : FDFunction.CeilingSlant),
             Type = SlantType
         };
         if (XSlant.HasValue)
@@ -116,8 +116,8 @@ public class EMSlantFunction : EMClickFunction
 
         // Only one slant of each type is supported, and floor must come before ceiling and both before anything else.
         // For ease, remove any existing slants, then re-add/replace as needed.
-        FDEntry floorSlant = entries.Find(e => e is FDSlantEntry slant && slant.Type == FDSlantEntryType.FloorSlant);
-        FDEntry ceilingSlant = entries.Find(e => e is FDSlantEntry slant && slant.Type == FDSlantEntryType.CeilingSlant);
+        FDEntry floorSlant = entries.Find(e => e is FDSlantEntry slant && slant.Type == FDSlantType.FloorSlant);
+        FDEntry ceilingSlant = entries.Find(e => e is FDSlantEntry slant && slant.Type == FDSlantType.CeilingSlant);
 
         if (floorSlant != null)
         {
@@ -128,7 +128,7 @@ public class EMSlantFunction : EMClickFunction
             entries.Remove(ceilingSlant);
         }
 
-        if (SlantType == FDSlantEntryType.FloorSlant)
+        if (SlantType == FDSlantType.FloorSlant)
         {
             floorSlant = newSlant;
         }

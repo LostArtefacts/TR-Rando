@@ -1,5 +1,5 @@
 ﻿namespace TRFDControl.FDEntryTypes;
 
-public class TR3MonkeySwingEntry : FDEntry
+public class FDMonkeySwingEntry : FDEntry
 {
 }

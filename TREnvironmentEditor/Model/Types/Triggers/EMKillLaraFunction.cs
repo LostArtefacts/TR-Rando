@@ -71,7 +71,7 @@ public class EMKillLaraFunction : BaseEMFunction
         {
             entries.Add(new FDKillLaraEntry
             {
-                Setup = new FDSetup(FDFunctions.KillLara)
+                Setup = new FDSetup(FDFunction.KillLara)
             });
         }
     }

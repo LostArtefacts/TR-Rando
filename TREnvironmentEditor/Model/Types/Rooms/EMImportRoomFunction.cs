@@ -234,38 +234,38 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 List<FDEntry> newEntries = new();
                 foreach (FDEntry entry in entries)
                 {
-                    switch ((FDFunctions)entry.Setup.Function)
+                    switch ((FDFunction)entry.Setup.Function)
                     {
-                        case FDFunctions.PortalSector:
+                        case FDFunction.PortalSector:
                             // This portal will no longer be valid in the new room's position,
                             // so block off the wall
                             newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = TRConsts.WallClicks;
                             break;
-                        case FDFunctions.FloorSlant:
+                        case FDFunction.FloorSlant:
                             FDSlantEntry slantEntry = entry as FDSlantEntry;
                             newEntries.Add(new FDSlantEntry()
                             {
                                 Setup = new FDSetup() { Value = slantEntry.Setup.Value },
                                 SlantValue = slantEntry.SlantValue,
-                                Type = FDSlantEntryType.FloorSlant
+                                Type = FDSlantType.FloorSlant
                             });
                             break;
-                        case FDFunctions.CeilingSlant:
+                        case FDFunction.CeilingSlant:
                             FDSlantEntry ceilingSlant = entry as FDSlantEntry;
                             newEntries.Add(new FDSlantEntry()
                             {
                                 Setup = new FDSetup() { Value = ceilingSlant.Setup.Value },
                                 SlantValue = ceilingSlant.SlantValue,
-                                Type = FDSlantEntryType.CeilingSlant
+                                Type = FDSlantType.CeilingSlant
                             });
                             break;
-                        case FDFunctions.KillLara:
+                        case FDFunction.KillLara:
                             newEntries.Add(new FDKillLaraEntry()
                             {
                                 Setup = new FDSetup() { Value = entry.Setup.Value }
                             });
                             break;
-                        case FDFunctions.ClimbableWalls:
+                        case FDFunction.ClimbableWalls:
                             newEntries.Add(new FDClimbEntry()
                             {
                                 Setup = new FDSetup() { Value = entry.Setup.Value }
@@ -485,75 +485,75 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 List<FDEntry> newEntries = new();
                 foreach (FDEntry entry in entries)
                 {
-                    switch ((FDFunctions)entry.Setup.Function)
+                    switch ((FDFunction)entry.Setup.Function)
                     {
-                        case FDFunctions.PortalSector:
+                        case FDFunction.PortalSector:
                             // This portal will no longer be valid in the new room's position,
                             // so block off the wall
                             newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = TRConsts.WallClicks;
                             break;
-                        case FDFunctions.FloorSlant:
+                        case FDFunction.FloorSlant:
                             FDSlantEntry slantEntry = entry as FDSlantEntry;
                             newEntries.Add(new FDSlantEntry()
                             {
                                 Setup = new FDSetup() { Value = slantEntry.Setup.Value },
                                 SlantValue = slantEntry.SlantValue,
-                                Type = FDSlantEntryType.FloorSlant
+                                Type = FDSlantType.FloorSlant
                             });
                             break;
-                        case FDFunctions.CeilingSlant:
+                        case FDFunction.CeilingSlant:
                             FDSlantEntry ceilingSlant = entry as FDSlantEntry;
                             newEntries.Add(new FDSlantEntry()
                             {
                                 Setup = new FDSetup() { Value = ceilingSlant.Setup.Value },
                                 SlantValue = ceilingSlant.SlantValue,
-                                Type = FDSlantEntryType.CeilingSlant
+                                Type = FDSlantType.CeilingSlant
                             });
                             break;
-                        case FDFunctions.KillLara:
+                        case FDFunction.KillLara:
                             newEntries.Add(new FDKillLaraEntry()
                             {
                                 Setup = new FDSetup() { Value = entry.Setup.Value }
                             });
                             break;
-                        case FDFunctions.ClimbableWalls:
+                        case FDFunction.ClimbableWalls:
                             newEntries.Add(new FDClimbEntry()
                             {
                                 Setup = new FDSetup() { Value = entry.Setup.Value }
                             });
                             break;
-                        case FDFunctions.FloorTriangulationNWSE_Solid:
-                        case FDFunctions.FloorTriangulationNESW_Solid:
-                        case FDFunctions.CeilingTriangulationNW_Solid:
-                        case FDFunctions.CeilingTriangulationNE_Solid:
-                        case FDFunctions.FloorTriangulationNWSE_SW:
-                        case FDFunctions.FloorTriangulationNWSE_NE:
-                        case FDFunctions.FloorTriangulationNESW_SE:
-                        case FDFunctions.FloorTriangulationNESW_NW:
-                        case FDFunctions.CeilingTriangulationNW_SW:
-                        case FDFunctions.CeilingTriangulationNW_NE:
-                        case FDFunctions.CeilingTriangulationNE_NW:
-                        case FDFunctions.CeilingTriangulationNE_SE:
-                            TR3TriangulationEntry triEntry = entry as TR3TriangulationEntry;
-                            newEntries.Add(new TR3TriangulationEntry
+                        case FDFunction.FloorTriangulationNWSE_Solid:
+                        case FDFunction.FloorTriangulationNESW_Solid:
+                        case FDFunction.CeilingTriangulationNW_Solid:
+                        case FDFunction.CeilingTriangulationNE_Solid:
+                        case FDFunction.FloorTriangulationNWSE_SW:
+                        case FDFunction.FloorTriangulationNWSE_NE:
+                        case FDFunction.FloorTriangulationNESW_SE:
+                        case FDFunction.FloorTriangulationNESW_NW:
+                        case FDFunction.CeilingTriangulationNW_SW:
+                        case FDFunction.CeilingTriangulationNW_NE:
+                        case FDFunction.CeilingTriangulationNE_NW:
+                        case FDFunction.CeilingTriangulationNE_SE:
+                            FDTriangulationEntry triEntry = entry as FDTriangulationEntry;
+                            newEntries.Add(new FDTriangulationEntry
                             {
                                 Setup = new FDSetup { Value = triEntry.Setup.Value },
                                 TriData = new FDTriangulationData { Value = triEntry.TriData.Value }
                             });
                             break;
-                        case FDFunctions.Monkeyswing:
-                            newEntries.Add(new TR3MonkeySwingEntry()
+                        case FDFunction.Monkeyswing:
+                            newEntries.Add(new FDMonkeySwingEntry()
                             {
                                 Setup = new FDSetup() { Value = entry.Setup.Value }
                             });
                             break;
-                        case FDFunctions.DeferredTriggeringOrMinecartRotateLeft:
-                            newEntries.Add(new TR3MinecartRotateLeftEntry()
+                        case FDFunction.DeferredTriggeringOrMinecartRotateLeft:
+                            newEntries.Add(new FDMinecartEntry()
                             {
                                 Setup = new FDSetup() { Value = entry.Setup.Value }
                             });
                             break;
-                        case FDFunctions.MechBeetleOrMinecartRotateRight:
+                        case FDFunction.MechBeetleOrMinecartRotateRight:
                             newEntries.Add(new TR3MinecartRotateRightEntry()
                             {
                                 Setup = new FDSetup() { Value = entry.Setup.Value }

@@ -97,7 +97,7 @@ public class EMTriggerFunction : BaseEMFunction
         }
 
         // Handle any specifics that the trigger may rely on
-        foreach (FDActionListItem action in triggerEntry.TrigActionList)
+        foreach (FDActionItem action in triggerEntry.TrigActionList)
         {
             switch (action.TrigAction)
             {
@@ -149,7 +149,7 @@ public class EMTriggerFunction : BaseEMFunction
         }
 
         // Handle any specifics that the trigger may rely on
-        foreach (FDActionListItem action in triggerEntry.TrigActionList)
+        foreach (FDActionItem action in triggerEntry.TrigActionList)
         {
             switch (action.TrigAction)
             {

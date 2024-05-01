@@ -2,7 +2,7 @@
 
 public class FDSlantEntry : FDEntry
 {
-    public FDSlantEntryType Type { get; set; }
+    public FDSlantType Type { get; set; }
 
     public ushort SlantValue { get; set; }
 
