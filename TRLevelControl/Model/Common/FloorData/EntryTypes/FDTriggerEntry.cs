@@ -4,7 +4,7 @@ public class FDTriggerEntry : FDEntry
 {
     public FDTriggerEntry()
     {
-        TrigActionList = new List<FDActionListItem>();
+        TrigActionList = new List<FDActionItem>();
     }
 
     public FDTrigSetup TrigSetup { get; set; }
@@ -21,7 +21,7 @@ public class FDTriggerEntry : FDEntry
         }
     }
 
-    public List<FDActionListItem> TrigActionList { get; set; }
+    public List<FDActionItem> TrigActionList { get; set; }
 
     public ushort SwitchOrKeyRef { get; set; }
 
@@ -61,7 +61,7 @@ public class FDTriggerEntry : FDEntry
 
         for (int i = 0; i < TrigActionList.Count; i++)
         {
-            FDActionListItem action = TrigActionList[i];
+            FDActionItem action = TrigActionList[i];
 
             // Ensure Continue is set on all but the final action, unless it's a camera action,
             // in which case the CamAction will have Continue set to false if this is the final action.

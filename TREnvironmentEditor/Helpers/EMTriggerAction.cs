@@ -7,7 +7,7 @@ public class EMTriggerAction
     public FDTrigAction Action { get; set; }
     public short Parameter { get; set; }
 
-    public FDActionListItem ToFDAction(EMLevelData levelData)
+    public FDActionItem ToFDAction(EMLevelData levelData)
     {
         ushort parameter = (ushort)Parameter;
         if (Parameter < 0)
@@ -24,14 +24,14 @@ public class EMTriggerAction
             }
         }
 
-        return new FDActionListItem
+        return new FDActionItem
         {
             TrigAction = Action,
             Parameter = parameter
         };
     }
 
-    public static EMTriggerAction FromFDAction(FDActionListItem action)
+    public static EMTriggerAction FromFDAction(FDActionItem action)
     {
         return new EMTriggerAction
         {

@@ -127,7 +127,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            FDActionListItem musicAction = new()
+            FDActionItem musicAction = new()
             {
                 TrigAction = FDTrigAction.PlaySoundtrack,
                 Parameter = secretTrack.ID
@@ -137,7 +137,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
             List<FDTriggerEntry> triggers = FDUtilities.GetSecretTriggers(floorData, i);
             foreach (FDTriggerEntry trigger in triggers)
             {
-                FDActionListItem currentMusicAction = trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.PlaySoundtrack);
+                FDActionItem currentMusicAction = trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.PlaySoundtrack);
                 if (currentMusicAction == null)
                 {
                     trigger.TrigActionList.Add(musicAction);

@@ -250,13 +250,13 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 {
                     if (trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Camera) == null)
                     {
-                        trigger.TrigActionList.Add(new FDActionListItem
+                        trigger.TrigActionList.Add(new FDActionItem
                         {
                             TrigAction = FDTrigAction.Camera,
                             CamAction = new FDCameraAction { Value = 4 },
                             Parameter = (ushort)rewardRoom.CameraIndices[i]
                         });
-                        trigger.TrigActionList.Add(new FDActionListItem
+                        trigger.TrigActionList.Add(new FDActionItem
                         {
                             TrigAction = FDTrigAction.LookAtItem,
                             Parameter = (ushort)rewardRoom.DoorIndices[0]
@@ -289,7 +289,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 Value = 15872
             },
             TrigType = FDTrigType.Dummy,
-            TrigActionList = new List<FDActionListItem>
+            TrigActionList = new List<FDActionItem>
             {
                 new() {
                     TrigAction = FDTrigAction.Object,
@@ -680,8 +680,8 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         // move Object actions if the mask on this trigger is full.
         if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry existingTrigger)
         {
-            List<FDActionListItem> existingActions = new();
-            foreach (FDActionListItem actionItem in existingTrigger.TrigActionList)
+            List<FDActionItem> existingActions = new();
+            foreach (FDActionItem actionItem in existingTrigger.TrigActionList)
             {
                 if (actionItem.TrigAction == FDTrigAction.Object)
                 {

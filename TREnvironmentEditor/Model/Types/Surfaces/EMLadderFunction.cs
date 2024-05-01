@@ -87,7 +87,7 @@ public class EMLadderFunction : EMRefaceFunction
         {
             FDClimbEntry climbEntry = new()
             {
-                Setup = new FDSetup(FDFunctions.ClimbableWalls),
+                Setup = new FDSetup(FDFunction.ClimbableWalls),
                 IsPositiveX = IsPositiveX,
                 IsPositiveZ = IsPositiveZ,
                 IsNegativeX = IsNegativeX,
@@ -96,7 +96,7 @@ public class EMLadderFunction : EMRefaceFunction
 
             // We have to add climbable entries after portal, slant and kill Lara entries.
             List<FDEntry> entries = control.Entries[sector.FDIndex];
-            int index = entries.FindLastIndex(e => e is FDPortalEntry || e is FDSlantEntry || e is FDKillLaraEntry || e is TR3TriangulationEntry);
+            int index = entries.FindLastIndex(e => e is FDPortalEntry || e is FDSlantEntry || e is FDKillLaraEntry || e is FDTriangulationEntry);
 
             control.Entries[sector.FDIndex].Insert(index + 1, climbEntry);
         }

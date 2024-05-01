@@ -237,7 +237,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
         floorData.Entries[sector.FDIndex].Add(new FDKillLaraEntry
         {
-            Setup = new FDSetup(FDFunctions.KillLara)
+            Setup = new FDSetup(FDFunction.KillLara)
         });
 
         floorData.WriteToLevel(level.Data);

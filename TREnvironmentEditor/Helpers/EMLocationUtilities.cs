@@ -36,7 +36,7 @@ public static class EMLocationUtilities
             if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
                 && trigger.TrigType == FDTrigType.Pickup
                 && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null
-                && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Object) is FDActionListItem action)
+                && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Object) is FDActionItem action)
             {
                 return action.Parameter;
             }

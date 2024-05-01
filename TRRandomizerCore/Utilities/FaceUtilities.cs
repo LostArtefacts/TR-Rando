@@ -244,9 +244,9 @@ public static class FaceUtilities
             return;
         }
 
-        entry ??= floorData.Entries[sector.FDIndex].Find(e => e is TR3MonkeySwingEntry);
+        entry ??= floorData.Entries[sector.FDIndex].Find(e => e is FDMonkeySwingEntry);
 
-        if (entry is TR3MonkeySwingEntry monkeyEntry)
+        if (entry is FDMonkeySwingEntry monkeyEntry)
         {
             int sectorIndex = room.Sectors.ToList().IndexOf(sector);
             short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);

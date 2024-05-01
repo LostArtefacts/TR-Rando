@@ -327,13 +327,13 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                 {
                     if (trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Camera) == null)
                     {
-                        trigger.TrigActionList.Add(new FDActionListItem
+                        trigger.TrigActionList.Add(new FDActionItem
                         {
                             TrigAction = FDTrigAction.Camera,
                             CamAction = new FDCameraAction { Value = 4 },
                             Parameter = (ushort)rewardRoom.CameraIndices[i]
                         });
-                        trigger.TrigActionList.Add(new FDActionListItem
+                        trigger.TrigActionList.Add(new FDActionItem
                         {
                             TrigAction = FDTrigAction.LookAtItem,
                             Parameter = cameraTarget
@@ -757,8 +757,8 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         // move Object actions if the mask on this trigger is full.
         if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry existingTrigger)
         {
-            List<FDActionListItem> existingActions = new();
-            foreach (FDActionListItem actionItem in existingTrigger.TrigActionList)
+            List<FDActionItem> existingActions = new();
+            foreach (FDActionItem actionItem in existingTrigger.TrigActionList)
             {
                 if (actionItem.TrigAction == FDTrigAction.Object)
                 {

@@ -135,7 +135,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
             }
 
             // Generate a new music action
-            FDActionListItem musicAction = new()
+            FDActionItem musicAction = new()
             {
                 TrigAction = FDTrigAction.PlaySoundtrack,
                 Parameter = secretTracks[_generator.Next(0, secretTracks.Count)].ID
@@ -155,7 +155,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
                     // remaining action list items are actioned on pick up.
                     Setup = new FDSetup { Value = 1028 },
                     TrigSetup = new FDTrigSetup { Value = 15872 },
-                    TrigActionList = new List<FDActionListItem>
+                    TrigActionList = new List<FDActionItem>
                     {
                         new() {
                             TrigAction = FDTrigAction.Object,

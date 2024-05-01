@@ -1,6 +1,6 @@
 ﻿namespace TRFDControl.FDEntryTypes;
 
-public enum FDSlantEntryType
+public enum FDSlantType
 {
     CeilingSlant,
     FloorSlant

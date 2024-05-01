@@ -1,6 +1,6 @@
 ﻿namespace TRFDControl;
 
-public enum FDFunctions
+public enum FDFunction
 {
     PortalSector = 0x01,
     FloorSlant = 0x02,

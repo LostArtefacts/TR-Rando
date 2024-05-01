@@ -14,7 +14,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        FDActionListItem action = InitialiseActionItem(data);
+        FDActionItem action = InitialiseActionItem(data);
 
         FDControl control = new();
         control.ParseFromLevel(level);
@@ -31,7 +31,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        FDActionListItem action = InitialiseActionItem(data);
+        FDActionItem action = InitialiseActionItem(data);
 
         FDControl control = new();
         control.ParseFromLevel(level);
@@ -48,7 +48,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        FDActionListItem action = InitialiseActionItem(data);
+        FDActionItem action = InitialiseActionItem(data);
 
         FDControl control = new();
         control.ParseFromLevel(level);
@@ -62,12 +62,12 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
         control.WriteToLevel(level);
     }
 
-    private FDActionListItem InitialiseActionItem(EMLevelData data)
+    private FDActionItem InitialiseActionItem(EMLevelData data)
     {
         return ActionItem.ToFDAction(data);
     }
 
-    private static void RemoveAction(TRRoomSector sector, FDControl control, FDActionListItem action)
+    private static void RemoveAction(TRRoomSector sector, FDControl control, FDActionItem action)
     {
         if (sector.FDIndex == 0)
         {

@@ -261,7 +261,7 @@ public abstract class AbstractLocationGenerator<T, L>
                     invalidFloorData = true;
                     break;
                 }
-                else if (entry is FDSlantEntry slant && slant.Type == FDSlantEntryType.FloorSlant)
+                else if (entry is FDSlantEntry slant && slant.Type == FDSlantType.FloorSlant)
                 {
                     // NB It's only ever FDSlantEntry or TR3TriangulationEntry (or neither) for TR3-5                                
                     Vector4? bestMidpoint = GetBestSlantMidpoint(slant);
@@ -279,7 +279,7 @@ public abstract class AbstractLocationGenerator<T, L>
                         break;
                     }
                 }
-                else if (entry is TR3TriangulationEntry triangulation && triangulation.IsFloorTriangulation)
+                else if (entry is FDTriangulationEntry triangulation && triangulation.IsFloorTriangulation)
                 {
                     Vector4? bestMidpoint = GetBestTriangleMidpoint(sector, triangulation, sectorIndex, GetRoomDepth(level, roomIndex), GetRoomYTop(level, roomIndex));
                     if (bestMidpoint.HasValue)
@@ -299,7 +299,7 @@ public abstract class AbstractLocationGenerator<T, L>
                         break;
                     }
                 }
-                else if (entry is TR3MinecartRotateLeftEntry && i < entries.Count - 1 && entries[i + 1] is TR3MinecartRotateRightEntry)
+                else if (entry is FDMinecartEntry && i < entries.Count - 1 && entries[i + 1] is TR3MinecartRotateRightEntry)
                 {
                     // Minecart stops here, so block this tile.
                     invalidFloorData = true;
@@ -452,7 +452,7 @@ public abstract class AbstractLocationGenerator<T, L>
     }
 
     // Returned vector contains x, y, z and angle adjustments for midpoint
-    private static Vector4? GetBestTriangleMidpoint(TRRoomSector sector, TR3TriangulationEntry triangulation, int sectorIndex, int roomDepth, int roomYTop)
+    private static Vector4? GetBestTriangleMidpoint(TRRoomSector sector, FDTriangulationEntry triangulation, int sectorIndex, int roomDepth, int roomYTop)
     {
         int t0 = triangulation.TriData.C10;
         int t1 = triangulation.TriData.C00;
@@ -488,12 +488,12 @@ public abstract class AbstractLocationGenerator<T, L>
         int sectorXPos = sectorIndex / roomDepth * TRConsts.Step4;
         int sectorZPos = sectorIndex % roomDepth * TRConsts.Step4;
 
-        FDFunctions func = (FDFunctions)triangulation.Setup.Function;
+        FDFunction func = (FDFunction)triangulation.Setup.Function;
         switch (func)
         {
-            case FDFunctions.FloorTriangulationNWSE_Solid:
-            case FDFunctions.FloorTriangulationNWSE_SW:
-            case FDFunctions.FloorTriangulationNWSE_NE:
+            case FDFunction.FloorTriangulationNWSE_Solid:
+            case FDFunction.FloorTriangulationNWSE_SW:
+            case FDFunction.FloorTriangulationNWSE_NE:
                 triangle1 = new List<Vector3>
                 {
                     new(0, corners[0], 0),
@@ -571,13 +571,13 @@ public abstract class AbstractLocationGenerator<T, L>
 
                 // Work out which triangle has the smallest gradient. We can only include it if
                 // the triangle is not a collisional portal.
-                if (Math.Abs(xoff1) < Math.Abs(xoff2) && Math.Abs(zoff1) < Math.Abs(zoff2) && func != FDFunctions.FloorTriangulationNWSE_SW)
+                if (Math.Abs(xoff1) < Math.Abs(xoff2) && Math.Abs(zoff1) < Math.Abs(zoff2) && func != FDFunction.FloorTriangulationNWSE_SW)
                 {
                     xOffset = xoff1;
                     zOffset = zoff1;
                     bestMatch = new Vector4(triSum1.X, triSum1.Y, triSum1.Z, angle);
                 }
-                else if (func != FDFunctions.FloorTriangulationNWSE_NE)
+                else if (func != FDFunction.FloorTriangulationNWSE_NE)
                 {
                     xOffset = xoff2;
                     zOffset = zoff2;
@@ -586,9 +586,9 @@ public abstract class AbstractLocationGenerator<T, L>
 
                 break;
 
-            case FDFunctions.FloorTriangulationNESW_Solid:
-            case FDFunctions.FloorTriangulationNESW_SE:
-            case FDFunctions.FloorTriangulationNESW_NW:
+            case FDFunction.FloorTriangulationNESW_Solid:
+            case FDFunction.FloorTriangulationNESW_SE:
+            case FDFunction.FloorTriangulationNESW_NW:
                 triangle1 = new List<Vector3>
                 {
                     new(0, corners[0], 0),
@@ -658,13 +658,13 @@ public abstract class AbstractLocationGenerator<T, L>
                     angle = -8192;
                 }
 
-                if (Math.Abs(xoff1) < Math.Abs(xoff2) && Math.Abs(zoff1) < Math.Abs(zoff2) && func != FDFunctions.FloorTriangulationNESW_NW)
+                if (Math.Abs(xoff1) < Math.Abs(xoff2) && Math.Abs(zoff1) < Math.Abs(zoff2) && func != FDFunction.FloorTriangulationNESW_NW)
                 {
                     xOffset = xoff1;
                     zOffset = zoff1;
                     bestMatch = new Vector4(triSum1.X, triSum1.Y, triSum1.Z, angle);
                 }
-                else if (func != FDFunctions.FloorTriangulationNESW_SE)
+                else if (func != FDFunction.FloorTriangulationNESW_SE)
                 {
                     xOffset = xoff2;
                     zOffset = zoff2;

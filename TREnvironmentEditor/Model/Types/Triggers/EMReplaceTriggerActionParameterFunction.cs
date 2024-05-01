@@ -14,7 +14,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        FDActionListItem action = InitialiseActionItem(data);
+        FDActionItem action = InitialiseActionItem(data);
 
         FDControl control = new();
         control.ParseFromLevel(level);
@@ -43,7 +43,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        FDActionListItem action = InitialiseActionItem(data);
+        FDActionItem action = InitialiseActionItem(data);
 
         FDControl control = new();
         control.ParseFromLevel(level);
@@ -72,7 +72,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        FDActionListItem action = InitialiseActionItem(data);
+        FDActionItem action = InitialiseActionItem(data);
 
         FDControl control = new();
         control.ParseFromLevel(level);
@@ -98,20 +98,20 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         control.WriteToLevel(level);
     }
 
-    private FDActionListItem InitialiseActionItem(EMLevelData data)
+    private FDActionItem InitialiseActionItem(EMLevelData data)
     {
         return Action.ToFDAction(data);
     }
 
-    private static void ReplaceActionParameter(TRRoomSector baseSector, FDControl control, FDActionListItem actionItem)
+    private static void ReplaceActionParameter(TRRoomSector baseSector, FDControl control, FDActionItem actionItem)
     {
         if (baseSector.FDIndex == 0)
         {
             return;
         }
 
-        List<FDActionListItem> actions = FDUtilities.GetActionListItems(control, actionItem.TrigAction, baseSector.FDIndex);
-        foreach (FDActionListItem action in actions)
+        List<FDActionItem> actions = FDUtilities.GetActionListItems(control, actionItem.TrigAction, baseSector.FDIndex);
+        foreach (FDActionItem action in actions)
         {
             action.Parameter = actionItem.Parameter;
         }
