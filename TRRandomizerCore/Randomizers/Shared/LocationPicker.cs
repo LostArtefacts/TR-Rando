@@ -99,13 +99,13 @@ public class LocationPicker : IRouteManager
     public void RandomizeKeyItemLocation<T>(TREntity<T> entity, bool hasPickupTrigger, int levelSequence, TRRoomInfo roomInfo)
         where T : Enum
     {
-        int keyItemID = GetKeyItemID(levelSequence, entity, roomInfo);
+        uint keyItemID = GetKeyItemID(levelSequence, entity, roomInfo);
         if (!Enum.IsDefined(typeof(T), keyItemID))
         {
             return;
         }
 
-        Location location = GetKeyItemLocation(keyItemID, entity, hasPickupTrigger);
+        Location location = GetKeyItemLocation((int)keyItemID, entity, hasPickupTrigger);
         if (location != null)
         {
             SetLocation(entity, location);
@@ -301,7 +301,7 @@ public class LocationPicker : IRouteManager
         return location;
     }
 
-    public static int GetKeyItemID<T>(int levelSequence, TREntity<T> entity, TRRoomInfo roomInfo)
+    public static uint GetKeyItemID<T>(int levelSequence, TREntity<T> entity, TRRoomInfo roomInfo)
         where T : Enum
     {
         // Arbitrary method of generating unique IDs per level.
@@ -309,12 +309,13 @@ public class LocationPicker : IRouteManager
         int z = (entity.Z - roomInfo.Z) / TRConsts.Step4;
         int y = entity.Y / TRConsts.Step1;
 
-        return 10000
+        long id = 10000
             + (levelSequence - 1) * 1000
-            + (int)(object)entity.TypeID
+            + (uint)(object)entity.TypeID
             + entity.Room * 2
             + x * z
             + y;
+        return (uint)id;
     }
 
     public void SetLocation<T>(TREntity<T> entity, Location location)
