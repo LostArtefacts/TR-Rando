@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRRandomizerView", "TRRando
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRRandomizerCore", "TRRandomizerCore\TRRandomizerCore.csproj", "{B657D758-A095-44B5-AEF1-C77C30667DAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRFDControl", "TRFDControl\TRFDControl.csproj", "{09ABCF27-6777-4866-8740-3EAD3F6B86FC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRModelTransporter", "TRModelTransporter\TRModelTransporter.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TREnvironmentEditor", "TREnvironmentEditor\TREnvironmentEditor.csproj", "{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}"
@@ -61,10 +59,6 @@ Global
 		{B657D758-A095-44B5-AEF1-C77C30667DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B657D758-A095-44B5-AEF1-C77C30667DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B657D758-A095-44B5-AEF1-C77C30667DAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09ABCF27-6777-4866-8740-3EAD3F6B86FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09ABCF27-6777-4866-8740-3EAD3F6B86FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09ABCF27-6777-4866-8740-3EAD3F6B86FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09ABCF27-6777-4866-8740-3EAD3F6B86FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6CE83D8E-30E4-4CE1-9228-8657EF186A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CE83D8E-30E4-4CE1-9228-8657EF186A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CE83D8E-30E4-4CE1-9228-8657EF186A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
