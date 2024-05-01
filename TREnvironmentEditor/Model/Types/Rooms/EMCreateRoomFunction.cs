@@ -1,6 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRLevelControl;
 using TRLevelControl.Helpers.Pathing;
 using TRLevelControl.Model;

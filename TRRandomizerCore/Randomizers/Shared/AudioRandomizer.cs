@@ -1,6 +1,4 @@
 ﻿using System.Numerics;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Model;

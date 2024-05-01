@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
 using TREnvironmentEditor.Model.Types;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRGE.Core.Item.Enums;
 using TRLevelControl;

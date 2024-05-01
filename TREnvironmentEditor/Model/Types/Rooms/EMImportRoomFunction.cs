@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;

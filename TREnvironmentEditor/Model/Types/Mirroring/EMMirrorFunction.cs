@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;

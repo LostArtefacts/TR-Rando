@@ -1,4 +1,4 @@
-﻿namespace TRFDControl;
+﻿namespace TRLevelControl.Model;
 
 public enum FDFunction
 {

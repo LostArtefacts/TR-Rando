@@ -1,4 +1,4 @@
-﻿namespace TRFDControl.FDEntryTypes;
+﻿namespace TRLevelControl.Model;
 
 public class FDPortalEntry : FDEntry
 {

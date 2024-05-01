@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;

@@ -1,7 +1,4 @@
 ﻿using System.Numerics;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 

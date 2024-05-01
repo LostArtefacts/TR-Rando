@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using TREnvironmentEditor;
 using TREnvironmentEditor.Model;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;

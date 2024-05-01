@@ -1,8 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;

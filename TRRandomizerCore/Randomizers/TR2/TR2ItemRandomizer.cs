@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRGE.Core.Item.Enums;
 using TRLevelControl.Helpers;

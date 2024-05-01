@@ -50,7 +50,7 @@ public class EMConvertWheelDoorFunction : BaseEMFunction
             // This indicates that we want to get rid of the wheel and make its current trigger a pad
             new EMConvertTriggerFunction
             {
-                TrigType = TRFDControl.FDTrigType.Pad,
+                TrigType = FDTrigType.Pad,
                 Location = new EMLocation
                 {
                     X = wheel.X,

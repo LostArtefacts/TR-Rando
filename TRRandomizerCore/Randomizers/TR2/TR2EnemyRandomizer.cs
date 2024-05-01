@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;

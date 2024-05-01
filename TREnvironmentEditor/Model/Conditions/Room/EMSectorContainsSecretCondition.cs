@@ -1,5 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Conditions;

@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;

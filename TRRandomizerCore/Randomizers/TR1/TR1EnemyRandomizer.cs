@@ -2,9 +2,6 @@
 using System.Diagnostics;
 using System.Numerics;
 using TREnvironmentEditor.Model.Types;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;

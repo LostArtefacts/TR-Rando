@@ -1,8 +1,4 @@
-﻿using TRFDControl.FDEntryTypes;
-using TRLevelControl;
-using TRLevelControl.Model;
-
-namespace TRFDControl.Utilities;
+﻿namespace TRLevelControl.Model;
 
 public static class FDUtilities
 {

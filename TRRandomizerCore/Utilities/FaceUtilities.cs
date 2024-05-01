@@ -1,7 +1,4 @@
-﻿using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Utilities;

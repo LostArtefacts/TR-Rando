@@ -1,6 +1,4 @@
 ﻿using System.Drawing;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;

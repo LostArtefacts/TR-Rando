@@ -1,7 +1,5 @@
 ﻿using RectanglePacker.Events;
 using System.Drawing;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
 using TRLevelControl;
 using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;

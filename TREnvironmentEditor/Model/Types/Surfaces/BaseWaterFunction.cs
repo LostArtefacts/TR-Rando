@@ -1,6 +1,4 @@
-﻿using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
