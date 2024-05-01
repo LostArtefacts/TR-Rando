@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using System.Numerics;
 using TRLevelControl.Model;
 
 namespace TRLevelControl;
@@ -25,9 +26,7 @@ public class TRLevelReader : BinaryReader
             data[i] = ReadByte();
         }
 
-        MemoryStream inflatedStream;
-
-        inflatedStream = new();
+        MemoryStream inflatedStream = new();
         using MemoryStream ms = new(data);
         using InflaterInputStream inflater = new(ms);
 
@@ -132,19 +131,24 @@ public class TRLevelReader : BinaryReader
         };
     }
 
-    public List<TRColour> ReadColours(long numColours)
+    public List<TRColour> ReadColours(long numColours, byte multiplier = 1)
     {
         List<TRColour> colours = new((int)numColours);
         for (long i = 0; i < numColours; i++)
         {
-            colours.Add(new()
-            {
-                Red = ReadByte(),
-                Green = ReadByte(),
-                Blue = ReadByte()
-            });
+            colours.Add(ReadColour(multiplier));
         }
         return colours;
+    }
+
+    public TRColour ReadColour(byte multiplier = 1)
+    {
+        return new()
+        {
+            Red = (byte)(ReadByte() * multiplier),
+            Green = (byte)(ReadByte() * multiplier),
+            Blue = (byte)(ReadByte() * multiplier)
+        };
     }
 
     public List<TRColour4> ReadColour4s(long numColours)
@@ -452,6 +456,16 @@ public class TRLevelReader : BinaryReader
             X = ReadInt16(),
             Y = ReadInt16(),
             Z = ReadInt16()
+        };
+    }
+
+    public Vector3 ReadVector3()
+    {
+        return new()
+        {
+            X = ReadSingle(),
+            Y = ReadSingle(),
+            Z = ReadSingle()
         };
     }
 

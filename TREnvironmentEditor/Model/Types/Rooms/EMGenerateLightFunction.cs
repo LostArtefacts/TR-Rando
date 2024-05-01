@@ -109,7 +109,7 @@ public class EMGenerateLightFunction : BaseEMFunction
                 TR3RoomLight nearestLight = null;
                 foreach (TR3RoomLight light in room.Lights)
                 {
-                    if (light.LightType == 0)
+                    if (light.Type == 0)
                     {
                         // Sun light
                         continue;

@@ -196,7 +196,7 @@ public class EMCreateRoomFunction : BaseEMFunction
                 Z = light.Z + Location.Z,
                 Colour = light.Colour,
                 LightProperties = light.LightProperties,
-                LightType = light.LightType,
+                Type = (TR3RoomLightType)light.LightType,
             });
         }
 

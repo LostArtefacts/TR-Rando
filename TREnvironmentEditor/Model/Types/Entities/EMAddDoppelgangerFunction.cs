@@ -5,8 +5,6 @@ namespace TREnvironmentEditor.Model.Types;
 
 public class EMAddDoppelgangerFunction : EMAddEntityFunction
 {
-    public static readonly short AnchorRoomFlag = 0x200;
-
     public short AnchorRoom { get; set; }
 
     public override void ApplyToLevel(TR1Level level)
@@ -15,7 +13,7 @@ public class EMAddDoppelgangerFunction : EMAddEntityFunction
         base.ApplyToLevel(level);
 
         EMLevelData data = GetData(level);
-        level.Rooms[data.ConvertRoom(AnchorRoom)].Flags |= AnchorRoomFlag;
+        level.Rooms[data.ConvertRoom(AnchorRoom)].SetFlag(TRRoomFlag.Unused1, true);
     }
 
     public override void ApplyToLevel(TR2Level level)

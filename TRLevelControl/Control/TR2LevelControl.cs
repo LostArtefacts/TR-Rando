@@ -181,64 +181,8 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
     private void ReadRooms(TRLevelReader reader)
     {
-        ushort numRooms = reader.ReadUInt16();
-        _level.Rooms = new();
-        for (int i = 0; i < numRooms; i++)
-        {
-            TR2Room room = new()
-            {
-                Info = reader.ReadRoomInfo(_level.Version.Game)
-            };
-            _level.Rooms.Add(room);
-
-            _roomBuilder.ReadRawMesh(reader);
-
-            ushort numPortals = reader.ReadUInt16();
-            room.Portals = reader.ReadRoomPortals(numPortals);
-
-            room.NumZSectors = reader.ReadUInt16();
-            room.NumXSectors = reader.ReadUInt16();
-            room.Sectors = reader.ReadRoomSectors(room.NumXSectors * room.NumZSectors);
-
-            room.AmbientIntensity = reader.ReadInt16();
-            room.AmbientIntensity2 = reader.ReadInt16();
-            room.LightMode = reader.ReadInt16();
-            ushort numLights = reader.ReadUInt16();
-            room.Lights = new();
-            for (int j = 0; j < numLights; j++)
-            {
-                room.Lights.Add(new()
-                {
-                    X = reader.ReadInt32(),
-                    Y = reader.ReadInt32(),
-                    Z = reader.ReadInt32(),
-                    Intensity1 = reader.ReadUInt16(),
-                    Intensity2 = reader.ReadUInt16(),
-                    Fade1 = reader.ReadUInt32(),
-                    Fade2 = reader.ReadUInt32()
-                });
-            }
-
-            ushort numStaticMeshes = reader.ReadUInt16();
-            room.StaticMeshes = new();
-            for (int j = 0; j < numStaticMeshes; j++)
-            {
-                room.StaticMeshes.Add(new()
-                {
-                    X = reader.ReadInt32(),
-                    Y = reader.ReadInt32(),
-                    Z = reader.ReadInt32(),
-                    Angle = reader.ReadInt16(),
-                    Intensity1 = reader.ReadUInt16(),
-                    Intensity2 = reader.ReadUInt16(),
-                    ID = TR2Type.SceneryBase + reader.ReadUInt16()
-                });
-            }
-
-            room.AlternateRoom = reader.ReadInt16();
-            room.Flags = reader.ReadInt16();
-        }
-
+        _level.Rooms = _roomBuilder.ReadRooms(reader);
+        
         uint numFloorData = reader.ReadUInt32();
         _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
     }
@@ -246,52 +190,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     private void WriteRooms(TRLevelWriter writer)
     {
         _spriteBuilder.CacheSpriteOffsets(_level.Sprites);
-
-        writer.Write((ushort)_level.Rooms.Count);
-        foreach (TR2Room room in _level.Rooms)
-        {
-            writer.Write(room.Info, _level.Version.Game);
-
-            _roomBuilder.WriteMesh(writer, room.Mesh, _spriteBuilder);
-
-            writer.Write((ushort)room.Portals.Count);
-            writer.Write(room.Portals);
-
-            writer.Write(room.NumZSectors);
-            writer.Write(room.NumXSectors);
-            writer.Write(room.Sectors);
-
-            writer.Write(room.AmbientIntensity);
-            writer.Write(room.AmbientIntensity2);
-            writer.Write(room.LightMode);
-
-            writer.Write((ushort)room.Lights.Count);
-            foreach (TR2RoomLight light in room.Lights)
-            {
-                writer.Write(light.X);
-                writer.Write(light.Y);
-                writer.Write(light.Z);
-                writer.Write(light.Intensity1);
-                writer.Write(light.Intensity2);
-                writer.Write(light.Fade1);
-                writer.Write(light.Fade2);
-            }
-
-            writer.Write((ushort)room.StaticMeshes.Count);
-            foreach (TR2RoomStaticMesh mesh in room.StaticMeshes)
-            {
-                writer.Write(mesh.X);
-                writer.Write(mesh.Y);
-                writer.Write(mesh.Z);
-                writer.Write(mesh.Angle);
-                writer.Write(mesh.Intensity1);
-                writer.Write(mesh.Intensity2);
-                writer.Write((ushort)(mesh.ID - TR2Type.SceneryBase));
-            }
-
-            writer.Write(room.AlternateRoom);
-            writer.Write(room.Flags);
-        }
+        _roomBuilder.WriteRooms(writer, _level.Rooms, _spriteBuilder);
 
         writer.Write((uint)_level.FloorData.Count);
         writer.Write(_level.FloorData);
@@ -335,7 +234,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         for (int i = 0; i < _level.Rooms.Count; i++)
         {
-            _level.Rooms[i].Mesh = _roomBuilder.BuildMesh(i, _spriteBuilder);
+            _roomBuilder.BuildMesh(_level.Rooms[i], i, _spriteBuilder);
         }
     }
 

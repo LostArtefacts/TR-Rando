@@ -1,5 +1,6 @@
 ﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using System.Diagnostics;
+using System.Numerics;
 using TRLevelControl.Model;
 
 namespace TRLevelControl;
@@ -356,6 +357,13 @@ public class TRLevelWriter : BinaryWriter
         Write(vertex.X);
         Write(vertex.Y);
         Write(vertex.Z);
+    }
+
+    public void Write(Vector3 vector)
+    {
+        Write(vector.X);
+        Write(vector.Y);
+        Write(vector.Z);
     }
 
     public void Write(TRRoomInfo info, TRGameVersion version)

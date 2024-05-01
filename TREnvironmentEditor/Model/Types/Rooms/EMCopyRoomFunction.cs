@@ -36,47 +36,33 @@ public class EMCopyRoomFunction : BaseEMFunction
                 YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
                 Z = NewLocation.Z
             },
-            Lights = new(),
+            Lights = new(baseRoom.Lights.Select(l => l.Clone())),
             
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
             Portals = new(),
             Mesh = baseRoom.Mesh.Clone(),
             Sectors = new(),
-            StaticMeshes = new()
+            StaticMeshes = new(baseRoom.StaticMeshes.Select(s => s.Clone()))
         };
 
-        // Lights
-        for (int i = 0; i < baseRoom.Lights.Count; i++)
+        foreach (TR1RoomLight light in newRoom.Lights)
         {
-            newRoom.Lights.Add(new()
-            {
-                Fade = baseRoom.Lights[i].Fade,
-                Intensity = baseRoom.Lights[i].Intensity,
-                X = baseRoom.Lights[i].X + xdiff,
-                Y = baseRoom.Lights[i].Y + ydiff,
-                Z = baseRoom.Lights[i].Z + zdiff
-            });
+            light.X += xdiff;
+            light.Y += ydiff;
+            light.Z += zdiff;
         }
 
-        // Vertices
         foreach (TRVertex vertex in newRoom.Mesh.Vertices.Select(v => v.Vertex))
         {
             vertex.Y += (short)ydiff;
         }
 
-        // Static Meshes
-        for (int i = 0; i < baseRoom.StaticMeshes.Count; i++)
+        foreach (TR1RoomStaticMesh staticMesh in newRoom.StaticMeshes)
         {
-            newRoom.StaticMeshes.Add(new()
-            {
-                Intensity = baseRoom.StaticMeshes[i].Intensity,
-                ID = baseRoom.StaticMeshes[i].ID,
-                Angle = baseRoom.StaticMeshes[i].Angle,
-                X = baseRoom.StaticMeshes[i].X + xdiff,
-                Y = baseRoom.StaticMeshes[i].Y + ydiff,
-                Z = baseRoom.StaticMeshes[i].Z + zdiff
-            });
+            staticMesh.X += xdiff;
+            staticMesh.Y += ydiff;
+            staticMesh.Z += zdiff;
         }
 
         // Rebuild the sectors
@@ -122,50 +108,33 @@ public class EMCopyRoomFunction : BaseEMFunction
                 YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
                 Z = NewLocation.Z
             },
-            Lights = new(),
+            Lights = new(baseRoom.Lights.Select(l => l.Clone())),
             LightMode = baseRoom.LightMode,
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
             Portals = new(),
             Mesh = baseRoom.Mesh.Clone(),
             Sectors = new(),
-            StaticMeshes = new()
+            StaticMeshes = new(baseRoom.StaticMeshes.Select(s => s.Clone()))
         };
 
-        // Lights
-        for (int i = 0; i < baseRoom.Lights.Count; i++)
+        foreach (TR2RoomLight light in newRoom.Lights)
         {
-            newRoom.Lights.Add(new()
-            {
-                Fade1 = baseRoom.Lights[i].Fade1,
-                Fade2 = baseRoom.Lights[i].Fade2,
-                Intensity1 = baseRoom.Lights[i].Intensity1,
-                Intensity2 = baseRoom.Lights[i].Intensity2,
-                X = baseRoom.Lights[i].X + xdiff,
-                Y = baseRoom.Lights[i].Y + ydiff,
-                Z = baseRoom.Lights[i].Z + zdiff
-            });
+            light.X += xdiff;
+            light.Y += ydiff;
+            light.Z += zdiff;
         }
 
-        // Vertices
         foreach (TRVertex vertex in newRoom.Mesh.Vertices.Select(v => v.Vertex))
         {
             vertex.Y += (short)ydiff;
         }
 
-        // Static Meshes
-        for (int i = 0; i < baseRoom.StaticMeshes.Count; i++)
+        foreach (TR2RoomStaticMesh staticMesh in newRoom.StaticMeshes)
         {
-            newRoom.StaticMeshes.Add(new()
-            {
-                Intensity1 = baseRoom.StaticMeshes[i].Intensity1,
-                Intensity2 = baseRoom.StaticMeshes[i].Intensity2,
-                ID = baseRoom.StaticMeshes[i].ID,
-                Angle = baseRoom.StaticMeshes[i].Angle,
-                X = baseRoom.StaticMeshes[i].X + xdiff,
-                Y = baseRoom.StaticMeshes[i].Y + ydiff,
-                Z = baseRoom.StaticMeshes[i].Z + zdiff
-            });
+            staticMesh.X += xdiff;
+            staticMesh.Y += ydiff;
+            staticMesh.Z += zdiff;
         }
 
         // Rebuild the sectors
@@ -202,7 +171,6 @@ public class EMCopyRoomFunction : BaseEMFunction
         {
             AlternateRoom = -1,
             AmbientIntensity = baseRoom.AmbientIntensity,
-            Filler = baseRoom.Filler,
             Flags = baseRoom.Flags,
             Info = new()
             {
@@ -211,51 +179,35 @@ public class EMCopyRoomFunction : BaseEMFunction
                 YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
                 Z = NewLocation.Z
             },
-            Lights = new(),
+            Lights = new(baseRoom.Lights.Select(l => l.Clone())),
             LightMode = baseRoom.LightMode,
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
             Portals = new(),
-            ReverbInfo = baseRoom.ReverbInfo,
+            ReverbMode = baseRoom.ReverbMode,
             Mesh = baseRoom.Mesh.Clone(),
             Sectors = new(),
-            StaticMeshes = new(),
+            StaticMeshes = new(baseRoom.StaticMeshes.Select(s => s.Clone())),
             WaterScheme = baseRoom.WaterScheme
         };
 
-        // Lights
-        for (int i = 0; i < baseRoom.Lights.Count; i++)
+        foreach (TR3RoomLight light in newRoom.Lights)
         {
-            newRoom.Lights.Add(new()
-            {
-                Colour = baseRoom.Lights[i].Colour,
-                LightProperties = baseRoom.Lights[i].LightProperties,
-                LightType = baseRoom.Lights[i].LightType,
-                X = baseRoom.Lights[i].X + xdiff,
-                Y = baseRoom.Lights[i].Y + ydiff,
-                Z = baseRoom.Lights[i].Z + zdiff
-            });
+            light.X += xdiff;
+            light.Y += ydiff;
+            light.Z += zdiff;
         }
 
-        // Vertices
         foreach (TRVertex vertex in newRoom.Mesh.Vertices.Select(v => v.Vertex))
         {
             vertex.Y += (short)ydiff;
         }
 
-        // Static Meshes
-        for (int i = 0; i < baseRoom.StaticMeshes.Count; i++)
+        foreach (TR3RoomStaticMesh staticMesh in newRoom.StaticMeshes)
         {
-            newRoom.StaticMeshes.Add(new()
-            {
-                Colour = baseRoom.StaticMeshes[i].Colour,
-                ID = baseRoom.StaticMeshes[i].ID,
-                Unused = baseRoom.StaticMeshes[i].Unused,
-                Angle = baseRoom.StaticMeshes[i].Angle,
-                X = baseRoom.StaticMeshes[i].X + xdiff,
-                Y = baseRoom.StaticMeshes[i].Y + ydiff,
-                Z = baseRoom.StaticMeshes[i].Z + zdiff
-            });
+            staticMesh.X += xdiff;
+            staticMesh.Y += ydiff;
+            staticMesh.Z += zdiff;
         }
 
         // Rebuild the sectors
