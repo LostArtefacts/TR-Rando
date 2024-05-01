@@ -26,9 +26,7 @@ public class TRLevelReader : BinaryReader
             data[i] = ReadByte();
         }
 
-        MemoryStream inflatedStream;
-
-        inflatedStream = new();
+        MemoryStream inflatedStream = new();
         using MemoryStream ms = new(data);
         using InflaterInputStream inflater = new(ms);
 
