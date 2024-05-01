@@ -8,7 +8,6 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 {
     private TRObjectMeshBuilder<TR5Type> _meshBuilder;
     private TRSpriteBuilder<TR5Type> _spriteBuilder;
-    private TR5RoomBuilder _roomBuilder;
 
     public TR5LevelControl(ITRLevelObserver observer = null)
         : base(observer) { }
@@ -32,7 +31,6 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
     {
         _meshBuilder = new(TRGameVersion.TR5, _observer);
         _spriteBuilder = new(TRGameVersion.TR5);
-        _roomBuilder = new();
     }
 
     protected override void Read(TRLevelReader reader)
@@ -191,7 +189,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
             return;
         }
 
-        _level.Rooms = _roomBuilder.ReadRooms(reader);
+        _level.Rooms = TR5RoomBuilder.ReadRooms(reader);
 
         uint numFloorData = reader.ReadUInt32();
         _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
@@ -237,7 +235,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
             return;
         }
 
-        _roomBuilder.WriteRooms(writer, _level.Rooms, _spriteBuilder);
+        TR5RoomBuilder.WriteRooms(writer, _level.Rooms);
 
         writer.Write((uint)_level.FloorData.Count);
         writer.Write(_level.FloorData);
