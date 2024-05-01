@@ -132,8 +132,8 @@ public class TR5RoomBuilder
                 }
             }
             room.Mesh.Vertices.AddRange(roomlet.Vertices);
-            room.Mesh.Rectangles.AddRange(roomlet.Rectangles);
-            room.Mesh.Triangles.AddRange(roomlet.Triangles);
+            room.Mesh.Rectangles.AddRange(ConvertFromMeshFaces(roomlet.Rectangles));
+            room.Mesh.Triangles.AddRange(ConvertFromMeshFaces(roomlet.Triangles));
         }
 
         // Skip to the end and we're done
@@ -418,8 +418,8 @@ public class TR5RoomBuilder
         writer.Write((uint)0);
 
         header.PolyStartOffset = (uint)writer.BaseStream.Position;
-        writer.Write(room.Mesh.Rectangles, TRGameVersion.TR5);
-        writer.Write(room.Mesh.Triangles, TRGameVersion.TR5);
+        writer.Write(ConvertToMeshFaces(room.Mesh.Rectangles), TRGameVersion.TR5);
+        writer.Write(ConvertToMeshFaces(room.Mesh.Triangles), TRGameVersion.TR5);
 
         header.VerticesStartOffset = (uint)writer.BaseStream.Position;
         WriteVertices(writer, room.Mesh.Vertices);
@@ -606,6 +606,30 @@ public class TR5RoomBuilder
             writer.Write(vertex.Normal);
             writer.Write(vertex.Colour.ToARGB());
         }
+    }
+
+    private static IEnumerable<TRFace> ConvertFromMeshFaces(IEnumerable<TRMeshFace> meshFaces)
+    {
+        return meshFaces.Select(f => new TRFace
+        {
+            DoubleSided = f.DoubleSided,
+            Texture = f.Texture,
+            Type = f.Type,
+            UnknownFlag = f.UnknownFlag,
+            Vertices = f.Vertices
+        });
+    }
+
+    private static IEnumerable<TRMeshFace> ConvertToMeshFaces(IEnumerable<TRFace> faces)
+    {
+        return faces.Select(f => new TRMeshFace
+        {
+            DoubleSided = f.DoubleSided,
+            Texture = f.Texture,
+            Type = f.Type,
+            UnknownFlag = f.UnknownFlag,
+            Vertices = f.Vertices,
+        });
     }
 
     class TR5RoomHeader
