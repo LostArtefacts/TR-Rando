@@ -2,9 +2,9 @@
 
 namespace TRLevelControl.Build;
 
-public abstract class TRRoomBuilder<T, V>
+public abstract class TRRoomBuilder<T, R>
     where T : Enum
-    where V : TRRoomVertex
+    where R : TRRoom, new()
 {
     protected readonly TRGameVersion _version;
     protected List<ushort[]> _rawMeshes = new();
@@ -14,16 +14,41 @@ public abstract class TRRoomBuilder<T, V>
         _version = version;
     }
 
-    public void ReadRawMesh(TRLevelReader reader)
+    public List<R> ReadRooms(TRLevelReader reader)
     {
-        uint numMeshData = reader.ReadUInt32();
-        _rawMeshes.Add(reader.ReadUInt16s(numMeshData));
+        ushort numRooms = reader.ReadUInt16();
+        List<R> rooms = new();
+        for (int i = 0; i < numRooms; i++)
+        {
+            R room = new()
+            {
+                Info = reader.ReadRoomInfo(_version)
+            };
+            rooms.Add(room);
+
+            uint numMeshData = reader.ReadUInt32();
+            _rawMeshes.Add(reader.ReadUInt16s(numMeshData));
+
+            ushort numPortals = reader.ReadUInt16();
+            room.Portals = reader.ReadRoomPortals(numPortals);
+
+            room.NumZSectors = reader.ReadUInt16();
+            room.NumXSectors = reader.ReadUInt16();
+            room.Sectors = reader.ReadRoomSectors(room.NumXSectors * room.NumZSectors);
+
+            ReadLights(room, reader);
+            ReadStatics(room, reader);
+
+            room.AlternateRoom = reader.ReadInt16();
+            room.Flags = (TRRoomFlag)reader.ReadInt16();
+
+            ReadAdditionalProperties(room, reader);
+        }
+
+        return rooms;
     }
 
-    protected abstract List<V> ReadVertices(TRLevelReader reader);
-    protected abstract void WriteVertices(TRLevelWriter writer, List<V> vertices);
-
-    public TRRoomMesh<T, V> BuildMesh(int roomIndex, ISpriteProvider<T> spriteProvider)
+    public void BuildMesh(R room, int roomIndex, ISpriteProvider<T> spriteProvider)
     {
         ushort[] rawData = _rawMeshes[roomIndex];
         byte[] target = new byte[rawData.Length * sizeof(short)];
@@ -32,54 +57,88 @@ public abstract class TRRoomBuilder<T, V>
         using MemoryStream ms = new(target);
         using TRLevelReader reader = new(ms);
 
-        TRRoomMesh<T, V> mesh = new()
-        {
-            Vertices = ReadVertices(reader)
-        };
+        BuildMesh(room, reader, spriteProvider);
+    }
 
+    protected List<TRFace> ReadFaces(TRFaceType type, TRLevelReader reader)
+    {
         short numFaces = reader.ReadInt16();
-        mesh.Rectangles = reader.ReadRoomFaces(numFaces, TRFaceType.Rectangle, _version);
+        return reader.ReadRoomFaces(numFaces, type, _version);
+    }
 
-        numFaces = reader.ReadInt16();
-        mesh.Triangles = reader.ReadRoomFaces(numFaces, TRFaceType.Triangle, _version);
-
+    protected List<TRRoomSprite<T>> ReadSprites(TRLevelReader reader, ISpriteProvider<T> spriteProvider)
+    {
         short numSprites = reader.ReadInt16();
-        mesh.Sprites = new();
+        List<TRRoomSprite<T>> sprites = new();
 
         for (int i = 0; i < numSprites; i++)
         {
-            mesh.Sprites.Add(new()
+            sprites.Add(new()
             {
                 Vertex = reader.ReadInt16(),
                 ID = spriteProvider.FindSpriteType(reader.ReadInt16())
             });
         }
 
-        return mesh;
+        return sprites;
     }
 
-    public void WriteMesh(TRLevelWriter writer, TRRoomMesh<T, V> mesh, ISpriteProvider<T> spriteProvider)
+    public void WriteRooms(TRLevelWriter writer, List<R> rooms, ISpriteProvider<T> spriteProvider)
     {
-        using MemoryStream stream = new();
-        using TRLevelWriter meshWriter = new(stream);
-
-        WriteVertices(meshWriter, mesh.Vertices);
-
-        meshWriter.Write((short)mesh.Rectangles.Count);
-        meshWriter.Write(mesh.Rectangles, _version);
-
-        meshWriter.Write((short)mesh.Triangles.Count);
-        meshWriter.Write(mesh.Triangles, _version);
-
-        meshWriter.Write((short)mesh.Sprites.Count);
-        foreach (TRRoomSprite<T> sprite in mesh.Sprites)
+        writer.Write((ushort)rooms.Count);
+        foreach (R room in rooms)
         {
-            meshWriter.Write(sprite.Vertex);
-            meshWriter.Write(spriteProvider.GetSpriteOffset(sprite.ID));
-        }
+            writer.Write(room.Info, _version);
 
-        byte[] data = stream.ToArray();
-        writer.Write((uint)data.Length / sizeof(short));
-        writer.Write(data);
+            using MemoryStream stream = new();
+            using TRLevelWriter meshWriter = new(stream);
+
+            WriteMesh(room, meshWriter, spriteProvider);
+            byte[] data = stream.ToArray();
+            writer.Write((uint)data.Length / sizeof(short));
+            writer.Write(data);
+
+            writer.Write((ushort)room.Portals.Count);
+            writer.Write(room.Portals);
+
+            writer.Write(room.NumZSectors);
+            writer.Write(room.NumXSectors);
+            writer.Write(room.Sectors);
+
+            WriteLights(room, writer);
+            WriteStatics(room, writer);
+
+            writer.Write(room.AlternateRoom);
+            writer.Write((short)room.Flags);
+
+            WriteAdditionalProperties(room, writer);
+        }
     }
+
+    protected void WriteFaces(List<TRFace> faces, TRLevelWriter writer)
+    {
+        writer.Write((short)faces.Count);
+        writer.Write(faces, _version);
+    }
+
+    protected void WriteSprites(List<TRRoomSprite<T>> sprites, ISpriteProvider<T> spriteProvider, TRLevelWriter writer)
+    {
+        writer.Write((short)sprites.Count);
+        foreach (TRRoomSprite<T> sprite in sprites)
+        {
+            writer.Write(sprite.Vertex);
+            writer.Write(spriteProvider.GetSpriteOffset(sprite.ID));
+        }
+    }
+
+    protected abstract void ReadLights(R room, TRLevelReader reader);
+    protected abstract void ReadStatics(R room, TRLevelReader reader);
+    protected virtual void ReadAdditionalProperties(R room, TRLevelReader reader) { }
+
+    protected abstract void WriteLights(R room, TRLevelWriter writer);
+    protected abstract void WriteStatics(R room, TRLevelWriter writer);
+    protected virtual void WriteAdditionalProperties(R room, TRLevelWriter writer) { }
+
+    protected abstract void BuildMesh(R room, TRLevelReader reader, ISpriteProvider<T> spriteProvider);
+    protected abstract void WriteMesh(R room, TRLevelWriter writer, ISpriteProvider<T> spriteProvider);
 }
