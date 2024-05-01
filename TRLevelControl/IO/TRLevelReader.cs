@@ -107,6 +107,16 @@ public class TRLevelReader : BinaryReader
         return data;
     }
 
+    public float[] ReadSingles(long numData)
+    {
+        float[] data = new float[numData];
+        for (int i = 0; i < numData; i++)
+        {
+            data[i] = ReadSingle();
+        }
+        return data;
+    }
+
     public List<TRTexImage8> ReadImage8s(long numImages)
     {
         List<TRTexImage8> images = new((int)numImages);

@@ -170,9 +170,7 @@ public class TR5RoomBuilder
         header.NumVertices = reader.ReadUInt32();
 
         reader.ReadUInt32s(4); // 0, 0, 0xCDCDCDCD, 0
-        reader.ReadSingle(); // Position as floats, not needed
-        reader.ReadSingle();
-        reader.ReadSingle();
+        reader.ReadSingles(3); // Position as floats, not needed
         reader.ReadUInt32s(6); // 4 x 0xCDCDCDCD, then 0 for normal rooms or 0xCDCDCDCD for null rooms, then another 0xCDCDCDCD
         header.NumTriangles = reader.ReadUInt32();
         header.NumRectangles = reader.ReadUInt32();
@@ -184,17 +182,14 @@ public class TR5RoomBuilder
 
         header.NumFogBulbs = reader.ReadUInt32();
 
-        reader.ReadSingle(); // YTop float
-        reader.ReadSingle(); // YBottom float
+        reader.ReadSingles(2); // YTop/YBottom floats
 
         header.NumRoomlets = reader.ReadUInt32();
         header.RoomletStartOffset = reader.ReadUInt32();
         header.VerticesStartOffset = reader.ReadUInt32();
         header.PolyStartOffset = reader.ReadUInt32();
 
-        reader.ReadUInt32(); // Poly offset repeated
-        reader.ReadUInt32(); // Total vertex size
-        reader.ReadUInt32s(4); // Always 0xCDCDCDCD x 4
+        reader.ReadUInt32s(6); // Poly offset repeated; total vertex size; then 0xCDCDCDCD x 4
 
         return header;
     }
@@ -388,14 +383,10 @@ public class TR5RoomBuilder
 
         header.RoomletStartOffset = (uint)writer.BaseStream.Position;
         writer.Write((ushort)room.Mesh.Vertices.Count);
-        writer.Write((ushort)0); // waterVertCount
-        writer.Write((ushort)0); // shoreVertCount
+        writer.Write(Enumerable.Repeat((ushort)0, 2)); // waterVertCount, shoreVertCount
         writer.Write((ushort)room.Mesh.Rectangles.Count);
         writer.Write((ushort)room.Mesh.Triangles.Count);
-        writer.Write((ushort)0); // waterRectCount
-        writer.Write((ushort)0); // waterTriCount
-
-        writer.Write((ushort)0); // Filler
+        writer.Write(Enumerable.Repeat((ushort)0, 3)); // waterRectCount, waterTriCount, filler
 
         // Min bounds
         writer.Write(new TR5Vertex
@@ -412,10 +403,7 @@ public class TR5RoomBuilder
             Z = (room.NumZSectors - 1) * TRConsts.Step4 - 1,
         });
 
-        writer.Write((uint)0); // Filler
-        writer.Write((uint)0);
-        writer.Write((uint)0);
-        writer.Write((uint)0);
+        writer.Write(Enumerable.Repeat((uint)0, 4)); // Filler
 
         header.PolyStartOffset = (uint)writer.BaseStream.Position;
         writer.Write(ConvertToMeshFaces(room.Mesh.Rectangles), TRGameVersion.TR5);
@@ -446,11 +434,7 @@ public class TR5RoomBuilder
         writer.Write(header.AlternateGroup);
         writer.Write(header.WaterScheme);
 
-        writer.Write((uint)0x00007FFF);
-        writer.Write((uint)0x00007FFF);
-        writer.Write(0xCDCDCDCD);
-        writer.Write(0xCDCDCDCD);
-        writer.Write(0xFFFFFFFF);
+        writer.Write(new uint[] { 0x00007FFF, 0x00007FFF, 0xCDCDCDCD, 0xCDCDCDCD, 0xFFFFFFFF }); // Filler
 
         writer.Write(header.AlternateRoom);
         writer.Write((short)header.Flags);
@@ -463,9 +447,7 @@ public class TR5RoomBuilder
 
         if (isNullRoom)
         {
-            writer.Write(0xCDCDCDCD);
-            writer.Write(0xCDCDCDCD);
-            writer.Write(0xCDCDCDCD);
+            writer.Write(Enumerable.Repeat(0xCDCDCDCD, 3));
         }
         else
         {
@@ -474,17 +456,13 @@ public class TR5RoomBuilder
             writer.Write((float)header.Info.Z);
         }
 
-        writer.Write(0xCDCDCDCD);
-        writer.Write(0xCDCDCDCD);
-        writer.Write(0xCDCDCDCD);
-        writer.Write(0xCDCDCDCD);
+        writer.Write(Enumerable.Repeat(0xCDCDCDCD, 4));
         writer.Write(isNullRoom ? 0xCDCDCDCD : 0);
         writer.Write(0xCDCDCDCD);
 
         if (isNullRoom)
         {
-            writer.Write(0xCDCDCDCD);
-            writer.Write(0xCDCDCDCD);
+            writer.Write(Enumerable.Repeat(0xCDCDCDCD, 2));
         }
         else
         {
@@ -500,8 +478,7 @@ public class TR5RoomBuilder
 
         if (isNullRoom)
         {
-            writer.Write(0xCDCDCDCD);
-            writer.Write(0xCDCDCDCD);
+            writer.Write(Enumerable.Repeat(0xCDCDCDCD, 2));
         }
         else
         {
@@ -517,10 +494,7 @@ public class TR5RoomBuilder
         writer.Write(header.PolyStartOffset);
         writer.Write(header.NumVertices * 28);
 
-        writer.Write(0xCDCDCDCD);
-        writer.Write(0xCDCDCDCD);
-        writer.Write(0xCDCDCDCD);
-        writer.Write(0xCDCDCDCD);
+        writer.Write(Enumerable.Repeat(0xCDCDCDCD, 4));
     }
 
     private static void WriteLights(TRLevelWriter writer, List<TR5RoomLight> lights)
