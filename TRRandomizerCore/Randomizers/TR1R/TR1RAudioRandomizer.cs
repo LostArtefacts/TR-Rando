@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using TREnvironmentEditor.Model.Types;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
@@ -63,7 +62,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
     private void RandomizeFloorTracks(TR1Level level, FDControl floorData)
     {
         _audioRandomizer.ResetFloorMap();
-        foreach (TR1Room room in level.Rooms.Where(r => (r.Flags & EMLockMusicFunction.LockedMusicFlag) == 0))
+        foreach (TR1Room room in level.Rooms.Where(r => !r.Flags.HasFlag(TRRoomFlag.Unused2)))
         {
             _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
             {

@@ -223,7 +223,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
             }
 
             room.AlternateRoom = reader.ReadInt16();
-            room.Flags = reader.ReadInt16();
+            room.Flags = (TRRoomFlag)reader.ReadInt16();
         }
 
         uint numFloorData = reader.ReadUInt32();
@@ -272,7 +272,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
             }
 
             writer.Write(room.AlternateRoom);
-            writer.Write(room.Flags);
+            writer.Write((short)room.Flags);
         }
 
         writer.Write((uint)_level.FloorData.Count);

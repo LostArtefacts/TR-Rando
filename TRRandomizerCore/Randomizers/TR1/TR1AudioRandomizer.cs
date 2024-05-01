@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Numerics;
-using TREnvironmentEditor.Model.Types;
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
@@ -123,7 +122,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             floorData.ParseFromLevel(level.Data);
 
             _audioRandomizer.ResetFloorMap();
-            foreach (TR1Room room in level.Data.Rooms.Where(r => (r.Flags & EMLockMusicFunction.LockedMusicFlag) == 0))
+            foreach (TR1Room room in level.Data.Rooms.Where(r => !r.Flags.HasFlag(TRRoomFlag.Unused2)))
             {
                 _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
                 {

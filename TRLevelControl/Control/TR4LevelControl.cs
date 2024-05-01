@@ -231,7 +231,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
             }
 
             room.AlternateRoom = reader.ReadInt16();
-            room.Flags = reader.ReadInt16();
+            room.Flags = (TRRoomFlag)reader.ReadInt16();
             room.WaterScheme = reader.ReadByte();
             room.ReverbInfo = reader.ReadByte();
             room.Filler = reader.ReadByte();
@@ -291,7 +291,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
             }
 
             writer.Write(room.AlternateRoom);
-            writer.Write(room.Flags);
+            writer.Write((short)room.Flags);
             writer.Write(room.WaterScheme);
             writer.Write(room.ReverbInfo);
             writer.Write(room.Filler);
