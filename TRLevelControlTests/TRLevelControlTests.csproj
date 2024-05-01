@@ -29,4 +29,12 @@
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
     <ProjectReference Include="..\TRRandomizerCore\TRRandomizerCore.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Levels\TR5\TEST1.TRC">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Levels\TR5\TEST2.TRC">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

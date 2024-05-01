@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TRFDControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
