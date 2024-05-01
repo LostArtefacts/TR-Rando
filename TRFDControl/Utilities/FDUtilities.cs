@@ -80,28 +80,13 @@ public static class FDUtilities
     }
 
     public static void RemoveEntityTriggers(TR1Level level, int entityIndex, FDControl control)
-    {
-        foreach (TR1Room room in level.Rooms)
-        {
-            RemoveEntityTriggers(room.Sectors, entityIndex, control);
-        }
-    }
+        => RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), entityIndex, control);
 
     public static void RemoveEntityTriggers(TR2Level level, int entityIndex, FDControl control)
-    {
-        foreach (TR2Room room in level.Rooms)
-        {
-            RemoveEntityTriggers(room.Sectors, entityIndex, control);
-        }
-    }
+        => RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), entityIndex, control);
 
     public static void RemoveEntityTriggers(TR3Level level, int entityIndex, FDControl control)
-    {
-        foreach (TR3Room room in level.Rooms)
-        {
-            RemoveEntityTriggers(room.Sectors, entityIndex, control);
-        }
-    }
+        => RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), entityIndex, control);
 
     public static void RemoveEntityTriggers(IEnumerable<TRRoomSector> sectorList, int entityIndex, FDControl control)
     {
@@ -142,183 +127,19 @@ public static class FDUtilities
     }
 
     public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR1Level level, FDControl floorData)
-    {
-        int xFloor, yFloor;
-        TR1Room room = level.Rooms[roomNumber];
-        TRRoomSector sector;
-        short data;
-
-        do
-        {
-            // Clip position to edge of tile
-            xFloor = (z - room.Info.Z) >> TRConsts.WallShift;
-            yFloor = (x - room.Info.X) >> TRConsts.WallShift;
-
-            if (xFloor <= 0)
-            {
-                xFloor = 0;
-                if (yFloor < 1)
-                {
-                    yFloor = 1;
-                }
-                else if (yFloor > room.NumXSectors - 2)
-                {
-                    yFloor = room.NumXSectors - 2;
-                }
-            }
-            else if (xFloor >= room.NumZSectors - 1)
-            {
-                xFloor = room.NumZSectors - 1;
-                if (yFloor < 1)
-                {
-                    yFloor = 1;
-                }
-                else if (yFloor > room.NumXSectors - 2)
-                {
-                    yFloor = room.NumXSectors - 2;
-                }
-            }
-            else if (yFloor < 0)
-            {
-                yFloor = 0;
-            }
-            else if (yFloor >= room.NumXSectors)
-            {
-                yFloor = room.NumXSectors - 1;
-            }
-
-            sector = room.Sectors[xFloor + yFloor * room.NumZSectors];
-            data = GetDoor(sector, floorData);
-            if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Count - 1)
-            {
-                room = level.Rooms[data];
-            }
-        }
-        while (data != TRConsts.NoRoom);
-
-        if (y >= (sector.Floor << 8))
-        {
-            do
-            {
-                if (sector.RoomBelow == TRConsts.NoRoom)
-                {
-                    return sector;
-                }
-
-                room = level.Rooms[sector.RoomBelow];
-                sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
-            }
-            while (y >= (sector.Floor << 8));
-        }
-        else if (y < (sector.Ceiling << 8))
-        {
-            do
-            {
-                if (sector.RoomAbove == TRConsts.NoRoom)
-                {
-                    return sector;
-                }
-
-                room = level.Rooms[sector.RoomAbove];
-                sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
-            }
-            while (y < (sector.RoomAbove << 8));
-        }
-
-        return sector;
-    }
+        => GetRoomSector(x, y, z, roomNumber, level.Rooms, floorData);
 
     public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR2Level level, FDControl floorData)
-    {
-        int xFloor, yFloor;
-        TR2Room room = level.Rooms[roomNumber];
-        TRRoomSector sector;
-        short data;
-
-        do
-        {
-            // Clip position to edge of tile
-            xFloor = (z - room.Info.Z) >> TRConsts.WallShift;
-            yFloor = (x - room.Info.X) >> TRConsts.WallShift;
-
-            if (xFloor <= 0)
-            {
-                xFloor = 0;
-                if (yFloor < 1)
-                {
-                    yFloor = 1;
-                }
-                else if (yFloor > room.NumXSectors - 2)
-                {
-                    yFloor = room.NumXSectors - 2;
-                }
-            }
-            else if (xFloor >= room.NumZSectors - 1)
-            {
-                xFloor = room.NumZSectors - 1;
-                if (yFloor < 1)
-                {
-                    yFloor = 1;
-                }
-                else if (yFloor > room.NumXSectors - 2)
-                {
-                    yFloor = room.NumXSectors - 2;
-                }
-            }
-            else if (yFloor < 0)
-            {
-                yFloor = 0;
-            }
-            else if (yFloor >= room.NumXSectors)
-            {
-                yFloor = room.NumXSectors - 1;
-            }
-
-            sector = room.Sectors[xFloor + yFloor * room.NumZSectors];
-            data = GetDoor(sector, floorData);
-            if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Count - 1)
-            {
-                room = level.Rooms[data];
-            }
-        }
-        while (data != TRConsts.NoRoom);
-
-        if (y >= (sector.Floor << 8))
-        {
-            do
-            {
-                if (sector.RoomBelow == TRConsts.NoRoom)
-                {
-                    return sector;
-                }
-
-                room = level.Rooms[sector.RoomBelow];
-                sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
-            }
-            while (y >= (sector.Floor << 8));
-        }
-        else if (y < (sector.Ceiling << 8))
-        {
-            do
-            {
-                if (sector.RoomAbove == TRConsts.NoRoom)
-                {
-                    return sector;
-                }
-
-                room = level.Rooms[sector.RoomAbove];
-                sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
-            }
-            while (y < (sector.RoomAbove << 8));
-        }
-
-        return sector;
-    }
+        => GetRoomSector(x, y, z, roomNumber, level.Rooms, floorData);
 
     public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR3Level level, FDControl floorData)
+        => GetRoomSector(x, y, z, roomNumber, level.Rooms, floorData);
+
+    public static TRRoomSector GetRoomSector<R>(int x, int y, int z, short roomNumber, List<R> rooms, FDControl floorData)
+        where R : TRRoom
     {
         int xFloor, yFloor;
-        TR3Room room = level.Rooms[roomNumber];
+        TRRoom room = rooms[roomNumber];
         TRRoomSector sector;
         short data;
 
@@ -363,9 +184,9 @@ public static class FDUtilities
 
             sector = room.Sectors[xFloor + yFloor * room.NumZSectors];
             data = GetDoor(sector, floorData);
-            if (data != TRConsts.NoRoom && data >= 0 && data < level.Rooms.Count - 1)
+            if (data != TRConsts.NoRoom && data >= 0 && data < rooms.Count - 1)
             {
-                room = level.Rooms[data];
+                room = rooms[data];
             }
         }
         while (data != TRConsts.NoRoom);
@@ -389,7 +210,7 @@ public static class FDUtilities
                     break;
                 }
 
-                room = level.Rooms[sector.RoomBelow];
+                room = rooms[sector.RoomBelow];
                 sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
             }
             while (y >= (sector.Floor << 8));
@@ -413,7 +234,7 @@ public static class FDUtilities
                     break;
                 }
 
-                room = level.Rooms[sector.RoomAbove];
+                room = rooms[sector.RoomAbove];
                 sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
             }
             while (y < (sector.RoomAbove << 8));
@@ -451,8 +272,8 @@ public static class FDUtilities
         if (floorData.Entries[sector.FDIndex].Find(e => e is TR3TriangulationEntry) is TR3TriangulationEntry triangulation)
         {
             FDFunctions func = (FDFunctions)triangulation.Setup.Value;
-            int dx = x & (TRConsts.Step4 - 1);
-            int dz = z & (TRConsts.Step4 - 1);
+            int dx = x & TRConsts.WallMask;
+            int dz = z & TRConsts.WallMask;
 
             if (func == FDFunctions.FloorTriangulationNWSE_SW && dx <= (TRConsts.Step4 - dz))
             {
@@ -487,8 +308,8 @@ public static class FDUtilities
         if (floorData.Entries[sector.FDIndex].Find(e => e is TR3TriangulationEntry) is TR3TriangulationEntry triangulation)
         {
             FDFunctions func = (FDFunctions)triangulation.Setup.Value;
-            int dx = x & (TRConsts.Step4 - 1);
-            int dz = z & (TRConsts.Step4 - 1);
+            int dx = x & TRConsts.WallMask;
+            int dz = z & TRConsts.WallMask;
 
             if (func == FDFunctions.CeilingTriangulationNW_SW && dx <= (TRConsts.Step4 - dz))
             {
@@ -514,76 +335,18 @@ public static class FDUtilities
     }
 
     public static int GetHeight(int x, int z, short roomIndex, TR1Level level, FDControl floorData, bool waterOnly)
-    {
-        TR1Room room = level.Rooms[roomIndex];
-        if (waterOnly && !room.ContainsWater)
-        {
-            return TRConsts.NoHeight;
-        }
-
-        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
-        TRRoomSector floorSector = baseSector;
-        while (floorSector.RoomBelow != TRConsts.NoRoom)
-        {
-            room = level.Rooms[floorSector.RoomBelow];
-            if (waterOnly && !room.ContainsWater)
-            {
-                break;
-            }
-            floorSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
-        }
-
-        TRRoomSector ceilingSector = baseSector;
-        while (ceilingSector.RoomAbove != TRConsts.NoRoom)
-        {
-            room = level.Rooms[ceilingSector.RoomAbove];
-            if (waterOnly && !room.ContainsWater)
-            {
-                break;
-            }
-            ceilingSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
-        }
-
-        return GetHeight(x, z, floorSector, ceilingSector, floorData);
-    }
+        => GetHeight(x, z, roomIndex, level.Rooms, floorData, waterOnly);
 
     public static int GetHeight(int x, int z, short roomIndex, TR2Level level, FDControl floorData, bool waterOnly)
-    {
-        TR2Room room = level.Rooms[roomIndex];
-        if (waterOnly && !room.ContainsWater)
-        {
-            return TRConsts.NoHeight;
-        }
-
-        TRRoomSector baseSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
-        TRRoomSector floorSector = baseSector;
-        while (floorSector.RoomBelow != TRConsts.NoRoom)
-        {
-            room = level.Rooms[floorSector.RoomBelow];
-            if (waterOnly && !room.ContainsWater)
-            {
-                break;
-            }
-            floorSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
-        }
-
-        TRRoomSector ceilingSector = baseSector;
-        while (ceilingSector.RoomAbove != TRConsts.NoRoom)
-        {
-            room = level.Rooms[ceilingSector.RoomAbove];
-            if (waterOnly && !room.ContainsWater)
-            {
-                break;
-            }
-            ceilingSector = GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
-        }
-
-        return GetHeight(x, z, floorSector, ceilingSector, floorData);
-    }
+        => GetHeight(x, z, roomIndex, level.Rooms, floorData, waterOnly);
 
     public static int GetHeight(int x, int z, short roomIndex, TR3Level level, FDControl floorData, bool waterOnly)
+        => GetHeight(x, z, roomIndex, level.Rooms, floorData, waterOnly);
+
+    public static int GetHeight<R>(int x, int z, short roomIndex, List<R> rooms, FDControl floorData, bool waterOnly)
+        where R : TRRoom
     {
-        TR3Room room = level.Rooms[roomIndex];
+        TRRoom room = rooms[roomIndex];
         if (waterOnly && !room.ContainsWater)
         {
             return TRConsts.NoHeight;
@@ -593,7 +356,7 @@ public static class FDUtilities
         TRRoomSector floorSector = baseSector;
         while (floorSector.RoomBelow != TRConsts.NoRoom)
         {
-            room = level.Rooms[floorSector.RoomBelow];
+            room = rooms[floorSector.RoomBelow];
             if (waterOnly && !room.ContainsWater)
             {
                 break;
@@ -604,7 +367,7 @@ public static class FDUtilities
         TRRoomSector ceilingSector = baseSector;
         while (ceilingSector.RoomAbove != TRConsts.NoRoom)
         {
-            room = level.Rooms[ceilingSector.RoomAbove];
+            room = rooms[ceilingSector.RoomAbove];
             if (waterOnly && !room.ContainsWater)
             {
                 break;
@@ -648,22 +411,22 @@ public static class FDUtilities
         {
             if (slantType == FDSlantEntryType.FloorSlant)
             {
-                adjustment -= (xoff * (x & (TRConsts.Step4 - 1))) >> 2;
+                adjustment -= (xoff * (x & TRConsts.WallMask)) >> 2;
             }
             else
             {
-                adjustment += (xoff * ((TRConsts.Step4 - 1 - x) & (TRConsts.Step4 - 1))) >> 2;
+                adjustment += (xoff * ((TRConsts.WallMask - x) & TRConsts.WallMask)) >> 2;
             }
         }
         else
         {
             if (slantType == FDSlantEntryType.FloorSlant)
             {
-                adjustment += (xoff * ((TRConsts.Step4 - 1 - x) & (TRConsts.Step4 - 1))) >> 2;
+                adjustment += (xoff * ((TRConsts.WallMask - x) & TRConsts.WallMask)) >> 2;
             }
             else
             {
-                adjustment -= (xoff * (x & (TRConsts.Step4 - 1))) >> 2;
+                adjustment -= (xoff * (x & TRConsts.WallMask)) >> 2;
             }
         }
 
@@ -671,22 +434,22 @@ public static class FDUtilities
         {
             if (slantType == FDSlantEntryType.FloorSlant)
             {
-                adjustment -= (zoff * (z & (TRConsts.Step4 - 1))) >> 2;
+                adjustment -= (zoff * (z & TRConsts.WallMask)) >> 2;
             }
             else
             {
-                adjustment += (zoff * (z & (TRConsts.Step4 - 1))) >> 2;
+                adjustment += (zoff * (z & TRConsts.WallMask)) >> 2;
             }
         }
         else
         {
             if (slantType == FDSlantEntryType.FloorSlant)
             {
-                adjustment += (zoff * ((TRConsts.Step4 - 1 - z) & (TRConsts.Step4 - 1))) >> 2;
+                adjustment += (zoff * ((TRConsts.WallMask - z) & TRConsts.WallMask)) >> 2;
             }
             else
             {
-                adjustment -= (zoff * ((TRConsts.Step4 - 1 - z) & (TRConsts.Step4 - 1))) >> 2;
+                adjustment -= (zoff * ((TRConsts.WallMask - z) & TRConsts.WallMask)) >> 2;
             }
         }
 

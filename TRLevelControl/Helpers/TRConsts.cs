@@ -19,6 +19,7 @@ public static class TRConsts
     public const int WallShift = 10;
     public const int NoHeight = -32512;
     public const int WallClicks = -127;
+    public const int WallMask = Step4 - 1;
 
     public const int MaskBits = 5;
     public const int FullMask = (1 << MaskBits) - 1;
