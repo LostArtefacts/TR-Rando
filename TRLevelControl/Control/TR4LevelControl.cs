@@ -187,8 +187,8 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
             room.NumXSectors = reader.ReadUInt16();
             room.Sectors = reader.ReadRoomSectors(room.NumXSectors * room.NumZSectors);
 
-            room.AmbientIntensity = reader.ReadInt16();
-            room.LightMode = reader.ReadInt16();
+            room.Colour = new(reader.ReadUInt32());
+
             ushort numLights = reader.ReadUInt16();
             room.Lights = new();
             for (int j = 0; j < numLights; j++)
@@ -233,8 +233,8 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
             room.AlternateRoom = reader.ReadInt16();
             room.Flags = (TRRoomFlag)reader.ReadInt16();
             room.WaterScheme = reader.ReadByte();
-            room.ReverbInfo = reader.ReadByte();
-            room.Filler = reader.ReadByte();
+            room.ReverbMode = (TRPSXReverbMode)reader.ReadByte();
+            room.AlternateGroup = reader.ReadByte();
         }
 
         uint numFloorData = reader.ReadUInt32();
@@ -259,8 +259,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
             writer.Write(room.NumXSectors);
             writer.Write(room.Sectors);
 
-            writer.Write(room.AmbientIntensity);
-            writer.Write(room.LightMode);
+            writer.Write(room.Colour.ToARGB());
 
             writer.Write((ushort)room.Lights.Count);
             foreach (TR4RoomLight light in room.Lights)
@@ -293,8 +292,8 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
             writer.Write(room.AlternateRoom);
             writer.Write((short)room.Flags);
             writer.Write(room.WaterScheme);
-            writer.Write(room.ReverbInfo);
-            writer.Write(room.Filler);
+            writer.Write((byte)room.ReverbMode);
+            writer.Write(room.AlternateGroup);
         }
 
         writer.Write((uint)_level.FloorData.Count);
