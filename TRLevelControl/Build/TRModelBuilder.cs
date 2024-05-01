@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 
 namespace TRLevelControl.Build;
 
@@ -198,7 +197,7 @@ public class TRModelBuilder<T>
 
             if (_version == TRGameVersion.TR5)
             {
-                Debug.Assert(reader.ReadUInt16() == _tr5ModelPadding);
+                reader.ReadUInt16(); // Skip padding
             }
         }
 
