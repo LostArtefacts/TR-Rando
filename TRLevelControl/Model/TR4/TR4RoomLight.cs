@@ -1,19 +1,24 @@
-﻿namespace TRLevelControl.Model;
+﻿using System.Numerics;
 
-public class TR4RoomLight
+namespace TRLevelControl.Model;
+
+public class TR4RoomLight : ICloneable
 {
     public int X { get; set; }
     public int Y { get; set; }
     public int Z { get; set; }
     public TRColour Colour { get; set; }
-    public byte LightType { get; set; }
-    public byte Unknown { get; set; }
-    public byte Intensity { get; set; }
-    public float In { get; set; }
-    public float Out { get; set; }
+    public TR4RoomLightType Type { get; set; }
+    public ushort Intensity { get; set; }
+    public float Inner { get; set; }
+    public float Outer { get; set; }
     public float Length { get; set; }
     public float CutOff { get; set; }
-    public float Dx { get; set; }
-    public float Dy { get; set; }
-    public float Dz { get; set; }
+    public Vector3 Direction { get; set; }
+
+    public TR4RoomLight Clone()
+        => (TR4RoomLight)MemberwiseClone();
+
+    object ICloneable.Clone()
+        => Clone();
 }

@@ -204,16 +204,13 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
                         Green = reader.ReadByte(),
                         Blue = reader.ReadByte()
                     },
-                    LightType = reader.ReadByte(),
-                    Unknown = reader.ReadByte(),
-                    Intensity = reader.ReadByte(),
-                    In = reader.ReadSingle(),
-                    Out = reader.ReadSingle(),
+                    Type = (TR4RoomLightType)reader.ReadByte(),
+                    Intensity = reader.ReadUInt16(),
+                    Inner = reader.ReadSingle(),
+                    Outer = reader.ReadSingle(),
                     Length = reader.ReadSingle(),
                     CutOff = reader.ReadSingle(),
-                    Dx = reader.ReadSingle(),
-                    Dy = reader.ReadSingle(),
-                    Dz = reader.ReadSingle()
+                    Direction = reader.ReadVector3()
                 });
             }
 
@@ -272,16 +269,13 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
                 writer.Write(light.Y);
                 writer.Write(light.Z);
                 writer.Write(light.Colour);
-                writer.Write(light.LightType);
-                writer.Write(light.Unknown);
+                writer.Write((byte)light.Type);
                 writer.Write(light.Intensity);
-                writer.Write(light.In);
-                writer.Write(light.Out);
+                writer.Write(light.Inner);
+                writer.Write(light.Outer);
                 writer.Write(light.Length);
                 writer.Write(light.CutOff);
-                writer.Write(light.Dx);
-                writer.Write(light.Dy);
-                writer.Write(light.Dz);
+                writer.Write(light.Direction);
             }
 
             writer.Write((ushort)room.StaticMeshes.Count);

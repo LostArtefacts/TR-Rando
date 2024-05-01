@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using System.Numerics;
 using TRLevelControl.Model;
 
 namespace TRLevelControl;
@@ -452,6 +453,16 @@ public class TRLevelReader : BinaryReader
             X = ReadInt16(),
             Y = ReadInt16(),
             Z = ReadInt16()
+        };
+    }
+
+    public Vector3 ReadVector3()
+    {
+        return new()
+        {
+            X = ReadSingle(),
+            Y = ReadSingle(),
+            Z = ReadSingle()
         };
     }
 
