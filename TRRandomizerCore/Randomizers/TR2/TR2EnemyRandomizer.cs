@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -736,7 +734,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Type.RedSnowmobile, _generator);
                 if (randomLocation != null)
                 {
-                    skidoo.Room = (short)randomLocation.Room;
+                    skidoo.Room = randomLocation.Room;
                     skidoo.X = randomLocation.X;
                     skidoo.Y = randomLocation.Y;
                     skidoo.Z = randomLocation.Z;
@@ -760,7 +758,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Type.RedSnowmobile, _generator);
                 if (randomLocation != null)
                 {
-                    skidoo.Room = (short)randomLocation.Room;
+                    skidoo.Room = randomLocation.Room;
                     skidoo.X = randomLocation.X;
                     skidoo.Y = randomLocation.Y;
                     skidoo.Z = randomLocation.Z;
@@ -836,8 +834,6 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             return;
         }
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
         List<Location> pickupLocations = level.Data.Entities
             .Where(e => TR2TypeUtilities.IsAnyPickupType(e.TypeID) && !TR2TypeUtilities.IsSecretType(e.TypeID))
             .Select(e => e.GetLocation())
@@ -877,10 +873,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             }
 
             // Get rid of the old enemy's triggers
-            FDUtilities.RemoveEntityTriggers(level.Data, level.Data.Entities.IndexOf(skidMan), floorData);
+            level.Data.FloorData.RemoveEntityTriggers(level.Data.Entities.IndexOf(skidMan));
         }
-
-        floorData.WriteToLevel(level.Data);
     }
 
     private void LimitFriendlyEnemies(TR2CombinedLevel level, List<TR2Type> pool, List<TR2Type> friends)

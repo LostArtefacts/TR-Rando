@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -225,10 +223,6 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             uniqueTypes.Add(_unarmedLevelPistols.TypeID);
         }
 
-        // FD for removing crystal triggers if applicable.
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         // Look for extra utility/ammo items and hide them
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
@@ -246,12 +240,10 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 ItemFactory.FreeItem(level.Name, i);
                 if (TR3TypeUtilities.IsCrystalPickup(entity.TypeID))
                 {
-                    FDUtilities.RemoveEntityTriggers(level.Data, i, floorData);
+                    level.Data.FloorData.RemoveEntityTriggers(i);
                 }
             }
         }
-
-        floorData.WriteToLevel(level.Data);
     }
 
     public void RandomizeItemLocations(TR3CombinedLevel level)
@@ -286,15 +278,11 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             exclusions.AddRange(_excludedLocations[level.Name]);
         }
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         foreach (TR3Entity entity in level.Data.Entities)
         {
             if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(entity.GetFloorLocation(loc =>
-                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData)));
+                exclusions.Add(entity.GetFloorLocation(loc => level.Data.GetRoomSector(loc)));
             }
         }
 
@@ -311,7 +299,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         if (level.HasExposureMeter)
         {
             // Don't put items underwater if it's too cold
-            for (int i = 0; i < level.Data.Rooms.Count; i++)
+            for (short i = 0; i < level.Data.Rooms.Count; i++)
             {
                 if (level.Data.Rooms[i].ContainsWater)
                 {
@@ -330,10 +318,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     public void RandomizeKeyItems(TR3CombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
-        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
+        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data);
         _picker.KeyItemTestAction = (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, level);
         _picker.RoomInfos = level.Data.Rooms
             .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
@@ -351,7 +336,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             }
 
             _picker.RandomizeKeyItemLocation(
-                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData),
+                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data),
                 level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
         }
     }

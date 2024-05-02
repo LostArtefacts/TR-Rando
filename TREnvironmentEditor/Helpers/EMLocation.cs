@@ -1,6 +1,8 @@
-﻿namespace TREnvironmentEditor.Helpers;
+﻿using TRLevelControl.Model;
 
-public class EMLocation
+namespace TREnvironmentEditor.Helpers;
+
+public class EMLocation : ITRLocatable
 {
     public int X { get; set; }
     public int Y { get; set; }

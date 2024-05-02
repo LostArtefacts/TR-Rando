@@ -1,6 +1,4 @@
-﻿using TRFDControl;
-using TRFDControl.Utilities;
-using TRLevelControl.Helpers;
+﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Helpers;
@@ -13,9 +11,6 @@ public class EMEntityFinder
 
     public int GetEntity(TR1Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         EMLevelData data = EMLevelData.GetData(level);
 
         List<TR1Type> types = new();
@@ -32,15 +27,11 @@ public class EMEntityFinder
             types.AddRange(Types.Select(t => (TR1Type)t));
         }
 
-        return GetEntity(level.Entities, types, data, 
-            l => FDUtilities.GetRoomSector(l.X, l.Y, l.Z, l.Room, level, floorData));
+        return GetEntity(level.Entities, types, data, l => level.GetRoomSector(l));
     }
 
     public int GetEntity(TR2Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         EMLevelData data = EMLevelData.GetData(level);
 
         List<TR2Type> types = new();
@@ -57,15 +48,11 @@ public class EMEntityFinder
             types.AddRange(Types.Select(t => (TR2Type)t));
         }
 
-        return GetEntity(level.Entities, types, data,
-            l => FDUtilities.GetRoomSector(l.X, l.Y, l.Z, l.Room, level, floorData));
+        return GetEntity(level.Entities, types, data, l => level.GetRoomSector(l));
     }
 
     public int GetEntity(TR3Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         EMLevelData data = EMLevelData.GetData(level);
 
         List<TR3Type> types = new();
@@ -82,8 +69,7 @@ public class EMEntityFinder
             types.AddRange(Types.Select(t => (TR3Type)t));
         }
 
-        return GetEntity(level.Entities, types, data,
-            l => FDUtilities.GetRoomSector(l.X, l.Y, l.Z, l.Room, level, floorData));
+        return GetEntity(level.Entities, types, data, l => level.GetRoomSector(l));
     }
 
     public int GetEntity<E, T>(List<E> entities, List<T> types, EMLevelData data, Func<EMLocation, TRRoomSector> sectorFunc)

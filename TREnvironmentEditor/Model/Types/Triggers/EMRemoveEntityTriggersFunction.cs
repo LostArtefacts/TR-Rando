@@ -1,6 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model;
@@ -16,15 +14,10 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
         List<int> entities = GetEntities(data);
         List<FDTrigType> excludedTypes = GetExcludedTypes();
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (TR1Room room in level.Rooms)
         {
-            RemoveSectorTriggers(floorData, room.Sectors, entities, excludedTypes);
+            RemoveSectorTriggers(level.FloorData, room.Sectors, entities, excludedTypes);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -33,15 +26,10 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
         List<int> entities = GetEntities(data);
         List<FDTrigType> excludedTypes = GetExcludedTypes();
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (TR2Room room in level.Rooms)
         {
-            RemoveSectorTriggers(floorData, room.Sectors, entities, excludedTypes);
+            RemoveSectorTriggers(level.FloorData, room.Sectors, entities, excludedTypes);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -50,15 +38,10 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
         List<int> entities = GetEntities(data);
         List<FDTrigType> excludedTypes = GetExcludedTypes();
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (TR3Room room in level.Rooms)
         {
-            RemoveSectorTriggers(floorData, room.Sectors, entities, excludedTypes);
+            RemoveSectorTriggers(level.FloorData, room.Sectors, entities, excludedTypes);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     private List<int> GetEntities(EMLevelData data)
@@ -90,20 +73,15 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
                 continue;
             }
 
-            List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+            List<FDEntry> entries = floorData[sector.FDIndex];
             // Find any trigger that isn't a type we wish to exclude
             if (entries.Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
                 && !excludedTypes.Contains(trigger.TrigType))
             {
-                trigger.TrigActionList.RemoveAll(a => a.TrigAction == FDTrigAction.Object && entities.Contains(a.Parameter));
-                if (trigger.TrigActionList.Count == 0)
+                trigger.Actions.RemoveAll(a => a.Action == FDTrigAction.Object && entities.Contains(a.Parameter));
+                if (trigger.Actions.Count == 0)
                 {
                     entries.Remove(trigger);
-                }
-
-                if (entries.Count == 0)
-                {
-                    floorData.RemoveFloorData(sector);
                 }
             }
         }

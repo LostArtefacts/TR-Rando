@@ -1,6 +1,4 @@
-﻿using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -125,7 +123,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
             bool ceilingMatch = asCeiling && adjacentRooms.Contains(sector.RoomAbove);
             bool floorMatch = !asCeiling && adjacentRooms.Contains(sector.RoomBelow);
             // Ignore triangles for now
-            bool isTriangle = sector.FDIndex != 0 && floorData.Entries[sector.FDIndex].Any(e => e is FDTriangulationEntry);
+            bool isTriangle = sector.FDIndex != 0 && floorData[sector.FDIndex].Any(e => e is FDTriangulationEntry);
 
             if (!isTriangle && (ceilingMatch || floorMatch))
             {

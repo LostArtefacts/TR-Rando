@@ -1,41 +1,58 @@
-﻿namespace TRFDControl.FDEntryTypes;
+﻿namespace TRLevelControl.Model;
 
 public class FDTriangulationEntry : FDEntry
 {
-    public FDTriangulationData TriData { get; set; }
+    private static readonly List<FDTriangulationType> _floorTriTypes = new()
+    {
+        FDTriangulationType.FloorNWSE_Solid,
+        FDTriangulationType.FloorNESW_Solid,
+    };
+
+    private static readonly List<FDTriangulationType> _floorPortalTypes = new()
+    {
+        FDTriangulationType.FloorNWSE_SW,
+        FDTriangulationType.FloorNWSE_NE,
+        FDTriangulationType.FloorNESW_SE,
+        FDTriangulationType.FloorNESW_NW,
+    };
+
+    private static readonly List<FDTriangulationType> _ceilingTriTypes = new()
+    {
+        FDTriangulationType.CeilingNWSE_Solid,
+        FDTriangulationType.CeilingNESW_Solid,
+    };
+
+    private static readonly List<FDTriangulationType> _ceilingPortalTypes = new()
+    {
+        FDTriangulationType.CeilingNWSE_SW,
+        FDTriangulationType.CeilingNWSE_NE,
+        FDTriangulationType.CeilingNESW_NW,
+        FDTriangulationType.CeilingNESW_SE,
+    };
+
+    public FDTriangulationType Type { get; set; }
+    public byte C10 { get; set; }
+    public byte C00 { get; set; }
+    public byte C01 { get; set; }
+    public byte C11 { get; set; }
+    public sbyte H1 { get; set; }
+    public sbyte H2 { get; set; }
 
     public bool IsFloorTriangulation
-    {
-        get
-        {
-            FDFunction function = (FDFunction)Setup.Function;
-            return function == FDFunction.FloorTriangulationNESW_NW
-                || function == FDFunction.FloorTriangulationNESW_Solid
-                || function == FDFunction.FloorTriangulationNESW_SE
-                || function == FDFunction.FloorTriangulationNWSE_NE
-                || function == FDFunction.FloorTriangulationNWSE_Solid
-                || function == FDFunction.FloorTriangulationNWSE_SW;
-        }
-    }
+        => _floorTriTypes.Contains(Type);
 
     public bool IsFloorPortal
-    {
-        get
-        {
-            FDFunction function = (FDFunction)Setup.Function;
-            return function == FDFunction.FloorTriangulationNESW_NW
-                || function == FDFunction.FloorTriangulationNESW_SE
-                || function == FDFunction.FloorTriangulationNWSE_NE
-                || function == FDFunction.FloorTriangulationNWSE_SW;
-        }
-    }
+        => _floorPortalTypes.Contains(Type);
 
-    public override ushort[] Flatten()
-    {
-        return new ushort[]
-        {
-            Setup.Value,
-            TriData.Value
-        };
-    }
+    public bool IsCeilingTriangulation
+        => _ceilingTriTypes.Contains(Type);
+
+    public bool IsCeilingPortal
+        => _ceilingPortalTypes.Contains(Type);
+
+    public override FDFunction GetFunction()
+        => (FDFunction)Type;
+
+    public override FDEntry Clone()
+        => (FDTriangulationEntry)MemberwiseClone();
 }

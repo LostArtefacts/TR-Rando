@@ -1,291 +1,74 @@
-﻿using TRFDControl.FDEntryTypes;
-using TRLevelControl.Model;
+﻿using System.Collections;
+using TRLevelControl.Build;
 
-namespace TRFDControl;
+namespace TRLevelControl.Model;
 
-public class FDControl
+public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
 {
-    private SortedDictionary<int, List<FDEntry>> _entries; //Key is Sector.FDIndex
+    private readonly TRGameVersion _version;
+    private readonly ITRLevelObserver _observer;
+    private readonly ushort _dummyEntry;
+    private SortedDictionary<int, List<FDEntry>> _entries;
 
-    public IReadOnlyDictionary<int, List<FDEntry>> Entries => _entries;
+    public List<FDEntry> this[int index]
+    {
+        get => _entries[index];
+        set => _entries[index] = value;
+    }
 
-    /// <summary>
-    /// Create a slot in the FD for a room sector that currently points to dummy FD.
-    /// </summary>
+    public bool ContainsKey(int index)
+        => _entries.ContainsKey(index);
+
+    public IEnumerator<KeyValuePair<int, List<FDEntry>>> GetEnumerator()
+        => _entries.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator()
+        => GetEnumerator();
+
+    public IEnumerable<FDEntry> FindAll(Func<FDEntry, bool> predicate)
+    {
+        return _entries.Values.SelectMany(v => v.Where(predicate));
+    }
+
+    public FDControl(TRGameVersion version, ITRLevelObserver observer, ushort dummyData = 0)
+    {
+        _version = version;
+        _observer = observer;
+        _dummyEntry = dummyData;
+        _entries = new();
+    }
+
     public void CreateFloorData(TRRoomSector sector)
     {
         int index;
         if (_entries.Count == 0)
         {
-            // Highly unlikely that we would have cleared all FD, but in any case the
-            // first index should always be 1
             index = 1;
         }
         else
         {
-            // Get the highest index, which is the last key as we use a SortedDictionary.
-            // Add the total length of the entries at that key to get the next index for
-            // allocating to this sector.
-            index = _entries.Keys.ToList().Last();
-            List<FDEntry> entries = _entries[index];
-            foreach (FDEntry entry in entries)
-            {
-                index += entry.Flatten().Length;
-            }
+            TRFDBuilder builder = new(_version);
+            index = _entries.Keys.Last();
+            index += builder.Flatten(_entries[index]).Count;
         }
 
         _entries.Add(index, new List<FDEntry>());
         sector.FDIndex = (ushort)index;
     }
 
-    /// <summary>
-    /// Remove a given room sector's FD and reset its FDIndex to 0.
-    /// </summary>
-    public void RemoveFloorData(TRRoomSector sector)
+    public List<ushort> Flatten(IEnumerable<TRRoomSector> sectors)
     {
-        if (_entries.Remove(sector.FDIndex))
+        List<ushort> data = new()
         {
-            sector.FDIndex = 0;
-        }
-    }
-
-    public void ParseFromLevel (TR1Level level)
-    {
-        ParseLevel(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    public void ParseFromLevel(TR2Level level)
-    {
-        ParseLevel(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    public void ParseFromLevel(TR3Level level)
-    {
-        ParseLevel(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    public void ParseFromLevel(TR4Level level)
-    {
-        ParseLevel(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    public void ParseFromLevel(TR5Level level)
-    {
-        ParseLevel(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    private void ParseLevel(IEnumerable<TRRoomSector> roomSectors, List<ushort> floorData)
-    {
-        _entries = new();
-        foreach (TRRoomSector sector in roomSectors)
-        {
-            ParseFromSector(sector, floorData);
-        }
-    }
-
-    private void ParseFromSector(TRRoomSector sector, List<ushort> floorData)
-    {
-        ushort index = sector.FDIndex;
-        // Index 0 is always dummy, so NOOP.
-        if (index == 0)
-        {
-            return;
-        }
-
-        // List of floordata functions for this sector.
-        List<FDEntry> functions = new();
-        _entries[sector.FDIndex] = functions;
-
-        while (true)
-        {
-            FDSetup data = new()
-            {
-                Value = floorData[index]
-            };
-
-            switch ((FDFunction)data.Function)
-            {
-                case FDFunction.PortalSector:
-                    functions.Add(new FDPortalEntry
-                    {
-                        Setup = new() { Value = floorData[index] },
-                        Room = floorData[++index]
-                    });
-                    break;
-
-                case FDFunction.FloorSlant:
-                    functions.Add(new FDSlantEntry
-                    {
-                        Setup = new() { Value = floorData[index] },
-                        SlantValue = floorData[++index],
-                        Type = FDSlantType.FloorSlant
-                    });
-                    break;
-
-                case FDFunction.CeilingSlant:
-                    functions.Add(new FDSlantEntry
-                    {
-                        Setup = new() { Value = floorData[index] },
-                        SlantValue = floorData[++index],
-                        Type = FDSlantType.CeilingSlant
-                    });
-                    break;
-
-                case FDFunction.Trigger:
-
-                    FDTriggerEntry trig = new()
-                    {
-                        Setup = new FDSetup() { Value = floorData[index] },
-                        TrigSetup = new FDTrigSetup() {  Value = floorData[++index] }
-                    };
-                    functions.Add(trig);
-
-                    if (trig.TrigType == FDTrigType.Switch || trig.TrigType == FDTrigType.Key)
-                    {
-                        // First entry in action list is reference to switch/key entity for switch/key types.
-                        trig.SwitchOrKeyRef = floorData[++index];
-                    }
-
-                    // We don't know if there are any more yet.
-                    bool continueFDParse;
-
-                    // Do not enter do...while if key/switch ref uint16 does not set continue
-                    if (trig.SwitchKeyContinue)
-                    {
-                        // Parse trigactions
-                        do
-                        {
-                            // New trigger action
-                            FDActionItem action = new() { Value = floorData[++index] };
-                            trig.TrigActionList.Add(action);
-
-                            continueFDParse = action.Continue;
-
-                            if (action.TrigAction == FDTrigAction.Camera || action.TrigAction == FDTrigAction.Flyby)
-                            {
-                                // Camera trig actions have a special extra uint16...
-                                FDCameraAction camAction = new() { Value = floorData[++index] };
-
-                                // store associated camera action
-                                action.CamAction = camAction;
-
-                                // Is there more?
-                                continueFDParse = camAction.Continue;
-                            }
-                        }
-                        while (index < floorData.Count && continueFDParse);
-                    }
-                    break;
-
-                case FDFunction.KillLara:
-                    functions.Add(new FDKillLaraEntry
-                    {
-                        Setup = new() { Value = floorData[index] }
-                    });
-                    break;
-
-                case FDFunction.ClimbableWalls:
-                    functions.Add(new FDClimbEntry
-                    {
-                        Setup = new() { Value = floorData[index] }
-                    });
-                    break;
-
-                case FDFunction.FloorTriangulationNWSE_Solid:
-                case FDFunction.FloorTriangulationNESW_Solid:
-                case FDFunction.CeilingTriangulationNW_Solid:
-                case FDFunction.CeilingTriangulationNE_Solid:
-                case FDFunction.FloorTriangulationNWSE_SW:
-                case FDFunction.FloorTriangulationNWSE_NE:
-                case FDFunction.FloorTriangulationNESW_SE:
-                case FDFunction.FloorTriangulationNESW_NW:
-                case FDFunction.CeilingTriangulationNW_SW:
-                case FDFunction.CeilingTriangulationNW_NE:
-                case FDFunction.CeilingTriangulationNE_NW:
-                case FDFunction.CeilingTriangulationNE_SE:
-                    functions.Add(new FDTriangulationEntry
-                    {
-                        Setup = new() { Value = floorData[index] },
-                        TriData = new() { Value = floorData[++index] }
-                    });
-                    break;
-
-                case FDFunction.Monkeyswing:
-                    functions.Add(new FDMonkeySwingEntry
-                    {
-                        Setup = new() { Value = floorData[index] },
-                    });
-                    break;
-
-                case FDFunction.DeferredTriggeringOrMinecartRotateLeft:
-                    functions.Add(new FDMinecartEntry
-                    {
-                        Setup = new() { Value = floorData[index] },
-                    });
-                    break;
-
-                case FDFunction.MechBeetleOrMinecartRotateRight:
-                    functions.Add(new TR3MinecartRotateRightEntry
-                    {
-                        Setup = new() { Value = floorData[index] },
-                    });
-                    break;
-
-                default:
-                    break;
-            }
-
-            if (data.EndData)
-            {
-                // End data (from what I understand) means there is no further functions for this sector.
-                // E.G. Sector 52 on Xian has a slant function and portal function. EndData is not set on
-                // slant function, but is on portal function as there are no further functions.
-                break;
-            }
-            else
-            {
-                // There are further functions for this sector - continue parsing.
-                index++;
-            }
-        }
-    }
-
-    public void WriteToLevel(TR1Level level)
-    {
-        Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    public void WriteToLevel(TR2Level level)
-    {
-        Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    public void WriteToLevel(TR3Level level)
-    {
-        Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    public void WriteToLevel(TR4Level level)
-    {
-        Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    public void WriteToLevel(TR5Level level)
-    {
-        Flatten(level.Rooms.SelectMany(r => r.Sectors), level.FloorData);
-    }
-
-    private void Flatten(IEnumerable<TRRoomSector> sectors, List<ushort> data)
-    {
-        ushort dummyEntry = data.Count > 0 ? data[0] : (ushort)0;
-        data.Clear();
-        data.Add(dummyEntry);
+            _dummyEntry
+        };
 
         // Flatten each entry list and map old indices to new.
+        TRFDBuilder builder = new(_version, _observer);
         Dictionary<int, int> newIndices = new();
         foreach (int currentIndex in _entries.Keys)
         {
-            List<ushort> sectorData = Flatten(_entries[currentIndex]);
+            List<ushort> sectorData = builder.Flatten(_entries[currentIndex]);
             if (sectorData.Count > 0)
             {
                 newIndices.Add(currentIndex, data.Count);
@@ -294,7 +77,7 @@ public class FDControl
         }
 
         // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> updatedEntries = new();
+        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
         foreach (TRRoomSector sector in sectors)
         {
             ushort index = sector.FDIndex;
@@ -303,35 +86,613 @@ public class FDControl
                 sector.FDIndex = (ushort)newIndices[index];
 
                 // Map the list of entries against the new index
-                updatedEntries[sector.FDIndex] = _entries[index];
+                _updatedEntries[sector.FDIndex] = _entries[index];
             }
             else if (_entries.ContainsKey(index))
             {
-                // FD has been removed - we only reset it if it was a valid entry before
-                // because some levels, e.g. most of TRUB, have stale data.
+                // FD has been removed - we only reset it if it was a valid
+                // previous entry, because some levels (TRUB for ex) have stale
+                // data. This keeps tests happy.
                 sector.FDIndex = 0;
             }
         }
 
         // Update the stored values in case of further changes
-        _entries = updatedEntries;
+        _entries = _updatedEntries;
+        return data;
     }
 
-    public static List<ushort> Flatten(List<FDEntry> entries)
+    public List<FDTriggerEntry> GetEntityTriggers(int entityIndex)
     {
-        List<ushort> data = new();
-        for (int i = 0; i < entries.Count; i++)
+        return GetTriggers(FDTrigAction.Object, entityIndex);
+    }
+
+    public List<FDTriggerEntry> GetSecretTriggers(int secretIndex)
+    {
+        return GetTriggers(FDTrigAction.SecretFound, secretIndex);
+    }
+
+    public List<FDTriggerEntry> GetTriggers(FDTrigAction action, int parameter = -1)
+    {
+        return _entries.Values
+            .SelectMany(e => e.Where(i => i is FDTriggerEntry))
+            .Cast<FDTriggerEntry>()
+            .Where(t => t.Actions.Find(a => a.Action == action && (parameter == -1 || a.Parameter == parameter)) != null)
+            .ToList();
+    }
+
+    public List<FDActionItem> GetActionItems(FDTrigAction action, int sectorIndex = -1)
+    {
+        List<List<FDEntry>> entrySearch;
+        if (sectorIndex == -1)
         {
-            FDEntry function = entries[i];
-
-            // Ensure EndData is set on the last function in the list only
-            function.Setup.EndData = i == entries.Count - 1;
-
-            //Convert function to ushort array
-            ushort[] fdata = function.Flatten();
-            data.AddRange(fdata);
+            entrySearch = _entries.Values.ToList();
+        }
+        else
+        {
+            entrySearch = new List<List<FDEntry>>
+            {
+                _entries[sectorIndex]
+            };
         }
 
-        return data;
+        return entrySearch
+            .SelectMany(e => e.Where(i => i is FDTriggerEntry))
+            .Cast<FDTriggerEntry>()
+            .SelectMany(t => t.Actions.FindAll(a => a.Action == action))
+            .ToList();
+    }
+
+    public void RemoveEntityTriggers(int entityIndex)
+    {
+        foreach (List<FDEntry> entries in _entries.Values)
+        {
+            for (int i = entries.Count - 1; i >= 0; i--)
+            {
+                FDEntry entry = entries[i];
+                if (entry is not FDTriggerEntry trig)
+                {
+                    continue;
+                }
+
+                trig.Actions.RemoveAll(a => a.Action == FDTrigAction.Object && a.Parameter == entityIndex);
+                if (trig.Actions.Count == 0)
+                {
+                    entries.RemoveAt(i);
+                }
+            }
+        }
+    }
+
+    public TRRoomSector GetRoomSector<R>(int x, int y, int z, short roomNumber, List<R> rooms)
+        where R : TRRoom
+    {
+        int xFloor, yFloor;
+        TRRoom room = rooms[roomNumber];
+        TRRoomSector sector;
+        short data;
+
+        do
+        {
+            // Clip position to edge of tile
+            xFloor = (z - room.Info.Z) >> TRConsts.WallShift;
+            yFloor = (x - room.Info.X) >> TRConsts.WallShift;
+
+            if (xFloor <= 0)
+            {
+                xFloor = 0;
+                if (yFloor < 1)
+                {
+                    yFloor = 1;
+                }
+                else if (yFloor > room.NumXSectors - 2)
+                {
+                    yFloor = room.NumXSectors - 2;
+                }
+            }
+            else if (xFloor >= room.NumZSectors - 1)
+            {
+                xFloor = room.NumZSectors - 1;
+                if (yFloor < 1)
+                {
+                    yFloor = 1;
+                }
+                else if (yFloor > room.NumXSectors - 2)
+                {
+                    yFloor = room.NumXSectors - 2;
+                }
+            }
+            else if (yFloor < 0)
+            {
+                yFloor = 0;
+            }
+            else if (yFloor >= room.NumXSectors)
+            {
+                yFloor = room.NumXSectors - 1;
+            }
+
+            sector = room.Sectors[xFloor + yFloor * room.NumZSectors];
+            data = GetDoor(sector);
+            if (data != TRConsts.NoRoom && data >= 0 && data < rooms.Count - 1)
+            {
+                room = rooms[data];
+            }
+        }
+        while (data != TRConsts.NoRoom);
+
+        if (y >= (sector.Floor << 8))
+        {
+            do
+            {
+                if (sector.RoomBelow == TRConsts.NoRoom)
+                {
+                    return sector;
+                }
+
+                int triCheck = CheckFloorTriangle(sector, x, z);
+                if (triCheck == 1)
+                {
+                    break;
+                }
+                else if (triCheck == -1 && y < room.Info.YBottom)
+                {
+                    break;
+                }
+
+                room = rooms[sector.RoomBelow];
+                sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
+            }
+            while (y >= (sector.Floor << 8));
+        }
+        else if (y < (sector.Ceiling << 8))
+        {
+            do
+            {
+                if (sector.RoomAbove == TRConsts.NoRoom)
+                {
+                    return sector;
+                }
+
+                int triCheck = CheckCeilingTriangle(sector, x, z);
+                if (triCheck == 1)
+                {
+                    break;
+                }
+                else if (triCheck == -1 && y >= room.Info.YTop)
+                {
+                    break;
+                }
+
+                room = rooms[sector.RoomAbove];
+                sector = room.Sectors[((z - room.Info.Z) >> TRConsts.WallShift) + ((x - room.Info.X) >> TRConsts.WallShift) * room.NumZSectors];
+            }
+            while (y < (sector.RoomAbove << 8));
+        }
+
+        return sector;
+    }
+
+    public short GetDoor(TRRoomSector sector)
+    {
+        if (sector.FDIndex == 0)
+        {
+            return TRConsts.NoRoom;
+        }
+
+        List<FDEntry> entries = _entries[sector.FDIndex];
+        foreach (FDEntry entry in entries)
+        {
+            if (entry is FDPortalEntry portal)
+            {
+                return portal.Room;
+            }
+        }
+
+        return TRConsts.NoRoom;
+    }
+
+    private int CheckFloorTriangle(TRRoomSector sector, int x, int z)
+    {
+        if (sector.FDIndex == 0)
+        {
+            return 0;
+        }
+
+        if (_entries[sector.FDIndex].Find(e => e is FDTriangulationEntry) is FDTriangulationEntry triangulation)
+        {
+            FDFunction func = triangulation.GetFunction();
+            int dx = x & TRConsts.WallMask;
+            int dz = z & TRConsts.WallMask;
+
+            if (func == FDFunction.FloorTriangulationNWSE_SW && dx <= (TRConsts.Step4 - dz))
+            {
+                return -1;
+            }
+            else if (func == FDFunction.FloorTriangulationNWSE_NE && dx > (TRConsts.Step4 - dz))
+            {
+                return -1;
+            }
+            else if (func == FDFunction.FloorTriangulationNESW_SE && dx <= dz)
+            {
+                return -1;
+            }
+            else if (func == FDFunction.FloorTriangulationNESW_NW && dx > dz)
+            {
+                return -1;
+            }
+
+            return 1; // Bad floor data
+        }
+
+        return 0;
+    }
+
+    private int CheckCeilingTriangle(TRRoomSector sector, int x, int z)
+    {
+        if (sector.FDIndex == 0)
+        {
+            return 0;
+        }
+
+        if (_entries[sector.FDIndex].Find(e => e is FDTriangulationEntry) is FDTriangulationEntry triangulation)
+        {
+            FDFunction func = triangulation.GetFunction();
+            int dx = x & TRConsts.WallMask;
+            int dz = z & TRConsts.WallMask;
+
+            if (func == FDFunction.CeilingTriangulationNW_SW && dx <= (TRConsts.Step4 - dz))
+            {
+                return -1;
+            }
+            else if (func == FDFunction.CeilingTriangulationNW_NE && dx > (TRConsts.Step4 - dz))
+            {
+                return -1;
+            }
+            else if (func == FDFunction.CeilingTriangulationNE_NW && dx <= dz)
+            {
+                return -1;
+            }
+            else if (func == FDFunction.CeilingTriangulationNE_SE && dx > dz)
+            {
+                return -1;
+            }
+
+            return 1; // Bad floor data
+        }
+
+        return 0;
+    }
+
+    public int GetHeight<T>(int x, int z, int roomIndex, IEnumerable<T> allRooms, bool waterOnly)
+        where T : TRRoom
+    {
+        int floor = GetFloorHeight(x, z, roomIndex, allRooms, waterOnly);
+        int ceiling = GetCeilingHeight(x, z, roomIndex, allRooms, waterOnly);
+
+        if (floor == TRConsts.NoHeight || ceiling == TRConsts.NoHeight)
+        {
+            return TRConsts.NoHeight;
+        }
+
+        return Math.Abs(floor - ceiling);
+    }
+
+    public int GetFloorHeight<T>(int x, int z, int roomIndex, IEnumerable<T> allRooms, bool waterOnly)
+        where T : TRRoom
+    {
+        List<T> rooms = allRooms.ToList();
+
+        TRRoom room = rooms[roomIndex];
+        if (waterOnly && !room.ContainsWater)
+        {
+            return TRConsts.NoHeight;
+        }
+
+        TRRoomSector sector = room.GetSector(x, z);
+        while (sector.RoomBelow != TRConsts.NoRoom)
+        {
+            room = rooms[sector.RoomBelow];
+            if (waterOnly && !room.ContainsWater)
+            {
+                break;
+            }
+            sector = room.GetSector(x, z);
+        }
+
+        int floor = TRConsts.Step1 * sector.Floor;
+        floor += GetHeightAdjustment(x, z, FDSlantType.Floor, sector);
+
+        if (_version >= TRGameVersion.TR3)
+        {
+            floor += GetTriangulationFloor(x, z, sector);
+        }
+
+        return floor;
+    }
+
+    public int GetCeilingHeight<T>(int x, int z, int roomIndex, IEnumerable<T> allRooms, bool waterOnly)
+        where T : TRRoom
+    {
+        List<T> rooms = allRooms.ToList();
+
+        TRRoom room = rooms[roomIndex];
+        if (waterOnly && !room.ContainsWater)
+        {
+            return TRConsts.NoHeight;
+        }
+
+        TRRoomSector sector = room.GetSector(x, z);
+        while (sector.RoomAbove != TRConsts.NoRoom)
+        {
+            room = rooms[sector.RoomAbove];
+            if (waterOnly && !room.ContainsWater)
+            {
+                break;
+            }
+            sector = room.GetSector(x, z);
+        }
+
+        int ceiling = TRConsts.Step1 * sector.Ceiling;
+        ceiling += GetHeightAdjustment(x, z, FDSlantType.Ceiling, sector);
+
+        if (_version >= TRGameVersion.TR3)
+        {
+            ceiling += GetTriangulationCeiling(x, z, sector);
+        }
+
+        return ceiling;
+    }
+
+    public int GetHeightAdjustment(int x, int z, FDSlantType slantType, TRRoomSector sector)
+    {
+        int adjustment = 0;
+        if (sector.FDIndex == 0)
+        {
+            return adjustment;
+        }
+
+        FDEntry entry = this[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == slantType);
+        if (entry is not FDSlantEntry slant)
+        {
+            return adjustment;
+        }
+
+        sbyte xoff = slant.XSlant;
+        sbyte zoff = slant.ZSlant;
+
+        if (xoff < 0)
+        {
+            if (slantType == FDSlantType.Floor)
+            {
+                adjustment -= (xoff * (x & (TRConsts.Step4 - 1))) >> 2;
+            }
+            else
+            {
+                adjustment += (xoff * ((TRConsts.Step4 - 1 - x) & (TRConsts.Step4 - 1))) >> 2;
+            }
+        }
+        else
+        {
+            if (slantType == FDSlantType.Floor)
+            {
+                adjustment += (xoff * ((TRConsts.Step4 - 1 - x) & (TRConsts.Step4 - 1))) >> 2;
+            }
+            else
+            {
+                adjustment -= (xoff * (x & (TRConsts.Step4 - 1))) >> 2;
+            }
+        }
+
+        if (zoff < 0)
+        {
+            if (slantType == FDSlantType.Floor)
+            {
+                adjustment -= (zoff * (z & (TRConsts.Step4 - 1))) >> 2;
+            }
+            else
+            {
+                adjustment += (zoff * (z & (TRConsts.Step4 - 1))) >> 2;
+            }
+        }
+        else
+        {
+            if (slantType == FDSlantType.Floor)
+            {
+                adjustment += (zoff * ((TRConsts.Step4 - 1 - z) & (TRConsts.Step4 - 1))) >> 2;
+            }
+            else
+            {
+                adjustment -= (zoff * ((TRConsts.Step4 - 1 - z) & (TRConsts.Step4 - 1))) >> 2;
+            }
+        }
+
+        return adjustment;
+    }
+
+    public int GetTriangulationFloor(int x, int z, TRRoomSector sector)
+    {
+        int adjustment = 0;
+        if (sector.FDIndex == 0)
+        {
+            return adjustment;
+        }
+
+        FDEntry entry = this[sector.FDIndex].Find(e => e is FDTriangulationEntry t && t.IsFloorTriangulation);
+        if (entry is not FDTriangulationEntry triangulation)
+        {
+            return adjustment;
+        }
+
+        int t0 = triangulation.C10;
+        int t1 = triangulation.C00;
+        int t2 = triangulation.C01;
+        int t3 = triangulation.C11;
+        int dx = x & (TRConsts.Step4 - 1);
+        int dz = z & (TRConsts.Step4 - 1);
+        int xoff = 0;
+        int zoff = 0;
+
+        if (triangulation.Type != FDTriangulationType.FloorNWSE_Solid
+            && triangulation.Type != FDTriangulationType.FloorNWSE_SW
+            && triangulation.Type != FDTriangulationType.FloorNWSE_NE)
+        {
+            if (dx <= dz)
+            {
+                int hadj = triangulation.H2;
+                if ((hadj & 0x10) != 0)
+                {
+                    hadj |= 0xFFF0;
+                }
+
+                adjustment += hadj << 8;
+                xoff = t2 - t1;
+                zoff = t3 - t2;
+            }
+            else
+            {
+                int hadj = triangulation.H1;
+                if ((hadj & 0x10) != 0)
+                {
+                    hadj |= 0xFFF0;
+                }
+
+                adjustment += hadj << 8;
+                xoff = t3 - t0;
+                zoff = t0 - t1;
+            }
+        }
+        else
+        {
+            if (dx <= (TRConsts.Step4 - dz))
+            {
+                int hadj = triangulation.H2;
+                if ((hadj & 0x10) != 0)
+                {
+                    hadj |= 0xFFF0;
+                }
+
+                adjustment += hadj << 8;
+                xoff = t2 - t1;
+                zoff = t0 - t1;
+            }
+            else
+            {
+                int hadj = triangulation.H1;
+                if ((hadj & 0x10) != 0)
+                {
+                    hadj |= 0xFFF0;
+                }
+
+                adjustment += hadj << 8;
+                xoff = t3 - t0;
+                zoff = t3 - t2;
+            }
+        }
+
+        if (xoff < 0)
+            adjustment -= xoff * (z & (TRConsts.Step4 - 1)) >> 2;
+        else
+            adjustment += xoff * ((-1 - (ushort)z) & (TRConsts.Step4 - 1)) >> 2;
+
+        if (zoff < 0)
+            adjustment -= zoff * (x & (TRConsts.Step4 - 1)) >> 2;
+        else
+            adjustment += zoff * ((-1 - (ushort)x) & (TRConsts.Step4 - 1)) >> 2;
+
+        return adjustment;
+    }
+
+    public int GetTriangulationCeiling(int x, int z, TRRoomSector sector)
+    {
+        int adjustment = 0;
+        if (sector.FDIndex == 0)
+        {
+            return adjustment;
+        }
+
+        FDEntry entry = this[sector.FDIndex].Find(e => e is FDTriangulationEntry t && t.IsCeilingTriangulation);
+        if (entry is not FDTriangulationEntry triangulation)
+        {
+            return adjustment;
+        }
+
+        const int wallMask = TRConsts.Step4 - 1;
+        int t0 = -triangulation.C10;
+        int t1 = -triangulation.C00;
+        int t2 = -triangulation.C01;
+        int t3 = -triangulation.C11;
+        int dx = x & wallMask;
+        int dz = z & wallMask;
+        int xoff = 0;
+        int zoff = 0;
+
+        if (triangulation.Type == FDTriangulationType.CeilingNWSE_Solid
+            || triangulation.Type == FDTriangulationType.CeilingNWSE_SW
+            || triangulation.Type == FDTriangulationType.CeilingNWSE_NE)
+        {
+            if (dx <= TRConsts.Step4 - dz)
+            {
+                int hadj = triangulation.H2;
+                if ((hadj & 0x10) != 0)
+                {
+                    hadj |= 0xFFF0;
+                }
+
+                adjustment += hadj << 8;
+                xoff = t2 - t1;
+                zoff = t3 - t2;
+            }
+            else
+            {
+                int hadj = triangulation.H1;
+                if ((hadj & 0x10) != 0)
+                {
+                    hadj |= 0xFFF0;
+                }
+
+                adjustment += hadj << 8;
+                xoff = t3 - t0;
+                zoff = t0 - t1;
+            }
+        }
+        else
+        {
+            if (dx <= dz)
+            {
+                int hadj = triangulation.H2;
+                if ((hadj & 0x10) != 0)
+                {
+                    hadj |= 0xFFF0;
+                }
+
+                adjustment += hadj << 8;
+                xoff = t2 - t1;
+                zoff = t0 - t1;
+            }
+            else
+            {
+                int hadj = triangulation.H1;
+                if ((hadj & 0x10) != 0)
+                {
+                    hadj |= 0xFFF0;
+                }
+
+                adjustment += hadj << 8;
+                xoff = t3 - t0;
+                zoff = t3 - t2;
+            }
+        }
+
+        if (xoff < 0)
+            adjustment += ((z & wallMask) * xoff) >> 2;
+        else
+            adjustment -= ((-1 - (z & wallMask)) * xoff) >> 2;
+
+        if (zoff < 0)
+            adjustment += ((-1 - (x & wallMask)) * zoff) >> 2;
+        else
+            adjustment -= ((x & wallMask) * zoff) >> 2;
+
+        return adjustment;
     }
 }

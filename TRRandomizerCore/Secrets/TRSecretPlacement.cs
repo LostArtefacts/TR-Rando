@@ -7,21 +7,21 @@ public class TRSecretPlacement<E> where E : Enum
 {
     public Location Location { get; set; }
     public E PickupType { get; set; }
-    public ushort EntityIndex { get; set; }
-    public ushort SecretIndex { get; set; }
-    public ushort DoorIndex { get; set; }
-    public ushort CameraIndex { get; set; }
-    public ushort CameraTarget { get; set; }
+    public short EntityIndex { get; set; }
+    public short SecretIndex { get; set; }
+    public short DoorIndex { get; set; }
+    public short CameraIndex { get; set; }
+    public short CameraTarget { get; set; }
     public byte TriggerMask { get; set; }
-    public bool TriggersDoor => DoorIndex != ushort.MaxValue;
-    public bool TriggersCamera => CameraIndex != ushort.MaxValue;
+    public bool TriggersDoor => DoorIndex != short.MaxValue;
+    public bool TriggersCamera => CameraIndex != short.MaxValue;
 
     public TRSecretPlacement()
     {
         // Default to standard mask and no door
         TriggerMask = TRConsts.FullMask;
-        DoorIndex = ushort.MaxValue;
-        CameraIndex = ushort.MaxValue;
+        DoorIndex = short.MaxValue;
+        CameraIndex = short.MaxValue;
     }
 
     public void SetMaskAndDoor(int secretCount, List<int> doorItems)
@@ -55,6 +55,6 @@ public class TRSecretPlacement<E> where E : Enum
         }
 
         TriggerMask = (byte)mask;
-        DoorIndex = (ushort)doorItems[SecretIndex / split];
+        DoorIndex = (short)doorItems[SecretIndex / split];
     }
 }

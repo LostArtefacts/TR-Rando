@@ -117,7 +117,6 @@ public class RoomTests : TestBase
             {
                 BoxIndex = (ushort)i,
                 Ceiling = (sbyte)i,
-                FDIndex = (ushort)(i * i),
                 Floor = (sbyte)-i,
                 RoomAbove = (byte)rand.Next(0, 256),
                 RoomBelow = (byte)rand.Next(0, 256),

@@ -1,7 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
@@ -17,28 +14,22 @@ public class EMMoveSlotFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         EntityIndex = data.ConvertEntity(EntityIndex);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         TR1Entity slot = level.Entities[EntityIndex];
-        TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
-        short roomNumber = data.ConvertRoom(Location.Room);
-        TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
+        TRRoomSector currentSector = level.GetRoomSector(slot);
+        EMLocation location = data.ConvertLocation(Location);
+        TRRoomSector newSector = level.GetRoomSector(location);
 
         // Check if there is also a trigger in the flip map if we are moving the slot within the same room
         TRRoomSector currentFlipSector = null;
         TRRoomSector newFlipSector = null;
         short altRoom = level.Rooms[slot.Room].AlternateRoom;
-        if (slot.Room == roomNumber && altRoom != -1)
+        if (slot.Room == location.Room && altRoom != -1)
         {
-            currentFlipSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom, level, control);
-            newFlipSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom, level, control);
+            currentFlipSector = level.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom);
+            newFlipSector = level.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom);
         }
 
-        if (MoveSlot(control, slot, roomNumber, currentSector, newSector, currentFlipSector, newFlipSector))
-        {
-            control.WriteToLevel(level);
-        }
+        MoveSlot(level.FloorData, slot, location, currentSector, newSector, currentFlipSector, newFlipSector);
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -46,40 +37,32 @@ public class EMMoveSlotFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         EntityIndex = data.ConvertEntity(EntityIndex);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         TR2Entity slot = level.Entities[EntityIndex];
-        TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
-        short roomNumber = data.ConvertRoom(Location.Room);
-        TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
+        TRRoomSector currentSector = level.GetRoomSector(slot);
+        EMLocation location = data.ConvertLocation(Location);
+        TRRoomSector newSector = level.GetRoomSector(location);
 
-        // Check if there is also a trigger in the flip map if we are moving the slot within the same room
         TRRoomSector currentFlipSector = null;
         TRRoomSector newFlipSector = null;
         short altRoom = level.Rooms[slot.Room].AlternateRoom;
-        if (slot.Room == roomNumber && altRoom != -1)
+        if (slot.Room == location.Room && altRoom != -1)
         {
-            currentFlipSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom, level, control);
-            newFlipSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom, level, control);
+            currentFlipSector = level.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom);
+            newFlipSector = level.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom);
         }
 
         // Make sure there isn't a static enemy on the same sector e.g. MorayEel
-        List<TR2Entity> staticEnemies = level.Entities.FindAll(e => e.Room == roomNumber && TR2TypeUtilities.IsStaticCreature(e.TypeID));
+        List<TR2Entity> staticEnemies = level.Entities.FindAll(e => e.Room == location.Room && TR2TypeUtilities.IsStaticCreature(e.TypeID));
         foreach (TR2Entity staticEnemy in staticEnemies)
         {
-            TRRoomSector enemySector = FDUtilities.GetRoomSector(staticEnemy.X, staticEnemy.Y, staticEnemy.Z, staticEnemy.Room, level, control);
+            TRRoomSector enemySector = level.GetRoomSector(staticEnemy);
             if (enemySector == newSector)
             {
-                // Bail out
                 return;
             }
         }
 
-        if (MoveSlot(control, slot, roomNumber, currentSector, newSector, currentFlipSector, newFlipSector))
-        {
-            control.WriteToLevel(level);
-        }
+        MoveSlot(level.FloorData, slot, location, currentSector, newSector, currentFlipSector, newFlipSector);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -87,39 +70,32 @@ public class EMMoveSlotFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         EntityIndex = data.ConvertEntity(EntityIndex);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         TR3Entity slot = level.Entities[EntityIndex];
-        TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
-        short roomNumber = data.ConvertRoom(Location.Room);
-        TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
+        TRRoomSector currentSector = level.GetRoomSector(slot);
+        EMLocation location = data.ConvertLocation(Location);
+        TRRoomSector newSector = level.GetRoomSector(location);
 
-        // Check if there is also a trigger in the flip map if we are moving the slot within the same room
         TRRoomSector currentFlipSector = null;
         TRRoomSector newFlipSector = null;
         short altRoom = level.Rooms[slot.Room].AlternateRoom;
-        if (slot.Room == roomNumber && altRoom != -1)
+        if (slot.Room == location.Room && altRoom != -1)
         {
-            currentFlipSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom, level, control);
-            newFlipSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom, level, control);
+            currentFlipSector = level.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom);
+            newFlipSector = level.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom);
         }
 
-        if (MoveSlot(control, slot, roomNumber, currentSector, newSector, currentFlipSector, newFlipSector))
-        {
-            control.WriteToLevel(level);
-        }
+        MoveSlot(level.FloorData, slot, location, currentSector, newSector, currentFlipSector, newFlipSector);
     }
 
-    protected bool MoveSlot<T>(FDControl control, TREntity<T> slot, short roomNumber, 
+    protected void MoveSlot<T>(FDControl control, TREntity<T> slot, EMLocation location, 
         TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
         where T : Enum
     {
-        slot.X = Location.X;
-        slot.Y = Location.Y;
-        slot.Z = Location.Z;
-        slot.Room = roomNumber;
-        slot.Angle = Location.Angle;
+        slot.X = location.X;
+        slot.Y = location.Y;
+        slot.Z = location.Z;
+        slot.Room = location.Room;
+        slot.Angle = location.Angle;
 
         if (newSector != currentSector && currentSector.FDIndex != 0)
         {
@@ -129,11 +105,7 @@ public class EMMoveSlotFunction : BaseEMFunction
             {
                 MoveTriggers(control, currentFlipSector, newFlipSector);
             }
-
-            return true;
         }
-
-        return false;
     }
 
     protected void MoveTriggers(FDControl control, TRRoomSector currentSector, TRRoomSector newSector)
@@ -146,14 +118,9 @@ public class EMMoveSlotFunction : BaseEMFunction
         bool keyTrigPredicate(FDEntry e) => e is FDTriggerEntry trig && trig.SwitchOrKeyRef == EntityIndex;
 
         // Copy the key trigger to the new sector
-        List<FDEntry> keyTriggers = control.Entries[currentSector.FDIndex].FindAll(keyTrigPredicate);
-        control.Entries[newSector.FDIndex].AddRange(keyTriggers);
+        List<FDEntry> keyTriggers = control[currentSector.FDIndex].FindAll(keyTrigPredicate);
+        control[newSector.FDIndex].AddRange(keyTriggers);
         // Remove from the old
-        control.Entries[currentSector.FDIndex].RemoveAll(keyTrigPredicate);
-        if (control.Entries[currentSector.FDIndex].Count == 0)
-        {
-            // If there isn't anything left, reset the sector to point to the dummy FD
-            control.RemoveFloorData(currentSector);
-        }
+        control[currentSector.FDIndex].RemoveAll(keyTrigPredicate);
     }
 }

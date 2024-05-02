@@ -1,7 +1,4 @@
-﻿using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Utilities;
@@ -10,13 +7,10 @@ public static class FaceUtilities
 {
     public static List<TRFace> GetTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         List<TRFace> faces = new();
         foreach (TR1Room room in level.Rooms)
         {
-            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
+            faces.AddRange(ScanTriggerFaces(level.FloorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
             {
                 return room.Mesh.Vertices[v].Vertex;
             }));
@@ -27,13 +21,10 @@ public static class FaceUtilities
 
     public static List<TRFace> GetTriggerFaces(TR2Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         List<TRFace> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
-            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
+            faces.AddRange(ScanTriggerFaces(level.FloorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
             {
                 return room.Mesh.Vertices[v].Vertex;
             }));
@@ -44,13 +35,10 @@ public static class FaceUtilities
 
     public static List<TRFace> GetTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         List<TRFace> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
-            faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
+            faces.AddRange(ScanTriggerFaces(level.FloorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.Mesh.Rectangles, v =>
             {
                 return room.Mesh.Vertices[v].Vertex;
             }));
@@ -61,15 +49,12 @@ public static class FaceUtilities
 
     public static Dictionary<TRFace, List<TRVertex>> GetClimbableFaces(TR2Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         Dictionary<TRFace, List<TRVertex>> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
             foreach (TRRoomSector sector in room.Sectors)
             {
-                ScanTR2SectorLadderFaces(faces, level, floorData, room, sector);
+                ScanTR2SectorLadderFaces(faces, level, room, sector);
             }
         }
 
@@ -78,16 +63,13 @@ public static class FaceUtilities
 
     public static Dictionary<TRFace, List<TRVertex>> GetClimbableFaces(TR3Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         Dictionary<TRFace, List<TRVertex>> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
             foreach (TRRoomSector sector in room.Sectors)
             {
-                ScanTR3SectorLadderFaces(faces, level, floorData, room, sector);
-                ScanTR3SectorMonkeyFaces(faces, level, floorData, room, sector);
+                ScanTR3SectorLadderFaces(faces, level, room, sector);
+                ScanTR3SectorMonkeyFaces(faces, level, room, sector);
             }
         }
 
@@ -106,7 +88,7 @@ public static class FaceUtilities
                 continue;
             }
 
-            List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+            List<FDEntry> entries = floorData[sector.FDIndex];
             if ((entries.Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger && triggerMatches.Contains(trigger.TrigType))
                 || (includeDeathTiles && entries.Any(e => e is FDKillLaraEntry)))
             {
@@ -135,14 +117,14 @@ public static class FaceUtilities
         return faces;
     }
 
-    private static void ScanTR2SectorLadderFaces(Dictionary<TRFace, List<TRVertex>> faces, TR2Level level, FDControl floorData, TR2Room room, TRRoomSector sector, FDEntry entry = null)
+    private static void ScanTR2SectorLadderFaces(Dictionary<TRFace, List<TRVertex>> faces, TR2Level level, TR2Room room, TRRoomSector sector, FDEntry entry = null)
     {
         if (entry == null && sector.FDIndex == 0)
         {
             return;
         }
 
-        entry ??= floorData.Entries[sector.FDIndex].Find(e => e is FDClimbEntry);
+        entry ??= level.FloorData[sector.FDIndex].Find(e => e is FDClimbEntry);
 
         if (entry is FDClimbEntry climbEntry)
         {
@@ -177,23 +159,23 @@ public static class FaceUtilities
                 int wx = room.Info.X + x;
                 int wz = room.Info.Z + z;
                 int wy = (sector.Ceiling - 1) * TRConsts.Step1;
-                TRRoomSector sectorAbove = FDUtilities.GetRoomSector(wx, wy, wz, sector.RoomAbove, level, floorData);
+                TRRoomSector sectorAbove = level.GetRoomSector(wx, wy, wz, sector.RoomAbove);
                 if (sector != sectorAbove)
                 {
-                    ScanTR2SectorLadderFaces(faces, level, floorData, roomAbove, sectorAbove, entry);
+                    ScanTR2SectorLadderFaces(faces, level, roomAbove, sectorAbove, entry);
                 }
             }
         }
     }
 
-    private static void ScanTR3SectorLadderFaces(Dictionary<TRFace, List<TRVertex>> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
+    private static void ScanTR3SectorLadderFaces(Dictionary<TRFace, List<TRVertex>> faces, TR3Level level, TR3Room room, TRRoomSector sector, FDEntry entry = null)
     {
         if (entry == null && sector.FDIndex == 0)
         {
             return;
         }
 
-        entry ??= floorData.Entries[sector.FDIndex].Find(e => e is FDClimbEntry);
+        entry ??= level.FloorData[sector.FDIndex].Find(e => e is FDClimbEntry);
 
         if (entry is FDClimbEntry climbEntry)
         {
@@ -228,23 +210,23 @@ public static class FaceUtilities
                 int wx = room.Info.X + x;
                 int wz = room.Info.Z + z;
                 int wy = (sector.Ceiling - 1) * TRConsts.Step1;
-                TRRoomSector sectorAbove = FDUtilities.GetRoomSector(wx, wy, wz, sector.RoomAbove, level, floorData);
+                TRRoomSector sectorAbove = level.GetRoomSector(wx, wy, wz, sector.RoomAbove);
                 if (sector != sectorAbove)
                 {
-                    ScanTR3SectorLadderFaces(faces, level, floorData, roomAbove, sectorAbove, entry);
+                    ScanTR3SectorLadderFaces(faces, level, roomAbove, sectorAbove, entry);
                 }
             }
         }
     }
 
-    private static void ScanTR3SectorMonkeyFaces(Dictionary<TRFace, List<TRVertex>> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
+    private static void ScanTR3SectorMonkeyFaces(Dictionary<TRFace, List<TRVertex>> faces, TR3Level level, TR3Room room, TRRoomSector sector, FDEntry entry = null)
     {
         if (entry == null && sector.FDIndex == 0)
         {
             return;
         }
 
-        entry ??= floorData.Entries[sector.FDIndex].Find(e => e is FDMonkeySwingEntry);
+        entry ??= level.FloorData[sector.FDIndex].Find(e => e is FDMonkeySwingEntry);
 
         if (entry is FDMonkeySwingEntry monkeyEntry)
         {
@@ -280,10 +262,10 @@ public static class FaceUtilities
                 int wx = room.Info.X + x;
                 int wz = room.Info.Z + z;
                 int wy = (sector.Ceiling - 1) * TRConsts.Step1;
-                TRRoomSector sectorAbove = FDUtilities.GetRoomSector(wx, wy, wz, sector.RoomAbove, level, floorData);
+                TRRoomSector sectorAbove = level.GetRoomSector(wx, wy, wz, sector.RoomAbove);
                 if (sector != sectorAbove)
                 {
-                    ScanTR3SectorMonkeyFaces(faces, level, floorData, roomAbove, sectorAbove, entry);
+                    ScanTR3SectorMonkeyFaces(faces, level, roomAbove, sectorAbove, entry);
                 }
             }
         }
@@ -294,12 +276,12 @@ public static class FaceUtilities
         List<TRVertex> vertMatches = new();
         if (climbEntry.IsNegativeX)
         {
-            vertMatches.Add(new TRVertex
+            vertMatches.Add(new()
             {
                 X = x,
                 Z = z
             });
-            vertMatches.Add(new TRVertex
+            vertMatches.Add(new()
             {
                 X = x,
                 Z = (short)(z + TRConsts.Step4)
@@ -307,12 +289,12 @@ public static class FaceUtilities
         }
         if (climbEntry.IsPositiveX)
         {
-            vertMatches.Add(new TRVertex
+            vertMatches.Add(new()
             {
                 X = (short)(x + TRConsts.Step4),
                 Z = z
             });
-            vertMatches.Add(new TRVertex
+            vertMatches.Add(new()
             {
                 X = (short)(x + TRConsts.Step4),
                 Z = (short)(z + TRConsts.Step4)
@@ -320,12 +302,12 @@ public static class FaceUtilities
         }
         if (climbEntry.IsNegativeZ)
         {
-            vertMatches.Add(new TRVertex
+            vertMatches.Add(new()
             {
                 X = x,
                 Z = z
             });
-            vertMatches.Add(new TRVertex
+            vertMatches.Add(new()
             {
                 X = (short)(x + TRConsts.Step4),
                 Z = z
@@ -333,12 +315,12 @@ public static class FaceUtilities
         }
         if (climbEntry.IsPositiveZ)
         {
-            vertMatches.Add(new TRVertex
+            vertMatches.Add(new()
             {
                 X = x,
                 Z = (short)(z + TRConsts.Step4)
             });
-            vertMatches.Add(new TRVertex
+            vertMatches.Add(new()
             {
                 X = (short)(x + TRConsts.Step4),
                 Z = (short)(z + TRConsts.Step4)
@@ -352,22 +334,22 @@ public static class FaceUtilities
     {
         List<TRVertex> vertMatches = new()
         {
-            new TRVertex
+            new()
             {
                 X = x,
                 Z = z
             },
-            new TRVertex
+            new()
             {
                 X = (short)(x + TRConsts.Step4),
                 Z = z
             },
-            new TRVertex
+            new()
             {
                 X = x,
                 Z = (short)(z + TRConsts.Step4)
             },
-            new TRVertex
+            new()
             {
                 X = (short)(x + TRConsts.Step4),
                 Z = (short)(z + TRConsts.Step4)

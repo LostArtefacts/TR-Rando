@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -118,41 +116,26 @@ public class EMMirrorFunction : BaseEMFunction
 
     private static void MirrorFloorData(TR1Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (TR1Room room in level.Rooms)
         {
-            MirrorSectors(room.Sectors, room.NumXSectors, room.NumZSectors, floorData);
+            MirrorSectors(room.Sectors, room.NumXSectors, room.NumZSectors, level.FloorData);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     private static void MirrorFloorData(TR2Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (TR2Room room in level.Rooms)
         {
-            MirrorSectors(room.Sectors, room.NumXSectors, room.NumZSectors, floorData);
+            MirrorSectors(room.Sectors, room.NumXSectors, room.NumZSectors, level.FloorData);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     private static void MirrorFloorData(TR3Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (TR3Room room in level.Rooms)
         {
-            MirrorSectors(room.Sectors, room.NumXSectors, room.NumZSectors, floorData);
+            MirrorSectors(room.Sectors, room.NumXSectors, room.NumZSectors, level.FloorData);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     private static void MirrorSectors(List<TRRoomSector> sectors, ushort numXSectors, ushort numZSectors, FDControl floorData)
@@ -181,7 +164,7 @@ public class EMMirrorFunction : BaseEMFunction
         {
             if (sector.FDIndex != 0)
             {
-                List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+                List<FDEntry> entries = floorData[sector.FDIndex];
                 for (int i = 0; i < entries.Count; i++)
                 {
                     FDEntry entry = entries[i];
@@ -202,86 +185,86 @@ public class EMMirrorFunction : BaseEMFunction
                     else if (entry is FDTriangulationEntry triangulation)
                     {
                         // Flip the corners
-                        byte c00 = triangulation.TriData.C00;
-                        byte c10 = triangulation.TriData.C10;
-                        byte c01 = triangulation.TriData.C01;
-                        byte c11 = triangulation.TriData.C11;
-                        triangulation.TriData.C00 = c10;
-                        triangulation.TriData.C10 = c00;
-                        triangulation.TriData.C01 = c11;
-                        triangulation.TriData.C11 = c01;
+                        byte c00 = triangulation.C00;
+                        byte c10 = triangulation.C10;
+                        byte c01 = triangulation.C01;
+                        byte c11 = triangulation.C11;
+                        triangulation.C00 = c10;
+                        triangulation.C10 = c00;
+                        triangulation.C01 = c11;
+                        triangulation.C11 = c01;
 
                         // And the heights
-                        sbyte h1 = triangulation.Setup.H1;
-                        sbyte h2 = triangulation.Setup.H2;
-                        triangulation.Setup.H1 = h2;
-                        triangulation.Setup.H2 = h1;
+                        sbyte h1 = triangulation.H1;
+                        sbyte h2 = triangulation.H2;
+                        triangulation.H1 = h2;
+                        triangulation.H2 = h1;
 
                         // And the triangulation
-                        switch ((FDFunction)triangulation.Setup.Function)
+                        switch (triangulation.Type)
                         {
                             // Non-portals
-                            case FDFunction.FloorTriangulationNWSE_Solid:
-                                triangulation.Setup.Function = (byte)FDFunction.FloorTriangulationNESW_Solid;
+                            case FDTriangulationType.FloorNWSE_Solid:
+                                triangulation.Type = FDTriangulationType.FloorNESW_Solid;
                                 break;
-                            case FDFunction.FloorTriangulationNESW_Solid:
-                                triangulation.Setup.Function = (byte)FDFunction.FloorTriangulationNWSE_Solid;
+                            case FDTriangulationType.FloorNESW_Solid:
+                                triangulation.Type = FDTriangulationType.FloorNWSE_Solid;
                                 break;
 
-                            case FDFunction.CeilingTriangulationNW_Solid:
-                                triangulation.Setup.Function = (byte)FDFunction.CeilingTriangulationNE_Solid;
+                            case FDTriangulationType.CeilingNWSE_Solid:
+                                triangulation.Type = FDTriangulationType.CeilingNESW_Solid;
                                 break;
-                            case FDFunction.CeilingTriangulationNE_Solid:
-                                triangulation.Setup.Function = (byte)FDFunction.CeilingTriangulationNW_Solid;
+                            case FDTriangulationType.CeilingNESW_Solid:
+                                triangulation.Type = FDTriangulationType.CeilingNWSE_Solid;
                                 break;
 
                             // Portals: _SW, _NE etc indicate triangles whose right-angles point towards the portal
-                            case FDFunction.FloorTriangulationNWSE_SW:
-                                triangulation.Setup.Function = (byte)FDFunction.FloorTriangulationNESW_NW;
+                            case FDTriangulationType.FloorNWSE_SW:
+                                triangulation.Type = FDTriangulationType.FloorNESW_NW;
                                 break;
-                            case FDFunction.FloorTriangulationNWSE_NE:
-                                triangulation.Setup.Function = (byte)FDFunction.FloorTriangulationNESW_SE;
+                            case FDTriangulationType.FloorNWSE_NE:
+                                triangulation.Type = FDTriangulationType.FloorNESW_SE;
                                 break;
-                            case FDFunction.FloorTriangulationNESW_SE:
-                                triangulation.Setup.Function = (byte)FDFunction.FloorTriangulationNWSE_NE;
+                            case FDTriangulationType.FloorNESW_SE:
+                                triangulation.Type = FDTriangulationType.FloorNWSE_NE;
                                 break;
-                            case FDFunction.FloorTriangulationNESW_NW:
-                                triangulation.Setup.Function = (byte)FDFunction.FloorTriangulationNWSE_SW;
+                            case FDTriangulationType.FloorNESW_NW:
+                                triangulation.Type = FDTriangulationType.FloorNWSE_SW;
                                 break;
 
-                            case FDFunction.CeilingTriangulationNW_SW:
-                                triangulation.Setup.Function = (byte)FDFunction.CeilingTriangulationNE_SE;
+                            case FDTriangulationType.CeilingNWSE_SW:
+                                triangulation.Type = FDTriangulationType.CeilingNESW_SE;
                                 break;
-                            case FDFunction.CeilingTriangulationNW_NE:
-                                triangulation.Setup.Function = (byte)FDFunction.CeilingTriangulationNE_NW;
+                            case FDTriangulationType.CeilingNWSE_NE:
+                                triangulation.Type = FDTriangulationType.CeilingNESW_NW;
                                 break;
-                            case FDFunction.CeilingTriangulationNE_NW:
-                                triangulation.Setup.Function = (byte)FDFunction.CeilingTriangulationNW_NE;
+                            case FDTriangulationType.CeilingNESW_NW:
+                                triangulation.Type = FDTriangulationType.CeilingNWSE_NE;
                                 break;
-                            case FDFunction.CeilingTriangulationNE_SE:
-                                triangulation.Setup.Function = (byte)FDFunction.CeilingTriangulationNW_SW;
+                            case FDTriangulationType.CeilingNESW_SE:
+                                triangulation.Type = FDTriangulationType.CeilingNWSE_SW;
                                 break;
                         }
                     }
-                    else if (entry is FDMinecartEntry)
+                    else if (entry is FDMinecartEntry minecart)
                     {
                         // If left is followed by right, it means stop the minecart and they appear to
                         // need to remain in this order. Only switch the entry if there is no other.
-                        if (!(i < entries.Count - 1 && entries[i + 1] is TR3MinecartRotateRightEntry))
+                        if (minecart.Type == FDMinecartType.Left)
                         {
-                            entries[i] = new TR3MinecartRotateRightEntry
+                            if (!(i < entries.Count - 1 && entries[i + 1] is FDMinecartEntry mincartRight && mincartRight.Type == FDMinecartType.Right))
                             {
-                                Setup = new FDSetup(FDFunction.MechBeetleOrMinecartRotateRight)
-                            };
+                                entries[i] = new FDMinecartEntry
+                                {
+                                    Type = FDMinecartType.Right
+                                };
+                            }
                         }
-                    }
-                    else if (entry is TR3MinecartRotateRightEntry)
-                    {
-                        if (!(i > 0 && entries[i - 1] is FDMinecartEntry))
+                        else if (!(i > 0 && entries[i - 1] is FDMinecartEntry minecartLeft && minecartLeft.Type == FDMinecartType.Left))
                         {
                             entries[i] = new FDMinecartEntry
                             {
-                                Setup = new FDSetup(FDFunction.DeferredTriggeringOrMinecartRotateLeft)
+                                Type= FDMinecartType.Left
                             };
                         }
                     }

@@ -1,7 +1,6 @@
 using RectanglePacker.Organisation;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using TRFDControl;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;

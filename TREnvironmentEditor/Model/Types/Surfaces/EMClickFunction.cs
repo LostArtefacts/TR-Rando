@@ -1,6 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRLevelControl;
 using TRLevelControl.Model;
 
@@ -24,22 +22,20 @@ public class EMClickFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         _locations = InitialiseLocations(data);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in _locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-            MoveSector(sector, level.Rooms[location.Room].Info);
+            EMLocation position = data.ConvertLocation(location);
+            TRRoomSector sector = level.GetRoomSector(position);
+            MoveSector(sector, level.Rooms[position.Room].Info);
 
             // Move any entities that share the same floor sector up or down the relevant number of clicks
             if (FloorClicks.HasValue && !RetainItemPositions)
             {
                 foreach (TR1Entity entity in level.Entities)
                 {
-                    if (entity.Room == location.Room)
+                    if (entity.Room == position.Room)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+                        TRRoomSector entitySector = level.GetRoomSector(entity);
                         if (entitySector == sector)
                         {
                             entity.Y += GetEntityYShift(FloorClicks.Value);
@@ -55,22 +51,20 @@ public class EMClickFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         _locations = InitialiseLocations(data);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in _locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-            MoveSector(sector, level.Rooms[location.Room].Info);
+            EMLocation position = data.ConvertLocation(location);
+            TRRoomSector sector = level.GetRoomSector(position);
+            MoveSector(sector, level.Rooms[position.Room].Info);
 
             // Move any entities that share the same floor sector up or down the relevant number of clicks
             if (FloorClicks.HasValue && !RetainItemPositions)
             {
                 foreach (TR2Entity entity in level.Entities)
                 {
-                    if (entity.Room == location.Room)
+                    if (entity.Room == position.Room)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+                        TRRoomSector entitySector = level.GetRoomSector(entity);
                         if (entitySector == sector)
                         {
                             entity.Y += GetEntityYShift(FloorClicks.Value);
@@ -86,22 +80,20 @@ public class EMClickFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         _locations = InitialiseLocations(data);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in _locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-            MoveSector(sector, level.Rooms[location.Room].Info);
+            EMLocation position = data.ConvertLocation(location);
+            TRRoomSector sector = level.GetRoomSector(position);
+            MoveSector(sector, level.Rooms[position.Room].Info);
 
             // Move any entities that share the same floor sector up or down the relevant number of clicks
             if (FloorClicks.HasValue && !RetainItemPositions)
             {
                 foreach (TR3Entity entity in level.Entities)
                 {
-                    if (entity.Room == location.Room)
+                    if (entity.Room == position.Room)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+                        TRRoomSector entitySector = level.GetRoomSector(entity);
                         if (entitySector == sector)
                         {
                             entity.Y += GetEntityYShift(FloorClicks.Value);

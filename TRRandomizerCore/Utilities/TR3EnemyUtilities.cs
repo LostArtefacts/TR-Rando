@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -177,16 +174,11 @@ public static class TR3EnemyUtilities
         {
             int entityID = level.Entities.IndexOf(entity);
 
-            FDControl fdControl = new();
-            fdControl.ParseFromLevel(level);
-
-            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdControl, entityID);
+            List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(entityID);
             foreach (FDTriggerEntry trigger in triggers)
             {
-                trigger.TrigSetup.OneShot = true;
+                trigger.OneShot = true;
             }
-
-            fdControl.WriteToLevel(level);
         }
     }
 

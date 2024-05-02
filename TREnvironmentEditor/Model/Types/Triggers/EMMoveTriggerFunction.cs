@@ -1,7 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -15,11 +12,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
+        TRRoomSector baseSector = level.GetRoomSector(data.ConvertLocation(BaseLocation));
 
         if (NewLocation != null)
         {
@@ -28,7 +21,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
         else if (EntityLocation.HasValue)
         {
             TR1Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
-            NewLocation = new EMLocation
+            NewLocation = new()
             {
                 X = entity.X,
                 Y = entity.Y,
@@ -41,11 +34,9 @@ public class EMMoveTriggerFunction : BaseEMFunction
             throw new InvalidOperationException("No means to determine new sector for moving trigger.");
         }
 
-        TRRoomSector newSector = FDUtilities.GetRoomSector(NewLocation.X, NewLocation.Y, NewLocation.Z, NewLocation.Room, level, control);
-        if (MoveTriggers(baseSector, newSector, control))
+        TRRoomSector newSector = level.GetRoomSector(NewLocation);
+        if (MoveTriggers(baseSector, newSector, level.FloorData))
         {
-            control.WriteToLevel(level);
-
             // Make sure to copy the trigger into the flipped room if applicable
             short altRoom = level.Rooms[NewLocation.Room].AlternateRoom;
             if (altRoom != -1)
@@ -58,11 +49,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
+        TRRoomSector baseSector = level.GetRoomSector(data.ConvertLocation(BaseLocation));
 
         if (NewLocation != null)
         {
@@ -71,7 +58,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
         else if (EntityLocation.HasValue)
         {
             TR2Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
-            NewLocation = new EMLocation
+            NewLocation = new()
             {
                 X = entity.X,
                 Y = entity.Y,
@@ -84,11 +71,9 @@ public class EMMoveTriggerFunction : BaseEMFunction
             throw new InvalidOperationException("No means to determine new sector for moving trigger.");
         }
 
-        TRRoomSector newSector = FDUtilities.GetRoomSector(NewLocation.X, NewLocation.Y, NewLocation.Z, NewLocation.Room, level, control);
-        if (MoveTriggers(baseSector, newSector, control))
+        TRRoomSector newSector = level.GetRoomSector(NewLocation);
+        if (MoveTriggers(baseSector, newSector, level.FloorData))
         {
-            control.WriteToLevel(level);
-
             // Make sure to copy the trigger into the flipped room if applicable
             short altRoom = level.Rooms[NewLocation.Room].AlternateRoom;
             if (altRoom != -1)
@@ -101,11 +86,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
+        TRRoomSector baseSector = level.GetRoomSector(data.ConvertLocation(BaseLocation));
 
         if (NewLocation != null)
         {
@@ -114,7 +95,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
         else if (EntityLocation.HasValue)
         {
             TR3Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
-            NewLocation = new EMLocation
+            NewLocation = new()
             {
                 X = entity.X,
                 Y = entity.Y,
@@ -127,11 +108,9 @@ public class EMMoveTriggerFunction : BaseEMFunction
             throw new InvalidOperationException("No means to determine new sector for moving trigger.");
         }
 
-        TRRoomSector newSector = FDUtilities.GetRoomSector(NewLocation.X, NewLocation.Y, NewLocation.Z, NewLocation.Room, level, control);
-        if (MoveTriggers(baseSector, newSector, control))
+        TRRoomSector newSector = level.GetRoomSector(NewLocation);
+        if (MoveTriggers(baseSector, newSector, level.FloorData))
         {
-            control.WriteToLevel(level);
-
             // Make sure to copy the trigger into the flipped room if applicable
             short altRoom = level.Rooms[NewLocation.Room].AlternateRoom;
             if (altRoom != -1)
@@ -145,7 +124,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     {
         if (baseSector != newSector && baseSector.FDIndex != 0)
         {
-            List<FDEntry> triggers = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
+            List<FDEntry> triggers = control[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
             if (triggers.Count > 0)
             {
                 if (newSector.FDIndex == 0)
@@ -153,13 +132,8 @@ public class EMMoveTriggerFunction : BaseEMFunction
                     control.CreateFloorData(newSector);
                 }
 
-                control.Entries[newSector.FDIndex].AddRange(triggers);
-
-                control.Entries[baseSector.FDIndex].RemoveAll(e => triggers.Contains(e));
-                if (control.Entries[baseSector.FDIndex].Count == 0)
-                {
-                    control.RemoveFloorData(baseSector);
-                }
+                control[newSector.FDIndex].AddRange(triggers);
+                control[baseSector.FDIndex].RemoveAll(e => triggers.Contains(e));
 
                 return true;
             }
@@ -172,12 +146,13 @@ public class EMMoveTriggerFunction : BaseEMFunction
     {
         // We want the trigger that's in the new target location added to the same
         // position in the flipped room.
-        return new EMDuplicateTriggerFunction
+        return new()
         {
             BaseLocation = NewLocation,
-            Locations = new List<EMLocation>
+            Locations = new()
             {
-                new() {
+                new()
+                {
                     X = NewLocation.X,
                     Y = NewLocation.Y,
                     Z = NewLocation.Z,

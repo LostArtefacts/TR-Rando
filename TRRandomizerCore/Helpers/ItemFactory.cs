@@ -94,7 +94,7 @@ public class ItemFactory<T>
             item.X = location.X;
             item.Y = location.Y;
             item.Z = location.Z;
-            item.Room = (short)location.Room;
+            item.Room = location.Room;
             item.Angle = location.Angle;
         }
 

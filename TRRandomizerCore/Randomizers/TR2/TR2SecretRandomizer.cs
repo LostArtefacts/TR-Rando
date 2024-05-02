@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -93,8 +91,8 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
 
         // Simulate zoning of sorts by splitting the route equally. This of course doesn't guarantee
         // what will be assigned in regular mode.
-        List<int> routeRooms = _routePicker.GetRouteRooms();
-        List<List<int>> zones = routeRooms.Split(_levelSecretCount);
+        List<short> routeRooms = _routePicker.GetRouteRooms();
+        List<List<short>> zones = routeRooms.Split(_levelSecretCount);
         List<TR2Type> secretTypes = TR2TypeUtilities.GetSecretTypes();
 
         foreach (Location location in _locations[level.Name])
@@ -118,14 +116,10 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
 
     private void RandomizeSecrets(TR2CombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         List<Location> locations = _locations[level.Name];
         locations.Shuffle(_generator);
 
-        _secretPicker.SectorAction = loc 
-            => FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
+        _secretPicker.SectorAction = loc => level.Data.GetRoomSector(loc);
         _routePicker.RoomInfos = level.Data.Rooms
             .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
             .ToList();

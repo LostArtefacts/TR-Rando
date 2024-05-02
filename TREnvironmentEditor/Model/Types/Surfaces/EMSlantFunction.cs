@@ -1,7 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl;
 using TRLevelControl.Model;
 
@@ -19,48 +16,33 @@ public class EMSlantFunction : EMClickFunction
         // Apply click changes first
         base.ApplyToLevel(level);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in _locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-            UpdateSlantEntry(sector, floorData);
+            TRRoomSector sector = level.GetRoomSector(location);
+            UpdateSlantEntry(sector, level.FloorData);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         base.ApplyToLevel(level);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in _locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-            UpdateSlantEntry(sector, floorData);
+            TRRoomSector sector = level.GetRoomSector(location);
+            UpdateSlantEntry(sector, level.FloorData);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         base.ApplyToLevel(level);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in _locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-            UpdateSlantEntry(sector, floorData);
+            TRRoomSector sector = level.GetRoomSector(location);
+            UpdateSlantEntry(sector, level.FloorData);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     private void UpdateSlantEntry(TRRoomSector sector, FDControl floorData)
@@ -82,13 +64,8 @@ public class EMSlantFunction : EMClickFunction
             return;
         }
 
-        List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+        List<FDEntry> entries = floorData[sector.FDIndex];
         entries.RemoveAll(e => e is FDSlantEntry slant && slant.Type == SlantType);
-
-        if (entries.Count == 0)
-        {
-            floorData.RemoveFloorData(sector);
-        }
     }
 
     private void CreateSlantEntry(TRRoomSector sector, FDControl floorData)
@@ -100,7 +77,6 @@ public class EMSlantFunction : EMClickFunction
 
         FDSlantEntry newSlant = new()
         {
-            Setup = new FDSetup(SlantType == FDSlantType.FloorSlant ? FDFunction.FloorSlant : FDFunction.CeilingSlant),
             Type = SlantType
         };
         if (XSlant.HasValue)
@@ -112,12 +88,12 @@ public class EMSlantFunction : EMClickFunction
             newSlant.ZSlant = ZSlant.Value;
         }
 
-        List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+        List<FDEntry> entries = floorData[sector.FDIndex];
 
         // Only one slant of each type is supported, and floor must come before ceiling and both before anything else.
         // For ease, remove any existing slants, then re-add/replace as needed.
-        FDEntry floorSlant = entries.Find(e => e is FDSlantEntry slant && slant.Type == FDSlantType.FloorSlant);
-        FDEntry ceilingSlant = entries.Find(e => e is FDSlantEntry slant && slant.Type == FDSlantType.CeilingSlant);
+        FDEntry floorSlant = entries.Find(e => e is FDSlantEntry slant && slant.Type == FDSlantType.Floor);
+        FDEntry ceilingSlant = entries.Find(e => e is FDSlantEntry slant && slant.Type == FDSlantType.Ceiling);
 
         if (floorSlant != null)
         {
@@ -128,7 +104,7 @@ public class EMSlantFunction : EMClickFunction
             entries.Remove(ceilingSlant);
         }
 
-        if (SlantType == FDSlantType.FloorSlant)
+        if (SlantType == FDSlantType.Floor)
         {
             floorSlant = newSlant;
         }

@@ -1,7 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -23,30 +20,27 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
 
         // We can only swap if the slots are corresponding done/not done types.
         // So for now, just check that one doesn't have any triggers
-        FDControl control = new();
-        control.ParseFromLevel(level);
 
-        TRRoomSector slot1Sector = FDUtilities.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room, level, control);
-        TRRoomSector slot2Sector = FDUtilities.GetRoomSector(slot2.X, slot2.Y, slot2.Z, slot2.Room, level, control);
+        TRRoomSector slot1Sector = level.GetRoomSector(slot1);
+        TRRoomSector slot2Sector = level.GetRoomSector(slot2);
 
-        bool slot1HasTriggers = SectorHasTriggers(slot1Sector, control);
-        bool slot2HasTriggers = SectorHasTriggers(slot2Sector, control);
+        bool slot1HasTriggers = SectorHasTriggers(slot1Sector, level.FloorData);
+        bool slot2HasTriggers = SectorHasTriggers(slot2Sector, level.FloorData);
 
         if (slot1HasTriggers ^ slot2HasTriggers)
         {
             if (slot1HasTriggers)
             {
                 EntityIndex = Slot1Index;
-                MoveTriggers(control, slot1Sector, slot2Sector);
+                MoveTriggers(level.FloorData, slot1Sector, slot2Sector);
             }
             else
             {
                 EntityIndex = Slot2Index;
-                MoveTriggers(control, slot2Sector, slot1Sector);
+                MoveTriggers(level.FloorData, slot2Sector, slot1Sector);
             }
 
             SwapSlots(slot1, slot2, GetData(level));
-            control.WriteToLevel(level);
         }
     }
 
@@ -60,32 +54,26 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
         TR2Entity slot1 = level.Entities[Slot1Index];
         TR2Entity slot2 = level.Entities[Slot2Index];
 
-        // We can only swap if the slots are corresponding done/not done types.
-        // So for now, just check that one doesn't have any triggers
-        FDControl control = new();
-        control.ParseFromLevel(level);
+        TRRoomSector slot1Sector = level.GetRoomSector(slot1);
+        TRRoomSector slot2Sector = level.GetRoomSector(slot2);
 
-        TRRoomSector slot1Sector = FDUtilities.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room, level, control);
-        TRRoomSector slot2Sector = FDUtilities.GetRoomSector(slot2.X, slot2.Y, slot2.Z, slot2.Room, level, control);
-
-        bool slot1HasTriggers = SectorHasTriggers(slot1Sector, control);
-        bool slot2HasTriggers = SectorHasTriggers(slot2Sector, control);
+        bool slot1HasTriggers = SectorHasTriggers(slot1Sector, level.FloorData);
+        bool slot2HasTriggers = SectorHasTriggers(slot2Sector, level.FloorData);
 
         if (slot1HasTriggers ^ slot2HasTriggers)
         {
             if (slot1HasTriggers)
             {
                 EntityIndex = Slot1Index;
-                MoveTriggers(control, slot1Sector, slot2Sector);
+                MoveTriggers(level.FloorData, slot1Sector, slot2Sector);
             }
             else
             {
                 EntityIndex = Slot2Index;
-                MoveTriggers(control, slot2Sector, slot1Sector);
+                MoveTriggers(level.FloorData, slot2Sector, slot1Sector);
             }
 
             SwapSlots(slot1, slot2, GetData(level));
-            control.WriteToLevel(level);
         }
     }
 
@@ -99,39 +87,33 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
         TR3Entity slot1 = level.Entities[Slot1Index];
         TR3Entity slot2 = level.Entities[Slot2Index];
 
-        // We can only swap if the slots are corresponding done/not done types.
-        // So for now, just check that one doesn't have any triggers
-        FDControl control = new();
-        control.ParseFromLevel(level);
+        TRRoomSector slot1Sector = level.GetRoomSector(slot1);
+        TRRoomSector slot2Sector = level.GetRoomSector(slot2);
 
-        TRRoomSector slot1Sector = FDUtilities.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room, level, control);
-        TRRoomSector slot2Sector = FDUtilities.GetRoomSector(slot2.X, slot2.Y, slot2.Z, slot2.Room, level, control);
-
-        bool slot1HasTriggers = SectorHasTriggers(slot1Sector, control);
-        bool slot2HasTriggers = SectorHasTriggers(slot2Sector, control);
+        bool slot1HasTriggers = SectorHasTriggers(slot1Sector, level.FloorData);
+        bool slot2HasTriggers = SectorHasTriggers(slot2Sector, level.FloorData);
 
         if (slot1HasTriggers ^ slot2HasTriggers)
         {
             if (slot1HasTriggers)
             {
                 EntityIndex = Slot1Index;
-                MoveTriggers(control, slot1Sector, slot2Sector);
+                MoveTriggers(level.FloorData, slot1Sector, slot2Sector);
             }
             else
             {
                 EntityIndex = Slot2Index;
-                MoveTriggers(control, slot2Sector, slot1Sector);
+                MoveTriggers(level.FloorData, slot2Sector, slot1Sector);
             }
 
             SwapSlots(slot1, slot2, GetData(level));
-            control.WriteToLevel(level);
         }
     }
 
     private static bool SectorHasTriggers(TRRoomSector sector, FDControl control)
     {
         return sector.FDIndex != 0
-            && control.Entries[sector.FDIndex].Any(e => e is FDTriggerEntry);
+            && control[sector.FDIndex].Any(e => e is FDTriggerEntry);
     }
 
     private static void SwapSlots<T>(TREntity<T> slot1, TREntity<T> slot2, EMLevelData data)

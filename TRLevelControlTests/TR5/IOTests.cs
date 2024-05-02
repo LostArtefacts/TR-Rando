@@ -16,4 +16,18 @@ public class IOTests : TestBase
     {
         ReadWriteLevel(levelName, TRGameVersion.TR5);
     }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestAgressiveFloorData(string levelName)
+    {
+        TR5Level level = GetTR5Level(levelName);
+        IEnumerable<TRRoomSector> allFDSectors = level.Rooms.SelectMany(r => r.Sectors.Where(s => s.FDIndex != 0));
+
+        foreach (TRRoomSector sector in allFDSectors)
+        {
+            Assert.IsTrue(level.FloorData.ContainsKey(sector.FDIndex));
+        }
+        Assert.AreEqual(allFDSectors.Count(), allFDSectors.DistinctBy(s => s.FDIndex).Count());
+    }
 }

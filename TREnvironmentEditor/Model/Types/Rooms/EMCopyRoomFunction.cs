@@ -1,7 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl;
 using TRLevelControl.Helpers.Pathing;
 using TRLevelControl.Model;
@@ -66,20 +63,15 @@ public class EMCopyRoomFunction : BaseEMFunction
         }
 
         // Rebuild the sectors
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         for (int i = 0; i < baseRoom.Sectors.Count; i++)
         {
-            newRoom.Sectors.Add(RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info));
+            newRoom.Sectors.Add(RebuildSector(baseRoom.Sectors[i], i, level.FloorData, ydiff, baseRoom.Info));
         }
-
-        floorData.WriteToLevel(level);
 
         // Generate new boxes, unless this room is meant to be isolated
         if (LinkedLocation != null)
         {
-            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+            TRRoomSector linkedSector = level.GetRoomSector(data.ConvertLocation(LinkedLocation));
             BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
@@ -138,20 +130,15 @@ public class EMCopyRoomFunction : BaseEMFunction
         }
 
         // Rebuild the sectors
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         for (int i = 0; i < baseRoom.Sectors.Count; i++)
         {
-            newRoom.Sectors.Add(RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info));
+            newRoom.Sectors.Add(RebuildSector(baseRoom.Sectors[i], i, level.FloorData, ydiff, baseRoom.Info));
         }
-
-        floorData.WriteToLevel(level);
 
         // Generate new boxes, unless this room is meant to be isolated
         if (LinkedLocation != null)
         {
-            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+            TRRoomSector linkedSector = level.GetRoomSector(data.ConvertLocation(LinkedLocation));
             BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
@@ -211,20 +198,15 @@ public class EMCopyRoomFunction : BaseEMFunction
         }
 
         // Rebuild the sectors
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         for (int i = 0; i < baseRoom.Sectors.Count; i++)
         {
-            newRoom.Sectors.Add(RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info));
+            newRoom.Sectors.Add(RebuildSector(baseRoom.Sectors[i], i, level.FloorData, ydiff, baseRoom.Info));
         }
-
-        floorData.WriteToLevel(level);
 
         // Generate new boxes, unless this room is meant to be isolated
         if (LinkedLocation != null)
         {
-            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+            TRRoomSector linkedSector = level.GetRoomSector(data.ConvertLocation(LinkedLocation));
             BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
@@ -275,13 +257,13 @@ public class EMCopyRoomFunction : BaseEMFunction
         // so they can be blocked off.
         if (originalSector.FDIndex != 0)
         {
-            List<FDEntry> entries = floorData.Entries[originalSector.FDIndex];
+            List<FDEntry> entries = floorData[originalSector.FDIndex];
             List<FDEntry> newEntries = new();
             foreach (FDEntry entry in entries)
             {
-                switch ((FDFunction)entry.Setup.Function)
+                switch (entry)
                 {
-                    case FDFunction.PortalSector:
+                    case FDPortalEntry:
                         // This portal will no longer be valid in the new room's position,
                         // so block off the wall provided we haven't opened the wall above.
                         if (!wallOpened)
@@ -289,72 +271,10 @@ public class EMCopyRoomFunction : BaseEMFunction
                             newSector.Floor = newSector.Ceiling = TRConsts.WallClicks;
                         }
                         break;
-                    case FDFunction.FloorSlant:
-                        FDSlantEntry slantEntry = entry as FDSlantEntry;
-                        newEntries.Add(new FDSlantEntry()
-                        {
-                            Setup = new FDSetup() { Value = slantEntry.Setup.Value },
-                            SlantValue = slantEntry.SlantValue,
-                            Type = FDSlantType.FloorSlant
-                        });
+                    case FDTriggerEntry:
                         break;
-                    case FDFunction.CeilingSlant:
-                        FDSlantEntry ceilingSlant = entry as FDSlantEntry;
-                        newEntries.Add(new FDSlantEntry()
-                        {
-                            Setup = new FDSetup() { Value = ceilingSlant.Setup.Value },
-                            SlantValue = ceilingSlant.SlantValue,
-                            Type = FDSlantType.CeilingSlant
-                        });
-                        break;
-                    case FDFunction.KillLara:
-                        newEntries.Add(new FDKillLaraEntry()
-                        {
-                            Setup = new FDSetup() { Value = entry.Setup.Value }
-                        });
-                        break;
-                    case FDFunction.ClimbableWalls:
-                        newEntries.Add(new FDClimbEntry()
-                        {
-                            Setup = new FDSetup() { Value = entry.Setup.Value }
-                        });
-                        break;
-                    case FDFunction.FloorTriangulationNWSE_Solid:
-                    case FDFunction.FloorTriangulationNESW_Solid:
-                    case FDFunction.CeilingTriangulationNW_Solid:
-                    case FDFunction.CeilingTriangulationNE_Solid:
-                    case FDFunction.FloorTriangulationNWSE_SW:
-                    case FDFunction.FloorTriangulationNWSE_NE:
-                    case FDFunction.FloorTriangulationNESW_SE:
-                    case FDFunction.FloorTriangulationNESW_NW:
-                    case FDFunction.CeilingTriangulationNW_SW:
-                    case FDFunction.CeilingTriangulationNW_NE:
-                    case FDFunction.CeilingTriangulationNE_NW:
-                    case FDFunction.CeilingTriangulationNE_SE:
-                        FDTriangulationEntry triEntry = entry as FDTriangulationEntry;
-                        newEntries.Add(new FDTriangulationEntry
-                        {
-                            Setup = new FDSetup { Value = triEntry.Setup.Value },
-                            TriData = new FDTriangulationData { Value = triEntry.TriData.Value }
-                        });
-                        break;
-                    case FDFunction.Monkeyswing:
-                        newEntries.Add(new FDMonkeySwingEntry()
-                        {
-                            Setup = new FDSetup() { Value = entry.Setup.Value }
-                        });
-                        break;
-                    case FDFunction.DeferredTriggeringOrMinecartRotateLeft:
-                        newEntries.Add(new FDMinecartEntry()
-                        {
-                            Setup = new FDSetup() { Value = entry.Setup.Value }
-                        });
-                        break;
-                    case FDFunction.MechBeetleOrMinecartRotateRight:
-                        newEntries.Add(new TR3MinecartRotateRightEntry()
-                        {
-                            Setup = new FDSetup() { Value = entry.Setup.Value }
-                        });
+                    default:
+                        newEntries.Add(entry.Clone());
                         break;
                 }
             }
@@ -362,7 +282,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             if (newEntries.Count > 0)
             {
                 floorData.CreateFloorData(newSector);
-                floorData.Entries[newSector.FDIndex].AddRange(newEntries);
+                floorData[newSector.FDIndex].AddRange(newEntries);
             }
         }
 

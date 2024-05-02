@@ -1,6 +1,4 @@
 ﻿using System.Drawing;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
@@ -167,9 +165,6 @@ public class DynamicTextureBuilder
         }
 
         // Key items and secrets
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         Dictionary<TR1Type, TR1Type> keyItems = TR1TypeUtilities.GetKeyItemMap();
         foreach (TR1Type pickupType in keyItems.Keys)
         {
@@ -183,8 +178,8 @@ public class DynamicTextureBuilder
             TR1Entity keyInstance = level.Data.Entities.Find(e => e.TypeID == pickupType);
             if (keyInstance != null)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(keyInstance.X, keyInstance.Y, keyInstance.Z, keyInstance.Room, level.Data, floorData);
-                if (LocationUtilities.SectorContainsSecret(sector, floorData))
+                TRRoomSector sector = level.Data.GetRoomSector(keyInstance);
+                if (LocationUtilities.SectorContainsSecret(sector, level.Data.FloorData))
                 {
                     AddModelTextures(level.Data, pickupType, model, hips, secretObjectTextures, modelMeshes);
                     AddSpriteTextures(level.Data, pickupType, secretSpriteTextures);

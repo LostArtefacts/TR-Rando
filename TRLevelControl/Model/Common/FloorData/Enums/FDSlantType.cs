@@ -1,7 +1,7 @@
-﻿namespace TRFDControl.FDEntryTypes;
+﻿namespace TRLevelControl.Model;
 
 public enum FDSlantType
 {
-    CeilingSlant,
-    FloorSlant
+    Floor   = 0x02,
+    Ceiling = 0x03,
 }

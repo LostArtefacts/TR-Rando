@@ -1,7 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -13,11 +10,7 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        Dictionary<TRRoomSector, List<ushort>> sectorMap = new();
+        Dictionary<TRRoomSector, List<short>> sectorMap = new();
 
         foreach (short fromRoomNumber in Portals.Keys)
         {
@@ -27,34 +20,24 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
                 short convertedToRoomNumber = data.ConvertRoom(toRoomNumber);
                 foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
                 {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber, level, control);
+                    TRRoomSector sector = level.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber);
 
                     if (!sectorMap.ContainsKey(sector))
                     {
-                        sectorMap[sector] = new List<ushort>();
+                        sectorMap[sector] = new();
                     }
-                    sectorMap[sector].Add((ushort)convertedToRoomNumber);
+                    sectorMap[sector].Add(convertedToRoomNumber);
                 }
             }
         }
 
-        CreatePortals(sectorMap, control);
-
-        control.WriteToLevel(level);
+        CreatePortals(sectorMap, level.FloorData);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        // Given a room number, we want to create collisional portals into the other room
-        // using the given locations to find the correct sector.
-        // See 4.4.1 in https://opentomb.github.io/TRosettaStone3/trosettastone.html#_floordata_functions
-
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        Dictionary<TRRoomSector, List<ushort>> sectorMap = new();
+        Dictionary<TRRoomSector, List<short>> sectorMap = new();
 
         // Because some sectors may be shared, we need to call GetRoomSector to get all the sectors we are
         // interested in first before making any changes.
@@ -66,31 +49,24 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
                 short convertedToRoomNumber = data.ConvertRoom(toRoomNumber);
                 foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
                 {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber, level, control);
+                    TRRoomSector sector = level.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber);
 
                     if (!sectorMap.ContainsKey(sector))
                     {
-                        sectorMap[sector] = new List<ushort>();
+                        sectorMap[sector] = new();
                     }
-                    sectorMap[sector].Add((ushort)convertedToRoomNumber);
+                    sectorMap[sector].Add(convertedToRoomNumber);
                 }
             }
         }
 
-        // Now create the new entries for all the portals.
-        CreatePortals(sectorMap, control);
-
-        control.WriteToLevel(level);
+        CreatePortals(sectorMap, level.FloorData);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        Dictionary<TRRoomSector, List<ushort>> sectorMap = new();
+        Dictionary<TRRoomSector, List<short>> sectorMap = new();
 
         foreach (short fromRoomNumber in Portals.Keys)
         {
@@ -100,23 +76,21 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
                 short convertedToRoomNumber = data.ConvertRoom(toRoomNumber);
                 foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
                 {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber, level, control);
+                    TRRoomSector sector = level.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber);
 
                     if (!sectorMap.ContainsKey(sector))
                     {
-                        sectorMap[sector] = new List<ushort>();
+                        sectorMap[sector] = new();
                     }
-                    sectorMap[sector].Add((ushort)convertedToRoomNumber);
+                    sectorMap[sector].Add(convertedToRoomNumber);
                 }
             }
         }
 
-        CreatePortals(sectorMap, control);
-
-        control.WriteToLevel(level);
+        CreatePortals(sectorMap, level.FloorData);
     }
 
-    private static void CreatePortals(Dictionary<TRRoomSector, List<ushort>> sectorMap, FDControl control)
+    private static void CreatePortals(Dictionary<TRRoomSector, List<short>> sectorMap, FDControl control)
     {
         foreach (TRRoomSector sector in sectorMap.Keys)
         {
@@ -125,11 +99,10 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
                 control.CreateFloorData(sector);
             }
 
-            foreach (ushort roomNumber in sectorMap[sector])
+            foreach (short roomNumber in sectorMap[sector])
             {
-                control.Entries[sector.FDIndex].Add(new FDPortalEntry
+                control[sector.FDIndex].Add(new FDPortalEntry
                 {
-                    Setup = new FDSetup { Value = 32769 },
                     Room = roomNumber
                 });
             }

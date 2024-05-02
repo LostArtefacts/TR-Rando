@@ -1,6 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -16,52 +14,37 @@ public class EMReplaceCollisionalPortalFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         TR1Room room = level.Rooms[data.ConvertRoom(Room)];
         TRRoomSector sector = room.Sectors[X * room.NumZSectors + Z];
-        ReplacePortal(sector, (ushort)data.ConvertRoom(AdjoiningRoom), floorData);
-
-        floorData.WriteToLevel(level);
+        ReplacePortal(sector, data.ConvertRoom(AdjoiningRoom), level.FloorData);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         TR2Room room = level.Rooms[data.ConvertRoom(Room)];
         TRRoomSector sector = room.Sectors[X * room.NumZSectors + Z];
-        ReplacePortal(sector, (ushort)data.ConvertRoom(AdjoiningRoom), floorData);
-
-        floorData.WriteToLevel(level);
+        ReplacePortal(sector, data.ConvertRoom(AdjoiningRoom), level.FloorData);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         TR3Room room = level.Rooms[data.ConvertRoom(Room)];
         TRRoomSector sector = room.Sectors[X * room.NumZSectors + Z];
-        ReplacePortal(sector, (ushort)data.ConvertRoom(AdjoiningRoom), floorData);
-
-        floorData.WriteToLevel(level);
+        ReplacePortal(sector, data.ConvertRoom(AdjoiningRoom), level.FloorData);
     }
 
-    private static void ReplacePortal(TRRoomSector sector, ushort adjoiningRoom, FDControl floorData)
+    private static void ReplacePortal(TRRoomSector sector, short adjoiningRoom, FDControl floorData)
     {
         if (sector.FDIndex == 0)
         {
             return;
         }
 
-        foreach (FDEntry entry in floorData.Entries[sector.FDIndex].FindAll(e => e is FDPortalEntry))
+        foreach (FDEntry entry in floorData[sector.FDIndex].FindAll(e => e is FDPortalEntry))
         {
             (entry as FDPortalEntry).Room = adjoiningRoom;
         }

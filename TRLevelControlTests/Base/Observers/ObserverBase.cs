@@ -17,6 +17,7 @@ public class ObserverBase : ITRLevelObserver
     public virtual void OnChunkWritten(long startPosition, long endPosition, TRChunkType chunkType, byte[] data)
     { }
 
+    public virtual bool UseOriginalFloorData => true;
     public virtual bool UseTR5RawRooms => false;
 
     public virtual void OnRawTR5RoomsRead(List<byte> data)

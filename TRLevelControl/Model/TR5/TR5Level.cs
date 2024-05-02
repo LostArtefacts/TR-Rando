@@ -6,7 +6,6 @@ public class TR5Level : TRLevelBase
     public ushort LaraType { get; set; }
     public ushort WeatherType { get; set; }
     public List<TR5Room> Rooms { get; set; }
-    public List<ushort> FloorData { get; set; }
     public TRDictionary<TR5Type, TRModel> Models { get; set; }
     public TRDictionary<TR5Type, TRStaticMesh> StaticMeshes { get; set; }
     public TRDictionary<TR5Type, TRSpriteSequence> Sprites { get; set; }

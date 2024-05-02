@@ -73,7 +73,7 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
             Location location = rewardPositions[_generator.Next(0, rewardPositions.Count)];
             TR1Entity item = ItemFactory.CreateItem(level.Name, level.Data.Entities, location, true);
             rewardIndices.Add(level.Data.Entities.IndexOf(item));
-            item.Room = (short)location.Room;
+            item.Room = location.Room;
         }
 
         foreach (int rewardIndex in rewardIndices)

@@ -1,6 +1,4 @@
 ﻿using System.Numerics;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Model;
@@ -33,7 +31,7 @@ public class AudioRandomizer
             FDActionItem trackItem = null;
             if (sector.FDIndex > 0)
             {
-                List<FDActionItem> actions = FDUtilities.GetActionListItems(floorData, FDTrigAction.PlaySoundtrack, sector.FDIndex);
+                List<FDActionItem> actions = floorData.GetActionItems(FDTrigAction.PlaySoundtrack, sector.FDIndex);
                 if (actions.Count > 0)
                 {
                     trackItem = actions[0];
@@ -53,7 +51,7 @@ public class AudioRandomizer
 
             if (!_trackMap.ContainsKey(position))
             {
-                TRAudioCategory category = FindTrackCategory(trackItem.Parameter);
+                TRAudioCategory category = FindTrackCategory((ushort)trackItem.Parameter);
                 List<TRAudioTrack> tracks = _tracks[category];
                 _trackMap[position] = tracks[generator.Next(0, tracks.Count)].ID;
             }
@@ -72,7 +70,7 @@ public class AudioRandomizer
                 }
             }
 
-            trackItem.Parameter = _trackMap[position];
+            trackItem.Parameter = (short)_trackMap[position];
         }
     }
 

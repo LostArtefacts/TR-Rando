@@ -1,6 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRLevelControl;
 using TRLevelControl.Model;
 
@@ -16,40 +14,36 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
-        short ceilingRoom = data.ConvertRoom(Ceiling.Room);
-        short floorRoom = data.ConvertRoom(Floor.Room);
+        EMLocation ceilingRoom = data.ConvertLocation(Ceiling);
+        EMLocation floorRoom = data.ConvertLocation(Floor);
 
         if (AllSectors)
         {
-            foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
+            foreach (TRRoomSector sector in level.Rooms[ceilingRoom.Room].Sectors)
             {
                 if (!sector.IsWall && sector.RoomBelow != TRConsts.NoRoom)
                 {
-                    sector.RoomBelow = (byte)floorRoom;
+                    sector.RoomBelow = (byte)floorRoom.Room;
                 }
             }
 
-            foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
+            foreach (TRRoomSector sector in level.Rooms[floorRoom.Room].Sectors)
             {
                 if (!sector.IsWall && sector.RoomAbove != TRConsts.NoRoom)
                 {
-                    sector.RoomAbove = (byte)ceilingRoom;
+                    sector.RoomAbove = (byte)ceilingRoom.Room;
                 }
             }
         }
         else
         {
-            TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
-            TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
+            TRRoomSector ceilingSector = level.GetRoomSector(ceilingRoom);
+            TRRoomSector floorSector = level.GetRoomSector(floorRoom);
 
             if (ceilingSector != floorSector)
             {
-                ceilingSector.RoomBelow = (byte)floorRoom;
-                floorSector.RoomAbove = (byte)ceilingRoom;
+                ceilingSector.RoomBelow = (byte)floorRoom.Room;
+                floorSector.RoomAbove = (byte)ceilingRoom.Room;
 
                 if (InheritFloorBox)
                 {
@@ -62,40 +56,36 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
-        short ceilingRoom = data.ConvertRoom(Ceiling.Room);
-        short floorRoom = data.ConvertRoom(Floor.Room);
+        EMLocation ceilingRoom = data.ConvertLocation(Ceiling);
+        EMLocation floorRoom = data.ConvertLocation(Floor);
 
         if (AllSectors)
         {
-            foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
+            foreach (TRRoomSector sector in level.Rooms[ceilingRoom.Room].Sectors)
             {
                 if (!sector.IsWall && sector.RoomBelow != TRConsts.NoRoom)
                 {
-                    sector.RoomBelow = (byte)floorRoom;
+                    sector.RoomBelow = (byte)floorRoom.Room;
                 }
             }
 
-            foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
+            foreach (TRRoomSector sector in level.Rooms[floorRoom.Room].Sectors)
             {
                 if (!sector.IsWall && sector.RoomAbove != TRConsts.NoRoom)
                 {
-                    sector.RoomAbove = (byte)ceilingRoom;
+                    sector.RoomAbove = (byte)ceilingRoom.Room;
                 }
             }
         }
         else
         {
-            TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
-            TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
+            TRRoomSector ceilingSector = level.GetRoomSector(ceilingRoom);
+            TRRoomSector floorSector = level.GetRoomSector(floorRoom);
 
             if (ceilingSector != floorSector)
             {
-                ceilingSector.RoomBelow = (byte)floorRoom;
-                floorSector.RoomAbove = (byte)ceilingRoom;
+                ceilingSector.RoomBelow = (byte)floorRoom.Room;
+                floorSector.RoomAbove = (byte)ceilingRoom.Room;
 
                 if (InheritFloorBox)
                 {
@@ -108,40 +98,36 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
-        short ceilingRoom = data.ConvertRoom(Ceiling.Room);
-        short floorRoom = data.ConvertRoom(Floor.Room);
+        EMLocation ceilingRoom = data.ConvertLocation(Ceiling);
+        EMLocation floorRoom = data.ConvertLocation(Floor);
 
         if (AllSectors)
         {
-            foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
+            foreach (TRRoomSector sector in level.Rooms[ceilingRoom.Room].Sectors)
             {
                 if (!sector.IsWall && sector.RoomBelow != TRConsts.NoRoom)
                 {
-                    sector.RoomBelow = (byte)floorRoom;
+                    sector.RoomBelow = (byte)floorRoom.Room;
                 }
             }
 
-            foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
+            foreach (TRRoomSector sector in level.Rooms[floorRoom.Room].Sectors)
             {
                 if (!sector.IsWall && sector.RoomAbove != TRConsts.NoRoom)
                 {
-                    sector.RoomAbove = (byte)ceilingRoom;
+                    sector.RoomAbove = (byte)ceilingRoom.Room;
                 }
             }
         }
         else
         {
-            TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
-            TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
+            TRRoomSector ceilingSector = level.GetRoomSector(ceilingRoom);
+            TRRoomSector floorSector = level.GetRoomSector(floorRoom);
 
             if (ceilingSector != floorSector)
             {
-                ceilingSector.RoomBelow = (byte)floorRoom;
-                floorSector.RoomAbove = (byte)ceilingRoom;
+                ceilingSector.RoomBelow = (byte)floorRoom.Room;
+                floorSector.RoomAbove = (byte)ceilingRoom.Room;
 
                 if (InheritFloorBox)
                 {

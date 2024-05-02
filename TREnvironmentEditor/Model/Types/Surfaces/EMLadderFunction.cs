@@ -1,7 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -23,18 +20,9 @@ public class EMLadderFunction : EMRefaceFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
+        TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(Location));
+        ModifyLadder(sector, level.FloorData);
 
-        TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
-        ModifyLadder(sector, control);
-
-        control.WriteToLevel(level);
-
-        // Unfortunately the ladder texture may not match the walls we are targeting, but
-        // we can maybe look at generating a ladder texture with a transparent background for
-        // each level, and then merging it with the wall in a particular room (similar to the way
-        // landmarks are done), provided there is enough texture space.
         base.ApplyToLevel(level);
     }
 
@@ -42,13 +30,8 @@ public class EMLadderFunction : EMRefaceFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
-        ModifyLadder(sector, control);
-
-        control.WriteToLevel(level);
+        TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(Location));
+        ModifyLadder(sector, level.FloorData);
 
         base.ApplyToLevel(level);
     }
@@ -74,20 +57,14 @@ public class EMLadderFunction : EMRefaceFunction
             if (sector.FDIndex != 0)
             {
                 // remove the climbable entry and if it leaves an empty list, remove the FD
-                List<FDEntry> entries = control.Entries[sector.FDIndex];
+                List<FDEntry> entries = control[sector.FDIndex];
                 entries.RemoveAll(e => e is FDClimbEntry);
-                if (entries.Count == 0)
-                {
-                    // If there isn't anything left, reset the sector to point to the dummy FD
-                    control.RemoveFloorData(sector);
-                }
             }
         }
         else
         {
             FDClimbEntry climbEntry = new()
             {
-                Setup = new FDSetup(FDFunction.ClimbableWalls),
                 IsPositiveX = IsPositiveX,
                 IsPositiveZ = IsPositiveZ,
                 IsNegativeX = IsNegativeX,
@@ -95,10 +72,10 @@ public class EMLadderFunction : EMRefaceFunction
             };
 
             // We have to add climbable entries after portal, slant and kill Lara entries.
-            List<FDEntry> entries = control.Entries[sector.FDIndex];
+            List<FDEntry> entries = control[sector.FDIndex];
             int index = entries.FindLastIndex(e => e is FDPortalEntry || e is FDSlantEntry || e is FDKillLaraEntry || e is FDTriangulationEntry);
 
-            control.Entries[sector.FDIndex].Insert(index + 1, climbEntry);
+            control[sector.FDIndex].Insert(index + 1, climbEntry);
         }
     }
 }

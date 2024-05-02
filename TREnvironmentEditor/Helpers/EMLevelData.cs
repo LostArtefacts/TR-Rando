@@ -35,6 +35,18 @@ public class EMLevelData
         return Convert(room, NumRooms);
     }
 
+    public EMLocation ConvertLocation(EMLocation location)
+    {
+        return location.Room >= 0 ? location : new()
+        {
+            X = location.X,
+            Y = location.Y,
+            Z = location.Z,
+            Room = ConvertRoom(location.Room),
+            Angle = location.Angle
+        };
+    }
+
     public static short Convert(int itemIndex, long numItems)
     {
         return (short)(itemIndex < 0 ? numItems + itemIndex : itemIndex);

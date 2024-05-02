@@ -1,5 +1,4 @@
-﻿using TRFDControl;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRModelTransporter.Packing;
 using TRTexture16Importer.Textures;
 
@@ -26,13 +25,10 @@ public class TR1LandmarkImporter : AbstractLandmarkImporter<TR1Type, TR1Level>
 
     protected override short? GetRoomFromPortal(TR1Level level, PortalSector portalSector, bool isLevelMirrored)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         TR1Room room = level.Rooms[portalSector.Room];
         int x = isLevelMirrored ? (room.NumXSectors - portalSector.X - 1) : portalSector.X;
         TRRoomSector sector = room.Sectors[x * room.NumZSectors + portalSector.Z];
 
-        return GetSectorPortalRoom(sector, floorData, portalSector.Direction);
+        return GetSectorPortalRoom(sector, level.FloorData, portalSector.Direction);
     }
 }

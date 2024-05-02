@@ -1,6 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -15,40 +13,22 @@ public class EMMovePickupFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         MovePickups(level.Entities, data, location =>
-        {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-        });
+            level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         MovePickups(level.Entities, data, location =>
-        {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-        });
+            level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         MovePickups(level.Entities, data, location =>
-        {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-        });
+            level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     private void MovePickups<T>(IEnumerable<TREntity<T>> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)

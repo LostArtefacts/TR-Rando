@@ -45,4 +45,22 @@ public abstract class TRRoom
         get => Flags.HasFlag(TRRoomFlag.SwampOrNoLensflare);
         set => SetFlag(TRRoomFlag.SwampOrNoLensflare, value);
     }
+
+    public TRRoomSector GetSector(int x, int z, TRUnit unit = TRUnit.World)
+    {
+        switch (unit)
+        {
+            case TRUnit.Room:
+                x /= TRConsts.Step4;
+                z /= TRConsts.Step4;
+                break;
+            case TRUnit.World:
+                x = Math.Min(Math.Max(x, Info.X), Info.X + (NumXSectors - 1) * TRConsts.Step4);
+                z = Math.Min(Math.Max(z, Info.Z), Info.Z + (NumZSectors - 1) * TRConsts.Step4);
+                x = (x - Info.X) / TRConsts.Step4;
+                z = (z - Info.Z) / TRConsts.Step4;
+                break;
+        }
+        return Sectors[x * NumZSectors + z];
+    }
 }

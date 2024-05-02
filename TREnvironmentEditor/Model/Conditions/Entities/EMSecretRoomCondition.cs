@@ -1,7 +1,4 @@
-﻿using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
-using TRLevelControl.Helpers;
+﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Conditions;
@@ -13,9 +10,6 @@ public class EMSecretRoomCondition : BaseEMCondition
 
     protected override bool Evaluate(TR1Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (TRRoomSector sector in level.Rooms[RoomIndex].Sectors)
         {
             if (sector.FDIndex == 0)
@@ -23,7 +17,7 @@ public class EMSecretRoomCondition : BaseEMCondition
                 continue;
             }
 
-            if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null)
+            if (level.FloorData[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger && trigger.Actions.Any(a => a.Action == FDTrigAction.SecretFound))
             {
                 return true;
             }
@@ -45,27 +39,24 @@ public class EMSecretRoomCondition : BaseEMCondition
             // It's difficult to tell if a particular model is being used for secret pickups,
             // so instead we check the FD under each entity in the room to see if it triggers
             // a secret found.
-            FDControl floorData = new();
-            floorData.ParseFromLevel(level);
-
             Predicate<FDEntry> pred = new(
                 e => 
                     e is FDTriggerEntry trig && trig.TrigType == FDTrigType.Pickup
-                 && trig.TrigActionList.Count > 1
-                 && trig.TrigActionList[0].TrigAction == FDTrigAction.Object
-                 && trig.TrigActionList[1].TrigAction == FDTrigAction.SecretFound
+                 && trig.Actions.Count > 1
+                 && trig.Actions[0].Action == FDTrigAction.Object
+                 && trig.Actions[1].Action == FDTrigAction.SecretFound
             );
 
             foreach (TR3Entity entity in roomEntities)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, RoomIndex, level, floorData);
+                TRRoomSector sector = level.GetRoomSector(entity);
                 if (sector.FDIndex == 0)
                 {
                     continue;
                 }
                 
                 ushort entityIndex = (ushort)level.Entities.IndexOf(entity);
-                if (floorData.Entries[sector.FDIndex].Find(pred) is FDTriggerEntry trigger && trigger.TrigActionList[0].Parameter == entityIndex)
+                if (level.FloorData[sector.FDIndex].Find(pred) is FDTriggerEntry trigger && trigger.Actions[0].Parameter == entityIndex)
                 {
                     return true;
                 }

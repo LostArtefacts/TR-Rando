@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using TRFDControl;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Model;
@@ -35,9 +34,6 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
     {
         TR1Entity lara = level.Data.Entities.Find(e => e.TypeID == TR1Type.Lara);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         // If we haven't defined anything for a level, Lara will just be rotated. This is most likely where there are
         // triggers just after Lara's starting spot, so we just skip them here.
         if (!Settings.RotateStartPositionOnly && _startLocations.ContainsKey(level.Name))
@@ -48,12 +44,12 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
             {
                 location = locations[_generator.Next(0, locations.Count)];
             }
-            while (!location.Validated || location.ContainsSecret(level.Data, floorData));
+            while (!location.Validated || location.ContainsSecret(level.Data));
 
             lara.X = location.X;
             lara.Y = location.Y;
             lara.Z = location.Z;
-            lara.Room = (short)location.Room;
+            lara.Room = location.Room;
         }
 
         short currentAngle = lara.Angle;

@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -100,22 +98,18 @@ public class TR3RItemRandomizer : BaseTR3RRandomizer
             exclusions.AddRange(_excludedLocations[level.Name]);
         }
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         foreach (TR3Entity entity in level.Data.Entities)
         {
             if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(entity.GetFloorLocation(loc =>
-                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData)));
+                exclusions.Add(entity.GetFloorLocation(loc => level.Data.GetRoomSector(loc)));
             }
         }
 
         if (level.Script.HasColdWater)
         {
             // Don't put items underwater if it's too cold
-            for (int i = 0; i < level.Data.Rooms.Count; i++)
+            for (short i = 0; i < level.Data.Rooms.Count; i++)
             {
                 if (level.Data.Rooms[i].ContainsWater)
                 {
@@ -190,9 +184,6 @@ public class TR3RItemRandomizer : BaseTR3RRandomizer
             return;
         }
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR3Entity entity = level.Data.Entities[i];
@@ -240,10 +231,7 @@ public class TR3RItemRandomizer : BaseTR3RRandomizer
 
     private void RandomizeKeyItems(TR3RCombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
-        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
+        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data);
         _picker.KeyItemTestAction = (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, level);
         _picker.RoomInfos = level.Data.Rooms
             .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
@@ -261,7 +249,7 @@ public class TR3RItemRandomizer : BaseTR3RRandomizer
             }
 
             _picker.RandomizeKeyItemLocation(
-                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData),
+                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data),
                 level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
         }
     }

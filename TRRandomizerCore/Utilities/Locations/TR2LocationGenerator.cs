@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
@@ -10,20 +9,15 @@ public class TR2LocationGenerator : AbstractLocationGenerator<TR2Type, TR2Level>
     public override bool CrawlspacesAllowed => false;
     public override bool WadingAllowed => true;
 
-    protected override void ReadFloorData(TR2Level level)
-    {
-        _floorData.ParseFromLevel(level);
-    }
-
     protected override TRRoomSector GetSector(Location location, TR2Level level)
     {
-        return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, _floorData);
+        return level.GetRoomSector(location);
     }
 
     protected override TRRoomSector GetSector(int x, int z, int roomIndex, TR2Level level)
     {
         TR2Room room = level.Rooms[roomIndex];
-        return FDUtilities.GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
+        return room.GetSector(x, z);
     }
 
     protected override List<TRRoomSector> GetRoomSectors(TR2Level level, int room)
@@ -89,6 +83,6 @@ public class TR2LocationGenerator : AbstractLocationGenerator<TR2Type, TR2Level>
 
     protected override int GetHeight(TR2Level level, Location location, bool waterOnly)
     {
-        return FDUtilities.GetHeight(location.X, location.Z, (short)location.Room, level, _floorData, waterOnly);
+        return _floorData.GetHeight(location.X, location.Z, location.Room, level.Rooms, waterOnly);
     }
 }

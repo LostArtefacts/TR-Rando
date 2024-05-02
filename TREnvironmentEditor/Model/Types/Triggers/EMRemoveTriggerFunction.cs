@@ -1,7 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -16,15 +13,12 @@ public class EMRemoveTriggerFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         if (Locations != null)
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                RemoveSectorTriggers(sector, control);
+                TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(location));
+                RemoveSectorTriggers(sector, level.FloorData);
             }
         }
 
@@ -32,26 +26,21 @@ public class EMRemoveTriggerFunction : BaseEMFunction
         {
             foreach (int roomNumber in Rooms)
             {
-                RemoveSectorListTriggers(level.Rooms[data.ConvertRoom(roomNumber)].Sectors, control);
+                RemoveSectorListTriggers(level.Rooms[data.ConvertRoom(roomNumber)].Sectors, level.FloorData);
             }
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         if (Locations != null)
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                RemoveSectorTriggers(sector, control);
+                TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(location));
+                RemoveSectorTriggers(sector, level.FloorData);
             }
         }
 
@@ -59,26 +48,21 @@ public class EMRemoveTriggerFunction : BaseEMFunction
         {
             foreach (int roomNumber in Rooms)
             {
-                RemoveSectorListTriggers(level.Rooms[data.ConvertRoom(roomNumber)].Sectors, control);
+                RemoveSectorListTriggers(level.Rooms[data.ConvertRoom(roomNumber)].Sectors, level.FloorData);
             }
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         if (Locations != null)
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                RemoveSectorTriggers(sector, control);
+                TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(location));
+                RemoveSectorTriggers(sector, level.FloorData);
             }
         }
 
@@ -86,11 +70,9 @@ public class EMRemoveTriggerFunction : BaseEMFunction
         {
             foreach (int roomNumber in Rooms)
             {
-                RemoveSectorListTriggers(level.Rooms[data.ConvertRoom(roomNumber)].Sectors, control);
+                RemoveSectorListTriggers(level.Rooms[data.ConvertRoom(roomNumber)].Sectors, level.FloorData);
             }
         }
-
-        control.WriteToLevel(level);
     }
 
     private void RemoveSectorListTriggers(IEnumerable<TRRoomSector> sectors, FDControl control)
@@ -108,12 +90,7 @@ public class EMRemoveTriggerFunction : BaseEMFunction
             return;
         }
 
-        List<FDEntry> entries = control.Entries[sector.FDIndex];
+        List<FDEntry> entries = control[sector.FDIndex];
         entries.RemoveAll(e => e is FDTriggerEntry trig && (TrigTypes?.Contains(trig.TrigType) ?? true));
-        if (entries.Count == 0)
-        {
-            // If there isn't anything left, reset the sector to point to the dummy FD
-            control.RemoveFloorData(sector);
-        }
     }
 }

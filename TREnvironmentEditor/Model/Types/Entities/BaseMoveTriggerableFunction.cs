@@ -1,7 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -27,22 +24,14 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
             return;
         }
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         // Make a new Trigger based on the first one we find (to ensure things like one-shot are copied)
         // then copy only the action list items for this entity. But if there is already another trigger
         // on the tile, just manually copy over one-shot when appending the new action item.
 
-        List<FDTriggerEntry> currentTriggers = FDUtilities.GetEntityTriggers(control, EntityIndex);
-        FDUtilities.RemoveEntityTriggers(level, EntityIndex, control);
+        List<FDTriggerEntry> currentTriggers = level.FloorData.GetEntityTriggers(EntityIndex);
+        level.FloorData.RemoveEntityTriggers(EntityIndex);
 
-        AmendTriggers(currentTriggers, control, delegate (EMLocation location)
-        {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-        });
-
-        control.WriteToLevel(level);
+        AmendTriggers(currentTriggers, level.FloorData, location => level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     protected void RepositionTriggerable(TR2Entity entity, TR2Level level)
@@ -56,26 +45,13 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
 
         if (TriggerLocations == null || TriggerLocations.Count == 0)
         {
-            // We want to keep the original triggers
             return;
         }
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
+        List<FDTriggerEntry> currentTriggers = level.FloorData.GetEntityTriggers(EntityIndex);
+        level.FloorData.RemoveEntityTriggers(EntityIndex);
 
-        // Make a new Trigger based on the first one we find (to ensure things like one-shot are copied)
-        // then copy only the action list items for this entity. But if there is already another trigger
-        // on the tile, just manually copy over one-shot when appending the new action item.
-
-        List<FDTriggerEntry> currentTriggers = FDUtilities.GetEntityTriggers(control, EntityIndex);
-        FDUtilities.RemoveEntityTriggers(level, EntityIndex, control);
-
-        AmendTriggers(currentTriggers, control, delegate (EMLocation location)
-        {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-        });
-
-        control.WriteToLevel(level);
+        AmendTriggers(currentTriggers, level.FloorData, location => level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     protected void RepositionTriggerable(TR3Entity entity, TR3Level level)
@@ -87,23 +63,10 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         entity.Z = Location.Z;
         entity.Room = data.ConvertRoom(Location.Room);
 
-        if (TriggerLocations == null || TriggerLocations.Count == 0)
-        {
-            return;
-        }
+        List<FDTriggerEntry> currentTriggers = level.FloorData.GetEntityTriggers(EntityIndex);
+        level.FloorData.RemoveEntityTriggers(EntityIndex);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        List<FDTriggerEntry> currentTriggers = FDUtilities.GetEntityTriggers(control, EntityIndex);
-        FDUtilities.RemoveEntityTriggers(level, EntityIndex, control);
-
-        AmendTriggers(currentTriggers, control, delegate (EMLocation location)
-        {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-        });
-
-        control.WriteToLevel(level);
+        AmendTriggers(currentTriggers, level.FloorData, location => level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     private void AmendTriggers(List<FDTriggerEntry> currentTriggers, FDControl control, Func<EMLocation, TRRoomSector> sectorGetter)
@@ -118,33 +81,35 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
             }
 
             FDActionItem currentObjectAction = null;
-            FDTriggerEntry currentTrigger = control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) as FDTriggerEntry;
+            FDTriggerEntry currentTrigger = control[sector.FDIndex].Find(e => e is FDTriggerEntry) as FDTriggerEntry;
             if (currentTrigger != null)
             {
-                currentObjectAction = currentTrigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Object);
+                currentObjectAction = currentTrigger.Actions.Find(a => a.Action == FDTrigAction.Object);
             }
 
             FDActionItem newAction = new()
             {
-                TrigAction = FDTrigAction.Object,
-                Parameter = (ushort)EntityIndex
+                Parameter = (short)EntityIndex
             };
 
             if (currentObjectAction != null)
             {
-                currentTrigger.TrigActionList.Add(newAction);
-                if (currentTriggers[0].TrigSetup.OneShot)
+                currentTrigger.Actions.Add(newAction);
+                if (currentTriggers[0].OneShot)
                 {
-                    currentTrigger.TrigSetup.OneShot = true;
+                    currentTrigger.OneShot = true;
                 }
             }
             else
             {
-                control.Entries[sector.FDIndex].Add(new FDTriggerEntry
+                control[sector.FDIndex].Add(new FDTriggerEntry
                 {
-                    Setup = currentTriggers[0].Setup,
-                    TrigSetup = currentTriggers[0].TrigSetup,
-                    TrigActionList = new List<FDActionItem> { newAction }
+                    Mask = currentTriggers[0].Mask,
+                    OneShot = currentTriggers[0].OneShot,
+                    SwitchOrKeyRef = currentTriggers[0].SwitchOrKeyRef,
+                    Timer = currentTriggers[0].Timer,
+                    TrigType = currentTriggers[0].TrigType,
+                    Actions = new() { newAction }
                 });
             }
         }

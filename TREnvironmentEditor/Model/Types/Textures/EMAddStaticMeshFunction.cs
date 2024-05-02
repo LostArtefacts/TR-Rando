@@ -1,6 +1,4 @@
 ﻿using TREnvironmentEditor.Helpers;
-using TRFDControl;
-using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -16,24 +14,21 @@ public class EMAddStaticMeshFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
-            short roomNumber = data.ConvertRoom(location.Room);
-            TR1Room room = level.Rooms[roomNumber];
+            EMLocation position = data.ConvertLocation(location);
+            TR1Room room = level.Rooms[position.Room];
 
             // Only add this mesh if there is nothing else in the same sector.
             if (!IgnoreSectorEntities)
             {
                 bool sectorFree = true;
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level, control);
+                TRRoomSector sector = level.GetRoomSector(position);
                 foreach (TR1Entity entity in level.Entities)
                 {
-                    if (entity.Room == roomNumber)
+                    if (entity.Room == position.Room)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                        TRRoomSector entitySector = level.GetRoomSector(entity);
                         if (entitySector == sector)
                         {
                             sectorFree = false;
@@ -50,12 +45,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
 
             room.StaticMeshes.Add(new()
             {
-                X = location.X,
-                Y = location.Y,
-                Z = location.Z,
+                X = position.X,
+                Y = position.Y,
+                Z = position.Z,
                 Intensity = Intensity,
                 ID = (TR1Type)MeshID,
-                Angle = location.Angle
+                Angle = position.Angle
             });
         }
     }
@@ -64,24 +59,21 @@ public class EMAddStaticMeshFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
-            short roomNumber = data.ConvertRoom(location.Room);
-            TR2Room room = level.Rooms[roomNumber];
+            EMLocation position = data.ConvertLocation(location);
+            TR2Room room = level.Rooms[position.Room];
 
             // Only add this mesh if there is nothing else in the same sector.
             if (!IgnoreSectorEntities)
             {
                 bool sectorFree = true;
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level, control);
+                TRRoomSector sector = level.GetRoomSector(position);
                 foreach (TR2Entity entity in level.Entities)
                 {
-                    if (entity.Room == roomNumber)
+                    if (entity.Room == position.Room)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                        TRRoomSector entitySector = level.GetRoomSector(entity);
                         if (entitySector == sector)
                         {
                             sectorFree = false;
@@ -98,13 +90,13 @@ public class EMAddStaticMeshFunction : BaseEMFunction
 
             room.StaticMeshes.Add(new()
             {
-                X = location.X,
-                Y = location.Y,
-                Z = location.Z,
+                X = position.X,
+                Y = position.Y,
+                Z = position.Z,
                 Intensity1 = Intensity,
                 Intensity2 = Intensity,
                 ID = (TR2Type)MeshID,
-                Angle = location.Angle
+                Angle = position.Angle
             });
         }
     }
@@ -113,24 +105,21 @@ public class EMAddStaticMeshFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
-            short roomNumber = data.ConvertRoom(location.Room);
-            TR3Room room = level.Rooms[roomNumber];
+            EMLocation position = data.ConvertLocation(location);
+            TR3Room room = level.Rooms[position.Room];
 
             // Only add this mesh if there is nothing else in the same sector.
             if (!IgnoreSectorEntities)
             {
                 bool sectorFree = true;
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level, control);
+                TRRoomSector sector = level.GetRoomSector(position);
                 foreach (TR3Entity entity in level.Entities)
                 {
-                    if (entity.Room == roomNumber)
+                    if (entity.Room == position.Room)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                        TRRoomSector entitySector = level.GetRoomSector(entity);
                         if (entitySector == sector)
                         {
                             sectorFree = false;
@@ -147,12 +136,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
 
             room.StaticMeshes.Add(new()
             {
-                X = location.X,
-                Y = location.Y,
-                Z = location.Z,
+                X = position.X,
+                Y = position.Y,
+                Z = position.Z,
                 Colour = Intensity,
                 ID = (TR3Type)MeshID,
-                Angle = location.Angle
+                Angle = position.Angle
             });
         }
     }
