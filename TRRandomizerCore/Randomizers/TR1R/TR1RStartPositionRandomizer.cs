@@ -34,9 +34,6 @@ public class TR1RStartPositionRandomizer : BaseTR1RRandomizer
     {
         TR1Entity lara = level.Data.Entities.Find(e => e.TypeID == TR1Type.Lara);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         if (!Settings.RotateStartPositionOnly && _startLocations.ContainsKey(level.Name))
         {
             List<Location> locations = _startLocations[level.Name];
@@ -45,7 +42,7 @@ public class TR1RStartPositionRandomizer : BaseTR1RRandomizer
             {
                 location = locations[_generator.Next(0, locations.Count)];
             }
-            while (!location.Validated || location.ContainsSecret(level.Data, floorData));
+            while (!location.Validated || location.ContainsSecret(level.Data));
 
             lara.X = location.X;
             lara.Y = location.Y;

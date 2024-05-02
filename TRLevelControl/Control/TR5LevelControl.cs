@@ -191,8 +191,8 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         _level.Rooms = TR5RoomBuilder.ReadRooms(reader);
 
-        uint numFloorData = reader.ReadUInt32();
-        _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
+        TRFDBuilder builder = new(_level.Version.Game);
+        _level.FloorData = builder.ReadFloorData(reader);
     }
 
     private void ReadRawRooms(TRLevelReader reader)
@@ -235,10 +235,12 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
             return;
         }
 
+        List<ushort> floorData = _level.FloorData
+            .Flatten(_level.Rooms.SelectMany(r => r.Sectors));
         TR5RoomBuilder.WriteRooms(writer, _level.Rooms);
 
-        writer.Write((uint)_level.FloorData.Count);
-        writer.Write(_level.FloorData);
+        writer.Write((uint)floorData.Count);
+        writer.Write(floorData);
     }
 
     private void ReadMeshData(TRLevelReader reader)

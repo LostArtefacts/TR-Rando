@@ -40,28 +40,23 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
 
     private void RandomizeMusicTriggers(TR1RCombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         if (Settings.ChangeTriggerTracks)
         {
-            RandomizeFloorTracks(level.Data, floorData);
+            RandomizeFloorTracks(level.Data);
         }
 
         if (Settings.SeparateSecretTracks)
         {
-            RandomizeSecretTracks(level, floorData);
-        }        
-
-        floorData.WriteToLevel(level.Data);
+            RandomizeSecretTracks(level);
+        }
     }
 
-    private void RandomizeFloorTracks(TR1Level level, FDControl floorData)
+    private void RandomizeFloorTracks(TR1Level level)
     {
         _audioRandomizer.ResetFloorMap();
         foreach (TR1Room room in level.Rooms.Where(r => !r.Flags.HasFlag(TRRoomFlag.Unused2)))
         {
-            _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
+            _audioRandomizer.RandomizeFloorTracks(room.Sectors, level.FloorData, _generator, sectorIndex =>
             {
                 return new Vector2
                 (
@@ -72,7 +67,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
         }
     }
 
-    private void RandomizeSecretTracks(TR1RCombinedLevel level, FDControl floorData)
+    private void RandomizeSecretTracks(TR1RCombinedLevel level)
     {
         List<TRAudioTrack> secretTracks = _audioRandomizer.GetTracks(TRAudioCategory.Secret);
 
@@ -86,17 +81,17 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
 
             FDActionItem musicAction = new()
             {
-                TrigAction = FDTrigAction.PlaySoundtrack,
-                Parameter = secretTrack.ID
+                Action = FDTrigAction.PlaySoundtrack,
+                Parameter = (short)secretTrack.ID
             };
 
-            List<FDTriggerEntry> triggers = FDUtilities.GetSecretTriggers(floorData, i);
+            List<FDTriggerEntry> triggers = level.Data.FloorData.GetSecretTriggers(i);
             foreach (FDTriggerEntry trigger in triggers)
             {
-                FDActionItem currentMusicAction = trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.PlaySoundtrack);
+                FDActionItem currentMusicAction = trigger.Actions.Find(a => a.Action == FDTrigAction.PlaySoundtrack);
                 if (currentMusicAction == null)
                 {
-                    trigger.TrigActionList.Add(musicAction);
+                    trigger.Actions.Add(musicAction);
                 }
             }
         }

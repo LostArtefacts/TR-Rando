@@ -1,11 +1,10 @@
 ﻿namespace TRLevelControl.Model;
 
-public class FDEntry
+public abstract class FDEntry : ICloneable
 {
-    public FDSetup Setup { get; set; }
+    public abstract FDFunction GetFunction();
+    public abstract FDEntry Clone();
 
-    public virtual ushort[] Flatten()
-    {
-        return new ushort[] { Setup.Value };
-    }
+    object ICloneable.Clone()
+        => Clone();
 }

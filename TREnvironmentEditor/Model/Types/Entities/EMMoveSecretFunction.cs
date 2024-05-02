@@ -8,11 +8,9 @@ public class EMMoveSecretFunction : EMMovePickupFunction
     public override void ApplyToLevel(TR1Level level)
     {
         Types = new List<short>();
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
         foreach (EMLocation location in SectorLocations)
         {
-            int entityIndex = location.GetContainedSecretEntity(level, floorData);
+            int entityIndex = location.GetContainedSecretEntity(level);
             if (entityIndex != -1)
             {
                 Types.Add((short)level.Entities[entityIndex].TypeID);
@@ -25,11 +23,9 @@ public class EMMoveSecretFunction : EMMovePickupFunction
     public override void ApplyToLevel(TR2Level level)
     {
         Types = new List<short>();
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
         foreach (EMLocation location in SectorLocations)
         {
-            int entityIndex = location.GetContainedSecretEntity(level, floorData);
+            int entityIndex = location.GetContainedSecretEntity(level);
             if (entityIndex != -1)
             {
                 Types.Add((short)level.Entities[entityIndex].TypeID);
@@ -42,11 +38,9 @@ public class EMMoveSecretFunction : EMMovePickupFunction
     public override void ApplyToLevel(TR3Level level)
     {
         Types = new List<short>();
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
         foreach (EMLocation location in SectorLocations)
         {
-            int entityIndex = location.GetContainedSecretEntity(level, floorData);
+            int entityIndex = location.GetContainedSecretEntity(level);
             if (entityIndex != -1)
             {
                 Types.Add((short)level.Entities[entityIndex].TypeID);

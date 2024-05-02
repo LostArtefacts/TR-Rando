@@ -2,79 +2,47 @@
 
 public class FDClimbEntry : FDEntry
 {
-    public bool IsPositiveX
-    {
-        get
-        {
-            return (Setup.SubFunction & (byte)FDClimbDirection.PositiveX) > 0;
-        }
-        set
-        {
-            if (value)
-            {
-                Setup.SubFunction |= (byte)FDClimbDirection.PositiveX;
-            }
-            else
-            {
-                Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveX);
-            }
-        }
-    }
+    public FDClimbDirection Direction { get; set; }
 
-    public bool IsPositiveZ
-    {
-        get
-        {
-            return (Setup.SubFunction & (byte)FDClimbDirection.PositiveZ) > 0;
-        }
-        set
-        {
-            if (value)
-            {
-                Setup.SubFunction |= (byte)FDClimbDirection.PositiveZ;
-            }
-            else
-            {
-                Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveZ);
-            }
-        }
-    }
+    public override FDFunction GetFunction()
+        => FDFunction.ClimbableWalls;
 
     public bool IsNegativeX
     {
-        get
-        {
-            return (Setup.SubFunction & (byte)FDClimbDirection.NegativeX) > 0;
-        }
-        set
-        {
-            if (value)
-            {
-                Setup.SubFunction |= (byte)FDClimbDirection.NegativeX;
-            }
-            else
-            {
-                Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeX);
-            }
-        }
+        get => Direction.HasFlag(FDClimbDirection.NegativeX);
+        set => SetDirection(FDClimbDirection.NegativeX, value);
+    }
+
+    public bool IsPositiveX
+    {
+        get => Direction.HasFlag(FDClimbDirection.PositiveX);
+        set => SetDirection(FDClimbDirection.PositiveX, value);
     }
 
     public bool IsNegativeZ
     {
-        get
+        get => Direction.HasFlag(FDClimbDirection.NegativeZ);
+        set => SetDirection(FDClimbDirection.NegativeZ, value);
+    }
+
+    public bool IsPositiveZ
+    {
+        get => Direction.HasFlag(FDClimbDirection.PositiveZ);
+        set => SetDirection(FDClimbDirection.PositiveZ, value);
+    }
+
+    public void SetDirection(FDClimbDirection direction, bool state)
+    {
+        if (state)
         {
-            return (Setup.SubFunction & (byte)FDClimbDirection.NegativeZ) > 0;
+            Direction |= direction;
         }
-        set
+        else
         {
-            if (value)
-            {
-                Setup.SubFunction |= (byte)FDClimbDirection.NegativeZ;
-            }
-            else
-            {
-                Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeZ);
-            }
+            Direction &= ~direction;
         }
     }
+
+    public override FDEntry Clone()
+        => (FDClimbEntry)MemberwiseClone();
 }

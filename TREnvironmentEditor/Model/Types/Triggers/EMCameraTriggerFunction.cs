@@ -21,27 +21,24 @@ public class EMCameraTriggerFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        ushort cameraIndex;
+        short cameraIndex;
         if (Camera != null)
         {
-            cameraIndex = (ushort)level.Cameras.Count;
+            cameraIndex = (short)level.Cameras.Count;
             level.Cameras.Add(CreateCamera(data));
         }
         else
         {
-            cameraIndex = (ushort)data.ConvertCamera(CameraIndex);
+            cameraIndex = data.ConvertCamera(CameraIndex);
         }
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
 
         if (AttachToItems != null)
         {
             foreach (int item in AttachToItems)
             {
                 TR1Entity attachToEntity = level.Entities[data.ConvertEntity(item)];
-                TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
-                AttachToSector(sector, control, cameraIndex, data);
+                TRRoomSector sector = level.FloorData.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level);
+                AttachToSector(sector, level.FloorData, cameraIndex, data);
             }
         }
 
@@ -49,8 +46,8 @@ public class EMCameraTriggerFunction : BaseEMFunction
         {
             foreach (EMLocation location in AttachToLocations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                AttachToSector(sector, control, cameraIndex, data);
+                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+                AttachToSector(sector, level.FloorData, cameraIndex, data);
             }
         }
 
@@ -60,38 +57,33 @@ public class EMCameraTriggerFunction : BaseEMFunction
             {
                 foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                 {
-                    AttachToSector(sector, control, cameraIndex, data);
+                    AttachToSector(sector, level.FloorData, cameraIndex, data);
                 }
             }
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        ushort cameraIndex;
+        short cameraIndex;
         if (Camera != null)
         {
-            cameraIndex = (ushort)level.Cameras.Count;
+            cameraIndex = (short)level.Cameras.Count;
             level.Cameras.Add(CreateCamera(data));
         }
         else
         {
-            cameraIndex = (ushort)data.ConvertCamera(CameraIndex);
+            cameraIndex = data.ConvertCamera(CameraIndex);
         }
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
 
         if (AttachToItems != null)
         {
             foreach (int item in AttachToItems)
             {
                 TR2Entity attachToEntity = level.Entities[data.ConvertEntity(item)];
-                TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
-                AttachToSector(sector, control, cameraIndex, data);
+                TRRoomSector sector = level.FloorData.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level);
+                AttachToSector(sector, level.FloorData, cameraIndex, data);
             }
         }
 
@@ -99,8 +91,8 @@ public class EMCameraTriggerFunction : BaseEMFunction
         {
             foreach (EMLocation location in AttachToLocations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                AttachToSector(sector, control, cameraIndex, data);
+                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+                AttachToSector(sector, level.FloorData, cameraIndex, data);
             }
         }
 
@@ -110,38 +102,33 @@ public class EMCameraTriggerFunction : BaseEMFunction
             {
                 foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                 {
-                    AttachToSector(sector, control, cameraIndex, data);
+                    AttachToSector(sector, level.FloorData, cameraIndex, data);
                 }
             }
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        ushort cameraIndex;
+        short cameraIndex;
         if (Camera != null)
         {
-            cameraIndex = (ushort)level.Cameras.Count;
+            cameraIndex = (short)level.Cameras.Count;
             level.Cameras.Add(CreateCamera(data));
         }
         else
         {
-            cameraIndex = (ushort)data.ConvertCamera(CameraIndex);
+            cameraIndex = data.ConvertCamera(CameraIndex);
         }
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
 
         if (AttachToItems != null)
         {
             foreach (int item in AttachToItems)
             {
                 TR3Entity attachToEntity = level.Entities[data.ConvertEntity(item)];
-                TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
-                AttachToSector(sector, control, cameraIndex, data);
+                TRRoomSector sector = level.FloorData.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level);
+                AttachToSector(sector, level.FloorData, cameraIndex, data);
             }
         }
 
@@ -149,8 +136,8 @@ public class EMCameraTriggerFunction : BaseEMFunction
         {
             foreach (EMLocation location in AttachToLocations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                AttachToSector(sector, control, cameraIndex, data);
+                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+                AttachToSector(sector, level.FloorData, cameraIndex, data);
             }
         }
 
@@ -160,17 +147,15 @@ public class EMCameraTriggerFunction : BaseEMFunction
             {
                 foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                 {
-                    AttachToSector(sector, control, cameraIndex, data);
+                    AttachToSector(sector, level.FloorData, cameraIndex, data);
                 }
             }
         }
-
-        control.WriteToLevel(level);
     }
 
     private TRCamera CreateCamera(EMLevelData data)
     {
-        return new TRCamera
+        return new()
         {
             X = Camera.X,
             Y = Camera.Y,
@@ -180,28 +165,26 @@ public class EMCameraTriggerFunction : BaseEMFunction
         };
     }
 
-    private void AttachToSector(TRRoomSector sector, FDControl control, ushort cameraIndex, EMLevelData data)
+    private void AttachToSector(TRRoomSector sector, FDControl control, short cameraIndex, EMLevelData data)
     {
         if (sector.FDIndex != 0)
         {
-            if (control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+            if (control[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
                 && trigger.TrigType != FDTrigType.Dummy)
             {
-                trigger.TrigActionList.Add(new FDActionItem
+                trigger.Actions.Add(new FDActionItem
                 {
-                    TrigAction = FDTrigAction.Camera,
-                    Value = 1024,
+                    Action = FDTrigAction.Camera,
                     CamAction = CameraAction,
                     Parameter = cameraIndex
                 });
 
                 if (LookAtItem != ushort.MaxValue)
                 {
-                    trigger.TrigActionList.Add(new FDActionItem
+                    trigger.Actions.Add(new FDActionItem
                     {
-                        TrigAction = FDTrigAction.LookAtItem,
-                        Value = 6158,
-                        Parameter = (ushort)data.ConvertEntity(LookAtItem)
+                        Action = FDTrigAction.LookAtItem,
+                        Parameter = data.ConvertEntity(LookAtItem)
                     });
                 }
             }

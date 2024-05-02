@@ -60,28 +60,23 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
 
     private void RandomizeMusicTriggers(TR2RCombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         if (Settings.ChangeTriggerTracks)
         {
-            RandomizeFloorTracks(level.Data, floorData);
+            RandomizeFloorTracks(level.Data);
         }
 
         if (Settings.SeparateSecretTracks)
         {
-            RandomizeSecretTracks(level.Data, floorData);
+            RandomizeSecretTracks(level.Data);
         }
-
-        floorData.WriteToLevel(level.Data);
     }
 
-    private void RandomizeFloorTracks(TR2Level level, FDControl floorData)
+    private void RandomizeFloorTracks(TR2Level level)
     {
         _audioRandomizer.ResetFloorMap();
         foreach (TR2Room room in level.Rooms)
         {
-            _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
+            _audioRandomizer.RandomizeFloorTracks(room.Sectors, level.FloorData, _generator, sectorIndex =>
             {
                 return new Vector2
                 (
@@ -92,25 +87,25 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
         }
     }
 
-    private void RandomizeSecretTracks(TR2Level level, FDControl floorData)
+    private void RandomizeSecretTracks(TR2Level level)
     {
         List<TRAudioTrack> secretTracks = _audioRandomizer.GetTracks(TRAudioCategory.Secret);
         Dictionary<int, TR2Entity> secrets = GetSecretItems(level);
         foreach (int entityIndex in secrets.Keys)
         {
             TR2Entity secret = secrets[entityIndex];
-            TRRoomSector sector = FDUtilities.GetRoomSector(secret.X, secret.Y, secret.Z, secret.Room, level, floorData);
+            TRRoomSector sector = level.FloorData.GetRoomSector(secret.X, secret.Y, secret.Z, secret.Room, level);
             if (sector.FDIndex == 0)
             {
-                floorData.CreateFloorData(sector);
+                level.FloorData.CreateFloorData(sector);
             }
 
-            List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+            List<FDEntry> entries = level.FloorData[sector.FDIndex];
             FDTriggerEntry existingTriggerEntry = entries.Find(e => e is FDTriggerEntry) as FDTriggerEntry;
             bool existingEntityPickup = false;
             if (existingTriggerEntry != null)
             {
-                if (existingTriggerEntry.TrigType == FDTrigType.Pickup && existingTriggerEntry.TrigActionList[0].Parameter == entityIndex)
+                if (existingTriggerEntry.TrigType == FDTrigType.Pickup && existingTriggerEntry.Actions[0].Parameter == entityIndex)
                 {
                     existingEntityPickup = true;
                 }
@@ -122,25 +117,23 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
 
             FDActionItem musicAction = new()
             {
-                TrigAction = FDTrigAction.PlaySoundtrack,
-                Parameter = secretTracks[_generator.Next(0, secretTracks.Count)].ID
+                Action = FDTrigAction.PlaySoundtrack,
+                Parameter = (short)secretTracks[_generator.Next(0, secretTracks.Count)].ID
             };
 
             if (existingEntityPickup)
             {
-                existingTriggerEntry.TrigActionList.Add(musicAction);
+                existingTriggerEntry.Actions.Add(musicAction);
             }
             else
             {
                 entries.Add(new FDTriggerEntry
                 {
-                    Setup = new FDSetup { Value = 1028 },
-                    TrigSetup = new FDTrigSetup { Value = 15872 },
-                    TrigActionList = new List<FDActionItem>
+                    Actions = new()
                     {
-                        new() {
-                            TrigAction = FDTrigAction.Object,
-                            Parameter = (ushort)entityIndex
+                        new()
+                        {
+                            Parameter = (short)entityIndex
                         },
                         musicAction
                     }

@@ -63,28 +63,23 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
 
     private void RandomizeMusicTriggers(TR2CombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         if (Settings.ChangeTriggerTracks)
         {
-            RandomizeFloorTracks(level.Data, floorData);
+            RandomizeFloorTracks(level.Data);
         }
 
         if (Settings.SeparateSecretTracks)
         {
-            RandomizeSecretTracks(level.Data, floorData);
+            RandomizeSecretTracks(level.Data);
         }
-
-        floorData.WriteToLevel(level.Data);
     }
 
-    private void RandomizeFloorTracks(TR2Level level, FDControl floorData)
+    private void RandomizeFloorTracks(TR2Level level)
     {
         _audioRandomizer.ResetFloorMap();
         foreach (TR2Room room in level.Rooms)
         {
-            _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
+            _audioRandomizer.RandomizeFloorTracks(room.Sectors, level.FloorData, _generator, sectorIndex =>
             {
                 // Get the midpoint of the tile in world coordinates
                 return new Vector2
@@ -96,7 +91,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         }
     }
 
-    private void RandomizeSecretTracks(TR2Level level, FDControl floorData)
+    private void RandomizeSecretTracks(TR2Level level)
     {
         // Generate new triggers for secrets to allow different sounds for each one
         List<TRAudioTrack> secretTracks = _audioRandomizer.GetTracks(TRAudioCategory.Secret);
@@ -104,19 +99,19 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         foreach (int entityIndex in secrets.Keys)
         {
             TR2Entity secret = secrets[entityIndex];
-            TRRoomSector sector = FDUtilities.GetRoomSector(secret.X, secret.Y, secret.Z, secret.Room, level, floorData);
+            TRRoomSector sector = level.FloorData.GetRoomSector(secret.X, secret.Y, secret.Z, secret.Room, level);
             if (sector.FDIndex == 0)
             {
                 // The secret is positioned on a tile that currently has no FD, so create it
-                floorData.CreateFloorData(sector);
+                level.FloorData.CreateFloorData(sector);
             }
 
-            List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+            List<FDEntry> entries = level.FloorData[sector.FDIndex];
             FDTriggerEntry existingTriggerEntry = entries.Find(e => e is FDTriggerEntry) as FDTriggerEntry;
             bool existingEntityPickup = false;
             if (existingTriggerEntry != null)
             {
-                if (existingTriggerEntry.TrigType == FDTrigType.Pickup && existingTriggerEntry.TrigActionList[0].Parameter == entityIndex)
+                if (existingTriggerEntry.TrigType == FDTrigType.Pickup && existingTriggerEntry.Actions[0].Parameter == entityIndex)
                 {
                     // GW gold secret (default location) already has a pickup trigger to spawn the
                     // TRex (or whatever enemy) so we'll just append to that item list here
@@ -134,29 +129,24 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
             // Generate a new music action
             FDActionItem musicAction = new()
             {
-                TrigAction = FDTrigAction.PlaySoundtrack,
-                Parameter = secretTracks[_generator.Next(0, secretTracks.Count)].ID
+                Action = FDTrigAction.PlaySoundtrack,
+                Parameter = (short)secretTracks[_generator.Next(0, secretTracks.Count)].ID
             };
 
             // For GW default gold, just append it
             if (existingEntityPickup)
             {
-                existingTriggerEntry.TrigActionList.Add(musicAction);
+                existingTriggerEntry.Actions.Add(musicAction);
             }
             else
             {
                 entries.Add(new FDTriggerEntry
                 {
-                    // The values here are replicated from Trigger#112 (in trview) in GW.
-                    // The first action list must be the entity being picked up and so
-                    // remaining action list items are actioned on pick up.
-                    Setup = new FDSetup { Value = 1028 },
-                    TrigSetup = new FDTrigSetup { Value = 15872 },
-                    TrigActionList = new List<FDActionItem>
+                    Actions = new List<FDActionItem>
                     {
-                        new() {
-                            TrigAction = FDTrigAction.Object,
-                            Parameter = (ushort)entityIndex
+                        new()
+                        {
+                            Parameter = (short)entityIndex
                         },
                         musicAction
                     }

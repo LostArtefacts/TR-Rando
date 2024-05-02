@@ -37,16 +37,11 @@ public class TR2EnemyAdjuster : TR2LevelProcessor
 
     private void AdjustInstanceEnemies()
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(_levelInstance.Data);
-
         foreach (int enemyIndex in _enemyTargets[_levelInstance.Name])
         {
             _levelInstance.Data.Entities[enemyIndex].TypeID = TR2Type.CameraTarget_N;
-            FDUtilities.RemoveEntityTriggers(_levelInstance.Data, enemyIndex, floorData);
+            _levelInstance.Data.FloorData.RemoveEntityTriggers(_levelInstance.Data.Rooms.SelectMany(r => r.Sectors), enemyIndex);
             ItemFactory?.FreeItem(_levelInstance.Name, enemyIndex);
         }
-
-        floorData.WriteToLevel(_levelInstance.Data);
     }
 }

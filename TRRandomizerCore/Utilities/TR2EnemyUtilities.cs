@@ -477,16 +477,11 @@ public static class TR2EnemyUtilities
         {
             int entityID = level.Entities.IndexOf(entity);
 
-            FDControl fdControl = new();
-            fdControl.ParseFromLevel(level);
-
-            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdControl, entityID);
+            List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(entityID);
             foreach (FDTriggerEntry trigger in triggers)
             {
-                trigger.TrigSetup.OneShot = true;
+                trigger.OneShot = true;
             }
-
-            fdControl.WriteToLevel(level);
         }
     }
 

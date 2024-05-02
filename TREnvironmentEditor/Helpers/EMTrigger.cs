@@ -2,6 +2,7 @@
 
 namespace TREnvironmentEditor.Helpers;
 
+// This is redundant now - to be eliminated
 public class EMTrigger
 {
     private static readonly byte _defaultMask = 31;
@@ -22,21 +23,17 @@ public class EMTrigger
     {
         FDTriggerEntry entry = new()
         {
-            Setup = new FDSetup(FDFunction.Trigger),
             TrigType = TrigType,
-            SwitchOrKeyRef = (ushort)levelData.ConvertEntity(SwitchOrKeyRef),
-            TrigSetup = new FDTrigSetup
-            {
-                OneShot = OneShot,
-                Mask = Mask,
-                Timer = Timer
-            },
-            TrigActionList = new List<FDActionItem>()
+            SwitchOrKeyRef = levelData.ConvertEntity(SwitchOrKeyRef),
+            OneShot = OneShot,
+            Mask = Mask,
+            Timer = Timer,
+            Actions = new()
         };
 
         foreach (EMTriggerAction action in Actions)
         {
-            entry.TrigActionList.Add(action.ToFDAction(levelData));
+            entry.Actions.Add(action.ToFDAction(levelData));
         }
 
         return entry;
@@ -47,14 +44,14 @@ public class EMTrigger
         EMTrigger trigger = new()
         {
             TrigType = entry.TrigType,
-            OneShot = entry.TrigSetup.OneShot,
-            Mask = entry.TrigSetup.Mask,
-            Timer = entry.TrigSetup.Timer,
-            SwitchOrKeyRef = (short)entry.SwitchOrKeyRef,
-            Actions = new List<EMTriggerAction>()
+            OneShot = entry.OneShot,
+            Mask = entry.Mask,
+            Timer = entry.Timer,
+            SwitchOrKeyRef = entry.SwitchOrKeyRef,
+            Actions = new()
         };
 
-        foreach (FDActionItem action in entry.TrigActionList)
+        foreach (FDActionItem action in entry.Actions)
         {
             trigger.Actions.Add(EMTriggerAction.FromFDAction(action));
         }

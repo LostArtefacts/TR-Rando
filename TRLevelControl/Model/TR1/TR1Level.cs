@@ -4,7 +4,6 @@ public class TR1Level : TRLevelBase
 {
     public List<TRTexImage8> Images8 { get; set; }
     public List<TR1Room> Rooms { get; set; }
-    public List<ushort> FloorData { get; set; }
     public TRDictionary<TR1Type, TRModel> Models { get; set; }
     public TRDictionary<TR1Type, TRStaticMesh> StaticMeshes { get; set; }
     public List<TRObjectTexture> ObjectTextures { get; set; }

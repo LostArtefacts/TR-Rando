@@ -147,16 +147,16 @@ public static class TR1EnemyUtilities
         return entities;
     }
 
-    public static void SetEntityTriggers(TR1Level level, TR1Entity entity, FDControl floorData)
+    public static void SetEntityTriggers(TR1Level level, TR1Entity entity)
     {
         if (_oneShotEnemies.Contains(entity.TypeID))
         {
             int entityID = level.Entities.IndexOf(entity);
 
-            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(floorData, entityID);
+            List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(entityID);
             foreach (FDTriggerEntry trigger in triggers)
             {
-                trigger.TrigSetup.OneShot = true;
+                trigger.OneShot = true;
             }
         }
     }
@@ -583,7 +583,7 @@ public static class TR1EnemyUtilities
         return !level.Data.Models.ContainsKey(type);
     }
 
-    public static bool CanDropItems(TR1Entity entity, TR1CombinedLevel level, FDControl floorData)
+    public static bool CanDropItems(TR1Entity entity, TR1CombinedLevel level)
     {
         if (IsEmptyEgg(entity, level))
         {
@@ -592,8 +592,8 @@ public static class TR1EnemyUtilities
 
         if (entity.TypeID == TR1Type.Pierre)
         {
-            return FDUtilities.GetEntityTriggers(floorData, level.Data.Entities.IndexOf(entity))
-                .All(t => t.TrigSetup.OneShot);
+            return level.Data.FloorData.GetEntityTriggers(level.Data.Entities.IndexOf(entity))
+                .All(t => t.OneShot);
         }
 
         return TR1TypeUtilities.IsEnemyType(entity.TypeID);

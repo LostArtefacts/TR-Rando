@@ -9,34 +9,34 @@ public class EMTriggerAction
 
     public FDActionItem ToFDAction(EMLevelData levelData)
     {
-        ushort parameter = (ushort)Parameter;
+        short parameter = Parameter;
         if (Parameter < 0)
         {
             switch (Action)
             {
                 case FDTrigAction.Camera:
-                    parameter = (ushort)(levelData.NumCameras + Parameter);
+                    parameter = (short)(levelData.NumCameras + Parameter);
                     break;
                 case FDTrigAction.LookAtItem:
                 case FDTrigAction.Object:
-                    parameter = (ushort)(levelData.NumEntities + Parameter);
+                    parameter = (short)(levelData.NumEntities + Parameter);
                     break;
             }
         }
 
         return new FDActionItem
         {
-            TrigAction = Action,
+            Action = Action,
             Parameter = parameter
         };
     }
 
     public static EMTriggerAction FromFDAction(FDActionItem action)
     {
-        return new EMTriggerAction
+        return new()
         {
-            Action = action.TrigAction,
-            Parameter = (short)action.Parameter
+            Action = action.Action,
+            Parameter = action.Parameter
         };
     }
 }

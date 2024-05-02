@@ -14,9 +14,6 @@ public class EMAddStaticMeshFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
             short roomNumber = data.ConvertRoom(location.Room);
@@ -26,12 +23,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
             if (!IgnoreSectorEntities)
             {
                 bool sectorFree = true;
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level, control);
+                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level);
                 foreach (TR1Entity entity in level.Entities)
                 {
                     if (entity.Room == roomNumber)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
                         if (entitySector == sector)
                         {
                             sectorFree = false;
@@ -62,9 +59,6 @@ public class EMAddStaticMeshFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
             short roomNumber = data.ConvertRoom(location.Room);
@@ -74,12 +68,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
             if (!IgnoreSectorEntities)
             {
                 bool sectorFree = true;
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level, control);
+                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level);
                 foreach (TR2Entity entity in level.Entities)
                 {
                     if (entity.Room == roomNumber)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
                         if (entitySector == sector)
                         {
                             sectorFree = false;
@@ -111,9 +105,6 @@ public class EMAddStaticMeshFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
             short roomNumber = data.ConvertRoom(location.Room);
@@ -123,12 +114,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
             if (!IgnoreSectorEntities)
             {
                 bool sectorFree = true;
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level, control);
+                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level);
                 foreach (TR3Entity entity in level.Entities)
                 {
                     if (entity.Room == roomNumber)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
                         if (entitySector == sector)
                         {
                             sectorFree = false;

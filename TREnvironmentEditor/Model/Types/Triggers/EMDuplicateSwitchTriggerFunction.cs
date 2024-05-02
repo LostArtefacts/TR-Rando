@@ -18,15 +18,8 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         base.ApplyToLevel(level);
 
         // Go one step further and replace the duplicated trigger with the new switch ref
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        UpdateTriggers(data, control, delegate (EMLocation location)
-        {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-        });
-
-        control.WriteToLevel(level);
+        UpdateTriggers(data, level.FloorData, location =>
+            level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level));
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -35,19 +28,10 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
 
         SetupLocations(data, level.Entities);
 
-        // Duplicate the triggers to the switch's location
         base.ApplyToLevel(level);
 
-        // Go one step further and replace the duplicated trigger with the new switch ref
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        UpdateTriggers(data, control, delegate (EMLocation location)
-        {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-        });
-
-        control.WriteToLevel(level);
+        UpdateTriggers(data, level.FloorData, location =>
+            level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level));
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -58,15 +42,8 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
 
         base.ApplyToLevel(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        UpdateTriggers(data, control, delegate (EMLocation location)
-        {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-        });
-
-        control.WriteToLevel(level);
+        UpdateTriggers(data, level.FloorData, location =>
+            level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level));
     }
 
     private void SetupLocations(EMLevelData data, List<TR1Entity> entities)
@@ -146,12 +123,12 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
 
     private void UpdateTriggers(EMLevelData data, FDControl control, Func<EMLocation, TRRoomSector> sectorGetter)
     {
-        ushort newSwitchIndex = (ushort)data.ConvertEntity(NewSwitchIndex);
+        short newSwitchIndex = data.ConvertEntity(NewSwitchIndex);
         foreach (EMLocation location in Locations)
         {
             TRRoomSector baseSector = sectorGetter.Invoke(location);
 
-            List<FDEntry> keyTriggers = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
+            List<FDEntry> keyTriggers = control[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
             foreach (FDEntry entry in keyTriggers)
             {
                 (entry as FDTriggerEntry).SwitchOrKeyRef = newSwitchIndex;

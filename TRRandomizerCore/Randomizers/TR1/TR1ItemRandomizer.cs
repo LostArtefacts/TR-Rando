@@ -309,9 +309,6 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             return;
         }
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         // TR1X allows us to keep the end-level stats accurate. All generated locations
         // should be reachable, but this may be modifed in TestEnemyItemDrop where items
         // are hidden.
@@ -331,7 +328,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             {
                 _picker.RandomizePickupLocation(entity);
                 entity.Intensity = 0;
-                TestEnemyItemDrop(level, entity, floorData);
+                TestEnemyItemDrop(level, entity);
             }
         }
     }
@@ -344,15 +341,12 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             exclusions.AddRange(_excludedLocations[level.Name]);
         }
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         foreach (TR1Entity entity in level.Data.Entities)
         {
             if (!TR1TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(entity.GetFloorLocation(loc =>
-                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData)));
+                    level.Data.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data)));
             }
         }
 
@@ -372,10 +366,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
     private void RandomizeKeyItems(TR1CombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
-        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
+        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data);
         _picker.RoomInfos = level.Data.Rooms
             .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
             .ToList();
@@ -404,13 +395,13 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                 continue;
             }
 
-            bool hasPickupTrigger = LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData);
+            bool hasPickupTrigger = LocationUtilities.HasPickupTriger(entity, i, level.Data);
             _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger,
                 sequence, level.Data.Rooms[entity.Room].Info);
 
             if (Settings.AllowEnemyKeyDrops && !hasPickupTrigger)
             {
-                TestEnemyItemDrop(level, entity, floorData);
+                TestEnemyItemDrop(level, entity);
             }
         }
     }
@@ -428,10 +419,10 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         return sequence;
     }
 
-    private void TestEnemyItemDrop(TR1CombinedLevel level, TR1Entity entity, FDControl floorData)
+    private void TestEnemyItemDrop(TR1CombinedLevel level, TR1Entity entity)
     {
         TRRoomSector sectorFunc(Location loc) =>
-            FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
+            level.Data.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data);
 
         // There may be several enemies in one spot e.g. in cloned enemy mode. Pick one
         // at random for each call of this method. Always exclude empty eggs.
@@ -441,7 +432,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             .FindAll(e => TR1TypeUtilities.IsEnemyType(e.TypeID) || e.TypeID == TR1Type.AdamEgg)
             .FindAll(e => e.GetFloorLocation(sectorFunc).IsEquivalent(floor));
 
-        if (enemies.Count == 0 || enemies.All(e => !TR1EnemyUtilities.CanDropItems(e, level, floorData)))
+        if (enemies.Count == 0 || enemies.All(e => !TR1EnemyUtilities.CanDropItems(e, level)))
         {
             return;
         }
@@ -451,7 +442,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         {
             enemy = enemies[_generator.Next(0, enemies.Count)];
         }
-        while (!TR1EnemyUtilities.CanDropItems(enemy, level, floorData));
+        while (!TR1EnemyUtilities.CanDropItems(enemy, level));
 
         level.Script.AddItemDrops(level.Data.Entities.IndexOf(enemy), ItemUtilities.ConvertToScriptItem(entity.TypeID));
         ItemUtilities.HideEntity(entity);
@@ -502,14 +493,13 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         // For key items, some may be used as secrets so look for entity instances of each to determine what's what
         _spriteRandomizer.SecretItemTypes = new List<TR1Type>();
         _spriteRandomizer.KeyItemTypes = new List<TR1Type>();
-        FDControl floorData = new();
-        floorData.ParseFromLevel(_levelInstance.Data);
+
         foreach (TR1Type type in TR1TypeUtilities.GetKeyItemTypes())
         {
             int typeInstanceIndex = _levelInstance.Data.Entities.FindIndex(e => e.TypeID == type);
             if (typeInstanceIndex != -1)
             {
-                if (IsSecretItem(_levelInstance.Data.Entities[typeInstanceIndex], typeInstanceIndex, _levelInstance.Data, floorData))
+                if (IsSecretItem(_levelInstance.Data.Entities[typeInstanceIndex], typeInstanceIndex, _levelInstance.Data))
                 {
                     _spriteRandomizer.SecretItemTypes.Add(type);
                 }
@@ -524,15 +514,15 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         _spriteRandomizer.Randomize(_generator);
     }
 
-    private static bool IsSecretItem(TR1Entity entity, int entityIndex, TR1Level level, FDControl floorData)
+    private static bool IsSecretItem(TR1Entity entity, int entityIndex, TR1Level level)
     {
-        TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+        TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
         if (sector.FDIndex != 0)
         {
-            return floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+            return level.FloorData[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
                 && trigger.TrigType == FDTrigType.Pickup
-                && trigger.TrigActionList[0].Parameter == entityIndex
-                && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null;
+                && trigger.Actions[0].Parameter == entityIndex
+                && trigger.Actions.Find(a => a.Action == FDTrigAction.SecretFound) != null;
         }
 
         return false;

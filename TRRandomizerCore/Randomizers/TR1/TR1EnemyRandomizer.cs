@@ -191,12 +191,10 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         {
             // There is a triggered centaur in room 18, plus several untriggered eggs for show.
             // Move the centaur, and free the eggs to be repurposed elsewhere.
-            FDControl floorData = new();
-            floorData.ParseFromLevel(level.Data);
             foreach (TR1Entity enemy in level.Data.Entities.Where(e => e.Room == _unreachableStrongholdRoom))
             {
                 int index = level.Data.Entities.IndexOf(enemy);
-                if (FDUtilities.GetEntityTriggers(floorData, index).Count == 0)
+                if (level.Data.FloorData.GetEntityTriggers(index).Count == 0)
                 {
                     enemy.TypeID = TR1Type.CameraTarget_N;
                     ItemFactory.FreeItem(level.Name, index);
@@ -513,9 +511,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         // First iterate through any enemies that are restricted by room
         Dictionary<TR1Type, List<int>> enemyRooms = TR1EnemyUtilities.GetRestrictedEnemyRooms(level.Name, difficulty);
         if (enemyRooms != null)
@@ -563,7 +558,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     targetEntity.TypeID = TR1TypeUtilities.TranslateAlias(entity);
 
                     // #146 Ensure OneShot triggers are set for this enemy if needed
-                    TR1EnemyUtilities.SetEntityTriggers(level.Data, targetEntity, floorData);
+                    TR1EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
 
                     if (Settings.HideEnemiesUntilTriggered || entity == TR1Type.Adam)
                     {
@@ -598,7 +593,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
 
             List<TR1Type> enemyPool;
-            if (difficulty == RandoDifficulty.Default && IsEnemyInOrAboveWater(currentEntity, level.Data, floorData))
+            if (difficulty == RandoDifficulty.Default && IsEnemyInOrAboveWater(currentEntity, level.Data))
             {
                 // Make sure we replace with another water enemy
                 enemyPool = enemies.Water;
@@ -734,7 +729,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
             if (newEntityType == TR1Type.CentaurStatue)
             {
-                AdjustCentaurStatue(currentEntity, level.Data, floorData);
+                AdjustCentaurStatue(currentEntity, level.Data);
             }
             else if (newEntityType == TR1Type.Adam)
             {
@@ -747,7 +742,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             currentEntity.TypeID = TR1TypeUtilities.TranslateAlias(newEntityType);
 
             // #146 Ensure OneShot triggers are set for this enemy if needed
-            TR1EnemyUtilities.SetEntityTriggers(level.Data, currentEntity, floorData);
+            TR1EnemyUtilities.SetEntityTriggers(level.Data, currentEntity);
 
             if (currentEntity.TypeID == TR1Type.Pierre
                 && _pierreLocations.ContainsKey(level.Name)
@@ -771,7 +766,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         {
             TR1Entity pierreReplacement = level.Data.Entities[TR1ItemRandomizer.TihocanPierreIndex];
             if (Settings.AllowEnemyKeyDrops
-                && TR1EnemyUtilities.CanDropItems(pierreReplacement, level, floorData))
+                && TR1EnemyUtilities.CanDropItems(pierreReplacement, level))
             {
                 // Whichever enemy has taken Pierre's place will drop the items. Move the pickups to the enemy for trview lookup.
                 level.Script.AddItemDrops(TR1ItemRandomizer.TihocanPierreIndex, TR1ItemRandomizer.TihocanEndItems
@@ -795,8 +790,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 level.Data.Entities.AddRange(TR1ItemRandomizer.TihocanEndItems);
             }
         }
-
-        floorData.WriteToLevel(level.Data);
 
         // Fix missing OG animation SFX
         FixEnemyAnimations(level);
@@ -841,7 +834,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         return count;
     }
 
-    private static bool IsEnemyInOrAboveWater(TR1Entity entity, TR1Level level, FDControl floorData)
+    private static bool IsEnemyInOrAboveWater(TR1Entity entity, TR1Level level)
     {
         if (level.Rooms[entity.Room].ContainsWater)
         {
@@ -849,14 +842,14 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         // Example where we have to search is Midas room 21
-        TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y - TRConsts.Step1, entity.Z, entity.Room, level, floorData);
+        TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y - TRConsts.Step1, entity.Z, entity.Room, level);
         while (sector.RoomBelow != TRConsts.NoRoom)
         {
             if (level.Rooms[sector.RoomBelow].ContainsWater)
             {
                 return true;
             }
-            sector = FDUtilities.GetRoomSector(entity.X, (sector.Floor + 1) * TRConsts.Step1, entity.Z, sector.RoomBelow, level, floorData);
+            sector = level.FloorData.GetRoomSector(entity.X, (sector.Floor + 1) * TRConsts.Step1, entity.Z, sector.RoomBelow, level);
         }
         return false;
     }
@@ -960,27 +953,28 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
     }
 
-    private static void AdjustCentaurStatue(TR1Entity entity, TR1Level level, FDControl floorData)
+    private static void AdjustCentaurStatue(TR1Entity entity, TR1Level level)
     {
         // If they're floating, they tend not to trigger as Lara's not within range
         TR1LocationGenerator locationGenerator = new();
 
         int y = entity.Y;
         short room = entity.Room;
-        TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, y, entity.Z, room, level, floorData);
+        TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, y, entity.Z, room, level);
         while (sector.RoomBelow != TRConsts.NoRoom)
         {
             y = (sector.Floor + 1) * TRConsts.Step1;
             room = sector.RoomBelow;
-            sector = FDUtilities.GetRoomSector(entity.X, y, entity.Z, room, level, floorData);
+            sector = level.FloorData.GetRoomSector(entity.X, y, entity.Z, room, level);
         }
 
         entity.Y = sector.Floor * TRConsts.Step1;
         entity.Room = room;
 
+        // Change this GetHeight
         if (sector.FDIndex != 0)
         {
-            FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == FDSlantType.FloorSlant);
+            FDEntry entry = level.FloorData[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == FDSlantType.Floor);
             if (entry is FDSlantEntry slant)
             {
                 Vector4? bestMidpoint = locationGenerator.GetBestSlantMidpoint(slant);
@@ -1031,13 +1025,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         List<TR1Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
         // #409 Eggs are excluded as they are not part of the cross-level enemy pool, so create copies of any
         // of these using their actual types so to ensure they are part of the difficulty calculation.
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR1Entity entity = level.Data.Entities[i];
             if ((entity.TypeID == TR1Type.AtlanteanEgg || entity.TypeID == TR1Type.AdamEgg)
-                && FDUtilities.GetEntityTriggers(floorData, i).Count > 0)
+                && level.Data.FloorData.GetEntityTriggers(i).Count > 0)
             {
                 TR1Entity resultantEnemy = new()
                 {
@@ -1273,20 +1265,15 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     {
         // Fix the bat trigger in Colosseum. Done outside of environment mods to allow for cloning.
         // Item 74 is duplicated in each trigger.
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
-        foreach (FDTriggerEntry trigger in FDUtilities.GetEntityTriggers(floorData, 74))
+        foreach (FDTriggerEntry trigger in level.Data.FloorData.GetEntityTriggers(74))
         {
-            List<FDActionItem> actions = trigger.TrigActionList
-                .FindAll(a => a.TrigAction == FDTrigAction.Object && a.Parameter == 74);
+            List<FDActionItem> actions = trigger.Actions
+                .FindAll(a => a.Action == FDTrigAction.Object && a.Parameter == 74);
             if (actions.Count == 2)
             {
                 actions[0].Parameter = 73;
             }
         }
-
-        floorData.WriteToLevel(level.Data);
     }
 
     private void CloneEnemies(TR1CombinedLevel level)
@@ -1303,30 +1290,26 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         {
             enemies.Add(adamEgg);
         }
-
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
         
         uint cloneCount = Math.Max(2, Math.Min(MaxClones, Settings.EnemyMultiplier)) - 1;
         short angleDiff = (short)Math.Ceiling(ushort.MaxValue / (cloneCount + 1d));
 
         foreach (TR1Entity enemy in enemies)
         {
-            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(floorData, level.Data.Entities.IndexOf(enemy));
+            List<FDTriggerEntry> triggers = level.Data.FloorData.GetEntityTriggers(level.Data.Entities.IndexOf(enemy));
             if (Settings.UseKillableClonePierres && enemy.TypeID == TR1Type.Pierre)
             {
                 // Ensure OneShot, otherwise only ever one runaway Pierre
-                triggers.ForEach(t => t.TrigSetup.OneShot = true);
+                triggers.ForEach(t => t.OneShot = true);
             }
 
             for (int i = 0; i < cloneCount; i++)
             {
                 foreach (FDTriggerEntry trigger in triggers)
                 {
-                    trigger.TrigActionList.Add(new()
+                    trigger.Actions.Add(new()
                     {
-                        TrigAction = FDTrigAction.Object,
-                        Parameter = (ushort)level.Data.Entities.Count
+                        Parameter = (short)level.Data.Entities.Count
                     });
                 }
 
@@ -1340,8 +1323,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 }
             }
         }
-
-        floorData.WriteToLevel(level.Data);
     }
 
     internal class EnemyProcessor : AbstractProcessorThread<TR1EnemyRandomizer>

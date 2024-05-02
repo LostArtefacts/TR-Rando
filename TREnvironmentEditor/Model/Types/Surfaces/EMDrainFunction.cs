@@ -117,9 +117,6 @@ public class EMDrainFunction : BaseWaterFunction
             return;
         }
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (int roomNumber in RoomNumbers)
         {
             TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
@@ -130,7 +127,7 @@ public class EMDrainFunction : BaseWaterFunction
                 TR3Room roomBelow = level.Rooms[roomBelowNumber];
                 if (roomBelow.ContainsWater)
                 {
-                    AddWaterSurface(room, false, RoomNumbers, floorData);
+                    AddWaterSurface(room, false, RoomNumbers, level.FloorData);
                 }
             }
 

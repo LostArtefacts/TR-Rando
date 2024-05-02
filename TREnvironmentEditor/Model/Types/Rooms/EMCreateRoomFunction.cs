@@ -66,11 +66,8 @@ public class EMCreateRoomFunction : BaseEMFunction
         room.Sectors = GenerateSectors(ceiling, floor);
 
         // Generate the box, zone and overlap data
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         EMLevelData data = GetData(level);
-        TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+        TRRoomSector linkedSector = level.FloorData.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level);
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
@@ -135,11 +132,8 @@ public class EMCreateRoomFunction : BaseEMFunction
         room.Sectors = GenerateSectors(ceiling, floor);
 
         // Generate the box, zone and overlap data
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         EMLevelData data = GetData(level);
-        TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+        TRRoomSector linkedSector = level.FloorData.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level);
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
@@ -205,11 +199,8 @@ public class EMCreateRoomFunction : BaseEMFunction
         room.Sectors = GenerateSectors(ceiling, floor);
 
         // Generate the box, zone and overlap data
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         EMLevelData data = GetData(level);
-        TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+        TRRoomSector linkedSector = level.FloorData.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level);
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces

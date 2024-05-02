@@ -18,16 +18,11 @@ public class EMConvertTriggerFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseLocations();
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-            ConvertTrigger(sector, control, data);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            ConvertTrigger(sector, level.FloorData, data);
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -35,16 +30,11 @@ public class EMConvertTriggerFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseLocations();
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-            ConvertTrigger(sector, control, data);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            ConvertTrigger(sector, level.FloorData, data);
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -52,16 +42,11 @@ public class EMConvertTriggerFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseLocations();
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-            ConvertTrigger(sector, control, data);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            ConvertTrigger(sector, level.FloorData, data);
         }
-
-        control.WriteToLevel(level);
     }
 
     private void InitialiseLocations()
@@ -78,34 +63,34 @@ public class EMConvertTriggerFunction : BaseEMFunction
     {
         if (sector.FDIndex != 0)
         {
-            IEnumerable<FDTriggerEntry> triggers = floorData.Entries[sector.FDIndex].FindAll(e => e is FDTriggerEntry).Cast<FDTriggerEntry>();
+            IEnumerable<FDTriggerEntry> triggers = floorData[sector.FDIndex].FindAll(e => e is FDTriggerEntry).Cast<FDTriggerEntry>();
             foreach (FDTriggerEntry trigger in triggers)
             {
                 if (TrigType.HasValue)
                 {
-                    if (trigger.TrigType == FDTrigType.Pickup && TrigType.Value != FDTrigType.Pickup && trigger.TrigActionList.Count > 0)
+                    if (trigger.TrigType == FDTrigType.Pickup && TrigType.Value != FDTrigType.Pickup && trigger.Actions.Count > 0)
                     {
                         // The first action entry for pickup triggers is the pickup reference itself, so
                         // this is no longer needed.
-                        trigger.TrigActionList.RemoveAt(0);
+                        trigger.Actions.RemoveAt(0);
                     }
                     trigger.TrigType = TrigType.Value;
                 }
                 if (OneShot.HasValue)
                 {
-                    trigger.TrigSetup.OneShot = OneShot.Value;
+                    trigger.OneShot = OneShot.Value;
                 }
                 if (SwitchOrKeyRef.HasValue)
                 {
-                    trigger.SwitchOrKeyRef = (ushort)data.ConvertEntity(SwitchOrKeyRef.Value);
+                    trigger.SwitchOrKeyRef = data.ConvertEntity(SwitchOrKeyRef.Value);
                 }
                 if (Mask.HasValue)
                 {
-                    trigger.TrigSetup.Mask = Mask.Value;
+                    trigger.Mask = Mask.Value;
                 }
                 if (Timer.HasValue)
                 {
-                    trigger.TrigSetup.Timer = Timer.Value;
+                    trigger.Timer = Timer.Value;
                 }
             }
         }

@@ -21,14 +21,12 @@ public class EMAddEntityFunction : BaseEMFunction
         {
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
-            {
-                FDControl floorData = new();
-                floorData.ParseFromLevel(level);
+            {;
                 short room = data.ConvertRoom(Location.Room);
-                TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);
+                TRRoomSector sector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, room, level);
                 foreach (TR1Entity entity in level.Entities)
                 {
-                    if (entity.Room == room && FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData) == sector)
+                    if (entity.Room == room && level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level) == sector)
                     {
                         entity.X = TargetRelocation.X;
                         entity.Y = TargetRelocation.Y;
@@ -49,13 +47,11 @@ public class EMAddEntityFunction : BaseEMFunction
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
             {
-                FDControl floorData = new();
-                floorData.ParseFromLevel(level);
                 short room = data.ConvertRoom(Location.Room);
-                TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);
+                TRRoomSector sector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, room, level);
                 foreach (TR2Entity entity in level.Entities)
                 {
-                    if (entity.Room == room && FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData) == sector)
+                    if (entity.Room == room && level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level) == sector)
                     {
                         entity.X = TargetRelocation.X;
                         entity.Y = TargetRelocation.Y;
@@ -77,13 +73,11 @@ public class EMAddEntityFunction : BaseEMFunction
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
             {
-                FDControl floorData = new();
-                floorData.ParseFromLevel(level);
                 short room = data.ConvertRoom(Location.Room);
-                TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);
+                TRRoomSector sector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, room, level);
                 foreach (TR3Entity entity in level.Entities)
                 {
-                    if (entity.Room == room && FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData) == sector)
+                    if (entity.Room == room && level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level) == sector)
                     {
                         entity.X = TargetRelocation.X;
                         entity.Y = TargetRelocation.Y;

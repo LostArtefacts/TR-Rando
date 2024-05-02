@@ -58,110 +58,110 @@ public static class LocationUtilities
         return location;
     }
 
-    public static bool ContainsSecret(this Location location, TR1Level level, FDControl floorData)
+    public static bool ContainsSecret(this Location location, TR1Level level)
     {
-        TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);
-        return SectorContainsSecret(sector, floorData);
+        TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level);
+        return SectorContainsSecret(sector, level.FloorData);
     }
 
-    public static bool IsSlipperySlope(this Location location, TR1Level level, FDControl floorData)
+    public static bool IsSlipperySlope(this Location location, TR1Level level)
     {
-        TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);
-        return SectorIsSlipperySlope(sector, floorData);
+        TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level);
+        return SectorIsSlipperySlope(sector, level.FloorData);
     }
 
     public static bool SectorContainsSecret(TRRoomSector sector, FDControl floorData)
     {
         if (sector.FDIndex != 0)
         {
-            return floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+            return floorData[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
                 && trigger.TrigType == FDTrigType.Pickup
-                && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null;
+                && trigger.Actions.Find(a => a.Action == FDTrigAction.SecretFound) != null;
         }
 
         return false;
     }
 
-    public static bool HasPickupTriger(TR1Entity entity, int entityIndex, TR1Level level, FDControl floorData)
+    public static bool HasPickupTriger(TR1Entity entity, int entityIndex, TR1Level level)
     {
         Location floor = entity.GetFloorLocation(loc =>
-            FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData));
-        TRRoomSector sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level, floorData);
-        bool hasTrigger = HasPickupTrigger(sector, entityIndex, floorData);
+            level.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level));
+        TRRoomSector sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level);
+        bool hasTrigger = HasPickupTrigger(sector, entityIndex, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
-            sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level, floorData);
-            hasTrigger |= HasPickupTrigger(sector, entityIndex, floorData);
+            sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level);
+            hasTrigger |= HasPickupTrigger(sector, entityIndex, level.FloorData);
         }
         return hasTrigger;
     }
 
-    public static bool HasAnyTrigger(Location location, TR1Level level, FDControl floorData)
+    public static bool HasAnyTrigger(Location location, TR1Level level)
     {
         Location floor = location.GetFloorLocation(loc =>
-            FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData));
-        TRRoomSector sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level, floorData);
-        bool hasTrigger = HasAnyTrigger(sector, floorData);
+            level.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level));
+        TRRoomSector sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level);
+        bool hasTrigger = HasAnyTrigger(sector, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
-            sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level, floorData);
-            hasTrigger |= HasAnyTrigger(sector, floorData);
+            sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level);
+            hasTrigger |= HasAnyTrigger(sector, level.FloorData);
         }
         return hasTrigger;
     }
 
-    public static bool HasPickupTriger(TR2Entity entity, int entityIndex, TR2Level level, FDControl floorData)
+    public static bool HasPickupTriger(TR2Entity entity, int entityIndex, TR2Level level)
     {
         Location floor = entity.GetFloorLocation(loc =>
-            FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData));
-        TRRoomSector sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level, floorData);
-        bool hasTrigger = HasPickupTrigger(sector, entityIndex, floorData);
+            level.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level));
+        TRRoomSector sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level);
+        bool hasTrigger = HasPickupTrigger(sector, entityIndex, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
-            sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level, floorData);
-            hasTrigger |= HasPickupTrigger(sector, entityIndex, floorData);
+            sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level);
+            hasTrigger |= HasPickupTrigger(sector, entityIndex, level.FloorData);
         }
         return hasTrigger;
     }
 
-    public static bool HasAnyTrigger(Location location, TR2Level level, FDControl floorData)
+    public static bool HasAnyTrigger(Location location, TR2Level level)
     {
         Location floor = location.GetFloorLocation(loc =>
-            FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData));
-        TRRoomSector sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level, floorData);
-        bool hasTrigger = HasAnyTrigger(sector, floorData);
+            level.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level));
+        TRRoomSector sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level);
+        bool hasTrigger = HasAnyTrigger(sector, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
-            sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level, floorData);
-            hasTrigger |= HasAnyTrigger(sector, floorData);
+            sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level);
+            hasTrigger |= HasAnyTrigger(sector, level.FloorData);
         }
         return hasTrigger;
     }
 
-    public static bool HasPickupTriger(TR3Entity entity, int entityIndex, TR3Level level, FDControl floorData)
+    public static bool HasPickupTriger(TR3Entity entity, int entityIndex, TR3Level level)
     {
         Location floor = entity.GetFloorLocation(loc =>
-            FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData));
-        TRRoomSector sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level, floorData);
-        bool hasTrigger = HasPickupTrigger(sector, entityIndex, floorData);
+            level.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level));
+        TRRoomSector sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level);
+        bool hasTrigger = HasPickupTrigger(sector, entityIndex, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
-            sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level, floorData);
-            hasTrigger |= HasPickupTrigger(sector, entityIndex, floorData);
+            sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level);
+            hasTrigger |= HasPickupTrigger(sector, entityIndex, level.FloorData);
         }
         return hasTrigger;
     }
 
-    public static bool HasAnyTrigger(Location location, TR3Level level, FDControl floorData)
+    public static bool HasAnyTrigger(Location location, TR3Level level)
     {
         Location floor = location.GetFloorLocation(loc =>
-            FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData));
-        TRRoomSector sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level, floorData);
-        bool hasTrigger = HasAnyTrigger(sector, floorData);
+            level.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level));
+        TRRoomSector sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room, level);
+        bool hasTrigger = HasAnyTrigger(sector, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
-            sector = FDUtilities.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level, floorData);
-            hasTrigger |= HasAnyTrigger(sector, floorData);
+            sector = level.FloorData.GetRoomSector(floor.X, floor.Y, floor.Z, level.Rooms[floor.Room].AlternateRoom, level);
+            hasTrigger |= HasAnyTrigger(sector, level.FloorData);
         }
         return hasTrigger;
     }
@@ -169,21 +169,21 @@ public static class LocationUtilities
     public static bool HasPickupTrigger(TRRoomSector sector, int entityIndex, FDControl floorData)
     {
         return sector.FDIndex != 0
-            && floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+            && floorData[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
             && trigger.TrigType == FDTrigType.Pickup
-            && trigger.TrigActionList[0].Parameter == entityIndex;
+            && trigger.Actions[0].Parameter == entityIndex;
     }
 
     public static bool HasAnyTrigger(TRRoomSector sector, FDControl floorData)
     {
         return sector.FDIndex != 0
-            && floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger;
+            && floorData[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger;
     }
 
     public static bool SectorIsSlipperySlope(TRRoomSector sector, FDControl floorData)
     {
         return sector.FDIndex != 0
-            && floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry slant && slant.Type == FDSlantType.FloorSlant) is FDSlantEntry floorSlant
+            && floorData[sector.FDIndex].Find(e => e is FDSlantEntry slant && slant.Type == FDSlantType.Floor) is FDSlantEntry floorSlant
             && (Math.Abs(floorSlant.XSlant) > 2 || Math.Abs(floorSlant.ZSlant) > 2);
     }
 
@@ -192,7 +192,7 @@ public static class LocationUtilities
         sbyte floor = sector.Floor;
         if (sector.FDIndex != 0)
         {
-            FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => (e is FDSlantEntry s && s.Type == FDSlantType.FloorSlant)
+            FDEntry entry = floorData[sector.FDIndex].Find(e => (e is FDSlantEntry s && s.Type == FDSlantType.Floor)
                 || (e is FDTriangulationEntry tri && tri.IsFloorTriangulation));
             if (entry is FDSlantEntry slant)
             {
@@ -236,10 +236,10 @@ public static class LocationUtilities
             {
                 List<byte> triangleCorners = new()
                 {
-                    triangulation.TriData.C00,
-                    triangulation.TriData.C01,
-                    triangulation.TriData.C10,
-                    triangulation.TriData.C11
+                    triangulation.C00,
+                    triangulation.C01,
+                    triangulation.C10,
+                    triangulation.C11
                 };
 
                 int max = triangleCorners.Max();

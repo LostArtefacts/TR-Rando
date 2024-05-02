@@ -105,9 +105,6 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private static void RemoveDefaultSecrets(TR3CombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         // Scan all rooms and remove any existing secret triggers.
         foreach (TR3Room room in level.Data.Rooms)
         {
@@ -118,29 +115,21 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                     continue;
                 }
 
-                List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+                List<FDEntry> entries = level.Data.FloorData[sector.FDIndex];
                 for (int i = entries.Count - 1; i >= 0; i--)
                 {
                     if (entries[i] is FDTriggerEntry trig)
                     {
                         // #230 Remove the secret action but retain anything else that may be triggered here
-                        trig.TrigActionList.RemoveAll(a => a.TrigAction == FDTrigAction.SecretFound);
-                        if (trig.TrigActionList.Count == 0)
+                        trig.Actions.RemoveAll(a => a.Action == FDTrigAction.SecretFound);
+                        if (trig.Actions.Count == 0)
                         {
                             entries.RemoveAt(i);
                         }
                     }
                 }
-
-                if (entries.Count == 0)
-                {
-                    // If there isn't anything left, reset the sector to point to the dummy FD
-                    floorData.RemoveFloorData(sector);
-                }
             }
         }
-
-        floorData.WriteToLevel(level.Data);
     }
 
     private TRSecretRoom<TR2Entity> MakePlaceholderRewardRoom(TR3CombinedLevel level)
@@ -206,7 +195,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             // If it's a trapdoor, we need to make a dummy trigger for it
             if (TR3TypeUtilities.IsTrapdoor(door.TypeID))
             {
-                CreateTrapdoorTrigger(door, (ushort)doorIndex, level.Data);
+                CreateTrapdoorTrigger(door, (short)doorIndex, level.Data);
             }
         }
 
@@ -235,74 +224,58 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 level.Data.Cameras.Add(rewardRoom.Cameras[i % rewardRoom.Cameras.Count]);
             }
 
-            FDControl floorData = new();
-            floorData.ParseFromLevel(level.Data);
-
             // Get each trigger created for each secret index and add the camera, provided
             // there isn't any existing camera actions.
             for (int i = 0; i < countedSecrets; i++)
             {
-                List<FDTriggerEntry> secretTriggers = FDUtilities.GetSecretTriggers(floorData, i);
+                List<FDTriggerEntry> secretTriggers = level.Data.FloorData.GetSecretTriggers(i);
                 foreach (FDTriggerEntry trigger in secretTriggers)
                 {
-                    if (trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Camera) == null)
+                    if (trigger.Actions.Find(a => a.Action == FDTrigAction.Camera) == null)
                     {
-                        trigger.TrigActionList.Add(new FDActionItem
+                        trigger.Actions.Add(new FDActionItem
                         {
-                            TrigAction = FDTrigAction.Camera,
-                            CamAction = new FDCameraAction { Value = 4 },
-                            Parameter = (ushort)rewardRoom.CameraIndices[i]
+                            Action = FDTrigAction.Camera,
+                            CamAction = new()
+                            {
+                                Timer = 4
+                            },
+                            Parameter = (short)rewardRoom.CameraIndices[i]
                         });
-                        trigger.TrigActionList.Add(new FDActionItem
+                        trigger.Actions.Add(new FDActionItem
                         {
-                            TrigAction = FDTrigAction.LookAtItem,
-                            Parameter = (ushort)rewardRoom.DoorIndices[0]
+                            Action = FDTrigAction.LookAtItem,
+                            Parameter = (short)rewardRoom.DoorIndices[0]
                         });
                     }
                 }
             }
-
-            // Write back the camera triggers
-            floorData.WriteToLevel(level.Data);
         }
     }
 
-    private static void CreateTrapdoorTrigger(TR3Entity door, ushort doorIndex, TR3Level level)
+    private static void CreateTrapdoorTrigger(TR3Entity door, short doorIndex, TR3Level level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
-        TRRoomSector sector = FDUtilities.GetRoomSector(door.X, door.Y, door.Z, door.Room, level, floorData);
+        TRRoomSector sector = level.FloorData.GetRoomSector(door.X, door.Y, door.Z, door.Room, level);
         if (sector.FDIndex == 0)
         {
-            floorData.CreateFloorData(sector);
+            level.FloorData.CreateFloorData(sector);
         }
 
-        floorData.Entries[sector.FDIndex].Add(new FDTriggerEntry
+        level.FloorData[sector.FDIndex].Add(new FDTriggerEntry
         {
-            Setup = new FDSetup { Value = 4 },
-            TrigSetup = new FDTrigSetup
-            {
-                Value = 15872
-            },
             TrigType = FDTrigType.Dummy,
-            TrigActionList = new List<FDActionItem>
+            Actions = new()
             {
-                new() {
-                    TrigAction = FDTrigAction.Object,
+                new()
+                {
                     Parameter = doorIndex
                 }
             }
         });
-
-        floorData.WriteToLevel(level);
     }
 
     private void PlaceAllSecrets(TR3CombinedLevel level, List<TR3Type> pickupTypes, TRSecretRoom<TR2Entity> rewardRoom)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         List<Location> locations = _locations[level.Name];
 
         TRSecretPlacement<TR3Type> secret = new();
@@ -318,19 +291,19 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 continue;
 
             secret.Location = location;
-            secret.EntityIndex = (ushort)ItemFactory.GetNextIndex(level.Name, level.Data.Entities, true);
-            secret.SecretIndex = (ushort)(secretIndex % countedSecrets); // Cycle through each secret number
+            secret.EntityIndex = (short)ItemFactory.GetNextIndex(level.Name, level.Data.Entities, true);
+            secret.SecretIndex = (short)(secretIndex % countedSecrets); // Cycle through each secret number
             secret.PickupType = pickupTypes[pickupIndex % pickupTypes.Count]; // Cycle through the types
 
             // #238 Point this secret to a specific camera and look-at target if applicable.
             if (Settings.UseRewardRoomCameras && rewardRoom.HasCameras)
             {
-                secret.CameraIndex = (ushort)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
-                secret.CameraTarget = (ushort)rewardRoom.DoorIndices[0];
+                secret.CameraIndex = (short)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
+                secret.CameraTarget = (short)rewardRoom.DoorIndices[0];
             }
 
             secret.SetMaskAndDoor(countedSecrets, rewardRoom.DoorIndices);
-            PlaceSecret(level, secret, floorData);
+            PlaceSecret(level, secret);
 
             // This will either make a new entity or repurpose an old one
             TR3Entity entity = ItemFactory.CreateLockedItem(level.Name, level.Data.Entities, secret.Location, true);
@@ -340,23 +313,18 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             pickupIndex++;
         }
 
-        floorData.WriteToLevel(level.Data);
-
         AddDamageControl(level, pickupTypes, locations);
     }
 
     private void RandomizeSecrets(TR3CombinedLevel level, List<TR3Type> pickupTypes, TRSecretRoom<TR2Entity> rewardRoom)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         List<Location> locations = _locations[level.Name];
         locations.Shuffle(_generator);
 
         _secretPicker.SectorAction = loc
-            => FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
+            => level.Data.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data);
         _secretPicker.PlacementTestAction = loc
-            => TestSecretPlacement(level, loc, floorData);
+            => TestSecretPlacement(level, loc);
 
         _routePicker.RoomInfos = level.Data.Rooms
             .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
@@ -371,17 +339,17 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         {
             Location location = pickedLocations[i];
             secret.Location = location;
-            secret.EntityIndex = (ushort)ItemFactory.GetNextIndex(level.Name, level.Data.Entities);
+            secret.EntityIndex = (short)ItemFactory.GetNextIndex(level.Name, level.Data.Entities);
             secret.PickupType = pickupTypes[pickupIndex % pickupTypes.Count];
 
             if (Settings.UseRewardRoomCameras && rewardRoom.HasCameras)
             {
-                secret.CameraIndex = (ushort)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
-                secret.CameraTarget = (ushort)rewardRoom.DoorIndices[0];
+                secret.CameraIndex = (short)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
+                secret.CameraTarget = (short)rewardRoom.DoorIndices[0];
             }
 
             secret.SetMaskAndDoor(level.Script.NumSecrets, rewardRoom.DoorIndices);
-            PlaceSecret(level, secret, floorData);
+            PlaceSecret(level, secret);
 
             // This will either make a new entity or repurpose an old one. Ensure it is locked
             // to prevent item rando from potentially treating it as a key item.
@@ -391,8 +359,6 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             secret.SecretIndex++;
             pickupIndex++;
         }
-
-        floorData.WriteToLevel(level.Data);
 
         AddDamageControl(level, pickupTypes, pickedLocations);
         _secretPicker.FinaliseSecretPool(pickedLocations, level.Name, itemIndex => GetDependentLockedItems(level, itemIndex));
@@ -493,7 +459,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         }
     }
 
-    private bool TestSecretPlacement(TR3CombinedLevel level, Location location, FDControl floorData)
+    private bool TestSecretPlacement(TR3CombinedLevel level, Location location)
     {
         // Check if this secret is being added to a flipped room, as that won't work
         for (int i = 0; i < level.Data.Rooms.Count; i++)
@@ -514,13 +480,13 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         }
 
         // Get the sector and check if it is shared with a trapdoor or bridge, as these won't work either.
-        TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level.Data, floorData);
+        TRRoomSector sector = level.Data.FloorData.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level.Data);
         foreach (TR3Entity otherEntity in level.Data.Entities)
         {
             TR3Type type = otherEntity.TypeID;
             if (location.Room == otherEntity.Room && (TR3TypeUtilities.IsTrapdoor(type) || TR3TypeUtilities.IsBridge(type)))
             {
-                TRRoomSector otherSector = FDUtilities.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room, level.Data, floorData);
+                TRRoomSector otherSector = level.Data.FloorData.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room, level.Data);
                 if (otherSector == sector)
                 {
                     if (Settings.DevelopmentMode)
@@ -532,7 +498,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             }
         }
 
-        if (!TestTriggerPlacement(level, location, (short)location.Room, sector, floorData))
+        if (!TestTriggerPlacement(level, location, (short)location.Room, sector))
         {
             return false;
         }
@@ -541,8 +507,8 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         short altRoom = level.Data.Rooms[location.Room].AlternateRoom;
         if (altRoom != -1)
         {
-            sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, altRoom, level.Data, floorData);
-            if (!TestTriggerPlacement(level, location, altRoom, sector, floorData))
+            sector = level.Data.FloorData.GetRoomSector(location.X, location.Y, location.Z, altRoom, level.Data);
+            if (!TestTriggerPlacement(level, location, altRoom, sector))
             {
                 return false;
             }
@@ -556,9 +522,9 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         return true;
     }
 
-    private bool TestTriggerPlacement(TR3CombinedLevel level, Location location, short room, TRRoomSector sector, FDControl floorData)
+    private bool TestTriggerPlacement(TR3CombinedLevel level, Location location, short room, TRRoomSector sector)
     {
-        if (!location.Validated && LocationUtilities.HasAnyTrigger(sector, floorData))
+        if (!location.Validated && LocationUtilities.HasAnyTrigger(sector, level.Data.FloorData))
         {
             // There is already a trigger here and the location hasn't been marked as being
             // safe to move the action items to the new pickup trigger.
@@ -572,24 +538,24 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
     }
 
 
-    private void PlaceSecret(TR3CombinedLevel level, TRSecretPlacement<TR3Type> secret, FDControl floorData)
+    private void PlaceSecret(TR3CombinedLevel level, TRSecretPlacement<TR3Type> secret)
     {
         // This assumes TestTriggerPlacement has already been called and passed.
-        TRRoomSector sector = FDUtilities.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, (short)secret.Location.Room, level.Data, floorData);
-        CreateSecretTriggers(level, secret, (short)secret.Location.Room, floorData, sector);
+        TRRoomSector sector = level.Data.FloorData.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, (short)secret.Location.Room, level.Data);
+        CreateSecretTriggers(level, secret, (short)secret.Location.Room, sector);
 
         short altRoom = level.Data.Rooms[secret.Location.Room].AlternateRoom;
         if (altRoom != -1)
         {
-            sector = FDUtilities.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, altRoom, level.Data, floorData);
-            CreateSecretTriggers(level, secret, altRoom, floorData, sector);
+            sector = level.Data.FloorData.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, altRoom, level.Data);
+            CreateSecretTriggers(level, secret, altRoom, sector);
         }
     }
 
-    private void CreateSecretTriggers(TR3CombinedLevel level, TRSecretPlacement<TR3Type> secret, short room, FDControl floorData, TRRoomSector baseSector)
+    private void CreateSecretTriggers(TR3CombinedLevel level, TRSecretPlacement<TR3Type> secret, short room, TRRoomSector baseSector)
     {
         // Try to make the primary trigger
-        CreateSecretTrigger(level, secret, room, floorData, baseSector);
+        CreateSecretTrigger(level, secret, room, baseSector);
 
         // Check neighbouring sectors if we are very close to tile edges. We scan 8 locations around
         // the secret's position based on the edge tolerance and see if the sector has changed.
@@ -602,16 +568,16 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
                 int x = secret.Location.X + xNorm * SC.TriggerEdgeLimit;
                 int z = secret.Location.Z + zNorm * SC.TriggerEdgeLimit;
-                TRRoomSector neighbour = FDUtilities.GetRoomSector(x, secret.Location.Y, z, room, level.Data, floorData);
+                TRRoomSector neighbour = level.Data.FloorData.GetRoomSector(x, secret.Location.Y, z, room, level.Data);
 
                 // Process each unique sector only once and if it's a valid neighbour, add the extra trigger.
                 // We test neighbouring sector heights as Lara doesn't clip up in TR3 unlike TR1 if she is
                 // against the wall, so this avoids unnecessary extra FD.
                 if (processedSectors.Add(neighbour)
                     && !IsInvalidNeighbour(baseSector, neighbour)
-                    && Math.Abs(secret.Location.Y - LocationUtilities.GetCornerHeight(neighbour, floorData, x, z)) < TRConsts.Step1)
+                    && Math.Abs(secret.Location.Y - LocationUtilities.GetCornerHeight(neighbour, level.Data.FloorData, x, z)) < TRConsts.Step1)
                 {
-                    CreateSecretTrigger(level, secret, room, floorData, neighbour);
+                    CreateSecretTrigger(level, secret, room, neighbour);
                     if (Settings.DevelopmentMode)
                     {
                         Debug.WriteLine(string.Format(SC.EdgeInfoMsg, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, room));
@@ -632,33 +598,27 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             );
     }
 
-    private void CreateSecretTrigger(TR3CombinedLevel level, TRSecretPlacement<TR3Type> secret, short room, FDControl floorData, TRRoomSector sector)
+    private void CreateSecretTrigger(TR3CombinedLevel level, TRSecretPlacement<TR3Type> secret, short room, TRRoomSector sector)
     {
         if (sector.FDIndex == 0)
         {
-            floorData.CreateFloorData(sector);
+            level.Data.FloorData.CreateFloorData(sector);
         }
 
         // Make a new pickup trigger
         FDTriggerEntry trigger = new()
         {
-            Setup = new() { Value = 4 },
-            TrigSetup = new()
-            {
-                Value = 15872,
-                Mask = secret.TriggerMask
-            },
+            Mask = secret.TriggerMask,
             TrigType = FDTrigType.Pickup,
-            TrigActionList = new()
+            Actions = new()
             {
                 new()
                 {
-                    TrigAction = FDTrigAction.Object,
                     Parameter = secret.EntityIndex
                 },
                 new()
                 {
-                    TrigAction = FDTrigAction.SecretFound,
+                    Action = FDTrigAction.SecretFound,
                     Parameter = secret.SecretIndex
                 }
             }
@@ -666,21 +626,20 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
         if (secret.TriggersDoor)
         {
-            trigger.TrigActionList.Add(new()
+            trigger.Actions.Add(new()
             {
-                TrigAction = FDTrigAction.Object,
                 Parameter = secret.DoorIndex
             });
         }
 
         // Move any existing action list items to the new trigger and remove the old one. We can only
         // move Object actions if the mask on this trigger is full.
-        if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry existingTrigger)
+        if (level.Data.FloorData[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry existingTrigger)
         {
             List<FDActionItem> existingActions = new();
-            foreach (FDActionItem actionItem in existingTrigger.TrigActionList)
+            foreach (FDActionItem actionItem in existingTrigger.Actions)
             {
-                if (actionItem.TrigAction == FDTrigAction.Object)
+                if (actionItem.Action == FDTrigAction.Object)
                 {
                     if (Settings.DevelopmentMode)
                     {
@@ -698,11 +657,11 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 }
             }
 
-            trigger.TrigActionList.AddRange(existingActions);
-            floorData.Entries[sector.FDIndex].Remove(existingTrigger);
+            trigger.Actions.AddRange(existingActions);
+            level.Data.FloorData[sector.FDIndex].Remove(existingTrigger);
         }
 
-        floorData.Entries[sector.FDIndex].Add(trigger);
+        level.Data.FloorData[sector.FDIndex].Add(trigger);
     }
 
     internal class SecretProcessor : AbstractProcessorThread<TR3SecretRandomizer>

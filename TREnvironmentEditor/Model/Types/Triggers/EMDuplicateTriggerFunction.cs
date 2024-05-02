@@ -12,16 +12,13 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
+        TRRoomSector baseSector = level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level);
         if (baseSector.FDIndex == 0)
         {
             return;
         }
 
-        List<FDEntry> triggerEntries = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
+        List<FDEntry> triggerEntries = level.FloorData[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
         if (triggerEntries.Count == 0)
         {
             return;
@@ -29,27 +26,22 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-            AppendTriggers(sector, triggerEntries, control);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            AppendTriggers(sector, triggerEntries, level.FloorData);
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
+        TRRoomSector baseSector = level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level);
         if (baseSector.FDIndex == 0)
         {
             return;
         }
 
-        List<FDEntry> triggerEntries = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
+        List<FDEntry> triggerEntries = level.FloorData[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
         if (triggerEntries.Count == 0)
         {
             return;
@@ -57,27 +49,22 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-            AppendTriggers(sector, triggerEntries, control);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            AppendTriggers(sector, triggerEntries, level.FloorData);
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
-        TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
+        TRRoomSector baseSector = level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level);
         if (baseSector.FDIndex == 0)
         {
             return;
         }
 
-        List<FDEntry> triggerEntries = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
+        List<FDEntry> triggerEntries = level.FloorData[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
         if (triggerEntries.Count == 0)
         {
             return;
@@ -85,11 +72,9 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-            AppendTriggers(sector, triggerEntries, control);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            AppendTriggers(sector, triggerEntries, level.FloorData);
         }
-
-        control.WriteToLevel(level);
     }
 
     private static void AppendTriggers(TRRoomSector sector, List<FDEntry> triggerEntries, FDControl control)
@@ -99,7 +84,7 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
             control.CreateFloorData(sector);
         }
 
-        List<FDEntry> entries = control.Entries[sector.FDIndex];
+        List<FDEntry> entries = control[sector.FDIndex];
         if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
         {
             entries.AddRange(triggerEntries);

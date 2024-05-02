@@ -20,8 +20,7 @@ public abstract class AbstractLocationGenerator<T, L>
 
     public List<Location> Generate(L level, List<Location> exclusions, bool keyItemMode = false)
     {
-        _floorData = new FDControl();
-        ReadFloorData(level);
+        _floorData = level.FloorData;
 
         // Manual exclusions or known rooms such as swamps we wish to eliminate first
         DetermineBaseExcludedSectors(level, exclusions, keyItemMode);
@@ -142,7 +141,7 @@ public abstract class AbstractLocationGenerator<T, L>
 
             // Horizontal?
             if (sector.FDIndex != 0
-                && _floorData.Entries[sector.FDIndex].Any(e => e is FDPortalEntry))
+                && _floorData[sector.FDIndex].Any(e => e is FDPortalEntry))
             {
                 return true;
             }
@@ -234,7 +233,7 @@ public abstract class AbstractLocationGenerator<T, L>
         // Check the floor data, if there is any
         if (sector.FDIndex != 0)
         {
-            List<FDEntry> entries = _floorData.Entries[sector.FDIndex];
+            List<FDEntry> entries = _floorData[sector.FDIndex];
             bool invalidFloorData = false;
             for (int i = 0; i < entries.Count; i++)
             {
@@ -259,7 +258,7 @@ public abstract class AbstractLocationGenerator<T, L>
                     invalidFloorData = true;
                     break;
                 }
-                else if (entry is FDSlantEntry slant && slant.Type == FDSlantType.FloorSlant)
+                else if (entry is FDSlantEntry slant && slant.Type == FDSlantType.Floor)
                 {
                     // NB It's only ever FDSlantEntry or TR3TriangulationEntry (or neither) for TR3-5                                
                     Vector4? bestMidpoint = GetBestSlantMidpoint(slant);
@@ -297,7 +296,8 @@ public abstract class AbstractLocationGenerator<T, L>
                         break;
                     }
                 }
-                else if (entry is FDMinecartEntry && i < entries.Count - 1 && entries[i + 1] is TR3MinecartRotateRightEntry)
+                else if (entry is FDMinecartEntry minecartL && minecartL.Type == FDMinecartType.Left && i < entries.Count - 1 
+                    && entries[i + 1] is FDMinecartEntry minecartR && minecartR.Type == FDMinecartType.Right)
                 {
                     // Minecart stops here, so block this tile.
                     invalidFloorData = true;
@@ -371,9 +371,9 @@ public abstract class AbstractLocationGenerator<T, L>
     private bool IsTriggerInvalid(L level, FDTriggerEntry trigger)
     {
         // Any trigger types where we don't want items placed
-        return trigger.TrigActionList.Any(a =>
-            a.TrigAction == FDTrigAction.UnderwaterCurrent
-            || a.TrigAction == FDTrigAction.EndLevel
+        return trigger.Actions.Any(a =>
+            a.Action == FDTrigAction.UnderwaterCurrent
+            || a.Action == FDTrigAction.EndLevel
         ) || !TriggerSupportsItems(level, trigger);
     }
 
@@ -449,20 +449,21 @@ public abstract class AbstractLocationGenerator<T, L>
         return new Vector4(TRConsts.Step2, dy, TRConsts.Step2, angle);
     }
 
+    // Change to GetHeight
     // Returned vector contains x, y, z and angle adjustments for midpoint
     private static Vector4? GetBestTriangleMidpoint(TRRoomSector sector, FDTriangulationEntry triangulation, int sectorIndex, int roomDepth, int roomYTop)
     {
-        int t0 = triangulation.TriData.C10;
-        int t1 = triangulation.TriData.C00;
-        int t2 = triangulation.TriData.C01;
-        int t3 = triangulation.TriData.C11;
+        int t0 = triangulation.C10;
+        int t1 = triangulation.C00;
+        int t2 = triangulation.C01;
+        int t3 = triangulation.C11;
 
         List<byte> triangleCorners = new()
         {
-            triangulation.TriData.C00,
-            triangulation.TriData.C01,
-            triangulation.TriData.C10,
-            triangulation.TriData.C11
+            triangulation.C00,
+            triangulation.C01,
+            triangulation.C10,
+            triangulation.C11
         };
 
         int max = triangleCorners.Max();
@@ -486,7 +487,7 @@ public abstract class AbstractLocationGenerator<T, L>
         int sectorXPos = sectorIndex / roomDepth * TRConsts.Step4;
         int sectorZPos = sectorIndex % roomDepth * TRConsts.Step4;
 
-        FDFunction func = (FDFunction)triangulation.Setup.Function;
+        FDFunction func = triangulation.GetFunction();
         switch (func)
         {
             case FDFunction.FloorTriangulationNWSE_Solid:
@@ -701,7 +702,6 @@ public abstract class AbstractLocationGenerator<T, L>
         };
     }
 
-    protected abstract void ReadFloorData(L level);
     protected abstract TRRoomSector GetSector(Location location, L level);
     protected abstract TRRoomSector GetSector(int x, int z, int roomIndex, L level);
     protected abstract List<TRRoomSector> GetRoomSectors(L level, int room);

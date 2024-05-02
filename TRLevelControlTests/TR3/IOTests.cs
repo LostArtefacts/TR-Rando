@@ -20,51 +20,51 @@ public class IOTests : TestBase
         ReadWriteLevel(levelName, TRGameVersion.TR3);
     }
 
-    [TestMethod]
-    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
-    public void TestFloorData(string levelName)
-    {
-        TR3Level level = GetTR3Level(levelName);
+    //[TestMethod]
+    //[DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    //public void TestFloorData(string levelName)
+    //{
+    //    TR3Level level = GetTR3Level(levelName);
 
-        List<ushort> originalData = new(level.FloorData);
+    //    List<ushort> originalData = new(level.FloorData);
 
-        FDControl fdControl = new();
+    //    FDControl fdControl = new();
         
-        if (levelName == TR3LevelNames.ANTARC)
-        {
-            // Antarctica has a single ceiling triangulation entry that is not referenced by any
-            // room sector. It precedes the entry for room 69 [7,2], and there is a room above
-            // with a regular ceiling slant. We will modify that sector to include the extra entry
-            // for the sake of this test. FDControl by design strips out unused data.
-            IEnumerable<TRRoomSector> allSectors = level.Rooms.SelectMany(r => r.Sectors);
-            Assert.IsFalse(allSectors.Any(s => s.FDIndex == 8142));
-            TRRoomSector sector = allSectors.First(s => s.FDIndex == 8144);
-            Assert.IsNotNull(sector);
-            sector.FDIndex = 8142;
-        }
+    //    if (levelName == TR3LevelNames.ANTARC)
+    //    {
+    //        // Antarctica has a single ceiling triangulation entry that is not referenced by any
+    //        // room sector. It precedes the entry for room 69 [7,2], and there is a room above
+    //        // with a regular ceiling slant. We will modify that sector to include the extra entry
+    //        // for the sake of this test. FDControl by design strips out unused data.
+    //        IEnumerable<TRRoomSector> allSectors = level.Rooms.SelectMany(r => r.Sectors);
+    //        Assert.IsFalse(allSectors.Any(s => s.FDIndex == 8142));
+    //        TRRoomSector sector = allSectors.First(s => s.FDIndex == 8144);
+    //        Assert.IsNotNull(sector);
+    //        sector.FDIndex = 8142;
+    //    }
 
-        fdControl.ParseFromLevel(level);
-        fdControl.WriteToLevel(level);
+    //    fdControl.ParseFromLevel(level);
+    //    fdControl.WriteToLevel(level);
 
-        CollectionAssert.AreEqual(originalData, level.FloorData);
-    }
+    //    CollectionAssert.AreEqual(originalData, level.FloorData);
+    //}
 
-    [TestMethod]
-    public void Floordata_ReadWrite_LevelHasMonkeySwingTest()
-    {
-        TR3Level lvl = GetTR3Level(TR3LevelNames.THAMES);
+    //[TestMethod]
+    //public void Floordata_ReadWrite_LevelHasMonkeySwingTest()
+    //{
+    //    TR3Level lvl = GetTR3Level(TR3LevelNames.THAMES);
 
-        //Store the original floordata from the level
-        List<ushort> originalFData = new(lvl.FloorData);
+    //    //Store the original floordata from the level
+    //    List<ushort> originalFData = new(lvl.FloorData);
 
-        //Parse the floordata using FDControl and re-write the parsed data back
-        FDControl fdataReader = new();
-        fdataReader.ParseFromLevel(lvl);
-        fdataReader.WriteToLevel(lvl);
+    //    //Parse the floordata using FDControl and re-write the parsed data back
+    //    FDControl fdataReader = new();
+    //    fdataReader.ParseFromLevel(lvl);
+    //    fdataReader.WriteToLevel(lvl);
 
-        //Compare to make sure the original fdata was written back.
-        CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");;
-    }
+    //    //Compare to make sure the original fdata was written back.
+    //    CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");;
+    //}
 
     [TestMethod]
     public void ModifyZonesTest()
@@ -191,7 +191,7 @@ public class IOTests : TestBase
             List<TRSecretPlacement<TR3Type>> secrets = new();
 
             // Create a secret up to the limit for this "level" and set its mask and door
-            for (ushort secretIndex = 0; secretIndex < totalSecrets; secretIndex++)
+            for (short secretIndex = 0; secretIndex < totalSecrets; secretIndex++)
             {
                 TRSecretPlacement<TR3Type> secret = new()
                 {

@@ -47,12 +47,9 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         EMLevelData data = GetData(level);
 
-        FDControl fdc = new();
-        fdc.ParseFromLevel(level);
-
         short roomNumber = data.ConvertRoom(Location.Room);
         TR1Room room = level.Rooms[roomNumber];
-        TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, fdc);
+        TRRoomSector sector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level);
         int sectorIndex = room.Sectors.ToList().IndexOf(sector);
 
         // Find the current vertices for this tile
@@ -184,7 +181,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         {
             if (entity.Room == roomNumber)
             {
-                TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, fdc);
+                TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
                 if (entitySector == sector)
                 {
                     entity.Y += clickChange;
@@ -269,12 +266,9 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         EMLevelData data = GetData(level);
 
-        FDControl fdc = new();
-        fdc.ParseFromLevel(level);
-
         short roomNumber = data.ConvertRoom(Location.Room);
         TR2Room room = level.Rooms[roomNumber];
-        TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, fdc);
+        TRRoomSector sector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level);
         int sectorIndex = room.Sectors.ToList().IndexOf(sector);
 
         // Find the current vertices for this tile
@@ -405,7 +399,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         {
             if (entity.Room == roomNumber)
             {
-                TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, fdc);
+                TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
                 if (entitySector == sector)
                 {
                     entity.Y += clickChange;
@@ -510,12 +504,9 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         EMLevelData data = GetData(level);
 
-        FDControl fdc = new();
-        fdc.ParseFromLevel(level);
-
         short roomNumber = data.ConvertRoom(Location.Room);
         TR3Room room = level.Rooms[roomNumber];
-        TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, fdc);
+        TRRoomSector sector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level);
         int sectorIndex = room.Sectors.ToList().IndexOf(sector);
 
         // Find the current vertices for this tile
@@ -640,7 +631,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         {
             if (entity.Room == roomNumber)
             {
-                TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, fdc);
+                TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
                 if (entitySector == sector)
                 {
                     entity.Y += clickChange;

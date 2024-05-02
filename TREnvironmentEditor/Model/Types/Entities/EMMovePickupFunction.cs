@@ -13,39 +13,27 @@ public class EMMovePickupFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         MovePickups(level.Entities, data, location =>
         {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+            return level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
         });
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         MovePickups(level.Entities, data, location =>
         {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+            return level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
         });
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         MovePickups(level.Entities, data, location =>
         {
-            return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+            return level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
         });
     }
 

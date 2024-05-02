@@ -14,10 +14,6 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         short ceilingRoom = data.ConvertRoom(Ceiling.Room);
         short floorRoom = data.ConvertRoom(Floor.Room);
 
@@ -41,8 +37,8 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
         }
         else
         {
-            TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
-            TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
+            TRRoomSector ceilingSector = level.FloorData.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level);
+            TRRoomSector floorSector = level.FloorData.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level);
 
             if (ceilingSector != floorSector)
             {
@@ -60,10 +56,6 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         short ceilingRoom = data.ConvertRoom(Ceiling.Room);
         short floorRoom = data.ConvertRoom(Floor.Room);
 
@@ -87,8 +79,8 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
         }
         else
         {
-            TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
-            TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
+            TRRoomSector ceilingSector = level.FloorData.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level);
+            TRRoomSector floorSector = level.FloorData.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level);
 
             if (ceilingSector != floorSector)
             {
@@ -106,10 +98,6 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         short ceilingRoom = data.ConvertRoom(Ceiling.Room);
         short floorRoom = data.ConvertRoom(Floor.Room);
 
@@ -133,8 +121,8 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
         }
         else
         {
-            TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
-            TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
+            TRRoomSector ceilingSector = level.FloorData.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level);
+            TRRoomSector floorSector = level.FloorData.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level);
 
             if (ceilingSector != floorSector)
             {

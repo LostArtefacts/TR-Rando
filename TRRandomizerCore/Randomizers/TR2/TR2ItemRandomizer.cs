@@ -143,15 +143,12 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             exclusions.AddRange(_excludedLocations[level.Name]);
         }
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         foreach (TR2Entity entity in level.Data.Entities)
         {
             if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(entity.GetFloorLocation(loc =>
-                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData)));
+                    level.Data.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data)));
             }
         }
 
@@ -209,10 +206,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void RandomizeKeyItems(TR2CombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
-        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data, floorData);
+        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data);
         _picker.KeyItemTestAction = (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, level);
         _picker.RoomInfos = level.Data.Rooms
             .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
@@ -234,7 +228,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             }
 
             _picker.RandomizeKeyItemLocation(
-                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data, floorData),
+                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data),
                 level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
             entity.Intensity1 = entity.Intensity2 = -1;
         }

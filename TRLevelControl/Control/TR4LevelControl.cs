@@ -170,17 +170,20 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
     {
         _level.Rooms = _roomBuilder.ReadRooms(reader);
 
-        uint numFloorData = reader.ReadUInt32();
-        _level.FloorData = reader.ReadUInt16s(numFloorData).ToList();
+        TRFDBuilder builder = new(_level.Version.Game);
+        _level.FloorData = builder.ReadFloorData(reader);
     }
 
     private void WriteRooms(TRLevelWriter writer)
     {
         _spriteBuilder.CacheSpriteOffsets(_level.Sprites);
+
+        List<ushort> floorData = _level.FloorData
+            .Flatten(_level.Rooms.SelectMany(r => r.Sectors));
         _roomBuilder.WriteRooms(writer, _level.Rooms, _spriteBuilder);
 
-        writer.Write((uint)_level.FloorData.Count);
-        writer.Write(_level.FloorData);
+        writer.Write((uint)floorData.Count);
+        writer.Write(floorData);
     }
 
     private void ReadMeshData(TRLevelReader reader)

@@ -116,13 +116,10 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
     {
         if (Settings.ChangeTriggerTracks)
         {
-            FDControl floorData = new();
-            floorData.ParseFromLevel(level.Data);
-
             _audioRandomizer.ResetFloorMap();
             foreach (TR1Room room in level.Data.Rooms.Where(r => !r.Flags.HasFlag(TRRoomFlag.Unused2)))
             {
-                _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
+                _audioRandomizer.RandomizeFloorTracks(room.Sectors, level.Data.FloorData, _generator, sectorIndex =>
                 {
                     // Get the midpoint of the tile in world coordinates
                     return new Vector2
@@ -132,8 +129,6 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
                     );
                 });
             }
-
-            floorData.WriteToLevel(level.Data);
         }
     }
 
@@ -244,11 +239,8 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         // track, so ensure that the required data is in the level if any
         // of these are used on the floor.
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
-        List<ushort> usedSpeechTracks = FDUtilities.GetActionListItems(floorData, FDTrigAction.PlaySoundtrack)
-            .Select(action => action.Parameter)
+        List<ushort> usedSpeechTracks = level.Data.FloorData.GetActionItems(FDTrigAction.PlaySoundtrack)
+            .Select(action => (ushort)action.Parameter)
             .Distinct()
             .Where(trackID => _speechTracks.Contains(trackID))
             .ToList();

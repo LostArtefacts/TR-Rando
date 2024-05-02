@@ -15,18 +15,14 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         Location1.Room = data.ConvertRoom(Location1.Room);
         Location2.Room = data.ConvertRoom(Location2.Room);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         TR1Room room1 = level.Rooms[Location1.Room];
         TR1Room room2 = level.Rooms[Location2.Room];
 
+        // Change all this to room1.GetSector(Location1.X, Location1.Z);
         TRRoomSector sector1 = room1.Sectors[GetSectorIndex(room1.Info, Location1, room1.NumZSectors)];
         TRRoomSector sector2 = room2.Sectors[GetSectorIndex(room2.Info, Location2, room2.NumZSectors)];
 
-        RemovePortals(sector1, sector2, floorData);
-
-        floorData.WriteToLevel(level);
+        RemovePortals(sector1, sector2, level.FloorData);
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -35,18 +31,13 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         Location1.Room = data.ConvertRoom(Location1.Room);
         Location2.Room = data.ConvertRoom(Location2.Room);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         TR2Room room1 = level.Rooms[Location1.Room];
         TR2Room room2 = level.Rooms[Location2.Room];
 
         TRRoomSector sector1 = room1.Sectors[GetSectorIndex(room1.Info, Location1, room1.NumZSectors)];
         TRRoomSector sector2 = room2.Sectors[GetSectorIndex(room2.Info, Location2, room2.NumZSectors)];
 
-        RemovePortals(sector1, sector2, floorData);
-
-        floorData.WriteToLevel(level);
+        RemovePortals(sector1, sector2, level.FloorData);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -55,18 +46,13 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         Location1.Room = data.ConvertRoom(Location1.Room);
         Location2.Room = data.ConvertRoom(Location2.Room);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         TR3Room room1 = level.Rooms[Location1.Room];
         TR3Room room2 = level.Rooms[Location2.Room];
 
         TRRoomSector sector1 = room1.Sectors[GetSectorIndex(room1.Info, Location1, room1.NumZSectors)];
         TRRoomSector sector2 = room2.Sectors[GetSectorIndex(room2.Info, Location2, room2.NumZSectors)];
 
-        RemovePortals(sector1, sector2, floorData);
-
-        floorData.WriteToLevel(level);
+        RemovePortals(sector1, sector2, level.FloorData);
     }
 
     private void RemovePortals(TRRoomSector sector1, TRRoomSector sector2, FDControl floorData)
@@ -101,16 +87,12 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
             return;
         }
 
-        List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+        List<FDEntry> entries = floorData[sector.FDIndex];
         if (entries.RemoveAll(e => e is FDPortalEntry portal && (portal.Room == Location1.Room || portal.Room == Location2.Room)) > 0)
         {
             // Ensure it's a wall and remove all FD - don't leave nospace in our trails
             sector.Floor = sector.Ceiling = TRConsts.WallClicks;
             entries.Clear();
-        }
-        if (entries.Count == 0)
-        {
-            floorData.RemoveFloorData(sector);
         }
     }
 

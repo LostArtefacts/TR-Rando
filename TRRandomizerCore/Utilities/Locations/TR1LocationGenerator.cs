@@ -9,20 +9,15 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Type, TR1Level>
     public override bool CrawlspacesAllowed => false;
     public override bool WadingAllowed => false;
 
-    protected override void ReadFloorData(TR1Level level)
-    {
-        _floorData.ParseFromLevel(level);
-    }
-
     protected override TRRoomSector GetSector(Location location, TR1Level level)
     {
-        return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, _floorData);
+        return _floorData.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level);
     }
 
     protected override TRRoomSector GetSector(int x, int z, int roomIndex, TR1Level level)
     {
         TR1Room room = level.Rooms[roomIndex];
-        return FDUtilities.GetRoomSector(x, z, room.Sectors, room.Info, room.NumZSectors);
+        return room.GetSector(x, z);
     }
 
     protected override List<TRRoomSector> GetRoomSectors(TR1Level level, int room)
@@ -53,7 +48,7 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Type, TR1Level>
     protected override bool TriggerSupportsItems(TR1Level level, FDTriggerEntry trigger)
     {
         // Assume a Thor hammer trigger is directly below the hammer head.
-        return !trigger.TrigActionList.Any(a => a.TrigAction == FDTrigAction.Object
+        return !trigger.Actions.Any(a => a.Action == FDTrigAction.Object
             && level.Entities[a.Parameter].TypeID == TR1Type.ThorHammerHandle);
     }
 
@@ -95,6 +90,6 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Type, TR1Level>
 
     protected override int GetHeight(TR1Level level, Location location, bool waterOnly)
     {
-        return FDUtilities.GetHeight(location.X, location.Z, (short)location.Room, level, _floorData, waterOnly);
+        return _floorData.GetHeight(location.X, location.Z, (short)location.Room, level.Rooms, waterOnly);
     }
 }

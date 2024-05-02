@@ -224,20 +224,13 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private static void AmendAntarctica(TR3CombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-        TRRoomSector sector = FDUtilities.GetRoomSector(53760, -3328, 28160, 185, level.Data, floorData);
+        TRRoomSector sector = level.Data.FloorData.GetRoomSector(53760, -3328, 28160, 185, level.Data);
         if (sector.FDIndex == 0)
         {
-            floorData.CreateFloorData(sector);
+            level.Data.FloorData.CreateFloorData(sector);
         }
 
-        floorData.Entries[sector.FDIndex].Add(new FDKillLaraEntry
-        {
-            Setup = new FDSetup(FDFunction.KillLara)
-        });
-
-        floorData.WriteToLevel(level.Data);
+        level.Data.FloorData[sector.FDIndex].Add(new FDKillLaraEntry());
     }
 
     private void ImportArtefactMenuModels(TR3CombinedLevel level)

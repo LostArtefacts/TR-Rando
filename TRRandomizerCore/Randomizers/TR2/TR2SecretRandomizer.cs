@@ -116,14 +116,11 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
 
     private void RandomizeSecrets(TR2CombinedLevel level)
     {
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level.Data);
-
         List<Location> locations = _locations[level.Name];
         locations.Shuffle(_generator);
 
         _secretPicker.SectorAction = loc 
-            => FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
+            => level.Data.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data);
         _routePicker.RoomInfos = level.Data.Rooms
             .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
             .ToList();

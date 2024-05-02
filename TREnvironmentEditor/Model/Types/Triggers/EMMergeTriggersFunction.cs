@@ -11,43 +11,25 @@ public class EMMergeTriggersFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
-        MergeTriggers(
-            FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, floorData),
-            FDUtilities.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room), level, floorData),
-            floorData);
-
-        floorData.WriteToLevel(level);
+        MergeTriggers(level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level),
+            level.FloorData.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room), level),
+            level.FloorData);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
-        MergeTriggers(
-            FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, floorData),
-            FDUtilities.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room), level, floorData),
-            floorData);
-
-        floorData.WriteToLevel(level);
+        MergeTriggers(level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level),
+            level.FloorData.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room), level),
+            level.FloorData);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
-        MergeTriggers(
-            FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, floorData),
-            FDUtilities.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room), level, floorData),
-            floorData);
-
-        floorData.WriteToLevel(level);
+        MergeTriggers(level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level),
+            level.FloorData.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room), level),
+            level.FloorData);
     }
 
     private static void MergeTriggers(TRRoomSector baseSector, TRRoomSector targetSector, FDControl floorData)
@@ -55,7 +37,7 @@ public class EMMergeTriggersFunction : BaseEMFunction
         FDEntry baseEntry;
         if (baseSector.FDIndex == 0
             || baseSector == targetSector
-            || (baseEntry = floorData.Entries[baseSector.FDIndex].Find(e => e is FDTriggerEntry)) == null)
+            || (baseEntry = floorData[baseSector.FDIndex].Find(e => e is FDTriggerEntry)) == null)
         {
             return;
         }
@@ -65,27 +47,23 @@ public class EMMergeTriggersFunction : BaseEMFunction
             floorData.CreateFloorData(targetSector);
         }
 
-        FDEntry targetEntry = floorData.Entries[targetSector.FDIndex].Find(e => e is FDTriggerEntry);
+        FDEntry targetEntry = floorData[targetSector.FDIndex].Find(e => e is FDTriggerEntry);
         if (targetEntry == null)
         {
-            floorData.Entries[targetSector.FDIndex].Add(baseEntry);
+            floorData[targetSector.FDIndex].Add(baseEntry);
         }
         else
         {
             FDTriggerEntry baseTrigger = baseEntry as FDTriggerEntry;
             FDTriggerEntry targetTrigger = targetEntry as FDTriggerEntry;
 
-            targetTrigger.TrigActionList.AddRange(baseTrigger.TrigActionList);
-            if (baseTrigger.TrigSetup.OneShot)
+            targetTrigger.Actions.AddRange(baseTrigger.Actions);
+            if (baseTrigger.OneShot)
             {
-                targetTrigger.TrigSetup.OneShot = true;
+                targetTrigger.OneShot = true;
             }
         }
 
-        floorData.Entries[baseSector.FDIndex].Remove(baseEntry);
-        if (floorData.Entries[baseSector.FDIndex].Count == 0)
-        {
-            floorData.RemoveFloorData(baseSector);
-        }
+        floorData[baseSector.FDIndex].Remove(baseEntry);
     }
 }

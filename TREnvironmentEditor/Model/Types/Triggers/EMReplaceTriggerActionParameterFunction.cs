@@ -14,15 +14,12 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDActionItem action = InitialiseActionItem(data);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         if (Locations != null)
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                ReplaceActionParameter(baseSector, control, action);
+                TRRoomSector baseSector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+                ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
         if (EntityLocations != null)
@@ -30,12 +27,10 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
             foreach (int entityIndex in EntityLocations)
             {
                 TR1Entity entity = level.Entities[data.ConvertEntity(entityIndex)];
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
-                ReplaceActionParameter(baseSector, control, action);
+                TRRoomSector baseSector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+                ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -43,15 +38,12 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDActionItem action = InitialiseActionItem(data);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         if (Locations != null)
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                ReplaceActionParameter(baseSector, control, action);
+                TRRoomSector baseSector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+                ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
         if (EntityLocations != null)
@@ -59,12 +51,10 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
             foreach (int entityIndex in EntityLocations)
             {
                 TR2Entity entity = level.Entities[data.ConvertEntity(entityIndex)];
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
-                ReplaceActionParameter(baseSector, control, action);
+                TRRoomSector baseSector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+                ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -72,15 +62,12 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDActionItem action = InitialiseActionItem(data);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         if (Locations != null)
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                ReplaceActionParameter(baseSector, control, action);
+                TRRoomSector baseSector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+                ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
         if (EntityLocations != null)
@@ -88,12 +75,10 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
             foreach (int entityIndex in EntityLocations)
             {
                 TR3Entity entity = level.Entities[data.ConvertEntity(entityIndex)];
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
-                ReplaceActionParameter(baseSector, control, action);
+                TRRoomSector baseSector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+                ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
-
-        control.WriteToLevel(level);
     }
 
     private FDActionItem InitialiseActionItem(EMLevelData data)
@@ -108,7 +93,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
             return;
         }
 
-        List<FDActionItem> actions = FDUtilities.GetActionListItems(control, actionItem.TrigAction, baseSector.FDIndex);
+        List<FDActionItem> actions = control.GetActionItems(actionItem.Action, baseSector.FDIndex);
         foreach (FDActionItem action in actions)
         {
             action.Parameter = actionItem.Parameter;

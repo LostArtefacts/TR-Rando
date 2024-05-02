@@ -18,16 +18,11 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         List<FDActionItem> actions = InitialiseActionItems(data);
         List<EMLocation> locations = InitialiseLocations<TR1Type, TR1Entity>(level.Entities, data);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, floorData);
-            AppendActions(sector, floorData, actions);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            AppendActions(sector, level.FloorData, actions);
         }
-        
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -36,16 +31,11 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         List<FDActionItem> actions = InitialiseActionItems(data);
         List<EMLocation> locations = InitialiseLocations<TR2Type, TR2Entity>(level.Entities, data);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, floorData);
-            AppendActions(sector, floorData, actions);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            AppendActions(sector, level.FloorData, actions);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -54,16 +44,11 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         List<FDActionItem> actions = InitialiseActionItems(data);
         List<EMLocation> locations = InitialiseLocations<TR3Type, TR3Entity>(level.Entities, data);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, floorData);
-            AppendActions(sector, floorData, actions);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            AppendActions(sector, level.FloorData, actions);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     private List<EMLocation> InitialiseLocations<T, E>(List<E> entities, EMLevelData data)
@@ -110,14 +95,14 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
 
     private void AppendActions(TRRoomSector sector, FDControl floorData, List<FDActionItem> actions)
     {
-        if (sector.FDIndex != 0 && floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+        if (sector.FDIndex != 0 && floorData[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
             && (TargetTypes == null || TargetTypes.Contains(trigger.TrigType)))
         {
             foreach (FDActionItem item in actions)
             {
-                if (!trigger.TrigActionList.Any(a => a.TrigAction == item.TrigAction && a.Parameter == item.Parameter))
+                if (!trigger.Actions.Any(a => a.Action == item.Action && a.Parameter == item.Parameter))
                 {
-                    trigger.TrigActionList.Add(item);
+                    trigger.Actions.Add(item);
                 }
             }
         }

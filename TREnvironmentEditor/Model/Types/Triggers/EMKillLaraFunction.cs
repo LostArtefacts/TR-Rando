@@ -11,48 +11,33 @@ public class EMKillLaraFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-            CreateTrigger(sector, control);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            CreateTrigger(sector, level.FloorData);
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-            CreateTrigger(sector, control);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            CreateTrigger(sector, level.FloorData);
         }
-
-        control.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-            CreateTrigger(sector, control);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            CreateTrigger(sector, level.FloorData);
         }
-
-        control.WriteToLevel(level);
     }
 
     private static void CreateTrigger(TRRoomSector sector, FDControl control)
@@ -63,13 +48,10 @@ public class EMKillLaraFunction : BaseEMFunction
             control.CreateFloorData(sector);
         }
 
-        List<FDEntry> entries = control.Entries[sector.FDIndex];
+        List<FDEntry> entries = control[sector.FDIndex];
         if (entries.FindIndex(e => e is FDKillLaraEntry) == -1)
         {
-            entries.Add(new FDKillLaraEntry
-            {
-                Setup = new FDSetup(FDFunction.KillLara)
-            });
+            entries.Add(new FDKillLaraEntry());
         }
     }
 }

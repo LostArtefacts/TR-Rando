@@ -12,19 +12,16 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseEntityMap(data);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         Dictionary<short, SlotInfo> slotInfo = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
             TR1Entity entity = level.Entities[entityIndex];
-            TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+            TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
             slotInfo[entityIndex] = new SlotInfo
             {
                 Location = GetLocation(entity),
                 FDIndex = sector.FDIndex,
-                Triggers = floorData.Entries[sector.FDIndex].FindAll(e => e is FDTriggerEntry)
+                Triggers = level.FloorData[sector.FDIndex].FindAll(e => e is FDTriggerEntry)
             };
         }
 
@@ -33,11 +30,9 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
             SlotInfo slotInfo1 = slotInfo[entityIndex];
             SlotInfo slotInfo2 = slotInfo[EntityMap[entityIndex]];
 
-            SwapTriggers(slotInfo1, slotInfo2, floorData);
+            SwapTriggers(slotInfo1, slotInfo2, level.FloorData);
             MoveSlot(level.Entities[entityIndex], slotInfo2.Location);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -45,19 +40,16 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseEntityMap(data);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         Dictionary<short, SlotInfo> slotInfo = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
             TR2Entity entity = level.Entities[entityIndex];
-            TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+            TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
             slotInfo[entityIndex] = new SlotInfo
             {
                 Location = GetLocation(entity),
                 FDIndex = sector.FDIndex,
-                Triggers = floorData.Entries[sector.FDIndex].FindAll(e => e is FDTriggerEntry)
+                Triggers = level.FloorData[sector.FDIndex].FindAll(e => e is FDTriggerEntry)
             };
         }
 
@@ -66,11 +58,9 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
             SlotInfo slotInfo1 = slotInfo[entityIndex];
             SlotInfo slotInfo2 = slotInfo[EntityMap[entityIndex]];
 
-            SwapTriggers(slotInfo1, slotInfo2, floorData);
+            SwapTriggers(slotInfo1, slotInfo2, level.FloorData);
             MoveSlot(level.Entities[entityIndex], slotInfo2.Location);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -78,19 +68,16 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseEntityMap(data);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         Dictionary<short, SlotInfo> slotInfo = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
             TR3Entity entity = level.Entities[entityIndex];
-            TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+            TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
             slotInfo[entityIndex] = new SlotInfo
             {
                 Location = GetLocation(entity),
                 FDIndex = sector.FDIndex,
-                Triggers = floorData.Entries[sector.FDIndex].FindAll(e => e is FDTriggerEntry)
+                Triggers = level.FloorData[sector.FDIndex].FindAll(e => e is FDTriggerEntry)
             };
         }
 
@@ -99,11 +86,9 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
             SlotInfo slotInfo1 = slotInfo[entityIndex];
             SlotInfo slotInfo2 = slotInfo[EntityMap[entityIndex]];
 
-            SwapTriggers(slotInfo1, slotInfo2, floorData);
+            SwapTriggers(slotInfo1, slotInfo2, level.FloorData);
             MoveSlot(level.Entities[entityIndex], slotInfo2.Location);
         }
-
-        floorData.WriteToLevel(level);
     }
 
     private void InitialiseEntityMap(EMLevelData data)
@@ -128,8 +113,8 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
 
     private static void SwapTriggers(SlotInfo slotInfo1, SlotInfo slotInfo2, FDControl floorData)
     {
-        floorData.Entries[slotInfo1.FDIndex].RemoveAll(slotInfo1.Triggers.Contains);
-        floorData.Entries[slotInfo2.FDIndex].AddRange(slotInfo1.Triggers);
+        floorData[slotInfo1.FDIndex].RemoveAll(slotInfo1.Triggers.Contains);
+        floorData[slotInfo2.FDIndex].AddRange(slotInfo1.Triggers);
     }
 
     private static void MoveSlot<T>(TREntity<T> entity, EMLocation location)

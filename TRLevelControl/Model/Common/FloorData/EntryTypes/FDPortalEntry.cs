@@ -2,14 +2,11 @@
 
 public class FDPortalEntry : FDEntry
 {
-    public ushort Room { get; set; }
+    public short Room { get; set; }
 
-    public override ushort[] Flatten()
-    {
-        return new ushort[]
-        {
-            Setup.Value,
-            Room
-        };
-    }
+    public override FDFunction GetFunction()
+        => FDFunction.PortalSector;
+
+    public override FDEntry Clone()
+        => (FDPortalEntry)MemberwiseClone();
 }

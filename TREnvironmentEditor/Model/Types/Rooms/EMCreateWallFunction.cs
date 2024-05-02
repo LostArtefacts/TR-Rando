@@ -13,14 +13,11 @@ public class EMCreateWallFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
             short roomIndex = data.ConvertRoom(location.Room);
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomIndex, level, floorData);
-            BlockSector(sector, floorData);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomIndex, level);
+            BlockSector(sector);
 
             // Move any entities that share the same floor sector somewhere else
             if (EntityMoveLocation != null)
@@ -29,7 +26,7 @@ public class EMCreateWallFunction : BaseEMFunction
                 {
                     if (entity.Room == roomIndex)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
                         if (entitySector == sector)
                         {
                             entity.X = EntityMoveLocation.X;
@@ -41,22 +38,17 @@ public class EMCreateWallFunction : BaseEMFunction
                 }
             }
         }
-
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
             short roomIndex = data.ConvertRoom(location.Room);
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomIndex, level, floorData);
-            BlockSector(sector, floorData);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomIndex, level);
+            BlockSector(sector);
 
             // Move any entities that share the same floor sector somewhere else
             if (EntityMoveLocation != null)
@@ -65,7 +57,7 @@ public class EMCreateWallFunction : BaseEMFunction
                 {
                     if (entity.Room == roomIndex)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
                         if (entitySector == sector)
                         {
                             entity.X = EntityMoveLocation.X;
@@ -77,22 +69,17 @@ public class EMCreateWallFunction : BaseEMFunction
                 }
             }
         }
-
-        floorData.WriteToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
-
         foreach (EMLocation location in Locations)
         {
             short roomIndex = data.ConvertRoom(location.Room);
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomIndex, level, floorData);
-            BlockSector(sector, floorData);
+            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomIndex, level);
+            BlockSector(sector);
 
             // Move any entities that share the same floor sector somewhere else
             if (EntityMoveLocation != null)
@@ -101,7 +88,7 @@ public class EMCreateWallFunction : BaseEMFunction
                 {
                     if (entity.Room == roomIndex)
                     {
-                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
                         if (entitySector == sector)
                         {
                             entity.X = EntityMoveLocation.X;
@@ -113,17 +100,11 @@ public class EMCreateWallFunction : BaseEMFunction
                 }
             }
         }
-
-        floorData.WriteToLevel(level);
     }
 
-    private static void BlockSector(TRRoomSector sector, FDControl floorData)
+    private static void BlockSector(TRRoomSector sector)
     {
         sector.Floor = sector.Ceiling = TRConsts.WallClicks;
         sector.BoxIndex = ushort.MaxValue;
-        if (sector.FDIndex != 0)
-        {
-            floorData.RemoveFloorData(sector);
-        }
     }
 }

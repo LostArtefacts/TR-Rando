@@ -235,9 +235,6 @@ public static class FaceMapper
         Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
         Dictionary<int, Dictionary<int, int>> newRectFaces = new();
 
-        FDControl control = new();
-        control.ParseFromLevel(level);
-
         foreach (int roomNumber in roomNumbers)
         {
             rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
@@ -255,7 +252,7 @@ public static class FaceMapper
             foreach (int rectIndex in rectFaces[roomNumber].Keys)
             {
                 TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
-                TexturedTileSegment newSegment = DrawNewFace(segment, GetBoxDescription(level, control, roomNumber, rectIndex));
+                TexturedTileSegment newSegment = DrawNewFace(segment, GetBoxDescription(level, roomNumber, rectIndex));
                 packer.AddRectangle(newSegment);
 
                 newRectFaces[roomNumber][rectIndex] = level.ObjectTextures.Count;
@@ -382,7 +379,7 @@ public static class FaceMapper
         return null;
     }
 
-    private static string GetBoxDescription(TR2Level level, FDControl control, int roomNumber, int rectIndex)
+    private static string GetBoxDescription(TR2Level level, int roomNumber, int rectIndex)
     {
         TR2Room room = level.Rooms[roomNumber];
         TRFace face = room.Mesh.Rectangles[rectIndex];
@@ -397,7 +394,7 @@ public static class FaceMapper
         int xmin = verts.Min(v => v.X) + room.Info.X;
         int zmin = verts.Min(v => v.Z) + room.Info.Z;
 
-        TRRoomSector sector = FDUtilities.GetRoomSector(xmin, verts[0].Y, zmin, (short)roomNumber, level, control);
+        TRRoomSector sector = room.GetSector(xmin, zmin);
         if (sector.BoxIndex == ushort.MaxValue)
         {
             return "NOBOX";

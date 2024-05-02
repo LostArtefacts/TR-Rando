@@ -5,35 +5,35 @@ namespace TREnvironmentEditor.Helpers;
 
 public static class EMLocationUtilities
 {
-    public static int GetContainedSecretEntity(this EMLocation location, TR1Level level, FDControl floorData)
+    public static int GetContainedSecretEntity(this EMLocation location, TR1Level level)
     {
-        TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-        return GetSectorSecretEntity(sector, floorData);
+        TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, location.Room, level);
+        return GetSectorSecretEntity(sector, level.FloorData);
     }
 
-    public static int GetContainedSecretEntity(this EMLocation location, TR2Level level, FDControl floorData)
+    public static int GetContainedSecretEntity(this EMLocation location, TR2Level level)
     {
-        TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
+        TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, location.Room, level);
         return level.Entities.FindIndex(e =>
             TR2TypeUtilities.IsSecretType(e.TypeID)
-            && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, level, floorData) == sector
+            && level.FloorData.GetRoomSector(e.X, e.Y, e.Z, e.Room, level) == sector
         );
     }
 
-    public static int GetContainedSecretEntity(this EMLocation location, TR3Level level, FDControl floorData)
+    public static int GetContainedSecretEntity(this EMLocation location, TR3Level level)
     {
-        TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-        return GetSectorSecretEntity(sector, floorData);
+        TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, location.Room, level);
+        return GetSectorSecretEntity(sector, level.FloorData);
     }
 
     private static int GetSectorSecretEntity(TRRoomSector sector, FDControl floorData)
     {
         if (sector.FDIndex != 0)
         {
-            if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+            if (floorData[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
                 && trigger.TrigType == FDTrigType.Pickup
-                && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null
-                && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Object) is FDActionItem action)
+                && trigger.Actions.Find(a => a.Action == FDTrigAction.SecretFound) != null
+                && trigger.Actions.Find(a => a.Action == FDTrigAction.Object) is FDActionItem action)
             {
                 return action.Parameter;
             }

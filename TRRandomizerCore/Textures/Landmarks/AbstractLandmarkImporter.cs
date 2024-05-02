@@ -228,9 +228,9 @@ public abstract class AbstractLandmarkImporter<E, L>
             return sector.RoomBelow;
         }
         else if (sector.FDIndex != 0
-            && floorData.Entries[sector.FDIndex].Find(e => e is FDPortalEntry) is FDPortalEntry portal)
+            && floorData[sector.FDIndex].Find(e => e is FDPortalEntry) is FDPortalEntry portal)
         {
-            return (short)portal.Room;
+            return portal.Room;
         }
 
         return null;

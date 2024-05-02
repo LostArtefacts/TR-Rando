@@ -1,9 +1,10 @@
 ﻿namespace TRLevelControl.Model;
 
+[Flags]
 public enum FDClimbDirection
 {
-    PositiveZ = 0x01,
-    PositiveX = 0x02,
-    NegativeZ = 0x04,
-    NegativeX = 0x08
+    PositiveZ = 1 << 0,
+    PositiveX = 1 << 1,
+    NegativeZ = 1 << 2,
+    NegativeX = 1 << 3,
 }

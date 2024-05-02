@@ -161,8 +161,6 @@ class Program
     private static List<Location> ExportTR1Locations(string lvl)
     {
         TR1Level level = _reader1.Read(lvl);
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
         List<Location> exclusions = new();
         if (_allTR1Exclusions.ContainsKey(lvl))
         {
@@ -174,7 +172,7 @@ class Program
             if (!TR1TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(entity.GetFloorLocation(loc =>
-                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
+                    level.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level)));
             }
         }
 
@@ -185,8 +183,6 @@ class Program
     private static List<Location> ExportTR2Locations(string lvl)
     {
         TR2Level level = _reader2.Read(lvl);
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
         List<Location> exclusions = new();
         if (_allTR2Exclusions.ContainsKey(lvl))
         {
@@ -198,7 +194,7 @@ class Program
             if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(entity.GetFloorLocation(loc =>
-                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
+                    level.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level)));
             }
         }
 
@@ -209,8 +205,6 @@ class Program
     private static List<Location> ExportTR3Locations(string lvl)
     {
         TR3Level level = _reader3.Read(lvl);
-        FDControl floorData = new();
-        floorData.ParseFromLevel(level);
         List<Location> exclusions = new();
         if (_allTR3Exclusions.ContainsKey(lvl))
         {
@@ -222,7 +216,7 @@ class Program
             if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(entity.GetFloorLocation(loc =>
-                    FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level, floorData)));
+                    level.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level)));
             }
         }
 

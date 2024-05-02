@@ -45,4 +45,11 @@ public abstract class TRRoom
         get => Flags.HasFlag(TRRoomFlag.SwampOrNoLensflare);
         set => SetFlag(TRRoomFlag.SwampOrNoLensflare, value);
     }
+
+    public TRRoomSector GetSector(int x, int z)
+    {
+        int xFloor = (x - Info.X) >> TRConsts.WallShift;
+        int zFloor = (z - Info.Z) >> TRConsts.WallShift;
+        return Sectors[xFloor * NumZSectors + zFloor];
+    }
 }
