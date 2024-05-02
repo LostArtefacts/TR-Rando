@@ -384,7 +384,7 @@ public class FDTests : FDTestBase
         List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(1);
         Assert.AreNotEqual(0, triggers.Count);
 
-        level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), 1);
+        level.FloorData.RemoveEntityTriggers(1);
 
         triggers = level.FloorData.GetEntityTriggers(1);
         Assert.AreEqual(0, triggers.Count);

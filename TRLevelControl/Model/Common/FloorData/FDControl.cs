@@ -141,16 +141,10 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
             .ToList();
     }
 
-    public void RemoveEntityTriggers(IEnumerable<TRRoomSector> sectorList, int entityIndex)
+    public void RemoveEntityTriggers(int entityIndex)
     {
-        foreach (TRRoomSector sector in sectorList)
+        foreach (List<FDEntry> entries in _entries.Values)
         {
-            if (sector.FDIndex == 0)
-            {
-                continue;
-            }
-
-            List<FDEntry> entries = _entries[sector.FDIndex];
             for (int i = entries.Count - 1; i >= 0; i--)
             {
                 FDEntry entry = entries[i];

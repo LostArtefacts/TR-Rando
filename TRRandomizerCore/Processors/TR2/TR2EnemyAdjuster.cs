@@ -40,7 +40,7 @@ public class TR2EnemyAdjuster : TR2LevelProcessor
         foreach (int enemyIndex in _enemyTargets[_levelInstance.Name])
         {
             _levelInstance.Data.Entities[enemyIndex].TypeID = TR2Type.CameraTarget_N;
-            _levelInstance.Data.FloorData.RemoveEntityTriggers(_levelInstance.Data.Rooms.SelectMany(r => r.Sectors), enemyIndex);
+            _levelInstance.Data.FloorData.RemoveEntityTriggers(enemyIndex);
             ItemFactory?.FreeItem(_levelInstance.Name, enemyIndex);
         }
     }

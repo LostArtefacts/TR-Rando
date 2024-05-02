@@ -240,7 +240,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 ItemFactory.FreeItem(level.Name, i);
                 if (TR3TypeUtilities.IsCrystalPickup(entity.TypeID))
                 {
-                    level.Data.FloorData.RemoveEntityTriggers(level.Data.Rooms.SelectMany(r => r.Sectors), i);
+                    level.Data.FloorData.RemoveEntityTriggers(i);
                 }
             }
         }

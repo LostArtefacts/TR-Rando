@@ -873,7 +873,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             }
 
             // Get rid of the old enemy's triggers
-            level.Data.FloorData.RemoveEntityTriggers(level.Data.Rooms.SelectMany(r => r.Sectors), level.Data.Entities.IndexOf(skidMan));
+            level.Data.FloorData.RemoveEntityTriggers(level.Data.Entities.IndexOf(skidMan));
         }
     }
 

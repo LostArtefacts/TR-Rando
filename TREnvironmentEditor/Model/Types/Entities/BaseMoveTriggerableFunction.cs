@@ -29,7 +29,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         // on the tile, just manually copy over one-shot when appending the new action item.
 
         List<FDTriggerEntry> currentTriggers = level.FloorData.GetEntityTriggers(EntityIndex);
-        level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), EntityIndex);
+        level.FloorData.RemoveEntityTriggers(EntityIndex);
 
         AmendTriggers(currentTriggers, level.FloorData, location => level.GetRoomSector(data.ConvertLocation(location)));
     }
@@ -49,7 +49,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         }
 
         List<FDTriggerEntry> currentTriggers = level.FloorData.GetEntityTriggers(EntityIndex);
-        level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), EntityIndex);
+        level.FloorData.RemoveEntityTriggers(EntityIndex);
 
         AmendTriggers(currentTriggers, level.FloorData, location => level.GetRoomSector(data.ConvertLocation(location)));
     }
@@ -64,7 +64,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         entity.Room = data.ConvertRoom(Location.Room);
 
         List<FDTriggerEntry> currentTriggers = level.FloorData.GetEntityTriggers(EntityIndex);
-        level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), EntityIndex);
+        level.FloorData.RemoveEntityTriggers(EntityIndex);
 
         AmendTriggers(currentTriggers, level.FloorData, location => level.GetRoomSector(data.ConvertLocation(location)));
     }
