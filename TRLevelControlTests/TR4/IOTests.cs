@@ -17,20 +17,19 @@ public class IOTests : TestBase
         ReadWriteLevel(levelname, TRGameVersion.TR4);
     }
 
-    //[TestMethod]
-    //[DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
-    //public void TestFloorData(string levelName)
-    //{
-    //    TR4Level level = GetTR4Level(levelName);
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestAgressiveFloorData(string levelName)
+    {
+        TR4Level level = GetTR4Level(levelName);
+        IEnumerable<TRRoomSector> allFDSectors = level.Rooms.SelectMany(r => r.Sectors.Where(s => s.FDIndex != 0));
 
-    //    List<ushort> originalData = new(level.FloorData);
-
-    //    FDControl fdControl = new();
-    //    fdControl.ParseFromLevel(level);
-    //    fdControl.WriteToLevel(level);
-
-    //    CollectionAssert.AreEqual(originalData, level.FloorData);
-    //}
+        foreach (TRRoomSector sector in allFDSectors)
+        {
+            Assert.IsTrue(level.FloorData.ContainsKey(sector.FDIndex));
+        }
+        Assert.AreEqual(allFDSectors.Count(), allFDSectors.DistinctBy(s => s.FDIndex).Count());
+    }
 
     //[TestMethod]
     //public void Floordata_ReadWrite_MechBeetleTest()

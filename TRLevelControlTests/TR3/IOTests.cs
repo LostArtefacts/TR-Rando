@@ -20,34 +20,19 @@ public class IOTests : TestBase
         ReadWriteLevel(levelName, TRGameVersion.TR3);
     }
 
-    //[TestMethod]
-    //[DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
-    //public void TestFloorData(string levelName)
-    //{
-    //    TR3Level level = GetTR3Level(levelName);
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestAgressiveFloorData(string levelName)
+    {
+        TR3Level level = GetTR3Level(levelName);
+        IEnumerable<TRRoomSector> allFDSectors = level.Rooms.SelectMany(r => r.Sectors.Where(s => s.FDIndex != 0));
 
-    //    List<ushort> originalData = new(level.FloorData);
-
-    //    FDControl fdControl = new();
-        
-    //    if (levelName == TR3LevelNames.ANTARC)
-    //    {
-    //        // Antarctica has a single ceiling triangulation entry that is not referenced by any
-    //        // room sector. It precedes the entry for room 69 [7,2], and there is a room above
-    //        // with a regular ceiling slant. We will modify that sector to include the extra entry
-    //        // for the sake of this test. FDControl by design strips out unused data.
-    //        IEnumerable<TRRoomSector> allSectors = level.Rooms.SelectMany(r => r.Sectors);
-    //        Assert.IsFalse(allSectors.Any(s => s.FDIndex == 8142));
-    //        TRRoomSector sector = allSectors.First(s => s.FDIndex == 8144);
-    //        Assert.IsNotNull(sector);
-    //        sector.FDIndex = 8142;
-    //    }
-
-    //    fdControl.ParseFromLevel(level);
-    //    fdControl.WriteToLevel(level);
-
-    //    CollectionAssert.AreEqual(originalData, level.FloorData);
-    //}
+        foreach (TRRoomSector sector in allFDSectors)
+        {
+            Assert.IsTrue(level.FloorData.ContainsKey(sector.FDIndex));
+        }
+        Assert.AreEqual(allFDSectors.Count(), allFDSectors.DistinctBy(s => s.FDIndex).Count());
+    }
 
     //[TestMethod]
     //public void Floordata_ReadWrite_LevelHasMonkeySwingTest()

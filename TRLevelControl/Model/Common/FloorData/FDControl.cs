@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using TRLevelControl.Build;
 
 namespace TRLevelControl.Model;
@@ -15,6 +14,9 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
         get => _entries[index];
         set => _entries[index] = value;
     }
+
+    public bool ContainsKey(int index)
+        => _entries.ContainsKey(index);
 
     public IEnumerator<KeyValuePair<int, List<FDEntry>>> GetEnumerator()
         => _entries.GetEnumerator();

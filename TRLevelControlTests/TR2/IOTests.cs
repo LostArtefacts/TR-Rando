@@ -21,20 +21,19 @@ public class IOTests : TestBase
         ReadWriteLevel(levelName, TRGameVersion.TR2);
     }
 
-    //[TestMethod]
-    //[DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
-    //public void TestFloorData(string levelName)
-    //{
-    //    TR2Level level = GetTR2Level(levelName);
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestAgressiveFloorData(string levelName)
+    {
+        TR2Level level = GetTR2Level(levelName);
+        IEnumerable<TRRoomSector> allFDSectors = level.Rooms.SelectMany(r => r.Sectors.Where(s => s.FDIndex != 0));
 
-    //    List<ushort> originalData = new(level.FloorData);
-
-    //    FDControl fdControl = new();
-    //    fdControl.ParseFromLevel(level);
-    //    fdControl.WriteToLevel(level);
-
-    //    CollectionAssert.AreEqual(originalData, level.FloorData);
-    //}
+        foreach (TRRoomSector sector in allFDSectors)
+        {
+            Assert.IsTrue(level.FloorData.ContainsKey(sector.FDIndex));
+        }
+        Assert.AreEqual(allFDSectors.Count(), allFDSectors.DistinctBy(s => s.FDIndex).Count());
+    }
 
     //[TestMethod]
     //public void FloorData_ReadWriteOneShotTest()

@@ -191,8 +191,8 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         _level.Rooms = TR5RoomBuilder.ReadRooms(reader);
 
-        TRFDBuilder builder = new(_level.Version.Game);
-        _level.FloorData = builder.ReadFloorData(reader);
+        TRFDBuilder builder = new(_level.Version.Game, _observer);
+        _level.FloorData = builder.ReadFloorData(reader, _level.Rooms.SelectMany(r => r.Sectors));
     }
 
     private void ReadRawRooms(TRLevelReader reader)

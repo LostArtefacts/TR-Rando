@@ -20,42 +20,22 @@ public class IOTests : TestBase
         ReadWriteLevel(levelName, TRGameVersion.TR1);
     }
 
-    //[TestMethod]
-    //[DynamicData(nameof(GetBaseLevels), DynamicDataSourceType.Method)]
-    //public void TestFloorData(string levelName)
-    //{
-    //    TR1Level level = GetTR1Level(levelName);
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestAgressiveFloorData(string levelName)
+    {
+        // The UB levels seem to have been compiled with agressive FD packing. Our library will expand and so byte-for-byte checks
+        // can't be done when not using the observer approach. We will instead verify that every sector points to a valid FD entry
+        // and that the expansion works by eliminating duplicates.
+        TR1Level level = GetTR1Level(levelName);
+        IEnumerable<TRRoomSector> allFDSectors = level.Rooms.SelectMany(r => r.Sectors.Where(s => s.FDIndex != 0));
 
-    //    // Store the original floordata from the level
-    //    List<ushort> originalFData = new(level.FloorData);
-
-    //    // Parse the floordata using FDControl and re-write the parsed data back
-    //    FDControl fdControl = new();
-    //    fdControl.ParseFromLevel(level);
-    //    fdControl.WriteToLevel(level);
-
-    //    // Compare to make sure the original fdata was written back.
-    //    CollectionAssert.AreEqual(originalFData, level.FloorData, $"Floordata in {levelName} does not match after read/write.");
-    //}
-
-    //[TestMethod]
-    //[DynamicData(nameof(GetGoldLevels), DynamicDataSourceType.Method)]
-    //public void TestAgressiveFloorData(string levelName)
-    //{
-    //    // The UB levels seem to have been compiled with agressive FD packing.
-    //    // Our library will expand and so byte-for-byte checks can't be done.
-    //    // We will instead verify that every sector points to a valid FD entry.
-    //    TR1Level level = GetTR1Level(levelName);
-
-    //    FDControl fdControl = new();
-    //    fdControl.ParseFromLevel(level);
-    //    fdControl.WriteToLevel(level);
-
-    //    foreach (TRRoomSector sector in level.Rooms.SelectMany(r => r.Sectors.Where(s => s.FDIndex != 0)))
-    //    {
-    //        Assert.IsTrue(fdControl.Entries.ContainsKey(sector.FDIndex));
-    //    }
-    //}
+        foreach (TRRoomSector sector in allFDSectors)
+        {
+            Assert.IsTrue(level.FloorData.ContainsKey(sector.FDIndex));
+        }
+        Assert.AreEqual(allFDSectors.Count(), allFDSectors.DistinctBy(s => s.FDIndex).Count());
+    }
 
     [TestMethod]
     public void ModifyZonesTest()

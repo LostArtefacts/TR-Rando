@@ -185,8 +185,8 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     {
         _level.Rooms = _roomBuilder.ReadRooms(reader);
 
-        TRFDBuilder builder = new(_level.Version.Game);
-        _level.FloorData = builder.ReadFloorData(reader);
+        TRFDBuilder builder = new(_level.Version.Game, _observer);
+        _level.FloorData = builder.ReadFloorData(reader, _level.Rooms.SelectMany(r => r.Sectors));
     }
 
     private void WriteRooms(TRLevelWriter writer)

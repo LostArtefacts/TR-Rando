@@ -5,179 +5,217 @@ namespace TRLevelControl.Build;
 public class TRFDBuilder
 {
     private readonly TRGameVersion _version;
+    private readonly ITRLevelObserver _observer;
 
-    public TRFDBuilder(TRGameVersion version)
+    public TRFDBuilder(TRGameVersion version, ITRLevelObserver observer = null)
     {
         _version = version;
+        _observer = observer;
     }
 
-    public FDControl ReadFloorData(TRLevelReader reader)
+    public FDControl ReadFloorData(TRLevelReader reader, IEnumerable<TRRoomSector> sectors)
     {
         uint numFloorData = reader.ReadUInt32();
         ushort[] data = reader.ReadUInt16s(numFloorData);
 
-        FDControl fd = new(_version, data.Length == 0 ? (ushort)0 : data[0]);
-
-        int index = 0;
-        while (++index < data.Length)
+        FDControl floorData = new(_version, data.Length == 0 ? (ushort)0 : data[0]);
+        if (_observer?.UseOriginalFloorData ?? false)
         {
-            List<FDEntry> functions = new();
-            fd[index] = functions;
-
-            while (true)
+            int index = 0;
+            while (++index < data.Length)
             {
-                ushort value = data[index];
-                FDFunction function = (FDFunction)(value & 0x001F);
-                switch (function)
+                floorData[index] = ReadFromIndex(ref index, data);
+            }
+        }
+        else
+        {
+            Dictionary<TRRoomSector, List<FDEntry>> expandedFunctions = new();
+            foreach (TRRoomSector sector in sectors)
+            {
+                int index = sector.FDIndex;
+                if (index == 0)
                 {
-                    case FDFunction.PortalSector:
-                        functions.Add(new FDPortalEntry()
-                        {
-                            Room = (short)data[++index]
-                        });
-                        break;
-
-                    case FDFunction.FloorSlant:
-                    case FDFunction.CeilingSlant:
-                        ushort slantData = data[++index];
-                        functions.Add(new FDSlantEntry
-                        {
-                            Type = (FDSlantType)function,
-                            XSlant = (sbyte)(slantData & 0x00FF),
-                            ZSlant = (sbyte)((slantData & 0xFF00) >> 8)
-                        });
-                        break;
-
-                    case FDFunction.Trigger:
-                        ushort trigSetup = data[++index];
-                        FDTriggerEntry trig = new()
-                        {
-                            TrigType = (FDTrigType)((value & 0x7F00) >> 8),
-                            Timer = (byte)(trigSetup & 0x00FF),
-                            OneShot = (trigSetup & 0x0100) > 0,
-                            Mask = (byte)((trigSetup & 0x3E00) >> 9)
-                        };
-                        functions.Add(trig);
-
-                        bool done = false;
-                        if (trig.TrigType == FDTrigType.Switch || trig.TrigType == FDTrigType.Key)
-                        {
-                            ushort switchRef = data[++index];
-                            trig.SwitchOrKeyRef = (short)(switchRef & 0x7FFF);
-                            done = (switchRef & 0x8000) > 0;
-                        }
-
-                        while (!done && index < data.Length)
-                        {
-                            ushort actionData = data[++index];
-                            FDActionItem action = new()
-                            {
-                                Action = (FDTrigAction)((actionData & 0x7C00) >> 10),
-                                Parameter = (short)(actionData & 0x03FF)
-                            };
-                            trig.Actions.Add(action);
-
-                            done = (actionData & 0x8000) > 0;
-
-                            if (action.Action == FDTrigAction.Camera || action.Action == FDTrigAction.Flyby)
-                            {
-                                ushort camData = data[++index];
-                                action.CamAction = new()
-                                {
-                                    Timer = (byte)(camData & 0x00FF),
-                                    Once = (camData & 0x0100) > 0,
-                                    MoveTimer = (byte)((camData & 0x3E00) >> 9)
-                                };
-
-                                done = (camData & 0x8000) > 0;
-                            }
-                        }
-
-                        break;
-                    case FDFunction.KillLara:
-                        functions.Add(new FDKillLaraEntry());
-                        break;
-
-                    case FDFunction.ClimbableWalls:
-                        functions.Add(new FDClimbEntry
-                        {
-                            Direction = (FDClimbDirection)((value & 0x7F00) >> 8)
-                        });
-                        break;
-
-                    case FDFunction.FloorTriangulationNWSE_Solid:
-                    case FDFunction.FloorTriangulationNESW_Solid:
-                    case FDFunction.CeilingTriangulationNW_Solid:
-                    case FDFunction.CeilingTriangulationNE_Solid:
-                    case FDFunction.FloorTriangulationNWSE_SW:
-                    case FDFunction.FloorTriangulationNWSE_NE:
-                    case FDFunction.FloorTriangulationNESW_SE:
-                    case FDFunction.FloorTriangulationNESW_NW:
-                    case FDFunction.CeilingTriangulationNW_SW:
-                    case FDFunction.CeilingTriangulationNW_NE:
-                    case FDFunction.CeilingTriangulationNE_NW:
-                    case FDFunction.CeilingTriangulationNE_SE:
-                        ushort triData = data[++index];
-                        functions.Add(new FDTriangulationEntry
-                        {
-                            Type = (FDTriangulationType)function,
-                            C10 = (byte)(triData & 0x000F),
-                            C00 = (byte)((triData & 0x00F0) >> 4),
-                            C01 = (byte)((triData & 0x0F00) >> 8),
-                            C11 = (byte)((triData & 0xF000) >> 12),
-                            H1 = (sbyte)((value & 0x03E0) >> 5),
-                            H2 = (sbyte)((value & 0x7C00) >> 10)
-                        });
-                        break;
-
-                    case FDFunction.Monkeyswing:
-                        functions.Add(new FDMonkeySwingEntry());
-                        break;
-
-                    case FDFunction.DeferredTrigOrMinecartRotateLeft:
-                        if (_version < TRGameVersion.TR4)
-                        {
-                            functions.Add(new FDMinecartEntry
-                            {
-                                Type = (FDMinecartType)function
-                            });
-                        }
-                        else
-                        {
-                            functions.Add(new FDDeferredTriggerEntry());
-                        }
-                        break;
-
-                    case FDFunction.MechBeetleOrMinecartRotateRight:
-                        if (_version < TRGameVersion.TR4)
-                        {
-                            functions.Add(new FDMinecartEntry
-                            {
-                                Type = (FDMinecartType)function
-                            });
-                        }
-                        else
-                        {
-                            functions.Add(new FDBeetleEntry());
-                        }
-                        break;
-
-                    default:
-                        break;
+                    continue;
                 }
 
-                if ((value & 0x8000) > 0)
+                List<FDEntry> functions = ReadFromIndex(ref index, data);
+                if (floorData.ContainsKey(sector.FDIndex))
                 {
-                    break;
+                    expandedFunctions[sector] = functions;
                 }
                 else
                 {
-                    index++;
+                    floorData[sector.FDIndex] = functions;
                 }
+            }
+
+            foreach (var (sector, functions) in expandedFunctions)
+            {
+                floorData.CreateFloorData(sector);
+                floorData[sector.FDIndex] = functions;
             }
         }
 
-        return fd;
+        return floorData;
+    }
+
+    private List<FDEntry> ReadFromIndex(ref int index, ushort[] data)
+    {
+        List<FDEntry> functions = new();
+
+        while (true)
+        {
+            ushort value = data[index];
+            FDFunction function = (FDFunction)(value & 0x001F);
+            switch (function)
+            {
+                case FDFunction.PortalSector:
+                    functions.Add(new FDPortalEntry()
+                    {
+                        Room = (short)data[++index]
+                    });
+                    break;
+
+                case FDFunction.FloorSlant:
+                case FDFunction.CeilingSlant:
+                    ushort slantData = data[++index];
+                    functions.Add(new FDSlantEntry
+                    {
+                        Type = (FDSlantType)function,
+                        XSlant = (sbyte)(slantData & 0x00FF),
+                        ZSlant = (sbyte)((slantData & 0xFF00) >> 8)
+                    });
+                    break;
+
+                case FDFunction.Trigger:
+                    ushort trigSetup = data[++index];
+                    FDTriggerEntry trig = new()
+                    {
+                        TrigType = (FDTrigType)((value & 0x7F00) >> 8),
+                        Timer = (byte)(trigSetup & 0x00FF),
+                        OneShot = (trigSetup & 0x0100) > 0,
+                        Mask = (byte)((trigSetup & 0x3E00) >> 9)
+                    };
+                    functions.Add(trig);
+
+                    bool done = false;
+                    if (trig.TrigType == FDTrigType.Switch || trig.TrigType == FDTrigType.Key)
+                    {
+                        ushort switchRef = data[++index];
+                        trig.SwitchOrKeyRef = (short)(switchRef & 0x7FFF);
+                        done = (switchRef & 0x8000) > 0;
+                    }
+
+                    while (!done && index < data.Length)
+                    {
+                        ushort actionData = data[++index];
+                        FDActionItem action = new()
+                        {
+                            Action = (FDTrigAction)((actionData & 0x7C00) >> 10),
+                            Parameter = (short)(actionData & 0x03FF)
+                        };
+                        trig.Actions.Add(action);
+
+                        done = (actionData & 0x8000) > 0;
+
+                        if (action.Action == FDTrigAction.Camera || action.Action == FDTrigAction.Flyby)
+                        {
+                            ushort camData = data[++index];
+                            action.CamAction = new()
+                            {
+                                Timer = (byte)(camData & 0x00FF),
+                                Once = (camData & 0x0100) > 0,
+                                MoveTimer = (byte)((camData & 0x3E00) >> 9)
+                            };
+
+                            done = (camData & 0x8000) > 0;
+                        }
+                    }
+
+                    break;
+                case FDFunction.KillLara:
+                    functions.Add(new FDKillLaraEntry());
+                    break;
+
+                case FDFunction.ClimbableWalls:
+                    functions.Add(new FDClimbEntry
+                    {
+                        Direction = (FDClimbDirection)((value & 0x7F00) >> 8)
+                    });
+                    break;
+
+                case FDFunction.FloorTriangulationNWSE_Solid:
+                case FDFunction.FloorTriangulationNESW_Solid:
+                case FDFunction.CeilingTriangulationNW_Solid:
+                case FDFunction.CeilingTriangulationNE_Solid:
+                case FDFunction.FloorTriangulationNWSE_SW:
+                case FDFunction.FloorTriangulationNWSE_NE:
+                case FDFunction.FloorTriangulationNESW_SE:
+                case FDFunction.FloorTriangulationNESW_NW:
+                case FDFunction.CeilingTriangulationNW_SW:
+                case FDFunction.CeilingTriangulationNW_NE:
+                case FDFunction.CeilingTriangulationNE_NW:
+                case FDFunction.CeilingTriangulationNE_SE:
+                    ushort triData = data[++index];
+                    functions.Add(new FDTriangulationEntry
+                    {
+                        Type = (FDTriangulationType)function,
+                        C10 = (byte)(triData & 0x000F),
+                        C00 = (byte)((triData & 0x00F0) >> 4),
+                        C01 = (byte)((triData & 0x0F00) >> 8),
+                        C11 = (byte)((triData & 0xF000) >> 12),
+                        H1 = (sbyte)((value & 0x03E0) >> 5),
+                        H2 = (sbyte)((value & 0x7C00) >> 10)
+                    });
+                    break;
+
+                case FDFunction.Monkeyswing:
+                    functions.Add(new FDMonkeySwingEntry());
+                    break;
+
+                case FDFunction.DeferredTrigOrMinecartRotateLeft:
+                    if (_version < TRGameVersion.TR4)
+                    {
+                        functions.Add(new FDMinecartEntry
+                        {
+                            Type = (FDMinecartType)function
+                        });
+                    }
+                    else
+                    {
+                        functions.Add(new FDDeferredTriggerEntry());
+                    }
+                    break;
+
+                case FDFunction.MechBeetleOrMinecartRotateRight:
+                    if (_version < TRGameVersion.TR4)
+                    {
+                        functions.Add(new FDMinecartEntry
+                        {
+                            Type = (FDMinecartType)function
+                        });
+                    }
+                    else
+                    {
+                        functions.Add(new FDBeetleEntry());
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+            if ((value & 0x8000) > 0)
+            {
+                break;
+            }
+            else
+            {
+                index++;
+            }
+        }
+
+        return functions;
     }
 
     public List<ushort> Flatten(List<FDEntry> entries)
