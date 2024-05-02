@@ -20,7 +20,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
 
         foreach (EMLocation location in locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             AppendActions(sector, level.FloorData, actions);
         }
     }
@@ -33,7 +33,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
 
         foreach (EMLocation location in locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             AppendActions(sector, level.FloorData, actions);
         }
     }
@@ -46,7 +46,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
 
         foreach (EMLocation location in locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             AppendActions(sector, level.FloorData, actions);
         }
     }

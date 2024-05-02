@@ -167,7 +167,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         // Duplicate the zone for the new box and link the current box to the new room
         if (!PreserveBoxes)
         {
-            TRRoomSector linkedSector = level.FloorData.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level);
+            TRRoomSector linkedSector = level.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room));
             newBoxIndex = (ushort)level.Boxes.Count;
             int linkedBoxIndex = linkedSector.BoxIndex;
 
@@ -378,7 +378,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         // Boxes, zones and sectors
         EMLevelData data = GetData(level);
 
-        TRRoomSector linkedSector = level.FloorData.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level);
+        TRRoomSector linkedSector = level.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room));
         ushort newBoxIndex = ushort.MaxValue;
         int linkedBoxIndex = (linkedSector.BoxIndex & 0x7FF0) >> 4;
         int linkedMaterial = linkedSector.BoxIndex & 0x000F; // TR3-5 store material in bits 0-3 - wood, mud etc

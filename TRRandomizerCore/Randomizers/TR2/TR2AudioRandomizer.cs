@@ -99,7 +99,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         foreach (int entityIndex in secrets.Keys)
         {
             TR2Entity secret = secrets[entityIndex];
-            TRRoomSector sector = level.FloorData.GetRoomSector(secret.X, secret.Y, secret.Z, secret.Room, level);
+            TRRoomSector sector = level.GetRoomSector(secret.X, secret.Y, secret.Z, secret.Room);
             if (sector.FDIndex == 0)
             {
                 // The secret is positioned on a tile that currently has no FD, so create it

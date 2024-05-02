@@ -12,7 +12,7 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        TRRoomSector baseSector = level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level);
+        TRRoomSector baseSector = level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room));
         if (baseSector.FDIndex == 0)
         {
             return;
@@ -26,7 +26,7 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             AppendTriggers(sector, triggerEntries, level.FloorData);
         }
     }
@@ -35,7 +35,7 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        TRRoomSector baseSector = level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level);
+        TRRoomSector baseSector = level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room));
         if (baseSector.FDIndex == 0)
         {
             return;
@@ -49,7 +49,7 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             AppendTriggers(sector, triggerEntries, level.FloorData);
         }
     }
@@ -58,7 +58,7 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        TRRoomSector baseSector = level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level);
+        TRRoomSector baseSector = level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room));
         if (baseSector.FDIndex == 0)
         {
             return;
@@ -72,7 +72,7 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             AppendTriggers(sector, triggerEntries, level.FloorData);
         }
     }

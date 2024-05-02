@@ -18,7 +18,7 @@ public class EMSlantFunction : EMClickFunction
 
         foreach (EMLocation location in _locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, location.Room, level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, location.Room);
             UpdateSlantEntry(sector, level.FloorData);
         }
     }
@@ -29,7 +29,7 @@ public class EMSlantFunction : EMClickFunction
 
         foreach (EMLocation location in _locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, location.Room, level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, location.Room);
             UpdateSlantEntry(sector, level.FloorData);
         }
     }
@@ -40,7 +40,7 @@ public class EMSlantFunction : EMClickFunction
 
         foreach (EMLocation location in _locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, location.Room, level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, location.Room);
             UpdateSlantEntry(sector, level.FloorData);
         }
     }

@@ -32,7 +32,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), EntityIndex);
 
         AmendTriggers(currentTriggers, level.FloorData, location =>
-            level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level));
+            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
     }
 
     protected void RepositionTriggerable(TR2Entity entity, TR2Level level)
@@ -53,7 +53,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), EntityIndex);
 
         AmendTriggers(currentTriggers, level.FloorData, location =>
-            level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level));
+            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
     }
 
     protected void RepositionTriggerable(TR3Entity entity, TR3Level level)
@@ -69,7 +69,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), EntityIndex);
 
         AmendTriggers(currentTriggers, level.FloorData, location =>
-            level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level));
+            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
     }
 
     private void AmendTriggers(List<FDTriggerEntry> currentTriggers, FDControl control, Func<EMLocation, TRRoomSector> sectorGetter)

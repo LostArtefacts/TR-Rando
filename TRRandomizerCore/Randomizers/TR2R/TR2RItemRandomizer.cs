@@ -100,7 +100,7 @@ public class TR2RItemRandomizer : BaseTR2RRandomizer
             if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(entity.GetFloorLocation(loc =>
-                    level.Data.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data)));
+                    level.Data.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room)));
             }
         }
 

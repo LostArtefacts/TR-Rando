@@ -13,7 +13,7 @@ public class EMKillLaraFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             CreateTrigger(sector, level.FloorData);
         }
     }
@@ -24,7 +24,7 @@ public class EMKillLaraFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             CreateTrigger(sector, level.FloorData);
         }
     }
@@ -35,7 +35,7 @@ public class EMKillLaraFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             CreateTrigger(sector, level.FloorData);
         }
     }

@@ -178,7 +178,7 @@ public class DynamicTextureBuilder
             TR1Entity keyInstance = level.Data.Entities.Find(e => e.TypeID == pickupType);
             if (keyInstance != null)
             {
-                TRRoomSector sector = level.Data.FloorData.GetRoomSector(keyInstance.X, keyInstance.Y, keyInstance.Z, keyInstance.Room, level.Data);
+                TRRoomSector sector = level.Data.GetRoomSector(keyInstance.X, keyInstance.Y, keyInstance.Z, keyInstance.Room);
                 if (LocationUtilities.SectorContainsSecret(sector, level.Data.FloorData))
                 {
                     AddModelTextures(level.Data, pickupType, model, hips, secretObjectTextures, modelMeshes);

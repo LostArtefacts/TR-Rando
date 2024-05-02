@@ -842,14 +842,14 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         // Example where we have to search is Midas room 21
-        TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y - TRConsts.Step1, entity.Z, entity.Room, level);
+        TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y - TRConsts.Step1, entity.Z, entity.Room);
         while (sector.RoomBelow != TRConsts.NoRoom)
         {
             if (level.Rooms[sector.RoomBelow].ContainsWater)
             {
                 return true;
             }
-            sector = level.FloorData.GetRoomSector(entity.X, (sector.Floor + 1) * TRConsts.Step1, entity.Z, sector.RoomBelow, level);
+            sector = level.GetRoomSector(entity.X, (sector.Floor + 1) * TRConsts.Step1, entity.Z, sector.RoomBelow);
         }
         return false;
     }
@@ -960,12 +960,12 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         int y = entity.Y;
         short room = entity.Room;
-        TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, y, entity.Z, room, level);
+        TRRoomSector sector = level.GetRoomSector(entity.X, y, entity.Z, room);
         while (sector.RoomBelow != TRConsts.NoRoom)
         {
             y = (sector.Floor + 1) * TRConsts.Step1;
             room = sector.RoomBelow;
-            sector = level.FloorData.GetRoomSector(entity.X, y, entity.Z, room, level);
+            sector = level.GetRoomSector(entity.X, y, entity.Z, room);
         }
 
         entity.Y = sector.Floor * TRConsts.Step1;

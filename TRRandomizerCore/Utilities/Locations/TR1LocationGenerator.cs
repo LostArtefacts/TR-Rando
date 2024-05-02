@@ -11,7 +11,7 @@ public class TR1LocationGenerator : AbstractLocationGenerator<TR1Type, TR1Level>
 
     protected override TRRoomSector GetSector(Location location, TR1Level level)
     {
-        return _floorData.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level);
+        return level.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room);
     }
 
     protected override TRRoomSector GetSector(int x, int z, int roomIndex, TR1Level level)

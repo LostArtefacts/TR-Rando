@@ -16,7 +16,7 @@ public class EMCreateWallFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             short roomIndex = data.ConvertRoom(location.Room);
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomIndex, level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, roomIndex);
             BlockSector(sector);
 
             // Move any entities that share the same floor sector somewhere else
@@ -26,7 +26,7 @@ public class EMCreateWallFunction : BaseEMFunction
                 {
                     if (entity.Room == roomIndex)
                     {
-                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+                        TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
                         if (entitySector == sector)
                         {
                             entity.X = EntityMoveLocation.X;
@@ -47,7 +47,7 @@ public class EMCreateWallFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             short roomIndex = data.ConvertRoom(location.Room);
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomIndex, level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, roomIndex);
             BlockSector(sector);
 
             // Move any entities that share the same floor sector somewhere else
@@ -57,7 +57,7 @@ public class EMCreateWallFunction : BaseEMFunction
                 {
                     if (entity.Room == roomIndex)
                     {
-                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+                        TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
                         if (entitySector == sector)
                         {
                             entity.X = EntityMoveLocation.X;
@@ -78,7 +78,7 @@ public class EMCreateWallFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             short roomIndex = data.ConvertRoom(location.Room);
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomIndex, level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, roomIndex);
             BlockSector(sector);
 
             // Move any entities that share the same floor sector somewhere else
@@ -88,7 +88,7 @@ public class EMCreateWallFunction : BaseEMFunction
                 {
                     if (entity.Room == roomIndex)
                     {
-                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+                        TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
                         if (entitySector == sector)
                         {
                             entity.X = EntityMoveLocation.X;

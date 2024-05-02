@@ -20,7 +20,7 @@ public class EMConvertTriggerFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             ConvertTrigger(sector, level.FloorData, data);
         }
     }
@@ -32,7 +32,7 @@ public class EMConvertTriggerFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             ConvertTrigger(sector, level.FloorData, data);
         }
     }
@@ -44,7 +44,7 @@ public class EMConvertTriggerFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             ConvertTrigger(sector, level.FloorData, data);
         }
     }

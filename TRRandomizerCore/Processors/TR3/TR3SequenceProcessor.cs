@@ -224,7 +224,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private static void AmendAntarctica(TR3CombinedLevel level)
     {
-        TRRoomSector sector = level.Data.FloorData.GetRoomSector(53760, -3328, 28160, 185, level.Data);
+        TRRoomSector sector = level.Data.GetRoomSector(53760, -3328, 28160, 185);
         if (sector.FDIndex == 0)
         {
             level.Data.FloorData.CreateFloorData(sector);

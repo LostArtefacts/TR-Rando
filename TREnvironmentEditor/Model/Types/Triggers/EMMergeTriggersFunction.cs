@@ -11,24 +11,24 @@ public class EMMergeTriggersFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        MergeTriggers(level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level),
-            level.FloorData.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room), level),
+        MergeTriggers(level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room)),
+            level.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room)),
             level.FloorData);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        MergeTriggers(level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level),
-            level.FloorData.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room), level),
+        MergeTriggers(level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room)),
+            level.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room)),
             level.FloorData);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        MergeTriggers(level.FloorData.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level),
-            level.FloorData.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room), level),
+        MergeTriggers(level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room)),
+            level.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room)),
             level.FloorData);
     }
 

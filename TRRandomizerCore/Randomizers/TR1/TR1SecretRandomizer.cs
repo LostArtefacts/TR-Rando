@@ -405,7 +405,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         locations.Shuffle(_generator);
 
         _secretPicker.SectorAction = loc
-            => level.Data.FloorData.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data);
+            => level.Data.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room);
         _secretPicker.PlacementTestAction = loc
             => TestSecretPlacement(level, loc);
 
@@ -523,13 +523,13 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
 
         // Get the sector and check if it is shared with a trapdoor, breakable tile or bridge, as these won't work either.
-        TRRoomSector sector = level.Data.FloorData.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level.Data);
+        TRRoomSector sector = level.Data.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room);
         foreach (TR1Entity otherEntity in level.Data.Entities)
         {
             TR1Type type = otherEntity.TypeID;
             if (location.Room == otherEntity.Room && (TR1TypeUtilities.IsTrapdoor(type) || TR1TypeUtilities.IsBridge(type) || type == TR1Type.FallingBlock))
             {
-                TRRoomSector otherSector = level.Data.FloorData.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room, level.Data);
+                TRRoomSector otherSector = level.Data.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room);
                 if (otherSector == sector)
                 {
                     if (Settings.DevelopmentMode)
@@ -558,7 +558,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         short altRoom = level.Data.Rooms[location.Room].AlternateRoom;
         if (altRoom != -1)
         {
-            sector = level.Data.FloorData.GetRoomSector(location.X, location.Y, location.Z, altRoom, level.Data);
+            sector = level.Data.GetRoomSector(location.X, location.Y, location.Z, altRoom);
             if (!TestTriggerPlacement(level, location, altRoom, sector))
             {
                 return false;
@@ -591,13 +591,13 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
     private void PlaceSecret(TR1CombinedLevel level, TRSecretPlacement<TR1Type> secret)
     {
         // This assumes TestTriggerPlacement has already been called and passed.
-        TRRoomSector sector = level.Data.FloorData.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, (short)secret.Location.Room, level.Data);
+        TRRoomSector sector = level.Data.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, (short)secret.Location.Room);
         CreateSecretTriggers(level, secret, (short)secret.Location.Room, sector);
 
         short altRoom = level.Data.Rooms[secret.Location.Room].AlternateRoom;
         if (altRoom != -1)
         {
-            sector = level.Data.FloorData.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, altRoom, level.Data);
+            sector = level.Data.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, altRoom);
             CreateSecretTriggers(level, secret, altRoom, sector);
         }
 
@@ -624,7 +624,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             if (altRoom != -1)
             {
                 // Flipped room may have a floor here, or be underwater
-                sector = level.Data.FloorData.GetRoomSector(location.X, location.Y, location.Z, level.Data.Rooms[location.Room].AlternateRoom, level.Data);
+                sector = level.Data.GetRoomSector(location.X, location.Y, location.Z, level.Data.Rooms[location.Room].AlternateRoom);
                 return sector.RoomBelow == TRConsts.NoRoom || level.Data.Rooms[altRoom].ContainsWater;
             }
             
@@ -640,7 +640,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         while (mainSector.RoomBelow != TRConsts.NoRoom)
         {
             // Ensure we go as far down as possible - for example, Atlantis room 47 sector 10,9 - but stay in the same room
-            mainSector = level.Data.FloorData.GetRoomSector(secret.Location.X, (mainSector.Floor + 1) * TRConsts.Step1, secret.Location.Z, mainSector.RoomBelow, level.Data);
+            mainSector = level.Data.GetRoomSector(secret.Location.X, (mainSector.Floor + 1) * TRConsts.Step1, secret.Location.Z, mainSector.RoomBelow);
         }
 
         CreateSecretTrigger(level, secret, room, mainSector);
@@ -656,7 +656,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
                 int x = secret.Location.X + xNorm * SC.TriggerEdgeLimit;
                 int z = secret.Location.Z + zNorm * SC.TriggerEdgeLimit;
-                TRRoomSector neighbour = level.Data.FloorData.GetRoomSector(x, secret.Location.Y, z, room, level.Data);
+                TRRoomSector neighbour = level.Data.GetRoomSector(x, secret.Location.Y, z, room);
 
                 // Process each unique sector only once and if it's a valid neighbour, add the extra trigger
                 if (processedSectors.Add(neighbour) && !IsInvalidNeighbour(neighbour))
@@ -666,7 +666,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         // Try to find the absolute floor
                         do
                         {
-                            neighbour = level.Data.FloorData.GetRoomSector(x, (neighbour.Floor + 1) * TRConsts.Step1, z, neighbour.RoomBelow, level.Data);
+                            neighbour = level.Data.GetRoomSector(x, (neighbour.Floor + 1) * TRConsts.Step1, z, neighbour.RoomBelow);
                         }
                         while (neighbour.RoomBelow != TRConsts.NoRoom);
                     }

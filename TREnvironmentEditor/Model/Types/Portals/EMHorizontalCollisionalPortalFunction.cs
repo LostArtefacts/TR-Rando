@@ -20,7 +20,7 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
                 short convertedToRoomNumber = data.ConvertRoom(toRoomNumber);
                 foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
                 {
-                    TRRoomSector sector = level.FloorData.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber, level);
+                    TRRoomSector sector = level.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber);
 
                     if (!sectorMap.ContainsKey(sector))
                     {
@@ -49,7 +49,7 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
                 short convertedToRoomNumber = data.ConvertRoom(toRoomNumber);
                 foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
                 {
-                    TRRoomSector sector = level.FloorData.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber, level);
+                    TRRoomSector sector = level.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber);
 
                     if (!sectorMap.ContainsKey(sector))
                     {
@@ -76,7 +76,7 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
                 short convertedToRoomNumber = data.ConvertRoom(toRoomNumber);
                 foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
                 {
-                    TRRoomSector sector = level.FloorData.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber, level);
+                    TRRoomSector sector = level.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber);
 
                     if (!sectorMap.ContainsKey(sector))
                     {

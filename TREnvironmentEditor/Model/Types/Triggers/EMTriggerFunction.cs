@@ -23,7 +23,7 @@ public class EMTriggerFunction : BaseEMFunction
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+                TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
                 CreateTrigger(sector, level.FloorData, triggerEntry);
             }
         }
@@ -45,7 +45,7 @@ public class EMTriggerFunction : BaseEMFunction
         if (EntityLocation.HasValue)
         {
             TR1Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
-            TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+            TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
             CreateTrigger(sector, level.FloorData, triggerEntry);
         }
     }
@@ -59,7 +59,7 @@ public class EMTriggerFunction : BaseEMFunction
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+                TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
                 CreateTrigger(sector, level.FloorData, triggerEntry);
             }
         }
@@ -81,7 +81,7 @@ public class EMTriggerFunction : BaseEMFunction
         if (EntityLocation.HasValue)
         {
             TR2Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
-            TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+            TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
             CreateTrigger(sector, level.FloorData, triggerEntry);
         }
 
@@ -106,7 +106,7 @@ public class EMTriggerFunction : BaseEMFunction
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+                TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
                 CreateTrigger(sector, level.FloorData, triggerEntry);
             }
         }
@@ -128,7 +128,7 @@ public class EMTriggerFunction : BaseEMFunction
         if (EntityLocation.HasValue)
         {
             TR3Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
-            TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+            TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
             CreateTrigger(sector, level.FloorData, triggerEntry);
         }
 

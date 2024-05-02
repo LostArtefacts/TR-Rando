@@ -23,12 +23,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
             if (!IgnoreSectorEntities)
             {
                 bool sectorFree = true;
-                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level);
+                TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, roomNumber);
                 foreach (TR1Entity entity in level.Entities)
                 {
                     if (entity.Room == roomNumber)
                     {
-                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+                        TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
                         if (entitySector == sector)
                         {
                             sectorFree = false;
@@ -68,12 +68,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
             if (!IgnoreSectorEntities)
             {
                 bool sectorFree = true;
-                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level);
+                TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, roomNumber);
                 foreach (TR2Entity entity in level.Entities)
                 {
                     if (entity.Room == roomNumber)
                     {
-                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+                        TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
                         if (entitySector == sector)
                         {
                             sectorFree = false;
@@ -114,12 +114,12 @@ public class EMAddStaticMeshFunction : BaseEMFunction
             if (!IgnoreSectorEntities)
             {
                 bool sectorFree = true;
-                TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level);
+                TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, roomNumber);
                 foreach (TR3Entity entity in level.Entities)
                 {
                     if (entity.Room == roomNumber)
                     {
-                        TRRoomSector entitySector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+                        TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
                         if (entitySector == sector)
                         {
                             sectorFree = false;

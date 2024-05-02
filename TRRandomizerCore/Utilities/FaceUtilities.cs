@@ -159,7 +159,7 @@ public static class FaceUtilities
                 int wx = room.Info.X + x;
                 int wz = room.Info.Z + z;
                 int wy = (sector.Ceiling - 1) * TRConsts.Step1;
-                TRRoomSector sectorAbove = level.FloorData.GetRoomSector(wx, wy, wz, sector.RoomAbove, level);
+                TRRoomSector sectorAbove = level.GetRoomSector(wx, wy, wz, sector.RoomAbove);
                 if (sector != sectorAbove)
                 {
                     ScanTR2SectorLadderFaces(faces, level, roomAbove, sectorAbove, entry);
@@ -210,7 +210,7 @@ public static class FaceUtilities
                 int wx = room.Info.X + x;
                 int wz = room.Info.Z + z;
                 int wy = (sector.Ceiling - 1) * TRConsts.Step1;
-                TRRoomSector sectorAbove = level.FloorData.GetRoomSector(wx, wy, wz, sector.RoomAbove, level);
+                TRRoomSector sectorAbove = level.GetRoomSector(wx, wy, wz, sector.RoomAbove);
                 if (sector != sectorAbove)
                 {
                     ScanTR3SectorLadderFaces(faces, level, roomAbove, sectorAbove, entry);
@@ -262,7 +262,7 @@ public static class FaceUtilities
                 int wx = room.Info.X + x;
                 int wz = room.Info.Z + z;
                 int wy = (sector.Ceiling - 1) * TRConsts.Step1;
-                TRRoomSector sectorAbove = level.FloorData.GetRoomSector(wx, wy, wz, sector.RoomAbove, level);
+                TRRoomSector sectorAbove = level.GetRoomSector(wx, wy, wz, sector.RoomAbove);
                 if (sector != sectorAbove)
                 {
                     ScanTR3SectorMonkeyFaces(faces, level, roomAbove, sectorAbove, entry);

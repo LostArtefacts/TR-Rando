@@ -15,9 +15,9 @@ public class EMMoveSlotFunction : BaseEMFunction
         EntityIndex = data.ConvertEntity(EntityIndex);
 
         TR1Entity slot = level.Entities[EntityIndex];
-        TRRoomSector currentSector = level.FloorData.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level);
+        TRRoomSector currentSector = level.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room);
         short roomNumber = data.ConvertRoom(Location.Room);
-        TRRoomSector newSector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level);
+        TRRoomSector newSector = level.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber);
 
         // Check if there is also a trigger in the flip map if we are moving the slot within the same room
         TRRoomSector currentFlipSector = null;
@@ -25,8 +25,8 @@ public class EMMoveSlotFunction : BaseEMFunction
         short altRoom = level.Rooms[slot.Room].AlternateRoom;
         if (slot.Room == roomNumber && altRoom != -1)
         {
-            currentFlipSector = level.FloorData.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom, level);
-            newFlipSector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom, level);
+            currentFlipSector = level.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom);
+            newFlipSector = level.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom);
         }
 
         MoveSlot(level.FloorData, slot, roomNumber, currentSector, newSector, currentFlipSector, newFlipSector);
@@ -38,9 +38,9 @@ public class EMMoveSlotFunction : BaseEMFunction
         EntityIndex = data.ConvertEntity(EntityIndex);
 
         TR2Entity slot = level.Entities[EntityIndex];
-        TRRoomSector currentSector = level.FloorData.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level);
+        TRRoomSector currentSector = level.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room);
         short roomNumber = data.ConvertRoom(Location.Room);
-        TRRoomSector newSector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level);
+        TRRoomSector newSector = level.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber);
 
         // Check if there is also a trigger in the flip map if we are moving the slot within the same room
         TRRoomSector currentFlipSector = null;
@@ -48,15 +48,15 @@ public class EMMoveSlotFunction : BaseEMFunction
         short altRoom = level.Rooms[slot.Room].AlternateRoom;
         if (slot.Room == roomNumber && altRoom != -1)
         {
-            currentFlipSector = level.FloorData.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom, level);
-            newFlipSector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom, level);
+            currentFlipSector = level.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom);
+            newFlipSector = level.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom);
         }
 
         // Make sure there isn't a static enemy on the same sector e.g. MorayEel
         List<TR2Entity> staticEnemies = level.Entities.FindAll(e => e.Room == roomNumber && TR2TypeUtilities.IsStaticCreature(e.TypeID));
         foreach (TR2Entity staticEnemy in staticEnemies)
         {
-            TRRoomSector enemySector = level.FloorData.GetRoomSector(staticEnemy.X, staticEnemy.Y, staticEnemy.Z, staticEnemy.Room, level);
+            TRRoomSector enemySector = level.GetRoomSector(staticEnemy.X, staticEnemy.Y, staticEnemy.Z, staticEnemy.Room);
             if (enemySector == newSector)
             {
                 return;
@@ -72,9 +72,9 @@ public class EMMoveSlotFunction : BaseEMFunction
         EntityIndex = data.ConvertEntity(EntityIndex);
 
         TR3Entity slot = level.Entities[EntityIndex];
-        TRRoomSector currentSector = level.FloorData.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level);
+        TRRoomSector currentSector = level.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room);
         short roomNumber = data.ConvertRoom(Location.Room);
-        TRRoomSector newSector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level);
+        TRRoomSector newSector = level.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber);
 
         // Check if there is also a trigger in the flip map if we are moving the slot within the same room
         TRRoomSector currentFlipSector = null;
@@ -82,8 +82,8 @@ public class EMMoveSlotFunction : BaseEMFunction
         short altRoom = level.Rooms[slot.Room].AlternateRoom;
         if (slot.Room == roomNumber && altRoom != -1)
         {
-            currentFlipSector = level.FloorData.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom, level);
-            newFlipSector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom, level);
+            currentFlipSector = level.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom);
+            newFlipSector = level.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom);
         }
 
         MoveSlot(level.FloorData, slot, roomNumber, currentSector, newSector, currentFlipSector, newFlipSector);

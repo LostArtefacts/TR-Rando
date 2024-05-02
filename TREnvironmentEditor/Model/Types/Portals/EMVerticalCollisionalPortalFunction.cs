@@ -37,8 +37,8 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
         }
         else
         {
-            TRRoomSector ceilingSector = level.FloorData.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level);
-            TRRoomSector floorSector = level.FloorData.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level);
+            TRRoomSector ceilingSector = level.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom);
+            TRRoomSector floorSector = level.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom);
 
             if (ceilingSector != floorSector)
             {
@@ -79,8 +79,8 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
         }
         else
         {
-            TRRoomSector ceilingSector = level.FloorData.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level);
-            TRRoomSector floorSector = level.FloorData.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level);
+            TRRoomSector ceilingSector = level.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom);
+            TRRoomSector floorSector = level.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom);
 
             if (ceilingSector != floorSector)
             {
@@ -121,8 +121,8 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
         }
         else
         {
-            TRRoomSector ceilingSector = level.FloorData.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level);
-            TRRoomSector floorSector = level.FloorData.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level);
+            TRRoomSector ceilingSector = level.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom);
+            TRRoomSector floorSector = level.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom);
 
             if (ceilingSector != floorSector)
             {

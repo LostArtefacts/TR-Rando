@@ -19,7 +19,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
 
         // Go one step further and replace the duplicated trigger with the new switch ref
         UpdateTriggers(data, level.FloorData, location =>
-            level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level));
+            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -31,7 +31,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         base.ApplyToLevel(level);
 
         UpdateTriggers(data, level.FloorData, location =>
-            level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level));
+            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -43,7 +43,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         base.ApplyToLevel(level);
 
         UpdateTriggers(data, level.FloorData, location =>
-            level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level));
+            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
     }
 
     private void SetupLocations(EMLevelData data, List<TR1Entity> entities)

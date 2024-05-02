@@ -94,7 +94,7 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
         foreach (int entityIndex in secrets.Keys)
         {
             TR2Entity secret = secrets[entityIndex];
-            TRRoomSector sector = level.FloorData.GetRoomSector(secret.X, secret.Y, secret.Z, secret.Room, level);
+            TRRoomSector sector = level.GetRoomSector(secret.X, secret.Y, secret.Z, secret.Room);
             if (sector.FDIndex == 0)
             {
                 level.FloorData.CreateFloorData(sector);

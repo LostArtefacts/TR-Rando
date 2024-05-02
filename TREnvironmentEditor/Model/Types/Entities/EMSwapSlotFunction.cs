@@ -21,8 +21,8 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
         // We can only swap if the slots are corresponding done/not done types.
         // So for now, just check that one doesn't have any triggers
 
-        TRRoomSector slot1Sector = level.FloorData.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room, level);
-        TRRoomSector slot2Sector = level.FloorData.GetRoomSector(slot2.X, slot2.Y, slot2.Z, slot2.Room, level);
+        TRRoomSector slot1Sector = level.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room);
+        TRRoomSector slot2Sector = level.GetRoomSector(slot2.X, slot2.Y, slot2.Z, slot2.Room);
 
         bool slot1HasTriggers = SectorHasTriggers(slot1Sector, level.FloorData);
         bool slot2HasTriggers = SectorHasTriggers(slot2Sector, level.FloorData);
@@ -54,8 +54,8 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
         TR2Entity slot1 = level.Entities[Slot1Index];
         TR2Entity slot2 = level.Entities[Slot2Index];
 
-        TRRoomSector slot1Sector = level.FloorData.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room, level);
-        TRRoomSector slot2Sector = level.FloorData.GetRoomSector(slot2.X, slot2.Y, slot2.Z, slot2.Room, level);
+        TRRoomSector slot1Sector = level.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room);
+        TRRoomSector slot2Sector = level.GetRoomSector(slot2.X, slot2.Y, slot2.Z, slot2.Room);
 
         bool slot1HasTriggers = SectorHasTriggers(slot1Sector, level.FloorData);
         bool slot2HasTriggers = SectorHasTriggers(slot2Sector, level.FloorData);
@@ -87,8 +87,8 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
         TR3Entity slot1 = level.Entities[Slot1Index];
         TR3Entity slot2 = level.Entities[Slot2Index];
 
-        TRRoomSector slot1Sector = level.FloorData.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room, level);
-        TRRoomSector slot2Sector = level.FloorData.GetRoomSector(slot2.X, slot2.Y, slot2.Z, slot2.Room, level);
+        TRRoomSector slot1Sector = level.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room);
+        TRRoomSector slot2Sector = level.GetRoomSector(slot2.X, slot2.Y, slot2.Z, slot2.Room);
 
         bool slot1HasTriggers = SectorHasTriggers(slot1Sector, level.FloorData);
         bool slot2HasTriggers = SectorHasTriggers(slot2Sector, level.FloorData);

@@ -168,15 +168,6 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
         }
     }
 
-    public TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR1Level level)
-        => GetRoomSector(x, y, z, roomNumber, level.Rooms);
-
-    public TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR2Level level)
-        => GetRoomSector(x, y, z, roomNumber, level.Rooms);
-
-    public TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR3Level level)
-        => GetRoomSector(x, y, z, roomNumber, level.Rooms);
-
     public TRRoomSector GetRoomSector<R>(int x, int y, int z, short roomNumber, List<R> rooms)
         where R : TRRoom
     {

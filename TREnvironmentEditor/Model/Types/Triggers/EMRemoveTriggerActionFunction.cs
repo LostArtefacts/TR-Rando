@@ -15,7 +15,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector baseSector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector baseSector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             RemoveAction(baseSector, level.FloorData, action);
         }
     }
@@ -27,7 +27,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector baseSector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector baseSector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             RemoveAction(baseSector, level.FloorData, action);
         }
     }
@@ -39,7 +39,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            TRRoomSector baseSector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level);
+            TRRoomSector baseSector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
             RemoveAction(baseSector, level.FloorData, action);
         }
     }

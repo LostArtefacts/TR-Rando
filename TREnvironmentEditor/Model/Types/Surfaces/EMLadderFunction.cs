@@ -20,7 +20,7 @@ public class EMLadderFunction : EMRefaceFunction
     {
         EMLevelData data = GetData(level);
 
-        TRRoomSector sector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level);
+        TRRoomSector sector = level.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room));
         ModifyLadder(sector, level.FloorData);
 
         base.ApplyToLevel(level);
@@ -30,7 +30,7 @@ public class EMLadderFunction : EMRefaceFunction
     {
         EMLevelData data = GetData(level);
 
-        TRRoomSector sector = level.FloorData.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level);
+        TRRoomSector sector = level.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room));
         ModifyLadder(sector, level.FloorData);
 
         base.ApplyToLevel(level);

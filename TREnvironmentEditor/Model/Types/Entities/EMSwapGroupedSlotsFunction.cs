@@ -16,7 +16,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         foreach (short entityIndex in EntityMap.Keys)
         {
             TR1Entity entity = level.Entities[entityIndex];
-            TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+            TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
             slotInfo[entityIndex] = new SlotInfo
             {
                 Location = GetLocation(entity),
@@ -44,7 +44,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         foreach (short entityIndex in EntityMap.Keys)
         {
             TR2Entity entity = level.Entities[entityIndex];
-            TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+            TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
             slotInfo[entityIndex] = new SlotInfo
             {
                 Location = GetLocation(entity),
@@ -72,7 +72,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         foreach (short entityIndex in EntityMap.Keys)
         {
             TR3Entity entity = level.Entities[entityIndex];
-            TRRoomSector sector = level.FloorData.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level);
+            TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
             slotInfo[entityIndex] = new SlotInfo
             {
                 Location = GetLocation(entity),

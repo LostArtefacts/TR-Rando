@@ -28,7 +28,7 @@ public class EMEntityFinder
         }
 
         return GetEntity(level.Entities, types, data, 
-            l => level.FloorData.GetRoomSector(l.X, l.Y, l.Z, l.Room, level));
+            l => level.GetRoomSector(l.X, l.Y, l.Z, l.Room));
     }
 
     public int GetEntity(TR2Level level)
@@ -50,7 +50,7 @@ public class EMEntityFinder
         }
 
         return GetEntity(level.Entities, types, data,
-            l => level.FloorData.GetRoomSector(l.X, l.Y, l.Z, l.Room, level));
+            l => level.GetRoomSector(l.X, l.Y, l.Z, l.Room));
     }
 
     public int GetEntity(TR3Level level)
@@ -72,7 +72,7 @@ public class EMEntityFinder
         }
 
         return GetEntity(level.Entities, types, data,
-            l => level.FloorData.GetRoomSector(l.X, l.Y, l.Z, l.Room, level));
+            l => level.GetRoomSector(l.X, l.Y, l.Z, l.Room));
     }
 
     public int GetEntity<E, T>(List<E> entities, List<T> types, EMLevelData data, Func<EMLocation, TRRoomSector> sectorFunc)

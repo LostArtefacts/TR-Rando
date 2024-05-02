@@ -56,7 +56,7 @@ public static class RoomWaterUtilities
     {
         while (level.Rooms[location.Room].ContainsWater)
         {
-            TRRoomSector sector = level.FloorData.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level);
+            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room);
             if (sector.RoomAbove == byte.MaxValue)
             {
                 break;

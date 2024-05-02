@@ -71,7 +71,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         // Generate new boxes, unless this room is meant to be isolated
         if (LinkedLocation != null)
         {
-            TRRoomSector linkedSector = level.FloorData.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level);
+            TRRoomSector linkedSector = level.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room));
             BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
@@ -138,7 +138,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         // Generate new boxes, unless this room is meant to be isolated
         if (LinkedLocation != null)
         {
-            TRRoomSector linkedSector = level.FloorData.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level);
+            TRRoomSector linkedSector = level.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room));
             BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
@@ -206,7 +206,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         // Generate new boxes, unless this room is meant to be isolated
         if (LinkedLocation != null)
         {
-            TRRoomSector linkedSector = level.FloorData.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level);
+            TRRoomSector linkedSector = level.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room));
             BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
