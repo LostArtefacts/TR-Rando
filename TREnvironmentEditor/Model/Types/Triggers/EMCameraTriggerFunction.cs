@@ -46,7 +46,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
         {
             foreach (EMLocation location in AttachToLocations)
             {
-                TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
+                TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(location));
                 AttachToSector(sector, level.FloorData, cameraIndex, data);
             }
         }
@@ -91,7 +91,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
         {
             foreach (EMLocation location in AttachToLocations)
             {
-                TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
+                TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(location));
                 AttachToSector(sector, level.FloorData, cameraIndex, data);
             }
         }
@@ -136,7 +136,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
         {
             foreach (EMLocation location in AttachToLocations)
             {
-                TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
+                TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(location));
                 AttachToSector(sector, level.FloorData, cameraIndex, data);
             }
         }

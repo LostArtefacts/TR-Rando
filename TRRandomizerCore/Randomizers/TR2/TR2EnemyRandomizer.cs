@@ -734,7 +734,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Type.RedSnowmobile, _generator);
                 if (randomLocation != null)
                 {
-                    skidoo.Room = (short)randomLocation.Room;
+                    skidoo.Room = randomLocation.Room;
                     skidoo.X = randomLocation.X;
                     skidoo.Y = randomLocation.Y;
                     skidoo.Z = randomLocation.Z;
@@ -758,7 +758,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Type.RedSnowmobile, _generator);
                 if (randomLocation != null)
                 {
-                    skidoo.Room = (short)randomLocation.Room;
+                    skidoo.Room = randomLocation.Room;
                     skidoo.X = randomLocation.X;
                     skidoo.Y = randomLocation.Y;
                     skidoo.Z = randomLocation.Z;

@@ -15,26 +15,25 @@ public class EMCreateWallFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            short roomIndex = data.ConvertRoom(location.Room);
-            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, roomIndex);
+            EMLocation position = data.ConvertLocation(location);
+            TRRoomSector sector = level.GetRoomSector(position);
             BlockSector(sector);
 
             // Move any entities that share the same floor sector somewhere else
-            if (EntityMoveLocation != null)
+            if (EntityMoveLocation == null)
             {
-                foreach (TR1Entity entity in level.Entities)
+                continue;
+            }
+
+            foreach (TR1Entity entity in level.Entities.Where(e => e.Room == position.Room))
+            {
+                TRRoomSector entitySector = level.GetRoomSector(entity);
+                if (entitySector == sector)
                 {
-                    if (entity.Room == roomIndex)
-                    {
-                        TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
-                        if (entitySector == sector)
-                        {
-                            entity.X = EntityMoveLocation.X;
-                            entity.Y = EntityMoveLocation.Y;
-                            entity.Z = EntityMoveLocation.Z;
-                            entity.Room += data.ConvertRoom(EntityMoveLocation.Room);
-                        }
-                    }
+                    entity.X = EntityMoveLocation.X;
+                    entity.Y = EntityMoveLocation.Y;
+                    entity.Z = EntityMoveLocation.Z;
+                    entity.Room += data.ConvertRoom(EntityMoveLocation.Room);
                 }
             }
         }
@@ -46,26 +45,25 @@ public class EMCreateWallFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            short roomIndex = data.ConvertRoom(location.Room);
-            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, roomIndex);
+            EMLocation position = data.ConvertLocation(location);
+            TRRoomSector sector = level.GetRoomSector(position);
             BlockSector(sector);
 
             // Move any entities that share the same floor sector somewhere else
-            if (EntityMoveLocation != null)
+            if (EntityMoveLocation == null)
             {
-                foreach (TR2Entity entity in level.Entities)
+                continue;
+            }
+
+            foreach (TR2Entity entity in level.Entities.Where(e => e.Room == position.Room))
+            {
+                TRRoomSector entitySector = level.GetRoomSector(entity);
+                if (entitySector == sector)
                 {
-                    if (entity.Room == roomIndex)
-                    {
-                        TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
-                        if (entitySector == sector)
-                        {
-                            entity.X = EntityMoveLocation.X;
-                            entity.Y = EntityMoveLocation.Y;
-                            entity.Z = EntityMoveLocation.Z;
-                            entity.Room += data.ConvertRoom(EntityMoveLocation.Room);
-                        }
-                    }
+                    entity.X = EntityMoveLocation.X;
+                    entity.Y = EntityMoveLocation.Y;
+                    entity.Z = EntityMoveLocation.Z;
+                    entity.Room += data.ConvertRoom(EntityMoveLocation.Room);
                 }
             }
         }
@@ -77,26 +75,25 @@ public class EMCreateWallFunction : BaseEMFunction
 
         foreach (EMLocation location in Locations)
         {
-            short roomIndex = data.ConvertRoom(location.Room);
-            TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, roomIndex);
+            EMLocation position = data.ConvertLocation(location);
+            TRRoomSector sector = level.GetRoomSector(position);
             BlockSector(sector);
 
             // Move any entities that share the same floor sector somewhere else
-            if (EntityMoveLocation != null)
+            if (EntityMoveLocation == null)
             {
-                foreach (TR3Entity entity in level.Entities)
+                continue;
+            }
+
+            foreach (TR3Entity entity in level.Entities.Where(e => e.Room == position.Room))
+            {
+                TRRoomSector entitySector = level.GetRoomSector(entity);
+                if (entitySector == sector)
                 {
-                    if (entity.Room == roomIndex)
-                    {
-                        TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
-                        if (entitySector == sector)
-                        {
-                            entity.X = EntityMoveLocation.X;
-                            entity.Y = EntityMoveLocation.Y;
-                            entity.Z = EntityMoveLocation.Z;
-                            entity.Room += data.ConvertRoom(EntityMoveLocation.Room);
-                        }
-                    }
+                    entity.X = EntityMoveLocation.X;
+                    entity.Y = EntityMoveLocation.Y;
+                    entity.Z = EntityMoveLocation.Z;
+                    entity.Room += data.ConvertRoom(EntityMoveLocation.Room);
                 }
             }
         }

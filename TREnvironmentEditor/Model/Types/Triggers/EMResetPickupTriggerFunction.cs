@@ -10,19 +10,19 @@ public class EMResetPickupTriggerFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        ResetPickupTriggers(level.FloorData, l => level.GetRoomSector(l.X, l.Y, l.Z, data.ConvertRoom(l.Room)));
+        ResetPickupTriggers(level.FloorData, l => level.GetRoomSector(data.ConvertLocation(l)));
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        ResetPickupTriggers(level.FloorData, l => level.GetRoomSector(l.X, l.Y, l.Z, data.ConvertRoom(l.Room)));
+        ResetPickupTriggers(level.FloorData, l => level.GetRoomSector(data.ConvertLocation(l)));
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        ResetPickupTriggers(level.FloorData, l => level.GetRoomSector(l.X, l.Y, l.Z, data.ConvertRoom(l.Room)));
+        ResetPickupTriggers(level.FloorData, l => level.GetRoomSector(data.ConvertLocation(l)));
     }
 
     private void ResetPickupTriggers(FDControl floorData, Func<EMLocation, TRRoomSector> sectorFunc)

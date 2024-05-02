@@ -12,7 +12,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        TRRoomSector baseSector = level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room));
+        TRRoomSector baseSector = level.GetRoomSector(data.ConvertLocation(BaseLocation));
 
         if (NewLocation != null)
         {
@@ -34,7 +34,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
             throw new InvalidOperationException("No means to determine new sector for moving trigger.");
         }
 
-        TRRoomSector newSector = level.GetRoomSector(NewLocation.X, NewLocation.Y, NewLocation.Z, NewLocation.Room);
+        TRRoomSector newSector = level.GetRoomSector(NewLocation);
         if (MoveTriggers(baseSector, newSector, level.FloorData))
         {
             // Make sure to copy the trigger into the flipped room if applicable
@@ -49,7 +49,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        TRRoomSector baseSector = level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room));
+        TRRoomSector baseSector = level.GetRoomSector(data.ConvertLocation(BaseLocation));
 
         if (NewLocation != null)
         {
@@ -71,7 +71,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
             throw new InvalidOperationException("No means to determine new sector for moving trigger.");
         }
 
-        TRRoomSector newSector = level.GetRoomSector(NewLocation.X, NewLocation.Y, NewLocation.Z, NewLocation.Room);
+        TRRoomSector newSector = level.GetRoomSector(NewLocation);
         if (MoveTriggers(baseSector, newSector, level.FloorData))
         {
             // Make sure to copy the trigger into the flipped room if applicable
@@ -86,7 +86,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        TRRoomSector baseSector = level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room));
+        TRRoomSector baseSector = level.GetRoomSector(data.ConvertLocation(BaseLocation));
 
         if (NewLocation != null)
         {
@@ -108,7 +108,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
             throw new InvalidOperationException("No means to determine new sector for moving trigger.");
         }
 
-        TRRoomSector newSector = level.GetRoomSector(NewLocation.X, NewLocation.Y, NewLocation.Z, NewLocation.Room);
+        TRRoomSector newSector = level.GetRoomSector(NewLocation);
         if (MoveTriggers(baseSector, newSector, level.FloorData))
         {
             // Make sure to copy the trigger into the flipped room if applicable

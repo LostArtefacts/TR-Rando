@@ -147,8 +147,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         {
             if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(entity.GetFloorLocation(loc =>
-                    level.Data.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room)));
+                exclusions.Add(entity.GetFloorLocation(loc => level.Data.GetRoomSector(loc)));
             }
         }
 
@@ -649,7 +648,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     _levelInstance.Data.Entities.Add(new()
                     {
                         TypeID = entity,
-                        Room = (short)location.Room,
+                        Room = location.Room,
                         X = location.X,
                         Y = location.Y,
                         Z = location.Z,
@@ -668,7 +667,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                         {
                             TR2Entity boat = boatToMove[i];
 
-                            boat.Room = (short)location.Room;
+                            boat.Room = location.Room;
                             boat.X = location.X;
                             boat.Y = location.Y;
                             boat.Z = location.Z;
@@ -694,7 +693,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
                                 TR2Entity boat2 = boatToMove[i];
 
-                                boat2.Room = (short)location2ndBoat.Room;
+                                boat2.Room = location2ndBoat.Room;
                                 boat2.X = location2ndBoat.X;
                                 boat2.Y = location2ndBoat.Y;
                                 boat2.Z = location2ndBoat.Z;

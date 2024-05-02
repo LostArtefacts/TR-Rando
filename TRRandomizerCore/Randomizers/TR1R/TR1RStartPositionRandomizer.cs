@@ -47,7 +47,7 @@ public class TR1RStartPositionRandomizer : BaseTR1RRandomizer
             lara.X = location.X;
             lara.Y = location.Y;
             lara.Z = location.Z;
-            lara.Room = (short)location.Room;
+            lara.Room = location.Room;
         }
 
         short currentAngle = lara.Angle;

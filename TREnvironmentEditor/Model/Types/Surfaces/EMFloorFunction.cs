@@ -47,10 +47,10 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         EMLevelData data = GetData(level);
 
-        short roomNumber = data.ConvertRoom(Location.Room);
-        TR1Room room = level.Rooms[roomNumber];
-        TRRoomSector sector = level.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber);
-        int sectorIndex = room.Sectors.ToList().IndexOf(sector);
+        EMLocation location = data.ConvertLocation(Location);
+        TR1Room room = level.Rooms[location.Room];
+        TRRoomSector sector = level.GetRoomSector(location);
+        int sectorIndex = room.Sectors.IndexOf(sector);
 
         // Find the current vertices for this tile
         short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
@@ -179,9 +179,9 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         // Move any entities that share the same floor sector up or down the relevant number of clicks
         foreach (TR1Entity entity in level.Entities)
         {
-            if (entity.Room == roomNumber)
+            if (entity.Room == location.Room)
             {
-                TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
+                TRRoomSector entitySector = level.GetRoomSector(entity);
                 if (entitySector == sector)
                 {
                     entity.Y += clickChange;
@@ -266,10 +266,10 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         EMLevelData data = GetData(level);
 
-        short roomNumber = data.ConvertRoom(Location.Room);
-        TR2Room room = level.Rooms[roomNumber];
-        TRRoomSector sector = level.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber);
-        int sectorIndex = room.Sectors.ToList().IndexOf(sector);
+        EMLocation location = data.ConvertLocation(Location);
+        TR2Room room = level.Rooms[location.Room];
+        TRRoomSector sector = level.GetRoomSector(location);
+        int sectorIndex = room.Sectors.IndexOf(sector);
 
         // Find the current vertices for this tile
         short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
@@ -397,9 +397,9 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         // Move any entities that share the same floor sector up or down the relevant number of clicks
         foreach (TR2Entity entity in level.Entities)
         {
-            if (entity.Room == roomNumber)
+            if (entity.Room == location.Room)
             {
-                TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
+                TRRoomSector entitySector = level.GetRoomSector(entity);
                 if (entitySector == sector)
                 {
                     entity.Y += clickChange;
@@ -504,10 +504,10 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         EMLevelData data = GetData(level);
 
-        short roomNumber = data.ConvertRoom(Location.Room);
-        TR3Room room = level.Rooms[roomNumber];
-        TRRoomSector sector = level.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber);
-        int sectorIndex = room.Sectors.ToList().IndexOf(sector);
+        EMLocation location = data.ConvertLocation(Location);
+        TR3Room room = level.Rooms[location.Room];
+        TRRoomSector sector = level.GetRoomSector(location);
+        int sectorIndex = room.Sectors.IndexOf(sector);
 
         // Find the current vertices for this tile
         short x = (short)(sectorIndex / room.NumZSectors * TRConsts.Step4);
@@ -629,9 +629,9 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         // Move any entities that share the same floor sector up or down the relevant number of clicks
         foreach (TR3Entity entity in level.Entities)
         {
-            if (entity.Room == roomNumber)
+            if (entity.Room == location.Room)
             {
-                TRRoomSector entitySector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
+                TRRoomSector entitySector = level.GetRoomSector(entity);
                 if (entitySector == sector)
                 {
                     entity.Y += clickChange;

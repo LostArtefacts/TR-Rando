@@ -11,24 +11,24 @@ public class EMMergeTriggersFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         EMLevelData data = GetData(level);
-        MergeTriggers(level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room)),
-            level.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room)),
+        MergeTriggers(level.GetRoomSector(data.ConvertLocation(BaseLocation)),
+            level.GetRoomSector(data.ConvertLocation(TargetLocation)),
             level.FloorData);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        MergeTriggers(level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room)),
-            level.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room)),
+        MergeTriggers(level.GetRoomSector(data.ConvertLocation(BaseLocation)),
+            level.GetRoomSector(data.ConvertLocation(TargetLocation)),
             level.FloorData);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        MergeTriggers(level.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room)),
-            level.GetRoomSector(TargetLocation.X, TargetLocation.Y, TargetLocation.Z, data.ConvertRoom(TargetLocation.Room)),
+        MergeTriggers(level.GetRoomSector(data.ConvertLocation(BaseLocation)),
+            level.GetRoomSector(data.ConvertLocation(TargetLocation)),
             level.FloorData);
     }
 

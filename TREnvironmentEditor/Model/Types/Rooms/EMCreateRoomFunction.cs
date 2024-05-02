@@ -67,7 +67,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         // Generate the box, zone and overlap data
         EMLevelData data = GetData(level);
-        TRRoomSector linkedSector = level.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room));
+        TRRoomSector linkedSector = level.GetRoomSector(data.ConvertLocation(LinkedLocation));
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
@@ -133,7 +133,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         // Generate the box, zone and overlap data
         EMLevelData data = GetData(level);
-        TRRoomSector linkedSector = level.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room));
+        TRRoomSector linkedSector = level.GetRoomSector(data.ConvertLocation(LinkedLocation));
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
@@ -200,7 +200,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         // Generate the box, zone and overlap data
         EMLevelData data = GetData(level);
-        TRRoomSector linkedSector = level.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room));
+        TRRoomSector linkedSector = level.GetRoomSector(data.ConvertLocation(LinkedLocation));
         BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces

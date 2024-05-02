@@ -119,8 +119,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
         List<Location> locations = _locations[level.Name];
         locations.Shuffle(_generator);
 
-        _secretPicker.SectorAction = loc 
-            => level.Data.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room);
+        _secretPicker.SectorAction = loc => level.Data.GetRoomSector(loc);
         _routePicker.RoomInfos = level.Data.Rooms
             .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
             .ToList();

@@ -31,8 +31,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         List<FDTriggerEntry> currentTriggers = level.FloorData.GetEntityTriggers(EntityIndex);
         level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), EntityIndex);
 
-        AmendTriggers(currentTriggers, level.FloorData, location =>
-            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
+        AmendTriggers(currentTriggers, level.FloorData, location => level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     protected void RepositionTriggerable(TR2Entity entity, TR2Level level)
@@ -52,8 +51,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         List<FDTriggerEntry> currentTriggers = level.FloorData.GetEntityTriggers(EntityIndex);
         level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), EntityIndex);
 
-        AmendTriggers(currentTriggers, level.FloorData, location =>
-            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
+        AmendTriggers(currentTriggers, level.FloorData, location => level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     protected void RepositionTriggerable(TR3Entity entity, TR3Level level)
@@ -68,8 +66,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         List<FDTriggerEntry> currentTriggers = level.FloorData.GetEntityTriggers(EntityIndex);
         level.FloorData.RemoveEntityTriggers(level.Rooms.SelectMany(r => r.Sectors), EntityIndex);
 
-        AmendTriggers(currentTriggers, level.FloorData, location =>
-            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
+        AmendTriggers(currentTriggers, level.FloorData, location => level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     private void AmendTriggers(List<FDTriggerEntry> currentTriggers, FDControl control, Func<EMLocation, TRRoomSector> sectorGetter)

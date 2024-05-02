@@ -7,22 +7,19 @@ public static class EMLocationUtilities
 {
     public static int GetContainedSecretEntity(this EMLocation location, TR1Level level)
     {
-        TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, location.Room);
+        TRRoomSector sector = level.GetRoomSector(location);
         return GetSectorSecretEntity(sector, level.FloorData);
     }
 
     public static int GetContainedSecretEntity(this EMLocation location, TR2Level level)
     {
-        TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, location.Room);
-        return level.Entities.FindIndex(e =>
-            TR2TypeUtilities.IsSecretType(e.TypeID)
-            && level.GetRoomSector(e.X, e.Y, e.Z, e.Room) == sector
-        );
+        TRRoomSector sector = level.GetRoomSector(location);
+        return level.Entities.FindIndex(e => TR2TypeUtilities.IsSecretType(e.TypeID) && level.GetRoomSector(e) == sector);
     }
 
     public static int GetContainedSecretEntity(this EMLocation location, TR3Level level)
     {
-        TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, location.Room);
+        TRRoomSector sector = level.GetRoomSector(location);
         return GetSectorSecretEntity(sector, level.FloorData);
     }
 

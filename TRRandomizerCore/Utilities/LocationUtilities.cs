@@ -25,7 +25,7 @@ public static class LocationUtilities
         entity.X = location.X;
         entity.Y = location.Y;
         entity.Z = location.Z;
-        entity.Room = (short)location.Room;
+        entity.Room = location.Room;
         entity.Angle = location.Angle;
     }
 
@@ -60,13 +60,13 @@ public static class LocationUtilities
 
     public static bool ContainsSecret(this Location location, TR1Level level)
     {
-        TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room);
+        TRRoomSector sector = level.GetRoomSector(location);
         return SectorContainsSecret(sector, level.FloorData);
     }
 
     public static bool IsSlipperySlope(this Location location, TR1Level level)
     {
-        TRRoomSector sector = level.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room);
+        TRRoomSector sector = level.GetRoomSector(location);
         return SectorIsSlipperySlope(sector, level.FloorData);
     }
 
@@ -84,9 +84,8 @@ public static class LocationUtilities
 
     public static bool HasPickupTriger(TR1Entity entity, int entityIndex, TR1Level level)
     {
-        Location floor = entity.GetFloorLocation(loc =>
-            level.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room));
-        TRRoomSector sector = level.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room);
+        Location floor = entity.GetFloorLocation(loc => level.GetRoomSector(loc));
+        TRRoomSector sector = level.GetRoomSector(floor);
         bool hasTrigger = HasPickupTrigger(sector, entityIndex, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
@@ -98,9 +97,8 @@ public static class LocationUtilities
 
     public static bool HasAnyTrigger(Location location, TR1Level level)
     {
-        Location floor = location.GetFloorLocation(loc =>
-            level.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room));
-        TRRoomSector sector = level.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room);
+        Location floor = location.GetFloorLocation(loc => level.GetRoomSector(loc));
+        TRRoomSector sector = level.GetRoomSector(floor);
         bool hasTrigger = HasAnyTrigger(sector, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
@@ -112,9 +110,8 @@ public static class LocationUtilities
 
     public static bool HasPickupTriger(TR2Entity entity, int entityIndex, TR2Level level)
     {
-        Location floor = entity.GetFloorLocation(loc =>
-            level.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room));
-        TRRoomSector sector = level.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room);
+        Location floor = entity.GetFloorLocation(loc => level.GetRoomSector(loc));
+        TRRoomSector sector = level.GetRoomSector(floor);
         bool hasTrigger = HasPickupTrigger(sector, entityIndex, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
@@ -126,9 +123,8 @@ public static class LocationUtilities
 
     public static bool HasAnyTrigger(Location location, TR2Level level)
     {
-        Location floor = location.GetFloorLocation(loc =>
-            level.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room));
-        TRRoomSector sector = level.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room);
+        Location floor = location.GetFloorLocation(loc => level.GetRoomSector(loc));
+        TRRoomSector sector = level.GetRoomSector(floor);
         bool hasTrigger = HasAnyTrigger(sector, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
@@ -140,9 +136,8 @@ public static class LocationUtilities
 
     public static bool HasPickupTriger(TR3Entity entity, int entityIndex, TR3Level level)
     {
-        Location floor = entity.GetFloorLocation(loc =>
-            level.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room));
-        TRRoomSector sector = level.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room);
+        Location floor = entity.GetFloorLocation(loc => level.GetRoomSector(loc));
+        TRRoomSector sector = level.GetRoomSector(floor);
         bool hasTrigger = HasPickupTrigger(sector, entityIndex, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {
@@ -154,9 +149,8 @@ public static class LocationUtilities
 
     public static bool HasAnyTrigger(Location location, TR3Level level)
     {
-        Location floor = location.GetFloorLocation(loc =>
-            level.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room));
-        TRRoomSector sector = level.GetRoomSector(floor.X, floor.Y, floor.Z, (short)floor.Room);
+        Location floor = location.GetFloorLocation(loc => level.GetRoomSector(loc));
+        TRRoomSector sector = level.GetRoomSector(floor);
         bool hasTrigger = HasAnyTrigger(sector, level.FloorData);
         if (level.Rooms[floor.Room].AlternateRoom != -1)
         {

@@ -27,8 +27,7 @@ public class EMEntityFinder
             types.AddRange(Types.Select(t => (TR1Type)t));
         }
 
-        return GetEntity(level.Entities, types, data, 
-            l => level.GetRoomSector(l.X, l.Y, l.Z, l.Room));
+        return GetEntity(level.Entities, types, data, l => level.GetRoomSector(l));
     }
 
     public int GetEntity(TR2Level level)
@@ -49,8 +48,7 @@ public class EMEntityFinder
             types.AddRange(Types.Select(t => (TR2Type)t));
         }
 
-        return GetEntity(level.Entities, types, data,
-            l => level.GetRoomSector(l.X, l.Y, l.Z, l.Room));
+        return GetEntity(level.Entities, types, data, l => level.GetRoomSector(l));
     }
 
     public int GetEntity(TR3Level level)
@@ -71,8 +69,7 @@ public class EMEntityFinder
             types.AddRange(Types.Select(t => (TR3Type)t));
         }
 
-        return GetEntity(level.Entities, types, data,
-            l => level.GetRoomSector(l.X, l.Y, l.Z, l.Room));
+        return GetEntity(level.Entities, types, data, l => level.GetRoomSector(l));
     }
 
     public int GetEntity<E, T>(List<E> entities, List<T> types, EMLevelData data, Func<EMLocation, TRRoomSector> sectorFunc)

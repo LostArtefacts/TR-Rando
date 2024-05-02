@@ -14,21 +14,21 @@ public class EMMovePickupFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
         MovePickups(level.Entities, data, location =>
-            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
+            level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
         MovePickups(level.Entities, data, location =>
-            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
+            level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
         MovePickups(level.Entities, data, location =>
-            level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room)));
+            level.GetRoomSector(data.ConvertLocation(location)));
     }
 
     private void MovePickups<T>(IEnumerable<TREntity<T>> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)

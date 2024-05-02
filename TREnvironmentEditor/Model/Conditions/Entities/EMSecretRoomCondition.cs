@@ -49,7 +49,7 @@ public class EMSecretRoomCondition : BaseEMCondition
 
             foreach (TR3Entity entity in roomEntities)
             {
-                TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y, entity.Z, RoomIndex);
+                TRRoomSector sector = level.GetRoomSector(entity);
                 if (sector.FDIndex == 0)
                 {
                     continue;

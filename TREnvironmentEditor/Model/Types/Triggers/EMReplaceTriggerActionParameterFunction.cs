@@ -18,7 +18,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
+                TRRoomSector baseSector = level.GetRoomSector(data.ConvertLocation(location));
                 ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
@@ -27,7 +27,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
             foreach (int entityIndex in EntityLocations)
             {
                 TR1Entity entity = level.Entities[data.ConvertEntity(entityIndex)];
-                TRRoomSector baseSector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
+                TRRoomSector baseSector = level.GetRoomSector(entity);
                 ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
@@ -42,7 +42,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
+                TRRoomSector baseSector = level.GetRoomSector(data.ConvertLocation(location));
                 ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
@@ -51,7 +51,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
             foreach (int entityIndex in EntityLocations)
             {
                 TR2Entity entity = level.Entities[data.ConvertEntity(entityIndex)];
-                TRRoomSector baseSector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
+                TRRoomSector baseSector = level.GetRoomSector(entity);
                 ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
@@ -66,7 +66,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         {
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = level.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room));
+                TRRoomSector baseSector = level.GetRoomSector(data.ConvertLocation(location));
                 ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }
@@ -75,7 +75,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
             foreach (int entityIndex in EntityLocations)
             {
                 TR3Entity entity = level.Entities[data.ConvertEntity(entityIndex)];
-                TRRoomSector baseSector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
+                TRRoomSector baseSector = level.GetRoomSector(entity);
                 ReplaceActionParameter(baseSector, level.FloorData, action);
             }
         }

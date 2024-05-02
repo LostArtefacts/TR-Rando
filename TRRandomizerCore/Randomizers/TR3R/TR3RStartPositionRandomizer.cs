@@ -58,14 +58,14 @@ public class TR3RStartPositionRandomizer : BaseTR3RRandomizer
                     X = location.X,
                     Y = location.Y,
                     Z = location.Z,
-                    Room = (short)location.Room
+                    Room = location.Room
                 }
             }.ApplyToLevel(level.Data);
 
             lara.X = location.X;
             lara.Y = location.Y;
             lara.Z = location.Z;
-            lara.Room = (short)location.Room;
+            lara.Room = location.Room;
         }
 
         short currentAngle = lara.Angle;

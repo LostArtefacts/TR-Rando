@@ -282,8 +282,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         {
             if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(entity.GetFloorLocation(loc =>
-                    level.Data.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room)));
+                exclusions.Add(entity.GetFloorLocation(loc => level.Data.GetRoomSector(loc)));
             }
         }
 

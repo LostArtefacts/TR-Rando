@@ -345,8 +345,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         {
             if (!TR1TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
-                exclusions.Add(entity.GetFloorLocation(loc =>
-                    level.Data.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room)));
+                exclusions.Add(entity.GetFloorLocation(loc => level.Data.GetRoomSector(loc)));
             }
         }
 
@@ -421,8 +420,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
     private void TestEnemyItemDrop(TR1CombinedLevel level, TR1Entity entity)
     {
-        TRRoomSector sectorFunc(Location loc) =>
-            level.Data.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room);
+        TRRoomSector sectorFunc(Location loc) => level.Data.GetRoomSector(loc);
 
         // There may be several enemies in one spot e.g. in cloned enemy mode. Pick one
         // at random for each call of this method. Always exclude empty eggs.
@@ -516,7 +514,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
     private static bool IsSecretItem(TR1Entity entity, int entityIndex, TR1Level level)
     {
-        TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room);
+        TRRoomSector sector = level.GetRoomSector(entity);
         if (sector.FDIndex != 0)
         {
             return level.FloorData[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger

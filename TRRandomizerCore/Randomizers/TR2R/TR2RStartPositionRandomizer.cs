@@ -49,7 +49,7 @@ public class TR2RStartPositionRandomizer : BaseTR2RRandomizer
         {
             List<Location> locations = _startLocations[level.Name];
             Location location = locations[_generator.Next(0, locations.Count)];
-            lara.Room = (short)location.Room;
+            lara.Room = location.Room;
             lara.X = location.X;
             lara.Y = location.Y;
             lara.Z = location.Z;

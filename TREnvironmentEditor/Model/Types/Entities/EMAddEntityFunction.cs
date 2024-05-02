@@ -21,12 +21,12 @@ public class EMAddEntityFunction : BaseEMFunction
         {
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
-            {;
-                short room = data.ConvertRoom(Location.Room);
-                TRRoomSector sector = level.GetRoomSector(Location.X, Location.Y, Location.Z, room);
+            {
+                EMLocation location = data.ConvertLocation(Location);
+                TRRoomSector sector = level.GetRoomSector(location);
                 foreach (TR1Entity entity in level.Entities)
                 {
-                    if (entity.Room == room && level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room) == sector)
+                    if (entity.Room == location.Room && level.GetRoomSector(entity) == sector)
                     {
                         entity.X = TargetRelocation.X;
                         entity.Y = TargetRelocation.Y;
@@ -47,11 +47,11 @@ public class EMAddEntityFunction : BaseEMFunction
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
             {
-                short room = data.ConvertRoom(Location.Room);
-                TRRoomSector sector = level.GetRoomSector(Location.X, Location.Y, Location.Z, room);
+                EMLocation location = data.ConvertLocation(Location);
+                TRRoomSector sector = level.GetRoomSector(location);
                 foreach (TR2Entity entity in level.Entities)
                 {
-                    if (entity.Room == room && level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room) == sector)
+                    if (entity.Room == location.Room && level.GetRoomSector(entity) == sector)
                     {
                         entity.X = TargetRelocation.X;
                         entity.Y = TargetRelocation.Y;
@@ -73,11 +73,11 @@ public class EMAddEntityFunction : BaseEMFunction
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
             {
-                short room = data.ConvertRoom(Location.Room);
-                TRRoomSector sector = level.GetRoomSector(Location.X, Location.Y, Location.Z, room);
+                EMLocation location = data.ConvertLocation(Location);
+                TRRoomSector sector = level.GetRoomSector(location);
                 foreach (TR3Entity entity in level.Entities)
                 {
-                    if (entity.Room == room && level.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room) == sector)
+                    if (entity.Room == location.Room && level.GetRoomSector(entity) == sector)
                     {
                         entity.X = TargetRelocation.X;
                         entity.Y = TargetRelocation.Y;

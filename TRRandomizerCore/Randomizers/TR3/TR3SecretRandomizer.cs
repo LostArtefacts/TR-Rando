@@ -255,7 +255,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private static void CreateTrapdoorTrigger(TR3Entity door, short doorIndex, TR3Level level)
     {
-        TRRoomSector sector = level.GetRoomSector(door.X, door.Y, door.Z, door.Room);
+        TRRoomSector sector = level.GetRoomSector(door);
         if (sector.FDIndex == 0)
         {
             level.FloorData.CreateFloorData(sector);
@@ -321,8 +321,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         List<Location> locations = _locations[level.Name];
         locations.Shuffle(_generator);
 
-        _secretPicker.SectorAction = loc
-            => level.Data.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room);
+        _secretPicker.SectorAction = loc => level.Data.GetRoomSector(loc);
         _secretPicker.PlacementTestAction = loc
             => TestSecretPlacement(level, loc);
 
@@ -480,13 +479,13 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         }
 
         // Get the sector and check if it is shared with a trapdoor or bridge, as these won't work either.
-        TRRoomSector sector = level.Data.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room);
+        TRRoomSector sector = level.Data.GetRoomSector(location);
         foreach (TR3Entity otherEntity in level.Data.Entities)
         {
             TR3Type type = otherEntity.TypeID;
             if (location.Room == otherEntity.Room && (TR3TypeUtilities.IsTrapdoor(type) || TR3TypeUtilities.IsBridge(type)))
             {
-                TRRoomSector otherSector = level.Data.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room);
+                TRRoomSector otherSector = level.Data.GetRoomSector(otherEntity);
                 if (otherSector == sector)
                 {
                     if (Settings.DevelopmentMode)
@@ -541,8 +540,8 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
     private void PlaceSecret(TR3CombinedLevel level, TRSecretPlacement<TR3Type> secret)
     {
         // This assumes TestTriggerPlacement has already been called and passed.
-        TRRoomSector sector = level.Data.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, (short)secret.Location.Room);
-        CreateSecretTriggers(level, secret, (short)secret.Location.Room, sector);
+        TRRoomSector sector = level.Data.GetRoomSector(secret.Location);
+        CreateSecretTriggers(level, secret, secret.Location.Room, sector);
 
         short altRoom = level.Data.Rooms[secret.Location.Room].AlternateRoom;
         if (altRoom != -1)

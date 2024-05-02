@@ -708,7 +708,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         currentEntity.Y = eggLocation.Y;
                         currentEntity.Z = eggLocation.Z;
                         currentEntity.Angle = eggLocation.Angle;
-                        currentEntity.Room = (short)eggLocation.Room;
+                        currentEntity.Room = eggLocation.Room;
                     }
 
                     // Eggs will always be visible

@@ -324,7 +324,7 @@ public class LocationPicker : IRouteManager
         entity.X = location.X;
         entity.Y = location.Y;
         entity.Z = location.Z;
-        entity.Room = (short)location.Room;
+        entity.Room = location.Room;
         entity.Angle = location.Angle;
 
         // Anything other than -1 means a sloped sector and so the location generator
