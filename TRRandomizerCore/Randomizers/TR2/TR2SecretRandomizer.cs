@@ -91,8 +91,8 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
 
         // Simulate zoning of sorts by splitting the route equally. This of course doesn't guarantee
         // what will be assigned in regular mode.
-        List<int> routeRooms = _routePicker.GetRouteRooms();
-        List<List<int>> zones = routeRooms.Split(_levelSecretCount);
+        List<short> routeRooms = _routePicker.GetRouteRooms();
+        List<List<short>> zones = routeRooms.Split(_levelSecretCount);
         List<TR2Type> secretTypes = TR2TypeUtilities.GetSecretTypes();
 
         foreach (Location location in _locations[level.Name])

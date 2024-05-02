@@ -6,7 +6,7 @@ namespace TRRandomizerCore.Utilities;
 
 public static class RoomWaterUtilities
 {
-    public static readonly Dictionary<string, int> DefaultRoomCountDictionary = new()
+    public static readonly Dictionary<string, short> DefaultRoomCountDictionary = new()
     {
         { TR1LevelNames.CAVES, 38 },
         { TR1LevelNames.VILCABAMBA, 94 },

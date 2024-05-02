@@ -12,7 +12,7 @@ public class LocationPicker : IRouteManager
     private readonly Dictionary<string, List<Location>> _routes;
 
     private List<Location> _locations, _usedTriggerLocations, _currentRoute;
-    private List<int> _allRooms;
+    private List<short> _allRooms;
     private RandomizerSettings _settings;
     private Random _generator;
 
@@ -75,7 +75,7 @@ public class LocationPicker : IRouteManager
             }
             else
             {
-                location.Room = RoomInfos.IndexOf(matchingInfos[0]);
+                location.Room = (short)RoomInfos.IndexOf(matchingInfos[0]);
             }
         }
     }
@@ -115,7 +115,7 @@ public class LocationPicker : IRouteManager
     public Location GetKeyItemLocation<T>(int keyItemID, TREntity<T> entity, bool hasPickupTrigger)
         where T : Enum
     {
-        List<int> roomPool = GetRoomPool(keyItemID);
+        List<short> roomPool = GetRoomPool(keyItemID);
         if (roomPool.Count == 0)
         {
             // This key item must remain static.
@@ -154,9 +154,9 @@ public class LocationPicker : IRouteManager
         return newLocation;
     }
 
-    public List<int> GetRoomPool(int keyItemID)
+    public List<short> GetRoomPool(int keyItemID)
     {
-        List<int> roomPool = new();
+        List<short> roomPool = new();
         if (_currentRoute == null)
         {
             return roomPool;
@@ -247,7 +247,7 @@ public class LocationPicker : IRouteManager
         return _currentRoute.FindIndex(l => l.Room == location.Room);
     }
 
-    public List<int> GetRouteRooms()
+    public List<short> GetRouteRooms()
     {
         return _currentRoute
             .Select(l => l.Room)
@@ -284,7 +284,7 @@ public class LocationPicker : IRouteManager
         return distance;
     }
 
-    public Location GetRandomLocation(List<int> roomPool = null)
+    public Location GetRandomLocation(List<short> roomPool = null)
     {
         if (roomPool == null || !_locations.Any(l => roomPool.Contains(l.Room)))
         {

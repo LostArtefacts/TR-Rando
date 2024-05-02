@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel;
 using System.Numerics;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Helpers;
 
-public class Location
+public class Location : ITRLocatable
 {
     public const string DefaultPackID = "TRRando";
 
     public int X { get; set; }
     public int Y { get; set; }
     public int Z { get; set; }
-    public int Room { get; set; }
+    public short Room { get; set; }
     public bool RequiresGlitch { get; set; }
     public Difficulty Difficulty { get; set; }
     public ItemRange Range { get; set; }
