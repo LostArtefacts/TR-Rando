@@ -151,6 +151,49 @@ public class FDTests : FDTestBase
     }
 
     [TestMethod]
+    [Description("Get a sector through a horizontal portal.")]
+    public void GetSectorBeyondHPortal()
+    {
+        TR1Level level = GetTR1TestLevel();
+        TRRoom room0 = level.Rooms[0];
+        TRRoom room4 = level.Rooms[4];
+        TRRoomSector sector = level.GetRoomSector(3584, 0, 14848, 0);
+
+        Assert.IsFalse(room0.Sectors.Contains(sector));
+        Assert.IsTrue(room4.Sectors.Contains(sector));
+        Assert.IsTrue(room0.Sectors.Where(s => s.FDIndex != 0)
+            .Any(s => level.FloorData[s.FDIndex].Any(e => e is FDPortalEntry portal && portal.Room == 4)));
+    }
+
+    [TestMethod]
+    [Description("Get a sector below a vertical portal.")]
+    public void GetSectorBelowVPortal()
+    {
+        TR1Level level = GetTR1TestLevel();
+        TRRoom room0 = level.Rooms[0];
+        TRRoom room1 = level.Rooms[1];
+        TRRoomSector sector = level.GetRoomSector(8704, 256, 13824, 0);
+
+        Assert.IsFalse(room0.Sectors.Contains(sector));
+        Assert.IsTrue(room1.Sectors.Contains(sector));
+        Assert.AreEqual(0, sector.RoomAbove);
+    }
+
+    [TestMethod]
+    [Description("Get a sector above a vertical portal.")]
+    public void GetSectorAboveVPortal()
+    {
+        TR1Level level = GetTR1TestLevel();
+        TRRoom room1 = level.Rooms[1];
+        TRRoom room0 = level.Rooms[0];
+        TRRoomSector sector = level.GetRoomSector(8704, -256, 13824, 1);
+
+        Assert.IsFalse(room1.Sectors.Contains(sector));
+        Assert.IsTrue(room0.Sectors.Contains(sector));
+        Assert.AreEqual(1, sector.RoomBelow);
+    }
+
+    [TestMethod]
     public void GetFlatFloorHeight()
     {
         TR1Level level = GetTR1TestLevel();
@@ -500,5 +543,29 @@ public class FDTests : FDTestBase
         Assert.AreEqual(FDSlantType.Ceiling, slant.Type);
         Assert.AreEqual(2, slant.XSlant);
         Assert.AreEqual(-3, slant.ZSlant);
+    }
+
+    [TestMethod]
+    [Description("Add invalid FD entries for TR1.")]
+    public void AddInvalidEntries()
+    {
+        TR1Level level = GetTR1TestLevel();
+
+        TRRoomSector sector = level.Rooms[2].GetSector(4608, 6656);
+        Assert.AreEqual(0, sector.FDIndex);
+
+        level.FloorData.CreateFloorData(sector);
+        level.FloorData[sector.FDIndex].AddRange(new List<FDEntry>
+        {
+            new FDBeetleEntry(),
+            new FDClimbEntry(),
+            new FDDeferredTriggerEntry(),
+            new FDMinecartEntry(),
+            new FDMonkeySwingEntry(),
+            new FDTriangulationEntry(),
+        });
+
+        WriteReadTempLevel(level);
+        Assert.AreEqual(0, sector.FDIndex);
     }
 }

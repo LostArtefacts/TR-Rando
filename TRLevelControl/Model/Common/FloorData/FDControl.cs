@@ -6,6 +6,7 @@ namespace TRLevelControl.Model;
 public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
 {
     private readonly TRGameVersion _version;
+    private readonly ITRLevelObserver _observer;
     private readonly ushort _dummyEntry;
     private SortedDictionary<int, List<FDEntry>> _entries;
 
@@ -29,9 +30,10 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
         return _entries.Values.SelectMany(v => v.Where(predicate));
     }
 
-    public FDControl(TRGameVersion version, ushort dummyData = 0)
+    public FDControl(TRGameVersion version, ITRLevelObserver observer, ushort dummyData = 0)
     {
         _version = version;
+        _observer = observer;
         _dummyEntry = dummyData;
         _entries = new();
     }
@@ -62,7 +64,7 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
         };
 
         // Flatten each entry list and map old indices to new.
-        TRFDBuilder builder = new(_version);
+        TRFDBuilder builder = new(_version, _observer);
         Dictionary<int, int> newIndices = new();
         foreach (int currentIndex in _entries.Keys)
         {

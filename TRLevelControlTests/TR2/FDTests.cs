@@ -82,4 +82,27 @@ public class FDTests : FDTestBase
 
         TestDirection(FDClimbDirection.PositiveX | FDClimbDirection.NegativeX | FDClimbDirection.PositiveZ | FDClimbDirection.NegativeZ);
     }
+
+    [TestMethod]
+    [Description("Add invalid FD entries for TR2.")]
+    public void AddInvalidEntries()
+    {
+        TR2Level level = GetTR2TestLevel();
+
+        TRRoomSector sector = level.Rooms[2].GetSector(4608, 6656);
+        Assert.AreEqual(0, sector.FDIndex);
+
+        level.FloorData.CreateFloorData(sector);
+        level.FloorData[sector.FDIndex].AddRange(new List<FDEntry>
+        {
+            new FDBeetleEntry(),
+            new FDDeferredTriggerEntry(),
+            new FDMinecartEntry(),
+            new FDMonkeySwingEntry(),
+            new FDTriangulationEntry(),
+        });
+
+        WriteReadTempLevel(level);
+        Assert.AreEqual(0, sector.FDIndex);
+    }
 }

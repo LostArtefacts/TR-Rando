@@ -18,7 +18,7 @@ public class TRFDBuilder
         uint numFloorData = reader.ReadUInt32();
         ushort[] data = reader.ReadUInt16s(numFloorData);
 
-        FDControl floorData = new(_version, data.Length == 0 ? (ushort)0 : data[0]);
+        FDControl floorData = new(_version, _observer, data.Length == 0 ? (ushort)0 : data[0]);
         if (_observer?.UseOriginalFloorData ?? false)
         {
             int index = 0;
@@ -225,10 +225,15 @@ public class TRFDBuilder
         for (int i = 0; i < entries.Count; i++)
         {
             FDEntry entry = entries[i];
+            if (_observer == null && !IsValidEntry(entry))
+            {
+                continue;
+            }
+
             int setupValue = (byte)entry.GetFunction() & 0x001F;
 
             // Check for defined SubFunction - 0x7F00
-            if (entry is FDClimbEntry climbEntry && _version >= TRGameVersion.TR2)
+            if (entry is FDClimbEntry climbEntry)
             {
                 setupValue |= ((byte)climbEntry.Direction & 0x001F) << 8;
             }
@@ -237,7 +242,7 @@ public class TRFDBuilder
                 setupValue |= ((byte)trigger.TrigType & 0x001F) << 8;
             }
             // Or triangulation height adjustments
-            else if (entry is FDTriangulationEntry triangulation && _version >= TRGameVersion.TR3)
+            else if (entry is FDTriangulationEntry triangulation)
             {
                 setupValue |= (triangulation.H1 & 0x001F) << 5;
                 setupValue |= (triangulation.H2 & 0x001F) << 10;
@@ -270,7 +275,7 @@ public class TRFDBuilder
             {
                 data.AddRange(Flatten(trigger));
             }
-            else if (entry is FDTriangulationEntry triangulation && _version >= TRGameVersion.TR3)
+            else if (entry is FDTriangulationEntry triangulation)
             {
                 int corners = triangulation.C10 & 0x000F;
                 corners |= (triangulation.C00 & 0x000F) << 4;
@@ -281,6 +286,19 @@ public class TRFDBuilder
         }
 
         return data;
+    }
+
+    private bool IsValidEntry(FDEntry entry)
+    {
+        return entry switch
+        {
+            FDTriggerEntry trigger => trigger.Actions.Count > 0,
+            FDClimbEntry => _version >= TRGameVersion.TR2,
+            FDMinecartEntry => _version == TRGameVersion.TR3,
+            FDTriangulationEntry or FDMonkeySwingEntry => _version >= TRGameVersion.TR3,
+            FDBeetleEntry or FDDeferredTriggerEntry => _version >= TRGameVersion.TR4,
+            _ => true,
+        };
     }
 
     private static List<ushort> Flatten(FDTriggerEntry trigger)

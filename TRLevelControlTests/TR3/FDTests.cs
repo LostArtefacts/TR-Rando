@@ -136,4 +136,24 @@ public class FDTests : FDTestBase
         Assert.AreEqual(2, triangle.H1);
         Assert.AreEqual(1, triangle.H2);
     }
+
+    [TestMethod]
+    [Description("Add invalid FD entries for TR3.")]
+    public void AddInvalidEntries()
+    {
+        TR3Level level = GetTR3TestLevel();
+
+        TRRoomSector sector = level.Rooms[2].GetSector(4608, 6656);
+        Assert.AreEqual(0, sector.FDIndex);
+
+        level.FloorData.CreateFloorData(sector);
+        level.FloorData[sector.FDIndex].AddRange(new List<FDEntry>
+        {
+            new FDBeetleEntry(),
+            new FDDeferredTriggerEntry(),
+        });
+
+        WriteReadTempLevel(level);
+        Assert.AreEqual(0, sector.FDIndex);
+    }
 }
