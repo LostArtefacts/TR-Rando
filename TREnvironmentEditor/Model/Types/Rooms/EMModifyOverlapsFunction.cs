@@ -39,7 +39,7 @@ public class EMModifyOverlapsFunction : BaseEMFunction
         {
             foreach (ushort boxIndex in RemoveLinks.Keys)
             {
-                TR2Box box = level.Boxes[boxIndex];
+                TRBox box = level.Boxes[boxIndex];
                 List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
                 overlaps.RemoveAll(o => RemoveLinks[boxIndex].Contains(o));
                 TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);
@@ -50,7 +50,7 @@ public class EMModifyOverlapsFunction : BaseEMFunction
         {
             foreach (ushort boxIndex in AddLinks.Keys)
             {
-                TR2Box box = level.Boxes[boxIndex];
+                TRBox box = level.Boxes[boxIndex];
                 List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
                 overlaps.AddRange(AddLinks[boxIndex]);
                 TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);
@@ -64,7 +64,7 @@ public class EMModifyOverlapsFunction : BaseEMFunction
         {
             foreach (ushort boxIndex in RemoveLinks.Keys)
             {
-                TR2Box box = level.Boxes[boxIndex];
+                TRBox box = level.Boxes[boxIndex];
                 List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
                 overlaps.RemoveAll(o => RemoveLinks[boxIndex].Contains(o));
                 TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);
@@ -75,7 +75,7 @@ public class EMModifyOverlapsFunction : BaseEMFunction
         {
             foreach (ushort boxIndex in AddLinks.Keys)
             {
-                TR2Box box = level.Boxes[boxIndex];
+                TRBox box = level.Boxes[boxIndex];
                 List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
                 overlaps.AddRange(AddLinks[boxIndex]);
                 TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);

@@ -440,27 +440,14 @@ public class EMMirrorFunction : BaseEMFunction
 
     private void MirrorBoxes(List<TRBox> boxes)
     {
-        // TR1 boxes are in world coordinate values
-        foreach (TRBox box in boxes)
-        {
-            uint newMaxX = (uint)FlipWorldX((int)box.XMin);
-            uint newMinX = (uint)FlipWorldX((int)box.XMax);
-            Debug.Assert(newMaxX >= newMinX);
-            box.XMin = newMinX;
-            box.XMax = newMaxX;
-        }
-    }
-
-    private void MirrorBoxes(List<TR2Box> boxes)
-    {
         // Boxes do not necessarily cover only one sector and several sectors can point
         // to the same box. So we need to work out the smallest new X position for shared
         // boxes and update each one only once. This is done by converting the xmin and xmax
         // to world coordinates, flipping them over X and then swapping them.
-        foreach (TR2Box box in boxes)
+        foreach (TRBox box in boxes)
         {
-            byte newMaxX = (byte)(FlipWorldX(box.XMin * TRConsts.Step4) / TRConsts.Step4);
-            byte newMinX = (byte)(FlipWorldX(box.XMax * TRConsts.Step4) / TRConsts.Step4);
+            byte newMaxX = (byte)(FlipWorldX(box.XMin << TRConsts.WallShift) >> TRConsts.WallShift);
+            byte newMinX = (byte)(FlipWorldX(box.XMax << TRConsts.WallShift) >> TRConsts.WallShift);
             Debug.Assert(newMaxX >= newMinX);
             box.XMin = newMinX;
             box.XMax = newMaxX;

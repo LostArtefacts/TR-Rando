@@ -12,8 +12,8 @@ public class TR2BoxUtilities
     public static readonly int Blockable = 0x8000;
     public static readonly int Blocked = 0x4000;
 
-    public static readonly short TR2NoOverlap = -1;
-    public static readonly short TR3NoOverlap = 2047;
+    public static readonly ushort TR2NoOverlap = ushort.MaxValue;
+    public static readonly ushort TR3NoOverlap = 2047;
 
     public static void DuplicateZone(TR2Level level, int boxIndex)
     {
@@ -132,17 +132,17 @@ public class TR2BoxUtilities
         return count;
     }
 
-    public static List<ushort> GetOverlaps(TR2Level level, TR2Box box)
+    public static List<ushort> GetOverlaps(TR2Level level, TRBox box)
     {
         return GetOverlaps(level.Overlaps, box, TR2NoOverlap);
     }
 
-    public static List<ushort> GetOverlaps(TR3Level level, TR2Box box)
+    public static List<ushort> GetOverlaps(TR3Level level, TRBox box)
     {
         return GetOverlaps(level.Overlaps, box, TR3NoOverlap);
     }
 
-    private static List<ushort> GetOverlaps(List<ushort> allOverlaps, TR2Box box, short noOverlap)
+    private static List<ushort> GetOverlaps(List<ushort> allOverlaps, TRBox box, ushort noOverlap)
     {
         List<ushort> overlaps = new();
 
@@ -167,10 +167,10 @@ public class TR2BoxUtilities
         return overlaps;
     }
 
-    public static void UpdateOverlaps(TR2Level level, TR2Box box, List<ushort> overlaps)
+    public static void UpdateOverlaps(TR2Level level, TRBox box, List<ushort> overlaps)
     {
         List<ushort> newOverlaps = new();
-        foreach (TR2Box lvlBox in level.Boxes)
+        foreach (TRBox lvlBox in level.Boxes)
         {
             // Either append the current overlaps, or the new ones if this is the box being updated.
             // Do nothing for boxes that have no overlaps.
@@ -183,10 +183,10 @@ public class TR2BoxUtilities
         level.Overlaps.AddRange(newOverlaps);
     }
 
-    public static void UpdateOverlaps(TR3Level level, TR2Box box, List<ushort> overlaps)
+    public static void UpdateOverlaps(TR3Level level, TRBox box, List<ushort> overlaps)
     {
         List<ushort> newOverlaps = new();
-        foreach (TR2Box lvlBox in level.Boxes)
+        foreach (TRBox lvlBox in level.Boxes)
         {
             List<ushort> boxOverlaps = lvlBox == box ? overlaps : GetOverlaps(level, lvlBox);
             UpdateOverlaps(lvlBox, boxOverlaps, newOverlaps, TR3NoOverlap);
@@ -197,7 +197,7 @@ public class TR2BoxUtilities
         level.Overlaps.AddRange(newOverlaps);
     }
 
-    private static void UpdateOverlaps(TR2Box lvlBox, List<ushort> boxOverlaps, List<ushort> newOverlaps, short noOverlap)
+    private static void UpdateOverlaps(TRBox lvlBox, List<ushort> boxOverlaps, List<ushort> newOverlaps, ushort noOverlap)
     {
         // Either append the current overlaps, or the new ones if this is the box being updated.
         // Do nothing for boxes that have no overlaps.
@@ -226,7 +226,7 @@ public class TR2BoxUtilities
         }
     }
 
-    private static void UpdateOverlapIndex(TR2Box box, int index)
+    private static void UpdateOverlapIndex(TRBox box, int index)
     {
         if ((box.OverlapIndex & Blockable) > 0)
         {
@@ -236,6 +236,6 @@ public class TR2BoxUtilities
         {
             index |= Blocked;
         }
-        box.OverlapIndex = (short)index;
+        box.OverlapIndex = (ushort)index;
     }
 }

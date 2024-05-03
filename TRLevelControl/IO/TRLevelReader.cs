@@ -579,6 +579,34 @@ public class TRLevelReader : BinaryReader
         };
     }
 
+    public TRBox ReadBox(TRGameVersion version)
+    {
+        byte zmin, zmax, xmin, xmax;
+        if (version == TRGameVersion.TR1)
+        {
+            zmin = (byte)(ReadUInt32() >> TRConsts.WallShift);
+            zmax = (byte)((ReadUInt32() + 1) >> TRConsts.WallShift);
+            xmin = (byte)(ReadUInt32() >> TRConsts.WallShift);
+            xmax = (byte)((ReadUInt32() + 1) >> TRConsts.WallShift);
+        }
+        else
+        {
+            zmin = ReadByte();
+            zmax = ReadByte();
+            xmin = ReadByte();
+            xmax = ReadByte();
+        }
+
+        return new()
+        {
+            ZMin = zmin,
+            ZMax = zmax,
+            XMin = xmin,
+            XMax = xmax,
+            TrueFloor = ReadInt16()
+        };
+    }
+
     public List<TRSpriteTexture> ReadSpriteTextures(long numTextures, TRGameVersion version)
     {
         List<TRSpriteTexture> textures = new();

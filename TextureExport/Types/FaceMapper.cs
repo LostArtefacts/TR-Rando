@@ -400,7 +400,7 @@ public static class FaceMapper
             return "NOBOX";
         }
 
-        TR2Box box = level.Boxes[sector.BoxIndex];
+        TRBox box = level.Boxes[sector.BoxIndex];
         List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
 
         string info = "B" + sector.BoxIndex;

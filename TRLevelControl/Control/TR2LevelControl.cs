@@ -79,20 +79,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.SoundSources.Add(TR2FileReadUtilities.ReadSoundSource(reader));
         }
 
-        //Boxes
-        uint numBoxes = reader.ReadUInt32();
-        _level.Boxes = new();
-        for (int i = 0; i < numBoxes; i++)
-        {
-            _level.Boxes.Add(TR2FileReadUtilities.ReadBox(reader));
-        }
-
-        //Overlaps & Zones
-        uint numOverlaps = reader.ReadUInt32();
-        _level.Overlaps = reader.ReadUInt16s(numOverlaps).ToList();
-
-        ushort[] zoneData = reader.ReadUInt16s(numBoxes * 10);
-        _level.Zones = TR2BoxUtilities.ReadZones(numBoxes, zoneData);
+        ReadBoxes(reader);
 
         reader.ReadUInt32(); // Total count of ushorts
         ushort numGroups = reader.ReadUInt16();
@@ -153,11 +140,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write((uint)_level.SoundSources.Count);
         foreach (TRSoundSource src in _level.SoundSources) { writer.Write(src.Serialize()); }
 
-        writer.Write((uint)_level.Boxes.Count);
-        foreach (TR2Box box in _level.Boxes) { writer.Write(box.Serialize()); }
-        writer.Write((uint)_level.Overlaps.Count);
-        writer.Write(_level.Overlaps);
-        writer.Write(TR2BoxUtilities.FlattenZones(_level.Zones));
+        WriteBoxes(writer);
 
         byte[] animTextureData = _level.AnimatedTextures.SelectMany(a => a.Serialize()).ToArray();
         writer.Write((uint)(animTextureData.Length / sizeof(ushort)) + 1);
@@ -244,6 +227,28 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     private void WriteSprites(TRLevelWriter writer)
     {
         _spriteBuilder.WriteSprites(writer, _level.Sprites);
+    }
+
+    private void ReadBoxes(TRLevelReader reader)
+    {
+        TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
+        _level.Boxes = boxBuilder.ReadBoxes(reader);
+
+        uint numOverlaps = reader.ReadUInt32();
+        _level.Overlaps = reader.ReadUInt16s(numOverlaps).ToList();
+
+        ushort[] zoneData = reader.ReadUInt16s(_level.Boxes.Count * 10);
+        _level.Zones = TR2BoxUtilities.ReadZones((uint)_level.Boxes.Count, zoneData);
+    }
+
+    private void WriteBoxes(TRLevelWriter writer)
+    {
+        TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
+        boxBuilder.WriteBoxes(writer, _level.Boxes);
+
+        writer.Write((uint)_level.Overlaps.Count);
+        writer.Write(_level.Overlaps);
+        writer.Write(TR2BoxUtilities.FlattenZones(_level.Zones));
     }
 
     private void ReadSoundEffects(TRLevelReader reader)

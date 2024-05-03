@@ -172,7 +172,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             int linkedBoxIndex = linkedSector.BoxIndex;
 
             TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
-            TR2Box linkedBox = level.Boxes[linkedBoxIndex];
+            TRBox linkedBox = level.Boxes[linkedBoxIndex];
             List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
             overlaps.Add(newBoxIndex);
             TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
@@ -182,7 +182,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             byte zmin = (byte)(newRoom.Info.Z / TRConsts.Step4);
             byte xmax = (byte)(xmin + newRoom.NumXSectors);
             byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new()
+            TRBox box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
@@ -389,7 +389,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
             // Duplicate the zone for the new box and link the current box to the new room
             TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
-            TR2Box linkedBox = level.Boxes[linkedBoxIndex];
+            TRBox linkedBox = level.Boxes[linkedBoxIndex];
             List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
             overlaps.Add(newBoxIndex);
             TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
@@ -399,7 +399,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             byte zmin = (byte)(newRoom.Info.Z / TRConsts.Step4);
             byte xmax = (byte)(xmin + newRoom.NumXSectors);
             byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new()
+            TRBox box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,

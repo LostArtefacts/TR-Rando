@@ -41,34 +41,6 @@ internal static class TR5FileReadUtilities
         }
     }
 
-    public static void PopulateBoxesOverlapsZones(BinaryReader reader, TR5Level lvl)
-    {
-        //Boxes
-        uint numBoxes = reader.ReadUInt32();
-        lvl.Boxes = new();
-
-        for (int i = 0; i < numBoxes; i++)
-        {
-            lvl.Boxes.Add(TR2FileReadUtilities.ReadBox(reader));
-        }
-
-        //Overlaps & Zones
-        uint numOverlaps = reader.ReadUInt32();
-        lvl.Overlaps = new();
-        short[] zones = new short[10 * numBoxes];
-
-        for (int i = 0; i < numOverlaps; i++)
-        {
-            lvl.Overlaps.Add(reader.ReadUInt16());
-        }
-
-        for (int i = 0; i < zones.Length; i++)
-        {
-            zones[i] = reader.ReadInt16();
-        }
-        lvl.Zones = new(zones);
-    }
-
     public static void PopulateAnimatedTextures(BinaryReader reader, TR5Level lvl)
     {
         reader.ReadUInt32(); // Total count of ushorts

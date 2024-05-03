@@ -216,16 +216,14 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             GenerateOverlaps(level, sector.BoxIndex, newBoxIndex);
 
             // Make a new box for the sector.
-            uint xmin = (uint)(room.Info.X + (sectorIndex / room.NumZSectors) * TRConsts.Step4);
-            uint zmin = (uint)(room.Info.Z + (sectorIndex % room.NumZSectors) * TRConsts.Step4);
-            uint xmax = (uint)(xmin + TRConsts.Step4);
-            uint zmax = (uint)(zmin + TRConsts.Step4);
+            byte xmin = (byte)((room.Info.X / TRConsts.Step4) + (sectorIndex / room.NumZSectors));
+            byte zmin = (byte)((room.Info.Z / TRConsts.Step4) + (sectorIndex % room.NumZSectors));
             TRBox box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
-                XMax = xmax,
-                ZMax = zmax,
+                XMax = (byte)(xmin + 1), // Only 1 tile
+                ZMax = (byte)(zmin + 1),
                 TrueFloor = (short)(sector.Floor * TRConsts.Step1)
             };
 
@@ -436,7 +434,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             // Make a new box for the sector.
             byte xmin = (byte)((room.Info.X / TRConsts.Step4) + (sectorIndex / room.NumZSectors));
             byte zmin = (byte)((room.Info.Z / TRConsts.Step4) + (sectorIndex % room.NumZSectors));
-            TR2Box box = new()
+            TRBox box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
@@ -458,7 +456,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
     {
         for (int i = 0; i < level.Boxes.Count; i++)
         {
-            TR2Box box = level.Boxes[i];
+            TRBox box = level.Boxes[i];
             // Anything that has the current box as an overlap will need
             // to also have the new box, or if this is the current box, it
             // will need the new box linked to it.
@@ -670,7 +668,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             // Make a new box for the sector.
             byte xmin = (byte)((room.Info.X / TRConsts.Step4) + (sectorIndex / room.NumZSectors));
             byte zmin = (byte)((room.Info.Z / TRConsts.Step4) + (sectorIndex % room.NumZSectors));
-            TR2Box box = new()
+            TRBox box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
@@ -694,7 +692,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
     {
         for (int i = 0; i < level.Boxes.Count; i++)
         {
-            TR2Box box = level.Boxes[i];
+            TRBox box = level.Boxes[i];
             // Anything that has the current box as an overlap will need
             // to also have the new box, or if this is the current box, it
             // will need the new box linked to it.

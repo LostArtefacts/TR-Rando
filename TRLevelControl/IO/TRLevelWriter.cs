@@ -434,6 +434,26 @@ public class TRLevelWriter : BinaryWriter
         Write(sector.Ceiling);
     }
 
+    public void Write(TRBox box, ushort overlapIndex, TRGameVersion version)
+    {
+        if (version == TRGameVersion.TR1)
+        {
+            Write((uint)(box.ZMin << TRConsts.WallShift));
+            Write((uint)(box.ZMax << TRConsts.WallShift) - 1);
+            Write((uint)(box.XMin << TRConsts.WallShift));
+            Write((uint)(box.XMax << TRConsts.WallShift) - 1);
+        }
+        else
+        {
+            Write(box.ZMin);
+            Write(box.ZMax);
+            Write(box.XMin);
+            Write(box.XMax);
+        }
+        Write(box.TrueFloor);
+        Write(overlapIndex);
+    }
+
     public void Write(IEnumerable<TRSpriteTexture> textures, TRGameVersion version)
     {
         foreach (TRSpriteTexture texture in textures)

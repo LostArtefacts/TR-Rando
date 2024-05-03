@@ -10,7 +10,7 @@ public class TR4Level : TRLevelBase
     public List<TRCamera> Cameras { get; set; }
     public List<TR4FlyByCamera> FlybyCameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
-    public List<TR2Box> Boxes { get; set; }
+    public List<TRBox> Boxes { get; set; }
     public List<ushort> Overlaps { get; set; }
     public List<short> Zones { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }

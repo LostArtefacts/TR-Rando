@@ -103,7 +103,7 @@ public class IOTests : TestBase
         // For every box, store the current list of overlaps and the overlap starting
         // index itself (which also stores Blockable/Blocked bits).
         Dictionary<int, List<ushort>> boxOverlaps = new();
-        Dictionary<int, short> boxOverlapIndices = new();
+        Dictionary<int, ushort> boxOverlapIndices = new();
         for (int i = 0; i < lvl.Boxes.Count; i++)
         {
             boxOverlaps[i] = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
