@@ -1,11 +1,11 @@
 ﻿using System.Drawing;
 using TRLevelControl.Model;
 
-namespace TRLevelControl.Helpers.Pathing;
+namespace TRLevelControl.Helpers;
 
 public class BoxGenerator
 {
-    public static void Generate(TR1Room room, TR1Level level, TRRoomSector linkedSector)
+    public static void Generate(TRRoom room, TRLevelBase level, TRRoomSector linkedSector)
     {
         Room boxRoom = Room.Create(room);
         Generate(boxRoom, level.Boxes.Count);
@@ -17,41 +17,10 @@ public class BoxGenerator
             trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
             trBox.Zone = level.Boxes[linkedSector.BoxIndex].Zone.Clone();
         }
-    }
 
-    public static void Generate(TR2Room room, TR2Level level, TRRoomSector linkedSector)
-    {
-        Room boxRoom = Room.Create(room);
-        Generate(boxRoom, level.Boxes.Count);
-
-        foreach (Box box in boxRoom.Boxes)
+        foreach (TRRoomSector sector in boxRoom.Sectors.Where(s => !s.IsWall))
         {
-            TRBox trBox = box.ToTRBox(room.Info);
-            level.Boxes.Add(trBox);
-            trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
-            trBox.Zone = level.Boxes[linkedSector.BoxIndex].Zone.Clone();
-        }
-    }
-
-    public static void Generate(TR3Room room, TR3Level level, TRRoomSector linkedSector)
-    {
-        Room boxRoom = Room.Create(room);
-        Generate(boxRoom, (int)level.Boxes.Count);
-
-        foreach (Box box in boxRoom.Boxes)
-        {
-            TRBox trBox = box.ToTRBox(room.Info);
-            level.Boxes.Add(trBox);
-            trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
-            trBox.Zone = level.Boxes[linkedSector.BoxIndex].Zone.Clone();
-        }
-
-        foreach (TRRoomSector sector in boxRoom.Sectors)
-        {
-            if (!sector.IsWall)
-            {
-                sector.Material = linkedSector.Material;
-            }
+            sector.Material = linkedSector.Material;
         }
     }
 

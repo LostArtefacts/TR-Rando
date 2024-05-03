@@ -1,6 +1,6 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl;
-using TRLevelControl.Helpers.Pathing;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
