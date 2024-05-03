@@ -48,27 +48,6 @@ internal static class TR4FileReadUtilities
         }
     }
 
-    public static TR4FlyByCamera ReadFlybyCamera(BinaryReader reader)
-    {
-        return new TR4FlyByCamera
-        {
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            Dx = reader.ReadInt32(),
-            Dy = reader.ReadInt32(),
-            Dz = reader.ReadInt32(),
-            Sequence = reader.ReadByte(),
-            Index = reader.ReadByte(),
-            FOV = reader.ReadUInt16(),
-            Roll = reader.ReadInt16(),
-            Timer = reader.ReadUInt16(),
-            Speed = reader.ReadUInt16(),
-            Flags = reader.ReadUInt16(),
-            RoomID = reader.ReadUInt32()
-        };
-    }
-
     public static TR4ObjectTexture ReadObjectTexture(BinaryReader reader)
     {
         return new TR4ObjectTexture()

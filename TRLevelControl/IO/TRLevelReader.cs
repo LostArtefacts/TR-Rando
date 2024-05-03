@@ -499,6 +499,16 @@ public class TRLevelReader : BinaryReader
         };
     }
 
+    public TRVertex32 ReadVertex32()
+    {
+        return new()
+        {
+            X = ReadInt32(),
+            Y = ReadInt32(),
+            Z = ReadInt32()
+        };
+    }
+
     public TR5Vertex ReadTR5Vertex()
     {
         return new()

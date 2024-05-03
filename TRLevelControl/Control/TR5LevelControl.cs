@@ -290,13 +290,8 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         uint numCameras = reader.ReadUInt32();
         _level.Cameras = reader.ReadCameras(numCameras);
 
-        uint numFlybyCameras = reader.ReadUInt32();
-        _level.FlybyCameras = new();
-
-        for (int i = 0; i < numFlybyCameras; i++)
-        {
-            _level.FlybyCameras.Add(TR4FileReadUtilities.ReadFlybyCamera(reader));
-        }
+        TRFlybyBuilder builder = new(_observer);
+        _level.Flybys = builder.ReadFlybys(reader);
     }
 
     private void WriteCameras(TRLevelWriter writer)
@@ -304,11 +299,8 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         writer.Write((uint)_level.Cameras.Count);
         writer.Write(_level.Cameras);
 
-        writer.Write((uint)_level.FlybyCameras.Count);
-        foreach (TR4FlyByCamera flycam in _level.FlybyCameras)
-        {
-            writer.Write(flycam.Serialize());
-        }
+        TRFlybyBuilder builder = new(_observer);
+        builder.WriteFlybys(writer, _level.Flybys);
     }
 
     private void ReadSoundSources(TRLevelReader reader)

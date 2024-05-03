@@ -375,6 +375,13 @@ public class TRLevelWriter : BinaryWriter
         Write(vertex.Z);
     }
 
+    public void Write(TRVertex32 vertex)
+    {
+        Write(vertex.X);
+        Write(vertex.Y);
+        Write(vertex.Z);
+    }
+
     public void Write(TR5Vertex vertex)
     {
         Write(vertex.X);

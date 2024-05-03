@@ -85,4 +85,10 @@ public class ObserverBase : ITRLevelObserver
 
     public virtual IEnumerable<uint> GetSampleIndices()
         => null;
+
+    public virtual void OnFlybyIndexRead(byte flybySequence, byte cameraIndex)
+    { }
+
+    public virtual List<byte> GetFlybyIndices(byte flybySequence)
+        => null;
 }
