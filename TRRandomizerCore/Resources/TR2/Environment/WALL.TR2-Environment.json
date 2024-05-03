@@ -116,23 +116,19 @@
       {
         "Comments": "Create a water sound source",
         "EMType": 101,
-        "Source": {
-          "X": 62976,
-          "Z": 23040,
-          "SoundID": 59,
-          "Flags": 192
-        }
+        "ID": 59,
+        "Mode": 192,
+        "X": 62976,
+        "Z": 23040
       },
       {
         "Comments": "Create a water sound source",
         "EMType": 101,
-        "Source": {
-          "X": 59898,
-          "Y": -1666,
-          "Z": 34293,
-          "SoundID": 59,
-          "Flags": 192
-        }
+        "ID": 59,
+        "Mode": 192,
+        "X": 59898,
+        "Y": -1666,
+        "Z": 34293
       },
       {
         "Comments": "Extends the helicopter/camera trigger in case Lara swims over the one tile that doesn't have it",
@@ -367,13 +363,11 @@
       {
         "Comments": "Create a water sound source",
         "EMType": 101,
-        "Source": {
-          "X": 69640,
-          "Y": 18690,
-          "Z": 74746,
-          "SoundID": 59,
-          "Flags": 192
-        }
+        "ID": 59,
+        "Mode": 192,
+        "X": 69640,
+        "Y": 18690,
+        "Z": 74746
       },
       {
         "Comments": "Move the first T-Rex to spawn on land unless it's a water creature.",

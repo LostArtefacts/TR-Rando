@@ -11,7 +11,7 @@
         "Z": 59904,
         "Room": 2
       },
-      "SlantType": 1,
+      "SlantType": 2,
       "ZSlant": 2
     },
     {
@@ -24,7 +24,7 @@
         "Z": 59904,
         "Room": 2
       },
-      "SlantType": 1,
+      "SlantType": 2,
       "ZSlant": 2
     },
     {
@@ -93,6 +93,7 @@
       "Triangles": {
         "2": [
           {
+            "Type": 3,
             "Vertices": [
               18,
               109,
@@ -101,6 +102,7 @@
             "Texture": 1497
           },
           {
+            "Type": 3,
             "Vertices": [
               57,
               112,

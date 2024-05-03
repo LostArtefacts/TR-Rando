@@ -1889,7 +1889,7 @@
         },
         "FloorClicks": 4,
         "CeilingClicks": -3,
-        "SlantType": 1,
+        "SlantType": 2,
         "RemoveSlant": true
       },
       {
@@ -1923,17 +1923,17 @@
         "Comments": "Create a dummy static mesh.",
         "EMType": 34,
         "ID": 292,
-        "Mesh": {
-          "Centre": {},
-          "Vertices": [],
-          "Normals": [],
-          "Lights": [],
-          "TexturedRectangles": [],
-          "TexturedTriangles": [],
-          "ColouredRectangles": [],
-          "ColouredTriangles": []
-        },
         "Info": {
+          "Mesh": {
+            "Centre": {},
+            "Vertices": [],
+            "Normals": [],
+            "Lights": [],
+            "TexturedRectangles": [],
+            "TexturedTriangles": [],
+            "ColouredRectangles": [],
+            "ColouredTriangles": []
+          },
           "VisibilityBox": {
             "MinX": -3584,
             "MaxX": 512,
@@ -2012,6 +2012,7 @@
         "Quads": {
           "8": [
             {
+              "Type": 4,
               "Vertices": [
                 287,
                 47,
@@ -2023,6 +2024,7 @@
           ],
           "14": [
             {
+              "Type": 4,
               "Vertices": [
                 848,
                 847,

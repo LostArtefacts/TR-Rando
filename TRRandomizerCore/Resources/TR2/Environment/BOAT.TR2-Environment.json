@@ -1155,9 +1155,7 @@
             155
           ],
           "CameraAction": {
-            "Value": 2,
-            "Timer": 2,
-            "Continue": true
+            "Timer": 2
           }
         },
         {
@@ -1212,9 +1210,7 @@
             116
           ],
           "CameraAction": {
-            "Value": 2,
-            "Timer": 2,
-            "Continue": true
+            "Timer": 2
           }
         }
       ]
@@ -1550,9 +1546,7 @@
               20
             ],
             "CameraAction": {
-              "Value": 2,
-              "Timer": 2,
-              "Continue": true
+              "Timer": 2
             }
           }
         ],

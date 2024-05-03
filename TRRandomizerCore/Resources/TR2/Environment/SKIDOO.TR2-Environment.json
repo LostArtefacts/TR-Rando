@@ -38,6 +38,7 @@
       "Quads": {
         "143": [
           {
+            "Type": 4,
             "Vertices": [
               460,
               459,
@@ -131,7 +132,7 @@
         "Room": 53
       },
       "FloorClicks": -2,
-      "SlantType": 1,
+      "SlantType": 2,
       "ZSlant": -2
     },
     {
@@ -146,7 +147,7 @@
         "Room": 53
       },
       "FloorClicks": -1,
-      "SlantType": 1,
+      "SlantType": 2,
       "ZSlant": -1
     },
     {
@@ -215,6 +216,7 @@
       "Quads": {
         "53": [
           {
+            "Type": 4,
             "Vertices": [
               211,
               214,
@@ -224,6 +226,7 @@
             "Texture": 1332
           },
           {
+            "Type": 4,
             "Vertices": [
               213,
               212,
@@ -233,6 +236,7 @@
             "Texture": 1332
           },
           {
+            "Type": 4,
             "Vertices": [
               215,
               218,
@@ -242,6 +246,7 @@
             "Texture": 1332
           },
           {
+            "Type": 4,
             "Vertices": [
               217,
               216,
@@ -255,6 +260,7 @@
       "Triangles": {
         "53": [
           {
+            "Type": 3,
             "Vertices": [
               219,
               106,
@@ -263,6 +269,7 @@
             "Texture": 1407
           },
           {
+            "Type": 3,
             "Vertices": [
               72,
               76,
@@ -1100,6 +1107,7 @@
       "Quads": {
         "81": [
           {
+            "Type": 4,
             "Vertices": [
               107,
               104,
@@ -1161,6 +1169,7 @@
         "Z": 14848,
         "Room": 81
       },
+      "SlantType": 3,
       "RemoveSlant": true
     },
     {
@@ -1636,6 +1645,7 @@
           "Quads": {
             "0": [
               {
+                "Type": 4,
                 "Vertices": [
                   82,
                   83,
@@ -1645,6 +1655,7 @@
                 "Texture": 1474
               },
               {
+                "Type": 4,
                 "Vertices": [
                   85,
                   82,
@@ -1765,6 +1776,7 @@
           "Quads": {
             "37": [
               {
+                "Type": 4,
                 "Vertices": [
                   7,
                   11,
@@ -2040,7 +2052,7 @@
             "Z": 29184,
             "Room": 29
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "XSlant": -1
         },
         {
@@ -2101,6 +2113,7 @@
           "Triangles": {
             "29": [
               {
+                "Type": 3,
                 "Vertices": [
                   59,
                   32,
@@ -2252,7 +2265,6 @@
             }
           ],
           "CameraAction": {
-            "Value": 37123,
             "Timer": 3,
             "Once": true,
             "MoveTimer": 8
@@ -2294,7 +2306,6 @@
             }
           ],
           "CameraAction": {
-            "Value": 37123,
             "Timer": 3,
             "Once": true,
             "MoveTimer": 8
@@ -2334,7 +2345,6 @@
             }
           ],
           "CameraAction": {
-            "Value": 37123,
             "Timer": 3,
             "Once": true,
             "MoveTimer": 8

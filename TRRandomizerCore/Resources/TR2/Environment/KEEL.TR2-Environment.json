@@ -73,7 +73,7 @@
         "Z": 42496,
         "Room": 43
       },
-      "SlantType": 1,
+      "SlantType": 2,
       "ZSlant": -2
     },
     {
@@ -87,7 +87,7 @@
         "Z": 42496,
         "Room": 43
       },
-      "SlantType": 1,
+      "SlantType": 2,
       "ZSlant": -2
     },
     {
@@ -1588,9 +1588,7 @@
             17
           ],
           "CameraAction": {
-            "Value": 2,
-            "Timer": 2,
-            "Continue": true
+            "Timer": 2
           }
         }
       ],

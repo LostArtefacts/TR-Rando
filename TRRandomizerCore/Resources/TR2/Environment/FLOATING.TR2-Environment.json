@@ -12,7 +12,7 @@
         "Z": 73216,
         "Room": 40
       },
-      "SlantType": 1,
+      "SlantType": 2,
       "XSlant": 0,
       "ZSlant": -1
     },
@@ -1822,9 +1822,7 @@
             89
           ],
           "CameraAction": {
-            "Value": 2,
-            "Timer": 2,
-            "Continue": true
+            "Timer": 2
           }
         }
       ],
