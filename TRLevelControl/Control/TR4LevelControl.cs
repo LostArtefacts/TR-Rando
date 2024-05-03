@@ -235,16 +235,22 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadCameras(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateCameras(reader, _level);
+        uint numCameras = reader.ReadUInt32();
+        _level.Cameras = reader.ReadCameras(numCameras);
+
+        uint numFlybyCameras = reader.ReadUInt32();
+        _level.FlybyCameras = new();
+
+        for (int i = 0; i < numFlybyCameras; i++)
+        {
+            _level.FlybyCameras.Add(TR4FileReadUtilities.ReadFlybyCamera(reader));
+        }
     }
 
     private void WriteCameras(TRLevelWriter writer)
     {
         writer.Write((uint)_level.Cameras.Count);
-        foreach (TRCamera cam in _level.Cameras)
-        {
-            writer.Write(cam.Serialize());
-        }
+        writer.Write(_level.Cameras);
 
         writer.Write((uint)_level.FlybyCameras.Count);
         foreach (TR4FlyByCamera flycam in _level.FlybyCameras)

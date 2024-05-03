@@ -57,12 +57,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         ReadSprites(reader);
 
-        uint numCameras = reader.ReadUInt32();
-        _level.Cameras = new();
-        for (int i = 0; i < numCameras; i++)
-        {
-            _level.Cameras.Add(TR2FileReadUtilities.ReadCamera(reader));
-        }
+        ReadCameras(reader);
 
         uint numSoundSources = reader.ReadUInt32();
         _level.SoundSources = new();
@@ -130,8 +125,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         WriteSprites(writer);
 
-        writer.Write((uint)_level.Cameras.Count);
-        foreach (TRCamera cam in _level.Cameras) { writer.Write(cam.Serialize()); }
+        WriteCameras(writer);
 
         writer.Write((uint)_level.SoundSources.Count);
         foreach (TRSoundSource src in _level.SoundSources) { writer.Write(src.Serialize()); }
@@ -225,6 +219,18 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     private void WriteSprites(TRLevelWriter writer)
     {
         _spriteBuilder.WriteSprites(writer, _level.Sprites);
+    }
+
+    private void ReadCameras(TRLevelReader reader)
+    {
+        uint numCameras = reader.ReadUInt32();
+        _level.Cameras = reader.ReadCameras(numCameras);
+    }
+
+    private void WriteCameras(TRLevelWriter writer)
+    {
+        writer.Write((uint)_level.Cameras.Count);
+        writer.Write(_level.Cameras);
     }
 
     private void ReadBoxes(TRLevelReader reader)

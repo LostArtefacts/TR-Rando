@@ -681,4 +681,26 @@ public class TRLevelReader : BinaryReader
 
         return sprite;
     }
+
+    public List<TRCamera> ReadCameras(long numCameras)
+    {
+        List<TRCamera> cameras = new();
+        for (int i = 0; i < numCameras; i++)
+        {
+            cameras.Add(ReadCamera());
+        }
+        return cameras;
+    }
+
+    public TRCamera ReadCamera()
+    {
+        return new()
+        {
+            X = ReadInt32(),
+            Y = ReadInt32(),
+            Z = ReadInt32(),
+            Room = ReadInt16(),
+            Flag = ReadUInt16()
+        };
+    }
 }

@@ -10,7 +10,6 @@ public class TR3Level : TRLevelBase
     public TRDictionary<TR3Type, TRModel> Models { get; set; }
     public TRDictionary<TR3Type, TRStaticMesh> StaticMeshes { get; set; }
     public TRDictionary<TR3Type, TRSpriteSequence> Sprites { get; set; }
-    public List<TRCamera> Cameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public List<TRObjectTexture> ObjectTextures { get; set; }

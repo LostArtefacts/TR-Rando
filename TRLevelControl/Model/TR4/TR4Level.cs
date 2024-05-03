@@ -7,7 +7,6 @@ public class TR4Level : TRLevelBase
     public TRDictionary<TR4Type, TRModel> Models { get; set; }
     public TRDictionary<TR4Type, TRStaticMesh> StaticMeshes { get; set; }
     public TRDictionary<TR4Type, TRSpriteSequence> Sprites { get; set; }
-    public List<TRCamera> Cameras { get; set; }
     public List<TR4FlyByCamera> FlybyCameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }

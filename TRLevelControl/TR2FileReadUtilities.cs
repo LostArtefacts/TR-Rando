@@ -35,18 +35,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRCamera ReadCamera(BinaryReader reader)
-    {
-        return new TRCamera()
-        {
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            Room = reader.ReadInt16(),
-            Flag = reader.ReadUInt16()
-        };
-    }
-
     public static TRSoundSource ReadSoundSource(BinaryReader reader)
     {
         return new TRSoundSource()

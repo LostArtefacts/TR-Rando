@@ -8,27 +8,6 @@ internal static class TR4FileReadUtilities
 {
     public static readonly string TEXMarker = "TEX";
 
-    public static void PopulateCameras(BinaryReader reader, TR4Level lvl)
-    {
-        //Cameras
-        uint numCameras = reader.ReadUInt32();
-        lvl.Cameras = new();
-
-        for (int i = 0; i < numCameras; i++)
-        {
-            lvl.Cameras.Add(TR2FileReadUtilities.ReadCamera(reader));
-        }
-
-        //Flyby Cameras
-        uint numFlybyCameras = reader.ReadUInt32();
-        lvl.FlybyCameras = new();
-
-        for (int i = 0; i < numFlybyCameras; i++)
-        {
-            lvl.FlybyCameras.Add(ReadFlybyCamera(reader));
-        }
-    }
-
     public static void PopulateSoundSources(BinaryReader reader, TR4Level lvl)
     {
         //Sound Sources

@@ -494,4 +494,21 @@ public class TRLevelWriter : BinaryWriter
             Write(texture.Alignment.Bottom);
         }
     }
+
+    public void Write(IEnumerable<TRCamera> cameras)
+    {
+        foreach (TRCamera camera in cameras)
+        {
+            Write(camera);
+        }
+    }
+
+    public void Write(TRCamera camera)
+    {
+        Write(camera.X);
+        Write(camera.Y);
+        Write(camera.Z);
+        Write(camera.Room);
+        Write(camera.Flag);
+    }
 }
