@@ -102,12 +102,10 @@ public class EMRemoveFaceFunction : BaseEMFunction
 
     private static void RemoveEntries<T>(List<T> items, List<int> indices)
     {
-        List<T> itemList = items.ToList();
-        
         indices.Sort();
         for (int i = indices.Count - 1; i >= 0; i--)
         {
-            itemList.RemoveAt(indices[i]);
+            items.RemoveAt(indices[i]);
         }
     }
 }

@@ -74,7 +74,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
     private IEnumerable<EMMeshTextureData> PrepareImportData<T>(SortedDictionary<T, TRModel> existingModels)
         where T : Enum
     {
-        return Data.Where(d => !existingModels.ContainsKey((T)(object)d.ModelID));
+        return Data.Where(d => !existingModels.ContainsKey((T)(object)(uint)d.ModelID));
     }
 
     private static void RemapFaces<T>(IEnumerable<EMMeshTextureData> data, int maximumTexture, SortedDictionary<T, TRModel> models)
@@ -82,7 +82,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
     {
         foreach (EMMeshTextureData textureData in data)
         {
-            TRModel model = models[(T)(object)textureData.ModelID];
+            TRModel model = models[(T)(object)(uint)textureData.ModelID];
             foreach (TRMesh mesh in model.Meshes)
             {
                 foreach (TRMeshFace face in mesh.ColouredTriangles)

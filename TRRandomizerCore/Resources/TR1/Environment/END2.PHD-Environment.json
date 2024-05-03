@@ -396,13 +396,11 @@
       "Tags": [
         9
       ],
-      "Source": {
-        "X": 47104,
-        "Y": 5120,
-        "Z": 28160,
-        "SoundID": 148,
-        "Flags": 192
-      }
+      "ID": 148,
+      "Mode": 192,
+      "X": 47104,
+      "Y": 5120,
+      "Z": 28160
     },
     {
       "Comments": "Adjust/remove faces for portals.",
@@ -1448,6 +1446,7 @@
         "Quads": {
           "17": [
             {
+              "Type": 4,
               "Vertices": [
                 47,
                 48,
@@ -1457,6 +1456,7 @@
               "Texture": 13
             },
             {
+              "Type": 4,
               "Vertices": [
                 13,
                 14,
@@ -1468,6 +1468,7 @@
           ],
           "20": [
             {
+              "Type": 4,
               "Vertices": [
                 72,
                 73,
@@ -1477,6 +1478,7 @@
               "Texture": 13
             },
             {
+              "Type": 4,
               "Vertices": [
                 90,
                 104,
@@ -3497,7 +3499,7 @@
             "Z": 18944,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": -4
         },
         {
@@ -3508,7 +3510,7 @@
             "Z": 18944,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": -4
         },
         {
@@ -3519,7 +3521,7 @@
             "Z": 18944,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": -4
         },
         {
@@ -3530,7 +3532,7 @@
             "Z": 18944,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": -4
         },
         {
@@ -3541,7 +3543,7 @@
             "Z": 18944,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": -4
         },
         {
@@ -4756,9 +4758,7 @@
               "Room": -2
             }
           ],
-          "CameraAction": {
-            "Continue": true
-          }
+          "CameraAction": {}
         },
         {
           "EMType": 61,
@@ -4792,9 +4792,7 @@
               "Room": -2
             }
           ],
-          "CameraAction": {
-            "Continue": true
-          }
+          "CameraAction": {}
         },
         {
           "EMType": 61,
@@ -4828,9 +4826,7 @@
               "Room": -2
             }
           ],
-          "CameraAction": {
-            "Continue": true
-          }
+          "CameraAction": {}
         },
         {
           "EMType": 61,
@@ -4864,9 +4860,7 @@
               "Room": -2
             }
           ],
-          "CameraAction": {
-            "Continue": true
-          }
+          "CameraAction": {}
         },
         {
           "EMType": 61,
@@ -4901,9 +4895,7 @@
             }
           ],
           "CameraAction": {
-            "Value": 5,
-            "Timer": 5,
-            "Continue": true
+            "Timer": 5
           }
         },
         {
@@ -5353,9 +5345,7 @@
             }
           ],
           "CameraAction": {
-            "Value": 5,
-            "Timer": 5,
-            "Continue": true
+            "Timer": 5
           }
         },
         {
@@ -5401,9 +5391,7 @@
               "Room": -1
             }
           ],
-          "CameraAction": {
-            "Continue": true
-          }
+          "CameraAction": {}
         },
         {
           "EMType": 71,
@@ -7232,6 +7220,7 @@
             "Room": 33
           },
           "CeilingClicks": 1,
+          "SlantType": 3,
           "XSlant": 1,
           "ZSlant": 0
         },
@@ -7243,6 +7232,7 @@
             "Z": 22016,
             "Room": 33
           },
+          "SlantType": 3,
           "XSlant": 1
         },
         {
@@ -7337,6 +7327,7 @@
           "Triangles": {
             "33": [
               {
+                "Type": 3,
                 "Vertices": [
                   790,
                   89,
@@ -7345,6 +7336,7 @@
                 "Texture": 20
               },
               {
+                "Type": 3,
                 "Vertices": [
                   21,
                   89,

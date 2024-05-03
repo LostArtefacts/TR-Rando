@@ -1207,6 +1207,7 @@
               "Room": -2
             }
           ],
+          "SlantType": 3,
           "XSlant": 2
         },
         {
@@ -1225,6 +1226,7 @@
               "Room": -2
             }
           ],
+          "SlantType": 3,
           "XSlant": -2
         },
         {
@@ -1736,7 +1738,6 @@
             }
           ],
           "CameraAction": {
-            "Value": 32771,
             "Timer": 3
           }
         },
@@ -2496,7 +2497,6 @@
             }
           ],
           "CameraAction": {
-            "Value": 32771,
             "Timer": 3
           }
         },
@@ -3975,7 +3975,6 @@
             }
           ],
           "CameraAction": {
-            "Value": 32771,
             "Timer": 3
           }
         },

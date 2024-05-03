@@ -920,7 +920,6 @@
           }
         ],
         "CameraAction": {
-          "Value": 37123,
           "Timer": 3,
           "Once": true,
           "MoveTimer": 8
@@ -1466,9 +1465,7 @@
             90
           ],
           "CameraAction": {
-            "Value": 2,
-            "Timer": 2,
-            "Continue": true
+            "Timer": 2
           }
         }
       ]
@@ -2519,9 +2516,7 @@
             -1
           ],
           "CameraAction": {
-            "Value": 2,
-            "Timer": 2,
-            "Continue": true
+            "Timer": 2
           }
         },
         {

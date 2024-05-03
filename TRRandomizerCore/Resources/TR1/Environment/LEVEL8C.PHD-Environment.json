@@ -132,6 +132,7 @@
       "Triangles": {
         "0": [
           {
+            "Type": 3,
             "Vertices": [
               145,
               192,
@@ -172,6 +173,7 @@
       "Triangles": {
         "53": [
           {
+            "Type": 3,
             "Vertices": [
               87,
               89,
@@ -182,6 +184,7 @@
         ],
         "54": [
           {
+            "Type": 3,
             "Vertices": [
               305,
               304,
@@ -205,7 +208,7 @@
           "Room": 36
         },
         "FloorClicks": -2,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": 1,
         "ZSlant": 2
       },
@@ -357,7 +360,7 @@
           "Room": 19
         },
         "FloorClicks": -3,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": -1,
         "ZSlant": -2
       },
@@ -493,7 +496,7 @@
           "Room": 27
         },
         "FloorClicks": -1,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": 1
       },
       {
@@ -504,7 +507,7 @@
           "Z": 49664,
           "Room": 27
         },
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": 1
       },
       {
@@ -591,6 +594,7 @@
         "Quads": {
           "27": [
             {
+              "Type": 4,
               "Vertices": [
                 26,
                 25,
@@ -614,7 +618,7 @@
           "Room": 25
         },
         "FloorClicks": -1,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": -1
       },
       {
@@ -625,7 +629,7 @@
           "Z": 44544,
           "Room": 25
         },
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": -1
       },
       {
@@ -712,6 +716,7 @@
         "Quads": {
           "25": [
             {
+              "Type": 4,
               "Vertices": [
                 22,
                 21,
@@ -735,7 +740,7 @@
           "Room": 43
         },
         "FloorClicks": -1,
-        "SlantType": 1,
+        "SlantType": 2,
         "ZSlant": -1
       },
       {
@@ -746,7 +751,7 @@
           "Z": 46592,
           "Room": 43
         },
-        "SlantType": 1,
+        "SlantType": 2,
         "ZSlant": -1
       },
       {
@@ -833,6 +838,7 @@
         "Quads": {
           "43": [
             {
+              "Type": 4,
               "Vertices": [
                 27,
                 26,
@@ -1390,6 +1396,7 @@
         "Quads": {
           "60": [
             {
+              "Type": 4,
               "Vertices": [
                 8,
                 9,
@@ -1399,6 +1406,7 @@
               "Texture": 677
             },
             {
+              "Type": 4,
               "Vertices": [
                 9,
                 13,
@@ -1424,7 +1432,7 @@
           "Z": 55808,
           "Room": 12
         },
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": -3
       },
       {
@@ -2380,6 +2388,7 @@
           "Quads": {
             "30": [
               {
+                "Type": 4,
                 "Vertices": [
                   5,
                   4,
@@ -2915,6 +2924,7 @@
           "Quads": {
             "30": [
               {
+                "Type": 4,
                 "Vertices": [
                   5,
                   4,

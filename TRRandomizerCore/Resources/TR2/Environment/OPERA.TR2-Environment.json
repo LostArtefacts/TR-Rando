@@ -1098,6 +1098,7 @@
         "Quads": {
           "53": [
             {
+              "Type": 4,
               "Vertices": [
                 125,
                 120,
@@ -1107,6 +1108,7 @@
               "Texture": 1666
             },
             {
+              "Type": 4,
               "Vertices": [
                 59,
                 124,
@@ -1236,17 +1238,17 @@
           11
         ],
         "ID": 292,
-        "Mesh": {
-          "Centre": {},
-          "Vertices": [],
-          "Normals": [],
-          "Lights": [],
-          "TexturedRectangles": [],
-          "TexturedTriangles": [],
-          "ColouredRectangles": [],
-          "ColouredTriangles": []
-        },
         "Info": {
+          "Mesh": {
+            "Centre": {},
+            "Vertices": [],
+            "Normals": [],
+            "Lights": [],
+            "TexturedRectangles": [],
+            "TexturedTriangles": [],
+            "ColouredRectangles": [],
+            "ColouredTriangles": []
+          },
           "VisibilityBox": {
             "MinX": -512,
             "MaxX": 2560,
@@ -1351,6 +1353,7 @@
         "Quads": {
           "13": [
             {
+              "Type": 4,
               "Vertices": [
                 108,
                 98,
@@ -1360,6 +1363,7 @@
               "Texture": 1233
             },
             {
+              "Type": 4,
               "Vertices": [
                 98,
                 87,
@@ -1369,6 +1373,7 @@
               "Texture": 1233
             },
             {
+              "Type": 4,
               "Vertices": [
                 87,
                 73,
@@ -1380,6 +1385,7 @@
           ],
           "38": [
             {
+              "Type": 4,
               "Vertices": [
                 61,
                 76,
@@ -1389,6 +1395,7 @@
               "Texture": 1234
             },
             {
+              "Type": 4,
               "Vertices": [
                 41,
                 61,
@@ -1398,6 +1405,7 @@
               "Texture": 1234
             },
             {
+              "Type": 4,
               "Vertices": [
                 42,
                 41,

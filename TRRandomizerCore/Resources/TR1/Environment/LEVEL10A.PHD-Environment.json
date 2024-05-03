@@ -9,6 +9,7 @@
       "Triangles": {
         "35": [
           {
+            "Type": 3,
             "Vertices": [
               0,
               6,
@@ -528,6 +529,7 @@
         "Quads": {
           "17": [
             {
+              "Type": 4,
               "Vertices": [
                 294,
                 266,
@@ -537,6 +539,7 @@
               "Texture": 3
             },
             {
+              "Type": 4,
               "Vertices": [
                 230,
                 194,
@@ -715,7 +718,7 @@
           "Room": 3
         },
         "FloorClicks": -1,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": -3
       },
       {
@@ -730,7 +733,7 @@
           "Room": 16
         },
         "FloorClicks": -1,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": -3
       },
       {
@@ -745,7 +748,7 @@
           "Room": 3
         },
         "FloorClicks": -1,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": 5
       },
       {
@@ -760,7 +763,7 @@
           "Room": 16
         },
         "FloorClicks": -1,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": 5
       },
       {
@@ -2205,13 +2208,11 @@
         {
           "Comments": "Add a lava sound source.",
           "EMType": 101,
-          "Source": {
-            "X": 29686,
-            "Y": 256,
-            "Z": 91133,
-            "SoundID": 148,
-            "Flags": 192
-          }
+          "ID": 148,
+          "Mode": 192,
+          "X": 29686,
+          "Y": 256,
+          "Z": 91133
         },
         {
           "Comments": "Get rid of the normal end level trigger.",
@@ -2435,10 +2436,8 @@
             }
           ],
           "CameraAction": {
-            "Value": 1280,
             "Once": true,
-            "MoveTimer": 2,
-            "Continue": true
+            "MoveTimer": 2
           }
         },
         {
@@ -5891,13 +5890,11 @@
         {
           "Comments": "Add a lava sound source.",
           "EMType": 101,
-          "Source": {
-            "X": 32782,
-            "Y": 2048,
-            "Z": 89059,
-            "SoundID": 148,
-            "Flags": 192
-          }
+          "ID": 148,
+          "Mode": 192,
+          "X": 32782,
+          "Y": 2048,
+          "Z": 89059
         },
         {
           "Comments": "Add some embers.",
@@ -6068,9 +6065,7 @@
             -1
           ],
           "CameraAction": {
-            "Value": 5,
-            "Timer": 5,
-            "Continue": true
+            "Timer": 5
           }
         },
         {

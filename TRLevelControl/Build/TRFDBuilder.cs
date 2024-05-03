@@ -323,22 +323,14 @@ public class TRFDBuilder
             data.Add(switchRef);
         }
 
-        for (int i = 0; i < trigger.Actions.Count; i++)
+        foreach (FDActionItem action in trigger.Actions)
         {
-            FDActionItem action = trigger.Actions[i];
             int actionValue = action.Parameter & 0x03FF;
             actionValue |= ((byte)action.Action & 0x001F) << 10;
-
-            bool isCamera = action.CamAction != null
-                && (action.Action == FDTrigAction.Camera || action.Action == FDTrigAction.Flyby);
-            if (i == trigger.Actions.Count - 1 && !isCamera)
-            {
-                actionValue |= 0x8000;
-            }
-
             data.Add((ushort)actionValue);
 
-            if (isCamera)
+            if (action.CamAction != null
+                && (action.Action == FDTrigAction.Camera || action.Action == FDTrigAction.Flyby))
             {
                 int cameraValue = action.CamAction.Timer;
                 if (action.CamAction.Once)
@@ -346,16 +338,11 @@ public class TRFDBuilder
                     cameraValue |= 0x0100;
                 }
                 cameraValue |= (action.CamAction.MoveTimer & 0x001F) << 9;
-
-                if (i == trigger.Actions.Count - 1)
-                {
-                    cameraValue |= 0x8000;
-                }
-
                 data.Add((ushort)cameraValue);
             }
         }
 
+        data[^1] |= 0x8000;
         return data;
     }
 }

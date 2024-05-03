@@ -404,13 +404,11 @@
       {
         "Comments": "Create a water sound source",
         "EMType": 101,
-        "Source": {
-          "X": 40559,
-          "Y": -3584,
-          "Z": 35175,
-          "SoundID": 59,
-          "Flags": 192
-        }
+        "ID": 59,
+        "Mode": 192,
+        "X": 40559,
+        "Y": -3584,
+        "Z": 35175
       }
     ],
     [

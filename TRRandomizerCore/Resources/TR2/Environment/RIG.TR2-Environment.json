@@ -73,19 +73,6 @@
     ],
     [
       {
-        "Comments": "Add a wind sound effect outside.",
-        "EMType": 101,
-        "Source": {
-          "X": 20015,
-          "Y": -11008,
-          "Z": 72161,
-          "SoundID": 226,
-          "Flags": 192
-        }
-      }
-    ],
-    [
-      {
         "Comments": "Add some barrels",
         "EMType": 24,
         "MeshID": 287,

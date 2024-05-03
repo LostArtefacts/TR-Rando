@@ -66,13 +66,11 @@
       {
         "Comments": "Create a water sound source",
         "EMType": 101,
-        "Source": {
-          "X": 25217,
-          "Y": -4012,
-          "Z": 22092,
-          "SoundID": 59,
-          "Flags": 192
-        }
+        "ID": 59,
+        "Mode": 192,
+        "X": 25217,
+        "Y": -4012,
+        "Z": 22092
       },
       {
         "Comments": "Adjust any secrets.",

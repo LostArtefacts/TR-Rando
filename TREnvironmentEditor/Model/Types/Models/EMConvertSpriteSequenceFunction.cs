@@ -26,8 +26,8 @@ public class EMConvertSpriteSequenceFunction : BaseEMFunction
         where T : Enum
         where E : TREntity<T>
     {
-        T oldID = (T)(object)OldSpriteID;
-        T newID = (T)(object)NewSpriteID;
+        T oldID = (T)(object)(uint)OldSpriteID;
+        T newID = (T)(object)(uint)NewSpriteID;
         if (!sequences.ChangeKey(oldID, newID))
         {
             return;

@@ -43,6 +43,7 @@
       "Quads": {
         "1": [
           {
+            "Type": 4,
             "Vertices": [
               106,
               105,
@@ -56,6 +57,7 @@
       "Triangles": {
         "10": [
           {
+            "Type": 3,
             "Vertices": [
               119,
               122,
@@ -64,6 +66,7 @@
             "Texture": 72
           },
           {
+            "Type": 3,
             "Vertices": [
               327,
               298,
@@ -74,6 +77,7 @@
         ],
         "30": [
           {
+            "Type": 3,
             "Vertices": [
               220,
               252,
@@ -82,6 +86,7 @@
             "Texture": 72
           },
           {
+            "Type": 3,
             "Vertices": [
               252,
               253,
@@ -1481,6 +1486,7 @@
           "Quads": {
             "-1": [
               {
+                "Type": 4,
                 "Vertices": [
                   31,
                   30,
@@ -1490,6 +1496,7 @@
                 "Texture": 707
               },
               {
+                "Type": 4,
                 "Vertices": [
                   30,
                   47,
@@ -2870,7 +2877,7 @@
             "Z": 97792,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": 2
         },
         {
@@ -2881,7 +2888,7 @@
             "Z": 96768,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": 2
         },
         {
@@ -2892,7 +2899,7 @@
             "Z": 95744,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": 2
         },
         {
@@ -2903,7 +2910,7 @@
             "Z": 94720,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": 2
         },
         {
@@ -2914,7 +2921,7 @@
             "Z": 98816,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": -2
         },
         {
@@ -2925,7 +2932,7 @@
             "Z": 99840,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": -2
         },
         {
@@ -2936,7 +2943,7 @@
             "Z": 100864,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": -2
         },
         {
@@ -2947,7 +2954,7 @@
             "Z": 101888,
             "Room": -1
           },
-          "SlantType": 1,
+          "SlantType": 2,
           "ZSlant": -2
         },
         {
@@ -3639,9 +3646,7 @@
               "Room": -2
             }
           ],
-          "CameraAction": {
-            "Continue": true
-          }
+          "CameraAction": {}
         },
         {
           "EMType": 71,
