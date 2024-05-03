@@ -74,6 +74,12 @@ public class ObserverBase : ITRLevelObserver
     public virtual List<short> GetFramePadding(int animIndex, int frameIndex)
         => null;
 
+    public virtual void OnBadOverlapRead(ushort value)
+    { }
+
+    public virtual ushort? GetBadOverlap()
+        => null;
+
     public virtual void OnSampleIndicesRead(uint[] sampleIndices)
     { }
 

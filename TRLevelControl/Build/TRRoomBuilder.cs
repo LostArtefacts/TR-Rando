@@ -34,7 +34,7 @@ public abstract class TRRoomBuilder<T, R>
 
             room.NumZSectors = reader.ReadUInt16();
             room.NumXSectors = reader.ReadUInt16();
-            room.Sectors = reader.ReadRoomSectors(room.NumXSectors * room.NumZSectors);
+            room.Sectors = reader.ReadRoomSectors(room.NumXSectors * room.NumZSectors, _version);
 
             ReadLights(room, reader);
             ReadStatics(room, reader);
@@ -103,7 +103,7 @@ public abstract class TRRoomBuilder<T, R>
 
             writer.Write(room.NumZSectors);
             writer.Write(room.NumXSectors);
-            writer.Write(room.Sectors);
+            writer.Write(room.Sectors, _version);
 
             WriteLights(room, writer);
             WriteStatics(room, writer);

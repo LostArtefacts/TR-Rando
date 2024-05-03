@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using TREnvironmentEditor.Helpers;
 using TRLevelControl;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -171,29 +170,27 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             newBoxIndex = (ushort)level.Boxes.Count;
             int linkedBoxIndex = linkedSector.BoxIndex;
 
-            TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
-            TR2Box linkedBox = level.Boxes[linkedBoxIndex];
-            List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
-            overlaps.Add(newBoxIndex);
-            TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
+            TRBox linkedBox = level.Boxes[linkedBoxIndex];
+            linkedBox.Overlaps.Add(newBoxIndex);
 
             // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / TRConsts.Step4);
-            byte zmin = (byte)(newRoom.Info.Z / TRConsts.Step4);
-            byte xmax = (byte)(xmin + newRoom.NumXSectors);
-            byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new()
+            uint xmin = (uint)(newRoom.Info.X + TRConsts.Step4);
+            uint zmin = (uint)(newRoom.Info.Z + TRConsts.Step4);
+            uint xmax = (uint)(xmin + (newRoom.NumXSectors - 2) * TRConsts.Step4);
+            uint zmax = (uint)(zmin + (newRoom.NumZSectors - 2) * TRConsts.Step4);
+            TRBox box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
                 XMax = xmax,
                 ZMax = zmax,
-                TrueFloor = (short)newRoom.Info.YBottom
+                TrueFloor = (short)newRoom.Info.YBottom,
+                Zone = linkedBox.Zone.Clone(),
             };            
             level.Boxes.Add(box);
 
             // Link the box to the room we're joining to
-            TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
+            box.Overlaps.Add((ushort)linkedBoxIndex);
         }
 
         for (int i = 0; i < roomDef.Room.Sectors.Count; i++)
@@ -257,224 +254,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
     public override void ApplyToLevel(TR3Level level)
     {
-        Dictionary<byte, EMRoomDefinition<TR3Room>> roomResource = JsonConvert.DeserializeObject<Dictionary<byte, EMRoomDefinition<TR3Room>>>(ReadRoomResource("TR3"), _jsonSettings);
-        if (!roomResource.ContainsKey(RoomNumber))
-        {
-            throw new Exception(string.Format("Missing room {0} in room definition data for {1}.", RoomNumber, LevelID));
-        }
-
-        EMRoomDefinition<TR3Room> roomDef = roomResource[RoomNumber];
-
-        int xdiff = NewLocation.X - roomDef.Room.Info.X;
-        int ydiff = NewLocation.Y - roomDef.Room.Info.YBottom;
-        int zdiff = NewLocation.Z - roomDef.Room.Info.Z;
-
-        TR3Room newRoom = new()
-        {
-            AlternateRoom = -1,
-            AmbientIntensity = roomDef.Room.AmbientIntensity,
-            Flags = roomDef.Room.Flags,
-            Info = new TRRoomInfo
-            {
-                X = NewLocation.X,
-                YBottom = NewLocation.Y,
-                YTop = NewLocation.Y + (roomDef.Room.Info.YTop - roomDef.Room.Info.YBottom),
-                Z = NewLocation.Z
-            },
-            Lights = new(),
-            LightMode = roomDef.Room.LightMode,
-            NumXSectors = roomDef.Room.NumXSectors,
-            NumZSectors = roomDef.Room.NumZSectors,
-            Portals = new(),
-            ReverbMode = roomDef.Room.ReverbMode,
-            Mesh = new()
-            {
-                Rectangles = new(),
-                Triangles = new(),
-                Vertices = new(),
-                Sprites = new(),
-            },
-            Sectors = new(),
-            StaticMeshes = new(),
-            WaterScheme = roomDef.Room.WaterScheme
-        };
-
-        // Lights
-        for (int i = 0; i < roomDef.Room.Lights.Count; i++)
-        {
-            newRoom.Lights.Add(new()
-            {
-                Colour = roomDef.Room.Lights[i].Colour,
-                LightProperties = roomDef.Room.Lights[i].LightProperties,
-                Type = roomDef.Room.Lights[i].Type,
-                X = roomDef.Room.Lights[i].X + xdiff,
-                Y = roomDef.Room.Lights[i].Y + ydiff,
-                Z = roomDef.Room.Lights[i].Z + zdiff
-            });
-        }
-
-        // Faces
-        for (int i = 0; i < roomDef.Room.Mesh.Rectangles.Count; i++)
-        {
-            newRoom.Mesh.Rectangles.Add(new()
-            {
-                Texture = RectangleTexture == ushort.MaxValue ? roomDef.Room.Mesh.Rectangles[i].Texture : RectangleTexture,
-                Vertices = new(newRoom.Mesh.Rectangles[i].Vertices)
-            });
-        }
-
-        for (int i = 0; i < roomDef.Room.Mesh.Triangles.Count; i++)
-        {
-            newRoom.Mesh.Triangles.Add(new()
-            {
-                Type = TRFaceType.Triangle,
-                Texture = TriangleTexture == ushort.MaxValue ? roomDef.Room.Mesh.Triangles[i].Texture : TriangleTexture,
-                Vertices = new(newRoom.Mesh.Triangles[i].Vertices)
-            });
-        }
-
-        // Vertices
-        for (int i = 0; i < roomDef.Room.Mesh.Vertices.Count; i++)
-        {
-            newRoom.Mesh.Vertices.Add(new()
-            {
-                Attributes = roomDef.Room.Mesh.Vertices[i].Attributes,
-                Colour = roomDef.Room.Mesh.Vertices[i].Colour,
-                Lighting = roomDef.Room.Mesh.Vertices[i].Lighting,
-                Vertex = new()
-                {
-                    X = roomDef.Room.Mesh.Vertices[i].Vertex.X, // Room coords for X and Z
-                    Y = (short)(roomDef.Room.Mesh.Vertices[i].Vertex.Y + ydiff),
-                    Z = roomDef.Room.Mesh.Vertices[i].Vertex.Z
-                }
-            });
-        }
-
-        // Sprites
-        for (int i = 0; i < roomDef.Room.Mesh.Sprites.Count; i++)
-        {
-            newRoom.Mesh.Sprites.Add(new()
-            {
-                ID = roomDef.Room.Mesh.Sprites[i].ID,
-                Vertex = roomDef.Room.Mesh.Sprites[i].Vertex
-            });
-        }
-
-        // Static Meshes
-        for (int i = 0; i < roomDef.Room.StaticMeshes.Count; i++)
-        {
-            newRoom.StaticMeshes.Add(new()
-            {
-                Colour = roomDef.Room.StaticMeshes[i].Colour,
-                ID = roomDef.Room.StaticMeshes[i].ID,
-                Unused = roomDef.Room.StaticMeshes[i].Unused,
-                Angle = roomDef.Room.StaticMeshes[i].Angle,
-                X = roomDef.Room.StaticMeshes[i].X + xdiff,
-                Y = roomDef.Room.StaticMeshes[i].Y + ydiff,
-                Z = roomDef.Room.StaticMeshes[i].Z + zdiff
-            });
-        }
-
-        // Boxes, zones and sectors
-        EMLevelData data = GetData(level);
-
-        TRRoomSector linkedSector = level.GetRoomSector(data.ConvertLocation(LinkedLocation));
-        ushort newBoxIndex = ushort.MaxValue;
-        int linkedBoxIndex = (linkedSector.BoxIndex & 0x7FF0) >> 4;
-        int linkedMaterial = linkedSector.BoxIndex & 0x000F; // TR3-5 store material in bits 0-3 - wood, mud etc
-
-        if (!PreserveBoxes)
-        {
-            newBoxIndex = (ushort)level.Boxes.Count;
-
-            // Duplicate the zone for the new box and link the current box to the new room
-            TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
-            TR2Box linkedBox = level.Boxes[linkedBoxIndex];
-            List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
-            overlaps.Add(newBoxIndex);
-            TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
-
-            // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / TRConsts.Step4);
-            byte zmin = (byte)(newRoom.Info.Z / TRConsts.Step4);
-            byte xmax = (byte)(xmin + newRoom.NumXSectors);
-            byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new()
-            {
-                XMin = xmin,
-                ZMin = zmin,
-                XMax = xmax,
-                ZMax = zmax,
-                TrueFloor = (short)newRoom.Info.YBottom
-            };
-            level.Boxes.Add(box);
-
-            // Link the box to the room we're joining to
-            TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
-        }
-
-        // Now update each of the sectors in the new room. The box index in each sector
-        // needs to reference the material so pack this into the box index.
-        newBoxIndex <<= 4;
-        newBoxIndex |= (ushort)linkedMaterial;
-
-        for (int i = 0; i < newRoom.Sectors.Count; i++)
-        {
-            int sectorYDiff = 0;
-            ushort sectorBoxIndex = roomDef.Room.Sectors[i].BoxIndex;
-            // Only change the sector if it's not impenetrable
-            if (roomDef.Room.Sectors[i].Ceiling != TRConsts.WallClicks || roomDef.Room.Sectors[i].Floor != TRConsts.WallClicks)
-            {
-                sectorYDiff = ydiff / TRConsts.Step1;
-                if (!PreserveBoxes)
-                {
-                    sectorBoxIndex = newBoxIndex;
-                }
-            }
-
-            newRoom.Sectors[i] = new TRRoomSector
-            {
-                BoxIndex = sectorBoxIndex,
-                Ceiling = (sbyte)(roomDef.Room.Sectors[i].Ceiling + sectorYDiff),
-                FDIndex = 0, // Initialise to no FD
-                Floor = (sbyte)(roomDef.Room.Sectors[i].Floor + sectorYDiff),
-                RoomAbove = PreservePortals ? roomDef.Room.Sectors[i].RoomAbove : (byte)TRConsts.NoRoom,
-                RoomBelow = PreservePortals ? roomDef.Room.Sectors[i].RoomBelow : (byte)TRConsts.NoRoom
-            };
-
-            // Duplicate the FD too for everything except triggers. Track any portals
-            // so they can be blocked off.
-            ushort fdIndex = roomDef.Room.Sectors[i].FDIndex;
-            if (roomDef.FloorData.ContainsKey(fdIndex))
-            {
-                List<FDEntry> entries = roomDef.FloorData[fdIndex];
-                List<FDEntry> newEntries = new();
-                foreach (FDEntry entry in entries)
-                {
-                    switch (entry)
-                    {
-                        case FDPortalEntry:
-                            // This portal will no longer be valid in the new room's position,
-                            // so block off the wall
-                            newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = TRConsts.WallClicks;
-                            break;
-                        case FDTriggerEntry:
-                            break;
-                        default:
-                            newEntries.Add(entry.Clone());
-                            break;
-                    }
-                }
-
-                if (newEntries.Count > 0)
-                {
-                    level.FloorData.CreateFloorData(newRoom.Sectors[i]);
-                    level.FloorData[newRoom.Sectors[i].FDIndex].AddRange(newEntries);
-                }
-            }
-        }
-
-        level.Rooms.Add(newRoom);
+        throw new NotImplementedException();
     }
 
     public void RemapTextures(Dictionary<ushort, ushort> indexMap)

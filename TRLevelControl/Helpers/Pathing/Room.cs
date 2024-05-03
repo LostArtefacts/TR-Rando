@@ -13,45 +13,17 @@ public class Room
     public List<FloorPlan> FloorPlan { get; set; }
     public List<Box> Boxes { get; set; }
 
-    public static Room Create(TR1Room room)
+    public static Room Create(TRRoom room)
     {
-        return new Room
+        return new()
         {
             Floor = (sbyte)(room.Info.YBottom / TRConsts.Step1),
             Ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1),
             NumXSectors = room.NumXSectors,
             NumZSectors = room.NumZSectors,
-            Sectors = room.Sectors.ToList(),
-            FloorPlan = new List<FloorPlan>(),
-            Boxes = new List<Box>()
-        };
-    }
-
-    public static Room Create(TR2Room room)
-    {
-        return new Room
-        {
-            Floor = (sbyte)(room.Info.YBottom / TRConsts.Step1),
-            Ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1),
-            NumXSectors = room.NumXSectors,
-            NumZSectors = room.NumZSectors,
-            Sectors = room.Sectors.ToList(),
-            FloorPlan = new List<FloorPlan>(),
-            Boxes = new List<Box>()
-        };
-    }
-
-    public static Room Create(TR3Room room)
-    {
-        return new Room
-        {
-            Floor = (sbyte)(room.Info.YBottom / TRConsts.Step1),
-            Ceiling = (sbyte)(room.Info.YTop / TRConsts.Step1),
-            NumXSectors = room.NumXSectors,
-            NumZSectors = room.NumZSectors,
-            Sectors = room.Sectors.ToList(),
-            FloorPlan = new List<FloorPlan>(),
-            Boxes = new List<Box>()
+            Sectors = room.Sectors,
+            FloorPlan = new(),
+            Boxes = new()
         };
     }
 

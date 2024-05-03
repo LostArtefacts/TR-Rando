@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Base.Enums;
 
 namespace TRLevelControlTests.TR1;
 
@@ -35,49 +34,5 @@ public class IOTests : TestBase
             Assert.IsTrue(level.FloorData.ContainsKey(sector.FDIndex));
         }
         Assert.AreEqual(allFDSectors.Count(), allFDSectors.DistinctBy(s => s.FDIndex).Count());
-    }
-
-    [TestMethod]
-    public void ModifyZonesTest()
-    {
-        TR1Level lvl = GetTR1Level(TR1LevelNames.CAVES);
-
-        // For every box, store the current zone. We use the serialized form
-        // for comparison.
-        Dictionary<int, byte[]> flipOffZones = new();
-        Dictionary<int, byte[]> flipOnZones = new();
-        for (int i = 0; i < lvl.Boxes.Count; i++)
-        {
-            flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
-            flipOnZones[i] = lvl.Zones[i][FlipStatus.On].Serialize();
-        }
-
-        // Add a new box
-        lvl.Boxes.Add(lvl.Boxes[0]);
-
-        // Add a new zone for the box and store its serialized form for comparison
-        int newBoxIndex = (int)(lvl.Boxes.Count - 1);
-        TR1BoxUtilities.DuplicateZone(lvl, 0);
-        flipOffZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.Off].Serialize();
-        flipOnZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.On].Serialize();
-
-        // Verify the number of zone ushorts matches what's expected for the box count
-        Assert.AreEqual(TR1BoxUtilities.FlattenZones(lvl.Zones).Count, (int)(6 * lvl.Boxes.Count));
-
-        // Write and re-read the level
-        lvl = WriteReadTempLevel(lvl);
-
-        // Capture all of the zones again. Make sure the addition of the zone above didn't
-        // affect any of the others and that the addition itself matches after IO.
-        for (int i = 0; i < lvl.Boxes.Count; i++)
-        {
-            byte[] flipOff = lvl.Zones[i][FlipStatus.Off].Serialize();
-            Assert.IsTrue(flipOffZones.ContainsKey(i));
-            CollectionAssert.AreEqual(flipOffZones[i], flipOff);
-
-            byte[] flipOn = lvl.Zones[i][FlipStatus.On].Serialize();
-            Assert.IsTrue(flipOnZones.ContainsKey(i));
-            CollectionAssert.AreEqual(flipOnZones[i], flipOn);
-        }
     }
 }

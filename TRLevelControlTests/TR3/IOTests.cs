@@ -2,7 +2,6 @@
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Base.Enums;
 using TRRandomizerCore.Secrets;
 
 namespace TRLevelControlTests.TR3;
@@ -32,131 +31,6 @@ public class IOTests : TestBase
             Assert.IsTrue(level.FloorData.ContainsKey(sector.FDIndex));
         }
         Assert.AreEqual(allFDSectors.Count(), allFDSectors.DistinctBy(s => s.FDIndex).Count());
-    }
-
-    //[TestMethod]
-    //public void Floordata_ReadWrite_LevelHasMonkeySwingTest()
-    //{
-    //    TR3Level lvl = GetTR3Level(TR3LevelNames.THAMES);
-
-    //    //Store the original floordata from the level
-    //    List<ushort> originalFData = new(lvl.FloorData);
-
-    //    //Parse the floordata using FDControl and re-write the parsed data back
-    //    FDControl fdataReader = new();
-    //    fdataReader.ParseFromLevel(lvl);
-    //    fdataReader.WriteToLevel(lvl);
-
-    //    //Compare to make sure the original fdata was written back.
-    //    CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");;
-    //}
-
-    [TestMethod]
-    public void ModifyZonesTest()
-    {
-        TR3Level lvl = GetTR3Level(TR3LevelNames.JUNGLE);
-
-        // For every box, store the current zone. We use the serialized form
-        // for comparison.
-        Dictionary<int, byte[]> flipOffZones = new();
-        Dictionary<int, byte[]> flipOnZones = new();
-        for (int i = 0; i < lvl.Boxes.Count; i++)
-        {
-            flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
-            flipOnZones[i] = lvl.Zones[i][FlipStatus.On].Serialize();
-        }
-
-        // Add a new box
-        lvl.Boxes.Add(lvl.Boxes[0]);
-
-        // Add a new zone for the box and store its serialized form for comparison
-        int newBoxIndex = (int)(lvl.Boxes.Count - 1);
-        TR2BoxUtilities.DuplicateZone(lvl, 0);
-        flipOffZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.Off].Serialize();
-        flipOnZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.On].Serialize();
-
-        // Verify the number of zone ushorts matches what's expected for the box count
-        Assert.AreEqual(TR2BoxUtilities.FlattenZones(lvl.Zones).Count, 10 * lvl.Boxes.Count);
-
-        // Write and re-read the level
-        lvl = WriteReadTempLevel(lvl);
-
-        // Capture all of the zones again. Make sure the addition of the zone above didn't
-        // affect any of the others and that the addition itself matches after IO.
-        for (int i = 0; i < lvl.Boxes.Count; i++)
-        {
-            byte[] flipOff = lvl.Zones[i][FlipStatus.Off].Serialize();
-            Assert.IsTrue(flipOffZones.ContainsKey(i));
-            CollectionAssert.AreEqual(flipOffZones[i], flipOff);
-
-            byte[] flipOn = lvl.Zones[i][FlipStatus.On].Serialize();
-            Assert.IsTrue(flipOnZones.ContainsKey(i));
-            CollectionAssert.AreEqual(flipOnZones[i], flipOn);
-        }
-    }
-
-    [TestMethod]
-    public void ModifyOverlapsTest()
-    {
-        TR3Level lvl = GetTR3Level(TR3LevelNames.JUNGLE);
-
-        // For every box, store the current list of overlaps and the overlap starting
-        // index itself (which also stores Blockable/Blocked bits).
-        Dictionary<int, List<ushort>> boxOverlaps = new();
-        Dictionary<int, short> boxOverlapIndices = new();
-        for (int i = 0; i < lvl.Boxes.Count; i++)
-        {
-            boxOverlaps[i] = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
-            boxOverlapIndices[i] = lvl.Boxes[i].OverlapIndex;
-        }
-
-        // TR3 allows different boxes to point to the same overlap index.
-        // For testing we just write everything back and repeat the collection
-        // process above to ensure we get the same results.
-
-        // Write everything back with no changes.
-        for (int i = 0; i < lvl.Boxes.Count; i++)
-        {
-            TR2BoxUtilities.UpdateOverlaps(lvl, lvl.Boxes[i], boxOverlaps[i]);
-        }
-
-        Dictionary<int, List<ushort>> newBoxOverlaps = new();
-        for (int i = 0; i < lvl.Boxes.Count; i++)
-        {
-            newBoxOverlaps[i] = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
-        }
-
-        Assert.AreEqual(boxOverlaps.Count, newBoxOverlaps.Count);
-        foreach (int boxIndex in boxOverlaps.Keys)
-        {
-            CollectionAssert.AreEqual(boxOverlaps[boxIndex], newBoxOverlaps[boxIndex]);
-        }
-
-        // Add a new overlap to the first box, selecting a box that isn't already there.
-        for (ushort i = 1; i < lvl.Boxes.Count; i++)
-        {
-            if (!boxOverlaps[0].Contains(i))
-            {
-                boxOverlaps[0].Add(i);
-                break;
-            }
-        }
-
-        // Write the overlap list back to the level for box 0.
-        TR2BoxUtilities.UpdateOverlaps(lvl, lvl.Boxes[0], boxOverlaps[0]);
-
-        // Write and re-read the level
-        lvl = WriteReadTempLevel(lvl);
-
-        // Capture all of the overlaps again and confirm the numbers are what we expect i.e.
-        // the new overlap for box 0 exists and none of the other overlaps were affected by
-        // the addition.
-        for (int i = 0; i < lvl.Boxes.Count; i++)
-        {
-            List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
-            Assert.IsTrue(boxOverlaps.ContainsKey(i));
-            CollectionAssert.AreEqual(boxOverlaps[i], overlaps);
-        }
     }
 
     [TestMethod]

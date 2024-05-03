@@ -2,7 +2,6 @@
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using TRLevelControl;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
@@ -395,16 +394,14 @@ public static class FaceMapper
         int zmin = verts.Min(v => v.Z) + room.Info.Z;
 
         TRRoomSector sector = room.GetSector(xmin, zmin);
-        if (sector.BoxIndex == ushort.MaxValue)
+        if (sector.BoxIndex == TRConsts.NoBox)
         {
             return "NOBOX";
         }
 
-        TR2Box box = level.Boxes[sector.BoxIndex];
-        List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
-
+        TRBox box = level.Boxes[sector.BoxIndex];
         string info = "B" + sector.BoxIndex;
-        foreach (int overlap in overlaps)
+        foreach (int overlap in box.Overlaps)
         {
             info += Environment.NewLine + "  " + overlap;
         }

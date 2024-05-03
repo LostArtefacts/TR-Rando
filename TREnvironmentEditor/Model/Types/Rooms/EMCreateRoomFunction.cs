@@ -1,6 +1,6 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl;
-using TRLevelControl.Helpers.Pathing;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -249,7 +249,7 @@ public class EMCreateRoomFunction : BaseEMFunction
                 sectors.Add(new TRRoomSector
                 {
                     FDIndex = 0,
-                    BoxIndex = ushort.MaxValue,
+                    BoxIndex = TRConsts.NoBox,
                     Ceiling = sectorCeiling,
                     Floor = sectorFloor,
                     RoomAbove = TRConsts.NoRoom,

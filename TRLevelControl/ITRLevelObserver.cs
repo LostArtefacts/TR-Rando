@@ -26,6 +26,8 @@ public interface ITRLevelObserver
     byte? GetEmptyAnimFrameSize(int animIndex);
     void OnFramePaddingRead(int animIndex, int frameIndex, List<short> values);
     List<short> GetFramePadding(int animIndex, int frameIndex);
+    void OnBadOverlapRead(ushort value);
+    ushort? GetBadOverlap();
     void OnSampleIndicesRead(uint[] sampleIndices);
     IEnumerable<uint> GetSampleIndices();
 }

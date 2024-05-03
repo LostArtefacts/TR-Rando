@@ -556,19 +556,19 @@ public class TRLevelReader : BinaryReader
         };
     }
 
-    public List<TRRoomSector> ReadRoomSectors(long numSectors)
+    public List<TRRoomSector> ReadRoomSectors(long numSectors, TRGameVersion version)
     {
         List<TRRoomSector> sectors = new();
         for (int i = 0; i < numSectors; i++)
         {
-            sectors.Add(ReadRoomSector());
+            sectors.Add(ReadRoomSector(version));
         }
         return sectors;
     }
 
-    public TRRoomSector ReadRoomSector()
+    public TRRoomSector ReadRoomSector(TRGameVersion version)
     {
-        return new()
+        TRRoomSector sector = new()
         {
             FDIndex = ReadUInt16(),
             BoxIndex = ReadUInt16(),
@@ -576,6 +576,51 @@ public class TRLevelReader : BinaryReader
             Floor = ReadSByte(),
             RoomAbove = ReadByte(),
             Ceiling = ReadSByte()
+        };
+
+        if (version >= TRGameVersion.TR3 && sector.BoxIndex != TRConsts.NoBox)
+        {
+            sector.Material = (TRMaterial)(sector.BoxIndex & 0xF);
+            sector.BoxIndex = (ushort)((sector.BoxIndex & 0x7FF0) >> 4);
+        }
+
+        return sector;
+    }
+
+    public TRBox ReadBox(TRGameVersion version)
+    {
+        uint zmin, zmax, xmin, xmax;
+        if (version == TRGameVersion.TR1)
+        {
+            zmin = ReadUInt32();
+            zmax = ReadUInt32();
+            xmin = ReadUInt32();
+            xmax = ReadUInt32();
+
+            if ((zmax + 1) % TRConsts.Step4 == 0)
+            {
+                zmax++;
+            }
+            if ((xmax + 1) % TRConsts.Step4 == 0)
+            {
+                xmax++;
+            }
+        }
+        else
+        {
+            zmin = (uint)(ReadByte() << TRConsts.WallShift);
+            zmax = (uint)(ReadByte() << TRConsts.WallShift);
+            xmin = (uint)(ReadByte() << TRConsts.WallShift);
+            xmax = (uint)(ReadByte() << TRConsts.WallShift);
+        }
+
+        return new()
+        {
+            ZMin = zmin,
+            ZMax = zmax,
+            XMin = xmin,
+            XMax = xmax,
+            TrueFloor = ReadInt16()
         };
     }
 

@@ -13,9 +13,6 @@ public class TR2Level : TRLevelBase
     public TRDictionary<TR2Type, TRSpriteSequence> Sprites { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
-    public List<TR2Box> Boxes { get; set; }
-    public List<ushort> Overlaps { get; set; }
-    public List<TR2ZoneGroup> Zones { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public List<TR2Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }

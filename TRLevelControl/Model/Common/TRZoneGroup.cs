@@ -1,23 +1,19 @@
-﻿using TRLevelControl.Model.Base.Enums;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TRZoneGroup : Dictionary<FlipStatus, TRZone>
+public class TRZoneGroup : ICloneable
 {
-    /// <summary>
-    /// Zone values when flipmap is off.
-    /// </summary>
-    public TRZone NormalZone
+    public TRZone FlipOffZone { get; set; } = new();
+    public TRZone FlipOnZone { get; set; } = new();
+
+    public TRZoneGroup Clone()
     {
-        get => this[FlipStatus.Off];
-        set => this[FlipStatus.Off] = value;
+        return new()
+        {
+            FlipOffZone = FlipOffZone.Clone(),
+            FlipOnZone = FlipOnZone.Clone(),
+        };
     }
-    /// <summary>
-    /// Zone values when flipmap is on.
-    /// </summary>
-    public TRZone AlternateZone
-    {
-        get => this[FlipStatus.On];
-        set => this[FlipStatus.On] = value;
-    }
+
+    object ICloneable.Clone()
+        => Clone();
 }

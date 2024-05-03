@@ -72,7 +72,7 @@ public class TR5RoomBuilder
         room.Lights.AddRange(fogBulbs);
 
         reader.ReadUntil(dataStartPos + header.SectorStartOffset);
-        room.Sectors = reader.ReadRoomSectors(room.NumXSectors * room.NumZSectors);
+        room.Sectors = reader.ReadRoomSectors(room.NumXSectors * room.NumZSectors, TRGameVersion.TR5);
 
         ushort numPortals = reader.ReadUInt16();
         room.Portals = reader.ReadRoomPortals(numPortals);
@@ -371,7 +371,7 @@ public class TR5RoomBuilder
         WriteFogBulbs(writer, room.Lights.Where(l => l is TR5FogBulb).Cast<TR5FogBulb>());
 
         header.SectorStartOffset = (uint)writer.BaseStream.Position;
-        writer.Write(room.Sectors);
+        writer.Write(room.Sectors, TRGameVersion.TR5);
         header.SectorEndOffset = (uint)writer.BaseStream.Position;
 
         writer.Write((ushort)room.Portals.Count);

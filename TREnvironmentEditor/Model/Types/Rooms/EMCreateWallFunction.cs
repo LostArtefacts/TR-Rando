@@ -102,6 +102,6 @@ public class EMCreateWallFunction : BaseEMFunction
     private static void BlockSector(TRRoomSector sector)
     {
         sector.Floor = sector.Ceiling = TRConsts.WallClicks;
-        sector.BoxIndex = ushort.MaxValue;
+        sector.BoxIndex = TRConsts.NoBox;
     }
 }

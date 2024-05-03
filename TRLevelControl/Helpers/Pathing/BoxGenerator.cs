@@ -1,11 +1,11 @@
 ﻿using System.Drawing;
 using TRLevelControl.Model;
 
-namespace TRLevelControl.Helpers.Pathing;
+namespace TRLevelControl.Helpers;
 
 public class BoxGenerator
 {
-    public static void Generate(TR1Room room, TR1Level level, TRRoomSector linkedSector)
+    public static void Generate(TRRoom room, TRLevelBase level, TRRoomSector linkedSector)
     {
         Room boxRoom = Room.Create(room);
         Generate(boxRoom, level.Boxes.Count);
@@ -14,46 +14,13 @@ public class BoxGenerator
         {
             TRBox trBox = box.ToTRBox(room.Info);
             level.Boxes.Add(trBox);
-            TR1BoxUtilities.UpdateOverlaps(level, trBox, box.Overlaps.Select(o => (ushort)o.Index).ToList());
-            TR1BoxUtilities.DuplicateZone(level, linkedSector.BoxIndex);
-        }
-    }
-
-    public static void Generate(TR2Room room, TR2Level level, TRRoomSector linkedSector)
-    {
-        Room boxRoom = Room.Create(room);
-        Generate(boxRoom, level.Boxes.Count);
-
-        foreach (Box box in boxRoom.Boxes)
-        {
-            TR2Box trBox = box.ToTR2Box(room.Info);
-            level.Boxes.Add(trBox);
-            TR2BoxUtilities.UpdateOverlaps(level, trBox, box.Overlaps.Select(o => (ushort)o.Index).ToList());
-            TR2BoxUtilities.DuplicateZone(level, linkedSector.BoxIndex);
-        }
-    }
-
-    public static void Generate(TR3Room room, TR3Level level, TRRoomSector linkedSector)
-    {
-        Room boxRoom = Room.Create(room);
-        Generate(boxRoom, (int)level.Boxes.Count);
-
-        foreach (Box box in boxRoom.Boxes)
-        {
-            TR2Box trBox = box.ToTR2Box(room.Info);
-            level.Boxes.Add(trBox);
-            TR2BoxUtilities.UpdateOverlaps(level, trBox, box.Overlaps.Select(o => (ushort)o.Index).ToList());
-            TR2BoxUtilities.DuplicateZone(level, (linkedSector.BoxIndex & 0x7FF0) >> 4);
+            trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
+            trBox.Zone = level.Boxes[linkedSector.BoxIndex].Zone.Clone();
         }
 
-        ushort linkedMaterial = (ushort)(linkedSector.BoxIndex & 0x000F); // TR3-5 store material in bits 0-3 - wood, mud etc
-        foreach (TRRoomSector sector in boxRoom.Sectors)
+        foreach (TRRoomSector sector in boxRoom.Sectors.Where(s => !s.IsWall))
         {
-            if (!sector.IsWall)
-            {
-                sector.BoxIndex <<= 4;
-                sector.BoxIndex |= linkedMaterial;
-            }
+            sector.Material = linkedSector.Material;
         }
     }
 

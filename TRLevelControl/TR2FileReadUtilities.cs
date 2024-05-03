@@ -4,19 +4,6 @@ namespace TRLevelControl;
 
 internal static class TR2FileReadUtilities
 {
-    public static TRRoomSector ReadRoomSector(BinaryReader reader)
-    {
-        return new TRRoomSector
-        {
-            FDIndex = reader.ReadUInt16(),
-            BoxIndex = reader.ReadUInt16(),
-            RoomBelow = reader.ReadByte(),
-            Floor = reader.ReadSByte(),
-            RoomAbove = reader.ReadByte(),
-            Ceiling = reader.ReadSByte()
-        };
-    }
-
     public static TRObjectTexture ReadObjectTexture(BinaryReader reader)
     {
         return new TRObjectTexture()
@@ -69,19 +56,6 @@ internal static class TR2FileReadUtilities
             Z = reader.ReadInt32(),
             SoundID = reader.ReadUInt16(),
             Flags = reader.ReadUInt16()
-        };
-    }
-
-    public static TR2Box ReadBox(BinaryReader reader)
-    {
-        return new TR2Box()
-        {
-            ZMin = reader.ReadByte(),
-            ZMax = reader.ReadByte(),
-            XMin = reader.ReadByte(),
-            XMax = reader.ReadByte(),
-            TrueFloor = reader.ReadInt16(),
-            OverlapIndex = reader.ReadInt16()
         };
     }
 

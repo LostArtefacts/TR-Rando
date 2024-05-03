@@ -269,27 +269,14 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadBoxes(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateBoxesOverlapsZones(reader, _level);
+        TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
+        _level.Boxes = boxBuilder.ReadBoxes(reader);
     }
 
     private void WriteBoxes(TRLevelWriter writer)
     {
-        writer.Write((uint)_level.Boxes.Count);
-        foreach (TR2Box box in _level.Boxes)
-        {
-            writer.Write(box.Serialize());
-        }
-
-        writer.Write((uint)_level.Overlaps.Count);
-        foreach (ushort overlap in _level.Overlaps)
-        {
-            writer.Write(overlap);
-        }
-
-        foreach (short zone in _level.Zones)
-        {
-            writer.Write(zone);
-        }
+        TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
+        boxBuilder.WriteBoxes(writer, _level.Boxes);
     }
 
     private void ReadAnimatedTextures(TRLevelReader reader)
