@@ -28,6 +28,8 @@ public interface ITRLevelObserver
     List<short> GetFramePadding(int animIndex, int frameIndex);
     void OnBadOverlapRead(ushort value);
     ushort? GetBadOverlap();
+    void OnFlybyIndexRead(byte flybySequence, byte cameraIndex);
+    List<byte> GetFlybyIndices(byte flybySequence);
     void OnSampleIndicesRead(uint[] sampleIndices);
     IEnumerable<uint> GetSampleIndices();
 }

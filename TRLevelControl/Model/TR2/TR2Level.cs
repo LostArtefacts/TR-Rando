@@ -11,8 +11,7 @@ public class TR2Level : TRLevelBase
     public TRDictionary<TR2Type, TRStaticMesh> StaticMeshes { get; set; }
     public List<TRObjectTexture> ObjectTextures { get; set; }
     public TRDictionary<TR2Type, TRSpriteSequence> Sprites { get; set; }
-    public List<TRCamera> Cameras { get; set; }
-    public List<TRSoundSource> SoundSources { get; set; }
+    public List<TRSoundSource<TR2SFX>> SoundSources { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public List<TR2Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }

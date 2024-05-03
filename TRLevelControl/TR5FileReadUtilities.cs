@@ -8,39 +8,6 @@ internal static class TR5FileReadUtilities
 {
     public static readonly string TEXMarker = "TEX\0";
 
-    public static void PopulateCameras(BinaryReader reader, TR5Level lvl)
-    {
-        //Cameras
-        uint numCameras = reader.ReadUInt32();
-        lvl.Cameras = new();
-
-        for (int i = 0; i < numCameras; i++)
-        {
-            lvl.Cameras.Add(TR2FileReadUtilities.ReadCamera(reader));
-        }
-
-        //Flyby Cameras
-        uint numFlybyCameras = reader.ReadUInt32();
-        lvl.FlybyCameras = new();
-
-        for (int i = 0; i < numFlybyCameras; i++)
-        {
-            lvl.FlybyCameras.Add(TR4FileReadUtilities.ReadFlybyCamera(reader));
-        }
-    }
-
-    public static void PopulateSoundSources(BinaryReader reader, TR5Level lvl)
-    {
-        //Sound Sources
-        uint numSoundSources = reader.ReadUInt32();
-        lvl.SoundSources = new();
-
-        for (int i = 0; i < numSoundSources; i++)
-        {
-            lvl.SoundSources.Add(TR2FileReadUtilities.ReadSoundSource(reader));
-        }
-    }
-
     public static void PopulateAnimatedTextures(BinaryReader reader, TR5Level lvl)
     {
         reader.ReadUInt32(); // Total count of ushorts
@@ -107,16 +74,5 @@ internal static class TR5FileReadUtilities
             HeightMinusOne = reader.ReadUInt32(),
             Filler = reader.ReadUInt16()
         };
-    }
-
-    public static void PopulateEntitiesAndAI(TRLevelReader reader, TR5Level lvl)
-    {
-        //Entities
-        uint numEntities = reader.ReadUInt32();
-        lvl.Entities = reader.ReadTR5Entities(numEntities);
-
-        //AIObjects
-        numEntities = reader.ReadUInt32();
-        lvl.AIEntities = reader.ReadTR5AIEntities(numEntities);
     }
 }

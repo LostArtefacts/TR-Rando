@@ -11,6 +11,7 @@ public class TR4Observer : TR3Observer
     private readonly Dictionary<uint, List<byte>> _meshPadding = new();
     private readonly Dictionary<int, ushort> _badAnimCmdCounts = new();
     private readonly Dictionary<int, byte> _emptyAnimFrameSizes = new();
+    private readonly Dictionary<byte, List<byte>> _flybyIndices = new();
 
     private uint[] _sampleIndices;
 
@@ -93,6 +94,20 @@ public class TR4Observer : TR3Observer
     public override byte? GetEmptyAnimFrameSize(int animIndex)
     {
         return _emptyAnimFrameSizes.ContainsKey(animIndex) ? _emptyAnimFrameSizes[animIndex] : null;
+    }
+
+    public override void OnFlybyIndexRead(byte flybySequence, byte cameraIndex)
+    {
+        if (!_flybyIndices.ContainsKey(flybySequence))
+        {
+            _flybyIndices[flybySequence] = new();
+        }
+        _flybyIndices[flybySequence].Add(cameraIndex);
+    }
+
+    public override List<byte> GetFlybyIndices(byte flybySequence)
+    {
+        return _flybyIndices.ContainsKey(flybySequence) ? _flybyIndices[flybySequence] : null;
     }
 
     public override void OnSampleIndicesRead(uint[] sampleIndices)

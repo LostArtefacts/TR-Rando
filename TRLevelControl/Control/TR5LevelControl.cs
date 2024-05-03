@@ -287,36 +287,32 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void ReadCameras(TRLevelReader reader)
     {
-        TR5FileReadUtilities.PopulateCameras(reader, _level);
+        uint numCameras = reader.ReadUInt32();
+        _level.Cameras = reader.ReadCameras(numCameras);
+
+        TRFlybyBuilder builder = new(_observer);
+        _level.Flybys = builder.ReadFlybys(reader);
     }
 
     private void WriteCameras(TRLevelWriter writer)
     {
         writer.Write((uint)_level.Cameras.Count);
-        foreach (TRCamera cam in _level.Cameras)
-        {
-            writer.Write(cam.Serialize());
-        }
+        writer.Write(_level.Cameras);
 
-        writer.Write((uint)_level.FlybyCameras.Count);
-        foreach (TR4FlyByCamera flycam in _level.FlybyCameras)
-        {
-            writer.Write(flycam.Serialize());
-        }
+        TRFlybyBuilder builder = new(_observer);
+        builder.WriteFlybys(writer, _level.Flybys);
     }
 
     private void ReadSoundSources(TRLevelReader reader)
     {
-        TR5FileReadUtilities.PopulateSoundSources(reader, _level);
+        uint numSources = reader.ReadUInt32();
+        _level.SoundSources = reader.ReadSoundSources<TR5SFX>(numSources);
     }
 
     private void WriteSoundSources(TRLevelWriter writer)
     {
         writer.Write((uint)_level.SoundSources.Count);
-        foreach (TRSoundSource ssrc in _level.SoundSources)
-        {
-            writer.Write(ssrc.Serialize());
-        }
+        writer.Write(_level.SoundSources);
     }
 
     private void ReadBoxes(TRLevelReader reader)
@@ -364,7 +360,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void ReadEntities(TRLevelReader reader)
     {
-        TR5FileReadUtilities.PopulateEntitiesAndAI(reader, _level);
+        uint numEntities = reader.ReadUInt32();
+        _level.Entities = reader.ReadTR5Entities(numEntities);
+
+        numEntities = reader.ReadUInt32();
+        _level.AIEntities = reader.ReadTR5AIEntities(numEntities);
     }
 
     private void WriteEntities(TRLevelWriter writer)

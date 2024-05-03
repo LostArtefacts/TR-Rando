@@ -368,7 +368,14 @@ public class TRLevelWriter : BinaryWriter
         }
     }
 
-    public void Write(TRVertex vertex)
+    public void Write(TRVertex vertex, bool reverse = false)
+    {
+        Write(reverse ? vertex.Z : vertex.X);
+        Write(vertex.Y);
+        Write(reverse ? vertex.X : vertex.Z);
+    }
+
+    public void Write(TRVertex32 vertex)
     {
         Write(vertex.X);
         Write(vertex.Y);
@@ -493,5 +500,58 @@ public class TRLevelWriter : BinaryWriter
             Write(texture.Alignment.Right);
             Write(texture.Alignment.Bottom);
         }
+    }
+
+    public void Write(IEnumerable<TRCamera> cameras)
+    {
+        foreach (TRCamera camera in cameras)
+        {
+            Write(camera);
+        }
+    }
+
+    public void Write(TRCamera camera)
+    {
+        Write(camera.X);
+        Write(camera.Y);
+        Write(camera.Z);
+        Write(camera.Room);
+        Write(camera.Flag);
+    }
+
+    public void Write<T>(IEnumerable<TRSoundSource<T>> sources)
+        where T : Enum
+    {
+        foreach (TRSoundSource<T> source in sources)
+        {
+            Write(source);
+        }
+    }
+
+    public void Write<T>(TRSoundSource<T> source)
+        where T : Enum
+    {
+        uint soundID = (uint)(object)source.ID;
+        Write(source.X);
+        Write(source.Y);
+        Write(source.Z);
+        Write((ushort)soundID);
+        Write((ushort)source.Mode);
+    }
+
+    public void Write(IEnumerable<TRCinematicFrame> frames)
+    {
+        foreach (TRCinematicFrame frame in frames)
+        {
+            Write(frame);
+        }
+    }
+
+    public void Write(TRCinematicFrame frame)
+    {
+        Write(frame.Target);
+        Write(frame.Position, true);
+        Write(frame.FOV);
+        Write(frame.Roll);
     }
 }

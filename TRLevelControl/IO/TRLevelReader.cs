@@ -489,13 +489,30 @@ public class TRLevelReader : BinaryReader
         return vertices;
     }
 
-    public TRVertex ReadVertex()
+    public TRVertex ReadVertex(bool reverse = false)
     {
-        return new()
+        TRVertex vertex = new()
         {
             X = ReadInt16(),
             Y = ReadInt16(),
             Z = ReadInt16()
+        };
+
+        if (reverse)
+        {
+            (vertex.Z, vertex.X) = (vertex.X, vertex.Z);
+        }
+
+        return vertex;
+    }
+
+    public TRVertex32 ReadVertex32()
+    {
+        return new()
+        {
+            X = ReadInt32(),
+            Y = ReadInt32(),
+            Z = ReadInt32()
         };
     }
 
@@ -680,5 +697,72 @@ public class TRLevelReader : BinaryReader
         }
 
         return sprite;
+    }
+
+    public List<TRCamera> ReadCameras(long numCameras)
+    {
+        List<TRCamera> cameras = new();
+        for (int i = 0; i < numCameras; i++)
+        {
+            cameras.Add(ReadCamera());
+        }
+        return cameras;
+    }
+
+    public TRCamera ReadCamera()
+    {
+        return new()
+        {
+            X = ReadInt32(),
+            Y = ReadInt32(),
+            Z = ReadInt32(),
+            Room = ReadInt16(),
+            Flag = ReadUInt16()
+        };
+    }
+
+    public List<TRSoundSource<T>> ReadSoundSources<T>(long numSources)
+        where T : Enum
+    {
+        List<TRSoundSource<T>> sources = new();
+        for (int i = 0; i < numSources; i++)
+        {
+            sources.Add(ReadSoundSource<T>());
+        }
+        return sources;
+    }
+
+    public TRSoundSource<T> ReadSoundSource<T>()
+        where T : Enum
+    {
+        return new()
+        {
+            X = ReadInt32(),
+            Y = ReadInt32(),
+            Z = ReadInt32(),
+            ID = (T)(object)(uint)ReadUInt16(),
+            Mode = (TRSoundMode)ReadUInt16()
+        };
+    }
+
+    public List<TRCinematicFrame> ReadCinematicFrames(long numFrames)
+    {
+        List<TRCinematicFrame> frames = new();
+        for (int i = 0; i < numFrames; i++)
+        {
+            frames.Add(ReadCinematicFrame());
+        }
+        return frames;
+    }
+
+    public TRCinematicFrame ReadCinematicFrame()
+    {
+        return new()
+        {
+            Target = ReadVertex(),
+            Position = ReadVertex(true),
+            FOV = ReadInt16(),
+            Roll = ReadInt16()
+        };
     }
 }

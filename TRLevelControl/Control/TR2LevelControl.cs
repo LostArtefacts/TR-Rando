@@ -64,19 +64,8 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         ReadSprites(reader);
 
-        uint numCameras = reader.ReadUInt32();
-        _level.Cameras = new();
-        for (int i = 0; i < numCameras; i++)
-        {
-            _level.Cameras.Add(TR2FileReadUtilities.ReadCamera(reader));
-        }
-
-        uint numSoundSources = reader.ReadUInt32();
-        _level.SoundSources = new();
-        for (int i = 0; i < numSoundSources; i++)
-        {
-            _level.SoundSources.Add(TR2FileReadUtilities.ReadSoundSource(reader));
-        }
+        ReadCameras(reader);
+        ReadSoundSources(reader);
 
         ReadBoxes(reader);
 
@@ -88,19 +77,11 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.AnimatedTextures.Add(TR2FileReadUtilities.ReadAnimatedTexture(reader));
         }
 
-        //Entities
-        uint numEntities = reader.ReadUInt32();
-        _level.Entities = reader.ReadTR2Entities(numEntities);
+        ReadEntities(reader);
 
         _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
 
-        //Cinematic Frames
-        ushort numCinematicFrames = reader.ReadUInt16();
-        _level.CinematicFrames = new();
-        for (int i = 0; i < numCinematicFrames; i++)
-        {
-            _level.CinematicFrames.Add(TR2FileReadUtilities.ReadCinematicFrame(reader));
-        }
+        ReadCinematicFrames(reader);
 
         ushort numDemoData = reader.ReadUInt16();
         _level.DemoData = reader.ReadBytes(numDemoData);
@@ -133,11 +114,8 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
         WriteSprites(writer);
 
-        writer.Write((uint)_level.Cameras.Count);
-        foreach (TRCamera cam in _level.Cameras) { writer.Write(cam.Serialize()); }
-
-        writer.Write((uint)_level.SoundSources.Count);
-        foreach (TRSoundSource src in _level.SoundSources) { writer.Write(src.Serialize()); }
+        WriteCameras(writer);
+        WriteSoundSources(writer);
 
         WriteBoxes(writer);
 
@@ -146,14 +124,12 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write((ushort)_level.AnimatedTextures.Count);
         writer.Write(animTextureData);
 
-        writer.Write((uint)_level.Entities.Count);
-        writer.Write(_level.Entities);
+        WriteEntities(writer);
 
         Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
         writer.Write(_level.LightMap.ToArray());
 
-        writer.Write((ushort)_level.CinematicFrames.Count);
-        foreach (TRCinematicFrame cineframe in _level.CinematicFrames) { writer.Write(cineframe.Serialize()); }
+        WriteCinematicFrames(writer);
 
         writer.Write((ushort)_level.DemoData.Length);
         writer.Write(_level.DemoData);
@@ -228,6 +204,30 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         _spriteBuilder.WriteSprites(writer, _level.Sprites);
     }
 
+    private void ReadCameras(TRLevelReader reader)
+    {
+        uint numCameras = reader.ReadUInt32();
+        _level.Cameras = reader.ReadCameras(numCameras);
+    }
+
+    private void WriteCameras(TRLevelWriter writer)
+    {
+        writer.Write((uint)_level.Cameras.Count);
+        writer.Write(_level.Cameras);
+    }
+
+    private void ReadSoundSources(TRLevelReader reader)
+    {
+        uint numSources = reader.ReadUInt32();
+        _level.SoundSources = reader.ReadSoundSources<TR2SFX>(numSources);
+    }
+
+    private void WriteSoundSources(TRLevelWriter writer)
+    {
+        writer.Write((uint)_level.SoundSources.Count);
+        writer.Write(_level.SoundSources);
+    }
+
     private void ReadBoxes(TRLevelReader reader)
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
@@ -238,6 +238,30 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         boxBuilder.WriteBoxes(writer, _level.Boxes);
+    }
+
+    private void ReadEntities(TRLevelReader reader)
+    {
+        uint numEntities = reader.ReadUInt32();
+        _level.Entities = reader.ReadTR2Entities(numEntities);
+    }
+
+    private void WriteEntities(TRLevelWriter writer)
+    {
+        writer.Write((uint)_level.Entities.Count);
+        writer.Write(_level.Entities);
+    }
+
+    private void ReadCinematicFrames(TRLevelReader reader)
+    {
+        ushort numFrames = reader.ReadUInt16();
+        _level.CinematicFrames = reader.ReadCinematicFrames(numFrames);
+    }
+
+    private void WriteCinematicFrames(TRLevelWriter writer)
+    {
+        writer.Write((ushort)_level.CinematicFrames.Count);
+        writer.Write(_level.CinematicFrames);
     }
 
     private void ReadSoundEffects(TRLevelReader reader)
