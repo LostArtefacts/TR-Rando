@@ -73,7 +73,7 @@
           "Room": 2
         },
         "FloorClicks": -1,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": -1
       },
       {
@@ -109,6 +109,7 @@
         "Quads": {
           "2": [
             {
+              "Type": 4,
               "Vertices": [
                 177,
                 178,
@@ -122,6 +123,7 @@
         "Triangles": {
           "2": [
             {
+              "Type": 3,
               "Vertices": [
                 93,
                 107,
@@ -231,6 +233,7 @@
         "Quads": {
           "38": [
             {
+              "Type": 4,
               "Vertices": [
                 35,
                 34,
@@ -240,6 +243,7 @@
               "Texture": 76
             },
             {
+              "Type": 4,
               "Vertices": [
                 34,
                 33,
@@ -728,7 +732,7 @@
           "Z": 49664,
           "Room": 8
         },
-        "SlantType": 1,
+        "SlantType": 2,
         "ZSlant": 3
       },
       {
@@ -742,7 +746,7 @@
           "Z": 48640,
           "Room": 8
         },
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": 4,
         "ZSlant": -3
       },
@@ -3262,7 +3266,6 @@
               -1
             ],
             "CameraAction": {
-              "Value": 34816,
               "MoveTimer": 4
             }
           },
@@ -3847,7 +3850,6 @@
               -1
             ],
             "CameraAction": {
-              "Value": 34816,
               "MoveTimer": 4
             }
           },

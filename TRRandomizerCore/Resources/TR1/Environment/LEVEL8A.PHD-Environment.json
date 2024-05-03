@@ -75,7 +75,7 @@
         "Z": 14848
       },
       "FloorClicks": 1,
-      "SlantType": 1,
+      "SlantType": 2,
       "XSlant": 1
     },
     {
@@ -91,7 +91,7 @@
         "Room": 42
       },
       "FloorClicks": -1,
-      "SlantType": 1,
+      "SlantType": 2,
       "ZSlant": 2
     },
     {
@@ -168,6 +168,7 @@
       "Triangles": {
         "0": [
           {
+            "Type": 3,
             "Vertices": [
               137,
               109,
@@ -178,6 +179,7 @@
         ],
         "42": [
           {
+            "Type": 3,
             "Vertices": [
               69,
               67,
@@ -3087,10 +3089,8 @@
             }
           ],
           "CameraAction": {
-            "Value": 1280,
             "Once": true,
-            "MoveTimer": 2,
-            "Continue": true
+            "MoveTimer": 2
           }
         },
         {
@@ -5948,6 +5948,7 @@
           "Quads": {
             "12": [
               {
+                "Type": 4,
                 "Vertices": [
                   27,
                   28,
@@ -5957,6 +5958,7 @@
                 "Texture": 620
               },
               {
+                "Type": 4,
                 "Vertices": [
                   28,
                   32,

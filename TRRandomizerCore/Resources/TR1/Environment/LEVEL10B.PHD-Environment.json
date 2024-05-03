@@ -644,7 +644,7 @@
           "Room": 40
         },
         "FloorClicks": -6,
-        "SlantType": 1,
+        "SlantType": 2,
         "XSlant": -3,
         "ZSlant": -3
       },
@@ -714,6 +714,7 @@
         "Quads": {
           "40": [
             {
+              "Type": 4,
               "Vertices": [
                 484,
                 483,
@@ -723,6 +724,7 @@
               "Texture": 26
             },
             {
+              "Type": 4,
               "Vertices": [
                 483,
                 482,
@@ -732,6 +734,7 @@
               "Texture": 67
             },
             {
+              "Type": 4,
               "Vertices": [
                 482,
                 485,
@@ -741,6 +744,7 @@
               "Texture": 27
             },
             {
+              "Type": 4,
               "Vertices": [
                 485,
                 484,
@@ -4686,6 +4690,7 @@
           "Quads": {
             "36": [
               {
+                "Type": 4,
                 "Vertices": [
                   232,
                   231,

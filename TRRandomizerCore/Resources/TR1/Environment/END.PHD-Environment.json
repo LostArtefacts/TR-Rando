@@ -549,6 +549,7 @@
       "Quads": {
         "13": [
           {
+            "Type": 4,
             "Vertices": [
               73,
               81,
@@ -558,6 +559,7 @@
             "Texture": 42
           },
           {
+            "Type": 4,
             "Vertices": [
               652,
               609,
@@ -571,6 +573,7 @@
       "Triangles": {
         "13": [
           {
+            "Type": 3,
             "Vertices": [
               656,
               652,
@@ -3232,7 +3235,7 @@
               "ExpandX": 1,
               "ExpandZ": 3
             },
-            "SlantType": 1,
+            "SlantType": 2,
             "ZSlant": 3
           },
           {
@@ -3247,7 +3250,7 @@
               "ExpandX": 1,
               "ExpandZ": 3
             },
-            "SlantType": 1,
+            "SlantType": 2,
             "ZSlant": -3
           },
           {
@@ -3262,6 +3265,7 @@
               "ExpandX": 1,
               "ExpandZ": 3
             },
+            "SlantType": 3,
             "ZSlant": -3
           },
           {
@@ -3276,6 +3280,7 @@
               "ExpandX": 1,
               "ExpandZ": 3
             },
+            "SlantType": 3,
             "ZSlant": 3
           },
           {
@@ -3908,23 +3913,19 @@
           },
           {
             "EMType": 101,
-            "Source": {
-              "X": 46592,
-              "Y": -256,
-              "Z": 17920,
-              "SoundID": 155,
-              "Flags": 192
-            }
+            "ID": 155,
+            "Mode": 192,
+            "X": 46592,
+            "Y": -256,
+            "Z": 17920
           },
           {
             "EMType": 101,
-            "Source": {
-              "X": 48553,
-              "Y": -256,
-              "Z": 25873,
-              "SoundID": 148,
-              "Flags": 192
-            }
+            "ID": 148,
+            "Mode": 192,
+            "X": 48553,
+            "Y": -256,
+            "Z": 25873
           },
           {
             "EMType": 70,
@@ -3993,10 +3994,8 @@
               }
             ],
             "CameraAction": {
-              "Value": 1792,
               "Once": true,
-              "MoveTimer": 3,
-              "Continue": true
+              "MoveTimer": 3
             }
           },
           {
@@ -4245,9 +4244,7 @@
               -10
             ],
             "CameraAction": {
-              "Value": 5,
-              "Timer": 5,
-              "Continue": true
+              "Timer": 5
             }
           },
           {
@@ -4337,9 +4334,7 @@
               -9
             ],
             "CameraAction": {
-              "Value": 5,
-              "Timer": 5,
-              "Continue": true
+              "Timer": 5
             }
           },
           {
@@ -4439,9 +4434,7 @@
               -8
             ],
             "CameraAction": {
-              "Value": 5,
-              "Timer": 5,
-              "Continue": true
+              "Timer": 5
             }
           },
           {

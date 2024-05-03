@@ -56,6 +56,7 @@
       "Quads": {
         "66": [
           {
+            "Type": 4,
             "Vertices": [
               13,
               3,
@@ -89,6 +90,7 @@
         "Room": 25
       },
       "CeilingClicks": -2,
+      "SlantType": 3,
       "XSlant": 0,
       "ZSlant": 2
     },
@@ -133,6 +135,7 @@
       "Triangles": {
         "25": [
           {
+            "Type": 3,
             "Vertices": [
               131,
               132,
@@ -141,6 +144,7 @@
             "Texture": 60
           },
           {
+            "Type": 3,
             "Vertices": [
               120,
               121,
@@ -1573,13 +1577,11 @@
           "Tags": [
             5
           ],
-          "Source": {
-            "X": 59392,
-            "Y": 11264,
-            "Z": 11776,
-            "SoundID": 148,
-            "Flags": 192
-          }
+          "ID": 148,
+          "Mode": 192,
+          "X": 59392,
+          "Y": 11264,
+          "Z": 11776
         },
         {
           "Comments": "Raise some of the platforms for the jumps back up the pit.",
@@ -2834,6 +2836,7 @@
           "Quads": {
             "3": [
               {
+                "Type": 4,
                 "Vertices": [
                   41,
                   43,

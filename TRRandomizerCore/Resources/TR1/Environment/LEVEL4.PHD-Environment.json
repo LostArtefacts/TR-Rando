@@ -2260,7 +2260,7 @@
               "Room": -2
             }
           ],
-          "SlantType": 1,
+          "SlantType": 2,
           "XSlant": -4
         },
         {
@@ -2329,6 +2329,7 @@
           "Triangles": {
             "-2": [
               {
+                "Type": 3,
                 "Vertices": [
                   77,
                   169,
@@ -2337,6 +2338,7 @@
                 "Texture": 75
               },
               {
+                "Type": 3,
                 "Vertices": [
                   113,
                   171,
@@ -2345,6 +2347,7 @@
                 "Texture": 75
               },
               {
+                "Type": 3,
                 "Vertices": [
                   52,
                   54,
@@ -2353,6 +2356,7 @@
                 "Texture": 75
               },
               {
+                "Type": 3,
                 "Vertices": [
                   90,
                   91,
@@ -2361,6 +2365,7 @@
                 "Texture": 75
               },
               {
+                "Type": 3,
                 "Vertices": [
                   33,
                   25,
@@ -2369,6 +2374,7 @@
                 "Texture": 75
               },
               {
+                "Type": 3,
                 "Vertices": [
                   82,
                   64,
@@ -2377,6 +2383,7 @@
                 "Texture": 75
               },
               {
+                "Type": 3,
                 "Vertices": [
                   119,
                   101,
@@ -2385,6 +2392,7 @@
                 "Texture": 75
               },
               {
+                "Type": 3,
                 "Vertices": [
                   47,
                   56,
@@ -2393,6 +2401,7 @@
                 "Texture": 75
               },
               {
+                "Type": 3,
                 "Vertices": [
                   76,
                   92,
@@ -2401,6 +2410,7 @@
                 "Texture": 75
               },
               {
+                "Type": 3,
                 "Vertices": [
                   109,
                   126,
@@ -3051,6 +3061,7 @@
           "Quads": {
             "-1": [
               {
+                "Type": 4,
                 "Vertices": [
                   29,
                   28,
@@ -3905,7 +3916,7 @@
               "Room": -3
             }
           ],
-          "SlantType": 1,
+          "SlantType": 2,
           "XSlant": -3
         },
         {
@@ -3924,7 +3935,7 @@
               "Room": -3
             }
           ],
-          "SlantType": 1,
+          "SlantType": 2,
           "XSlant": 3
         },
         {
@@ -3937,7 +3948,7 @@
               "Room": -2
             }
           ],
-          "SlantType": 1,
+          "SlantType": 2,
           "XSlant": 2
         },
         {
