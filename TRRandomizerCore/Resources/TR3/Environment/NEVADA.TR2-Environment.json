@@ -452,9 +452,7 @@
             }
           ],
           "CameraAction": {
-            "Value": 10,
-            "Timer": 10,
-            "Continue": true
+            "Timer": 10
           }
         },
         {

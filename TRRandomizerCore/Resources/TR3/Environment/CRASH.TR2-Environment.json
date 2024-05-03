@@ -12,7 +12,7 @@
         "Z": 80384,
         "Room": 44
       },
-      "SlantType": 1,
+      "SlantType": 2,
       "XSlant": -1
     },
     {
@@ -54,6 +54,7 @@
       "Quads": {
         "44": [
           {
+            "Type": 4,
             "Vertices": [
               391,
               392,
@@ -67,6 +68,7 @@
       "Triangles": {
         "44": [
           {
+            "Type": 3,
             "Vertices": [
               62,
               391,
