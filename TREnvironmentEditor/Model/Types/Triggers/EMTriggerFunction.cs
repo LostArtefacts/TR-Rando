@@ -170,7 +170,7 @@ public class EMTriggerFunction : BaseEMFunction
         }
         if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
         {
-            entries.Add(triggerEntry);
+            entries.Add(triggerEntry.Clone());
         }
     }
 

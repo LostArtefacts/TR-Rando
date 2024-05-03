@@ -56,7 +56,7 @@ public class EMImportModelFunction : BaseEMFunction
         where T : Enum
     {
         return AliasPriority?
-            .Select(kv => new KeyValuePair<T, T>((T)(object)(int)kv.Key, (T)(object)(int)kv.Value))
+            .Select(kv => new KeyValuePair<T, T>((T)(object)(uint)kv.Key, (T)(object)(uint)kv.Value))
             .ToDictionary(kv => kv.Key, kv => kv.Value);
     }
 }

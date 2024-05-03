@@ -87,7 +87,7 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
         List<FDEntry> entries = control[sector.FDIndex];
         if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
         {
-            entries.AddRange(triggerEntries);
+            entries.AddRange(triggerEntries.Select(t => t.Clone()));
         }
     }
 }

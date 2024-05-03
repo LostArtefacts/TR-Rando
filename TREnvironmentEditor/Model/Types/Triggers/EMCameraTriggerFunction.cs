@@ -172,7 +172,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
             if (control[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
                 && trigger.TrigType != FDTrigType.Dummy)
             {
-                trigger.Actions.Add(new FDActionItem
+                trigger.Actions.Add(new()
                 {
                     Action = FDTrigAction.Camera,
                     CamAction = CameraAction,
@@ -181,7 +181,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
 
                 if (LookAtItem != ushort.MaxValue)
                 {
-                    trigger.Actions.Add(new FDActionItem
+                    trigger.Actions.Add(new()
                     {
                         Action = FDTrigAction.LookAtItem,
                         Parameter = data.ConvertEntity(LookAtItem)

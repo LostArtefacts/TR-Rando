@@ -102,7 +102,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
             {
                 if (!trigger.Actions.Any(a => a.Action == item.Action && a.Parameter == item.Parameter))
                 {
-                    trigger.Actions.Add(item);
+                    trigger.Actions.Add(item.Clone());
                 }
             }
         }

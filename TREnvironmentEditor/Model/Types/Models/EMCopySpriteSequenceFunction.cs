@@ -25,8 +25,8 @@ public class EMCopySpriteSequenceFunction : BaseEMFunction
     private void CopySpriteSequence<T>(TRDictionary<T, TRSpriteSequence> sequences)
         where T : Enum
     {
-        T baseID = (T)(object)BaseSpriteID;
-        T targetID = (T)(object)TargetSpriteID;
+        T baseID = (T)(object)(uint)BaseSpriteID;
+        T targetID = (T)(object)(uint)TargetSpriteID;
         if (!sequences.ContainsKey(baseID) || sequences.ContainsKey(targetID))
         {
             return;
