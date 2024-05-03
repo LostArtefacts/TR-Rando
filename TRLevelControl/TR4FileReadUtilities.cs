@@ -69,17 +69,6 @@ internal static class TR4FileReadUtilities
         }
     }
 
-    public static void PopulateEntitiesAndAI(TRLevelReader reader, TR4Level lvl)
-    {
-        //Entities
-        uint numEntities = reader.ReadUInt32();
-        lvl.Entities = reader.ReadTR4Entities(numEntities);
-
-        //AIObjects
-        numEntities = reader.ReadUInt32();
-        lvl.AIEntities = reader.ReadTR4AIEntities(numEntities);
-    }
-
     public static TR4FlyByCamera ReadFlybyCamera(BinaryReader reader)
     {
         return new TR4FlyByCamera

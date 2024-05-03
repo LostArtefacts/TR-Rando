@@ -89,9 +89,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
             _level.ObjectTextures.Add(TR2FileReadUtilities.ReadObjectTexture(reader));
         }
 
-        //Entities
-        uint numEntities = reader.ReadUInt32();
-        _level.Entities = reader.ReadTR3Entities(numEntities);
+        ReadEntities(reader);
 
         _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
 
@@ -148,8 +146,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write((uint)_level.ObjectTextures.Count);
         foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
 
-        writer.Write((uint)_level.Entities.Count);
-        writer.Write(_level.Entities);
+        WriteEntities(writer);
 
         Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
         writer.Write(_level.LightMap.ToArray());
@@ -240,6 +237,18 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         boxBuilder.WriteBoxes(writer, _level.Boxes);
+    }
+
+    private void ReadEntities(TRLevelReader reader)
+    {
+        uint numEntities = reader.ReadUInt32();
+        _level.Entities = reader.ReadTR3Entities(numEntities);
+    }
+
+    private void WriteEntities(TRLevelWriter writer)
+    {
+        writer.Write((uint)_level.Entities.Count);
+        writer.Write(_level.Entities);
     }
 
     private void ReadSoundEffects(TRLevelReader reader)

@@ -108,15 +108,4 @@ internal static class TR5FileReadUtilities
             Filler = reader.ReadUInt16()
         };
     }
-
-    public static void PopulateEntitiesAndAI(TRLevelReader reader, TR5Level lvl)
-    {
-        //Entities
-        uint numEntities = reader.ReadUInt32();
-        lvl.Entities = reader.ReadTR5Entities(numEntities);
-
-        //AIObjects
-        numEntities = reader.ReadUInt32();
-        lvl.AIEntities = reader.ReadTR5AIEntities(numEntities);
-    }
 }

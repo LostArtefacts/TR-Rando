@@ -84,9 +84,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
             _level.AnimatedTextures.Add(TR2FileReadUtilities.ReadAnimatedTexture(reader));
         }
 
-        //Entities
-        uint numEntities = reader.ReadUInt32();
-        _level.Entities = reader.ReadTR1Entities(numEntities);
+        ReadEntities(reader);
 
         _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
         _level.Palette = reader.ReadColours(TRConsts.PaletteSize);
@@ -136,8 +134,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         writer.Write((ushort)_level.AnimatedTextures.Count);
         writer.Write(animTextureData);
 
-        writer.Write((uint)_level.Entities.Count);
-        writer.Write(_level.Entities);
+        WriteEntities(writer);
 
         Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
         Debug.Assert(_level.Palette.Count == TRConsts.PaletteSize);
@@ -230,6 +227,18 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         boxBuilder.WriteBoxes(writer, _level.Boxes);
+    }
+
+    private void ReadEntities(TRLevelReader reader)
+    {
+        uint numEntities = reader.ReadUInt32();
+        _level.Entities = reader.ReadTR1Entities(numEntities);
+    }
+
+    private void WriteEntities(TRLevelWriter writer)
+    {
+        writer.Write((uint)_level.Entities.Count);
+        writer.Write(_level.Entities);
     }
 
     private void ReadSoundEffects(TRLevelReader reader)

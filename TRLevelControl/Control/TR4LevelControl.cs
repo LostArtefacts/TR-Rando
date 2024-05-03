@@ -311,7 +311,11 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadEntities(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateEntitiesAndAI(reader, _level);
+        uint numEntities = reader.ReadUInt32();
+        _level.Entities = reader.ReadTR4Entities(numEntities);
+
+        numEntities = reader.ReadUInt32();
+        _level.AIEntities = reader.ReadTR4AIEntities(numEntities);
     }
 
     private void WriteEntities(TRLevelWriter writer)
