@@ -305,16 +305,14 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void ReadSoundSources(TRLevelReader reader)
     {
-        TR5FileReadUtilities.PopulateSoundSources(reader, _level);
+        uint numSources = reader.ReadUInt32();
+        _level.SoundSources = reader.ReadSoundSources<TR5SFX>(numSources);
     }
 
     private void WriteSoundSources(TRLevelWriter writer)
     {
         writer.Write((uint)_level.SoundSources.Count);
-        foreach (TRSoundSource ssrc in _level.SoundSources)
-        {
-            writer.Write(ssrc.Serialize());
-        }
+        writer.Write(_level.SoundSources);
     }
 
     private void ReadBoxes(TRLevelReader reader)

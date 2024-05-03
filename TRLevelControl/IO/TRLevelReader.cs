@@ -721,6 +721,30 @@ public class TRLevelReader : BinaryReader
         };
     }
 
+    public List<TRSoundSource<T>> ReadSoundSources<T>(long numSources)
+        where T : Enum
+    {
+        List<TRSoundSource<T>> sources = new();
+        for (int i = 0; i < numSources; i++)
+        {
+            sources.Add(ReadSoundSource<T>());
+        }
+        return sources;
+    }
+
+    public TRSoundSource<T> ReadSoundSource<T>()
+        where T : Enum
+    {
+        return new()
+        {
+            X = ReadInt32(),
+            Y = ReadInt32(),
+            Z = ReadInt32(),
+            ID = (T)(object)(uint)ReadUInt16(),
+            Mode = (TRSoundMode)ReadUInt16()
+        };
+    }
+
     public List<TRCinematicFrame> ReadCinematicFrames(long numFrames)
     {
         List<TRCinematicFrame> frames = new();

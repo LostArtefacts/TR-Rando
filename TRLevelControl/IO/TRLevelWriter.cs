@@ -519,6 +519,26 @@ public class TRLevelWriter : BinaryWriter
         Write(camera.Flag);
     }
 
+    public void Write<T>(IEnumerable<TRSoundSource<T>> sources)
+        where T : Enum
+    {
+        foreach (TRSoundSource<T> source in sources)
+        {
+            Write(source);
+        }
+    }
+
+    public void Write<T>(TRSoundSource<T> source)
+        where T : Enum
+    {
+        uint soundID = (uint)(object)source.ID;
+        Write(source.X);
+        Write(source.Y);
+        Write(source.Z);
+        Write((ushort)soundID);
+        Write((ushort)source.Mode);
+    }
+
     public void Write(IEnumerable<TRCinematicFrame> frames)
     {
         foreach (TRCinematicFrame frame in frames)

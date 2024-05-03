@@ -65,13 +65,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         ReadSprites(reader);
 
         ReadCameras(reader);
-
-        uint numSoundSources = reader.ReadUInt32();
-        _level.SoundSources = new();
-        for (int i = 0; i < numSoundSources; i++)
-        {
-            _level.SoundSources.Add(TR2FileReadUtilities.ReadSoundSource(reader));
-        }
+        ReadSoundSources(reader);
 
         ReadBoxes(reader);
 
@@ -121,9 +115,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         WriteSprites(writer);
 
         WriteCameras(writer);
-
-        writer.Write((uint)_level.SoundSources.Count);
-        foreach (TRSoundSource src in _level.SoundSources) { writer.Write(src.Serialize()); }
+        WriteSoundSources(writer);
 
         WriteBoxes(writer);
 
@@ -222,6 +214,18 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     {
         writer.Write((uint)_level.Cameras.Count);
         writer.Write(_level.Cameras);
+    }
+
+    private void ReadSoundSources(TRLevelReader reader)
+    {
+        uint numSources = reader.ReadUInt32();
+        _level.SoundSources = reader.ReadSoundSources<TR2SFX>(numSources);
+    }
+
+    private void WriteSoundSources(TRLevelWriter writer)
+    {
+        writer.Write((uint)_level.SoundSources.Count);
+        writer.Write(_level.SoundSources);
     }
 
     private void ReadBoxes(TRLevelReader reader)

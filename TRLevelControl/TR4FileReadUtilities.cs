@@ -8,18 +8,6 @@ internal static class TR4FileReadUtilities
 {
     public static readonly string TEXMarker = "TEX";
 
-    public static void PopulateSoundSources(BinaryReader reader, TR4Level lvl)
-    {
-        //Sound Sources
-        uint numSoundSources = reader.ReadUInt32();
-        lvl.SoundSources = new();
-
-        for (int i = 0; i < numSoundSources; i++)
-        {
-            lvl.SoundSources.Add(TR2FileReadUtilities.ReadSoundSource(reader));
-        }
-    }
-
     public static void PopulateAnimatedTextures(BinaryReader reader, TR4Level lvl)
     {
         reader.ReadUInt32(); // Total count of ushorts

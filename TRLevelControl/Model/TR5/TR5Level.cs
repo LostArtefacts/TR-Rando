@@ -10,7 +10,7 @@ public class TR5Level : TRLevelBase
     public TRDictionary<TR5Type, TRStaticMesh> StaticMeshes { get; set; }
     public TRDictionary<TR5Type, TRSpriteSequence> Sprites { get; set; }
     public TRDictionary<byte, List<TRFlybyCamera>> Flybys { get; set; }
-    public List<TRSoundSource> SoundSources { get; set; }
+    public List<TRSoundSource<TR5SFX>> SoundSources { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public byte AnimatedTexturesUVCount { get; set; }
     public List<TR5ObjectTexture> ObjectTextures { get; set; }

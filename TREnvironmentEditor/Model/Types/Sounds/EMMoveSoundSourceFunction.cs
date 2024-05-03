@@ -23,7 +23,8 @@ public class EMMoveSoundSourceFunction : BaseEMFunction
         MoveSoundSource(level.SoundSources[Index]);
     }
 
-    private void MoveSoundSource(TRSoundSource source)
+    private void MoveSoundSource<T>(TRSoundSource<T> source)
+        where T : Enum
     {
         source.X += Relocation.X;
         source.Y += Relocation.Y;

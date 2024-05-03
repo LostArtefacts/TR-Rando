@@ -35,18 +35,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TRSoundSource ReadSoundSource(BinaryReader reader)
-    {
-        return new TRSoundSource()
-        {
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            SoundID = reader.ReadUInt16(),
-            Flags = reader.ReadUInt16()
-        };
-    }
-
     public static TRAnimatedTexture ReadAnimatedTexture(BinaryReader reader)
     {
         // See https://opentomb.github.io/TRosettaStone3/trosettastone.html#_animated_textures_2

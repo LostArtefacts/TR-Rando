@@ -852,7 +852,7 @@ public class EMMirrorFunction : BaseEMFunction
             camera.X = FlipWorldX(camera.X);
         }
 
-        foreach (TRSoundSource sound in level.SoundSources)
+        foreach (TRSoundSource<TR1SFX> sound in level.SoundSources)
         {
             sound.X = FlipWorldX(sound.X);
         }
@@ -872,7 +872,7 @@ public class EMMirrorFunction : BaseEMFunction
             camera.X = FlipWorldX(camera.X);
         }
 
-        foreach (TRSoundSource sound in level.SoundSources)
+        foreach (TRSoundSource<TR2SFX> sound in level.SoundSources)
         {
             sound.X = FlipWorldX(sound.X);
         }
@@ -892,7 +892,7 @@ public class EMMirrorFunction : BaseEMFunction
             camera.X = FlipWorldX(camera.X);
         }
 
-        foreach (TRSoundSource sound in level.SoundSources)
+        foreach (TRSoundSource<TR3SFX> sound in level.SoundSources)
         {
             sound.X = FlipWorldX(sound.X);
         }
