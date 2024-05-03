@@ -1,6 +1,5 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -198,7 +197,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             return;
         }
 
-        if (TR1BoxUtilities.GetSectorCount(level, sector.BoxIndex) == 1)
+        if (level.Rooms.Sum(r => r.Sectors.Count(s => s.BoxIndex == sector.BoxIndex)) == 1)
         {
             // The box used by this sector is unique to this sector, so we can
             // simply change the existing floor height to match the sector.
@@ -394,7 +393,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             return;
         }
 
-        if (TR2BoxUtilities.GetSectorCount(level, sector.BoxIndex) == 1)
+        if (level.Rooms.Sum(r => r.Sectors.Count(s => s.BoxIndex == sector.BoxIndex)) == 1)
         {
             // The box used by this sector is unique to this sector, so we can
             // simply change the existing floor height to match the sector.
@@ -606,7 +605,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             return;
         }
 
-        if (TR2BoxUtilities.GetSectorCount(level, sector.BoxIndex) == 1)
+        if (level.Rooms.Sum(r => r.Sectors.Count(s => s.BoxIndex == sector.BoxIndex)) == 1)
         {
             // The box used by this sector is unique to this sector, so we can
             // simply change the existing floor height to match the sector.
