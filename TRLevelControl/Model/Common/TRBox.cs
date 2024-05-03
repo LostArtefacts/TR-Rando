@@ -10,4 +10,5 @@ public class TRBox
     public bool Blockable { get; set; }
     public bool Blocked { get; set; }
     public List<ushort> Overlaps { get; set; } = new();
+    public TRZoneGroup Zone { get; set; } = new();
 }

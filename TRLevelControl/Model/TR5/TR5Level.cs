@@ -12,7 +12,6 @@ public class TR5Level : TRLevelBase
     public List<TRCamera> Cameras { get; set; }
     public List<TR4FlyByCamera> FlybyCameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
-    public List<short> Zones { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public byte AnimatedTexturesUVCount { get; set; }
     public List<TR5ObjectTexture> ObjectTextures { get; set; }

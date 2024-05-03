@@ -33,4 +33,12 @@ public class FDTests : FDTestBase
         TR5Level level = GetTR5TestLevel();
         ModifyOverlaps(level, () => WriteReadTempLevel(level));
     }
+
+    [TestMethod]
+    [Description("Add a new box/zone and verify none of the original zones are affected.")]
+    public void ModifyZones()
+    {
+        TR5Level level = GetTR5TestLevel();
+        ModifyZones(level, () => WriteReadTempLevel(level));
+    }
 }

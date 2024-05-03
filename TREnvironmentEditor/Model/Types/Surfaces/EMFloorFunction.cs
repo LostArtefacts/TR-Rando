@@ -209,9 +209,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             ushort currentBoxIndex = sector.BoxIndex;
             ushort newBoxIndex = (ushort)level.Boxes.Count;
 
-            // Make a new zone to match the addition of a new box.
-            TR1BoxUtilities.DuplicateZone(level, sector.BoxIndex);
-
             // Add what will be the new box index as an overlap to adjoining boxes.
             GenerateOverlaps(level.Boxes, sector.BoxIndex, newBoxIndex);
 
@@ -224,7 +221,8 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                 ZMin = zmin,
                 XMax = (byte)(xmin + 1), // Only 1 tile
                 ZMax = (byte)(zmin + 1),
-                TrueFloor = (short)(sector.Floor * TRConsts.Step1)
+                TrueFloor = (short)(sector.Floor * TRConsts.Step1),
+                Zone = level.Boxes[sector.BoxIndex].Zone.Clone()
             };
 
             // Point the sector to the new box, and save it to the level
@@ -407,9 +405,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             ushort currentBoxIndex = sector.BoxIndex;
             ushort newBoxIndex = (ushort)level.Boxes.Count;
 
-            // Make a new zone to match the addition of a new box.
-            TR2BoxUtilities.DuplicateZone(level, sector.BoxIndex);
-
             // Add what will be the new box index as an overlap to adjoining boxes.
             GenerateOverlaps(level.Boxes, sector.BoxIndex, newBoxIndex);
 
@@ -422,7 +417,8 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                 ZMin = zmin,
                 XMax = (byte)(xmin + 1), // Only 1 tile
                 ZMax = (byte)(zmin + 1),
-                TrueFloor = (short)(sector.Floor * TRConsts.Step1)
+                TrueFloor = (short)(sector.Floor * TRConsts.Step1),
+                Zone = level.Boxes[sector.BoxIndex].Zone.Clone()
             };
 
             // Point the sector to the new box, and save it to the level
@@ -623,9 +619,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         {
             ushort newBoxIndex = (ushort)level.Boxes.Count;
 
-            // Make a new zone to match the addition of a new box.
-            TR2BoxUtilities.DuplicateZone(level, currentBoxIndex);
-
             // Add what will be the new box index as an overlap to adjoining boxes.
             GenerateOverlaps(level.Boxes, currentBoxIndex, newBoxIndex);
 
@@ -638,7 +631,8 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                 ZMin = zmin,
                 XMax = (byte)(xmin + 1), // Only 1 tile
                 ZMax = (byte)(zmin + 1),
-                TrueFloor = (short)(sector.Floor * TRConsts.Step1)
+                TrueFloor = (short)(sector.Floor * TRConsts.Step1),
+                Zone = level.Boxes[sector.BoxIndex].Zone.Clone()
             };
 
             // Point the sector to the new box, and save it to the level

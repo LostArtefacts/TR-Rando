@@ -12,7 +12,7 @@ internal class TRZoneControl : IDrawable
         {
             ImGui.Text("Box count: " + IOManager.CurrentLevelAsTR1?.Boxes.Count);
             ImGui.Text("Overlap count: " + IOManager.CurrentLevelAsTR1?.Boxes.Sum(b => b.Overlaps.Count));
-            ImGui.Text("Zone Group count: " + IOManager.CurrentLevelAsTR1?.Zones.Count);
+            ImGui.Text("Zone Group count: " + IOManager.CurrentLevelAsTR1?.Boxes.Count);
             ImGui.TreePop();
         }
     }

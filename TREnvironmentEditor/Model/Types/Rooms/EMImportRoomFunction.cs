@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using TREnvironmentEditor.Helpers;
 using TRLevelControl;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -171,7 +170,6 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             newBoxIndex = (ushort)level.Boxes.Count;
             int linkedBoxIndex = linkedSector.BoxIndex;
 
-            TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
             TRBox linkedBox = level.Boxes[linkedBoxIndex];
             linkedBox.Overlaps.Add(newBoxIndex);
 
@@ -186,7 +184,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 ZMin = zmin,
                 XMax = xmax,
                 ZMax = zmax,
-                TrueFloor = (short)newRoom.Info.YBottom
+                TrueFloor = (short)newRoom.Info.YBottom,
+                Zone = linkedBox.Zone.Clone(),
             };            
             level.Boxes.Add(box);
 
@@ -386,7 +385,6 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             newBoxIndex = (ushort)level.Boxes.Count;
 
             // Duplicate the zone for the new box and link the current box to the new room
-            TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
             TRBox linkedBox = level.Boxes[linkedBoxIndex];
             linkedBox.Overlaps.Add(newBoxIndex);
 
@@ -401,7 +399,8 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
                 ZMin = zmin,
                 XMax = xmax,
                 ZMax = zmax,
-                TrueFloor = (short)newRoom.Info.YBottom
+                TrueFloor = (short)newRoom.Info.YBottom,
+                Zone = linkedBox.Zone.Clone(),
             };
             level.Boxes.Add(box);
 

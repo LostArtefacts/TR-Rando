@@ -10,7 +10,6 @@ public class TR1Level : TRLevelBase
     public TRDictionary<TR1Type, TRSpriteSequence> Sprites { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
-    public List<TRZoneGroup> Zones { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public List<TR1Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }

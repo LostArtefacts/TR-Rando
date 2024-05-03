@@ -164,4 +164,12 @@ public class FDTests : FDTestBase
         TR3Level level = GetTR3TestLevel();
         ModifyOverlaps(level, () => WriteReadTempLevel(level));
     }
+
+    [TestMethod]
+    [Description("Add a new box/zone and verify none of the original zones are affected.")]
+    public void ModifyZones()
+    {
+        TR3Level level = GetTR3TestLevel();
+        ModifyZones(level, () => WriteReadTempLevel(level));
+    }
 }

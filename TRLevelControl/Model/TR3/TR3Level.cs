@@ -12,7 +12,6 @@ public class TR3Level : TRLevelBase
     public TRDictionary<TR3Type, TRSpriteSequence> Sprites { get; set; }
     public List<TRCamera> Cameras { get; set; }
     public List<TRSoundSource> SoundSources { get; set; }
-    public List<TR2ZoneGroup> Zones { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public List<TRObjectTexture> ObjectTextures { get; set; }
     public List<TR3Entity> Entities { get; set; }

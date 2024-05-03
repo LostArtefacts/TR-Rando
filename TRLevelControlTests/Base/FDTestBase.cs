@@ -121,4 +121,40 @@ public class FDTestBase : TestBase
             CollectionAssert.AreEqual(originalOverlaps[i], level.Boxes[i].Overlaps);
         }
     }
+
+    protected static void ModifyZones(TRLevelBase level, Func<TRLevelBase> rewriteAction)
+    {
+        List<TRZoneGroup> originalZones = level.Boxes.Select(b => b.Zone).ToList();
+
+        level.Boxes.Add(new()
+        {
+            XMin = 1,
+            XMax = 2,
+            ZMin = 1,
+            ZMax = 2,
+            TrueFloor = 1024,
+            Zone = level.Boxes[0].Zone.Clone()
+        });
+
+        level = rewriteAction();
+
+        for (int i = 0; i < originalZones.Count; i++)
+        {
+            TRZoneGroup originalZone = originalZones[i];
+            TRZoneGroup newZone = level.Boxes[i].Zone;
+            
+            foreach (var (zoneType, value) in originalZone.FlipOffZone.Ground)
+            {
+                Assert.AreEqual(value, newZone.FlipOffZone.Ground[zoneType]);
+            }
+
+            foreach (var (zoneType, value) in originalZone.FlipOnZone.Ground)
+            {
+                Assert.AreEqual(value, newZone.FlipOnZone.Ground[zoneType]);
+            }
+
+            Assert.AreEqual(originalZone.FlipOffZone.Fly, newZone.FlipOffZone.Fly);
+            Assert.AreEqual(originalZone.FlipOnZone.Fly, newZone.FlipOnZone.Fly);
+        }
+    }
 }

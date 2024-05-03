@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using TRLevelControl.Build;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TRLevelControl;
@@ -233,17 +232,12 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         _level.Boxes = boxBuilder.ReadBoxes(reader);
-
-        ushort[] zoneData = reader.ReadUInt16s(_level.Boxes.Count * 10);
-        _level.Zones = TR2BoxUtilities.ReadZones((uint)_level.Boxes.Count, zoneData);
     }
 
     private void WriteBoxes(TRLevelWriter writer)
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         boxBuilder.WriteBoxes(writer, _level.Boxes);
-
-        writer.Write(TR2BoxUtilities.FlattenZones(_level.Zones));
     }
 
     private void ReadSoundEffects(TRLevelReader reader)

@@ -15,7 +15,7 @@ public class BoxGenerator
             TRBox trBox = box.ToTRBox(room.Info);
             level.Boxes.Add(trBox);
             trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
-            TR1BoxUtilities.DuplicateZone(level, linkedSector.BoxIndex);
+            trBox.Zone = level.Boxes[linkedSector.BoxIndex].Zone.Clone();
         }
     }
 
@@ -29,7 +29,7 @@ public class BoxGenerator
             TRBox trBox = box.ToTRBox(room.Info);
             level.Boxes.Add(trBox);
             trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
-            TR2BoxUtilities.DuplicateZone(level, linkedSector.BoxIndex);
+            trBox.Zone = level.Boxes[linkedSector.BoxIndex].Zone.Clone();
         }
     }
 
@@ -43,7 +43,7 @@ public class BoxGenerator
             TRBox trBox = box.ToTRBox(room.Info);
             level.Boxes.Add(trBox);
             trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
-            TR2BoxUtilities.DuplicateZone(level, (linkedSector.BoxIndex & 0x7FF0) >> 4);
+            trBox.Zone = level.Boxes[(linkedSector.BoxIndex & 0x7FF0) >> 4].Zone.Clone();
         }
 
         ushort linkedMaterial = (ushort)(linkedSector.BoxIndex & 0x000F); // TR3-5 store material in bits 0-3 - wood, mud etc

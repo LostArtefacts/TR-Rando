@@ -1,4 +1,5 @@
-﻿using TRLevelControl.Model;
+﻿using System.Diagnostics;
+using TRLevelControl.Model;
 
 namespace TRLevelControl.Build;
 
@@ -33,6 +34,7 @@ public class TRBoxBuilder
         }
 
         BuildOverlaps(reader, boxes);
+        BuildZones(reader, boxes);
 
         return boxes;
     }
@@ -89,6 +91,45 @@ public class TRBoxBuilder
         }
     }
 
+    private void BuildZones(TRLevelReader reader, List<TRBox> boxes)
+    {
+        List<TRZoneType> zoneTypes = new()
+        {
+            TRZoneType.Zone1,
+            TRZoneType.Zone2,
+        };
+
+        if (_version > TRGameVersion.TR1)
+        {
+            zoneTypes.Add(TRZoneType.Zone3);
+            zoneTypes.Add(TRZoneType.Zone4);
+        }
+
+        int numZoneData = 2 * boxes.Count * (zoneTypes.Count + 1);
+        long targetRead = reader.BaseStream.Position + numZoneData * sizeof(ushort);
+
+        void Build(Func<TRZoneGroup, TRZone> zoneAction)
+        {
+            foreach (TRZoneType zoneType in zoneTypes)
+            {
+                foreach (TRBox box in boxes)
+                {
+                    zoneAction(box.Zone).Ground[zoneType] = reader.ReadUInt16();
+                }
+            }
+
+            foreach (TRBox box in boxes)
+            {
+                zoneAction(box.Zone).Fly = reader.ReadUInt16();
+            }
+        }
+
+        Build(zoneGroup => zoneGroup.FlipOffZone);
+        Build(zoneGroup => zoneGroup.FlipOnZone);
+
+        Debug.Assert(reader.BaseStream.Position == targetRead);
+    }
+
     public void WriteBoxes(TRLevelWriter writer, List<TRBox> boxes)
     {
         _overlaps = new();
@@ -100,6 +141,7 @@ public class TRBoxBuilder
         }
 
         WriteOverlaps(writer);
+        WriteZones(writer, boxes);
     }
 
     private void WriteBox(TRLevelWriter writer, TRBox box)
@@ -138,5 +180,41 @@ public class TRBoxBuilder
     {
         writer.Write((uint)_overlaps.Count);
         writer.Write(_overlaps);
+    }
+
+    private void WriteZones(TRLevelWriter writer, List<TRBox> boxes)
+    {
+        List<TRZoneType> zoneTypes = new()
+        {
+            TRZoneType.Zone1,
+            TRZoneType.Zone2,
+        };
+
+        if (_version > TRGameVersion.TR1)
+        {
+            zoneTypes.Add(TRZoneType.Zone3);
+            zoneTypes.Add(TRZoneType.Zone4);
+        }
+
+        IEnumerable<TRZoneGroup> zoneGroups = boxes.Select(b => b.Zone);
+
+        void Flatten(Func<TRZoneGroup, TRZone> zoneAction)
+        {
+            foreach (TRZoneType zoneType in zoneTypes)
+            {
+                foreach (TRZoneGroup zoneGroup in zoneGroups)
+                {
+                    writer.Write(zoneAction(zoneGroup).Ground[zoneType]);
+                }
+            }
+
+            foreach (TRZoneGroup zoneGroup in zoneGroups)
+            {
+                writer.Write(zoneAction(zoneGroup).Fly);
+            }
+        }
+
+        Flatten(zoneGroup => zoneGroup.FlipOffZone);
+        Flatten(zoneGroup => zoneGroup.FlipOnZone);
     }
 }

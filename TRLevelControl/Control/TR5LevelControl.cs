@@ -323,24 +323,12 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         _level.Boxes = boxBuilder.ReadBoxes(reader);
-
-        short[] zones = new short[10 * _level.Boxes.Count];
-        for (int i = 0; i < zones.Length; i++)
-        {
-            zones[i] = reader.ReadInt16();
-        }
-        _level.Zones = new(zones);
     }
 
     private void WriteBoxes(TRLevelWriter writer)
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         boxBuilder.WriteBoxes(writer, _level.Boxes);
-
-        foreach (short zone in _level.Zones)
-        {
-            writer.Write(zone);
-        }
     }
 
     private void ReadAnimatedTextures(TRLevelReader reader)
