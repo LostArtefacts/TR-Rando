@@ -33,67 +33,6 @@ public class IOTests : TestBase
         Assert.AreEqual(allFDSectors.Count(), allFDSectors.DistinctBy(s => s.FDIndex).Count());
     }
 
-    //[TestMethod]
-    //public void Floordata_ReadWrite_LevelHasMonkeySwingTest()
-    //{
-    //    TR3Level lvl = GetTR3Level(TR3LevelNames.THAMES);
-
-    //    //Store the original floordata from the level
-    //    List<ushort> originalFData = new(lvl.FloorData);
-
-    //    //Parse the floordata using FDControl and re-write the parsed data back
-    //    FDControl fdataReader = new();
-    //    fdataReader.ParseFromLevel(lvl);
-    //    fdataReader.WriteToLevel(lvl);
-
-    //    //Compare to make sure the original fdata was written back.
-    //    CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");;
-    //}
-
-    [TestMethod]
-    public void ModifyZonesTest()
-    {
-        //TR3Level lvl = GetTR3Level(TR3LevelNames.JUNGLE);
-
-        //// For every box, store the current zone. We use the serialized form
-        //// for comparison.
-        //Dictionary<int, byte[]> flipOffZones = new();
-        //Dictionary<int, byte[]> flipOnZones = new();
-        //for (int i = 0; i < lvl.Boxes.Count; i++)
-        //{
-        //    flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
-        //    flipOnZones[i] = lvl.Zones[i][FlipStatus.On].Serialize();
-        //}
-
-        //// Add a new box
-        //lvl.Boxes.Add(lvl.Boxes[0]);
-
-        //// Add a new zone for the box and store its serialized form for comparison
-        //int newBoxIndex = (int)(lvl.Boxes.Count - 1);
-        //TR2BoxUtilities.DuplicateZone(lvl, 0);
-        //flipOffZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.Off].Serialize();
-        //flipOnZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.On].Serialize();
-
-        //// Verify the number of zone ushorts matches what's expected for the box count
-        //Assert.AreEqual(TR2BoxUtilities.FlattenZones(lvl.Zones).Count, 10 * lvl.Boxes.Count);
-
-        //// Write and re-read the level
-        //lvl = WriteReadTempLevel(lvl);
-
-        //// Capture all of the zones again. Make sure the addition of the zone above didn't
-        //// affect any of the others and that the addition itself matches after IO.
-        //for (int i = 0; i < lvl.Boxes.Count; i++)
-        //{
-        //    byte[] flipOff = lvl.Zones[i][FlipStatus.Off].Serialize();
-        //    Assert.IsTrue(flipOffZones.ContainsKey(i));
-        //    CollectionAssert.AreEqual(flipOffZones[i], flipOff);
-
-        //    byte[] flipOn = lvl.Zones[i][FlipStatus.On].Serialize();
-        //    Assert.IsTrue(flipOnZones.ContainsKey(i));
-        //    CollectionAssert.AreEqual(flipOnZones[i], flipOn);
-        //}
-    }
-
     [TestMethod]
     public void TestSecretTriggerMasks()
     {
