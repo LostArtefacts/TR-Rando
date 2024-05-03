@@ -11,7 +11,6 @@ public class TR3Level : TRLevelBase
     public TRDictionary<TR3Type, TRStaticMesh> StaticMeshes { get; set; }
     public TRDictionary<TR3Type, TRSpriteSequence> Sprites { get; set; }
     public List<TRSoundSource<TR3SFX>> SoundSources { get; set; }
-    public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public List<TR3Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }

@@ -11,8 +11,6 @@ public class TR5Level : TRLevelBase
     public TRDictionary<TR5Type, TRSpriteSequence> Sprites { get; set; }
     public TRDictionary<byte, List<TRFlybyCamera>> Flybys { get; set; }
     public List<TRSoundSource<TR5SFX>> SoundSources { get; set; }
-    public List<TRAnimatedTexture> AnimatedTextures { get; set; }
-    public byte AnimatedTexturesUVCount { get; set; }
     public List<TR5Entity> Entities { get; set; }
     public List<TR5AIEntity> AIEntities { get; set; }
     public byte[] DemoData { get; set; }

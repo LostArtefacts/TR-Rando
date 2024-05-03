@@ -331,16 +331,12 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void ReadAnimatedTextures(TRLevelReader reader)
     {
-        TR5FileReadUtilities.PopulateAnimatedTextures(reader, _level);
+        _level.AnimatedTextures = _textureBuilder.ReadAnimatedTextures(reader);
     }
 
     private void WriteAnimatedTextures(TRLevelWriter writer)
     {
-        byte[] animTextureData = _level.AnimatedTextures.SelectMany(a => a.Serialize()).ToArray();
-        writer.Write((uint)(animTextureData.Length / sizeof(ushort)) + 1);
-        writer.Write((ushort)_level.AnimatedTextures.Count);
-        writer.Write(animTextureData);
-        writer.Write(_level.AnimatedTexturesUVCount);
+        _textureBuilder.Write(writer, _level.AnimatedTextures);
     }
 
     private void ReadObjectTextures(TRLevelReader reader)

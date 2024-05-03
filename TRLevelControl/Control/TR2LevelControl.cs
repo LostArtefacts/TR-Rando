@@ -65,13 +65,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         ReadBoxes(reader);
 
-        reader.ReadUInt32(); // Total count of ushorts
-        ushort numGroups = reader.ReadUInt16();
-        _level.AnimatedTextures = new();
-        for (int i = 0; i < numGroups; i++)
-        {
-            _level.AnimatedTextures.Add(TR2FileReadUtilities.ReadAnimatedTexture(reader));
-        }
+        ReadAnimatedTextures(reader);
 
         ReadEntities(reader);
 
@@ -114,10 +108,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         WriteBoxes(writer);
 
-        byte[] animTextureData = _level.AnimatedTextures.SelectMany(a => a.Serialize()).ToArray();
-        writer.Write((uint)(animTextureData.Length / sizeof(ushort)) + 1);
-        writer.Write((ushort)_level.AnimatedTextures.Count);
-        writer.Write(animTextureData);
+        WriteAnimatedTextures(writer);
 
         WriteEntities(writer);
 
@@ -243,6 +234,16 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         boxBuilder.WriteBoxes(writer, _level.Boxes);
+    }
+
+    private void ReadAnimatedTextures(TRLevelReader reader)
+    {
+        _level.AnimatedTextures = _textureBuilder.ReadAnimatedTextures(reader);
+    }
+
+    private void WriteAnimatedTextures(TRLevelWriter writer)
+    {
+        _textureBuilder.Write(writer, _level.AnimatedTextures);
     }
 
     private void ReadEntities(TRLevelReader reader)

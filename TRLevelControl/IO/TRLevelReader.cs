@@ -718,6 +718,32 @@ public class TRLevelReader : BinaryReader
         return sprite;
     }
 
+    public List<TRAnimatedTexture> ReadAnimatedTextures(long numGroups)
+    {
+        List<TRAnimatedTexture> textures = new();
+        for (int i = 0; i < numGroups; i++)
+        {
+            textures.Add(ReadAnimatedTexture());
+        }
+        return textures;
+    }
+
+    public TRAnimatedTexture ReadAnimatedTexture()
+    {
+        TRAnimatedTexture texture = new()
+        {
+            Textures = new()
+        };
+
+        int numTextures = ReadUInt16() + 1;
+        for (int j = 0; j < numTextures; j++)
+        {
+            texture.Textures.Add(ReadUInt16());
+        }
+
+        return texture;
+    }
+
     public List<TRCamera> ReadCameras(long numCameras)
     {
         List<TRCamera> cameras = new();

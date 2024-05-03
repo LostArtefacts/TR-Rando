@@ -40,6 +40,31 @@ public class TRTextureBuilder
         return textures;
     }
 
+    public List<TRAnimatedTexture> ReadAnimatedTextures(TRLevelReader reader)
+    {
+        uint textureLength = reader.ReadUInt32();
+        long endPosition = reader.BaseStream.Position + textureLength * sizeof(ushort);
+
+        ushort numGroups = reader.ReadUInt16();
+        List<TRAnimatedTexture> textures = reader.ReadAnimatedTextures(numGroups);
+
+        // Old TRLEs can contain unreferenced texture data, so ensure to seek to the
+        // end of the data before finishing.
+        reader.BaseStream.Position = Math.Max(endPosition, reader.BaseStream.Position);
+
+        if (_version >= TRGameVersion.TR4)
+        {
+            // The first sets in the group are UVRotate mode, else classic.
+            byte uvRotates = reader.ReadByte();
+            for (int i = 0; i < uvRotates && i < numGroups; i++)
+            {
+                textures[i].Mode = TRAnimatedTextureMode.UVRotate;
+            }
+        }
+
+        return textures;
+    }
+
     public void Write(TRLevelWriter writer, List<TRObjectTexture> textures)
     {
         if (_version >= TRGameVersion.TR4)
@@ -56,6 +81,39 @@ public class TRTextureBuilder
         for (int i = 0; i < textures.Count; i++)
         {
             Write(writer, textures[i], i);
+        }
+    }
+
+    public void Write(TRLevelWriter writer, List<TRAnimatedTexture> textures)
+    {
+        List<ushort> data = new()
+        {
+            (ushort)textures.Count
+        };
+
+        if (_version >= TRGameVersion.TR4)
+        {
+            // Make sure to put UVRotate mode first.
+            textures = new(textures.OrderByDescending(t => t.Mode));
+        }
+
+        byte uvRotate = 0;
+        foreach (TRAnimatedTexture texture in textures)
+        {
+            data.Add((ushort)(texture.Textures.Count - 1));
+            data.AddRange(texture.Textures);
+            if (texture.Mode == TRAnimatedTextureMode.UVRotate)
+            {
+                uvRotate++;
+            }
+        }
+
+        writer.Write((uint)data.Count);
+        writer.Write(data);
+
+        if (_version >= TRGameVersion.TR4)
+        {
+            writer.Write(uvRotate);
         }
     }
 
