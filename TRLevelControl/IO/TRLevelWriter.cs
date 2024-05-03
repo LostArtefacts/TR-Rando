@@ -368,11 +368,11 @@ public class TRLevelWriter : BinaryWriter
         }
     }
 
-    public void Write(TRVertex vertex)
+    public void Write(TRVertex vertex, bool reverse = false)
     {
-        Write(vertex.X);
+        Write(reverse ? vertex.Z : vertex.X);
         Write(vertex.Y);
-        Write(vertex.Z);
+        Write(reverse ? vertex.X : vertex.Z);
     }
 
     public void Write(TRVertex32 vertex)
@@ -517,5 +517,21 @@ public class TRLevelWriter : BinaryWriter
         Write(camera.Z);
         Write(camera.Room);
         Write(camera.Flag);
+    }
+
+    public void Write(IEnumerable<TRCinematicFrame> frames)
+    {
+        foreach (TRCinematicFrame frame in frames)
+        {
+            Write(frame);
+        }
+    }
+
+    public void Write(TRCinematicFrame frame)
+    {
+        Write(frame.Target);
+        Write(frame.Position, true);
+        Write(frame.FOV);
+        Write(frame.Roll);
     }
 }

@@ -88,13 +88,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
 
-        //Cinematic Frames
-        ushort numCinematicFrames = reader.ReadUInt16();
-        _level.CinematicFrames = new();
-        for (int i = 0; i < numCinematicFrames; i++)
-        {
-            _level.CinematicFrames.Add(TR2FileReadUtilities.ReadCinematicFrame(reader));
-        }
+        ReadCinematicFrames(reader);
 
         ushort numDemoData = reader.ReadUInt16();
         _level.DemoData = reader.ReadBytes(numDemoData);
@@ -145,8 +139,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
         writer.Write(_level.LightMap.ToArray());
 
-        writer.Write((ushort)_level.CinematicFrames.Count);
-        foreach (TRCinematicFrame cineframe in _level.CinematicFrames) { writer.Write(cineframe.Serialize()); }
+        WriteCinematicFrames(writer);
 
         writer.Write((ushort)_level.DemoData.Length);
         writer.Write(_level.DemoData);
@@ -255,6 +248,18 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     {
         writer.Write((uint)_level.Entities.Count);
         writer.Write(_level.Entities);
+    }
+
+    private void ReadCinematicFrames(TRLevelReader reader)
+    {
+        ushort numFrames = reader.ReadUInt16();
+        _level.CinematicFrames = reader.ReadCinematicFrames(numFrames);
+    }
+
+    private void WriteCinematicFrames(TRLevelWriter writer)
+    {
+        writer.Write((ushort)_level.CinematicFrames.Count);
+        writer.Write(_level.CinematicFrames);
     }
 
     private void ReadSoundEffects(TRLevelReader reader)

@@ -62,19 +62,4 @@ internal static class TR2FileReadUtilities
             Textures = textures
         };
     }
-
-    public static TRCinematicFrame ReadCinematicFrame(BinaryReader reader)
-    {
-        return new TRCinematicFrame()
-        {
-            TargetX = reader.ReadInt16(),
-            TargetY = reader.ReadInt16(),
-            TargetZ = reader.ReadInt16(),
-            PosZ = reader.ReadInt16(),
-            PosY = reader.ReadInt16(),
-            PosX = reader.ReadInt16(),
-            FOV = reader.ReadInt16(),
-            Roll = reader.ReadInt16()
-        };
-    }
 }
