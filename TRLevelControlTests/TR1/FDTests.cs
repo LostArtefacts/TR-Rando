@@ -5,7 +5,7 @@ using TRLevelControl.Model;
 namespace TRLevelControlTests.TR1;
 
 [TestClass]
-[TestCategory("OriginalIO")]
+[TestCategory("FD")]
 public class FDTests : FDTestBase
 {
     [TestMethod]
