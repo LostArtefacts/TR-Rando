@@ -100,4 +100,25 @@ public class FDTestBase : TestBase
         Assert.AreNotEqual(0, triggers.Count);
         Assert.IsTrue(triggers.All(t => t.Actions.Find(a => a.Action == FDTrigAction.SecretFound && a.Parameter == secretIndex) != null));
     }
+
+    protected static void ModifyOverlaps(TRLevelBase level, Func<TRLevelBase> rewriteAction)
+    {
+        level.Boxes[0].Overlaps.Add(Enumerable.Range(0, level.Boxes.Count).Select(i => (ushort)i)
+            .First(i => !level.Boxes[0].Overlaps.Contains(i)));
+
+        level.Boxes[1].Overlaps.RemoveAt(0);
+
+        List<List<ushort>> originalOverlaps = new();
+        for (int i = 0; i < level.Boxes.Count; i++)
+        {
+            originalOverlaps.Add(new(level.Boxes[i].Overlaps));
+        }
+
+        level = rewriteAction();
+
+        for (int i = 0; i < level.Boxes.Count; i++)
+        {
+            CollectionAssert.AreEqual(originalOverlaps[i], level.Boxes[i].Overlaps);
+        }
+    }
 }

@@ -7,5 +7,7 @@ public class TRBox
     public byte XMin { get; set; }
     public byte XMax { get; set; }
     public short TrueFloor { get; set; }
-    public ushort OverlapIndex { get; set; }
+    public bool Blockable { get; set; }
+    public bool Blocked { get; set; }
+    public List<ushort> Overlaps { get; set; } = new();
 }

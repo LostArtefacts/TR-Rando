@@ -226,9 +226,6 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         _level.Boxes = boxBuilder.ReadBoxes(reader);
 
-        uint numOverlaps = reader.ReadUInt32();
-        _level.Overlaps = reader.ReadUInt16s(numOverlaps).ToList();
-
         ushort[] zoneData = reader.ReadUInt16s(_level.Boxes.Count * 6);
         _level.Zones = TR1BoxUtilities.ReadZones((uint)_level.Boxes.Count, zoneData);
     }
@@ -238,8 +235,6 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         boxBuilder.WriteBoxes(writer, _level.Boxes);
 
-        writer.Write((uint)_level.Overlaps.Count);
-        writer.Write(_level.Overlaps);
         writer.Write(TR1BoxUtilities.FlattenZones(_level.Zones));
     }
 

@@ -14,7 +14,7 @@ public class BoxGenerator
         {
             TRBox trBox = box.ToTRBox(room.Info);
             level.Boxes.Add(trBox);
-            TR1BoxUtilities.UpdateOverlaps(level, trBox, box.Overlaps.Select(o => (ushort)o.Index).ToList());
+            trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
             TR1BoxUtilities.DuplicateZone(level, linkedSector.BoxIndex);
         }
     }
@@ -28,7 +28,7 @@ public class BoxGenerator
         {
             TRBox trBox = box.ToTRBox(room.Info);
             level.Boxes.Add(trBox);
-            TR2BoxUtilities.UpdateOverlaps(level, trBox, box.Overlaps.Select(o => (ushort)o.Index).ToList());
+            trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
             TR2BoxUtilities.DuplicateZone(level, linkedSector.BoxIndex);
         }
     }
@@ -42,7 +42,7 @@ public class BoxGenerator
         {
             TRBox trBox = box.ToTRBox(room.Info);
             level.Boxes.Add(trBox);
-            TR2BoxUtilities.UpdateOverlaps(level, trBox, box.Overlaps.Select(o => (ushort)o.Index).ToList());
+            trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
             TR2BoxUtilities.DuplicateZone(level, (linkedSector.BoxIndex & 0x7FF0) >> 4);
         }
 

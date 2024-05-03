@@ -173,9 +173,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
             TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
             TRBox linkedBox = level.Boxes[linkedBoxIndex];
-            List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
-            overlaps.Add(newBoxIndex);
-            TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
+            linkedBox.Overlaps.Add(newBoxIndex);
 
             // Make a new box for the new room
             byte xmin = (byte)(newRoom.Info.X / TRConsts.Step4);
@@ -193,7 +191,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             level.Boxes.Add(box);
 
             // Link the box to the room we're joining to
-            TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
+            box.Overlaps.Add((ushort)linkedBoxIndex);
         }
 
         for (int i = 0; i < roomDef.Room.Sectors.Count; i++)
@@ -390,9 +388,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             // Duplicate the zone for the new box and link the current box to the new room
             TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
             TRBox linkedBox = level.Boxes[linkedBoxIndex];
-            List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
-            overlaps.Add(newBoxIndex);
-            TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
+            linkedBox.Overlaps.Add(newBoxIndex);
 
             // Make a new box for the new room
             byte xmin = (byte)(newRoom.Info.X / TRConsts.Step4);
@@ -410,7 +406,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             level.Boxes.Add(box);
 
             // Link the box to the room we're joining to
-            TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
+            box.Overlaps.Add((ushort)linkedBoxIndex);
         }
 
         // Now update each of the sectors in the new room. The box index in each sector

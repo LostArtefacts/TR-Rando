@@ -156,4 +156,12 @@ public class FDTests : FDTestBase
         WriteReadTempLevel(level);
         Assert.AreEqual(0, sector.FDIndex);
     }
+
+    [TestMethod]
+    [Description("Add and remove overlaps and verify only the related boxes are affected.")]
+    public void ModifyOverlaps()
+    {
+        TR3Level level = GetTR3TestLevel();
+        ModifyOverlaps(level, () => WriteReadTempLevel(level));
+    }
 }

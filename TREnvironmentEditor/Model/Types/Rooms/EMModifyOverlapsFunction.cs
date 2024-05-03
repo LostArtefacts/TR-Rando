@@ -1,5 +1,4 @@
-﻿using TRLevelControl.Helpers;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;
 
@@ -10,64 +9,27 @@ public class EMModifyOverlapsFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        if (RemoveLinks != null)
-        {
-            foreach (ushort boxIndex in RemoveLinks.Keys)
-            {
-                TRBox box = level.Boxes[boxIndex];
-                List<ushort> overlaps = TR1BoxUtilities.GetOverlaps(level, box);
-                overlaps.RemoveAll(o => RemoveLinks[boxIndex].Contains(o));
-                TR1BoxUtilities.UpdateOverlaps(level, box, overlaps);
-            }
-        }
-
-        if (AddLinks != null)
-        {
-            foreach (ushort boxIndex in AddLinks.Keys)
-            {
-                TRBox box = level.Boxes[boxIndex];
-                List<ushort> overlaps = TR1BoxUtilities.GetOverlaps(level, box);
-                overlaps.AddRange(AddLinks[boxIndex]);
-                TR1BoxUtilities.UpdateOverlaps(level, box, overlaps);
-            }
-        }
+        UpdateBoxes(level.Boxes);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        if (RemoveLinks != null)
-        {
-            foreach (ushort boxIndex in RemoveLinks.Keys)
-            {
-                TRBox box = level.Boxes[boxIndex];
-                List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
-                overlaps.RemoveAll(o => RemoveLinks[boxIndex].Contains(o));
-                TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);
-            }
-        }
-
-        if (AddLinks != null)
-        {
-            foreach (ushort boxIndex in AddLinks.Keys)
-            {
-                TRBox box = level.Boxes[boxIndex];
-                List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
-                overlaps.AddRange(AddLinks[boxIndex]);
-                TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);
-            }
-        }
+        UpdateBoxes(level.Boxes);
     }
 
     public override void ApplyToLevel(TR3Level level)
+    {
+        UpdateBoxes(level.Boxes);
+    }
+
+    private void UpdateBoxes(List<TRBox> boxes)
     {
         if (RemoveLinks != null)
         {
             foreach (ushort boxIndex in RemoveLinks.Keys)
             {
-                TRBox box = level.Boxes[boxIndex];
-                List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
-                overlaps.RemoveAll(o => RemoveLinks[boxIndex].Contains(o));
-                TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);
+                TRBox box = boxes[boxIndex];
+                box.Overlaps.RemoveAll(o => RemoveLinks[boxIndex].Contains(o));
             }
         }
 
@@ -75,10 +37,8 @@ public class EMModifyOverlapsFunction : BaseEMFunction
         {
             foreach (ushort boxIndex in AddLinks.Keys)
             {
-                TRBox box = level.Boxes[boxIndex];
-                List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
-                overlaps.AddRange(AddLinks[boxIndex]);
-                TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);
+                TRBox box = boxes[boxIndex];
+                box.Overlaps.AddRange(AddLinks[boxIndex]);
             }
         }
     }
