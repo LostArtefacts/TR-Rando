@@ -9,7 +9,6 @@ public class TR2Level : TRLevelBase
     public List<TR2Room> Rooms { get; set; }
     public TRDictionary<TR2Type, TRModel> Models { get; set; }
     public TRDictionary<TR2Type, TRStaticMesh> StaticMeshes { get; set; }
-    public List<TRObjectTexture> ObjectTextures { get; set; }
     public TRDictionary<TR2Type, TRSpriteSequence> Sprites { get; set; }
     public List<TRSoundSource<TR2SFX>> SoundSources { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }

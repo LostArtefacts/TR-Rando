@@ -310,41 +310,9 @@ public static class FaceMapper
 
     private static IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
     {
-        // Make a dummy texture object with the given bounds
-        TRObjectTexture texture = new()
+        return new()
         {
-            AtlasAndFlag = 0,
-            Attribute = 0,
-            Vertices = new TRObjectTextureVert[]
-            {
-                CreatePoint(0, 0),
-                CreatePoint(rectangle.Width, 0),
-                CreatePoint(rectangle.Width, rectangle.Height),
-                CreatePoint(0, rectangle.Height)
-            }
-        };
-
-        return new IndexedTRObjectTexture
-        {
-            Index = 0,
-            Texture = texture
-        };
-    }
-
-    private static TRObjectTextureVert CreatePoint(int x, int y)
-    {
-        return new TRObjectTextureVert
-        {
-            XCoordinate = new FixedFloat16
-            {
-                Whole = (byte)(x == 0 ? 1 : 255),
-                Fraction = (byte)(x == 0 ? 0 : x - 1)
-            },
-            YCoordinate = new FixedFloat16
-            {
-                Whole = (byte)(y == 0 ? 1 : 255),
-                Fraction = (byte)(y == 0 ? 0 : y - 1)
-            }
+            Texture = new(rectangle)
         };
     }
 

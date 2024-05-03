@@ -171,48 +171,11 @@ public abstract class AbstractLandmarkImporter<E, L>
 
     private static IndexedTRObjectTexture CreateTexture(Rectangle rectangle, bool mirrored)
     {
-        // Configure the points and reverse them if the level is mirrored
-        List<TRObjectTextureVert> vertices = new()
+        return new()
         {
-            CreatePoint(0, 0),
-            CreatePoint(rectangle.Width, 0),
-            CreatePoint(rectangle.Width, rectangle.Height),
-            CreatePoint(0, rectangle.Height)
-        };
-
-        if (mirrored)
-        {
-            vertices.Reverse();
-        }
-
-        // Make a dummy texture object with the given bounds
-        TRObjectTexture texture = new()
-        {
-            AtlasAndFlag = 0,
-            Attribute = 0,
-            Vertices = vertices.ToArray()
-        };
-
-        return new IndexedTRObjectTexture
-        {
-            Index = 0,
-            Texture = texture
-        };
-    }
-
-    private static TRObjectTextureVert CreatePoint(int x, int y)
-    {
-        return new TRObjectTextureVert
-        {
-            XCoordinate = new FixedFloat16
+            Texture = new(rectangle)
             {
-                Whole = (byte)(x == 0 ? 1 : 255),
-                Fraction = (byte)(x == 0 ? 0 : x - 1)
-            },
-            YCoordinate = new FixedFloat16
-            {
-                Whole = (byte)(y == 0 ? 1 : 255),
-                Fraction = (byte)(y == 0 ? 0 : y - 1)
+                UVMode = mirrored ? TRUVMode.NE_AntiClockwise : TRUVMode.NW_Clockwise
             }
         };
     }

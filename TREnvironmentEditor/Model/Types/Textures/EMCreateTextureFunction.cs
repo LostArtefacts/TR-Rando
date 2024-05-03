@@ -78,7 +78,7 @@ public class EMCreateTextureFunction : BaseEMFunction
             // must remain as-is.
             if (data.RetainInWireframe)
             {
-                texture.Texture.Attribute = (ushort)TRBlendingMode.Unused01;
+                texture.Texture.BlendingMode = TRBlendingMode.Unused01;
             }
         }
 
@@ -91,33 +91,7 @@ public class EMCreateTextureFunction : BaseEMFunction
     {
         return new()
         {
-            Texture = new()
-            {
-                Vertices = new TRObjectTextureVert[]
-                {
-                    CreatePoint(0, 0),
-                    CreatePoint(size.Width, 0),
-                    CreatePoint(size.Width, size.Height),
-                    CreatePoint(0, size.Height)
-                }
-            }
-        };
-    }
-
-    private static TRObjectTextureVert CreatePoint(int x, int y)
-    {
-        return new()
-        {
-            XCoordinate = new()
-            {
-                Whole = (byte)(x == 0 ? 1 : 255),
-                Fraction = (byte)(x == 0 ? 0 : x - 1)
-            },
-            YCoordinate = new()
-            {
-                Whole = (byte)(y == 0 ? 1 : 255),
-                Fraction = (byte)(y == 0 ? 0 : y - 1)
-            }
+            Texture = new(0, 0, size.Width, size.Height)
         };
     }
 }

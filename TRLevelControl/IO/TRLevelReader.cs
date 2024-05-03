@@ -641,6 +641,25 @@ public class TRLevelReader : BinaryReader
         };
     }
 
+    public List<TRObjectTextureVert> ReadObectTextureVertices(long numVertices)
+    {
+        List<TRObjectTextureVert> vertices = new();
+        for (int i = 0; i < numVertices; i++)
+        {
+            vertices.Add(ReadObjectTextureVertex());
+        }
+        return vertices;
+    }
+
+    public TRObjectTextureVert ReadObjectTextureVertex()
+    {
+        return new()
+        {
+            U = ReadUInt16(),
+            V = ReadUInt16()
+        };
+    }
+
     public List<TRSpriteTexture> ReadSpriteTextures(long numTextures, TRGameVersion version)
     {
         List<TRSpriteTexture> textures = new();

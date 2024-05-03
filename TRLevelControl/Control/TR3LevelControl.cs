@@ -7,6 +7,7 @@ namespace TRLevelControl;
 public class TR3LevelControl : TRLevelControlBase<TR3Level>
 {
     private TRObjectMeshBuilder<TR3Type> _meshBuilder;
+    private TRTextureBuilder _textureBuilder;
     private TRSpriteBuilder<TR3Type> _spriteBuilder;
     private TR3RoomBuilder _roomBuilder;
 
@@ -31,6 +32,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     protected override void Initialise()
     {
         _meshBuilder = new(TRGameVersion.TR3, _observer);
+        _textureBuilder = new(TRGameVersion.TR3, _observer);
         _spriteBuilder = new(TRGameVersion.TR3);
         _roomBuilder = new();
     }
@@ -70,13 +72,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
             _level.AnimatedTextures.Add(TR2FileReadUtilities.ReadAnimatedTexture(reader));
         }
 
-        //Object Textures - in TR3 this is now after animated textures
-        uint numObjectTextures = reader.ReadUInt32();
-        _level.ObjectTextures = new();
-        for (int i = 0; i < numObjectTextures; i++)
-        {
-            _level.ObjectTextures.Add(TR2FileReadUtilities.ReadObjectTexture(reader));
-        }
+        ReadObjectTextures(reader);
 
         ReadEntities(reader);
 
@@ -123,8 +119,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write((ushort)_level.AnimatedTextures.Count);
         writer.Write(animTextureData);
 
-        writer.Write((uint)_level.ObjectTextures.Count);
-        foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
+        WriteObjectTextures(writer);
 
         WriteEntities(writer);
 
@@ -240,6 +235,16 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         boxBuilder.WriteBoxes(writer, _level.Boxes);
+    }
+
+    private void ReadObjectTextures(TRLevelReader reader)
+    {
+        _level.ObjectTextures = _textureBuilder.ReadObjectTextures(reader);
+    }
+
+    private void WriteObjectTextures(TRLevelWriter writer)
+    {
+        _textureBuilder.Write(writer, _level.ObjectTextures);
     }
 
     private void ReadEntities(TRLevelReader reader)

@@ -146,7 +146,7 @@ public abstract class AbstractTRWireframer<E, L>
         List<TRObjectTexture> textures = GetObjectTextures(level);
         for (ushort i = 0; i < textures.Count; i++)
         {
-            if (textures[i].Attribute == (ushort)TRBlendingMode.Unused01)
+            if (textures[i].BlendingMode == TRBlendingMode.Unused01)
             {
                 _data.ExcludedTextures.Add(i);
             }
@@ -377,9 +377,9 @@ public abstract class AbstractTRWireframer<E, L>
         // Ensure these clipped textures support transparency
         foreach (TRObjectTexture texture in textures)
         {
-            if (texture.Attribute == 0)
+            if (texture.BlendingMode == TRBlendingMode.Opaque)
             {
-                texture.Attribute = 1;
+                texture.BlendingMode = TRBlendingMode.AlphaTesting;
             }
         }
     }
@@ -401,44 +401,9 @@ public abstract class AbstractTRWireframer<E, L>
 
     protected IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
     {
-        // Configure the points
-        List<TRObjectTextureVert> vertices = new()
+        return new()
         {
-            CreatePoint(0, 0),
-            CreatePoint(rectangle.Width, 0),
-            CreatePoint(rectangle.Width, rectangle.Height),
-            CreatePoint(0, rectangle.Height)
-        };
-
-        // Make a dummy texture object with the given bounds
-        TRObjectTexture texture = new()
-        {
-            AtlasAndFlag = 0,
-            Attribute = 1,
-            Vertices = vertices.ToArray()
-        };
-
-        return new IndexedTRObjectTexture
-        {
-            Index = 0,
-            Texture = texture
-        };
-    }
-
-    private static TRObjectTextureVert CreatePoint(int x, int y)
-    {
-        return new TRObjectTextureVert
-        {
-            XCoordinate = new FixedFloat16
-            {
-                Whole = (byte)(x == 0 ? 1 : 255),
-                Fraction = (byte)(x == 0 ? 0 : x - 1)
-            },
-            YCoordinate = new FixedFloat16
-            {
-                Whole = (byte)(y == 0 ? 1 : 255),
-                Fraction = (byte)(y == 0 ? 0 : y - 1)
-            }
+            Texture = new(rectangle)
         };
     }
 

@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Drawing;
 using System.Drawing.Imaging;
-using TRLevelControl.Model;
 using TRModelTransporter.Events;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model;
@@ -93,11 +92,12 @@ public abstract class AbstractTRModelExporter<E, L, D> : AbstractTRModelTranspor
         definition.Dependencies = dependencies.ToArray();
     }
 
-    protected void AmendDXtre3DTextures(D definition)
+    protected void AmendDXtre3DTextures(D _)
     {
         // Dxtre3D can produce faulty UV mapping which can cause casting issues
         // when used in model IO, so fix coordinates at this stage.
-        foreach (List<IndexedTRObjectTexture> textureList in definition.ObjectTextures.Values)
+        // This may no longer be the case...
+        /*foreach (List<IndexedTRObjectTexture> textureList in definition.ObjectTextures.Values)
         {
             foreach (IndexedTRObjectTexture texture in textureList)
             {
@@ -135,6 +135,6 @@ public abstract class AbstractTRModelExporter<E, L, D> : AbstractTRModelTranspor
                     }
                 }
             }
-        }
+        }*/
     }
 }

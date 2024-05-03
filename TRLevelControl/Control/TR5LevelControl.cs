@@ -7,6 +7,7 @@ namespace TRLevelControl;
 public class TR5LevelControl : TRLevelControlBase<TR5Level>
 {
     private TRObjectMeshBuilder<TR5Type> _meshBuilder;
+    private TRTextureBuilder _textureBuilder;
     private TRSpriteBuilder<TR5Type> _spriteBuilder;
 
     public TR5LevelControl(ITRLevelObserver observer = null)
@@ -30,6 +31,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
     protected override void Initialise()
     {
         _meshBuilder = new(TRGameVersion.TR5, _observer);
+        _textureBuilder = new(TRGameVersion.TR5, _observer);
         _spriteBuilder = new(TRGameVersion.TR5);
     }
 
@@ -343,19 +345,12 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void ReadObjectTextures(TRLevelReader reader)
     {
-        TR5FileReadUtilities.VerifyTEXMarker(reader);
-        TR5FileReadUtilities.PopulateObjectTextures(reader, _level);
+        _level.ObjectTextures = _textureBuilder.ReadObjectTextures(reader);
     }
 
     private void WriteObjectTextures(TRLevelWriter writer)
     {
-        writer.Write(TR5FileReadUtilities.TEXMarker.ToCharArray());
-
-        writer.Write((uint)_level.ObjectTextures.Count);
-        foreach (TR5ObjectTexture otex in _level.ObjectTextures)
-        {
-            writer.Write(otex.Serialize());
-        }
+        _textureBuilder.Write(writer, _level.ObjectTextures);
     }
 
     private void ReadEntities(TRLevelReader reader)

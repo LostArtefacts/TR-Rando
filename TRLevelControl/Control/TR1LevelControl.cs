@@ -7,6 +7,7 @@ namespace TRLevelControl;
 public class TR1LevelControl : TRLevelControlBase<TR1Level>
 {
     private TRObjectMeshBuilder<TR1Type> _meshBuilder;
+    private TRTextureBuilder _textureBuilder;
     private TRSpriteBuilder<TR1Type> _spriteBuilder;
     private TR1RoomBuilder _roomBuilder;
 
@@ -31,6 +32,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
     protected override void Initialise()
     {
         _meshBuilder = new(TRGameVersion.TR1, _observer);
+        _textureBuilder = new(TRGameVersion.TR1, _observer);
         _spriteBuilder = new(TRGameVersion.TR1);
         _roomBuilder = new();
     }
@@ -50,13 +52,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
         ReadStaticMeshes(reader);
 
-        uint numObjectTextures = reader.ReadUInt32();
-        _level.ObjectTextures = new();
-        for (int i = 0; i < numObjectTextures; i++)
-        {
-            _level.ObjectTextures.Add(TR2FileReadUtilities.ReadObjectTexture(reader));
-        }
-
+        ReadObjectTextures(reader);
         ReadSprites(reader);
 
         ReadCameras(reader);
@@ -99,8 +95,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
         WriteStaticMeshes(writer);
 
-        writer.Write((uint)_level.ObjectTextures.Count);
-        foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
+        WriteObjectTextures(writer);
         WriteSprites(writer);
 
         WriteCameras(writer);
@@ -178,6 +173,16 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
     private void WriteStaticMeshes(TRLevelWriter writer)
     {
         _meshBuilder.WriteStaticMeshes(writer, _level.StaticMeshes, TR1Type.SceneryBase);
+    }
+
+    private void ReadObjectTextures(TRLevelReader reader)
+    {
+        _level.ObjectTextures = _textureBuilder.ReadObjectTextures(reader);
+    }
+
+    private void WriteObjectTextures(TRLevelWriter writer)
+    {
+        _textureBuilder.Write(writer, _level.ObjectTextures);
     }
 
     private void ReadSprites(TRLevelReader reader)

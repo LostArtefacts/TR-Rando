@@ -7,6 +7,7 @@ namespace TRLevelControl;
 public class TR2LevelControl : TRLevelControlBase<TR2Level>
 {
     private TRObjectMeshBuilder<TR2Type> _meshBuilder;
+    private TRTextureBuilder _textureBuilder;
     private TRSpriteBuilder<TR2Type> _spriteBuilder;
     private TR2RoomBuilder _roomBuilder;
 
@@ -31,6 +32,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     protected override void Initialise()
     {
         _meshBuilder = new(TRGameVersion.TR2, _observer);
+        _textureBuilder = new(TRGameVersion.TR2, _observer);
         _spriteBuilder = new(TRGameVersion.TR2);
         _roomBuilder = new();
     }
@@ -55,13 +57,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         ReadStaticMeshes(reader);
 
-        uint numObjectTextures = reader.ReadUInt32();
-        _level.ObjectTextures = new();
-        for (int i = 0; i < numObjectTextures; i++)
-        {
-            _level.ObjectTextures.Add(TR2FileReadUtilities.ReadObjectTexture(reader));
-        }
-
+        ReadObjectTextures(reader);
         ReadSprites(reader);
 
         ReadCameras(reader);
@@ -110,8 +106,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         WriteStaticMeshes(writer);
 
-        writer.Write((uint)_level.ObjectTextures.Count);
-        foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
+        WriteObjectTextures(writer);
         WriteSprites(writer);
 
         WriteCameras(writer);
@@ -187,6 +182,16 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     private void WriteStaticMeshes(TRLevelWriter writer)
     {
         _meshBuilder.WriteStaticMeshes(writer, _level.StaticMeshes, TR2Type.SceneryBase);
+    }
+
+    private void ReadObjectTextures(TRLevelReader reader)
+    {
+        _level.ObjectTextures = _textureBuilder.ReadObjectTextures(reader);
+    }
+
+    private void WriteObjectTextures(TRLevelWriter writer)
+    {
+        _textureBuilder.Write(writer, _level.ObjectTextures);
     }
 
     private void ReadSprites(TRLevelReader reader)

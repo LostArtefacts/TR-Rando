@@ -7,8 +7,6 @@ namespace TRModelTransporter.Helpers;
 
 public static class TRModelExtensions
 {
-    private static readonly FixedFloat16 _nullCoord = new() { Fraction = 0, Whole = 0 };
-
     public static void ResetUnusedTextures(this TR1Level level)
     {
         ResetUnusedObjectTextures(level.ObjectTextures);
@@ -31,7 +29,7 @@ public static class TRModelExtensions
     {
         foreach (TRObjectTexture texture in objectTextures)
         {
-            if (texture.AtlasAndFlag == ushort.MaxValue)
+            if (texture.Atlas == ushort.MaxValue)
             {
                 texture.Invalidate();
             }
@@ -52,26 +50,18 @@ public static class TRModelExtensions
     // See TextureTransportHandler.ResetUnusedTextures
     public static bool IsValid(this TRObjectTexture texture)
     {
-        if (texture.AtlasAndFlag == 0)
+        if (texture.Atlas == 0)
         {
-            int coords = 0;
-            foreach (TRObjectTextureVert vert in texture.Vertices)
-            {
-                coords += vert.XCoordinate.Whole + vert.XCoordinate.Fraction + vert.YCoordinate.Whole + vert.XCoordinate.Fraction;
-            }
-            return coords > 0;
+            return texture.Size.Width == 0 && texture.Size.Height == 0;
         }
 
-        return texture.AtlasAndFlag != ushort.MaxValue;
+        return texture.Atlas != ushort.MaxValue;
     }
 
     public static void Invalidate(this TRObjectTexture texture)
     {
-        texture.AtlasAndFlag = 0;
-        foreach (TRObjectTextureVert vert in texture.Vertices)
-        {
-            vert.XCoordinate = vert.YCoordinate = _nullCoord;
-        }
+        texture.Atlas = 0;
+        texture.Size = new(0, 0);
     }
 
     // See TextureTransportHandler.ResetUnusedTextures

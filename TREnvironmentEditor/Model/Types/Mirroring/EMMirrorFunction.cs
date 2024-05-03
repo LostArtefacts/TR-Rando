@@ -109,7 +109,7 @@ public class EMMirrorFunction : BaseEMFunction
         return x;
     }
 
-    private static void Swap<T>(T[] arr, int pos1, int pos2)
+    private static void Swap<T>(List<T> arr, int pos1, int pos2)
     {
         (arr[pos2], arr[pos1]) = (arr[pos1], arr[pos2]);
     }
@@ -1040,6 +1040,7 @@ public class EMMirrorFunction : BaseEMFunction
     private static void MirrorObjectTextures(ISet<ushort> textureReferences, List<TRObjectTexture> objectTextures)
     {
         // Flip the object texture vertices in the same way as done for faces
+        // TODO: use actual UV change
         foreach (ushort textureRef in textureReferences)
         {
             IndexedTRObjectTexture texture = new()
