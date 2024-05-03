@@ -394,7 +394,7 @@ public static class FaceMapper
         int zmin = verts.Min(v => v.Z) + room.Info.Z;
 
         TRRoomSector sector = room.GetSector(xmin, zmin);
-        if (sector.BoxIndex == ushort.MaxValue)
+        if (sector.BoxIndex == TRConsts.NoBox)
         {
             return "NOBOX";
         }

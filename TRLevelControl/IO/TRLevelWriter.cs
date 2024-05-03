@@ -416,18 +416,24 @@ public class TRLevelWriter : BinaryWriter
         Write(portal.Vertices);
     }
 
-    public void Write(IEnumerable<TRRoomSector> sectors)
+    public void Write(IEnumerable<TRRoomSector> sectors, TRGameVersion version)
     {
         foreach (TRRoomSector sector in sectors)
         {
-            Write(sector);
+            Write(sector, version);
         }
     }
 
-    public void Write(TRRoomSector sector)
+    public void Write(TRRoomSector sector, TRGameVersion version)
     {
+        ushort boxIndex = sector.BoxIndex;
+        if (version >= TRGameVersion.TR3 && boxIndex != TRConsts.NoBox)
+        {
+            boxIndex = (ushort)((boxIndex << 4) | (byte)sector.Material);
+        }
+
         Write(sector.FDIndex);
-        Write(sector.BoxIndex);
+        Write(boxIndex);
         Write(sector.RoomBelow);
         Write(sector.Floor);
         Write(sector.RoomAbove);

@@ -249,7 +249,7 @@ public class EMCreateRoomFunction : BaseEMFunction
                 sectors.Add(new TRRoomSector
                 {
                     FDIndex = 0,
-                    BoxIndex = ushort.MaxValue,
+                    BoxIndex = TRConsts.NoBox,
                     Ceiling = sectorCeiling,
                     Floor = sectorFloor,
                     RoomAbove = TRConsts.NoRoom,

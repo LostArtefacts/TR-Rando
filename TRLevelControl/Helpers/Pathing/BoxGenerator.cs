@@ -43,16 +43,14 @@ public class BoxGenerator
             TRBox trBox = box.ToTRBox(room.Info);
             level.Boxes.Add(trBox);
             trBox.Overlaps.AddRange(box.Overlaps.Select(o => (ushort)o.Index));
-            trBox.Zone = level.Boxes[(linkedSector.BoxIndex & 0x7FF0) >> 4].Zone.Clone();
+            trBox.Zone = level.Boxes[linkedSector.BoxIndex].Zone.Clone();
         }
 
-        ushort linkedMaterial = (ushort)(linkedSector.BoxIndex & 0x000F); // TR3-5 store material in bits 0-3 - wood, mud etc
         foreach (TRRoomSector sector in boxRoom.Sectors)
         {
             if (!sector.IsWall)
             {
-                sector.BoxIndex <<= 4;
-                sector.BoxIndex |= linkedMaterial;
+                sector.Material = linkedSector.Material;
             }
         }
     }

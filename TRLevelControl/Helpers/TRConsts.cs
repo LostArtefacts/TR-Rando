@@ -16,6 +16,7 @@ public static class TRConsts
     public const int Step4 = Step1 * 4;
 
     public const int NoRoom = 255;
+    public const int NoBox = ushort.MaxValue;
     public const int WallShift = 10;
     public const int NoHeight = -32512;
     public const int WallClicks = -127;

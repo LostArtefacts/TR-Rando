@@ -240,12 +240,12 @@ public class EMCopyRoomFunction : BaseEMFunction
                 sectorYDiff = ydiff / TRConsts.Step1;
             }
 
-            wallOpened = originalSector.IsWall || originalSector.BoxIndex == ushort.MaxValue;
+            wallOpened = originalSector.IsWall || originalSector.BoxIndex == TRConsts.NoBox;
         }
 
         TRRoomSector newSector = new()
         {
-            BoxIndex = ushort.MaxValue,
+            BoxIndex = TRConsts.NoBox,
             Ceiling = (sbyte)(ceiling + sectorYDiff),
             FDIndex = 0, // Initialise to no FD
             Floor = (sbyte)(floor + sectorYDiff),

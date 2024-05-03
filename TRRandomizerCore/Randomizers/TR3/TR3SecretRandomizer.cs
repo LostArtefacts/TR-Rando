@@ -588,13 +588,10 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private static bool IsInvalidNeighbour(TRRoomSector baseSector, TRRoomSector neighbour)
     {
-        return (neighbour.Floor == TRConsts.WallClicks && neighbour.Ceiling == TRConsts.WallClicks) // Inside a wall
-            || (neighbour.RoomBelow != baseSector.RoomBelow)          // Mid-air
-            ||
-            (
-                (neighbour.BoxIndex & 0x7FF0) >> 4 == 2047            // Neighbour is a slope
-                && (baseSector.BoxIndex & 0x7FF0) >> 4 != 2047        // But the base sector isn't
-            );
+        // Wall, mid-air or a slipper slope (no path-finding)
+        return (neighbour.Floor == TRConsts.WallClicks && neighbour.Ceiling == TRConsts.WallClicks)
+            || (neighbour.RoomBelow != baseSector.RoomBelow)
+            || (neighbour.IsSlipperySlope && !baseSector.IsSlipperySlope);
     }
 
     private void CreateSecretTrigger(TR3CombinedLevel level, TRSecretPlacement<TR3Type> secret, short room, TRRoomSector sector)

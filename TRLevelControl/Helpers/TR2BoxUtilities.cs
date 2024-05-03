@@ -27,7 +27,7 @@ public class TR2BoxUtilities
         {
             foreach (TRRoomSector sector in room.Sectors)
             {
-                if ((sector.BoxIndex & 0x7FF0) >> 4 == boxIndex)
+                if (sector.BoxIndex == boxIndex)
                 {
                     count++;
                 }

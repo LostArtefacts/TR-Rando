@@ -556,19 +556,19 @@ public class TRLevelReader : BinaryReader
         };
     }
 
-    public List<TRRoomSector> ReadRoomSectors(long numSectors)
+    public List<TRRoomSector> ReadRoomSectors(long numSectors, TRGameVersion version)
     {
         List<TRRoomSector> sectors = new();
         for (int i = 0; i < numSectors; i++)
         {
-            sectors.Add(ReadRoomSector());
+            sectors.Add(ReadRoomSector(version));
         }
         return sectors;
     }
 
-    public TRRoomSector ReadRoomSector()
+    public TRRoomSector ReadRoomSector(TRGameVersion version)
     {
-        return new()
+        TRRoomSector sector = new()
         {
             FDIndex = ReadUInt16(),
             BoxIndex = ReadUInt16(),
@@ -577,6 +577,14 @@ public class TRLevelReader : BinaryReader
             RoomAbove = ReadByte(),
             Ceiling = ReadSByte()
         };
+
+        if (version >= TRGameVersion.TR3 && sector.BoxIndex != TRConsts.NoBox)
+        {
+            sector.Material = (TRMaterial)(sector.BoxIndex & 0xF);
+            sector.BoxIndex = (ushort)((sector.BoxIndex & 0x7FF0) >> 4);
+        }
+
+        return sector;
     }
 
     public TRBox ReadBox(TRGameVersion version)
