@@ -9,6 +9,7 @@ public class EMSerializationResolver : DefaultContractResolver
     protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
     {
         return base.CreateProperties(type, memberSerialization)
+            ?.Where(p => !p.Ignored && p.Writable)
             ?.OrderBy(p => p.DeclaringType.BaseTypesAndSelf().Count()).ToList();
     }
 }
