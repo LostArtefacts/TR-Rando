@@ -40,6 +40,16 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         MoveFloor(level);
     }
 
+    public override void ApplyToLevel(TR3Level level)
+    {
+        if (Clicks == 0)
+        {
+            return;
+        }
+
+        MoveFloor(level);
+    }
+
     private void MoveFloor(TR1Level level)
     {
         int clickChange = Clicks * TRConsts.Step1;
@@ -173,7 +183,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         // Make the floor solid too.
         sector.Floor += Clicks;
         sector.RoomBelow = TRConsts.NoRoom;
-        AlterSectorBox(level, room, sectorIndex);
+        AlterSectorBox(level, room, sectorIndex, level.Rooms);
 
         // Move any entities that share the same floor sector up or down the relevant number of clicks
         foreach (TR1Entity entity in level.Entities)
@@ -186,50 +196,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                     entity.Y += clickChange;
                 }
             }
-        }
-    }
-
-    private static void AlterSectorBox(TR1Level level, TR1Room room, int sectorIndex)
-    {
-        TRRoomSector sector = room.Sectors[sectorIndex];
-        if (sector.BoxIndex == TRConsts.NoBox)
-        {
-            return;
-        }
-
-        if (level.Rooms.Sum(r => r.Sectors.Count(s => s.BoxIndex == sector.BoxIndex)) == 1)
-        {
-            // The box used by this sector is unique to this sector, so we can
-            // simply change the existing floor height to match the sector.
-            level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * TRConsts.Step1);
-        }
-        else
-        {
-            ushort currentBoxIndex = sector.BoxIndex;
-            ushort newBoxIndex = (ushort)level.Boxes.Count;
-
-            // Add what will be the new box index as an overlap to adjoining boxes.
-            GenerateOverlaps(level.Boxes, sector.BoxIndex, newBoxIndex);
-
-            // Make a new box for the sector.
-            byte xmin = (byte)((room.Info.X / TRConsts.Step4) + (sectorIndex / room.NumZSectors));
-            byte zmin = (byte)((room.Info.Z / TRConsts.Step4) + (sectorIndex % room.NumZSectors));
-            TRBox box = new()
-            {
-                XMin = xmin,
-                ZMin = zmin,
-                XMax = (byte)(xmin + 1), // Only 1 tile
-                ZMax = (byte)(zmin + 1),
-                TrueFloor = (short)(sector.Floor * TRConsts.Step1),
-                Zone = level.Boxes[sector.BoxIndex].Zone.Clone()
-            };
-
-            // Point the sector to the new box, and save it to the level
-            sector.BoxIndex = newBoxIndex;
-            level.Boxes.Add(box);
-
-            // Finally add the previous box as a neighbour to the new one.
-            box.Overlaps.Add(currentBoxIndex);
         }
     }
 
@@ -369,7 +335,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         // Make the floor solid too.
         sector.Floor += Clicks;
         sector.RoomBelow = TRConsts.NoRoom;
-        AlterSectorBox(level, room, sectorIndex);
+        AlterSectorBox(level, room, sectorIndex, level.Rooms);
 
         // Move any entities that share the same floor sector up or down the relevant number of clicks
         foreach (TR2Entity entity in level.Entities)
@@ -383,72 +349,6 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
                 }
             }
         }
-    }
-
-    private static void AlterSectorBox(TR2Level level, TR2Room room, int sectorIndex)
-    {
-        TRRoomSector sector = room.Sectors[sectorIndex];
-        if (sector.BoxIndex == TRConsts.NoBox)
-        {
-            return;
-        }
-
-        if (level.Rooms.Sum(r => r.Sectors.Count(s => s.BoxIndex == sector.BoxIndex)) == 1)
-        {
-            // The box used by this sector is unique to this sector, so we can
-            // simply change the existing floor height to match the sector.
-            level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * TRConsts.Step1);
-        }
-        else
-        {
-            ushort currentBoxIndex = sector.BoxIndex;
-            ushort newBoxIndex = (ushort)level.Boxes.Count;
-
-            // Add what will be the new box index as an overlap to adjoining boxes.
-            GenerateOverlaps(level.Boxes, sector.BoxIndex, newBoxIndex);
-
-            // Make a new box for the sector.
-            byte xmin = (byte)((room.Info.X / TRConsts.Step4) + (sectorIndex / room.NumZSectors));
-            byte zmin = (byte)((room.Info.Z / TRConsts.Step4) + (sectorIndex % room.NumZSectors));
-            TRBox box = new()
-            {
-                XMin = xmin,
-                ZMin = zmin,
-                XMax = (byte)(xmin + 1), // Only 1 tile
-                ZMax = (byte)(zmin + 1),
-                TrueFloor = (short)(sector.Floor * TRConsts.Step1),
-                Zone = level.Boxes[sector.BoxIndex].Zone.Clone()
-            };
-
-            // Point the sector to the new box, and save it to the level
-            sector.BoxIndex = newBoxIndex;
-            level.Boxes.Add(box);
-
-            // Finally add the previous box as a neighbour to the new one.
-            box.Overlaps.Add(currentBoxIndex);
-        }
-    }
-
-    public void RemapTextures(Dictionary<ushort, ushort> indexMap)
-    {
-        if (indexMap.ContainsKey(FloorTexture))
-        {
-            FloorTexture = indexMap[FloorTexture];
-        }
-        if (indexMap.ContainsKey(SideTexture))
-        {
-            SideTexture = indexMap[SideTexture];
-        }
-    }
-
-    public override void ApplyToLevel(TR3Level level)
-    {
-        if (Clicks == 0)
-        {
-            return;
-        }
-
-        MoveFloor(level);
     }
 
     private void MoveFloor(TR3Level level)
@@ -581,7 +481,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         // Now shift the actual sector info and adjust the box if necessary
         sector.Floor += Clicks;
-        AlterSectorBox(level, room, sectorIndex);
+        AlterSectorBox(level, room, sectorIndex, level.Rooms);
 
         // Move any entities that share the same floor sector up or down the relevant number of clicks
         foreach (TR3Entity entity in level.Entities)
@@ -597,7 +497,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private static void AlterSectorBox(TR3Level level, TR3Room room, int sectorIndex)
+    private static void AlterSectorBox(TRLevelBase level, TRRoom room, int sectorIndex, IEnumerable<TRRoom> allRooms)
     {
         TRRoomSector sector = room.Sectors[sectorIndex];
         if (sector.BoxIndex == TRConsts.NoBox)
@@ -605,7 +505,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             return;
         }
 
-        if (level.Rooms.Sum(r => r.Sectors.Count(s => s.BoxIndex == sector.BoxIndex)) == 1)
+        if (allRooms.Sum(r => r.Sectors.Count(s => s.BoxIndex == sector.BoxIndex)) == 1)
         {
             // The box used by this sector is unique to this sector, so we can
             // simply change the existing floor height to match the sector.
@@ -613,20 +513,29 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
         else
         {
+            ushort currentBoxIndex = sector.BoxIndex;
             ushort newBoxIndex = (ushort)level.Boxes.Count;
 
-            // Add what will be the new box index as an overlap to adjoining boxes.
-            GenerateOverlaps(level.Boxes, sector.BoxIndex, newBoxIndex);
+            // Anything that has the current box as an overlap will need to also have the
+            // new box, or if this is the current box, it will need the new box linked to it.
+            for (int i = 0; i < level.Boxes.Count; i++)
+            {
+                TRBox otherBox = level.Boxes[i];
+                if (otherBox.Overlaps.Contains(currentBoxIndex) || i == currentBoxIndex)
+                {
+                    otherBox.Overlaps.Add(newBoxIndex);
+                }
+            }
 
             // Make a new box for the sector.
-            byte xmin = (byte)((room.Info.X / TRConsts.Step4) + (sectorIndex / room.NumZSectors));
-            byte zmin = (byte)((room.Info.Z / TRConsts.Step4) + (sectorIndex % room.NumZSectors));
+            uint xmin = (uint)(room.Info.X + (sectorIndex / room.NumZSectors) * TRConsts.Step4);
+            uint zmin = (uint)(room.Info.Z + (sectorIndex % room.NumZSectors) * TRConsts.Step4);
             TRBox box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
-                XMax = (byte)(xmin + 1), // Only 1 tile
-                ZMax = (byte)(zmin + 1),
+                XMax = xmin + TRConsts.Step4,
+                ZMax = zmin + TRConsts.Step4,
                 TrueFloor = (short)(sector.Floor * TRConsts.Step1),
                 Zone = level.Boxes[sector.BoxIndex].Zone.Clone()
             };
@@ -636,22 +545,19 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             level.Boxes.Add(box);
 
             // Finally add the previous box as a neighbour to the new one.
-            box.Overlaps.Add(sector.BoxIndex);
+            box.Overlaps.Add(currentBoxIndex);
         }
     }
 
-    private static void GenerateOverlaps(List<TRBox> boxes, ushort currentBoxIndex, ushort newBoxIndex)
+    public void RemapTextures(Dictionary<ushort, ushort> indexMap)
     {
-        for (int i = 0; i < boxes.Count; i++)
+        if (indexMap.ContainsKey(FloorTexture))
         {
-            TRBox box = boxes[i];
-            // Anything that has the current box as an overlap will need
-            // to also have the new box, or if this is the current box, it
-            // will need the new box linked to it.
-            if (box.Overlaps.Contains(currentBoxIndex) || i == currentBoxIndex)
-            {
-                box.Overlaps.Add(newBoxIndex);
-            }
+            FloorTexture = indexMap[FloorTexture];
+        }
+        if (indexMap.ContainsKey(SideTexture))
+        {
+            SideTexture = indexMap[SideTexture];
         }
     }
 }

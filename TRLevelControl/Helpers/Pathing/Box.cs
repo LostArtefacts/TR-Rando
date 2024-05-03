@@ -36,10 +36,10 @@ public class Box
 
     public TRBox ToTRBox(TRRoomInfo roomInfo)
     {
-        byte xmin = (byte)(roomInfo.X / TRConsts.Step4 + MinX);
-        byte zmin = (byte)(roomInfo.Z / TRConsts.Step4 + MinZ);
-        byte xmax = (byte)(xmin + (MaxX - MinX));
-        byte zmax = (byte)(zmin + (MaxZ - MinZ));
+        uint xmin = (uint)(roomInfo.X + MinX * TRConsts.Step4);
+        uint zmin = (uint)(roomInfo.Z + MinZ * TRConsts.Step4);
+        uint xmax = (uint)(xmin + (MaxX - MinX) * TRConsts.Step4);
+        uint zmax = (uint)(zmin + (MaxZ - MinZ) * TRConsts.Step4);
         return new()
         {
             XMin = xmin,

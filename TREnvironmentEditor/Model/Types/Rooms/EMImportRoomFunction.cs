@@ -174,10 +174,10 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             linkedBox.Overlaps.Add(newBoxIndex);
 
             // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / TRConsts.Step4);
-            byte zmin = (byte)(newRoom.Info.Z / TRConsts.Step4);
-            byte xmax = (byte)(xmin + newRoom.NumXSectors);
-            byte zmax = (byte)(zmin + newRoom.NumZSectors);
+            uint xmin = (uint)(newRoom.Info.X + TRConsts.Step4);
+            uint zmin = (uint)(newRoom.Info.Z + TRConsts.Step4);
+            uint xmax = (uint)(xmin + (newRoom.NumXSectors - 2) * TRConsts.Step4);
+            uint zmax = (uint)(zmin + (newRoom.NumZSectors - 2) * TRConsts.Step4);
             TRBox box = new()
             {
                 XMin = xmin,

@@ -589,20 +589,29 @@ public class TRLevelReader : BinaryReader
 
     public TRBox ReadBox(TRGameVersion version)
     {
-        byte zmin, zmax, xmin, xmax;
+        uint zmin, zmax, xmin, xmax;
         if (version == TRGameVersion.TR1)
         {
-            zmin = (byte)(ReadUInt32() >> TRConsts.WallShift);
-            zmax = (byte)((ReadUInt32() + 1) >> TRConsts.WallShift);
-            xmin = (byte)(ReadUInt32() >> TRConsts.WallShift);
-            xmax = (byte)((ReadUInt32() + 1) >> TRConsts.WallShift);
+            zmin = ReadUInt32();
+            zmax = ReadUInt32();
+            xmin = ReadUInt32();
+            xmax = ReadUInt32();
+
+            if ((zmax + 1) % TRConsts.Step4 == 0)
+            {
+                zmax++;
+            }
+            if ((xmax + 1) % TRConsts.Step4 == 0)
+            {
+                xmax++;
+            }
         }
         else
         {
-            zmin = ReadByte();
-            zmax = ReadByte();
-            xmin = ReadByte();
-            xmax = ReadByte();
+            zmin = (uint)(ReadByte() << TRConsts.WallShift);
+            zmax = (uint)(ReadByte() << TRConsts.WallShift);
+            xmin = (uint)(ReadByte() << TRConsts.WallShift);
+            xmax = (uint)(ReadByte() << TRConsts.WallShift);
         }
 
         return new()

@@ -444,17 +444,17 @@ public class TRLevelWriter : BinaryWriter
     {
         if (version == TRGameVersion.TR1)
         {
-            Write((uint)(box.ZMin << TRConsts.WallShift));
-            Write((uint)(box.ZMax << TRConsts.WallShift) - 1);
-            Write((uint)(box.XMin << TRConsts.WallShift));
-            Write((uint)(box.XMax << TRConsts.WallShift) - 1);
+            Write(box.ZMin);
+            Write(box.ZMax - 1);
+            Write(box.XMin);
+            Write(box.XMax - 1);
         }
         else
         {
-            Write(box.ZMin);
-            Write(box.ZMax);
-            Write(box.XMin);
-            Write(box.XMax);
+            Write((byte)(box.ZMin >> TRConsts.WallShift));
+            Write((byte)(box.ZMax >> TRConsts.WallShift));
+            Write((byte)(box.XMin >> TRConsts.WallShift));
+            Write((byte)(box.XMax >> TRConsts.WallShift));
         }
         Write(box.TrueFloor);
         Write(overlapIndex);

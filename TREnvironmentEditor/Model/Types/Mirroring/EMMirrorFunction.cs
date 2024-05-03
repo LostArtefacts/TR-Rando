@@ -446,8 +446,8 @@ public class EMMirrorFunction : BaseEMFunction
         // to world coordinates, flipping them over X and then swapping them.
         foreach (TRBox box in boxes)
         {
-            byte newMaxX = (byte)(FlipWorldX(box.XMin << TRConsts.WallShift) >> TRConsts.WallShift);
-            byte newMinX = (byte)(FlipWorldX(box.XMax << TRConsts.WallShift) >> TRConsts.WallShift);
+            uint newMaxX = (uint)FlipWorldX((int)box.XMin);
+            uint newMinX = (uint)FlipWorldX((int)box.XMax);
             Debug.Assert(newMaxX >= newMinX);
             box.XMin = newMinX;
             box.XMax = newMaxX;

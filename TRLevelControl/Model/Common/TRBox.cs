@@ -2,10 +2,10 @@
 
 public class TRBox
 {
-    public byte ZMin { get; set; }
-    public byte ZMax { get; set; }
-    public byte XMin { get; set; }
-    public byte XMax { get; set; }
+    public uint ZMin { get; set; }
+    public uint ZMax { get; set; }
+    public uint XMin { get; set; }
+    public uint XMax { get; set; }
     public short TrueFloor { get; set; }
     public bool Blockable { get; set; }
     public bool Blocked { get; set; }
