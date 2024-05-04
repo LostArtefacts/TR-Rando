@@ -96,6 +96,68 @@ public class TRObjectTexture : TRTexture
         return vertices;
     }
 
+    public void FlipHorizontal()
+    {
+        switch (UVMode)
+        {
+            case TRUVMode.NW_Clockwise:
+                UVMode = TRUVMode.NE_AntiClockwise;
+                break;
+            case TRUVMode.NE_AntiClockwise:
+                UVMode = TRUVMode.NW_Clockwise;
+                break;
+            case TRUVMode.SW_AntiClockwise:
+                UVMode = TRUVMode.SE_Clockwise;
+                break;
+            case TRUVMode.SE_Clockwise:
+                UVMode = TRUVMode.SW_AntiClockwise;
+                break;
+            case TRUVMode.NE_Clockwise:
+                UVMode = TRUVMode.NW_AntiClockwise;
+                break;
+            case TRUVMode.NW_AntiClockwise:
+                UVMode = TRUVMode.NE_Clockwise;
+                break;
+            case TRUVMode.SW_Clockwise:
+                UVMode = TRUVMode.SE_AntiClockwise;
+                break;
+            case TRUVMode.SE_AntiClockwise:
+                UVMode = TRUVMode.SW_Clockwise;
+                break;
+        }
+    }
+
+    public void FlipVertical()
+    {
+        switch (UVMode)
+        {
+            case TRUVMode.NW_Clockwise:
+                UVMode = TRUVMode.SW_AntiClockwise;
+                break;
+            case TRUVMode.SW_AntiClockwise:
+                UVMode = TRUVMode.NW_Clockwise;
+                break;
+            case TRUVMode.NE_Clockwise:
+                UVMode = TRUVMode.SE_AntiClockwise;
+                break;
+            case TRUVMode.SE_AntiClockwise:
+                UVMode = TRUVMode.NE_Clockwise;
+                break;
+            case TRUVMode.SE_Clockwise:
+                UVMode = TRUVMode.NE_AntiClockwise;
+                break;
+            case TRUVMode.NE_AntiClockwise:
+                UVMode = TRUVMode.SE_Clockwise;
+                break;
+            case TRUVMode.SW_Clockwise:
+                UVMode = TRUVMode.NW_AntiClockwise;
+                break;
+            case TRUVMode.NW_AntiClockwise:
+                UVMode = TRUVMode.SW_Clockwise;
+                break;
+        }
+    }
+
     protected void SetUVMode(TRUVMode mode)
     {
         if (mode == UVMode)

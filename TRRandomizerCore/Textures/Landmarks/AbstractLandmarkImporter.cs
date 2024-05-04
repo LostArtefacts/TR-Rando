@@ -171,13 +171,16 @@ public abstract class AbstractLandmarkImporter<E, L>
 
     private static IndexedTRObjectTexture CreateTexture(Rectangle rectangle, bool mirrored)
     {
-        return new()
+        IndexedTRObjectTexture texture = new()
         {
             Texture = new(rectangle)
-            {
-                UVMode = mirrored ? TRUVMode.NE_AntiClockwise : TRUVMode.NW_Clockwise
-            }
         };
+
+        if (mirrored)
+        {
+            texture.Texture.FlipHorizontal();
+        }
+        return texture;
     }
 
     protected short? GetSectorPortalRoom(TRRoomSector sector, FDControl floorData, PortalDirection direction)

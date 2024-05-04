@@ -82,25 +82,7 @@ public class EMMirrorModelFunction : BaseEMFunction
     {
         foreach (ushort textureRef in textureReferences)
         {
-            IndexedTRObjectTexture texture = new()
-            {
-                Texture = objectTextures[textureRef]
-            };
-
-            if (texture.IsTriangle)
-            {
-                Swap(texture.Texture.Vertices, 0, 2);
-            }
-            else
-            {
-                Swap(texture.Texture.Vertices, 0, 3);
-                Swap(texture.Texture.Vertices, 1, 2);
-            }
+            objectTextures[textureRef].FlipHorizontal();
         }
-    }
-
-    private static void Swap<T>(List<T> arr, int pos1, int pos2)
-    {
-        (arr[pos2], arr[pos1]) = (arr[pos1], arr[pos2]);
     }
 }
