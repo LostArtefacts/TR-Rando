@@ -367,16 +367,15 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         writer.Write(_level.AIEntities);
     }
 
-    private void ReadDemoData(TRLevelReader reader)
+    private static void ReadDemoData(TRLevelReader reader)
     {
         ushort numDemoData = reader.ReadUInt16();
-        _level.DemoData = reader.ReadBytes(numDemoData);
+        Debug.Assert(numDemoData == 0);
     }
 
     private void WriteDemoData(TRLevelWriter writer)
     {
-        writer.Write((ushort)_level.DemoData.Length);
-        writer.Write(_level.DemoData);
+        writer.Write((ushort)0);
     }
 
     private void ReadSoundEffects(TRLevelReader reader)

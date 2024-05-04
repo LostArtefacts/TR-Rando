@@ -12,7 +12,7 @@ public class TR1Level : TRLevelBase
     public List<byte> LightMap { get; set; }
     public List<TRColour> Palette { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }
-    public byte[] DemoData { get; set; }
+    public TRDemoData<TR1DemoGun, TR1InputState> DemoData { get; set; }
     public SortedDictionary<TR1SFX, TR1SoundEffect> SoundEffects { get; set; }
 
     public override IEnumerable<TRMesh> DistinctMeshes => Models.Values.SelectMany(m => m.Meshes)
