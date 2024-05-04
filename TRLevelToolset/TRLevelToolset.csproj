@@ -18,9 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TREnvironmentEditor\TREnvironmentEditor.csproj" />
+    <ProjectReference Include="..\TRDataControl\TRDataControl.csproj" />
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
-    <ProjectReference Include="..\TRModelTransporter\TRModelTransporter.csproj" />
   </ItemGroup>
 
 </Project>

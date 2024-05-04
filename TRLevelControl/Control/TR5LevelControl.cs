@@ -373,7 +373,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         Debug.Assert(numDemoData == 0);
     }
 
-    private void WriteDemoData(TRLevelWriter writer)
+    private static void WriteDemoData(TRLevelWriter writer)
     {
         writer.Write((ushort)0);
     }

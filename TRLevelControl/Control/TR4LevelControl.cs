@@ -321,7 +321,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         Debug.Assert(numDemoData == 0);
     }
 
-    private void WriteDemoData(TRLevelWriter writer)
+    private static void WriteDemoData(TRLevelWriter writer)
     {
         writer.Write((ushort)0);
     }

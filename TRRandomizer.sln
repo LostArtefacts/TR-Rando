@@ -11,15 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextureExport", "TextureExport\TextureExport.csproj", "{108D4840-3E84-466F-B5DE-AF00EECA8103}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRTexture16Importer", "TRTexture16Importer\TRTexture16Importer.csproj", "{29F10C62-F4D8-4ACA-91ED-6920AE3F1AC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRImageControl", "TRImageControl\TRImageControl.csproj", "{29F10C62-F4D8-4ACA-91ED-6920AE3F1AC0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRRandomizerView", "TRRandomizerView\TRRandomizerView.csproj", "{6CE82358-524D-4B12-A514-0903521ED13C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRRandomizerCore", "TRRandomizerCore\TRRandomizerCore.csproj", "{B657D758-A095-44B5-AEF1-C77C30667DAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRModelTransporter", "TRModelTransporter\TRModelTransporter.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TREnvironmentEditor", "TREnvironmentEditor\TREnvironmentEditor.csproj", "{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRDataControl", "TRDataControl\TRDataControl.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFXExport", "SFXExport\SFXExport.csproj", "{D3662F36-C8D8-471C-8F43-192CE748B04E}"
 EndProject
@@ -63,10 +61,6 @@ Global
 		{6CE83D8E-30E4-4CE1-9228-8657EF186A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CE83D8E-30E4-4CE1-9228-8657EF186A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CE83D8E-30E4-4CE1-9228-8657EF186A17}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Release|Any CPU.ActiveCfg = Release|Any CPU
