@@ -115,19 +115,20 @@ public class TRLevelWriter : BinaryWriter
         Write(image.Pixels);
     }
 
-    public void Write(IEnumerable<TRColour> colours)
+    public void Write(IEnumerable<TRColour> colours, byte divisor)
     {
         foreach (TRColour colour in colours)
         {
-            Write(colour);
+            Write(colour, divisor);
         }
     }
 
-    public void Write(TRColour colour)
+    public void Write(TRColour colour, byte divisor = 1)
     {
-        Write(colour.Red);
-        Write(colour.Green);
-        Write(colour.Blue);
+        divisor = Math.Max((byte)1, divisor);
+        Write((byte)(colour.Red / divisor));
+        Write((byte)(colour.Green / divisor));
+        Write((byte)(colour.Blue / divisor));
     }
 
     public void Write(IEnumerable<TRColour4> colours)

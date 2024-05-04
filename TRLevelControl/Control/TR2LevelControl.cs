@@ -39,15 +39,9 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
     protected override void Read(TRLevelReader reader)
     {
-        // Colour palettes and textures
-        _level.Palette = reader.ReadColours(TRConsts.PaletteSize);
-        _level.Palette16 = reader.ReadColour4s(TRConsts.PaletteSize);
+        ReadPalette(reader);
+        ReadImages(reader);
 
-        uint numImages = reader.ReadUInt32();
-        _level.Images8 = reader.ReadImage8s(numImages);
-        _level.Images16 = reader.ReadImage16s(numImages);
-
-        // Unused, always 0 in OG
         _level.Version.LevelNumber = reader.ReadUInt32();
 
         ReadRooms(reader);
@@ -69,7 +63,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         ReadEntities(reader);
 
-        _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
+        ReadLightMap(reader);
 
         ReadCinematicFrames(reader);
 
@@ -81,15 +75,8 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
     protected override void Write(TRLevelWriter writer)
     {
-        Debug.Assert(_level.Palette.Count == TRConsts.PaletteSize);
-        Debug.Assert(_level.Palette16.Count == TRConsts.PaletteSize);
-        writer.Write(_level.Palette);
-        writer.Write(_level.Palette16);
-
-        Debug.Assert(_level.Images8.Count == _level.Images16.Count);
-        writer.Write((uint)_level.Images8.Count);
-        writer.Write(_level.Images8);
-        writer.Write(_level.Images16);
+        WritePalette(writer);
+        WriteImages(writer);
 
         writer.Write(_level.Version.LevelNumber);
 
@@ -112,8 +99,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         WriteEntities(writer);
 
-        Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
-        writer.Write(_level.LightMap.ToArray());
+        WriteLightMap(writer);
 
         WriteCinematicFrames(writer);
 
@@ -121,6 +107,35 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write(_level.DemoData);
 
         WriteSoundEffects(writer);
+    }
+
+    private void ReadPalette(TRLevelReader reader)
+    {
+        _level.Palette = reader.ReadColours(TRConsts.PaletteSize, TRConsts.Palette8Multiplier);
+        _level.Palette16 = reader.ReadColour4s(TRConsts.PaletteSize);
+    }
+
+    private void WritePalette(TRLevelWriter writer)
+    {
+        Debug.Assert(_level.Palette.Count == TRConsts.PaletteSize);
+        Debug.Assert(_level.Palette16.Count == TRConsts.PaletteSize);
+        writer.Write(_level.Palette, TRConsts.Palette8Multiplier);
+        writer.Write(_level.Palette16);
+    }
+
+    private void ReadImages(TRLevelReader reader)
+    {
+        uint numImages = reader.ReadUInt32();
+        _level.Images8 = reader.ReadImage8s(numImages);
+        _level.Images16 = reader.ReadImage16s(numImages);
+    }
+
+    private void WriteImages(TRLevelWriter writer)
+    {
+        Debug.Assert(_level.Images8.Count == _level.Images16.Count);
+        writer.Write((uint)_level.Images8.Count);
+        writer.Write(_level.Images8);
+        writer.Write(_level.Images16);
     }
 
     private void ReadRooms(TRLevelReader reader)
@@ -256,6 +271,17 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     {
         writer.Write((uint)_level.Entities.Count);
         writer.Write(_level.Entities);
+    }
+
+    private void ReadLightMap(TRLevelReader reader)
+    {
+        _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
+    }
+
+    private void WriteLightMap(TRLevelWriter writer)
+    {
+        Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
+        writer.Write(_level.LightMap);
     }
 
     private void ReadCinematicFrames(TRLevelReader reader)

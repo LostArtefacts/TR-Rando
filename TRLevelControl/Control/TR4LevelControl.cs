@@ -105,7 +105,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
     {
         using TRLevelReader reader = mainReader.Inflate(TRChunkType.LevelData);
 
-        reader.ReadUInt32(); // Unused, always 0
+        _level.Version.LevelNumber = reader.ReadUInt32();
 
         ReadRooms(reader);
 
@@ -138,7 +138,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
     {
         using TRLevelWriter writer = new();
 
-        writer.Write((uint)0); // Unused, always 0
+        writer.Write(_level.Version.LevelNumber);
 
         WriteRooms(writer);
 
