@@ -7,6 +7,7 @@ namespace TRLevelControl;
 public class TR4LevelControl : TRLevelControlBase<TR4Level>
 {
     private TRObjectMeshBuilder<TR4Type> _meshBuilder;
+    private TRTextureBuilder _textureBuilder;
     private TRSpriteBuilder<TR4Type> _spriteBuilder;
     private TR4RoomBuilder _roomBuilder;
 
@@ -31,6 +32,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
     protected override void Initialise()
     {
         _meshBuilder = new(TRGameVersion.TR4, _observer);
+        _textureBuilder = new(TRGameVersion.TR4, _observer);
         _spriteBuilder = new(TRGameVersion.TR4);
         _roomBuilder = new();
     }
@@ -277,32 +279,22 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadAnimatedTextures(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateAnimatedTextures(reader, _level);
+        _level.AnimatedTextures = _textureBuilder.ReadAnimatedTextures(reader);
     }
 
     private void WriteAnimatedTextures(TRLevelWriter writer)
     {
-        byte[] animTextureData = _level.AnimatedTextures.SelectMany(a => a.Serialize()).ToArray();
-        writer.Write((uint)(animTextureData.Length / sizeof(ushort)) + 1);
-        writer.Write((ushort)_level.AnimatedTextures.Count);
-        writer.Write(animTextureData);
-        writer.Write(_level.AnimatedTexturesUVCount);
+        _textureBuilder.Write(writer, _level.AnimatedTextures);
     }
 
     private void ReadObjectTextures(TRLevelReader reader)
     {
-        TR4FileReadUtilities.PopulateObjectTextures(reader, _level);
+        _level.ObjectTextures = _textureBuilder.ReadObjectTextures(reader);
     }
 
     private void WriteObjectTextures(TRLevelWriter writer)
     {
-        writer.Write(TR4FileReadUtilities.TEXMarker.ToCharArray());
-
-        writer.Write((uint)_level.ObjectTextures.Count);
-        foreach (TR4ObjectTexture otex in _level.ObjectTextures)
-        {
-            writer.Write(otex.Serialize());
-        }
+        _textureBuilder.Write(writer, _level.ObjectTextures);
     }
 
     private void ReadEntities(TRLevelReader reader)

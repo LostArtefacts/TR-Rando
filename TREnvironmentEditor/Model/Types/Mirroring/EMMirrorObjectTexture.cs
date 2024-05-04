@@ -1,5 +1,4 @@
 ﻿using TRLevelControl.Model;
-using TRModelTransporter.Model.Textures;
 
 namespace TREnvironmentEditor.Model.Types;
 
@@ -26,25 +25,7 @@ public class EMMirrorObjectTexture : BaseEMFunction
     {
         foreach (ushort textureRef in Textures)
         {
-            IndexedTRObjectTexture texture = new()
-            {
-                Texture = levelTextures[textureRef]
-            };
-
-            if (texture.IsTriangle)
-            {
-                Swap(texture.Texture.Vertices, 0, 2);
-            }
-            else
-            {
-                Swap(texture.Texture.Vertices, 0, 3);
-                Swap(texture.Texture.Vertices, 1, 2);
-            }
+            levelTextures[textureRef].FlipHorizontal();
         }
-    }
-
-    private static void Swap<T>(T[] arr, int pos1, int pos2)
-    {
-        (arr[pos2], arr[pos1]) = (arr[pos1], arr[pos2]);
     }
 }

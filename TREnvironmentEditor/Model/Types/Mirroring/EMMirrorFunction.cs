@@ -2,7 +2,6 @@
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Model.Textures;
 
 namespace TREnvironmentEditor.Model.Types;
 
@@ -107,11 +106,6 @@ public class EMMirrorFunction : BaseEMFunction
         x += _xAdjustment;
         Debug.Assert(x >= 0);
         return x;
-    }
-
-    private static void Swap<T>(T[] arr, int pos1, int pos2)
-    {
-        (arr[pos2], arr[pos1]) = (arr[pos1], arr[pos2]);
     }
 
     private static void MirrorFloorData(TR1Level level)
@@ -1039,23 +1033,9 @@ public class EMMirrorFunction : BaseEMFunction
 
     private static void MirrorObjectTextures(ISet<ushort> textureReferences, List<TRObjectTexture> objectTextures)
     {
-        // Flip the object texture vertices in the same way as done for faces
         foreach (ushort textureRef in textureReferences)
         {
-            IndexedTRObjectTexture texture = new()
-            {
-                Texture = objectTextures[textureRef]
-            };
-
-            if (texture.IsTriangle)
-            {
-                Swap(texture.Texture.Vertices, 0, 2);
-            }
-            else
-            {
-                Swap(texture.Texture.Vertices, 0, 3);
-                Swap(texture.Texture.Vertices, 1, 2);
-            }
+            objectTextures[textureRef].FlipHorizontal();
         }
     }
 

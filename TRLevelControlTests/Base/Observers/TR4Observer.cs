@@ -11,6 +11,7 @@ public class TR4Observer : TR3Observer
     private readonly Dictionary<uint, List<byte>> _meshPadding = new();
     private readonly Dictionary<int, ushort> _badAnimCmdCounts = new();
     private readonly Dictionary<int, byte> _emptyAnimFrameSizes = new();
+    private readonly Dictionary<int, Tuple<uint, uint>> _originalUV = new();
     private readonly Dictionary<byte, List<byte>> _flybyIndices = new();
 
     private uint[] _sampleIndices;
@@ -108,6 +109,16 @@ public class TR4Observer : TR3Observer
     public override List<byte> GetFlybyIndices(byte flybySequence)
     {
         return _flybyIndices.ContainsKey(flybySequence) ? _flybyIndices[flybySequence] : null;
+    }
+
+    public override void OnOrignalUVRead(int index, Tuple<uint, uint> uv)
+    {
+        _originalUV[index] = uv;
+    }
+
+    public override Tuple<uint, uint> GetOrignalUV(int index)
+    {
+        return _originalUV.ContainsKey(index) ? _originalUV[index] : null;
     }
 
     public override void OnSampleIndicesRead(uint[] sampleIndices)

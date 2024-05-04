@@ -7,6 +7,7 @@ namespace TRLevelControl;
 public class TR1LevelControl : TRLevelControlBase<TR1Level>
 {
     private TRObjectMeshBuilder<TR1Type> _meshBuilder;
+    private TRTextureBuilder _textureBuilder;
     private TRSpriteBuilder<TR1Type> _spriteBuilder;
     private TR1RoomBuilder _roomBuilder;
 
@@ -31,6 +32,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
     protected override void Initialise()
     {
         _meshBuilder = new(TRGameVersion.TR1, _observer);
+        _textureBuilder = new(TRGameVersion.TR1, _observer);
         _spriteBuilder = new(TRGameVersion.TR1);
         _roomBuilder = new();
     }
@@ -50,13 +52,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
         ReadStaticMeshes(reader);
 
-        uint numObjectTextures = reader.ReadUInt32();
-        _level.ObjectTextures = new();
-        for (int i = 0; i < numObjectTextures; i++)
-        {
-            _level.ObjectTextures.Add(TR2FileReadUtilities.ReadObjectTexture(reader));
-        }
-
+        ReadObjectTextures(reader);
         ReadSprites(reader);
 
         ReadCameras(reader);
@@ -64,13 +60,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
         ReadBoxes(reader);
 
-        reader.ReadUInt32(); // Total count of ushorts
-        ushort numGroups = reader.ReadUInt16();
-        _level.AnimatedTextures = new();
-        for (int i = 0; i < numGroups; i++)
-        {
-            _level.AnimatedTextures.Add(TR2FileReadUtilities.ReadAnimatedTexture(reader));
-        }
+        ReadAnimatedTextures(reader);
 
         ReadEntities(reader);
 
@@ -99,8 +89,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
         WriteStaticMeshes(writer);
 
-        writer.Write((uint)_level.ObjectTextures.Count);
-        foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
+        WriteObjectTextures(writer);
         WriteSprites(writer);
 
         WriteCameras(writer);
@@ -108,10 +97,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
         WriteBoxes(writer);
 
-        byte[] animTextureData = _level.AnimatedTextures.SelectMany(a => a.Serialize()).ToArray();
-        writer.Write((uint)(animTextureData.Length / sizeof(ushort)) + 1);
-        writer.Write((ushort)_level.AnimatedTextures.Count);
-        writer.Write(animTextureData);
+        WriteAnimatedTextures(writer);
 
         WriteEntities(writer);
 
@@ -180,6 +166,16 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         _meshBuilder.WriteStaticMeshes(writer, _level.StaticMeshes, TR1Type.SceneryBase);
     }
 
+    private void ReadObjectTextures(TRLevelReader reader)
+    {
+        _level.ObjectTextures = _textureBuilder.ReadObjectTextures(reader);
+    }
+
+    private void WriteObjectTextures(TRLevelWriter writer)
+    {
+        _textureBuilder.Write(writer, _level.ObjectTextures);
+    }
+
     private void ReadSprites(TRLevelReader reader)
     {
         _level.Sprites = _spriteBuilder.ReadSprites(reader);
@@ -229,6 +225,16 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
     {
         TRBoxBuilder boxBuilder = new(_level.Version.Game, _observer);
         boxBuilder.WriteBoxes(writer, _level.Boxes);
+    }
+
+    private void ReadAnimatedTextures(TRLevelReader reader)
+    {
+        _level.AnimatedTextures = _textureBuilder.ReadAnimatedTextures(reader);
+    }
+
+    private void WriteAnimatedTextures(TRLevelWriter writer)
+    {
+        _textureBuilder.Write(writer, _level.AnimatedTextures);
     }
 
     private void ReadEntities(TRLevelReader reader)

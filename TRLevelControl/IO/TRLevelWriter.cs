@@ -467,6 +467,20 @@ public class TRLevelWriter : BinaryWriter
         Write(overlapIndex);
     }
 
+    public void Write(IEnumerable<TRObjectTextureVert> vertices)
+    {
+        foreach (TRObjectTextureVert vertex in vertices)
+        {
+            Write(vertex);
+        }
+    }
+
+    public void Write(TRObjectTextureVert vertex)
+    {
+        Write(vertex.U);
+        Write(vertex.V);
+    }
+
     public void Write(IEnumerable<TRSpriteTexture> textures, TRGameVersion version)
     {
         foreach (TRSpriteTexture texture in textures)
