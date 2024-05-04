@@ -6,7 +6,7 @@ using TRModelTransporter.Transport;
 
 namespace TRModelTransporter.Utilities;
 
-public class MassTR3ModelExporter : AbstractMassTRModelExporter<TR3Type, TR3Level, TR3ModelDefinition>
+public class TR3MassExporter : TRMassExporter<TR3Type, TR3Level, TR3Blob>
 {
     public override List<string> LevelNames => TR3LevelNames.AsListWithAssault;
 
@@ -14,14 +14,14 @@ public class MassTR3ModelExporter : AbstractMassTRModelExporter<TR3Type, TR3Leve
 
     private readonly TR3LevelControl _reader;
 
-    public MassTR3ModelExporter()
+    public TR3MassExporter()
     {
         _reader = new();
     }
 
-    protected override AbstractTRModelExporter<TR3Type, TR3Level, TR3ModelDefinition> CreateExporter()
+    protected override TRDataExporter<TR3Type, TR3Level, TR3Blob> CreateExporter()
     {
-        return new TR3ModelExporter();
+        return new TR3DataExporter();
     }
 
     protected override TR3Level ReadLevel(string path)

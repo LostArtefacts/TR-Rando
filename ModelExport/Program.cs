@@ -29,7 +29,7 @@ class Program
 
     static void TR1Export(bool exportSegments)
     {
-        MassTR1ModelExporter exporter = new();
+        TR1MassExporter exporter = new();
         string exportFolder = @"TR1\Models";
         string segmentFolder = exportSegments ? @"TR1\ModelSegments" : null;
 
@@ -38,7 +38,7 @@ class Program
 
     static void TR2Export(bool exportSegments)
     {
-        MassTR2ModelExporter exporter = new();
+        TR2MassExporter exporter = new();
         string exportFolder = @"TR2\Models";
         string segmentFolder = exportSegments ? @"TR2\ModelSegments" : null;
 
@@ -47,7 +47,7 @@ class Program
 
     static void TR3Export(bool exportSegments)
     {
-        MassTR3ModelExporter exporter = new();
+        TR3MassExporter exporter = new();
         string exportFolder = @"TR3\Models";
         string segmentFolder = exportSegments ? @"TR3\ModelSegments" : null;
 

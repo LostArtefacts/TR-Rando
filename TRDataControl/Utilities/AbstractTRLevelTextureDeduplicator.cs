@@ -1,5 +1,5 @@
-﻿using TRModelTransporter.Model.Textures;
-using TRModelTransporter.Packing;
+﻿using TRImageControl.Packing;
+using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Utilities;
 

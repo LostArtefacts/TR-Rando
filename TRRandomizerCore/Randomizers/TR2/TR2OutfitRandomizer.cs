@@ -1,7 +1,7 @@
 ﻿using TRGE.Core;
+using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
@@ -252,7 +252,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 laraRemovals.AddRange(_laraRemovals);
             }
             
-            TR2ModelImporter importer = new()
+            TR2DataImporter importer = new()
             {
                 Level = level.Data,
                 LevelName = level.Name,

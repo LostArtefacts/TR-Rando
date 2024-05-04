@@ -1,11 +1,11 @@
-﻿using TRLevelControl.Model;
+﻿using TRImageControl.Packing;
+using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
-using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Handlers;
 
-public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2Level, TR2ModelDefinition>
+public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2Level, TR2Blob>
 {
     protected override TRDictionary<TR2Type, TRSpriteSequence> GetExistingSpriteSequences()
     {
@@ -110,9 +110,9 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2
         return _level.GetInvalidObjectTextureIndices();
     }
 
-    protected override void RemapMeshTextures(Dictionary<TR2ModelDefinition, Dictionary<int, int>> indexMap)
+    protected override void RemapMeshTextures(Dictionary<TR2Blob, Dictionary<int, int>> indexMap)
     {
-        foreach (TR2ModelDefinition definition in indexMap.Keys)
+        foreach (TR2Blob definition in indexMap.Keys)
         {
             foreach (TRMesh mesh in definition.Meshes)
             {
@@ -129,7 +129,7 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2
         _level.ResetUnusedTextures();
     }
 
-    protected override IEnumerable<TR2Type> CollateWatchedTextures(IEnumerable<TR2Type> watchedEntities, TR2ModelDefinition definition)
+    protected override IEnumerable<TR2Type> CollateWatchedTextures(IEnumerable<TR2Type> watchedEntities, TR2Blob definition)
     {
         // Ensure the likes of the flamethrower having been imported triggers the fact that
         // the flame sprite sequence has been positioned.

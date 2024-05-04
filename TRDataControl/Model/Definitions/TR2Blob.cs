@@ -2,7 +2,7 @@
 
 namespace TRModelTransporter.Model.Definitions;
 
-public class TR2ModelDefinition : AbstractTRModelDefinition<TR2Type>
+public class TR2Blob : TRBlobBase<TR2Type>
 {
     public TRCinematicFrame[] CinematicFrames { get; set; }
     public Dictionary<int, TRColour4> Colours { get; set; }
@@ -12,7 +12,7 @@ public class TR2ModelDefinition : AbstractTRModelDefinition<TR2Type>
 
     public override bool Equals(object obj)
     {
-        return obj is TR2ModelDefinition definition && Entity == definition.Entity;
+        return obj is TR2Blob definition && Entity == definition.Entity;
     }
 
     public override int GetHashCode()

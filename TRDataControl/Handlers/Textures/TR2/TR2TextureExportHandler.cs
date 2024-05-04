@@ -1,10 +1,10 @@
-﻿using TRLevelControl.Model;
+﻿using TRImageControl.Packing;
+using TRLevelControl.Model;
 using TRModelTransporter.Model.Definitions;
-using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Handlers;
 
-public class TR2TextureExportHandler : AbstractTextureExportHandler<TR2Type, TR2Level, TR2ModelDefinition>
+public class TR2TextureExportHandler : AbstractTextureExportHandler<TR2Type, TR2Level, TR2Blob>
 {
     protected override AbstractTexturePacker<TR2Type, TR2Level> CreatePacker()
     {

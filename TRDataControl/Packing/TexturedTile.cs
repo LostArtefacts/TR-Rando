@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using TRModelTransporter.Model.Textures;
 using TRTexture16Importer.Helpers;
 
-namespace TRModelTransporter.Packing;
+namespace TRImageControl.Packing;
 
 public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
 {

@@ -3,7 +3,7 @@ using TRLevelControl.Model;
 
 namespace TRModelTransporter.Data;
 
-public class TR2DefaultDataProvider : ITransportDataProvider<TR2Type>
+public class TR2DataProvider : IDataProvider<TR2Type>
 {
     public int TextureTileLimit { get; set; } = 16;
     public int TextureObjectLimit { get; set; } = 2048;

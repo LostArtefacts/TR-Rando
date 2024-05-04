@@ -1,4 +1,4 @@
-﻿namespace TRModelTransporter.Packing;
+﻿namespace TRImageControl.Packing;
 
 public class PackingException : Exception
 {

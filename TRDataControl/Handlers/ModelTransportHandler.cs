@@ -6,22 +6,22 @@ namespace TRModelTransporter.Handlers;
 
 public class ModelTransportHandler
 {
-    public static void Export(TR1Level level, TR1ModelDefinition definition, TR1Type entity)
+    public static void Export(TR1Level level, TR1Blob definition, TR1Type entity)
     {
         definition.Model = level.Models[entity];
     }
 
-    public static void Export(TR2Level level, TR2ModelDefinition definition, TR2Type entity)
+    public static void Export(TR2Level level, TR2Blob definition, TR2Type entity)
     {
         definition.Model = level.Models[entity];
     }
 
-    public static void Export(TR3Level level, TR3ModelDefinition definition, TR3Type entity)
+    public static void Export(TR3Level level, TR3Blob definition, TR3Type entity)
     {
         definition.Model = level.Models[entity];
     }
 
-    public static void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TR1Type, TR1Type> aliasPriority, IEnumerable<TR1Type> laraDependants)
+    public static void Import(TR1Level level, TR1Blob definition, Dictionary<TR1Type, TR1Type> aliasPriority, IEnumerable<TR1Type> laraDependants)
     {
         if (!level.Models.ContainsKey(definition.Entity))
         {
@@ -51,7 +51,7 @@ public class ModelTransportHandler
         }
     }
 
-    public static void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Type, TR2Type> aliasPriority, IEnumerable<TR2Type> laraDependants)
+    public static void Import(TR2Level level, TR2Blob definition, Dictionary<TR2Type, TR2Type> aliasPriority, IEnumerable<TR2Type> laraDependants)
     {
         if (!level.Models.ContainsKey(definition.Entity))
         {
@@ -75,7 +75,7 @@ public class ModelTransportHandler
         }
     }
 
-    public static void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Type, TR3Type> aliasPriority, IEnumerable<TR3Type> laraDependants, IEnumerable<TR3Type> unsafeReplacements)
+    public static void Import(TR3Level level, TR3Blob definition, Dictionary<TR3Type, TR3Type> aliasPriority, IEnumerable<TR3Type> laraDependants, IEnumerable<TR3Type> unsafeReplacements)
     {
         if (!level.Models.ContainsKey(definition.Entity))
         {

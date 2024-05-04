@@ -15,7 +15,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             return;
         }
 
-        TR1ModelImporter importer = new()
+        TR1DataImporter importer = new()
         {
             Level = level,
             ClearUnusedSprites = false,
@@ -36,7 +36,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             return;
         }
 
-        TR2ModelImporter importer = new()
+        TR2DataImporter importer = new()
         {
             Level = level,
             ClearUnusedSprites = false,
@@ -57,7 +57,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             return;
         }
 
-        TR3ModelImporter importer = new()
+        TR3DataImporter importer = new()
         {
             Level = level,
             ClearUnusedSprites = false,

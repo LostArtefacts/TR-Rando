@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using TRGE.Core;
 using TRGE.Core.Item.Enums;
+using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
@@ -612,7 +612,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             return;
         }
 
-        TR2ModelImporter importer = new()
+        TR2DataImporter importer = new()
         {
             Level = _levelInstance.Data,
             LevelName = _levelInstance.Name,

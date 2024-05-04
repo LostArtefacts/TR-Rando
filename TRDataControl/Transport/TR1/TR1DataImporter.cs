@@ -9,13 +9,13 @@ using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Transport;
 
-public class TR1ModelImporter : AbstractTRModelImporter<TR1Type, TR1Level, TR1ModelDefinition>
+public class TR1DataImporter : TRDataImporter<TR1Type, TR1Level, TR1Blob>
 {
     public TRPalette8Control PaletteManager { get; set; }
 
-    public TR1ModelImporter(bool isCommunityPatch = false)
+    public TR1DataImporter(bool isCommunityPatch = false)
     {
-        Data = new TR1DefaultDataProvider();
+        Data = new TR1DataProvider();
         SortModels = true;
         PaletteManager = new();
 
@@ -26,7 +26,7 @@ public class TR1ModelImporter : AbstractTRModelImporter<TR1Type, TR1Level, TR1Mo
         }
     }
 
-    protected override AbstractTextureImportHandler<TR1Type, TR1Level, TR1ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureImportHandler<TR1Type, TR1Level, TR1Blob> CreateTextureHandler()
     {
         return new TR1TextureImportHandler();
     }
@@ -36,7 +36,7 @@ public class TR1ModelImporter : AbstractTRModelImporter<TR1Type, TR1Level, TR1Mo
         return Level.Models.Keys.ToList();
     }
 
-    protected override void Import(IEnumerable<TR1ModelDefinition> standardDefinitions, IEnumerable<TR1ModelDefinition> soundOnlyDefinitions)
+    protected override void Import(IEnumerable<TR1Blob> standardDefinitions, IEnumerable<TR1Blob> soundOnlyDefinitions)
     {
         TR1TextureRemapGroup remap = null;
         if (TextureRemapPath != null)
@@ -57,7 +57,7 @@ public class TR1ModelImporter : AbstractTRModelImporter<TR1Type, TR1Level, TR1Mo
 
         Dictionary<TR1Type, TR1Type> aliasPriority = Data.AliasPriority ?? new Dictionary<TR1Type, TR1Type>();
 
-        foreach (TR1ModelDefinition definition in standardDefinitions)
+        foreach (TR1Blob definition in standardDefinitions)
         {
             if (!IgnoreGraphics)
             {

@@ -7,14 +7,14 @@ using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Transport;
 
-public class TR2ModelImporter : AbstractTRModelImporter<TR2Type, TR2Level, TR2ModelDefinition>
+public class TR2DataImporter : TRDataImporter<TR2Type, TR2Level, TR2Blob>
 {
-    public TR2ModelImporter()
+    public TR2DataImporter()
     {
-        Data = new TR2DefaultDataProvider();
+        Data = new TR2DataProvider();
     }
 
-    protected override AbstractTextureImportHandler<TR2Type, TR2Level, TR2ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureImportHandler<TR2Type, TR2Level, TR2Blob> CreateTextureHandler()
     {
         return new TR2TextureImportHandler();
     }
@@ -24,7 +24,7 @@ public class TR2ModelImporter : AbstractTRModelImporter<TR2Type, TR2Level, TR2Mo
         return Level.Models.Keys.ToList();
     }
 
-    protected override void Import(IEnumerable<TR2ModelDefinition> standardDefinitions, IEnumerable<TR2ModelDefinition> soundOnlyDefinitions)
+    protected override void Import(IEnumerable<TR2Blob> standardDefinitions, IEnumerable<TR2Blob> soundOnlyDefinitions)
     {
         // Textures first, which will remap Mesh rectangles/triangles to the new texture indices.
         // This is called using the entire entity list to import so that RectanglePacker packer has
@@ -47,7 +47,7 @@ public class TR2ModelImporter : AbstractTRModelImporter<TR2Type, TR2Level, TR2Mo
         // Allow external alias model priorities to be defined
         Dictionary<TR2Type, TR2Type> aliasPriority = Data.AliasPriority ?? new Dictionary<TR2Type, TR2Type>();
 
-        foreach (TR2ModelDefinition definition in standardDefinitions)
+        foreach (TR2Blob definition in standardDefinitions)
         {
             if (!IgnoreGraphics)
             {

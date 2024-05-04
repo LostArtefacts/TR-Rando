@@ -5,7 +5,7 @@ using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Model;
 
-public abstract class AbstractTRModelDefinition<E> : IDisposable where E : Enum
+public abstract class TRBlobBase<E> : IDisposable where E : Enum
 {
     [JsonIgnore]
     public E Entity { get; set; }

@@ -5,21 +5,21 @@ using TRModelTransporter.Model.Definitions;
 
 namespace TRModelTransporter.Transport;
 
-public class TR3ModelExporter : AbstractTRModelExporter<TR3Type, TR3Level, TR3ModelDefinition>
+public class TR3DataExporter : TRDataExporter<TR3Type, TR3Level, TR3Blob>
 {
-    public TR3ModelExporter()
+    public TR3DataExporter()
     {
-        Data = new TR3DefaultDataProvider();
+        Data = new TR3DataProvider();
     }
 
-    protected override AbstractTextureExportHandler<TR3Type, TR3Level, TR3ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureExportHandler<TR3Type, TR3Level, TR3Blob> CreateTextureHandler()
     {
         return new TR3TextureExportHandler();
     }
 
-    protected override TR3ModelDefinition CreateModelDefinition(TR3Level level, TR3Type modelEntity)
+    protected override TR3Blob CreateModelDefinition(TR3Level level, TR3Type modelEntity)
     {
-        TR3ModelDefinition definition = new()
+        TR3Blob definition = new()
         {
             Alias = modelEntity
         };

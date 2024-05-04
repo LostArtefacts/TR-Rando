@@ -1,11 +1,11 @@
-﻿using TRLevelControl.Model;
+﻿using TRImageControl.Packing;
+using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
-using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Handlers;
 
-public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Type, TR3Level, TR3ModelDefinition>
+public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Type, TR3Level, TR3Blob>
 {
     protected override TRDictionary<TR3Type, TRSpriteSequence> GetExistingSpriteSequences()
     {
@@ -73,9 +73,9 @@ public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Type, TR3
         return _level.GetInvalidObjectTextureIndices();
     }
 
-    protected override void RemapMeshTextures(Dictionary<TR3ModelDefinition, Dictionary<int, int>> indexMap)
+    protected override void RemapMeshTextures(Dictionary<TR3Blob, Dictionary<int, int>> indexMap)
     {
-        foreach (TR3ModelDefinition definition in indexMap.Keys)
+        foreach (TR3Blob definition in indexMap.Keys)
         {
             foreach (TRMesh mesh in definition.Meshes)
             {
@@ -92,7 +92,7 @@ public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Type, TR3
         _level.ResetUnusedTextures();
     }
 
-    protected override IEnumerable<TR3Type> CollateWatchedTextures(IEnumerable<TR3Type> watchedEntities, TR3ModelDefinition definition)
+    protected override IEnumerable<TR3Type> CollateWatchedTextures(IEnumerable<TR3Type> watchedEntities, TR3Blob definition)
     {
         return new List<TR3Type>();
     }
