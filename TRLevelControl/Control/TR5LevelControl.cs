@@ -119,7 +119,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         uint compressedLength = reader.ReadUInt32();
         Debug.Assert(expectedLength == compressedLength);
 
-        reader.ReadUInt32(); // Unused, always 0
+        _level.Version.LevelNumber = reader.ReadUInt32();
 
         ReadRooms(reader);
 
@@ -149,7 +149,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
     {
         using TRLevelWriter writer = new();
 
-        writer.Write((uint)0); // Unused, always 0
+        writer.Write(_level.Version.LevelNumber);
 
         WriteRooms(writer);
 
