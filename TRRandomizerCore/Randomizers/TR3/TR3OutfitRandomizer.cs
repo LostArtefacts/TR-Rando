@@ -226,7 +226,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
                 laraRemovals.AddRange(_laraRemovals);
             }
 
-            TR3ModelImporter importer = new()
+            TR3DataImporter importer = new()
             {
                 Level = level.Data,
                 LevelName = level.Name,

@@ -10,10 +10,10 @@ using TRTexture16Importer.Textures;
 
 namespace TRModelTransporter.Transport;
 
-public abstract class AbstractTRModelExporter<E, L, D> : AbstractTRModelTransport<E, L, D>
+public abstract class TRDataExporter<E, L, D> : TRDataTransport<E, L, D>
     where E : Enum
     where L : class
-    where D : AbstractTRModelDefinition<E>
+    where D : TRBlobBase<E>
 {
     protected static readonly string _defaultSegmentsFolder = @"Resources\ModelSegments";
 
@@ -24,7 +24,7 @@ public abstract class AbstractTRModelExporter<E, L, D> : AbstractTRModelTranspor
 
     protected AbstractTextureExportHandler<E, L, D> _textureHandler;
 
-    public AbstractTRModelExporter()
+    public TRDataExporter()
     {
         SegmentsDataFolder = _defaultSegmentsFolder;
         _textureHandler = CreateTextureHandler();

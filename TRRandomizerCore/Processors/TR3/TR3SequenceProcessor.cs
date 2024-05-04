@@ -158,7 +158,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         }
 
         List<TR3Type> upvImport = new() { TR3Type.UPV };
-        TR3ModelImporter importer = new()
+        TR3DataImporter importer = new()
         {
             Level = level.Data,
             LevelName = level.Name,
@@ -245,7 +245,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
         if (imports.Count > 0)
         {
-            TR3ModelImporter importer = new()
+            TR3DataImporter importer = new()
             {
                 Level = level.Data,
                 LevelName = level.Name,

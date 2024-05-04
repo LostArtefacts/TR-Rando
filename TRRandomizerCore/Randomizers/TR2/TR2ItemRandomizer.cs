@@ -612,7 +612,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             return;
         }
 
-        TR2ModelImporter importer = new()
+        TR2DataImporter importer = new()
         {
             Level = _levelInstance.Data,
             LevelName = _levelInstance.Name,

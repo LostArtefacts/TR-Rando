@@ -823,7 +823,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                     TRSecretModelAllocation<TR1Type> allocation = _importAllocations[level];
 
                     // Get the artefacts into the level and refresh the model list
-                    TR1ModelImporter importer = new(true)
+                    TR1DataImporter importer = new(true)
                     {
                         Level = level.Data,
                         LevelName = level.Name,

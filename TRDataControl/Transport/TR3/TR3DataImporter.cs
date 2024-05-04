@@ -7,15 +7,15 @@ using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Transport;
 
-public class TR3ModelImporter : AbstractTRModelImporter<TR3Type, TR3Level, TR3ModelDefinition>
+public class TR3DataImporter : TRDataImporter<TR3Type, TR3Level, TR3Blob>
 {
-    public TR3ModelImporter()
+    public TR3DataImporter()
     {
-        Data = new TR3DefaultDataProvider();
+        Data = new TR3DataProvider();
         SortModels = true;
     }
 
-    protected override AbstractTextureImportHandler<TR3Type, TR3Level, TR3ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureImportHandler<TR3Type, TR3Level, TR3Blob> CreateTextureHandler()
     {
         return new TR3TextureImportHandler();
     }
@@ -25,7 +25,7 @@ public class TR3ModelImporter : AbstractTRModelImporter<TR3Type, TR3Level, TR3Mo
         return Level.Models.Keys.ToList();
     }
 
-    protected override void Import(IEnumerable<TR3ModelDefinition> standardDefinitions, IEnumerable<TR3ModelDefinition> soundOnlyDefinitions)
+    protected override void Import(IEnumerable<TR3Blob> standardDefinitions, IEnumerable<TR3Blob> soundOnlyDefinitions)
     {
         TR3TextureRemapGroup remap = null;
         if (TextureRemapPath != null)
@@ -42,7 +42,7 @@ public class TR3ModelImporter : AbstractTRModelImporter<TR3Type, TR3Level, TR3Mo
 
         Dictionary<TR3Type, TR3Type> aliasPriority = Data.AliasPriority ?? new Dictionary<TR3Type, TR3Type>();
 
-        foreach (TR3ModelDefinition definition in standardDefinitions)
+        foreach (TR3Blob definition in standardDefinitions)
         {
             if (!IgnoreGraphics)
             {

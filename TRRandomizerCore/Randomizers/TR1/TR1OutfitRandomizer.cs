@@ -300,7 +300,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private void ImportBraid(TR1CombinedLevel level)
         {
-            TR1ModelImporter importer = new(true)
+            TR1DataImporter importer = new(true)
             {
                 Level = level.Data,
                 LevelName = level.Name,
@@ -696,7 +696,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 }
             }
 
-            TR1ModelImporter importer = new(true)
+            TR1DataImporter importer = new(true)
             {
                 Level = level.Data,
                 LevelName = level.Name,
@@ -877,7 +877,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             if (level.HasCutScene && !level.Is(TR1LevelNames.MINES))
             {
-                TR1ModelImporter importer = new(true)
+                TR1DataImporter importer = new(true)
                 {
                     Level = level.CutSceneLevel.Data,
                     LevelName = level.CutSceneLevel.Name,

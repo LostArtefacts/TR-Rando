@@ -727,7 +727,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 if (!level.IsAssault)
                 {
                     EnemyTransportCollection enemies = _enemyMapping[level];
-                    TR3ModelImporter importer = new()
+                    TR3DataImporter importer = new()
                     {
                         EntitiesToImport = enemies.EntitiesToImport,
                         EntitiesToRemove = enemies.EntitiesToRemove,

@@ -252,7 +252,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 laraRemovals.AddRange(_laraRemovals);
             }
             
-            TR2ModelImporter importer = new()
+            TR2DataImporter importer = new()
             {
                 Level = level.Data,
                 LevelName = level.Name,

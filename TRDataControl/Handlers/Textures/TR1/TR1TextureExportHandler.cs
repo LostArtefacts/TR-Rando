@@ -4,7 +4,7 @@ using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Handlers.Textures;
 
-public class TR1TextureExportHandler : AbstractTextureExportHandler<TR1Type, TR1Level, TR1ModelDefinition>
+public class TR1TextureExportHandler : AbstractTextureExportHandler<TR1Type, TR1Level, TR1Blob>
 {
     protected override AbstractTexturePacker<TR1Type, TR1Level> CreatePacker()
     {

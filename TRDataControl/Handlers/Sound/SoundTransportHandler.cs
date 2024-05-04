@@ -5,7 +5,7 @@ namespace TRModelTransporter.Handlers;
 
 public class SoundTransportHandler
 {
-    public static void Export(TR1Level level, TR1ModelDefinition definition, short[] hardcodedSounds)
+    public static void Export(TR1Level level, TR1Blob definition, short[] hardcodedSounds)
     {
         if (hardcodedSounds == null || hardcodedSounds.Length == 0)
         {
@@ -23,7 +23,7 @@ public class SoundTransportHandler
         }
     }
 
-    public static void Export(TR2Level level, TR2ModelDefinition definition, short[] hardcodedSounds)
+    public static void Export(TR2Level level, TR2Blob definition, short[] hardcodedSounds)
     {
         if (hardcodedSounds == null || hardcodedSounds.Length == 0)
         {
@@ -41,7 +41,7 @@ public class SoundTransportHandler
         }
     }
 
-    public static void Export(TR3Level level, TR3ModelDefinition definition, short[] hardcodedSounds)
+    public static void Export(TR3Level level, TR3Blob definition, short[] hardcodedSounds)
     {
         if (hardcodedSounds == null || hardcodedSounds.Length == 0)
         {
@@ -59,9 +59,9 @@ public class SoundTransportHandler
         }
     }
 
-    public static void Import(TR1Level level, IEnumerable<TR1ModelDefinition> definitions)
+    public static void Import(TR1Level level, IEnumerable<TR1Blob> definitions)
     {
-        foreach (TR1ModelDefinition definition in definitions)
+        foreach (TR1Blob definition in definitions)
         {
             if (definition.SoundEffects == null)
             {
@@ -75,9 +75,9 @@ public class SoundTransportHandler
         }
     }
 
-    public static void Import(TR2Level level, IEnumerable<TR2ModelDefinition> definitions)
+    public static void Import(TR2Level level, IEnumerable<TR2Blob> definitions)
     {
-        foreach (TR2ModelDefinition definition in definitions)
+        foreach (TR2Blob definition in definitions)
         {
             if (definition.SoundEffects == null)
             {
@@ -91,9 +91,9 @@ public class SoundTransportHandler
         }
     }
 
-    public static void Import(TR3Level level, IEnumerable<TR3ModelDefinition> definitions)
+    public static void Import(TR3Level level, IEnumerable<TR3Blob> definitions)
     {
-        foreach (TR3ModelDefinition definition in definitions)
+        foreach (TR3Blob definition in definitions)
         {
             if (definition.SoundEffects == null)
             {

@@ -1234,8 +1234,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (level.Data.Models.ContainsKey(TR1Type.Pierre)
             && (level.Is(TR1LevelNames.FOLLY) || level.Is(TR1LevelNames.COLOSSEUM) || level.Is(TR1LevelNames.CISTERN) || level.Is(TR1LevelNames.TIHOCAN)))
         {
-            TR1ModelExporter.AmendPierreGunshot(level.Data);
-            TR1ModelExporter.AmendPierreDeath(level.Data);
+            TR1DataExporter.AmendPierreGunshot(level.Data);
+            TR1DataExporter.AmendPierreDeath(level.Data);
 
             // Non one-shot-Pierre levels won't have the death sound by default, so borrow it from ToT.
             if (!level.Data.SoundEffects.ContainsKey(TR1SFX.PierreDeath))
@@ -1247,17 +1247,17 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         if (level.Data.Models.ContainsKey(TR1Type.Larson) && level.Is(TR1LevelNames.SANCTUARY))
         {
-            TR1ModelExporter.AmendLarsonDeath(level.Data);
+            TR1DataExporter.AmendLarsonDeath(level.Data);
         }
 
         if (level.Data.Models.ContainsKey(TR1Type.SkateboardKid) && level.Is(TR1LevelNames.MINES))
         {
-            TR1ModelExporter.AmendSkaterBoyDeath(level.Data);
+            TR1DataExporter.AmendSkaterBoyDeath(level.Data);
         }
 
         if (level.Data.Models.ContainsKey(TR1Type.Natla) && level.Is(TR1LevelNames.PYRAMID))
         {
-            TR1ModelExporter.AmendNatlaDeath(level.Data);
+            TR1DataExporter.AmendNatlaDeath(level.Data);
         }
     }
 
@@ -1369,7 +1369,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         importModels.Add(TR1Type.Missile3_H);
                     }
 
-                    TR1ModelImporter importer = new(true)
+                    TR1DataImporter importer = new(true)
                     {
                         EntitiesToImport = importModels,
                         EntitiesToRemove = enemies.EntitiesToRemove,

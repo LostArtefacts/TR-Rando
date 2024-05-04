@@ -3,15 +3,15 @@ using TRModelTransporter.Transport;
 
 namespace TRModelTransporter.Utilities;
 
-public abstract class AbstractMassTRModelExporter<E, L, D>
+public abstract class TRMassExporter<E, L, D>
     where E : Enum
     where L : class
-    where D : AbstractTRModelDefinition<E>
+    where D : TRBlobBase<E>
 {
     public abstract List<string> LevelNames { get; }
     public abstract Dictionary<string, List<E>> ExportTypes { get; }
 
-    private AbstractTRModelExporter<E, L, D> _exporter;
+    private TRDataExporter<E, L, D> _exporter;
     private List<E> _processedEntities;
 
     public void Export(string levelFileDirectory, string exportDirectory, string segmentsDirectory = null)
@@ -54,6 +54,6 @@ public abstract class AbstractMassTRModelExporter<E, L, D>
         }
     }
 
-    protected abstract AbstractTRModelExporter<E, L, D> CreateExporter();
+    protected abstract TRDataExporter<E, L, D> CreateExporter();
     protected abstract L ReadLevel(string path);
 }

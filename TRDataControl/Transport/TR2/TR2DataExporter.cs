@@ -6,21 +6,21 @@ using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Transport;
 
-public class TR2ModelExporter : AbstractTRModelExporter<TR2Type, TR2Level, TR2ModelDefinition>
+public class TR2DataExporter : TRDataExporter<TR2Type, TR2Level, TR2Blob>
 {
-    public TR2ModelExporter()
+    public TR2DataExporter()
     {
-        Data = new TR2DefaultDataProvider();
+        Data = new TR2DataProvider();
     }
 
-    protected override AbstractTextureExportHandler<TR2Type, TR2Level, TR2ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureExportHandler<TR2Type, TR2Level, TR2Blob> CreateTextureHandler()
     {
         return new TR2TextureExportHandler();
     }
 
-    protected override TR2ModelDefinition CreateModelDefinition(TR2Level level, TR2Type modelEntity)
+    protected override TR2Blob CreateModelDefinition(TR2Level level, TR2Type modelEntity)
     {
-        TR2ModelDefinition definition = new()
+        TR2Blob definition = new()
         {
             Alias = modelEntity
         };
@@ -39,7 +39,7 @@ public class TR2ModelExporter : AbstractTRModelExporter<TR2Type, TR2Level, TR2Mo
         return definition;
     }
 
-    protected override void ModelExportReady(TR2ModelDefinition definition)
+    protected override void ModelExportReady(TR2Blob definition)
     {
         switch (definition.Alias)
         {
@@ -56,7 +56,7 @@ public class TR2ModelExporter : AbstractTRModelExporter<TR2Type, TR2Level, TR2Mo
         }
     }
 
-    private static void AmendDXtre3DFlameTextures(TR2ModelDefinition definition)
+    private static void AmendDXtre3DFlameTextures(TR2Blob definition)
     {
         if (!definition.SpriteSequences.ContainsKey(TR2Type.Flame_S_H))
         {

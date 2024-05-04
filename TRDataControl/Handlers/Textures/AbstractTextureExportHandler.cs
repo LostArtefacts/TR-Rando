@@ -12,7 +12,7 @@ namespace TRModelTransporter.Handlers;
 public abstract class AbstractTextureExportHandler<E, L, D>
     where E : Enum
     where L : class
-    where D : AbstractTRModelDefinition<E>
+    where D : TRBlobBase<E>
 {
     protected const int _exportBitmapWidth = 320;
     protected const int _exportBitmapHeight = 640;

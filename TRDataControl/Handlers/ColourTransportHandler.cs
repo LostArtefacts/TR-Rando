@@ -6,17 +6,17 @@ namespace TRModelTransporter.Handlers;
 
 public class ColourTransportHandler
 {
-    public static void Export(TR1Level level, TR1ModelDefinition definition)
+    public static void Export(TR1Level level, TR1Blob definition)
     {
         definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette);
     }
 
-    public static void Export(TR2Level level, TR2ModelDefinition definition)
+    public static void Export(TR2Level level, TR2Blob definition)
     {
         definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
     }
 
-    public static void Export(TR3Level level, TR3ModelDefinition definition)
+    public static void Export(TR3Level level, TR3Blob definition)
     {
         definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
     }
@@ -61,7 +61,7 @@ public class ColourTransportHandler
         return colourIndices;
     }
 
-    public static void Import(TR1ModelDefinition definition, TRPalette8Control paletteManager)
+    public static void Import(TR1Blob definition, TRPalette8Control paletteManager)
     {
         Dictionary<int, int> indexMap = new();
 
@@ -75,7 +75,7 @@ public class ColourTransportHandler
         ReindexMeshTextures(definition.Meshes, indexMap, false);
     }
 
-    public static void Import(TR2Level level, TR2ModelDefinition definition)
+    public static void Import(TR2Level level, TR2Blob definition)
     {
         Dictionary<int, int> indexMap = new();
         TRPalette16Control tracker = new(level);
@@ -89,7 +89,7 @@ public class ColourTransportHandler
         ReindexMeshTextures(definition.Meshes, indexMap, true);
     }
 
-    public static void Import(TR3Level level, TR3ModelDefinition definition)
+    public static void Import(TR3Level level, TR3Blob definition)
     {
         Dictionary<int, int> indexMap = new();
         TRPalette16Control tracker = new(level);

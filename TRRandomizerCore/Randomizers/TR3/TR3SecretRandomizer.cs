@@ -747,7 +747,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
                     // Get the artefacts into the level and refresh the model list
                     TextureMonitor<TR3Type> monitor = _outer.TextureMonitor.CreateMonitor(level.Name, allocation.ImportModels);
-                    TR3ModelImporter importer = new()
+                    TR3DataImporter importer = new()
                     {
                         Level = level.Data,
                         LevelName = level.Name,

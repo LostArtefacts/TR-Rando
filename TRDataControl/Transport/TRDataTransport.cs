@@ -7,16 +7,16 @@ using TRModelTransporter.Model;
 
 namespace TRModelTransporter.Transport;
 
-public abstract class AbstractTRModelTransport<E, L, D> 
+public abstract class TRDataTransport<E, L, D> 
     where E : Enum
     where L : class
-    where D : AbstractTRModelDefinition<E>
+    where D : TRBlobBase<E>
 {
     protected static readonly string _defaultDataFolder = @"Resources\Models";
     protected static readonly string _dataFileName = "Data.json";
     protected static readonly string _imageFileName = "Segments.png";
 
-    public ITransportDataProvider<E> Data { get; set; }
+    public IDataProvider<E> Data { get; set; }
     public L Level { get; set; }
 
     public string LevelName { get; set; }
@@ -28,7 +28,7 @@ public abstract class AbstractTRModelTransport<E, L, D>
     protected readonly ColourTransportHandler _colourHandler;
     protected readonly SoundTransportHandler _soundHandler;
 
-    public AbstractTRModelTransport()
+    public TRDataTransport()
     {
         DataFolder = _defaultDataFolder;
 

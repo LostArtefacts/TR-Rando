@@ -12,9 +12,9 @@ namespace TRModelTransporter.Handlers;
 public abstract class AbstractTextureImportHandler<E, L, D>
     where E : Enum
     where L : class
-    where D : AbstractTRModelDefinition<E>
+    where D : TRBlobBase<E>
 {
-    public ITransportDataProvider<E> Data { get; set; }
+    public IDataProvider<E> Data { get; set; }
 
     protected Dictionary<D, List<TexturedTileSegment>> _importSegments;
 

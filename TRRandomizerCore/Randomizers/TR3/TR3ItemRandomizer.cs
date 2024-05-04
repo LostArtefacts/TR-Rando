@@ -95,7 +95,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         // #312 We need all item models plus Lara's associated weapon animations for the
         // assault course. The DEagle and Uzi anims will match Lara's default home outfit
         // - outfit rando will take care of replacing these if it's enabled.
-        TR3ModelImporter importer = new()
+        TR3DataImporter importer = new()
         {
             Level = level.Data,
             LevelName = level.Name,

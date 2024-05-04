@@ -4,10 +4,10 @@ using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Transport;
 
-public abstract class AbstractTRModelImporter<E, L, D> : AbstractTRModelTransport<E, L, D> 
+public abstract class TRDataImporter<E, L, D> : TRDataTransport<E, L, D> 
     where E : Enum
     where L : class
-    where D : AbstractTRModelDefinition<E>
+    where D : TRBlobBase<E>
 {
     public IEnumerable<E> EntitiesToImport { get; set; }
     public IEnumerable<E> EntitiesToRemove { get; set; }
@@ -20,7 +20,7 @@ public abstract class AbstractTRModelImporter<E, L, D> : AbstractTRModelTranspor
 
     protected AbstractTextureImportHandler<E, L, D> _textureHandler;
 
-    public AbstractTRModelImporter()
+    public TRDataImporter()
     {
         EntitiesToImport = new List<E>();
         EntitiesToRemove = new List<E>();

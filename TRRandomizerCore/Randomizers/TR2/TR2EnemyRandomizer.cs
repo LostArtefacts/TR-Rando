@@ -1027,7 +1027,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             {
                 // The importer will handle any duplication between the entities to import and 
                 // remove so just pass the unfiltered lists to it.
-                TR2ModelImporter importer = new()
+                TR2DataImporter importer = new()
                 {
                     ClearUnusedSprites = true,
                     EntitiesToImport = enemies.EntitiesToImport,

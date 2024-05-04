@@ -243,7 +243,7 @@ public class DynamicTextureBuilder
 
         if (modelID == TR1Type.Adam)
         {                
-            TR1ModelDefinition adam = new TR1ModelImporter
+            TR1Blob adam = new TR1DataImporter
             {
                 DataFolder = @"Resources\TR1\Models"
             }.LoadDefinition(modelID);

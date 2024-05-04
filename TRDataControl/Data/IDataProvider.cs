@@ -1,6 +1,6 @@
 ﻿namespace TRModelTransporter.Data;
 
-public interface ITransportDataProvider<E> where E : Enum
+public interface IDataProvider<E> where E : Enum
 {
     int TextureTileLimit { get; set; }
     int TextureObjectLimit { get; set; }

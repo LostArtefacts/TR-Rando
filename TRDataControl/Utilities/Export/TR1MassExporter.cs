@@ -6,7 +6,7 @@ using TRModelTransporter.Transport;
 
 namespace TRModelTransporter.Utilities;
 
-public class MassTR1ModelExporter : AbstractMassTRModelExporter<TR1Type, TR1Level, TR1ModelDefinition>
+public class TR1MassExporter : TRMassExporter<TR1Type, TR1Level, TR1Blob>
 {
     private static readonly List<string> _sourceLevels = TR1LevelNames.AsListWithAssault.Concat(new List<string>
     {
@@ -20,14 +20,14 @@ public class MassTR1ModelExporter : AbstractMassTRModelExporter<TR1Type, TR1Leve
 
     private readonly TR1LevelControl _reader;
 
-    public MassTR1ModelExporter()
+    public TR1MassExporter()
     {
         _reader = new();
     }
 
-    protected override AbstractTRModelExporter<TR1Type, TR1Level, TR1ModelDefinition> CreateExporter()
+    protected override TRDataExporter<TR1Type, TR1Level, TR1Blob> CreateExporter()
     {
-        return new TR1ModelExporter();
+        return new TR1DataExporter();
     }
 
     protected override TR1Level ReadLevel(string path)

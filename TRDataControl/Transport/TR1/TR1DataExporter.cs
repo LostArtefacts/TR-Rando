@@ -8,21 +8,21 @@ using TRModelTransporter.Model.Definitions;
 
 namespace TRModelTransporter.Transport;
 
-public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1ModelDefinition>
+public class TR1DataExporter : TRDataExporter<TR1Type, TR1Level, TR1Blob>
 {
-    public TR1ModelExporter()
+    public TR1DataExporter()
     {
-        Data = new TR1DefaultDataProvider();
+        Data = new TR1DataProvider();
     }
 
-    protected override AbstractTextureExportHandler<TR1Type, TR1Level, TR1ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureExportHandler<TR1Type, TR1Level, TR1Blob> CreateTextureHandler()
     {
         return new TR1TextureExportHandler();
     }
 
-    protected override TR1ModelDefinition CreateModelDefinition(TR1Level level, TR1Type modelEntity)
+    protected override TR1Blob CreateModelDefinition(TR1Level level, TR1Type modelEntity)
     {
-        TR1ModelDefinition definition = new()
+        TR1Blob definition = new()
         {
             Alias = modelEntity
         };
@@ -64,7 +64,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1Mo
         }
     }
 
-    protected override void ModelExportReady(TR1ModelDefinition definition)
+    protected override void ModelExportReady(TR1Blob definition)
     {
         switch (definition.Alias)
         {
