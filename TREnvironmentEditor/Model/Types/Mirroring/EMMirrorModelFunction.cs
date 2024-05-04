@@ -81,7 +81,7 @@ public class EMMirrorModelFunction : BaseEMFunction
     {
         foreach (ushort textureRef in textureReferences)
         {
-            objectTextures[textureRef].FlipHorizontal();
+            objectTextures[textureRef].FlipVertical();
         }
     }
 }
