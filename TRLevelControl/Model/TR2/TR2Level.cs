@@ -15,7 +15,7 @@ public class TR2Level : TRLevelBase
     public List<byte> LightMap { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }
     public TRDemoData<TR2DemoGun, TR2InputState> DemoData { get; set; }
-    public SortedDictionary<TR2SFX, TR2SoundEffect> SoundEffects { get; set; }
+    public TRDictionary<TR2SFX, TR2SoundEffect> SoundEffects { get; set; }
 
     public override IEnumerable<TRMesh> DistinctMeshes => Models.Values.SelectMany(m => m.Meshes)
         .Concat(StaticMeshes.Values.Select(s => s.Mesh))
