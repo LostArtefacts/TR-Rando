@@ -63,9 +63,17 @@ public static class TextureUtilities
 
         List<byte> pixelCollection = new();
 
-        foreach (Textile16Pixel px in tex.To32BPPFormat())
+        foreach (ushort px in tex.Pixels)
         {
-            pixelCollection.AddRange(px.RGB32);
+            int b = (px & 0x001F) * 255 / 31;
+            int g = ((px & 0x03E0) >> 5) * 255 / 31;
+            int r = ((px & 0x7C00) >> 10) * 255 / 31;
+            int a = ((px & 0x8000) >> 15) == 1 ? 0xFF : 0x00;
+
+            pixelCollection.Add((byte)b);
+            pixelCollection.Add((byte)g);
+            pixelCollection.Add((byte)r);
+            pixelCollection.Add((byte)a);
         }
 
         Marshal.Copy(pixelCollection.ToArray(), 0, bitmapData.Scan0, pixelCollection.Count);
