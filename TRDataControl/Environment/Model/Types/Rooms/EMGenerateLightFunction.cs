@@ -1,8 +1,7 @@
 ﻿using System.Numerics;
-using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public class EMGenerateLightFunction : BaseEMFunction
 {

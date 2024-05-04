@@ -1,8 +1,7 @@
-﻿using TREnvironmentEditor.Helpers;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Conditions;
+namespace TRDataControl.Environment;
 
 public class EMSectorIsWallCondition : BaseEMCondition
 {

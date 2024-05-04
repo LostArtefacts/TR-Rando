@@ -1,7 +1,6 @@
-﻿using TREnvironmentEditor.Helpers;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Conditions;
+namespace TRDataControl.Environment;
 
 public class EMSectorContainsSecretCondition : BaseEMCondition
 {

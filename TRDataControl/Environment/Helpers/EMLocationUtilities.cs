@@ -1,7 +1,7 @@
 ﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Helpers;
+namespace TRDataControl.Environment;
 
 public static class EMLocationUtilities
 {

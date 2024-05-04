@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
-using TREnvironmentEditor.Model;
-using TREnvironmentEditor.Parsing;
+using TRDataControl.Environment.Parsing;
 
-namespace TREnvironmentEditor;
+namespace TRDataControl.Environment;
 
 public class EMEditorMapping
 {

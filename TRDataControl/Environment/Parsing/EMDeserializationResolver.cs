@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using TREnvironmentEditor.Model;
 
-namespace TREnvironmentEditor.Parsing;
+namespace TRDataControl.Environment.Parsing;
 
 public class EMDeserializationResolver : DefaultContractResolver
 {

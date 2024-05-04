@@ -4,7 +4,7 @@ using TRLevelControl.Model;
 using TRTexture16Importer;
 using TRTexture16Importer.Helpers;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public class EMImportTextureFunction : BaseEMFunction
 {

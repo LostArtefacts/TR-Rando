@@ -1,4 +1,4 @@
-﻿namespace TREnvironmentEditor.Model;
+﻿namespace TRDataControl.Environment;
 
 public enum EMType
 {

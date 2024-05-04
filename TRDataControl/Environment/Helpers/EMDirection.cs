@@ -1,4 +1,4 @@
-﻿namespace TREnvironmentEditor.Helpers;
+﻿namespace TRDataControl.Environment;
 
 public enum Direction
 {

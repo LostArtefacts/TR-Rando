@@ -1,6 +1,6 @@
 ﻿using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Conditions;
+namespace TRDataControl.Environment;
 
 public class EMEntityPropertyCondition : BaseEMCondition
 {

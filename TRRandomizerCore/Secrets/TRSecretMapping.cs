@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using TREnvironmentEditor;
+using TRDataControl.Environment;
 
 namespace TRRandomizerCore.Secrets;
 

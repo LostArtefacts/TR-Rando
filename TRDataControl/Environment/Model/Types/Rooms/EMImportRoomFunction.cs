@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
-using TREnvironmentEditor.Helpers;
 using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 {
