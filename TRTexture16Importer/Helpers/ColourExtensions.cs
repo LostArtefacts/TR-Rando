@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRTexture16Importer.Helpers;
@@ -151,8 +150,7 @@ public static class ColourExtensions
 
     public static Color ToTR1Color(this TRColour c)
     {
-        int multiplier = TRConsts.Palette8Multiplier;
-        return Color.FromArgb(c.Red * multiplier, c.Green * multiplier, c.Blue * multiplier);
+        return Color.FromArgb(c.Red, c.Green, c.Blue);
     }
 
     public static Color ToColor(this TRColour4 c)
@@ -162,12 +160,11 @@ public static class ColourExtensions
 
     public static TRColour ToTRColour(this Color c)
     {
-        int divisor = TRConsts.Palette8Multiplier;
         return new()
         {
-            Red = (byte)(c.R / divisor),
-            Green = (byte)(c.G / divisor),
-            Blue = (byte)(c.B / divisor)
+            Red = c.R,
+            Green = c.G,
+            Blue = c.B
         };
     }
 

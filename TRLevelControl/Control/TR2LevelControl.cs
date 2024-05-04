@@ -111,7 +111,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
     private void ReadPalette(TRLevelReader reader)
     {
-        _level.Palette = reader.ReadColours(TRConsts.PaletteSize);
+        _level.Palette = reader.ReadColours(TRConsts.PaletteSize, TRConsts.Palette8Multiplier);
         _level.Palette16 = reader.ReadColour4s(TRConsts.PaletteSize);
     }
 
@@ -119,7 +119,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
     {
         Debug.Assert(_level.Palette.Count == TRConsts.PaletteSize);
         Debug.Assert(_level.Palette16.Count == TRConsts.PaletteSize);
-        writer.Write(_level.Palette);
+        writer.Write(_level.Palette, TRConsts.Palette8Multiplier);
         writer.Write(_level.Palette16);
     }
 

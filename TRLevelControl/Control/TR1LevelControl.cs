@@ -269,13 +269,13 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
     private void ReadPalette(TRLevelReader reader)
     {
-        _level.Palette = reader.ReadColours(TRConsts.PaletteSize);
+        _level.Palette = reader.ReadColours(TRConsts.PaletteSize, TRConsts.Palette8Multiplier);
     }
 
     private void WritePalette(TRLevelWriter writer)
     {
         Debug.Assert(_level.Palette.Count == TRConsts.PaletteSize);
-        writer.Write(_level.Palette);
+        writer.Write(_level.Palette, TRConsts.Palette8Multiplier);
     }
 
     private void ReadCinematicFrames(TRLevelReader reader)
