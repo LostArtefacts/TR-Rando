@@ -14,7 +14,7 @@ public class TR2Level : TRLevelBase
     public List<TR2Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }
     public List<TRCinematicFrame> CinematicFrames { get; set; }
-    public byte[] DemoData { get; set; }
+    public TRDemoData<TR2DemoGun, TR2InputState> DemoData { get; set; }
     public SortedDictionary<TR2SFX, TR2SoundEffect> SoundEffects { get; set; }
 
     public override IEnumerable<TRMesh> DistinctMeshes => Models.Values.SelectMany(m => m.Meshes)

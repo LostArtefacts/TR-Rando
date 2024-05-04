@@ -13,7 +13,6 @@ public class TR5Level : TRLevelBase
     public List<TRSoundSource<TR5SFX>> SoundSources { get; set; }
     public List<TR5Entity> Entities { get; set; }
     public List<TR5AIEntity> AIEntities { get; set; }
-    public byte[] DemoData { get; set; }
     public SortedDictionary<TR5SFX, TR4SoundEffect> SoundEffects { get; set; }
 
     public override IEnumerable<TRMesh> DistinctMeshes => Models.Values.SelectMany(m => m.Meshes)

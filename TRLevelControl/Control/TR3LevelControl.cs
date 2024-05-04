@@ -67,8 +67,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         ReadCinematicFrames(reader);
 
-        ushort numDemoData = reader.ReadUInt16();
-        _level.DemoData = reader.ReadBytes(numDemoData);
+        ReadDemoData(reader);
 
         ReadSoundEffects(reader);
     }
@@ -103,8 +102,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         WriteCinematicFrames(writer);
 
-        writer.Write((ushort)_level.DemoData.Length);
-        writer.Write(_level.DemoData);
+        WriteDemoData(writer);
 
         WriteSoundEffects(writer);
     }
@@ -294,6 +292,18 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
     {
         writer.Write((ushort)_level.CinematicFrames.Count);
         writer.Write(_level.CinematicFrames);
+    }
+
+    private void ReadDemoData(TRLevelReader reader)
+    {
+        TRDemoBuilder<TR3DemoGun, TR3InputState> builder = new(TRGameVersion.TR3);
+        _level.DemoData = builder.Read(reader);
+    }
+
+    private void WriteDemoData(TRLevelWriter writer)
+    {
+        TRDemoBuilder<TR3DemoGun, TR3InputState> builder = new(TRGameVersion.TR3);
+        builder.Write(_level.DemoData, writer);
     }
 
     private void ReadSoundEffects(TRLevelReader reader)
