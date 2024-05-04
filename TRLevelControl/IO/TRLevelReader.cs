@@ -457,7 +457,7 @@ public class TRLevelReader : BinaryReader
         }
     }
 
-    public FixedFloat32 ReadFixed32()
+    public TRFixedFloat32 ReadFixed32()
     {
         return new()
         {

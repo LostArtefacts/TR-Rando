@@ -4,10 +4,10 @@ public class TRAnimation : ICloneable
 {
     public byte FrameRate { get; set; }
     public ushort StateID { get; set; }
-    public FixedFloat32 Speed { get; set; }
-    public FixedFloat32 Accel { get; set; }
-    public FixedFloat32 SpeedLateral { get; set; }
-    public FixedFloat32 AccelLateral { get; set; }
+    public TRFixedFloat32 Speed { get; set; }
+    public TRFixedFloat32 Accel { get; set; }
+    public TRFixedFloat32 SpeedLateral { get; set; }
+    public TRFixedFloat32 AccelLateral { get; set; }
     public ushort FrameStart { get; set; }
     public ushort FrameEnd { get; set; }
     public ushort NextAnimation { get; set; }

@@ -11,7 +11,7 @@ public class TR4Level : TRLevelBase
     public List<TRSoundSource<TR4SFX>> SoundSources { get; set; }
     public List<TR4Entity> Entities { get; set; }
     public List<TR4AIEntity> AIEntities { get; set; }
-    public SortedDictionary<TR4SFX, TR4SoundEffect> SoundEffects { get; set; }
+    public TRDictionary<TR4SFX, TR4SoundEffect> SoundEffects { get; set; }
 
     public override IEnumerable<TRMesh> DistinctMeshes => Models.Values.SelectMany(m => m.Meshes)
         .Concat(StaticMeshes.Values.Select(s => s.Mesh))
