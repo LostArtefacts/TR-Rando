@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace TREnvironmentEditor.Parsing;
+namespace TRDataControl.Environment.Parsing;
 
 // https://stackoverflow.com/questions/32571695/order-of-fields-when-serializing-the-derived-class-in-json-net
 public class EMSerializationResolver : DefaultContractResolver

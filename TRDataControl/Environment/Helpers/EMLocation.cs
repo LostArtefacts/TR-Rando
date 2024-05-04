@@ -1,6 +1,6 @@
 ﻿using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Helpers;
+namespace TRDataControl.Environment;
 
 public class EMLocation : ITRLocatable
 {

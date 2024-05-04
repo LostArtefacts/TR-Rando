@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace TREnvironmentEditor.Helpers;
+namespace TRDataControl.Environment;
 
 public class EMMeshTextureData
 {

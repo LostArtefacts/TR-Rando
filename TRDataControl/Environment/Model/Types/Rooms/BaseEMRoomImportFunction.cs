@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public abstract class BaseEMRoomImportFunction : BaseEMFunction
 {

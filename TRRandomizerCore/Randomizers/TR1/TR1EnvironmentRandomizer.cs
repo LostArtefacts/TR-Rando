@@ -1,7 +1,4 @@
-﻿using TREnvironmentEditor;
-using TREnvironmentEditor.Helpers;
-using TREnvironmentEditor.Model;
-using TREnvironmentEditor.Model.Types;
+﻿using TRDataControl.Environment;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;

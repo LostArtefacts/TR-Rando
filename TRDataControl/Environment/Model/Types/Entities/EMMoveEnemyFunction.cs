@@ -1,7 +1,7 @@
 ﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
 {

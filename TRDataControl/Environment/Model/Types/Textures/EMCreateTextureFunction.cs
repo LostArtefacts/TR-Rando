@@ -1,11 +1,10 @@
 ﻿using System.Drawing;
-using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRTexture16Importer.Helpers;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public class EMCreateTextureFunction : BaseEMFunction
 {

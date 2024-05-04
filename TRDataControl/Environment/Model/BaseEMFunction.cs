@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
-using TREnvironmentEditor.Helpers;
 using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model;
+namespace TRDataControl.Environment;
 
 public abstract class BaseEMFunction
 {

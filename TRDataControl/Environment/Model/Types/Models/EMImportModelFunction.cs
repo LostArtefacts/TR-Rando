@@ -1,8 +1,7 @@
-﻿using TREnvironmentEditor.Helpers;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRModelTransporter.Transport;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public class EMImportModelFunction : BaseEMFunction
 {

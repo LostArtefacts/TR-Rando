@@ -1,7 +1,7 @@
 ﻿using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
 {

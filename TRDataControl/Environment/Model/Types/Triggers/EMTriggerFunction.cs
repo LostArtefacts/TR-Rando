@@ -1,9 +1,8 @@
-﻿using TREnvironmentEditor.Helpers;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public class EMTriggerFunction : BaseEMFunction
 {

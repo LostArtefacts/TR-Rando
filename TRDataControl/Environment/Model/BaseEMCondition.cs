@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model;
+namespace TRDataControl.Environment;
 
 public abstract class BaseEMCondition
 {

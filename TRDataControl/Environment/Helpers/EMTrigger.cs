@@ -1,6 +1,6 @@
 ﻿using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Helpers;
+namespace TRDataControl.Environment;
 
 // This is redundant now - to be eliminated
 public class EMTrigger

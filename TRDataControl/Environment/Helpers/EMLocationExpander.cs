@@ -1,6 +1,6 @@
 ﻿using TRLevelControl;
 
-namespace TREnvironmentEditor.Helpers;
+namespace TRDataControl.Environment;
 
 public class EMLocationExpander
 {

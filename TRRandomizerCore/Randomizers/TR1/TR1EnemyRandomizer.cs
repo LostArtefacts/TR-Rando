@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Numerics;
-using TREnvironmentEditor.Model.Types;
+using TRDataControl.Environment;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;

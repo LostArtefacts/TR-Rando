@@ -1,10 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using TREnvironmentEditor.Model;
-using TREnvironmentEditor.Model.Conditions;
-using TREnvironmentEditor.Model.Types;
 
-namespace TREnvironmentEditor.Parsing;
+namespace TRDataControl.Environment.Parsing;
 
 public class EMConverter : JsonConverter
 {

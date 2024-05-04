@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
-using TREnvironmentEditor.Model.Types;
 using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Helpers;
+namespace TRDataControl.Environment;
 
 public class EMTextureGroup
 {

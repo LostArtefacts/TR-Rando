@@ -1,6 +1,4 @@
-﻿using TREnvironmentEditor;
-using TREnvironmentEditor.Helpers;
-using TREnvironmentEditor.Model;
+﻿using TRDataControl.Environment;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 

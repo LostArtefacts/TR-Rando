@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using TREnvironmentEditor.Model;
+using TRDataControl.Environment;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
-using TREnvironmentEditor.Model.Types;
+using TRDataControl.Environment;
 using TRGE.Core;
 using TRGE.Core.Item.Enums;
 using TRLevelControl;

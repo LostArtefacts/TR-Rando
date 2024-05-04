@@ -1,4 +1,4 @@
-﻿namespace TREnvironmentEditor.Helpers;
+﻿namespace TRDataControl.Environment;
 
 // Texture index => room index => rect/tri indices
 public class EMTextureMap : Dictionary<ushort, EMGeometryMap>

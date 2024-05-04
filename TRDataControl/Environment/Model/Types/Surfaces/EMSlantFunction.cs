@@ -1,8 +1,7 @@
-﻿using TREnvironmentEditor.Helpers;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types;
+namespace TRDataControl.Environment;
 
 public class EMSlantFunction : EMClickFunction
 {
