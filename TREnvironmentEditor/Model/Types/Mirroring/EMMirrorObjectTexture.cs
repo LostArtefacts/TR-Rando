@@ -1,5 +1,4 @@
 ﻿using TRLevelControl.Model;
-using TRModelTransporter.Model.Textures;
 
 namespace TREnvironmentEditor.Model.Types;
 
