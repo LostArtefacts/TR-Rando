@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TRDataControl\TRDataControl.csproj" />
-    <ProjectReference Include="..\TREnvironmentEditor\TREnvironmentEditor.csproj" />
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
   </ItemGroup>
 
