@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRRandomizerView", "TRRando
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRRandomizerCore", "TRRandomizerCore\TRRandomizerCore.csproj", "{B657D758-A095-44B5-AEF1-C77C30667DAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRModelTransporter", "TRModelTransporter\TRModelTransporter.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRDataControl", "TRDataControl\TRDataControl.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TREnvironmentEditor", "TREnvironmentEditor\TREnvironmentEditor.csproj", "{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}"
 EndProject

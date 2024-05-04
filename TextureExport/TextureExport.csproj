@@ -14,8 +14,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TRDataControl\TRDataControl.csproj" />
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
-    <ProjectReference Include="..\TRModelTransporter\TRModelTransporter.csproj" />
     <ProjectReference Include="..\TRTexture16Importer\TRTexture16Importer.csproj" />
   </ItemGroup>
   <ItemGroup>
