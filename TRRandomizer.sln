@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextureExport", "TextureExport\TextureExport.csproj", "{108D4840-3E84-466F-B5DE-AF00EECA8103}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRTexture16Importer", "TRTexture16Importer\TRTexture16Importer.csproj", "{29F10C62-F4D8-4ACA-91ED-6920AE3F1AC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRImageControl", "TRImageControl\TRImageControl.csproj", "{29F10C62-F4D8-4ACA-91ED-6920AE3F1AC0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRRandomizerView", "TRRandomizerView\TRRandomizerView.csproj", "{6CE82358-524D-4B12-A514-0903521ED13C}"
 EndProject

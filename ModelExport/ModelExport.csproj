@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\TRDataControl\TRDataControl.csproj" />
+    <ProjectReference Include="..\TRImageControl\TRImageControl.csproj" />
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
-    <ProjectReference Include="..\TRTexture16Importer\TRTexture16Importer.csproj" />
   </ItemGroup>
 </Project>
