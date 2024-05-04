@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Drawing.Imaging;
+using TRImageControl.Packing;
 using TRModelTransporter.Model.Textures;
-using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Utilities;
 

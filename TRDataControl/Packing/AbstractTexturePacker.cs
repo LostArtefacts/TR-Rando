@@ -9,7 +9,7 @@ using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
 using TRTexture16Importer.Helpers;
 
-namespace TRModelTransporter.Packing;
+namespace TRImageControl.Packing;
 
 public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile, TexturedTileSegment>, IDisposable
     where E : Enum

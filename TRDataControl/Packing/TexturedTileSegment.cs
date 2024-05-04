@@ -2,7 +2,7 @@
 using System.Drawing;
 using TRModelTransporter.Model.Textures;
 
-namespace TRModelTransporter.Packing;
+namespace TRImageControl.Packing;
 
 public class TexturedTileSegment : DefaultRectangle, IDisposable
 {

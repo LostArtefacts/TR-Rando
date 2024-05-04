@@ -5,7 +5,7 @@ using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
 using TRTexture16Importer;
 
-namespace TRModelTransporter.Packing;
+namespace TRImageControl.Packing;
 
 public class TR2TexturePacker : AbstractTexturePacker<TR2Type, TR2Level>
 {

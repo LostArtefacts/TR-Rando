@@ -1,7 +1,7 @@
-﻿using TRLevelControl.Model;
+﻿using TRImageControl.Packing;
+using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
-using TRModelTransporter.Packing;
 using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Handlers.Textures;

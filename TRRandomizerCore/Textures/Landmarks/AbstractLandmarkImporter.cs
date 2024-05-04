@@ -1,9 +1,9 @@
 ﻿using RectanglePacker.Events;
 using System.Drawing;
+using TRImageControl.Packing;
 using TRLevelControl;
 using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
-using TRModelTransporter.Packing;
 using TRTexture16Importer.Helpers;
 using TRTexture16Importer.Textures;
 

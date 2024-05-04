@@ -3,7 +3,7 @@ using RectanglePacker.Organisation;
 using TRLevelControl;
 using TRModelTransporter.Model.Textures;
 
-namespace TRModelTransporter.Packing;
+namespace TRImageControl.Packing;
 
 public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSegment>, IDisposable
 {

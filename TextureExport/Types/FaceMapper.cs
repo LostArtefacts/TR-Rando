@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using TRImageControl.Packing;
 using TRLevelControl;
 using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
-using TRModelTransporter.Packing;
 
 namespace TextureExport.Types;
 

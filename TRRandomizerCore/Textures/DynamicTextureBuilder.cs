@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
+using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Model.Textures;
-using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Utilities;

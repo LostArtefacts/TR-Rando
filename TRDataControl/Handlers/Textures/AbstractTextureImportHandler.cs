@@ -1,10 +1,10 @@
 ﻿using RectanglePacker.Events;
 using System.Drawing;
+using TRImageControl.Packing;
 using TRLevelControl.Model;
 using TRModelTransporter.Data;
 using TRModelTransporter.Model;
 using TRModelTransporter.Model.Textures;
-using TRModelTransporter.Packing;
 using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Handlers;
