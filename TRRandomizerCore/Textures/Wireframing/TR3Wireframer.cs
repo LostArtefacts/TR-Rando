@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using TRImageControl;
-using TRImageControl.Helpers;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;

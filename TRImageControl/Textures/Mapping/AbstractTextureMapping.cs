@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Drawing;
-using TRImageControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TRImageControl.Textures;

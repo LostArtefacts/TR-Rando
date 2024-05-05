@@ -1,6 +1,4 @@
-﻿using TRImageControl.Helpers;
-
-namespace TRImageControl.Textures;
+﻿namespace TRImageControl.Textures;
 
 public class DynamicTextureSource : AbstractTextureSource
 {

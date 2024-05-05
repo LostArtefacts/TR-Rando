@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using TRDataControl.Environment;
 using TRGE.Core;
-using TRImageControl.Helpers;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRImageControl.Textures;
 using TRLevelControl;

@@ -1,4 +1,4 @@
-﻿namespace TRImageControl.Helpers;
+﻿namespace TRImageControl;
 
 public struct HSB
 {
