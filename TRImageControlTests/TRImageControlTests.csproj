@@ -24,6 +24,11 @@
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="RectanglePacker">
+      <HintPath>..\Deps\RectanglePacker.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 </Project>
