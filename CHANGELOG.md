@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.4...master) - xxxx-xx-xx
+- fixed a key item softlock in Crash Site (#662)
 
 ## [V1.8.4](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.3...V1.8.4) - 2024-02-12
 - fixed item locking logic so that secrets that rely on specific enemies will always be obtainable (#570)
