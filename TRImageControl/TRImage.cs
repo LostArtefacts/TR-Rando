@@ -124,7 +124,7 @@ public class TRImage : ICloneable
                 uint c = 0;
                 for (int i = 0; i < bytesPerPixel; i++)
                 {
-                    c |= (uint)(pixels[currentLine + x + i] << (8 * i));
+                    c |= (uint)(pixels[currentLine + x + i] << (i * 8));
                 }
 
                 this[x / bytesPerPixel, y] = c;
@@ -267,7 +267,7 @@ public class TRImage : ICloneable
             for (int x = 0; x < image.Size.Width; x++)
             {
                 Color c = image.GetPixel(x, y);
-                if (c.A != 0)
+                if (!retainBackground || c.A != 0)
                 {
                     this[x + point.X, y + point.Y] = image[x, y];
                 }

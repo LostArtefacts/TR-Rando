@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationExport", "LocationE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelToolset", "TRLevelToolset\TRLevelToolset.csproj", "{4B75F7F5-A3D4-465F-A8B8-F5142057FD97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRImageControlTests", "TRImageControlTests\TRImageControlTests.csproj", "{D9278559-10CF-4533-9A05-8FCB76193DE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{4B75F7F5-A3D4-465F-A8B8-F5142057FD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B75F7F5-A3D4-465F-A8B8-F5142057FD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B75F7F5-A3D4-465F-A8B8-F5142057FD97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9278559-10CF-4533-9A05-8FCB76193DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9278559-10CF-4533-9A05-8FCB76193DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9278559-10CF-4533-9A05-8FCB76193DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9278559-10CF-4533-9A05-8FCB76193DE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
