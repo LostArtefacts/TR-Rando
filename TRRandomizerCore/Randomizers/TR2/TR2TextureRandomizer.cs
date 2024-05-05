@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Drawing;
 using TRGE.Core;
+using TRImageControl.Textures;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -8,7 +9,6 @@ using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Textures;
 using TRRandomizerCore.Utilities;
-using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Randomizers;
 

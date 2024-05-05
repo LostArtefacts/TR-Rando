@@ -4,7 +4,7 @@ using TRImageControl.Packing;
 using TRLevelControl.Model;
 using TRModelTransporter.Data;
 using TRModelTransporter.Model;
-using TRTexture16Importer.Helpers;
+using TRImageControl.Helpers;
 
 namespace TRModelTransporter.Handlers;
 

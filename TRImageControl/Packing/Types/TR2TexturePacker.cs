@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using TRLevelControl;
 using TRLevelControl.Model;
-using TRTexture16Importer;
 
 namespace TRImageControl.Packing;
 

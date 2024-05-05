@@ -3,9 +3,9 @@ using RectanglePacker.Events;
 using RectanglePacker.Organisation;
 using System.Collections.Immutable;
 using System.Drawing;
+using TRImageControl.Helpers;
 using TRLevelControl;
 using TRLevelControl.Model;
-using TRTexture16Importer.Helpers;
 
 namespace TRImageControl.Packing;
 

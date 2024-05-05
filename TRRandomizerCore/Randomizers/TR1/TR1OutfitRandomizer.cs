@@ -1,7 +1,9 @@
 ﻿using System.Drawing;
 using TRDataControl.Environment;
 using TRGE.Core;
+using TRImageControl.Helpers;
 using TRImageControl.Packing;
+using TRImageControl.Textures;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -12,8 +14,6 @@ using TRRandomizerCore.Levels;
 using TRRandomizerCore.Meshes;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Textures;
-using TRTexture16Importer.Helpers;
-using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Randomizers;
 

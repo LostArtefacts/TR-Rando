@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using TRImageControl.Packing;
+using TRImageControl.Textures;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
@@ -7,7 +8,6 @@ using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Utilities;
-using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Textures;
 

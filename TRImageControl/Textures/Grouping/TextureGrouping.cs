@@ -1,4 +1,4 @@
-﻿namespace TRTexture16Importer.Textures;
+﻿namespace TRImageControl.Textures;
 
 public class TextureGrouping<E>
     where E : Enum

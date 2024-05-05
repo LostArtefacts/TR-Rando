@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
+using TRImageControl.Helpers;
 using TRLevelControl.Model;
-using TRTexture16Importer.Helpers;
 
-namespace TRTexture16Importer.Textures;
+namespace TRImageControl.Textures;
 
 public class TR3TextureMapping : AbstractTextureMapping<TR3Type, TR3Level>
 {

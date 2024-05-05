@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Drawing;
+using TRImageControl.Helpers;
 using TRLevelControl.Model;
-using TRTexture16Importer.Helpers;
 
-namespace TRTexture16Importer.Textures;
+namespace TRImageControl.Textures;
 
 public abstract class AbstractTextureMapping<E, L> : IDisposable
     where E : Enum

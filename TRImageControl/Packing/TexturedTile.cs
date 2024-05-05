@@ -1,7 +1,7 @@
 ﻿using RectanglePacker.Defaults;
 using System.Drawing;
 using System.Drawing.Imaging;
-using TRTexture16Importer.Helpers;
+using TRImageControl.Helpers;
 
 namespace TRImageControl.Packing;
 
