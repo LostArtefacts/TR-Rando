@@ -1,6 +1,6 @@
 ﻿using TRLevelControl.Model;
 
-namespace TRTexture16Importer.Textures;
+namespace TRImageControl.Textures;
 
 public class TR3TextureDatabase : TextureDatabase<TR3Type>
 {

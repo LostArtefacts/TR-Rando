@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using TRLevelControl.Model;
 
-namespace TRTexture16Importer.Textures;
+namespace TRImageControl.Textures;
 
 public class DynamicTextureTarget
 {

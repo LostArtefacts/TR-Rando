@@ -4,7 +4,6 @@ using TRImageControl.Packing;
 using TRLevelControl.Model;
 using TRModelTransporter.Events;
 using TRModelTransporter.Model;
-using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Utilities;
 
 namespace TRModelTransporter.Handlers;

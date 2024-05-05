@@ -2,9 +2,9 @@
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using TRTexture16Importer.Textures;
+using TRImageControl.Textures;
 
-namespace TRTexture16Importer.Helpers;
+namespace TRImageControl.Helpers;
 
 public class BitmapGraphics : IDisposable
 {

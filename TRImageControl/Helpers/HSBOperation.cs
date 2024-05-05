@@ -1,4 +1,4 @@
-﻿namespace TRTexture16Importer.Helpers;
+﻿namespace TRImageControl.Helpers;
 
 public class HSBOperation
 {

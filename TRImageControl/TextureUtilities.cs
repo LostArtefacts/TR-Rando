@@ -2,11 +2,11 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using TRImageControl.Helpers;
 using TRLevelControl;
 using TRLevelControl.Model;
-using TRTexture16Importer.Helpers;
 
-namespace TRTexture16Importer;
+namespace TRImageControl;
 
 public static class TextureUtilities
 {

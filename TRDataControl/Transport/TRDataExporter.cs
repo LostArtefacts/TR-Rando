@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.Drawing;
 using System.Drawing.Imaging;
+using TRImageControl.Packing;
+using TRImageControl.Textures;
 using TRModelTransporter.Events;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model;
-using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Utilities;
-using TRTexture16Importer.Textures;
 
 namespace TRModelTransporter.Transport;
 

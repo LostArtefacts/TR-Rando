@@ -1,5 +1,4 @@
 ﻿using TRImageControl.Packing;
-using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Utilities;
 

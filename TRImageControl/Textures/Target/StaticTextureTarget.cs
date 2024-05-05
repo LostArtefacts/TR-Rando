@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace TRTexture16Importer.Textures;
+namespace TRImageControl.Textures;
 
 public class StaticTextureTarget
 {

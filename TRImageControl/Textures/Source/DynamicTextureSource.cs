@@ -1,6 +1,6 @@
-﻿using TRTexture16Importer.Helpers;
+﻿using TRImageControl.Helpers;
 
-namespace TRTexture16Importer.Textures;
+namespace TRImageControl.Textures;
 
 public class DynamicTextureSource : AbstractTextureSource
 {

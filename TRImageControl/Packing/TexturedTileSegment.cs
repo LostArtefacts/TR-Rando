@@ -1,6 +1,5 @@
 ﻿using RectanglePacker.Defaults;
 using System.Drawing;
-using TRModelTransporter.Model.Textures;
 
 namespace TRImageControl.Packing;
 

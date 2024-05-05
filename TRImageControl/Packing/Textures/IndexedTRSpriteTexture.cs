@@ -1,10 +1,11 @@
-﻿using TRLevelControl.Model;
+﻿using TRLevelControl;
+using TRLevelControl.Model;
 
-namespace TRModelTransporter.Model.Textures;
+namespace TRImageControl.Packing;
 
-public class IndexedTRObjectTexture : AbstractIndexedTRTexture
+public class IndexedTRSpriteTexture : AbstractIndexedTRTexture
 {
-    private TRObjectTexture _texture;
+    private TRSpriteTexture _texture;
 
     public override int Atlas
     {
@@ -12,7 +13,7 @@ public class IndexedTRObjectTexture : AbstractIndexedTRTexture
         set => _texture.Atlas = (ushort)value;
     }
 
-    public TRObjectTexture Texture
+    public TRSpriteTexture Texture
     {
         get => _texture;
         set
@@ -24,23 +25,22 @@ public class IndexedTRObjectTexture : AbstractIndexedTRTexture
 
     protected override void GetBoundsFromTexture()
     {
-        _bounds = Texture.Bounds;
+        _bounds = new(Texture.X, Texture.Y, (Texture.Width + 1) / TRConsts.TPageWidth, (Texture.Height + 1) / TRConsts.TPageHeight);
     }
 
     protected override void ApplyBoundDiffToTexture(int xDiff, int yDiff)
     {
+        Texture.X += (byte)xDiff;
+        Texture.Y += (byte)yDiff;
     }
-
-    public bool IsTriangle
-        => Texture.IsTriangle;
 
     public override AbstractIndexedTRTexture Clone()
     {
-        return new IndexedTRObjectTexture
+        return new IndexedTRSpriteTexture
         {
             Index = Index,
             Classification = Classification,
-            Texture = Texture.Clone()
+            Texture = _texture.Clone(),
         };
     }
 }

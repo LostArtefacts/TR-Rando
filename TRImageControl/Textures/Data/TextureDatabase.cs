@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TRTexture16Importer.Textures;
+namespace TRImageControl.Textures;
 
 public class TextureDatabase<E> : IDisposable
     where E : Enum

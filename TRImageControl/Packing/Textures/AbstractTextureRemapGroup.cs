@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
-using TRImageControl.Packing;
 
-namespace TRModelTransporter.Model.Textures;
+namespace TRImageControl.Packing;
 
 public abstract class AbstractTextureRemapGroup<E, L> 
     where E : Enum

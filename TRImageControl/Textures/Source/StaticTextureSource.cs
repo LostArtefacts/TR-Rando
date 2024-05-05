@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace TRTexture16Importer.Textures;
+namespace TRImageControl.Textures;
 
 public class StaticTextureSource<E> : AbstractTextureSource, IDisposable
     where E : Enum

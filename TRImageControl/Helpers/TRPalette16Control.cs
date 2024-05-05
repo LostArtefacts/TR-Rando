@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using TRLevelControl.Model;
 
-namespace TRTexture16Importer.Helpers;
+namespace TRImageControl.Helpers;
 
 public class TRPalette16Control
 {

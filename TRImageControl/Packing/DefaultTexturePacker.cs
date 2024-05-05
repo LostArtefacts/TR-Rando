@@ -1,7 +1,6 @@
 ﻿using RectanglePacker;
 using RectanglePacker.Organisation;
 using TRLevelControl;
-using TRModelTransporter.Model.Textures;
 
 namespace TRImageControl.Packing;
 

@@ -2,12 +2,12 @@
 using System.Drawing;
 using TRGE.Coord;
 using TRGE.Core;
+using TRImageControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
 using TRRandomizerCore.Textures;
-using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Editors;
 

@@ -1,6 +1,5 @@
 ﻿using TRImageControl.Packing;
 using TRLevelControl.Model;
-using TRModelTransporter.Model.Textures;
 
 namespace TextureExport.Types;
 

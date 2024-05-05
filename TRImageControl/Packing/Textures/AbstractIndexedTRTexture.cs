@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Drawing;
 
-namespace TRModelTransporter.Model.Textures;
+namespace TRImageControl.Packing;
 
 public abstract class AbstractIndexedTRTexture
 {

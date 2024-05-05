@@ -1,5 +1,5 @@
-﻿using TRModelTransporter.Model.Textures;
-using TRTexture16Importer.Textures;
+﻿using TRImageControl.Packing;
+using TRImageControl.Textures;
 
 namespace TRRandomizerCore.Textures;
 

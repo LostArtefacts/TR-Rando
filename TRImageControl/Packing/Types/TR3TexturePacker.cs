@@ -1,9 +1,6 @@
 ﻿using System.Drawing;
 using TRLevelControl;
 using TRLevelControl.Model;
-using TRModelTransporter.Helpers;
-using TRModelTransporter.Model.Textures;
-using TRTexture16Importer;
 
 namespace TRImageControl.Packing;
 
@@ -22,7 +19,7 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Type, TR3Level>
         for (int i = 0; i < Level.ObjectTextures.Count; i++)
         {
             TRObjectTexture texture = Level.ObjectTextures[i];
-            if (texture.IsValid())
+            //if (texture.IsValid())
             {
                 textures.Add(new IndexedTRObjectTexture
                 {
@@ -42,7 +39,7 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Type, TR3Level>
         for (int i = 0; i < sprites.Count; i++)
         {
             TRSpriteTexture texture = sprites[i];
-            if (texture.IsValid())
+            //if (texture.IsValid())
             {
                 textures.Add(new IndexedTRSpriteTexture
                 {

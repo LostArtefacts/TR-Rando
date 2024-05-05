@@ -1,11 +1,10 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
+using TRImageControl.Helpers;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Model.Textures;
-using TRTexture16Importer.Helpers;
 
 namespace TextureExport.Types;
 

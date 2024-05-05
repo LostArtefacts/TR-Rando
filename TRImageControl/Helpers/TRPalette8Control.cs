@@ -2,7 +2,7 @@
 using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TRTexture16Importer.Helpers;
+namespace TRImageControl.Helpers;
 
 public class TRPalette8Control : IDisposable
 {
