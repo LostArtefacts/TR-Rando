@@ -77,7 +77,7 @@ public abstract class AbstractTRWireframer<E, L>
             DashCap = DashCap.Round
         };
 
-        using AbstractTexturePacker<E, L> packer = CreatePacker(level);
+        using TRTexturePacker<E, L> packer = CreatePacker(level);
         DeleteTextures(packer);
         ResetUnusedTextures(level);
 
@@ -221,7 +221,7 @@ public abstract class AbstractTRWireframer<E, L>
         return _nullSize;
     }
 
-    private void DeleteTextures(AbstractTexturePacker<E, L> packer)
+    private void DeleteTextures(TRTexturePacker<E, L> packer)
     {
         List<int> textures = new();
         foreach (ushort t in _allTextures)
@@ -248,7 +248,7 @@ public abstract class AbstractTRWireframer<E, L>
         return _nullSize;
     }
 
-    private IndexedTRObjectTexture CreateWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+    private IndexedTRObjectTexture CreateWireframe(TRTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
     {
         if (size.Equals(_nullSize))
         {
@@ -263,7 +263,7 @@ public abstract class AbstractTRWireframer<E, L>
         return texture;
     }
 
-    private IndexedTRObjectTexture CreateLadderWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+    private IndexedTRObjectTexture CreateLadderWireframe(TRTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
     {
         if (size.Equals(_nullSize))
         {
@@ -288,7 +288,7 @@ public abstract class AbstractTRWireframer<E, L>
         return texture;
     }
 
-    private IndexedTRObjectTexture CreateTriggerWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+    private IndexedTRObjectTexture CreateTriggerWireframe(TRTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
     {
         if (size.Equals(_nullSize))
         {
@@ -305,7 +305,7 @@ public abstract class AbstractTRWireframer<E, L>
         return texture;
     }
 
-    private IndexedTRObjectTexture CreateDeathWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+    private IndexedTRObjectTexture CreateDeathWireframe(TRTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
     {
         if (size.Equals(_nullSize))
         {
@@ -324,7 +324,7 @@ public abstract class AbstractTRWireframer<E, L>
         return texture;
     }
 
-    private Dictionary<ushort, IndexedTRObjectTexture> CreateSpecialTextures(AbstractTexturePacker<E, L> packer, L level, Pen pen)
+    private Dictionary<ushort, IndexedTRObjectTexture> CreateSpecialTextures(TRTexturePacker<E, L> packer, L level, Pen pen)
     {
         Dictionary<ushort, TexturedTileSegment> specialSegments = CreateSpecialSegments(level, pen);
         Dictionary<ushort, IndexedTRObjectTexture> specialTextures = new();
@@ -341,7 +341,7 @@ public abstract class AbstractTRWireframer<E, L>
         return new Dictionary<ushort, TexturedTileSegment>();
     }
 
-    private void ProcessClips(AbstractTexturePacker<E, L> packer, L level, Pen pen, SmoothingMode mode)
+    private void ProcessClips(TRTexturePacker<E, L> packer, L level, Pen pen, SmoothingMode mode)
     {
         // Some animated textures are shared in segments e.g. 4 32x32 segments within a 64x64 container,
         // so in instances where we only want to wireframe a section of these, we use manual clipping.
@@ -607,7 +607,7 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract Dictionary<TRFace, List<TRVertex>> CollectLadders(L level);
     protected abstract List<TRFace> CollectTriggerFaces(L level, List<FDTrigType> triggerTypes);
     protected abstract List<TRFace> CollectDeathFaces(L level);
-    protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
+    protected abstract TRTexturePacker<E, L> CreatePacker(L level);
     protected abstract IEnumerable<IEnumerable<TRFace>> GetRoomFace4s(L level);
     protected abstract IEnumerable<IEnumerable<TRFace>> GetRoomFace3s(L level);
     protected abstract void ResetUnusedTextures(L level);

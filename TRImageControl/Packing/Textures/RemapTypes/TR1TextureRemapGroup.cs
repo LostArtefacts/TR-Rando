@@ -9,7 +9,7 @@ public class TR1TextureRemapGroup : AbstractTextureRemapGroup<TR1Type, TR1Level>
         return level.Models.Keys.ToList();
     }
 
-    protected override AbstractTexturePacker<TR1Type, TR1Level> CreatePacker(TR1Level level)
+    protected override TRTexturePacker<TR1Type, TR1Level> CreatePacker(TR1Level level)
     {
         return new TR1TexturePacker(level);
     }

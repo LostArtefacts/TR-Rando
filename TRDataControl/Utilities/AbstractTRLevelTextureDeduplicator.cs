@@ -20,7 +20,7 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
 
     public void Deduplicate(string remappingPath)
     {
-        using AbstractTexturePacker<E, L> levelPacker = CreatePacker(Level);
+        using TRTexturePacker<E, L> levelPacker = CreatePacker(Level);
         Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
         foreach (TexturedTile tile in levelPacker.Tiles)
         {
@@ -51,7 +51,7 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
         ReindexTextures(indexMap);
     }
 
-    protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
+    protected abstract TRTexturePacker<E, L> CreatePacker(L level);
     protected abstract AbstractTextureRemapGroup<E, L> GetRemapGroup(string path);
     protected abstract void ReindexTextures(Dictionary<int, int> indexMap);
 

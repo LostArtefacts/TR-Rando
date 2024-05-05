@@ -20,7 +20,7 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TR1Type, TR1
         return _level.Sprites;
     }
 
-    protected override AbstractTexturePacker<TR1Type, TR1Level> CreatePacker()
+    protected override TRTexturePacker<TR1Type, TR1Level> CreatePacker()
     {
         return new TR1TexturePacker(_level)
         {
@@ -28,7 +28,7 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TR1Type, TR1
         };
     }
 
-    protected override void ProcessRemovals(AbstractTexturePacker<TR1Type, TR1Level> packer)
+    protected override void ProcessRemovals(TRTexturePacker<TR1Type, TR1Level> packer)
     {
         List<TR1Type> removals = new();
         if (_clearUnusedSprites)
@@ -48,7 +48,7 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TR1Type, TR1
         }
     }
 
-    private void RemoveUnusedSprites(AbstractTexturePacker<TR1Type, TR1Level> packer)
+    private void RemoveUnusedSprites(TRTexturePacker<TR1Type, TR1Level> packer)
     {
         List<TR1Type> unusedItems = new()
         {

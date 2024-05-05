@@ -9,7 +9,7 @@ using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile, TexturedTileSegment>, IDisposable
+public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, TexturedTileSegment>, IDisposable
     where E : Enum
     where L : class
 {
@@ -22,10 +22,10 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     private readonly List<AbstractIndexedTRTexture> _allTextures;
 
-    public AbstractTexturePacker()
+    public TRTexturePacker()
         : this(default) { }
 
-    public AbstractTexturePacker(L level, int maximumTiles = 16, ITextureClassifier classifier = null)
+    public TRTexturePacker(L level, int maximumTiles = 16, ITextureClassifier classifier = null)
     {
         TileWidth = TRConsts.TPageWidth;
         TileHeight = TRConsts.TPageHeight;

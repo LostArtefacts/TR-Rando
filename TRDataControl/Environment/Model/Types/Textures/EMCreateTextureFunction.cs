@@ -45,7 +45,7 @@ public class EMCreateTextureFunction : BaseEMFunction
         }.ApplyToLevel(level));
     }
 
-    private List<EMTextureMap> BuildAndPackTextures<E, L>(AbstractTexturePacker<E, L> packer, List<TRObjectTexture> textures)
+    private List<EMTextureMap> BuildAndPackTextures<E, L>(TRTexturePacker<E, L> packer, List<TRObjectTexture> textures)
         where L : class
         where E : Enum
     {

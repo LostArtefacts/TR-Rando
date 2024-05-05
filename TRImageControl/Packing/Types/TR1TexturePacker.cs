@@ -5,7 +5,7 @@ using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public class TR1TexturePacker : AbstractTexturePacker<TR1Type, TR1Level>
+public class TR1TexturePacker : TRTexturePacker<TR1Type, TR1Level>
 {
     private const int _maximumTiles = 16;
 
