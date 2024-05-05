@@ -6,11 +6,11 @@ namespace TRModelTransporter.Utilities;
 
 public class TRTextureDeduplicator<E> where E : Enum
 {
-    public Dictionary<TexturedTile, List<TexturedTileSegment>> SegmentMap { get; set; }
+    public Dictionary<TRTextile, List<TRTextileRegion>> SegmentMap { get; set; }
     public List<TextureRemap> PrecompiledRemapping { get; set; }
     public bool UpdateGraphics { get; set; }
 
-    private Dictionary<TexturedTile, List<int>> _segmentRemovalPositions;
+    private Dictionary<TRTextile, List<int>> _segmentRemovalPositions;
     private List<MappedSegment> _segments;
 
     public EventHandler<TRTextureRemapEventArgs> SegmentRemapped;
@@ -32,10 +32,10 @@ public class TRTextureDeduplicator<E> where E : Enum
 
     private void InitialiseSegments()
     {
-        _segmentRemovalPositions = new Dictionary<TexturedTile, List<int>>();
+        _segmentRemovalPositions = new Dictionary<TRTextile, List<int>>();
         _segments = new List<MappedSegment>();
 
-        foreach (TexturedTile tile in SegmentMap.Keys)
+        foreach (TRTextile tile in SegmentMap.Keys)
         {
             for (int i = 0; i < SegmentMap[tile].Count; i++)
             {
@@ -200,7 +200,7 @@ public class TRTextureDeduplicator<E> where E : Enum
 
     private void RemoveStaleSegments()
     {
-        foreach (TexturedTile tile in _segmentRemovalPositions.Keys)
+        foreach (TRTextile tile in _segmentRemovalPositions.Keys)
         {
             List<int> removals = _segmentRemovalPositions[tile];
             removals.Sort();
@@ -220,7 +220,7 @@ public class TRTextureDeduplicator<E> where E : Enum
         }
     }
 
-    public bool ShouldIgnoreSegment(IEnumerable<int> ignoredIndices, TexturedTileSegment segment)
+    public bool ShouldIgnoreSegment(IEnumerable<int> ignoredIndices, TRTextileRegion segment)
     {
         if (ignoredIndices != null)
         {
@@ -242,8 +242,8 @@ public class TRTextureDeduplicator<E> where E : Enum
 
     private class MappedSegment
     {
-        public TexturedTile Tile { get; set; }
-        public TexturedTileSegment Segment { get; set; }
+        public TRTextile Tile { get; set; }
+        public TRTextileRegion Segment { get; set; }
         public int SegmentPosition { get; set; }
     }
 }

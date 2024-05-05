@@ -139,9 +139,9 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return level.AnimatedTextures;
     }
 
-    protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TR3Level level, Pen pen)
+    protected override Dictionary<ushort, TRTextileRegion> CreateSpecialSegments(TR3Level level, Pen pen)
     {
-        Dictionary<ushort, TexturedTileSegment> segments = new();
+        Dictionary<ushort, TRTextileRegion> segments = new();
         foreach (SpecialTextureHandling special in _data.SpecialTextures)
         {
             switch (special.Type)
@@ -149,7 +149,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
                 case SpecialTextureType.CrashPads:
                     foreach (ushort texture in special.Textures)
                     {
-                        if (CreateCrashPad(pen, special.Mode) is TexturedTileSegment segment)
+                        if (CreateCrashPad(pen, special.Mode) is TRTextileRegion segment)
                         {
                             segments[texture] = segment;
                         }
@@ -161,7 +161,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return segments;
     }
 
-    private TexturedTileSegment CreateCrashPad(Pen pen, SpecialTextureMode mode)
+    private TRTextileRegion CreateCrashPad(Pen pen, SpecialTextureMode mode)
     {
         const int width = 64;
         const int height = 64;
@@ -187,6 +187,6 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
                 break;
         }
 
-        return new TexturedTileSegment(texture, new(bmp));
+        return new TRTextileRegion(texture, new(bmp));
     }
 }

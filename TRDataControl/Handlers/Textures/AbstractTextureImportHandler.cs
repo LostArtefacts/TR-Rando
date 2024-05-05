@@ -14,7 +14,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
 {
     public IDataProvider<E> Data { get; set; }
 
-    protected Dictionary<D, List<TexturedTileSegment>> _importSegments;
+    protected Dictionary<D, List<TRTextileRegion>> _importSegments;
 
     protected L _level;
     protected IEnumerable<D> _definitions;
@@ -36,7 +36,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
         CollateSegments();
 
         // Pack the textures into the level, or bail if it wasn't possible
-        PackingResult<TexturedTile, TexturedTileSegment> packingResult = Pack();
+        PackingResult<TRTextile, TRTextileRegion> packingResult = Pack();
         if (packingResult.OrphanCount > 0)
         {
             List<string> entityNames = new();
@@ -66,7 +66,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
     {
         // Rebuild the segment list. We assume the list of IndexedTRObjectTextures has been
         // ordered by area descending to preserve the "master" texture for each segment.
-        _importSegments = new Dictionary<D, List<TexturedTileSegment>>();
+        _importSegments = new Dictionary<D, List<TRTextileRegion>>();
 
         // Track existing sprite sequences to avoid duplication
         List<E> existingSequences = GetExistingSpriteSequences().Keys.ToList();
@@ -77,16 +77,16 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                 continue;
             }
 
-            _importSegments[definition] = new List<TexturedTileSegment>();
+            _importSegments[definition] = new List<TRTextileRegion>();
             foreach (int segmentIndex in definition.ObjectTextures.Keys)
             {
                 TRImage segmentClip = definition.Image.Export(definition.TextureSegments[segmentIndex]);
-                TexturedTileSegment segment = null;
+                TRTextileRegion segment = null;
                 foreach (IndexedTRObjectTexture texture in definition.ObjectTextures[segmentIndex])
                 {
                     if (segment == null)
                     {
-                        _importSegments[definition].Add(segment = new TexturedTileSegment(texture, segmentClip));
+                        _importSegments[definition].Add(segment = new TRTextileRegion(texture, segmentClip));
                     }
                     else
                     {
@@ -116,12 +116,12 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                 foreach (int segmentIndex in spriteTextures.Keys)
                 {
                     TRImage segmentClip = definition.Image.Export(definition.TextureSegments[segmentIndex]);
-                    TexturedTileSegment segment = null;
+                    TRTextileRegion segment = null;
                     foreach (IndexedTRSpriteTexture texture in spriteTextures[segmentIndex])
                     {
                         if (segment == null)
                         {
-                            _importSegments[definition].Add(segment = new TexturedTileSegment(texture, segmentClip));
+                            _importSegments[definition].Add(segment = new TRTextileRegion(texture, segmentClip));
                         }
                         else
                         {
@@ -133,15 +133,15 @@ public abstract class AbstractTextureImportHandler<E, L, D>
         }
     }
 
-    protected virtual PackingResult<TexturedTile, TexturedTileSegment> Pack()
+    protected virtual PackingResult<TRTextile, TRTextileRegion> Pack()
     {
         TRTexturePacker<E, L> packer = CreatePacker();
         packer.MaximumTiles = Data.TextureTileLimit;
 
         ProcessRemovals(packer);
 
-        List<TexturedTileSegment> allSegments = new();
-        foreach (List<TexturedTileSegment> segmentList in _importSegments.Values)
+        List<TRTextileRegion> allSegments = new();
+        foreach (List<TRTextileRegion> segmentList in _importSegments.Values)
         {
             // We only add unique segments, so if another segment already exists, 
             // remap the definition's segment to that one. Example of when this is
@@ -149,7 +149,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             // DragonFront, so this will greatly reduce the import cost.
             for (int i = 0; i < segmentList.Count; i++)
             {
-                TexturedTileSegment segment = segmentList[i];
+                TRTextileRegion segment = segmentList[i];
                 int j = FindMatchingSegment(allSegments, segment);
                 if (j == -1)
                 {
@@ -157,9 +157,9 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                 }
                 else
                 {
-                    TexturedTileSegment otherSegment = allSegments[j];
+                    TRTextileRegion otherSegment = allSegments[j];
                     segmentList[i] = allSegments[j];
-                    foreach (AbstractIndexedTRTexture texture in segment.Textures)
+                    foreach (TRTextileSegment texture in segment.Textures)
                     {
                         if (!otherSegment.IsObjectTextureFor(texture.Index))
                         {
@@ -191,9 +191,9 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             }
 
             indexMap[definition] = new Dictionary<int, int>();
-            foreach (TexturedTileSegment segment in _importSegments[definition])
+            foreach (TRTextileRegion segment in _importSegments[definition])
             {
-                foreach (AbstractIndexedTRTexture texture in segment.Textures)
+                foreach (TRTextileSegment texture in segment.Textures)
                 {
                     if (texture is not IndexedTRObjectTexture objTexture) // Sprites handled later
                     {
@@ -310,9 +310,9 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             {
                 foreach (int watchedIndex in watchedTextures[entity])
                 {
-                    foreach (TexturedTileSegment segment in _importSegments[definition])
+                    foreach (TRTextileRegion segment in _importSegments[definition])
                     {
-                        AbstractIndexedTRTexture texture = segment.GetTexture(watchedIndex);
+                        TRTextileSegment texture = segment.GetTexture(watchedIndex);
                         if (texture == null)
                         {
                             continue;
@@ -332,11 +332,11 @@ public abstract class AbstractTextureImportHandler<E, L, D>
         _positionMonitor.MonitoredTexturesPositioned(textureResults);
     }
 
-    protected int FindMatchingSegment(List<TexturedTileSegment> segments, TexturedTileSegment segment)
+    protected int FindMatchingSegment(List<TRTextileRegion> segments, TRTextileRegion segment)
     {
         for (int i = 0; i < segments.Count; i++)
         {
-            TexturedTileSegment otherSegment = segments[i];
+            TRTextileRegion otherSegment = segments[i];
             if
             (
                 otherSegment.FirstTextureIndex == segment.FirstTextureIndex &&

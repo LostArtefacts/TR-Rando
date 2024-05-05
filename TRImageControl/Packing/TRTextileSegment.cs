@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace TRImageControl.Packing;
 
-public abstract class AbstractIndexedTRTexture
+public abstract class TRTextileSegment
 {
     protected Rectangle _bounds;
     private int _boundsXDiff, _boundsYDiff;
@@ -17,7 +17,7 @@ public abstract class AbstractIndexedTRTexture
     [JsonIgnore]
     public Rectangle Bounds => _bounds;
 
-    public AbstractIndexedTRTexture()
+    public TRTextileSegment()
     {
         _boundsXDiff = 0;
         _boundsYDiff = 0;
@@ -61,5 +61,5 @@ public abstract class AbstractIndexedTRTexture
     protected abstract void GetBoundsFromTexture();
     protected abstract void ApplyBoundDiffToTexture(int xDiff, int yDiff);
 
-    public abstract AbstractIndexedTRTexture Clone();
+    public abstract TRTextileSegment Clone();
 }

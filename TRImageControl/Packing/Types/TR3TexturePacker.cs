@@ -12,9 +12,9 @@ public class TR3TexturePacker : TRTexturePacker<TR3Type, TR3Level>
     public TR3TexturePacker(TR3Level level, ITextureClassifier classifier = null)
         : base(level, _maximumTiles, classifier) { }
 
-    protected override List<AbstractIndexedTRTexture> LoadObjectTextures()
+    protected override List<TRTextileSegment> LoadObjectTextures()
     {
-        List<AbstractIndexedTRTexture> textures = new(Level.ObjectTextures.Count);
+        List<TRTextileSegment> textures = new(Level.ObjectTextures.Count);
         for (int i = 0; i < Level.ObjectTextures.Count; i++)
         {
             TRObjectTexture texture = Level.ObjectTextures[i];
@@ -31,10 +31,10 @@ public class TR3TexturePacker : TRTexturePacker<TR3Type, TR3Level>
         return textures;
     }
 
-    protected override List<AbstractIndexedTRTexture> LoadSpriteTextures()
+    protected override List<TRTextileSegment> LoadSpriteTextures()
     {
         List<TRSpriteTexture> sprites = Level.Sprites.SelectMany(s => s.Value.Textures).ToList();
-        List<AbstractIndexedTRTexture> textures = new();
+        List<TRTextileSegment> textures = new();
         for (int i = 0; i < sprites.Count; i++)
         {
             TRSpriteTexture texture = sprites[i];

@@ -599,8 +599,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             List<int> faces = new() { 5, 6, 7 };
             foreach (int face in faces)
             {
-                Dictionary<TexturedTile, List<TexturedTileSegment>> segments = packer.GetObjectTextureSegments(new List<int> { lara[0].TexturedRectangles[face].Texture });
-                foreach (TexturedTile tile in segments.Keys)
+                Dictionary<TRTextile, List<TRTextileRegion>> segments = packer.GetObjectTextureSegments(new List<int> { lara[0].TexturedRectangles[face].Texture });
+                foreach (TRTextile tile in segments.Keys)
                 {
                     int index = -1;
                     Rectangle rect = segments[tile].First().Bounds;

@@ -18,7 +18,7 @@ public abstract class AbstractTextureRemapGroup<E, L>
     public void CalculateDependencies(L level, E entity)
     {
         TRTexturePacker<E, L> packer = CreatePacker(level);
-        Dictionary<TexturedTile, List<TexturedTileSegment>> entitySegments = packer.GetModelSegments(entity);
+        Dictionary<TRTextile, List<TRTextileRegion>> entitySegments = packer.GetModelSegments(entity);
         foreach (E otherEntity in GetModelTypes(level))
         {
             if (EqualityComparer<E>.Default.Equals(entity, otherEntity))
@@ -26,14 +26,14 @@ public abstract class AbstractTextureRemapGroup<E, L>
                 continue;
             }
 
-            Dictionary<TexturedTile, List<TexturedTileSegment>> modelSegments = packer.GetModelSegments(otherEntity);
+            Dictionary<TRTextile, List<TRTextileRegion>> modelSegments = packer.GetModelSegments(otherEntity);
 
-            foreach (TexturedTile tile in entitySegments.Keys)
+            foreach (TRTextile tile in entitySegments.Keys)
             {
                 if (modelSegments.ContainsKey(tile))
                 {
-                    List<TexturedTileSegment> matches = entitySegments[tile].FindAll(s1 => modelSegments[tile].Any(s2 => s1 == s2));
-                    foreach (TexturedTileSegment matchedSegment in matches)
+                    List<TRTextileRegion> matches = entitySegments[tile].FindAll(s1 => modelSegments[tile].Any(s2 => s1 == s2));
+                    foreach (TRTextileRegion matchedSegment in matches)
                     {
                         TextureDependency<E> dependency = GetDependency(tile.Index, matchedSegment.Bounds);
                         if (dependency == null)

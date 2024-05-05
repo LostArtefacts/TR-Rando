@@ -3,23 +3,23 @@ using System.Drawing;
 
 namespace TRImageControl.Packing;
 
-public class TexturedTileSegment : DefaultRectangle
+public class TRTextileRegion : DefaultRectangle
 {
     public TRImage Image { get; private set; }
-    public List<AbstractIndexedTRTexture> Textures { get; private set; }
-    public AbstractIndexedTRTexture FirstTexture => Textures[0];
+    public List<TRTextileSegment> Textures { get; private set; }
+    public TRTextileSegment FirstTexture => Textures[0];
     public int FirstTextureIndex => FirstTexture.Index;
     public string FirstClassification => FirstTexture.Classification;
 
-    public TexturedTileSegment(AbstractIndexedTRTexture initialTexture, TRImage image)
+    public TRTextileRegion(TRTextileSegment initialTexture, TRImage image)
         : base(initialTexture.Bounds)
     {
         Image = image;
-        Textures = new List<AbstractIndexedTRTexture>();
+        Textures = new List<TRTextileSegment>();
         AddTexture(initialTexture);
     }
 
-    public void AddTexture(AbstractIndexedTRTexture texture)
+    public void AddTexture(TRTextileSegment texture)
     {
         Textures.Add(texture);
     }
@@ -47,11 +47,11 @@ public class TexturedTileSegment : DefaultRectangle
         return GetTexture(textureIndex) != null;
     }
 
-    public AbstractIndexedTRTexture GetTexture(int textureIndex)
+    public TRTextileSegment GetTexture(int textureIndex)
     {
         for (int i = 0; i < Textures.Count; i++)
         {
-            AbstractIndexedTRTexture texture = Textures[i];
+            TRTextileSegment texture = Textures[i];
             if (texture.Index == textureIndex)
             {
                 return texture;
@@ -72,7 +72,7 @@ public class TexturedTileSegment : DefaultRectangle
         MoveTo(p.X, p.Y, tileIndex);
     }
 
-    public void InheritTextures(TexturedTileSegment otherSegment, Point p, int tileIndex)
+    public void InheritTextures(TRTextileRegion otherSegment, Point p, int tileIndex)
     {
         // Get the old segment first to reposition its children
         otherSegment.MoveTo(p, tileIndex);
@@ -101,7 +101,7 @@ public class TexturedTileSegment : DefaultRectangle
             yDiff *= -1;
         }
 
-        foreach (AbstractIndexedTRTexture texture in Textures)
+        foreach (TRTextileSegment texture in Textures)
         {
             texture.MoveBy(xDiff, yDiff);
             if (tileIndex != -1)
@@ -115,7 +115,7 @@ public class TexturedTileSegment : DefaultRectangle
     // the indexed textures to invalidate themselves.
     public void Unbind()
     {
-        foreach (AbstractIndexedTRTexture texture in Textures)
+        foreach (TRTextileSegment texture in Textures)
         {
             texture.Invalidate();
         }
@@ -125,15 +125,15 @@ public class TexturedTileSegment : DefaultRectangle
     // Index is that of containing tile.
     public void Commit(int tileIndex)
     {
-        foreach (AbstractIndexedTRTexture texture in Textures)
+        foreach (TRTextileSegment texture in Textures)
         {
             texture.Commit(tileIndex);
         }
     }
 
-    public TexturedTileSegment Clone()
+    public TRTextileRegion Clone()
     {
-        TexturedTileSegment copy = new(FirstTexture.Clone(), Image.Clone());
+        TRTextileRegion copy = new(FirstTexture.Clone(), Image.Clone());
         for (int i = 1; i < Textures.Count; i++)
         {
             copy.AddTexture(Textures[i].Clone());

@@ -34,7 +34,7 @@ public abstract class AbstractLandmarkImporter<E, L>
         }
 
         TRTexturePacker<E, L> packer = CreatePacker(level);
-        Dictionary<LandmarkTextureTarget, TexturedTileSegment> targetSegmentMap = new();
+        Dictionary<LandmarkTextureTarget, TRTextileRegion> targetSegmentMap = new();
 
         foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
         {
@@ -118,7 +118,7 @@ public abstract class AbstractLandmarkImporter<E, L>
                         image = source.Image.Clone();
                     }
 
-                    TexturedTileSegment segment = new(texture, image);
+                    TRTextileRegion segment = new(texture, image);
                     packer.AddRectangle(segment);
                     targetSegmentMap[target] = segment;
                 }
@@ -132,7 +132,7 @@ public abstract class AbstractLandmarkImporter<E, L>
 
         try
         {
-            PackingResult<TexturedTile, TexturedTileSegment> result = packer.Pack(true);
+            PackingResult<TRTextile, TRTextileRegion> result = packer.Pack(true);
 
             // Perform the room data remapping
             foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)

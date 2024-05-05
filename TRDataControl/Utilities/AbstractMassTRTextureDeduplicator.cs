@@ -63,10 +63,10 @@ public abstract class AbstractMassTRTextureDeduplicator<E, L>
     private void ExportDuplicateLevelTextures(string lvlPath)
     {
         TRTexturePacker<E, L> levelPacker = CreatePacker(ReadLevel(lvlPath));
-        Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
-        foreach (TexturedTile tile in levelPacker.Tiles)
+        Dictionary<TRTextile, List<TRTextileRegion>> allTextures = new();
+        foreach (TRTextile tile in levelPacker.Tiles)
         {
-            allTextures[tile] = new List<TexturedTileSegment>(tile.Rectangles);
+            allTextures[tile] = new List<TRTextileRegion>(tile.Rectangles);
         }
 
         _deduplicator.SegmentMap = allTextures;
@@ -78,7 +78,7 @@ public abstract class AbstractMassTRTextureDeduplicator<E, L>
             {
                 string dir = Path.Combine(OutputDirectory, _currentLevel);
                 Directory.CreateDirectory(dir);
-                foreach (TexturedTile tile in allTextures.Keys)
+                foreach (TRTextile tile in allTextures.Keys)
                 {
                     tile.Image.Save(Path.Combine(dir, tile.Index.ToString() + ".png"), ImageFormat.Png);
                 }

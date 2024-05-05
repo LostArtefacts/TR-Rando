@@ -4,11 +4,11 @@ using TRLevelControl;
 
 namespace TRImageControl.Packing;
 
-public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSegment>
+public class DefaultTexturePacker : AbstractPacker<TRTextile, TRTextileRegion>
 {
-    public IReadOnlyList<AbstractIndexedTRTexture> AllTextures => _allTextures;
+    public IReadOnlyList<TRTextileSegment> AllTextures => _allTextures;
 
-    private readonly List<AbstractIndexedTRTexture> _allTextures;
+    private readonly List<TRTextileSegment> _allTextures;
 
     public DefaultTexturePacker()
     {
@@ -25,11 +25,6 @@ public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSeg
             StartMethod = PackingStartMethod.EndTile
         };
 
-        _allTextures = new List<AbstractIndexedTRTexture>();
-    }
-
-    protected override TexturedTile CreateTile()
-    {
-        return new TexturedTile();
+        _allTextures = new List<TRTextileSegment>();
     }
 }

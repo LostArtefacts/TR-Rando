@@ -3,7 +3,7 @@ using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public class IndexedTRSpriteTexture : AbstractIndexedTRTexture
+public class IndexedTRSpriteTexture : TRTextileSegment
 {
     private TRSpriteTexture _texture;
 
@@ -34,7 +34,7 @@ public class IndexedTRSpriteTexture : AbstractIndexedTRTexture
         Texture.Y += (byte)yDiff;
     }
 
-    public override AbstractIndexedTRTexture Clone()
+    public override TRTextileSegment Clone()
     {
         return new IndexedTRSpriteTexture
         {

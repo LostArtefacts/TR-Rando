@@ -309,11 +309,11 @@ public class DynamicTextureBuilder
         // Collect all texture pointers from each face in the mesh.
         IEnumerable<int> textures = mesh.TexturedRectangles.Select(f => (int)f.Texture);
         textures = textures.Concat(mesh.TexturedTriangles.Select(f => (int)f.Texture));
-        Dictionary<TexturedTile, List<TexturedTileSegment>> segments = packer.GetObjectTextureSegments(textures.ToHashSet());
+        Dictionary<TRTextile, List<TRTextileRegion>> segments = packer.GetObjectTextureSegments(textures.ToHashSet());
 
         // Clone each segment ready for packing.
-        List<TexturedTileSegment> duplicates = new();
-        foreach (List<TexturedTileSegment> segs in segments.Values)
+        List<TRTextileRegion> duplicates = new();
+        foreach (List<TRTextileRegion> segs in segments.Values)
         {
             duplicates.AddRange(segs.Select(s => s.Clone()));
         }
@@ -325,9 +325,9 @@ public class DynamicTextureBuilder
         // Map the packed segments to object textures.
         Queue<int> reusableIndices = new(level.GetInvalidObjectTextureIndices());
         Dictionary<int, int> reindex = new();
-        foreach (TexturedTileSegment segment in duplicates)
+        foreach (TRTextileRegion segment in duplicates)
         {
-            foreach (AbstractIndexedTRTexture texture in segment.Textures)
+            foreach (TRTextileSegment texture in segment.Textures)
             {
                 if (texture is not IndexedTRObjectTexture objTexture)
                 {
@@ -389,15 +389,15 @@ public class DynamicTextureBuilder
         }
     }
 
-    private static void AddSegmentsToMapping(Dictionary<TexturedTile, List<TexturedTileSegment>> segments, Dictionary<int, List<Rectangle>> mapping)
+    private static void AddSegmentsToMapping(Dictionary<TRTextile, List<TRTextileRegion>> segments, Dictionary<int, List<Rectangle>> mapping)
     {
-        foreach (TexturedTile tile in segments.Keys)
+        foreach (TRTextile tile in segments.Keys)
         {
             if (!mapping.ContainsKey(tile.Index))
             {
                 mapping[tile.Index] = new List<Rectangle>();
             }
-            foreach (TexturedTileSegment segment in segments[tile])
+            foreach (TRTextileRegion segment in segments[tile])
             {
                 mapping[tile.Index].Add(segment.Bounds);
             }

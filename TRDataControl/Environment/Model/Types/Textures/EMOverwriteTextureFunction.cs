@@ -15,7 +15,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         ApplyOverwrites(texture =>
         {
             return packer.GetObjectTextureSegments(new List<int> { texture })
-                .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
+                .Select(k => new Tuple<TRTextile, TRTextileRegion>(k.Key, k.Value[0]))
                 .First();
         });
         packer.AllowEmptyPacking = true;
@@ -28,7 +28,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         ApplyOverwrites(texture =>
         {
             return packer.GetObjectTextureSegments(new List<int> { texture })
-                .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
+                .Select(k => new Tuple<TRTextile, TRTextileRegion>(k.Key, k.Value[0]))
                 .First();
         });
         packer.AllowEmptyPacking = true;
@@ -41,7 +41,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         ApplyOverwrites(texture =>
         {
             return packer.GetObjectTextureSegments(new List<int> { texture })
-                .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
+                .Select(k => new Tuple<TRTextile, TRTextileRegion>(k.Key, k.Value[0]))
                 .First();
         });
         packer.AllowEmptyPacking = true;
@@ -68,16 +68,16 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private void ApplyOverwrites(Func<ushort, Tuple<TexturedTile, TexturedTileSegment>> segmentAction)
+    private void ApplyOverwrites(Func<ushort, Tuple<TRTextile, TRTextileRegion>> segmentAction)
     {
         foreach (TextureOverwrite overwrite in Overwrites)
         {
-            Tuple<TexturedTile, TexturedTileSegment> segment = segmentAction(overwrite.Texture);
+            Tuple<TRTextile, TRTextileRegion> segment = segmentAction(overwrite.Texture);
             TRImage clippedImage = segment.Item2.Image.Export(overwrite.Clip);
 
             foreach (ushort targetTexture in overwrite.Targets.Keys)
             {
-                Tuple<TexturedTile, TexturedTileSegment> targetSegment = segmentAction(targetTexture);
+                Tuple<TRTextile, TRTextileRegion> targetSegment = segmentAction(targetTexture);
                 foreach (Point point in overwrite.Targets[targetTexture])
                 {
                     targetSegment.Item1.Image.Import(clippedImage, new
