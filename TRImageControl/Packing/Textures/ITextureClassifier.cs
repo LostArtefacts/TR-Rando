@@ -1,4 +1,4 @@
-﻿namespace TRModelTransporter.Model.Textures;
+﻿namespace TRImageControl.Packing;
 
 public interface ITextureClassifier
 {

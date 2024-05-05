@@ -1,4 +1,4 @@
-﻿namespace TRModelTransporter.Model.Textures;
+﻿namespace TRImageControl.Packing;
 
 // This allows external callers to monitor specific textures for specific entities by providing a list
 // of texture indices it wants to observe. When the import completes, a map of entity to a list of

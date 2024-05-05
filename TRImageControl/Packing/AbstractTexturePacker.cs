@@ -5,8 +5,6 @@ using System.Collections.Immutable;
 using System.Drawing;
 using TRLevelControl;
 using TRLevelControl.Model;
-using TRModelTransporter.Helpers;
-using TRModelTransporter.Model.Textures;
 using TRTexture16Importer.Helpers;
 
 namespace TRImageControl.Packing;
@@ -52,7 +50,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
         {
             _allTextures.AddRange(LoadObjectTextures());
             _allTextures.AddRange(LoadSpriteTextures());
-            _allTextures.Sort(new TRTextureReverseAreaComparer());
+            _allTextures.Sort((s1, s2) => s2.Area.CompareTo(s1.Area));
 
             for (int i = 0; i < NumLevelImages; i++)
             {

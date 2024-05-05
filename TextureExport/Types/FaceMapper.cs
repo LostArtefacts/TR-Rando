@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using TRImageControl.Packing;
 using TRLevelControl;
 using TRLevelControl.Model;
-using TRModelTransporter.Model.Textures;
 
 namespace TextureExport.Types;
 

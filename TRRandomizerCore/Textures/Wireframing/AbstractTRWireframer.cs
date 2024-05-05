@@ -4,7 +4,6 @@ using System.Drawing.Drawing2D;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
-using TRModelTransporter.Model.Textures;
 using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures;

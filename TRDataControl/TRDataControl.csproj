@@ -7,15 +7,15 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RectanglePacker">
-      <HintPath>..\Deps\RectanglePacker.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TRImageControl\TRImageControl.csproj" />
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="RectanglePacker">
+      <HintPath>..\Deps\RectanglePacker.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

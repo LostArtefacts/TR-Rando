@@ -1,4 +1,4 @@
-﻿using TRModelTransporter.Model.Textures;
+﻿using TRImageControl.Packing;
 using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Textures;

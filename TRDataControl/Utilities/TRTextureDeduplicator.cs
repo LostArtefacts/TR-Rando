@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using TRImageControl.Packing;
-using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Utilities;
 

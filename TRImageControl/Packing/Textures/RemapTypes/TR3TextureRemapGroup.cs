@@ -1,7 +1,6 @@
-﻿using TRImageControl.Packing;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 
-namespace TRModelTransporter.Model.Textures;
+namespace TRImageControl.Packing;
 
 public class TR3TextureRemapGroup : AbstractTextureRemapGroup<TR3Type, TR3Level>
 {

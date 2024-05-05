@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
-using TRModelTransporter.Model.Textures;
 using TRTexture16Importer.Helpers;
 
 namespace TRDataControl.Environment;

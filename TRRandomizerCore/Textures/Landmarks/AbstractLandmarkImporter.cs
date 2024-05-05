@@ -3,7 +3,6 @@ using System.Drawing;
 using TRImageControl.Packing;
 using TRLevelControl;
 using TRLevelControl.Model;
-using TRModelTransporter.Model.Textures;
 using TRTexture16Importer.Helpers;
 using TRTexture16Importer.Textures;
 

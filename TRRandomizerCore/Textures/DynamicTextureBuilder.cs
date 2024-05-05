@@ -4,7 +4,6 @@ using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
-using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Utilities;
