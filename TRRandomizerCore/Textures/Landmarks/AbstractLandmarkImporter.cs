@@ -16,7 +16,7 @@ public abstract class AbstractLandmarkImporter<E, L>
 
     protected abstract int MaxTextures { get; }
 
-    protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
+    protected abstract TRTexturePacker<E, L> CreatePacker(L level);
     protected abstract List<TRObjectTexture> GetObjectTextures(L level);
     protected abstract void SetRoomTexture(L level, int roomIndex, int rectangleIndex, ushort textureIndex);
     protected abstract short? GetRoomFromPortal(L level, PortalSector portalSector, bool isLevelMirrored);
@@ -33,7 +33,7 @@ public abstract class AbstractLandmarkImporter<E, L>
             return false;
         }
 
-        using AbstractTexturePacker<E, L> packer = CreatePacker(level);
+        using TRTexturePacker<E, L> packer = CreatePacker(level);
         Dictionary<LandmarkTextureTarget, TexturedTileSegment> targetSegmentMap = new();
 
         foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)

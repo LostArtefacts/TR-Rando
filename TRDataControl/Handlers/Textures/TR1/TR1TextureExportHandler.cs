@@ -6,7 +6,7 @@ namespace TRModelTransporter.Handlers.Textures;
 
 public class TR1TextureExportHandler : AbstractTextureExportHandler<TR1Type, TR1Level, TR1Blob>
 {
-    protected override AbstractTexturePacker<TR1Type, TR1Level> CreatePacker()
+    protected override TRTexturePacker<TR1Type, TR1Level> CreatePacker()
     {
         return new TR1TexturePacker(_level, _classifier);
     }

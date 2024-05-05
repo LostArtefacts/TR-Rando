@@ -48,7 +48,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
 
     private TR1TexturePacker _packer;
 
-    protected override AbstractTexturePacker<TR1Type, TR1Level> CreatePacker(TR1Level level)
+    protected override TRTexturePacker<TR1Type, TR1Level> CreatePacker(TR1Level level)
     {
         return _packer = new TR1TexturePacker(level);
     }

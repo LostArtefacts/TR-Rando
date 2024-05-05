@@ -28,7 +28,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
 
     private TRPalette16Control _paletteTracker;
 
-    protected override AbstractTexturePacker<TR2Type, TR2Level> CreatePacker(TR2Level level)
+    protected override TRTexturePacker<TR2Type, TR2Level> CreatePacker(TR2Level level)
     {
         return new TR2TexturePacker(level);
     }

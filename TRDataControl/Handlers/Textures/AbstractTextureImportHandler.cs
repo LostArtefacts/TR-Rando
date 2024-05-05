@@ -137,7 +137,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
 
     protected virtual PackingResult<TexturedTile, TexturedTileSegment> Pack()
     {
-        using AbstractTexturePacker<E, L> packer = CreatePacker();
+        using TRTexturePacker<E, L> packer = CreatePacker();
         packer.MaximumTiles = Data.TextureTileLimit;
 
         ProcessRemovals(packer);
@@ -255,9 +255,9 @@ public abstract class AbstractTextureImportHandler<E, L, D>
 
     protected abstract TRDictionary<E, TRSpriteSequence> GetExistingSpriteSequences();
 
-    protected abstract AbstractTexturePacker<E, L> CreatePacker();
+    protected abstract TRTexturePacker<E, L> CreatePacker();
 
-    protected abstract void ProcessRemovals(AbstractTexturePacker<E, L> packer);
+    protected abstract void ProcessRemovals(TRTexturePacker<E, L> packer);
 
     protected abstract List<TRObjectTexture> GetExistingObjectTextures();
 

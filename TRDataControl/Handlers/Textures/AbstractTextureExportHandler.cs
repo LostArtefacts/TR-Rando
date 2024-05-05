@@ -22,7 +22,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
     protected IEnumerable<E> _spriteDependencies;
     protected IEnumerable<int> _ignoreableTextureIndices;
 
-    protected AbstractTexturePacker<E, L> _packer;
+    protected TRTexturePacker<E, L> _packer;
 
     protected List<TexturedTileSegment> _allSegments;
     public event EventHandler<SegmentEventArgs> SegmentExported;
@@ -45,7 +45,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
         }
     }
 
-    protected abstract AbstractTexturePacker<E, L> CreatePacker();
+    protected abstract TRTexturePacker<E, L> CreatePacker();
 
     protected abstract TRSpriteSequence GetSprite(E entity);
 
