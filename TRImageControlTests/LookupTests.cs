@@ -175,4 +175,43 @@ public class LookupTests : TestBase
         // Did we find them all?
         Assert.AreEqual(0, textures.Count);
     }
+
+    [TestMethod]
+    public void TestObjectRemoval()
+    {
+        TR1Level level = GetTR1TestLevel();
+        TR1TexturePacker packer = new(level, 16);
+
+        TRModel lara = level.Models[TR1Type.Lara];
+        var regions = packer.GetMeshRegions(lara.Meshes);
+        Assert.AreNotEqual(0, regions.Count);
+
+        IEnumerable<int> textures = lara.Meshes
+            .SelectMany(m => m.TexturedFaces.Select(t => (int)t.Texture))
+            .Distinct();
+
+        packer.RemoveObjectRegions(textures);
+
+        regions = packer.GetMeshRegions(lara.Meshes);
+        Assert.AreEqual(0, regions.Count);
+
+        regions = packer.GetObjectRegions(textures);
+        Assert.AreEqual(0, regions.Count);
+    }
+
+    [TestMethod]
+    public void TestSpriteRemoval()
+    {
+        TR1Level level = GetTR1TestLevel();
+        TR1TexturePacker packer = new(level, 16);
+
+        List<TRSpriteSequence> font = new() { level.Sprites[TR1Type.FontGraphics_S_H] };
+        var regions = packer.GetSpriteRegions(font);
+        Assert.AreNotEqual(0, regions.Count);
+
+        packer.RemoveSpriteRegions(font);
+
+        regions = packer.GetSpriteRegions(font);
+        Assert.AreEqual(0, regions.Count);
+    }
 }
