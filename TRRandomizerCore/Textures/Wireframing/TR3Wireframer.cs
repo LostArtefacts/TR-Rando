@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
-using TRImageControl.Helpers;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -167,7 +167,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         const int height = 64;
 
         IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, width, height));
-        BitmapGraphics frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, true);
+        TRImage frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, true);
 
         switch (mode)
         {

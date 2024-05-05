@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using TRLevelControl.Model;
 
-namespace TRImageControl.Helpers;
+namespace TRImageControl;
 
 //https://www.codeproject.com/Articles/19045/Manipulating-colors-in-NET-Part-1
 public static class ColourExtensions

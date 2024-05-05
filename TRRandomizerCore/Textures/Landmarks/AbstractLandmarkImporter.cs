@@ -1,6 +1,6 @@
 ﻿using RectanglePacker.Events;
 using System.Drawing;
-using TRImageControl.Helpers;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRImageControl.Textures;
 using TRLevelControl;
@@ -106,8 +106,8 @@ public abstract class AbstractLandmarkImporter<E, L>
                             Index = target.BackgroundIndex,
                             Texture = textures[target.BackgroundIndex]
                         };
-                        BitmapGraphics tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
-                        BitmapGraphics clip = new(tile.Extract(indexedTexture.Bounds));
+                        TRImage tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
+                        TRImage clip = new(tile.Extract(indexedTexture.Bounds));
                         clip.Overlay(source.Bitmap);
                         image = clip.Bitmap;
 

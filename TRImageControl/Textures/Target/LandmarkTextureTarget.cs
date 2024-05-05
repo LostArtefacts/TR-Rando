@@ -1,12 +1,10 @@
-﻿using TRImageControl.Helpers;
-
-namespace TRImageControl.Textures;
+﻿namespace TRImageControl.Textures;
 
 public class LandmarkTextureTarget
 {
     public int MappedTextureIndex { get; set; }
     public int BackgroundIndex { get; set; }
-    public BitmapGraphics Background { get; set; }
+    public TRImage Background { get; set; }
     public int RoomNumber { get; set; }
     public List<int> RectangleIndices { get; set; }
     public PortalSector PortalSector { get; set; }

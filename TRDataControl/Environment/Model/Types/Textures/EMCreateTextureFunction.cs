@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using TRImageControl.Helpers;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
 
@@ -58,8 +58,8 @@ public class EMCreateTextureFunction : BaseEMFunction
                 Index = data.Background,
                 Texture = textures[data.Background]
             };
-            BitmapGraphics tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
-            BitmapGraphics clip = new(tile.Extract(indexedTexture.Bounds));
+            TRImage tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
+            TRImage clip = new(tile.Extract(indexedTexture.Bounds));
             clip.Overlay(new Bitmap(data.Overlay));
 
             IndexedTRObjectTexture texture = CreateTexture(clip.Bitmap.Size);

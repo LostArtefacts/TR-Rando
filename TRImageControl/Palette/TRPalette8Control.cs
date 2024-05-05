@@ -2,7 +2,7 @@
 using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TRImageControl.Helpers;
+namespace TRImageControl;
 
 public class TRPalette8Control : IDisposable
 {
@@ -40,7 +40,7 @@ public class TRPalette8Control : IDisposable
         for (int i = 0; i < Level.Images8.Count; i++)
         {
             Bitmap bmp = ChangedTiles.ContainsKey(i) ? ChangedTiles[i] : GetOriginalTile(i);
-            BitmapGraphics bg = new(bmp);
+            TRImage bg = new(bmp);
             bg.Scan(_defaultBounds, (c, x, y) =>
             {
                 int colIndex;

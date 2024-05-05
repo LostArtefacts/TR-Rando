@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using TRImageControl.Helpers;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
 
@@ -73,7 +73,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         foreach (TextureOverwrite overwrite in Overwrites)
         {
             Tuple<TexturedTile, TexturedTileSegment> segment = segmentAction(overwrite.Texture);
-            BitmapGraphics segmentBmp = new(segment.Item2.Bitmap);
+            TRImage segmentBmp = new(segment.Item2.Bitmap);
             Bitmap clipBmp = segmentBmp.Extract(overwrite.Clip);
 
             foreach (ushort targetTexture in overwrite.Targets.Keys)

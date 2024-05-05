@@ -1,7 +1,7 @@
 using RectanglePacker.Organisation;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using TRImageControl.Helpers;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
@@ -256,7 +256,7 @@ public abstract class AbstractTRWireframer<E, L>
         }
 
         IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
-        BitmapGraphics frame = CreateFrame(size.W, size.H, pen, mode, true);
+        TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
 
         packer.AddRectangle(new TexturedTileSegment(texture, frame.Bitmap));
 
@@ -271,7 +271,7 @@ public abstract class AbstractTRWireframer<E, L>
         }
 
         IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
-        BitmapGraphics frame = CreateFrame(size.W, size.H, pen, mode, false);
+        TRImage frame = CreateFrame(size.W, size.H, pen, mode, false);
 
         int rungSplit = size.H / _ladderRungs;
         for (int i = 0; i < _ladderRungs; i++)
@@ -296,7 +296,7 @@ public abstract class AbstractTRWireframer<E, L>
         }
 
         IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
-        BitmapGraphics frame = CreateFrame(size.W, size.H, pen, mode, true);
+        TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
         // X marks the spot
         frame.Graphics.DrawLine(pen, 0, size.H, size.W, 0);
 
@@ -313,7 +313,7 @@ public abstract class AbstractTRWireframer<E, L>
         }
 
         IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
-        BitmapGraphics frame = CreateFrame(size.W, size.H, pen, mode, true);
+        TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
         // Star symbol
         frame.Graphics.DrawLine(pen, 0, size.H, size.W, 0);
         frame.Graphics.DrawLine(pen, size.W / 2, 0, size.W / 2, size.H);
@@ -348,7 +348,7 @@ public abstract class AbstractTRWireframer<E, L>
         List<TRObjectTexture> textures = GetObjectTextures(level);
         foreach (WireframeClip clip in _data.ManualClips)
         {
-            BitmapGraphics frame = CreateFrame(clip.Clip.Width, clip.Clip.Height, pen, mode, true);
+            TRImage frame = CreateFrame(clip.Clip.Width, clip.Clip.Height, pen, mode, true);
 
             foreach (ushort texture in clip.Textures)
             {
@@ -357,7 +357,7 @@ public abstract class AbstractTRWireframer<E, L>
                     Index = texture,
                     Texture = textures[texture]
                 };
-                BitmapGraphics bmp = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
+                TRImage bmp = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
 
                 List<TexturedTileSegment> segments = packer.Tiles[indexedTexture.Atlas].GetObjectTextureIndexSegments(new int[] { texture });
                 foreach (TexturedTileSegment segment in segments)
@@ -383,9 +383,9 @@ public abstract class AbstractTRWireframer<E, L>
         }
     }
 
-    protected BitmapGraphics CreateFrame(int width, int height, Pen pen, SmoothingMode mode, bool addDiagonal)
+    protected TRImage CreateFrame(int width, int height, Pen pen, SmoothingMode mode, bool addDiagonal)
     {
-        BitmapGraphics image = new(new Bitmap(width, height));
+        TRImage image = new(new Bitmap(width, height));
         image.Graphics.SmoothingMode = mode;
 
         image.Graphics.FillRectangle(new SolidBrush(Color.Transparent), new Rectangle(0, 0, width, height));

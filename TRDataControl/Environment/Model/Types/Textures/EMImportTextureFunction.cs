@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using TRImageControl;
-using TRImageControl.Helpers;
 using TRLevelControl;
 using TRLevelControl.Model;
 
@@ -15,7 +14,7 @@ public class EMImportTextureFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        using BitmapGraphics bg = new(new Bitmap(Bitmap));
+        using TRImage bg = new(new Bitmap(Bitmap));
         List<Color> palette = level.Palette.Select(c => c.ToTR1Color()).ToList();
         Rectangle size = new(0, 0, bg.Bitmap.Width, bg.Bitmap.Height);
         bg.Scan(size, (c, x, y) =>
@@ -38,7 +37,7 @@ public class EMImportTextureFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        using BitmapGraphics bg = new(level.Images16[Tile].ToBitmap());
+        using TRImage bg = new(level.Images16[Tile].ToBitmap());
         using Bitmap bmp = new(Bitmap);
         bg.Import(bmp, new Rectangle(X, Y, bmp.Width, bmp.Height));
         level.Images16[Tile].Pixels = TextureUtilities.ImportFromBitmap(bg.Bitmap);
@@ -46,7 +45,7 @@ public class EMImportTextureFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        using BitmapGraphics bg = new(level.Images16[Tile].ToBitmap());
+        using TRImage bg = new(level.Images16[Tile].ToBitmap());
         using Bitmap bmp = new(Bitmap);
         bg.Import(bmp, new Rectangle(X, Y, bmp.Width, bmp.Height));
         level.Images16[Tile].Pixels = TextureUtilities.ImportFromBitmap(bg.Bitmap);

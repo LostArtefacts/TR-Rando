@@ -1,4 +1,4 @@
-﻿using TRImageControl.Helpers;
+﻿using TRImageControl;
 using TRLevelControl.Model;
 using TRModelTransporter.Model.Definitions;
 

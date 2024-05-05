@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
-using TRImageControl.Helpers;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -206,7 +206,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         const int height = 16;
                     
         IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, width, height));
-        BitmapGraphics frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, false);
+        TRImage frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, false);
 
         int flags = (doorInstance.Flags & 0x3E00) >> 9;
         for (int i = 0; i < 5; i++)

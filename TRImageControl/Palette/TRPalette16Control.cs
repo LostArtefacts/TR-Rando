@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using TRLevelControl.Model;
 
-namespace TRImageControl.Helpers;
+namespace TRImageControl;
 
 public class TRPalette16Control
 {
@@ -19,11 +19,8 @@ public class TRPalette16Control
         _palette = palette16;
 
         IEnumerable<int> colourRefs = meshes
-            .SelectMany(m => m.ColouredRectangles)
-            .Select(f => f.Texture >> 8)
-            .Concat(meshes
-                .SelectMany(m => m.ColouredTriangles)
-                .Select(f => f.Texture >> 8));
+            .SelectMany(m => m.ColouredFaces)
+            .Select(f => f.Texture >> 8);
 
         List<int> range = new(Enumerable.Range(0, palette16.Count));
         _freeIndices = new(range.Except(colourRefs));
