@@ -23,8 +23,6 @@ public class StaticTextureSource<E> : AbstractTextureSource
         get => _image ??= new(PNGPath);
     }
 
-    public TRImage ClonedBitmap => Image.Clone();
-
     public override bool Equals(object obj)
     {
         return obj is StaticTextureSource<E> source && PNGPath == source.PNGPath;

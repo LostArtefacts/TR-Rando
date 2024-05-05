@@ -115,7 +115,7 @@ public abstract class AbstractLandmarkImporter<E, L>
                     }
                     else
                     {
-                        image = source.ClonedBitmap;
+                        image = source.Image.Clone();
                     }
 
                     TexturedTileSegment segment = new(texture, image);

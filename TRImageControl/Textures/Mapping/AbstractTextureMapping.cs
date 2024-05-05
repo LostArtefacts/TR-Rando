@@ -189,7 +189,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     {
         foreach (int tileIndex in targets.Keys)
         {
-            TRImage bg = GetBitmapGraphics(tileIndex);
+            TRImage bg = GetImage(tileIndex);
             foreach (Rectangle rect in targets[tileIndex])
             {
                 bg.AdjustHSB(rect, operation);
@@ -275,7 +275,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 throw new IndexOutOfRangeException(string.Format("Segment {0} is invalid for texture source {1}.", target.Segment, source.PNGPath));
             }
 
-            GetBitmapGraphics(target.Tile).ImportSegment(source.Image, target, segments[target.Segment]);
+            GetImage(target.Tile).ImportSegment(source.Image, target, segments[target.Segment]);
         }
 
         if (source.EntityColourMap != null)
@@ -389,12 +389,12 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     {
         foreach (ReplacementTextureTarget replacement in ReplacementMapping)
         {
-            Color search = GetBitmapGraphics(replacement.Search.Tile).GetPixel(replacement.Search.X, replacement.Search.Y);
-            Color replace = GetBitmapGraphics(replacement.Replace.Tile).GetPixel(replacement.Replace.X, replacement.Replace.Y);
+            Color search = GetImage(replacement.Search.Tile).GetPixel(replacement.Search.X, replacement.Search.Y);
+            Color replace = GetImage(replacement.Replace.Tile).GetPixel(replacement.Replace.X, replacement.Replace.Y);
             // Scan each tile and replace colour Search with above
             foreach (int tile in replacement.ReplacementMap.Keys)
             {
-                TRImage graphics = GetBitmapGraphics(tile);
+                TRImage graphics = GetImage(tile);
                 foreach (Rectangle rect in replacement.ReplacementMap[tile])
                 {
                     graphics.Replace(rect, search, replace);
@@ -445,7 +445,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         return texture;
     }
 
-    private TRImage GetBitmapGraphics(int tile)
+    private TRImage GetImage(int tile)
     {
         if (!_tileMap.ContainsKey(tile))
         {
