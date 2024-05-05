@@ -52,6 +52,112 @@ public class PackingTests : TestBase
         TestPacking(packer1, packer2);
     }
 
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test object texture packing in TR4.")]
+    public void TestTR4PackingObjects()
+    {
+        TR4Level level1 = GetTR4TestLevel();
+        TR4Level level2 = GetTR4AltTestLevel();
+
+        TR4TexturePacker packer1 = new(level1, TRGroupPackingMode.Object, 32);
+        TR4TexturePacker packer2 = new(level2, TRGroupPackingMode.Object);
+
+        TestPacking(packer1, packer2);
+    }
+
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test room texture packing in TR4.")]
+    public void TestTR4PackingRooms()
+    {
+        TR4Level level1 = GetTR4TestLevel();
+        TR4Level level2 = GetTR4AltTestLevel();
+
+        TR4TexturePacker packer1 = new(level1, TRGroupPackingMode.Room, 32);
+        TR4TexturePacker packer2 = new(level2, TRGroupPackingMode.Room, 32);
+
+        TestPacking(packer1, packer2);
+    }
+
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test read-only texture packing in TR4.")]
+    public void TestTR4PackingReadOnly()
+    {
+        TR4Level level1 = GetTR4TestLevel();
+        TR4Level level2 = GetTR4AltTestLevel();
+
+        TR4TexturePacker packer1 = new(level1, TRGroupPackingMode.All, 32);
+        TR4TexturePacker packer2 = new(level2, TRGroupPackingMode.Room, 32);
+
+        IEnumerable<TRTexture> textures = packer1.Tiles
+            .SelectMany(t => t.Rectangles)
+            .SelectMany(r => r.Segments)
+            .Select(s => s.Texture);
+        Assert.AreEqual(level1.ObjectTextures.Count + level1.Sprites.Sum(s => s.Value.Textures.Count), textures.Count());
+
+        try
+        {
+            TestPacking(packer1, packer2);
+            Assert.Fail();
+        }
+        catch { }
+    }
+
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test object texture packing in TR5.")]
+    public void TestTR5PackingObjects()
+    {
+        TR5Level level1 = GetTR5TestLevel();
+        TR5Level level2 = GetTR5AltTestLevel();
+
+        TR5TexturePacker packer1 = new(level1, TRGroupPackingMode.Object, 32);
+        TR5TexturePacker packer2 = new(level2, TRGroupPackingMode.Object, 32);
+
+        TestPacking(packer1, packer2);
+    }
+
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test room texture packing in TR5.")]
+    public void TestTR5PackingRooms()
+    {
+        TR5Level level1 = GetTR5TestLevel();
+        TR5Level level2 = GetTR5AltTestLevel();
+
+        TR5TexturePacker packer1 = new(level1, TRGroupPackingMode.Room, 32);
+        TR5TexturePacker packer2 = new(level2, TRGroupPackingMode.Room, 32);
+
+        TestPacking(packer1, packer2);
+    }
+
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test read-only texture packing in TR5.")]
+    public void TestTR5PackingReadOnly()
+    {
+        TR5Level level1 = GetTR5TestLevel();
+        TR5Level level2 = GetTR5AltTestLevel();
+
+        TR5TexturePacker packer1 = new(level1, TRGroupPackingMode.All, 32);
+        TR5TexturePacker packer2 = new(level2, TRGroupPackingMode.Room, 32);
+
+        IEnumerable<TRTexture> textures = packer1.Tiles
+            .SelectMany(t => t.Rectangles)
+            .SelectMany(r => r.Segments)
+            .Select(s => s.Texture);
+        Assert.AreEqual(level1.ObjectTextures.Count + level1.Sprites.Sum(s => s.Value.Textures.Count), textures.Count());
+
+        try
+        {
+            TestPacking(packer1, packer2);
+            Assert.Fail();
+        }
+        catch { }
+    }
+
     private static void TestPacking(TRTexturePacker packer1, TRTexturePacker packer2)
     {
         Assert.AreNotEqual(0, packer2.Tiles[0].Rectangles.Count);

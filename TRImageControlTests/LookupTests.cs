@@ -40,6 +40,28 @@ public class LookupTests : TestBase
         TestGetMeshRegions(packer, level.Models[TR3Type.Lara].Meshes, level.ObjectTextures);
     }
 
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test locating mesh texture regions in TR4.")]
+    public void TestGetTR4MeshRegions()
+    {
+        TR4Level level = GetTR4TestLevel();
+        TR4TexturePacker packer = new(level, TRGroupPackingMode.Object, 32);
+
+        TestGetMeshRegions(packer, level.Models[TR4Type.Lara].Meshes, level.ObjectTextures);
+    }
+
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test locating mesh texture regions in TR5.")]
+    public void TestGetTR5MeshRegions()
+    {
+        TR5Level level = GetTR5TestLevel();
+        TR5TexturePacker packer = new(level, TRGroupPackingMode.Object, 32);
+
+        TestGetMeshRegions(packer, level.Models[TR5Type.Lara].Meshes, level.ObjectTextures);
+    }
+
     private static void TestGetMeshRegions(TRTexturePacker packer, List<TRMesh> meshes, List<TRObjectTexture> allTextures)
     {
         Dictionary<TRTextile, List<TRTextileRegion>> regions = packer.GetMeshRegions(meshes);
@@ -105,6 +127,28 @@ public class LookupTests : TestBase
         TR3TexturePacker packer = new(level, 16);
 
         TestGetSpriteRegions(packer, level.Sprites[TR3Type.FontGraphics_S_H]);
+    }
+
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test locating sprite texture regions in TR4.")]
+    public void TestGetTR4SpriteRegions()
+    {
+        TR4Level level = GetTR4TestLevel();
+        TR4TexturePacker packer = new(level, TRGroupPackingMode.Object, 32);
+
+        TestGetSpriteRegions(packer, level.Sprites[TR4Type.DefaultSprites]);
+    }
+
+    [TestMethod]
+    [TestCategory("Packing")]
+    [Description("Test locating sprite texture regions in TR5.")]
+    public void TestGetTR5SpriteRegions()
+    {
+        TR5Level level = GetTR5TestLevel();
+        TR5TexturePacker packer = new(level, TRGroupPackingMode.Object, 32);
+
+        TestGetSpriteRegions(packer, level.Sprites[TR5Type.SkyGraphics]);
     }
 
     private static void TestGetSpriteRegions(TRTexturePacker packer, TRSpriteSequence sequence)
