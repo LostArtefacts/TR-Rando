@@ -2,7 +2,7 @@
 using System.Drawing;
 using TRGE.Coord;
 using TRGE.Core;
-using TRImageControl.Helpers;
+using TRImageControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
@@ -359,7 +359,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
         if (File.Exists(backupTitle))
         {
             string editedTitle = Path.Combine(GetWriteBasePath(), mainMenuPic);
-            using BitmapGraphics bg = new(new Bitmap(backupTitle));
+            using TRImage bg = new(new Bitmap(backupTitle));
             using Bitmap badge = new(@"Resources\Shared\Graphics\goldbadge-small.png");
             bg.Graphics.DrawImage(badge, new Rectangle(
                 scriptEditor.GameMode == GameMode.Gold ? _goldBadgePos : _regularBadgePos, 
@@ -378,7 +378,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
             string creditFile = Path.Combine(_io.OutputDirectory.FullName, "trrando.png");
             string creditPath = @"data\trrando.png";
 
-            using (BitmapGraphics bg = new(new Bitmap(1920, 1080)))
+            using (TRImage bg = new(new Bitmap(1920, 1080)))
             using (Bitmap badge = new(@"Resources\Shared\Graphics\goldbadge-large.png"))
             {
                 bg.Graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, 1920, 1080));

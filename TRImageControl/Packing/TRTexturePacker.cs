@@ -3,7 +3,6 @@ using RectanglePacker.Events;
 using RectanglePacker.Organisation;
 using System.Collections.Immutable;
 using System.Drawing;
-using TRImageControl.Helpers;
 using TRLevelControl;
 using TRLevelControl.Model;
 
@@ -55,7 +54,7 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
             for (int i = 0; i < NumLevelImages; i++)
             {
                 TexturedTile tile = AddTile();
-                tile.BitmapGraphics = new BitmapGraphics(GetTile(i));
+                tile.BitmapGraphics = new TRImage(GetTile(i));
                 tile.AllowOverlapping = true; // Allow initially for the likes of Opera House - see tile 3 [128, 128]
             }
 

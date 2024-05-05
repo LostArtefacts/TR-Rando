@@ -19,14 +19,14 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     public Color DefaultSkyBox { get; set; }
     public Dictionary<E, E> EntityMap { get; set; }
 
-    protected readonly Dictionary<int, BitmapGraphics> _tileMap;
+    protected readonly Dictionary<int, TRImage> _tileMap;
     protected readonly L _level;
     protected bool _committed;
 
     protected AbstractTextureMapping(L level)
     {
         _level = level;
-        _tileMap = new Dictionary<int, BitmapGraphics>();
+        _tileMap = new Dictionary<int, TRImage>();
         _committed = false;
     }
 
@@ -190,7 +190,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     {
         foreach (int tileIndex in targets.Keys)
         {
-            BitmapGraphics bg = GetBitmapGraphics(tileIndex);
+            TRImage bg = GetBitmapGraphics(tileIndex);
             foreach (Rectangle rect in targets[tileIndex])
             {
                 bg.AdjustHSB(rect, operation);
@@ -395,7 +395,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
             // Scan each tile and replace colour Search with above
             foreach (int tile in replacement.ReplacementMap.Keys)
             {
-                BitmapGraphics graphics = GetBitmapGraphics(tile);
+                TRImage graphics = GetBitmapGraphics(tile);
                 foreach (Rectangle rect in replacement.ReplacementMap[tile])
                 {
                     graphics.Replace(search, replace, rect);
@@ -446,11 +446,11 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         return texture;
     }
 
-    private BitmapGraphics GetBitmapGraphics(int tile)
+    private TRImage GetBitmapGraphics(int tile)
     {
         if (!_tileMap.ContainsKey(tile))
         {
-            _tileMap.Add(tile, new BitmapGraphics(GetTile(tile)));
+            _tileMap.Add(tile, new TRImage(GetTile(tile)));
         }
 
         return _tileMap[tile];
@@ -468,7 +468,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         {
             foreach (int tile in _tileMap.Keys)
             {
-                using BitmapGraphics bmp = _tileMap[tile];
+                using TRImage bmp = _tileMap[tile];
                 SetTile(tile, bmp.Bitmap);
             }
             _committed = true;

@@ -1,14 +1,13 @@
 ﻿using RectanglePacker.Defaults;
 using System.Drawing;
 using System.Drawing.Imaging;
-using TRImageControl.Helpers;
 
 namespace TRImageControl.Packing;
 
 public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
 {
-    private BitmapGraphics _graphics;
-    public BitmapGraphics BitmapGraphics
+    private TRImage _graphics;
+    public TRImage BitmapGraphics
     {
         get => _graphics;
         set

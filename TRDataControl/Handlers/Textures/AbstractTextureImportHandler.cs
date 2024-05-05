@@ -4,7 +4,7 @@ using TRImageControl.Packing;
 using TRLevelControl.Model;
 using TRModelTransporter.Data;
 using TRModelTransporter.Model;
-using TRImageControl.Helpers;
+using TRImageControl;
 
 namespace TRModelTransporter.Handlers;
 
@@ -79,7 +79,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             }
 
             _importSegments[definition] = new List<TexturedTileSegment>();
-            using BitmapGraphics bg = new(definition.Bitmap);
+            using TRImage bg = new(definition.Bitmap);
             foreach (int segmentIndex in definition.ObjectTextures.Keys)
             {
                 Bitmap segmentClip = bg.Extract(definition.TextureSegments[segmentIndex]);
