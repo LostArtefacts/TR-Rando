@@ -20,7 +20,7 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
 
     public void Deduplicate(string remappingPath)
     {
-        using TRTexturePacker<E, L> levelPacker = CreatePacker(Level);
+        TRTexturePacker<E, L> levelPacker = CreatePacker(Level);
         Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
         foreach (TexturedTile tile in levelPacker.Tiles)
         {

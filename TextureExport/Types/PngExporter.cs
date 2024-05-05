@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using TRImageControl;
+﻿using TRImageControl;
 using TRLevelControl.Model;
 
 namespace TextureExport.Types;
@@ -27,8 +26,8 @@ public static class PngExporter
         int index = 0;
         foreach (TRTexImage8 tex in images)
         {
-            using Bitmap bmp = tex.ToBitmap(palette);
-            bmp.Save(Path.Combine(dir, index.ToString().PadLeft(2, '0') + ".png"));
+            TRImage image = new(tex.Pixels, palette);
+            image.Save(Path.Combine(dir, index.ToString().PadLeft(2, '0') + ".png"));
             index++;
         }
     }
@@ -39,8 +38,8 @@ public static class PngExporter
         int index = 0;
         foreach (TRTexImage16 tex in images)
         {
-            using Bitmap bmp = tex.ToBitmap();
-            bmp.Save(Path.Combine(dir, index.ToString().PadLeft(2, '0') + ".png"));
+            TRImage image = new(tex.Pixels);
+            image.Save(Path.Combine(dir, index.ToString().PadLeft(2, '0') + ".png"));
             index++;
         }
     }

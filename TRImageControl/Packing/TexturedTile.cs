@@ -1,20 +1,18 @@
 ﻿using RectanglePacker.Defaults;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace TRImageControl.Packing;
 
-public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
+public class TexturedTile : DefaultTile<TexturedTileSegment>
 {
-    private TRImage _graphics;
-    public TRImage BitmapGraphics
+    private TRImage _image;
+    public TRImage Image
     {
-        get => _graphics;
+        get => _image;
         set
         {
-            _graphics = value;
+            _image = value;
             // Listen to on-the-fly bitmap changes
-            _graphics.GraphicChanged += (object sender, EventArgs e) =>
+            _image.DataChanged += (object sender, EventArgs e) =>
             {
                 _graphicChanged = true;
             };
@@ -29,7 +27,7 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
         set => _allowOverlapping = value;
     }
 
-    public bool BitmapChanged => _segmentAdded || _segmentRemoved || _graphicChanged;
+    public bool ImageChanged => _segmentAdded || _segmentRemoved || _graphicChanged;
     private bool _segmentAdded, _segmentRemoved, _graphicChanged;
 
     public TexturedTile()
@@ -50,7 +48,7 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
         }
 
         // Otherwise, make a new segment
-        TexturedTileSegment newSegment = new(texture, BitmapGraphics.Extract(texture.Bounds));
+        TexturedTileSegment newSegment = new(texture, Image.Export(texture.Bounds));
         base.Add(newSegment, texture.Bounds.X, texture.Bounds.Y);
     }
 
@@ -100,7 +98,7 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
         if (added)
         {
             CheckBitmapStatus();
-            BitmapGraphics.Import(segment.Bitmap, segment.MappedBounds);
+            Image.Import(segment.Image, segment.MappedBounds.Location);
 
             segment.Bind();
             _segmentAdded = true;
@@ -114,7 +112,7 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
         if (removed)
         {
             CheckBitmapStatus();
-            BitmapGraphics.Delete(segment.Bounds);
+            Image.Delete(segment.Bounds);
             segment.Unbind();
             _segmentRemoved = true;
         }
@@ -137,17 +135,6 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
 
     private void CheckBitmapStatus()
     {
-        BitmapGraphics ??= new(new Bitmap(Width, Height, PixelFormat.Format32bppArgb));
-    }
-
-    public void Dispose()
-    {
-        BitmapGraphics?.Dispose();
-
-        foreach (TexturedTileSegment segment in _rectangles)
-        {
-            segment.Dispose();
-        }
-        GC.SuppressFinalize(this);
+        Image ??= new(Width, Height);
     }
 }

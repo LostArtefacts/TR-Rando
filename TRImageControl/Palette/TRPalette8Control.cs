@@ -4,14 +4,10 @@ using TRLevelControl.Model;
 
 namespace TRImageControl;
 
-public class TRPalette8Control : IDisposable
+public class TRPalette8Control
 {
-    private const int _paletteLimit = TRConsts.PaletteSize - 1;
-
-    private readonly Rectangle _defaultBounds = new(0, 0, TRConsts.TPageWidth, TRConsts.TPageHeight);
-
     public TR1Level Level { get; set; }
-    public Dictionary<int, Bitmap> ChangedTiles { get; set; }
+    public Dictionary<int, TRImage> ChangedTiles { get; set; }
     public List<TR1Type> ObsoleteModels { get; set; }
 
     private List<Color> _palette, _predefinedPalette;
@@ -22,9 +18,9 @@ public class TRPalette8Control : IDisposable
         ObsoleteModels = new();
     }
 
-    public Bitmap GetOriginalTile(int tileIndex)
+    public TRImage GetOriginalTile(int tileIndex)
     {
-        return Level.Images8[tileIndex].ToBitmap(Level.Palette);
+        return new(Level.Images8[tileIndex].Pixels, Level.Palette);
     }
 
     public void MergeTiles()
@@ -39,9 +35,8 @@ public class TRPalette8Control : IDisposable
         // palette or replace with a suitable match.
         for (int i = 0; i < Level.Images8.Count; i++)
         {
-            Bitmap bmp = ChangedTiles.ContainsKey(i) ? ChangedTiles[i] : GetOriginalTile(i);
-            TRImage bg = new(bmp);
-            bg.Scan(_defaultBounds, (c, x, y) =>
+            TRImage image = ChangedTiles.ContainsKey(i) ? ChangedTiles[i] : GetOriginalTile(i);
+            image.Read((c, x, y) =>
             {
                 int colIndex;
                 if (c.A == 0)
@@ -56,8 +51,6 @@ public class TRPalette8Control : IDisposable
 
                 // Store the pointer in the level tiles
                 Level.Images8[i].Pixels[y * TRConsts.TPageWidth + x] = (byte)colIndex;
-
-                return c;
             });
         }
 
@@ -100,12 +93,12 @@ public class TRPalette8Control : IDisposable
 
     private ushort GetMeshFaceColour(ushort colourRef)
     {
-        if (colourRef > _paletteLimit)
+        if (colourRef >= TRConsts.PaletteSize)
         {
             if (_predefinedPalette != null)
             {
                 // This is a predefined colour we're tracking during import, so it's in our palette and not the level's
-                colourRef -= (_paletteLimit + 1);
+                colourRef -= TRConsts.PaletteSize;
                 return (ushort)GetOrAddPaletteIndex(_predefinedPalette[colourRef]);
             }
 
@@ -118,7 +111,7 @@ public class TRPalette8Control : IDisposable
     public void WritePalletteToLevel()
     {
         // Fill up the remainder with black
-        while (_palette.Count <= _paletteLimit)
+        while (_palette.Count < TRConsts.PaletteSize)
         {
             _palette.Add(Color.Black);
         }
@@ -138,7 +131,7 @@ public class TRPalette8Control : IDisposable
             _predefinedPalette.Add(c);
         }
 
-        return colIndex + _paletteLimit + 1;
+        return colIndex + TRConsts.PaletteSize;
     }
 
     public void MergePredefinedColours()
@@ -179,9 +172,9 @@ public class TRPalette8Control : IDisposable
     public int GetOrAddPaletteIndex(Color c)
     {
         int colIndex = _palette.IndexOf(c);
-        if (colIndex == -1 || colIndex > _paletteLimit)
+        if (colIndex == -1 || colIndex >= TRConsts.PaletteSize)
         {
-            if (_palette.Count <= _paletteLimit)
+            if (_palette.Count < TRConsts.PaletteSize)
             {
                 // We have room to store this colour
                 colIndex = _palette.Count;
@@ -206,15 +199,5 @@ public class TRPalette8Control : IDisposable
     {
         // Start at 1 to avoid matching black to transparency.
         return palette.FindClosest(colour, 1);
-    }
-
-    public void Dispose()
-    {
-        foreach (Bitmap bmp in ChangedTiles.Values)
-        {
-            bmp.Dispose();
-        }
-        ChangedTiles.Clear();
-        GC.SuppressFinalize(this);
     }
 }

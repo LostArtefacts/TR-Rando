@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
@@ -80,18 +79,18 @@ public class TR1TexturePacker : TRTexturePacker<TR1Type, TR1Level>
         }
     }
 
-    public override Bitmap GetTile(int tileIndex)
+    public override TRImage  GetTile(int tileIndex)
     {
-        return Level.Images8[tileIndex].ToBitmap(Level.Palette);
+        return new(Level.Images8[tileIndex].Pixels, Level.Palette);
     }
 
-    public override void SetTile(int tileIndex, Bitmap bitmap)
+    public override void SetTile(int tileIndex, TRImage image)
     {
         PaletteManager ??= new()
         {
             Level = Level
         };
-        PaletteManager.ChangedTiles[tileIndex] = bitmap;
+        PaletteManager.ChangedTiles[tileIndex] = image;
     }
 
     protected override void PostCommit()

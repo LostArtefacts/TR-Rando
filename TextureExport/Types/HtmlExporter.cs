@@ -12,7 +12,7 @@ public static class HtmlExporter
 {
     public static void Export(TR1Level level, string lvlName)
     {
-        using TR1TexturePacker packer = new(level);
+        TR1TexturePacker packer = new(level);
         StringBuilder tiles = new();
         BuildTiles(tiles, packer.Tiles, level.Palette);
 
@@ -34,7 +34,7 @@ public static class HtmlExporter
 
     public static void Export(TR2Level level, string lvlName)
     {
-        using TR2TexturePacker packer = new(level);
+        TR2TexturePacker packer = new(level);
         StringBuilder tiles = new();
         BuildTiles(tiles, packer.Tiles);
 
@@ -50,7 +50,7 @@ public static class HtmlExporter
 
     public static void Export(TR3Level level, string lvlName)
     {
-        using TR3TexturePacker packer = new(level);
+        TR3TexturePacker packer = new(level);
         StringBuilder tiles = new();
         BuildTiles(tiles, packer.Tiles);
 
@@ -73,7 +73,7 @@ public static class HtmlExporter
             foreach (TexturedTileSegment segment in tile.Rectangles)
             {
                 using MemoryStream ms = new();
-                segment.Bitmap.Save(ms, ImageFormat.Png);
+                segment.Image.Save(ms, ImageFormat.Png);
 
                 List<int> objectTextures = GetObjectTextureList(segment);
                 List<int> spriteTextures = GetSpriteTextureList(segment);
@@ -87,11 +87,11 @@ public static class HtmlExporter
                 {
                     // Assume 8-bit so we want to see the palette indices for this segment
                     ISet<int> paletteIndices = new SortedSet<int>();
-                    for (int y = 0; y < segment.Bitmap.Height; y++)
+                    for (int y = 0; y < segment.Image.Height; y++)
                     {
-                        for (int x = 0; x < segment.Bitmap.Width; x++)
+                        for (int x = 0; x < segment.Image.Width; x++)
                         {
-                            Color c = segment.Bitmap.GetPixel(x, y);
+                            Color c = segment.Image.GetPixel(x, y);
                             if (c.A != 0)
                             {
                                 TRColour col = c.ToTRColour();

@@ -2,7 +2,7 @@
 
 namespace TRRandomizerCore.Textures;
 
-public abstract class AbstractTextureMonitorBroker<E> : IDisposable
+public abstract class AbstractTextureMonitorBroker<E>
     where E : Enum
 {
     private readonly Dictionary<string, TextureMonitor<E>> _monitors;
@@ -128,11 +128,5 @@ public abstract class AbstractTextureMonitorBroker<E> : IDisposable
     {
         TextureMonitor<E> monitor = GetMonitor(lvlName);
         return monitor?.EntityMap;
-    }
-
-    public void Dispose()
-    {
-        _textureDatabase.Dispose();
-        GC.SuppressFinalize(this);
     }
 }

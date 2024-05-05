@@ -192,7 +192,7 @@ public class DynamicTextureBuilder
         }
 
         // Put it all together into the required format for texture re-mapping.
-        using TR1TexturePacker packer = new(level.Data);
+        TR1TexturePacker packer = new(level.Data);
         Dictionary<int, List<Rectangle>> defaultMapping = new();
         AddSegmentsToMapping(packer.GetObjectTextureSegments(defaultObjectTextures), defaultMapping);
         AddSegmentsToMapping(packer.GetSpriteTextureSegments(defaultSpriteTextures), defaultMapping);
@@ -300,8 +300,10 @@ public class DynamicTextureBuilder
 
     private void DuplicateMeshTextures(TR1Level level, TRMesh mesh)
     {
-        using TR1TexturePacker packer = new(level);
-        packer.MaximumTiles = IsCommunityPatch ? 128 : 16;
+        TR1TexturePacker packer = new(level)
+        {
+            MaximumTiles = IsCommunityPatch ? 128 : 16
+        };
         int maximumObjects = IsCommunityPatch ? 8192 : 2048;
 
         // Collect all texture pointers from each face in the mesh.

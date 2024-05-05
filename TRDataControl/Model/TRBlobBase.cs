@@ -1,18 +1,19 @@
 ﻿using Newtonsoft.Json;
 using System.Drawing;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
 
 namespace TRModelTransporter.Model;
 
-public abstract class TRBlobBase<E> : IDisposable where E : Enum
+public abstract class TRBlobBase<E> where E : Enum
 {
     [JsonIgnore]
     public E Entity { get; set; }
     [JsonIgnore]
     public E Alias { get; set; }
     [JsonIgnore]
-    public Bitmap Bitmap { get; set; }
+    public TRImage Image { get; set; }
     [JsonIgnore]
     public bool HasGraphics => ObjectTextures.Count > 0;
     [JsonIgnore]
@@ -23,10 +24,4 @@ public abstract class TRBlobBase<E> : IDisposable where E : Enum
     public Dictionary<E, Dictionary<int, List<IndexedTRSpriteTexture>>> SpriteTextures { get; set; }
     public Dictionary<E, TRSpriteSequence> SpriteSequences { get; set; }
     public Rectangle[] TextureSegments { get; set; }
-
-    public void Dispose()
-    {
-        Bitmap?.Dispose();
-        GC.SuppressFinalize(this);
-    }
 }

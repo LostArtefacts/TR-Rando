@@ -593,33 +593,30 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             // Just the torso
             laraMisc[7].CopyInto(lara[7]);
-            
-            using (TR1TexturePacker packer = new(level.Data))
-            {
-                // Replace the blue parts on Lara's hips with skin tone
-                List<int> faces = new() { 5, 6, 7 };
-                foreach (int face in faces)
-                {
-                    Dictionary<TexturedTile, List<TexturedTileSegment>> segments = packer.GetObjectTextureSegments(new List<int> { lara[0].TexturedRectangles[face].Texture });
-                    foreach (TexturedTile tile in segments.Keys)
-                    {
-                        int index = -1;
-                        Rectangle rect = segments[tile].First().Bounds;
-                        tile.BitmapGraphics.Scan(rect, (c, x, y) =>
-                        {
-                            if (y - rect.Y < 2 || face == 7)
-                            {
-                                if (c.A != 0 && index == -1)
-                                {
-                                    // Top-left is skin tone in each of these cases.
-                                    index = level.Data.Images8[tile.Index].Pixels[y * TRConsts.TPageWidth + x];
-                                }
 
-                                level.Data.Images8[tile.Index].Pixels[y * TRConsts.TPageWidth + x] = (byte)(c.A == 0 ? 0 : index);
+            TR1TexturePacker packer = new(level.Data);
+            // Replace the blue parts on Lara's hips with skin tone
+            List<int> faces = new() { 5, 6, 7 };
+            foreach (int face in faces)
+            {
+                Dictionary<TexturedTile, List<TexturedTileSegment>> segments = packer.GetObjectTextureSegments(new List<int> { lara[0].TexturedRectangles[face].Texture });
+                foreach (TexturedTile tile in segments.Keys)
+                {
+                    int index = -1;
+                    Rectangle rect = segments[tile].First().Bounds;
+                    tile.Image.Read(rect, (c, x, y) =>
+                    {
+                        if (y - rect.Y < 2 || face == 7)
+                        {
+                            if (c.A != 0 && index == -1)
+                            {
+                                // Top-left is skin tone in each of these cases.
+                                index = level.Data.Images8[tile.Index].Pixels[y * TRConsts.TPageWidth + x];
                             }
-                            return c;
-                        });
-                    }
+
+                            level.Data.Images8[tile.Index].Pixels[y * TRConsts.TPageWidth + x] = (byte)(c.A == 0 ? 0 : index);
+                        }
+                    });
                 }
             }
 

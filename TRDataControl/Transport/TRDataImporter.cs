@@ -68,18 +68,9 @@ public abstract class TRDataImporter<E, L, D> : TRDataTransport<E, L, D>
             });
         }
 
-        try
+        if (standardModelDefinitions.Count + soundModelDefinitions.Count > 0)
         {
-            if (standardModelDefinitions.Count + soundModelDefinitions.Count > 0)
-            {
-                Import(standardModelDefinitions, soundModelDefinitions);
-            }
-        }
-        finally
-        {
-            // Bitmap cleanup
-            standardModelDefinitions.ForEach(d => d.Dispose());
-            soundModelDefinitions.ForEach(d => d.Dispose());
+            Import(standardModelDefinitions, soundModelDefinitions);
         }
     }
 

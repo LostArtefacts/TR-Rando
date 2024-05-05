@@ -25,7 +25,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     protected AbstractTextureMapping(L level)
     {
         _level = level;
-        _tileMap = new Dictionary<int, TRImage>();
+        _tileMap = new();
         _committed = false;
     }
 
@@ -34,8 +34,8 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     protected abstract List<TRColour4> GetPalette16();
     protected abstract int ImportColour(Color colour);
     protected abstract TRDictionary<E, TRSpriteSequence> GetSpriteSequences();
-    protected abstract Bitmap GetTile(int tileIndex);
-    protected abstract void SetTile(int tileIndex, Bitmap bitmap);
+    protected abstract TRImage GetTile(int tileIndex);
+    protected abstract void SetTile(int tileIndex, TRImage image);
 
     protected static void LoadMapping(AbstractTextureMapping<E, L> levelMapping, string mapFile, TextureDatabase<E> database, Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> predefinedMapping = null, List<E> entitiesToIgnore = null)
     {
@@ -189,7 +189,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     {
         foreach (int tileIndex in targets.Keys)
         {
-            TRImage bg = GetBitmapGraphics(tileIndex);
+            TRImage bg = GetImage(tileIndex);
             foreach (Rectangle rect in targets[tileIndex])
             {
                 bg.AdjustHSB(rect, operation);
@@ -275,7 +275,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 throw new IndexOutOfRangeException(string.Format("Segment {0} is invalid for texture source {1}.", target.Segment, source.PNGPath));
             }
 
-            GetBitmapGraphics(target.Tile).ImportSegment(source.Bitmap, target, segments[target.Segment]);
+            GetImage(target.Tile).ImportSegment(source.Image, target, segments[target.Segment]);
         }
 
         if (source.EntityColourMap != null)
@@ -324,7 +324,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
 
                     // Extract the colour from the top-left of the rectangle specified in the source, and import that into the level
                     int sourceRectangle = source.EntityColourMap[entity][targetColour];
-                    int newColourIndex = ImportColour(source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
+                    int newColourIndex = ImportColour(source.Image.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
                     remapIndices.Add(matchedIndex, newColourIndex);
                 }
 
@@ -367,7 +367,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                     }
 
                     int sourceRectangle = source.EntityColourMap8[entity][targetColour];
-                    int newColourIndex = ImportColour(source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
+                    int newColourIndex = ImportColour(source.Image.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
                     remapIndices.Add(matchedIndex, newColourIndex);
                 }
 
@@ -389,15 +389,15 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     {
         foreach (ReplacementTextureTarget replacement in ReplacementMapping)
         {
-            Color search = GetBitmapGraphics(replacement.Search.Tile).Bitmap.GetPixel(replacement.Search.X, replacement.Search.Y);
-            Color replace = GetBitmapGraphics(replacement.Replace.Tile).Bitmap.GetPixel(replacement.Replace.X, replacement.Replace.Y);
+            Color search = GetImage(replacement.Search.Tile).GetPixel(replacement.Search.X, replacement.Search.Y);
+            Color replace = GetImage(replacement.Replace.Tile).GetPixel(replacement.Replace.X, replacement.Replace.Y);
             // Scan each tile and replace colour Search with above
             foreach (int tile in replacement.ReplacementMap.Keys)
             {
-                TRImage graphics = GetBitmapGraphics(tile);
+                TRImage graphics = GetImage(tile);
                 foreach (Rectangle rect in replacement.ReplacementMap[tile])
                 {
-                    graphics.Replace(search, replace, rect);
+                    graphics.Replace(rect, search, replace);
                 }
             }
         }
@@ -445,11 +445,11 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         return texture;
     }
 
-    private TRImage GetBitmapGraphics(int tile)
+    private TRImage GetImage(int tile)
     {
         if (!_tileMap.ContainsKey(tile))
         {
-            _tileMap.Add(tile, new TRImage(GetTile(tile)));
+            _tileMap.Add(tile, GetTile(tile));
         }
 
         return _tileMap[tile];
@@ -467,8 +467,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         {
             foreach (int tile in _tileMap.Keys)
             {
-                using TRImage bmp = _tileMap[tile];
-                SetTile(tile, bmp.Bitmap);
+                SetTile(tile, _tileMap[tile]);
             }
             _committed = true;
         }

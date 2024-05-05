@@ -49,13 +49,13 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Type, TR2Level>
         return _level.Sprites;
     }
 
-    protected override Bitmap GetTile(int tileIndex)
+    protected override TRImage GetTile(int tileIndex)
     {
-        return _level.Images16[tileIndex].ToBitmap();
+        return new(_level.Images16[tileIndex].Pixels);
     }
 
-    protected override void SetTile(int tileIndex, Bitmap bitmap)
+    protected override void SetTile(int tileIndex, TRImage image)
     {
-        _level.Images16[tileIndex].Pixels = TextureUtilities.ImportFromBitmap(bitmap);
+        _level.Images16[tileIndex].Pixels = image.ToRGB555();
     }
 }

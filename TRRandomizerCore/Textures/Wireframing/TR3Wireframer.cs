@@ -168,14 +168,16 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
 
         IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, width, height));
         TRImage frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, true);
+        using Bitmap bmp = frame.ToBitmap();
+        using Graphics graphics = Graphics.FromImage(bmp);
 
         switch (mode)
         {
             case SpecialTextureMode.CrashPadCircle:
-                frame.Graphics.FillEllipse(pen.Brush, new Rectangle(16, 16, 46, 46));
+                graphics.FillEllipse(pen.Brush, new Rectangle(16, 16, 46, 46));
                 break;
             case SpecialTextureMode.CrashPadDiamond:
-                frame.Graphics.FillPolygon(pen.Brush, new Point[]
+                graphics.FillPolygon(pen.Brush, new Point[]
                 {
                     new(32, 16),
                     new(48, 32),
@@ -185,6 +187,6 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
                 break;
         }
 
-        return new TexturedTileSegment(texture, frame.Bitmap);
+        return new TexturedTileSegment(texture, new(bmp));
     }
 }

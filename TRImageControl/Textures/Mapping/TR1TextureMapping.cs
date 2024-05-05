@@ -53,18 +53,18 @@ public class TR1TextureMapping : AbstractTextureMapping<TR1Type, TR1Level>
         return _level.Sprites;
     }
 
-    protected override Bitmap GetTile(int tileIndex)
+    protected override TRImage GetTile(int tileIndex)
     {
-        return _level.Images8[tileIndex].ToBitmap(_level.Palette);
+        return new(_level.Images8[tileIndex].Pixels, _level.Palette);
     }
 
-    protected override void SetTile(int tileIndex, Bitmap bitmap)
+    protected override void SetTile(int tileIndex, TRImage image)
     {
         PaletteManager ??= new()
         {
             Level = _level
         };
-        PaletteManager.ChangedTiles[tileIndex] = bitmap;
+        PaletteManager.ChangedTiles[tileIndex] = image;
     }
 
     public override void CommitGraphics()
@@ -73,15 +73,10 @@ public class TR1TextureMapping : AbstractTextureMapping<TR1Type, TR1Level>
         {
             foreach (int tile in _tileMap.Keys)
             {
-                SetTile(tile, _tileMap[tile].Bitmap);
+                SetTile(tile, _tileMap[tile]);
             }
 
             PaletteManager?.MergeTiles();
-
-            foreach (int tile in _tileMap.Keys)
-            {
-                _tileMap[tile].Dispose();
-            }
 
             _committed = true;
         }

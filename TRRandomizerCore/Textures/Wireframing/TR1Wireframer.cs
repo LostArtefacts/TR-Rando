@@ -207,6 +207,8 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
                     
         IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, width, height));
         TRImage frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, false);
+        using Bitmap bmp = frame.ToBitmap();
+        using Graphics graphics = Graphics.FromImage(bmp);
 
         int flags = (doorInstance.Flags & 0x3E00) >> 9;
         for (int i = 0; i < 5; i++)
@@ -217,7 +219,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
             int h = 10;
 
             // Make a smaller rectangle
-            frame.Graphics.DrawRectangle(pen, x, y, w - 1, h - 1);
+            graphics.DrawRectangle(pen, x, y, w - 1, h - 1);
 
             // Decorate based on the door's bits
             bool doorBitSet = (flags & (1 << i)) == 0;
@@ -226,46 +228,46 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
                 case SpecialTextureMode.MidasDoorBars:
                     // Bar at top = lever up; at bottom = lever down
                     y += doorBitSet ? 5 : 1;
-                    frame.Graphics.DrawLine(pen, x + 4, y, x + 4, y + 3);
-                    frame.Graphics.DrawLine(pen, x + 5, y, x + 5, y + 3);
+                    graphics.DrawLine(pen, x + 4, y, x + 4, y + 3);
+                    graphics.DrawLine(pen, x + 5, y, x + 5, y + 3);
                     break;
                 case SpecialTextureMode.MidasDoorFill:
                     // Empty blocks need "filled" - levers go down
                     if (!doorBitSet)
                     {
-                        frame.Graphics.FillRectangle(pen.Brush, x, y, w - 1, h - 1);
+                        graphics.FillRectangle(pen.Brush, x, y, w - 1, h - 1);
                     }
                     break;
                 case SpecialTextureMode.MidasDoorLines:
                     if (doorBitSet)
                     {
                         // Lever up
-                        frame.Graphics.DrawLine(pen, x + 1, y + 4, x + 8, y + 4);
-                        frame.Graphics.DrawLine(pen, x + 1, y + 5, x + 8, y + 5);
+                        graphics.DrawLine(pen, x + 1, y + 4, x + 8, y + 4);
+                        graphics.DrawLine(pen, x + 1, y + 5, x + 8, y + 5);
                     }
                     else
                     {
                         // Lever down
-                        frame.Graphics.DrawLine(pen, x + 4, y + 1, x + 4, y + 8);
-                        frame.Graphics.DrawLine(pen, x + 5, y + 1, x + 5, y + 8);
+                        graphics.DrawLine(pen, x + 4, y + 1, x + 4, y + 8);
+                        graphics.DrawLine(pen, x + 5, y + 1, x + 5, y + 8);
                     }
                     break;
                 case SpecialTextureMode.MidasDoorDiagonals:
                     if (doorBitSet)
                     {
                         // Lever up \
-                        frame.Graphics.DrawLine(pen, x + 1, y + 1, x + 8, y + 8);
+                        graphics.DrawLine(pen, x + 1, y + 1, x + 8, y + 8);
                     }
                     else
                     {
                         // Lever down /
-                        frame.Graphics.DrawLine(pen, x + 1, y + 8, x + 8, y + 1);
+                        graphics.DrawLine(pen, x + 1, y + 8, x + 8, y + 1);
                     }
                     break;
             }
         }
 
-        return new TexturedTileSegment(texture, frame.Bitmap);
+        return new TexturedTileSegment(texture, new(bmp));
     }
 
     private static TR1Type FindDoorModel(TR1Level level, ushort textureIndex)

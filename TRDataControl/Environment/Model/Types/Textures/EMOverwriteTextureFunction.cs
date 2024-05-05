@@ -11,7 +11,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
 
     public override void ApplyToLevel(TR1Level level)
     {
-        using TR1TexturePacker packer = new(level);
+        TR1TexturePacker packer = new(level);
         ApplyOverwrites(texture =>
         {
             return packer.GetObjectTextureSegments(new List<int> { texture })
@@ -24,7 +24,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
 
     public override void ApplyToLevel(TR2Level level)
     {
-        using TR2TexturePacker packer = new(level);
+        TR2TexturePacker packer = new(level);
         ApplyOverwrites(texture =>
         {
             return packer.GetObjectTextureSegments(new List<int> { texture })
@@ -37,7 +37,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
 
     public override void ApplyToLevel(TR3Level level)
     {
-        using TR3TexturePacker packer = new(level);
+        TR3TexturePacker packer = new(level);
         ApplyOverwrites(texture =>
         {
             return packer.GetObjectTextureSegments(new List<int> { texture })
@@ -73,20 +73,17 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         foreach (TextureOverwrite overwrite in Overwrites)
         {
             Tuple<TexturedTile, TexturedTileSegment> segment = segmentAction(overwrite.Texture);
-            TRImage segmentBmp = new(segment.Item2.Bitmap);
-            Bitmap clipBmp = segmentBmp.Extract(overwrite.Clip);
+            TRImage clippedImage = segment.Item2.Image.Export(overwrite.Clip);
 
             foreach (ushort targetTexture in overwrite.Targets.Keys)
             {
                 Tuple<TexturedTile, TexturedTileSegment> targetSegment = segmentAction(targetTexture);
                 foreach (Point point in overwrite.Targets[targetTexture])
                 {
-                    targetSegment.Item1.BitmapGraphics.Import(clipBmp, new Rectangle
+                    targetSegment.Item1.Image.Import(clippedImage, new
                     (
                         targetSegment.Item2.Bounds.X + point.X, 
-                        targetSegment.Item2.Bounds.Y + point.Y, 
-                        clipBmp.Width, 
-                        clipBmp.Height
+                        targetSegment.Item2.Bounds.Y + point.Y
                     ), overwrite.RetainBackground);
                 }
             }

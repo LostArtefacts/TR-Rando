@@ -8,14 +8,14 @@ public static class SegmentExporter
     public static void Export(TR2Level level, string lvl)
     {
         string folder = PrepareDirectory("TR2", lvl);
-        using TR2TexturePacker packer = new(level);
+        TR2TexturePacker packer = new(level);
         Export(packer.Tiles, folder);
     }
 
     public static void Export(TR3Level level, string lvl)
     {
         string folder = PrepareDirectory("TR3", lvl);
-        using TR3TexturePacker packer = new(level);
+        TR3TexturePacker packer = new(level);
         Export(packer.Tiles, folder);
     }
 
@@ -38,7 +38,7 @@ public static class SegmentExporter
             foreach (TexturedTileSegment texture in tile.Rectangles)
             {
                 bool isSprite = texture.FirstTexture is IndexedTRSpriteTexture;
-                texture.Bitmap.Save(Path.Combine(folder, (isSprite ? "Sprite_" : "Object_") + texture.FirstTextureIndex + ".png"));
+                texture.Image.Save(Path.Combine(folder, (isSprite ? "Sprite_" : "Object_") + texture.FirstTextureIndex + ".png"));
             }
         }
     }

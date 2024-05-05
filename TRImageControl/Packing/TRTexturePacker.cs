@@ -2,13 +2,12 @@
 using RectanglePacker.Events;
 using RectanglePacker.Organisation;
 using System.Collections.Immutable;
-using System.Drawing;
 using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, TexturedTileSegment>, IDisposable
+public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, TexturedTileSegment>
     where E : Enum
     where L : class
 {
@@ -54,7 +53,7 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
             for (int i = 0; i < NumLevelImages; i++)
             {
                 TexturedTile tile = AddTile();
-                tile.BitmapGraphics = new TRImage(GetTile(i));
+                tile.Image = GetTile(i);
                 tile.AllowOverlapping = true; // Allow initially for the likes of Opera House - see tile 3 [128, 128]
             }
 
@@ -301,11 +300,11 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
         }
     }
 
-    public abstract Bitmap GetTile(int tileIndex);
+    public abstract TRImage GetTile(int tileIndex);
 
     protected abstract void CreateImageSpace(int count);
 
-    public abstract void SetTile(int tileIndex, Bitmap bitmap);
+    public abstract void SetTile(int tileIndex, TRImage image);
 
     private void Commit()
     {
@@ -317,26 +316,17 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
         for (int i = 0; i < _tiles.Count; i++)
         {
             TexturedTile tile = _tiles[i];
-            if (!tile.BitmapChanged)
+            if (!tile.ImageChanged)
             {
                 continue;
             }
 
             tile.Commit();
-            SetTile(i, tile.BitmapGraphics.Bitmap);
+            SetTile(i, tile.Image);
         }
     }
 
     protected virtual void PostCommit() { }
-
-    public void Dispose()
-    {
-        foreach (TexturedTile tile in _tiles)
-        {
-            tile.Dispose();
-        }
-        GC.SuppressFinalize(this);
-    }
 
     protected override TexturedTile CreateTile()
     {

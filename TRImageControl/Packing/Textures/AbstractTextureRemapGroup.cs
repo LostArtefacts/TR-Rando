@@ -17,7 +17,7 @@ public abstract class AbstractTextureRemapGroup<E, L>
 
     public void CalculateDependencies(L level, E entity)
     {
-        using TRTexturePacker<E, L> packer = CreatePacker(level);
+        TRTexturePacker<E, L> packer = CreatePacker(level);
         Dictionary<TexturedTile, List<TexturedTileSegment>> entitySegments = packer.GetModelSegments(entity);
         foreach (E otherEntity in GetModelTypes(level))
         {

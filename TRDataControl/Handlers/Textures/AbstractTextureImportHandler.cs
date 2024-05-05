@@ -1,5 +1,4 @@
 ﻿using RectanglePacker.Events;
-using System.Drawing;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
 using TRModelTransporter.Data;
@@ -79,10 +78,9 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             }
 
             _importSegments[definition] = new List<TexturedTileSegment>();
-            using TRImage bg = new(definition.Bitmap);
             foreach (int segmentIndex in definition.ObjectTextures.Keys)
             {
-                Bitmap segmentClip = bg.Extract(definition.TextureSegments[segmentIndex]);
+                TRImage segmentClip = definition.Image.Export(definition.TextureSegments[segmentIndex]);
                 TexturedTileSegment segment = null;
                 foreach (IndexedTRObjectTexture texture in definition.ObjectTextures[segmentIndex])
                 {
@@ -117,7 +115,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                 Dictionary<int, List<IndexedTRSpriteTexture>> spriteTextures = definition.SpriteTextures[spriteEntity];
                 foreach (int segmentIndex in spriteTextures.Keys)
                 {
-                    Bitmap segmentClip = bg.Extract(definition.TextureSegments[segmentIndex]);
+                    TRImage segmentClip = definition.Image.Export(definition.TextureSegments[segmentIndex]);
                     TexturedTileSegment segment = null;
                     foreach (IndexedTRSpriteTexture texture in spriteTextures[segmentIndex])
                     {
@@ -137,7 +135,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
 
     protected virtual PackingResult<TexturedTile, TexturedTileSegment> Pack()
     {
-        using TRTexturePacker<E, L> packer = CreatePacker();
+        TRTexturePacker<E, L> packer = CreatePacker();
         packer.MaximumTiles = Data.TextureTileLimit;
 
         ProcessRemovals(packer);

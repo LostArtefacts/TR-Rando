@@ -38,11 +38,9 @@ public abstract class AbstractTextureExportHandler<E, L, D>
 
         _allSegments = new List<TexturedTileSegment>();
 
-        using (_packer = CreatePacker())
-        {
-            CollateSegments();
-            ExportSegments();
-        }
+        _packer = CreatePacker();
+        CollateSegments();
+        ExportSegments();
     }
 
     protected abstract TRTexturePacker<E, L> CreatePacker();
@@ -108,7 +106,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
             return;
         }
 
-        using DefaultTexturePacker segmentPacker = new();
+        DefaultTexturePacker segmentPacker = new();
         segmentPacker.AddRectangles(_allSegments);
 
         segmentPacker.Options = new PackingOptions
@@ -139,14 +137,14 @@ public abstract class AbstractTextureExportHandler<E, L, D>
         _definition.TextureSegments = rects.ToArray();
 
         Rectangle region = tile.GetOccupiedRegion();
-        _definition.Bitmap = tile.BitmapGraphics.Extract(region);
+        _definition.Image = tile.Image.Export(region);
 
         foreach (TexturedTileSegment segment in _allSegments)
         {
             SegmentExported?.Invoke(this, new SegmentEventArgs
             {
                 SegmentIndex = segment.FirstTextureIndex,
-                Bitmap = segment.Bitmap
+                Image = segment.Image
             });
         }
     }

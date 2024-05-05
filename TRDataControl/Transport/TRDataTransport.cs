@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Drawing;
 using System.Drawing.Imaging;
 using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
@@ -48,7 +47,7 @@ public abstract class TRDataTransport<E, L, D>
 
         if (definition.HasGraphics)
         {
-            definition.Bitmap.Save(Path.Combine(directory, _imageFileName), ImageFormat.Png);
+            definition.Image.Save(Path.Combine(directory, _imageFileName), ImageFormat.Png);
         }
         File.WriteAllText(Path.Combine(directory, _dataFileName), JsonConvert.SerializeObject(definition, Formatting.None));
     }
@@ -73,7 +72,7 @@ public abstract class TRDataTransport<E, L, D>
             {
                 throw new IOException(string.Format("Missing model data image file ({0})", imageFilePath));
             }
-            definition.Bitmap = new Bitmap(imageFilePath);
+            definition.Image = new(imageFilePath);
         }
         return definition;
     }

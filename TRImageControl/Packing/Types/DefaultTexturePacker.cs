@@ -4,7 +4,7 @@ using TRLevelControl;
 
 namespace TRImageControl.Packing;
 
-public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSegment>, IDisposable
+public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSegment>
 {
     public IReadOnlyList<AbstractIndexedTRTexture> AllTextures => _allTextures;
 
@@ -26,15 +26,6 @@ public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSeg
         };
 
         _allTextures = new List<AbstractIndexedTRTexture>();
-    }
-
-    public void Dispose()
-    {
-        foreach (TexturedTile tile in _tiles)
-        {
-            tile.Dispose();
-        }
-        GC.SuppressFinalize(this);
     }
 
     protected override TexturedTile CreateTile()
