@@ -31,11 +31,11 @@ public static class SegmentExporter
         return levelFolder;
     }
 
-    private static void Export(IReadOnlyList<TexturedTile> tiles, string folder)
+    private static void Export(IReadOnlyList<TRTextile> tiles, string folder)
     {
-        foreach (TexturedTile tile in tiles)
+        foreach (TRTextile tile in tiles)
         {
-            foreach (TexturedTileSegment texture in tile.Rectangles)
+            foreach (TRTextileRegion texture in tile.Rectangles)
             {
                 bool isSprite = texture.FirstTexture is IndexedTRSpriteTexture;
                 texture.Image.Save(Path.Combine(folder, (isSprite ? "Sprite_" : "Object_") + texture.FirstTextureIndex + ".png"));

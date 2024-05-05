@@ -21,10 +21,10 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
     public void Deduplicate(string remappingPath)
     {
         TRTexturePacker<E, L> levelPacker = CreatePacker(Level);
-        Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
-        foreach (TexturedTile tile in levelPacker.Tiles)
+        Dictionary<TRTextile, List<TRTextileRegion>> allTextures = new();
+        foreach (TRTextile tile in levelPacker.Tiles)
         {
-            allTextures[tile] = new List<TexturedTileSegment>(tile.Rectangles);
+            allTextures[tile] = new List<TRTextileRegion>(tile.Rectangles);
         }
 
         AbstractTextureRemapGroup<E, L> remapGroup = GetRemapGroup(remappingPath);
@@ -40,9 +40,9 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
         // pointing to the same thing - so tile, position, and point direction
         // have to be equal. See IndexedTRObjectTexture
         Dictionary<int, int> indexMap = new();
-        foreach (TexturedTile tile in allTextures.Keys)
+        foreach (TRTextile tile in allTextures.Keys)
         {
-            foreach (TexturedTileSegment segment in allTextures[tile])
+            foreach (TRTextileRegion segment in allTextures[tile])
             {
                 TidySegment(segment, indexMap);
             }
@@ -55,12 +55,12 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
     protected abstract AbstractTextureRemapGroup<E, L> GetRemapGroup(string path);
     protected abstract void ReindexTextures(Dictionary<int, int> indexMap);
 
-    private static void TidySegment(TexturedTileSegment segment, Dictionary<int, int> reindexMap)
+    private static void TidySegment(TRTextileRegion segment, Dictionary<int, int> reindexMap)
     {
         for (int i = segment.Textures.Count - 1; i > 0; i--) //ignore the first = the largest
         {
-            AbstractIndexedTRTexture texture = segment.Textures[i];
-            AbstractIndexedTRTexture candidateTexture = null;
+            TRTextileSegment texture = segment.Textures[i];
+            TRTextileSegment candidateTexture = null;
             for (int j = 0; j < segment.Textures.Count; j++)
             {
                 if (i == j)
@@ -68,7 +68,7 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
                     continue;
                 }
 
-                AbstractIndexedTRTexture texture2 = segment.Textures[j];
+                TRTextileSegment texture2 = segment.Textures[j];
                 if (texture.Equals(texture2))
                 {
                     candidateTexture = texture2;

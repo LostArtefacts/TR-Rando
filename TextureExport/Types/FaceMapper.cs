@@ -15,16 +15,16 @@ public static class FaceMapper
             MaximumTiles = 255
         };
 
-        Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
-        Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
+        Dictionary<int, Dictionary<int, TRTextileRegion>> rectFaces = new();
+        Dictionary<int, Dictionary<int, TRTextileRegion>> triFaces = new();
 
         Dictionary<int, Dictionary<int, int>> newRectFaces = new();
         Dictionary<int, Dictionary<int, int>> newTriFaces = new();
 
         foreach (int roomNumber in roomNumbers)
         {
-            rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-            triFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            rectFaces[roomNumber] = new Dictionary<int, TRTextileRegion>();
+            triFaces[roomNumber] = new Dictionary<int, TRTextileRegion>();
             newRectFaces[roomNumber] = new Dictionary<int, int>();
             newTriFaces[roomNumber] = new Dictionary<int, int>();
 
@@ -39,10 +39,10 @@ public static class FaceMapper
 
             foreach (int rectIndex in rectFaces[roomNumber].Keys)
             {
-                TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
+                TRTextileRegion segment = rectFaces[roomNumber][rectIndex];
                 if (segment != null)
                 {
-                    TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex, true);
+                    TRTextileRegion newSegment = DrawNewFace(segment, "Q" + rectIndex, true);
                     packer.AddRectangle(newSegment);
 
                     newRectFaces[roomNumber][rectIndex] = level.ObjectTextures.Count;
@@ -52,10 +52,10 @@ public static class FaceMapper
 
             foreach (int triIndex in triFaces[roomNumber].Keys)
             {
-                TexturedTileSegment segment = triFaces[roomNumber][triIndex];
+                TRTextileRegion segment = triFaces[roomNumber][triIndex];
                 if (segment != null)
                 {
-                    TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex, true);
+                    TRTextileRegion newSegment = DrawNewFace(segment, "T" + triIndex, true);
                     packer.AddRectangle(newSegment);
 
                     newTriFaces[roomNumber][triIndex] = level.ObjectTextures.Count;
@@ -89,16 +89,16 @@ public static class FaceMapper
             MaximumTiles = 255
         };
 
-        Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
-        Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
+        Dictionary<int, Dictionary<int, TRTextileRegion>> rectFaces = new();
+        Dictionary<int, Dictionary<int, TRTextileRegion>> triFaces = new();
 
         Dictionary<int, Dictionary<int, int>> newRectFaces = new();
         Dictionary<int, Dictionary<int, int>> newTriFaces = new();
 
         foreach (int roomNumber in roomNumbers)
         {
-            rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-            triFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            rectFaces[roomNumber] = new Dictionary<int, TRTextileRegion>();
+            triFaces[roomNumber] = new Dictionary<int, TRTextileRegion>();
             newRectFaces[roomNumber] = new Dictionary<int, int>();
             newTriFaces[roomNumber] = new Dictionary<int, int>();
 
@@ -113,10 +113,10 @@ public static class FaceMapper
 
             foreach (int rectIndex in rectFaces[roomNumber].Keys)
             {
-                TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
+                TRTextileRegion segment = rectFaces[roomNumber][rectIndex];
                 if (segment != null)
                 {
-                    TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex);
+                    TRTextileRegion newSegment = DrawNewFace(segment, "Q" + rectIndex);
                     packer.AddRectangle(newSegment);
 
                     newRectFaces[roomNumber][rectIndex] = level.ObjectTextures.Count;
@@ -126,10 +126,10 @@ public static class FaceMapper
 
             foreach (int triIndex in triFaces[roomNumber].Keys)
             {
-                TexturedTileSegment segment = triFaces[roomNumber][triIndex];
+                TRTextileRegion segment = triFaces[roomNumber][triIndex];
                 if (segment != null)
                 {
-                    TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex);
+                    TRTextileRegion newSegment = DrawNewFace(segment, "T" + triIndex);
                     packer.AddRectangle(newSegment);
 
                     newTriFaces[roomNumber][triIndex] = level.ObjectTextures.Count;
@@ -163,16 +163,16 @@ public static class FaceMapper
             MaximumTiles = 255
         };
 
-        Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
-        Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
+        Dictionary<int, Dictionary<int, TRTextileRegion>> rectFaces = new();
+        Dictionary<int, Dictionary<int, TRTextileRegion>> triFaces = new();
 
         Dictionary<int, Dictionary<int, int>> newRectFaces = new();
         Dictionary<int, Dictionary<int, int>> newTriFaces = new();
 
         foreach (int roomNumber in roomNumbers)
         {
-            rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-            triFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            rectFaces[roomNumber] = new Dictionary<int, TRTextileRegion>();
+            triFaces[roomNumber] = new Dictionary<int, TRTextileRegion>();
             newRectFaces[roomNumber] = new Dictionary<int, int>();
             newTriFaces[roomNumber] = new Dictionary<int, int>();
 
@@ -187,10 +187,10 @@ public static class FaceMapper
 
             foreach (int rectIndex in rectFaces[roomNumber].Keys)
             {
-                TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
+                TRTextileRegion segment = rectFaces[roomNumber][rectIndex];
                 if (segment != null)
                 {
-                    TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex);
+                    TRTextileRegion newSegment = DrawNewFace(segment, "Q" + rectIndex);
                     packer.AddRectangle(newSegment);
 
                     newRectFaces[roomNumber][rectIndex] = level.ObjectTextures.Count;
@@ -200,10 +200,10 @@ public static class FaceMapper
 
             foreach (int triIndex in triFaces[roomNumber].Keys)
             {
-                TexturedTileSegment segment = triFaces[roomNumber][triIndex];
+                TRTextileRegion segment = triFaces[roomNumber][triIndex];
                 if (segment != null)
                 {
-                    TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex);
+                    TRTextileRegion newSegment = DrawNewFace(segment, "T" + triIndex);
                     packer.AddRectangle(newSegment);
 
                     newTriFaces[roomNumber][triIndex] = level.ObjectTextures.Count;
@@ -237,17 +237,17 @@ public static class FaceMapper
             MaximumTiles = 10000
         };
 
-        Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
+        Dictionary<int, Dictionary<int, TRTextileRegion>> rectFaces = new();
         Dictionary<int, Dictionary<int, int>> newRectFaces = new();
 
         foreach (int roomNumber in roomNumbers)
         {
-            rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            rectFaces[roomNumber] = new Dictionary<int, TRTextileRegion>();
             newRectFaces[roomNumber] = new Dictionary<int, int>();
 
             for (int i = 0; i < level.Rooms[roomNumber].Mesh.Rectangles.Count; i++)
             {
-                TexturedTileSegment seg = GetBoxFaceSegment(level.Rooms[roomNumber], i, packer.Tiles);
+                TRTextileRegion seg = GetBoxFaceSegment(level.Rooms[roomNumber], i, packer.Tiles);
                 if (seg != null)
                 {
                     rectFaces[roomNumber][i] = seg;
@@ -256,8 +256,8 @@ public static class FaceMapper
 
             foreach (int rectIndex in rectFaces[roomNumber].Keys)
             {
-                TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
-                TexturedTileSegment newSegment = DrawNewFace(segment, GetBoxDescription(level, roomNumber, rectIndex));
+                TRTextileRegion segment = rectFaces[roomNumber][rectIndex];
+                TRTextileRegion newSegment = DrawNewFace(segment, GetBoxDescription(level, roomNumber, rectIndex));
                 packer.AddRectangle(newSegment);
 
                 newRectFaces[roomNumber][rectIndex] = level.ObjectTextures.Count;
@@ -279,7 +279,7 @@ public static class FaceMapper
         new TR2LevelControl().Write(level, @"TR2\Boxes\" + lvl);
     }
 
-    private static TexturedTileSegment DrawNewFace(TexturedTileSegment segment, string text, bool fillBackground = false)
+    private static TRTextileRegion DrawNewFace(TRTextileRegion segment, string text, bool fillBackground = false)
     {
         Bitmap bitmap = segment.Image.ToBitmap();
         
@@ -297,15 +297,15 @@ public static class FaceMapper
 
         g.Flush();
 
-        return new TexturedTileSegment(CreateTexture(segment.Bounds), new(bitmap));
+        return new TRTextileRegion(CreateTexture(segment.Bounds), new(bitmap));
     }
 
-    private static TexturedTileSegment GetFaceSegment(int textureIndex, IReadOnlyList<TexturedTile> tiles)
+    private static TRTextileRegion GetFaceSegment(int textureIndex, IReadOnlyList<TRTextile> tiles)
     {
         List<int> indices = new() { textureIndex & 0x0fff };
-        foreach (TexturedTile tile in tiles)
+        foreach (TRTextile tile in tiles)
         {
-            List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
+            List<TRTextileRegion> segments = tile.GetObjectTextureIndexSegments(indices);
             if (segments.Count > 0)
             {
                 return segments[0];
@@ -322,7 +322,7 @@ public static class FaceMapper
         };
     }
 
-    private static TexturedTileSegment GetBoxFaceSegment(TR2Room room, int rectIndex, IReadOnlyList<TexturedTile> tiles)
+    private static TRTextileRegion GetBoxFaceSegment(TR2Room room, int rectIndex, IReadOnlyList<TRTextile> tiles)
     {
         TRFace face = room.Mesh.Rectangles[rectIndex];
 
@@ -341,9 +341,9 @@ public static class FaceMapper
         }
 
         List<int> indices = new() { face.Texture };
-        foreach (TexturedTile tile in tiles)
+        foreach (TRTextile tile in tiles)
         {
-            List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
+            List<TRTextileRegion> segments = tile.GetObjectTextureIndexSegments(indices);
             if (segments.Count > 0)
             {
                 return segments[0];

@@ -2,7 +2,7 @@
 
 namespace TRImageControl.Packing;
 
-public class IndexedTRObjectTexture : AbstractIndexedTRTexture
+public class IndexedTRObjectTexture : TRTextileSegment
 {
     private TRObjectTexture _texture;
 
@@ -34,7 +34,7 @@ public class IndexedTRObjectTexture : AbstractIndexedTRTexture
     public bool IsTriangle
         => Texture.IsTriangle;
 
-    public override AbstractIndexedTRTexture Clone()
+    public override TRTextileSegment Clone()
     {
         return new IndexedTRObjectTexture
         {

@@ -64,13 +64,13 @@ public static class HtmlExporter
         Write("TR3", lvlName, tiles, levelSel, skyboxInfo);
     }
 
-    private static void BuildTiles(StringBuilder html, IReadOnlyList<TexturedTile> tiles, List<TRColour> palette = null)
+    private static void BuildTiles(StringBuilder html, IReadOnlyList<TRTextile> tiles, List<TRColour> palette = null)
     {
-        foreach (TexturedTile tile in tiles)
+        foreach (TRTextile tile in tiles)
         {
             html.Append(string.Format("<div class=\"tile\" id=\"tile_{0}\">", tile.Index));
 
-            foreach (TexturedTileSegment segment in tile.Rectangles)
+            foreach (TRTextileRegion segment in tile.Rectangles)
             {
                 using MemoryStream ms = new();
                 segment.Image.Save(ms, ImageFormat.Png);
@@ -110,7 +110,7 @@ public static class HtmlExporter
                 List<string> objectData = new();
                 List<string> spriteData = new();
 
-                foreach (AbstractIndexedTRTexture texture in segment.Textures)
+                foreach (TRTextileSegment texture in segment.Textures)
                 {
                     if (texture is IndexedTRObjectTexture objTexture)
                     {
@@ -143,10 +143,10 @@ public static class HtmlExporter
         return string.Format("[{0}, {1}, {2}, {3}]", r.X, r.Y, r.Width, r.Height);
     }
 
-    private static List<int> GetObjectTextureList(TexturedTileSegment segment)
+    private static List<int> GetObjectTextureList(TRTextileRegion segment)
     {
         List<int> indices = new();
-        foreach (AbstractIndexedTRTexture texture in segment.Textures)
+        foreach (TRTextileSegment texture in segment.Textures)
         {
             if (texture is IndexedTRObjectTexture)
             {
@@ -156,10 +156,10 @@ public static class HtmlExporter
         return indices;
     }
 
-    private static List<int> GetSpriteTextureList(TexturedTileSegment segment)
+    private static List<int> GetSpriteTextureList(TRTextileRegion segment)
     {
         List<int> indices = new();
-        foreach (AbstractIndexedTRTexture texture in segment.Textures)
+        foreach (TRTextileSegment texture in segment.Textures)
         {
             if (texture is IndexedTRSpriteTexture)
             {

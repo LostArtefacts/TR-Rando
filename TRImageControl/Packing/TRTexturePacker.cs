@@ -7,7 +7,7 @@ using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, TexturedTileSegment>
+public abstract class TRTexturePacker<E, L> : AbstractPacker<TRTextile, TRTextileRegion>
     where E : Enum
     where L : class
 {
@@ -16,9 +16,9 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
 
     protected readonly string _levelClassifier;
 
-    public IReadOnlyList<AbstractIndexedTRTexture> AllTextures => _allTextures;
+    public IReadOnlyList<TRTextileSegment> AllTextures => _allTextures;
 
-    private readonly List<AbstractIndexedTRTexture> _allTextures;
+    private readonly List<TRTextileSegment> _allTextures;
 
     public TRTexturePacker()
         : this(default) { }
@@ -42,7 +42,7 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
         Level = level;
         _levelClassifier = classifier == null ? string.Empty : classifier.GetClassification();
 
-        _allTextures = new List<AbstractIndexedTRTexture>();
+        _allTextures = new List<TRTextileSegment>();
 
         if (Level != null)
         {
@@ -52,23 +52,23 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
 
             for (int i = 0; i < NumLevelImages; i++)
             {
-                TexturedTile tile = AddTile();
+                TRTextile tile = AddTile();
                 tile.Image = GetTile(i);
                 tile.AllowOverlapping = true; // Allow initially for the likes of Opera House - see tile 3 [128, 128]
             }
 
-            foreach (AbstractIndexedTRTexture texture in _allTextures)
+            foreach (TRTextileSegment texture in _allTextures)
             {
                 _tiles[texture.Atlas].AddTexture(texture);
             }
         }
     }
 
-    public PackingResult<TexturedTile, TexturedTileSegment> Pack(bool commitToLevel)
+    public PackingResult<TRTextile, TRTextileRegion> Pack(bool commitToLevel)
     {
         try
         {
-            PackingResult<TexturedTile, TexturedTileSegment> result = Pack();
+            PackingResult<TRTextile, TRTextileRegion> result = Pack();
 
             if (result.OrphanCount == 0 && commitToLevel)
             {
@@ -84,19 +84,19 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
         }
     }
 
-    protected abstract List<AbstractIndexedTRTexture> LoadObjectTextures();
-    protected abstract List<AbstractIndexedTRTexture> LoadSpriteTextures();
+    protected abstract List<TRTextileSegment> LoadObjectTextures();
+    protected abstract List<TRTextileSegment> LoadSpriteTextures();
 
-    public Dictionary<TexturedTile, List<TexturedTileSegment>> GetModelSegments(E modelEntity)
+    public Dictionary<TRTextile, List<TRTextileRegion>> GetModelSegments(E modelEntity)
     {
-        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new();
+        Dictionary<TRTextile, List<TRTextileRegion>> segmentMap = new();
         List<TRMesh> meshes = GetModelMeshes(modelEntity);
         if (meshes != null)
         {
             ISet<int> indices = meshes.SelectMany(m => m.TexturedFaces.Select(f => (int)f.Texture)).ToImmutableSortedSet();
-            foreach (TexturedTile tile in _tiles)
+            foreach (TRTextile tile in _tiles)
             {
-                List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
+                List<TRTextileRegion> segments = tile.GetObjectTextureIndexSegments(indices);
                 if (segments.Count > 0)
                 {
                     segmentMap[tile] = segments;
@@ -107,12 +107,12 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
         return segmentMap;
     }
 
-    public Dictionary<TexturedTile, List<TexturedTileSegment>> GetObjectTextureSegments(IEnumerable<int> indices)
+    public Dictionary<TRTextile, List<TRTextileRegion>> GetObjectTextureSegments(IEnumerable<int> indices)
     {
-        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new();
-        foreach (TexturedTile tile in _tiles)
+        Dictionary<TRTextile, List<TRTextileRegion>> segmentMap = new();
+        foreach (TRTextile tile in _tiles)
         {
-            List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
+            List<TRTextileRegion> segments = tile.GetObjectTextureIndexSegments(indices);
             if (segments.Count > 0)
             {
                 segmentMap[tile] = segments;
@@ -124,13 +124,13 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
 
     protected abstract List<TRMesh> GetModelMeshes(E modelEntity);
 
-    public Dictionary<TexturedTile, List<TexturedTileSegment>> GetSpriteSegments(E entity)
+    public Dictionary<TRTextile, List<TRTextileRegion>> GetSpriteSegments(E entity)
     {
         TRSpriteSequence sequence = GetSpriteSequence(entity);
-        Dictionary<TexturedTile, List<TexturedTileSegment>> regionMap = new();
-        foreach (TexturedTile tile in _tiles)
+        Dictionary<TRTextile, List<TRTextileRegion>> regionMap = new();
+        foreach (TRTextile tile in _tiles)
         {
-            List<TexturedTileSegment> regions = tile.Rectangles
+            List<TRTextileRegion> regions = tile.Rectangles
                 .Where(r => r.Textures.Any(s => s is IndexedTRSpriteTexture spr && sequence.Textures.Contains(spr.Texture)))
                 .ToList();
             if (regions.Count > 0)
@@ -142,12 +142,12 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
         return regionMap;
     }
 
-    public Dictionary<TexturedTile, List<TexturedTileSegment>> GetSpriteTextureSegments(IEnumerable<int> indices)
+    public Dictionary<TRTextile, List<TRTextileRegion>> GetSpriteTextureSegments(IEnumerable<int> indices)
     {
-        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new();
-        foreach (TexturedTile tile in _tiles)
+        Dictionary<TRTextile, List<TRTextileRegion>> segmentMap = new();
+        foreach (TRTextile tile in _tiles)
         {
-            List<TexturedTileSegment> segments = tile.GetSpriteTextureIndexSegments(indices);
+            List<TRTextileRegion> segments = tile.GetSpriteTextureIndexSegments(indices);
             if (segments.Count > 0)
             {
                 segmentMap[tile] = segments;
@@ -171,13 +171,13 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
         // in advance which we cannot remove.
         foreach (E modelEntity in modelEntitiesToRemove)
         {
-            Dictionary<TexturedTile, List<TexturedTileSegment>> modelSegments = GetModelSegments(modelEntity);
-            foreach (TexturedTile tile in modelSegments.Keys)
+            Dictionary<TRTextile, List<TRTextileRegion>> modelSegments = GetModelSegments(modelEntity);
+            foreach (TRTextile tile in modelSegments.Keys)
             {
-                List<TexturedTileSegment> segments = modelSegments[tile];
+                List<TRTextileRegion> segments = modelSegments[tile];
                 for (int i = 0; i < segments.Count; i++)
                 {
-                    TexturedTileSegment segment = segments[i];
+                    TRTextileRegion segment = segments[i];
                     if (remapGroup.CanRemoveRectangle(tile.Index, segment.Bounds, modelEntitiesToRemove))
                     {
                         tile.Remove(segment);
@@ -189,9 +189,9 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
 
     public void RemoveObjectTextureSegments(IEnumerable<int> indices)
     {
-        foreach (TexturedTile tile in _tiles)
+        foreach (TRTextile tile in _tiles)
         {
-            List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
+            List<TRTextileRegion> segments = tile.GetObjectTextureIndexSegments(indices);
             for (int i = 0; i < segments.Count; i++)
             {
                 tile.Remove(segments[i]);
@@ -201,9 +201,9 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
 
     public void RemoveSpriteTextureSegments(IEnumerable<int> indices)
     {
-        foreach (TexturedTile tile in _tiles)
+        foreach (TRTextile tile in _tiles)
         {
-            List<TexturedTileSegment> segments = tile.GetSpriteTextureIndexSegments(indices);
+            List<TRTextileRegion> segments = tile.GetSpriteTextureIndexSegments(indices);
             for (int i = 0; i < segments.Count; i++)
             {
                 tile.Remove(segments[i]);
@@ -220,7 +220,7 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
 
         // Perform an exhaustive check against every other model in the level to find shared textures.
 
-        Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>> candidateSegments = new();
+        Dictionary<E, Dictionary<TRTextile, List<TRTextileRegion>>> candidateSegments = new();
 
         // First cache each segment for the models we wish to remove
         foreach (E modelEntity in modelEntitiesToRemove)
@@ -239,11 +239,11 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
                 continue;
             }
 
-            Dictionary<TexturedTile, List<TexturedTileSegment>> modelSegments = GetModelSegments(otherEntity);
+            Dictionary<TRTextile, List<TRTextileRegion>> modelSegments = GetModelSegments(otherEntity);
             foreach (E entityToRemove in modelEntitiesToRemove)
             {
-                Dictionary<TexturedTile, List<TexturedTileSegment>> entityMap = candidateSegments[entityToRemove];
-                foreach (TexturedTile tile in entityMap.Keys)
+                Dictionary<TRTextile, List<TRTextileRegion>> entityMap = candidateSegments[entityToRemove];
+                foreach (TRTextile tile in entityMap.Keys)
                 {
                     if (modelSegments.ContainsKey(tile))
                     {
@@ -258,11 +258,11 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
         }
 
         // Tell each tile to remove the candidate segments
-        foreach (Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap in candidateSegments.Values)
+        foreach (Dictionary<TRTextile, List<TRTextileRegion>> segmentMap in candidateSegments.Values)
         {
-            foreach (TexturedTile tile in segmentMap.Keys)
+            foreach (TRTextile tile in segmentMap.Keys)
             {
-                foreach (TexturedTileSegment segment in segmentMap[tile])
+                foreach (TRTextileRegion segment in segmentMap[tile])
                 {
                     tile.Remove(segment);
                 }
@@ -279,7 +279,7 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
 
     public void RemoveSpriteSegments(IEnumerable<E> entitiesToRemove)
     {
-        Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>> candidateSegments = new();
+        Dictionary<E, Dictionary<TRTextile, List<TRTextileRegion>>> candidateSegments = new();
 
         // First cache each segment for the models we wish to remove
         foreach (E entity in entitiesToRemove)
@@ -288,11 +288,11 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
         }
 
         // Tell each tile to remove the candidate segments
-        foreach (Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap in candidateSegments.Values)
+        foreach (Dictionary<TRTextile, List<TRTextileRegion>> segmentMap in candidateSegments.Values)
         {
-            foreach (TexturedTile tile in segmentMap.Keys)
+            foreach (TRTextile tile in segmentMap.Keys)
             {
-                foreach (TexturedTileSegment segment in segmentMap[tile])
+                foreach (TRTextileRegion segment in segmentMap[tile])
                 {
                     tile.Remove(segment);
                 }
@@ -315,7 +315,7 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
 
         for (int i = 0; i < _tiles.Count; i++)
         {
-            TexturedTile tile = _tiles[i];
+            TRTextile tile = _tiles[i];
             if (!tile.ImageChanged)
             {
                 continue;
@@ -328,8 +328,8 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TexturedTile, Textu
 
     protected virtual void PostCommit() { }
 
-    protected override TexturedTile CreateTile()
+    protected override TRTextile CreateTile()
     {
-        return new TexturedTile();
+        return new TRTextile();
     }
 }

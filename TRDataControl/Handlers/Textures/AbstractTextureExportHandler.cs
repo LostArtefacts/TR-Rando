@@ -24,7 +24,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
 
     protected TRTexturePacker<E, L> _packer;
 
-    protected List<TexturedTileSegment> _allSegments;
+    protected List<TRTextileRegion> _allSegments;
     public event EventHandler<SegmentEventArgs> SegmentExported;
     public event EventHandler<TRTextureRemapEventArgs> SegmentRemapped;
 
@@ -36,7 +36,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
         _spriteDependencies = spriteDependencies;
         _ignoreableTextureIndices = ignoreableTextureIndices;
 
-        _allSegments = new List<TexturedTileSegment>();
+        _allSegments = new List<TRTextileRegion>();
 
         _packer = CreatePacker();
         CollateSegments();
@@ -49,7 +49,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
 
     protected virtual void CollateSegments()
     {
-        Dictionary<TexturedTile, List<TexturedTileSegment>> textureSegments = _packer.GetModelSegments(_definition.Entity);
+        Dictionary<TRTextile, List<TRTextileRegion>> textureSegments = _packer.GetModelSegments(_definition.Entity);
 
         TRTextureDeduplicator<E> deduplicator = new()
         {
@@ -64,11 +64,11 @@ public abstract class AbstractTextureExportHandler<E, L, D>
         _definition.SpriteTextures = new Dictionary<E, Dictionary<int, List<IndexedTRSpriteTexture>>>();
 
         int bitmapIndex = 0;
-        foreach (List<TexturedTileSegment> segments in textureSegments.Values)
+        foreach (List<TRTextileRegion> segments in textureSegments.Values)
         {
             for (int i = 0; i < segments.Count; i++)
             {
-                TexturedTileSegment segment = segments[i];
+                TRTextileRegion segment = segments[i];
                 if (!deduplicator.ShouldIgnoreSegment(_ignoreableTextureIndices, segment))
                 {
                     _allSegments.Add(segment);
@@ -85,13 +85,13 @@ public abstract class AbstractTextureExportHandler<E, L, D>
                 _definition.SpriteSequences[spriteEntity] = sequence;
             }
 
-            Dictionary<TexturedTile, List<TexturedTileSegment>> spriteSegments = _packer.GetSpriteSegments(spriteEntity);
+            Dictionary<TRTextile, List<TRTextileRegion>> spriteSegments = _packer.GetSpriteSegments(spriteEntity);
             _definition.SpriteTextures[spriteEntity] = new Dictionary<int, List<IndexedTRSpriteTexture>>();
-            foreach (List<TexturedTileSegment> segments in spriteSegments.Values)
+            foreach (List<TRTextileRegion> segments in spriteSegments.Values)
             {
                 for (int i = 0; i < segments.Count; i++)
                 {
-                    TexturedTileSegment segment = segments[i];
+                    TRTextileRegion segment = segments[i];
                     _allSegments.Add(segment);
                     _definition.SpriteTextures[spriteEntity][bitmapIndex++] = new List<IndexedTRSpriteTexture>(segment.Textures.Cast<IndexedTRSpriteTexture>().ToArray());
                 }
@@ -127,9 +127,9 @@ public abstract class AbstractTextureExportHandler<E, L, D>
             throw new PackingException(string.Format("Failed to export textures for {0}.", _definition.Entity));
         }
 
-        TexturedTile tile = segmentPacker.Tiles[0];
+        TRTextile tile = segmentPacker.Tiles[0];
         List<Rectangle> rects = new();
-        foreach (TexturedTileSegment segment in _allSegments)
+        foreach (TRTextileRegion segment in _allSegments)
         {
             rects.Add(segment.MappedBounds);
         }
@@ -139,7 +139,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
         Rectangle region = tile.GetOccupiedRegion();
         _definition.Image = tile.Image.Export(region);
 
-        foreach (TexturedTileSegment segment in _allSegments)
+        foreach (TRTextileRegion segment in _allSegments)
         {
             SegmentExported?.Invoke(this, new SegmentEventArgs
             {

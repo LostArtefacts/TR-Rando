@@ -2,7 +2,7 @@
 
 namespace TRImageControl.Packing;
 
-public class TexturedTile : DefaultTile<TexturedTileSegment>
+public class TRTextile : DefaultTile<TRTextileRegion>
 {
     private TRImage _image;
     public TRImage Image
@@ -30,14 +30,14 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>
     public bool ImageChanged => _segmentAdded || _segmentRemoved || _graphicChanged;
     private bool _segmentAdded, _segmentRemoved, _graphicChanged;
 
-    public TexturedTile()
+    public TRTextile()
     {
         _segmentAdded = _segmentRemoved = _graphicChanged = false;
     }
 
-    public void AddTexture(AbstractIndexedTRTexture texture)
+    public void AddTexture(TRTextileSegment texture)
     {
-        foreach (TexturedTileSegment segment in Rectangles)
+        foreach (TRTextileRegion segment in Rectangles)
         {
             if (segment.Bounds.Contains(texture.Bounds))
             {
@@ -48,16 +48,16 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>
         }
 
         // Otherwise, make a new segment
-        TexturedTileSegment newSegment = new(texture, Image.Export(texture.Bounds));
+        TRTextileRegion newSegment = new(texture, Image.Export(texture.Bounds));
         base.Add(newSegment, texture.Bounds.X, texture.Bounds.Y);
     }
 
-    public List<TexturedTileSegment> GetObjectTextureIndexSegments(IEnumerable<int> indices)
+    public List<TRTextileRegion> GetObjectTextureIndexSegments(IEnumerable<int> indices)
     {
-        List<TexturedTileSegment> segments = new();
+        List<TRTextileRegion> segments = new();
         foreach (int index in indices)
         {
-            foreach (TexturedTileSegment segment in Rectangles)
+            foreach (TRTextileRegion segment in Rectangles)
             {
                 if (segment.IsObjectTextureFor(index) && !segments.Contains(segment))
                 {
@@ -68,12 +68,12 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>
         return segments;
     }
 
-    public List<TexturedTileSegment> GetSpriteTextureIndexSegments(IEnumerable<int> indices)
+    public List<TRTextileRegion> GetSpriteTextureIndexSegments(IEnumerable<int> indices)
     {
-        List<TexturedTileSegment> segments = new();
+        List<TRTextileRegion> segments = new();
         foreach (int index in indices)
         {
-            foreach (TexturedTileSegment segment in Rectangles)
+            foreach (TRTextileRegion segment in Rectangles)
             {
                 if (segment.IsSpriteTextureFor(index) && !segments.Contains(segment))
                 {
@@ -86,13 +86,13 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>
 
     public void Commit()
     {
-        foreach (TexturedTileSegment segment in Rectangles)
+        foreach (TRTextileRegion segment in Rectangles)
         {
             segment.Commit(Index);
         }
     }
 
-    protected override bool Add(TexturedTileSegment segment, int x, int y)
+    protected override bool Add(TRTextileRegion segment, int x, int y)
     {
         bool added = base.Add(segment, x, y);
         if (added)
@@ -106,7 +106,7 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>
         return added;
     }
 
-    public override bool Remove(TexturedTileSegment segment)
+    public override bool Remove(TRTextileRegion segment)
     {
         bool removed = base.Remove(segment);
         if (removed)

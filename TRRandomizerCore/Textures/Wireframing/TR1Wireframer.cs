@@ -166,9 +166,9 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return level.AnimatedTextures;
     }
 
-    protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TR1Level level, Pen pen)
+    protected override Dictionary<ushort, TRTextileRegion> CreateSpecialSegments(TR1Level level, Pen pen)
     {
-        Dictionary<ushort, TexturedTileSegment> segments = new();
+        Dictionary<ushort, TRTextileRegion> segments = new();
         foreach (SpecialTextureHandling special in _data.SpecialTextures)
         {
             switch (special.Type)
@@ -176,7 +176,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
                 case SpecialTextureType.MidasDoors:
                     foreach (ushort texture in special.Textures)
                     {
-                        if (CreateMidasDoor(level, pen, texture, special.Mode) is TexturedTileSegment segment)
+                        if (CreateMidasDoor(level, pen, texture, special.Mode) is TRTextileRegion segment)
                         {
                             segments[texture] = segment;
                         }
@@ -188,7 +188,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return segments;
     }
 
-    private TexturedTileSegment CreateMidasDoor(TR1Level level, Pen pen, ushort textureIndex, SpecialTextureMode mode)
+    private TRTextileRegion CreateMidasDoor(TR1Level level, Pen pen, ushort textureIndex, SpecialTextureMode mode)
     {
         TR1Type doorType = FindDoorModel(level, textureIndex);
         if (doorType == default)
@@ -267,7 +267,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
             }
         }
 
-        return new TexturedTileSegment(texture, new(bmp));
+        return new TRTextileRegion(texture, new(bmp));
     }
 
     private static TR1Type FindDoorModel(TR1Level level, ushort textureIndex)

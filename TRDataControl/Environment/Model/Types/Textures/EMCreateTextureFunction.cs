@@ -63,7 +63,7 @@ public class EMCreateTextureFunction : BaseEMFunction
             clip.Overlay(new(data.Overlay));
 
             IndexedTRObjectTexture texture = CreateTexture(clip.Size);
-            TexturedTileSegment segment = new(texture, clip);
+            TRTextileRegion segment = new(texture, clip);
             packer.AddRectangle(segment);
 
             mappings.Add(new()

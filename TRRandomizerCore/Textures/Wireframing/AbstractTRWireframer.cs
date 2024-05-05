@@ -258,7 +258,7 @@ public abstract class AbstractTRWireframer<E, L>
         IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
 
-        packer.AddRectangle(new TexturedTileSegment(texture, frame));
+        packer.AddRectangle(new TRTextileRegion(texture, frame));
 
         return texture;
     }
@@ -285,7 +285,7 @@ public abstract class AbstractTRWireframer<E, L>
             graphics.DrawLine(pen, 0, y, size.W, y + rungSplit);
         }
 
-        packer.AddRectangle(new TexturedTileSegment(texture, new(bmp)));
+        packer.AddRectangle(new TRTextileRegion(texture, new(bmp)));
 
         return texture;
     }
@@ -305,7 +305,7 @@ public abstract class AbstractTRWireframer<E, L>
         // X marks the spot
         graphics.DrawLine(pen, 0, size.H, size.W, 0);
 
-        packer.AddRectangle(new TexturedTileSegment(texture, new(bmp)));
+        packer.AddRectangle(new TRTextileRegion(texture, new(bmp)));
 
         return texture;
     }
@@ -327,14 +327,14 @@ public abstract class AbstractTRWireframer<E, L>
         graphics.DrawLine(pen, size.W / 2, 0, size.W / 2, size.H);
         graphics.DrawLine(pen, 0, size.H / 2, size.W, size.H / 2);
 
-        packer.AddRectangle(new TexturedTileSegment(texture, new(bmp)));
+        packer.AddRectangle(new TRTextileRegion(texture, new(bmp)));
 
         return texture;
     }
 
     private Dictionary<ushort, IndexedTRObjectTexture> CreateSpecialTextures(TRTexturePacker<E, L> packer, L level, Pen pen)
     {
-        Dictionary<ushort, TexturedTileSegment> specialSegments = CreateSpecialSegments(level, pen);
+        Dictionary<ushort, TRTextileRegion> specialSegments = CreateSpecialSegments(level, pen);
         Dictionary<ushort, IndexedTRObjectTexture> specialTextures = new();
         foreach (ushort textureIndex in specialSegments.Keys)
         {
@@ -344,9 +344,9 @@ public abstract class AbstractTRWireframer<E, L>
         return specialTextures;
     }
 
-    protected virtual Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(L level, Pen pen)
+    protected virtual Dictionary<ushort, TRTextileRegion> CreateSpecialSegments(L level, Pen pen)
     {
-        return new Dictionary<ushort, TexturedTileSegment>();
+        return new Dictionary<ushort, TRTextileRegion>();
     }
 
     private void ProcessClips(TRTexturePacker<E, L> packer, L level, Pen pen, SmoothingMode mode)
@@ -367,8 +367,8 @@ public abstract class AbstractTRWireframer<E, L>
                 };
                 TRImage bmp = packer.Tiles[indexedTexture.Atlas].Image;
 
-                List<TexturedTileSegment> segments = packer.Tiles[indexedTexture.Atlas].GetObjectTextureIndexSegments(new int[] { texture });
-                foreach (TexturedTileSegment segment in segments)
+                List<TRTextileRegion> segments = packer.Tiles[indexedTexture.Atlas].GetObjectTextureIndexSegments(new int[] { texture });
+                foreach (TRTextileRegion segment in segments)
                 {
                     bmp.Import(frame, new
                     (
