@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
+using TRImageControl;
 using TRImageControl.Packing;
 
 namespace TRModelTransporter.Utilities;
@@ -188,29 +188,14 @@ public class TRTextureDeduplicator<E> where E : Enum
             for (int y = 0; y <= yEnd; y++)
             {
                 rect.Y = y;
-                using Bitmap bmp = containerSegment.Segment.Bitmap.Clone(rect, PixelFormat.Format32bppArgb);
-                if (CompareBitmaps(segmentToLocate.Segment.Bitmap, bmp))
+                TRImage bmp = containerSegment.Segment.Image.Export(rect);
+                if (segmentToLocate.Segment.Image.Equals(bmp))
                 {
                     return new Point(x, y);
                 }
             }
         }
         return null;
-    }
-
-    private static bool CompareBitmaps(Bitmap bmp1, Bitmap bmp2)
-    {
-        for (int x = 0; x < bmp1.Width; x++)
-        {
-            for (int y = 0; y < bmp1.Height; y++)
-            {
-                if (bmp1.GetPixel(x, y) != bmp2.GetPixel(x, y))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     private void RemoveStaleSegments()

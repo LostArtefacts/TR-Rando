@@ -33,7 +33,7 @@ public abstract class AbstractLandmarkImporter<E, L>
             return false;
         }
 
-        using TRTexturePacker<E, L> packer = CreatePacker(level);
+        TRTexturePacker<E, L> packer = CreatePacker(level);
         Dictionary<LandmarkTextureTarget, TexturedTileSegment> targetSegmentMap = new();
 
         foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
@@ -62,7 +62,7 @@ public abstract class AbstractLandmarkImporter<E, L>
                         // until we reach the target room. If it doesn't exist, the landmark will not
                         // be imported.
                         PortalSector sector = target.PortalSector;
-                        bool traverse = true;
+                        bool traverse;
                         short? room;
                         do
                         {
@@ -98,7 +98,7 @@ public abstract class AbstractLandmarkImporter<E, L>
                     target.MappedTextureIndex = textures.Count;
                     textures.Add(texture.Texture);
 
-                    Bitmap image;
+                    TRImage image;
                     if (target.BackgroundIndex != -1)
                     {
                         IndexedTRObjectTexture indexedTexture = new()
@@ -106,10 +106,10 @@ public abstract class AbstractLandmarkImporter<E, L>
                             Index = target.BackgroundIndex,
                             Texture = textures[target.BackgroundIndex]
                         };
-                        TRImage tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
-                        TRImage clip = new(tile.Extract(indexedTexture.Bounds));
-                        clip.Overlay(source.Bitmap);
-                        image = clip.Bitmap;
+                        TRImage tile = packer.Tiles[indexedTexture.Atlas].Image;
+                        TRImage clip = tile.Export(indexedTexture.Bounds);
+                        clip.Overlay(source.Image);
+                        image = clip;
 
                         backgroundCache[target.BackgroundIndex] = target;
                     }

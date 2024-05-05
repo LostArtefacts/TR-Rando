@@ -3,18 +3,18 @@ using System.Drawing;
 
 namespace TRImageControl.Packing;
 
-public class TexturedTileSegment : DefaultRectangle, IDisposable
+public class TexturedTileSegment : DefaultRectangle
 {
-    public Bitmap Bitmap { get; private set; }
+    public TRImage Image { get; private set; }
     public List<AbstractIndexedTRTexture> Textures { get; private set; }
     public AbstractIndexedTRTexture FirstTexture => Textures[0];
     public int FirstTextureIndex => FirstTexture.Index;
     public string FirstClassification => FirstTexture.Classification;
 
-    public TexturedTileSegment(AbstractIndexedTRTexture initialTexture, Bitmap bitmap)
+    public TexturedTileSegment(AbstractIndexedTRTexture initialTexture, TRImage image)
         : base(initialTexture.Bounds)
     {
-        Bitmap = bitmap;
+        Image = image;
         Textures = new List<AbstractIndexedTRTexture>();
         AddTexture(initialTexture);
     }
@@ -131,15 +131,9 @@ public class TexturedTileSegment : DefaultRectangle, IDisposable
         }
     }
 
-    public void Dispose()
-    {
-        Bitmap?.Dispose();
-        GC.SuppressFinalize(this);
-    }
-
     public TexturedTileSegment Clone()
     {
-        TexturedTileSegment copy = new(FirstTexture.Clone(), (Bitmap)Bitmap.Clone());
+        TexturedTileSegment copy = new(FirstTexture.Clone(), Image.Clone());
         for (int i = 1; i < Textures.Count; i++)
         {
             copy.AddTexture(Textures[i].Clone());

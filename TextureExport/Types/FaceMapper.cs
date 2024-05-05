@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using TRImageControl.Packing;
 using TRLevelControl;
 using TRLevelControl.Model;
@@ -11,8 +10,10 @@ public static class FaceMapper
 {
     public static void DrawFaces(TR1Level level, string lvl, int[] roomNumbers)
     {
-        using TR1TexturePacker packer = new(level);
-        packer.MaximumTiles = 255;
+        TR1TexturePacker packer = new(level)
+        {
+            MaximumTiles = 255
+        };
 
         Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
         Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
@@ -83,8 +84,10 @@ public static class FaceMapper
 
     public static void DrawFaces(TR2Level level, string lvl, int[] roomNumbers)
     {
-        using TR2TexturePacker packer = new(level);
-        packer.MaximumTiles = 255;
+        TR2TexturePacker packer = new(level)
+        {
+            MaximumTiles = 255
+        };
 
         Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
         Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
@@ -155,8 +158,10 @@ public static class FaceMapper
 
     public static void DrawFaces(TR3Level level, string lvl, int[] roomNumbers)
     {
-        using TR3TexturePacker packer = new(level);
-        packer.MaximumTiles = 255;
+        TR3TexturePacker packer = new(level)
+        {
+            MaximumTiles = 255
+        };
 
         Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
         Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
@@ -227,8 +232,10 @@ public static class FaceMapper
 
     public static void DrawBoxes(TR2Level level, string lvl, int[] roomNumbers)
     {
-        using TR2TexturePacker packer = new(level);
-        packer.MaximumTiles = 10000;
+        TR2TexturePacker packer = new(level)
+        {
+            MaximumTiles = 10000
+        };
 
         Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
         Dictionary<int, Dictionary<int, int>> newRectFaces = new();
@@ -274,7 +281,7 @@ public static class FaceMapper
 
     private static TexturedTileSegment DrawNewFace(TexturedTileSegment segment, string text, bool fillBackground = false)
     {
-        Bitmap bitmap = segment.Bitmap.Clone(new Rectangle(0, 0, segment.Width, segment.Height), PixelFormat.Format32bppArgb);
+        Bitmap bitmap = segment.Image.ToBitmap();
         
         Graphics g = Graphics.FromImage(bitmap);
 
@@ -290,7 +297,7 @@ public static class FaceMapper
 
         g.Flush();
 
-        return new TexturedTileSegment(CreateTexture(segment.Bounds), bitmap);
+        return new TexturedTileSegment(CreateTexture(segment.Bounds), new(bitmap));
     }
 
     private static TexturedTileSegment GetFaceSegment(int textureIndex, IReadOnlyList<TexturedTile> tiles)

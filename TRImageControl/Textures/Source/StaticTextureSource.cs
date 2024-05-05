@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace TRImageControl.Textures;
 
-public class StaticTextureSource<E> : AbstractTextureSource, IDisposable
+public class StaticTextureSource<E> : AbstractTextureSource
     where E : Enum
 {
     public string PNGPath { get; set; }
@@ -18,19 +17,13 @@ public class StaticTextureSource<E> : AbstractTextureSource, IDisposable
     public override string[] Variants => VariantMap.Keys.ToArray();
     public bool HasVariants => VariantMap.Count > 0;
 
-    private Bitmap _bitmap;
-    public Bitmap Bitmap
+    private TRImage _image;
+    public TRImage Image
     {
-        get => _bitmap ??= new(PNGPath);
+        get => _image ??= new(PNGPath);
     }
 
-    public Bitmap ClonedBitmap => Bitmap.Clone(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), PixelFormat.Format32bppArgb);
-
-    public void Dispose()
-    {
-        _bitmap?.Dispose();
-        GC.SuppressFinalize(this);
-    }
+    public TRImage ClonedBitmap => Image.Clone();
 
     public override bool Equals(object obj)
     {

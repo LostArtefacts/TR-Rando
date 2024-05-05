@@ -58,12 +58,12 @@ public class EMCreateTextureFunction : BaseEMFunction
                 Index = data.Background,
                 Texture = textures[data.Background]
             };
-            TRImage tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
-            TRImage clip = new(tile.Extract(indexedTexture.Bounds));
-            clip.Overlay(new Bitmap(data.Overlay));
+            TRImage tile = packer.Tiles[indexedTexture.Atlas].Image;
+            TRImage clip = tile.Export(indexedTexture.Bounds);
+            clip.Overlay(new(data.Overlay));
 
-            IndexedTRObjectTexture texture = CreateTexture(clip.Bitmap.Size);
-            TexturedTileSegment segment = new(texture, clip.Bitmap);
+            IndexedTRObjectTexture texture = CreateTexture(clip.Size);
+            TexturedTileSegment segment = new(texture, clip);
             packer.AddRectangle(segment);
 
             mappings.Add(new()

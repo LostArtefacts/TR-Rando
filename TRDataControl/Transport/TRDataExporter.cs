@@ -48,7 +48,7 @@ public abstract class TRDataExporter<E, L, D> : TRDataTransport<E, L, D>
 
             _textureHandler.SegmentExported += segmentDelegate = delegate (object sender, SegmentEventArgs e)
             {
-                e.Bitmap.Save(Path.Combine(segmentDir, e.SegmentIndex + ".png"), ImageFormat.Png);
+                e.Image.Save(Path.Combine(segmentDir, e.SegmentIndex + ".png"), ImageFormat.Png);
             };
 
             duplicateClips = new List<StaticTextureTarget>();

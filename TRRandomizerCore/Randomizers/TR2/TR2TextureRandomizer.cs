@@ -37,18 +37,15 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
     public override void Randomize(int seed)
     {
-        _generator = new Random(seed);
-
-        using (_textureDatabase = new TR2TextureDatabase())
+        _generator = new(seed);
+        _textureDatabase = new();
+        if (NightModeOnly)
         {
-            if (NightModeOnly)
-            {
-                RandomizeNightModeTextures();
-            }
-            else
-            {
-                RandomizeAllTextures();
-            }
+            RandomizeNightModeTextures();
+        }
+        else
+        {
+            RandomizeAllTextures();
         }
     }
 

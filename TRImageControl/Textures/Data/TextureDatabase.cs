@@ -2,7 +2,7 @@
 
 namespace TRImageControl.Textures;
 
-public class TextureDatabase<E> : IDisposable
+public class TextureDatabase<E>
     where E : Enum
 {
     private static readonly string _entityLookupPath = @"Static\entity_lookup.json";
@@ -26,15 +26,6 @@ public class TextureDatabase<E> : IDisposable
         _staticSources = new Dictionary<string, StaticTextureSource<E>>();
         _entityMap = JsonConvert.DeserializeObject<Dictionary<E, string[]>>(File.ReadAllText(Path.Combine(DataPath, _entityLookupPath)));
         GlobalGrouping = new GlobalGrouping<E>(this);
-    }
-
-    public void Dispose()
-    {
-        foreach (StaticTextureSource<E> source in _staticSources.Values)
-        {
-            source.Dispose();
-        }
-        GC.SuppressFinalize(this);
     }
 
     public DynamicTextureSource GetDynamicSource(string name)
