@@ -54,7 +54,7 @@ public class TR3DataImporter : TRDataImporter<TR3Type, TR3Level, TR3Blob>
 
         if (!IgnoreGraphics)
         {
-            _textureHandler.ResetUnusedTextures();
+            //_textureHandler.ResetUnusedTextures();
         }
     }
 }

@@ -3,98 +3,75 @@ using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public class TR1TexturePacker : TRTexturePacker<TR1Type, TR1Level>
+public class TR1TexturePacker : TRTexturePacker
 {
-    private const int _maximumTiles = 16;
+    private readonly TR1Level _level;
 
-    public TRPalette8Control PaletteManager { get; set; }
+    public TRPalette8Control PaletteControl { get; set; }
+    public override int NumLevelImages => _level.Images8.Count;
 
-    public override int NumLevelImages => Level.Images8.Count;
-
-    public TR1TexturePacker(TR1Level level, ITextureClassifier classifier = null)
-        : base(level, _maximumTiles, classifier) { }
-
-    protected override List<TRTextileSegment> LoadObjectTextures()
+    public TR1TexturePacker(TR1Level level, int maximumTiles = 16)
+        : base(maximumTiles)
     {
-        List<TRTextileSegment> textures = new(Level.ObjectTextures.Count);
-        for (int i = 0; i < Level.ObjectTextures.Count; i++)
+        _level = level;
+        LoadLevel();
+    }
+
+    public override TRImage GetImage(int tileIndex)
+    {
+        return new(_level.Images8[tileIndex].Pixels, _level.Palette);
+    }
+
+    public override void SetImage(int tileIndex, TRImage image)
+    {
+        PaletteControl ??= new()
         {
-            TRObjectTexture texture = Level.ObjectTextures[i];
-            //if (texture.IsValid())
-            {
-                textures.Add(new IndexedTRObjectTexture
-                {
-                    Index = i,
-                    Classification = _levelClassifier,
-                    Texture = texture
-                });
-            }
-        }
-        return textures;
-    }
-
-    protected override List<TRTextileSegment> LoadSpriteTextures()
-    {
-        List<TRSpriteTexture> sprites = Level.Sprites.SelectMany(s => s.Value.Textures).ToList();
-        List<TRTextileSegment> textures = new();
-        for (int i = 0; i < sprites.Count; i++)
-        {
-            TRSpriteTexture texture = sprites[i];
-            //if (texture.IsValid())
-            {
-                textures.Add(new IndexedTRSpriteTexture
-                {
-                    Index = i,
-                    Classification = _levelClassifier,
-                    Texture = texture
-                });
-            }
-        }
-        return textures;
-    }
-
-    protected override List<TRMesh> GetModelMeshes(TR1Type modelEntity)
-    {
-        return Level.Models[modelEntity]?.Meshes;
-    }
-
-    protected override TRSpriteSequence GetSpriteSequence(TR1Type entity)
-    {
-        return Level.Sprites[entity];
-    }
-
-    protected override IEnumerable<TR1Type> GetAllModelTypes()
-    {
-        return Level.Models.Keys.ToList();
+            Level = _level
+        };
+        PaletteControl.ChangedTiles[tileIndex] = image;
     }
 
     protected override void CreateImageSpace(int count)
     {
         for (int i = 0; i < count; i++)
         {
-            Level.Images8.Add(new()
-            {
-                Pixels = new byte[TRConsts.TPageSize]
-            });
+            _level.Images8.Add(new() { Pixels = new byte[TRConsts.TPageSize] });
         }
     }
 
-    public override TRImage  GetTile(int tileIndex)
+    protected override List<TRTextileSegment> LoadObjectSegments()
     {
-        return new(Level.Images8[tileIndex].Pixels, Level.Palette);
+        List<TRTextileSegment> segments = new();
+        for (int i = 0; i < _level.ObjectTextures.Count; i++)
+        {
+            segments.Add(new()
+            {
+                Index = i,
+                Texture = _level.ObjectTextures[i],
+            });
+        }
+
+        return segments;
     }
 
-    public override void SetTile(int tileIndex, TRImage image)
+    protected override List<TRTextileSegment> LoadSpriteSegments()
     {
-        PaletteManager ??= new()
+        List<TRTextileSegment> segments = new();
+        List<TRSpriteTexture> sprites = _level.Sprites.SelectMany(s => s.Value.Textures).ToList();
+        for (int i = 0; i < sprites.Count; i++)
         {
-            Level = Level
-        };
-        PaletteManager.ChangedTiles[tileIndex] = image;
+            segments.Add(new()
+            {
+                Index = i,
+                Texture = sprites[i],
+            });
+        }
+
+        return segments;
     }
 
     protected override void PostCommit()
     {
-        PaletteManager?.MergeTiles();
+        PaletteControl?.MergeTiles();
     }
 }

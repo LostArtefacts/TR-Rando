@@ -7,7 +7,7 @@ namespace TRModelTransporter.Utilities;
 
 public class TR2LevelTextureDeduplicator : AbstractTRLevelTextureDeduplicator<TR2Type, TR2Level>
 {
-    protected override TRTexturePacker<TR2Type, TR2Level> CreatePacker(TR2Level level)
+    protected override TRTexturePacker CreatePacker(TR2Level level)
     {
         return new TR2TexturePacker(level);
     }

@@ -9,19 +9,16 @@ public static class DependencyExporter
     public static void Export(TR1Level level, string lvl)
     {
         TR1TextureRemapGroup remapGroup = new();
-        foreach (TR1Type type in level.Models.Keys)
-        {
-            remapGroup.CalculateDependencies(level, type);
-        }
+        remapGroup.CalculateDependencies(level);
 
         foreach (TextureDependency<TR1Type> dependency in remapGroup.Dependencies)
         {
             // We need to ensure Atlantean spawns are accounted for because these are null meshes
-            if (dependency.Entities.Contains(TR1Type.FlyingAtlantean))
+            if (dependency.Types.Contains(TR1Type.FlyingAtlantean))
             {
-                dependency.AddEntity(TR1Type.ShootingAtlantean_N);
-                dependency.AddEntity(TR1Type.NonShootingAtlantean_N);
-                dependency.Entities.Sort();
+                dependency.AddType(TR1Type.ShootingAtlantean_N);
+                dependency.AddType(TR1Type.NonShootingAtlantean_N);
+                dependency.Types.Sort();
             }
         }
 
@@ -46,10 +43,7 @@ public static class DependencyExporter
     public static void Export(TR2Level level, string lvl)
     {
         TR2TextureRemapGroup remapGroup = new();
-        foreach (TR2Type type in level.Models.Keys)
-        {
-            remapGroup.CalculateDependencies(level, type);
-        }
+        remapGroup.CalculateDependencies(level);
 
         string dir = @"TR2\Deduplication";
         Directory.CreateDirectory(dir);
@@ -59,10 +53,7 @@ public static class DependencyExporter
     public static void Export(TR3Level level, string lvl)
     {
         TR3TextureRemapGroup remapGroup = new();
-        foreach (TR3Type type in level.Models.Keys)
-        {
-            remapGroup.CalculateDependencies(level, type);
-        }
+        remapGroup.CalculateDependencies(level);
 
         remapGroup.Dependencies.Sort(delegate (TextureDependency<TR3Type> d1, TextureDependency<TR3Type> d2)
         {

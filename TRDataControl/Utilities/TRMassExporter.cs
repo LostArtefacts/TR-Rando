@@ -1,11 +1,12 @@
-﻿using TRModelTransporter.Model;
+﻿using TRLevelControl.Model;
+using TRModelTransporter.Model;
 using TRModelTransporter.Transport;
 
 namespace TRModelTransporter.Utilities;
 
 public abstract class TRMassExporter<E, L, D>
     where E : Enum
-    where L : class
+    where L : TRLevelBase
     where D : TRBlobBase<E>
 {
     public abstract List<string> LevelNames { get; }
@@ -42,7 +43,7 @@ public abstract class TRMassExporter<E, L, D>
         {
             // The level has to be re-read per entity because TextureTransportHandler can modify ObjectTextures
             // which when shared between entities is difficult to undo.
-            _exporter.TextureClassifier = new TRTextureClassifier(levelPath);
+            //_exporter.TextureClassifier = new TRTextureClassifier(levelPath);
             L level = ReadLevel(levelPath);
             D definition = _exporter.Export(level, entity);
             _processedEntities.Add(entity);

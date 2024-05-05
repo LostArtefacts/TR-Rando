@@ -1,63 +1,54 @@
 ﻿using RectanglePacker.Defaults;
 using System.Drawing;
+using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
 public class TRTextileRegion : DefaultRectangle
 {
-    public TRImage Image { get; private set; }
-    public List<TRTextileSegment> Textures { get; private set; }
-    public TRTextileSegment FirstTexture => Textures[0];
-    public int FirstTextureIndex => FirstTexture.Index;
-    public string FirstClassification => FirstTexture.Classification;
+    public TRImage Image { get; set; }
+    public string ID { get; set; }
+    public List<TRTextileSegment> Segments { get; set; }
+
+    public TRTextileRegion()
+        : base(new())
+    {
+        Segments = new();
+    }
 
     public TRTextileRegion(TRTextileSegment initialTexture, TRImage image)
         : base(initialTexture.Bounds)
     {
         Image = image;
-        Textures = new List<TRTextileSegment>();
+        Segments = new();
         AddTexture(initialTexture);
+    }
+
+    public void GenerateID()
+    {
+        ID = Image.GenerateID();
     }
 
     public void AddTexture(TRTextileSegment texture)
     {
-        Textures.Add(texture);
+        Segments.Add(texture);
     }
 
     public bool IsObjectTextureFor(int textureIndex)
     {
-        if (Textures.Count == 0 || Textures[0] is IndexedTRSpriteTexture)
-        {
-            return false;
-        }
-        return IsFor(textureIndex);
+        return Segments.Count > 0 && Segments[0].Texture is TRObjectTexture
+            && GetTexture(textureIndex) != null;
     }
 
     public bool IsSpriteTextureFor(int textureIndex)
     {
-        if (Textures.Count == 0 || Textures[0] is IndexedTRObjectTexture)
-        {
-            return false;
-        }
-        return IsFor(textureIndex);
-    }
-
-    private bool IsFor(int textureIndex)
-    {
-        return GetTexture(textureIndex) != null;
+        return Segments.Count > 0 && Segments[0].Texture is TRSpriteTexture
+            && GetTexture(textureIndex) != null;
     }
 
     public TRTextileSegment GetTexture(int textureIndex)
     {
-        for (int i = 0; i < Textures.Count; i++)
-        {
-            TRTextileSegment texture = Textures[i];
-            if (texture.Index == textureIndex)
-            {
-                return texture;
-            }
-        }
-        return null;
+        return Segments.Find(s => s.Index == textureIndex);
     }
 
     // Triggered when successfully mapped onto a tile, so inform
@@ -72,38 +63,31 @@ public class TRTextileRegion : DefaultRectangle
         MoveTo(p.X, p.Y, tileIndex);
     }
 
-    public void InheritTextures(TRTextileRegion otherSegment, Point p, int tileIndex)
+    public void InheritTextures(TRTextileRegion otherRegion, Point p, int tileIndex)
     {
         // Get the old segment first to reposition its children
-        otherSegment.MoveTo(p, tileIndex);
+        otherRegion.MoveTo(p, tileIndex);
 
         // Copy all textures from the old segment into this
-        Textures.AddRange(otherSegment.Textures);
+        Segments.AddRange(otherRegion.Segments);
 
         // Clear the other's list of segments, effectively nullifying it
-        otherSegment.Textures.Clear();
+        otherRegion.Segments.Clear();
     }
 
-    // We work out the difference in x/y values here and pass these 
-    // to the child areas to allow them to calculate where they
-    // need to be.
+    // We work out the difference in x/y values here so that child
+    // segments are repositioned correctly.
     public void MoveTo(int x, int y, int tileIndex = -1)
     {
-        int xDiff = Math.Abs(Bounds.X - x);
-        int yDiff = Math.Abs(Bounds.Y - y);
+        Point root = Segments[0].Position;
 
-        if (x < Bounds.X)
+        foreach (TRTextileSegment texture in Segments)
         {
-            xDiff *= -1;
-        }
-        if (y < Bounds.Y)
-        {
-            yDiff *= -1;
-        }
+            Point position = texture.Position;
+            position.X = position.X - root.X + x;
+            position.Y = position.Y - root.Y + y;
+            texture.Position = position;
 
-        foreach (TRTextileSegment texture in Textures)
-        {
-            texture.MoveBy(xDiff, yDiff);
             if (tileIndex != -1)
             {
                 texture.Commit(tileIndex);
@@ -115,7 +99,7 @@ public class TRTextileRegion : DefaultRectangle
     // the indexed textures to invalidate themselves.
     public void Unbind()
     {
-        foreach (TRTextileSegment texture in Textures)
+        foreach (TRTextileSegment texture in Segments)
         {
             texture.Invalidate();
         }
@@ -125,7 +109,7 @@ public class TRTextileRegion : DefaultRectangle
     // Index is that of containing tile.
     public void Commit(int tileIndex)
     {
-        foreach (TRTextileSegment texture in Textures)
+        foreach (TRTextileSegment texture in Segments)
         {
             texture.Commit(tileIndex);
         }
@@ -133,10 +117,10 @@ public class TRTextileRegion : DefaultRectangle
 
     public TRTextileRegion Clone()
     {
-        TRTextileRegion copy = new(FirstTexture.Clone(), Image.Clone());
-        for (int i = 1; i < Textures.Count; i++)
+        TRTextileRegion copy = new(Segments[0].Clone(), Image.Clone());
+        for (int i = 1; i < Segments.Count; i++)
         {
-            copy.AddTexture(Textures[i].Clone());
+            copy.AddTexture(Segments[i].Clone());
         }
         return copy;
     }

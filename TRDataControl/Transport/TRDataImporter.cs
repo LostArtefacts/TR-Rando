@@ -1,4 +1,5 @@
 ﻿using TRImageControl.Packing;
+using TRLevelControl.Model;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model;
 
@@ -6,7 +7,7 @@ namespace TRModelTransporter.Transport;
 
 public abstract class TRDataImporter<E, L, D> : TRDataTransport<E, L, D> 
     where E : Enum
-    where L : class
+    where L : TRLevelBase
     where D : TRBlobBase<E>
 {
     public IEnumerable<E> EntitiesToImport { get; set; }

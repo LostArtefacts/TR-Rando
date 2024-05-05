@@ -1,64 +1,72 @@
 ﻿using System.Drawing;
+using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public abstract class AbstractTextureRemapGroup<E, L> 
-    where E : Enum
-    where L : class
+public abstract class AbstractTextureRemapGroup<T, L> 
+    where T : Enum
+    where L : TRLevelBase
 {
-    public List<TextureRemap> Remapping { get; set; }
-    public List<TextureDependency<E>> Dependencies { get; set; }
+    public List<TextureRemap> Remapping { get; set; } = new();
+    public List<TextureDependency<T>> Dependencies { get; set; } = new();
 
-    public AbstractTextureRemapGroup()
+    public void CalculateDependencies(L level)
     {
-        Remapping = new List<TextureRemap>();
-        Dependencies = new List<TextureDependency<E>>();
-    }
+        TRTexturePacker packer = CreatePacker(level);
+        TRDictionary<T, TRModel> models = GetModels(level);
+        TRMesh dummyMesh = GetDummyMesh(level);
 
-    public void CalculateDependencies(L level, E entity)
-    {
-        TRTexturePacker<E, L> packer = CreatePacker(level);
-        Dictionary<TRTextile, List<TRTextileRegion>> entitySegments = packer.GetModelSegments(entity);
-        foreach (E otherEntity in GetModelTypes(level))
+        foreach (var (baseType, baseModel) in models)
         {
-            if (EqualityComparer<E>.Default.Equals(entity, otherEntity))
-            {
-                continue;
-            }
+            Dictionary<TRTextile, List<TRTextileRegion>> baseRegions = packer.GetMeshRegions(baseModel.Meshes,
+                IsMasterType(baseType) ? dummyMesh : null);
 
-            Dictionary<TRTextile, List<TRTextileRegion>> modelSegments = packer.GetModelSegments(otherEntity);
-
-            foreach (TRTextile tile in entitySegments.Keys)
+            foreach (var (otherType, otherModel) in models)
             {
-                if (modelSegments.ContainsKey(tile))
+                if (EqualityComparer<T>.Default.Equals(baseType, otherType))
                 {
-                    List<TRTextileRegion> matches = entitySegments[tile].FindAll(s1 => modelSegments[tile].Any(s2 => s1 == s2));
+                    continue;
+                }
+
+                Dictionary<TRTextile, List<TRTextileRegion>> otherRegions = packer.GetMeshRegions(otherModel.Meshes,
+                    IsMasterType(otherType) ? dummyMesh : null);
+
+                foreach (var (tile, regions) in baseRegions)
+                {
+                    if (!otherRegions.ContainsKey(tile))
+                    {
+                        continue;
+                    }
+
+                    List<TRTextileRegion> matches = regions.FindAll(s1 => otherRegions[tile].Any(s2 => s1 == s2));
                     foreach (TRTextileRegion matchedSegment in matches)
                     {
-                        TextureDependency<E> dependency = GetDependency(tile.Index, matchedSegment.Bounds);
+                        TextureDependency<T> dependency = GetDependency(tile.Index, matchedSegment.Bounds);
                         if (dependency == null)
                         {
-                            dependency = new TextureDependency<E>
+                            dependency = new()
                             {
                                 TileIndex = tile.Index,
                                 Bounds = matchedSegment.Bounds
                             };
                             Dependencies.Add(dependency);
                         }
-                        dependency.AddEntity(entity);
-                        dependency.AddEntity(otherEntity);
+                        dependency.AddType(baseType);
+                        dependency.AddType(otherType);
                     }
                 }
             }
         }
     }
 
-    protected abstract TRTexturePacker<E, L> CreatePacker(L level);
-    protected abstract IEnumerable<E> GetModelTypes(L level);
+    protected abstract TRTexturePacker CreatePacker(L level);
+    protected abstract TRDictionary<T, TRModel> GetModels(L level);
+    protected abstract bool IsMasterType(T type);
+    protected abstract TRMesh GetDummyMesh(L level);
 
-    public TextureDependency<E> GetDependency(int tileIndex, Rectangle rectangle)
+    public TextureDependency<T> GetDependency(int tileIndex, Rectangle rectangle)
     {
-        foreach (TextureDependency<E> dependency in Dependencies)
+        foreach (TextureDependency<T> dependency in Dependencies)
         {
             if (dependency.TileIndex == tileIndex && dependency.Bounds == rectangle)
             {
@@ -68,11 +76,11 @@ public abstract class AbstractTextureRemapGroup<E, L>
         return null;
     }
 
-    public TextureDependency<E> GetDependency(int tileIndex, Rectangle rectangle, IEnumerable<E> entities)
+    public TextureDependency<T> GetDependency(int tileIndex, Rectangle rectangle, IEnumerable<T> entities)
     {
-        foreach (TextureDependency<E> dependency in Dependencies)
+        foreach (TextureDependency<T> dependency in Dependencies)
         {
-            if (dependency.TileIndex == tileIndex && dependency.Bounds == rectangle && dependency.Entities.All(e => entities.Contains(e)))
+            if (dependency.TileIndex == tileIndex && dependency.Bounds == rectangle && dependency.Types.All(e => entities.Contains(e)))
             {
                 return dependency;
             }
@@ -80,14 +88,14 @@ public abstract class AbstractTextureRemapGroup<E, L>
         return null;
     }
 
-    public bool CanRemoveRectangle(int tileIndex, Rectangle rectangle, IEnumerable<E> entities)
+    public bool CanRemoveRectangle(int tileIndex, Rectangle rectangle, IEnumerable<T> entities)
     {
         // Is there a dependency for the given rectangle?
-        TextureDependency<E> dependency = GetDependency(tileIndex, rectangle);
+        TextureDependency<T> dependency = GetDependency(tileIndex, rectangle);
         if (dependency != null)
         {
             // The rectangle can be removed if all of the entities match the dependency
-            return dependency.Entities.All(e => entities.Contains(e));
+            return dependency.Types.All(e => entities.Contains(e));
         }
         return true;
     }

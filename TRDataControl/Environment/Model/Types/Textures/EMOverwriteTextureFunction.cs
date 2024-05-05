@@ -14,7 +14,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         TR1TexturePacker packer = new(level);
         ApplyOverwrites(texture =>
         {
-            return packer.GetObjectTextureSegments(new List<int> { texture })
+            return packer.GetObjectRegions(new List<int> { texture })
                 .Select(k => new Tuple<TRTextile, TRTextileRegion>(k.Key, k.Value[0]))
                 .First();
         });
@@ -27,7 +27,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         TR2TexturePacker packer = new(level);
         ApplyOverwrites(texture =>
         {
-            return packer.GetObjectTextureSegments(new List<int> { texture })
+            return packer.GetObjectRegions(new List<int> { texture })
                 .Select(k => new Tuple<TRTextile, TRTextileRegion>(k.Key, k.Value[0]))
                 .First();
         });
@@ -40,7 +40,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         TR3TexturePacker packer = new(level);
         ApplyOverwrites(texture =>
         {
-            return packer.GetObjectTextureSegments(new List<int> { texture })
+            return packer.GetObjectRegions(new List<int> { texture })
                 .Select(k => new Tuple<TRTextile, TRTextileRegion>(k.Key, k.Value[0]))
                 .First();
         });

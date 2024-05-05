@@ -1,5 +1,4 @@
-﻿using TRImageControl.Packing;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model.Definitions;
@@ -32,7 +31,7 @@ public class TR2DataExporter : TRDataExporter<TR2Type, TR2Level, TR2Blob>
 
         ModelTransportHandler.Export(level, definition, modelEntity);
         ColourTransportHandler.Export(level, definition);
-        _textureHandler.Export(level, definition, TextureClassifier, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
+        _textureHandler.Export(level, definition, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
         CinematicTransportHandler.Export(level, definition, Data.GetCinematicEntities());
         SoundTransportHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));
 
@@ -45,7 +44,7 @@ public class TR2DataExporter : TRDataExporter<TR2Type, TR2Level, TR2Blob>
         {
             case TR2Type.FlamethrowerGoonTopixtor:
                 AmendDXtre3DTextures(definition);
-                AmendDXtre3DFlameTextures(definition);
+                //AmendDXtre3DFlameTextures(definition);
                 break;
             case TR2Type.Gunman1TopixtorORC:
             case TR2Type.Gunman1TopixtorCAC:
@@ -56,21 +55,21 @@ public class TR2DataExporter : TRDataExporter<TR2Type, TR2Level, TR2Blob>
         }
     }
 
-    private static void AmendDXtre3DFlameTextures(TR2Blob definition)
-    {
-        if (!definition.SpriteSequences.ContainsKey(TR2Type.Flame_S_H))
-        {
-            return;
-        }
+    //private static void AmendDXtre3DFlameTextures(TR2Blob definition)
+    //{
+    //    if (!definition.SpriteSequences.ContainsKey(TR2Type.Flame_S_H))
+    //    {
+    //        return;
+    //    }
 
-        // Ensures the flame sprite is aligned to OG - required for texture monitoring
-        Dictionary<int, List<IndexedTRSpriteTexture>> defaultSprites = definition.SpriteTextures[TR2Type.Flame_S_H];
-        foreach (int id in defaultSprites.Keys)
-        {
-            foreach (IndexedTRSpriteTexture sprite in defaultSprites[id])
-            {
-                sprite.Index += 22;
-            }
-        }
-    }
+    //    // Ensures the flame sprite is aligned to OG - required for texture monitoring
+    //    Dictionary<int, List<IndexedTRSpriteTexture>> defaultSprites = definition.SpriteTextures[TR2Type.Flame_S_H];
+    //    foreach (int id in defaultSprites.Keys)
+    //    {
+    //        foreach (IndexedTRSpriteTexture sprite in defaultSprites[id])
+    //        {
+    //            sprite.Index += 22;
+    //        }
+    //    }
+    //}
 }

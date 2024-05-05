@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using TRImageControl;
+﻿using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
 
@@ -45,15 +44,13 @@ public class EMCreateTextureFunction : BaseEMFunction
         }.ApplyToLevel(level));
     }
 
-    private List<EMTextureMap> BuildAndPackTextures<E, L>(TRTexturePacker<E, L> packer, List<TRObjectTexture> textures)
-        where L : class
-        where E : Enum
+    private List<EMTextureMap> BuildAndPackTextures(TRTexturePacker packer, List<TRObjectTexture> textures)
     {
         List<EMTextureMap> mappings = new();
 
         foreach (EMTextureData data in Data)
         {
-            IndexedTRObjectTexture indexedTexture = new()
+            TRTextileSegment indexedTexture = new()
             {
                 Index = data.Background,
                 Texture = textures[data.Background]
@@ -62,35 +59,26 @@ public class EMCreateTextureFunction : BaseEMFunction
             TRImage clip = tile.Export(indexedTexture.Bounds);
             clip.Overlay(new(data.Overlay));
 
-            IndexedTRObjectTexture texture = CreateTexture(clip.Size);
-            TRTextileRegion segment = new(texture, clip);
-            packer.AddRectangle(segment);
+            TRTextileSegment segment = new()
+            {
+                Texture = new TRObjectTexture(new(0, 0, clip.Size.Width, clip.Size.Height))
+                {
+                    BlendingMode = data.RetainInWireframe ? TRBlendingMode.Unused01 : TRBlendingMode.Opaque,
+                }
+            };
+
+            packer.AddRectangle(new(segment, clip));
 
             mappings.Add(new()
             {
                 [(ushort)textures.Count] = data.GeometryMap
             });
-            textures.Add(texture.Texture);
-
-            // Use a flag that's unused throughout the games to indicate this texture
-            // must remain as-is.
-            if (data.RetainInWireframe)
-            {
-                texture.Texture.BlendingMode = TRBlendingMode.Unused01;
-            }
+            textures.Add(segment.Texture as TRObjectTexture);
         }
 
         packer.Pack(true);
 
         return mappings;
-    }
-
-    private static IndexedTRObjectTexture CreateTexture(Size size)
-    {
-        return new()
-        {
-            Texture = new(0, 0, size.Width, size.Height)
-        };
     }
 }
 

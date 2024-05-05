@@ -16,7 +16,7 @@ public abstract class AbstractLandmarkImporter<E, L>
 
     protected abstract int MaxTextures { get; }
 
-    protected abstract TRTexturePacker<E, L> CreatePacker(L level);
+    protected abstract TRTexturePacker CreatePacker(L level);
     protected abstract List<TRObjectTexture> GetObjectTextures(L level);
     protected abstract void SetRoomTexture(L level, int roomIndex, int rectangleIndex, ushort textureIndex);
     protected abstract short? GetRoomFromPortal(L level, PortalSector portalSector, bool isLevelMirrored);
@@ -33,7 +33,7 @@ public abstract class AbstractLandmarkImporter<E, L>
             return false;
         }
 
-        TRTexturePacker<E, L> packer = CreatePacker(level);
+        TRTexturePacker packer = CreatePacker(level);
         Dictionary<LandmarkTextureTarget, TRTextileRegion> targetSegmentMap = new();
 
         foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
@@ -94,20 +94,20 @@ public abstract class AbstractLandmarkImporter<E, L>
                         continue;
                     }
 
-                    IndexedTRObjectTexture texture = CreateTexture(segments[segmentIndex], isLevelMirrored);
+                    TRTextileSegment segment = CreateTexture(segments[segmentIndex], isLevelMirrored);
                     target.MappedTextureIndex = textures.Count;
-                    textures.Add(texture.Texture);
+                    textures.Add(segment.Texture as TRObjectTexture);
 
                     TRImage image;
                     if (target.BackgroundIndex != -1)
                     {
-                        IndexedTRObjectTexture indexedTexture = new()
+                        TRTextileSegment indexedSegment = new()
                         {
                             Index = target.BackgroundIndex,
                             Texture = textures[target.BackgroundIndex]
                         };
-                        TRImage tile = packer.Tiles[indexedTexture.Atlas].Image;
-                        TRImage clip = tile.Export(indexedTexture.Bounds);
+                        TRImage tile = packer.Tiles[indexedSegment.Atlas].Image;
+                        TRImage clip = tile.Export(indexedSegment.Bounds);
                         clip.Overlay(source.Image);
                         image = clip;
 
@@ -118,9 +118,9 @@ public abstract class AbstractLandmarkImporter<E, L>
                         image = source.Image.Clone();
                     }
 
-                    TRTextileRegion segment = new(texture, image);
-                    packer.AddRectangle(segment);
-                    targetSegmentMap[target] = segment;
+                    TRTextileRegion region = new(segment, image);
+                    packer.AddRectangle(region);
+                    targetSegmentMap[target] = region;
                 }
             }
         }
@@ -168,18 +168,18 @@ public abstract class AbstractLandmarkImporter<E, L>
         }
     }
 
-    private static IndexedTRObjectTexture CreateTexture(Rectangle rectangle, bool mirrored)
+    private static TRTextileSegment CreateTexture(Rectangle rectangle, bool mirrored)
     {
-        IndexedTRObjectTexture texture = new()
-        {
-            Texture = new(rectangle)
-        };
-
+        TRObjectTexture texture = new(rectangle);
         if (mirrored)
         {
-            texture.Texture.FlipHorizontal();
+            texture.FlipHorizontal();
         }
-        return texture;
+
+        return new()
+        {
+            Texture = texture
+        };
     }
 
     protected short? GetSectorPortalRoom(TRRoomSector sector, FDControl floorData, PortalDirection direction)
