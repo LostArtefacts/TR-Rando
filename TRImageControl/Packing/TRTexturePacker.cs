@@ -327,9 +327,4 @@ public abstract class TRTexturePacker<E, L> : AbstractPacker<TRTextile, TRTextil
     }
 
     protected virtual void PostCommit() { }
-
-    protected override TRTextile CreateTile()
-    {
-        return new TRTextile();
-    }
 }

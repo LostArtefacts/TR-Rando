@@ -27,9 +27,4 @@ public class DefaultTexturePacker : AbstractPacker<TRTextile, TRTextileRegion>
 
         _allTextures = new List<TRTextileSegment>();
     }
-
-    protected override TRTextile CreateTile()
-    {
-        return new TRTextile();
-    }
 }
