@@ -1,9 +1,6 @@
-﻿using TRLevelControl.Model;
-using TRModelTransporter.Model.Definitions;
+﻿namespace TRModelTransporter.Handlers;
 
-namespace TRModelTransporter.Handlers;
-
-public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2Level, TR2Blob>
+public class TR2TextureImportHandler// : AbstractTextureImportHandler<TR2Type, TR2Level, TR2Blob>
 {
     //protected override TRDictionary<TR2Type, TRSpriteSequence> GetExistingSpriteSequences()
     //{

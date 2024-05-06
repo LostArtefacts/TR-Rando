@@ -1,84 +1,40 @@
-﻿using Newtonsoft.Json;
-using System.Drawing.Imaging;
-using TRModelTransporter.Data;
-using TRModelTransporter.Handlers;
-using TRModelTransporter.Model;
+﻿using TRDataControl.Remapping;
+using TRImageControl.Packing;
+using TRLevelControl.Model;
 
-namespace TRModelTransporter.Transport;
+namespace TRDataControl;
 
-public abstract class TRDataTransport<E, L, D> 
-    where E : Enum
-    where L : class
-    where D : TRBlobBase<E>
+public abstract class TRDataTransport<L, T, S, B>
+    where L : TRLevelBase
+    where T : Enum
+    where S : Enum
+    where B : TRBlobBase<T>
 {
-    protected static readonly string _defaultDataFolder = @"Resources\Models";
-    protected static readonly string _dataFileName = "Data.json";
-    protected static readonly string _imageFileName = "Segments.png";
+    protected static readonly string _defaultDataFolder = @"Resources\Objects";
+    protected static readonly string _blobExt = ".TRB";
 
-    public IDataProvider<E> Data { get; set; }
+    public IDataProvider<T, S> Data { get; set; }
     public L Level { get; set; }
-
     public string LevelName { get; set; }
+    public string DataFolder { get; set; } = _defaultDataFolder;
 
-    public string DataFolder { get; set; }
-
-    protected readonly CinematicTransportHandler _cinematicHandler;
-    protected readonly ModelTransportHandler _modelHandler;
-    protected readonly ColourTransportHandler _colourHandler;
-    protected readonly SoundTransportHandler _soundHandler;
-
-    public TRDataTransport()
+    public void StoreBlob(B blob)
     {
-        DataFolder = _defaultDataFolder;
-
-        _cinematicHandler = new CinematicTransportHandler();
-        _modelHandler = new ModelTransportHandler();
-        _colourHandler = new ColourTransportHandler();
-        _soundHandler = new SoundTransportHandler();
+        Directory.CreateDirectory(DataFolder);
+        TRBlobControl.Write(blob, Path.Combine(DataFolder, blob.Alias.ToString().ToUpper() + _blobExt));
     }
 
-    protected void StoreDefinition(D definition)
+    public B LoadBlob(T type)
     {
-        string directory = Path.Combine(DataFolder, definition.Alias.ToString());
-        if (!Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-
-        if (definition.HasGraphics)
-        {
-            definition.Image.Save(Path.Combine(directory, _imageFileName), ImageFormat.Png);
-        }
-        File.WriteAllText(Path.Combine(directory, _dataFileName), JsonConvert.SerializeObject(definition, Formatting.None));
+        return TRBlobControl.Read<B>(Path.Combine(DataFolder, type.ToString().ToUpper() + _blobExt));
     }
 
-    public D LoadDefinition(E modelEntity)
-    {
-        string directory = Path.Combine(DataFolder, modelEntity.ToString());
-        string dataFilePath = Path.Combine(directory, _dataFileName);
-        string imageFilePath = Path.Combine(directory, _imageFileName);
-
-        if (!File.Exists(dataFilePath))
-        {
-            throw new IOException(string.Format("Missing model data JSON file ({0})", dataFilePath));
-        }
-
-        D definition = JsonConvert.DeserializeObject<D>(File.ReadAllText(dataFilePath));
-        definition.Alias = modelEntity;
-
-        if (definition.HasGraphics)
-        {
-            if (!File.Exists(imageFilePath))
-            {
-                throw new IOException(string.Format("Missing model data image file ({0})", imageFilePath));
-            }
-            definition.Image = new(imageFilePath);
-        }
-        return definition;
-    }
-
-    protected bool Equals(E e1, E e2)
-    {
-        return EqualityComparer<E>.Default.Equals(e1, e2);
-    }
+    protected abstract TRTexturePacker CreatePacker();
+    protected abstract TRTextureRemapper<L> CreateRemapper();
+    protected abstract bool IsMasterType(T type);
+    protected abstract TRMesh GetDummyMesh();
+    protected abstract TRDictionary<T, TRModel> Models { get; }
+    protected abstract TRDictionary<T, TRStaticMesh> StaticMeshes { get; }
+    protected abstract TRDictionary<T, TRSpriteSequence> SpriteSequences { get; }
+    protected abstract List<TRCinematicFrame> CinematicFrames { get; }
 }

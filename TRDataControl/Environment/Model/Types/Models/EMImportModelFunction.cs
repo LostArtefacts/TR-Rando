@@ -1,5 +1,4 @@
 ﻿using TRLevelControl.Model;
-using TRModelTransporter.Transport;
 
 namespace TRDataControl.Environment;
 
@@ -14,7 +13,7 @@ public class EMImportModelFunction : BaseEMFunction
         TR1DataImporter importer = new(Tags?.Contains(EMTag.CommunityPatchOnly) ?? false)
         {
             Level = level,
-            EntitiesToImport = Models.Select(m => (TR1Type)m),
+            TypesToImport = new(Models.Select(m => (TR1Type)m)),
             DataFolder = @"Resources\TR1\Models",
             ForceCinematicOverwrite = ForceCinematicOverwrite
         };
@@ -28,7 +27,7 @@ public class EMImportModelFunction : BaseEMFunction
         TR2DataImporter importer = new()
         {
             Level = level,
-            EntitiesToImport = Models.Select(m => (TR2Type)m),
+            TypesToImport = new(Models.Select(m => (TR2Type)m)),
             DataFolder = @"Resources\TR2\Models",
             ForceCinematicOverwrite = ForceCinematicOverwrite
         };
@@ -42,7 +41,7 @@ public class EMImportModelFunction : BaseEMFunction
         TR3DataImporter importer = new()
         {
             Level = level,
-            EntitiesToImport = Models.Select(m => (TR3Type)m),
+            TypesToImport = new(Models.Select(m => (TR3Type)m)),
             DataFolder = @"Resources\TR3\Models",
             ForceCinematicOverwrite = ForceCinematicOverwrite
         };

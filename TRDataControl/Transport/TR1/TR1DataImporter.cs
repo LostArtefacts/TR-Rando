@@ -1,24 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using TRDataControl.Remapping;
 using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
-using TRModelTransporter.Data;
-using TRModelTransporter.Handlers;
-using TRModelTransporter.Handlers.Textures;
-using TRModelTransporter.Model.Definitions;
 
-namespace TRModelTransporter.Transport;
+namespace TRDataControl;
 
-public class TR1DataImporter : TRDataImporter<TR1Type, TR1Level, TR1Blob>
+public class TR1DataImporter : TRDataImporter<TR1Level, TR1Type, TR1SFX, TR1Blob>
 {
-    public TRPalette8Control PaletteManager { get; set; }
+    private TRPalette8Control _paletteControl;
 
     public TR1DataImporter(bool isCommunityPatch = false)
     {
         Data = new TR1DataProvider();
-        SortModels = true;
-        PaletteManager = new();
-
         if (isCommunityPatch)
         {
             Data.TextureTileLimit = 128;
@@ -26,50 +19,68 @@ public class TR1DataImporter : TRDataImporter<TR1Type, TR1Level, TR1Blob>
         }
     }
 
-    protected override AbstractTextureImportHandler<TR1Type, TR1Level, TR1Blob> CreateTextureHandler()
+    protected override List<TR1Type> GetExistingTypes()
     {
-        return new TR1TextureImportHandler();
+        if (Level.Sprites[TR1Type.Explosion1_S_H]?.Textures.Count == 1)
+        {
+            // Allow replacing the Explosion sequence in Vilcabamba (it's there but empty, originally dynamite?)
+            Level.Sprites.Remove(TR1Type.Explosion1_S_H);
+        }
+        return new(Level.Models.Keys.Concat(Level.Sprites.Keys));
     }
 
-    protected override List<TR1Type> GetExistingModelTypes()
-    {
-        return Level.Models.Keys.ToList();
-    }
+    protected override TRTextureRemapper<TR1Level> CreateRemapper()
+        => new TR1TextureRemapper();
 
-    protected override void Import(IEnumerable<TR1Blob> standardDefinitions, IEnumerable<TR1Blob> soundOnlyDefinitions)
-    {
-        TR1TextureRemapGroup remap = null;
-        if (TextureRemapPath != null)
+    protected override bool IsMasterType(TR1Type type)
+        => type == TR1Type.Lara;
+
+    protected override TRMesh GetDummyMesh()
+        => Level.Models[TR1Type.Lara].Meshes[0];
+
+    protected override TRTexturePacker CreatePacker()
+        => new TR1TexturePacker(Level, Data.TextureTileLimit)
         {
-            remap = JsonConvert.DeserializeObject<TR1TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
-        }
-
-        if (!IgnoreGraphics)
-        {
-            PaletteManager.Level = Level;
-            PaletteManager.ObsoleteModels = EntitiesToRemove.Select(e => Data.TranslateAlias(e)).ToList();
-
-            (_textureHandler as TR1TextureImportHandler).PaletteManager = PaletteManager;
-            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
-        }
-
-        SoundTransportHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
-
-        Dictionary<TR1Type, TR1Type> aliasPriority = Data.AliasPriority ?? new Dictionary<TR1Type, TR1Type>();
-
-        foreach (TR1Blob definition in standardDefinitions)
-        {
-            if (!IgnoreGraphics)
+            PaletteControl = _paletteControl = new()
             {
-                ColourTransportHandler.Import(definition, PaletteManager);
+                Level = Level,
+                ObsoleteTypes = new(TypesToRemove.Select(t => Data.TranslateAlias(t)))
             }
-            CinematicTransportHandler.Import(Level, definition, ForceCinematicOverwrite);
-            ModelTransportHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
-        }
+        };
 
-        if (!IgnoreGraphics)
+    protected override TRDictionary<TR1Type, TRModel> Models
+        => Level.Models;
+
+    protected override TRDictionary<TR1Type, TRStaticMesh> StaticMeshes
+        => Level.StaticMeshes;
+
+    protected override TRDictionary<TR1Type, TRSpriteSequence> SpriteSequences
+        => Level.Sprites;
+
+    protected override List<TRCinematicFrame> CinematicFrames
+        => Level.CinematicFrames;
+
+    protected override List<TRObjectTexture> ObjectTextures
+        => Level.ObjectTextures;
+
+    protected override ushort ImportColour(TR1Blob blob, ushort currentIndex)
+    {
+        return blob.Palette8.ContainsKey(currentIndex)
+            ? (ushort)_paletteControl.GetOrAddPaletteIndex(blob.Palette8[currentIndex])
+            : currentIndex;
+    }
+
+    protected override void ImportSound(TR1Blob blob)
+    {
+        if (blob.SoundEffects == null)
+            return;
+
+        foreach (TR1SFX sfx in blob.SoundEffects.Keys)
         {
-            //_textureHandler.ResetUnusedTextures();
+            if (!Level.SoundEffects.ContainsKey(sfx))
+            {
+                Level.SoundEffects[sfx] = blob.SoundEffects[sfx];
+            }
         }
     }
 }

@@ -1,22 +1,19 @@
 ﻿using TRLevelControl.Model;
 
-namespace TRModelTransporter.Model.Definitions;
+namespace TRDataControl;
 
 public class TR2Blob : TRBlobBase<TR2Type>
 {
-    public TRCinematicFrame[] CinematicFrames { get; set; }
-    public Dictionary<int, TRColour4> Colours { get; set; }
-    public List<TRMesh> Meshes { get; set; }
-    public TRModel Model { get; set; }
+    public Dictionary<ushort, TRColour4> Palette16 { get; set; }
     public SortedDictionary<TR2SFX, TR2SoundEffect> SoundEffects { get; set; }
 
     public override bool Equals(object obj)
     {
-        return obj is TR2Blob definition && Entity == definition.Entity;
+        return obj is TR2Blob blob && ID == blob.ID;
     }
 
     public override int GetHashCode()
     {
-        return 1875520522 + Entity.GetHashCode();
+        return ID.GetHashCode();
     }
 }

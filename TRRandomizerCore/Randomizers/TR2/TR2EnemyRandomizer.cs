@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
+using TRDataControl;
 using TRGE.Core;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
@@ -1030,13 +1030,13 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 TR2DataImporter importer = new()
                 {
                     ClearUnusedSprites = true,
-                    EntitiesToImport = enemies.EntitiesToImport,
-                    EntitiesToRemove = enemies.EntitiesToRemove,
+                    TypesToImport = enemies.EntitiesToImport,
+                    TypesToRemove = enemies.EntitiesToRemove,
                     Level = level.Data,
                     LevelName = level.Name,
                     DataFolder = _outer.GetResourcePath(@"TR2\Models"),
                     TextureRemapPath = _outer.GetResourcePath(@"TR2\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json"),
-                    TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
+                    //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                 };
 
                 importer.Data.AliasPriority = TR2EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport);

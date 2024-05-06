@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
+using TRDataControl;
 using TRDataControl.Environment;
 using TRGE.Core;
 using TRGE.Core.Item.Enums;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
@@ -827,7 +827,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                     {
                         Level = level.Data,
                         LevelName = level.Name,
-                        EntitiesToImport = allocation.ImportModels,
+                        TypesToImport = allocation.ImportModels,
                         DataFolder = _outer.GetResourcePath(@"TR1\Models"),
                     };
 

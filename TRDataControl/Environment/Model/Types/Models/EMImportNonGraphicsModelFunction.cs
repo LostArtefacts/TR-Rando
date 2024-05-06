@@ -1,5 +1,4 @@
 ﻿using TRLevelControl.Model;
-using TRModelTransporter.Transport;
 
 namespace TRDataControl.Environment;
 
@@ -19,7 +18,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         {
             Level = level,
             ClearUnusedSprites = false,
-            EntitiesToImport = data.Select(m => (TR1Type)m.ModelID),
+            TypesToImport = new(data.Select(m => (TR1Type)m.ModelID)),
             DataFolder = @"Resources\TR1\Models",
             IgnoreGraphics = true
         };
@@ -40,7 +39,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         {
             Level = level,
             ClearUnusedSprites = false,
-            EntitiesToImport = data.Select(m => (TR2Type)m.ModelID),
+            TypesToImport = new(data.Select(m => (TR2Type)m.ModelID)),
             DataFolder = @"Resources\TR2\Models",
             IgnoreGraphics = true
         };
@@ -61,7 +60,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         {
             Level = level,
             ClearUnusedSprites = false,
-            EntitiesToImport = data.Select(m => (TR3Type)m.ModelID),
+            TypesToImport = new(data.Select(m => (TR3Type)m.ModelID)),
             DataFolder = @"Resources\TR3\Models",
             IgnoreGraphics = true
         };

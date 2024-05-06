@@ -1,60 +1,51 @@
 ﻿using TRLevelControl.Model;
-using TRModelTransporter.Model;
-using TRModelTransporter.Transport;
 
-namespace TRModelTransporter.Utilities;
+namespace TRDataControl.Utils;
 
-public abstract class TRMassExporter<E, L, D>
-    where E : Enum
+public abstract class TRMassExporter<L, T, S, B>
     where L : TRLevelBase
-    where D : TRBlobBase<E>
+    where T : Enum
+    where S : Enum
+    where B : TRBlobBase<T>
 {
-    public abstract List<string> LevelNames { get; }
-    public abstract Dictionary<string, List<E>> ExportTypes { get; }
+    public abstract Dictionary<string, List<T>> Data { get; }
 
-    private TRDataExporter<E, L, D> _exporter;
-    private List<E> _processedEntities;
+    private TRDataExporter<L, T, S, B> _exporter;
+    private List<T> _processedTypes;
 
-    public void Export(string levelFileDirectory, string exportDirectory, string segmentsDirectory = null)
+    public void Export(string levelFileDirectory, string exportDirectory)
     {
         _exporter = CreateExporter();
-        _exporter.ExportIndividualSegments = segmentsDirectory != null;
-        _exporter.SegmentsDataFolder = segmentsDirectory;
         _exporter.DataFolder = exportDirectory;
-        _processedEntities = new List<E>();
+        _exporter.BaseLevelDirectory = levelFileDirectory;
+        _processedTypes = new();
 
-        foreach (string lvlName in LevelNames)
+        foreach (string level in Data.Keys)
         {
-            _exporter.LevelName = lvlName;
-            if (ExportTypes.ContainsKey(lvlName))
+            _exporter.LevelName = level;
+            string levelPath = Path.Combine(levelFileDirectory, level);
+            foreach (T type in Data[level])
             {
-                string levelPath = Path.Combine(levelFileDirectory, lvlName);
-                foreach (E entity in ExportTypes[lvlName])
-                {
-                    Export(levelPath, entity);
-                }
+                Export(levelPath, type);
             }
         }
     }
 
-    private void Export(string levelPath, E entity)
+    private void Export(string levelPath, T type)
     {
-        if (!_processedEntities.Contains(entity))
-        {
-            // The level has to be re-read per entity because TextureTransportHandler can modify ObjectTextures
-            // which when shared between entities is difficult to undo.
-            //_exporter.TextureClassifier = new TRTextureClassifier(levelPath);
-            L level = ReadLevel(levelPath);
-            D definition = _exporter.Export(level, entity);
-            _processedEntities.Add(entity);
+        if (_processedTypes.Contains(type))
+            return;
 
-            foreach (E dependency in definition.Dependencies)
-            {
-                Export(levelPath, dependency);
-            }
+        L level = ReadLevel(levelPath);
+        B blob = _exporter.Export(level, type, _exporter.Data.GetBlobType(type));
+        _processedTypes.Add(type);
+
+        foreach (T dependency in blob.Dependencies)
+        {
+            Export(levelPath, dependency);
         }
     }
 
-    protected abstract TRDataExporter<E, L, D> CreateExporter();
+    protected abstract TRDataExporter<L, T, S, B> CreateExporter();
     protected abstract L ReadLevel(string path);
 }

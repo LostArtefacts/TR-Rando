@@ -1,11 +1,10 @@
 ﻿using System.Drawing;
+using TRDataControl;
 using TRImageControl.Packing;
 using TRImageControl.Textures;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
-using TRModelTransporter.Model.Definitions;
-using TRModelTransporter.Transport;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Utilities;
 
@@ -247,9 +246,9 @@ public class DynamicTextureBuilder
             TR1Blob adam = new TR1DataImporter
             {
                 DataFolder = @"Resources\TR1\Models"
-            }.LoadDefinition(modelID);
+            }.LoadBlob(modelID);
 
-            if (model.Meshes[3].CollRadius != adam.Meshes[3].CollRadius)
+            if (model.Meshes[3].CollRadius != adam.Model.Meshes[3].CollRadius)
             {
                 try
                 {

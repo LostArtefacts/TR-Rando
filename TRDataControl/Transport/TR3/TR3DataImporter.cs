@@ -1,60 +1,76 @@
-﻿using Newtonsoft.Json;
+﻿using TRDataControl.Remapping;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
-using TRModelTransporter.Data;
-using TRModelTransporter.Handlers;
-using TRModelTransporter.Model.Definitions;
 
-namespace TRModelTransporter.Transport;
+namespace TRDataControl;
 
-public class TR3DataImporter : TRDataImporter<TR3Type, TR3Level, TR3Blob>
+public class TR3DataImporter : TRDataImporter<TR3Level, TR3Type, TR3SFX, TR3Blob>
 {
-    public TR3DataImporter()
+    private TRPalette16Control _paletteControl;
+
+    public TR3DataImporter(bool isCommunityPatch = false)
     {
         Data = new TR3DataProvider();
-        SortModels = true;
-    }
-
-    protected override AbstractTextureImportHandler<TR3Type, TR3Level, TR3Blob> CreateTextureHandler()
-    {
-        return new TR3TextureImportHandler();
-    }
-
-    protected override List<TR3Type> GetExistingModelTypes()
-    {
-        return Level.Models.Keys.ToList();
-    }
-
-    protected override void Import(IEnumerable<TR3Blob> standardDefinitions, IEnumerable<TR3Blob> soundOnlyDefinitions)
-    {
-        TR3TextureRemapGroup remap = null;
-        if (TextureRemapPath != null)
+        if (isCommunityPatch)
         {
-            remap = JsonConvert.DeserializeObject<TR3TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
+            Data.TextureTileLimit = 128;
+            Data.TextureObjectLimit = 16384;
+        }
+    }
+
+    protected override List<TR3Type> GetExistingTypes()
+        => new(Level.Models.Keys.Concat(Level.Sprites.Keys));
+
+    protected override TRTextureRemapper<TR3Level> CreateRemapper()
+        => new TR3TextureRemapper();
+
+    protected override bool IsMasterType(TR3Type type)
+        => type == TR3Type.Lara;
+
+    protected override TRMesh GetDummyMesh()
+        => Level.Models[TR3Type.Lara].Meshes[0];
+
+    protected override TRTexturePacker CreatePacker()
+        => new TR3TexturePacker(Level, Data.TextureTileLimit);
+
+    protected override TRDictionary<TR3Type, TRModel> Models
+        => Level.Models;
+
+    protected override TRDictionary<TR3Type, TRStaticMesh> StaticMeshes
+        => Level.StaticMeshes;
+
+    protected override TRDictionary<TR3Type, TRSpriteSequence> SpriteSequences
+        => Level.Sprites;
+
+    protected override List<TRCinematicFrame> CinematicFrames
+        => Level.CinematicFrames;
+
+    protected override List<TRObjectTexture> ObjectTextures
+        => Level.ObjectTextures;
+
+    protected override ushort ImportColour(TR3Blob blob, ushort currentIndex)
+    {
+        if (!blob.Palette16.ContainsKey(currentIndex))
+        {
+            return currentIndex;
         }
 
-        if (!IgnoreGraphics)
+        _paletteControl ??= new(Level.Palette16, Level.DistinctMeshes);
+        return (ushort)_paletteControl.Import(blob.Palette16[currentIndex]);
+    }
+
+    protected override void ImportSound(TR3Blob blob)
+    {
+        if (blob.SoundEffects == null)
+            return;
+
+        foreach (TR3SFX sfx in blob.SoundEffects.Keys)
         {
-            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
-        }
-
-        SoundTransportHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
-
-        Dictionary<TR3Type, TR3Type> aliasPriority = Data.AliasPriority ?? new Dictionary<TR3Type, TR3Type>();
-
-        foreach (TR3Blob definition in standardDefinitions)
-        {
-            if (!IgnoreGraphics)
+            if (!Level.SoundEffects.ContainsKey(sfx))
             {
-                ColourTransportHandler.Import(Level, definition);
+                Level.SoundEffects[sfx] = blob.SoundEffects[sfx];
             }
-            CinematicTransportHandler.Import(Level, definition, ForceCinematicOverwrite);
-            ModelTransportHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants(), Data.GetUnsafeModelReplacements());
-        }
-
-        if (!IgnoreGraphics)
-        {
-            //_textureHandler.ResetUnusedTextures();
         }
     }
 }

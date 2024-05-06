@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
+using TRDataControl;
 using TRGE.Core;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Secrets;
@@ -100,7 +100,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             Level = level.Data,
             LevelName = level.Name,
             ClearUnusedSprites = false,
-            EntitiesToImport = new List<TR3Type>
+            TypesToImport = new List<TR3Type>
             {
                 TR3Type.LaraShotgunAnimation_H,
                 TR3Type.LaraDeagleAnimation_H_Home,

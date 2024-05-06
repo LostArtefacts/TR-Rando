@@ -1,64 +1,59 @@
-﻿using TRImageControl.Packing;
-using TRLevelControl.Model;
-using TRModelTransporter.Data;
-using TRModelTransporter.Model;
+﻿namespace TRModelTransporter.Handlers;
 
-namespace TRModelTransporter.Handlers;
-
-public abstract class AbstractTextureImportHandler<E, L, D>
+public abstract class AbstractTextureImportHandler/*<E, L, D>
     where E : Enum
     where L : TRLevelBase
-    where D : TRBlobBase<E>
+    where D : TRBlobBase<E>*/
 {
-    public IDataProvider<E> Data { get; set; }
+    //public IDataProvider<E> Data { get; set; }
 
-    protected Dictionary<D, List<TRTextileRegion>> _importSegments;
+    //protected Dictionary<D, List<TRTextileRegion>> _importSegments;
 
-    protected L _level;
-    protected IEnumerable<D> _definitions;
-    protected IEnumerable<E> _entitiesToRemove;
-    protected AbstractTextureRemapGroup<E, L> _textureRemap;
-    protected bool _clearUnusedSprites;
-    protected ITexturePositionMonitor<E> _positionMonitor;
+    //protected L _level;
+    //protected IEnumerable<D> _definitions;
+    //protected IEnumerable<E> _entitiesToRemove;
+    //protected AbstractTextureRemapGroup<E, L> _textureRemap;
+    //protected bool _clearUnusedSprites;
+    //protected ITexturePositionMonitor<E> _positionMonitor;
 
-    public void Import(L level, IEnumerable<D> definitions, IEnumerable<E> entitiesToRemove, AbstractTextureRemapGroup<E, L> textureRemap, bool clearUnusedSprites, ITexturePositionMonitor<E> positionMonitor)
-    {
-        _level = level;
-        _definitions = definitions;
-        _entitiesToRemove = entitiesToRemove;
-        _textureRemap = textureRemap;
-        _clearUnusedSprites = clearUnusedSprites;
-        _positionMonitor = positionMonitor;
+    //public void Import(L level, IEnumerable<D> definitions, IEnumerable<E> entitiesToRemove, AbstractTextureRemapGroup<E, L> textureRemap, bool clearUnusedSprites, ITexturePositionMonitor<E> positionMonitor)
+    //{
+    //    _level = level;
+    //    _definitions = definitions;
+    //    _entitiesToRemove = entitiesToRemove;
+    //    _textureRemap = textureRemap;
+    //    _clearUnusedSprites = clearUnusedSprites;
+    //    _positionMonitor = positionMonitor;
 
-        // Pull together all of the texture segments for each of the definitions
-        //CollateSegments();
+    //    // Pull together all of the texture segments for each of the definitions
+    //    //CollateSegments();
 
-        //// Pack the textures into the level, or bail if it wasn't possible
-        //PackingResult<TRTextile, TRTextileRegion> packingResult = Pack();
-        //if (packingResult.OrphanCount > 0)
-        //{
-        //    List<string> entityNames = new();
-        //    foreach (D def in _definitions)
-        //    {
-        //        entityNames.Add(def.Entity.ToString());
-        //    }
-        //    throw new PackingException(string.Format
-        //    (
-        //        "Failed to pack {0} rectangles for model types [{1}].",
-        //        packingResult.OrphanCount,
-        //        string.Join(", ", entityNames)
-        //    ));
-        //}
+    //    //// Pack the textures into the level, or bail if it wasn't possible
+    //    //PackingResult<TRTextile, TRTextileRegion> packingResult = Pack();
+    //    //if (packingResult.OrphanCount > 0)
+    //    //{
+    //    //    List<string> entityNames = new();
+    //    //    foreach (D def in _definitions)
+    //    //    {
+    //    //        entityNames.Add(def.Entity.ToString());
+    //    //    }
+    //    //    throw new PackingException(string.Format
+    //    //    (
+    //    //        "Failed to pack {0} rectangles for model types [{1}].",
+    //    //        packingResult.OrphanCount,
+    //    //        string.Join(", ", entityNames)
+    //    //    ));
+    //    //}
 
-        //// Update the level with any new ObjectTextures and update meshes accordingly
-        //MergeObjectTextures();
+    //    //// Update the level with any new ObjectTextures and update meshes accordingly
+    //    //MergeObjectTextures();
 
-        //// Update the level with any new SpriteTextures and SpriteSequences
-        //MergeSpriteTextures();
+    //    //// Update the level with any new SpriteTextures and SpriteSequences
+    //    //MergeSpriteTextures();
 
-        //// Inform the texture position monitor of the new location of tracked textures
-        //NotifyTextureWatcher();
-    }
+    //    //// Inform the texture position monitor of the new location of tracked textures
+    //    //NotifyTextureWatcher();
+    //}
 
     //protected virtual void CollateSegments()
     //{

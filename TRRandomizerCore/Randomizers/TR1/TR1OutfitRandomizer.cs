@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using TRDataControl;
 using TRDataControl.Environment;
 using TRGE.Core;
 using TRImageControl;
@@ -8,7 +9,6 @@ using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
-using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Meshes;
@@ -305,8 +305,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 Level = level.Data,
                 LevelName = level.Name,
                 ClearUnusedSprites = false,
-                EntitiesToImport = _ponytailEntities,
-                TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, _ponytailEntities),
+                TypesToImport = _ponytailEntities,
+                //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, _ponytailEntities),
                 DataFolder = _outer.GetResourcePath(@"TR1\Models")
             };
 
@@ -699,7 +699,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 Level = level.Data,
                 LevelName = level.Name,
                 ClearUnusedSprites = false,
-                EntitiesToImport = new List<TR1Type> { TR1Type.LaraMiscAnim_H_General },
+                TypesToImport = new List<TR1Type> { TR1Type.LaraMiscAnim_H_General },
                 DataFolder = _outer.GetResourcePath(@"TR1\Models")
             };
 
@@ -880,8 +880,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                     Level = level.CutSceneLevel.Data,
                     LevelName = level.CutSceneLevel.Name,
                     ClearUnusedSprites = false,
-                    EntitiesToImport = _mauledEntities,
-                    TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.CutSceneLevel.Name, _mauledEntities),
+                    TypesToImport = _mauledEntities,
+                    //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.CutSceneLevel.Name, _mauledEntities),
                     DataFolder = _outer.GetResourcePath(@"TR1\Models")
                 };
 

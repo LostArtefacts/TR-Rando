@@ -1,138 +1,166 @@
-﻿using Newtonsoft.Json;
-using System.Drawing;
-using System.Drawing.Imaging;
-using TRImageControl.Textures;
+﻿using System.Diagnostics;
+using TRImageControl.Packing;
 using TRLevelControl.Model;
-using TRModelTransporter.Events;
-using TRModelTransporter.Handlers;
-using TRModelTransporter.Model;
-using TRModelTransporter.Utilities;
 
-namespace TRModelTransporter.Transport;
+namespace TRDataControl;
 
-public abstract class TRDataExporter<E, L, D> : TRDataTransport<E, L, D>
-    where E : Enum
+public abstract class TRDataExporter<L, T, S, B> : TRDataTransport<L, T, S, B>
     where L : TRLevelBase
-    where D : TRBlobBase<E>
+    where T : Enum
+    where S : Enum
+    where B : TRBlobBase<T>
 {
-    protected static readonly string _defaultSegmentsFolder = @"Resources\ModelSegments";
+    public string BaseLevelDirectory { get; set; }
 
-    public bool ExportIndividualSegments { get; set; }
-    public string SegmentsDataFolder { get; set; }
-
-    protected AbstractTextureExportHandler<E, L, D> _textureHandler;
-
-    public TRDataExporter()
+    public B Export(L level, T type, TRBlobType blobType)
     {
-        SegmentsDataFolder = _defaultSegmentsFolder;
-        _textureHandler = CreateTextureHandler();
-    }
+        Level = level;
 
-    protected abstract AbstractTextureExportHandler<E, L, D> CreateTextureHandler();
+        CreateRemapper()?.Remap(level);
 
-    public D Export(L level, E entity)
-    {
-        EventHandler<SegmentEventArgs> segmentDelegate = null;
-        EventHandler<TRTextureRemapEventArgs> segmentRemapped = null;
-        List<StaticTextureTarget> duplicateClips = null;
-        string segmentDir = Path.Combine(SegmentsDataFolder, entity.ToString());
-        if (ExportIndividualSegments)
+        PreCreation(level, type, blobType);
+
+        B blob = CreateBlob(level, type, blobType);
+        blob.Dependencies = new(Data.GetDependencies(blob.Alias));
+
+        CompileTextures(blob, CreatePacker());
+
+        switch (blobType)
         {
-            if (Directory.Exists(segmentDir))
-            {
-                Directory.Delete(segmentDir, true);
-            }
-            Directory.CreateDirectory(segmentDir);
-
-            _textureHandler.SegmentExported += segmentDelegate = delegate (object sender, SegmentEventArgs e)
-            {
-                e.Image.Save(Path.Combine(segmentDir, e.SegmentIndex + ".png"), ImageFormat.Png);
-            };
-
-            duplicateClips = new List<StaticTextureTarget>();
-            _textureHandler.SegmentRemapped += segmentRemapped = delegate (object sender, TRTextureRemapEventArgs e)
-            {
-                duplicateClips.Add(new StaticTextureTarget
-                {
-                    Segment = e.NewSegment.Segments.First().Index,
-                    Tile = e.OldTile.Index,
-                    X = e.OldBounds.X,
-                    Y = e.OldBounds.Y,
-                    Clip = new Rectangle(e.AdjustmentPoint.X - e.NewBounds.X, e.AdjustmentPoint.Y - e.NewBounds.Y, e.OldBounds.Width, e.OldBounds.Height)
-                });
-            };
+            case TRBlobType.Model:
+                BuildModel(blob);
+                break;
+            case TRBlobType.StaticMesh:
+                BuildStaticMesh(blob);
+                break;
+            case TRBlobType.Sprite:
+                BuildSprite(blob);
+                break;
         }
 
-        PreDefinitionCreation(level, entity);
-        D definition = CreateModelDefinition(level, entity);
-        ExportDependencies(definition);
-        ModelExportReady(definition);
-        StoreDefinition(definition);
-
-        if (ExportIndividualSegments)
+        foreach (S sfx in Data.GetHardcodedSounds(blob.Alias))
         {
-            _textureHandler.SegmentExported -= segmentDelegate;
-            _textureHandler.SegmentRemapped -= segmentRemapped;
-
-            File.WriteAllText(Path.Combine(segmentDir, "DuplicateClips.json"), JsonConvert.SerializeObject(duplicateClips, Formatting.Indented));
+            StoreSFX(sfx, blob);
         }
 
-        return definition;
+        PostCreation(blob);
+        StoreBlob(blob);
+
+        return blob;
     }
 
-    protected virtual void PreDefinitionCreation(L level, E modelEntity) { }
-    protected abstract D CreateModelDefinition(L level, E modelEntity);
-    protected virtual void ModelExportReady(D definition) { }
-
-    private void ExportDependencies(D definition)
+    protected void CompileTextures(B blob, TRTexturePacker packer)
     {
-        List<E> dependencies = new(Data.GetModelDependencies(definition.Alias));
-        definition.Dependencies = dependencies.ToArray();
-    }
-
-    protected void AmendDXtre3DTextures(D _)
-    {
-        // Dxtre3D can produce faulty UV mapping which can cause casting issues
-        // when used in model IO, so fix coordinates at this stage.
-        // This may no longer be the case...
-        /*foreach (List<IndexedTRObjectTexture> textureList in definition.ObjectTextures.Values)
+        // Get the object or sprite textures from the packer
+        Dictionary<TRTextile, List<TRTextileRegion>> textures;
+        if (blob.Type == TRBlobType.Sprite)
         {
-            foreach (IndexedTRObjectTexture texture in textureList)
+            textures = packer.GetSpriteRegions(SpriteSequences[blob.ID]);
+        }
+        else
+        {
+            List<TRMesh> meshes = new();
+            if (blob.Type == TRBlobType.Model)
             {
-                Dictionary<TRObjectTextureVert, Point> points = new();
-                foreach (TRObjectTextureVert vertex in texture.Texture.Vertices)
-                {
-                    int x = vertex.XCoordinate.Fraction;
-                    if (vertex.XCoordinate.Whole == byte.MaxValue)
-                    {
-                        x++;
-                    }
+                meshes.AddRange(Models[blob.ID].Meshes);
+            }
+            else if (blob.Type == TRBlobType.StaticMesh)
+            {
+                meshes.Add(StaticMeshes[blob.ID].Mesh);
+            }
 
-                    int y = vertex.YCoordinate.Fraction;
-                    if (vertex.YCoordinate.Whole == byte.MaxValue)
-                    {
-                        y++;
-                    }
-                    points[vertex] = new Point(x, y);
-                }
+            // We don't ignore the dummy mesh if this is the master type
+            TRMesh dummyMesh = IsMasterType(blob.ID) ? null : GetDummyMesh();
+            textures = packer.GetMeshRegions(meshes, dummyMesh);
 
-                int maxX = points.Values.Max(p => p.X);
-                int maxY = points.Values.Max(p => p.Y);
-                foreach (TRObjectTextureVert vertex in texture.Texture.Vertices)
+            ExtractMeshColours(meshes, dummyMesh, blob);
+        }
+
+        // Deduplicate for efficient import later
+        new TRImageDeduplicator().Deduplicate(textures);
+
+        // Classify each texture to allow identical texture matching during import
+        blob.Textures = new(textures.SelectMany(r => r.Value));
+        foreach (TRTextileRegion region in blob.Textures)
+        {
+            region.GenerateID();
+        }
+
+        Debug.Assert(blob.Textures.Select(t => t.ID).Distinct().Count() == blob.Textures.Count);
+    }
+
+    protected void BuildModel(B blob)
+    {
+        blob.Model = Models[blob.ID];
+
+        if (!IsMasterType(blob.ID))
+        {
+            TRMesh dummyMesh = GetDummyMesh();
+            for (int i = 0; i < blob.Model.Meshes.Count; i++)
+            {
+                if (blob.Model.Meshes[i] == dummyMesh)
                 {
-                    Point p = points[vertex];
-                    if (p.X == maxX && maxX != byte.MaxValue)
-                    {
-                        vertex.XCoordinate.Fraction--;
-                        vertex.XCoordinate.Whole = byte.MaxValue;
-                    }
-                    if (p.Y == maxY && maxY != byte.MaxValue)
-                    {
-                        vertex.YCoordinate.Fraction--;
-                        vertex.YCoordinate.Whole = byte.MaxValue;
-                    }
+                    blob.Model.Meshes[i] = null;
                 }
             }
-        }*/
+        }
+
+        HashSet<S> modelSFX = blob.Model.Animations
+            .SelectMany(a => a.Commands.Where(c => c is TRSFXCommand))
+            .Select(s => (S)(object)(uint)((TRSFXCommand)s).SoundID)
+            .ToHashSet();
+
+        foreach (S sfx in modelSFX)
+        {
+            StoreSFX(sfx, blob);
+        }
+
+        if (Data.GetCinematicTypes().Contains(blob.Alias))
+        {
+            blob.CinematicFrames = CinematicFrames;
+        }
     }
+
+    protected void BuildStaticMesh(B blob)
+    {
+        blob.StaticMesh = StaticMeshes[blob.ID];
+    }
+
+    protected void ExtractMeshColours(IEnumerable<TRMesh> meshes, TRMesh dummyMesh, B blob)
+    {
+        IEnumerable<ushort> faces = meshes
+            .Where(m => m != dummyMesh)
+            .SelectMany(m => m.ColouredFaces)
+            .Select(f => f.Texture)
+            .Distinct();
+
+        foreach (ushort texture in faces)
+        {
+            StoreColour(texture, blob);
+        }
+    }
+
+    protected void BuildSprite(B blob)
+    {
+        // Track where sprite textures are to retain sequencing
+        blob.SpriteOffsets = new();
+        TRSpriteSequence sequence = SpriteSequences[blob.ID];
+        foreach (TRSpriteTexture texture in sequence.Textures)
+        {
+            foreach (TRTextileSegment segment in blob.Textures.SelectMany(r => r.Segments))
+            {
+                if (segment.Texture == texture)
+                {
+                    blob.SpriteOffsets.Add(segment.Index);
+                    break;
+                }
+            }
+        }
+    }
+
+    protected virtual void PreCreation(L level, T type, TRBlobType blobType) { }
+    protected abstract B CreateBlob(L level, T type, TRBlobType blobType);
+    protected abstract void StoreColour(ushort index, B blob);
+    protected abstract void StoreSFX(S sfx, B blob);
+    protected virtual void PostCreation(B blob) { }
 }

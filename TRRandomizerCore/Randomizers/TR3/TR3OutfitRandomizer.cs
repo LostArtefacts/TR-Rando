@@ -1,8 +1,8 @@
-﻿using TRGE.Core;
+﻿using TRDataControl;
+using TRGE.Core;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
@@ -231,9 +231,9 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
                 Level = level.Data,
                 LevelName = level.Name,
                 ClearUnusedSprites = false,
-                EntitiesToImport = laraImport,
-                EntitiesToRemove = laraRemovals,
-                TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, laraImport),
+                TypesToImport = laraImport,
+                TypesToRemove = laraRemovals,
+                //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, laraImport),
                 DataFolder = _outer.GetResourcePath(@"TR3\Models")
             };
 

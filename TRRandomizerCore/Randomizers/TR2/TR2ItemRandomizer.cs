@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
+using TRDataControl;
 using TRGE.Core;
 using TRGE.Core.Item.Enums;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
@@ -617,9 +617,9 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             Level = _levelInstance.Data,
             LevelName = _levelInstance.Name,
             ClearUnusedSprites = false,
-            EntitiesToImport = vehicles.Keys,
+            TypesToImport = new(vehicles.Keys),
             DataFolder = GetResourcePath(@"TR2\Models"),
-            TexturePositionMonitor = TextureMonitor.CreateMonitor(_levelInstance.Name, vehicles.Keys.ToList())
+            //TexturePositionMonitor = TextureMonitor.CreateMonitor(_levelInstance.Name, vehicles.Keys.ToList())
         };
 
 

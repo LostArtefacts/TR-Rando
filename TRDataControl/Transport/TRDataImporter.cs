@@ -1,97 +1,75 @@
-﻿using TRImageControl.Packing;
+﻿using RectanglePacker.Events;
+using TRImageControl.Packing;
 using TRLevelControl.Model;
-using TRModelTransporter.Handlers;
-using TRModelTransporter.Model;
+using TRModelTransporter.Transport;
 
-namespace TRModelTransporter.Transport;
+namespace TRDataControl;
 
-public abstract class TRDataImporter<E, L, D> : TRDataTransport<E, L, D> 
-    where E : Enum
+public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
     where L : TRLevelBase
-    where D : TRBlobBase<E>
+    where T : Enum
+    where S : Enum
+    where B : TRBlobBase<T>
 {
-    public IEnumerable<E> EntitiesToImport { get; set; }
-    public IEnumerable<E> EntitiesToRemove { get; set; }
+    public List<T> TypesToImport { get; set; } = new();
+    public List<T> TypesToRemove { get; set; } = new();
     public bool ClearUnusedSprites { get; set; }
     public string TextureRemapPath { get; set; }
-    public ITexturePositionMonitor<E> TexturePositionMonitor { get; set; }
-    public bool SortModels { get; set; }
     public bool IgnoreGraphics { get; set; }
     public bool ForceCinematicOverwrite { get; set; }
 
-    protected AbstractTextureImportHandler<E, L, D> _textureHandler;
-
-    public TRDataImporter()
-    {
-        EntitiesToImport = new List<E>();
-        EntitiesToRemove = new List<E>();
-        ClearUnusedSprites = false;
-    }
-
-    protected abstract AbstractTextureImportHandler<E, L, D> CreateTextureHandler();
-
     public void Import()
     {
-        if (_textureHandler == null)
-        {
-            _textureHandler = CreateTextureHandler();
-            _textureHandler.Data = Data;
-        }
+        List<T> existingTypes = GetExistingTypes();
 
-        List<E> existingEntities = GetExistingModelTypes();
-
-        if (EntitiesToRemove != null)
-        {
-            AdjustEntities();
-        }
-
+        CleanRemovalList();
         CleanAliases();
 
-        List<D> standardModelDefinitions = new();
-        List<D> soundModelDefinitions = new();
-        foreach (E entity in EntitiesToImport)
+        List<B> blobs = new();
+        foreach (T type in TypesToImport)
         {
-            BuildDefinitionList(standardModelDefinitions, soundModelDefinitions, existingEntities, entity, false);
+            BuildBlobList(blobs, existingTypes, type, false);
         }
 
         // Check for alias duplication
-        ValidateDefinitionList(existingEntities, standardModelDefinitions);
+        ValidateBlobList(existingTypes, blobs);
 
-        if (SortModels)
+        if (blobs.Count == 0)
         {
-            standardModelDefinitions.Sort(delegate (D d1, D d2)
-            {
-                return d1.Entity.CompareTo(d2.Entity);
-            });
-            soundModelDefinitions.Sort(delegate (D d1, D d2)
-            {
-                return d1.Entity.CompareTo(d2.Entity);
-            });
+            return;
         }
 
-        if (standardModelDefinitions.Count + soundModelDefinitions.Count > 0)
-        {
-            Import(standardModelDefinitions, soundModelDefinitions);
-        }
+        // Store the current dummy mesh in case we are replacing the master type.
+        TRMesh dummyMesh = GetDummyMesh();
+
+        // Remove old types first and tidy up stale textures
+        RemoveData();
+
+        // Try to pack the textures collectively now that we have cleared some space.
+        // This will throw if it fails.
+        ImportTextures(blobs);
+
+        // Success - import the remaining data.
+        ImportData(blobs, dummyMesh);
     }
 
-    private void AdjustEntities()
+    private void CleanRemovalList()
     {
         // If an entity is marked to be removed but is also in the list
         // to import, don't remove it in the first place.
-        List<E> cleanedEntities = new();
-        foreach (E entity in EntitiesToRemove)
+        List<T> cleanedEntities = new();
+        foreach (T type in TypesToRemove)
         {
             bool entityClean = false;
-            if (Data.HasAliases(entity))
+            if (Data.HasAliases(type))
             {
                 // Check if we have another alias in the import list different from any
                 // in the current level
-                E alias = Data.GetLevelAlias(LevelName, entity);
-                E importAlias = default;
-                foreach (E a in Data.GetAliases(entity))
+                T alias = Data.GetLevelAlias(LevelName, type);
+                T importAlias = default;
+                foreach (T a in Data.GetAliases(type))
                 {
-                    if (EntitiesToImport.Contains(a))
+                    if (TypesToImport.Contains(a))
                     {
                         importAlias = a;
                         break;
@@ -103,7 +81,7 @@ public abstract class TRDataImporter<E, L, D> : TRDataTransport<E, L, D>
                     entityClean = true;
                 }
             }
-            else if (!EntitiesToImport.Contains(entity))
+            else if (!TypesToImport.Contains(type))
             {
                 entityClean = true;
             }
@@ -112,8 +90,8 @@ public abstract class TRDataImporter<E, L, D> : TRDataTransport<E, L, D>
             {
                 // There may be null meshes dependent on this removal, so we can only remove it if they're
                 // being removed as well.
-                IEnumerable<E> exclusions = Data.GetRemovalExclusions(entity);
-                if (exclusions.Any() && exclusions.All(EntitiesToRemove.Contains))
+                IEnumerable<T> exclusions = Data.GetRemovalExclusions(type);
+                if (exclusions.Any() && exclusions.All(TypesToRemove.Contains))
                 {
                     entityClean = false;
                 }
@@ -121,119 +99,127 @@ public abstract class TRDataImporter<E, L, D> : TRDataTransport<E, L, D>
 
             if (entityClean)
             {
-                cleanedEntities.Add(entity);
+                cleanedEntities.Add(type);
             }
         }
-        EntitiesToRemove = cleanedEntities;
+        TypesToRemove = cleanedEntities;
     }
 
     private void CleanAliases()
     {
-        List<E> cleanedEntities = new();
+        List<T> cleanedTypes = new();
         // Do we have any aliases?
-        foreach (E importEntity in EntitiesToImport)
+        foreach (T importType in TypesToImport)
         {
-            if (Data.HasAliases(importEntity))
+            if (Data.HasAliases(importType))
             {
                 throw new TransportException(string.Format
                 (
                     "Cannot import ambiguous entity {0} - choose an alias from [{1}].",
-                    importEntity.ToString(),
-                    string.Join(", ", Data.GetAliases(importEntity))
+                    importType.ToString(),
+                    string.Join(", ", Data.GetAliases(importType))
                 ));
             }
 
-            bool entityIsValid = true;
-            if (Data.IsAlias(importEntity))
+            bool typeIsValid = true;
+            if (Data.IsAlias(importType))
             {
-                E existingEntity = Data.GetLevelAlias(LevelName, Data.TranslateAlias(importEntity));
+                T existingType = Data.GetLevelAlias(LevelName, Data.TranslateAlias(importType));
                 // This entity is only valid if the alias it's for is not already there
-                entityIsValid = !Equals(importEntity, existingEntity);
+                typeIsValid = !Equals(importType, existingType);
             }
 
-            if (entityIsValid)
+            if (typeIsValid)
             {
-                cleanedEntities.Add(importEntity);
+                cleanedTypes.Add(importType);
             }
         }
 
         // #139 Ensure that aliases are added last so to avoid dependency issues
-        cleanedEntities.Sort(delegate (E e1, E e2)
-        {
-            return Data.TranslateAlias(e1).CompareTo(Data.TranslateAlias(e2));
-        });
+        cleanedTypes.Sort((t1, t2) => Data.TranslateAlias(t1).CompareTo(Data.TranslateAlias(t2)));
 
-        EntitiesToImport = cleanedEntities;
+        TypesToImport = cleanedTypes;
     }
 
-    private void ValidateDefinitionList(List<E> modelEntities, List<D> importDefinitions)
+    private void ValidateBlobList(List<T> modelTypes, List<B> importBlobs)
     {
-        Dictionary<E, List<E>> detectedAliases = new();
-        foreach (E entity in modelEntities)
+        Dictionary<T, List<T>> detectedAliases = new();
+        foreach (T entity in modelTypes)
         {
             if (Data.IsAlias(entity))
             {
-                E masterEntity = Data.TranslateAlias(entity);
-                if (!detectedAliases.ContainsKey(masterEntity))
+                T masterType = Data.TranslateAlias(entity);
+                if (!detectedAliases.ContainsKey(masterType))
                 {
-                    detectedAliases[masterEntity] = new List<E>();
+                    detectedAliases[masterType] = new();
                 }
-                detectedAliases[masterEntity].Add(entity);
+                detectedAliases[masterType].Add(entity);
             }
         }
 
-        foreach (E masterEntity in detectedAliases.Keys)
+        foreach (T masterType in detectedAliases.Keys)
         {
-            if (detectedAliases[masterEntity].Count > 1)
+            if (detectedAliases[masterType].Count > 1)
             {
-                if (!Data.IsAliasDuplicatePermitted(masterEntity))
+                if (!Data.IsAliasDuplicatePermitted(masterType))
                 {
                     throw new TransportException(string.Format
                     (
                         "Only one alias per entity can exist in the same level. [{0}] were found as aliases for {1}.",
-                        string.Join(", ", detectedAliases[masterEntity]),
-                        masterEntity.ToString()
+                        string.Join(", ", detectedAliases[masterType]),
+                        masterType.ToString()
                     ));
                 }
-                else if (Data.AliasPriority.ContainsKey(masterEntity))
+                else if (Data.AliasPriority.ContainsKey(masterType))
                 {
                     // If we are importing two aliases such as LaraMiscAnim_Unwater and LaraMiscAnim_Xian,
                     // allow the priority list to define exactly what imports. Otherwise while the prioritised
                     // model will be imported, other aspects such as texture import will try to import both.
-                    E prioritisedType = Data.AliasPriority[masterEntity];
-                    importDefinitions.RemoveAll(d => detectedAliases[masterEntity].Contains(d.Alias) && !Equals(d.Alias, prioritisedType));
+                    T prioritisedType = Data.AliasPriority[masterType];
+                    importBlobs.RemoveAll(d => detectedAliases[masterType].Contains(d.Alias) && !Equals(d.Alias, prioritisedType));
                 }
             }
         }
+
+        // If we are importing a master model, ensure it is handled first - this will usually be
+        // Lara, so when replacing her we need to define her new model first to get the new dummy
+        // mesh for other models.
+        B masterBlob = importBlobs.Find(b => IsMasterType(b.ID));
+        if (masterBlob != null)
+        {
+            importBlobs.Remove(masterBlob);
+            importBlobs.Insert(0, masterBlob);
+        }
     }
 
-    private void BuildDefinitionList(List<D> standardModelDefinitions, List<D> soundModelDefinitions, List<E> modelEntities, E nextEntity, bool isDependency)
+    private void BuildBlobList(List<B> standardBlobs, List<T> modelTypes, T nextType, bool isDependency)
     {
-        if (modelEntities.Contains(nextEntity))
+        if (modelTypes.Contains(nextType))
         {
             // Are we allowed to replace it?
-            if (!Data.IsOverridePermitted(nextEntity))
+            if (!Data.IsOverridePermitted(nextType))
             {
                 // If the model already in the list is a dependency only, but the new one to add isn't, switch it
-                D definition = standardModelDefinitions.Find(m => Equals(m.Alias, nextEntity));
-                if (definition != null && definition.IsDependencyOnly && !isDependency)
+                B blob = standardBlobs.Find(m => Equals(m.Alias, nextType));
+                if (blob != null && blob.IsDependencyOnly && !isDependency)
                 {
-                    definition.IsDependencyOnly = false;
+                    blob.IsDependencyOnly = false;
                 }
-                else if (EntitiesToRemove.Contains(nextEntity))
+                else if (TypesToRemove.Contains(nextType))
                 {
-                    EntitiesToRemove = new List<E>(EntitiesToRemove).Except(new List<E> { nextEntity });
+                    TypesToRemove = new(TypesToRemove);
+                    TypesToRemove.Remove(nextType);
                 }
 
                 // Avoid issues with cyclic dependencies by adding separately. The caveat here is
                 // cyclic dependencies can't have further sub-dependencies.
-                IEnumerable<E> cyclicDependencies = Data.GetCyclicDependencies(nextEntity);
-                foreach (E cyclicDependency in cyclicDependencies)
+                IEnumerable<T> cyclicDependencies = Data.GetCyclicDependencies(nextType);
+                foreach (T cyclicDependency in cyclicDependencies)
                 {
-                    if (!modelEntities.Contains(cyclicDependency) || Data.IsOverridePermitted(cyclicDependency))
+                    if (!modelTypes.Contains(cyclicDependency) || Data.IsOverridePermitted(cyclicDependency))
                     {
-                        modelEntities.Add(cyclicDependency);
-                        standardModelDefinitions.Add(LoadDefinition(cyclicDependency));
+                        modelTypes.Add(cyclicDependency);
+                        standardBlobs.Add(LoadBlob(cyclicDependency));
                     }
                 }
 
@@ -241,25 +227,25 @@ public abstract class TRDataImporter<E, L, D> : TRDataTransport<E, L, D>
             }
         }
 
-        D nextDefinition = LoadDefinition(nextEntity);
-        nextDefinition.IsDependencyOnly = isDependency;
-        modelEntities.Add(nextEntity);
+        B nextBlob = LoadBlob(nextType);
+        nextBlob.IsDependencyOnly = isDependency;
+        modelTypes.Add(nextType);
 
         // Add dependencies first
-        foreach (E dependency in nextDefinition.Dependencies)
+        foreach (T dependency in nextBlob.Dependencies)
         {
             // If it's a non-graphics dependency, but we are importing another alias
             // for it, or the level already contains the dependency, we don't need it.
             bool nonGraphics = Data.IsNonGraphicsDependency(dependency);
-            E aliasFor = Data.TranslateAlias(dependency);
+            T aliasFor = Data.TranslateAlias(dependency);
             if (!Equals(aliasFor, dependency) && nonGraphics)
             {
                 bool required = true;
                 // #139 check entire model list for instances where alias and dependencies cause clashes
-                foreach (E entity in modelEntities)
+                foreach (T type in modelTypes)
                 {
                     // If this entity and the dependency are in the same family
-                    if (Equals(aliasFor, Data.TranslateAlias(entity)))
+                    if (Equals(aliasFor, Data.TranslateAlias(type)))
                     {
                         // Skip it
                         required = false;
@@ -269,22 +255,253 @@ public abstract class TRDataImporter<E, L, D> : TRDataTransport<E, L, D>
 
                 if (!required)
                 {
-                    // We don't need the graphics, but do we need hardcoded sound?
-                    if (Data.IsSoundOnlyDependency(dependency) && standardModelDefinitions.Find(m => Equals(m.Alias, dependency)) == null)
-                    {
-                        soundModelDefinitions.Add(LoadDefinition(dependency));
-                    }
-
                     continue;
                 }
             }
 
-            BuildDefinitionList(standardModelDefinitions, soundModelDefinitions, modelEntities, dependency, nonGraphics);
+            BuildBlobList(standardBlobs, modelTypes, dependency, nonGraphics);
         }
 
-        standardModelDefinitions.Add(nextDefinition);
+        standardBlobs.Add(nextBlob);
     }
 
-    protected abstract List<E> GetExistingModelTypes();
-    protected abstract void Import(IEnumerable<D> standardDefinitions, IEnumerable<D> soundOnlyDefinitions);
+    protected void RemoveData()
+    {
+        bool removed = false;
+        foreach (T type in TypesToRemove)
+        {
+            T id = Data.TranslateAlias(type);
+            TRBlobType blobType = Data.GetBlobType(id);
+            switch (blobType)
+            {
+                case TRBlobType.Model:
+                    removed |= Models.Remove(id);
+                    break;
+                case TRBlobType.StaticMesh:
+                    removed |= StaticMeshes.Remove(id);
+                    break;
+                case TRBlobType.Sprite:
+                    removed |= SpriteSequences.Remove(id);
+                    break;
+            }
+        }
+
+        if (removed)
+        {
+            // Clear unused textures
+            CreateRemapper()?.Remap(Level);
+        }
+    }
+
+    protected void ImportTextures(List<B> blobs)
+    {
+        List<TRTextileRegion> importRegions = new();
+
+        foreach (B blob in blobs)
+        {
+            if (blob.IsDependencyOnly)
+                continue;
+
+            foreach (TRTextileRegion region in blob.Textures)
+            {
+                // Identical textures may exist between models that were exported separately, so merge them here.
+                if (importRegions.Find(r => r.ID == region.ID) is TRTextileRegion otherRegion)
+                {
+                    region.MoveTo(otherRegion.Bounds.Location);
+                    otherRegion.Segments.AddRange(region.Segments);
+                    region.Segments.Clear();
+                }
+                else
+                {
+                    importRegions.Add(region);
+                }
+            }
+        }
+
+        TRTexturePacker packer = CreatePacker();
+        packer.AddRectangles(importRegions);
+        PackingResult<TRTextile, TRTextileRegion> packingResult = packer.Pack(true);
+
+        if (packingResult.OrphanCount > 0)
+        {
+            throw new TransportException($"Failed to pack {packingResult.OrphanCount} rectangles for types [{string.Join(", ", blobs.Select(b => b.Alias))}].");
+        }
+
+        // Packing passed, so remap mesh textures to their new object references
+        Dictionary<string, Dictionary<int, int>> globalRemap = new();
+        foreach (TRTextileRegion region in importRegions)
+        {
+            globalRemap[region.ID] = new();
+            foreach (TRTextileSegment segment in region.Segments.Where(s => s.Texture is TRObjectTexture))
+            {
+                if (globalRemap[region.ID].ContainsKey(segment.Index))
+                    continue;
+
+                if (ObjectTextures.Count >= Data.TextureObjectLimit)
+                {
+                    throw new TransportException($"Limit of {Data.TextureObjectLimit} textures reached.");
+                }
+
+                globalRemap[region.ID][segment.Index] = ObjectTextures.Count;
+                ObjectTextures.Add(segment.Texture as TRObjectTexture);
+            }
+        }
+
+        foreach (B blob in blobs)
+        {
+            if (blob.IsDependencyOnly)
+                continue;
+
+            Dictionary<int, int> remap = new();
+            foreach (TRTextileRegion region in blob.Textures)
+            {
+                foreach (int oldIndex in globalRemap[region.ID].Keys)
+                {
+                    remap[oldIndex] = globalRemap[region.ID][oldIndex];
+                }
+            }
+
+            List<TRMesh> meshes = new();
+            if (blob.Model != null)
+            {
+                meshes.AddRange(blob.Model.Meshes);
+            }
+            if (blob.StaticMesh != null)
+            {
+                meshes.Add(blob.StaticMesh.Mesh);
+            }
+
+            IEnumerable<TRMeshFace> faces = meshes
+                .Where(m => m != null)
+                .SelectMany(m => m.TexturedFaces);
+            foreach (TRMeshFace face in faces)
+            {
+                face.Texture = (ushort)remap[face.Texture];
+            }
+
+            faces = meshes
+                .Where(m => m != null)
+                .SelectMany(m => m.ColouredFaces);
+            foreach (TRMeshFace face in faces)
+            {
+                face.Texture = ImportColour(blob, face.Texture);
+            }
+        }
+    }
+
+    protected void ImportData(List<B> blobs, TRMesh oldDummyMesh)
+    {
+        foreach (B blob in blobs)
+        {
+            switch (blob.Type)
+            {
+                case TRBlobType.Model:
+                    ImportModel(blob, oldDummyMesh);
+                    break;
+                case TRBlobType.StaticMesh:
+                    ImportStaticMesh(blob);
+                    break;
+                case TRBlobType.Sprite:
+                    ImportSprite(blob);
+                    break;
+            }
+
+            ImportSound(blob);
+            ImportCinematics(blob);
+
+            BlobImported(blob);
+        }
+    }
+
+    protected void ImportModel(B blob, TRMesh oldDummyMesh)
+    {
+        if (blob.Model == null)
+            return;
+
+        if (IsMasterType(blob.ID))
+        {
+            Models[blob.ID] = blob.Model;
+            TRMesh newDummyMesh = GetDummyMesh();
+            foreach (TRModel model in Models.Values)
+            {
+                if (model == blob.Model)
+                    continue;
+
+                for (int i = 0; i < model.Meshes.Count; i++)
+                {
+                    if (model.Meshes[i] == oldDummyMesh)
+                    {
+                        model.Meshes[i] = newDummyMesh;
+                    }
+                }
+            }
+        }
+        // Is this condition really needed?
+        else if (!Models.ContainsKey(blob.ID)
+            || (!Data.AliasPriority?.ContainsKey(blob.ID) ?? true)
+            || Equals(Data.AliasPriority[blob.ID], blob.Alias))
+        {
+            Models[blob.ID] = blob.Model;
+
+            // Restore dummy meshes
+            TRMesh dummyMesh = GetDummyMesh();
+            for (int i = 0; i < blob.Model.Meshes.Count; i++)
+            {
+                if (blob.Model.Meshes[i] == null || blob.IsDependencyOnly)
+                {
+                    blob.Model.Meshes[i] = dummyMesh;
+                }
+            }
+        }
+    }
+
+    protected void ImportCinematics(B blob)
+    {
+        if (blob.CinematicFrames == null)
+        {
+            return;
+        }
+
+        if (CinematicFrames.Count == 0 || ForceCinematicOverwrite)
+        {
+            CinematicFrames.Clear();
+            CinematicFrames.AddRange(blob.CinematicFrames);
+        }
+    }
+
+    protected void ImportStaticMesh(B blob)
+    {
+        if (blob.StaticMesh != null)
+        {
+            StaticMeshes[blob.ID] = blob.StaticMesh;
+        }
+    }
+
+    protected void ImportSprite(B blob)
+    {
+        List<TRSpriteTexture> textures = new();
+        foreach (int spriteOffset in blob.SpriteOffsets)
+        {
+            foreach (TRTextileSegment segment in blob.Textures.SelectMany(r => r.Segments))
+            {
+                if (segment.Index == spriteOffset)
+                {
+                    textures.Add(segment.Texture as TRSpriteTexture);
+                    break;
+                }
+            }
+        }
+
+        SpriteSequences[blob.ID] = new()
+        {
+            Textures = textures,
+        };
+    }
+
+    protected virtual void BlobImported(B blob) { }
+    protected abstract ushort ImportColour(B blob, ushort currentIndex);
+    protected abstract void ImportSound(B blob);
+
+    protected abstract List<T> GetExistingTypes();
+    protected abstract List<TRObjectTexture> ObjectTextures { get; }
 }

@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
+using TRDataControl;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
@@ -729,12 +729,12 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     EnemyTransportCollection enemies = _enemyMapping[level];
                     TR3DataImporter importer = new()
                     {
-                        EntitiesToImport = enemies.EntitiesToImport,
-                        EntitiesToRemove = enemies.EntitiesToRemove,
+                        TypesToImport = enemies.EntitiesToImport,
+                        TypesToRemove = enemies.EntitiesToRemove,
                         Level = level.Data,
                         LevelName = level.Name,
                         DataFolder = _outer.GetResourcePath(@"TR3\Models"),
-                        TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
+                        //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                     };
 
                     string remapPath = @"TR3\Textures\Deduplication\" + level.Name + "-TextureRemap.json";
