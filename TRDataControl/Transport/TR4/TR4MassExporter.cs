@@ -1,7 +1,7 @@
 ﻿using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TRDataControl.Utils;
+namespace TRDataControl;
 
 public class TR4MassExporter : TRMassExporter<TR4Level, TR4Type, TR4SFX, TR4Blob>
 {

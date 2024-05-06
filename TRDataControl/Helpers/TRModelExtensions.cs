@@ -3,7 +3,7 @@ using System.Text;
 using TRLevelControl.Build;
 using TRLevelControl.Model;
 
-namespace TRModelTransporter.Helpers;
+namespace TRDataControl;
 
 public static class TRModelExtensions
 {

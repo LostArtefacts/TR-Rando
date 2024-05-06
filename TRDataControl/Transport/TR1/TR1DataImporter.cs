@@ -1,5 +1,4 @@
-﻿using TRDataControl.Remapping;
-using TRImageControl;
+﻿using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
 
