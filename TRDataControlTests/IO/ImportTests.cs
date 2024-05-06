@@ -68,6 +68,46 @@ public class ImportTests : TestBase
         Assert.IsTrue(level.Models.ContainsKey(TR3Type.Monkey));
     }
 
+    [TestMethod]
+    [Description("Test importing a TR4 model.")]
+    public void TestTR4Import()
+    {
+        ExportTR4Model(TR4Type.Dog, TRBlobType.Model);
+
+        TR4Level level = GetTR4AltTestLevel();
+        Assert.IsFalse(level.Models.ContainsKey(TR4Type.Dog));
+
+        TR4DataImporter importer = new()
+        {
+            DataFolder = @"Objects\TR4",
+            Level = level,
+            TypesToImport = new() { TR4Type.Dog },
+        };
+        importer.Import();
+
+        Assert.IsTrue(level.Models.ContainsKey(TR4Type.Dog));
+    }
+
+    [TestMethod]
+    [Description("Test importing a TR5 model.")]
+    public void TestTR5Import()
+    {
+        ExportTR5Model(TR5Type.Huskie, TRBlobType.Model);
+
+        TR5Level level = GetTR5AltTestLevel();
+        Assert.IsFalse(level.Models.ContainsKey(TR5Type.Huskie));
+
+        TR5DataImporter importer = new()
+        {
+            DataFolder = @"Objects\TR5",
+            Level = level,
+            TypesToImport = new() { TR5Type.Huskie },
+        };
+        importer.Import();
+
+        Assert.IsTrue(level.Models.ContainsKey(TR5Type.Huskie));
+    }
+
     private static void ExportTR1Model(TR1Type type, TRBlobType blobType)
     {
         TR1Level level = GetTR1TestLevel();
@@ -113,6 +153,38 @@ public class ImportTests : TestBase
         foreach (TR3Type dependency in blob.Dependencies)
         {
             ExportTR3Model(dependency, exporter.Data.GetBlobType(dependency));
+        }
+    }
+
+    private static void ExportTR4Model(TR4Type type, TRBlobType blobType)
+    {
+        TR4Level level = GetTR4TestLevel();
+        TR4DataExporter exporter = new()
+        {
+            DataFolder = @"Objects\TR4"
+        };
+        TR4Blob blob = exporter.Export(level, type, blobType);
+        exporter.StoreBlob(blob);
+
+        foreach (TR4Type dependency in blob.Dependencies)
+        {
+            ExportTR4Model(dependency, exporter.Data.GetBlobType(dependency));
+        }
+    }
+
+    private static void ExportTR5Model(TR5Type type, TRBlobType blobType)
+    {
+        TR5Level level = GetTR5TestLevel();
+        TR5DataExporter exporter = new()
+        {
+            DataFolder = @"Objects\TR5"
+        };
+        TR5Blob blob = exporter.Export(level, type, blobType);
+        exporter.StoreBlob(blob);
+
+        foreach (TR5Type dependency in blob.Dependencies)
+        {
+            ExportTR5Model(dependency, exporter.Data.GetBlobType(dependency));
         }
     }
 }

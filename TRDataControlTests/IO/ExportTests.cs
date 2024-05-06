@@ -149,4 +149,91 @@ public class ExportTests : TestBase
 
         Assert.AreEqual(json1, json2);
     }
+
+    [TestMethod]
+    [TestCategory("Model")]
+    [Description("Test creating a TR4 model export.")]
+    public void TestTR4ExportProperties()
+    {
+        TR4Level level = GetTR4TestLevel();
+        TR4DataExporter exporter = new();
+        TR4Blob blob = exporter.Export(level, TR4Type.Dog, TRBlobType.Model);
+
+        Assert.AreEqual(TR4Type.Dog, blob.ID);
+        Assert.AreEqual(TR4Type.Dog, blob.Alias);
+        Assert.AreEqual(TRBlobType.Model, blob.Type);
+        Assert.IsFalse(blob.IsDependencyOnly);
+        Assert.AreEqual(0, blob.Dependencies.Count);
+        Assert.AreEqual(level.Models[TR4Type.Dog], blob.Model);
+        Assert.IsNull(blob.CinematicFrames);
+
+        Assert.AreEqual(3, blob.SoundEffects.Count);
+        Assert.IsTrue(blob.SoundEffects.ContainsKey(TR4SFX.DogHowl));
+        Assert.IsTrue(blob.SoundEffects.ContainsKey(TR4SFX.DogDeath));
+        Assert.IsTrue(blob.SoundEffects.ContainsKey(TR4SFX.DogBite));
+    }
+
+    [TestMethod]
+    [TestCategory("Model")]
+    [Description("Test TR4 model export IO.")]
+    public void TestTR4ExportIO()
+    {
+        TR4Level level = GetTR4TestLevel();
+        TR4DataExporter exporter = new()
+        {
+            DataFolder = @"Objects\TR4"
+        };
+        TR4Blob blob1 = exporter.Export(level, TR4Type.Dog, TRBlobType.Model);
+        exporter.StoreBlob(blob1);
+
+        TR4Blob blob2 = exporter.LoadBlob(TR4Type.Dog);
+
+        string json1 = JsonConvert.SerializeObject(blob1);
+        string json2 = JsonConvert.SerializeObject(blob2);
+
+        Assert.AreEqual(json1, json2);
+    }
+
+    [TestMethod]
+    [Description("Test creating a TR5 model export.")]
+    public void TestTR5ExportProperties()
+    {
+        TR5Level level = GetTR5TestLevel();
+        TR5DataExporter exporter = new();
+        TR5Blob blob = exporter.Export(level, TR5Type.Huskie, TRBlobType.Model);
+
+        Assert.AreEqual(TR5Type.Huskie, blob.ID);
+        Assert.AreEqual(TR5Type.Huskie, blob.Alias);
+        Assert.AreEqual(TRBlobType.Model, blob.Type);
+        Assert.IsFalse(blob.IsDependencyOnly);
+        Assert.AreEqual(0, blob.Dependencies.Count);
+        Assert.AreEqual(level.Models[TR5Type.Huskie], blob.Model);
+        Assert.IsNull(blob.CinematicFrames);
+
+        Assert.AreEqual(4, blob.SoundEffects.Count);
+        Assert.IsTrue(blob.SoundEffects.ContainsKey(TR5SFX.LaraSplash));
+        Assert.IsTrue(blob.SoundEffects.ContainsKey(TR5SFX.DogHowl));
+        Assert.IsTrue(blob.SoundEffects.ContainsKey(TR5SFX.DogDeath));
+        Assert.IsTrue(blob.SoundEffects.ContainsKey(TR5SFX.DogAttack1));
+    }
+
+    [TestMethod]
+    [Description("Test TR5 model export IO.")]
+    public void TestTR5ExportIO()
+    {
+        TR5Level level = GetTR5TestLevel();
+        TR5DataExporter exporter = new()
+        {
+            DataFolder = @"Objects\TR5"
+        };
+        TR5Blob blob1 = exporter.Export(level, TR5Type.Huskie, TRBlobType.Model);
+        exporter.StoreBlob(blob1);
+
+        TR5Blob blob2 = exporter.LoadBlob(TR5Type.Huskie);
+
+        string json1 = JsonConvert.SerializeObject(blob1);
+        string json2 = JsonConvert.SerializeObject(blob2);
+
+        Assert.AreEqual(json1, json2);
+    }
 }
