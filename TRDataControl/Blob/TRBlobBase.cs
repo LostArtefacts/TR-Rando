@@ -1,26 +1,19 @@
-﻿using Newtonsoft.Json;
-using System.Drawing;
-using TRImageControl;
+﻿using TRImageControl.Packing;
 using TRLevelControl.Model;
 
-namespace TRModelTransporter.Model;
+namespace TRDataControl;
 
-public abstract class TRBlobBase<E> where E : Enum
+public abstract class TRBlobBase<T>
+    where T : Enum
 {
-    [JsonIgnore]
-    public E Entity { get; set; }
-    [JsonIgnore]
-    public E Alias { get; set; }
-    [JsonIgnore]
-    public TRImage Image { get; set; }
-    [JsonIgnore]
-    public bool HasGraphics => false;// ObjectTextures.Count > 0;
-    [JsonIgnore]
+    public TRBlobType Type { get; set; }
+    public T ID { get; set; }
+    public T Alias { get; set; }
     public bool IsDependencyOnly { get; set; }
-
-    public E[] Dependencies { get; set; }        
-    //public Dictionary<int, List<IndexedTRObjectTexture>> ObjectTextures { get; set; }
-    //public Dictionary<E, Dictionary<int, List<IndexedTRSpriteTexture>>> SpriteTextures { get; set; }
-    public Dictionary<E, TRSpriteSequence> SpriteSequences { get; set; }
-    public Rectangle[] TextureSegments { get; set; }
+    public List<T> Dependencies { get; set; }
+    public TRModel Model { get; set; }
+    public TRStaticMesh StaticMesh { get; set; }
+    public List<int> SpriteOffsets { get; set; }
+    public List<TRTextileRegion> Textures { get; set; }
+    public List<TRCinematicFrame> CinematicFrames { get; set; }
 }

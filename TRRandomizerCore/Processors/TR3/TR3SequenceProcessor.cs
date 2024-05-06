@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
+using TRDataControl;
 using TRDataControl.Environment;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Transport;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
@@ -162,9 +162,9 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         {
             Level = level.Data,
             LevelName = level.Name,
-            EntitiesToImport = upvImport,
+            TypesToImport = upvImport,
             DataFolder = GetResourcePath(@"TR3\Models"),
-            TexturePositionMonitor = TextureMonitor.CreateMonitor(level.Name, upvImport)
+            //TexturePositionMonitor = TextureMonitor.CreateMonitor(level.Name, upvImport)
         };
 
         importer.Import();
@@ -249,7 +249,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             {
                 Level = level.Data,
                 LevelName = level.Name,
-                EntitiesToImport = imports,
+                TypesToImport = imports,
                 DataFolder = GetResourcePath(@"TR3\Models")
             };
 

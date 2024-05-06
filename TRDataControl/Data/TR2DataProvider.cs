@@ -1,50 +1,63 @@
 ﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
-namespace TRModelTransporter.Data;
+namespace TRDataControl;
 
-public class TR2DataProvider : IDataProvider<TR2Type>
+public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
 {
     public int TextureTileLimit { get; set; } = 16;
     public int TextureObjectLimit { get; set; } = 2048;
 
     public Dictionary<TR2Type, TR2Type> AliasPriority { get; set; }
 
-    public IEnumerable<TR2Type> GetModelDependencies(TR2Type entity)
+    public TRBlobType GetBlobType(TR2Type type)
     {
-        return _entityDependencies.ContainsKey(entity) ? _entityDependencies[entity] : _emptyEntities;
-    }
-
-    public IEnumerable<TR2Type> GetRemovalExclusions(TR2Type entity)
-    {
-        return _emptyEntities;
-    }
-
-    public IEnumerable<TR2Type> GetCyclicDependencies(TR2Type entity)
-    {
-        return _emptyEntities;
-    }
-
-    public IEnumerable<TR2Type> GetSpriteDependencies(TR2Type entity)
-    {
-        return _spriteDependencies.ContainsKey(entity) ? _spriteDependencies[entity] : _emptyEntities;
-    }
-
-    public IEnumerable<TR2Type> GetCinematicEntities()
-    {
-        return _cinematicEntities;
-    }
-
-    public IEnumerable<TR2Type> GetLaraDependants()
-    {
-        return _laraDependentModels;
-    }
-
-    public bool IsAlias(TR2Type entity)
-    {
-        foreach (List<TR2Type> aliases in _entityAliases.Values)
+        if (_spriteTypes.Contains(type))
         {
-            if (aliases.Contains(entity))
+            return TRBlobType.Sprite;
+        }
+        if (type >= TR2Type.SceneryBase && type < TR2Type.BengalTiger)
+        {
+            return TRBlobType.StaticMesh;
+        }
+        return TRBlobType.Model;
+    }
+
+    public IEnumerable<TR2Type> GetDependencies(TR2Type type)
+    {
+        if (_typeDependencies.ContainsKey(type))
+        {
+            return _typeDependencies[type];
+        }
+
+        if (IsAlias(type))
+        {
+            return GetDependencies(TranslateAlias(type));
+        }
+
+        return _emptyTypes;
+    }
+
+    public IEnumerable<TR2Type> GetRemovalExclusions(TR2Type type)
+    {
+        return _emptyTypes;
+    }
+
+    public IEnumerable<TR2Type> GetCyclicDependencies(TR2Type type)
+    {
+        return _emptyTypes;
+    }
+
+    public IEnumerable<TR2Type> GetCinematicTypes()
+    {
+        return _cinematicTypes;
+    }
+
+    public bool IsAlias(TR2Type type)
+    {
+        foreach (List<TR2Type> aliases in _typeAliases.Values)
+        {
+            if (aliases.Contains(type))
             {
                 return true;
             }
@@ -53,230 +66,196 @@ public class TR2DataProvider : IDataProvider<TR2Type>
         return false;
     }
 
-    public bool HasAliases(TR2Type entity)
+    public bool HasAliases(TR2Type type)
     {
-        return _entityAliases.ContainsKey(entity);
+        return _typeAliases.ContainsKey(type);
     }
 
-    public TR2Type TranslateAlias(TR2Type entity)
+    public TR2Type TranslateAlias(TR2Type type)
     {
-        foreach (TR2Type root in _entityAliases.Keys)
+        foreach (TR2Type root in _typeAliases.Keys)
         {
-            if (_entityAliases[root].Contains(entity))
+            if (_typeAliases[root].Contains(type))
             {
                 return root;
             }
         }
 
-        return entity;
+        return type;
     }
 
-    public IEnumerable<TR2Type> GetAliases(TR2Type entity)
+    public IEnumerable<TR2Type> GetAliases(TR2Type type)
     {
-        return _entityAliases.ContainsKey(entity) ? _entityAliases[entity] : _emptyEntities;
+        return _typeAliases.ContainsKey(type) ? _typeAliases[type] : _emptyTypes;
     }
 
-    public TR2Type GetLevelAlias(string level, TR2Type entity)
+    public TR2Type GetLevelAlias(string level, TR2Type type)
     {
-        return TR2TypeUtilities.GetAliasForLevel(level, entity);
+        return TR2TypeUtilities.GetAliasForLevel(level, type);
     }
 
-    public bool IsAliasDuplicatePermitted(TR2Type entity)
+    public bool IsAliasDuplicatePermitted(TR2Type type)
     {
-        return _permittedAliasDuplicates.Contains(entity);
+        return _permittedAliasDuplicates.Contains(type);
     }
 
-    public bool IsOverridePermitted(TR2Type entity)
+    public bool IsOverridePermitted(TR2Type type)
     {
-        return _permittedOverrides.Contains(entity);
+        return _permittedOverrides.Contains(type);
     }
 
-    public IEnumerable<TR2Type> GetUnsafeModelReplacements()
+    public bool IsNonGraphicsDependency(TR2Type type)
     {
-        return _unsafeModelReplacements;
+        return _nonGraphicsDependencies.Contains(type);
     }
 
-    public bool IsNonGraphicsDependency(TR2Type entity)
+    public IEnumerable<TR2SFX> GetHardcodedSounds(TR2Type type)
     {
-        return _nonGraphicsDependencies.Contains(entity);
-    }
-
-    public bool IsSoundOnlyDependency(TR2Type entity)
-    {
-        return _soundOnlyDependencies.Contains(entity);
-    }
-
-    public short[] GetHardcodedSounds(TR2Type entity)
-    {
-        return _hardcodedSoundIndices.ContainsKey(entity) ? _hardcodedSoundIndices[entity] : null;
-    }
-
-    public IEnumerable<int> GetIgnorableTextureIndices(TR2Type entity, string level)
-    {
-        return _ignoreEntityTextures.ContainsKey(entity) ? _ignoreEntityTextures[entity] : null;
+        return _hardcodedSFX.ContainsKey(type)
+            ? _hardcodedSFX[type]
+            : _emptySFX;
     }
 
     #region Data
 
-    private static readonly IEnumerable<TR2Type> _emptyEntities = new List<TR2Type>();
+    private static readonly List<TR2Type> _emptyTypes = new();
+    private static readonly List<TR2SFX> _emptySFX = new();
 
-    private static readonly Dictionary<TR2Type, TR2Type[]> _entityDependencies = new()
+    private static readonly Dictionary<TR2Type, List<TR2Type>> _typeDependencies = new()
     {
-        [TR2Type.LaraSun] =
-            new TR2Type[] { TR2Type.LaraPistolAnim_H_Sun, TR2Type.LaraAutoAnim_H_Sun, TR2Type.LaraUziAnim_H_Sun },
-        [TR2Type.LaraUnwater] =
-            new TR2Type[] { TR2Type.LaraPistolAnim_H_Unwater, TR2Type.LaraAutoAnim_H_Unwater, TR2Type.LaraUziAnim_H_Unwater },
-        [TR2Type.LaraSnow] =
-            new TR2Type[] { TR2Type.LaraPistolAnim_H_Snow, TR2Type.LaraAutoAnim_H_Snow, TR2Type.LaraUziAnim_H_Snow },
-        [TR2Type.LaraHome] =
-            new TR2Type[] { TR2Type.LaraPistolAnim_H_Home, TR2Type.LaraAutoAnim_H_Home, TR2Type.LaraUziAnim_H_Home },
-
-        [TR2Type.Pistols_M_H] =
-            new TR2Type[] { TR2Type.LaraPistolAnim_H, TR2Type.Gunflare_H },
-        [TR2Type.Shotgun_M_H] =
-            new TR2Type[] { TR2Type.LaraShotgunAnim_H, TR2Type.Gunflare_H },
         [TR2Type.Autos_M_H] =
-            new TR2Type[] { TR2Type.LaraAutoAnim_H, TR2Type.Gunflare_H },
-        [TR2Type.Uzi_M_H] =
-            new TR2Type[] { TR2Type.LaraUziAnim_H, TR2Type.Gunflare_H },
-        [TR2Type.M16_M_H] =
-            new TR2Type[] { TR2Type.LaraM16Anim_H, TR2Type.M16Gunflare_H },
-        [TR2Type.Harpoon_M_H] =
-            new TR2Type[] { TR2Type.LaraHarpoonAnim_H, TR2Type.HarpoonProjectile_H },
-        [TR2Type.GrenadeLauncher_M_H] =
-            new TR2Type[] { TR2Type.LaraGrenadeAnim_H, TR2Type.GrenadeProjectile_H },
-
-        [TR2Type.TRex] =
-            new TR2Type[] { TR2Type.LaraMiscAnim_H_Wall },
-        [TR2Type.MaskedGoon2] =
-            new TR2Type[] { TR2Type.MaskedGoon1 },
-        [TR2Type.MaskedGoon3] =
-            new TR2Type[] { TR2Type.MaskedGoon1 },
-        [TR2Type.ScubaDiver] =
-            new TR2Type[] { TR2Type.ScubaHarpoonProjectile_H },
-        [TR2Type.Shark] =
-            new TR2Type[] { TR2Type.LaraMiscAnim_H_Unwater },
-        [TR2Type.StickWieldingGoon2] =
-            new TR2Type[] { TR2Type.StickWieldingGoon1GreenVest },
-        [TR2Type.MercSnowmobDriver] =
-            new TR2Type[] { TR2Type.BlackSnowmob },
-        [TR2Type.BlackSnowmob] =
-            new TR2Type[] { TR2Type.RedSnowmobile },
-        [TR2Type.RedSnowmobile] =
-            new TR2Type[] { TR2Type.SnowmobileBelt, TR2Type.LaraSnowmobAnim_H },
+            new() { TR2Type.LaraAutoAnim_H, TR2Type.Gunflare_H, TR2Type.Automags_S_P, TR2Type.AutoAmmo_M_H, TR2Type.AutoAmmo_S_P },
         [TR2Type.Boat] =
-            new TR2Type[] { TR2Type.LaraBoatAnim_H },
-        [TR2Type.Mercenary3] =
-            new TR2Type[] { TR2Type.Mercenary2 },
-        [TR2Type.Yeti] =
-            new TR2Type[] { TR2Type.LaraMiscAnim_H_Ice },
-        [TR2Type.XianGuardSpear] =
-            new TR2Type[] { TR2Type.LaraMiscAnim_H_Xian, TR2Type.XianGuardSpearStatue },
-        [TR2Type.XianGuardSword] =
-            new TR2Type[] { TR2Type.XianGuardSwordStatue },
+            new() { TR2Type.LaraBoatAnim_H, TR2Type.BoatWake_S_H },
+        [TR2Type.BlackSnowmob] =
+            new() { TR2Type.RedSnowmobile },
+        [TR2Type.FlamethrowerGoon]
+            = new() { TR2Type.Flame_S_H },
+        [TR2Type.GrenadeLauncher_M_H] =
+            new() { TR2Type.LaraGrenadeAnim_H, TR2Type.GrenadeProjectile_H, TR2Type.GrenadeLauncher_S_P, TR2Type.Grenades_M_H, TR2Type.Grenades_S_P, TR2Type.Explosion_S_H },
+        [TR2Type.Harpoon_M_H] =
+            new() { TR2Type.LaraHarpoonAnim_H, TR2Type.HarpoonProjectile_H, TR2Type.Harpoon_S_P, TR2Type.HarpoonAmmo_M_H, TR2Type.HarpoonAmmo_S_P },
+        [TR2Type.Key2_M_H]
+            = new() { TR2Type.Key2_S_P },
         [TR2Type.Knifethrower] =
-            new TR2Type[] { TR2Type.KnifeProjectile_H },
+            new() { TR2Type.KnifeProjectile_H },
+        [TR2Type.LaraSun] =
+            new() { TR2Type.LaraPistolAnim_H_Sun, TR2Type.LaraAutoAnim_H_Sun, TR2Type.LaraUziAnim_H_Sun },
+        [TR2Type.LaraUnwater] =
+            new() { TR2Type.LaraPistolAnim_H_Unwater, TR2Type.LaraAutoAnim_H_Unwater, TR2Type.LaraUziAnim_H_Unwater },
+        [TR2Type.LaraSnow] =
+            new() { TR2Type.LaraPistolAnim_H_Snow, TR2Type.LaraAutoAnim_H_Snow, TR2Type.LaraUziAnim_H_Snow },
+        [TR2Type.LaraHome] =
+            new() { TR2Type.LaraPistolAnim_H_Home, TR2Type.LaraAutoAnim_H_Home, TR2Type.LaraUziAnim_H_Home },
+        [TR2Type.M16_M_H] =
+            new() { TR2Type.LaraM16Anim_H, TR2Type.M16Gunflare_H, TR2Type.M16_S_P, TR2Type.M16Ammo_M_H, TR2Type.M16Ammo_S_P },
         [TR2Type.MarcoBartoli] =
-            new TR2Type[]
+            new()
             {
                 TR2Type.DragonExplosionEmitter_N, TR2Type.DragonExplosion1_H, TR2Type.DragonExplosion2_H, TR2Type.DragonExplosion3_H,
                 TR2Type.DragonFront_H, TR2Type.DragonBack_H, TR2Type.DragonBonesFront_H, TR2Type.DragonBonesBack_H, TR2Type.LaraMiscAnim_H_Xian,
-                TR2Type.Puzzle2_M_H_Dagger
-            }
-    };
-
-    private static readonly Dictionary<TR2Type, List<TR2Type>> _spriteDependencies = new()
-    {
-        [TR2Type.FlamethrowerGoon] 
-            = new List<TR2Type> { TR2Type.Flame_S_H },
-        [TR2Type.MarcoBartoli] 
-            = new List<TR2Type> { TR2Type.Flame_S_H },
-        [TR2Type.Boat] 
-            = new List<TR2Type> { TR2Type.BoatWake_S_H },
-        [TR2Type.RedSnowmobile] 
-            = new List<TR2Type> { TR2Type.SnowmobileWake_S_H },
-        [TR2Type.XianGuardSword] 
-            = new List<TR2Type> { TR2Type.XianGuardSparkles_S_H },
+                TR2Type.Puzzle2_M_H_Dagger, TR2Type.Flame_S_H
+            },
+        [TR2Type.MaskedGoon2] =
+            new() { TR2Type.MaskedGoon1 },
+        [TR2Type.MaskedGoon3] =
+            new() { TR2Type.MaskedGoon1 },
+        [TR2Type.Mercenary3] =
+            new() { TR2Type.Mercenary2 },
+        [TR2Type.MercSnowmobDriver] =
+            new() { TR2Type.BlackSnowmob },
+        [TR2Type.Pistols_M_H] =
+            new() { TR2Type.LaraPistolAnim_H, TR2Type.Gunflare_H, TR2Type.Pistols_S_P },
+        [TR2Type.RedSnowmobile] =
+            new() { TR2Type.SnowmobileBelt, TR2Type.LaraSnowmobAnim_H, TR2Type.SnowmobileWake_S_H },
+        [TR2Type.Shotgun_M_H] =
+            new() { TR2Type.LaraShotgunAnim_H, TR2Type.Gunflare_H, TR2Type.Shotgun_S_P, TR2Type.ShotgunAmmo_M_H, TR2Type.ShotgunAmmo_S_P },
+        [TR2Type.ScubaDiver] =
+            new() { TR2Type.ScubaHarpoonProjectile_H },
+        [TR2Type.Shark] =
+            new() { TR2Type.LaraMiscAnim_H_Unwater },
+        [TR2Type.StickWieldingGoon2] =
+            new() { TR2Type.StickWieldingGoon1GreenVest },
+        [TR2Type.TRex] =
+            new() { TR2Type.LaraMiscAnim_H_Wall },
+        [TR2Type.Uzi_M_H] =
+            new() { TR2Type.LaraUziAnim_H, TR2Type.Gunflare_H, TR2Type.Uzi_S_P, TR2Type.UziAmmo_M_H, TR2Type.Uzi_S_P },
         [TR2Type.WaterfallMist_N]
-            = new List<TR2Type> { TR2Type.WaterRipples_S_H },
-        [TR2Type.Key2_M_H]
-            = new List<TR2Type> { TR2Type.Key2_S_P }
+            = new() { TR2Type.WaterRipples_S_H },
+        [TR2Type.XianGuardSpear] =
+            new() { TR2Type.LaraMiscAnim_H_Xian, TR2Type.XianGuardSpearStatue },
+        [TR2Type.XianGuardSword] =
+            new() { TR2Type.XianGuardSwordStatue, TR2Type.XianGuardSparkles_S_H },
+        [TR2Type.Yeti] =
+            new() { TR2Type.LaraMiscAnim_H_Ice },
+        
     };
 
-    private static readonly List<TR2Type> _cinematicEntities = new()
+    private static readonly List<TR2Type> _cinematicTypes = new()
     {
         TR2Type.DragonExplosionEmitter_N
     };
 
-    // These are models that use Lara's hips as placeholders
-    private static readonly List<TR2Type> _laraDependentModels = new()
+    private static readonly Dictionary<TR2Type, List<TR2Type>> _typeAliases = new()
     {
-        TR2Type.CameraTarget_N, TR2Type.FlameEmitter_N, TR2Type.LaraCutscenePlacement_N,
-        TR2Type.DragonExplosionEmitter_N, TR2Type.BartoliHideoutClock_N, TR2Type.SingingBirds_N,
-        TR2Type.WaterfallMist_N, TR2Type.DrippingWater_N, TR2Type.LavaAirParticleEmitter_N,
-        TR2Type.AlarmBell_N, TR2Type.DoorBell_N
-    };
-
-    private static readonly Dictionary<TR2Type, List<TR2Type>> _entityAliases = new()
-    {
-        [TR2Type.Lara] = new List<TR2Type>
+        [TR2Type.Lara] = new()
         {
             TR2Type.LaraSun, TR2Type.LaraUnwater, TR2Type.LaraSnow, TR2Type.LaraHome
         },
 
-        [TR2Type.LaraPistolAnim_H] = new List<TR2Type>
+        [TR2Type.LaraPistolAnim_H] = new()
         {
             TR2Type.LaraPistolAnim_H_Sun, TR2Type.LaraPistolAnim_H_Unwater, TR2Type.LaraPistolAnim_H_Snow, TR2Type.LaraPistolAnim_H_Home
         },
-        [TR2Type.LaraAutoAnim_H] = new List<TR2Type>
+        [TR2Type.LaraAutoAnim_H] = new()
         {
             TR2Type.LaraAutoAnim_H_Sun, TR2Type.LaraAutoAnim_H_Unwater, TR2Type.LaraAutoAnim_H_Snow, TR2Type.LaraAutoAnim_H_Home
         },
-        [TR2Type.LaraUziAnim_H] = new List<TR2Type>
+        [TR2Type.LaraUziAnim_H] = new()
         {
             TR2Type.LaraUziAnim_H_Sun, TR2Type.LaraUziAnim_H_Unwater, TR2Type.LaraUziAnim_H_Snow, TR2Type.LaraUziAnim_H_Home
         },
 
-        [TR2Type.LaraMiscAnim_H] = new List<TR2Type>
+        [TR2Type.LaraMiscAnim_H] = new()
         {
             TR2Type.LaraMiscAnim_H_Wall, TR2Type.LaraMiscAnim_H_Unwater, TR2Type.LaraMiscAnim_H_Ice, TR2Type.LaraMiscAnim_H_Xian, TR2Type.LaraMiscAnim_H_HSH, TR2Type.LaraMiscAnim_H_Venice
         },
 
-        [TR2Type.TigerOrSnowLeopard] = new List<TR2Type>
+        [TR2Type.TigerOrSnowLeopard] = new()
         {
             TR2Type.BengalTiger, TR2Type.SnowLeopard, TR2Type.WhiteTiger
         },
 
-        [TR2Type.StickWieldingGoon1] = new List<TR2Type>
+        [TR2Type.StickWieldingGoon1] = new()
         {
             TR2Type.StickWieldingGoon1Bandana, TR2Type.StickWieldingGoon1BlackJacket, TR2Type.StickWieldingGoon1BodyWarmer, TR2Type.StickWieldingGoon1GreenVest, TR2Type.StickWieldingGoon1WhiteVest
         },
 
-        [TR2Type.FlamethrowerGoon] = new List<TR2Type>
+        [TR2Type.FlamethrowerGoon] = new()
         {
             TR2Type.FlamethrowerGoonOG, TR2Type.FlamethrowerGoonTopixtor
         },
 
-        [TR2Type.Gunman1] = new List<TR2Type>
+        [TR2Type.Gunman1] = new()
         {
             TR2Type.Gunman1OG, TR2Type.Gunman1TopixtorORC, TR2Type.Gunman1TopixtorCAC
         },
 
-        [TR2Type.Barracuda] = new List<TR2Type>
+        [TR2Type.Barracuda] = new()
         {
             TR2Type.BarracudaIce, TR2Type.BarracudaUnwater, TR2Type.BarracudaXian
         },
 
-        [TR2Type.Puzzle1_M_H] = new List<TR2Type>
+        [TR2Type.Puzzle1_M_H] = new()
         {
             TR2Type.Puzzle1_M_H_CircuitBoard, TR2Type.Puzzle1_M_H_CircuitBreaker, TR2Type.Puzzle1_M_H_Dagger, TR2Type.Puzzle1_M_H_DragonSeal, TR2Type.Puzzle1_M_H_MysticPlaque,
             TR2Type.Puzzle1_M_H_PrayerWheel, TR2Type.Puzzle1_M_H_RelayBox, TR2Type.Puzzle1_M_H_TibetanMask
         },
-        [TR2Type.Puzzle2_M_H] = new List<TR2Type>
+        [TR2Type.Puzzle2_M_H] = new()
         {
             TR2Type.Puzzle2_M_H_CircuitBoard, TR2Type.Puzzle2_M_H_Dagger, TR2Type.Puzzle2_M_H_GemStone, TR2Type.Puzzle2_M_H_MysticPlaque
         },
-        [TR2Type.Puzzle4_M_H] = new List<TR2Type>
+        [TR2Type.Puzzle4_M_H] = new()
         {
             TR2Type.Puzzle4_M_H_Seraph
         }
@@ -292,121 +271,139 @@ public class TR2DataProvider : IDataProvider<TR2Type>
         TR2Type.MarcoBartoli
     };
 
-    private static readonly List<TR2Type> _unsafeModelReplacements = new()
-    {
-    };
-
     private static readonly List<TR2Type> _nonGraphicsDependencies = new()
     {
         TR2Type.StickWieldingGoon1GreenVest, TR2Type.MaskedGoon1, TR2Type.Mercenary2
     };
 
-    // If these are imported into levels that already have another alias for them, only their hardcoded sounds will be imported
-    protected static readonly List<TR2Type> _soundOnlyDependencies = new()
+    private static readonly Dictionary<TR2Type, List<TR2SFX>> _hardcodedSFX = new()
     {
-        TR2Type.StickWieldingGoon1GreenVest
-    };
-
-    private static readonly Dictionary<TR2Type, short[]> _hardcodedSoundIndices = new()
-    {
-        [TR2Type.DragonExplosionEmitter_N] = new short[]
+        [TR2Type.Boat] = new()
         {
-            341  // Explosion when dragon spawns
+            TR2SFX.BoatIdle,
+            TR2SFX.BoatMoving,
+            TR2SFX.BoatEngine,
+            TR2SFX.BoatIntoWater,
         },
-        [TR2Type.DragonFront_H] = new short[]
+        [TR2Type.DragonExplosion1_H] = new()
         {
-            298, // Footstep
-            299, // Growl 1
-            300, // Growl 2
-            301, // Body falling
-            302, // Dying breath
-            303, // Growl 3
-            304, // Grunt
-            305, // Fire-breathing
-            306, // Leg lift
-            307  // Leg hit
+            TR2SFX.SphereOfDoom,
         },
-        [TR2Type.Boat] = new short[]
+        [TR2Type.DragonFront_H] = new()
         {
-            194, // Start
-            195, // Idling
-            196, // Accelerating
-            197, // High RPM
-            198, // Shut off
-            199, // Engine hit
-            200, // Body hit
-            336  // Dry land
+            TR2SFX.DragonFire,
         },
-        [TR2Type.LaraSnowmobAnim_H] = new short[]
+        [TR2Type.Flame_S_H] = new()
         {
-            153, // Snowmobile idling
-            155  // Snowmobile accelerating
+            TR2SFX.LoopForSmallFires,
         },
-        [TR2Type.StickWieldingGoon1Bandana] = new short[]
+        [TR2Type.RedSnowmobile] = new()
         {
-            71,  // Thump 1
-            72,  // Thump 2
+            TR2SFX.SkidooIdle,
+            TR2SFX.SkidooMoving,
         },
-        [TR2Type.StickWieldingGoon1BlackJacket] = new short[]
+        [TR2Type.StickWieldingGoon1BodyWarmer] = new()
         {
-            71,  // Thump 1
-            72,  // Thump 2
+            TR2SFX.EnemyHit1,
+            TR2SFX.EnemyHit2,
+            TR2SFX.EnemyThump,
         },
-        [TR2Type.StickWieldingGoon1BodyWarmer] = new short[]
+        [TR2Type.StickWieldingGoon1WhiteVest] = new()
         {
-            69,  // Footstep
-            70,  // Grunt
-            71,  // Thump 1
-            72,  // Thump 2
-            121  // Thump 3
+            TR2SFX.EnemyHit1,
+            TR2SFX.EnemyHit2,
+            TR2SFX.EnemyThump,
         },
-        [TR2Type.StickWieldingGoon1GreenVest] = new short[]
+        [TR2Type.StickWieldingGoon1Bandana] = new()
         {
-            71,  // Thump 1
-            72,  // Thump 2
+            TR2SFX.EnemyHit1,
+            TR2SFX.EnemyHit2,
+            TR2SFX.EnemyThump,
         },
-        [TR2Type.StickWieldingGoon1WhiteVest] = new short[]
+        [TR2Type.StickWieldingGoon1GreenVest] = new()
         {
-            71,  // Thump 1
-            72,  // Thump 2,
-            121  // Thump 3
+            TR2SFX.EnemyHit1,
+            TR2SFX.EnemyHit2,
+            TR2SFX.EnemyThump,
         },
-        [TR2Type.StickWieldingGoon2] = new short[]
+        [TR2Type.StickWieldingGoon1BlackJacket] = new()
         {
-            69,  // Footstep
-            70,  // Grunt
-            71,  // Thump 1
-            72,  // Thump 2
-            180, // Chains
-            181, // Chains
-            182, // Footstep?
-            183  // Another thump?
+            TR2SFX.EnemyHit1,
+            TR2SFX.EnemyHit2,
+            TR2SFX.EnemyThump,
         },
-        [TR2Type.XianGuardSword] = new short[]
+        [TR2Type.StickWieldingGoon2] = new()
         {
-            312  // Hovering
+            TR2SFX.EnemyFeet,
+            TR2SFX.EnemyGrunt,
+            TR2SFX.EnemyHit1,
+            TR2SFX.EnemyHit2,
+            TR2SFX.EnemyBeltJingle,
+            TR2SFX.EnemyWrench,
+            TR2SFX.Footstep,
+            TR2SFX.FootstepHit,
         },
-        [TR2Type.Winston] = new short[]
+        [TR2Type.XianGuardSword] = new()
         {
-            344, // Scared
-            345, // Huff
-            346, // Bumped
-            347  // Cups clattering
+            TR2SFX.WarriorHover,
+        },
+        [TR2Type.Winston] = new()
+        {
+            TR2SFX.WinstonGrunt1,
+            TR2SFX.WinstonGrunt2,
+            TR2SFX.WinstonGrunt3,
+            TR2SFX.WinstonCups,
         }
     };
 
-    private static readonly Dictionary<TR2Type, List<int>> _ignoreEntityTextures = new()
+    private static readonly List<TR2Type> _spriteTypes = new()
     {
-        [TR2Type.LaraMiscAnim_H] 
-            = new List<int>(), // empty list indicates to ignore everything
-        [TR2Type.WaterfallMist_N]
-            = new List<int> { 0, 1, 2, 3, 4, 5, 6, 11, 15, 20, 22 },
-        [TR2Type.LaraSnowmobAnim_H] 
-            = new List<int> { 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 20, 21, 23 },
-        [TR2Type.SnowmobileBelt] 
-            = new List<int> { 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 20, 21, 23 },
-        [TR2Type.DragonExplosionEmitter_N] 
-            = new List<int> { 0, 1, 2, 3, 4, 5, 6, 8, 13, 14, 16, 17, 19 }
+        TR2Type.BoatWake_S_H,
+        TR2Type.SnowmobileWake_S_H,
+        TR2Type.UIFrame_H,
+        TR2Type.Pistols_S_P,
+        TR2Type.Shotgun_S_P,
+        TR2Type.Automags_S_P,
+        TR2Type.Uzi_S_P,
+        TR2Type.Harpoon_S_P,
+        TR2Type.M16_S_P,
+        TR2Type.GrenadeLauncher_S_P,
+        TR2Type.ShotgunAmmo_S_P,
+        TR2Type.AutoAmmo_S_P,
+        TR2Type.UziAmmo_S_P,
+        TR2Type.HarpoonAmmo_S_P,
+        TR2Type.M16Ammo_S_P,
+        TR2Type.Grenades_S_P,
+        TR2Type.SmallMed_S_P,
+        TR2Type.LargeMed_S_P,
+        TR2Type.Flares_S_P,
+        TR2Type.Puzzle1_S_P,
+        TR2Type.Puzzle2_S_P,
+        TR2Type.Puzzle4_S_P,
+        TR2Type.GoldSecret_S_P,
+        TR2Type.JadeSecret_S_P,
+        TR2Type.StoneSecret_S_P,
+        TR2Type.Key1_S_P,
+        TR2Type.Key2_S_P,
+        TR2Type.Key3_S_P,
+        TR2Type.Key4_S_P,
+        TR2Type.Quest1_S_P,
+        TR2Type.Quest2_S_P,
+        TR2Type.ExtraFire_S_H,
+        TR2Type.GrayDisk_S_H,
+        TR2Type.Explosion_S_H,
+        TR2Type.WaterRipples_S_H,
+        TR2Type.Bubbles1_S_H,
+        TR2Type.Blood_S_H,
+        TR2Type.DartEffect_S_H,
+        TR2Type.Glow_S_H,
+        TR2Type.Ricochet_S_H,
+        TR2Type.XianGuardSparkles_S_H,
+        TR2Type.FireBlast_S_H,
+        TR2Type.LavaParticles_S_H,
+        TR2Type.Flame_S_H,
+        TR2Type.FontGraphics_S_H,
+        TR2Type.AssaultNumbers,
     };
 
     #endregion

@@ -1,40 +1,63 @@
-﻿using TRLevelControl.Model;
-using TRModelTransporter.Data;
-using TRModelTransporter.Handlers;
-using TRModelTransporter.Model.Definitions;
+﻿using TRDataControl.Remapping;
+using TRImageControl.Packing;
+using TRLevelControl.Model;
 
-namespace TRModelTransporter.Transport;
+namespace TRDataControl;
 
-public class TR3DataExporter : TRDataExporter<TR3Type, TR3Level, TR3Blob>
+public class TR3DataExporter : TRDataExporter<TR3Level, TR3Type, TR3SFX, TR3Blob>
 {
     public TR3DataExporter()
     {
         Data = new TR3DataProvider();
     }
 
-    protected override AbstractTextureExportHandler<TR3Type, TR3Level, TR3Blob> CreateTextureHandler()
+    protected override TR3Blob CreateBlob(TR3Level level, TR3Type id, TRBlobType blobType)
     {
-        return new TR3TextureExportHandler();
-    }
-
-    protected override TR3Blob CreateModelDefinition(TR3Level level, TR3Type modelEntity)
-    {
-        TR3Blob definition = new()
+        return new()
         {
-            Alias = modelEntity
+            Type = blobType,
+            ID = Data.TranslateAlias(id),
+            Alias = id,
+            Palette16 = new(),
+            SpriteOffsets = new(),
+            SoundEffects = new()
         };
-
-        if (Data.IsAlias(modelEntity))
-        {
-            modelEntity = Data.TranslateAlias(modelEntity);
-        }
-
-        ModelTransportHandler.Export(level, definition, modelEntity);
-        ColourTransportHandler.Export(level, definition);
-        _textureHandler.Export(level, definition, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
-        CinematicTransportHandler.Export(level, definition, Data.GetCinematicEntities());
-        SoundTransportHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));
-
-        return definition;
     }
+
+    protected override TRTextureRemapper<TR3Level> CreateRemapper()
+        => new TR3TextureRemapper();
+
+    protected override bool IsMasterType(TR3Type type)
+        => type == TR3Type.Lara;
+
+    protected override TRMesh GetDummyMesh()
+        => Level.Models[TR3Type.Lara].Meshes[0];
+
+    protected override void StoreColour(ushort index, TR3Blob blob)
+    {
+        blob.Palette16[index] = Level.Palette16[index >> 8];
+    }
+
+    protected override void StoreSFX(TR3SFX sfx, TR3Blob blob)
+    {
+        if (Level.SoundEffects.ContainsKey(sfx))
+        {
+            blob.SoundEffects[sfx] = Level.SoundEffects[sfx];
+        }
+    }
+
+    protected override TRTexturePacker CreatePacker()
+        => new TR3TexturePacker(Level, Data.TextureTileLimit);
+
+    protected override TRDictionary<TR3Type, TRModel> Models
+        => Level.Models;
+
+    protected override TRDictionary<TR3Type, TRStaticMesh> StaticMeshes
+        => Level.StaticMeshes;
+
+    protected override TRDictionary<TR3Type, TRSpriteSequence> SpriteSequences
+        => Level.Sprites;
+
+    protected override List<TRCinematicFrame> CinematicFrames
+        => Level.CinematicFrames;
 }

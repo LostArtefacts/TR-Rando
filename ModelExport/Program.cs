@@ -1,4 +1,4 @@
-﻿using TRModelTransporter.Utilities;
+﻿using TRDataControl.Utils;
 
 namespace ModelExport;
 
@@ -12,52 +12,42 @@ class Program
             return;
         }
 
-        bool exportSegments = args.Length > 1 && args[1].ToLower().Contains("segments");
         switch (args[0].ToLower())
         {
             case "tr1":
-                TR1Export(exportSegments);
+                TR1Export();
                 break;
             case "tr2":
-                TR2Export(exportSegments);
+                TR2Export();
                 break;
             case "tr3":
-                TR3Export(exportSegments);
+                TR3Export();
                 break;
         }
     }
 
-    static void TR1Export(bool exportSegments)
+    static void TR1Export()
     {
         TR1MassExporter exporter = new();
-        string exportFolder = @"TR1\Models";
-        string segmentFolder = exportSegments ? @"TR1\ModelSegments" : null;
-
-        exporter.Export(Directory.GetCurrentDirectory(), exportFolder, segmentFolder);
+        exporter.Export(Directory.GetCurrentDirectory(), @"TR1\Objects");
     }
 
-    static void TR2Export(bool exportSegments)
+    static void TR2Export()
     {
         TR2MassExporter exporter = new();
-        string exportFolder = @"TR2\Models";
-        string segmentFolder = exportSegments ? @"TR2\ModelSegments" : null;
-
-        exporter.Export(Directory.GetCurrentDirectory(), exportFolder, segmentFolder);
+        exporter.Export(Directory.GetCurrentDirectory(), @"TR2\Objects");
     }
 
-    static void TR3Export(bool exportSegments)
+    static void TR3Export()
     {
         TR3MassExporter exporter = new();
-        string exportFolder = @"TR3\Models";
-        string segmentFolder = exportSegments ? @"TR3\ModelSegments" : null;
-
-        exporter.Export(Directory.GetCurrentDirectory(), exportFolder, segmentFolder);
+        exporter.Export(Directory.GetCurrentDirectory(), @"TR3\Objects");
     }
 
     private static void Usage()
     {
         Console.WriteLine();
-        Console.WriteLine("Usage: ModelExport [tr1 | tr2 | tr3] [segments]");
+        Console.WriteLine("Usage: ModelExport [tr1 | tr2 | tr3]");
         Console.WriteLine();
 
         Console.WriteLine("Example");
@@ -65,12 +55,6 @@ class Program
         Console.WriteLine("\tModelExport tr1");
         Console.ResetColor();
         Console.WriteLine("\t\tExport defined models for TR1.");
-        Console.WriteLine();
-
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\tModelExport tr2 segments");
-        Console.ResetColor();
-        Console.WriteLine("\t\tExport defined models for TR2 and include all individual segments for each model.");
         Console.WriteLine();
     }
 }

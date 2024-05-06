@@ -7,6 +7,8 @@ namespace TRModelTransporter.Helpers;
 
 public static class TRModelExtensions
 {
+    // This should be handled by TRTextureRemapper
+
     public static void ResetUnusedTextures(this TR1Level level)
     {
         ResetUnusedObjectTextures(level.ObjectTextures);
@@ -142,56 +144,6 @@ public static class TRModelExtensions
         // They have to remain unique it seems, otherwise the animation speed is too fast, so while we
         // have removed the duplicated textures, we can re-add duplicate texture objects while there is 
         // enough space in that array.
-        List<TRObjectTexture> textures = level.ObjectTextures.ToList();
-        foreach (TRAnimatedTexture anim in level.AnimatedTextures)
-        {
-            for (int i = 0; i < anim.Textures.Count; i++)
-            {
-                anim.Textures[i] = ConvertTextureReference(anim.Textures[i], indexMap, defaultToOriginal);
-            }
-
-            ushort previousIndex = anim.Textures[0];
-            for (int i = 1; i < anim.Textures.Count; i++)
-            {
-                if (anim.Textures[i] == previousIndex && textures.Count < 2048)
-                {
-                    textures.Add(textures[anim.Textures[i]]);
-                    anim.Textures[i] = (ushort)(textures.Count - 1);
-                }
-                previousIndex = anim.Textures[i];
-            }
-        }
-
-        if (textures.Count > level.ObjectTextures.Count)
-        {
-            level.ObjectTextures.Clear();
-            level.ObjectTextures.AddRange(textures);
-        }
-    }
-
-    public static void ReindexTextures(this TR3Level level, Dictionary<int, int> indexMap, bool defaultToOriginal = true)
-    {
-        if (indexMap.Count == 0)
-        {
-            return;
-        }
-
-        foreach (TRMesh mesh in level.DistinctMeshes)
-        {
-            foreach (TRMeshFace face in mesh.TexturedFaces)
-            {
-                face.Texture = ConvertTextureReference(face.Texture, indexMap, defaultToOriginal);
-            }
-        }
-
-        foreach (TR3Room room in level.Rooms)
-        {
-            foreach (TRFace face in room.Mesh.Faces)
-            {
-                face.Texture = ConvertTextureReference(face.Texture, indexMap, defaultToOriginal);
-            }
-        }
-
         List<TRObjectTexture> textures = level.ObjectTextures.ToList();
         foreach (TRAnimatedTexture anim in level.AnimatedTextures)
         {

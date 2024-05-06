@@ -8,14 +8,14 @@ public class TRPalette8Control
 {
     public TR1Level Level { get; set; }
     public Dictionary<int, TRImage> ChangedTiles { get; set; }
-    public List<TR1Type> ObsoleteModels { get; set; }
+    public List<TR1Type> ObsoleteTypes { get; set; }
 
     private List<Color> _palette, _predefinedPalette;
 
     public TRPalette8Control()
     {
         ChangedTiles = new();
-        ObsoleteModels = new();
+        ObsoleteTypes = new();
     }
 
     public TRImage GetOriginalTile(int tileIndex)
@@ -57,7 +57,7 @@ public class TRPalette8Control
         // Grab meshes we aren't interested in - but don't remove Lara's hips e.g. Atlantean spawns
         List<TRMesh> ignoredMeshes = new();
         Level.Models.TryGetValue(TR1Type.Lara, out TRModel lara);
-        foreach (TR1Type entity in ObsoleteModels)
+        foreach (TR1Type entity in ObsoleteTypes)
         {
             Level.Models.TryGetValue(entity, out TRModel model);
             if (model == null)

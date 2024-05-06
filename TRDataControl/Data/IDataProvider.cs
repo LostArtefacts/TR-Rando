@@ -1,104 +1,84 @@
-﻿namespace TRModelTransporter.Data;
+﻿namespace TRDataControl;
 
-public interface IDataProvider<E> where E : Enum
+public interface IDataProvider<T, S>
+    where T : Enum
+    where S : Enum
 {
     int TextureTileLimit { get; set; }
     int TextureObjectLimit { get; set; }
 
     /// <summary>
-    /// Return all other model types on which the given type depends.
+    /// Get the blob type of a game type.
     /// </summary>
-    IEnumerable<E> GetModelDependencies(E entity);
+    TRBlobType GetBlobType(T type);
 
     /// <summary>
-    /// Null meshes that determine if the main entity can be removed from a level.
+    /// Return all other model types on which the given type depends.
     /// </summary>
-    IEnumerable<E> GetRemovalExclusions(E entity);
+    IEnumerable<T> GetDependencies(T type);
+
+    /// <summary>
+    /// Null meshes that determine if the main type can be removed from a level.
+    /// </summary>
+    IEnumerable<T> GetRemovalExclusions(T type);
 
     /// <summary>
     /// Return model types that have a cyclic depencency on the given type.
     /// </summary>
-    IEnumerable<E> GetCyclicDependencies(E entity);
+    IEnumerable<T> GetCyclicDependencies(T type);
 
-    /// <summary>
-    /// Return any sprite types on which the given type depends.
-    /// </summary>
-    IEnumerable<E> GetSpriteDependencies(E entity);
-    
     /// <summary>
     /// Determines which alias has the priority in a family during import if another alias already exists.
     /// </summary>
-    Dictionary<E, E> AliasPriority { get; set; }
+    Dictionary<T, T> AliasPriority { get; set; }
 
     /// <summary>
     /// Return model types for which cinematic frames should be exported.
     /// </summary>
-    IEnumerable<E> GetCinematicEntities();
+    IEnumerable<T> GetCinematicTypes();
 
     /// <summary>
-    /// Return models that are dependent on Lara.
+    /// Whether or not the given type is an alias of another.
     /// </summary>
-    IEnumerable<E> GetLaraDependants();
+    bool IsAlias(T type);
 
     /// <summary>
-    /// Whether or not the given entity is an alias of another.
+    /// Whether or not the given type has aliases.
     /// </summary>
-    bool IsAlias(E entity);
-
-    /// <summary>
-    /// Whether or not the given entity has aliases.
-    /// </summary>
-    bool HasAliases(E entity);
+    bool HasAliases(T type);
 
     /// <summary>
     /// Convert the given alias into its normal type.
     /// </summary>
-    E TranslateAlias(E entity);
+    T TranslateAlias(T type);
 
     /// <summary>
-    /// Returns all possible aliases for the given entity.
+    /// Returns all possible aliases for the given type.
     /// </summary>
-    IEnumerable<E> GetAliases(E entity);
+    IEnumerable<T> GetAliases(T type);
 
     /// <summary>
     /// Return the specific alias for an alias type given a particular level ID.
     /// </summary>
-    E GetLevelAlias(string level, E entity);
+    T GetLevelAlias(string level, T type);
 
     /// <summary>
     /// Duplicates on import will throw a TransportException unless they are permitted to replace existing models.
     /// </summary>
-    bool IsAliasDuplicatePermitted(E entity);
+    bool IsAliasDuplicatePermitted(T type);
 
     /// <summary>
     /// Similar to alias duplicates, but where we want to replace a non-aliased model with another.
     /// </summary>
-    bool IsOverridePermitted(E entity);
-
-    /// <summary>
-    /// Models that cannot be replaced in the Model array and instead should be remapped to imported models.
-    /// </summary>
-    IEnumerable<E> GetUnsafeModelReplacements();
+    bool IsOverridePermitted(T type);
 
     /// <summary>
     /// Determine if the given type's graphics should be ignored on import.
     /// </summary>
-    bool IsNonGraphicsDependency(E entity);
+    bool IsNonGraphicsDependency(T type);
 
     /// <summary>
-    /// Determine if the the given type's sound alone should be imported.
+    /// Returns any hardcoded internal sound IDs for the given type.
     /// </summary>
-    bool IsSoundOnlyDependency(E entity);
-
-    /// <summary>
-    /// Returns any hardcoded internal sound IDs for the given entity.
-    /// </summary>
-    short[] GetHardcodedSounds(E entity);
-
-    /// <summary>
-    /// Returns a list of texture indices that should be ignored for a given entity.
-    /// An emtpy list is translated as meaning all indices should be ignored. Null
-    /// indicates that no indices should be ignored.
-    /// </summary>
-    IEnumerable<int> GetIgnorableTextureIndices(E entity, string level);
+    IEnumerable<S> GetHardcodedSounds(T type);
 }

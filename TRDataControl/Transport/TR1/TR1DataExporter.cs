@@ -1,49 +1,71 @@
-﻿using TRLevelControl;
+﻿using TRDataControl.Remapping;
+using TRImageControl.Packing;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Data;
-using TRModelTransporter.Handlers;
-using TRModelTransporter.Handlers.Textures;
-using TRModelTransporter.Model.Definitions;
 
-namespace TRModelTransporter.Transport;
+namespace TRDataControl;
 
-public class TR1DataExporter : TRDataExporter<TR1Type, TR1Level, TR1Blob>
+public class TR1DataExporter : TRDataExporter<TR1Level, TR1Type, TR1SFX, TR1Blob>
 {
     public TR1DataExporter()
     {
         Data = new TR1DataProvider();
     }
 
-    protected override AbstractTextureExportHandler<TR1Type, TR1Level, TR1Blob> CreateTextureHandler()
+    protected override TR1Blob CreateBlob(TR1Level level, TR1Type id, TRBlobType blobType)
     {
-        return new TR1TextureExportHandler();
-    }
-
-    protected override TR1Blob CreateModelDefinition(TR1Level level, TR1Type modelEntity)
-    {
-        TR1Blob definition = new()
+        return new()
         {
-            Alias = modelEntity
+            Type = blobType,
+            ID = Data.TranslateAlias(id),
+            Alias = id,
+            Palette8 = new(),
+            SpriteOffsets = new(),
+            SoundEffects = new()
         };
-
-        if (Data.IsAlias(modelEntity))
-        {
-            modelEntity = Data.TranslateAlias(modelEntity);
-        }
-
-        ModelTransportHandler.Export(level, definition, modelEntity);
-        ColourTransportHandler.Export(level, definition);
-        _textureHandler.Export(level, definition, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
-        CinematicTransportHandler.Export(level, definition, Data.GetCinematicEntities());
-        SoundTransportHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));
-
-        return definition;
     }
 
-    protected override void PreDefinitionCreation(TR1Level level, TR1Type modelEntity)
+    protected override TRTextureRemapper<TR1Level> CreateRemapper()
+        => new TR1TextureRemapper();
+
+    protected override bool IsMasterType(TR1Type type)
+        => type == TR1Type.Lara;
+
+    protected override TRMesh GetDummyMesh()
+        => Level.Models[TR1Type.Lara].Meshes[0];
+
+    protected override void StoreColour(ushort index, TR1Blob blob)
     {
-        switch (modelEntity)
+        blob.Palette8[index] = Level.Palette[index];
+    }
+
+    protected override void StoreSFX(TR1SFX sfx, TR1Blob blob)
+    {
+        if (Level.SoundEffects.ContainsKey(sfx))
+        {
+            blob.SoundEffects[sfx] = Level.SoundEffects[sfx];
+        }
+    }
+
+    protected override TRTexturePacker CreatePacker()
+        => new TR1TexturePacker(Level, Data.TextureTileLimit);
+
+    protected override TRDictionary<TR1Type, TRModel> Models
+        => Level.Models;
+
+    protected override TRDictionary<TR1Type, TRStaticMesh> StaticMeshes
+        => Level.StaticMeshes;
+
+    protected override TRDictionary<TR1Type, TRSpriteSequence> SpriteSequences
+        => Level.Sprites;
+
+    protected override List<TRCinematicFrame> CinematicFrames
+        => Level.CinematicFrames;
+
+    protected override void PreCreation(TR1Level level, TR1Type type, TRBlobType blobType)
+    {
+        switch (type)
         {
             case TR1Type.Pierre:
                 AmendPierreGunshot(level);
@@ -55,130 +77,107 @@ public class TR1DataExporter : TRDataExporter<TR1Type, TR1Level, TR1Blob>
             case TR1Type.SkateboardKid:
                 AmendSkaterBoyDeath(level);
                 break;
+            case TR1Type.CowboyHeadless:
+                //AmendDXtre3DTextures(definition);
+                break;
             case TR1Type.Natla:
                 AmendNatlaDeath(level);
                 break;
             case TR1Type.MovingBlock:
-                AddMovingBlockSFX(level);
+                AddMovingBlockSFX(level, BaseLevelDirectory);
                 break;
         }
     }
 
-    protected override void ModelExportReady(TR1Blob definition)
+    protected override void PostCreation(TR1Blob blob)
     {
-        switch (definition.Alias)
+        switch (blob.ID)
         {
-            case TR1Type.Kold:
-                if (definition.Colours.ContainsKey(123))
-                {
-                    // Incorrect orange colouring on head and hands
-                    definition.Colours[123].Red = 28;
-                    definition.Colours[123].Green = 18;
-                    definition.Colours[123].Blue = 4;
-                }
-                break;
             case TR1Type.SkateboardKid:
-                if (definition.Colours.ContainsKey(182))
+                if (blob.Palette8.ContainsKey(60))
                 {
                     // Incorrect yellow colouring on his arm
-                    definition.Colours[182].Red = 51;
-                    definition.Colours[182].Green = 33;
-                    definition.Colours[182].Blue = 22;
+                    blob.Palette8[60].Red = 204;
+                    blob.Palette8[60].Green = 132;
+                    blob.Palette8[60].Blue = 88;
                 }
                 break;
-            case TR1Type.CowboyHeadless:
-                AmendDXtre3DTextures(definition);
-                break;
-            default:
+            case TR1Type.Kold:
+                if (blob.Palette8.ContainsKey(185))
+                {
+                    // Incorrect orange colouring on head and hands
+                    blob.Palette8[185].Red = 112;
+                    blob.Palette8[185].Green = 72;
+                    blob.Palette8[185].Blue = 16;
+                }
                 break;
         }
     }
 
     public static void AmendPierreGunshot(TR1Level level)
     {
-        TRModel model = level.Models[TR1Type.Pierre];
-        // Get his shooting animation
-        TRAnimation anim = model.Animations[10];
-
-        // On the 2nd frame, play SFX 44 (magnums)
-        anim.Commands.Add(new TRSFXCommand
+        level.Models[TR1Type.Pierre].Animations[10].Commands.Add(new TRSFXCommand
         {
-            FrameNumber = 1,
             SoundID = (short)TR1SFX.LaraMagnums,
+            FrameNumber = 1
         });
     }
 
     public static void AmendPierreDeath(TR1Level level)
     {
-        TRModel model = level.Models[TR1Type.Pierre];
-        // Get his death animation
-        TRAnimation anim = model.Animations[12];
-
-        // On the 61st frame, play SFX 159 (death)
-        anim.Commands.Add(new TRSFXCommand
+        level.Models[TR1Type.Pierre].Animations[12].Commands.Add(new TRSFXCommand
         {
-            FrameNumber = 60,
             SoundID = (short)TR1SFX.PierreDeath,
+            FrameNumber = 60
         });
     }
 
     public static void AmendLarsonDeath(TR1Level level)
     {
-        TRModel model = level.Models[TR1Type.Larson];
-        // Get his death animation
-        TRAnimation anim = model.Animations[15];
-
-        // On the 2nd frame, play SFX 158 (death)
-        anim.Commands.Add(new TRSFXCommand
+        level.Models[TR1Type.Larson].Animations[15].Commands.Add(new TRSFXCommand
         {
-            FrameNumber = 1,
             SoundID = (short)TR1SFX.LarsonDeath,
+            FrameNumber = 1
         });
     }
 
     public static void AmendSkaterBoyDeath(TR1Level level)
     {
-        TRModel model = level.Models[TR1Type.SkateboardKid];
-        // Get his death animation
-        TRAnimation anim = model.Animations[13];
-        // Play the death sound on the 2nd frame (doesn't work on the 1st, which is OG).
-        (anim.Commands[2] as TRSFXCommand).FrameNumber++;
+        TRAnimCommand cmd = level.Models[TR1Type.SkateboardKid].Animations[13].Commands
+            .Find(c => c is TRSFXCommand sfx && sfx.SoundID == (short)TR1SFX.SkateKidDeath);
+        if (cmd is TRSFXCommand sfxCmd)
+        {
+            // OG has frame number 0, but this is skipped by the engine
+            sfxCmd.FrameNumber = 1;
+        }
     }
 
     public static void AmendNatlaDeath(TR1Level level)
     {
-        TRModel model = level.Models[TR1Type.Natla];
-        // Get her death animation
-        TRAnimation anim = model.Animations[13];
-
-        // On the 5th frame, play SFX 160 (death)
-        anim.Commands.Add(new TRSFXCommand
+        level.Models[TR1Type.Natla].Animations[13].Commands.Add(new TRSFXCommand
         {
-            FrameNumber = 4,
             SoundID = (short)TR1SFX.NatlaDeath,
+            FrameNumber = 4
         });
     }
 
-    public static void AddMovingBlockSFX(TR1Level level)
+    public static void AddMovingBlockSFX(TR1Level level, string baseLevelDirectory)
     {
         // ToQ moving blocks are silent but we want them to scrape along the floor when they move.
         // Import the trapdoor closing SFX from Vilcabamba and adjust the animations accordingly.
 
         if (!level.SoundEffects.ContainsKey(TR1SFX.TrapdoorClose))
         {
-            TR1Level vilcabamba = new TR1LevelControl().Read(TR1LevelNames.VILCABAMBA);
+            TR1Level vilcabamba = new TR1LevelControl().Read(Path.Combine(baseLevelDirectory, TR1LevelNames.VILCABAMBA));
             level.SoundEffects[TR1SFX.TrapdoorClose] = vilcabamba.SoundEffects[TR1SFX.TrapdoorClose];
         }
 
-        TRModel model = level.Models[TR1Type.MovingBlock];
         for (int i = 2; i < 4; i++)
         {
-            TRAnimation anim = model.Animations[i];
-
-            // On the 1st frame, play SFX 162
-            anim.Commands.Add(new TRSFXCommand
+            level.Models[TR1Type.MovingBlock].Animations[i].Commands.Add(new TRSFXCommand
             {
                 SoundID = (short)TR1SFX.TrapdoorClose,
+                FrameNumber = 0
             });
         }
     }

@@ -1,70 +1,95 @@
-﻿using Newtonsoft.Json;
+﻿using TRDataControl.Remapping;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
-using TRModelTransporter.Data;
-using TRModelTransporter.Handlers;
-using TRModelTransporter.Model.Definitions;
 
-namespace TRModelTransporter.Transport;
+namespace TRDataControl;
 
-public class TR2DataImporter : TRDataImporter<TR2Type, TR2Level, TR2Blob>
+public class TR2DataImporter : TRDataImporter<TR2Level, TR2Type, TR2SFX, TR2Blob>
 {
-    public TR2DataImporter()
+    private TRPalette16Control _paletteControl;
+
+    public TR2DataImporter(bool isCommunityPatch = false)
     {
         Data = new TR2DataProvider();
-    }
-
-    protected override AbstractTextureImportHandler<TR2Type, TR2Level, TR2Blob> CreateTextureHandler()
-    {
-        return new TR2TextureImportHandler();
-    }
-
-    protected override List<TR2Type> GetExistingModelTypes()
-    {
-        return Level.Models.Keys.ToList();
-    }
-
-    protected override void Import(IEnumerable<TR2Blob> standardDefinitions, IEnumerable<TR2Blob> soundOnlyDefinitions)
-    {
-        // Textures first, which will remap Mesh rectangles/triangles to the new texture indices.
-        // This is called using the entire entity list to import so that RectanglePacker packer has
-        // the best chance to organise the tiles.
-        TR2TextureRemapGroup remap = null;
-        if (TextureRemapPath != null)
+        if (isCommunityPatch)
         {
-            remap = JsonConvert.DeserializeObject<TR2TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
+            Data.TextureTileLimit = 32;
+            Data.TextureObjectLimit = 8192;
+        }
+    }
+
+    protected override List<TR2Type> GetExistingTypes()
+        => new(Level.Models.Keys.Concat(Level.Sprites.Keys));
+
+    protected override TRTextureRemapper<TR2Level> CreateRemapper()
+        => new TR2TextureRemapper();
+
+    protected override bool IsMasterType(TR2Type type)
+        => type == TR2Type.Lara;
+
+    protected override TRMesh GetDummyMesh()
+        => Level.Models[TR2Type.Lara].Meshes[0];
+
+    protected override TRTexturePacker CreatePacker()
+        => new TR2TexturePacker(Level, Data.TextureTileLimit);
+
+    protected override TRDictionary<TR2Type, TRModel> Models
+        => Level.Models;
+
+    protected override TRDictionary<TR2Type, TRStaticMesh> StaticMeshes
+        => Level.StaticMeshes;
+
+    protected override TRDictionary<TR2Type, TRSpriteSequence> SpriteSequences
+        => Level.Sprites;
+
+    protected override List<TRCinematicFrame> CinematicFrames
+        => Level.CinematicFrames;
+
+    protected override List<TRObjectTexture> ObjectTextures
+        => Level.ObjectTextures;
+
+    protected override ushort ImportColour(TR2Blob blob, ushort currentIndex)
+    {
+        if (!blob.Palette16.ContainsKey(currentIndex))
+        {
+            return currentIndex;
         }
 
-        if (!IgnoreGraphics)
+        _paletteControl ??= new(Level.Palette16, Level.DistinctMeshes);
+        return (ushort)_paletteControl.Import(blob.Palette16[currentIndex]);
+    }
+
+    protected override void ImportSound(TR2Blob blob)
+    {
+        if (blob.SoundEffects == null)
+            return;
+
+        foreach (TR2SFX sfx in blob.SoundEffects.Keys)
         {
-            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
-        }
-
-        // Hardcoded sounds are also imported en-masse to ensure the correct SoundMap indices are assigned
-        // before any animation sounds are dealt with.
-        SoundTransportHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
-
-        // Allow external alias model priorities to be defined
-        Dictionary<TR2Type, TR2Type> aliasPriority = Data.AliasPriority ?? new Dictionary<TR2Type, TR2Type>();
-
-        foreach (TR2Blob definition in standardDefinitions)
-        {
-            if (!IgnoreGraphics)
+            if (!Level.SoundEffects.ContainsKey(sfx))
             {
-                // Colours next, again to remap Mesh rectangles/triangles to any new palette indices
-                ColourTransportHandler.Import(Level, definition);
+                Level.SoundEffects[sfx] = blob.SoundEffects[sfx];
             }
-
-            // Cinematic frames
-            CinematicTransportHandler.Import(Level, definition, ForceCinematicOverwrite);
-
-            // Add the model, which will have the correct StartingMesh, MeshTree, Frame and Animation offset.
-            ModelTransportHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
         }
+    }
 
-        if (!IgnoreGraphics)
+    protected override void BlobImported(TR2Blob blob)
+    {
+        switch (blob.ID)
         {
-            //_textureHandler.ResetUnusedTextures();
+            case TR2Type.FlamethrowerGoon:
+            case TR2Type.MarcoBartoli:
+                AddFlameSprites();
+                break;
+        }
+    }
+
+    private void AddFlameSprites()
+    {
+        if (!Level.Sprites.ContainsKey(TR2Type.FireBlast_S_H) && Level.Sprites.ContainsKey(TR2Type.Explosion_S_H))
+        {
+            Level.Sprites[TR2Type.FireBlast_S_H] = Level.Sprites[TR2Type.Explosion_S_H].Clone();
         }
     }
 }
