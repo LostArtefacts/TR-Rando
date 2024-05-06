@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System.Drawing;
 using System.Drawing.Imaging;
-using TRImageControl.Packing;
 using TRImageControl.Textures;
+using TRLevelControl.Model;
 using TRModelTransporter.Events;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model;
@@ -12,15 +12,13 @@ namespace TRModelTransporter.Transport;
 
 public abstract class TRDataExporter<E, L, D> : TRDataTransport<E, L, D>
     where E : Enum
-    where L : class
+    where L : TRLevelBase
     where D : TRBlobBase<E>
 {
     protected static readonly string _defaultSegmentsFolder = @"Resources\ModelSegments";
 
     public bool ExportIndividualSegments { get; set; }
     public string SegmentsDataFolder { get; set; }
-
-    public ITextureClassifier TextureClassifier { get; set; }
 
     protected AbstractTextureExportHandler<E, L, D> _textureHandler;
 
@@ -56,7 +54,7 @@ public abstract class TRDataExporter<E, L, D> : TRDataTransport<E, L, D>
             {
                 duplicateClips.Add(new StaticTextureTarget
                 {
-                    Segment = e.NewSegment.FirstTextureIndex,
+                    Segment = e.NewSegment.Segments.First().Index,
                     Tile = e.OldTile.Index,
                     X = e.OldBounds.X,
                     Y = e.OldBounds.Y,

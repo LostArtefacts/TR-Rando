@@ -34,7 +34,7 @@ public class TR1DataExporter : TRDataExporter<TR1Type, TR1Level, TR1Blob>
 
         ModelTransportHandler.Export(level, definition, modelEntity);
         ColourTransportHandler.Export(level, definition);
-        _textureHandler.Export(level, definition, TextureClassifier, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
+        _textureHandler.Export(level, definition, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
         CinematicTransportHandler.Export(level, definition, Data.GetCinematicEntities());
         SoundTransportHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));
 

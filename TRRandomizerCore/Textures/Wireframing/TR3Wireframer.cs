@@ -27,7 +27,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
 
     private TRPalette16Control _paletteTracker;
 
-    protected override TRTexturePacker<TR3Type, TR3Level> CreatePacker(TR3Level level)
+    protected override TRTexturePacker CreatePacker(TR3Level level)
     {
         return new TR3TexturePacker(level);
     }
@@ -166,7 +166,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         const int width = 64;
         const int height = 64;
 
-        IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, width, height));
+        TRTextileSegment segment = CreateSegment(new Rectangle(0, 0, width, height));
         TRImage frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, true);
         using Bitmap bmp = frame.ToBitmap();
         using Graphics graphics = Graphics.FromImage(bmp);
@@ -187,6 +187,6 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
                 break;
         }
 
-        return new TRTextileRegion(texture, new(bmp));
+        return new(segment, new(bmp));
     }
 }

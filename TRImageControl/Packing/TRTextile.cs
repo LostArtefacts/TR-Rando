@@ -11,8 +11,7 @@ public class TRTextile : DefaultTile<TRTextileRegion>
         set
         {
             _image = value;
-            // Listen to on-the-fly bitmap changes
-            _image.DataChanged += (object sender, EventArgs e) =>
+            _image.DataChanged += (s, e) =>
             {
                 _graphicChanged = true;
             };
@@ -35,85 +34,68 @@ public class TRTextile : DefaultTile<TRTextileRegion>
         _segmentAdded = _segmentRemoved = _graphicChanged = false;
     }
 
-    public void AddTexture(TRTextileSegment texture)
+    public void AddSegment(TRTextileSegment segment)
     {
-        foreach (TRTextileRegion segment in Rectangles)
+        foreach (TRTextileRegion region in Rectangles)
         {
-            if (segment.Bounds.Contains(texture.Bounds))
+            if (region.Bounds.Contains(segment.Bounds))
             {
                 // If so, just map the texture to the same segment
-                segment.AddTexture(texture);
+                region.AddTexture(segment);
                 return;
             }
         }
 
         // Otherwise, make a new segment
-        TRTextileRegion newSegment = new(texture, Image.Export(texture.Bounds));
-        base.Add(newSegment, texture.Bounds.X, texture.Bounds.Y);
+        TRTextileRegion newRegion = new(segment, Image.Export(segment.Bounds));
+        Add(newRegion, segment.Position);
     }
 
-    public List<TRTextileRegion> GetObjectTextureIndexSegments(IEnumerable<int> indices)
+    public List<TRTextileRegion> GetObjectRegions(IEnumerable<int> indices)
     {
-        List<TRTextileRegion> segments = new();
+        List<TRTextileRegion> regions = new();
         foreach (int index in indices)
         {
-            foreach (TRTextileRegion segment in Rectangles)
+            foreach (TRTextileRegion region in Rectangles)
             {
-                if (segment.IsObjectTextureFor(index) && !segments.Contains(segment))
+                if (region.IsObjectTextureFor(index) && !regions.Contains(region))
                 {
-                    segments.Add(segment);
+                    regions.Add(region);
                 }
             }
         }
-        return segments;
-    }
-
-    public List<TRTextileRegion> GetSpriteTextureIndexSegments(IEnumerable<int> indices)
-    {
-        List<TRTextileRegion> segments = new();
-        foreach (int index in indices)
-        {
-            foreach (TRTextileRegion segment in Rectangles)
-            {
-                if (segment.IsSpriteTextureFor(index) && !segments.Contains(segment))
-                {
-                    segments.Add(segment);
-                }
-            }
-        }
-        return segments;
+        return regions;
     }
 
     public void Commit()
     {
-        foreach (TRTextileRegion segment in Rectangles)
+        foreach (TRTextileRegion region in Rectangles)
         {
-            segment.Commit(Index);
+            region.Commit(Index);
         }
     }
 
-    protected override bool Add(TRTextileRegion segment, int x, int y)
+    protected override bool Add(TRTextileRegion region, int x, int y)
     {
-        bool added = base.Add(segment, x, y);
+        bool added = base.Add(region, x, y);
         if (added)
         {
-            CheckBitmapStatus();
-            Image.Import(segment.Image, segment.MappedBounds.Location);
-
-            segment.Bind();
+            Image ??= new(Width, Height);
+            Image.Import(region.Image, region.MappedBounds.Location);
+            region.Bind();
             _segmentAdded = true;
         }
         return added;
     }
 
-    public override bool Remove(TRTextileRegion segment)
+    public override bool Remove(TRTextileRegion region)
     {
-        bool removed = base.Remove(segment);
+        bool removed = base.Remove(region);
         if (removed)
         {
-            CheckBitmapStatus();
-            Image.Delete(segment.Bounds);
-            segment.Unbind();
+            Image ??= new(Width, Height);
+            Image.Delete(region.Bounds);
+            region.Unbind();
             _segmentRemoved = true;
         }
         return removed;
@@ -131,10 +113,5 @@ public class TRTextile : DefaultTile<TRTextileRegion>
         {
             _segmentAdded = _segmentRemoved = false;
         }
-    }
-
-    private void CheckBitmapStatus()
-    {
-        Image ??= new(Width, Height);
     }
 }

@@ -77,21 +77,21 @@ public abstract class AbstractTRWireframer<E, L>
             DashCap = DashCap.Round
         };
 
-        TRTexturePacker<E, L> packer = CreatePacker(level);
+        TRTexturePacker packer = CreatePacker(level);
         DeleteTextures(packer);
         ResetUnusedTextures(level);
 
         TRSize roomSize = GetLargestSize(roomSizes);
         roomSize.RoundDown();
 
-        IndexedTRObjectTexture roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
-        IndexedTRObjectTexture ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
-        IndexedTRObjectTexture triggerTexture = CreateTriggerWireframe(packer, roomSize, triggerPen, SmoothingMode.AntiAlias);
-        IndexedTRObjectTexture deathTexture = CreateDeathWireframe(packer, roomSize, deathPen, SmoothingMode.AntiAlias);
-        Dictionary<ushort, IndexedTRObjectTexture> specialTextures = CreateSpecialTextures(packer, level, roomPen);
+        TRTextileSegment roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+        TRTextileSegment ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+        TRTextileSegment triggerTexture = CreateTriggerWireframe(packer, roomSize, triggerPen, SmoothingMode.AntiAlias);
+        TRTextileSegment deathTexture = CreateDeathWireframe(packer, roomSize, deathPen, SmoothingMode.AntiAlias);
+        Dictionary<ushort, TRTextileSegment> specialTextures = CreateSpecialTextures(packer, level, roomPen);
         ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
 
-        Dictionary<TRSize, IndexedTRObjectTexture> modelRemap = new();
+        Dictionary<TRSize, TRTextileSegment> modelRemap = new();
         foreach (TRSize size in meshSizes)
         {
             modelRemap[size] = CreateWireframe(packer, size, modelPen, SmoothingMode.None);
@@ -104,22 +104,22 @@ public abstract class AbstractTRWireframer<E, L>
         List<TRObjectTexture> levelObjectTextures = GetObjectTextures(level);
 
         ushort roomTextureIndex = (ushort)reusableTextures.Dequeue();
-        levelObjectTextures[roomTextureIndex] = roomTexture.Texture;
+        levelObjectTextures[roomTextureIndex] = roomTexture.Texture as TRObjectTexture;
 
         ushort ladderTextureIndex = (ushort)reusableTextures.Dequeue();
-        levelObjectTextures[ladderTextureIndex] = ladderTexture.Texture;
+        levelObjectTextures[ladderTextureIndex] = ladderTexture.Texture as TRObjectTexture;
 
         ushort triggerTextureIndex = (ushort)reusableTextures.Dequeue();
-        levelObjectTextures[triggerTextureIndex] = triggerTexture.Texture;
+        levelObjectTextures[triggerTextureIndex] = triggerTexture.Texture as TRObjectTexture;
 
         ushort deathTextureIndex = (ushort)reusableTextures.Dequeue();
-        levelObjectTextures[deathTextureIndex] = deathTexture.Texture;
+        levelObjectTextures[deathTextureIndex] = deathTexture.Texture as TRObjectTexture;
 
         Dictionary<ushort, ushort> specialTextureRemap = new();
         foreach (ushort originalTexture in specialTextures.Keys)
         {
             ushort newIndex = (ushort)reusableTextures.Dequeue();
-            levelObjectTextures[newIndex] = specialTextures[originalTexture].Texture;
+            levelObjectTextures[newIndex] = specialTextures[originalTexture].Texture as TRObjectTexture;
             specialTextureRemap[originalTexture] = newIndex;
         }
 
@@ -128,7 +128,7 @@ public abstract class AbstractTRWireframer<E, L>
             if (!size.Equals(_nullSize))
             {
                 ushort texture = (ushort)reusableTextures.Dequeue();
-                levelObjectTextures[texture] = modelRemap[size].Texture;
+                levelObjectTextures[texture] = modelRemap[size].Texture as TRObjectTexture;
                 modelRemap[size].Index = texture;
             }
         }
@@ -211,7 +211,7 @@ public abstract class AbstractTRWireframer<E, L>
         if (texture.IsValid())
         {
             _allTextures.Add(textureIndex);
-            IndexedTRObjectTexture itext = new()
+            TRTextileSegment itext = new()
             {
                 Texture = texture
             };
@@ -221,7 +221,7 @@ public abstract class AbstractTRWireframer<E, L>
         return _nullSize;
     }
 
-    private void DeleteTextures(TRTexturePacker<E, L> packer)
+    private void DeleteTextures(TRTexturePacker packer)
     {
         List<int> textures = new();
         foreach (ushort t in _allTextures)
@@ -232,7 +232,7 @@ public abstract class AbstractTRWireframer<E, L>
             }
         }
 
-        packer.RemoveObjectTextureSegments(textures);
+        packer.RemoveObjectRegions(textures);
     }
 
     private static TRSize GetLargestSize(IEnumerable<TRSize> sizes)
@@ -248,14 +248,14 @@ public abstract class AbstractTRWireframer<E, L>
         return _nullSize;
     }
 
-    private IndexedTRObjectTexture CreateWireframe(TRTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+    private TRTextileSegment CreateWireframe(TRTexturePacker packer, TRSize size, Pen pen, SmoothingMode mode)
     {
         if (size.Equals(_nullSize))
         {
             return null;
         }
 
-        IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
+        TRTextileSegment texture = CreateSegment(new Rectangle(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
 
         packer.AddRectangle(new TRTextileRegion(texture, frame));
@@ -263,14 +263,14 @@ public abstract class AbstractTRWireframer<E, L>
         return texture;
     }
 
-    private IndexedTRObjectTexture CreateLadderWireframe(TRTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+    private TRTextileSegment CreateLadderWireframe(TRTexturePacker packer, TRSize size, Pen pen, SmoothingMode mode)
     {
         if (size.Equals(_nullSize))
         {
             return null;
         }
 
-        IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
+        TRTextileSegment texture = CreateSegment(new Rectangle(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, false);
         using Bitmap bmp = frame.ToBitmap();
         using Graphics graphics = Graphics.FromImage(bmp);
@@ -290,14 +290,14 @@ public abstract class AbstractTRWireframer<E, L>
         return texture;
     }
 
-    private IndexedTRObjectTexture CreateTriggerWireframe(TRTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+    private TRTextileSegment CreateTriggerWireframe(TRTexturePacker packer, TRSize size, Pen pen, SmoothingMode mode)
     {
         if (size.Equals(_nullSize))
         {
             return null;
         }
 
-        IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
+        TRTextileSegment texture = CreateSegment(new Rectangle(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
         using Bitmap bmp = frame.ToBitmap();
         using Graphics graphics = Graphics.FromImage(bmp);
@@ -310,14 +310,14 @@ public abstract class AbstractTRWireframer<E, L>
         return texture;
     }
 
-    private IndexedTRObjectTexture CreateDeathWireframe(TRTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+    private TRTextileSegment CreateDeathWireframe(TRTexturePacker packer, TRSize size, Pen pen, SmoothingMode mode)
     {
         if (size.Equals(_nullSize))
         {
             return null;
         }
 
-        IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
+        TRTextileSegment texture = CreateSegment(new Rectangle(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
         using Bitmap bmp = frame.ToBitmap();
         using Graphics graphics = Graphics.FromImage(bmp);
@@ -332,14 +332,14 @@ public abstract class AbstractTRWireframer<E, L>
         return texture;
     }
 
-    private Dictionary<ushort, IndexedTRObjectTexture> CreateSpecialTextures(TRTexturePacker<E, L> packer, L level, Pen pen)
+    private Dictionary<ushort, TRTextileSegment> CreateSpecialTextures(TRTexturePacker packer, L level, Pen pen)
     {
         Dictionary<ushort, TRTextileRegion> specialSegments = CreateSpecialSegments(level, pen);
-        Dictionary<ushort, IndexedTRObjectTexture> specialTextures = new();
+        Dictionary<ushort, TRTextileSegment> specialTextures = new();
         foreach (ushort textureIndex in specialSegments.Keys)
         {
             packer.AddRectangle(specialSegments[textureIndex]);
-            specialTextures[textureIndex] = specialSegments[textureIndex].FirstTexture as IndexedTRObjectTexture;
+            specialTextures[textureIndex] = specialSegments[textureIndex].Segments.First();
         }
         return specialTextures;
     }
@@ -349,7 +349,7 @@ public abstract class AbstractTRWireframer<E, L>
         return new Dictionary<ushort, TRTextileRegion>();
     }
 
-    private void ProcessClips(TRTexturePacker<E, L> packer, L level, Pen pen, SmoothingMode mode)
+    private void ProcessClips(TRTexturePacker packer, L level, Pen pen, SmoothingMode mode)
     {
         // Some animated textures are shared in segments e.g. 4 32x32 segments within a 64x64 container,
         // so in instances where we only want to wireframe a section of these, we use manual clipping.
@@ -360,14 +360,14 @@ public abstract class AbstractTRWireframer<E, L>
 
             foreach (ushort texture in clip.Textures)
             {
-                IndexedTRObjectTexture indexedTexture = new()
+                TRTextileSegment indexedTexture = new()
                 {
                     Index = texture,
                     Texture = textures[texture]
                 };
                 TRImage bmp = packer.Tiles[indexedTexture.Atlas].Image;
 
-                List<TRTextileRegion> segments = packer.Tiles[indexedTexture.Atlas].GetObjectTextureIndexSegments(new int[] { texture });
+                List<TRTextileRegion> segments = packer.Tiles[indexedTexture.Atlas].GetObjectRegions(new int[] { texture });
                 foreach (TRTextileRegion segment in segments)
                 {
                     bmp.Import(frame, new
@@ -406,11 +406,11 @@ public abstract class AbstractTRWireframer<E, L>
         return new(bmp);
     }
 
-    protected IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
+    protected TRTextileSegment CreateSegment(Rectangle rectangle)
     {
         return new()
         {
-            Texture = new(rectangle)
+            Texture = new TRObjectTexture(rectangle)
         };
     }
 
@@ -468,7 +468,7 @@ public abstract class AbstractTRWireframer<E, L>
         }
     }
 
-    private void ResetMeshTextures(Dictionary<TRSize, IndexedTRObjectTexture> sizeRemap, Dictionary<ushort, ushort> specialTextureRemap)
+    private void ResetMeshTextures(Dictionary<TRSize, TRTextileSegment> sizeRemap, Dictionary<ushort, ushort> specialTextureRemap)
     {
         foreach (TRMeshFace face in _meshFaces.Keys)
         {
@@ -495,7 +495,7 @@ public abstract class AbstractTRWireframer<E, L>
         }
     }
 
-    private static TRSize Find(TRSize s, Dictionary<TRSize, IndexedTRObjectTexture> map)
+    private static TRSize Find(TRSize s, Dictionary<TRSize, TRTextileSegment> map)
     {
         foreach (TRSize size in map.Keys)
         {
@@ -615,7 +615,7 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract Dictionary<TRFace, List<TRVertex>> CollectLadders(L level);
     protected abstract List<TRFace> CollectTriggerFaces(L level, List<FDTrigType> triggerTypes);
     protected abstract List<TRFace> CollectDeathFaces(L level);
-    protected abstract TRTexturePacker<E, L> CreatePacker(L level);
+    protected abstract TRTexturePacker CreatePacker(L level);
     protected abstract IEnumerable<IEnumerable<TRFace>> GetRoomFace4s(L level);
     protected abstract IEnumerable<IEnumerable<TRFace>> GetRoomFace3s(L level);
     protected abstract void ResetUnusedTextures(L level);

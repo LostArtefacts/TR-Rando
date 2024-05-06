@@ -158,7 +158,7 @@ public class TRTextureDeduplicator<E> where E : Enum
     {
         Rectangle oldBounds = originalSegment.Segment.Bounds;
         // We pull all of the sub textures from the original segment into the candidate
-        int oldFirstTextureIndex = originalSegment.Segment.FirstTextureIndex;
+        int oldFirstTextureIndex = originalSegment.Segment.Segments.First().Index;
         candidateSegment.Segment.InheritTextures(originalSegment.Segment, adjustmentPoint, candidateSegment.Tile.Index);
         // Store the removal for later processing in RemoveStaleSegments
         StoreSegmentRemoval(originalSegment);

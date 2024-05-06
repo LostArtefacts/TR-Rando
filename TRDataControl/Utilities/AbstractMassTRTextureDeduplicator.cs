@@ -2,12 +2,13 @@
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using TRImageControl.Packing;
+using TRLevelControl.Model;
 
 namespace TRModelTransporter.Utilities;
 
 public abstract class AbstractMassTRTextureDeduplicator<E, L>
     where E : Enum
-    where L : class
+    where L : TRLevelBase
 {
     public abstract List<string> LevelNames { get; }
 
@@ -62,7 +63,7 @@ public abstract class AbstractMassTRTextureDeduplicator<E, L>
 
     private void ExportDuplicateLevelTextures(string lvlPath)
     {
-        TRTexturePacker<E, L> levelPacker = CreatePacker(ReadLevel(lvlPath));
+        TRTexturePacker levelPacker = CreatePacker(ReadLevel(lvlPath));
         Dictionary<TRTextile, List<TRTextileRegion>> allTextures = new();
         foreach (TRTextile tile in levelPacker.Tiles)
         {
@@ -126,7 +127,7 @@ public abstract class AbstractMassTRTextureDeduplicator<E, L>
             OriginalBounds = e.OldBounds,
             NewBounds = e.NewBounds,
             NewTile = e.NewTile.Index,
-            NewIndex = e.NewSegment.FirstTextureIndex,
+            NewIndex = e.NewSegment.Segments.First().Index,
             AdjustmentPoint = e.AdjustmentPoint
         });
 
@@ -136,7 +137,7 @@ public abstract class AbstractMassTRTextureDeduplicator<E, L>
     }
 
     protected abstract AbstractTextureRemapGroup<E, L> CreateRemapGroup();
-    protected abstract TRTexturePacker<E, L> CreatePacker(L level);
+    protected abstract TRTexturePacker CreatePacker(L level);
     protected abstract AbstractTRLevelTextureDeduplicator<E, L> CreateDeduplicator();
     protected abstract L ReadLevel(string path);
     protected abstract void WriteLevel(L level, string path);

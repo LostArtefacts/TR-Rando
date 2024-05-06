@@ -70,28 +70,28 @@ public static class HtmlExporter
         {
             html.Append(string.Format("<div class=\"tile\" id=\"tile_{0}\">", tile.Index));
 
-            foreach (TRTextileRegion segment in tile.Rectangles)
+            foreach (TRTextileRegion region in tile.Rectangles)
             {
                 using MemoryStream ms = new();
-                segment.Image.Save(ms, ImageFormat.Png);
+                region.Image.Save(ms, ImageFormat.Png);
 
-                List<int> objectTextures = GetObjectTextureList(segment);
-                List<int> spriteTextures = GetSpriteTextureList(segment);
+                List<int> objectTextures = GetObjectTextureList(region);
+                List<int> spriteTextures = GetSpriteTextureList(region);
 
                 html.Append(string.Format("<img src=\"data:image/png;base64, {0}\" ", Convert.ToBase64String(ms.ToArray())));
-                html.Append(string.Format("style=\"top:{0}px;left:{1}px;width:{2}px;height:{3}px\" ", segment.Bounds.Y, segment.Bounds.X, segment.Bounds.Width, segment.Bounds.Height));
+                html.Append(string.Format("style=\"top:{0}px;left:{1}px;width:{2}px;height:{3}px\" ", region.Bounds.Y, region.Bounds.X, region.Bounds.Width, region.Bounds.Height));
                 html.Append(string.Format("data-tile=\"{0}\" ", tile.Index));
-                html.Append(string.Format("data-rect=\"{0}\" ", RectangleToString(segment.Bounds)));
+                html.Append(string.Format("data-rect=\"{0}\" ", RectangleToString(region.Bounds)));
 
                 if (palette != null)
                 {
                     // Assume 8-bit so we want to see the palette indices for this segment
                     ISet<int> paletteIndices = new SortedSet<int>();
-                    for (int y = 0; y < segment.Image.Height; y++)
+                    for (int y = 0; y < region.Image.Height; y++)
                     {
-                        for (int x = 0; x < segment.Image.Width; x++)
+                        for (int x = 0; x < region.Image.Width; x++)
                         {
-                            Color c = segment.Image.GetPixel(x, y);
+                            Color c = region.Image.GetPixel(x, y);
                             if (c.A != 0)
                             {
                                 TRColour col = c.ToTRColour();
@@ -110,15 +110,15 @@ public static class HtmlExporter
                 List<string> objectData = new();
                 List<string> spriteData = new();
 
-                foreach (TRTextileSegment texture in segment.Textures)
+                foreach (TRTextileSegment segment in region.Segments)
                 {
-                    if (texture is IndexedTRObjectTexture objTexture)
+                    if (segment.Texture is TRObjectTexture objTexture)
                     {
-                        objectData.Add(texture.Index + ":" + RectangleToString(texture.Bounds) + ":" + (objTexture.IsTriangle ? "T" : "Q"));
+                        objectData.Add(segment.Index + ":" + RectangleToString(region.Bounds) + ":" + (objTexture.IsTriangle ? "T" : "Q"));
                     }
                     else
                     {
-                        spriteData.Add(texture.Index + ":" + RectangleToString(texture.Bounds));
+                        spriteData.Add(segment.Index + ":" + RectangleToString(segment.Bounds));
                     }
                 }
 
@@ -143,30 +143,16 @@ public static class HtmlExporter
         return string.Format("[{0}, {1}, {2}, {3}]", r.X, r.Y, r.Width, r.Height);
     }
 
-    private static List<int> GetObjectTextureList(TRTextileRegion segment)
+    private static List<int> GetObjectTextureList(TRTextileRegion region)
     {
-        List<int> indices = new();
-        foreach (TRTextileSegment texture in segment.Textures)
-        {
-            if (texture is IndexedTRObjectTexture)
-            {
-                indices.Add(texture.Index);
-            }
-        }
-        return indices;
+        return new(region.Segments.Where(s => s.Texture is TRObjectTexture)
+            .Select(s => s.Index));
     }
 
-    private static List<int> GetSpriteTextureList(TRTextileRegion segment)
+    private static List<int> GetSpriteTextureList(TRTextileRegion region)
     {
-        List<int> indices = new();
-        foreach (TRTextileSegment texture in segment.Textures)
-        {
-            if (texture is IndexedTRSpriteTexture)
-            {
-                indices.Add(texture.Index);
-            }
-        }
-        return indices;
+        return new(region.Segments.Where(s => s.Texture is TRSpriteTexture)
+            .Select(s => s.Index));
     }
 
     private static void BuildLevelSelect(StringBuilder html, string currentLevel, IEnumerable<string> levelNames)

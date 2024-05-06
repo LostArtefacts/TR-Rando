@@ -48,7 +48,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
 
     private TR1TexturePacker _packer;
 
-    protected override TRTexturePacker<TR1Type, TR1Level> CreatePacker(TR1Level level)
+    protected override TRTexturePacker CreatePacker(TR1Level level)
     {
         return _packer = new TR1TexturePacker(level);
     }
@@ -115,8 +115,8 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
 
     protected override int ImportColour(TR1Level level, Color c)
     {
-        _packer.PaletteManager ??= new();
-        return _packer.PaletteManager.AddPredefinedColour(c);
+        _packer.PaletteControl ??= new();
+        return _packer.PaletteControl.AddPredefinedColour(c);
     }
 
     protected override bool IsLaraModel(TR1Type type)
@@ -136,7 +136,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
 
     protected override void ResetPaletteTracking(TR1Level level)
     {
-        _packer.PaletteManager?.MergePredefinedColours();
+        _packer.PaletteControl?.MergePredefinedColours();
     }
 
     protected override void ResetUnusedTextures(TR1Level level)
@@ -205,7 +205,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         const int width = 64;
         const int height = 16;
                     
-        IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, width, height));
+        TRTextileSegment segment = CreateSegment(new(0, 0, width, height));
         TRImage frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, false);
         using Bitmap bmp = frame.ToBitmap();
         using Graphics graphics = Graphics.FromImage(bmp);
@@ -267,7 +267,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
             }
         }
 
-        return new TRTextileRegion(texture, new(bmp));
+        return new(segment, new(bmp));
     }
 
     private static TR1Type FindDoorModel(TR1Level level, ushort textureIndex)

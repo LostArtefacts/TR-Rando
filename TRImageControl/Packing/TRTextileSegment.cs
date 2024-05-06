@@ -1,65 +1,55 @@
-﻿using Newtonsoft.Json;
-using System.Drawing;
+﻿using System.Drawing;
+using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public abstract class TRTextileSegment
+public class TRTextileSegment : ICloneable
 {
-    protected Rectangle _bounds;
-    private int _boundsXDiff, _boundsYDiff;
-
-    public int Index { get; set; }
-    public string Classification { get; set; } // a reference to the level the texture originated from
-    [JsonIgnore]
-    public abstract int Atlas { get; set; }
-    [JsonIgnore]
-    public int Area => _bounds.Width * _bounds.Height;
-    [JsonIgnore]
-    public Rectangle Bounds => _bounds;
-
-    public TRTextileSegment()
+    public TRTexture Texture { get; set; }
+    public int Atlas
     {
-        _boundsXDiff = 0;
-        _boundsYDiff = 0;
+        get => Texture.Atlas;
+        set => Texture.Atlas = (ushort)value;
     }
 
-    public void MoveBy(int xDiff, int yDiff)
+    public int Index { get; set; }
+    public int Area => Bounds.Width * Bounds.Height;
+    public Rectangle Bounds => Texture.Bounds;
+    public Point Position
     {
-        _bounds.X += xDiff;
-        _bounds.Y += yDiff;
-
-        _boundsXDiff = xDiff;
-        _boundsYDiff = yDiff;
+        get => Texture.Position;
+        set => Texture.Position = value;
     }
 
     public void Commit(int tileIndex)
     {
         Atlas = tileIndex;
-        ApplyBoundsDiff();
     }
 
-    private void ApplyBoundsDiff()
-    {
-        if (_boundsXDiff != 0 || _boundsYDiff != 0)
-        {
-            ApplyBoundDiffToTexture(_boundsXDiff, _boundsYDiff);
-            _boundsXDiff = _boundsYDiff = 0; // Don't apply again unless we move again
-            //System.Diagnostics.Debug.WriteLine("[" + Index + "] => Atlas " + Atlas + ", " + Bounds);
-        }
-    }
-
-    public virtual void Invalidate()
+    public void Invalidate()
     {
         Atlas = ushort.MaxValue;
     }
 
-    public virtual bool IsValid()
+    public bool IsValid()
     {
         return Atlas != ushort.MaxValue;
     }
 
-    protected abstract void GetBoundsFromTexture();
-    protected abstract void ApplyBoundDiffToTexture(int xDiff, int yDiff);
+    public override string ToString()
+    {
+        return Bounds.ToString();
+    }
 
-    public abstract TRTextileSegment Clone();
+    public TRTextileSegment Clone()
+    {
+        return new()
+        {
+            Index = Index,
+            Texture = Texture.Clone(),
+        };
+    }
+
+    object ICloneable.Clone()
+        => Clone();
 }

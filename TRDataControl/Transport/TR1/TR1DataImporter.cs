@@ -69,7 +69,7 @@ public class TR1DataImporter : TRDataImporter<TR1Type, TR1Level, TR1Blob>
 
         if (!IgnoreGraphics)
         {
-            _textureHandler.ResetUnusedTextures();
+            //_textureHandler.ResetUnusedTextures();
         }
     }
 }

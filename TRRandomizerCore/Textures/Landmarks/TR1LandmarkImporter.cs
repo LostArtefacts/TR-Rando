@@ -8,7 +8,7 @@ public class TR1LandmarkImporter : AbstractLandmarkImporter<TR1Type, TR1Level>
 {
     protected override int MaxTextures => IsCommunityPatch ? 8192 : 2048;
 
-    protected override TRTexturePacker<TR1Type, TR1Level> CreatePacker(TR1Level level)
+    protected override TRTexturePacker CreatePacker(TR1Level level)
     {
         return new TR1TexturePacker(level);
     }

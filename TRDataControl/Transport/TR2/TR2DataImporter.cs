@@ -64,7 +64,7 @@ public class TR2DataImporter : TRDataImporter<TR2Type, TR2Level, TR2Blob>
 
         if (!IgnoreGraphics)
         {
-            _textureHandler.ResetUnusedTextures();
+            //_textureHandler.ResetUnusedTextures();
         }
     }
 }

@@ -35,10 +35,14 @@ public static class SegmentExporter
     {
         foreach (TRTextile tile in tiles)
         {
-            foreach (TRTextileRegion texture in tile.Rectangles)
+            foreach (TRTextileRegion region in tile.Rectangles)
             {
-                bool isSprite = texture.FirstTexture is IndexedTRSpriteTexture;
-                texture.Image.Save(Path.Combine(folder, (isSprite ? "Sprite_" : "Object_") + texture.FirstTextureIndex + ".png"));
+                TRTextileSegment firstSegment = region.Segments.FirstOrDefault();
+                if (firstSegment != null)
+                {
+                    bool isSprite = firstSegment.Texture is TRSpriteTexture;
+                    region.Image.Save(Path.Combine(folder, (isSprite ? "Sprite_" : "Object_") + firstSegment.Index + ".png"));
+                }
             }
         }
     }

@@ -8,7 +8,7 @@ public class TR3LandmarkImporter : AbstractLandmarkImporter<TR3Type, TR3Level>
 {
     protected override int MaxTextures => 4096;
 
-    protected override TRTexturePacker<TR3Type, TR3Level> CreatePacker(TR3Level level)
+    protected override TRTexturePacker CreatePacker(TR3Level level)
     {
         return new TR3TexturePacker(level);
     }

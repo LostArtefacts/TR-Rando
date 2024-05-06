@@ -2,22 +2,18 @@
 
 namespace TRImageControl.Packing;
 
-public class TextureDependency<E> where E : Enum
+public class TextureDependency<T>
+    where T : Enum
 {
-    public List<E> Entities { get; set; }
+    public List<T> Types { get; set; } = new();
     public int TileIndex { get; set; }
     public Rectangle Bounds { get; set; }
 
-    public TextureDependency()
+    public void AddType(T type)
     {
-        Entities = new List<E>();
-    }
-
-    public void AddEntity(E entity)
-    {
-        if (!Entities.Contains(entity))
+        if (!Types.Contains(type))
         {
-            Entities.Add(entity);
+            Types.Add(type);
         }
     }
 }

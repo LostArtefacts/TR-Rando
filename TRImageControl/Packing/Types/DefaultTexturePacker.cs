@@ -6,17 +6,13 @@ namespace TRImageControl.Packing;
 
 public class DefaultTexturePacker : AbstractPacker<TRTextile, TRTextileRegion>
 {
-    public IReadOnlyList<TRTextileSegment> AllTextures => _allTextures;
-
-    private readonly List<TRTextileSegment> _allTextures;
-
     public DefaultTexturePacker()
     {
         TileWidth = TRConsts.TPageWidth;
         TileHeight = TRConsts.TPageHeight;
         MaximumTiles = 16;
 
-        Options = new PackingOptions
+        Options = new()
         {
             FillMode = PackingFillMode.Vertical,
             OrderMode = PackingOrderMode.Height,
@@ -24,7 +20,5 @@ public class DefaultTexturePacker : AbstractPacker<TRTextile, TRTextileRegion>
             GroupMode = PackingGroupMode.None,
             StartMethod = PackingStartMethod.EndTile
         };
-
-        _allTextures = new List<TRTextileSegment>();
     }
 }

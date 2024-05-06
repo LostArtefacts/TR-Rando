@@ -16,7 +16,7 @@ public class MassTR2TextureDeduplicator : AbstractMassTRTextureDeduplicator<TR2T
         _control = new();
     }
 
-    protected override TRTexturePacker<TR2Type, TR2Level> CreatePacker(TR2Level level)
+    protected override TRTexturePacker CreatePacker(TR2Level level)
     {
         return new TR2TexturePacker(level);
     }

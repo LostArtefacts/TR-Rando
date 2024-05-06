@@ -58,12 +58,14 @@ public class DynamicTextureBuilder
     public DynamicTextureTarget Build(TR1CombinedLevel level)
     {
         HashSet<int> defaultObjectTextures = new();
-        HashSet<int> defaultSpriteTextures = new();
         HashSet<int> enemyObjectTextures = new();
         HashSet<int> secretObjectTextures = new();
-        HashSet<int> secretSpriteTextures = new();
         HashSet<int> keyItemObjectTextures = new();
-        HashSet<int> keyItemSpriteTextures = new();
+        
+
+        HashSet<TRSpriteSequence> defaultSprites = new();
+        HashSet<TRSpriteSequence> secretSprites = new();
+        HashSet<TRSpriteSequence> keyItemSprites = new();
 
         HashSet<TRMesh> modelMeshes = new();
 
@@ -99,7 +101,7 @@ public class DynamicTextureBuilder
         // Collect standard sprite sequences
         foreach (TR1Type spriteID in _spriteIDs.Concat(roomSprites).Distinct())
         {
-            AddSpriteTextures(level.Data, spriteID, defaultSpriteTextures);
+            AddSpriteTextures(level.Data, spriteID, defaultSprites);
         }
 
         TRMesh hips = null;
@@ -181,21 +183,21 @@ public class DynamicTextureBuilder
                 if (LocationUtilities.SectorContainsSecret(sector, level.Data.FloorData))
                 {
                     AddModelTextures(level.Data, pickupType, model, hips, secretObjectTextures, modelMeshes);
-                    AddSpriteTextures(level.Data, pickupType, secretSpriteTextures);
+                    AddSpriteTextures(level.Data, pickupType, secretSprites);
                     continue;
                 }
             }
                 
             // Otherwise it's a regular key item
             AddModelTextures(level.Data, pickupType, model, hips, keyItemObjectTextures, modelMeshes);
-            AddSpriteTextures(level.Data, pickupType, keyItemSpriteTextures);
+            AddSpriteTextures(level.Data, pickupType, keyItemSprites);
         }
 
         // Put it all together into the required format for texture re-mapping.
         TR1TexturePacker packer = new(level.Data);
         Dictionary<int, List<Rectangle>> defaultMapping = new();
-        AddSegmentsToMapping(packer.GetObjectTextureSegments(defaultObjectTextures), defaultMapping);
-        AddSegmentsToMapping(packer.GetSpriteTextureSegments(defaultSpriteTextures), defaultMapping);
+        AddSegmentsToMapping(packer.GetObjectRegions(defaultObjectTextures), defaultMapping);
+        AddSegmentsToMapping(packer.GetSpriteRegions(defaultSprites), defaultMapping);
 
         Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>> optionalMapping = new()
         {
@@ -203,11 +205,11 @@ public class DynamicTextureBuilder
             [TextureCategory.Secret] = new Dictionary<int, List<Rectangle>>(),
             [TextureCategory.KeyItem] = new Dictionary<int, List<Rectangle>>()
         };
-        AddSegmentsToMapping(packer.GetObjectTextureSegments(enemyObjectTextures), optionalMapping[TextureCategory.Enemy]);
-        AddSegmentsToMapping(packer.GetObjectTextureSegments(secretObjectTextures), optionalMapping[TextureCategory.Secret]);
-        AddSegmentsToMapping(packer.GetSpriteTextureSegments(secretSpriteTextures), optionalMapping[TextureCategory.Secret]);
-        AddSegmentsToMapping(packer.GetObjectTextureSegments(keyItemObjectTextures), optionalMapping[TextureCategory.KeyItem]);
-        AddSegmentsToMapping(packer.GetSpriteTextureSegments(keyItemSpriteTextures), optionalMapping[TextureCategory.KeyItem]);
+        AddSegmentsToMapping(packer.GetObjectRegions(enemyObjectTextures), optionalMapping[TextureCategory.Enemy]);
+        AddSegmentsToMapping(packer.GetObjectRegions(secretObjectTextures), optionalMapping[TextureCategory.Secret]);
+        AddSegmentsToMapping(packer.GetSpriteRegions(secretSprites), optionalMapping[TextureCategory.Secret]);
+        AddSegmentsToMapping(packer.GetObjectRegions(keyItemObjectTextures), optionalMapping[TextureCategory.KeyItem]);
+        AddSegmentsToMapping(packer.GetSpriteRegions(keyItemSprites), optionalMapping[TextureCategory.KeyItem]);
 
         return new DynamicTextureTarget
         {
@@ -309,7 +311,7 @@ public class DynamicTextureBuilder
         // Collect all texture pointers from each face in the mesh.
         IEnumerable<int> textures = mesh.TexturedRectangles.Select(f => (int)f.Texture);
         textures = textures.Concat(mesh.TexturedTriangles.Select(f => (int)f.Texture));
-        Dictionary<TRTextile, List<TRTextileRegion>> segments = packer.GetObjectTextureSegments(textures.ToHashSet());
+        Dictionary<TRTextile, List<TRTextileRegion>> segments = packer.GetObjectRegions(textures.ToHashSet());
 
         // Clone each segment ready for packing.
         List<TRTextileRegion> duplicates = new();
@@ -325,33 +327,30 @@ public class DynamicTextureBuilder
         // Map the packed segments to object textures.
         Queue<int> reusableIndices = new(level.GetInvalidObjectTextureIndices());
         Dictionary<int, int> reindex = new();
-        foreach (TRTextileRegion segment in duplicates)
+        foreach (TRTextileSegment segment in duplicates.SelectMany(r => r.Segments))
         {
-            foreach (TRTextileSegment texture in segment.Textures)
+            if (segment.Texture is not TRObjectTexture objTexture)
             {
-                if (texture is not IndexedTRObjectTexture objTexture)
-                {
-                    continue;
-                }
-
-                int newIndex;
-                if (reusableIndices.Count > 0)
-                {
-                    newIndex = reusableIndices.Dequeue();
-                    level.ObjectTextures[newIndex] = objTexture.Texture;
-                }
-                else if (level.ObjectTextures.Count < maximumObjects)
-                {
-                    level.ObjectTextures.Add(objTexture.Texture);
-                    newIndex = level.ObjectTextures.Count - 1;
-                }
-                else
-                {
-                    throw new PackingException(string.Format("Limit of {0} textures reached.", maximumObjects));
-                }
-
-                reindex[objTexture.Index] = newIndex;
+                continue;
             }
+
+            int newIndex;
+            if (reusableIndices.Count > 0)
+            {
+                newIndex = reusableIndices.Dequeue();
+                level.ObjectTextures[newIndex] = objTexture;
+            }
+            else if (level.ObjectTextures.Count < maximumObjects)
+            {
+                level.ObjectTextures.Add(objTexture);
+                newIndex = level.ObjectTextures.Count - 1;
+            }
+            else
+            {
+                throw new PackingException(string.Format("Limit of {0} textures reached.", maximumObjects));
+            }
+
+            reindex[segment.Index] = newIndex;
         }
 
         // Remap the mesh's faces.
@@ -371,21 +370,11 @@ public class DynamicTextureBuilder
         }
     }
 
-    private static void AddSpriteTextures(TR1Level level, TR1Type spriteID, ISet<int> textures)
+    private static void AddSpriteTextures(TR1Level level, TR1Type spriteID, ISet<TRSpriteSequence> sprites)
     {
-        // Temporary until texture packing doesn't need index references
-        int offset = 0;
-        foreach (var (type, sequence) in level.Sprites)
+        if (level.Sprites.ContainsKey(spriteID))
         {
-            if (type == spriteID)
-            {
-                for (int i = 0; i < sequence.Textures.Count; i++)
-                {
-                    textures.Add(offset + i);
-                }
-                return;
-            }
-            offset += sequence.Textures.Count;
+            sprites.Add(level.Sprites[spriteID]);
         }
     }
 
