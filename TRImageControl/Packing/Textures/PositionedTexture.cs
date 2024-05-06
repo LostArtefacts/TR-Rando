@@ -4,15 +4,15 @@ namespace TRImageControl.Packing;
 
 public class PositionedTexture
 {
-    private readonly TRTextileSegment _texture;
+    private readonly TRTextileSegment _segment;
 
-    public int OriginalIndex => _texture.Index;
-    public int TileIndex => _texture.Atlas;
-    public Point Position => new(_texture.Bounds.X, _texture.Bounds.Y);
-    public Rectangle Bounds => _texture.Bounds;
+    public int OriginalIndex => _segment.Index;
+    public int TileIndex => _segment.Atlas;
+    public Point Position => new(_segment.Bounds.X, _segment.Bounds.Y);
+    public Rectangle Bounds => _segment.Bounds;
 
-    public PositionedTexture(TRTextileSegment texture)
+    public PositionedTexture(TRTextileSegment segment)
     {
-        _texture = texture;
+        _segment = segment;
     }
 }

@@ -599,11 +599,12 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             List<int> faces = new() { 5, 6, 7 };
             foreach (int face in faces)
             {
-                Dictionary<TRTextile, List<TRTextileRegion>> segments = packer.GetObjectRegions(lara[0].TexturedRectangles[face].Texture);
-                foreach (TRTextile tile in segments.Keys)
+                // Rename all vars like this
+                Dictionary<TRTextile, List<TRTextileRegion>> regions = packer.GetObjectRegions(lara[0].TexturedRectangles[face].Texture);
+                foreach (TRTextile tile in regions.Keys)
                 {
                     int index = -1;
-                    Rectangle rect = segments[tile].First().Bounds;
+                    Rectangle rect = regions[tile].First().Bounds;
                     tile.Image.Read(rect, (c, x, y) =>
                     {
                         if (y - rect.Y < 2 || face == 7)

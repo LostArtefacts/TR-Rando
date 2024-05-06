@@ -50,13 +50,13 @@ public class EMCreateTextureFunction : BaseEMFunction
 
         foreach (EMTextureData data in Data)
         {
-            TRTextileSegment indexedTexture = new()
+            TRTextileSegment indexedSegment = new()
             {
                 Index = data.Background,
                 Texture = textures[data.Background]
             };
-            TRImage tile = packer.Tiles[indexedTexture.Atlas].Image;
-            TRImage clip = tile.Export(indexedTexture.Bounds);
+            TRImage tile = packer.Tiles[indexedSegment.Atlas].Image;
+            TRImage clip = tile.Export(indexedSegment.Bounds);
             clip.Overlay(new(data.Overlay));
 
             TRTextileSegment segment = new()

@@ -39,15 +39,15 @@ public abstract class AbstractTextureRemapGroup<T, L>
                     }
 
                     List<TRTextileRegion> matches = regions.FindAll(s1 => otherRegions[tile].Any(s2 => s1 == s2));
-                    foreach (TRTextileRegion matchedSegment in matches)
+                    foreach (TRTextileRegion matchedRegion in matches)
                     {
-                        TextureDependency<T> dependency = GetDependency(tile.Index, matchedSegment.Bounds);
+                        TextureDependency<T> dependency = GetDependency(tile.Index, matchedRegion.Bounds);
                         if (dependency == null)
                         {
                             dependency = new()
                             {
                                 TileIndex = tile.Index,
-                                Bounds = matchedSegment.Bounds
+                                Bounds = matchedRegion.Bounds
                             };
                             Dependencies.Add(dependency);
                         }
