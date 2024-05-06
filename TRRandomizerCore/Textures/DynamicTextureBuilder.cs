@@ -4,7 +4,6 @@ using TRImageControl.Packing;
 using TRImageControl.Textures;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRModelTransporter.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Utilities;
 

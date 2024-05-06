@@ -1,4 +1,4 @@
-﻿namespace TRModelTransporter.Transport;
+﻿namespace TRDataControl;
 
 public class TransportException : Exception
 {

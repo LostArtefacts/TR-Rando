@@ -1,7 +1,7 @@
 ﻿using TRImageControl.Packing;
 using TRLevelControl.Model;
 
-namespace TRDataControl.Remapping;
+namespace TRDataControl;
 
 public abstract class TRTextureRemapper<L>
     where L : TRLevelBase

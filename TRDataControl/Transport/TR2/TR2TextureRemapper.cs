@@ -1,7 +1,7 @@
 ﻿using TRImageControl.Packing;
 using TRLevelControl.Model;
 
-namespace TRDataControl.Remapping;
+namespace TRDataControl;
 
 public class TR2TextureRemapper : TRTextureRemapper<TR2Level>
 {

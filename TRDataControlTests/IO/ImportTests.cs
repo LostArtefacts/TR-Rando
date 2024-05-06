@@ -108,6 +108,24 @@ public class ImportTests : TestBase
         Assert.IsTrue(level.Models.ContainsKey(TR5Type.Huskie));
     }
 
+    [TestMethod]
+    [Description("Test that importing a non-specific type that has aliases fails.")]
+    public void TestAliasImport()
+    {
+        TR2DataImporter importer = new()
+        {
+            Level = GetTR2TestLevel(),
+            TypesToImport = new() { TR2Type.StickWieldingGoon1 },
+        };
+
+        try
+        {
+            importer.Import();
+            Assert.Fail();
+        }
+        catch (TransportException) { }
+    }
+
     private static void ExportTR1Model(TR1Type type, TRBlobType blobType)
     {
         TR1Level level = GetTR1TestLevel();

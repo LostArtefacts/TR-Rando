@@ -151,7 +151,6 @@ public class ExportTests : TestBase
     }
 
     [TestMethod]
-    [TestCategory("Model")]
     [Description("Test creating a TR4 model export.")]
     public void TestTR4ExportProperties()
     {
@@ -174,7 +173,6 @@ public class ExportTests : TestBase
     }
 
     [TestMethod]
-    [TestCategory("Model")]
     [Description("Test TR4 model export IO.")]
     public void TestTR4ExportIO()
     {

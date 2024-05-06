@@ -1,6 +1,6 @@
 ﻿using TRLevelControl.Model;
 
-namespace TRDataControl.Utils;
+namespace TRDataControl;
 
 public abstract class TRMassExporter<L, T, S, B>
     where L : TRLevelBase
