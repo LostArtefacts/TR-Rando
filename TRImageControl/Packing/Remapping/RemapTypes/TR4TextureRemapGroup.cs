@@ -2,7 +2,7 @@
 
 namespace TRImageControl.Packing;
 
-public class TR4TextureRemapGroup : AbstractTextureRemapGroup<TR4Type, TR4Level>
+public class TR4TextureRemapGroup : TRTextureRemapGroup<TR4Type, TR4Level>
 {
     protected override TRTexturePacker CreatePacker(TR4Level level)
         => new TR4TexturePacker(level, TRGroupPackingMode.All);

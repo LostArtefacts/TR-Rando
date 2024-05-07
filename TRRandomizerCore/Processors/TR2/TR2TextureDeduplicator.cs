@@ -1,6 +1,10 @@
-﻿using TRRandomizerCore.Levels;
+﻿using Newtonsoft.Json;
+using TRDataControl;
 using TRGE.Core;
+using TRImageControl.Packing;
+using TRLevelControl.Model;
 using TRModelTransporter.Utilities;
+using TRRandomizerCore.Levels;
 
 namespace TRRandomizerCore.Processors;
 
@@ -8,7 +12,7 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
 {
     public void Deduplicate()
     {
-        List<DeduplicationProcessor> processors = new() { new DeduplicationProcessor(this) };
+        List<DeduplicationProcessor> processors = new() { new(this) };
         int levelSplit = (int)(Levels.Count / _maxThreads);
 
         bool beginProcessing = true;
@@ -18,7 +22,7 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
             {
                 // Kick start the last one
                 processors[^1].Start();
-                processors.Add(new DeduplicationProcessor(this));
+                processors.Add(new(this));
             }
 
             processors[^1].AddLevel(LoadCombinedLevel(lvl));
@@ -49,15 +53,13 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
     internal class DeduplicationProcessor : AbstractProcessorThread<TR2TextureDeduplicator>
     {
         private readonly List<TR2CombinedLevel> _levels;
-        private readonly TR2LevelTextureDeduplicator _deduplicator;
 
         internal override int LevelCount => _levels.Count;
 
         internal DeduplicationProcessor(TR2TextureDeduplicator outer)
             :base(outer)
         {
-            _levels = new List<TR2CombinedLevel>();
-            _deduplicator = new TR2LevelTextureDeduplicator();
+            _levels = new();
         }
 
         internal void AddLevel(TR2CombinedLevel level)
@@ -69,11 +71,32 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
         {
             foreach (TR2CombinedLevel level in _levels)
             {
-                string dedupPath = _outer.GetResourcePath(@"TR2\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json");
+                string dedupPath = _outer.GetResourcePath($@"TR2\Textures\Deduplication\{level.JsonID}-TextureRemap.json");
                 if (File.Exists(dedupPath))
                 {
-                    _deduplicator.Level = level.Data;
-                    _deduplicator.Deduplicate(dedupPath);
+                    TR2TexturePacker levelPacker = new(level.Data);
+                    Dictionary<TRTextile, List<TRTextileRegion>> allTextures = new();
+                    foreach (TRTextile tile in levelPacker.Tiles)
+                    {
+                        allTextures[tile] = new List<TRTextileRegion>(tile.Rectangles);
+                    }
+
+                    TR2TextureRemapGroup remapGroup = JsonConvert.DeserializeObject<TR2TextureRemapGroup>(File.ReadAllText(dedupPath));
+                    TRTextureDeduplicator<TR2Type> deduplicator = new()
+                    {
+                        UpdateGraphics = true,
+                        SegmentMap = allTextures,
+                        PrecompiledRemapping = remapGroup.Remapping,
+                    };
+
+                    deduplicator.Deduplicate();
+
+                    levelPacker.AllowEmptyPacking = true;
+                    levelPacker.Pack(true);
+
+                    TR2TextureRemapper remapper = new(level.Data);
+                    remapper.ResetUnusedTextures();
+                    remapper.Remap();
 
                     _outer.SaveLevel(level);
                 }

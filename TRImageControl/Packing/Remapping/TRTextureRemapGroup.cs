@@ -3,7 +3,7 @@ using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public abstract class AbstractTextureRemapGroup<T, L> 
+public abstract class TRTextureRemapGroup<T, L> 
     where T : Enum
     where L : TRLevelBase
 {
