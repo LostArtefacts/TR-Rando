@@ -80,11 +80,11 @@ public class EMEntityPropertyCondition : BaseEMCondition
         bool result = true;
         if (EntityType.HasValue)
         {
-            result &= EqualityComparer<T>.Default.Equals(entity.TypeID, (T)(object)(int)EntityType.Value);
+            result &= EqualityComparer<T>.Default.Equals(entity.TypeID, (T)(object)(uint)EntityType.Value);
         }
         if (EntityTypes != null)
         {
-            result &= EntityTypes.Any(e => EqualityComparer<T>.Default.Equals(entity.TypeID, (T)(object)(int)e));
+            result &= EntityTypes.Any(e => EqualityComparer<T>.Default.Equals(entity.TypeID, (T)(object)(uint)e));
         }
         if (Invisible.HasValue)
         {

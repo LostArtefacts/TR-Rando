@@ -297,7 +297,7 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
         staleTextures = new(staleTextures.Distinct());
         if (staleTextures.Count > 0)
         {
-            AbstractTextureRemapGroup<T, L> remapGroup = TextureRemapPath == null ? null : GetRemapGroup();
+            TRTextureRemapGroup<T, L> remapGroup = TextureRemapPath == null ? null : GetRemapGroup();
             CreateRemapper(Level)?.RemoveUnusedTextures(staleTextures,
                 (tile, bounds) => remapGroup?.CanRemoveRectangle(tile, bounds, TypesToRemove) ?? true);
         }
@@ -349,7 +349,7 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
                 if (Level.ObjectTextures.Count >= Data.TextureObjectLimit)
                 {
-                    throw new TransportException($"Limit of {Data.TextureObjectLimit} textures reached.");
+                    throw new PackingException($"Limit of {Data.TextureObjectLimit} textures reached.");
                 }
 
                 globalRemap[region.ID][segment.Index] = Level.ObjectTextures.Count;
@@ -513,5 +513,5 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
     protected abstract void ImportSound(B blob);
 
     protected abstract List<T> GetExistingTypes();
-    protected abstract AbstractTextureRemapGroup<T, L> GetRemapGroup();
+    protected abstract TRTextureRemapGroup<T, L> GetRemapGroup();
 }

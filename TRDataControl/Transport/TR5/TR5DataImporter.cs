@@ -17,7 +17,7 @@ public class TR5DataImporter : TRDataImporter<TR5Level, TR5Type, TR5SFX, TR5Blob
     protected override TRTextureRemapper<TR5Level> CreateRemapper(TR5Level level)
         => new TR5TextureRemapper(level);
 
-    protected override AbstractTextureRemapGroup<TR5Type, TR5Level> GetRemapGroup()
+    protected override TRTextureRemapGroup<TR5Type, TR5Level> GetRemapGroup()
         => JsonConvert.DeserializeObject<TR5TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
 
     protected override bool IsMasterType(TR5Type type)

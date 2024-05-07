@@ -32,7 +32,7 @@ public class TR1DataImporter : TRDataImporter<TR1Level, TR1Type, TR1SFX, TR1Blob
     protected override TRTextureRemapper<TR1Level> CreateRemapper(TR1Level level)
         => new TR1TextureRemapper(level);
 
-    protected override AbstractTextureRemapGroup<TR1Type, TR1Level> GetRemapGroup()
+    protected override TRTextureRemapGroup<TR1Type, TR1Level> GetRemapGroup()
         => JsonConvert.DeserializeObject<TR1TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
 
     protected override bool IsMasterType(TR1Type type)
