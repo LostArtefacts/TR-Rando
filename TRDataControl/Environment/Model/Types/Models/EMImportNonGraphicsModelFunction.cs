@@ -19,7 +19,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             Level = level,
             ClearUnusedSprites = false,
             TypesToImport = new(data.Select(m => (TR1Type)m.ModelID)),
-            DataFolder = @"Resources\TR1\Models",
+            DataFolder = @"Resources\TR1\Objects",
             IgnoreGraphics = true
         };
         importer.Import();
@@ -40,7 +40,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             Level = level,
             ClearUnusedSprites = false,
             TypesToImport = new(data.Select(m => (TR2Type)m.ModelID)),
-            DataFolder = @"Resources\TR2\Models",
+            DataFolder = @"Resources\TR2\Objects",
             IgnoreGraphics = true
         };
         importer.Import();
@@ -61,7 +61,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             Level = level,
             ClearUnusedSprites = false,
             TypesToImport = new(data.Select(m => (TR3Type)m.ModelID)),
-            DataFolder = @"Resources\TR3\Models",
+            DataFolder = @"Resources\TR3\Objects",
             IgnoreGraphics = true
         };
         importer.Import();

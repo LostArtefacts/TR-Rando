@@ -733,7 +733,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                         TypesToRemove = enemies.EntitiesToRemove,
                         Level = level.Data,
                         LevelName = level.Name,
-                        DataFolder = _outer.GetResourcePath(@"TR3\Models"),
+                        DataFolder = _outer.GetResourcePath(@"TR3\Objects"),
                         //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                     };
 

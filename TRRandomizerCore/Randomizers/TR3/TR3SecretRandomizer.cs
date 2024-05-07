@@ -752,7 +752,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         Level = level.Data,
                         LevelName = level.Name,
                         TypesToImport = allocation.ImportModels,
-                        DataFolder = _outer.GetResourcePath(@"TR3\Models"),
+                        DataFolder = _outer.GetResourcePath(@"TR3\Objects"),
                         //TexturePositionMonitor = monitor
                     };
                     importer.Import();

@@ -1375,7 +1375,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         TypesToRemove = enemies.EntitiesToRemove,
                         Level = level.Data,
                         LevelName = level.Name,
-                        DataFolder = _outer.GetResourcePath(@"TR1\Models"),
+                        DataFolder = _outer.GetResourcePath(@"TR1\Objects"),
                         //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                     };
 

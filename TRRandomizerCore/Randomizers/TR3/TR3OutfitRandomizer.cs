@@ -234,7 +234,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
                 TypesToImport = laraImport,
                 TypesToRemove = laraRemovals,
                 //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, laraImport),
-                DataFolder = _outer.GetResourcePath(@"TR3\Models")
+                DataFolder = _outer.GetResourcePath(@"TR3\Objects")
             };
 
             string remapPath = @"TR3\Textures\Deduplication\" + level.Name + "-TextureRemap.json";

@@ -306,7 +306,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 ClearUnusedSprites = false,
                 TypesToImport = _ponytailEntities,
                 //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, _ponytailEntities),
-                DataFolder = _outer.GetResourcePath(@"TR1\Models")
+                DataFolder = _outer.GetResourcePath(@"TR1\Objects")
             };
 
             string remapPath = _outer.GetResourcePath(@"TR1\Textures\Deduplication\" + level.Name + "-TextureRemap.json");
@@ -699,7 +699,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 LevelName = level.Name,
                 ClearUnusedSprites = false,
                 TypesToImport = new List<TR1Type> { TR1Type.LaraMiscAnim_H_General },
-                DataFolder = _outer.GetResourcePath(@"TR1\Models")
+                DataFolder = _outer.GetResourcePath(@"TR1\Objects")
             };
 
             string remapPath = _outer.GetResourcePath($@"TR1\Textures\Deduplication\{level.Name}-TextureRemap.json");
@@ -881,7 +881,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                     ClearUnusedSprites = false,
                     TypesToImport = _mauledEntities,
                     //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.CutSceneLevel.Name, _mauledEntities),
-                    DataFolder = _outer.GetResourcePath(@"TR1\Models")
+                    DataFolder = _outer.GetResourcePath(@"TR1\Objects")
                 };
 
                 string remapPath = _outer.GetResourcePath(@"TR1\Textures\Deduplication\" + level.CutSceneLevel.Name + "-TextureRemap.json");

@@ -244,7 +244,7 @@ public class DynamicTextureBuilder
         {                
             TR1Blob adam = new TR1DataImporter
             {
-                DataFolder = @"Resources\TR1\Models"
+                DataFolder = @"Resources\TR1\Objects"
             }.LoadBlob(modelID);
 
             if (model.Meshes[3].CollRadius != adam.Model.Meshes[3].CollRadius)

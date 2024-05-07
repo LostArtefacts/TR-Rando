@@ -1034,7 +1034,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                     TypesToRemove = enemies.EntitiesToRemove,
                     Level = level.Data,
                     LevelName = level.Name,
-                    DataFolder = _outer.GetResourcePath(@"TR2\Models"),
+                    DataFolder = _outer.GetResourcePath(@"TR2\Objects"),
                     TextureRemapPath = _outer.GetResourcePath(@"TR2\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json"),
                     //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                 };
@@ -1045,9 +1045,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 importer.Import();
                 return true;
             }
-            catch (PackingException/* e*/)
+            catch (PackingException)
             {
-                //System.Diagnostics.Debug.WriteLine(level.Name + ": " + e.Message);
                 // We need to reload the level to undo anything that may have changed.
                 _outer.ReloadLevelData(level);
                 // Tell the monitor to no longer track what we tried to import
