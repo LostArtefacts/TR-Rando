@@ -10,4 +10,7 @@ public class TR5TextureRemapper : TRTextureRemapper<TR5Level>
 
     protected override TRTexturePacker CreatePacker()
         => new TR5TexturePacker(_level, TRGroupPackingMode.Object, 32);
+
+    public TR5TextureRemapper(TR5Level level)
+        : base(level) { }
 }

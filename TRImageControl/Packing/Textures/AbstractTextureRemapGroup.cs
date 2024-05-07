@@ -66,37 +66,13 @@ public abstract class AbstractTextureRemapGroup<T, L>
 
     public TextureDependency<T> GetDependency(int tileIndex, Rectangle rectangle)
     {
-        foreach (TextureDependency<T> dependency in Dependencies)
-        {
-            if (dependency.TileIndex == tileIndex && dependency.Bounds == rectangle)
-            {
-                return dependency;
-            }
-        }
-        return null;
+        return Dependencies.Find(d => d.TileIndex == tileIndex && d.Bounds == rectangle);
     }
 
-    public TextureDependency<T> GetDependency(int tileIndex, Rectangle rectangle, IEnumerable<T> entities)
+    public bool CanRemoveRectangle(int tileIndex, Rectangle rectangle, IEnumerable<T> types)
     {
-        foreach (TextureDependency<T> dependency in Dependencies)
-        {
-            if (dependency.TileIndex == tileIndex && dependency.Bounds == rectangle && dependency.Types.All(e => entities.Contains(e)))
-            {
-                return dependency;
-            }
-        }
-        return null;
-    }
-
-    public bool CanRemoveRectangle(int tileIndex, Rectangle rectangle, IEnumerable<T> entities)
-    {
-        // Is there a dependency for the given rectangle?
+        // The rectangle can be removed if all of the types that use it are being removed
         TextureDependency<T> dependency = GetDependency(tileIndex, rectangle);
-        if (dependency != null)
-        {
-            // The rectangle can be removed if all of the entities match the dependency
-            return dependency.Types.All(e => entities.Contains(e));
-        }
-        return true;
+        return dependency?.Types.All(types.Contains) ?? true;
     }
 }

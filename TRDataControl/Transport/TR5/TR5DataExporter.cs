@@ -22,8 +22,8 @@ public class TR5DataExporter : TRDataExporter<TR5Level, TR5Type, TR5SFX, TR5Blob
         };
     }
 
-    protected override TRTextureRemapper<TR5Level> CreateRemapper()
-        => new TR5TextureRemapper();
+    protected override TRTextureRemapper<TR5Level> CreateRemapper(TR5Level level)
+        => new TR5TextureRemapper(level);
 
     protected override bool IsMasterType(TR5Type type)
         => type == TR5Type.Lara;

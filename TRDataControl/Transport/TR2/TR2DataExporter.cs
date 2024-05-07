@@ -25,8 +25,8 @@ public class TR2DataExporter : TRDataExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         };
     }
 
-    protected override TRTextureRemapper<TR2Level> CreateRemapper()
-        => new TR2TextureRemapper();
+    protected override TRTextureRemapper<TR2Level> CreateRemapper(TR2Level level)
+        => new TR2TextureRemapper(level);
 
     protected override bool IsMasterType(TR2Type type)
         => type == TR2Type.Lara;

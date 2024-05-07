@@ -10,4 +10,7 @@ public class TR3TextureRemapper : TRTextureRemapper<TR3Level>
 
     protected override TRTexturePacker CreatePacker()
         => new TR3TexturePacker(_level, 32);
+
+    public TR3TextureRemapper(TR3Level level)
+        : base(level) { }
 }

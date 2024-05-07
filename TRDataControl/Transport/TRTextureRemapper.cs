@@ -1,4 +1,5 @@
-﻿using TRImageControl.Packing;
+﻿using System.Drawing;
+using TRImageControl.Packing;
 using TRLevelControl.Model;
 
 namespace TRDataControl;
@@ -6,17 +7,29 @@ namespace TRDataControl;
 public abstract class TRTextureRemapper<L>
     where L : TRLevelBase
 {
-    protected L _level;
+    protected readonly L _level;
 
-    protected abstract TRTexturePacker CreatePacker();
     public abstract IEnumerable<TRFace> RoomFaces { get; }
 
     public IEnumerable<TRFace> AllFaces
         => RoomFaces.Concat(_level.DistinctMeshes.SelectMany(m => m.TexturedFaces));
 
-    public void Remap(L level)
+    public TRTextureRemapper(L level)
+        => _level = level;
+
+    protected abstract TRTexturePacker CreatePacker();
+
+    public void RemoveUnusedTextures(List<int> textures, Func<int, Rectangle, bool> removalCheck = null)
     {
-        _level = level;
+        TRTexturePacker packer = CreatePacker();
+        packer.RemoveObjectRegions(textures, removalCheck);
+        packer.Pack(true);
+
+        ResetUnusedTextures();
+    }
+
+    public void Remap()
+    {
         TRTexturePacker packer = CreatePacker();
 
         Dictionary<TRTextileRegion, int> regionToTileMap = new();
@@ -63,7 +76,7 @@ public abstract class TRTextureRemapper<L>
         }
 
         // Group each object texture
-        IEnumerable<List<TRObjectTexture>> groupedTextures = level.ObjectTextures.GroupBy(t => Hash(t))
+        IEnumerable<List<TRObjectTexture>> groupedTextures = _level.ObjectTextures.GroupBy(t => Hash(t))
             .Where(g => g.Count() > 1)
             .Select(g => g.ToList());
 
@@ -71,52 +84,50 @@ public abstract class TRTextureRemapper<L>
         Dictionary<int, int> remap = new();
         foreach (List<TRObjectTexture> copies in groupedTextures)
         {
-            int rootIndex = level.ObjectTextures.IndexOf(copies[0]);
+            int rootIndex = _level.ObjectTextures.IndexOf(copies[0]);
             for (int i = 1; i < copies.Count; i++)
             {
-                int j = level.ObjectTextures.IndexOf(copies[i]);
+                int j = _level.ObjectTextures.IndexOf(copies[i]);
                 remap[j] = rootIndex;
-                level.ObjectTextures[j].Atlas = ushort.MaxValue;
+                _level.ObjectTextures[j].Atlas = ushort.MaxValue;
             }
         }
 
         // Update all faces
-        RemapTextures(level, remap);
+        RemapTextures(remap);
 
-        ResetUnusedTextures(_level);
+        ResetUnusedTextures();
     }
 
-    public void ResetUnusedTextures(L level)
+    public void ResetUnusedTextures()
     {
-        _level = level;
-
         // Find every unused object texture and null it
-        IEnumerable<int> allIndices = Enumerable.Range(0, level.ObjectTextures.Count);
+        IEnumerable<int> allIndices = Enumerable.Range(0, _level.ObjectTextures.Count);
         IEnumerable<int> usedIndices = AllFaces.Select(f => (int)f.Texture)
-            .Concat(level.AnimatedTextures.SelectMany(a => a.Textures.Select(t => (int)t)))
+            .Concat(_level.AnimatedTextures.SelectMany(a => a.Textures.Select(t => (int)t)))
             .Distinct();
         foreach (int unused in allIndices.Except(usedIndices))
         {
-            level.ObjectTextures[unused].Atlas = ushort.MaxValue;
+            _level.ObjectTextures[unused].Atlas = ushort.MaxValue;
         }
 
         // Remap all indices after deleting the nulls
         Dictionary<int, int> remap = new();
-        List<TRObjectTexture> oldTextures = new(level.ObjectTextures);
-        level.ObjectTextures.RemoveAll(o => o.Atlas == ushort.MaxValue);
+        List<TRObjectTexture> oldTextures = new(_level.ObjectTextures);
+        _level.ObjectTextures.RemoveAll(o => o.Atlas == ushort.MaxValue);
         for (int i = 0; i < oldTextures.Count; i++)
         {
             if (oldTextures[i].Atlas != ushort.MaxValue)
             {
-                remap[i] = level.ObjectTextures.IndexOf(oldTextures[i]);
+                remap[i] = _level.ObjectTextures.IndexOf(oldTextures[i]);
             }
         }
 
         // Update all faces
-        RemapTextures(level, remap);
+        RemapTextures(remap);
     }
 
-    private void RemapTextures(L level, Dictionary<int, int> remap)
+    private void RemapTextures(Dictionary<int, int> remap)
     {
         foreach (TRFace face in AllFaces)
         {
@@ -126,7 +137,7 @@ public abstract class TRTextureRemapper<L>
             }
         }
 
-        foreach (TRAnimatedTexture t in level.AnimatedTextures)
+        foreach (TRAnimatedTexture t in _level.AnimatedTextures)
         {
             for (int i = 0; i < t.Textures.Count; i++)
             {

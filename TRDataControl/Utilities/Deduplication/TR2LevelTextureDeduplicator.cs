@@ -10,8 +10,8 @@ public class TR2LevelTextureDeduplicator : AbstractTRLevelTextureDeduplicator<TR
     protected override TRTexturePacker CreatePacker(TR2Level level)
         => new TR2TexturePacker(level);
 
-    protected override TRTextureRemapper<TR2Level> CreateRemapper()
-        => new TR2TextureRemapper();
+    protected override TRTextureRemapper<TR2Level> CreateRemapper(TR2Level level)
+        => new TR2TextureRemapper(level);
 
     protected override AbstractTextureRemapGroup<TR2Type, TR2Level> GetRemapGroup(string path)
         => JsonConvert.DeserializeObject<TR2TextureRemapGroup>(File.ReadAllText(path));

@@ -1,6 +1,7 @@
 ﻿using RectanglePacker;
 using RectanglePacker.Events;
 using RectanglePacker.Organisation;
+using System.Drawing;
 using TRLevelControl;
 using TRLevelControl.Model;
 
@@ -117,14 +118,17 @@ public abstract class TRTexturePacker : AbstractPacker<TRTextile, TRTextileRegio
         return regionMap;
     }
 
-    public void RemoveObjectRegions(IEnumerable<int> indices)
+    public void RemoveObjectRegions(IEnumerable<int> indices, Func<int, Rectangle, bool> removalCheck = null)
     {
         foreach (TRTextile tile in _tiles)
         {
             List<TRTextileRegion> regions = tile.GetObjectRegions(indices);
             for (int i = 0; i < regions.Count; i++)
             {
-                tile.Remove(regions[i]);
+                if (removalCheck?.Invoke(tile.Index, regions[i].Bounds) ?? true)
+                {
+                    tile.Remove(regions[i]);
+                }
             }
         }
     }

@@ -23,8 +23,8 @@ public class TR3DataExporter : TRDataExporter<TR3Level, TR3Type, TR3SFX, TR3Blob
         };
     }
 
-    protected override TRTextureRemapper<TR3Level> CreateRemapper()
-        => new TR3TextureRemapper();
+    protected override TRTextureRemapper<TR3Level> CreateRemapper(TR3Level level)
+        => new TR3TextureRemapper(level);
 
     protected override bool IsMasterType(TR3Type type)
         => type == TR3Type.Lara;

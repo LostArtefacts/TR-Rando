@@ -94,6 +94,10 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
                 {
                     entityClean = false;
                 }
+
+                // And similarly for cyclic dependencies
+                IEnumerable<T> cyclics = Data.GetCyclicDependencies(type);
+                entityClean = cyclics.All(TypesToRemove.Contains);
             }
 
             if (entityClean)
@@ -266,7 +270,7 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
     protected void RemoveData()
     {
-        bool removed = false;
+        List<int> staleTextures = new();
         foreach (T type in TypesToRemove)
         {
             T id = Data.TranslateAlias(type);
@@ -274,21 +278,28 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
             switch (blobType)
             {
                 case TRBlobType.Model:
-                    removed |= Models.Remove(id);
+                    staleTextures.AddRange(Models[type].Meshes
+                        .SelectMany(m => m.TexturedFaces.Select(t => (int)t.Texture)));
+                    Models.Remove(id);
                     break;
+
                 case TRBlobType.StaticMesh:
-                    removed |= StaticMeshes.Remove(id);
+                    staleTextures.AddRange(StaticMeshes[type].Mesh.TexturedFaces.Select(t => (int)t.Texture));
+                    StaticMeshes.Remove(id);
                     break;
+
                 case TRBlobType.Sprite:
-                    removed |= SpriteSequences.Remove(id);
+                    SpriteSequences.Remove(id);
                     break;
             }
         }
 
-        if (removed)
+        staleTextures = new(staleTextures.Distinct());
+        if (staleTextures.Count > 0)
         {
-            // Clear unused textures
-            CreateRemapper()?.Remap(Level);
+            AbstractTextureRemapGroup<T, L> remapGroup = TextureRemapPath == null ? null : GetRemapGroup();
+            CreateRemapper(Level)?.RemoveUnusedTextures(staleTextures,
+                (tile, bounds) => remapGroup?.CanRemoveRectangle(tile, bounds, TypesToRemove) ?? true);
         }
     }
 
@@ -336,13 +347,13 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
                 if (globalRemap[region.ID].ContainsKey(segment.Index))
                     continue;
 
-                if (ObjectTextures.Count >= Data.TextureObjectLimit)
+                if (Level.ObjectTextures.Count >= Data.TextureObjectLimit)
                 {
                     throw new TransportException($"Limit of {Data.TextureObjectLimit} textures reached.");
                 }
 
-                globalRemap[region.ID][segment.Index] = ObjectTextures.Count;
-                ObjectTextures.Add(segment.Texture as TRObjectTexture);
+                globalRemap[region.ID][segment.Index] = Level.ObjectTextures.Count;
+                Level.ObjectTextures.Add(segment.Texture as TRObjectTexture);
             }
         }
 
@@ -502,5 +513,5 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
     protected abstract void ImportSound(B blob);
 
     protected abstract List<T> GetExistingTypes();
-    protected abstract List<TRObjectTexture> ObjectTextures { get; }
+    protected abstract AbstractTextureRemapGroup<T, L> GetRemapGroup();
 }

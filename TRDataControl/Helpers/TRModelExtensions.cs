@@ -12,19 +12,19 @@ public static class TRModelExtensions
         switch (level.Version.Game)
         {
             case TRGameVersion.TR1:
-                new TR1TextureRemapper().ResetUnusedTextures(level as TR1Level);
+                new TR1TextureRemapper(level as TR1Level).ResetUnusedTextures();
                 break;
             case TRGameVersion.TR2:
-                new TR2TextureRemapper().ResetUnusedTextures(level as TR2Level);
+                new TR2TextureRemapper(level as TR2Level).ResetUnusedTextures();
                 break;
             case TRGameVersion.TR3:
-                new TR3TextureRemapper().ResetUnusedTextures(level as TR3Level);
+                new TR3TextureRemapper(level as TR3Level).ResetUnusedTextures();
                 break;
             case TRGameVersion.TR4:
-                new TR4TextureRemapper().ResetUnusedTextures(level as TR4Level);
+                new TR4TextureRemapper(level as TR4Level).ResetUnusedTextures();
                 break;
             case TRGameVersion.TR5:
-                new TR5TextureRemapper().ResetUnusedTextures(level as TR5Level);
+                new TR5TextureRemapper(level as TR5Level).ResetUnusedTextures();
                 break;
         }
     }

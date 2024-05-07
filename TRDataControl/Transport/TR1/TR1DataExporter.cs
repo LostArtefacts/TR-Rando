@@ -25,8 +25,8 @@ public class TR1DataExporter : TRDataExporter<TR1Level, TR1Type, TR1SFX, TR1Blob
         };
     }
 
-    protected override TRTextureRemapper<TR1Level> CreateRemapper()
-        => new TR1TextureRemapper();
+    protected override TRTextureRemapper<TR1Level> CreateRemapper(TR1Level level)
+        => new TR1TextureRemapper(level);
 
     protected override bool IsMasterType(TR1Type type)
         => type == TR1Type.Lara;
@@ -77,7 +77,7 @@ public class TR1DataExporter : TRDataExporter<TR1Level, TR1Type, TR1SFX, TR1Blob
                 AmendSkaterBoyDeath(level);
                 break;
             case TR1Type.CowboyHeadless:
-                //AmendDXtre3DTextures(definition);
+                AmendHeadlessCowboySFX(level);
                 break;
             case TR1Type.Natla:
                 AmendNatlaDeath(level);
@@ -151,6 +151,21 @@ public class TR1DataExporter : TRDataExporter<TR1Level, TR1Type, TR1SFX, TR1Blob
         }
     }
 
+    public static void AmendHeadlessCowboySFX(TR1Level level)
+    {
+        // Originally silent in the Folklorist's Diary, but achieved using ID 15, which has been repurposed
+        // in TR1X as LaraWetFeet. Restore the gunshots and just remove the fake death sound.
+        foreach (TRAnimCommand cmd in level.Models[TR1Type.Cowboy].Animations[4].Commands)
+        {
+            if (cmd is TRSFXCommand sfxCmd && sfxCmd.SoundID == 15)
+            {
+                sfxCmd.SoundID = (short)TR1SFX.LaraMagnums;
+            }
+        }
+
+        level.Models[TR1Type.Cowboy].Animations[7].Commands.RemoveAll(a => a is TRSFXCommand);
+    }
+
     public static void AmendNatlaDeath(TR1Level level)
     {
         level.Models[TR1Type.Natla].Animations[13].Commands.Add(new TRSFXCommand
@@ -164,7 +179,6 @@ public class TR1DataExporter : TRDataExporter<TR1Level, TR1Type, TR1SFX, TR1Blob
     {
         // ToQ moving blocks are silent but we want them to scrape along the floor when they move.
         // Import the trapdoor closing SFX from Vilcabamba and adjust the animations accordingly.
-
         if (!level.SoundEffects.ContainsKey(TR1SFX.TrapdoorClose))
         {
             TR1Level vilcabamba = new TR1LevelControl().Read(Path.Combine(baseLevelDirectory, TR1LevelNames.VILCABAMBA));

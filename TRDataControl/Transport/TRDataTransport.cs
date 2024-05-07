@@ -29,7 +29,7 @@ public abstract class TRDataTransport<L, T, S, B>
     }
 
     protected abstract TRTexturePacker CreatePacker();
-    protected abstract TRTextureRemapper<L> CreateRemapper();
+    protected abstract TRTextureRemapper<L> CreateRemapper(L level);
     protected abstract bool IsMasterType(T type);
     protected abstract TRMesh GetDummyMesh();
     protected abstract TRDictionary<T, TRModel> Models { get; }
