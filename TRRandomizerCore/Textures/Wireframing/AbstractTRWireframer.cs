@@ -54,8 +54,11 @@ public abstract class AbstractTRWireframer<E, L>
         ScanRooms(level);
         ScanMeshes(level);
 
-        ISet<TRSize> roomSizes = new SortedSet<TRSize>(_roomFace3s.Values.Concat(_roomFace4s.Values));
-        ISet<TRSize> meshSizes = new SortedSet<TRSize>(_meshFaces.Values);
+        _triggerFaces.RemoveAll(f => IsTextureExcluded(f.Texture));
+        _deathFaces.RemoveAll(f => IsTextureExcluded(f.Texture));
+
+        SortedSet<TRSize> roomSizes = new(_roomFace3s.Values.Concat(_roomFace4s.Values));
+        SortedSet<TRSize> meshSizes = new(_meshFaces.Values);
 
         Pen roomPen = new(_data.HighlightColour, 1)
         {
@@ -77,9 +80,11 @@ public abstract class AbstractTRWireframer<E, L>
             DashCap = DashCap.Round
         };
 
+        DeleteAnimatedTextures(level);
+
         TRTexturePacker packer = CreatePacker(level);
         DeleteTextures(packer);
-        ResetUnusedTextures(level);
+        level.ResetUnusedTextures();
 
         TRSize roomSize = GetLargestSize(roomSizes);
         roomSize.RoundDown();
@@ -100,36 +105,28 @@ public abstract class AbstractTRWireframer<E, L>
         packer.Options.StartMethod = PackingStartMethod.FirstTile;
         packer.Pack(true);
 
-        Queue<int> reusableTextures = new(GetInvalidObjectTextureIndices(level));
-        List<TRObjectTexture> levelObjectTextures = GetObjectTextures(level);
+        ushort StoreTexture(TRTextileSegment segment)
+        {
+            level.ObjectTextures.Add(segment.Texture as TRObjectTexture);
+            return (ushort)(level.ObjectTextures.Count - 1);
+        }
 
-        ushort roomTextureIndex = (ushort)reusableTextures.Dequeue();
-        levelObjectTextures[roomTextureIndex] = roomTexture.Texture as TRObjectTexture;
-
-        ushort ladderTextureIndex = (ushort)reusableTextures.Dequeue();
-        levelObjectTextures[ladderTextureIndex] = ladderTexture.Texture as TRObjectTexture;
-
-        ushort triggerTextureIndex = (ushort)reusableTextures.Dequeue();
-        levelObjectTextures[triggerTextureIndex] = triggerTexture.Texture as TRObjectTexture;
-
-        ushort deathTextureIndex = (ushort)reusableTextures.Dequeue();
-        levelObjectTextures[deathTextureIndex] = deathTexture.Texture as TRObjectTexture;
+        ushort roomTextureIndex = StoreTexture(roomTexture);
+        ushort ladderTextureIndex = StoreTexture(ladderTexture);
+        ushort triggerTextureIndex = StoreTexture(triggerTexture);
+        ushort deathTextureIndex = StoreTexture(deathTexture);
 
         Dictionary<ushort, ushort> specialTextureRemap = new();
         foreach (ushort originalTexture in specialTextures.Keys)
         {
-            ushort newIndex = (ushort)reusableTextures.Dequeue();
-            levelObjectTextures[newIndex] = specialTextures[originalTexture].Texture as TRObjectTexture;
-            specialTextureRemap[originalTexture] = newIndex;
+            specialTextureRemap[originalTexture] = StoreTexture(specialTextures[originalTexture]);
         }
 
         foreach (TRSize size in modelRemap.Keys)
         {
             if (!size.Equals(_nullSize))
             {
-                ushort texture = (ushort)reusableTextures.Dequeue();
-                levelObjectTextures[texture] = modelRemap[size].Texture as TRObjectTexture;
-                modelRemap[size].Index = texture;
+                modelRemap[size].Index = StoreTexture(modelRemap[size]);
             }
         }
 
@@ -137,15 +134,13 @@ public abstract class AbstractTRWireframer<E, L>
         ResetMeshTextures(modelRemap, specialTextureRemap);
         TidyModels(level);
         SetSkyboxVisible(level);
-        DeleteAnimatedTextures(level);
     }
 
     private void RetainCustomTextures(L level)
     {
-        List<TRObjectTexture> textures = GetObjectTextures(level);
-        for (ushort i = 0; i < textures.Count; i++)
+        for (ushort i = 0; i < level.ObjectTextures.Count; i++)
         {
-            if (textures[i].BlendingMode == TRBlendingMode.Unused01)
+            if (level.ObjectTextures[i].BlendingMode == TRBlendingMode.Unused01)
             {
                 _data.ExcludedTextures.Add(i);
             }
@@ -207,18 +202,13 @@ public abstract class AbstractTRWireframer<E, L>
 
     private TRSize GetTextureSize(L level, ushort textureIndex)
     {
-        TRObjectTexture texture = GetObjectTextures(level)[textureIndex];
-        if (texture.IsValid())
+        TRObjectTexture texture = level.ObjectTextures[textureIndex];
+        _allTextures.Add(textureIndex);
+        TRTextileSegment itext = new()
         {
-            _allTextures.Add(textureIndex);
-            TRTextileSegment itext = new()
-            {
-                Texture = texture
-            };
-            return new TRSize(itext.Bounds.Width, itext.Bounds.Height);
-        }
-
-        return _nullSize;
+            Texture = texture
+        };
+        return new(itext.Bounds.Width, itext.Bounds.Height);
     }
 
     private void DeleteTextures(TRTexturePacker packer)
@@ -255,10 +245,10 @@ public abstract class AbstractTRWireframer<E, L>
             return null;
         }
 
-        TRTextileSegment texture = CreateSegment(new Rectangle(0, 0, size.W, size.H));
+        TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
 
-        packer.AddRectangle(new TRTextileRegion(texture, frame));
+        packer.AddRectangle(new(texture, frame));
 
         return texture;
     }
@@ -270,7 +260,7 @@ public abstract class AbstractTRWireframer<E, L>
             return null;
         }
 
-        TRTextileSegment texture = CreateSegment(new Rectangle(0, 0, size.W, size.H));
+        TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, false);
         using Bitmap bmp = frame.ToBitmap();
         using Graphics graphics = Graphics.FromImage(bmp);
@@ -285,7 +275,7 @@ public abstract class AbstractTRWireframer<E, L>
             graphics.DrawLine(pen, 0, y, size.W, y + rungSplit);
         }
 
-        packer.AddRectangle(new TRTextileRegion(texture, new(bmp)));
+        packer.AddRectangle(new(texture, new(bmp)));
 
         return texture;
     }
@@ -297,7 +287,7 @@ public abstract class AbstractTRWireframer<E, L>
             return null;
         }
 
-        TRTextileSegment texture = CreateSegment(new Rectangle(0, 0, size.W, size.H));
+        TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
         using Bitmap bmp = frame.ToBitmap();
         using Graphics graphics = Graphics.FromImage(bmp);
@@ -305,7 +295,7 @@ public abstract class AbstractTRWireframer<E, L>
         // X marks the spot
         graphics.DrawLine(pen, 0, size.H, size.W, 0);
 
-        packer.AddRectangle(new TRTextileRegion(texture, new(bmp)));
+        packer.AddRectangle(new(texture, new(bmp)));
 
         return texture;
     }
@@ -317,7 +307,7 @@ public abstract class AbstractTRWireframer<E, L>
             return null;
         }
 
-        TRTextileSegment texture = CreateSegment(new Rectangle(0, 0, size.W, size.H));
+        TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
         using Bitmap bmp = frame.ToBitmap();
         using Graphics graphics = Graphics.FromImage(bmp);
@@ -327,7 +317,7 @@ public abstract class AbstractTRWireframer<E, L>
         graphics.DrawLine(pen, size.W / 2, 0, size.W / 2, size.H);
         graphics.DrawLine(pen, 0, size.H / 2, size.W, size.H / 2);
 
-        packer.AddRectangle(new TRTextileRegion(texture, new(bmp)));
+        packer.AddRectangle(new(texture, new(bmp)));
 
         return texture;
     }
@@ -345,15 +335,12 @@ public abstract class AbstractTRWireframer<E, L>
     }
 
     protected virtual Dictionary<ushort, TRTextileRegion> CreateSpecialSegments(L level, Pen pen)
-    {
-        return new Dictionary<ushort, TRTextileRegion>();
-    }
+        => new();
 
     private void ProcessClips(TRTexturePacker packer, L level, Pen pen, SmoothingMode mode)
     {
         // Some animated textures are shared in segments e.g. 4 32x32 segments within a 64x64 container,
         // so in instances where we only want to wireframe a section of these, we use manual clipping.
-        List<TRObjectTexture> textures = GetObjectTextures(level);
         foreach (WireframeClip clip in _data.ManualClips)
         {
             TRImage frame = CreateFrame(clip.Clip.Width, clip.Clip.Height, pen, mode, true);
@@ -363,7 +350,7 @@ public abstract class AbstractTRWireframer<E, L>
                 TRTextileSegment indexedTexture = new()
                 {
                     Index = texture,
-                    Texture = textures[texture]
+                    Texture = level.ObjectTextures[texture]
                 };
                 TRImage bmp = packer.Tiles[indexedTexture.Atlas].Image;
 
@@ -380,7 +367,7 @@ public abstract class AbstractTRWireframer<E, L>
         }
 
         // Ensure these clipped textures support transparency
-        foreach (TRObjectTexture texture in textures)
+        foreach (TRObjectTexture texture in level.ObjectTextures)
         {
             if (texture.BlendingMode == TRBlendingMode.Opaque)
             {
@@ -396,7 +383,7 @@ public abstract class AbstractTRWireframer<E, L>
 
         graphics.SmoothingMode = mode;
 
-        graphics.FillRectangle(new SolidBrush(Color.Transparent), new Rectangle(0, 0, width, height));
+        graphics.FillRectangle(new SolidBrush(Color.Transparent), new(0, 0, width, height));
         graphics.DrawRectangle(pen, 0, 0, width - 1, height - 1);
         if (addDiagonal)
         {
@@ -452,19 +439,12 @@ public abstract class AbstractTRWireframer<E, L>
 
         foreach (TRFace face in _triggerFaces)
         {
-            // Exclusion example is Bacon Lara's heavy trigger - we want to retain the Lava here
-            if (!IsTextureExcluded(face.Texture))
-            {
-                face.Texture = triggerIndex;
-            }
+            face.Texture = triggerIndex;
         }
 
         foreach (TRFace face in _deathFaces)
         {
-            if (!IsTextureExcluded(face.Texture))
-            {
-                face.Texture = deathIndex;
-            }
+            face.Texture = deathIndex;
         }
     }
 
@@ -518,7 +498,7 @@ public abstract class AbstractTRWireframer<E, L>
             SetFace3Colours(mesh.ColouredTriangles, blackIndex);
         }
 
-        ISet<TRMesh> processedModelMeshes = new HashSet<TRMesh>();
+        HashSet<TRMesh> processedModelMeshes = new();
         foreach (var (type, model) in GetModels(level))
         {
             if (IsSkybox(type))
@@ -592,11 +572,9 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void DeleteAnimatedTextures(L level)
     {
-        List<TRAnimatedTexture> animatedTextures = GetAnimatedTextures(level);
-
-        for (int i = animatedTextures.Count - 1; i >= 0; i--)
+        for (int i = level.AnimatedTextures.Count - 1; i >= 0; i--)
         {
-            TRAnimatedTexture animatedTexture = animatedTextures[i];
+            TRAnimatedTexture animatedTexture = level.AnimatedTextures[i];
             for (int j = animatedTexture.Textures.Count - 1; j >= 0; j--)
             {
                 if (!IsTextureExcluded(animatedTexture.Textures[j]))
@@ -607,7 +585,7 @@ public abstract class AbstractTRWireframer<E, L>
 
             if (animatedTexture.Textures.Count < 2)
             {
-                animatedTextures.RemoveAt(i);
+                level.AnimatedTextures.RemoveAt(i);
             }
         }
     }
@@ -618,9 +596,6 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract TRTexturePacker CreatePacker(L level);
     protected abstract IEnumerable<IEnumerable<TRFace>> GetRoomFace4s(L level);
     protected abstract IEnumerable<IEnumerable<TRFace>> GetRoomFace3s(L level);
-    protected abstract void ResetUnusedTextures(L level);
-    protected abstract IEnumerable<int> GetInvalidObjectTextureIndices(L level);
-    protected abstract List<TRObjectTexture> GetObjectTextures(L level);
     protected abstract int GetBlackPaletteIndex(L level);
     protected abstract int ImportColour(L level, Color c);
     protected abstract TRDictionary<E, TRModel> GetModels(L level);
@@ -631,7 +606,6 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract bool IsInteractableModel(E type);
     protected virtual bool ShouldSolidifyModel(E type) => false;
     protected abstract void SetSkyboxVisible(L level);
-    protected abstract List<TRAnimatedTexture> GetAnimatedTextures(L level);
 
     public virtual bool Is8BitPalette { get; }
     protected virtual void ResetPaletteTracking(L level) { }

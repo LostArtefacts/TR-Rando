@@ -1,4 +1,5 @@
-﻿using TRImageControl.Packing;
+﻿using TRDataControl;
+using TRImageControl.Packing;
 using TRLevelControl.Model;
 
 namespace TRModelTransporter.Utilities;
@@ -13,7 +14,7 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
 
     public AbstractTRLevelTextureDeduplicator()
     {
-        _deduplicator = new TRTextureDeduplicator<E>
+        _deduplicator = new()
         {
             UpdateGraphics = true
         };
@@ -37,52 +38,10 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
         levelPacker.AllowEmptyPacking = true;
         levelPacker.Pack(true);
 
-        // Now we want to go through every IndexedTexture and see if it's
-        // pointing to the same thing - so tile, position, and point direction
-        // have to be equal. See IndexedTRObjectTexture
-        Dictionary<int, int> indexMap = new();
-        foreach (TRTextile tile in allTextures.Keys)
-        {
-            foreach (TRTextileRegion segment in allTextures[tile])
-            {
-                TidySegment(segment, indexMap);
-            }
-        }
-
-        ReindexTextures(indexMap);
+        CreateRemapper().Remap(Level);
     }
 
     protected abstract TRTexturePacker CreatePacker(L level);
+    protected abstract TRTextureRemapper<L> CreateRemapper();
     protected abstract AbstractTextureRemapGroup<E, L> GetRemapGroup(string path);
-    protected abstract void ReindexTextures(Dictionary<int, int> indexMap);
-
-    private static void TidySegment(TRTextileRegion region, Dictionary<int, int> reindexMap)
-    {
-        for (int i = region.Segments.Count - 1; i > 0; i--) //ignore the first = the largest
-        {
-            TRTextileSegment segment = region.Segments[i];
-            TRTextileSegment candidateTexture = null;
-            for (int j = 0; j < region.Segments.Count; j++)
-            {
-                if (i == j)
-                {
-                    continue;
-                }
-
-                TRTextileSegment texture2 = region.Segments[j];
-                if (segment.Equals(texture2))
-                {
-                    candidateTexture = texture2;
-                    break;
-                }
-            }
-
-            if (candidateTexture != null)
-            {
-                reindexMap[segment.Index] = candidateTexture.Index;
-                segment.Invalidate();
-                region.Segments.RemoveAt(i);
-            }
-        }
-    }
 }
