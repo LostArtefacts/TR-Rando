@@ -412,8 +412,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         return new EnemyTransportCollection
         {
-            EntitiesToImport = newEntities,
-            EntitiesToRemove = oldEntities,
+            TypesToImport = newEntities,
+            TypesToRemove = oldEntities,
             BirdMonsterGuiser = chickenGuiser
         };
     }
@@ -1030,8 +1030,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 TR2DataImporter importer = new()
                 {
                     ClearUnusedSprites = true,
-                    TypesToImport = enemies.EntitiesToImport,
-                    TypesToRemove = enemies.EntitiesToRemove,
+                    TypesToImport = enemies.TypesToImport,
+                    TypesToRemove = enemies.TypesToRemove,
                     Level = level.Data,
                     LevelName = level.Name,
                     DataFolder = _outer.GetResourcePath(@"TR2\Objects"),
@@ -1039,7 +1039,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                     //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                 };
 
-                importer.Data.AliasPriority = TR2EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport);
+                importer.Data.AliasPriority = TR2EnemyUtilities.GetAliasPriority(level.Name, enemies.TypesToImport);
 
                 // Try to import the selected models into the level.
                 importer.Import();
@@ -1050,7 +1050,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 // We need to reload the level to undo anything that may have changed.
                 _outer.ReloadLevelData(level);
                 // Tell the monitor to no longer track what we tried to import
-                _outer.TextureMonitor.ClearMonitor(level.Name, enemies.EntitiesToImport);
+                _outer.TextureMonitor.ClearMonitor(level.Name, enemies.TypesToImport);
                 return false;
             }
         }
@@ -1091,10 +1091,10 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                         // can refer to the original list, as actual entity randomization may remove models.
                         EnemyRandomizationCollection enemies = new()
                         {
-                            Available = importedCollection.EntitiesToImport,
-                            Droppable = TR2TypeUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.UnconditionalChickens),
-                            Water = TR2TypeUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport),
-                            All = new List<TR2Type>(importedCollection.EntitiesToImport)
+                            Available = importedCollection.TypesToImport,
+                            Droppable = TR2TypeUtilities.FilterDroppableEnemies(importedCollection.TypesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.UnconditionalChickens),
+                            Water = TR2TypeUtilities.FilterWaterEnemies(importedCollection.TypesToImport),
+                            All = new List<TR2Type>(importedCollection.TypesToImport)
                         };
 
                         if (_outer.Settings.DocileChickens && importedCollection.BirdMonsterGuiser != TR2Type.BirdMonster)
@@ -1123,8 +1123,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
     internal class EnemyTransportCollection
     {
-        internal List<TR2Type> EntitiesToImport { get; set; }
-        internal List<TR2Type> EntitiesToRemove { get; set; }
+        internal List<TR2Type> TypesToImport { get; set; }
+        internal List<TR2Type> TypesToRemove { get; set; }
         internal TR2Type BirdMonsterGuiser { get; set; }
         internal bool ImportResult { get; set; }
 

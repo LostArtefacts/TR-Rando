@@ -377,7 +377,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             ushort goldPalette = goldenHips.ColouredRectangles[0].Texture;
 
             TRModel ponytail = level.Data.Models[TR1Type.LaraPonytail_H_U];
-            ponytail.Meshes.AddRange(ponytail.Meshes.Select(m => MeshEditor.CloneMeshAsColoured(m, goldPalette)));
+            List<TRMesh> goldMeshes = new(ponytail.Meshes.Select(m => MeshEditor.CloneMeshAsColoured(m, goldPalette)));
+            ponytail.Meshes.AddRange(goldMeshes);
             ponytail.MeshTrees.AddRange(ponytail.MeshTrees);
         }
 
@@ -483,11 +484,11 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
 
             List<TRMesh> lara = level.Data.Models[(level.IsCutScene ? TR1Type.CutsceneActor1 : TR1Type.Lara)].Meshes;
-            List<TRMesh> laraPistol = level.Data.Models[TR1Type.LaraPistolAnim_H].Meshes;
-            List<TRMesh> laraShotgun = level.Data.Models[TR1Type.LaraShotgunAnim_H].Meshes;
-            List<TRMesh> laraMagnums = level.Data.Models[TR1Type.LaraMagnumAnim_H].Meshes;
-            List<TRMesh> laraUzis = level.Data.Models[TR1Type.LaraUziAnimation_H].Meshes;
-            List<TRMesh> laraMisc = level.Data.Models[TR1Type.LaraMiscAnim_H].Meshes;
+            List<TRMesh> laraPistol = level.Data.Models[TR1Type.LaraPistolAnim_H]?.Meshes;
+            List<TRMesh> laraShotgun = level.Data.Models[TR1Type.LaraShotgunAnim_H]?.Meshes;
+            List<TRMesh> laraMagnums = level.Data.Models[TR1Type.LaraMagnumAnim_H]?.Meshes;
+            List<TRMesh> laraUzis = level.Data.Models[TR1Type.LaraUziAnimation_H]?.Meshes;
+            List<TRMesh> laraMisc = level.Data.Models[TR1Type.LaraMiscAnim_H]?.Meshes;
 
             // Basic meshes to take from LaraMiscAnim. We don't replace Lara's gloves
             // or thighs (at this stage - handled below with gun swaps).

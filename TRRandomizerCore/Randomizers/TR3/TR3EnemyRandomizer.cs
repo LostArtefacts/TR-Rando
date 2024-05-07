@@ -309,8 +309,8 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
         return new EnemyTransportCollection
         {
-            EntitiesToImport = newEntities,
-            EntitiesToRemove = oldEntities
+            TypesToImport = newEntities,
+            TypesToRemove = oldEntities
         };
     }
 
@@ -729,8 +729,8 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     EnemyTransportCollection enemies = _enemyMapping[level];
                     TR3DataImporter importer = new()
                     {
-                        TypesToImport = enemies.EntitiesToImport,
-                        TypesToRemove = enemies.EntitiesToRemove,
+                        TypesToImport = enemies.TypesToImport,
+                        TypesToRemove = enemies.TypesToRemove,
                         Level = level.Data,
                         LevelName = level.Name,
                         DataFolder = _outer.GetResourcePath(@"TR3\Objects"),
@@ -747,7 +747,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
                     // Remove stale tiger model if present to avoid friendly monkeys causing vehicle crashes.
                     if (level.HasVehicle
-                        && enemies.EntitiesToImport.Contains(TR3Type.Monkey))
+                        && enemies.TypesToImport.Contains(TR3Type.Monkey))
                     {
                         level.Data.Models.Remove(TR3Type.Tiger);
                     }
@@ -769,9 +769,9 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 {
                     EnemyRandomizationCollection enemies = new()
                     {
-                        Available = _enemyMapping[level].EntitiesToImport,
-                        Droppable = TR3TypeUtilities.FilterDroppableEnemies(_enemyMapping[level].EntitiesToImport, _outer.Settings.ProtectMonks),
-                        Water = TR3TypeUtilities.FilterWaterEnemies(_enemyMapping[level].EntitiesToImport)
+                        Available = _enemyMapping[level].TypesToImport,
+                        Droppable = TR3TypeUtilities.FilterDroppableEnemies(_enemyMapping[level].TypesToImport, _outer.Settings.ProtectMonks),
+                        Water = TR3TypeUtilities.FilterWaterEnemies(_enemyMapping[level].TypesToImport)
                     };
 
                     _outer.RandomizeEnemies(level, enemies);
@@ -788,8 +788,8 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
     internal class EnemyTransportCollection
     {
-        internal List<TR3Type> EntitiesToImport { get; set; }
-        internal List<TR3Type> EntitiesToRemove { get; set; }
+        internal List<TR3Type> TypesToImport { get; set; }
+        internal List<TR3Type> TypesToRemove { get; set; }
     }
 
     internal class EnemyRandomizationCollection
