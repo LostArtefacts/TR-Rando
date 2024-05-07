@@ -9,9 +9,10 @@ public abstract class TRTextureRemapper<L>
     protected L _level;
 
     protected abstract TRTexturePacker CreatePacker();
-    public abstract List<TRAnimatedTexture> AnimatedTextures { get; }
-    public abstract List<TRObjectTexture> ObjectTextures { get; }
-    public abstract IEnumerable<TRFace> Faces { get; }
+    public abstract IEnumerable<TRFace> RoomFaces { get; }
+
+    public IEnumerable<TRFace> AllFaces
+        => RoomFaces.Concat(_level.DistinctMeshes.SelectMany(m => m.TexturedFaces));
 
     public void Remap(L level)
     {
@@ -62,7 +63,7 @@ public abstract class TRTextureRemapper<L>
         }
 
         // Group each object texture
-        IEnumerable<List<TRObjectTexture>> groupedTextures = ObjectTextures.GroupBy(t => Hash(t))
+        IEnumerable<List<TRObjectTexture>> groupedTextures = level.ObjectTextures.GroupBy(t => Hash(t))
             .Where(g => g.Count() > 1)
             .Select(g => g.ToList());
 
@@ -70,45 +71,54 @@ public abstract class TRTextureRemapper<L>
         Dictionary<int, int> remap = new();
         foreach (List<TRObjectTexture> copies in groupedTextures)
         {
-            int rootIndex = ObjectTextures.IndexOf(copies[0]);
+            int rootIndex = level.ObjectTextures.IndexOf(copies[0]);
             for (int i = 1; i < copies.Count; i++)
             {
-                int j = ObjectTextures.IndexOf(copies[i]);
+                int j = level.ObjectTextures.IndexOf(copies[i]);
                 remap[j] = rootIndex;
-                ObjectTextures[j] = null;
+                level.ObjectTextures[j].Atlas = ushort.MaxValue;
             }
         }
 
         // Update all faces
-        RemapTextures(remap);
+        RemapTextures(level, remap);
+
+        ResetUnusedTextures(_level);
+    }
+
+    public void ResetUnusedTextures(L level)
+    {
+        _level = level;
 
         // Find every unused object texture and null it
-        List<int> allIndices = Enumerable.Range(0, ObjectTextures.Count).ToList();
-        List<int> usedIndices = Faces.Select(f => (int)f.Texture).Distinct().ToList();
+        IEnumerable<int> allIndices = Enumerable.Range(0, level.ObjectTextures.Count);
+        IEnumerable<int> usedIndices = AllFaces.Select(f => (int)f.Texture)
+            .Concat(level.AnimatedTextures.SelectMany(a => a.Textures.Select(t => (int)t)))
+            .Distinct();
         foreach (int unused in allIndices.Except(usedIndices))
         {
-            ObjectTextures[unused] = null;
+            level.ObjectTextures[unused].Atlas = ushort.MaxValue;
         }
 
-        // Remap all indices again after deleting the nulls
-        remap.Clear();
-        List<TRObjectTexture> oldTextures = new(ObjectTextures);
-        ObjectTextures.RemoveAll(o => o == null);
+        // Remap all indices after deleting the nulls
+        Dictionary<int, int> remap = new();
+        List<TRObjectTexture> oldTextures = new(level.ObjectTextures);
+        level.ObjectTextures.RemoveAll(o => o.Atlas == ushort.MaxValue);
         for (int i = 0; i < oldTextures.Count; i++)
         {
-            if (oldTextures[i] != null)
+            if (oldTextures[i].Atlas != ushort.MaxValue)
             {
-                remap[i] = ObjectTextures.IndexOf(oldTextures[i]);
+                remap[i] = level.ObjectTextures.IndexOf(oldTextures[i]);
             }
         }
 
-        // Final face update
-        RemapTextures(remap);
+        // Update all faces
+        RemapTextures(level, remap);
     }
 
-    private void RemapTextures(Dictionary<int, int> remap)
+    private void RemapTextures(L level, Dictionary<int, int> remap)
     {
-        foreach (TRFace face in Faces)
+        foreach (TRFace face in AllFaces)
         {
             if (remap.ContainsKey(face.Texture))
             {
@@ -116,7 +126,7 @@ public abstract class TRTextureRemapper<L>
             }
         }
 
-        foreach (TRAnimatedTexture t in AnimatedTextures)
+        foreach (TRAnimatedTexture t in level.AnimatedTextures)
         {
             for (int i = 0; i < t.Textures.Count; i++)
             {
