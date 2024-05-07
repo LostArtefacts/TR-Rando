@@ -194,11 +194,11 @@ public enum TR1Type : uint
     Motorboat              = 182,
     Earthquake_N           = 183,
 
-    SecretScion_M_H        = 184, // Unused models, so repurposed as duplicate puzzle items for importing as secret pickups
-    SecretGoldIdol_M_H     = 185,
-    SecretLeadBar_M_H      = 186,
-    SecretGoldBar_M_H      = 187,
-    SecretAnkh_M_H         = 188,
+    Unused01               = 184,
+    Unused02               = 185,
+    Unused03               = 186,
+    Unused04               = 187,
+    Unused05               = 188,
     
     LaraPonytail_H_U       = 189,
     FontGraphics_S_H       = 190,
@@ -255,6 +255,19 @@ public enum TR1Type : uint
     Debris8                = 239,
     Debris9                = 240,
     SceneryBase            = Plant0,
+
+    // Unused models, so repurposed as duplicate puzzle items for importing as secret pickups
+    SecretScion_M_H        = 700,
+    SecretGoldIdol_M_H     = 701,
+    SecretLeadBar_M_H      = 702,
+    SecretGoldBar_M_H      = 703,
+    SecretAnkh_M_H         = 704,
+
+    SecretScion_S_P        = 800,
+    SecretGoldIdol_S_P     = 801,
+    SecretLeadBar_S_P      = 802,
+    SecretGoldBar_S_P      = 803,
+    SecretAnkh_S_P         = 804,
 
     // Alias entries
     // Egyptian mummies are just NonShootingAtlantean_N, but both depend on FlyingMutant for meshes

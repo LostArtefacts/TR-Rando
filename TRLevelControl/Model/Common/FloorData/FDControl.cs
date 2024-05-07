@@ -47,12 +47,15 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
         }
         else
         {
-            TRFDBuilder builder = new(_version);
             index = _entries.Keys.Last();
-            index += builder.Flatten(_entries[index]).Count;
+            if (_entries[index].Count > 0)
+            {
+                TRFDBuilder builder = new(_version);
+                index += builder.Flatten(_entries[index]).Count;
+            }
         }
 
-        _entries.Add(index, new List<FDEntry>());
+        _entries[index] = new();
         sector.FDIndex = (ushort)index;
     }
 

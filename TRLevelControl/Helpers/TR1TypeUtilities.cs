@@ -554,11 +554,11 @@ public static class TR1TypeUtilities
     {
         return new()
         {
-            [TR1Type.SecretAnkh_M_H] = TR1Type.ScionPiece4_S_P,
-            [TR1Type.SecretGoldBar_M_H] = TR1Type.ScionPiece4_S_P,
-            [TR1Type.SecretGoldIdol_M_H] = TR1Type.ScionPiece4_S_P,
-            [TR1Type.SecretLeadBar_M_H] = TR1Type.ScionPiece4_S_P,
-            [TR1Type.SecretScion_M_H] = TR1Type.ScionPiece4_S_P
+            [TR1Type.SecretAnkh_M_H] = TR1Type.SecretAnkh_S_P,
+            [TR1Type.SecretGoldBar_M_H] = TR1Type.SecretGoldBar_S_P,
+            [TR1Type.SecretGoldIdol_M_H] = TR1Type.SecretGoldIdol_S_P,
+            [TR1Type.SecretLeadBar_M_H] = TR1Type.SecretLeadBar_S_P,
+            [TR1Type.SecretScion_M_H] = TR1Type.SecretScion_S_P
         };
     }
 
