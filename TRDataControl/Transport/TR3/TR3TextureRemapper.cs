@@ -5,17 +5,12 @@ namespace TRDataControl;
 
 public class TR3TextureRemapper : TRTextureRemapper<TR3Level>
 {
-    public override List<TRAnimatedTexture> AnimatedTextures
-        => _level.AnimatedTextures;
-
-    public override List<TRObjectTexture> ObjectTextures
-        => _level.ObjectTextures;
-
-    public override IEnumerable<TRFace> Faces
-        => _level.Rooms.Select(r => r.Mesh)
-        .SelectMany(m => m.Faces)
-        .Concat(_level.DistinctMeshes.SelectMany(m => m.TexturedFaces));
+    public override IEnumerable<TRFace> RoomFaces
+        => _level.Rooms.Select(r => r.Mesh).SelectMany(m => m.Faces);
 
     protected override TRTexturePacker CreatePacker()
         => new TR3TexturePacker(_level, 32);
+
+    public TR3TextureRemapper(TR3Level level)
+        : base(level) { }
 }

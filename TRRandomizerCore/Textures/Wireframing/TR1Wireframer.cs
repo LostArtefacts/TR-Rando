@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
-using TRDataControl;
 using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
@@ -78,19 +77,9 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         return ImportColour(level, Color.Black);
     }
 
-    protected override IEnumerable<int> GetInvalidObjectTextureIndices(TR1Level level)
-    {
-        return level.GetInvalidObjectTextureIndices();
-    }
-
     protected override TRDictionary<TR1Type, TRModel> GetModels(TR1Level level)
     {
         return level.Models;
-    }
-
-    protected override List<TRObjectTexture> GetObjectTextures(TR1Level level)
-    {
-        return level.ObjectTextures;
     }
 
     protected override IEnumerable<IEnumerable<TRFace>> GetRoomFace3s(TR1Level level)
@@ -139,11 +128,6 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         _packer.PaletteControl?.MergePredefinedColours();
     }
 
-    protected override void ResetUnusedTextures(TR1Level level)
-    {
-        level.ResetUnusedTextures();
-    }
-
     protected override void SetSkyboxVisible(TR1Level level) { }
 
     protected override Dictionary<TRFace, List<TRVertex>> CollectLadders(TR1Level level)
@@ -159,11 +143,6 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
     protected override List<TRFace> CollectDeathFaces(TR1Level level)
     {
         return FaceUtilities.GetTriggerFaces(level, new(), true);
-    }
-
-    protected override List<TRAnimatedTexture> GetAnimatedTextures(TR1Level level)
-    {
-        return level.AnimatedTextures;
     }
 
     protected override Dictionary<ushort, TRTextileRegion> CreateSpecialSegments(TR1Level level, Pen pen)

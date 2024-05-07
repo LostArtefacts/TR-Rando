@@ -16,7 +16,7 @@ public abstract class TRDataExporter<L, T, S, B> : TRDataTransport<L, T, S, B>
     {
         Level = level;
 
-        CreateRemapper()?.Remap(level);
+        CreateRemapper(Level)?.Remap();
 
         PreCreation(level, type, blobType);
 

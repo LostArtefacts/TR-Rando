@@ -7,178 +7,26 @@ namespace TRDataControl;
 
 public static class TRModelExtensions
 {
-    // This should be handled by TRTextureRemapper
-
-    public static void ResetUnusedTextures(this TR1Level level)
+    public static void ResetUnusedTextures(this TRLevelBase level)
     {
-        ResetUnusedObjectTextures(level.ObjectTextures);
-        ResetUnusedSpriteTextures(level.Sprites.SelectMany(s => s.Value.Textures));
-    }
-
-    public static void ResetUnusedTextures(this TR2Level level)
-    {
-        ResetUnusedObjectTextures(level.ObjectTextures);
-        ResetUnusedSpriteTextures(level.Sprites.SelectMany(s => s.Value.Textures));
-    }
-
-    public static void ResetUnusedTextures(this TR3Level level)
-    {
-        ResetUnusedObjectTextures(level.ObjectTextures);
-        ResetUnusedSpriteTextures(level.Sprites.SelectMany(s => s.Value.Textures));
-    }
-
-    private static void ResetUnusedObjectTextures(IEnumerable<TRObjectTexture> objectTextures)
-    {
-        foreach (TRObjectTexture texture in objectTextures)
+        switch (level.Version.Game)
         {
-            if (texture.Atlas == ushort.MaxValue)
-            {
-                texture.Invalidate();
-            }
+            case TRGameVersion.TR1:
+                new TR1TextureRemapper(level as TR1Level).ResetUnusedTextures();
+                break;
+            case TRGameVersion.TR2:
+                new TR2TextureRemapper(level as TR2Level).ResetUnusedTextures();
+                break;
+            case TRGameVersion.TR3:
+                new TR3TextureRemapper(level as TR3Level).ResetUnusedTextures();
+                break;
+            case TRGameVersion.TR4:
+                new TR4TextureRemapper(level as TR4Level).ResetUnusedTextures();
+                break;
+            case TRGameVersion.TR5:
+                new TR5TextureRemapper(level as TR5Level).ResetUnusedTextures();
+                break;
         }
-    }
-
-    private static void ResetUnusedSpriteTextures(IEnumerable<TRSpriteTexture> spriteTextures)
-    {
-        foreach (TRSpriteTexture texture in spriteTextures)
-        {
-            if (texture.Atlas == ushort.MaxValue)
-            {
-                texture.Invalidate();
-            }
-        }
-    }
-
-    // See TextureTransportHandler.ResetUnusedTextures
-    public static bool IsValid(this TRObjectTexture texture)
-    {
-        if (texture.Atlas == 0)
-        {
-            return texture.Size.Width == 0 && texture.Size.Height == 0;
-        }
-
-        return texture.Atlas != ushort.MaxValue;
-    }
-
-    public static void Invalidate(this TRObjectTexture texture)
-    {
-        texture.Atlas = 0;
-        texture.Size = new(0, 0);
-    }
-
-    // See TextureTransportHandler.ResetUnusedTextures
-    public static bool IsValid(this TRSpriteTexture texture)
-    {
-        if (texture.Atlas == 0)
-        {
-            if (texture.X == 0 && texture.Y == 0 && texture.Width == 1 && texture.Height == 1)
-            {
-                return false;
-            }
-        }
-
-        return texture.Atlas != ushort.MaxValue;
-    }
-
-    public static void Invalidate(this TRSpriteTexture texture)
-    {
-        texture.Atlas = 0;
-        texture.X = texture.Y = 0;
-        texture.Width = texture.Height = 1;
-    }
-
-    public static List<int> GetInvalidObjectTextureIndices(this TR1Level level)
-    {
-        return GetInvalidObjectTextureIndices(level.ObjectTextures);
-    }
-
-    public static List<int> GetInvalidObjectTextureIndices(this TR2Level level)
-    {
-        return GetInvalidObjectTextureIndices(level.ObjectTextures);
-    }
-
-    public static List<int> GetInvalidObjectTextureIndices(this TR3Level level)
-    {
-        return GetInvalidObjectTextureIndices(level.ObjectTextures);
-    }
-
-    private static List<int> GetInvalidObjectTextureIndices(List<TRObjectTexture> objectTextures)
-    {
-        List<int> reusableIndices = new();
-        for (int i = 0; i < objectTextures.Count; i++)
-        {
-            if (!objectTextures[i].IsValid())
-            {
-                reusableIndices.Add(i);
-            }
-        }
-        return reusableIndices;
-    }
-
-    // Given a precompiled dictionary of old texture index to new, this will ensure that
-    // all Meshes, RoomData and AnimatedTextures point to the new correct index.
-    public static void ReindexTextures(this TR2Level level, Dictionary<int, int> indexMap, bool defaultToOriginal = true)
-    {
-        if (indexMap.Count == 0)
-        {
-            return;
-        }
-
-        foreach (TRMesh mesh in level.DistinctMeshes)
-        {
-            foreach (TRMeshFace face in mesh.TexturedFaces)
-            {
-                face.Texture = ConvertTextureReference(face.Texture, indexMap, defaultToOriginal);
-            }
-        }
-
-        foreach (TR2Room room in level.Rooms)
-        {
-            foreach (TRFace face in room.Mesh.Faces)
-            {
-                face.Texture = ConvertTextureReference(face.Texture, indexMap, defaultToOriginal);
-            }
-        }
-
-        // #137 Ensure animated textures are reindexed too (these are just groups of texture indices)
-        // They have to remain unique it seems, otherwise the animation speed is too fast, so while we
-        // have removed the duplicated textures, we can re-add duplicate texture objects while there is 
-        // enough space in that array.
-        List<TRObjectTexture> textures = level.ObjectTextures.ToList();
-        foreach (TRAnimatedTexture anim in level.AnimatedTextures)
-        {
-            for (int i = 0; i < anim.Textures.Count; i++)
-            {
-                anim.Textures[i] = ConvertTextureReference(anim.Textures[i], indexMap, defaultToOriginal);
-            }
-
-            ushort previousIndex = anim.Textures[0];
-            for (int i = 1; i < anim.Textures.Count; i++)
-            {
-                if (anim.Textures[i] == previousIndex && textures.Count < 2048)
-                {
-                    textures.Add(textures[anim.Textures[i]]);
-                    anim.Textures[i] = (ushort)(textures.Count - 1);
-                }
-                previousIndex = anim.Textures[i];
-            }
-        }
-
-        if (textures.Count > level.ObjectTextures.Count)
-        {
-            level.ObjectTextures.Clear();
-            level.ObjectTextures.AddRange(textures);
-        }
-    }
-
-    private static ushort ConvertTextureReference(ushort textureReference, Dictionary<int, int> indexMap, bool defaultToOriginal)
-    {
-        if (indexMap.ContainsKey(textureReference))
-        {
-            return (ushort)indexMap[textureReference];
-        }
-
-        return defaultToOriginal ? textureReference : (ushort)0;
     }
 
     public static string ComputeSkeletonHash(this IEnumerable<TRMesh> meshes)

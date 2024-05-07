@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using TRDataControl;
 using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
@@ -51,19 +50,9 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return level.Palette16.ToList().FindIndex(c => c.Red + c.Green + c.Blue == 0);
     }
 
-    protected override IEnumerable<int> GetInvalidObjectTextureIndices(TR2Level level)
-    {
-        return level.GetInvalidObjectTextureIndices();
-    }
-
     protected override TRDictionary<TR2Type, TRModel> GetModels(TR2Level level)
     {
         return level.Models;
-    }
-
-    protected override List<TRObjectTexture> GetObjectTextures(TR2Level level)
-    {
-        return level.ObjectTextures;
     }
 
     protected override IEnumerable<IEnumerable<TRFace>> GetRoomFace3s(TR2Level level)
@@ -102,11 +91,6 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return TR2TypeUtilities.IsEnemyType(type) || _additionalEnemyEntities.Contains(type);
     }
 
-    protected override void ResetUnusedTextures(TR2Level level)
-    {
-        level.ResetUnusedTextures();
-    }
-
     protected override void SetSkyboxVisible(TR2Level level)
     {
         foreach (TR2Room room in level.Rooms)
@@ -128,10 +112,5 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
     protected override List<TRFace> CollectDeathFaces(TR2Level level)
     {
         return FaceUtilities.GetTriggerFaces(level, new(), true);
-    }
-
-    protected override List<TRAnimatedTexture> GetAnimatedTextures(TR2Level level)
-    {
-        return level.AnimatedTextures;
     }
 }

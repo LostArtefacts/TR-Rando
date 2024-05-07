@@ -323,7 +323,6 @@ public class DynamicTextureBuilder
         packer.Pack(true);
 
         // Map the packed segments to object textures.
-        Queue<int> reusableIndices = new(level.GetInvalidObjectTextureIndices());
         Dictionary<int, int> reindex = new();
         foreach (TRTextileSegment segment in duplicates.SelectMany(r => r.Segments))
         {
@@ -332,23 +331,13 @@ public class DynamicTextureBuilder
                 continue;
             }
 
-            int newIndex;
-            if (reusableIndices.Count > 0)
+            if (level.ObjectTextures.Count >= maximumObjects)
             {
-                newIndex = reusableIndices.Dequeue();
-                level.ObjectTextures[newIndex] = objTexture;
-            }
-            else if (level.ObjectTextures.Count < maximumObjects)
-            {
-                level.ObjectTextures.Add(objTexture);
-                newIndex = level.ObjectTextures.Count - 1;
-            }
-            else
-            {
-                throw new PackingException(string.Format("Limit of {0} textures reached.", maximumObjects));
+                throw new PackingException($"Limit of {maximumObjects} textures reached.");
             }
 
-            reindex[segment.Index] = newIndex;
+            reindex[segment.Index] = level.ObjectTextures.Count;
+            level.ObjectTextures.Add(objTexture);
         }
 
         // Remap the mesh's faces.

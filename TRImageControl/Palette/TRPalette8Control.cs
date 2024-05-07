@@ -25,9 +25,11 @@ public class TRPalette8Control
 
     public void MergeTiles()
     {
+        // Reuse the original transparency colour even though the RGB is redundant
+        Color transparency = Level.Palette[0].ToTR1Color();
         _palette = new()
         {
-            Color.FromArgb(0, 0, 0, 0) // Placeholder for transparency
+            Color.FromArgb(0, transparency.R, transparency.G, transparency.B)
         };
 
         // Scan over replacement and original images, the idea being they will have been

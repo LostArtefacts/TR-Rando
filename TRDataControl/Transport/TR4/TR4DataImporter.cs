@@ -1,4 +1,5 @@
-﻿using TRImageControl.Packing;
+﻿using Newtonsoft.Json;
+using TRImageControl.Packing;
 using TRLevelControl.Model;
 
 namespace TRDataControl;
@@ -13,8 +14,11 @@ public class TR4DataImporter : TRDataImporter<TR4Level, TR4Type, TR4SFX, TR4Blob
     protected override List<TR4Type> GetExistingTypes()
         => new(Level.Models.Keys.Concat(Level.Sprites.Keys));
 
-    protected override TRTextureRemapper<TR4Level> CreateRemapper()
-        => new TR4TextureRemapper();
+    protected override TRTextureRemapper<TR4Level> CreateRemapper(TR4Level level)
+        => new TR4TextureRemapper(level);
+
+    protected override AbstractTextureRemapGroup<TR4Type, TR4Level> GetRemapGroup()
+        => JsonConvert.DeserializeObject<TR4TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
 
     protected override bool IsMasterType(TR4Type type)
         => type == TR4Type.Lara;
@@ -36,9 +40,6 @@ public class TR4DataImporter : TRDataImporter<TR4Level, TR4Type, TR4SFX, TR4Blob
 
     protected override List<TRCinematicFrame> CinematicFrames
         => null;
-
-    protected override List<TRObjectTexture> ObjectTextures
-        => Level.ObjectTextures;
 
     protected override ushort ImportColour(TR4Blob blob, ushort currentIndex)
         => 0;
