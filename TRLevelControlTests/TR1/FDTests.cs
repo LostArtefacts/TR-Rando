@@ -570,6 +570,23 @@ public class FDTests : FDTestBase
     }
 
     [TestMethod]
+    public void TestEmptyEntries()
+    {
+        TR1Level level = GetTR1TestLevel();
+
+        TRRoomSector maxSector = level.Rooms.SelectMany(r => r.Sectors).MaxBy(s => s.FDIndex);
+        TRRoomSector noFDSector = level.Rooms.SelectMany(r => r.Sectors).First(s => s.FDIndex == 0);
+
+        Assert.AreNotEqual(0, maxSector.FDIndex);
+        Assert.IsNotNull(noFDSector);
+
+        level.FloorData[maxSector.FDIndex].Clear();
+
+        level.FloorData.CreateFloorData(noFDSector);
+        Assert.AreEqual(maxSector.FDIndex + 1, noFDSector.FDIndex);
+    }
+
+    [TestMethod]
     [Description("Add and remove overlaps and verify only the related boxes are affected.")]
     public void ModifyOverlaps()
     {

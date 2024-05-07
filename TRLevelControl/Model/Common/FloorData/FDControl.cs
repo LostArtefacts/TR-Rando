@@ -48,14 +48,19 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
         else
         {
             index = _entries.Keys.Last();
-            if (_entries[index].Count > 0)
+            if (_entries[index].Count == 0)
+            {
+                // Stale entries must remain until fully flattened
+                index++;
+            }
+            else
             {
                 TRFDBuilder builder = new(_version);
                 index += builder.Flatten(_entries[index]).Count;
             }
         }
 
-        _entries[index] = new();
+        _entries.Add(index, new());
         sector.FDIndex = (ushort)index;
     }
 
