@@ -5,7 +5,16 @@
         {
           "RoomNumber": 131,
           "RectangleIndices": [ 15 ],
-          "BackgroundIndex": 1480
+          "BackgroundIndex": 1462
+        }
+      ]
+    },
+    "Landmarks.EycoreNoSaves": {
+      "0": [
+        {
+          "RoomNumber": 124,
+          "RectangleIndices": [ 4 ],
+          "BackgroundIndex": 1332
         }
       ]
     }
