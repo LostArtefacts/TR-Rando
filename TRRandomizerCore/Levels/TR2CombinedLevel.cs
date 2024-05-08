@@ -59,10 +59,18 @@ public class TR2CombinedLevel
     /// <summary>
     /// Determines if the given level is specific to UKBox. This currently applies only to Floating Islands which differs between UKBox and EPC/Multipatch.
     /// </summary>
-    // We previously checked for NumBoxes but with environment rando, this can now change. We instead look for the first
-    // animated texture index (the lava) as this is 1702 in UKBox and 1686 in EPC/Multipatch. This remains consistent
-    // regardless of texture deduplication.
-    public bool IsUKBox => Is(TR2LevelNames.FLOATER) && Data.AnimatedTextures[0].Textures[0] == 1702;
+    // This is a horrible way to store this. Texture data was previously used to detect, but as this can change, we instead make a change to an unreachable sector.
+    public bool IsUKBox
+    {
+        get => Is(TR2LevelNames.FLOATER) && Data.Rooms[165].Sectors[21].BoxIndex == 0;
+        set
+        {
+            if (Is(TR2LevelNames.FLOATER))
+            {
+                Data.Rooms[165].Sectors[21].BoxIndex = 0;
+            }
+        }
+    }
 
     /// <summary>
     /// Returns {Name}-UKBox if this level is for UKBox, otherwise just {Name}.

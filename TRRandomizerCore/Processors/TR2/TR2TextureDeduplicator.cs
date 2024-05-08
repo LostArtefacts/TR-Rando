@@ -2,6 +2,7 @@
 using TRDataControl;
 using TRGE.Core;
 using TRImageControl.Packing;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRModelTransporter.Utilities;
 using TRRandomizerCore.Levels;
@@ -71,6 +72,11 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
         {
             foreach (TR2CombinedLevel level in _levels)
             {
+                if (level.Is(TR2LevelNames.FLOATER) && level.Data.AnimatedTextures[0].Textures[0] == 1702)
+                {
+                    level.IsUKBox = true;
+                }
+
                 string dedupPath = _outer.GetResourcePath($@"TR2\Textures\Deduplication\{level.JsonID}-TextureRemap.json");
                 if (File.Exists(dedupPath))
                 {
