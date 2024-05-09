@@ -127,7 +127,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 TR3Type.SmallMed_P, TR3Type.SmallMed_M_H,
                 TR3Type.LargeMed_P, TR3Type.LargeMed_M_H
             },
-            DataFolder = GetResourcePath(@"TR3\Models")
+            DataFolder = GetResourcePath(@"TR3\Objects")
         };
 
         string remapPath = @"TR3\Textures\Deduplication\" + level.Name + "-TextureRemap.json";

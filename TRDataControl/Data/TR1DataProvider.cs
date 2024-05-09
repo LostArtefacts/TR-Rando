@@ -16,7 +16,7 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         {
             return TRBlobType.Sprite;
         }
-        if (type >= TR1Type.SceneryBase && type < TR1Type.BandagedAtlantean)
+        if (type >= TR1Type.SceneryBase && type < TR1Type.SecretScion_M_H)
         {
             return TRBlobType.StaticMesh;
         }
@@ -166,15 +166,15 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         [TR1Type.ScionPiece_M_H]
             = new() { TR1Type.ScionPiece2_S_P },
         [TR1Type.SecretAnkh_M_H]
-            = new() { TR1Type.ScionPiece4_S_P },
+            = new() { TR1Type.SecretAnkh_S_P },
         [TR1Type.SecretGoldBar_M_H]
-            = new() { TR1Type.ScionPiece4_S_P },
+            = new() { TR1Type.SecretGoldBar_S_P },
         [TR1Type.SecretGoldIdol_M_H]
-            = new() { TR1Type.ScionPiece4_S_P },
+            = new() { TR1Type.SecretGoldIdol_S_P },
         [TR1Type.SecretLeadBar_M_H]
-            = new() { TR1Type.ScionPiece4_S_P },
+            = new() { TR1Type.SecretLeadBar_S_P },
         [TR1Type.SecretScion_M_H]
-            = new() { TR1Type.ScionPiece4_S_P },
+            = new() { TR1Type.SecretScion_S_P },
         [TR1Type.ShootingAtlantean_N]
             = new() { TR1Type.MeatyFlyer },
         [TR1Type.SkateboardKid]
@@ -356,6 +356,12 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         TR1Type.LavaParticles_S_H,
         TR1Type.Flame_S_H,
         TR1Type.FontGraphics_S_H,
+
+        TR1Type.SecretScion_S_P,
+        TR1Type.SecretGoldIdol_S_P,
+        TR1Type.SecretLeadBar_S_P,
+        TR1Type.SecretGoldBar_S_P,
+        TR1Type.SecretAnkh_S_P,
     };
 
     #endregion

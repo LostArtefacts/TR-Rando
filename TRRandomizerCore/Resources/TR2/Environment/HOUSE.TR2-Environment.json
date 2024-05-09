@@ -44,12 +44,6 @@
         "Z": 79360,
         "Room": 85
       },
-      "Textures": {
-        "Floor": 1387,
-        "Ceiling": 1387,
-        "WallAlignment": 4,
-        "Wall4": 1387
-      },
       "DefaultVertex": {
         "Lighting": 7000,
         "Lighting2": 7000,

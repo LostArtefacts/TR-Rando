@@ -618,7 +618,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             LevelName = _levelInstance.Name,
             ClearUnusedSprites = false,
             TypesToImport = new(vehicles.Keys),
-            DataFolder = GetResourcePath(@"TR2\Models"),
+            DataFolder = GetResourcePath(@"TR2\Objects"),
             //TexturePositionMonitor = TextureMonitor.CreateMonitor(_levelInstance.Name, vehicles.Keys.ToList())
         };
 

@@ -305,6 +305,11 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
     protected void ImportTextures(List<B> blobs)
     {
+        if (IgnoreGraphics)
+        {
+            return;
+        }
+
         List<TRTextileRegion> importRegions = new();
 
         foreach (B blob in blobs)

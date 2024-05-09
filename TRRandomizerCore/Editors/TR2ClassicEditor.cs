@@ -78,11 +78,8 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             target += numLevels;
         }
 
-        if (Settings.DeduplicateTextures)
-        {
-            // *2 because of multithreaded approach
-            target += numLevels * 2;
-        }
+        // Deduplication
+        target += numLevels * 2;
 
         if (Settings.ReassignPuzzleItems)
         {
@@ -200,11 +197,9 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             }.Randomize(Settings.GameStringsSeed);
         }
 
-        if (!monitor.IsCancelled && Settings.DeduplicateTextures)
+        if (!monitor.IsCancelled)
         {
-            // This is needed to make as much space as possible available for cross-level enemies.
-            // We do this if we are implementing cross-level enemies OR if randomizing textures,
-            // as the texture mapping is optimised for levels that have been deduplicated.
+            // Deduplication is required so any further mods can reliably set texture data
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Deduplicating textures");
             new TR2TextureDeduplicator
             {

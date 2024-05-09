@@ -14,7 +14,7 @@ public class EMImportModelFunction : BaseEMFunction
         {
             Level = level,
             TypesToImport = new(Models.Select(m => (TR1Type)m)),
-            DataFolder = @"Resources\TR1\Models",
+            DataFolder = @"Resources\TR1\Objects",
             ForceCinematicOverwrite = ForceCinematicOverwrite
         };
 
@@ -28,7 +28,7 @@ public class EMImportModelFunction : BaseEMFunction
         {
             Level = level,
             TypesToImport = new(Models.Select(m => (TR2Type)m)),
-            DataFolder = @"Resources\TR2\Models",
+            DataFolder = @"Resources\TR2\Objects",
             ForceCinematicOverwrite = ForceCinematicOverwrite
         };
 
@@ -42,7 +42,7 @@ public class EMImportModelFunction : BaseEMFunction
         {
             Level = level,
             TypesToImport = new(Models.Select(m => (TR3Type)m)),
-            DataFolder = @"Resources\TR3\Models",
+            DataFolder = @"Resources\TR3\Objects",
             ForceCinematicOverwrite = ForceCinematicOverwrite
         };
 

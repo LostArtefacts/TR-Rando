@@ -828,7 +828,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         Level = level.Data,
                         LevelName = level.Name,
                         TypesToImport = allocation.ImportModels,
-                        DataFolder = _outer.GetResourcePath(@"TR1\Models"),
+                        DataFolder = _outer.GetResourcePath(@"TR1\Objects"),
                     };
 
                     importer.Import();

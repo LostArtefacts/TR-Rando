@@ -15,7 +15,7 @@ public class ExportTests : TestBase
     {
         TR1Level level = GetTR1TestLevel();
         TR1DataExporter exporter = new();
-        TR1Blob blob = exporter.Export(level, TR1Type.Bear, TRBlobType.Model);
+        TR1Blob blob = exporter.Export(level, TR1Type.Bear);
 
         Assert.AreEqual(TR1Type.Bear, blob.ID);
         Assert.AreEqual(TR1Type.Bear, blob.Alias);
@@ -43,7 +43,7 @@ public class ExportTests : TestBase
         {
             DataFolder = @"Objects\TR1"
         };
-        TR1Blob blob1 = exporter.Export(level, TR1Type.Bear, TRBlobType.Model);
+        TR1Blob blob1 = exporter.Export(level, TR1Type.Bear);
         exporter.StoreBlob(blob1);
 
         TR1Blob blob2 = exporter.LoadBlob(TR1Type.Bear);
@@ -60,7 +60,7 @@ public class ExportTests : TestBase
     {
         TR2Level level = GetTR2TestLevel();
         TR2DataExporter exporter = new();
-        TR2Blob blob = exporter.Export(level, TR2Type.BengalTiger, TRBlobType.Model);
+        TR2Blob blob = exporter.Export(level, TR2Type.BengalTiger);
 
         Assert.AreEqual(TR2Type.TigerOrSnowLeopard, blob.ID);
         Assert.AreEqual(TR2Type.BengalTiger, blob.Alias);
@@ -91,7 +91,7 @@ public class ExportTests : TestBase
         {
             DataFolder = @"Objects\TR2"
         };
-        TR2Blob blob1 = exporter.Export(level, TR2Type.BengalTiger, TRBlobType.Model);
+        TR2Blob blob1 = exporter.Export(level, TR2Type.BengalTiger);
         exporter.StoreBlob(blob1);
 
         TR2Blob blob2 = exporter.LoadBlob(TR2Type.BengalTiger);
@@ -108,7 +108,7 @@ public class ExportTests : TestBase
     {
         TR3Level level = GetTR3TestLevel();
         TR3DataExporter exporter = new();
-        TR3Blob blob = exporter.Export(level, TR3Type.Monkey, TRBlobType.Model);
+        TR3Blob blob = exporter.Export(level, TR3Type.Monkey);
 
         Assert.AreEqual(TR3Type.Monkey, blob.ID);
         Assert.AreEqual(TR3Type.Monkey, blob.Alias);
@@ -139,7 +139,7 @@ public class ExportTests : TestBase
         {
             DataFolder = @"Objects\TR3"
         };
-        TR3Blob blob1 = exporter.Export(level, TR3Type.Monkey, TRBlobType.Model);
+        TR3Blob blob1 = exporter.Export(level, TR3Type.Monkey);
         exporter.StoreBlob(blob1);
 
         TR3Blob blob2 = exporter.LoadBlob(TR3Type.Monkey);
@@ -156,7 +156,7 @@ public class ExportTests : TestBase
     {
         TR4Level level = GetTR4TestLevel();
         TR4DataExporter exporter = new();
-        TR4Blob blob = exporter.Export(level, TR4Type.Dog, TRBlobType.Model);
+        TR4Blob blob = exporter.Export(level, TR4Type.Dog);
 
         Assert.AreEqual(TR4Type.Dog, blob.ID);
         Assert.AreEqual(TR4Type.Dog, blob.Alias);
@@ -181,7 +181,7 @@ public class ExportTests : TestBase
         {
             DataFolder = @"Objects\TR4"
         };
-        TR4Blob blob1 = exporter.Export(level, TR4Type.Dog, TRBlobType.Model);
+        TR4Blob blob1 = exporter.Export(level, TR4Type.Dog);
         exporter.StoreBlob(blob1);
 
         TR4Blob blob2 = exporter.LoadBlob(TR4Type.Dog);
@@ -198,7 +198,7 @@ public class ExportTests : TestBase
     {
         TR5Level level = GetTR5TestLevel();
         TR5DataExporter exporter = new();
-        TR5Blob blob = exporter.Export(level, TR5Type.Huskie, TRBlobType.Model);
+        TR5Blob blob = exporter.Export(level, TR5Type.Huskie);
 
         Assert.AreEqual(TR5Type.Huskie, blob.ID);
         Assert.AreEqual(TR5Type.Huskie, blob.Alias);
@@ -224,7 +224,7 @@ public class ExportTests : TestBase
         {
             DataFolder = @"Objects\TR5"
         };
-        TR5Blob blob1 = exporter.Export(level, TR5Type.Huskie, TRBlobType.Model);
+        TR5Blob blob1 = exporter.Export(level, TR5Type.Huskie);
         exporter.StoreBlob(blob1);
 
         TR5Blob blob2 = exporter.LoadBlob(TR5Type.Huskie);

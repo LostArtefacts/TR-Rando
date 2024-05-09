@@ -12,7 +12,7 @@ public class ImportTests : TestBase
     [Description("Test importing a TR1 model.")]
     public void TestTR1Import()
     {
-        ExportTR1Model(TR1Type.Bear, TRBlobType.Model);
+        ExportTR1Model(TR1Type.Bear);
 
         TR1Level level = GetTR1AltTestLevel();
         Assert.IsFalse(level.Models.ContainsKey(TR1Type.Bear));
@@ -32,7 +32,7 @@ public class ImportTests : TestBase
     [Description("Test importing a TR2 model.")]
     public void TestTR2Import()
     {
-        ExportTR2Model(TR2Type.BengalTiger, TRBlobType.Model);
+        ExportTR2Model(TR2Type.BengalTiger);
 
         TR2Level level = GetTR2AltTestLevel();
         Assert.IsFalse(level.Models.ContainsKey(TR2Type.TigerOrSnowLeopard));
@@ -52,7 +52,7 @@ public class ImportTests : TestBase
     [Description("Test importing a TR3 model.")]
     public void TestTR3Import()
     {
-        ExportTR3Model(TR3Type.Monkey, TRBlobType.Model);
+        ExportTR3Model(TR3Type.Monkey);
 
         TR3Level level = GetTR3AltTestLevel();
         Assert.IsFalse(level.Models.ContainsKey(TR3Type.Monkey));
@@ -72,7 +72,7 @@ public class ImportTests : TestBase
     [Description("Test importing a TR4 model.")]
     public void TestTR4Import()
     {
-        ExportTR4Model(TR4Type.Dog, TRBlobType.Model);
+        ExportTR4Model(TR4Type.Dog);
 
         TR4Level level = GetTR4AltTestLevel();
         Assert.IsFalse(level.Models.ContainsKey(TR4Type.Dog));
@@ -92,7 +92,7 @@ public class ImportTests : TestBase
     [Description("Test importing a TR5 model.")]
     public void TestTR5Import()
     {
-        ExportTR5Model(TR5Type.Huskie, TRBlobType.Model);
+        ExportTR5Model(TR5Type.Huskie);
 
         TR5Level level = GetTR5AltTestLevel();
         Assert.IsFalse(level.Models.ContainsKey(TR5Type.Huskie));
@@ -126,83 +126,83 @@ public class ImportTests : TestBase
         catch (TransportException) { }
     }
 
-    private static void ExportTR1Model(TR1Type type, TRBlobType blobType)
+    private static void ExportTR1Model(TR1Type type)
     {
         TR1Level level = GetTR1TestLevel();
         TR1DataExporter exporter = new()
         {
             DataFolder = @"Objects\TR1"
         };
-        TR1Blob blob = exporter.Export(level, type, blobType);
+        TR1Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);
 
         foreach (TR1Type dependency in blob.Dependencies)
         {
-            ExportTR1Model(dependency, exporter.Data.GetBlobType(dependency));
+            ExportTR1Model(dependency);
         }
     }
 
-    private static void ExportTR2Model(TR2Type type, TRBlobType blobType)
+    private static void ExportTR2Model(TR2Type type)
     {
         TR2Level level = GetTR2TestLevel();
         TR2DataExporter exporter = new()
         {
             DataFolder = @"Objects\TR2"
         };
-        TR2Blob blob = exporter.Export(level, type, blobType);
+        TR2Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);
 
         foreach (TR2Type dependency in blob.Dependencies)
         {
-            ExportTR2Model(dependency, exporter.Data.GetBlobType(dependency));
+            ExportTR2Model(dependency);
         }
     }
 
-    private static void ExportTR3Model(TR3Type type, TRBlobType blobType)
+    private static void ExportTR3Model(TR3Type type)
     {
         TR3Level level = GetTR3TestLevel();
         TR3DataExporter exporter = new()
         {
             DataFolder = @"Objects\TR3"
         };
-        TR3Blob blob = exporter.Export(level, type, blobType);
+        TR3Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);
 
         foreach (TR3Type dependency in blob.Dependencies)
         {
-            ExportTR3Model(dependency, exporter.Data.GetBlobType(dependency));
+            ExportTR3Model(dependency);
         }
     }
 
-    private static void ExportTR4Model(TR4Type type, TRBlobType blobType)
+    private static void ExportTR4Model(TR4Type type)
     {
         TR4Level level = GetTR4TestLevel();
         TR4DataExporter exporter = new()
         {
             DataFolder = @"Objects\TR4"
         };
-        TR4Blob blob = exporter.Export(level, type, blobType);
+        TR4Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);
 
         foreach (TR4Type dependency in blob.Dependencies)
         {
-            ExportTR4Model(dependency, exporter.Data.GetBlobType(dependency));
+            ExportTR4Model(dependency);
         }
     }
 
-    private static void ExportTR5Model(TR5Type type, TRBlobType blobType)
+    private static void ExportTR5Model(TR5Type type)
     {
         TR5Level level = GetTR5TestLevel();
         TR5DataExporter exporter = new()
         {
             DataFolder = @"Objects\TR5"
         };
-        TR5Blob blob = exporter.Export(level, type, blobType);
+        TR5Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);
 
         foreach (TR5Type dependency in blob.Dependencies)
         {
-            ExportTR5Model(dependency, exporter.Data.GetBlobType(dependency));
+            ExportTR5Model(dependency);
         }
     }
 }

@@ -351,7 +351,7 @@ public class TRImage : ICloneable
 
     public void Overlay(TRImage image)
     {
-        if (image.Size != Size)
+        if (image.Size.Width > Size.Width || image.Size.Height > Size.Height)
         {
             throw new InvalidOperationException();
         }

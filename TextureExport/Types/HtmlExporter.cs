@@ -114,7 +114,7 @@ public static class HtmlExporter
                 {
                     if (segment.Texture is TRObjectTexture objTexture)
                     {
-                        objectData.Add(segment.Index + ":" + RectangleToString(region.Bounds) + ":" + (objTexture.IsTriangle ? "T" : "Q"));
+                        objectData.Add(segment.Index + ":" + RectangleToString(segment.Bounds) + ":" + (objTexture.HasTriangleVertex ? "T" : "Q"));
                     }
                     else
                     {

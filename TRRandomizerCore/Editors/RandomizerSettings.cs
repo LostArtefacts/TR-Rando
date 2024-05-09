@@ -139,7 +139,6 @@ public class RandomizerSettings
     public bool RandomizeItemTypes { get; set; }
     public bool RandomizeItemPositions { get; set; }
 
-    public bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;// || RandomizeEnvironment; // Not needed until trap model import takes place
     public bool ReassignPuzzleItems => (RandomizeEnemies && CrossLevelEnemies) || (RandomizeItems && IncludeKeyItems);
 
     public bool RandomizeVfx { get; set; }

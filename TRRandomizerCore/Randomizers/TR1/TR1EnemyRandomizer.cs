@@ -20,8 +20,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     public static readonly uint MaxClones = 8;
     private static readonly EnemyTransportCollection _emptyEnemies = new()
     {
-        EntitiesToImport = new(),
-        EntitiesToRemove = new()
+        TypesToImport = new(),
+        TypesToRemove = new()
     };
 
     private static readonly int _unkillableEgyptMummy = 163;
@@ -420,8 +420,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         return new EnemyTransportCollection
         {
-            EntitiesToImport = newEntities,
-            EntitiesToRemove = oldEntities
+            TypesToImport = newEntities,
+            TypesToRemove = oldEntities
         };
     }
 
@@ -1361,7 +1361,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 if (!level.IsAssault)
                 {
                     EnemyTransportCollection enemies = _enemyMapping[level];
-                    List<TR1Type> importModels = new(enemies.EntitiesToImport);
+                    List<TR1Type> importModels = new(enemies.TypesToImport);
                     if (level.Is(TR1LevelNames.KHAMOON) && (importModels.Contains(TR1Type.BandagedAtlantean) || importModels.Contains(TR1Type.BandagedFlyer)))
                     {
                         // Mummies may become shooters in Khamoon, but the missiles won't be available by default, so ensure they do get imported.
@@ -1372,10 +1372,10 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     TR1DataImporter importer = new(true)
                     {
                         TypesToImport = importModels,
-                        TypesToRemove = enemies.EntitiesToRemove,
+                        TypesToRemove = enemies.TypesToRemove,
                         Level = level.Data,
                         LevelName = level.Name,
-                        DataFolder = _outer.GetResourcePath(@"TR1\Models"),
+                        DataFolder = _outer.GetResourcePath(@"TR1\Objects"),
                         //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                     };
 
@@ -1385,7 +1385,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         importer.TextureRemapPath = _outer.GetResourcePath(remapPath);
                     }
 
-                    importer.Data.AliasPriority = TR1EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport);
+                    importer.Data.AliasPriority = TR1EnemyUtilities.GetAliasPriority(level.Name, enemies.TypesToImport);
                     importer.Import();
                 }
 
@@ -1405,8 +1405,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 {
                     EnemyRandomizationCollection enemies = new()
                     {
-                        Available = _enemyMapping[level].EntitiesToImport,
-                        Water = TR1TypeUtilities.FilterWaterEnemies(_enemyMapping[level].EntitiesToImport)
+                        Available = _enemyMapping[level].TypesToImport,
+                        Water = TR1TypeUtilities.FilterWaterEnemies(_enemyMapping[level].TypesToImport)
                     };
 
                     _outer.RandomizeEnemies(level, enemies);
@@ -1423,8 +1423,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
     internal class EnemyTransportCollection
     {
-        internal List<TR1Type> EntitiesToImport { get; set; }
-        internal List<TR1Type> EntitiesToRemove { get; set; }
+        internal List<TR1Type> TypesToImport { get; set; }
+        internal List<TR1Type> TypesToRemove { get; set; }
     }
 
     internal class EnemyRandomizationCollection

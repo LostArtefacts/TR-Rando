@@ -37,7 +37,7 @@ public abstract class TRMassExporter<L, T, S, B>
             return;
 
         L level = ReadLevel(levelPath);
-        B blob = _exporter.Export(level, type, _exporter.Data.GetBlobType(type));
+        B blob = _exporter.Export(level, type);
         _processedTypes.Add(type);
 
         foreach (T dependency in blob.Dependencies)
