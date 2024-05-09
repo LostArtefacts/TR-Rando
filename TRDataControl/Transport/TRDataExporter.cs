@@ -12,12 +12,13 @@ public abstract class TRDataExporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 {
     public string BaseLevelDirectory { get; set; }
 
-    public B Export(L level, T type, TRBlobType blobType)
+    public B Export(L level, T type)
     {
         Level = level;
 
         CreateRemapper(Level)?.Remap();
 
+        TRBlobType blobType = Data.GetBlobType(type);
         PreCreation(level, type, blobType);
 
         B blob = CreateBlob(level, type, blobType);
