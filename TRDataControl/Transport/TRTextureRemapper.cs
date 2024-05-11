@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
 
@@ -89,7 +90,7 @@ public abstract class TRTextureRemapper<L>
             {
                 int j = _level.ObjectTextures.IndexOf(copies[i]);
                 remap[j] = rootIndex;
-                _level.ObjectTextures[j].Atlas = ushort.MaxValue;
+                _level.ObjectTextures[j].Invalidate();
             }
         }
 
@@ -108,23 +109,8 @@ public abstract class TRTextureRemapper<L>
             .Distinct();
         foreach (int unused in allIndices.Except(usedIndices))
         {
-            _level.ObjectTextures[unused].Atlas = ushort.MaxValue;
+            _level.ObjectTextures[unused].Invalidate();
         }
-
-        // Remap all indices after deleting the nulls
-        Dictionary<int, int> remap = new();
-        List<TRObjectTexture> oldTextures = new(_level.ObjectTextures);
-        _level.ObjectTextures.RemoveAll(o => o.Atlas == ushort.MaxValue);
-        for (int i = 0; i < oldTextures.Count; i++)
-        {
-            if (oldTextures[i].Atlas != ushort.MaxValue)
-            {
-                remap[i] = _level.ObjectTextures.IndexOf(oldTextures[i]);
-            }
-        }
-
-        // Update all faces
-        RemapTextures(remap);
     }
 
     private void RemapTextures(Dictionary<int, int> remap)

@@ -344,6 +344,7 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
         // Packing passed, so remap mesh textures to their new object references
         Dictionary<string, Dictionary<int, int>> globalRemap = new();
+        Queue<int> freeSlots = new(Level.GetFreeTextureSlots());
         foreach (TRTextileRegion region in importRegions)
         {
             globalRemap[region.ID] = new();
@@ -352,13 +353,23 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
                 if (globalRemap[region.ID].ContainsKey(segment.Index))
                     continue;
 
-                if (Level.ObjectTextures.Count >= Data.TextureObjectLimit)
+                int newIndex;
+                if (freeSlots.Count > 0)
+                {
+                    newIndex = freeSlots.Dequeue();
+                    Level.ObjectTextures[newIndex] = segment.Texture as TRObjectTexture;
+                }
+                else if (Level.ObjectTextures.Count < Data.TextureObjectLimit)
+                {
+                    newIndex = Level.ObjectTextures.Count;
+                    Level.ObjectTextures.Add(segment.Texture as TRObjectTexture);
+                }
+                else
                 {
                     throw new PackingException($"Limit of {Data.TextureObjectLimit} textures reached.");
                 }
 
-                globalRemap[region.ID][segment.Index] = Level.ObjectTextures.Count;
-                Level.ObjectTextures.Add(segment.Texture as TRObjectTexture);
+                globalRemap[region.ID][segment.Index] = newIndex;
             }
         }
 

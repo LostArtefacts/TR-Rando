@@ -113,7 +113,7 @@ public class TR5TexturePacker : TRTexturePacker
         for (int i = 0; i < _level.ObjectTextures.Count; i++)
         {
             TRObjectTexture texture = _level.ObjectTextures[i];
-            if (group != null && !group.Contains(texture))
+            if (group != null && !group.Contains(texture) || !texture.IsValid())
                 continue;
 
             segments.Add(new()

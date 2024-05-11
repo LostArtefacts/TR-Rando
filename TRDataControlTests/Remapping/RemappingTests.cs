@@ -8,10 +8,34 @@ using TRLevelControlTests;
 namespace TRDataControlTests.IO;
 
 [TestClass]
-[TestCategory("OriginalIO")]
 public class RemappingTests : TestBase
 {
     [TestMethod]
+    [TestCategory("DataTransport")]
+    [Description("Test that texture slots are freed correctly when requested.")]
+    public void TestFreeSlots()
+    {
+        TR1Level level = GetTR1TestLevel();
+
+        HashSet<int> slots = new();
+        Random random = new();
+        while (slots.Count < 10)
+        {
+            slots.Add(random.Next(0, level.ObjectTextures.Count));
+        }
+
+        foreach (int slot in slots)
+        {
+            level.ObjectTextures[slot].Invalidate();
+            Assert.IsFalse(level.ObjectTextures[slot].IsValid());
+        }
+
+        List<int> freeSlots = level.GetFreeTextureSlots();
+        CollectionAssert.AreEquivalent(slots.ToList(), freeSlots);
+    }
+
+    [TestMethod]
+    [TestCategory("OriginalIO")]
     [Description("Test that object textures are correct after removing data.")]
     public void TestTextureRemoval()
     {
@@ -46,6 +70,7 @@ public class RemappingTests : TestBase
     }
 
     [TestMethod]
+    [TestCategory("OriginalIO")]
     [Description("As above, but with an added dependency on a different model.")]
     public void TestDependencies()
     {

@@ -40,6 +40,9 @@ public class TR3TexturePacker : TRTexturePacker
         List<TRTextileSegment> segments = new();
         for (int i = 0; i < _level.ObjectTextures.Count; i++)
         {
+            if (!_level.ObjectTextures[i].IsValid())
+                continue;
+
             segments.Add(new()
             {
                 Index = i,

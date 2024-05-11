@@ -5,7 +5,7 @@
         {
           "RoomNumber": 131,
           "RectangleIndices": [ 15 ],
-          "BackgroundIndex": 1462
+          "BackgroundIndex": 1480
         }
       ]
     },
@@ -14,7 +14,7 @@
         {
           "RoomNumber": 124,
           "RectangleIndices": [ 4 ],
-          "BackgroundIndex": 1332
+          "BackgroundIndex": 1350
         }
       ]
     }
