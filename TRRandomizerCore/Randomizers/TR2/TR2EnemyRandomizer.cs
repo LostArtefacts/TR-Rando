@@ -1036,7 +1036,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                     LevelName = level.Name,
                     DataFolder = _outer.GetResourcePath(@"TR2\Objects"),
                     TextureRemapPath = _outer.GetResourcePath(@"TR2\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json"),
-                    //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
+                    TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport)
                 };
 
                 importer.Data.AliasPriority = TR2EnemyUtilities.GetAliasPriority(level.Name, enemies.TypesToImport);

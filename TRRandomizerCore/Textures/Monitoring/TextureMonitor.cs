@@ -3,44 +3,44 @@ using TRImageControl.Textures;
 
 namespace TRRandomizerCore.Textures;
 
-public class TextureMonitor<E> : ITexturePositionMonitor<E>
-    where E : Enum
+public class TextureMonitor<T> : ITexturePositionMonitor<T>
+    where T : Enum
 {
-    private readonly List<StaticTextureSource<E>> _entitySources;
+    private readonly List<StaticTextureSource<T>> _typeSources;
 
-    public Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> PreparedLevelMapping { get; private set; }
-    public List<E> RemovedTextures { get; private set; }
+    public Dictionary<StaticTextureSource<T>, List<StaticTextureTarget>> PreparedLevelMapping { get; private set; }
+    public List<T> RemovedTextures { get; private set; }
 
     public bool UseMirroring { get; set; }
     public bool UseNightTextures { get; set; }
     public bool UseLaraOutfitTextures { get; set; }
 
     // Allow entities such as Artefacts to be defined in texture sources, but mapped to different types here
-    public Dictionary<E, E> EntityMap { get; set; }
+    public Dictionary<T, T> TypeMap { get; set; }
 
-    public TextureMonitor(List<StaticTextureSource<E>> sources)
+    public TextureMonitor(List<StaticTextureSource<T>> sources)
     {
-        _entitySources = sources;
-        EntityMap = new Dictionary<E, E>();
+        _typeSources = sources;
+        TypeMap = new();
         UseLaraOutfitTextures = true;
     }
 
-    public void AppendSources(IEnumerable<StaticTextureSource<E>> sources)
+    public void AppendSources(IEnumerable<StaticTextureSource<T>> sources)
     {
-        foreach (StaticTextureSource<E> source in sources)
+        foreach (StaticTextureSource<T> source in sources)
         {
-            if (!_entitySources.Contains(source))
+            if (!_typeSources.Contains(source))
             {
-                _entitySources.Add(source);
+                _typeSources.Add(source);
             }
         }
     }
 
-    public void RemoveSources(IEnumerable<StaticTextureSource<E>> sources)
+    public void RemoveSources(IEnumerable<StaticTextureSource<T>> sources)
     {
-        foreach (StaticTextureSource<E> source in sources)
+        foreach (StaticTextureSource<T> source in sources)
         {
-            _entitySources.Remove(source);
+            _typeSources.Remove(source);
             if (PreparedLevelMapping != null && PreparedLevelMapping.ContainsKey(source))
             {
                 PreparedLevelMapping.Remove(source);
@@ -48,77 +48,75 @@ public class TextureMonitor<E> : ITexturePositionMonitor<E>
         }
     }
 
-    public Dictionary<E, List<int>> GetMonitoredTextureIndices()
+    public Dictionary<T, List<int>> GetMonitoredIndices()
     {
         // The keys defined in the source ObjectTextureMap are TRObjectTexture index references
         // from the original level they were extracted from. We want to track what happens to
         // these textures.
-        Dictionary<E, List<int>> entityIndices = new();
-        foreach (StaticTextureSource<E> source in _entitySources)
+        Dictionary<T, List<int>> indices = new();
+        foreach (StaticTextureSource<T> source in _typeSources)
         {
-            foreach (E entity in source.EntityTextureMap.Keys)
+            foreach (T type in source.EntityTextureMap.Keys)
             {
-                if (!entityIndices.ContainsKey(entity))
+                if (!indices.ContainsKey(type))
                 {
-                    entityIndices[entity] = new List<int>();
+                    indices[type] = new List<int>();
                 }
-                entityIndices[entity].AddRange(source.EntityTextureMap[entity].Keys); // The keys hold the texture indices, the values are the segment positions
+                indices[type].AddRange(source.EntityTextureMap[type].Keys); // The keys hold the texture indices, the values are the segment positions
             }
         }
-        return entityIndices;
+        return indices;
     }
 
-    public void MonitoredTexturesPositioned(Dictionary<E, List<PositionedTexture>> texturePositions)
+    public void OnTexturesPositioned(Dictionary<T, List<PositionedTexture>> texturePositions)
     {
         PreparedLevelMapping ??= new();
 
-        foreach (E entity in texturePositions.Keys)
+        foreach (var (type, positions) in texturePositions)
         {
-            StaticTextureSource<E>[] sources = GetSources(entity);
-            List<StaticTextureTarget> targets = new();
-            foreach (PositionedTexture texture in texturePositions[entity])
+            List<StaticTextureSource<T>> sources = GetSources(type);
+            foreach (PositionedTexture texture in positions)
             {
-                foreach (StaticTextureSource<E> source in sources)
+                foreach (StaticTextureSource<T> source in sources)
                 {
-                    if (source.EntityTextureMap[entity].ContainsKey(texture.OriginalIndex))
+                    if (!source.EntityTextureMap[type].ContainsKey(texture.OriginalIndex))
                     {
-                        // We'll make a new texture target for the level this monitor is associated with
-                        targets.Add(new StaticTextureTarget
-                        {
-                            Segment = source.EntityTextureMap[entity][texture.OriginalIndex], // this points to the associated rectangle in the source's Bitmap
-                            Tile = texture.TileIndex,
-                            X = texture.Position.X,
-                            Y = texture.Position.Y
-                        });
-
-                        if (!PreparedLevelMapping.ContainsKey(source))
-                        {
-                            PreparedLevelMapping[source] = new List<StaticTextureTarget>();
-                        }
-                        PreparedLevelMapping[source].Add(targets[^1]);
+                        continue;
                     }
+
+                    if (!PreparedLevelMapping.ContainsKey(source))
+                    {
+                        PreparedLevelMapping[source] = new();
+                    }
+                    PreparedLevelMapping[source].Add(new()
+                    {
+                        Segment = source.EntityTextureMap[type][texture.OriginalIndex], // this points to the associated rectangle in the source's Bitmap
+                        Tile = texture.TileIndex,
+                        X = texture.Position.X,
+                        Y = texture.Position.Y
+                    });
                 }
             }
         }
     }
 
-    private StaticTextureSource<E>[] GetSources(E entity)
+    private List<StaticTextureSource<T>> GetSources(T type)
     {
-        List<StaticTextureSource<E>> sources = new();
-        foreach (StaticTextureSource<E> source in _entitySources)
+        List<StaticTextureSource<T>> sources = new();
+        foreach (StaticTextureSource<T> source in _typeSources)
         {
-            if (source.EntityTextureMap.ContainsKey(entity))
+            if (source.EntityTextureMap.ContainsKey(type))
             {
                 sources.Add(source);
             }
         }
-        return sources.ToArray();
+        return sources;
     }
 
     // Keep a note of removed textures so that anything defined statically in the texture source
     // files does not get imported (e.g. if Barney is removed from GW, we don't want the randomized
     // textures to be imported).
-    public void EntityTexturesRemoved(List<E> entities)
+    public void OnTexturesRemoved(List<T> entities)
     {
         if (RemovedTextures == null)
         {

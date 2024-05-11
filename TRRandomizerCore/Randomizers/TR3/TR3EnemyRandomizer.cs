@@ -734,7 +734,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                         Level = level.Data,
                         LevelName = level.Name,
                         DataFolder = _outer.GetResourcePath(@"TR3\Objects"),
-                        //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
+                        TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport)
                     };
 
                     string remapPath = @"TR3\Textures\Deduplication\" + level.Name + "-TextureRemap.json";

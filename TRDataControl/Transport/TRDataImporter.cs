@@ -14,6 +14,7 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
     public List<T> TypesToRemove { get; set; } = new();
     public bool ClearUnusedSprites { get; set; }
     public string TextureRemapPath { get; set; }
+    public ITexturePositionMonitor<T> TextureMonitor { get; set; }
     public bool IgnoreGraphics { get; set; }
     public bool ForceCinematicOverwrite { get; set; }
 
@@ -278,14 +279,20 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
             switch (blobType)
             {
                 case TRBlobType.Model:
-                    staleTextures.AddRange(Models[type].Meshes
-                        .SelectMany(m => m.TexturedFaces.Select(t => (int)t.Texture)));
-                    Models.Remove(id);
+                    if (Models.ContainsKey(id))
+                    {
+                        staleTextures.AddRange(Models[type].Meshes
+                            .SelectMany(m => m.TexturedFaces.Select(t => (int)t.Texture)));
+                        Models.Remove(id);
+                    }
                     break;
 
                 case TRBlobType.StaticMesh:
-                    staleTextures.AddRange(StaticMeshes[type].Mesh.TexturedFaces.Select(t => (int)t.Texture));
-                    StaticMeshes.Remove(id);
+                    if (StaticMeshes.ContainsKey(id))
+                    {
+                        staleTextures.AddRange(StaticMeshes[type].Mesh.TexturedFaces.Select(t => (int)t.Texture));
+                        StaticMeshes.Remove(id);
+                    }
                     break;
 
                 case TRBlobType.Sprite:
@@ -301,6 +308,8 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
             CreateRemapper(Level)?.RemoveUnusedTextures(staleTextures,
                 (tile, bounds) => remapGroup?.CanRemoveRectangle(tile, bounds, TypesToRemove) ?? true);
         }
+
+        TextureMonitor?.OnTexturesRemoved(TypesToRemove);
     }
 
     protected void ImportTextures(List<B> blobs)
@@ -373,6 +382,8 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
             }
         }
 
+        Dictionary<T, List<PositionedTexture>> texturePositions = new();
+
         foreach (B blob in blobs)
         {
             if (blob.IsDependencyOnly)
@@ -412,7 +423,21 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
             {
                 face.Texture = ImportColour(blob, face.Texture);
             }
+
+            texturePositions[blob.Alias] = new();
+            foreach (var (oldIndex, newIndex) in remap)
+            {
+                TRObjectTexture texture = Level.ObjectTextures[newIndex];
+                texturePositions[blob.Alias].Add(new()
+                {
+                    OriginalIndex = oldIndex,
+                    TileIndex = texture.Atlas,
+                    Position = texture.Position
+                });
+            }
         }
+
+        TextureMonitor?.OnTexturesPositioned(texturePositions);
     }
 
     protected void ImportData(List<B> blobs, TRMesh oldDummyMesh)

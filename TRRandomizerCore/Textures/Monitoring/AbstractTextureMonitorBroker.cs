@@ -2,35 +2,35 @@
 
 namespace TRRandomizerCore.Textures;
 
-public abstract class AbstractTextureMonitorBroker<E>
-    where E : Enum
+public abstract class AbstractTextureMonitorBroker<T>
+    where T : Enum
 {
-    private readonly Dictionary<string, TextureMonitor<E>> _monitors;
-    private readonly TextureDatabase<E> _textureDatabase;
+    private readonly Dictionary<string, TextureMonitor<T>> _monitors;
+    private readonly TextureDatabase<T> _textureDatabase;
     private readonly object _lock;
 
-    protected abstract Dictionary<E, E> ExpandedMonitorMap { get; }
+    protected abstract Dictionary<T, T> ExpandedMonitorMap { get; }
 
     public AbstractTextureMonitorBroker()
     {
-        _monitors = new Dictionary<string, TextureMonitor<E>>();
+        _monitors = new();
         _textureDatabase = CreateDatabase();
-        _lock = new object();
+        _lock = new();
     }
 
-    protected abstract TextureDatabase<E> CreateDatabase();
-    protected abstract E TranslateAlias(string lvlName, E entity);
+    protected abstract TextureDatabase<T> CreateDatabase();
+    protected abstract T TranslateAlias(string lvlName, T type);
 
-    public TextureMonitor<E> CreateMonitor(string lvlName, List<E> entities = null)
+    public TextureMonitor<T> CreateMonitor(string lvlName, List<T> types = null)
     {
         lock (_lock)
         {
-            entities ??= new();
-            List<StaticTextureSource<E>> sources = GetSourcesToMonitor(entities);
-            TextureMonitor<E> monitor = GetMonitor(lvlName);
+            types ??= new();
+            List<StaticTextureSource<T>> sources = GetSourcesToMonitor(types);
+            TextureMonitor<T> monitor = GetMonitor(lvlName);
             if (monitor == null)
             {
-                monitor = new TextureMonitor<E>(sources);
+                monitor = new TextureMonitor<T>(sources);
                 _monitors[lvlName] = monitor;
             }
             else
@@ -42,42 +42,42 @@ public abstract class AbstractTextureMonitorBroker<E>
         }
     }
 
-    public void ClearMonitor(string lvlName, List<E> entities)
+    public void ClearMonitor(string lvlName, List<T> types)
     {
         lock (_lock)
         {
-            TextureMonitor<E> monitor = GetMonitor(lvlName);
+            TextureMonitor<T> monitor = GetMonitor(lvlName);
             if (monitor == null)
             {
                 return;
             }
 
-            List<StaticTextureSource<E>> sources = GetSourcesToMonitor(entities);
+            List<StaticTextureSource<T>> sources = GetSourcesToMonitor(types);
             monitor.RemoveSources(sources);
         }
     }
 
-    private List<StaticTextureSource<E>> GetSourcesToMonitor(List<E> entities)
+    private List<StaticTextureSource<T>> GetSourcesToMonitor(List<T> types)
     {
-        List<E> expandedEntities = new(entities);
+        List<T> expandedTypes = new(types);
 
         // We need to capture things like flames being imported into Boat, Opera, Skidoo and the fact that
         // the red Skidoo is available when importing MercSnomobDriver.
         if (ExpandedMonitorMap != null)
         {
-            foreach (E entity in ExpandedMonitorMap.Keys)
+            foreach (T type in ExpandedMonitorMap.Keys)
             {
-                if (expandedEntities.Contains(entity) && !expandedEntities.Contains(ExpandedMonitorMap[entity]))
+                if (expandedTypes.Contains(type) && !expandedTypes.Contains(ExpandedMonitorMap[type]))
                 {
-                    expandedEntities.Add(ExpandedMonitorMap[entity]);
+                    expandedTypes.Add(ExpandedMonitorMap[type]);
                 }
             }
         }
 
-        List<StaticTextureSource<E>> sources = new();
-        foreach (E entity in expandedEntities)
+        List<StaticTextureSource<T>> sources = new();
+        foreach (T type in expandedTypes)
         {
-            foreach (StaticTextureSource<E> source in _textureDatabase.GetStaticSource(entity))
+            foreach (StaticTextureSource<T> source in _textureDatabase.GetStaticSource(type))
             {
                 // Does the source have any defined object texture indices we are interested in monitoring?
                 if (source.EntityTextureMap != null && !sources.Contains(source))
@@ -90,7 +90,7 @@ public abstract class AbstractTextureMonitorBroker<E>
         return sources;
     }
 
-    public TextureMonitor<E> GetMonitor(string lvlName)
+    public TextureMonitor<T> GetMonitor(string lvlName)
     {
         return _monitors.ContainsKey(lvlName) ? _monitors[lvlName] : null;
     }
@@ -103,30 +103,30 @@ public abstract class AbstractTextureMonitorBroker<E>
         }
     }
 
-    public Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> GetLevelMapping(string lvlName)
+    public Dictionary<StaticTextureSource<T>, List<StaticTextureTarget>> GetLevelMapping(string lvlName)
     {
-        TextureMonitor<E> monitor = GetMonitor(lvlName);
+        TextureMonitor<T> monitor = GetMonitor(lvlName);
         return monitor?.PreparedLevelMapping;
     }
 
-    public List<E> GetIgnoredEntities(string lvlName)
+    public List<T> GetIgnoredTypes(string lvlName)
     {
-        TextureMonitor<E> monitor = GetMonitor(lvlName);
+        TextureMonitor<T> monitor = GetMonitor(lvlName);
         if (monitor != null && monitor.RemovedTextures != null)
         {
-            List<E> entities = new();
-            foreach (E entity in monitor.RemovedTextures)
+            List<T> types = new();
+            foreach (T type in monitor.RemovedTextures)
             {
-                entities.Add(TranslateAlias(lvlName, entity));
+                types.Add(TranslateAlias(lvlName, type));
             }
-            return entities;
+            return types;
         }
         return null;
     }
 
-    public Dictionary<E, E> GetEntityMap(string lvlName)
+    public Dictionary<T, T> GetTypeMap(string lvlName)
     {
-        TextureMonitor<E> monitor = GetMonitor(lvlName);
-        return monitor?.EntityMap;
+        TextureMonitor<T> monitor = GetMonitor(lvlName);
+        return monitor?.TypeMap;
     }
 }

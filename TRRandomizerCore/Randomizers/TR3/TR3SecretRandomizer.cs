@@ -753,7 +753,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         LevelName = level.Name,
                         TypesToImport = allocation.ImportModels,
                         DataFolder = _outer.GetResourcePath(@"TR3\Objects"),
-                        //TexturePositionMonitor = monitor
+                        TextureMonitor = monitor
                     };
                     importer.Import();
 
@@ -782,8 +782,8 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         SetPuzzleTypeName(level, puzzlePickupType, _pickupNames[artefactPickupType]);
 
                         // Tell the texture monitor that these artefacts are puzzle items
-                        monitor.EntityMap[artefactPickupType] = puzzlePickupType;
-                        monitor.EntityMap[artefactMenuType] = puzzleMenuType;
+                        monitor.TypeMap[artefactPickupType] = puzzlePickupType;
+                        monitor.TypeMap[artefactMenuType] = puzzleMenuType;
                     }
                 }
 
