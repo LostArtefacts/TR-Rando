@@ -28,12 +28,12 @@ public class TRTextileSegment : ICloneable
 
     public void Invalidate()
     {
-        Atlas = ushort.MaxValue;
+        Texture.Invalidate();
     }
 
     public bool IsValid()
     {
-        return Atlas != ushort.MaxValue;
+        return Texture.IsValid();
     }
 
     public override string ToString()

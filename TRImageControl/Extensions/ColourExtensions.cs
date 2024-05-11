@@ -191,4 +191,17 @@ public static class ColourExtensions
             .Where(item => item.Index >= startIndex)
             .MinBy(item => item.Delta).Index;
     }
+
+    public static bool IsValid(this TRTexture texture)
+    {
+        return texture.Atlas != 0 || texture.Bounds != _nullBounds;
+    }
+
+    public static void Invalidate(this TRTexture texture)
+    {
+        texture.Atlas = 0;
+        texture.Bounds = _nullBounds;
+    }
+
+    private static readonly Rectangle _nullBounds = new(0, 0, 1, 1);
 }

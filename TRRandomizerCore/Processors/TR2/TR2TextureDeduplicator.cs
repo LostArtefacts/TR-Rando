@@ -102,7 +102,6 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
 
                     TR2TextureRemapper remapper = new(level.Data);
                     remapper.ResetUnusedTextures();
-                    remapper.Remap();
 
                     _outer.SaveLevel(level);
                 }

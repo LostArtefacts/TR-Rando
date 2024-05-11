@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using TRImageControl;
 using TRLevelControl.Build;
 using TRLevelControl.Model;
 
@@ -27,6 +28,19 @@ public static class TRModelExtensions
                 new TR5TextureRemapper(level as TR5Level).ResetUnusedTextures();
                 break;
         }
+    }
+
+    public static List<int> GetFreeTextureSlots(this TRLevelBase level)
+    {
+        List<int> slots = new();
+        for (int i = 0; i < level.ObjectTextures.Count; i++)
+        {
+            if (!level.ObjectTextures[i].IsValid())
+            {
+                slots.Add(i);
+            }
+        }
+        return slots;
     }
 
     public static string ComputeSkeletonHash(this IEnumerable<TRMesh> meshes)
