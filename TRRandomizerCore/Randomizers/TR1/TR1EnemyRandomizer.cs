@@ -1376,7 +1376,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         Level = level.Data,
                         LevelName = level.Name,
                         DataFolder = _outer.GetResourcePath(@"TR1\Objects"),
-                        //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
+                        TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport)
                     };
 
                     string remapPath = @"TR1\Textures\Deduplication\" + level.Name + "-TextureRemap.json";

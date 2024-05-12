@@ -305,7 +305,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 LevelName = level.Name,
                 ClearUnusedSprites = false,
                 TypesToImport = _ponytailEntities,
-                //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, _ponytailEntities),
+                TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, _ponytailEntities),
                 DataFolder = _outer.GetResourcePath(@"TR1\Objects")
             };
 
@@ -881,7 +881,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                     LevelName = level.CutSceneLevel.Name,
                     ClearUnusedSprites = false,
                     TypesToImport = _mauledEntities,
-                    //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.CutSceneLevel.Name, _mauledEntities),
+                    TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.CutSceneLevel.Name, _mauledEntities),
                     DataFolder = _outer.GetResourcePath(@"TR1\Objects")
                 };
 

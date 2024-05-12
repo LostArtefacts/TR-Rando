@@ -259,7 +259,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 ClearUnusedSprites = false,
                 TypesToImport = laraImport,
                 TypesToRemove = laraRemovals,
-                //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, laraImport),
+                TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, laraImport),
                 DataFolder = _outer.GetResourcePath(@"TR2\Objects")
             };
 

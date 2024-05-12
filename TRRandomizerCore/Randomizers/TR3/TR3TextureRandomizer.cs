@@ -215,8 +215,8 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
                 level.Name,
                 _textureDatabase,
                 TextureMonitor.GetLevelMapping(level.Name),
-                TextureMonitor.GetIgnoredEntities(level.Name),
-                TextureMonitor.GetEntityMap(level.Name)
+                TextureMonitor.GetIgnoredTypes(level.Name),
+                TextureMonitor.GetTypeMap(level.Name)
             );
         }
     }

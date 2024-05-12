@@ -18,8 +18,8 @@ public class TR1TextureMonitorBroker : AbstractTextureMonitorBroker<TR1Type>
         return new TR1TextureDatabase();
     }
 
-    protected override TR1Type TranslateAlias(string lvlName, TR1Type entity)
+    protected override TR1Type TranslateAlias(string lvlName, TR1Type type)
     {
-        return TR1TypeUtilities.GetAliasForLevel(lvlName, entity);
+        return TR1TypeUtilities.GetAliasForLevel(lvlName, type);
     }
 }

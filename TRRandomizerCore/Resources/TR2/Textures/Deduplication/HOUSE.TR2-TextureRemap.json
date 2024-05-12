@@ -1,1 +1,116 @@
-{}
+{
+  "Dependencies": [
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 12,
+      "Bounds": "112, 160, 24, 32"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 12,
+      "Bounds": "48, 184, 24, 32"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 12,
+      "Bounds": "208, 191, 24, 32"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 12,
+      "Bounds": "232, 207, 24, 32"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 13,
+      "Bounds": "176, 0, 24, 32"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 13,
+      "Bounds": "0, 32, 24, 16"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 7,
+      "Bounds": "64, 152, 16, 16"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 7,
+      "Bounds": "48, 136, 16, 16"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 7,
+      "Bounds": "240, 144, 16, 16"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 7,
+      "Bounds": "80, 152, 16, 16"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 7,
+      "Bounds": "208, 160, 16, 16"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 7,
+      "Bounds": "160, 120, 16, 16"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 7,
+      "Bounds": "104, 248, 8, 8"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 14,
+      "Bounds": "40, 208, 8, 16"
+    },
+    {
+      "Types": [
+        243
+      ],
+      "TileIndex": 8,
+      "Bounds": "128, 32, 8, 8"
+    },
+    {
+      "Types": [
+        170
+      ],
+      "TileIndex": 8,
+      "Bounds": "224, 32, 8, 8"
+    }
+  ]
+}

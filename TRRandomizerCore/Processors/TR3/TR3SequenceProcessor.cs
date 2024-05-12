@@ -164,7 +164,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             LevelName = level.Name,
             TypesToImport = upvImport,
             DataFolder = GetResourcePath(@"TR3\Objects"),
-            //TexturePositionMonitor = TextureMonitor.CreateMonitor(level.Name, upvImport)
+            TextureMonitor = TextureMonitor.CreateMonitor(level.Name, upvImport)
         };
 
         importer.Import();

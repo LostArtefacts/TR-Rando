@@ -441,6 +441,7 @@
       {
         "Comments": "Add a bowl where the spikes were.",
         "EMType": 24,
+        "MeshID": 302,
         "Locations": [
           {
             "X": 47616,

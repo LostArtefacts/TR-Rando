@@ -13,27 +13,15 @@ public class EMEditorMapping
         Formatting = Formatting.Indented
     };
 
-    public EMEditorSet All { get; set; }
-    public List<EMEditorSet> Any { get; set; }
-    public List<List<EMEditorSet>> AllWithin { get; set; }
-    public List<EMEditorGroupedSet> OneOf { get; set; }
-    public List<EMConditionalEditorSet> ConditionalAllWithin { get; set; }
-    public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; }
-    public List<EMConditionalGroupedSet> ConditionalOneOf { get; set; }
-    public EMEditorSet Mirrored { get; set; }
+    public EMEditorSet All { get; set; } = new();
+    public List<EMEditorSet> Any { get; set; } = new();
+    public List<List<EMEditorSet>> AllWithin { get; set; } = new();
+    public List<EMEditorGroupedSet> OneOf { get; set; } = new();
+    public List<EMConditionalEditorSet> ConditionalAllWithin { get; set; } = new();
+    public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; } = new();
+    public List<EMConditionalGroupedSet> ConditionalOneOf { get; set; } = new();
+    public EMEditorSet Mirrored { get; set; } = new();
     public Dictionary<ushort, ushort> AlternativeTextures { get; set; }
-
-    public EMEditorMapping()
-    {
-        All = new EMEditorSet();
-        ConditionalAll = new List<EMConditionalSingleEditorSet>();
-        Any = new List<EMEditorSet>();
-        AllWithin = new List<List<EMEditorSet>>();
-        ConditionalAllWithin = new List<EMConditionalEditorSet>();
-        OneOf = new List<EMEditorGroupedSet>();
-        ConditionalOneOf = new List<EMConditionalGroupedSet>();
-        Mirrored = new EMEditorSet();
-    }
 
     public static EMEditorMapping Get(string packPath)
     {
@@ -82,5 +70,36 @@ public class EMEditorMapping
         OneOf?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
         ConditionalOneOf?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
         Mirrored?.SetCommunityPatch(isCommunityPatch);
+    }
+
+    public List<BaseEMFunction> FindAll(Predicate<BaseEMFunction> predicate = null)
+    {
+        List<BaseEMFunction> results = new();
+        Scan(e =>
+        {
+            if (predicate == null || predicate(e))
+            {
+                results.Add(e);
+            }
+        });
+        return results;
+    }
+
+    public void Scan(Action<BaseEMFunction> callback)
+    {
+        All?.ForEach(e => callback(e));
+        ConditionalAll?.ForEach(s => s.OnFalse?.ForEach(e => callback(e)));
+        ConditionalAll?.ForEach(s => s.OnTrue?.ForEach(e => callback(e)));
+        Any?.ForEach(e => e.ForEach(a => callback(a)));
+        AllWithin?.ForEach(a => a.ForEach(s => s.ForEach(e => callback(e))));
+        ConditionalAllWithin?.ForEach(s => s.OnFalse?.ForEach(a => a.ForEach(e => callback(e))));
+        ConditionalAllWithin?.ForEach(s => s.OnTrue?.ForEach(a => a.ForEach(e => callback(e))));
+        OneOf?.ForEach(s => s.Leader.ForEach(e => callback(e)));
+        OneOf?.ForEach(s => s.Followers.ForEach(e => e.ForEach(a => callback(a))));
+        ConditionalOneOf?.ForEach(s => s.OnFalse?.Leader.ForEach(e => callback(e)));
+        ConditionalOneOf?.ForEach(s => s.OnFalse?.Followers.ForEach(e => e.ForEach(a => callback(a))));
+        ConditionalOneOf?.ForEach(s => s.OnTrue?.Leader.ForEach(e => callback(e)));
+        ConditionalOneOf?.ForEach(s => s.OnTrue?.Followers.ForEach(e => e.ForEach(a => callback(a))));
+        Mirrored?.ForEach(e => callback(e));
     }
 }

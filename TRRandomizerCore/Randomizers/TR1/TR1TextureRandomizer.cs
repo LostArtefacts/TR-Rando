@@ -217,8 +217,8 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
                 level.JsonID,
                 _textureDatabase,
                 TextureMonitor.GetLevelMapping(level.Name),
-                TextureMonitor.GetIgnoredEntities(level.Name),
-                TextureMonitor.GetEntityMap(level.Name)
+                TextureMonitor.GetIgnoredTypes(level.Name),
+                TextureMonitor.GetTypeMap(level.Name)
             );
         }
     }
