@@ -274,6 +274,12 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // Try to import the selected models into the level.
                 importer.Import();
 
+                if (level.IsCutScene)
+                {
+                    // Restore original cutscene animations
+                    level.Data.Models[TR2Type.Lara].Animations = laraModel.Animations;
+                }
+
                 // #314 Any clones of Lara should copy her new style
                 if (laraClones.Count > 0)
                 {
