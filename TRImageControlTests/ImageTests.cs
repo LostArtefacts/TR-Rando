@@ -7,10 +7,10 @@ using TRLevelControlTests;
 namespace TRImageControlTests;
 
 [TestClass]
+[TestCategory("Textures")]
 public class ImageTests : TestBase
 {
     [TestMethod]
-    [TestCategory("Textures")]
     [Description("Test that an 8-bit image is identical after conversion into TRImage type.")]
     public void Test8Bit()
     {
@@ -35,7 +35,6 @@ public class ImageTests : TestBase
     }
 
     [TestMethod]
-    [TestCategory("Textures")]
     [Description("Test that a 16-bit image is identical after conversion into TRImage type.")]
     public void Test16Bit()
     {
@@ -49,7 +48,6 @@ public class ImageTests : TestBase
     }
 
     [TestMethod]
-    [TestCategory("Textures")]
     [Description("Test that a 32-bit image is identical after conversion into TRImage type.")]
     public void Test32Bit()
     {
@@ -63,7 +61,6 @@ public class ImageTests : TestBase
     }
 
     [TestMethod]
-    [TestCategory("Textures")]
     [Description("Test that the correct portion of an image is deleted.")]
     public void TestDelete()
     {
@@ -99,7 +96,6 @@ public class ImageTests : TestBase
     }
 
     [TestMethod]
-    [TestCategory("Textures")]
     [Description("Test that a portion of an image exported matches the source.")]
     public void TestCopy()
     {
@@ -121,7 +117,6 @@ public class ImageTests : TestBase
     }
 
     [TestMethod]
-    [TestCategory("Textures")]
     [Description("Test importing an image into another.")]
     [DataRow(true)]
     [DataRow(false)]
@@ -172,7 +167,6 @@ public class ImageTests : TestBase
     }
 
     [TestMethod]
-    [TestCategory("Textures")]
     [Description("Test reading and writing to an image.")]
     public void TestReadWrite()
     {
@@ -203,7 +197,6 @@ public class ImageTests : TestBase
     }
 
     [TestMethod]
-    [TestCategory("Textures")]
     [Description("Test bitmap interpretation.")]
     public void TestBitmap()
     {
@@ -224,5 +217,25 @@ public class ImageTests : TestBase
         bitmap2.Save(ms2, ImageFormat.Png);
 
         CollectionAssert.AreEqual(ms1.ToArray(), ms2.ToArray());
+    }
+
+    [TestMethod]
+    [Description("Test alpha blending")]
+    public void TestBlending()
+    {
+        TRImage baseImage = new(128, 128);
+        baseImage.Fill(Color.FromArgb(153, Color.Blue)); // 60%
+
+        TRImage overlay = new(64, 64);
+        overlay.Fill(Color.FromArgb(102, Color.Red)); // 40%
+
+        baseImage.Import(overlay, new(32, 32), true);
+
+        // Rubbish test
+        Color blend = baseImage.GetPixel(32, 32);
+        Assert.AreEqual(134, blend.R);
+        Assert.AreEqual(0, blend.G);
+        Assert.AreEqual(120, blend.B);
+        Assert.AreEqual(193, blend.A);
     }
 }
