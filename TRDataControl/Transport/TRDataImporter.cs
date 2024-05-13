@@ -95,10 +95,13 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
                 {
                     entityClean = false;
                 }
+            }
 
+            if (entityClean)
+            {
                 // And similarly for cyclic dependencies
                 IEnumerable<T> cyclics = Data.GetCyclicDependencies(type);
-                entityClean = cyclics.All(TypesToRemove.Contains);
+                entityClean = cyclics.All(TypesToRemove.Contains) && !cyclics.Any(TypesToImport.Contains);
             }
 
             if (entityClean)

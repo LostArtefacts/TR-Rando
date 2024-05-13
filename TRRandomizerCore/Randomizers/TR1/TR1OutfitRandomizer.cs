@@ -379,7 +379,10 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             TRModel ponytail = level.Data.Models[TR1Type.LaraPonytail_H_U];
             List<TRMesh> goldMeshes = new(ponytail.Meshes.Select(m => MeshEditor.CloneMeshAsColoured(m, goldPalette)));
             ponytail.Meshes.AddRange(goldMeshes);
-            ponytail.MeshTrees.AddRange(ponytail.MeshTrees);
+
+            List<TRMeshTreeNode> treeClones = new(ponytail.MeshTrees.Select(t => t.Clone()));
+            ponytail.MeshTrees.Add(new()); // Additional dummy tree required
+            ponytail.MeshTrees.AddRange(treeClones);
         }
 
         private static void HideEntities(TR1CombinedLevel level, IEnumerable<TR1Type> entities)
@@ -588,8 +591,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
 
             List<TRMesh> lara = level.Data.Models[(level.IsCutScene ? TR1Type.CutsceneActor1 : TR1Type.Lara)].Meshes;
-            List<TRMesh> laraShotgun = level.Data.Models[TR1Type.LaraShotgunAnim_H].Meshes;
-            List<TRMesh> laraMisc = level.Data.Models[TR1Type.LaraMiscAnim_H].Meshes;
+            List<TRMesh> laraShotgun = level.Data.Models[TR1Type.LaraShotgunAnim_H]?.Meshes;
+            List<TRMesh> laraMisc = level.Data.Models[TR1Type.LaraMiscAnim_H]?.Meshes;
 
             // Just the torso
             laraMisc[7].CopyInto(lara[7]);
@@ -803,8 +806,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
         private void ConvertToMauledOutfit(TR1CombinedLevel level)
         {
             List<TRMesh> lara = level.Data.Models[(level.IsCutScene ? TR1Type.CutsceneActor1 : TR1Type.Lara)].Meshes;
-            List<TRMesh> laraShotgun = level.Data.Models[TR1Type.LaraShotgunAnim_H].Meshes;
-            List<TRMesh> laraMisc = level.Data.Models[TR1Type.LaraMiscAnim_H].Meshes;
+            List<TRMesh> laraShotgun = level.Data.Models[TR1Type.LaraShotgunAnim_H]?.Meshes;
+            List<TRMesh> laraMisc = level.Data.Models[TR1Type.LaraMiscAnim_H]?.Meshes;
 
             if (level.Is(TR1LevelNames.QUALOPEC_CUT))
             {
