@@ -866,8 +866,7 @@
             "X": 39269,
             "Y": -4608,
             "Z": 45538,
-            "Room": 81,
-            "Angle": -32768
+            "Room": 81
           }
         ],
         "IgnoreSectorEntities": true
