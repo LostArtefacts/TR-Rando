@@ -47,7 +47,7 @@ public class TRPalette16Control
             }
         }
 
-        return index;
+        return index << 8;
     }
 
     private int FindClosestColour(TRColour4 colour)
