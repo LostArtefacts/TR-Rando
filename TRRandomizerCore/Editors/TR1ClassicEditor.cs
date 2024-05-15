@@ -356,11 +356,10 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
         string backupTitle = Path.Combine(GetReadBasePath(), mainMenuPic);
         if (File.Exists(backupTitle))
         {
-            string editedTitle = Path.Combine(GetWriteBasePath(), mainMenuPic);
+            string editedTitle = Path.Combine(GetWriteBasePath(), "title.png");
             TRImage bg = new(backupTitle);
             TRImage badge = new(@"Resources\Shared\Graphics\goldbadge-small.png");
             bg.Import(badge, scriptEditor.GameMode == GameMode.Gold ? _goldBadgePos : _regularBadgePos, true);
-            Color c = bg.GetPixel(706, 537);
 
             if (scriptEditor.GameMode == GameMode.Combined)
             {
@@ -369,6 +368,10 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
             }
 
             bg.Save(editedTitle);
+
+            string titlePath = @"data\title.png";
+            script.MainMenuPicture = titlePath;
+            script.AddAdditionalBackupFile(titlePath);
         }
 
         {
@@ -395,9 +398,9 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
             });
 
             script.AddAdditionalBackupFile(creditPath);
-            scriptEditor.SaveScript();
         }
 
+        scriptEditor.SaveScript();
         monitor.FireSaveStateChanged(1);
     }
 }

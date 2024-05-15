@@ -8,7 +8,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        IEnumerable<EMMeshTextureData> data = PrepareImportData(level.Models);
+        List<EMMeshTextureData> data = PrepareImportData(level.Models);
         if (!data.Any())
         {
             return;
@@ -29,7 +29,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        IEnumerable<EMMeshTextureData> data = PrepareImportData(level.Models);
+        List<EMMeshTextureData> data = PrepareImportData(level.Models);
         if (!data.Any())
         {
             return;
@@ -50,7 +50,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        IEnumerable<EMMeshTextureData> data = PrepareImportData(level.Models);
+        List<EMMeshTextureData> data = PrepareImportData(level.Models);
         if (!data.Any())
         {
             return;
@@ -69,10 +69,10 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         RemapFaces(data, level.ObjectTextures.Count - 1, level.Models);
     }
 
-    private IEnumerable<EMMeshTextureData> PrepareImportData<T>(SortedDictionary<T, TRModel> existingModels)
+    private List<EMMeshTextureData> PrepareImportData<T>(SortedDictionary<T, TRModel> existingModels)
         where T : Enum
     {
-        return Data.Where(d => !existingModels.ContainsKey((T)(object)(uint)d.ModelID));
+        return Data.Where(d => !existingModels.ContainsKey((T)(object)(uint)d.ModelID)).ToList();
     }
 
     private static void RemapFaces<T>(IEnumerable<EMMeshTextureData> data, int maximumTexture, SortedDictionary<T, TRModel> models)

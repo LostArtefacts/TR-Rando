@@ -186,10 +186,10 @@ public class TRImage : ICloneable
         for (int i = 0; i < Pixels.Length; i++)
         {
             uint pixel = Pixels[i];
+            byte a = (byte)((pixel & 0xFF000000) >> 24);
             byte r = (byte)((pixel & 0xFF0000) >> 16);
             byte g = (byte)((pixel & 0xFF00) >> 8);
             byte b = (byte)(pixel & 0xFF);
-            byte a = (byte)((pixel & 0xFF000000) > 0 ? 0xFF : 0);
 
             pixels.Add(b);
             pixels.Add(g);
@@ -232,7 +232,7 @@ public class TRImage : ICloneable
         {
             for (int x = bounds.Left; x < bounds.Right; x++)
             {
-                callback.Invoke(Color.FromArgb((int)this[x, y]), x, y);
+                callback.Invoke(GetPixel(x, y), x, y);
             }
         }
     }
@@ -248,7 +248,7 @@ public class TRImage : ICloneable
         {
             for (int x = bounds.Left; x < bounds.Right; x++)
             {
-                this[x, y] = (uint)callback.Invoke(Color.FromArgb((int)this[x, y]), x, y).ToArgb();
+                this[x, y] = (uint)callback.Invoke(GetPixel(x, y), x, y).ToArgb();
             }
         }
 
@@ -266,17 +266,38 @@ public class TRImage : ICloneable
         {
             for (int x = 0; x < image.Size.Width; x++)
             {
-                Color c = image.GetPixel(x, y);
-                if (!retainBackground || c.A != 0)
+                Color inColour = image.GetPixel(x, y);
+                if (!retainBackground || inColour.A == 0xFF)
                 {
                     this[x + point.X, y + point.Y] = image[x, y];
+                }
+                else if (inColour.A > 0)
+                {
+                    Color curColour = GetPixel(x + point.X, y + point.Y);
+
+                    float a0 = inColour.A / 255.0f;
+                    float r0 = (inColour.R / 255.0f) * a0;
+                    float g0 = (inColour.G / 255.0f) * a0;
+                    float b0 = (inColour.B / 255.0f) * a0;
+
+                    float a1 = curColour.A / 255.0f;
+                    float r1 = (curColour.R / 255.0f) * a1;
+                    float g1 = (curColour.G / 255.0f) * a1;
+                    float b1 = (curColour.B / 255.0f) * a1;
+
+                    float aOut = a0 + a1 * (1 - a0);
+                    float rOut = (r0 + r1 * (1 - a0)) / aOut;
+                    float gOut = (g0 + g1 * (1 - a0)) / aOut;
+                    float bOut = (b0 + b1 * (1 - a0)) / aOut;
+
+                    Color blend = Color.FromArgb((int)(aOut * 255), (int)(rOut * 255), (int)(gOut * 255), (int)(bOut * 255));
+                    this[x + point.X, y + point.Y] = (uint)blend.ToArgb();
                 }
             }
         }
 
         DataChanged?.Invoke(this, EventArgs.Empty);
     }
-
 
     public TRImage Export(Rectangle bounds)
     {

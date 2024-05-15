@@ -536,7 +536,7 @@ public class TRModelBuilder<T>
         {
             ID = (uint)(object)type,
             Animation = model.Animations.Count == 0 ? TRConsts.NoAnimation : (ushort)_placeholderAnimations.Count,
-            FrameOffset = (uint)_frames.Count * sizeof(short),
+            FrameOffset = _observer == null && model.Animations.Count == 0 ? 0 : (uint)_frames.Count * sizeof(short),
             NumMeshes = (ushort)model.Meshes.Count,
         };
         _placeholderModels.Add(placeholderModel);
