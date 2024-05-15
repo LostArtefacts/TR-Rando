@@ -224,17 +224,16 @@ public class ImageTests : TestBase
     public void TestBlending()
     {
         TRImage baseImage = new(128, 128);
-        baseImage.Fill(Color.FromArgb(153, Color.Blue)); // 60%
+        baseImage.Fill(Color.FromArgb(153, 0, 100, 255)); // 60%
 
         TRImage overlay = new(64, 64);
         overlay.Fill(Color.FromArgb(102, Color.Red)); // 40%
 
         baseImage.Import(overlay, new(32, 32), true);
 
-        // Rubbish test
         Color blend = baseImage.GetPixel(32, 32);
         Assert.AreEqual(134, blend.R);
-        Assert.AreEqual(0, blend.G);
+        Assert.AreEqual(47, blend.G);
         Assert.AreEqual(120, blend.B);
         Assert.AreEqual(193, blend.A);
     }
