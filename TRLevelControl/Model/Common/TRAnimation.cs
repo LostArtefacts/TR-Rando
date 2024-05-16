@@ -8,8 +8,8 @@ public class TRAnimation : ICloneable
     public TRFixedFloat32 Accel { get; set; }
     public TRFixedFloat32 SpeedLateral { get; set; }
     public TRFixedFloat32 AccelLateral { get; set; }
-    public ushort FrameStart { get; set; }
-    public ushort FrameEnd { get; set; }
+    public short FrameStart { get; set; }
+    public short FrameEnd { get; set; }
     public ushort NextAnimation { get; set; }
     public ushort NextFrame { get; set; }
     public List<TRStateChange> Changes { get; set; } = new();

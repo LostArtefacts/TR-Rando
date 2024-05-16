@@ -104,8 +104,8 @@ public class TRModelBuilder<T>
                 animation.AccelLateral = reader.ReadFixed32();
             }
 
-            animation.FrameStart = placeholder.RelFrameStart = reader.ReadUInt16();
-            animation.FrameEnd = reader.ReadUInt16();
+            animation.FrameStart = placeholder.RelFrameStart = reader.ReadInt16();
+            animation.FrameEnd = reader.ReadInt16();
             animation.NextAnimation = reader.ReadUInt16();
             animation.NextFrame = reader.ReadUInt16();
 
@@ -256,9 +256,9 @@ public class TRModelBuilder<T>
         {
             PlaceholderAnimation nextAnim = _placeholderAnimations[animation.NextAnimation];
             animation.NextAnimation -= placeholderModel.Animation;
-            animation.NextFrame -= nextAnim.RelFrameStart;
+            animation.NextFrame -= (ushort)nextAnim.RelFrameStart;
         }
-        animation.FrameEnd -= animation.FrameStart;
+        animation.FrameEnd -= (short)animation.FrameStart;
         animation.FrameStart = 0;
 
         animation.Frames = new();
@@ -543,7 +543,7 @@ public class TRModelBuilder<T>
 
         _trees.AddRange(model.MeshTrees);
 
-        ushort frameBase = 0;
+        short frameBase = 0;
         foreach (TRAnimation animation in model.Animations)
         {
             PlaceholderAnimation placeholderAnimation = new()
@@ -555,7 +555,7 @@ public class TRModelBuilder<T>
 
             if (animation.Frames.Count > 0)
             {
-                frameBase += (ushort)(animation.FrameEnd + 1);
+                frameBase += (short)(animation.FrameEnd + 1);
             }
 
             DeconstructFrames(placeholderAnimation, animation);
@@ -576,7 +576,7 @@ public class TRModelBuilder<T>
                 foreach (TRAnimDispatch dispatch in change.Dispatches)
                 {
                     _dispatches.Add(dispatch);
-                    _dispatchFrameBase[dispatch] = (short)placeholderAnimation.RelFrameStart;
+                    _dispatchFrameBase[dispatch] = placeholderAnimation.RelFrameStart;
                     _dispatchToAnimMap[dispatch] = (short)(dispatch.NextAnimation + placeholderModel.Animation);
                 }
             }
@@ -950,7 +950,7 @@ public class TRModelBuilder<T>
     {
         public byte FrameSize { get; set; }
         public uint FrameOffset { get; set; }
-        public ushort RelFrameStart { get; set; }
+        public short RelFrameStart { get; set; }
         public ushort NumStateChanges { get; set; }
         public ushort ChangeOffset { get; set; }
         public ushort NumAnimCommands { get; set; }

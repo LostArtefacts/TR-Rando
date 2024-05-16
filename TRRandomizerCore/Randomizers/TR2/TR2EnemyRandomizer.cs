@@ -959,10 +959,10 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         // #327 Trick the game into never reaching the final frame of the death animation.
         // This results in a very abrupt death but avoids the level ending. For Ice Palace,
         // environment modifications will be made to enforce an alternative ending.
-        TRModel model = level.Data.Models[TR2Type.BirdMonster];
-        if (model != null)
+        TRAnimation birdDeathAnim = level.Data.Models[TR2Type.BirdMonster]?.Animations[20];
+        if (birdDeathAnim != null)
         {
-            model.Animations[20].FrameEnd = model.Animations[19].FrameEnd;
+            birdDeathAnim.FrameEnd = -1;
         }
     }
 
