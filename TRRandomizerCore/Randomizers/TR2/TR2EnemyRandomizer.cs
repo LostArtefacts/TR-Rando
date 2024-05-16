@@ -915,8 +915,20 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             foreach (TR2Type enemyType in laraClones)
             {
                 TRModel enemyModel = level.Data.Models[enemyType];
-                enemyModel.MeshTrees = laraModel.MeshTrees;
-                enemyModel.Meshes = laraModel.Meshes;
+                int meshCount = enemyModel.Meshes.Count;
+                enemyModel.MeshTrees = new(laraModel.MeshTrees);
+                enemyModel.Meshes = new(laraModel.Meshes);
+
+                while (enemyModel.Meshes.Count < meshCount)
+                {
+                    // Pad with dummy meshes so any hard-coded manipulation in the engine doesn't cause
+                    // potential corruption with meshes beyond this model.
+                    enemyModel.MeshTrees.Add(new());
+                    enemyModel.Meshes.Add(new()
+                    {
+                        Normals = new(),
+                    });
+                }
             }
 
             // Remove texture randomization for this enemy as it's no longer required

@@ -2,13 +2,13 @@
 
 public class TRMesh : ICloneable
 {
-    public TRVertex Centre { get; set; }
+    public TRVertex Centre { get; set; } = new();
     public int CollRadius { get; set; }
-    public List<TRVertex> Vertices { get; set; }
+    public List<TRVertex> Vertices { get; set; } = new();
     public List<TRVertex> Normals { get; set; }
     public List<short> Lights { get; set; }
-    public List<TRMeshFace> TexturedRectangles { get; set; }
-    public List<TRMeshFace> TexturedTriangles { get; set; }
+    public List<TRMeshFace> TexturedRectangles { get; set; } = new();
+    public List<TRMeshFace> TexturedTriangles { get; set; } = new();
     public List<TRMeshFace> ColouredRectangles { get; set; } = new();
     public List<TRMeshFace> ColouredTriangles { get; set; } = new();
 

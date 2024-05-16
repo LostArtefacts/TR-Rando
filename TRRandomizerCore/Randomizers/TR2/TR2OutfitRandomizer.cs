@@ -230,8 +230,9 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         private bool Import(TR2CombinedLevel level, TR2Type lara)
         {
             TRModel laraModel = level.Data.Models[TR2Type.Lara];
-            List<TRModel> laraClones = level.Data.Models.Values
-                .Where(m => m.MeshTrees.FirstOrDefault() == laraModel.MeshTrees.FirstOrDefault() && m != laraModel)
+            List<TRModel> laraClones = level.Data.Models
+                .Where(kvp => TR2TypeUtilities.IsEnemyType(kvp.Key) && laraModel.Meshes.All(kvp.Value.Meshes.Contains))
+                .Select(kvp => kvp.Value)
                 .ToList();
 
             if (lara == TR2Type.LaraInvisible)
@@ -286,8 +287,14 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                     laraModel = level.Data.Models[TR2Type.Lara];
                     foreach (TRModel model in laraClones)
                     {
-                        model.MeshTrees = laraModel.MeshTrees;
-                        model.Meshes = laraModel.Meshes;
+                        for (int i = 0; i < laraModel.Meshes.Count && i < model.Meshes.Count; i++)
+                        {
+                            if (i < laraModel.MeshTrees.Count)
+                            {
+                                model.MeshTrees[i] = laraModel.MeshTrees[i];
+                            }
+                            model.Meshes[i] = laraModel.Meshes[i];
+                        }
                     }
                 }
 
@@ -317,7 +324,10 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             IEnumerable<TRMesh> clonedMeshes = laraModel.Meshes.Select(m => m.Clone());
             foreach (TRModel model in clones)
             {
-                model.Meshes = new(clonedMeshes);
+                for (int i = 0; i < laraModel.Meshes.Count && i < model.Meshes.Count; i++)
+                {
+                    model.Meshes[i] = model.Meshes[i].Clone();
+                }
             }
         }
 
