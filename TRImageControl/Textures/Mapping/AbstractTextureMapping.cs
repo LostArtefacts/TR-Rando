@@ -295,45 +295,34 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                     continue;
                 }
 
-                ISet<int> colourIndices = new HashSet<int>();
-                foreach (TRMesh mesh in meshes)
-                {
-                    foreach (TRMeshFace face in mesh.ColouredFaces)
-                    {
-                        colourIndices.Add(BitConverter.GetBytes(face.Texture)[1]);
-                    }
-                }
+                List<int> colourIndices = meshes.SelectMany(m => m.ColouredFaces.Select(f => f.Texture >> 8))
+                    .Distinct().ToList();
 
                 Dictionary<int, int> remapIndices = new();
                 foreach (Color targetColour in source.EntityColourMap[entity].Keys)
                 {
-                    int matchedIndex = -1;
-                    foreach (int currentIndex in colourIndices)
-                    {
-                        TRColour4 currentColour = palette[currentIndex];
-                        if (currentColour.Red == targetColour.R && currentColour.Green == targetColour.G && currentColour.Blue == targetColour.B)
-                        {
-                            matchedIndex = currentIndex;
-                        }
-                    }
-
+                    int matchedIndex = colourIndices.FindIndex(
+                        i => palette[i].Red == targetColour.R && palette[i].Green == targetColour.G && palette[i].Blue == targetColour.B);
                     if (matchedIndex == -1)
                     {
                         continue;
                     }
 
+                    matchedIndex = colourIndices[matchedIndex];
+
                     // Extract the colour from the top-left of the rectangle specified in the source, and import that into the level
                     int sourceRectangle = source.EntityColourMap[entity][targetColour];
                     int newColourIndex = ImportColour(source.Image.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
-                    remapIndices.Add(matchedIndex, newColourIndex);
+                    remapIndices[matchedIndex] = newColourIndex;
                 }
 
                 // Remap the affected mesh textures to the newly inserted colours
-                foreach (TRMesh mesh in meshes)
+                foreach (TRMeshFace face in meshes.SelectMany(m => m.ColouredFaces))
                 {
-                    foreach (TRMeshFace face in mesh.ColouredFaces)
+                    int oldColour = face.Texture >> 8;
+                    if (remapIndices.ContainsKey(oldColour))
                     {
-                        face.Texture = ConvertMeshTexture(face.Texture, remapIndices);
+                        face.Texture = (ushort)(remapIndices[oldColour] | (face.Texture & 0xFF));
                     }
                 }
             }
@@ -433,16 +422,6 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 Y = sprite.Y
             });
         }
-    }
-
-    private static ushort ConvertMeshTexture(ushort texture, Dictionary<int, int> remapIndices)
-    {
-        int p16 = texture >> 8;
-        if (remapIndices.ContainsKey(p16))
-        {
-            return (ushort)(remapIndices[p16] << 8 | (texture & 0xFF));
-        }
-        return texture;
     }
 
     private TRImage GetImage(int tile)

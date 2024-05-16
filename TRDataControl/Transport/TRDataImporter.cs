@@ -351,7 +351,7 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
         if (packingResult.OrphanCount > 0)
         {
-            throw new TransportException($"Failed to pack {packingResult.OrphanCount} rectangles for types [{string.Join(", ", blobs.Select(b => b.Alias))}].");
+            throw new PackingException($"Failed to pack {packingResult.OrphanCount} rectangles for types [{string.Join(", ", blobs.Select(b => b.Alias))}].");
         }
 
         // Packing passed, so remap mesh textures to their new object references
