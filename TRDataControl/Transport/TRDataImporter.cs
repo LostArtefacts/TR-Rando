@@ -88,6 +88,15 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
             if (entityClean)
             {
+                // Something else being brought in may rely on this
+                if (TypesToImport.Any(t => Data.GetDependencies(t).Contains(type)))
+                {
+                    entityClean = false;
+                }
+            }
+
+            if (entityClean)
+            {
                 // There may be null meshes dependent on this removal, so we can only remove it if they're
                 // being removed as well.
                 IEnumerable<T> exclusions = Data.GetRemovalExclusions(type);
