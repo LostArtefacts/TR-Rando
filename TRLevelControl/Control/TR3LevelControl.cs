@@ -324,7 +324,6 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
                 Range = reader.ReadByte(),
                 Chance = reader.ReadByte(),
                 Pitch = reader.ReadByte(),
-                Samples = new()
             });
 
             sfx[i].SetFlags(reader.ReadUInt16());
@@ -333,14 +332,9 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         uint numSampleIndices = reader.ReadUInt32();
         uint[] sampleIndices = reader.ReadUInt32s(numSampleIndices);
 
-        foreach (int soundID in sampleMap.Keys)
+        foreach (var (soundID, samplePointer) in sampleMap)
         {
-            TR3SoundEffect effect = sfx[soundID];
-            ushort baseIndex = sampleMap[soundID];
-            for (int i = 0; i < effect.Samples.Capacity; i++)
-            {
-                effect.Samples.Add(sampleIndices[baseIndex + i]);
-            }
+            sfx[soundID].SampleID = sampleIndices[samplePointer];
         }
 
         for (int i = 0; i < soundMap.Length; i++)
@@ -356,27 +350,32 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
     private void WriteSoundEffects(TRLevelWriter writer)
     {
-        short detailsIndex = 0;
+        List<TR3SoundEffect> effects = new(_level.SoundEffects.Values);
+        List<uint> sampleIndices = effects.SelectMany(s => Enumerable.Range((int)s.SampleID, s.SampleCount))
+            .Select(s => (uint)s)
+            .Distinct().ToList();
+
+        sampleIndices.Sort();
+
+        Dictionary<TR3SoundEffect, ushort> sampleMap = new();
+        foreach (TR3SoundEffect effect in effects)
+        {
+            sampleMap[effect] = (ushort)sampleIndices.IndexOf(effect.SampleID);
+        }
+
+        effects.Sort((e1, e2) => sampleMap[e1].CompareTo(sampleMap[e2]));
+
         foreach (TR3SFX id in Enum.GetValues<TR3SFX>())
         {
-            writer.Write(_level.SoundEffects.ContainsKey(id) ? detailsIndex++ : (short)-1);
+            writer.Write(_level.SoundEffects.ContainsKey(id)
+                ? (short)effects.IndexOf(_level.SoundEffects[id])
+                : (short)-1);
         }
-
-        List<uint> samplePointers = new();
-        foreach (var (_, effect) in _level.SoundEffects)
-        {
-            if (!samplePointers.Contains(effect.Samples.First()))
-            {
-                samplePointers.AddRange(effect.Samples);
-            }
-        }
-        samplePointers.Sort();
 
         writer.Write((uint)_level.SoundEffects.Count);
-        foreach (var (_, effect) in _level.SoundEffects)
+        foreach (TR3SoundEffect effect in effects)
         {
-            uint firstSample = effect.Samples.First();
-            writer.Write((ushort)samplePointers.IndexOf(firstSample));
+            writer.Write(sampleMap[effect]);
             writer.Write(effect.Volume);
             writer.Write(effect.Range);
             writer.Write(effect.Chance);
@@ -384,7 +383,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
             writer.Write(effect.GetFlags());
         }
 
-        writer.Write((uint)samplePointers.Count);
-        writer.Write(samplePointers);
+        writer.Write((uint)sampleIndices.Count);
+        writer.Write(sampleIndices);
     }
 }

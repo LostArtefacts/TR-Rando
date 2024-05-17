@@ -12,6 +12,8 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR2RAudioRandomizer : BaseTR2RRandomizer
 {
+    private const int _numSamples = 412;
+
     private AudioRandomizer _audioRandomizer;
 
     private List<TR2SFXDefinition> _soundEffects;
@@ -129,12 +131,10 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
             {
                 entries.Add(new FDTriggerEntry
                 {
+                    TrigType = FDTrigType.Pickup,
                     Actions = new()
                     {
-                        new()
-                        {
-                            Parameter = (short)entityIndex
-                        },
+                        new() { Parameter = (short)entityIndex },
                         musicAction
                     }
                 });
@@ -188,20 +188,14 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
 
         if (IsUncontrolledLevel(level.Script))
         {
-            int maxSample = Enum.GetValues<TR2SFX>().Length;            
             HashSet<uint> indices = new();
-            foreach (var (_, effect) in level.Data.SoundEffects)
+            foreach (TR2SoundEffect effect in level.Data.SoundEffects.Values)
             {
-                for (int i = 0; i < effect.Samples.Count; i++)
+                do
                 {
-                    uint sample;
-                    do
-                    {
-                        sample = (uint)_generator.Next(0, maxSample + 1);
-                    }
-                    while (!indices.Add(sample));
-                    effect.Samples[i] = sample;
+                    effect.SampleID = (uint)_generator.Next(0, _numSamples + 1 - Math.Max(effect.SampleCount, 1));
                 }
+                while (!indices.Add(effect.SampleID));
             }
         }
         else
