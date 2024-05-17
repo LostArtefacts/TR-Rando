@@ -131,10 +131,12 @@ public class TR2RAudioRandomizer : BaseTR2RRandomizer
             {
                 entries.Add(new FDTriggerEntry
                 {
-                    TrigType = FDTrigType.Pickup,
                     Actions = new()
                     {
-                        new() { Parameter = (short)entityIndex },
+                        new()
+                        {
+                            Parameter = (short)entityIndex
+                        },
                         musicAction
                     }
                 });

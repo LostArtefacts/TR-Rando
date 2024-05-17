@@ -144,10 +144,12 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
             {
                 entries.Add(new FDTriggerEntry
                 {
-                    TrigType = FDTrigType.Pickup,
-                    Actions = new()
+                    Actions = new List<FDActionItem>
                     {
-                        new() { Parameter = (short)entityIndex },
+                        new()
+                        {
+                            Parameter = (short)entityIndex
+                        },
                         musicAction
                     }
                 });
