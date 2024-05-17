@@ -76,7 +76,7 @@
       {
         "Comments": "Make a new bench near the exit.",
         "EMType": 24,
-        "MeshID": 284,
+        "MeshID": 294,
         "Intensity": 6400,
         "Locations": [
           {
@@ -84,7 +84,7 @@
             "Y": 1280,
             "Z": 21075,
             "Room": 60,
-            "Angle": 16384
+            "Angle": -16384
           }
         ]
       }
@@ -101,7 +101,7 @@
             "Y": 5888,
             "Z": 52710,
             "Room": 12,
-            "Angle": -16384
+            "Angle": 16384
           }
         ]
       }
