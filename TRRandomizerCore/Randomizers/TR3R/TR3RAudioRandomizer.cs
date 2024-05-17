@@ -13,6 +13,7 @@ namespace TRRandomizerCore.Randomizers;
 public class TR3RAudioRandomizer : BaseTR3RRandomizer
 {
     private const int _defaultSecretTrack = 122;
+    private const int _numSamples = 414;
 
     private AudioRandomizer _audioRandomizer;
 
@@ -151,20 +152,16 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
 
         if (IsUncontrolledLevel(level.Script))
         {
-            int maxSample = Enum.GetValues<TR3SFX>().Length;
             HashSet<uint> indices = new();
-            foreach (var (_, effect) in level.Data.SoundEffects)
+            foreach (TR3SoundEffect effect in level.Data.SoundEffects.Values)
             {
-                for (int i = 0; i < effect.Samples.Count; i++)
+                uint sampleIndex;
+                do
                 {
-                    uint sample;
-                    do
-                    {
-                        sample = (uint)_generator.Next(0, maxSample + 1);
-                    }
-                    while (!indices.Add(sample));
-                    effect.Samples[i] = sample;
+                    sampleIndex = (uint)_generator.Next(0, _numSamples + 1 - Math.Max(effect.SampleCount, 1));
                 }
+                while (!indices.Add(sampleIndex));
+                effect.SampleID = sampleIndex;
             }
         }
         else
