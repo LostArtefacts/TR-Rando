@@ -126,6 +126,69 @@ public class ImportTests : TestBase
         catch (TransportException) { }
     }
 
+    [TestMethod]
+    [Description("Test that dependencies are calculated on import.")]
+    public void TestDirectDependency()
+    {
+        ExportTR2Model(TR2Type.MaskedGoon1);
+        ExportTR2Model(TR2Type.MaskedGoon2);
+
+        TR2Level level = GetTR2AltTestLevel();
+        TR2DataImporter importer = new()
+        {
+            DataFolder = @"Objects\TR2",
+            Level = level,
+            TypesToImport = new() { TR2Type.MaskedGoon2 },
+        };
+
+        importer.Import();
+
+        Assert.IsTrue(level.Models.ContainsKey(TR2Type.MaskedGoon1));
+        Assert.IsTrue(level.Models.ContainsKey(TR2Type.MaskedGoon2));
+    }
+
+    [TestMethod]
+    [Description("Test that dependencies aren't removed until no longer required.")]
+    public void TestDependencyRemoval()
+    {
+        ExportTR2Model(TR2Type.MaskedGoon1);
+        ExportTR2Model(TR2Type.MaskedGoon2);
+        ExportTR2Model(TR2Type.BengalTiger);
+
+        TR2Level level = GetTR2AltTestLevel();
+        TR2DataImporter importer = new()
+        {
+            DataFolder = @"Objects\TR2",
+            Level = level,
+            TypesToImport = new() { TR2Type.MaskedGoon1 },
+        };
+
+        importer.Import();
+
+        importer = new()
+        {
+            DataFolder = @"Objects\TR2",
+            Level = level,
+            TypesToImport = new() { TR2Type.MaskedGoon2 },
+            TypesToRemove = new() { TR2Type.MaskedGoon1 },
+        };
+        importer.Import();
+
+        Assert.IsTrue(level.Models.ContainsKey(TR2Type.MaskedGoon1));
+
+        importer = new()
+        {
+            DataFolder = @"Objects\TR2",
+            Level = level,
+            TypesToImport = new() { TR2Type.BengalTiger },
+            TypesToRemove = new() { TR2Type.MaskedGoon1, TR2Type.MaskedGoon2 },
+        };
+        importer.Import();
+
+        Assert.IsFalse(level.Models.ContainsKey(TR2Type.MaskedGoon1));
+        Assert.IsFalse(level.Models.ContainsKey(TR2Type.MaskedGoon2));
+    }
+
     private static void ExportTR1Model(TR1Type type)
     {
         TR1Level level = GetTR1TestLevel();
