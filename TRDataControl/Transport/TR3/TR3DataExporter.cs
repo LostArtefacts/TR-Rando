@@ -59,4 +59,21 @@ public class TR3DataExporter : TRDataExporter<TR3Level, TR3Type, TR3SFX, TR3Blob
 
     protected override List<TRCinematicFrame> CinematicFrames
         => Level.CinematicFrames;
+
+    protected override void PreCreation(TR3Level level, TR3Type type, TRBlobType blobType)
+    {
+        switch (type)
+        {
+            case TR3Type.Quest1_P:
+            case TR3Type.Quest1_M_H:
+                level.Models.ChangeKey(TR3Type.Puzzle1_P, TR3Type.Quest1_P);
+                level.Models.ChangeKey(TR3Type.Puzzle1_M_H, TR3Type.Quest1_M_H);
+                break;
+            case TR3Type.Quest2_P:
+            case TR3Type.Quest2_M_H:
+                level.Models.ChangeKey(TR3Type.Puzzle1_P, TR3Type.Quest2_P);
+                level.Models.ChangeKey(TR3Type.Puzzle1_M_H, TR3Type.Quest2_M_H);
+                break;
+        }
+    }
 }

@@ -34,7 +34,7 @@ public class TR3MassExporter : TRMassExporter<TR3Level, TR3Type, TR3SFX, TR3Blob
         },
         [TR3LevelNames.COASTAL] = new()
         {
-            TR3Type.LaraCoastal, TR3Type.Croc, TR3Type.TribesmanAxe, TR3Type.TribesmanDart
+            TR3Type.LaraCoastal, TR3Type.Croc, TR3Type.TribesmanAxe, TR3Type.TribesmanDart, TR3Type.Quest1_P
         },
         [TR3LevelNames.CRASH] = new()
         {
@@ -93,9 +93,9 @@ public class TR3MassExporter : TRMassExporter<TR3Level, TR3Type, TR3SFX, TR3Blob
         {
             TR3Type.Willie, TR3Type.RXGunLad
         },
-        [TR3LevelNames.HALLOWS] = new()
+        [TR3LevelNames.MADHOUSE] = new()
         {
-            
+            TR3Type.Quest2_P
         },
         [TR3LevelNames.ASSAULT] = new()
         {

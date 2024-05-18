@@ -276,6 +276,10 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private void PlaceAllSecrets(TR3CombinedLevel level, List<TR3Type> pickupTypes, TRSecretRoom<TR2Entity> rewardRoom)
     {
+        if (!_locations.ContainsKey(level.Name))
+        {
+            return;
+        }
         List<Location> locations = _locations[level.Name];
 
         TRSecretPlacement<TR3Type> secret = new();
