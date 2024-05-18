@@ -18,8 +18,11 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
     public bool IgnoreGraphics { get; set; }
     public bool ForceCinematicOverwrite { get; set; }
 
+    private List<T> _nonGraphicsDependencies;
+
     public void Import()
     {
+        _nonGraphicsDependencies = new();
         List<T> existingTypes = GetExistingTypes();
 
         CleanRemovalList();
@@ -84,15 +87,6 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
             else if (!TypesToImport.Contains(type))
             {
                 entityClean = true;
-            }
-
-            if (entityClean)
-            {
-                // Something else being brought in may rely on this
-                if (TypesToImport.Any(t => Data.GetDependencies(t).Contains(type)))
-                {
-                    entityClean = false;
-                }
             }
 
             if (entityClean)
@@ -263,7 +257,8 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
                     // If this entity and the dependency are in the same family
                     if (Equals(aliasFor, Data.TranslateAlias(type)))
                     {
-                        // Skip it
+                        // Skip it and ensure we don't remove the model later
+                        _nonGraphicsDependencies.Add(type);
                         required = false;
                         break;
                     }
@@ -295,7 +290,11 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
                     {
                         staleTextures.AddRange(Models[type].Meshes
                             .SelectMany(m => m.TexturedFaces.Select(t => (int)t.Texture)));
-                        Models.Remove(id);
+
+                        if (!_nonGraphicsDependencies.Contains(id))
+                        {
+                            Models.Remove(id);
+                        }
                     }
                     break;
 
