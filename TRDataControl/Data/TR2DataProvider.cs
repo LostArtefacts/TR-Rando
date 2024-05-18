@@ -147,6 +147,8 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             new() { TR2Type.LaraPistolAnim_H_Snow, TR2Type.LaraAutoAnim_H_Snow, TR2Type.LaraUziAnim_H_Snow },
         [TR2Type.LaraHome] =
             new() { TR2Type.LaraPistolAnim_H_Home, TR2Type.LaraAutoAnim_H_Home, TR2Type.LaraUziAnim_H_Home },
+        [TR2Type.LaraAssault] =
+            new() { TR2Type.LaraPistolAnim_H_Assault, TR2Type.LaraAutoAnim_H_Assault, TR2Type.LaraUziAnim_H_Assault },
         [TR2Type.M16_M_H] =
             new() { TR2Type.LaraM16Anim_H, TR2Type.M16Gunflare_H, TR2Type.M16_S_P, TR2Type.M16Ammo_M_H, TR2Type.M16Ammo_S_P },
         [TR2Type.MarcoBartoli] =
@@ -200,20 +202,20 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
     {
         [TR2Type.Lara] = new()
         {
-            TR2Type.LaraSun, TR2Type.LaraUnwater, TR2Type.LaraSnow, TR2Type.LaraHome
+            TR2Type.LaraSun, TR2Type.LaraUnwater, TR2Type.LaraSnow, TR2Type.LaraHome, TR2Type.LaraAssault
         },
 
         [TR2Type.LaraPistolAnim_H] = new()
         {
-            TR2Type.LaraPistolAnim_H_Sun, TR2Type.LaraPistolAnim_H_Unwater, TR2Type.LaraPistolAnim_H_Snow, TR2Type.LaraPistolAnim_H_Home
+            TR2Type.LaraPistolAnim_H_Sun, TR2Type.LaraPistolAnim_H_Unwater, TR2Type.LaraPistolAnim_H_Snow, TR2Type.LaraPistolAnim_H_Home, TR2Type.LaraPistolAnim_H_Assault
         },
         [TR2Type.LaraAutoAnim_H] = new()
         {
-            TR2Type.LaraAutoAnim_H_Sun, TR2Type.LaraAutoAnim_H_Unwater, TR2Type.LaraAutoAnim_H_Snow, TR2Type.LaraAutoAnim_H_Home
+            TR2Type.LaraAutoAnim_H_Sun, TR2Type.LaraAutoAnim_H_Unwater, TR2Type.LaraAutoAnim_H_Snow, TR2Type.LaraAutoAnim_H_Home, TR2Type.LaraAutoAnim_H_Assault
         },
         [TR2Type.LaraUziAnim_H] = new()
         {
-            TR2Type.LaraUziAnim_H_Sun, TR2Type.LaraUziAnim_H_Unwater, TR2Type.LaraUziAnim_H_Snow, TR2Type.LaraUziAnim_H_Home
+            TR2Type.LaraUziAnim_H_Sun, TR2Type.LaraUziAnim_H_Unwater, TR2Type.LaraUziAnim_H_Snow, TR2Type.LaraUziAnim_H_Home, TR2Type.LaraUziAnim_H_Assault
         },
 
         [TR2Type.LaraMiscAnim_H] = new()

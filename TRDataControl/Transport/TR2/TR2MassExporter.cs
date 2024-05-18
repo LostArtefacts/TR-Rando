@@ -88,7 +88,7 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         },
         [TR2LevelNames.ASSAULT] = new()
         {
-            TR2Type.Winston
+            TR2Type.Winston, TR2Type.LaraAssault
         },
         ["TOPIORC.TR2"] = new()
         {

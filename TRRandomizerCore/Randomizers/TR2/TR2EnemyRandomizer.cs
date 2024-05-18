@@ -509,26 +509,24 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
-        // #148 If it's HSH and we have been able to import cross-level, we will add 15
-        // dogs outside the gate to ensure the kill counter works. Dogs, Goon1 and
-        // StickGoons will have been excluded from the cross-level pool for simplicity
-        // Their textures will have been removed but they won't spawn anyway as we aren't
-        // defining triggers - the game only needs them to be present in the entity list.
         if (level.Is(TR2LevelNames.HOME) && !enemies.Available.Contains(TR2Type.Doberman))
         {
+            // The game requires 15 items of type dog, stick goon or masked goon. The models will have been
+            // eliminated at this stage, so just create a placeholder to trigger the correct HSH behaviour.
+            level.Data.Models[TR2Type.Doberman] = new()
+            {
+                Meshes = new() { level.Data.Models[TR2Type.Lara].Meshes.First() }
+            };
             for (int i = 0; i < 15; i++)
             {
                 level.Data.Entities.Add(new()
                 {
                     TypeID = TR2Type.Doberman,
                     Room = 85,
-                    X = 61919,
+                    X = 61952,
                     Y = 2560,
-                    Z = 74222,
-                    Angle = 16384,
-                    Flags = 0,
-                    Intensity1 = -1,
-                    Intensity2 = -1
+                    Z = 74240,
+                    Invisible = true,
                 });
             }
         }
@@ -915,8 +913,20 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             foreach (TR2Type enemyType in laraClones)
             {
                 TRModel enemyModel = level.Data.Models[enemyType];
-                enemyModel.MeshTrees = laraModel.MeshTrees;
-                enemyModel.Meshes = laraModel.Meshes;
+                int meshCount = enemyModel.Meshes.Count;
+                enemyModel.MeshTrees = new(laraModel.MeshTrees);
+                enemyModel.Meshes = new(laraModel.Meshes);
+
+                while (enemyModel.Meshes.Count < meshCount)
+                {
+                    // Pad with dummy meshes so any hard-coded manipulation in the engine doesn't cause
+                    // potential corruption with meshes beyond this model.
+                    enemyModel.MeshTrees.Add(new());
+                    enemyModel.Meshes.Add(new()
+                    {
+                        Normals = new(),
+                    });
+                }
             }
 
             // Remove texture randomization for this enemy as it's no longer required
@@ -949,10 +959,10 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         // #327 Trick the game into never reaching the final frame of the death animation.
         // This results in a very abrupt death but avoids the level ending. For Ice Palace,
         // environment modifications will be made to enforce an alternative ending.
-        TRModel model = level.Data.Models[TR2Type.BirdMonster];
-        if (model != null)
+        TRAnimation birdDeathAnim = level.Data.Models[TR2Type.BirdMonster]?.Animations[20];
+        if (birdDeathAnim != null)
         {
-            model.Animations[20].FrameEnd = model.Animations[19].FrameEnd;
+            birdDeathAnim.FrameEnd = -1;
         }
     }
 

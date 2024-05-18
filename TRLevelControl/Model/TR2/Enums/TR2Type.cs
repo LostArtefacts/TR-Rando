@@ -378,6 +378,11 @@ public enum TR2Type : uint
 
     LaraInvisible                 = 3400,
 
+    LaraAssault                   = 3450,
+    LaraPistolAnim_H_Assault      = 3451,
+    LaraAutoAnim_H_Assault        = 3452,
+    LaraUziAnim_H_Assault         = 3453,
+
     // Puzzle and quest aliases
     Puzzle1_M_H_RelayBox          = 3500,
     Puzzle2_M_H_CircuitBoard      = 3501,

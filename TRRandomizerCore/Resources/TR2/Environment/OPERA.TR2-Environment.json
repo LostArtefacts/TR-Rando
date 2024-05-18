@@ -1177,15 +1177,13 @@
             "X": 73216,
             "Y": 3584,
             "Z": 50670,
-            "Room": 53,
-            "Angle": -32768
+            "Room": 53
           },
           {
             "X": 74240,
             "Y": 3584,
             "Z": 50670,
-            "Room": 53,
-            "Angle": -32768
+            "Room": 53
           }
         ],
         "IgnoreSectorEntities": true
@@ -1203,13 +1201,14 @@
             "Y": 3584,
             "Z": 51712,
             "Room": 53,
-            "Angle": 16384
+            "Angle": -16384
           },
           {
             "X": 72192,
             "Y": 3584,
             "Z": 51712,
-            "Room": 53
+            "Room": 53,
+            "Angle": -32768
           }
         ],
         "IgnoreSectorEntities": true
@@ -1278,8 +1277,7 @@
             "X": 73216,
             "Y": 3712,
             "Z": 50688,
-            "Room": 53,
-            "Angle": -32768
+            "Room": 53
           }
         ],
         "IgnoreSectorEntities": true

@@ -15,7 +15,9 @@ public static class TR2TypeUtilities
             [TR2Type.LaraSnow] =
                 new() { TR2LevelNames.TIBET, TR2LevelNames.MONASTERY, TR2LevelNames.COT, TR2LevelNames.CHICKEN },
             [TR2Type.LaraHome] =
-                new() { TR2LevelNames.HOME }
+                new() { TR2LevelNames.HOME },
+            [TR2Type.LaraAssault] =
+                new() { TR2LevelNames.ASSAULT },
         },
         [TR2Type.Barracuda] = new()
         {
@@ -70,7 +72,7 @@ public static class TR2TypeUtilities
     {
         [TR2Type.Lara] = new()
         {
-            TR2Type.LaraSun, TR2Type.LaraSnow, TR2Type.LaraUnwater, TR2Type.LaraHome
+            TR2Type.LaraSun, TR2Type.LaraSnow, TR2Type.LaraUnwater, TR2Type.LaraHome, TR2Type.LaraAssault
         },
         [TR2Type.Barracuda] = new()
         {
@@ -154,7 +156,7 @@ public static class TR2TypeUtilities
     {
         return new()
         {
-            TR2Type.LaraSun, TR2Type.LaraUnwater, TR2Type.LaraSnow, TR2Type.LaraHome, TR2Type.LaraInvisible
+            TR2Type.LaraSun, TR2Type.LaraUnwater, TR2Type.LaraSnow, TR2Type.LaraHome, TR2Type.LaraInvisible, TR2Type.LaraAssault
         };
     }
 

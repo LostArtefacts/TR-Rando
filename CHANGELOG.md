@@ -1,6 +1,9 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.4...master) - xxxx-xx-xx
 - added support for TR1X V4 (#626)
+- added Lara's assault course outfit in TR2 for outfit randomization (#672)
+- added gun holsters to Lara's robe outfit in TR2 (#672)
 - fixed a key item softlock in Crash Site (#662)
+- fixed incorrect item and mesh positions in Home Sweet Home when mirrored (#676)
 
 ## [V1.8.4](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.3...V1.8.4) - 2024-02-12
 - fixed item locking logic so that secrets that rely on specific enemies will always be obtainable (#570)

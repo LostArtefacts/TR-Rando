@@ -84,22 +84,19 @@ public class TR2DataExporter : TRDataExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
 
     private static void ScaleSphereOfDoom(TR2Blob blob)
     {
-        // Scale down the Sphere of Doom textures for a better chance of
+        // Clip the Sphere of Doom texture for a better chance of
         // importing into levels later.
-
         Debug.Assert(blob.Textures.Count == 1);
         Debug.Assert(blob.Textures[0].Width == 128);
         Debug.Assert(blob.Textures[0].Height == 128);
 
         TRTextileRegion region = blob.Textures[0];
-        Size newSize = new(64, 64);
+        Rectangle clip = new(32, 32, 64, 64);
 
-        using Bitmap scaledBmp = new(region.Image.ToBitmap(), newSize);
-
-        region.Image = new(scaledBmp);
-        region.Bounds = new(0, 0, newSize.Width, newSize.Height);
+        region.Image = region.Image.Export(clip);
+        region.Bounds = new(0, 0, clip.Width, clip.Height);
         region.GenerateID();
-        region.Segments.ForEach(s => s.Texture.Size = newSize);
+        region.Segments.ForEach(s => s.Texture.Size = clip.Size);
     }
 
     //protected void AmendDXtre3DTextures(TR2Blob definition)

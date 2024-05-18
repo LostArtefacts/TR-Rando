@@ -218,6 +218,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
                 return true;
             }
 
+            TRModel laraModel = level.Data.Models[TR3Type.Lara];
             List<TR3Type> laraImport = new();
             List<TR3Type> laraRemovals = new();
             if (lara != TR3TypeUtilities.GetAliasForLevel(level.Name, TR3Type.Lara))
@@ -247,6 +248,12 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
             {
                 // Try to import the selected models into the level.
                 importer.Import();
+
+                if (level.IsCutScene)
+                {
+                    // Restore original cutscene animations
+                    level.Data.Models[TR3Type.Lara].Animations = laraModel.Animations;
+                }
 
                 // Repeat the process if there is a cutscene after this level.
                 if (level.HasCutScene)

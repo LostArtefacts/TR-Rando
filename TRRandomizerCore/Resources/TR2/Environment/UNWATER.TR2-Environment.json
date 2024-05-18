@@ -259,21 +259,21 @@
             "Y": -372,
             "Z": 57447,
             "Room": 2,
-            "Angle": -16384
+            "Angle": 16384
           },
           {
             "X": 51252,
             "Y": -372,
             "Z": 58000,
             "Room": 2,
-            "Angle": -16384
+            "Angle": 16384
           },
           {
             "X": 52580,
             "Y": -400,
             "Z": 22780,
             "Room": 5,
-            "Angle": 16384
+            "Angle": -16384
           }
         ],
         "IgnoreSectorEntities": true
