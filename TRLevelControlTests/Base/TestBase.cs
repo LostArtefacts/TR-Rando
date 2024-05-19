@@ -72,9 +72,9 @@ public class TestBase
         return control.Read(GetReadPath(level, TRGameVersion.TR5));
     }
 
-    public static void ReadWriteLevel(string levelName, TRGameVersion version)
+    public static void ReadWriteLevel(string levelName, TRGameVersion version, bool remastered)
     {
-        string pathI = GetReadPath(levelName, version);
+        string pathI = GetReadPath(levelName, version, remastered);
         using FileStream dataStream = File.OpenRead(pathI);
         using MemoryStream inputStream = new();
         using MemoryStream outputStream = new();
