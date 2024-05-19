@@ -33,6 +33,11 @@ public class TRPalette16Control
     {
         int index = _palette.FindIndex(c
             => c.Red == colour.Red && c.Green == colour.Green && c.Blue == colour.Blue);
+        if (_freeIndices.Contains(index))
+        {
+            // Avoid assigning and then later repurposing the same index.
+            index = -1;
+        }
 
         if (index == -1)
         {
