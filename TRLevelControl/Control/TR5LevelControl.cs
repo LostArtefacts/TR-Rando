@@ -257,13 +257,13 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     private void ReadModelData(TRLevelReader reader)
     {
-        TRModelBuilder<TR5Type> builder = new(TRGameVersion.TR5, _observer);
+        TRModelBuilder<TR5Type> builder = new(TRGameVersion.TR5, TRModelDataType.Level, _observer);
         _level.Models = builder.ReadModelData(reader, _meshBuilder);
     }
 
     private void WriteModelData(TRLevelWriter writer)
     {
-        TRModelBuilder<TR5Type> builder = new(TRGameVersion.TR5, _observer);
+        TRModelBuilder<TR5Type> builder = new(TRGameVersion.TR5, TRModelDataType.Level, _observer);
         builder.WriteModelData(writer, _level.Models);
     }
 

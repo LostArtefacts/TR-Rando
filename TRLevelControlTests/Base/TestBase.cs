@@ -6,16 +6,10 @@ namespace TRLevelControlTests;
 public class TestBase
 {
     protected static readonly string _readPath = @"Levels\{0}\{1}";
-    protected static readonly string _writePath = @"Levels\{0}\{1}_TEMP{2}";
 
-    public static string GetReadPath(string level, TRGameVersion version)
+    public static string GetReadPath(string level, TRGameVersion version, bool remastered = false)
     {
-        return string.Format(_readPath, version.ToString(), level);
-    }
-
-    public static string GetWritePath(string level, TRGameVersion version)
-    {
-        return string.Format(_writePath, version.ToString(), Path.GetFileNameWithoutExtension(level), Path.GetExtension(level));
+        return string.Format(_readPath, version.ToString() + (remastered ? "R" : string.Empty), level);
     }
 
     public static TR1Level GetTR1TestLevel()
@@ -167,6 +161,50 @@ public class TestBase
         TR5LevelControl control = new();
         control.Write(level, ms);
         return control.Read(new MemoryStream(ms.ToArray()));
+    }
+
+    public static void ReadWritePDP(string levelName, TRGameVersion version)
+    {
+        levelName = Path.GetFileNameWithoutExtension(levelName) + ".PDP";
+        string pathI = GetReadPath(levelName, version, true);
+
+        using FileStream dataStream = File.OpenRead(pathI);
+        using MemoryStream inputStream = new();
+        using MemoryStream outputStream = new();
+
+        dataStream.CopyTo(inputStream);
+        byte[] inputData = inputStream.ToArray();
+        inputStream.Position = 0;
+
+        ObserverBase observer;
+        switch (version)
+        {
+            case TRGameVersion.TR1:
+                observer = new TR1Observer();
+                TR1PDPControl control1 = new(observer);
+                TRDictionary<TR1Type, TRModel> models1 = control1.Read(inputStream);
+                control1.Write(models1, outputStream);
+                break;
+
+            case TRGameVersion.TR2:
+                observer = new TR2Observer();
+                TR2PDPControl control2 = new(observer);
+                TRDictionary<TR2Type, TRModel> models2 = control2.Read(inputStream);
+                control2.Write(models2, outputStream);
+                break;
+
+            case TRGameVersion.TR3:
+                observer = new TR3Observer();
+                TR3PDPControl control3 = new(observer);
+                TRDictionary<TR3Type, TRModel> models3 = control3.Read(inputStream);
+                control3.Write(models3, outputStream);
+                break;
+
+            default:
+                throw new NotImplementedException();
+        }
+
+        observer.TestOutput(inputData, outputStream.ToArray());
     }
 
     public static IEnumerable<object[]> GetLevelNames(IEnumerable<string> names)

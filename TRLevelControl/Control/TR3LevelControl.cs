@@ -168,13 +168,13 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
     private void ReadModelData(TRLevelReader reader)
     {
-        TRModelBuilder<TR3Type> builder = new(TRGameVersion.TR3, _observer);
+        TRModelBuilder<TR3Type> builder = new(TRGameVersion.TR3, TRModelDataType.Level, _observer);
         _level.Models = builder.ReadModelData(reader, _meshBuilder);
     }
 
     private void WriteModelData(TRLevelWriter writer)
     {
-        TRModelBuilder<TR3Type> builder = new(TRGameVersion.TR3, _observer);
+        TRModelBuilder<TR3Type> builder = new(TRGameVersion.TR3, TRModelDataType.Level, _observer);
         builder.WriteModelData(writer, _level.Models);
     }
 

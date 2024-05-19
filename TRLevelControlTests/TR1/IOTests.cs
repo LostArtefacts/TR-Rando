@@ -21,6 +21,13 @@ public class IOTests : TestBase
 
     [TestMethod]
     [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestPDPReadWrite(string levelName)
+    {
+        ReadWritePDP(levelName, TRGameVersion.TR1);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
     public void TestAgressiveFloorData(string levelName)
     {
         // The UB levels seem to have been compiled with agressive FD packing. Our library will expand and so byte-for-byte checks
