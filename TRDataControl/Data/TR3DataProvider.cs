@@ -180,13 +180,15 @@ public class TR3DataProvider : IDataProvider<TR3Type, TR3SFX>
             = new() { TR3Type.Quest2_M_H },
 
         [TR3Type.Pistols_P] =
-            new() { TR3Type.LaraPistolAnimation_H, TR3Type.Gunflare_H, TR3Type.Pistols_M_H, TR3Type.PistolAmmo_P, TR3Type.PistolAmmo_M_H },
+            new() { TR3Type.Gunflare_H, TR3Type.Pistols_M_H, TR3Type.PistolAmmo_P },
+        [TR3Type.PistolAmmo_P] =
+            new() { TR3Type.PistolAmmo_M_H },
         [TR3Type.Shotgun_P] =
             new() { TR3Type.LaraShotgunAnimation_H, TR3Type.Gunflare_H, TR3Type.Shotgun_M_H, TR3Type.ShotgunAmmo_P, TR3Type.ShotgunAmmo_M_H },
         [TR3Type.Deagle_P] =
-            new() { TR3Type.LaraDeagleAnimation_H, TR3Type.Gunflare_H, TR3Type.Deagle_M_H, TR3Type.DeagleAmmo_P, TR3Type.DeagleAmmo_M_H },
+            new() { TR3Type.Gunflare_H, TR3Type.Deagle_M_H, TR3Type.DeagleAmmo_P, TR3Type.DeagleAmmo_M_H },
         [TR3Type.Uzis_P] =
-            new() { TR3Type.LaraUziAnimation_H, TR3Type.Gunflare_H, TR3Type.Uzis_M_H, TR3Type.UziAmmo_P, TR3Type.UziAmmo_M_H },
+            new() { TR3Type.Gunflare_H, TR3Type.Uzis_M_H, TR3Type.UziAmmo_P, TR3Type.UziAmmo_M_H },
         [TR3Type.Harpoon_P] =
             new() { TR3Type.LaraHarpoonAnimation_H, TR3Type.Harpoon_M_H, TR3Type.Harpoons_P, TR3Type.Harpoons_M_H, TR3Type.HarpoonSingle2 },
         [TR3Type.MP5_P] =
@@ -195,6 +197,10 @@ public class TR3DataProvider : IDataProvider<TR3Type, TR3SFX>
             new() { TR3Type.LaraRocketAnimation_H, TR3Type.RocketLauncher_M_H, TR3Type.Rockets_P, TR3Type.Rockets_M_H, TR3Type.RocketSingle },
         [TR3Type.GrenadeLauncher_P] =
             new() { TR3Type.LaraGrenadeAnimation_H, TR3Type.GrenadeLauncher_M_H, TR3Type.Grenades_P, TR3Type.Grenades_M_H, TR3Type.GrenadeSingle },
+        [TR3Type.SmallMed_P] =
+            new() { TR3Type.SmallMed_M_H },
+        [TR3Type.LargeMed_P] =
+            new() { TR3Type.LargeMed_M_H },
     };
 
     private static readonly Dictionary<TR3Type, List<TR3Type>> _typeAliases = new()

@@ -13,6 +13,22 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR3ItemRandomizer : BaseTR3Randomizer
 {
+    private static readonly List<TR3Type> _assaultPickupModels = new()
+    {
+        TR3Type.PistolAmmo_P,
+        TR3Type.Shotgun_P,
+        TR3Type.Deagle_P,
+        TR3Type.Uzis_P,
+        TR3Type.MP5_P,
+        TR3Type.RocketLauncher_P,
+        TR3Type.GrenadeLauncher_P,
+        TR3Type.Harpoon_P,
+        TR3Type.SmallMed_P,
+        TR3Type.LargeMed_P,
+        TR3Type.LaraDeagleAnimation_H_Nevada,
+        TR3Type.LaraUziAnimation_H_Nevada,
+    };
+
     private readonly Dictionary<string, List<Location>> _excludedLocations;
     private readonly Dictionary<string, List<Location>> _pistolLocations;
 
@@ -92,41 +108,11 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     private bool ImportAssaultModels(TR3CombinedLevel level)
     {
-        // #312 We need all item models plus Lara's associated weapon animations for the
-        // assault course. The DEagle and Uzi anims will match Lara's default home outfit
-        // - outfit rando will take care of replacing these if it's enabled.
         TR3DataImporter importer = new()
         {
             Level = level.Data,
             LevelName = level.Name,
-            ClearUnusedSprites = false,
-            TypesToImport = new List<TR3Type>
-            {
-                TR3Type.LaraShotgunAnimation_H,
-                TR3Type.LaraDeagleAnimation_H_Home,
-                TR3Type.LaraUziAnimation_H_Home,
-                TR3Type.LaraMP5Animation_H,
-                TR3Type.LaraRocketAnimation_H,
-                TR3Type.LaraGrenadeAnimation_H,
-                TR3Type.LaraHarpoonAnimation_H,
-                TR3Type.PistolAmmo_P,
-                TR3Type.Shotgun_P, TR3Type.Shotgun_M_H,
-                TR3Type.ShotgunAmmo_P, TR3Type.ShotgunAmmo_M_H,
-                TR3Type.Deagle_P, TR3Type.Deagle_M_H,
-                TR3Type.DeagleAmmo_P, TR3Type.DeagleAmmo_M_H,
-                TR3Type.Uzis_P, TR3Type.Uzis_M_H,
-                TR3Type.UziAmmo_P, TR3Type.UziAmmo_M_H,
-                TR3Type.MP5_P, TR3Type.MP5_M_H,
-                TR3Type.MP5Ammo_P, TR3Type.MP5Ammo_M_H,
-                TR3Type.RocketLauncher_M_H, TR3Type.RocketLauncher_P,
-                TR3Type.Rockets_M_H, TR3Type.Rockets_P,
-                TR3Type.GrenadeLauncher_M_H, TR3Type.GrenadeLauncher_P,
-                TR3Type.Grenades_M_H, TR3Type.Grenades_P,
-                TR3Type.Harpoon_M_H, TR3Type.Harpoon_P,
-                TR3Type.Harpoons_M_H, TR3Type.Harpoons_P,
-                TR3Type.SmallMed_P, TR3Type.SmallMed_M_H,
-                TR3Type.LargeMed_P, TR3Type.LargeMed_M_H
-            },
+            TypesToImport = _assaultPickupModels,
             DataFolder = GetResourcePath(@"TR3\Objects")
         };
 
@@ -138,8 +124,28 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
         try
         {
-            // Try to import the selected models into the level.
             importer.Import();
+
+            // Manipulate the Nevada leg meshes to match the home outfit.
+            // Anything using vertex 26 and above is a holstered gun face.
+            TRModel pistolModel = level.Data.Models[TR3Type.LaraPistolAnimation_H];
+            TRModel deagleModel = level.Data.Models[TR3Type.LaraDeagleAnimation_H];
+            TRModel uzisModel = level.Data.Models[TR3Type.LaraUziAnimation_H];
+
+            static void CopyFaces(TRMesh baseMesh, TRMesh targetMesh)
+            {
+                static bool regularFace(TRMeshFace f) => f.Vertices.All(v => v < 26);
+                targetMesh.TexturedRectangles.RemoveAll(regularFace);
+                targetMesh.TexturedTriangles.RemoveAll(regularFace);
+                targetMesh.TexturedRectangles.AddRange(baseMesh.TexturedRectangles.FindAll(regularFace));
+                targetMesh.TexturedTriangles.AddRange(baseMesh.TexturedTriangles.FindAll(regularFace));
+            }
+
+            deagleModel.Meshes[1] = pistolModel.Meshes[1];
+            CopyFaces(pistolModel.Meshes[4], deagleModel.Meshes[4]);
+            CopyFaces(pistolModel.Meshes[1], uzisModel.Meshes[1]);
+            CopyFaces(pistolModel.Meshes[4], uzisModel.Meshes[4]);
+
             return true;
         }
         catch (PackingException)

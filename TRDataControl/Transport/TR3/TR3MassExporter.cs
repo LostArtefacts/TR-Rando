@@ -18,7 +18,10 @@ public class TR3MassExporter : TRMassExporter<TR3Level, TR3Type, TR3SFX, TR3Blob
     {
         [TR3LevelNames.JUNGLE] = new()
         {
-            TR3Type.LaraIndia, TR3Type.Monkey, TR3Type.Tiger, TR3Type.Door1
+            TR3Type.LaraIndia, TR3Type.Monkey, TR3Type.Tiger, TR3Type.Door1,
+            TR3Type.Pistols_P, TR3Type.PistolAmmo_P, TR3Type.Shotgun_P, TR3Type.Deagle_P, TR3Type.Uzis_P,
+            TR3Type.MP5_P, TR3Type.Harpoon_P, TR3Type.RocketLauncher_P, TR3Type.GrenadeLauncher_P,
+            TR3Type.SmallMed_P, TR3Type.LargeMed_P,
         },
         [TR3LevelNames.RUINS] = new()
         {
