@@ -153,7 +153,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         switch (mode)
         {
             case SpecialTextureMode.CrashPadCircle:
-                graphics.FillEllipse(pen.Brush, new Rectangle(16, 16, 46, 46));
+                graphics.FillEllipse(pen.Brush, new Rectangle(9, 9, 46, 46));
                 break;
             case SpecialTextureMode.CrashPadDiamond:
                 graphics.FillPolygon(pen.Brush, new Point[]
