@@ -17,4 +17,5 @@ public class TR3RCombinedLevel
     public int Sequence => IsCutScene ? ParentLevel.Sequence : Script.Sequence;
     public bool Is(string levelFileName) => Script.Is(levelFileName);
     public bool IsAssault => Is(TR3LevelNames.ASSAULT);
+    public TRDictionary<TR3Type, TRModel> PDPData { get; set; }
 }

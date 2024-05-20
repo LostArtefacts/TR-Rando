@@ -7,11 +7,13 @@ namespace TRRandomizerCore.Processors;
 
 public class TR2RLevelProcessor : AbstractLevelProcessor<TRRScriptedLevel, TR2RCombinedLevel>
 {
-    protected TR2LevelControl _control;
+    protected TR2LevelControl _levelControl;
+    protected TR2PDPControl _pdpControl;
 
     public TR2RLevelProcessor()
     {
-        _control = new();
+        _levelControl = new();
+        _pdpControl = new();
     }
 
     protected override TR2RCombinedLevel LoadCombinedLevel(TRRScriptedLevel scriptedLevel)
@@ -19,6 +21,7 @@ public class TR2RLevelProcessor : AbstractLevelProcessor<TRRScriptedLevel, TR2RC
         TR2RCombinedLevel level = new()
         {
             Data = LoadLevelData(scriptedLevel.LevelFileBaseName),
+            PDPData = LoadPDPData(scriptedLevel.PdpFileBaseName),
             Script = scriptedLevel,
             Checksum = GetBackupChecksum(scriptedLevel.LevelFileBaseName)
         };
@@ -37,25 +40,38 @@ public class TR2RLevelProcessor : AbstractLevelProcessor<TRRScriptedLevel, TR2RC
         lock (_controlLock)
         {
             string fullPath = Path.Combine(BasePath, name);
-            return _control.Read(fullPath);
+            return _levelControl.Read(fullPath);
+        }
+    }
+
+    public TRDictionary<TR2Type, TRModel> LoadPDPData(string name)
+    {
+        lock (_controlLock)
+        {
+            string fullPath = Path.Combine(BasePath, name);
+            return File.Exists(fullPath) ? _pdpControl.Read(fullPath) : null;
         }
     }
 
     protected override void ReloadLevelData(TR2RCombinedLevel level)
     {
         level.Data = LoadLevelData(level.Name);
+        level.PDPData = LoadPDPData(level.Script.PdpFileBaseName);
         if (level.HasCutScene)
         {
             level.CutSceneLevel.Data = LoadLevelData(level.CutSceneLevel.Name);
+            level.CutSceneLevel.PDPData = LoadPDPData(level.CutSceneLevel.Script.PdpFileBaseName);
         }
     }
 
     protected override void SaveLevel(TR2RCombinedLevel level)
     {
         SaveLevel(level.Data, level.Name);
+        SavePDPData(level.PDPData, level.Script.PdpFileBaseName);
         if (level.HasCutScene)
         {
             SaveLevel(level.CutSceneLevel.Data, level.CutSceneLevel.Name);
+            SavePDPData(level.CutSceneLevel.PDPData, level.CutSceneLevel.Script.PdpFileBaseName);
         }
 
         SaveScript();
@@ -66,7 +82,21 @@ public class TR2RLevelProcessor : AbstractLevelProcessor<TRRScriptedLevel, TR2RC
         lock (_controlLock)
         {
             string fullPath = Path.Combine(BasePath, name);
-            _control.Write(level, fullPath);
+            _levelControl.Write(level, fullPath);
+        }
+    }
+
+    public void SavePDPData(TRDictionary<TR2Type, TRModel> data, string name)
+    {
+        if (data != null)
+        {
+            return;
+        }
+
+        lock (_controlLock)
+        {
+            string fullPath = Path.Combine(BasePath, name);
+            _pdpControl.Write(data, fullPath);
         }
     }
 }
