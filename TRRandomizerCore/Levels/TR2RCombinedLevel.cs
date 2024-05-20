@@ -18,4 +18,5 @@ public class TR2RCombinedLevel
     public bool Is(string levelFileName) => Script.Is(levelFileName);
     public bool IsAssault => Is(TR2LevelNames.ASSAULT);
     public TRDictionary<TR2Type, TRModel> PDPData { get; set; }
+    public Dictionary<TR2Type, TR2RAlias> MapData { get; set; }
 }
