@@ -98,63 +98,23 @@ public class TRObjectTexture : TRTexture
 
     public void FlipHorizontal()
     {
-        switch (UVMode)
+        (Vertices[1], Vertices[0]) = (Vertices[0], Vertices[1]);
+        if (!HasTriangleVertex)
         {
-            case TRUVMode.NW_Clockwise:
-                UVMode = TRUVMode.NE_AntiClockwise;
-                break;
-            case TRUVMode.NE_AntiClockwise:
-                UVMode = TRUVMode.NW_Clockwise;
-                break;
-            case TRUVMode.SW_AntiClockwise:
-                UVMode = TRUVMode.SE_Clockwise;
-                break;
-            case TRUVMode.SE_Clockwise:
-                UVMode = TRUVMode.SW_AntiClockwise;
-                break;
-            case TRUVMode.NE_Clockwise:
-                UVMode = TRUVMode.NW_AntiClockwise;
-                break;
-            case TRUVMode.NW_AntiClockwise:
-                UVMode = TRUVMode.NE_Clockwise;
-                break;
-            case TRUVMode.SW_Clockwise:
-                UVMode = TRUVMode.SE_AntiClockwise;
-                break;
-            case TRUVMode.SE_AntiClockwise:
-                UVMode = TRUVMode.SW_Clockwise;
-                break;
+            (Vertices[3], Vertices[2]) = (Vertices[2], Vertices[3]);
         }
     }
 
     public void FlipVertical()
     {
-        switch (UVMode)
+        if (HasTriangleVertex)
         {
-            case TRUVMode.NW_Clockwise:
-                UVMode = TRUVMode.SW_AntiClockwise;
-                break;
-            case TRUVMode.SW_AntiClockwise:
-                UVMode = TRUVMode.NW_Clockwise;
-                break;
-            case TRUVMode.NE_Clockwise:
-                UVMode = TRUVMode.SE_AntiClockwise;
-                break;
-            case TRUVMode.SE_AntiClockwise:
-                UVMode = TRUVMode.NE_Clockwise;
-                break;
-            case TRUVMode.SE_Clockwise:
-                UVMode = TRUVMode.NE_AntiClockwise;
-                break;
-            case TRUVMode.NE_AntiClockwise:
-                UVMode = TRUVMode.SE_Clockwise;
-                break;
-            case TRUVMode.SW_Clockwise:
-                UVMode = TRUVMode.NW_AntiClockwise;
-                break;
-            case TRUVMode.NW_AntiClockwise:
-                UVMode = TRUVMode.SW_Clockwise;
-                break;
+            (Vertices[2], Vertices[0]) = (Vertices[0], Vertices[2]);
+        }
+        else
+        {
+            (Vertices[3], Vertices[0]) = (Vertices[0], Vertices[3]);
+            (Vertices[2], Vertices[1]) = (Vertices[1], Vertices[2]);
         }
     }
 

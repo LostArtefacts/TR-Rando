@@ -689,12 +689,12 @@ public partial class TextureTests
         }
 
         Test(MakeNWClockwiseQuad(), TRUVMode.NE_AntiClockwise);
-        Test(MakeNEClockwiseQuad(), TRUVMode.NW_AntiClockwise);
+        Test(MakeNEClockwiseQuad(), TRUVMode.SE_AntiClockwise);
         Test(MakeSEClockwiseQuad(), TRUVMode.SW_AntiClockwise);
-        Test(MakeSWClockwiseQuad(), TRUVMode.SE_AntiClockwise);
-        Test(MakeNWAntiClockwiseQuad(), TRUVMode.NE_Clockwise);
+        Test(MakeSWClockwiseQuad(), TRUVMode.NW_AntiClockwise);
+        Test(MakeNWAntiClockwiseQuad(), TRUVMode.SW_Clockwise);
         Test(MakeNEAntiClockwiseQuad(), TRUVMode.NW_Clockwise);
-        Test(MakeSEAntiClockwiseQuad(), TRUVMode.SW_Clockwise);
+        Test(MakeSEAntiClockwiseQuad(), TRUVMode.NE_Clockwise);
         Test(MakeSWAntiClockwiseQuad(), TRUVMode.SE_Clockwise);
     }
 
@@ -708,12 +708,12 @@ public partial class TextureTests
         }
 
         Test(MakeNWClockwiseQuad(), TRUVMode.SW_AntiClockwise);
-        Test(MakeNEClockwiseQuad(), TRUVMode.SE_AntiClockwise);
+        Test(MakeNEClockwiseQuad(), TRUVMode.NW_AntiClockwise);
         Test(MakeSEClockwiseQuad(), TRUVMode.NE_AntiClockwise);
-        Test(MakeSWClockwiseQuad(), TRUVMode.NW_AntiClockwise);
-        Test(MakeNWAntiClockwiseQuad(), TRUVMode.SW_Clockwise);
+        Test(MakeSWClockwiseQuad(), TRUVMode.SE_AntiClockwise);
+        Test(MakeNWAntiClockwiseQuad(), TRUVMode.NE_Clockwise);
         Test(MakeNEAntiClockwiseQuad(), TRUVMode.SE_Clockwise);
-        Test(MakeSEAntiClockwiseQuad(), TRUVMode.NE_Clockwise);
+        Test(MakeSEAntiClockwiseQuad(), TRUVMode.SW_Clockwise);
         Test(MakeSWAntiClockwiseQuad(), TRUVMode.NW_Clockwise);
     }
 

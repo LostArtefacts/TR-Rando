@@ -398,6 +398,9 @@ public abstract class AbstractTRWireframer<E, L>
         return new()
         {
             Texture = new TRObjectTexture(rectangle)
+            {
+                BlendingMode = TRBlendingMode.AlphaTesting
+            }
         };
     }
 
