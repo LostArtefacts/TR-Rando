@@ -129,7 +129,7 @@ public enum TR2Type : uint
     BridgeFlat               = 117,
     BridgeTilt1              = 118,
     BridgeTilt2              = 119,
-    JadeSecret_M_H           = 120,
+    PassportOpen_M_H           = 120,
     SilverSecret_M_H         = 121,
     LaraHomePhoto_M_H        = 122,
     CutsceneActor4           = 123,
