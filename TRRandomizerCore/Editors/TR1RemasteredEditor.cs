@@ -1,4 +1,5 @@
-﻿using TRGE.Core;
+﻿using TRDataControl;
+using TRGE.Core;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Randomizers;
@@ -21,6 +22,11 @@ public class TR1RemasteredEditor : TR1ClassicEditor
     protected override int GetSaveTarget(int numLevels)
     {
         int target = 0;
+
+        if (Settings.RandomizeSecrets)
+        {
+            target += numLevels * 3;
+        }
 
         if (Settings.RandomizeItems)
         {
@@ -61,6 +67,11 @@ public class TR1RemasteredEditor : TR1ClassicEditor
         string backupDirectory = _io.BackupDirectory.FullName;
         string wipDirectory = _io.WIPOutputDirectory.FullName;
 
+        TR1RDataCache dataCache = new()
+        {
+            PDPFolder = backupDirectory,
+        };
+
         ItemFactory<TR1Entity> itemFactory = new(@"Resources\TR1\Items\repurposable_items.json");
         TR1RItemRandomizer itemRandomizer = new()
         {
@@ -82,6 +93,22 @@ public class TR1RemasteredEditor : TR1ClassicEditor
             SaveMonitor = monitor,
             Settings = Settings,
         };
+
+        if (!monitor.IsCancelled && Settings.RandomizeSecrets)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
+            new TR1RSecretRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings,
+                ItemFactory = itemFactory,
+                DataCache = dataCache,
+            }.Randomize(Settings.SecretSeed);
+        }
 
         if (!monitor.IsCancelled && Settings.RandomizeItems)
         {

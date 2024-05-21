@@ -59,8 +59,11 @@ internal class TRVersionSupport
     private static readonly List<TRRandomizerType> _tr1RTypes = new()
     {
         TRRandomizerType.Audio,
+        TRRandomizerType.GlitchedSecrets,
+        TRRandomizerType.HardSecrets,
         TRRandomizerType.Item,
         TRRandomizerType.KeyItems,
+        TRRandomizerType.Secret,
         TRRandomizerType.SecretAudio,
         TRRandomizerType.StartPosition,
     };

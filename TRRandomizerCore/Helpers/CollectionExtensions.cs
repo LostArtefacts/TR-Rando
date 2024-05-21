@@ -81,4 +81,20 @@ public static class CollectionExtensions
         }
         return splits;
     }
+
+    public static List<T>[] Cluster<T>(this IEnumerable<T> list, int clusterCount)
+    {
+        List<T>[] clusters = new List<T>[clusterCount];
+        for (int i = 0; i < clusterCount; i++)
+        {
+            clusters[i] = new();
+        }
+
+        int j = 0;
+        foreach (T item in list)
+        {
+            clusters[j++ % clusterCount].Add(item);
+        }
+        return clusters;
+    }
 }
