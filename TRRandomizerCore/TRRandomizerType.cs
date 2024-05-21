@@ -32,6 +32,7 @@ public enum TRRandomizerType
     VFX,
     DragonSpawn,
     BirdMonsterBehaviour,
+    DocileBirdMonster,
     SecretAudio,
     Mediless,
     KeyItems,

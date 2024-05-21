@@ -414,7 +414,8 @@
                         </Label>
                     </Border>
 
-                    <Border Grid.Row="2">
+                    <Border Grid.Row="2"
+                            Visibility="{Binding ControllerProxy.IsDocileBirdMonsterTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <RadioButton Content="Docile"
                                      GroupName="birdMonsterBehaviour"
                                      x:Name="_docileBirdBehaviourButton"
@@ -424,7 +425,8 @@
                     </Border>
 
                     <Border Grid.Row="2"
-                            Grid.Column="1">
+                            Grid.Column="1"
+                            Visibility="{Binding ControllerProxy.IsDocileBirdMonsterTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}">
                             <TextBlock>
                                 <Run>Bird monsters will </Run>

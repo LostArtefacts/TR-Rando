@@ -198,9 +198,9 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         else
         {
             // Do we need at least one water creature?
-            bool waterEnemyRequired = TR2EnemyUtilities.IsWaterEnemyRequired(level);
+            bool waterEnemyRequired = TR2EnemyUtilities.IsWaterEnemyRequired(level.Data);
             // Do we need at least one enemy that can drop?
-            bool droppableEnemyRequired = TR2EnemyUtilities.IsDroppableEnemyRequired(level);
+            bool droppableEnemyRequired = TR2EnemyUtilities.IsDroppableEnemyRequired(level.Data);
 
             // Let's try to populate the list. Start by adding one water enemy and one droppable
             // enemy if they are needed. If we want to exclude, try to select based on user priority.
@@ -729,7 +729,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 };
                 level.Data.Entities.Add(skidoo);
 
-                Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Type.RedSnowmobile, _generator);
+                Location randomLocation = VehicleUtilities.GetRandomLocation(level.Name, level.Data, TR2Type.RedSnowmobile, _generator);
                 if (randomLocation != null)
                 {
                     skidoo.Room = randomLocation.Room;
@@ -753,7 +753,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             TR2Entity skidoo = level.Data.Entities.Find(e => e.TypeID == TR2Type.RedSnowmobile);
             if (skidoo != null)
             {
-                Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Type.RedSnowmobile, _generator);
+                Location randomLocation = VehicleUtilities.GetRandomLocation(level.Name, level.Data, TR2Type.RedSnowmobile, _generator);
                 if (randomLocation != null)
                 {
                     skidoo.Room = randomLocation.Room;

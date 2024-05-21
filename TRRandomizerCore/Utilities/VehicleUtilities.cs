@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
-using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Levels;
-using TRLevelControl.Model;
 using TRLevelControl.Helpers;
+using TRLevelControl.Model;
+using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Utilities;
 
@@ -17,14 +16,14 @@ public static class VehicleUtilities
         _secretLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\locations.json"));
     }
 
-    public static Location GetRandomLocation(TR2CombinedLevel level, TR2Type vehicle, Random random, bool testSecrets = true)
+    public static Location GetRandomLocation(string levelName, TR2Level level, TR2Type vehicle, Random random, bool testSecrets = true)
     {
-        if (_vehicleLocations.ContainsKey(level.Name))
+        if (_vehicleLocations.ContainsKey(levelName))
         {
             short vehicleID = (short)vehicle;
             if (testSecrets)
             {
-                IEnumerable<Location> dependencies = GetDependentLocations(level);
+                IEnumerable<Location> dependencies = GetDependentLocations(levelName, level);
                 if (dependencies.Any(l => l.TargetType == vehicleID))
                 {
                     // Vehicles that have secrets dependent on their OG positions will not be moved.
@@ -32,7 +31,7 @@ public static class VehicleUtilities
                 }
             }
 
-            List<Location> vehicleLocations = _vehicleLocations[level.Name]
+            List<Location> vehicleLocations = _vehicleLocations[levelName]
                 .FindAll(l => l.TargetType == vehicleID);
             if (vehicleLocations.Count > 0)
             {
@@ -43,15 +42,15 @@ public static class VehicleUtilities
         return null;
     }
 
-    public static IEnumerable<Location> GetDependentLocations(TR2CombinedLevel level)
+    public static IEnumerable<Location> GetDependentLocations(string levelName, TR2Level level)
     {
-        if (!_secretLocations.ContainsKey(level.Name))
+        if (!_secretLocations.ContainsKey(levelName))
         {
             return Array.Empty<Location>();
         }
 
-        IEnumerable<Location> levelLocations = _secretLocations[level.Name].Where(l => l.VehicleRequired);
-        IEnumerable<TR2Entity> secrets = level.Data.Entities.Where(e => TR2TypeUtilities.IsSecretType(e.TypeID));
+        IEnumerable<Location> levelLocations = _secretLocations[levelName].Where(l => l.VehicleRequired);
+        IEnumerable<TR2Entity> secrets = level.Entities.Where(e => TR2TypeUtilities.IsSecretType(e.TypeID));
 
         return levelLocations
             .Where(l => secrets.Any(s => l.X == s.X && l.Y == s.Y && l.Z == s.Z && l.Room == s.Room));

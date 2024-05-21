@@ -79,6 +79,7 @@ internal class TRVersionSupport
         TRRandomizerType.Audio,
         TRRandomizerType.BirdMonsterBehaviour,
         TRRandomizerType.Braid,
+        TRRandomizerType.DocileBirdMonster,
         TRRandomizerType.DisableDemos,
         TRRandomizerType.DragonSpawn,
         TRRandomizerType.DynamicEnemyTextures,
@@ -118,6 +119,8 @@ internal class TRVersionSupport
     private static readonly List<TRRandomizerType> _tr2RTypes = new()
     {
         TRRandomizerType.Audio,
+        TRRandomizerType.BirdMonsterBehaviour,
+        TRRandomizerType.Enemy,
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
         TRRandomizerType.Item,

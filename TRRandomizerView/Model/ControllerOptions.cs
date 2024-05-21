@@ -3946,6 +3946,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsChallengeRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.ChallengeRooms);
     public bool IsWeatherTypeSupported => IsRandomizationSupported(TRRandomizerType.Weather);
     public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
+    public bool IsDocileBirdMonsterTypeSupported => IsRandomizationSupported(TRRandomizerType.DocileBirdMonster);
     public bool IsDragonSpawnTypeSupported => IsRandomizationSupported(TRRandomizerType.DragonSpawn);
     public bool IsSecretTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretTextures);
     public bool IsKeyItemTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItemTextures);
