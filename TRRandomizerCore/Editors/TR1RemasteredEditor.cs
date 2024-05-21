@@ -28,6 +28,11 @@ public class TR1RemasteredEditor : TR1ClassicEditor
             target += numLevels * 3;
         }
 
+        if (Settings.RandomizeEnemies)
+        {
+            target += Settings.CrossLevelEnemies ? numLevels * 3 : numLevels;
+        }
+
         if (Settings.RandomizeItems)
         {
             target += numLevels;
@@ -113,6 +118,22 @@ public class TR1RemasteredEditor : TR1ClassicEditor
                 ItemFactory = itemFactory,
                 DataCache = dataCache,
             }.Randomize(Settings.SecretSeed);
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeEnemies)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
+            new TR1REnemyRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings,
+                ItemFactory = itemFactory,
+                DataCache = dataCache
+            }.Randomize(Settings.EnemySeed);
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeItems)

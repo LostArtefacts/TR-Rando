@@ -20,8 +20,9 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
     private List<T> _nonGraphicsDependencies;
 
-    public void Import()
+    public ImportResult<T> Import()
     {
+        ImportResult<T> result = new();
         _nonGraphicsDependencies = new();
         List<T> existingTypes = GetExistingTypes();
 
@@ -39,14 +40,16 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
         if (blobs.Count == 0)
         {
-            return;
+            return result;
         }
+
+        result.ImportedTypes.AddRange(blobs.Where(b => b.Type == TRBlobType.Model).Select(b => b.Alias));
 
         // Store the current dummy mesh in case we are replacing the master type.
         TRMesh dummyMesh = GetDummyMesh();
 
         // Remove old types first and tidy up stale textures
-        RemoveData();
+        RemoveData(result);
 
         // Try to pack the textures collectively now that we have cleared some space.
         // This will throw if it fails.
@@ -54,6 +57,8 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
         // Success - import the remaining data.
         ImportData(blobs, dummyMesh);
+
+        return result;
     }
 
     private void CleanRemovalList()
@@ -276,7 +281,7 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
         standardBlobs.Add(nextBlob);
     }
 
-    protected void RemoveData()
+    protected void RemoveData(ImportResult<T> resultTracker)
     {
         List<int> staleTextures = new();
         foreach (T type in TypesToRemove)
@@ -294,6 +299,7 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
                         if (!_nonGraphicsDependencies.Contains(id))
                         {
                             Models.Remove(id);
+                            resultTracker.RemovedTypes.Add(type);
                         }
                     }
                     break;

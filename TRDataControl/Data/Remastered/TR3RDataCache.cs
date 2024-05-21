@@ -25,8 +25,7 @@ public class TR3RDataCache : BaseTRRDataCache<TR3Type, TR3RAlias>
     public override string GetSourceLevel(TR3Type key)
     {
         _dataProvider ??= new();
-        TR3Type translatedType = _dataProvider.TranslateAlias(key);
-        return _sourceLevels.ContainsKey(translatedType) ? _sourceLevels[translatedType] : null;
+        return _sourceLevels.ContainsKey(key) ? _sourceLevels[key] : null;
     }
 
     public override TR3RAlias GetAlias(TR3Type key)
