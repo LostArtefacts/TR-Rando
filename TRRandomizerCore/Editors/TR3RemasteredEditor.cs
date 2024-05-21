@@ -1,4 +1,5 @@
-﻿using TRGE.Core;
+﻿using TRDataControl;
+using TRGE.Core;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Randomizers;
@@ -22,6 +23,11 @@ public class TR3RemasteredEditor : TR3ClassicEditor
     {
         int target = 0;
 
+        if (Settings.RandomizeSecrets)
+        {
+            target += numLevels * 3;
+        }
+
         if (Settings.RandomizeItems)
         {
             target += numLevels;
@@ -29,6 +35,11 @@ public class TR3RemasteredEditor : TR3ClassicEditor
             {
                 target += numLevels;
             }
+        }
+
+        if (Settings.RandomizeSecretRewardsPhysical)
+        {
+            target += numLevels;
         }
 
         if (Settings.RandomizeStartPosition)
@@ -61,6 +72,11 @@ public class TR3RemasteredEditor : TR3ClassicEditor
         string backupDirectory = _io.BackupDirectory.FullName;
         string wipDirectory = _io.WIPOutputDirectory.FullName;
 
+        TR3RDataCache dataCache = new()
+        {
+            PDPFolder = backupDirectory,
+        };
+
         ItemFactory<TR3Entity> itemFactory = new(@"Resources\TR3\Items\repurposable_items.json")
         {
             DefaultItem = new() { Intensity1 = -1, Intensity2 = -1 }
@@ -87,10 +103,40 @@ public class TR3RemasteredEditor : TR3ClassicEditor
             Settings = Settings,
         };
 
+        if (!monitor.IsCancelled && Settings.RandomizeSecrets)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
+            new TR3RSecretRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings,
+                ItemFactory = itemFactory,
+                DataCache = dataCache,
+            }.Randomize(Settings.SecretSeed);
+        }
+
         if (!monitor.IsCancelled && Settings.RandomizeItems)
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing standard items");
             itemRandomizer.Randomize(Settings.ItemSeed);
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeSecretRewardsPhysical)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secret rewards");
+            new TR3RSecretRewardRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings
+            }.Randomize(Settings.SecretRewardsPhysicalSeed);
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeStartPosition)

@@ -1085,7 +1085,7 @@ public class TRRandomizerController
             ISecretRandomizer randomizer = _editor.Edition.Version switch
             {
                 TRVersion.TR1 => new TR1SecretRandomizer(),
-                TRVersion.TR2 => new TR2SecretRandomizer(),
+                TRVersion.TR2 => new TR2SecretAllocator(),
                 TRVersion.TR3 => new TR3SecretRandomizer(),
                 _ => throw new Exception(),
             };

@@ -4,7 +4,7 @@ using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Helpers;
 
-public class Location : ITRLocatable
+public class Location : ITRLocatable, ICloneable
 {
     public const string DefaultPackID = "TRRando";
 
@@ -66,6 +66,12 @@ public class Location : ITRLocatable
     {
         return new(X, Y, Z);
     }
+
+    public Location Clone()
+        => (Location)MemberwiseClone();
+
+    object ICloneable.Clone()
+        => Clone();
 
     public override string ToString()
     {

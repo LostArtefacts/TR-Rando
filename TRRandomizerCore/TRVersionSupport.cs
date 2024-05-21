@@ -59,9 +59,13 @@ internal class TRVersionSupport
     private static readonly List<TRRandomizerType> _tr1RTypes = new()
     {
         TRRandomizerType.Audio,
+        TRRandomizerType.GlitchedSecrets,
+        TRRandomizerType.HardSecrets,
         TRRandomizerType.Item,
         TRRandomizerType.KeyItems,
+        TRRandomizerType.Secret,
         TRRandomizerType.SecretAudio,
+        TRRandomizerType.SecretReward,
         TRRandomizerType.StartPosition,
     };
 
@@ -111,9 +115,12 @@ internal class TRVersionSupport
     private static readonly List<TRRandomizerType> _tr2RTypes = new()
     {
         TRRandomizerType.Audio,
+        TRRandomizerType.GlitchedSecrets,
+        TRRandomizerType.HardSecrets,
         TRRandomizerType.Item,
         TRRandomizerType.ItemDrops,
         TRRandomizerType.KeyItems,
+        TRRandomizerType.Secret,
         TRRandomizerType.SecretAudio,
         TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
@@ -163,10 +170,14 @@ internal class TRVersionSupport
     private static readonly List<TRRandomizerType> _tr3RTypes = new()
     {
         TRRandomizerType.Audio,
+        TRRandomizerType.GlitchedSecrets,
+        TRRandomizerType.HardSecrets,
         TRRandomizerType.Item,
         TRRandomizerType.ItemDrops,
         TRRandomizerType.KeyItems,
+        TRRandomizerType.Secret,
         TRRandomizerType.SecretAudio,
+        TRRandomizerType.SecretReward,
         TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
     };

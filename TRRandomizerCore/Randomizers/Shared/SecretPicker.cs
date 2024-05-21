@@ -219,11 +219,11 @@ public class SecretPicker<T>
         // Secrets in packs are permitted to enforce level state
         if (usedLocations.Any(l => l.LevelState == LevelState.Mirrored))
         {
-            Mirrorer.SetIsMirrored(level, true);
+            Mirrorer?.SetIsMirrored(level, true);
         }
         else if (usedLocations.Any(l => l.LevelState == LevelState.NotMirrored))
         {
-            Mirrorer.SetIsMirrored(level, false);
+            Mirrorer?.SetIsMirrored(level, false);
         }
 
         foreach (Location location in usedLocations.Where(l => l.EntityIndex != -1))

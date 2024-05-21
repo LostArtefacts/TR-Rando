@@ -104,7 +104,7 @@ public class TR2RLevelProcessor : AbstractLevelProcessor<TRRScriptedLevel, TR2RC
 
     public void SavePDPData(TRDictionary<TR2Type, TRModel> data, string name)
     {
-        if (data != null)
+        if (data == null)
         {
             return;
         }
