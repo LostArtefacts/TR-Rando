@@ -58,9 +58,12 @@ internal class TRVersionSupport
 
     private static readonly List<TRRandomizerType> _tr1RTypes = new()
     {
+        TRRandomizerType.AtlanteanEggBehaviour,
         TRRandomizerType.Audio,
+        TRRandomizerType.Enemy,
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
+        TRRandomizerType.HiddenEnemies,
         TRRandomizerType.Item,
         TRRandomizerType.KeyItems,
         TRRandomizerType.Secret,

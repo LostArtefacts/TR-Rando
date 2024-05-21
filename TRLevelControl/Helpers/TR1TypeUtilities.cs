@@ -562,18 +562,6 @@ public static class TR1TypeUtilities
         };
     }
 
-    public static TR1Type TranslateSourceType(TR1Type type)
-    {
-        return type switch
-        {
-            TR1Type.SecretAnkh_M_H => TR1Type.Puzzle4_M_H,
-            TR1Type.SecretGoldBar_M_H or TR1Type.SecretGoldIdol_M_H => TR1Type.Puzzle1_M_H,
-            TR1Type.SecretLeadBar_M_H => TR1Type.LeadBar_M_H,
-            TR1Type.SecretScion_M_H => TR1Type.ScionPiece_M_H,
-            _ => type,
-        };
-    }
-
     public static Dictionary<TR1Type, TR1Type> GetSecretReplacements()
     {
         // Note Key1 is omitted because of Pierre

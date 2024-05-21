@@ -38,6 +38,10 @@ public abstract class BaseTRRDataCache<TKey, TAlias>
             {
                 _pdpCache[sourceType] = models[translatedKey];
             }
+            else if (models.ContainsKey(destinationType))
+            {
+                _pdpCache[sourceType] = models[destinationType];
+            }
             else
             {
                 throw new KeyNotFoundException($"Could not load cached PDP data for {sourceType}");
