@@ -3989,7 +3989,7 @@ public class ControllerOptions : INotifyPropertyChanged
         }
         else
         {
-            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and rewards will appear when all secrets are collected.";
+            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and rewards will be stacked with them.";
         }
 
         FirePropertyChanged(nameof(RandomizeSecretsText));
