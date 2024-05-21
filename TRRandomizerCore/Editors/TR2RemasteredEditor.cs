@@ -22,6 +22,11 @@ public class TR2RemasteredEditor : TR2ClassicEditor
     {
         int target = 0;
 
+        if (Settings.RandomizeSecrets)
+        {
+            target += numLevels;
+        }
+
         if (Settings.RandomizeItems)
         {
             target += numLevels;
@@ -85,6 +90,21 @@ public class TR2RemasteredEditor : TR2ClassicEditor
             SaveMonitor = monitor,
             Settings = Settings,
         };
+
+        if (!monitor.IsCancelled && Settings.RandomizeSecrets)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
+            new TR2RSecretRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings,
+                ItemFactory = itemFactory,
+            }.Randomize(Settings.SecretSeed);
+        }
 
         if (!monitor.IsCancelled && Settings.RandomizeItems)
         {
