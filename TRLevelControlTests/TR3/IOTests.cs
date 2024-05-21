@@ -14,9 +14,30 @@ public class IOTests : TestBase
 
     [TestMethod]
     [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
-    public void TestReadWrite(string levelName)
+    public void TestOGReadWrite(string levelName)
     {
-        ReadWriteLevel(levelName, TRGameVersion.TR3);
+        ReadWriteLevel(levelName, TRGameVersion.TR3, false);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestRemasteredReadWrite(string levelName)
+    {
+        ReadWriteLevel(levelName, TRGameVersion.TR3, true);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestPDPReadWrite(string levelName)
+    {
+        ReadWritePDP(levelName, TRGameVersion.TR3);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestMAPReadWrite(string levelName)
+    {
+        ReadWriteMAP(levelName, TRGameVersion.TR3);
     }
 
     [TestMethod]

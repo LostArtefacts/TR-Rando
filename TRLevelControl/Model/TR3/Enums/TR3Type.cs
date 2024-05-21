@@ -437,6 +437,9 @@ public enum TR3Type : uint
     Debris9                    = 423,
     SceneryBase                = Plant0,
 
+    // Workaround for a typo in TRR
+    CutsceneActor_4            = 800,
+
     // Alias entries
     CobraIndia                    = 1000,
     CobraNevada                   = 1001,

@@ -12,9 +12,9 @@ public class IOTests : TestBase
 
     [TestMethod]
     [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
-    public void TestReadWrite(string levelname)
+    public void TestOGReadWrite(string levelname)
     {
-        ReadWriteLevel(levelname, TRGameVersion.TR4);
+        ReadWriteLevel(levelname, TRGameVersion.TR4, false);
     }
 
     [TestMethod]

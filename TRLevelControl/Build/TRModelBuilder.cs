@@ -8,6 +8,7 @@ public class TRModelBuilder<T>
     private static readonly ushort _tr5ModelPadding = 0xFFEF;
 
     private readonly TRGameVersion _version;
+    private readonly TRModelDataType _dataType;
     private readonly ITRLevelObserver _observer;
 
     private List<TRAnimation> _animations;
@@ -23,9 +24,10 @@ public class TRModelBuilder<T>
     private Dictionary<TRAnimDispatch, short> _dispatchToAnimMap;
     private Dictionary<TRAnimDispatch, short> _dispatchFrameBase;
 
-    public TRModelBuilder(TRGameVersion version, ITRLevelObserver observer = null)
+    public TRModelBuilder(TRGameVersion version, TRModelDataType dataType, ITRLevelObserver observer = null)
     {
         _version = version;
+        _dataType = dataType;
         _observer = observer;
     }
 
@@ -305,6 +307,19 @@ public class TRModelBuilder<T>
             }
         }
 
+        if (_dataType == TRModelDataType.PDP && _version == TRGameVersion.TR1 && globalAnimIndex < _placeholderAnimations.Count - 1)
+        {
+            // TR1 PDP files have an extra frame in Lara's drop-twist-hang animation (46, modern controls).
+            // Frame start/end mean it's never used in-game, but we capture it for tests.
+            // Sanity check that the difference is exactly the size of a (TR1) frame.
+            PlaceholderAnimation nextAnimation = _placeholderAnimations[globalAnimIndex + 1];
+            int difference = ((int)nextAnimation.FrameOffset / sizeof(short)) - frameIndex;
+            if (difference == 10 + 2 * placeholderModel.NumMeshes)
+            {
+                animation.Frames.Add(BuildFrame(ref frameIndex, placeholderModel.NumMeshes));
+            }
+        }
+
         return animation;
     }
 
@@ -536,7 +551,8 @@ public class TRModelBuilder<T>
         {
             ID = (uint)(object)type,
             Animation = model.Animations.Count == 0 ? TRConsts.NoAnimation : (ushort)_placeholderAnimations.Count,
-            FrameOffset = _observer == null && model.Animations.Count == 0 ? 0 : (uint)_frames.Count * sizeof(short),
+            FrameOffset = (_dataType == TRModelDataType.PDP || _observer == null)
+                && model.Animations.Count == 0 ? 0 : (uint)_frames.Count * sizeof(short),
             NumMeshes = (ushort)model.Meshes.Count,
         };
         _placeholderModels.Add(placeholderModel);
@@ -880,11 +896,13 @@ public class TRModelBuilder<T>
         }
     }
 
-    private static TRAngleMode GetMode(TRAnimFrameRotation rot)
+    private TRAngleMode GetMode(TRAnimFrameRotation rot)
     {
         if (rot.X == 0 && rot.Y == 0)
         {
-            return TRAngleMode.Z;
+            // OG TR2+ levels (and TRR levels) use Z here, PDP uses X. Makes no difference
+            // in game, but keeps tests happy.
+            return _dataType == TRModelDataType.PDP && rot.Z == 0 ? TRAngleMode.X : TRAngleMode.Z;
         }
         if (rot.X == 0 && rot.Z == 0)
         {

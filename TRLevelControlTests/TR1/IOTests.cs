@@ -11,12 +11,34 @@ public class IOTests : TestBase
     public static IEnumerable<object[]> GetAllLevels() => GetLevelNames(TR1LevelNames.AsOrderedList);
     public static IEnumerable<object[]> GetBaseLevels() => GetLevelNames(TR1LevelNames.AsOrderedList.Except(TR1LevelNames.AsListGold));
     public static IEnumerable<object[]> GetGoldLevels() => GetLevelNames(TR1LevelNames.AsListGold);
+    public static IEnumerable<object[]> GetMapLevels() => GetLevelNames(TR1LevelNames.AsOrderedList.Except(new List<string> { TR1LevelNames.TIHOCAN_CUT }));
 
     [TestMethod]
     [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
-    public void TestReadWrite(string levelName)
+    public void TestOGReadWrite(string levelName)
     {
-        ReadWriteLevel(levelName, TRGameVersion.TR1);
+        ReadWriteLevel(levelName, TRGameVersion.TR1, false);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestRemasteredReadWrite(string levelName)
+    {
+        ReadWriteLevel(levelName, TRGameVersion.TR1, true);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestPDPReadWrite(string levelName)
+    {
+        ReadWritePDP(levelName, TRGameVersion.TR1);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetMapLevels), DynamicDataSourceType.Method)]
+    public void TestMAPReadWrite(string levelName)
+    {
+        ReadWriteMAP(levelName, TRGameVersion.TR1);
     }
 
     [TestMethod]
