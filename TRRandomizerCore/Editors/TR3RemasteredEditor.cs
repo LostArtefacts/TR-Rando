@@ -37,6 +37,11 @@ public class TR3RemasteredEditor : TR3ClassicEditor
             }
         }
 
+        if (Settings.RandomizeSecretRewardsPhysical)
+        {
+            target += numLevels;
+        }
+
         if (Settings.RandomizeStartPosition)
         {
             target += numLevels;
@@ -118,6 +123,20 @@ public class TR3RemasteredEditor : TR3ClassicEditor
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing standard items");
             itemRandomizer.Randomize(Settings.ItemSeed);
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeSecretRewardsPhysical)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secret rewards");
+            new TR3RSecretRewardRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings
+            }.Randomize(Settings.SecretRewardsPhysicalSeed);
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeStartPosition)

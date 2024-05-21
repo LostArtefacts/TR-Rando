@@ -1,9 +1,10 @@
 ﻿using TRGE.Core;
+using TRLevelControl.Model;
 using TRRandomizerCore.Secrets;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class TR3SecretRewardRandomizer : BaseTR3Randomizer
+public class TR3RSecretRewardRandomizer : BaseTR3RRandomizer
 {
     public override void Randomize(int seed)
     {
@@ -13,10 +14,10 @@ public class TR3SecretRewardRandomizer : BaseTR3Randomizer
             Generator = _generator
         };
 
-        foreach (TR3ScriptedLevel lvl in Levels)
+        foreach (TRRScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
-            TR3SecretMapping mapping = TR3SecretMapping.Get(_levelInstance);
+            TRSecretMapping<TR3Entity> mapping = TRSecretMapping<TR3Entity>.Get($@"Resources\TR3\SecretMapping\{_levelInstance.Name}-SecretMapping.json");
             if (mapping != null)
             {
                 allocator.RandomizeRewards(_levelInstance.Data, mapping.RewardEntities);
