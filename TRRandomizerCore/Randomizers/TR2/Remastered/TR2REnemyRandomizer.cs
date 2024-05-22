@@ -12,6 +12,17 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR2REnemyRandomizer : BaseTR2RRandomizer
 {
+    private static readonly List<string> _dragonLevels = new()
+    {
+        TR2LevelNames.GW,
+        TR2LevelNames.DORIA,
+        TR2LevelNames.DECK,
+        TR2LevelNames.TIBET,
+        TR2LevelNames.COT,
+        TR2LevelNames.CHICKEN,
+        TR2LevelNames.XIAN,
+    };
+
     private Dictionary<TR2Type, List<string>> _gameEnemyTracker;
     private List<TR2Type> _excludedEnemies;
     private HashSet<TR2Type> _resultantEnemies;
@@ -188,10 +199,8 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
         // Get all other candidate supported enemies
         List<TR2Type> allEnemies = TR2TypeUtilities.GetCandidateCrossLevelEnemies()
             .FindAll(e => TR2EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, Settings.ProtectMonks));
-        if (Settings.OneEnemyMode || Settings.IncludedEnemies.Count < newEntities.Capacity)
+        if (Settings.OneEnemyMode || Settings.IncludedEnemies.Count < newEntities.Capacity || !_dragonLevels.Contains(level.Name))
         {
-            // Marco isn't excludable in his own right because supporting a dragon-only game is impossible.
-            // If we want a minimum dragon game, he is excluded here as well (for Lair he is required, so already added above).
             allEnemies.Remove(TR2Type.MarcoBartoli);
         }
 
