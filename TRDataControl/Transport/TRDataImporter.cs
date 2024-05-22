@@ -43,6 +43,8 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
             return result;
         }
 
+        result.ImportedTypes.AddRange(blobs.Where(b => b.Type == TRBlobType.Model).Select(b => b.Alias));
+
         // Store the current dummy mesh in case we are replacing the master type.
         TRMesh dummyMesh = GetDummyMesh();
 
