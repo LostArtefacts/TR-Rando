@@ -7,12 +7,16 @@ namespace TRDataControl;
 public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
 {
     private TR2PDPControl _control;
+    private TR2DataProvider _dataProvider;
 
     protected override TRPDPControlBase<TR2Type> GetPDPControl()
         => _control ??= new();
 
     public override TR2Type TranslateKey(TR2Type key)
         => key;
+
+    public override TR2Type TranslateAlias(TR2Type key)
+        => (_dataProvider ??= new()).TranslateAlias(key);
 
     public override string GetSourceLevel(TR2Type key)
         => _sourceLevels.ContainsKey(key) ? _sourceLevels[key] : null;

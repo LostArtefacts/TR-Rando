@@ -22,18 +22,14 @@ public class TR3RDataCache : BaseTRRDataCache<TR3Type, TR3RAlias>
         };
     }
 
+    public override TR3Type TranslateAlias(TR3Type key)
+        => (_dataProvider ??= new()).TranslateAlias(key);
+
     public override string GetSourceLevel(TR3Type key)
-    {
-        _dataProvider ??= new();
-        return _sourceLevels.ContainsKey(key) ? _sourceLevels[key] : null;
-    }
+        => _sourceLevels.ContainsKey(key) ? _sourceLevels[key] : null;
 
     public override TR3RAlias GetAlias(TR3Type key)
-    {
-        _dataProvider ??= new();
-        TR3Type translatedType = _dataProvider.TranslateAlias(key);
-        return _mapAliases.ContainsKey(translatedType) ? _mapAliases[translatedType] : default;
-    }
+        => _mapAliases.ContainsKey(key) ? _mapAliases[key] : default;
 
     private static readonly Dictionary<TR3Type, string> _sourceLevels = new()
     {

@@ -937,12 +937,9 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
                     }
 
                     importer.Data.AliasPriority = TR1EnemyUtilities.GetAliasPriority(level.Name, enemies.TypesToImport);
+                    
                     ImportResult<TR1Type> result = importer.Import();
-
-                    foreach (TR1Type type in result.ImportedTypes)
-                    {
-                        _outer.DataCache.SetData(level.PDPData, level.MapData, type, importer.Data.TranslateAlias(type));
-                    }
+                    _outer.DataCache.Merge(result, level.PDPData, level.MapData);
                 }
 
                 if (!_outer.TriggerProgress())
