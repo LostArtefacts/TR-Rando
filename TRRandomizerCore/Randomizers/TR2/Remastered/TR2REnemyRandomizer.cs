@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using Newtonsoft.Json;
+using System.Diagnostics;
 using TRDataControl;
 using TRGE.Core;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -24,6 +26,7 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
     };
 
     private Dictionary<TR2Type, List<string>> _gameEnemyTracker;
+    private Dictionary<string, List<Location>> _pistolLocations;
     private List<TR2Type> _excludedEnemies;
     private HashSet<TR2Type> _resultantEnemies;
 
@@ -32,7 +35,8 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
 
     public override void Randomize(int seed)
     {
-        _generator = new Random(seed);
+        _generator = new(seed);
+        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\unarmed_locations.json"));
         if (Settings.CrossLevelEnemies)
         {
             RandomizeEnemiesCrossLevel();
@@ -151,23 +155,15 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
 
         int enemyCount = oldEntities.Count + TR2EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
         List<TR2Type> newEntities = new(enemyCount);
-
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
-        // Do we need at least one water creature?
-        bool waterEnemyRequired = TR2EnemyUtilities.IsWaterEnemyRequired(level.Data);
-        // Do we need at least one enemy that can drop?
-        bool droppableEnemyRequired = TR2EnemyUtilities.IsDroppableEnemyRequired(level.Data);
-
-        // Let's try to populate the list. Start by adding one water enemy and one droppable
-        // enemy if they are needed. If we want to exclude, try to select based on user priority.
-        if (waterEnemyRequired)
+        if (TR2EnemyUtilities.IsWaterEnemyRequired(level.Data))
         {
             List<TR2Type> waterEnemies = TR2TypeUtilities.KillableWaterCreatures();
             newEntities.Add(SelectRequiredEnemy(waterEnemies, level, difficulty));
         }
 
-        if (droppableEnemyRequired)
+        if (TR2EnemyUtilities.IsDroppableEnemyRequired(level.Data))
         {
             List<TR2Type> droppableEnemies = TR2TypeUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.UnconditionalChickens);
             newEntities.Add(SelectRequiredEnemy(droppableEnemies, level, difficulty));
@@ -380,8 +376,6 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
 
         if (level.Is(TR2LevelNames.HOME) && !enemies.Available.Contains(TR2Type.Doberman))
         {
-            // The game requires 15 items of type dog, stick goon or masked goon. The models will have been
-            // eliminated at this stage, so just create a placeholder to trigger the correct HSH behaviour.
             level.Data.Models[TR2Type.Doberman] = new()
             {
                 Meshes = new() { level.Data.Models[TR2Type.Lara].Meshes.First() }
@@ -447,15 +441,10 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
                     }
 
                     targetEntity.TypeID = TR2TypeUtilities.TranslateAlias(entity);
-
-                    // #146 Ensure OneShot triggers are set for this enemy if needed
                     TR2EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
-
-                    // Remove the target entity so it doesn't get replaced
                     enemyEntities.Remove(targetEntity);
                 }
 
-                // Remove this entity type from the available rando pool
                 enemies.Available.Remove(entity);
             }
         }
@@ -511,11 +500,6 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
 
                 if (roomDrainIndex != -1)
                 {
-                    // Draining cannot be performed so make the entity a water creature.
-                    // The list of provided water creatures will either be those native
-                    // to this level, or if randomizing cross-level, a pre-check will
-                    // have already been performed on draining so if it's not possible,
-                    // at least one water creature will be available.
                     newEntityType = enemies.Water[_generator.Next(0, enemies.Water.Count)];
                 }
             }
@@ -612,7 +596,7 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
                 else
                 {
                     // A secret depends on this skidoo, so just rotate it for variety.
-                    skidoo.Angle = (short)(_generator.Next(0, 8) * (ushort.MaxValue + 1) / 8);
+                    skidoo.Angle = (short)(_generator.Next(0, 8) * -TRConsts.Angle45);
                 }
             }
         }
@@ -648,13 +632,12 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
                 enemy.X++;
             }
         }
+
+        AddUnarmedItems(level);
     }
 
     private void LimitSkidooEntities(TR2RCombinedLevel level)
     {
-        // Ensure that the total implied enemy count does not exceed that of the original
-        // level. The limit actually varies depending on the number of traps and other objects
-        // so for those levels with high entity counts, we further restrict the limit.
         int skidooLimit = TR2EnemyUtilities.GetSkidooDriverLimit(level.Name);
 
         List<TR2Entity> enemies = level.Data.Entities.FindAll(e => TR2TypeUtilities.GetFullListOfEnemies().Contains(e.TypeID));
@@ -682,12 +665,10 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
         List<TR2Type> replacementPool;
         if (!Settings.RandomizeItems || Settings.RandoItemDifficulty == ItemDifficulty.Default)
         {
-            // The user is not specifically attempting one-item rando, so we can add anything as replacements
             replacementPool = TR2TypeUtilities.GetAmmoTypes();
         }
         else
         {
-            // Camera targets don't take up any savegame space, so in one-item mode use these as replacements
             replacementPool = new() { TR2Type.CameraTarget_N };
         }
 
@@ -747,6 +728,72 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
         if (birdDeathAnim != null)
         {
             birdDeathAnim.FrameEnd = -1;
+        }
+    }
+
+    private void AddUnarmedItems(TR2RCombinedLevel level)
+    {
+        if (!level.Script.RemovesWeapons)
+        {
+            return;
+        }
+
+        // Only applies to Rig and HSH.
+        // - Pistols guaranteed in Rig
+        // - Pistols break HSH, so just add a silly amount of shotgun shells
+        // - Extra meds loosely based on difficulty
+        List<TR2Entity> enemies = level.Data.Entities.FindAll(e => TR2TypeUtilities.GetFullListOfEnemies().Contains(e.TypeID));
+        EnemyDifficulty difficulty = TR2EnemyUtilities.GetEnemyDifficulty(enemies);        
+
+        TR2Entity item = level.Data.Entities.Find(e =>
+            (e.TypeID == TR2Type.Pistols_S_P || TR2TypeUtilities.IsGunType(e.TypeID))
+            && _pistolLocations[level.Name].Any(l => l.IsEquivalent(e.GetLocation())));
+
+        item ??= level.Data.Entities.Find(e => TR2TypeUtilities.IsAnyPickupType(e.TypeID));
+        item ??= level.Data.Entities.Find(e => e.TypeID == TR2Type.Lara);
+
+        if (item == null)
+        {
+            return;
+        }
+
+        void AddItem(TR2Type type, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                item = (TR2Entity)item.Clone();
+                item.TypeID = type;
+                level.Data.Entities.Add(item);
+            }
+        }
+
+        if (level.Is(TR2LevelNames.HOME))
+        {
+            const int shellCount = 8;
+            AddItem(TR2Type.ShotgunAmmo_S_P, shellCount * (int)difficulty * 2);
+        }
+        else if (!level.Data.Entities.Any(e => e.TypeID == TR2Type.Pistols_S_P))
+        {
+            AddItem(TR2Type.Pistols_S_P, 1);
+        }
+
+        if (Settings.GiveUnarmedItems)
+        {
+            int smallMeds = 0;
+            int largeMeds = 0;
+
+            if (difficulty >= EnemyDifficulty.Medium)
+            {
+                smallMeds++;
+                largeMeds++;
+            }
+            while (difficulty-- >= EnemyDifficulty.Medium)
+            {
+                largeMeds++;
+            }
+
+            AddItem(TR2Type.SmallMed_S_P, smallMeds);
+            AddItem(TR2Type.LargeMed_S_P, largeMeds);
         }
     }
 
