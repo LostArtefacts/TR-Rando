@@ -176,6 +176,7 @@ internal class TRVersionSupport
     private static readonly List<TRRandomizerType> _tr3RTypes = new()
     {
         TRRandomizerType.Audio,
+        TRRandomizerType.Enemy,
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
         TRRandomizerType.Item,

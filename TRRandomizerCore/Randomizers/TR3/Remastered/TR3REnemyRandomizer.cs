@@ -8,24 +8,23 @@ using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
-using TRRandomizerCore.Textures;
 using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class TR3EnemyRandomizer : BaseTR3Randomizer
+public class TR3REnemyRandomizer : BaseTR3RRandomizer
 {
     private Dictionary<TR3Type, List<string>> _gameEnemyTracker;
     private Dictionary<string, List<Location>> _pistolLocations;
     private List<TR3Type> _excludedEnemies;
-    private ISet<TR3Type> _resultantEnemies;
+    private HashSet<TR3Type> _resultantEnemies;
 
-    internal TR3TextureMonitorBroker TextureMonitor { get; set; }
+    public TR3RDataCache DataCache { get; set; }
     public ItemFactory<TR3Entity> ItemFactory { get; set; }
 
     public override void Randomize(int seed)
     {
-        _generator = new Random(seed);
+        _generator = new(seed);
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
 
         if (Settings.CrossLevelEnemies)
@@ -40,20 +39,15 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
     private void RandomizeExistingEnemies()
     {
-        _excludedEnemies = new List<TR3Type>();
-        _resultantEnemies = new HashSet<TR3Type>();
+        _excludedEnemies = new();
+        _resultantEnemies = new();
 
-        foreach (TR3ScriptedLevel lvl in Levels)
+        foreach (TRRScriptedLevel lvl in Levels)
         {
-            //Read the level into a combined data/script level object
             LoadLevelInstance(lvl);
-
-            //Apply the modifications
             RandomizeEnemiesNatively(_levelInstance);
 
-            //Write back the level file
             SaveLevelInstance();
-
             if (!TriggerProgress())
             {
                 break;
@@ -68,11 +62,11 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         List<EnemyProcessor> processors = new();
         for (int i = 0; i < _maxThreads; i++)
         {
-            processors.Add(new EnemyProcessor(this));
+            processors.Add(new(this));
         }
 
-        List<TR3CombinedLevel> levels = new(Levels.Count);
-        foreach (TR3ScriptedLevel lvl in Levels)
+        List<TR3RCombinedLevel> levels = new(Levels.Count);
+        foreach (TRRScriptedLevel lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
             if (!TriggerProgress())
@@ -82,20 +76,17 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         }
 
         int processorIndex = 0;
-        foreach (TR3CombinedLevel level in levels)
+        foreach (TR3RCombinedLevel level in levels)
         {
             processors[processorIndex].AddLevel(level);
             processorIndex = processorIndex == _maxThreads - 1 ? 0 : processorIndex + 1;
         }
 
-        // Track enemies whose counts across the game are restricted
         _gameEnemyTracker = TR3EnemyUtilities.PrepareEnemyGameTracker(Settings.RandoEnemyDifficulty);
-
-        // #272 Selective enemy pool - convert the shorts in the settings to actual entity types
-        _excludedEnemies = Settings.UseEnemyExclusions ?
-            Settings.ExcludedEnemies.Select(s => (TR3Type)s).ToList() :
-            new List<TR3Type>();
-        _resultantEnemies = new HashSet<TR3Type>();
+        _excludedEnemies = Settings.UseEnemyExclusions
+            ? Settings.ExcludedEnemies.Select(s => (TR3Type)s).ToList()
+            : new();
+        _resultantEnemies = new();
 
         SetMessage("Randomizing enemies - importing models");
         foreach (EnemyProcessor processor in processors)
@@ -118,8 +109,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         }
 
         _processingException?.Throw();
-
-        // If any exclusions failed to be avoided, send a message
         if (Settings.ShowExclusionWarnings)
         {
             VerifyExclusionStatus();
@@ -131,7 +120,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         List<TR3Type> failedExclusions = _resultantEnemies.ToList().FindAll(_excludedEnemies.Contains);
         if (failedExclusions.Count > 0)
         {
-            // A little formatting
             List<string> failureNames = new();
             foreach (TR3Type entity in failedExclusions)
             {
@@ -142,44 +130,33 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         }
     }
 
-    private EnemyTransportCollection SelectCrossLevelEnemies(TR3CombinedLevel level)
+    private EnemyTransportCollection SelectCrossLevelEnemies(TR3RCombinedLevel level)
     {
-        // For the assault course, nothing will be imported for the time being
         if (level.IsAssault)
         {
             return null;
         }
 
-        // Get the list of enemy types currently in the level
         List<TR3Type> oldEntities = GetCurrentEnemyEntities(level);
+        List<TR3Type> allEnemies = TR3TypeUtilities.GetCandidateCrossLevelEnemies()
+            .FindAll(e => TR3EnemyUtilities.IsEnemySupported(level.Name, e, Settings.RandoEnemyDifficulty));
 
-        // Get the list of canidadates
-        List<TR3Type> allEnemies = TR3TypeUtilities.GetCandidateCrossLevelEnemies().FindAll(e => TR3EnemyUtilities.IsEnemySupported(level.Name, e, Settings.RandoEnemyDifficulty));
-        
-        // Work out how many we can support
         int enemyCount = oldEntities.Count + TR3EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
         List<TR3Type> newEntities = new(enemyCount);
 
-        // Do we need at least one water creature?
-        bool waterEnemyRequired = TR3TypeUtilities.GetWaterEnemies().Any(e => oldEntities.Contains(e));
-        // Do we need at least one enemy that can drop?
-        bool droppableEnemyRequired = TR3EnemyUtilities.IsDroppableEnemyRequired(level.Data);
-
-        // Let's try to populate the list. Start by adding one water enemy
-        // and one droppable enemy if they are needed.
-        if (waterEnemyRequired)
+        if (TR3TypeUtilities.GetWaterEnemies().Any(e => oldEntities.Contains(e)))
         {
             List<TR3Type> waterEnemies = TR3TypeUtilities.GetKillableWaterEnemies();
             newEntities.Add(SelectRequiredEnemy(waterEnemies, level, Settings.RandoEnemyDifficulty));
         }
 
+        bool droppableEnemyRequired = TR3EnemyUtilities.IsDroppableEnemyRequired(level.Data);
         if (droppableEnemyRequired)
         {
             List<TR3Type> droppableEnemies = TR3TypeUtilities.FilterDroppableEnemies(allEnemies, Settings.ProtectMonks);
             newEntities.Add(SelectRequiredEnemy(droppableEnemies, level, Settings.RandoEnemyDifficulty));
         }
 
-        // Are there any other types we need to retain?
         foreach (TR3Type entity in TR3EnemyUtilities.GetRequiredEnemies(level.Name))
         {
             if (!newEntities.Contains(entity))
@@ -188,7 +165,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             }
         }
 
-        // Some secrets may have locked enemies in place - we must retain those types
         foreach (int itemIndex in ItemFactory.GetLockedItems(level.Name))
         {
             TR3Entity item = level.Data.Entities[itemIndex];
@@ -208,7 +184,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             allEnemies.Remove(TR3Type.Willie);
         }
 
-        // Remove all exclusions from the pool, and adjust the target capacity
         allEnemies.RemoveAll(e => _excludedEnemies.Contains(e));
 
         IEnumerable<TR3Type> ex = allEnemies.Where(e => !newEntities.Any(TR3TypeUtilities.GetFamily(e).Contains));
@@ -218,60 +193,38 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             --newEntities.Capacity;
         }
 
-        // Fill the list from the remaining candidates. Keep track of ones tested to avoid
-        // looping infinitely if it's not possible to fill to capacity
         ISet<TR3Type> testedEntities = new HashSet<TR3Type>();
         while (newEntities.Count < newEntities.Capacity && testedEntities.Count < allEnemies.Count)
         {
             TR3Type entity = allEnemies[_generator.Next(0, allEnemies.Count)];
             testedEntities.Add(entity);
 
-            // Make sure this isn't known to be unsupported in the level
             if (!TR3EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty))
-            {
-                continue;
-            }
-
-            // If it's Willie but Cavern is off-sequence, he can't be used
-            if (entity == TR3Type.Willie && level.Is(TR3LevelNames.WILLIE) && !level.IsWillardSequence)
             {
                 continue;
             }
 
             // Monkeys are friendly when the tiger model is present, and when they are friendly,
             // mounting a vehicle will crash the game.
-            if (level.HasVehicle
+            if (level.Data.Entities.Any(e => TR3TypeUtilities.IsVehicleType(e.TypeID))
                 && ((entity == TR3Type.Monkey && newEntities.Contains(TR3Type.Tiger))
                 || (entity == TR3Type.Tiger && newEntities.Contains(TR3Type.Monkey))))
             {
                 continue;
             }
 
-            // If this is a tracked enemy throughout the game, we only allow it if the number
-            // of unique levels is within the limit. Bear in mind we are collecting more than
-            // one group of enemies per level.
             if (_gameEnemyTracker.ContainsKey(entity) && !_gameEnemyTracker[entity].Contains(level.Name))
             {
                 if (_gameEnemyTracker[entity].Count < _gameEnemyTracker[entity].Capacity)
                 {
-                    // The entity is allowed, so store the fact that this level will have it
                     _gameEnemyTracker[entity].Add(level.Name);
                 }
-                else
+                else if (allEnemies.Except(newEntities).Count() > 1)
                 {
-                    // Otherwise, pick something else. If we tried to previously exclude this
-                    // enemy and couldn't, it will slip through the net and so the appearances
-                    // will increase.
-                    if (allEnemies.Except(newEntities).Count() > 1)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
             }
 
-            // GetEntityFamily returns all aliases for the likes of the dogs, but if an entity
-            // doesn't have any, the returned list just contains the entity itself. This means
-            // we can avoid duplicating standard enemies as well as avoiding alias-clashing.
             List<TR3Type> family = TR3TypeUtilities.GetFamily(entity);
             if (!newEntities.Any(e1 => family.Any(e2 => e1 == e2)))
             {
@@ -282,8 +235,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         if (newEntities.Count == 0
             || (newEntities.Capacity > 1 && newEntities.All(e => TR3EnemyUtilities.IsEnemyRestricted(level.Name, e))))
         {
-            // Make sure we have an unrestricted enemy available for the individual level conditions. This will
-            // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
             bool RestrictionCheck(TR3Type e) =>
                 (droppableEnemyRequired && !TR3TypeUtilities.CanDropPickups(e, Settings.ProtectMonks))
                 || !TR3EnemyUtilities.IsEnemySupported(level.Name, e, Settings.RandoEnemyDifficulty)
@@ -295,7 +246,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             List<TR3Type> unrestrictedPool = allEnemies.FindAll(e => !RestrictionCheck(e));
             if (unrestrictedPool.Count == 0)
             {
-                // We are going to have to pull in the full list of candidates again, so ignoring any user-defined exclusions
                 unrestrictedPool = TR3TypeUtilities.GetCandidateCrossLevelEnemies().FindAll(e => !RestrictionCheck(e));
             }
 
@@ -307,23 +257,21 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             Debug.WriteLine(level.Name + ": " + string.Join(", ", newEntities));
         }
 
-        return new EnemyTransportCollection
+        return new()
         {
             TypesToImport = newEntities,
             TypesToRemove = oldEntities
         };
     }
 
-    private static List<TR3Type> GetCurrentEnemyEntities(TR3CombinedLevel level)
+    private static List<TR3Type> GetCurrentEnemyEntities(TR3RCombinedLevel level)
     {
         List<TR3Type> allGameEnemies = TR3TypeUtilities.GetFullListOfEnemies();
-        ISet<TR3Type> allLevelEnts = new SortedSet<TR3Type>();
-        level.Data.Entities.ForEach(e => allLevelEnts.Add(e.TypeID));
-        List<TR3Type> oldEntities = allLevelEnts.ToList().FindAll(e => allGameEnemies.Contains(e));
-        return oldEntities;
+        SortedSet<TR3Type> allLevelEnts = new(level.Data.Entities.Select(e => e.TypeID));
+        return allLevelEnts.Where(allGameEnemies.Contains).ToList();
     }
 
-    private TR3Type SelectRequiredEnemy(List<TR3Type> pool, TR3CombinedLevel level, RandoDifficulty difficulty)
+    private TR3Type SelectRequiredEnemy(List<TR3Type> pool, TR3RCombinedLevel level, RandoDifficulty difficulty)
     {
         pool.RemoveAll(e => !TR3EnemyUtilities.IsEnemySupported(level.Name, e, difficulty));
 
@@ -345,16 +293,15 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         return entity;
     }
 
-    private void RandomizeEnemiesNatively(TR3CombinedLevel level)
+    private void RandomizeEnemiesNatively(TR3RCombinedLevel level)
     {
-        // For the assault course, nothing will be changed for the time being
         if (level.IsAssault)
         {
             return;
         }
 
         List<TR3Type> availableEnemyTypes = GetCurrentEnemyEntities(level);
-        if (level.HasVehicle
+        if (level.Data.Entities.Any(e => TR3TypeUtilities.IsVehicleType(e.TypeID))
             && availableEnemyTypes.Contains(TR3Type.Tiger)
             && availableEnemyTypes.Contains(TR3Type.Monkey))
         {
@@ -366,7 +313,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         List<TR3Type> droppableEnemies = TR3TypeUtilities.FilterDroppableEnemies(availableEnemyTypes, Settings.ProtectMonks);
         List<TR3Type> waterEnemies = TR3TypeUtilities.FilterWaterEnemies(availableEnemyTypes);
 
-        RandomizeEnemies(level, new EnemyRandomizationCollection
+        RandomizeEnemies(level, new()
         {
             Available = availableEnemyTypes,
             Droppable = droppableEnemies,
@@ -374,7 +321,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         });
     }
 
-    private void RandomizeEnemies(TR3CombinedLevel level, EnemyRandomizationCollection enemies)
+    private void RandomizeEnemies(TR3RCombinedLevel level, EnemyRandomizationCollection enemies)
     {
         // Get a list of current enemy entities
         List<TR3Type> allEnemies = TR3TypeUtilities.GetFullListOfEnemies();
@@ -429,14 +376,9 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     if (ItemFactory.CanCreateItems(level.Name, level.Data.Entities, paths.Count))
                     {
                         targetEntity.TypeID = TR3TypeUtilities.TranslateAlias(entity);
-
-                        // #146 Ensure OneShot triggers are set for this enemy if needed
                         TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
-
-                        // Remove the target entity from the tracker list so it doesn't get replaced
                         enemyEntities.Remove(targetEntity);
 
-                        // Add the pathing if necessary
                         foreach (Location path in paths)
                         {
                             TR3Entity pathItem = ItemFactory.CreateItem(level.Name, level.Data.Entities, path);
@@ -482,7 +424,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 enemyPool = enemies.Water;
             }
 
-            // Pick a new type
             newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
 
             // If we are restricting count per level for this enemy and have reached that count, pick
@@ -519,20 +460,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     }
                 }
             }
-            else if (level.Is(TR3LevelNames.RXTECH)
-                && level.IsWillardSequence
-                && Settings.RandoEnemyDifficulty == RandoDifficulty.Default
-                && newEntityType == TR3Type.RXTechFlameLad
-                && (currentEntity.Room == 14 || currentEntity.Room == 45))
-            {
-                // #269 We don't want flamethrowers here because they're hostile, so getting off the minecart
-                // safely is too difficult. We can only change them if there is something else unrestricted available.
-                List<TR3Type> safePool = enemyPool.FindAll(e => e != TR3Type.RXTechFlameLad && !TR3EnemyUtilities.IsEnemyRestricted(level.Name, e));
-                if (safePool.Count > 0)
-                {
-                    newEntityType = safePool[_generator.Next(0, safePool.Count)];
-                }
-            }
             else if (level.Is(TR3LevelNames.HSC))
             {
                 if (currentEntity.Room == 87 && newEntityType != TR3Type.Prisoner)
@@ -557,7 +484,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     else
                     {
                         // Full monkey mode means we have to move them inside the gate
-                        currentEntity.Z -= 4096;
+                        currentEntity.Z -= 4 * TRConsts.Step4;
                     }
                 }
             }
@@ -566,22 +493,15 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 // #286 Move the monkeys away from the AI entities
                 currentEntity.Z -= TRConsts.Step4;
             }
-            
-            // Make sure to convert back to the actual type
-            targetEntity.TypeID = TR3TypeUtilities.TranslateAlias(newEntityType);
 
-            // #146 Ensure OneShot triggers are set for this enemy if needed
+            targetEntity.TypeID = TR3TypeUtilities.TranslateAlias(newEntityType);
             TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
 
-            // #291 Cobras don't seem to come back into reality when the
-            // engine disables them when too many enemies are active, unless
-            // invisible is false.
             if (targetEntity.TypeID == TR3Type.Cobra)
             {
                 targetEntity.Invisible = false;
             }
 
-            // Track every enemy type across the game
             _resultantEnemies.Add(newEntityType);
         }
 
@@ -593,7 +513,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
         if (!Settings.AllowEnemyKeyDrops && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
         {
-            // Shift enemies who are on top of key items so they don't pick them up.
             IEnumerable<TR3Entity> keyEnemies = level.Data.Entities.Where(enemy => TR3TypeUtilities.IsEnemyType(enemy.TypeID)
                   && level.Data.Entities.Any(key => TR3TypeUtilities.IsKeyItemType(key.TypeID)
                   && key.GetLocation().IsEquivalent(enemy.GetLocation()))
@@ -606,123 +525,68 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         }
     }
 
-    private void AddUnarmedLevelAmmo(TR3CombinedLevel level)
+    private void AddUnarmedLevelAmmo(TR3RCombinedLevel level)
     {
         if (!Settings.GiveUnarmedItems)
         {
             return;
         }
 
-        // Find out which gun we have for this level
         List<TR3Type> weaponTypes = TR3TypeUtilities.GetWeaponPickups();
-        List<TR3Entity> levelWeapons = level.Data.Entities.FindAll(e => weaponTypes.Contains(e.TypeID));
-        TR3Entity weaponEntity = null;
-        foreach (TR3Entity weapon in levelWeapons)
+        TR3Entity weaponEntity = level.Data.Entities.Find(e =>
+            weaponTypes.Contains(e.TypeID)
+            && _pistolLocations[level.Name].Any(l => l.IsEquivalent(e.GetLocation())));
+
+        // We can't give more ammo because HSC is so close to the limit. Instead just guarantee
+        // pistols in the starting area
+        Location location;
+        do
         {
-            int match = _pistolLocations[level.Name].FindIndex
-            (
-                location =>
-                    location.X == weapon.X &&
-                    location.Y == weapon.Y &&
-                    location.Z == weapon.Z &&
-                    location.Room == weapon.Room
-            );
-            if (match != -1)
-            {
-                weaponEntity = weapon;
-                break;
-            }
+            location = _pistolLocations[level.Name][_generator.Next(0, _pistolLocations[level.Name].Count)];
         }
+        while (location.Room != 7);
 
-        if (weaponEntity == null)
-        {
-            return;
-        }
+        TR3Entity pistols = ItemFactory.CreateItem(level.Name, level.Data.Entities, location);
+        pistols.TypeID = TR3Type.Pistols_P;
 
-        List<TR3Type> allEnemies = TR3TypeUtilities.GetFullListOfEnemies();
-        List<TR3Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
-        EnemyDifficulty difficulty = TR3EnemyUtilities.GetEnemyDifficulty(levelEnemies);
-
-        if (difficulty > EnemyDifficulty.Easy)
+        if (weaponEntity != null)
         {
             while (weaponEntity.TypeID == TR3Type.Pistols_P)
             {
-                weaponEntity.TypeID = weaponTypes[_generator.Next(0, weaponTypes.Count)];
+                weaponEntity.TypeID = weaponTypes[_generator.Next(0, weaponTypes.Count - 1)];
             }
-        }
-
-        TR3Type weaponType = weaponEntity.TypeID;
-        uint ammoToGive = TR3EnemyUtilities.GetStartingAmmo(weaponType);
-        if (ammoToGive > 0)
-        {
-            ammoToGive *= (uint)difficulty;
-            TR3Type ammoType = TR3TypeUtilities.GetWeaponAmmo(weaponType);
-            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(ammoType), ammoToGive);
-
-            uint smallMediToGive = 0;
-            uint largeMediToGive = 0;
-
-            if (difficulty == EnemyDifficulty.Medium || difficulty == EnemyDifficulty.Hard)
-            {
-                smallMediToGive++;
-            }
-            if (difficulty > EnemyDifficulty.Medium)
-            {
-                largeMediToGive++;
-            }
-            if (difficulty == EnemyDifficulty.VeryHard)
-            {
-                largeMediToGive++;
-            }
-
-            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Type.SmallMed_P), smallMediToGive);
-            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Type.LargeMed_P), largeMediToGive);
-        }
-
-        // Add the pistols as a pickup if the level is hard and there aren't any other pistols around
-        if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == TR3Type.Pistols_P) == null && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
-        {
-            TR3Entity pistols = ItemFactory.CreateItem(level.Name, level.Data.Entities);
-            pistols.TypeID = TR3Type.Pistols_P;
-            pistols.X = weaponEntity.X;
-            pistols.Y = weaponEntity.Y;
-            pistols.Z = weaponEntity.Z;
-            pistols.Room = weaponEntity.Room;
         }
     }
 
-    internal class EnemyProcessor : AbstractProcessorThread<TR3EnemyRandomizer>
+    internal class EnemyProcessor : AbstractProcessorThread<TR3REnemyRandomizer>
     {
-        private readonly Dictionary<TR3CombinedLevel, EnemyTransportCollection> _enemyMapping;
+        private readonly Dictionary<TR3RCombinedLevel, EnemyTransportCollection> _enemyMapping;
 
         internal override int LevelCount => _enemyMapping.Count;
 
-        internal EnemyProcessor(TR3EnemyRandomizer outer)
+        internal EnemyProcessor(TR3REnemyRandomizer outer)
             : base(outer)
         {
-            _enemyMapping = new Dictionary<TR3CombinedLevel, EnemyTransportCollection>();
+            _enemyMapping = new();
         }
 
-        internal void AddLevel(TR3CombinedLevel level)
+        internal void AddLevel(TR3RCombinedLevel level)
         {
             _enemyMapping.Add(level, null);
         }
 
         protected override void StartImpl()
         {
-            // Load initially outwith the processor thread to ensure the RNG selected for each
-            // level/enemy group remains consistent between randomization sessions.
-            List<TR3CombinedLevel> levels = new(_enemyMapping.Keys);
-            foreach (TR3CombinedLevel level in levels)
+            List<TR3RCombinedLevel> levels = new(_enemyMapping.Keys);
+            foreach (TR3RCombinedLevel level in levels)
             {
                 _enemyMapping[level] = _outer.SelectCrossLevelEnemies(level);
             }
         }
 
-        // Executed in parallel, so just store the import result to process later synchronously.
         protected override void ProcessImpl()
         {
-            foreach (TR3CombinedLevel level in _enemyMapping.Keys)
+            foreach (TR3RCombinedLevel level in _enemyMapping.Keys)
             {
                 if (!level.IsAssault)
                 {
@@ -734,23 +598,19 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                         Level = level.Data,
                         LevelName = level.Name,
                         DataFolder = _outer.GetResourcePath(@"TR3\Objects"),
-                        TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport)
                     };
 
-                    string remapPath = @"TR3\Textures\Deduplication\" + level.Name + "-TextureRemap.json";
+                    importer.Data.TextureObjectLimit = RandoConsts.TRRTexLimit;
+                    importer.Data.TextureTileLimit = RandoConsts.TRRTileLimit;
+
+                    string remapPath = $@"TR3\Textures\Deduplication\{level.Name}-TextureRemap.json";
                     if (_outer.ResourceExists(remapPath))
                     {
                         importer.TextureRemapPath = _outer.GetResourcePath(remapPath);
                     }
 
-                    importer.Import();
-
-                    // Remove stale tiger model if present to avoid friendly monkeys causing vehicle crashes.
-                    if (level.HasVehicle
-                        && enemies.TypesToImport.Contains(TR3Type.Monkey))
-                    {
-                        level.Data.Models.Remove(TR3Type.Tiger);
-                    }
+                    ImportResult<TR3Type> result = importer.Import();
+                    _outer.DataCache.Merge(result, level.PDPData, level.MapData);
                 }
 
                 if (!_outer.TriggerProgress())
@@ -760,10 +620,9 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             }
         }
 
-        // This is triggered synchronously after the import work to ensure the RNG remains consistent
         internal void ApplyRandomization()
         {
-            foreach (TR3CombinedLevel level in _enemyMapping.Keys)
+            foreach (TR3RCombinedLevel level in _enemyMapping.Keys)
             {
                 if (!level.IsAssault)
                 {

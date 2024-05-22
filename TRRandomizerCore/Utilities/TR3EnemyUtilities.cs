@@ -2,7 +2,6 @@
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Levels;
 
 namespace TRRandomizerCore.Utilities;
 
@@ -153,11 +152,11 @@ public static class TR3EnemyUtilities
         return locations;
     }
 
-    public static bool IsDroppableEnemyRequired(TR3CombinedLevel level)
+    public static bool IsDroppableEnemyRequired(TR3Level level)
     {
-        return level.Data.Entities
+        return level.Entities
             .Where(e => TR3TypeUtilities.IsEnemyType(e.TypeID))
-            .Any(enemy => level.Data.Entities.Any(item => HasDropItem(enemy, item)));
+            .Any(enemy => level.Entities.Any(item => HasDropItem(enemy, item)));
     }
 
     public static bool HasDropItem(TR3Entity enemy, TR3Entity item)
