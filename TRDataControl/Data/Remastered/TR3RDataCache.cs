@@ -27,12 +27,6 @@ public class TR3RDataCache : BaseTRRDataCache<TR3Type, TR3RAlias>
 
     public override string GetSourceLevel(TR3Type key)
         => _sourceLevels.ContainsKey(key) ? _sourceLevels[key] : null;
-    }
-    }
-    }
-    }
-    }
-    }
 
     public override TR3RAlias GetAlias(TR3Type key)
         => _mapAliases.ContainsKey(key) ? _mapAliases[key] : default;
