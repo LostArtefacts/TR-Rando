@@ -202,7 +202,7 @@ public static class TR1EnemyUtilities
         return allDifficulties[weight];
     }
 
-    public static uint GetStartingAmmo(TR1Type weaponType)
+    public static int GetStartingAmmo(TR1Type weaponType)
     {
         if (_startingAmmoToGive.ContainsKey(weaponType))
         {
@@ -529,7 +529,7 @@ public static class TR1EnemyUtilities
         }
     };
 
-    private static readonly Dictionary<TR1Type, uint> _startingAmmoToGive = new()
+    private static readonly Dictionary<TR1Type, int> _startingAmmoToGive = new()
     {
         [TR1Type.Shotgun_S_P] = 10,
         [TR1Type.Magnums_S_P] = 6,
