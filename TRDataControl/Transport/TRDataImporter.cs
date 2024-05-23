@@ -297,7 +297,8 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
                         staleTextures.AddRange(Models[type].Meshes
                             .SelectMany(m => m.TexturedFaces.Select(t => (int)t.Texture)));
 
-                        if (!_nonGraphicsDependencies.Contains(id))
+                        if (!_nonGraphicsDependencies.Contains(id)
+                            && !TypesToImport.Any(t => Data.GetDependencies(t).Contains(id)))
                         {
                             Models.Remove(id);
                             resultTracker.RemovedTypes.Add(type);
