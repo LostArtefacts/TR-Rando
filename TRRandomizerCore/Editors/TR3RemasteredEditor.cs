@@ -17,6 +17,8 @@ public class TR3RemasteredEditor : TR3ClassicEditor
         Settings.AllowReturnPathLocations = false;
         Settings.AddReturnPaths = false;
         Settings.FixOGBugs = false;
+        Settings.ReplaceRequiredEnemies = false;
+        Settings.SwapEnemyAppearance = false;
     }
 
     protected override int GetSaveTarget(int numLevels)
