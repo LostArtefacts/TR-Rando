@@ -13,6 +13,9 @@
     {
       "Comments": "Make a slight change to face order in room 8 to make further modifications here easier.",
       "EMType": 32,
+      "Tags": [
+        14
+      ],
       "RoomIndex": 8,
       "Swaps": {
         "269": 184,

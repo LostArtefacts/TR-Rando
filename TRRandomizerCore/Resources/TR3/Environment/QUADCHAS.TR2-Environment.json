@@ -529,6 +529,9 @@
       "OnTrue": [
         {
           "EMType": 0,
+          "Tags": [
+            14
+          ],
           "TextureMap": {
             "1487": {
               "167": {

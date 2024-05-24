@@ -15,6 +15,9 @@
     {
       "Comments": "Make a slight change to face order in room 37 to make further modifications here easier.",
       "EMType": 32,
+      "Tags": [
+        14
+      ],
       "RoomIndex": 37,
       "Swaps": {
         "27": 42

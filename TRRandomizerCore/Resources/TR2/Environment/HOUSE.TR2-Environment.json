@@ -3,6 +3,9 @@
     {
       "Comments": "Reposition the unused maze button to the bedroom.",
       "EMType": 44,
+      "Tags": [
+        14
+      ],
       "EntityIndex": 107,
       "TargetLocation": {
         "X": 39424,
@@ -15,6 +18,9 @@
     {
       "Comments": "Use it to turn off the alarms.",
       "EMType": 61,
+      "Tags": [
+        14
+      ],
       "EntityLocation": 107,
       "Trigger": {
         "TrigType": 2,
@@ -33,6 +39,9 @@
     {
       "Comments": "Make an unreachable room for a boulder trigger.",
       "EMType": 126,
+      "Tags": [
+        14
+      ],
       "Location": {
         "X": 67584,
         "Y": 2560,
@@ -57,6 +66,9 @@
     {
       "Comments": "Import the boulder model.",
       "EMType": 145,
+      "Tags": [
+        14
+      ],
       "Data": [
         {
           "ModelID": 60,
@@ -68,12 +80,18 @@
     {
       "Comments": "Convert the zipline handle into a boulder (so we can track the index elsewhere).",
       "EMType": 45,
+      "Tags": [
+        14
+      ],
       "EntityIndex": 23,
       "NewEntityType": 60
     },
     {
       "Comments": "Move it to the hidden room.",
       "EMType": 44,
+      "Tags": [
+        14
+      ],
       "EntityIndex": 23,
       "TargetLocation": {
         "X": 69120,
@@ -85,6 +103,9 @@
     {
       "Comments": "Put a new zipline handle in its place.",
       "EMType": 51,
+      "Tags": [
+        14
+      ],
       "TypeID": 102,
       "Intensity": -1,
       "Location": {
@@ -97,6 +118,9 @@
     {
       "Comments": "Move the initial trigger under Lara to the boulder.",
       "EMType": 67,
+      "Tags": [
+        14
+      ],
       "BaseLocation": {
         "X": 34304,
         "Y": 256,
@@ -108,6 +132,9 @@
     {
       "Comments": "Make it heavy.",
       "EMType": 69,
+      "Tags": [
+        14
+      ],
       "Location": {
         "X": 69120,
         "Y": 2560,
@@ -119,6 +146,9 @@
     {
       "Comments": "Trigger the boulder from the start position. All in all, this means the alarms won't get turned back on.",
       "EMType": 61,
+      "Tags": [
+        14
+      ],
       "Locations": [
         {
           "X": 34304,
@@ -138,6 +168,9 @@
     },
     {
       "EMType": 23,
+      "Tags": [
+        14
+      ],
       "Rotations": [
         {
           "RoomNumber": 8,
