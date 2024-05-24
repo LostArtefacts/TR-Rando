@@ -147,20 +147,6 @@ public static class TR1EnemyUtilities
         return entities;
     }
 
-    public static void SetEntityTriggers(TR1Level level, TR1Entity entity)
-    {
-        if (_oneShotEnemies.Contains(entity.TypeID))
-        {
-            int entityID = level.Entities.IndexOf(entity);
-
-            List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(entityID);
-            foreach (FDTriggerEntry trigger in triggers)
-            {
-                trigger.OneShot = true;
-            }
-        }
-    }
-
     public static EnemyDifficulty GetEnemyDifficulty(List<TR1Entity> enemyEntities)
     {
         if (enemyEntities.Count == 0)
@@ -493,12 +479,6 @@ public static class TR1EnemyUtilities
             = 2,  // Defaults: 4 types, 39 enemies
         [TR1LevelNames.HIVE]
             = 2,  // Defaults: 4 types, 56 enemies
-    };
-
-    // Enemies who can only spawn once.
-    private static readonly List<TR1Type> _oneShotEnemies = new()
-    {
-        TR1Type.Pierre
     };
 
     private static readonly Dictionary<EnemyDifficulty, List<TR1Type>> _enemyDifficulties = new()

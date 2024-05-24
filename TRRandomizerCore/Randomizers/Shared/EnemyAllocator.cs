@@ -1,4 +1,6 @@
-﻿using TRRandomizerCore.Editors;
+﻿using TRLevelControl.Model;
+using TRRandomizerCore.Editors;
+using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Randomizers;
 
@@ -15,14 +17,11 @@ public abstract class EnemyAllocator<T>
 
     public void Initialise()
     {
-        // Track enemies whose counts across the game are restricted
-        _gameEnemyTracker = GetGameTracker();
-
-        // #272 Selective enemy pool - convert the shorts in the settings to actual entity types
-        _excludedEnemies = Settings.UseEnemyExclusions
-            ? Settings.ExcludedEnemies.Select(s => (T)(object)(uint)s).ToList()
-            : new();
         _resultantEnemies = new();
+        _gameEnemyTracker = GetGameTracker();
+        _excludedEnemies = Settings.UseEnemyExclusions
+            ? new(Settings.ExcludedEnemies.Select(s => (T)(object)(uint)s))
+            : new();
     }
 
     public string GetExclusionStatusMessage()
@@ -43,5 +42,58 @@ public abstract class EnemyAllocator<T>
         return null;
     }
 
+    protected T SelectRequiredEnemy(List<T> pool, string levelName, RandoDifficulty difficulty)
+    {
+        pool.RemoveAll(t => !IsEnemySupported(levelName, t, difficulty));
+
+        if (pool.All(_excludedEnemies.Contains))
+        {
+            // Select the last excluded enemy (lowest priority)
+            return _excludedEnemies.Last(pool.Contains);
+        }
+        
+        T type;
+        do
+        {
+            type = pool[Generator.Next(0, pool.Count)];
+        }
+        while (_excludedEnemies.Contains(type));
+
+        return type;
+    }
+
+    protected RandoDifficulty GetImpliedDifficulty()
+    {
+        if (_excludedEnemies.Count > 0 && Settings.RandoEnemyDifficulty == RandoDifficulty.Default)
+        {
+            // If every enemy in the pool has room restrictions for any level, we have to imply NoRestrictions difficulty mode
+            List<T> includedEnemies = Settings.ExcludableEnemies.Keys.Except(Settings.ExcludedEnemies).Select(s => (T)(object)(uint)s).ToList();
+            foreach (string level in GameLevels)
+            {
+                IEnumerable<T> restrictedRoomEnemies = GetRestrictedRooms(level.ToUpper(), RandoDifficulty.Default).Keys;
+                if (includedEnemies.All(e => restrictedRoomEnemies.Contains(e) || _gameEnemyTracker.ContainsKey(e)))
+                {
+                    return RandoDifficulty.NoRestrictions;
+                }
+            }
+        }
+        return Settings.RandoEnemyDifficulty;
+    }
+
+    protected void SetOneShot<E>(E entity, int index, FDControl floorData)
+        where E : TREntity<T>
+    {
+        if (!IsOneShotType(entity.TypeID))
+        {
+            return;
+        }
+
+        floorData.GetEntityTriggers(index)
+            .ForEach(t => t.OneShot = true);
+    }
+
     protected abstract Dictionary<T, List<string>> GetGameTracker();
+    protected abstract bool IsEnemySupported(string levelName, T type, RandoDifficulty difficulty);
+    protected abstract Dictionary<T, List<int>> GetRestrictedRooms(string levelName, RandoDifficulty difficulty);
+    protected abstract bool IsOneShotType(T type);
 }

@@ -50,6 +50,15 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
     protected override Dictionary<TR1Type, List<string>> GetGameTracker()
         => TR1EnemyUtilities.PrepareEnemyGameTracker(Settings.RandoEnemyDifficulty, GameLevels);
 
+    protected override bool IsEnemySupported(string levelName, TR1Type type, RandoDifficulty difficulty)
+        => TR1EnemyUtilities.IsEnemySupported(levelName, type, difficulty);
+
+    protected override Dictionary<TR1Type, List<int>> GetRestrictedRooms(string levelName, RandoDifficulty difficulty)
+        => TR1EnemyUtilities.GetRestrictedEnemyRooms(levelName, RandoDifficulty.Default);
+
+    protected override bool IsOneShotType(TR1Type type)
+        => type == TR1Type.Pierre;
+
     public EnemyTransportCollection<TR1Type> SelectCrossLevelEnemies(string levelName, TR1Level level)
     {
         if (levelName == TR1LevelNames.ASSAULT)
@@ -251,49 +260,8 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
         return allLevelEnts.Where(allGameEnemies.Contains).ToList();
     }
 
-    private TR1Type SelectRequiredEnemy(List<TR1Type> pool, string levelName, RandoDifficulty difficulty)
-    {
-        pool.RemoveAll(e => !TR1EnemyUtilities.IsEnemySupported(levelName, e, difficulty));
-
-        TR1Type type;
-        if (pool.All(_excludedEnemies.Contains))
-        {
-            // Select the last excluded enemy (lowest priority)
-            type = _excludedEnemies.Last(pool.Contains);
-        }
-        else
-        {
-            do
-            {
-                type = pool[Generator.Next(0, pool.Count)];
-            }
-            while (_excludedEnemies.Contains(type));
-        }
-
-        return type;
-    }
-
-    private RandoDifficulty GetImpliedDifficulty()
-    {
-        if (_excludedEnemies.Count > 0 && Settings.RandoEnemyDifficulty == RandoDifficulty.Default)
-        {
-            // If every enemy in the pool has room restrictions for any level, we have to imply NoRestrictions difficulty mode
-            List<TR1Type> includedEnemies = Settings.ExcludableEnemies.Keys.Except(Settings.ExcludedEnemies).Select(s => (TR1Type)s).ToList();
-            foreach (string level in GameLevels)
-            {
-                IEnumerable<TR1Type> restrictedRoomEnemies = TR1EnemyUtilities.GetRestrictedEnemyRooms(level.ToUpper(), RandoDifficulty.Default).Keys;
-                if (includedEnemies.All(e => restrictedRoomEnemies.Contains(e) || _gameEnemyTracker.ContainsKey(e)))
-                {
-                    return RandoDifficulty.NoRestrictions;
-                }
-            }
-        }
-        return Settings.RandoEnemyDifficulty;
-    }
-
     public EnemyRandomizationCollection<TR1Type> RandomizeEnemiesNatively(string levelName, TR1Level level)
     {
-        // For the assault course, nothing will be changed for the time being
         if (levelName == TR1LevelNames.ASSAULT)
         {
             return null;
@@ -372,7 +340,7 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
                     }
 
                     targetEntity.TypeID = TR1TypeUtilities.TranslateAlias(type);
-                    TR1EnemyUtilities.SetEntityTriggers(level, targetEntity);
+                    SetOneShot(targetEntity, level.Entities.IndexOf(targetEntity), level.FloorData);
                     enemyEntities.Remove(targetEntity);
 
                     if (Settings.HideEnemiesUntilTriggered || type == TR1Type.Adam)
@@ -555,7 +523,7 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
 
             // Final step is to convert/set the type and ensure OneShot is set if needed (#146)
             currentEntity.TypeID = TR1TypeUtilities.TranslateAlias(newType);
-            TR1EnemyUtilities.SetEntityTriggers(level, currentEntity);
+            SetOneShot(currentEntity, entityIndex, level.FloorData);
             _resultantEnemies.Add(newType);
         }
     }
@@ -675,8 +643,7 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
         }
 
         level.Entities
-            .Where(e => e.TypeID == TR1Type.Larson)
-            .ToList()
+            .FindAll(e => e.TypeID == TR1Type.Larson)
             .ForEach(e => e.TypeID = TR1Type.Raptor);
 
         // Make the scion invisible.

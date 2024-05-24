@@ -35,6 +35,15 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
     protected override Dictionary<TR2Type, List<string>> GetGameTracker()
         => TR2EnemyUtilities.PrepareEnemyGameTracker(Settings.DocileChickens, Settings.RandoEnemyDifficulty);
 
+    protected override bool IsEnemySupported(string levelName, TR2Type type, RandoDifficulty difficulty)
+        => TR2EnemyUtilities.IsEnemySupported(levelName, type, difficulty, Settings.ProtectMonks);
+
+    protected override Dictionary<TR2Type, List<int>> GetRestrictedRooms(string levelName, RandoDifficulty difficulty)
+        => TR2EnemyUtilities.GetRestrictedEnemyRooms(levelName, RandoDifficulty.Default);
+
+    protected override bool IsOneShotType(TR2Type type)
+        => type == TR2Type.MarcoBartoli;
+
     public EnemyTransportCollection<TR2Type> SelectCrossLevelEnemies(string levelName, TR2Level level, int reduceEnemyCountBy = 0)
     {
         if (levelName == TR2LevelNames.ASSAULT)
@@ -282,46 +291,6 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         };
     }
 
-    private TR2Type SelectRequiredEnemy(List<TR2Type> pool, string levelName, RandoDifficulty difficulty)
-    {
-        pool.RemoveAll(e => !TR2EnemyUtilities.IsEnemySupported(levelName, e, difficulty, Settings.ProtectMonks));
-
-        TR2Type type;
-        if (pool.All(_excludedEnemies.Contains))
-        {
-            // Select the last excluded enemy (lowest priority)
-            type = _excludedEnemies.Last(pool.Contains);
-        }
-        else
-        {
-            do
-            {
-                type = pool[Generator.Next(0, pool.Count)];
-            }
-            while (_excludedEnemies.Contains(type));
-        }
-
-        return type;
-    }
-
-    private RandoDifficulty GetImpliedDifficulty()
-    {
-        if (_excludedEnemies.Count > 0 && Settings.RandoEnemyDifficulty == RandoDifficulty.Default)
-        {
-            // If every enemy in the pool has room restrictions for any level, we have to imply NoRestrictions difficulty mode
-            List<TR2Type> includedEnemies = Settings.ExcludableEnemies.Keys.Except(Settings.ExcludedEnemies).Select(s => (TR2Type)s).ToList();
-            foreach (string level in GameLevels)
-            {
-                IEnumerable<TR2Type> restrictedRoomEnemies = TR2EnemyUtilities.GetRestrictedEnemyRooms(level.ToUpper(), RandoDifficulty.Default).Keys;
-                if (includedEnemies.All(e => restrictedRoomEnemies.Contains(e) || _gameEnemyTracker.ContainsKey(e)))
-                {
-                    return RandoDifficulty.NoRestrictions;
-                }
-            }
-        }
-        return Settings.RandoEnemyDifficulty;
-    }
-
     public static List<TR2Entity> GetEnemyEntities(TR2Level level)
     {
         List<TR2Type> allEnemies = TR2TypeUtilities.GetFullListOfEnemies();
@@ -442,7 +411,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
                     }
 
                     targetEntity.TypeID = TR2TypeUtilities.TranslateAlias(type);
-                    TR2EnemyUtilities.SetEntityTriggers(level, targetEntity);
+                    SetOneShot(targetEntity, level.Entities.IndexOf(targetEntity), level.FloorData);
                     enemyEntities.Remove(targetEntity);
                 }
 
@@ -558,7 +527,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             }
 
             currentEntity.TypeID = TR2TypeUtilities.TranslateAlias(newType);
-            TR2EnemyUtilities.SetEntityTriggers(level, currentEntity);
+            SetOneShot(currentEntity, enemyIndex, level.FloorData);
             _resultantEnemies.Add(newType);
         }
 

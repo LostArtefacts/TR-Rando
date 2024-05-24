@@ -11,6 +11,14 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
 {
     private const int _willardSequence = 19;
 
+    private static readonly List<TR3Type> _oneShotEnemies = new()
+    {
+        TR3Type.Croc,
+        TR3Type.KillerWhale,
+        TR3Type.Raptor,
+        TR3Type.Rat,
+    };
+
     private readonly Dictionary<string, List<Location>> _pistolLocations;
 
     public ItemFactory<TR3Entity> ItemFactory { get; set; }
@@ -22,6 +30,15 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
 
     protected override Dictionary<TR3Type, List<string>> GetGameTracker()
         => TR3EnemyUtilities.PrepareEnemyGameTracker(Settings.RandoEnemyDifficulty);
+
+    protected override bool IsEnemySupported(string levelName, TR3Type type, RandoDifficulty difficulty)
+        => TR3EnemyUtilities.IsEnemySupported(levelName, type, difficulty);
+
+    protected override Dictionary<TR3Type, List<int>> GetRestrictedRooms(string levelName, RandoDifficulty difficulty)
+        => TR3EnemyUtilities.GetRestrictedEnemyRooms(levelName, difficulty);
+
+    protected override bool IsOneShotType(TR3Type type)
+        => _oneShotEnemies.Contains(type);
 
     public EnemyTransportCollection<TR3Type> SelectCrossLevelEnemies(string levelName, TR3Level level, int levelSequence)
     {
@@ -173,28 +190,6 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
         return allLevelEnts.Where(allGameEnemies.Contains).ToList();
     }
 
-    private TR3Type SelectRequiredEnemy(List<TR3Type> pool, string levelName, RandoDifficulty difficulty)
-    {
-        pool.RemoveAll(e => !TR3EnemyUtilities.IsEnemySupported(levelName, e, difficulty));
-
-        TR3Type type;
-        if (pool.All(_excludedEnemies.Contains))
-        {
-            // Select the last excluded enemy (lowest priority)
-            type = _excludedEnemies.Last(pool.Contains);
-        }
-        else
-        {
-            do
-            {
-                type = pool[Generator.Next(0, pool.Count)];
-            }
-            while (_excludedEnemies.Contains(type));
-        }
-
-        return type;
-    }
-
     public EnemyRandomizationCollection<TR3Type> RandomizeEnemiesNatively(string levelName, TR3Level level, int levelSequence)
     {
         if (levelName == TR3LevelNames.ASSAULT)
@@ -278,7 +273,7 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
                     if (ItemFactory.CanCreateItems(levelName, level.Entities, paths.Count))
                     {
                         targetEntity.TypeID = TR3TypeUtilities.TranslateAlias(type);
-                        TR3EnemyUtilities.SetEntityTriggers(level, targetEntity);
+                        SetOneShot(targetEntity, level.Entities.IndexOf(targetEntity), level.FloorData);
                         enemyEntities.Remove(targetEntity);
 
                         // Add the pathing if necessary
@@ -412,7 +407,7 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
 
             // Final step is to convert/set the type and ensure OneShot is set if needed (#146)
             targetEntity.TypeID = TR3TypeUtilities.TranslateAlias(newType);
-            TR3EnemyUtilities.SetEntityTriggers(level, targetEntity);
+            SetOneShot(targetEntity, level.Entities.IndexOf(targetEntity), level.FloorData);
             _resultantEnemies.Add(newType);
         }
 

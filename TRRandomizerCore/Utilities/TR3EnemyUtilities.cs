@@ -167,20 +167,6 @@ public static class TR3EnemyUtilities
             && item.Z == enemy.Z;
     }
 
-    public static void SetEntityTriggers(TR3Level level, TR3Entity entity)
-    {
-        if (_oneShotEnemies.Contains(entity.TypeID))
-        {
-            int entityID = level.Entities.IndexOf(entity);
-
-            List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(entityID);
-            foreach (FDTriggerEntry trigger in triggers)
-            {
-                trigger.OneShot = true;
-            }
-        }
-    }
-
     public static EnemyDifficulty GetEnemyDifficulty(List<TR3Entity> enemyEntities)
     {
         if (enemyEntities.Count == 0)
@@ -371,15 +357,6 @@ public static class TR3EnemyUtilities
             = 1, // Defaults: 3 types, 13 enemies
         [TR3LevelNames.HALLOWS]
             = 0  // Defaults: 2 types, 2 enemies
-    };
-
-    // Enemies who can only spawn once. These are enemies whose triggers in OG are all OneShot throughout.
-    private static readonly List<TR3Type> _oneShotEnemies = new()
-    {
-        TR3Type.Croc,
-        TR3Type.KillerWhale,
-        TR3Type.Raptor,
-        TR3Type.Rat
     };
 
     private static readonly Dictionary<EnemyDifficulty, List<TR3Type>> _enemyDifficulties = new()

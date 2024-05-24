@@ -464,26 +464,6 @@ public static class TR2EnemyUtilities
         TR2Type.Winston, TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick
     };
 
-    // #146 Ensure Marco is spawned only once
-    private static readonly List<TR2Type> _oneShotEnemies = new()
-    {
-        TR2Type.MarcoBartoli
-    };
-
-    public static void SetEntityTriggers(TR2Level level, TR2Entity entity)
-    {
-        if (_oneShotEnemies.Contains(entity.TypeID))
-        {
-            int entityID = level.Entities.IndexOf(entity);
-
-            List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(entityID);
-            foreach (FDTriggerEntry trigger in triggers)
-            {
-                trigger.OneShot = true;
-            }
-        }
-    }
-
     public static Dictionary<TR2Type, TR2Type> GetAliasPriority(string lvlName, List<TR2Type> importEntities)
     {
         // If the priorities map doesn't contain an entity we are trying to import as a key, TRModelTransporter

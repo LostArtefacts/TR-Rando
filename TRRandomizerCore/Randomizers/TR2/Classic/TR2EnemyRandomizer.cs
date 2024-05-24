@@ -95,23 +95,13 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
 
         SetMessage("Randomizing enemies - importing models");
-        foreach (EnemyProcessor processor in processors)
-        {
-            processor.Start();
-        }
-
-        foreach (EnemyProcessor processor in processors)
-        {
-            processor.Join();
-        }
+        processors.ForEach(p => p.Start());
+        processors.ForEach(p => p.Join());
 
         if (!SaveMonitor.IsCancelled && _processingException == null)
         {
             SetMessage("Randomizing enemies - saving levels");
-            foreach (EnemyProcessor processor in processors)
-            {
-                processor.ApplyRandomization();
-            }
+            processors.ForEach(p => p.ApplyRandomization());
         }
 
         _processingException?.Throw();
