@@ -61,16 +61,10 @@ public class EMEditorMapping
     }
 
     public void SetCommunityPatch(bool isCommunityPatch)
-    {
-        All?.SetCommunityPatch(isCommunityPatch);
-        ConditionalAll?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
-        Any?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
-        AllWithin?.ForEach(a => a.ForEach(s => s.SetCommunityPatch(isCommunityPatch)));
-        ConditionalAllWithin?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
-        OneOf?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
-        ConditionalOneOf?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
-        Mirrored?.SetCommunityPatch(isCommunityPatch);
-    }
+        => Scan(e => e.SetCommunityPatch(isCommunityPatch));
+
+    public void SetRemastered(bool isRemastered)
+        => Scan(e => e.SetRemastered(isRemastered));
 
     public List<BaseEMFunction> FindAll(Predicate<BaseEMFunction> predicate = null)
     {
