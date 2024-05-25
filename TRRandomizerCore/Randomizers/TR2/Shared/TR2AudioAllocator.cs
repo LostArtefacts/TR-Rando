@@ -7,7 +7,7 @@ using TRRandomizerCore.SFX;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class TR2AudioAllocator : AudioRandomizer
+public class TR2AudioAllocator : AudioAllocator
 {
     private readonly int _numSamples;
 

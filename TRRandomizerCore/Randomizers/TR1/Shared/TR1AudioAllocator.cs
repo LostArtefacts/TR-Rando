@@ -7,7 +7,7 @@ using TRRandomizerCore.SFX;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class TR1AudioAllocator : AudioRandomizer
+public class TR1AudioAllocator : AudioAllocator
 {
     private const int _defaultSecretTrack = 13;
 

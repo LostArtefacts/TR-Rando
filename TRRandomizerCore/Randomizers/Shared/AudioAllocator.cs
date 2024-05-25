@@ -8,7 +8,7 @@ using TRRandomizerCore.SFX;
 
 namespace TRRandomizerCore.Randomizers;
 
-public abstract class AudioRandomizer
+public abstract class AudioAllocator
 {
     private readonly IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> _tracks;
     private readonly Dictionary<Vector2, ushort> _trackMap;
@@ -18,7 +18,7 @@ public abstract class AudioRandomizer
     public RandomizerSettings Settings { get; set; }
     public List<TRSFXGeneralCategory> Categories { get; private set; }
 
-    public AudioRandomizer(IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> tracks)
+    public AudioAllocator(IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> tracks)
     {
         _tracks = tracks;
         _trackMap = new();
