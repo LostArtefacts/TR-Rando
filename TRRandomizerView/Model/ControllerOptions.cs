@@ -1649,7 +1649,9 @@ public class ControllerOptions : INotifyPropertyChanged
         set
         {
             _randomSecretsControl.IsActive = value;
+            _separateSecretTracks.IsActive = IsTR2 || !value;
             FirePropertyChanged();
+            FirePropertyChanged(nameof(SeparateSecretTracks));
         }
     }
 

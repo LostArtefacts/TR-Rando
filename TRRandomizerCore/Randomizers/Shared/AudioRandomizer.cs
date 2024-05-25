@@ -3,31 +3,71 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
+using TRRandomizerCore.Helpers;
 using TRRandomizerCore.SFX;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class AudioRandomizer
+public abstract class AudioRandomizer
 {
     private readonly IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> _tracks;
     private readonly Dictionary<Vector2, ushort> _trackMap;
+    private List<string> _uncontrolledLevels;
+
+    public Random Generator { get; set; }
+    public RandomizerSettings Settings { get; set; }
+    public List<TRSFXGeneralCategory> Categories { get; private set; }
 
     public AudioRandomizer(IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> tracks)
     {
         _tracks = tracks;
-        _trackMap = new Dictionary<Vector2, ushort>();
+        _trackMap = new();
     }
 
-    public void ResetFloorMap()
+    public void Initialise(IEnumerable<string> levelNames, string backupPath)
     {
-        _trackMap.Clear();
+        Categories = GetSFXCategories();
+        ChooseUncontrolledLevels(new(levelNames), GetAssaultName());
+        LoadData(backupPath);
     }
 
-    public void RandomizeFloorTracks(List<TRRoomSector> sectors, FDControl floorData, Random generator, Func<int, Vector2> positionAction)
+    protected abstract string GetAssaultName();
+    protected abstract void LoadData(string backupPath);
+
+    public void ChooseUncontrolledLevels(List<string> levels, string assaultCourse)
     {
-        for (int i = 0; i < sectors.Count; i++)
+        HashSet<string> exlusions = new() { assaultCourse };
+        _uncontrolledLevels = levels.RandomSelection(Generator, (int)Settings.UncontrolledSFXCount, exclusions: exlusions);
+        if (Settings.UncontrolledSFXAssaultCourse)
         {
-            TRRoomSector sector = sectors[i];
+            _uncontrolledLevels.Add(assaultCourse);
+        }
+    }
+
+    public bool IsUncontrolledLevel(string level)
+        => _uncontrolledLevels.Any(l => string.Equals(level, l, StringComparison.InvariantCultureIgnoreCase));
+
+    public void RandomizeFloorTracks<R>(List<R> rooms, FDControl floorData)
+        where R : TRRoom
+    {
+        if (!Settings.ChangeTriggerTracks)
+        {
+            return;
+        }
+
+        // TRRoomFlag.Unused2 is used in mods elsewhere to indicate that music tracks are locked.
+        _trackMap.Clear();
+        foreach (TRRoom room in rooms.Where(r => !r.Flags.HasFlag(TRRoomFlag.Unused2)))
+        {
+            RandomizeFloorTracks(room, floorData);
+        }
+    }
+
+    protected void RandomizeFloorTracks(TRRoom room, FDControl floorData)
+    {
+        for (int i = 0; i < room.Sectors.Count; i++)
+        {
+            TRRoomSector sector = room.Sectors[i];
             FDActionItem trackItem = null;
             if (sector.FDIndex > 0)
             {
@@ -45,7 +85,11 @@ public class AudioRandomizer
 
             // Get this sector's midpoint in world coordinates. Store each immediately
             // neighbouring tile to use the same track as this one, regardless of room.
-            Vector2 position = positionAction.Invoke(i);
+            Vector2 position = new
+            (
+                TRConsts.Step2 + room.Info.X + i / room.NumZSectors * TRConsts.Step4,
+                TRConsts.Step2 + room.Info.Z + i % room.NumZSectors * TRConsts.Step4
+            );
             int x = (int)position.X;
             int z = (int)position.Y;
 
@@ -53,7 +97,7 @@ public class AudioRandomizer
             {
                 TRAudioCategory category = FindTrackCategory((ushort)trackItem.Parameter);
                 List<TRAudioTrack> tracks = _tracks[category];
-                _trackMap[position] = tracks[generator.Next(0, tracks.Count)].ID;
+                _trackMap[position] = tracks[Generator.Next(0, tracks.Count)].ID;
             }
 
             for (int xNorm = -1; xNorm < 2; xNorm++)
@@ -71,6 +115,60 @@ public class AudioRandomizer
             }
 
             trackItem.Parameter = (short)_trackMap[position];
+        }
+    }
+
+    public void RandomizeSecretTracks(FDControl floorData, ushort defaultTrackID)
+    {
+        int numSecrets = floorData.GetActionItems(FDTrigAction.SecretFound)
+            .Select(a => a.Parameter)
+            .Distinct().Count();
+        if (numSecrets == 0 || !Settings.SeparateSecretTracks)
+        {
+            return;
+        }
+
+        List<TRAudioTrack> secretTracks = GetTracks(TRAudioCategory.Secret);
+
+        for (int i = 0; i < numSecrets; i++)
+        {
+            TRAudioTrack secretTrack = secretTracks[Generator.Next(0, secretTracks.Count)];
+            if (secretTrack.ID == defaultTrackID)
+            {
+                continue;
+            }
+
+            FDActionItem musicAction = new()
+            {
+                Action = FDTrigAction.PlaySoundtrack,
+                Parameter = (short)secretTrack.ID
+            };
+
+            List<FDTriggerEntry> triggers = floorData.GetSecretTriggers(i);
+            foreach (FDTriggerEntry trigger in triggers)
+            {
+                FDActionItem currentMusicAction = trigger.Actions.Find(a => a.Action == FDTrigAction.PlaySoundtrack);
+                if (currentMusicAction == null)
+                {
+                    trigger.Actions.Add(musicAction);
+                }
+            }
+        }
+    }
+
+    public void RandomizePitch<T>(IEnumerable<TRSoundEffect<T>> effects)
+        where T : Enum
+    {
+        if (!Settings.RandomizeWibble)
+        {
+            return;
+        }
+
+        // The engine does the actual randomization, we just tell it that every
+        // sound effect should be included.
+        foreach (TRSoundEffect<T> effect in effects)
+        {
+            effect.RandomizePitch = true;
         }
     }
 
@@ -95,10 +193,10 @@ public class AudioRandomizer
         return _tracks[category];
     }
 
-    public static List<TRSFXGeneralCategory> GetSFXCategories(RandomizerSettings settings)
+    private List<TRSFXGeneralCategory> GetSFXCategories()
     {
         List<TRSFXGeneralCategory> sfxCategories = new();
-        if (settings.ChangeWeaponSFX)
+        if (Settings.ChangeWeaponSFX)
         {
             // Pistols, Autos etc
             sfxCategories.Add(TRSFXGeneralCategory.StandardWeaponFiring);
@@ -108,7 +206,7 @@ public class AudioRandomizer
             sfxCategories.Add(TRSFXGeneralCategory.Ricochet);
         }
 
-        if (settings.ChangeCrashSFX)
+        if (Settings.ChangeCrashSFX)
         {
             // Grenades, 40F crash, dragon explosion
             sfxCategories.Add(TRSFXGeneralCategory.Explosion);
@@ -118,7 +216,7 @@ public class AudioRandomizer
             sfxCategories.Add(TRSFXGeneralCategory.Breaking);
         }
 
-        if (settings.ChangeEnemySFX)
+        if (Settings.ChangeEnemySFX)
         {
             // General death noises
             sfxCategories.Add(TRSFXGeneralCategory.Death);
@@ -140,7 +238,7 @@ public class AudioRandomizer
             sfxCategories.Add(TRSFXGeneralCategory.Flying);
         }
 
-        if (settings.ChangeDoorSFX)
+        if (Settings.ChangeDoorSFX)
         {
             // Doors that share opening/closing sounds
             sfxCategories.Add(TRSFXGeneralCategory.GeneralDoor);
