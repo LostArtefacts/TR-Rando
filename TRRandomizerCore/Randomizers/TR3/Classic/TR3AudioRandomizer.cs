@@ -54,7 +54,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
         ISet<TR3ScriptedLevel> exlusions = new HashSet<TR3ScriptedLevel> { assaultCourse };
 
         _uncontrolledLevels = Levels.RandomSelection(_generator, (int)Settings.UncontrolledSFXCount, exclusions: exlusions);
-        if (Settings.AssaultCourseWireframe)
+        if (Settings.UncontrolledSFXAssaultCourse)
         {
             _uncontrolledLevels.Add(assaultCourse);
         }

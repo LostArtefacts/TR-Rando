@@ -52,7 +52,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         ISet<TR2ScriptedLevel> exlusions = new HashSet<TR2ScriptedLevel> { assaultCourse };
 
         _uncontrolledLevels = Levels.RandomSelection(_generator, (int)Settings.UncontrolledSFXCount, exclusions: exlusions);
-        if (Settings.AssaultCourseWireframe)
+        if (Settings.UncontrolledSFXAssaultCourse)
         {
             _uncontrolledLevels.Add(assaultCourse);
         }
