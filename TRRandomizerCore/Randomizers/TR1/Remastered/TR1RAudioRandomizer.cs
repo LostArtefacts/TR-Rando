@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using TRGE.Core;
-using TRLevelControl;
-using TRLevelControl.Helpers;
+﻿using TRGE.Core;
 using TRLevelControl.Model;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.SFX;
@@ -10,25 +7,25 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR1RAudioRandomizer : BaseTR1RRandomizer
 {
-    private const int _defaultSecretTrack = 13;
-
-    private AudioRandomizer _audioRandomizer;
-
-    private List<TR1SFXDefinition> _soundEffects;
-    private List<TRSFXGeneralCategory> _sfxCategories, _persistentCategories;
+    private TR1AudioAllocator _allocator;
 
     public override void Randomize(int seed)
     {
         _generator = new(seed);
-        LoadAudioData();
+        _allocator = new(ScriptEditor.AudioProvider.GetCategorisedTracks())
+        {
+            Generator = _generator,
+            Settings = Settings,
+        };
+        _allocator.Initialise(Levels.Select(l => l.LevelFileBaseName), BackupPath);
 
         foreach (TRRScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
 
-            RandomizeMusicTriggers(_levelInstance);
+            _allocator.RandomizeMusicTriggers(_levelInstance.Data);
             RandomizeSoundEffects(_levelInstance);
-            RandomizeWibble(_levelInstance);
+            _allocator.RandomizeWibble(_levelInstance.Data);
 
             SaveLevelInstance();
             if (!TriggerProgress())
@@ -38,95 +35,10 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
         }
     }
 
-    private void LoadAudioData()
-    {
-        _audioRandomizer = new(ScriptEditor.AudioProvider.GetCategorisedTracks())
-        {
-            Generator = _generator,
-            Settings = Settings,
-        };
-        _audioRandomizer.ChooseUncontrolledLevels(new(Levels.Select(l => l.LevelFileBaseName)), TR1LevelNames.ASSAULT);
-
-        _sfxCategories = AudioRandomizer.GetSFXCategories(Settings);
-        _persistentCategories = new()
-        {
-            TRSFXGeneralCategory.StandardWeaponFiring,
-            TRSFXGeneralCategory.Ricochet,
-            TRSFXGeneralCategory.Flying,
-            TRSFXGeneralCategory.Explosion
-        };
-
-        _soundEffects = JsonConvert.DeserializeObject<List<TR1SFXDefinition>>(ReadResource(@"TR1\Audio\sfx.json"));
-
-        Dictionary<string, TR1Level> levels = new();
-        TR1LevelControl reader = new();
-        foreach (TR1SFXDefinition definition in _soundEffects)
-        {
-            if (!levels.ContainsKey(definition.SourceLevel))
-            {
-                levels[definition.SourceLevel] = reader.Read(Path.Combine(BackupPath, definition.SourceLevel));
-            }
-
-            TR1Level level = levels[definition.SourceLevel];
-            definition.SoundEffect = level.SoundEffects[definition.InternalIndex];
-        }
-    }
-
-    private void RandomizeMusicTriggers(TR1RCombinedLevel level)
-    {
-        if (Settings.ChangeTriggerTracks)
-        {
-            RandomizeFloorTracks(level.Data);
-        }
-
-        if (Settings.SeparateSecretTracks)
-        {
-            RandomizeSecretTracks(level);
-        }
-    }
-
-    private void RandomizeFloorTracks(TR1Level level)
-    {
-        _audioRandomizer.ResetFloorMap();
-        foreach (TR1Room room in level.Rooms.Where(r => !r.Flags.HasFlag(TRRoomFlag.Unused2)))
-        {
-            _audioRandomizer.RandomizeFloorTracks(room, level.FloorData);
-        }
-    }
-
-    private void RandomizeSecretTracks(TR1RCombinedLevel level)
-    {
-        List<TRAudioTrack> secretTracks = _audioRandomizer.GetTracks(TRAudioCategory.Secret);
-
-        for (int i = 0; i < level.Script.NumSecrets; i++)
-        {
-            TRAudioTrack secretTrack = secretTracks[_generator.Next(0, secretTracks.Count)];
-            if (secretTrack.ID == _defaultSecretTrack)
-            {
-                continue;
-            }
-
-            FDActionItem musicAction = new()
-            {
-                Action = FDTrigAction.PlaySoundtrack,
-                Parameter = (short)secretTrack.ID
-            };
-
-            List<FDTriggerEntry> triggers = level.Data.FloorData.GetSecretTriggers(i);
-            foreach (FDTriggerEntry trigger in triggers)
-            {
-                FDActionItem currentMusicAction = trigger.Actions.Find(a => a.Action == FDTrigAction.PlaySoundtrack);
-                if (currentMusicAction == null)
-                {
-                    trigger.Actions.Add(musicAction);
-                }
-            }
-        }
-    }
-
     private void RandomizeSoundEffects(TR1RCombinedLevel level)
     {
-        if (_sfxCategories.Count == 0)
+        List<TRSFXGeneralCategory> categories = _allocator.GetCategories();
+        if (categories.Count == 0)
         {
             return;
         }
@@ -166,14 +78,17 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
 
     private TR1SFXDefinition SelectSFXReplacement(TR1RCombinedLevel level, TR1SFX currentSFX)
     {
-        if (_audioRandomizer.IsUncontrolledLevel(level.Name))
+        List<TR1SFXDefinition> soundEffects = _allocator.GetDefinitions();
+        List<TRSFXGeneralCategory> categories = _allocator.GetCategories();
+
+        if (_allocator.IsUncontrolledLevel(level.Name))
         {
-            return _soundEffects[_generator.Next(0, _soundEffects.Count)];
+            return soundEffects[_generator.Next(0, soundEffects.Count)];
         }
 
-        TR1SFXDefinition definition = _soundEffects.Find(sfx => sfx.InternalIndex == currentSFX);
+        TR1SFXDefinition definition = soundEffects.Find(sfx => sfx.InternalIndex == currentSFX);
         if (definition == null
-            || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
+            || definition.Creature == TRSFXCreatureCategory.Lara || !categories.Contains(definition.PrimaryCategory))
         {
             return null;
         }
@@ -184,7 +99,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
             pred = sfx =>
             {
                 return sfx.Categories.Contains(definition.PrimaryCategory) &&
-                (sfx != definition || _persistentCategories.Contains(definition.PrimaryCategory)) &&
+                (sfx != definition || _allocator.IsPersistent(definition.PrimaryCategory)) &&
                 (
                     sfx.Creature == definition.Creature ||
                     (sfx.Creature == TRSFXCreatureCategory.Lara && definition.Creature == TRSFXCreatureCategory.Human)
@@ -193,23 +108,12 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
         }
         else
         {
-            pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && (sfx != definition || _persistentCategories.Contains(definition.PrimaryCategory));
+            pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && (sfx != definition || _allocator.IsPersistent(definition.PrimaryCategory));
         }
 
-        List<TR1SFXDefinition> otherDefinitions = _soundEffects.FindAll(pred);
+        List<TR1SFXDefinition> otherDefinitions = soundEffects.FindAll(pred);
         return otherDefinitions.Any()
             ? otherDefinitions[_generator.Next(0, otherDefinitions.Count)]
             : null;
-    }
-
-    private void RandomizeWibble(TR1RCombinedLevel level)
-    {
-        if (Settings.RandomizeWibble)
-        {
-            foreach (var (_, effect) in level.Data.SoundEffects)
-            {
-                effect.RandomizePitch = true;
-            }
-        }
     }
 }

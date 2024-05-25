@@ -42,6 +42,7 @@ internal class TRVersionSupport
         TRRandomizerType.ReturnPaths,
         TRRandomizerType.RewardRooms,
         TRRandomizerType.Secret,
+        TRRandomizerType.SecretAudio,
         TRRandomizerType.SecretCount,
         TRRandomizerType.SecretModels,
         TRRandomizerType.SecretReward,
