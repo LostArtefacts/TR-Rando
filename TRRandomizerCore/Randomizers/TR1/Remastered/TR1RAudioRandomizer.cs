@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Numerics;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
@@ -91,14 +90,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
         _audioRandomizer.ResetFloorMap();
         foreach (TR1Room room in level.Rooms.Where(r => !r.Flags.HasFlag(TRRoomFlag.Unused2)))
         {
-            _audioRandomizer.RandomizeFloorTracks(room.Sectors, level.FloorData, _generator, sectorIndex =>
-            {
-                return new Vector2
-                (
-                    TRConsts.Step2 + room.Info.X + sectorIndex / room.NumZSectors * TRConsts.Step4,
-                    TRConsts.Step2 + room.Info.Z + sectorIndex % room.NumZSectors * TRConsts.Step4
-                );
-            });
+            _audioRandomizer.RandomizeFloorTracks(room, level.FloorData);
         }
     }
 

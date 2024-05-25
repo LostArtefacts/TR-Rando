@@ -41,11 +41,11 @@ public class AudioRandomizer
         _trackMap.Clear();
     }
 
-    public void RandomizeFloorTracks(List<TRRoomSector> sectors, FDControl floorData, Random generator, Func<int, Vector2> positionAction)
+    public void RandomizeFloorTracks(TRRoom room, FDControl floorData)
     {
-        for (int i = 0; i < sectors.Count; i++)
+        for (int i = 0; i < room.Sectors.Count; i++)
         {
-            TRRoomSector sector = sectors[i];
+            TRRoomSector sector = room.Sectors[i];
             FDActionItem trackItem = null;
             if (sector.FDIndex > 0)
             {
@@ -63,7 +63,11 @@ public class AudioRandomizer
 
             // Get this sector's midpoint in world coordinates. Store each immediately
             // neighbouring tile to use the same track as this one, regardless of room.
-            Vector2 position = positionAction.Invoke(i);
+            Vector2 position = new
+            (
+                TRConsts.Step2 + room.Info.X + i / room.NumZSectors * TRConsts.Step4,
+                TRConsts.Step2 + room.Info.Z + i % room.NumZSectors * TRConsts.Step4
+            );
             int x = (int)position.X;
             int z = (int)position.Y;
 
@@ -71,7 +75,7 @@ public class AudioRandomizer
             {
                 TRAudioCategory category = FindTrackCategory((ushort)trackItem.Parameter);
                 List<TRAudioTrack> tracks = _tracks[category];
-                _trackMap[position] = tracks[generator.Next(0, tracks.Count)].ID;
+                _trackMap[position] = tracks[Generator.Next(0, tracks.Count)].ID;
             }
 
             for (int xNorm = -1; xNorm < 2; xNorm++)
