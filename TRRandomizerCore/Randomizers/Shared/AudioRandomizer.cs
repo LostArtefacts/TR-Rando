@@ -3,6 +3,7 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
+using TRRandomizerCore.Helpers;
 using TRRandomizerCore.SFX;
 
 namespace TRRandomizerCore.Randomizers;
@@ -11,12 +12,29 @@ public class AudioRandomizer
 {
     private readonly IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> _tracks;
     private readonly Dictionary<Vector2, ushort> _trackMap;
+    private List<string> _uncontrolledLevels;
+
+    public Random Generator { get; set; }
+    public RandomizerSettings Settings { get; set; }
 
     public AudioRandomizer(IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> tracks)
     {
         _tracks = tracks;
-        _trackMap = new Dictionary<Vector2, ushort>();
+        _trackMap = new();
     }
+
+    public void ChooseUncontrolledLevels(List<string> levels, string assaultCourse)
+    {
+        HashSet<string> exlusions = new() { assaultCourse };
+        _uncontrolledLevels = levels.RandomSelection(Generator, (int)Settings.UncontrolledSFXCount, exclusions: exlusions);
+        if (Settings.UncontrolledSFXAssaultCourse)
+        {
+            _uncontrolledLevels.Add(assaultCourse);
+        }
+    }
+
+    public bool IsUncontrolledLevel(string level)
+        => _uncontrolledLevels.Contains(level);
 
     public void ResetFloorMap()
     {

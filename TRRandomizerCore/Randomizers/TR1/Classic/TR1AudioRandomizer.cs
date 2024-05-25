@@ -4,7 +4,6 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.SFX;
 
@@ -21,29 +20,22 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
     private List<TR1SFXDefinition> _soundEffects;
     private TR1SFXDefinition _psUziDefinition;
     private List<TRSFXGeneralCategory> _sfxCategories, _persistentCategories;
-    private List<TR1ScriptedLevel> _uncontrolledLevels;
 
     public override void Randomize(int seed)
     {
-        _generator = new Random(seed);
-
+        _generator = new(seed);
         LoadAudioData();
-        ChooseUncontrolledLevels();
 
         foreach (TR1ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
 
             RandomizeMusicTriggers(_levelInstance);
-
             RandomizeSoundEffects(_levelInstance);
-
             ImportSpeechSFX(_levelInstance);
-
             RandomizeWibble(_levelInstance);
             
             SaveLevelInstance();
-
             if (!TriggerProgress())
             {
                 break;
@@ -54,13 +46,18 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
     private void LoadAudioData()
     {
         // Get the track data from audio_tracks.json. Loaded from TRGE as it sets the ambient tracks initially.
-        _audioRandomizer = new AudioRandomizer(ScriptEditor.AudioProvider.GetCategorisedTracks());
+        _audioRandomizer = new(ScriptEditor.AudioProvider.GetCategorisedTracks())
+        {
+            Generator = _generator,
+            Settings = Settings,
+        };
+        _audioRandomizer.ChooseUncontrolledLevels(new(Levels.Select(l => l.LevelFileBaseName)), TR1LevelNames.ASSAULT);
 
         // Decide which sound effect categories we want to randomize.
         _sfxCategories = AudioRandomizer.GetSFXCategories(Settings);
 
         // SFX in these categories can potentially remain as they are
-        _persistentCategories = new List<TRSFXGeneralCategory>
+        _persistentCategories = new()
         {
             TRSFXGeneralCategory.StandardWeaponFiring,
             TRSFXGeneralCategory.Ricochet,
@@ -95,23 +92,6 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         _psUziDefinition.SoundEffect.Samples = new() { File.ReadAllBytes(GetResourcePath(@"TR1\Audio\ps_uzis.wav")) };
     }
 
-    private void ChooseUncontrolledLevels()
-    {
-        TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
-        ISet<TR1ScriptedLevel> exlusions = new HashSet<TR1ScriptedLevel> { assaultCourse };
-
-        _uncontrolledLevels = Levels.RandomSelection(_generator, (int)Settings.UncontrolledSFXCount, exclusions: exlusions);
-        if (Settings.UncontrolledSFXAssaultCourse)
-        {
-            _uncontrolledLevels.Add(assaultCourse);
-        }
-    }
-
-    public bool IsUncontrolledLevel(TR1ScriptedLevel level)
-    {
-        return _uncontrolledLevels.Contains(level);
-    }
-
     private void RandomizeMusicTriggers(TR1CombinedLevel level)
     {
         if (Settings.ChangeTriggerTracks)
@@ -140,7 +120,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             return;
         }
 
-        if (IsUncontrolledLevel(level.Script))
+        if (_audioRandomizer.IsUncontrolledLevel(level.Name))
         {
             HashSet<string> usedSamples = new();
 

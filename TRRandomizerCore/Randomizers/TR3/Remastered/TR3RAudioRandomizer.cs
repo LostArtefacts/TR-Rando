@@ -4,7 +4,6 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.SFX;
 
@@ -19,14 +18,11 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
 
     private List<TR3SFXDefinition> _soundEffects;
     private List<TRSFXGeneralCategory> _sfxCategories;
-    private List<TRRScriptedLevel> _uncontrolledLevels;
 
     public override void Randomize(int seed)
     {
         _generator = new(seed);
-
         LoadAudioData();
-        ChooseUncontrolledLevels();
 
         foreach (TRRScriptedLevel lvl in Levels)
         {
@@ -42,23 +38,6 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
                 break;
             }
         }
-    }
-
-    private void ChooseUncontrolledLevels()
-    {
-        TRRScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR3LevelNames.ASSAULT));
-        HashSet<TRRScriptedLevel> exlusions = new () { assaultCourse };
-
-        _uncontrolledLevels = Levels.RandomSelection(_generator, (int)Settings.UncontrolledSFXCount, exclusions: exlusions);
-        if (Settings.UncontrolledSFXAssaultCourse)
-        {
-            _uncontrolledLevels.Add(assaultCourse);
-        }
-    }
-
-    public bool IsUncontrolledLevel(TRRScriptedLevel level)
-    {
-        return _uncontrolledLevels.Contains(level);
     }
 
     private void RandomizeMusicTriggers(TR3RCombinedLevel level)
@@ -122,7 +101,13 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
 
     private void LoadAudioData()
     {
-        _audioRandomizer = new AudioRandomizer(ScriptEditor.AudioProvider.GetCategorisedTracks());
+        _audioRandomizer = new(ScriptEditor.AudioProvider.GetCategorisedTracks())
+        {
+            Generator = _generator,
+            Settings = Settings,
+        };
+        _audioRandomizer.ChooseUncontrolledLevels(new(Levels.Select(l => l.LevelFileBaseName)), TR3LevelNames.ASSAULT);
+
         _sfxCategories = AudioRandomizer.GetSFXCategories(Settings);
         if (_sfxCategories.Count > 0)
         {
@@ -150,7 +135,7 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
             return;
         }
 
-        if (IsUncontrolledLevel(level.Script))
+        if (_audioRandomizer.IsUncontrolledLevel(level.Name))
         {
             HashSet<uint> indices = new();
             foreach (TR3SoundEffect effect in level.Data.SoundEffects.Values)
