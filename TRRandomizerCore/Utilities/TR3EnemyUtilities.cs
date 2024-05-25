@@ -2,7 +2,6 @@
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Levels;
 
 namespace TRRandomizerCore.Utilities;
 
@@ -153,11 +152,11 @@ public static class TR3EnemyUtilities
         return locations;
     }
 
-    public static bool IsDroppableEnemyRequired(TR3CombinedLevel level)
+    public static bool IsDroppableEnemyRequired(TR3Level level)
     {
-        return level.Data.Entities
+        return level.Entities
             .Where(e => TR3TypeUtilities.IsEnemyType(e.TypeID))
-            .Any(enemy => level.Data.Entities.Any(item => HasDropItem(enemy, item)));
+            .Any(enemy => level.Entities.Any(item => HasDropItem(enemy, item)));
     }
 
     public static bool HasDropItem(TR3Entity enemy, TR3Entity item)
@@ -166,20 +165,6 @@ public static class TR3EnemyUtilities
             && item.X == enemy.X
             && item.Y == enemy.Y
             && item.Z == enemy.Z;
-    }
-
-    public static void SetEntityTriggers(TR3Level level, TR3Entity entity)
-    {
-        if (_oneShotEnemies.Contains(entity.TypeID))
-        {
-            int entityID = level.Entities.IndexOf(entity);
-
-            List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(entityID);
-            foreach (FDTriggerEntry trigger in triggers)
-            {
-                trigger.OneShot = true;
-            }
-        }
     }
 
     public static EnemyDifficulty GetEnemyDifficulty(List<TR3Entity> enemyEntities)
@@ -223,7 +208,7 @@ public static class TR3EnemyUtilities
         return allDifficulties[weight];
     }
 
-    public static uint GetStartingAmmo(TR3Type weaponType)
+    public static int GetStartingAmmo(TR3Type weaponType)
     {
         if (_startingAmmoToGive.ContainsKey(weaponType))
         {
@@ -374,15 +359,6 @@ public static class TR3EnemyUtilities
             = 0  // Defaults: 2 types, 2 enemies
     };
 
-    // Enemies who can only spawn once. These are enemies whose triggers in OG are all OneShot throughout.
-    private static readonly List<TR3Type> _oneShotEnemies = new()
-    {
-        TR3Type.Croc,
-        TR3Type.KillerWhale,
-        TR3Type.Raptor,
-        TR3Type.Rat
-    };
-
     private static readonly Dictionary<EnemyDifficulty, List<TR3Type>> _enemyDifficulties = new()
     {
         [EnemyDifficulty.VeryEasy] = new List<TR3Type>
@@ -414,7 +390,7 @@ public static class TR3EnemyUtilities
         }
     };
 
-    private static readonly Dictionary<TR3Type, uint> _startingAmmoToGive = new()
+    private static readonly Dictionary<TR3Type, int> _startingAmmoToGive = new()
     {
         [TR3Type.Shotgun_P] = 8,
         [TR3Type.Deagle_P] = 4,

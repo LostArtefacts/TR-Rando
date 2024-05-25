@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Levels;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
@@ -32,16 +31,16 @@ public static class TR2EnemyUtilities
         return 0;
     }
 
-    public static bool IsWaterEnemyRequired(TR2CombinedLevel level)
+    public static bool IsWaterEnemyRequired(TR2Level level)
     {
-        return level.Data.Entities.Any(e => TR2TypeUtilities.IsWaterCreature(e.TypeID));
+        return level.Entities.Any(e => TR2TypeUtilities.IsWaterCreature(e.TypeID));
     }
 
-    public static bool IsDroppableEnemyRequired(TR2CombinedLevel level)
+    public static bool IsDroppableEnemyRequired(TR2Level level)
     {
-        return level.Data.Entities
+        return level.Entities
             .Where(e => TR2TypeUtilities.IsEnemyType(e.TypeID))
-            .Any(enemy => level.Data.Entities.Any(item => HasDropItem(enemy, item)));
+            .Any(enemy => level.Entities.Any(item => HasDropItem(enemy, item)));
     }
 
     public static bool HasDropItem(TR2Entity enemy, TR2Entity item)
@@ -464,26 +463,6 @@ public static class TR2EnemyUtilities
     {
         TR2Type.Winston, TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick
     };
-
-    // #146 Ensure Marco is spawned only once
-    private static readonly List<TR2Type> _oneShotEnemies = new()
-    {
-        TR2Type.MarcoBartoli
-    };
-
-    public static void SetEntityTriggers(TR2Level level, TR2Entity entity)
-    {
-        if (_oneShotEnemies.Contains(entity.TypeID))
-        {
-            int entityID = level.Entities.IndexOf(entity);
-
-            List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(entityID);
-            foreach (FDTriggerEntry trigger in triggers)
-            {
-                trigger.OneShot = true;
-            }
-        }
-    }
 
     public static Dictionary<TR2Type, TR2Type> GetAliasPriority(string lvlName, List<TR2Type> importEntities)
     {

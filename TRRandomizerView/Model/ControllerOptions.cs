@@ -3946,6 +3946,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsChallengeRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.ChallengeRooms);
     public bool IsWeatherTypeSupported => IsRandomizationSupported(TRRandomizerType.Weather);
     public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
+    public bool IsDocileBirdMonsterTypeSupported => IsRandomizationSupported(TRRandomizerType.DocileBirdMonster);
     public bool IsDragonSpawnTypeSupported => IsRandomizationSupported(TRRandomizerType.DragonSpawn);
     public bool IsSecretTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretTextures);
     public bool IsKeyItemTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItemTextures);
@@ -3989,7 +3990,7 @@ public class ControllerOptions : INotifyPropertyChanged
         }
         else
         {
-            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and rewards will appear when all secrets are collected.";
+            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and rewards will be stacked with them.";
         }
 
         FirePropertyChanged(nameof(RandomizeSecretsText));

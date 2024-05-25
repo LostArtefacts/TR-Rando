@@ -683,7 +683,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                             int checkCount = 0;
                             while (location2ndBoat.IsEquivalent(vehicles[entity]) && checkCount < 5)//compare locations in bottom of water ( authorize 5 round max in case there is only 1 valid location)
                             {
-                                location2ndBoat = VehicleUtilities.GetRandomLocation(_levelInstance, TR2Type.Boat, _generator, false);
+                                location2ndBoat = VehicleUtilities.GetRandomLocation(_levelInstance.Name, _levelInstance.Data, TR2Type.Boat, _generator, false);
                                 checkCount++;
                             }
 
@@ -722,7 +722,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     /// <param name="locationMap">Dictionnary EntityType/location </param>
     private void PopulateVehicleLocation(TR2Type entity, Dictionary<TR2Type, Location> locationMap)
     {
-        Location location = VehicleUtilities.GetRandomLocation(_levelInstance, entity, _generator);
+        Location location = VehicleUtilities.GetRandomLocation(_levelInstance.Name, _levelInstance.Data, entity, _generator);
         if (location != null)
         {
             locationMap[entity] = location;

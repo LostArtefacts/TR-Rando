@@ -58,9 +58,12 @@ internal class TRVersionSupport
 
     private static readonly List<TRRandomizerType> _tr1RTypes = new()
     {
+        TRRandomizerType.AtlanteanEggBehaviour,
         TRRandomizerType.Audio,
+        TRRandomizerType.Enemy,
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
+        TRRandomizerType.HiddenEnemies,
         TRRandomizerType.Item,
         TRRandomizerType.KeyItems,
         TRRandomizerType.Secret,
@@ -76,6 +79,7 @@ internal class TRVersionSupport
         TRRandomizerType.Audio,
         TRRandomizerType.BirdMonsterBehaviour,
         TRRandomizerType.Braid,
+        TRRandomizerType.DocileBirdMonster,
         TRRandomizerType.DisableDemos,
         TRRandomizerType.DragonSpawn,
         TRRandomizerType.DynamicEnemyTextures,
@@ -115,6 +119,8 @@ internal class TRVersionSupport
     private static readonly List<TRRandomizerType> _tr2RTypes = new()
     {
         TRRandomizerType.Audio,
+        TRRandomizerType.BirdMonsterBehaviour,
+        TRRandomizerType.Enemy,
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
         TRRandomizerType.Item,
@@ -170,6 +176,7 @@ internal class TRVersionSupport
     private static readonly List<TRRandomizerType> _tr3RTypes = new()
     {
         TRRandomizerType.Audio,
+        TRRandomizerType.Enemy,
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
         TRRandomizerType.Item,

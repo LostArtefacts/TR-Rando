@@ -147,20 +147,6 @@ public static class TR1EnemyUtilities
         return entities;
     }
 
-    public static void SetEntityTriggers(TR1Level level, TR1Entity entity)
-    {
-        if (_oneShotEnemies.Contains(entity.TypeID))
-        {
-            int entityID = level.Entities.IndexOf(entity);
-
-            List<FDTriggerEntry> triggers = level.FloorData.GetEntityTriggers(entityID);
-            foreach (FDTriggerEntry trigger in triggers)
-            {
-                trigger.OneShot = true;
-            }
-        }
-    }
-
     public static EnemyDifficulty GetEnemyDifficulty(List<TR1Entity> enemyEntities)
     {
         if (enemyEntities.Count == 0)
@@ -202,7 +188,7 @@ public static class TR1EnemyUtilities
         return allDifficulties[weight];
     }
 
-    public static uint GetStartingAmmo(TR1Type weaponType)
+    public static int GetStartingAmmo(TR1Type weaponType)
     {
         if (_startingAmmoToGive.ContainsKey(weaponType))
         {
@@ -495,12 +481,6 @@ public static class TR1EnemyUtilities
             = 2,  // Defaults: 4 types, 56 enemies
     };
 
-    // Enemies who can only spawn once.
-    private static readonly List<TR1Type> _oneShotEnemies = new()
-    {
-        TR1Type.Pierre
-    };
-
     private static readonly Dictionary<EnemyDifficulty, List<TR1Type>> _enemyDifficulties = new()
     {
         [EnemyDifficulty.VeryEasy] = new List<TR1Type>
@@ -529,7 +509,7 @@ public static class TR1EnemyUtilities
         }
     };
 
-    private static readonly Dictionary<TR1Type, uint> _startingAmmoToGive = new()
+    private static readonly Dictionary<TR1Type, int> _startingAmmoToGive = new()
     {
         [TR1Type.Shotgun_S_P] = 10,
         [TR1Type.Magnums_S_P] = 6,

@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Diagnostics;
-using System.Numerics;
-using TRDataControl;
-using TRDataControl.Environment;
+﻿using TRDataControl;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
@@ -18,46 +14,23 @@ namespace TRRandomizerCore.Randomizers;
 public class TR1EnemyRandomizer : BaseTR1Randomizer
 {
     public static readonly uint MaxClones = 8;
-    private static readonly EnemyTransportCollection _emptyEnemies = new()
-    {
-        TypesToImport = new(),
-        TypesToRemove = new()
-    };
 
-    private static readonly int _unkillableEgyptMummy = 163;
-    private static readonly Location _egyptMummyLocation = new()
-    {
-        X = 66048,
-        Y = -2304,
-        Z = 73216,
-        Room = 78
-    };
-
-    private static readonly int _unreachableStrongholdRoom = 18;
-    private static readonly Location _strongholdCentaurLocation = new()
-    {
-        X = 57856,
-        Y = -26880,
-        Z = 43520,
-        Room = 14
-    };
-
-    private Dictionary<TR1Type, List<string>> _gameEnemyTracker;
-    private Dictionary<string, List<Location>> _pistolLocations;
-    private Dictionary<string, List<Location>> _eggLocations;
-    private Dictionary<string, List<Location>> _pierreLocations;
-    private List<TR1Type> _excludedEnemies;
-    private ISet<TR1Type> _resultantEnemies;
+    private TR1EnemyAllocator _allocator;
 
     internal TR1TextureMonitorBroker TextureMonitor { get; set; }
     public ItemFactory<TR1Entity> ItemFactory { get; set; }
 
     public override void Randomize(int seed)
     {
-        _generator = new Random(seed);
-        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
-        _eggLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\egg_locations.json"));
-        _pierreLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\pierre_locations.json"));
+        _generator = new(seed);
+        _allocator = new()
+        {
+            Settings = Settings,
+            ItemFactory = ItemFactory,
+            Generator = _generator,
+            GameLevels = Levels.Select(l => l.LevelFileBaseName),
+        };
+        _allocator.Initialise();
 
         if (Settings.CrossLevelEnemies)
         {
@@ -78,20 +51,13 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
     private void RandomizeExistingEnemies()
     {
-        _excludedEnemies = new List<TR1Type>();
-        _resultantEnemies = new HashSet<TR1Type>();
-
         foreach (TR1ScriptedLevel lvl in Levels)
         {
-            //Read the level into a combined data/script level object
             LoadLevelInstance(lvl);
+            EnemyRandomizationCollection<TR1Type> enemies = _allocator.RandomizeEnemiesNatively(_levelInstance.Name, _levelInstance.Data);
+            ApplyPostRandomization(_levelInstance, enemies);
 
-            //Apply the modifications
-            RandomizeEnemiesNatively(_levelInstance);
-
-            //Write back the level file
             SaveLevelInstance();
-
             if (!TriggerProgress())
             {
                 break;
@@ -126,979 +92,213 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             processorIndex = processorIndex == _maxThreads - 1 ? 0 : processorIndex + 1;
         }
 
-        // Track enemies whose counts across the game are restricted
-        _gameEnemyTracker = TR1EnemyUtilities.PrepareEnemyGameTracker(Settings.RandoEnemyDifficulty, Levels.Select(l => l.Name));
-
-        // #272 Selective enemy pool - convert the shorts in the settings to actual entity types
-        _excludedEnemies = Settings.UseEnemyExclusions ?
-            Settings.ExcludedEnemies.Select(s => (TR1Type)s).ToList() :
-            new List<TR1Type>();
-        _resultantEnemies = new HashSet<TR1Type>();
-
         SetMessage("Randomizing enemies - importing models");
-        foreach (EnemyProcessor processor in processors)
-        {
-            processor.Start();
-        }
-
-        foreach (EnemyProcessor processor in processors)
-        {
-            processor.Join();
-        }
+        processors.ForEach(p => p.Start());
+        processors.ForEach(p => p.Join());
 
         if (!SaveMonitor.IsCancelled && _processingException == null)
         {
             SetMessage("Randomizing enemies - saving levels");
-            foreach (EnemyProcessor processor in processors)
-            {
-                processor.ApplyRandomization();
-            }
+            processors.ForEach(p => p.ApplyRandomization());
         }
 
         _processingException?.Throw();
 
-        // If any exclusions failed to be avoided, send a message
-        if (Settings.ShowExclusionWarnings)
+        string statusMessage = _allocator.GetExclusionStatusMessage();
+        if (statusMessage != null)
         {
-            VerifyExclusionStatus();
+            SetWarning(statusMessage);
         }
     }
 
-    private void VerifyExclusionStatus()
+    private void RandomizeEnemies(TR1CombinedLevel level, EnemyRandomizationCollection<TR1Type> enemies)
     {
-        List<TR1Type> failedExclusions = _resultantEnemies.ToList().FindAll(_excludedEnemies.Contains);
-        if (failedExclusions.Count > 0)
-        {
-            // A little formatting
-            List<string> failureNames = new();
-            foreach (TR1Type entity in failedExclusions)
-            {
-                failureNames.Add(Settings.ExcludableEnemies[(short)entity]);
-            }
-            failureNames.Sort();
-            SetWarning(string.Format("The following enemies could not be excluded entirely from the randomization pool.{0}{0}{1}", Environment.NewLine, string.Join(Environment.NewLine, failureNames)));
-        }
+        level.Script.ItemDrops.Clear();
+
+        _allocator.RandomizeEnemies(level.Name, level.Data, enemies);
+
+        ApplyPostRandomization(level, enemies);
     }
 
-    private void AdjustUnkillableEnemies(TR1CombinedLevel level)
+    private void ApplyPostRandomization(TR1CombinedLevel level, EnemyRandomizationCollection<TR1Type> enemies)
     {
-        if (level.Is(TR1LevelNames.EGYPT))
+        if (enemies == null)
         {
-            // The OG mummy normally falls out of sight when triggered, so move it.
-            level.Data.Entities[_unkillableEgyptMummy].SetLocation(_egyptMummyLocation);
-        }
-        else if (level.Is(TR1LevelNames.STRONGHOLD))
-        {
-            // There is a triggered centaur in room 18, plus several untriggered eggs for show.
-            // Move the centaur, and free the eggs to be repurposed elsewhere.
-            foreach (TR1Entity enemy in level.Data.Entities.Where(e => e.Room == _unreachableStrongholdRoom))
-            {
-                int index = level.Data.Entities.IndexOf(enemy);
-                if (level.Data.FloorData.GetEntityTriggers(index).Count == 0)
-                {
-                    enemy.TypeID = TR1Type.CameraTarget_N;
-                    ItemFactory.FreeItem(level.Name, index);
-                }
-                else
-                {
-                    enemy.SetLocation(_strongholdCentaurLocation);
-                }
-            }
+            return;
         }
 
         level.Script.UnobtainableKills = null;
+
+        FixColosseumBats(level);
+        AdjustTihocanEnding(level);
+        FixEnemyAnimations(level);
+        CloneEnemies(level);
+        AddUnarmedLevelAmmo(level);
+        RandomizeMeshes(level, enemies.Available);
     }
 
-    private EnemyTransportCollection SelectCrossLevelEnemies(TR1CombinedLevel level)
+    private void FixColosseumBats(TR1CombinedLevel level)
     {
-        // For the assault course, nothing will be imported for the time being
-        if (level.IsAssault)
+        if (!level.Is(TR1LevelNames.COLOSSEUM) || !Settings.FixOGBugs)
         {
-            return null;
+            return;
         }
 
-        AdjustUnkillableEnemies(level);
-
-        if (Settings.UseEnemyClones && Settings.CloneOriginalEnemies)
+        // Fix the bat trigger in Colosseum. Done outside of environment mods to allow for cloning.
+        // Item 74 is duplicated in each trigger.
+        foreach (FDTriggerEntry trigger in level.Data.FloorData.GetEntityTriggers(74))
         {
-            // Skip import altogether for OG clone mode
-            return _emptyEnemies;
-        }
-
-        // If level-ending Larson is disabled, we make an alternative ending to ToQ.
-        // Do this at this stage as it effectively gets rid of ToQ-Larson meaning
-        // Sanctuary-Larson can potentially be imported.
-        if (level.Is(TR1LevelNames.QUALOPEC) && Settings.ReplaceRequiredEnemies)
-        {
-            AmendToQLarson(level);
-        }
-
-        if (level.IsExpansion)
-        {
-            // Ensure big eggs are randomized by converting to normal ones because
-            // big eggs are never part of the enemy pool.
-            level.Data.Entities.FindAll(e => e.TypeID == TR1Type.AdamEgg)
-                .ForEach(e => e.TypeID = TR1Type.AtlanteanEgg);
-        }
-
-        RandoDifficulty difficulty = GetImpliedDifficulty();
-
-        // Get the list of enemy types currently in the level
-        List<TR1Type> oldEntities = GetCurrentEnemyEntities(level);
-
-        // Get the list of canidadates
-        List<TR1Type> allEnemies = TR1TypeUtilities.GetCandidateCrossLevelEnemies();
-
-        // Work out how many we can support
-        int enemyCount = oldEntities.Count + TR1EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
-        if (level.Is(TR1LevelNames.QUALOPEC) && Settings.ReplaceRequiredEnemies)
-        {
-            // Account for Larson having been removed above.
-            ++enemyCount;
-        }
-        List<TR1Type> newEntities = new(enemyCount);
-
-        // TR1 doesn't kill land creatures when underwater, so if "no restrictions" is
-        // enabled, don't enforce any by default.
-        bool waterEnemyRequired = difficulty == RandoDifficulty.Default
-            && TR1TypeUtilities.GetWaterEnemies().Any(oldEntities.Contains);
-
-        // Let's try to populate the list. Start by adding a water enemy if needed.
-        if (waterEnemyRequired)
-        {
-            List<TR1Type> waterEnemies = TR1TypeUtilities.GetWaterEnemies();
-            newEntities.Add(SelectRequiredEnemy(waterEnemies, level, difficulty));
-        }
-
-        // Are there any other types we need to retain?
-        if (!Settings.ReplaceRequiredEnemies)
-        {
-            foreach (TR1Type entity in TR1EnemyUtilities.GetRequiredEnemies(level.Name))
+            List<FDActionItem> actions = trigger.Actions
+                .FindAll(a => a.Action == FDTrigAction.Object && a.Parameter == 74);
+            if (actions.Count == 2)
             {
-                if (!newEntities.Contains(entity))
-                {
-                    newEntities.Add(entity);
-                }
+                actions[0].Parameter = 73;
             }
         }
-
-        // Remove all exclusions from the pool, and adjust the target capacity
-        allEnemies.RemoveAll(e => _excludedEnemies.Contains(e));
-
-        IEnumerable<TR1Type> ex = allEnemies.Where(e => !newEntities.Any(TR1TypeUtilities.GetFamily(e).Contains));
-        List<TR1Type> unalisedEntities = TR1TypeUtilities.RemoveAliases(ex);
-        while (unalisedEntities.Count < newEntities.Capacity - newEntities.Count)
-        {
-            --newEntities.Capacity;
-        }
-
-        // Fill the list from the remaining candidates. Keep track of ones tested to avoid
-        // looping infinitely if it's not possible to fill to capacity
-        ISet<TR1Type> testedEntities = new HashSet<TR1Type>();
-        List<TR1Type> eggEntities = TR1TypeUtilities.GetAtlanteanEggEnemies();
-        while (newEntities.Count < newEntities.Capacity && testedEntities.Count < allEnemies.Count)
-        {
-            TR1Type entity = allEnemies[_generator.Next(0, allEnemies.Count)];
-            testedEntities.Add(entity);
-
-            // Make sure this isn't known to be unsupported in the level
-            if (!TR1EnemyUtilities.IsEnemySupported(level.Name, entity, difficulty))
-            {
-                continue;
-            }
-
-            // Atlanteans and mummies are complex creatures. Grounded ones require the flyer for meshes
-            // so we can't have a grounded mummy and meaty flyer, or vice versa as a result.
-            if (entity == TR1Type.BandagedAtlantean && newEntities.Contains(TR1Type.MeatyFlyer) && !newEntities.Contains(TR1Type.MeatyAtlantean))
-            {
-                entity = TR1Type.MeatyAtlantean;
-            }
-            else if (entity == TR1Type.MeatyAtlantean && newEntities.Contains(TR1Type.BandagedFlyer) && !newEntities.Contains(TR1Type.BandagedAtlantean))
-            {
-                entity = TR1Type.BandagedAtlantean;
-            }
-            else if (entity == TR1Type.BandagedFlyer && newEntities.Contains(TR1Type.MeatyAtlantean))
-            {
-                continue;
-            }
-            else if (entity == TR1Type.MeatyFlyer && newEntities.Contains(TR1Type.BandagedAtlantean))
-            {
-                continue;
-            }
-            else if (entity == TR1Type.AtlanteanEgg && !newEntities.Any(eggEntities.Contains))
-            {
-                // Try to pick a type in the inclusion list if possible
-                List<TR1Type> preferredEggTypes = eggEntities.FindAll(allEnemies.Contains);
-                if (preferredEggTypes.Count == 0)
-                {
-                    preferredEggTypes = eggEntities;
-                }
-                TR1Type eggType = preferredEggTypes[_generator.Next(0, preferredEggTypes.Count)];
-                newEntities.Add(eggType);
-                testedEntities.Add(eggType);
-            }
-
-            // If this is a tracked enemy throughout the game, we only allow it if the number
-            // of unique levels is within the limit. Bear in mind we are collecting more than
-            // one group of enemies per level.
-            if (_gameEnemyTracker.ContainsKey(entity) && !_gameEnemyTracker[entity].Contains(level.Name))
-            {
-                if (_gameEnemyTracker[entity].Count < _gameEnemyTracker[entity].Capacity)
-                {
-                    // The entity is allowed, so store the fact that this level will have it
-                    _gameEnemyTracker[entity].Add(level.Name);
-                }
-                else
-                {
-                    // Otherwise, pick something else. If we tried to previously exclude this
-                    // enemy and couldn't, it will slip through the net and so the appearances
-                    // will increase.
-                    if (allEnemies.Except(newEntities).Count() > 1)
-                    {
-                        continue;
-                    }
-                }
-            }
-
-            // GetEntityFamily returns all aliases for the likes of the dogs, but if an entity
-            // doesn't have any, the returned list just contains the entity itself. This means
-            // we can avoid duplicating standard enemies as well as avoiding alias-clashing.
-            List<TR1Type> family = TR1TypeUtilities.GetFamily(entity);
-            if (!newEntities.Any(e1 => family.Any(e2 => e1 == e2)))
-            {
-                newEntities.Add(entity);
-            }
-        }
-
-        if
-        (
-            newEntities.All(e => TR1TypeUtilities.IsWaterCreature(e) || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)) || 
-            (newEntities.Capacity > 1 && newEntities.All(e => TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)))
-        )
-        {
-            // Make sure we have an unrestricted enemy available for the individual level conditions. This will
-            // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
-            bool RestrictionCheck(TR1Type e) =>
-                !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty)
-                || newEntities.Contains(e)
-                || TR1TypeUtilities.IsWaterCreature(e)
-                || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)
-                || TR1TypeUtilities.TranslateAlias(e) != e;
-
-            List<TR1Type> unrestrictedPool = allEnemies.FindAll(e => !RestrictionCheck(e));
-            if (unrestrictedPool.Count == 0)
-            {
-                // We are going to have to pull in the full list of candidates again, so ignoring any exclusions
-                unrestrictedPool = TR1TypeUtilities.GetCandidateCrossLevelEnemies().FindAll(e => !RestrictionCheck(e));
-            }
-
-            TR1Type entity = unrestrictedPool[_generator.Next(0, unrestrictedPool.Count)];
-            newEntities.Add(entity);
-
-            if (entity == TR1Type.AtlanteanEgg && !newEntities.Any(eggEntities.Contains))
-            {
-                // Try to pick a type in the inclusion list if possible
-                List<TR1Type> preferredEggTypes = eggEntities.FindAll(allEnemies.Contains);
-                if (preferredEggTypes.Count == 0)
-                {
-                    preferredEggTypes = eggEntities;
-                }
-                TR1Type eggType = preferredEggTypes[_generator.Next(0, preferredEggTypes.Count)];
-                newEntities.Add(eggType);
-            }
-        }
-
-        if (level.Is(TR1LevelNames.PYRAMID) && Settings.ReplaceRequiredEnemies && !newEntities.Contains(TR1Type.Adam))
-        {
-            AmendPyramidTorso(level);
-        }
-
-        if (Settings.DevelopmentMode)
-        {
-            Debug.WriteLine(level.Name + ": " + string.Join(", ", newEntities));
-        }
-
-        return new EnemyTransportCollection
-        {
-            TypesToImport = newEntities,
-            TypesToRemove = oldEntities
-        };
     }
 
-    private static List<TR1Type> GetCurrentEnemyEntities(TR1CombinedLevel level)
+    private void AdjustTihocanEnding(TR1CombinedLevel level)
     {
-        List<TR1Type> allGameEnemies = TR1TypeUtilities.GetFullListOfEnemies();
-        ISet<TR1Type> allLevelEnts = new SortedSet<TR1Type>();
-        level.Data.Entities.ForEach(e => allLevelEnts.Add(e.TypeID));
-        List<TR1Type> oldEntities = allLevelEnts.ToList().FindAll(e => allGameEnemies.Contains(e));
-        return oldEntities;
-    }
-
-    private TR1Type SelectRequiredEnemy(List<TR1Type> pool, TR1CombinedLevel level, RandoDifficulty difficulty)
-    {
-        pool.RemoveAll(e => !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty));
-
-        TR1Type entity;
-        if (pool.All(_excludedEnemies.Contains))
+        if (!level.Is(TR1LevelNames.TIHOCAN) || (Settings.RandomizeItems && Settings.IncludeKeyItems))
         {
-            // Select the last excluded enemy (lowest priority)
-            entity = _excludedEnemies.Last(e => pool.Contains(e));
+            return;
+        }
+
+        TR1Entity pierreReplacement = level.Data.Entities[TR1ItemRandomizer.TihocanPierreIndex];
+        if (Settings.AllowEnemyKeyDrops
+            && TR1EnemyUtilities.CanDropItems(pierreReplacement, level))
+        {
+            // Whichever enemy has taken Pierre's place will drop the items. Move the pickups to the enemy for trview lookup.
+            level.Script.AddItemDrops(TR1ItemRandomizer.TihocanPierreIndex, TR1ItemRandomizer.TihocanEndItems
+                .Select(e => ItemUtilities.ConvertToScriptItem(e.TypeID)));
+            foreach (TR1Entity drop in TR1ItemRandomizer.TihocanEndItems)
+            {
+                level.Data.Entities.Add(new()
+                {
+                    TypeID = drop.TypeID,
+                    X = pierreReplacement.X,
+                    Y = pierreReplacement.Y,
+                    Z = pierreReplacement.Z,
+                    Room = pierreReplacement.Room,
+                });
+                ItemUtilities.HideEntity(level.Data.Entities[^1]);
+            }
         }
         else
         {
-            do
-            {
-                entity = pool[_generator.Next(0, pool.Count)];
-            }
-            while (_excludedEnemies.Contains(entity));
+            // Add Pierre's pickups in a default place. Allows pacifist runs effectively.
+            level.Data.Entities.AddRange(TR1ItemRandomizer.TihocanEndItems);
         }
-
-        return entity;
     }
 
-    private RandoDifficulty GetImpliedDifficulty()
+    private void FixEnemyAnimations(TR1CombinedLevel level)
     {
-        if (_excludedEnemies.Count > 0 && Settings.RandoEnemyDifficulty == RandoDifficulty.Default)
+        // Model transport will handle these missing SFX by default, but we need to fix them in
+        // the levels where these enemies already exist.
+        if (level.Data.Models.ContainsKey(TR1Type.Pierre)
+            && (level.Is(TR1LevelNames.FOLLY) || level.Is(TR1LevelNames.COLOSSEUM) || level.Is(TR1LevelNames.CISTERN) || level.Is(TR1LevelNames.TIHOCAN)))
         {
-            // If every enemy in the pool has room restrictions for any level, we have to imply NoRestrictions difficulty mode
-            List<TR1Type> includedEnemies = Settings.ExcludableEnemies.Keys.Except(Settings.ExcludedEnemies).Select(s => (TR1Type)s).ToList();
-            foreach (TR1ScriptedLevel level in Levels)
+            TR1DataExporter.AmendPierreGunshot(level.Data);
+            TR1DataExporter.AmendPierreDeath(level.Data);
+
+            // Non one-shot-Pierre levels won't have the death sound by default, so borrow it from ToT.
+            if (!level.Data.SoundEffects.ContainsKey(TR1SFX.PierreDeath))
             {
-                IEnumerable<TR1Type> restrictedRoomEnemies = TR1EnemyUtilities.GetRestrictedEnemyRooms(level.LevelFileBaseName.ToUpper(), RandoDifficulty.Default).Keys;
-                if (includedEnemies.All(e => restrictedRoomEnemies.Contains(e) || _gameEnemyTracker.ContainsKey(e)))
-                {
-                    return RandoDifficulty.NoRestrictions;
-                }
+                TR1Level tihocan = new TR1LevelControl().Read(Path.Combine(BackupPath, TR1LevelNames.TIHOCAN));
+                level.Data.SoundEffects[TR1SFX.PierreDeath] = tihocan.SoundEffects[TR1SFX.PierreDeath];
             }
         }
-        return Settings.RandoEnemyDifficulty;
+
+        if (level.Data.Models.ContainsKey(TR1Type.Larson) && level.Is(TR1LevelNames.SANCTUARY))
+        {
+            TR1DataExporter.AmendLarsonDeath(level.Data);
+        }
+
+        if (level.Data.Models.ContainsKey(TR1Type.SkateboardKid) && level.Is(TR1LevelNames.MINES))
+        {
+            TR1DataExporter.AmendSkaterBoyDeath(level.Data);
+        }
+
+        if (level.Data.Models.ContainsKey(TR1Type.Natla) && level.Is(TR1LevelNames.PYRAMID))
+        {
+            TR1DataExporter.AmendNatlaDeath(level.Data);
+        }
     }
 
-    private void RandomizeEnemiesNatively(TR1CombinedLevel level)
+    private void CloneEnemies(TR1CombinedLevel level)
     {
-        // For the assault course, nothing will be changed for the time being
-        if (level.IsAssault)
+        if (!Settings.UseEnemyClones)
         {
             return;
         }
 
-        AdjustUnkillableEnemies(level);
-        EnemyRandomizationCollection enemies = new()
-        {
-            Available = new(),
-            Water = new()
-        };
+        List<TR1Type> enemyTypes = TR1TypeUtilities.GetFullListOfEnemies();
+        List<TR1Entity> enemies = level.Data.Entities.FindAll(e => enemyTypes.Contains(e.TypeID));
 
-        if (!Settings.UseEnemyClones || !Settings.CloneOriginalEnemies)
+        // If Adam is still in his egg, clone the egg as well. Otherwise there will be separate
+        // entities inside the egg that will have already been accounted for.
+        TR1Entity adamEgg = level.Data.Entities.Find(e => e.TypeID == TR1Type.AdamEgg);
+        if (adamEgg != null
+            && TR1EnemyUtilities.CodeBitsToAtlantean(adamEgg.CodeBits) == TR1Type.Adam
+            && level.Data.Models.ContainsKey(TR1Type.Adam))
         {
-            enemies.Available.AddRange(GetCurrentEnemyEntities(level));
-            enemies.Water.AddRange(TR1TypeUtilities.FilterWaterEnemies(enemies.Available));
+            enemies.Add(adamEgg);
         }
-
-        RandomizeEnemies(level, enemies);
-    }
-
-    private void RandomizeEnemies(TR1CombinedLevel level, EnemyRandomizationCollection enemies)
-    {
-        AmendAtlanteanModels(level, enemies);
-
-        // Clear all default enemy item drops
-        level.Script.ItemDrops.Clear();
-
-        // Get a list of current enemy entities
-        List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
-        List<TR1Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
-
-        RandoDifficulty difficulty = GetImpliedDifficulty();
-
-        // First iterate through any enemies that are restricted by room
-        Dictionary<TR1Type, List<int>> enemyRooms = TR1EnemyUtilities.GetRestrictedEnemyRooms(level.Name, difficulty);
-        if (enemyRooms != null)
-        {
-            foreach (TR1Type entity in enemyRooms.Keys)
-            {
-                if (!enemies.Available.Contains(entity))
-                {
-                    continue;
-                }
-
-                List<int> rooms = enemyRooms[entity];
-                int maxEntityCount = TR1EnemyUtilities.GetRestrictedEnemyLevelCount(entity, difficulty);
-                if (maxEntityCount == -1)
-                {
-                    // We are allowed any number, but this can't be more than the number of unique rooms,
-                    // so we will assume 1 per room as these restricted enemies are likely to be tanky.
-                    maxEntityCount = rooms.Count;
-                }
-                else
-                {
-                    maxEntityCount = Math.Min(maxEntityCount, rooms.Count);
-                }
-
-                // Pick an actual count
-                int enemyCount = _generator.Next(1, maxEntityCount + 1);
-                for (int i = 0; i < enemyCount; i++)
-                {
-                    // Find an entity in one of the rooms that the new enemy is restricted to
-                    TR1Entity targetEntity = null;
-                    do
-                    {
-                        int room = enemyRooms[entity][_generator.Next(0, enemyRooms[entity].Count)];
-                        targetEntity = enemyEntities.Find(e => e.Room == room);
-                    }
-                    while (targetEntity == null);
-
-                    // If the room has water but this enemy isn't a water enemy, we will assume that environment
-                    // modifications will handle assignment of the enemy to entities.
-                    if (!TR1TypeUtilities.IsWaterCreature(entity) && level.Data.Rooms[targetEntity.Room].ContainsWater)
-                    {
-                        continue;
-                    }
-
-                    targetEntity.TypeID = TR1TypeUtilities.TranslateAlias(entity);
-
-                    // #146 Ensure OneShot triggers are set for this enemy if needed
-                    TR1EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
-
-                    if (Settings.HideEnemiesUntilTriggered || entity == TR1Type.Adam)
-                    {
-                        targetEntity.Invisible = true;
-                    }
-
-                    // Remove the target entity so it doesn't get replaced
-                    enemyEntities.Remove(targetEntity);
-                }
-
-                // Remove this entity type from the available rando pool
-                enemies.Available.Remove(entity);
-            }
-        }
-
-        foreach (TR1Entity currentEntity in enemyEntities)
-        {
-            if (enemies.Available.Count == 0)
-            {
-                continue;
-            }
-
-            int entityIndex = level.Data.Entities.IndexOf(currentEntity);
-            TR1Type currentEntityType = currentEntity.TypeID;
-            TR1Type newEntityType = currentEntityType;
-
-            // If it's an existing enemy that has to remain in the same spot, skip it
-            if (!Settings.ReplaceRequiredEnemies && TR1EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType))
-            {
-                _resultantEnemies.Add(currentEntityType);
-                continue;
-            }
-
-            List<TR1Type> enemyPool;
-            if (difficulty == RandoDifficulty.Default && IsEnemyInOrAboveWater(currentEntity, level.Data))
-            {
-                // Make sure we replace with another water enemy
-                enemyPool = enemies.Water;
-            }
-            else
-            {
-                // Otherwise we can pick any other available enemy
-                enemyPool = enemies.Available;
-            }
-
-            // Pick a new type
-            newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
-
-            // If we are restricting count per level for this enemy and have reached that count, pick
-            // something else. This applies when we are restricting by in-level count, but not by room
-            // (e.g. Kold, SkateboardKid).
-            int maxEntityCount = TR1EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, difficulty);
-            if (maxEntityCount != -1)
-            {
-                if (GetEntityCount(level, newEntityType) >= maxEntityCount)
-                {
-                    List<TR1Type> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1TypeUtilities.TranslateAlias(e)));
-                    if (pool.Count > 0)
-                    {
-                        newEntityType = pool[_generator.Next(0, pool.Count)];
-                    }
-                }
-            }
-
-            // Rather than individual enemy limits, this accounts for enemy groups such as all Atlanteans
-            RandoDifficulty groupDifficulty = difficulty;
-            if (level.Is(TR1LevelNames.QUALOPEC) && newEntityType == TR1Type.Larson && Settings.ReplaceRequiredEnemies)
-            {
-                // Non-level ending Larson is not restricted in ToQ, otherwise we adhere to the normal rules.
-                groupDifficulty = RandoDifficulty.NoRestrictions;
-            }
-            RestrictedEnemyGroup enemyGroup = TR1EnemyUtilities.GetRestrictedEnemyGroup(level.Name, TR1TypeUtilities.TranslateAlias(newEntityType), groupDifficulty);
-            if (enemyGroup != null)
-            {
-                if (level.Data.Entities.FindAll(e => enemyGroup.Enemies.Contains(e.TypeID)).Count >= enemyGroup.MaximumCount)
-                {
-                    List<TR1Type> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1TypeUtilities.TranslateAlias(e), groupDifficulty));
-                    if (pool.Count > 0)
-                    {
-                        newEntityType = pool[_generator.Next(0, pool.Count)];
-                    }
-                }
-            }
-
-            // Tomp1 switches rats/crocs automatically if a room is flooded or drained. But we may have added a normal
-            // land enemy to a room that eventually gets flooded. So in default difficulty, ensure the entity is a
-            // hybrid, otherwise allow land creatures underwater (which works, but is obviously more difficult).
-            if (difficulty == RandoDifficulty.Default)
-            {
-                TR1Room currentRoom = level.Data.Rooms[currentEntity.Room];
-                if (currentRoom.AlternateRoom != -1 && level.Data.Rooms[currentRoom.AlternateRoom].ContainsWater && TR1TypeUtilities.IsWaterLandCreatureEquivalent(currentEntityType) && !TR1TypeUtilities.IsWaterLandCreatureEquivalent(newEntityType))
-                {
-                    Dictionary<TR1Type, TR1Type> hybrids = TR1TypeUtilities.GetWaterEnemyLandCreatures();
-                    List<TR1Type> pool = enemies.Available.FindAll(e => hybrids.ContainsKey(e) || hybrids.ContainsValue(e));
-                    if (pool.Count > 0)
-                    {
-                        newEntityType = TR1TypeUtilities.GetWaterEnemyLandCreature(pool[_generator.Next(0, pool.Count)]);
-                    }
-                }
-            }
-
-            if (Settings.HideEnemiesUntilTriggered)
-            {
-                // Default to hiding the enemy - checks below for eggs, ex-eggs, Adam and centaur
-                // statues will override as necessary.
-                currentEntity.Invisible = true;
-            }
-
-            if (newEntityType == TR1Type.AtlanteanEgg)
-            {
-                List<TR1Type> allEggTypes = TR1TypeUtilities.GetAtlanteanEggEnemies();
-                List<TR1Type> spawnTypes = enemies.Available.FindAll(allEggTypes.Contains);
-                TR1Type spawnType = TR1TypeUtilities.TranslateAlias(spawnTypes[_generator.Next(0, spawnTypes.Count)]);
-
-                Location eggLocation = _eggLocations.ContainsKey(level.Name)
-                    ? _eggLocations[level.Name].Find(l => l.EntityIndex == entityIndex)
-                    : null;
-
-                if (eggLocation != null || currentEntityType == newEntityType)
-                {
-                    if (Settings.AllowEmptyEggs)
-                    {
-                        // Add 1/4 chance of an empty egg, provided at least one spawn model is not available
-                        List<TR1Type> allModels = level.Data.Models.Keys.ToList();
-
-                        // We can add Adam to make it possible for a dud spawn - he's not normally available for eggs because
-                        // of his own restrictions.
-                        if (!allModels.Contains(TR1Type.Adam))
-                        {
-                            allEggTypes.Add(TR1Type.Adam);
-                        }
-
-                        if (!allEggTypes.All(e => allModels.Contains(TR1TypeUtilities.TranslateAlias(e))) && _generator.NextDouble() < 0.25)
-                        {
-                            do
-                            {
-                                spawnType = TR1TypeUtilities.TranslateAlias(allEggTypes[_generator.Next(0, allEggTypes.Count)]);
-                            }
-                            while (allModels.Contains(spawnType));
-                        }
-                    }
-
-                    currentEntity.CodeBits = TR1EnemyUtilities.AtlanteanToCodeBits(spawnType);
-                    if (eggLocation != null)
-                    {
-                        currentEntity.X = eggLocation.X;
-                        currentEntity.Y = eggLocation.Y;
-                        currentEntity.Z = eggLocation.Z;
-                        currentEntity.Angle = eggLocation.Angle;
-                        currentEntity.Room = eggLocation.Room;
-                    }
-
-                    // Eggs will always be visible
-                    currentEntity.Invisible = false;
-                }
-                else
-                {
-                    // We don't want an egg for this particular enemy, so just make it spawn as the actual type
-                    newEntityType = spawnType;
-                }
-            }
-            else if (currentEntityType == TR1Type.AtlanteanEgg)
-            {
-                // Hide what used to be eggs and reset the CodeBits otherwise this can interfere with trigger masks.
-                currentEntity.Invisible = true;
-                currentEntity.CodeBits = 0;
-            }
-
-            if (newEntityType == TR1Type.CentaurStatue)
-            {
-                AdjustCentaurStatue(currentEntity, level.Data);
-            }
-            else if (newEntityType == TR1Type.Adam)
-            {
-                // Adam should always be invisible as he is inactive high above the ground
-                // so this can interfere with Lara's route - see Cistern item 36
-                currentEntity.Invisible = true;
-            }
-
-            // Make sure to convert back to the actual type
-            currentEntity.TypeID = TR1TypeUtilities.TranslateAlias(newEntityType);
-
-            // #146 Ensure OneShot triggers are set for this enemy if needed
-            TR1EnemyUtilities.SetEntityTriggers(level.Data, currentEntity);
-
-            if (currentEntity.TypeID == TR1Type.Pierre
-                && _pierreLocations.ContainsKey(level.Name)
-                && _pierreLocations[level.Name].Find(l => l.EntityIndex == entityIndex) is Location location)
-            {
-                // Pierre is the only enemy who cannot be underwater, so location shifts have been predefined
-                // for specific entities.
-                currentEntity.SetLocation(location);
-            }
-
-            // Track every enemy type across the game
-            _resultantEnemies.Add(newEntityType);
-        }
-
-        if (level.Is(TR1LevelNames.COLOSSEUM) && Settings.FixOGBugs)
-        {
-            FixColosseumBats(level);
-        }
-
-        if (level.Is(TR1LevelNames.TIHOCAN) && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
-        {
-            TR1Entity pierreReplacement = level.Data.Entities[TR1ItemRandomizer.TihocanPierreIndex];
-            if (Settings.AllowEnemyKeyDrops
-                && TR1EnemyUtilities.CanDropItems(pierreReplacement, level))
-            {
-                // Whichever enemy has taken Pierre's place will drop the items. Move the pickups to the enemy for trview lookup.
-                level.Script.AddItemDrops(TR1ItemRandomizer.TihocanPierreIndex, TR1ItemRandomizer.TihocanEndItems
-                    .Select(e => ItemUtilities.ConvertToScriptItem(e.TypeID)));
-                foreach (TR1Entity drop in TR1ItemRandomizer.TihocanEndItems)
-                {
-                    level.Data.Entities.Add(new()
-                    {
-                        TypeID = drop.TypeID,
-                        X = pierreReplacement.X,
-                        Y = pierreReplacement.Y,
-                        Z = pierreReplacement.Z,
-                        Room = pierreReplacement.Room,
-                    });
-                    ItemUtilities.HideEntity(level.Data.Entities[^1]);
-                }
-            }
-            else
-            {
-                // Add Pierre's pickups in a default place. Allows pacifist runs effectively.
-                level.Data.Entities.AddRange(TR1ItemRandomizer.TihocanEndItems);
-            }
-        }
-
-        // Fix missing OG animation SFX
-        FixEnemyAnimations(level);
-
-        if (Settings.UseEnemyClones)
-        {
-            CloneEnemies(level);
-        }
-
-        // Add extra ammo based on this level's difficulty
-        if (Settings.CrossLevelEnemies && level.Script.RemovesWeapons)
-        {
-            AddUnarmedLevelAmmo(level);
-        }
-
-        if (Settings.SwapEnemyAppearance)
-        {
-            RandomizeMeshes(level, enemies.Available);
-        }
-    }
-
-    private static int GetEntityCount(TR1CombinedLevel level, TR1Type entityType)
-    {
-        int count = 0;
-        TR1Type translatedType = TR1TypeUtilities.TranslateAlias(entityType);
-        foreach (TR1Entity entity in level.Data.Entities)
-        {
-            TR1Type type = entity.TypeID;
-            if (type == translatedType)
-            {
-                count++;
-            }
-            else if (type == TR1Type.AdamEgg || type == TR1Type.AtlanteanEgg)
-            {
-                TR1Type eggType = TR1EnemyUtilities.CodeBitsToAtlantean(entity.CodeBits);
-                if (eggType == translatedType && level.Data.Models.ContainsKey(eggType))
-                {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-
-    private static bool IsEnemyInOrAboveWater(TR1Entity entity, TR1Level level)
-    {
-        if (level.Rooms[entity.Room].ContainsWater)
-        {
-            return true;
-        }
-
-        // Example where we have to search is Midas room 21
-        TRRoomSector sector = level.GetRoomSector(entity.X, entity.Y - TRConsts.Step1, entity.Z, entity.Room);
-        while (sector.RoomBelow != TRConsts.NoRoom)
-        {
-            if (level.Rooms[sector.RoomBelow].ContainsWater)
-            {
-                return true;
-            }
-            sector = level.GetRoomSector(entity.X, (sector.Floor + 1) * TRConsts.Step1, entity.Z, sector.RoomBelow);
-        }
-        return false;
-    }
-
-    private static void AmendToQLarson(TR1CombinedLevel level)
-    {
-        // Convert the Larson model into the Great Pyramid scion to allow ending the level. Larson will
-        // become a raptor to allow for normal randomization. Environment mods will handle the specifics here.
-        if (!level.Data.Models.ChangeKey(TR1Type.Larson, TR1Type.ScionPiece3_S_P))
-        {
-            return;
-        }
-
-        level.Data.Entities
-            .Where(e => e.TypeID == TR1Type.Larson)
-            .ToList()
-            .ForEach(e => e.TypeID = TR1Type.Raptor);
-
-        // Make the scion invisible.
-        MeshEditor editor = new();
-        foreach (TRMesh mesh in level.Data.Models[TR1Type.ScionPiece3_S_P].Meshes)
-        {
-            editor.Mesh = mesh;
-            editor.ClearAllPolygons();
-        }
-    }
-
-    private void AmendPyramidTorso(TR1CombinedLevel level)
-    {
-        // We want to keep Adam's egg, but simulate something else hatching.
-        // In hard mode, two enemies take his place.
-        level.Data.Models.Remove(TR1Type.Adam);
         
-        TR1Entity egg = level.Data.Entities.Find(e => e.TypeID == TR1Type.AdamEgg);
-        TR1Entity lara = level.Data.Entities.Find(e => e.TypeID == TR1Type.Lara);
+        uint cloneCount = Math.Max(2, Math.Min(MaxClones, Settings.EnemyMultiplier)) - 1;
+        short angleDiff = (short)Math.Ceiling(ushort.MaxValue / (cloneCount + 1d));
 
-        EMAppendTriggerActionFunction trigFunc = new()
+        foreach (TR1Entity enemy in enemies)
         {
-            Location = new()
+            List<FDTriggerEntry> triggers = level.Data.FloorData.GetEntityTriggers(level.Data.Entities.IndexOf(enemy));
+            if (Settings.UseKillableClonePierres && enemy.TypeID == TR1Type.Pierre)
             {
-                X = lara.X,
-                Y = lara.Y,
-                Z = lara.Z,
-                Room = lara.Room
-            },
-            Actions = new()
-        };
-
-        int count = Settings.RandoEnemyDifficulty == RandoDifficulty.Default ? 1 : 2;
-        for (int i = 0; i < count; i++)
-        {
-            trigFunc.Actions.Add(new()
-            {
-                Parameter = (short)level.Data.Entities.Count
-            });
-
-            level.Data.Entities.Add(new()
-            {
-                TypeID = TR1Type.Adam,
-                X = egg.X,
-                Y = egg.Y - i * TRConsts.Step4,
-                Z = egg.Z - TRConsts.Step4,
-                Room = egg.Room,
-                Angle = egg.Angle,
-                Intensity = egg.Intensity,
-                Invisible = true
-            });
-        }
-
-        trigFunc.ApplyToLevel(level.Data);
-    }
-
-    private void AmendAtlanteanModels(TR1CombinedLevel level, EnemyRandomizationCollection enemies)
-    {
-        // If non-shooting grounded Atlanteans are present, we can just duplicate the model to make shooting Atlanteans
-        if (enemies.Available.Any(TR1TypeUtilities.GetFamily(TR1Type.ShootingAtlantean_N).Contains))
-        {
-            TRModel shooter = level.Data.Models[TR1Type.ShootingAtlantean_N];
-            TRModel nonShooter = level.Data.Models[TR1Type.NonShootingAtlantean_N];
-            if (shooter == null && nonShooter != null)
-            {
-                shooter = nonShooter.Clone();
-                level.Data.Models[TR1Type.ShootingAtlantean_N] = shooter;
-                enemies.Available.Add(TR1Type.ShootingAtlantean_N);
+                // Ensure OneShot, otherwise only ever one runaway Pierre
+                triggers.ForEach(t => t.OneShot = true);
             }
-        }
 
-        // If we're using flying mummies, add a chance that they'll have proper wings
-        if (enemies.Available.Contains(TR1Type.BandagedFlyer) && _generator.NextDouble() < 0.5)
-        {
-            List<TRMesh> meshes = level.Data.Models[TR1Type.FlyingAtlantean].Meshes;
-            ushort bandageTexture = meshes[1].TexturedRectangles[3].Texture;
-            for (int i = 15; i < 21; i++)
+            for (int i = 0; i < cloneCount; i++)
             {
-                TRMesh mesh = meshes[i];
-                foreach (TRMeshFace face in mesh.TexturedFaces)
+                foreach (FDTriggerEntry trigger in triggers)
                 {
-                    face.Texture = bandageTexture;
+                    trigger.Actions.Add(new()
+                    {
+                        Parameter = (short)level.Data.Entities.Count
+                    });
+                }
+
+                TR1Entity clone = (TR1Entity)enemy.Clone();
+                level.Data.Entities.Add(clone);
+
+                if (enemy.TypeID != TR1Type.AtlanteanEgg
+                    && enemy.TypeID != TR1Type.AdamEgg)
+                {
+                    clone.Angle -= (short)((i + 1) * angleDiff);
                 }
             }
         }
-    }
-
-    private static void AdjustCentaurStatue(TR1Entity entity, TR1Level level)
-    {
-        // If they're floating, they tend not to trigger as Lara's not within range
-        TR1LocationGenerator locationGenerator = new();
-
-        int y = entity.Y;
-        short room = entity.Room;
-        TRRoomSector sector = level.GetRoomSector(entity.X, y, entity.Z, room);
-        while (sector.RoomBelow != TRConsts.NoRoom)
-        {
-            y = (sector.Floor + 1) * TRConsts.Step1;
-            room = sector.RoomBelow;
-            sector = level.GetRoomSector(entity.X, y, entity.Z, room);
-        }
-
-        entity.Y = sector.Floor * TRConsts.Step1;
-        entity.Room = room;
-
-        // Change this GetHeight
-        if (sector.FDIndex != 0)
-        {
-            FDEntry entry = level.FloorData[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == FDSlantType.Floor);
-            if (entry is FDSlantEntry slant)
-            {
-                Vector4? bestMidpoint = locationGenerator.GetBestSlantMidpoint(slant);
-                if (bestMidpoint.HasValue)
-                {
-                    entity.Y += (int)bestMidpoint.Value.Y;
-                }
-            }
-        }
-
-        entity.Invisible = false;
     }
 
     private void AddUnarmedLevelAmmo(TR1CombinedLevel level)
     {
-        if (!Settings.GiveUnarmedItems)
+        if (!level.Script.RemovesWeapons)
         {
             return;
         }
 
-        // Find out which gun we have for this level
-        List<TR1Type> weaponTypes = TR1TypeUtilities.GetWeaponPickups();
-        List<TR1Entity> levelWeapons = level.Data.Entities.FindAll(e => weaponTypes.Contains(e.TypeID));
-        TR1Entity weaponEntity = null;
-        foreach (TR1Entity weapon in levelWeapons)
+        _allocator.AddUnarmedLevelAmmo(level.Name, level.Data, (loc, type) =>
         {
-            int match = _pistolLocations[level.Name].FindIndex
-            (
-                location =>
-                    location.X == weapon.X &&
-                    location.Y == weapon.Y &&
-                    location.Z == weapon.Z &&
-                    location.Room == weapon.Room
-            );
-            if (match != -1)
-            {
-                weaponEntity = weapon;
-                break;
-            }
-        }
-
-        if (weaponEntity == null)
-        {
-            return;
-        }
-
-        List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
-        List<TR1Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
-        // #409 Eggs are excluded as they are not part of the cross-level enemy pool, so create copies of any
-        // of these using their actual types so to ensure they are part of the difficulty calculation.
-        for (int i = 0; i < level.Data.Entities.Count; i++)
-        {
-            TR1Entity entity = level.Data.Entities[i];
-            if ((entity.TypeID == TR1Type.AtlanteanEgg || entity.TypeID == TR1Type.AdamEgg)
-                && level.Data.FloorData.GetEntityTriggers(i).Count > 0)
-            {
-                TR1Entity resultantEnemy = new()
-                {
-                    TypeID = TR1EnemyUtilities.CodeBitsToAtlantean(entity.CodeBits)
-                };
-
-                // Only include it if the model is present i.e. it's not an empty egg.
-                if (level.Data.Models.ContainsKey(resultantEnemy.TypeID))
-                {
-                    levelEnemies.Add(resultantEnemy);
-                }
-            }
-        }
-
-        EnemyDifficulty difficulty = TR1EnemyUtilities.GetEnemyDifficulty(levelEnemies);
-
-        if (difficulty > EnemyDifficulty.Easy)
-        {
-            while (weaponEntity.TypeID == TR1Type.Pistols_S_P)
-            {
-                weaponEntity.TypeID = weaponTypes[_generator.Next(0, weaponTypes.Count)];
-            }
-        }
-
-        TR1Type weaponType = weaponEntity.TypeID;
-        uint ammoToGive = TR1EnemyUtilities.GetStartingAmmo(weaponType);
-        if (ammoToGive > 0)
-        {
-            ammoToGive *= (uint)difficulty;
-            TR1Type ammoType = TR1TypeUtilities.GetWeaponAmmo(weaponType);
-            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(ammoType), ammoToGive);
-
-            uint smallMediToGive = 0;
-            uint largeMediToGive = 0;
-
-            if (difficulty == EnemyDifficulty.Medium || difficulty == EnemyDifficulty.Hard)
-            {
-                smallMediToGive++;
-                largeMediToGive++;
-            }
-            if (difficulty > EnemyDifficulty.Medium)
-            {
-                largeMediToGive++;
-            }
-            if (difficulty == EnemyDifficulty.VeryHard)
-            {
-                largeMediToGive++;
-            }
-
-            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR1Type.SmallMed_S_P), smallMediToGive);
-            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR1Type.LargeMed_S_P), largeMediToGive);
-        }
-
-        // Add the pistols as a pickup if the level is hard and there aren't any other pistols around
-        if (difficulty > EnemyDifficulty.Medium
-            && levelWeapons.Find(e => e.TypeID == TR1Type.Pistols_S_P) == null
-            && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
-        {
-            TR1Entity pistols = ItemFactory.CreateItem(level.Name, level.Data.Entities);
-            pistols.TypeID = TR1Type.Pistols_S_P;
-            pistols.X = weaponEntity.X;
-            pistols.Y = weaponEntity.Y;
-            pistols.Z = weaponEntity.Z;
-            pistols.Room = weaponEntity.Room;
-        }
+            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(type));
+        });
     }
 
     private void RandomizeMeshes(TR1CombinedLevel level, List<TR1Type> availableEnemies)
     {
+        if (!Settings.SwapEnemyAppearance)
+        {
+            return;
+        }
+
         if (level.Is(TR1LevelNames.ATLANTIS))
         {
             // Atlantis scion swap - Model => Mesh index
@@ -1179,7 +379,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             else
             {
                 TR1Type laraSwapType = _generator.NextDouble() < 0.5 ? TR1Type.LaraUziAnimation_H : TR1Type.Lara;
-                replacement = level.Data.Models[laraSwapType].Meshes[14];                
+                replacement = level.Data.Models[laraSwapType].Meshes[14];
             }
 
             adam[3] = replacement.Clone();
@@ -1227,114 +427,16 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
     }
 
-    private void FixEnemyAnimations(TR1CombinedLevel level)
-    {
-        // Model transport will handle these missing SFX by default, but we need to fix them in
-        // the levels where these enemies already exist.
-        if (level.Data.Models.ContainsKey(TR1Type.Pierre)
-            && (level.Is(TR1LevelNames.FOLLY) || level.Is(TR1LevelNames.COLOSSEUM) || level.Is(TR1LevelNames.CISTERN) || level.Is(TR1LevelNames.TIHOCAN)))
-        {
-            TR1DataExporter.AmendPierreGunshot(level.Data);
-            TR1DataExporter.AmendPierreDeath(level.Data);
-
-            // Non one-shot-Pierre levels won't have the death sound by default, so borrow it from ToT.
-            if (!level.Data.SoundEffects.ContainsKey(TR1SFX.PierreDeath))
-            {
-                TR1Level tihocan = new TR1LevelControl().Read(Path.Combine(BackupPath, TR1LevelNames.TIHOCAN));
-                level.Data.SoundEffects[TR1SFX.PierreDeath] = tihocan.SoundEffects[TR1SFX.PierreDeath];
-            }
-        }
-
-        if (level.Data.Models.ContainsKey(TR1Type.Larson) && level.Is(TR1LevelNames.SANCTUARY))
-        {
-            TR1DataExporter.AmendLarsonDeath(level.Data);
-        }
-
-        if (level.Data.Models.ContainsKey(TR1Type.SkateboardKid) && level.Is(TR1LevelNames.MINES))
-        {
-            TR1DataExporter.AmendSkaterBoyDeath(level.Data);
-        }
-
-        if (level.Data.Models.ContainsKey(TR1Type.Natla) && level.Is(TR1LevelNames.PYRAMID))
-        {
-            TR1DataExporter.AmendNatlaDeath(level.Data);
-        }
-    }
-
-    private static void FixColosseumBats(TR1CombinedLevel level)
-    {
-        // Fix the bat trigger in Colosseum. Done outside of environment mods to allow for cloning.
-        // Item 74 is duplicated in each trigger.
-        foreach (FDTriggerEntry trigger in level.Data.FloorData.GetEntityTriggers(74))
-        {
-            List<FDActionItem> actions = trigger.Actions
-                .FindAll(a => a.Action == FDTrigAction.Object && a.Parameter == 74);
-            if (actions.Count == 2)
-            {
-                actions[0].Parameter = 73;
-            }
-        }
-    }
-
-    private void CloneEnemies(TR1CombinedLevel level)
-    {
-        List<TR1Type> enemyTypes = TR1TypeUtilities.GetFullListOfEnemies();
-        List<TR1Entity> enemies = level.Data.Entities.FindAll(e => enemyTypes.Contains(e.TypeID));
-
-        // If Adam is still in his egg, clone the egg as well. Otherwise there will be separate
-        // entities inside the egg that will have already been accounted for.
-        TR1Entity adamEgg = level.Data.Entities.Find(e => e.TypeID == TR1Type.AdamEgg);
-        if (adamEgg != null
-            && TR1EnemyUtilities.CodeBitsToAtlantean(adamEgg.CodeBits) == TR1Type.Adam
-            && level.Data.Models.ContainsKey(TR1Type.Adam))
-        {
-            enemies.Add(adamEgg);
-        }
-        
-        uint cloneCount = Math.Max(2, Math.Min(MaxClones, Settings.EnemyMultiplier)) - 1;
-        short angleDiff = (short)Math.Ceiling(ushort.MaxValue / (cloneCount + 1d));
-
-        foreach (TR1Entity enemy in enemies)
-        {
-            List<FDTriggerEntry> triggers = level.Data.FloorData.GetEntityTriggers(level.Data.Entities.IndexOf(enemy));
-            if (Settings.UseKillableClonePierres && enemy.TypeID == TR1Type.Pierre)
-            {
-                // Ensure OneShot, otherwise only ever one runaway Pierre
-                triggers.ForEach(t => t.OneShot = true);
-            }
-
-            for (int i = 0; i < cloneCount; i++)
-            {
-                foreach (FDTriggerEntry trigger in triggers)
-                {
-                    trigger.Actions.Add(new()
-                    {
-                        Parameter = (short)level.Data.Entities.Count
-                    });
-                }
-
-                TR1Entity clone = (TR1Entity)enemy.Clone();
-                level.Data.Entities.Add(clone);
-
-                if (enemy.TypeID != TR1Type.AtlanteanEgg
-                    && enemy.TypeID != TR1Type.AdamEgg)
-                {
-                    clone.Angle -= (short)((i + 1) * angleDiff);
-                }
-            }
-        }
-    }
-
     internal class EnemyProcessor : AbstractProcessorThread<TR1EnemyRandomizer>
     {
-        private readonly Dictionary<TR1CombinedLevel, EnemyTransportCollection> _enemyMapping;
+        private readonly Dictionary<TR1CombinedLevel, EnemyTransportCollection<TR1Type>> _enemyMapping;
 
         internal override int LevelCount => _enemyMapping.Count;
 
         internal EnemyProcessor(TR1EnemyRandomizer outer)
             : base(outer)
         {
-            _enemyMapping = new Dictionary<TR1CombinedLevel, EnemyTransportCollection>();
+            _enemyMapping = new();
         }
 
         internal void AddLevel(TR1CombinedLevel level)
@@ -1349,7 +451,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             List<TR1CombinedLevel> levels = new(_enemyMapping.Keys);
             foreach (TR1CombinedLevel level in levels)
             {
-                _enemyMapping[level] = _outer.SelectCrossLevelEnemies(level);
+                _enemyMapping[level] = _outer._allocator.SelectCrossLevelEnemies(level.Name, level.Data);
             }
         }
 
@@ -1360,7 +462,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             {
                 if (!level.IsAssault)
                 {
-                    EnemyTransportCollection enemies = _enemyMapping[level];
+                    EnemyTransportCollection<TR1Type> enemies = _enemyMapping[level];
                     List<TR1Type> importModels = new(enemies.TypesToImport);
                     if (level.Is(TR1LevelNames.KHAMOON) && (importModels.Contains(TR1Type.BandagedAtlantean) || importModels.Contains(TR1Type.BandagedFlyer)))
                     {
@@ -1379,7 +481,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport)
                     };
 
-                    string remapPath = @"TR1\Textures\Deduplication\" + level.Name + "-TextureRemap.json";
+                    string remapPath = $@"TR1\Textures\Deduplication\{level.Name}-TextureRemap.json";
                     if (_outer.ResourceExists(remapPath))
                     {
                         importer.TextureRemapPath = _outer.GetResourcePath(remapPath);
@@ -1403,7 +505,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             {
                 if (!level.IsAssault)
                 {
-                    EnemyRandomizationCollection enemies = new()
+                    EnemyRandomizationCollection<TR1Type> enemies = new()
                     {
                         Available = _enemyMapping[level].TypesToImport,
                         Water = TR1TypeUtilities.FilterWaterEnemies(_enemyMapping[level].TypesToImport)
@@ -1419,17 +521,5 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 }
             }
         }
-    }
-
-    internal class EnemyTransportCollection
-    {
-        internal List<TR1Type> TypesToImport { get; set; }
-        internal List<TR1Type> TypesToRemove { get; set; }
-    }
-
-    internal class EnemyRandomizationCollection
-    {
-        internal List<TR1Type> Available { get; set; }
-        internal List<TR1Type> Water { get; set; }
     }
 }

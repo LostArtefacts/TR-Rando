@@ -13,6 +13,20 @@ public abstract class BaseTRRDataCache<TKey, TAlias>
 
     public string PDPFolder { get; set; }
 
+    public void Merge(ImportResult<TKey> importResult, TRDictionary<TKey, TRModel> pdpData, Dictionary<TKey, TAlias> mapData)
+    {
+        foreach (TKey type in importResult.ImportedTypes)
+        {
+            SetData(pdpData, mapData, type, TranslateAlias(type));
+        }
+
+        foreach (TKey type in importResult.RemovedTypes)
+        {
+            pdpData.Remove(type);
+            mapData.Remove(type);
+        }
+    }
+
     public void SetData(TRDictionary<TKey, TRModel> pdpData, Dictionary<TKey, TAlias> mapData, TKey sourceType, TKey destinationType = default)
     {
         if (EqualityComparer<TKey>.Default.Equals(destinationType, default))
@@ -37,6 +51,10 @@ public abstract class BaseTRRDataCache<TKey, TAlias>
             if (models.ContainsKey(translatedKey))
             {
                 _pdpCache[sourceType] = models[translatedKey];
+            }
+            else if (models.ContainsKey(destinationType))
+            {
+                _pdpCache[sourceType] = models[destinationType];
             }
             else
             {
@@ -63,5 +81,6 @@ public abstract class BaseTRRDataCache<TKey, TAlias>
     protected abstract TRPDPControlBase<TKey> GetPDPControl();
     public abstract string GetSourceLevel(TKey key);
     public abstract TKey TranslateKey(TKey key);
+    public abstract TKey TranslateAlias(TKey alias);
     public abstract TAlias GetAlias(TKey key);
 }

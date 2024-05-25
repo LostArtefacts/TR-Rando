@@ -1,4 +1,5 @@
-﻿using TRGE.Core;
+﻿using TRDataControl;
+using TRGE.Core;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Randomizers;
@@ -16,6 +17,8 @@ public class TR2RemasteredEditor : TR2ClassicEditor
         Settings.AllowReturnPathLocations = false;
         Settings.AddReturnPaths = false;
         Settings.FixOGBugs = false;
+        Settings.ReplaceRequiredEnemies = false;
+        Settings.SwapEnemyAppearance = false;
     }
 
     protected override int GetSaveTarget(int numLevels)
@@ -39,6 +42,11 @@ public class TR2RemasteredEditor : TR2ClassicEditor
         if (Settings.RandomizeStartPosition)
         {
             target += numLevels;
+        }
+
+        if (Settings.RandomizeEnemies)
+        {
+            target += Settings.CrossLevelEnemies ? numLevels * 3 : numLevels;
         }
 
         if (Settings.RandomizeAudio)
@@ -65,6 +73,11 @@ public class TR2RemasteredEditor : TR2ClassicEditor
 
         string backupDirectory = _io.BackupDirectory.FullName;
         string wipDirectory = _io.WIPOutputDirectory.FullName;
+
+        TR2RDataCache dataCache = new()
+        {
+            PDPFolder = backupDirectory,
+        };
 
         ItemFactory<TR2Entity> itemFactory = new()
         {
@@ -110,6 +123,22 @@ public class TR2RemasteredEditor : TR2ClassicEditor
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing standard items");
             itemRandomizer.Randomize(Settings.ItemSeed);
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeEnemies)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
+            new TR2REnemyRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings,
+                ItemFactory = itemFactory,
+                DataCache = dataCache
+            }.Randomize(Settings.EnemySeed);
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeStartPosition)
