@@ -25,7 +25,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
 
             _allocator.RandomizeMusicTriggers(_levelInstance.Data);
             RandomizeSoundEffects(_levelInstance);
-            _allocator.RandomizeWibble(_levelInstance.Data);
+            _allocator.RandomizePitch(_levelInstance.Data.SoundEffects.Values);
 
             SaveLevelInstance();
             if (!TriggerProgress())
@@ -37,8 +37,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
 
     private void RandomizeSoundEffects(TR1RCombinedLevel level)
     {
-        List<TRSFXGeneralCategory> categories = _allocator.GetCategories();
-        if (categories.Count == 0)
+        if (_allocator.Categories.Count == 0)
         {
             return;
         }
@@ -79,7 +78,6 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
     private TR1SFXDefinition SelectSFXReplacement(TR1RCombinedLevel level, TR1SFX currentSFX)
     {
         List<TR1SFXDefinition> soundEffects = _allocator.GetDefinitions();
-        List<TRSFXGeneralCategory> categories = _allocator.GetCategories();
 
         if (_allocator.IsUncontrolledLevel(level.Name))
         {
@@ -88,7 +86,7 @@ public class TR1RAudioRandomizer : BaseTR1RRandomizer
 
         TR1SFXDefinition definition = soundEffects.Find(sfx => sfx.InternalIndex == currentSFX);
         if (definition == null
-            || definition.Creature == TRSFXCreatureCategory.Lara || !categories.Contains(definition.PrimaryCategory))
+            || definition.Creature == TRSFXCreatureCategory.Lara || !_allocator.Categories.Contains(definition.PrimaryCategory))
         {
             return null;
         }

@@ -3,7 +3,6 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRRandomizerCore.Levels;
 using TRRandomizerCore.SFX;
 
 namespace TRRandomizerCore.Randomizers;
@@ -14,7 +13,7 @@ public class TR1AudioAllocator : AudioRandomizer
 
     private List<TR1SFXDefinition> _soundEffects;
     private TR1SFXDefinition _psUziDefinition;
-    private List<TRSFXGeneralCategory> _sfxCategories, _persistentCategories;
+    private List<TRSFXGeneralCategory> _persistentCategories;
 
     public TR1AudioAllocator(IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> tracks)
         : base(tracks) { }
@@ -22,21 +21,17 @@ public class TR1AudioAllocator : AudioRandomizer
     public List<TR1SFXDefinition> GetDefinitions()
         => _soundEffects;
 
-    public List<TRSFXGeneralCategory> GetCategories()
-        => _sfxCategories;
-
     public bool IsPersistent(TRSFXGeneralCategory category)
         => _persistentCategories.Contains(category);
 
     public TR1SFXDefinition GetPSUziDefinition()
         => _psUziDefinition;
 
-    public void Initialise(IEnumerable<string> levelNames, string backupPath)
+    protected override string GetAssaultName()
+        => TR1LevelNames.ASSAULT;
+
+    protected override void LoadData(string backupPath)
     {
-        ChooseUncontrolledLevels(new(levelNames), TR1LevelNames.ASSAULT);
-
-        _sfxCategories = GetSFXCategories(Settings);
-
         // SFX in these categories can potentially remain as they are
         _persistentCategories = new()
         {
@@ -75,74 +70,10 @@ public class TR1AudioAllocator : AudioRandomizer
 
     public void RandomizeMusicTriggers(TR1Level level)
     {
-        if (Settings.ChangeTriggerTracks)
+        RandomizeFloorTracks(level.Rooms, level.FloorData);
+        if (!Settings.RandomizeSecrets)
         {
-            RandomizeFloorTracks(level);
-        }
-
-        if (Settings.SeparateSecretTracks && !Settings.RandomizeSecrets)
-        {
-            RandomizeSecretTracks(level);
-        }
-    }
-
-    public void RandomizeFloorTracks(TR1Level level)
-    {
-        ResetFloorMap();
-        foreach (TR1Room room in level.Rooms.Where(r => !r.Flags.HasFlag(TRRoomFlag.Unused2)))
-        {
-            RandomizeFloorTracks(room, level.FloorData);
-        }
-    }
-
-    private void RandomizeSecretTracks(TR1Level level)
-    {
-        int numSecrets = level.FloorData.GetActionItems(FDTrigAction.SecretFound)
-            .Select(a => a.Parameter)
-            .Distinct().Count();
-        if (numSecrets == 0)
-        {
-            return;
-        }
-
-        List<TRAudioTrack> secretTracks = GetTracks(TRAudioCategory.Secret);
-
-        for (int i = 0; i < numSecrets; i++)
-        {
-            TRAudioTrack secretTrack = secretTracks[Generator.Next(0, secretTracks.Count)];
-            if (secretTrack.ID == _defaultSecretTrack)
-            {
-                continue;
-            }
-
-            FDActionItem musicAction = new()
-            {
-                Action = FDTrigAction.PlaySoundtrack,
-                Parameter = (short)secretTrack.ID
-            };
-
-            List<FDTriggerEntry> triggers = level.FloorData.GetSecretTriggers(i);
-            foreach (FDTriggerEntry trigger in triggers)
-            {
-                FDActionItem currentMusicAction = trigger.Actions.Find(a => a.Action == FDTrigAction.PlaySoundtrack);
-                if (currentMusicAction == null)
-                {
-                    trigger.Actions.Add(musicAction);
-                }
-            }
-        }
-    }
-
-    public void RandomizeWibble(TR1Level level)
-    {
-        if (Settings.RandomizeWibble)
-        {
-            // The engine does the actual randomization, we just tell it that every
-            // sound effect should be included.
-            foreach (var (_, effect) in level.SoundEffects)
-            {
-                effect.RandomizePitch = true;
-            }
+            RandomizeSecretTracks(level.FloorData, _defaultSecretTrack);
         }
     }
 }

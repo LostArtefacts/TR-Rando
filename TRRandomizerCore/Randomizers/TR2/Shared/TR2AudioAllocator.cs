@@ -12,7 +12,6 @@ public class TR2AudioAllocator : AudioRandomizer
     private readonly int _numSamples;
 
     private List<TR2SFXDefinition> _soundEffects;
-    private List<TRSFXGeneralCategory> _sfxCategories;
 
     public TR2AudioAllocator(IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> tracks, int numSamples)
         : base(tracks)
@@ -20,54 +19,40 @@ public class TR2AudioAllocator : AudioRandomizer
         _numSamples = numSamples;
     }
 
-    public void Initialise(IEnumerable<string> levelNames, string backupPath)
+    protected override string GetAssaultName()
+        => TR2LevelNames.ASSAULT;
+
+    protected override void LoadData(string backupPath)
     {
-        ChooseUncontrolledLevels(new(levelNames), TR2LevelNames.ASSAULT);
+        _soundEffects = JsonConvert.DeserializeObject<List<TR2SFXDefinition>>(File.ReadAllText(@"Resources\TR2\Audio\sfx.json"));
 
-        _sfxCategories = GetSFXCategories(Settings);
-        if (_sfxCategories.Count > 0)
+        Dictionary<string, TR2Level> levels = new();
+        TR2LevelControl reader = new();
+        foreach (TR2SFXDefinition definition in _soundEffects)
         {
-            _soundEffects = JsonConvert.DeserializeObject<List<TR2SFXDefinition>>(File.ReadAllText(@"Resources\TR2\Audio\sfx.json"));
-
-            Dictionary<string, TR2Level> levels = new();
-            TR2LevelControl reader = new();
-            foreach (TR2SFXDefinition definition in _soundEffects)
+            if (!levels.ContainsKey(definition.SourceLevel))
             {
-                if (!levels.ContainsKey(definition.SourceLevel))
-                {
-                    levels[definition.SourceLevel] = reader.Read(Path.Combine(backupPath, definition.SourceLevel));
-                }
-
-                TR2Level level = levels[definition.SourceLevel];
-                definition.SoundEffect = level.SoundEffects[definition.InternalIndex];
+                levels[definition.SourceLevel] = reader.Read(Path.Combine(backupPath, definition.SourceLevel));
             }
+
+            TR2Level level = levels[definition.SourceLevel];
+            definition.SoundEffect = level.SoundEffects[definition.InternalIndex];
         }
     }
 
     public void RandomizeMusicTriggers(TR2Level level)
     {
-        if (Settings.ChangeTriggerTracks)
-        {
-            RandomizeFloorTracks(level);
-        }
-
-        if (Settings.SeparateSecretTracks)
-        {
-            RandomizeSecretTracks(level);
-        }
-    }
-
-    private void RandomizeFloorTracks(TR2Level level)
-    {
-        ResetFloorMap();
-        foreach (TR2Room room in level.Rooms)
-        {
-            RandomizeFloorTracks(room, level.FloorData);
-        }
+        RandomizeFloorTracks(level.Rooms, level.FloorData);
+        RandomizeSecretTracks(level);
     }
 
     public void RandomizeSecretTracks(TR2Level level)
     {
+        if (!Settings.SeparateSecretTracks)
+        {
+            return;
+        }
+
         List<TRAudioTrack> secretTracks = GetTracks(TRAudioCategory.Secret);
         Dictionary<int, TR2Entity> secrets = GetSecretItems(level);
         foreach (int entityIndex in secrets.Keys)
@@ -140,7 +125,7 @@ public class TR2AudioAllocator : AudioRandomizer
 
     public void RandomizeSoundEffects(string levelName, TR2Level level)
     {
-        if (_sfxCategories.Count == 0)
+        if (Categories.Count == 0)
         {
             return;
         }
@@ -164,7 +149,7 @@ public class TR2AudioAllocator : AudioRandomizer
             {
                 TR2SFXDefinition definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
                 if (!level.SoundEffects.ContainsKey(internalIndex) || definition == null
-                    || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
+                    || definition.Creature == TRSFXCreatureCategory.Lara || !Categories.Contains(definition.PrimaryCategory))
                 {
                     continue;
                 }
@@ -196,17 +181,6 @@ public class TR2AudioAllocator : AudioRandomizer
                         level.SoundEffects[internalIndex] = nextDefinition.SoundEffect;
                     }
                 }
-            }
-        }
-    }
-
-    public void RandomizePitch(TR2Level level)
-    {
-        if (Settings.RandomizeWibble)
-        {
-            foreach (var (_, effect) in level.SoundEffects)
-            {
-                effect.RandomizePitch = true;
             }
         }
     }

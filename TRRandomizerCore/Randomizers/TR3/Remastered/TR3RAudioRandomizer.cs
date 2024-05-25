@@ -19,7 +19,7 @@ public class TR3RAudioRandomizer : BaseTR3RRandomizer
 
             allocator.RandomizeMusicTriggers(_levelInstance.Data);
             allocator.RandomizeSoundEffects(_levelInstance.Name, _levelInstance.Data);
-            allocator.RandomizePitch(_levelInstance.Data);
+            allocator.RandomizePitch(_levelInstance.Data.SoundEffects.Values);
 
             SaveLevelInstance();
             if (!TriggerProgress())
