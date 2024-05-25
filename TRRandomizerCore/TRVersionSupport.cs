@@ -69,6 +69,7 @@ internal class TRVersionSupport
         TRRandomizerType.Secret,
         TRRandomizerType.SecretAudio,
         TRRandomizerType.SecretReward,
+        TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
     };
 
