@@ -15,6 +15,8 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
     private static readonly TR1SFX _sfxFirstSpeechID = TR1SFX.BaldySpeech;
     private static readonly TR1SFX _sfxUziID = TR1SFX.LaraUziFire;
 
+    private const double _psUziChance = 0.4;
+
     private AudioRandomizer _audioRandomizer;
 
     private List<TR1SFXDefinition> _soundEffects;
@@ -116,7 +118,6 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
     {
         if (_sfxCategories.Count == 0)
         {
-            // We haven't selected any SFX categories to change.
             return;
         }
 
@@ -147,6 +148,9 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         }
         else
         {
+            // Run through the SoundMap for this level and get the SFX definition for each one.
+            // Choose a new sound effect provided the definition is in a category we want to change.
+            // Lara's SFX are not changed by default.
             foreach (TR1SFX internalIndex in Enum.GetValues<TR1SFX>())
             {
                 TR1SFXDefinition definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
@@ -177,14 +181,13 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
                 }
 
                 List<TR1SFXDefinition> otherDefinitions;
-                if (internalIndex == _sfxUziID && _generator.NextDouble() < 0.4)
+                if (internalIndex == _sfxUziID && _generator.NextDouble() < _psUziChance)
                 {
                     // 2/5 chance of PS uzis replacing original uzis, but they won't be used for anything else
                     otherDefinitions = new() { _psUziDefinition };
                 }
                 else
                 {
-                    // Try to find definitions that match
                     otherDefinitions = _soundEffects.FindAll(pred);
                 }
 
@@ -218,7 +221,6 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         // TR1X can play enemy speeches as SFX to avoid killing the current
         // track, so ensure that the required data is in the level if any
         // of these are used on the floor.
-
         List<ushort> usedSpeechTracks = level.Data.FloorData.GetActionItems(FDTrigAction.PlaySoundtrack)
             .Select(action => (ushort)action.Parameter)
             .Distinct()

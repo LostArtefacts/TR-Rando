@@ -61,7 +61,6 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
         {
             _audioRandomizer.RandomizeFloorTracks(room.Sectors, level.FloorData, _generator, sectorIndex =>
             {
-                // Get the midpoint of the tile in world coordinates
                 return new Vector2
                 (
                     TRConsts.Step2 + room.Info.X + sectorIndex / room.NumZSectors * TRConsts.Step4,
@@ -80,7 +79,6 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
 
         List<TRAudioTrack> secretTracks = _audioRandomizer.GetTracks(TRAudioCategory.Secret);
 
-        // If we want the same secret sound throughout the game, select it now.
         if (!Settings.SeparateSecretTracks && _fixedSecretTrack == null)
         {
             _fixedSecretTrack = secretTracks[_generator.Next(0, secretTracks.Count)];
@@ -88,11 +86,9 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
 
         for (int i = 0; i < level.Script.NumSecrets; i++)
         {
-            // Pick a track for this secret and prepare an action item
             TRAudioTrack secretTrack = _fixedSecretTrack ?? secretTracks[_generator.Next(0, secretTracks.Count)];
             if (secretTrack.ID == _defaultSecretTrack)
             {
-                // The game hardcodes this track, so there is no point in amending the triggers.
                 continue;
             }
 
@@ -102,7 +98,6 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
                 Parameter = (short)secretTrack.ID
             };
 
-            // Add a music action for each trigger defined for this secret.
             List<FDTriggerEntry> triggers = level.Data.FloorData.GetSecretTriggers(i);
             foreach (FDTriggerEntry trigger in triggers)
             {
@@ -117,7 +112,6 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
 
     private void LoadAudioData()
     {
-        // Get the track data from audio_tracks.json. Loaded from TRGE as it sets the ambient tracks initially.
         _audioRandomizer = new(ScriptEditor.AudioProvider.GetCategorisedTracks())
         {
             Generator = _generator,
@@ -125,10 +119,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
         };
         _audioRandomizer.ChooseUncontrolledLevels(new(Levels.Select(l => l.LevelFileBaseName)), TR3LevelNames.ASSAULT);
 
-        // Decide which sound effect categories we want to randomize.
         _sfxCategories = AudioRandomizer.GetSFXCategories(Settings);
-
-        // Only load the SFX if we are changing at least one category
         if (_sfxCategories.Count > 0)
         {
             _soundEffects = JsonConvert.DeserializeObject<List<TR3SFXDefinition>>(ReadResource(@"TR3\Audio\sfx.json"));
@@ -152,13 +143,11 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
     {
         if (_sfxCategories.Count == 0)
         {
-            // We haven't selected any SFX categories to change.
             return;
         }
 
         if (_audioRandomizer.IsUncontrolledLevel(level.Name))
         {
-            // Choose a random but unique pointer into MAIN.SFX for each sample.
             HashSet<uint> indices = new();
             foreach (TR3SoundEffect effect in level.Data.SoundEffects.Values)
             {
@@ -171,9 +160,6 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
         }
         else
         {
-            // Run through the SoundMap for this level and get the SFX definition for each one.
-            // Choose a new sound effect provided the definition is in a category we want to change.
-            // Lara's SFX are not changed by default.
             foreach (TR3SFX internalIndex in Enum.GetValues<TR3SFX>())
             {
                 TR3SFXDefinition definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
@@ -183,8 +169,6 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
                     continue;
                 }
 
-                // The following allows choosing to keep humans making human noises, and animals animal noises.
-                // Other humans can use Lara's SFX.
                 Predicate<TR3SFXDefinition> pred;
                 if (Settings.LinkCreatureSFX && definition.Creature > TRSFXCreatureCategory.Lara)
                 {
@@ -203,13 +187,9 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
                     pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && sfx != definition;
                 }
 
-                // Try to find definitions that match
                 List<TR3SFXDefinition> otherDefinitions = _soundEffects.FindAll(pred);
                 if (otherDefinitions.Count > 0)
                 {
-                    // Pick a new definition and try to import it into the level. This should only fail if
-                    // the JSON is misconfigured e.g. missing sample indices. In that case, we just leave 
-                    // the current sound effect as-is.
                     TR3SFXDefinition nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
                     if (nextDefinition != definition)
                     {
