@@ -1,4 +1,5 @@
 ﻿using TRDataControl.Environment;
+using TRGE.Core;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 
@@ -6,81 +7,82 @@ namespace TRRandomizerCore.Randomizers;
 
 public class EnvironmentPicker
 {
+    private readonly Random _generator;
+    private readonly RandomizerSettings _settings;
+    private readonly TREdition _gfEdition;
+
     public EMOptions Options { get; set; }
-    public Random Generator { get; set; }
 
-    public EnvironmentPicker(bool hardMode)
+    public EnvironmentPicker(Random generator, RandomizerSettings settings, TREdition gfEdition)
     {
-        Options = new EMOptions
+        Options = new()
         {
-            EnableHardMode = hardMode,
-            ExcludedTags = new List<EMTag>()
+            EnableHardMode = settings.HardEnvironmentMode,
+            ExcludedTags = new()
         };
+
+        _generator = generator;
+        _settings = settings;
+        _gfEdition = gfEdition;
+
+        ResetTags();
+
+        if (!_settings.AddReturnPaths)
+        {
+            Options.ExcludedTags.Add(EMTag.ReturnPath);
+        }
+        if (!_settings.FixOGBugs)
+        {
+            Options.ExcludedTags.Add(EMTag.GeneralBugFix);
+        }
+        if (!_settings.BlockShortcuts)
+        {
+            Options.ExcludedTags.Add(EMTag.ShortcutFix);
+        }
+        if (!_settings.RandomizeLadders)
+        {
+            Options.ExcludedTags.Add(EMTag.LadderChange);
+        }
+        if (!_settings.RandomizeWaterLevels)
+        {
+            Options.ExcludedTags.Add(EMTag.WaterChange);
+        }
+        if (!_settings.RandomizeSlotPositions)
+        {
+            Options.ExcludedTags.Add(EMTag.SlotChange);
+        }
+        if (!_settings.RandomizeTraps)
+        {
+            Options.ExcludedTags.Add(EMTag.TrapChange);
+        }
+        if (!_settings.RandomizeChallengeRooms)
+        {
+            Options.ExcludedTags.Add(EMTag.PuzzleRoom);
+        }
+        if (!_settings.RandomizeItems || !_settings.IncludeKeyItems)
+        {
+            Options.ExcludedTags.Add(EMTag.KeyItemFix);
+        }
     }
 
-    public void LoadTags(RandomizerSettings settings, bool isCommunityPatch)
+    public void ResetTags()
     {
-        List<EMTag> excludedTags = new();
-        if (!settings.AddReturnPaths)
+        // If we're using a community patch, exclude mods that only apply to non-community patch and vice-versa.
+        // Same idea for classic/remastered only.
+        Options.ExcludedTags = new()
         {
-            excludedTags.Add(EMTag.ReturnPath);
-        }
-        if (!settings.FixOGBugs)
-        {
-            excludedTags.Add(EMTag.GeneralBugFix);
-        }
-        if (!settings.BlockShortcuts)
-        {
-            excludedTags.Add(EMTag.ShortcutFix);
-        }
-        if (!settings.RandomizeLadders)
-        {
-            excludedTags.Add(EMTag.LadderChange);
-        }
-        if (!settings.RandomizeWaterLevels)
-        {
-            excludedTags.Add(EMTag.WaterChange);
-        }
-        if (!settings.RandomizeSlotPositions)
-        {
-            excludedTags.Add(EMTag.SlotChange);
-        }
-        if (!settings.RandomizeTraps)
-        {
-            excludedTags.Add(EMTag.TrapChange);
-        }
-        if (!settings.RandomizeChallengeRooms)
-        {
-            excludedTags.Add(EMTag.PuzzleRoom);
-        }
-        if (!settings.RandomizeItems || !settings.IncludeKeyItems)
-        {
-            excludedTags.Add(EMTag.KeyItemFix);
-        }
-
-        // If we're using a community patch, exclude mods that
-        // only apply to non-community patch and vice-versa.
-        excludedTags.Add(isCommunityPatch 
-            ? EMTag.NonCommunityPatchOnly 
-            : EMTag.CommunityPatchOnly);
-
-        Options.ExcludedTags = excludedTags;
-    }
-
-    public void ResetTags(bool isCommunityPatch)
-    {
-        Options.ExcludedTags = new List<EMTag>
-        {
-            isCommunityPatch
-            ? EMTag.NonCommunityPatchOnly
-            : EMTag.CommunityPatchOnly
+            _gfEdition.IsCommunityPatch
+                ? EMTag.NonCommunityPatchOnly
+                : EMTag.CommunityPatchOnly,
+            _gfEdition.Remastered
+                ? EMTag.ClassicOnly
+                : EMTag.RemasteredOnly
         };
     }
 
     public List<EMEditorSet> GetRandomAny(EMEditorMapping mapping)
     {
-        List<EMEditorSet> sets = new();
-        
+        List<EMEditorSet> sets = new();        
         List<EMEditorSet> pool = Options.EnableHardMode 
             ? mapping.Any 
             : mapping.Any.FindAll(e => !e.IsHard);
@@ -88,7 +90,7 @@ public class EnvironmentPicker
         if (pool.Count > 0)
         {
             // Pick a random number of packs to apply, but at least 1
-            sets = pool.RandomSelection(Generator, Generator.Next(1, pool.Count + 1));
+            sets = pool.RandomSelection(_generator, _generator.Next(1, pool.Count + 1));
         }
 
         return sets;
@@ -99,7 +101,7 @@ public class EnvironmentPicker
         if (Options.EnableHardMode)
         {
             // Anything goes.
-            return modList[Generator.Next(0, modList.Count)];
+            return modList[_generator.Next(0, modList.Count)];
         }
 
         if (modList.Any(e => !e.IsHard))
@@ -108,7 +110,7 @@ public class EnvironmentPicker
             EMEditorSet set;
             do
             {
-                set = modList[Generator.Next(0, modList.Count)];
+                set = modList[_generator.Next(0, modList.Count)];
             }
             while (set.IsHard);
 

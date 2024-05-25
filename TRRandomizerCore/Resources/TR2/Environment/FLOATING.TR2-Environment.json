@@ -4,7 +4,8 @@
       "Comments": "Tweak a slope at the end for easier key item exploration, if enabled.",
       "EMType": 7,
       "Tags": [
-        12
+        12,
+        14
       ],
       "Location": {
         "X": 24064,
@@ -19,7 +20,8 @@
     {
       "EMType": 23,
       "Tags": [
-        12
+        12,
+        14
       ],
       "Modifications": [
         {
@@ -61,7 +63,8 @@
     {
       "EMType": 21,
       "Tags": [
-        12
+        12,
+        14
       ],
       "TextureMap": {
         "1557": {

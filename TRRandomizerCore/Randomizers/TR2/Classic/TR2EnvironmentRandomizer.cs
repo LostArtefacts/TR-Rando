@@ -112,11 +112,7 @@ public class TR2EnvironmentRandomizer : BaseTR2Randomizer, IMirrorControl
 
     private void ApplyMappingToLevel(TR2CombinedLevel level, EMEditorMapping mapping)
     {
-        EnvironmentPicker picker = new(Settings.HardEnvironmentMode)
-        {
-            Generator = _generator
-        };
-        picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
+        EnvironmentPicker picker = new(_generator, Settings, ScriptEditor.Edition);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
 
         mapping.All.ApplyToLevel(level.Data, picker.Options);
@@ -168,9 +164,8 @@ public class TR2EnvironmentRandomizer : BaseTR2Randomizer, IMirrorControl
     private void FinalizeEnvironment(TR2CombinedLevel level)
     {
         EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($@"TR2\Environment\{level.Name}-Environment.json"));
-        EnvironmentPicker picker = new(Settings.HardEnvironmentMode);
+        EnvironmentPicker picker = new(_generator, Settings, ScriptEditor.Edition);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
-        picker.ResetTags(ScriptEditor.Edition.IsCommunityPatch);
 
         if (mapping != null)
         {

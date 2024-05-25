@@ -1096,7 +1096,8 @@
       "Comments": "Replace the wall texture.",
       "EMType": 21,
       "Tags": [
-        12
+        12,
+        14
       ],
       "TextureMap": {
         "1889": {

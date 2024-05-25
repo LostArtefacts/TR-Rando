@@ -15,4 +15,6 @@ public enum EMTag
     GeneralBugFix,
     ShortcutFix,
     KeyItemFix,
+    RemasteredOnly,
+    ClassicOnly,
 }

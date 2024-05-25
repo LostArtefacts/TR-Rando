@@ -119,11 +119,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
             level.Data.SoundEffects[TR1SFX.PendulumBlades] = vilcabamba.SoundEffects[TR1SFX.PendulumBlades];
         }
 
-        EnvironmentPicker picker = new(Settings.HardEnvironmentMode)
-        {
-            Generator = _generator
-        };
-        picker.LoadTags(Settings, true);
+        EnvironmentPicker picker = new(_generator, Settings, ScriptEditor.Edition);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
 
         // These are applied whether or not environment randomization is enabled,
@@ -224,9 +220,9 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
     private void FinalizeEnvironment(TR1CombinedLevel level)
     {
         EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($@"TR1\Environment\{level.Name}-Environment.json"));
-        EnvironmentPicker picker = new(Settings.HardEnvironmentMode);
+        EnvironmentPicker picker = new(_generator, Settings, ScriptEditor.Edition);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
-        picker.ResetTags(true);
+        picker.ResetTags();
 
         if (mapping != null)
         {

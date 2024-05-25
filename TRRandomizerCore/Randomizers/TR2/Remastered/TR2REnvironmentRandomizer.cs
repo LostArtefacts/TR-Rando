@@ -39,7 +39,11 @@ public class TR2REnvironmentRandomizer : BaseTR2RRandomizer
     }
 
     private EMEditorMapping GetMapping(TR2RCombinedLevel level)
-        => EMEditorMapping.Get(GetResourcePath($@"TR2\Environment\{level.Name}-Environment.json"));
+    {
+        EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($@"TR2\Environment\{level.Name}-Environment.json"));
+        mapping?.SetRemastered(true);
+        return mapping;
+    }
 
     private void RandomizeEnvironment(TR2RCombinedLevel level)
     {
@@ -52,24 +56,17 @@ public class TR2REnvironmentRandomizer : BaseTR2RRandomizer
 
     private void ApplyMappingToLevel(TR2RCombinedLevel level, EMEditorMapping mapping)
     {
-        EnvironmentPicker picker = new(Settings.HardEnvironmentMode)
-        {
-            Generator = _generator
-        };
-        picker.LoadTags(Settings, true);
+        EnvironmentPicker picker = new(_generator, Settings, ScriptEditor.Edition);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
 
         mapping.All.ApplyToLevel(level.Data, picker.Options);
-
-        // No further mods supported yet
     }
 
     private void FinalizeEnvironment(TR2RCombinedLevel level)
     {
         EMEditorMapping mapping = GetMapping(level);
-        EnvironmentPicker picker = new(Settings.HardEnvironmentMode);
+        EnvironmentPicker picker = new(_generator, Settings, ScriptEditor.Edition);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
-        picker.ResetTags(true);
 
         if (mapping != null)
         {

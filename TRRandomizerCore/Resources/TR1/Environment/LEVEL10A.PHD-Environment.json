@@ -7823,6 +7823,9 @@
         {
           "Comments": "Remove the fuse static mesh from the conveyor belt.",
           "EMType": 25,
+          "Tags": [
+            14
+          ],
           "ClearFromRooms": {
             "227": [
               45
@@ -7832,6 +7835,9 @@
         {
           "Comments": "Add a sprite instead for the ammo.",
           "EMType": 31,
+          "Tags": [
+            14
+          ],
           "ID": 89,
           "Vertex": {
             "Lighting": 4096

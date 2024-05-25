@@ -7630,6 +7630,9 @@
         {
           "Comments": "Make a side trap room to house the medis. You get nothing for free.",
           "EMType": 126,
+          "Tags": [
+            14
+          ],
           "Location": {
             "X": 26624,
             "Y": -6144,
@@ -7682,6 +7685,9 @@
         {
           "Comments": "Make visibility portals.",
           "EMType": 81,
+          "Tags": [
+            14
+          ],
           "Portals": [
             {
               "BaseRoom": 79,
@@ -7745,6 +7751,9 @@
         },
         {
           "EMType": 82,
+          "Tags": [
+            14
+          ],
           "Portals": {
             "-1": {
               "79": [
@@ -7766,6 +7775,9 @@
         },
         {
           "EMType": 21,
+          "Tags": [
+            14
+          ],
           "TextureMap": {
             "5": {
               "-1": {
@@ -7791,6 +7803,9 @@
         },
         {
           "EMType": 22,
+          "Tags": [
+            14
+          ],
           "GeometryMap": {
             "-1": {
               "Rectangles": [
@@ -7806,6 +7821,9 @@
         },
         {
           "EMType": 128,
+          "Tags": [
+            14
+          ],
           "RoomIndices": [
             -1
           ]
@@ -7861,6 +7879,9 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 38,
           "Intensity": -1,
           "Location": {
@@ -7872,6 +7893,9 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 42,
           "Intensity": -1,
           "Location": {
@@ -7884,6 +7908,9 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 42,
           "Intensity": -1,
           "Location": {
@@ -7896,6 +7923,9 @@
         },
         {
           "EMType": 61,
+          "Tags": [
+            14
+          ],
           "EntityLocation": -2,
           "Trigger": {
             "Mask": 31,
@@ -7914,6 +7944,9 @@
         },
         {
           "EMType": 61,
+          "Tags": [
+            14
+          ],
           "Locations": [
             {
               "X": 28160,
@@ -7937,6 +7970,9 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -7948,6 +7984,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28800,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -7959,6 +8012,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28800,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -7970,6 +8040,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28800,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -7981,6 +8068,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 28800,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -7992,6 +8096,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29184,
+            "Y": -6144,
+            "Z": 60544,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8003,6 +8124,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29184,
+            "Y": -6144,
+            "Z": 60544,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8014,6 +8152,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29184,
+            "Y": -6144,
+            "Z": 60544,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8025,6 +8180,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29184,
+            "Y": -6144,
+            "Z": 60544,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 93,
           "Intensity": 4096,
           "Location": {
@@ -8036,6 +8208,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 93,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29184,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8047,6 +8236,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29184,
+            "Y": -6144,
+            "Z": 61312,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8058,6 +8264,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29184,
+            "Y": -6144,
+            "Z": 61312,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8069,6 +8292,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29184,
+            "Y": -6144,
+            "Z": 61312,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8080,6 +8320,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29184,
+            "Y": -6144,
+            "Z": 61312,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8091,6 +8348,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29568,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8102,6 +8376,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29568,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8113,6 +8404,23 @@
         },
         {
           "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29568,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 94,
           "Intensity": 4096,
           "Location": {
@@ -8120,6 +8428,20 @@
             "Y": -6144,
             "Z": 55808,
             "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 94,
+          "Intensity": 4096,
+          "Location": {
+            "X": 29568,
+            "Y": -6144,
+            "Z": 60928,
+            "Room": 79
           }
         }
       ]

@@ -7535,10 +7535,26 @@
       "OnTrue": [
         {
           "EMType": 67,
+          "Tags": [
+            14
+          ],
           "BaseLocation": {
             "X": 57856,
             "Y": 10240,
             "Z": 10752,
+            "Room": 12
+          },
+          "EntityLocation": 38
+        },
+        {
+          "EMType": 67,
+          "Tags": [
+            13
+          ],
+          "BaseLocation": {
+            "X": 57856,
+            "Y": 10240,
+            "Z": 11776,
             "Room": 12
           },
           "EntityLocation": 38
