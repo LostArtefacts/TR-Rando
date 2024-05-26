@@ -61,8 +61,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 
         if (Settings.RandomizeItems)
         {
-            // Standard/key item rando followed by unarmed logic after enemy rando
-            target += numLevels * 2;
+            target += numLevels;
             if (Settings.RandomizeItemSprites)
             {
                 target += numLevels;
@@ -262,13 +261,6 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 TextureMonitor = textureMonitor,
                 ItemFactory = itemFactory,
             }.Randomize(Settings.EnemySeed);
-        }
-
-        // Randomize ammo/weapon in unarmed levels post enemy randomization
-        if (!monitor.IsCancelled && Settings.RandomizeItems)
-        {
-            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing unarmed level items");
-            itemRandomizer.RandomizeAmmo();
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeStartPosition)
