@@ -126,16 +126,17 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
         DataCache.SetPDPData(level.PDPData, TR1Type.ShootingAtlantean_N, TR1Type.ShootingAtlantean_N);
     }
 
-    private static void AdjustTihocanEnding(TR1RCombinedLevel level)
+    private void AdjustTihocanEnding(TR1RCombinedLevel level)
     {
         if (!level.Is(TR1LevelNames.TIHOCAN)
-            || _tihocanEndEnemies.Any(e => level.Data.Entities[e].TypeID == TR1Type.Pierre))
+            || _tihocanEndEnemies.Any(e => level.Data.Entities[e].TypeID == TR1Type.Pierre)
+            || (Settings.RandomizeItems && Settings.IncludeKeyItems))
         {
             return;
         }
 
         // Add Pierre's pickups in a default place. Allows pacifist runs effectively.
-        level.Data.Entities.AddRange(TR1ItemRandomizer.TihocanEndItems);
+        level.Data.Entities.AddRange(TR1ItemAllocator.TihocanEndItems);
     }
 
     private void AddUnarmedLevelAmmo(TR1RCombinedLevel level)

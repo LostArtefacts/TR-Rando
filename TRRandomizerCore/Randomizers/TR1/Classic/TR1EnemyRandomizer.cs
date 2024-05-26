@@ -164,14 +164,14 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             return;
         }
 
-        TR1Entity pierreReplacement = level.Data.Entities[TR1ItemRandomizer.TihocanPierreIndex];
+        TR1Entity pierreReplacement = level.Data.Entities[TR1ItemAllocator.TihocanPierreIndex];
         if (Settings.AllowEnemyKeyDrops
             && TR1EnemyUtilities.CanDropItems(pierreReplacement, level))
         {
             // Whichever enemy has taken Pierre's place will drop the items. Move the pickups to the enemy for trview lookup.
-            level.Script.AddItemDrops(TR1ItemRandomizer.TihocanPierreIndex, TR1ItemRandomizer.TihocanEndItems
+            level.Script.AddItemDrops(TR1ItemAllocator.TihocanPierreIndex, TR1ItemAllocator.TihocanEndItems
                 .Select(e => ItemUtilities.ConvertToScriptItem(e.TypeID)));
-            foreach (TR1Entity drop in TR1ItemRandomizer.TihocanEndItems)
+            foreach (TR1Entity drop in TR1ItemAllocator.TihocanEndItems)
             {
                 level.Data.Entities.Add(new()
                 {
@@ -187,7 +187,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         else
         {
             // Add Pierre's pickups in a default place. Allows pacifist runs effectively.
-            level.Data.Entities.AddRange(TR1ItemRandomizer.TihocanEndItems);
+            level.Data.Entities.AddRange(TR1ItemAllocator.TihocanEndItems);
         }
     }
 
