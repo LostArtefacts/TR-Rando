@@ -51,8 +51,13 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
             = 4,  // Default = 12
     };
 
-    public TR1ItemAllocator()
-        : base(TRGameVersion.TR1) { }
+    private readonly bool _remaster;
+
+    public TR1ItemAllocator(bool remaster = false)
+        : base(TRGameVersion.TR1)
+    {
+        _remaster = remaster;
+    }
 
     protected override List<int> GetExcludedItems(string levelName)
     {
@@ -143,7 +148,8 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
             .Select(e => e.GetFloorLocation(loc => level.GetRoomSector(loc))));
 
         if (Settings.RandomizeSecrets
-            && level.FloorData.GetActionItems(FDTrigAction.SecretFound).Any()) // && !remastered => make UseRewardRooms setting
+            && !_remaster // Eliminate and make UseRewardRooms setting
+            && level.FloorData.GetActionItems(FDTrigAction.SecretFound).Any())
         {
             // Make sure to exclude the reward room
             exclusions.Add(new()

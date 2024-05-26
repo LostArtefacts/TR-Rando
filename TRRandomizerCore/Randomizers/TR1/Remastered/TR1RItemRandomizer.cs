@@ -15,7 +15,7 @@ public class TR1RItemRandomizer : BaseTR1RRandomizer
     public override void Randomize(int seed)
     {
         _generator = new(seed);
-        _allocator = new()
+        _allocator = new(true)
         {
             Generator = _generator,
             Settings = Settings,
