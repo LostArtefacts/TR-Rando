@@ -461,6 +461,20 @@ public static class TR2TypeUtilities
         };
     }
 
+    public static TR2Type GetWeaponAmmo(TR2Type weapon)
+    {
+        return weapon switch
+        {
+            TR2Type.Shotgun_S_P => TR2Type.ShotgunAmmo_S_P,
+            TR2Type.Automags_S_P => TR2Type.AutoAmmo_S_P,
+            TR2Type.Uzi_S_P => TR2Type.UziAmmo_S_P,
+            TR2Type.Harpoon_S_P => TR2Type.HarpoonAmmo_S_P,
+            TR2Type.M16_S_P => TR2Type.M16Ammo_S_P,
+            TR2Type.GrenadeLauncher_S_P => TR2Type.Grenades_S_P,
+            _ => TR2Type.PistolAmmo_S_P,
+        };
+    }
+
     public static bool IsUtilityType(TR2Type type)
     {
         return (type == TR2Type.ShotgunAmmo_S_P ||

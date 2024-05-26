@@ -387,9 +387,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         _secretPicker.SectorAction = loc => level.Data.GetRoomSector(loc);
         _secretPicker.PlacementTestAction = loc => _placer.TestSecretPlacement(loc);
 
-        _routePicker.RoomInfos = level.Data.Rooms
-            .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
-            .ToList();
+        _routePicker.RoomInfos = new(level.Data.Rooms.Select(r => new ExtRoomInfo(r)));
         _routePicker.Initialise(level.Name, locations, Settings, _generator);
 
         List<Location> pickedLocations = _secretPicker.GetLocations(locations, Mirrorer.IsMirrored(level.Name), level.Script.NumSecrets);

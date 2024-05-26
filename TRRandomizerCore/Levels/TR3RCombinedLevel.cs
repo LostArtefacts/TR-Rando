@@ -19,4 +19,5 @@ public class TR3RCombinedLevel
     public bool IsAssault => Is(TR3LevelNames.ASSAULT);
     public TRDictionary<TR3Type, TRModel> PDPData { get; set; }
     public Dictionary<TR3Type, TR3RAlias> MapData { get; set; }
+    public bool HasExposureMeter => Sequence == 16 || Sequence == 17;
 }
