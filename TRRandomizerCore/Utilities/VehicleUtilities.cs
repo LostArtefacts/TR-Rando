@@ -16,6 +16,9 @@ public static class VehicleUtilities
         _secretLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\locations.json"));
     }
 
+    public static bool HasLocations(string levelName, TR2Type vehicle)
+        => _vehicleLocations.ContainsKey(levelName) && _vehicleLocations[levelName].Any(l => l.TargetType == (short)vehicle);
+
     public static Location GetRandomLocation(string levelName, TR2Level level, TR2Type vehicle, Random random, bool testSecrets = true)
     {
         if (_vehicleLocations.ContainsKey(levelName))
@@ -53,6 +56,6 @@ public static class VehicleUtilities
         IEnumerable<TR2Entity> secrets = level.Entities.Where(e => TR2TypeUtilities.IsSecretType(e.TypeID));
 
         return levelLocations
-            .Where(l => secrets.Any(s => l.X == s.X && l.Y == s.Y && l.Z == s.Z && l.Room == s.Room));
+            .Where(l => secrets.Any(s => s.GetLocation().IsEquivalent(l)));
     }
 }
