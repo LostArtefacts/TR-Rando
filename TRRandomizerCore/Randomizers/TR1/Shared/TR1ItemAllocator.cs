@@ -92,9 +92,7 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
     public void RandomizeKeyItems(string levelName, TR1Level level, int originalSequence)
     {
         _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level);
-        _picker.RoomInfos = level.Rooms
-            .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
-            .ToList();
+        _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
 
         _picker.Initialise(levelName, GetItemLocationPool(levelName, level, true), Settings, Generator);
 

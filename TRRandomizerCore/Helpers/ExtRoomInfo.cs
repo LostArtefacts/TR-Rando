@@ -18,17 +18,17 @@ public class ExtRoomInfo
 
     public int Size { get; private set; }
 
-    public ExtRoomInfo(TRRoomInfo info, int numXSectors, int numZSectors)
+    public ExtRoomInfo(TRRoom room)
     {
-        MinX = info.X + TRConsts.Step4;
-        MaxX = info.X + TRConsts.Step4 * (numXSectors - 1);
-        MinZ = info.Z + TRConsts.Step4;
-        MaxZ = info.Z + TRConsts.Step4 * (numZSectors - 1);
-        MinY = info.YTop;
-        MaxY = info.YBottom;
+        MinX = room.Info.X + TRConsts.Step4;
+        MaxX = room.Info.X + TRConsts.Step4 * (room.NumXSectors - 1);
+        MinZ = room.Info.Z + TRConsts.Step4;
+        MaxZ = room.Info.Z + TRConsts.Step4 * (room.NumZSectors - 1);
+        MinY = room.Info.YTop;
+        MaxY = room.Info.YBottom;
 
-        Width = numXSectors - 2;
-        Depth = numZSectors - 2;
+        Width = room.NumXSectors - 2;
+        Depth = room.NumZSectors - 2;
         Height = Math.Abs(MaxY - MinY) / TRConsts.Step1;
 
         Size = Width * Depth * Height;

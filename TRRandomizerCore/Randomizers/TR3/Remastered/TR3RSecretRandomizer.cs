@@ -154,9 +154,7 @@ public class TR3RSecretRandomizer : BaseTR3RRandomizer, ISecretRandomizer
         _secretPicker.PlacementTestAction = loc
             => _placer.TestSecretPlacement(loc);
 
-        _routePicker.RoomInfos = level.Data.Rooms
-            .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
-            .ToList();
+        _routePicker.RoomInfos = new(level.Data.Rooms.Select(r => new ExtRoomInfo(r)));
         _routePicker.Initialise(level.Name, locations, Settings, _generator);
 
         List<Location> pickedLocations = _secretPicker.GetLocations(locations, false, level.Script.NumSecrets);

@@ -50,9 +50,7 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
     {
         _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level);
         _picker.KeyItemTestAction = (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, levelName, level);
-        _picker.RoomInfos = level.Rooms
-            .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
-            .ToList();
+        _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
 
         _picker.Initialise(levelName, GetItemLocationPool(levelName, level, true), Settings, Generator);
 
