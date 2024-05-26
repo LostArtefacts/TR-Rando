@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using TRDataControl;
+﻿using TRDataControl;
 using TRGE.Core;
 using TRGE.Core.Item.Enums;
 using TRImageControl.Packing;
@@ -22,52 +21,26 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         Room = 43
     };
 
+    private TR2ItemAllocator _allocator;
+
     internal TR2TextureMonitorBroker TextureMonitor { get; set; }
     public ItemFactory<TR2Entity> ItemFactory { get; set; }
-
-    // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
-    // into predefined locations. See FindUnarmedPistolsLocation below.
-    private int _unarmedLevelPistolIndex;
-    private readonly Dictionary<string, List<Location>> _excludedLocations;
-    private readonly Dictionary<string, List<Location>> _pistolLocations;
-
-    private readonly LocationPicker _picker;
-    private ItemSpriteRandomizer<TR2Type> _spriteRandomizer;
-
-    public TR2ItemRandomizer()
-    {
-        _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\invalid_item_locations.json"));
-        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\unarmed_locations.json"));
-        _picker = new(GetResourcePath(@"TR2\Locations\routes.json"));
-    }
 
     public override void Randomize(int seed)
     {
         _generator = new(seed);
+        _allocator = new()
+        {
+            Generator = _generator,
+            Settings = Settings,
+            ItemFactory = ItemFactory,
+        };
 
         foreach (TR2ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
 
-            FindUnarmedPistolsLocation();
-
-            _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, false), Settings, _generator);
-
-            if (Settings.RandomizeItemPositions)
-            {
-                RandomizeItemLocations(_levelInstance);
-            }
-
-            if (Settings.RandomizeItemTypes)
-            {
-                RandomizeItemTypes(_levelInstance);
-            }
-
-            if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
-            {
-                EnforceOneLimit(_levelInstance);
-            }
-
+            _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script);
             RandomizeVehicles();
 
             SaveLevelInstance();
@@ -83,7 +56,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         foreach (TR2ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
-            RandomizeKeyItems(_levelInstance);
+            AdjustSeraphContinuity(_levelInstance);
+            _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
 
             SaveLevelInstance();
             if (!TriggerProgress())
@@ -93,116 +67,20 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
     }
 
-    public void RandomizeLevelsSprites()
+    public void RandomizeSprites()
     {
+        // This remains separate as it must be performed following all other texture work due to
+        // TR2 texture deduplication.
         foreach (TR2ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
-            RandomizeSprites();
+            _allocator.RandomizeSprites(_levelInstance.Data.Sprites, TR2TypeUtilities.GetKeyItemTypes(), TR2TypeUtilities.GetSecretTypes());
 
             SaveLevelInstance();
             if (!TriggerProgress())
             {
                 break;
             }
-        }
-    }
-
-    private List<Location> GetItemLocationPool(TR2CombinedLevel level, bool keyItemMode)
-    {
-        List<Location> exclusions = new();
-        if (_excludedLocations.ContainsKey(level.Name))
-        {
-            exclusions.AddRange(_excludedLocations[level.Name]);
-        }
-
-        foreach (TR2Entity entity in level.Data.Entities)
-        {
-            if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
-            {
-                exclusions.Add(entity.GetFloorLocation(loc => level.Data.GetRoomSector(loc)));
-            }
-        }
-
-        TR2LocationGenerator generator = new();
-        return generator.Generate(level.Data, exclusions, keyItemMode);
-    }
-
-    private void RandomizeSprites()
-    {
-        // If the _spriteRandomizer doesn't exists it gets fed all the settings of the rando and Lists of the game once. 
-        if (_spriteRandomizer == null)
-        {
-            _spriteRandomizer = new ItemSpriteRandomizer<TR2Type>
-            {
-                StandardItemTypes = TR2TypeUtilities.GetGunTypes().Concat(TR2TypeUtilities.GetAmmoTypes()).ToList(),
-                KeyItemTypes = TR2TypeUtilities.GetKeyItemTypes(),
-                SecretItemTypes = TR2TypeUtilities.GetSecretTypes(),
-                RandomizeKeyItemSprites = Settings.RandomizeKeyItemSprites,
-                RandomizeSecretSprites = Settings.RandomizeSecretSprites,
-                Mode = Settings.SpriteRandoMode
-            };
-#if DEBUG
-            _spriteRandomizer.TextureChanged += (object sender, SpriteEventArgs<TR2Type> e) =>
-            {
-                System.Diagnostics.Debug.WriteLine(string.Format("{0}: {1} => {2}", _levelInstance.Name, e.OldSprite, e.NewSprite));
-            };
-#endif
-        }
-
-        _spriteRandomizer.Sequences = _levelInstance.Data.Sprites;
-        _spriteRandomizer.Randomize(_generator);
-    }
-
-    public void RandomizeItemLocations(TR2CombinedLevel level)
-    {
-        if (level.Is(TR2LevelNames.HOME) && (level.Script.RemovesWeapons || level.Script.RemovesAmmo))
-        {
-            return;
-        }
-
-        for (int i = 0; i < level.Data.Entities.Count; i++)
-        {
-            TR2Entity entity = level.Data.Entities[i];
-            if (!TR2TypeUtilities.IsStandardPickupType(entity.TypeID)
-                || ItemFactory.IsItemLocked(level.Name, i)
-                || i == _unarmedLevelPistolIndex)
-            {
-                continue;
-            }
-
-            _picker.RandomizePickupLocation(entity);
-            entity.Intensity1 = entity.Intensity2 = -1;
-        }
-    }
-
-    private void RandomizeKeyItems(TR2CombinedLevel level)
-    {
-        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level.Data);
-        _picker.KeyItemTestAction = (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, level);
-        _picker.RoomInfos = level.Data.Rooms
-            .Select(r => new ExtRoomInfo(r.Info, r.NumXSectors, r.NumZSectors))
-            .ToList();
-
-        _picker.Initialise(_levelInstance.Name, GetItemLocationPool(_levelInstance, true), Settings, _generator);
-
-        // The Seraph may be removed from The Deck and added to Barkhang. Do that first to allow
-        // its location to be changed.
-        AdjustSeraphContinuity(level);
-
-        for (int i = 0; i < level.Data.Entities.Count; i++)
-        {
-            TR2Entity entity = level.Data.Entities[i];
-            if (!TR2TypeUtilities.IsKeyItemType(entity.TypeID)
-                || ItemFactory.IsItemLocked(level.Name, i))
-            {
-                continue;
-            }
-
-            _picker.RandomizeKeyItemLocation(
-                entity, LocationUtilities.HasPickupTriger(entity, i, level.Data),
-                level.Script.OriginalSequence, level.Data.Rooms[entity.Room].Info);
-            entity.Intensity1 = entity.Intensity2 = -1;
         }
     }
 
@@ -252,106 +130,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 {
                     List<TR2Type> stdItemTypes = TR2TypeUtilities.GetStandardPickupTypes();
                     seraph.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
-                }
-            }
-        }
-    }
-
-    private bool TestKeyItemLocation(Location location, bool hasPickupTrigger, TR2CombinedLevel level)
-    {
-        // Make sure if we're placing on the same tile as an enemy, that the
-        // enemy can drop the item.
-        TR2Entity enemy = level.Data.Entities
-            .FindAll(e => TR2TypeUtilities.IsEnemyType(e.TypeID))
-            .Find(e => e.GetLocation().IsEquivalent(location));
-
-        return enemy == null || (Settings.AllowEnemyKeyDrops && !hasPickupTrigger && TR2TypeUtilities.CanDropPickups
-        (
-            TR2TypeUtilities.GetAliasForLevel(level.Name, enemy.TypeID), 
-            Settings.RandomizeEnemies && !Settings.ProtectMonks,
-            Settings.RandomizeEnemies && Settings.UnconditionalChickens
-        ));
-    }
-
-    private void RandomizeItemTypes(TR2CombinedLevel level)
-    {
-        if (level.IsAssault
-            || (level.Is(TR2LevelNames.HOME) && (level.Script.RemovesWeapons || level.Script.RemovesAmmo)))
-        {
-            return;
-        }
-
-        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetStandardPickupTypes();
-
-        for (int i = 0; i < level.Data.Entities.Count; i++)
-        {
-            TR2Entity entity = level.Data.Entities[i];
-            if (i == _unarmedLevelPistolIndex)
-            {
-                // Handled separately in RandomizeAmmo
-                continue;
-            }
-            else if (stdItemTypes.Contains(entity.TypeID))
-            {
-                entity.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
-            }
-        }
-    }
-
-    private void EnforceOneLimit(TR2CombinedLevel level)
-    {
-        HashSet<TR2Type> uniqueTypes = new();
-
-        // Look for extra utility/ammo items and hide them
-        for (int i = 0; i < level.Data.Entities.Count; i++)
-        {
-            TR2Entity entity = level.Data.Entities[i];
-            if (TR2TypeUtilities.IsStandardPickupType(entity.TypeID)
-                && !uniqueTypes.Add(entity.TypeID))
-            {
-                ItemUtilities.HideEntity(entity);
-                ItemFactory.FreeItem(level.Name, i);
-            }
-        }
-    }
-
-    private void FindUnarmedPistolsLocation()
-    {
-        // #66 - checks were previously performed to clean locations from previous
-        // randomization sessions to avoid item pollution. This is no longer required
-        // as randomization is now always performed on the original level files.
-
-        // #124 Default pistol locations are no longer limited to one per level.
-
-        _unarmedLevelPistolIndex = -1;
-
-        if (_levelInstance.Script.RemovesWeapons && _pistolLocations.ContainsKey(_levelInstance.Name))
-        {
-            int pistolIndex = _levelInstance.Data.Entities.FindIndex(e => e.TypeID == TR2Type.Pistols_S_P);
-            if (pistolIndex != -1)
-            {
-                // Sanity check that the location is one that we expect
-                TR2Entity pistols = _levelInstance.Data.Entities[pistolIndex];
-                Location pistolLocation = new()
-                {
-                    X = pistols.X,
-                    Y = pistols.Y,
-                    Z = pistols.Z,
-                    Room = pistols.Room
-                };
-
-                int match = _pistolLocations[_levelInstance.Name].FindIndex
-                (
-                    location =>
-                        location.X == pistolLocation.X &&
-                        location.Y == pistolLocation.Y &&
-                        location.Z == pistolLocation.Z &&
-                        location.Room == pistolLocation.Room
-                );
-
-                if (match != -1)
-                {
-                    _unarmedLevelPistolIndex = pistolIndex;
                 }
             }
         }

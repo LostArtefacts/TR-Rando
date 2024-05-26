@@ -374,7 +374,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
         if (!monitor.IsCancelled && Settings.RandomizeItems && Settings.RandomizeItemSprites)
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing Sprites");
-            itemRandomizer.RandomizeLevelsSprites();
+            itemRandomizer.RandomizeSprites();
         }
     }
 }
