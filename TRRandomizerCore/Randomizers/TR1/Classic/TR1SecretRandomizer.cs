@@ -88,23 +88,13 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
 
         SetMessage("Randomizing secrets - importing models");
-        foreach (SecretProcessor processor in processors)
-        {
-            processor.Start();
-        }
-
-        foreach (SecretProcessor processor in processors)
-        {
-            processor.Join();
-        }
+        processors.ForEach(p => p.Start());
+        processors.ForEach(p => p.Join());
 
         if (!SaveMonitor.IsCancelled && _processingException == null)
         {
             SetMessage("Randomizing secrets - placing items");
-            foreach (SecretProcessor processor in processors)
-            {
-                processor.ApplyRandomization();
-            }
+            processors.ForEach(p => p.ApplyRandomization());
         }
 
         _processingException?.Throw();
