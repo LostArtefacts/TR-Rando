@@ -1573,7 +1573,7 @@
             <!-- Reward Mode -->
             <StackPanel
                 Grid.Row="20"
-                Visibility="{Binding ControllerProxy.IsRewardRoomsTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
+                Visibility="{Binding HasSecretRewardMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -1668,7 +1668,7 @@
                             <Label
                                 Content="Min"
                                 VerticalAlignment="Center"
-                                Padding="0,0,3,0" Margin="0"/>
+                                Padding="0,0,3,0"/>
                             <ctrl:NumericUpDown
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
@@ -1679,7 +1679,7 @@
                             <Label
                                 Content="Max"
                                 VerticalAlignment="Center"
-                                Padding="6,0,3,0" Margin="0"/>
+                                Padding="6,0,3,0"/>
                             <ctrl:NumericUpDown
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"

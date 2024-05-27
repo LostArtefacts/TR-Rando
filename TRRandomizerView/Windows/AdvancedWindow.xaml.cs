@@ -119,6 +119,11 @@ public partial class AdvancedWindow : Window
         nameof(HasSecretCountMode), typeof(bool), typeof(AdvancedWindow)
     );
 
+    public static readonly DependencyProperty HasSecretRewardModeProperty = DependencyProperty.Register
+    (
+        nameof(HasSecretRewardMode), typeof(bool), typeof(AdvancedWindow)
+    );
+
     public static readonly DependencyProperty HasSecretPackModeProperty = DependencyProperty.Register
     (
         nameof(HasSecretPackMode), typeof(bool), typeof(AdvancedWindow)
@@ -263,6 +268,12 @@ public partial class AdvancedWindow : Window
     {
         get => (bool)GetValue(HasSecretCountModeProperty);
         set => SetValue(HasSecretCountModeProperty, value);
+    }
+
+    public bool HasSecretRewardMode
+    {
+        get => (bool)GetValue(HasSecretRewardModeProperty);
+        set => SetValue(HasSecretRewardModeProperty, value);
     }
 
     public bool HasSecretPackMode

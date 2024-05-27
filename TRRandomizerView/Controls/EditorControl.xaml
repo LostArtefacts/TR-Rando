@@ -231,6 +231,7 @@
                                         BoolItemsSource="{Binding Data.SecretBoolItemControls, Source={StaticResource proxy}}"
                                         HasBoolItems="True"
                                         HasSecretPackMode="{Binding Data.IsSecretPackTypeSupported, Source={StaticResource proxy}}"
+                                        HasSecretRewardMode="{Binding Data.IsRewardRoomsTypeSupported, Source={StaticResource proxy}}"
                                         HasSecretCountMode="{Binding Data.IsSecretCountTypeSupported, Source={StaticResource proxy}}"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
