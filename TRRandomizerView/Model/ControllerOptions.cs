@@ -31,6 +31,8 @@ public class ControllerOptions : INotifyPropertyChanged
 
     private BoolItemControlClass _randomizeLevelSequencing;
     private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels;
+    private TRSecretRewardMode[] _secretRewardModes;
+    private TRSecretRewardMode _secretRewardMode;
     private TRSecretCountMode _secretCountMode;
     private uint _minSecretCount, _maxSecretCount;
     private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity;
@@ -2231,6 +2233,26 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public TRSecretRewardMode[] SecretRewardModes
+    {
+        get => _secretRewardModes;
+        private set
+        {
+            _secretRewardModes = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public TRSecretRewardMode SecretRewardMode
+    {
+        get => _secretRewardMode;
+        set
+        {
+            _secretRewardMode = value;
+            FirePropertyChanged();
+        }
+    }
+
     public BoolItemControlClass UseRewardRoomCameras
     {
         get => _useRewardRoomCameras;
@@ -3434,6 +3456,8 @@ public class ControllerOptions : INotifyPropertyChanged
         IsHardSecrets.Value = _controller.HardSecrets;
         IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
         GuaranteeSecrets.Value = _controller.GuaranteeSecrets;
+        SecretRewardModes = Enum.GetValues<TRSecretRewardMode>();
+        SecretRewardMode = _controller.SecretRewardMode;
         UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
         UseRandomSecretModels.Value = _controller.UseRandomSecretModels;
         SecretCountMode = _controller.SecretCountMode;
@@ -3739,6 +3763,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.HardSecrets = IsHardSecrets.Value;
         _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
         _controller.GuaranteeSecrets = GuaranteeSecrets.Value;
+        _controller.SecretRewardMode = SecretRewardMode;
         _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
         _controller.UseRandomSecretModels = UseRandomSecretModels.Value;
         _controller.SecretCountMode = SecretCountMode;
@@ -3988,7 +4013,7 @@ public class ControllerOptions : INotifyPropertyChanged
         }
         else if (IsTR1Main || IsTR3Main)
         {
-            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and reward rooms created for collecting all secrets.";
+            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and either reward rooms created for collecting all secrets, or rewards will be stacked with the secrets.";
         }
         else
         {

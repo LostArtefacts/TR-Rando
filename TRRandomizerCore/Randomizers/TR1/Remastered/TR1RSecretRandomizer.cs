@@ -154,13 +154,7 @@ public class TR1RSecretRandomizer : BaseTR1RRandomizer, ISecretRandomizer
         _routePicker.Initialise(level.Name, locations, Settings, _generator);
 
         List<Location> pickedLocations = _secretPicker.GetLocations(locations, false, level.Script.NumSecrets);
-
-        // We can't make reward rooms, so the items are instead distrbuted around the secret locations
-        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($@"TR1\SecretMapping\{level.Name}-SecretMapping.json"));
-        List<TR1Entity>[] rewardClusters = secretMapping.RewardEntities
-            .Select(i => level.Data.Entities[i])
-            .Cluster(level.Script.NumSecrets);
-        
+                
         TRSecretPlacement<TR1Type> secret = new();
         int pickupIndex = 0;
         for (int i = 0; i < level.Script.NumSecrets; i++)
@@ -171,7 +165,6 @@ public class TR1RSecretRandomizer : BaseTR1RRandomizer, ISecretRandomizer
             secret.PickupType = pickupTypes[pickupIndex % pickupTypes.Count];
 
             _placer.PlaceSecret(secret);
-            rewardClusters[i].ForEach(r => r.SetLocation(location));
 
             TR1Entity entity = ItemFactory.CreateLockedItem(level.Name, level.Data.Entities, secret.Location);
             entity.TypeID = secret.PickupType;
@@ -179,6 +172,9 @@ public class TR1RSecretRandomizer : BaseTR1RRandomizer, ISecretRandomizer
             secret.SecretIndex++;
             pickupIndex++;
         }
+
+        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($@"TR1\SecretMapping\{level.Name}-SecretMapping.json"));
+        _placer.CreateRewardStacks(level.Data.Entities, secretMapping.RewardEntities, level.Data.FloorData);
 
         AddDamageControl(level, pickedLocations);
         _secretPicker.FinaliseSecretPool(pickedLocations, level.Name, itemIndex => new() { itemIndex });

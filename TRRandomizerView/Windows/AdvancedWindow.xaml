@@ -1570,8 +1570,54 @@
                 </Grid>
             </StackPanel>
 
+            <!-- Reward Mode -->
+            <StackPanel
+                Grid.Row="20"
+                Visibility="{Binding ControllerProxy.IsRewardRoomsTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock
+                    Style="{StaticResource HeaderStyle}"
+                    Text="Secret Reward Mode"/>
+
+                <Grid Margin="0,5,0,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border VerticalAlignment="Top">
+                        <ComboBox
+                            ItemsSource="{Binding ControllerProxy.SecretRewardModes}"
+                            SelectedItem="{Binding ControllerProxy.SecretRewardMode, Mode=TwoWay}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"/>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <Label.Content>
+                                <TextBlock>
+                                    <Run>Choose how you are rewarded for collecting secrets.</Run>
+                                    <LineBreak/>
+                                    <Run>- Room: a room will be added near the end of the level and will hold all reward items. Every secret in the level will need to be collected to access the room.</Run>
+                                    <LineBreak/>
+                                    <Run>- Stack: a stack of items will be added at the same location as each secret artefact.</Run>
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
+                    </Border>
+                </Grid>
+            </StackPanel>
+            
             <!-- Secret Count -->
-            <StackPanel Grid.Row="20"
+            <StackPanel Grid.Row="21"
                         Visibility="{Binding HasSecretCountMode, Converter={StaticResource BoolToCollapsedConverter}}"
                         IsEnabled="{Binding ControllerProxy.UseGenericSecrets}">
                 <StackPanel.Resources>
@@ -1689,7 +1735,7 @@
             </StackPanel>
 
             <!-- Secret Packs -->
-            <StackPanel Grid.Row="21"
+            <StackPanel Grid.Row="22"
                         Visibility="{Binding HasSecretPackMode, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -1741,7 +1787,7 @@
             </StackPanel>
 
             <!-- Weather -->
-            <StackPanel Grid.Row="22"
+            <StackPanel Grid.Row="23"
                         Visibility="{Binding HasWeatherMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1853,7 +1899,7 @@
             
             <!-- Enemy Clones -->
             <StackPanel
-                Grid.Row="23"
+                Grid.Row="24"
                 Visibility="{Binding HasClonedEnemyMode, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"

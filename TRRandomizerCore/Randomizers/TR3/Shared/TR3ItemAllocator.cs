@@ -8,13 +8,8 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR3ItemAllocator : ItemAllocator<TR3Type, TR3Entity>
 {
-    private readonly bool _remaster;
-
-    public TR3ItemAllocator(bool remaster = false)
-        : base(TRGameVersion.TR3)
-    {
-        _remaster = remaster;
-    }
+    public TR3ItemAllocator()
+        : base(TRGameVersion.TR3) { }
 
     protected override List<int> GetExcludedItems(string levelName)
     {
@@ -96,7 +91,7 @@ public class TR3ItemAllocator : ItemAllocator<TR3Type, TR3Entity>
             .Select(e => e.GetFloorLocation(loc => level.GetRoomSector(loc))));
 
         if (Settings.RandomizeSecrets
-            && !_remaster // Eliminate and make UseRewardRooms setting
+            && Settings.SecretRewardMode == TRSecretRewardMode.Room
             && level.FloorData.GetActionItems(FDTrigAction.SecretFound).Any())
         {
             // Make sure to exclude the reward room

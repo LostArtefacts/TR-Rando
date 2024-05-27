@@ -160,12 +160,6 @@ public class TR3RSecretRandomizer : BaseTR3RRandomizer, ISecretRandomizer
 
         List<Location> pickedLocations = _secretPicker.GetLocations(locations, false, level.Script.NumSecrets);
 
-        // We can't make reward rooms, so the items are instead distrbuted around the secret locations
-        TRSecretMapping<TR3Entity> secretMapping = TRSecretMapping<TR3Entity>.Get(GetResourcePath($@"TR3\SecretMapping\{level.Name}-SecretMapping.json"));
-        List<TR3Entity>[] rewardClusters = secretMapping.RewardEntities
-            .Select(i => level.Data.Entities[i])
-            .Cluster(level.Script.NumSecrets);
-
         int pickupIndex = 0;
         TRSecretPlacement<TR3Type> secret = new();
         for (int i = 0; i < level.Script.NumSecrets; i++)
@@ -176,7 +170,6 @@ public class TR3RSecretRandomizer : BaseTR3RRandomizer, ISecretRandomizer
             secret.PickupType = pickupTypes[pickupIndex % pickupTypes.Count];
 
             _placer.PlaceSecret(secret);
-            rewardClusters[i].ForEach(r => r.SetLocation(location));
 
             // This will either make a new entity or repurpose an old one. Ensure it is locked
             // to prevent item rando from potentially treating it as a key item.
@@ -186,6 +179,9 @@ public class TR3RSecretRandomizer : BaseTR3RRandomizer, ISecretRandomizer
             secret.SecretIndex++;
             pickupIndex++;
         }
+
+        TRSecretMapping<TR3Entity> secretMapping = TRSecretMapping<TR3Entity>.Get(GetResourcePath($@"TR3\SecretMapping\{level.Name}-SecretMapping.json"));
+        _placer.CreateRewardStacks(level.Data.Entities, secretMapping.RewardEntities, level.Data.FloorData);
 
         AddDamageControl(level, pickedLocations);
         _secretPicker.FinaliseSecretPool(pickedLocations, level.Name, itemIndex => GetDependentLockedItems(level, itemIndex));

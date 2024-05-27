@@ -120,6 +120,16 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             return;
         }
 
+        if (placeholder == null)
+        {
+            _placer.CreateRewardStacks(level.Data.Entities, secretMapping.RewardEntities, level.Data.FloorData);
+            return;
+        }
+        else if (secretMapping.Rooms.Count == 0)
+        {
+            return;
+        }
+
         // Are any rooms enforced based on level specifics?
         TRSecretRoom<TR3Entity> rewardRoom = secretMapping.Rooms.Find(r => r.HasUsageCondition);
         if (rewardRoom == null || !rewardRoom.UsageCondition.GetResult(level.Data))
@@ -219,13 +229,17 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             secret.EntityIndex = (short)ItemFactory.GetNextIndex(level.Name, level.Data.Entities);
             secret.PickupType = pickupTypes[pickupIndex % pickupTypes.Count];
 
-            if (Settings.UseRewardRoomCameras && rewardRoom.HasCameras)
+            if (rewardRoom != null)
             {
-                secret.CameraIndex = (short)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
-                secret.CameraTarget = (short)rewardRoom.DoorIndices[0];
+                if (Settings.UseRewardRoomCameras && rewardRoom.HasCameras)
+                {
+                    secret.CameraIndex = (short)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
+                    secret.CameraTarget = (short)rewardRoom.DoorIndices[0];
+                }
+
+                secret.SetMaskAndDoor(level.Script.NumSecrets, rewardRoom.DoorIndices);
             }
 
-            secret.SetMaskAndDoor(level.Script.NumSecrets, rewardRoom.DoorIndices);
             _placer.PlaceSecret(secret);
 
             // This will either make a new entity or repurpose an old one. Ensure it is locked

@@ -175,7 +175,17 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
     private void ActualiseRewardRoom(TR1CombinedLevel level, TRSecretRoom<TR1Entity> placeholder)
     {
         TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($@"TR1\SecretMapping\{level.Name}-SecretMapping.json"));
-        if (secretMapping == null || secretMapping.Rooms.Count == 0)
+        if (secretMapping == null)
+        {
+            return;
+        }
+
+        if (placeholder == null)
+        {
+            _placer.CreateRewardStacks(level.Data.Entities, secretMapping.RewardEntities, level.Data.FloorData);
+            return;
+        }
+        else if (secretMapping.Rooms.Count == 0)
         {
             return;
         }
@@ -277,13 +287,17 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             secret.EntityIndex = (short)ItemFactory.GetNextIndex(level.Name, level.Data.Entities);
             secret.PickupType = pickupTypes[pickupIndex % pickupTypes.Count];
 
-            if (Settings.UseRewardRoomCameras && rewardRoom.HasCameras)
+            if (rewardRoom != null)
             {
-                secret.CameraIndex = (short)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
-                secret.CameraTarget = (short)rewardRoom.DoorIndices[0];
+                if (Settings.UseRewardRoomCameras && rewardRoom.HasCameras)
+                {
+                    secret.CameraIndex = (short)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
+                    secret.CameraTarget = (short)rewardRoom.DoorIndices[0];
+                }
+
+                secret.SetMaskAndDoor(level.Script.NumSecrets, rewardRoom.DoorIndices);
             }
 
-            secret.SetMaskAndDoor(level.Script.NumSecrets, rewardRoom.DoorIndices);
             _placer.PlaceSecret(secret);
 
             // Turn off walk-to-items in TR1X if we are placing on a slope above water.

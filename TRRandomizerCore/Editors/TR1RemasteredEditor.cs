@@ -3,6 +3,7 @@ using TRGE.Core;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Randomizers;
+using TRRandomizerCore.Secrets;
 
 namespace TRRandomizerCore.Editors;
 
@@ -19,6 +20,7 @@ public class TR1RemasteredEditor : TR1ClassicEditor
         Settings.FixOGBugs = false;
         Settings.ReplaceRequiredEnemies = false;
         Settings.SwapEnemyAppearance = false;
+        Settings.SecretRewardMode = TRSecretRewardMode.Stack;
     }
 
     protected override int GetSaveTarget(int numLevels)

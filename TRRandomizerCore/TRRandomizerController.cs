@@ -1036,6 +1036,12 @@ public class TRRandomizerController
         set => LevelRandomizer.GuaranteeSecrets = value;
     }
 
+    public TRSecretRewardMode SecretRewardMode
+    {
+        get => LevelRandomizer.SecretRewardMode;
+        set => LevelRandomizer.SecretRewardMode = value;
+    }
+
     public bool UseRewardRoomCameras
     {
         get => LevelRandomizer.UseRewardRoomCameras;

@@ -361,6 +361,11 @@ public class SecretArtefactPlacer<T, E>
 
     public TRSecretRoom<E> MakePlaceholderRewardRoom(TRGameVersion gameVersion, string levelName, int secretCount, List<E> allItems)
     {
+        if (Settings.SecretRewardMode == TRSecretRewardMode.Stack && !Settings.DevelopmentMode)
+        {
+            return null;
+        }
+
         TRSecretRoom<E> rewardRoom = null;
         string mappingPath = $@"Resources\{gameVersion}\SecretMapping\{levelName}-SecretMapping.json";
         if (File.Exists(mappingPath))
@@ -485,6 +490,25 @@ public class SecretArtefactPlacer<T, E>
                     }
                 }
             }
+        }
+    }
+
+    public void CreateRewardStacks(List<E> allItems, List<int> rewardIndices, FDControl floorData)
+    {
+        List<E> artefacts = allItems.FindAll(e => floorData.GetEntityTriggers(allItems.IndexOf(e))
+            .Any(t => t.TrigType == FDTrigType.Pickup && t.Actions.Any(a => a.Action == FDTrigAction.SecretFound)));
+        if (artefacts.Count == 0)
+        {
+            return;
+        }
+
+        List<E>[] rewardClusters = rewardIndices
+            .Select(i => allItems[i])
+            .Cluster(artefacts.Count);
+        for (int i = 0; i < artefacts.Count; i++)
+        {
+            Location location = artefacts[i].GetLocation();
+            rewardClusters[i].ForEach(r => r.SetLocation(location));
         }
     }
 }

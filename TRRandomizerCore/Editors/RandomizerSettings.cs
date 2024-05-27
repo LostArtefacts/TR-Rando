@@ -90,6 +90,7 @@ public class RandomizerSettings
     public bool UseKillableClonePierres { get; set; }
     public bool GlitchedSecrets { get; set; }
     public bool GuaranteeSecrets { get; set; }
+    public TRSecretRewardMode SecretRewardMode { get; set; }
     public bool UseRewardRoomCameras { get; set; }
     public bool UseRandomSecretModels { get; set; }
     public TRSecretCountMode SecretCountMode { get; set; }
@@ -197,6 +198,7 @@ public class RandomizerSettings
         HardSecrets = config.GetBool(nameof(HardSecrets));
         GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
         GuaranteeSecrets = config.GetBool(nameof(GuaranteeSecrets), true);
+        SecretRewardMode = (TRSecretRewardMode)config.GetEnum(nameof(SecretRewardMode), typeof(TRSecretRewardMode), TRSecretRewardMode.Room);
         UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras), true);
         UseRandomSecretModels = config.GetBool(nameof(UseRandomSecretModels));
         SecretCountMode = (TRSecretCountMode)config.GetEnum(nameof(SecretCountMode), typeof(TRSecretCountMode), TRSecretCountMode.Default);
@@ -364,6 +366,7 @@ public class RandomizerSettings
         config[nameof(HardSecrets)] = HardSecrets;
         config[nameof(GlitchedSecrets)] = GlitchedSecrets;
         config[nameof(GuaranteeSecrets)] = GuaranteeSecrets;
+        config[nameof(SecretRewardMode)] = SecretRewardMode;
         config[nameof(UseRewardRoomCameras)] = UseRewardRoomCameras;
         config[nameof(UseRandomSecretModels)] = UseRandomSecretModels;
         config[nameof(SecretCountMode)] = SecretCountMode;
