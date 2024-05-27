@@ -368,21 +368,6 @@ public partial class AdvancedWindow : Window
                     break;
             }
         }
-        if (HasSecretCountMode)
-        {
-            switch (ControllerProxy.SecretCountMode)
-            {
-                case TRSecretCountMode.Default:
-                    _defaultSecretCountButton.IsChecked = true;
-                    break;
-                case TRSecretCountMode.Shuffled:
-                    _shuffledSecretCountButton.IsChecked = true;
-                    break;
-                case TRSecretCountMode.Customized:
-                    _customizedSecretCountButton.IsChecked = true;
-                    break;
-            }
-        }
         if (HasItemSpriteRandomization)
         {
             switch (ControllerProxy.SpriteRandoMode)

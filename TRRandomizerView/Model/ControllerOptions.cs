@@ -33,6 +33,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels;
     private TRSecretRewardMode[] _secretRewardModes;
     private TRSecretRewardMode _secretRewardMode;
+    private TRSecretCountMode[] _secretCountModes;
     private TRSecretCountMode _secretCountMode;
     private uint _minSecretCount, _maxSecretCount;
     private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity;
@@ -2283,6 +2284,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public TRSecretCountMode[] SecretCountModes
+    {
+        get => _secretCountModes;
+        private set
+        {
+            _secretCountModes = value;
+            FirePropertyChanged();
+        }
+    }
+
     public TRSecretCountMode SecretCountMode
     {
         get => _secretCountMode;
@@ -2290,11 +2301,8 @@ public class ControllerOptions : INotifyPropertyChanged
         {
             _secretCountMode = value;
             FirePropertyChanged();
-            FirePropertyChanged(nameof(IsCustomizedSecretModeCount));
         }
     }
-
-    public bool IsCustomizedSecretModeCount => SecretCountMode == TRSecretCountMode.Customized;
 
     public uint MinSecretCount
     {
@@ -3470,6 +3478,7 @@ public class ControllerOptions : INotifyPropertyChanged
         SecretRewardMode = _controller.SecretRewardMode;
         UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
         UseRandomSecretModels.Value = _controller.UseRandomSecretModels;
+        SecretCountModes = Enum.GetValues<TRSecretCountMode>();
         SecretCountMode = _controller.SecretCountMode;
         MaxSecretCount = _controller.MaxSecretCount;
         MinSecretCount = _controller.MinSecretCount;            

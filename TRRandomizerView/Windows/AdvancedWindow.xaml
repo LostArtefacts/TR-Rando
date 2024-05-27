@@ -1631,9 +1631,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -1641,95 +1638,56 @@
                     </Grid.ColumnDefinitions>
 
                     <Border>
-                        <RadioButton Content="Default"
-                                     GroupName="secretCount"
-                                     x:Name="_defaultSecretCountButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.SecretCountMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static secrets:TRSecretCountMode.Default}, Mode=TwoWay}"/>
+                        <ComboBox
+                            ItemsSource="{Binding ControllerProxy.SecretCountModes}"
+                            SelectedItem="{Binding ControllerProxy.SecretCountMode, Mode=TwoWay}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"/>
                     </Border>
 
-                    <Border Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="The number of secrets per level will match the original game."/>
+                    <Border Grid.Column="1"
+                            Grid.RowSpan="2">
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <Label.Content>
+                                <TextBlock>
+                                    <Run>Choose the number of secrets per level.</Run>
+                                    <LineBreak/>
+                                    <Run>- Default: the number of secrets per level will match the original game.</Run>
+                                    <LineBreak/>
+                                    <Run>- Shuffled: each level will take on the secret count of another - the total number of secrets in the game will remain the same.</Run>
+                                    <LineBreak/>
+                                    <Run>- Customized: each level will be assigned a random number of secrets in the given range.</Run>
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
                     </Border>
 
-                    <Border Grid.Row="1">
-                        <RadioButton Content="Shuffled"
-                                     GroupName="secretCount"
-                                     x:Name="_shuffledSecretCountButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.SecretCountMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static secrets:TRSecretCountMode.Shuffled}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Row="1"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                            Content="Each level will take on the secret count of another - the total number of secrets in the game will remain the same."/>
-                    </Border>
-
-                    <Border Grid.Row="2">
-                        <RadioButton Content="Customized"
-                                     GroupName="secretCount"
-                                     x:Name="_customizedSecretCountButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.SecretCountMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static secrets:TRSecretCountMode.Customized}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Row="2"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                            Content="Each level will be assigned a random number of secrets in the given range."/>
-                    </Border>
-
-                    <Border Grid.Row="3" Margin="20,3,0,0"
-                            IsEnabled="{Binding ControllerProxy.IsCustomizedSecretModeCount}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG3"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Label Content="Minimum value"
-                                   VerticalAlignment="Center"
-                                   Padding="0,0,5,0" Margin="0"/>
-
-                            <ctrl:NumericUpDown HorizontalAlignment="Left"
-                                                Grid.Column="1"
-                                                VerticalAlignment="Center"  
-                                                Value="{Binding ControllerProxy.MinSecretCount, Mode=TwoWay}"
-                                                MinValue="1"
-                                                MaxValue="{Binding ControllerProxy.MaxSecretCount}"/>
-                        </Grid>
-                    </Border>
-
-                    <Border Grid.Row="4" Margin="20,3,0,0"
-                            IsEnabled="{Binding ControllerProxy.IsCustomizedSecretModeCount}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG3"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Label Content="Maximum value"
-                                   VerticalAlignment="Center"
-                                   Padding="0,0,5,0" Margin="0"/>
-
-                            <ctrl:NumericUpDown HorizontalAlignment="Left"
-                                                Grid.Column="1"
-                                                VerticalAlignment="Center"  
-                                                Value="{Binding ControllerProxy.MaxSecretCount, Mode=TwoWay}"
-                                                MinValue="{Binding ControllerProxy.MinSecretCount}"
-                                                MaxValue="5"/>
-                        </Grid>
+                    <Border Grid.Row="1" Margin="0,8,0,0"
+                            IsEnabled="{Binding ControllerProxy.SecretCountMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static secrets:TRSecretCountMode.Customized}, Mode=TwoWay}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label
+                                Content="Min"
+                                VerticalAlignment="Center"
+                                Padding="0,0,3,0" Margin="0"/>
+                            <ctrl:NumericUpDown
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                MinWidth="50"
+                                Value="{Binding ControllerProxy.MinSecretCount, Mode=TwoWay}"
+                                MinValue="1"
+                                MaxValue="{Binding ControllerProxy.MaxSecretCount}"/>
+                            <Label
+                                Content="Max"
+                                VerticalAlignment="Center"
+                                Padding="6,0,3,0" Margin="0"/>
+                            <ctrl:NumericUpDown
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                MinWidth="50"
+                                Value="{Binding ControllerProxy.MaxSecretCount, Mode=TwoWay}"
+                                MinValue="{Binding ControllerProxy.MinSecretCount}"
+                                MaxValue="5"/>
+                        </StackPanel>
                     </Border>
                 </Grid>
             </StackPanel>
