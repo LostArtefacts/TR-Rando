@@ -30,11 +30,12 @@ public class ControllerOptions : INotifyPropertyChanged
     private bool _addReturnPaths, _fixOGBugs, _disableDemos, _autoLaunchGame;
 
     private BoolItemControlClass _randomizeLevelSequencing;
-    private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels;
+    private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRandomSecretModels;
     private TRSecretRewardMode[] _secretRewardModes;
     private TRSecretRewardMode _secretRewardMode;
     private TRSecretCountMode[] _secretCountModes;
     private TRSecretCountMode _secretCountMode;
+    private bool _useRewardRoomCameras;
     private uint _minSecretCount, _maxSecretCount;
     private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity;
     private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems;
@@ -2264,7 +2265,7 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
-    public BoolItemControlClass UseRewardRoomCameras
+    public bool UseRewardRoomCameras
     {
         get => _useRewardRoomCameras;
         set
@@ -2899,12 +2900,6 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "Guarantees that at least one hard and/or glitched secret (based on above selection) will appear in each level where possible."
         };
         BindingOperations.SetBinding(GuaranteeSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
-        UseRewardRoomCameras = new BoolItemControlClass()
-        {
-            Title = "Enable reward room cameras",
-            Description = "When picking up secrets, show a hint where the reward room for the level is located."
-        };
-        BindingOperations.SetBinding(UseRewardRoomCameras, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
         UseRandomSecretModels = new BoolItemControlClass()
         {
             Title = "Use random secret types",
@@ -3254,7 +3249,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         SecretBoolItemControls = new List<BoolItemControlClass>()
         {
-            _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels
+            _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRandomSecretModels
         };
         ItemBoolItemControls = new List<BoolItemControlClass>()
         {
@@ -3326,7 +3321,6 @@ public class ControllerOptions : INotifyPropertyChanged
 
         _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = _changeDoorSFX.IsAvailable = IsSFXTypeSupported;
 
-        _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
         _useRandomSecretModels.IsAvailable = IsSecretModelsTypeSupported;
 
         _swapEnemyAppearance.IsAvailable = IsMeshSwapsTypeSupported;
@@ -3476,7 +3470,7 @@ public class ControllerOptions : INotifyPropertyChanged
         GuaranteeSecrets.Value = _controller.GuaranteeSecrets;
         SecretRewardModes = Enum.GetValues<TRSecretRewardMode>();
         SecretRewardMode = _controller.SecretRewardMode;
-        UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
+        UseRewardRoomCameras = _controller.UseRewardRoomCameras;
         UseRandomSecretModels.Value = _controller.UseRandomSecretModels;
         SecretCountModes = Enum.GetValues<TRSecretCountMode>();
         SecretCountMode = _controller.SecretCountMode;
@@ -3783,7 +3777,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
         _controller.GuaranteeSecrets = GuaranteeSecrets.Value;
         _controller.SecretRewardMode = SecretRewardMode;
-        _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
+        _controller.UseRewardRoomCameras = UseRewardRoomCameras;
         _controller.UseRandomSecretModels = UseRandomSecretModels.Value;
         _controller.SecretCountMode = SecretCountMode;
         _controller.MinSecretCount = MinSecretCount;
