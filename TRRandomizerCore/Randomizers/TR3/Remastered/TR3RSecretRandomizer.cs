@@ -18,7 +18,7 @@ public class TR3RSecretRandomizer : BaseTR3RRandomizer, ISecretRandomizer
     private readonly Dictionary<string, List<Location>> _locations, _unarmedLocations;
     private readonly LocationPicker _routePicker;
     private SecretPicker<TR3Entity> _secretPicker;
-    private SecretArtefactPlacer<TR3Type> _placer;
+    private SecretArtefactPlacer<TR3Type, TR3Entity> _placer;
 
     public TR3RDataCache DataCache { get; set; }
     public ItemFactory<TR3Entity> ItemFactory { get; set; }
@@ -51,7 +51,8 @@ public class TR3RSecretRandomizer : BaseTR3RRandomizer, ISecretRandomizer
 
         _placer = new()
         {
-            Settings = Settings
+            Settings = Settings,
+            ItemFactory = ItemFactory,
         };
 
         SetMessage("Randomizing secrets - loading levels");

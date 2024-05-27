@@ -10,8 +10,9 @@ using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class SecretArtefactPlacer<T>
+public class SecretArtefactPlacer<T, E>
     where T : Enum
+    where E : TREntity<T>, new()
 {
     private static readonly string _invalidLocationMsg = "Cannot place a nonvalidated secret where a trigger already exists - {0} [X={1}, Y={2}, Z={3}, R={4}]";
     private static readonly string _trapdoorLocationMsg = "Cannot place a secret on the same sector as a bridge/trapdoor - {0} [X={1}, Y={2}, Z={3}, R={4}]";
@@ -24,6 +25,7 @@ public class SecretArtefactPlacer<T>
     private static readonly int _triggerEdgeLimit = (int)Math.Ceiling(TRConsts.Step4 / 10d); // Within ~10% of a tile edge, triggers will be copied into neighbours
 
     public RandomizerSettings Settings { get; set; }
+    public ItemFactory<E> ItemFactory { get; set; }
 
     private TRGameVersion _version;
     private string _levelName;
@@ -355,5 +357,134 @@ public class SecretArtefactPlacer<T>
         }
 
         _floorData[sector.FDIndex].Add(trigger);
+    }
+
+    public TRSecretRoom<E> MakePlaceholderRewardRoom(TRGameVersion gameVersion, string levelName, int secretCount, List<E> allItems)
+    {
+        TRSecretRoom<E> rewardRoom = null;
+        string mappingPath = $@"Resources\{gameVersion}\SecretMapping\{levelName}-SecretMapping.json";
+        if (File.Exists(mappingPath))
+        {
+            int requiredDoors = (int)Math.Ceiling((double)secretCount / TRConsts.MaskBits);
+            rewardRoom = new()
+            {
+                DoorIndices = new()
+            };
+
+            for (int i = 0; i < requiredDoors; i++)
+            {
+                E door = ItemFactory.CreateItem(levelName, allItems);
+                rewardRoom.DoorIndices.Add(allItems.IndexOf(door));
+            }
+        }
+
+        return rewardRoom;
+    }
+
+    public void CreateRewardRoom(string levelName,
+        TRSecretRoom<E> placeholder,
+        TRSecretRoom<E> finalRoom,
+        List<E> allItems,
+        List<TRCamera> allCameras,
+        T cameraTargetType,
+        List<int> rewardIndices,
+        FDControl floorData,
+        short roomIndex,
+        int secretCount,
+        Func<T, bool> isTrapdoor)
+    {
+        // Convert the temporary doors
+        finalRoom.DoorIndices = placeholder.DoorIndices;
+        for (int i = 0; i < finalRoom.DoorIndices.Count; i++)
+        {
+            int doorIndex = finalRoom.DoorIndices[i];
+            E door = finalRoom.Doors[i];
+            if (door.Room < 0)
+            {
+                door.Room = roomIndex;
+            }
+            allItems[doorIndex] = door;
+
+            if (isTrapdoor(door.TypeID))
+            {
+                TRRoomSector sector = _sectorGetter(door.GetFloorLocation(_sectorGetter));
+                if (sector.FDIndex == 0)
+                {
+                    floorData.CreateFloorData(sector);
+                }
+
+                floorData[sector.FDIndex].Add(new FDTriggerEntry
+                {
+                    TrigType = FDTrigType.Dummy,
+                    Actions = new()
+                    {
+                        new()
+                        {
+                            Parameter = (short)doorIndex
+                        }
+                    }
+                });
+            }
+        }
+
+        // Spread the rewards out fairly evenly across each defined position in the new room.
+        int rewardPositionCount = finalRoom.RewardPositions.Count;
+        for (int i = 0; i < rewardIndices.Count; i++)
+        {
+            E item = allItems[rewardIndices[i]];
+            item.SetLocation(finalRoom.RewardPositions[i % rewardPositionCount]);
+            item.Room = roomIndex;
+        }
+
+        // #238 Make the required number of cameras. Because of the masks, we need
+        // a camera per counted secret otherwise it only shows once.
+        if (Settings.UseRewardRoomCameras && finalRoom.Cameras != null)
+        {
+            finalRoom.CameraIndices = new();
+            for (int i = 0; i < secretCount; i++)
+            {
+                finalRoom.CameraIndices.Add(allCameras.Count);
+                allCameras.Add(finalRoom.Cameras[i % finalRoom.Cameras.Count]);
+            }
+
+            short cameraTarget;
+            if (finalRoom.CameraTarget != null && ItemFactory.CanCreateItem(levelName, allItems))
+            {
+                E target = ItemFactory.CreateItem(levelName, allItems, finalRoom.CameraTarget);
+                target.TypeID = cameraTargetType;
+                cameraTarget = (short)allItems.IndexOf(target);
+            }
+            else
+            {
+                cameraTarget = (short)finalRoom.DoorIndices[0];
+            }
+
+            // Get each trigger created for each secret index and add the camera, provided
+            // there isn't any existing camera actions.
+            for (int i = 0; i < secretCount; i++)
+            {
+                List<FDTriggerEntry> secretTriggers = floorData.GetSecretTriggers(i);
+                foreach (FDTriggerEntry trigger in secretTriggers)
+                {
+                    if (trigger.Actions.Find(a => a.Action == FDTrigAction.Camera) == null)
+                    {
+                        trigger.Actions.Add(new()
+                        {
+                            Action = FDTrigAction.Camera,
+                            CamAction = new()
+                            {
+                                Timer = 4
+                            },
+                            Parameter = (short)finalRoom.CameraIndices[i]
+                        });
+                        trigger.Actions.Add(new()
+                        {
+                            Action = FDTrigAction.LookAtItem,
+                            Parameter = cameraTarget
+                        });
+                    }
+                }
+            }
+        }
     }
 }
