@@ -1000,6 +1000,16 @@ public class ControllerOptions : INotifyPropertyChanged
         ColdLevelCount = (uint)Math.Min(ColdLevelCount, MaximumLevelCount);
     }
 
+    private void UpdateSeparateSecretTracks()
+    {
+        bool available = IsTR2 || !RandomizeSecrets || SecretRewardMode == TRSecretRewardMode.Stack;
+        if (available != _separateSecretTracks.IsActive)
+        {
+            _separateSecretTracks.IsActive = available;
+            FirePropertyChanged(nameof(SeparateSecretTracks));
+        }
+    }
+
     public bool RandomizationPossible
     {
         get => RandomizeGameMode || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeHealth || RandomizeSunsets ||
@@ -1651,9 +1661,8 @@ public class ControllerOptions : INotifyPropertyChanged
         set
         {
             _randomSecretsControl.IsActive = value;
-            _separateSecretTracks.IsActive = IsTR2 || !value;
             FirePropertyChanged();
-            FirePropertyChanged(nameof(SeparateSecretTracks));
+            UpdateSeparateSecretTracks();
         }
     }
 
@@ -2250,6 +2259,7 @@ public class ControllerOptions : INotifyPropertyChanged
         {
             _secretRewardMode = value;
             FirePropertyChanged();
+            UpdateSeparateSecretTracks();
         }
     }
 

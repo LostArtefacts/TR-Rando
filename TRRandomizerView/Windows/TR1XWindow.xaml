@@ -1402,7 +1402,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.FixSecretsKillingMusic, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Fix secrets killing music" />
+                                       Content="Fix secrets killing music *" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="5"
@@ -1418,7 +1418,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.FixSpeechesKillingMusic, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Fix speech killing music" />
+                                       Content="Fix speech killing music *" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="6"

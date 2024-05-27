@@ -145,10 +145,9 @@ public abstract class AudioAllocator
             };
 
             List<FDTriggerEntry> triggers = floorData.GetSecretTriggers(i);
-            foreach (FDTriggerEntry trigger in triggers)
+            foreach (FDTriggerEntry trigger in triggers.Where(t => t.Mask == TRConsts.FullMask))
             {
-                FDActionItem currentMusicAction = trigger.Actions.Find(a => a.Action == FDTrigAction.PlaySoundtrack);
-                if (currentMusicAction == null)
+                if (!trigger.Actions.Any(a => a.Action == FDTrigAction.PlaySoundtrack))
                 {
                     trigger.Actions.Add(musicAction);
                 }

@@ -71,9 +71,6 @@ public class TR1AudioAllocator : AudioAllocator
     public void RandomizeMusicTriggers(TR1Level level)
     {
         RandomizeFloorTracks(level.Rooms, level.FloorData);
-        if (!Settings.RandomizeSecrets)
-        {
-            RandomizeSecretTracks(level.FloorData, _defaultSecretTrack);
-        }
+        RandomizeSecretTracks(level.FloorData, _defaultSecretTrack);
     }
 }
