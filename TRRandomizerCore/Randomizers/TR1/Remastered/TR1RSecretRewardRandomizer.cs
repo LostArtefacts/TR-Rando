@@ -14,6 +14,7 @@ public class TR1RSecretRewardRandomizer : BaseTR1RRandomizer
         TR1SecretRewardAllocator allocator = new()
         {
             ItemFactory = ItemFactory,
+            Settings = Settings,
             Generator = _generator
         };
 
