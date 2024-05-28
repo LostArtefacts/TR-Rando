@@ -96,7 +96,7 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
 
         _picker.Initialise(levelName, GetItemLocationPool(levelName, level, true), Settings, Generator);
 
-        int sequence = GetKeyItemLevelSequence(levelName, originalSequence);
+        originalSequence = GetKeyItemLevelSequence(levelName, originalSequence);
         for (int i = 0; i < level.Entities.Count; i++)
         {
             TR1Entity entity = level.Entities[i];
@@ -107,8 +107,8 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
             }
 
             bool hasPickupTrigger = LocationUtilities.HasPickupTriger(entity, i, level);
-            _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger,
-                sequence, level.Rooms[entity.Room].Info);
+            _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger, originalSequence);
+            ItemMoved(entity);
         }
     }
 

@@ -63,9 +63,8 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
                 continue;
             }
 
-            _picker.RandomizeKeyItemLocation(
-                entity, LocationUtilities.HasPickupTriger(entity, i, level),
-                originalSequence, level.Rooms[entity.Room].Info);
+            bool hasPickupTrigger = LocationUtilities.HasPickupTriger(entity, i, level);
+            _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger, originalSequence);
             ItemMoved(entity);
         }
     }
