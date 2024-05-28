@@ -2,6 +2,8 @@
 - added support for TR1X V4 (#626)
 - added Lara's assault course outfit in TR2 for outfit randomization (#672)
 - added gun holsters to Lara's robe outfit in TR2 (#672)
+- added an option to stack rewards with secrets in TR1 and TR3, rather than using reward rooms (#687)
+- added separate secret audio for TR1 and TR3 when not using reward rooms (#687)
 - fixed a key item softlock in Crash Site (#662)
 - fixed incorrect item and mesh positions in Home Sweet Home when mirrored (#676)
 - fixed uncontrolled SFX in gym/assault course levels not being linked to the correct setting (#684)

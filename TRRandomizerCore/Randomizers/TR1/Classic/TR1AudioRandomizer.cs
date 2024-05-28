@@ -40,11 +40,19 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             }
         }
 
+        TR1ScriptEditor script = (ScriptEditor as TR1ScriptEditor);
         if (Settings.RandomizeWibble)
         {
-            (ScriptEditor as TR1ScriptEditor).EnablePitchedSounds = true;
-            ScriptEditor.SaveScript();
+            script.EnablePitchedSounds = true;
         }
+
+        if (Settings.SeparateSecretTracks && Settings.SecretRewardMode == Secrets.TRSecretRewardMode.Stack)
+        {
+            script.FixSecretsKillingMusic = false;
+            script.FixSpeechesKillingMusic = false;
+        }
+
+        ScriptEditor.SaveScript();
     }
 
     private void RandomizeSoundEffects(TR1CombinedLevel level)

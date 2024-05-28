@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TRDataControl;
-using TRDataControl.Environment;
 using TRGE.Core;
 using TRGE.Core.Item.Enums;
 using TRLevelControl.Helpers;
@@ -20,7 +19,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
     private readonly Dictionary<string, List<Location>> _locations, _unarmedLocations;
     private readonly LocationPicker _routePicker;
     private SecretPicker<TR1Entity> _secretPicker;
-    private SecretArtefactPlacer<TR1Type> _placer;
+    private SecretArtefactPlacer<TR1Type, TR1Entity> _placer;
 
     public ItemFactory<TR1Entity> ItemFactory { get; set; }
     public IMirrorControl Mirrorer { get; set; }
@@ -54,7 +53,8 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
         _placer = new()
         {
-            Settings = Settings
+            Settings = Settings,
+            ItemFactory = ItemFactory,
         };
 
         if (!Settings.UseSecretPack)
@@ -88,23 +88,13 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
 
         SetMessage("Randomizing secrets - importing models");
-        foreach (SecretProcessor processor in processors)
-        {
-            processor.Start();
-        }
-
-        foreach (SecretProcessor processor in processors)
-        {
-            processor.Join();
-        }
+        processors.ForEach(p => p.Start());
+        processors.ForEach(p => p.Join());
 
         if (!SaveMonitor.IsCancelled && _processingException == null)
         {
             SetMessage("Randomizing secrets - placing items");
-            foreach (SecretProcessor processor in processors)
-            {
-                processor.ApplyRandomization();
-            }
+            processors.ForEach(p => p.ApplyRandomization());
         }
 
         _processingException?.Throw();
@@ -169,35 +159,23 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     private TRSecretRoom<TR1Entity> MakePlaceholderRewardRoom(TR1CombinedLevel level)
     {
-        TRSecretRoom<TR1Entity> rewardRoom = null;
-        string mappingPath = @"TR1\SecretMapping\" + level.Name + "-SecretMapping.json";
-        if (ResourceExists(mappingPath))
-        {
-            // Trigger activation masks have 5 bits so we need a specific number of doors to match.
-            // Limited to 1 (5 secrets for the time being).
-            //double countedSecrets = Settings.DevelopmentMode ? _devModeSecretCount : level.Script.NumSecrets;
-            int requiredDoors = 1;// (int)Math.Ceiling(countedSecrets / TRSecretPlacement<TREntities>.MaskBits);
-
-            // Make the doors and store the entity indices for the secret triggers
-            rewardRoom = new()
-            {
-                DoorIndices = new()
-            };
-
-            for (int i = 0; i < requiredDoors; i++)
-            {
-                TR1Entity door = ItemFactory.CreateItem(level.Name, level.Data.Entities);
-                rewardRoom.DoorIndices.Add(level.Data.Entities.IndexOf(door));
-            }
-        }
-
-        return rewardRoom;
+        return _placer.MakePlaceholderRewardRoom(TRGameVersion.TR1, level.Name, level.Script.NumSecrets, level.Data.Entities);
     }
 
     private void ActualiseRewardRoom(TR1CombinedLevel level, TRSecretRoom<TR1Entity> placeholder)
     {
-        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath(@"TR1\SecretMapping\" + level.Name + "-SecretMapping.json"));
-        if (secretMapping == null || secretMapping.Rooms.Count == 0)
+        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($@"TR1\SecretMapping\{level.Name}-SecretMapping.json"));
+        if (secretMapping == null)
+        {
+            return;
+        }
+
+        if (placeholder == null)
+        {
+            _placer.CreateRewardStacks(level.Data.Entities, secretMapping.RewardEntities, level.Data.FloorData);
+            return;
+        }
+        else if (secretMapping.Rooms.Count == 0)
         {
             return;
         }
@@ -216,120 +194,18 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         rewardRoom.Room.ApplyToLevel(level.Data);
         short roomIndex = (short)(level.Data.Rooms.Count - 1);
 
-        // Convert the temporary doors
-        rewardRoom.DoorIndices = placeholder.DoorIndices;
-        for (int i = 0; i < rewardRoom.DoorIndices.Count; i++)
-        {
-            int doorIndex = rewardRoom.DoorIndices[i];
-            TR1Entity door = rewardRoom.Doors[i];
-            if (door.Room < 0)
-            {
-                door.Room = roomIndex;
-            }
-            level.Data.Entities[doorIndex] = door;
-
-            // If it's a trapdoor, we need to make a dummy trigger for it
-            if (TR1TypeUtilities.IsTrapdoor(door.TypeID))
-            {
-                CreateTrapdoorTrigger(door, (ushort)doorIndex, level.Data);
-            }
-        }
-
-        // Get the reward entities.
-        List<int> rewardEntities = secretMapping.RewardEntities;
-
-        // Spread them out fairly evenly across each defined position in the new room.
-        int rewardPositionCount = rewardRoom.RewardPositions.Count;
-        for (int i = 0; i < rewardEntities.Count; i++)
-        {
-            TR1Entity item = level.Data.Entities[rewardEntities[i]];
-            Location position = rewardRoom.RewardPositions[i % rewardPositionCount];
-
-            item.X = position.X;
-            item.Y = position.Y;
-            item.Z = position.Z;
-            item.Room = roomIndex;
-        }
-
-        // #238 Make the required number of cameras. Because of the masks, we need
-        // a camera per counted secret otherwise it only shows once.
-        if (Settings.UseRewardRoomCameras && rewardRoom.Cameras != null)
-        {
-            double countedSecrets = Settings.DevelopmentMode ? _maxSecretCount : level.Script.NumSecrets;
-            rewardRoom.CameraIndices = new List<int>();
-            for (int i = 0; i < countedSecrets; i++)
-            {
-                rewardRoom.CameraIndices.Add(level.Data.Cameras.Count);
-                level.Data.Cameras.Add(rewardRoom.Cameras[i % rewardRoom.Cameras.Count]);
-            }
-
-            short cameraTarget;
-            if (rewardRoom.CameraTarget != null && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
-            {
-                TR1Entity target = ItemFactory.CreateItem(level.Name, level.Data.Entities, rewardRoom.CameraTarget);
-                target.TypeID = TR1Type.CameraTarget_N;
-                cameraTarget = (short)level.Data.Entities.IndexOf(target);
-            }
-            else
-            {
-                cameraTarget = (short)rewardRoom.DoorIndices[0];
-            }
-
-            // Get each trigger created for each secret index and add the camera, provided
-            // there isn't any existing camera actions.
-            for (int i = 0; i < countedSecrets; i++)
-            {
-                List<FDTriggerEntry> secretTriggers = level.Data.FloorData.GetSecretTriggers(i);
-                foreach (FDTriggerEntry trigger in secretTriggers)
-                {
-                    if (trigger.Actions.Find(a => a.Action == FDTrigAction.Camera) == null)
-                    {
-                        trigger.Actions.Add(new FDActionItem
-                        {
-                            Action = FDTrigAction.Camera,
-                            CamAction = new()
-                            {
-                                Timer = 4
-                            },
-                            Parameter = (short)rewardRoom.CameraIndices[i]
-                        });
-                        trigger.Actions.Add(new FDActionItem
-                        {
-                            Action = FDTrigAction.LookAtItem,
-                            Parameter = cameraTarget
-                        });
-                    }
-                }
-            }
-        }
-    }
-
-    private static void CreateTrapdoorTrigger(TR1Entity door, ushort doorIndex, TR1Level level)
-    {
-        new EMTriggerFunction
-        {
-            Locations = new()
-            {
-                new()
-                {
-                    X = door.X,
-                    Y = door.Y,
-                    Z = door.Z,
-                    Room = door.Room
-                }
-            },
-            Trigger = new()
-            {
-                TrigType = FDTrigType.Dummy,
-                Actions = new()
-                {
-                    new()
-                    {
-                        Parameter = (short)doorIndex
-                    }
-                }
-            }
-        }.ApplyToLevel(level);
+        _placer.CreateRewardRoom(level.Name,
+            placeholder,
+            rewardRoom,
+            level.Data.Entities,
+            level.Data.Cameras,
+            TR1Type.CameraTarget_N,
+            secretMapping.RewardEntities,
+            level.Data.FloorData,
+            roomIndex,
+            Settings.DevelopmentMode ? _maxSecretCount : level.Script.NumSecrets,
+            t => TR1TypeUtilities.IsTrapdoor(t)
+        );
     }
 
     private void PlaceAllSecrets(TR1CombinedLevel level, List<TR1Type> pickupTypes, TRSecretRoom<TR1Entity> rewardRoom)
@@ -401,13 +277,17 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             secret.EntityIndex = (short)ItemFactory.GetNextIndex(level.Name, level.Data.Entities);
             secret.PickupType = pickupTypes[pickupIndex % pickupTypes.Count];
 
-            if (Settings.UseRewardRoomCameras && rewardRoom.HasCameras)
+            if (rewardRoom != null)
             {
-                secret.CameraIndex = (short)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
-                secret.CameraTarget = (short)rewardRoom.DoorIndices[0];
+                if (Settings.UseRewardRoomCameras && rewardRoom.HasCameras)
+                {
+                    secret.CameraIndex = (short)rewardRoom.CameraIndices[pickupIndex % rewardRoom.CameraIndices.Count];
+                    secret.CameraTarget = (short)rewardRoom.DoorIndices[0];
+                }
+
+                secret.SetMaskAndDoor(level.Script.NumSecrets, rewardRoom.DoorIndices);
             }
 
-            secret.SetMaskAndDoor(level.Script.NumSecrets, rewardRoom.DoorIndices);
             _placer.PlaceSecret(secret);
 
             // Turn off walk-to-items in TR1X if we are placing on a slope above water.

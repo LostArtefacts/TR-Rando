@@ -13,7 +13,7 @@ public class TR3RItemRandomizer : BaseTR3RRandomizer
     public override void Randomize(int seed)
     {
         _generator = new(seed);
-        _allocator = new(true)
+        _allocator = new()
         {
             Generator = _generator,
             Settings = Settings,

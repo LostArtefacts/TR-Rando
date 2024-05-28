@@ -30,8 +30,12 @@ public class ControllerOptions : INotifyPropertyChanged
     private bool _addReturnPaths, _fixOGBugs, _disableDemos, _autoLaunchGame;
 
     private BoolItemControlClass _randomizeLevelSequencing;
-    private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels;
+    private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRandomSecretModels;
+    private TRSecretRewardMode[] _secretRewardModes;
+    private TRSecretRewardMode _secretRewardMode;
+    private TRSecretCountMode[] _secretCountModes;
     private TRSecretCountMode _secretCountMode;
+    private bool _useRewardRoomCameras;
     private uint _minSecretCount, _maxSecretCount;
     private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity;
     private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems;
@@ -998,6 +1002,16 @@ public class ControllerOptions : INotifyPropertyChanged
         ColdLevelCount = (uint)Math.Min(ColdLevelCount, MaximumLevelCount);
     }
 
+    private void UpdateSeparateSecretTracks()
+    {
+        bool available = IsTR2 || !RandomizeSecrets || SecretRewardMode == TRSecretRewardMode.Stack;
+        if (available != _separateSecretTracks.IsActive)
+        {
+            _separateSecretTracks.IsActive = available;
+            FirePropertyChanged(nameof(SeparateSecretTracks));
+        }
+    }
+
     public bool RandomizationPossible
     {
         get => RandomizeGameMode || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeHealth || RandomizeSunsets ||
@@ -1649,9 +1663,8 @@ public class ControllerOptions : INotifyPropertyChanged
         set
         {
             _randomSecretsControl.IsActive = value;
-            _separateSecretTracks.IsActive = IsTR2 || !value;
             FirePropertyChanged();
-            FirePropertyChanged(nameof(SeparateSecretTracks));
+            UpdateSeparateSecretTracks();
         }
     }
 
@@ -2231,7 +2244,28 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
-    public BoolItemControlClass UseRewardRoomCameras
+    public TRSecretRewardMode[] SecretRewardModes
+    {
+        get => _secretRewardModes;
+        private set
+        {
+            _secretRewardModes = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public TRSecretRewardMode SecretRewardMode
+    {
+        get => _secretRewardMode;
+        set
+        {
+            _secretRewardMode = value;
+            FirePropertyChanged();
+            UpdateSeparateSecretTracks();
+        }
+    }
+
+    public bool UseRewardRoomCameras
     {
         get => _useRewardRoomCameras;
         set
@@ -2251,6 +2285,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public TRSecretCountMode[] SecretCountModes
+    {
+        get => _secretCountModes;
+        private set
+        {
+            _secretCountModes = value;
+            FirePropertyChanged();
+        }
+    }
+
     public TRSecretCountMode SecretCountMode
     {
         get => _secretCountMode;
@@ -2258,11 +2302,8 @@ public class ControllerOptions : INotifyPropertyChanged
         {
             _secretCountMode = value;
             FirePropertyChanged();
-            FirePropertyChanged(nameof(IsCustomizedSecretModeCount));
         }
     }
-
-    public bool IsCustomizedSecretModeCount => SecretCountMode == TRSecretCountMode.Customized;
 
     public uint MinSecretCount
     {
@@ -2859,12 +2900,6 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "Guarantees that at least one hard and/or glitched secret (based on above selection) will appear in each level where possible."
         };
         BindingOperations.SetBinding(GuaranteeSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
-        UseRewardRoomCameras = new BoolItemControlClass()
-        {
-            Title = "Enable reward room cameras",
-            Description = "When picking up secrets, show a hint where the reward room for the level is located."
-        };
-        BindingOperations.SetBinding(UseRewardRoomCameras, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
         UseRandomSecretModels = new BoolItemControlClass()
         {
             Title = "Use random secret types",
@@ -3214,7 +3249,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         SecretBoolItemControls = new List<BoolItemControlClass>()
         {
-            _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels
+            _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRandomSecretModels
         };
         ItemBoolItemControls = new List<BoolItemControlClass>()
         {
@@ -3286,7 +3321,6 @@ public class ControllerOptions : INotifyPropertyChanged
 
         _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = _changeDoorSFX.IsAvailable = IsSFXTypeSupported;
 
-        _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
         _useRandomSecretModels.IsAvailable = IsSecretModelsTypeSupported;
 
         _swapEnemyAppearance.IsAvailable = IsMeshSwapsTypeSupported;
@@ -3434,8 +3468,11 @@ public class ControllerOptions : INotifyPropertyChanged
         IsHardSecrets.Value = _controller.HardSecrets;
         IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
         GuaranteeSecrets.Value = _controller.GuaranteeSecrets;
-        UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
+        SecretRewardModes = Enum.GetValues<TRSecretRewardMode>();
+        SecretRewardMode = _controller.SecretRewardMode;
+        UseRewardRoomCameras = _controller.UseRewardRoomCameras;
         UseRandomSecretModels.Value = _controller.UseRandomSecretModels;
+        SecretCountModes = Enum.GetValues<TRSecretCountMode>();
         SecretCountMode = _controller.SecretCountMode;
         MaxSecretCount = _controller.MaxSecretCount;
         MinSecretCount = _controller.MinSecretCount;            
@@ -3739,7 +3776,8 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.HardSecrets = IsHardSecrets.Value;
         _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
         _controller.GuaranteeSecrets = GuaranteeSecrets.Value;
-        _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
+        _controller.SecretRewardMode = SecretRewardMode;
+        _controller.UseRewardRoomCameras = UseRewardRoomCameras;
         _controller.UseRandomSecretModels = UseRandomSecretModels.Value;
         _controller.SecretCountMode = SecretCountMode;
         _controller.MinSecretCount = MinSecretCount;
@@ -3988,7 +4026,7 @@ public class ControllerOptions : INotifyPropertyChanged
         }
         else if (IsTR1Main || IsTR3Main)
         {
-            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and reward rooms created for collecting all secrets.";
+            _randomSecretsControl.Description = "Randomize secret locations. Artefacts will be added as pickups and either reward rooms created for collecting all secrets, or rewards will be stacked with the secrets.";
         }
         else
         {
