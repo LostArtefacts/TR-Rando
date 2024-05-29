@@ -10,6 +10,8 @@ public class TR2RItemRandomizer : BaseTR2RRandomizer
 
     public ItemFactory<TR2Entity> ItemFactory { get; set; }
 
+    private List<TR2Entity> _puzzle2Items;
+
     public override void Randomize(int seed)
     {
         _generator = new(seed);
@@ -23,8 +25,11 @@ public class TR2RItemRandomizer : BaseTR2RRandomizer
         foreach (TRRScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
-            _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script);
+            ConvertPuzzle2Items();
 
+            _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script);
+            
+            RevertPuzzle2Items();
             SaveLevelInstance();
             if (!TriggerProgress())
             {
@@ -33,26 +38,45 @@ public class TR2RItemRandomizer : BaseTR2RRandomizer
         }
     }
 
-    public void RandomizeKeyItems()
+    public void FinalizeRandomization()
     {
         foreach (TRRScriptedLevel lvl in Levels)
         {
-            LoadLevelInstance(lvl);
+            if (Settings.ItemMode == ItemMode.Shuffled || Settings.IncludeKeyItems)
+            {
+                LoadLevelInstance(lvl);
 
-            // In OG, all puzzle2 items are switched to puzzle3 to allow the dragon to be imported everywhere.
-            // This means routes have been defined to look for these types, so we need to flip them temporarily.
-            // See TR2ModelAdjuster and LocationPicker.GetKeyItemID.
-            List<TR2Entity> puzzle2Items = _levelInstance.Data.Entities.FindAll(e => e.TypeID == TR2Type.Puzzle2_S_P);
-            puzzle2Items.ForEach(e => e.TypeID = TR2Type.Puzzle3_S_P);
+                if (Settings.ItemMode == ItemMode.Shuffled)
+                {
+                    _allocator.ApplyItemSwaps(_levelInstance.Name, _levelInstance.Data.Entities);
+                    _puzzle2Items = _levelInstance.Data.Entities.FindAll(e => e.TypeID == TR2Type.Puzzle3_S_P); // Already converted in first shuffling stage
+                }
+                else
+                {
+                    ConvertPuzzle2Items();
+                    _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
+                }
 
-            _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
-            puzzle2Items.ForEach(e => e.TypeID = TR2Type.Puzzle2_S_P);
+                RevertPuzzle2Items();
+                SaveLevelInstance();
+            }
 
-            SaveLevelInstance();
             if (!TriggerProgress())
             {
                 break;
             }
         }
     }
+
+    private void ConvertPuzzle2Items()
+    {
+        // In OG, all puzzle2 items are switched to puzzle3 to allow the dragon to be imported everywhere.
+        // This means routes have been defined to look for these types, so we need to flip them temporarily.
+        // See TR2ModelAdjuster and LocationPicker.GetKeyItemID.
+        _puzzle2Items = _levelInstance.Data.Entities.FindAll(e => e.TypeID == TR2Type.Puzzle2_S_P);
+        _puzzle2Items.ForEach(e => e.TypeID = TR2Type.Puzzle3_S_P);
+    }
+
+    private void RevertPuzzle2Items()
+        => _puzzle2Items.ForEach(e => e.TypeID = TR2Type.Puzzle2_S_P);
 }

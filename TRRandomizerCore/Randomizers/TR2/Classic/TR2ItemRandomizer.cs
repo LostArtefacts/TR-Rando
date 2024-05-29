@@ -51,15 +51,27 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
     }
 
-    public void RandomizeKeyItems()
+    public void FinalizeRandomization()
     {
         foreach (TR2ScriptedLevel lvl in Levels)
         {
-            LoadLevelInstance(lvl);
-            AdjustSeraphContinuity(_levelInstance);
-            _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
+            if (Settings.ItemMode == ItemMode.Shuffled || Settings.IncludeKeyItems)
+            {
+                LoadLevelInstance(lvl);
 
-            SaveLevelInstance();
+                if (Settings.ItemMode == ItemMode.Shuffled)
+                {
+                    _allocator.ApplyItemSwaps(_levelInstance.Name, _levelInstance.Data.Entities);
+                }
+                else
+                {
+                    AdjustSeraphContinuity(_levelInstance);
+                    _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
+                }
+
+                SaveLevelInstance();
+            }
+
             if (!TriggerProgress())
             {
                 break;
