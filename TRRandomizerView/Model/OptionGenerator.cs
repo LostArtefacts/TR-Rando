@@ -258,7 +258,6 @@ public class OptionGenerator
     private void RandomizeItemOptions()
     {
         RandomizeBoolItems(_options.ItemBoolItemControls);
-        _options.RandoItemDifficulty = GetRandomEnumValue<ItemDifficulty>(typeof(ItemDifficulty));
         if (_options.IsItemSpriteTypeSupported)
         {
             if (_options.RandomizeItemSprites = GetRandomBool())

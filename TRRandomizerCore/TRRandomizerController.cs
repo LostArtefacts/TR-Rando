@@ -1101,6 +1101,12 @@ public class TRRandomizerController
         }
     }
 
+    public ItemMode ItemMode
+    {
+        get => LevelRandomizer.ItemMode;
+        set => LevelRandomizer.ItemMode = value;
+    }
+
     public bool IncludeKeyItems
     {
         get => LevelRandomizer.IncludeKeyItems;

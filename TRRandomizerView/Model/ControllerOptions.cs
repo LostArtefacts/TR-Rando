@@ -37,7 +37,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private TRSecretCountMode _secretCountMode;
     private bool _useRewardRoomCameras;
     private uint _minSecretCount, _maxSecretCount;
-    private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity;
+    private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity, _oneItemDifficulty;
     private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems;
     private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures, _retainLaraTextures;
     private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
@@ -91,7 +91,6 @@ public class ControllerOptions : INotifyPropertyChanged
     private bool _useEnemyExclusions, _showExclusionWarnings;
 
     private RandoDifficulty _randoEnemyDifficulty;
-    private ItemDifficulty _randoItemDifficulty;
     private ItemRange _keyItemRange;
     private GlobeDisplayOption _globeDisplayOption;
     private BirdMonsterBehaviour _birdMonsterBehaviour;
@@ -106,8 +105,12 @@ public class ControllerOptions : INotifyPropertyChanged
     private uint _minStartingHealth, _maxStartingHealth, _medilessLevelCount;
     private bool _useRecommendedCommunitySettings;
 
+    private SpriteRandoMode[] _spriteRandoModes;
     private SpriteRandoMode _spriteRandoMode;
     private bool _randomizeItemSprites, _randomizeKeyItemSprites, _randomizeSecretSprites;
+
+    private ItemMode _itemMode;
+    private ItemMode[] _itemModes;
 
     #region TR1X Sepcifics
 
@@ -1012,6 +1015,21 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    private void UpdateItemMode()
+    {
+        bool defaultMode = ItemMode == ItemMode.Default;
+        RandomizeItemTypes.IsActive = defaultMode;
+        RandomizeItemPositions.IsActive = defaultMode;
+        IncludeKeyItems.IsActive = defaultMode;
+        OneItemDifficulty.IsActive = defaultMode;
+        MaintainKeyContinuity.IsActive = defaultMode;
+
+        AllowReturnPathLocations.IsActive = !defaultMode || IncludeKeyItems.Value;
+        AllowEnemyKeyDrops.IsActive = !defaultMode || IncludeKeyItems.Value;
+
+        FirePropertyChanged(nameof(IncludeKeyItemsImplied));
+    }
+
     public bool RandomizationPossible
     {
         get => RandomizeGameMode || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeHealth || RandomizeSunsets ||
@@ -1713,6 +1731,27 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public ItemMode ItemMode
+    {
+        get => _itemMode;
+        set
+        {
+            _itemMode = value;
+            FirePropertyChanged();
+            UpdateItemMode();
+        }
+    }
+
+    public ItemMode[] ItemModes
+    {
+        get => _itemModes;
+        private set
+        {
+            _itemModes = value;
+            FirePropertyChanged();
+        }
+    }
+
     public BoolItemControlClass IncludeKeyItems
     {
         get => _includeKeyItems;
@@ -1721,6 +1760,11 @@ public class ControllerOptions : INotifyPropertyChanged
             _includeKeyItems = value;
             FirePropertyChanged();
         }
+    }
+
+    public bool IncludeKeyItemsImplied
+    {
+        get => ItemMode == ItemMode.Shuffled || IncludeKeyItems.Value;
     }
 
     public BoolItemControlClass AllowReturnPathLocations
@@ -1763,12 +1807,12 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
-    public ItemDifficulty RandoItemDifficulty
+    public BoolItemControlClass OneItemDifficulty
     {
-        get => _randoItemDifficulty;
+        get => _oneItemDifficulty;
         set
         {
-            _randoItemDifficulty = value;
+            _oneItemDifficulty = value;
             FirePropertyChanged();
         }
     }
@@ -2802,6 +2846,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public SpriteRandoMode[] SpriteRandoModes
+    {
+        get => _spriteRandoModes;
+        private set
+        {
+            _spriteRandoModes = value;
+            FirePropertyChanged();
+        }
+    }
+
     public SpriteRandoMode SpriteRandoMode
     {
         get => _spriteRandoMode;
@@ -2948,6 +3002,12 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = $"Maintains continuity for key items when level sequencing changes.{Environment.NewLine}e.g. The Seraph will become a pickup in Barkhang Monastery if The Deck has not yet been visited."
         };
         BindingOperations.SetBinding(MaintainKeyContinuity, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+        OneItemDifficulty = new()
+        {
+            Title = "Use one-item difficulty mode",
+            Description = "Each item type will spawn a maximum of once per level."
+        };
+        BindingOperations.SetBinding(OneItemDifficulty, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
         IncludeExtraPickups = new BoolItemControlClass
         {
             Title = "Add extra pickups",
@@ -3253,7 +3313,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         ItemBoolItemControls = new List<BoolItemControlClass>()
         {
-            _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _allowReturnPathLocations, _allowEnemyKeyDrops, _maintainKeyContinuity, _includeExtraPickups
+            _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _allowReturnPathLocations, _allowEnemyKeyDrops, _oneItemDifficulty, _maintainKeyContinuity, _includeExtraPickups
         };
         EnemyBoolItemControls = new List<BoolItemControlClass>()
         {
@@ -3297,8 +3357,10 @@ public class ControllerOptions : INotifyPropertyChanged
 
     private void IncludeKeyItems_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        AllowReturnPathLocations.IsActive = IncludeKeyItems.Value;
-        AllowEnemyKeyDrops.IsActive = IncludeKeyItems.Value;
+        bool defaultMode = ItemMode == ItemMode.Default;
+        AllowReturnPathLocations.IsActive = !defaultMode || IncludeKeyItems.Value;
+        AllowEnemyKeyDrops.IsActive = !defaultMode || IncludeKeyItems.Value;
+        FirePropertyChanged(nameof(IncludeKeyItemsImplied));
     }
 
     private void SecretCategory_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -3429,12 +3491,14 @@ public class ControllerOptions : INotifyPropertyChanged
 
         RandomizeItems = _controller.RandomizeItems;
         ItemSeed = _controller.ItemSeed;
+        ItemModes = Enum.GetValues<ItemMode>();
+        ItemMode = _controller.ItemMode;
         IncludeKeyItems.Value = _controller.IncludeKeyItems;
         AllowReturnPathLocations.Value = _controller.AllowReturnPathLocations;
         IncludeExtraPickups.Value = _controller.IncludeExtraPickups;
         RandomizeItemTypes.Value = _controller.RandomizeItemTypes;
         RandomizeItemPositions.Value = _controller.RandomizeItemPositions;
-        RandoItemDifficulty = _controller.RandoItemDifficulty;
+        OneItemDifficulty.Value = _controller.RandoItemDifficulty == ItemDifficulty.OneLimit;
         ItemRanges = Enum.GetValues<ItemRange>();
         KeyItemRange = _controller.KeyItemRange;
         AllowEnemyKeyDrops.Value = _controller.AllowEnemyKeyDrops;
@@ -3543,6 +3607,7 @@ public class ControllerOptions : INotifyPropertyChanged
         FixOGBugs = _controller.FixOGBugs;
         UseRecommendedCommunitySettings = _controller.UseRecommendedCommunitySettings;
 
+        SpriteRandoModes = Enum.GetValues<SpriteRandoMode>();
         SpriteRandoMode = _controller.SpriteRandoMode;
         RandomizeItemSprites = _controller.RandomizeItemSprites;
         RandomizeKeyItemSprites = _controller.RandomizeKeyItemSprites;
@@ -3736,12 +3801,13 @@ public class ControllerOptions : INotifyPropertyChanged
 
         _controller.RandomizeItems = RandomizeItems;
         _controller.ItemSeed = ItemSeed;
+        _controller.ItemMode = ItemMode;
         _controller.IncludeKeyItems = IncludeKeyItems.Value;
         _controller.AllowReturnPathLocations = AllowReturnPathLocations.Value;
         _controller.IncludeExtraPickups = IncludeExtraPickups.Value;
         _controller.RandomizeItemTypes = RandomizeItemTypes.Value;
         _controller.RandomizeItemPositions = RandomizeItemPositions.Value;
-        _controller.RandoItemDifficulty = RandoItemDifficulty;
+        _controller.RandoItemDifficulty = OneItemDifficulty.Value ? ItemDifficulty.OneLimit : ItemDifficulty.Default;
         _controller.KeyItemRange = KeyItemRange;
         _controller.AllowEnemyKeyDrops = AllowEnemyKeyDrops.Value;
         _controller.MaintainKeyContinuity = MaintainKeyContinuity.Value;
