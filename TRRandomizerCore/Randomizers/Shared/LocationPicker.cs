@@ -224,6 +224,12 @@ public class LocationPicker : IRouteManager
         return roomPool;
     }
 
+    public bool IsValidKeyItemLocation(int keyItemID, Location location)
+    {
+        return GetRoomPool(keyItemID).Contains(location.Room)
+            && _locations.Any(l => l.IsEquivalent(location));
+    }
+
     private bool TestLocation(Location location, KeyMode keyTestMode, int keyItemID)
     {
         // This assumes that all possible scenarios are defined on a route

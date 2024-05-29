@@ -15,6 +15,7 @@ public abstract class ItemAllocator<T, E>
     protected readonly Dictionary<string, E> _unarmedPistolCache;
     protected readonly LocationPicker _picker;
 
+    protected Dictionary<string, List<ItemSwap>> _itemSwapCache;
     protected ItemSpriteRandomizer<T> _spriteRandomizer;
 
     public Random Generator { get; set; }
@@ -29,6 +30,12 @@ public abstract class ItemAllocator<T, E>
         _unarmedPistolCache = new();
     }
 
+    public static bool TypeMatch(E item1, E item2)
+        => TypeMatch(item1.TypeID, item2.TypeID);
+
+    public static bool TypeMatch(T type1, T type2)
+        => EqualityComparer<T>.Default.Equals(type1, type2);
+
     public E GetUnarmedLevelPistols(string levelName, List<E> items)
     {
         if (!_pistolLocations.ContainsKey(levelName))
@@ -41,7 +48,7 @@ public abstract class ItemAllocator<T, E>
             List<T> weaponTypes = GetWeaponItemTypes();
             T pistols = GetPistolType();
             _unarmedPistolCache[levelName] = items.Find(e =>
-                (weaponTypes.Contains(e.TypeID) || EqualityComparer<T>.Default.Equals(e.TypeID, pistols))
+                (weaponTypes.Contains(e.TypeID) || TypeMatch(e.TypeID, pistols))
                 && _pistolLocations[levelName].Any(l => l.IsEquivalent(e.GetLocation())));
         }
         
@@ -60,7 +67,7 @@ public abstract class ItemAllocator<T, E>
         T pistols = GetPistolType();
         List<int> excludedItems = GetExcludedItems(levelName);
 
-        bool hasPistols = items.Any(e => EqualityComparer<T>.Default.Equals(e.TypeID, pistols));
+        bool hasPistols = items.Any(e => TypeMatch(e.TypeID, pistols));
         E unarmedPistols = isUnarmed ? GetUnarmedLevelPistols(levelName, items) : null;
 
         for (int i = 0; i < items.Count; i++)
@@ -77,7 +84,7 @@ public abstract class ItemAllocator<T, E>
             {
                 // Enemy rando may have changed this already to something else and allocated
                 // ammo to the inventory, so only change pistols.
-                if (EqualityComparer<T>.Default.Equals(entityType, pistols) && Settings.GiveUnarmedItems)
+                if (TypeMatch(entityType, pistols) && Settings.GiveUnarmedItems)
                 {
                     do
                     {
@@ -90,19 +97,19 @@ public abstract class ItemAllocator<T, E>
             else if (stdItemTypes.Contains(entityType))
             {
                 T newType = stdItemTypes[Generator.Next(0, stdItemTypes.Count)];
-                if (EqualityComparer<T>.Default.Equals(newType, pistols) && (hasPistols || !isUnarmed))
+                if (TypeMatch(newType, pistols) && (hasPistols || !isUnarmed))
                 {
                     // Only one pistol pickup per level, and only if it's unarmed
                     do
                     {
                         newType = stdItemTypes[Generator.Next(0, stdItemTypes.Count)];
                     }
-                    while (!weaponTypes.Contains(newType) || EqualityComparer<T>.Default.Equals(newType, pistols));
+                    while (!weaponTypes.Contains(newType) || TypeMatch(newType, pistols));
                 }
                 entity.TypeID = newType;
             }
 
-            hasPistols = items.Any(e => EqualityComparer<T>.Default.Equals(e.TypeID, pistols));
+            hasPistols = items.Any(e => TypeMatch(e.TypeID, pistols));
         }
     }
 
@@ -133,9 +140,134 @@ public abstract class ItemAllocator<T, E>
         }
     }
 
+    public void ShuffleItems(string levelName, List<E> items, bool isUnarmed, int levelSequence)
+    {
+        // Shuffle mode retains all item positions and types, but types are redistributed. This is done in two stages
+        // to allow other mods to potentially change types based on original indices. The first stage means any additional
+        // items created by mods will not be affected.
+        List<ItemSwap> swapCache = new();
+        _itemSwapCache ??= new();
+        _itemSwapCache[levelName] = swapCache;
+
+        List<E> allPickups = GetPickups(levelName, items, isUnarmed);
+        List<T> stdItemTypes = GetStandardItemTypes();
+        List<T> keyItemTypes = GetKeyItemTypes();
+
+        List<T> usedStdTypes = new(allPickups.Where(e => stdItemTypes.Contains(e.TypeID)).Select(e => e.TypeID));
+        List<E> keyItems = allPickups.FindAll(e => keyItemTypes.Contains(e.TypeID));
+
+        void CacheSwap(E item, T newType)
+        {
+            swapCache.Add(new()
+            {
+                Index = items.IndexOf(item),
+                OldType = item.TypeID,
+                NewType = newType,
+            });
+            usedStdTypes.Remove(newType);
+        }
+
+        List<Location> usedLocations = new();
+        bool IsUsed(Location location)
+            => usedLocations.Any(l => l.IsEquivalent(location));
+
+        foreach (E keyItem in keyItems)
+        {
+            if (!allPickups.Contains(keyItem))
+            {
+                continue;
+            }
+
+            // Try to avoid similar key types ending up in another's position.
+            int keyItemID = (int)_picker.GetKeyItemID(levelSequence, keyItem);
+            Location currentLocation = keyItem.GetLocation();
+
+            List<E> validPool = new(allPickups.Where(e => _picker.IsValidKeyItemLocation(keyItemID, e.GetLocation())));
+            if (validPool.Count == 0)
+            {
+                allPickups.Remove(keyItem);
+                continue;
+            }
+
+            List<E> clashPool = new(validPool.Where(e => TypeMatch(keyItem, e) || e.GetLocation().IsEquivalent(currentLocation)));
+            if (validPool.Except(clashPool).Any())
+            {
+                validPool.RemoveAll(clashPool.Contains);
+            }
+
+            E swapItem;
+            Location location;
+            do
+            {
+                swapItem = validPool[Generator.Next(0, validPool.Count)];
+                location = swapItem.GetLocation();
+            }
+            while ((IsUsed(location) || keyItems.Contains(swapItem)) && !validPool.All(e => IsUsed(e.GetLocation()) || keyItems.Contains(e)));
+
+            if (keyItems.Contains(swapItem))
+            {
+                // Instances where two keys can't be swapped and there are no other pickups before their max rooms.
+                keyItemID = (int)_picker.GetKeyItemID(levelSequence, swapItem);
+                if (!_picker.IsValidKeyItemLocation(keyItemID, currentLocation))
+                {
+                    allPickups.Remove(keyItem);
+                    continue;
+                }
+            }
+
+            if (keyItem != swapItem)
+            {
+                CacheSwap(keyItem, swapItem.TypeID);
+                CacheSwap(swapItem, keyItem.TypeID);
+            }
+
+            allPickups.Remove(swapItem);
+            allPickups.Remove(keyItem);
+            usedLocations.Add(location);
+        }
+
+        foreach (E pickup in allPickups)
+        {
+            // Regular items need no placement checks.
+            CacheSwap(pickup, usedStdTypes[Generator.Next(0, usedStdTypes.Count)]);
+        }
+    }
+
+    public void ApplyItemSwaps(string levelName, List<E> items)
+    {
+        if (_itemSwapCache == null || !_itemSwapCache.ContainsKey(levelName))
+        {
+            return;
+        }
+
+        // Other mods may have already switched item types, so only apply those that are still valid.
+        foreach (ItemSwap swap in _itemSwapCache[levelName])
+        {
+            E pickup = items[swap.Index];
+            if (TypeMatch(pickup.TypeID, swap.OldType))
+            {
+                pickup.TypeID = swap.NewType;
+            }
+        }
+    }
+
+    protected List<E> GetPickups(string levelName, List<E> items, bool isUnarmed)
+    {
+        List<T> stdItemTypes = GetStandardItemTypes();
+        List<T> keyItemTypes = GetKeyItemTypes();
+        List<int> excludedItems = GetExcludedItems(levelName);
+        E unarmedPistols = isUnarmed ? GetUnarmedLevelPistols(levelName, items) : null;
+
+        return items.Where(e =>
+            (stdItemTypes.Contains(e.TypeID) || keyItemTypes.Contains(e.TypeID))
+            && !excludedItems.Contains(items.IndexOf(e))
+            && e != unarmedPistols
+            && !ItemFactory.IsItemLocked(levelName, items.IndexOf(e))).ToList();
+    }
+
     public int? EnforceOneLimit(string levelName, List<E> items, bool isUnarmed)
     {
-        if (Settings.RandoItemDifficulty != ItemDifficulty.OneLimit)
+        if (Settings.RandoItemDifficulty != ItemDifficulty.OneLimit || Settings.ItemMode == ItemMode.Shuffled)
         {
             return null;
         }
@@ -198,8 +330,16 @@ public abstract class ItemAllocator<T, E>
 
     protected abstract List<T> GetStandardItemTypes();
     protected abstract List<T> GetWeaponItemTypes();
+    protected abstract List<T> GetKeyItemTypes();
     protected abstract T GetPistolType();
     protected abstract List<int> GetExcludedItems(string levelName);
     protected abstract bool IsCrystalPickup(T type);
     protected virtual void ItemMoved(E item) { }
+
+    protected class ItemSwap
+    {
+        public int Index { get; set; }
+        public T OldType { get; set; }
+        public T NewType { get; set; }
+    }
 }
