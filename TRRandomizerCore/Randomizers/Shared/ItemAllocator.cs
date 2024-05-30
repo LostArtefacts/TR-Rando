@@ -249,6 +249,11 @@ public abstract class ItemAllocator<T, E>
                 pickup.TypeID = swap.NewType;
             }
         }
+
+        if (!Settings.AllowEnemyKeyDrops)
+        {
+            ExcludeEnemyKeyDrops(items);
+        }
     }
 
     protected List<E> GetPickups(string levelName, List<E> items, bool isUnarmed)
@@ -328,9 +333,25 @@ public abstract class ItemAllocator<T, E>
         _spriteRandomizer.Randomize(Generator);
     }
 
+    public void ExcludeEnemyKeyDrops(List<E> allItems)
+    {
+        List<T> enemyTypes = GetEnemyTypes();
+        List<T> keyItemTypes = GetKeyItemTypes();
+        IEnumerable<E> keyEnemies = allItems.Where(enemy => enemyTypes.Contains(enemy.TypeID)
+            && allItems.Any(key => keyItemTypes.Contains(key.TypeID)
+            && key.GetLocation().IsEquivalent(enemy.GetLocation()))
+        );
+
+        foreach (E enemy in keyEnemies)
+        {
+            enemy.X++;
+        }
+    }
+
     protected abstract List<T> GetStandardItemTypes();
     protected abstract List<T> GetWeaponItemTypes();
     protected abstract List<T> GetKeyItemTypes();
+    protected abstract List<T> GetEnemyTypes();
     protected abstract T GetPistolType();
     protected abstract List<int> GetExcludedItems(string levelName);
     protected abstract bool IsCrystalPickup(T type);

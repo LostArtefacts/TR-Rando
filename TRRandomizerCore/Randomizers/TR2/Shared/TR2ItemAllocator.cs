@@ -26,6 +26,9 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
     protected override List<TR2Type> GetKeyItemTypes()
         => TR2TypeUtilities.GetKeyItemTypes();
 
+    protected override List<TR2Type> GetEnemyTypes()
+        => TR2TypeUtilities.GetFullListOfEnemies();
+
     protected override bool IsCrystalPickup(TR2Type type)
         => false;
 

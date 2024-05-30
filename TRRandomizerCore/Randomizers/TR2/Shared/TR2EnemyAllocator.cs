@@ -581,18 +581,11 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             LimitFriendlyEnemies(level, enemies.Available.Except(friends).ToList(), friends);
         }
 
-        if (!Settings.AllowEnemyKeyDrops && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
+        if (!Settings.AllowEnemyKeyDrops)
         {
-            // Shift enemies who are on top of key items so they don't pick them up.
-            IEnumerable<TR2Entity> keyEnemies = level.Entities.Where(enemy => TR2TypeUtilities.IsEnemyType(enemy.TypeID)
-                  && level.Entities.Any(key => TR2TypeUtilities.IsKeyItemType(key.TypeID)
-                  && key.GetLocation().IsEquivalent(enemy.GetLocation()))
-            );
-
-            foreach (TR2Entity enemy in keyEnemies)
-            {
-                enemy.X++;
-            }
+            // Referenced here in case item randomization is not enabled.
+            TR2ItemAllocator allocator = new();
+            allocator.ExcludeEnemyKeyDrops(level.Entities);
         }
     }
 

@@ -33,6 +33,9 @@ public class TR3ItemAllocator : ItemAllocator<TR3Type, TR3Entity>
     protected override List<TR3Type> GetKeyItemTypes()
         => TR3TypeUtilities.GetKeyItemTypes();
 
+    protected override List<TR3Type> GetEnemyTypes()
+        => TR3TypeUtilities.GetFullListOfEnemies();
+
     protected override bool IsCrystalPickup(TR3Type type)
         => type == TR3Type.SaveCrystal_P;
 

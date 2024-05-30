@@ -76,6 +76,9 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
     protected override List<TR1Type> GetKeyItemTypes()
         => TR1TypeUtilities.GetKeyItemTypes();
 
+    protected override List<TR1Type> GetEnemyTypes()
+        => TR1TypeUtilities.GetFullListOfEnemies();
+
     protected override bool IsCrystalPickup(TR1Type type)
         => type == TR1Type.SavegameCrystal_P;
 
