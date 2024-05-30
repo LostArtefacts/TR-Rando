@@ -135,6 +135,8 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
     private void UpdateEnemyItemDrops(TR1CombinedLevel level, IEnumerable<TR1Entity> pickups)
     {
+        pickups = pickups.Except(_allocator.GetExcludedItems(level.Name).Select(i => level.Data.Entities[i]));
+
         TRRoomSector sectorFunc(Location loc) => level.Data.GetRoomSector(loc);
         foreach (TR1Entity pickup in pickups)
         {

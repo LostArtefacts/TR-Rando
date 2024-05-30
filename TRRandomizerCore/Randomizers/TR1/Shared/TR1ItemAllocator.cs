@@ -54,7 +54,7 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
     public TR1ItemAllocator()
         : base(TRGameVersion.TR1) { }
 
-    protected override List<int> GetExcludedItems(string levelName)
+    public override List<int> GetExcludedItems(string levelName)
     {
         TRSecretMapping<TR1Entity> mapping = TRSecretMapping<TR1Entity>.Get($@"Resources\TR1\SecretMapping\{levelName}-SecretMapping.json");
         return mapping?.RewardEntities ?? new();

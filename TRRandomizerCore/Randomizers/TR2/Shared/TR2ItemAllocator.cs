@@ -11,7 +11,7 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
     public TR2ItemAllocator()
         : base(TRGameVersion.TR2) { }
 
-    protected override List<int> GetExcludedItems(string levelName)
+    public override List<int> GetExcludedItems(string levelName)
         => new();
 
     protected override TR2Type GetPistolType()

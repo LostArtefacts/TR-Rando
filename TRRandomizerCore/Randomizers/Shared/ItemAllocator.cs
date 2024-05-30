@@ -353,7 +353,7 @@ public abstract class ItemAllocator<T, E>
     protected abstract List<T> GetKeyItemTypes();
     protected abstract List<T> GetEnemyTypes();
     protected abstract T GetPistolType();
-    protected abstract List<int> GetExcludedItems(string levelName);
+    public abstract List<int> GetExcludedItems(string levelName);
     protected abstract bool IsCrystalPickup(T type);
     protected virtual void ItemMoved(E item) { }
 
