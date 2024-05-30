@@ -6640,6 +6640,13 @@
       "Z": 28172,
       "Room": 185,
       "InvalidatesRoom": true
+    },
+    {
+      "X": 68096,
+      "Y": -3584,
+      "Z": 32256,
+      "Room": 89,
+      "TargetType": 1
     }
   ],
   "MINES.TR2": [
