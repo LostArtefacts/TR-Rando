@@ -39,11 +39,7 @@ public class TR1RemasteredEditor : TR1ClassicEditor
 
         if (Settings.RandomizeItems)
         {
-            target += numLevels;
-            if (Settings.IncludeKeyItems)
-            {
-                target += numLevels;
-            }
+            target += 2 * numLevels;
         }
 
         if (Settings.RandomizeSecretRewardsPhysical)

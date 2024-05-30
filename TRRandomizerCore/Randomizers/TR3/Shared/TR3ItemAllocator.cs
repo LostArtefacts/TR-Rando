@@ -39,21 +39,24 @@ public class TR3ItemAllocator : ItemAllocator<TR3Type, TR3Entity>
     protected override bool IsCrystalPickup(TR3Type type)
         => type == TR3Type.SaveCrystal_P;
 
-    public void RandomizeItems(string levelName, TR3Level level, bool isUnarmed, bool isCold)
+    public void RandomizeItems(string levelName, TR3Level level, bool isUnarmed, int originalSequence, bool isCold)
     {
-        _picker.Initialise(levelName, GetItemLocationPool(levelName, level, false, isCold), Settings, Generator);
+        InitialisePicker(levelName, level, Settings.ItemMode == ItemMode.Default ? LocationMode.Default : LocationMode.ExistingItems, isCold);
 
-        RandomizeItemTypes(levelName, level.Entities, isUnarmed);
-        RandomizeItemLocations(levelName, level.Entities, isUnarmed);
+        if (Settings.ItemMode == ItemMode.Default)
+        {
+            RandomizeItemTypes(levelName, level.Entities, isUnarmed);
+            RandomizeItemLocations(levelName, level.Entities, isUnarmed);
+        }
+        else
+        {
+            ShuffleItems(levelName, level.Entities, isUnarmed, originalSequence);
+        }
     }
 
     public void RandomizeKeyItems(string levelName, TR3Level level, int originalSequence, bool isCold)
     {
-        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level);
-        _picker.KeyItemTestAction = (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, levelName, level);
-        _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
-
-        _picker.Initialise(levelName, GetItemLocationPool(levelName, level, true, isCold), Settings, Generator);
+        InitialisePicker(levelName, level, LocationMode.KeyItems, isCold);
 
         for (int i = 0; i < level.Entities.Count; i++)
         {
@@ -68,6 +71,27 @@ public class TR3ItemAllocator : ItemAllocator<TR3Type, TR3Entity>
             _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger, originalSequence);
             ItemMoved(entity);
         }
+    }
+
+    private void InitialisePicker(string levelName, TR3Level level, LocationMode locationMode, bool isCold)
+    {
+        _picker.TriggerTestAction = locationMode == LocationMode.KeyItems
+            ? location => LocationUtilities.HasAnyTrigger(location, level)
+            : null;
+        _picker.KeyItemTestAction = locationMode == LocationMode.KeyItems
+            ? (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, levelName, level)
+            : null;
+        _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
+
+        List<Location> pool = GetItemLocationPool(levelName, level, locationMode != LocationMode.Default, isCold);
+        if (locationMode == LocationMode.ExistingItems)
+        {
+            IEnumerable<Location> itemLocations = GetPickups(levelName, level.Entities, true)
+                .Select(e => e.GetLocation())
+                .DistinctBy(l => level.GetRoomSector(l));
+            pool = new(itemLocations.Where(i => pool.Any(e => level.GetRoomSector(i) == level.GetRoomSector(e))));
+        }
+        _picker.Initialise(levelName, pool, Settings, Generator);
     }
 
     private bool TestKeyItemLocation(Location location, bool hasPickupTrigger, string levelName, TR3Level level)
