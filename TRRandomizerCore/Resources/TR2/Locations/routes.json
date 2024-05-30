@@ -695,12 +695,6 @@
       "Validated": false
     },
     {
-      "X": 54784,
-      "Y": 0,
-      "Z": 37376,
-      "Room": 16
-    },
-    {
       "X": 52736,
       "Y": 0,
       "Z": 37376,
@@ -911,6 +905,12 @@
       "KeyItemsHigh": "11210",
       "Range": "Large",
       "RequiresReturnPath": true
+    },
+    {
+      "X": 54784,
+      "Y": 0,
+      "Z": 37376,
+      "Room": 16
     },
     {
       "X": 47616,
