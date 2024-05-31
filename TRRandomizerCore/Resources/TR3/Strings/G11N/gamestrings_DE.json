@@ -1,446 +1,202 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Funkelnd",
-            "Flipmap Helfer",
-            "Ahh glaenzend!",
-            "Stolperverhinderer",
-            "Benutz mich!"
-          ],
-          "44": [
-            "Funkelnd",
-            "Flipmap Helfer",
-            "Ahh glaenzend!",
-            "Stolperverhinderer",
-            "Benutz mich!"
-          ]
-        },
-        {
-          "36": [
-            "Doppelwaffen",
-            "Cheatcode Helfer",
-            "Klassische Klassiker",
-            "Die IIkonischen",
-            "Unendliche Toetungen"
-          ],
-          "45": [
-            "Doppelwaffen Magazine",
-            "Cheatcode Helfer Magazine",
-            "Klassische Klassiker Magazine",
-            "Die IIkonischen Magazine",
-            "Unendliche Toetungen Magazine"
-          ]
-        },
-        {
-          "37": [
-            "Schrottflinte",
-            "Warum?",
-            "Komm her oder keine Toetung!",
-            "Bist du noch da?",
-            "Lass es in Ruhe! Es ist besch‰ftigt!"
-          ],
-          "46": [
-            "Schrottflinte Patronen",
-            "Frage Patronen",
-            "Schnecken Patronen",
-            "Bist du noch da Patronen?",
-            "Beschaeftigte Patronen"
-          ]
-        },
-        {
-          "38": [
-            "10 gegen Willy",
-            "Ausnahmsweise nuetzlich!",
-            "D-Adler",
-            "Nevada Adler",
-            "Die heiﬂeste im Topf"
-          ],
-          "47": [
-            "10 gegen Willy Magazine",
-            "Nuetzliche Magazine",
-            "D-Adler Magazine",
-            "Adler Magazine",
-            "Kochtopf Magazine"
-          ]
-        },
-        {
-          "39": [
-            "Munitionsvampir",
-            "Autos 2.0",
-            "Nicht TR II Uzis",
-            "Du-zis",
-            "Nicht staerker geworden!"
-          ],
-          "48": [
-            "Munitionsvampir Magazine",
-            "Magazine 2.0",
-            "Bestossene Magazine",
-            "Du-zi Magazine",
-            "Schwaechere Magazine"
-          ]
-        },
-        {
-          "40": [
-            "Meme Waffe",
-            "Nutzlos",
-            "Nur f¸r Herausforderungen",
-            "Warum existiert es?",
-            "Unterwasser Armbrust"
-          ],
-          "49": [
-            "Feuchte Memes",
-            "Abfall",
-            "Herausforderer",
-            "Existentielle",
-            "Bolzen"
-          ]
-        },
-        {
-          "41": [
-            "Nicht die M16",
-            "M16",
-            "Raptor Vernichter",
-            "MP3 Musik",
-            "Raketenverst‰rker"
-          ],
-          "50": [
-            "Falsche Magazine",
-            "Betrugsmagazine",
-            "Raptor Vernichter",
-            "Tonspuren",
-            "Raketenlader"
-          ]
-        },
-        {
-          "42": [
-            "Ultimatives Bum",
-            "Rucksackgesch¸tz",
-            "Braucht sowieso zu long",
-            "Komplett ungenau",
-            "Enormer Rueckstoss?"
-          ],
-          "51": [
-            "Ultimative Raketen",
-            "Rucksackraketen",
-            "Langes Nachladen Raketen",
-            "Ungenaue Raketen",
-            "Enorme Raketen"
-          ]
-        },
-        {
-          "43": [
-            "Ungenaues Ding",
-            "Bessere Launcher KOPIE",
-            "Groﬂes Bum",
-            "Warum benutzt du mich?",
-            "Nicht mehr auf 7"
-          ],
-          "52": [
-            "Ungenaue Granaten",
-            "KOPIE Granaten",
-            "Groﬂes Bum Granaten",
-            "Fragwuerdige Granaten",
-            "Minderwertige Raketen"
-          ]
-        },
-        {
-          "53": [
-            "Benutzung nicht erlaubt!",
-            "Du bist auf KEINE MEDIKAMENTE!",
-            "Kleines Krankenhaus",
-            "Kleiner Lebensretter",
-            "Rucksackkristall"
-          ],
-          "54": [
-            "Benutzung nicht erlaubt!",
-            "Du bist auf KEINE MEDIKAMENTE!",
-            "Groﬂes Krankenhaus",
-            "Groﬂer Lebensretter",
-            "Tasche von Kristallen"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "Dinge",
-          "Was ist das?",
-          "Nicht so gl‰nzend!",
-          "M¸ll",
-          "Dies & Das",
-          "Zu viele Artifakte!",
-          "Wie sollen die passen?"
-        ],
-        "3": [
-          "Wurdest du wieder gekajakt?",
-          "NLNMAS als N‰chstes?",
-          "Du tot!",
-          "Werd besser!",
-          "Vergessen zu heilen?",
-          "Medi Pack?",
-          "Du bist wirklich hier gestorben?"
-        ],
-        "35": [
-          "Sinnloses Zeug Z‰hler",
-          "Any% als N‰chstes?",
-          "Geht es noch langsamer?",
-          "Alle Geheimnisse?",
-          "Keine Medipacks erlaubt!",
-          "Pazifistenlauf?"
-        ],
-        "59": [
-          "Das Croft Anwesen",
-          "Core Design Hauptsitz",
-          "TR3Rando Hauptsitz",
-          "Laras Ausgrabungen",
-          "Winstons K¸hlschrank",
-          "Taue Winston auf!"
-        ],
-        "85": [
-          "Bit City",
-          "S¸dengland",
-          "Is the Queen home?",
-          "Catsuit City",
-          "Zehn Minuten bis Mitternacht!"
-        ],
-        "86": [
-          "Nicht so leere Wueste",
-          "StaubÖ ueberall",
-          "OI!",
-          "HEY!",
-          "Adlerwueste"
-        ],
-        "87": [
-          "Wasser und Zeug",
-          "Vergessene Insel",
-          "Kannibalenwahn",
-          "Punas Eck",
-          "Suedspezifisch",
-          "Suedindien"
-        ],
-        "88": [
-          "Groﬂer Kuehlschrank",
-          "Wo ist Winston?",
-          "Unterkuehlungswahn",
-          "Titanic 2.0",
-          "Groﬂ, Kalt, Weiﬂ",
-          "Eisberg voraus!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NULL -",
-          "- NICHTS HIER -",
-          "- UNDEFINIERT -",
-          "- OH, DIESER SLOT IST FREI -"
-        ]
-      }
-    }
-  ],
-
+Ôªø{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Funkelnd",
+      "Flipmap Helfer",
+      "Ahh glaenzend!",
+      "Stolperverhinderer",
+      "Benutz mich!"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Doppelwaffen",
+      "Cheatcode Helfer",
+      "Klassische Klassiker",
+      "Die IIkonischen",
+      "Unendliche Toetungen"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Doppelwaffen Magazine",
+      "Cheatcode Helfer Magazine",
+      "Klassische Klassiker Magazine",
+      "Die IIkonischen Magazine",
+      "Unendliche Toetungen Magazine"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Schrottflinte",
+      "Warum?",
+      "Komm her oder keine Toetung!",
+      "Bist du noch da?",
+      "Lass es in Ruhe! Es ist besch√§ftigt!"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Schrottflinte Patronen",
+      "Frage Patronen",
+      "Schnecken Patronen",
+      "Bist du noch da Patronen?",
+      "Beschaeftigte Patronen"
+    ],
+    "INV_ITEM_DEAGLE": [
+      "10 gegen Willy",
+      "Ausnahmsweise nuetzlich!",
+      "D-Adler",
+      "Nevada Adler",
+      "Die hei√üeste im Topf"
+    ],
+    "INV_ITEM_DEAGLE_AMMO": [
+      "10 gegen Willy Magazine",
+      "Nuetzliche Magazine",
+      "D-Adler Magazine",
+      "Adler Magazine",
+      "Kochtopf Magazine"
+    ],
+    "INV_ITEM_UZI": [
+      "Munitionsvampir",
+      "Autos 2.0",
+      "Nicht TR II Uzis",
+      "Du-zis",
+      "Nicht staerker geworden!"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Munitionsvampir Magazine",
+      "Magazine 2.0",
+      "Bestossene Magazine",
+      "Du-zi Magazine",
+      "Schwaechere Magazine"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Meme Waffe",
+      "Nutzlos",
+      "Nur f√ºr Herausforderungen",
+      "Warum existiert es?",
+      "Unterwasser Armbrust"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Feuchte Memes",
+      "Abfall",
+      "Herausforderer",
+      "Existentielle",
+      "Bolzen"
+    ],
+    "INV_ITEM_M16": [
+      "Nicht die M16",
+      "M16",
+      "Raptor Vernichter",
+      "MP3 Musik",
+      "Raketenverst√§rker"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "Falsche Magazine",
+      "Betrugsmagazine",
+      "Raptor Vernichter",
+      "Tonspuren",
+      "Raketenlader"
+    ],
+    "INV_ITEM_ROCKET_LAUNCHER": [
+      "Ultimatives Bum",
+      "Rucksackgesch√ºtz",
+      "Braucht sowieso zu long",
+      "Komplett ungenau",
+      "Enormer Rueckstoss?"
+    ],
+    "INV_ITEM_ROCKETS": [
+      "Ultimative Raketen",
+      "Rucksackraketen",
+      "Langes Nachladen Raketen",
+      "Ungenaue Raketen",
+      "Enorme Raketen"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Ungenaues Ding",
+      "Bessere Launcher KOPIE",
+      "Gro√ües Bum",
+      "Warum benutzt du mich?",
+      "Nicht mehr auf 7"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Ungenaue Granaten",
+      "KOPIE Granaten",
+      "Gro√ües Bum Granaten",
+      "Fragwuerdige Granaten",
+      "Minderwertige Raketen"
+    ],
+    "INV_ITEM_MEDI": [
+      "Benutzung nicht erlaubt!",
+      "Du bist auf KEINE MEDIKAMENTE!",
+      "Kleines Krankenhaus",
+      "Kleiner Lebensretter",
+      "Rucksackkristall"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Benutzung nicht erlaubt!",
+      "Du bist auf KEINE MEDIKAMENTE!",
+      "Gro√ües Krankenhaus",
+      "Gro√üer Lebensretter",
+      "Tasche von Kristallen"
+    ],
+    "HEADING_ITEMS": [
+      "Dinge",
+      "Was ist das?",
+      "Nicht so gl√§nzend!",
+      "M√ºll",
+      "Dies & Das",
+      "Zu viele Artifakte!",
+      "Wie sollen die passen?"
+    ],
+    "HEADING_GAME_OVER": [
+      "Wurdest du wieder gekajakt?",
+      "NLNMAS als N√§chstes?",
+      "Du tot!",
+      "Werd besser!",
+      "Vergessen zu heilen?",
+      "Medi Pack?",
+      "Du bist wirklich hier gestorben?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Sinnloses Zeug Z√§hler",
+      "Any% als N√§chstes?",
+      "Geht es noch langsamer?",
+      "Alle Geheimnisse?",
+      "Keine Medipacks erlaubt!",
+      "Pazifistenlauf?"
+    ],
+    "INV_GLOBE_LONDON": [
+      "Bit City",
+      "S√ºdengland",
+      "Is the Queen home?",
+      "Catsuit City",
+      "Zehn Minuten bis Mitternacht!"
+    ],
+    "INV_GLOBE_NEVADA": [
+      "Nicht so leere Wueste",
+      "Staub, ueberall",
+      "OI!",
+      "HEY!",
+      "Adlerwueste"
+    ],
+    "INV_GLOBE_SOUTH_PACIFIC": [
+      "Wasser und Zeug",
+      "Vergessene Insel",
+      "Kannibalenwahn",
+      "Punas Eck",
+      "Suedspezifisch",
+      "Suedindien"
+    ],
+    "INV_GLOBE_ANTARCTICA": [
+      "Gro√üer Kuehlschrank",
+      "Wo ist Winston?",
+      "Unterkuehlungswahn",
+      "Titanic 2.0",
+      "Gro√ü, Kalt, Wei√ü",
+      "Eisberg voraus!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NULL -",
+      "- NICHTS HIER -",
+      "- UNDEFINIERT -",
+      "- OH, DIESER SLOT IST FREI -"
+    ]
+  },
   "LevelStrings": {
-    "ANTARC.TR2": {
-      "Names": [
-        "Keine Schneeflocke",
-        "Speedboot 2.0",
-        "Der Eisw¸rfel",
-        "Frierender Spaziergang",
-        "Jemand Tomatensuppe?"
-      ],
-      "Keys": {
-        "0": [
-          "Nicht das Deck",
-          "IceKey_Gamer",
-          "Ein Schluessel zum Fuerchten",
-          "Gefrorener Schluessel"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Vergiss mich nicht!",
-          "Zuckerstange",
-          "Kuhfuﬂ",
-          "I werde st‰rker!",
-          "Kr‰henbar"
-        ],
-        "1": [
-          "Befreit den Fluss",
-          "Oeffnet die Fluttore",
-          "Wasser und Wasser und Wasser",
-          "Zugang zur Suppe",
-          "Suppenkuechenschluessel"
-        ]
-      }
-    },
-
-    "AREA51.TR2": {
-      "Names": [
-        "Paul war hier!",
-        "Verschwoerungstheoretiker",
-        "Das Alien war hier!",
-        "Unabh‰ngigkeitstag",
-        "Nach Hause telefonieren!"
-      ],
-      "Keys": {
-        "0": [
-          "Raketenschluessel",
-          "Rip Ride Rakete",
-          "SpaceX Schluessel",
-          "Raketenwaschbaer",
-          "Elon Musk Schluessel",
-          "Das kannst du auch ignorieren!",
-          "Geheime Nummern",
-          "Kredikarten-PIN",
-          "Richtiger Raketenwerfer",
-          "Aliens in der Naehe?!?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Rapunzels Schluessel",
-          "Groﬂer Schluessel",
-          "Kein Drachenturm",
-          "Cheat Schluessel",
-          "DU CHEATEST!!!"
-        ],
-        "1": [
-          "Du kannst mich nicht ignorieren!",
-          "Ich bin es wieder!",
-          "UFO Disk",
-          "Eine von zwei Disks",
-          "Warum keine Musik? O.o"
-        ],
-        "2": [
-          "Laras Party Mix",
-          "Raetsel Element Musik",
-          "Eine von zwei Disks",
-          "Dschungelmusik",
-          "Du kannst mich ignorieren!"
-        ],
-        "3": [
-          "Magnetischer Eisenbahn Schl¸ssel",
-          "U-Bahn Schl¸ssel",
-          "Eisenbahnstation Schl¸ssel",
-          "Reiﬂnagel",
-          "Ber¸hmtheit",
-          "Vorschlaghammer"
-        ]
-      }
-    },
-
-    "CHAMBER.TR2": {
-      "Names": [
-        "Pfui Spinne!",
-        "20 ñ 40 Deagle Schuesse",
-        "Japanisch empfohlen",
-        "Free Willy",
-        "Willards Netz"
-      ]
-    },
-
-    "CITY.TR2": {
-      "Names": [
-        "Brueckensprung",
-        "Das groﬂe Krabbeln",
-        "Der Bienenfilm 2.0",
-        "Die Halle der Elemente",
-        "Vier Wege zu sterben!"
-      ],
-      "Keys": {
-        "0": [
-          "Hans-Dieter-Schluessel",
-          "Horst-Ludwig-Schluessel",
-          "Du kannst uns ignorieren!",
-          "Zwillingsschluessel",
-          "Gerhardlinde Schluessel",
-          "Sieh mich an!",
-          "Kruemelmonsterschluessel"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Schoenheitsmaske",
-          "Keine Goldene Maske",
-          "Phantom der Oper",
-          "Maskenball kommt",
-          "DIE MASKE"
-        ]
-      }
-    },
-
-    "COMPOUND.TR2": {
-      "Names": [
-        "Ein anderes Gefaengnis",
-        "Ausbrauch",
-        "Der groﬂe Ausbruch",
-        "Boris ist hier!",
-        "Wo sind meine Waffen?"
-      ],
-      "Keys": {
-        "0": [
-          "Stirb WacheÖ STIRB!",
-          "Nur eine andere Schluesselkarte",
-          "MasterCard",
-          "Schluesselkarte 1",
-          "Schluesselkarte 2",
-          "Du kommst aus dem Gefaengniskarte"
-        ],
-        "1": [
-          "VisaCard",
-          "Schluesselkarte 1",
-          "Schluesselkarte 2",
-          "Geheime Schluesselkarte",
-          "Kreditkarte"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Blaues Stein Dingsda",
-          "Funkenstecker 2",
-          "Sicherungsding 2",
-          "Blauer USB-Stecker",
-          "Auch kein Duplizieren moeglich"
-        ],
-        "1": [
-          "Gelbes Stein Dingsda",
-          "Funkenstecker 1",
-          "Sicherungsding 1",
-          "Gelber USB-Stecker",
-          "Auch kein Duplizieren moeglich"
-        ]
-      }
-    },
-
-    "CRASH.TR2": {
-      "Names": [
-        "Jurassic Park",
-        "DinosÖ schon wieder?",
-        "Barneys Zuhause",
-        "Das Verlorene Tal 2",
-        "Wo ist der Golddrache?"
-      ],
-      "Keys": {
-        "0": [
-          "Barney-Herbeizauber-Schluessel",
-          "Kein Barney-Essen",
-          "Fuer was ist das? O.o",
-          "Geschuetzschluessel fuer groﬂes Bumm",
-          "Zerstoerungsschluessel"
-        ],
-        "1": [
-          "Raptorenschluessel",
-          "Achte auf deinen Ruecken",
-          "HINTER DIR!",
-          "Feind macht BUUUH!",
-          "Wo wird er passen?"
-        ]
-      }
-    },
-
     "HOUSE.TR2": {
       "Names": [
         "Vier Waende",
@@ -450,8 +206,8 @@
         "Zieluebung",
         "Ruhestandsheim"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Rennstreckenschluessel",
           "Flaggenschluessel",
           "Formel 1 Schluessel",
@@ -461,7 +217,6 @@
         ]
       }
     },
-
     "JUNGLE.TR2": {
       "Names": [
         "Dschungelbuch",
@@ -470,8 +225,8 @@
         "Rollen, rollen, roll",
         "Rolling Stones"
       ],
-      "Keys": {
-        "3": [
+      "KeyItems": {
+        "Key4": [
           "Schoener Schluessel",
           "MonKey",
           "Nutzloser Schluessel",
@@ -480,78 +235,25 @@
         ]
       }
     },
-
-    "MINES.TR2": {
+    "TEMPLE.TR2": {
       "Names": [
-        "Minecraft",
-        "WARUM?!?!?!",
-        "Kalter Tieftauchgang",
-        "Sturmtruppenbucht",
-        "Feuer und Kotzmonster",
-        "LEIDE!"
+        "Randys und Rorys Grab",
+        "Warum so viele Shivas?",
+        "Kugelsichere Statuen",
+        "Schlangen und Leitern",
+        "Fallenh√∂lle",
+        "Flip-Fackel-Trick"
       ],
-      "Puzzles": {
-        "0": [
-          "Vergiss mich nicht!",
-          "Zuckerstange",
-          "Kuhfuﬂ",
-          "Ich werde staerker!",
-          "Kraehenbar"
-        ],
-        "1": [
-          "Duracell",
-          "9 Volt",
-          "Ladegeraet",
-          "Blaues und rotes Dingsda",
-          "Schraubschluesselkranenergie!"
-        ],
-        "2": [
-          "Tiefgefrorenes Dingsda",
-          "ShawCrank Redemption",
-          "Drehdingsda",
-          "Schon gekurbelt?",
-          "Du wirst STERBEN!"
+      "KeyItems": {
+        "Key1": [
+          "Immer noch kein Duplizier-Glitch",
+          "Toedlische Schluesselkollektion",
+          "Fuenf Naechte im Ganesha",
+          "Keine Gebetsmuehlen",
+          "Folterkammerschluessel"
         ]
       }
     },
-
-    "NEVADA.TR2": {
-      "Names": [
-        "Wuestenadler",
-        "Waessrige Wueste",
-        "Trink viel!",
-        "Kein Zug in der Wueste",
-        "Das ist ein heiﬂes Tal!"
-      ],
-      "Keys": {
-        "0": [
-          "Zugang zum Generator",
-          "Karte zu Generationen",
-          "AGATHE BAUER!",
-          "Werde nicht geschockt!",
-          "Stromausfallschluessel"
-        ],
-        "1": [
-          "Minenfeldschluessel",
-          "TNT-Schluessel",
-          "Flipmap Schluessel",
-          "Zugang zu den Aliens",
-          "GROSSES BUMM!",
-          "Azezas Schluessel zum BUMM!"
-        ]
-      }
-    },
-
-    "OFFICE.TR2": {
-      "Names": [
-        "Renn Lara, RENN!",
-        "Ist sie wirklich tot?",
-        "Zu viele Volt!",
-        "Stromausfall!",
-        "Speicher und Lade!"
-      ]
-    },
-
     "QUADCHAS.TR2": {
       "Names": [
         "Brauchst du das Quad?",
@@ -560,8 +262,8 @@
         "Tauche nicht!",
         "Keine Barneys hier!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Doppelt nutzlos",
           "Wer hebt das auf?",
           "MonKey Double",
@@ -570,7 +272,65 @@
         ]
       }
     },
-
+    "TONYBOSS.TR2": {
+      "Names": [
+        "Labyrinth der Meister",
+        "Bitte kein Labyrinth",
+        "Geheimes Labyrinth?!?",
+        "40 Sackgassen",
+        "40 Schlangen"
+      ]
+    },
+    "SHORE.TR2": {
+      "Names": [
+        "Kannibalendorf",
+        "Der Strand",
+        "Verlier nicht dein Bein",
+        "Keine Bruecke und Gift",
+        "Razzia im Takt"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Unter dem Meer-Schluessel",
+          "Jack Sparrows Schluessel",
+          "Ertraenkter Schluessel",
+          "Rostiger Schluessel",
+          "Ein Schmuggler hat das verloren!"
+        ],
+        "Puzzle1": [
+          "Giftstein",
+          "Tempelruinenstein",
+          "Blutstein",
+          "Vertrau mir",
+          "Kein Reiterstein"
+        ]
+      }
+    },
+    "CRASH.TR2": {
+      "Names": [
+        "Jurassic Park",
+        "Dinos, schon wieder?",
+        "Barneys Zuhause",
+        "Das Verlorene Tal 2",
+        "Wo ist der Golddrache?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Barney-Herbeizauber-Schluessel",
+          "Kein Barney-Essen",
+          "Fuer was ist das? O.o",
+          "Geschuetzschluessel fuer gro√ües Bumm",
+          "Zerstoerungsschluessel"
+        ],
+        "Key2": [
+          "Raptorenschluessel",
+          "Achte auf deinen Ruecken",
+          "HINTER DIR!",
+          "Feind macht BUUUH!",
+          "Wo wird er passen?"
+        ]
+      }
+    },
     "RAPIDS.TR2": {
       "Names": [
         "Warum existiert das?",
@@ -581,7 +341,15 @@
         "RiP Kopfhoerer"
       ]
     },
-
+    "TRIBOSS.TR2": {
+      "Names": [
+        "Kannibalenboss",
+        "Noch mehr Gift",
+        "Footis Gefaengnis",
+        "Yunas Tempel",
+        "Temple Run"
+      ]
+    },
     "ROOFS.TR2": {
       "Names": [
         "20 Sekunden",
@@ -592,15 +360,15 @@
         "London Ghetto",
         "Irgendjemand?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Rattenschluessel",
           "Boilerraumschluessel",
           "Kaminschluessel",
           "Einfacher Schluessel",
           "Goldener Schluessel"
         ],
-        "1": [
+        "Key2": [
           "Wunderschoener Schluessel",
           "Kirchenschluessel",
           "Rubinschluessel",
@@ -609,7 +377,6 @@
         ]
       }
     },
-
     "SEWER.TR2": {
       "Names": [
         "Gleis 9 3/4",
@@ -618,59 +385,57 @@
         "Ticketautomat kaputt",
         "Bahnsteinkante!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Elektrischer Schluessel",
           "Schluessel des Hausmeisters",
           "Agathe Bauer!",
           "Werkzeugkasten",
           "Bring diese Dinger in Ordnung!"
         ],
-        "1": [
+        "Key2": [
           "Halb und Halb",
-          "Eine H‰lfte",
+          "Eine H√§lfte",
           "Religioeser Schluessel",
           "Salomo 1 oder 2?",
           "Damoklesschluessel"
         ],
-        "2": [
+        "Key3": [
           "Halb und Halb",
           "Eine Haelfte",
           "Religioeser Schluessel",
           "Salomo 1 oder 2?",
           "Damoklesschluessel"
         ],
-        "3": [
+        "Key4": [
           "Halb und Halb",
           "Eine Haelfte",
           "Religioeser Schluessel",
           "Salomo 1 oder 2?",
           "Damoklesschluessel"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "GELD!",
           "Pfenning",
           "Massiv aber glaenzend!",
           "Fahrgeld",
           "25 Bits"
         ],
-        "1": [
+        "Puzzle2": [
           "Auf nach Hogwarts",
           "Bahnfahrkarte",
           "Zurueck nach Nevada!",
           "Keine Kontrollen noetig!",
           "Austernkarte"
         ],
-        "2": [
+        "Puzzle3": [
           "Thors Hammer",
-          "Mjˆlnir",
+          "Mj√∂lnir",
           "Whack-a-Mole Hammer",
           "Zerschmetter dieses Schloss!",
           "St Francis Follys Hammer"
         ],
-        "3": [
+        "Puzzle4": [
           "Funkel funkel kleiner Stern",
           "Ich waere lieber glaenzend!",
           "Du siehst etwas Glaenzendes!",
@@ -679,115 +444,16 @@
         ]
       }
     },
-
-    "SHORE.TR2": {
-      "Names": [
-        "Kannibalendorf",
-        "Der Strand",
-        "Verlier nicht dein Bein",
-        "Keine Bruecke und Gift",
-        "Razzia im Takt"
-      ],
-      "Keys": {
-        "0": [
-          "Unter dem Meer-Schluessel",
-          "Jack Sparrows Schluessel",
-          "Ertraenkter Schluessel",
-          "Rostiger Schluessel",
-          "Ein Schmuggler hat das verloren!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Giftstein",
-          "Tempelruinenstein",
-          "Blutstein",
-          "Vertrau mir",
-          "Kein Reiterstein"
-        ]
-      }
-    },
-
-    "STPAUL.TR2": {
-      "Names": [
-        "Pst, Geheimnis",
-        "60/59",
-        "Unfinished Business",
-        "Toedliche Kathedrale",
-        "Ohne Schaden unmoeglich"
-      ],
-      "Keys": {
-        "0": [
-          "Sehr gut versteckt",
-          "Leiter, Leiter an der Wand",
-          "Hast du mich endlich gefunden?",
-          "Versteckspielen",
-          "Boilerraumschluessel"
-        ]
-      }
-    },
-
-    "TEMPLE.TR2": {
-      "Names": [
-        "Randys und Rorys Grab",
-        "Warum so viele Shivas?",
-        "Kugelsichere Statuen",
-        "Schlangen und Leitern",
-        "Fallenhˆlle",
-        "Flip-Fackel-Trick"
-      ],
-      "Keys": {
-        "0": [
-          "Immer noch kein Duplizier-Glitch",
-          "Toedlische Schluesselkollektion",
-          "Fuenf Naechte im Ganesha",
-          "Keine Gebetsmuehlen",
-          "Folterkammerschluessel"
-        ],
-        "1": [
-          "Immer noch kein Duplizier-Glitch",
-          "Toedlische Schluesselkollektion",
-          "Fuenf Naechte im Ganesha",
-          "Keine Gebetsmuehlen",
-          "Folterkammerschluessel"
-        ],
-        "2": [
-          "Immer noch kein Duplizier-Glitch",
-          "Toedlische Schluesselkollektion",
-          "Fuenf Naechte im Ganesha",
-          "Keine Gebetsmuehlen",
-          "Folterkammerschluessel"
-        ],
-        "3": [
-          "Immer noch kein Duplizier-Glitch",
-          "Toedlische Schluesselkollektion",
-          "Fuenf Naechte im Ganesha",
-          "Keine Gebetsmuehlen",
-          "Folterkammerschluessel"
-        ]
-      }
-    },
-
-    "TONYBOSS.TR2": {
-      "Names": [
-        "Labyrinth der Meister",
-        "Bitte kein Labyrinth",
-        "Geheimes Labyrinth?!?",
-        "40 Sackgassen",
-        "40 Schlangen"
-      ]
-    },
-
     "TOWER.TR2": {
       "Names": [
         "National History Museum",
         "Unsinnsmix",
-        "Ludís Hass",
+        "Lud's Hass",
         "Lasst uns hassen",
         "Fliegendes UPV voraus!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Schluessel zum Aufwaermen!",
           "Wow, du hast nicht geglitcht!",
           "Feuerkind",
@@ -796,15 +462,250 @@
         ]
       }
     },
-
-    "TRIBOSS.TR2": {
+    "OFFICE.TR2": {
       "Names": [
-        "Kannibalenboss",
-        "Noch mehr Gift",
-        "Footis Gefaengnis",
-        "Yunas Tempel",
-        "Temple Run"
+        "Renn Lara, RENN!",
+        "Ist sie wirklich tot?",
+        "Zu viele Volt!",
+        "Stromausfall!",
+        "Speicher und Lade!"
       ]
+    },
+    "NEVADA.TR2": {
+      "Names": [
+        "Wuestenadler",
+        "Waessrige Wueste",
+        "Trink viel!",
+        "Kein Zug in der Wueste",
+        "Das ist ein hei√ües Tal!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Zugang zum Generator",
+          "Karte zu Generationen",
+          "AGATHE BAUER!",
+          "Werde nicht geschockt!",
+          "Stromausfallschluessel"
+        ],
+        "Key2": [
+          "Minenfeldschluessel",
+          "TNT-Schluessel",
+          "Flipmap Schluessel",
+          "Zugang zu den Aliens",
+          "GROSSES BUMM!",
+          "Azezas Schluessel zum BUMM!"
+        ]
+      }
+    },
+    "COMPOUND.TR2": {
+      "Names": [
+        "Ein anderes Gefaengnis",
+        "Ausbrauch",
+        "Der gro√üe Ausbruch",
+        "Boris ist hier!",
+        "Wo sind meine Waffen?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Stirb Wache, STIRB!",
+          "Nur eine andere Schluesselkarte",
+          "MasterCard",
+          "Schluesselkarte 1",
+          "Schluesselkarte 2",
+          "Du kommst aus dem Gefaengniskarte"
+        ],
+        "Key2": [
+          "VisaCard",
+          "Schluesselkarte 1",
+          "Schluesselkarte 2",
+          "Geheime Schluesselkarte",
+          "Kreditkarte"
+        ],
+        "Puzzle1": [
+          "Blaues Stein Dingsda",
+          "Funkenstecker 2",
+          "Sicherungsding 2",
+          "Blauer USB-Stecker",
+          "Auch kein Duplizieren moeglich"
+        ],
+        "Puzzle2": [
+          "Gelbes Stein Dingsda",
+          "Funkenstecker 1",
+          "Sicherungsding 1",
+          "Gelber USB-Stecker",
+          "Auch kein Duplizieren moeglich"
+        ]
+      }
+    },
+    "AREA51.TR2": {
+      "Names": [
+        "Paul war hier!",
+        "Verschwoerungstheoretiker",
+        "Das Alien war hier!",
+        "Unabh√§ngigkeitstag",
+        "Nach Hause telefonieren!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Raketenschluessel",
+          "Rip Ride Rakete",
+          "SpaceX Schluessel",
+          "Raketenwaschbaer",
+          "Elon Musk Schluessel",
+          "Das kannst du auch ignorieren!",
+          "Geheime Nummern",
+          "Kredikarten-PIN",
+          "Richtiger Raketenwerfer",
+          "Aliens in der Naehe?!?"
+        ],
+        "Puzzle1": [
+          "Rapunzels Schluessel",
+          "Gro√üer Schluessel",
+          "Kein Drachenturm",
+          "Cheat Schluessel",
+          "DU CHEATEST!!!"
+        ],
+        "Puzzle2": [
+          "Du kannst mich nicht ignorieren!",
+          "Ich bin es wieder!",
+          "UFO Disk",
+          "Eine von zwei Disks",
+          "Warum keine Musik? O.o"
+        ],
+        "Puzzle3": [
+          "Laras Party Mix",
+          "Raetsel Element Musik",
+          "Eine von zwei Disks",
+          "Dschungelmusik",
+          "Du kannst mich ignorieren!"
+        ],
+        "Puzzle4": [
+          "Magnetischer Eisenbahn Schl√ºssel",
+          "U-Bahn Schl√ºssel",
+          "Eisenbahnstation Schl√ºssel",
+          "Rei√ünagel",
+          "Ber√ºhmtheit",
+          "Vorschlaghammer"
+        ]
+      }
+    },
+    "ANTARC.TR2": {
+      "Names": [
+        "Keine Schneeflocke",
+        "Speedboot 2.0",
+        "Der Eisw√ºrfel",
+        "Frierender Spaziergang",
+        "Jemand Tomatensuppe?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Nicht das Deck",
+          "IceKey_Gamer",
+          "Ein Schluessel zum Fuerchten",
+          "Gefrorener Schluessel"
+        ],
+        "Puzzle1": [
+          "Vergiss mich nicht!",
+          "Zuckerstange",
+          "Kuhfu√ü",
+          "I werde st√§rker!",
+          "Kr√§henbar"
+        ],
+        "Puzzle2": [
+          "Befreit den Fluss",
+          "Oeffnet die Fluttore",
+          "Wasser und Wasser und Wasser",
+          "Zugang zur Suppe",
+          "Suppenkuechenschluessel"
+        ]
+      }
+    },
+    "MINES.TR2": {
+      "Names": [
+        "Minecraft",
+        "WARUM?!?!?!",
+        "Kalter Tieftauchgang",
+        "Sturmtruppenbucht",
+        "Feuer und Kotzmonster",
+        "LEIDE!"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Vergiss mich nicht!",
+          "Zuckerstange",
+          "Kuhfu√ü",
+          "Ich werde staerker!",
+          "Kraehenbar"
+        ],
+        "Puzzle2": [
+          "Duracell",
+          "9 Volt",
+          "Ladegeraet",
+          "Blaues und rotes Dingsda",
+          "Schraubschluesselkranenergie!"
+        ],
+        "Puzzle3": [
+          "Tiefgefrorenes Dingsda",
+          "ShawCrank Redemption",
+          "Drehdingsda",
+          "Schon gekurbelt?",
+          "Du wirst STERBEN!"
+        ]
+      }
+    },
+    "CITY.TR2": {
+      "Names": [
+        "Brueckensprung",
+        "Das gro√üe Krabbeln",
+        "Der Bienenfilm 2.0",
+        "Die Halle der Elemente",
+        "Vier Wege zu sterben!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Hans-Dieter-Schluessel",
+          "Horst-Ludwig-Schluessel",
+          "Du kannst uns ignorieren!",
+          "Zwillingsschluessel",
+          "Gerhardlinde Schluessel",
+          "Sieh mich an!",
+          "Kruemelmonsterschluessel"
+        ],
+        "Puzzle1": [
+          "Schoenheitsmaske",
+          "Keine Goldene Maske",
+          "Phantom der Oper",
+          "Maskenball kommt",
+          "DIE MASKE"
+        ]
+      }
+    },
+    "CHAMBER.TR2": {
+      "Names": [
+        "Pfui Spinne!",
+        "20 - 40 Deagle Schuesse",
+        "Japanisch empfohlen",
+        "Free Willy",
+        "Willards Netz"
+      ]
+    },
+    "STPAUL.TR2": {
+      "Names": [
+        "Pst, Geheimnis",
+        "60/59",
+        "Unfinished Business",
+        "Toedliche Kathedrale",
+        "Ohne Schaden unmoeglich"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Sehr gut versteckt",
+          "Leiter, Leiter an der Wand",
+          "Hast du mich endlich gefunden?",
+          "Versteckspielen",
+          "Boilerraumschluessel"
+        ]
+      }
     }
   }
 }

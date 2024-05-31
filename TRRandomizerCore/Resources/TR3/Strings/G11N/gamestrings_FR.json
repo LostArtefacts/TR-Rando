@@ -1,704 +1,303 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Brillant",
-            "Coup de pouce pour flipmap",
-            "Uhh étincelant !",
-            "Annule les chutes",
-            "Utilise moi !"
-          ],
-          "44": [
-            "Brillant",
-            "Coup de pouce pour flipmap",
-            "Uhh étincelant !",
-            "Annule les chutes",
-            "Utilise moi !"
-          ]
-        },
-        {
-          "36": [
-            "Double pistolets",
-            "Utile pour les codes de triche",
-            "Les classiques",
-            "Les PIIstolets",
-            "Feu à volonté"
-          ],
-          "45": [
-            "Balles pour double pistolets",
-            "Balles pour les codes de triche",
-            "Balles classiques pour les classiques",
-            "Balles pour les pIIstolets",
-            "Balles pour du feu à volonté"
-          ]
-        },
-        {
-          "37": [
-            "Fumisterie",
-            "Pourquoi?",
-            "Approche toi sinon je ne peux pas tirer!",
-            "Trop vu ?",
-            "Laisse-le, il est occupé !"
-          ],
-          "46": [
-            "Cartouche pour la fumisterie",
-            "Cartouches",
-            "Pas des balles à blanc",
-            "Trop de cartouches ?",
-            "Cartouches occupées"
-          ]
-        },
-        {
-          "38": [
-            "Dangereuses pour Willy",
-            "Celle-ci est utile!",
-            "D-Eagle",
-            "Nevada Eagle",
-            "La meilleure arme"
-          ],
-          "47": [
-            "Les balles pour assommer Willy",
-            "Balles intéressantes",
-            "Balles pour D-Eagle ",
-            "Balles d’aigles",
-            "Les meilleures balles"
-          ]
-        },
-        {
-          "39": [
-            "Arme de vampire",
-            "Autos 2.0",
-            "Pas aussi performants que les uzis de TR2",
-            "You-zis",
-            "Pas les meilleurs maintenant !"
-          ],
-          "48": [
-            "Balles de vampire",
-            "Balles 2.0",
-            "Balles pour rafales",
-            "Balles pour You-zis",
-            "Balles à blanc"
-          ]
-        },
-        {
-          "40": [
-            "L’arme des memes",
-            "Inutile",
-            "Uniquement pour les défis",
-            "Pourquoi il existe ?",
-            "Arbalète waterproof "
-          ],
-          "49": [
-            "Réservoir à memes",
-            "Gâchis",
-            "Challenges",
-            "Munitions vitales",
-            "Flèches"
-          ]
-        },
-        {
-          "41": [
-            "Pas le M16",
-            "M16",
-            "Destructeur de Raptor",
-            "Fichier MP3",
-            "Bonne combinaison avec le bazooka"
-          ],
-          "50": [
-            "Fausses balles",
-            "Balles d’escroc",
-            "Assassins de raptors",
-            "Traces",
-            "Fausses roquettes"
-          ]
-        },
-        {
-          "42": [
-            "BOUM",
-            "Mitrailleuse portable",
-            "Prend trop de temps à recharger",
-            "Très imprécis",
-            "Permet de prendre du recul"
-          ],
-          "51": [
-            "Ultime roquettes",
-            "Roquettes portables",
-            "Roquettes lentes",
-            "Roquettes imprécises",
-            "Roquettes lourdes"
-          ]
-        },
-        {
-          "43": [
-            "Arme imprécise",
-            "Lance-roquettes 2.0",
-            "Gros boum",
-            "Pourquoi m’utilises-tu?",
-            "Ca n’est plus le 7"
-          ],
-          "52": [
-            "Grenades imprécises",
-            "Fausses roquettes",
-            "Grenades pour un gros boum",
-            "On va vraiment les utiliser ?",
-            "Roquettes au rabais"
-          ]
-        },
-        {
-          "53": [
-            "Non autorisé!",
-            "C’est un challenge NOMEDS !",
-            "Clinique",
-            "Petit sauveur",
-            "Cristal de poche"
-          ],
-          "54": [
-            "Non autorisé!",
-            "C’est un challenge NOMEDS !",
-            "Hopital",
-            "Grand sauveur",
-            "Sac de cristaux"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "Trucs",
-          "Qu’est-ce que c’est ?",
-          "Pas très brillant !",
-          "A jeter",
-          "Ca et ça",
-          "Trop d’artifacts !",
-          "Comment ils tiennent dans le sac ?"
-        ],
-        "3": [
-          "Déjà kayaké?",
-          "NLNMAS à suivre ?",
-          "Tu es MORT !",
-          "Pas de bol",
-          "Oublié de te soigner ?",
-          "Medipack ?",
-          "Tu as vraiment perdu ici ?"
-        ],
-        "35": [
-          "Statistiques des memes",
-          "Any% à suivre ?",
-          "C’est un peu lent…",
-          "Trouvé tous les secrets ?",
-          "Les medipacks sont interdits",
-          "Pacifique% Run?"
-        ],
-        "59": [
-          "Manoir des Croft",
-          "Core Design HQ",
-          "TR3Rando HQ",
-          "Les trouvailles de Lara",
-          "Le frigo de Winston",
-          "Winston décongelé"
-        ],
-        "85": [
-          "Paris est plus jolie",
-          "Angleterre du Sud",
-          "La reine est-elle à la maison ?",
-          "La ville des catsuits",
-          "10 minutes avant minuit !"
-        ],
-        "86": [
-          "Un désert pas si désert",
-          "De la poussière… Partout",
-          "OI!",
-          "HEY!",
-          "Désert Eagle"
-        ],
-        "87": [
-          "De l’eau et des broutilles",
-          "L’ile perdue",
-          "Cannibale Mania",
-          "Le repaire de Puna",
-          "Pathétique Sud",
-          "Inde du sud"
-        ],
-        "88": [
-          "Frigo géant",
-          "Où est Winston?",
-          "Hyperthermie Mania",
-          "Titanic 2.0",
-          "Grand, froid, blanc.",
-          "Iceberg droit devant !"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- ZERO -",
-          "- RIEN ICI -",
-          "- INDEFINI -",
-          "- OI, CET EMPLACEMENT EST VIDE -"
-        ]
-      }
-    }
-  ],
-
+ï»¿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Brillant",
+      "Coup de pouce pour flipmap",
+      "Uhh Ã©tincelant !",
+      "Annule les chutes",
+      "Utilise moi !"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Double pistolets",
+      "Utile pour les codes de triche",
+      "Les classiques",
+      "Les PIIstolets",
+      "Feu Ã  volontÃ©"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Balles pour double pistolets",
+      "Balles pour les codes de triche",
+      "Balles classiques pour les classiques",
+      "Balles pour les pIIstolets",
+      "Balles pour du feu Ã  volontÃ©"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Fumisterie",
+      "Pourquoi?",
+      "Approche toi sinon je ne peux pas tirer!",
+      "Trop vu ?",
+      "Laisse-le, il est occupÃ© !"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Cartouche pour la fumisterie",
+      "Cartouches",
+      "Pas des balles Ã  blanc",
+      "Trop de cartouches ?",
+      "Cartouches occupÃ©es"
+    ],
+    "INV_ITEM_DEAGLE": [
+      "Dangereuses pour Willy",
+      "Celle-ci est utile!",
+      "D-Eagle",
+      "Nevada Eagle",
+      "La meilleure arme"
+    ],
+    "INV_ITEM_DEAGLE_AMMO": [
+      "Les balles pour assommer Willy",
+      "Balles intÃ©ressantes",
+      "Balles pour D-Eagle ",
+      "Balles d'aigles",
+      "Les meilleures balles"
+    ],
+    "INV_ITEM_UZI": [
+      "Arme de vampire",
+      "Autos 2.0",
+      "Pas aussi performants que les uzis de TR2",
+      "You-zis",
+      "Pas les meilleurs maintenant !"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Balles de vampire",
+      "Balles 2.0",
+      "Balles pour rafales",
+      "Balles pour You-zis",
+      "Balles Ã  blanc"
+    ],
+    "INV_ITEM_HARPOON": [
+      "L'arme des memes",
+      "Inutile",
+      "Uniquement pour les dÃ©fis",
+      "Pourquoi il existe ?",
+      "ArbalÃ¨te waterproof "
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "RÃ©servoir Ã  memes",
+      "GÃ¢chis",
+      "Challenges",
+      "Munitions vitales",
+      "FlÃ¨ches"
+    ],
+    "INV_ITEM_M16": [
+      "Pas le M16",
+      "M16",
+      "Destructeur de Raptor",
+      "Fichier MP3",
+      "Bonne combinaison avec le bazooka"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "Fausses balles",
+      "Balles d'escroc",
+      "Assassins de raptors",
+      "Traces",
+      "Fausses roquettes"
+    ],
+    "INV_ITEM_ROCKET_LAUNCHER": [
+      "BOUM",
+      "Mitrailleuse portable",
+      "Prend trop de temps Ã  recharger",
+      "TrÃ¨s imprÃ©cis",
+      "Permet de prendre du recul"
+    ],
+    "INV_ITEM_ROCKETS": [
+      "Ultime roquettes",
+      "Roquettes portables",
+      "Roquettes lentes",
+      "Roquettes imprÃ©cises",
+      "Roquettes lourdes"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Arme imprÃ©cise",
+      "Lance-roquettes 2.0",
+      "Gros boum",
+      "Pourquoi m'utilises-tu?",
+      "Ca n'est plus le 7"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Grenades imprÃ©cises",
+      "Fausses roquettes",
+      "Grenades pour un gros boum",
+      "On va vraiment les utiliser ?",
+      "Roquettes au rabais"
+    ],
+    "INV_ITEM_MEDI": [
+      "Non autorisÃ©!",
+      "C'est un challenge NOMEDS !",
+      "Clinique",
+      "Petit sauveur",
+      "Cristal de poche"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Non autorisÃ©!",
+      "C'est un challenge NOMEDS !",
+      "Hopital",
+      "Grand sauveur",
+      "Sac de cristaux"
+    ],
+    "HEADING_ITEMS": [
+      "Trucs",
+      "Qu'est-ce que c'est ?",
+      "Pas trÃ¨s brillant !",
+      "A jeter",
+      "Ca et Ã§a",
+      "Trop d'artifacts !",
+      "Comment ils tiennent dans le sac ?"
+    ],
+    "HEADING_GAME_OVER": [
+      "DÃ©jÃ  kayakÃ©?",
+      "NLNMAS Ã  suivre ?",
+      "Tu es MORT !",
+      "Pas de bol",
+      "OubliÃ© de te soigner ?",
+      "Medipack ?",
+      "Tu as vraiment perdu ici ?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Statistiques des memes",
+      "Any% Ã  suivre ?",
+      "C'est un peu lent",
+      "TrouvÃ© tous les secrets ?",
+      "Les medipacks sont interdits",
+      "Pacifique% Run?"
+    ],
+    "INV_GLOBE_LONDON": [
+      "Paris est plus jolie",
+      "Angleterre du Sud",
+      "La reine est-elle Ã  la maison ?",
+      "La ville des catsuits",
+      "10 minutes avant minuit !"
+    ],
+    "INV_GLOBE_NEVADA": [
+      "Un dÃ©sert pas si dÃ©sert",
+      "De la poussiÃ¨re, Partout",
+      "OI!",
+      "HEY!",
+      "DÃ©sert Eagle"
+    ],
+    "INV_GLOBE_SOUTH_PACIFIC": [
+      "De l'eau et des broutilles",
+      "L'ile perdue",
+      "Cannibale Mania",
+      "Le repaire de Puna",
+      "PathÃ©tique Sud",
+      "Inde du sud"
+    ],
+    "INV_GLOBE_ANTARCTICA": [
+      "Frigo gÃ©ant",
+      "OÃ¹ est Winston?",
+      "Hyperthermie Mania",
+      "Titanic 2.0",
+      "Grand, froid, blanc.",
+      "Iceberg droit devant !"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- ZERO -",
+      "- RIEN ICI -",
+      "- INDEFINI -",
+      "- OI, CET EMPLACEMENT EST VIDE -"
+    ]
+  },
   "LevelStrings": {
-    "ANTARC.TR2": {
-      "Names": [
-        "Pas de flocon",
-        "Hors-bord 2.0",
-        "L’Icetea ",
-        "En marche vers le congel",
-        "Une soupe de tomate ?"
-      ],
-      "Keys": {
-        "0": [
-          "Pas le pont",
-          "IceKey_Gamer",
-          "Une clé aller-retour",
-          "Clé gelée"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Ne m’oublie pas!",
-          "Paille",
-          "J’ai ma chemise mais c’est mou",
-          "Je me sens plus forte !",
-          "Von Crowbar"
-        ],
-        "1": [
-          "Libérez la rivière !",
-          "Ouvrez les vannes !",
-          "De l’eau et encore de l’eau",
-          "Accès à la soupe",
-          "Clé de la cuisine"
-        ]
-      }
-    },
-
-    "AREA51.TR2": {
-      "Names": [
-        "Paul était là!",
-        "L’endroit des complotistes",
-        "Xenomorph était là!",
-        "Le jour de l’indépendance",
-        "Les aliens veulent rentrer !"
-      ],
-      "Keys": {
-        "0": [
-          "Clé de la fusée",
-          "Tintin sur la lune",
-          "La clé de SpaceX",
-          "Clé du ciel",
-          "Clé d’Elon Musk",
-          "Pas obligatoire non plus !",
-          "Code secret",
-          "Code secret",
-          "Codes nucléaires",
-          "Aliens ?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Clé de Raiponce",
-          "Grande clé",
-          "Pas la clé du dongeon",
-          "Clé de la triche",
-          "TU AS TRICHE !!!"
-        ],
-        "1": [
-          "Tu es obligé de me prendre !",
-          "Encore moi !",
-          "Disque UFO",
-          "Un des deux disques",
-          "Un peu de musique ?"
-        ],
-        "2": [
-          "Le disque de platine de Lara",
-          "Musique du Puzzle Element",
-          "Un des deux disques",
-          "Musique de la Jungle",
-          "Ce disque n’est pas obligatoire !"
-        ],
-        "3": [
-          "Clé de l'hyperloop",
-          "Clé du métro",
-          "Clé de la station de métro",
-          "Une punaise",
-          "Célébrité",
-          "Marteau piqueur"
-        ]
-      }
-    },
-
-    "CHAMBER.TR2": {
-      "Names": [
-        "Gentille petite araignée",
-        "20 – 40 tirs de Deagle",
-        "Version japonaise recommandée",
-        "Libérez Willy",
-        "Willard"
-      ]
-    },
-
-    "CITY.TR2": {
-      "Names": [
-        "La saut du pont",
-        "Une vie d’insecte",
-        "Drôle d’abeille 2.0",
-        "Le hall des éléments",
-        "4 manières de mourir!"
-      ],
-      "Keys": {
-        "0": [
-          "La clé du diable",
-          "Cette fille n’est pas en feu!",
-          "Vous pouvez vous passer de moi!",
-          "Clé jumelle",
-          "Clé des enfers",
-          "Regarde-moi!",
-          "Clé des monstres"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Masque de beauté",
-          "Pas le masque d’or",
-          "Le fantôme de l’opéra",
-          "Déguisement",
-          "LE MASQUE"
-        ]
-      }
-    },
-
-    "COMPOUND.TR2": {
-      "Names": [
-        "Encore une prison",
-        "Prison Break",
-        "La grande évasion",
-        "Boris est là !",
-        "Où sont mes armes ?"
-      ],
-      "Keys": {
-        "0": [
-          "Meurs, monsieur le garde !",
-          "Encore une carte d’accès",
-          "MasterCard",
-          "Carte-clé 1",
-          "Carte-clé 2",
-          "Codes d’évasion"
-        ],
-        "1": [
-          "VisaCard",
-          "Carte-clé 1",
-          "Carte-clé 2",
-          "Carte d’accès secrète",
-          "Carte de crédit"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Pierre bleue",
-          "Bougie d’allumage 2",
-          "Fusible 2",
-          "Port USB bleue",
-          "Pas possible de les dupliquer"
-        ],
-        "1": [
-          "Pierre jaune",
-          "Bougie d’allumage 1",
-          "Fusible 1",
-          "Port USB jaune",
-          "Pas possible de les dupliquer"
-        ]
-      }
-    },
-
-    "CRASH.TR2": {
-      "Names": [
-        "Jurassic Park",
-        "Dinos… encore ?",
-        "L’antre de Barney",
-        "La vallée perdue partie 2",
-        "Où est le dragon jaune?"
-      ],
-      "Keys": {
-        "0": [
-          "Clé d’apparition de Barney",
-          "Pas la nourriture de Barney",
-          "A quoi sert-elle ? O.o",
-          "Clé du gros canon",
-          "Clé de la destruction"
-        ],
-        "1": [
-          "Clé du Raptor",
-          "Dans ton dos !",
-          "DERRIERE TOI !",
-          "BOOUUUH!",
-          "Où doit-on m’insérer ?"
-        ]
-      }
-    },
-
     "HOUSE.TR2": {
       "Names": [
         "Mon humble demeure",
         "Le frigo de Winston 2.0",
         "Piste de formule 1",
         "Winston... en double?",
-        "Entraînement au tir",
+        "EntraÃ®nement au tir",
         "Maison de retraite"
       ],
-      "Keys": {
-        "0": [
-          "Clé de la piste",
-          "Clé du drapeau",
-          "Clé de la formule 1",
-          "Clé des poissons",
-          "Clé du trophée",
-          "Accès au Quad"
+      "KeyItems": {
+        "Key1": [
+          "ClÃ© de la piste",
+          "ClÃ© du drapeau",
+          "ClÃ© de la formule 1",
+          "ClÃ© des poissons",
+          "ClÃ© du trophÃ©e",
+          "AccÃ¨s au Quad"
         ]
       }
     },
-
     "JUNGLE.TR2": {
       "Names": [
         "Le livre de la jungle",
         "Le Roi Lion",
         "Glissade piquante",
-        "Roulez jeunesse !",
+        "Roulez jeunesse !",
         "Rolling Stones"
       ],
-      "Keys": {
-        "3": [
-          "Jolie clé",
+      "KeyItems": {
+        "Key4": [
+          "Jolie clÃ©",
           "MonKey",
-          "Clé inutile",
-          "Clé pour les runs sans glitches",
-          "Qu’est-ce que c’est ? O.o"
+          "ClÃ© inutile",
+          "ClÃ© pour les runs sans glitches",
+          "Qu'est-ce que c'est ? O.o"
         ]
       }
     },
-
-    "MINES.TR2": {
+    "TEMPLE.TR2": {
       "Names": [
-        "Minecraft",
-        "POURQUOI?!?!?!",
-        "Plongée en eaux profondes et froides",
-        "La baie de glace",
-        "Feu et monstre ragoutants",
-        "SOUFFRE !"
+        "La tombe de Randy et Rory",
+        "Pourquoi autant de Shivas?",
+        "Statues blindÃ©es",
+        "Serpents et Ã©chelles",
+        "Les piÃ¨ges de l'enfer",
+        "Le temple du flipmap"
       ],
-      "Puzzles": {
-        "0": [
-          "Ne m’oubliez pas !",
-          "Sucre d’orge",
-          "Pied de cheval",
-          "Je me sens plus forte!",
-          "Von Crowbar"
-        ],
-        "1": [
-          "Duracell",
-          "9 Volt",
-          "Chargeur",
-          "Bleu et rouge",
-          "Du courant pour la grue !"
-        ],
-        "2": [
-          "Une chose profonde et glacée",
-          "La grue",
-          "Une sorte de tournevis",
-          "Déjà remonté?",
-          "Tu vas MOURIR!"
+      "KeyItems": {
+        "Key1": [
+          "Toujours pas de raccourci",
+          "ClÃ© mortelle",
+          "5 nuits Ã  Ganesha",
+          "Pas les moulins Ã  priÃ¨re",
+          "ClÃ©s de la chambre des tortures"
         ]
       }
     },
-
-    "NEVADA.TR2": {
-      "Names": [
-        "Desert Eagles",
-        "Desert d’oasis",
-        "Reste hydraté !",
-        "Pas un train à travers le désert",
-        "La vallée chaude"
-      ],
-      "Keys": {
-        "0": [
-          "Pourquoi étais-je sur le toit ?",
-          "Carte oubliée",
-          "J’AI LE COURANT!",
-          "Ne te fais pas électrocuter !",
-          "Clé pour la panne d’électricité"
-        ],
-        "1": [
-          "Clé du champ de mines",
-          "Clé de la TNT",
-          "Clé pour un Flipmap",
-          "Accès aux aliens",
-          "BOUM !",
-          "Clé du capitaine Azeza !"
-        ]
-      }
-    },
-
-    "OFFICE.TR2": {
-      "Names": [
-        "Cours Lara, COURS!",
-        "Est-elle vraiment morte?",
-        "Beaucoup trop de volts!",
-        "Panne d’électricité !",
-        "Sauve et charge !"
-      ]
-    },
-
     "QUADCHAS.TR2": {
       "Names": [
         "Vraiment besoin du quad?",
-        "Vallée du Piranha",
+        "VallÃ©e du Piranha",
         "Pas la Tamise",
         "Ne te baigne pas!",
         "Pas de Barney ici !"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Double inutile",
-          "Qui ramasse cette clé ?",
+          "Qui ramasse cette clÃ© ?",
           "Double de MonKey",
-          "Clé de la cathédrale",
-          "C’est quoi ?"
+          "ClÃ© de la cathÃ©drale",
+          "C'est quoi ?"
         ]
       }
     },
-
-    "RAPIDS.TR2": {
+    "TONYBOSS.TR2": {
       "Names": [
-        "Pourquoi ce niveau existe ?",
-        "Bloc-notes requis !",
-        "MADubu",
-        "Chasse d’eau",
-        "CrocOIdile",
-        "Désolé pour les oreilles"
+        "Tony",
+        "Encore un labyrinthe ?",
+        "Labyrinthe secret ?!? O.o",
+        "40 culs-de-sac",
+        "40 serpents"
       ]
     },
-
-    "ROOFS.TR2": {
-      "Names": [
-        "20 Secondes",
-        "Westminster",
-        "Erreurs d’architecture",
-        "Où est Big Ben?",
-        "Qu’est-ce-que ça fait là ?",
-        "Ghetto Londonien",
-        "Oi !"
-      ],
-      "Keys": {
-        "0": [
-          "Clé du rat",
-          "Clé du feu",
-          "Clé de la cheminée",
-          "Clé simple",
-          "Clé en or"
-        ],
-        "1": [
-          "Magnifique clé",
-          "Clé de l’église",
-          "Clé sans serrure",
-          "Clé inutile",
-          "A quoi sert-elle ? O.o"
-        ]
-      }
-    },
-
-    "SEWER.TR2": {
-      "Names": [
-        "Quai 9 3/4",
-        "Le métro",
-        "Le côté obscur de Londres",
-        "Guichets fermés",
-        "Attention à la marche"
-      ],
-      "Keys": {
-        "0": [
-          "Clé du centre de contrôle",
-          "Clé des concièrges",
-          "J’ai le courant !",
-          "Boîte à outils",
-          "Résous ces choses !"
-        ],
-        "1": [
-          "Moitié moitié",
-          "Une première moitié",
-          "Clé religieuse",
-          "Salomon 1 or 2?",
-          "Clé de Damocles"
-        ],
-        "2": [
-          "Moitié moitié",
-          "Une première moitié",
-          "Clé religieuse",
-          "Salomon 1 or 2?",
-          "Clé de Damocles"
-        ],
-        "3": [
-          "Moitié moitié",
-          "Une première moitié",
-          "Clé religieuse",
-          "Salomon 1 or 2?",
-          "Clé de Damocles"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "THUNE!",
-          "Un pactole",
-          "Petite mais brillante !",
-          "Prix RATP",
-          "25 Bits"
-        ],
-        "1": [
-          "Allons à Poudlard",
-          "Billet RATP",
-          "Retour au Nevada!",
-          "Pas de contrôleurs !",
-          "Ticket tarif réduit"
-        ],
-        "2": [
-          "Le marteau de Thor",
-          "Mjölnir",
-          "Enclume",
-          "Détruis-moi cette porte!",
-          "Marteau de la folie St Francis"
-        ],
-        "3": [
-          "Twinkle Twinkle Little Star",
-          "Je ferais bien de briller !",
-          "Arcturus",
-          "Pas dans le ciel !",
-          "La Starac’"
-        ]
-      }
-    },
-
     "SHORE.TR2": {
       "Names": [
         "Village de cannibales",
         "La plage",
         "Ne perds pas ta jambe",
-        "Raccourci pour éviter le pont",
+        "Raccourci pour Ã©viter le pont",
         "4 secrets sur 3"
       ],
-      "Keys": {
-        "0": [
-          "Clé sous-marine",
-          "Clé de Jack Sparrow",
-          "Clé noyée",
-          "Clé rouillée",
-          "Un pirate l’a oubliée !"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
+          "ClÃ© sous-marine",
+          "ClÃ© de Jack Sparrow",
+          "ClÃ© noyÃ©e",
+          "ClÃ© rouillÃ©e",
+          "Un pirate l'a oubliÃ©e !"
+        ],
+        "Puzzle1": [
           "Pierre de poison",
           "Pierre des ruines du temple",
           "Pierre de sang",
@@ -707,104 +306,406 @@
         ]
       }
     },
-
-    "STPAUL.TR2": {
+    "CRASH.TR2": {
       "Names": [
-        "Chut ! C’est un secret !",
-        "60/59",
-        "Unfinished Business",
-        "La cathédrale mortelle",
-        "Impossible d’avoir 0 dommage"
+        "Jurassic Park",
+        "Dinos, encore ?",
+        "L'antre de Barney",
+        "La vallÃ©e perdue partie 2",
+        "OÃ¹ est le dragon jaune?"
       ],
-      "Keys": {
-        "0": [
-          "Bien cachée",
-          "Echelle sur le mur ",
-          "Tu m’as enfin trouvée ?",
-          "Cache-cache",
-          "Clé de la fin de l’aventure"
+      "KeyItems": {
+        "Key1": [
+          "ClÃ© d'apparition de Barney",
+          "Pas la nourriture de Barney",
+          "A quoi sert-elle ? O.o",
+          "ClÃ© du gros canon",
+          "ClÃ© de la destruction"
+        ],
+        "Key2": [
+          "ClÃ© du Raptor",
+          "Dans ton dos !",
+          "DERRIERE TOI !",
+          "BOOUUUH!",
+          "OÃ¹ doit-on m'insÃ©rer ?"
         ]
       }
     },
-
-    "TEMPLE.TR2": {
+    "RAPIDS.TR2": {
       "Names": [
-        "La tombe de Randy et Rory",
-        "Pourquoi autant de Shivas?",
-        "Statues blindées",
-        "Serpents et échelles",
-        "Les pièges de l’enfer",
-        "Le temple du flipmap"
-      ],
-      "Keys": {
-        "0": [
-          "Toujours pas de raccourci",
-          "Clé mortelle",
-          "5 nuits à Ganesha",
-          "Pas les moulins à prière",
-          "Clés de la chambre des tortures"
-        ],
-        "1": [
-          "Toujours pas de raccourci",
-          "Clé mortelle",
-          "5 nuits à Ganesha",
-          "Pas les moulins à prière",
-          "Clés de la chambre des tortures"
-        ],
-        "2": [
-          "Toujours pas de raccourci",
-          "Clé mortelle",
-          "5 nuits à Ganesha",
-          "Pas les moulins à prière",
-          "Clés de la chambre des tortures"
-        ],
-        "3": [
-          "Toujours pas de raccourci",
-          "Clé mortelle",
-          "5 nuits à Ganesha",
-          "Pas les moulins à prière",
-          "Clés de la chambre des tortures"
-        ]
-      }
-    },
-
-    "TONYBOSS.TR2": {
-      "Names": [
-        "Tony",
-        "Encore un labyrinthe ?",
-        "Labyrinthe secret ?!? O.o",
-        "40 culs-de-sac",
-        "40 serpents"
+        "Pourquoi ce niveau existe ?",
+        "Bloc-notes requis !",
+        "MADubu",
+        "Chasse d'eau",
+        "CrocOIdile",
+        "DÃ©solÃ© pour les oreilles"
       ]
     },
-
-    "TOWER.TR2": {
-      "Names": [
-        "Museum d’histoire naturelle",
-        "Niveau du non-sens",
-        "Le portail de l’absurde",
-        "Tout le monde déteste ce niveau !",
-        "Décollage du UPV !"
-      ],
-      "Keys": {
-        "0": [
-          "Clé du chauffage !",
-          "Wow tu n’as pas triché!",
-          "Allumage",
-          "Pas de Chaudière ici ?!?",
-          "J’ai froid !"
-        ]
-      }
-    },
-
     "TRIBOSS.TR2": {
       "Names": [
         "Le patron des cannibales",
         "Encore du poison",
         "La prison de Footi",
         "Temple des memes",
-        "Temple des pièges"
+        "Temple des piÃ¨ges"
       ]
+    },
+    "ROOFS.TR2": {
+      "Names": [
+        "20 Secondes",
+        "Westminster",
+        "Erreurs d'architecture",
+        "OÃ¹ est Big Ben?",
+        "Qu'est-ce-que Ã§a fait lÃ  ?",
+        "Ghetto Londonien",
+        "Oi !"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "ClÃ© du rat",
+          "ClÃ© du feu",
+          "ClÃ© de la cheminÃ©e",
+          "ClÃ© simple",
+          "ClÃ© en or"
+        ],
+        "Key2": [
+          "Magnifique clÃ©",
+          "ClÃ© de l'Ã©glise",
+          "ClÃ© sans serrure",
+          "ClÃ© inutile",
+          "A quoi sert-elle ? O.o"
+        ]
+      }
+    },
+    "SEWER.TR2": {
+      "Names": [
+        "Quai 9 3/4",
+        "Le mÃ©tro",
+        "Le cÃ´tÃ© obscur de Londres",
+        "Guichets fermÃ©s",
+        "Attention Ã  la marche"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "ClÃ© du centre de contrÃ´le",
+          "ClÃ© des conciÃ¨rges",
+          "J'ai le courant !",
+          "BoÃ®te Ã  outils",
+          "RÃ©sous ces choses !"
+        ],
+        "Key2": [
+          "MoitiÃ© moitiÃ©",
+          "Une premiÃ¨re moitiÃ©",
+          "ClÃ© religieuse",
+          "Salomon 1 or 2?",
+          "ClÃ© de Damocles"
+        ],
+        "Key3": [
+          "MoitiÃ© moitiÃ©",
+          "Une premiÃ¨re moitiÃ©",
+          "ClÃ© religieuse",
+          "Salomon 1 or 2?",
+          "ClÃ© de Damocles"
+        ],
+        "Key4": [
+          "MoitiÃ© moitiÃ©",
+          "Une premiÃ¨re moitiÃ©",
+          "ClÃ© religieuse",
+          "Salomon 1 or 2?",
+          "ClÃ© de Damocles"
+        ],
+        "Puzzle1": [
+          "THUNE!",
+          "Un pactole",
+          "Petite mais brillante !",
+          "Prix RATP",
+          "25 Bits"
+        ],
+        "Puzzle2": [
+          "Allons Ã  Poudlard",
+          "Billet RATP",
+          "Retour au Nevada!",
+          "Pas de contrÃ´leurs !",
+          "Ticket tarif rÃ©duit"
+        ],
+        "Puzzle3": [
+          "Le marteau de Thor",
+          "MjÃ¶lnir",
+          "Enclume",
+          "DÃ©truis-moi cette porte!",
+          "Marteau de la folie St Francis"
+        ],
+        "Puzzle4": [
+          "Twinkle Twinkle Little Star",
+          "Je ferais bien de briller !",
+          "Arcturus",
+          "Pas dans le ciel !",
+          "La Starac'"
+        ]
+      }
+    },
+    "TOWER.TR2": {
+      "Names": [
+        "Museum d'histoire naturelle",
+        "Niveau du non-sens",
+        "Le portail de l'absurde",
+        "Tout le monde dÃ©teste ce niveau !",
+        "DÃ©collage du UPV !"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "ClÃ© du chauffage !",
+          "Wow tu n'as pas trichÃ©!",
+          "Allumage",
+          "Pas de ChaudiÃ¨re ici ?!?",
+          "J'ai froid !"
+        ]
+      }
+    },
+    "OFFICE.TR2": {
+      "Names": [
+        "Cours Lara, COURS!",
+        "Est-elle vraiment morte?",
+        "Beaucoup trop de volts!",
+        "Panne d'Ã©lectricitÃ© !",
+        "Sauve et charge !"
+      ]
+    },
+    "NEVADA.TR2": {
+      "Names": [
+        "Desert Eagles",
+        "Desert d'oasis",
+        "Reste hydratÃ© !",
+        "Pas un train Ã  travers le dÃ©sert",
+        "La vallÃ©e chaude"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Pourquoi Ã©tais-je sur le toit ?",
+          "Carte oubliÃ©e",
+          "J'AI LE COURANT!",
+          "Ne te fais pas Ã©lectrocuter !",
+          "ClÃ© pour la panne d'Ã©lectricitÃ©"
+        ],
+        "Key2": [
+          "ClÃ© du champ de mines",
+          "ClÃ© de la TNT",
+          "ClÃ© pour un Flipmap",
+          "AccÃ¨s aux aliens",
+          "BOUM !",
+          "ClÃ© du capitaine Azeza !"
+        ]
+      }
+    },
+    "COMPOUND.TR2": {
+      "Names": [
+        "Encore une prison",
+        "Prison Break",
+        "La grande Ã©vasion",
+        "Boris est lÃ  !",
+        "OÃ¹ sont mes armes ?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Meurs, monsieur le garde !",
+          "Encore une carte d'accÃ¨s",
+          "MasterCard",
+          "Carte-clÃ© 1",
+          "Carte-clÃ© 2",
+          "Codes d'Ã©vasion"
+        ],
+        "Key2": [
+          "VisaCard",
+          "Carte-clÃ© 1",
+          "Carte-clÃ© 2",
+          "Carte d'accÃ¨s secrÃ¨te",
+          "Carte de crÃ©dit"
+        ],
+        "Puzzle1": [
+          "Pierre bleue",
+          "Bougie d'allumage 2",
+          "Fusible 2",
+          "Port USB bleue",
+          "Pas possible de les dupliquer"
+        ],
+        "Puzzle2": [
+          "Pierre jaune",
+          "Bougie d'allumage 1",
+          "Fusible 1",
+          "Port USB jaune",
+          "Pas possible de les dupliquer"
+        ]
+      }
+    },
+    "AREA51.TR2": {
+      "Names": [
+        "Paul Ã©tait lÃ !",
+        "L'endroit des complotistes",
+        "Xenomorph Ã©tait lÃ !",
+        "Le jour de l'indÃ©pendance",
+        "Les aliens veulent rentrer !"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "ClÃ© de la fusÃ©e",
+          "Tintin sur la lune",
+          "La clÃ© de SpaceX",
+          "ClÃ© du ciel",
+          "ClÃ© d'Elon Musk",
+          "Pas obligatoire non plus !",
+          "Code secret",
+          "Code secret",
+          "Codes nuclÃ©aires",
+          "Aliens ?"
+        ],
+        "Puzzle1": [
+          "ClÃ© de Raiponce",
+          "Grande clÃ©",
+          "Pas la clÃ© du dongeon",
+          "ClÃ© de la triche",
+          "TU AS TRICHE !!!"
+        ],
+        "Puzzle2": [
+          "Tu es obligÃ© de me prendre !",
+          "Encore moi !",
+          "Disque UFO",
+          "Un des deux disques",
+          "Un peu de musique ?"
+        ],
+        "Puzzle3": [
+          "Le disque de platine de Lara",
+          "Musique du Puzzle Element",
+          "Un des deux disques",
+          "Musique de la Jungle",
+          "Ce disque n'est pas obligatoire !"
+        ],
+        "Puzzle4": [
+          "ClÃ© de l'hyperloop",
+          "ClÃ© du mÃ©tro",
+          "ClÃ© de la station de mÃ©tro",
+          "Une punaise",
+          "CÃ©lÃ©britÃ©",
+          "Marteau piqueur"
+        ]
+      }
+    },
+    "ANTARC.TR2": {
+      "Names": [
+        "Pas de flocon",
+        "Hors-bord 2.0",
+        "L'Icetea ",
+        "En marche vers le congel",
+        "Une soupe de tomate ?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Pas le pont",
+          "IceKey_Gamer",
+          "Une clÃ© aller-retour",
+          "ClÃ© gelÃ©e"
+        ],
+        "Puzzle1": [
+          "Ne m'oublie pas!",
+          "Paille",
+          "J'ai ma chemise mais c'est mou",
+          "Je me sens plus forte !",
+          "Von Crowbar"
+        ],
+        "Puzzle2": [
+          "LibÃ©rez la riviÃ¨re !",
+          "Ouvrez les vannes !",
+          "De l'eau et encore de l'eau",
+          "AccÃ¨s Ã  la soupe",
+          "ClÃ© de la cuisine"
+        ]
+      }
+    },
+    "MINES.TR2": {
+      "Names": [
+        "Minecraft",
+        "POURQUOI?!?!?!",
+        "PlongÃ©e en eaux profondes et froides",
+        "La baie de glace",
+        "Feu et monstre ragoutants",
+        "SOUFFRE !"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Ne m'oubliez pas !",
+          "Sucre d'orge",
+          "Pied de cheval",
+          "Je me sens plus forte!",
+          "Von Crowbar"
+        ],
+        "Puzzle2": [
+          "Duracell",
+          "9 Volt",
+          "Chargeur",
+          "Bleu et rouge",
+          "Du courant pour la grue !"
+        ],
+        "Puzzle3": [
+          "Une chose profonde et glacÃ©e",
+          "La grue",
+          "Une sorte de tournevis",
+          "DÃ©jÃ  remontÃ©?",
+          "Tu vas MOURIR!"
+        ]
+      }
+    },
+    "CITY.TR2": {
+      "Names": [
+        "La saut du pont",
+        "Une vie d'insecte",
+        "DrÃ´le d'abeille 2.0",
+        "Le hall des Ã©lÃ©ments",
+        "4 maniÃ¨res de mourir!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "La clÃ© du diable",
+          "Cette fille n'est pas en feu!",
+          "Vous pouvez vous passer de moi!",
+          "ClÃ© jumelle",
+          "ClÃ© des enfers",
+          "Regarde-moi!",
+          "ClÃ© des monstres"
+        ],
+        "Puzzle1": [
+          "Masque de beautÃ©",
+          "Pas le masque d'or",
+          "Le fantÃ´me de l'opÃ©ra",
+          "DÃ©guisement",
+          "LE MASQUE"
+        ]
+      }
+    },
+    "CHAMBER.TR2": {
+      "Names": [
+        "Gentille petite araignÃ©e",
+        "20 - 40 tirs de Deagle",
+        "Version japonaise recommandÃ©e",
+        "LibÃ©rez Willy",
+        "Willard"
+      ]
+    },
+    "STPAUL.TR2": {
+      "Names": [
+        "Chut ! C'est un secret !",
+        "60/59",
+        "Unfinished Business",
+        "La cathÃ©drale mortelle",
+        "Impossible d'avoir 0 dommage"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Bien cachÃ©e",
+          "Echelle sur le mur ",
+          "Tu m'as enfin trouvÃ©e ?",
+          "Cache-cache",
+          "ClÃ© de la fin de l'aventure"
+        ]
+      }
     }
   }
 }

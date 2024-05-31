@@ -1,446 +1,202 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Sverkayushchiy",
-            "Flipmap pomoshchnik",
-            "Ukhkh blestyashchiy!",
-            "Otmena spotykaniya",
-            "Ispol'zuy menya!"
-          ],
-          "44": [
-            "Sverkayushchiy",
-            "Flipmap pomoshchnik",
-            "Ukhkh blestyashchiy!",
-            "Otmena spotykaniya",
-            "Ispol'zuy menya!"
-          ]
-        },
-        {
-          "36": [
-            "Dvoynyye pushki",
-            "Pomoshchniki chit-koda",
-            "Klassicheskaya klassika",
-            "Ikonika",
-            "Neogranichennoye kolichestvo ubiystv"
-          ],
-          "45": [
-            "Oboymy dlya dvoynykh pistoletov",
-            "Oboymy dlya pomoshchnikov chit-koda",
-            "Oboymy dlya klassicheskoy klassiki",
-            "Oboymy dlya ikoniki",
-            "Oboymy dlya neogranichennoye kolichestvo ubiystv"
-          ]
-        },
-        {
-          "37": [
-            "Der'mooruzhiye",
-            "Pochemu?",
-            "Idi syuda ili ne ubivay!",
-            "Videl dostatochno?",
-            "Zabud' ob etom! Eto zanyato!"
-          ],
-          "46": [
-            "Patrony dlya der'mooruzhiya",
-            "Voprositel'nyye patrony",
-            "Snaryady",
-            "Patrony dlya videl dostatochno?",
-            "Delovyye patrony"
-          ]
-        },
-        {
-          "38": [
-            "Ubiytsa Villi",
-            "Na samom dele polezno!",
-            "S-Orel",
-            "Nevadskiy orel",
-            "Samoye goryacheye v gorshke"
-          ],
-          "47": [
-            "Oboymy dlya ubiytsa Villi",
-            "Oboymy dlya na samom dele polezno",
-            "Oboymy dlya S-Orla",
-            "Oboymy dlya nevadskogo orla",
-            "Oboymy dlya samoye goryacheye v gorshke"
-          ]
-        },
-        {
-          "39": [
-            "Boyepripasy vampira",
-            "Avtomaty 2.0",
-            "Ne TR II uzi",
-            "Y-zi",
-            "Ne sil'neye seychas!"
-          ],
-          "48": [
-            "Oboymy dlya vampira",
-            "Oboymy 2.0",
-            "Potortyye oboymy",
-            "Oboymy dlya y-zi",
-            "Slabyye oboymy"
-          ]
-        },
-        {
-          "40": [
-            "Memnoye oruzhiye",
-            "Bespoleznyy",
-            "Tol'ko dlya ispytaniya",
-            "Pochemu eto sushchestvuyet?",
-            "Podvodnyy arbalet"
-          ],
-          "49": [
-            "Glupyye memy",
-            "Otkhody",
-            "Pretendenty",
-            "Ekzistentsial'nyye",
-            "Luki"
-          ]
-        },
-        {
-          "41": [
-            "Ne M16",
-            "M16",
-            "Ubiytsa raptorov",
-            "MP3 pleer",
-            "Raketnyy usilitel'"
-          ],
-          "50": [
-            "Poddel'nyye oboymy",
-            "Moshennicheskiye oboymy",
-            "Ubiytsy raptorov",
-            "Treki",
-            "Raketnaya zapravka"
-          ]
-        },
-        {
-          "42": [
-            "Okonchatel'nyy bum",
-            "Ryukzachnaya turel'",
-            "Zanimayet slishkom mnogo vremeni",
-            "Sovershenno netochno",
-            "Tyazhelaya otdacha?"
-          ],
-          "51": [
-            "Ul'timativnyye rakety",
-            "Ryukzachnyye rakety",
-            "Rakety dolgoy zagruzki",
-            "Netochnyye rakety",
-            "Tyazhelyye rakety"
-          ]
-        },
-        {
-          "43": [
-            "Netochnaya veshch'",
-            "Luchshaya puskovaya ustanovka COPIUM",
-            "Bol'shoy bum",
-            "Pochemu ty menya ispol'zuyesh'?",
-            "Bol'she ne na 7"
-          ],
-          "52": [
-            "Netochnyye granaty",
-            "COPIUM granaty",
-            "Bol'shoy bum granaty",
-            "Somnitel'nyye granaty",
-            "Rakety so skidkoy"
-          ]
-        },
-        {
-          "53": [
-            "Ispol'zovaniye ne razresheno!",
-            "Ty na BEZ APTECHEK!",
-            "Malaya bol'nitsa",
-            "Malen'kiy spasatel'",
-            "Karmannyy kristall"
-          ],
-          "54": [
-            "Ispol'zovaniye ne razresheno!",
-            "Ty na BEZ APTECHEK!",
-            "Bol'shaya bol'nitsa",
-            "Bol'shoy Spasatel'",
-            "Sumka s kristallami"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "Veshchi",
-          "Chto eto?",
-          "Ne takoy blestyashchiy!",
-          "Musor",
-          "Eto i eto",
-          "Slishkom mnogo artefaktov!",
-          "Kak oni pomeshchayutsya?"
-        ],
-        "3": [
-          "Poluchil yeshche kayak?",
-          "NLNMAS sleduyushchiy?",
-          "Ty umer!",
-          "Poluchi khorosheye!",
-          "Zabyl istselit'?",
-          "Aptechka?",
-          "Vy deystvitel'no tol'ko chto umerli zdes'?"
-        ],
-        "35": [
-          "Schetchik potrachennogo vpustuyu",
-          "Lyuboy% sleduyushchiy?",
-          "Mozhete li vy stat' medlenneye?",
-          "Vse sekrety?",
-          "Aptechki ne razresheny!",
-          "Patsifistskiy zabeg?"
-        ],
-        "59": [
-          "Pomest'ye Kroft",
-          "Core Design ubezhishche",
-          "TR3Rando ubezhishche",
-          "Raskopki Lary",
-          "Kholodil'nik Uinstona",
-          "Razmorozit' Uinstona"
-        ],
-        "85": [
-          "Malen'kiy gorod",
-          "Yuzhnaya Angliya",
-          "Koroleva doma?",
-          "Gorod koshach'yego kostyuma",
-          "10 Minuty do polunochi!"
-        ],
-        "86": [
-          "Ne takaya uzh i pustaya pustynya",
-          "Pyl' ... povsyudu",
-          "OI!",
-          "HEY!",
-          "Pustynnyye orly"
-        ],
-        "87": [
-          "Voda i procheyef",
-          "Zabytyy ostrov",
-          "Kannibal maniya",
-          "Ugolok Puny",
-          "Yuzhnyy zhalkiy",
-          "Yuzhnaya Indiya"
-        ],
-        "88": [
-          "Gigantskiy kholodil'nik",
-          "Gde Uinston?",
-          "Gipertermicheskaya maniya",
-          "Titanik 2.0",
-          "Bol'shoy, kholodnyy, belyy",
-          "Aysberg pryamo vperedi!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NULEVOY -",
-          "- ZDES' NICHEGO -",
-          "- NEOPREDELENNYY -",
-          "- OY, ETOT SLOT PUSTOY -"
-        ]
-      }
-    }
-  ],
-
+ï»¿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Sverkayushchiy",
+      "Flipmap pomoshchnik",
+      "Ukhkh blestyashchiy!",
+      "Otmena spotykaniya",
+      "Ispol'zuy menya!"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Dvoynyye pushki",
+      "Pomoshchniki chit-koda",
+      "Klassicheskaya klassika",
+      "Ikonika",
+      "Neogranichennoye kolichestvo ubiystv"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Oboymy dlya dvoynykh pistoletov",
+      "Oboymy dlya pomoshchnikov chit-koda",
+      "Oboymy dlya klassicheskoy klassiki",
+      "Oboymy dlya ikoniki",
+      "Oboymy dlya neogranichennoye kolichestvo ubiystv"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Der'mooruzhiye",
+      "Pochemu?",
+      "Idi syuda ili ne ubivay!",
+      "Videl dostatochno?",
+      "Zabud' ob etom! Eto zanyato!"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Patrony dlya der'mooruzhiya",
+      "Voprositel'nyye patrony",
+      "Snaryady",
+      "Patrony dlya videl dostatochno?",
+      "Delovyye patrony"
+    ],
+    "INV_ITEM_DEAGLE": [
+      "Ubiytsa Villi",
+      "Na samom dele polezno!",
+      "S-Orel",
+      "Nevadskiy orel",
+      "Samoye goryacheye v gorshke"
+    ],
+    "INV_ITEM_DEAGLE_AMMO": [
+      "Oboymy dlya ubiytsa Villi",
+      "Oboymy dlya na samom dele polezno",
+      "Oboymy dlya S-Orla",
+      "Oboymy dlya nevadskogo orla",
+      "Oboymy dlya samoye goryacheye v gorshke"
+    ],
+    "INV_ITEM_UZI": [
+      "Boyepripasy vampira",
+      "Avtomaty 2.0",
+      "Ne TR II uzi",
+      "Y-zi",
+      "Ne sil'neye seychas!"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Oboymy dlya vampira",
+      "Oboymy 2.0",
+      "Potortyye oboymy",
+      "Oboymy dlya y-zi",
+      "Slabyye oboymy"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Memnoye oruzhiye",
+      "Bespoleznyy",
+      "Tol'ko dlya ispytaniya",
+      "Pochemu eto sushchestvuyet?",
+      "Podvodnyy arbalet"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Glupyye memy",
+      "Otkhody",
+      "Pretendenty",
+      "Ekzistentsial'nyye",
+      "Luki"
+    ],
+    "INV_ITEM_M16": [
+      "Ne M16",
+      "M16",
+      "Ubiytsa raptorov",
+      "MP3 pleer",
+      "Raketnyy usilitel'"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "Poddel'nyye oboymy",
+      "Moshennicheskiye oboymy",
+      "Ubiytsy raptorov",
+      "Treki",
+      "Raketnaya zapravka"
+    ],
+    "INV_ITEM_ROCKET_LAUNCHER": [
+      "Okonchatel'nyy bum",
+      "Ryukzachnaya turel'",
+      "Zanimayet slishkom mnogo vremeni",
+      "Sovershenno netochno",
+      "Tyazhelaya otdacha?"
+    ],
+    "INV_ITEM_ROCKETS": [
+      "Ul'timativnyye rakety",
+      "Ryukzachnyye rakety",
+      "Rakety dolgoy zagruzki",
+      "Netochnyye rakety",
+      "Tyazhelyye rakety"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Netochnaya veshch'",
+      "Luchshaya puskovaya ustanovka COPIUM",
+      "Bol'shoy bum",
+      "Pochemu ty menya ispol'zuyesh'?",
+      "Bol'she ne na 7"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Netochnyye granaty",
+      "COPIUM granaty",
+      "Bol'shoy bum granaty",
+      "Somnitel'nyye granaty",
+      "Rakety so skidkoy"
+    ],
+    "INV_ITEM_MEDI": [
+      "Ispol'zovaniye ne razresheno!",
+      "Ty na BEZ APTECHEK!",
+      "Malaya bol'nitsa",
+      "Malen'kiy spasatel'",
+      "Karmannyy kristall"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Ispol'zovaniye ne razresheno!",
+      "Ty na BEZ APTECHEK!",
+      "Bol'shaya bol'nitsa",
+      "Bol'shoy Spasatel'",
+      "Sumka s kristallami"
+    ],
+    "HEADING_ITEMS": [
+      "Veshchi",
+      "Chto eto?",
+      "Ne takoy blestyashchiy!",
+      "Musor",
+      "Eto i eto",
+      "Slishkom mnogo artefaktov!",
+      "Kak oni pomeshchayutsya?"
+    ],
+    "HEADING_GAME_OVER": [
+      "Poluchil yeshche kayak?",
+      "NLNMAS sleduyushchiy?",
+      "Ty umer!",
+      "Poluchi khorosheye!",
+      "Zabyl istselit'?",
+      "Aptechka?",
+      "Vy deystvitel'no tol'ko chto umerli zdes'?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Schetchik potrachennogo vpustuyu",
+      "Lyuboy% sleduyushchiy?",
+      "Mozhete li vy stat' medlenneye?",
+      "Vse sekrety?",
+      "Aptechki ne razresheny!",
+      "Patsifistskiy zabeg?"
+    ],
+    "INV_GLOBE_LONDON": [
+      "Malen'kiy gorod",
+      "Yuzhnaya Angliya",
+      "Koroleva doma?",
+      "Gorod koshach'yego kostyuma",
+      "10 Minuty do polunochi!"
+    ],
+    "INV_GLOBE_NEVADA": [
+      "Ne takaya uzh i pustaya pustynya",
+      "Pyl' ... povsyudu",
+      "OI!",
+      "HEY!",
+      "Pustynnyye orly"
+    ],
+    "INV_GLOBE_SOUTH_PACIFIC": [
+      "Voda i procheyef",
+      "Zabytyy ostrov",
+      "Kannibal maniya",
+      "Ugolok Puny",
+      "Yuzhnyy zhalkiy",
+      "Yuzhnaya Indiya"
+    ],
+    "INV_GLOBE_ANTARCTICA": [
+      "Gigantskiy kholodil'nik",
+      "Gde Uinston?",
+      "Gipertermicheskaya maniya",
+      "Titanik 2.0",
+      "Bol'shoy, kholodnyy, belyy",
+      "Aysberg pryamo vperedi!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NULEVOY -",
+      "- ZDES' NICHEGO -",
+      "- NEOPREDELENNYY -",
+      "- OY, ETOT SLOT PUSTOY -"
+    ]
+  },
   "LevelStrings": {
-    "ANTARC.TR2": {
-      "Names": [
-        "Ne snoufleyk",
-        "Bystrokhodnyy kater 2.0",
-        "Kubik l'da",
-        "Progulka v morozilke",
-        "Tomatnyy sup kto-nibud'?"
-      ],
-      "Keys": {
-        "0": [
-          "Ne paluba",
-          "KholodnyyKlyuch_Igrok",
-          "Odin klyuch, chtoby napugat'",
-          "Zamorozhennyy klyuch"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Ne zabyvay menya!",
-          "Konfeta",
-          "Montirovka",
-          "Ya chuvstvuyu sebya sil'neye!",
-          "Lom"
-        ],
-        "1": [
-          "Osvobodi reku",
-          "Otkroyte vorota navodneniya",
-          "Voda i voda i voda",
-          "Dostup k supu",
-          "Klyuch ot kukhni dlya supa"
-        ]
-      }
-    },
-
-    "AREA51.TR2": {
-      "Names": [
-        "Pol byl zdes'!",
-        "Teoriya zagovora",
-        "Ksenomorf byl zdes'!",
-        "Den' nezavisimosti",
-        "Prishel'tsy zvonyat domoy!"
-      ],
-      "Keys": {
-        "0": [
-          "Raketnyy klyuch",
-          "Vzlet rakety",
-          "SpaceX klyuch",
-          "Reaktivnyy Yenot",
-          "Elon Musk klyuch",
-          "Vy takzhe mozhete propustit' eto!",
-          "Sekretnyye chisla",
-          "PIN-kod kreditnoy karty",
-          "Nastoyashchaya raketnaya ustanovka",
-          "Inoplanetyane poblizosti?!?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Klyuch Rapuntsel'",
-          "Vysokiy klyuch",
-          "Ne Bashnya Drakona",
-          "Chit Klyuch",
-          "TY SCHITERIL!!!"
-        ],
-        "1": [
-          "Ty ne mozhesh' propustit' menya!",
-          "Eto opyat' ya!",
-          "NLO Disc",
-          "Odin iz dvukh diskov",
-          "Pochemu net muzyki? O.o"
-        ],
-        "2": [
-          "Vecherinka Lary",
-          "Muzykal'nyy element",
-          "Odin iz dvukh diskov",
-          "Muzyka dzhungley",
-          "Mozhesh' propustit' menya!"
-        ],
-        "3": [
-          "Magnitnyy zheleznodorozhnyy klyuch",
-          "Klyuch ot metro",
-          "Klyuch ot zheleznodorozhnogo vokzala",
-          "Kantselyarskaya knopka",
-          "Znamenitost",
-          "Otboynyy molotok"
-        ]
-      }
-    },
-
-    "CHAMBER.TR2": {
-      "Names": [
-        "Insi Vinsi Pauk",
-        "20 – 40 vystrelov digla",
-        "Yaponskiy rekomenduyetsya",
-        "Osvobodite Villi",
-        "Putina Villarda"
-      ]
-    },
-
-    "CITY.TR2": {
-      "Names": [
-        "Pryzhok s mosta",
-        "Zhizn' nasekomykh",
-        "Bi Muvi 2.0",
-        "Zal Stikhiy",
-        "4 sposoba umeret'!"
-      ],
-      "Keys": {
-        "0": [
-          "Klyuch D'yavola",
-          "Eta devushka ne gorit!",
-          "Vy mozhete propustit' nas!",
-          "Dvoynoy klyuch",
-          "Klyuch ot ada",
-          "Smotri na menya!",
-          "Monstr-pechen'ka klyuch"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Maska krasoty",
-          "Ne zolotaya maska",
-          "Prizrak opery",
-          "Maska-shar priblizhayetsya",
-          "MASKA"
-        ]
-      }
-    },
-
-    "COMPOUND.TR2": {
-      "Names": [
-        "Prosto yeshche odna tyur'ma",
-        "Pobeg iz tyur'my",
-        "Bol'shoy pobeg",
-        "Boris zdes'!",
-        "Gde moye oruzhiye?"
-      ],
-      "Keys": {
-        "0": [
-          "Umri strazha ... UMRI!",
-          "Yeshche odna kartochka-klyuch",
-          "MasterCard",
-          "Klyuch-karta 1",
-          "Klyuch-karta 2",
-          "Poluchit' kartu tyur'my"
-        ],
-        "1": [
-          "VisaCard",
-          "Klyuch-karta 1",
-          "Klyuch-karta 2",
-          "Sekretnaya karta-klyuch",
-          "Kreditnaya karta"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Veshch' iz sinego kamnya",
-          "Svetyashchayasya probka 2",
-          "Predokhranitel' 2",
-          "Golubaya fleshka",
-          "Nikakogo obmana"
-        ],
-        "1": [
-          "Zhelto-kamennaya veshch'",
-          "Svetyashchayasya probka 1",
-          "Predokhranitel' 1",
-          "Zholtaya fleshka",
-          "Nikakogo obmana"
-        ]
-      }
-    },
-
-    "CRASH.TR2": {
-      "Names": [
-        "Park Yurskogo perioda",
-        "Dinozavry… opyat'?",
-        "Mesto Barni",
-        "Zateryannaya dolina chast' 2",
-        "Gde zolotoy drakon?"
-      ],
-      "Keys": {
-        "0": [
-          "Klyuch vyzova Barni",
-          "Ne yeda dlya Barni",
-          "Dlya chego eto? O.o",
-          "Klyuch dlya bol'shogo bum",
-          "Klyuch razrusheniya"
-        ],
-        "1": [
-          "Raptor klyuch",
-          "Sledi za svoyey spinoy",
-          "ZA TOBOY!",
-          "Vragi idut monkaS!",
-          "Gde ya podoydu?"
-        ]
-      }
-    },
-
     "HOUSE.TR2": {
       "Names": [
         "Skromnaya obitel'",
@@ -450,8 +206,8 @@
         "Uchebnaya strel'ba",
         "Schastlivyy dom prestarelykh"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klyuch ot gonochnoy trassy",
           "Flag-klyuch",
           "Formula 1 klyuch",
@@ -461,7 +217,6 @@
         ]
       }
     },
-
     "JUNGLE.TR2": {
       "Names": [
         "Kniga dzhungley",
@@ -470,8 +225,8 @@
         "Katat'sya katat'sya katat'sya",
         "Katyashchiyesya kamni"
       ],
-      "Keys": {
-        "3": [
+      "KeyItems": {
+        "Key4": [
           "Krasivyy klyuch",
           "MonKlyuch",
           "Bespoleznyy klyuch",
@@ -480,78 +235,25 @@
         ]
       }
     },
-
-    "MINES.TR2": {
+    "TEMPLE.TR2": {
       "Names": [
-        "Shakhterskoye remeslo",
-        "POCHEMU?!?!?!",
-        "Glubokoye ledyanoye plavaniye",
-        "Zaliv shturmovikov",
-        "Ogon' i Pukemonstry",
-        "PROSTO STRADAY!"
+        "Grobnitsa Rendisa i Rorisa",
+        "Pochemu tak mnogo shiv?",
+        "Puleneprobivayemyye statui",
+        "Lestnitsy i gorki",
+        "Adskaya lovushka",
+        "Ulovka flip fleyera"
       ],
-      "Puzzles": {
-        "0": [
-          "Ne zabyvay menya!",
-          "Konfeta",
-          "Montirovka",
-          "Ya chuvstvuyu sebya sil'neye!",
-          "Lom"
-        ],
-        "1": [
-          "Duracell",
-          "9 Vol't",
-          "Zaryadnoye ustroystvo",
-          "Sinyaya i krasnaya shtuka",
-          "Aktivator krana!"
-        ],
-        "2": [
-          "Gluboko zamorozhennaya veshch'",
-          "Pobeg iz Shoushenka",
-          "Vrashchaya veshch'",
-          "Zavelas' yeshche?",
-          "Ty umresh'!"
+      "KeyItems": {
+        "Key1": [
+          "Vso yeshche bez dyupa",
+          "Smertel'nyy sbor klyuchey",
+          "Pyat' nochey u Ganeshi",
+          "Ne molitvennyye barabany",
+          "Klyuchi ot kamery pytok"
         ]
       }
     },
-
-    "NEVADA.TR2": {
-      "Names": [
-        "Stepnyye orly",
-        "Vodnaya pustynya",
-        "Ostavaytes' gidratirovannymi",
-        "Zdes' net pustynnoy zheleznoy dorogi",
-        "Zharkaya dolina!"
-      ],
-      "Keys": {
-        "0": [
-          "Dostup k generatoru",
-          "Kartochka dlya pokoleniy",
-          "U MENYA YEST' VLAST'!",
-          "Izbegayte udara tokom!",
-          "Blekaut klyuch"
-        ],
-        "1": [
-          "Klyuch ot minnogo polya",
-          "Klyuch TNT",
-          "Flipmap klyuch",
-          "Dostup k inoplanetyanam",
-          "BOL'SHOY BUM!",
-          "Azezas klyuch k BUM!"
-        ]
-      }
-    },
-
-    "OFFICE.TR2": {
-      "Names": [
-        "Begi, Lara, RUUUN!",
-        "Ona deystvitel'no mertva?",
-        "Slishkom mnogo vol't!",
-        "Zatmeniye!",
-        "Sokhranit' i zagruzit'!"
-      ]
-    },
-
     "QUADCHAS.TR2": {
       "Names": [
         "Kvadro nuzhen?",
@@ -560,8 +262,8 @@
         "Ne nyryay, devochka!",
         "Zdes' net Barni!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Dvoynaya bespoleznost'",
           "Kto eto podnimayet?",
           "MonKlyuch dvoynoy",
@@ -570,7 +272,65 @@
         ]
       }
     },
-
+    "TONYBOSS.TR2": {
+      "Names": [
+        "Labirint",
+        "Ne yeshche odin labirint",
+        "Sekretnyy labirint?!? O.o",
+        "40 mortvykh kontsov",
+        "40 zmey"
+      ]
+    },
+    "SHORE.TR2": {
+      "Names": [
+        "Derevnya kannibalov",
+        "Plyazh",
+        "Ne teryayte nogu",
+        "Yad i mostik",
+        "Muzyka v takt"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klyuch pod morem",
+          "Klyuch Dzheka Vorob'ya",
+          "Utoplennyy klyuch",
+          "Rzhavyy klyuch",
+          "Kontrabandist poteryal eto!"
+        ],
+        "Puzzle1": [
+          "Yadovityy kamen'",
+          "Kamen' iz ruin khrama",
+          "Krovavyy kamen'",
+          "Ver' v menya",
+          "Ne zhemchuzhina vsadnika"
+        ]
+      }
+    },
+    "CRASH.TR2": {
+      "Names": [
+        "Park Yurskogo perioda",
+        "Dinozavry, opyat'?",
+        "Mesto Barni",
+        "Zateryannaya dolina chast' 2",
+        "Gde zolotoy drakon?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klyuch vyzova Barni",
+          "Ne yeda dlya Barni",
+          "Dlya chego eto? O.o",
+          "Klyuch dlya bol'shogo bum",
+          "Klyuch razrusheniya"
+        ],
+        "Key2": [
+          "Raptor klyuch",
+          "Sledi za svoyey spinoy",
+          "ZA TOBOY!",
+          "Vragi idut monkaS!",
+          "Gde ya podoydu?"
+        ]
+      }
+    },
     "RAPIDS.TR2": {
       "Names": [
         "Pochemu eto sushchestvuyet?",
@@ -581,7 +341,15 @@
         "Pol'zovateli naushnikov RIP"
       ]
     },
-
+    "TRIBOSS.TR2": {
+      "Names": [
+        "Boss-kannibal",
+        "Yeshche bol'she yada",
+        "Khram lovushek",
+        "Khram tuntsa",
+        "Khram zabega"
+      ]
+    },
     "ROOFS.TR2": {
       "Names": [
         "20 sekund",
@@ -592,15 +360,15 @@
         "Londonskoye getto",
         "Kakiye-to bro?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Krysinyy klyuch",
           "Klyuch ot komnaty grippa",
           "Klyuch ot dymokhoda",
           "Prostoy klyuch",
           "Zolotoy klyuch"
         ],
-        "1": [
+        "Key2": [
           "Krasivyy klyuch",
           "Tserkovnyy klyuch",
           "Rubinovyy klyuch",
@@ -609,7 +377,6 @@
         ]
       }
     },
-
     "SEWER.TR2": {
       "Names": [
         "Platforma 9 3/4",
@@ -618,59 +385,57 @@
         "Bilety snyaty s prodazhi",
         "Pozhaluysta, obratite vnimaniye na probel"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Elektricheskiy klyuch",
           "Klyuch dvornika",
           "U menya yest' vlast'!",
           "Instrumentariy",
           "Ispravit' eti veshchi!"
         ],
-        "1": [
+        "Key2": [
           "Polovina na polovinu",
           "Odna polovina",
           "Religioznyy klyuch",
           "Salomo 1 ili 2?",
           "Damoklov klyuchi"
         ],
-        "2": [
+        "Key3": [
           "Polovina na polovinu",
           "Odna polovina",
           "Religioznyy klyuch",
           "Salomo 1 ili 2?",
           "Damoklov klyuchi"
         ],
-        "3": [
+        "Key4": [
           "Polovina na polovinu",
           "Odna polovina",
           "Religioznyy klyuch",
           "Salomo 1 ili 2?",
           "Damoklov klyuchi"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "DEN'GI!",
           "Shilling",
           "Massivnyy, no blestyashchiy!",
           "Stoimost' proyezda na poyezde",
           "25 Bitsov"
         ],
-        "1": [
+        "Puzzle2": [
           "Poydem v Khogvarts",
           "Zheleznodorozhnyy proyezdnoy",
           "Nazad v Nevadu!",
           "Kontrol' ne trebuyetsya!",
           "Plastikovaya karta dlya poyezdok po Londonu"
         ],
-        "2": [
+        "Puzzle3": [
           "Molot Tora",
           "M'yol'nir",
           "Udar' krota molotkom",
           "Razbeyte etot zamok!",
           "Molot iz Folli"
         ],
-        "3": [
+        "Puzzle4": [
           "Mertsaniye mertsayet malen'kaya zvezda",
           "Ya luchshe budu siyat'!",
           "Vy videli chto-to blestyashcheye!",
@@ -679,105 +444,6 @@
         ]
       }
     },
-
-    "SHORE.TR2": {
-      "Names": [
-        "Derevnya kannibalov",
-        "Plyazh",
-        "Ne teryayte nogu",
-        "Yad i mostik",
-        "Muzyka v takt"
-      ],
-      "Keys": {
-        "0": [
-          "Klyuch pod morem",
-          "Klyuch Dzheka Vorob'ya",
-          "Utoplennyy klyuch",
-          "Rzhavyy klyuch",
-          "Kontrabandist poteryal eto!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Yadovityy kamen'",
-          "Kamen' iz ruin khrama",
-          "Krovavyy kamen'",
-          "Ver' v menya",
-          "Ne zhemchuzhina vsadnika"
-        ]
-      }
-    },
-
-    "STPAUL.TR2": {
-      "Names": [
-        "Shsh eto sekret",
-        "60/59",
-        "Nezakonchennoye delo",
-        "Smertel'nyy sobor",
-        "Net povrezhdeniy nevozmozhno"
-      ],
-      "Keys": {
-        "0": [
-          "Super skrytyy",
-          "Lestnitsa, Lestnitsa na stene",
-          "Nakonets nashel menya?",
-          "Pryatki",
-          "Klyuch ot komnaty grippa"
-        ]
-      }
-    },
-
-    "TEMPLE.TR2": {
-      "Names": [
-        "Grobnitsa Rendisa i Rorisa",
-        "Pochemu tak mnogo shiv?",
-        "Puleneprobivayemyye statui",
-        "Lestnitsy i gorki",
-        "Adskaya lovushka",
-        "Ulovka flip fleyera"
-      ],
-      "Keys": {
-        "0": [
-          "Vso yeshche bez dyupa",
-          "Smertel'nyy sbor klyuchey",
-          "Pyat' nochey u Ganeshi",
-          "Ne molitvennyye barabany",
-          "Klyuchi ot kamery pytok"
-        ],
-        "1": [
-          "Vso yeshche bez dyupa",
-          "Smertel'nyy sbor klyuchey",
-          "Pyat' nochey u Ganeshi",
-          "Ne molitvennyye barabany",
-          "Klyuchi ot kamery pytok"
-        ],
-        "2": [
-          "Vso yeshche bez dyupa",
-          "Smertel'nyy sbor klyuchey",
-          "Pyat' nochey u Ganeshi",
-          "Ne molitvennyye barabany",
-          "Klyuchi ot kamery pytok"
-        ],
-        "3": [
-          "Vso yeshche bez dyupa",
-          "Smertel'nyy sbor klyuchey",
-          "Pyat' nochey u Ganeshi",
-          "Ne molitvennyye barabany",
-          "Klyuchi ot kamery pytok"
-        ]
-      }
-    },
-
-    "TONYBOSS.TR2": {
-      "Names": [
-        "Labirint",
-        "Ne yeshche odin labirint",
-        "Sekretnyy labirint?!? O.o",
-        "40 mortvykh kontsov",
-        "40 zmey"
-      ]
-    },
-
     "TOWER.TR2": {
       "Names": [
         "Natsional'nyy istoricheskiy muzey",
@@ -786,8 +452,8 @@
         "Davayte nenavidet'",
         "Polet UPV vperedi!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klavisha nagreva!",
           "Vou ty ne sdelal glitch",
           "Podzhigatel'",
@@ -796,15 +462,250 @@
         ]
       }
     },
-
-    "TRIBOSS.TR2": {
+    "OFFICE.TR2": {
       "Names": [
-        "Boss-kannibal",
-        "Yeshche bol'she yada",
-        "Khram lovushek",
-        "Khram tuntsa",
-        "Khram zabega"
+        "Begi, Lara, RUUUN!",
+        "Ona deystvitel'no mertva?",
+        "Slishkom mnogo vol't!",
+        "Zatmeniye!",
+        "Sokhranit' i zagruzit'!"
       ]
+    },
+    "NEVADA.TR2": {
+      "Names": [
+        "Stepnyye orly",
+        "Vodnaya pustynya",
+        "Ostavaytes' gidratirovannymi",
+        "Zdes' net pustynnoy zheleznoy dorogi",
+        "Zharkaya dolina!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Dostup k generatoru",
+          "Kartochka dlya pokoleniy",
+          "U MENYA YEST' VLAST'!",
+          "Izbegayte udara tokom!",
+          "Blekaut klyuch"
+        ],
+        "Key2": [
+          "Klyuch ot minnogo polya",
+          "Klyuch TNT",
+          "Flipmap klyuch",
+          "Dostup k inoplanetyanam",
+          "BOL'SHOY BUM!",
+          "Azezas klyuch k BUM!"
+        ]
+      }
+    },
+    "COMPOUND.TR2": {
+      "Names": [
+        "Prosto yeshche odna tyur'ma",
+        "Pobeg iz tyur'my",
+        "Bol'shoy pobeg",
+        "Boris zdes'!",
+        "Gde moye oruzhiye?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Umri strazha ... UMRI!",
+          "Yeshche odna kartochka-klyuch",
+          "MasterCard",
+          "Klyuch-karta 1",
+          "Klyuch-karta 2",
+          "Poluchit' kartu tyur'my"
+        ],
+        "Key2": [
+          "VisaCard",
+          "Klyuch-karta 1",
+          "Klyuch-karta 2",
+          "Sekretnaya karta-klyuch",
+          "Kreditnaya karta"
+        ],
+        "Puzzle1": [
+          "Veshch' iz sinego kamnya",
+          "Svetyashchayasya probka 2",
+          "Predokhranitel' 2",
+          "Golubaya fleshka",
+          "Nikakogo obmana"
+        ],
+        "Puzzle2": [
+          "Zhelto-kamennaya veshch'",
+          "Svetyashchayasya probka 1",
+          "Predokhranitel' 1",
+          "Zholtaya fleshka",
+          "Nikakogo obmana"
+        ]
+      }
+    },
+    "AREA51.TR2": {
+      "Names": [
+        "Pol byl zdes'!",
+        "Teoriya zagovora",
+        "Ksenomorf byl zdes'!",
+        "Den' nezavisimosti",
+        "Prishel'tsy zvonyat domoy!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Raketnyy klyuch",
+          "Vzlet rakety",
+          "SpaceX klyuch",
+          "Reaktivnyy Yenot",
+          "Elon Musk klyuch",
+          "Vy takzhe mozhete propustit' eto!",
+          "Sekretnyye chisla",
+          "PIN-kod kreditnoy karty",
+          "Nastoyashchaya raketnaya ustanovka",
+          "Inoplanetyane poblizosti?!?"
+        ],
+        "Puzzle1": [
+          "Klyuch Rapuntsel'",
+          "Vysokiy klyuch",
+          "Ne Bashnya Drakona",
+          "Chit Klyuch",
+          "TY SCHITERIL!!!"
+        ],
+        "Puzzle2": [
+          "Ty ne mozhesh' propustit' menya!",
+          "Eto opyat' ya!",
+          "NLO Disc",
+          "Odin iz dvukh diskov",
+          "Pochemu net muzyki? O.o"
+        ],
+        "Puzzle3": [
+          "Vecherinka Lary",
+          "Muzykal'nyy element",
+          "Odin iz dvukh diskov",
+          "Muzyka dzhungley",
+          "Mozhesh' propustit' menya!"
+        ],
+        "Puzzle4": [
+          "Magnitnyy zheleznodorozhnyy klyuch",
+          "Klyuch ot metro",
+          "Klyuch ot zheleznodorozhnogo vokzala",
+          "Kantselyarskaya knopka",
+          "Znamenitost",
+          "Otboynyy molotok"
+        ]
+      }
+    },
+    "ANTARC.TR2": {
+      "Names": [
+        "Ne snoufleyk",
+        "Bystrokhodnyy kater 2.0",
+        "Kubik l'da",
+        "Progulka v morozilke",
+        "Tomatnyy sup kto-nibud'?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Ne paluba",
+          "KholodnyyKlyuch_Igrok",
+          "Odin klyuch, chtoby napugat'",
+          "Zamorozhennyy klyuch"
+        ],
+        "Puzzle1": [
+          "Ne zabyvay menya!",
+          "Konfeta",
+          "Montirovka",
+          "Ya chuvstvuyu sebya sil'neye!",
+          "Lom"
+        ],
+        "Puzzle2": [
+          "Osvobodi reku",
+          "Otkroyte vorota navodneniya",
+          "Voda i voda i voda",
+          "Dostup k supu",
+          "Klyuch ot kukhni dlya supa"
+        ]
+      }
+    },
+    "MINES.TR2": {
+      "Names": [
+        "Shakhterskoye remeslo",
+        "POCHEMU?!?!?!",
+        "Glubokoye ledyanoye plavaniye",
+        "Zaliv shturmovikov",
+        "Ogon' i Pukemonstry",
+        "PROSTO STRADAY!"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Ne zabyvay menya!",
+          "Konfeta",
+          "Montirovka",
+          "Ya chuvstvuyu sebya sil'neye!",
+          "Lom"
+        ],
+        "Puzzle2": [
+          "Duracell",
+          "9 Vol't",
+          "Zaryadnoye ustroystvo",
+          "Sinyaya i krasnaya shtuka",
+          "Aktivator krana!"
+        ],
+        "Puzzle3": [
+          "Gluboko zamorozhennaya veshch'",
+          "Pobeg iz Shoushenka",
+          "Vrashchaya veshch'",
+          "Zavelas' yeshche?",
+          "Ty umresh'!"
+        ]
+      }
+    },
+    "CITY.TR2": {
+      "Names": [
+        "Pryzhok s mosta",
+        "Zhizn' nasekomykh",
+        "Bi Muvi 2.0",
+        "Zal Stikhiy",
+        "4 sposoba umeret'!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klyuch D'yavola",
+          "Eta devushka ne gorit!",
+          "Vy mozhete propustit' nas!",
+          "Dvoynoy klyuch",
+          "Klyuch ot ada",
+          "Smotri na menya!",
+          "Monstr-pechen'ka klyuch"
+        ],
+        "Puzzle1": [
+          "Maska krasoty",
+          "Ne zolotaya maska",
+          "Prizrak opery",
+          "Maska-shar priblizhayetsya",
+          "MASKA"
+        ]
+      }
+    },
+    "CHAMBER.TR2": {
+      "Names": [
+        "Insi Vinsi Pauk",
+        "20 Â– 40 vystrelov digla",
+        "Yaponskiy rekomenduyetsya",
+        "Osvobodite Villi",
+        "Putina Villarda"
+      ]
+    },
+    "STPAUL.TR2": {
+      "Names": [
+        "Shsh eto sekret",
+        "60/59",
+        "Nezakonchennoye delo",
+        "Smertel'nyy sobor",
+        "Net povrezhdeniy nevozmozhno"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Super skrytyy",
+          "Lestnitsa, Lestnitsa na stene",
+          "Nakonets nashel menya?",
+          "Pryatki",
+          "Klyuch ot komnaty grippa"
+        ]
+      }
     }
   }
 }
