@@ -173,7 +173,7 @@ public abstract class AbstractLandmarkImporter<E, L>
         TRObjectTexture texture = new(rectangle);
         if (mirrored)
         {
-            texture.FlipHorizontal();
+            texture.FlipVertical();
         }
 
         return new()

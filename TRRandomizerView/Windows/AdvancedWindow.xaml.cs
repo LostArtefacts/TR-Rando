@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Secrets;
 using TRRandomizerView.Model;
 using TRRandomizerView.Utilities;
 
@@ -330,10 +329,6 @@ public partial class AdvancedWindow : Window
         {
             _unrestrictedButton.IsChecked = !(_defaultDifficultyButton.IsChecked = ControllerProxy.RandoEnemyDifficulty == RandoDifficulty.Default);
         }
-        if (HasItemDifficulty)
-        {
-            _itemOneLimitButton.IsChecked = !(_defaultItemDifficultyButton.IsChecked = ControllerProxy.RandoItemDifficulty == ItemDifficulty.Default);
-        }
         if (HasGlobeOptions)
         {
             switch (ControllerProxy.GlobeDisplay)
@@ -376,21 +371,6 @@ public partial class AdvancedWindow : Window
                     break;
                 case DragonSpawnType.Minimum:
                     _minimumDragonSpawnButton.IsChecked = true;
-                    break;
-            }
-        }
-        if (HasItemSpriteRandomization)
-        {
-            switch (ControllerProxy.SpriteRandoMode)
-            {
-                case SpriteRandoMode.Default:
-                    _defaultSpriteRandoMode.IsChecked = true;
-                    break;
-                case SpriteRandoMode.OneSpritePerLevel:
-                    _oneSpritePerLevelSpriteRandoMode.IsChecked = true;
-                    break;
-                case SpriteRandoMode.OneSpritePerGame:
-                    _oneitemPerGameSpriteRandoMode.IsChecked = true;
                     break;
             }
         }

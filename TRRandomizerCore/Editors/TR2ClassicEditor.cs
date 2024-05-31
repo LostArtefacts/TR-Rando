@@ -61,12 +61,8 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 
         if (Settings.RandomizeItems)
         {
-            target += numLevels;
+            target += 2 * numLevels;
             if (Settings.RandomizeItemSprites)
-            {
-                target += numLevels;
-            }
-            if (Settings.IncludeKeyItems)
             {
                 target += numLevels;
             }
@@ -90,8 +86,6 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
         {
             // 3 for multithreading cross-level work
             target += Settings.CrossLevelEnemies ? numLevels * 3 : numLevels;
-            // And again for eliminating unused enemies
-            target += numLevels;
         }
 
         if (Settings.RandomizeTextures)
@@ -108,6 +102,9 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 
         // Environment randomizer always runs
         target += numLevels * 2;
+
+        // Enemy adjuster always runs
+        target += numLevels;
 
         return target;
     }
@@ -168,7 +165,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 
         // Texture monitoring is needed between enemy and texture randomization
         // to track where imported enemies are placed.
-        if (!monitor.IsCancelled && Settings.RandomizeEnemies)
+        if (!monitor.IsCancelled)
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting enemy entities");
             new TR2EnemyAdjuster
@@ -226,12 +223,6 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             }.Randomize(Settings.SecretSeed);
         }
 
-        if (!monitor.IsCancelled && Settings.RandomizeItems)
-        {
-            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing standard items");
-            itemRandomizer.Randomize(Settings.ItemSeed);
-        }
-
         if (!monitor.IsCancelled && Settings.ReassignPuzzleItems)
         {
             // P2 items are converted to P3 in case the dragon is present as the dagger type is hardcoded.
@@ -245,6 +236,12 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 BackupPath = backupDirectory,
                 SaveMonitor = monitor
             }.AdjustModels();
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeItems)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
+            itemRandomizer.Randomize(Settings.ItemSeed);
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeEnemies)
@@ -283,10 +280,10 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             environmentRandomizer.Randomize(Settings.EnvironmentSeed);
         }
 
-        if (!monitor.IsCancelled && Settings.RandomizeItems && Settings.IncludeKeyItems)
+        if (!monitor.IsCancelled && Settings.RandomizeItems)
         {
-            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing key items");
-            itemRandomizer.RandomizeKeyItems();
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Finalizing item randomization");
+            itemRandomizer.FinalizeRandomization();
         }
 
         if (!monitor.IsCancelled)

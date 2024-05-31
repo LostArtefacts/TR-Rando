@@ -501,6 +501,10 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                     // Convert the placeholder reward room into an actual room now that secrets are positioned.
                     _outer.ActualiseRewardRoom(level, rewardRoom);
                 }
+                else if (!level.HasSecrets)
+                {
+                    _outer._placer.RemoveDefaultSecrets(level.Data.Rooms, level.Data.FloorData);
+                }
 
                 _outer.SaveLevel(level);
 

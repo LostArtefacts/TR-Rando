@@ -26,7 +26,7 @@ public class TR1RItemRandomizer : BaseTR1RRandomizer
         {
             LoadLevelInstance(lvl);
 
-            _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.RemovesWeapons);
+            _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.RemovesWeapons, _levelInstance.Script.OriginalSequence);
             _allocator.EnforceOneLimit(_levelInstance.Name, _levelInstance.Data.Entities, _levelInstance.Script.RemovesWeapons);
 
             SaveLevelInstance();
@@ -37,16 +37,27 @@ public class TR1RItemRandomizer : BaseTR1RRandomizer
         }
     }
 
-    public void RandomizeKeyItems()
+    public void FinalizeRandomization()
     {
         foreach (TRRScriptedLevel lvl in Levels)
         {
-            LoadLevelInstance(lvl);
+            if (Settings.ItemMode == ItemMode.Shuffled || Settings.IncludeKeyItems)
+            {
+                LoadLevelInstance(lvl);
 
-            CheckTihocanPierre(_levelInstance);
-            _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
+                CheckTihocanPierre(_levelInstance);
+                if (Settings.ItemMode == ItemMode.Shuffled)
+                {
+                    _allocator.ApplyItemSwaps(_levelInstance.Name, _levelInstance.Data.Entities);
+                }
+                else
+                {
+                    _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
+                }
 
-            SaveLevelInstance();
+                SaveLevelInstance();
+            }
+
             if (!TriggerProgress())
             {
                 break;

@@ -96,10 +96,10 @@ public class LocationPicker : IRouteManager
         }
     }
 
-    public void RandomizeKeyItemLocation<T>(TREntity<T> entity, bool hasPickupTrigger, int levelSequence, TRRoomInfo roomInfo)
+    public void RandomizeKeyItemLocation<T>(TREntity<T> entity, bool hasPickupTrigger, int levelSequence)
         where T : Enum
     {
-        uint keyItemID = GetKeyItemID(levelSequence, entity, roomInfo);
+        uint keyItemID = GetKeyItemID(levelSequence, entity);
         if (!Enum.IsDefined(typeof(T), keyItemID))
         {
             return;
@@ -224,6 +224,12 @@ public class LocationPicker : IRouteManager
         return roomPool;
     }
 
+    public bool IsValidKeyItemLocation(int keyItemID, Location location)
+    {
+        return GetRoomPool(keyItemID).Contains(location.Room)
+            && _locations.Any(l => l.IsEquivalent(location));
+    }
+
     private bool TestLocation(Location location, KeyMode keyTestMode, int keyItemID)
     {
         // This assumes that all possible scenarios are defined on a route
@@ -301,12 +307,15 @@ public class LocationPicker : IRouteManager
         return location;
     }
 
-    public static uint GetKeyItemID<T>(int levelSequence, TREntity<T> entity, TRRoomInfo roomInfo)
+    public uint GetKeyItemID<T>(int levelSequence, TREntity<T> entity)
         where T : Enum
     {
         // Arbitrary method of generating unique IDs per level.
-        int x = (entity.X - roomInfo.X) / TRConsts.Step4;
-        int z = (entity.Z - roomInfo.Z) / TRConsts.Step4;
+        int roomX = RoomInfos[entity.Room].MinX - TRConsts.Step4;
+        int roomZ = RoomInfos[entity.Room].MinZ - TRConsts.Step4;
+
+        int x = (entity.X - roomX) / TRConsts.Step4;
+        int z = (entity.Z - roomZ) / TRConsts.Step4;
         int y = entity.Y / TRConsts.Step1;
 
         long id = 10000

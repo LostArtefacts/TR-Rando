@@ -54,7 +54,7 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
     public TR1ItemAllocator()
         : base(TRGameVersion.TR1) { }
 
-    protected override List<int> GetExcludedItems(string levelName)
+    public override List<int> GetExcludedItems(string levelName)
     {
         TRSecretMapping<TR1Entity> mapping = TRSecretMapping<TR1Entity>.Get($@"Resources\TR1\SecretMapping\{levelName}-SecretMapping.json");
         return mapping?.RewardEntities ?? new();
@@ -73,30 +73,41 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
     protected override List<TR1Type> GetWeaponItemTypes()
         => TR1TypeUtilities.GetWeaponPickups();
 
+    protected override List<TR1Type> GetKeyItemTypes()
+        => TR1TypeUtilities.GetKeyItemTypes();
+
+    protected override List<TR1Type> GetEnemyTypes()
+        => TR1TypeUtilities.GetFullListOfEnemies();
+
     protected override bool IsCrystalPickup(TR1Type type)
         => type == TR1Type.SavegameCrystal_P;
 
     protected override void ItemMoved(TR1Entity item)
         => item.Intensity = 0;
 
-    public void RandomizeItems(string levelName, TR1Level level, bool isUnarmed)
+    public void RandomizeItems(string levelName, TR1Level level, bool isUnarmed, int originalSequence)
     {
-        _picker.Initialise(levelName, GetItemLocationPool(levelName, level, false), Settings, Generator);
-
+        InitialisePicker(levelName, level, Settings.ItemMode == ItemMode.Default ? LocationMode.Default : LocationMode.ExistingItems);
         AddExtraPickups(levelName, level.Entities);
-        RandomizeItemTypes(levelName, level.Entities, isUnarmed);
-        RandomizeItemLocations(levelName, level.Entities, isUnarmed);
+
+        if (Settings.ItemMode == ItemMode.Default)
+        {
+            RandomizeItemTypes(levelName, level.Entities, isUnarmed);
+            RandomizeItemLocations(levelName, level.Entities, isUnarmed);
+        }
+        else
+        {
+            ShuffleItems(levelName, level.Entities, isUnarmed, GetKeyItemLevelSequence(levelName, originalSequence));
+        }
+        
         RandomizeSprites(level);
     }
 
     public void RandomizeKeyItems(string levelName, TR1Level level, int originalSequence)
     {
-        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level);
-        _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
+        InitialisePicker(levelName, level, LocationMode.KeyItems);
+        originalSequence = GetKeyItemLevelSequence(levelName, originalSequence);
 
-        _picker.Initialise(levelName, GetItemLocationPool(levelName, level, true), Settings, Generator);
-
-        int sequence = GetKeyItemLevelSequence(levelName, originalSequence);
         for (int i = 0; i < level.Entities.Count; i++)
         {
             TR1Entity entity = level.Entities[i];
@@ -107,9 +118,28 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
             }
 
             bool hasPickupTrigger = LocationUtilities.HasPickupTriger(entity, i, level);
-            _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger,
-                sequence, level.Rooms[entity.Room].Info);
+            _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger, originalSequence);
+            ItemMoved(entity);
         }
+    }
+
+    private void InitialisePicker(string levelName, TR1Level level, LocationMode locationMode)
+    {
+        _picker.TriggerTestAction = locationMode == LocationMode.KeyItems
+            ? location => LocationUtilities.HasAnyTrigger(location, level)
+            : null;
+        _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
+
+        List<Location> pool = GetItemLocationPool(levelName, level, locationMode != LocationMode.Default);
+        if (locationMode == LocationMode.ExistingItems)
+        {
+            // OG items may not be centre-tile, plus we want to exclude such things as the unreachable Midas medipack.
+            IEnumerable<Location> itemLocations = GetPickups(levelName, level.Entities, true)
+                .Select(e => e.GetLocation())
+                .DistinctBy(l => level.GetRoomSector(l));
+            pool = new(itemLocations.Where(i => pool.Any(e => level.GetRoomSector(i) == level.GetRoomSector(e))));
+        }
+        _picker.Initialise(levelName, pool, Settings, Generator);
     }
 
     private int GetKeyItemLevelSequence(string levelName, int originalSequence)
@@ -166,6 +196,7 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
         }
 
         List<TR1Type> stdItemTypes = GetStandardItemTypes();
+        stdItemTypes.Remove(GetPistolType());
 
         // Add what we can to the level. The locations and types may be further randomized depending on the selected options.
         for (int i = 0; i < _extraItemCounts[levelName]; i++)

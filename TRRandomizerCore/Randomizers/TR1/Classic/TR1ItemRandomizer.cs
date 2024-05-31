@@ -27,21 +27,21 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         {
             LoadLevelInstance(lvl);
 
-            if (Settings.RandomizeItemTypes)
+            if (Settings.ItemMode == ItemMode.Default && Settings.RandomizeItemTypes)
             {
                 RandomizeDefaultItemDrops(_levelInstance);
             }
 
-            _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.RemovesWeapons);
+            _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.RemovesWeapons, _levelInstance.Script.OriginalSequence);
 
             int? hiddenCount = _allocator.EnforceOneLimit(_levelInstance.Name, _levelInstance.Data.Entities, _levelInstance.Script.RemovesWeapons);
             if (hiddenCount.HasValue)
             {
                 _levelInstance.Script.UnobtainablePickups ??= 0;
                 _levelInstance.Script.UnobtainablePickups += hiddenCount;
-            }            
+            }
 
-            if (Settings.RandomizeItemPositions)
+            if (Settings.ItemMode == ItemMode.Default && Settings.RandomizeItemPositions)
             {
                 UpdateEnemyItemDrops(_levelInstance, _levelInstance.Data.Entities
                     .Where(e => TR1TypeUtilities.IsStandardPickupType(e.TypeID)));
@@ -62,19 +62,33 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         }
     }
 
-    public void RandomizeKeyItems()
+    public void FinalizeRandomization()
     {
         foreach (TR1ScriptedLevel lvl in Levels)
         {
-            LoadLevelInstance(lvl);
+            if (Settings.ItemMode == ItemMode.Shuffled || Settings.IncludeKeyItems)
+            {
+                LoadLevelInstance(lvl);
 
-            CheckTihocanPierre(_levelInstance);
-            _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
+                CheckTihocanPierre(_levelInstance);
+                if (Settings.ItemMode == ItemMode.Shuffled)
+                {
+                    _allocator.ApplyItemSwaps(_levelInstance.Name, _levelInstance.Data.Entities);
+                }
+                else
+                {
+                    _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
+                }
 
-            UpdateEnemyItemDrops(_levelInstance, _levelInstance.Data.Entities
-                .Where(e => TR1TypeUtilities.IsKeyItemType(e.TypeID)));
+                if (Settings.AllowEnemyKeyDrops)
+                {
+                    UpdateEnemyItemDrops(_levelInstance, _levelInstance.Data.Entities
+                        .Where(e => TR1TypeUtilities.IsKeyItemType(e.TypeID)));
+                }
 
-            SaveLevelInstance();
+                SaveLevelInstance();
+            }
+
             if (!TriggerProgress())
             {
                 break;
@@ -121,6 +135,8 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
     private void UpdateEnemyItemDrops(TR1CombinedLevel level, IEnumerable<TR1Entity> pickups)
     {
+        pickups = pickups.Except(_allocator.GetExcludedItems(level.Name).Select(i => level.Data.Entities[i]));
+
         TRRoomSector sectorFunc(Location loc) => level.Data.GetRoomSector(loc);
         foreach (TR1Entity pickup in pickups)
         {

@@ -64,11 +64,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
 
         if (Settings.RandomizeItems)
         {
-            target += numLevels;
-            if (Settings.IncludeKeyItems)
-            {
-                target += numLevels;
-            }
+            target += 2 * numLevels;
         }
 
         if (Settings.RandomizeSecretRewardsPhysical)
@@ -235,7 +231,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
         // - this allows for accounting for newly added items.
         if (!monitor.IsCancelled && Settings.RandomizeItems)
         {
-            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing standard items");
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
             itemRandomizer.Randomize(Settings.ItemSeed);
         }
 
@@ -274,10 +270,10 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
             environmentRandomizer.Randomize(Settings.EnvironmentSeed);
         }
 
-        if (!monitor.IsCancelled && Settings.RandomizeItems && Settings.IncludeKeyItems)
+        if (!monitor.IsCancelled && Settings.RandomizeItems)
         {
-            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing key items");
-            itemRandomizer.RandomizeKeyItems();
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Finalizing item randomization");
+            itemRandomizer.FinalizeRandomization();
         }
 
         if (!monitor.IsCancelled)

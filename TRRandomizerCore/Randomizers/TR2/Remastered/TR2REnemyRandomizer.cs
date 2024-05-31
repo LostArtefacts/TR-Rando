@@ -24,6 +24,14 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
         TR2LevelNames.XIAN,
     };
 
+    private const int _hshShellCount = 16;
+    private static readonly List<Location> _hshShellLocations = new()
+    {
+        new() { X = 31232, Y = 256, Z = 66048, Room = 57 },
+        new() { X = 31232, Y = 256, Z = 65024, Room = 57 },
+        new() { X = 31232, Y = 256, Z = 64000, Room = 52 },
+    };
+
     private Dictionary<string, List<Location>> _pistolLocations;
     private TR2EnemyAllocator _allocator;
 
@@ -203,8 +211,13 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
 
         if (level.Is(TR2LevelNames.HOME))
         {
-            const int shellCount = 8;
-            AddItem(TR2Type.ShotgunAmmo_S_P, shellCount * (int)difficulty * 2);
+            // The game crashes with more than 32 pickups on a tile, so we need to spread additional shells around.
+            int shellCount = _hshShellCount * (int)difficulty;
+            for (int i = 0; i < shellCount; i++)
+            {
+                AddItem(TR2Type.ShotgunAmmo_S_P, 1);
+                item.SetLocation(_hshShellLocations[i % _hshShellLocations.Count]);
+            }
         }
         else if (!level.Data.Entities.Any(e => e.TypeID == TR2Type.Pistols_S_P))
         {

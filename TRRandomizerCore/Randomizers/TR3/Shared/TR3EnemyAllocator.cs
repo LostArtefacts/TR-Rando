@@ -411,18 +411,10 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
             _resultantEnemies.Add(newType);
         }
 
-        if (!Settings.AllowEnemyKeyDrops && (!Settings.RandomizeItems || !Settings.IncludeKeyItems))
+        if (!Settings.AllowEnemyKeyDrops)
         {
-            // Shift enemies who are on top of key items so they don't pick them up.
-            IEnumerable<TR3Entity> keyEnemies = level.Entities.Where(enemy => TR3TypeUtilities.IsEnemyType(enemy.TypeID)
-                  && level.Entities.Any(key => TR3TypeUtilities.IsKeyItemType(key.TypeID)
-                  && key.GetLocation().IsEquivalent(enemy.GetLocation()))
-            );
-
-            foreach (TR3Entity enemy in keyEnemies)
-            {
-                enemy.X++;
-            }
+            TR3ItemAllocator allocator = new();
+            allocator.ExcludeEnemyKeyDrops(level.Entities);
         }
     }
 

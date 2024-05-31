@@ -92,6 +92,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -105,8 +107,53 @@
                 Grid.ColumnSpan="2"
                 Margin="0,0,0,10"/>
 
+            <!-- Item Mode -->
+            <StackPanel
+                Grid.Row="1"
+                Visibility="{Binding HasItemDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock
+                    Style="{StaticResource HeaderStyle}"
+                    Text="Item Mode"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border VerticalAlignment="Top">
+                        <ComboBox
+                            ItemsSource="{Binding ControllerProxy.ItemModes}"
+                            SelectedItem="{Binding ControllerProxy.ItemMode, Mode=TwoWay}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"/>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <Label.Content>
+                                <TextBlock>
+                                    <Run>Choose how item randomization is performed.</Run>
+                                    <LineBreak/>
+                                    <Run>- Default: full item randomization based on the options below.</Run>
+                                    <LineBreak/>
+                                    <Run>- Shuffled: the number of types and locations will be retained per level, but item types will be shuffled.</Run>
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
             <!-- General -->
-            <StackPanel Grid.Row="1"
+            <StackPanel Grid.Row="2"
                         Visibility="{Binding HasBoolItems, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="General"/>
@@ -120,7 +167,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Border Margin="0,10,0,0">
+                                <Border Margin="0,5,0,0">
                                     <CheckBox IsEnabled="{Binding IsActive}"
                                               IsChecked="{Binding Value, Mode=TwoWay}"
                                               VerticalAlignment="Top">
@@ -130,7 +177,8 @@
                                 </Border>
 
                                 <Border Grid.Column="1"
-                                        Margin="0,10,0,0">
+                                        Margin="0,5,0,0"
+                                        IsEnabled="{Binding IsActive}">
                                     <Label Style="{StaticResource OptionDescriptionStyle}"
                                            Content="{Binding Description}">
                                         <Label.Resources>
@@ -146,63 +194,10 @@
                 </ItemsControl>
             </StackPanel>
 
-            <!-- (Item) Difficulty -->
-            <StackPanel Grid.Row="2"
-                        Visibility="{Binding HasItemDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
-                <TextBlock Style="{StaticResource HeaderStyle}"
-                           Text="Difficulty" />
-
-                <Grid Margin="0,5,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <Border>
-                        <RadioButton Content="Default"
-                                     GroupName="randoItemDifficulty"
-                                     x:Name="_defaultItemDifficultyButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.RandoItemDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:ItemDifficulty.Default}, Mode=TwoWay}" />
-                    </Border>
-
-                    <Border Grid.Row="0"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Standard item randomization." />
-                    </Border>
-
-                    <Border Grid.Row="1"
-                            Grid.Column="0">
-                        <RadioButton Content="One Limit"
-                                     GroupName="randoItemDifficulty"
-                                     x:Name="_itemOneLimitButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.RandoItemDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:ItemDifficulty.OneLimit}, Mode=TwoWay}" />
-                    </Border>
-
-                    <Border Grid.Row="1"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Each item type will spawn a maximum of once per level." />
-                    </Border>
-                </Grid>
-            </StackPanel>
-
             <!-- (Key Item) Difficulty -->
             <StackPanel
                 Grid.Row="3"
-                IsEnabled="{Binding ControllerProxy.IncludeKeyItems.Value}"
+                IsEnabled="{Binding ControllerProxy.IncludeKeyItemsImplied}"
                 Visibility="{Binding HasItemDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -262,8 +257,6 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -272,95 +265,80 @@
 
                     <Border Grid.Row="0">
                         <CheckBox IsChecked="{Binding ControllerProxy.RandomizeItemSprites, Mode=TwoWay}"
-                                  VerticalAlignment="Center"
-                                 >
+                                  VerticalAlignment="Center">
                             <Label Padding="0"
-                                   Content="Randomize Sprites" />
+                                   Content="Randomize sprites" />
                         </CheckBox>
                     </Border>
 
                     <Border Grid.Column="1"
                             Grid.Row="0">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Activate the sprite randomization (pickups only)"/>
+                               Content="Randomize the appearance of pickup item sprites e.g. shotgun shells may look like a medipack."/>
                     </Border>
 
                     <Border Grid.Row="1" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
                         <CheckBox IsChecked="{Binding ControllerProxy.RandomizeKeyItemSprites, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
-                                   Content="Include Key Sprites" />
+                                   Content="Include key items" />
                         </CheckBox>
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="1">
+                            Grid.Row="1"
+                            IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Keys items will be included in the randomization with the pickups"/>
+                               Content="Key items will be included in sprite randomization."/>
                     </Border>
 
                     <Border Grid.Row="2" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
                         <CheckBox IsChecked="{Binding ControllerProxy.RandomizeSecretSprites, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
-                                   Content="Include Secrets Sprites" />
+                                   Content="Include secrets" />
                         </CheckBox>
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="2">
+                            Grid.Row="2"
+                            IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Secrets items will be included in the randomization with the pickups"/>
+                               Content="Secret items will be included in sprite randomization."/>
                     </Border>
 
-                    <Border Grid.Row="3" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
-                        <RadioButton Content="Default Mode"
-                                     GroupName="spriteRandoMode"
-                                     x:Name="_defaultSpriteRandoMode"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.SpriteRandoMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:SpriteRandoMode.Default}, Mode=TwoWay}"/>
+                    <Border
+                        Grid.Row="3"
+                        VerticalAlignment="Top"
+                        IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
+                        <ComboBox
+                            ItemsSource="{Binding ControllerProxy.SpriteRandoModes}"
+                            SelectedItem="{Binding ControllerProxy.SpriteRandoMode, Mode=TwoWay}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"/>
                     </Border>
 
-                    <Border Grid.Row="3" Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="All included sprites will be shuffled ( but inside a level X will always looks like Y )."/>
-                    </Border>
-
-                    <Border Grid.Row="4" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
-                        <RadioButton Content="OneSpritePerLevel Mode"
-                                     GroupName="spriteRandoMode"
-                                     x:Name="_oneSpritePerLevelSpriteRandoMode"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.SpriteRandoMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:SpriteRandoMode.OneSpritePerLevel}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Row="4"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="All included sprites will look the same, but the used sprite will change each level."/>
-                    </Border>
-
-                    <Border Grid.Row="5" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
-                        <RadioButton Content="OneItemPerGame Mode"
-                                     GroupName="spriteRandoMode"
-                                     x:Name="_oneitemPerGameSpriteRandoMode"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.SpriteRandoMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:SpriteRandoMode.OneSpritePerGame}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Row="5"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="All included sprites will look the same all game."/>
+                    <Border Grid.Row="3" Grid.Column="1"
+                            IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <Label.Content>
+                                <TextBlock>
+                                    <Run>Choose sprite randomization mode.</Run>
+                                    <LineBreak/>
+                                    <Run>- Default: any sprite can take on the appearance of any other.</Run>
+                                    <LineBreak/>
+                                    <Run>- OneSpritePerLevel: all sprites within a level will appear the same.</Run>
+                                    <LineBreak/>
+                                    <Run>- OneSpritePerGame: all sprites throughout the game will appear the same.</Run>
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
                     </Border>
                 </Grid>
             </StackPanel>
 
             <!-- Chicken Behaviour -->
-            <StackPanel Grid.Row="3"
+            <StackPanel Grid.Row="5"
                         Visibility="{Binding HasBirdMonsterBehaviour, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -441,7 +419,7 @@
             </StackPanel>
 
             <!-- Dragon Spawn -->
-            <StackPanel Grid.Row="4"
+            <StackPanel Grid.Row="6"
                         Visibility="{Binding HasDragonSpawn, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -508,7 +486,7 @@
             </StackPanel>
 
             <!-- (Enemy) Difficulty -->
-            <StackPanel Grid.Row="5"
+            <StackPanel Grid.Row="7"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -568,7 +546,7 @@
             </StackPanel>
 
             <!-- Enemy Exclusions -->
-            <StackPanel Grid.Row="6"
+            <StackPanel Grid.Row="8"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -611,7 +589,7 @@
             </StackPanel>
 
             <!-- Language -->
-            <StackPanel Grid.Row="7"
+            <StackPanel Grid.Row="9"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -639,7 +617,7 @@
             </StackPanel>
 
             <!-- Mirrored Levels -->
-            <StackPanel Grid.Row="8"
+            <StackPanel Grid.Row="10"
                         Visibility="{Binding HasMirroring, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -693,7 +671,7 @@
             </StackPanel>
 
             <!-- Haircuts -->
-            <StackPanel Grid.Row="9"
+            <StackPanel Grid.Row="11"
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -766,7 +744,7 @@
             </StackPanel>
 
             <!-- Invisibility -->
-            <StackPanel Grid.Row="10"
+            <StackPanel Grid.Row="12"
                         Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -820,7 +798,7 @@
             </StackPanel>
 
             <!-- Night Mode general -->
-            <StackPanel Grid.Row="11"
+            <StackPanel Grid.Row="13"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1011,7 +989,7 @@
             </StackPanel>
 
             <!-- Intensity -->
-            <StackPanel Grid.Row="12"
+            <StackPanel Grid.Row="14"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1067,7 +1045,7 @@
             </StackPanel>
 
             <!-- TR3 Globe Options -->
-            <StackPanel Grid.Row="13"
+            <StackPanel Grid.Row="15"
                         Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -1135,7 +1113,7 @@
 
             <!-- Game Mode -->
             <StackPanel
-                Grid.Row="14"
+                Grid.Row="16"
                 Visibility="{Binding HasGameModeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <StackPanel.Resources>
@@ -1182,7 +1160,7 @@
             </StackPanel>
 
             <!-- Level Count -->
-            <StackPanel Grid.Row="15"
+            <StackPanel Grid.Row="17"
                         Visibility="{Binding HasLevelCount, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1229,7 +1207,7 @@
             </StackPanel>
 
             <!-- Wireframing -->
-            <StackPanel Grid.Row="16"
+            <StackPanel Grid.Row="18"
                         Visibility="{Binding HasTextureOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1391,7 +1369,7 @@
             </StackPanel>
 
             <!-- SFX -->
-            <StackPanel Grid.Row="17"
+            <StackPanel Grid.Row="19"
                         Visibility="{Binding HasSFXOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1445,7 +1423,7 @@
             </StackPanel>
 
             <!-- Mediless -->
-            <StackPanel Grid.Row="18"
+            <StackPanel Grid.Row="20"
                         Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}"
                         IsEnabled="{Binding ControllerProxy.IsMedilessTypeSupported}">
 
@@ -1492,7 +1470,7 @@
             </StackPanel>
 
             <!-- Starting Health -->
-            <StackPanel Grid.Row="19"
+            <StackPanel Grid.Row="21"
                         Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1572,7 +1550,7 @@
 
             <!-- Reward Mode -->
             <StackPanel
-                Grid.Row="20"
+                Grid.Row="22"
                 Visibility="{Binding HasSecretRewardMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <StackPanel.Resources>
@@ -1640,7 +1618,7 @@
             </StackPanel>
             
             <!-- Secret Count -->
-            <StackPanel Grid.Row="21"
+            <StackPanel Grid.Row="23"
                         Visibility="{Binding HasSecretCountMode, Converter={StaticResource BoolToCollapsedConverter}}"
                         IsEnabled="{Binding ControllerProxy.UseGenericSecrets}">
                 <StackPanel.Resources>
@@ -1716,7 +1694,7 @@
             </StackPanel>
 
             <!-- Secret Packs -->
-            <StackPanel Grid.Row="22"
+            <StackPanel Grid.Row="24"
                         Visibility="{Binding HasSecretPackMode, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -1768,7 +1746,7 @@
             </StackPanel>
 
             <!-- Weather -->
-            <StackPanel Grid.Row="23"
+            <StackPanel Grid.Row="25"
                         Visibility="{Binding HasWeatherMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1880,7 +1858,7 @@
             
             <!-- Enemy Clones -->
             <StackPanel
-                Grid.Row="24"
+                Grid.Row="26"
                 Visibility="{Binding HasClonedEnemyMode, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"

@@ -80,7 +80,13 @@ public class SecretArtefactPlacer<T, E>
         _sectorGetter = sectorGetter;
         _sectorEntityTester = sectorEntityTester;
 
-        foreach (TRRoomSector sector in _rooms.SelectMany(r => r.Sectors))
+        RemoveDefaultSecrets(_rooms, _floorData);
+    }
+
+    public void RemoveDefaultSecrets<R>(List<R> rooms, FDControl floorData)
+        where R : TRRoom
+    {
+        foreach (TRRoomSector sector in rooms.SelectMany(r => r.Sectors))
         {
             if (sector.FDIndex == 0)
             {

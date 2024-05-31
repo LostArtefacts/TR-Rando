@@ -52,7 +52,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             }
 
             _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data, 
-                _levelInstance.Script.RemovesWeapons || _levelInstance.IsAssault, _levelInstance.HasExposureMeter);
+                _levelInstance.Script.RemovesWeapons || _levelInstance.IsAssault, _levelInstance.Script.OriginalSequence, _levelInstance.HasExposureMeter);
 
             if (_levelInstance.IsAssault)
             {
@@ -67,15 +67,27 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         }
     }
 
-    public void RandomizeKeyItems()
+    public void FinalizeRandomization()
     {
         foreach (TR3ScriptedLevel lvl in Levels)
         {
-            LoadLevelInstance(lvl);
-            _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, 
-                _levelInstance.Script.OriginalSequence, _levelInstance.HasExposureMeter);
+            if (Settings.ItemMode == ItemMode.Shuffled || Settings.IncludeKeyItems)
+            {
+                LoadLevelInstance(lvl);
 
-            SaveLevelInstance();
+                if (Settings.ItemMode == ItemMode.Shuffled)
+                {
+                    _allocator.ApplyItemSwaps(_levelInstance.Name, _levelInstance.Data.Entities);
+                }
+                else
+                {
+                    _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data,
+                        _levelInstance.Script.OriginalSequence, _levelInstance.HasExposureMeter);
+                }
+
+                SaveLevelInstance();
+            }
+
             if (!TriggerProgress())
             {
                 break;
@@ -85,6 +97,11 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     private bool ImportAssaultModels(TR3CombinedLevel level)
     {
+        if (Settings.ItemMode == ItemMode.Shuffled)
+        {
+            return true;
+        }
+
         TR3DataImporter importer = new()
         {
             Level = level.Data,
@@ -134,7 +151,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     private void AddAssaultCourseAmmo(TR3CombinedLevel level)
     {
         TR3Entity weapon = _allocator.GetUnarmedLevelPistols(_levelInstance.Name, _levelInstance.Data.Entities);
-        if (weapon == null)
+        if (weapon == null || Settings.ItemMode == ItemMode.Shuffled)
         {
             return;
         }

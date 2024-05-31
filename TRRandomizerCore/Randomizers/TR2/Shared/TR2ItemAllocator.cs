@@ -11,7 +11,7 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
     public TR2ItemAllocator()
         : base(TRGameVersion.TR2) { }
 
-    protected override List<int> GetExcludedItems(string levelName)
+    public override List<int> GetExcludedItems(string levelName)
         => new();
 
     protected override TR2Type GetPistolType()
@@ -22,6 +22,12 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
 
     protected override List<TR2Type> GetWeaponItemTypes()
         => TR2TypeUtilities.GetGunTypes();
+
+    protected override List<TR2Type> GetKeyItemTypes()
+        => TR2TypeUtilities.GetKeyItemTypes();
+
+    protected override List<TR2Type> GetEnemyTypes()
+        => TR2TypeUtilities.GetFullListOfEnemies();
 
     protected override bool IsCrystalPickup(TR2Type type)
         => false;
@@ -36,23 +42,26 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
             return;
         }
 
-        _picker.Initialise(levelName, GetItemLocationPool(levelName, level, false), Settings, Generator);
+        InitialisePicker(levelName, level, Settings.ItemMode == ItemMode.Default ? LocationMode.Default : LocationMode.ExistingItems);
 
-        if (levelName != TR2LevelNames.ASSAULT)
+        if (Settings.ItemMode == ItemMode.Default)
         {
-            RandomizeItemTypes(levelName, level.Entities, scriptedLevel.RemovesWeapons);
+            if (levelName != TR2LevelNames.ASSAULT)
+            {
+                RandomizeItemTypes(levelName, level.Entities, scriptedLevel.RemovesWeapons);
+            }
+            RandomizeItemLocations(levelName, level.Entities, scriptedLevel.RemovesWeapons);
+            EnforceOneLimit(levelName, level.Entities, scriptedLevel.RemovesWeapons);
         }
-        RandomizeItemLocations(levelName, level.Entities, scriptedLevel.RemovesWeapons);
-        EnforceOneLimit(levelName, level.Entities, scriptedLevel.RemovesWeapons);
+        else
+        {
+            ShuffleItems(levelName, level.Entities, scriptedLevel.RemovesWeapons, scriptedLevel.OriginalSequence);
+        }
     }
 
     public void RandomizeKeyItems(string levelName, TR2Level level, int originalSequence)
     {
-        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level);
-        _picker.KeyItemTestAction = (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, levelName, level);
-        _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
-
-        _picker.Initialise(levelName, GetItemLocationPool(levelName, level, true), Settings, Generator);
+        InitialisePicker(levelName, level, LocationMode.KeyItems);
 
         for (int i = 0; i < level.Entities.Count; i++)
         {
@@ -63,11 +72,31 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
                 continue;
             }
 
-            _picker.RandomizeKeyItemLocation(
-                entity, LocationUtilities.HasPickupTriger(entity, i, level),
-                originalSequence, level.Rooms[entity.Room].Info);
+            bool hasPickupTrigger = LocationUtilities.HasPickupTriger(entity, i, level);
+            _picker.RandomizeKeyItemLocation(entity, hasPickupTrigger, originalSequence);
             ItemMoved(entity);
         }
+    }
+
+    private void InitialisePicker(string levelName, TR2Level level, LocationMode locationMode)
+    {
+        _picker.TriggerTestAction = locationMode == LocationMode.KeyItems
+            ? location => LocationUtilities.HasAnyTrigger(location, level)
+            : null;
+        _picker.KeyItemTestAction = locationMode == LocationMode.KeyItems
+            ? (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, levelName, level)
+            : null;
+        _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
+
+        List<Location> pool = GetItemLocationPool(levelName, level, locationMode != LocationMode.Default);
+        if (locationMode == LocationMode.ExistingItems)
+        {
+            IEnumerable<Location> itemLocations = GetPickups(levelName, level.Entities, true)
+                .Select(e => e.GetLocation())
+                .DistinctBy(l => level.GetRoomSector(l));
+            pool = new(itemLocations.Where(i => pool.Any(e => level.GetRoomSector(i) == level.GetRoomSector(e))));
+        }
+        _picker.Initialise(levelName, pool, Settings, Generator);
     }
 
     private bool TestKeyItemLocation(Location location, bool hasPickupTrigger, string levelName, TR2Level level)

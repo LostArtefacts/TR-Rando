@@ -159,7 +159,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
     private void AdjustTihocanEnding(TR1CombinedLevel level)
     {
-        if (!level.Is(TR1LevelNames.TIHOCAN) || (Settings.RandomizeItems && Settings.IncludeKeyItems))
+        if (!level.Is(TR1LevelNames.TIHOCAN)
+            || (Settings.RandomizeItems && (Settings.ItemMode == ItemMode.Shuffled || Settings.IncludeKeyItems)))
         {
             return;
         }
