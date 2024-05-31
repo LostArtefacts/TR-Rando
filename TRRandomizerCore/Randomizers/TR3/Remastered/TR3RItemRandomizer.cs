@@ -1,4 +1,5 @@
 ﻿using TRGE.Core;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
@@ -19,6 +20,8 @@ public class TR3RItemRandomizer : BaseTR3RRandomizer
             Settings = Settings,
             ItemFactory = ItemFactory,
         };
+
+        _allocator.AllocateWeapons(Levels.Where(l => !l.Is(TR3LevelNames.ASSAULT)));
 
         foreach (TRRScriptedLevel lvl in Levels)
         {
