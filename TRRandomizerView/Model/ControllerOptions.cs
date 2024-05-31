@@ -112,6 +112,9 @@ public class ControllerOptions : INotifyPropertyChanged
     private ItemMode _itemMode;
     private ItemMode[] _itemModes;
 
+    private WeaponDifficulty _weaponDifficulty;
+    private WeaponDifficulty[] _weaponDifficulties;
+
     #region TR1X Sepcifics
 
     private bool _enableGameModes;
@@ -1027,6 +1030,7 @@ public class ControllerOptions : INotifyPropertyChanged
         AllowReturnPathLocations.IsActive = !defaultMode || IncludeKeyItems.Value;
         AllowEnemyKeyDrops.IsActive = !defaultMode || IncludeKeyItems.Value;
 
+        FirePropertyChanged(nameof(WeaponDifficultyAvailable));
         FirePropertyChanged(nameof(IncludeKeyItemsImplied));
     }
 
@@ -1750,6 +1754,31 @@ public class ControllerOptions : INotifyPropertyChanged
             _itemModes = value;
             FirePropertyChanged();
         }
+    }
+
+    public WeaponDifficulty WeaponDifficulty
+    {
+        get => _weaponDifficulty;
+        set
+        {
+            _weaponDifficulty = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public WeaponDifficulty[] WeaponDifficulties
+    {
+        get => _weaponDifficulties;
+        private set
+        {
+            _weaponDifficulties = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public bool WeaponDifficultyAvailable
+    {
+        get => ItemMode == ItemMode.Default && RandomizeItemTypes.Value;
     }
 
     public BoolItemControlClass IncludeKeyItems
@@ -2972,6 +3001,9 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "The types of standard pickups will be randomized e.g. a small medi may become a shotgun."
         };
         BindingOperations.SetBinding(RandomizeItemTypes, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+
+        RandomizeItemTypes.PropertyChanged += (s, e) => FirePropertyChanged(nameof(WeaponDifficultyAvailable));
+
         RandomizeItemPositions = new BoolItemControlClass
         {
             Title = "Randomize positions",
@@ -3493,6 +3525,8 @@ public class ControllerOptions : INotifyPropertyChanged
         ItemSeed = _controller.ItemSeed;
         ItemModes = Enum.GetValues<ItemMode>();
         ItemMode = _controller.ItemMode;
+        WeaponDifficulties = Enum.GetValues<WeaponDifficulty>();
+        WeaponDifficulty = _controller.WeaponDifficulty;
         IncludeKeyItems.Value = _controller.IncludeKeyItems;
         AllowReturnPathLocations.Value = _controller.AllowReturnPathLocations;
         IncludeExtraPickups.Value = _controller.IncludeExtraPickups;
@@ -3802,6 +3836,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.RandomizeItems = RandomizeItems;
         _controller.ItemSeed = ItemSeed;
         _controller.ItemMode = ItemMode;
+        _controller.WeaponDifficulty = WeaponDifficulty;
         _controller.IncludeKeyItems = IncludeKeyItems.Value;
         _controller.AllowReturnPathLocations = AllowReturnPathLocations.Value;
         _controller.IncludeExtraPickups = IncludeExtraPickups.Value;

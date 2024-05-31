@@ -40,6 +40,7 @@ public class RandomizerSettings
     public GlobeDisplayOption GlobeDisplay { get; set; }
     public bool HardSecrets { get; set; }
     public ItemMode ItemMode { get; set; }
+    public WeaponDifficulty WeaponDifficulty { get; set; }
     public bool IncludeKeyItems { get; set; }
     public bool AllowReturnPathLocations { get; set; }
     public ItemRange KeyItemRange { get; set; }
@@ -211,6 +212,7 @@ public class RandomizerSettings
         RandomizeItems = config.GetBool(nameof(RandomizeItems));
         ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
         ItemMode = (ItemMode)config.GetEnum(nameof(ItemMode), typeof(ItemMode), ItemMode.Default);
+        WeaponDifficulty = (WeaponDifficulty)config.GetEnum(nameof(WeaponDifficulty), typeof(WeaponDifficulty), WeaponDifficulty.Fair);
         IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
         KeyItemRange = (ItemRange)config.GetEnum(nameof(KeyItemRange), typeof(ItemRange), ItemRange.Medium);
         AllowEnemyKeyDrops = config.GetBool(nameof(AllowEnemyKeyDrops), true);
@@ -380,6 +382,7 @@ public class RandomizerSettings
         config[nameof(RandomizeItems)] = RandomizeItems;
         config[nameof(ItemSeed)] = ItemSeed;
         config[nameof(ItemMode)] = ItemMode;
+        config[nameof(WeaponDifficulty)] = WeaponDifficulty;
         config[nameof(IncludeKeyItems)] = IncludeKeyItems;
         config[nameof(KeyItemRange)] = KeyItemRange;
         config[nameof(AllowEnemyKeyDrops)] = AllowEnemyKeyDrops;
