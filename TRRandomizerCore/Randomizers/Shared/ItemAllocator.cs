@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using TRGE.Core;
 using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
@@ -10,11 +11,15 @@ public abstract class ItemAllocator<T, E>
     where T : Enum
     where E : TREntity<T>, new()
 {
+    private const double _fairWeaponChance = 0.4;
+    private const double _hardWeaponChance = 0.15;
+
     protected readonly Dictionary<string, List<Location>> _excludedLocations;
     protected readonly Dictionary<string, List<Location>> _pistolLocations;
     protected readonly Dictionary<string, E> _unarmedPistolCache;
     protected readonly LocationPicker _picker;
 
+    protected Dictionary<string, List<T>> _weaponAllocations;
     protected Dictionary<string, List<ItemSwap>> _itemSwapCache;
     protected ItemSpriteRandomizer<T> _spriteRandomizer;
 
@@ -28,6 +33,7 @@ public abstract class ItemAllocator<T, E>
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText($@"Resources\{gameVersion}\Locations\unarmed_locations.json"));
         _picker = new($@"Resources\{gameVersion}\Locations\routes.json");
         _unarmedPistolCache = new();
+        _weaponAllocations = new();
     }
 
     public static bool TypeMatch(E item1, E item2)
@@ -55,6 +61,67 @@ public abstract class ItemAllocator<T, E>
         return _unarmedPistolCache[levelName];
     }
 
+    public void AllocateWeapons<S>(IEnumerable<S> scriptedLevels)
+        where S : AbstractTRScriptedLevel
+    {
+        if (Settings.ItemMode == ItemMode.Shuffled || !Settings.RandomizeItemTypes || Settings.WeaponDifficulty == WeaponDifficulty.Easy)
+        {
+            return;
+        }
+
+        bool hardMode = Settings.WeaponDifficulty == WeaponDifficulty.Hard;
+
+        _weaponAllocations.Clear();
+        List<S> levels = new(scriptedLevels);
+        levels.Sort((l1, l2) => l1.Sequence.CompareTo(l2.Sequence));
+
+        List<T> weaponTypes = GetWeaponItemTypes();
+        weaponTypes.Remove(GetPistolType());
+
+        HashSet<T> gameTracker = new();
+        for (int i = 0; i < levels.Count; i++)
+        {
+            S level = levels[i];
+            bool previousUnarmed = i > 0 && levels[i - 1].RemovesWeapons;
+
+            if (level.RemovesWeapons)
+            {
+                gameTracker.Clear();
+            }
+            else if (hardMode && gameTracker.Count == weaponTypes.Count)
+            {
+                continue;
+            }
+            else if (!previousUnarmed && gameTracker.Count != 0 && Generator.NextDouble() > (hardMode ? _hardWeaponChance : _fairWeaponChance))
+            {
+                continue;
+            }
+
+            List<T> levelWeapons = new();
+            _weaponAllocations[level.LevelFileBaseName.ToUpper()] = levelWeapons;
+
+            int levelAllocation = hardMode ? 1 : 2;
+            if ((level.RemovesWeapons && !hardMode) || previousUnarmed)
+            {
+                levelAllocation++;
+            }
+
+            levelAllocation = Math.Min(levelAllocation, weaponTypes.Count);
+
+            for (int j = 0; j < levelAllocation; j++)
+            {
+                T type;
+                do
+                {
+                    type = weaponTypes.RandomItem(Generator);
+                }
+                while (levelWeapons.Contains(type) || (gameTracker.Contains(type) && gameTracker.Count < weaponTypes.Count));
+                levelWeapons.Add(type);
+                gameTracker.Add(type);
+            }
+        }
+    }
+
     public void RandomizeItemTypes(string levelName, List<E> items, bool isUnarmed)
     {
         if (!Settings.RandomizeItemTypes)
@@ -65,51 +132,60 @@ public abstract class ItemAllocator<T, E>
         List<T> stdItemTypes = GetStandardItemTypes();
         List<T> weaponTypes = GetWeaponItemTypes();
         T pistols = GetPistolType();
+
+        if (Settings.WeaponDifficulty != WeaponDifficulty.Easy)
+        {
+            stdItemTypes.RemoveAll(weaponTypes.Contains);
+        }
+        if (!stdItemTypes.Contains(pistols))
+        {
+            stdItemTypes.Add(pistols);
+        }
+
         List<int> excludedItems = GetExcludedItems(levelName);
 
         bool hasPistols = items.Any(e => TypeMatch(e.TypeID, pistols));
         E unarmedPistols = isUnarmed ? GetUnarmedLevelPistols(levelName, items) : null;
 
-        for (int i = 0; i < items.Count; i++)
+        List<E> pickupItems = items.FindAll(e =>
+            (stdItemTypes.Contains(e.TypeID) || weaponTypes.Contains(e.TypeID))
+            && !excludedItems.Contains(items.IndexOf(e)));
+
+        if (_weaponAllocations.ContainsKey(levelName))
         {
-            if (excludedItems.Contains(i))
+            List<E> weaponItems = pickupItems.RandomSelection(Generator, _weaponAllocations[levelName].Count, false, new List<E>() { unarmedPistols }.ToHashSet());
+            for (int i = 0; i < weaponItems.Count; i++)
             {
-                continue;
+                weaponItems[i].TypeID = _weaponAllocations[levelName][i];
             }
 
-            E entity = items[i];
-            T entityType = entity.TypeID;
+            pickupItems.RemoveAll(weaponItems.Contains);
+        }
 
-            if (isUnarmed && entity == unarmedPistols)
+        foreach (E item in pickupItems)
+        {
+            T itemType = item.TypeID;
+
+            if (isUnarmed && item == unarmedPistols)
             {
                 // Enemy rando may have changed this already to something else and allocated
                 // ammo to the inventory, so only change pistols.
-                if (TypeMatch(entityType, pistols) && Settings.GiveUnarmedItems)
+                if (TypeMatch(itemType, pistols) && Settings.GiveUnarmedItems)
                 {
-                    do
-                    {
-                        entityType = stdItemTypes[Generator.Next(0, stdItemTypes.Count)];
-                    }
-                    while (!weaponTypes.Contains(entityType));
-                    entity.TypeID = entityType;
+                    item.TypeID = weaponTypes.RandomItem(Generator);
                 }
             }
-            else if (stdItemTypes.Contains(entityType))
+            else
             {
-                T newType = stdItemTypes[Generator.Next(0, stdItemTypes.Count)];
-                if (TypeMatch(newType, pistols) && (hasPistols || !isUnarmed))
+                // Only one pistol pickup per level, and only if it's unarmed
+                do
                 {
-                    // Only one pistol pickup per level, and only if it's unarmed
-                    do
-                    {
-                        newType = stdItemTypes[Generator.Next(0, stdItemTypes.Count)];
-                    }
-                    while (!weaponTypes.Contains(newType) || TypeMatch(newType, pistols));
+                    item.TypeID = stdItemTypes.RandomItem(Generator);
                 }
-                entity.TypeID = newType;
+                while (TypeMatch(item.TypeID, pistols) && (hasPistols || !isUnarmed));
             }
 
-            hasPistols = items.Any(e => TypeMatch(e.TypeID, pistols));
+            hasPistols = pickupItems.Any(e => TypeMatch(e.TypeID, pistols));
         }
     }
 
