@@ -1,218 +1,184 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Šibica",
-            "Baklja",
-            "Bengalka",
-            "Svijeća",
-            "Lampa"
-          ],
-          "43": [
-            "Šibica",
-            "Baklja",
-            "Bengalka",
-            "Svijeća",
-            "Lampa"
-          ]
-        },
-        {
-          "36": [
-            "Bacač graška",
-            "Ručni pištolj",
-            "Stari pištolj",
-            "Piju-piju",
-            "Uzeti ću dva"
-          ],
-          "44": [
-            "Grašak",
-            "Ručni pištolj metci",
-            "Stari pištolj metci",
-            "Piju-piju metci",
-            "Uzeti ću dva metci"
-          ]
-        },
-        {
-          "37": [
-            "Shotty",
-            "Mušketa",
-            "Stara sačma",
-            "Vidjeo/la si dovoljno?",
-            "Razarač iznutrica"
-          ],
-          "45": [
-            "Shotty metci",
-            "Čahure za mušketu",
-            "Stara sačma metci",
-            "Vidjeo/la si dovoljno? čahure",
-            "Razarač iznutrica čahure"
-          ]
-        },
-        {
-          "38": [
-            "Automatik pištolj",
-            "Magnum",
-            "SuperPištolj",
-            "Pierre je izgubio ove pištolje",
-            "Vrati Pierru"
-          ],
-          "46": [
-            "Automatik metci",
-            "Magnum metci",
-            "SuperPištolj metci",
-            "Pierre je izgubio ove metke",
-            "Vrati metke Pierru"
-          ]
-        },
-        {
-          "39": [
-            "UwUzis",
-            "Drrrrrrrrrr",
-            "FeelStronger pištolj",
-            "Vampir",
-            "1000 pucnjeva kasnije..."
-          ],
-          "47": [
-            "UwUzi metci",
-            "Drrrrrrrrrr metci",
-            "FeelStronger metci",
-            "Vampir metci",
-            "1000 pucnjeva kasnije metci"
-          ]
-        },
-        {
-          "40": [
-            "Tik-tik-tik",
-            "Strpljene je vrlina",
-            "Bacač strijela",
-            "Beskorisno",
-            "Beskorisno",
-            "Zašto?",
-            "Ne!",
-            "Bacač čačkalica za zube",
-            "Bacač koplja"
-          ],
-          "48": [
-            "Tik-tik-tiks",
-            "Strpljene je vrlina metci",
-            "Strijele",
-            "Beskorisno metci",
-            "Beskorisno metci",
-            "Zašto? metci",
-            "Ne metci!",
-            "Čačkalice za zube",
-            "Koplje"
-          ]
-        },
-        {
-          "41": [
-            "MP3 Player",
-            "MPEG",
-            "Ovo nije MP5",
-            "Big Drrrrrrrrrr"
-          ],
-          "49": [
-            "MP3 metci",
-            "MPEG metci",
-            "Ovo nisu MP5 metci",
-            "Big Drrrrrrrrrr metci"
-          ]
-        },
-        {
-          "42": [
-            "Bacač mina",
-            "Explosive Delivery",
-            "Enemy Roaster",
-            "Shell Launcher",
-            "Pineapple Dispatch",
-            "Big Bang",
-            "Big Boom",
-            "Raznesi to!"
-          ],
-          "50": [
-            "Mine",
-            "Ekspolzivi",
-            "Vatrene kugle",
-            "Čahure",
-            "Ananasi",
-            "Veliki prasak",
-            "Velika eksplozija",
-            "Raznesi to! metci"
-          ]
-        },
-        {
-          "51": [
-            "Sićušna prva pomoć",
-            "Weee prva pomoć",
-            "Mala prva pomoć",
-            "Kompaktna prva pomoć",
-            "Bijou prva pomoć",
-            "Prva pomoć za bebe"
-          ],
-          "52": [
-            "Gigantska prva pomoć",
-            "Ogromna prva pomoć",
-            "Titanska prva pomoć",
-            "Masivna prva pomoć",
-            "Mahoosivna prva pomoć",
-            "Prva pomoć za velike"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "STVARI",
-          "KRPE",
-          "STVARČICE",
-          "BLAGO",
-          "SMEĆE",
-          "UH SJAJNO",
-          "MOJE ZLATO"
-        ],
-        "3": [
-          "LARA JE UMRLA",
-          "POKUŠAJ PONOVO?",
-          "POKUŠAJ PONOVO? IGRAJ BOLJE",
-          "VIŠE SREĆE DRUGI PUT",
-          "RUN BACK TO THE START AND TRY AGAIN",
-          "RIP",
-          "RIP NO LOADS",
-          "GIT GUD",
-          "RAGE QUIT",
-          "NLNMAS sljedeće?"
-        ],
-        "35": [
-          "Statistika",
-          "Vitalna statistika",
-          "Krhki brojevi",
-          "NEMA PRVE POMOĆI!",
-          "Tragač tajni!"
-        ],
-        "57": [
-          "Croft imanje",
-          "Core Design sjedište",
-          "TR2Rando sjedište",
-          "Larini artefakti",
-          "Winstonov frižider",
-          "Odmrzni Winstona!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NIŠTA -",
-          "- NEMA NIČEGA -",
-          "- NEDEFINIRANO -",
-          "- EJ, OVO MJESTO JE SLOBODNO -"
-        ]
-      }
-    }
-  ],
-
+﻿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Šibica",
+      "Baklja",
+      "Bengalka",
+      "Svijeća",
+      "Lampa"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Bacač graška",
+      "Ručni pištolj",
+      "Stari pištolj",
+      "Piju-piju",
+      "Uzeti ću dva"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Grašak",
+      "Ručni pištolj metci",
+      "Stari pištolj metci",
+      "Piju-piju metci",
+      "Uzeti ću dva metci"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Shotty",
+      "Mušketa",
+      "Stara sačma",
+      "Vidjeo/la si dovoljno?",
+      "Razarač iznutrica"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Shotty metci",
+      "Čahure za mušketu",
+      "Stara sačma metci",
+      "Vidjeo/la si dovoljno? čahure",
+      "Razarač iznutrica čahure"
+    ],
+    "INV_ITEM_AUTOS": [
+      "Automatik pištolj",
+      "Magnum",
+      "SuperPištolj",
+      "Pierre je izgubio ove pištolje",
+      "Vrati Pierru"
+    ],
+    "INV_ITEM_AUTO_AMMO": [
+      "Automatik metci",
+      "Magnum metci",
+      "SuperPištolj metci",
+      "Pierre je izgubio ove metke",
+      "Vrati metke Pierru"
+    ],
+    "INV_ITEM_UZI": [
+      "UwUzis",
+      "Drrrrrrrrrr",
+      "FeelStronger pištolj",
+      "Vampir",
+      "1000 pucnjeva kasnije..."
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "UwUzi metci",
+      "Drrrrrrrrrr metci",
+      "FeelStronger metci",
+      "Vampir metci",
+      "1000 pucnjeva kasnije metci"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Tik-tik-tik",
+      "Strpljene je vrlina",
+      "Bacač strijela",
+      "Beskorisno",
+      "Beskorisno",
+      "Zašto?",
+      "Ne!",
+      "Bacač čačkalica za zube",
+      "Bacač koplja"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Tik-tik-tiks",
+      "Strpljene je vrlina metci",
+      "Strijele",
+      "Beskorisno metci",
+      "Beskorisno metci",
+      "Zašto? metci",
+      "Ne metci!",
+      "Čačkalice za zube",
+      "Koplje"
+    ],
+    "INV_ITEM_M16": [
+      "MP3 Player",
+      "MPEG",
+      "Ovo nije MP5",
+      "Big Drrrrrrrrrr"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "MP3 metci",
+      "MPEG metci",
+      "Ovo nisu MP5 metci",
+      "Big Drrrrrrrrrr metci"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Bacač mina",
+      "Explosive Delivery",
+      "Enemy Roaster",
+      "Shell Launcher",
+      "Pineapple Dispatch",
+      "Big Bang",
+      "Big Boom",
+      "Raznesi to!"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Mine",
+      "Ekspolzivi",
+      "Vatrene kugle",
+      "Čahure",
+      "Ananasi",
+      "Veliki prasak",
+      "Velika eksplozija",
+      "Raznesi to! metci"
+    ],
+    "INV_ITEM_MEDI": [
+      "Sićušna prva pomoć",
+      "Weee prva pomoć",
+      "Mala prva pomoć",
+      "Kompaktna prva pomoć",
+      "Bijou prva pomoć",
+      "Prva pomoć za bebe"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Gigantska prva pomoć",
+      "Ogromna prva pomoć",
+      "Titanska prva pomoć",
+      "Masivna prva pomoć",
+      "Mahoosivna prva pomoć",
+      "Prva pomoć za velike"
+    ],
+    "HEADING_ITEMS": [
+      "STVARI",
+      "KRPE",
+      "STVARČICE",
+      "BLAGO",
+      "SMEĆE",
+      "UH SJAJNO",
+      "MOJE ZLATO"
+    ],
+    "HEADING_GAME_OVER": [
+      "LARA JE UMRLA",
+      "POKUŠAJ PONOVO?",
+      "POKUŠAJ PONOVO? IGRAJ BOLJE",
+      "VIŠE SREĆE DRUGI PUT",
+      "RUN BACK TO THE START AND TRY AGAIN",
+      "RIP",
+      "RIP NO LOADS",
+      "GIT GUD",
+      "RAGE QUIT",
+      "NLNMAS sljedeće?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Statistika",
+      "Vitalna statistika",
+      "Krhki brojevi",
+      "NEMA PRVE POMOĆI!",
+      "Tragač tajni!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NIŠTA -",
+      "- NEMA NIČEGA -",
+      "- NEDEFINIRANO -",
+      "- EJ, OVO MJESTO JE SLOBODNO -"
+    ]
+  },
   "LevelStrings": {
+    "ASSAULT.TR2": {
+      "Names": [
+        "Croft imanje",
+        "Core Design sjedište",
+        "TR2Rando sjedište",
+        "Larini artefakti",
+        "Winstonov frižider",
+        "Odmrzni Winstona!"
+      ]
+    },
     "WALL.TR2": {
       "Names": [
         "Kina dio 1",
@@ -226,8 +192,8 @@
         "Izgubljena dolina 2.0",
         "Put do Xiana"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ključ za sobu 4",
           "Memehouse ključ",
           "A Ključ",
@@ -238,7 +204,7 @@
           "Jeli ovo ključ 1?",
           "Jeli ovo ključ 2?"
         ],
-        "1": [
+        "Key2": [
           "Pauk ključ",
           "Ključ s koricom",
           "Ključ A",
@@ -252,7 +218,6 @@
         ]
       }
     },
-
     "BOAT.TR2": {
       "Names": [
         "Italija dio 1",
@@ -266,8 +231,8 @@
         "Daleko od kuće",
         "Ovo je ljubav"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Brodić ključ",
           "A Ključ",
           "Ključ!",
@@ -279,7 +244,7 @@
           "Pristup plovidbi",
           "Garaža za čamac"
         ],
-        "1": [
+        "Key2": [
           "Ključ sobe 82",
           "Metalni ključ",
           "A Ključ",
@@ -290,7 +255,7 @@
           "Ne provaljuj!",
           "To je taj ključ!"
         ],
-        "2": [
+        "Key3": [
           "Ključ željezne daske",
           "Željezna šaka",
           "Željezna dama",
@@ -303,7 +268,6 @@
         ]
       }
     },
-
     "VENICE.TR2": {
       "Names": [
         "Italija dio 2",
@@ -315,8 +279,8 @@
         "Mona Lisa",
         "Izadi sa stilom"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ključ sobe s knjigama",
           "A Ključ",
           "Ključ!",
@@ -331,7 +295,7 @@
           "Ključ tajnog skrovišta",
           "Alohomora"
         ],
-        "1": [
+        "Key2": [
           "TNT Ključ!",
           "Ključ detonacija",
           "Explosion Key",
@@ -348,7 +312,6 @@
         ]
       }
     },
-
     "OPERA.TR2": {
       "Names": [
         "Italija dio 3",
@@ -363,8 +326,8 @@
         "Spektakl",
         "Pripremite pozornicu"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Fensi Ključ",
           "Otmjen Ključ",
           "Razmetljiv Ključ",
@@ -376,10 +339,8 @@
           "Ključ za vrata",
           "Klimavi ključ",
           "C Sharp"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzle 1",
           "Popravljač dizala",
           "Popravljač lifta",
@@ -389,7 +350,7 @@
           "Ding",
           "Nema muzike"
         ],
-        "1": [
+        "Puzzle2": [
           "Puzle 2",
           "Matična",
           "ACME Matična",
@@ -402,7 +363,6 @@
         ]
       }
     },
-
     "RIG.TR2": {
       "Names": [
         "Platforma",
@@ -417,8 +377,8 @@
         "Glavobolja",
         "Opasno po zdravlje"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Kartica za živo blato",
           "Kartica za bačve",
           "Kartica prolaska 2",
@@ -427,7 +387,7 @@
           "Visa Express",
           "Ne savijaj"
         ],
-        "1": [
+        "Key2": [
           "QWOP kartica",
           "Ugasi Taj Alarm!",
           "Kartica prolaska 1",
@@ -436,7 +396,7 @@
           "Mastercard Express",
           "Ne lomi"
         ],
-        "2": [
+        "Key3": [
           "Kartica sobe 37",
           "Nepotrebna kartica",
           "Kartica prolaska 3",
@@ -447,7 +407,6 @@
         ]
       }
     },
-
     "PLATFORM.TR2": {
       "Names": [
         "Morska Platforma Dio 2",
@@ -459,24 +418,22 @@
         "Žuta Podmornica",
         "Pazi na oštrice"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Kartica za sobu 12",
           "Neidentificirana karta",
           "Kartica prolaska 2",
           "Larina osobna",
           "Ne lomi"
         ],
-        "3": [
+        "Key4": [
           "Kartica za sobu 49",
           "Neidentificirana karta",
           "Kartica prolaska 1",
           "Winstonova osobna",
           "Ne savijaj!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Matična",
           "ACME Matična",
           "PC Pro 97",
@@ -489,7 +446,6 @@
         ]
       }
     },
-
     "UNWATER.TR2": {
       "Names": [
         "Pod vodom dio 1",
@@ -505,7 +461,6 @@
         "Podmorje"
       ]
     },
-
     "KEEL.TR2": {
       "Names": [
         "Pod vodom dio 2",
@@ -518,8 +473,8 @@
         "Anti gravitacija",
         "Uništen"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ključ nužnika",
           "Ključ kupaone",
           "A Ključ",
@@ -528,7 +483,7 @@
           "Ključ A",
           "Soba za odmor?"
         ],
-        "1": [
+        "Key2": [
           "Ključ s koricom",
           "A Ključ",
           "Ključ!",
@@ -536,7 +491,7 @@
           "Ključ B",
           "Ključ za vrata"
         ],
-        "2": [
+        "Key3": [
           "Ključ za sobu",
           "Tko je?",
           "A Ključ",
@@ -545,10 +500,8 @@
           "Ključ C",
           "Novi Ključ?",
           "Gdje je lokot?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Ključ požara",
           "T puzla",
           "Vatrogasni apart",
@@ -558,7 +511,6 @@
         ]
       }
     },
-
     "LIVING.TR2": {
       "Names": [
         "Pod vodom dio 3",
@@ -571,8 +523,8 @@
         "Nikog doma",
         "Beživotne odaje"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Dramatičan ključ",
           "Melodramatičan ključ",
           "Tragični Ključ",
@@ -584,7 +536,7 @@
           "Ključ opere",
           "Šou se nastavlja!"
         ],
-        "1": [
+        "Key2": [
           "Ključ s koricom",
           "A Ključ",
           "Ključ!",
@@ -596,7 +548,6 @@
         ]
       }
     },
-
     "DECK.TR2": {
       "Names": [
         "Podmorje dio 4",
@@ -606,8 +557,8 @@
         "Santa leda pobjeduje ",
         "Zračni džep"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Ključ krme",
           "Oštri ključ",
           "Okrutni ključ",
@@ -623,7 +574,7 @@
           "Ključ 1",
           "Ključ A"
         ],
-        "2": [
+        "Key3": [
           "Ključ skadišta",
           "Ključ skadišta?",
           "Čudan ključ",
@@ -638,7 +589,7 @@
           "Ključ 2",
           "Ključ B"
         ],
-        "3": [
+        "Key4": [
           "Ključ kabine",
           "Ključ sobe",
           "Ključ vrata",
@@ -651,10 +602,8 @@
           "Ključ",
           "Ključ 3",
           "Ključ C"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "Andeo",
           "Kerubin",
           "Puzla 1",
@@ -665,7 +614,6 @@
         ]
       }
     },
-
     "SKIDOO.TR2": {
       "Names": [
         "Tibet Dio 1",
@@ -681,8 +629,8 @@
         "Skidoo Manija",
         "Napravi snjegovića"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ključ pokretnog mosta",
           "Beskoristan ključ",
           "Nije taj",
@@ -695,7 +643,7 @@
           "Podižeš me!",
           "Stvori platformu"
         ],
-        "1": [
+        "Key2": [
           "Ključ kolibe",
           "Ključ kolibe?",
           "Brzi Tibet ključ",
@@ -708,10 +656,8 @@
           "Speedrun Ključ",
           "Most Wanted!",
           "Unutarnji ključ"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "Andeo",
           "Kerubin",
           "Puzla 1",
@@ -722,7 +668,6 @@
         ]
       }
     },
-
     "MONASTRY.TR2": {
       "Names": [
         "Tibet Dio 2",
@@ -737,37 +682,35 @@
         "Samostan ključeva",
         "Ne sestrinski čin"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ključ slabe sobe",
           "FeelStronger ključ",
           "Ključ za ključ",
           "Ključ poklopca"
         ],
-        "1": [
+        "Key2": [
           "Jadni ključ",
           "Vanjski ključ 1 ",
           "Idemo van odavdje?",
           "Nije sobni ključ? O.o",
           "Ključ stražnjih vrata"
         ],
-        "2": [
+        "Key3": [
           "Zahrdali ključ",
           "Prečica za vrh",
           "Prevrtljivi ključ",
           "Vanjski ključ 2"
         ],
-        "3": [
+        "Key4": [
           "TR2Main hodnik ključ",
           "Meme hodnik ključ",
           "Ključ velike sobe",
           "Ne roni ključ",
           "Buddah ključ",
           "Ključ predvorja"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Kao molitveni kotači",
           "Mani kotači",
           "Chen kotači",
@@ -776,14 +719,14 @@
           "Tko je izumio kotače?",
           "Umorni pomagači"
         ],
-        "1": [
+        "Puzzle2": [
           "Dijamanti",
           "Barkhang plijen",
           "Dragino kamenje",
           "Uhhh sjajno!",
           "18 karata"
         ],
-        "3": [
+        "Puzzle4": [
           "Andeo",
           "Kerubin",
           "Puzla 3",
@@ -795,7 +738,6 @@
         ]
       }
     },
-
     "CATACOMB.TR2": {
       "Names": [
         "Tibet Dio 3",
@@ -808,20 +750,8 @@
         "Mračno je ovdje!",
         "Tamna Yeti soba"
       ],
-      "Pickups": {
-        "0": [
-          "Gong čekić?",
-          "Čekaj, šta?",
-          "Sretan Uskrs ",
-          "Em, Gosp. Gong? Ha!",
-          "Ovo ne pripada ovdje",
-          "...???",
-          "Ksilofon štapić",
-          "Pa, svejedno!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Maska za lice",
           "Maska A",
           "Maska",
@@ -831,10 +761,19 @@
           "Nosi masku!",
           "Lijepa maska",
           "Ružna maska"
+        ],
+        "Pickup1": [
+          "Gong čekić?",
+          "Čekaj, šta?",
+          "Sretan Uskrs ",
+          "Em, Gosp. Gong? Ha!",
+          "Ovo ne pripada ovdje",
+          "...???",
+          "Ksilofon štapić",
+          "Pa, svejedno!"
         ]
       }
     },
-
     "ICECAVE.TR2": {
       "Names": [
         "Tibet Dio 4",
@@ -853,8 +792,8 @@
         "Winston odobrava!",
         "Winstonov frižider"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Mr Gong Čekić",
           "Čekić",
           "Dobar Gong",
@@ -865,22 +804,8 @@
           "Kopač leda",
           "Štap za bubnjeve",
           "Gong Malj"
-        ]
-      },
-      "Pickups": {
-        "1": [
-          "Talion",
-          "Kokošje blago",
-          "Otvori ta vrata, Lara!",
-          "PUSTI KOKOŠ!",
-          "Zlatna stvarčica",
-          "Xian ključ",
-          "SJAJNO!",
-          "Tu je, ali će nestat!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Maska za lice",
           "Beskorisna maska",
           "Maska",
@@ -890,10 +815,19 @@
           "Tko ovo koristi?",
           "Larina maska lijepote",
           "Kasandra"
+        ],
+        "Pickup2": [
+          "Talion",
+          "Kokošje blago",
+          "Otvori ta vrata, Lara!",
+          "PUSTI KOKOŠ!",
+          "Zlatna stvarčica",
+          "Xian ključ",
+          "SJAJNO!",
+          "Tu je, ali će nestat!"
         ]
       }
     },
-
     "EMPRTOMB.TR2": {
       "Names": [
         "Kina dio 2",
@@ -907,8 +841,8 @@
         "Utrka za bodež",
         "Puni krug"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "A Ključ",
           "Ključ",
           "Ključ 1",
@@ -916,7 +850,7 @@
           "Au",
           "Ključ za vrata"
         ],
-        "2": [
+        "Key3": [
           "A Ključ",
           "The KeyKljuč",
           "Ključ 2",
@@ -924,16 +858,14 @@
           "Samo ključ",
           "Preživjeli ste pauke!"
         ],
-        "3": [
+        "Key4": [
           "TR2Main komora ključ",
           "A Ključ",
           "Ključ",
           "Ključ 3",
           "Jedini ključ koji trebaš"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzla 1",
           "Soba 41",
           "Maska za lice",
@@ -943,7 +875,6 @@
         ]
       }
     },
-
     "FLOATING.TR2": {
       "Names": [
         "Kina dio 3",
@@ -957,8 +888,8 @@
         "Baci se u vatru",
         "Leteći lego"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Kereker",
           "Kereker 1",
           "Kereker A",
@@ -967,7 +898,7 @@
           "Magični kolač",
           "Kolač za sreću"
         ],
-        "1": [
+        "Puzzle2": [
           "Kereker",
           "Kereker 2",
           "Kereker B",
@@ -979,7 +910,6 @@
         ]
       }
     },
-
     "XIAN.TR2": {
       "Names": [
         "Kina dio 4",
@@ -998,8 +928,8 @@
         "Kipovi, noževi i vatra",
         "DL"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Kreker",
           "Taj reker",
           "Sir i krekeri",
@@ -1007,7 +937,7 @@
           "Kliki pečat",
           "Nejestiv kreker"
         ],
-        "1": [
+        "Puzzle2": [
           "Xian plijen",
           "Zmajev bodež",
           "Veliki nož",
@@ -1022,7 +952,6 @@
         ]
       }
     },
-
     "HOUSE.TR2": {
       "Names": [
         "HSH",
@@ -1038,8 +967,8 @@
         "Nisam sam u kući",
         "Vidjeli dovoljno?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ključ ormara",
           "Arsenal ključ",
           "Ključ",
@@ -1050,10 +979,8 @@
           "Daj mi bum bum ključ",
           "Klju samoobranje",
           "Ključ oružarnice"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Xianov plijen",
           "Zmajev bodež",
           "Veliki nož",

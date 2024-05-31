@@ -1,215 +1,181 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Jiskra v.1",
-            "Zippo",
-            "SSSSSSSSS",
-            "Blikatko",
-            "Mini-Plamenomet"
-          ],
-          "43": [
-            "Jiskra v.1",
-            "Zippo",
-            "SSSSSSSSS",
-            "Blikatko",
-            "Mini-Plamenomet"
-          ]
-        },
-        {
-          "36": [
-            "Kulickovky",
-            "Rucni Pistolky",
-            "Raritky",
-            "Pew-Pews",
-            "Beru Dve"
-          ],
-          "44": [
-            "Kulickovky - Kulicky",
-            "Pistolky - Kulicky",
-            "Raritky - Kulicky",
-            "Pew-Pew - Kulicky",
-            "Beru Dve - Kulicky"
-          ]
-        },
-        {
-          "37": [
-            "Flusbrok",
-            "Musketa",
-            "Stara Znama",
-            "Nestacilo?",
-            "Vykuchavacka"
-          ],
-          "45": [
-            "Flusbrok Gule",
-            "Musketa Gule",
-            "Stara Znama Gule",
-            "Nestacilo? Dalsi",
-            "Vykuchavacka - Dalsi"
-          ]
-        },
-        {
-          "38": [
-            "Automatky",
-            "Magnumky",
-            "SuperPistolky",
-            "Pierre to ztratil",
-            "Vrat Pierrovy"
-          ],
-          "46": [
-            "Automatky - Aha",
-            "Magnumky - Aha",
-            "SuperPistolky - Aha",
-            "Pierre to ztratil - Aha",
-            "Vrat Pierrovi - Aha"
-          ]
-        },
-        {
-          "39": [
-            "RATATA",
-            "Drrrrrrrrrr",
-            "Zrout Munice",
-            "Nabojovy Upir",
-            "o 1000 Ran Pozdeji..."
-          ],
-          "47": [
-            "RATATA Naboje",
-            "Drrrrrrrrrr Naboje",
-            "Zrout Munice - Pridavek",
-            "Nabojovy Upir - Dalsi",
-            "o 1000 Ran Pozdeji - Naboje"
-          ]
-        },
-        {
-          "40": [
-            "Tick-tick-tick",
-            "Trpelivost",
-            "Vrhac Sipek",
-            "Zbytecnost",
-            "Bezvyznamne",
-            "Proc?",
-            "NE!",
-            "Paratkovac",
-            "Vrhac Kopi"
-          ],
-          "48": [
-            "Tick-tick-ticks",
-            "Dalsi Trpelivost",
-            "Sipky?",
-            "Munice pro Zbytecnost",
-            "Vic Bezvyznamne",
-            "Proc? Naboje",
-            "Munice pro NE",
-            "Paratka",
-            "Dalsi Kopi"
-          ]
-        },
-        {
-          "41": [
-            "MP3 Prehravac",
-            "MPEG",
-            "To Neni MP5",
-            "Velke Drrrrrrrrrr"
-          ],
-          "49": [
-            "MP3 Nahravky",
-            "MPEG Zasoba",
-            "To Neni MP5 Munice",
-            "Velke Drrrrrrrrrr Dalsi!"
-          ]
-        },
-        {
-          "42": [
-            "HubaBuba",
-            "Dodavka BUM",
-            "Rozhazovac",
-            "Zmizikovac",
-            "AnanasoVrhac",
-            "BumPrask",
-            "BUM!!!",
-            "Vybouchni!"
-          ],
-          "50": [
-            "Dalsi HubaBuba",
-            "Dalsi BUM",
-            "Ohnive Gule",
-            "Zmizik",
-            "Ananasy",
-            "Vice BumPrask",
-            "Dalsi BUM!!!",
-            "Vybouchny! Olovo"
-          ]
-        },
-        {
-          "51": [
-            "Nepatrna Lekarna",
-            "Takovy Drobecek",
-            "Lekarna - Clun",
-            "Kompaktni Lekarna",
-            "Ruzenec",
-            "Snez mne!"
-          ],
-          "52": [
-            "Giganticka Lekarna",
-            "Uz Nejez!",
-            "Lekarna - Titanik",
-            "Masivni Lekarna",
-            "Jezisuv Kriz",
-            "Snez mne! Vazne!"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "MOJE VECI",
-          "MUJ BORDEL",
-          "SEBRANO",
-          "POKLAD",
-          "ZBYTECNOSTI",
-          "OHH LESKLE",
-          "MUJ MILASEK"
-        ],
-        "3": [
-          "LARA ZKAPALA",
-          "ZKUSIT ZNOVU?",
-          "ZKUSIT ZNOVU? NEODOLAS",
-          "HODNE STESTI PRISTE",
-          "UPADLO TI TELO!",
-          "TROCHU ROZCUCHAN!",
-          "NLNMAS je v Pr.?"
-        ],
-        "35": [
-          "Jak sem na tom",
-          "Zdravotni Karta",
-          "CISELNIK",
-          "NEDOVOLENE LEKARNY!",
-          "POCITADLO TAJEMSTVY!"
-        ],
-        "57": [
-          "Larino Sidlo",
-          "Core Design HQ",
-          "TR2Rando HQ",
-          "Larina Ruina",
-          "Sluhova Lednice",
-          "Rozmrazit Winstona!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NIC -",
-          "- JAKOZE NIC -",
-          "- NEURCENO -",
-          "- OHH, TU JE VOLNO ZENO -"
-        ]
-      }
-    }
-  ],
-
+﻿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Jiskra v.1",
+      "Zippo",
+      "SSSSSSSSS",
+      "Blikatko",
+      "Mini-Plamenomet"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Kulickovky",
+      "Rucni Pistolky",
+      "Raritky",
+      "Pew-Pews",
+      "Beru Dve"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Kulickovky - Kulicky",
+      "Pistolky - Kulicky",
+      "Raritky - Kulicky",
+      "Pew-Pew - Kulicky",
+      "Beru Dve - Kulicky"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Flusbrok",
+      "Musketa",
+      "Stara Znama",
+      "Nestacilo?",
+      "Vykuchavacka"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Flusbrok Gule",
+      "Musketa Gule",
+      "Stara Znama Gule",
+      "Nestacilo? Dalsi",
+      "Vykuchavacka - Dalsi"
+    ],
+    "INV_ITEM_AUTOS": [
+      "Automatky",
+      "Magnumky",
+      "SuperPistolky",
+      "Pierre to ztratil",
+      "Vrat Pierrovy"
+    ],
+    "INV_ITEM_AUTO_AMMO": [
+      "Automatky - Aha",
+      "Magnumky - Aha",
+      "SuperPistolky - Aha",
+      "Pierre to ztratil - Aha",
+      "Vrat Pierrovi - Aha"
+    ],
+    "INV_ITEM_UZI": [
+      "RATATA",
+      "Drrrrrrrrrr",
+      "Zrout Munice",
+      "Nabojovy Upir",
+      "o 1000 Ran Pozdeji..."
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "RATATA Naboje",
+      "Drrrrrrrrrr Naboje",
+      "Zrout Munice - Pridavek",
+      "Nabojovy Upir - Dalsi",
+      "o 1000 Ran Pozdeji - Naboje"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Tick-tick-tick",
+      "Trpelivost",
+      "Vrhac Sipek",
+      "Zbytecnost",
+      "Bezvyznamne",
+      "Proc?",
+      "NE!",
+      "Paratkovac",
+      "Vrhac Kopi"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Tick-tick-ticks",
+      "Dalsi Trpelivost",
+      "Sipky?",
+      "Munice pro Zbytecnost",
+      "Vic Bezvyznamne",
+      "Proc? Naboje",
+      "Munice pro NE",
+      "Paratka",
+      "Dalsi Kopi"
+    ],
+    "INV_ITEM_M16": [
+      "MP3 Prehravac",
+      "MPEG",
+      "To Neni MP5",
+      "Velke Drrrrrrrrrr"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "MP3 Nahravky",
+      "MPEG Zasoba",
+      "To Neni MP5 Munice",
+      "Velke Drrrrrrrrrr Dalsi!"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "HubaBuba",
+      "Dodavka BUM",
+      "Rozhazovac",
+      "Zmizikovac",
+      "AnanasoVrhac",
+      "BumPrask",
+      "BUM!!!",
+      "Vybouchni!"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Dalsi HubaBuba",
+      "Dalsi BUM",
+      "Ohnive Gule",
+      "Zmizik",
+      "Ananasy",
+      "Vice BumPrask",
+      "Dalsi BUM!!!",
+      "Vybouchny! Olovo"
+    ],
+    "INV_ITEM_MEDI": [
+      "Nepatrna Lekarna",
+      "Takovy Drobecek",
+      "Lekarna - Clun",
+      "Kompaktni Lekarna",
+      "Ruzenec",
+      "Snez mne!"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Giganticka Lekarna",
+      "Uz Nejez!",
+      "Lekarna - Titanik",
+      "Masivni Lekarna",
+      "Jezisuv Kriz",
+      "Snez mne! Vazne!"
+    ],
+    "HEADING_ITEMS": [
+      "MOJE VECI",
+      "MUJ BORDEL",
+      "SEBRANO",
+      "POKLAD",
+      "ZBYTECNOSTI",
+      "OHH LESKLE",
+      "MUJ MILASEK"
+    ],
+    "HEADING_GAME_OVER": [
+      "LARA ZKAPALA",
+      "ZKUSIT ZNOVU?",
+      "ZKUSIT ZNOVU? NEODOLAS",
+      "HODNE STESTI PRISTE",
+      "UPADLO TI TELO!",
+      "TROCHU ROZCUCHAN!",
+      "NLNMAS je v Pr.?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Jak sem na tom",
+      "Zdravotni Karta",
+      "CISELNIK",
+      "NEDOVOLENE LEKARNY!",
+      "POCITADLO TAJEMSTVY!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NIC -",
+      "- JAKOZE NIC -",
+      "- NEURCENO -",
+      "- OHH, TU JE VOLNO ZENO -"
+    ]
+  },
   "LevelStrings": {
+    "ASSAULT.TR2": {
+      "Names": [
+        "Larino Sidlo",
+        "Core Design HQ",
+        "TR2Rando HQ",
+        "Larina Ruina",
+        "Sluhova Lednice",
+        "Rozmrazit Winstona!"
+      ]
+    },
     "WALL.TR2": {
       "Names": [
         "Cina Kapitola 1",
@@ -223,8 +189,8 @@
         "Ztracene Udoli 2.0",
         "Cesta do Xianu"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klic pro Mistnost 4",
           "Klic k Gif Panstvi",
           "Klic?",
@@ -235,7 +201,7 @@
           "Zeby Klic 1?",
           "Zeby Klic 2?"
         ],
-        "1": [
+        "Key2": [
           "Pavouci Klic",
           "Krupavy Klic",
           "Klic?",
@@ -249,7 +215,6 @@
         ]
       }
     },
-
     "BOAT.TR2": {
       "Names": [
         "Italie Kapitola 1",
@@ -263,8 +228,8 @@
         "Daleko od Domove",
         "To je Milacek"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Lodickovy Klicek",
           "Klic?",
           "Zase Klic!!",
@@ -276,7 +241,7 @@
           "Pristup k Platbe",
           "Garaz pro Lode"
         ],
-        "1": [
+        "Key2": [
           "Klic pro Mistnost 82",
           "Zelezny Klic",
           "Klic?",
@@ -287,7 +252,7 @@
           "To Neni Pacidlo",
           "Tento Klic"
         ],
-        "2": [
+        "Key3": [
           "Oxid Klice Zeleziteho",
           "Klic Zelezne Pesty",
           "Zelezna Lady",
@@ -300,7 +265,6 @@
         ]
       }
     },
-
     "VENICE.TR2": {
       "Names": [
         "Italie Kapitola 2",
@@ -312,8 +276,8 @@
         "Mona Lisa",
         "Odejdi s BUM"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klic do Knihovny",
           "Klic?",
           "Ohh, I found a Key",
@@ -328,7 +292,7 @@
           "Klicek k memu srdci",
           "Alohomora"
         ],
-        "1": [
+        "Key2": [
           "TNT Klic",
           "Vybuch Klic",
           "BumBac Klic",
@@ -345,7 +309,6 @@
         ]
       }
     },
-
     "OPERA.TR2": {
       "Names": [
         "Italie - Kapitola 3",
@@ -360,8 +323,8 @@
         "CAS PREDSTAVENI!",
         "Priprav se na Lezeni"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Honosny Klic",
           "Zbohatlikuv Klic",
           "Okazaly Klic",
@@ -373,10 +336,8 @@
           "Klic ke Dverim",
           "Klic k Nestabylite",
           "C Sharp"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzzle 1",
           "Opravator Vytahu",
           "Opravovac Plosiny",
@@ -386,7 +347,7 @@
           "CINK",
           "Neopravuje Hudbu"
         ],
-        "1": [
+        "Puzzle2": [
           "Puzzle 2",
           "Zakladni Deska",
           "ASUS Zakladni Deska",
@@ -399,7 +360,6 @@
         ]
       }
     },
-
     "RIG.TR2": {
       "Names": [
         "Plosina",
@@ -414,8 +374,8 @@
         "Bolest Hlavy",
         "Pozor tam Nahore"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ohniva Karta",
           "Cesta k Barelum",
           "Cerveny Podtacek 2",
@@ -424,7 +384,7 @@
           "Visa Express",
           "NEKROUTIT!!!!"
         ],
-        "1": [
+        "Key2": [
           "QWER Podtacek",
           "Vypni ten Alarm",
           "Nazloutly Podtacek 1",
@@ -433,7 +393,7 @@
           "Mastercard Express",
           "NEROZBIJET!"
         ],
-        "2": [
+        "Key3": [
           "Karta pro Mistnost 37",
           "Nepotrebna Karta",
           "Zeleny Podtacek 3",
@@ -444,7 +404,6 @@
         ]
       }
     },
-
     "PLATFORM.TR2": {
       "Names": [
         "Ropna Plosina Cast 2",
@@ -456,24 +415,22 @@
         "Zluty Ponorka",
         "Pozor na Pilu"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Karta pro Mistnost 12",
           "Neznama Karta",
           "Cerveny Podtacek 2",
           "Larina ID Karta",
           "POZOR KREHKE!"
         ],
-        "3": [
+        "Key4": [
           "Card for Room 49",
           "Divna Modra Karta",
           "Modry Podtacek 1",
           "Winstonova ID Karta",
           "POZOR NEOHYBAT!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Zakladni Deska",
           "ASUS Zakladni Deska",
           "PC Pro 97",
@@ -486,7 +443,6 @@
         ]
       }
     },
-
     "UNWATER.TR2": {
       "Names": [
         "Bubly Bubly Kapitola 1",
@@ -502,7 +458,6 @@
         "Pod Morem"
       ]
     },
-
     "KEEL.TR2": {
       "Names": [
         "Bubly Bubly Kapitola2",
@@ -515,8 +470,8 @@
         "Anti-Gravitacni Lod",
         "Sesrotovano"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Zachodovy Klic",
           "Koupelnovi Klic",
           "Zase Klic",
@@ -525,7 +480,7 @@
           "Klic A",
           "Nadherna koupelna?"
         ],
-        "1": [
+        "Key2": [
           "Krupavy Klic",
           "Zase Klic",
           "Boze, zase Klic",
@@ -533,7 +488,7 @@
           "Klic B",
           "Klic ke Dverim"
         ],
-        "2": [
+        "Key3": [
           "Klic od Dveri",
           "Kdo Tu?",
           "Zase Klic",
@@ -542,10 +497,8 @@
           "Klic C",
           "Novy Klic?",
           "Kde je ten Zamek?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Zhava Brzdicka",
           "Puzzle ve tvaru T",
           "Hasici Pristroj",
@@ -555,7 +508,6 @@
         ]
       }
     },
-
     "LIVING.TR2": {
       "Names": [
         "Bubly Bubly KApitola 3",
@@ -568,8 +520,8 @@
         "Nikdo neni doma",
         "Neobydlena ctvrt"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Dramaticky Klic",
           "Melodramaticky Klic",
           "Tragicky Klic",
@@ -581,7 +533,7 @@
           "Klic od Opery",
           "Hvezdari!"
         ],
-        "1": [
+        "Key2": [
           "Krupavy klic",
           "Jakoze Klic?",
           "TEN Klic",
@@ -593,7 +545,6 @@
         ]
       }
     },
-
     "DECK.TR2": {
       "Names": [
         "Bubly Bubly Kapitola 4",
@@ -603,8 +554,8 @@
         "Ledovec Vyhrava",
         "Velka Vzduchova Kapsa"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Vazny Klic",
           "Prisny Klic",
           "Kruty Klic",
@@ -620,7 +571,7 @@
           "Klic 1",
           "Klic A"
         ],
-        "2": [
+        "Key3": [
           "Klic k Bednam",
           "Klic k Bordelu?",
           "Jakoze Divnej Klic",
@@ -635,7 +586,7 @@
           "Klic 2",
           "Key B"
         ],
-        "3": [
+        "Key4": [
           "Klic od Kabiny",
           "Klic k Mistnosti",
           "Klic ke Dverim",
@@ -648,10 +599,8 @@
           "TEN Klic",
           "Klic 3",
           "Klic C"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "Andel",
           "Serubin",
           "Puzzle 1",
@@ -662,7 +611,6 @@
         ]
       }
     },
-
     "SKIDOO.TR2": {
       "Names": [
         "Tibet Kapitola 1",
@@ -678,8 +626,8 @@
         "Skidoo Manie",
         "Postav Snehulaka"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klic od Padaciho mostu",
           "Nepouzitelny Klic",
           "To neni on",
@@ -692,7 +640,7 @@
           "Ty jsi mne sebral!",
           "Klic, Zvedni platformu"
         ],
-        "1": [
+        "Key2": [
           "Klic od Chaty",
           "Klic od Chaty?",
           "Tibetsky Klic na Preskoceni",
@@ -705,10 +653,8 @@
           "Klic na Speedrun",
           "HLEDA SE!",
           "Vnitrni Klic"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "Andel",
           "Cherubin",
           "Puzzle 1",
@@ -719,7 +665,6 @@
         ]
       }
     },
-
     "MONASTRY.TR2": {
       "Names": [
         "Tibet Kapitola 2",
@@ -734,36 +679,34 @@
         "Klicnikuv Chram",
         "Zakaz Jeptiskam"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klic od Slabe Mistnosti",
           "Jsem silnejsi Klic",
           "Klic ke Klici"
         ],
-        "1": [
+        "Key2": [
           "Sakra, Nebohy Klic",
           "Venkovni Klic 1",
           "Vypadneme odsud?",
           "Klic k nikam? O.o",
           "Klic k zadni Brane"
         ],
-        "2": [
+        "Key3": [
           "Klicek na Balkonek",
           "Zkratka na Vrchol",
           "Klic Sikmich Oci",
           "Venkovni Klic 2"
         ],
-        "3": [
+        "Key4": [
           "TR2Main Hala Klic",
           "Klic k Meme Salu",
           "Klic od Ratejny",
           "Klic od NESKAKAT",
           "Klic k Budhovi?",
           "Klic do Cekarny"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Jakoze Modliteni Valec",
           "Kutululu Valec",
           "Chenuv Valec",
@@ -772,14 +715,14 @@
           "Kdo ten Valec Vyrobyl?",
           "Unaveny Pomocnik"
         ],
-        "1": [
+        "Puzzle2": [
           "Diamanty",
           "Barkhangsky Poklad",
           "Mantuv Dia?",
           "Ohh Leskle!",
           "18 Karatu"
         ],
-        "3": [
+        "Puzzle4": [
           "Andel",
           "Cherubin",
           "Puzzle 3",
@@ -791,7 +734,6 @@
         ]
       }
     },
-
     "CATACOMB.TR2": {
       "Names": [
         "Tibet Kapitola 3",
@@ -804,19 +746,8 @@
         "Celkem Temno Tady!",
         "Temna Yetiho Komurka"
       ],
-      "Pickups": {
-        "0": [
-          "Pockat, COOO?",
-          "Vesele Velikonoce",
-          "Aaa, Pan Gong, ano!",
-          "Toto sem nepatri",
-          "...???",
-          "Xylofonova Tycka",
-          "No, Ale co uz!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Pletova Maska",
           "Maska?",
           "TA Maska",
@@ -826,10 +757,18 @@
           "Noste Rousky!",
           "Krasna maska",
           "Hnusne Vypadajici Maska"
+        ],
+        "Pickup1": [
+          "Pockat, COOO?",
+          "Vesele Velikonoce",
+          "Aaa, Pan Gong, ano!",
+          "Toto sem nepatri",
+          "...???",
+          "Xylofonova Tycka",
+          "No, Ale co uz!"
         ]
       }
     },
-
     "ICECAVE.TR2": {
       "Names": [
         "Tibet Kapitola 4",
@@ -848,8 +787,8 @@
         "Winston Doporucuje!",
         "Winstonuv Mrazak"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Pan Kladido Gong",
           "Kladivo?",
           "Hodny Gong",
@@ -860,22 +799,8 @@
           "Cepin",
           "Bubnovaci Palicka",
           "Palicka na Gong"
-        ]
-      },
-      "Pickups": {
-        "1": [
-          "Talion",
-          "Slepici Poklad",
-          "Otevri Dvere Laro",
-          "VYPOUSTIT SLEPICI!",
-          "Pozlacena Cetka",
-          "Klice od Xian Dveri",
-          "LESKLE!",
-          "Tady a Pryc Znovu!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Maska na Xicht",
           "Preskocitelna Maska",
           "Maska",
@@ -885,10 +810,19 @@
           "Kdo to porad pouziva?",
           "Larina Pletova Maska",
           "Cassandra"
+        ],
+        "Pickup2": [
+          "Talion",
+          "Slepici Poklad",
+          "Otevri Dvere Laro",
+          "VYPOUSTIT SLEPICI!",
+          "Pozlacena Cetka",
+          "Klice od Xian Dveri",
+          "LESKLE!",
+          "Tady a Pryc Znovu!"
         ]
       }
     },
-
     "EMPRTOMB.TR2": {
       "Names": [
         "Cina Kapitola 2",
@@ -902,8 +836,8 @@
         "Zavod za Dykou",
         "Kompletni Kruh"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Nejaky Klic",
           "Ten Klic",
           "Klic 1",
@@ -911,7 +845,7 @@
           "Jauvajs",
           "Klic ke dverim"
         ],
-        "2": [
+        "Key3": [
           "Zase Klic",
           "Jakoze TEN Klic",
           "Klic 2",
@@ -919,16 +853,14 @@
           "Proste Zase Klic",
           "Prezil jsi Pavuuucky!"
         ],
-        "3": [
+        "Key4": [
           "TR2Main Chramovy Klic",
           "Jen Klic",
           "Vyznamny Klic",
           "Klic 3",
           "Jediny Potrebny Klic"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzzle 1",
           "Mistnost 41 Vyplnovac Slotu",
           "Maska na Xicht",
@@ -938,7 +870,6 @@
         ]
       }
     },
-
     "FLOATING.TR2": {
       "Names": [
         "Cina Kapitola 3",
@@ -952,8 +883,8 @@
         "Sipka do Ohne",
         "Letajici Lego"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Susenka",
           "Susenka 1",
           "Susenka A",
@@ -963,7 +894,7 @@
           "Magicka Susenka",
           "Kolacek Stesti"
         ],
-        "1": [
+        "Puzzle2": [
           "Susenka",
           "Susenka 2",
           "Susenka B",
@@ -975,7 +906,6 @@
         ]
       }
     },
-
     "XIAN.TR2": {
       "Names": [
         "China Kapitola 4",
@@ -993,8 +923,8 @@
         "Mne nelze spalit!",
         "Sochy, Dyky a Ohen"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Jen Susenka",
           "Ta Susenka",
           "Syrova Susenka",
@@ -1002,7 +932,7 @@
           "Nedostupna Susenka",
           "Nejedla Susenka"
         ],
-        "1": [
+        "Puzzle2": [
           "Poklad xian",
           "Draci Dyka",
           "Velky Nuz",
@@ -1017,7 +947,6 @@
         ]
       }
     },
-
     "HOUSE.TR2": {
       "Names": [
         "HSH",
@@ -1033,8 +962,8 @@
         "Ne Sam Doma",
         "Videl jsi Vse?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klic od Skrine",
           "Klic od Zbrojnice",
           "Ten Klic",
@@ -1045,10 +974,8 @@
           "Dejmi Bum Bum Klic",
           "Klic Sebeobrany",
           "Klic od Zbrojnice"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Poklad xian",
           "Draci Dyka",
           "Velky Nuz",

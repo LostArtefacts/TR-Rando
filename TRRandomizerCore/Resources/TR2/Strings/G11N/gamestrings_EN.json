@@ -1,218 +1,184 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Sparkler",
-            "Zippo",
-            "Dazzler",
-            "Flickerer",
-            "Mini-blaze"
-          ],
-          "43": [
-            "Sparkler",
-            "Zippo",
-            "Dazzler",
-            "Flickerer",
-            "Mini-blaze"
-          ]
-        },
-        {
-          "36": [
-            "Peashooters",
-            "Handguns",
-            "Old Faithfuls",
-            "Pew-Pews",
-            "I'll Take Two"
-          ],
-          "44": [
-            "Peashooter Clips",
-            "Handgun Clips",
-            "Old Faithful Clips",
-            "Pew-Pew Clips",
-            "I'll Take Two Clips"
-          ]
-        },
-        {
-          "37": [
-            "Shotty",
-            "Musket",
-            "Old Faithful",
-            "Seen Enough?",
-            "Gutbuster"
-          ],
-          "45": [
-            "Shotty Shells",
-            "Musket Shells",
-            "Old Faithful Shells",
-            "Seen Enough Shells?",
-            "Gutbuster Shells"
-          ]
-        },
-        {
-          "38": [
-            "Autos",
-            "Magnums",
-            "SuperPistols",
-            "Pierre Lost 'em",
-            "Return to Pierre"
-          ],
-          "46": [
-            "Auto Clips",
-            "Magnum Clips",
-            "SuperPistol Clips",
-            "Pierre Lost 'em Clips",
-            "Clips to Return to Pierre"
-          ]
-        },
-        {
-          "39": [
-            "UwUzis",
-            "Drrrrrrrrrr",
-            "FeelStronger Guns",
-            "Ammo Vampire",
-            "1000 Shots Later..."
-          ],
-          "47": [
-            "UwUzi Clips",
-            "Drrrrrrrrrr Clips",
-            "FeelStronger Clips",
-            "Ammo Vampire Clips",
-            "1000 Clips Later"
-          ]
-        },
-        {
-          "40": [
-            "Tick-tick-tick",
-            "Patience",
-            "Arrow Thrower",
-            "Useless",
-            "Pointless",
-            "Why Bother?",
-            "No!",
-            "Toothpick Thrower",
-            "Spear Launcher"
-          ],
-          "48": [
-            "Tick-tick-ticks",
-            "Patience Ammo",
-            "Arrows",
-            "Useless Ammo",
-            "Pointless Ammo",
-            "Why Bother Ammo?",
-            "No Ammo!",
-            "Toothpicks",
-            "Spears"
-          ]
-        },
-        {
-          "41": [
-            "MP3 Player",
-            "MPEG",
-            "Not the MP5",
-            "Big Drrrrrrrrrr"
-          ],
-          "49": [
-            "MP3 Clips",
-            "MPEG Clips",
-            "Not MP5 Clips",
-            "Big Drrrrrrrrrr Clips"
-          ]
-        },
-        {
-          "42": [
-            "Nade Blaster",
-            "Explosive Delivery",
-            "Enemy Roaster",
-            "Shell Launcher",
-            "Pineapple Dispatch",
-            "Big Bang",
-            "Big Boom",
-            "Blow It Up"
-          ],
-          "50": [
-            "Nades",
-            "Explosives",
-            "Fireballs",
-            "Shells",
-            "Pineapples",
-            "Big Bangs",
-            "Big Booms",
-            "Ammo to Blow It Up"
-          ]
-        },
-        {
-          "51": [
-            "Tiny Medi Pack",
-            "Wee Medi Pack",
-            "Little Medi Pack",
-            "Compact Medi Pack",
-            "Bijou Medi Pack",
-            "Baby Booboo Fixer"
-          ],
-          "52": [
-            "Gigantic Medi Pack",
-            "Enormous Medi Pack",
-            "Titanic Medi Pack",
-            "Massive Medi Pack",
-            "Mahoosive Medi Pack",
-            "Big Booboo Fixer"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "THINGS",
-          "STUFF",
-          "PICKUPS",
-          "LOOT",
-          "JUNK",
-          "UH, SHINY",
-          "MY PRECIOUS"
-        ],
-        "3": [
-          "LARA DIED",
-          "TRY AGAIN?",
-          "TRY AGAIN? JUST GET GOOD",
-          "BETTER LUCK NEXT TIME",
-          "RUN BACK TO THE START AND TRY AGAIN",
-          "RIP",
-          "RIP NO LOADS",
-          "GIT GUD",
-          "RAGE QUIT",
-          "NLNMAS Next?"
-        ],
-        "35": [
-          "Stats",
-          "Vital Stats",
-          "Number Crunching",
-          "No Meds Allowed",
-          "Secret Tracker"
-        ],
-        "57": [
-          "Croft Manor",
-          "Core Design HQ",
-          "TR2Rando HQ",
-          "Lara's Digs",
-          "Winston's Fridge",
-          "Defrost Winston"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NULL -",
-          "- NOTHING HERE -",
-          "- UNDEFINED -",
-          "- OI, THIS SLOT'S FREE -"
-        ]
-      }
-    }
-  ],
-
+﻿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Sparkler",
+      "Zippo",
+      "Dazzler",
+      "Flickerer",
+      "Mini-blaze"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Peashooters",
+      "Handguns",
+      "Old Faithfuls",
+      "Pew-Pews",
+      "I'll Take Two"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Peashooter Clips",
+      "Handgun Clips",
+      "Old Faithful Clips",
+      "Pew-Pew Clips",
+      "I'll Take Two Clips"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Shotty",
+      "Musket",
+      "Old Faithful",
+      "Seen Enough?",
+      "Gutbuster"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Shotty Shells",
+      "Musket Shells",
+      "Old Faithful Shells",
+      "Seen Enough Shells?",
+      "Gutbuster Shells"
+    ],
+    "INV_ITEM_AUTOS": [
+      "Autos",
+      "Magnums",
+      "SuperPistols",
+      "Pierre Lost 'em",
+      "Return to Pierre"
+    ],
+    "INV_ITEM_AUTO_AMMO": [
+      "Auto Clips",
+      "Magnum Clips",
+      "SuperPistol Clips",
+      "Pierre Lost 'em Clips",
+      "Clips to Return to Pierre"
+    ],
+    "INV_ITEM_UZI": [
+      "UwUzis",
+      "Drrrrrrrrrr",
+      "FeelStronger Guns",
+      "Ammo Vampire",
+      "1000 Shots Later..."
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "UwUzi Clips",
+      "Drrrrrrrrrr Clips",
+      "FeelStronger Clips",
+      "Ammo Vampire Clips",
+      "1000 Clips Later"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Tick-tick-tick",
+      "Patience",
+      "Arrow Thrower",
+      "Useless",
+      "Pointless",
+      "Why Bother?",
+      "No!",
+      "Toothpick Thrower",
+      "Spear Launcher"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Tick-tick-ticks",
+      "Patience Ammo",
+      "Arrows",
+      "Useless Ammo",
+      "Pointless Ammo",
+      "Why Bother Ammo?",
+      "No Ammo!",
+      "Toothpicks",
+      "Spears"
+    ],
+    "INV_ITEM_M16": [
+      "MP3 Player",
+      "MPEG",
+      "Not the MP5",
+      "Big Drrrrrrrrrr"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "MP3 Clips",
+      "MPEG Clips",
+      "Not MP5 Clips",
+      "Big Drrrrrrrrrr Clips"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Nade Blaster",
+      "Explosive Delivery",
+      "Enemy Roaster",
+      "Shell Launcher",
+      "Pineapple Dispatch",
+      "Big Bang",
+      "Big Boom",
+      "Blow It Up"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Nades",
+      "Explosives",
+      "Fireballs",
+      "Shells",
+      "Pineapples",
+      "Big Bangs",
+      "Big Booms",
+      "Ammo to Blow It Up"
+    ],
+    "INV_ITEM_MEDI": [
+      "Tiny Medi Pack",
+      "Wee Medi Pack",
+      "Little Medi Pack",
+      "Compact Medi Pack",
+      "Bijou Medi Pack",
+      "Baby Booboo Fixer"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Gigantic Medi Pack",
+      "Enormous Medi Pack",
+      "Titanic Medi Pack",
+      "Massive Medi Pack",
+      "Mahoosive Medi Pack",
+      "Big Booboo Fixer"
+    ],
+    "HEADING_ITEMS": [
+      "THINGS",
+      "STUFF",
+      "PICKUPS",
+      "LOOT",
+      "JUNK",
+      "UH, SHINY",
+      "MY PRECIOUS"
+    ],
+    "HEADING_GAME_OVER": [
+      "LARA DIED",
+      "TRY AGAIN?",
+      "TRY AGAIN? JUST GET GOOD",
+      "BETTER LUCK NEXT TIME",
+      "RUN BACK TO THE START AND TRY AGAIN",
+      "RIP",
+      "RIP NO LOADS",
+      "GIT GUD",
+      "RAGE QUIT",
+      "NLNMAS Next?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Stats",
+      "Vital Stats",
+      "Number Crunching",
+      "No Meds Allowed",
+      "Secret Tracker"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NULL -",
+      "- NOTHING HERE -",
+      "- UNDEFINED -",
+      "- OI, THIS SLOT'S FREE -"
+    ]
+  },
   "LevelStrings": {
+    "ASSAULT.TR2": {
+      "Names": [
+        "Croft Manor",
+        "Core Design HQ",
+        "TR2Rando HQ",
+        "Lara's Digs",
+        "Winston's Fridge",
+        "Defrost Winston"
+      ]
+    },
     "WALL.TR2": {
       "Names": [
         "China Part 1",
@@ -226,8 +192,8 @@
         "The Lost Valley 2.0",
         "The Path to Xian"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Key to Room 4",
           "Memehouse Key",
           "A Key",
@@ -238,7 +204,7 @@
           "Maybe Key 1?",
           "Maybe Key 2?"
         ],
-        "1": [
+        "Key2": [
           "Spider Key",
           "Crusty Key",
           "A Key",
@@ -252,7 +218,6 @@
         ]
       }
     },
-
     "BOAT.TR2": {
       "Names": [
         "Italy Part 1",
@@ -266,8 +231,8 @@
         "Far From Home",
         "That's Amore"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Boaty McKey Face",
           "A Key",
           "The Key",
@@ -279,7 +244,7 @@
           "Sail Access",
           "Boat Garage"
         ],
-        "1": [
+        "Key2": [
           "Key for Room 82",
           "Metal Key",
           "A Key",
@@ -290,7 +255,7 @@
           "Not a Lockpick",
           "This Key"
         ],
-        "2": [
+        "Key3": [
           "Ironing Board Key",
           "Iron Lady",
           "Iron Fist Key",
@@ -303,7 +268,6 @@
         ]
       }
     },
-
     "VENICE.TR2": {
       "Names": [
         "Italy Part 2",
@@ -316,8 +280,8 @@
         "The Mona Lisa",
         "Go Out With a Bang"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Bookroom Key",
           "A Key",
           "The Key",
@@ -332,7 +296,7 @@
           "Secret Stash Key",
           "Alohomora"
         ],
-        "1": [
+        "Key2": [
           "TNT Key",
           "Blast Key",
           "Explosion Key",
@@ -349,7 +313,6 @@
         ]
       }
     },
-
     "OPERA.TR2": {
       "Names": [
         "Italy Part 3",
@@ -364,8 +327,8 @@
         "Showtime!",
         "Prepare the Floor Show"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Fancy Key",
           "Posh Key",
           "Ostentatious Key",
@@ -377,10 +340,8 @@
           "The Key to the Door",
           "Wobbly Floor Key",
           "C Sharp"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzzle 1",
           "Elevator Fixer",
           "Lift Fixer",
@@ -390,7 +351,7 @@
           "Ding",
           "No Music Fix"
         ],
-        "1": [
+        "Puzzle2": [
           "Puzzle 2",
           "Motherboard",
           "ACME Motherboard",
@@ -403,7 +364,6 @@
         ]
       }
     },
-
     "RIG.TR2": {
       "Names": [
         "The Rig",
@@ -418,8 +378,8 @@
         "Offshore Headache",
         "Health and Safety Risk"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Quicksand Card",
           "Barrel Pass Card",
           "Pass Card 2",
@@ -428,7 +388,7 @@
           "Mastercard Express",
           "Do Not Break"
         ],
-        "1": [
+        "Key2": [
           "QWOP Spot Card",
           "Turn Off That Alarm",
           "Pass Card 1",
@@ -437,7 +397,7 @@
           "Visa Express",
           "Do Not Twist"
         ],
-        "2": [
+        "Key3": [
           "Card for Room 37",
           "Unnecessary Card",
           "Pass Card 3",
@@ -448,7 +408,6 @@
         ]
       }
     },
-
     "PLATFORM.TR2": {
       "Names": [
         "Offshore Rig Part 2",
@@ -460,24 +419,22 @@
         "The Yellow Submarine",
         "Mind the Saw"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Card for Room 12",
           "Unidentified Pass Card",
           "Pass Card 2",
           "Laras ID Card",
           "Do Not Break"
         ],
-        "3": [
+        "Key4": [
           "Card for Room 49",
           "Unidentified Pass Card",
           "Pass Card 1",
           "Winstons ID Card",
           "Do Not Bend"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Motherboard",
           "ACME Motherboard",
           "PC Pro 97",
@@ -490,7 +447,6 @@
         ]
       }
     },
-
     "UNWATER.TR2": {
       "Names": [
         "Underwater Part 1",
@@ -506,7 +462,6 @@
         "Under the Sea"
       ]
     },
-
     "KEEL.TR2": {
       "Names": [
         "Underwater Part 2",
@@ -519,8 +474,8 @@
         "Anti Gravity Ship",
         "Wrecked"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Toilet Key",
           "Bathroom Key",
           "A Key",
@@ -529,7 +484,7 @@
           "Key A",
           "What, a Restroom?"
         ],
-        "1": [
+        "Key2": [
           "Crusty Key",
           "A Key",
           "The Key",
@@ -537,7 +492,7 @@
           "Key B",
           "Key to a Door"
         ],
-        "2": [
+        "Key3": [
           "Room Key",
           "Who Dis?",
           "A Key",
@@ -546,10 +501,8 @@
           "Key C",
           "New Key?",
           "Where's This Lock?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Fire Breaker",
           "T-Shaped Puzzle",
           "Fire Extinguisher",
@@ -559,7 +512,6 @@
         ]
       }
     },
-
     "LIVING.TR2": {
       "Names": [
         "Underwater Part 3",
@@ -572,8 +524,8 @@
         "Nobody Home",
         "Lifeless Quarters"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Dramatic Key",
           "Melodramatic Key",
           "Tragic Key",
@@ -585,7 +537,7 @@
           "Opera Key",
           "The Show Must Go On!"
         ],
-        "1": [
+        "Key2": [
           "Crusty Key",
           "A Key",
           "The Key",
@@ -597,7 +549,6 @@
         ]
       }
     },
-
     "DECK.TR2": {
       "Names": [
         "Underwater-ish Part 4",
@@ -608,8 +559,8 @@
         "Big Air Pocket",
         "[ then ]"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Stern Key",
           "Harsh Key",
           "Cruel Key",
@@ -625,7 +576,7 @@
           "Key 1",
           "Key A"
         ],
-        "2": [
+        "Key3": [
           "Storage Key",
           "Storage Key?",
           "Strange Key",
@@ -640,7 +591,7 @@
           "Key 2",
           "Key B"
         ],
-        "3": [
+        "Key4": [
           "Cabin Key",
           "Room Key",
           "Key to the Door",
@@ -653,10 +604,8 @@
           "The Key",
           "Key 3",
           "Key C"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "The Angel",
           "The Cherub",
           "Puzzle 1",
@@ -667,7 +616,6 @@
         ]
       }
     },
-
     "SKIDOO.TR2": {
       "Names": [
         "Tibet Part 1",
@@ -684,8 +632,8 @@
         "Build a Snowman",
         "Sanctuary of the Skidoo"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Drawbridge Key",
           "Useless Key",
           "Not The One",
@@ -698,7 +646,7 @@
           "You Raise Me Up",
           "Make A Platform Key"
         ],
-        "1": [
+        "Key2": [
           "Hut Key",
           "Hut Key?",
           "Tibet Skip Key",
@@ -711,10 +659,8 @@
           "Speedrun Key",
           "Most Wanted",
           "Inside Key"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "The Angel",
           "The Cherub",
           "Puzzle 1",
@@ -725,7 +671,6 @@
         ]
       }
     },
-
     "MONASTRY.TR2": {
       "Names": [
         "Tibet Part 2",
@@ -742,36 +687,34 @@
         "Kill the Monks",
         "Barkhang Monastry"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Weakroom Key",
           "FeelStronger Key",
           "Key to a Key"
         ],
-        "1": [
+        "Key2": [
           "Drat, Poor Key",
           "Outside Key 1",
           "Let's Go Outside",
           "Key to No Room",
           "Backdoor Key"
         ],
-        "2": [
+        "Key3": [
           "Spoof Rot Key",
           "Shortcut to the Top",
           "Outside Key 2",
           "Shifty Eyes Key"
         ],
-        "3": [
+        "Key4": [
           "TR2Main Hall Key",
           "Meme Hall Key",
           "Big Room Key",
           "Don't Swandive Key",
           "Buddah Key",
           "Lobby Key"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Like a Prayer Wheel",
           "Mani Wheel",
           "Chen Wheel",
@@ -780,14 +723,14 @@
           "Who Invented This Wheel?",
           "Weary Helper"
         ],
-        "1": [
+        "Puzzle2": [
           "Diamonds",
           "Barkhang Loot",
           "Gem's Tones",
           "Uhh, Shiny!",
           "18 Carat"
         ],
-        "3": [
+        "Puzzle4": [
           "The Angel",
           "The Cherub",
           "Puzzle 1",
@@ -799,7 +742,6 @@
         ]
       }
     },
-
     "CATACOMB.TR2": {
       "Names": [
         "Tibet Part 3",
@@ -813,20 +755,8 @@
         "Dark Yeti Room",
         "Caves"
       ],
-      "Pickups": {
-        "0": [
-          "Gong Hammer?",
-          "Wait, what?",
-          "Happy Easter",
-          "Em, Mr Gong? Ha!",
-          "Doesn't Belong Here",
-          "...???",
-          "Xylophone Stick",
-          "Well, Whatever!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Face Mask",
           "A Mask",
           "The Mask",
@@ -836,10 +766,19 @@
           "Wear a Mask!",
           "Pretty Mask",
           "Ugly Mask"
+        ],
+        "Pickup1": [
+          "Gong Hammer?",
+          "Wait, what?",
+          "Happy Easter",
+          "Em, Mr Gong? Ha!",
+          "Doesn't Belong Here",
+          "...???",
+          "Xylophone Stick",
+          "Well, Whatever!"
         ]
       }
     },
-
     "ICECAVE.TR2": {
       "Names": [
         "Tibet Part 4",
@@ -858,8 +797,8 @@
         "Winston Approved Palace",
         "Winston's Big Fridge"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Mr Gong Hame",
           "The Hammer",
           "Good Gong",
@@ -870,22 +809,8 @@
           "Ice Pick",
           "Drumstick",
           "Gong Mallet"
-        ]
-      },
-      "Pickups": {
-        "1": [
-          "Talion",
-          "Chicken Treasure",
-          "Open That Door, Lara",
-          "RELEASE THE CHICKEN",
-          "Golden Thingy",
-          "Xian Door Key",
-          "SHINY!",
-          "Here and Gone Again"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Face Mask",
           "Skippable Mask",
           "The Mask",
@@ -895,10 +820,19 @@
           "Who Uses This?",
           "Lara's Beauty Mask",
           "Cassandra"
+        ],
+        "Pickup2": [
+          "Talion",
+          "Chicken Treasure",
+          "Open That Door, Lara",
+          "RELEASE THE CHICKEN",
+          "Golden Thingy",
+          "Xian Door Key",
+          "SHINY!",
+          "Here and Gone Again"
         ]
       }
     },
-
     "EMPRTOMB.TR2": {
       "Names": [
         "China Part 2",
@@ -912,8 +846,8 @@
         "Race to the Dagger",
         "Full Circle"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "A Key",
           "The Key",
           "Key 1",
@@ -921,7 +855,7 @@
           "Au",
           "Key to a Door"
         ],
-        "2": [
+        "Key3": [
           "A Key",
           "The Key",
           "Key 2",
@@ -929,16 +863,14 @@
           "Just a Key",
           "You Survived the Spiders"
         ],
-        "3": [
+        "Key4": [
           "TR2Main Chamber Key",
           "A Key",
           "The Key",
           "Key 3",
           "Only Key You Need"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzzle 1",
           "Room 41 Slot Filler",
           "Face Mask",
@@ -948,7 +880,6 @@
         ]
       }
     },
-
     "FLOATING.TR2": {
       "Names": [
         "China Part 3",
@@ -962,8 +893,8 @@
         "Swandive into Fire",
         "Floating Lego"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "A Cracker",
           "Cracker 1",
           "Cracker A",
@@ -972,7 +903,7 @@
           "Magic Cookie",
           "Fortune Cookie"
         ],
-        "1": [
+        "Puzzle2": [
           "A Cracker",
           "Cracker 2",
           "Cracker B",
@@ -984,7 +915,6 @@
         ]
       }
     },
-
     "XIAN.TR2": {
       "Names": [
         "China Part 4",
@@ -1003,8 +933,8 @@
         "Statues, Knives and Fire",
         "DL"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "A Cracker",
           "The Cracker",
           "Cheese 'n' Crackers",
@@ -1012,7 +942,7 @@
           "Cliquey Stamp",
           "Inedible Cracker"
         ],
-        "1": [
+        "Puzzle2": [
           "Xian Loot",
           "Dragon Dagger",
           "Big Knife",
@@ -1027,7 +957,6 @@
         ]
       }
     },
-
     "HOUSE.TR2": {
       "Names": [
         "HSH",
@@ -1047,8 +976,8 @@
         "Assault Course",
         "Lara's Home"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Closet Key",
           "Arsenal Key",
           "The Key",
@@ -1059,10 +988,8 @@
           "Gimme Boom Boom Key",
           "Self-defence Training Key",
           "Armoury Key"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Xian Loot",
           "Dragon Dagger",
           "Big Knife",

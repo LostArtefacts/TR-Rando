@@ -1,215 +1,181 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Stella filante",
-            "Accendino",
-            "Splendore",
-            "Barlume",
-            "Mini-fiamma"
-          ],
-          "43": [
-            "Stella filante",
-            "Accendino",
-            "Splendore",
-            "Barlume",
-            "Mini-fiamma"
-          ]
-        },
-        {
-          "36": [
-            "Cerbottana",
-            "Pistole",
-            "Sempre Fedeli",
-            "Pew-Pew",
-            "Ne Prendo Due"
-          ],
-          "44": [
-            "Munizioni per Cerbottana",
-            "Munizioni per Pistola",
-            "Munizioni per Sempre Fedeli",
-            "Munizioni per Pew-Pew",
-            "Munizioni per Ne Prendo Due"
-          ]
-        },
-        {
-          "37": [
-            "Pompa",
-            "Moschetto",
-            "Sempre Fedele",
-            "Sei Ancora Qui?",
-            "Spaccabudella"
-          ],
-          "45": [
-            "Cartucce per Pompa",
-            "Cartucce per Moschetto",
-            "Cartucce per Sempre Fedele",
-            "Munizioni per Sei Ancora Qui?",
-            "Munizioni per Spaccabudella"
-          ]
-        },
-        {
-          "38": [
-            "Automatiche",
-            "Magnum",
-            "SuperPistole",
-            "Le Ha Perse Pierre",
-            "Restituire a Pierre"
-          ],
-          "46": [
-            "Munizioni per Automatiche",
-            "Munizioni per Magnum",
-            "Munizioni per SuperPistola",
-            "Munizioni per Le Ha Perse Pierre",
-            "Munizioni per Restituire a Pierre"
-          ]
-        },
-        {
-          "39": [
-            "UwUzi",
-            "Drrrrrrrrrr",
-            "Pistole Fortissime",
-            "MangiaColpi",
-            "1000 Colpi Dopo..."
-          ],
-          "47": [
-            "Munizioni per UwUzi",
-            "Munizioni per Drrrrrrrrrr",
-            "Munizioni per Pistole Fortissime",
-            "Munizioni per MangiaColpi",
-            "Munizioni per 1000 Colpi Dopo"
-          ]
-        },
-        {
-          "40": [
-            "Tick-tick-tick",
-            "Pazienza",
-            "Lanciatore di Frecce",
-            "Inutile",
-            "Senza Senso",
-            "Perché?",
-            "No!",
-            "Lanciatore di Stuzzicadenti",
-            "Propulsore di Lance"
-          ],
-          "48": [
-            "Tick-tick-tick",
-            "Munizioni per Pazienza",
-            "Frecce",
-            "Munizioni per Inutile",
-            "Munizioni per Senza Senso",
-            "Munizioni per Perché?",
-            "Munizioni per No!",
-            "Stuzzicadenti",
-            "Lance"
-          ]
-        },
-        {
-          "41": [
-            "Lettore MP3",
-            "MPEG",
-            "Non l'MP5",
-            "Grande Drrrrrrrrrr"
-          ],
-          "49": [
-            "Munizioni per Lettore MP3",
-            "Munizioni per MPEG",
-            "Munizioni per Non l'MP5",
-            "Munizioni per Grande Drrrrrrrrrr"
-          ]
-        },
-        {
-          "42": [
-            "Esploditore di Granate",
-            "Consegna Esplosiva",
-            "Arrostitore di Nemici",
-            "Lanciatore di Bombe",
-            "Spedizione di Granate",
-            "Big Bang",
-            "Big Boom",
-            "Fallo Saltare!"
-          ],
-          "50": [
-            "Granate",
-            "Esplosivi",
-            "Palle di Fuoco",
-            "Bombe",
-            "Granate",
-            "Big Bangs",
-            "Big Booms",
-            "Munizioni per Fallo Saltare!"
-          ]
-        },
-        {
-          "51": [
-            "Medi-kit Minuscolo",
-            "Medi-kit Piccino",
-            "Medi-kit Piccolo",
-            "Medi-kit Minuto",
-            "Medi-kit Microscopico",
-            "Piccolo Cerotto per la bua"
-          ],
-          "52": [
-            "Medi-kit Gigante",
-            "Medi-kit Enorme",
-            "Medi-kit Titanico",
-            "Medi-kit Massiccio",
-            "Medi-kit Smisurato",
-            "Grande Cerotto per la bua"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "COSE",
-          "ROBE",
-          "COLLEZIONE",
-          "BOTTINO",
-          "ROTTAMI",
-          "OH LUCCICA",
-          "IL MIO TESORO"
-        ],
-        "3": [
-          "LARA È MORTA",
-          "RIPROVARE?",
-          "RIPROVARE? DIVENTA PIÙ BRAVO",
-          "ANDRÀ MEGLIO LA PROSSIMA VOLTA",
-          "GIT GUD",
-          "RAGE QUIT!",
-          "Pronto per la NLNMAS?"
-        ],
-        "35": [
-          "Statistiche",
-          "Statistiche Vitali",
-          "Numeri Macinati",
-          "NON PUOI CURARTI!",
-          "Dati Segreti!"
-        ],
-        "57": [
-          "Croft Manor",
-          "Core Design HQ",
-          "TR2Rando HQ",
-          "Gli Scavi di Lara",
-          "Il Frigo di Winston",
-          "Scongela Winston!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NULL -",
-          "- NON C'È NIENTE QUI -",
-          "- NON DEFINITO -",
-          "- HEY, QUESTO SLOT È LIBERO -"
-        ]
-      }
-    }
-  ],
-
+﻿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Stella filante",
+      "Accendino",
+      "Splendore",
+      "Barlume",
+      "Mini-fiamma"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Cerbottana",
+      "Pistole",
+      "Sempre Fedeli",
+      "Pew-Pew",
+      "Ne Prendo Due"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Munizioni per Cerbottana",
+      "Munizioni per Pistola",
+      "Munizioni per Sempre Fedeli",
+      "Munizioni per Pew-Pew",
+      "Munizioni per Ne Prendo Due"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Pompa",
+      "Moschetto",
+      "Sempre Fedele",
+      "Sei Ancora Qui?",
+      "Spaccabudella"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Cartucce per Pompa",
+      "Cartucce per Moschetto",
+      "Cartucce per Sempre Fedele",
+      "Munizioni per Sei Ancora Qui?",
+      "Munizioni per Spaccabudella"
+    ],
+    "INV_ITEM_AUTOS": [
+      "Automatiche",
+      "Magnum",
+      "SuperPistole",
+      "Le Ha Perse Pierre",
+      "Restituire a Pierre"
+    ],
+    "INV_ITEM_AUTO_AMMO": [
+      "Munizioni per Automatiche",
+      "Munizioni per Magnum",
+      "Munizioni per SuperPistola",
+      "Munizioni per Le Ha Perse Pierre",
+      "Munizioni per Restituire a Pierre"
+    ],
+    "INV_ITEM_UZI": [
+      "UwUzi",
+      "Drrrrrrrrrr",
+      "Pistole Fortissime",
+      "MangiaColpi",
+      "1000 Colpi Dopo..."
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Munizioni per UwUzi",
+      "Munizioni per Drrrrrrrrrr",
+      "Munizioni per Pistole Fortissime",
+      "Munizioni per MangiaColpi",
+      "Munizioni per 1000 Colpi Dopo"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Tick-tick-tick",
+      "Pazienza",
+      "Lanciatore di Frecce",
+      "Inutile",
+      "Senza Senso",
+      "Perché?",
+      "No!",
+      "Lanciatore di Stuzzicadenti",
+      "Propulsore di Lance"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Tick-tick-tick",
+      "Munizioni per Pazienza",
+      "Frecce",
+      "Munizioni per Inutile",
+      "Munizioni per Senza Senso",
+      "Munizioni per Perché?",
+      "Munizioni per No!",
+      "Stuzzicadenti",
+      "Lance"
+    ],
+    "INV_ITEM_M16": [
+      "Lettore MP3",
+      "MPEG",
+      "Non l'MP5",
+      "Grande Drrrrrrrrrr"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "Munizioni per Lettore MP3",
+      "Munizioni per MPEG",
+      "Munizioni per Non l'MP5",
+      "Munizioni per Grande Drrrrrrrrrr"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Esploditore di Granate",
+      "Consegna Esplosiva",
+      "Arrostitore di Nemici",
+      "Lanciatore di Bombe",
+      "Spedizione di Granate",
+      "Big Bang",
+      "Big Boom",
+      "Fallo Saltare!"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Granate",
+      "Esplosivi",
+      "Palle di Fuoco",
+      "Bombe",
+      "Granate",
+      "Big Bangs",
+      "Big Booms",
+      "Munizioni per Fallo Saltare!"
+    ],
+    "INV_ITEM_MEDI": [
+      "Medi-kit Minuscolo",
+      "Medi-kit Piccino",
+      "Medi-kit Piccolo",
+      "Medi-kit Minuto",
+      "Medi-kit Microscopico",
+      "Piccolo Cerotto per la bua"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Medi-kit Gigante",
+      "Medi-kit Enorme",
+      "Medi-kit Titanico",
+      "Medi-kit Massiccio",
+      "Medi-kit Smisurato",
+      "Grande Cerotto per la bua"
+    ],
+    "HEADING_ITEMS": [
+      "COSE",
+      "ROBE",
+      "COLLEZIONE",
+      "BOTTINO",
+      "ROTTAMI",
+      "OH LUCCICA",
+      "IL MIO TESORO"
+    ],
+    "HEADING_GAME_OVER": [
+      "LARA È MORTA",
+      "RIPROVARE?",
+      "RIPROVARE? DIVENTA PIÙ BRAVO",
+      "ANDRÀ MEGLIO LA PROSSIMA VOLTA",
+      "GIT GUD",
+      "RAGE QUIT!",
+      "Pronto per la NLNMAS?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Statistiche",
+      "Statistiche Vitali",
+      "Numeri Macinati",
+      "NON PUOI CURARTI!",
+      "Dati Segreti!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NULL -",
+      "- NON C'È NIENTE QUI -",
+      "- NON DEFINITO -",
+      "- HEY, QUESTO SLOT È LIBERO -"
+    ]
+  },
   "LevelStrings": {
+    "ASSAULT.TR2": {
+      "Names": [
+        "Croft Manor",
+        "Core Design HQ",
+        "TR2Rando HQ",
+        "Gli Scavi di Lara",
+        "Il Frigo di Winston",
+        "Scongela Winston!"
+      ]
+    },
     "WALL.TR2": {
       "Names": [
         "Cina Parte 1",
@@ -223,8 +189,8 @@
         "La Valle Perduta 2.0",
         "La Strada per Xian"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Chiave della Stanza 4",
           "Chiave della Casa dei Meme",
           "Una Chiave",
@@ -235,7 +201,7 @@
           "Forse la Chiave 1?",
           "Forse la Chiave 2?"
         ],
-        "1": [
+        "Key2": [
           "Chiave del Ragno",
           "Chiave Croccante",
           "Una Chiave",
@@ -249,7 +215,6 @@
         ]
       }
     },
-
     "BOAT.TR2": {
       "Names": [
         "Italia Parte 1",
@@ -263,8 +228,8 @@
         "Lontano da Casa",
         "That's Amore"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Boaty McKey Face",
           "Una Chiave",
           "La Chiave",
@@ -276,7 +241,7 @@
           "Accesso alla Navigazione",
           "Garage della Barca"
         ],
-        "1": [
+        "Key2": [
           "Chiave della Stanza 82",
           "Chiave di Metallo",
           "Una Chiave",
@@ -287,7 +252,7 @@
           "Non è un grimaldello",
           "Questa Chiave"
         ],
-        "2": [
+        "Key3": [
           "Chiave Ferro da Stiro",
           "Chiave di Iron Fist",
           "Braccio di Ferro",
@@ -300,7 +265,6 @@
         ]
       }
     },
-
     "VENICE.TR2": {
       "Names": [
         "Italia Parte 2",
@@ -313,8 +277,8 @@
         "La Monna Lisa",
         "Un'uscita col Botto"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Chiave della Stanza dei Libri",
           "Una Chiave",
           "La Chiave",
@@ -329,7 +293,7 @@
           "Chiave del Nascondiglio Segreto",
           "Alohomora"
         ],
-        "1": [
+        "Key2": [
           "Chiave TNT",
           "Chiave Scoppio",
           "Chiave Esplosione",
@@ -346,7 +310,6 @@
         ]
       }
     },
-
     "OPERA.TR2": {
       "Names": [
         "Italia Parte 3",
@@ -361,8 +324,8 @@
         "Si va in scena!",
         "Prepara lo Spettacolo"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Chiave Elegante",
           "Chiave Chic",
           "Chiave Appariscente",
@@ -374,10 +337,8 @@
           "La Chiave della Porta",
           "Chiave Pavimento Traballante",
           "Do Diesis"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzzle 1",
           "Ripara l'ascensore",
           "Ripara l'ascensore",
@@ -387,7 +348,7 @@
           "Ding",
           "No Music Fix"
         ],
-        "1": [
+        "Puzzle2": [
           "Puzzle 2",
           "Scheda Madre",
           "Scheda Madre ACME",
@@ -400,7 +361,6 @@
         ]
       }
     },
-
     "RIG.TR2": {
       "Names": [
         "La Piattaforma",
@@ -415,8 +375,8 @@
         "Mal di Testa",
         "La sicurezza è a rischio"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Tessera Sabbie Mobili",
           "Tessera Barile",
           "Tessera 2",
@@ -425,7 +385,7 @@
           "Visa Express",
           "Non deformare"
         ],
-        "1": [
+        "Key2": [
           "Tessera QWOP",
           "Spegni quell'allarme",
           "Tessera 1",
@@ -434,7 +394,7 @@
           "Mastercard Express",
           "Non rompere"
         ],
-        "2": [
+        "Key3": [
           "Tessera della Stanza 37",
           "Tessera non necessaria",
           "Tessera 3",
@@ -445,7 +405,6 @@
         ]
       }
     },
-
     "PLATFORM.TR2": {
       "Names": [
         "Piattaforma Offshore 2",
@@ -457,24 +416,22 @@
         "Yellow Submarine",
         "Attenzione alla sega"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Tessera della Stanza 12",
           "Tessera non identificata",
           "Tessera 2",
           "Carta d'Identità di Lara",
           "Non rompere!"
         ],
-        "3": [
+        "Key4": [
           "Tessera della Stanza 49",
           "Tessera non identificata",
           "Tessera 1",
           "Carta d'Identità di Winston",
           "Non piegare!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Scheda Madre",
           "Scheda Madre ACME",
           "PC Pro 97",
@@ -487,7 +444,6 @@
         ]
       }
     },
-
     "UNWATER.TR2": {
       "Names": [
         "Sott'acqua Parte 1",
@@ -503,7 +459,6 @@
         "In Fondo al Mar"
       ]
     },
-
     "KEEL.TR2": {
       "Names": [
         "Sott'acqua Parte 2",
@@ -516,8 +471,8 @@
         "Nave Anti-Gravità",
         "Distrutto"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Chiave del Gabinetto",
           "Chiave del Bagno",
           "Una Chiave",
@@ -526,7 +481,7 @@
           "Chiave A",
           "Dov'è il Bagno?"
         ],
-        "1": [
+        "Key2": [
           "Chiave Croccante",
           "Una Chiave",
           "La Chiave",
@@ -534,7 +489,7 @@
           "Chiave B",
           "Chiave di una Porta"
         ],
-        "2": [
+        "Key3": [
           "Chiave della Stanza",
           "Chi è?",
           "Una Chiave",
@@ -543,10 +498,8 @@
           "Chiave C",
           "Nuova Chiave?",
           "Dov'è la serratura?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Fuoco-Circuitatore",
           "Puzzle a forma di T",
           "Estintore",
@@ -556,7 +509,6 @@
         ]
       }
     },
-
     "LIVING.TR2": {
       "Names": [
         "Sott'acqua Parte 3",
@@ -569,8 +521,8 @@
         "Nessuno in Casa",
         "Saloni Disabitati"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Chiave Drammatica",
           "Chiave Melodrammatica",
           "Chiave Tragica",
@@ -582,7 +534,7 @@
           "Chiave dell'Opera",
           "The Show must go on!"
         ],
-        "1": [
+        "Key2": [
           "Chiave Croccante",
           "Una Chiave",
           "La Chiave",
@@ -594,7 +546,6 @@
         ]
       }
     },
-
     "DECK.TR2": {
       "Names": [
         "Circa Sott'acqua Parte 4",
@@ -604,8 +555,8 @@
         "L'Iceberg Vince",
         "Una Grossa Sacca d'Aria"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Chiave di Poppa",
           "Chiave Dura",
           "Chiave Crudele",
@@ -621,7 +572,7 @@
           "Chiave 1",
           "Chiave A"
         ],
-        "2": [
+        "Key3": [
           "Chiave Dispensa",
           "Chiave Dispensa?",
           "Chiave Dispersa",
@@ -636,7 +587,7 @@
           "Chiave 2",
           "Chiave B"
         ],
-        "3": [
+        "Key4": [
           "Chiave Cabina",
           "Chiave Stanza",
           "Chiave della Porta",
@@ -649,10 +600,8 @@
           "La Chiave",
           "Chiave 3",
           "Chiave C"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "L'Angelo",
           "Il Cherubino",
           "Puzzle 1",
@@ -663,7 +612,6 @@
         ]
       }
     },
-
     "SKIDOO.TR2": {
       "Names": [
         "Tibet Parte 1",
@@ -679,8 +627,8 @@
         "Skidoo Mania",
         "Fai un Pupazzo di Neve"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Chiave Ponte",
           "Chiave Inutile",
           "No, non è questa",
@@ -693,7 +641,7 @@
           "Tu mi tiri su!",
           "Chiave per creare una piattaforma"
         ],
-        "1": [
+        "Key2": [
           "Chiave Ripostiglio",
           "Chiave Ripostiglio?",
           "Chiave per il Tibet Skip",
@@ -706,10 +654,8 @@
           "Chiave Speedrun",
           "La più ricercata!",
           "Chiave per l'interno"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "L'Angelo",
           "Il Cherubino",
           "Puzzle 1",
@@ -720,7 +666,6 @@
         ]
       }
     },
-
     "MONASTRY.TR2": {
       "Names": [
         "Tibet Parte 2",
@@ -735,36 +680,34 @@
         "Monastero delle Chiavi",
         "Non è Sister Act"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Chiave Stanza Relax",
           "Chiave per Palestrati",
           "Chiave per una Chiave"
         ],
-        "1": [
+        "Key2": [
           "Chiave B8LA",
           "Chiave per l'esterno 1",
           "Ce ne andiamo da qui?",
           "Chiave per nessuna stanza? O.o",
           "Chiave della porta sul retro"
         ],
-        "2": [
+        "Key3": [
           "Chiave Sola",
           "Scorciatoia per la cima",
           "Chiave Occhi Sfuggenti",
           "Chiave per l'esterno 2"
         ],
-        "3": [
+        "Key4": [
           "TR2Chiave Salone Principale",
           "Chiave Salone Principessale",
           "Chiave Grande Stanza",
           "Chiave Niente Tuffo ad Angelo",
           "Chiave Buddah",
           "Chiave Atrio"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Tipo una Ruota di Preghiera",
           "Ruota Mani",
           "Ruota Chen",
@@ -773,14 +716,14 @@
           "Chi ha inventato questa Ruota?",
           "L'Aiutante Stanco"
         ],
-        "1": [
+        "Puzzle2": [
           "Diamanti",
           "Il Bottino di Barkhang",
           "Gem & Me",
           "Ohhh luccica!",
           "18 Carati"
         ],
-        "3": [
+        "Puzzle4": [
           "L'Angelo",
           "Il Cherubino",
           "Puzzle 3",
@@ -792,7 +735,6 @@
         ]
       }
     },
-
     "CATACOMB.TR2": {
       "Names": [
         "Tibet Parte 3",
@@ -805,20 +747,8 @@
         "È Scuro Qui!",
         "Stanza Buia dello Yeti"
       ],
-      "Pickups": {
-        "0": [
-          "Martello del Gong?",
-          "Aspetta, cosa?",
-          "Buona Pasqua",
-          "Hem, Signor Gong? Ahah!",
-          "Questo non dovrebbe essere qui",
-          "...???",
-          "Bacchetta per Xilofono",
-          "Vabbè, pazienza!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Mascherina",
           "Una Maschera",
           "La Maschera",
@@ -828,10 +758,19 @@
           "Metti la mascherina!",
           "Maschera Carina",
           "Maschera Brutta"
+        ],
+        "Pickup1": [
+          "Martello del Gong?",
+          "Aspetta, cosa?",
+          "Buona Pasqua",
+          "Hem, Signor Gong? Ahah!",
+          "Questo non dovrebbe essere qui",
+          "...???",
+          "Bacchetta per Xilofono",
+          "Vabbè, pazienza!"
         ]
       }
     },
-
     "ICECAVE.TR2": {
       "Names": [
         "Tibet Parte 4",
@@ -850,8 +789,8 @@
         "Winston approva!",
         "Grande Frigo di Winston"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Signor Gong Martello",
           "Il Martello",
           "Bravo Gong",
@@ -862,22 +801,8 @@
           "Rompighiaccio",
           "Bacchetta per batteria",
           "Mazza del Gong"
-        ]
-      },
-      "Pickups": {
-        "1": [
-          "Talion",
-          "Tesoro del Pollo",
-          "Apri quella porta, Lara",
-          "LIBERA IL POLLO!",
-          "Roba dorata",
-          "Chiave della Porta di Xian",
-          "LUCCICA!",
-          "Preso e subito andato!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Mascherina",
           "Maschera che si può skippare",
           "La Maschera",
@@ -887,10 +812,19 @@
           "C'è qualcuno che la usa ancora?",
           "Maschera di bellezza di Lara",
           "Cassandra"
+        ],
+        "Pickup2": [
+          "Talion",
+          "Tesoro del Pollo",
+          "Apri quella porta, Lara",
+          "LIBERA IL POLLO!",
+          "Roba dorata",
+          "Chiave della Porta di Xian",
+          "LUCCICA!",
+          "Preso e subito andato!"
         ]
       }
     },
-
     "EMPRTOMB.TR2": {
       "Names": [
         "Cina Parte 2",
@@ -904,8 +838,8 @@
         "La Corsa al Pugnale",
         "Si torna all'inizio"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Una Chiave",
           "La Chiave",
           "Chiave 1",
@@ -913,7 +847,7 @@
           "Au",
           "Chiave di una porta"
         ],
-        "2": [
+        "Key3": [
           "Una Chiave",
           "La Chiave",
           "Chiave 2",
@@ -921,16 +855,14 @@
           "Solo una Chiave",
           "Sei sopravvissuta ai Ragni!"
         ],
-        "3": [
+        "Key4": [
           "TR2Chiave Camera Principale",
           "Una Chiave",
           "La Chiave",
           "Chiave 3",
           "L'unica Chiave che ti serve"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzzle 1",
           "Tappabuchi Stanza 41",
           "Mascherina",
@@ -940,7 +872,6 @@
         ]
       }
     },
-
     "FLOATING.TR2": {
       "Names": [
         "Cina Parte 3",
@@ -954,8 +885,8 @@
         "Tuffo a Angelo nel Fuoco",
         "Lego Galleggianti"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Un Biscotto",
           "Biscotto 1",
           "Biscotto A",
@@ -964,7 +895,7 @@
           "Biscotto Magico",
           "Biscotto della Fortuna"
         ],
-        "1": [
+        "Puzzle2": [
           "Un Biscotto",
           "Biscotto 2",
           "Biscotto B",
@@ -976,7 +907,6 @@
         ]
       }
     },
-
     "XIAN.TR2": {
       "Names": [
         "Cina Parte 4",
@@ -994,8 +924,8 @@
         "Non puoi bruciarmi!",
         "Statue, Coltelli e Fuoco"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Un Biscotto",
           "Il Biscotto",
           "Formaggio e Biscotti",
@@ -1003,7 +933,7 @@
           "Il Marchio della Cricca",
           "Biscotto non commestibile"
         ],
-        "1": [
+        "Puzzle2": [
           "Il Bottino di Xian",
           "Il Pugnale del Drago",
           "Grosso Coltello",
@@ -1018,7 +948,6 @@
         ]
       }
     },
-
     "HOUSE.TR2": {
       "Names": [
         "CDC",
@@ -1034,8 +963,8 @@
         "A casa... ma non da sola",
         "Sei ancora qui?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Chiave Ripostiglio",
           "Chiave Arsenale",
           "La Chiave",
@@ -1046,10 +975,8 @@
           "Chiave Boom Boom",
           "Chiave per addestramento autodifesa",
           "Chiave Armeria"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Il Bottino di Xian",
           "Il Pugnale del Drago",
           "Grosso Coltello",
