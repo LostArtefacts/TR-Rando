@@ -5,6 +5,7 @@
 - added an option to stack rewards with secrets in TR1 and TR3, rather than using reward rooms (#687)
 - added separate secret audio for TR1 and TR3 when not using reward rooms (#687)
 - added an option to shuffle items rather than randomize their types and locations in each level (#625)
+- added an option to control weapon allocation in item randomization (#690)
 - fixed several potential key item softlocks in TR2 (#691)
 - fixed a key item softlock in Crash Site (#662)
 - fixed incorrect item and mesh positions in Home Sweet Home when mirrored (#676)

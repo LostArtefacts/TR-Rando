@@ -4,6 +4,9 @@ public static class CollectionExtensions
 {
     private const int _defaultShuffleCount = 5;
 
+    public static T RandomItem<T>(this List<T> list, Random random)
+        => list[random.Next(0, list.Count)];
+
     public static List<T> RandomSelection<T>(this List<T> list, Random rand, int count, bool allowDuplicates = false, ISet<T> exclusions = null)
     {
         count = Math.Abs(count);

@@ -196,7 +196,9 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
         }
 
         List<TR1Type> stdItemTypes = GetStandardItemTypes();
+        List<TR1Type> weaponTypes = GetWeaponItemTypes();
         stdItemTypes.Remove(GetPistolType());
+        stdItemTypes.RemoveAll(weaponTypes.Contains);
 
         // Add what we can to the level. The locations and types may be further randomized depending on the selected options.
         for (int i = 0; i < _extraItemCounts[levelName]; i++)

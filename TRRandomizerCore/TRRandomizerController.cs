@@ -1107,6 +1107,12 @@ public class TRRandomizerController
         set => LevelRandomizer.ItemMode = value;
     }
 
+    public WeaponDifficulty WeaponDifficulty
+    {
+        get => LevelRandomizer.WeaponDifficulty;
+        set => LevelRandomizer.WeaponDifficulty = value;
+    }
+
     public bool IncludeKeyItems
     {
         get => LevelRandomizer.IncludeKeyItems;

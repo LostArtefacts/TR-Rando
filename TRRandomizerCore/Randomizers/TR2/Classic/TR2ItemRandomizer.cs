@@ -36,6 +36,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             ItemFactory = ItemFactory,
         };
 
+        _allocator.AllocateWeapons(Levels.Where(l => !l.Is(TR2LevelNames.ASSAULT)));
+
         foreach (TR2ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);

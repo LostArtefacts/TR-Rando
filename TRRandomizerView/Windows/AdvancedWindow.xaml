@@ -64,9 +64,11 @@
                     <Setter Property="Grid.ColumnSpan"
                             Value="2" />
                 </Style>
+                <cvt:ComparisonConverter x:Key="ComparisonConverter" />
             </Grid.Resources>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -111,10 +113,6 @@
             <StackPanel
                 Grid.Row="1"
                 Visibility="{Binding HasItemDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"
                     Text="Item Mode"/>
@@ -194,15 +192,45 @@
                 </ItemsControl>
             </StackPanel>
 
-            <!-- (Key Item) Difficulty -->
+            <!-- Weapon Difficulty -->
             <StackPanel
                 Grid.Row="3"
+                Visibility="{Binding HasItemDifficulty, Converter={StaticResource BoolToCollapsedConverter}}"
+                IsEnabled="{Binding ControllerProxy.WeaponDifficultyAvailable}">
+                <TextBlock
+                    Style="{StaticResource HeaderStyle}"
+                    Text="Weapon Difficulty"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border VerticalAlignment="Top">
+                        <ComboBox
+                            ItemsSource="{Binding ControllerProxy.WeaponDifficulties}"
+                            SelectedItem="{Binding ControllerProxy.WeaponDifficulty, Mode=TwoWay}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"/>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label
+                            Style="{StaticResource OptionDescriptionStyle}"
+                            Content="Sets the relative difficulty of how weapons are allocated throughout the game."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+            
+            <!-- (Key Item) Difficulty -->
+            <StackPanel
+                Grid.Row="4"
                 IsEnabled="{Binding ControllerProxy.IncludeKeyItemsImplied}"
                 Visibility="{Binding HasItemDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"
                     Text="Key Item Range" />
@@ -242,12 +270,8 @@
             </StackPanel>
 
             <!-- (Item) SpriteRandomization -->
-            <StackPanel Grid.Row="4"
+            <StackPanel Grid.Row="5"
                         Visibility="{Binding HasItemSpriteRandomization, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Sprite Randomization" />
 
@@ -338,12 +362,8 @@
             </StackPanel>
 
             <!-- Chicken Behaviour -->
-            <StackPanel Grid.Row="5"
+            <StackPanel Grid.Row="6"
                         Visibility="{Binding HasBirdMonsterBehaviour, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Bird Monster Behaviour"/>
 
@@ -419,12 +439,8 @@
             </StackPanel>
 
             <!-- Dragon Spawn -->
-            <StackPanel Grid.Row="6"
+            <StackPanel Grid.Row="7"
                         Visibility="{Binding HasDragonSpawn, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Dragon Spawns"/>
 
@@ -486,12 +502,8 @@
             </StackPanel>
 
             <!-- (Enemy) Difficulty -->
-            <StackPanel Grid.Row="7"
+            <StackPanel Grid.Row="8"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Difficulty"/>
 
@@ -546,12 +558,8 @@
             </StackPanel>
 
             <!-- Enemy Exclusions -->
-            <StackPanel Grid.Row="8"
+            <StackPanel Grid.Row="9"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Excluded Enemies"/>
 
@@ -589,7 +597,7 @@
             </StackPanel>
 
             <!-- Language -->
-            <StackPanel Grid.Row="9"
+            <StackPanel Grid.Row="10"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -617,7 +625,7 @@
             </StackPanel>
 
             <!-- Mirrored Levels -->
-            <StackPanel Grid.Row="10"
+            <StackPanel Grid.Row="11"
                         Visibility="{Binding HasMirroring, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -671,7 +679,7 @@
             </StackPanel>
 
             <!-- Haircuts -->
-            <StackPanel Grid.Row="11"
+            <StackPanel Grid.Row="12"
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -744,7 +752,7 @@
             </StackPanel>
 
             <!-- Invisibility -->
-            <StackPanel Grid.Row="12"
+            <StackPanel Grid.Row="13"
                         Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -798,7 +806,7 @@
             </StackPanel>
 
             <!-- Night Mode general -->
-            <StackPanel Grid.Row="13"
+            <StackPanel Grid.Row="14"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -989,7 +997,7 @@
             </StackPanel>
 
             <!-- Intensity -->
-            <StackPanel Grid.Row="14"
+            <StackPanel Grid.Row="15"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1045,12 +1053,8 @@
             </StackPanel>
 
             <!-- TR3 Globe Options -->
-            <StackPanel Grid.Row="15"
+            <StackPanel Grid.Row="16"
                         Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Globe Display"/>
 
@@ -1113,13 +1117,8 @@
 
             <!-- Game Mode -->
             <StackPanel
-                Grid.Row="16"
+                Grid.Row="17"
                 Visibility="{Binding HasGameModeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
-
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"
                     Text="Game Mode"/>
@@ -1160,7 +1159,7 @@
             </StackPanel>
 
             <!-- Level Count -->
-            <StackPanel Grid.Row="17"
+            <StackPanel Grid.Row="18"
                         Visibility="{Binding HasLevelCount, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1207,7 +1206,7 @@
             </StackPanel>
 
             <!-- Wireframing -->
-            <StackPanel Grid.Row="18"
+            <StackPanel Grid.Row="19"
                         Visibility="{Binding HasTextureOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1369,7 +1368,7 @@
             </StackPanel>
 
             <!-- SFX -->
-            <StackPanel Grid.Row="19"
+            <StackPanel Grid.Row="20"
                         Visibility="{Binding HasSFXOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1423,7 +1422,7 @@
             </StackPanel>
 
             <!-- Mediless -->
-            <StackPanel Grid.Row="20"
+            <StackPanel Grid.Row="21"
                         Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}"
                         IsEnabled="{Binding ControllerProxy.IsMedilessTypeSupported}">
 
@@ -1470,7 +1469,7 @@
             </StackPanel>
 
             <!-- Starting Health -->
-            <StackPanel Grid.Row="21"
+            <StackPanel Grid.Row="22"
                         Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1550,13 +1549,8 @@
 
             <!-- Reward Mode -->
             <StackPanel
-                Grid.Row="22"
+                Grid.Row="23"
                 Visibility="{Binding HasSecretRewardMode, Converter={StaticResource BoolToCollapsedConverter}}">
-
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"
                     Text="Secret Reward Mode"/>
@@ -1618,13 +1612,9 @@
             </StackPanel>
             
             <!-- Secret Count -->
-            <StackPanel Grid.Row="23"
+            <StackPanel Grid.Row="24"
                         Visibility="{Binding HasSecretCountMode, Converter={StaticResource BoolToCollapsedConverter}}"
                         IsEnabled="{Binding ControllerProxy.UseGenericSecrets}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Secret Count Mode"/>
 
@@ -1694,12 +1684,8 @@
             </StackPanel>
 
             <!-- Secret Packs -->
-            <StackPanel Grid.Row="24"
+            <StackPanel Grid.Row="25"
                         Visibility="{Binding HasSecretPackMode, Converter={StaticResource BoolToCollapsedConverter}}">
-                <StackPanel.Resources>
-                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                </StackPanel.Resources>
-
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Secret Packs"/>
 
@@ -1746,7 +1732,7 @@
             </StackPanel>
 
             <!-- Weather -->
-            <StackPanel Grid.Row="25"
+            <StackPanel Grid.Row="26"
                         Visibility="{Binding HasWeatherMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1858,7 +1844,7 @@
             
             <!-- Enemy Clones -->
             <StackPanel
-                Grid.Row="26"
+                Grid.Row="27"
                 Visibility="{Binding HasClonedEnemyMode, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"

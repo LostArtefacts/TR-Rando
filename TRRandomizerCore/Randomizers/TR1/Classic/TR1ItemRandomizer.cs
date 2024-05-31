@@ -23,6 +23,8 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             ItemFactory = ItemFactory,
         };
 
+        _allocator.AllocateWeapons(Levels.Where(l => !l.Is(TR1LevelNames.ASSAULT)));
+
         foreach (TR1ScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
@@ -117,6 +119,11 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
     {
         List<TR1Type> stdItemTypes = TR1TypeUtilities.GetStandardPickupTypes();
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P);
+        if (Settings.WeaponDifficulty != WeaponDifficulty.Easy)
+        {
+            List<TR1Type> weapons = TR1TypeUtilities.GetWeaponPickups();
+            stdItemTypes.RemoveAll(weapons.Contains);
+        }
 
         foreach (TR1Entity enemy in level.Data.Entities.Where(e => TR1TypeUtilities.IsEnemyType(e.TypeID)))
         {
