@@ -14,7 +14,6 @@
         ShowInTaskbar="False"
         SizeToContent="WidthAndHeight"
         Loaded="Window_Loaded"
-        IsVisibleChanged="Window_IsVisibleChanged"
         Closing="Window_Closing"
         Title="Advanced">
     <Window.Resources>
@@ -68,7 +67,6 @@
             </Grid.Resources>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -166,25 +164,40 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Border Margin="0,5,0,0">
-                                    <CheckBox IsEnabled="{Binding IsActive}"
-                                              IsChecked="{Binding Value, Mode=TwoWay}"
-                                              VerticalAlignment="Top">
-                                        <Label Padding="0"
-                                               Content="{Binding Title}" />
+                                    <CheckBox
+                                        IsEnabled="{Binding IsActive}"
+                                        IsChecked="{Binding Value, Mode=TwoWay}"
+                                        VerticalAlignment="Top">
+                                        <Label
+                                            Padding="0"
+                                            Content="{Binding Title}" />
                                     </CheckBox>
                                 </Border>
 
-                                <Border Grid.Column="1"
-                                        Margin="0,5,0,0"
-                                        IsEnabled="{Binding IsActive}">
-                                    <Label Style="{StaticResource OptionDescriptionStyle}"
-                                           Content="{Binding Description}">
-                                        <Label.Resources>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="TextWrapping" Value="Wrap" />
-                                            </Style>
-                                        </Label.Resources>
-                                    </Label>
+                                <Border
+                                    Grid.Column="1"
+                                    Margin="0,5,0,0"
+                                    IsEnabled="{Binding IsActive}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Style="{StaticResource OptionDescriptionStyle}"
+                                            Content="{Binding Description}"/>
+                                        <Label
+                                            Style="{StaticResource OptionDescriptionStyle}"
+                                            Margin="3,0,0,0"
+                                            Visibility="{Binding HasHelpURL, Converter={StaticResource BoolToCollapsedConverter}}">
+                                            <Label.Content>
+                                                <TextBlock>
+                                                    <Run>See</Run>
+                                                    <Hyperlink
+                                                        ToolTip="{Binding HelpURL}"
+                                                        NavigateUri="{Binding HelpURL}"
+                                                        RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
+                                                    <Run>for details.</Run>
+                                                </TextBlock>
+                                            </Label.Content>
+                                        </Label>
+                                    </StackPanel>
                                 </Border>
                             </Grid>
                         </DataTemplate>
@@ -370,69 +383,39 @@
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
-                        <RadioButton Content="Default"
-                                     GroupName="birdMonsterBehaviour"
-                                     x:Name="_defaultBirdBehaviourButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.BirdMonsterBehaviour, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:BirdMonsterBehaviour.Default}, Mode=TwoWay}"/>
+                    <Border VerticalAlignment="Top">
+                        <ComboBox
+                            ItemsSource="{Binding ControllerProxy.BirdMonsterBehaviours}"
+                            SelectedItem="{Binding ControllerProxy.BirdMonsterBehaviour, Mode=TwoWay}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"/>
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Bird monsters will be aggressive and will end the level when killed."/>
-                    </Border>
-
-                    <Border Grid.Row="1">
-                        <RadioButton Content="Unconditional"
-                                     GroupName="birdMonsterBehaviour"
-                                     x:Name="_unconditionalBirdBehaviourButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.BirdMonsterBehaviour, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:BirdMonsterBehaviour.Unconditional}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Row="1"
-                            Grid.Column="1">
                         <Label Style="{StaticResource OptionDescriptionStyle}">
-                            <TextBlock>
-                                <Run>Bird monsters will be aggressive but will </Run>
-                                <Run TextDecorations="Underline">not </Run>
-                                <Run>end the level when killed.</Run>
-                            </TextBlock>
-                        </Label>
-                    </Border>
-
-                    <Border Grid.Row="2"
-                            Visibility="{Binding ControllerProxy.IsDocileBirdMonsterTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
-                        <RadioButton Content="Docile"
-                                     GroupName="birdMonsterBehaviour"
-                                     x:Name="_docileBirdBehaviourButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.BirdMonsterBehaviour, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:BirdMonsterBehaviour.Docile}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Row="2"
-                            Grid.Column="1"
-                            Visibility="{Binding ControllerProxy.IsDocileBirdMonsterTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
-                        <Label Style="{StaticResource OptionDescriptionStyle}">
-                            <TextBlock>
-                                <Run>Bird monsters will </Run>
-                                <Run TextDecorations="Underline">not </Run>
-                                <Run>be aggressive and will </Run>
-                                <Run TextDecorations="Underline">not </Run>
-                                <Run>end the level when killed.</Run>
-                            </TextBlock>
+                            <Label.Content>
+                                <TextBlock>
+                                    <Run>Choose how bird monsters behave.</Run>
+                                    <LineBreak/>
+                                    <Run>- Default: bird monsters will be aggressive and will end the level when killed.</Run>
+                                    <LineBreak/>
+                                    <Run>- Unconditional: bird monsters will be aggressive but will </Run>
+                                    <Run TextDecorations="Underline">not </Run>
+                                    <Run>end the level when killed.</Run>
+                                    <LineBreak/>
+                                    <Run>- Docile: bird monsters will </Run>
+                                    <Run TextDecorations="Underline">not </Run>
+                                    <Run>be aggressive and will </Run>
+                                    <Run TextDecorations="Underline">not </Run>
+                                    <Run>end the level when killed.</Run>
+                                </TextBlock>
+                            </Label.Content>
                         </Label>
                     </Border>
                 </Grid>
@@ -447,118 +430,40 @@
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
-                        <RadioButton Content="Default"
-                                     GroupName="dragonSpawn"
-                                     x:Name="_defaultDragonSpawnButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.DragonSpawnType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:DragonSpawnType.Default}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Use the normal randomization selection method for dragons."/>
-                    </Border>
-
-                    <Border Grid.Row="1">
-                        <RadioButton Content="Maximum"
-                                     GroupName="dragonSpawn"
-                                     x:Name="_maximumDragonSpawnButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.DragonSpawnType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:DragonSpawnType.Maximum}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Row="1"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Make a best effort attempt to have as many dragons as possible in the game."/>
-                    </Border>
-
-                    <Border Grid.Row="2">
-                        <RadioButton Content="Minimum"
-                                     GroupName="dragonSpawn"
-                                     x:Name="_minimumDragonSpawnButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.DragonSpawnType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:DragonSpawnType.Minimum}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Row="2"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Only the original dragon will spawn."/>
-                    </Border>
-                </Grid>
-            </StackPanel>
-
-            <!-- (Enemy) Difficulty -->
-            <StackPanel Grid.Row="8"
-                        Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
-                <TextBlock Style="{StaticResource HeaderStyle}"
-                           Text="Difficulty"/>
-
-                <Grid Margin="0,5,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Border>
-                        <RadioButton Content="Default"
-                                     GroupName="randoEnemyDifficulty"
-                                     x:Name="_defaultDifficultyButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.RandoEnemyDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:RandoDifficulty.Default}, Mode=TwoWay}"/>
+                    <Border VerticalAlignment="Top">
+                        <ComboBox
+                            ItemsSource="{Binding ControllerProxy.DragonSpawnTypes}"
+                            SelectedItem="{Binding ControllerProxy.DragonSpawnType, Mode=TwoWay}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"/>
                     </Border>
 
                     <Border Grid.Column="1">
                         <Label Style="{StaticResource OptionDescriptionStyle}">
                             <Label.Content>
                                 <TextBlock>
-                                    Standard restrictions will apply for cross-level enemies. See
-                                    <Hyperlink ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/ENEMIES.md"
-                                               NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/ENEMIES.md"
-                                               RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
-                                    for details.
+                                    <Run>Choose how many dragons can potentially spawn in the game.</Run>
+                                    <LineBreak/>
+                                    <Run>- Default: use the normal randomization selection method for dragons.</Run>
+                                    <LineBreak/>
+                                    <Run>- Maximum: make a best effort attempt to have as many dragons as possible in the game.</Run>
+                                    <LineBreak/>
+                                    <Run>- Minimum: only the original dragon will spawn.</Run>
                                 </TextBlock>
                             </Label.Content>
                         </Label>
-                    </Border>
-
-                    <Border Grid.Row="1">
-                        <RadioButton Content="No Restrictions"
-                                     GroupName="randoEnemyDifficulty"
-                                     x:Name="_unrestrictedButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.RandoEnemyDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:RandoDifficulty.NoRestrictions}, Mode=TwoWay}" />
-                    </Border>
-
-                    <Border Grid.Row="1"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Disables virtually all cross-level enemy restrictions except for technical ones."/>
                     </Border>
                 </Grid>
             </StackPanel>
 
             <!-- Enemy Exclusions -->
-            <StackPanel Grid.Row="9"
+            <StackPanel Grid.Row="8"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Excluded Enemies"/>
@@ -597,7 +502,7 @@
             </StackPanel>
 
             <!-- Language -->
-            <StackPanel Grid.Row="10"
+            <StackPanel Grid.Row="9"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -625,7 +530,7 @@
             </StackPanel>
 
             <!-- Mirrored Levels -->
-            <StackPanel Grid.Row="11"
+            <StackPanel Grid.Row="10"
                         Visibility="{Binding HasMirroring, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -679,7 +584,7 @@
             </StackPanel>
 
             <!-- Haircuts -->
-            <StackPanel Grid.Row="12"
+            <StackPanel Grid.Row="11"
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -752,7 +657,7 @@
             </StackPanel>
 
             <!-- Invisibility -->
-            <StackPanel Grid.Row="13"
+            <StackPanel Grid.Row="12"
                         Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -806,7 +711,7 @@
             </StackPanel>
 
             <!-- Night Mode general -->
-            <StackPanel Grid.Row="14"
+            <StackPanel Grid.Row="13"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -997,7 +902,7 @@
             </StackPanel>
 
             <!-- Intensity -->
-            <StackPanel Grid.Row="15"
+            <StackPanel Grid.Row="14"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1053,7 +958,7 @@
             </StackPanel>
 
             <!-- TR3 Globe Options -->
-            <StackPanel Grid.Row="16"
+            <StackPanel Grid.Row="15"
                         Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Globe Display"/>
@@ -1061,63 +966,41 @@
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
-                        <RadioButton Content="Default"
-                                     GroupName="globeTextDisplay"
-                                     x:Name="_globeDefaultButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.GlobeDisplay, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:GlobeDisplayOption.Default}, Mode=TwoWay}"/>
+                    <Border VerticalAlignment="Top">
+                        <ComboBox
+                            ItemsSource="{Binding ControllerProxy.GlobeDisplayOptions}"
+                            SelectedItem="{Binding ControllerProxy.GlobeDisplay, Mode=TwoWay}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"/>
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Leave the default in place - displayed locations may or may not match the next level."/>
-                    </Border>
-
-                    <Border Grid.Row="1">
-                        <RadioButton Content="Show next area"
-                                     GroupName="globeTextDisplay"
-                                     x:Name="_globeAreaButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.GlobeDisplay, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:GlobeDisplayOption.Area}, Mode=TwoWay}"/>
-                    </Border>
-
-                    <Border Grid.Row="1"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Show the next area name when selecting a globe location."/>
-                    </Border>
-
-                    <Border Grid.Row="2">
-                        <RadioButton Content="Show next level"
-                                     GroupName="globeTextDisplay"
-                                     x:Name="_globeLevelButton"
-                                     VerticalAlignment="Center"
-                                     Padding="4,0,0,0"
-                                     IsChecked="{Binding ControllerProxy.GlobeDisplay, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:GlobeDisplayOption.Level}, Mode=TwoWay}" />
-                    </Border>
-
-                    <Border Grid.Row="2"
-                            Grid.Column="1">
-                        <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="Show the next level name when selecting a globe location."/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <Label.Content>
+                                <TextBlock>
+                                    <Run>Choose the wording on the level select globe.</Run>
+                                    <LineBreak/>
+                                    <Run>- Default: displayed locations may or may not match the next level.</Run>
+                                    <LineBreak/>
+                                    <Run>- Area: show the next area name when selecting a globe location e.g. India, South Pacific etc.</Run>
+                                    <LineBreak/>
+                                    <Run>- Level: show the next level name when selecting a globe location e.g. Thames Wharf, Temple Ruins etc.</Run>
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
                     </Border>
                 </Grid>
             </StackPanel>
 
             <!-- Game Mode -->
             <StackPanel
-                Grid.Row="17"
+                Grid.Row="16"
                 Visibility="{Binding HasGameModeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"
@@ -1159,7 +1042,7 @@
             </StackPanel>
 
             <!-- Level Count -->
-            <StackPanel Grid.Row="18"
+            <StackPanel Grid.Row="17"
                         Visibility="{Binding HasLevelCount, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1206,7 +1089,7 @@
             </StackPanel>
 
             <!-- Wireframing -->
-            <StackPanel Grid.Row="19"
+            <StackPanel Grid.Row="18"
                         Visibility="{Binding HasTextureOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1368,7 +1251,7 @@
             </StackPanel>
 
             <!-- SFX -->
-            <StackPanel Grid.Row="20"
+            <StackPanel Grid.Row="19"
                         Visibility="{Binding HasSFXOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1422,7 +1305,7 @@
             </StackPanel>
 
             <!-- Mediless -->
-            <StackPanel Grid.Row="21"
+            <StackPanel Grid.Row="20"
                         Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}"
                         IsEnabled="{Binding ControllerProxy.IsMedilessTypeSupported}">
 
@@ -1469,7 +1352,7 @@
             </StackPanel>
 
             <!-- Starting Health -->
-            <StackPanel Grid.Row="22"
+            <StackPanel Grid.Row="21"
                         Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1549,7 +1432,7 @@
 
             <!-- Reward Mode -->
             <StackPanel
-                Grid.Row="23"
+                Grid.Row="22"
                 Visibility="{Binding HasSecretRewardMode, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"
@@ -1612,7 +1495,7 @@
             </StackPanel>
             
             <!-- Secret Count -->
-            <StackPanel Grid.Row="24"
+            <StackPanel Grid.Row="23"
                         Visibility="{Binding HasSecretCountMode, Converter={StaticResource BoolToCollapsedConverter}}"
                         IsEnabled="{Binding ControllerProxy.UseGenericSecrets}">
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1684,7 +1567,7 @@
             </StackPanel>
 
             <!-- Secret Packs -->
-            <StackPanel Grid.Row="25"
+            <StackPanel Grid.Row="24"
                         Visibility="{Binding HasSecretPackMode, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="Secret Packs"/>
@@ -1732,7 +1615,7 @@
             </StackPanel>
 
             <!-- Weather -->
-            <StackPanel Grid.Row="26"
+            <StackPanel Grid.Row="25"
                         Visibility="{Binding HasWeatherMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -1844,7 +1727,7 @@
             
             <!-- Enemy Clones -->
             <StackPanel
-                Grid.Row="27"
+                Grid.Row="26"
                 Visibility="{Binding HasClonedEnemyMode, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock
                     Style="{StaticResource HeaderStyle}"

@@ -321,61 +321,6 @@ public partial class AdvancedWindow : Window
         Visibility = Visibility.Hidden;
     }
 
-    private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-    {
-        // This should not be here, but in some cases both radio buttons can remain unchecked on load
-        // TODO: This causes opening an AdvancedWindow to automatically become "unsaved"
-        if (HasDifficulty)
-        {
-            _unrestrictedButton.IsChecked = !(_defaultDifficultyButton.IsChecked = ControllerProxy.RandoEnemyDifficulty == RandoDifficulty.Default);
-        }
-        if (HasGlobeOptions)
-        {
-            switch (ControllerProxy.GlobeDisplay)
-            {
-                case GlobeDisplayOption.Default:
-                    _globeDefaultButton.IsChecked = true;
-                    break;
-                case GlobeDisplayOption.Area:
-                    _globeAreaButton.IsChecked = true;
-                    break;
-                case GlobeDisplayOption.Level:
-                    _globeLevelButton.IsChecked = true;
-                    break;
-            }
-        }
-        if (HasBirdMonsterBehaviour)
-        {
-            switch (ControllerProxy.BirdMonsterBehaviour)
-            {
-                case BirdMonsterBehaviour.Default:
-                    _defaultBirdBehaviourButton.IsChecked = true;
-                    break;
-                case BirdMonsterBehaviour.Unconditional:
-                    _unconditionalBirdBehaviourButton.IsChecked = true;
-                    break;
-                case BirdMonsterBehaviour.Docile:
-                    _docileBirdBehaviourButton.IsChecked = true;
-                    break;
-            }
-        }
-        if (HasDragonSpawn)
-        {
-            switch (ControllerProxy.DragonSpawnType)
-            {
-                case DragonSpawnType.Default:
-                    _defaultDragonSpawnButton.IsChecked = true;
-                    break;
-                case DragonSpawnType.Maximum:
-                    _maximumDragonSpawnButton.IsChecked = true;
-                    break;
-                case DragonSpawnType.Minimum:
-                    _minimumDragonSpawnButton.IsChecked = true;
-                    break;
-            }
-        }
-    }
-
     private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
     {
         ProcessUtils.OpenURL(e.Uri.AbsoluteUri);
