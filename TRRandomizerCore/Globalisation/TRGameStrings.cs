@@ -2,12 +2,12 @@
 
 namespace TRRandomizerCore.Globalisation;
 
-public class TR1GameStrings : IGameStrings
+public class TRGameStrings
 {
-    public Dictionary<string, List<string>> GlobalStrings { get; set; }
-    public Dictionary<string, TR1LevelStrings> LevelStrings { get; set; }
+    public Dictionary<TRStringKey, List<string>> GlobalStrings { get; set; }
+    public Dictionary<string, TRLevelStrings> LevelStrings { get; set; }
 
-    public string Encode(string text)
+    public static string Encode(string text)
     {
         // Uppercase accented characters will be normalised in all cases.
         // Some lowercase accented characters are supported.

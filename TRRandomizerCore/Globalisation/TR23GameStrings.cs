@@ -2,7 +2,7 @@
 
 namespace TRRandomizerCore.Globalisation;
 
-public class TR23GameStrings : IGameStrings
+public class TR23GameStrings
 {
     public GlobalStrings[] GlobalStrings { get; set; }
     public Dictionary<string, TR23LevelStrings> LevelStrings { get; set; }

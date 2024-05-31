@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using TRRandomizerCore.Helpers;
 using TRRandomizerView.Model;
 using TRRandomizerView.Utilities;
 
