@@ -272,11 +272,6 @@ public class OptionGenerator
     private void RandomizeEnemyOptions()
     {
         RandomizeBoolItems(_options.EnemyBoolItemControls);
-        do
-        {
-            _options.RandoEnemyDifficulty = GetRandomEnumValue<RandoDifficulty>(typeof(RandoDifficulty));
-        }
-        while (_options.RandoEnemyDifficulty == RandoDifficulty.DefaultOrNoRestrictions); // Used internally only and is not a UI option
         if (_options.IsBirdMonsterBehaviourTypeSupported)
         {
             _options.BirdMonsterBehaviour = GetRandomEnumValue<BirdMonsterBehaviour>(typeof(BirdMonsterBehaviour));

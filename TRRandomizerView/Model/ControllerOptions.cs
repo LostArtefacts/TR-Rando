@@ -38,7 +38,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private bool _useRewardRoomCameras;
     private uint _minSecretCount, _maxSecretCount;
     private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity, _oneItemDifficulty;
-    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems;
+    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems, _unrestrictedEnemyDifficulty;
     private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures, _retainLaraTextures;
     private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
     private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
@@ -90,13 +90,18 @@ public class ControllerOptions : INotifyPropertyChanged
     private List<BoolItemIDControlClass> _selectableEnemies;
     private bool _useEnemyExclusions, _showExclusionWarnings;
 
-    private RandoDifficulty _randoEnemyDifficulty;
+    private ItemRange[] _itemRanges;
     private ItemRange _keyItemRange;
+
+    private GlobeDisplayOption[] _globeDisplayOptions;
     private GlobeDisplayOption _globeDisplayOption;
+
+    private BirdMonsterBehaviour[] _birdMonsterBehaviours;
     private BirdMonsterBehaviour _birdMonsterBehaviour;
+
+    private DragonSpawnType[] _dragonSpawnTypes;
     private DragonSpawnType _dragonSpawnType;
 
-    private ItemRange[] _itemRanges;
     private Language[] _availableLanguages;
     private Language _gameStringLanguage;
 
@@ -1092,6 +1097,16 @@ public class ControllerOptions : INotifyPropertyChanged
         set
         {
             _globeDisplayOption = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public GlobeDisplayOption[] GlobeDisplayOptions
+    {
+        get => _globeDisplayOptions;
+        private set
+        {
+            _globeDisplayOptions = value;
             FirePropertyChanged();
         }
     }
@@ -2455,12 +2470,32 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public BirdMonsterBehaviour[] BirdMonsterBehaviours
+    {
+        get => _birdMonsterBehaviours;
+        private set
+        {
+            _birdMonsterBehaviours = value;
+            FirePropertyChanged();
+        }
+    }
+
     public DragonSpawnType DragonSpawnType
     {
         get => _dragonSpawnType;
         set
         {
             _dragonSpawnType = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public DragonSpawnType[] DragonSpawnTypes
+    {
+        get => _dragonSpawnTypes;
+        private set
+        {
+            _dragonSpawnTypes = value;
             FirePropertyChanged();
         }
     }
@@ -2515,12 +2550,12 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
-    public RandoDifficulty RandoEnemyDifficulty
+    public BoolItemControlClass UnrestrictedEnemyDifficulty
     {
-        get => _randoEnemyDifficulty;
+        get => _unrestrictedEnemyDifficulty;
         set
         {
-            _randoEnemyDifficulty = value;
+            _unrestrictedEnemyDifficulty = value;
             FirePropertyChanged();
         }
     }
@@ -3099,6 +3134,13 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "If a level is unarmed, give extra ammo, medipacks and a weapon other than the pistols (based on enemy difficulty)."
         };
         BindingOperations.SetBinding(GiveUnarmedItems, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+        UnrestrictedEnemyDifficulty = new()
+        {
+            Title = "Unrestricted difficulty",
+            Description = "Disables virtually all cross-level enemy restrictions except for technical ones.",
+            HelpURL = "https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/ENEMIES.md",
+        };
+        BindingOperations.SetBinding(UnrestrictedEnemyDifficulty, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
         // Textures
         Binding randomizeTexturesBinding = new(nameof(RandomizeTextures)) { Source = this };
@@ -3339,52 +3381,78 @@ public class ControllerOptions : INotifyPropertyChanged
         {
             _randomizeLevelSequencing
         };
-        SecretBoolItemControls = new List<BoolItemControlClass>()
+        SecretBoolItemControls = new()
         {
             _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRandomSecretModels
         };
-        ItemBoolItemControls = new List<BoolItemControlClass>()
+        ItemBoolItemControls = new()
         {
             _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _allowReturnPathLocations, _allowEnemyKeyDrops, _oneItemDifficulty, _maintainKeyContinuity, _includeExtraPickups
         };
-        EnemyBoolItemControls = new List<BoolItemControlClass>()
+        EnemyBoolItemControls = new()
         {
-            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems,_allowEnemyKeyDrops
+            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems,_allowEnemyKeyDrops, _unrestrictedEnemyDifficulty
         };
-        TextureBoolItemControls = new List<BoolItemControlClass>()
+        TextureBoolItemControls = new()
         {
             _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainLaraTextures, _retainEnemyTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
         };
-        AudioBoolItemControls = new List<BoolItemControlClass>()
+        AudioBoolItemControls = new()
         {
             _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX,
             _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble
         };
-        OutfitBoolItemControls = new List<BoolItemControlClass>()
+        OutfitBoolItemControls = new()
         {
             _persistOutfits, _removeRobeDagger, _allowGymOutfit
         };
-        TextBoolItemControls = new List<BoolItemControlClass>
+        TextBoolItemControls = new()
         {
             _retainKeyItemNames, _retainLevelNames
         };
-        StartBoolItemControls = new List<BoolItemControlClass>
+        StartBoolItemControls = new()
         {
             _rotateStartPosition
         };
-        EnvironmentBoolItemControls = new List<BoolItemControlClass>
+        EnvironmentBoolItemControls = new()
         {
             _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps,
             _randomizeChallengeRooms, _hardEnvironmentMode, _blockShortcuts
         };
-        HealthBoolItemControls = new List<BoolItemControlClass>
+        HealthBoolItemControls = new()
         {
             _disableHealingBetweenLevels, _disableMedpacks
         };
-        WeatherBoolItemControls = new List<BoolItemControlClass>
+        WeatherBoolItemControls = new()
         {
             _rainyAssaultCourse, _snowyAssaultCourse, _coldAssaultCourse
         };
+
+        IEnumerable<BoolItemControlClass> controls = GameOrderBoolItemControls
+            .Concat(SecretBoolItemControls)
+            .Concat(ItemBoolItemControls)
+            .Concat(EnemyBoolItemControls)
+            .Concat(TextureBoolItemControls)
+            .Concat(AudioBoolItemControls)
+            .Concat(OutfitBoolItemControls)
+            .Concat(TextureBoolItemControls)
+            .Concat(StartBoolItemControls)
+            .Concat(EnvironmentBoolItemControls)
+            .Concat(HealthBoolItemControls)
+            .Concat(WeatherBoolItemControls);
+
+        foreach (BoolItemControlClass control in controls)
+        {
+            control.PropertyChanged += BoolControl_PropertyChanged;
+        }
+    }
+
+    private void BoolControl_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(BoolItemControlClass.Value))
+        {
+            FirePropertyChanged(e.PropertyName);
+        }
     }
 
     private void IncludeKeyItems_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -3456,6 +3524,7 @@ public class ControllerOptions : INotifyPropertyChanged
         RandomizeLevelSequencing.Value = _controller.RandomizeSequencing;
         LevelSequencingSeed = _controller.LevelSequencingSeed;
         PlayableLevelCount = _controller.PlayableLevelCount;
+        GlobeDisplayOptions = Enum.GetValues<GlobeDisplayOption>();
         GlobeDisplay = _controller.GlobeDisplay;
 
         RandomizeUnarmedLevels = _controller.RandomizeUnarmedLevels;
@@ -3543,14 +3612,16 @@ public class ControllerOptions : INotifyPropertyChanged
         CrossLevelEnemies.Value = _controller.CrossLevelEnemies;
         ProtectMonks.Value = _controller.ProtectMonks;
         DocileWillard.Value = _controller.DocileWillard;
+        BirdMonsterBehaviours = Enum.GetValues<BirdMonsterBehaviour>();
         BirdMonsterBehaviour = _controller.BirdMonsterBehaviour;
+        DragonSpawnTypes = Enum.GetValues<DragonSpawnType>();
         DragonSpawnType = _controller.DragonSpawnType;
         SwapEnemyAppearance.Value = _controller.SwapEnemyAppearance;
         AllowEmptyEggs.Value = _controller.AllowEmptyEggs;
         HideEnemies.Value = _controller.HideEnemiesUntilTriggered;
         RemoveLevelEndingLarson.Value = _controller.RemoveLevelEndingLarson;
         GiveUnarmedItems.Value = _controller.GiveUnarmedItems;
-        RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
+        UnrestrictedEnemyDifficulty.Value = _controller.RandoEnemyDifficulty == RandoDifficulty.NoRestrictions;
         UseEnemyExclusions = _controller.UseEnemyExclusions;
         ShowExclusionWarnings = _controller.ShowExclusionWarnings;
         LoadEnemyExclusions();
@@ -3859,7 +3930,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.HideEnemiesUntilTriggered = HideEnemies.Value;
         _controller.RemoveLevelEndingLarson = RemoveLevelEndingLarson.Value;
         _controller.GiveUnarmedItems = GiveUnarmedItems.Value;
-        _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
+        _controller.RandoEnemyDifficulty = UnrestrictedEnemyDifficulty.Value ? RandoDifficulty.NoRestrictions : RandoDifficulty.Default;
         _controller.UseEnemyExclusions = UseEnemyExclusions;
         _controller.ShowExclusionWarnings = ShowExclusionWarnings;
 
