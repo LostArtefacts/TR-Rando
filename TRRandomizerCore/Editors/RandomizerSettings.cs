@@ -212,7 +212,7 @@ public class RandomizerSettings
         RandomizeItems = config.GetBool(nameof(RandomizeItems));
         ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
         ItemMode = (ItemMode)config.GetEnum(nameof(ItemMode), typeof(ItemMode), ItemMode.Default);
-        WeaponDifficulty = (WeaponDifficulty)config.GetEnum(nameof(WeaponDifficulty), typeof(WeaponDifficulty), WeaponDifficulty.Fair);
+        WeaponDifficulty = (WeaponDifficulty)config.GetEnum(nameof(WeaponDifficulty), typeof(WeaponDifficulty), WeaponDifficulty.Easy);
         IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
         KeyItemRange = (ItemRange)config.GetEnum(nameof(KeyItemRange), typeof(ItemRange), ItemRange.Medium);
         AllowEnemyKeyDrops = config.GetBool(nameof(AllowEnemyKeyDrops), true);
