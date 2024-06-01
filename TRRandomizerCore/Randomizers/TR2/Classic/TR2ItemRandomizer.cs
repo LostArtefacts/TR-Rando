@@ -152,21 +152,34 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     private void RandomizeVehicles(TR2CombinedLevel level)
     {
         Dictionary<TR2Type, Queue<Location>> vehicleLocations = new();
+        void StoreLocation(TR2Type type)
+        {
+            Location location = VehicleUtilities.GetRandomLocation(level.Name, level.Data, type, _generator);
+            if (location == null)
+            {
+                return;
+            }
+
+            if (!vehicleLocations.ContainsKey(type))
+            {
+                vehicleLocations[type] = new();
+            }
+            vehicleLocations[type].Enqueue(location);
+        }
+
         if (VehicleUtilities.HasLocations(level.Name, TR2Type.Boat))
         {
-            vehicleLocations[TR2Type.Boat] = new();
             int boatCount = Math.Max(1, level.Data.Entities.Count(e => e.TypeID == TR2Type.Boat));
             for (int i = 0; i < boatCount; i++)
             {
-                vehicleLocations[TR2Type.Boat].Enqueue(VehicleUtilities.GetRandomLocation(level.Name, level.Data, TR2Type.Boat, _generator));
+                StoreLocation(TR2Type.Boat);
             }
         }
 
         if (level.IsAssault)
         {
             // Regular skidoo rando comes with enemy rando currently
-            vehicleLocations[TR2Type.RedSnowmobile] = new();
-            vehicleLocations[TR2Type.RedSnowmobile].Enqueue(VehicleUtilities.GetRandomLocation(level.Name, level.Data, TR2Type.RedSnowmobile, _generator));
+            StoreLocation(TR2Type.RedSnowmobile);
         }
 
         if (vehicleLocations.Count == 0)
