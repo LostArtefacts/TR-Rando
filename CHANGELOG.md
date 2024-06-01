@@ -11,6 +11,7 @@
 - fixed incorrect item and mesh positions in Home Sweet Home when mirrored (#676)
 - fixed uncontrolled SFX in gym/assault course levels not being linked to the correct setting (#684)
 - fixed the scion being difficult to shoot if Lara only has the shotgun (#696)
+- fixed character encoding in TR3 gamestrings, which was causing data loss in some cases (#698)
 - improved the layout of some options in the UI (#694)
 
 ## [V1.8.4](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.3...V1.8.4) - 2024-02-12
