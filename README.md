@@ -5,16 +5,10 @@
 TR Rando is a randomizer tool for the classic Tomb Raider series (TR 1-3 and Unfinished Business). It allows you to change many aspects of the
 original levels, such as item pickups, secrets, enemies, Lara's appearance, level order, text...[and so much more](#features).
 
-> ## Tomb Raider Remasters
-> Currently, the randomizer *does not work* with the remasters as there are several differences with how the new games function compared to the originals. This includes some new file formats that as yet remain unexplored, along with the unknown factor of how randomization will affect built-in game features, such as achievements.
+> ## Tomb Raider I-III Remastered
+> The current release of the randomizer *does not work* with the remasters. Testing is currently underway on supporting these games; for the time being, support remains only for the _original_ games as detailed in [USING.md](USING.md).
 >
-> We do not want to exert development effort at this stage while the new games are fresh, to allow for patches to settle in - these patches may change fundamental game assets/logic/features etc, so it makes sense to wait. The task thereafter to see what is and what is not going to be possible is a large one; then working out the best way to continue to support the original games will need careful consideration.
->
-> For the foreseeable future, support will remain with randomizing the _original_ games only as detailed in [USING.md](USING.md).
->
-> We appreciate your patience, and hope that you are enjoying the remastered experience as much as we are!
->
-> <p align="right"><em>Rando Team</em><br/><em>2024-03-13</em></p>
+> <p align="right"><em>Rando Team</em><br/><em>2024-06-01</em></p>
 
 ## Installation
 
@@ -54,11 +48,14 @@ For keeping track of levels while you play, check out the [TRRandoTracker](https
 ## Showcase
 ![TR1 Rando](Resources/Screenshots/Compressed/TR1_3.jpg)
 ![TR1 Rando](Resources/Screenshots/Compressed/TR1_4.jpg)
+![TR1R Rando](Resources/Screenshots/Compressed/TR1R_1.jpg)
 ![TR2 Rando](Resources/Screenshots/Compressed/TR2_1.jpg)
 ![TR2 Rando](Resources/Screenshots/Compressed/TR2_4.jpg)
 ![TR2 Rando](Resources/Screenshots/Compressed/TR2_5.jpg)
+![TR2R Rando](Resources/Screenshots/Compressed/TR2R_1.jpg)
 ![TR3 Rando](Resources/Screenshots/Compressed/TR3_2.jpg)
 ![TR3 Rando](Resources/Screenshots/Compressed/TR3_3.jpg)
+![TR3R Rando](Resources/Screenshots/Compressed/TR3R_1.jpg)
 
 [View all](Resources/Screenshots).
 
