@@ -813,5 +813,10 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
         {
             createItemCallback(weaponLocation, TR1Type.LargeMed_S_P);
         }
+
+        if (weaponType == TR1Type.Shotgun_S_P && level.Models.ContainsKey(TR1Type.ScionPiece3_S_P))
+        {
+            level.Models[TR1Type.ScionPiece3_S_P].Meshes[0].CollRadius = TRConsts.Step1;
+        }
     }
 }
