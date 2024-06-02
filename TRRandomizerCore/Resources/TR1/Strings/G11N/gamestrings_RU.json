@@ -496,6 +496,60 @@
         "Eto lovushka",
         "Obnimite Torso"
       ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Pesok na kazhdom uglu",
+        "Krokodilovyy pitomnik",
+        "Uvidimsya pozzhe, croco",
+        "Skol'z' – Padeniye – Vsplesk",
+        "Vam nuzhny eti aptechki!"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Maslyanyy klyuch",
+          "Do Zolotogo Klyucha",
+          "Blestyashchiy klyuch",
+          "Ukhkh blestyashchiy!",
+          "Sapfirovyy klyuch"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Khram Lilly",
+        "Khram kot'ki",
+        "Nichego, krome koshek...",
+        "Ne sobachnik",
+        "Sobachniki podal'she"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Sorokin klyuch",
+          "Neobychnyy klyuch",
+          "Na skol'ko bol'she?",
+          "vzdokh Slishkom mnogo...",
+          "Koshachiy klyuch"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Detskiy sad mummiy",
+        "Peshchera ploti",
+        "Peshchera spagetti",
+        "Lazan'yu komu-nibud'?",
+        "Oni povsyudu.. Pomogite!"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Potyanite rychag!",
+        "Nepravil'nyy rychag!",
+        "Zachem voobshche rychag?",
+        "Vytashchi menya otsyuda!",
+        "Zakonchennoye delo!"
+      ]
     }
   }
 }

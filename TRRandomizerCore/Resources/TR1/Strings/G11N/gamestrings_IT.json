@@ -496,6 +496,60 @@
         "Ciao a D e A",
         "Quel torso è spaventoso"
       ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Sabbia in ogni angolo",
+        "A dopo coccodrillo",
+        "Ci vediamo dopo alligatore",
+        "Scivola - Cadi - Splash",
+        "Ti serviranno quei Kit medici!"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Chiave di burro",
+          "Chiave semi-dorata",
+          "Chiave splendente",
+          "Uhhh splendente!",
+          "Chiave brillante"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Tempio di Lilly",
+        "Tempio di Cat-alina",
+        "Nient'altro che gatti qui...",
+        "Il costruttore non era un tipo da cani",
+        "Cani, state lontani"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Ce ne sono troppe",
+          "Chiave elegante",
+          "Quante ancora?",
+          "sigh Troppe...",
+          "Chiave del gatto"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Asilo della mummia",
+        "Caverna di carne",
+        "Caverna di spaghetti",
+        "Lasagne?",
+        "Atlantici.... Atlantici ovunque!!! Aiuto!"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Tira la Leva!",
+        "Leva Sbagliata!",
+        "Perchè c'è una leva del genere?",
+        "Fatemi uscire da qui!",
+        "Faccende in sospeso finite!"
+      ]
     }
   }
 }

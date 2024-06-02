@@ -496,6 +496,60 @@
         "Je To Past",
         "Obejmuti Torza"
       ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Pisek Kam Se Podivas",
+        "Za Chvilu Krokodil",
+        "Tak Zatim Krokousi",
+        "Skluz - Pad - Zblunk",
+        "Tyhle Lekarny Potrebujes"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Maslovej Klic",
+          "Pred Zlaty Klic",
+          "Leskly Klic",
+          "Ohh leskle!",
+          "Genialni Klic"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Lilyin Chram",
+        "Chram Kateriny",
+        "Nic nez kocky tady...",
+        "Tvurce nebyl milovnik psu",
+        "Milovnici psu ZMIZTE"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Je jich proste moc",
+          "Zazobancuv Klic",
+          "Kolik jeste?",
+          "znacka: Prilis Mnoho",
+          "Kocici Klic"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Skolka pro male Mumijky",
+        "Masova Jeskynka",
+        "Spagetove Monstrum",
+        "Date si Lasagne?",
+        "Atlantane... JSOU VSUDE! POMOC!"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Zmackni Paku",
+        "Spatna Paka",
+        "Proc tu paku vubec mame?",
+        "Dostante me odsud!",
+        "Dokoncene Prace"
+      ]
     }
   }
 }
