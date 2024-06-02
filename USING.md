@@ -25,9 +25,12 @@ Before you launch the randomizer for the first time, you should carry out a few 
 >
 > _This step is entirely optional based on your own preference of gameplay._
 ***
-It is recommended at this point that you create a copy of your game folder. If you choose to use the original folder and decide later that you want to revert the changes made by the randomizer, see the [relevant point below](USING.md#reverting).
+
+It is recommended at this point that you create a copy of your game folder _if playing classic TR_. If you choose to use the original folder and decide later that you want to revert the changes made by the randomizer, see the [relevant point below](USING.md#reverting).
 
 Let's say you are setting up TR2 and have it installed in `D:\Games\TR2`. You should copy this folder in its entirety and name it something like `D:\Games\TR2Rando`.
+
+For TR I-III Remastered, you will need to point the randomizer to your main installation of TRR, as copying the folder and launching it from a different location will trigger Steam (for example) to launch, which will in turn always run from your main installation folder. This means that you cannot have separate folders setup for different playthroughs. Use the [reverting](USING.md#reverting) guide below to restore your game to defaults once you have finished playing with the randomizer. You can then later re-open and randomize safely if you wish. Note too that some files are shared so if you randomize TR1R, you may for example see some text changes in both TR2R and TR3R as a result. Again, restoring defaults will revert everything back to normal.
 
 > ### IMPORTANT
 > Now that you have a dedicated folder for the randomizer to work on, you should **_not_** change anything manually in this folder as it can cause corruption when randomizing again. Everything can be controlled in the randomizer, so provided that you have set the game up as above per your preferences, you should have no need to edit anything manually.
@@ -56,7 +59,15 @@ The randomizer will now check the data in the folder you have selected and creat
 It is **_strongly_** recommended that you click `Yes` if you see this message, reinstall the game and follow this guide carefully again from the [beginning](USING.md#randomizer-setup).
 
 ## Randomizing
-Now that you have your TR game folder open in the randomizer, you can select each aspect that you wish to randomize. There are several options available, so be sure to click the available `Options` button in each pane.
+Now that you have your TR game folder open in the randomizer, you can select each aspect that you wish to randomize. There are several options available, so be sure to click the available `Options` button in each pane. Note that for TR I-III Remastered, the options that are available to randomize are much more limited than the classics. Only the following aspects are currently supported, the remaining options will be greyed out in the UI.
+
+- Secrets
+- Items
+- Enemies
+- Start positions
+- Secret rewards (excluding TR2R)
+- Audio
+- Game text
 
 When you are ready to start, click the large green `Randomize` button. A progress bar will appear and the randomizer will make the selected changes.
 
