@@ -510,13 +510,23 @@
       "Names": [
         "Back again?",
         "FLOODED",
-        "Winking Sphinx"
+        "Winking Sphinx",
+        "Sand in every corner",
+        "In a while crocodile",
+        "See you later alligator",
+        "Slide - Drop - Splash",
+        "You will need those meds!"
       ],
       "KeyItems": {
         "key1": [
           "Mind the Boulders",
           "Blue Room Access",
-          "Sapphire Key"
+          "Sapphire Key",
+          "Butter Key",
+          "Pre-Gold Key",
+          "Shiny Key",
+          "Uhhh shiny!",
+          "Brilliant Key"
         ]
       }
     },
@@ -526,13 +536,22 @@
         "Temple of Cat-astrophe",
         "Just Kitten Around",
         "catJAM",
-        "MEOW.PHD"
+        "MEOW.PHD",
+        "Lilly's Temple",
+        "Temple of Cat-alina",
+        "Nothing but cats here...",
+        "Builder was not a Dog Person",
+        "Dog People keep out"
       ],
       "KeyItems": {
         "key1": [
           "You'll Need Seven",
           "Fancy Key",
-          "Let Me In!"
+          "Let Me In!",
+          "Too many of these",
+          "How many more?",
+          "Sigh, too many...",
+          "Cat Key"
         ]
       }
     },
@@ -540,14 +559,24 @@
       "Names": [
         "But Wait, There's More...",
         "Natla's Empire",
-        "The Aftermath"
+        "The Aftermath",
+        "Mummy Kindergarten",
+        "Flesh Cave",
+        "Spaghetti Cave",
+        "Lasagne anyone?",
+        "Atlanteans everywhere. Help!"
       ]
     },
     "END2.PHD": {
       "Names": [
         "The End?",
         "Best Boulder Puzzle",
-        "Goodbye, Atlantis"
+        "Goodbye, Atlantis",
+        "Pull the Lever!",
+        "Wrong Lever!",
+        "Why do we even have that lever?",
+        "Get me out of here!",
+        "Finished Business!"
       ]
     }
   }

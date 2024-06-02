@@ -170,8 +170,8 @@
         "1": "P2"
       },
       "Puzzles": {
-        "0": "Tower Access Pass",
-        "1": "Code CD",
+        "0": "P1",
+        "1": "Tower Access Pass",
         "2": "Code CD",
         "3": "Hangar Access Pass"
       }
@@ -397,7 +397,7 @@
         "0": "Maintenance Key",
         "1": "Solomon's Key",
         "2": "Solomon's Key",
-        "3": "Solomon's Key"
+        "3": "K4"
       },
       "Pickups": {
         "0": "P1",
@@ -449,9 +449,9 @@
     "TEMPLE.TR2": {
       "Keys": {
         "0": "Key of Ganesha",
-        "1": "Key of Ganesha",
-        "2": "Key of Ganesha",
-        "3": "Key of Ganesha"
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
       },
       "Pickups": {
         "0": "P1",

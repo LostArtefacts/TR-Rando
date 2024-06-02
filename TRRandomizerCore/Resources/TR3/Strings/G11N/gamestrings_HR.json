@@ -1,704 +1,303 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Blistavo",
-            "PomoÊ za flipmap",
-            "Uhh SvjetleÊe!",
-            "Poniötavanje stumblea",
-            "Iskoristi me!"
-          ],
-          "44": [
-            "Blistavo",
-            "PomoÊ za flipmap",
-            "Uhh SvjetleÊe!",
-            "Poniötavanje stumblea",
-            "Iskoristi me!"
-          ]
-        },
-        {
-          "36": [
-            "Dupli piötolj",
-            "äifra za varanje",
-            "KlasiËni klasik",
-            "Ikonici",
-            "BeskonaËna ubojstva"
-          ],
-          "45": [
-            "Klipovi za piötolje",
-            "Klipovi za varanje",
-            "Klipovi za klasik",
-            "IkoniËni klipovi",
-            "Klipovi za beskonaËna ubojstva"
-          ]
-        },
-        {
-          "37": [
-            "SaËma govno",
-            "Zaöto?",
-            "Doi ovdje ili niöta!",
-            "Vidjeli dovoljno?",
-            "Ostavi ga! Zauzet je!"
-          ],
-          "46": [
-            "Meci za saËmu",
-            "Upitni meci",
-            "Puûevi",
-            "Vidjeli dovoljno meci?",
-            "Zauzeti meci"
-          ]
-        },
-        {
-          "38": [
-            "Vili Killy",
-            "Zapravo korisno!",
-            "O-rao",
-            "Nevada O-rao",
-            "Najbolji u loncu"
-          ],
-          "47": [
-            "Willy Killy meci",
-            "Korisni meci",
-            "O-rao meci",
-            "Orao metci",
-            "Najbolji meci"
-          ]
-        },
-        {
-          "39": [
-            "Vampri meci",
-            "Auto 2.0",
-            "Nije TR II uzi",
-            "Ju-uzi",
-            "Nisu jaki meci!"
-          ],
-          "48": [
-            "Vampir meci",
-            "Klipovi 2.0",
-            "Izgrebani meci",
-            "Ju-uzi meci",
-            "Slabiji meci"
-          ]
-        },
-        {
-          "40": [
-            "Meme Piötolj",
-            "Beskorisno",
-            "Samo za izazove",
-            "Zaöto ovo postoji?",
-            "Podvodni samostrel"
-          ],
-          "49": [
-            "Dank Meme",
-            "SmeÊe",
-            "IzazivaËi",
-            "Egzistencijai",
-            "Lukovi"
-          ]
-        },
-        {
-          "41": [
-            "Nije M16",
-            "M16",
-            "Raptor ubojica",
-            "MP3 muzika",
-            "PojaËivaË raketi"
-          ],
-          "50": [
-            "Laûni meci",
-            "Prevara",
-            "Raptor ubojice",
-            "Staze",
-            "UËativaË raketi"
-          ]
-        },
-        {
-          "42": [
-            "Ultimativni bum",
-            "Turet za torbu",
-            "Ionako je predugo",
-            "Totalno neprecizno",
-            "Veliki trzaj?"
-          ],
-          "51": [
-            "Ultimativne rakete",
-            "Rakete za torbu",
-            "Spore rakete",
-            "Neprecizne rakete",
-            "Teöke rakete"
-          ]
-        },
-        {
-          "43": [
-            "Neprecizne stvari",
-            "Bolji lanser COPIUM",
-            "Veliki bum",
-            "Za öto ti trebam?",
-            "Nije viöe 7"
-          ],
-          "52": [
-            "Neprecizne granate",
-            "COPIUM granate",
-            "Veliki bum granate",
-            "Upitne granate",
-            "Granate na popustu"
-          ]
-        },
-        {
-          "53": [
-            "Zabranjeno koriötenje!",
-            "Nisi na LJEKOVIMA!",
-            "Mala bolnica",
-            "Mali spasitelj",
-            "Kristal za torbu"
-          ],
-          "54": [
-            "Zabranjeno koriötenje!",
-            "Nisi na LJEKOVIMA",
-            "Velika bolnica",
-            "Veliki spasitelj",
-            "VreÊa kristala"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "Stvari",
-          "äto je ovo?",
-          "Nije sjajno!",
-          "SmeÊe",
-          "Ovo i ono",
-          "Previöe artifakta!",
-          "Kako stanu?"
-        ],
-        "3": [
-          "Zakajakirali ste se?",
-          "NLNMAS slijedi?",
-          "MRTAV SI!",
-          "Budi bolji!",
-          "Zaboravili ste se healat?",
-          "Prva pomoÊ?",
-          "Stvarno ste umrijeli ovdje?"
-        ],
-        "35": [
-          "BrojaË potroöenih stvari",
-          "Any% slijedi?",
-          "Moûe li sporije?",
-          "Sve tajne?",
-          "Nema prve pomoÊi!",
-          "Pacifist?"
-        ],
-        "59": [
-          "Croft imanje",
-          "Core Design HQ",
-          "TR3Rando HQ",
-          "Larine iskopine",
-          "Winstonov friûider",
-          "Odleti Winstona"
-        ],
-        "85": [
-          "Grad bitova",
-          "Juûna Engleska",
-          "Je li kraljica kuÊi?",
-          "MaËji grad",
-          "10 minuta do ponoÊi!"
-        ],
-        "86": [
-          "Popunjena pustinja",
-          "Praöina...svuda",
-          "OI!",
-          "HEY!",
-          "Orlova pustinja"
-        ],
-        "87": [
-          "Voda i stvari",
-          "Zaboravljeni otok",
-          "Kanibalizam",
-          "Punin kut",
-          "Juûna tuga",
-          "Juûna Indija"
-        ],
-        "88": [
-          "Ogromni friûider",
-          "Gdje je Winston?",
-          "Hipertermija",
-          "Titanik 2.0",
-          "Veliki, hladni, bijeli",
-          "Santa leda!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NULA -",
-          "- NIäTA OVDJE -",
-          "- NEDEFINIRANO -",
-          "- OI, PRAZNO MJESTO -"
-        ]
-      }
-    }
-  ],
-
+Ôªø{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Blistavo",
+      "Pomoƒá za flipmap",
+      "Uhh Svjetleƒáe!",
+      "Poni≈°tavanje stumblea",
+      "Iskoristi me!"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Dupli pi≈°tolj",
+      "≈†ifra za varanje",
+      "Klasiƒçni klasik",
+      "Ikonici",
+      "Beskonaƒçna ubojstva"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Klipovi za pi≈°tolje",
+      "Klipovi za varanje",
+      "Klipovi za klasik",
+      "Ikoniƒçni klipovi",
+      "Klipovi za beskonaƒçna ubojstva"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Saƒçma govno",
+      "Za≈°to?",
+      "Doƒëi ovdje ili ni≈°ta!",
+      "Vidjeli dovoljno?",
+      "Ostavi ga! Zauzet je!"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Meci za saƒçmu",
+      "Upitni meci",
+      "Pu≈æevi",
+      "Vidjeli dovoljno meci?",
+      "Zauzeti meci"
+    ],
+    "INV_ITEM_DEAGLE": [
+      "Vili Killy",
+      "Zapravo korisno!",
+      "O-rao",
+      "Nevada O-rao",
+      "Najbolji u loncu"
+    ],
+    "INV_ITEM_DEAGLE_AMMO": [
+      "Willy Killy meci",
+      "Korisni meci",
+      "O-rao meci",
+      "Orao metci",
+      "Najbolji meci"
+    ],
+    "INV_ITEM_UZI": [
+      "Vampri meci",
+      "Auto 2.0",
+      "Nije TR II uzi",
+      "Ju-uzi",
+      "Nisu jaki meci!"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Vampir meci",
+      "Klipovi 2.0",
+      "Izgrebani meci",
+      "Ju-uzi meci",
+      "Slabiji meci"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Meme Pi≈°tolj",
+      "Beskorisno",
+      "Samo za izazove",
+      "Za≈°to ovo postoji?",
+      "Podvodni samostrel"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Dank Meme",
+      "Smeƒáe",
+      "Izazivaƒçi",
+      "Egzistencijai",
+      "Lukovi"
+    ],
+    "INV_ITEM_M16": [
+      "Nije M16",
+      "M16",
+      "Raptor ubojica",
+      "MP3 muzika",
+      "Pojaƒçivaƒç raketi"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "La≈æni meci",
+      "Prevara",
+      "Raptor ubojice",
+      "Staze",
+      "Uƒçativaƒç raketi"
+    ],
+    "INV_ITEM_ROCKET_LAUNCHER": [
+      "Ultimativni bum",
+      "Turet za torbu",
+      "Ionako je predugo",
+      "Totalno neprecizno",
+      "Veliki trzaj?"
+    ],
+    "INV_ITEM_ROCKETS": [
+      "Ultimativne rakete",
+      "Rakete za torbu",
+      "Spore rakete",
+      "Neprecizne rakete",
+      "Te≈°ke rakete"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Neprecizne stvari",
+      "Bolji lanser COPIUM",
+      "Veliki bum",
+      "Za ≈°to ti trebam?",
+      "Nije vi≈°e 7"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Neprecizne granate",
+      "COPIUM granate",
+      "Veliki bum granate",
+      "Upitne granate",
+      "Granate na popustu"
+    ],
+    "INV_ITEM_MEDI": [
+      "Zabranjeno kori≈°tenje!",
+      "Nisi na LJEKOVIMA!",
+      "Mala bolnica",
+      "Mali spasitelj",
+      "Kristal za torbu"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Zabranjeno kori≈°tenje!",
+      "Nisi na LJEKOVIMA",
+      "Velika bolnica",
+      "Veliki spasitelj",
+      "Vreƒáa kristala"
+    ],
+    "HEADING_ITEMS": [
+      "Stvari",
+      "≈†to je ovo?",
+      "Nije sjajno!",
+      "Smeƒáe",
+      "Ovo i ono",
+      "Previ≈°e artifakta!",
+      "Kako stanu?"
+    ],
+    "HEADING_GAME_OVER": [
+      "Zakajakirali ste se?",
+      "NLNMAS slijedi?",
+      "MRTAV SI!",
+      "Budi bolji!",
+      "Zaboravili ste se healat?",
+      "Prva pomoƒá?",
+      "Stvarno ste umrijeli ovdje?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Brojaƒç potro≈°enih stvari",
+      "Any% slijedi?",
+      "Mo≈æe li sporije?",
+      "Sve tajne?",
+      "Nema prve pomoƒái!",
+      "Pacifist?"
+    ],
+    "INV_GLOBE_LONDON": [
+      "Grad bitova",
+      "Ju≈æna Engleska",
+      "Je li kraljica kuƒái?",
+      "Maƒçji grad",
+      "10 minuta do ponoƒái!"
+    ],
+    "INV_GLOBE_NEVADA": [
+      "Popunjena pustinja",
+      "Pra≈°ina...svuda",
+      "OI!",
+      "HEY!",
+      "Orlova pustinja"
+    ],
+    "INV_GLOBE_SOUTH_PACIFIC": [
+      "Voda i stvari",
+      "Zaboravljeni otok",
+      "Kanibalizam",
+      "Punin kut",
+      "Ju≈æna tuga",
+      "Ju≈æna Indija"
+    ],
+    "INV_GLOBE_ANTARCTICA": [
+      "Ogromni fri≈æider",
+      "Gdje je Winston?",
+      "Hipertermija",
+      "Titanik 2.0",
+      "Veliki, hladni, bijeli",
+      "Santa leda!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NULA -",
+      "- NI≈†TA OVDJE -",
+      "- NEDEFINIRANO -",
+      "- OI, PRAZNO MJESTO -"
+    ]
+  },
   "LevelStrings": {
-    "ANTARC.TR2": {
-      "Names": [
-        "Nema pahuljica",
-        "Brzi Ëamac 2.0",
-        "Kocka leda",
-        "Hod u friûideru",
-        "Juha od rajËice?"
-      ],
-      "Keys": {
-        "0": [
-          "Nije paluba",
-          "IceKey_Gamer",
-          "Joö jedan kljuË",
-          "Zaleeni kljuË"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Ne zaboravi me!",
-          "Bombon",
-          "ätap",
-          "OsjeÊam se snaûnije!",
-          "Von ätapoviÊ"
-        ],
-        "1": [
-          "Otvaraj rijeku",
-          "Otvaraj branu",
-          "Voda i voda i voda",
-          "Pristup juhi",
-          "Juöni kljuË"
-        ]
-      }
-    },
-
-    "AREA51.TR2": {
-      "Names": [
-        "Paul je bio ovdje!",
-        "Mjesto teorija zavjere",
-        "Kesnomorf je bio ovdje!",
-        "Dan neovisnosti",
-        "Zemlja vanzemaljaca!"
-      ],
-      "Keys": {
-        "0": [
-          "KljuË rakete",
-          "Niöta od voûnje raketom",
-          "SpaceX kljuË",
-          "Raketa rakun",
-          "Elon Musk kljuË",
-          "Moûeö preskoËiti i mene!",
-          "Tajni brojevi",
-          "Broj kreditne kartice",
-          "Stvarni bacaË raketi",
-          "Vanzemaljci blizu?!?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Rapunzel kljuË",
-          "Visoki kljuË",
-          "Nije zmajev toranj",
-          "KljuË za varanje",
-          "VARAä!!!"
-        ],
-        "1": [
-          "Ne moûeö me preskoËiti!",
-          "Evo mene opet!",
-          "UFO disk",
-          "Jedan od dva diska",
-          "Muzika? O.o"
-        ],
-        "2": [
-          "Larin party",
-          "Zagonetna muzika",
-          "Jedan od dva diska",
-          "Muzika dûungle",
-          "Moûeö me preskoËiti!"
-        ],
-        "3": [
-          "Magnetski ûeljezni?ki klju?",
-          "Klju? podzemne ûeljeznice",
-          "Klju? ûeljezni?ke stanice",
-          "Crta?a igla",
-          "Slavna osoba",
-          "?eki?"
-        ]
-      }
-    },
-
-    "CHAMBER.TR2": {
-      "Names": [
-        "InËi vinËi pauk",
-        "20 ñ 40 orlova",
-        "Japanski preporuËen",
-        "Oslobodi Vilija",
-        "Willardova pauËina"
-      ]
-    },
-
-    "CITY.TR2": {
-      "Names": [
-        "Skoks s mosta",
-        "éivot bube",
-        "PËelin film 2.0",
-        "Hodnik elemenata",
-        "4 naËina za smrt!"
-      ],
-      "Keys": {
-        "0": [
-          "–avolji kljuË",
-          "Ova cura gori!",
-          "Moûeö nas preskoËiti!",
-          "Blizanac kljuË",
-          "KljuË iz pakla",
-          "Pogledaj me!",
-          "KolaËiÊ kljuË"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Maska za lice",
-          "Nije Golden Mask",
-          "Fantom iz opere",
-          "Masikrana kugla dolazi",
-          "MASKA"
-        ]
-      }
-    },
-
-    "COMPOUND.TR2": {
-      "Names": [
-        "Joö jedan zatvor",
-        "Zakon braÊe",
-        "Veliki bijeg",
-        "Boris je ovdje!",
-        "Gdje mi je oruûje?"
-      ],
-      "Keys": {
-        "0": [
-          "Umri Ëuvaru...UMRI!!",
-          "Joö jedna kartica",
-          "MasterCard",
-          "Kartica 1",
-          "Kartica 2",
-          "Izai iz zatvora kartica"
-        ],
-        "1": [
-          "VisaCard",
-          "Kartica 1",
-          "Kartica 2",
-          "Tajna kartica",
-          "Kreditna kartica"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Plavi kamen",
-          "SvjeËica 2",
-          "PrekidaË 2",
-          "Plavi USB",
-          "Nema dupliciranja"
-        ],
-        "1": [
-          "éuti kamen",
-          "SvjeÊica 1",
-          "PrekidaË 1",
-          "éuti USB",
-          "Nema dupliciranja"
-        ]
-      }
-    },
-
-    "CRASH.TR2": {
-      "Names": [
-        "Jurski park",
-        "Dinosauri.. opet?",
-        "Barney-evo mjesto",
-        "Izgubljena dolina dio 2",
-        "Gdje je zlatni zmaj?"
-      ],
-      "Keys": {
-        "0": [
-          "Stvorili ste Barney-a",
-          "Nije Barney hrana",
-          "Za öto je ovo? O.o",
-          "Topovski kljuË",
-          "KljuË destrukcije"
-        ],
-        "1": [
-          "Raptor kljuË",
-          "Pazi lea",
-          "IZA TEBE!",
-          "Neprijatelj kaûe BUUU!",
-          "Gdje ja stanem?"
-        ]
-      }
-    },
-
     "HOUSE.TR2": {
       "Names": [
-        "Skromno prebivaliöte",
-        "Winstonov friûider 2.0",
+        "Skromno prebivali≈°te",
+        "Winstonov fri≈æider 2.0",
         "Traka za quad formule",
         "Winston... dupli?",
-        "Vjeûba za gaanje",
+        "Vje≈æba za gaƒëanje",
         "Sretna mirovina"
       ],
-      "Keys": {
-        "0": [
-          "KljuË za utrku",
-          "KljuË zastave",
-          "Formula 1 kljuË",
-          "Riblji kljuË",
-          "KljuË trofeja",
+      "KeyItems": {
+        "Key1": [
+          "Kljuƒç za utrku",
+          "Kljuƒç zastave",
+          "Formula 1 kljuƒç",
+          "Riblji kljuƒç",
+          "Kljuƒç trofeja",
           "Pristup quadu"
         ]
       }
     },
-
     "JUNGLE.TR2": {
       "Names": [
-        "Knjiga o dûungli",
-        "Roaci kralja Luja",
+        "Knjiga o d≈æungli",
+        "Roƒëaci kralja Luja",
         "Bodljikavo sklizanje",
         "Rollin rollin rollin",
-        "KotrljajuËe kamenje"
+        "Kotrljajuƒçe kamenje"
       ],
-      "Keys": {
-        "3": [
-          "Lijepi kljuË",
+      "KeyItems": {
+        "Key4": [
+          "Lijepi kljuƒç",
           "MajMun",
-          "Beskoristan kljuË",
-          "Glitchless kljuË",
-          "äto je ovo? O.o"
+          "Beskoristan kljuƒç",
+          "Glitchless kljuƒç",
+          "≈†to je ovo? O.o"
         ]
       }
     },
-
-    "MINES.TR2": {
+    "TEMPLE.TR2": {
       "Names": [
-        "Minecraft",
-        "ZAäTO?!?!?!",
-        "Duboko, ledeno plivanje",
-        "Stormtrooper zaljev",
-        "Vatra",
-        "PATI!"
+        "Randijeva i Rorina grobnica",
+        "Za≈°to toliko ≈†iva?",
+        "Kipovi otporne na metke",
+        "Zmije i ljestve",
+        "Zamka pakla",
+        "Trik sa svijeƒáom"
       ],
-      "Puzzles": {
-        "0": [
-          "Ne zaboravi me!",
-          "Lizalica",
-          "ätap",
-          "OsjeÊam se snaûnije!",
-          "Von ätapoviÊ"
-        ],
-        "1": [
-          "Duracell",
-          "9 Volti",
-          "PunjaË",
-          "Plava i crvena stvar",
-          "KljuË dizalice!"
-        ],
-        "2": [
-          "Duboka zaleena stvarËica",
-          "ShawCrank iskupljenje",
-          "Okretanje stvari",
-          "Ozlijeen si?",
-          "Umrijet Êeö!"
+      "KeyItems": {
+        "Key1": [
+          "Nema dupliciranja",
+          "Smrtonosni kljuƒç",
+          "5 noƒái Gane≈°e",
+          "Nisu molitveni kotaƒçi",
+          "Komora za muƒçenje"
         ]
       }
     },
-
-    "NEVADA.TR2": {
-      "Names": [
-        "Pustinjski orlovi",
-        "Vodena pustinja",
-        "Ostani hidrirani",
-        "Nema pustinjskih traËnica",
-        "Ovo je topla dolina!"
-      ],
-      "Keys": {
-        "0": [
-          "Generator kljuË",
-          "KljuË generacije",
-          "JA IMAM MO∆!",
-          "Nemoj se elektrizirati!",
-          "KljuË nesvjestice"
-        ],
-        "1": [
-          "KljuË minskog polja",
-          "TNT kljuË",
-          "Flipmap kljuË",
-          "Pristup vanzemaljcima",
-          "Veliki BUM!",
-          "KljuË za BOOM!"
-        ]
-      }
-    },
-
-    "OFFICE.TR2": {
-      "Names": [
-        "TrËi Lara, TR»I!",
-        "Jeli stvarno mrtva?",
-        "Previöe volti!",
-        "Nesvjesti!",
-        "Spremi i uËitaj!"
-      ]
-    },
-
     "QUADCHAS.TR2": {
       "Names": [
-        "Trebaö quad?",
+        "Treba≈° quad?",
         "Dolina pirana",
         "Ne Temza",
         "Ne roni djevojko!",
         "Nema Barney-a!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Dvostruko beskorisno",
           "Tko ovo skuplja?",
           "DuPli MajMun",
-          "Nije kljuË katedrale",
-          "äto je ovo?"
+          "Nije kljuƒç katedrale",
+          "≈†to je ovo?"
         ]
       }
     },
-
-    "RAPIDS.TR2": {
+    "TONYBOSS.TR2": {
       "Names": [
-        "Zaöto ovo postoji?",
-        "Potreban notepad!",
-        "MADubu",
-        "WC ökoljka",
-        "Korokodili",
-        "RiP korisnici sluöalica"
+        "Odliƒçno",
+        "Jo≈° jedan labirint",
+        "Tajni labirint?!? O.o",
+        "40 slijepih ulica",
+        "40 zmija"
       ]
     },
-
-    "ROOFS.TR2": {
-      "Names": [
-        "20 sekundi",
-        "KopaË na zapadu",
-        "Greöka u izgradnji",
-        "Nema Big Bena?",
-        "Zaöto je ovo ovdje?",
-        "London Ghetto",
-        "Bruvs?"
-      ],
-      "Keys": {
-        "0": [
-          "ätakor kljuË",
-          "KljuË za sobu gripe",
-          "KljuË za dimnjak",
-          "Jednostavni kljuË",
-          "Zlatni kljuË"
-        ],
-        "1": [
-          "Predivni kljuË",
-          "KljuË crkve",
-          "Rubin kljuË",
-          "Beskorisni kljuË",
-          "Za öto je ovo? O.o"
-        ]
-      }
-    },
-
-    "SEWER.TR2": {
-      "Names": [
-        "Platforma 9 3/4",
-        "Podzemlje",
-        "Voûnja Londonom",
-        "Ponestalo karata",
-        "Pazi rupa"
-      ],
-      "Keys": {
-        "0": [
-          "ElektriËni kljuË",
-          "KljuË ËistaËa",
-          "NajjaËi sam!",
-          "Alat",
-          "Popravi ovo!"
-        ],
-        "1": [
-          "Pola i pola",
-          "Pola",
-          "Religiozni kljuË",
-          "Jedan ili dva?",
-          "Damaklov kljuË"
-        ],
-        "2": [
-          "Pola i pola",
-          "Jedna polovica",
-          "Religiozni kljuË",
-          "Jedan ili dva?",
-          "Damoklov kljuË"
-        ],
-        "3": [
-          "Pola i pola",
-          "Jedna polovica",
-          "Religiozni kljuË",
-          "Jedan ili dva?",
-          "Damoklov kljuË"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "NOVAC!",
-          "äiling",
-          "Masivan i sjajan!",
-          "Cijena voza",
-          "25 bitova"
-        ],
-        "1": [
-          "Ajmo u Hogwarts",
-          "éeljezniËki prolaz",
-          "Nazad u Nevadu!",
-          "Bez kontrole!",
-          "Karta za kamenice"
-        ],
-        "2": [
-          "Thorov ËekiÊ",
-          "Mjˆlnir",
-          "Udari krticu",
-          "Razbij lokot!",
-          "Sveti Franjo ËekiÊ"
-        ],
-        "3": [
-          "Blistaj zvjezdo mala",
-          "Sjajan sam!",
-          "Vidjeli ste neöto sjajno!",
-          "Ne na nebu!",
-          "Jedna zvjezdica"
-        ]
-      }
-    },
-
     "SHORE.TR2": {
       "Names": [
         "Selo kanibala",
-        "Plaûa",
+        "Pla≈æa",
         "Nemoj izgubiti nogu",
         "Otrov",
         "Preskok mosta"
       ],
-      "Keys": {
-        "0": [
-          "Podmorski kljuË",
-          "Jack Sparrow kljuË",
-          "Potopljeni kljuË",
-          "Zahrali kljuË",
-          "KrijumËar je ovo izgubio!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
+          "Podmorski kljuƒç",
+          "Jack Sparrow kljuƒç",
+          "Potopljeni kljuƒç",
+          "Zahrƒëali kljuƒç",
+          "Krijumƒçar je ovo izgubio!"
+        ],
+        "Puzzle1": [
           "Otrovni kamen",
           "Temple Ruins kamen",
           "Krvavi kamen",
@@ -707,104 +306,406 @@
         ]
       }
     },
-
-    "STPAUL.TR2": {
+    "CRASH.TR2": {
       "Names": [
-        "Ovo je tajna",
-        "60/59",
-        "Nedovröeni posao",
-        "Smrtonosna katedrala",
-        "Bez ötete"
+        "Jurski park",
+        "Dinosauri.. opet?",
+        "Barney-evo mjesto",
+        "Izgubljena dolina dio 2",
+        "Gdje je zlatni zmaj?"
       ],
-      "Keys": {
-        "0": [
-          "Super skriven",
-          "Ljestve na zidu",
-          "Pronaöao si me konaËno?",
-          "Igra skrivaËa",
-          "PtiËja gripa"
+      "KeyItems": {
+        "Key1": [
+          "Stvorili ste Barney-a",
+          "Nije Barney hrana",
+          "Za ≈°to je ovo? O.o",
+          "Topovski kljuƒç",
+          "Kljuƒç destrukcije"
+        ],
+        "Key2": [
+          "Raptor kljuƒç",
+          "Pazi leƒëa",
+          "IZA TEBE!",
+          "Neprijatelj ka≈æe BUUU!",
+          "Gdje ja stanem?"
         ]
       }
     },
-
-    "TEMPLE.TR2": {
+    "RAPIDS.TR2": {
       "Names": [
-        "Randijeva i Rorina grobnica",
-        "Zaöto toliko äiva?",
-        "Kipovi otporne na metke",
-        "Zmije i ljestve",
-        "Zamka pakla",
-        "Trik sa svijeÊom"
-      ],
-      "Keys": {
-        "0": [
-          "Nema dupliciranja",
-          "Smrtonosni kljuË",
-          "5 noÊi Ganeöe",
-          "Nisu molitveni kotaËi",
-          "Komora za muËenje"
-        ],
-        "1": [
-          "Nema dupliciranja",
-          "Smrtonosni kljuË",
-          "5 noÊi Ganeöe",
-          "Nisu molitveni kotaËi",
-          "Komora za muËenje"
-        ],
-        "2": [
-          "Nema dupliciranja",
-          "Smrtonosni kljuË",
-          "5 noÊi Ganeöe",
-          "Nisu molitveni kotaËi",
-          "Komora za muËenje"
-        ],
-        "3": [
-          "Nema dupliciranja",
-          "Smrtonosni kljuË",
-          "5 noÊi Ganeöe",
-          "Nisu molitveni kotaËi",
-          "Komora za muËenje"
-        ]
-      }
-    },
-
-    "TONYBOSS.TR2": {
-      "Names": [
-        "OdliËno",
-        "Joö jedan labirint",
-        "Tajni labirint?!? O.o",
-        "40 slijepih ulica",
-        "40 zmija"
+        "Za≈°to ovo postoji?",
+        "Potreban notepad!",
+        "MADubu",
+        "WC ≈°koljka",
+        "Korokodili",
+        "RiP korisnici slu≈°alica"
       ]
     },
-
+    "TRIBOSS.TR2": {
+      "Names": [
+        "Kanibal boss",
+        "Jo≈° vi≈°e otrova",
+        "Footijeva tamnica",
+        "Hram tune",
+        "Temple Run"
+      ]
+    },
+    "ROOFS.TR2": {
+      "Names": [
+        "20 sekundi",
+        "Kopaƒç na zapadu",
+        "Gre≈°ka u izgradnji",
+        "Nema Big Bena?",
+        "Za≈°to je ovo ovdje?",
+        "London Ghetto",
+        "Bruvs?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "≈†takor kljuƒç",
+          "Kljuƒç za sobu gripe",
+          "Kljuƒç za dimnjak",
+          "Jednostavni kljuƒç",
+          "Zlatni kljuƒç"
+        ],
+        "Key2": [
+          "Predivni kljuƒç",
+          "Kljuƒç crkve",
+          "Rubin kljuƒç",
+          "Beskorisni kljuƒç",
+          "Za ≈°to je ovo? O.o"
+        ]
+      }
+    },
+    "SEWER.TR2": {
+      "Names": [
+        "Platforma 9 3/4",
+        "Podzemlje",
+        "Vo≈ænja Londonom",
+        "Ponestalo karata",
+        "Pazi rupa"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Elektriƒçni kljuƒç",
+          "Kljuƒç ƒçistaƒça",
+          "Najjaƒçi sam!",
+          "Alat",
+          "Popravi ovo!"
+        ],
+        "Key2": [
+          "Pola i pola",
+          "Pola",
+          "Religiozni kljuƒç",
+          "Jedan ili dva?",
+          "Damaklov kljuƒç"
+        ],
+        "Key3": [
+          "Pola i pola",
+          "Jedna polovica",
+          "Religiozni kljuƒç",
+          "Jedan ili dva?",
+          "Damoklov kljuƒç"
+        ],
+        "Key4": [
+          "Pola i pola",
+          "Jedna polovica",
+          "Religiozni kljuƒç",
+          "Jedan ili dva?",
+          "Damoklov kljuƒç"
+        ],
+        "Puzzle1": [
+          "NOVAC!",
+          "≈†iling",
+          "Masivan i sjajan!",
+          "Cijena voza",
+          "25 bitova"
+        ],
+        "Puzzle2": [
+          "Ajmo u Hogwarts",
+          "≈Ωeljezniƒçki prolaz",
+          "Nazad u Nevadu!",
+          "Bez kontrole!",
+          "Karta za kamenice"
+        ],
+        "Puzzle3": [
+          "Thorov ƒçekiƒá",
+          "Mj√∂lnir",
+          "Udari krticu",
+          "Razbij lokot!",
+          "Sveti Franjo ƒçekiƒá"
+        ],
+        "Puzzle4": [
+          "Blistaj zvjezdo mala",
+          "Sjajan sam!",
+          "Vidjeli ste ne≈°to sjajno!",
+          "Ne na nebu!",
+          "Jedna zvjezdica"
+        ]
+      }
+    },
     "TOWER.TR2": {
       "Names": [
         "Muzej nacionalne povjesti",
         "Miks besmislica",
-        "Ludova mrûnja",
+        "Ludova mr≈ænja",
         "Ajmo mrziti",
-        "LeteÊi UPV!"
+        "Leteƒái UPV!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Zagrij se!",
           "Nisi glitchao!",
-          "PodmetaË vatre",
+          "Podmetaƒç vatre",
           "Nema boilera?!?",
           "Hladan sam!"
         ]
       }
     },
-
-    "TRIBOSS.TR2": {
+    "OFFICE.TR2": {
       "Names": [
-        "Kanibal boss",
-        "Joö viöe otrova",
-        "Footijeva tamnica",
-        "Hram tune",
-        "Temple Run"
+        "Trƒçi Lara, TRƒåI!",
+        "Jeli stvarno mrtva?",
+        "Previ≈°e volti!",
+        "Nesvjesti!",
+        "Spremi i uƒçitaj!"
       ]
+    },
+    "NEVADA.TR2": {
+      "Names": [
+        "Pustinjski orlovi",
+        "Vodena pustinja",
+        "Ostani hidrirani",
+        "Nema pustinjskih traƒçnica",
+        "Ovo je topla dolina!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Generator kljuƒç",
+          "Kljuƒç generacije",
+          "JA IMAM MOƒÜ!",
+          "Nemoj se elektrizirati!",
+          "Kljuƒç nesvjestice"
+        ],
+        "Key2": [
+          "Kljuƒç minskog polja",
+          "TNT kljuƒç",
+          "Flipmap kljuƒç",
+          "Pristup vanzemaljcima",
+          "Veliki BUM!",
+          "Kljuƒç za BOOM!"
+        ]
+      }
+    },
+    "COMPOUND.TR2": {
+      "Names": [
+        "Jo≈° jedan zatvor",
+        "Zakon braƒáe",
+        "Veliki bijeg",
+        "Boris je ovdje!",
+        "Gdje mi je oru≈æje?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Umri ƒçuvaru...UMRI!!",
+          "Jo≈° jedna kartica",
+          "MasterCard",
+          "Kartica 1",
+          "Kartica 2",
+          "Izaƒëi iz zatvora kartica"
+        ],
+        "Key2": [
+          "VisaCard",
+          "Kartica 1",
+          "Kartica 2",
+          "Tajna kartica",
+          "Kreditna kartica"
+        ],
+        "Puzzle1": [
+          "Plavi kamen",
+          "Svjeƒçica 2",
+          "Prekidaƒç 2",
+          "Plavi USB",
+          "Nema dupliciranja"
+        ],
+        "Puzzle2": [
+          "≈Ωuti kamen",
+          "Svjeƒáica 1",
+          "Prekidaƒç 1",
+          "≈Ωuti USB",
+          "Nema dupliciranja"
+        ]
+      }
+    },
+    "AREA51.TR2": {
+      "Names": [
+        "Paul je bio ovdje!",
+        "Mjesto teorija zavjere",
+        "Kesnomorf je bio ovdje!",
+        "Dan neovisnosti",
+        "Zemlja vanzemaljaca!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Kljuƒç rakete",
+          "Ni≈°ta od vo≈ænje raketom",
+          "SpaceX kljuƒç",
+          "Raketa rakun",
+          "Elon Musk kljuƒç",
+          "Mo≈æe≈° preskoƒçiti i mene!",
+          "Tajni brojevi",
+          "Broj kreditne kartice",
+          "Stvarni bacaƒç raketi",
+          "Vanzemaljci blizu?!?"
+        ],
+        "Puzzle1": [
+          "Rapunzel kljuƒç",
+          "Visoki kljuƒç",
+          "Nije zmajev toranj",
+          "Kljuƒç za varanje",
+          "VARA≈†!!!"
+        ],
+        "Puzzle2": [
+          "Ne mo≈æe≈° me preskoƒçiti!",
+          "Evo mene opet!",
+          "UFO disk",
+          "Jedan od dva diska",
+          "Muzika? O.o"
+        ],
+        "Puzzle3": [
+          "Larin party",
+          "Zagonetna muzika",
+          "Jedan od dva diska",
+          "Muzika d≈æungle",
+          "Mo≈æe≈° me preskoƒçiti!"
+        ],
+        "Puzzle4": [
+          "Magnetski ≈æeljezni?ki klju?",
+          "Klju? podzemne ≈æeljeznice",
+          "Klju? ≈æeljezni?ke stanice",
+          "Crta?a igla",
+          "Slavna osoba",
+          "?eki?"
+        ]
+      }
+    },
+    "ANTARC.TR2": {
+      "Names": [
+        "Nema pahuljica",
+        "Brzi ƒçamac 2.0",
+        "Kocka leda",
+        "Hod u fri≈æideru",
+        "Juha od rajƒçice?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Nije paluba",
+          "IceKey_Gamer",
+          "Jo≈° jedan kljuƒç",
+          "Zaleƒëeni kljuƒç"
+        ],
+        "Puzzle1": [
+          "Ne zaboravi me!",
+          "Bombon",
+          "≈†tap",
+          "Osjeƒáam se sna≈ænije!",
+          "Von ≈†tapoviƒá"
+        ],
+        "Puzzle2": [
+          "Otvaraj rijeku",
+          "Otvaraj branu",
+          "Voda i voda i voda",
+          "Pristup juhi",
+          "Ju≈°ni kljuƒç"
+        ]
+      }
+    },
+    "MINES.TR2": {
+      "Names": [
+        "Minecraft",
+        "ZA≈†TO?!?!?!",
+        "Duboko, ledeno plivanje",
+        "Stormtrooper zaljev",
+        "Vatra",
+        "PATI!"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Ne zaboravi me!",
+          "Lizalica",
+          "≈†tap",
+          "Osjeƒáam se sna≈ænije!",
+          "Von ≈†tapoviƒá"
+        ],
+        "Puzzle2": [
+          "Duracell",
+          "9 Volti",
+          "Punjaƒç",
+          "Plava i crvena stvar",
+          "Kljuƒç dizalice!"
+        ],
+        "Puzzle3": [
+          "Duboka zaleƒëena stvarƒçica",
+          "ShawCrank iskupljenje",
+          "Okretanje stvari",
+          "Ozlijeƒëen si?",
+          "Umrijet ƒáe≈°!"
+        ]
+      }
+    },
+    "CITY.TR2": {
+      "Names": [
+        "Skoks s mosta",
+        "≈Ωivot bube",
+        "Pƒçelin film 2.0",
+        "Hodnik elemenata",
+        "4 naƒçina za smrt!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "ƒêavolji kljuƒç",
+          "Ova cura gori!",
+          "Mo≈æe≈° nas preskoƒçiti!",
+          "Blizanac kljuƒç",
+          "Kljuƒç iz pakla",
+          "Pogledaj me!",
+          "Kolaƒçiƒá kljuƒç"
+        ],
+        "Puzzle1": [
+          "Maska za lice",
+          "Nije Golden Mask",
+          "Fantom iz opere",
+          "Masikrana kugla dolazi",
+          "MASKA"
+        ]
+      }
+    },
+    "CHAMBER.TR2": {
+      "Names": [
+        "Inƒçi vinƒçi pauk",
+        "20 - 40 orlova",
+        "Japanski preporuƒçen",
+        "Oslobodi Vilija",
+        "Willardova pauƒçina"
+      ]
+    },
+    "STPAUL.TR2": {
+      "Names": [
+        "Ovo je tajna",
+        "60/59",
+        "Nedovr≈°eni posao",
+        "Smrtonosna katedrala",
+        "Bez ≈°tete"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Super skriven",
+          "Ljestve na zidu",
+          "Prona≈°ao si me konaƒçno?",
+          "Igra skrivaƒça",
+          "Ptiƒçja gripa"
+        ]
+      }
     }
   }
 }

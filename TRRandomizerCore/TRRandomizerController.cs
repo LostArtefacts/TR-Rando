@@ -9,6 +9,8 @@ using TRRandomizerCore.Utilities;
 using TRRandomizerCore.Secrets;
 using TRGE.Coord.Helpers;
 
+using GV = TRLevelControl.Model.TRGameVersion;
+
 namespace TRRandomizerCore;
 
 public class TRRandomizerController
@@ -1384,17 +1386,17 @@ public class TRRandomizerController
     {
         get
         {
-            G11NGame game;
+            GV game;
             switch (_editor.Edition.Version)
             {
                 case TRVersion.TR1:
-                    game = G11NGame.TR1;
+                    game = GV.TR1;
                     break;
                 case TRVersion.TR2:
-                    game = G11NGame.TR2;
+                    game = GV.TR2;
                     break;
                 case TRVersion.TR3:
-                    game = G11NGame.TR3;
+                    game = GV.TR3;
                     break;
                 default:
                     return null;

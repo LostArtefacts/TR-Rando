@@ -1,539 +1,262 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Iskierka nadziei",
-            "Aktywator flipmapy",
-            "Swiatelko w tunelu",
-            "Zaoszczedzony czas",
-            "Uzyj mnie!",
-            "Pochodnia",
-            "Przenosny plomyczek",
-            "Swiatlo, widze swiatlo",
-            "Tato! Patrz, pali sie"
-          ],
-          "44": [
-            "Iskierka nadziei",
-            "Aktywator flipmapy",
-            "Swiatelko w tunelu",
-            "Zaoszczedzony czas",
-            "Uzyj mnie!",
-            "Pochodnia",
-            "Przenosny plomyczek",
-            "Swiatlo, widze swiatlo",
-            "Tato! Patrz, pali sie"
-          ]
-        },
-        {
-          "36": [
-            "Pistolce",
-            "Najlepszy przyjaciel cheatera",
-            "Legendarna legenda",
-            "Boski atrybut",
-            "Tylko dwie rzeczy sa nieskonczone",
-            "Dwie pukawki",
-            "Pju pju"
-          ],
-          "45": [
-            "Naboje do pistoletow",
-            "Bierni obserwatorzy",
-            "Legendarna amunicja",
-            "Boska amunicja",
-            "...i jedna z nich to naboje",
-            "Amunicja do dwoch pukawek",
-            "Slepaki"
-          ]
-        },
-        {
-          "37": [
-            "Srutowka",
-            "Giwera",
-            "Powolna bron",
-            "Bron ktora widziala za duzo",
-            "Horeszkowska jednorurka",
-            "Rozdziewiczacz",
-            "Szotgens",
-            "Zabawka Kolda"
-          ],
-          "46": [
-            "Srut",
-            "Naboje do giwery",
-            "Powolne naboje",
-            "Naboje ktore widzialy za duzo",
-            "Kule do horeszkowskiej jednorurki",
-            "Potezna amunicja",
-            "Czerwona amunicja",
-            "Nie niebieska amunicja z TR4"
-          ]
-        },
-        {
-          "38": [
-            "Zabojca zabojcow",
-            "W zasadzie dobra bron",
-            "Deagle",
-            "Pustynny Orzel",
-            "Zguba Willarda",
-            "Orzelek",
-            "Digul",
-            "Potezny guns"
-          ],
-          "47": [
-            "Naboje do zabojcy zabojcow",
-            "W zasadzie dobre naboje",
-            "Naboje do deagla",
-            "Skrzydlate pociski",
-            "Cenne sekundy",
-            "Kulki do orzelka",
-            "Amunicja do digula",
-            "50 BMG"
-          ]
-        },
-        {
-          "39": [
-            "Marnotrawca nabojow",
-            "Ulepszone automaty",
-            "Znerfowana bron",
-            "Uzacze",
-            "Teraz mi slabiej",
-            "Pistolety razy 2",
-            "MG42 ale nie tak bardzo"
-          ],
-          "48": [
-            "Zmarnotrawione naboje",
-            "Naboje te same co zawsze",
-            "Znerfowana amunicja",
-            "Naboje do uzaczy",
-            "To nie bardzo pomaga",
-            "Duzo pestek",
-            "Tylko 60 pestek"
-          ]
-        },
-        {
-          "40": [
-            "Karabin memiczny",
-            "Gowniany karabin",
-            "Bron dla masochistow",
-            "Problem egzystencjalny",
-            "Podwodna kusza",
-            "2 szoty i kobra ded"
-          ],
-          "49": [
-            "Memy bojowe",
-            "Gowniana amunicja",
-            "Amunicja dla masochistow",
-            "Pytania egzystencjalne",
-            "Wykalaczki",
-            "Metalowe wykalaczki"
-          ]
-        },
-        {
-          "41": [
-            "Nie M16",
-            "MP 2137",
-            "Pogromca jaszczurow",
-            "MP3",
-            "Lepszy od bazuki",
-            "Stoj! Bo strzelam",
-            "Kulomiot"
-          ],
-          "50": [
-            "Oszukane naboje",
-            "Naboje do MP 2137",
-            "Sprej na jaszczury",
-            "Pliki MP3",
-            "Lepsze od rakiet",
-            "Dwa ciasteczka",
-            "Amunicja do kulomiota"
-          ]
-        },
-        {
-          "42": [
-            "Bron ostatecznej zaglady",
-            "Przenosna armata",
-            "Dzialo atomowe",
-            "Dzialo na kartofle",
-            "Rakietnica",
-            "Panzerabwehrkanone 40",
-            "Kakaowe dzialo",
-            "RPG-7"
-          ],
-          "51": [
-            "Rakiety ostatecznej zaglady",
-            "Kule armatnie",
-            "Glowice miedzykontynentalne",
-            "Kartofle",
-            "Rakiety",
-            "A co to takiego?",
-            "Czekolada",
-            "Dildos"
-          ]
-        },
-        {
-          "43": [
-            "Miotacz niedokladnosci",
-            "Z dwojga zlego lepiej tym",
-            "Wielki bumbum",
-            "Nie uzywac",
-            "Nie ten klawisz",
-            "Miotacz konserw"
-          ],
-          "52": [
-            "Niecelne granaty",
-            "Ladunki kompensacyjne",
-            "Wielkie bumbumy",
-            "Granaty ostatecznej kontrowersji",
-            "Granaty z lumpexu",
-            "Dwie puszki"
-          ]
-        },
-        {
-          "53": [
-            "Nie uzywac",
-            "Medyczna marihuana",
-            "Przenosny gabinet lekarski",
-            "Ibuprom Zatoki",
-            "Zasobnik z krysztalami",
-            "NLNMAS Restart",
-            "Kremowka papieska",
-            "Fajzerek razy 50"
-          ],
-          "54": [
-            "Psychotropy",
-            "Kokainum",
-            "Szpital tymczasowy",
-            "Zestaw do urynoterapii",
-            "Zapas krysztalow leczniczych",
-            "Andrzej to sie wyklepie",
-            "Fajzerek razy 100"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "Klamoty",
-          "Szpargaly",
-          "Inwentarz",
-          "Pierdoly",
-          "Roznosci",
-          "Artefuckty",
-          "Przedmioty",
-          "Plecak z TR4",
-          "Plecak z Angkor Wat"
-        ],
-        "3": [
-          "'Zdychlas kur**'",
-          "To co, teraz NLNM?",
-          "Zgon",
-          "Postaraj sie bardziej",
-          "I nastepny gryzie piach",
-          "Kalendarz zostal kopniety",
-          "Jak do tego doszlo nie wiem",
-          "FFFFFFFFFFFFF",
-          "Witaj w Dark Souls"
-        ],
-        "35": [
-          "Statystyka ",
-          "Jak ci idzie",
-          "Dane do wyzwan",
-          "Sprawdz o ile jestes do tylu",
-          "Wyzwalacz depresji",
-          "Frustracja w liczbach",
-          "O 60km/h za szybko",
-          "Patrz kochanie jak czas leci",
-          "Stoper"
-
-        ],
-        "59": [
-          "Safespace",
-          "Siedziba Core Design",
-          "Kwatera randomizera",
-          "Dom Lary",
-          "Lodowka Winstona",
-          "Strefa komfortu",
-          "Burdel"
-        ],
-        "85": [
-          "Londyn",
-          "Anglia",
-          "Z wizyta u krolowej",
-          "Noc w muzeum",
-          "Za piec dwunasta",
-          "Pora na herbatke",
-          "Wycieczka nad Tamize"
-        ],
-        "86": [
-          "Nevada",
-          "Jak krew w piach",
-          "Dolina smierci",
-          "Infiltracja",
-          "Orly pustyni",
-          "Brak broni",
-          "Siedziba Microsoftu"
-        ],
-        "87": [
-          "Splyw kajakowy",
-          "Zaginiona wyspa",
-          "Cannibal Holocaust",
-          "Park wodny",
-          "Ocean niespokojny",
-          "Gdzies indziej",
-          "Wodzionka"
-        ],
-        "88": [
-          "Lara Polara",
-          "Zemsta Winstona",
-          "Zmora plaskoziemcow",
-          "Kraina lodu",
-          "Cos",
-          "Gora lodowa na wprost",
-          "Tam gdzie zatonal Titanic"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- PUSTE MIEJSCE -",
-          "- WOLNY OTWOR -",
-          "- NIC -",
-          "- MIEJSCE NA ZAPIS -",
-          "- NADPISZ MNIE -",
-          "- KLIKNIJ MNIE -",
-          "- PUSTE -",
-          "- TU NIC NIE MA -"
-        ]
-      }
-    }
-  ],
-
+ï»¿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Iskierka nadziei",
+      "Aktywator flipmapy",
+      "Swiatelko w tunelu",
+      "Zaoszczedzony czas",
+      "Uzyj mnie!",
+      "Pochodnia",
+      "Przenosny plomyczek",
+      "Swiatlo, widze swiatlo",
+      "Tato! Patrz, pali sie"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Pistolce",
+      "Najlepszy przyjaciel cheatera",
+      "Legendarna legenda",
+      "Boski atrybut",
+      "Tylko dwie rzeczy sa nieskonczone",
+      "Dwie pukawki",
+      "Pju pju"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Naboje do pistoletow",
+      "Bierni obserwatorzy",
+      "Legendarna amunicja",
+      "Boska amunicja",
+      "...i jedna z nich to naboje",
+      "Amunicja do dwoch pukawek",
+      "Slepaki"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Srutowka",
+      "Giwera",
+      "Powolna bron",
+      "Bron ktora widziala za duzo",
+      "Horeszkowska jednorurka",
+      "Rozdziewiczacz",
+      "Szotgens",
+      "Zabawka Kolda"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Srut",
+      "Naboje do giwery",
+      "Powolne naboje",
+      "Naboje ktore widzialy za duzo",
+      "Kule do horeszkowskiej jednorurki",
+      "Potezna amunicja",
+      "Czerwona amunicja",
+      "Nie niebieska amunicja z TR4"
+    ],
+    "INV_ITEM_DEAGLE": [
+      "Zabojca zabojcow",
+      "W zasadzie dobra bron",
+      "Deagle",
+      "Pustynny Orzel",
+      "Zguba Willarda",
+      "Orzelek",
+      "Digul",
+      "Potezny guns"
+    ],
+    "INV_ITEM_DEAGLE_AMMO": [
+      "Naboje do zabojcy zabojcow",
+      "W zasadzie dobre naboje",
+      "Naboje do deagla",
+      "Skrzydlate pociski",
+      "Cenne sekundy",
+      "Kulki do orzelka",
+      "Amunicja do digula",
+      "50 BMG"
+    ],
+    "INV_ITEM_UZI": [
+      "Marnotrawca nabojow",
+      "Ulepszone automaty",
+      "Znerfowana bron",
+      "Uzacze",
+      "Teraz mi slabiej",
+      "Pistolety razy 2",
+      "MG42 ale nie tak bardzo"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Zmarnotrawione naboje",
+      "Naboje te same co zawsze",
+      "Znerfowana amunicja",
+      "Naboje do uzaczy",
+      "To nie bardzo pomaga",
+      "Duzo pestek",
+      "Tylko 60 pestek"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Karabin memiczny",
+      "Gowniany karabin",
+      "Bron dla masochistow",
+      "Problem egzystencjalny",
+      "Podwodna kusza",
+      "2 szoty i kobra ded"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Memy bojowe",
+      "Gowniana amunicja",
+      "Amunicja dla masochistow",
+      "Pytania egzystencjalne",
+      "Wykalaczki",
+      "Metalowe wykalaczki"
+    ],
+    "INV_ITEM_M16": [
+      "Nie M16",
+      "MP 2137",
+      "Pogromca jaszczurow",
+      "MP3",
+      "Lepszy od bazuki",
+      "Stoj! Bo strzelam",
+      "Kulomiot"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "Oszukane naboje",
+      "Naboje do MP 2137",
+      "Sprej na jaszczury",
+      "Pliki MP3",
+      "Lepsze od rakiet",
+      "Dwa ciasteczka",
+      "Amunicja do kulomiota"
+    ],
+    "INV_ITEM_ROCKET_LAUNCHER": [
+      "Bron ostatecznej zaglady",
+      "Przenosna armata",
+      "Dzialo atomowe",
+      "Dzialo na kartofle",
+      "Rakietnica",
+      "Panzerabwehrkanone 40",
+      "Kakaowe dzialo",
+      "RPG-7"
+    ],
+    "INV_ITEM_ROCKETS": [
+      "Rakiety ostatecznej zaglady",
+      "Kule armatnie",
+      "Glowice miedzykontynentalne",
+      "Kartofle",
+      "Rakiety",
+      "A co to takiego?",
+      "Czekolada",
+      "Dildos"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Miotacz niedokladnosci",
+      "Z dwojga zlego lepiej tym",
+      "Wielki bumbum",
+      "Nie uzywac",
+      "Nie ten klawisz",
+      "Miotacz konserw"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Niecelne granaty",
+      "Ladunki kompensacyjne",
+      "Wielkie bumbumy",
+      "Granaty ostatecznej kontrowersji",
+      "Granaty z lumpexu",
+      "Dwie puszki"
+    ],
+    "INV_ITEM_MEDI": [
+      "Nie uzywac",
+      "Medyczna marihuana",
+      "Przenosny gabinet lekarski",
+      "Ibuprom Zatoki",
+      "Zasobnik z krysztalami",
+      "NLNMAS Restart",
+      "Kremowka papieska",
+      "Fajzerek razy 50"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Psychotropy",
+      "Kokainum",
+      "Szpital tymczasowy",
+      "Zestaw do urynoterapii",
+      "Zapas krysztalow leczniczych",
+      "Andrzej to sie wyklepie",
+      "Fajzerek razy 100"
+    ],
+    "HEADING_ITEMS": [
+      "Klamoty",
+      "Szpargaly",
+      "Inwentarz",
+      "Pierdoly",
+      "Roznosci",
+      "Artefuckty",
+      "Przedmioty",
+      "Plecak z TR4",
+      "Plecak z Angkor Wat"
+    ],
+    "HEADING_GAME_OVER": [
+      "'Zdychlas kur**'",
+      "To co, teraz NLNM?",
+      "Zgon",
+      "Postaraj sie bardziej",
+      "I nastepny gryzie piach",
+      "Kalendarz zostal kopniety",
+      "Jak do tego doszlo nie wiem",
+      "FFFFFFFFFFFFF",
+      "Witaj w Dark Souls"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Statystyka ",
+      "Jak ci idzie",
+      "Dane do wyzwan",
+      "Sprawdz o ile jestes do tylu",
+      "Wyzwalacz depresji",
+      "Frustracja w liczbach",
+      "O 60km/h za szybko",
+      "Patrz kochanie jak czas leci",
+      "Stoper"
+    ],
+    "INV_GLOBE_LONDON": [
+      "Londyn",
+      "Anglia",
+      "Z wizyta u krolowej",
+      "Noc w muzeum",
+      "Za piec dwunasta",
+      "Pora na herbatke",
+      "Wycieczka nad Tamize"
+    ],
+    "INV_GLOBE_NEVADA": [
+      "Nevada",
+      "Jak krew w piach",
+      "Dolina smierci",
+      "Infiltracja",
+      "Orly pustyni",
+      "Brak broni",
+      "Siedziba Microsoftu"
+    ],
+    "INV_GLOBE_SOUTH_PACIFIC": [
+      "Splyw kajakowy",
+      "Zaginiona wyspa",
+      "Cannibal Holocaust",
+      "Park wodny",
+      "Ocean niespokojny",
+      "Gdzies indziej",
+      "Wodzionka"
+    ],
+    "INV_GLOBE_ANTARCTICA": [
+      "Lara Polara",
+      "Zemsta Winstona",
+      "Zmora plaskoziemcow",
+      "Kraina lodu",
+      "Cos",
+      "Gora lodowa na wprost",
+      "Tam gdzie zatonal Titanic"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- PUSTE MIEJSCE -",
+      "- WOLNY OTWOR -",
+      "- NIC -",
+      "- MIEJSCE NA ZAPIS -",
+      "- NADPISZ MNIE -",
+      "- KLIKNIJ MNIE -",
+      "- PUSTE -",
+      "- TU NIC NIE MA -"
+    ]
+  },
   "LevelStrings": {
-    "ANTARC.TR2": {
-      "Names": [
-        "Pieklo snowflake'ow",
-        "Hipotermia",
-        "Co najmniej minus siedemset",
-        "Sniezna slepota",
-        "Barszcz antygrawitacyjny",
-        "Sutki mam jak gumki na olowku",
-        "Zasada 1-10-1"
-      ],
-      "Keys": {
-        "0": [
-          "Klucz do przeziebienia",
-          "Klucz do chaty",
-          "Klucz do odmrozen",
-          "Mrozony klucz",
-          "Podwodny klucz"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "No to rura",
-          "Slomka do napojow",
-          "Lom",
-          "Zlom",
-          "Szprycha od roweru"
-        ],
-        "1": [
-          "Klucz do rzeki",
-          "Otwieracz do rzeki",
-          "Klucz od sluzy",
-          "Klucz od tamy",
-          "Klucz do zupy"
-        ]
-      }
-    },
-
-    "AREA51.TR2": {
-      "Names": [
-        "Strefa 11",
-        "Wylegarnia teorii spiskowych",
-        "Starozytni kosmici",
-        "Dzien niepodleglosci",
-        "Uforia",
-        "Strefa 69"
-      ],
-      "Keys": {
-        "0": [
-          "Klucz do wyrzutni",
-          "Gdzie on wyladuje",
-          "SpaceX",
-          "Rakieta ziemia-dupa",
-          "Klucz Elona"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Klucz do Mysiej Wiezy",
-          "Klucz na gore",
-          "Klucz do straznicy",
-          "Klucz cheatera",
-          "Nieuzywany klucz",
-          "Mozna pominac",
-          "Tajny szyfr",
-          "Pin do karty",
-          "To dopiero rakietnica",
-          "Ufo w poblizu?!?"
-        ],
-        "1": [
-          "Dark Angel Symphony",
-          "Windows 98",
-          "ASMR dla kosmitow",
-          "Dziela wszystkie Boleslawa Prusa",
-          "Program hakujacy od ruskich trolli",
-          "Bazarowa kopia TR3"
-        ],
-        "2": [
-          "Tomb Raider Suite",
-          "DVD od kosmitow",
-          "UFOPORNOOOO",
-          "Zlota plyta z Voyagera",
-          "Zaginiona beta z E3",
-          "Piracka kopia TR3"
-        ],
-        "3": [
-          "Klucz do kolejki magnetycznej",
-          "Klucz do metra",
-          "Klucz do stacji kolejki",
-          "Pinezka",
-          "celebryta",
-          "mlot pneumatyczny"
-        ]
-      }
-    },
-
-    "CHAMBER.TR2": {
-      "Names": [
-        "Chondryt zwyczajny",
-        "Deagle na ratunek",
-        "Turkuc podjadek",
-        "Czlowiek-pajak",
-        "Pajeczyna glupoty",
-        "Willy 50",
-        "Cztery posazki",
-        "Czlowiek silnej woli"
-      ]
-    },
-
-    "CITY.TR2": {
-      "Names": [
-        "Mostalgia",
-        "Film o pszczolach",
-        "Szerszenie 2 Smiertelny Atak",
-        "Elementarny Blad",
-        "Cztery Pory Zdychu",
-        "Szerszenie",
-        "Pszczoly",
-        "Wesole miasteczko",
-        "Barkhang Monastery ale to TR3",
-        "Barkhang Monastery.TR3"
-
-      ],
-      "Keys": {
-        "0": [
-          "Klucz z PTSD",
-          "Klucz z trauma",
-          "Klucz z flashbackiem",
-          "Swiadomy klucz",
-          "Klucz ktory widzial zbyt duzo",
-          "Klucz z depresja",
-          "Ciasteczkowy klucz",
-          "Bolaterski klucz"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Maska kowidowa",
-          "Maska przeciwgazowa",
-          "Maska karnawalowa",
-          "Maska spawacza",
-          "Maska"
-        ]
-      }
-    },
-
-    "COMPOUND.TR2": {
-      "Names": [
-        "Wronki",
-        "Skazani na pushblock",
-        "Wielka ucieczka",
-        "Biuro ochrony rzadu",
-        "Nie mam k**wa broni!!!",
-        "Wiezienie w Sztumie",
-        "Kolchoz",
-        "Lagier"
-      ],
-      "Keys": {
-        "0": [
-          "Dowod osobisty",
-          "Karta premium",
-          "Delikarta",
-          "Karta rabatowa",
-          "Karta stalego wieznia",
-          "Karta wyjscia z wiezienia",
-          "Xbox Game Pass"
-        ],
-        "1": [
-          "Karta VISA",
-          "Karta MasterCard",
-          "Karta VPay",
-          "Karta platnicza",
-          "Karta kredytowa",
-          "Karta pre-paid Steam 20 USD",
-          "Licencja do WinRARa"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Zatyczka do dupy",
-          "Sonda analna",
-          "Czopek",
-          "Gruszka do wlewow",
-          "Rektoskop"
-        ],
-        "1": [
-          "Bezpiecznik",
-          "Zworka",
-          "Wtyczka",
-          "Kabel USB",
-          "Adapter PS2",
-          "Zatyczka do kal dziury"
-        ]
-      }
-    },
-
-    "CRASH.TR2": {
-      "Names": [
-        "Park Jurajski",
-        "Milion lat przed resetem",
-        "Nora Barneya",
-        "Zaginiony swiat",
-        "10 kwietnia",
-        "Blighttown",
-        "Lost Valley.TR3"
-      ],
-      "Keys": {
-        "0": [
-          "Klucz do cierpliwosci",
-          "Niestrawny klucz",
-          "O nie...",
-          "Klucz drugiego pilota",
-          "Klucz do armaty",
-          "Klucz do serca F37CH"
-        ],
-        "1": [
-          "Klucz raptorow",
-          "Uwaga, z tylu",
-          "Za toba",
-          "Klucz pilota",
-          "Taka zagadka dwa klucze i armatka",
-          "Kluczyk"
-        ]
-      }
-    },
-
     "HOUSE.TR2": {
       "Names": [
         "W skromnych progach",
@@ -544,8 +267,8 @@
         "Dom spokojnej starosci",
         "Dom, slodki dom"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klucz do toru",
           "Klucz wyscigowy",
           "Klucz do rajdu w terenie",
@@ -555,7 +278,6 @@
         ]
       }
     },
-
     "JUNGLE.TR2": {
       "Names": [
         "Ksiega dzungli",
@@ -564,8 +286,8 @@
         "Pirania 3D",
         "Mile zlego poczatki"
       ],
-      "Keys": {
-        "3": [
+      "KeyItems": {
+        "Key4": [
           "Drzwi do lasu",
           "Klucz do dzungli",
           "Nieobowiazkowy klucz",
@@ -574,85 +296,25 @@
         ]
       }
     },
-
-    "MINES.TR2": {
+    "TEMPLE.TR2": {
       "Names": [
-        "Minecraft",
-        "Kopalnia Wieliczka",
-        "Morderczy nur",
-        "Koszary szturmowcow",
-        "Kraina lodu, ognia i rzygu",
-        "Kopalnia kryptowaluty",
-        "...a bez apteczki potrafisz?"
-
+        "Ten grobowiec bedzie ich grobowcem",
+        "PokShiviony level",
+        "Gabki na pociski",
+        "Weze i drabiny",
+        "Pulapek od cholery",
+        "Flara jako klucz"
       ],
-      "Puzzles": {
-        "0": [
-          "No to rura",
-          "Slomka do napojow",
-          "Lom",
-          "Zlom",
-          "Szprycha od roweru"
-        ],
-        "1": [
-          "RTX do kopania bitcoina",
-          "Energia do grania w ten syf",
-          "Ladowarka do Samsunga",
-          "500 plus, 500 minus",
-          "Zasilacz do dzwigu"
-        ],
-        "2": [
-          "Zimny rozruch",
-          "Korba od traktora",
-          "Korba od dzwigu",
-          "Uruchamiacz",
-          "Nie gadamy, nurkujemy"
+      "KeyItems": {
+        "Key1": [
+          "Niestety potrzebne dwa",
+          "Zestaw kluczy",
+          "Horror u Ganeshy",
+          "Klucze przeblagalne",
+          "Klucze do sali tortur"
         ]
       }
     },
-
-    "NEVADA.TR2": {
-      "Names": [
-        "Pustynia Bledowska",
-        "Slowinski Park Narodowy",
-        "Avada Nevada",
-        "Nevada Kedavra",
-        "Globalne ocieplenie",
-        "Piaskownica",
-        "Sahara Lara"
-      ],
-      "Keys": {
-        "0": [
-          "Grunt to prund",
-          "Karta stalego pradu",
-          "Degenerator",
-          "Kaliber 200 Volt",
-          "Ostatni gasi swiatlo"
-        ],
-        "1": [
-          "Betonator",
-          "Lubudu",
-          "Jebut",
-          "Pierdziu",
-          "Terraforming",
-          "To gdzie mam pania wysadzic",
-          "Duze BOOM",
-          "PA jak jebn*e!"
-        ]
-      }
-    },
-
-    "OFFICE.TR2": {
-      "Names": [
-        "Parkour",
-        "Kosmetyczna zmiana",
-        "Pod napieciem",
-        "Czwarta faza",
-        "Zaciemnienie",
-        "Ale faza"
-      ]
-    },
-
     "QUADCHAS.TR2": {
       "Names": [
         "Piknik nad Narwia",
@@ -662,8 +324,8 @@
         "Biebrzanski Park Narodowy",
         "Plywajac z rybami"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klucz do dluzszej drogi",
           "Kto tego w ogole uzywa",
           "Malpi klucz",
@@ -673,7 +335,71 @@
         ]
       }
     },
-
+    "TONYBOSS.TR2": {
+      "Names": [
+        "Pogiety poziom",
+        "Zemsta zywoplotu",
+        "Jaskinia Mylna",
+        "Zielono mi",
+        "Klatwa doliny wezy",
+        "A-MAZE-ING"
+      ]
+    },
+    "SHORE.TR2": {
+      "Names": [
+        "Wioska ludozercow",
+        "Kurort Miedzyzdroje",
+        "Uwaga na nogi...",
+        "4/3",
+        "Jadro ciemnosci",
+        "Wioska na odludziu"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Podwodny klucz",
+          "Klucz Davy'ego Jonesa",
+          "Klucz topielcow",
+          "Klucz Jacka Sparrowa",
+          "Klucz przemytnika"
+        ],
+        "Puzzle1": [
+          "Galaretowaty osmioscian",
+          "Krystaliczny jad",
+          "Krwawy diament",
+          "Magiczny otwieracz",
+          "Zelki"
+        ]
+      }
+    },
+    "CRASH.TR2": {
+      "Names": [
+        "Park Jurajski",
+        "Milion lat przed resetem",
+        "Nora Barneya",
+        "Zaginiony swiat",
+        "10 kwietnia",
+        "Blighttown",
+        "Lost Valley.TR3"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klucz do cierpliwosci",
+          "Niestrawny klucz",
+          "O nie...",
+          "Klucz drugiego pilota",
+          "Klucz do armaty",
+          "Klucz do serca F37CH"
+        ],
+        "Key2": [
+          "Klucz raptorow",
+          "Uwaga, z tylu",
+          "Za toba",
+          "Klucz pilota",
+          "Taka zagadka dwa klucze i armatka",
+          "Kluczyk"
+        ]
+      }
+    },
     "RAPIDS.TR2": {
       "Names": [
         "Wawoz Kamienczyka",
@@ -686,7 +412,17 @@
         "NaBudu Gorge"
       ]
     },
-
+    "TRIBOSS.TR2": {
+      "Names": [
+        "Wudz wioski",
+        "Zrodlo jadu",
+        "Izolatka Footiego",
+        "Zywe tarcze",
+        "Ten jeden dobry sekret",
+        "Bestia z Wadowic",
+        "Czekoladowy krol"
+      ]
+    },
     "ROOFS.TR2": {
       "Names": [
         "Brenter",
@@ -698,15 +434,15 @@
         "Jest tu kto?",
         "Spojrz na mojego Big Bena"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klucz do niewiadomo czego",
           "A co to tu robi?",
           "Malo przydatny klucz",
           "Klucz do tajemniczych drzwi",
           "Ze tez ci sie chce"
         ],
-        "1": [
+        "Key2": [
           "Ozdobny klucz",
           "Klucz do kosciola",
           "Klucz z rubinem",
@@ -715,7 +451,6 @@
         ]
       }
     },
-
     "SEWER.TR2": {
       "Names": [
         "Peron 9 3/4",
@@ -726,59 +461,57 @@
         "Londynskie metro",
         "Loza masonska"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klucz kustosza",
           "Klucz woznego",
           "Klucz portiera",
           "Klucz do skladziku",
           "Klucz mechanika"
         ],
-        "1": [
+        "Key2": [
           "Jeden z dwoch kluczy",
           "W polowie zagadki",
           "Klucz biblijny",
           "Klucz do madrosci",
           "Klucze Damoclesa"
         ],
-        "2": [
+        "Key3": [
           "Jeden z dwoch kluczy",
           "W polowie zagadki",
           "Klucz biblijny",
           "Klucz do madrosci",
           "Klucze Damoclesa"
         ],
-        "3": [
+        "Key4": [
           "Jeden z dwoch kluczy",
           "W polowie zagadki",
           "Klucz biblijny",
           "Klucz do madrosci",
           "Klucze Damoclesa"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Kasa",
           "Bitcoin",
           "Moneta okolicznosciowa",
           "Donacja na hype train",
-          "25 Bitów"
+          "25 BitÃ³w"
         ],
-        "1": [
+        "Puzzle2": [
           "Bilet do Hogwartu",
           "Bilet na tamten swiat",
           "Bilet MPK",
           "Karta zblizeniowa",
           "Karta sieciowa"
         ],
-        "2": [
+        "Puzzle3": [
           "Mlot Thora",
-          "Mjölnir",
+          "MjÃ¶lnir",
           "Mlot do Whack-a-mole'a",
           "Odnalazles siebie, ty mlocie",
           "Mlot kowala z Dark Soulsow"
         ],
-        "3": [
+        "Puzzle4": [
           "Gwiazda betlejemska",
           "Tryb administratora",
           "Gwiezdny klucz",
@@ -787,108 +520,6 @@
         ]
       }
     },
-
-    "SHORE.TR2": {
-      "Names": [
-        "Wioska ludozercow",
-        "Kurort Miedzyzdroje",
-        "Uwaga na nogi...",
-        "4/3",
-        "Jadro ciemnosci",
-        "Wioska na odludziu"
-      ],
-      "Keys": {
-        "0": [
-          "Podwodny klucz",
-          "Klucz Davy'ego Jonesa",
-          "Klucz topielcow",
-          "Klucz Jacka Sparrowa",
-          "Klucz przemytnika"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Galaretowaty osmioscian",
-          "Krystaliczny jad",
-          "Krwawy diament",
-          "Magiczny otwieracz",
-          "Zelki"
-        ]
-      }
-    },
-
-    "STPAUL.TR2": {
-      "Names": [
-        "Litania do wszystkich bugow",
-        "60/59",
-        "Niedokonczony poziom",
-        "Kosciol swietego Bedoesa",
-        "Bazylika mniejszego urazu",
-        "Deckjavu"
-      ],
-      "Keys": {
-        "0": [
-          "Klucz do zycia wiecznego",
-          "Drabina jakubowa",
-          "Wreszcie ktos mnie znalazl",
-          "Klucz znaleziony w kosciele",
-          "Klucz do zakrystii"
-        ]
-      }
-    },
-
-    "TEMPLE.TR2": {
-      "Names": [
-        "Ten grobowiec bedzie ich grobowcem",
-        "PokShiviony level",
-        "Gabki na pociski",
-        "Weze i drabiny",
-        "Pulapek od cholery",
-        "Flara jako klucz"
-      ],
-      "Keys": {
-        "0": [
-          "Niestety potrzebne dwa",
-          "Zestaw kluczy",
-          "Horror u Ganeshy",
-          "Klucze przeblagalne",
-          "Klucze do sali tortur"
-        ],
-        "1": [
-          "Niestety potrzebne dwa",
-          "Zestaw kluczy",
-          "Horror u Ganeshy",
-          "Klucze przeblagalne",
-          "Klucze do sali tortur"
-        ],
-        "2": [
-          "Niestety potrzebne dwa",
-          "Zestaw kluczy",
-          "Horror u Ganeshy",
-          "Klucze przeblagalne",
-          "Klucze do sali tortur"
-        ],
-        "3": [
-          "Niestety potrzebne dwa",
-          "Zestaw kluczy",
-          "Horror u Ganeshy",
-          "Klucze przeblagalne",
-          "Klucze do sali tortur"
-        ]
-      }
-    },
-
-    "TONYBOSS.TR2": {
-      "Names": [
-        "Pogiety poziom",
-        "Zemsta zywoplotu",
-        "Jaskinia Mylna",
-        "Zielono mi",
-        "Klatwa doliny wezy",
-        "A-MAZE-ING"
-      ]
-    },
-
     "TOWER.TR2": {
       "Names": [
         "Muzeum historii paranormalnej",
@@ -898,8 +529,8 @@
         "Magazyn pasera",
         "Bardzo nudny level"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Podgrzewacz",
           "Wow ",
           "Zapalnik",
@@ -909,17 +540,279 @@
         ]
       }
     },
-
-    "TRIBOSS.TR2": {
+    "OFFICE.TR2": {
       "Names": [
-        "Wudz wioski",
-        "Zrodlo jadu",
-        "Izolatka Footiego",
-        "Zywe tarcze",
-        "Ten jeden dobry sekret",
-        "Bestia z Wadowic",
-        "Czekoladowy krol"
+        "Parkour",
+        "Kosmetyczna zmiana",
+        "Pod napieciem",
+        "Czwarta faza",
+        "Zaciemnienie",
+        "Ale faza"
       ]
+    },
+    "NEVADA.TR2": {
+      "Names": [
+        "Pustynia Bledowska",
+        "Slowinski Park Narodowy",
+        "Avada Nevada",
+        "Nevada Kedavra",
+        "Globalne ocieplenie",
+        "Piaskownica",
+        "Sahara Lara"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Grunt to prund",
+          "Karta stalego pradu",
+          "Degenerator",
+          "Kaliber 200 Volt",
+          "Ostatni gasi swiatlo"
+        ],
+        "Key2": [
+          "Betonator",
+          "Lubudu",
+          "Jebut",
+          "Pierdziu",
+          "Terraforming",
+          "To gdzie mam pania wysadzic",
+          "Duze BOOM",
+          "PA jak jebn*e!"
+        ]
+      }
+    },
+    "COMPOUND.TR2": {
+      "Names": [
+        "Wronki",
+        "Skazani na pushblock",
+        "Wielka ucieczka",
+        "Biuro ochrony rzadu",
+        "Nie mam k**wa broni!!!",
+        "Wiezienie w Sztumie",
+        "Kolchoz",
+        "Lagier"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Dowod osobisty",
+          "Karta premium",
+          "Delikarta",
+          "Karta rabatowa",
+          "Karta stalego wieznia",
+          "Karta wyjscia z wiezienia",
+          "Xbox Game Pass"
+        ],
+        "Key2": [
+          "Karta VISA",
+          "Karta MasterCard",
+          "Karta VPay",
+          "Karta platnicza",
+          "Karta kredytowa",
+          "Karta pre-paid Steam 20 USD",
+          "Licencja do WinRARa"
+        ],
+        "Puzzle1": [
+          "Zatyczka do dupy",
+          "Sonda analna",
+          "Czopek",
+          "Gruszka do wlewow",
+          "Rektoskop"
+        ],
+        "Puzzle2": [
+          "Bezpiecznik",
+          "Zworka",
+          "Wtyczka",
+          "Kabel USB",
+          "Adapter PS2",
+          "Zatyczka do kal dziury"
+        ]
+      }
+    },
+    "AREA51.TR2": {
+      "Names": [
+        "Strefa 11",
+        "Wylegarnia teorii spiskowych",
+        "Starozytni kosmici",
+        "Dzien niepodleglosci",
+        "Uforia",
+        "Strefa 69"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klucz do wyrzutni",
+          "Gdzie on wyladuje",
+          "SpaceX",
+          "Rakieta ziemia-dupa",
+          "Klucz Elona"
+        ],
+        "Puzzle1": [
+          "Klucz do Mysiej Wiezy",
+          "Klucz na gore",
+          "Klucz do straznicy",
+          "Klucz cheatera",
+          "Nieuzywany klucz",
+          "Mozna pominac",
+          "Tajny szyfr",
+          "Pin do karty",
+          "To dopiero rakietnica",
+          "Ufo w poblizu?!?"
+        ],
+        "Puzzle2": [
+          "Dark Angel Symphony",
+          "Windows 98",
+          "ASMR dla kosmitow",
+          "Dziela wszystkie Boleslawa Prusa",
+          "Program hakujacy od ruskich trolli",
+          "Bazarowa kopia TR3"
+        ],
+        "Puzzle3": [
+          "Tomb Raider Suite",
+          "DVD od kosmitow",
+          "UFOPORNOOOO",
+          "Zlota plyta z Voyagera",
+          "Zaginiona beta z E3",
+          "Piracka kopia TR3"
+        ],
+        "Puzzle4": [
+          "Klucz do kolejki magnetycznej",
+          "Klucz do metra",
+          "Klucz do stacji kolejki",
+          "Pinezka",
+          "celebryta",
+          "mlot pneumatyczny"
+        ]
+      }
+    },
+    "ANTARC.TR2": {
+      "Names": [
+        "Pieklo snowflake'ow",
+        "Hipotermia",
+        "Co najmniej minus siedemset",
+        "Sniezna slepota",
+        "Barszcz antygrawitacyjny",
+        "Sutki mam jak gumki na olowku",
+        "Zasada 1-10-1"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klucz do przeziebienia",
+          "Klucz do chaty",
+          "Klucz do odmrozen",
+          "Mrozony klucz",
+          "Podwodny klucz"
+        ],
+        "Puzzle1": [
+          "No to rura",
+          "Slomka do napojow",
+          "Lom",
+          "Zlom",
+          "Szprycha od roweru"
+        ],
+        "Puzzle2": [
+          "Klucz do rzeki",
+          "Otwieracz do rzeki",
+          "Klucz od sluzy",
+          "Klucz od tamy",
+          "Klucz do zupy"
+        ]
+      }
+    },
+    "MINES.TR2": {
+      "Names": [
+        "Minecraft",
+        "Kopalnia Wieliczka",
+        "Morderczy nur",
+        "Koszary szturmowcow",
+        "Kraina lodu, ognia i rzygu",
+        "Kopalnia kryptowaluty",
+        "...a bez apteczki potrafisz?"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "No to rura",
+          "Slomka do napojow",
+          "Lom",
+          "Zlom",
+          "Szprycha od roweru"
+        ],
+        "Puzzle2": [
+          "RTX do kopania bitcoina",
+          "Energia do grania w ten syf",
+          "Ladowarka do Samsunga",
+          "500 plus, 500 minus",
+          "Zasilacz do dzwigu"
+        ],
+        "Puzzle3": [
+          "Zimny rozruch",
+          "Korba od traktora",
+          "Korba od dzwigu",
+          "Uruchamiacz",
+          "Nie gadamy, nurkujemy"
+        ]
+      }
+    },
+    "CITY.TR2": {
+      "Names": [
+        "Mostalgia",
+        "Film o pszczolach",
+        "Szerszenie 2 Smiertelny Atak",
+        "Elementarny Blad",
+        "Cztery Pory Zdychu",
+        "Szerszenie",
+        "Pszczoly",
+        "Wesole miasteczko",
+        "Barkhang Monastery ale to TR3",
+        "Barkhang Monastery.TR3"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klucz z PTSD",
+          "Klucz z trauma",
+          "Klucz z flashbackiem",
+          "Swiadomy klucz",
+          "Klucz ktory widzial zbyt duzo",
+          "Klucz z depresja",
+          "Ciasteczkowy klucz",
+          "Bolaterski klucz"
+        ],
+        "Puzzle1": [
+          "Maska kowidowa",
+          "Maska przeciwgazowa",
+          "Maska karnawalowa",
+          "Maska spawacza",
+          "Maska"
+        ]
+      }
+    },
+    "CHAMBER.TR2": {
+      "Names": [
+        "Chondryt zwyczajny",
+        "Deagle na ratunek",
+        "Turkuc podjadek",
+        "Czlowiek-pajak",
+        "Pajeczyna glupoty",
+        "Willy 50",
+        "Cztery posazki",
+        "Czlowiek silnej woli"
+      ]
+    },
+    "STPAUL.TR2": {
+      "Names": [
+        "Litania do wszystkich bugow",
+        "60/59",
+        "Niedokonczony poziom",
+        "Kosciol swietego Bedoesa",
+        "Bazylika mniejszego urazu",
+        "Deckjavu"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klucz do zycia wiecznego",
+          "Drabina jakubowa",
+          "Wreszcie ktos mnie znalazl",
+          "Klucz znaleziony w kosciele",
+          "Klucz do zakrystii"
+        ]
+      }
     }
   }
 }

@@ -6,11 +6,13 @@
 - added separate secret audio for TR1 and TR3 when not using reward rooms (#687)
 - added an option to shuffle items rather than randomize their types and locations in each level (#625)
 - added an option to control weapon allocation in item randomization (#690)
+- added Finnish, Portuguese, and Swedish translations to TR1 and added all supported language translations to TRUB (#701)
 - fixed several potential key item softlocks in TR2 (#691)
 - fixed a key item softlock in Crash Site (#662)
 - fixed incorrect item and mesh positions in Home Sweet Home when mirrored (#676)
 - fixed uncontrolled SFX in gym/assault course levels not being linked to the correct setting (#684)
 - fixed the scion being difficult to shoot if Lara only has the shotgun (#696)
+- fixed character encoding in TR3 gamestrings, which was causing data loss in some cases (#698)
 - improved the layout of some options in the UI (#694)
 
 ## [V1.8.4](https://github.com/LostArtefacts/TR-Rando/compare/V1.8.3...V1.8.4) - 2024-02-12

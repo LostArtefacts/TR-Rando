@@ -1,204 +1,171 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Hikari-bae",
-            "Kira kira",
-            "Raito pachi-pachi",
-            "Shoumei Show"
-          ],
-          "43": [
-            "Hikari-bae",
-            "Kira kira",
-            "Raito pachi-pachi",
-            "Shoumei Show"
-          ]
-        },
-        {
-          "36": [
-            "Edamame Bang Bangs",
-            "Made in Lara",
-            "Hajimari",
-            "Futago"
-          ],
-          "44": [
-            "Edamame",
-            "Makers in Lara",
-            "Kunrei dansou",
-            "Futago dansou"
-          ]
-        },
-        {
-          "37": [
-            "Kubi-chan",
-            "Futori",
-            "Tayori",
-            "Mada iru no?",
-            "Harakiri"
-          ],
-          "45": [
-            "Kubi-chan dansou",
-            "Futori dansou",
-            "Tayori dansou",
-            "Mada iru ka na?",
-            "Harakiri dansou"
-          ]
-        },
-        {
-          "38": [
-            "Chotto Tsuyoi Juu",
-            "Kurogashi",
-            "Kogeta Hajimari",
-            "Nusumareta juu",
-            "Pierre-tte dare?"
-          ],
-          "46": [
-            "Chotto Tsuyoi dansou",
-            "Kurogashi dansou",
-            "Kogeta Hajimari dansou",
-            "Nusumareta dansou",
-            "Pierre kara no dansou"
-          ]
-        },
-        {
-          "39": [
-            "UwUzi",
-            "Durarararara",
-            "Tsuyoku dekita juu",
-            "Betsu no wa Iranai",
-            "Mou Ikinaku"
-          ],
-          "47": [
-            "UwUzi dansou",
-            "Durarararara dansou",
-            "Tsuyoku dekita dansou",
-            "Betsu no wa Iranai dansou",
-            "Mou Ikinaku dansou"
-          ]
-        },
-        {
-          "40": [
-            "Bochi-Bochi",
-            "Gamanjuu",
-            "Yumiya Bottakuri",
-            "Yaku Tatanai",
-            "Konna no wa?",
-            "Kuso",
-            "Tsumayouji juu",
-            "Hurricane"
-          ],
-          "48": [
-            "Bochi-Bochi hari",
-            "Gaman no hari",
-            "Yumi janai kedo",
-            "Yaku Tatanai hari",
-            "Konna no hari",
-            "Kuso no hari",
-            "Tsumayouji",
-            "Hariken"
-          ]
-        },
-        {
-          "41": [
-            "MP3",
-            "MP4",
-            "MP5 Janakute",
-            "Big Durarararara"
-          ],
-          "49": [
-            "MP3 Clip",
-            "MP4 Clip",
-            "MP5 Janakute dansou",
-            "Big Durarararara dansou"
-          ]
-        },
-        {
-          "42": [
-            "Onage",
-            "Haitatsu",
-            "Yakitori",
-            "Buttobi",
-            "Big Bang",
-            "Kowase!"
-          ],
-          "50": [
-            "Onage Maru",
-            "Haitatsu Maru",
-            "Yakitori Maru",
-            "Buttobi Maru",
-            "Big Bang Maru",
-            "Kowase! Maru"
-          ]
-        },
-        {
-          "51": [
-            "Chicchai Kyuukyuu AID",
-            "Puchi Pouch",
-            "Chiisai AID",
-            "Yowai Kyuukyuu AID",
-            "Kawaii Pouch",
-            "S Kizu Kiss"
-          ],
-          "52": [
-            "Dekai Kyuukyuu AID",
-            "Grand Pouch",
-            "Ookii AID",
-            "Tsuyoi Kyuukyuu AID",
-            "Kyouryoku na Pouch",
-            "L Kizu Kiss"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "SHOJIHIN",
-          "AITEMU",
-          "NUSUNDA MONO",
-          "TOUHIN",
-          "MUYOUHIN",
-          "ARA!"
-        ],
-        "3": [
-          "SHINDA...",
-          "YARINAOSU?",
-          "MOU GANBATTA NA?",
-          "OSHII...",
-          "HONKI DASANAI?",
-          "ZANNEN",
-          "DAIJOUBU?"
-        ],
-        "35": [
-          "Yakutananai Toukei",
-          "Toukei",
-          "Keisanchuu",
-          "ENJO NASHI",
-          "Kakushimono wa...?"
-        ],
-        "57": [
-          "Croft-Tei",
-          "Core Design Honbu",
-          "TR2Rando Honbu",
-          "Leila no Uchi",
-          "Winston no Kakurenbo",
-          "Winston O-hisashiburi!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- FILE NASHI -",
-          "- KARAPPOI -",
-          "- SHOUSEI NASHI -",
-          "- SUKETEIRU -"
-        ]
-      }
-    }
-  ],
-
+﻿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Hikari-bae",
+      "Kira kira",
+      "Raito pachi-pachi",
+      "Shoumei Show"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Edamame Bang Bangs",
+      "Made in Lara",
+      "Hajimari",
+      "Futago"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Edamame",
+      "Makers in Lara",
+      "Kunrei dansou",
+      "Futago dansou"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Kubi-chan",
+      "Futori",
+      "Tayori",
+      "Mada iru no?",
+      "Harakiri"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Kubi-chan dansou",
+      "Futori dansou",
+      "Tayori dansou",
+      "Mada iru ka na?",
+      "Harakiri dansou"
+    ],
+    "INV_ITEM_AUTOS": [
+      "Chotto Tsuyoi Juu",
+      "Kurogashi",
+      "Kogeta Hajimari",
+      "Nusumareta juu",
+      "Pierre-tte dare?"
+    ],
+    "INV_ITEM_AUTO_AMMO": [
+      "Chotto Tsuyoi dansou",
+      "Kurogashi dansou",
+      "Kogeta Hajimari dansou",
+      "Nusumareta dansou",
+      "Pierre kara no dansou"
+    ],
+    "INV_ITEM_UZI": [
+      "UwUzi",
+      "Durarararara",
+      "Tsuyoku dekita juu",
+      "Betsu no wa Iranai",
+      "Mou Ikinaku"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "UwUzi dansou",
+      "Durarararara dansou",
+      "Tsuyoku dekita dansou",
+      "Betsu no wa Iranai dansou",
+      "Mou Ikinaku dansou"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Bochi-Bochi",
+      "Gamanjuu",
+      "Yumiya Bottakuri",
+      "Yaku Tatanai",
+      "Konna no wa?",
+      "Kuso",
+      "Tsumayouji juu",
+      "Hurricane"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Bochi-Bochi hari",
+      "Gaman no hari",
+      "Yumi janai kedo",
+      "Yaku Tatanai hari",
+      "Konna no hari",
+      "Kuso no hari",
+      "Tsumayouji",
+      "Hariken"
+    ],
+    "INV_ITEM_M16": [
+      "MP3",
+      "MP4",
+      "MP5 Janakute",
+      "Big Durarararara"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "MP3 Clip",
+      "MP4 Clip",
+      "MP5 Janakute dansou",
+      "Big Durarararara dansou"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Onage",
+      "Haitatsu",
+      "Yakitori",
+      "Buttobi",
+      "Big Bang",
+      "Kowase!"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Onage Maru",
+      "Haitatsu Maru",
+      "Yakitori Maru",
+      "Buttobi Maru",
+      "Big Bang Maru",
+      "Kowase! Maru"
+    ],
+    "INV_ITEM_MEDI": [
+      "Chicchai Kyuukyuu AID",
+      "Puchi Pouch",
+      "Chiisai AID",
+      "Yowai Kyuukyuu AID",
+      "Kawaii Pouch",
+      "S Kizu Kiss"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Dekai Kyuukyuu AID",
+      "Grand Pouch",
+      "Ookii AID",
+      "Tsuyoi Kyuukyuu AID",
+      "Kyouryoku na Pouch",
+      "L Kizu Kiss"
+    ],
+    "HEADING_ITEMS": [
+      "SHOJIHIN",
+      "AITEMU",
+      "NUSUNDA MONO",
+      "TOUHIN",
+      "MUYOUHIN",
+      "ARA!"
+    ],
+    "HEADING_GAME_OVER": [
+      "SHINDA...",
+      "YARINAOSU?",
+      "MOU GANBATTA NA?",
+      "OSHII...",
+      "HONKI DASANAI?",
+      "ZANNEN",
+      "DAIJOUBU?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Yakutananai Toukei",
+      "Toukei",
+      "Keisanchuu",
+      "ENJO NASHI",
+      "Kakushimono wa...?"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- FILE NASHI -",
+      "- KARAPPOI -",
+      "- SHOUSEI NASHI -",
+      "- SUKETEIRU -"
+    ]
+  },
   "LevelStrings": {
+    "ASSAULT.TR2": {
+      "Names": [
+        "Croft-Tei",
+        "Core Design Honbu",
+        "TR2Rando Honbu",
+        "Leila no Uchi",
+        "Winston no Kakurenbo",
+        "Winston O-hisashiburi!"
+      ]
+    },
     "WALL.TR2": {
       "Names": [
         "Chuugoku Dai 1",
@@ -212,8 +179,8 @@
         "Lost Valley 2.0",
         "Saian no Michi"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Room 4 no Kagi",
           "Kagi",
           "Hitotsu no Kagi",
@@ -223,7 +190,7 @@
           "Kagi 1 ka mo?",
           "Kagi 2 ka mo?"
         ],
-        "1": [
+        "Key2": [
           "Kumo no Kagi",
           "Boroboro no Kagi",
           "Kagi",
@@ -237,7 +204,6 @@
         ]
       }
     },
-
     "BOAT.TR2": {
       "Names": [
         "Italy Dai 1",
@@ -250,8 +216,8 @@
         "Venice de no Shi",
         "Guuzen Italy"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Fune no Kagi",
           "Kagi",
           "Aru Kagi",
@@ -262,7 +228,7 @@
           "Boat Nyuujou",
           "Boat no Hako"
         ],
-        "1": [
+        "Key2": [
           "Room 82 no kagi",
           "Kinzoku no kagi",
           "Kagi A",
@@ -273,7 +239,7 @@
           "Jouyaburi",
           "Kono kagi"
         ],
-        "2": [
+        "Key3": [
           "Airon no kagi",
           "Tetsu no te",
           "Mata sono kagi",
@@ -286,7 +252,6 @@
         ]
       }
     },
-
     "VENICE.TR2": {
       "Names": [
         "Italy Dai 2",
@@ -298,8 +263,8 @@
         "Mona Lisa",
         "Daidai Die"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Honya no kagi",
           "Kagi",
           "Aru kagi",
@@ -314,7 +279,7 @@
           "Kakushibasho no kagi",
           "Alohomora"
         ],
-        "1": [
+        "Key2": [
           "TNT Key",
           "Bakuhatsu!!",
           "Dokkaaaaagi",
@@ -330,7 +295,6 @@
         ]
       }
     },
-
     "OPERA.TR2": {
       "Names": [
         "Italy Dai 3",
@@ -344,8 +308,8 @@
         "Show Must Go On",
         "Showtime!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Oshare Kagi",
           "Subarashii kagi",
           "Hanayaka Kagi",
@@ -357,10 +321,8 @@
           "Tobira no kagi",
           "Kaku kaku kagi",
           "C Sharp"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzzle 1",
           "Lift wo naoseru!",
           "Raisin Box",
@@ -368,7 +330,7 @@
           "TR5 kara oboeta",
           "Ding"
         ],
-        "1": [
+        "Puzzle2": [
           "Puzzle 2",
           "Motherboard",
           "ACME Motherboard",
@@ -380,7 +342,6 @@
         ]
       }
     },
-
     "RIG.TR2": {
       "Names": [
         "The Rig",
@@ -395,8 +356,8 @@
         "Zutsuu",
         "Kenkou & Anzen"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ryuusa Swipe card",
           "Barrel Pass Card",
           "Pass Card 2",
@@ -405,7 +366,7 @@
           "Visa Express",
           "Nejirenu Card"
         ],
-        "1": [
+        "Key2": [
           "QWOP Spot Card",
           "Alarm kaijo!",
           "Pass Card 1",
@@ -414,7 +375,7 @@
           "Mastercard Express",
           "Orenu Card"
         ],
-        "2": [
+        "Key3": [
           "Room 37 no kagi",
           "Muimi Card 3",
           "Pass Card 3",
@@ -425,7 +386,6 @@
         ]
       }
     },
-
     "PLATFORM.TR2": {
       "Names": [
         "Kaijou Souko Dai 2",
@@ -437,24 +397,22 @@
         "The Yellow Submarine",
         "Ike Men"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Room 12 no kagi",
           "Mishou no swipe card",
           "Swipe card 2",
           "Leila no Shoumeisho",
           "Kowasanaide yo!"
         ],
-        "3": [
+        "Key4": [
           "Room 49 no kagi",
           "Mishou no swipe card",
           "Pass Card 1",
           "Winstons no shoumeisho",
           "Orenaide yo!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Motherboard",
           "ACME Motherboard",
           "PC Pro 97",
@@ -467,7 +425,6 @@
         ]
       }
     },
-
     "UNWATER.TR2": {
       "Names": [
         "Kaichuu Dai 1",
@@ -483,7 +440,6 @@
         "Kaichuu"
       ]
     },
-
     "KEEL.TR2": {
       "Names": [
         "Kaichuu Dai 2",
@@ -496,15 +452,15 @@
         "Hanjuuryoku-sen",
         "Nanpasen"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Otearai wa?",
           "Kagi",
           "Aru kagi",
           "Kagi 1",
           "Kagi A"
         ],
-        "1": [
+        "Key2": [
           "Boroboro no kagi",
           "Kagi",
           "Aru kagi",
@@ -512,7 +468,7 @@
           "Kagi B",
           "Tobira no kagi"
         ],
-        "2": [
+        "Key3": [
           "Dare na no?",
           "Kagi",
           "Aru kagi",
@@ -522,10 +478,8 @@
           "Key C",
           "Arata no kagi?",
           "Kaijo wa doko?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Kaji Kaijo",
           "T-kei no Nazo",
           "Shoukaki",
@@ -535,7 +489,6 @@
         ]
       }
     },
-
     "LIVING.TR2": {
       "Names": [
         "Kaichuu Dai 3",
@@ -547,8 +500,8 @@
         "Dare mo inai",
         "Muimi"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Gekiteki no kagi",
           "Shibai no kagi",
           "Higekiteki no kagi",
@@ -560,7 +513,7 @@
           "Ano kagi",
           "The Show must go on!"
         ],
-        "1": [
+        "Key2": [
           "Boroboro kagi",
           "Kagi",
           "Aru kagi",
@@ -572,7 +525,6 @@
         ]
       }
     },
-
     "DECK.TR2": {
       "Names": [
         "Hobo Owari!",
@@ -582,8 +534,8 @@
         "Kouka!",
         "Kuukiana"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Kibishii kagi",
           "Senbei no kagi...?",
           "Hidoi kagi",
@@ -600,7 +552,7 @@
           "Kagi A",
           "Sono kagi"
         ],
-        "2": [
+        "Key3": [
           "Mohaya Souko?",
           "Souko wa soko?",
           "Myou na kagi",
@@ -616,7 +568,7 @@
           "Kagi B",
           "Ano kagi"
         ],
-        "3": [
+        "Key4": [
           "Kagi",
           "Tobira no kagi",
           "Souko ka Senbi?",
@@ -629,10 +581,8 @@
           "Kagi 3",
           "Kagi C",
           "Ano kagi"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "Za Tenshi",
           "Tenbou",
           "Nazo 1",
@@ -643,7 +593,6 @@
         ]
       }
     },
-
     "SKIDOO.TR2": {
       "Names": [
         "Tibet Dai 1",
@@ -657,8 +606,8 @@
         "Nadare!",
         "Yukidaruma Tsukurou!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Otoshibashi no kagi",
           "Muimi no kagi",
           "Chigau...",
@@ -671,7 +620,7 @@
           "Nadare no agaru kagi",
           "Ashiba no kagi"
         ],
-        "1": [
+        "Key2": [
           "Komuro no kagi",
           "Tibet no Chikamichi",
           "Kagi",
@@ -680,10 +629,8 @@
           "Kagi B",
           "Kagi da!",
           "Saijuuyouno kagi"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "Za Tenshi",
           "Tendou",
           "Nazo 1",
@@ -694,7 +641,6 @@
         ]
       }
     },
-
     "MONASTRY.TR2": {
       "Names": [
         "Tibet Dai 2",
@@ -707,34 +653,32 @@
         "Fukusei Kinshi",
         "Boudan no Ikemen"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ginkoshitsu no kagi",
           "Kagi no kagi"
         ],
-        "1": [
+        "Key2": [
           "Shikatanai kagi",
           "Outside Key 1",
           "Soto ikanai?",
           "Soto no kagi?",
           "Uraguchi no kagi"
         ],
-        "2": [
+        "Key3": [
           "Yane",
           "Ten no chikamichi",
           "kakureta Me",
           "Soto no kagi 2"
         ],
-        "3": [
+        "Key4": [
           "TR2Main Hondou no kagi",
           "Hondou no kagi",
           "Daidokoro no kagi",
           "Motto sagaseru kagi no kagi",
           "Buddah no kagi"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Kore de Inoru",
           "Mani no Wa",
           "Chen no Wa",
@@ -743,14 +687,14 @@
           "Hatsumeisha  wa?",
           "Shibui Wa"
         ],
-        "1": [
+        "Puzzle2": [
           "Daiya",
           "Barkhang no Takara",
           "Koma",
           "Kira Koma",
           "Ninjin"
         ],
-        "3": [
+        "Puzzle4": [
           "Za Tenshi",
           "Nazo 3",
           "Ritsuzou",
@@ -760,7 +704,6 @@
         ]
       }
     },
-
     "CATACOMB.TR2": {
       "Names": [
         "Tibet Dai 3",
@@ -773,19 +716,8 @@
         "Kurai Yama",
         "Yajin no Yami"
       ],
-      "Pickups": {
-        "0": [
-          "Chicken?",
-          "Nani kore?",
-          "Happy Easter",
-          "Talion no Chinko",
-          "Kore wa doko kara?",
-          "...???",
-          "Xylo Stick"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Men",
           "Aru men",
           "The Mask",
@@ -795,10 +727,18 @@
           "Chakuyou!",
           "Kirei na men",
           "Minikui men"
+        ],
+        "Pickup1": [
+          "Chicken?",
+          "Nani kore?",
+          "Happy Easter",
+          "Talion no Chinko",
+          "Kore wa doko kara?",
+          "...???",
+          "Xylo Stick"
         ]
       }
     },
-
     "ICECAVE.TR2": {
       "Names": [
         "Tibet Dai 4",
@@ -817,8 +757,8 @@
         "Shounin Shirushi",
         "Winston no Souko"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Mr Gong Hame",
           "Tonkachi",
           "Good Gong",
@@ -826,22 +766,8 @@
           "BOOOOOOOOOONGGGGG",
           "Koori-wari",
           "Drumstick"
-        ]
-      },
-      "Pickups": {
-        "1": [
-          "Talion",
-          "Chicken no Ou",
-          "Tobira Akete!",
-          "Talion Hanatare!",
-          "Kinchikin",
-          "Saian no Kagi",
-          "Kira!",
-          "Attoiumani"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Men",
           "Aru men",
           "The Mask",
@@ -854,10 +780,19 @@
           "Iranai men",
           "Hirotta koto nakatta!",
           "Cassandra"
+        ],
+        "Pickup2": [
+          "Talion",
+          "Chicken no Ou",
+          "Tobira Akete!",
+          "Talion Hanatare!",
+          "Kinchikin",
+          "Saian no Kagi",
+          "Kira!",
+          "Attoiumani"
         ]
       }
     },
-
     "EMPRTOMB.TR2": {
       "Names": [
         "Chuugoku Dai 2",
@@ -871,8 +806,8 @@
         "Saian no Ken e!!",
         "Isshuu"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Kagi",
           "Aru kagi",
           "Kagi 1",
@@ -880,7 +815,7 @@
           "Tobira no kagi",
           "Kin"
         ],
-        "2": [
+        "Key3": [
           "Kagi",
           "Aru kagi",
           "Kagi 2",
@@ -889,16 +824,14 @@
           "Gin",
           "Kumo no kagi"
         ],
-        "3": [
+        "Key4": [
           "TR2Main no hiroba no kagi",
           "Kagi",
           "Aru kagi",
           "Kagi 3",
           "Kore dake tsuaeba yoi kagi"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Nazo 1",
           "Room 41",
           "Men",
@@ -908,7 +841,6 @@
         ]
       }
     },
-
     "FLOATING.TR2": {
       "Names": [
         "Chuugoku Dai 3",
@@ -920,8 +852,8 @@
         "Nanda Korya!?",
         "Yougan ni Tobikomi"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Senbei",
           "Senbei 1",
           "Senbei A",
@@ -930,7 +862,7 @@
           "Cookie",
           "Okashi"
         ],
-        "1": [
+        "Puzzle2": [
           "Senbei",
           "Senbei 2",
           "Senbei B",
@@ -941,7 +873,6 @@
         ]
       }
     },
-
     "XIAN.TR2": {
       "Names": [
         "Chuugoku Dai 4",
@@ -957,15 +888,15 @@
         "Moecha Dame!",
         "Honoo ni Ritsuzou to Ken"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Senbei",
           "Cheese 'n' Crackers",
           "Poko",
           "Cookie",
           "Okashi"
         ],
-        "1": [
+        "Puzzle2": [
           "Saian no Takara",
           "Tatsu no Ken",
           "Stabby Stabby",
@@ -978,7 +909,6 @@
         ]
       }
     },
-
     "HOUSE.TR2": {
       "Names": [
         "HSH",
@@ -993,8 +923,8 @@
         "Hitori?",
         "Mada Iru..."
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Closet Key",
           "Bukiko no kagi",
           "Kagi",
@@ -1003,10 +933,8 @@
           "Hesokuri",
           "Soubi no Heya",
           "Jiko Bouei no kagi"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Saian no Takara",
           "Tatsu no Ken",
           "Stabby Stabby",

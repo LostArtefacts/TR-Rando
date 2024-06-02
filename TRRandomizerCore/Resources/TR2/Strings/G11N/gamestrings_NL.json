@@ -1,215 +1,181 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Sparkler",
-            "Zippo",
-            "Dazzler",
-            "Flickerer",
-            "Mini-blaze"
-          ],
-          "43": [
-            "Sparkler",
-            "Zippo",
-            "Dazzler",
-            "Flickerer",
-            "Mini-blaze"
-          ]
-        },
-        {
-          "36": [
-            "Erwtenschieters",
-            "Handpistool",
-            "Old Faithfuls",
-            "Pew-Pews",
-            "I'll take two"
-          ],
-          "44": [
-            "Erwtenschieter Magazijnen",
-            "Handpistool Magazijnen",
-            "Old Faithful Magezijnen",
-            "Pew-Pew Magezijnen",
-            "I'll take two Clips"
-          ]
-        },
-        {
-          "37": [
-            "Shotty",
-            "Musket",
-            "Old Faithful",
-            "Genoeg gezien?",
-            "Gutbuster"
-          ],
-          "45": [
-            "Shotty Patronen",
-            "Musket Patronen",
-            "Old Faithful Patronen",
-            "Genoeg gezien? Munitie",
-            "Gutbuster Munitie"
-          ]
-        },
-        {
-          "38": [
-            "Auto's",
-            "Magnum's",
-            "SuperPistols",
-            "Pierre verloor deze",
-            "Ga terug naar Pierre"
-          ],
-          "46": [
-            "Auto Magezijnen",
-            "Magnum Magezijnen",
-            "SuperPistol Magezijnen",
-            "Pierre verloor deze Magezijnen",
-            "Ga terug naar Pierre Magazijnen"
-          ]
-        },
-        {
-          "39": [
-            "UwUzis",
-            "Drrrrrrrrrr",
-            "Sterkervoelen Geweren",
-            "Munitie Vampier",
-            "1000 schoten later..."
-          ],
-          "47": [
-            "UwUzi Magazijnen",
-            "Drrrrrrrrrr Magazijnen",
-            "Sterkervoelen Magezijnen",
-            "Munitie Vampier Magezijnen",
-            "1000 Shoten later Magezijnen"
-          ]
-        },
-        {
-          "40": [
-            "Tik-tik-tik",
-            "Geduld",
-            "Pijl Werper",
-            "Nutteloos",
-            "Zinloos",
-            "Waarom?",
-            "Nee!",
-            "Tandenstoker Werper",
-            "Speer Lanceerder"
-          ],
-          "48": [
-            "Tik-tik-tiks",
-            "Geduld Munitie",
-            "Pijlen",
-            "Nuttelose Munitie",
-            "Zinloose Munitie",
-            "Waarom? Munitie",
-            "Nee Munitie",
-            "Tandenstekers",
-            "Speren"
-          ]
-        },
-        {
-          "41": [
-            "MP3 Speler",
-            "MPEG",
-            "Niet de MP5",
-            "Grote Drrrrrrrrrr"
-          ],
-          "49": [
-            "MP3 Magazijnen",
-            "MPEG Magazijnen",
-            "Niet de MP5 Magazijnen",
-            "Grote Drrrrrrrrrr Magazijnen"
-          ]
-        },
-        {
-          "42": [
-            "Nade Blaster",
-            "Explosieve Levering",
-            "Vijand Gebraden",
-            "Patronen Lanceerder",
-            "Ananas Verzonden",
-            "Grote Knal",
-            "Grote Gedonder",
-            "Blaas het op!"
-          ],
-          "50": [
-            "Nades",
-            "Explosieven",
-            "Vuurballen",
-            "Patronen",
-            "Ananassen",
-            "Grote Knallen",
-            "Grote Gedonders",
-            "Blaas het op! Munitie"
-          ]
-        },
-        {
-          "51": [
-            "Minuskuul Medi Pack",
-            "Wee Medi Pack",
-            "Kleine Medi Pack",
-            "Compact Medi Pack",
-            "Bijou Medi Pack",
-            "Baby Booboo Maker"
-          ],
-          "52": [
-            "Gigantische Medi Pack",
-            "Enorme Medi Pack",
-            "Titanic Medi Pack",
-            "Massieve Medi Pack",
-            "Mahoosive Medi Pack",
-            "Grote Booboo Maker"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "DINGEN",
-          "SPULLEN",
-          "PICKUPS",
-          "BUIT",
-          "ROMMEL",
-          "OW GLIMMEND",
-          "MIJN LIEVELING"
-        ],
-        "3": [
-          "LARA GING DOOD",
-          "PROBEER OPNIEUW?",
-          "PROBEER OPNIEUW? DOE GEWOON GOED",
-          "VOLGENDE KEER BETER",
-          "GIT GUD",
-          "WOEDE STOPPEN",
-          "NLNMAS volgende?"
-        ],
-        "35": [
-          "Stats",
-          "Vitale Stats",
-          "Rekenwerk",
-          "GEEN MEDS TOEGESTAAN!",
-          "Geheim Spoorzoeker!"
-        ],
-        "57": [
-          "Croft's Landhuis",
-          "Core Design HQ",
-          "TR2Rando HQ",
-          "Lara's graaft",
-          "Winston's Koelkast",
-          "Ontdooi Winston!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NUL -",
-          "- NIKS HIER -",
-          "- UNDEFINED -",
-          "- HEY, DEZE SLOT IS VRIJ -"
-        ]
-      }
-    }
-  ],
-
+﻿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Sparkler",
+      "Zippo",
+      "Dazzler",
+      "Flickerer",
+      "Mini-blaze"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Erwtenschieters",
+      "Handpistool",
+      "Old Faithfuls",
+      "Pew-Pews",
+      "I'll take two"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Erwtenschieter Magazijnen",
+      "Handpistool Magazijnen",
+      "Old Faithful Magezijnen",
+      "Pew-Pew Magezijnen",
+      "I'll take two Clips"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Shotty",
+      "Musket",
+      "Old Faithful",
+      "Genoeg gezien?",
+      "Gutbuster"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Shotty Patronen",
+      "Musket Patronen",
+      "Old Faithful Patronen",
+      "Genoeg gezien? Munitie",
+      "Gutbuster Munitie"
+    ],
+    "INV_ITEM_AUTOS": [
+      "Auto's",
+      "Magnum's",
+      "SuperPistols",
+      "Pierre verloor deze",
+      "Ga terug naar Pierre"
+    ],
+    "INV_ITEM_AUTO_AMMO": [
+      "Auto Magezijnen",
+      "Magnum Magezijnen",
+      "SuperPistol Magezijnen",
+      "Pierre verloor deze Magezijnen",
+      "Ga terug naar Pierre Magazijnen"
+    ],
+    "INV_ITEM_UZI": [
+      "UwUzis",
+      "Drrrrrrrrrr",
+      "Sterkervoelen Geweren",
+      "Munitie Vampier",
+      "1000 schoten later..."
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "UwUzi Magazijnen",
+      "Drrrrrrrrrr Magazijnen",
+      "Sterkervoelen Magezijnen",
+      "Munitie Vampier Magezijnen",
+      "1000 Shoten later Magezijnen"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Tik-tik-tik",
+      "Geduld",
+      "Pijl Werper",
+      "Nutteloos",
+      "Zinloos",
+      "Waarom?",
+      "Nee!",
+      "Tandenstoker Werper",
+      "Speer Lanceerder"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Tik-tik-tiks",
+      "Geduld Munitie",
+      "Pijlen",
+      "Nuttelose Munitie",
+      "Zinloose Munitie",
+      "Waarom? Munitie",
+      "Nee Munitie",
+      "Tandenstekers",
+      "Speren"
+    ],
+    "INV_ITEM_M16": [
+      "MP3 Speler",
+      "MPEG",
+      "Niet de MP5",
+      "Grote Drrrrrrrrrr"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "MP3 Magazijnen",
+      "MPEG Magazijnen",
+      "Niet de MP5 Magazijnen",
+      "Grote Drrrrrrrrrr Magazijnen"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Nade Blaster",
+      "Explosieve Levering",
+      "Vijand Gebraden",
+      "Patronen Lanceerder",
+      "Ananas Verzonden",
+      "Grote Knal",
+      "Grote Gedonder",
+      "Blaas het op!"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Nades",
+      "Explosieven",
+      "Vuurballen",
+      "Patronen",
+      "Ananassen",
+      "Grote Knallen",
+      "Grote Gedonders",
+      "Blaas het op! Munitie"
+    ],
+    "INV_ITEM_MEDI": [
+      "Minuskuul Medi Pack",
+      "Wee Medi Pack",
+      "Kleine Medi Pack",
+      "Compact Medi Pack",
+      "Bijou Medi Pack",
+      "Baby Booboo Maker"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Gigantische Medi Pack",
+      "Enorme Medi Pack",
+      "Titanic Medi Pack",
+      "Massieve Medi Pack",
+      "Mahoosive Medi Pack",
+      "Grote Booboo Maker"
+    ],
+    "HEADING_ITEMS": [
+      "DINGEN",
+      "SPULLEN",
+      "PICKUPS",
+      "BUIT",
+      "ROMMEL",
+      "OW GLIMMEND",
+      "MIJN LIEVELING"
+    ],
+    "HEADING_GAME_OVER": [
+      "LARA GING DOOD",
+      "PROBEER OPNIEUW?",
+      "PROBEER OPNIEUW? DOE GEWOON GOED",
+      "VOLGENDE KEER BETER",
+      "GIT GUD",
+      "WOEDE STOPPEN",
+      "NLNMAS volgende?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Stats",
+      "Vitale Stats",
+      "Rekenwerk",
+      "GEEN MEDS TOEGESTAAN!",
+      "Geheim Spoorzoeker!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NUL -",
+      "- NIKS HIER -",
+      "- UNDEFINED -",
+      "- HEY, DEZE SLOT IS VRIJ -"
+    ]
+  },
   "LevelStrings": {
+    "ASSAULT.TR2": {
+      "Names": [
+        "Croft's Landhuis",
+        "Core Design HQ",
+        "TR2Rando HQ",
+        "Lara's graaft",
+        "Winston's Koelkast",
+        "Ontdooi Winston!"
+      ]
+    },
     "WALL.TR2": {
       "Names": [
         "China Deel 1",
@@ -223,8 +189,8 @@
         "Verloren Vallei",
         "De weg naar Xian"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Sleutel voor Kamer 4",
           "Memehuis Sleutel",
           "Een Sleutel",
@@ -235,7 +201,7 @@
           "Mischien Sleutel 1?",
           "Mischien Sleutel 2?"
         ],
-        "1": [
+        "Key2": [
           "Spinnen Sleutel",
           "knappige Sleutel",
           "Een Sleutel",
@@ -249,7 +215,6 @@
         ]
       }
     },
-
     "BOAT.TR2": {
       "Names": [
         "Italie Deel 1",
@@ -263,8 +228,8 @@
         "Ver Van Huis",
         "Dat is Amore"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Bootje Hoofd McSleutel",
           "Een Sleutel",
           "De Sleutel",
@@ -276,7 +241,7 @@
           "Zeil Toegang",
           "Boot Garage"
         ],
-        "1": [
+        "Key2": [
           "Sleutel voor Kamer 82",
           "Metalen Sleutel",
           "Een Sleutel",
@@ -287,7 +252,7 @@
           "Geen Lockpick",
           "Deze Sleutel"
         ],
-        "2": [
+        "Key3": [
           "Strijkplanksleutel",
           "Ijzeren Vuist Sleutel",
           "Ijzeren Vrouw",
@@ -300,7 +265,6 @@
         ]
       }
     },
-
     "VENICE.TR2": {
       "Names": [
         "Italy Part 2",
@@ -313,8 +277,8 @@
         "The Mona Lisa",
         "Go Out With a Bang"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Bookroom Key",
           "A Key",
           "The Key",
@@ -329,7 +293,7 @@
           "Secret Stash Key",
           "Alohomora"
         ],
-        "1": [
+        "Key2": [
           "TNT Key",
           "Blast Key",
           "Explosion Key",
@@ -346,7 +310,6 @@
         ]
       }
     },
-
     "OPERA.TR2": {
       "Names": [
         "Italie Deel 3",
@@ -361,8 +324,8 @@
         "Showtime!",
         "Bereid de Vloer Show"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Luxe Sleutel",
           "Chique Sleutel",
           "Opzichtige Sleutel",
@@ -374,10 +337,8 @@
           "De Sleutel voor de Deur",
           "Wiebelige Vloer Sleutel",
           "C Sharp"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzzel 1",
           "Lift Fixer",
           "Lift Fixer",
@@ -387,7 +348,7 @@
           "Ding",
           "Geen Music Fix"
         ],
-        "1": [
+        "Puzzle2": [
           "Puzzel 2",
           "Moederbord",
           "ACME Moederbord",
@@ -400,7 +361,6 @@
         ]
       }
     },
-
     "RIG.TR2": {
       "Names": [
         "De Tuig",
@@ -415,8 +375,8 @@
         "Hoofdpijn",
         "Gezondheids en Veiligheidsrisico"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Drijfzand Kaart",
           "Ton Doorgangskaart",
           "Doorgangskaart 2",
@@ -425,7 +385,7 @@
           "Visa Express",
           "Niet Draaien"
         ],
-        "1": [
+        "Key2": [
           "QWOP Plek Kaart",
           "Doe Die Alarm Uit",
           "Doorgangskaart 1",
@@ -434,7 +394,7 @@
           "Mastercard Express",
           "Niet Breken"
         ],
-        "2": [
+        "Key3": [
           "Kaart voor Kamer 37",
           "Onnodige Kaart",
           "Doorgangskaart",
@@ -445,7 +405,6 @@
         ]
       }
     },
-
     "PLATFORM.TR2": {
       "Names": [
         "Olieboorplatform Deel 2",
@@ -457,24 +416,22 @@
         "De Gele Onderzeeër",
         "Let op de Zaag"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Kaart voor Kamer 12",
           "Niet geïdentificeerd Doorgangskaart",
           "Doorgangskaart 2",
           "Lara's ID Kaart",
           "Niet Breken!"
         ],
-        "3": [
+        "Key4": [
           "Kaart voor Kamer 49",
           "niet geïdentificeerd Doorgangskaart",
           "Doorgangskaart 1",
           "Winstons ID Kaart",
           "Niet Buigen!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Moederbord",
           "ACME Moederbord",
           "PC Pro 97",
@@ -487,7 +444,6 @@
         ]
       }
     },
-
     "UNWATER.TR2": {
       "Names": [
         "Onderwater Deel 1",
@@ -503,7 +459,6 @@
         "Onder de Zee"
       ]
     },
-
     "KEEL.TR2": {
       "Names": [
         "Onderwater Deel 2",
@@ -516,8 +471,8 @@
         "Anti-Zwaartekrachtschip",
         "Gesloopt"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Toilet Sleutel",
           "Badkamer Sleutel",
           "Een Sleutel",
@@ -526,7 +481,7 @@
           "Sleutel A",
           "Wat is een toilet?"
         ],
-        "1": [
+        "Key2": [
           "Knappige Sleutel",
           "Een Sleutel",
           "De Sleutel",
@@ -534,7 +489,7 @@
           "Sleutel B",
           "Sleutel tot een Deur"
         ],
-        "2": [
+        "Key3": [
           "Kamer Sleutel",
           "Wie Niet",
           "Een Sleutel",
@@ -543,10 +498,8 @@
           "Sleutel C",
           "Nieuwe Sleutel?",
           "Waar is deze Slot?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Brandbreker",
           "T-Vormige Puzzel",
           "Brandblusser",
@@ -556,7 +509,6 @@
         ]
       }
     },
-
     "LIVING.TR2": {
       "Names": [
         "Onderwater Deel 3",
@@ -569,8 +521,8 @@
         "Niemand Thuis",
         "Leveloze Kamers"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Dramatische Sleutel",
           "Melodramatische Sleutel",
           "Tragische Sleutel",
@@ -582,7 +534,7 @@
           "Opera Sleutel",
           "De Show moet doorgaan!"
         ],
-        "1": [
+        "Key2": [
           "Korstige Sleutel",
           "Een Sleutel",
           "De Sleutel",
@@ -594,7 +546,6 @@
         ]
       }
     },
-
     "DECK.TR2": {
       "Names": [
         "Onder water-ig Deel 4",
@@ -604,8 +555,8 @@
         "Ijsberg Wint",
         "Grote Luchtzak"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Strenge Sleutel",
           "Harde Sleutel",
           "Wreede Sleutel",
@@ -621,7 +572,7 @@
           "Sleutel 1",
           "Sleutel A"
         ],
-        "2": [
+        "Key3": [
           "Opslagsleutel",
           "Opslagsleutel?",
           "Vreemde Sleutel",
@@ -636,7 +587,7 @@
           "Sleutel 2",
           "Sleutel B"
         ],
-        "3": [
+        "Key4": [
           "Kajuit Sleutel",
           "Kamer Sleutel",
           "Sleutel voor de Deur",
@@ -649,10 +600,8 @@
           "De Sleutel",
           "Sleutel 3",
           "Sleutel C"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "De Engel",
           "De Cherubijn",
           "Puzzle 1",
@@ -663,7 +612,6 @@
         ]
       }
     },
-
     "SKIDOO.TR2": {
       "Names": [
         "Tibet Deel 1",
@@ -679,8 +627,8 @@
         "Sneeuwscooter Gekte",
         "Een sneeuwpop bouwen"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Ophaalbrug Sleutel",
           "Nutteloze Sleutel",
           "Niet degene",
@@ -693,7 +641,7 @@
           "Je doet me opleven",
           "Maak een platformsleutel"
         ],
-        "1": [
+        "Key2": [
           "Hutsleutel",
           "Hutsleutel?",
           "Tibet Overslaan Sleutel",
@@ -706,10 +654,8 @@
           "Speedrun Sleutel",
           "Meeste Gezocht!",
           "Binnensleutel"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "De Engel",
           "De Cherubijn",
           "Puzzle 1",
@@ -720,7 +666,6 @@
         ]
       }
     },
-
     "MONASTRY.TR2": {
       "Names": [
         "Tibet Deel 2",
@@ -735,36 +680,34 @@
         "Keyhang Klooster",
         "Geen Zussen act"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Zwakke Kamersleutel",
           "VoelSterker Sleutel",
           "Sleutel voor een Sleutel"
         ],
-        "1": [
+        "Key2": [
           "Ach, arme sleutel",
           "Buitensleutel 1",
           "Laten we hier weggaan?",
           "Sleutel voor geen kamer?",
           "Achterdeur sleutel"
         ],
-        "2": [
+        "Key3": [
           "Nep Rotsleutel",
           "Kortere weg naar de top",
           "Schimmige ogen sleutel",
           "Buitensleutel 2"
         ],
-        "3": [
+        "Key4": [
           "TR2Hoofdhal sleutel",
           "Memehal sleutel",
           "Grote Kamersleutel",
           "Niet Snoekduiken Sleutel",
           "Boeddha Sleutel",
           "Lobby Sleutel"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Als een gebedsmolen",
           "Maniwiel",
           "Chenwiel",
@@ -773,14 +716,14 @@
           "Wie heeft dit wiel uitgevonden?",
           "Vermoeide Helper"
         ],
-        "1": [
+        "Puzzle2": [
           "Diamanten",
           "Barkhang Buit",
           "Edelstenen tonen",
           "Hmm Glimmend!",
           "18 Karaat"
         ],
-        "3": [
+        "Puzzle4": [
           "De Engel",
           "De Cherubijn",
           "Puzzle 3",
@@ -792,7 +735,6 @@
         ]
       }
     },
-
     "CATACOMB.TR2": {
       "Names": [
         "Tibet Deel 3",
@@ -805,20 +747,8 @@
         "Het is donker hier!",
         "Donkere Yeti Kamer"
       ],
-      "Pickups": {
-        "0": [
-          "Gong Hamer?",
-          "Wacht, wat?",
-          "Gelukkig Pasen",
-          "Um, Meneer Gong? Ha!",
-          "Dit hoort hier niet",
-          "...???",
-          "Xylofoon Stok",
-          "Nou, wat dan ook!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Gezichtsmasker",
           "Een Masker",
           "Het Masker",
@@ -828,10 +758,19 @@
           "Draag een masker!",
           "Mooi Masker",
           "Lelijk Masker"
+        ],
+        "Pickup1": [
+          "Gong Hamer?",
+          "Wacht, wat?",
+          "Gelukkig Pasen",
+          "Um, Meneer Gong? Ha!",
+          "Dit hoort hier niet",
+          "...???",
+          "Xylofoon Stok",
+          "Nou, wat dan ook!"
         ]
       }
     },
-
     "ICECAVE.TR2": {
       "Names": [
         "Tibet Deel 4",
@@ -850,8 +789,8 @@
         "Winston keurt goed!",
         "Winston's grote koelkast"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Meneer Gong Hamer",
           "De Hamer",
           "Goede Gong",
@@ -862,22 +801,8 @@
           "Ijspriem",
           "Trommelstok",
           "Gong Slaghamer"
-        ]
-      },
-      "Pickups": {
-        "1": [
-          "Vergelding",
-          "Kippenschat",
-          "Open die deur, Lara",
-          "Bevrijdt de kip!",
-          "Gouden Dingetje",
-          "Xian Deursleutel",
-          "Glimmend!",
-          "Hier en weer weg!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Gezichtsmasker",
           "Masker dat kan worden overgeslagen",
           "Het masker",
@@ -887,10 +812,19 @@
           "Wie gebruikt dit nog?",
           "Lara's Schoonheidsmasker",
           "Cassandra"
+        ],
+        "Pickup2": [
+          "Vergelding",
+          "Kippenschat",
+          "Open die deur, Lara",
+          "Bevrijdt de kip!",
+          "Gouden Dingetje",
+          "Xian Deursleutel",
+          "Glimmend!",
+          "Hier en weer weg!"
         ]
       }
     },
-
     "EMPRTOMB.TR2": {
       "Names": [
         "China Deel 2",
@@ -904,8 +838,8 @@
         "Race naar de dolk",
         "Volle Cirkel"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Een Sleutel",
           "De Sleutel",
           "Sleutel 1",
@@ -913,7 +847,7 @@
           "Au",
           "Sleutel voor een deur"
         ],
-        "2": [
+        "Key3": [
           "Een Sleutel",
           "De Sleutel",
           "Sleutel 2",
@@ -921,16 +855,14 @@
           "Maar een Sleutel",
           "Je hebt de spinnen overleefd!"
         ],
-        "3": [
+        "Key4": [
           "TR2Hoofdkamersleutel",
           "Een Sleutel",
           "De Sleutel",
           "Sleutel 3",
           "De enige sleutel die je nodig hebt"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Puzzel 1",
           "Kamer 41 Slotvuller",
           "Gezichtsmasker",
@@ -940,7 +872,6 @@
         ]
       }
     },
-
     "FLOATING.TR2": {
       "Names": [
         "China deel 3",
@@ -954,8 +885,8 @@
         "Snopekduik in vuur",
         "Zwevende Lego"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Een cracker",
           "Cracker 1",
           "Cracker A",
@@ -964,7 +895,7 @@
           "Magisch koekje",
           "Gelukskoekje"
         ],
-        "1": [
+        "Puzzle2": [
           "Een cracker",
           "Cracker 2",
           "Cracker B",
@@ -976,7 +907,6 @@
         ]
       }
     },
-
     "XIAN.TR2": {
       "Names": [
         "China deel 4",
@@ -994,8 +924,8 @@
         "Je kan me niet verbrande!",
         "Standbeelden, messen en vuur"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Een Cracker",
           "De Cracker",
           "Kaas en Crackers",
@@ -1003,7 +933,7 @@
           "Kliekige Stempel",
           "Niet eetbare Cracker"
         ],
-        "1": [
+        "Puzzle2": [
           "Xian Buit",
           "Drakendolk",
           "Groot Mes",
@@ -1018,7 +948,6 @@
         ]
       }
     },
-
     "HOUSE.TR2": {
       "Names": [
         "HSH",
@@ -1034,8 +963,8 @@
         "Niet alleen thuis",
         "Genoeg gezien?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Kastsleutel",
           "Arsenaalsleutel",
           "De Sleutel",
@@ -1046,10 +975,8 @@
           "Geef me de boem boem sleutel",
           "Zelfverdedigingstrainingsleutel",
           "Wapenkamersleutel"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Xian Buit",
           "Drakendolk",
           "Groot mes",

@@ -496,6 +496,60 @@
         "Het is een val",
         "Geef torso een knuffel"
       ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Zand in iedere hoek",
+        "over een tijdje krokodil",
+        "Zie je later aligator",
+        "Glij - Val - Splash",
+        "Je heb die meds nodig!"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Boter Sleutel",
+          "Pre-Goud Sleutel",
+          "Schijnende Sleutel",
+          "uhhh schijnent!",
+          "Briljante Sleutel"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Lilly's Tempel",
+        "Tempel van Cat-alina",
+        "Niks anders dan katten hier",
+        "De bouwer was geen honden persoon",
+        "Honden personen blijf buiten"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Te veel van deze",
+          "Modieuse Sleutel",
+          "Hoe veel meer nog?",
+          "sigh... Te veel...",
+          "Kat Sleutel"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Mummy Kleuterschool",
+        "Vlees Grot",
+        "Spagetti Grot",
+        "Lasagna iemand?",
+        "Atlanteans... Atlanteans overal!!! Help!"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Haal de hendel over!",
+        "Verkeerde hendel!",
+        "Waarom hebben we eigenlijk deze hendel?",
+        "Haal me hier weg!",
+        "Afgeronden Zaken!"
+      ]
     }
   }
 }

@@ -1,467 +1,222 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Cintilante",
-            "Ajudante Flipmap",
-            "Uhh Brilhante!",
-            "Cancelar tropeÁo",
-            "Usa-me!"
-          ],
-          "44": [
-            "Cintilante",
-            "Ajudante Flipmap",
-            "Uhh Brilhante!",
-            "Cancelar tropeÁo",
-            "Usa-me!"
-          ]
-        },
-        {
-          "36": [
-            "Armas duplas",
-            "CÛdigo de Batota",
-            "Cl·ssicos",
-            "Os IcÛnicos ",
-            "Mortes Ilimitadas"
-          ],
-          "45": [
-            "Clipes de armas duplas",
-            "Clipes de ajuda cÛdigo de Batota",
-            "Clipes Cl·ssicos",
-            "Os Clipes Iconicos",
-            "Clipes de Mortes Ilimitadas"
-          ]
-        },
-        {
-          "37": [
-            "Espingarda",
-            "PorquÍ?",
-            "Venha aqui ou n„o mate!",
-            "Viste o suficiente?",
-            "Deixe o em paz! Est· ocupado!"
-          ],
-          "46": [
-            "Cartuchos de Espingarda",
-            "Pergunta Cartuchos",
-            "Cartuchos lesma",
-            "Viu Cartuchos Suficientes??",
-            "Cartuchos Ocupados"
-          ]
-        },
-        {
-          "38": [
-            "Willy Killy",
-            "De facto ˙til!",
-            "D-Eagle",
-            "¡guia de Nevada",
-            "O mais quente da panela"
-          ],
-          "47": [
-            "Clipes Willy Killy",
-            "Clipes ˙teis",
-            "Clipes D-Eagle ",
-            "Clipes Eagle ",
-            "Clipes Hotpot "
-          ]
-        },
-        {
-          "39": [
-            "MuniÁ„o Vampiro",
-            "Autos 2.0",
-            "TR II Uzis N„o",
-            "UZI",
-            "N„o t„o forte agora!"
-          ],
-          "48": [
-            "Clipes de Vampiro",
-            "Clipes 2.0",
-            "Clipes arranhados",
-            "Clipes Uzi",
-            "Clipes fraquinhos"
-          ]
-        },
-        {
-          "40": [
-            "Arma de Meme",
-            "In˙til",
-            "Apenas para Desafio",
-            "Porque È que existe?",
-            "Besta subaqu·tica"
-          ],
-          "49": [
-            "Dank Memes",
-            "ResÌduos",
-            "Desafiadores",
-            "Existenciais",
-            "Arcos"
-          ]
-        },
-        {
-          "41": [
-            "M16 N„o",
-            "M16",
-            "Assassinos de Raptores",
-            "M˙sica MP3",
-            "Foguete Enhancer"
-          ],
-          "50": [
-            "Clipes falsos",
-            "Scam Clipes",
-            "Assassinos de Raptores",
-            "Trilhas",
-            "Carregadores de Foguetes"
-          ]
-        },
-        {
-          "42": [
-            "Ultimate Boom",
-            "Torre de mochila",
-            "Demora muito tempo de qualquer maneira",
-            "Totalmente impreciso",
-            "Recoil pesado?"
-          ],
-          "51": [
-            "Foguetes Ultimate",
-            "Foguetes de mochila",
-            "Foguetes de carga longa",
-            "Foguetes imprecisos",
-            "Foguetes Pesados"
-          ]
-        },
-        {
-          "43": [
-            "Coisa imprecisa",
-            "Melhor lanÁador de COPIUM",
-            "Grande Boom",
-            "Porque È que me usas?",
-            "J· n„o em 7"
-          ],
-          "52": [
-            "Granadas imprecisas",
-            "Granadas de COPIUM",
-            "Granadas Grande Boom",
-            "Granadas question·veis",
-            "Foguetes com Desconto"
-          ]
-        },
-        {
-          "53": [
-            "UtilizaÁ„o n„o permitida!",
-            "VocÍ em NO MEDS!",
-            "Pequeno hospital",
-            "Pequeno salva-vidas",
-            "Cristal de mochila"
-          ],
-          "54": [
-            "UtilizaÁ„o n„o permitida!",
-            "VocÍ em NO MEDS!",
-            "Grande hospital",
-            "Grande salva-vidas",
-            "Saco de Cristais"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "Coisas",
-          "O que È isto?",
-          "N„o t„o brilhantes!",
-          "LIXO",
-          "Isto e aquilo",
-          "Demasiados artefactos!",
-          "Como È que encaixam?"
-        ],
-        "3": [
-          "J· foi de caiaque?",
-          "NLNMAS a seguir?",
-          "Morreu!",
-          "Fica Bom!",
-          "Esqueceste-te de curar?",
-          "Medpack?",
-          "morreste aqui?"
-        ],
-        "35": [
-          "Balc„o de Coisas DesperdiÁadas",
-          "Algum prÛximo?",
-          "Consegues ir mais devagar?",
-          "Todos os segredos?",
-          "N„o s„o permitidos Medpacks!",
-          "Corrida Pacifista?"
-        ],
-        "59": [
-          "Mans„o Croft",
-          "Core Design HQ",
-          "TR3Rando HQ",
-          "EscavaÁıes da Lara",
-          "FrigorÌfico do Winston",
-          "Descongele Winston"
-        ],
-        "85": [
-          "Cidade Bit",
-          "Sul da Inglaterra",
-          "A Rainha est· em casa?",
-          "Cidade Catsuit",
-          "10 minutos ‡ meia-noite!"
-        ],
-        "86": [
-          "Deserto n„o t„o vazio",
-          "Poeira... em todo o lado",
-          "OI!",
-          "HEY!",
-          "Deserto das ¡guias"
-        ],
-        "87": [
-          "¡gua e Coisas",
-          "Ilha esquecida",
-          "Mania Canibal",
-          "Canto do Puna",
-          "PatÈtico do Sul",
-          "Sul da Õndia"
-        ],
-        "88": [
-          "FrigorÌfico gigante",
-          "Onde est· o Winston?",
-          "Hipertermia Mania",
-          "Titanic 2.0",
-          "Grande, Frio, Branco",
-          "Iceberg em frente!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NULO -",
-          "- NADA AQUI -",
-          "- INDEFINIDO -",
-          "- OI, ESTA VAGA … GR¡TIS -"
-        ]
-      }
-    }
-  ],
-
+Ôªø{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Cintilante",
+      "Ajudante Flipmap",
+      "Uhh Brilhante!",
+      "Cancelar trope√ßo",
+      "Usa-me!"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Armas duplas",
+      "C√≥digo de Batota",
+      "Cl√°ssicos",
+      "Os Ic√≥nicos ",
+      "Mortes Ilimitadas"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Clipes de armas duplas",
+      "Clipes de ajuda c√≥digo de Batota",
+      "Clipes Cl√°ssicos",
+      "Os Clipes Iconicos",
+      "Clipes de Mortes Ilimitadas"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Espingarda",
+      "Porqu√™?",
+      "Venha aqui ou n√£o mate!",
+      "Viste o suficiente?",
+      "Deixe o em paz! Est√° ocupado!"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Cartuchos de Espingarda",
+      "Pergunta Cartuchos",
+      "Cartuchos lesma",
+      "Viu Cartuchos Suficientes??",
+      "Cartuchos Ocupados"
+    ],
+    "INV_ITEM_DEAGLE": [
+      "Willy Killy",
+      "De facto √∫til!",
+      "D-Eagle",
+      "√Åguia de Nevada",
+      "O mais quente da panela"
+    ],
+    "INV_ITEM_DEAGLE_AMMO": [
+      "Clipes Willy Killy",
+      "Clipes √∫teis",
+      "Clipes D-Eagle ",
+      "Clipes Eagle ",
+      "Clipes Hotpot "
+    ],
+    "INV_ITEM_UZI": [
+      "Muni√ß√£o Vampiro",
+      "Autos 2.0",
+      "TR II Uzis N√£o",
+      "UZI",
+      "N√£o t√£o forte agora!"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Clipes de Vampiro",
+      "Clipes 2.0",
+      "Clipes arranhados",
+      "Clipes Uzi",
+      "Clipes fraquinhos"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Arma de Meme",
+      "In√∫til",
+      "Apenas para Desafio",
+      "Porque √© que existe?",
+      "Besta subaqu√°tica"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Dank Memes",
+      "Res√≠duos",
+      "Desafiadores",
+      "Existenciais",
+      "Arcos"
+    ],
+    "INV_ITEM_M16": [
+      "M16 N√£o",
+      "M16",
+      "Assassinos de Raptores",
+      "M√∫sica MP3",
+      "Foguete Enhancer"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "Clipes falsos",
+      "Scam Clipes",
+      "Assassinos de Raptores",
+      "Trilhas",
+      "Carregadores de Foguetes"
+    ],
+    "INV_ITEM_ROCKET_LAUNCHER": [
+      "Ultimate Boom",
+      "Torre de mochila",
+      "Demora muito tempo de qualquer maneira",
+      "Totalmente impreciso",
+      "Recoil pesado?"
+    ],
+    "INV_ITEM_ROCKETS": [
+      "Foguetes Ultimate",
+      "Foguetes de mochila",
+      "Foguetes de carga longa",
+      "Foguetes imprecisos",
+      "Foguetes Pesados"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Coisa imprecisa",
+      "Melhor lan√ßador de COPIUM",
+      "Grande Boom",
+      "Porque √© que me usas?",
+      "J√° n√£o em 7"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Granadas imprecisas",
+      "Granadas de COPIUM",
+      "Granadas Grande Boom",
+      "Granadas question√°veis",
+      "Foguetes com Desconto"
+    ],
+    "INV_ITEM_MEDI": [
+      "Utiliza√ß√£o n√£o permitida!",
+      "Voc√™ em NO MEDS!",
+      "Pequeno hospital",
+      "Pequeno salva-vidas",
+      "Cristal de mochila"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Utiliza√ß√£o n√£o permitida!",
+      "Voc√™ em NO MEDS!",
+      "Grande hospital",
+      "Grande salva-vidas",
+      "Saco de Cristais"
+    ],
+    "HEADING_ITEMS": [
+      "Coisas",
+      "O que √© isto?",
+      "N√£o t√£o brilhantes!",
+      "LIXO",
+      "Isto e aquilo",
+      "Demasiados artefactos!",
+      "Como √© que encaixam?"
+    ],
+    "HEADING_GAME_OVER": [
+      "J√° foi de caiaque?",
+      "NLNMAS a seguir?",
+      "Morreu!",
+      "Fica Bom!",
+      "Esqueceste-te de curar?",
+      "Medpack?",
+      "morreste aqui?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Balc√£o de Coisas Desperdi√ßadas",
+      "Algum pr√≥ximo?",
+      "Consegues ir mais devagar?",
+      "Todos os segredos?",
+      "N√£o s√£o permitidos Medpacks!",
+      "Corrida Pacifista?"
+    ],
+    "INV_GLOBE_LONDON": [
+      "Cidade Bit",
+      "Sul da Inglaterra",
+      "A Rainha est√° em casa?",
+      "Cidade Catsuit",
+      "10 minutos √† meia-noite!"
+    ],
+    "INV_GLOBE_NEVADA": [
+      "Deserto n√£o t√£o vazio",
+      "Poeira... em todo o lado",
+      "OI!",
+      "HEY!",
+      "Deserto das √Åguias"
+    ],
+    "INV_GLOBE_SOUTH_PACIFIC": [
+      "√Ågua e Coisas",
+      "Ilha esquecida",
+      "Mania Canibal",
+      "Canto do Puna",
+      "Pat√©tico do Sul",
+      "Sul da √çndia"
+    ],
+    "INV_GLOBE_ANTARCTICA": [
+      "Frigor√≠fico gigante",
+      "Onde est√° o Winston?",
+      "Hipertermia Mania",
+      "Titanic 2.0",
+      "Grande, Frio, Branco",
+      "Iceberg em frente!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NULO -",
+      "- NADA AQUI -",
+      "- INDEFINIDO -",
+      "- OI, ESTA VAGA √â GR√ÅTIS -"
+    ]
+  },
   "LevelStrings": {
-    "ANTARC.TR2": {
-      "Names": [
-        "Sem Floco de Neve",
-        "Lancha 2.0",
-        "O cubo de gelo",
-        "Andar no Congelador",
-        "Sopa de tomate alguÈm?"
-      ],
-      "Keys": {
-        "0": [
-          "O convÈs n„o",
-          "Chave de gelo ",
-          "Uma chave para assustar",
-          "Chave congelada"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "N„o te esqueÁas de mim!",
-          "Bengala doce",
-          "PÈ de cabra",
-          "Sinto-me mais forte agora!",
-          "PÈ de cabra de Von"
-        ],
-        "1": [
-          "Libertar o rio",
-          "Abrir os portıes de inundaÁ„o",
-          "¡gua e ¡gua e ¡gua",
-          "Acesso ‡ sopa",
-          "Chave da Cozinha da Sopa"
-        ]
-      }
-    },
-
-    "AREA51.TR2": {
-      "Names": [
-        "Paul esteve aqui!",
-        "Teoria da ConspiraÁ„o",
-        "Xenomorph esteve aqui!",
-        "Dia da IndependÍncia",
-        "Alien liga para casa!"
-      ],
-      "Keys": {
-        "0": [
-          "Chave do foguete",
-          "Foguete Rip Ride",
-          "Chave SpaceX",
-          "Foguet„o Raccoon",
-          "Chave Elon Musk",
-          "TambÈm pode saltar isto!",
-          "N˙meros secretos",
-          "CÛdigo do cart„o de crÈdito",
-          "LanÁador de foguetes",
-          "AlienÌgenas nas proximidades?!?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Chave Rapunzels",
-          "Chave alta",
-          "Torre do Drag„o n„o",
-          "Chave da Batota",
-          "Fizeste Batota"
-        ],
-        "1": [
-          "N„o me podes passar!",
-          "Sou eu outra vez!",
-          "Disco OVNI",
-          "Um de Dois Discos",
-          "Porque n„o h· m˙sica? O.o"
-        ],
-        "2": [
-          "Mistura de Festas da Lara",
-          "M˙sica do Elemento Puzzle",
-          "Um de Dois Discos",
-          "M˙sica da selva",
-          "Pode passar-me ‡ frente!"
-        ],
-        "3": [
-          "Chave ferrovi·ria magnÈtica",
-          "Chave do metro",
-          "Chave da estaÁ„o ferrovi·ria",
-          "Pino de desenho",
-          "Celebridade",
-          "Martelo pneum·tico"
-        ]
-      }
-    },
-
-    "CHAMBER.TR2": {
-      "Names": [
-        "Aranha Incy Wincy",
-        "20 - 40 Tiros Deagle",
-        "JaponÍs recomendado",
-        "Livre vontade",
-        "Willards Web"
-      ]
-    },
-
-    "CITY.TR2": {
-      "Names": [
-        "Salto da ponte",
-        "Uma vida de insecto",
-        "Filme Abelha 2.0",
-        "Hall dos Elementos",
-        "4 Maneiras de morrer!"
-      ],
-      "Keys": {
-        "0": [
-          "Chave do Diabo",
-          "Esta rapariga n„o est· a arder!",
-          "Podes saltar-nos ‡ frente!",
-          "Chave GÍmea",
-          "Chave do Inferno",
-          "Olha para mim!",
-          "Chave do Monstro das Bolachas"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "M·scara de beleza",
-          "M·scara dourada n„o",
-          "O Fantasma da ”pera",
-          "Bola de M·scara a chegar",
-          "A M¡SCARA"
-        ]
-      }
-    },
-
-    "COMPOUND.TR2": {
-      "Names": [
-        "Apenas outra pris„o",
-        "Fuga da pris„o",
-        "A Grande Fuga",
-        "Boris est· aqui?",
-        "Onde est„o as minhas armas?"
-      ],
-      "Keys": {
-        "0": [
-          "MORRE GUARD... MORRE!",
-          "Apenas outro cart„o-chave",
-          "MasterCard",
-          "Cart„o-chave 1",
-          "Cart„o-chave 2",
-          "Cart„o Sair da pris„o "
-        ],
-        "1": [
-          "VisaCard",
-          "Cart„o-chave 1",
-          "Cart„o-chave 2",
-          "Cart„o-chave secreto",
-          "Cart„o de crÈdito"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Pedra Amarela",
-          "Vela de igniÁ„o 1",
-          "FusÌvel 1",
-          "Ficha USB Amarela",
-          "TambÈm n„o h· Dupe"
-        ],
-        "1": [
-          "Pedra Amarela",
-          "Vela de igniÁ„o 1",
-          "FusÌvel 1",
-          "Ficha USB Amarela",
-          "TambÈm n„o h· Dupe"
-        ]
-      }
-    },
-
-    "CRASH.TR2": {
-      "Names": [
-        "Parque Jur·ssico",
-        "Dinos... outra vez?",
-        "Lugar do Barney",
-        "Vale Perdido Parte 2",
-        "Onde est· o Drag„o Dourado?"
-      ],
-      "Keys": {
-        "0": [
-          "Chave de Barney Spawn",
-          "Barney Sem comida",
-          "Para que serve isto? O.o",
-          "Chave do Canh„o para o Grande Boom",
-          "Chave de DestruiÁ„o"
-        ],
-        "1": [
-          "Chave do Raptor",
-          "Cuidado com as costas",
-          "ATR¡S DE TI!",
-          "Inimigo vai BOOOH!",
-          "Onde vou caber?"
-        ]
-      }
-    },
-
     "HOUSE.TR2": {
       "Names": [
         "Humilde Morada",
-        "FrigorÌfico 2.0 Winston",
-        "Curso de FÛrmula Quad",
+        "Frigor√≠fico 2.0 Winston",
+        "Curso de F√≥rmula Quad",
         "Winston... duplo?",
-        "Pr·tica de Alvo",
+        "Pr√°tica de Alvo",
         "Casa de Repouso Feliz"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Chave da pista de corrida",
           "Chave da Bandeira",
-          "Chave da FÛrmula 1",
+          "Chave da F√≥rmula 1",
           "Chave do peixe",
-          "Chave do TrofÈu",
-          "Acesso Qu·druplo"
+          "Chave do Trof√©u",
+          "Acesso Qu√°druplo"
         ]
       }
     },
-
     "JUNGLE.TR2": {
       "Names": [
         "Livro da Selva",
@@ -470,68 +225,269 @@
         "Rolar Rolar Rolar",
         "Pedras Rolantes"
       ],
-      "Keys": {
-        "3": [
+      "KeyItems": {
+        "Key4": [
           "Chave Bonita",
           "Chave Macaco",
-          "Chave in˙til",
+          "Chave in√∫til",
           "Chave sem falhas",
-          "O que È isto? O.o"
+          "O que √© isto? O.o"
         ]
       }
     },
-
-    "MINES.TR2": {
+    "TEMPLE.TR2": {
       "Names": [
-        "Minecraft",
-        "PORQU ?!?!?!",
-        "Nadar fundo, gelado",
-        "BaÌa Stormtrooper",
-        "Fogo e Pukemonstros",
-        "APENAS SOFRE!"
+        "T√∫mulo de Randys e Rorys",
+        "Porqu√™ tantos Sheevas?",
+        "Est√°tuas √† prova de bala",
+        "Cobras e Escadas",
+        "Inferno de armadilhas",
+        "Truque Flip Flare"
       ],
-      "Puzzles": {
-        "0": [
-          "N„o te esqueÁas de mim!",
-          "Bengala doce",
-          "PÈ de cabra",
-          "Sinto-me mais forte agora!",
-          "PÈ de cabra de Von"
-        ],
-        "1": [
-          "Duracell",
-          "9 Volt",
-          "Carregador",
-          "Coisa Azul e Vermelha",
-          "Guindaste de chave inglesa!"
-        ],
-        "2": [
-          "Coisa Congelada Profunda",
-          "RedenÁ„o ShawCrank",
-          "A Coisa que vira",
-          "Ainda n„o foi ferido?",
-          "Tu vais MORRER!"
+      "KeyItems": {
+        "Key1": [
+          "Ainda sem falhas",
+          "Colec√ß√£o de chaves mort√≠feras",
+          "Cinco Noites na Ganesha",
+          "Rodas de Ora√ß√£o n√£o",
+          "Chaves da C√¢mara de Tortura"
         ]
       }
     },
-
+    "QUADCHAS.TR2": {
+      "Names": [
+        "Qu√°druplo necess√°rio?",
+        "Vale Piranha",
+        "N√£o o Tamisa",
+        "N√£o mergulhes rapariga!",
+        "N√£o h√° aqui Barneys!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Duplo in√∫til",
+          "Quem apanha isto?",
+          "Chave Macaco Duplo",
+          "Sem Chave da Catedral",
+          "O QUE √â ISTO?"
+        ]
+      }
+    },
+    "TONYBOSS.TR2": {
+      "Names": [
+        "Labirinto",
+        "Outro labirinto n√£o!",
+        "Labirinto secreto?!? O.o",
+        "40 becos sem sa√≠da",
+        "40 Cobras"
+      ]
+    },
+    "SHORE.TR2": {
+      "Names": [
+        "Aldeia Canibal",
+        "A Praia",
+        "N√£o percas a perna",
+        "Veneno e Ponte Saltar",
+        "Ataque ao ritmo"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Chave debaixo do mar",
+          "Chave de Jack Sparrow",
+          "Chave afogada",
+          "Chave ferrugenta",
+          "Um traficante perdeu isto!"
+        ],
+        "Puzzle1": [
+          "Pedra Venenosa",
+          "Pedra das Ru√≠nas do Templo",
+          "Pedra de Sangue",
+          "Confia em mim",
+          "N√£o √© uma Gema de Cavaleiro"
+        ]
+      }
+    },
+    "CRASH.TR2": {
+      "Names": [
+        "Parque Jur√°ssico",
+        "Dinos... outra vez?",
+        "Lugar do Barney",
+        "Vale Perdido Parte 2",
+        "Onde est√° o Drag√£o Dourado?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Chave de Barney Spawn",
+          "Barney Sem comida",
+          "Para que serve isto? O.o",
+          "Chave do Canh√£o para o Grande Boom",
+          "Chave de Destrui√ß√£o"
+        ],
+        "Key2": [
+          "Chave do Raptor",
+          "Cuidado com as costas",
+          "ATR√ÅS DE TI!",
+          "Inimigo vai BOOOH!",
+          "Onde vou caber?"
+        ]
+      }
+    },
+    "RAPIDS.TR2": {
+      "Names": [
+        "Porque √© que isto existe?",
+        "Bloco de notas necess√°rio!",
+        "MADubu",
+        "Descarga da sanita",
+        "Crocodilo",
+        "RIP Utilizadores de Fones"
+      ]
+    },
+    "TRIBOSS.TR2": {
+      "Names": [
+        "Chefe Canibal",
+        "Ainda mais veneno",
+        "Pris√£o de Footis",
+        "Templo do Atum",
+        "Corrida ao Templo"
+      ]
+    },
+    "ROOFS.TR2": {
+      "Names": [
+        "20 Segundos",
+        "Westminster",
+        "Falha de constru√ß√£o",
+        "N√£o h√° nenhum Big Ben?",
+        "Porqu√™ isto aqui?",
+        "Gueto de Londres",
+        "Algum Bruvs?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Chave do Rato",
+          "Chave da sala da gripe",
+          "Chave da chamin√©",
+          "Chave simples",
+          "Chave Dourada"
+        ],
+        "Key2": [
+          "Chave Bonita",
+          "Chave da Igreja",
+          "Chave de Rubi",
+          "Chave in√∫til",
+          "Para que serve isto? O.o"
+        ]
+      }
+    },
+    "SEWER.TR2": {
+      "Names": [
+        "Plataforma 9 3/4",
+        "O Metro",
+        "Passeio Escuro em Londres",
+        "Bilhetes fora de servi√ßo",
+        "Porfavor aten√ß√£o √† falha"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Chave el√©ctrica",
+          "Chave dos cont√≠nuos",
+          "Eu tenho o poder!",
+          "Kit de ferramentas",
+          "Arranje estas coisas!"
+        ],
+        "Key2": [
+          "Metade e Metade",
+          "Uma Metade",
+          "Chave Religiosa",
+          "Salomo 1 ou 2?",
+          "Chaves de Damocles"
+        ],
+        "Key3": [
+          "Metade e Metade",
+          "Uma Metade",
+          "Chave Religiosa",
+          "Salomo 1 ou 2?",
+          "Chaves de Damocles"
+        ],
+        "Key4": [
+          "Metade e Metade",
+          "Uma Metade",
+          "Chave Religiosa",
+          "Salomo 1 ou 2?",
+          "Chaves de Damocles"
+        ],
+        "Puzzle1": [
+          "DINHEIRO!",
+          "Xelim",
+          "Massivo mas brilhante!",
+          "Tarifa de comboio",
+          "25 Bits"
+        ],
+        "Puzzle2": [
+          "Vamos para Hogwarts",
+          "Passe ferrovi√°rio",
+          "De volta a Nevada!",
+          "N√£o √© necess√°rio Controlo!",
+          "Cart√£o Ostra"
+        ],
+        "Puzzle3": [
+          "Martelo de Thor",
+          "Mj√∂lnir",
+          "Martelo de Whack-a-Mole",
+          "Esmague esta fechadura!",
+          "Martelo de S√£o Francis Follys"
+        ],
+        "Puzzle4": [
+          "Brilha Brilha Pequena Estrela",
+          "Preferia ser brilhante!",
+          "Viste algo brilhante!",
+          "No c√©u n√£o!",
+          "An√°lise de uma estrela"
+        ]
+      }
+    },
+    "TOWER.TR2": {
+      "Names": [
+        "Museu Nacional de Hist√≥ria",
+        "Mistura sem sentido",
+        "O √≥dio de Lud",
+        "Vamos odiar",
+        "UPV Voando √† frente!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Chave de aquecimento!",
+          "Uau, n√£o falhas-te!",
+          "Iniciador de fogo",
+          "Nem sequer uma caldeira aqui?!?",
+          "Estou com frio!"
+        ]
+      }
+    },
+    "OFFICE.TR2": {
+      "Names": [
+        "Corre Lara, CORRE!",
+        "Ela est√° mesmo morta?",
+        "Muitos volts!",
+        "Apag√£o!",
+        "Salvar e carregar!"
+      ]
+    },
     "NEVADA.TR2": {
       "Names": [
-        "¡guias do Deserto",
-        "Deserto aqu·tico",
+        "√Åguias do Deserto",
+        "Deserto aqu√°tico",
         "Fique Hidratado",
         "Sem carris no deserto",
-        "… um vale quente!"
+        "√â um vale quente!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Gerador Zugang zum",
-          "Cart„o para GeraÁıes",
+          "Cart√£o para Gera√ß√µes",
           "EU TENHO O PODER!",
-          "N„o sejas electrocutado!",
-          "Chave de apag„o"
+          "N√£o sejas electrocutado!",
+          "Chave de apag√£o"
         ],
-        "1": [
+        "Key2": [
           "Chave do Campo de Minas",
           "Chave TNT",
           "Chave do Flipmap",
@@ -541,183 +497,208 @@
         ]
       }
     },
-
-    "OFFICE.TR2": {
+    "COMPOUND.TR2": {
       "Names": [
-        "Corre Lara, CORRE!",
-        "Ela est· mesmo morta?",
-        "Muitos volts!",
-        "Apag„o!",
-        "Salvar e carregar!"
+        "Apenas outra pris√£o",
+        "Fuga da pris√£o",
+        "A Grande Fuga",
+        "Boris est√° aqui?",
+        "Onde est√£o as minhas armas?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "MORRE GUARD... MORRE!",
+          "Apenas outro cart√£o-chave",
+          "MasterCard",
+          "Cart√£o-chave 1",
+          "Cart√£o-chave 2",
+          "Cart√£o Sair da pris√£o "
+        ],
+        "Key2": [
+          "VisaCard",
+          "Cart√£o-chave 1",
+          "Cart√£o-chave 2",
+          "Cart√£o-chave secreto",
+          "Cart√£o de cr√©dito"
+        ],
+        "Puzzle1": [
+          "Pedra Amarela",
+          "Vela de igni√ß√£o 1",
+          "Fus√≠vel 1",
+          "Ficha USB Amarela",
+          "Tamb√©m n√£o h√° Dupe"
+        ],
+        "Puzzle2": [
+          "Pedra Amarela",
+          "Vela de igni√ß√£o 1",
+          "Fus√≠vel 1",
+          "Ficha USB Amarela",
+          "Tamb√©m n√£o h√° Dupe"
+        ]
+      }
+    },
+    "AREA51.TR2": {
+      "Names": [
+        "Paul esteve aqui!",
+        "Teoria da Conspira√ß√£o",
+        "Xenomorph esteve aqui!",
+        "Dia da Independ√™ncia",
+        "Alien liga para casa!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Chave do foguete",
+          "Foguete Rip Ride",
+          "Chave SpaceX",
+          "Foguet√£o Raccoon",
+          "Chave Elon Musk",
+          "Tamb√©m pode saltar isto!",
+          "N√∫meros secretos",
+          "C√≥digo do cart√£o de cr√©dito",
+          "Lan√ßador de foguetes",
+          "Alien√≠genas nas proximidades?!?"
+        ],
+        "Puzzle1": [
+          "Chave Rapunzels",
+          "Chave alta",
+          "Torre do Drag√£o n√£o",
+          "Chave da Batota",
+          "Fizeste Batota"
+        ],
+        "Puzzle2": [
+          "N√£o me podes passar!",
+          "Sou eu outra vez!",
+          "Disco OVNI",
+          "Um de Dois Discos",
+          "Porque n√£o h√° m√∫sica? O.o"
+        ],
+        "Puzzle3": [
+          "Mistura de Festas da Lara",
+          "M√∫sica do Elemento Puzzle",
+          "Um de Dois Discos",
+          "M√∫sica da selva",
+          "Pode passar-me √† frente!"
+        ],
+        "Puzzle4": [
+          "Chave ferrovi√°ria magn√©tica",
+          "Chave do metro",
+          "Chave da esta√ß√£o ferrovi√°ria",
+          "Pino de desenho",
+          "Celebridade",
+          "Martelo pneum√°tico"
+        ]
+      }
+    },
+    "ANTARC.TR2": {
+      "Names": [
+        "Sem Floco de Neve",
+        "Lancha 2.0",
+        "O cubo de gelo",
+        "Andar no Congelador",
+        "Sopa de tomate algu√©m?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "O conv√©s n√£o",
+          "Chave de gelo ",
+          "Uma chave para assustar",
+          "Chave congelada"
+        ],
+        "Puzzle1": [
+          "N√£o te esque√ßas de mim!",
+          "Bengala doce",
+          "P√© de cabra",
+          "Sinto-me mais forte agora!",
+          "P√© de cabra de Von"
+        ],
+        "Puzzle2": [
+          "Libertar o rio",
+          "Abrir os port√µes de inunda√ß√£o",
+          "√Ågua e √Ågua e √Ågua",
+          "Acesso √† sopa",
+          "Chave da Cozinha da Sopa"
+        ]
+      }
+    },
+    "MINES.TR2": {
+      "Names": [
+        "Minecraft",
+        "PORQU√ä?!?!?!",
+        "Nadar fundo, gelado",
+        "Ba√≠a Stormtrooper",
+        "Fogo e Pukemonstros",
+        "APENAS SOFRE!"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "N√£o te esque√ßas de mim!",
+          "Bengala doce",
+          "P√© de cabra",
+          "Sinto-me mais forte agora!",
+          "P√© de cabra de Von"
+        ],
+        "Puzzle2": [
+          "Duracell",
+          "9 Volt",
+          "Carregador",
+          "Coisa Azul e Vermelha",
+          "Guindaste de chave inglesa!"
+        ],
+        "Puzzle3": [
+          "Coisa Congelada Profunda",
+          "Reden√ß√£o ShawCrank",
+          "A Coisa que vira",
+          "Ainda n√£o foi ferido?",
+          "Tu vais MORRER!"
+        ]
+      }
+    },
+    "CITY.TR2": {
+      "Names": [
+        "Salto da ponte",
+        "Uma vida de insecto",
+        "Filme Abelha 2.0",
+        "Hall dos Elementos",
+        "4 Maneiras de morrer!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Chave do Diabo",
+          "Esta rapariga n√£o est√° a arder!",
+          "Podes saltar-nos √† frente!",
+          "Chave G√™mea",
+          "Chave do Inferno",
+          "Olha para mim!",
+          "Chave do Monstro das Bolachas"
+        ],
+        "Puzzle1": [
+          "M√°scara de beleza",
+          "M√°scara dourada n√£o",
+          "O Fantasma da √ìpera",
+          "Bola de M√°scara a chegar",
+          "A M√ÅSCARA"
+        ]
+      }
+    },
+    "CHAMBER.TR2": {
+      "Names": [
+        "Aranha Incy Wincy",
+        "20 - 40 Tiros Deagle",
+        "Japon√™s recomendado",
+        "Livre vontade",
+        "Willards Web"
       ]
     },
-
-    "QUADCHAS.TR2": {
-      "Names": [
-        "Qu·druplo necess·rio?",
-        "Vale Piranha",
-        "N„o o Tamisa",
-        "N„o mergulhes rapariga!",
-        "N„o h· aqui Barneys!"
-      ],
-      "Keys": {
-        "0": [
-          "Duplo in˙til",
-          "Quem apanha isto?",
-          "Chave Macaco Duplo",
-          "Sem Chave da Catedral",
-          "O QUE … ISTO?"
-        ]
-      }
-    },
-
-    "RAPIDS.TR2": {
-      "Names": [
-        "Porque È que isto existe?",
-        "Bloco de notas necess·rio!",
-        "MADubu",
-        "Descarga da sanita",
-        "Crocodilo",
-        "RIP Utilizadores de Fones"
-      ]
-    },
-
-    "ROOFS.TR2": {
-      "Names": [
-        "20 Segundos",
-        "Westminster",
-        "Falha de construÁ„o",
-        "N„o h· nenhum Big Ben?",
-        "PorquÍ isto aqui?",
-        "Gueto de Londres",
-        "Algum Bruvs?"
-      ],
-      "Keys": {
-        "0": [
-          "Chave do Rato",
-          "Chave da sala da gripe",
-          "Chave da chaminÈ",
-          "Chave simples",
-          "Chave Dourada"
-        ],
-        "1": [
-          "Chave Bonita",
-          "Chave da Igreja",
-          "Chave de Rubi",
-          "Chave in˙til",
-          "Para que serve isto? O.o"
-        ]
-      }
-    },
-
-    "SEWER.TR2": {
-      "Names": [
-        "Plataforma 9 3/4",
-        "O Metro",
-        "Passeio Escuro em Londres",
-        "Bilhetes fora de serviÁo",
-        "Porfavor atenÁ„o ‡ falha"
-      ],
-      "Keys": {
-        "0": [
-          "Chave elÈctrica",
-          "Chave dos contÌnuos",
-          "Eu tenho o poder!",
-          "Kit de ferramentas",
-          "Arranje estas coisas!"
-        ],
-        "1": [
-          "Metade e Metade",
-          "Uma Metade",
-          "Chave Religiosa",
-          "Salomo 1 ou 2?",
-          "Chaves de Damocles"
-        ],
-        "2": [
-          "Metade e Metade",
-          "Uma Metade",
-          "Chave Religiosa",
-          "Salomo 1 ou 2?",
-          "Chaves de Damocles"
-        ],
-        "3": [
-          "Metade e Metade",
-          "Uma Metade",
-          "Chave Religiosa",
-          "Salomo 1 ou 2?",
-          "Chaves de Damocles"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "DINHEIRO!",
-          "Xelim",
-          "Massivo mas brilhante!",
-          "Tarifa de comboio",
-          "25 Bits"
-        ],
-        "1": [
-          "Vamos para Hogwarts",
-          "Passe ferrovi·rio",
-          "De volta a Nevada!",
-          "N„o È necess·rio Controlo!",
-          "Cart„o Ostra"
-        ],
-        "2": [
-          "Martelo de Thor",
-          "Mjˆlnir",
-          "Martelo de Whack-a-Mole",
-          "Esmague esta fechadura!",
-          "Martelo de S„o Francis Follys"
-        ],
-        "3": [
-          "Brilha Brilha Pequena Estrela",
-          "Preferia ser brilhante!",
-          "Viste algo brilhante!",
-          "No cÈu n„o!",
-          "An·lise de uma estrela"
-        ]
-      }
-    },
-
-    "SHORE.TR2": {
-      "Names": [
-        "Aldeia Canibal",
-        "A Praia",
-        "N„o percas a perna",
-        "Veneno e Ponte Saltar",
-        "Ataque ao ritmo"
-      ],
-      "Keys": {
-        "0": [
-          "Chave debaixo do mar",
-          "Chave de Jack Sparrow",
-          "Chave afogada",
-          "Chave ferrugenta",
-          "Um traficante perdeu isto!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Pedra Venenosa",
-          "Pedra das RuÌnas do Templo",
-          "Pedra de Sangue",
-          "Confia em mim",
-          "N„o È uma Gema de Cavaleiro"
-        ]
-      }
-    },
-
     "STPAUL.TR2": {
       "Names": [
-        "Shh È um segredo",
+        "Shh √© um segredo",
         "60/59",
-        "NegÛcios inacabados",
-        "Catedral mortÌfera",
-        "N„o h· danos impossÌveis"
+        "Neg√≥cios inacabados",
+        "Catedral mort√≠fera",
+        "N√£o h√° danos imposs√≠veis"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Super Escondido",
           "Escada, Escada na Parede",
           "Finalmente encontrou-me?",
@@ -725,86 +706,6 @@
           "Chave da sala da gripe"
         ]
       }
-    },
-
-    "TEMPLE.TR2": {
-      "Names": [
-        "T˙mulo de Randys e Rorys",
-        "PorquÍ tantos Sheevas?",
-        "Est·tuas ‡ prova de bala",
-        "Cobras e Escadas",
-        "Inferno de armadilhas",
-        "Truque Flip Flare"
-      ],
-      "Keys": {
-        "0": [
-          "Ainda sem falhas",
-          "ColecÁ„o de chaves mortÌferas",
-          "Cinco Noites na Ganesha",
-          "Rodas de OraÁ„o n„o",
-          "Chaves da C‚mara de Tortura"
-        ],
-        "1": [
-          "Ainda sem falhas",
-          "ColecÁ„o de chaves mortÌferas",
-          "Cinco Noites na Ganesha",
-          "Rodas de OraÁ„o n„o",
-          "Chaves da C‚mara de Tortura"
-        ],
-        "2": [
-          "Ainda sem falhas",
-          "ColecÁ„o de chaves mortÌferas",
-          "Cinco Noites na Ganesha",
-          "Rodas de OraÁ„o n„o",
-          "Chaves da C‚mara de Tortura"
-        ],
-        "3": [
-          "Ainda sem falhas",
-          "ColecÁ„o de chaves mortÌferas",
-          "Cinco Noites na Ganesha",
-          "Rodas de OraÁ„o n„o",
-          "Chaves da C‚mara de Tortura"
-        ]
-      }
-    },
-
-    "TONYBOSS.TR2": {
-      "Names": [
-        "Labirinto",
-        "Outro labirinto n„o!",
-        "Labirinto secreto?!? O.o",
-        "40 becos sem saÌda",
-        "40 Cobras"
-      ]
-    },
-
-    "TOWER.TR2": {
-      "Names": [
-        "Museu Nacional de HistÛria",
-        "Mistura sem sentido",
-        "O Ûdio de Lud",
-        "Vamos odiar",
-        "UPV Voando ‡ frente!"
-      ],
-      "Keys": {
-        "0": [
-          "Chave de aquecimento!",
-          "Uau, n„o falhas-te!",
-          "Iniciador de fogo",
-          "Nem sequer uma caldeira aqui?!?",
-          "Estou com frio!"
-        ]
-      }
-    },
-
-    "TRIBOSS.TR2": {
-      "Names": [
-        "Chefe Canibal",
-        "Ainda mais veneno",
-        "Pris„o de Footis",
-        "Templo do Atum",
-        "Corrida ao Templo"
-      ]
     }
   }
 }

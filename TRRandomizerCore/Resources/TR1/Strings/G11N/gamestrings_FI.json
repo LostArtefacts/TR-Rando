@@ -1,0 +1,564 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "YOLO ei kannattanut",
+      "Kuolit",
+      "Yritä uudelleen",
+      "Hävisit pelin",
+      "RIP"
+    ],
+    "HEADING_INVENTORY": [
+      "Käyttötavarat",
+      "Jutut",
+      "Repun sisältö",
+      "Tavarat",
+      "Kaikki keräämäsi"
+    ],
+    "HEADING_ITEMS": [
+      "Tärkeät jutut",
+      "Älä hukkaa näitä",
+      "Aarteet",
+      "Älä myy pois",
+      "Asiat"
+    ],
+    "HEADING_OPTION": [
+      "Valinnat",
+      "Säädöt",
+      "OwO",
+      "UwU",
+      "Tee muutoksia"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Iso",
+      "Kun laastari ei riitä",
+      "Käytä hengenvaarassa",
+      "Täysi elämä",
+      "Auttaa paljon"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Suuntaa pohjoiseen",
+      "Pyörivä härveli",
+      "Magneettikyhäelmä",
+      "Miten tämä toimii?",
+      "Käyttääkö tätä kukaan?"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "Ergonomia",
+      "Näin pelataan",
+      "Näppäimistö on paras",
+      "Peliohjain on paras",
+      "Mitä nappia pitää painaa?"
+    ],
+    "INV_ITEM_DETAILS": [
+      "John Lennon -asu",
+      "Arskat",
+      "Aurinkolasit",
+      "Vaaleanpunaiset lasit",
+      "Miltä näyttää?"
+    ],
+    "INV_ITEM_GAME": [
+      "Henkkarit",
+      "Matkustusasiakirja",
+      "Henkilötiedot",
+      "Pikselöitynyt kirja",
+      "Passi"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "Älä nuole",
+      "Liian painava",
+      "Väärä materiaali",
+      "Hieman myrkyllinen",
+      "Laita kädelle"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Magnumit",
+      "Paremmat pistoolit",
+      "Paukkuu kovempaa",
+      "Mustat pistoolit",
+      "Ne suklaa-aseet"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "Suklaapatukat",
+      "Jätskipatukat",
+      "50 luotia",
+      "Suklaata",
+      "Paukkuja"
+    ],
+    "INV_ITEM_MEDI": [
+      "Pieni",
+      "Puolikas elämä",
+      "Auttaa hieman",
+      "Laiha apu",
+      "Laastari"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Pistoolit",
+      "Peruspyssyt",
+      "Perushyvät",
+      "Loputtomat panokset",
+      "Heikoimmat aseet"
+    ],
+    "INV_ITEM_SCION": [
+      "Pyöreä jutska",
+      "Älä ammu minua",
+      "Kolme samanlaista",
+      "Se lausutaan Skii-on",
+      "Se lausutaan Sai-on"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Tarkkuusase",
+      "Eniten vahinkoa",
+      "Hidas ase",
+      "Iso pamaus",
+      "Ehkä osut, ehkä et"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Haulikon patruunat",
+      "Vain kaksi per paketti",
+      "Menee minne sattuu",
+      "Vaivaudutko keräämään?",
+      "Hauleja"
+    ],
+    "INV_ITEM_SOUND": [
+      "Ääni",
+      "Mikseri",
+      "Hiljaa vai kovalla?",
+      "Kuulokkeet",
+      "Kasettisoitin"
+    ],
+    "INV_ITEM_UZI": [
+      "Uzit",
+      "PRRRRR",
+      "Nopeat pistoolit",
+      "Luotisade",
+      "Pampampam"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Parhaat ammukset",
+      "100 luotia",
+      "Näillä osut vihollisiin",
+      "Haudoista löytämäsi luodit",
+      "Pampampam-ammukset"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "Tyhjä",
+      "Tähän mahtuu",
+      "Tallenna tähän",
+      "Oma tallennuksesi tähän",
+      "Ei vielä tallennusta"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Tutoriaali",
+        "Muuttopäivä",
+        "404: Puutarhaa ei löydy",
+        "Opastettu kierros",
+        "Vaatteet pois!"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "Lepakkoluola",
+        "Helppo nakki",
+        "Ja alusta!",
+        "Vaikein taso",
+        "Harmaa kolo"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Susibileet",
+        "Sutten kaupunki",
+        "Yllätyskarhu",
+        "Niin monta lepakkoa",
+        "Vilgabanga"
+      ],
+      "KeyItems": {
+        "key1": [
+          "QWOP-avain",
+          "Susiavain",
+          "Älä unohda idolia",
+          "Lisää susia",
+          "Esine oikealla"
+        ],
+        "puzzle1": [
+          "Nukke",
+          "Indianan Idoli",
+          "Varmaan arvokas",
+          "Esine vasemmalla",
+          "Hassuhattuinen hemmo"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Jurassic Park",
+        "Dinomaailma",
+        "Eeppisin kohtaus",
+        "Barneyn reviiri",
+        "Kadonnut laakso"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Tarvitset kolme",
+          "Laita pyörimään!",
+          "Korjaa koneisto",
+          "Masiinan osa",
+          "Hammasratas"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Vain raptoreita",
+        "Yllätys-Larson",
+        "Varo vierivää kiveä",
+        "Muumio haluaa halin",
+        "Lara tuhoaa haudan"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Tarvitset kolme",
+          "Laita pyörimään!",
+          "Korjaa koneisto",
+          "Masiinan osa",
+          "Hammasratas"
+        ]
+      }
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "Älä putoa",
+        "Varo vasaraa",
+        "Voi jumala",
+        "Pierre roskaa",
+        "Paljon koloja"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Vesiavain",
+          "Itseasiassa roomalainen",
+          "Feikki-Poseidon",
+          "Syvyyksistä",
+          "Uintihetki"
+        ],
+        "key2": [
+          "Lukuisia karttoja",
+          "Aito leidi ampuu aina",
+          "Samperin gorilla",
+          "Vierivän kiven avain",
+          "Hyvä ettet jäänyt alle!"
+        ],
+        "key3": [
+          "Varo mihin astut",
+          "Ei edes jumala",
+          "Mennään kävelylle",
+          "Varo miekkoja",
+          "Ne tulee!"
+        ],
+        "key4": [
+          "Ei edes kreikkalainen",
+          "Mjölnir-avain",
+          "Vasara-avain",
+          "Salama-avain",
+          "Älä putoa nyt"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "Pierren teatteri",
+        "Onko gladiaattoreita?",
+        "Miksi tämä on maan alla?",
+        "Niin paljon vihollisia",
+        "Näytös alkaa pian"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Ulospääsy",
+          "Miksi tämä on täällä?",
+          "Mikä tämä huone on?",
+          "Avaa parvekkeen portin",
+          "Lippu eläintarhaan"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "Kultaa!",
+        "Salaisuus käden päällä",
+        "Eläintarha",
+        "Aina kultainen aika",
+        "Apinoiden taso"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Tällä pääsee pois",
+          "Ei myrkyllinen",
+          "Oikea materiaali",
+          "Nyt siitä on jotain hyötyä!",
+          "Liian painava"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "Jatka uimista!",
+        "TULVA",
+        "Jättivessa",
+        "Krokojen paratiisi",
+        "Rottabileet"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Vihdoin!",
+          "Ooh, se kiiltää",
+          "Melkein perillä",
+          "Viimeinen avain",
+          "Parempi kuin hopeinen"
+        ],
+        "key2": [
+          "Parempi kuin ruosteinen",
+          "Huonompi kuin kultainen",
+          "Liian monta suljettua ovea",
+          "Tarvitset kaksi",
+          "Tarvitset paremman"
+        ],
+        "key3": [
+          "Tällä saat lisää avaimia",
+          "Ensimmäinen monista avaimista",
+          "Huonompi kuin hopeinen",
+          "Onko tuo varmasti ruostetta?",
+          "Hapettunutta rautaa"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "Älä luota patsaisiin",
+        "Vihdoin pääsee Kreikasta",
+        "Pierre ehti ensin",
+        "Jee, siirretään lohkareita!",
+        "Pierren viimeinen kohtaaminen"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Miten avain tekee tämän?",
+          "Tämä ei ole salaisuus",
+          "Onko se salaisuus?",
+          "Sopii kultaiseen avaimenreikään",
+          "Kimalteleva avain"
+        ],
+        "key2": [
+          "Runsaasti rottia",
+          "Varo gorilloja",
+          "Älä missaa salaisuutta",
+          "Tarvitset toisenkin",
+          "Käy vain oikeaan lukkoon"
+        ],
+        "key3": [
+          "Laita avaimenreikään",
+          "Kaksi avainta yhteen oveen",
+          "Siirrä lohkaretta lisää",
+          "Tarvitset toisenkin avaimen",
+          "Käy vain vasempaan lukkoon"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Rapsuta kisuja",
+        "Paluu Egyptiin",
+        "Pantteriparatiisi",
+        "Kaupunki, kai",
+        "Monan koti"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Aivokirurgiaa",
+          "Monan avain",
+          "Käytä Sfinksissä",
+          "Sininen jalokiviavain",
+          "Safiiriavain"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Hymynaamahyppy",
+        "Lisää muumioita",
+        "Tarvitset neljä artefaktia",
+        "Egyptiläinen museo",
+        "Egyptin jumalien juttuja"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Avaa kaksi ovea",
+          "Sininen jalokiviavain",
+          "Safiiriavain",
+          "Miksi täällä on ovi?",
+          "Krokotiiliavain"
+        ],
+        "puzzle1": [
+          "Sethin vihollisen silmä",
+          "Näkyillään",
+          "Se silmäilee",
+          "Haukan katse",
+          "Lakkaa tuijottamasta!"
+        ],
+        "puzzle2": [
+          "Ötökkäamuletti",
+          "Skarabee",
+          "Khepri",
+          "Pillerinpyörittäjä",
+          "Saisitpa pitää tämän seuraavaa tasoa varten"
+        ],
+        "puzzle3": [
+          "Mitä siinä lukee?",
+          "Sakaalin sinetti",
+          "Jotain kirjoituksia",
+          "Rosettan kivi",
+          "Peruna"
+        ],
+        "puzzle4": [
+          "Tämä ei ole TR4",
+          "Missä on Seth?",
+          "Paras laittaa se takaisin",
+          "Elämän avain",
+          "Silmukkaristi"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "Miten Larson pääsi tänne?",
+        "Liikaa atlantialaisia",
+        "Uzit on MISSÄ?",
+        "Nakuja muumioita",
+        "Jättisfinksi"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Käytä sillalla",
+          "Vapauta kentauri",
+          "Tällä saat Ankhin",
+          "Tason ainut avain",
+          "Ruostumaton!"
+        ],
+        "puzzle1": [
+          "Käytä Sfinksin päällä",
+          "Tarvitset kaksi",
+          "Missä on Seth?",
+          "Yksi ei riitä!",
+          "Kentaurinkakka"
+        ],
+        "puzzle2": [
+          "Ötökkä",
+          "Viholliset tulee!",
+          "Pääset ulos täältä",
+          "Jaahas, taas täällä",
+          "Kauanpa kesti"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "Pikku paatti",
+        "Natlan kätyreitä",
+        "Miksi tämä on kaivos?",
+        "Missä aseet!?",
+        "Natlan miinat"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Miten tämä tänne joutui?",
+          "Sähköä!",
+          "Haluatko aseet?",
+          "Miten nämä vielä toimivat?",
+          "Älä polta"
+        ],
+        "puzzle2": [
+          "Ainutlaatuinen avain",
+          "Tällä pääset ulos",
+          "Joku egyptiläinen kolmio",
+          "Pääsylippu Atlantikseen",
+          "Melko kulmikas"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "Ei vedenalainen",
+        "Lihaisa sokkelo",
+        "Onnea matkaan",
+        "Tarvitset laastareita",
+        "Turmion torni"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "Viimeistä viedään!",
+        "Natla elää",
+        "Tuhoa Atlantis",
+        "Ansojen pyramidi",
+        "ISO HALI"
+      ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Hiekkaa Joka Kolkassa",
+        "Ajottain Krokotiili",
+        "Näkemiin Alligaattori",
+        "Liu'u - Pudottaudu - Splat",
+        "Tarvitset Kaikki Lääkepakkaukset!"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Voi Avain",
+          "Esi-Kulta Avain",
+          "Kiiltävä Avain",
+          "Uhhh Kiiltävä!",
+          "Loistava Avain"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Lillyn Temppeli",
+        "Cat-alinan Temppeli",
+        "Kissoja Pelkästään Täällä",
+        "Rakentaja Ei Ollut Koira Ihminen",
+        "Koira Ihmiset Pysykää Loitolla"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Liian Monta",
+          "Hieno Avain",
+          "Kuinka Monta Lisää?",
+          "Aivan Liikaa...",
+          "Kissa Avain"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Muumion Leikkipuisto",
+        "Liha Luola",
+        "Spaghetti Luola",
+        "Kuka Haluaa Lasagnea?",
+        "Atlantin Otukset.. Ovat Kaikkialla! Auttakaa!"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Vedä Se Vipu!",
+        "Väärä Vipu!",
+        "Miksi Tämä Vipu On Edes Olemassa?",
+        "Päästäkää Minut Pois!",
+        "Tehtävä Suoritettu!"
+      ]
+    }
+  }
+}

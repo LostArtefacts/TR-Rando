@@ -1,0 +1,564 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "Du YOLO'ade för hårt",
+      "Du dog",
+      "Dödlighet",
+      "Tryck F för att visa respekt",
+      "F"
+    ],
+    "HEADING_INVENTORY": [
+      "Förbrukningsvaror",
+      "Saker",
+      "Bästa Ryggsäcken",
+      "De bra sakerna",
+      "Alla sakerna"
+    ],
+    "HEADING_ITEMS": [
+      "De viktiga sakerna",
+      "Uppdrags objekt",
+      "Skatt",
+      "Sälj inte dessa",
+      "Saker"
+    ],
+    "HEADING_OPTION": [
+      "Funktionskarusell",
+      "Du är vacker!",
+      "OwO",
+      "UwU",
+      "Ändra saker"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Doktor!",
+      "Tjockt medicinpack",
+      "Hel hälsa givare",
+      "Mega",
+      "Bättre än ett litet medicinpack"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Du borde gå norr",
+      "Snurrig sak",
+      "Bara en magnet",
+      "Funkar detta?",
+      "Vem använder det här?"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "Ergonomi",
+      "Hur man spelar",
+      "Tangentbord är bäst",
+      "Kontroller är bäst",
+      "Vilken knapp är det?"
+    ],
+    "INV_ITEM_DETAILS": [
+      "John Lennon kostym",
+      "Solglasögon",
+      "/o-o/",
+      "Rosa färgade glasögon",
+      "Glasögon"
+    ],
+    "INV_ITEM_GAME": [
+      "ID",
+      "Resedokument",
+      "Referenser",
+      "Pixelerad bok",
+      "Pass"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "Slicka inte",
+      "För tungt att bära",
+      "Fel material",
+      "Lite giftigt",
+      "Lägg på Midas hand"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Bättre pistoler",
+      "Pistoler i svart",
+      "Ganska tråkig",
+      "Skada per sekund",
+      "Något djupare ljud"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "Glass clip",
+      "Hershey bar",
+      "50 kulor",
+      "Choklad",
+      "Inte lika bra som Uzi klipp"
+    ],
+    "INV_ITEM_MEDI": [
+      "Inte tjockt medicinpack",
+      "Mini",
+      "Halv hälsa givare",
+      "Det är något",
+      "Värre än ett stort medicinpack"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Pistolen",
+      "Svagaste builden",
+      "Gamle trofast",
+      "Vem behöver ammunition?",
+      "Oändlig pew pew"
+    ],
+    "INV_ITEM_SCION": [
+      "Rund sak",
+      "Skjut mig inte",
+      "Du behöver tre",
+      "Det är skii-on",
+      "Det är saj-on"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Helt ackurat",
+      "Bara använd pistoler",
+      "Bästa skadan",
+      "Klumpigt",
+      "Stor bang bazooka"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Inte tillräckligt med ammunition",
+      "Bara 2 patroner var",
+      "Definition av träffsäkerhet",
+      "Inte värt att ta upp",
+      "Knall patron"
+    ],
+    "INV_ITEM_SOUND": [
+      "Mixer",
+      "Tyst eller högt?",
+      "catJAM",
+      "Hörlurar",
+      "Ljud polisen"
+    ],
+    "INV_ITEM_UZI": [
+      "RATATATATATA",
+      "MAC-10",
+      "Maskingevär",
+      "Pew pew",
+      "Behöver nerf"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Bästa ammunitionen",
+      "100 kulor",
+      "Dessa träffar iaf fienden",
+      "Ammunition chillar i urgamla gravar",
+      "Pew pew ammunition"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "Du är hisnande",
+      "För närvarande värdelös",
+      "Rädda våra själar",
+      "Personligt sparande",
+      "Spara över mig"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Handledning",
+        "Flyttar in",
+        "404 Trädgård ej funnen",
+        "Guidad tur",
+        "Ta av dina kläder"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "Fladdermusgrottan",
+        "ENKELT",
+        "OMSTART",
+        "Svåraste nivån",
+        "Mycket grått"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Varg orgie",
+        "Varg staden",
+        "Björnen är hemligheten",
+        "För många fladdermöss",
+        "Vilcabanga Staden"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Qwop nyckel",
+          "Varg nyckel",
+          "Glöm inte Idolen",
+          "Fly vargarna för fler vargar",
+          "Grej till höger"
+        ],
+        "puzzle1": [
+          "Docka",
+          "Indiana's figur",
+          "Antagligen värdefullt",
+          "Grej till vänster",
+          "Man med rolig hatt"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Dinosaurie park",
+        "Dinosaurie värld",
+        "Mest episka ögonblicket",
+        "Barney's rike",
+        "Dinosauriefristad"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 är det magiska numret",
+          "KUGGERS",
+          "Kugghjul",
+          "Maskineri",
+          "Tandhjul"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Bara raptorer här",
+        "Överraskning! Larson!",
+        "Akta rullstenen",
+        "Krama mumien för tur",
+        "Lara har sönder saker"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 är det magiska numret",
+          "KUGGERS",
+          "Kugghjul",
+          "Maskineri",
+          "Tandhjul"
+        ]
+      }
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "Ramla inte",
+        "Hammra mig baby",
+        "Gud inte denna nivå",
+        "Pierre, din nedskräpare",
+        "En mängd olika hål"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Vatten nyckel",
+          "Jag är faktiskt Romare",
+          "Falsk Poseidon",
+          "Hela vägen ner för dig",
+          "Låt oss simma"
+        ],
+        "key2": [
+          "Många många kartor",
+          "En sann dam skjuter alltid",
+          "Jävla gorilla",
+          "Gigantisk sten nyckel",
+          "Glad att du inte blev mosad"
+        ],
+        "key3": [
+          "Akta ditt steg",
+          "Inte ens en gud",
+          "Dags för en promenad",
+          "Akta svärden",
+          "Inkommande"
+        ],
+        "key4": [
+          "Inte ens Grekisk",
+          "Mjölnir Nyckel",
+          "Hammar Nyckel",
+          "Blixt Nyckel",
+          "Ramla inte nu"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "Pierre's teater",
+        "gladiatorKontroll",
+        "Varför är det underjord?",
+        "Så många fiender",
+        "Menageriet"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Din väg ut",
+          "Varför är nyckeln här?",
+          "Vad är detta för rum?",
+          "Öppnar balkongporten",
+          "Biljett till zoo"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "Känns guld mannen!",
+        "Stå i hand för OP vapen",
+        "Djurparken",
+        "Gratis guld split",
+        "Tillbaka till apa"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Din biljett ut",
+          "Inte giftigt",
+          "Rätt material",
+          "Nu är det användbart!",
+          "För tungt att bära"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "Fortsätt simma!",
+        "ÖVERSVÄMMAT",
+        "Gigantisk toalett",
+        "Krokodil Paradiset",
+        "råttPARTY"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Fan äntligen",
+          "Ooo.. skinande",
+          "Nästan där",
+          "Sista Nyckeln",
+          "Bättre än silver"
+        ],
+        "key2": [
+          "Bättre än rostigt",
+          "Sämre än guld",
+          "För många dörrar att öppna",
+          "Du behöver två",
+          "Behöver något bättre"
+        ],
+        "key3": [
+          "Använd för mer nycklar",
+          "Första av många nycklar",
+          "Sämre än silver",
+          "Säkert att det är rost?",
+          "Oxiderat järn"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "Lita inte på statyerna",
+        "Klar med Grekland",
+        "Pierre kom hit först",
+        "Ja! Flyttstenar!",
+        "Pierre's sista ställning"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Hur gör nyckeln så?",
+          "Det är inte en hemlighet",
+          "Gör hemlighets ljud",
+          "Använd i guldhålet",
+          "Glittrande nyckel"
+        ],
+        "key2": [
+          "Råttor i överflöd",
+          "Akta för gorillor",
+          "Missa inte hemligheten",
+          "Du behöver en till nyckel",
+          "Funkar bara på höger lås"
+        ],
+        "key3": [
+          "Sätt i nyckelhålet",
+          "Behövs 2 nycklar för 1 dörr",
+          "Knuffa blocket mer",
+          "Du behöver en till nyckel",
+          "Funkar bara på vänster lås"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Gosa med katterna",
+        "Åter till Egypten",
+        "Panterparadis",
+        "Inte riktigt en stad",
+        "Mona's Hem"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Hjärnoperation",
+          "Mona's nyckel",
+          "Använd i Sfinxen",
+          "Blå ädelstensnyckel",
+          "Aluminiumoxid nyckel"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Leende hopp",
+        "Ren tillfredsställelse",
+        "Fyra artefakter behövs",
+        "Egyptiskt museum",
+        "Egyptisk Guds saker"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Öppnar två dörrar",
+          "Blå ädelstensnyckel",
+          "Aluminiumoxid nyckel",
+          "Varför är en dörr där?",
+          "Krokodil nyckel"
+        ],
+        "puzzle1": [
+          "Ögat av Seth's skurk",
+          "Vi ses",
+          "Vakar alltid",
+          "Falkens ögonglob",
+          "Sluta titta på mig"
+        ],
+        "puzzle2": [
+          "Bara en bugg",
+          "Heracross",
+          "Khepri",
+          "Dyngbagge",
+          "Önskar du hade detta nästa nivå"
+        ],
+        "puzzle3": [
+          "Anpu's sigill",
+          "Schakalen's sigill",
+          "Bara något klotter",
+          "Rosettastenen",
+          "Potatis"
+        ],
+        "puzzle4": [
+          "Detta är inte TR4",
+          "Vart är Seth?",
+          "Lägg tillbaka den där",
+          "Livets nyckel",
+          "Kors med en ögla"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "Hur kom Larson hit?",
+        "För många Atlantianer",
+        "Vänta, Uzi vart då?",
+        "Vem släppte ut mumierna",
+        "En glad stund"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Använd på bron",
+          "Släpp lös Kentauren",
+          "Använd för att få Ankh",
+          "Enda nyckeln i nivån",
+          "Hur är den inte rostig?"
+        ],
+        "puzzle1": [
+          "Lägg på sfinxen",
+          "Behöver två",
+          "Vart är Seth?",
+          "Slå mig baby en gång till",
+          "Kentaur bajs"
+        ],
+        "puzzle2": [
+          "Bara en bugg",
+          "Skapa några fiender",
+          "Ta dig ur den här nivån",
+          "Kul, tillbaka till början",
+          "Tog dig sån tid?"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "Nivån med jolle",
+        "Död åt Natla's idioter",
+        "Varför är detta en gruva?",
+        "Vapen vart?",
+        "Natla's Memes"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Vem la den här",
+          "Zap!",
+          "Vill du ha vapen?",
+          "Varför funkar dessa än?",
+          "Elektrisk pincett"
+        ],
+        "puzzle2": [
+          "Väldigt unik nyckel",
+          "Din väg ut",
+          "Nån Egyptisk triangel",
+          "Atlantis tillträde",
+          "Ganska kantig"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "Inte under vattnet",
+        "Köttlabyrint",
+        "Lycka till",
+        "Ta med förband",
+        "Skräckens torn"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "Den sista nedräkningen",
+        "Natla är inte död",
+        "Död åt Atlantis",
+        "Det är en fälla",
+        "Ge Torso en kram"
+      ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Sand i varje hörn",
+        "Om ett tag krokodil",
+        "Vi ses senare alligator",
+        "Skjut - Släpp - Stänk",
+        "Du kommer att behöva de medicinerna!"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Smörnyckel",
+          "Inte guldnyckel",
+          "Glänsande nyckel",
+          "Ooo.. skinande!",
+          "Briljant nyckel"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Lillys tempel",
+        "Catalinas tempel",
+        "Inget annat än katter här...",
+        "Builder var inte en hundperson",
+        "Hundar stannar ute"
+      ],
+      "KeyItems": {
+        "key1": [
+          "För många av dessa",
+          "Snygg nyckel",
+          "Hur många fler?",
+          "Suck, för många...",
+          "Kattnyckel"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Mamma dagis",
+        "Kött grotta",
+        "Spaghettigrottan",
+        "Lasagne någon?",
+        "Atlanter överallt. Hjälp!"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Dra i spaken!",
+        "Fel spak!",
+        "Varför har vi ens den spaken?",
+        "Få mig härifrån!",
+        "Avslutade affärer!"
+      ]
+    }
+  }
+}

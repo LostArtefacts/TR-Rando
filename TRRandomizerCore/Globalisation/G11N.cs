@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Globalisation;
 
@@ -13,21 +14,21 @@ public class G11N
             @"Resources\Shared\G11N\languages.json"));
     }
 
-    private readonly G11NGame _game;
-    private readonly SortedDictionary<Language, IGameStrings> _languageMap;
+    private readonly TRGameVersion _game;
+    private readonly SortedDictionary<Language, TRGameStrings> _languageMap;
     private readonly SortedSet<Language> _realLanguages;
 
-    public Language[] RealLanguages => _realLanguages.ToArray();
+    public List<Language> RealLanguages => _realLanguages.ToList();
 
-    public G11N(G11NGame game)
+    public G11N(TRGameVersion game)
     {
         _game = game;
-        _languageMap = new SortedDictionary<Language, IGameStrings>();
-        _realLanguages = new SortedSet<Language>();
+        _languageMap = new();
+        _realLanguages = new();
 
         foreach (Language language in _definedLanguages)
         {
-            IGameStrings strings;
+            TRGameStrings strings;
             if (!language.IsHybrid && (strings = LoadLanguage(language, _game)) != null)
             {
                 _languageMap[language] = strings;
@@ -36,36 +37,24 @@ public class G11N
         }
     }
 
-    public static List<Language> GetSupportedLanguages(G11NGame game) =>
-        _definedLanguages.Where(l => l.IsHybrid || LoadLanguage(l, game) != null).ToList();
+    public static List<Language> GetSupportedLanguages(TRGameVersion game)
+        => _definedLanguages.Where(l => l.IsHybrid || LoadLanguage(l, game) != null).ToList();
 
     public static Language GetLanguage(string tag)
-    {
-        tag = tag.ToUpper();
-        return _definedLanguages.Find(l => l.Tag.ToUpper().Equals(tag));
-    }
+        => _definedLanguages.Find(l => string.Equals(l.Tag, tag, StringComparison.InvariantCultureIgnoreCase));
 
-    public IGameStrings GetDefaultGameStrings()
-    {
-        return GetGameStrings(GetLanguage(Language.DefaultTag));
-    }
+    public TRGameStrings GetDefaultGameStrings()
+        => GetGameStrings(Language.DefaultTag);
 
-    public IGameStrings GetGameStrings(string tag)
-    {
-        return GetGameStrings(GetLanguage(tag));
-    }
+    public TRGameStrings GetGameStrings(string tag)
+        => GetGameStrings(GetLanguage(tag));
 
-    public IGameStrings GetGameStrings(Language language)
-    {
-        if (!_languageMap.ContainsKey(language))
-        {
-            throw new KeyNotFoundException(string.Format("There is no language defined for {0} ({1})).", language.Name, language.Tag));
-        }
+    public TRGameStrings GetGameStrings(Language language)
+        => _languageMap.ContainsKey(language)
+        ? _languageMap[language]
+        : throw new KeyNotFoundException($"There is no language defined for {language.Name} ({language.Tag}).");
 
-        return _languageMap[language];
-    }
-
-    private static IGameStrings LoadLanguage(Language language, G11NGame game)
+    private static TRGameStrings LoadLanguage(Language language, TRGameVersion game)
     {
         string path = $@"Resources\{game}\Strings\G11N\gamestrings_{language.Tag}.json";
         if (!File.Exists(path))
@@ -73,20 +62,6 @@ public class G11N
             return null;
         }
 
-        string data = File.ReadAllText(path, Encoding.UTF8);
-        return game switch
-        {
-            G11NGame.TR1 => JsonConvert.DeserializeObject<TR1GameStrings>(data),
-            G11NGame.TR2
-            or G11NGame.TR3 => JsonConvert.DeserializeObject<TR23GameStrings>(data),
-            _ => null,
-        };
+        return JsonConvert.DeserializeObject<TRGameStrings>(File.ReadAllText(path, Encoding.UTF8));
     }
-}
-
-public enum G11NGame
-{
-    TR1,
-    TR2,
-    TR3
 }

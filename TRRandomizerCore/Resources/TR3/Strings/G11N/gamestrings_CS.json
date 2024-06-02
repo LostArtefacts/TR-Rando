@@ -1,446 +1,202 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Sumive",
-            "Flipmap Pomocnik",
-            "Ohh Leskle!",
-            "Konec Zakopavani",
-            "Pouzij mne!"
-          ],
-          "44": [
-            "Sumive",
-            "Flipmap Pomocnik",
-            "Ohh Leskle!",
-            "Konec Zakopavani",
-            "Pouzij mne!"
-          ]
-        },
-        {
-          "36": [
-            "Dve Zbrane",
-            "Cheat Pomocnik",
-            "Klasicka Klasika",
-            "Ty IIkony",
-            "Nekonecne Zabijeni"
-          ],
-          "45": [
-            "Dvojte Naboje do Zbrane",
-            "Cheat Pomocni - Zasobnik",
-            "Klasicka Klasika - Zasobnik",
-            "Ty IIkony - Zasobnik",
-            "Nekonecne Zabijeni - Zasobnik"
-          ]
-        },
-        {
-          "37": [
-            "Hovnomet",
-            "Proc?",
-            "Pojd nebo Nezabijej!",
-            "Uz si videl DOST?",
-            "Nech to by, je to zaneprazdneno!"
-          ],
-          "46": [
-            "Hovnomet - Naboje",
-            "Otazky - Naboje",
-            "Hlemizd - Naboje",
-            "Dostcujici? - Naboje",
-            "Zaneprazdnene Naboje"
-          ]
-        },
-        {
-          "38": [
-            "Pal Pal",
-            "Dost Uzitecne!",
-            "D-Eagle",
-            "Poustni Orel",
-            "Zhave Vystrely"
-          ],
-          "47": [
-            "Pal Pal - Naboje",
-            "Uzitecne - Naboje",
-            "D-Eagle - Naboje",
-            "Orli Naboje",
-            "Zhave Naboje"
-          ]
-        },
-        {
-          "39": [
-            "Nabojovi Upir",
-            "Automat 2.0",
-            "Neni TR2 Uzi",
-            "Ups-Zis",
-            "Celkem Slabe!"
-          ],
-          "48": [
-            "Upiri Naboje",
-            "Naboje 2.0",
-            "Zranene Naboje",
-            "Ups-zi Naboje",
-            "Slabsi Naboje"
-          ]
-        },
-        {
-          "40": [
-            "Meme Zbran",
-            "Zbytecnost",
-            "Jen pro Challenge",
-            "K cemu to je?",
-            "Podvodni Kuse"
-          ],
-          "49": [
-            "Vlhke Meme",
-            "Odpad",
-            "Vyzyvatele",
-            "Existencialove",
-            "Luky"
-          ]
-        },
-        {
-          "41": [
-            "To Neni M16",
-            "M16",
-            "Zabijak Raptoru",
-            "MP3 Hudba",
-            "Raketovylepsovac"
-          ],
-          "50": [
-            "Falesne Naboje",
-            "Podvodne Naboje",
-            "Zabijaci Raptoru",
-            "Skladby",
-            "Raketovi Nabijeci"
-          ]
-        },
-        {
-          "42": [
-            "Ultimatni BUM",
-            "Batohova Sentry",
-            "Netrva to dluho",
-            "Totalne Nepresne",
-            "Velky Rozptyl?"
-          ],
-          "51": [
-            "Ultimatni Rakety",
-            "Batohove Rakety",
-            "Dlouho Nabijeci Rakety",
-            "Nepresne Rakety",
-            "Tezke Rakety"
-          ]
-        },
-        {
-          "43": [
-            "Nepresna Vec",
-            "Lepsi Laucher - Kopie",
-            "Velky BadaBoom",
-            "Proc mne pouzivas?",
-            "Neni uz na 7"
-          ],
-          "52": [
-            "Nepresne Nejdy",
-            "Zkopirovane Nejdy",
-            "BadaBoom Nejdy",
-            "Pochybne Nejdy",
-            "Nejdy ve Sleve"
-          ]
-        },
-        {
-          "53": [
-            "Pouziti Zakazano!",
-            "Jsi na NE LEKARNAM!",
-            "Mala Nemocnice",
-            "Maly Zachrance",
-            "Batohovy Krystal"
-          ],
-          "54": [
-            "Pouziti Zakazano!",
-            "Jsi na NE LEKARNAM!",
-            "Velka Nemocnice",
-            "Velky Zachrance",
-            "Batoh Plny Krystalu"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "Itemy",
-          "Co to je?",
-          "Neni to leskle!",
-          "Odpad",
-          "To & Tamto",
-          "Moc Artefaktu!",
-          "Jak pasujou?"
-        ],
-        "3": [
-          "Byl jsi Kayakovan?",
-          "NLNMAS jedeeem?",
-          "Ty MRTVOLA!",
-          "Jsi ted Palacinka!",
-          "Zapomnel jsi Healing?",
-          "Co treba LEKARNA?",
-          "Zemrel si? Jako TADY?"
-        ],
-        "35": [
-          "Vyplacane Zbytevnosti",
-          "Nejaky% dal?",
-          "Lze byt jeste pomalejsi?",
-          "Vsechna Tajemstvi?",
-          "Lekarny Zakazany!",
-          "Beh Pacifisty?"
-        ],
-        "59": [
-          "Panstvi Croft",
-          "Core Design HQ",
-          "TR3Rando HQ",
-          "Lariny Vykopavky",
-          "Winstonova Lednice",
-          "Rozmrazte Winstona"
-        ],
-        "85": [
-          "Bit City",
-          "Jizni Anglie",
-          "Je Kralovna doma?",
-          "Metro je VSUDE",
-          "10 Minut Pulnoci!"
-        ],
-        "86": [
-          "Ne tak prazdna poust",
-          "PRACH... Vsude",
-          "OI!",
-          "HEY!",
-          "Orelni Poust"
-        ],
-        "87": [
-          "Voda a Zuby",
-          "Zapomenute Ostrovy",
-          "Kanibalska Manie",
-          "Punuv Dum",
-          "Jizni Pateticky",
-          "Jizni India?"
-        ],
-        "88": [
-          "Super Mrazak",
-          "Kde je Winston?",
-          "Hypotermie je tu!",
-          "Titanic 2.0",
-          "Velke, Ledove, Bile",
-          "Ledovec v dohledu!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NULL -",
-          "- NIC TU NENI -",
-          "- NEIDENTIFIKOVANO -",
-          "- OI, VOLNY SLOT? -"
-        ]
-      }
-    }
-  ],
-
+ï»¿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Sumive",
+      "Flipmap Pomocnik",
+      "Ohh Leskle!",
+      "Konec Zakopavani",
+      "Pouzij mne!"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Dve Zbrane",
+      "Cheat Pomocnik",
+      "Klasicka Klasika",
+      "Ty IIkony",
+      "Nekonecne Zabijeni"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Dvojte Naboje do Zbrane",
+      "Cheat Pomocni - Zasobnik",
+      "Klasicka Klasika - Zasobnik",
+      "Ty IIkony - Zasobnik",
+      "Nekonecne Zabijeni - Zasobnik"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Hovnomet",
+      "Proc?",
+      "Pojd nebo Nezabijej!",
+      "Uz si videl DOST?",
+      "Nech to by, je to zaneprazdneno!"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Hovnomet - Naboje",
+      "Otazky - Naboje",
+      "Hlemizd - Naboje",
+      "Dostcujici? - Naboje",
+      "Zaneprazdnene Naboje"
+    ],
+    "INV_ITEM_DEAGLE": [
+      "Pal Pal",
+      "Dost Uzitecne!",
+      "D-Eagle",
+      "Poustni Orel",
+      "Zhave Vystrely"
+    ],
+    "INV_ITEM_DEAGLE_AMMO": [
+      "Pal Pal - Naboje",
+      "Uzitecne - Naboje",
+      "D-Eagle - Naboje",
+      "Orli Naboje",
+      "Zhave Naboje"
+    ],
+    "INV_ITEM_UZI": [
+      "Nabojovi Upir",
+      "Automat 2.0",
+      "Neni TR2 Uzi",
+      "Ups-Zis",
+      "Celkem Slabe!"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Upiri Naboje",
+      "Naboje 2.0",
+      "Zranene Naboje",
+      "Ups-zi Naboje",
+      "Slabsi Naboje"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Meme Zbran",
+      "Zbytecnost",
+      "Jen pro Challenge",
+      "K cemu to je?",
+      "Podvodni Kuse"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Vlhke Meme",
+      "Odpad",
+      "Vyzyvatele",
+      "Existencialove",
+      "Luky"
+    ],
+    "INV_ITEM_M16": [
+      "To Neni M16",
+      "M16",
+      "Zabijak Raptoru",
+      "MP3 Hudba",
+      "Raketovylepsovac"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "Falesne Naboje",
+      "Podvodne Naboje",
+      "Zabijaci Raptoru",
+      "Skladby",
+      "Raketovi Nabijeci"
+    ],
+    "INV_ITEM_ROCKET_LAUNCHER": [
+      "Ultimatni BUM",
+      "Batohova Sentry",
+      "Netrva to dluho",
+      "Totalne Nepresne",
+      "Velky Rozptyl?"
+    ],
+    "INV_ITEM_ROCKETS": [
+      "Ultimatni Rakety",
+      "Batohove Rakety",
+      "Dlouho Nabijeci Rakety",
+      "Nepresne Rakety",
+      "Tezke Rakety"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Nepresna Vec",
+      "Lepsi Laucher - Kopie",
+      "Velky BadaBoom",
+      "Proc mne pouzivas?",
+      "Neni uz na 7"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Nepresne Nejdy",
+      "Zkopirovane Nejdy",
+      "BadaBoom Nejdy",
+      "Pochybne Nejdy",
+      "Nejdy ve Sleve"
+    ],
+    "INV_ITEM_MEDI": [
+      "Pouziti Zakazano!",
+      "Jsi na NE LEKARNAM!",
+      "Mala Nemocnice",
+      "Maly Zachrance",
+      "Batohovy Krystal"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Pouziti Zakazano!",
+      "Jsi na NE LEKARNAM!",
+      "Velka Nemocnice",
+      "Velky Zachrance",
+      "Batoh Plny Krystalu"
+    ],
+    "HEADING_ITEMS": [
+      "Itemy",
+      "Co to je?",
+      "Neni to leskle!",
+      "Odpad",
+      "To & Tamto",
+      "Moc Artefaktu!",
+      "Jak pasujou?"
+    ],
+    "HEADING_GAME_OVER": [
+      "Byl jsi Kayakovan?",
+      "NLNMAS jedeeem?",
+      "Ty MRTVOLA!",
+      "Jsi ted Palacinka!",
+      "Zapomnel jsi Healing?",
+      "Co treba LEKARNA?",
+      "Zemrel si? Jako TADY?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Vyplacane Zbytevnosti",
+      "Nejaky% dal?",
+      "Lze byt jeste pomalejsi?",
+      "Vsechna Tajemstvi?",
+      "Lekarny Zakazany!",
+      "Beh Pacifisty?"
+    ],
+    "INV_GLOBE_LONDON": [
+      "Bit City",
+      "Jizni Anglie",
+      "Je Kralovna doma?",
+      "Metro je VSUDE",
+      "10 Minut Pulnoci!"
+    ],
+    "INV_GLOBE_NEVADA": [
+      "Ne tak prazdna poust",
+      "PRACH... Vsude",
+      "OI!",
+      "HEY!",
+      "Orelni Poust"
+    ],
+    "INV_GLOBE_SOUTH_PACIFIC": [
+      "Voda a Zuby",
+      "Zapomenute Ostrovy",
+      "Kanibalska Manie",
+      "Punuv Dum",
+      "Jizni Pateticky",
+      "Jizni India?"
+    ],
+    "INV_GLOBE_ANTARCTICA": [
+      "Super Mrazak",
+      "Kde je Winston?",
+      "Hypotermie je tu!",
+      "Titanic 2.0",
+      "Velke, Ledove, Bile",
+      "Ledovec v dohledu!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NULL -",
+      "- NIC TU NENI -",
+      "- NEIDENTIFIKOVANO -",
+      "- OI, VOLNY SLOT? -"
+    ]
+  },
   "LevelStrings": {
-    "ANTARC.TR2": {
-      "Names": [
-        "Bez Sneznych Vlocek",
-        "MotorClun 2.0",
-        "Kostka Ledu",
-        "Pochod Mrazakem",
-        "Date si Rajskou Polevku?"
-      ],
-      "Keys": {
-        "0": [
-          "Neni to Paluba",
-          "LedovyKlic_Hraci",
-          "Klid pro Strach",
-          "Ledovi Klic"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "NEZAPOMEN MNE!",
-          "Zahnuty Pendreg, Mnam",
-          "Tyc na Paceni",
-          "Citim, ze jsem SILNEJSI!",
-          "Von Pacidlo"
-        ],
-        "1": [
-          "Vypustte Reku",
-          "Otevrete Vypust",
-          "Sama Voda",
-          "Pristup k Polevce",
-          "Klic do Polevkarny"
-        ]
-      }
-    },
-
-    "AREA51.TR2": {
-      "Names": [
-        "Paul tu byl!",
-        "Misto Konspiracnich Teorii",
-        "Xenomorph tu byl!",
-        "Den Nezavyslosti",
-        "Vetrelcuv Telefoni Dum!"
-      ],
-      "Keys": {
-        "0": [
-          "Raketovy Klic",
-          "LETIMEEE",
-          "SpaceX Klic",
-          "Myval Raketak",
-          "Elon Musk Klic",
-          "To take Nepotrebujes!",
-          "Tajne KOdy",
-          "Pin ke Kreditce",
-          "Pravy Raketomet",
-          "Vetrelec Pobliz?!?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Klic Na Vlasku",
-          "Vysoky Klic",
-          "Neni Draci Vez",
-          "Podvodnikuv Klic",
-          "PODVODNIKU!!!"
-        ],
-        "1": [
-          "Mne Neskipnes!",
-          "To Jsem Zase Ja!",
-          "UFO CD",
-          "Jeden ze dvou CD",
-          "Kde je HUDBA? O.o"
-        ],
-        "2": [
-          "Larin Party Mix",
-          "Puzzle Element Hudba",
-          "Jeden ze Dvou CD",
-          "Dzungle Hudba",
-          "Mne Nepreskocis!"
-        ],
-        "3": [
-          "Magneticky zeleznicni klic",
-          "Metro Klic",
-          "Stanicni Metro Klic",
-          "Kreslici Kolicek",
-          "Celebrita",
-          "Zbijecka"
-        ]
-      }
-    },
-
-    "CHAMBER.TR2": {
-      "Names": [
-        "PAVOUCEK",
-        "20 – 40 dEagle Naboju",
-        "Japonci Doporucuji",
-        "Volny Willy",
-        "Willardova Pavucinka"
-      ]
-    },
-
-    "CITY.TR2": {
-      "Names": [
-        "Skok na Most",
-        "Zivot Brouka",
-        "Vceli Film 2.0",
-        "Sal Elementu",
-        "4 Zpusoby jak zemrit.!"
-      ],
-      "Keys": {
-        "0": [
-          "Dabluv Klic",
-          "Divka NEHORI!",
-          "Muzes Nas Preskocit!",
-          "Klic Dvojce",
-          "Klic z Pekla",
-          "Koukni na Mne!",
-          "Cookie Monster Klic"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Pletova Maska",
-          "Neni Zlata Maska",
-          "Fantom Opery",
-          "Maskarni je tu",
-          "MASKA!"
-        ]
-      }
-    },
-
-    "COMPOUND.TR2": {
-      "Names": [
-        "Jen Dalsi Vezeni",
-        "Utek z Vezeni",
-        "Velky Utek",
-        "Boris je tu!",
-        "Kde jsou moje ZBRANE?"
-      ],
-      "Keys": {
-        "0": [
-          "Zemri Dozorce!",
-          "Jen Dalsi Karta",
-          "MasterCard",
-          "Karta 1",
-          "Karta 2",
-          "Karta pro UTEK"
-        ],
-        "1": [
-          "VisaCard",
-          "Karta 1",
-          "Karta 2",
-          "Tajna Karta",
-          "Kreditka"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Modry Kamen",
-          "Jiskrivy Spunt 2",
-          "Pojistka 2",
-          "Modre USB",
-          "Zadny Duplikat"
-        ],
-        "1": [
-          "Yellow Stone Thingy",
-          "Jiskrivy Spunt 1",
-          "Pojistka  1",
-          "Yellow USB Plug",
-          "Zadny Duplikat"
-        ]
-      }
-    },
-
-    "CRASH.TR2": {
-      "Names": [
-        "Jursky Park",
-        "Raptor... ZASE?",
-        "Barnyho Domov",
-        "Ztracene Udoli Part 2",
-        "Kde je zlaty DRAK?"
-      ],
-      "Keys": {
-        "0": [
-          "Barnyho Spawnovaci Klic",
-          "Jidlo pro Barnyho",
-          "K Cemu To Je? O.o",
-          "Klic k delu pro BOOM",
-          "Devastujici Klic"
-        ],
-        "1": [
-          "Raptoruv Klic",
-          "Pozor na Zada",
-          "ZATEBOU!",
-          "Nepritel dela BUBUBU!",
-          "Kam se nacpu?"
-        ]
-      }
-    },
-
     "HOUSE.TR2": {
       "Names": [
         "Skromny Pribytek",
@@ -450,8 +206,8 @@
         "Cvicne Terce",
         "Stanstny Domov Duchodcu"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Zavodni Klic",
           "Vlajkovi Klic",
           "Formule 1 Klic",
@@ -461,7 +217,6 @@
         ]
       }
     },
-
     "JUNGLE.TR2": {
       "Names": [
         "Kniha Dzungli",
@@ -470,8 +225,8 @@
         "Kutlulu Kutululu",
         "Kutaleci Kameny"
       ],
-      "Keys": {
-        "3": [
+      "KeyItems": {
+        "Key4": [
           "Krasny to Klic",
           "OpiKlic",
           "Klic k Nicemu",
@@ -480,78 +235,25 @@
         ]
       }
     },
-
-    "MINES.TR2": {
+    "TEMPLE.TR2": {
       "Names": [
-        "Minecraft",
-        "PROOOOC?!?!?!",
-        "Hluboky a Ledovy Ponor",
-        "Zakladna Stromtroopera",
-        "Ohen a Blitkomonstra",
-        "PROSTE UTRPENI!"
+        "Hrobka Randyho a Roryho",
+        "Proc je tu tolik Shiva Soch?",
+        "Neprustrelne Sochy",
+        "Hadi v Chramu",
+        "Peklo na Pasti",
+        "Flip Flare Trik"
       ],
-      "Puzzles": {
-        "0": [
-          "Nezapomen na MNE!",
-          "Pendrek",
-          "Pacici Tycka",
-          "Citim se Silnejsi!",
-          "Von Pacidlo"
-        ],
-        "1": [
-          "Duracell",
-          "9 Voltu",
-          "Nabijecka",
-          "Cosi CervenoModre",
-          "Energie pro Jerab!"
-        ],
-        "2": [
-          "Zamrzly Predmet",
-          "Vykoupeni z ShawCrank :)",
-          "Otocna Vec",
-          "Jste Zraneni?",
-          "Ted tady vsichni chcipnete!"
+      "KeyItems": {
+        "Key1": [
+          "NE NE, proste NEEE",
+          "Klic ke SMRTI",
+          "Pet Noci v Ganeshe",
+          "Neni Modlitebni Valec",
+          "Klic do Mucirny"
         ]
       }
     },
-
-    "NEVADA.TR2": {
-      "Names": [
-        "Poustni Orlove",
-        "Vodni Poust",
-        "Doplnuj Tekutiny",
-        "Zadny Vlak v Pousti",
-        "To Je VEDRO!"
-      ],
-      "Keys": {
-        "0": [
-          "Cesticka ke Generatorku",
-          "Karta ke Generaci",
-          "MAM ELEKTRINU!",
-          "Pozor, Jiskrive!",
-          "EMP Klicek UvU :)"
-        ],
-        "1": [
-          "Klic k Minovemu Poli",
-          "TNT Klic",
-          "Flipmap Klic",
-          "Pristup k Vetrelcum",
-          "BUM BANG!",
-          "Sezame Vybouchni!"
-        ]
-      }
-    },
-
-    "OFFICE.TR2": {
-      "Names": [
-        "Utikej Laro, UTIKEJ!",
-        "Je Vazne Mrtva??",
-        "Mnoho Elektriny Skodi!",
-        "Tma!",
-        "Nacist a Ulozit!"
-      ]
-    },
-
     "QUADCHAS.TR2": {
       "Names": [
         "Ctyrkolka je NUTNA?",
@@ -560,8 +262,8 @@
         "Nepotapej se Holka!",
         "Pozor na Kousance!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Totalne k Ho*** :)",
           "Kdo by to sbiral?",
           "OpiKlic DVA",
@@ -570,7 +272,65 @@
         ]
       }
     },
-
+    "TONYBOSS.TR2": {
+      "Names": [
+        "uZASneeee",
+        "Snad ne dalsi BLUDISTE",
+        "Tajny Labyrint?!? O.o",
+        "40 Slepych Ulic",
+        "40 Hadu"
+      ]
+    },
+    "SHORE.TR2": {
+      "Names": [
+        "Vesnice Kanibalu",
+        "Plaz",
+        "Neztracej Nohu",
+        "Jed a Skip pres Most",
+        "Najezd do Rytmu"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "BublyBubly Klic",
+          "Klick Jacka Sparrowa",
+          "Utopeny Klic",
+          "Vlhky Klic",
+          "Paserak to ztratil?!"
+        ],
+        "Puzzle1": [
+          "Kamen Otravy",
+          "Kamen do Chramove Ruiny",
+          "Krevni Kamen",
+          "Duveruj mi, ja jsem Kamen",
+          "To Neni Jezdcuv Drahokam"
+        ]
+      }
+    },
+    "CRASH.TR2": {
+      "Names": [
+        "Jursky Park",
+        "Raptor... ZASE?",
+        "Barnyho Domov",
+        "Ztracene Udoli Part 2",
+        "Kde je zlaty DRAK?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Barnyho Spawnovaci Klic",
+          "Jidlo pro Barnyho",
+          "K Cemu To Je? O.o",
+          "Klic k delu pro BOOM",
+          "Devastujici Klic"
+        ],
+        "Key2": [
+          "Raptoruv Klic",
+          "Pozor na Zada",
+          "ZATEBOU!",
+          "Nepritel dela BUBUBU!",
+          "Kam se nacpu?"
+        ]
+      }
+    },
     "RAPIDS.TR2": {
       "Names": [
         "Proc to existuje?",
@@ -581,7 +341,15 @@
         "RiP Sluchatka"
       ]
     },
-
+    "TRIBOSS.TR2": {
+      "Names": [
+        "Kanibal Boss",
+        "Jeste Vic Jedu",
+        "Fetish Veznice",
+        "Chram Tunaka",
+        "Temple Run"
+      ]
+    },
     "ROOFS.TR2": {
       "Names": [
         "20 Vterin",
@@ -592,15 +360,15 @@
         "Londynske Ghetto",
         "Any Bruvs?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Krysaruv Klic",
           "Chripko Klic",
           "Klic od Kominika",
           "Jednoduchy Klic",
           "Zlaty Klic"
         ],
-        "1": [
+        "Key2": [
           "Krasny Klic",
           "Kostelni Klic",
           "Rubinovi Klic",
@@ -609,7 +377,6 @@
         ]
       }
     },
-
     "SEWER.TR2": {
       "Names": [
         "Nastupiste 9 3/4",
@@ -618,59 +385,57 @@
         "Listky Dosly",
         "Pozor! DIRKA"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Elektricky Klic",
           "Klic Uklizecky",
           "Mam Elektrinu!",
           "Nastroje",
           "Opravte ty veci!"
         ],
-        "1": [
+        "Key2": [
           "Pulka a Pulka",
           "Jedna Polovina",
           "Nabozensky Klic",
           "Salomo 1 nebo 2?",
           "Damoklesuv Klic"
         ],
-        "2": [
+        "Key3": [
           "Pulka a Pulka",
           "Jedna Polovina",
           "Nabozensky Klic",
           "Salomo 1 nebo 2?",
           "Damoklesuv Klic"
         ],
-        "3": [
+        "Key4": [
           "Pulka a Pulka",
           "Jedna Polovina",
           "Nabozensky Klic",
           "Salomo 1 nebo 2?",
           "Damoklesuv Klic"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "PRACHY!",
           "Silinky",
           "Obrovske ale Leskle!",
           "Na Cestu Vlakem",
           "25 Bitu"
         ],
-        "1": [
+        "Puzzle2": [
           "Pojdme do Bradavic",
           "Pristup na Koleje",
           "Hura do Nevady!",
           "Netreba Ovladani!",
           "Skeblovi Klic"
         ],
-        "2": [
+        "Puzzle3": [
           "Thorovo Kladivo",
-          "Mjölnir",
+          "MjÃ¶lnir",
           "Kladivo - Zabij Krtka -",
           "Rozbij Zamek!",
           "St Francis Follys Kladivo"
         ],
-        "3": [
+        "Puzzle4": [
           "PlumPlum Hvezdicka",
           "At je to Trpitive!",
           "Uvidel jsi neco Trpitiveho!",
@@ -679,115 +444,16 @@
         ]
       }
     },
-
-    "SHORE.TR2": {
-      "Names": [
-        "Vesnice Kanibalu",
-        "Plaz",
-        "Neztracej Nohu",
-        "Jed a Skip pres Most",
-        "Najezd do Rytmu"
-      ],
-      "Keys": {
-        "0": [
-          "BublyBubly Klic",
-          "Klick Jacka Sparrowa",
-          "Utopeny Klic",
-          "Vlhky Klic",
-          "Paserak to ztratil?!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Kamen Otravy",
-          "Kamen do Chramove Ruiny",
-          "Krevni Kamen",
-          "Duveruj mi, ja jsem Kamen",
-          "To Neni Jezdcuv Drahokam"
-        ]
-      }
-    },
-
-    "STPAUL.TR2": {
-      "Names": [
-        "Ticho, je to TAJNE",
-        "60/59",
-        "Vystryhnuty Kontent :)",
-        "Smrtici Katedrala",
-        "No Damage? Asi ne no :)"
-      ],
-      "Keys": {
-        "0": [
-          "Ultra Schovane",
-          "Zebrik, Zebrik na Zdi",
-          "Ze by snad?",
-          "Hra na Schovavanou",
-          "ChripkoKlic"
-        ]
-      }
-    },
-
-    "TEMPLE.TR2": {
-      "Names": [
-        "Hrobka Randyho a Roryho",
-        "Proc je tu tolik Shiva Soch?",
-        "Neprustrelne Sochy",
-        "Hadi v Chramu",
-        "Peklo na Pasti",
-        "Flip Flare Trik"
-      ],
-      "Keys": {
-        "0": [
-          "NE NE, proste NEEE",
-          "Klic ke SMRTI",
-          "Pet Noci v Ganeshe",
-          "Neni Modlitebni Valec",
-          "Klic do Mucirny"
-        ],
-        "1": [
-          "NE NE, proste NEEE",
-          "Klic ke SMRTI",
-          "Pet Noci v Ganeshe",
-          "Neni Modlitebni Valec",
-          "Klic do Mucirny"
-        ],
-        "2": [
-          "NE NE, proste NEEE",
-          "Klic ke SMRTI",
-          "Pet Noci v Ganeshe",
-          "Neni Modlitebni Valec",
-          "Klic do Mucirny"
-        ],
-        "3": [
-          "NE NE, proste NEEE",
-          "Klic ke SMRTI",
-          "Pet Noci v Ganeshe",
-          "Neni Modlitebni Valec",
-          "Klic do Mucirny"
-        ]
-      }
-    },
-
-    "TONYBOSS.TR2": {
-      "Names": [
-        "uZASneeee",
-        "Snad ne dalsi BLUDISTE",
-        "Tajny Labyrint?!? O.o",
-        "40 Slepych Ulic",
-        "40 Hadu"
-      ]
-    },
-
     "TOWER.TR2": {
       "Names": [
         "Narodni Historicke Muzem",
         "Smes Nesmyslu",
-        "Lud’s Hate",
-        "Let’s Hate",
+        "Lud's Hate",
+        "Let's Hate",
         "Letajici UPV!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Rozpalte mne!",
           "Wow Ty jsi Neglitchoval!",
           "OhnoStart",
@@ -796,15 +462,250 @@
         ]
       }
     },
-
-    "TRIBOSS.TR2": {
+    "OFFICE.TR2": {
       "Names": [
-        "Kanibal Boss",
-        "Jeste Vic Jedu",
-        "Fetish Veznice",
-        "Chram Tunaka",
-        "Temple Run"
+        "Utikej Laro, UTIKEJ!",
+        "Je Vazne Mrtva??",
+        "Mnoho Elektriny Skodi!",
+        "Tma!",
+        "Nacist a Ulozit!"
       ]
+    },
+    "NEVADA.TR2": {
+      "Names": [
+        "Poustni Orlove",
+        "Vodni Poust",
+        "Doplnuj Tekutiny",
+        "Zadny Vlak v Pousti",
+        "To Je VEDRO!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Cesticka ke Generatorku",
+          "Karta ke Generaci",
+          "MAM ELEKTRINU!",
+          "Pozor, Jiskrive!",
+          "EMP Klicek UvU :)"
+        ],
+        "Key2": [
+          "Klic k Minovemu Poli",
+          "TNT Klic",
+          "Flipmap Klic",
+          "Pristup k Vetrelcum",
+          "BUM BANG!",
+          "Sezame Vybouchni!"
+        ]
+      }
+    },
+    "COMPOUND.TR2": {
+      "Names": [
+        "Jen Dalsi Vezeni",
+        "Utek z Vezeni",
+        "Velky Utek",
+        "Boris je tu!",
+        "Kde jsou moje ZBRANE?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Zemri Dozorce!",
+          "Jen Dalsi Karta",
+          "MasterCard",
+          "Karta 1",
+          "Karta 2",
+          "Karta pro UTEK"
+        ],
+        "Key2": [
+          "VisaCard",
+          "Karta 1",
+          "Karta 2",
+          "Tajna Karta",
+          "Kreditka"
+        ],
+        "Puzzle1": [
+          "Modry Kamen",
+          "Jiskrivy Spunt 2",
+          "Pojistka 2",
+          "Modre USB",
+          "Zadny Duplikat"
+        ],
+        "Puzzle2": [
+          "Yellow Stone Thingy",
+          "Jiskrivy Spunt 1",
+          "Pojistka  1",
+          "Yellow USB Plug",
+          "Zadny Duplikat"
+        ]
+      }
+    },
+    "AREA51.TR2": {
+      "Names": [
+        "Paul tu byl!",
+        "Misto Konspiracnich Teorii",
+        "Xenomorph tu byl!",
+        "Den Nezavyslosti",
+        "Vetrelcuv Telefoni Dum!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Raketovy Klic",
+          "LETIMEEE",
+          "SpaceX Klic",
+          "Myval Raketak",
+          "Elon Musk Klic",
+          "To take Nepotrebujes!",
+          "Tajne KOdy",
+          "Pin ke Kreditce",
+          "Pravy Raketomet",
+          "Vetrelec Pobliz?!?"
+        ],
+        "Puzzle1": [
+          "Klic Na Vlasku",
+          "Vysoky Klic",
+          "Neni Draci Vez",
+          "Podvodnikuv Klic",
+          "PODVODNIKU!!!"
+        ],
+        "Puzzle2": [
+          "Mne Neskipnes!",
+          "To Jsem Zase Ja!",
+          "UFO CD",
+          "Jeden ze dvou CD",
+          "Kde je HUDBA? O.o"
+        ],
+        "Puzzle3": [
+          "Larin Party Mix",
+          "Puzzle Element Hudba",
+          "Jeden ze Dvou CD",
+          "Dzungle Hudba",
+          "Mne Nepreskocis!"
+        ],
+        "Puzzle4": [
+          "Magneticky zeleznicni klic",
+          "Metro Klic",
+          "Stanicni Metro Klic",
+          "Kreslici Kolicek",
+          "Celebrita",
+          "Zbijecka"
+        ]
+      }
+    },
+    "ANTARC.TR2": {
+      "Names": [
+        "Bez Sneznych Vlocek",
+        "MotorClun 2.0",
+        "Kostka Ledu",
+        "Pochod Mrazakem",
+        "Date si Rajskou Polevku?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Neni to Paluba",
+          "LedovyKlic_Hraci",
+          "Klid pro Strach",
+          "Ledovi Klic"
+        ],
+        "Puzzle1": [
+          "NEZAPOMEN MNE!",
+          "Zahnuty Pendreg, Mnam",
+          "Tyc na Paceni",
+          "Citim, ze jsem SILNEJSI!",
+          "Von Pacidlo"
+        ],
+        "Puzzle2": [
+          "Vypustte Reku",
+          "Otevrete Vypust",
+          "Sama Voda",
+          "Pristup k Polevce",
+          "Klic do Polevkarny"
+        ]
+      }
+    },
+    "MINES.TR2": {
+      "Names": [
+        "Minecraft",
+        "PROOOOC?!?!?!",
+        "Hluboky a Ledovy Ponor",
+        "Zakladna Stromtroopera",
+        "Ohen a Blitkomonstra",
+        "PROSTE UTRPENI!"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Nezapomen na MNE!",
+          "Pendrek",
+          "Pacici Tycka",
+          "Citim se Silnejsi!",
+          "Von Pacidlo"
+        ],
+        "Puzzle2": [
+          "Duracell",
+          "9 Voltu",
+          "Nabijecka",
+          "Cosi CervenoModre",
+          "Energie pro Jerab!"
+        ],
+        "Puzzle3": [
+          "Zamrzly Predmet",
+          "Vykoupeni z ShawCrank :)",
+          "Otocna Vec",
+          "Jste Zraneni?",
+          "Ted tady vsichni chcipnete!"
+        ]
+      }
+    },
+    "CITY.TR2": {
+      "Names": [
+        "Skok na Most",
+        "Zivot Brouka",
+        "Vceli Film 2.0",
+        "Sal Elementu",
+        "4 Zpusoby jak zemrit.!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Dabluv Klic",
+          "Divka NEHORI!",
+          "Muzes Nas Preskocit!",
+          "Klic Dvojce",
+          "Klic z Pekla",
+          "Koukni na Mne!",
+          "Cookie Monster Klic"
+        ],
+        "Puzzle1": [
+          "Pletova Maska",
+          "Neni Zlata Maska",
+          "Fantom Opery",
+          "Maskarni je tu",
+          "MASKA!"
+        ]
+      }
+    },
+    "CHAMBER.TR2": {
+      "Names": [
+        "PAVOUCEK",
+        "20 - 40 dEagle Naboju",
+        "Japonci Doporucuji",
+        "Volny Willy",
+        "Willardova Pavucinka"
+      ]
+    },
+    "STPAUL.TR2": {
+      "Names": [
+        "Ticho, je to TAJNE",
+        "60/59",
+        "Vystryhnuty Kontent :)",
+        "Smrtici Katedrala",
+        "No Damage? Asi ne no :)"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Ultra Schovane",
+          "Zebrik, Zebrik na Zdi",
+          "Ze by snad?",
+          "Hra na Schovavanou",
+          "ChripkoKlic"
+        ]
+      }
     }
   }
 }

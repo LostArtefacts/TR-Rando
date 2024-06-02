@@ -85,13 +85,13 @@ For keeping track of levels while you play, check out the [TRRandoTracker](https
 * Lilly Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, mirrored levels, and providing great continuous feedback. Lilly was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
     * Croatian - Erackk
     * Czech - Sabatu
-    * Dutch - BeardedBogle, Dokus, & LordMeShine
-    * Finnish - Riku
-    * French - Hedteur & LeonHeart
+    * Dutch - BeardedBogle, Dokus, LordMeShine, & Dutchyraider
+    * Finnish - Riku, mawia, & Footi
+    * French - Hedteur, LeonHeart, & Towandaa
     * German - Lilly Jericho & Radgryd
-    * Italian - Diego & Nanaki
+    * Italian - Diego, Nanaki, & Warpy
     * Japanese - ChiburuTV
-    * Polish - DJ_Full & NaBu
+    * Polish - DJ_Full, NaBu, & Nickelony
     * Portuguese - Fuse & Jumica
-    * Russian - Fetch
-    * Swedish - Pikkufighter & Woof Smit
+    * Russian - Ayiluy
+    * Swedish - Pikkufighter, Woof Smit, & Zahnac

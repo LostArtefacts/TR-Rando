@@ -496,6 +496,60 @@
         "Tombe pas en bas",
         "Dernier niveau"
       ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Du sable dans tous les coins",
+        "Hostiles crocodiles",
+        "Pléthore d'alligators",
+        "On va à Aquasplash",
+        "Tu auras besoin de soins"
+      ],
+      "KeyItems": {
+        "key1": [
+          "La clé",
+          "Clé dorée",
+          "Pour serrure",
+          "Oooh ça brille!",
+          "Clé rutilante"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Temple de Lilly",
+        "Temple Chat-oyant",
+        "Le chat-oiement est un mensonge",
+        "Interdit aux chiens et à leur maître",
+        "Si tu aimes les chiens prend garde"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Encore?",
+          "Je l'ai pas déjà celle là?",
+          "Trop de clés",
+          "COMBIEN!?",
+          "Soupir...trop...trop"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Les momies s'éclatent bien",
+        "Les grottes de chair",
+        "Explosions d'Atlantes au menu",
+        "Lasagnes et soupe de tomate pour la 2",
+        "S'il vous plait nooooon"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Abaisse le levier Lara!",
+        "Pas ce levier làààà!",
+        "Mais pourquoi est ce qu'on a créé ce levier?",
+        "Sortez moi de là!",
+        "Affaire terminée!!!"
+      ]
     }
   }
 }

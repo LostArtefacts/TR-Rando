@@ -496,6 +496,60 @@
         "Ostateczna Walka",
         "Wielka Ucieczka"
       ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Wszędzie Piasek",
+        "Wystawa Krokodyli",
+        "Krokodyl czy Aligator?",
+        "Egipski Aquapark",
+        "Lepiej zbieraj te apteczki!"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Maślany Klucz",
+          "Każdy ziom zbiera zło-to",
+          "Błyszczący Klucz",
+          "Uuu, błyszczące!",
+          "Genialny Klucz"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Lilly tu była",
+        "Rety Kot-lety",
+        "Kotki w piwnicy",
+        "Ktoś tu bardzo lubiał koty",
+        "UWAGA - Koty"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Za dużo ich",
+          "Ładny Klucz",
+          "Ile ich jeszcze?",
+          "No ileż to...",
+          "Klucz Kota"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Mumiowe Przedszkole",
+        "Mięsna Jaskinia",
+        "Sos Pomidorowy",
+        "Lazania",
+        "Tylko jedno w głowie mam... Potworów 5k..."
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Pociągnij za Wajchę!",
+        "Zła Wajcha!",
+        "Po co ta wajcha?",
+        "Chcę stąd wyjść!",
+        "Dokończone Sprawy!"
+      ]
     }
   }
 }

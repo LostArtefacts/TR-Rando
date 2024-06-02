@@ -1,215 +1,181 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Sparkler",
-            "Zippo",
-            "Dazzler",
-            "Flickerer",
-            "Mini-blaze"
-          ],
-          "43": [
-            "Sparkler",
-            "Zippo",
-            "Dazzler",
-            "Flickerer",
-            "Mini-blaze"
-          ]
-        },
-        {
-          "36": [
-            "Peashooter",
-            "Handpistol",
-            "Gammal Trogen",
-            "Pew-pew",
-            "Jag tar två"
-          ],
-          "44": [
-            "Peashooter-magasin",
-            "Handpistol-Magasin",
-            "Gammal Trogen-magasin",
-            "Pew-Pew-Magasin",
-            "Jag tar två-magasin"
-          ]
-        },
-        {
-          "37": [
-            "Shotty",
-            "Musköt",
-            "Gammal Trogen",
-            "Sett tillräkligt",
-            "Gutbuster"
-          ],
-          "45": [
-            "Shotty-skott",
-            "Musköt-skott",
-            "Gammal Trogen-magasin",
-            "Sett tillträklig med ammunition",
-            "Gutbuster Magasin"
-          ]
-        },
-        {
-          "38": [
-            "Auto",
-            "Magnum",
-            "Superpistol",
-            "Pierre förlorade den",
-            "Kom tillbaka till Pierre"
-          ],
-          "46": [
-            "Auto-magasin",
-            "Magnum ammunition",
-            "Superpistol-magasin",
-            "Pierre förlorade den-magasin",
-            "Kom tillbaka till Pierre-magasin"
-          ]
-        },
-        {
-          "39": [
-            "Uwuzi",
-            "Brrrrrrrrrr",
-            "kännsStarkare Vapen",
-            "Vampyr skott",
-            "1000 skotts senare..."
-          ],
-          "47": [
-            "Uwuz-Mowosin",
-            "Brrrrrrrrr-magasin",
-            "KännsStarkare-magasin",
-            "Vampyr skott-magasin",
-            "1000 skotts senare...-magasin"
-          ]
-        },
-        {
-          "40": [
-            "Tick-tock-tick",
-            "Tålamod",
-            "Pil kastare",
-            "Värdelös",
-            "Meninglöst",
-            "Varför?",
-            "Nej!",
-            "Tandpetare vapen",
-            "Spjut skuttare"
-          ],
-          "48": [
-            "Tick-tock-tick",
-            "Tålamod-magasin",
-            "Pil",
-            "Värdelös skott",
-            "Meninglös skott",
-            "Varför? skott",
-            "Ingen Ammunition",
-            "Tandpetare",
-            "Spjut"
-          ]
-        },
-        {
-          "41": [
-            "MP3 Spelare",
-            "MPEG",
-            "Inte den MP5",
-            "Fet stor Drrrrrrrrr"
-          ],
-          "49": [
-            "MP3 Magasin",
-            "MPEG-Magasin",
-            "Inte den MP5-magasin",
-            "Fet stor Drrrrrrrr-magasin"
-          ]
-        },
-        {
-          "42": [
-            "Granat Spräng",
-            "Explosiv Leverans",
-            "Stekad Fiende",
-            "Skalavfyrare",
-            "Ananas kastare",
-            "Big bang",
-            "Stor explotion",
-            "Sprang den up!"
-          ],
-          "50": [
-            "Granat",
-            "Explosiv skott",
-            "Eldboll",
-            "Skalbomber",
-            "Ananas",
-            "Big bang",
-            "Stor explotion",
-            "Sprang den up! ammunition"
-          ]
-        },
-        {
-          "51": [
-            "Litten Medipack",
-            "småväxt Medipack",
-            "Pluttig MediPack",
-            "kort MediPack",
-            "För litten MediPack",
-            "Babis boo MediPack"
-          ],
-          "52": [
-            "Gigantisk MediPack",
-            "Enormt stort MediPack",
-            "Kolossal MediPack",
-            "Nobel Medipack",
-            "FET STOR MediPack",
-            "Stor boo MediPack"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "NÅGOTING",
-          "GREJ",
-          "Tar up",
-          "Plundra",
-          "Skräp",
-          "O SHINY",
-          "MIN ÄLSKADE"
-        ],
-        "3": [
-          "LARA DOG",
-          "FÖRSÖK IGEN?",
-          "FÖRSÖK IGEN? HA BLI BÄTTRE",
-          "LYCKA TILL NÄSTA GÅNG",
-          "SUGER DU? BLI BÄTTRE",
-          "RAGE QUIT!",
-          "LMAO försök igen?"
-        ],
-        "35": [
-          "Statistik",
-          "Livsviktigt Stat",
-          "Nummer ??",
-          "INGE MEDS TILL LÅTEN!",
-          "Hemlig Spårare!"
-        ],
-        "57": [
-          "Croft herrgård",
-          "Core Design HQ",
-          "TR2Rando HQ",
-          "lara's Digs",
-          "Winstons Fryskåpp",
-          "Tina Wintson!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "Noll",
-          "INGET HÄR",
-          "OIDENTIFIERAD",
-          "OJ, DENNA PLATS ÄR LEDIGT"
-        ]
-      }
-    }
-  ],
-
+﻿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Sparkler",
+      "Zippo",
+      "Dazzler",
+      "Flickerer",
+      "Mini-blaze"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Peashooter",
+      "Handpistol",
+      "Gammal Trogen",
+      "Pew-pew",
+      "Jag tar två"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Peashooter-magasin",
+      "Handpistol-Magasin",
+      "Gammal Trogen-magasin",
+      "Pew-Pew-Magasin",
+      "Jag tar två-magasin"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Shotty",
+      "Musköt",
+      "Gammal Trogen",
+      "Sett tillräkligt",
+      "Gutbuster"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Shotty-skott",
+      "Musköt-skott",
+      "Gammal Trogen-magasin",
+      "Sett tillträklig med ammunition",
+      "Gutbuster Magasin"
+    ],
+    "INV_ITEM_AUTOS": [
+      "Auto",
+      "Magnum",
+      "Superpistol",
+      "Pierre förlorade den",
+      "Kom tillbaka till Pierre"
+    ],
+    "INV_ITEM_AUTO_AMMO": [
+      "Auto-magasin",
+      "Magnum ammunition",
+      "Superpistol-magasin",
+      "Pierre förlorade den-magasin",
+      "Kom tillbaka till Pierre-magasin"
+    ],
+    "INV_ITEM_UZI": [
+      "Uwuzi",
+      "Brrrrrrrrrr",
+      "kännsStarkare Vapen",
+      "Vampyr skott",
+      "1000 skotts senare..."
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Uwuz-Mowosin",
+      "Brrrrrrrrr-magasin",
+      "KännsStarkare-magasin",
+      "Vampyr skott-magasin",
+      "1000 skotts senare...-magasin"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Tick-tock-tick",
+      "Tålamod",
+      "Pil kastare",
+      "Värdelös",
+      "Meninglöst",
+      "Varför?",
+      "Nej!",
+      "Tandpetare vapen",
+      "Spjut skuttare"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Tick-tock-tick",
+      "Tålamod-magasin",
+      "Pil",
+      "Värdelös skott",
+      "Meninglös skott",
+      "Varför? skott",
+      "Ingen Ammunition",
+      "Tandpetare",
+      "Spjut"
+    ],
+    "INV_ITEM_M16": [
+      "MP3 Spelare",
+      "MPEG",
+      "Inte den MP5",
+      "Fet stor Drrrrrrrrr"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "MP3 Magasin",
+      "MPEG-Magasin",
+      "Inte den MP5-magasin",
+      "Fet stor Drrrrrrrr-magasin"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Granat Spräng",
+      "Explosiv Leverans",
+      "Stekad Fiende",
+      "Skalavfyrare",
+      "Ananas kastare",
+      "Big bang",
+      "Stor explotion",
+      "Sprang den up!"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Granat",
+      "Explosiv skott",
+      "Eldboll",
+      "Skalbomber",
+      "Ananas",
+      "Big bang",
+      "Stor explotion",
+      "Sprang den up! ammunition"
+    ],
+    "INV_ITEM_MEDI": [
+      "Litten Medipack",
+      "småväxt Medipack",
+      "Pluttig MediPack",
+      "kort MediPack",
+      "För litten MediPack",
+      "Babis boo MediPack"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Gigantisk MediPack",
+      "Enormt stort MediPack",
+      "Kolossal MediPack",
+      "Nobel Medipack",
+      "FET STOR MediPack",
+      "Stor boo MediPack"
+    ],
+    "HEADING_ITEMS": [
+      "NÅGOTING",
+      "GREJ",
+      "Tar up",
+      "Plundra",
+      "Skräp",
+      "O SHINY",
+      "MIN ÄLSKADE"
+    ],
+    "HEADING_GAME_OVER": [
+      "LARA DOG",
+      "FÖRSÖK IGEN?",
+      "FÖRSÖK IGEN? HA BLI BÄTTRE",
+      "LYCKA TILL NÄSTA GÅNG",
+      "SUGER DU? BLI BÄTTRE",
+      "RAGE QUIT!",
+      "LMAO försök igen?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Statistik",
+      "Livsviktigt Stat",
+      "Nummer ??",
+      "INGE MEDS TILL LÅTEN!",
+      "Hemlig Spårare!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "Noll",
+      "INGET HÄR",
+      "OIDENTIFIERAD",
+      "OJ, DENNA PLATS ÄR LEDIGT"
+    ]
+  },
   "LevelStrings": {
+    "ASSAULT.TR2": {
+      "Names": [
+        "Croft herrgård",
+        "Core Design HQ",
+        "TR2Rando HQ",
+        "lara's Digs",
+        "Winstons Fryskåpp",
+        "Tina Wintson!"
+      ]
+    },
     "WALL.TR2": {
       "Names": [
         "China Del 1",
@@ -223,8 +189,8 @@
         "Lost Valley 2.0",
         "vägen till Xian"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Nyckel till rum 4",
           "Memehus Nyckel",
           "En Nyckel",
@@ -235,7 +201,7 @@
           "Kanske Nyckel 1?",
           "Kanske Nyckel 2?"
         ],
-        "1": [
+        "Key2": [
           "Spindel Nyckel",
           "Knarrig Nyckel",
           "En Nyckel",
@@ -249,7 +215,6 @@
         ]
       }
     },
-
     "BOAT.TR2": {
       "Names": [
         "Italy Del 1",
@@ -263,8 +228,8 @@
         "Lång From Hem",
         "Det är Amore"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Båt Mc'Nyckel Aniskte",
           "En nyckel",
           "Nyckeln",
@@ -276,7 +241,7 @@
           "Segla Tillträde",
           "Båt-Garage"
         ],
-        "1": [
+        "Key2": [
           "Nyckel för Rum 82",
           "Metall Nyckel",
           "En Nyckel",
@@ -287,7 +252,7 @@
           "Inte en Låsplockare",
           "Denna Nyckel"
         ],
-        "2": [
+        "Key3": [
           "Järn Board Nyckel",
           "Järn knytt Nyckel",
           "Järn herr Dam",
@@ -300,7 +265,6 @@
         ]
       }
     },
-
     "VENICE.TR2": {
       "Names": [
         "Italy Del 2",
@@ -312,8 +276,8 @@
         "Mona Lisa",
         "Gå ut med en Bang"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Book rum Nyckel",
           "En Nyckel",
           "Nyckeln",
@@ -328,7 +292,7 @@
           "Hemligt Nyckel",
           "Alohomora"
         ],
-        "1": [
+        "Key2": [
           "TNT Nyckel",
           "Sprängs Nyckel",
           "Explosions Nyckel",
@@ -345,7 +309,6 @@
         ]
       }
     },
-
     "OPERA.TR2": {
       "Names": [
         "Italy Del 3",
@@ -360,8 +323,8 @@
         "Showtime!",
         "Förbered Showen"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Stiligt Nyckel",
           "Classigt Nyckel",
           "Ostentatos Nyckel",
@@ -373,10 +336,8 @@
           "Nyckel till dörren",
           "Ostillande gålv Nyckel",
           "C vass"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Pussel 1",
           "Hiss Fixare",
           "lyft Fixare",
@@ -386,7 +347,7 @@
           "Ding",
           "Ingen Musik fix"
         ],
-        "1": [
+        "Puzzle2": [
           "Pussel 2",
           "Moderkort",
           "ACME Moderkort",
@@ -399,7 +360,6 @@
         ]
       }
     },
-
     "RIG.TR2": {
       "Names": [
         "Oljeplattform",
@@ -414,8 +374,8 @@
         "Huvudverk",
         "Hälsa och Säkerhet Risk"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Kvicksand Kort",
           "Tunna Passkort",
           "Pass Kort 2",
@@ -424,7 +384,7 @@
           "Visa Express",
           "Vrid Ej"
         ],
-        "1": [
+        "Key2": [
           "QWOP Fund kort",
           "Stäng ner Alarmen",
           "Pass kort 1",
@@ -433,7 +393,7 @@
           "Mastercard Express",
           "Förstör Ej"
         ],
-        "2": [
+        "Key3": [
           "Kort för Rum 37",
           "Onödigt kort",
           "Pass kort 3",
@@ -444,7 +404,6 @@
         ]
       }
     },
-
     "PLATFORM.TR2": {
       "Names": [
         "Havs Oljeplattform Del 2",
@@ -456,24 +415,22 @@
         "Den Gula Ubåten",
         "Tänk på sågen"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Kort för rum 12",
           "Oidentifierat passkort",
           "Passkort 2",
           "Laras ID Kort",
           "Föstör inget!"
         ],
-        "3": [
+        "Key4": [
           "Kort för rum 49",
           "Oidentifierat passkort",
           "Passkort 1",
           "Winstons ID kort",
           "Böj inte den!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Moderkort",
           "ACME Moderkort",
           "PC Pro 97",
@@ -486,7 +443,6 @@
         ]
       }
     },
-
     "UNWATER.TR2": {
       "Names": [
         "Undervatten Del 1",
@@ -502,7 +458,6 @@
         "Under havet"
       ]
     },
-
     "KEEL.TR2": {
       "Names": [
         "Undervatten Del 2",
@@ -515,8 +470,8 @@
         "Anti Gravitet Skepp",
         "Förstörd"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Toalett Nyckel",
           "Badsrums Nyckel",
           "En Nyckel",
@@ -525,7 +480,7 @@
           "Nyckel A",
           "Va!? en Vardagsrum"
         ],
-        "1": [
+        "Key2": [
           "Knarig Nyckel",
           "En Nyckel",
           "Nyckeln",
@@ -533,7 +488,7 @@
           "Nyckel B",
           "Nyckel till en dörr"
         ],
-        "2": [
+        "Key3": [
           "Rum Nyckel",
           "Vem är det här?",
           "En Nyckel",
@@ -542,10 +497,8 @@
           "Nyckel C",
           "Ny Nyckel?",
           "Var är låset?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Eldbrytare",
           "T-Format Pussel",
           "Brandsläckare",
@@ -555,7 +508,6 @@
         ]
       }
     },
-
     "LIVING.TR2": {
       "Names": [
         "Undervatten del 3",
@@ -568,8 +520,8 @@
         "Ingen hemma",
         "Livlösa bostäder"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Dramanyckel",
           "Melodramatisk nyckel",
           "Tragisk nyckel",
@@ -581,7 +533,7 @@
           "Operanyckeln",
           "Showen måste fortsätta!"
         ],
-        "1": [
+        "Key2": [
           "Vresig nyckel",
           "En Nyckel",
           "Nyckeln",
@@ -593,7 +545,6 @@
         ]
       }
     },
-
     "DECK.TR2": {
       "Names": [
         "Nästan undervatten del 4",
@@ -603,8 +554,8 @@
         "Isberget vann",
         "Stor luftficka"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Akternyckel",
           "Sträv nyckel",
           "Grym nyckel",
@@ -620,7 +571,7 @@
           "Nycekl 1",
           "Nyckel A"
         ],
-        "2": [
+        "Key3": [
           "Förvaringsnyckel",
           "Förvaringsnyckel?",
           "Underlig nyckel",
@@ -635,7 +586,7 @@
           "Nyckel 2",
           "Nyckel B"
         ],
-        "3": [
+        "Key4": [
           "Hyttnyckel",
           "Rumsnyckel",
           "Nyckeln till dörren",
@@ -648,10 +599,8 @@
           "Nyckeln",
           "Nyckel 3",
           "Nyckel C"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "Ängeln",
           "Kerub",
           "Pussel 1",
@@ -662,7 +611,6 @@
         ]
       }
     },
-
     "SKIDOO.TR2": {
       "Names": [
         "Tibet del 1",
@@ -678,8 +626,8 @@
         "Skidoo Mania",
         "Bygg en Snögubbe"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Klaffbrosnyckel",
           "Meningslös nyckel",
           "Inte den",
@@ -692,7 +640,7 @@
           "Du lyfter mig up!",
           "Laga en platform-nyckeln"
         ],
-        "1": [
+        "Key2": [
           "Stugnyckel",
           "Stugnyckel?",
           "Tibeanska hoppnyckeln",
@@ -705,10 +653,8 @@
           "Snabbrundsnyckeln",
           "Mest efterlysta!",
           "Nyckeln till insidan"
-        ]
-      },
-      "Puzzles": {
-        "3": [
+        ],
+        "Puzzle4": [
           "Ängeln",
           "Kerub",
           "Pussel 1",
@@ -719,7 +665,6 @@
         ]
       }
     },
-
     "MONASTRY.TR2": {
       "Names": [
         "Tibet del 2",
@@ -734,36 +679,34 @@
         "Klostret av många nycklar",
         "Inte systerakten"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Svag-rumsnyckel",
           "Känn-dig-starkare-nyckel",
           "Nyckeln till en nyckel"
         ],
-        "1": [
+        "Key2": [
           "Jäklar, stakars nyckel",
           "Nyckel 1 till utsidan",
           "Låt oss gå härifrån?",
           "Nyckeln till inget rum? O.o",
           "Nyckeln till backdörren"
         ],
-        "2": [
+        "Key3": [
           "Katnyckeln",
           "Genväg till toppen",
           "Skiftande ögonnyckeln",
           "Nyckel 2 till utsidan"
         ],
-        "3": [
+        "Key4": [
           "TR2Stora salsnyckeln",
           "Meme salsnyckeln",
           "Nyckeln till stora rummet",
           "Svandyck inte nyckeln",
           "Buddah Nyckeln",
           "Lobby Nyckeln"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Som ett bönhjul",
           "Mani hjul",
           "Chen hjul",
@@ -772,14 +715,14 @@
           "Vem upfann detta hjul?",
           "trött hjälpreda"
         ],
-        "1": [
+        "Puzzle2": [
           "Diamanter",
           "Barkhang's byte",
           "Juvelens toner",
           "Ohhh skimrande!",
           "18 karat"
         ],
-        "3": [
+        "Puzzle4": [
           "Ängeln",
           "Kerub",
           "Pussel 3",
@@ -791,7 +734,6 @@
         ]
       }
     },
-
     "CATACOMB.TR2": {
       "Names": [
         "Tibet del 3",
@@ -804,20 +746,8 @@
         "Det är mörkt här inne!",
         "Mörkt Yeti rum"
       ],
-      "Pickups": {
-        "0": [
-          "Gong-hammare?",
-          "Vänta, va?",
-          "Glad Påsk",
-          "Em, Herr Gong? Ha!",
-          "Det här hör inte hemma här",
-          "...???",
-          "Xylofon pinne",
-          "Skit samma!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Ansiktsmask",
           "En Mask",
           "Masken",
@@ -827,10 +757,19 @@
           "Använd mask!",
           "Fin mask",
           "Ful mask"
+        ],
+        "Pickup1": [
+          "Gong-hammare?",
+          "Vänta, va?",
+          "Glad Påsk",
+          "Em, Herr Gong? Ha!",
+          "Det här hör inte hemma här",
+          "...???",
+          "Xylofon pinne",
+          "Skit samma!"
         ]
       }
     },
-
     "ICECAVE.TR2": {
       "Names": [
         "Tibet del 4",
@@ -849,8 +788,8 @@
         "Winston godkäner!",
         "Winston's Stora Frys"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "Herr Gong Hama",
           "Hammaren",
           "Bra Gong",
@@ -861,22 +800,8 @@
           "Isyxa",
           "Trumpinne",
           "Gong släga"
-        ]
-      },
-      "Pickups": {
-        "1": [
-          "Klo",
-          "Kyckling skatt",
-          "Öpnna dörren, Lara",
-          "SLÄPP LÖSS KYCKLINGEN!",
-          "Guldsak",
-          "Xian dörrsnyckel",
-          "SKIMRANDE!",
-          "Här och bort igen!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Ansiktsmask",
           "Mask som kan hoppas över",
           "Masken",
@@ -886,10 +811,19 @@
           "Vem använder fortfarande denna?",
           "Laras skönhetsmask",
           "Cassandra"
+        ],
+        "Pickup2": [
+          "Klo",
+          "Kyckling skatt",
+          "Öpnna dörren, Lara",
+          "SLÄPP LÖSS KYCKLINGEN!",
+          "Guldsak",
+          "Xian dörrsnyckel",
+          "SKIMRANDE!",
+          "Här och bort igen!"
         ]
       }
     },
-
     "EMPRTOMB.TR2": {
       "Names": [
         "Kina del 2",
@@ -903,8 +837,8 @@
         "Kapplöppning till dolken",
         "Full cirkel"
       ],
-      "Keys": {
-        "1": [
+      "KeyItems": {
+        "Key2": [
           "En Nyckel",
           "Nyckeln",
           "Nyckel 1",
@@ -912,7 +846,7 @@
           "Au",
           "Nyckel till en dörr"
         ],
-        "2": [
+        "Key3": [
           "En Nyckel",
           "Nyckeln",
           "Nyckel 2",
@@ -920,16 +854,14 @@
           "Bara en nyckel",
           "Du överlevde spindlarna!"
         ],
-        "3": [
+        "Key4": [
           "Nyckeln till TR2huvudkammare",
           "En Nyckel",
           "Nyckeln",
           "Nyckel 3",
           "Enda nyckeln du behöver"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Pussel 1",
           "Utfyllnad för Rum 41",
           "Ansiktsmask",
@@ -939,7 +871,6 @@
         ]
       }
     },
-
     "FLOATING.TR2": {
       "Names": [
         "Kina del 3",
@@ -953,8 +884,8 @@
         "Svandyk in i eld",
         "Svävande Lego"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Ett kex",
           "Kex 1",
           "Kex A",
@@ -963,7 +894,7 @@
           "Magisk småkaka",
           "lyckokaka"
         ],
-        "1": [
+        "Puzzle2": [
           "Ett kex",
           "Kex 2",
           "Kex B",
@@ -975,7 +906,6 @@
         ]
       }
     },
-
     "XIAN.TR2": {
       "Names": [
         "Kina del 4",
@@ -993,8 +923,8 @@
         "Du kan inte bränna mig!",
         "Statyer, knivar och eld"
       ],
-      "Puzzles": {
-        "0": [
+      "KeyItems": {
+        "Puzzle1": [
           "Ett kex",
           "Kexet",
           "Ost o. kex",
@@ -1002,7 +932,7 @@
           "Exklusivt frimärke",
           "Inte ätbart kex"
         ],
-        "1": [
+        "Puzzle2": [
           "Xian's byte",
           "Drakdolken",
           "Stor kniv",
@@ -1017,7 +947,6 @@
         ]
       }
     },
-
     "HOUSE.TR2": {
       "Names": [
         "HLH",
@@ -1033,8 +962,8 @@
         "Inte ensam hemma",
         "Sett tillräckligt?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Garderobsnyckel",
           "Arsenalnyckel",
           "Nyckeln",
@@ -1045,10 +974,8 @@
           "Ge-mig-boom-boom nyckel",
           "Självförsvars-träningsnyckel",
           "vapenförrådsnyckel or (Arsenalnyckel"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "Xian's byte",
           "Drakdolken",
           "Stor kniv",

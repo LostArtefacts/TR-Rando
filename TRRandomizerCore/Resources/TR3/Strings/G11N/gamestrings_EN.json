@@ -1,446 +1,202 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Sparkling",
-            "Flipmap Helper",
-            "Uhh Shiny!",
-            "Stumble Cancel",
-            "Use me!"
-          ],
-          "44": [
-            "Sparkling",
-            "Flipmap Helper",
-            "Uhh Shiny!",
-            "Stumble Cancel",
-            "Use me!"
-          ]
-        },
-        {
-          "36": [
-            "Double Guns",
-            "Cheatcode Helpers",
-            "Classic Classics",
-            "The IIconics",
-            "Unlimited Kills"
-          ],
-          "45": [
-            "Double Guns Clips",
-            "Cheatcode Helpers Clips",
-            "Classic Classics Clips",
-            "The IIconics Clips",
-            "Unlimited Kills Clips"
-          ]
-        },
-        {
-          "37": [
-            "Shitgun",
-            "Why?",
-            "Come here or no kill!",
-            "Seen Enough?",
-            "Leave it alone! Its busy!"
-          ],
-          "46": [
-            "Shitgun Shells",
-            "Question Shells",
-            "Slug Shells",
-            "Seen Enough Shells?",
-            "Busy Shells"
-          ]
-        },
-        {
-          "38": [
-            "Willy Killy",
-            "Actually useful!",
-            "D-Eagle",
-            "Nevada Eagle",
-            "Hottest in the Pot"
-          ],
-          "47": [
-            "Willy Killy Clips",
-            "Useful Clips",
-            "D-Eagle Clips",
-            "Eagle Clips",
-            "Hotpot Clips"
-          ]
-        },
-        {
-          "39": [
-            "Ammo Vampire",
-            "Autos 2.0",
-            "Not TR II Uzis",
-            "You-zis",
-            "Not stronger now!"
-          ],
-          "48": [
-            "Vampire Clips",
-            "Clips 2.0",
-            "Scuffed Clips",
-            "You-zi Clips",
-            "Weaker Clips"
-          ]
-        },
-        {
-          "40": [
-            "Meme Gun",
-            "Useless",
-            "For Challenge only",
-            "Why does it exist?",
-            "Underwater Crossbow"
-          ],
-          "49": [
-            "Dank Memes",
-            "Waste",
-            "Challengers",
-            "Existentials",
-            "Bows"
-          ]
-        },
-        {
-          "41": [
-            "Not the M16",
-            "M16",
-            "Raptor Killer",
-            "MP3 Music",
-            "Rocket Enhancer"
-          ],
-          "50": [
-            "Fake Clips",
-            "Scam Clips",
-            "Raptor Killers",
-            "Tracks",
-            "Rocket Loaders"
-          ]
-        },
-        {
-          "42": [
-            "Ultimate Boom",
-            "Backpack Turret",
-            "Takes too long anyway",
-            "Totally inaccurate",
-            "Heavy Recoil?"
-          ],
-          "51": [
-            "Ultimate Rockets",
-            "Backpack Rockets",
-            "Long-load Rockets",
-            "Inaccurate Rockets",
-            "Heavy Rockets"
-          ]
-        },
-        {
-          "43": [
-            "Inaccurate Thing",
-            "Better Launcher COPIUM",
-            "Big Boom",
-            "Why do you use me?",
-            "Not on 7 anymore"
-          ],
-          "52": [
-            "Inaccurate Nades",
-            "COPIUM Nades",
-            "Big Boom Nades",
-            "Questionable Nades",
-            "Discount Rockets"
-          ]
-        },
-        {
-          "53": [
-            "Usage not allowed!",
-            "You on NO MEDS!",
-            "Small Hospital",
-            "Small Lifesaver",
-            "Backpack Crystal"
-          ],
-          "54": [
-            "Usage not allowed!",
-            "You on NO MEDS!",
-            "Large Hospital",
-            "Large Lifesaver",
-            "Bag of Crystals"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "Things",
-          "Whats this?",
-          "Not so shiny!",
-          "Trash",
-          "This & That",
-          "Too many artifacts!",
-          "How do they fit?"
-        ],
-        "3": [
-          "Got kayaked yet?",
-          "NLNMAS next?",
-          "You DED!",
-          "Git Gud!",
-          "Forgot to Heal?",
-          "Medpack?",
-          "You really just died here?"
-        ],
-        "35": [
-          "Wasted Stuff Counter",
-          "Any% next?",
-          "Can you get any slower?",
-          "All Secrets?",
-          "No Medpacks allowed!",
-          "Pacifist Run?"
-        ],
-        "59": [
-          "Croft Manor",
-          "Core Design HQ",
-          "TR3Rando HQ",
-          "Lara's Digs",
-          "Winston's Fridge",
-          "Defrost Winston"
-        ],
-        "85": [
-          "Bit City",
-          "South England",
-          "Is the Queen home?",
-          "Catsuit City",
-          "10 Minutes to midnight!"
-        ],
-        "86": [
-          "Not so empty desert",
-          "Dust… everywhere",
-          "OI!",
-          "HEY!",
-          "Eagles Desert"
-        ],
-        "87": [
-          "Water and Stuff",
-          "Forgotten Island",
-          "Cannibal Mania",
-          "Punas Corner",
-          "South Pathetic",
-          "South India"
-        ],
-        "88": [
-          "Giant Fridge",
-          "Where’s Winston?",
-          "Hyperthermia Mania",
-          "Titanic 2.0",
-          "Big, Cold, White",
-          "Iceberg right ahead!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NULL -",
-          "- NOTHING HERE -",
-          "- UNDEFINED -",
-          "- OI, THIS SLOT'S FREE -"
-        ]
-      }
-    }
-  ],
-
+ï»¿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Sparkling",
+      "Flipmap Helper",
+      "Uhh Shiny!",
+      "Stumble Cancel",
+      "Use me!"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Double Guns",
+      "Cheatcode Helpers",
+      "Classic Classics",
+      "The IIconics",
+      "Unlimited Kills"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "Double Guns Clips",
+      "Cheatcode Helpers Clips",
+      "Classic Classics Clips",
+      "The IIconics Clips",
+      "Unlimited Kills Clips"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Shitgun",
+      "Why?",
+      "Come here or no kill!",
+      "Seen Enough?",
+      "Leave it alone! Its busy!"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Shitgun Shells",
+      "Question Shells",
+      "Slug Shells",
+      "Seen Enough Shells?",
+      "Busy Shells"
+    ],
+    "INV_ITEM_DEAGLE": [
+      "Willy Killy",
+      "Actually useful!",
+      "D-Eagle",
+      "Nevada Eagle",
+      "Hottest in the Pot"
+    ],
+    "INV_ITEM_DEAGLE_AMMO": [
+      "Willy Killy Clips",
+      "Useful Clips",
+      "D-Eagle Clips",
+      "Eagle Clips",
+      "Hotpot Clips"
+    ],
+    "INV_ITEM_UZI": [
+      "Ammo Vampire",
+      "Autos 2.0",
+      "Not TR II Uzis",
+      "You-zis",
+      "Not stronger now!"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Vampire Clips",
+      "Clips 2.0",
+      "Scuffed Clips",
+      "You-zi Clips",
+      "Weaker Clips"
+    ],
+    "INV_ITEM_HARPOON": [
+      "Meme Gun",
+      "Useless",
+      "For Challenge only",
+      "Why does it exist?",
+      "Underwater Crossbow"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Dank Memes",
+      "Waste",
+      "Challengers",
+      "Existentials",
+      "Bows"
+    ],
+    "INV_ITEM_M16": [
+      "Not the M16",
+      "M16",
+      "Raptor Killer",
+      "MP3 Music",
+      "Rocket Enhancer"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "Fake Clips",
+      "Scam Clips",
+      "Raptor Killers",
+      "Tracks",
+      "Rocket Loaders"
+    ],
+    "INV_ITEM_ROCKET_LAUNCHER": [
+      "Ultimate Boom",
+      "Backpack Turret",
+      "Takes too long anyway",
+      "Totally inaccurate",
+      "Heavy Recoil?"
+    ],
+    "INV_ITEM_ROCKETS": [
+      "Ultimate Rockets",
+      "Backpack Rockets",
+      "Long-load Rockets",
+      "Inaccurate Rockets",
+      "Heavy Rockets"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Inaccurate Thing",
+      "Better Launcher COPIUM",
+      "Big Boom",
+      "Why do you use me?",
+      "Not on 7 anymore"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Inaccurate Nades",
+      "COPIUM Nades",
+      "Big Boom Nades",
+      "Questionable Nades",
+      "Discount Rockets"
+    ],
+    "INV_ITEM_MEDI": [
+      "Usage not allowed!",
+      "You on NO MEDS!",
+      "Small Hospital",
+      "Small Lifesaver",
+      "Backpack Crystal"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Usage not allowed!",
+      "You on NO MEDS!",
+      "Large Hospital",
+      "Large Lifesaver",
+      "Bag of Crystals"
+    ],
+    "HEADING_ITEMS": [
+      "Things",
+      "Whats this?",
+      "Not so shiny!",
+      "Trash",
+      "This & That",
+      "Too many artifacts!",
+      "How do they fit?"
+    ],
+    "HEADING_GAME_OVER": [
+      "Got kayaked yet?",
+      "NLNMAS next?",
+      "You DED!",
+      "Git Gud!",
+      "Forgot to Heal?",
+      "Medpack?",
+      "You really just died here?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Wasted Stuff Counter",
+      "Any% next?",
+      "Can you get any slower?",
+      "All Secrets?",
+      "No Medpacks allowed!",
+      "Pacifist Run?"
+    ],
+    "INV_GLOBE_LONDON": [
+      "Bit City",
+      "South England",
+      "Is the Queen home?",
+      "Catsuit City",
+      "10 Minutes to midnight!"
+    ],
+    "INV_GLOBE_NEVADA": [
+      "Not so empty desert",
+      "Dust everywhere",
+      "OI!",
+      "HEY!",
+      "Eagles Desert"
+    ],
+    "INV_GLOBE_SOUTH_PACIFIC": [
+      "Water and Stuff",
+      "Forgotten Island",
+      "Cannibal Mania",
+      "Punas Corner",
+      "South Pathetic",
+      "South India"
+    ],
+    "INV_GLOBE_ANTARCTICA": [
+      "Giant Fridge",
+      "Where's Winston?",
+      "Hyperthermia Mania",
+      "Titanic 2.0",
+      "Big, Cold, White",
+      "Iceberg right ahead!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NULL -",
+      "- NOTHING HERE -",
+      "- UNDEFINED -",
+      "- OI, THIS SLOT'S FREE -"
+    ]
+  },
   "LevelStrings": {
-    "ANTARC.TR2": {
-      "Names": [
-        "No Snow Flake",
-        "Speedboat 2.0",
-        "The Icecube",
-        "Walk In Freezer",
-        "Tomato Soup anyone?"
-      ],
-      "Keys": {
-        "0": [
-          "Not the Deck",
-          "IceKey_Gamer",
-          "One Key to scare",
-          "Frozen Key"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Dont forget me!",
-          "Candy Cane",
-          "Pry Stick",
-          "I feel stronger now!",
-          "Von Crowbar"
-        ],
-        "1": [
-          "Release the River",
-          "Open the flood gates",
-          "Water and Water and Water",
-          "Access to Soup",
-          "Soup Kitchen Key"
-        ]
-      }
-    },
-
-    "AREA51.TR2": {
-      "Names": [
-        "Paul was here!",
-        "Conspiracy Theory Place",
-        "Xenomorph was here!",
-        "Independence Day",
-        "Aliens phone home!"
-      ],
-      "Keys": {
-        "0": [
-          "Rocket Key",
-          "Rip Ride Rocket",
-          "SpaceX Key",
-          "Rocket Raccoon",
-          "Elon Musk Key",
-          "You can skip this as well!",
-          "Secret Numbers",
-          "Credit Card Pin",
-          "Real Rocket Launcher",
-          "Aliens nearby?!?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Rapunzels Key",
-          "Tall Key",
-          "Not a Dragon Tower",
-          "Cheat Key",
-          "YOU CHEATED!!!"
-        ],
-        "1": [
-          "You can’t skip me!",
-          "Ist me again!",
-          "UFO Disc",
-          "One of Two Discs",
-          "Why no music? O.o"
-        ],
-        "2": [
-          "Laras Party Mix",
-          "Puzzle Element Music",
-          "One of Two Discs",
-          "Jungle Music",
-          "You can skip me!"
-        ],
-        "3": [
-          "Magnetic railway key",
-          "Subway key",
-          "Railway station key",
-          "Drawing pin",
-          "Celebrity",
-          "Jackhammer"
-        ]
-      }
-    },
-
-    "CHAMBER.TR2": {
-      "Names": [
-        "Incy Wincy Spider",
-        "20 – 40 Deagle Shots",
-        "Japanese recommended",
-        "Free Willy",
-        "Willards Web"
-      ]
-    },
-
-    "CITY.TR2": {
-      "Names": [
-        "Bridge Jump",
-        "A Bugs Life",
-        "Bee Movie 2.0",
-        "Hall of Elements",
-        "4 Ways to die!"
-      ],
-      "Keys": {
-        "0": [
-          "Devil Key",
-          "This girl’s not on fire!",
-          "You can skip us!",
-          "Twin Key",
-          "Key from Hell",
-          "Look at me!",
-          "Cookie Monster Key"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Beauty Mask",
-          "Not Golden Mask",
-          "Phantom of the Opera",
-          "Mask Ball incoming",
-          "THE MASK"
-        ]
-      }
-    },
-
-    "COMPOUND.TR2": {
-      "Names": [
-        "Just another Prison",
-        "Prison Break",
-        "The Great Escape",
-        "Boris is here!",
-        "Where are my weapons?"
-      ],
-      "Keys": {
-        "0": [
-          "Die Guard… DIE!",
-          "Just another Keycard",
-          "MasterCard",
-          "Keycard 1",
-          "Keycard 2",
-          "Get outta Jail Card"
-        ],
-        "1": [
-          "VisaCard",
-          "Keycard 1",
-          "Keycard 2",
-          "Secret Keycard",
-          "Credit Card"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Blue Stone Thingy",
-          "Spark Plug 2",
-          "Fuse Thing 2",
-          "Blue USB Plug",
-          "No Dupe Either"
-        ],
-        "1": [
-          "Yellow Stone Thingy",
-          "Spark Plug 1",
-          "Fuse Thing 1",
-          "Yellow USB Plug",
-          "No Dupe Either"
-        ]
-      }
-    },
-
-    "CRASH.TR2": {
-      "Names": [
-        "Jurassic Park",
-        "Dinos… again?",
-        "Barneys Place",
-        "Lost Valley Part 2",
-        "Wheres the Gold Dragon?"
-      ],
-      "Keys": {
-        "0": [
-          "Barney Spawn Key",
-          "No Barney Food",
-          "What is this for? O.o",
-          "Canon Key for big Boom",
-          "Destruction Key"
-        ],
-        "1": [
-          "Raptor Key",
-          "Watch your back",
-          "BEHIND YOU!",
-          "Enemy goes BOOOH!",
-          "Where will i fit?"
-        ]
-      }
-    },
-
     "HOUSE.TR2": {
       "Names": [
         "Humble Abode",
@@ -450,8 +206,8 @@
         "Target Practice",
         "Happy Retirement Home"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Race Track Key",
           "Flag Key",
           "Formula 1 Key",
@@ -461,7 +217,6 @@
         ]
       }
     },
-
     "JUNGLE.TR2": {
       "Names": [
         "Junglebook",
@@ -470,8 +225,8 @@
         "Rollin rollin rollin",
         "Rolling Stones"
       ],
-      "Keys": {
-        "3": [
+      "KeyItems": {
+        "Key4": [
           "Pretty Key",
           "MonKey",
           "Useless Key",
@@ -480,88 +235,35 @@
         ]
       }
     },
-
-    "MINES.TR2": {
+    "TEMPLE.TR2": {
       "Names": [
-        "Minecraft",
-        "WHY?!?!?!",
-        "Deep, freezing Swim",
-        "Stormtrooper Bay",
-        "Fire and Pukemonsters",
-        "JUST SUFFER!"
+        "Randys and Rorys Tomb",
+        "Why so many Sheevas?",
+        "Bulletproof Statues",
+        "Snakes and Ladders",
+        "Trap Hell",
+        "Flip Flare Trick"
       ],
-      "Puzzles": {
-        "0": [
-          "Dont forget me!",
-          "Candy Cane",
-          "Pry Stick",
-          "I feel stronger now!",
-          "Von Crowbar"
-        ],
-        "1": [
-          "Duracell",
-          "9 Volt",
-          "Charger",
-          "Blue and Red Thingy",
-          "Wrench Crane Power!"
-        ],
-        "2": [
-          "Deep Frozen Thingy",
-          "ShawCrank Redemption",
-          "Turning Thing",
-          "Wound up yet?",
-          "You’re going to DIE!"
+      "KeyItems": {
+        "Key1": [
+          "Still no dupe Glitch",
+          "Deadly Key Collection",
+          "Five Nights at Ganesha",
+          "Not Prayer Wheels",
+          "Torture Chamber Keys"
         ]
       }
     },
-
-    "NEVADA.TR2": {
-      "Names": [
-        "Desert Eagles",
-        "Watery Desert",
-        "Stay Hydrated",
-        "No Desert Railroad here",
-        "Thats a hot Valley!"
-      ],
-      "Keys": {
-        "0": [
-          "Zugang zum Generator",
-          "Card to Generations",
-          "I’VE GOT THE POWER!",
-          "Dont get electrecuted!",
-          "Blackout Key"
-        ],
-        "1": [
-          "Mine Field Key",
-          "TNT Key",
-          "Flipmap Key",
-          "Access to Aliens",
-          "BIG BOOM!",
-          "Azezas Key to BOOM!"
-        ]
-      }
-    },
-
-    "OFFICE.TR2": {
-      "Names": [
-        "Run Lara, RUUUN!",
-        "Is she really dead?",
-        "Much too many volts!",
-        "Blackout!",
-        "Save and Load!"
-      ]
-    },
-
     "QUADCHAS.TR2": {
       "Names": [
         "Quad needed?",
         "Piranha Valley",
         "Not the Thames",
-        "Don’t dive girl!",
+        "Don't dive girl!",
         "No Barneys here!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Double Useless",
           "Who picks this up?",
           "MonKey Double",
@@ -570,7 +272,65 @@
         ]
       }
     },
-
+    "TONYBOSS.TR2": {
+      "Names": [
+        "aMAZEing",
+        "Not another Maze",
+        "Secret Maze?!? O.o",
+        "40 Dead Ends",
+        "40 Snakes"
+      ]
+    },
+    "SHORE.TR2": {
+      "Names": [
+        "Cannibal Village",
+        "The Beach",
+        "Dont loose your leg",
+        "Poison and Bridge Skip",
+        "Raid to the beat"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Under the Sea Key",
+          "Jack Sparrows Key",
+          "Drowned Key",
+          "Rusty Key",
+          "A smuggler lost this!"
+        ],
+        "Puzzle1": [
+          "Poison Stone",
+          "Temple Ruins Stone",
+          "Blood Stone",
+          "Trust in me",
+          "Not a Horseman Gem"
+        ]
+      }
+    },
+    "CRASH.TR2": {
+      "Names": [
+        "Jurassic Park",
+        "Dinos, again?",
+        "Barneys Place",
+        "Lost Valley Part 2",
+        "Wheres the Gold Dragon?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Barney Spawn Key",
+          "No Barney Food",
+          "What is this for? O.o",
+          "Canon Key for big Boom",
+          "Destruction Key"
+        ],
+        "Key2": [
+          "Raptor Key",
+          "Watch your back",
+          "BEHIND YOU!",
+          "Enemy goes BOOOH!",
+          "Where will i fit?"
+        ]
+      }
+    },
     "RAPIDS.TR2": {
       "Names": [
         "Why is this existing?",
@@ -581,7 +341,15 @@
         "RiP Headphone Users"
       ]
     },
-
+    "TRIBOSS.TR2": {
+      "Names": [
+        "Cannibal Boss",
+        "Even more poison",
+        "Footis Prison",
+        "Temple of Tuna",
+        "Temple Run"
+      ]
+    },
     "ROOFS.TR2": {
       "Names": [
         "20 Seconds",
@@ -592,15 +360,15 @@
         "London Ghetto",
         "Any Bruvs?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Rat Key",
           "Flu Room Key",
           "Chimney Key",
           "Simple Key",
           "Golden Key"
         ],
-        "1": [
+        "Key2": [
           "Beautiful Key",
           "Church Key",
           "Ruby Key",
@@ -609,7 +377,6 @@
         ]
       }
     },
-
     "SEWER.TR2": {
       "Names": [
         "Platform 9 3/4",
@@ -618,96 +385,310 @@
         "Tickets out of Order",
         "Please mind the gap"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Electrical Key",
           "Janitors Key",
-          "I’ve got the power!",
+          "I've got the power!",
           "Toolkit",
           "Fix these things!"
         ],
-        "1": [
+        "Key2": [
           "Half and Half",
           "One Half",
           "Religious Key",
           "Salomo 1 or 2?",
           "Damocles Keys"
         ],
-        "2": [
+        "Key3": [
           "Half and Half",
           "One Half",
           "Religious Key",
           "Salomo 1 or 2?",
           "Damocles Keys"
         ],
-        "3": [
+        "Key4": [
           "Half and Half",
           "One Half",
           "Religious Key",
           "Salomo 1 or 2?",
           "Damocles Keys"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "MONEY!",
           "Shilling",
           "Massive but shiny!",
           "Train Fare",
           "25 Bits"
         ],
-        "1": [
+        "Puzzle2": [
           "Lets go to Hogwarts",
           "Railpass",
           "Back to Nevada!",
           "No Control needed!",
           "Oyster Card"
         ],
-        "2": [
+        "Puzzle3": [
           "Thors Hammer",
-          "Mjölnir",
+          "MjÃ¶lnir",
           "Whack-a-Mole Hammer",
           "Smash this lock!",
           "St Francis Follys Hammer"
         ],
-        "3": [
+        "Puzzle4": [
           "Twinkle Twinkle Little Star",
-          "I’d rather be shiny!",
+          "I'd rather be shiny!",
           "You saw something shiny!",
           "Not in the sky!",
           "One Star Review"
         ]
       }
     },
-
-    "SHORE.TR2": {
+    "TOWER.TR2": {
       "Names": [
-        "Cannibal Village",
-        "The Beach",
-        "Dont loose your leg",
-        "Poison and Bridge Skip",
-        "Raid to the beat"
+        "National History Museum",
+        "Nonsense Mix",
+        "Lud's Hate",
+        "Let's Hate",
+        "Flying UPV ahead!"
       ],
-      "Keys": {
-        "0": [
-          "Under the Sea Key",
-          "Jack Sparrows Key",
-          "Drowned Key",
-          "Rusty Key",
-          "A smuggler lost this!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Poison Stone",
-          "Temple Ruins Stone",
-          "Blood Stone",
-          "Trust in me",
-          "Not a Horseman Gem"
+      "KeyItems": {
+        "Key1": [
+          "Heat Up Key!",
+          "Wow you didn't glitch!",
+          "Firestarter",
+          "Not even a boiler here?!?",
+          "I am cold!"
         ]
       }
     },
-
+    "OFFICE.TR2": {
+      "Names": [
+        "Run Lara, RUUUN!",
+        "Is she really dead?",
+        "Much too many volts!",
+        "Blackout!",
+        "Save and Load!"
+      ]
+    },
+    "NEVADA.TR2": {
+      "Names": [
+        "Desert Eagles",
+        "Watery Desert",
+        "Stay Hydrated",
+        "No Desert Railroad here",
+        "Thats a hot Valley!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Zugang zum Generator",
+          "Card to Generations",
+          "I'VE GOT THE POWER!",
+          "Don't get electrecuted!",
+          "Blackout Key"
+        ],
+        "Key2": [
+          "Mine Field Key",
+          "TNT Key",
+          "Flipmap Key",
+          "Access to Aliens",
+          "BIG BOOM!",
+          "Azezas Key to BOOM!"
+        ]
+      }
+    },
+    "COMPOUND.TR2": {
+      "Names": [
+        "Just another Prison",
+        "Prison Break",
+        "The Great Escape",
+        "Boris is here!",
+        "Where are my weapons?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Die Guard, DIE!",
+          "Just another Keycard",
+          "MasterCard",
+          "Keycard 1",
+          "Keycard 2",
+          "Get outta Jail Card"
+        ],
+        "Key2": [
+          "VisaCard",
+          "Keycard 1",
+          "Keycard 2",
+          "Secret Keycard",
+          "Credit Card"
+        ],
+        "Puzzle1": [
+          "Blue Stone Thingy",
+          "Spark Plug 2",
+          "Fuse Thing 2",
+          "Blue USB Plug",
+          "No Dupe Either"
+        ],
+        "Puzzle2": [
+          "Yellow Stone Thingy",
+          "Spark Plug 1",
+          "Fuse Thing 1",
+          "Yellow USB Plug",
+          "No Dupe Either"
+        ]
+      }
+    },
+    "AREA51.TR2": {
+      "Names": [
+        "Paul was here!",
+        "Conspiracy Theory Place",
+        "Xenomorph was here!",
+        "Independence Day",
+        "Aliens phone home!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Rocket Key",
+          "Rip Ride Rocket",
+          "SpaceX Key",
+          "Rocket Raccoon",
+          "Elon Musk Key",
+          "You can skip this as well!",
+          "Secret Numbers",
+          "Credit Card Pin",
+          "Real Rocket Launcher",
+          "Aliens nearby?!?"
+        ],
+        "Puzzle1": [
+          "Rapunzels Key",
+          "Tall Key",
+          "Not a Dragon Tower",
+          "Cheat Key",
+          "YOU CHEATED!!!"
+        ],
+        "Puzzle2": [
+          "You can't skip me!",
+          "Ist me again!",
+          "UFO Disc",
+          "One of Two Discs",
+          "Why no music? O.o"
+        ],
+        "Puzzle3": [
+          "Laras Party Mix",
+          "Puzzle Element Music",
+          "One of Two Discs",
+          "Jungle Music",
+          "You can skip me!"
+        ],
+        "Puzzle4": [
+          "Magnetic railway key",
+          "Subway key",
+          "Railway station key",
+          "Drawing pin",
+          "Celebrity",
+          "Jackhammer"
+        ]
+      }
+    },
+    "ANTARC.TR2": {
+      "Names": [
+        "No Snow Flake",
+        "Speedboat 2.0",
+        "The Icecube",
+        "Walk In Freezer",
+        "Tomato Soup anyone?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Not the Deck",
+          "IceKey_Gamer",
+          "One Key to scare",
+          "Frozen Key"
+        ],
+        "Puzzle1": [
+          "Dont forget me!",
+          "Candy Cane",
+          "Pry Stick",
+          "I feel stronger now!",
+          "Von Crowbar"
+        ],
+        "Puzzle2": [
+          "Release the River",
+          "Open the flood gates",
+          "Water and Water and Water",
+          "Access to Soup",
+          "Soup Kitchen Key"
+        ]
+      }
+    },
+    "MINES.TR2": {
+      "Names": [
+        "Minecraft",
+        "WHY?!?!?!",
+        "Deep, freezing Swim",
+        "Stormtrooper Bay",
+        "Fire and Pukemonsters",
+        "JUST SUFFER!"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Dont forget me!",
+          "Candy Cane",
+          "Pry Stick",
+          "I feel stronger now!",
+          "Von Crowbar"
+        ],
+        "Puzzle2": [
+          "Duracell",
+          "9 Volt",
+          "Charger",
+          "Blue and Red Thingy",
+          "Wrench Crane Power!"
+        ],
+        "Puzzle3": [
+          "Deep Frozen Thingy",
+          "ShawCrank Redemption",
+          "Turning Thing",
+          "Wound up yet?",
+          "You're going to DIE!"
+        ]
+      }
+    },
+    "CITY.TR2": {
+      "Names": [
+        "Bridge Jump",
+        "A Bugs Life",
+        "Bee Movie 2.0",
+        "Hall of Elements",
+        "4 Ways to die!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Devil Key",
+          "This girl's not on fire!",
+          "You can skip us!",
+          "Twin Key",
+          "Key from Hell",
+          "Look at me!",
+          "Cookie Monster Key"
+        ],
+        "Puzzle1": [
+          "Beauty Mask",
+          "Not Golden Mask",
+          "Phantom of the Opera",
+          "Mask Ball incoming",
+          "THE MASK"
+        ]
+      }
+    },
+    "CHAMBER.TR2": {
+      "Names": [
+        "Incy Wincy Spider",
+        "20 - 40 Deagle Shots",
+        "Japanese recommended",
+        "Free Willy",
+        "Willards Web"
+      ]
+    },
     "STPAUL.TR2": {
       "Names": [
         "Shh is a Secret",
@@ -716,8 +697,8 @@
         "Deadly Cathedral",
         "No Damage impossible"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Super Hidden",
           "Ladder, Ladder on the Wall",
           "Finally found me?",
@@ -725,86 +706,6 @@
           "Flu Room Key"
         ]
       }
-    },
-
-    "TEMPLE.TR2": {
-      "Names": [
-        "Randys and Rorys Tomb",
-        "Why so many Sheevas?",
-        "Bulletproof Statues",
-        "Snakes and Ladders",
-        "Trap Hell",
-        "Flip Flare Trick"
-      ],
-      "Keys": {
-        "0": [
-          "Still no dupe Glitch",
-          "Deadly Key Collection",
-          "Five Nights at Ganesha",
-          "Not Prayer Wheels",
-          "Torture Chamber Keys"
-        ],
-        "1": [
-          "Still no dupe Glitch",
-          "Deadly Key Collection",
-          "Five Nights at Ganesha",
-          "Not Prayer Wheels",
-          "Torture Chamber Keys"
-        ],
-        "2": [
-          "Still no dupe Glitch",
-          "Deadly Key Collection",
-          "Five Nights at Ganesha",
-          "Not Prayer Wheels",
-          "Torture Chamber Keys"
-        ],
-        "3": [
-          "Still no dupe Glitch",
-          "Deadly Key Collection",
-          "Five Nights at Ganesha",
-          "Not Prayer Wheels",
-          "Torture Chamber Keys"
-        ]
-      }
-    },
-
-    "TONYBOSS.TR2": {
-      "Names": [
-        "aMAZEing",
-        "Not another Maze",
-        "Secret Maze?!? O.o",
-        "40 Dead Ends",
-        "40 Snakes"
-      ]
-    },
-
-    "TOWER.TR2": {
-      "Names": [
-        "National History Museum",
-        "Nonsense Mix",
-        "Lud’s Hate",
-        "Let’s Hate",
-        "Flying UPV ahead!"
-      ],
-      "Keys": {
-        "0": [
-          "Heat Up Key!",
-          "Wow you didn‘t glitch!",
-          "Firestarter",
-          "Not even a boiler here?!?",
-          "I am cold!"
-        ]
-      }
-    },
-
-    "TRIBOSS.TR2": {
-      "Names": [
-        "Cannibal Boss",
-        "Even more poison",
-        "Footis Prison",
-        "Temple of Tuna",
-        "Temple Run"
-      ]
     }
   }
 }

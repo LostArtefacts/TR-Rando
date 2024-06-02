@@ -1,457 +1,213 @@
-{
-  "GlobalStrings": [
-    {
-      "GroupedStrings": [
-        {
-          "33": [
-            "Sprankelend",
-            "Flipmap Helper",
-            "Uhh glinsterent!",
-            "Struikelen annuleren",
-            "Gebruik mij!"
-          ],
-          "44": [
-            "Sprankelend",
-            "Flipmap Helper",
-            "Uhh glinsterent!",
-            "Struikelen annuleren",
-            "Gebruik mij!"
-          ]
-        },
-        {
-          "36": [
-            "Dubble geweren",
-            "Cheatcode Helpers",
-            "Klassiek klassiek",
-            "De iconische",
-            "Oneindig doden"
-          ],
-          "45": [
-            "dubble geweren munitie",
-            "Cheatcode Helpers munitie",
-            "Klassiek klassiek munitie",
-            "De iconische munitie",
-            "Oneindig doden munitie"
-          ]
-        },
-        {
-          "37": [
-            "Poepgeweer",
-            "Waarom?",
-            "Kom hier geen moord!",
-            "Genoeg gezien?",
-            "Laat het met rust! Het is druk!"
-          ],
-          "46": [
-            "Poepgeweer hulzen",
-            "Vragen hulzen ",
-            "Slak hulzen",
-            "Genoeg gezien? hulzen",
-            "Drukke hulzen"
-          ]
-        },
-        {
-          "38": [
-            "Willy Killy",
-            "Eigenlijk nuttig",
-            "De-Arend",
-            "Nevada Arend",
-            "Heetste in de pot"
-          ],
-          "47": [
-            "Willy Killy munitie",
-            "Nuttige munitie",
-            "D-Arend munitie",
-            "Arend munitie",
-            "Heet Pot munitie"
-          ]
-        },
-        {
-          "39": [
-            "Vampier munitie",
-            "Autos 2.0",
-            "Niet TR II Uzis",
-            "Je-zus",
-            "Niet sterker nu!"
-          ],
-          "48": [
-            "Vampier munitie",
-            "Munitie 2.0",
-            "Scuffed Clips",
-            "Je-zus munitie",
-            "Zwakke munitie"
-          ]
-        },
-        {
-          "40": [
-            "Même Geweer",
-            "Nutteloos",
-            "Alleen voor Challenge ",
-            "Waarom bestaat het?",
-            "Onderwater Kruisboog"
-          ],
-          "49": [
-            "Dank Memes",
-            "Verspilling",
-            "Uitdaging",
-            "Existentiële",
-            "Boog"
-          ]
-        },
-        {
-          "41": [
-            "Niet de M16",
-            "M16",
-            "Raptor moordenaar",
-            "MP3 Muziek",
-            "Raket versterker"
-          ],
-          "50": [
-            "Neppe munitie",
-            "opgelichte munitie",
-            "Raptor moordenaars",
-            "Sporem",
-            "Raket Laders"
-          ]
-        },
-        {
-          "42": [
-            "Ultieme Boom",
-            "Rugzak torentje",
-            "Duurt toch te lang",
-            "Helemal onnauwkeurig",
-            "Zware terugslag?"
-          ],
-          "51": [
-            "Ultieme Raketten",
-            "Rugzak Raketten",
-            "Lang-herladen Raketten",
-            "onnauwkeurige Raketten",
-            "Zware Raketten"
-          ]
-        },
-        {
-          "43": [
-            "Onnauwkeurig ding",
-            "betere werper COPIUM",
-            "Grote Boom",
-            "Waarom gebruik je me?",
-            "Niet meer 7"
-          ],
-          "52": [
-            "Onnauwkeurig Nades",
-            "COPIUM Nades",
-            "Grote Boom Nades",
-            "Twijfelachtig Nades",
-            "Korting raket"
-          ]
-        },
-        {
-          "53": [
-            "Gebruik niet toegelaten!",
-            "Jij gebruikt geen MEDS!",
-            "Klein ziekenhuis",
-            "Klein Levensredder",
-            "Rugzak kristal"
-          ],
-          "54": [
-            "Gebruik niet toegelaten!",
-            "Jij gebruikt geen MEDS!",
-            "Groot ziekenhuis",
-            "Grote redder in nood ",
-            "Zak met kristallen"
-          ]
-        }
-      ],
-      "StandaloneStrings": {
-        "2": [
-          "Dingen",
-          "Wat is dit?",
-          "Niet zo glinsterend!",
-          "Afval",
-          "dit & dat",
-          "Te veel artifacten!",
-          "Hoe passen ze?"
-        ],
-        "3": [
-          "Ben je al ge-kayaked?",
-          "NLNMAS volgende?",
-          "Je bent DED!",
-          "Git Gud!",
-          "Vergeten te genezen?",
-          "EHBO?",
-          "Ben je serieus hier gestorven?"
-        ],
-        "35": [
-          "Teller voor verspilde spullen",
-          "Alles% volgende?",
-          "Kan het nog trager?",
-          "Alle geheimen?",
-          "Geen Medpacks Toegestaan!",
-          "Pacifist Ren?"
-        ],
-        "59": [
-          "Croft landhuis",
-          "Core Design HQ",
-          "TR3Rando HQ",
-          "Lara's opgravingen",
-          "Winston's koelkast",
-          "Ontdooi Winston"
-        ],
-        "85": [
-          "Bit Stad",
-          "Zuid-Engeland",
-          "Is de koningin thuis?",
-          "Katpak Stad",
-          "10minuten tot midernacht!"
-        ],
-        "86": [
-          "Niet zo leeg woestijnt",
-          "Stof… overall",
-          "OI Josuke!",
-          "HEY!",
-          "Arend woestijn"
-        ],
-        "87": [
-          "Water en dingen",
-          "Vergeten Eiland",
-          "Kannibaal Mania",
-          "Puna’s hoek",
-          "Zuid ellendig",
-          "Zuid India"
-        ],
-        "88": [
-          "Grote koelkast",
-          "waar is Winston?",
-          "Hyperthermie Mania",
-          "Titanic 2.0",
-          "Groot, Koud, Wit",
-          "Ijsberg recht vooruit!"
-        ]
-      }
-    },
-    {
-      "StandaloneStrings": {
-        "15": [
-          "- NULL -",
-          "- NIKS HIER -",
-          "- ONGEDEFINIEERD-",
-          "- OI, DEZE SLOT IS GRATIS -"
-        ]
-      }
-    }
-  ],
-
+ï»¿{
+  "GlobalStrings": {
+    "INV_ITEM_FLARES": [
+      "Sprankelend",
+      "Flipmap Helper",
+      "Uhh glinsterent!",
+      "Struikelen annuleren",
+      "Gebruik mij!"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Dubble geweren",
+      "Cheatcode Helpers",
+      "Klassiek klassiek",
+      "De iconische",
+      "Oneindig doden"
+    ],
+    "INV_ITEM_PISTOL_AMMO": [
+      "dubble geweren munitie",
+      "Cheatcode Helpers munitie",
+      "Klassiek klassiek munitie",
+      "De iconische munitie",
+      "Oneindig doden munitie"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Poepgeweer",
+      "Waarom?",
+      "Kom hier geen moord!",
+      "Genoeg gezien?",
+      "Laat het met rust! Het is druk!"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Poepgeweer hulzen",
+      "Vragen hulzen ",
+      "Slak hulzen",
+      "Genoeg gezien? hulzen",
+      "Drukke hulzen"
+    ],
+    "INV_ITEM_DEAGLE": [
+      "Willy Killy",
+      "Eigenlijk nuttig",
+      "De-Arend",
+      "Nevada Arend",
+      "Heetste in de pot"
+    ],
+    "INV_ITEM_DEAGLE_AMMO": [
+      "Willy Killy munitie",
+      "Nuttige munitie",
+      "D-Arend munitie",
+      "Arend munitie",
+      "Heet Pot munitie"
+    ],
+    "INV_ITEM_UZI": [
+      "Vampier munitie",
+      "Autos 2.0",
+      "Niet TR II Uzis",
+      "Je-zus",
+      "Niet sterker nu!"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Vampier munitie",
+      "Munitie 2.0",
+      "Scuffed Clips",
+      "Je-zus munitie",
+      "Zwakke munitie"
+    ],
+    "INV_ITEM_HARPOON": [
+      "MÃªme Geweer",
+      "Nutteloos",
+      "Alleen voor Challenge ",
+      "Waarom bestaat het?",
+      "Onderwater Kruisboog"
+    ],
+    "INV_ITEM_HARPOON_AMMO": [
+      "Dank Memes",
+      "Verspilling",
+      "Uitdaging",
+      "ExistentiÃ«le",
+      "Boog"
+    ],
+    "INV_ITEM_M16": [
+      "Niet de M16",
+      "M16",
+      "Raptor moordenaar",
+      "MP3 Muziek",
+      "Raket versterker"
+    ],
+    "INV_ITEM_M16_AMMO": [
+      "Neppe munitie",
+      "opgelichte munitie",
+      "Raptor moordenaars",
+      "Sporem",
+      "Raket Laders"
+    ],
+    "INV_ITEM_ROCKET_LAUNCHER": [
+      "Ultieme Boom",
+      "Rugzak torentje",
+      "Duurt toch te lang",
+      "Helemal onnauwkeurig",
+      "Zware terugslag?"
+    ],
+    "INV_ITEM_ROCKETS": [
+      "Ultieme Raketten",
+      "Rugzak Raketten",
+      "Lang-herladen Raketten",
+      "onnauwkeurige Raketten",
+      "Zware Raketten"
+    ],
+    "INV_ITEM_GRENADE_LAUNCHER": [
+      "Onnauwkeurig ding",
+      "betere werper COPIUM",
+      "Grote Boom",
+      "Waarom gebruik je me?",
+      "Niet meer 7"
+    ],
+    "INV_ITEM_GRENADE_AMMO": [
+      "Onnauwkeurig Nades",
+      "COPIUM Nades",
+      "Grote Boom Nades",
+      "Twijfelachtig Nades",
+      "Korting raket"
+    ],
+    "INV_ITEM_MEDI": [
+      "Gebruik niet toegelaten!",
+      "Jij gebruikt geen MEDS!",
+      "Klein ziekenhuis",
+      "Klein Levensredder",
+      "Rugzak kristal"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Gebruik niet toegelaten!",
+      "Jij gebruikt geen MEDS!",
+      "Groot ziekenhuis",
+      "Grote redder in nood ",
+      "Zak met kristallen"
+    ],
+    "HEADING_ITEMS": [
+      "Dingen",
+      "Wat is dit?",
+      "Niet zo glinsterend!",
+      "Afval",
+      "dit & dat",
+      "Te veel artifacten!",
+      "Hoe passen ze?"
+    ],
+    "HEADING_GAME_OVER": [
+      "Ben je al ge-kayaked?",
+      "NLNMAS volgende?",
+      "Je bent DED!",
+      "Git Gud!",
+      "Vergeten te genezen?",
+      "EHBO?",
+      "Ben je serieus hier gestorven?"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Teller voor verspilde spullen",
+      "Alles% volgende?",
+      "Kan het nog trager?",
+      "Alle geheimen?",
+      "Geen Medpacks Toegestaan!",
+      "Pacifist Ren?"
+    ],
+    "INV_GLOBE_LONDON": [
+      "Bit Stad",
+      "Zuid-Engeland",
+      "Is de koningin thuis?",
+      "Katpak Stad",
+      "10minuten tot midernacht!"
+    ],
+    "INV_GLOBE_NEVADA": [
+      "Niet zo leeg woestijnt",
+      "Stof, overall",
+      "OI Josuke!",
+      "HEY!",
+      "Arend woestijn"
+    ],
+    "INV_GLOBE_SOUTH_PACIFIC": [
+      "Water en dingen",
+      "Vergeten Eiland",
+      "Kannibaal Mania",
+      "Puna's hoek",
+      "Zuid ellendig",
+      "Zuid India"
+    ],
+    "INV_GLOBE_ANTARCTICA": [
+      "Grote koelkast",
+      "waar is Winston?",
+      "Hyperthermie Mania",
+      "Titanic 2.0",
+      "Groot, Koud, Wit",
+      "Ijsberg recht vooruit!"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "- NULL -",
+      "- NIKS HIER -",
+      "- ONGEDEFINIEERD-",
+      "- OI, DEZE SLOT IS GRATIS -"
+    ]
+  },
   "LevelStrings": {
-    "ANTARC.TR2": {
-      "Names": [
-        "Geen sneeuwvlok",
-        "Speedboat 2.0",
-        "Het ijsblok",
-        "Wandeling in de vriezer",
-        "Tomatensoep iemand?"
-      ],
-      "Keys": {
-        "0": [
-          "Niet het deck",
-          "IjsSleutel_Gamer",
-          "Één sleutel om bang te maken",
-          "Bevroren sleutel"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Vergeet mij niet!",
-          "Zuurstok",
-          "Wrik strikje",
-          "Ik voel me sterker nu!",
-          "Von Koevoet"
-        ],
-        "1": [
-          "Laat de rivier vrij",
-          "Open de dam",
-          "Water en Water en Water…",
-          "Toegang tot soep",
-          "Soepkeuken sleutel"
-        ]
-      }
-    },
-
-    "AREA51.TR2": {
-      "Names": [
-        "Paul was hier!",
-        "Samenzweringstheorie plaats",
-        "Xenomorph was hier!",
-        "Onafhankelijkheidsdag",
-        "Aliens telefoon huis!"
-      ],
-      "Keys": {
-        "0": [
-          "Raket sleutel",
-          "Rip rijdende Raket",
-          "SpaceX sleutel",
-          "Raket wasbeer",
-          "Elon Musk’s sleutel",
-          "Je kan dit ook overslaan!",
-          "Geheime Nummers",
-          "Credit Card Pin",
-          "Echte raketwerper",
-          "Aliens dichtbij?!?"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Rapunzel’s sleutel",
-          "Lange sleutel",
-          "Niet een drakentoren",
-          "Code sleutel",
-          "JIJ HEBT VALS GESPEELT!!!"
-        ],
-        "1": [
-          "Je kan me niet overslaan!",
-          "Ik ben het weer!",
-          "UFO schijf",
-          "Een van de twee schijven",
-          "Waarom geen muziek? O.o"
-        ],
-        "2": [
-          "Lara’s feest Mix",
-          "Puzzel Element Muziek",
-          "Een van de twee schijven",
-          "Jungle Muziek",
-          "Je kan me overslaan!"
-        ],
-        "3": [
-          "Magnetische NS sleutel",
-          "Metro sleutel",
-          "Trein station sleutel",
-          "Punaise",
-          "Beroemdheid",
-          "Drilboor"
-        ]
-      }
-    },
-
-    "CHAMBER.TR2": {
-      "Names": [
-        "Incy Wincy Spider",
-        "20 – 40 arend schoten",
-        "Japans aanbevolen",
-        "Gratis Willy",
-        "Willards Web"
-      ]
-    },
-
-    "CITY.TR2": {
-      "Names": [
-        "Brug sprong",
-        "Een insect’s leven",
-        "Bij film 2.0",
-        "Hall van Elementen",
-        "4 manieren om te sterven!"
-      ],
-      "Keys": {
-        "0": [
-          "Duivel’s sleutel",
-          "Deze meid staat niet in de fik!",
-          "Je kan ons overslagen!",
-          "tweeling sleutel",
-          "Sleutel van Hell",
-          "Kijk naar mij!",
-          "Koekie Monster’s sleutel"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Schoonheidsmasker",
-          "Niet het gouden masker",
-          "fantoom van de opera",
-          "Masker Ball inkomend",
-          "HET MASKER"
-        ]
-      }
-    },
-
-    "COMPOUND.TR2": {
-      "Names": [
-        "Gewoon een andere gevangenis",
-        "Ontsnapping uit de gevangenis",
-        "De grote ontsnapping",
-        "Boris is hier!",
-        "Waar zijn me wapens?"
-      ],
-      "Keys": {
-        "0": [
-          "Sterf bewaker… STERF!",
-          "Gewoon weer een Sleutelkaart",
-          "MasterCard",
-          "Sleutelkaart 1",
-          "Sleutelkaart 2",
-          "Ontsnap de gevangenis kaart"
-        ],
-        "1": [
-          "VisaCard",
-          "Sleutelkaart 1",
-          "Sleutelkaart 2",
-          "Geheime Sleutelkaart",
-          "Kredietkaart"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Blauwe Steen ding",
-          "Bougie 2",
-          "Zekering Ding 2",
-          "Blauwe USB stekker",
-          "Ook geen duplicaat"
-        ],
-        "1": [
-          "Gele Steen Ding",
-          "Bougie 1",
-          "Zekering Ding 1",
-          "Gele USB stekker",
-          "Ook geen duplicaat"
-        ]
-      }
-    },
-
-    "CRASH.TR2": {
-      "Names": [
-        "Jurassic Park",
-        "Dino’s… alweer?",
-        "Barney’s Plek",
-        "Verloren vallei Deel 2",
-        "Waar is de gele draak?"
-      ],
-      "Keys": {
-        "0": [
-          "Barney Spawn Sleutel",
-          "Geen Barney eten",
-          "Wat is dit voor? O.o",
-          "Canon sleutel voor grote Boom",
-          "Vernietiging sleutel"
-        ],
-        "1": [
-          "Roofvogel Sleutel",
-          "Let op je rug",
-          "ACHTER JE!",
-          "Vijand gaat BOOOM!",
-          "Waar ga ik passent?"
-        ]
-      }
-    },
-
     "HOUSE.TR2": {
       "Names": [
         "Nederig verblijf",
-        "Winston’s Koelkast 2.0",
+        "Winston's Koelkast 2.0",
         "Formule Quad Baan",
         "Winston... double?",
         "Doel Oefening",
         "Gelukkig bejaardentehuis"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Racebaan Sleutel",
           "Vlag Sleutel",
           "Formule 1 Sleutel",
@@ -461,17 +217,16 @@
         ]
       }
     },
-
     "JUNGLE.TR2": {
       "Names": [
         "Jungleboek",
         "Koning Louis Familieleden",
         "puntige Glijbaan",
-        "Rollen rollen rollen…",
+        "Rollen rollen rollen,",
         "Rollenden Stenen"
       ],
-      "Keys": {
-        "3": [
+      "KeyItems": {
+        "Key4": [
           "Prachtige Sleutel",
           "Aap",
           "Nutteloze Key",
@@ -480,78 +235,25 @@
         ]
       }
     },
-
-    "MINES.TR2": {
+    "TEMPLE.TR2": {
       "Names": [
-        "Minecraft",
-        "WAAROM?!?!?!",
-        "Diepe, Bevroren zwem",
-        "Stormtrooper Baai",
-        "Vuur en kotsende monsters",
-        "GEWOON LIJDEN!"
+        "Randys en Rorys Graf",
+        "Waarom zo veel Sheevas?",
+        "Kogelvrije standbeelden",
+        "Slangen en ladders",
+        "Trap Hel",
+        "Flip Flare-truc"
       ],
-      "Puzzles": {
-        "0": [
-          "Vergeet me niet!",
-          "Zuurstok",
-          "Wrik strikje",
-          "Ik voel me sterker nu!",
-          "Von Koevoet"
-        ],
-        "1": [
-          "Duracell",
-          "9 Volt",
-          "Oplader",
-          "Blauw en Rood ding",
-          "Moersleutel Kraan Kracht!"
-        ],
-        "2": [
-          "Diep Bevroren Ding",
-          "ShawCrank Aflossing",
-          "Draaiend Ding",
-          "Ben je al opgewonden?",
-          "Je gaat DOOD!"
+      "KeyItems": {
+        "Key1": [
+          "Nog steeds geen dupe Glitch",
+          "Dodelijke sleutelverzameling",
+          "Five Nights bij Ganesha",
+          "Geen Gebedsmolens",
+          "Martelkamersleutels"
         ]
       }
     },
-
-    "NEVADA.TR2": {
-      "Names": [
-        "Woestijn Arend’s",
-        "Waterig Woestijn",
-        "Blijf Gehydrateerd",
-        "Nee, Geen woestijn spoor hier",
-        "Dat is een hete Vallei!"
-      ],
-      "Keys": {
-        "0": [
-          "Zugang zum Generator",
-          "kaart naar de Generaties",
-          "IK HEB DE KRACHT!",
-          "Wordt niet geëlektrocuteerd!",
-          "Black out Sleutel"
-        ],
-        "1": [
-          "Mijnenveld  Sleutel",
-          "TNT Sleutel",
-          "Flipmap Sleutel",
-          "Toegang tot buitenaardse wezens",
-          "GROTE BOOM!",
-          "Azezas’ sleutel naar de BOOM!"
-        ]
-      }
-    },
-
-    "OFFICE.TR2": {
-      "Names": [
-        "Ren Lara,REEEN!",
-        "Is ze echt dood?",
-        "veel te veel volts!",
-        "Black out!",
-        "Red en Laad!"
-      ]
-    },
-
     "QUADCHAS.TR2": {
       "Names": [
         "Quad Nodig?",
@@ -560,8 +262,8 @@
         "Niet duiken meid!",
         "Geen Barneys hier!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Dubbel nutteloos",
           "Wie pakt dit op?",
           "Aap Dubbel",
@@ -570,7 +272,65 @@
         ]
       }
     },
-
+    "TONYBOSS.TR2": {
+      "Names": [
+        "aMAZEing",
+        "Niet nog een doolhof",
+        "Geheim Doolhof?!? O.o",
+        "40 Doodlopende Wegen",
+        "40 Slangen"
+      ]
+    },
+    "SHORE.TR2": {
+      "Names": [
+        "Kannibaal Dorp",
+        "Het Strand",
+        "Verlies je been niet",
+        "Vergif en brug Skip",
+        "Raid to the beat"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Onder de zee sleutel",
+          "Jack Sparrows Key",
+          "Verdronken Sleutel",
+          "Roestige Sleutel",
+          "Een smokkelaar verloor zijn!"
+        ],
+        "Puzzle1": [
+          "Giftige Steen",
+          "TempelruÃ¯nes Steen",
+          "Bloed Steen",
+          "Vertrouw me",
+          "Geen Ruiterjuweeltje"
+        ]
+      }
+    },
+    "CRASH.TR2": {
+      "Names": [
+        "Jurassic Park",
+        "Dino's, alweer?",
+        "Barney's Plek",
+        "Verloren vallei Deel 2",
+        "Waar is de gele draak?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Barney Spawn Sleutel",
+          "Geen Barney eten",
+          "Wat is dit voor? O.o",
+          "Canon sleutel voor grote Boom",
+          "Vernietiging sleutel"
+        ],
+        "Key2": [
+          "Roofvogel Sleutel",
+          "Let op je rug",
+          "ACHTER JE!",
+          "Vijand gaat BOOOM!",
+          "Waar ga ik passent?"
+        ]
+      }
+    },
     "RAPIDS.TR2": {
       "Names": [
         "Waarom bestaat dit?",
@@ -581,7 +341,15 @@
         "RIP Koptelefoon Gebruikers"
       ]
     },
-
+    "TRIBOSS.TR2": {
+      "Names": [
+        "Kannibaal Baas",
+        "Nog meer Vergif",
+        "Footis Gevangenis",
+        "Tempel van Tonijn",
+        "Temple Ren"
+      ]
+    },
     "ROOFS.TR2": {
       "Names": [
         "20 Seconden",
@@ -592,15 +360,15 @@
         "London Getto",
         "Enkele Bruvs?"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Rat Sleutel",
           "Griep Kamersleutel",
           "Schoorsteen Sleutel",
           "Simpele Sleutel",
           "Gouden Sleutel"
         ],
-        "1": [
+        "Key2": [
           "Mooie Sleutel",
           "Kerk Sleutel",
           "Robijn Sleutel",
@@ -609,7 +377,6 @@
         ]
       }
     },
-
     "SEWER.TR2": {
       "Names": [
         "Platform 9 3/4",
@@ -618,176 +385,75 @@
         "Kaartjes uit of werking",
         "Let op het gat"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Elektrische Sleutel",
-          "conciërges Sleutel",
+          "conciÃ«rges Sleutel",
           "Ik heb de kracht!",
           "Toolkit",
           "Repareer deze dingen!"
         ],
-        "1": [
+        "Key2": [
           "Half en Half",
-          "Één Half",
+          "Ã‰Ã©n Half",
           "Religieuze Sleutel",
           "Salomo 1 of 2?",
-          "Damocles’ Sleutel"
+          "Damocles' Sleutel"
         ],
-        "2": [
+        "Key3": [
           "Half en Half",
-          "Één Half",
+          "Ã‰Ã©n Half",
           "religieuze Sleutel",
           "Salomo 1 or 2?",
-          "Damocles’ Sleutel"
+          "Damocles' Sleutel"
         ],
-        "3": [
+        "Key4": [
           "Half en Half",
-          "Één Helft",
+          "Ã‰Ã©n Helft",
           "religieuze Sleutel",
           "Salomo 1 of 2?",
           "Damocles Sleutel"
-        ]
-      },
-      "Puzzles": {
-        "0": [
+        ],
+        "Puzzle1": [
           "GELD!",
           "Shilling",
           "Massief maar glanzend!",
           "Train Fare",
           "25 Bits"
         ],
-        "1": [
+        "Puzzle2": [
           "Laten we naar Hogwarts gaan",
           "Spoorwegovergang",
           "Terug naar Nevada!",
           "Geen controle nodig!",
           "Oester kaart"
         ],
-        "2": [
-          "Thor’s Hamer",
-          "Mjölnir",
+        "Puzzle3": [
+          "Thor's Hamer",
+          "MjÃ¶lnir",
           "Sla een mol Hammer",
           "Verpulver dit slot!",
-          "St Francis Folly’s Hamer"
+          "St Francis Folly's Hamer"
         ],
-        "3": [
+        "Puzzle4": [
           "Twinkel Twinkel kleine ster",
           "Ik ben liever glanzend!",
           "Jij zag iets glanzend!",
           "Niet in de lucht!",
-          "Één Ster Beoordeling"
+          "Ã‰Ã©n Ster Beoordeling"
         ]
       }
     },
-
-    "SHORE.TR2": {
-      "Names": [
-        "Kannibaal Dorp",
-        "Het Strand",
-        "Verlies je been niet",
-        "Vergif en brug Skip",
-        "Raid to the beat"
-      ],
-      "Keys": {
-        "0": [
-          "Onder de zee sleutel",
-          "Jack Sparrows Key",
-          "Verdronken Sleutel",
-          "Roestige Sleutel",
-          "Een smokkelaar verloor zijn!"
-        ]
-      },
-      "Puzzles": {
-        "0": [
-          "Giftige Steen",
-          "Tempelruïnes Steen",
-          "Bloed Steen",
-          "Vertrouw me",
-          "Geen Ruiterjuweeltje"
-        ]
-      }
-    },
-
-    "STPAUL.TR2": {
-      "Names": [
-        "Shh het is een Secret",
-        "60/59",
-        "Onafgemaakte Zaken",
-        "Dodelijke Kathedraal",
-        "Geen Schade Onmogelijk"
-      ],
-      "Keys": {
-        "0": [
-          "Super Verborgen",
-          "Ladder, Ladder aan de Muur",
-          "Eindelijk mij gevonden?",
-          "Verstoppertje",
-          "Griepkamersleutel"
-        ]
-      }
-    },
-
-    "TEMPLE.TR2": {
-      "Names": [
-        "Randys en Rorys Graf",
-        "Waarom zo veel Sheevas?",
-        "Kogelvrije standbeelden",
-        "Slangen en ladders",
-        "Trap Hel",
-        "Flip Flare-truc"
-      ],
-      "Keys": {
-        "0": [
-          "Nog steeds geen dupe Glitch",
-          "Dodelijke sleutelverzameling",
-          "Five Nights bij Ganesha",
-          "Geen Gebedsmolens",
-          "Martelkamersleutels"
-        ],
-        "1": [
-          "Nog steeds geen dupe Glitch",
-          "Dodelijke sleutelverzameling",
-          "Five Nights bij Ganesha",
-          "Geen Gebedsmolens",
-          "Martelkamersleutels"
-        ],
-        "2": [
-          "Nog steeds geen dupe Glitch",
-          "Dodelijke sleutelverzameling",
-          "Five Nights bij Ganesha",
-          "Geen Gebedsmolens",
-          "Martelkamersleutels"
-        ],
-        "3": [
-          "Nog steeds geen dupe Glitch",
-          "Dodelijke sleutelverzameling",
-          "Five Nights bij Ganesha",
-          "Geen Gebedsmolens",
-          "Martelkamersleutels"
-        ]
-      }
-    },
-
-    "TONYBOSS.TR2": {
-      "Names": [
-        "aMAZEing",
-        "Niet nog een doolhof",
-        "Geheim Doolhof?!? O.o",
-        "40 Doodlopende Wegen",
-        "40 Slangen"
-      ]
-    },
-
     "TOWER.TR2": {
       "Names": [
         "Nationaal Historisch Museum",
         "Onzin Mix",
-        "Lud’s Haat",
+        "Lud's Haat",
         "Laten we Haten",
         "UPV Vooruit Vliegen!"
       ],
-      "Keys": {
-        "0": [
+      "KeyItems": {
+        "Key1": [
           "Opwarm Sleutel!",
           "Wow je hebt niet geglitched!",
           "Vuurstarter",
@@ -796,16 +462,250 @@
         ]
       }
     },
-
-    "TRIBOSS.TR2": {
+    "OFFICE.TR2": {
       "Names": [
-        "Kannibaal Baas",
-        "Nog meer Vergif",
-        "Footis Gevangenis",
-        "Tempel van Tonijn",
-        "Temple Ren"
+        "Ren Lara,REEEN!",
+        "Is ze echt dood?",
+        "veel te veel volts!",
+        "Black out!",
+        "Red en Laad!"
       ]
+    },
+    "NEVADA.TR2": {
+      "Names": [
+        "Woestijn Arend's",
+        "Waterig Woestijn",
+        "Blijf Gehydrateerd",
+        "Nee, Geen woestijn spoor hier",
+        "Dat is een hete Vallei!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Zugang zum Generator",
+          "kaart naar de Generaties",
+          "IK HEB DE KRACHT!",
+          "Wordt niet geÃ«lektrocuteerd!",
+          "Black out Sleutel"
+        ],
+        "Key2": [
+          "Mijnenveld  Sleutel",
+          "TNT Sleutel",
+          "Flipmap Sleutel",
+          "Toegang tot buitenaardse wezens",
+          "GROTE BOOM!",
+          "Azezas' sleutel naar de BOOM!"
+        ]
+      }
+    },
+    "COMPOUND.TR2": {
+      "Names": [
+        "Gewoon een andere gevangenis",
+        "Ontsnapping uit de gevangenis",
+        "De grote ontsnapping",
+        "Boris is hier!",
+        "Waar zijn me wapens?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Sterf bewaker, STERF!",
+          "Gewoon weer een Sleutelkaart",
+          "MasterCard",
+          "Sleutelkaart 1",
+          "Sleutelkaart 2",
+          "Ontsnap de gevangenis kaart"
+        ],
+        "Key2": [
+          "VisaCard",
+          "Sleutelkaart 1",
+          "Sleutelkaart 2",
+          "Geheime Sleutelkaart",
+          "Kredietkaart"
+        ],
+        "Puzzle1": [
+          "Blauwe Steen ding",
+          "Bougie 2",
+          "Zekering Ding 2",
+          "Blauwe USB stekker",
+          "Ook geen duplicaat"
+        ],
+        "Puzzle2": [
+          "Gele Steen Ding",
+          "Bougie 1",
+          "Zekering Ding 1",
+          "Gele USB stekker",
+          "Ook geen duplicaat"
+        ]
+      }
+    },
+    "AREA51.TR2": {
+      "Names": [
+        "Paul was hier!",
+        "Samenzweringstheorie plaats",
+        "Xenomorph was hier!",
+        "Onafhankelijkheidsdag",
+        "Aliens telefoon huis!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Raket sleutel",
+          "Rip rijdende Raket",
+          "SpaceX sleutel",
+          "Raket wasbeer",
+          "Elon Musk's sleutel",
+          "Je kan dit ook overslaan!",
+          "Geheime Nummers",
+          "Credit Card Pin",
+          "Echte raketwerper",
+          "Aliens dichtbij?!?"
+        ],
+        "Puzzle1": [
+          "Rapunzel's sleutel",
+          "Lange sleutel",
+          "Niet een drakentoren",
+          "Code sleutel",
+          "JIJ HEBT VALS GESPEELT!!!"
+        ],
+        "Puzzle2": [
+          "Je kan me niet overslaan!",
+          "Ik ben het weer!",
+          "UFO schijf",
+          "Een van de twee schijven",
+          "Waarom geen muziek? O.o"
+        ],
+        "Puzzle3": [
+          "Lara's feest Mix",
+          "Puzzel Element Muziek",
+          "Een van de twee schijven",
+          "Jungle Muziek",
+          "Je kan me overslaan!"
+        ],
+        "Puzzle4": [
+          "Magnetische NS sleutel",
+          "Metro sleutel",
+          "Trein station sleutel",
+          "Punaise",
+          "Beroemdheid",
+          "Drilboor"
+        ]
+      }
+    },
+    "ANTARC.TR2": {
+      "Names": [
+        "Geen sneeuwvlok",
+        "Speedboat 2.0",
+        "Het ijsblok",
+        "Wandeling in de vriezer",
+        "Tomatensoep iemand?"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Niet het deck",
+          "IjsSleutel_Gamer",
+          "Ã‰Ã©n sleutel om bang te maken",
+          "Bevroren sleutel"
+        ],
+        "Puzzle1": [
+          "Vergeet mij niet!",
+          "Zuurstok",
+          "Wrik strikje",
+          "Ik voel me sterker nu!",
+          "Von Koevoet"
+        ],
+        "Puzzle2": [
+          "Laat de rivier vrij",
+          "Open de dam",
+          "Water en Water en Water,",
+          "Toegang tot soep",
+          "Soepkeuken sleutel"
+        ]
+      }
+    },
+    "MINES.TR2": {
+      "Names": [
+        "Minecraft",
+        "WAAROM?!?!?!",
+        "Diepe, Bevroren zwem",
+        "Stormtrooper Baai",
+        "Vuur en kotsende monsters",
+        "GEWOON LIJDEN!"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Vergeet me niet!",
+          "Zuurstok",
+          "Wrik strikje",
+          "Ik voel me sterker nu!",
+          "Von Koevoet"
+        ],
+        "Puzzle2": [
+          "Duracell",
+          "9 Volt",
+          "Oplader",
+          "Blauw en Rood ding",
+          "Moersleutel Kraan Kracht!"
+        ],
+        "Puzzle3": [
+          "Diep Bevroren Ding",
+          "ShawCrank Aflossing",
+          "Draaiend Ding",
+          "Ben je al opgewonden?",
+          "Je gaat DOOD!"
+        ]
+      }
+    },
+    "CITY.TR2": {
+      "Names": [
+        "Brug sprong",
+        "Een insect's leven",
+        "Bij film 2.0",
+        "Hall van Elementen",
+        "4 manieren om te sterven!"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Duivel's sleutel",
+          "Deze meid staat niet in de fik!",
+          "Je kan ons overslagen!",
+          "tweeling sleutel",
+          "Sleutel van Hell",
+          "Kijk naar mij!",
+          "Koekie Monster's sleutel"
+        ],
+        "Puzzle1": [
+          "Schoonheidsmasker",
+          "Niet het gouden masker",
+          "fantoom van de opera",
+          "Masker Ball inkomend",
+          "HET MASKER"
+        ]
+      }
+    },
+    "CHAMBER.TR2": {
+      "Names": [
+        "Incy Wincy Spider",
+        "20 - 40 arend schoten",
+        "Japans aanbevolen",
+        "Gratis Willy",
+        "Willards Web"
+      ]
+    },
+    "STPAUL.TR2": {
+      "Names": [
+        "Shh het is een Secret",
+        "60/59",
+        "Onafgemaakte Zaken",
+        "Dodelijke Kathedraal",
+        "Geen Schade Onmogelijk"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Super Verborgen",
+          "Ladder, Ladder aan de Muur",
+          "Eindelijk mij gevonden?",
+          "Verstoppertje",
+          "Griepkamersleutel"
+        ]
+      }
     }
   }
 }
-

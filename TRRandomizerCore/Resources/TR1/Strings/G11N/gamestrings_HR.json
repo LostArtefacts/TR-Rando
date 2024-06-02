@@ -496,6 +496,60 @@
         "To je zamka",
         "Zagrli torza"
       ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Pijesak u svakom kutu",
+        "Samo krokodili",
+        "Vidimo se aligatore",
+        "Skliz - Pad - Spljuš",
+        "Trebat će ti prva pomoć"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Ključ od maslaca",
+          "Pred zlatni ključ",
+          "Sjajni ključ",
+          "Ohhh sjajno!",
+          "Briljatni ključ"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Lilin hram",
+        "Hram Kataline",
+        "Samo mačke ovdje...",
+        "Ovaj ne voli pse",
+        "Psi pazite se"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Previše ovog",
+          "Kul ključ",
+          "Koliko još?",
+          "Previše...",
+          "Mačji ključ"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Vrtić mumija",
+        "Špilja mesa",
+        "Špilja špageta",
+        "Netko za lazanje?",
+        "Atlantiđani....posvuda! Upomoć"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Povuci ručku!",
+        "Kriva ručka!",
+        "Zašto imamo ručku?",
+        "Vodi me odavdje!",
+        "Gotov posao!"
+      ]
     }
   }
 }

@@ -496,6 +496,60 @@
         "Es ist eine Falle",
         "Gib Torso eine Umarmung"
       ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "Sand in jeder Ritze",
+        "In ner Weile Krokodil",
+        "Sehen uns später Alligator",
+        "Rutschen - Fallen - Spritzen",
+        "Die Meds brauchst du noch!"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Butter Schlüssel",
+          "Vor-Gold Schlüssel",
+          "Glänzender Schlüssel",
+          "Uhhh glänzend!",
+          "Brillianten Schlüssel"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Lillys Tempel",
+        "Tempel der Cat-alina",
+        "Nichts außer Katzen hier",
+        "Der Bauer war kein Hundemensch",
+        "Hundemenschen draußen bleiben"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Zu viele davon",
+          "Hübscher Schlüssel",
+          "Wie viele noch?",
+          "*seufz* zu viele",
+          "Katzenschlüssel"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Mumien Kindergarten",
+        "Fleischhöhle",
+        "Spaghetti Höhle",
+        "Irgendwer Lust auf Lasagne?",
+        "Atlantaner... Atlantaner überall!!! HILFE!"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "Zieh den Hebel!",
+        "Falscher Hebel!",
+        "Warum haben wir diesen Hebel?",
+        "Hol mich hier raus!",
+        "Erledigte Angelegenheit!"
+      ]
     }
   }
 }
