@@ -60,9 +60,9 @@ public partial class App : Application
 
         TRRandomizerCoord.Instance.Initialise("TR2Rando", Version, TaggedVersion, new ModificationStamp
         {
-            English = "Modified by TRRando",
-            French = "Modifié par TRRando",
-            German = "Geändert von TRRando"
+            English = "TRRando",
+            French = "TRRando",
+            German = "TRRando"
         });
     }
 }
