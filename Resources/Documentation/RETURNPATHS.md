@@ -1,6 +1,6 @@
 # Return paths
 
-Return paths can be added to the majority of levels, which allows repeat exploration without having to save and load. In some cases - such as The River Ganges - it also allows exploring levels fully where it would otherwise not be possible.
+Return paths can be added to the majority of levels, which allows repeat exploration without having to save and load. In some cases - such as The River Ganges - it also allows exploring levels fully where it would otherwise not be possible. Return paths cannot currently be applied to TR I-III Remastered.
 
 Following are details on the return paths that are available. See `Global Settings` for managing whether or not these paths are added.
 
