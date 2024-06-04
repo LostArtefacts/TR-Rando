@@ -1,5 +1,7 @@
 ﻿using System.Runtime.ExceptionServices;
 using TRGE.Core;
+using TRLevelControl.Model;
+using TRLevelControl;
 
 namespace TRRandomizerCore.Processors;
 
@@ -49,6 +51,29 @@ public abstract class AbstractLevelProcessor<S, C> : ILevelProcessor where S : A
     }
 
     protected abstract void SaveLevel(C level);
+
+    public TRGData LoadTRGData(string name)
+    {
+        lock (_controlLock)
+        {
+            string fullPath = Path.Combine(BasePath, name);
+            return File.Exists(fullPath) ? TRGControlBase.Read(fullPath) : null;
+        }
+    }
+
+    public void SaveTRGData(TRGData data, string name)
+    {
+        if (data == null)
+        {
+            return;
+        }
+
+        lock (_controlLock)
+        {
+            string fullPath = Path.Combine(BasePath, name);
+            TRGControlBase.Write(data, fullPath);
+        }
+    }
 
     protected void SaveScript()
     {
