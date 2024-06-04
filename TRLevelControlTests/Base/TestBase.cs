@@ -257,6 +257,26 @@ public class TestBase
         CollectionAssert.AreEqual(originalLines.Distinct().ToList(), outputLines);
     }
 
+    public static void ReadWriteTRG(string levelName, TRGameVersion version)
+    {
+        levelName = Path.GetFileNameWithoutExtension(levelName) + ".TRG";
+        string pathI = GetReadPath(levelName, version, true);
+
+        using FileStream dataStream = File.OpenRead(pathI);
+        using MemoryStream inputStream = new();
+        using MemoryStream outputStream = new();
+
+        dataStream.CopyTo(inputStream);
+        byte[] inputData = inputStream.ToArray();
+        inputStream.Position = 0;
+
+        ObserverBase observer = new();
+        TRGData data = TRGControlBase.Read(inputStream);
+        TRGControlBase.Write(data, outputStream);
+
+        observer.TestOutput(inputData, outputStream.ToArray());
+    }
+
     public static IEnumerable<object[]> GetLevelNames(IEnumerable<string> names)
     {
         foreach (string lvl in names)

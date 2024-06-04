@@ -376,6 +376,13 @@ public class TRLevelWriter : BinaryWriter
         Write(reverse ? vertex.X : vertex.Z);
     }
 
+    public void Write(TRVertex8 vertex)
+    {
+        Write(vertex.X);
+        Write(vertex.Y);
+        Write(vertex.Z);
+    }
+
     public void Write(TRVertex32 vertex)
     {
         Write(vertex.X);

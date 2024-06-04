@@ -40,6 +40,13 @@ public class IOTests : TestBase
 
     [TestMethod]
     [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestTRGReadWrite(string levelName)
+    {
+        ReadWriteTRG(levelName, TRGameVersion.TR2);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
     public void TestAgressiveFloorData(string levelName)
     {
         TR2Level level = GetTR2Level(levelName);
