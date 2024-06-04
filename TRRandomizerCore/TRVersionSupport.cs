@@ -73,6 +73,7 @@ internal class TRVersionSupport
         TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
         TRRandomizerType.Text,
+        TRRandomizerType.Texture,
     };
 
     private static readonly List<TRRandomizerType> _tr2Types = new()
@@ -134,6 +135,7 @@ internal class TRVersionSupport
         TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
         TRRandomizerType.Text,
+        TRRandomizerType.Texture,
     };
 
     private static readonly List<TRRandomizerType> _tr3Types = new()
@@ -192,6 +194,7 @@ internal class TRVersionSupport
         TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
         TRRandomizerType.Text,
+        TRRandomizerType.Texture,
     };
 
     private static readonly Dictionary<TRVersion, TRVersionSupportGroup> _supportedTypes = new()
