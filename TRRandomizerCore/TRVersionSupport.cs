@@ -10,6 +10,7 @@ internal class TRVersionSupport
         TRRandomizerType.Ammoless,
         TRRandomizerType.AtlanteanEggBehaviour,
         TRRandomizerType.Audio,
+        TRRandomizerType.BlankTracks,
         TRRandomizerType.Braid,
         TRRandomizerType.ChallengeRooms,
         TRRandomizerType.ClonedEnemies,
@@ -60,6 +61,7 @@ internal class TRVersionSupport
 
     private static readonly List<TRRandomizerType> _tr1RTypes = new()
     {
+        TRRandomizerType.AmbientTracks,
         TRRandomizerType.AtlanteanEggBehaviour,
         TRRandomizerType.Audio,
         TRRandomizerType.Enemy,
@@ -84,6 +86,7 @@ internal class TRVersionSupport
         TRRandomizerType.Ammoless,
         TRRandomizerType.Audio,
         TRRandomizerType.BirdMonsterBehaviour,
+        TRRandomizerType.BlankTracks,
         TRRandomizerType.Braid,
         TRRandomizerType.DocileBirdMonster,
         TRRandomizerType.DisableDemos,
@@ -125,6 +128,7 @@ internal class TRVersionSupport
 
     private static readonly List<TRRandomizerType> _tr2RTypes = new()
     {
+        TRRandomizerType.AmbientTracks,
         TRRandomizerType.Audio,
         TRRandomizerType.BirdMonsterBehaviour,
         TRRandomizerType.Enemy,
@@ -147,6 +151,7 @@ internal class TRVersionSupport
         TRRandomizerType.AmbientTracks,
         TRRandomizerType.Ammoless,
         TRRandomizerType.Audio,
+        TRRandomizerType.BlankTracks,
         TRRandomizerType.Braid,
         TRRandomizerType.DynamicEnemyTextures,
         TRRandomizerType.Enemy,
@@ -186,6 +191,7 @@ internal class TRVersionSupport
 
     private static readonly List<TRRandomizerType> _tr3RTypes = new()
     {
+        TRRandomizerType.AmbientTracks,
         TRRandomizerType.Audio,
         TRRandomizerType.Enemy,
         TRRandomizerType.GlitchedSecrets,

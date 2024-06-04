@@ -3554,7 +3554,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _allowGymOutfit.IsAvailable = IsGymOutfitTypeSupported;
 
         _changeAmbientTracks.IsAvailable = IsAmbientTracksTypeSupported;
-        _includeBlankTracks.IsAvailable = IsAmbientTracksTypeSupported;
+        _includeBlankTracks.IsAvailable = IsBlankTracksTypeSupported;
         _separateSecretTracks.IsAvailable = IsSecretAudioSupported;
 
         _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = _changeDoorSFX.IsAvailable = IsSFXTypeSupported;
@@ -4232,6 +4232,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);
     public bool IsAudioTypeSupported => IsRandomizationSupported(TRRandomizerType.Audio);
     public bool IsAmbientTracksTypeSupported => IsRandomizationSupported(TRRandomizerType.AmbientTracks);
+    public bool IsBlankTracksTypeSupported => IsRandomizationSupported(TRRandomizerType.BlankTracks);
     public bool IsSecretAudioSupported => IsRandomizationSupported(TRRandomizerType.SecretAudio);
     public bool IsSFXTypeSupported => IsRandomizationSupported(TRRandomizerType.SFX);
     public bool IsVFXTypeSupported => IsRandomizationSupported(TRRandomizerType.VFX);

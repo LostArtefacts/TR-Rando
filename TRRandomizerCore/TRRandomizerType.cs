@@ -66,6 +66,7 @@ public enum TRRandomizerType
     GameMode,
     ItemDrops,
     LevelCount,
+    BlankTracks,
     TextureSwap,
     Wireframe,
 }
