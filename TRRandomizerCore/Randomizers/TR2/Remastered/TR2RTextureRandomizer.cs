@@ -1,4 +1,5 @@
-﻿using TRLevelControl.Model;
+﻿using TRGE.Core;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Randomizers;
 
@@ -6,26 +7,27 @@ public class TR2RTextureRandomizer : BaseTR2RRandomizer
 {
     public override void Randomize(int seed)
     {
-        TextureAllocator allocator = new()
+        TextureAllocator<TR2Type, TR2RAlias> allocator = new(TRGameVersion.TR2)
         {
             Generator = new(seed),
             Settings = Settings,
         };
 
-        allocator.LoadData(Levels, level =>
+        foreach (TRRScriptedLevel level in Levels)
         {
-            TRGData data = LoadTRGData(level.TrgFileBaseName);
-            return TriggerProgress() ? data : null;
-        });
-
-        if (SaveMonitor.IsCancelled)
-        {
-            return;
+            TRGData trgData = LoadTRGData(level.TrgFileBaseName);
+            Dictionary<TR2Type, TR2RAlias> mapData = LoadMapData(level.MapFileBaseName);
+            allocator.LoadData(level, trgData, mapData);
+            if (!TriggerProgress())
+            {
+                return;
+            }
         }
 
-        allocator.Allocate(TRGameVersion.TR2, (level, data) =>
+        allocator.Allocate((level, trgData, mapData) =>
         {
-            SaveTRGData(data, level.TrgFileBaseName);
+            SaveMapData(mapData, level.MapFileBaseName);
+            SaveTRGData(trgData, level.TrgFileBaseName);
             return TriggerProgress();
         });
     }
