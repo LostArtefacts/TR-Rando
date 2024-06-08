@@ -3,12 +3,13 @@ using TRGE.Core;
 using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Randomizers;
 
 public class TextureAllocator
 {
-    private readonly Dictionary<TRGameVersion, TRRTexInfo> _texInfo;
+    private readonly Dictionary<TRGameVersion, TRTexInfo> _texInfo;
     private Dictionary<TRRScriptedLevel, TRGData> _levelData;
 
     public Random Generator { get; set; }
@@ -16,7 +17,7 @@ public class TextureAllocator
 
     public TextureAllocator()
     {
-        _texInfo = JsonConvert.DeserializeObject<Dictionary<TRGameVersion, TRRTexInfo>>(File.ReadAllText(@"Resources\Shared\Graphics\TRRTex.json"));
+        _texInfo = JsonConvert.DeserializeObject<Dictionary<TRGameVersion, TRTexInfo>>(File.ReadAllText(@"Resources\Shared\Graphics\TRRTex.json"));
     }
 
     public void LoadData(List<TRRScriptedLevel> levels, Func<TRRScriptedLevel, TRGData> loadData)
@@ -35,33 +36,41 @@ public class TextureAllocator
     public void Allocate(TRGameVersion version, Func<TRRScriptedLevel, TRGData, bool> saveData)
     {
         Dictionary<TRRScriptedLevel, List<ushort>> textureCache = _levelData.ToDictionary(l => l.Key, l => l.Value.Textures.ToList());
-        TRRTexInfo texInfo = _texInfo[version];
+        TRTexInfo texInfo = _texInfo[version];
 
         // Temporary settings
         int mode = 1;
         bool retainMode = true;
 
         List<TRRScriptedLevel> levels = new(_levelData.Keys);
+        List<TRRScriptedLevel> levelSwaps = new();
+        if (mode == 1)
+        {
+            levelSwaps.AddRange(levels);
+            do
+            {
+                levelSwaps.Shuffle(Generator);
+            }
+            while (levelSwaps.Any(l => levels.IndexOf(l) == levelSwaps.IndexOf(l)));
+        }
+
         List<ushort> allTextures = new(textureCache.Values.SelectMany(t => t).Distinct());
 
         foreach (var (level, data) in _levelData)
         {
-            List<ushort> newTextures;
+            List<ushort> baseTextures = new();
+            List<ushort> newTextures = new();
             if (mode == 0)
             {
-                newTextures = new(data.Textures);
+                baseTextures.AddRange(data.Textures);
+                newTextures.AddRange(data.Textures);
             }
             else if (mode == 1)
             {
-                TRRScriptedLevel nextLevel;
-                do
-                {
-                    nextLevel = levels.RandomItem(Generator);
-                }
-                while (level == nextLevel);
-                levels.Remove(nextLevel);
-
+                TRRScriptedLevel nextLevel = levelSwaps[levels.IndexOf(level)];
+                baseTextures.AddRange(textureCache[nextLevel]);
                 newTextures = textureCache[nextLevel];
+
                 while (newTextures.Count < data.Textures.Count)
                 {
                     newTextures.Add(newTextures.RandomItem(Generator));
@@ -69,28 +78,30 @@ public class TextureAllocator
             }
             else
             {
-                newTextures = allTextures.RandomSelection(Generator, data.Textures.Count);
+                baseTextures.AddRange(data.Textures);
+                newTextures.AddRange(allTextures.RandomSelection(Generator, data.Textures.Count));
             }
 
             newTextures.Shuffle(Generator);
 
             if (retainMode)
             {
-                // Restore any that need to remain, like mist and skyboxes, and ensure everything
-                // else is a usable texture.
                 for (int i = 0; i < data.Textures.Count; i++)
                 {
-                    if (texInfo.FixedIDs.Contains(data.Textures[i]))
+                    ushort originalTexture = data.Textures[i];
+                    ushort newTexture = newTextures[i];
+
+                    // Try to match levers, ladders and windows/gates etc with similar from the import set.
+                    // By default, ensure everything else is opaque.
+                    if (!texInfo.Categories.Keys.Any(c => SelectTexture(originalTexture, ref newTexture, texInfo, c, baseTextures)))
                     {
-                        newTextures[i] = data.Textures[i];
-                    }
-                    else
-                    {
-                        while (!texInfo.UsableIDs.Contains(newTextures[i]))
+                        while (!texInfo.Categories[TRTexCategory.Opaque].Contains(newTexture))
                         {
-                            newTextures[i] = newTextures.RandomItem(Generator);
+                            newTexture = newTextures.RandomItem(Generator);
                         }
                     }
+
+                    newTextures[i] = newTexture;
                 }
             }
 
@@ -103,9 +114,36 @@ public class TextureAllocator
         }
     }
 
-    class TRRTexInfo
+    private bool SelectTexture(ushort originalTexture, ref ushort targetTexture,
+        TRTexInfo texInfo, TRTexCategory category, List<ushort> baseTextures)
     {
-        public SortedSet<ushort> UsableIDs { get; set; }
-        public SortedSet<ushort> FixedIDs { get; set; }
+        if (category == TRTexCategory.Opaque)
+        {
+            return false;
+        }
+
+        SortedSet<ushort> controlSet = texInfo.Categories[category];
+        if (!controlSet.Contains(originalTexture))
+        {
+            return false;
+        }
+
+        if (category == TRTexCategory.Fixed)
+        {
+            targetTexture = originalTexture;
+        }
+        else if (!baseTextures.Any(controlSet.Contains))
+        {
+            targetTexture = texInfo.Defaults[category];
+        }
+        else
+        {
+            while (!controlSet.Contains(targetTexture))
+            {
+                targetTexture = baseTextures.RandomItem(Generator);
+            }
+        }
+
+        return true;
     }
 }
