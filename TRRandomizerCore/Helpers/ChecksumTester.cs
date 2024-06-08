@@ -146,6 +146,9 @@ public class ChecksumTester : IChecksumTester
         "79e3f05f963acac6f864ba81555cc15d", // MONASTRY.TR2
         "cf4f784bdfa0b5794b3437e4d9ed04d8", // ICECAVE.TR2
 
+        // TR2R V1.3+
+        "ef2f5a3e08bd10655c38707e6657c687", // LEVEL5.TR2
+
         // TR3
         "5e11d251ddb12b98ebead1883dc12d2a", // HOUSE.TR2
         "9befdc5075fdb84450d2ed0533719b12", // JUNGLE.TR2 (International)
