@@ -550,6 +550,221 @@ public static class TRRExporter
 
     private static readonly List<Dictionary<string, Dictionary<TR3Type, TRItemFlags>>> _tr3ItemFlags = new()
     {
-
+        new()
+        {
+            [TR3LevelNames.ASSAULT] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door2] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick,
+                [TR3Type.Door3] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick,
+                [TR3Type.Door4] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick,
+                [TR3Type.Door5] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick,
+                [TR3Type.Door6] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick,
+                [TR3Type.Door7] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick,
+                [TR3Type.Door8] = TRItemFlags.LeftDoor | TRItemFlags.EightClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+            },
+        },
+        new()
+        {
+            [TR3LevelNames.JUNGLE] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door8] = TRItemFlags.LiftingDoor | TRItemFlags.EightClick,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.WallSwitch] = TRItemFlags.WallSwitch,
+            },
+            [TR3LevelNames.RUINS] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.EightClick | TRItemFlags.PairA,
+                [TR3Type.Door2] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door3] = TRItemFlags.RightDoor | TRItemFlags.EightClick | TRItemFlags.PairA,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR3Type.WallSwitch] = TRItemFlags.WallSwitch,
+            },
+            [TR3LevelNames.GANGES] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.EightClick | TRItemFlags.PairA,
+                [TR3Type.Door2] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door3] = TRItemFlags.RightDoor | TRItemFlags.EightClick | TRItemFlags.PairA,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+            },
+            [TR3LevelNames.CAVES] = new()
+            {
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+            },
+        },
+        new()
+        {
+            [TR3LevelNames.COASTAL] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.EightClick,
+                [TR3Type.Door4] = TRItemFlags.LeftDoor| TRItemFlags.FourClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+            },
+            [TR3LevelNames.CRASH] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.SixClick,
+                [TR3Type.Door2] = TRItemFlags.LeftDoor| TRItemFlags.FourClick,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.Trapdoor2] = TRItemFlags.Trapdoor,
+                [TR3Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR3Type.WallSwitch] = TRItemFlags.WallSwitch,
+            },
+            [TR3LevelNames.MADUBU] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.EightClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+            },
+            [TR3LevelNames.PUNA] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door2] = TRItemFlags.RightDoor | TRItemFlags.FiveClick | TRItemFlags.PairA,
+                [TR3Type.Door3] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick | TRItemFlags.PairA,
+                [TR3Type.Door4] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+                [TR3Type.WallSwitch] = TRItemFlags.WallSwitch,
+            },
+        },
+        new()
+        {
+            [TR3LevelNames.THAMES] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+                [TR3Type.PushableBlock2] = TRItemFlags.PushBlock,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.Trapdoor2] = TRItemFlags.Trapdoor,
+                [TR3Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+            },
+            [TR3LevelNames.ALDWYCH] = new()
+            {
+                // Door1 is mini-door with a static mesh, so ignored
+                [TR3Type.Door2] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door3] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door4] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door5] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door6] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door7] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.FallingBlock] = TRItemFlags.FallingBlock,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.Trapdoor2] = TRItemFlags.Trapdoor,
+            },
+            [TR3LevelNames.LUDS] = new()
+            {
+                [TR3Type.Door2] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door3] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door4] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door7] = TRItemFlags.RightDoor | TRItemFlags.FiveClick | TRItemFlags.PairA,
+                [TR3Type.Door8] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick | TRItemFlags.PairA,
+                [TR3Type.FallingBlock] = TRItemFlags.FallingBlock,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+                [TR3Type.PushableBlock2] = TRItemFlags.PushBlock,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+            },
+            [TR3LevelNames.CITY] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+            },
+            [TR3LevelNames.HALLOWS] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door5] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.FallingBlock] = TRItemFlags.FallingBlock,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.WallSwitch] = TRItemFlags.WallSwitch,
+            },
+        },
+        new()
+        {
+            [TR3LevelNames.NEVADA] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door2] = TRItemFlags.LeftDoor | TRItemFlags.EightClick | TRItemFlags.PairA,
+                [TR3Type.Door3] = TRItemFlags.RightDoor | TRItemFlags.EightClick | TRItemFlags.PairA,
+                [TR3Type.Door4] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+            },
+            [TR3LevelNames.HSC] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door2] = TRItemFlags.RightDoor | TRItemFlags.FiveClick | TRItemFlags.PairA,
+                [TR3Type.Door3] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick | TRItemFlags.PairA,
+                [TR3Type.Door4] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door5] = TRItemFlags.LiftingDoor | TRItemFlags.FourClick,
+                [TR3Type.Door6] = TRItemFlags.LiftingDoor | TRItemFlags.FourClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+            },
+            [TR3LevelNames.AREA51] = new()
+            {
+                // Doors 7 and 8 are non-standard so ignored
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door4] = TRItemFlags.RightDoor | TRItemFlags.FiveClick | TRItemFlags.PairA,
+                [TR3Type.Door5] = TRItemFlags.LeftDoor | TRItemFlags.FiveClick | TRItemFlags.PairA,
+                [TR3Type.Door6] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.Trapdoor2] = TRItemFlags.Trapdoor,
+            },
+        },
+        new()
+        {
+            [TR3LevelNames.ANTARC] = new()
+            {
+                // Doors 1, 2 and 5 are mini-doors; door6 is a gauge
+                [TR3Type.Door3] = TRItemFlags.LiftingDoor | TRItemFlags.FourClick,
+                [TR3Type.Door4] = TRItemFlags.LeftDoor | TRItemFlags.SixClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.WallSwitch] = TRItemFlags.WallSwitch,
+            },
+            [TR3LevelNames.RXTECH] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door3] = TRItemFlags.LiftingDoor | TRItemFlags.FourClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+            },
+            [TR3LevelNames.TINNOS] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.EightClick | TRItemFlags.PairA,
+                [TR3Type.Door2] = TRItemFlags.RightDoor | TRItemFlags.EightClick | TRItemFlags.PairA,
+                [TR3Type.Door3] = TRItemFlags.LiftingDoor | TRItemFlags.FourClick,
+                [TR3Type.Door4] = TRItemFlags.LiftingDoor | TRItemFlags.EightClick,
+                [TR3Type.Door6] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door7] = TRItemFlags.LiftingDoor | TRItemFlags.FourClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+                [TR3Type.PushableBlock1] = TRItemFlags.PushBlock,
+                [TR3Type.Trapdoor1] = TRItemFlags.Trapdoor,
+                [TR3Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR3Type.WallSwitch] = TRItemFlags.WallSwitch,
+            },
+            [TR3LevelNames.WILLIE] = new()
+            {
+                [TR3Type.Door1] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
+                [TR3Type.Door2] = TRItemFlags.LeftDoor | TRItemFlags.SixClick,
+                [TR3Type.PushButtonSwitch] = TRItemFlags.PushButton,
+            },
+        },
     };
 }
