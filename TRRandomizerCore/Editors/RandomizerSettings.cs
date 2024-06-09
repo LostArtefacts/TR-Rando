@@ -50,6 +50,9 @@ public class RandomizerSettings
     public bool IncludeExtraPickups { get; set; }
     public bool DevelopmentMode { get; set; }
     public ItemDifficulty RandoItemDifficulty { get; set; }
+    public TextureMode TextureMode { get; set; }
+    public bool MatchTextureTypes { get; set; }
+    public bool MatchTextureItems { get; set; }
     public bool PersistTextureVariants { get; set; }
     public bool RandomizeWaterColour { get; set; }
     public bool RetainMainLevelTextures { get; set; }
@@ -251,6 +254,9 @@ public class RandomizerSettings
 
         RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
         TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
+        TextureMode = (TextureMode)config.GetEnum(nameof(TextureMode), typeof(TextureMode), TextureMode.Game);
+        MatchTextureTypes = config.GetBool(nameof(MatchTextureTypes), true);
+        MatchTextureItems = config.GetBool(nameof(MatchTextureItems), true);
         PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
         RandomizeWaterColour = config.GetBool(nameof(RandomizeWaterColour), true);
         RetainMainLevelTextures = config.GetBool(nameof(RetainMainLevelTextures));
@@ -416,6 +422,9 @@ public class RandomizerSettings
 
         config[nameof(RandomizeTextures)] = RandomizeTextures;
         config[nameof(TextureSeed)] = TextureSeed;
+        config[nameof(TextureMode)] = TextureMode;
+        config[nameof(MatchTextureTypes)] = MatchTextureTypes;
+        config[nameof(MatchTextureItems)] = MatchTextureItems;
         config[nameof(PersistTextureVariants)] = PersistTextureVariants;
         config[nameof(RandomizeWaterColour)] = RandomizeWaterColour;
         config[nameof(RetainMainLevelTextures)] = RetainMainLevelTextures;

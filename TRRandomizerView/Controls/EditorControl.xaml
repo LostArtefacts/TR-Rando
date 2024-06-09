@@ -308,7 +308,8 @@
                                         MainDescription="Customize the texture randomization."
                                         BoolItemsSource="{Binding Data.TextureBoolItemControls, Source={StaticResource proxy}}"
                                         HasBoolItems="True"
-                                        HasTextureOptions="True"
+                                        HasWireframeOptions="{Binding Data.IsWireframeTypeSupported, Source={StaticResource proxy}}"
+                                        HasTextureSwapOptions="{Binding Data.IsTextureSwapTypeSupported, Source={StaticResource proxy}}"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>

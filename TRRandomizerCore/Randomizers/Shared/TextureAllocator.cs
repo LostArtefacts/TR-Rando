@@ -34,15 +34,11 @@ public class TextureAllocator<T, R>
     public void Allocate(Func<TRRScriptedLevel, TRGData, Dictionary<T, R>, bool> saveData)
     {
         Dictionary<TRRScriptedLevel, List<ushort>> textureCache = _trgData.ToDictionary(l => l.Key, l => l.Value.Textures.ToList());
-
-        // Temporary settings
-        int mode = 1;
-        bool retainMode = true;
-        bool matchItems = true;
-
-        List<TRRScriptedLevel> levels = new(_trgData.Keys);
+        List<ushort> allTextures = new(textureCache.Values.SelectMany(t => t).Distinct());
+        List<TRRScriptedLevel> levels = new(_trgData.Keys);        
         List<TRRScriptedLevel> levelSwaps = new();
-        if (mode == 1)
+
+        if (Settings.TextureMode == TextureMode.Game)
         {
             levelSwaps.AddRange(levels);
             do
@@ -52,18 +48,16 @@ public class TextureAllocator<T, R>
             while (levelSwaps.Any(l => levels.IndexOf(l) == levelSwaps.IndexOf(l)));
         }
 
-        List<ushort> allTextures = new(textureCache.Values.SelectMany(t => t).Distinct());
-
         foreach (var (level, trgData) in _trgData)
         {
             List<ushort> baseTextures = new();
             List<ushort> newTextures = new();
-            if (mode == 0)
+            if (Settings.TextureMode == TextureMode.Level)
             {
                 baseTextures.AddRange(trgData.Textures);
                 newTextures.AddRange(trgData.Textures);
             }
-            else if (mode == 1)
+            else if (Settings.TextureMode == TextureMode.Game)
             {
                 TRRScriptedLevel nextLevel = levelSwaps[levels.IndexOf(level)];
                 baseTextures.AddRange(textureCache[nextLevel]);
@@ -82,7 +76,7 @@ public class TextureAllocator<T, R>
 
             newTextures.Shuffle(Generator);
 
-            if (retainMode)
+            if (Settings.MatchTextureTypes)
             {
                 for (int i = 0; i < trgData.Textures.Count; i++)
                 {
@@ -103,7 +97,7 @@ public class TextureAllocator<T, R>
                 }
             }
 
-            Dictionary<T, R> itemRemp = mode == 1 && matchItems
+            Dictionary<T, R> itemRemp = Settings.TextureMode == TextureMode.Game && Settings.MatchTextureItems
                 ? RemapItems(level, levelSwaps[levels.IndexOf(level)])
                 : null;
 

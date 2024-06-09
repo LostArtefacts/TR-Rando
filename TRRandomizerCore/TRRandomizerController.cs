@@ -924,6 +924,24 @@ public class TRRandomizerController
         set => LevelRandomizer.TextureSeed = value;
     }
 
+    public TextureMode TextureMode
+    {
+        get => LevelRandomizer.TextureMode;
+        set => LevelRandomizer.TextureMode = value;
+    }
+
+    public bool MatchTextureTypes
+    {
+        get => LevelRandomizer.MatchTextureTypes;
+        set => LevelRandomizer.MatchTextureTypes = value;
+    }
+
+    public bool MatchTextureItems
+    {
+        get => LevelRandomizer.MatchTextureItems;
+        set => LevelRandomizer.MatchTextureItems = value;
+    }
+
     public bool PersistTextures
     {
         get => LevelRandomizer.PersistTextureVariants;
