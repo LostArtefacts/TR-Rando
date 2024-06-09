@@ -65,7 +65,7 @@ public static class TRRExporter
                 ItemFlags = itemFlags
             };
 
-            File.WriteAllText($@"{version}\DDS\texinfo.json", JsonConvert.SerializeObject(info));
+            File.WriteAllText(Path.GetFullPath($@"..\..\..\TRRandomizerCore\Resources\{version}\Textures\texinfo.json"), JsonConvert.SerializeObject(info));
         }
 
         switch (version)
@@ -108,6 +108,8 @@ public static class TRRExporter
                 [TR1Type.Door4] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
                 [TR1Type.FallingBlock] = TRItemFlags.FallingBlock,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR1Type.DartEmitter] = TRItemFlags.Darts | TRItemFlags.PairA,
+                [TR1Type.Dart_H] = TRItemFlags.Darts | TRItemFlags.PairB,
             },
             [TR1LevelNames.VILCABAMBA] = new()
             {
@@ -141,6 +143,7 @@ public static class TRRExporter
                 [TR1Type.FallingBlock] = TRItemFlags.FallingBlock,
                 [TR1Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR1Type.RollingBall] = TRItemFlags.Boulder,
             },
         },
         new()
@@ -158,6 +161,7 @@ public static class TRRExporter
                 [TR1Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
                 [TR1Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR1Type.RollingBall] = TRItemFlags.Boulder,
             },
             [TR1LevelNames.COLOSSEUM] = new()
             {
@@ -169,6 +173,7 @@ public static class TRRExporter
                 [TR1Type.Door8] = TRItemFlags.LeftDoor | TRItemFlags.FourClick,
                 [TR1Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR1Type.RollingBall] = TRItemFlags.Boulder,
             },
             [TR1LevelNames.MIDAS] = new()
             {
@@ -209,6 +214,8 @@ public static class TRRExporter
                 [TR1Type.SlammingDoor] = TRItemFlags.SlammingDoor,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
                 [TR1Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR1Type.DartEmitter] = TRItemFlags.Darts | TRItemFlags.PairA,
+                [TR1Type.Dart_H] = TRItemFlags.Darts | TRItemFlags.PairB,
             },
         },
         new()
@@ -224,6 +231,7 @@ public static class TRRExporter
                 [TR1Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
                 [TR1Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR1Type.RollingBall] = TRItemFlags.Boulder,
             },
             [TR1LevelNames.OBELISK] = new()
             {
@@ -262,6 +270,7 @@ public static class TRRExporter
                 [TR1Type.PushBlock3] = TRItemFlags.PushBlock,
                 [TR1Type.PushBlock4] = TRItemFlags.PushBlock,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR1Type.RollingBall] = TRItemFlags.Boulder,
             },
             [TR1LevelNames.ATLANTIS] = new()
             {
@@ -276,6 +285,9 @@ public static class TRRExporter
                 [TR1Type.SlammingDoor] = TRItemFlags.SlammingDoor,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
                 [TR1Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR1Type.RollingBall] = TRItemFlags.Boulder,
+                [TR1Type.DartEmitter] = TRItemFlags.Darts | TRItemFlags.PairA,
+                [TR1Type.Dart_H] = TRItemFlags.Darts | TRItemFlags.PairB,
             },
             [TR1LevelNames.PYRAMID] = new()
             {
@@ -285,6 +297,9 @@ public static class TRRExporter
                 [TR1Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR1Type.SlammingDoor] = TRItemFlags.SlammingDoor,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR1Type.RollingBall] = TRItemFlags.Boulder,
+                [TR1Type.DartEmitter] = TRItemFlags.Darts | TRItemFlags.PairA,
+                [TR1Type.Dart_H] = TRItemFlags.Darts | TRItemFlags.PairB,
             }
         },
     };
@@ -322,6 +337,9 @@ public static class TRRExporter
                 [TR2Type.FallingBlock] = TRItemFlags.FallingBlock,
                 [TR2Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.RollingBall] = TRItemFlags.Boulder | TRItemFlags.PairA,
+                [TR2Type.TeethSpikesOrGlassShards] = TRItemFlags.Spikes,
+                [TR2Type.RollingSpindle] = TRItemFlags.Spindle,
             },
             [TR2LevelNames.VENICE] = new()
             {
@@ -371,6 +389,8 @@ public static class TRRExporter
                 [TR2Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR2Type.Trapdoor1] = TRItemFlags.Trapdoor,
                 [TR2Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR2Type.BouldersOrSnowballs] = TRItemFlags.Boulder | TRItemFlags.PairB,
+                [TR2Type.TeethSpikesOrGlassShards] = TRItemFlags.Spikes,
             },
         },
         new()
@@ -386,6 +406,7 @@ public static class TRRExporter
                 [TR2Type.Trapdoor1] = TRItemFlags.Trapdoor,
                 [TR2Type.Trapdoor2] = TRItemFlags.Trapdoor,
                 [TR2Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR2Type.RollingStorageDrums] = TRItemFlags.Boulder | TRItemFlags.PairC,
             },
             [TR2LevelNames.DA] = new()
             {
@@ -428,6 +449,8 @@ public static class TRRExporter
                 [TR2Type.Trapdoor2] = TRItemFlags.Trapdoor,
                 [TR2Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.RollingStorageDrums] = TRItemFlags.Boulder | TRItemFlags.PairC,
+                [TR2Type.TeethSpikesOrGlassShards] = TRItemFlags.Spikes,
             },
             [TR2LevelNames.LQ] = new()
             {
@@ -441,6 +464,8 @@ public static class TRRExporter
                 [TR2Type.Trapdoor1] = TRItemFlags.Trapdoor,
                 [TR2Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.RollingStorageDrums] = TRItemFlags.Boulder | TRItemFlags.PairC,
+                [TR2Type.TeethSpikesOrGlassShards] = TRItemFlags.Spikes,
             },
             [TR2LevelNames.DECK] = new()
             {
@@ -453,6 +478,7 @@ public static class TRRExporter
                 [TR2Type.Trapdoor1] = TRItemFlags.Trapdoor,
                 [TR2Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.TeethSpikesOrGlassShards] = TRItemFlags.Spikes,
             },
         },
         new()
@@ -465,6 +491,7 @@ public static class TRRExporter
                 [TR2Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR2Type.Trapdoor1] = TRItemFlags.Trapdoor | TRItemFlags.EightClick,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.BouldersOrSnowballs] = TRItemFlags.Boulder | TRItemFlags.PairB,
             },
             [TR2LevelNames.MONASTERY] = new()
             {
@@ -478,6 +505,8 @@ public static class TRRExporter
                 [TR2Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR2Type.Trapdoor1] = TRItemFlags.Trapdoor,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.RollingBall] = TRItemFlags.Boulder | TRItemFlags.PairA,
+                [TR2Type.RollingSpindle] = TRItemFlags.Spindle,
             },
             [TR2LevelNames.COT] = new()
             {
@@ -489,6 +518,8 @@ public static class TRRExporter
                 [TR2Type.PushBlock2] = TRItemFlags.PushBlock,
                 [TR2Type.Trapdoor2] = TRItemFlags.Trapdoor | TRItemFlags.EightClick,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.BouldersOrSnowballs] = TRItemFlags.Boulder | TRItemFlags.PairB,
+                [TR2Type.TeethSpikesOrGlassShards] = TRItemFlags.Spikes,
             },
             [TR2LevelNames.CHICKEN] = new()
             {
@@ -501,6 +532,8 @@ public static class TRRExporter
                 [TR2Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR2Type.Trapdoor1] = TRItemFlags.Trapdoor,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.BouldersOrSnowballs] = TRItemFlags.Boulder | TRItemFlags.PairB,
+                [TR2Type.TeethSpikesOrGlassShards] = TRItemFlags.Spikes,
             },
         },
         new()
@@ -516,12 +549,16 @@ public static class TRRExporter
                 [TR2Type.LiftingDoor2] = TRItemFlags.LiftingDoor | TRItemFlags.FourClick,
                 [TR2Type.LiftingDoor3] = TRItemFlags.LiftingDoor | TRItemFlags.EightClick,
                 [TR2Type.FallingBlock] = TRItemFlags.FallingBlock,
+                [TR2Type.PushButtonSwitch] = TRItemFlags.PushButton,
                 [TR2Type.BouncePad] = TRItemFlags.Springboard,
                 [TR2Type.PushBlock2] = TRItemFlags.PushBlock,
                 [TR2Type.Trapdoor1] = TRItemFlags.Trapdoor,
                 [TR2Type.Trapdoor2] = TRItemFlags.Trapdoor | TRItemFlags.EightClick,
                 [TR2Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.RollingBall] = TRItemFlags.Boulder | TRItemFlags.PairA,
+                [TR2Type.TeethSpikesOrGlassShards] = TRItemFlags.Spikes,
+                [TR2Type.RollingSpindle] = TRItemFlags.Spindle,
             },
             [TR2LevelNames.FLOATER] = new()
             {
@@ -536,6 +573,8 @@ public static class TRRExporter
                 [TR2Type.Trapdoor1] = TRItemFlags.Trapdoor | TRItemFlags.EightClick,
                 [TR2Type.Trapdoor2] = TRItemFlags.Trapdoor,
                 [TR2Type.WallSwitch] = TRItemFlags.WallSwitch,
+                [TR2Type.RollingBall] = TRItemFlags.Boulder | TRItemFlags.PairA,
+                [TR2Type.TeethSpikesOrGlassShards] = TRItemFlags.Spikes,
             },
             [TR2LevelNames.LAIR] = new()
             {

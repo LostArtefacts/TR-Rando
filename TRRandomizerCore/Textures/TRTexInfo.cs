@@ -38,6 +38,10 @@ public enum TRItemFlags
     BreakableWindow  = 1 << 14,
     PushButton       = 1 << 15,
     Springboard      = 1 << 16,
+    Boulder          = 1 << 17,
+    Darts            = 1 << 18,
+    Spikes           = 1 << 19,
+    Spindle          = 1 << 20,
 
     PairA            = 1 << 24,
     PairB            = 1 << 25,
