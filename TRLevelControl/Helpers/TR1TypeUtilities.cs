@@ -6,6 +6,23 @@ public static class TR1TypeUtilities
 {
     public static readonly Dictionary<TR1Type, Dictionary<TR1Type, List<string>>> LevelAliases = new()
     {
+        [TR1Type.LaraMiscAnim_H] = new()
+        {
+            [TR1Type.LaraMiscAnim_H_General] =
+                new() { TR1LevelNames.CAVES, TR1LevelNames.VILCABAMBA, TR1LevelNames.FOLLY, TR1LevelNames.COLOSSEUM, TR1LevelNames.CISTERN, TR1LevelNames.TIHOCAN },
+            [TR1Type.LaraMiscAnim_H_Valley] =
+                new() { TR1LevelNames.VALLEY },
+            [TR1Type.LaraMiscAnim_H_Qualopec] =
+                new() { TR1LevelNames.QUALOPEC },
+            [TR1Type.LaraMiscAnim_H_Midas] =
+                new() { TR1LevelNames.MIDAS },
+            [TR1Type.LaraMiscAnim_H_Sanctuary] =
+                new() { TR1LevelNames.SANCTUARY },
+            [TR1Type.LaraMiscAnim_H_Atlantis] =
+                new() { TR1LevelNames.ATLANTIS },
+            [TR1Type.LaraMiscAnim_H_Pyramid] =
+                new() { TR1LevelNames.PYRAMID },
+        },
         [TR1Type.FlyingAtlantean] = new()
         {
             [TR1Type.BandagedFlyer] =

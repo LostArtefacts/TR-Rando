@@ -118,6 +118,17 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
                 cleanedEntities.Add(type);
             }
         }
+
+        for (int i = cleanedEntities.Count - 1; i >= 0; i--)
+        {
+            T type = cleanedEntities[i];
+            IEnumerable<T> dependencies = TypesToImport.SelectMany(t => Data.GetDependencies(t)).Select(t => Data.TranslateAlias(t));
+            if (dependencies.Contains(type))
+            {
+                cleanedEntities.RemoveAt(i);
+            }
+        }
+
         TypesToRemove = cleanedEntities;
     }
 
@@ -159,17 +170,22 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
 
     private void ValidateBlobList(List<T> modelTypes, List<B> importBlobs)
     {
-        Dictionary<T, List<T>> detectedAliases = new();
-        foreach (T entity in modelTypes)
+        Dictionary<T, SortedSet<T>> detectedAliases = new();
+        foreach (T type in modelTypes)
         {
-            if (Data.IsAlias(entity))
+            T inferredType = type;
+            if (Data.AliasPriority?.ContainsKey(type) ?? false)
             {
-                T masterType = Data.TranslateAlias(entity);
+                inferredType = Data.GetLevelAlias(LevelName, type);
+            }
+            if (Data.IsAlias(inferredType))
+            {
+                T masterType = Data.TranslateAlias(inferredType);
                 if (!detectedAliases.ContainsKey(masterType))
                 {
                     detectedAliases[masterType] = new();
                 }
-                detectedAliases[masterType].Add(entity);
+                detectedAliases[masterType].Add(inferredType);
             }
         }
 
