@@ -97,6 +97,17 @@ public class TextureAllocator<T, R>
                 }
             }
 
+            // Effectively disable animated textures as it's unclear where these are defined so they can't be
+            // properly controlled yet. This does not affect water surfaces.
+            List<int> animatedIndices = new(trgData.Textures
+                .Where(_texInfo.Animated.Contains)
+                .Select(t => trgData.Textures.IndexOf(t)));
+            if (animatedIndices.Count > 0)
+            {
+                ushort defaultTexture = newTextures[animatedIndices.RandomItem(Generator)];
+                animatedIndices.ForEach(i => newTextures[i] = defaultTexture);
+            }
+
             Dictionary<T, R> itemRemp = Settings.TextureMode == TextureMode.Game && Settings.MatchTextureItems
                 ? RemapItems(level, levelSwaps[levels.IndexOf(level)])
                 : null;

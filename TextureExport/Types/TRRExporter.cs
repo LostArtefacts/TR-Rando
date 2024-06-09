@@ -36,6 +36,7 @@ public static class TRRExporter
     {
         Dictionary<TRTexCategory, SortedSet<ushort>> categories = new();
         Dictionary<TRTexCategory, ushort> defaults = new();
+        SortedSet<ushort> animated;
 
         foreach (TRTexCategory category in Enum.GetValues<TRTexCategory>())
         {
@@ -61,6 +62,7 @@ public static class TRRExporter
             TRTexInfo<T> info = new()
             {
                 Categories = categories,
+                Animated = animated,
                 Defaults = defaults,
                 ItemFlags = itemFlags
             };
@@ -73,6 +75,7 @@ public static class TRRExporter
             case TRGameVersion.TR1:
                 defaults[TRTexCategory.Transparent] = 477;
                 defaults[TRTexCategory.Lever] = 34;
+                animated = new() { 554, 558, 571, 590, 651, 652, 654, 655 };
                 WriteInfo(_tr1ItemFlags);
                 break;
 
@@ -80,6 +83,7 @@ public static class TRRExporter
                 defaults[TRTexCategory.Transparent] = 159;
                 defaults[TRTexCategory.Lever] = 1202;
                 defaults[TRTexCategory.Ladder] = 1172;
+                animated = new() { 375, 401, 402, 403, 413, 414, 415, 416, 654, 721, 722 };
                 WriteInfo(_tr2ItemFlags);
                 break;
 
@@ -87,6 +91,7 @@ public static class TRRExporter
                 defaults[TRTexCategory.Transparent] = 794;
                 defaults[TRTexCategory.Lever] = 1002;
                 defaults[TRTexCategory.Ladder] = 600;
+                animated = new() { 374, 375, 376, 377, 378, 379, 380, 381, 806, 807, 808, 809, 818, 819, 820, 821 };
                 WriteInfo(_tr3ItemFlags);
                 break;
         }

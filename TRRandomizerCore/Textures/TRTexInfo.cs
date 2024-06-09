@@ -4,6 +4,7 @@ public class TRTexInfo<T>
     where T : Enum
 {
     public Dictionary<TRTexCategory, SortedSet<ushort>> Categories { get; set; }
+    public SortedSet<ushort> Animated { get; set; }
     public Dictionary<TRTexCategory, ushort> Defaults { get; set; }
     public List<Dictionary<string, Dictionary<T, TRItemFlags>>> ItemFlags { get; set; }
 }
