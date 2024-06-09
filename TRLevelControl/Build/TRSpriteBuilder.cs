@@ -22,7 +22,11 @@ public class TRSpriteBuilder<T> : ISpriteProvider<T>
         {
             string sprMarker = new(reader.ReadChars(_sprMarker.Length));
             Debug.Assert(sprMarker == _sprMarker);
-            Debug.Assert(_version != TRGameVersion.TR5 || reader.ReadByte() == 0);
+            if (_version == TRGameVersion.TR5)
+            {
+                byte end = reader.ReadByte();
+                Debug.Assert(end == 0);
+            }
         }
 
         uint numTextures = reader.ReadUInt32();

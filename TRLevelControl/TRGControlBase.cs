@@ -13,7 +13,8 @@ public class TRGControlBase
     public static TRGData Read(Stream stream)
     {
         using TRLevelReader reader = new(stream);
-        Debug.Assert(reader.ReadUInt32() == _trgMagic);
+        uint magic = reader.ReadUInt32();
+        Debug.Assert(magic == _trgMagic);
 
         TRGData data = new();
 

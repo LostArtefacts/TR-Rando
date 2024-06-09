@@ -25,7 +25,8 @@ public class TRTextureBuilder
             Debug.Assert(texMarker == _texMarker);
             if (_version == TRGameVersion.TR5)
             {
-                Debug.Assert(reader.ReadByte() == 0);
+                byte end = reader.ReadByte();
+                Debug.Assert(end == 0);
             }
         }
 
