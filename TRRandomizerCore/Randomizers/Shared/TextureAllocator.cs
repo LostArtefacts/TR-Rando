@@ -108,13 +108,13 @@ public class TextureAllocator<T, R>
                 animatedIndices.ForEach(i => newTextures[i] = defaultTexture);
             }
 
-            Dictionary<T, R> itemRemp = Settings.TextureMode == TextureMode.Game && Settings.MatchTextureItems
+            Dictionary<T, R> itemRemap = Settings.TextureMode == TextureMode.Game && Settings.MatchTextureItems
                 ? RemapItems(level, levelSwaps[levels.IndexOf(level)])
                 : null;
 
             trgData.Textures.Clear();
             trgData.Textures.AddRange(newTextures);
-            if (!saveData(level, trgData, itemRemp))
+            if (!saveData(level, trgData, itemRemap))
             {
                 break;
             }
