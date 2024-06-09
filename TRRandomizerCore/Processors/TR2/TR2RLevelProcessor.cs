@@ -70,11 +70,20 @@ public class TR2RLevelProcessor : AbstractLevelProcessor<TRRScriptedLevel, TR2RC
         level.Data = LoadLevelData(level.Name);
         level.PDPData = LoadPDPData(level.Script.PdpFileBaseName);
         level.MapData = LoadMapData(level.Script.MapFileBaseName);
+        if (level.TRGData != null)
+        {
+            level.TRGData = LoadTRGData(level.Script.TrgFileBaseName);
+        }
+
         if (level.HasCutScene)
         {
             level.CutSceneLevel.Data = LoadLevelData(level.CutSceneLevel.Name);
             level.CutSceneLevel.PDPData = LoadPDPData(level.CutSceneLevel.Script.PdpFileBaseName);
             level.CutSceneLevel.MapData = LoadMapData(level.CutSceneLevel.Script.MapFileBaseName);
+            if (level.CutSceneLevel.TRGData != null)
+            {
+                level.CutSceneLevel.TRGData = LoadTRGData(level.CutSceneLevel.Script.TrgFileBaseName);
+            }
         }
     }
 
@@ -83,11 +92,13 @@ public class TR2RLevelProcessor : AbstractLevelProcessor<TRRScriptedLevel, TR2RC
         SaveLevel(level.Data, level.Name);
         SavePDPData(level.PDPData, level.Script.PdpFileBaseName);
         SaveMapData(level.MapData, level.Script.MapFileBaseName);
+        SaveTRGData(level.TRGData, level.Script.TrgFileBaseName);
         if (level.HasCutScene)
         {
             SaveLevel(level.CutSceneLevel.Data, level.CutSceneLevel.Name);
             SavePDPData(level.CutSceneLevel.PDPData, level.CutSceneLevel.Script.PdpFileBaseName);
             SaveMapData(level.CutSceneLevel.MapData, level.CutSceneLevel.Script.MapFileBaseName);
+            SaveTRGData(level.CutSceneLevel.TRGData, level.CutSceneLevel.Script.TrgFileBaseName);
         }
 
         SaveScript();

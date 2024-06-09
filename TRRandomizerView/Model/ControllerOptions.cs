@@ -120,6 +120,10 @@ public class ControllerOptions : INotifyPropertyChanged
     private WeaponDifficulty _weaponDifficulty;
     private WeaponDifficulty[] _weaponDifficulties;
 
+    private BoolItemControlClass _matchTextureTypes, _matchTextureItems;
+    private TextureMode[] _textureModes;
+    private TextureMode _textureMode;
+
     #region TR1X Sepcifics
 
     private bool _enableGameModes;
@@ -1951,6 +1955,49 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public BoolItemControlClass MatchTextureTypes
+    {
+        get => _matchTextureTypes;
+        set
+        {
+            _matchTextureTypes = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public BoolItemControlClass MatchTextureItems
+    {
+        get => _matchTextureItems;
+        set
+        {
+            _matchTextureItems = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public TextureMode[] TextureModes
+    {
+        get => _textureModes;
+        private set
+        {
+            _textureModes = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public TextureMode TextureMode
+    {
+        get => _textureMode;
+        set
+        {
+            _textureMode = value;
+            FirePropertyChanged();
+
+            MatchTextureItems.IsActive = value == TextureMode.Game;
+            FirePropertyChanged(nameof(MatchTextureItems));
+        }
+    }
+
     public BoolItemControlClass PersistTextures
     {
         get => _persistTextures;
@@ -3144,6 +3191,18 @@ public class ControllerOptions : INotifyPropertyChanged
 
         // Textures
         Binding randomizeTexturesBinding = new(nameof(RandomizeTextures)) { Source = this };
+        MatchTextureTypes = new()
+        {
+            Title = "Match texture types",
+            Description = "Textures for such things as levers, windows and ladders will be matched where possible with those from the import set."
+        };
+        BindingOperations.SetBinding(MatchTextureTypes, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
+        MatchTextureItems = new()
+        {
+            Title = "Match item types",
+            Description = "Movable items such as doors, levers and traps will be matched where possible with those from the import set."
+        };
+        BindingOperations.SetBinding(MatchTextureItems, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
         PersistTextures = new BoolItemControlClass()
         {
             Title = "Use persistent textures",
@@ -3395,7 +3454,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         TextureBoolItemControls = new()
         {
-            _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainLaraTextures, _retainEnemyTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
+            _matchTextureTypes, _matchTextureItems, _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainLaraTextures, _retainEnemyTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
         };
         AudioBoolItemControls = new()
         {
@@ -3512,6 +3571,11 @@ public class ControllerOptions : INotifyPropertyChanged
         _randomizeTraps.IsAvailable = IsTrapsTypeSupported;
         _randomizeChallengeRooms.IsAvailable = IsChallengeRoomsTypeSupported;
         _hardEnvironmentMode.IsAvailable = IsHardEnvironmentTypeSupported;
+
+        _matchTextureTypes.IsAvailable = IsTextureSwapTypeSupported;
+        _matchTextureItems.IsAvailable = IsTextureSwapTypeSupported;
+        _persistTextures.IsAvailable = !IsTextureSwapTypeSupported;
+        _retainLaraTextures.IsAvailable = !IsTextureSwapTypeSupported;
     }
 
     public void Load(TRRandomizerController controller)
@@ -3655,6 +3719,10 @@ public class ControllerOptions : INotifyPropertyChanged
 
         RandomizeTextures = _controller.RandomizeTextures;
         TextureSeed = _controller.TextureSeed;
+        TextureModes = Enum.GetValues<TextureMode>();
+        TextureMode = _controller.TextureMode;
+        MatchTextureTypes.Value = _controller.MatchTextureTypes;
+        MatchTextureItems.Value = _controller.MatchTextureItems;
         PersistTextures.Value = _controller.PersistTextures;
         RandomizeWaterColour.Value = _controller.RandomizeWaterColour;
         RetainMainLevelTextures.Value = _controller.RetainMainLevelTextures;
@@ -3959,6 +4027,9 @@ public class ControllerOptions : INotifyPropertyChanged
 
         _controller.RandomizeTextures = RandomizeTextures;
         _controller.TextureSeed = TextureSeed;
+        _controller.TextureMode = TextureMode;
+        _controller.MatchTextureTypes = MatchTextureTypes.Value;
+        _controller.MatchTextureItems = MatchTextureItems.Value;
         _controller.PersistTextures = PersistTextures.Value;
         _controller.RandomizeWaterColour = RandomizeWaterColour.Value;
         _controller.RetainMainLevelTextures = RetainMainLevelTextures.Value;
@@ -4137,6 +4208,8 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsExtraPickupsTypeSupported => IsRandomizationSupported(TRRandomizerType.ExtraPickups);
     public bool IsEnemyTypeSupported => IsRandomizationSupported(TRRandomizerType.Enemy);
     public bool IsTextureTypeSupported => IsRandomizationSupported(TRRandomizerType.Texture);
+    public bool IsWireframeTypeSupported => IsRandomizationSupported(TRRandomizerType.Wireframe);
+    public bool IsTextureSwapTypeSupported => IsRandomizationSupported(TRRandomizerType.TextureSwap);
     public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);
     public bool IsAudioTypeSupported => IsRandomizationSupported(TRRandomizerType.Audio);
     public bool IsAmbientTracksTypeSupported => IsRandomizationSupported(TRRandomizerType.AmbientTracks);

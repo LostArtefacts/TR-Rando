@@ -19,4 +19,5 @@ public class TR1RCombinedLevel
     public bool IsAssault => Is(TR1LevelNames.ASSAULT);
     public TRDictionary<TR1Type, TRModel> PDPData { get; set; }
     public Dictionary<TR1Type, TR1RAlias> MapData { get; set; }
+    public TRGData TRGData { get; set; }
 }

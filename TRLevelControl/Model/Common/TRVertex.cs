@@ -40,3 +40,23 @@ public class TRVertex32 : ICloneable
     object ICloneable.Clone()
         => Clone();
 }
+
+public class TRVertex8 : ICloneable
+{
+    public byte X { get; set; }
+    public byte Y { get; set; }
+    public byte Z { get; set; }
+
+    public TRVertex8 Clone()
+    {
+        return new()
+        {
+            X = X,
+            Y = Y,
+            Z = Z
+        };
+    }
+
+    object ICloneable.Clone()
+        => Clone();
+}

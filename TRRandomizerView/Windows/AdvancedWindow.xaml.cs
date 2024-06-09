@@ -82,9 +82,14 @@ public partial class AdvancedWindow : Window
         nameof(HasGlobeOptions), typeof(bool), typeof(AdvancedWindow)
     );
 
-    public static readonly DependencyProperty HasTextureOptionsProperty = DependencyProperty.Register
+    public static readonly DependencyProperty HasWireframeOptionsProperty = DependencyProperty.Register
     (
-        nameof(HasTextureOptions), typeof(bool), typeof(AdvancedWindow)
+        nameof(HasWireframeOptions), typeof(bool), typeof(AdvancedWindow)
+    );
+
+    public static readonly DependencyProperty HasTextureSwapOptionsProperty = DependencyProperty.Register
+    (
+        nameof(HasTextureSwapOptions), typeof(bool), typeof(AdvancedWindow)
     );
 
     public static readonly DependencyProperty HasAudioOptionsProperty = DependencyProperty.Register
@@ -226,10 +231,16 @@ public partial class AdvancedWindow : Window
         set => SetValue(HasGlobeOptionsProperty, value);
     }
 
-    public bool HasTextureOptions
+    public bool HasWireframeOptions
     {
-        get => (bool)GetValue(HasTextureOptionsProperty);
-        set => SetValue(HasTextureOptionsProperty, value);
+        get => (bool)GetValue(HasWireframeOptionsProperty);
+        set => SetValue(HasWireframeOptionsProperty, value);
+    }
+
+    public bool HasTextureSwapOptions
+    {
+        get => (bool)GetValue(HasTextureSwapOptionsProperty);
+        set => SetValue(HasTextureSwapOptionsProperty, value);
     }
 
     public bool HasAudioOptions

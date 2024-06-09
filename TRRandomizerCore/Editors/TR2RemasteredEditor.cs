@@ -55,6 +55,11 @@ public class TR2RemasteredEditor : TR2ClassicEditor
             target += numLevels;
         }
 
+        if (Settings.RandomizeTextures)
+        {
+            target += numLevels * 2;
+        }
+
         // Environment randomizer always runs
         target += numLevels * 2;
 
@@ -200,6 +205,20 @@ public class TR2RemasteredEditor : TR2ClassicEditor
                 SaveMonitor = monitor,
                 Settings = Settings
             }.Randomize(Settings.AudioSeed);
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeTextures)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
+            new TR2RTextureRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings,
+            }.Randomize(Settings.TextureSeed);
         }
     }
 }

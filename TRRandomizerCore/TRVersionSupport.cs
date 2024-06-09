@@ -55,6 +55,7 @@ internal class TRVersionSupport
         TRRandomizerType.Traps,
         TRRandomizerType.Unarmed,
         TRRandomizerType.WaterColour,
+        TRRandomizerType.Wireframe,
     };
 
     private static readonly List<TRRandomizerType> _tr1RTypes = new()
@@ -73,6 +74,8 @@ internal class TRVersionSupport
         TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
         TRRandomizerType.Text,
+        TRRandomizerType.Texture,
+        TRRandomizerType.TextureSwap,
     };
 
     private static readonly List<TRRandomizerType> _tr2Types = new()
@@ -116,7 +119,8 @@ internal class TRVersionSupport
         TRRandomizerType.Text,
         TRRandomizerType.Texture,
         TRRandomizerType.Unarmed,
-        TRRandomizerType.ItemSprite
+        TRRandomizerType.ItemSprite,
+        TRRandomizerType.Wireframe,
     };
 
     private static readonly List<TRRandomizerType> _tr2RTypes = new()
@@ -134,6 +138,8 @@ internal class TRVersionSupport
         TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
         TRRandomizerType.Text,
+        TRRandomizerType.Texture,
+        TRRandomizerType.TextureSwap,
     };
 
     private static readonly List<TRRandomizerType> _tr3Types = new()
@@ -169,7 +175,8 @@ internal class TRVersionSupport
         TRRandomizerType.Text,
         TRRandomizerType.Texture,
         TRRandomizerType.Unarmed,
-        TRRandomizerType.VFX
+        TRRandomizerType.VFX,
+        TRRandomizerType.Wireframe,
     };
 
     private static readonly List<TRRandomizerType> _tr3MainTypes = new()
@@ -192,6 +199,8 @@ internal class TRVersionSupport
         TRRandomizerType.SFX,
         TRRandomizerType.StartPosition,
         TRRandomizerType.Text,
+        TRRandomizerType.Texture,
+        TRRandomizerType.TextureSwap,
     };
 
     private static readonly Dictionary<TRVersion, TRVersionSupportGroup> _supportedTypes = new()

@@ -9,7 +9,7 @@ class Program
 {
     enum Mode
     {
-        Png, Html, Segments, Faces, Boxes, Dependencies
+        Png, Html, Segments, Faces, Boxes, Dependencies, Dds, TexInfo,
     }
 
     static readonly TR1LevelControl _reader1 = new();
@@ -56,11 +56,37 @@ class Program
             {
                 mode = Mode.Dependencies;
             }
+            else if (arg == "dds")
+            {
+                if (args.Length < 3)
+                {
+                    return;
+                }
+                mode = Mode.Dds;
+            }
+            else if (arg == "texinfo")
+            {
+                mode = Mode.TexInfo;
+            }
         }
 
         string levelType = args[0].ToLower();
 
-        if (levelType.EndsWith(".phd"))
+        if (mode == Mode.Dds)
+        {
+            if (Enum.TryParse(levelType.ToUpper(), out TRGameVersion version))
+            {
+                TRRExporter.Export(args[2], version);
+            }
+        }
+        else if (mode == Mode.TexInfo)
+        {
+            if (Enum.TryParse(levelType.ToUpper(), out TRGameVersion version))
+            {
+                TRRExporter.GenerateCategories(version);
+            }
+        }
+        else if (levelType.EndsWith(".phd"))
         {
             ExportAllTextures(args[0], _reader1.Read(args[0]), mode);
         }
@@ -236,7 +262,7 @@ class Program
     static void Usage()
     {
         Console.WriteLine();
-        Console.WriteLine("Usage: TextureExport [tr1 | tr1g | tr2 | tr2g | tr3 | tr3g | *.phd | *.tr2] [png | html | segments | faces | boxes | depend]");
+        Console.WriteLine("Usage: TextureExport [tr1 | tr1g | tr2 | tr2g | tr3 | tr3g | *.phd | *.tr2] [png | html | segments | faces | boxes | depend | dds | texinfo]");
         Console.WriteLine();
 
         Console.WriteLine("Target Levels");
@@ -257,6 +283,8 @@ class Program
         Console.WriteLine("\tfaces    - Create a new texture for every face in a room and mark its index.");
         Console.WriteLine("\tboxes    - Similar to faces, but mark box extents for a list of rooms.");
         Console.WriteLine("\tdepend   - Calculate which textures are shared between models and generate the JSON used in the main randomizer.");
+        Console.WriteLine("\tdds      - Convert DDS files to PNG.");
+        Console.WriteLine("\ttexinfo  - Generate TexInfo JSON files for texture randomization.");
         Console.WriteLine();
         
         Console.WriteLine("Examples");
