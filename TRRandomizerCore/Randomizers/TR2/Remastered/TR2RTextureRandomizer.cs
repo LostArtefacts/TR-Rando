@@ -15,9 +15,12 @@ public class TR2RTextureRandomizer : BaseTR2RRandomizer
 
         foreach (TRRScriptedLevel level in Levels)
         {
-            TRGData trgData = LoadTRGData(level.TrgFileBaseName);
-            Dictionary<TR2Type, TR2RAlias> mapData = LoadMapData(level.MapFileBaseName);
-            allocator.LoadData(level, trgData, mapData);
+            allocator.LoadData(level, LoadTRGData(level.TrgFileBaseName), LoadMapData(level.MapFileBaseName));
+            if (level.HasCutScene)
+            {
+                TRRScriptedLevel cutLevel = level.CutSceneLevel as TRRScriptedLevel;
+                allocator.LoadCutData(level, LoadTRGData(cutLevel.TrgFileBaseName));
+            }
             if (!TriggerProgress())
             {
                 return;
@@ -28,7 +31,7 @@ public class TR2RTextureRandomizer : BaseTR2RRandomizer
         {
             SaveMapData(mapData, level.MapFileBaseName);
             SaveTRGData(trgData, level.TrgFileBaseName);
-            return TriggerProgress();
+            return level.IsCutscene || TriggerProgress();
         });
     }
 }
