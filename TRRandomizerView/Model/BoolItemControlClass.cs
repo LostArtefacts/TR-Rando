@@ -41,8 +41,8 @@ public class BoolItemControlClass : DependencyObject, INotifyPropertyChanged
 
     public string Title { get; set; }
     public string Description { get; set; }
-    public string HelpURL { get; set; }
-    public bool HasHelpURL => HelpURL != null;
+    public string HelpURL { get; set; } = string.Empty;
+    public bool HasHelpURL => HelpURL?.Length > 0;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
