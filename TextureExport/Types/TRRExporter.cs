@@ -117,6 +117,8 @@ public static class TRRExporter
                 [TR1Type.PushBlock1] = TRItemFlags.PushBlock,
                 [TR1Type.WallSwitch] = TRItemFlags.WallSwitch,
                 [TR1Type.UnderwaterSwitch] = TRItemFlags.UnderwaterSwitch,
+                [TR1Type.DartEmitter] = TRItemFlags.Darts | TRItemFlags.PairA,
+                [TR1Type.Dart_H] = TRItemFlags.Darts | TRItemFlags.PairB,
             },
             [TR1LevelNames.VALLEY] = new()
             {
