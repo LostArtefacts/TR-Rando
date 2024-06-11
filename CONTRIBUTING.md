@@ -7,6 +7,7 @@ dependencies, but these are listed as follows for reference.
 ### NuGet packages
 * https://github.com/icsharpcode/SharpZipLib
 * https://github.com/JamesNK/Newtonsoft.Json
+* https://github.com/Nominom/BCnEncoder.NET
 
 ### Additional dependencies
 * https://github.com/LostArtefacts/TRGameflowEditor/releases/latest
