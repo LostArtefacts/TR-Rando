@@ -10,6 +10,7 @@
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BCnEncoder.Net" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
   </ItemGroup>

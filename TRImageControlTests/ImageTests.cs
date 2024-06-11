@@ -237,4 +237,28 @@ public class ImageTests : TestBase
         Assert.AreEqual(120, blend.B);
         Assert.AreEqual(193, blend.A);
     }
+
+    [TestMethod]
+    public void TestDDS()
+    {
+        TRImage image = new(512, 256);
+        image.Fill(Color.Red);
+        image.Save("test.dds");
+
+        // Verify it's not PNG
+        File.Move("test.dds", "test.png", true);
+        try
+        {
+            image = new("test.png");
+            Assert.Fail();
+        }
+        catch { }
+
+        // Basic check that it's readable
+        File.Move("test.png", "test.dds", true);
+        image = new("test.dds");
+        
+        Assert.AreEqual(512, image.Width);
+        Assert.AreEqual(256, image.Height);
+    }
 }
