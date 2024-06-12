@@ -227,6 +227,8 @@ public class TR1RemasteredEditor : TR1ClassicEditor
             }.Randomize(Settings.AudioSeed);
         }
 
+        Task titleTask = Task.Run(() => TRRTitleEditor.Stamp(scriptEditor.Script as TRRScript, _io));
+
         if (!monitor.IsCancelled && Settings.RandomizeTextures)
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
@@ -240,5 +242,8 @@ public class TR1RemasteredEditor : TR1ClassicEditor
                 Settings = Settings,
             }.Randomize(Settings.TextureSeed);
         }
+
+        monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Finalizing tasks - please wait");
+        titleTask.Wait();
     }
 }

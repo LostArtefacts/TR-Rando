@@ -24,7 +24,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Pfim" Version="0.11.2" />
-  </ItemGroup>
 </Project>

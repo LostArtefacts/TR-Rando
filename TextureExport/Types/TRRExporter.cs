@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
+using TRImageControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Textures;
@@ -17,18 +15,8 @@ public static class TRRExporter
 
         foreach (string ddsFile in Directory.GetFiles(ddsFolder))
         {
-            using Pfim.IImage image = Pfim.Pfimage.FromFile(ddsFile);
-            GCHandle handle = GCHandle.Alloc(image.Data, GCHandleType.Pinned);
-            try
-            {
-                IntPtr data = Marshal.UnsafeAddrOfPinnedArrayElement(image.Data, 0);
-                Bitmap bitmap = new(image.Width, image.Height, image.Stride, PixelFormat.Format32bppArgb, data);
-                bitmap.Save(Path.Combine(dir, Path.ChangeExtension(Path.GetFileName(ddsFile), ".png")), ImageFormat.Png);
-            }
-            finally
-            {
-                handle.Free();
-            }
+            TRImage image = new(ddsFile);
+            image.Save(Path.Combine(dir, Path.ChangeExtension(Path.GetFileName(ddsFile), ".png")));
         }
     }
 

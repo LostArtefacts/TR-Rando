@@ -1,4 +1,8 @@
-﻿using System.Drawing;
+﻿using BCnEncoder.Decoder;
+using BCnEncoder.Shared;
+using BCnEncoder.Shared.ImageFiles;
+using Microsoft.Toolkit.HighPerformance;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -94,14 +98,24 @@ public class TRImage : ICloneable
     public TRImage(string filePath)
     {
         using FileStream fs = File.OpenRead(filePath);
-        using Bitmap bmp = new(Image.FromStream(fs));
-        ReadBitmap(bmp);
+        if (IsDDS(filePath))
+        {
+            ReadDDS(fs);
+        }
+        else
+        {
+            using Bitmap bmp = new(Image.FromStream(fs));
+            ReadBitmap(bmp);
+        }
     }
 
     public TRImage(Bitmap bmp)
     {
         ReadBitmap(bmp);
     }
+
+    private static bool IsDDS(string filePath)
+        => string.Equals(Path.GetExtension(filePath), ".DDS", StringComparison.InvariantCultureIgnoreCase);
 
     private void ReadBitmap(Bitmap bmp)
     {
@@ -132,6 +146,26 @@ public class TRImage : ICloneable
         }
 
         bmp.UnlockBits(bd);
+    }
+
+    private void ReadDDS(Stream stream)
+    {
+        BcDecoder decoder = new();
+        Memory2D<ColorRgba32> pixels = decoder.Decode2D(stream);
+        Span2D<ColorRgba32> span = pixels.Span;
+        
+        Size = new(pixels.Width, pixels.Height);
+        Pixels = new uint[Size.Width * Size.Height];
+
+        for (int y = 0; y < Height; y++)
+        {
+            Span<ColorRgba32> row = span.GetRowSpan(y);
+            for (int x = 0; x < Width; x++)
+            {
+                Color c = Color.FromArgb(row[x].a, row[x].r, row[x].g, row[x].b);
+                this[x, y] = (uint)c.ToArgb();
+            }
+        }
     }
 
     public byte[] ToRGB(List<TRColour> palette)
@@ -207,7 +241,16 @@ public class TRImage : ICloneable
     }
 
     public void Save(string fileName)
-        => Save(fileName, ImageFormat.Png);
+    {
+        if (IsDDS(fileName))
+        {
+            WriteDDS(fileName);
+        }
+        else
+        {
+            Save(fileName, ImageFormat.Png);
+        }
+    }
 
     public void Save(string fileName, ImageFormat format)
     {
@@ -217,6 +260,24 @@ public class TRImage : ICloneable
 
     public void Save(Stream stream, ImageFormat format)
         => ToBitmap().Save(stream, format);
+
+    private void WriteDDS(string fileName)
+    {
+        ColorRgba32[] colours = new ColorRgba32[Width * Height];
+        Read((c, x, y) => colours[y * Width + x] = new(c.R, c.G, c.B, c.A));
+
+        BCnEncoder.Encoder.BcEncoder encoder = new();
+        encoder.OutputOptions.GenerateMipMaps = true;
+        encoder.OutputOptions.MaxMipMapLevel = 6;
+        encoder.OutputOptions.FileFormat = OutputFileFormat.Dds;
+        encoder.OutputOptions.Format = CompressionFormat.Bc7;
+
+        Memory2D<ColorRgba32> pixels = colours.AsMemory().AsMemory2D(Height, Width);
+        DdsFile file = encoder.EncodeToDds(pixels);
+
+        using FileStream fs = File.OpenWrite(fileName);
+        file.Write(fs);
+    }
 
     public Color GetPixel(int x, int y)
         => Color.FromArgb((int)this[x, y]);

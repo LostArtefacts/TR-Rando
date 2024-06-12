@@ -13,8 +13,8 @@ namespace TRRandomizerCore.Editors;
 
 public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
 {
-    private static readonly Point _regularBadgePos = new(706, 537);
-    private static readonly Point _goldBadgePos = new(498, 445);
+    private static readonly Point _regularBadgePos = new(702, 538);
+    private static readonly Point _goldBadgePos = new(498, 444);
 
     public RandomizerSettings Settings { get; private set; }
 
@@ -354,7 +354,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
         {
             string editedTitle = Path.Combine(GetWriteBasePath(), "title.png");
             TRImage bg = new(backupTitle);
-            TRImage badge = new(@"Resources\Shared\Graphics\goldbadge-small.png");
+            TRImage badge = new(@"Resources\Shared\Graphics\tr1badge-small.png");
             bg.Import(badge, scriptEditor.GameMode == GameMode.Gold ? _goldBadgePos : _regularBadgePos, true);
 
             if (scriptEditor.GameMode == GameMode.Combined)
@@ -375,7 +375,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
             string creditPath = @"data\trrando.png";
 
             TRImage bg = new(1920, 1080);
-            TRImage badge = new(@"Resources\Shared\Graphics\goldbadge-large.png");
+            TRImage badge = new(@"Resources\Shared\Graphics\tr1badge-large.png");
             bg.Fill(Color.Black);
             bg.Import(badge, new(960 - badge.Width / 2, 540 - badge.Height / 2), true);
             bg.Save(creditFile);

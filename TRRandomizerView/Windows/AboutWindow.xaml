@@ -11,7 +11,8 @@
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         Loaded="Window_Loaded"
-        Title="{Binding AboutTitle}" Height="250" Width="550">
+        SizeToContent="Height"
+        Title="{Binding AboutTitle}" Width="550">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -79,6 +80,24 @@
                      NewtonSoft.Json
                 </Hyperlink>
                 by James Newton-King
+            </TextBlock>
+
+            <TextBlock>
+                Zlib support via
+                <Hyperlink ToolTip="https://github.com/icsharpcode/SharpZipLib"
+                           NavigateUri="https://github.com/icsharpcode/SharpZipLib"
+                           RequestNavigate="Hyperlink_RequestNavigate">
+                     SharpZipLib
+                </Hyperlink> by ICSharpCode
+            </TextBlock>
+
+            <TextBlock>
+                DDS support via
+                <Hyperlink ToolTip="https://github.com/Nominom/BCnEncoder.NET"
+                           NavigateUri="https://github.com/Nominom/BCnEncoder.NET"
+                           RequestNavigate="Hyperlink_RequestNavigate">
+                     BCnEncoder.NET
+                </Hyperlink> by Nominom
             </TextBlock>
 
             <TextBlock Margin="0,20,0,0">
