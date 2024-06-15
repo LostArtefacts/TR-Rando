@@ -1,0 +1,168 @@
+{
+  "LEVEL2.PHD": [
+    {
+      "X": 31232,
+      "Y": -7936,
+      "Z": 36352,
+      "Room": 67,
+      "Angle": -32768,
+      "EntityIndex": 85,
+      "TargetType": 18
+    }
+  ],
+  "LEVEL7A.PHD": [
+    {
+      "X": 42496,
+      "Y": -8448,
+      "Z": 40448,
+      "Room": 15,
+      "Angle": -32768,
+      "EntityIndex": 21,
+      "TargetType": 18
+    },
+    {
+      "X": 53760,
+      "Y": -3584,
+      "Z": 39424,
+      "Room": 39,
+      "Angle": -16384,
+      "EntityIndex": 43,
+      "TargetType": 18
+    },
+    {
+      "X": 45568,
+      "Y": -3328,
+      "Z": 51712,
+      "Room": 95,
+      "Angle": 0,
+      "EntityIndex": 44,
+      "TargetType": 18
+    },
+    {
+      "X": 40448,
+      "Y": -3328,
+      "Z": 64000,
+      "Room": 99,
+      "Angle": -32768,
+      "EntityIndex": 101,
+      "TargetType": 18
+    }
+  ],
+  "LEVEL7B.PHD": [
+    {
+      "X": 54784,
+      "Y": -3840,
+      "Z": 75264,
+      "Room": 70,
+      "Angle": -32768,
+      "EntityIndex": 31,
+      "TargetType": 18
+    },
+    {
+      "X": 54784,
+      "Y": -3840,
+      "Z": 74240,
+      "Room": 70,
+      "Angle": -32768,
+      "EntityIndex": 31,
+      "TargetType": 34
+    },
+    {
+      "X": 38400,
+      "Y": -4096,
+      "Z": 62976,
+      "Room": 77,
+      "Angle": 0,
+      "EntityIndex": 34,
+      "TargetType": 18
+    },
+    {
+      "X": 38400,
+      "Y": -4096,
+      "Z": 64000,
+      "Room": 77,
+      "Angle": 0,
+      "EntityIndex": 34,
+      "TargetType": 34
+    }
+  ],
+  "LEVEL8C.PHD": [
+    {
+      "X": 47616,
+      "Y": -768,
+      "Z": 38400,
+      "Room": 13,
+      "EntityIndex": 32,
+      "TargetType": 18
+    },
+    {
+      "X": 33280,
+      "Y": 17920,
+      "Z": 44544,
+      "Room": 5,
+      "EntityIndex": 42,
+      "TargetType": 18
+    },
+    {
+      "X": 31232,
+      "Y": 17920,
+      "Z": 44544,
+      "Room": 5,
+      "EntityIndex": 42,
+      "TargetType": 34
+    }
+  ],
+  "LEVEL10B.PHD": [
+    {
+      "X": 62976,
+      "Y": 0,
+      "Z": 46592,
+      "Room": 38,
+      "EntityIndex": 0,
+      "TargetType": 18
+    },
+    {
+      "X": 43520,
+      "Y": 3328,
+      "Z": 44544,
+      "Room": 78,
+      "EntityIndex": 1,
+      "TargetType": 18
+    },
+    {
+      "X": 54784,
+      "Y": 5120,
+      "Z": 44544,
+      "Room": 1,
+      "EntityIndex": 1,
+      "TargetType": 34
+    },
+    {
+      "X": 53760,
+      "Y": -13056,
+      "Z": 56832,
+      "Room": 47,
+      "EntityIndex": 8,
+      "TargetType": 18
+    },
+    {
+      "X": 65024,
+      "Y": -10240,
+      "Z": 51712,
+      "Room": 46,
+      "Angle": -32768,
+      "EntityIndex": 9,
+      "TargetType": 18
+    }
+  ],
+  "LEVEL10C.PHD": [
+    {
+      "X": 53760,
+      "Y": 9728,
+      "Z": 75264,
+      "Room": 34,
+      "EntityIndex": 101,
+      "TargetType": 18
+    }
+  ]
+}
