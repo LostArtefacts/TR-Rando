@@ -7,6 +7,7 @@
 - added separate secret audio for TR1 and TR3 when not using reward rooms (#687)
 - added an option to shuffle items rather than randomize their types and locations in each level (#625)
 - added an option to control weapon allocation in item randomization (#690)
+- added an option to move enemies such as eels, whose placement can lead to forced damage or difficulty in passing (#311)
 - added Finnish, Portuguese, and Swedish translations to TR1 and added all supported language translations to TRUB (#701)
 - fixed several potential key item softlocks in TR2 (#691)
 - fixed a key item softlock in Crash Site (#662)

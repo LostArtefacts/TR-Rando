@@ -4,6 +4,7 @@ Jump to:
 * [TR1](#tr1)
 * [TR2](#tr2)
 * [TR3](#tr3)
+* [Awkward enemies](#awkward-enemies)
 
 # TR1
 The following enemy restrictions are in place when using "Default" restriction mode during randomization.
@@ -178,6 +179,7 @@ There are further nuances with other enemy types in TR3.
 * RXTechFlameLad is hostile to Lara in any level that falls on Meteorite Cavern's sequence.
 * Crash site Mercenary and RXTechFlameLad will fight each other. The Mercenary always wins.
 * Raptors (288) will attack any other enemy, other than other raptors, unless Lara is the closest target.
+* The T-rex will only ever appear in Caves of Kaliya when _No Restrictions_ mode is enabled.
 
 ## Spawn Points
 
@@ -216,3 +218,10 @@ Because of the increased limits in TR3, most levels have had their number of ene
 | CITY.TR2 | 13 | 2 | 6 |
 | CHAMBER.TR2 | 7 | 3 | 4 |
 | _STPAUL.TR2_ | _2_ | _2_ | _2_ |
+
+# Awkward enemies
+Some enemy placements can cause problems by default, such as causing forced damage or difficulty in getting passed them. The UI option to move awkward enemies will - in most cases - move these enemies to better positions.
+
+- TR1: some T-rex and Torso locations are affected, for example on the narrow corridors leading to the Atlantis main chamber.
+- TR2: both types of eel will be moved off the ground in all cases when they are land creatures. This means that they effectively become hazards - they may still be able to snipe Lara if she is jumping, so take care!
+- TR3: the T-rex is moved in several instances to avoid blocking corridors and crawlspaces.

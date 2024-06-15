@@ -38,7 +38,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private bool _useRewardRoomCameras;
     private uint _minSecretCount, _maxSecretCount;
     private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity, _oneItemDifficulty;
-    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems, _unrestrictedEnemyDifficulty;
+    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems, _relocateAwkwardEnemies, _unrestrictedEnemyDifficulty;
     private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures, _retainLaraTextures;
     private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
     private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
@@ -2507,6 +2507,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public BoolItemControlClass RelocateAwkwardEnemies
+    {
+        get => _relocateAwkwardEnemies;
+        set
+        {
+            _relocateAwkwardEnemies = value;
+            FirePropertyChanged();
+        }
+    }
+
     public BirdMonsterBehaviour BirdMonsterBehaviour
     {
         get => _birdMonsterBehaviour;
@@ -3145,6 +3155,13 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "Willard can appear in levels other than Meteorite Cavern but will not attack Lara unless she gets too close."
         };
         BindingOperations.SetBinding(DocileWillard, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+        RelocateAwkwardEnemies = new BoolItemControlClass()
+        {
+            Title = "Move awkward enemies",
+            Description = "Some enemies will be moved to avoid forced damage or overly difficult situations.",
+            HelpURL = "https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/ENEMIES.md#awkward-enemies",
+        };
+        BindingOperations.SetBinding(RelocateAwkwardEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
         ProtectMonks = new BoolItemControlClass()
         {
             Title = "Avoid having to kill allies",
@@ -3450,7 +3467,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         EnemyBoolItemControls = new()
         {
-            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems,_allowEnemyKeyDrops, _unrestrictedEnemyDifficulty
+            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _relocateAwkwardEnemies, _removeLevelEndingLarson, _giveUnarmedItems,_allowEnemyKeyDrops, _unrestrictedEnemyDifficulty
         };
         TextureBoolItemControls = new()
         {
@@ -3676,6 +3693,7 @@ public class ControllerOptions : INotifyPropertyChanged
         CrossLevelEnemies.Value = _controller.CrossLevelEnemies;
         ProtectMonks.Value = _controller.ProtectMonks;
         DocileWillard.Value = _controller.DocileWillard;
+        RelocateAwkwardEnemies.Value = _controller.RelocateAwkwardEnemies;
         BirdMonsterBehaviours = Enum.GetValues<BirdMonsterBehaviour>();
         BirdMonsterBehaviour = _controller.BirdMonsterBehaviour;
         DragonSpawnTypes = Enum.GetValues<DragonSpawnType>();
@@ -3991,6 +4009,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.CrossLevelEnemies = CrossLevelEnemies.Value;
         _controller.ProtectMonks = ProtectMonks.Value;
         _controller.DocileWillard = DocileWillard.Value;
+        _controller.RelocateAwkwardEnemies = RelocateAwkwardEnemies.Value;
         _controller.BirdMonsterBehaviour = BirdMonsterBehaviour;
         _controller.DragonSpawnType = DragonSpawnType;
         _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
