@@ -1,6 +1,8 @@
-﻿using TRLevelControl.Model;
+﻿using Newtonsoft.Json;
+using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers;
 
@@ -8,12 +10,21 @@ public abstract class EnemyAllocator<T>
     where T : Enum
 {
     protected Dictionary<T, List<string>> _gameEnemyTracker;
+    protected Dictionary<string, List<Location>> _relocations;
     protected List<T> _excludedEnemies;
     protected HashSet<T> _resultantEnemies;
 
     public RandomizerSettings Settings { get; set; }
     public Random Generator { get; set; }
     public IEnumerable<string> GameLevels { get; set; }
+
+    public EnemyAllocator(TRGameVersion version)
+    {
+        string relocFile = $@"Resources\{version}\Locations\enemy_relocations.json";
+        _relocations = File.Exists(relocFile)
+            ? JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(relocFile))
+            : new();
+    }
 
     public void Initialise()
     {
@@ -90,6 +101,25 @@ public abstract class EnemyAllocator<T>
 
         floorData.GetEntityTriggers(index)
             .ForEach(t => t.OneShot = true);
+    }
+
+    protected void RelocateEnemies<E>(string levelName, List<E> entities)
+        where E : TREntity<T>
+    {
+        if (!Settings.RelocateAwkwardEnemies || !_relocations.ContainsKey(levelName))
+        {
+            return;
+        }
+
+        foreach (Location location in _relocations[levelName])
+        {
+            E enemy = entities[location.EntityIndex];
+            if (EqualityComparer<T>.Default.Equals(enemy.TypeID, (T)(object)(uint)location.TargetType))
+            {
+                enemy.SetLocation(location);
+                enemy.X++; // Avoid shifted enemies picking anything up
+            }
+        }
     }
 
     protected abstract Dictionary<T, List<string>> GetGameTracker();

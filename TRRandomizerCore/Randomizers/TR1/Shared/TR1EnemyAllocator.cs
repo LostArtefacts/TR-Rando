@@ -41,6 +41,7 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
     public ItemFactory<TR1Entity> ItemFactory { get; set; }
 
     public TR1EnemyAllocator()
+        : base(TRGameVersion.TR1)
     {
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\unarmed_locations.json"));
         _eggLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\egg_locations.json"));
@@ -526,6 +527,8 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
             SetOneShot(currentEntity, entityIndex, level.FloorData);
             _resultantEnemies.Add(newType);
         }
+
+        RelocateEnemies(levelName, level.Entities);
     }
 
     private static int GetEntityCount(TR1Level level, TR1Type entityType)

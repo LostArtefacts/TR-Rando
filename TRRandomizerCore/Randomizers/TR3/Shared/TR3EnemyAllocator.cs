@@ -24,6 +24,7 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
     public ItemFactory<TR3Entity> ItemFactory { get; set; }
 
     public TR3EnemyAllocator()
+        : base(TRGameVersion.TR3)
     {
         _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR3\Locations\unarmed_locations.json"));
     }
@@ -410,6 +411,8 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
             SetOneShot(targetEntity, level.Entities.IndexOf(targetEntity), level.FloorData);
             _resultantEnemies.Add(newType);
         }
+
+        RelocateEnemies(levelName, level.Entities);
 
         if (!Settings.AllowEnemyKeyDrops)
         {
