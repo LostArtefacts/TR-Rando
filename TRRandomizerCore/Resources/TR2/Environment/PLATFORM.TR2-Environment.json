@@ -2587,34 +2587,6 @@
           }
         }
       ]
-    },
-    {
-      "Condition": {
-        "Comments": "If enemy 59 is an eel, rotate it to avoid blocking puzzle slots.",
-        "ConditionType": 0,
-        "Or": [
-          {
-            "ConditionType": 0,
-            "EntityIndex": 59,
-            "EntityType": 26
-          }
-        ],
-        "EntityIndex": 59,
-        "EntityType": 27
-      },
-      "OnTrue": [
-        {
-          "EMType": 44,
-          "EntityIndex": 59,
-          "TargetLocation": {
-            "X": 59904,
-            "Y": -3584,
-            "Z": 75264,
-            "Room": 30,
-            "Angle": -32768
-          }
-        }
-      ]
     }
   ],
   "ConditionalOneOf": [],

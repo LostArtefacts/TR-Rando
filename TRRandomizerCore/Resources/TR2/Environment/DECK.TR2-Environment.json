@@ -1055,10 +1055,18 @@
       "Condition": {
         "Comments": "If enemy 103's type has been randomized, move him outside for some breathing space.",
         "ConditionType": 0,
+        "Negate": true,
+        "And": [
+          {
+            "ConditionType": 0,
+            "EntityIndex": 103,
+            "Room": 110
+          }
+        ],
         "EntityIndex": 103,
         "EntityType": 32
       },
-      "OnFalse": [
+      "OnTrue": [
         {
           "EMType": 44,
           "EntityIndex": 103,
