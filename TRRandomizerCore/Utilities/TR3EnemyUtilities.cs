@@ -292,8 +292,8 @@ public static class TR3EnemyUtilities
 
     private static readonly Dictionary<string, List<TR3Type>> _unsupportedEnemiesDefault = new()
     {
-        [TR3LevelNames.HALLOWS] =
-            new List<TR3Type> { TR3Type.Willie }
+        [TR3LevelNames.CAVES] = new() { TR3Type.Tyrannosaur },
+        [TR3LevelNames.HALLOWS] = new() { TR3Type.Willie },
     };
 
     // Any enemies that must remain untouched in a given level
