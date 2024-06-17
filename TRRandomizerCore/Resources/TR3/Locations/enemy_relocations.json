@@ -1,0 +1,1206 @@
+{
+  "JUNGLE.TR2": [
+    {
+      "X": 88576,
+      "Y": 26624,
+      "Z": 60928,
+      "Room": 71,
+      "Angle": 0,
+      "EntityIndex": 69,
+      "TargetType": 287
+    },
+    {
+      "X": 18944,
+      "Y": 23808,
+      "Z": 71168,
+      "Room": 126,
+      "Angle": 0,
+      "EntityIndex": 116,
+      "TargetType": 287
+    }
+  ],
+  "TEMPLE.TR2": [
+    {
+      "X": 86528,
+      "Y": -256,
+      "Z": 37376,
+      "Room": 16,
+      "EntityIndex": 14,
+      "TargetType": 287
+    },
+    {
+      "X": 80384,
+      "Y": -3328,
+      "Z": 34304,
+      "Room": 27,
+      "Angle": -32768,
+      "EntityIndex": 24,
+      "TargetType": 287
+    },
+    {
+      "X": 77312,
+      "Y": -3584,
+      "Z": 45568,
+      "Room": 38,
+      "Angle": -16384,
+      "EntityIndex": 30,
+      "TargetType": 287
+    },
+    {
+      "X": 86528,
+      "Y": -3328,
+      "Z": 33280,
+      "Room": 19,
+      "Angle": -16384,
+      "EntityIndex": 33,
+      "TargetType": 287
+    },
+    {
+      "X": 86528,
+      "Y": -768,
+      "Z": 52736,
+      "Room": 10,
+      "EntityIndex": 36,
+      "TargetType": 287
+    },
+    {
+      "X": 65024,
+      "Y": 7040,
+      "Z": 52736,
+      "Room": 77,
+      "Angle": -16384,
+      "EntityIndex": 41,
+      "TargetType": 287
+    },
+    {
+      "X": 48640,
+      "Y": 3968,
+      "Z": 23040,
+      "Room": 175,
+      "EntityIndex": 149,
+      "TargetType": 287
+    },
+    {
+      "X": 48640,
+      "Y": 1280,
+      "Z": 59904,
+      "Room": 196,
+      "Angle": -32768,
+      "EntityIndex": 176,
+      "TargetType": 287
+    },
+    {
+      "X": 48640,
+      "Y": 1280,
+      "Z": 56832,
+      "Room": 196,
+      "Angle": 0,
+      "EntityIndex": 177,
+      "TargetType": 287
+    },
+    {
+      "X": 61952,
+      "Y": 7168,
+      "Z": 61952,
+      "Room": 81,
+      "Angle": -32768,
+      "EntityIndex": 181,
+      "TargetType": 287
+    },
+    {
+      "X": 64000,
+      "Y": 7040,
+      "Z": 61952,
+      "Room": 81,
+      "Angle": -32768,
+      "EntityIndex": 182,
+      "TargetType": 287
+    }
+  ],
+  "QUADCHAS.TR2": [
+    {
+      "X": 93696,
+      "Y": 512,
+      "Z": 26112,
+      "Room": 41,
+      "Angle": -32768,
+      "EntityIndex": 14,
+      "TargetType": 287
+    },
+    {
+      "X": 77312,
+      "Y": -384,
+      "Z": 13824,
+      "Room": 51,
+      "EntityIndex": 15,
+      "TargetType": 287
+    },
+    {
+      "X": 69120,
+      "Y": 768,
+      "Z": 38400,
+      "Room": 63,
+      "Angle": -32768,
+      "EntityIndex": 29,
+      "TargetType": 287
+    },
+    {
+      "X": 72192,
+      "Y": 768,
+      "Z": 37376,
+      "Room": 78,
+      "Angle": 0,
+      "EntityIndex": 32,
+      "TargetType": 287
+    },
+    {
+      "X": 53760,
+      "Y": -2560,
+      "Z": 42496,
+      "Room": 91,
+      "EntityIndex": 56,
+      "TargetType": 287
+    },
+    {
+      "X": 55808,
+      "Y": -2560,
+      "Z": 44544,
+      "Room": 91,
+      "EntityIndex": 57,
+      "TargetType": 287
+    },
+    {
+      "X": 31232,
+      "Y": -5504,
+      "Z": 47616,
+      "Room": 155,
+      "EntityIndex": 83,
+      "TargetType": 287
+    }
+  ],
+  "SHORE.TR2": [
+    {
+      "X": 37376,
+      "Y": -6912,
+      "Z": 80384,
+      "Room": 40,
+      "Angle": -16384,
+      "EntityIndex": 75,
+      "TargetType": 287
+    },
+    {
+      "X": 33280,
+      "Y": -512,
+      "Z": 70144,
+      "Room": 144,
+      "EntityIndex": 165,
+      "TargetType": 287
+    },
+    {
+      "X": 46592,
+      "Y": -5376,
+      "Z": 71168,
+      "Room": 50,
+      "EntityIndex": 173,
+      "TargetType": 287
+    },
+    {
+      "X": 29184,
+      "Y": -4096,
+      "Z": 70144,
+      "Room": 76,
+      "EntityIndex": 92,
+      "TargetType": 287
+    },
+    {
+      "X": 34304,
+      "Y": -1024,
+      "Z": 89600,
+      "Room": 121,
+      "EntityIndex": 135,
+      "TargetType": 287
+    },
+    {
+      "X": 31232,
+      "Y": -4608,
+      "Z": 55808,
+      "Room": 143,
+      "EntityIndex": 145,
+      "TargetType": 287
+    },
+    {
+      "X": 34304,
+      "Y": -512,
+      "Z": 69120,
+      "Room": 144,
+      "EntityIndex": 159,
+      "TargetType": 287
+    },
+    {
+      "X": 26112,
+      "Y": -512,
+      "Z": 64000,
+      "Room": 145,
+      "EntityIndex": 162,
+      "TargetType": 287
+    },
+    {
+      "X": 79360,
+      "Y": -1280,
+      "Z": 80384,
+      "Room": 188,
+      "EntityIndex": 177,
+      "TargetType": 287
+    }
+  ],
+  "CRASH.TR2": [
+    {
+      "X": 64000,
+      "Y": -4096,
+      "Z": 49664,
+      "Room": 11,
+      "EntityIndex": 11,
+      "TargetType": 287
+    },
+    {
+      "X": 67072,
+      "Y": -128,
+      "Z": 46592,
+      "Room": 1,
+      "EntityIndex": 45,
+      "TargetType": 287
+    },
+    {
+      "X": 67072,
+      "Y": -128,
+      "Z": 46592,
+      "Room": 1,
+      "EntityIndex": 46,
+      "TargetType": 287
+    },
+    {
+      "X": 67072,
+      "Y": -128,
+      "Z": 46592,
+      "Room": 1,
+      "EntityIndex": 47,
+      "TargetType": 287
+    },
+    {
+      "X": 67072,
+      "Y": -128,
+      "Z": 46592,
+      "Room": 1,
+      "EntityIndex": 48,
+      "TargetType": 287
+    },
+    {
+      "X": 67072,
+      "Y": -128,
+      "Z": 46592,
+      "Room": 1,
+      "EntityIndex": 49,
+      "TargetType": 287
+    },
+    {
+      "X": 67072,
+      "Y": -128,
+      "Z": 46592,
+      "Room": 1,
+      "EntityIndex": 50,
+      "TargetType": 287
+    },
+    {
+      "X": 67072,
+      "Y": -128,
+      "Z": 46592,
+      "Room": 1,
+      "EntityIndex": 51,
+      "TargetType": 287
+    },
+    {
+      "X": 67072,
+      "Y": 0,
+      "Z": 23040,
+      "Room": 57,
+      "EntityIndex": 60,
+      "TargetType": 287
+    },
+    {
+      "X": 64000,
+      "Y": -6144,
+      "Z": 25088,
+      "Room": 60,
+      "EntityIndex": 109,
+      "TargetType": 287
+    },
+    {
+      "X": 64000,
+      "Y": 0,
+      "Z": 30208,
+      "Room": 57,
+      "EntityIndex": 121,
+      "TargetType": 287
+    },
+    {
+      "X": 65024,
+      "Y": 0,
+      "Z": 30208,
+      "Room": 57,
+      "EntityIndex": 124,
+      "TargetType": 287
+    },
+    {
+      "X": 66048,
+      "Y": 0,
+      "Z": 30208,
+      "Room": 57,
+      "EntityIndex": 128,
+      "TargetType": 287
+    },
+    {
+      "X": 67072,
+      "Y": 0,
+      "Z": 30208,
+      "Room": 57,
+      "EntityIndex": 130,
+      "TargetType": 287
+    },
+    {
+      "X": 66048,
+      "Y": 0,
+      "Z": 31232,
+      "Room": 57,
+      "EntityIndex": 131,
+      "TargetType": 287
+    },
+    {
+      "X": 26112,
+      "Y": 2048,
+      "Z": 50688,
+      "Room": 45,
+      "EntityIndex": 138,
+      "TargetType": 287
+    }
+  ],
+  "RAPIDS.TR2": [
+    {
+      "X": 86528,
+      "Y": -18432,
+      "Z": 38400,
+      "Room": 77,
+      "EntityIndex": 14,
+      "TargetType": 287
+    },
+    {
+      "X": 72192,
+      "Y": -23040,
+      "Z": 23040,
+      "Room": 14,
+      "EntityIndex": 32,
+      "TargetType": 287
+    },
+    {
+      "X": 52736,
+      "Y": -17792,
+      "Z": 17920,
+      "Room": 7,
+      "EntityIndex": 36,
+      "TargetType": 287
+    },
+    {
+      "X": 59904,
+      "Y": -19072,
+      "Z": 28160,
+      "Room": 39,
+      "EntityIndex": 42,
+      "TargetType": 287
+    },
+    {
+      "X": 66048,
+      "Y": -22528,
+      "Z": 43520,
+      "Room": 45,
+      "EntityIndex": 43,
+      "TargetType": 287
+    },
+    {
+      "X": 36352,
+      "Y": 4608,
+      "Z": 55808,
+      "Room": 81,
+      "EntityIndex": 104,
+      "TargetType": 287
+    },
+    {
+      "X": 47616,
+      "Y": 2816,
+      "Z": 83456,
+      "Room": 101,
+      "EntityIndex": 128,
+      "TargetType": 287
+    }
+  ],
+  "ROOFS.TR2": [
+    {
+      "X": 50688,
+      "Y": -13312,
+      "Z": 30208,
+      "Room": 148,
+      "EntityIndex": 30,
+      "TargetType": 287
+    },
+    {
+      "X": 48640,
+      "Y": -18944,
+      "Z": 30208,
+      "Room": 129,
+      "EntityIndex": 31,
+      "TargetType": 287
+    },
+    {
+      "X": 51712,
+      "Y": -14848,
+      "Z": 36352,
+      "Room": 108,
+      "EntityIndex": 46,
+      "TargetType": 287
+    },
+    {
+      "X": 27136,
+      "Y": -8704,
+      "Z": 31232,
+      "Room": 27,
+      "EntityIndex": 52,
+      "TargetType": 287
+    },
+    {
+      "X": 19968,
+      "Y": -8192,
+      "Z": 40448,
+      "Room": 17,
+      "EntityIndex": 81,
+      "TargetType": 287
+    },
+    {
+      "X": 19968,
+      "Y": -8192,
+      "Z": 47616,
+      "Room": 17,
+      "EntityIndex": 85,
+      "TargetType": 287
+    },
+    {
+      "X": 27136,
+      "Y": -8192,
+      "Z": 40448,
+      "Room": 17,
+      "EntityIndex": 86,
+      "TargetType": 287
+    },
+    {
+      "X": 19968,
+      "Y": -8192,
+      "Z": 56832,
+      "Room": 16,
+      "EntityIndex": 100,
+      "TargetType": 287
+    },
+    {
+      "X": 19968,
+      "Y": -8192,
+      "Z": 49664,
+      "Room": 16,
+      "EntityIndex": 101,
+      "TargetType": 287
+    },
+    {
+      "X": 39424,
+      "Y": -8704,
+      "Z": 49664,
+      "Room": 174,
+      "EntityIndex": 113,
+      "TargetType": 287
+    },
+    {
+      "X": 27136,
+      "Y": -8192,
+      "Z": 47616,
+      "Room": 17,
+      "EntityIndex": 147,
+      "TargetType": 287
+    },
+    {
+      "X": 27136,
+      "Y": -8192,
+      "Z": 49664,
+      "Room": 16,
+      "EntityIndex": 148,
+      "TargetType": 287
+    },
+    {
+      "X": 40448,
+      "Y": -8704,
+      "Z": 51712,
+      "Room": 174,
+      "EntityIndex": 176,
+      "TargetType": 287
+    },
+    {
+      "X": 39424,
+      "Y": -8704,
+      "Z": 51712,
+      "Room": 174,
+      "EntityIndex": 177,
+      "TargetType": 287
+    },
+    {
+      "X": 40448,
+      "Y": -8704,
+      "Z": 50688,
+      "Room": 174,
+      "EntityIndex": 191,
+      "TargetType": 287
+    },
+    {
+      "X": 27136,
+      "Y": -8192,
+      "Z": 56832,
+      "Room": 16,
+      "EntityIndex": 207,
+      "TargetType": 287
+    },
+    {
+      "X": 19968,
+      "Y": -8192,
+      "Z": 40448,
+      "Room": 17,
+      "EntityIndex": 208,
+      "TargetType": 287
+    },
+    {
+      "X": 19968,
+      "Y": -8192,
+      "Z": 56832,
+      "Room": 16,
+      "EntityIndex": 212,
+      "TargetType": 287
+    }
+  ],
+  "SEWER.TR2": [
+    {
+      "X": 49664,
+      "Y": 3584,
+      "Z": 71168,
+      "Room": 70,
+      "EntityIndex": 29,
+      "TargetType": 287
+    },
+    {
+      "X": 57856,
+      "Y": 1280,
+      "Z": 47616,
+      "Room": 75,
+      "EntityIndex": 55,
+      "TargetType": 287
+    },
+    {
+      "X": 50688,
+      "Y": 768,
+      "Z": 62976,
+      "Room": 41,
+      "EntityIndex": 102,
+      "TargetType": 287
+    },
+    {
+      "X": 41472,
+      "Y": -3328,
+      "Z": 67072,
+      "Room": 55,
+      "EntityIndex": 117,
+      "TargetType": 287
+    },
+    {
+      "X": 57856,
+      "Y": 1280,
+      "Z": 48640,
+      "Room": 75,
+      "EntityIndex": 141,
+      "TargetType": 287
+    },
+    {
+      "X": 50688,
+      "Y": 768,
+      "Z": 61952,
+      "Room": 41,
+      "EntityIndex": 152,
+      "TargetType": 287
+    },
+    {
+      "X": 61952,
+      "Y": 1280,
+      "Z": 48640,
+      "Room": 75,
+      "EntityIndex": 170,
+      "TargetType": 287
+    },
+    {
+      "X": 62976,
+      "Y": 1280,
+      "Z": 47616,
+      "Room": 75,
+      "EntityIndex": 181,
+      "TargetType": 287
+    },
+    {
+      "X": 61952,
+      "Y": 1280,
+      "Z": 47616,
+      "Room": 75,
+      "EntityIndex": 182,
+      "TargetType": 287
+    },
+    {
+      "X": 55808,
+      "Y": 2560,
+      "Z": 41472,
+      "Room": 104,
+      "EntityIndex": 199,
+      "TargetType": 287
+    },
+    {
+      "X": 49664,
+      "Y": 3584,
+      "Z": 70144,
+      "Room": 70,
+      "EntityIndex": 204,
+      "TargetType": 287
+    },
+    {
+      "X": 69120,
+      "Y": -5888,
+      "Z": 82432,
+      "Room": 37,
+      "EntityIndex": 216,
+      "TargetType": 287
+    }
+  ],
+  "TOWER.TR2": [
+    {
+      "X": 57856,
+      "Y": -4096,
+      "Z": 22016,
+      "Room": 29,
+      "EntityIndex": 22,
+      "TargetType": 287
+    },
+    {
+      "X": 71168,
+      "Y": -15616,
+      "Z": 34304,
+      "Room": 141,
+      "EntityIndex": 32,
+      "TargetType": 287
+    },
+    {
+      "X": 71168,
+      "Y": -15616,
+      "Z": 30208,
+      "Room": 141,
+      "EntityIndex": 44,
+      "TargetType": 287
+    },
+    {
+      "X": 73216,
+      "Y": -15616,
+      "Z": 30208,
+      "Room": 141,
+      "EntityIndex": 45,
+      "TargetType": 287
+    },
+    {
+      "X": 33280,
+      "Y": -26368,
+      "Z": 44544,
+      "Room": 155,
+      "EntityIndex": 51,
+      "TargetType": 287
+    },
+    {
+      "X": 52736,
+      "Y": -18688,
+      "Z": 30208,
+      "Room": 18,
+      "EntityIndex": 119,
+      "TargetType": 287
+    },
+    {
+      "X": 50688,
+      "Y": -18688,
+      "Z": 30208,
+      "Room": 18,
+      "EntityIndex": 133,
+      "TargetType": 287
+    },
+    {
+      "X": 51712,
+      "Y": -18688,
+      "Z": 29184,
+      "Room": 18,
+      "EntityIndex": 156,
+      "TargetType": 287
+    },
+    {
+      "X": 51712,
+      "Y": -18688,
+      "Z": 31232,
+      "Room": 18,
+      "EntityIndex": 179,
+      "TargetType": 287
+    }
+  ],
+  "NEVADA.TR2": [
+    {
+      "X": 27136,
+      "Y": 0,
+      "Z": 23040,
+      "Room": 4,
+      "EntityIndex": 18,
+      "TargetType": 287
+    },
+    {
+      "X": 26112,
+      "Y": 0,
+      "Z": 23040,
+      "Room": 4,
+      "EntityIndex": 19,
+      "TargetType": 287
+    },
+    {
+      "X": 25088,
+      "Y": 0,
+      "Z": 23040,
+      "Room": 4,
+      "EntityIndex": 20,
+      "TargetType": 287
+    },
+    {
+      "X": 12800,
+      "Y": -3328,
+      "Z": 56832,
+      "Room": 48,
+      "EntityIndex": 43,
+      "TargetType": 287
+    },
+    {
+      "X": 17920,
+      "Y": -3200,
+      "Z": 55808,
+      "Room": 48,
+      "EntityIndex": 59,
+      "TargetType": 287
+    },
+    {
+      "X": 51712,
+      "Y": -2944,
+      "Z": 71168,
+      "Room": 149,
+      "EntityIndex": 141,
+      "TargetType": 287
+    },
+    {
+      "X": 49664,
+      "Y": -6656,
+      "Z": 77312,
+      "Room": 154,
+      "EntityIndex": 145,
+      "TargetType": 287
+    }
+  ],
+  "COMPOUND.TR2": [
+    {
+      "X": 13824,
+      "Y": 2048,
+      "Z": 31232,
+      "Room": 7,
+      "EntityIndex": 17,
+      "TargetType": 287
+    },
+    {
+      "X": 95744,
+      "Y": -4864,
+      "Z": 79360,
+      "Room": 74,
+      "EntityIndex": 100,
+      "TargetType": 287
+    },
+    {
+      "X": 38400,
+      "Y": 1792,
+      "Z": 32256,
+      "Room": 19,
+      "EntityIndex": 126,
+      "TargetType": 287
+    },
+    {
+      "X": 55808,
+      "Y": -4608,
+      "Z": 22016,
+      "Room": 160,
+      "EntityIndex": 147,
+      "TargetType": 287
+    },
+    {
+      "X": 56832,
+      "Y": -4608,
+      "Z": 22016,
+      "Room": 160,
+      "EntityIndex": 148,
+      "TargetType": 287
+    },
+    {
+      "X": 57856,
+      "Y": -4608,
+      "Z": 22016,
+      "Room": 160,
+      "EntityIndex": 149,
+      "TargetType": 287
+    },
+    {
+      "X": 5632,
+      "Y": 2304,
+      "Z": 33280,
+      "Room": 7,
+      "EntityIndex": 165,
+      "TargetType": 287
+    },
+    {
+      "X": 71168,
+      "Y": 8704,
+      "Z": 17920,
+      "Room": 118,
+      "EntityIndex": 219,
+      "TargetType": 287
+    }
+  ],
+  "AREA51.TR2": [
+    {
+      "X": 35328,
+      "Y": 256,
+      "Z": 62976,
+      "Room": 0,
+      "EntityIndex": 9,
+      "TargetType": 287
+    },
+    {
+      "X": 46592,
+      "Y": 256,
+      "Z": 65024,
+      "Room": 0,
+      "EntityIndex": 38,
+      "TargetType": 287
+    },
+    {
+      "X": 14848,
+      "Y": -4864,
+      "Z": 45568,
+      "Room": 127,
+      "EntityIndex": 50,
+      "TargetType": 287
+    },
+    {
+      "X": 40448,
+      "Y": 256,
+      "Z": 69120,
+      "Room": 0,
+      "EntityIndex": 59,
+      "TargetType": 287
+    },
+    {
+      "X": 23040,
+      "Y": 1536,
+      "Z": 62976,
+      "Room": 148,
+      "EntityIndex": 76,
+      "TargetType": 287
+    },
+    {
+      "X": 38400,
+      "Y": 2048,
+      "Z": 60928,
+      "Room": 44,
+      "EntityIndex": 94,
+      "TargetType": 287
+    },
+    {
+      "X": 34304,
+      "Y": 5632,
+      "Z": 41472,
+      "Room": 69,
+      "EntityIndex": 106,
+      "TargetType": 287
+    },
+    {
+      "X": 34304,
+      "Y": 3584,
+      "Z": 72192,
+      "Room": 82,
+      "EntityIndex": 140,
+      "TargetType": 287
+    }
+  ],
+  "ANTARC.TR2": [
+    {
+      "X": 44544,
+      "Y": -2816,
+      "Z": 68096,
+      "Room": 187,
+      "EntityIndex": 8,
+      "TargetType": 287
+    },
+    {
+      "X": 45568,
+      "Y": -2816,
+      "Z": 68096,
+      "Room": 187,
+      "EntityIndex": 9,
+      "TargetType": 287
+    },
+    {
+      "X": 61952,
+      "Y": -6400,
+      "Z": 75264,
+      "Room": 55,
+      "EntityIndex": 14,
+      "TargetType": 287
+    },
+    {
+      "X": 27136,
+      "Y": -6400,
+      "Z": 39424,
+      "Room": 7,
+      "EntityIndex": 20,
+      "TargetType": 287
+    },
+    {
+      "X": 27136,
+      "Y": -6400,
+      "Z": 12800,
+      "Room": 39,
+      "EntityIndex": 28,
+      "TargetType": 287
+    },
+    {
+      "X": 25088,
+      "Y": -6400,
+      "Z": 39424,
+      "Room": 7,
+      "EntityIndex": 79,
+      "TargetType": 287
+    },
+    {
+      "X": 74240,
+      "Y": -2944,
+      "Z": 71168,
+      "Room": 69,
+      "EntityIndex": 81,
+      "TargetType": 287
+    },
+    {
+      "X": 23040,
+      "Y": -6144,
+      "Z": 29184,
+      "Room": 7,
+      "EntityIndex": 89,
+      "TargetType": 287
+    },
+    {
+      "X": 60928,
+      "Y": -2944,
+      "Z": 56832,
+      "Room": 119,
+      "EntityIndex": 92,
+      "TargetType": 287
+    },
+    {
+      "X": 45568,
+      "Y": -2688,
+      "Z": 64000,
+      "Room": 187,
+      "EntityIndex": 94,
+      "TargetType": 287
+    },
+    {
+      "X": 24064,
+      "Y": -6400,
+      "Z": 12800,
+      "Room": 39,
+      "EntityIndex": 105,
+      "TargetType": 287
+    },
+    {
+      "X": 27136,
+      "Y": -8960,
+      "Z": 22016,
+      "Room": 56,
+      "EntityIndex": 107,
+      "TargetType": 287
+    },
+    {
+      "X": 53760,
+      "Y": -2816,
+      "Z": 66048,
+      "Room": 117,
+      "EntityIndex": 115,
+      "TargetType": 287
+    },
+    {
+      "X": 53760,
+      "Y": -2816,
+      "Z": 65024,
+      "Room": 117,
+      "EntityIndex": 116,
+      "TargetType": 287
+    },
+    {
+      "X": 40448,
+      "Y": -6400,
+      "Z": 22016,
+      "Room": 19,
+      "EntityIndex": 150,
+      "TargetType": 287
+    },
+    {
+      "X": 46592,
+      "Y": -3584,
+      "Z": 40448,
+      "Room": 70,
+      "EntityIndex": 151,
+      "TargetType": 287
+    }
+  ],
+  "MINES.TR2": [
+    {
+      "X": 55808,
+      "Y": 8064,
+      "Z": 62976,
+      "Room": 18,
+      "EntityIndex": 26,
+      "TargetType": 287
+    },
+    {
+      "X": 54784,
+      "Y": 8192,
+      "Z": 62976,
+      "Room": 18,
+      "EntityIndex": 37,
+      "TargetType": 287
+    },
+    {
+      "X": 54784,
+      "Y": 9088,
+      "Z": 44544,
+      "Room": 69,
+      "EntityIndex": 47,
+      "TargetType": 287
+    },
+    {
+      "X": 54784,
+      "Y": 8960,
+      "Z": 43520,
+      "Room": 69,
+      "EntityIndex": 48,
+      "TargetType": 287
+    },
+    {
+      "X": 65024,
+      "Y": 5888,
+      "Z": 49664,
+      "Room": 104,
+      "EntityIndex": 71,
+      "TargetType": 287
+    },
+    {
+      "X": 49664,
+      "Y": 5888,
+      "Z": 41472,
+      "Room": 70,
+      "EntityIndex": 74,
+      "TargetType": 287
+    },
+    {
+      "X": 38400,
+      "Y": 8192,
+      "Z": 53760,
+      "Room": 11,
+      "EntityIndex": 95,
+      "TargetType": 287
+    },
+    {
+      "X": 11776,
+      "Y": 7424,
+      "Z": 69120,
+      "Room": 125,
+      "EntityIndex": 117,
+      "TargetType": 287
+    },
+    {
+      "X": 73216,
+      "Y": 24320,
+      "Z": 61952,
+      "Room": 160,
+      "EntityIndex": 147,
+      "TargetType": 287
+    },
+    {
+      "X": 58880,
+      "Y": 26624,
+      "Z": 57856,
+      "Room": 160,
+      "EntityIndex": 148,
+      "TargetType": 287
+    },
+    {
+      "X": 69120,
+      "Y": 26624,
+      "Z": 56832,
+      "Room": 160,
+      "EntityIndex": 164,
+      "TargetType": 287
+    },
+    {
+      "X": 55808,
+      "Y": 8192,
+      "Z": 65024,
+      "Room": 18,
+      "EntityIndex": 171,
+      "TargetType": 287
+    },
+    {
+      "X": 72192,
+      "Y": 24320,
+      "Z": 61952,
+      "Room": 160,
+      "EntityIndex": 173,
+      "TargetType": 287
+    }
+  ],
+  "CHAMBER.TR2": [
+    {
+      "X": 28160,
+      "Y": 0,
+      "Z": 27136,
+      "Room": 28,
+      "EntityIndex": 48,
+      "TargetType": 287
+    },
+    {
+      "X": 49664,
+      "Y": 0,
+      "Z": 35328,
+      "Room": 23,
+      "EntityIndex": 50,
+      "TargetType": 287
+    }
+  ]
+}

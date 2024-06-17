@@ -1232,6 +1232,12 @@ public class TRRandomizerController
         set => LevelRandomizer.DocileWillard = value;
     }
 
+    public bool RelocateAwkwardEnemies
+    {
+        get => LevelRandomizer.RelocateAwkwardEnemies;
+        set => LevelRandomizer.RelocateAwkwardEnemies = value;
+    }
+
     public BirdMonsterBehaviour BirdMonsterBehaviour
     {
         get => LevelRandomizer.BirdMonsterBehaviour;

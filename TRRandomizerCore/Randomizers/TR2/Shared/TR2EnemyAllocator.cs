@@ -29,6 +29,9 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         TR2LevelNames.MONASTERY,
     };
 
+    public TR2EnemyAllocator()
+        : base(TRGameVersion.TR2) { }
+
     public List<string> DragonLevels { get; set; }
     public ItemFactory<TR2Entity> ItemFactory { get; set; }
 
@@ -580,6 +583,8 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         {
             LimitFriendlyEnemies(level, enemies.Available.Except(friends).ToList(), friends);
         }
+
+        RelocateEnemies(levelName, level.Entities);
 
         if (!Settings.AllowEnemyKeyDrops)
         {
