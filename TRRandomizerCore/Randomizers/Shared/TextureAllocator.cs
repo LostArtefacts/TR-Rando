@@ -66,13 +66,15 @@ public class TextureAllocator<T, R>
             else if (Settings.TextureMode == TextureMode.Game)
             {
                 TRRScriptedLevel nextLevel = levelSwaps[levels.IndexOf(level)];
-                baseTextures.AddRange(textureCache[nextLevel]);
-                newTextures = textureCache[nextLevel];
-
-                while (newTextures.Count < trgData.Textures.Count)
+                List<ushort> textureSet = textureCache[nextLevel].RandomSelection(Generator, 
+                    Math.Min(trgData.Textures.Count, textureCache[nextLevel].Distinct().Count()));
+                while (textureSet.Count < trgData.Textures.Count)
                 {
-                    newTextures.Add(newTextures.RandomItem(Generator));
+                    textureSet.Add(textureCache[nextLevel].RandomItem(Generator));
                 }
+
+                baseTextures.AddRange(textureCache[nextLevel]);
+                newTextures.AddRange(textureSet);
             }
             else
             {
