@@ -116,6 +116,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             script.FixDescendingGlitch = false;
             script.FixQwopGlitch = false;
             script.FixWallJumpGlitch = false;
+            script.WalkToItems = false;
         }
 
         ScriptEditor.SaveScript();
