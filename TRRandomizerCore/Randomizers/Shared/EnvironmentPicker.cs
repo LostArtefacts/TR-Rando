@@ -91,6 +91,8 @@ public class EnvironmentPicker
         {
             // Pick a random number of packs to apply, but at least 1
             sets = pool.RandomSelection(_generator, _generator.Next(1, pool.Count + 1));
+            // Ensure original order is kept as some mods rely on other things happening first
+            sets.Sort((s1, s2) => pool.IndexOf(s1).CompareTo(pool.IndexOf(s2)));
         }
 
         return sets;
