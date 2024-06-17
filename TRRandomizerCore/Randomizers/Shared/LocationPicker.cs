@@ -17,7 +17,7 @@ public class LocationPicker : IRouteManager
     private Random _generator;
 
     public Func<Location, bool> TriggerTestAction { get; set; }
-    public Func<Location, bool, bool> KeyItemTestAction { get; set; }
+    public Func<Location, bool, List<short>, bool> KeyItemTestAction { get; set; }
     public List<ExtRoomInfo> RoomInfos { get; set; }
     public int LevelSize { get; private set; }
 
@@ -138,7 +138,7 @@ public class LocationPicker : IRouteManager
                 continue;
             }
 
-            if (KeyItemTestAction != null && !KeyItemTestAction(newLocation, hasPickupTrigger))
+            if (KeyItemTestAction != null && !KeyItemTestAction(newLocation, hasPickupTrigger, roomPool))
             {
                 continue;
             }

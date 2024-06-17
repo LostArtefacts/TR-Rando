@@ -326,10 +326,7 @@ public abstract class ItemAllocator<T, E>
             }
         }
 
-        if (!Settings.AllowEnemyKeyDrops)
-        {
-            ExcludeEnemyKeyDrops(items);
-        }
+        ExcludeEnemyKeyDrops(items);
     }
 
     protected List<E> GetPickups(string levelName, List<E> items, bool isUnarmed)

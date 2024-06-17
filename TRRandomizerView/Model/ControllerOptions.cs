@@ -1037,7 +1037,7 @@ public class ControllerOptions : INotifyPropertyChanged
         MaintainKeyContinuity.IsActive = defaultMode;
 
         AllowReturnPathLocations.IsActive = !defaultMode || IncludeKeyItems.Value;
-        AllowEnemyKeyDrops.IsActive = !defaultMode || IncludeKeyItems.Value;
+        AllowEnemyKeyDrops.IsActive = defaultMode && IncludeKeyItems.Value;
 
         FirePropertyChanged(nameof(WeaponDifficultyAvailable));
         FirePropertyChanged(nameof(IncludeKeyItemsImplied));
@@ -3535,7 +3535,7 @@ public class ControllerOptions : INotifyPropertyChanged
     {
         bool defaultMode = ItemMode == ItemMode.Default;
         AllowReturnPathLocations.IsActive = !defaultMode || IncludeKeyItems.Value;
-        AllowEnemyKeyDrops.IsActive = !defaultMode || IncludeKeyItems.Value;
+        AllowEnemyKeyDrops.IsActive = defaultMode && IncludeKeyItems.Value;
         FirePropertyChanged(nameof(IncludeKeyItemsImplied));
     }
 
