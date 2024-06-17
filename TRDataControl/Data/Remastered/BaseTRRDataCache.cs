@@ -40,30 +40,33 @@ public abstract class BaseTRRDataCache<TKey, TAlias>
 
     public void SetPDPData(TRDictionary<TKey, TRModel> pdpData, TKey sourceType, TKey destinationType)
     {
-        TKey translatedKey = TranslateKey(sourceType);
-        if (!_pdpCache.ContainsKey(sourceType))
+        lock (_pdpCache)
         {
-            string sourceLevel = GetSourceLevel(sourceType)
-                ?? throw new KeyNotFoundException($"Source PDP file for {sourceType} is undefined");
+            TKey translatedKey = TranslateKey(sourceType);
+            if (!_pdpCache.ContainsKey(sourceType))
+            {
+                string sourceLevel = GetSourceLevel(sourceType)
+                    ?? throw new KeyNotFoundException($"Source PDP file for {sourceType} is undefined");
 
-            TRPDPControlBase<TKey> control = GetPDPControl();
-            TRDictionary<TKey, TRModel> models = control.Read(Path.Combine(PDPFolder, Path.GetFileNameWithoutExtension(sourceLevel) + _pdpExt));
-            if (models.ContainsKey(translatedKey))
-            {
-                _pdpCache[sourceType] = models[translatedKey];
+                TRPDPControlBase<TKey> control = GetPDPControl();
+                TRDictionary<TKey, TRModel> models = control.Read(Path.Combine(PDPFolder, Path.GetFileNameWithoutExtension(sourceLevel) + _pdpExt));
+                if (models.ContainsKey(translatedKey))
+                {
+                    _pdpCache[sourceType] = models[translatedKey];
+                }
+                else if (models.ContainsKey(destinationType))
+                {
+                    _pdpCache[sourceType] = models[destinationType];
+                }
+                else
+                {
+                    throw new KeyNotFoundException($"Could not load cached PDP data for {sourceType}");
+                }
             }
-            else if (models.ContainsKey(destinationType))
-            {
-                _pdpCache[sourceType] = models[destinationType];
-            }
-            else
-            {
-                throw new KeyNotFoundException($"Could not load cached PDP data for {sourceType}");
-            }
+
+            translatedKey = TranslateKey(destinationType);
+            pdpData[translatedKey] = _pdpCache[sourceType];
         }
-
-        translatedKey = TranslateKey(destinationType);
-        pdpData[translatedKey] = _pdpCache[sourceType];
     }
 
     public void SetMapData(Dictionary<TKey, TAlias> mapData, TKey sourceType, TKey destinationType)
