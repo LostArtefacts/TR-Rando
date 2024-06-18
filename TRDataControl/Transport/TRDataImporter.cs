@@ -119,17 +119,8 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
             }
         }
 
-        for (int i = cleanedEntities.Count - 1; i >= 0; i--)
-        {
-            T type = cleanedEntities[i];
-            IEnumerable<T> dependencies = TypesToImport.SelectMany(t => Data.GetDependencies(t)).Select(t => Data.TranslateAlias(t));
-            if (dependencies.Contains(type))
-            {
-                cleanedEntities.RemoveAt(i);
-            }
-        }
-
-        TypesToRemove = cleanedEntities;
+        var dependencies = TypesToImport.SelectMany(t => Data.GetDependencies(t)).Select(t => Data.TranslateAlias(t));
+        TypesToRemove = cleanedEntities.Where(e => !dependencies.Contains(e)).ToList();
     }
 
     private void CleanAliases()
