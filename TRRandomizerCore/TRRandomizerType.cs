@@ -69,4 +69,5 @@ public enum TRRandomizerType
     BlankTracks,
     TextureSwap,
     Wireframe,
+    HideDeadTrexes,
 }

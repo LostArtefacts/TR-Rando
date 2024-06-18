@@ -73,6 +73,7 @@ public class RandomizerSettings
     public bool ProtectMonks { get; set; }
     public bool DocileWillard { get; set; }
     public bool RelocateAwkwardEnemies { get; set; }
+    public bool HideDeadTrexes { get; set; }
     public BirdMonsterBehaviour BirdMonsterBehaviour { get; set; }
     public bool DefaultChickens => BirdMonsterBehaviour == BirdMonsterBehaviour.Default;
     public bool DocileChickens => BirdMonsterBehaviour == BirdMonsterBehaviour.Docile;
@@ -233,6 +234,7 @@ public class RandomizerSettings
         ProtectMonks = config.GetBool(nameof(ProtectMonks), true);
         DocileWillard = config.GetBool(nameof(DocileWillard));
         RelocateAwkwardEnemies = config.GetBool(nameof(RelocateAwkwardEnemies), true);
+        HideDeadTrexes = config.GetBool(nameof(HideDeadTrexes), true);
         BirdMonsterBehaviour = (BirdMonsterBehaviour)config.GetEnum(nameof(BirdMonsterBehaviour), typeof(BirdMonsterBehaviour), BirdMonsterBehaviour.Default);
         RandoEnemyDifficulty = (RandoDifficulty)config.GetEnum(nameof(RandoEnemyDifficulty), typeof(RandoDifficulty), RandoDifficulty.Default);
         DragonSpawnType = (DragonSpawnType)config.GetEnum(nameof(DragonSpawnType), typeof(DragonSpawnType), DragonSpawnType.Default);
@@ -407,6 +409,7 @@ public class RandomizerSettings
         config[nameof(ProtectMonks)] = ProtectMonks;
         config[nameof(DocileWillard)] = DocileWillard;
         config[nameof(RelocateAwkwardEnemies)] = RelocateAwkwardEnemies;
+        config[nameof(HideDeadTrexes)] = HideDeadTrexes;
         config[nameof(BirdMonsterBehaviour)] = BirdMonsterBehaviour;
         config[nameof(RandoEnemyDifficulty)] = RandoEnemyDifficulty;
         config[nameof(DragonSpawnType)] = DragonSpawnType;

@@ -1,5 +1,6 @@
 ﻿using TRDataControl;
 using TRGE.Core;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -12,6 +13,7 @@ namespace TRRandomizerCore.Randomizers;
 public class TR1REnemyRandomizer : BaseTR1RRandomizer
 {
     private static readonly List<int> _tihocanEndEnemies = new() { 73, 74, 82 };
+    private const int _trexDeathAnimation = 10;
 
     private TR1EnemyAllocator _allocator;
 
@@ -111,6 +113,7 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
     private void ApplyPostRandomization(TR1RCombinedLevel level, EnemyRandomizationCollection<TR1Type> enemies)
     {
         UpdateAtlanteanPDP(level, enemies);
+        HideTrexDeath(level);
         AdjustTihocanEnding(level);
         AddUnarmedLevelAmmo(level);
     }
@@ -124,6 +127,21 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
 
         // The allocator may have cloned non-shooters, so copy into the PDP as well
         DataCache.SetPDPData(level.PDPData, TR1Type.ShootingAtlantean_N, TR1Type.ShootingAtlantean_N);
+    }
+
+    private void HideTrexDeath(TR1RCombinedLevel level)
+    {
+        if (!Settings.HideDeadTrexes || !level.Data.Models.ContainsKey(TR1Type.TRex))
+        {
+            return;
+        }
+
+        TRSetPositionCommand cmd = new()
+        {
+            Y = TRConsts.NoHeight,
+        };
+        level.Data.Models[TR1Type.TRex].Animations[_trexDeathAnimation].Commands.Add(cmd);
+        level.PDPData[TR1Type.TRex].Animations[_trexDeathAnimation].Commands.Add(cmd);
     }
 
     private void AdjustTihocanEnding(TR1RCombinedLevel level)

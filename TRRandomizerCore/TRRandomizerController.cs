@@ -1238,6 +1238,12 @@ public class TRRandomizerController
         set => LevelRandomizer.RelocateAwkwardEnemies = value;
     }
 
+    public bool HideDeadTrexes
+    {
+        get => LevelRandomizer.HideDeadTrexes;
+        set => LevelRandomizer.HideDeadTrexes = value;
+    }
+
     public BirdMonsterBehaviour BirdMonsterBehaviour
     {
         get => LevelRandomizer.BirdMonsterBehaviour;

@@ -38,7 +38,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private bool _useRewardRoomCameras;
     private uint _minSecretCount, _maxSecretCount;
     private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity, _oneItemDifficulty;
-    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems, _relocateAwkwardEnemies, _unrestrictedEnemyDifficulty;
+    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems, _relocateAwkwardEnemies, _hideDeadTrexes, _unrestrictedEnemyDifficulty;
     private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures, _retainLaraTextures;
     private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
     private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
@@ -2517,6 +2517,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public BoolItemControlClass HideDeadTrexes
+    {
+        get => _hideDeadTrexes;
+        set
+        {
+            _hideDeadTrexes = value;
+            FirePropertyChanged();
+        }
+    }
+
     public BirdMonsterBehaviour BirdMonsterBehaviour
     {
         get => _birdMonsterBehaviour;
@@ -3162,6 +3172,12 @@ public class ControllerOptions : INotifyPropertyChanged
             HelpURL = "https://github.com/LostArtefacts/TR-Rando/blob/master/Resources/Documentation/ENEMIES.md#awkward-enemies",
         };
         BindingOperations.SetBinding(RelocateAwkwardEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+        HideDeadTrexes = new()
+        {
+            Title = "Hide dead T-rexes",
+            Description = "T-rexes retain collision on death in TR1R, so this option will move them out of the way when killed.",
+        };
+        BindingOperations.SetBinding(HideDeadTrexes, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
         ProtectMonks = new BoolItemControlClass()
         {
             Title = "Avoid having to kill allies",
@@ -3467,7 +3483,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         EnemyBoolItemControls = new()
         {
-            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _relocateAwkwardEnemies, _removeLevelEndingLarson, _giveUnarmedItems,_allowEnemyKeyDrops, _unrestrictedEnemyDifficulty
+            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _relocateAwkwardEnemies, _hideDeadTrexes, _removeLevelEndingLarson, _giveUnarmedItems,_allowEnemyKeyDrops, _unrestrictedEnemyDifficulty
         };
         TextureBoolItemControls = new()
         {
@@ -3565,6 +3581,7 @@ public class ControllerOptions : INotifyPropertyChanged
 
         _protectMonks.IsAvailable = !IsTR1;
         _docileWillard.IsAvailable = IsTR3;
+        _hideDeadTrexes.IsAvailable = IsHideDeadTrexesTypeSupported;
 
         _includeKeyItems.IsAvailable = IsKeyItemTypeSupported;
         _maintainKeyContinuity.IsAvailable = IsKeyContinuityTypeSupported;
@@ -3694,6 +3711,7 @@ public class ControllerOptions : INotifyPropertyChanged
         ProtectMonks.Value = _controller.ProtectMonks;
         DocileWillard.Value = _controller.DocileWillard;
         RelocateAwkwardEnemies.Value = _controller.RelocateAwkwardEnemies;
+        HideDeadTrexes.Value = _controller.HideDeadTrexes;
         BirdMonsterBehaviours = Enum.GetValues<BirdMonsterBehaviour>();
         BirdMonsterBehaviour = _controller.BirdMonsterBehaviour;
         DragonSpawnTypes = Enum.GetValues<DragonSpawnType>();
@@ -4010,6 +4028,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.ProtectMonks = ProtectMonks.Value;
         _controller.DocileWillard = DocileWillard.Value;
         _controller.RelocateAwkwardEnemies = RelocateAwkwardEnemies.Value;
+        _controller.HideDeadTrexes = HideDeadTrexes.Value;
         _controller.BirdMonsterBehaviour = BirdMonsterBehaviour;
         _controller.DragonSpawnType = DragonSpawnType;
         _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
@@ -4257,6 +4276,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsKeyItemTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItemTextures);
     public bool IsWaterColourTypeSupported => IsRandomizationSupported(TRRandomizerType.WaterColour);
     public bool IsAtlanteanEggBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.AtlanteanEggBehaviour);
+    public bool IsHideDeadTrexesTypeSupported => IsRandomizationSupported(TRRandomizerType.HideDeadTrexes);
     public bool IsHiddenEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.HiddenEnemies);
     public bool IsLarsonBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.LarsonBehaviour);
     public bool IsClonedEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.ClonedEnemies);
