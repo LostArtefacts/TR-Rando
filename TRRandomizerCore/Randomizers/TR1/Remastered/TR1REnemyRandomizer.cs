@@ -115,6 +115,7 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
         UpdateAtlanteanPDP(level, enemies);
         HideTrexDeath(level);
         AdjustTihocanEnding(level);
+        AdjustScionEnding(level);
         AddUnarmedLevelAmmo(level);
     }
 
@@ -155,6 +156,17 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
 
         // Add Pierre's pickups in a default place. Allows pacifist runs effectively.
         level.Data.Entities.AddRange(TR1ItemAllocator.TihocanEndItems);
+    }
+
+    private static void AdjustScionEnding(TR1RCombinedLevel level)
+    {
+        if (level.Data.Models.ContainsKey(TR1Type.ScionPiece4_S_P)
+            && (level.Data.Models.ContainsKey(TR1Type.TRex) || level.Data.Models.ContainsKey(TR1Type.Adam)))
+        {
+            // Ensure the scion is shootable in Atlantis. This is handled in OG with an environment condition,
+            // but support for PDP isn't there yet.
+            level.PDPData.ChangeKey(TR1Type.ScionPiece4_S_P, TR1Type.ScionPiece3_S_P);
+        }
     }
 
     private void AddUnarmedLevelAmmo(TR1RCombinedLevel level)
