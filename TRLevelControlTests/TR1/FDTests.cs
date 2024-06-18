@@ -401,6 +401,42 @@ public class FDTests : FDTestBase
     }
 
     [TestMethod]
+    [Description("Get list of rooms that contain an entity's triggers.")]
+    public void GetTriggerRooms()
+    {
+        TR1Level level = GetTR1TestLevel();
+
+        // Check original single trigger
+        List<short> rooms = level.FloorData.GetTriggerRooms(12, level.Rooms);
+        Assert.AreEqual(1, rooms.Count);
+        Assert.IsTrue(rooms.Contains(6));
+
+        void AddTestTrigger(TRRoomSector sector)
+        {
+            level.FloorData.CreateFloorData(sector);
+            level.FloorData[sector.FDIndex].Add(new FDTriggerEntry
+            {
+                Actions = new()
+                {
+                    new() { Parameter = 12 }
+                }
+            });
+        }
+
+        // Add another in a different room
+        AddTestTrigger(level.Rooms[4].GetSector(3, 1, TRUnit.Sector));
+        rooms = level.FloorData.GetTriggerRooms(12, level.Rooms);
+        Assert.AreEqual(2, rooms.Count);
+        Assert.IsTrue(rooms.Contains(4));
+        Assert.IsTrue(rooms.Contains(6));
+
+        // Add a third but in the same room - we don't want duplicate room numbers returned
+        AddTestTrigger(level.Rooms[4].GetSector(3, 2, TRUnit.Sector));
+        rooms = level.FloorData.GetTriggerRooms(12, level.Rooms);
+        Assert.AreEqual(2, rooms.Count);
+    }
+
+    [TestMethod]
     [Description("Test finding secret triggers.")]
     public void GetSecretTriggers()
     {

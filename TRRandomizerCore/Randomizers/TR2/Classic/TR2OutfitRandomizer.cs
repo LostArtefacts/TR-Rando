@@ -275,6 +275,12 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // Try to import the selected models into the level.
                 importer.Import();
 
+                if (lara == TR2TypeUtilities.GetAliasForLevel(level.Name, TR2Type.Lara))
+                {
+                    // In case a previous attempt failed, we need to restore default texture mapping
+                    _outer.TextureMonitor.GetMonitor(level.Name)?.RemovedTextures?.Remove(TR2Type.Lara);
+                }
+
                 if (level.IsCutScene)
                 {
                     // Restore original cutscene animations

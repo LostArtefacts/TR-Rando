@@ -80,12 +80,11 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                 else
                 {
                     _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script.OriginalSequence);
-                }
-
-                if (Settings.AllowEnemyKeyDrops)
-                {
-                    UpdateEnemyItemDrops(_levelInstance, _levelInstance.Data.Entities
-                        .Where(e => TR1TypeUtilities.IsKeyItemType(e.TypeID)));
+                    if (Settings.AllowEnemyKeyDrops)
+                    {
+                        UpdateEnemyItemDrops(_levelInstance, _levelInstance.Data.Entities
+                            .Where(e => TR1TypeUtilities.IsKeyItemType(e.TypeID)));
+                    }
                 }
 
                 SaveLevelInstance();

@@ -172,6 +172,15 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
         }
     }
 
+    public List<short> GetTriggerRooms<R>(int entityIndex, List<R> rooms)
+        where R : TRRoom
+    {
+        List<FDTriggerEntry> triggers = GetEntityTriggers(entityIndex);
+        return Enumerable.Range(0, rooms.Count)
+            .Where(i => rooms[i].Sectors.Any(s => s.FDIndex != 0 && triggers.Any(_entries[s.FDIndex].Contains)))
+            .Select(i => (short)i).ToList();
+    }
+
     public TRRoomSector GetRoomSector<R>(int x, int y, int z, short roomNumber, List<R> rooms)
         where R : TRRoom
     {

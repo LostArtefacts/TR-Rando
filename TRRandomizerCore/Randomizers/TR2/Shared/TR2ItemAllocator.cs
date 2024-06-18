@@ -84,7 +84,7 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
             ? location => LocationUtilities.HasAnyTrigger(location, level)
             : null;
         _picker.KeyItemTestAction = locationMode == LocationMode.KeyItems
-            ? (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, levelName, level)
+            ? (location, hasPickupTrigger, roomPool) => TestKeyItemLocation(location, hasPickupTrigger, roomPool, levelName, level)
             : null;
         _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
 
@@ -99,9 +99,10 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
         _picker.Initialise(levelName, pool, Settings, Generator);
     }
 
-    private bool TestKeyItemLocation(Location location, bool hasPickupTrigger, string levelName, TR2Level level)
+    private bool TestKeyItemLocation(Location location, bool hasPickupTrigger, List<short> roomPool, string levelName, TR2Level level)
     {
-        // Make sure if we're placing on the same tile as an enemy, that the enemy can drop the item.
+        // Make sure if we're placing on the same tile as an enemy, that the enemy can drop the item. Ensure too that the enemy
+        // can be triggered from within the key item's room pool and not beyond.
         TR2Entity enemy = level.Entities
             .FindAll(e => TR2TypeUtilities.IsEnemyType(e.TypeID))
             .Find(e => e.GetLocation().IsEquivalent(location));
@@ -111,7 +112,8 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
             TR2TypeUtilities.GetAliasForLevel(levelName, enemy.TypeID),
             Settings.RandomizeEnemies && !Settings.ProtectMonks,
             Settings.RandomizeEnemies && Settings.UnconditionalChickens
-        ));
+        )
+        && level.FloorData.GetTriggerRooms(level.Entities.IndexOf(enemy), level.Rooms).Any(roomPool.Contains));
     }
 
     private List<Location> GetItemLocationPool(string levelName, TR2Level level, bool keyItemMode)

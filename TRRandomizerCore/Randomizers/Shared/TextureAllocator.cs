@@ -12,7 +12,7 @@ public class TextureAllocator<T, R>
     where R : Enum
 {
     private readonly TRTexInfo<T> _texInfo;
-    private readonly Dictionary<TRRScriptedLevel, TRGData> _trgData;
+    private readonly Dictionary<TRRScriptedLevel, TRGData> _trgData, _cutTrgData;
     private readonly Dictionary<TRRScriptedLevel, Dictionary<T, R>> _mapData;
 
     public Random Generator { get; set; }
@@ -22,6 +22,7 @@ public class TextureAllocator<T, R>
     {
         _texInfo = JsonConvert.DeserializeObject<TRTexInfo<T>>(File.ReadAllText($@"Resources\{version}\Textures\texinfo.json"));
         _trgData = new();
+        _cutTrgData = new();
         _mapData = new();
     }
 
@@ -29,6 +30,11 @@ public class TextureAllocator<T, R>
     {
         _trgData[level] = trgData;
         _mapData[level] = mapData;
+    }
+
+    public void LoadCutData(TRRScriptedLevel parentLevel, TRGData trgData)
+    {
+        _cutTrgData[parentLevel] = trgData;
     }
 
     public void Allocate(Func<TRRScriptedLevel, TRGData, Dictionary<T, R>, bool> saveData)
@@ -48,7 +54,7 @@ public class TextureAllocator<T, R>
             while (levelSwaps.Any(l => levels.IndexOf(l) == levelSwaps.IndexOf(l)));
         }
 
-        foreach (var (level, trgData) in _trgData)
+        Dictionary<T, R> AllocateLevel(TRRScriptedLevel level, TRGData trgData)
         {
             List<ushort> baseTextures = new();
             List<ushort> newTextures = new();
@@ -60,13 +66,15 @@ public class TextureAllocator<T, R>
             else if (Settings.TextureMode == TextureMode.Game)
             {
                 TRRScriptedLevel nextLevel = levelSwaps[levels.IndexOf(level)];
-                baseTextures.AddRange(textureCache[nextLevel]);
-                newTextures = textureCache[nextLevel];
-
-                while (newTextures.Count < trgData.Textures.Count)
+                List<ushort> textureSet = textureCache[nextLevel].RandomSelection(Generator, 
+                    Math.Min(trgData.Textures.Count, textureCache[nextLevel].Distinct().Count()));
+                while (textureSet.Count < trgData.Textures.Count)
                 {
-                    newTextures.Add(newTextures.RandomItem(Generator));
+                    textureSet.Add(textureCache[nextLevel].RandomItem(Generator));
                 }
+
+                baseTextures.AddRange(textureCache[nextLevel]);
+                newTextures.AddRange(textureSet);
             }
             else
             {
@@ -108,15 +116,29 @@ public class TextureAllocator<T, R>
                 animatedIndices.ForEach(i => newTextures[i] = defaultTexture);
             }
 
-            Dictionary<T, R> itemRemap = Settings.TextureMode == TextureMode.Game && Settings.MatchTextureItems
-                ? RemapItems(level, levelSwaps[levels.IndexOf(level)])
-                : null;
-
             trgData.Textures.Clear();
             trgData.Textures.AddRange(newTextures);
+
+            return Settings.TextureMode == TextureMode.Game && Settings.MatchTextureItems
+                ? RemapItems(level, levelSwaps[levels.IndexOf(level)])
+                : null;
+        }
+
+        foreach (var (level, trgData) in _trgData)
+        {
+            Dictionary<T, R> itemRemap = AllocateLevel(level, trgData);
             if (!saveData(level, trgData, itemRemap))
             {
                 break;
+            }
+
+            if (_cutTrgData.ContainsKey(level))
+            {
+                AllocateLevel(level, _cutTrgData[level]);
+                if (!saveData(level.CutSceneLevel as TRRScriptedLevel, _cutTrgData[level], null))
+                {
+                    break;
+                }
             }
         }
     }

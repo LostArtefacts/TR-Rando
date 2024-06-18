@@ -5,6 +5,7 @@ using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers;
 
@@ -114,8 +115,8 @@ public class TR3REnemyRandomizer : BaseTR3RRandomizer
 
         _allocator.AddUnarmedLevelAmmo(level.Name, level.Data, (loc, type) => { });
 
-        // We can't give more ammo because HSC is so close to the limit. Instead just guarantee
-        // pistols in the starting area
+        // We can't give more ammo or add additional pistols because HSC is so close to the
+        // item limit. Instead just move the OG pistols to the starting area.
         List<Location> pistolLocations = _allocator.GetPistolLocations(level.Name);
         Location location;
         do
@@ -124,8 +125,9 @@ public class TR3REnemyRandomizer : BaseTR3RRandomizer
         }
         while (location.Room != 7);
 
-        TR3Entity pistols = ItemFactory.CreateItem(level.Name, level.Data.Entities, location);
+        TR3Entity pistols = level.Data.Entities.Find(e => TR3TypeUtilities.IsWeaponPickup(e.TypeID));
         pistols.TypeID = TR3Type.Pistols_P;
+        pistols.SetLocation(location);
     }
 
     internal class EnemyProcessor : AbstractProcessorThread<TR3REnemyRandomizer>

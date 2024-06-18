@@ -53,6 +53,8 @@ The options are:
 # TR2
 The standard Stone, Jade and Gold dragons will be placed in each level.
 
+Note that in TR2 Remastered, secret rewards cannot be changed: you will always receive the same rewards as per OG. In addition, while secrets are added to Dragon's Lair and Home Sweet Home, you do not receive any rewards for collecting all three in each level.
+
 ----
 ## TR3
 Secret randomization logic in TR3 works in exactly the same way as TR1.

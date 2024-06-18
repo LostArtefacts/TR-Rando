@@ -32,8 +32,12 @@ public class TR3RStartPositionRandomizer : BaseTR3RRandomizer
 
     private void RandomizeStartPosition(TR3RCombinedLevel level)
     {
-        TR3Entity lara = level.Data.Entities.Find(e => e.TypeID == TR3Type.Lara);
+        if (level.Script.HasStartAnimation)
+        {
+            return;
+        }
 
+        TR3Entity lara = level.Data.Entities.Find(e => e.TypeID == TR3Type.Lara);
         if (!Settings.RotateStartPositionOnly && _startLocations.ContainsKey(level.Name))
         {
             List<Location> locations = _startLocations[level.Name];

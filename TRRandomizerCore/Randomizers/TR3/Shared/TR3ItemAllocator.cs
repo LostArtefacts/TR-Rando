@@ -79,7 +79,7 @@ public class TR3ItemAllocator : ItemAllocator<TR3Type, TR3Entity>
             ? location => LocationUtilities.HasAnyTrigger(location, level)
             : null;
         _picker.KeyItemTestAction = locationMode == LocationMode.KeyItems
-            ? (location, hasPickupTrigger) => TestKeyItemLocation(location, hasPickupTrigger, levelName, level)
+            ? (location, hasPickupTrigger, roomPool) => TestKeyItemLocation(location, hasPickupTrigger, roomPool, levelName, level)
             : null;
         _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
 
@@ -94,7 +94,7 @@ public class TR3ItemAllocator : ItemAllocator<TR3Type, TR3Entity>
         _picker.Initialise(levelName, pool, Settings, Generator);
     }
 
-    private bool TestKeyItemLocation(Location location, bool hasPickupTrigger, string levelName, TR3Level level)
+    private bool TestKeyItemLocation(Location location, bool hasPickupTrigger, List<short> roomPool, string levelName, TR3Level level)
     {
         // Make sure if we're placing on the same tile as an enemy, that the enemy can drop the item.
         TR3Entity enemy = level.Entities
@@ -105,7 +105,8 @@ public class TR3ItemAllocator : ItemAllocator<TR3Type, TR3Entity>
         (
             TR3TypeUtilities.GetAliasForLevel(levelName, enemy.TypeID),
             !Settings.RandomizeEnemies || Settings.ProtectMonks
-        ));
+        )
+        && level.FloorData.GetTriggerRooms(level.Entities.IndexOf(enemy), level.Rooms).Any(roomPool.Contains));
     }
 
     private List<Location> GetItemLocationPool(string levelName, TR3Level level, bool keyItemMode, bool isCold)

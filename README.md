@@ -49,13 +49,16 @@ For keeping track of levels while you play, check out the [TRRandoTracker](https
 ![TR1 Rando](Resources/Screenshots/Compressed/TR1_3.jpg)
 ![TR1 Rando](Resources/Screenshots/Compressed/TR1_4.jpg)
 ![TR1R Rando](Resources/Screenshots/Compressed/TR1R_1.jpg)
+![TR1R Rando](Resources/Screenshots/Compressed/TR1R_2.jpg)
 ![TR2 Rando](Resources/Screenshots/Compressed/TR2_1.jpg)
 ![TR2 Rando](Resources/Screenshots/Compressed/TR2_4.jpg)
 ![TR2 Rando](Resources/Screenshots/Compressed/TR2_5.jpg)
 ![TR2R Rando](Resources/Screenshots/Compressed/TR2R_1.jpg)
+![TR2R Rando](Resources/Screenshots/Compressed/TR2R_2.jpg)
 ![TR3 Rando](Resources/Screenshots/Compressed/TR3_2.jpg)
 ![TR3 Rando](Resources/Screenshots/Compressed/TR3_3.jpg)
 ![TR3R Rando](Resources/Screenshots/Compressed/TR3R_1.jpg)
+![TR3R Rando](Resources/Screenshots/Compressed/TR3R_2.jpg)
 
 [View all](Resources/Screenshots).
 

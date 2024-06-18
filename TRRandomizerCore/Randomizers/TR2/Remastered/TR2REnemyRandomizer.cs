@@ -219,9 +219,17 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
                 item.SetLocation(_hshShellLocations[i % _hshShellLocations.Count]);
             }
         }
-        else if (!level.Data.Entities.Any(e => e.TypeID == TR2Type.Pistols_S_P))
+        else
         {
-            AddItem(TR2Type.Pistols_S_P, 1);
+            TR2Entity pistols = level.Data.Entities.Find(e => e.TypeID == TR2Type.Pistols_S_P);
+            if (pistols == null)
+            {
+                AddItem(TR2Type.Pistols_S_P, 1);
+            }
+            else
+            {
+                pistols.SetLocation(item.GetLocation());
+            }
         }
 
         if (Settings.GiveUnarmedItems)

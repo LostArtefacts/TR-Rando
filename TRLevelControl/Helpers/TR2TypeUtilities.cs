@@ -19,6 +19,21 @@ public static class TR2TypeUtilities
             [TR2Type.LaraAssault] =
                 new() { TR2LevelNames.ASSAULT },
         },
+        [TR2Type.LaraMiscAnim_H] = new()
+        {
+            [TR2Type.LaraMiscAnim_H_Wall] = 
+                new() { TR2LevelNames.GW },
+            [TR2Type.LaraMiscAnim_H_Venice] = 
+                new() { TR2LevelNames.BARTOLI },
+            [TR2Type.LaraMiscAnim_H_Unwater] =
+                new() { TR2LevelNames.RIG, TR2LevelNames.DA, TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.DECK },
+            [TR2Type.LaraMiscAnim_H_Ice] = 
+                new() { TR2LevelNames.COT, TR2LevelNames.CHICKEN },
+            [TR2Type.LaraMiscAnim_H_Xian] =
+                new() { TR2LevelNames.FLOATER, TR2LevelNames.LAIR },
+            [TR2Type.LaraMiscAnim_H_HSH] =
+                new() { TR2LevelNames.HOME }
+        },
         [TR2Type.Barracuda] = new()
         {
             [TR2Type.BarracudaIce] =
