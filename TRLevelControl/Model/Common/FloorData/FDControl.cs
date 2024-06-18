@@ -176,20 +176,9 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
         where R : TRRoom
     {
         List<FDTriggerEntry> triggers = GetEntityTriggers(entityIndex);
-        List<short> triggerRooms = new();
-        for (short i = 0; i < rooms.Count; i++)
-        {
-            foreach (TRRoomSector sector in rooms[i].Sectors.Where(s => s.FDIndex != 0))
-            {
-                if (triggers.Any(_entries[sector.FDIndex].Contains))
-                {
-                    triggerRooms.Add(i);
-                    break;
-                }
-            }
-        }
-
-        return triggerRooms;
+        return Enumerable.Range(0, rooms.Count)
+            .Where(i => rooms[i].Sectors.Any(s => s.FDIndex != 0 && triggers.Any(_entries[s.FDIndex].Contains)))
+            .Select(i => (short)i).ToList();
     }
 
     public TRRoomSector GetRoomSector<R>(int x, int y, int z, short roomNumber, List<R> rooms)
