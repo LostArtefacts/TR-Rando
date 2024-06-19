@@ -1,5 +1,6 @@
 ﻿using TRDataControl;
 using TRGE.Core;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -12,6 +13,7 @@ namespace TRRandomizerCore.Randomizers;
 public class TR1REnemyRandomizer : BaseTR1RRandomizer
 {
     private static readonly List<int> _tihocanEndEnemies = new() { 73, 74, 82 };
+    private const int _trexDeathAnimation = 10;
 
     private TR1EnemyAllocator _allocator;
 
@@ -111,7 +113,9 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
     private void ApplyPostRandomization(TR1RCombinedLevel level, EnemyRandomizationCollection<TR1Type> enemies)
     {
         UpdateAtlanteanPDP(level, enemies);
+        HideTrexDeath(level);
         AdjustTihocanEnding(level);
+        AdjustScionEnding(level);
         AddUnarmedLevelAmmo(level);
     }
 
@@ -126,6 +130,31 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
         DataCache.SetPDPData(level.PDPData, TR1Type.ShootingAtlantean_N, TR1Type.ShootingAtlantean_N);
     }
 
+    private void HideTrexDeath(TR1RCombinedLevel level)
+    {
+        if (!Settings.HideDeadTrexes || !level.Data.Models.ContainsKey(TR1Type.TRex))
+        {
+            return;
+        }
+
+        // Push T-rexes down on death, which ultimately disables their collision. Shift the final frame
+        // to the absolute maximum so it's not visible.
+        TRSetPositionCommand cmd = new()
+        {
+            Y = (short)level.Data.Rooms.Max(r => Math.Abs(r.Info.YBottom - r.Info.YTop)),
+        };
+
+        void UpdateModel(TRModel model)
+        {
+            TRAnimation deathAnimation = model.Animations[_trexDeathAnimation];
+            deathAnimation.Commands.Add(cmd);
+            deathAnimation.Frames[^1].OffsetY = short.MaxValue;
+        }
+
+        UpdateModel(level.Data.Models[TR1Type.TRex]);
+        UpdateModel(level.PDPData[TR1Type.TRex]);
+    }
+
     private void AdjustTihocanEnding(TR1RCombinedLevel level)
     {
         if (!level.Is(TR1LevelNames.TIHOCAN)
@@ -137,6 +166,17 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
 
         // Add Pierre's pickups in a default place. Allows pacifist runs effectively.
         level.Data.Entities.AddRange(TR1ItemAllocator.TihocanEndItems);
+    }
+
+    private static void AdjustScionEnding(TR1RCombinedLevel level)
+    {
+        if (level.Data.Models.ContainsKey(TR1Type.ScionPiece4_S_P)
+            && (level.Data.Models.ContainsKey(TR1Type.TRex) || level.Data.Models.ContainsKey(TR1Type.Adam)))
+        {
+            // Ensure the scion is shootable in Atlantis. This is handled in OG with an environment condition,
+            // but support for PDP isn't there yet.
+            level.PDPData.ChangeKey(TR1Type.ScionPiece4_S_P, TR1Type.ScionPiece3_S_P);
+        }
     }
 
     private void AddUnarmedLevelAmmo(TR1RCombinedLevel level)

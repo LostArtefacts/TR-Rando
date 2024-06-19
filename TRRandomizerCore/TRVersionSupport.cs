@@ -68,6 +68,7 @@ internal class TRVersionSupport
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
         TRRandomizerType.HiddenEnemies,
+        TRRandomizerType.HideDeadTrexes,
         TRRandomizerType.Item,
         TRRandomizerType.KeyItems,
         TRRandomizerType.Secret,
