@@ -137,12 +137,22 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
             return;
         }
 
+        // Push T-rexes down on death, which ultimately disables their collision. Shift the final frame
+        // to the absolute maximum so it's not visible.
         TRSetPositionCommand cmd = new()
         {
-            Y = TRConsts.NoHeight,
+            Y = (short)level.Data.Rooms.Max(r => Math.Abs(r.Info.YBottom - r.Info.YTop)),
         };
-        level.Data.Models[TR1Type.TRex].Animations[_trexDeathAnimation].Commands.Add(cmd);
-        level.PDPData[TR1Type.TRex].Animations[_trexDeathAnimation].Commands.Add(cmd);
+
+        void UpdateModel(TRModel model)
+        {
+            TRAnimation deathAnimation = model.Animations[_trexDeathAnimation];
+            deathAnimation.Commands.Add(cmd);
+            deathAnimation.Frames[^1].OffsetY = short.MaxValue;
+        }
+
+        UpdateModel(level.Data.Models[TR1Type.TRex]);
+        UpdateModel(level.PDPData[TR1Type.TRex]);
     }
 
     private void AdjustTihocanEnding(TR1RCombinedLevel level)
