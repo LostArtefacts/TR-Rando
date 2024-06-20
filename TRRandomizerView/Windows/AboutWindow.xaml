@@ -27,7 +27,8 @@
         <Image Grid.RowSpan="2"
                VerticalAlignment="Top"
                Width="120"
-               HorizontalAlignment="Left"
+               Margin="0,5,10,0"
+               HorizontalAlignment="Center"
                Source="..\Resources\rando.png"/>
 
         <StackPanel Grid.Column="1">
@@ -101,7 +102,7 @@
             </TextBlock>
 
             <TextBlock Margin="0,20,0,0">
-                Icon made by 
+                Icon adapted from original by 
                 <Hyperlink ToolTip="https://www.flaticon.com/authors/kiranshastry" 
                            NavigateUri="https://www.flaticon.com/authors/kiranshastry"
                            RequestNavigate="Hyperlink_RequestNavigate">

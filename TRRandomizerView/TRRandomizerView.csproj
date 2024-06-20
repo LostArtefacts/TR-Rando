@@ -52,6 +52,7 @@
     <None Remove="Resources\loading.png" />
     <None Remove="Resources\rando.ico" />
     <None Remove="Resources\rando.png" />
+    <None Remove="Resources\rando_sm.png" />
     <None Remove="Resources\up.png" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,7 @@
     <Resource Include="Resources\loading.png" />
     <Resource Include="Resources\rando.ico" />
     <Resource Include="Resources\rando.png" />
+    <Resource Include="Resources\rando_sm.png" />
     <Resource Include="Resources\up.png" />
   </ItemGroup>
 </Project>
