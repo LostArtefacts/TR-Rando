@@ -2,13 +2,8 @@
    <img alt="TR Rando" src="Resources/randomizerlogo.png"/>
 </p>
 
-TR Rando is a randomizer tool for the classic Tomb Raider series (TR 1-3 and Unfinished Business). It allows you to change many aspects of the
+TR Rando is a randomizer tool for the classic Tomb Raider series (TR 1-3 and Unfinished Business) and Tomb Raider I-III Remastered. It allows you to change many aspects of the
 original levels, such as item pickups, secrets, enemies, Lara's appearance, level order, text...[and so much more](#features).
-
-> ## Tomb Raider I-III Remastered
-> The current release of the randomizer *does not work* with the remasters. Testing is currently underway on supporting these games; for the time being, support remains only for the _original_ games as detailed in [USING.md](USING.md).
->
-> <p align="right"><em>Rando Team</em><br/><em>2024-06-01</em></p>
 
 ## Installation
 

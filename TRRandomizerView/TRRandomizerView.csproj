@@ -20,9 +20,9 @@
     <SelfContained>false</SelfContained>
     <ApplicationIcon>Resources\rando.ico</ApplicationIcon>
 
-    <Version>1.8.4</Version>
+    <Version>1.9.0</Version>
     <Product>Tomb Raider Randomizer</Product>
-    <Copyright>Copyright © Tomb Raider Community 2023</Copyright>
+    <Copyright>Copyright © Tomb Raider Community 2024</Copyright>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\arrows.png" />
