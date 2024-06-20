@@ -435,7 +435,7 @@ public class TRImage : ICloneable
     {
         if (image.Size.Width > Size.Width || image.Size.Height > Size.Height)
         {
-            throw new InvalidOperationException();
+            image = image.Export(new(0, 0, Math.Min(image.Size.Width, Size.Width), Math.Min(image.Size.Height, Size.Height)));
         }
         Import(image, new(0, 0), true);
     }

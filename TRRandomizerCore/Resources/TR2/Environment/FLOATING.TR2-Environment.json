@@ -88,23 +88,9 @@
           "Z": 55891,
           "Room": 152
         },
-        "Clicks": -4,
-        "FloorTexture": 65535,
-        "SideTexture": 1688,
-        "Flags": 7
-      },
-      {
-        "Comments": "Put another on top.",
-        "EMType": 1,
-        "Location": {
-          "X": 83440,
-          "Y": -9216,
-          "Z": 55891,
-          "Room": 152
-        },
-        "Clicks": -2,
+        "Clicks": -6,
         "FloorTexture": 1709,
-        "SideTexture": 1863,
+        "SideTexture": 1688,
         "Flags": 7
       }
     ],
