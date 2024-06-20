@@ -22,7 +22,7 @@ To play the randomizer, you will need to have the relevant TR1, TR2 or TR3 game(
 
 Following is a brief video explanation of the setup, but be sure to read each of the following points as well.
 
-https://user-images.githubusercontent.com/9203254/148436641-6dd771ad-7b41-422e-a938-1fb70a3d279c.mp4
+[![Quick Setup](https://img.youtube.com/vi/wwBwX8Pe5Iw/hqdefault.jpg)](https://youtu.be/wwBwX8Pe5Iw)
 
 ## Prerequisites
 
@@ -96,6 +96,10 @@ Now that you have your TR game folder open in the randomizer, you can select eac
 When you are ready to start, click the large green `Randomize` button. A progress bar will appear and the randomizer will make the selected changes.
 
 ![Randomizing](Resources/Using/randomizing.png)
+
+Note that the first time you run the randomizer against a _remastered_ game, you will see the following message in the progress window. This stage will take a few moments to process, but depending on your system specification it could take quite a number of seconds. Bear with it. This runs only once for TR1R, once for TR2R and once again for TR3R - the next time you randomize any of these games, the stage is skipped.
+
+![Finalizing tasks](Resources/Using/finalizing.png)
 
 Once complete, the progress dialog will close and the randomizer will show `Saved` in the bottom status bar.
 
