@@ -10,7 +10,7 @@
         ShowInTaskbar="False"
         Loaded="Window_Loaded"
         SizeToContent="Height"
-        Title="TR Rando" Height="200" Width="420">
+        Height="200" Width="420">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

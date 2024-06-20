@@ -108,6 +108,7 @@ public partial class MessageWindow : Window
         InitializeComponent();
         Owner = WindowUtils.GetActiveWindow(this);
         DataContext = this;
+        Title = ((App)Application.Current).Title;
 
         Message = message;
         Details = details;

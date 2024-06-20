@@ -12,7 +12,7 @@
         ShowInTaskbar="False"
         Loaded="Window_Loaded"
         SizeToContent="Height"
-        Title="{Binding AboutTitle}" Width="550">
+        Title="{Binding Title}" Width="550">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -36,8 +36,8 @@
                        Foreground="{StaticResource ThemeColour7}">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="{}{0} {1}">
-                        <Binding Path="AppTitle"/>
-                        <Binding Path="Version"/>
+                        <Binding Path="Title"/>
+                        <Binding Path="TaggedVersion"/>
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>

@@ -21,7 +21,6 @@ public partial class App : Application
     }
 
     public string Title { get; private set; }
-    public string Description { get; private set; }
     public string Version { get; private set; }
     public string TaggedVersion { get; private set; }
     public string Copyright { get; private set; }
@@ -32,20 +31,14 @@ public partial class App : Application
 
         Assembly assembly = Assembly.GetExecutingAssembly();
 
-        object[] attributes = assembly.GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+        object[] attributes = assembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false);
         if (attributes.Length > 0)
         {
-            Title = ((AssemblyTitleAttribute)attributes[0]).Title;
+            Title = ((AssemblyProductAttribute)attributes[0]).Product;
         }
         else
         {
-            Title = "TRRandomizer";
-        }
-
-        attributes = assembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-        if (attributes.Length > 0)
-        {
-            Description = ((AssemblyProductAttribute)attributes[0]).Product;
+            Title = "Tomb Raider Randomizer";
         }
 
         attributes = assembly.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
