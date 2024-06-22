@@ -278,7 +278,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 if (lara == TR2TypeUtilities.GetAliasForLevel(level.Name, TR2Type.Lara))
                 {
                     // In case a previous attempt failed, we need to restore default texture mapping
-                    _outer.TextureMonitor.GetMonitor(level.Name)?.RemovedTextures?.Remove(TR2Type.Lara);
+                    _outer.TextureMonitor.GetMonitor(level.Name)?.RemovedTextures?.RemoveAll(t => t == TR2Type.Lara);
                 }
 
                 if (level.IsCutScene)

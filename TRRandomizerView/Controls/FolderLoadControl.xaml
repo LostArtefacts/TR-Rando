@@ -47,15 +47,20 @@
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
-            <Image Width="40"
-                   Source="..\Resources\rando.png"/>
-            
+            <Image Source="..\Resources\rando_sm.png"/>
             <TextBlock Text="{Binding AppTitle}"
-                       Foreground="{StaticResource ThemeColour7}"
                        VerticalAlignment="Center"
                        FontSize="40"
-                       Margin="10,0,0,2"
-                       FontWeight="Bold"/>
+                       Margin="10,0,0,2">
+                <TextBlock.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                        <GradientStopCollection>
+                            <GradientStop Color="#0B518A" Offset="0.2"/>
+                            <GradientStop Color="#2276A8" Offset="0.5"/>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
         </StackPanel>
         
         <StackPanel 
@@ -66,12 +71,14 @@
             Orientation="Horizontal">
             <TextBlock 
                 Text="Open a Tomb Raider Data folder to get started. The folder must contain *.PHD (TRI) or *.TR2 (TRII/TRIII) level files." 
+                FontSize="14"
                 VerticalAlignment="Center"/>
             <Button 
                 Padding="15,4" 
                 Margin="20,0,0,0" 
                 Content="Browse" 
                 VerticalAlignment="Center"
+                Style="{StaticResource AltCallToAction}"
                 Command="cmds:WindowCommands.Open"/>
         </StackPanel>
 

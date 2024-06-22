@@ -10,27 +10,27 @@ public partial class UpdateAvailableWindow : Window
     #region Dependency Properties
     public static readonly DependencyProperty CurrentVersionProperty = DependencyProperty.Register
     (
-        "CurrentVersion", typeof(string), typeof(UpdateAvailableWindow)
+        nameof(CurrentVersion), typeof(string), typeof(UpdateAvailableWindow)
     );
 
     public static readonly DependencyProperty NewVersionProperty = DependencyProperty.Register
     (
-        "NewVersion", typeof(string), typeof(UpdateAvailableWindow)
+        nameof(NewVersion), typeof(string), typeof(UpdateAvailableWindow)
     );
 
     public static readonly DependencyProperty PublishDateProperty = DependencyProperty.Register
     (
-        "PublishDate", typeof(string), typeof(UpdateAvailableWindow)
+        nameof(PublishDate), typeof(string), typeof(UpdateAvailableWindow)
     );
 
     public static readonly DependencyProperty UpdateBodyProperty = DependencyProperty.Register
     (
-        "UpdateBody", typeof(string), typeof(UpdateAvailableWindow)
+        nameof(UpdateBody), typeof(string), typeof(UpdateAvailableWindow)
     );
 
     public static readonly DependencyProperty UpdateURLProperty = DependencyProperty.Register
     (
-        "UpdateURL", typeof(string), typeof(UpdateAvailableWindow)
+        nameof(UpdateURL), typeof(string), typeof(UpdateAvailableWindow)
     );
 
     public string CurrentVersion
