@@ -71,6 +71,7 @@ internal class TRVersionSupport
         TRRandomizerType.HideDeadTrexes,
         TRRandomizerType.Item,
         TRRandomizerType.KeyItems,
+        TRRandomizerType.LarsonBehaviour,
         TRRandomizerType.Secret,
         TRRandomizerType.SecretAudio,
         TRRandomizerType.SecretReward,

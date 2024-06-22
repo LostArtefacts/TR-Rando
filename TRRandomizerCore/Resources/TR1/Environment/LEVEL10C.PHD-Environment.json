@@ -3193,6 +3193,9 @@
         {
           "Comments": "Make a room to house a switch.",
           "EMType": 126,
+          "Tags": [
+            14
+          ],
           "Location": {
             "X": 57344,
             "Y": -14592,
@@ -3254,6 +3257,9 @@
         {
           "Comments": "Collisional portals.",
           "EMType": 82,
+          "Tags": [
+            14
+          ],
           "Portals": {
             "36": {
               "-1": [
@@ -3278,6 +3284,9 @@
         {
           "Comments": "Visibility portals.",
           "EMType": 81,
+          "Tags": [
+            14
+          ],
           "Portals": [
             {
               "BaseRoom": 36,
@@ -3342,6 +3351,9 @@
         {
           "Comments": "Add a lever texture.",
           "EMType": 21,
+          "Tags": [
+            14
+          ],
           "TextureMap": {
             "42": {
               "-1": {
@@ -3355,6 +3367,9 @@
         {
           "Comments": "Remove faces for portals.",
           "EMType": 22,
+          "Tags": [
+            14
+          ],
           "GeometryMap": {
             "-1": {
               "Rectangles": [
@@ -3365,6 +3380,9 @@
         },
         {
           "EMType": 23,
+          "Tags": [
+            14
+          ],
           "Modifications": [
             {
               "RoomNumber": 36,
@@ -3383,6 +3401,9 @@
         {
           "Comments": "Let there be light.",
           "EMType": 128,
+          "Tags": [
+            14
+          ],
           "RoomIndices": [
             -1
           ]
@@ -3390,6 +3411,9 @@
         {
           "Comments": "Add a switch.",
           "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 55,
           "Intensity": -1,
           "Location": {
@@ -3403,6 +3427,9 @@
         {
           "Comments": "Duplicate one of the heavy triggers to capture everything Adam would trigger.",
           "EMType": 63,
+          "Tags": [
+            14
+          ],
           "Locations": [
             {
               "X": 59904,
@@ -3421,6 +3448,9 @@
         {
           "Comments": "Convert the duplicated trigger into a switch type.",
           "EMType": 69,
+          "Tags": [
+            14
+          ],
           "Location": {
             "X": 59904,
             "Y": -14592,
@@ -3433,6 +3463,9 @@
         {
           "Comments": "Clear the heavy triggers from the platform.",
           "EMType": 62,
+          "Tags": [
+            14
+          ],
           "Rooms": [
             36
           ],
@@ -3443,6 +3476,9 @@
         {
           "Comments": "Add a door.",
           "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 57,
           "Intensity": 4096,
           "Location": {
@@ -3455,6 +3491,9 @@
         {
           "Comments": "Add another switch.",
           "EMType": 51,
+          "Tags": [
+            14
+          ],
           "TypeID": 55,
           "Intensity": -1,
           "Location": {
@@ -3468,6 +3507,9 @@
         {
           "Comments": "Trigger the new door.",
           "EMType": 61,
+          "Tags": [
+            14
+          ],
           "EntityLocation": -1,
           "Trigger": {
             "TrigType": 2,
@@ -3476,6 +3518,147 @@
             "Actions": [
               {
                 "Parameter": -2
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Clear the heavy triggers from the platform (TR1R).",
+          "EMType": 62,
+          "Tags": [
+            13
+          ],
+          "Rooms": [
+            36
+          ],
+          "TrigTypes": [
+            5
+          ]
+        },
+        {
+          "Comments": "Add 4 switches (TR1R).",
+          "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 64000,
+            "Y": -15616,
+            "Z": 14848,
+            "Room": 36
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 65024,
+            "Y": -15616,
+            "Z": 14848,
+            "Room": 36
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 64000,
+            "Y": -15616,
+            "Z": 8704,
+            "Room": 36,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 51,
+          "Tags": [
+            13
+          ],
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 65024,
+            "Y": -15616,
+            "Z": 8704,
+            "Room": 36,
+            "Angle": -32768
+          }
+        },
+        {
+          "Comments": "Switches open the door (TR1R).",
+          "EMType": 61,
+          "Tags": [
+            13
+          ],
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 3,
+            "SwitchOrKeyRef": -1,
+            "Actions": [
+              {
+                "Parameter": 86
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 61,
+          "Tags": [
+            13
+          ],
+          "EntityLocation": -2,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 4,
+            "SwitchOrKeyRef": -2,
+            "Actions": [
+              {
+                "Parameter": 86
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 61,
+          "Tags": [
+            13
+          ],
+          "EntityLocation": -3,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 8,
+            "SwitchOrKeyRef": -3,
+            "Actions": [
+              {
+                "Parameter": 86
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 61,
+          "Tags": [
+            13
+          ],
+          "EntityLocation": -4,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 16,
+            "SwitchOrKeyRef": -4,
+            "Actions": [
+              {
+                "Parameter": 86
               }
             ]
           }

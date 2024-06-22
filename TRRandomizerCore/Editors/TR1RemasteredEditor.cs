@@ -18,7 +18,6 @@ public class TR1RemasteredEditor : TR1ClassicEditor
         Settings.AllowReturnPathLocations = false;
         Settings.AddReturnPaths = false;
         Settings.FixOGBugs = false;
-        Settings.ReplaceRequiredEnemies = false;
         Settings.SwapEnemyAppearance = false;
         Settings.SecretRewardMode = TRSecretRewardMode.Stack;
     }
