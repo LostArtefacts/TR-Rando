@@ -206,5 +206,45 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style
+            x:Key="LinkButtonStyle"
+            TargetType="Button">
+            <Setter
+                Property="Background"
+                Value="Transparent"/>
+            <Setter
+                Property="BorderThickness"
+                Value="0"/>
+            <Setter
+                Property="Foreground"
+                Value="{StaticResource ThemeColour7}"/>
+            <Setter
+                Property="Cursor"
+                Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            TextDecorations="Underline"
+                            Text="{Binding Content, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter
+                        Property="Foreground"
+                        Value="{StaticResource ThemeColour2}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter
+                        Property="Foreground"
+                        Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>
