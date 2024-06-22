@@ -287,7 +287,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             return;
         }
 
-        _allocator.AddUnarmedLevelAmmo(level.Name, level.Data, (loc, type) =>
+        _allocator.AddUnarmedLevelAmmo(level.Name, level.Data, true, (loc, type) =>
         {
             level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(type));
         });

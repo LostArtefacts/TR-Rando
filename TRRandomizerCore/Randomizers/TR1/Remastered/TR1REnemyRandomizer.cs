@@ -196,7 +196,7 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
             return;
         }
 
-        _allocator.AddUnarmedLevelAmmo(level.Name, level.Data, (loc, type) =>
+        _allocator.AddUnarmedLevelAmmo(level.Name, level.Data, false, (loc, type) =>
         {
             if (ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
             {
