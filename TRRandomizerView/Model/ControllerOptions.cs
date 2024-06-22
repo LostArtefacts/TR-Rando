@@ -2854,7 +2854,13 @@ public class ControllerOptions : INotifyPropertyChanged
         {
             _useEnemyExclusions = value;
             FirePropertyChanged();
+            FirePropertyChanged(nameof(CanSelectEnemyExclusions));
         }
+    }
+
+    public bool CanSelectEnemyExclusions
+    {
+        get => _crossLevelEnemies.Value && _useEnemyExclusions;
     }
 
     public bool ShowExclusionWarnings
@@ -3159,6 +3165,8 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "Allow enemy types to appear in any level."
         };
         BindingOperations.SetBinding(CrossLevelEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+        CrossLevelEnemies.PropertyChanged += (e, s) => FirePropertyChanged(nameof(CanSelectEnemyExclusions));
+
         DocileWillard = new BoolItemControlClass()
         {
             Title = "Enable docile Willard",
