@@ -1,6 +1,5 @@
 ﻿using TRDataControl;
 using TRGE.Core;
-using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -121,7 +120,7 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
 
     private void UpdateAtlanteanPDP(TR1RCombinedLevel level, EnemyRandomizationCollection<TR1Type> enemies)
     {
-        if (!enemies.Available.Contains(TR1Type.ShootingAtlantean_N) || level.PDPData.ContainsKey(TR1Type.ShootingAtlantean_N))
+        if (enemies == null || !enemies.Available.Contains(TR1Type.ShootingAtlantean_N) || level.PDPData.ContainsKey(TR1Type.ShootingAtlantean_N))
         {
             return;
         }
