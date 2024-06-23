@@ -120,7 +120,7 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
 
     private void UpdateAtlanteanPDP(TR1RCombinedLevel level, EnemyRandomizationCollection<TR1Type> enemies)
     {
-        if (!enemies.Available.Contains(TR1Type.ShootingAtlantean_N) || level.PDPData.ContainsKey(TR1Type.ShootingAtlantean_N))
+        if (enemies == null || !enemies.Available.Contains(TR1Type.ShootingAtlantean_N) || level.PDPData.ContainsKey(TR1Type.ShootingAtlantean_N))
         {
             return;
         }
@@ -167,7 +167,7 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
         level.Data.Entities.AddRange(TR1ItemAllocator.TihocanEndItems);
     }
 
-    private static void AdjustScionEnding(TR1RCombinedLevel level)
+    private void AdjustScionEnding(TR1RCombinedLevel level)
     {
         if (level.Data.Models.ContainsKey(TR1Type.ScionPiece4_S_P)
             && (level.Data.Models.ContainsKey(TR1Type.TRex) || level.Data.Models.ContainsKey(TR1Type.Adam)))
@@ -175,6 +175,17 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
             // Ensure the scion is shootable in Atlantis. This is handled in OG with an environment condition,
             // but support for PDP isn't there yet.
             level.PDPData.ChangeKey(TR1Type.ScionPiece4_S_P, TR1Type.ScionPiece3_S_P);
+        }
+        else if (level.Is(TR1LevelNames.QUALOPEC) && Settings.ReplaceRequiredEnemies)
+        {
+            // The scion must be shot to end the level - in OG, it's hidden and a Qualopec skeleton is the target;
+            // we can't add remastered meshes yet so we just add the actual scion so it's obvious, and make the sound
+            // effect from Pyramid available too.
+            TRDictionary<TR1Type, TRModel> pyramidPDP = _pdpControl.Read(Path.Combine(BackupPath, Path.ChangeExtension(TR1LevelNames.PYRAMID, ".PDP")));
+            level.PDPData[TR1Type.ScionPiece3_S_P] = pyramidPDP[TR1Type.ScionPiece3_S_P];
+
+            TR1Level pyramidLevel = _levelControl.Read(Path.Combine(BackupPath, TR1LevelNames.PYRAMID));
+            level.Data.SoundEffects[TR1SFX.ScionLoop] = pyramidLevel.SoundEffects[TR1SFX.ScionLoop];
         }
     }
 
@@ -185,7 +196,7 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
             return;
         }
 
-        _allocator.AddUnarmedLevelAmmo(level.Name, level.Data, (loc, type) =>
+        _allocator.AddUnarmedLevelAmmo(level.Name, level.Data, false, (loc, type) =>
         {
             if (ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
             {

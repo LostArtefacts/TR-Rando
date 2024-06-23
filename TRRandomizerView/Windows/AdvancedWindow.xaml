@@ -525,6 +525,7 @@
                     <Border>
                         <StackPanel Orientation="Vertical">
                             <CheckBox IsChecked="{Binding ControllerProxy.UseEnemyExclusions, Mode=TwoWay}"
+                                      IsEnabled="{Binding ControllerProxy.CrossLevelEnemies.Value}"
                                   VerticalAlignment="Center">
                                 <Label Padding="0"
                                    Content="Exclude Certain Enemies" />
@@ -533,7 +534,7 @@
                                 Margin="0,10,0,0"
                                 Style="{StaticResource AltCallToAction}"
                                 Content="Select Enemies"
-                                IsEnabled="{Binding ControllerProxy.UseEnemyExclusions}"
+                                IsEnabled="{Binding ControllerProxy.CanSelectEnemyExclusions}"
                                 Click="ExclusionsButton_Click"/>
                         </StackPanel>
                     </Border>

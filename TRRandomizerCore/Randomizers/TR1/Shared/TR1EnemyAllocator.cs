@@ -734,7 +734,7 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
         }
     }
 
-    public void AddUnarmedLevelAmmo(string levelName, TR1Level level, Action<Location, TR1Type> createItemCallback)
+    public void AddUnarmedLevelAmmo(string levelName, TR1Level level, bool changeWeapon, Action<Location, TR1Type> createItemCallback)
     {
         if (!Settings.CrossLevelEnemies || !Settings.GiveUnarmedItems)
         {
@@ -783,7 +783,7 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
             createItemCallback(weaponLocation, TR1Type.Pistols_S_P);
         }
 
-        if (difficulty > EnemyDifficulty.Easy)
+        if (changeWeapon && difficulty > EnemyDifficulty.Easy)
         {
             while (weaponEntity.TypeID == TR1Type.Pistols_S_P)
             {
@@ -793,7 +793,7 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
 
         TR1Type weaponType = weaponEntity.TypeID;
         int ammoAllocation = TR1EnemyUtilities.GetStartingAmmo(weaponType);
-        if (ammoAllocation > 0)
+        if (changeWeapon && ammoAllocation > 0)
         {
             ammoAllocation *= (int)difficulty;
             TR1Type ammoType = TR1TypeUtilities.GetWeaponAmmo(weaponType);

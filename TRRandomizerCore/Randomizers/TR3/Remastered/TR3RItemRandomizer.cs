@@ -1,4 +1,5 @@
 ﻿using TRGE.Core;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -59,6 +60,15 @@ public class TR3RItemRandomizer : BaseTR3RRandomizer
                 {
                     _allocator.RandomizeKeyItems(_levelInstance.Name, _levelInstance.Data,
                         _levelInstance.Script.OriginalSequence, _levelInstance.HasExposureMeter);
+                }
+
+                if (_levelInstance.Is(TR3LevelNames.JUNGLE)
+                    && _levelInstance.Data.Entities.Find(e => e.TypeID == TR3Type.Key4_P) is TR3Entity key)
+                {
+                    // Counteract the shift done by the game in patch 3. Nudge it slightly further in case
+                    // we land on an enemy.
+                    key.X += TRConsts.Step2 * 3 + 1;
+                    key.Z += TRConsts.Step2;
                 }
 
                 SaveLevelInstance();

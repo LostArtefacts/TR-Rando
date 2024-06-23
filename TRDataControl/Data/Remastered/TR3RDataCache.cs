@@ -116,6 +116,7 @@ public class TR3RDataCache : BaseTRRDataCache<TR3Type, TR3RAlias>
         [TR3Type.TinnosWasp] = TR3LevelNames.TINNOS,
 
         [TR3Type.Willie] = TR3LevelNames.WILLIE,
+        [TR3Type.AIPath_N] = TR3LevelNames.WILLIE,
         [TR3Type.RXGunLad] = TR3LevelNames.WILLIE,
 
         [TR3Type.Winston] = TR3LevelNames.ASSAULT,

@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using TRRandomizerView.Commands;
 using TRRandomizerView.Utilities;
 
@@ -222,7 +221,7 @@ public partial class MessageWindow : Window
         ShowError(Details);
     }
 
-    private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+    private void ErrorButton_Click(object sender, RoutedEventArgs e)
     {
         WindowCommands.ShowErrors.Execute(null, Application.Current.MainWindow);
     }

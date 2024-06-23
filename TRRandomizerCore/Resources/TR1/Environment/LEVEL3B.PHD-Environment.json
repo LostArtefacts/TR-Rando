@@ -5933,6 +5933,18 @@
           }
         },
         {
+          "Comments": "Add a sound effect for it (TR1R only).",
+          "EMType": 101,
+          "Tags": [
+            13
+          ],
+          "ID": 154,
+          "Mode": 192,
+          "X": 39424,
+          "Y": 4864,
+          "Z": 55808
+        },
+        {
           "Comments": "Trigger the scion.",
           "EMType": 68,
           "Location": {
