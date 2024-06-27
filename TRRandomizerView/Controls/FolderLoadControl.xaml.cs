@@ -93,9 +93,9 @@ public partial class FolderLoadControl : UserControl
         OpenDataFolder(folder.FolderPath);
     }
 
-    public void OpenDataFolder(string folderPath, bool performChecksumTest = true)
+    public void OpenDataFolder(string folderPath)
     {
-        OpenProgressWindow opw = new(folderPath, performChecksumTest);
+        OpenProgressWindow opw = new(folderPath);
         try
         {
             if (opw.ShowDialog() ?? false)
@@ -109,12 +109,9 @@ public partial class FolderLoadControl : UserControl
         }
         catch (ChecksumMismatchException)
         {
-            if (!MessageWindow.ShowConfirm(folderPath + "\n\nGame data integrity check failed. Randomization may not perform as expected as the game data files in the chosen directory are not original." +
-                "\n\nThe recommended action is for you to re-install the game. Once complete, open the data folder again in the randomizer to proceed." +
-                "\n\nDo you want to cancel the current operation and take the recommended action?"))
-            {
-                OpenDataFolder(folderPath, false);
-            }
+            MessageWindow.ShowError(folderPath + "\n\nGame data integrity check failed. Randomization cannot be performed as the game data files in the chosen directory are not original." +
+                "\n\nPlease uninstall the game and remove any external mods you may have applied.\n\nOnce complete, reinstall the game afresh, and open the data folder again in the randomizer to proceed.",
+                "https://github.com/LostArtefacts/TR-Rando/blob/master/USING.md#troubleshooting");
         }
         catch (Exception e)
         {

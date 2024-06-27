@@ -20,10 +20,11 @@ public class TRRandomizerController
     internal AbstractTRScriptEditor ScriptEditor => _editor.ScriptEditor;
     internal RandomizerSettings LevelRandomizer => (_editor.LevelEditor as ISettingsProvider).Settings;
 
-    internal TRRandomizerController(string directoryPath, bool performChecksumTest)
+    internal TRRandomizerController(string directoryPath)
     {
-        // If there is a checksum mismatch, we will just ignore the previous backup and open the folder afresh
-        _editor = TRCoord.Instance.Open(directoryPath, TRScriptOpenOption.DiscardBackup, performChecksumTest ? TRBackupChecksumOption.PerformCheck : TRBackupChecksumOption.IgnoreIssues);
+        // If there is a script checksum mismatch, we will just ignore the previous backup and open the folder afresh. If the
+        // data files fail the checksum test, the folder cannot be opened.
+        _editor = TRCoord.Instance.Open(directoryPath, TRScriptOpenOption.DiscardBackup, TRBackupChecksumOption.PerformCheck);
         _editor.SaveProgressChanged += Editor_SaveProgressChanged;
         _editor.RestoreProgressChanged += Editor_RestoreProgressChanged;
         StoreExternalOrganisations();
