@@ -155,7 +155,7 @@ If you encounter error messages during randomization, the most likely cause is u
     ![Confirm delete](Resources/Using/confirmdelete.png)
 
 3. Uninstall the TR game from your system (e.g. in Steam or GoG). You should also manually uninstall any third-party modifications you may have applied as these may not be captured by the uninstall process.
-4. Reinstall the TR game from scratch (e.g. in Steam of GoG).
+4. Reinstall the TR game from scratch (e.g. in Steam or GoG).
 5. Follow this guide carefully from the [beginning](USING.md#randomizer-setup).
 
 If you continue to experience issues, we have a friendly community [Discord server](https://discord.gg/f4bUqwgcCN) where you can get help or you can [raise an issue](https://github.com/LostArtefacts/TR-Rando/issues/new) for investigation.
