@@ -244,7 +244,11 @@ public partial class MainWindow : Window, IRecentFolderOpener
         IsEditorDirty = e.IsDirty;
         EditorCanExport = e.CanExport;
         _developmentModeMenuItem.IsChecked = _editorControl.DevelopmentMode;
-        if (e.ReloadRequested)
+        if (!e.IsLoaded)
+        {
+            IsEditorActive = false;
+        }
+        else if (e.ReloadRequested)
         {
             _editorControl.Unload();
             IsEditorActive = false;

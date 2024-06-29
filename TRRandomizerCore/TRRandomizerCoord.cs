@@ -68,15 +68,20 @@ public class TRRandomizerCoord
         TRCoord.Instance.BackupProgressChanged += TRCoord_BackupProgressChanged;
     }
 
-    public TRRandomizerController Open(string directoryPath, bool performChecksumTest)
+    public TRRandomizerController Open(string directoryPath)
     {
         _openEventArgs = new();
-        return new(directoryPath, performChecksumTest);
+        return new(directoryPath);
     }
 
     public static void ClearHistory()
     {
         TRCoord.Instance.ClearHistory();
+    }
+
+    public static void CheckBackupIntegrity()
+    {
+        TRCoord.Instance.CheckBackupIntegrity();
     }
 
     public static void ClearCurrentBackup()

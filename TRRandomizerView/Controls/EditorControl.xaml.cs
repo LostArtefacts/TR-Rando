@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using TRGE.Core;
 using TRRandomizerCore;
 using TRRandomizerView.Events;
 using TRRandomizerView.Model;
@@ -88,6 +89,7 @@ public partial class EditorControl : UserControl
     {
         EditorStateChanged?.Invoke(this, new EditorEventArgs
         {
+            IsLoaded = Controller != null,
             IsDirty = _dirty,
             CanExport = Controller != null && Controller.IsExportPossible,
             ReloadRequested = _reloadRequested
@@ -155,6 +157,23 @@ public partial class EditorControl : UserControl
         if (!_options.RandomizationPossible)
         {
             ShowInvalidSelectionMessage();
+            return false;
+        }
+
+        try
+        {
+            TRRandomizerCoord.CheckBackupIntegrity();
+        }
+        catch (ChecksumMismatchException)
+        {
+            MessageWindow.ShowError("Game backup data integrity check failed. Randomization cannot be performed as the game data files in the backup directory are not original." +
+                "\n\nPlease uninstall the game and remove any external mods you may have applied.\n\nOnce complete, reinstall the game afresh, and open the data folder again in the randomizer to proceed.",
+                "https://github.com/LostArtefacts/TR-Rando/blob/master/USING.md#troubleshooting");
+
+            if (DeleteBackupImpl())
+            {
+                Unload();
+            }
             return false;
         }
 
@@ -284,23 +303,26 @@ public partial class EditorControl : UserControl
 
     public bool DeleteBackup()
     {
-        if (MessageWindow.ShowConfirm("The files that were backed up when this folder was first opened will be deleted and the editor will be closed.\n\nDo you wish to proceed?"))
+        return MessageWindow.ShowConfirm("The files that were backed up when this folder was first opened will be deleted and the editor will be closed.\n\nDo you wish to proceed?")
+            && DeleteBackupImpl();
+    }
+
+    private bool DeleteBackupImpl()
+    {
+        try
         {
-            try
-            {
-                _showExternalModPrompt = false;
-                TRRandomizerCoord.ClearCurrentBackup();
-                _dirty = false;
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageWindow.ShowException(e);
-            }
-            finally
-            {
-                _showExternalModPrompt = true;
-            }
+            _showExternalModPrompt = false;
+            TRRandomizerCoord.ClearCurrentBackup();
+            _dirty = false;
+            return true;
+        }
+        catch (Exception e)
+        {
+            MessageWindow.ShowException(e);
+        }
+        finally
+        {
+            _showExternalModPrompt = true;
         }
 
         return false;

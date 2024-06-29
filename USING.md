@@ -7,7 +7,7 @@ On this page:
   - [TR3](#tr3)
   - [TR I-III Remastered](#tr-i-iii-remastered)
 - [Installing the Randomizer](#installing-the-randomizer)
-  - [Game Selection](#game-selection)
+- [Game Selection](#game-selection)
 - [Randomizing](#randomizing)
 - [Playing](#playing)
 - [Re-randomizing](#re-randomizing)
@@ -18,7 +18,7 @@ On this page:
   - [General Issues](#general-issues)
   - [FAQs](#faqs)
 
-To play the randomizer, you will need to have the relevant TR1, TR2 or TR3 game(s) installed on your PC. It is important that the data files for these games are "clean", meaning that they should not have been modified by any other custom tool. If you are in any doubt about this, the first step you should take is reinstalling the game (for example in Steam or GoG).
+To play the randomizer, you will need to have the relevant TR1, TR2 or TR3 game(s) installed on your PC. It is important that the data files for these games are "clean", meaning that they should not have been modified by any other custom tool. If you are in any doubt about this, the first step you should take is to reinstall the game (for example in Steam or GoG). Please note that the rando team cannot offer overly specific advice on game reinstallation as every system is different; you should refer to instructions specific to your system (e.g. Steam/GoG) as required, and should have a reasonable understanding of how your own PC is configured.
 
 Following is a brief video explanation of the setup, but be sure to read each of the following points as well.
 
@@ -154,8 +154,9 @@ If you encounter error messages during randomization, the most likely cause is u
 
     ![Confirm delete](Resources/Using/confirmdelete.png)
 
-3. Reinstall the TR game from scratch (e.g. in Steam or GoG).
-4. Follow this guide carefully from the [beginning](USING.md#randomizer-setup).
+3. Uninstall the TR game from your system (e.g. in Steam or GoG). You should also manually uninstall any third-party modifications you may have applied as these may not be captured by the uninstall process.
+4. Reinstall the TR game from scratch (e.g. in Steam or GoG).
+5. Follow this guide carefully from the [beginning](USING.md#randomizer-setup).
 
 If you continue to experience issues, we have a friendly community [Discord server](https://discord.gg/f4bUqwgcCN) where you can get help or you can [raise an issue](https://github.com/LostArtefacts/TR-Rando/issues/new) for investigation.
 

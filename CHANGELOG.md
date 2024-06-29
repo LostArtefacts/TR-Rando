@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.1...master) - xxxx-xx-xx
+- improved data integrity checks when opening a folder and prior to randomization (#719)
 
 ## [V1.9.1](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.0...V1.9.1) - 2024-06-23
 - fixed a missing reference related to Willard, which would cause enemy randomization to fail if he was selected (#712)
