@@ -1,6 +1,37 @@
 {
   "All": [
     {
+      "Comments": "Overwrite an out-of-sight texture with EmeraldRaider91's badge.",
+      "EMType": 33,
+      "Bitmap": "Resources\\TR2\\Textures\\Source\\Static\\Landmarks\\EmeraldRaider91\\Segments.png"
+    },
+    {
+      "Comments": "Add the badge to room 21; reset the texture in rooms 32 and 157 to stone.",
+      "EMType": 21,
+      "TextureMap": {
+        "1615": {
+          "21": {
+            "Rectangles": [
+              90,
+              92
+            ]
+          }
+        },
+        "1516": {
+          "32": {
+            "Rectangles": [
+              2
+            ]
+          },
+          "157": {
+            "Rectangles": [
+              52
+            ]
+          }
+        }
+      }
+    },
+    {
       "Comments": "Tweak a slope at the end for easier key item exploration, if enabled.",
       "EMType": 7,
       "Tags": [
@@ -2609,6 +2640,8 @@
     "1863": 1879,
     "1709": 1725,
     "1678": 1694,
-    "1557": 1573
+    "1557": 1573,
+    "1615": 1631,
+    "1516": 1536
   }
 }
