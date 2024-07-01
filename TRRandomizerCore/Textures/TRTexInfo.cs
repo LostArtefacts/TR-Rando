@@ -3,6 +3,7 @@
 public class TRTexInfo<T>
     where T : Enum
 {
+    public Dictionary<TRArea, List<string>> GameAreas { get; set; }
     public Dictionary<TRTexCategory, SortedSet<ushort>> Categories { get; set; }
     public SortedSet<ushort> Animated { get; set; }
     public Dictionary<TRTexCategory, ushort> Defaults { get; set; }
@@ -47,4 +48,25 @@ public enum TRItemFlags
     PairA            = 1 << 24,
     PairB            = 1 << 25,
     PairC            = 1 << 26,
+}
+
+public enum TRArea
+{
+    Home,
+    Peru,
+    Greece,
+    Cistern,
+    Egypt,
+    Atlantis,
+    GreatWall,
+    Italy,
+    Offshore,
+    Underwater,
+    Tibet,
+    Xian,
+    India,
+    SouthPacific,
+    London,
+    Nevada,
+    Antarctica,
 }

@@ -3,6 +3,7 @@ using TRRandomizerCore.Helpers;
 using TRGE.Core;
 using System.Drawing;
 using TRRandomizerCore.Secrets;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Editors;
 
@@ -53,6 +54,8 @@ public class RandomizerSettings
     public TextureMode TextureMode { get; set; }
     public bool MatchTextureTypes { get; set; }
     public bool MatchTextureItems { get; set; }
+    public bool FilterSourceTextures { get; set; }
+    public List<TRArea> SourceTextureAreas { get; set; }
     public bool PersistTextureVariants { get; set; }
     public bool RandomizeWaterColour { get; set; }
     public bool RetainMainLevelTextures { get; set; }
@@ -244,11 +247,10 @@ public class RandomizerSettings
         ReplaceRequiredEnemies = config.GetBool(nameof(ReplaceRequiredEnemies), true);
         UseEnemyExclusions = config.GetBool(nameof(UseEnemyExclusions));
         ShowExclusionWarnings = config.GetBool(nameof(ShowExclusionWarnings));
-        ExcludedEnemies = config.GetString(nameof(ExcludedEnemies))
-            .Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+        ExcludedEnemies = new(config.GetString(nameof(ExcludedEnemies))
+            .Split(',', StringSplitOptions.RemoveEmptyEntries)
             .Select(s => short.Parse(s))
-            .Where(s => ExcludableEnemies.ContainsKey(s))
-            .ToList();
+            .Where(s => ExcludableEnemies.ContainsKey(s)));
 
         GiveUnarmedItems = config.GetBool(nameof(GiveUnarmedItems), true);
         UseEnemyClones = config.GetBool(nameof(UseEnemyClones));
@@ -261,6 +263,11 @@ public class RandomizerSettings
         TextureMode = (TextureMode)config.GetEnum(nameof(TextureMode), typeof(TextureMode), TextureMode.Game);
         MatchTextureTypes = config.GetBool(nameof(MatchTextureTypes), true);
         MatchTextureItems = config.GetBool(nameof(MatchTextureItems), true);
+        FilterSourceTextures = config.GetBool(nameof(FilterSourceTextures));
+        SourceTextureAreas = new(config.GetString(nameof(SourceTextureAreas), string.Join(',', Enum.GetValues<TRArea>()))
+            .Split(',', StringSplitOptions.RemoveEmptyEntries)
+            .Select(s => Enum.Parse<TRArea>(s)));
+
         PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
         RandomizeWaterColour = config.GetBool(nameof(RandomizeWaterColour), true);
         RetainMainLevelTextures = config.GetBool(nameof(RetainMainLevelTextures));
@@ -413,7 +420,7 @@ public class RandomizerSettings
         config[nameof(BirdMonsterBehaviour)] = BirdMonsterBehaviour;
         config[nameof(RandoEnemyDifficulty)] = RandoEnemyDifficulty;
         config[nameof(DragonSpawnType)] = DragonSpawnType;
-        config[nameof(ExcludedEnemies)] = string.Join(",", ExcludedEnemies);
+        config[nameof(ExcludedEnemies)] = string.Join(',', ExcludedEnemies);
         config[nameof(UseEnemyExclusions)] = UseEnemyExclusions;
         config[nameof(ShowExclusionWarnings)] = ShowExclusionWarnings;
         config[nameof(SwapEnemyAppearance)] = SwapEnemyAppearance;
@@ -431,6 +438,8 @@ public class RandomizerSettings
         config[nameof(TextureMode)] = TextureMode;
         config[nameof(MatchTextureTypes)] = MatchTextureTypes;
         config[nameof(MatchTextureItems)] = MatchTextureItems;
+        config[nameof(FilterSourceTextures)] = FilterSourceTextures;
+        config[nameof(SourceTextureAreas)] = string.Join(',', SourceTextureAreas);
         config[nameof(PersistTextureVariants)] = PersistTextureVariants;
         config[nameof(RandomizeWaterColour)] = RandomizeWaterColour;
         config[nameof(RetainMainLevelTextures)] = RetainMainLevelTextures;
