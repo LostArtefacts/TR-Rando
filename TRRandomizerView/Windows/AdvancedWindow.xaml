@@ -64,9 +64,11 @@
                             Value="2" />
                 </Style>
                 <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                <cvt:InverseComparisonConverter x:Key="InverseComparisonConverter" />
             </Grid.Resources>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -1877,6 +1879,76 @@
                         <Label
                             Style="{StaticResource OptionDescriptionStyle}"
                             Content="Set the total enemy count per instance e.g. 2 implies each enemy will be cloned once; 3 implies cloned twice etc."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+            
+            <!-- Texture Filtering -->
+            <StackPanel
+                Grid.Row="28"
+                Visibility="{Binding HasTextureSwapOptions, Converter={StaticResource BoolToCollapsedConverter}}"
+                IsEnabled="{Binding ControllerProxy.TextureMode, Converter={StaticResource InverseComparisonConverter}, ConverterParameter={x:Static helpers:TextureMode.Level}, Mode=TwoWay}">
+                <TextBlock
+                    Style="{StaticResource HeaderStyle}"
+                    Text="Texture Filtering"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <CheckBox
+                            IsChecked="{Binding ControllerProxy.FilterSourceTextures, Mode=TwoWay}"
+                            VerticalAlignment="Center">
+                            <Label
+                                Padding="0"
+                                Content="Filter textures to use" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border
+                        Grid.Column="1"
+                        Grid.RowSpan="2">
+                        <Label
+                            Style="{StaticResource OptionDescriptionStyle}">
+                            <Label.Content>
+                                <TextBlock>
+                                    <Run>Only textures from the selected game areas will be used e.g. make the entire game appear like Peru or Egypt only.</Run>
+                                    <LineBreak/>
+                                    <Run>At least one game area must be chosen.</Run>
+                                    <LineBreak/>
+                                    <Run>If this option is disabled, then the textures of every level will appear, but no level will be duplicated.</Run>
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
+                    </Border>
+
+                    <Border
+                        Margin="10,3,0,0"
+                        Grid.Row="1"
+                        IsEnabled="{Binding ControllerProxy.CanFilterTextures}">
+                        <ItemsControl ItemsSource="{Binding ControllerProxy.SourceTextureAreas}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,5,0,0">
+                                        <CheckBox
+                                            IsChecked="{Binding Value, Mode=TwoWay}"
+                                            IsEnabled="{Binding IsActive}"
+                                            VerticalAlignment="Top">
+                                            <Label
+                                                Padding="0"
+                                                Content="{Binding Title}" />
+                                        </CheckBox>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Border>
                 </Grid>
             </StackPanel>
