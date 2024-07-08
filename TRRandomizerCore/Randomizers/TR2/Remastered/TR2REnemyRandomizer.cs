@@ -254,6 +254,12 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
 
     internal class EnemyProcessor : AbstractProcessorThread<TR2REnemyRandomizer>
     {
+        private static readonly List<TR2RAlias> _birdMonsterTypes = new()
+        {
+            TR2RAlias.BIG_YETI,
+            TR2RAlias.BIG_YETI_4_5,
+        };
+
         private readonly Dictionary<TR2RCombinedLevel, EnemyTransportCollection<TR2Type>> _enemyMapping;
 
         internal override int LevelCount => _enemyMapping.Count;
@@ -330,6 +336,14 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
                         Water = TR2TypeUtilities.FilterWaterEnemies(importedCollection.TypesToImport),
                         All = new(importedCollection.TypesToImport)
                     };
+
+                    if (_outer.Settings.DocileChickens && importedCollection.BirdMonsterGuiser != TR2Type.BirdMonster)
+                    {
+                        TR2EnemyAllocator.DisguiseType(level.Name, level.Data.Models, importedCollection.BirdMonsterGuiser, TR2Type.BirdMonster);
+                        TR2EnemyAllocator.DisguiseType(level.Name, level.PDPData, importedCollection.BirdMonsterGuiser, TR2Type.BirdMonster);
+                        level.MapData[importedCollection.BirdMonsterGuiser] = _birdMonsterTypes.RandomItem(_outer._generator);
+                        enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
+                    }
 
                     _outer.RandomizeEnemies(level, enemies);
                     if (_outer.Settings.DevelopmentMode)

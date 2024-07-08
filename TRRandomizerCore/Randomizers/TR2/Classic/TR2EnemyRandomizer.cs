@@ -434,7 +434,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
                         if (_outer.Settings.DocileChickens && importedCollection.BirdMonsterGuiser != TR2Type.BirdMonster)
                         {
-                            TR2EnemyAllocator.DisguiseType(level.Name, level.Data, importedCollection.BirdMonsterGuiser, TR2Type.BirdMonster);
+                            TR2EnemyAllocator.DisguiseType(level.Name, level.Data.Models, importedCollection.BirdMonsterGuiser, TR2Type.BirdMonster);
                             enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
                         }
 
