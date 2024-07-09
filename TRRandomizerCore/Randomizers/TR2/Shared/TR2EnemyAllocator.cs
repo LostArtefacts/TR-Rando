@@ -313,7 +313,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
         if (Settings.DocileChickens && levelName == TR2LevelNames.CHICKEN)
         {
-            DisguiseType(levelName, level, TR2Type.MaskedGoon1, TR2Type.BirdMonster);
+            DisguiseType(levelName, level.Models, TR2Type.MaskedGoon1, TR2Type.BirdMonster);
         }
 
         EnemyRandomizationCollection<TR2Type> enemies = new()
@@ -330,17 +330,17 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         return enemies;
     }
 
-    public static void DisguiseType(string levelName, TR2Level level, TR2Type guiser, TR2Type targetType)
+    public static void DisguiseType(string levelName, TRDictionary<TR2Type, TRModel> modelData, TR2Type guiser, TR2Type targetType)
     {
         if (targetType == TR2Type.BirdMonster && levelName == TR2LevelNames.CHICKEN)
         {
             // We have to keep the original model for the boss, so in
             // this instance we just clone the model for the guiser
-            level.Models[guiser] = level.Models[targetType].Clone();
+            modelData[guiser] = modelData[targetType].Clone();
         }
         else
         {
-            level.Models.ChangeKey(targetType, guiser);
+            modelData.ChangeKey(targetType, guiser);
         }
     }
 
