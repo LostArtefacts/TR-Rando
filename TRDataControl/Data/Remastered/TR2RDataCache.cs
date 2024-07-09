@@ -24,6 +24,16 @@ public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
     public override TR2RAlias GetAlias(TR2Type key)
         => _mapAliases.ContainsKey(key) ? _mapAliases[key] : default;
 
+    protected override Dictionary<TR2Type, TR2RAlias> GetMapDependencies(TR2Type key)
+        => key == TR2Type.RedSnowmobile ? _skidooDependencies : null;
+
+    private static readonly Dictionary<TR2Type, TR2RAlias> _skidooDependencies = new()
+    {
+        [TR2Type.CutsceneActor4] = TR2RAlias.SKIDOO_TRACK_1,
+        [TR2Type.CutsceneActor5] = TR2RAlias.SKIDOO_TRACK_2,
+        [TR2Type.CutsceneActor6] = TR2RAlias.SKIDOO_TRACK_3,
+    };
+
     private static readonly Dictionary<TR2Type, string> _sourceLevels = new()
     {
         [TR2Type.Crow] = TR2LevelNames.GW,

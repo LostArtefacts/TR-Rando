@@ -72,6 +72,15 @@ public abstract class BaseTRRDataCache<TKey, TAlias>
     public void SetMapData(Dictionary<TKey, TAlias> mapData, TKey sourceType, TKey destinationType)
     {
         TAlias alias = GetAlias(sourceType);
+        Dictionary<TKey, TAlias> dependencies = GetMapDependencies(sourceType);
+        if (dependencies != null)
+        {
+            foreach (var (depKey, depAlias) in dependencies)
+            {
+                mapData[depKey] = depAlias;
+            }
+        }
+
         if (EqualityComparer<TAlias>.Default.Equals(alias, default))
         {
             return;
@@ -86,4 +95,6 @@ public abstract class BaseTRRDataCache<TKey, TAlias>
     public abstract TKey TranslateKey(TKey key);
     public abstract TKey TranslateAlias(TKey alias);
     public abstract TAlias GetAlias(TKey key);
+    protected virtual Dictionary<TKey, TAlias> GetMapDependencies(TKey key)
+        => null;
 }
