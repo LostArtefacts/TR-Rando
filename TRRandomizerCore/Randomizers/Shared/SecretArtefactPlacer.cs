@@ -235,6 +235,11 @@ public class SecretArtefactPlacer<T, E>
         while (mainSector.RoomBelow != TRConsts.NoRoom)
         {
             // Ensure we go as far down as possible - for example, Atlantis room 47 sector 10,9 - but stay in the same room
+            // Don't traverse down if it's a TR3 triangle portal. This assumes the secret would never be mid-air over the portal.
+            if (mainSector.FDIndex != 0 && _floorData[mainSector.FDIndex].Any(e => e is FDTriangulationEntry t && t.IsFloorPortal))
+            {
+                break;
+            }
             location.Y = (mainSector.Floor + 1) * TRConsts.Step1;
             location.Room = mainSector.RoomBelow;
             mainSector = _sectorGetter(location);

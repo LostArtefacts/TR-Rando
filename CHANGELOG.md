@@ -1,6 +1,7 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.1...master) - xxxx-xx-xx
 - fixed docile bird monsters causing multiple Laras to spawn in remastered levels (#723)
 - fixed the incomplete skidoo model in TR2R when it appears anywhere other than Tibetan Foothills (#721)
+- fixed secrets on triangle portals not triggering in TR3 (#727)
 - improved data integrity checks when opening a folder and prior to randomization (#719)
 
 ## [V1.9.1](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.0...V1.9.1) - 2024-06-23
