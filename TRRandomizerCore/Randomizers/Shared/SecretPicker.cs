@@ -26,6 +26,7 @@ public class SecretPicker<T>
     public IRouteManager RouteManager { get; set; }
     public Func<Location, TRRoomSector> SectorAction { get; set; }
     public Func<Location, bool> PlacementTestAction { get; set; }
+    public Func<Location, List<Location>, bool> ProximityTestAction { get; set; }
 
     public List<Location> GetLocations(List<Location> allLocations, bool isMirrored, int totalCount)
     {
@@ -182,6 +183,11 @@ public class SecretPicker<T>
         {
             ResetEvaluators(totalCount);
             return true;
+        }
+
+        if (!ProximityTestAction?.Invoke(location, usedLocations) ?? false)
+        {
+            return false;
         }
 
         _proxEvaluationCount++;

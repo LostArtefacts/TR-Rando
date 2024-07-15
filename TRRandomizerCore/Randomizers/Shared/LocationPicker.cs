@@ -253,6 +253,17 @@ public class LocationPicker : IRouteManager
         return _currentRoute.FindIndex(l => l.Room == location.Room);
     }
 
+    public List<short> GetDemarkedZone(int zoneID)
+    {
+        List<short> rooms = new();
+        int demarker = _currentRoute.FindIndex(l => l.TargetType == zoneID);
+        if (demarker != -1)
+        {
+            rooms.AddRange(_currentRoute.GetRange(0, demarker).Select(l => l.Room));
+        }
+        return rooms;
+    }
+
     public List<short> GetRouteRooms()
     {
         return _currentRoute

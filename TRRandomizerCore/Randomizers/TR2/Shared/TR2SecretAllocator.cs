@@ -11,13 +11,6 @@ public class TR2SecretAllocator : ISecretRandomizer
 {
     private static readonly int _levelSecretCount = 3;
 
-    private static readonly List<string> _textureFixLevels = new()
-    {
-        TR2LevelNames.FLOATER,
-        TR2LevelNames.LAIR,
-        TR2LevelNames.HOME
-    };
-
     private readonly Dictionary<string, List<Location>> _locations;
     private readonly LocationPicker _routePicker;
     private SecretPicker<TR2Entity> _secretPicker;
@@ -75,8 +68,6 @@ public class TR2SecretAllocator : ISecretRandomizer
             int zone = zones.FindIndex(z => z.Contains(location.Room));
             PlaceSecret(entity, secretTypes[zone], location);
         }
-
-        FixSecretTextures(levelName, level);
     }
 
     public List<Location> RandomizeSecrets(string levelName, TR2Level level)
@@ -99,6 +90,7 @@ public class TR2SecretAllocator : ISecretRandomizer
         locations.Shuffle(Generator);
 
         _secretPicker.SectorAction = loc => level.GetRoomSector(loc);
+        _secretPicker.ProximityTestAction = (loc, usedLocs) => TestSecretPlacement(loc, usedLocs);
         _routePicker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
 
         _routePicker.Initialise(levelName, locations, Settings, Generator);
@@ -117,9 +109,6 @@ public class TR2SecretAllocator : ISecretRandomizer
         }
 
         _secretPicker.FinaliseSecretPool(pickedLocations, levelName, itemIndex => GetDependentLockedItems(level, itemIndex));
-
-        FixSecretTextures(levelName, level);
-
         return pickedLocations;
     }
 
@@ -141,6 +130,13 @@ public class TR2SecretAllocator : ISecretRandomizer
         return items;
     }
 
+    private bool TestSecretPlacement(Location location, List<Location> usedLocations)
+    {
+        // This is in effect a hard-coded zone for 40F because the starting area has too much weight.
+        List<short> stoneRooms = _routePicker.GetDemarkedZone((int)TR2Type.StoneSecret_S_P);
+        return !stoneRooms.Contains(location.Room) || !usedLocations.Any(l => stoneRooms.Contains(l.Room));
+    }
+
     private void PlaceSecret(TR2Entity entity, TR2Type type, Location location)
     {
         _routePicker.SetLocation(entity, location);
@@ -148,17 +144,5 @@ public class TR2SecretAllocator : ISecretRandomizer
         entity.Intensity1 = -1;
         entity.Intensity2 = -1;
         entity.Flags = 0;
-    }
-
-    private static void FixSecretTextures(string levelName, TR2Level level)
-    {
-        if (!_textureFixLevels.Contains(levelName))
-        {
-            return;
-        }
-
-        // Swap Stone and Jade textures - OG has them the wrong way around.
-        (level.Sprites[TR2Type.JadeSecret_S_P].Textures, level.Sprites[TR2Type.StoneSecret_S_P].Textures)
-            = (level.Sprites[TR2Type.StoneSecret_S_P].Textures, level.Sprites[TR2Type.JadeSecret_S_P].Textures);
     }
 }
