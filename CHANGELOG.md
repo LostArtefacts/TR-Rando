@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.1...master) - xxxx-xx-xx
+- fixed wireframe mode potentially exceeding texture limits and preventing levels from loading (#722)
 - fixed docile bird monsters causing multiple Laras to spawn in remastered levels (#723)
 - fixed the incomplete skidoo model in TR2R when it appears anywhere other than Tibetan Foothills (#721)
 - fixed secrets on triangle portals not triggering in TR3 (#727)
