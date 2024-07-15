@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using TRGE.Core;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
@@ -38,6 +39,7 @@ public class TR2RSecretRandomizer : BaseTR2RRandomizer
             {
                 List<Location> pickedLocations = allocator.RandomizeSecrets(_levelInstance.Name, _levelInstance.Data);
                 AddDamageControl(_levelInstance, pickedLocations);
+                FixSecretOrder(_levelInstance);
             }
 
             SaveLevelInstance();
@@ -58,6 +60,22 @@ public class TR2RSecretRandomizer : BaseTR2RRandomizer
 
             TR2Entity medi = ItemFactory.CreateItem(level.Name, level.Data.Entities, location, Settings.DevelopmentMode);
             medi.TypeID = TR2Type.LargeMed_S_P;
+        }
+    }
+
+    private static void FixSecretOrder(TR2RCombinedLevel level)
+    {
+        if (!level.Is(TR2LevelNames.FLOATER))
+        {
+            return;
+        }
+
+        TR2Entity stone = level.Data.Entities.Find(e => e.TypeID == TR2Type.StoneSecret_S_P);
+        TR2Entity jade = level.Data.Entities.Find(e => e.TypeID == TR2Type.JadeSecret_S_P);
+        if (stone != null && jade != null)
+        {
+            stone.TypeID = TR2Type.JadeSecret_S_P;
+            jade.TypeID = TR2Type.StoneSecret_S_P;
         }
     }
 }
