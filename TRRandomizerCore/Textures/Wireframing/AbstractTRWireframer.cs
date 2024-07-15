@@ -84,7 +84,7 @@ public abstract class AbstractTRWireframer<E, L>
 
         TRTexturePacker packer = CreatePacker(level);
         DeleteTextures(packer);
-        level.ResetUnusedTextures();
+        Queue<int> textureSlots = new(level.GetFreeTextureSlots());
 
         TRSize roomSize = GetLargestSize(roomSizes);
         roomSize.RoundDown();
@@ -107,8 +107,17 @@ public abstract class AbstractTRWireframer<E, L>
 
         ushort StoreTexture(TRTextileSegment segment)
         {
-            level.ObjectTextures.Add(segment.Texture as TRObjectTexture);
-            return (ushort)(level.ObjectTextures.Count - 1);
+            if (textureSlots.TryDequeue(out int slot))
+            {
+                level.ObjectTextures[slot] = segment.Texture as TRObjectTexture;
+            }
+            else
+            {
+                slot = level.ObjectTextures.Count;
+                level.ObjectTextures.Add(segment.Texture as TRObjectTexture);
+            }
+
+            return (ushort)slot;
         }
 
         ushort roomTextureIndex = StoreTexture(roomTexture);
@@ -134,6 +143,7 @@ public abstract class AbstractTRWireframer<E, L>
         ResetMeshTextures(modelRemap, specialTextureRemap);
         TidyModels(level);
         SetSkyboxVisible(level);
+        level.ResetUnusedTextures();
     }
 
     private void RetainCustomTextures(L level)
