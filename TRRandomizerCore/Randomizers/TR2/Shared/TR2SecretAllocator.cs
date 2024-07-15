@@ -90,6 +90,7 @@ public class TR2SecretAllocator : ISecretRandomizer
         locations.Shuffle(Generator);
 
         _secretPicker.SectorAction = loc => level.GetRoomSector(loc);
+        _secretPicker.ProximityTestAction = (loc, usedLocs) => TestSecretPlacement(loc, usedLocs);
         _routePicker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
 
         _routePicker.Initialise(levelName, locations, Settings, Generator);
@@ -127,6 +128,13 @@ public class TR2SecretAllocator : ISecretRandomizer
         }
 
         return items;
+    }
+
+    private bool TestSecretPlacement(Location location, List<Location> usedLocations)
+    {
+        // This is in effect a hard-coded zone for 40F because the starting area has too much weight.
+        List<short> stoneRooms = _routePicker.GetDemarkedZone((int)TR2Type.StoneSecret_S_P);
+        return !stoneRooms.Contains(location.Room) || !usedLocations.Any(l => stoneRooms.Contains(l.Room));
     }
 
     private void PlaceSecret(TR2Entity entity, TR2Type type, Location location)
