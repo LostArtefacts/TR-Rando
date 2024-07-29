@@ -254,6 +254,11 @@ public static class TR1TypeUtilities
         return GetStandardPickupTypes().Contains(type);
     }
 
+    public static bool IsMediType(TR1Type type)
+    {
+        return type == TR1Type.SmallMed_S_P || type == TR1Type.LargeMed_S_P;
+    }
+
     public static bool IsWeaponPickup(TR1Type type)
     {
         return GetWeaponPickups().Contains(type);
