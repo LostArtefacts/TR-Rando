@@ -224,10 +224,12 @@ public class LocationPicker : IRouteManager
         return roomPool;
     }
 
-    public bool IsValidKeyItemLocation(int keyItemID, Location location)
+    public bool IsValidKeyItemLocation(int keyItemID, Location location, bool hasPickupTrigger)
     {
-        return GetRoomPool(keyItemID).Contains(location.Room)
-            && _locations.Any(l => l.IsEquivalent(location));
+        List<short> roomPool = GetRoomPool(keyItemID);
+        return roomPool.Contains(location.Room)
+            && _locations.Any(l => l.IsEquivalent(location))
+            && (KeyItemTestAction == null || KeyItemTestAction(location, hasPickupTrigger, roomPool));
     }
 
     private bool TestLocation(Location location, KeyMode keyTestMode, int keyItemID)
