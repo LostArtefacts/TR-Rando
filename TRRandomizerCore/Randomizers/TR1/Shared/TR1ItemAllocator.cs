@@ -97,7 +97,8 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
         }
         else
         {
-            ShuffleItems(levelName, level.Entities, isUnarmed, GetKeyItemLevelSequence(levelName, originalSequence));
+            ShuffleItems(levelName, level.Entities, isUnarmed, GetKeyItemLevelSequence(levelName, originalSequence),
+                e => LocationUtilities.HasPickupTriger(e, level.Entities.IndexOf(e), level));
         }
         
         RandomizeSprites(level);
@@ -125,9 +126,7 @@ public class TR1ItemAllocator : ItemAllocator<TR1Type, TR1Entity>
 
     private void InitialisePicker(string levelName, TR1Level level, LocationMode locationMode)
     {
-        _picker.TriggerTestAction = locationMode == LocationMode.KeyItems
-            ? location => LocationUtilities.HasAnyTrigger(location, level)
-            : null;
+        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level);
         _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
 
         List<Location> pool = GetItemLocationPool(levelName, level, locationMode != LocationMode.Default);

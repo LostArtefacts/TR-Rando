@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Diagnostics;
 using TRGE.Core;
 using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
@@ -216,7 +217,7 @@ public abstract class ItemAllocator<T, E>
         }
     }
 
-    public void ShuffleItems(string levelName, List<E> items, bool isUnarmed, int levelSequence)
+    public void ShuffleItems(string levelName, List<E> items, bool isUnarmed, int levelSequence, Func<E, bool> triggerCheck)
     {
         // Shuffle mode retains all item positions and types, but types are redistributed. This is done in two stages
         // to allow other mods to potentially change types based on original indices. The first stage means any additional
@@ -229,18 +230,19 @@ public abstract class ItemAllocator<T, E>
         List<T> stdItemTypes = GetStandardItemTypes();
         List<T> keyItemTypes = GetKeyItemTypes();
 
-        List<T> usedStdTypes = new(allPickups.Where(e => stdItemTypes.Contains(e.TypeID)).Select(e => e.TypeID));
+        List<E> usedStdItems = new(allPickups.Where(e => stdItemTypes.Contains(e.TypeID)));
         List<E> keyItems = allPickups.FindAll(e => keyItemTypes.Contains(e.TypeID));
 
-        void CacheSwap(E item, T newType)
+        void CacheSwap(E baseItem, E swapItem)
         {
             swapCache.Add(new()
             {
-                Index = items.IndexOf(item),
-                OldType = item.TypeID,
-                NewType = newType,
+                BaseType = baseItem.TypeID,
+                SwapType = swapItem.TypeID,
+                BaseIndex = items.IndexOf(baseItem),
+                SwapIndex = items.IndexOf(swapItem),
             });
-            usedStdTypes.Remove(newType);
+            usedStdItems.Remove(swapItem);
         }
 
         List<Location> usedLocations = new();
@@ -258,7 +260,8 @@ public abstract class ItemAllocator<T, E>
             int keyItemID = (int)_picker.GetKeyItemID(levelSequence, keyItem);
             Location currentLocation = keyItem.GetLocation();
 
-            List<E> validPool = new(allPickups.Where(e => _picker.IsValidKeyItemLocation(keyItemID, e.GetLocation())));
+            bool hasPickupTrigger = triggerCheck(keyItem);
+            List<E> validPool = new(allPickups.Where(e => _picker.IsValidKeyItemLocation(keyItemID, e.GetLocation(), hasPickupTrigger)));
             if (validPool.Count == 0)
             {
                 allPickups.Remove(keyItem);
@@ -284,7 +287,7 @@ public abstract class ItemAllocator<T, E>
             {
                 // Instances where two keys can't be swapped and there are no other pickups before their max rooms.
                 keyItemID = (int)_picker.GetKeyItemID(levelSequence, swapItem);
-                if (!_picker.IsValidKeyItemLocation(keyItemID, currentLocation))
+                if (!_picker.IsValidKeyItemLocation(keyItemID, currentLocation, triggerCheck(swapItem)))
                 {
                     allPickups.Remove(keyItem);
                     continue;
@@ -293,8 +296,7 @@ public abstract class ItemAllocator<T, E>
 
             if (keyItem != swapItem)
             {
-                CacheSwap(keyItem, swapItem.TypeID);
-                CacheSwap(swapItem, keyItem.TypeID);
+                CacheSwap(keyItem, swapItem);
             }
 
             allPickups.Remove(swapItem);
@@ -302,10 +304,11 @@ public abstract class ItemAllocator<T, E>
             usedLocations.Add(location);
         }
 
+        Debug.Assert(allPickups.Count == usedStdItems.Count);
         foreach (E pickup in allPickups)
         {
             // Regular items need no placement checks.
-            CacheSwap(pickup, usedStdTypes[Generator.Next(0, usedStdTypes.Count)]);
+            CacheSwap(pickup, usedStdItems.RandomItem(Generator));
         }
     }
 
@@ -319,14 +322,21 @@ public abstract class ItemAllocator<T, E>
         // Other mods may have already switched item types, so only apply those that are still valid.
         foreach (ItemSwap swap in _itemSwapCache[levelName])
         {
-            E pickup = items[swap.Index];
-            if (TypeMatch(pickup.TypeID, swap.OldType))
+            E baseItem = items[swap.BaseIndex];
+            E swapItem = items[swap.SwapIndex];
+            if (TypeMatch(baseItem.TypeID, swap.BaseType)
+                && TypeMatch(swapItem.TypeID, swap.SwapType))
             {
-                pickup.TypeID = swap.NewType;
+                Location baseLocation = baseItem.GetLocation();
+                baseItem.SetLocation(swapItem.GetLocation());
+                swapItem.SetLocation(baseLocation);
             }
         }
 
-        ExcludeEnemyKeyDrops(items);
+        if (!Settings.AllowEnemyKeyDrops)
+        {
+            ExcludeEnemyKeyDrops(items);
+        }
     }
 
     protected List<E> GetPickups(string levelName, List<E> items, bool isUnarmed)
@@ -432,8 +442,9 @@ public abstract class ItemAllocator<T, E>
 
     protected class ItemSwap
     {
-        public int Index { get; set; }
-        public T OldType { get; set; }
-        public T NewType { get; set; }
+        public T BaseType { get; set; }
+        public T SwapType { get; set; }
+        public int BaseIndex { get; set; }
+        public int SwapIndex { get; set; }
     }
 }

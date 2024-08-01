@@ -55,7 +55,8 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
         }
         else
         {
-            ShuffleItems(levelName, level.Entities, scriptedLevel.RemovesWeapons, scriptedLevel.OriginalSequence);
+            ShuffleItems(levelName, level.Entities, scriptedLevel.RemovesWeapons, scriptedLevel.OriginalSequence,
+                e => LocationUtilities.HasPickupTriger(e, level.Entities.IndexOf(e), level));
         }
     }
 
@@ -80,12 +81,9 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
 
     private void InitialisePicker(string levelName, TR2Level level, LocationMode locationMode)
     {
-        _picker.TriggerTestAction = locationMode == LocationMode.KeyItems
-            ? location => LocationUtilities.HasAnyTrigger(location, level)
-            : null;
-        _picker.KeyItemTestAction = locationMode == LocationMode.KeyItems
-            ? (location, hasPickupTrigger, roomPool) => TestKeyItemLocation(location, hasPickupTrigger, roomPool, levelName, level)
-            : null;
+        _picker.TriggerTestAction = location => LocationUtilities.HasAnyTrigger(location, level);
+        _picker.KeyItemTestAction = (location, hasPickupTrigger, roomPool)
+            => TestKeyItemLocation(location, hasPickupTrigger, roomPool, levelName, level);
         _picker.RoomInfos = new(level.Rooms.Select(r => new ExtRoomInfo(r)));
 
         List<Location> pool = GetItemLocationPool(levelName, level, locationMode != LocationMode.Default);
