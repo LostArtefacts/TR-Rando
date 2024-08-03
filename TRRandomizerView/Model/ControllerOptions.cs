@@ -10,6 +10,7 @@ using TRRandomizerCore;
 using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Secrets;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerView.Model;
 
@@ -123,6 +124,8 @@ public class ControllerOptions : INotifyPropertyChanged
     private BoolItemControlClass _matchTextureTypes, _matchTextureItems;
     private TextureMode[] _textureModes;
     private TextureMode _textureMode;
+    private bool _filterSourceTextures;
+    private List<BoolItemIDControlClass> _sourceTextureAreas;
 
     #region TR1X Sepcifics
 
@@ -1975,6 +1978,27 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public bool FilterSourceTextures
+    {
+        get => _filterSourceTextures;
+        set
+        {
+            _filterSourceTextures = value;
+            FirePropertyChanged();
+            FirePropertyChanged(nameof(CanFilterTextures));
+        }
+    }
+
+    public List<BoolItemIDControlClass> SourceTextureAreas
+    {
+        get => _sourceTextureAreas;
+        set
+        {
+            _sourceTextureAreas = value;
+            FirePropertyChanged();
+        }
+    }
+
     public TextureMode[] TextureModes
     {
         get => _textureModes;
@@ -1995,6 +2019,27 @@ public class ControllerOptions : INotifyPropertyChanged
 
             MatchTextureItems.IsActive = value == TextureMode.Game;
             FirePropertyChanged(nameof(MatchTextureItems));
+            FirePropertyChanged(nameof(CanFilterTextures));
+        }
+    }
+
+    public bool CanFilterTextures
+    {
+        get => TextureMode != TextureMode.Level && FilterSourceTextures;
+    }
+
+    private void SourceTextureArea_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        FirePropertyChanged(nameof(SourceTextureAreas));
+        UpdateSourceTextureAreas();
+    }
+
+    private void UpdateSourceTextureAreas()
+    {
+        SourceTextureAreas.ForEach(a => a.IsActive = true);
+        if (SourceTextureAreas.Count(a => a.Value) == 1)
+        {
+            SourceTextureAreas.Find(a => a.Value).IsActive = false;
         }
     }
 
@@ -3767,6 +3812,17 @@ public class ControllerOptions : INotifyPropertyChanged
         TextureMode = _controller.TextureMode;
         MatchTextureTypes.Value = _controller.MatchTextureTypes;
         MatchTextureItems.Value = _controller.MatchTextureItems;
+        SourceTextureAreas = _controller.AvailableSourceTextureAreas
+            .Select(a => new BoolItemIDControlClass
+            {
+                ID = (int)a,
+                Title = a.ToString(),
+                Value = _controller.SourceTextureAreas.Contains(a),
+            }).ToList();
+        SourceTextureAreas.ForEach(a => a.PropertyChanged += SourceTextureArea_PropertyChanged);
+        FilterSourceTextures = _controller.FilterSourceTextures;
+        UpdateSourceTextureAreas();
+
         PersistTextures.Value = _controller.PersistTextures;
         RandomizeWaterColour.Value = _controller.RandomizeWaterColour;
         RetainMainLevelTextures.Value = _controller.RetainMainLevelTextures;
@@ -4076,6 +4132,8 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.TextureMode = TextureMode;
         _controller.MatchTextureTypes = MatchTextureTypes.Value;
         _controller.MatchTextureItems = MatchTextureItems.Value;
+        _controller.FilterSourceTextures = FilterSourceTextures;
+        _controller.SourceTextureAreas = new(SourceTextureAreas.Where(a => a.Value).Select(a => (TRArea)a.ID));
         _controller.PersistTextures = PersistTextures.Value;
         _controller.RandomizeWaterColour = RandomizeWaterColour.Value;
         _controller.RetainMainLevelTextures = RetainMainLevelTextures.Value;

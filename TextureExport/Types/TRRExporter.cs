@@ -22,6 +22,7 @@ public static class TRRExporter
 
     public static void GenerateCategories(TRGameVersion version)
     {
+        Dictionary<TRArea, List<string>> gameAreas;
         Dictionary<TRTexCategory, SortedSet<ushort>> categories = new();
         Dictionary<TRTexCategory, ushort> defaults = new();
         SortedSet<ushort> animated;
@@ -49,6 +50,7 @@ public static class TRRExporter
         {
             TRTexInfo<T> info = new()
             {
+                GameAreas = gameAreas,
                 Categories = categories,
                 Animated = animated,
                 Defaults = defaults,
@@ -61,6 +63,15 @@ public static class TRRExporter
         switch (version)
         {
             case TRGameVersion.TR1:
+                gameAreas = new()
+                {
+                    [TRArea.Home] = new() { TR1LevelNames.ASSAULT },
+                    [TRArea.Peru] = TR1LevelNames.Peru,
+                    [TRArea.Greece] = new() { TR1LevelNames.FOLLY, TR1LevelNames.COLOSSEUM, TR1LevelNames.MIDAS },
+                    [TRArea.Cistern] = new() { TR1LevelNames.CISTERN, TR1LevelNames.TIHOCAN },
+                    [TRArea.Egypt] = TR1LevelNames.Egypt,
+                    [TRArea.Atlantis] = TR1LevelNames.Atlantis,
+                };
                 defaults[TRTexCategory.Transparent] = 477;
                 defaults[TRTexCategory.Lever] = 34;
                 animated = new() { 554, 558, 571, 590, 651, 652, 654, 655 };
@@ -68,6 +79,16 @@ public static class TRRExporter
                 break;
 
             case TRGameVersion.TR2:
+                gameAreas = new()
+                {
+                    [TRArea.Home] = new() { TR2LevelNames.ASSAULT, TR2LevelNames.HOME },
+                    [TRArea.GreatWall] = TR2LevelNames.GreatWall,
+                    [TRArea.Italy] = TR2LevelNames.Italy,
+                    [TRArea.Offshore] = new() { TR2LevelNames.RIG, TR2LevelNames.DA },
+                    [TRArea.Underwater] = new() { TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.LQ, TR2LevelNames.DECK },
+                    [TRArea.Tibet] = TR2LevelNames.Tibet,
+                    [TRArea.Xian] = TR2LevelNames.China,
+                };
                 defaults[TRTexCategory.Transparent] = 159;
                 defaults[TRTexCategory.Lever] = 1202;
                 defaults[TRTexCategory.Ladder] = 1172;
@@ -76,6 +97,15 @@ public static class TRRExporter
                 break;
 
             case TRGameVersion.TR3:
+                gameAreas = new()
+                {
+                    [TRArea.Home] = new() { TR3LevelNames.ASSAULT },
+                    [TRArea.India] = TR3LevelNames.India,
+                    [TRArea.SouthPacific] = TR3LevelNames.SouthPacific,
+                    [TRArea.London] = TR3LevelNames.London,
+                    [TRArea.Nevada] = TR3LevelNames.Nevada,
+                    [TRArea.Antarctica] = TR3LevelNames.Antarctica,
+                };
                 defaults[TRTexCategory.Transparent] = 794;
                 defaults[TRTexCategory.Lever] = 1002;
                 defaults[TRTexCategory.Ladder] = 600;

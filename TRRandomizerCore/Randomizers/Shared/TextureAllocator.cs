@@ -17,6 +17,7 @@ public class TextureAllocator<T, R>
 
     public Random Generator { get; set; }
     public RandomizerSettings Settings { get; set; }
+    public List<TRArea> AvailableAreas => new(_texInfo.GameAreas.Keys);
 
     public TextureAllocator(TRGameVersion version)
     {
@@ -40,18 +41,30 @@ public class TextureAllocator<T, R>
     public void Allocate(Func<TRRScriptedLevel, TRGData, Dictionary<T, R>, bool> saveData)
     {
         Dictionary<TRRScriptedLevel, List<ushort>> textureCache = _trgData.ToDictionary(l => l.Key, l => l.Value.Textures.ToList());
-        List<ushort> allTextures = new(textureCache.Values.SelectMany(t => t).Distinct());
+        List<ushort> allTextures = new();
         List<TRRScriptedLevel> levels = new(_trgData.Keys);        
         List<TRRScriptedLevel> levelSwaps = new();
 
         if (Settings.TextureMode == TextureMode.Game)
         {
-            levelSwaps.AddRange(levels);
-            do
+            List<TRRScriptedLevel> sourceLevels = FilterSourceLevels(levels);
+            if (sourceLevels.Count < levels.Count)
             {
-                levelSwaps.Shuffle(Generator);
+                levelSwaps.AddRange(sourceLevels.RandomSelection(Generator, levels.Count, true));
             }
-            while (levelSwaps.Any(l => levels.IndexOf(l) == levelSwaps.IndexOf(l)));
+            else
+            {
+                levelSwaps.AddRange(levels);
+                do
+                {
+                    levelSwaps.Shuffle(Generator);
+                }
+                while (levelSwaps.Any(l => levels.IndexOf(l) == levelSwaps.IndexOf(l)));
+            }
+        }
+        else if (Settings.TextureMode == TextureMode.Random)
+        {
+            allTextures.AddRange(FilterSourceLevels(levels).SelectMany(l => textureCache[l]).Distinct());
         }
 
         Dictionary<T, R> AllocateLevel(TRRScriptedLevel level, TRGData trgData)
@@ -141,6 +154,24 @@ public class TextureAllocator<T, R>
                 }
             }
         }
+    }
+
+    private List<TRRScriptedLevel> FilterSourceLevels(List<TRRScriptedLevel> levels)
+    {
+        if (!Settings.FilterSourceTextures || Settings.SourceTextureAreas.Count >= _texInfo.GameAreas.Count)
+        {
+            return levels;
+        }
+
+        List<TRRScriptedLevel> sourceLevels = new(Settings.SourceTextureAreas
+                    .SelectMany(a => _texInfo.GameAreas[a])
+                    .Select(s => levels.Find(l => l.Is(s))));
+        if (sourceLevels.Count == 0)
+        {
+            throw new InvalidDataException("Unable to match the selected texture areas to source levels.");
+        }
+
+        return sourceLevels;
     }
 
     private bool SelectTexture(ushort originalTexture, ref ushort targetTexture,

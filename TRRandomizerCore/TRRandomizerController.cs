@@ -1,15 +1,16 @@
-﻿using TRRandomizerCore.Editors;
+﻿using System.Drawing;
+using TRGE.Coord;
+using TRGE.Coord.Helpers;
+using TRGE.Core;
+using TRRandomizerCore.Editors;
 using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Randomizers;
-using TRGE.Coord;
-using TRGE.Core;
-using System.Drawing;
-using TRRandomizerCore.Utilities;
 using TRRandomizerCore.Secrets;
-using TRGE.Coord.Helpers;
+using TRRandomizerCore.Textures;
+using TRRandomizerCore.Utilities;
 
-using GV = TRLevelControl.Model.TRGameVersion;
+using LC = TRLevelControl.Model;
 
 namespace TRRandomizerCore;
 
@@ -943,6 +944,32 @@ public class TRRandomizerController
         set => LevelRandomizer.MatchTextureItems = value;
     }
 
+    public bool FilterSourceTextures
+    {
+        get => LevelRandomizer.FilterSourceTextures;
+        set => LevelRandomizer.FilterSourceTextures = value;
+    }
+
+    public List<TRArea> SourceTextureAreas
+    {
+        get => LevelRandomizer.SourceTextureAreas;
+        set => LevelRandomizer.SourceTextureAreas = value;
+    }
+
+    public List<TRArea> AvailableSourceTextureAreas
+    {
+        get
+        {
+            return _editor.Edition.Version switch
+            {
+                TRVersion.TR1 => new TextureAllocator<LC.TR1Type, LC.TR1RAlias>(LC.TRGameVersion.TR1).AvailableAreas,
+                TRVersion.TR2 => new TextureAllocator<LC.TR2Type, LC.TR2RAlias>(LC.TRGameVersion.TR2).AvailableAreas,
+                TRVersion.TR3 => new TextureAllocator<LC.TR3Type, LC.TR3RAlias>(LC.TRGameVersion.TR3).AvailableAreas,
+                _ => null,
+            };
+        }
+    }
+
     public bool PersistTextures
     {
         get => LevelRandomizer.PersistTextureVariants;
@@ -1417,17 +1444,17 @@ public class TRRandomizerController
     {
         get
         {
-            GV game;
+            LC.TRGameVersion game;
             switch (_editor.Edition.Version)
             {
                 case TRVersion.TR1:
-                    game = GV.TR1;
+                    game = LC.TRGameVersion.TR1;
                     break;
                 case TRVersion.TR2:
-                    game = GV.TR2;
+                    game = LC.TRGameVersion.TR2;
                     break;
                 case TRVersion.TR3:
-                    game = GV.TR3;
+                    game = LC.TRGameVersion.TR3;
                     break;
                 default:
                     return null;
