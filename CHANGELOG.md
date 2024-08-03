@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.1...master) - xxxx-xx-xx
+- added options to use textures from specific game areas only in TRR texture randomization (#726)
 - fixed key item softlocks in remastered New Game+ when using shuffled item mode (#732, #734)
 - fixed wireframe mode potentially exceeding texture limits and preventing levels from loading (#722)
 - fixed docile bird monsters causing multiple Laras to spawn in remastered levels (#723)
