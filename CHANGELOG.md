@@ -7,6 +7,7 @@
 - fixed secrets on triangle portals not triggering in TR3 (#727)
 - fixed secrets in 40 Fathoms all generally appearing too close to the start of the level (#729)
 - fixed the Jade secret appearing before the Stone in TR2R Floating Islands (#729)
+- fixed being unable to collect secret artefacts in TR3R High Security Compound (#737)
 - improved data integrity checks when opening a folder and prior to randomization (#719)
 
 ## [V1.9.1](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.0...V1.9.1) - 2024-06-23

@@ -649,6 +649,46 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Camera target 38 may have been repurposed as a secret, so make the trigger look at fan 46 instead.",
+        "ConditionType": 0,
+        "EntityIndex": 38,
+        "EntityType": 304
+      },
+      "OnFalse": [
+        {
+          "EMType": 66,
+          "EntityLocations": [
+            127
+          ],
+          "Action": {
+            "Action": 6,
+            "Parameter": 46
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Camera target 198 may have been repurposed as a secret, so make the trigger look at door 232 instead.",
+        "ConditionType": 0,
+        "EntityIndex": 198,
+        "EntityType": 304
+      },
+      "OnFalse": [
+        {
+          "EMType": 66,
+          "EntityLocations": [
+            172
+          ],
+          "Action": {
+            "Action": 6,
+            "Parameter": 232
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],
