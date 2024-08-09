@@ -152,7 +152,7 @@ public class TR3REnemyRandomizer : BaseTR3RRandomizer
             List<TR3RCombinedLevel> levels = new(_enemyMapping.Keys);
             foreach (TR3RCombinedLevel level in levels)
             {
-                _enemyMapping[level] = _outer._allocator.SelectCrossLevelEnemies(level.Name, level.Data, level.Sequence);
+                _enemyMapping[level] = _outer._allocator.SelectCrossLevelEnemies(level.Name, level.Data, level.Sequence, true);
             }
         }
 
