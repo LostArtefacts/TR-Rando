@@ -2,6 +2,7 @@
 using TRGE.Core;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
 using TRRandomizerCore.Secrets;
 
@@ -68,6 +69,12 @@ public class TR1RemasteredEditor : TR1ClassicEditor
 
         // Environment randomizer always runs
         target += numLevels * 2;
+
+        // Level sequencing checks
+        if (Settings.RandomizeGameMode)
+        {
+            target += numLevels;
+        }
 
         return target;
     }
@@ -240,6 +247,20 @@ public class TR1RemasteredEditor : TR1ClassicEditor
                 SaveMonitor = monitor,
                 Settings = Settings,
             }.Randomize(Settings.TextureSeed);
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeGameMode)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Running level sequence checks");
+            new TR1RSequenceProcessor
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings,
+            }.Run();
         }
 
         monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Finalizing tasks - please wait");

@@ -31,6 +31,20 @@ public abstract class AbstractLevelProcessor<S, C> : ILevelProcessor where S : A
         _maxThreads = 3;
     }
 
+    protected void Process(Action<C> processAction)
+    {
+        foreach (S lvl in Levels)
+        {
+            LoadLevelInstance(lvl);
+            processAction(_levelInstance);
+            SaveLevelInstance();
+            if (!TriggerProgress())
+            {
+                break;
+            }
+        }
+    }
+
     protected void LoadLevelInstance(S scriptedLevel)
     {
         _levelInstance = LoadCombinedLevel(scriptedLevel);
