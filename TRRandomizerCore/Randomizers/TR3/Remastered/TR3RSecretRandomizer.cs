@@ -241,6 +241,9 @@ public class TR3RSecretRandomizer : BaseTR3RRandomizer, ISecretRandomizer
                 allocation.AvailablePickupModels.AddRange(_artefactReplacements.Keys
                     .Where(a => !level.Data.Models.ContainsKey(a)));
 
+                allocation.AvailablePickupModels.Remove(TR3Type.Quest1_P);
+                allocation.AvailablePickupModels.Remove(TR3Type.Quest2_P);
+
                 List<TR3Type> artefactTypes = _artefactPickups.Keys.ToList();
                 artefactTypes.RemoveAll(a => level.Data.Models.ContainsKey(a));
 
