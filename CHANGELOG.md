@@ -9,7 +9,7 @@
 - fixed the Jade secret appearing before the Stone in TR2R Floating Islands (#729)
 - fixed being unable to collect secret artefacts in TR3R High Security Compound (#737)
 - fixed (the lack of) prisoners in Area51 crashing the game when loading a save (#739)
-- fixed some enemies causing triggers for other objects to break e.g. Crash Site room 72 (#742)
+- fixed some enemies in TR3 causing triggers for other objects to break e.g. Crash Site room 72 (#742)
 - improved data integrity checks when opening a folder and prior to randomization (#719)
 
 ## [V1.9.1](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.0...V1.9.1) - 2024-06-23
