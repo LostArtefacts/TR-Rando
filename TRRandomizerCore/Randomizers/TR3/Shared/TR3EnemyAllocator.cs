@@ -11,14 +11,6 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
 {
     private const int _willardSequence = 19;
 
-    private static readonly List<TR3Type> _oneShotEnemies = new()
-    {
-        TR3Type.Croc,
-        TR3Type.KillerWhale,
-        TR3Type.Raptor,
-        TR3Type.Rat,
-    };
-
     private readonly Dictionary<string, List<Location>> _pistolLocations;
 
     public ItemFactory<TR3Entity> ItemFactory { get; set; }
@@ -39,7 +31,7 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
         => TR3EnemyUtilities.GetRestrictedEnemyRooms(levelName, difficulty);
 
     protected override bool IsOneShotType(TR3Type type)
-        => _oneShotEnemies.Contains(type);
+        => false;
 
     public EnemyTransportCollection<TR3Type> SelectCrossLevelEnemies(string levelName, TR3Level level, int levelSequence, bool remastered)
     {
