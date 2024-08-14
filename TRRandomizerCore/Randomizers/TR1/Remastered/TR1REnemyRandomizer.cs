@@ -111,6 +111,20 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
 
     private void ApplyPostRandomization(TR1RCombinedLevel level, EnemyRandomizationCollection<TR1Type> enemies)
     {
+        if (enemies == null)
+        {
+            return;
+        }
+
+        IEnumerable<TR1Type> missingDependencies = TR1EnemyAllocator.GetMissingDependencies(level.Data, enemies.Available);
+        if (missingDependencies.Any())
+        {
+            ExecuteImport(level, new()
+            {
+                TypesToImport = new(missingDependencies),
+            });
+        }
+
         UpdateAtlanteanPDP(level, enemies);
         HideTrexDeath(level);
         AdjustTihocanEnding(level);
@@ -206,6 +220,25 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
         });
     }
 
+    private void ExecuteImport(TR1RCombinedLevel level, TR1DataImporter importer)
+    {
+        importer.Level = level.Data;
+        importer.LevelName = level.Name;
+        importer.DataFolder = GetResourcePath(@"TR1\Objects");
+
+        importer.Data.TextureObjectLimit = RandoConsts.TRRTexLimit;
+        importer.Data.TextureTileLimit = RandoConsts.TRRTileLimit;
+
+        string remapPath = $@"TR1\Textures\Deduplication\{level.Name}-TextureRemap.json";
+        if (ResourceExists(remapPath))
+        {
+            importer.TextureRemapPath = GetResourcePath(remapPath);
+        }
+
+        ImportResult<TR1Type> result = importer.Import();
+        DataCache.Merge(result, level.PDPData, level.MapData);
+    }
+
     internal class EnemyProcessor : AbstractProcessorThread<TR1REnemyRandomizer>
     {
         private readonly Dictionary<TR1RCombinedLevel, EnemyTransportCollection<TR1Type>> _enemyMapping;
@@ -252,24 +285,10 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
                     {
                         TypesToImport = importModels,
                         TypesToRemove = enemies.TypesToRemove,
-                        Level = level.Data,
-                        LevelName = level.Name,
-                        DataFolder = _outer.GetResourcePath(@"TR1\Objects"),
                     };
-
-                    importer.Data.TextureObjectLimit = RandoConsts.TRRTexLimit;
-                    importer.Data.TextureTileLimit = RandoConsts.TRRTileLimit;
-
-                    string remapPath = @"TR1\Textures\Deduplication\" + level.Name + "-TextureRemap.json";
-                    if (_outer.ResourceExists(remapPath))
-                    {
-                        importer.TextureRemapPath = _outer.GetResourcePath(remapPath);
-                    }
-
                     importer.Data.AliasPriority = TR1EnemyUtilities.GetAliasPriority(level.Name, enemies.TypesToImport);
                     
-                    ImportResult<TR1Type> result = importer.Import();
-                    _outer.DataCache.Merge(result, level.PDPData, level.MapData);
+                    _outer.ExecuteImport(level, importer);
                 }
 
                 if (!_outer.TriggerProgress())

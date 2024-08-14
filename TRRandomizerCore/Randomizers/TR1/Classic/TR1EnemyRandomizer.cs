@@ -127,6 +127,15 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             return;
         }
 
+        IEnumerable<TR1Type> missingDependencies = TR1EnemyAllocator.GetMissingDependencies(level.Data, enemies.Available);
+        if (missingDependencies.Any())
+        {
+            ExecuteImport(level, new()
+            {
+                TypesToImport = new(missingDependencies),
+            });
+        }
+
         level.Script.UnobtainableKills = null;
 
         FixColosseumBats(level);
@@ -428,6 +437,24 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
     }
 
+    private void ExecuteImport(TR1CombinedLevel level, TR1DataImporter importer)
+    {
+        importer.Level = level.Data;
+        importer.LevelName = level.Name;
+        importer.DataFolder = GetResourcePath(@"TR1\Objects");
+
+        importer.Data.TextureObjectLimit = RandoConsts.TRRTexLimit;
+        importer.Data.TextureTileLimit = RandoConsts.TRRTileLimit;
+
+        string remapPath = $@"TR1\Textures\Deduplication\{level.Name}-TextureRemap.json";
+        if (ResourceExists(remapPath))
+        {
+            importer.TextureRemapPath = GetResourcePath(remapPath);
+        }
+
+        importer.Import();
+    }
+
     internal class EnemyProcessor : AbstractProcessorThread<TR1EnemyRandomizer>
     {
         private readonly Dictionary<TR1CombinedLevel, EnemyTransportCollection<TR1Type>> _enemyMapping;
@@ -476,20 +503,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     {
                         TypesToImport = importModels,
                         TypesToRemove = enemies.TypesToRemove,
-                        Level = level.Data,
-                        LevelName = level.Name,
-                        DataFolder = _outer.GetResourcePath(@"TR1\Objects"),
                         TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport)
                     };
 
-                    string remapPath = $@"TR1\Textures\Deduplication\{level.Name}-TextureRemap.json";
-                    if (_outer.ResourceExists(remapPath))
-                    {
-                        importer.TextureRemapPath = _outer.GetResourcePath(remapPath);
-                    }
-
                     importer.Data.AliasPriority = TR1EnemyUtilities.GetAliasPriority(level.Name, enemies.TypesToImport);
-                    importer.Import();
+                    _outer.ExecuteImport(level, importer);
                 }
 
                 if (!_outer.TriggerProgress())
