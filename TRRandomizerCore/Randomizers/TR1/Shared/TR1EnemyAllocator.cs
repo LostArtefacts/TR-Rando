@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Numerics;
+using TRDataControl;
 using TRDataControl.Environment;
 using TRLevelControl;
 using TRLevelControl.Helpers;
@@ -284,6 +285,15 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
         RandomizeEnemies(levelName, level, enemies);
 
         return enemies;
+    }
+
+    public static IEnumerable<TR1Type> GetMissingDependencies(TR1Level level, List<TR1Type> enemyTypes)
+    {
+        TR1DataProvider data = new();
+        return enemyTypes
+            .SelectMany(t => data.GetCyclicDependencies(t))
+            .Except(level.Models.Keys)
+            .Distinct();
     }
 
     public void RandomizeEnemies(string levelName, TR1Level level, EnemyRandomizationCollection<TR1Type> enemies)

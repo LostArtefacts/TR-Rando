@@ -11,6 +11,7 @@
 - fixed (the lack of) prisoners in Area51 crashing the game when loading a save (#739)
 - fixed some enemies in TR3 causing triggers for other objects to break e.g. Crash Site room 72 (#742)
 - fixed secret models in TR3R Aldwych appearing offset from their actual location (#744)
+- fixed a crash in Palace Midas when randomizing enemies natively (#746)
 - improved data integrity checks when opening a folder and prior to randomization (#719)
 
 ## [V1.9.1](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.0...V1.9.1) - 2024-06-23
