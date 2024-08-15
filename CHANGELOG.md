@@ -12,6 +12,8 @@
 - fixed some enemies in TR3 causing triggers for other objects to break e.g. Crash Site room 72 (#742)
 - fixed secret models in TR3R Aldwych appearing offset from their actual location (#744)
 - fixed a crash in Palace Midas when randomizing enemies natively (#746)
+- fixed being unable to shoot the scion in Atlantis if using the skip, without backtracking for its trigger when the T-rex or Adam is present (#746)
+- fixed an awkwardly positioned egg in Sanctuary of the Scion that could prevent being able to reach a switch (#748)
 - improved data integrity checks when opening a folder and prior to randomization (#719)
 
 ## [V1.9.1](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.0...V1.9.1) - 2024-06-23

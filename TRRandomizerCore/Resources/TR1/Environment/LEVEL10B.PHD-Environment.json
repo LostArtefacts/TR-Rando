@@ -7600,6 +7600,29 @@
               }
             ]
           }
+        },
+        {
+          "Comments": "Add a second trigger to activate the scion in case the player uses the Atlantis skip.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 56832,
+              "Y": -15616,
+              "Z": 40448,
+              "Room": 56
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 109
+              },
+              {
+                "Parameter": 110
+              }
+            ]
+          }
         }
       ]
     }
