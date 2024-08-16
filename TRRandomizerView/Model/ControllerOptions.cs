@@ -38,7 +38,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private TRSecretCountMode _secretCountMode;
     private bool _useRewardRoomCameras;
     private uint _minSecretCount, _maxSecretCount;
-    private BoolItemControlClass _includeKeyItems, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity, _oneItemDifficulty;
+    private BoolItemControlClass _includeKeyItems, _randomizeVehicles, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity, _oneItemDifficulty;
     private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems, _relocateAwkwardEnemies, _hideDeadTrexes, _unrestrictedEnemyDifficulty;
     private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures, _retainLaraTextures;
     private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
@@ -1818,6 +1818,16 @@ public class ControllerOptions : INotifyPropertyChanged
         get => ItemMode == ItemMode.Shuffled || IncludeKeyItems.Value;
     }
 
+    public BoolItemControlClass RandomizeVehicles
+    {
+        get => _randomizeVehicles;
+        set
+        {
+            _randomizeVehicles = value;
+            FirePropertyChanged();
+        }
+    }
+
     public BoolItemControlClass AllowReturnPathLocations
     {
         get => _allowReturnPathLocations;
@@ -3169,6 +3179,12 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "The positions of key item pickups will be randomized. Items will be placed before their respective locks/slots."
         };
         BindingOperations.SetBinding(IncludeKeyItems, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+        RandomizeVehicles = new()
+        {
+            Title = "Include vehicles",
+            Description = "The positions of vehicles may change within a level, and they may appear in different levels."
+        };
+        BindingOperations.SetBinding(RandomizeVehicles, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
         AllowReturnPathLocations = new()
         {
             Title = "Allow return path locations",
@@ -3532,7 +3548,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         ItemBoolItemControls = new()
         {
-            _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _allowReturnPathLocations, _allowEnemyKeyDrops, _oneItemDifficulty, _maintainKeyContinuity, _includeExtraPickups
+            _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _allowReturnPathLocations, _allowEnemyKeyDrops, _randomizeVehicles, _oneItemDifficulty, _maintainKeyContinuity, _includeExtraPickups
         };
         EnemyBoolItemControls = new()
         {
@@ -3637,6 +3653,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _hideDeadTrexes.IsAvailable = IsHideDeadTrexesTypeSupported;
 
         _includeKeyItems.IsAvailable = IsKeyItemTypeSupported;
+        _randomizeVehicles.IsAvailable = IsVehiclesTypeSupported;
         _maintainKeyContinuity.IsAvailable = IsKeyContinuityTypeSupported;
         _includeExtraPickups.IsAvailable = IsExtraPickupsTypeSupported;
         _allowEnemyKeyDrops.IsAvailable = IsItemDropsTypeSupported;
@@ -3748,6 +3765,7 @@ public class ControllerOptions : INotifyPropertyChanged
         WeaponDifficulties = Enum.GetValues<WeaponDifficulty>();
         WeaponDifficulty = _controller.WeaponDifficulty;
         IncludeKeyItems.Value = _controller.IncludeKeyItems;
+        RandomizeVehicles.Value = _controller.RandomizeVehicles;
         AllowReturnPathLocations.Value = _controller.AllowReturnPathLocations;
         IncludeExtraPickups.Value = _controller.IncludeExtraPickups;
         RandomizeItemTypes.Value = _controller.RandomizeItemTypes;
@@ -4077,6 +4095,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.ItemMode = ItemMode;
         _controller.WeaponDifficulty = WeaponDifficulty;
         _controller.IncludeKeyItems = IncludeKeyItems.Value;
+        _controller.RandomizeVehicles = RandomizeVehicles.Value;
         _controller.AllowReturnPathLocations = AllowReturnPathLocations.Value;
         _controller.IncludeExtraPickups = IncludeExtraPickups.Value;
         _controller.RandomizeItemTypes = RandomizeItemTypes.Value;
@@ -4308,6 +4327,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
     public bool IsItemDropsTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemDrops);
     public bool IsKeyItemTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItems);
+    public bool IsVehiclesTypeSupported => IsRandomizationSupported(TRRandomizerType.Vehicles);
     public bool IsKeyContinuityTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyContinuity);
     public bool IsExtraPickupsTypeSupported => IsRandomizationSupported(TRRandomizerType.ExtraPickups);
     public bool IsEnemyTypeSupported => IsRandomizationSupported(TRRandomizerType.Enemy);

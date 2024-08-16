@@ -151,6 +151,11 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void RandomizeVehicles(TR2CombinedLevel level)
     {
+        if (!Settings.RandomizeVehicles)
+        {
+            return;
+        }
+
         Dictionary<TR2Type, Queue<Location>> vehicleLocations = new();
         void StoreLocation(TR2Type type)
         {
@@ -176,9 +181,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             }
         }
 
-        if (level.IsAssault)
+        if (level.IsAssault || level.Data.Entities.Any(e => e.TypeID == TR2Type.RedSnowmobile))
         {
-            // Regular skidoo rando comes with enemy rando currently
             StoreLocation(TR2Type.RedSnowmobile);
         }
 

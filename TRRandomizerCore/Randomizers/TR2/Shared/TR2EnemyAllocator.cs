@@ -1,5 +1,4 @@
-﻿using TRLevelControl;
-using TRLevelControl.Helpers;
+﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Utilities;
@@ -535,40 +534,20 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         }
 
         // MercSnowMobDriver relies on RedSnowmobile so it will be available in the model list
-        if (levelName != TR2LevelNames.TIBET)
+        if (!level.Entities.Any(e => e.TypeID == TR2Type.RedSnowmobile)
+            && level.Entities.Find(e => e.TypeID == TR2Type.MercSnowmobDriver) is TR2Entity mercDriver)
         {
-            TR2Entity mercDriver = level.Entities.Find(e => e.TypeID == TR2Type.MercSnowmobDriver);
-            if (mercDriver != null)
+            TR2Entity skidoo = new()
             {
-                TR2Entity skidoo = new()
-                {
-                    TypeID = TR2Type.RedSnowmobile,
-                    Intensity1 = -1,
-                    Intensity2 = -1
-                };
-                level.Entities.Add(skidoo);
+                TypeID = TR2Type.RedSnowmobile,
+                Intensity1 = -1,
+                Intensity2 = -1
+            };
+            level.Entities.Add(skidoo);
 
-                Location randomLocation = VehicleUtilities.GetRandomLocation(levelName, level, TR2Type.RedSnowmobile, Generator)
-                    ?? mercDriver.GetLocation();
-                skidoo.SetLocation(randomLocation);
-            }
-        }
-        else
-        {
-            TR2Entity skidoo = level.Entities.Find(e => e.TypeID == TR2Type.RedSnowmobile);
-            if (skidoo != null)
-            {
-                Location randomLocation = VehicleUtilities.GetRandomLocation(levelName, level, TR2Type.RedSnowmobile, Generator);
-                if (randomLocation != null)
-                {
-                    skidoo.SetLocation(randomLocation);
-                }
-                else
-                {
-                    // A secret depends on this skidoo, so just rotate it for variety.
-                    skidoo.Angle = (short)(Generator.Next(0, 8) * -TRConsts.Angle45);
-                }
-            }
+            Location randomLocation = VehicleUtilities.GetRandomLocation(levelName, level, TR2Type.RedSnowmobile, Generator)
+                ?? mercDriver.GetLocation();
+            skidoo.SetLocation(randomLocation);
         }
 
         // Check in case there are too many skidoo drivers

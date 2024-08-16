@@ -125,6 +125,7 @@ internal class TRVersionSupport
         TRRandomizerType.Texture,
         TRRandomizerType.Unarmed,
         TRRandomizerType.ItemSprite,
+        TRRandomizerType.Vehicles,
         TRRandomizerType.Wireframe,
     };
 
@@ -146,6 +147,7 @@ internal class TRVersionSupport
         TRRandomizerType.Text,
         TRRandomizerType.Texture,
         TRRandomizerType.TextureSwap,
+        TRRandomizerType.Vehicles,
     };
 
     private static readonly List<TRRandomizerType> _tr3Types = new()
