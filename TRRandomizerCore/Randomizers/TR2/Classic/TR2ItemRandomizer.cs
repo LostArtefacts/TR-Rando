@@ -181,9 +181,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             }
         }
 
-        if (level.IsAssault)
+        if (level.IsAssault || level.Data.Entities.Any(e => e.TypeID == TR2Type.RedSnowmobile))
         {
-            // Regular skidoo rando comes with enemy rando currently
             StoreLocation(TR2Type.RedSnowmobile);
         }
 
