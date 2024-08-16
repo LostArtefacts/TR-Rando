@@ -507,7 +507,6 @@ public static class TR3TypeUtilities
             TR3Type.SophiaLee,
             TR3Type.Tiger,
             TR3Type.TinnosMonster,
-            TR3Type.TinnosWasp,
             TR3Type.TonyFirehands,
             TR3Type.TribesmanAxe,
             TR3Type.TribesmanDart,
