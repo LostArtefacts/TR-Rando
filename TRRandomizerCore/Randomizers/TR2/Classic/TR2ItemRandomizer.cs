@@ -151,6 +151,11 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void RandomizeVehicles(TR2CombinedLevel level)
     {
+        if (!Settings.RandomizeVehicles)
+        {
+            return;
+        }
+
         Dictionary<TR2Type, Queue<Location>> vehicleLocations = new();
         void StoreLocation(TR2Type type)
         {

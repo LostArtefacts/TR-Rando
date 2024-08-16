@@ -1167,6 +1167,12 @@ public class TRRandomizerController
         set => LevelRandomizer.IncludeKeyItems = value;
     }
 
+    public bool RandomizeVehicles
+    {
+        get => LevelRandomizer.RandomizeVehicles;
+        set => LevelRandomizer.RandomizeVehicles = value;
+    }
+
     public bool AllowReturnPathLocations
     {
         get => LevelRandomizer.AllowReturnPathLocations;

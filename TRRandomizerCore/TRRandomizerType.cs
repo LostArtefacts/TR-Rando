@@ -70,4 +70,5 @@ public enum TRRandomizerType
     TextureSwap,
     Wireframe,
     HideDeadTrexes,
+    Vehicles,
 }

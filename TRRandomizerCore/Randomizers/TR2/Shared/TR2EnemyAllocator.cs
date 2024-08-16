@@ -553,7 +553,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
                 skidoo.SetLocation(randomLocation);
             }
         }
-        else
+        else if (Settings.RandomizeItems && Settings.RandomizeVehicles)
         {
             TR2Entity skidoo = level.Entities.Find(e => e.TypeID == TR2Type.RedSnowmobile);
             if (skidoo != null)

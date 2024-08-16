@@ -43,6 +43,7 @@ public class RandomizerSettings
     public ItemMode ItemMode { get; set; }
     public WeaponDifficulty WeaponDifficulty { get; set; }
     public bool IncludeKeyItems { get; set; }
+    public bool RandomizeVehicles { get; set; }
     public bool AllowReturnPathLocations { get; set; }
     public ItemRange KeyItemRange { get; set; }
     public bool AllowEnemyKeyDrops { get; set; }
@@ -222,6 +223,7 @@ public class RandomizerSettings
         ItemMode = (ItemMode)config.GetEnum(nameof(ItemMode), typeof(ItemMode), ItemMode.Default);
         WeaponDifficulty = (WeaponDifficulty)config.GetEnum(nameof(WeaponDifficulty), typeof(WeaponDifficulty), WeaponDifficulty.Easy);
         IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
+        RandomizeVehicles = config.GetBool(nameof(RandomizeVehicles), true);
         KeyItemRange = (ItemRange)config.GetEnum(nameof(KeyItemRange), typeof(ItemRange), ItemRange.Medium);
         AllowEnemyKeyDrops = config.GetBool(nameof(AllowEnemyKeyDrops), true);
         MaintainKeyContinuity = config.GetBool(nameof(MaintainKeyContinuity), true);
@@ -401,6 +403,7 @@ public class RandomizerSettings
         config[nameof(ItemMode)] = ItemMode;
         config[nameof(WeaponDifficulty)] = WeaponDifficulty;
         config[nameof(IncludeKeyItems)] = IncludeKeyItems;
+        config[nameof(RandomizeVehicles)] = RandomizeVehicles;
         config[nameof(KeyItemRange)] = KeyItemRange;
         config[nameof(AllowEnemyKeyDrops)] = AllowEnemyKeyDrops;
         config[nameof(MaintainKeyContinuity)] = MaintainKeyContinuity;
