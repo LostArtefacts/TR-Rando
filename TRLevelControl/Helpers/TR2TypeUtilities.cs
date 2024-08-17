@@ -233,9 +233,7 @@ public static class TR2TypeUtilities
         List<TR2Type> types = new()
         {
             TR2Type.BengalTiger,
-            TR2Type.Crow,
             TR2Type.Doberman,
-            TR2Type.Eagle,
             TR2Type.FlamethrowerGoonOG,
             TR2Type.FlamethrowerGoonTopixtor,
             TR2Type.GiantSpider,

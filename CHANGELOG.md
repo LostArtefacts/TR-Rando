@@ -16,6 +16,7 @@
 - fixed being unable to shoot the scion in Atlantis if using the skip, without backtracking for its trigger when the T-rex or Adam is present (#746)
 - fixed an awkwardly positioned egg in Sanctuary of the Scion that could prevent being able to reach a switch (#748)
 - improved data integrity checks when opening a folder and prior to randomization (#719)
+- removed birds from the list of enemies that can drop items in TR2 and TR3 (#752)
 
 ## [V1.9.1](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.0...V1.9.1) - 2024-06-23
 - fixed a missing reference related to Willard, which would cause enemy randomization to fail if he was selected (#712)

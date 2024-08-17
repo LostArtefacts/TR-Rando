@@ -486,7 +486,6 @@ public static class TR3TypeUtilities
             TR3Type.Cobra,
             TR3Type.Compsognathus,
             TR3Type.Crawler,
-            TR3Type.Crow,
             TR3Type.DamGuard,
             TR3Type.DogAntarc,
             TR3Type.DogLondon,
@@ -508,12 +507,10 @@ public static class TR3TypeUtilities
             TR3Type.SophiaLee,
             TR3Type.Tiger,
             TR3Type.TinnosMonster,
-            TR3Type.TinnosWasp,
             TR3Type.TonyFirehands,
             TR3Type.TribesmanAxe,
             TR3Type.TribesmanDart,
             TR3Type.Tyrannosaur,
-            TR3Type.Vulture
         };
 
         if (!protectFriendlyEnemies)
