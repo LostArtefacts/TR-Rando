@@ -65,6 +65,7 @@ internal class TRVersionSupport
         TRRandomizerType.AtlanteanEggBehaviour,
         TRRandomizerType.Audio,
         TRRandomizerType.Enemy,
+        TRRandomizerType.ExtraPickups,
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
         TRRandomizerType.HiddenEnemies,
