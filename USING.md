@@ -82,16 +82,7 @@ The randomizer will now check the data in the folder you have selected and creat
 It is **_strongly_** recommended that you click `Yes` if you see this message, reinstall the game and follow this guide carefully again from the [beginning](USING.md#randomizer-setup).
 
 ## Randomizing
-Now that you have your TR game folder open in the randomizer, you can select each aspect that you wish to randomize. There are several options available, so be sure to click the available `Options` button in each pane. Note that for TR I-III Remastered, the options that are available to randomize are much more limited than the classics. Only the following aspects are currently supported, the remaining options will be greyed out in the UI.
-
-- Secrets
-- Items
-- Enemies
-- Textures
-- Start positions
-- Secret rewards (excluding TR2R)
-- Audio
-- Game text
+Now that you have your TR game folder open in the randomizer, you can select each aspect that you wish to randomize. There are several options available, so be sure to click the available `Options` button in each pane. Note that for TR I-III Remastered, there are fewer available options - see [TRR Options](Resources/Documentation/TRR.md) for details.
 
 When you are ready to start, click the large green `Randomize` button. A progress bar will appear and the randomizer will make the selected changes.
 

@@ -443,7 +443,8 @@ public partial class MainWindow : Window, IRecentFolderOpener
 
     private void LaunchGameCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
     {
-        if (ConfirmEditorSaveState())
+        bool wasDirty = IsEditorDirty;
+        if (ConfirmEditorSaveState() && (!wasDirty || !_editorControl.Controller.AutoLaunchGame))
         {
             _editorControl.LaunchGame();
         }

@@ -526,6 +526,11 @@ public static class TR2TypeUtilities
         return GetStandardPickupTypes().Contains(type);
     }
 
+    public static bool IsMediType(TR2Type type)
+    {
+        return type == TR2Type.SmallMed_S_P || type == TR2Type.LargeMed_S_P;
+    }
+
     public static List<TR2Type> GetKeyItemTypes()
     {
         return new()

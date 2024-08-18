@@ -25,9 +25,12 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
     IEnumerator IEnumerable.GetEnumerator()
         => GetEnumerator();
 
-    public IEnumerable<FDEntry> FindAll(Func<FDEntry, bool> predicate)
+    public IEnumerable<T> FindAll<T>(Func<T, bool> predicate)
+        where T : FDEntry
     {
-        return _entries.Values.SelectMany(v => v.Where(predicate));
+        return _entries.Values.SelectMany(v => v)
+            .OfType<T>()
+            .Where(predicate);
     }
 
     public FDControl(TRGameVersion version, ITRLevelObserver observer, ushort dummyData = 0)
@@ -129,7 +132,26 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
             .ToList();
     }
 
+    public List<FDTriggerEntry> GetSwitchKeyTriggers(int entityIndex)
+    {
+        return FindAll<FDTriggerEntry>(t =>
+            (t.TrigType == FDTrigType.Switch || t.TrigType == FDTrigType.Key)
+            && t.SwitchOrKeyRef == entityIndex)
+            .ToList();
+    }
+
     public List<FDActionItem> GetActionItems(FDTrigAction action, int sectorIndex = -1)
+    {
+        return GetActionItems(new List<FDTrigAction> { action }, sectorIndex);
+    }
+
+    public List<FDActionItem> GetEntityActionItems(int entityIndex)
+    {
+        return GetActionItems(new List<FDTrigAction> { FDTrigAction.Object, FDTrigAction.LookAtItem })
+            .FindAll(a => a.Parameter == entityIndex);
+    }
+
+    public List<FDActionItem> GetActionItems(List<FDTrigAction> actions, int sectorIndex = -1)
     {
         List<List<FDEntry>> entrySearch;
         if (sectorIndex == -1)
@@ -147,7 +169,7 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
         return entrySearch
             .SelectMany(e => e.Where(i => i is FDTriggerEntry))
             .Cast<FDTriggerEntry>()
-            .SelectMany(t => t.Actions.FindAll(a => a.Action == action))
+            .SelectMany(t => t.Actions.FindAll(a => actions.Contains(a.Action)))
             .ToList();
     }
 
