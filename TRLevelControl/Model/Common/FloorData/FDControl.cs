@@ -25,9 +25,12 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
     IEnumerator IEnumerable.GetEnumerator()
         => GetEnumerator();
 
-    public IEnumerable<FDEntry> FindAll(Func<FDEntry, bool> predicate)
+    public IEnumerable<T> FindAll<T>(Func<T, bool> predicate)
+        where T : FDEntry
     {
-        return _entries.Values.SelectMany(v => v.Where(predicate));
+        return _entries.Values.SelectMany(v => v)
+            .OfType<T>()
+            .Where(predicate);
     }
 
     public FDControl(TRGameVersion version, ITRLevelObserver observer, ushort dummyData = 0)
@@ -131,10 +134,9 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
 
     public List<FDTriggerEntry> GetSwitchKeyTriggers(int entityIndex)
     {
-        return FindAll(e => e is FDTriggerEntry trigger
-                && (trigger.TrigType == FDTrigType.Switch || trigger.TrigType == FDTrigType.Key)
-                && trigger.SwitchOrKeyRef == entityIndex)
-            .Cast<FDTriggerEntry>()
+        return FindAll<FDTriggerEntry>(t =>
+            (t.TrigType == FDTrigType.Switch || t.TrigType == FDTrigType.Key)
+            && t.SwitchOrKeyRef == entityIndex)
             .ToList();
     }
 

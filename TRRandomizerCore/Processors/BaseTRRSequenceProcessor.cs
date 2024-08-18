@@ -68,7 +68,7 @@ public class BaseTRRSequenceProcessor<E, T>
 
     private List<int> GetMediIndices(List<E> items)
     {
-        return items.FindAll(e => IsMediType(e.TypeID))
+        return items.Where(e => IsMediType(e.TypeID))
             .Select(e => items.IndexOf(e))
             .ToList();
     }

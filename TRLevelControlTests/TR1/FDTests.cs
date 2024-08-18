@@ -455,6 +455,28 @@ public class FDTests : FDTestBase
     }
 
     [TestMethod]
+    public void GetSwitchKeyTriggers()
+    {
+        TR1Level level = GetTR1TestLevel();
+
+        int itemIndex = level.Entities.FindIndex(e => e.TypeID == TR1Type.WallSwitch);
+        Assert.AreNotEqual(-1, itemIndex);
+
+        List<FDTriggerEntry> triggers = level.FloorData.GetSwitchKeyTriggers(itemIndex);
+        Assert.AreEqual(1, triggers.Count);
+        Assert.AreEqual(FDTrigType.Switch, triggers[0].TrigType);
+        Assert.AreEqual(itemIndex, triggers[0].SwitchOrKeyRef);
+
+        itemIndex = level.Entities.FindIndex(e => e.TypeID == TR1Type.Keyhole1);
+        Assert.AreNotEqual(-1, itemIndex);
+
+        triggers = level.FloorData.GetSwitchKeyTriggers(itemIndex);
+        Assert.AreEqual(1, triggers.Count);
+        Assert.AreEqual(FDTrigType.Key, triggers[0].TrigType);
+        Assert.AreEqual(itemIndex, triggers[0].SwitchOrKeyRef);
+    }
+
+    [TestMethod]
     [Description("Test removing entity triggers.")]
     public void RemoveEntityTriggers()
     {
