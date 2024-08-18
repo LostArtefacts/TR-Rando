@@ -22,6 +22,7 @@ Note that for TR I-III Remastered, the options that are available to randomize a
 
  - Key item names will generally default to "Key Item"
  - Lara will always lose her guns/ammo on level slots where this originally happens (i.e. Natla's Mines, Offshore Rig and Home Sweet Home)
+ - Cutscenes and FMVs are hard-coded, so will always follow the original level sequencing e.g. Larson vs. Lara will always show after the fourth level in TR1R
  - You may notice some minor visual glitches in remastered graphics, such as the skybox flickering occasionally in Colosseum
  - Ember colours in TR2 will change depending on the sequence e.g. in the Diving Area slot they are green, otherwise they are orange
  - In Barkhang Monastery, the Seraph will not be in Lara's inventory. A workaround is provided at the end of this level, such that the Seraph is not required
