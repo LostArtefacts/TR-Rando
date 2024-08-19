@@ -76,6 +76,7 @@ For keeping track of levels while you play, check out the [TRRandoTracker](https
 * Jimmy Beon - Providing us with an excellent assortment of custom textures for use in rando.
 * Topixtor - For endless testing to fix issues such as the opera house/barkhang entity freeze and mirrored levels, and providing enemy variations from his [TRLEs](https://trcustoms.org/users/927).
 * Radgryd - For endless TR1 testing and lots of great ideas for the rando.
+* Rylael - For extensive testing and providing valuable feedback.
 * Ralodosmovo - For providing an assortment of custom textures, and lots of ideas for the rando.
 * Lilly Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, mirrored levels, and providing great continuous feedback. Lilly was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
     * Croatian - Erackk
