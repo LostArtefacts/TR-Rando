@@ -1,6 +1,6 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.2...master) - xxxx-xx-xx
 
-## [V1.9.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.1...V1.9.2) - 2024-08-19
+## [V1.9.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.1...V1.9.2) - 2024-08-20
 - added support for level sequence randomization in TR1R and TR2R (#756)
 - added options to use textures from specific game areas only in TRR texture randomization (#726)
 - changed vehicle randomization in TR2 so that it is now optional within item randomization (#750)
