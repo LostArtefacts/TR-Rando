@@ -28,6 +28,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer
             Settings = Settings,
             Mirrorer = Mirrorer,
             ItemFactory = ItemFactory,
+            DefaultItemShade = -1,
         };
 
         foreach (TR2ScriptedLevel lvl in Levels)

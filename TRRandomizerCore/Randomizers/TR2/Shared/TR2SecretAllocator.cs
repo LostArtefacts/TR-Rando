@@ -19,6 +19,7 @@ public class TR2SecretAllocator : ISecretRandomizer
     public Random Generator { get; set; }
     public IMirrorControl Mirrorer { get; set; }
     public ItemFactory<TR2Entity> ItemFactory { get; set; }
+    public short DefaultItemShade { get; set; }
 
     public TR2SecretAllocator()
     {
@@ -141,8 +142,8 @@ public class TR2SecretAllocator : ISecretRandomizer
     {
         _routePicker.SetLocation(entity, location);
         entity.TypeID = type;
-        entity.Intensity1 = -1;
-        entity.Intensity2 = -1;
+        entity.Intensity1 = DefaultItemShade;
+        entity.Intensity2 = DefaultItemShade;
         entity.Flags = 0;
     }
 }
