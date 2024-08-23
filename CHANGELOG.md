@@ -1,4 +1,6 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.2...master) - xxxx-xx-xx
+- fixed dark pickup sprites in TR2R OG graphics (#760)
+- fixed gun pickup sprites not showing properly in TR2R Floating Islands and Dragon's Lair OG graphics (#760)
 
 ## [V1.9.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.1...V1.9.2) - 2024-08-20
 - added support for level sequence randomization in TR1R and TR2R (#756)

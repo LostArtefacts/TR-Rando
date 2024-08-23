@@ -8,6 +8,8 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
 {
+    public short DefaultItemShade { get; set; }
+
     public TR2ItemAllocator()
         : base(TRGameVersion.TR2) { }
 
@@ -33,7 +35,7 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
         => false;
 
     protected override void ItemMoved(TR2Entity item)
-        => item.Intensity1 = item.Intensity2 = -1;
+        => item.Intensity1 = item.Intensity2 = DefaultItemShade;
 
     public void RandomizeItems(string levelName, TR2Level level, AbstractTRScriptedLevel scriptedLevel)
     {
