@@ -34,6 +34,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             Generator = _generator,
             Settings = Settings,
             ItemFactory = ItemFactory,
+            DefaultItemShade = -1,
         };
 
         _allocator.AllocateWeapons(Levels.Where(l => !l.Is(TR2LevelNames.ASSAULT)));
