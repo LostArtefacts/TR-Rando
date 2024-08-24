@@ -60,7 +60,7 @@ Note too that some files are shared so if you randomize TR1R, you may for exampl
 
 ## Installing the Randomizer
 Setting up the randomizer itself is straight-forward.
-1. Download the latest release from https://github.com/LostArtefacts/TR-Rando/releases/latest. Make sure to download the `TRRando` zip file and not the source code. Choose the x64 or x86 version, depending on your system.
+1. Download the latest release from https://github.com/LostArtefacts/TR-Rando/releases/latest. Make sure to download the `TRRando-x64.zip` file and not the source code.
 
     ![Release example](Resources/Using/release.png)
     
@@ -129,10 +129,9 @@ You may see the following error message when you try to launch the randomizer - 
 
 ![.NET Core missing](Resources/Using/netcore.png)
 
-If however the randomizer doesn't launch, but you don't see the above error, you can install the runtime manually. Use one of the following links depending on your system.
+If however the randomizer doesn't launch, but you don't see the above error, you can install the runtime manually using the link below.
 
-- x64: https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x64.exe
-- x86: https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x86.exe
+- https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x64.exe
 
 ### General issues
 If you encounter error messages during randomization, the most likely cause is unclean data files. In this case, you should follow these steps.

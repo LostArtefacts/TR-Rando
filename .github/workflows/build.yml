@@ -6,46 +6,16 @@ on:
   pull_request:
     branches: [ "master" ]
 
-jobs:
-  buildx86:
-    name: Build x86
-    runs-on: windows-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '6.0'
-          
-      - name: Build the solution
-        run: |
-          dotnet restore
-          dotnet test --filter TestCategory!=OriginalIO
-          dotnet publish -c Release -a x86 --property:PublishDir=build
-          
-      - name: Package the build
-        run: |
-          cd TRRandomizerView/build
-          dir
-          Compress-Archive -Path (Get-ChildItem -Exclude *.pdb) -DestinationPath TRRando-x86.zip
-          
-      - name: Upload the package
-        uses: actions/upload-artifact@v3
-        with:
-          name: TRRando-x86
-          path: TRRandomizerView/build/TRRando-x86.zip
-          
+jobs:          
   buildx64:
     name: Build x64
     runs-on: windows-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0'
           
@@ -62,7 +32,7 @@ jobs:
           Compress-Archive -Path (Get-ChildItem -Exclude *.pdb) -DestinationPath TRRando-x64.zip
           
       - name: Upload the package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: TRRando-x64
           path: TRRandomizerView/build/TRRando-x64.zip
