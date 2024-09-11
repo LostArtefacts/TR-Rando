@@ -1072,6 +1072,12 @@ public class TRRandomizerController
         set => LevelRandomizer.HardSecrets = value;
     }
 
+    public bool EnableUWCornerSecrets
+    {
+        get => LevelRandomizer.EnableUWCornerSecrets;
+        set => LevelRandomizer.EnableUWCornerSecrets = value;
+    }
+
     public bool GlitchedSecrets
     {
         get => LevelRandomizer.GlitchedSecrets;

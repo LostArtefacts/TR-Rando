@@ -41,6 +41,7 @@
       "Y": 972,
       "Z": 31598,
       "Room": 33,
+      "IsUWCorner": true,
       "PackID": "TowandAA"
     },
     {
@@ -85,13 +86,15 @@
       "X": 38766,
       "Y": 7335,
       "Z": 38034,
-      "Room": 9
+      "Room": 9,
+      "IsUWCorner": true
     },
     {
       "X": 42862,
       "Y": 7152,
       "Z": 37742,
-      "Room": 9
+      "Room": 9,
+      "IsUWCorner": true
     },
     {
       "X": 50758,
@@ -540,13 +543,15 @@
       "X": 50030,
       "Y": 1074,
       "Z": 17262,
-      "Room": 42
+      "Room": 42,
+      "IsUWCorner": true
     },
     {
       "X": 41838,
       "Y": 2948,
       "Z": 33938,
-      "Room": 55
+      "Room": 55,
+      "IsUWCorner": true
     },
     {
       "X": 24077,
@@ -576,7 +581,8 @@
       "X": 56466,
       "Y": 1044,
       "Z": 63342,
-      "Room": 101
+      "Room": 101,
+      "IsUWCorner": true
     },
     {
       "X": 62565,
@@ -594,13 +600,15 @@
       "X": 72558,
       "Y": 1776,
       "Z": 60562,
-      "Room": 100
+      "Room": 100,
+      "IsUWCorner": true
     },
     {
       "X": 73874,
       "Y": 845,
       "Z": 51346,
-      "Room": 136
+      "Room": 136,
+      "IsUWCorner": true
     },
     {
       "X": 63977,
@@ -642,7 +650,8 @@
       "X": 31598,
       "Y": 1557,
       "Z": 43154,
-      "Room": 97
+      "Room": 97,
+      "IsUWCorner": true
     },
     {
       "X": 35640,
@@ -660,7 +669,8 @@
       "X": 41838,
       "Y": 2917,
       "Z": 24722,
-      "Room": 54
+      "Room": 54,
+      "IsUWCorner": true
     },
     {
       "X": 29797,
@@ -678,25 +688,29 @@
       "X": 47982,
       "Y": 1074,
       "Z": 47982,
-      "Room": 15
+      "Room": 15,
+      "IsUWCorner": true
     },
     {
       "X": 50030,
       "Y": 1263,
       "Z": 40082,
-      "Room": 14
+      "Room": 14,
+      "IsUWCorner": true
     },
     {
       "X": 40082,
       "Y": 1587,
       "Z": 50322,
-      "Room": 105
+      "Room": 105,
+      "IsUWCorner": true
     },
     {
       "X": 71826,
       "Y": 1776,
       "Z": 60562,
-      "Room": 100
+      "Room": 100,
+      "IsUWCorner": true
     },
     {
       "X": 66453,
@@ -1137,7 +1151,8 @@
       "X": 71826,
       "Y": 6128,
       "Z": 18578,
-      "Room": 150
+      "Room": 150,
+      "IsUWCorner": true
     },
     {
       "X": 66292,
@@ -1174,19 +1189,22 @@
       "X": 73582,
       "Y": 6128,
       "Z": 18578,
-      "Room": 150
+      "Room": 150,
+      "IsUWCorner": true
     },
     {
       "X": 74606,
       "Y": 6128,
       "Z": 26770,
-      "Room": 150
+      "Room": 150,
+      "IsUWCorner": true
     },
     {
       "X": 70802,
       "Y": 6201,
       "Z": 32914,
-      "Room": 154
+      "Room": 154,
+      "IsUWCorner": true
     },
     {
       "X": 70857,
@@ -1339,7 +1357,8 @@
       "X": 48274,
       "Y": 6461,
       "Z": 45934,
-      "Room": 28
+      "Room": 28,
+      "IsUWCorner": true
     },
     {
       "X": 54995,
@@ -1357,13 +1376,15 @@
       "X": 48274,
       "Y": 7664,
       "Z": 32914,
-      "Room": 51
+      "Room": 51,
+      "IsUWCorner": true
     },
     {
       "X": 44910,
       "Y": 8688,
       "Z": 36718,
-      "Room": 51
+      "Room": 51,
+      "IsUWCorner": true
     },
     {
       "X": 43109,
@@ -1477,7 +1498,8 @@
       "X": 33938,
       "Y": 5616,
       "Z": 33646,
-      "Room": 134
+      "Room": 134,
+      "IsUWCorner": true
     },
     {
       "X": 40859,
@@ -1544,7 +1566,8 @@
       "X": 41838,
       "Y": 4243,
       "Z": 36718,
-      "Room": 17
+      "Room": 17,
+      "IsUWCorner": true
     },
     {
       "X": 66481,
@@ -1668,7 +1691,8 @@
       "X": 76946,
       "Y": 9011,
       "Z": 30866,
-      "Room": 23
+      "Room": 23,
+      "IsUWCorner": true
     },
     {
       "X": 83045,
@@ -1742,13 +1766,15 @@
       "X": 69486,
       "Y": 8176,
       "Z": 59246,
-      "Room": 176
+      "Room": 176,
+      "IsUWCorner": true
     },
     {
       "X": 72850,
       "Y": 9456,
       "Z": 59538,
-      "Room": 76
+      "Room": 76,
+      "IsUWCorner": true
     },
     {
       "X": 83044,
@@ -1935,7 +1961,8 @@
       "X": 87186,
       "Y": 10261,
       "Z": 31890,
-      "Room": 23
+      "Room": 23,
+      "IsUWCorner": true
     },
     {
       "X": 67685,
@@ -1971,13 +1998,15 @@
       "X": 84114,
       "Y": 10480,
       "Z": 51054,
-      "Room": 154
+      "Room": 154,
+      "IsUWCorner": true
     },
     {
       "X": 75630,
       "Y": 7920,
       "Z": 47982,
-      "Room": 83
+      "Room": 83,
+      "IsUWCorner": true
     },
     {
       "X": 88987,
@@ -2292,7 +2321,8 @@
       "X": 35694,
       "Y": 2032,
       "Z": 77970,
-      "Room": 88
+      "Room": 88,
+      "IsUWCorner": true
     },
     {
       "X": 30619,
@@ -2328,7 +2358,8 @@
       "X": 42862,
       "Y": 2032,
       "Z": 96110,
-      "Room": 6
+      "Room": 6,
+      "IsUWCorner": true
     },
     {
       "X": 44133,
@@ -2516,7 +2547,8 @@
       "X": 50030,
       "Y": 1264,
       "Z": 58514,
-      "Room": 0
+      "Room": 0,
+      "IsUWCorner": true
     },
     {
       "X": 47049,
@@ -2585,7 +2617,8 @@
       "X": 69486,
       "Y": -528,
       "Z": 72850,
-      "Room": 87
+      "Room": 87,
+      "IsUWCorner": true
     },
     {
       "X": 62474,
@@ -2765,7 +2798,8 @@
       "X": 38766,
       "Y": 3676,
       "Z": 61294,
-      "Room": 43
+      "Room": 43,
+      "IsUWCorner": true
     },
     {
       "X": 32655,
@@ -2855,13 +2889,15 @@
       "Y": -1808,
       "Z": 69486,
       "Room": 18,
+      "IsUWCorner": true,
       "PackID": "TowandAA"
     },
     {
       "X": 40082,
       "Y": -356,
       "Z": 56466,
-      "Room": 2
+      "Room": 2,
+      "IsUWCorner": true
     },
     {
       "X": 51301,
@@ -2891,37 +2927,43 @@
       "X": 57490,
       "Y": -528,
       "Z": 68462,
-      "Room": 9
+      "Room": 9,
+      "IsUWCorner": true
     },
     {
       "X": 62318,
       "Y": -784,
       "Z": 64366,
-      "Room": 12
+      "Room": 12,
+      "IsUWCorner": true
     },
     {
       "X": 57490,
       "Y": -4368,
       "Z": 60270,
-      "Room": 11
+      "Room": 11,
+      "IsUWCorner": true
     },
     {
       "X": 62318,
       "Y": -4368,
       "Z": 54126,
-      "Room": 11
+      "Room": 11,
+      "IsUWCorner": true
     },
     {
       "X": 63634,
       "Y": -4368,
       "Z": 53394,
-      "Room": 14
+      "Room": 14,
+      "IsUWCorner": true
     },
     {
       "X": 66414,
       "Y": -2832,
       "Z": 62610,
-      "Room": 13
+      "Room": 13,
+      "IsUWCorner": true
     },
     {
       "X": 67483,
@@ -2951,7 +2993,8 @@
       "X": 62318,
       "Y": -4462,
       "Z": 64366,
-      "Room": 12
+      "Room": 12,
+      "IsUWCorner": true
     },
     {
       "X": 65008,
@@ -3041,7 +3084,8 @@
       "X": 83822,
       "Y": -1808,
       "Z": 35986,
-      "Room": 74
+      "Room": 74,
+      "IsUWCorner": true
     },
     {
       "X": 81384,
@@ -3053,7 +3097,8 @@
       "X": 65390,
       "Y": -4864,
       "Z": 67730,
-      "Room": 13
+      "Room": 13,
+      "IsUWCorner": true
     },
     {
       "X": 65435,
@@ -3066,47 +3111,54 @@
       "Y": -52,
       "Z": 59246,
       "Room": 3,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "IsUWCorner": true
     },
     {
       "X": 27502,
       "Y": -949,
       "Z": 62318,
       "Room": 3,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "IsUWCorner": true
     },
     {
       "X": 38766,
       "Y": -784,
       "Z": 69486,
-      "Room": 2
+      "Room": 2,
+      "IsUWCorner": true
     },
     {
       "X": 30866,
       "Y": -16,
       "Z": 40814,
-      "Room": 0
+      "Room": 0,
+      "IsUWCorner": true
     },
     {
       "X": 13166,
       "Y": -1229,
       "Z": 39058,
       "Room": 6,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "IsUWCorner": true
     },
     {
       "X": 13166,
       "Y": -1333,
       "Z": 36718,
       "Room": 6,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "IsUWCorner": true
     },
     {
       "X": 11118,
       "Y": -2576,
       "Z": 23698,
       "Room": 7,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "IsUWCorner": true
     },
     {
       "X": 48536,
@@ -3120,7 +3172,8 @@
       "Y": -12656,
       "Z": 69486,
       "Room": 51,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "IsUWCorner": true
     },
     {
       "X": 9288,
@@ -3140,7 +3193,8 @@
       "X": 57490,
       "Y": -528,
       "Z": 66414,
-      "Room": 9
+      "Room": 9,
+      "IsUWCorner": true
     },
     {
       "X": 28330,
@@ -3386,7 +3440,8 @@
       "X": 59246,
       "Y": 4555,
       "Z": 32914,
-      "Room": 94
+      "Room": 94,
+      "IsUWCorner": true
     },
     {
       "X": 54171,
@@ -3417,7 +3472,8 @@
       "X": 47982,
       "Y": 5199,
       "Z": 47982,
-      "Room": 41
+      "Room": 41,
+      "IsUWCorner": true
     },
     {
       "X": 49253,
@@ -3447,7 +3503,8 @@
       "X": 53394,
       "Y": 4848,
       "Z": 25454,
-      "Room": 101
+      "Room": 101,
+      "IsUWCorner": true
     },
     {
       "X": 42401,
@@ -3471,7 +3528,8 @@
       "X": 65682,
       "Y": 11504,
       "Z": 16530,
-      "Room": 7
+      "Room": 7,
+      "IsUWCorner": true
     },
     {
       "X": 70131,
@@ -3507,7 +3565,8 @@
       "X": 62610,
       "Y": -1808,
       "Z": 34962,
-      "Room": 42
+      "Room": 42,
+      "IsUWCorner": true
     },
     {
       "X": 73760,
@@ -3537,7 +3596,8 @@
       "X": 58222,
       "Y": 6896,
       "Z": 41106,
-      "Room": 79
+      "Room": 79,
+      "IsUWCorner": true
     },
     {
       "X": 53033,
@@ -3568,7 +3628,8 @@
       "X": 50322,
       "Y": 5616,
       "Z": 45202,
-      "Room": 41
+      "Room": 41,
+      "IsUWCorner": true
     },
     {
       "X": 54241,
@@ -3580,13 +3641,15 @@
       "X": 49298,
       "Y": 4300,
       "Z": 38766,
-      "Room": 41
+      "Room": 41,
+      "IsUWCorner": true
     },
     {
       "X": 55150,
       "Y": 5323,
       "Z": 38766,
-      "Room": 41
+      "Room": 41,
+      "IsUWCorner": true
     },
     {
       "X": 38853,
@@ -3598,19 +3661,22 @@
       "X": 77970,
       "Y": 10854,
       "Z": 12434,
-      "Room": 88
+      "Room": 88,
+      "IsUWCorner": true
     },
     {
       "X": 43886,
       "Y": 10444,
       "Z": 23406,
-      "Room": 103
+      "Room": 103,
+      "IsUWCorner": true
     },
     {
       "X": 55150,
       "Y": 10224,
       "Z": 21650,
-      "Room": 101
+      "Room": 101,
+      "IsUWCorner": true
     },
     {
       "X": 74752,
@@ -3672,6 +3738,7 @@
       "Y": 5872,
       "Z": 41838,
       "Room": 79,
+      "IsUWCorner": true,
       "PackID": "TowandAA"
     },
     {
@@ -3713,7 +3780,8 @@
       "X": 94062,
       "Y": 3530,
       "Z": 76946,
-      "Room": 4
+      "Room": 4,
+      "IsUWCorner": true
     },
     {
       "X": 73829,
@@ -3773,13 +3841,15 @@
       "X": 64366,
       "Y": 1776,
       "Z": 76654,
-      "Room": 6
+      "Room": 6,
+      "IsUWCorner": true
     },
     {
       "X": 64366,
       "Y": 752,
       "Z": 64658,
-      "Room": 6
+      "Room": 6,
+      "IsUWCorner": true
     },
     {
       "X": 68507,
@@ -3803,7 +3873,8 @@
       "X": 69486,
       "Y": 3243,
       "Z": 47250,
-      "Room": 17
+      "Room": 17,
+      "IsUWCorner": true
     },
     {
       "X": 61541,
@@ -3869,7 +3940,8 @@
       "X": 62610,
       "Y": -565,
       "Z": 34670,
-      "Room": 35
+      "Room": 35,
+      "IsUWCorner": true
     },
     {
       "X": 40859,
@@ -3905,7 +3977,8 @@
       "X": 62318,
       "Y": 496,
       "Z": 63342,
-      "Room": 14
+      "Room": 14,
+      "IsUWCorner": true
     },
     {
       "X": 71787,
@@ -3923,7 +3996,8 @@
       "X": 46958,
       "Y": -239,
       "Z": 69778,
-      "Room": 32
+      "Room": 32,
+      "IsUWCorner": true
     },
     {
       "X": 50075,
@@ -3965,13 +4039,15 @@
       "X": 68462,
       "Y": 1264,
       "Z": 75630,
-      "Room": 7
+      "Room": 7,
+      "IsUWCorner": true
     },
     {
       "X": 87918,
       "Y": 3309,
       "Z": 82798,
-      "Room": 3
+      "Room": 3,
+      "IsUWCorner": true
     },
     {
       "X": 74159,
@@ -3991,7 +4067,8 @@
       "X": 60270,
       "Y": -528,
       "Z": 74606,
-      "Room": 6
+      "Room": 6,
+      "IsUWCorner": true
     },
     {
       "X": 72707,
@@ -4662,7 +4739,8 @@
       "X": 25454,
       "Y": 17844,
       "Z": 27794,
-      "Room": 129
+      "Room": 129,
+      "IsUWCorner": true
     },
     {
       "X": 20826,
@@ -5018,7 +5096,8 @@
       "X": 46958,
       "Y": 3056,
       "Z": 39790,
-      "Room": 56
+      "Room": 56,
+      "IsUWCorner": true
     },
     {
       "X": 36424,
@@ -5383,7 +5462,8 @@
       "X": 10386,
       "Y": 5276,
       "Z": 61294,
-      "Room": 82
+      "Room": 82,
+      "IsUWCorner": true
     },
     {
       "X": 21332,
@@ -5944,13 +6024,15 @@
       "X": 32622,
       "Y": 10224,
       "Z": 43886,
-      "Room": 29
+      "Room": 29,
+      "IsUWCorner": true
     },
     {
       "X": 32914,
       "Y": 9895,
       "Z": 40814,
-      "Room": 24
+      "Room": 24,
+      "IsUWCorner": true
     },
     {
       "X": 36208,
@@ -6271,7 +6353,8 @@
       "X": 79726,
       "Y": 26864,
       "Z": 42862,
-      "Room": 61
+      "Room": 61,
+      "IsUWCorner": true
     },
     {
       "X": 73615,
@@ -6612,7 +6695,8 @@
       "X": 28526,
       "Y": 4216,
       "Z": 66706,
-      "Room": 119
+      "Room": 119,
+      "IsUWCorner": true
     },
     {
       "X": 34917,

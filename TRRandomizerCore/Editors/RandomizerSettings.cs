@@ -40,6 +40,7 @@ public class RandomizerSettings
     public GameMode GameMode { get; set; }
     public GlobeDisplayOption GlobeDisplay { get; set; }
     public bool HardSecrets { get; set; }
+    public bool EnableUWCornerSecrets { get; set; }
     public ItemMode ItemMode { get; set; }
     public WeaponDifficulty WeaponDifficulty { get; set; }
     public bool IncludeKeyItems { get; set; }
@@ -207,6 +208,7 @@ public class RandomizerSettings
         RandomizeSecrets = config.GetBool(nameof(RandomizeSecrets));
         SecretSeed = config.GetInt(nameof(SecretSeed), defaultSeed);
         HardSecrets = config.GetBool(nameof(HardSecrets));
+        EnableUWCornerSecrets = config.GetBool(nameof(EnableUWCornerSecrets), true);
         GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
         GuaranteeSecrets = config.GetBool(nameof(GuaranteeSecrets), true);
         SecretRewardMode = (TRSecretRewardMode)config.GetEnum(nameof(SecretRewardMode), typeof(TRSecretRewardMode), TRSecretRewardMode.Room);
@@ -387,6 +389,7 @@ public class RandomizerSettings
         config[nameof(RandomizeSecrets)] = RandomizeSecrets;
         config[nameof(SecretSeed)] = SecretSeed;
         config[nameof(HardSecrets)] = HardSecrets;
+        config[nameof(EnableUWCornerSecrets)] = EnableUWCornerSecrets;
         config[nameof(GlitchedSecrets)] = GlitchedSecrets;
         config[nameof(GuaranteeSecrets)] = GuaranteeSecrets;
         config[nameof(SecretRewardMode)] = SecretRewardMode;

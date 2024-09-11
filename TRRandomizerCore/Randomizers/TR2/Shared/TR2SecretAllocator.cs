@@ -37,6 +37,11 @@ public class TR2SecretAllocator : ISecretRandomizer
 
     public void PlaceAllSecrets(string levelName, TR2Level level)
     {
+        if (!_locations.ContainsKey(levelName))
+        {
+            return;
+        }
+
         Queue<int> existingIndices = new();
         for (int i = 0; i < level.Entities.Count; i++)
         {

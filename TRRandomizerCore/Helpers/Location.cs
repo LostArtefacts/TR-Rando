@@ -14,6 +14,7 @@ public class Location : ITRLocatable, ICloneable
     public short Room { get; set; }
     public bool RequiresGlitch { get; set; }
     public Difficulty Difficulty { get; set; }
+    public bool IsUWCorner { get; set; }
     public ItemRange Range { get; set; }
     public RoomType RoomType { get; set; }
     public bool VehicleRequired { get; set; }

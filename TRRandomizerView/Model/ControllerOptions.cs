@@ -31,7 +31,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private bool _addReturnPaths, _fixOGBugs, _disableDemos, _autoLaunchGame;
 
     private BoolItemControlClass _randomizeLevelSequencing;
-    private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRandomSecretModels;
+    private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRandomSecretModels, _enableUWCornerSecrets;
     private TRSecretRewardMode[] _secretRewardModes;
     private TRSecretRewardMode _secretRewardMode;
     private TRSecretCountMode[] _secretCountModes;
@@ -1737,6 +1737,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public BoolItemControlClass EnableUWCornerSecrets
+    {
+        get => _enableUWCornerSecrets;
+        set
+        {
+            _enableUWCornerSecrets = value;
+            FirePropertyChanged();
+        }
+    }
+
     public bool RandomizeItems
     {
         get => _randomItemsControl.IsActive;
@@ -3134,6 +3144,12 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "Locations classed as hard will be included in the randomization pool."
         };
         BindingOperations.SetBinding(IsHardSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
+        EnableUWCornerSecrets = new()
+        {
+            Title = "Enable underwater corner secrets",
+            Description = "Trickier underwater corner locations will be included in the randomization pool.",
+        };
+        BindingOperations.SetBinding(EnableUWCornerSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
         IsGlitchedSecrets = new BoolItemControlClass()
         {
             Title = "Enable glitched secrets",
@@ -3544,7 +3560,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         SecretBoolItemControls = new()
         {
-            _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRandomSecretModels
+            _isHardSecrets, _allowGlitched, _enableUWCornerSecrets, _guaranteeSecrets, _useRandomSecretModels
         };
         ItemBoolItemControls = new()
         {
@@ -3806,6 +3822,7 @@ public class ControllerOptions : INotifyPropertyChanged
         RandomizeSecrets = _controller.RandomizeSecrets;
         SecretSeed = _controller.SecretSeed;
         IsHardSecrets.Value = _controller.HardSecrets;
+        EnableUWCornerSecrets.Value = _controller.EnableUWCornerSecrets;
         IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
         GuaranteeSecrets.Value = _controller.GuaranteeSecrets;
         SecretRewardModes = Enum.GetValues<TRSecretRewardMode>();
@@ -4135,6 +4152,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.RandomizeSecrets = RandomizeSecrets;
         _controller.SecretSeed = SecretSeed;
         _controller.HardSecrets = IsHardSecrets.Value;
+        _controller.EnableUWCornerSecrets = EnableUWCornerSecrets.Value;
         _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
         _controller.GuaranteeSecrets = GuaranteeSecrets.Value;
         _controller.SecretRewardMode = SecretRewardMode;

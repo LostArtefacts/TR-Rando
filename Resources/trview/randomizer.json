@@ -11,6 +11,11 @@
       "display": "Requires Glitch",
       "type": "boolean"
     },
+    "IsUWCorner": {
+      "default": false,
+      "display": "UW corner",
+      "type": "boolean"
+    },
     "VehicleRequired": {
       "default": false,
       "display": "Vehicle Required",
