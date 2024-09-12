@@ -164,6 +164,11 @@ public class SecretPicker<T>
             return false;
         }
 
+        if (location.IsUWCorner && !Settings.EnableUWCornerSecrets)
+        {
+            return false;
+        }
+
         if (isMirrored && location.LevelState == LevelState.NotMirrored)
         {
             return false;

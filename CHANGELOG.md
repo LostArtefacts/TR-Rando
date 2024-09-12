@@ -1,6 +1,8 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.2...master) - xxxx-xx-xx
+- added an option to disable underwater corner secrets (#763)
 - fixed dark pickup sprites in TR2R OG graphics (#760)
 - fixed gun pickup sprites not showing properly in TR2R Floating Islands and Dragon's Lair OG graphics (#760)
+- fixed all placement issues with underwater corner secrets in TR1-3 (#763)
 - removed support for 32-bit (#759)
 
 ## [V1.9.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.1...V1.9.2) - 2024-08-20

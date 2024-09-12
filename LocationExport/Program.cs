@@ -9,6 +9,9 @@ namespace LocationExport;
 
 class Program
 {
+    private const int _uwCornerWallGap = TRConsts.Step4 / 7;
+    private const int _uwCornerFloorGap = TRConsts.Step1 / 16;
+
     private static TR1LevelControl _reader1;
     private static TR2LevelControl _reader2;
     private static TR3LevelControl _reader3;
@@ -30,9 +33,22 @@ class Program
         _allTR1Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\invalid_item_locations.json"));
         _allTR2Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\invalid_item_locations.json"));
         _allTR3Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR3\Locations\invalid_item_locations.json"));
+
+        if (args[0].ToLower() == "export")
+        {
+            Export(args);
+        }
+        else
+        {
+            Adjust(args);
+        }
+    }
+
+    static void Export(string[] args)
+    {
         Dictionary<string, List<Location>> allLocations = new();
 
-        string levelType = args[0].ToUpper();
+        string levelType = args[1].ToUpper();
 
         if (levelType.EndsWith(".PHD"))
         {
@@ -50,7 +66,7 @@ class Program
         }
         else if (levelType.EndsWith(".TR2"))
         {
-            TRFileVersion version = DetectVersion(args[0]);
+            TRFileVersion version = DetectVersion(args[1]);
             if (version == TRFileVersion.TR2)
             {
                 allLocations[levelType] = ExportTR2Locations(levelType);
@@ -96,14 +112,14 @@ class Program
         {
             string outputPath;
             string compPath = null;
-            if (args.Length > 2)
+            if (args.Length > 3)
             {
-                outputPath = args[2];
-                compPath = args[1];
+                outputPath = args[3];
+                compPath = args[2];
             }
             else
             {
-                outputPath = args.Length > 1 ? args[1] : levelType + "-Locations.json";
+                outputPath = args.Length > 2 ? args[2] : levelType + "-Locations.json";
             }
 
             // Are we running a diff?
@@ -221,10 +237,105 @@ class Program
         return generator.Generate(level, exclusions);
     }
 
+    private static void Adjust(string[] args)
+    {
+        if (!Enum.TryParse(args[1].ToUpper(), out TRGameVersion version))
+        {
+            return;
+        }
+
+        var allLocs = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText($@"Resources\{version}\Locations\locations.json"));
+        var diff = new Dictionary<string, List<Location>>();
+        foreach (var (lvl, locs) in allLocs)
+        {
+            TRLevelBase level;
+            switch (version)
+            {
+                case TRGameVersion.TR1:
+                    level = _reader1.Read(lvl);
+                    break;
+                case TRGameVersion.TR2:
+                    level = _reader2.Read(lvl);
+                    break;
+                case TRGameVersion.TR3:
+                    level = _reader3.Read(lvl);
+                    break;
+                default:
+                    return;
+            }
+    
+
+            foreach (var loc in locs)
+            {
+                var clone = loc.Clone();
+                switch (version)
+                {
+                    case TRGameVersion.TR1:
+                        AdjustLocation(loc, ((TR1Level)level).Rooms, level.FloorData);
+                        break;
+                    case TRGameVersion.TR2:
+                        AdjustLocation(loc, ((TR2Level)level).Rooms, level.FloorData);
+                        break;
+                    case TRGameVersion.TR3:
+                        AdjustLocation(loc, ((TR3Level)level).Rooms, level.FloorData);
+                        break;
+                }
+                
+
+                if (!clone.IsEquivalent(loc))
+                {
+                    if (!diff.ContainsKey(lvl))
+                    {
+                        diff[lvl] = new();
+                    }
+                    diff[lvl].Add(loc);
+                }
+            }
+        }
+
+        File.WriteAllText("diff.json", JsonConvert.SerializeObject(diff, Formatting.Indented));
+    }
+
+    private static void AdjustLocation<R>(Location location, List<R> rooms, FDControl floorData)
+        where R : TRRoom
+    {
+        R room = rooms[location.Room];
+        if (!room.ContainsWater
+            && (room.AlternateRoom == -1 || !rooms[room.AlternateRoom].ContainsWater))
+        {
+            return;
+        }
+
+        int dx = location.X & TRConsts.WallMask;
+        int dz = location.Z & TRConsts.WallMask;
+
+        int xWallTest = dx >= TRConsts.Step2 ? TRConsts.Step2 : -TRConsts.Step2;
+        int zWallTest = dz >= TRConsts.Step2 ? TRConsts.Step2 : -TRConsts.Step2;
+
+        int height = floorData.GetFloorHeight(location.X, location.Z, location.Room, rooms, false);
+        int adjHeightX = floorData.GetFloorHeight(location.X + xWallTest, location.Z, location.Room, rooms, false);
+        int adjHeightZ = floorData.GetFloorHeight(location.X, location.Z + zWallTest, location.Room, rooms, false);
+
+        if (!(Math.Abs(height - adjHeightX) > TRConsts.Step1 && Math.Abs(height - adjHeightZ) > TRConsts.Step1))
+        {
+            return;
+        }
+
+        int xShift = dx >= TRConsts.Step2 ? TRConsts.Step4 - _uwCornerWallGap : _uwCornerWallGap;
+        int zShift = dz >= TRConsts.Step2 ? TRConsts.Step4 - _uwCornerWallGap : _uwCornerWallGap;
+
+        location.X = (location.X & ~TRConsts.WallMask) + xShift;
+        location.Z = (location.Z & ~TRConsts.WallMask) + zShift;
+
+        int y = floorData.GetFloorHeight(location.X, location.Z, location.Room, rooms, false) - _uwCornerFloorGap;
+        location.Y = Math.Min(location.Y, y);
+    }
+
     private static void Usage()
     {
         Console.WriteLine();
-        Console.WriteLine("Usage: LocationExport [tr1 | tr2 | tr3 | tr3g | *.phd | *.tr2] [export_path.json] [previous_path.json]");
+        Console.WriteLine("Usage: LocationExport export [tr1 | tr2 | tr3 | tr3g | *.phd | *.tr2] [export_path.json] [previous_path.json]");
+        Console.WriteLine("Usage: LocationExport adjust [tr1 | tr2 | tr3]");
         Console.WriteLine();
 
         Console.WriteLine("Target Levels");
@@ -261,6 +372,12 @@ class Program
         Console.WriteLine("\tLocationExport TR3 old_locations.json new_locations.json");
         Console.ResetColor();
         Console.WriteLine("\t\tGenerate all locations for TR3 and output only the differences to new_locations.json (excludes old_loctions.json)");
+        Console.WriteLine();
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("\tLocationExport adjust");
+        Console.ResetColor();
+        Console.WriteLine("\t\tIntended to adjust underwater corner secret locations. A diff output will be generated as diff.json");
         Console.WriteLine();
     }
 }
