@@ -17,6 +17,7 @@ public class SpriteTests : TestBase
         Assert.AreEqual(TR1Type.Plant2, sprite.ID);
         Assert.AreEqual(0, sprite.Frame);
 
+        Assert.IsTrue(level.Sprites[TR1Type.Plant2].Textures.Count > 1);
         sprite.Frame = (short)(level.Sprites[TR1Type.Plant2].Textures.Count - 1);
 
         level = WriteReadTempLevel(level);
