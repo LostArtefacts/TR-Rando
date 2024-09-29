@@ -9,7 +9,7 @@ public class TRSpriteBuilder<T> : ISpriteProvider<T>
     private static readonly string _sprMarker = "SPR";
 
     private readonly TRGameVersion _version;
-    private Dictionary<T, short> _spriteOffsets;
+    private TRDictionary<T, TRSpriteSequence> _sprites;
 
     public TRSpriteBuilder(TRGameVersion version)
     {
@@ -86,30 +86,38 @@ public class TRSpriteBuilder<T> : ISpriteProvider<T>
 
     public void CacheSpriteOffsets(TRDictionary<T, TRSpriteSequence> spriteSequences)
     {
-        _spriteOffsets = new();
-        short offset = 0;
-        foreach (var (type, sequence) in spriteSequences)
-        {
-            _spriteOffsets[type] = offset;
-            offset += (short)sequence.Textures.Count;
-        }
+        _sprites = spriteSequences;
     }
 
     public T FindSpriteType(short textureOffset)
     {
-        foreach (var (type, offset) in _spriteOffsets)
+        int offset = 0;
+        foreach (var (type, sprite) in _sprites)
         {
-            if (offset == textureOffset)
+            if (textureOffset >= offset && textureOffset < offset + sprite.Textures.Count)
             {
                 return type;
             }
+
+            offset += sprite.Textures.Count;
         }
 
         throw new IndexOutOfRangeException();
     }
 
-    public short GetSpriteOffset(T type)
+    public short GetSpriteOffset(T spriteType)
     {
-        return _spriteOffsets[type];
+        int offset = 0;
+        foreach (var (type, sprite) in _sprites)
+        {
+            if (EqualityComparer<T>.Default.Equals(type, spriteType))
+            {
+                break;
+            }
+
+            offset += sprite.Textures.Count;
+        }
+
+        return (short)offset;
     }
 }

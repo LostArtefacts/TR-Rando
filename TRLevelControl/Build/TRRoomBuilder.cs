@@ -73,10 +73,15 @@ public abstract class TRRoomBuilder<T, R>
 
         for (int i = 0; i < numSprites; i++)
         {
+            short vertex = reader.ReadInt16();
+            short offset = reader.ReadInt16();
+
+            T type = spriteProvider.FindSpriteType(offset);
             sprites.Add(new()
             {
-                Vertex = reader.ReadInt16(),
-                ID = spriteProvider.FindSpriteType(reader.ReadInt16())
+                ID = type,
+                Vertex = vertex,
+                Frame = (short)(offset - spriteProvider.GetSpriteOffset(type)),
             });
         }
 
@@ -127,7 +132,7 @@ public abstract class TRRoomBuilder<T, R>
         foreach (TRRoomSprite<T> sprite in sprites)
         {
             writer.Write(sprite.Vertex);
-            writer.Write(spriteProvider.GetSpriteOffset(sprite.ID));
+            writer.Write((short)(spriteProvider.GetSpriteOffset(sprite.ID) + sprite.Frame));
         }
     }
 
