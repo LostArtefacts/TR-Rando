@@ -1,6 +1,7 @@
 ﻿using TRDataControl.Environment;
 using TRGE.Core;
 using TRRandomizerCore.Levels;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers;
 
@@ -75,5 +76,7 @@ public class TR3REnvironmentRandomizer : BaseTR3RRandomizer
                 mod.ApplyToLevel(level.Data, picker.Options);
             }
         }
+
+        TR3EnemyUtilities.CheckMonkeyPickups(level.Data, true);
     }
 }

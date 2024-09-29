@@ -416,4 +416,37 @@ public static class TR3EnemyUtilities
             File.ReadAllText(@"Resources\TR3\Restrictions\enemy_restrictions_pathing.json")
         );
     }
+
+    public static void CheckMonkeyPickups(TR3Level level, bool remastered)
+    {
+        // Do a global check for monkeys that may be sitting on more than one pickup.
+        // This has to happen after item, enemy and environment rando to account for
+        // any shifted, converted and added items.
+        foreach (TR3Entity monkey in level.Entities.Where(e => e.TypeID == TR3Type.Monkey))
+        {
+            List<TR3Entity> pickups = level.Entities.FindAll(e =>
+                    e.X == monkey.X &&
+                    e.Y == monkey.Y &&
+                    e.Z == monkey.Z &&
+                    TR3TypeUtilities.IsAnyPickupType(e.TypeID));
+
+            if (remastered)
+            {
+                // For TRR, we exclude all monkey pickups because the behaviour can lead to crashes.
+                pickups.ForEach(e => ++e.X);
+            }
+            else if (pickups.Count <= 1)
+            {
+                continue;
+            }
+
+            // Leave one item to drop, favouring key items. The others will be shifted
+            // slightly so the monkey doesn't pick them up.
+            pickups.Sort((e1, e2) => TR3TypeUtilities.IsKeyItemType(e1.TypeID) ? 1 : -1);
+            for (int i = 0; i < pickups.Count - 1; i++)
+            {
+                ++pickups[i].X;
+            }
+        }
+    }
 }
