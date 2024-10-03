@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.3...master) - xxxx-xx-xx
+- fixed unreachable item locations in Coastal Village (#774)
 
 ## [V1.9.3](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.2...V1.9.3) - 2024-09-29
 - added an option to disable underwater corner secrets (#763)

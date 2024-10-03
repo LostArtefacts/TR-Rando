@@ -357,25 +357,25 @@ class Program
 
         Console.WriteLine("Examples");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\tLocationExport TR3");
+        Console.WriteLine("\tLocationExport export TR3");
         Console.ResetColor();
         Console.WriteLine("\t\tGenerate all locations for TR3 to TR3-Locations.json");
         Console.WriteLine();
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\tLocationExport RAPIDS.TR2 rapids.json");
+        Console.WriteLine("\tLocationExport export RAPIDS.TR2 rapids.json");
         Console.ResetColor();
         Console.WriteLine("\t\tGenerate all locations for Madubu Gorge to rapids.json");
         Console.WriteLine();
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\tLocationExport TR3 old_locations.json new_locations.json");
+        Console.WriteLine("\tLocationExport export TR3 old_locations.json new_locations.json");
         Console.ResetColor();
         Console.WriteLine("\t\tGenerate all locations for TR3 and output only the differences to new_locations.json (excludes old_loctions.json)");
         Console.WriteLine();
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\tLocationExport adjust");
+        Console.WriteLine("\tLocationExport adjust TR1");
         Console.ResetColor();
         Console.WriteLine("\t\tIntended to adjust underwater corner secret locations. A diff output will be generated as diff.json");
         Console.WriteLine();
