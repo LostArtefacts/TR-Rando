@@ -416,7 +416,7 @@ public class TRModelBuilder<T>
                         {
                             FrameNumber = sfxFrame,
                             SoundID = (short)(sfxID & 0x3FFF),
-                            Environment = _version == TRGameVersion.TR1 ? TRSFXEnvironment.Any : (TRSFXEnvironment)(sfxID & 0xC000)
+                            Environment = (TRSFXEnvironment)(sfxID & 0xC000)
                         };
                         break;
                     case TRAnimCommandType.FlipEffect:
@@ -721,11 +721,7 @@ public class TRModelBuilder<T>
                     break;
                 case TRSFXCommand sfxCmd:
                     {
-                        short soundID = sfxCmd.SoundID;
-                        if (_version > TRGameVersion.TR1)
-                        {
-                            soundID = (short)((int)soundID | (int)sfxCmd.Environment);
-                        }
+                        short soundID = (short)((int)sfxCmd.SoundID | (int)sfxCmd.Environment);
                         values.Add((short)(sfxCmd.FrameNumber + placeholderAnimation.RelFrameStart));
                         values.Add(soundID);
                         break;
