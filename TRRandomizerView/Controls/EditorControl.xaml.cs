@@ -472,7 +472,7 @@ public partial class EditorControl : UserControl
     {
         try
         {
-            string exePath = Path.GetFullPath(Path.Combine(DataFolder, @"..\tomb3_ConfigTool.exe"));
+            string exePath = Path.GetFullPath(Path.Combine(DataFolder, "../tomb3_ConfigTool.exe"));
             ProcessUtils.OpenFile(exePath);
         }
         catch (Exception e)

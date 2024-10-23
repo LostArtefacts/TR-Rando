@@ -520,11 +520,11 @@ public static class TR1EnemyUtilities
     {
         _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR1Type, List<int>>>>
         (
-            File.ReadAllText(@"Resources\TR1\Restrictions\enemy_restrictions_default.json")
+            File.ReadAllText("Resources/TR1/Restrictions/enemy_restrictions_default.json")
         );
         _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR1Type, List<int>>>>
         (
-            File.ReadAllText(@"Resources\TR1\Restrictions\enemy_restrictions_technical.json")
+            File.ReadAllText("Resources/TR1/Restrictions/enemy_restrictions_technical.json")
         );
     }
 

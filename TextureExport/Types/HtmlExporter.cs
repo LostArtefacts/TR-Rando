@@ -209,16 +209,16 @@ public static class HtmlExporter
 
     private static void Write(string dir, string lvlName, StringBuilder tiles, StringBuilder levelSelect, StringBuilder skyBox, StringBuilder palette = null)
     {
-        string tpl = File.ReadAllText(@"Resources\TileTemplate.html");
+        string tpl = File.ReadAllText("Resources/TileTemplate.html");
         tpl = tpl.Replace("{Title}", lvlName);
         tpl = tpl.Replace("{Levels}", levelSelect.ToString());
         tpl = tpl.Replace("{Tiles}", tiles.ToString());
         tpl = tpl.Replace("{SkyBox}", skyBox.ToString());
         tpl = tpl.Replace("{Palette}", palette == null ? string.Empty : palette.ToString());
 
-        dir += @"\HTML";
+        dir += "/HTML";
         Directory.CreateDirectory(dir);
 
-        File.WriteAllText(string.Format(@"{0}\{1}.html", dir, lvlName), tpl);
+        File.WriteAllText(string.Format("{0}/{1}.html", dir, lvlName), tpl);
     }
 }

@@ -26,7 +26,7 @@ public class TRRTitleEditor
             return;
         }
 
-        string sharedFolder = Path.GetFullPath(Path.Combine(io.BackupDirectory.FullName, @"..\..\TRR"));
+        string sharedFolder = Path.GetFullPath(Path.Combine(io.BackupDirectory.FullName, "../../TRR"));
         Directory.CreateDirectory(sharedFolder);
 
         TRImage badge = null;
@@ -38,7 +38,7 @@ public class TRRTitleEditor
             {
                 // This is slow with debugger attached and intensive in release, so we only want to do it once per game.
                 TRImage titleImage = new(Path.Combine(io.BackupDirectory.FullName, titleFile));
-                badge ??= new($@"Resources\Shared\Graphics\{script.Edition.Version}badge-small.png");
+                badge ??= new($"Resources/Shared/Graphics/{script.Edition.Version}badge-small.png");
                 titleImage.Import(badge, _badgePositions[script.Edition.Version], true);
                 titleImage.Save(cachedFile);
             }

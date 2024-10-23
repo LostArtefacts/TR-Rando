@@ -21,7 +21,7 @@ public static class SegmentExporter
 
     private static string PrepareDirectory(string dir, string lvl)
     {
-        string levelFolder = Path.Combine(dir + @"\Segments", Path.GetFileNameWithoutExtension(lvl));
+        string levelFolder = Path.Combine(dir + "/Segments", Path.GetFileNameWithoutExtension(lvl));
         if (Directory.Exists(levelFolder))
         {
             Directory.Delete(levelFolder, true);

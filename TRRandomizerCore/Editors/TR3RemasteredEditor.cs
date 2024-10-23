@@ -92,7 +92,7 @@ public class TR3RemasteredEditor : TR3ClassicEditor
             PDPFolder = backupDirectory,
         };
 
-        ItemFactory<TR3Entity> itemFactory = new(@"Resources\TR3\Items\repurposable_items.json")
+        ItemFactory<TR3Entity> itemFactory = new("Resources/TR3/Items/repurposable_items.json")
         {
             DefaultItem = new() { Intensity1 = -1, Intensity2 = -1 }
         };

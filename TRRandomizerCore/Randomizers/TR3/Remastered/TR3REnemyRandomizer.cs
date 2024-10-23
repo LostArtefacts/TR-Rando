@@ -169,13 +169,13 @@ public class TR3REnemyRandomizer : BaseTR3RRandomizer
                         TypesToRemove = enemies.TypesToRemove,
                         Level = level.Data,
                         LevelName = level.Name,
-                        DataFolder = _outer.GetResourcePath(@"TR3\Objects"),
+                        DataFolder = _outer.GetResourcePath("TR3/Objects"),
                     };
 
                     importer.Data.TextureObjectLimit = RandoConsts.TRRTexLimit;
                     importer.Data.TextureTileLimit = RandoConsts.TRRTileLimit;
 
-                    string remapPath = $@"TR3\Textures\Deduplication\{level.Name}-TextureRemap.json";
+                    string remapPath = $"TR3/Textures/Deduplication/{level.Name}-TextureRemap.json";
                     if (_outer.ResourceExists(remapPath))
                     {
                         importer.TextureRemapPath = _outer.GetResourcePath(remapPath);

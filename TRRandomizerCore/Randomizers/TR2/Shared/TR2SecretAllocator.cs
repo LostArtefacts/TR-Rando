@@ -23,8 +23,8 @@ public class TR2SecretAllocator : ISecretRandomizer
 
     public TR2SecretAllocator()
     {
-        _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\locations.json"));
-        _routePicker = new(@"Resources\TR2\Locations\routes.json");
+        _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("Resources/TR2/Locations/locations.json"));
+        _routePicker = new("Resources/TR2/Locations/routes.json");
     }
 
     public IEnumerable<string> GetPacks()

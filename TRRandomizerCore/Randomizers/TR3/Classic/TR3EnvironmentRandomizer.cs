@@ -97,10 +97,10 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
 
     private void RandomizeEnvironment(TR3CombinedLevel level)
     {
-        string json = $@"TR3\Environment\{level.Name}-Environment.json";
+        string json = $"TR3/Environment/{level.Name}-Environment.json";
         if (IsJPVersion)
         {
-            string jpJson = $@"TR3\Environment\{level.Name}-JP-Environment.json";
+            string jpJson = $"TR3/Environment/{level.Name}-JP-Environment.json";
             if (ResourceExists(jpJson))
             {
                 json = jpJson;
@@ -168,7 +168,7 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
 
     private void FinalizeEnvironment(TR3CombinedLevel level)
     {
-        EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($@"TR3\Environment\{level.Name}-Environment.json"));
+        EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($"TR3/Environment/{level.Name}-Environment.json"));
         EnvironmentPicker picker = new(_generator, Settings, ScriptEditor.Edition);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
 

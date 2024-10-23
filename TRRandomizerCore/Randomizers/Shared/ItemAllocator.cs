@@ -30,9 +30,9 @@ public abstract class ItemAllocator<T, E>
 
     public ItemAllocator(TRGameVersion gameVersion)
     {
-        _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText($@"Resources\{gameVersion}\Locations\invalid_item_locations.json"));
-        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText($@"Resources\{gameVersion}\Locations\unarmed_locations.json"));
-        _picker = new($@"Resources\{gameVersion}\Locations\routes.json");
+        _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText($"Resources/{gameVersion}/Locations/invalid_item_locations.json"));
+        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText($"Resources/{gameVersion}/Locations/unarmed_locations.json"));
+        _picker = new($"Resources/{gameVersion}/Locations/routes.json");
         _unarmedPistolCache = new();
         _weaponAllocations = new();
     }

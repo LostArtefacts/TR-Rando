@@ -378,7 +378,7 @@ public class SecretArtefactPlacer<T, E>
         }
 
         TRSecretRoom<E> rewardRoom = null;
-        string mappingPath = $@"Resources\{gameVersion}\SecretMapping\{levelName}-SecretMapping.json";
+        string mappingPath = $"Resources/{gameVersion}/SecretMapping/{levelName}-SecretMapping.json";
         if (File.Exists(mappingPath))
         {
             int requiredDoors = (int)Math.Ceiling((double)secretCount / TRConsts.MaskBits);

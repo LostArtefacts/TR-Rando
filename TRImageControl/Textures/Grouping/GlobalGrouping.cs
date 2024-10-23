@@ -5,7 +5,7 @@ namespace TRImageControl.Textures;
 public class GlobalGrouping<E>
     where E : Enum
 {
-    private static readonly string _groupingDataPath = @"Static\global_grouping.json";
+    private static readonly string _groupingDataPath = "Static/global_grouping.json";
 
     public Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> Sources { get; private set; }
     public List<TextureGrouping<E>> Grouping { get; private set; }

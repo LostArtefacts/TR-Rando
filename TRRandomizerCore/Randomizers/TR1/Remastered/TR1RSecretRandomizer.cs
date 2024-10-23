@@ -22,9 +22,9 @@ public class TR1RSecretRandomizer : BaseTR1RRandomizer, ISecretRandomizer
 
     public TR1RSecretRandomizer()
     {
-        _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\locations.json"));
-        _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
-        _routePicker = new(GetResourcePath(@"TR1\Locations\routes.json"));
+        _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR1/Locations/locations.json"));
+        _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR1/Locations/unarmed_locations.json"));
+        _routePicker = new(GetResourcePath("TR1/Locations/routes.json"));
     }
 
     public IEnumerable<string> GetPacks()
@@ -162,7 +162,7 @@ public class TR1RSecretRandomizer : BaseTR1RRandomizer, ISecretRandomizer
             pickupIndex++;
         }
 
-        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($@"TR1\SecretMapping\{level.Name}-SecretMapping.json"));
+        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($"TR1/SecretMapping/{level.Name}-SecretMapping.json"));
         _placer.CreateRewardStacks(level.Data.Entities, secretMapping.RewardEntities, level.Data.FloorData);
 
         AddDamageControl(level, pickedLocations);
@@ -241,7 +241,7 @@ public class TR1RSecretRandomizer : BaseTR1RRandomizer, ISecretRandomizer
                         Level = level.Data,
                         LevelName = level.Name,
                         TypesToImport = allocation.ImportModels,
-                        DataFolder = _outer.GetResourcePath(@"TR1\Objects"),
+                        DataFolder = _outer.GetResourcePath("TR1/Objects"),
                     };
                     importer.Import();
 

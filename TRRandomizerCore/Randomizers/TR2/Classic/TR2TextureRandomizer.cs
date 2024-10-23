@@ -31,7 +31,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
     public TR2TextureRandomizer()
     {
         _persistentVariants = new Dictionary<AbstractTextureSource, string>();
-        _wireframeData = JsonConvert.DeserializeObject<Dictionary<string, WireframeData<TR2Type>>>(ReadResource(@"TR2\Textures\wireframing.json"));
+        _wireframeData = JsonConvert.DeserializeObject<Dictionary<string, WireframeData<TR2Type>>>(ReadResource("TR2/Textures/wireframing.json"));
         _drawLock = new object();
     }
 

@@ -48,7 +48,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     public void Run()
     {
-        _upvLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\upv_locations.json"));
+        _upvLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR3/Locations/upv_locations.json"));
 
         _gameStrings = new List<string>(ScriptEditor.Script.GameStrings1);
         _adventureNames = new Dictionary<TR3Adventure, string>
@@ -163,7 +163,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             Level = level.Data,
             LevelName = level.Name,
             TypesToImport = upvImport,
-            DataFolder = GetResourcePath(@"TR3\Objects"),
+            DataFolder = GetResourcePath("TR3/Objects"),
             TextureMonitor = TextureMonitor.CreateMonitor(level.Name, upvImport)
         };
 
@@ -250,7 +250,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
                 Level = level.Data,
                 LevelName = level.Name,
                 TypesToImport = imports,
-                DataFolder = GetResourcePath(@"TR3\Objects")
+                DataFolder = GetResourcePath("TR3/Objects")
             };
 
             importer.Import();
@@ -300,7 +300,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private void AmendBossFight(TR3CombinedLevel level)
     {
-        string mappingPath = @"TR3\BossMapping\" + level.Name + "-BossMapping.json";
+        string mappingPath = "TR3/BossMapping/" + level.Name + "-BossMapping.json";
         if (ResourceExists(mappingPath))
         {
             EMEditorSet mods = JsonConvert.DeserializeObject<EMEditorSet>(ReadResource(mappingPath), EMEditorMapping.Converter);

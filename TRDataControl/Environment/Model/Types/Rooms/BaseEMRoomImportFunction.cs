@@ -13,7 +13,7 @@ public abstract class BaseEMRoomImportFunction : BaseEMFunction
 
     protected string ReadRoomResource(string versionID)
     {
-        string path = string.Format(@"Resources\{0}\Rooms\{1}-Rooms.json", versionID, LevelID);
+        string path = string.Format("Resources/{0}/Rooms/{1}-Rooms.json", versionID, LevelID);
         if (!File.Exists(path))
         {
             throw new IOException("Missing room definition data: " + path);
@@ -24,7 +24,7 @@ public abstract class BaseEMRoomImportFunction : BaseEMFunction
 
     protected string ReadZoningResource(string versionID)
     {
-        string path = string.Format(@"Resources\{0}\Rooms\{1}-Zoning.json", versionID, LevelID);
+        string path = string.Format("Resources/{0}/Rooms/{1}-Zoning.json", versionID, LevelID);
         if (!File.Exists(path))
         {
             throw new IOException("Missing room zoning data: " + path);

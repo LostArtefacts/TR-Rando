@@ -343,15 +343,15 @@ public static class TR2EnemyUtilities
     {
         _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Type, List<int>>>>
         (
-            File.ReadAllText(@"Resources\TR2\Restrictions\enemy_restrictions_default.json")
+            File.ReadAllText("Resources/TR2/Restrictions/enemy_restrictions_default.json")
         );
         _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Type, List<int>>>>
         (
-            File.ReadAllText(@"Resources\TR2\Restrictions\enemy_restrictions_technical.json")
+            File.ReadAllText("Resources/TR2/Restrictions/enemy_restrictions_technical.json")
         );
         _specialEnemyCombinations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Type, Dictionary<RandoDifficulty, List<List<TR2Type>>>>>>
         (
-            File.ReadAllText(@"Resources\TR2\Restrictions\enemy_restrictions_special.json")
+            File.ReadAllText("Resources/TR2/Restrictions/enemy_restrictions_special.json")
         );
     }
 

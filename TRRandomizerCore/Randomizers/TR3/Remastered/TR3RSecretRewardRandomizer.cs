@@ -17,7 +17,7 @@ public class TR3RSecretRewardRandomizer : BaseTR3RRandomizer
         foreach (TRRScriptedLevel lvl in Levels)
         {
             LoadLevelInstance(lvl);
-            TRSecretMapping<TR3Entity> mapping = TRSecretMapping<TR3Entity>.Get($@"Resources\TR3\SecretMapping\{_levelInstance.Name}-SecretMapping.json");
+            TRSecretMapping<TR3Entity> mapping = TRSecretMapping<TR3Entity>.Get($"Resources/TR3/SecretMapping/{_levelInstance.Name}-SecretMapping.json");
             if (mapping != null)
             {
                 allocator.RandomizeRewards(_levelInstance.Data, mapping.RewardEntities);

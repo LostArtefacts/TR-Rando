@@ -41,7 +41,7 @@ public class TR1AudioAllocator : AudioAllocator
             TRSFXGeneralCategory.Explosion,
         };
 
-        _soundEffects = JsonConvert.DeserializeObject<List<TR1SFXDefinition>>(File.ReadAllText(@"Resources\TR1\Audio\sfx.json"));
+        _soundEffects = JsonConvert.DeserializeObject<List<TR1SFXDefinition>>(File.ReadAllText("Resources/TR1/Audio/sfx.json"));
 
         // We don't want to store all SFX WAV data in JSON, so instead we reference the source level
         // and extract the details from there using the same format for model transport.
@@ -65,7 +65,7 @@ public class TR1AudioAllocator : AudioAllocator
         {
             SoundEffect = caves.SoundEffects[TR1SFX.LaraUziFire]
         };
-        _psUziDefinition.SoundEffect.Samples = new() { File.ReadAllBytes(@"Resources\TR1\Audio\ps_uzis.wav") };
+        _psUziDefinition.SoundEffect.Samples = new() { File.ReadAllBytes("Resources/TR1/Audio/ps_uzis.wav") };
     }
 
     public void RandomizeMusicTriggers(TR1Level level)

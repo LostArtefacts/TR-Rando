@@ -109,10 +109,10 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             Level = level.Data,
             LevelName = level.Name,
             TypesToImport = _assaultPickupModels,
-            DataFolder = GetResourcePath(@"TR3\Objects")
+            DataFolder = GetResourcePath("TR3/Objects")
         };
 
-        string remapPath = $@"TR3\Textures\Deduplication\{level.Name}-TextureRemap.json";
+        string remapPath = $"TR3/Textures/Deduplication/{level.Name}-TextureRemap.json";
         if (ResourceExists(remapPath))
         {
             importer.TextureRemapPath = GetResourcePath(remapPath);

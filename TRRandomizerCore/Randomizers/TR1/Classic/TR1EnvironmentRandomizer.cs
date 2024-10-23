@@ -99,7 +99,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
 
     private void RandomizeEnvironment(TR1CombinedLevel level)
     {
-        EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath(@"TR1\Environment\" + level.Name + "-Environment.json"));
+        EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath("TR1/Environment/" + level.Name + "-Environment.json"));
         if (mapping != null)
         {
             mapping.SetCommunityPatch(true);
@@ -219,7 +219,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
 
     private void FinalizeEnvironment(TR1CombinedLevel level)
     {
-        EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($@"TR1\Environment\{level.Name}-Environment.json"));
+        EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($"TR1/Environment/{level.Name}-Environment.json"));
         EnvironmentPicker picker = new(_generator, Settings, ScriptEditor.Edition);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
         picker.ResetTags();

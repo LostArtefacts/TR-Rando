@@ -25,7 +25,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
     {
         Settings = new()
         {
-            ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText(@"Resources\TR1\Restrictions\excludable_enemies.json"))
+            ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText("Resources/TR1/Restrictions/excludable_enemies.json"))
         };
         Settings.ApplyConfig(config);
     }
@@ -127,7 +127,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
             scriptEditor.SaveScript();
         }
 
-        ItemFactory<TR1Entity> itemFactory = new(@"Resources\TR1\Items\repurposable_items.json");
+        ItemFactory<TR1Entity> itemFactory = new("Resources/TR1/Items/repurposable_items.json");
         TR1TextureMonitorBroker textureMonitor = new();
 
         TR1ItemRandomizer itemRandomizer = new()
@@ -354,28 +354,28 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
         {
             string editedTitle = Path.Combine(GetWriteBasePath(), "title.png");
             TRImage bg = new(backupTitle);
-            TRImage badge = new(@"Resources\Shared\Graphics\tr1badge-small.png");
+            TRImage badge = new("Resources/Shared/Graphics/tr1badge-small.png");
             bg.Import(badge, scriptEditor.GameMode == GameMode.Gold ? _goldBadgePos : _regularBadgePos, true);
 
             if (scriptEditor.GameMode == GameMode.Combined)
             {
-                TRImage comboBadge = new(@"Resources\Shared\Graphics\rando-business.png");
+                TRImage comboBadge = new("Resources/Shared/Graphics/rando-business.png");
                 bg.Import(comboBadge, new(29, 880), true);
             }
 
             bg.Save(editedTitle);
 
-            string titlePath = @"data\title.png";
+            string titlePath = "data/title.png";
             script.MainMenuPicture = titlePath;
             script.AddAdditionalBackupFile(titlePath);
         }
 
         {
             string creditFile = Path.Combine(_io.OutputDirectory.FullName, "trrando.png");
-            string creditPath = @"data\trrando.png";
+            string creditPath = "data/trrando.png";
 
             TRImage bg = new(1920, 1080);
-            TRImage badge = new(@"Resources\Shared\Graphics\tr1badge-large.png");
+            TRImage badge = new("Resources/Shared/Graphics/tr1badge-large.png");
             bg.Fill(Color.Black);
             bg.Import(badge, new(960 - badge.Width / 2, 540 - badge.Height / 2), true);
             bg.Save(creditFile);

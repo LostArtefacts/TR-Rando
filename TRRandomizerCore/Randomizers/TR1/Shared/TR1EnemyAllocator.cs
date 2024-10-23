@@ -44,9 +44,9 @@ public class TR1EnemyAllocator : EnemyAllocator<TR1Type>
     public TR1EnemyAllocator()
         : base(TRGameVersion.TR1)
     {
-        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\unarmed_locations.json"));
-        _eggLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\egg_locations.json"));
-        _pierreLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\pierre_locations.json"));
+        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("Resources/TR1/Locations/unarmed_locations.json"));
+        _eggLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("Resources/TR1/Locations/egg_locations.json"));
+        _pierreLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("Resources/TR1/Locations/pierre_locations.json"));
     }
 
     protected override Dictionary<TR1Type, List<string>> GetGameTracker()

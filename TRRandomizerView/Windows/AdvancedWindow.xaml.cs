@@ -10,7 +10,7 @@ namespace TRRandomizerView.Windows;
 
 public partial class AdvancedWindow : Window
 {
-    private static readonly string _darknessPreviewPath = @"pack://application:,,,/TRRandomizer;component/Resources/Darkness/{0}/{1}.jpg";
+    private static readonly string _darknessPreviewPath = "pack://application:,,,/TRRandomizer;component/Resources/Darkness/{0}/{1}.jpg";
 
     public static readonly DependencyProperty MainDescriptionProperty = DependencyProperty.Register
     (

@@ -159,11 +159,11 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                         TypesToRemove = enemies.TypesToRemove,
                         Level = level.Data,
                         LevelName = level.Name,
-                        DataFolder = _outer.GetResourcePath(@"TR3\Objects"),
+                        DataFolder = _outer.GetResourcePath("TR3/Objects"),
                         TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport)
                     };
 
-                    string remapPath = $@"TR3\Textures\Deduplication\{level.Name}-TextureRemap.json";
+                    string remapPath = $"TR3/Textures/Deduplication/{level.Name}-TextureRemap.json";
                     if (_outer.ResourceExists(remapPath))
                     {
                         importer.TextureRemapPath = _outer.GetResourcePath(remapPath);

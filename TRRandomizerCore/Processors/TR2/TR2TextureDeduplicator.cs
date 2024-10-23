@@ -77,7 +77,7 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
                     level.IsUKBox = true;
                 }
 
-                string dedupPath = _outer.GetResourcePath($@"TR2\Textures\Deduplication\{level.JsonID}-TextureRemap.json");
+                string dedupPath = _outer.GetResourcePath($"TR2/Textures/Deduplication/{level.JsonID}-TextureRemap.json");
                 if (File.Exists(dedupPath))
                 {
                     TR2TexturePacker levelPacker = new(level.Data);

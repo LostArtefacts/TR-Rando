@@ -30,9 +30,9 @@ class Program
         _reader1 = new();
         _reader2 = new();
         _reader3 = new();
-        _allTR1Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\invalid_item_locations.json"));
-        _allTR2Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\invalid_item_locations.json"));
-        _allTR3Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR3\Locations\invalid_item_locations.json"));
+        _allTR1Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("Resources/TR1/Locations/invalid_item_locations.json"));
+        _allTR2Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("Resources/TR2/Locations/invalid_item_locations.json"));
+        _allTR3Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("Resources/TR3/Locations/invalid_item_locations.json"));
 
         if (args[0].ToLower() == "export")
         {
@@ -244,7 +244,7 @@ class Program
             return;
         }
 
-        var allLocs = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText($@"Resources\{version}\Locations\locations.json"));
+        var allLocs = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText($"Resources/{version}/Locations/locations.json"));
         var diff = new Dictionary<string, List<Location>>();
         foreach (var (lvl, locs) in allLocs)
         {

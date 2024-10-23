@@ -12,8 +12,8 @@ public static class VehicleUtilities
 
     static VehicleUtilities()
     {
-        _vehicleLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\vehicle_locations.json"));
-        _secretLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\locations.json"));
+        _vehicleLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("Resources/TR2/Locations/vehicle_locations.json"));
+        _secretLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("Resources/TR2/Locations/locations.json"));
     }
 
     public static bool HasLocations(string levelName, TR2Type vehicle)

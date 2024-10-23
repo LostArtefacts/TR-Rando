@@ -224,12 +224,12 @@ public class TR1REnemyRandomizer : BaseTR1RRandomizer
     {
         importer.Level = level.Data;
         importer.LevelName = level.Name;
-        importer.DataFolder = GetResourcePath(@"TR1\Objects");
+        importer.DataFolder = GetResourcePath("TR1/Objects");
 
         importer.Data.TextureObjectLimit = RandoConsts.TRRTexLimit;
         importer.Data.TextureTileLimit = RandoConsts.TRRTileLimit;
 
-        string remapPath = $@"TR1\Textures\Deduplication\{level.Name}-TextureRemap.json";
+        string remapPath = $"TR1/Textures/Deduplication/{level.Name}-TextureRemap.json";
         if (ResourceExists(remapPath))
         {
             importer.TextureRemapPath = GetResourcePath(remapPath);

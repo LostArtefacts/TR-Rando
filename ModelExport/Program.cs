@@ -29,19 +29,19 @@ class Program
     static void TR1Export()
     {
         TR1MassExporter exporter = new();
-        exporter.Export(Directory.GetCurrentDirectory(), @"TR1\Objects");
+        exporter.Export(Directory.GetCurrentDirectory(), "TR1/Objects");
     }
 
     static void TR2Export()
     {
         TR2MassExporter exporter = new();
-        exporter.Export(Directory.GetCurrentDirectory(), @"TR2\Objects");
+        exporter.Export(Directory.GetCurrentDirectory(), "TR2/Objects");
     }
 
     static void TR3Export()
     {
         TR3MassExporter exporter = new();
-        exporter.Export(Directory.GetCurrentDirectory(), @"TR3\Objects");
+        exporter.Export(Directory.GetCurrentDirectory(), "TR3/Objects");
     }
 
     private static void Usage()

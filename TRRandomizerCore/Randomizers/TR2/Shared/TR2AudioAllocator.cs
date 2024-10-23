@@ -24,7 +24,7 @@ public class TR2AudioAllocator : AudioAllocator
 
     protected override void LoadData(string backupPath)
     {
-        _soundEffects = JsonConvert.DeserializeObject<List<TR2SFXDefinition>>(File.ReadAllText(@"Resources\TR2\Audio\sfx.json"));
+        _soundEffects = JsonConvert.DeserializeObject<List<TR2SFXDefinition>>(File.ReadAllText("Resources/TR2/Audio/sfx.json"));
 
         Dictionary<string, TR2Level> levels = new();
         TR2LevelControl reader = new();

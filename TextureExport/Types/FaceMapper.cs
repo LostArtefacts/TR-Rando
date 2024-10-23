@@ -75,8 +75,8 @@ public static class FaceMapper
             }
         }
 
-        Directory.CreateDirectory(@"TR1\Faces");
-        new TR1LevelControl().Write(level, @"TR1\Faces\" + lvl);
+        Directory.CreateDirectory("TR1/Faces");
+        new TR1LevelControl().Write(level, "TR1/Faces/" + lvl);
     }
 
     public static void DrawFaces(TR2Level level, string lvl, int[] roomNumbers)
@@ -146,8 +146,8 @@ public static class FaceMapper
             }
         }
 
-        Directory.CreateDirectory(@"TR2\Faces");
-        new TR2LevelControl().Write(level, @"TR2\Faces\" + lvl);
+        Directory.CreateDirectory("TR2/Faces");
+        new TR2LevelControl().Write(level, "TR2/Faces/" + lvl);
     }
 
     public static void DrawFaces(TR3Level level, string lvl, int[] roomNumbers)
@@ -217,8 +217,8 @@ public static class FaceMapper
             }
         }
 
-        Directory.CreateDirectory(@"TR3\Faces");
-        new TR3LevelControl().Write(level, @"TR3\Faces\" + lvl);
+        Directory.CreateDirectory("TR3/Faces");
+        new TR3LevelControl().Write(level, "TR3/Faces/" + lvl);
     }
 
     public static void DrawBoxes(TR2Level level, string lvl, int[] roomNumbers)
@@ -263,8 +263,8 @@ public static class FaceMapper
             }
         }
 
-        Directory.CreateDirectory(@"TR2\Boxes");
-        new TR2LevelControl().Write(level, @"TR2\Boxes\" + lvl);
+        Directory.CreateDirectory("TR2/Boxes");
+        new TR2LevelControl().Write(level, "TR2/Boxes/" + lvl);
     }
 
     private static TRTextileRegion DrawNewFace(TRTextileRegion segment, string text, bool fillBackground = false)

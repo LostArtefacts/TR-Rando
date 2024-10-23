@@ -7,17 +7,17 @@ public static class PngExporter
 {
     public static void Export(TR1Level level, string lvl)
     {
-        Export(@"TR1\PNG", lvl, level.Images8, level.Palette);
+        Export("TR1/PNG", lvl, level.Images8, level.Palette);
     }
 
     public static void Export(TR2Level level, string lvl)
     {
-        Export(@"TR2\PNG", lvl, level.Images16);
+        Export("TR2/PNG", lvl, level.Images16);
     }
 
     public static void Export(TR3Level level, string lvl)
     {
-        Export(@"TR3\PNG", lvl, level.Images16);
+        Export("TR3/PNG", lvl, level.Images16);
     }
 
     public static void Export(string topDir, string lvl, IEnumerable<TRTexImage8> images, List<TRColour> palette)

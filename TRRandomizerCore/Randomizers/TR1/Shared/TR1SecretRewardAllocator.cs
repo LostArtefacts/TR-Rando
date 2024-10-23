@@ -19,7 +19,7 @@ public class TR1SecretRewardAllocator
 
     public void RandomizeRewards(string levelName, TR1Level level)
     {
-        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get($@"Resources\TR1\SecretMapping\{levelName}-SecretMapping.json");
+        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get($"Resources/TR1/SecretMapping/{levelName}-SecretMapping.json");
         if (secretMapping == null)
         {
             return;

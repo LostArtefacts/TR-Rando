@@ -3877,7 +3877,7 @@
           "Data": [
             {
               "Background": 29,
-              "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\Reset.png",
+              "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/Reset.png",
               "RetainInWireframe": true,
               "GeometryMap": {
                 "-4": {
@@ -5717,7 +5717,7 @@
             "Data": [
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\O.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/O.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -5729,7 +5729,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\I.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/I.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -5741,7 +5741,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\C.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/C.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -5753,7 +5753,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\N.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/N.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -5765,7 +5765,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\S.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/S.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -5885,7 +5885,7 @@
             "Data": [
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\O.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/O.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -5897,7 +5897,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\N.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/N.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -5909,7 +5909,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\C.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/C.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -5921,7 +5921,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\B.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/B.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -5933,7 +5933,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\A.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/A.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6053,7 +6053,7 @@
             "Data": [
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\D.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/D.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6065,7 +6065,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\A.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/A.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6077,7 +6077,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\O.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/O.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6089,7 +6089,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\N.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/N.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6101,7 +6101,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\R.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/R.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6221,7 +6221,7 @@
             "Data": [
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\T.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/T.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6233,7 +6233,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\M.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/M.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6245,7 +6245,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\S.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/S.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6257,7 +6257,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\B.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/B.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6269,7 +6269,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\O.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/O.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6389,7 +6389,7 @@
             "Data": [
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\R.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/R.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6401,7 +6401,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\T.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/T.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6413,7 +6413,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\F.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/F.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6425,7 +6425,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\C.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/C.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
@@ -6437,7 +6437,7 @@
               },
               {
                 "Background": 29,
-                "Overlay": "Resources\\TR1\\Textures\\Source\\Static\\Alphabet\\O.png",
+                "Overlay": "Resources/TR1/Textures/Source/Static/Alphabet/O.png",
                 "RetainInWireframe": true,
                 "GeometryMap": {
                   "-4": {
