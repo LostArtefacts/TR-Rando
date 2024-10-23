@@ -1,5 +1,10 @@
-﻿using System.Drawing;
+﻿using SixLabors.Fonts;
+using SixLabors.ImageSharp.Drawing;
+using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.ImageSharp.Processing;
+using System.Drawing;
 using TRImageControl.Textures;
+using IS = SixLabors.ImageSharp;
 
 namespace TRImageControl;
 
@@ -123,5 +128,83 @@ public partial class TRImage
             image = image.Export(new(0, 0, Math.Min(image.Size.Width, Size.Width), Math.Min(image.Size.Height, Size.Height)));
         }
         Import(image, new(0, 0), true);
+    }
+
+    public void DrawLine(Color colour, int x1, int y1, int x2, int y2)
+    {
+        using var img = ToImage();
+        img.Mutate(ctx =>
+        {
+            SolidPen linePen = new(IS.Color.FromRgba(colour.R, colour.G, colour.B, colour.A), 1);
+            ctx.DrawLine(linePen, new IS.PointF[]
+            {
+                new(x1, y1),
+                new(x2, y2),
+            });
+        });
+
+        ReplaceFrom(img);
+    }
+
+    public void DrawRectangle(Color colour, int x, int y, int w, int h)
+    {
+        using var img = ToImage();
+        img.Mutate(ctx =>
+        {
+            SolidPen linePen = new(IS.Color.FromRgba(colour.R, colour.G, colour.B, colour.A), 1);
+            ctx.DrawPolygon(linePen, new IS.PointF[]
+            {
+                new(x, y),
+                new(x + w, y),
+                new(x + w, y + h),
+                new(x, y + h),
+            });
+        });
+
+        ReplaceFrom(img);
+    }
+
+    public void FillPolygon(Color colour, Point[] points)
+    {
+        FillPath(colour, new Polygon(points.Select(p => new IS.PointF(p.X, p.Y)).ToArray()));
+    }
+
+    public void FillEllipse(Color colour, int x, int y, int w, int h)
+    {
+        FillPath(colour, new EllipsePolygon(x, y, w, h));
+    }
+
+    public void FillPath(Color colour, IPath polygon)
+    {
+        using var img = ToImage();
+        img.Mutate(ctx =>
+        {
+            ctx.Fill(IS.Color.FromRgba(colour.R, colour.G, colour.B, colour.A), polygon);
+        });
+
+        ReplaceFrom(img);
+    }
+
+    public void DrawString(string text, string fontName, float size, Color colour, int x, int y)
+    {
+        if (!SystemFonts.TryGet(fontName, out FontFamily fontFamily))
+        {
+            throw new Exception($"Couldn't find font {fontName}");
+        }
+
+        Font font = fontFamily.CreateFont(size, FontStyle.Regular);
+        RichTextOptions options = new(font)
+        {
+            Origin = new(x, y),
+            Dpi = 72
+        };
+
+        using var img = ToImage();
+        img.Mutate(ctx =>
+        {
+            ctx.DrawText(options, text, IS.Color.FromRgba(colour.R, colour.G, colour.B, colour.A));
+        });
+
+        ReplaceFrom(img);
     }
 }
