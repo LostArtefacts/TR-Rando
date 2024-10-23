@@ -186,7 +186,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
                     
         TRTextileSegment segment = CreateSegment(new(0, 0, width, height));
         TRImage frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, false);
-        using Bitmap bmp = frame.ToBitmap();
+        using Bitmap bmp = ImageUtilities.ImageToBitmap(frame);
         using Graphics graphics = Graphics.FromImage(bmp);
 
         int flags = (doorInstance.Flags & 0x3E00) >> 9;
@@ -246,7 +246,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
             }
         }
 
-        return new(segment, new(bmp));
+        return new(segment, ImageUtilities.BitmapToImage(bmp));
     }
 
     private static TR1Type FindDoorModel(TR1Level level, ushort textureIndex)

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -25,7 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
-    <ProjectReference Include="..\TRRandomizerCore\TRRandomizerCore.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Levels\TR1\TEST1.PHD">

@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
 using System.Text;
 using TRImageControl;
 using TRImageControl.Packing;
@@ -73,7 +72,7 @@ public static class HtmlExporter
             foreach (TRTextileRegion region in tile.Rectangles)
             {
                 using MemoryStream ms = new();
-                region.Image.Save(ms, ImageFormat.Png);
+                region.Image.Save(ms, ExtImageType.PNG);
 
                 List<int> objectTextures = GetObjectTextureList(region);
                 List<int> spriteTextures = GetSpriteTextureList(region);
