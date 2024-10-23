@@ -1,20 +1,12 @@
-﻿using BCnEncoder.Decoder;
-using BCnEncoder.Shared;
-using BCnEncoder.Shared.ImageFiles;
-using Microsoft.Toolkit.HighPerformance;
-using SixLabors.ImageSharp.Formats.Png;
-using SixLabors.ImageSharp.PixelFormats;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
-using TRImageControl.Textures;
 using TRLevelControl;
 using TRLevelControl.Model;
-using IS = SixLabors.ImageSharp;
 
 namespace TRImageControl;
 
-public class TRImage : ICloneable
+public partial class TRImage : ICloneable
 {
     private const uint _trImageMagic = 'T' | ('R' << 8) | ('I' << 16) | ('M' << 24);
     private const uint _sizeDelimiter = 'S' | ('I' << 8) | ('Z' << 16) | ('E' << 24);
@@ -96,78 +88,6 @@ public class TRImage : ICloneable
         Pixels = pixels;
     }
 
-    public TRImage(string filePath)
-    {
-        ReadFile(filePath, GetImageType(filePath));
-    }
-
-    public TRImage(string filePath, ExtImageType type)
-    {
-        ReadFile(filePath, type);
-    }
-
-    public TRImage(Stream stream, ExtImageType type)
-    {
-        ReadStream(stream, type);
-    }
-
-    private static ExtImageType GetImageType(string filePath)
-    {
-        return Path.GetExtension(filePath).ToUpper() switch
-        {
-            ".PNG" => ExtImageType.PNG,
-            ".DDS" => ExtImageType.DDS,
-            _ => throw new NotSupportedException(),
-        };
-    }
-
-    private void ReadFile(string filePath, ExtImageType type)
-    {
-        using FileStream stream = File.OpenRead(filePath);
-        ReadStream(stream, type);
-    }
-
-    private void ReadStream(Stream stream, ExtImageType type)
-    {
-        switch (type)
-        {
-            case ExtImageType.PNG:
-                ReadPNG(stream);
-                break;
-            case ExtImageType.DDS:
-                ReadDDS(stream);
-                break;
-            default:
-                throw new NotSupportedException();
-        }
-    }
-
-    private void ReadPNG(Stream stream)
-    {
-        using IS.Image<Rgba32> image = IS.Image.Load<Rgba32>(stream);
-        ReplaceFrom(image);
-    }
-
-    private void ReadDDS(Stream stream)
-    {
-        BcDecoder decoder = new();
-        Memory2D<ColorRgba32> pixels = decoder.Decode2D(stream);
-        Span2D<ColorRgba32> span = pixels.Span;
-        
-        Size = new(pixels.Width, pixels.Height);
-        Pixels = new uint[Size.Width * Size.Height];
-
-        for (int y = 0; y < Height; y++)
-        {
-            Span<ColorRgba32> row = span.GetRowSpan(y);
-            for (int x = 0; x < Width; x++)
-            {
-                Color c = Color.FromArgb(row[x].a, row[x].r, row[x].g, row[x].b);
-                this[x, y] = (uint)c.ToArgb();
-            }
-        }
-    }
-
     public byte[] ToRGB(List<TRColour> palette)
     {
         byte[] data = new byte[Pixels.Length];
@@ -214,96 +134,6 @@ public class TRImage : ICloneable
         return copy;
     }
 
-    public void Save(string fileName)
-    {
-        Save(fileName, GetImageType(fileName));
-    }
-
-    public void Save(string fileName, ExtImageType type)
-    {
-        using FileStream fs = File.OpenWrite(fileName);
-        Save(fs, type);
-    }
-
-    public void Save(Stream stream, ExtImageType type)
-    {
-        switch (type)
-        {
-            case ExtImageType.PNG:
-                WritePNG(stream);
-                break;
-            case ExtImageType.DDS:
-                WriteDDS(stream);
-                break;
-            default:
-                throw new NotSupportedException();
-        }
-    }
-
-    private void WritePNG(Stream stream)
-    {
-        using IS.Image<Rgba32> image = ToImage();
-        image.Save(stream, new PngEncoder());
-    }
-
-    public IS.Image<Rgba32> ToImage()
-    {
-        IS.Image<Rgba32> image = new(Width, Height);
-        image.ProcessPixelRows(accessor =>
-        {
-            for (int y = 0; y < accessor.Height; y++)
-            {
-                Span<Rgba32> row = accessor.GetRowSpan(y);
-                for (int x = 0; x < row.Length; x++)
-                {
-                    Color c = GetPixel(x, y);
-                    row[x] = new(c.R, c.G, c.B, c.A);
-                }
-            }
-        });
-
-        return image;
-    }
-
-    public void ReplaceFrom(IS.Image<Rgba32> image)
-    {
-        if (image.Width != Width || image.Height != Height)
-        {
-            Size = new(image.Width, image.Height);
-            Pixels = new uint[Size.Width * Size.Height];
-        }
-
-        image.ProcessPixelRows(accessor =>
-        {
-            for (int y = 0; y < accessor.Height; y++)
-            {
-                Span<Rgba32> row = accessor.GetRowSpan(y);
-                for (int x = 0; x < row.Length; x++)
-                {
-                    Color c = Color.FromArgb(row[x].A, row[x].R, row[x].G, row[x].B);
-                    this[x, y] = (uint)c.ToArgb();
-                }
-            }
-        });
-    }
-
-    private void WriteDDS(Stream stream)
-    {
-        ColorRgba32[] colours = new ColorRgba32[Width * Height];
-        Read((c, x, y) => colours[y * Width + x] = new(c.R, c.G, c.B, c.A));
-
-        BCnEncoder.Encoder.BcEncoder encoder = new();
-        encoder.OutputOptions.GenerateMipMaps = true;
-        encoder.OutputOptions.MaxMipMapLevel = 6;
-        encoder.OutputOptions.FileFormat = OutputFileFormat.Dds;
-        encoder.OutputOptions.Format = CompressionFormat.Bc7;
-
-        Memory2D<ColorRgba32> pixels = colours.AsMemory().AsMemory2D(Height, Width);
-        DdsFile file = encoder.EncodeToDds(pixels);
-
-        file.Write(stream);
-    }
-
     public Color GetPixel(int x, int y)
         => Color.FromArgb((int)this[x, y]);
 
@@ -339,130 +169,6 @@ public class TRImage : ICloneable
         }
 
         DataChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void Import(TRImage image, Point point, bool retainBackground = false)
-    {
-        if (!retainBackground)
-        {
-            Delete(new(point, image.Size));
-        }
-
-        for (int y = 0; y < image.Size.Height; y++)
-        {
-            for (int x = 0; x < image.Size.Width; x++)
-            {
-                Color inColour = image.GetPixel(x, y);
-                if (!retainBackground || inColour.A == 0xFF)
-                {
-                    this[x + point.X, y + point.Y] = image[x, y];
-                }
-                else if (inColour.A > 0)
-                {
-                    Color curColour = GetPixel(x + point.X, y + point.Y);
-
-                    float a0 = inColour.A / 255.0f;
-                    float r0 = (inColour.R / 255.0f) * a0;
-                    float g0 = (inColour.G / 255.0f) * a0;
-                    float b0 = (inColour.B / 255.0f) * a0;
-
-                    float a1 = curColour.A / 255.0f;
-                    float r1 = (curColour.R / 255.0f) * a1;
-                    float g1 = (curColour.G / 255.0f) * a1;
-                    float b1 = (curColour.B / 255.0f) * a1;
-
-                    float aOut = a0 + a1 * (1 - a0);
-                    float rOut = (r0 + r1 * (1 - a0)) / aOut;
-                    float gOut = (g0 + g1 * (1 - a0)) / aOut;
-                    float bOut = (b0 + b1 * (1 - a0)) / aOut;
-
-                    Color blend = Color.FromArgb((int)(aOut * 255), (int)(rOut * 255), (int)(gOut * 255), (int)(bOut * 255));
-                    this[x + point.X, y + point.Y] = (uint)blend.ToArgb();
-                }
-            }
-        }
-
-        DataChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    public TRImage Export(Rectangle bounds)
-    {
-        TRImage image = new(bounds.Size);
-        for (int y = 0; y < bounds.Height; y++)
-        {
-            for (int x = 0; x < bounds.Width; x++)
-            {
-                image[x, y] = this[x + bounds.Left, y + bounds.Top];
-            }
-        }
-
-        return image;
-    }
-
-    public void Delete(Rectangle bounds)
-    {
-        for (int y = bounds.Top; y < bounds.Bottom; y++)
-        {
-            for (int x = bounds.Left; x < bounds.Right; x++)
-            {
-                this[x, y] = 0;
-            }
-        }
-
-        DataChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void AdjustHSB(Rectangle bounds, HSBOperation operation)
-    {
-        Write(bounds, (c, x, y) => ApplyHSBOperation(c, operation));
-    }
-
-    private static Color ApplyHSBOperation(Color c, HSBOperation operation)
-    {
-        HSB hsb = c.ToHSB();
-        hsb.H = operation.ModifyHue(hsb.H);
-        hsb.S = operation.ModifySaturation(hsb.S);
-        hsb.B = operation.ModifyBrightness(hsb.B);
-
-        return hsb.ToColour();
-    }
-
-    public void Replace(Rectangle bounds, Color search, Color replacement)
-    {
-        Write(bounds, (c, x, y) => c == search ? replacement : c);
-    }
-
-    public void ImportSegment(TRImage source, StaticTextureTarget target, Rectangle sourceSegment)
-    {
-        Rectangle sourceRectangle = sourceSegment;
-        if (target.ClipRequired)
-        {
-            sourceRectangle.X += target.Clip.X;
-            sourceRectangle.Y += target.Clip.Y;
-            sourceRectangle.Width = target.Clip.Width;
-            sourceRectangle.Height = target.Clip.Height;
-        }
-
-        Import(source.Export(sourceRectangle), new(target.X, target.Y), !target.Clear);
-    }
-
-    public void Fill(Color colour)
-    {
-        Write((x, y, c) => colour);
-    }
-
-    public void Fill(Rectangle bounds, Color colour)
-    {
-        Write(bounds, (x, y, c) => colour);
-    }
-
-    public void Overlay(TRImage image)
-    {
-        if (image.Size.Width > Size.Width || image.Size.Height > Size.Height)
-        {
-            image = image.Export(new(0, 0, Math.Min(image.Size.Width, Size.Width), Math.Min(image.Size.Height, Size.Height)));
-        }
-        Import(image, new(0, 0), true);
     }
 
     public string GenerateID()
