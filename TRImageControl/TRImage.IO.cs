@@ -2,7 +2,11 @@
 using BCnEncoder.Shared;
 using BCnEncoder.Shared.ImageFiles;
 using Microsoft.Toolkit.HighPerformance;
+using SixLabors.ImageSharp.Formats;
+using SixLabors.ImageSharp.Formats.Gif;
+using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.Formats.Webp;
 using SixLabors.ImageSharp.PixelFormats;
 using System.Drawing;
 using IS = SixLabors.ImageSharp;
@@ -32,6 +36,9 @@ public partial class TRImage
         {
             ".PNG" => ExtImageType.PNG,
             ".DDS" => ExtImageType.DDS,
+            ".WEBP" => ExtImageType.WEBP,
+            ".JPG" or ".JPEG" => ExtImageType.JPG,
+            ".GIF" => ExtImageType.GIF,
             _ => throw new NotSupportedException(),
         };
     }
@@ -47,7 +54,10 @@ public partial class TRImage
         switch (type)
         {
             case ExtImageType.PNG:
-                ReadPNG(stream);
+            case ExtImageType.WEBP:
+            case ExtImageType.JPG:
+            case ExtImageType.GIF:
+                Read(stream);
                 break;
             case ExtImageType.DDS:
                 ReadDDS(stream);
@@ -57,7 +67,7 @@ public partial class TRImage
         }
     }
 
-    private void ReadPNG(Stream stream)
+    private void Read(Stream stream)
     {
         using IS.Image<Rgba32> image = IS.Image.Load<Rgba32>(stream);
         ReplaceFrom(image);
@@ -99,7 +109,16 @@ public partial class TRImage
         switch (type)
         {
             case ExtImageType.PNG:
-                WritePNG(stream);
+                Write(stream, new PngEncoder());
+                break;
+            case ExtImageType.WEBP:
+                Write(stream, new WebpEncoder());
+                break;
+            case ExtImageType.JPG:
+                Write(stream, new JpegEncoder());
+                break;
+            case ExtImageType.GIF:
+                Write(stream, new GifEncoder());
                 break;
             case ExtImageType.DDS:
                 WriteDDS(stream);
@@ -109,10 +128,10 @@ public partial class TRImage
         }
     }
 
-    private void WritePNG(Stream stream)
+    private void Write(Stream stream, IImageEncoder encoder)
     {
         using IS.Image<Rgba32> image = ToImage();
-        image.Save(stream, new PngEncoder());
+        image.Save(stream, encoder);
     }
 
     public IS.Image<Rgba32> ToImage()
