@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
 using TRImageControl;
 using TRLevelControl.Model;
 using TRLevelControlTests;
@@ -197,26 +196,24 @@ public class ImageTests : TestBase
     }
 
     [TestMethod]
-    [Description("Test bitmap interpretation.")]
-    public void TestBitmap()
+    [Description("Test PNG interpretation.")]
+    public void TestPNG()
     {
-        using Bitmap bitmap1 = new(64, 32);
-        Graphics graphics = Graphics.FromImage(bitmap1);
-
-        graphics.FillRectangle(new SolidBrush(Color.Blue), new(0, 0, 64, 16));
-        graphics.FillRectangle(new SolidBrush(Color.Green), new(0, 16, 64, 16));
-        graphics.DrawLine(new(Color.Red, 1), new(10, 10), new(20, 20));
+        TRImage image = new(64, 32);
+        image.Fill(new(0, 0, 64, 16), Color.Blue);
+        image.Fill(new(0, 16, 64, 16), Color.Green);
 
         using MemoryStream ms1 = new();
-        bitmap1.Save(ms1, ImageFormat.Png);
+        image.Save(ms1, ExtImageType.PNG);
+        ms1.Position = 0;
 
-        TRImage image = new(bitmap1);
-        Bitmap bitmap2 = image.ToBitmap();
-
-        using MemoryStream ms2 = new();
-        bitmap2.Save(ms2, ImageFormat.Png);
-
-        CollectionAssert.AreEqual(ms1.ToArray(), ms2.ToArray());
+        TRImage image2 = new(ms1, ExtImageType.PNG);
+        Assert.AreEqual(image.Width, image2.Width);
+        Assert.AreEqual(image.Height, image2.Height);
+        image2.Read((c, x, y) =>
+        {
+            Assert.AreEqual(image.GetPixel(x, y), c);
+        });
     }
 
     [TestMethod]

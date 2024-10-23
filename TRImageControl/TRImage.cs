@@ -2,14 +2,15 @@
 using BCnEncoder.Shared;
 using BCnEncoder.Shared.ImageFiles;
 using Microsoft.Toolkit.HighPerformance;
+using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.PixelFormats;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using TRImageControl.Textures;
 using TRLevelControl;
 using TRLevelControl.Model;
+using IS = SixLabors.ImageSharp;
 
 namespace TRImageControl;
 
@@ -97,55 +98,54 @@ public class TRImage : ICloneable
 
     public TRImage(string filePath)
     {
-        using FileStream fs = File.OpenRead(filePath);
-        if (IsDDS(filePath))
+        ReadFile(filePath, GetImageType(filePath));
+    }
+
+    public TRImage(string filePath, ExtImageType type)
+    {
+        ReadFile(filePath, type);
+    }
+
+    public TRImage(Stream stream, ExtImageType type)
+    {
+        ReadStream(stream, type);
+    }
+
+    private static ExtImageType GetImageType(string filePath)
+    {
+        return Path.GetExtension(filePath).ToUpper() switch
         {
-            ReadDDS(fs);
-        }
-        else
+            ".PNG" => ExtImageType.PNG,
+            ".DDS" => ExtImageType.DDS,
+            _ => throw new NotSupportedException(),
+        };
+    }
+
+    private void ReadFile(string filePath, ExtImageType type)
+    {
+        using FileStream stream = File.OpenRead(filePath);
+        ReadStream(stream, type);
+    }
+
+    private void ReadStream(Stream stream, ExtImageType type)
+    {
+        switch (type)
         {
-            using Bitmap bmp = new(Image.FromStream(fs));
-            ReadBitmap(bmp);
+            case ExtImageType.PNG:
+                ReadPNG(stream);
+                break;
+            case ExtImageType.DDS:
+                ReadDDS(stream);
+                break;
+            default:
+                throw new NotSupportedException();
         }
     }
 
-    public TRImage(Bitmap bmp)
+    private void ReadPNG(Stream stream)
     {
-        ReadBitmap(bmp);
-    }
-
-    private static bool IsDDS(string filePath)
-        => string.Equals(Path.GetExtension(filePath), ".DDS", StringComparison.InvariantCultureIgnoreCase);
-
-    private void ReadBitmap(Bitmap bmp)
-    {
-        Size = bmp.Size;
-        Pixels = new uint[Size.Width * Size.Height];
-
-        BitmapData bd = bmp.LockBits(new(0, 0, Size.Width, Size.Height), ImageLockMode.ReadOnly, bmp.PixelFormat);
-        int bytesPerPixel = Image.GetPixelFormatSize(bmp.PixelFormat) / 8;
-        int byteCount = bd.Stride * Size.Height;
-        byte[] pixels = new byte[byteCount];
-        IntPtr ptrFirstPixel = bd.Scan0;
-        Marshal.Copy(ptrFirstPixel, pixels, 0, byteCount);
-
-        int endX = Size.Width * bytesPerPixel;
-        for (int y = 0; y < Size.Height; y++)
-        {
-            int currentLine = y * bd.Stride;
-            for (int x = 0; x < endX; x += bytesPerPixel)
-            {
-                uint c = 0;
-                for (int i = 0; i < bytesPerPixel; i++)
-                {
-                    c |= (uint)(pixels[currentLine + x + i] << (i * 8));
-                }
-
-                this[x / bytesPerPixel, y] = c;
-            }
-        }
-
-        bmp.UnlockBits(bd);
+        using IS.Image<Rgba32> image = IS.Image.Load<Rgba32>(stream);
+        ReplaceFrom(image);
     }
 
     private void ReadDDS(Stream stream)
@@ -214,54 +214,80 @@ public class TRImage : ICloneable
         return copy;
     }
 
-    public Bitmap ToBitmap()
-    {
-        List<byte> pixels = new(Pixels.Length * 4);
-        for (int i = 0; i < Pixels.Length; i++)
-        {
-            uint pixel = Pixels[i];
-            byte a = (byte)((pixel & 0xFF000000) >> 24);
-            byte r = (byte)((pixel & 0xFF0000) >> 16);
-            byte g = (byte)((pixel & 0xFF00) >> 8);
-            byte b = (byte)(pixel & 0xFF);
-
-            pixels.Add(b);
-            pixels.Add(g);
-            pixels.Add(r);
-            pixels.Add(a);
-        }
-
-        Bitmap bmp = new(Size.Width, Size.Height, PixelFormat.Format32bppArgb);
-        BitmapData bitmapData = bmp.LockBits(new(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-
-        Marshal.Copy(pixels.ToArray(), 0, bitmapData.Scan0, pixels.Count);
-        bmp.UnlockBits(bitmapData);
-
-        return bmp;
-    }
-
     public void Save(string fileName)
     {
-        if (IsDDS(fileName))
-        {
-            WriteDDS(fileName);
-        }
-        else
-        {
-            Save(fileName, ImageFormat.Png);
-        }
+        Save(fileName, GetImageType(fileName));
     }
 
-    public void Save(string fileName, ImageFormat format)
+    public void Save(string fileName, ExtImageType type)
     {
         using FileStream fs = File.OpenWrite(fileName);
-        ToBitmap().Save(fs, format);
+        Save(fs, type);
     }
 
-    public void Save(Stream stream, ImageFormat format)
-        => ToBitmap().Save(stream, format);
+    public void Save(Stream stream, ExtImageType type)
+    {
+        switch (type)
+        {
+            case ExtImageType.PNG:
+                WritePNG(stream);
+                break;
+            case ExtImageType.DDS:
+                WriteDDS(stream);
+                break;
+            default:
+                throw new NotSupportedException();
+        }
+    }
 
-    private void WriteDDS(string fileName)
+    private void WritePNG(Stream stream)
+    {
+        using IS.Image<Rgba32> image = ToImage();
+        image.Save(stream, new PngEncoder());
+    }
+
+    public IS.Image<Rgba32> ToImage()
+    {
+        IS.Image<Rgba32> image = new(Width, Height);
+        image.ProcessPixelRows(accessor =>
+        {
+            for (int y = 0; y < accessor.Height; y++)
+            {
+                Span<Rgba32> row = accessor.GetRowSpan(y);
+                for (int x = 0; x < row.Length; x++)
+                {
+                    Color c = GetPixel(x, y);
+                    row[x] = new(c.R, c.G, c.B, c.A);
+                }
+            }
+        });
+
+        return image;
+    }
+
+    public void ReplaceFrom(IS.Image<Rgba32> image)
+    {
+        if (image.Width != Width || image.Height != Height)
+        {
+            Size = new(image.Width, image.Height);
+            Pixels = new uint[Size.Width * Size.Height];
+        }
+
+        image.ProcessPixelRows(accessor =>
+        {
+            for (int y = 0; y < accessor.Height; y++)
+            {
+                Span<Rgba32> row = accessor.GetRowSpan(y);
+                for (int x = 0; x < row.Length; x++)
+                {
+                    Color c = Color.FromArgb(row[x].A, row[x].R, row[x].G, row[x].B);
+                    this[x, y] = (uint)c.ToArgb();
+                }
+            }
+        });
+    }
+
+    private void WriteDDS(Stream stream)
     {
         ColorRgba32[] colours = new ColorRgba32[Width * Height];
         Read((c, x, y) => colours[y * Width + x] = new(c.R, c.G, c.B, c.A));
@@ -275,8 +301,7 @@ public class TRImage : ICloneable
         Memory2D<ColorRgba32> pixels = colours.AsMemory().AsMemory2D(Height, Width);
         DdsFile file = encoder.EncodeToDds(pixels);
 
-        using FileStream fs = File.OpenWrite(fileName);
-        file.Write(fs);
+        file.Write(stream);
     }
 
     public Color GetPixel(int x, int y)

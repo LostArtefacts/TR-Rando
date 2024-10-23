@@ -147,7 +147,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
 
         TRTextileSegment segment = CreateSegment(new Rectangle(0, 0, width, height));
         TRImage frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, true);
-        using Bitmap bmp = frame.ToBitmap();
+        using Bitmap bmp = ImageUtilities.ImageToBitmap(frame);
         using Graphics graphics = Graphics.FromImage(bmp);
 
         switch (mode)
@@ -166,6 +166,6 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
                 break;
         }
 
-        return new(segment, new(bmp));
+        return new(segment, ImageUtilities.BitmapToImage(bmp));
     }
 }

@@ -39,7 +39,7 @@ public class TR1DataImporter : TRDataImporter<TR1Level, TR1Type, TR1SFX, TR1Blob
         => type == TR1Type.Lara;
 
     protected override TRMesh GetDummyMesh()
-        => Level.Models.First().Value.Meshes[0];
+        => Level.Models.Count == 0 ? null : Level.Models.First().Value.Meshes[0];
 
     protected override TRTexturePacker CreatePacker()
         => new TR1TexturePacker(Level, Data.TextureTileLimit)

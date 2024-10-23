@@ -3,6 +3,7 @@ using System.Drawing.Drawing2D;
 using TRImageControl.Packing;
 using TRLevelControl;
 using TRLevelControl.Model;
+using TRRandomizerCore.Utilities;
 
 namespace TextureExport.Types;
 
@@ -269,7 +270,7 @@ public static class FaceMapper
 
     private static TRTextileRegion DrawNewFace(TRTextileRegion segment, string text, bool fillBackground = false)
     {
-        Bitmap bitmap = segment.Image.ToBitmap();
+        Bitmap bitmap = ImageUtilities.ImageToBitmap(segment.Image);
         
         Graphics g = Graphics.FromImage(bitmap);
 
@@ -285,7 +286,7 @@ public static class FaceMapper
 
         g.Flush();
 
-        return new TRTextileRegion(CreateTexture(segment.Bounds), new(bitmap));
+        return new TRTextileRegion(CreateTexture(segment.Bounds), ImageUtilities.BitmapToImage(bitmap));
     }
 
     private static TRTextileRegion GetFaceSegment(int textureIndex, IReadOnlyList<TRTextile> tiles)

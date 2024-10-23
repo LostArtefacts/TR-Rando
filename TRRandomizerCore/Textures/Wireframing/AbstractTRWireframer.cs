@@ -5,6 +5,7 @@ using TRDataControl;
 using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Textures;
 
@@ -272,7 +273,7 @@ public abstract class AbstractTRWireframer<E, L>
 
         TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, false);
-        using Bitmap bmp = frame.ToBitmap();
+        using Bitmap bmp = ImageUtilities.ImageToBitmap(frame);
         using Graphics graphics = Graphics.FromImage(bmp);
 
         int rungSplit = size.H / _ladderRungs;
@@ -285,7 +286,7 @@ public abstract class AbstractTRWireframer<E, L>
             graphics.DrawLine(pen, 0, y, size.W, y + rungSplit);
         }
 
-        packer.AddRectangle(new(texture, new(bmp)));
+        packer.AddRectangle(new(texture, ImageUtilities.BitmapToImage(bmp)));
 
         return texture;
     }
@@ -299,13 +300,13 @@ public abstract class AbstractTRWireframer<E, L>
 
         TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
-        using Bitmap bmp = frame.ToBitmap();
+        using Bitmap bmp = ImageUtilities.ImageToBitmap(frame);
         using Graphics graphics = Graphics.FromImage(bmp);
 
         // X marks the spot
         graphics.DrawLine(pen, 0, size.H, size.W, 0);
 
-        packer.AddRectangle(new(texture, new(bmp)));
+        packer.AddRectangle(new(texture, ImageUtilities.BitmapToImage(bmp)));
 
         return texture;
     }
@@ -319,7 +320,7 @@ public abstract class AbstractTRWireframer<E, L>
 
         TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
-        using Bitmap bmp = frame.ToBitmap();
+        using Bitmap bmp = ImageUtilities.ImageToBitmap(frame);
         using Graphics graphics = Graphics.FromImage(bmp);
 
         // Star symbol
@@ -327,7 +328,7 @@ public abstract class AbstractTRWireframer<E, L>
         graphics.DrawLine(pen, size.W / 2, 0, size.W / 2, size.H);
         graphics.DrawLine(pen, 0, size.H / 2, size.W, size.H / 2);
 
-        packer.AddRectangle(new(texture, new(bmp)));
+        packer.AddRectangle(new(texture, ImageUtilities.BitmapToImage(bmp)));
 
         return texture;
     }
@@ -400,7 +401,7 @@ public abstract class AbstractTRWireframer<E, L>
             graphics.DrawLine(pen, 0, 0, width, height);
         }
 
-        return new(bmp);
+        return ImageUtilities.BitmapToImage(bmp);
     }
 
     protected TRTextileSegment CreateSegment(Rectangle rectangle)
