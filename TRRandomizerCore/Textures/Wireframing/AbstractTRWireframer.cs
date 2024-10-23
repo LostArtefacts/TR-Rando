@@ -1,11 +1,9 @@
 using RectanglePacker.Organisation;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using TRDataControl;
 using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
-using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Textures;
 
@@ -60,27 +58,7 @@ public abstract class AbstractTRWireframer<E, L>
 
         SortedSet<TRSize> roomSizes = new(_roomFace3s.Values.Concat(_roomFace4s.Values));
         SortedSet<TRSize> meshSizes = new(_meshFaces.Values);
-
-        Pen roomPen = new(_data.HighlightColour, 1)
-        {
-            Alignment = PenAlignment.Inset,
-            DashCap = DashCap.Round
-        };            
-        Pen modelPen = new(_data.HighlightColour, 1)
-        {
-            Alignment = PenAlignment.Inset
-        };
-        Pen triggerPen = new(_data.TriggerColour, 1)
-        {
-            Alignment = PenAlignment.Inset,
-            DashCap = DashCap.Round
-        };
-        Pen deathPen = new(_data.DeathColour, 1)
-        {
-            Alignment = PenAlignment.Inset,
-            DashCap = DashCap.Round
-        };
-
+        
         DeleteAnimatedTextures(level);
 
         TRTexturePacker packer = CreatePacker(level);
@@ -90,17 +68,17 @@ public abstract class AbstractTRWireframer<E, L>
         TRSize roomSize = GetLargestSize(roomSizes);
         roomSize.RoundDown();
 
-        TRTextileSegment roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
-        TRTextileSegment ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
-        TRTextileSegment triggerTexture = CreateTriggerWireframe(packer, roomSize, triggerPen, SmoothingMode.AntiAlias);
-        TRTextileSegment deathTexture = CreateDeathWireframe(packer, roomSize, deathPen, SmoothingMode.AntiAlias);
-        Dictionary<ushort, TRTextileSegment> specialTextures = CreateSpecialTextures(packer, level, roomPen);
-        ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
+        TRTextileSegment roomTexture = CreateWireframe(packer, roomSize, _data.HighlightColour);
+        TRTextileSegment ladderTexture = CreateLadderWireframe(packer, roomSize, _data.HighlightColour);
+        TRTextileSegment triggerTexture = CreateTriggerWireframe(packer, roomSize, _data.TriggerColour);
+        TRTextileSegment deathTexture = CreateDeathWireframe(packer, roomSize, _data.DeathColour);
+        Dictionary<ushort, TRTextileSegment> specialTextures = CreateSpecialTextures(packer, level, _data.HighlightColour);
+        ProcessClips(packer, level, _data.HighlightColour);
 
         Dictionary<TRSize, TRTextileSegment> modelRemap = new();
         foreach (TRSize size in meshSizes)
         {
-            modelRemap[size] = CreateWireframe(packer, size, modelPen, SmoothingMode.None);
+            modelRemap[size] = CreateWireframe(packer, size, _data.HighlightColour);
         }
 
         packer.Options.StartMethod = PackingStartMethod.FirstTile;
@@ -249,7 +227,7 @@ public abstract class AbstractTRWireframer<E, L>
         return _nullSize;
     }
 
-    private TRTextileSegment CreateWireframe(TRTexturePacker packer, TRSize size, Pen pen, SmoothingMode mode)
+    private TRTextileSegment CreateWireframe(TRTexturePacker packer, TRSize size, Color colour)
     {
         if (size.Equals(_nullSize))
         {
@@ -257,14 +235,14 @@ public abstract class AbstractTRWireframer<E, L>
         }
 
         TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
-        TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
+        TRImage frame = CreateFrame(size.W, size.H, colour, true);
 
         packer.AddRectangle(new(texture, frame));
 
         return texture;
     }
 
-    private TRTextileSegment CreateLadderWireframe(TRTexturePacker packer, TRSize size, Pen pen, SmoothingMode mode)
+    private TRTextileSegment CreateLadderWireframe(TRTexturePacker packer, TRSize size, Color colour)
     {
         if (size.Equals(_nullSize))
         {
@@ -272,26 +250,24 @@ public abstract class AbstractTRWireframer<E, L>
         }
 
         TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
-        TRImage frame = CreateFrame(size.W, size.H, pen, mode, false);
-        using Bitmap bmp = ImageUtilities.ImageToBitmap(frame);
-        using Graphics graphics = Graphics.FromImage(bmp);
+        TRImage frame = CreateFrame(size.W, size.H, colour, false);
 
         int rungSplit = size.H / _ladderRungs;
         for (int i = 0; i < _ladderRungs; i++)
         {
             int y = i * rungSplit;
             // Horizontal bar for the rung
-            graphics.DrawLine(pen, 0, y, size.W, y);
+            frame.DrawLine(colour, 0, y, size.W, y);
             // Diagonal bar to the next rung
-            graphics.DrawLine(pen, 0, y, size.W, y + rungSplit);
+            frame.DrawLine(colour, 0, y, size.W, y + rungSplit);
         }
 
-        packer.AddRectangle(new(texture, ImageUtilities.BitmapToImage(bmp)));
+        packer.AddRectangle(new(texture, frame));
 
         return texture;
     }
 
-    private TRTextileSegment CreateTriggerWireframe(TRTexturePacker packer, TRSize size, Pen pen, SmoothingMode mode)
+    private TRTextileSegment CreateTriggerWireframe(TRTexturePacker packer, TRSize size, Color colour)
     {
         if (size.Equals(_nullSize))
         {
@@ -299,19 +275,17 @@ public abstract class AbstractTRWireframer<E, L>
         }
 
         TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
-        TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
-        using Bitmap bmp = ImageUtilities.ImageToBitmap(frame);
-        using Graphics graphics = Graphics.FromImage(bmp);
+        TRImage frame = CreateFrame(size.W, size.H, colour, true);
 
         // X marks the spot
-        graphics.DrawLine(pen, 0, size.H, size.W, 0);
+        frame.DrawLine(colour, 0, size.H, size.W, 0);
 
-        packer.AddRectangle(new(texture, ImageUtilities.BitmapToImage(bmp)));
+        packer.AddRectangle(new(texture, frame));
 
         return texture;
     }
 
-    private TRTextileSegment CreateDeathWireframe(TRTexturePacker packer, TRSize size, Pen pen, SmoothingMode mode)
+    private TRTextileSegment CreateDeathWireframe(TRTexturePacker packer, TRSize size, Color colour)
     {
         if (size.Equals(_nullSize))
         {
@@ -319,23 +293,21 @@ public abstract class AbstractTRWireframer<E, L>
         }
 
         TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
-        TRImage frame = CreateFrame(size.W, size.H, pen, mode, true);
-        using Bitmap bmp = ImageUtilities.ImageToBitmap(frame);
-        using Graphics graphics = Graphics.FromImage(bmp);
+        TRImage frame = CreateFrame(size.W, size.H, colour, true);
 
         // Star symbol
-        graphics.DrawLine(pen, 0, size.H, size.W, 0);
-        graphics.DrawLine(pen, size.W / 2, 0, size.W / 2, size.H);
-        graphics.DrawLine(pen, 0, size.H / 2, size.W, size.H / 2);
+        frame.DrawLine(colour, 0, size.H, size.W, 0);
+        frame.DrawLine(colour, size.W / 2, 0, size.W / 2, size.H);
+        frame.DrawLine(colour, 0, size.H / 2, size.W, size.H / 2);
 
-        packer.AddRectangle(new(texture, ImageUtilities.BitmapToImage(bmp)));
+        packer.AddRectangle(new(texture, frame));
 
         return texture;
     }
 
-    private Dictionary<ushort, TRTextileSegment> CreateSpecialTextures(TRTexturePacker packer, L level, Pen pen)
+    private Dictionary<ushort, TRTextileSegment> CreateSpecialTextures(TRTexturePacker packer, L level, Color colour)
     {
-        Dictionary<ushort, TRTextileRegion> specialSegments = CreateSpecialSegments(level, pen);
+        Dictionary<ushort, TRTextileRegion> specialSegments = CreateSpecialSegments(level, colour);
         Dictionary<ushort, TRTextileSegment> specialTextures = new();
         foreach (ushort textureIndex in specialSegments.Keys)
         {
@@ -345,16 +317,16 @@ public abstract class AbstractTRWireframer<E, L>
         return specialTextures;
     }
 
-    protected virtual Dictionary<ushort, TRTextileRegion> CreateSpecialSegments(L level, Pen pen)
+    protected virtual Dictionary<ushort, TRTextileRegion> CreateSpecialSegments(L level, Color colour)
         => new();
 
-    private void ProcessClips(TRTexturePacker packer, L level, Pen pen, SmoothingMode mode)
+    private void ProcessClips(TRTexturePacker packer, L level, Color colour)
     {
         // Some animated textures are shared in segments e.g. 4 32x32 segments within a 64x64 container,
         // so in instances where we only want to wireframe a section of these, we use manual clipping.
         foreach (WireframeClip clip in _data.ManualClips)
         {
-            TRImage frame = CreateFrame(clip.Clip.Width, clip.Clip.Height, pen, mode, true);
+            TRImage frame = CreateFrame(clip.Clip.Width, clip.Clip.Height, colour, true);
 
             foreach (ushort texture in clip.Textures)
             {
@@ -387,21 +359,15 @@ public abstract class AbstractTRWireframer<E, L>
         }
     }
 
-    protected TRImage CreateFrame(int width, int height, Pen pen, SmoothingMode mode, bool addDiagonal)
+    protected TRImage CreateFrame(int width, int height, Color colour, bool addDiagonal)
     {
-        using Bitmap bmp = new(width, height);
-        using Graphics graphics = Graphics.FromImage(bmp);
-
-        graphics.SmoothingMode = mode;
-
-        graphics.FillRectangle(new SolidBrush(Color.Transparent), new(0, 0, width, height));
-        graphics.DrawRectangle(pen, 0, 0, width - 1, height - 1);
+        TRImage image = new(width, height);
+        image.DrawRectangle(colour, 0, 0, width - 1, height - 1);
         if (addDiagonal)
         {
-            graphics.DrawLine(pen, 0, 0, width, height);
+            image.DrawLine(colour, 0, 0, width, height);
         }
-
-        return ImageUtilities.BitmapToImage(bmp);
+        return image;
     }
 
     protected TRTextileSegment CreateSegment(Rectangle rectangle)

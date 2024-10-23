@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Drawing.Drawing2D;
 using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
@@ -118,7 +117,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return FaceUtilities.GetTriggerFaces(level, new(), true);
     }
 
-    protected override Dictionary<ushort, TRTextileRegion> CreateSpecialSegments(TR3Level level, Pen pen)
+    protected override Dictionary<ushort, TRTextileRegion> CreateSpecialSegments(TR3Level level, Color colour)
     {
         Dictionary<ushort, TRTextileRegion> segments = new();
         foreach (SpecialTextureHandling special in _data.SpecialTextures)
@@ -128,7 +127,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
                 case SpecialTextureType.CrashPads:
                     foreach (ushort texture in special.Textures)
                     {
-                        if (CreateCrashPad(pen, special.Mode) is TRTextileRegion segment)
+                        if (CreateCrashPad(colour, special.Mode) is TRTextileRegion segment)
                         {
                             segments[texture] = segment;
                         }
@@ -140,23 +139,21 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
         return segments;
     }
 
-    private TRTextileRegion CreateCrashPad(Pen pen, SpecialTextureMode mode)
+    private TRTextileRegion CreateCrashPad(Color colour, SpecialTextureMode mode)
     {
         const int width = 64;
         const int height = 64;
 
         TRTextileSegment segment = CreateSegment(new Rectangle(0, 0, width, height));
-        TRImage frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, true);
-        using Bitmap bmp = ImageUtilities.ImageToBitmap(frame);
-        using Graphics graphics = Graphics.FromImage(bmp);
+        TRImage frame = CreateFrame(width, height, colour, true);
 
         switch (mode)
         {
             case SpecialTextureMode.CrashPadCircle:
-                graphics.FillEllipse(pen.Brush, new Rectangle(9, 9, 46, 46));
+                frame.FillEllipse(colour, 9, 9, 46, 46);
                 break;
             case SpecialTextureMode.CrashPadDiamond:
-                graphics.FillPolygon(pen.Brush, new Point[]
+                frame.FillPolygon(colour, new Point[]
                 {
                     new(32, 16),
                     new(48, 32),
@@ -166,6 +163,6 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
                 break;
         }
 
-        return new(segment, ImageUtilities.BitmapToImage(bmp));
+        return new(segment, frame);
     }
 }
