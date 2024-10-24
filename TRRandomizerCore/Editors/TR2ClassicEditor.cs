@@ -20,7 +20,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
     {
         Settings = new()
         {
-            ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText(@"Resources\TR2\Restrictions\excludable_enemies.json"))
+            ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText("Resources/TR2/Restrictions/excludable_enemies.json"))
         };
         Settings.ApplyConfig(config);
     }

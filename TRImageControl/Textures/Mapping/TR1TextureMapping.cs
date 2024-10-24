@@ -12,7 +12,7 @@ public class TR1TextureMapping : AbstractTextureMapping<TR1Type, TR1Level>
 
     public static TR1TextureMapping Get(TR1Level level, string mappingFilePrefix, TR1TextureDatabase database, Dictionary<StaticTextureSource<TR1Type>, List<StaticTextureTarget>> predefinedMapping = null, List<TR1Type> entitiesToIgnore = null, Dictionary<TR1Type, TR1Type> entityMap = null)
     {
-        string mapFile = Path.Combine(@"Resources\TR1\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
+        string mapFile = Path.Combine("Resources/TR1/Textures/Mapping/", mappingFilePrefix + "-Textures.json");
         if (!File.Exists(mapFile))
         {
             return null;

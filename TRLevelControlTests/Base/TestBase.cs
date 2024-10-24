@@ -7,7 +7,7 @@ namespace TRLevelControlTests;
 
 public class TestBase
 {
-    protected static readonly string _readPath = @"Levels\{0}\{1}";
+    protected static readonly string _readPath = "Levels/{0}/{1}";
 
     public static string GetReadPath(string level, TRGameVersion version, bool remastered = false)
     {

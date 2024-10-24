@@ -12,7 +12,7 @@ public class TR3TextureMapping : AbstractTextureMapping<TR3Type, TR3Level>
 
     public static TR3TextureMapping Get(TR3Level level, string mappingFilePrefix, TR3TextureDatabase database, Dictionary<StaticTextureSource<TR3Type>, List<StaticTextureTarget>> predefinedMapping = null, List<TR3Type> entitiesToIgnore = null, Dictionary<TR3Type, TR3Type> entityMap = null)
     {
-        string mapFile = Path.Combine(@"Resources\TR3\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
+        string mapFile = Path.Combine("Resources/TR3/Textures/Mapping/", mappingFilePrefix + "-Textures.json");
         if (!File.Exists(mapFile))
         {
             return null;

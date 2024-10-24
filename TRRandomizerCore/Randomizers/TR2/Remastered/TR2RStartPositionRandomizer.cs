@@ -15,7 +15,7 @@ public class TR2RStartPositionRandomizer : BaseTR2RRandomizer
     public override void Randomize(int seed)
     {
         _generator = new(seed);
-        _startLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\start_positions.json"));
+        _startLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR2/Locations/start_positions.json"));
 
         foreach (TRRScriptedLevel lvl in Levels)
         {

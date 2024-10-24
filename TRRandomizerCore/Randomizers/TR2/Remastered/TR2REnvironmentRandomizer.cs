@@ -40,7 +40,7 @@ public class TR2REnvironmentRandomizer : BaseTR2RRandomizer
 
     private EMEditorMapping GetMapping(TR2RCombinedLevel level)
     {
-        EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($@"TR2\Environment\{level.Name}-Environment.json"));
+        EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath($"TR2/Environment/{level.Name}-Environment.json"));
         mapping?.SetRemastered(true);
         return mapping;
     }

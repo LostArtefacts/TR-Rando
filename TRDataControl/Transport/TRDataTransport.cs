@@ -9,7 +9,7 @@ public abstract class TRDataTransport<L, T, S, B>
     where S : Enum
     where B : TRBlobBase<T>
 {
-    protected static readonly string _defaultDataFolder = @"Resources\Objects";
+    protected static readonly string _defaultDataFolder = "Resources/Objects";
     protected static readonly string _blobExt = ".TRB";
 
     public IDataProvider<T, S> Data { get; set; }

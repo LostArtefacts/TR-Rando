@@ -21,7 +21,7 @@ public class ImportTests : TestBase
 
         TR1DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR1",
+            DataFolder = "Objects/TR1",
             Level = level,
             TypesToImport = new() { TR1Type.Bear },
         };
@@ -42,7 +42,7 @@ public class ImportTests : TestBase
 
         TR1DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR1",
+            DataFolder = "Objects/TR1",
             Level = level,
             TypesToImport = new() { TR1Type.Bear },
             TypesToRemove = new() { TR1Type.Larson },
@@ -83,7 +83,7 @@ public class ImportTests : TestBase
 
         TR2DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR2",
+            DataFolder = "Objects/TR2",
             Level = level,
             TypesToImport = new() { TR2Type.BengalTiger },
         };
@@ -104,7 +104,7 @@ public class ImportTests : TestBase
 
         TR2DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR2",
+            DataFolder = "Objects/TR2",
             Level = level,
             TypesToImport = new() { TR2Type.BengalTiger },
             TypesToRemove = new() { TR2Type.Yeti },
@@ -145,7 +145,7 @@ public class ImportTests : TestBase
 
         TR3DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR3",
+            DataFolder = "Objects/TR3",
             Level = level,
             TypesToImport = new() { TR3Type.Monkey },
         };
@@ -166,7 +166,7 @@ public class ImportTests : TestBase
 
         TR3DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR3",
+            DataFolder = "Objects/TR3",
             Level = level,
             TypesToImport = new() { TR3Type.Monkey },
             TypesToRemove = new() { TR3Type.Dog },
@@ -207,7 +207,7 @@ public class ImportTests : TestBase
 
         TR4DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR4",
+            DataFolder = "Objects/TR4",
             Level = level,
             TypesToImport = new() { TR4Type.Dog },
         };
@@ -227,7 +227,7 @@ public class ImportTests : TestBase
 
         TR5DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR5",
+            DataFolder = "Objects/TR5",
             Level = level,
             TypesToImport = new() { TR5Type.Huskie },
         };
@@ -264,7 +264,7 @@ public class ImportTests : TestBase
         TR2Level level = GetTR2AltTestLevel();
         TR2DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR2",
+            DataFolder = "Objects/TR2",
             Level = level,
             TypesToImport = new() { TR2Type.MaskedGoon2 },
         };
@@ -286,7 +286,7 @@ public class ImportTests : TestBase
         TR2Level level = GetTR2AltTestLevel();
         TR2DataImporter importer = new()
         {
-            DataFolder = @"Objects\TR2",
+            DataFolder = "Objects/TR2",
             Level = level,
             TypesToImport = new() { TR2Type.MaskedGoon1 },
         };
@@ -295,7 +295,7 @@ public class ImportTests : TestBase
 
         importer = new()
         {
-            DataFolder = @"Objects\TR2",
+            DataFolder = "Objects/TR2",
             Level = level,
             TypesToImport = new() { TR2Type.MaskedGoon2 },
             TypesToRemove = new() { TR2Type.MaskedGoon1 },
@@ -306,7 +306,7 @@ public class ImportTests : TestBase
 
         importer = new()
         {
-            DataFolder = @"Objects\TR2",
+            DataFolder = "Objects/TR2",
             Level = level,
             TypesToImport = new() { TR2Type.BengalTiger },
             TypesToRemove = new() { TR2Type.MaskedGoon1, TR2Type.MaskedGoon2 },
@@ -322,7 +322,7 @@ public class ImportTests : TestBase
         TR1Level level = GetTR1TestLevel();
         TR1DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR1"
+            DataFolder = "Objects/TR1"
         };
         TR1Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);
@@ -346,7 +346,7 @@ public class ImportTests : TestBase
         TR2Level level = GetTR2TestLevel();
         TR2DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR2"
+            DataFolder = "Objects/TR2"
         };
         TR2Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);
@@ -370,7 +370,7 @@ public class ImportTests : TestBase
         TR3Level level = GetTR3TestLevel();
         TR3DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR3"
+            DataFolder = "Objects/TR3"
         };
         TR3Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);
@@ -394,7 +394,7 @@ public class ImportTests : TestBase
         TR4Level level = GetTR4TestLevel();
         TR4DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR4"
+            DataFolder = "Objects/TR4"
         };
         TR4Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);
@@ -410,7 +410,7 @@ public class ImportTests : TestBase
         TR5Level level = GetTR5TestLevel();
         TR5DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR5"
+            DataFolder = "Objects/TR5"
         };
         TR5Blob blob = exporter.Export(level, type);
         exporter.StoreBlob(blob);

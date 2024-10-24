@@ -15,7 +15,7 @@ public class TR2RSecretRandomizer : BaseTR2RRandomizer
 
     public TR2RSecretRandomizer()
     {
-        _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\unarmed_locations.json"));
+        _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR2/Locations/unarmed_locations.json"));
     }
 
     public override void Randomize(int seed)

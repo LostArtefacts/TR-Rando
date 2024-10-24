@@ -22,7 +22,7 @@ public class TR3AudioAllocator : AudioAllocator
 
     protected override void LoadData(string backupPath)
     {
-        _soundEffects = JsonConvert.DeserializeObject<List<TR3SFXDefinition>>(File.ReadAllText(@"Resources\TR3\Audio\sfx.json"));
+        _soundEffects = JsonConvert.DeserializeObject<List<TR3SFXDefinition>>(File.ReadAllText("Resources/TR3/Audio/sfx.json"));
 
         Dictionary<string, TR3Level> levels = new();
         TR3LevelControl reader = new();

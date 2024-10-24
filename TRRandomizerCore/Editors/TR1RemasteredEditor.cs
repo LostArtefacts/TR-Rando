@@ -98,7 +98,7 @@ public class TR1RemasteredEditor : TR1ClassicEditor
             PDPFolder = backupDirectory,
         };
 
-        ItemFactory<TR1Entity> itemFactory = new(@"Resources\TR1\Items\repurposable_items.json");
+        ItemFactory<TR1Entity> itemFactory = new("Resources/TR1/Items/repurposable_items.json");
         TR1RItemRandomizer itemRandomizer = new()
         {
             ScriptEditor = scriptEditor,

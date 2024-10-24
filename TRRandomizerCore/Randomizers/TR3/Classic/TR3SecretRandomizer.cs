@@ -28,9 +28,9 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     public TR3SecretRandomizer()
     {
-        _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\locations.json"));
-        _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
-        _routePicker = new(GetResourcePath(@"TR3\Locations\routes.json"));
+        _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR3/Locations/locations.json"));
+        _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR3/Locations/unarmed_locations.json"));
+        _routePicker = new(GetResourcePath("TR3/Locations/routes.json"));
     }
 
     public IEnumerable<string> GetPacks()
@@ -432,7 +432,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         Level = level.Data,
                         LevelName = level.Name,
                         TypesToImport = allocation.ImportModels,
-                        DataFolder = _outer.GetResourcePath(@"TR3\Objects"),
+                        DataFolder = _outer.GetResourcePath("TR3/Objects"),
                         TextureMonitor = monitor
                     };
                     importer.Import();

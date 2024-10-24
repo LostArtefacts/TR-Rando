@@ -35,9 +35,9 @@ public static class DependencyExporter
             return d1.TileIndex.CompareTo(d2.TileIndex);
         });
 
-        string dir = @"TR1\Deduplication";
+        string dir = "TR1/Deduplication";
         Directory.CreateDirectory(dir);
-        File.WriteAllText(string.Format(@"{0}\{1}-TextureRemap.json", dir, lvl.ToUpper()), JsonConvert.SerializeObject(remapGroup, Formatting.Indented));
+        File.WriteAllText(string.Format("{0}/{1}-TextureRemap.json", dir, lvl.ToUpper()), JsonConvert.SerializeObject(remapGroup, Formatting.Indented));
     }
 
     public static void Export(TR2Level level, string lvl)
@@ -45,9 +45,9 @@ public static class DependencyExporter
         TR2TextureRemapGroup remapGroup = new();
         remapGroup.CalculateDependencies(level);
 
-        string dir = @"TR2\Deduplication";
+        string dir = "TR2/Deduplication";
         Directory.CreateDirectory(dir);
-        File.WriteAllText(string.Format(@"{0}\{1}-TextureRemap.json", dir, lvl.ToUpper()), JsonConvert.SerializeObject(remapGroup, Formatting.Indented));
+        File.WriteAllText(string.Format("{0}/{1}-TextureRemap.json", dir, lvl.ToUpper()), JsonConvert.SerializeObject(remapGroup, Formatting.Indented));
     }
 
     public static void Export(TR3Level level, string lvl)
@@ -68,8 +68,8 @@ public static class DependencyExporter
             return d1.TileIndex.CompareTo(d2.TileIndex);
         });
 
-        string dir = @"TR3\Deduplication";
+        string dir = "TR3/Deduplication";
         Directory.CreateDirectory(dir);
-        File.WriteAllText(string.Format(@"{0}\{1}-TextureRemap.json", dir, lvl.ToUpper()), JsonConvert.SerializeObject(remapGroup, Formatting.Indented));
+        File.WriteAllText(string.Format("{0}/{1}-TextureRemap.json", dir, lvl.ToUpper()), JsonConvert.SerializeObject(remapGroup, Formatting.Indented));
     }
 }

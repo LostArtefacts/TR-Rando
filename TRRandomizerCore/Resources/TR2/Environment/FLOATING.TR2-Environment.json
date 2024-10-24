@@ -3,7 +3,7 @@
     {
       "Comments": "Overwrite an out-of-sight texture with EmeraldRaider91's badge.",
       "EMType": 33,
-      "Bitmap": "Resources\\TR2\\Textures\\Source\\Static\\Landmarks\\EmeraldRaider91\\Segments.png"
+      "Bitmap": "Resources/TR2/Textures/Source/Static/Landmarks/EmeraldRaider91/Segments.png"
     },
     {
       "Comments": "Add the badge to room 21; reset the texture in rooms 32 and 157 to stone.",

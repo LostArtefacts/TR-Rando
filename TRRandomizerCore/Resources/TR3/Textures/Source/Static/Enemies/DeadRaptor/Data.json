@@ -3,7 +3,7 @@
     5
   ],
 
-  "PNGPath": "Resources\\TR3\\Textures\\Source\\Static\\Enemies\\Raptor\\Segments.png",
+  "PNGPath": "Resources/TR3/Textures/Source/Static/Enemies/Raptor/Segments.png",
 
   "EntityColourMap": {
     "38": {

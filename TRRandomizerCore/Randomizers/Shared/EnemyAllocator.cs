@@ -20,7 +20,7 @@ public abstract class EnemyAllocator<T>
 
     public EnemyAllocator(TRGameVersion version)
     {
-        string relocFile = $@"Resources\{version}\Locations\enemy_relocations.json";
+        string relocFile = $"Resources/{version}/Locations/enemy_relocations.json";
         _relocations = File.Exists(relocFile)
             ? JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(relocFile))
             : new();

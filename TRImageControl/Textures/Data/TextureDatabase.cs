@@ -5,9 +5,9 @@ namespace TRImageControl.Textures;
 public class TextureDatabase<E>
     where E : Enum
 {
-    private static readonly string _entityLookupPath = @"Static\entity_lookup.json";
-    private static readonly string _dynamicDataPath = @"Dynamic\{0}.json";
-    private static readonly string _staticDataPath = @"Static\{0}";
+    private static readonly string _entityLookupPath = "Static/entity_lookup.json";
+    private static readonly string _dynamicDataPath = "Dynamic/{0}.json";
+    private static readonly string _staticDataPath = "Static/{0}";
     private static readonly string _staticPngFile = "Segments.png";
     private static readonly string _staticDataFile = "Data.json";
 
@@ -65,7 +65,7 @@ public class TextureDatabase<E>
 
     private DynamicTextureSource LoadDynamicSource(string name)
     {
-        string source = Path.Combine(DataPath, string.Format(_dynamicDataPath, name.Replace(".", @"\")));
+        string source = Path.Combine(DataPath, string.Format(_dynamicDataPath, name.Replace(".", "/")));
         if (!File.Exists(source))
         {
             throw new IOException(string.Format("Missing texture pack source JSON ({0})", source));
@@ -76,7 +76,7 @@ public class TextureDatabase<E>
 
     private StaticTextureSource<E> LoadStaticSource(string name)
     {
-        string dir = Path.Combine(DataPath, string.Format(_staticDataPath, name.Replace(".", @"\")));
+        string dir = Path.Combine(DataPath, string.Format(_staticDataPath, name.Replace(".", "/")));
         if (!Directory.Exists(dir))
         {
             throw new IOException(string.Format("Missing texture pack source folder ({0})", name));

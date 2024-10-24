@@ -41,7 +41,7 @@ public class ExportTests : TestBase
         TR1Level level = GetTR1TestLevel();
         TR1DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR1"
+            DataFolder = "Objects/TR1"
         };
         TR1Blob blob1 = exporter.Export(level, TR1Type.Bear);
         exporter.StoreBlob(blob1);
@@ -89,7 +89,7 @@ public class ExportTests : TestBase
         TR2Level level = GetTR2TestLevel();
         TR2DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR2"
+            DataFolder = "Objects/TR2"
         };
         TR2Blob blob1 = exporter.Export(level, TR2Type.BengalTiger);
         exporter.StoreBlob(blob1);
@@ -137,7 +137,7 @@ public class ExportTests : TestBase
         TR3Level level = GetTR3TestLevel();
         TR3DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR3"
+            DataFolder = "Objects/TR3"
         };
         TR3Blob blob1 = exporter.Export(level, TR3Type.Monkey);
         exporter.StoreBlob(blob1);
@@ -179,7 +179,7 @@ public class ExportTests : TestBase
         TR4Level level = GetTR4TestLevel();
         TR4DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR4"
+            DataFolder = "Objects/TR4"
         };
         TR4Blob blob1 = exporter.Export(level, TR4Type.Dog);
         exporter.StoreBlob(blob1);
@@ -222,7 +222,7 @@ public class ExportTests : TestBase
         TR5Level level = GetTR5TestLevel();
         TR5DataExporter exporter = new()
         {
-            DataFolder = @"Objects\TR5"
+            DataFolder = "Objects/TR5"
         };
         TR5Blob blob1 = exporter.Export(level, TR5Type.Huskie);
         exporter.StoreBlob(blob1);

@@ -441,9 +441,9 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     {
         importer.Level = level.Data;
         importer.LevelName = level.Name;
-        importer.DataFolder = GetResourcePath(@"TR1\Objects");
+        importer.DataFolder = GetResourcePath("TR1/Objects");
 
-        string remapPath = $@"TR1\Textures\Deduplication\{level.Name}-TextureRemap.json";
+        string remapPath = $"TR1/Textures/Deduplication/{level.Name}-TextureRemap.json";
         if (ResourceExists(remapPath))
         {
             importer.TextureRemapPath = GetResourcePath(remapPath);

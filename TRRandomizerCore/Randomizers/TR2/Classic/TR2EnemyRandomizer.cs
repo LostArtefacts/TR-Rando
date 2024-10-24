@@ -47,7 +47,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         };
         _allocator.Initialise();
 
-        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\unarmed_locations.json"));
+        _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR2/Locations/unarmed_locations.json"));
         if (Settings.CrossLevelEnemies)
         {
             RandomizeEnemiesCrossLevel();
@@ -381,8 +381,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                     TypesToRemove = enemies.TypesToRemove,
                     Level = level.Data,
                     LevelName = level.Name,
-                    DataFolder = _outer.GetResourcePath(@"TR2\Objects"),
-                    TextureRemapPath = _outer.GetResourcePath($@"TR2\Textures\Deduplication\{level.JsonID}-TextureRemap.json"),
+                    DataFolder = _outer.GetResourcePath("TR2/Objects"),
+                    TextureRemapPath = _outer.GetResourcePath($"TR2/Textures/Deduplication/{level.JsonID}-TextureRemap.json"),
                     TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport)
                 };
 

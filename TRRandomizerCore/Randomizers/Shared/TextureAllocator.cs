@@ -21,7 +21,7 @@ public class TextureAllocator<T, R>
 
     public TextureAllocator(TRGameVersion version)
     {
-        _texInfo = JsonConvert.DeserializeObject<TRTexInfo<T>>(File.ReadAllText($@"Resources\{version}\Textures\texinfo.json"));
+        _texInfo = JsonConvert.DeserializeObject<TRTexInfo<T>>(File.ReadAllText($"Resources/{version}/Textures/texinfo.json"));
         _trgData = new();
         _cutTrgData = new();
         _mapData = new();

@@ -12,7 +12,7 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Type, TR2Level>
 
     public static TR2TextureMapping Get(TR2Level level, string mappingFilePrefix, TR2TextureDatabase database, Dictionary<StaticTextureSource<TR2Type>, List<StaticTextureTarget>> predefinedMapping = null, List<TR2Type> entitiesToIgnore = null)
     {
-        string mapFile = Path.Combine(@"Resources\TR2\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
+        string mapFile = Path.Combine("Resources/TR2/Textures/Mapping/", mappingFilePrefix + "-Textures.json");
         if (!File.Exists(mapFile))
         {
             return null;

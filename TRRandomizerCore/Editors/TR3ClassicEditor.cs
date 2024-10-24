@@ -20,7 +20,7 @@ public class TR3ClassicEditor : TR3LevelEditor, ISettingsProvider
     {
         Settings = new()
         {
-            ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText(@"Resources\TR3\Restrictions\excludable_enemies.json"))
+            ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText("Resources/TR3/Restrictions/excludable_enemies.json"))
         };
         Settings.ApplyConfig(config);
     }
@@ -128,7 +128,7 @@ public class TR3ClassicEditor : TR3LevelEditor, ISettingsProvider
         }
 
         // Shared tracker objects between randomizers
-        ItemFactory<TR3Entity> itemFactory = new(@"Resources\TR3\Items\repurposable_items.json")
+        ItemFactory<TR3Entity> itemFactory = new("Resources/TR3/Items/repurposable_items.json")
         {
             DefaultItem = new() { Intensity1 = -1, Intensity2 = -1 }
         };

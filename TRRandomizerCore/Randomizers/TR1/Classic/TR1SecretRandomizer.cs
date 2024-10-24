@@ -26,9 +26,9 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     public TR1SecretRandomizer()
     {
-        _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\locations.json"));
-        _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
-        _routePicker = new(GetResourcePath(@"TR1\Locations\routes.json"));
+        _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR1/Locations/locations.json"));
+        _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR1/Locations/unarmed_locations.json"));
+        _routePicker = new(GetResourcePath("TR1/Locations/routes.json"));
     }
 
     public IEnumerable<string> GetPacks()
@@ -165,7 +165,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     private void ActualiseRewardRoom(TR1CombinedLevel level, TRSecretRoom<TR1Entity> placeholder)
     {
-        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($@"TR1\SecretMapping\{level.Name}-SecretMapping.json"));
+        TRSecretMapping<TR1Entity> secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath($"TR1/SecretMapping/{level.Name}-SecretMapping.json"));
         if (secretMapping == null)
         {
             return;
@@ -439,7 +439,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         Level = level.Data,
                         LevelName = level.Name,
                         TypesToImport = allocation.ImportModels,
-                        DataFolder = _outer.GetResourcePath(@"TR1\Objects"),
+                        DataFolder = _outer.GetResourcePath("TR1/Objects"),
                     };
 
                     importer.Import();

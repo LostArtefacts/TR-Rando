@@ -65,7 +65,7 @@ public class TR1InjectionProcessor : TR1LevelProcessor
         List<string> validInjections = new();
         foreach (string injection in injections)
         {
-            string path = Path.Combine(ScriptEditor.OriginalFile.DirectoryName, @"..\", injection);
+            string path = Path.Combine(ScriptEditor.OriginalFile.DirectoryName, "../", injection);
             if (!File.Exists(path))
             {
                 continue;

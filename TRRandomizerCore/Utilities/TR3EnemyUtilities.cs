@@ -405,15 +405,15 @@ public static class TR3EnemyUtilities
     {
         _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR3Type, List<int>>>>
         (
-            File.ReadAllText(@"Resources\TR3\Restrictions\enemy_restrictions_default.json")
+            File.ReadAllText("Resources/TR3/Restrictions/enemy_restrictions_default.json")
         );
         _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR3Type, List<int>>>>
         (
-            File.ReadAllText(@"Resources\TR3\Restrictions\enemy_restrictions_technical.json")
+            File.ReadAllText("Resources/TR3/Restrictions/enemy_restrictions_technical.json")
         );
         _restrictedEnemyPathing = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR3Type, Dictionary<short, List<Location>>>>>
         (
-            File.ReadAllText(@"Resources\TR3\Restrictions\enemy_restrictions_pathing.json")
+            File.ReadAllText("Resources/TR3/Restrictions/enemy_restrictions_pathing.json")
         );
     }
 

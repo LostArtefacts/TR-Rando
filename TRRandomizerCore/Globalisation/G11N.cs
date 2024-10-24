@@ -11,7 +11,7 @@ public class G11N
     static G11N()
     {
         _definedLanguages = JsonConvert.DeserializeObject<List<Language>>(File.ReadAllText(
-            @"Resources\Shared\G11N\languages.json"));
+            "Resources/Shared/G11N/languages.json"));
     }
 
     private readonly TRGameVersion _game;
@@ -56,7 +56,7 @@ public class G11N
 
     private static TRGameStrings LoadLanguage(Language language, TRGameVersion game)
     {
-        string path = $@"Resources\{game}\Strings\G11N\gamestrings_{language.Tag}.json";
+        string path = $"Resources/{game}/Strings/G11N/gamestrings_{language.Tag}.json";
         if (!File.Exists(path))
         {
             return null;

@@ -10,7 +10,7 @@ public class TR3SecretMapping : TRSecretMapping<TR3Entity>
 {
     public static TR3SecretMapping Get(TR3CombinedLevel level)
     {
-        string packPath = $@"Resources\TR3\SecretMapping\{level.Name}-SecretMapping.json";
+        string packPath = $"Resources/TR3/SecretMapping/{level.Name}-SecretMapping.json";
         if (!File.Exists(packPath))
         {
             return null;

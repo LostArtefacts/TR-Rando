@@ -10,7 +10,7 @@ public static class TRRExporter
 {
     public static void Export(string ddsFolder, TRGameVersion version)
     {
-        string dir = $@"{version}\DDS\PNG";
+        string dir = $"{version}/DDS/PNG";
         Directory.CreateDirectory(dir);
 
         foreach (string ddsFile in Directory.GetFiles(ddsFolder))
@@ -29,7 +29,7 @@ public static class TRRExporter
 
         foreach (TRTexCategory category in Enum.GetValues<TRTexCategory>())
         {
-            string dir = $@"{version}\DDS\Categories\{category}";
+            string dir = $"{version}/DDS/Categories/{category}";
             if (!Directory.Exists(dir))
             {
                 continue;
@@ -57,7 +57,7 @@ public static class TRRExporter
                 ItemFlags = itemFlags
             };
 
-            File.WriteAllText(Path.GetFullPath($@"..\..\..\TRRandomizerCore\Resources\{version}\Textures\texinfo.json"), JsonConvert.SerializeObject(info));
+            File.WriteAllText(Path.GetFullPath($"../../../TRRandomizerCore/Resources/{version}/Textures/texinfo.json"), JsonConvert.SerializeObject(info));
         }
 
         switch (version)
