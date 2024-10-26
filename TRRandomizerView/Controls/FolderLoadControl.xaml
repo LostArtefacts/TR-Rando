@@ -88,12 +88,13 @@
             Visibility="{Binding RecentFoldersVisibility}">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
-                    <Image x:Name="_historyIcon" 
-                           Width="18" 
-                           Height="18"/>
-
-                    <TextBlock Margin="5,0,0,0" 
-                               Text="Recent Folders"/>
+                    <Image
+                        Source="../Resources/folder.png"
+                        Height="18"/>
+                    <TextBlock
+                        Margin="3,0,0,0" 
+                        FontWeight="Bold"
+                        Text="Recent Folders"/>
                 </StackPanel>
             </GroupBox.Header>
 

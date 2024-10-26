@@ -49,6 +49,7 @@
     <None Remove="Resources\Darkness\TR2\8.jpg" />
     <None Remove="Resources\Darkness\TR2\9.jpg" />
     <None Remove="Resources\down.png" />
+    <None Remove="Resources\folder.png" />
     <None Remove="Resources\loading.png" />
     <None Remove="Resources\rando.ico" />
     <None Remove="Resources\rando.png" />
@@ -88,6 +89,7 @@
     <Resource Include="Resources\Darkness\TR2\8.jpg" />
     <Resource Include="Resources\Darkness\TR2\9.jpg" />
     <Resource Include="Resources\down.png" />
+    <Resource Include="Resources\folder.png" />
     <Resource Include="Resources\loading.png" />
     <Resource Include="Resources\rando.ico" />
     <Resource Include="Resources\rando.png" />
