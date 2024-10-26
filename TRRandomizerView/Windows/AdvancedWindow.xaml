@@ -8,7 +8,7 @@
         xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
         xmlns:cvt="clr-namespace:TRRandomizerView.Converters"
         mc:Ignorable="d"
-        Icon="..\Resources\rando.ico"
+        Icon="../Resources/rando.ico"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
@@ -999,7 +999,7 @@
                         <Image Width="186"
                                x:Name="_darknessPreview"
                                HorizontalAlignment="Left"
-                               Source="..\Resources\Darkness\0.jpg"/>
+                               Source="../Resources/Darkness/0.jpg"/>
                     </Border>
                 </Grid>
             </StackPanel>

@@ -47,7 +47,7 @@
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
-            <Image Source="..\Resources\rando_sm.png"/>
+            <Image Source="../Resources/rando_sm.png"/>
             <TextBlock Text="{Binding AppTitle}"
                        VerticalAlignment="Center"
                        FontSize="40"
