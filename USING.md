@@ -157,6 +157,10 @@ If you continue to experience issues, we have a friendly community [Discord serv
   - For Steam, you can right-click on the game in your library and select `Manage` | `Browse Local Files`. This will open the folder where the game files are located in Explorer and you can then copy the address as necessary.
   - For GoG, you can find the general installation folder under `Settings` | `Installing, updating` | `Game installation folder`. Browse to this folder in Explorer and then locate your game folder there.
 
+- _Can I run TR-Rando on Linux?_
+
+  The core libraries used in the randomizer work fully in Linux; the sticking point is the user interface itself, which is Windows-only. However, there is at least one method available to make this work - refer to the steps [here](https://github.com/LostArtefacts/TR-Rando/issues/143#issuecomment-2439741066) for details.
+
 - _I have installed TR1X but when I open the folder in the randomizer, it can't find the data files. What should I do?_
 
   When you install TR1X using its installer and, for example, target your Steam copy of the game, TR1X will be installed by default into your Documents folder as opposed to the original Steam folder. You can change this folder when running the installer. So all you need to do is point the randomizer to this folder instead of your Steam/GOG/original folder.
