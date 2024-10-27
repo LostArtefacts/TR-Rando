@@ -9,7 +9,7 @@
         ResizeMode="NoResize"
         Loaded="Window_Loaded"
         Closing="Window_Closing"
-        Icon="..\Resources\rando.ico"
+        Icon="../Resources/rando.ico"
         Title="Opening Data Folder" Height="100" Width="400">
 
     <Grid Margin="10,10,10,15">
@@ -29,7 +29,7 @@
 
         <Image
             Grid.Column="1"
-            Source="..\Resources\loading.png"
+            Source="../Resources/loading.png"
             Width="16"
             Height="16"
             VerticalAlignment="Bottom"

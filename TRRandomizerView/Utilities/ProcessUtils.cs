@@ -19,11 +19,16 @@ public class ProcessUtils
 
     public static void OpenFolder(string folder)
     {
+        folder = Path.GetFullPath(folder);
+        if (!Path.EndsInDirectorySeparator(folder))
+        {
+            folder += Path.DirectorySeparatorChar;
+        }
         Process.Start(new ProcessStartInfo
         {
-            FileName = "explorer.exe",
-            Arguments = Path.GetFullPath(folder),
-            UseShellExecute = true
+            FileName = folder,
+            UseShellExecute = true,
+            Verb = "open",
         });
     }
 

@@ -7,7 +7,7 @@
         xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
         xmlns:vm="clr-namespace:TRRandomizerView.Model"
         mc:Ignorable="d"
-        Icon="..\Resources\rando.ico"
+        Icon="../Resources/rando.ico"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"

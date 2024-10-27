@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Icon="..\Resources\rando.ico"
+        Icon="../Resources/rando.ico"
         FontFamily="Segoe UI"
         FontSize="13"
         WindowStartupLocation="CenterOwner"
@@ -29,7 +29,7 @@
                Width="120"
                Margin="0,5,10,0"
                HorizontalAlignment="Center"
-               Source="..\Resources\rando.png"/>
+               Source="../Resources/rando.png"/>
 
         <StackPanel Grid.Column="1">
             <TextBlock FontSize="16"

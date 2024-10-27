@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
         mc:Ignorable="d"
-        Icon="..\Resources\rando.ico"
+        Icon="../Resources/rando.ico"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"

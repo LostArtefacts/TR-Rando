@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         ShowInTaskbar="False"
-        Icon="..\Resources\rando.ico"
+        Icon="../Resources/rando.ico"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterOwner"
         Loaded="Window_Loaded"

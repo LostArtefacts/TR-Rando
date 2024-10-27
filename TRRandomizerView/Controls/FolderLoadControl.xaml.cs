@@ -62,7 +62,6 @@ public partial class FolderLoadControl : UserControl
             AppTitle = app.Title;
         }
         _content.DataContext = this;
-        _historyIcon.Source = ControlUtils.DefaultIcons.FolderSmall.ToImageSource();
     }
 
     private void HistoryListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
