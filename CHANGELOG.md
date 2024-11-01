@@ -1,6 +1,7 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.3...master) - xxxx-xx-xx
 - added (experimental) support for Linux (#143)
 - changed the number of secrets in TR3R Coastal Village to four to match the statistics (#775)
+- fixed being unable to pick-up some items in TR3R High Security Compound (#783)
 - fixed unreachable item locations in Coastal Village (#774)
 
 ## [V1.9.3](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.2...V1.9.3) - 2024-09-29
