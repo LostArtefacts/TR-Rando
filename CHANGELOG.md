@@ -2,6 +2,7 @@
 - added (experimental) support for Linux (#143)
 - changed the number of secrets in TR3R Coastal Village to four to match the statistics (#775)
 - fixed unreachable item locations in Coastal Village (#774)
+- fixed the cobra not rendering properly in TR3R if used cross-level (#782)
 
 ## [V1.9.3](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.2...V1.9.3) - 2024-09-29
 - added an option to disable underwater corner secrets (#763)
