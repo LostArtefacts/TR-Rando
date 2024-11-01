@@ -140,5 +140,6 @@ public class TR3RDataCache : BaseTRRDataCache<TR3Type, TR3RAlias>
 
         [TR3Type.DogLondon] = TR3RAlias.DOG_SEWER,        
         [TR3Type.CobraNevada] = TR3RAlias.COBRA_NEVADA,        
+        [TR3Type.CobraIndia] = TR3RAlias.COBRA,
     };
 }
