@@ -33,6 +33,14 @@ public class TR3RItemRandomizer : BaseTR3RRandomizer
                 continue;
             }
 
+            if (lvl.Is(TR3LevelNames.HSC))
+            {
+                // These can't be picked up if they are moved out of these rooms.
+                _levelInstance.Data.Entities.Where(e => TR3TypeUtilities.IsAnyPickupType(e.TypeID) && (e.Room == 167 || e.Room == 168))
+                    .ToList()
+                    .ForEach(e => ItemFactory.LockItem(_levelInstance.Name, _levelInstance.Data.Entities.IndexOf(e)));
+            }
+
             _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data,
                 _levelInstance.Script.RemovesWeapons, _levelInstance.Script.OriginalSequence, _levelInstance.HasExposureMeter);
 
