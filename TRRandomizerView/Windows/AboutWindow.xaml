@@ -93,6 +93,15 @@
             </TextBlock>
 
             <TextBlock>
+                Cross-platform image support via
+                <Hyperlink ToolTip="https://github.com/SixLabors/ImageSharp"
+                           NavigateUri="https://github.com/SixLabors/ImageSharp"
+                           RequestNavigate="Hyperlink_RequestNavigate">
+                     ImageSharp
+                </Hyperlink> by SixLabors
+            </TextBlock>
+
+            <TextBlock>
                 DDS support via
                 <Hyperlink ToolTip="https://github.com/Nominom/BCnEncoder.NET"
                            NavigateUri="https://github.com/Nominom/BCnEncoder.NET"
