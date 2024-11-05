@@ -86,6 +86,11 @@ public class ChecksumTester : IChecksumTester
         "8376349b1989024228f7135f9c7187a6", // LEVEL3A.PHD
         "0878ce6127a93335b6a96f4dfbe61fb9", // LEVEL8C.PHD
 
+        // TR1R V1.4+
+        "35925bfa82e121a775495fbb3867e7f2", // LEVEL2.PHD
+        "6facfdf6342a7a3c72275e730292c7ae", // LEVEL3A.PHD
+        "682d6eaa53a429d3febcc1100692a818", // EGYPT.PHD
+
         // TR2
         "d6f218e32d172e67db60daa35ef7e114", // ASSAULT.TR2
         "da1e01683dad5fabbfff89c267b75b9e", // WALL.TR2
@@ -149,6 +154,10 @@ public class ChecksumTester : IChecksumTester
 
         // TR2R V1.3+
         "ef2f5a3e08bd10655c38707e6657c687", // LEVEL5.TR2
+
+        // TR2R V1.4+
+        "2afebdbb1c43fea9bf999f793b76ffa9", // WALL.TR2
+        "7b31bc1d20cdf295d4c0883ac1383894", // LEVEL5.TR2
 
         // TR3
         "5e11d251ddb12b98ebead1883dc12d2a", // HOUSE.TR2
@@ -231,5 +240,11 @@ public class ChecksumTester : IChecksumTester
 
         // TR3R V1.1+
         "9a1f7162eb7e2b3a57a17e92e0edfbb6", // ANTARC.TR2
+
+        // TR3R V1.4+
+        "bd2ded2e22845cd467b78d77aa01bf39", // JUNGLE.TR2
+        "93cbd2ad51822c133a92e8ac25e4834f", // TONYBOSS.TR2
+        "1a715a8b7c21e1077bdd31882b7bc822", // UNDERSEA.TR2
+        "3c68eaa0be796ab6521307f8e19e7503", // ZOO.TR2
     };
 }
