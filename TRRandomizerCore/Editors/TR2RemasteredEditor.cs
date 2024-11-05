@@ -1,5 +1,6 @@
 ﻿using TRDataControl;
 using TRGE.Core;
+using TRLevelControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
@@ -246,5 +247,8 @@ public class TR2RemasteredEditor : TR2ClassicEditor
 
         monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Finalizing tasks - please wait");
         titleTask.Wait();
+
+        TRRCheatEditor<TR2Type> cheatEditor = new(wipDirectory, new TR2PDPControl());
+        levels.ForEach(l => cheatEditor.AddCheats(l));
     }
 }
