@@ -12,4 +12,7 @@
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
     <ProjectReference Include="..\TRRandomizerCore\TRRandomizerCore.csproj" />
   </ItemGroup>
+  <PropertyGroup>
+    <NoWarn>IDE0130</NoWarn>
+  </PropertyGroup>
 </Project>

@@ -9,4 +9,7 @@
   <ItemGroup>
     <PackageReference Include="SharpZipLib" version="1.4.2" />
   </ItemGroup>
+  <PropertyGroup>
+    <NoWarn>IDE0130</NoWarn>
+  </PropertyGroup>
 </Project>

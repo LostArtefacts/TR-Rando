@@ -96,4 +96,7 @@
     <Resource Include="Resources\rando_sm.png" />
     <Resource Include="Resources\up.png" />
   </ItemGroup>
+  <PropertyGroup>
+    <NoWarn>IDE0130</NoWarn>
+  </PropertyGroup>
 </Project>
