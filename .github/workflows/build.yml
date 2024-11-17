@@ -23,7 +23,7 @@ jobs:
         run: |
           dotnet restore
           dotnet test --filter TestCategory!=OriginalIO
-          dotnet publish -c Release -a x64 --property:PublishDir=build
+          dotnet publish TRRandomizerView -c Release -a x64 --property:PublishDir=build --self-contained false
           
       - name: Package the build
         run: |
