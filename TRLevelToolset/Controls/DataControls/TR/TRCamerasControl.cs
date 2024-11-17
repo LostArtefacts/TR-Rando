@@ -25,7 +25,7 @@ internal class TRCamerasControl : IDrawable, IModelUpdater
         {
             ImGui.Text("Camera count: " + IOManager.CurrentLevelAsTR1?.Cameras.Count);
 
-            ImGui.BeginChild("cam_property_display", new Vector2(400, 200), true);
+            ImGui.BeginChild("cam_property_display", new Vector2(400, 200), ImGuiChildFlags.Border);
             
             if (ImGui.InputInt("Camera ID", ref _index, 1, 1))
             {
