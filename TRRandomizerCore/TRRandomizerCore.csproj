@@ -32,4 +32,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <PropertyGroup>
+    <NoWarn>IDE0130</NoWarn>
+  </PropertyGroup>
 </Project>

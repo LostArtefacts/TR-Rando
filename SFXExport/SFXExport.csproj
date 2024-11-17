@@ -11,4 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
   </ItemGroup>
+  <PropertyGroup>
+    <NoWarn>IDE0130</NoWarn>
+  </PropertyGroup>
 </Project>
