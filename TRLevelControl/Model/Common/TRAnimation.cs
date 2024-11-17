@@ -16,6 +16,8 @@ public class TRAnimation : ICloneable
     public List<TRAnimCommand> Commands { get; set; } = new();
     public List<TRAnimFrame> Frames { get; set; } = new();
 
+    public int TotalDispatchCount => Changes.Sum(c => c.Dispatches.Count);
+
     public TRAnimation Clone()
     {
         return new()

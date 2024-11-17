@@ -537,7 +537,7 @@ public class TRModelBuilder<T>
 
         // Some levels have an unreferenced state change at the end with a state ID that doesn't match
         // anything in the game. Need to observe for tests.
-        int totalChanges = models.Sum(m => m.Animations.Sum(a => a.Changes.Count));
+        int totalChanges = models.Sum(m => m.TotalChangeCount);
         if (totalChanges == _placeholderChanges.Count - 1)
         {
             PlaceholderChange finalChange = _placeholderChanges[^1];
