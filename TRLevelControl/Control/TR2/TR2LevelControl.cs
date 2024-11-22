@@ -308,8 +308,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
     private void ReadSoundEffects(TRLevelReader reader)
     {
-        _level.SoundEffects = new();
-        short[] soundMap = reader.ReadInt16s(Enum.GetValues<TR2SFX>().Length);
+        List<short> soundMap = TRSFXBuilder.ReadSoundMap(reader);
 
         uint numSoundDetails = reader.ReadUInt32();
         List<TR2SoundEffect> sfx = new();
@@ -335,15 +334,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             sfx[soundID].SampleID = sampleIndices[samplePointer];
         }
 
-        for (int i = 0; i < soundMap.Length; i++)
-        {
-            if (soundMap[i] < 0 || soundMap[i] >= sfx.Count)
-            {
-                continue;
-            }
-
-            _level.SoundEffects[(TR2SFX)i] = sfx[soundMap[i]];
-        }
+        _level.SoundEffects = TRSFXBuilder.Build<TR2SFX, TR2SoundEffect>(soundMap, sfx);
     }
 
     private void WriteSoundEffects(TRLevelWriter writer)

@@ -43,6 +43,13 @@ public class TRLevelReader : BinaryReader
         return new(inflatedStream);
     }
 
+    public uint PeekUInt()
+    {
+        uint value = ReadUInt32();
+        BaseStream.Position -= sizeof(uint);
+        return value;
+    }
+
     public void ReadUntil(long position)
     {
         long distance = position - BaseStream.Position;
