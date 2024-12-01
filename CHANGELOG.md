@@ -1,4 +1,5 @@
-## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.3...master) - xxxx-xx-xx
+## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.0...master) - xxxx-xx-xx
+- fixed too many pickups on the same tile in TR2R patch 4 causing a crash (#793)
 
 ## [V1.10.0](https://github.com/LostArtefacts/TR-Rando/compare/V1.9.3...V1.10.0) - 2024-11-05
 - added (experimental) support for Linux (#143)

@@ -30,6 +30,9 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
         new() { X = 31232, Y = 256, Z = 66048, Room = 57 },
         new() { X = 31232, Y = 256, Z = 65024, Room = 57 },
         new() { X = 31232, Y = 256, Z = 64000, Room = 52 },
+        new() { X = 31232, Y = 256, Z = 62976, Room = 52 },
+        new() { X = 31232, Y = 256, Z = 61952, Room = 52 },
+        new() { X = 31232, Y = 256, Z = 60928, Room = 52 },
     };
 
     private Dictionary<string, List<Location>> _pistolLocations;
