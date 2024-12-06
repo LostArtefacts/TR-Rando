@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.1...master) - xxxx-xx-xx
+- added support for TR1X 4.6 (#796)
 
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.0...V1.10.1) - 2024-12-01
 - fixed too many pickups on the same tile in TR2R patch 4 causing a crash (#793)
