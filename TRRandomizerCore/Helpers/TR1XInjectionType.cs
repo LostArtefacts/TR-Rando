@@ -11,4 +11,7 @@ public enum TR1XInjectionType
     LaraJumps,
     ItemRotation,
     PS1Enemy,
+    DisableAnimSprite,
+    Skybox,
+    PSCrystal,
 }

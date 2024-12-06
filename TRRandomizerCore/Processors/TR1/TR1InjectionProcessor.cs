@@ -12,6 +12,8 @@ public class TR1InjectionProcessor : TR1LevelProcessor
     {
         TR1XInjectionType.LaraAnims,
         TR1XInjectionType.LaraJumps,
+        TR1XInjectionType.Skybox,
+        TR1XInjectionType.PSCrystal,
     };
 
     public void Run()
