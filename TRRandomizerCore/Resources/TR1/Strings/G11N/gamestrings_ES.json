@@ -1,0 +1,583 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "Tú hiciste YOLO demasiado fuerte",
+      "Tú moriste",
+      "Fatalidad",
+      "Presione F para presentar sus respetos",
+      "F"
+    ],
+    "HEADING_INVENTORY": [
+      "Consumibles",
+      "Cosa",
+      "La mejor mochila",
+      "Las cosas buenas",
+      "Todas las cosas"
+    ],
+    "HEADING_ITEMS": [
+      "Las cosas importantes",
+      "Objetos de misión",
+      "Tesoro",
+      "No vendas estos",
+      "Cosas"
+    ],
+    "HEADING_OPTION": [
+      "Carrusel de funciones",
+      "¡Eres Hermosa",
+      "OwO",
+      "UwU",
+      "Cambiar las cosas"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "¡Médico!",
+      "Paquete médico Thicc",
+      "Donante de salud plena",
+      "Mega",
+      "Mejor que un Med pequeño"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Deberías ir al norte",
+      "Cosita giratoria",
+      "Sólo un imán",
+      "¿Esto funciona?",
+      "¿Quien usa esto?"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "Ergonomía",
+      "Cómo jugar",
+      "El teclado es lo mejor",
+      "El mando es lo mejor",
+      "¿Qué botón es?"
+    ],
+    "INV_ITEM_DETAILS": [
+      "Disfraz de John Lennon",
+      "Sombras",
+      "/o-o/",
+      "Gafas de color rosa",
+      "Gafas"
+    ],
+    "INV_ITEM_GAME": [
+      "ID",
+      "Documento de viaje",
+      "Cartas credenciales",
+      "Libro pixelado",
+      "Pasaporte"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "No lamer",
+      "Demasiado pesado para llevarlo",
+      "Material incorrecto",
+      "Ligeramente tóxico",
+      "Poner en la mano de Midas"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Pistolas mejoradas",
+      "Pistolas",
+      "Un poco aburrido",
+      "DPS",
+      "Sonido un poco más profundo"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "Clips para helado",
+      "Barra de chocolate Hershey",
+      "50 balas",
+      "Chocolate",
+      "No tan bueno como los cargadores de Uzi"
+    ],
+    "INV_ITEM_MEDI": [
+      "Paquete médico no tan espeso",
+      "Mini",
+      "Donante de media salud",
+      "Es algo",
+      "Peor que un Med grande"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Altos poderes de bronceado",
+      "La construcción más débil",
+      "El viejo confiable",
+      "¿Quién necesita munición?",
+      "Pew Pew infinito"
+    ],
+    "INV_ITEM_SCION": [
+      "Cosita redonda",
+      "No me dispares",
+      "Necesitas tres",
+      "Es Skee-On",
+      "Es Suspiro-On"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Perfetamente preciso",
+      "Solo usa pistolas",
+      "Mejor daño",
+      "Torpe",
+      "Gran Boom Bazooka"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "No hay suficiente munición",
+      "Solo 2 conchas cada una",
+      "Definición de precisión",
+      "No vale la pena recogerlo",
+      "Concha de explosión"
+    ],
+    "INV_ITEM_SOUND": [
+      "Mezclador",
+      "¿Silecioso o ruidoso?",
+      "catJAM",
+      "Auriculares",
+      "Policia del dolor de oído"
+    ],
+    "INV_ITEM_UZI": [
+      "BRRRRRR",
+      "MAC-10",
+      "Pistola ametralladora accionada por retroceso",
+      "Pew Pew",
+      "Necesita Nerf"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Mejor munición",
+      "100 balas",
+      "Almenos estos golpean a los enemigos",
+      "Munición congelada en tumbas antiguas",
+      "Munición Pew Pew"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "Eres asombroso",
+      "Actualmente inútil",
+      "Salva nuestras almas",
+      "Ahorros personales",
+      "Salvarme de mí"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Tutorial",
+        "En movimiento",
+        "404 Jardín no encontrado",
+        "Tour guiado",
+        "Quítate la ropa"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "La Baticueva",
+        "EZY",
+        "REINICIAR",
+        "Nivel más difícil",
+        "Mucho gris"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Orgía de lobos",
+        "Ciudad de lobos",
+        "El oso es el secreto",
+        "Demasiados murciélagos",
+        "Pueblo de Vilcabanga"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Llave Qwop",
+          "Llave de lobo",
+          "No olvides al ídolo",
+          "Escapa de los lobos para encontrar más lobos",
+          "Artículo en la derecha"
+        ],
+        "puzzle1": [
+          "Muñeca",
+          "El ídolo de indiana",
+          "Probablemente valioso",
+          "Objeto en la izquierda",
+          "Un tipo con un sombrero funky"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Parque Jurásico",
+        "Mundo Jurásico",
+        "El momento más épico",
+        "El reino de Barney",
+        "Santuario de dinosaurios"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 Es El Número Mágico",
+          "Engranajes",
+          "Engranaje",
+          "Maquinaria",
+          "Rueda dentada"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Aquí solo hay Raptors",
+        "¡Sorpresa! ¡Larson!",
+        "Mira la roca",
+        "Abraza a mamá para tener buena suerte",
+        "Lara Rota M****A"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 Es El Número Mágico",
+          "Engranajes",
+          "Engranaje",
+          "Maquinaria",
+          "Rueda dentada"
+        ]
+      }
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "No te caigas",
+        "Martillame Baby",
+        "Oh Dios, No Este Nivel",
+        "Pierre, Eres Un Insecto de Basura",
+        "Una Variedad de Agujeros"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Llave de Agua",
+          "Oye, En Realidad Soy Romano",
+          "Falso Poseidón",
+          "Todo el camino hacia abajo",
+          "Vamos a nadar"
+        ],
+        "key2": [
+          "Muchos Muchos Mapas",
+          "Una Verdadera Dama Siempre Dispara",
+          "Maldito Gorilla",
+          "Cayo una Roca Enorme",
+          "Me Alegro de Que No Te Hayan Aplastado"
+        ],
+        "key3": [
+          "Fíjate en Tus Pasos",
+          "Ni siquiera un Dios",
+          "Es Hora de un Paseo",
+          "Mira las Espadas",
+          "Entrante"
+        ],
+        "key4": [
+          "Ni Siquiera Griego",
+          "Llave Mjölnir",
+          "Llave de Martillo",
+          "Llave Relámpago",
+          "Ahora no te caigas"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "Teatro de Pierre",
+        "ComprobarGladiador",
+        "¿Por qué esto es Underground?",
+        "Tantos enemigos",
+        "La casa de fieras"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Tu Salida",
+          "¿Por qué está esta llave aquí?",
+          "¿Qué es está habitación?",
+          "Abre la puerta en el balcón",
+          "Entrada al Zoológico"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "¡Se siente hombre dorado!",
+        "Salto con la mano para el arma OP",
+        "El Zoológico",
+        "División de oro gratuita",
+        "Regreso a Monke"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Tu boleto de salida",
+          "No tóxico",
+          "Material adecuado",
+          "¡Ahora es útil!",
+          "Demasiado pesado para llevarlo"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "¡Sigue nadando!",
+        "INUNDADO",
+        "Inodoro gigante",
+        "El paraíso de los cocodrilos",
+        "ratJAM"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Maldita sea, finalmente",
+          "Ooooo...brillante",
+          "Casi llegamos",
+          "Última llave",
+          "Mejor que la plata"
+        ],
+        "key2": [
+          "Mejor que oxidado",
+          "Peor que el oro",
+          "Demasiadas puertas para abrir",
+          "Necesitarás dos",
+          "Necesitas algo mejor"
+        ],
+        "key3": [
+          "Úselo para obtener más llaves",
+          "Primera de muchas llaves",
+          "Peor que la plata",
+          "¿Seguro que es Rust?",
+          "Hierro oxidado"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "No confíes en las estatuas",
+        "Finalmente terminé con Grecia",
+        "Pierre llegó primero",
+        "¡Hurra! ¡Bloques de empuje!",
+        "La última resistencia de Pierre"
+      ],
+      "KeyItems": {
+        "key1": [
+          "¿Cómo hace esto esta llave?",
+          "Esto no es un secreto",
+          "Suena a secreto",
+          "Usa en la cerradura de oro",
+          "Llave brillante"
+        ],
+        "key2": [
+          "Las ratas abundan",
+          "Atento a los gorilas",
+          "No te pierdas el secreto",
+          "Necesitas otra llave",
+          "Solo funciona en la cerradura derecha"
+        ],
+        "key3": [
+          "Poner en el ojo de la cerradura",
+          "Necesito 2 llaves para 1 puerta",
+          "Empuja el bloque más",
+          "Necesitas otra llave",
+          "Sólo funciona en la cerradura izquierda"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Acurrucarse con los gatitos",
+        "Regreso a Egipto",
+        "Paraíso de las panteras",
+        "No es exactamente una ciudad",
+        "La casa de Mona"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Cirugía cerebral",
+          "Llave de Mona",
+          "Usa en la Esfinge",
+          "Llave de piedra preciosa azul",
+          "Llave de Aluminio Oxidado"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Salto sonriente",
+        "Pura satisfacción",
+        "Se necesitan cuatro artefactos",
+        "Museo Egipcio",
+        "Cosas del Dios egipcio"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Abre dos puertas",
+          "Llave de Piedra Preciosa Azul",
+          "Llave de Aluminio oxidado",
+          "¿Por qué hay una puerta allí?",
+          "Llave de Cocodrilo"
+        ],
+        "puzzle1": [
+          "El ojo del villano de Seth",
+          "Ya nos veremos",
+          "Siempre mirando",
+          "El globo ocular del halcón",
+          "Deja de mirarme"
+        ],
+        "puzzle2": [
+          "Solo un error",
+          "Heracross",
+          "Khepri",
+          "Escarabajo Pelotero",
+          "Ojalá tuvieras esto para el siguiente nivel"
+        ],
+        "puzzle3": [
+          "Sello de Anpu",
+          "Sello del Chacal",
+          "Solo algunos garabatos",
+          "La piedra de Rosetta",
+          "Patata"
+        ],
+        "puzzle4": [
+          "Esto no es TR4",
+          "Donde está Seth?",
+          "Será mejor que dejes eso de nuevo",
+          "Llave de la Vida",
+          "Cruz con un Lazo"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "¿Cómo llegó Larson aquí?",
+        "Demasiados Atlantes",
+        "Espera. ¿Donde estan los Uzis?",
+        "¿Quién dejó salir a las momias?",
+        "Un tiempo alegre"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Usa en el puente",
+          "Libera al Centauro",
+          "Úsalo para obtener Ankh",
+          "Única llave en este nivel",
+          "¿Cómo es que esto no está oxidado?"
+        ],
+        "puzzle1": [
+          "Ponte en la esfinge",
+          "Necesito dos",
+          "¿Dónde está Seth?",
+          "Golpéame nena una vez más",
+          "Caca de centauro"
+        ],
+        "puzzle2": [
+          "Solo un error",
+          "Genera algunos enemigos",
+          "Sal de este nivel",
+          "Genial, volvamos a empezar",
+          "¿Te tomó tanto tiempo?"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "Nivel con el bote",
+        "Muerte a los matones de Natla",
+        "¿Por qué esto es una mina?",
+        "¿Donde están las armas?",
+        "Los memes de Natla"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "¿Quién puso esto aquí?",
+          "Zap!",
+          "¿Quieres armas?",
+          "¿Por qué siguen funcionando?",
+          "Pinzas eléctricas"
+        ],
+        "puzzle2": [
+          "Llave muy única",
+          "Tu salida",
+          "Algunos triángulos egipcios",
+          "Acceso a Atlantis",
+          "Bastante vanguardista"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "No bajo el agua",
+        "Laberinto de carne",
+        "Buena suerte",
+        "Traer medicamentos",
+        "Torre del terror"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "La cuenta atrás final",
+        "Natla no está muerta",
+        "Muerte a la Atlántida",
+        "Es una trampa",
+        "Dale un abrazo al torso"
+      ]
+    },
+    "EGYPT.PHD": {
+      "Names": [
+        "¿De vuelta otra vez?",
+        "INUNDADO",
+        "Esfinge guiñando el ojo",
+        "Arena en cada rincón",
+        "En un rato cocodrilo",
+        "Hasta luego caimán",
+        "Deslizarse - Caer - Salpicar",
+        "¡Necesitarás esos mmedicamentos!"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Cuidado con las rocas",
+          "Acceso a la sala azul",
+          "Llave de Zafiro",
+          "Llave de Mantequilla",
+          "Llave Pre-Dorada",
+          "Llave Brillante",
+          "¡Uhhh brillante!",
+          "Llave Brillante"
+        ]
+      }
+    },
+    "CAT.PHD": {
+      "Names": [
+        "Buen aspecto, Buen felino",
+        "Templo de la Cat-ástrofe",
+        "Por ahí solo gatito",
+        "catJAM",
+        "MEOW.PHD",
+        "El templo de Lilly",
+        "Templo de Cat-alina",
+        "Aquí no hay nada mas que gatos...",
+        "El constructor no era amante de los perros",
+        "Los perros mantienen alejados a los humanos"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Necesitarás siete",
+          "Llave Elegante",
+          "¡Déjame entrar!",
+          "Demasiados de estos",
+          "¿Cuantos más?",
+          "Suspiro, Demaniados...",
+          "Llave de Gato"
+        ]
+      }
+    },
+    "END.PHD": {
+      "Names": [
+        "Pero espera, Hay más...",
+        "El imperio de Natla",
+        "Las secuelas",
+        "Jardín de infantes de mamá",
+        "Cueva de Carne",
+        "Cueva de Espaguetis",
+        "¿Alguien quiere lasaña?",
+        "Atlantes por todas partes. ¡Ayuda!"
+      ]
+    },
+    "END2.PHD": {
+      "Names": [
+        "¿El Fin?",
+        "El mejor rompezabezas de Bolas Rodantes",
+        "Adios Atlantis",
+        "¡Pulsa la palanca!",
+        "¡Palanca equivocada!",
+        "¿Por qué tenemos esa palanca?",
+        "¡Saquenme de aquí!",
+        "¡Negocio terminado!"
+      ]
+    }
+  }
+}
