@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.2...master) - xxxx-xx-xx
+- added Spanish translations for TR1 (#800)
 
 ## [V1.10.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.1...V1.10.2) - 2024-12-06
 - added support for TR1X 4.6 (#796)

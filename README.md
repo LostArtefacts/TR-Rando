@@ -90,4 +90,5 @@ For keeping track of levels while you play, check out the [TRRandoTracker](https
     * Polish - DJ_Full, NaBu, & Nickelony
     * Portuguese - Fuse & Jumica
     * Russian - Ayiluy
+    * Spanish - liveshh
     * Swedish - Pikkufighter, Woof Smit, & Zahnac
