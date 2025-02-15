@@ -25,7 +25,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
             }
         };
 
-        TestVersion(level, TRFileVersion.TR45);
+        TestVersion(level, TRFileVersion.TR45, TRFileVersion.TRR4);
         return level;
     }
 
@@ -58,27 +58,36 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         ushort objectCount = reader.ReadUInt16();
         ushort bumpCount = reader.ReadUInt16();
 
-        using TRLevelReader reader32 = reader.Inflate(TRChunkType.Images32);
-        _level.Images.Rooms.Images32 = reader32.ReadImage32s(roomCount);
-        _level.Images.Objects.Images32 = reader32.ReadImage32s(objectCount);
-        _level.Images.Bump.Images32 = reader32.ReadImage32s(bumpCount);
+        if (_level.Version.File == TRFileVersion.TRR4)
+        {
+            reader.ReadUInt32();
+            _level.Images.Rooms.Images32 = reader.ReadImage32s(roomCount);
+            _level.Images.Objects.Images32 = reader.ReadImage32s(objectCount);
+            _level.Images.Bump.Images32 = reader.ReadImage32s(bumpCount);
+            _level.Images.Font = reader.ReadImage32();
+            _level.Images.Sky = reader.ReadImage32();
+        }
+        else
+        {
+            using TRLevelReader reader32 = reader.Inflate(TRChunkType.Images32);
+            _level.Images.Rooms.Images32 = reader32.ReadImage32s(roomCount);
+            _level.Images.Objects.Images32 = reader32.ReadImage32s(objectCount);
+            _level.Images.Bump.Images32 = reader32.ReadImage32s(bumpCount);
 
-        using TRLevelReader reader16 = reader.Inflate(TRChunkType.Images16);
-        _level.Images.Rooms.Images16 = reader16.ReadImage16s(roomCount);
-        _level.Images.Objects.Images16 = reader16.ReadImage16s(objectCount);
-        _level.Images.Bump.Images16 = reader16.ReadImage16s(bumpCount);
 
-        using TRLevelReader skyReader = reader.Inflate(TRChunkType.SkyFont);
-        _level.Images.Font = skyReader.ReadImage32();
-        _level.Images.Sky = skyReader.ReadImage32();
+            using TRLevelReader reader16 = reader.Inflate(TRChunkType.Images16);
+            _level.Images.Rooms.Images16 = reader16.ReadImage16s(roomCount);
+            _level.Images.Objects.Images16 = reader16.ReadImage16s(objectCount);
+            _level.Images.Bump.Images16 = reader16.ReadImage16s(bumpCount);
+
+            using TRLevelReader skyReader = reader.Inflate(TRChunkType.SkyFont);
+            _level.Images.Font = skyReader.ReadImage32();
+            _level.Images.Sky = skyReader.ReadImage32();
+        }
     }
 
     private void WriteImages(TRLevelWriter writer)
     {
-        Debug.Assert(_level.Images.Rooms.Images32.Count == _level.Images.Rooms.Images16.Count);
-        Debug.Assert(_level.Images.Objects.Images32.Count == _level.Images.Objects.Images16.Count);
-        Debug.Assert(_level.Images.Bump.Images32.Count == _level.Images.Bump.Images16.Count);
-
         writer.Write((ushort)_level.Images.Rooms.Images32.Count);
         writer.Write((ushort)_level.Images.Objects.Images32.Count);
         writer.Write((ushort)_level.Images.Bump.Images32.Count);
@@ -87,25 +96,44 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         writer32.Write(_level.Images.Rooms.Images32);
         writer32.Write(_level.Images.Objects.Images32);
         writer32.Write(_level.Images.Bump.Images32);
-        writer.Deflate(writer32, TRChunkType.Images32);
 
-        using TRLevelWriter writer16 = new();
-        writer16.Write(_level.Images.Rooms.Images16);
-        writer16.Write(_level.Images.Objects.Images16);
-        writer16.Write(_level.Images.Bump.Images16);
-        writer.Deflate(writer16, TRChunkType.Images16);
+        if (_level.Version.File == TRFileVersion.TR45)
+        {
+            Debug.Assert(_level.Images.Rooms.Images32.Count == _level.Images.Rooms.Images16.Count);
+            Debug.Assert(_level.Images.Objects.Images32.Count == _level.Images.Objects.Images16.Count);
+            Debug.Assert(_level.Images.Bump.Images32.Count == _level.Images.Bump.Images16.Count);
+            
+            writer.Deflate(writer32, TRChunkType.Images32);
 
-        using TRLevelWriter skyWriter = new();
-        skyWriter.Write(_level.Images.Font);
-        skyWriter.Write(_level.Images.Sky);
-        writer.Deflate(skyWriter, TRChunkType.SkyFont);
+            using TRLevelWriter writer16 = new();
+            writer16.Write(_level.Images.Rooms.Images16);
+            writer16.Write(_level.Images.Objects.Images16);
+            writer16.Write(_level.Images.Bump.Images16);
+            writer.Deflate(writer16, TRChunkType.Images16);
+
+            using TRLevelWriter skyWriter = new();
+            skyWriter.Write(_level.Images.Font);
+            skyWriter.Write(_level.Images.Sky);
+            writer.Deflate(skyWriter, TRChunkType.SkyFont);
+        }
+        else
+        {
+            writer.Write((uint)writer32.BaseStream.Length);
+            writer32.BaseStream.Position = 0;
+            writer32.BaseStream.CopyTo(writer.BaseStream);
+            writer.Write(_level.Images.Font);
+            writer.Write(_level.Images.Sky);
+        }        
     }
 
     private void ReadLevelDataChunk(TRLevelReader mainReader)
     {
-        using TRLevelReader reader = mainReader.Inflate(TRChunkType.LevelData);
+        TRLevelReader reader = _level.Version.File == TRFileVersion.TRR4 ? mainReader : mainReader.Inflate(TRChunkType.LevelData);
 
-        _level.Version.LevelNumber = reader.ReadUInt32();
+        if (_level.Version.File == TRFileVersion.TR45)
+        {
+            _level.Version.LevelNumber = reader.ReadUInt32();
+        }
 
         ReadRooms(reader);
 
@@ -126,19 +154,26 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
         ReadEntities(reader);
 
-        ReadDemoData(reader);
+        if (_level.Version.File == TRFileVersion.TR45)
+        {
+            ReadDemoData(reader);
+            ReadSoundEffects(reader);
 
-        ReadSoundEffects(reader);
+            reader.ReadUInt16s(3); // Always 0s
 
-        reader.ReadUInt16s(3); // Always 0s
-        Debug.Assert(reader.BaseStream.Position == reader.BaseStream.Length);
+            Debug.Assert(reader.BaseStream.Position == reader.BaseStream.Length);
+            reader.Close();
+        }
     }
 
     private void WriteLevelDataChunk(TRLevelWriter mainWriter)
     {
         using TRLevelWriter writer = new();
 
-        writer.Write(_level.Version.LevelNumber);
+        if (_level.Version.File != TRFileVersion.TRR4)
+        {
+            writer.Write(_level.Version.LevelNumber);
+        }
 
         WriteRooms(writer);
 
@@ -159,13 +194,21 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
         WriteEntities(writer);
 
-        WriteDemoData(writer);
+        if (_level.Version.File != TRFileVersion.TRR4)
+        {
+            WriteDemoData(writer);
 
-        WriteSoundEffects(writer);
+            WriteSoundEffects(writer);
 
-        writer.Write(Enumerable.Repeat((ushort)0, 3).ToArray());
+            writer.Write(Enumerable.Repeat((ushort)0, 3).ToArray());
 
-        mainWriter.Deflate(writer, TRChunkType.LevelData);
+            mainWriter.Deflate(writer, TRChunkType.LevelData);
+        }
+        else
+        {
+            writer.BaseStream.Position = 0;
+            writer.BaseStream.CopyTo(mainWriter.BaseStream);
+        }
     }
 
     private void ReadRooms(TRLevelReader reader)
@@ -174,6 +217,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
         TRFDBuilder builder = new(_level.Version.Game, _observer);
         _level.FloorData = builder.ReadFloorData(reader, _level.Rooms.SelectMany(r => r.Sectors));
+        var n = _level.Rooms.SelectMany(r => r.Sectors).Where(s => s.FDIndex == 6471);
     }
 
     private void WriteRooms(TRLevelWriter writer)
@@ -398,6 +442,11 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void ReadWAVData(TRLevelReader reader)
     {
+        if (_level.Version.File == TRFileVersion.TRR4)
+        {
+            return;
+        }
+
         uint numSamples = reader.ReadUInt32();
         List<TR4Sample> samples = new();
 
@@ -425,6 +474,11 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     private void WriteWAVData(TRLevelWriter writer)
     {
+        if (_level.Version.File == TRFileVersion.TRR4)
+        {
+            return;
+        }
+
         List<TR4Sample> samples = _level.SoundEffects.Values
             .SelectMany(s => s.Samples)
             .Distinct()

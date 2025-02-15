@@ -6,6 +6,9 @@ public class TR5Observer : TR4Observer
     private short? _animCommandPadding;
     private List<byte> _rawRooms;
 
+    public TR5Observer(bool remastered)
+        : base(remastered) { }
+
     public override bool UseTR5RawRooms => true;
 
     public override void OnRawTR5RoomsRead(List<byte> data)

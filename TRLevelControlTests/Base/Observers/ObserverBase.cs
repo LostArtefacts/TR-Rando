@@ -20,6 +20,11 @@ public class ObserverBase : ITRLevelObserver
     public virtual bool UseOriginalFloorData => true;
     public virtual bool UseTR5RawRooms => false;
 
+    public virtual void OnFloorDataRead(ushort[] data)
+    { }
+
+    public virtual ushort[] GetFloorData() => null;
+
     public virtual void OnRawTR5RoomsRead(List<byte> data)
     { }
 

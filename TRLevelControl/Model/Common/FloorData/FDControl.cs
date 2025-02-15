@@ -69,6 +69,12 @@ public class FDControl : IEnumerable<KeyValuePair<int, List<FDEntry>>>
 
     public List<ushort> Flatten(IEnumerable<TRRoomSector> sectors)
     {
+        ushort[] oldData = _observer?.GetFloorData();
+        if (oldData != null)
+        {
+            return new(oldData);
+        }
+
         List<ushort> data = new()
         {
             _dummyEntry

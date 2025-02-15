@@ -20,11 +20,7 @@ public class TRLevelReader : BinaryReader
         uint expectedLength = ReadUInt32();
         uint compressedLength = ReadUInt32();
 
-        byte[] data = new byte[compressedLength];
-        for (uint i = 0; i < compressedLength; i++)
-        {
-            data[i] = ReadByte();
-        }
+        byte[] data = ReadUInt8s(compressedLength);
 
         MemoryStream inflatedStream = new();
         using MemoryStream ms = new(data);
