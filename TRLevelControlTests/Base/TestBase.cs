@@ -68,10 +68,10 @@ public class TestBase
         return control.Read(GetReadPath(level, TRGameVersion.TR4));
     }
 
-    public static TR5Level GetTR5Level(string level)
+    public static TR5Level GetTR5Level(string level, bool remastered = false)
     {
         TR5LevelControl control = new();
-        return control.Read(GetReadPath(level, TRGameVersion.TR5));
+        return control.Read(GetReadPath(level, TRGameVersion.TR5, remastered));
     }
 
     public static void ReadWriteLevel(string levelName, TRGameVersion version, bool remastered)

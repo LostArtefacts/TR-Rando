@@ -31,16 +31,27 @@ public class RoomTests : TestBase
     [TestMethod]
     [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
     [Description("Compare each room in each level before and after writing to ensure identical properties.")]
-    public void TestRoomIO(string levelName)
+    public void TestRoomIOClassic(string levelName)
     {
-        TestRoomIO(levelName, _roomCounts[levelName]);
+        TR5Level level = GetTR5Level(levelName, false);
+        TestRoomIO(level, _roomCounts[levelName]);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestRoomIORemastered(string levelName)
+    {
+        TR5Level level = GetTR5Level(levelName, true);
+        TestRoomIO(level, _roomCounts[levelName]);
     }
 
     [TestMethod]
     [Description("Add a room to test roomlet expansion and squashing.")]
-    public void TestRoomToRoomlet()
+    [DataRow(true)]
+    [DataRow(false)]
+    public void TestRoomToRoomlet(bool remastered)
     {
-        TR5Level level = GetTR5Level(TR5LevelNames.ROME);
+        TR5Level level = GetTR5Level(TR5LevelNames.ROME, remastered);
         TR5Room room = new()
         {
             AlternateGroup = 2,
@@ -185,9 +196,8 @@ public class RoomTests : TestBase
         CompareRooms(room, newRoom);
     }
 
-    private static void TestRoomIO(string levelName, int expectedRoomCount)
+    private static void TestRoomIO(TR5Level level, int expectedRoomCount)
     {
-        TR5Level level = GetTR5Level(levelName);
         Assert.AreEqual(expectedRoomCount, level.Rooms.Count);
         List<TR5Room> rooms = new(level.Rooms);
 

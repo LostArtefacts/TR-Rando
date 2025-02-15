@@ -9,4 +9,5 @@ public enum TRFileVersion : uint
     TR3b    = 0xFF180038,
     TR45    = 0x00345254, // classic
     TRR4    = 0x34585254, // remastered
+    TRR5    = 0x35585254,
 }

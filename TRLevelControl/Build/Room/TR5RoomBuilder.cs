@@ -8,19 +8,92 @@ public class TR5RoomBuilder
 {
     private static readonly string _xela = "XELA";
 
-    public static List<TR5Room> ReadRooms(TRLevelReader reader)
+    public static List<TR5Room> ReadRooms(TRLevelReader reader, bool remastered)
     {
-        uint numRooms = reader.ReadUInt32();
+        uint numRooms = remastered ? reader.ReadUInt16() : reader.ReadUInt32();
         List<TR5Room> rooms = new();
         for (int i = 0; i < numRooms; i++)
         {
-            rooms.Add(ReadRoom(reader));
+            rooms.Add(remastered ? ReadRemasteredRoom(reader) : ReadClassicRoom(reader));
         }
 
         return rooms;
     }
 
-    private static TR5Room ReadRoom(TRLevelReader reader)
+    private static TR5Room ReadRemasteredRoom(TRLevelReader reader)
+    {
+        TR5Room room = new()
+        {
+            Info = reader.ReadRoomInfo(TRGameVersion.TR4),
+        };
+
+        ushort numPortals = reader.ReadUInt16();
+        room.Portals = reader.ReadRoomPortals(numPortals);
+
+        room.NumZSectors = reader.ReadUInt16();
+        room.NumXSectors = reader.ReadUInt16();
+        room.Sectors = reader.ReadRoomSectors(room.NumXSectors * room.NumZSectors, TRGameVersion.TR5);
+
+        room.Colour = reader.ReadRGBA();
+
+        ushort numLights = reader.ReadUInt16();
+        room.Lights = ReadLights(reader, numLights);
+
+        int numFogBulbs = reader.ReadInt32();
+        Queue<TR5FogBulb> fogBulbs = new(ReadFogBulbs(reader, numFogBulbs));
+
+        for (int i = 0; i < room.Lights.Count && fogBulbs.Count > 0; i++)
+        {
+            if (room.Lights[i] is TR5FogBulb)
+            {
+                room.Lights[i] = fogBulbs.Dequeue();
+            }
+        }
+
+        ushort numStatics = reader.ReadUInt16();
+        room.StaticMeshes = ReadStaticMeshes(reader, numStatics);
+
+        room.AlternateRoom = reader.ReadInt16();
+        room.Flags = (TRRoomFlag)reader.ReadInt16();
+        room.WaterScheme = reader.ReadByte();
+        room.ReverbMode = (TRPSXReverbMode)reader.ReadByte();
+        room.AlternateGroup = reader.ReadByte();
+
+        uint numRoomlets = reader.ReadUInt32();
+        for (int i = 0; i < numRoomlets; i++)
+        {
+            ushort numVertices = reader.ReadUInt16();
+            reader.ReadUInt16(); // water verts
+            reader.ReadUInt16(); // shore verts
+            ushort numRectangles = reader.ReadUInt16();
+            ushort numTriangles = reader.ReadUInt16();
+            reader.ReadUInt16(); // water rects
+            reader.ReadUInt16(); // water tris
+            reader.ReadTR5Vertex(); // Box min
+            reader.ReadTR5Vertex(); // Box max
+
+            List<TR5RoomVertex> vertices = ReadVertices(reader, numVertices, true);
+            List<TRMeshFace> rects = reader.ReadMeshFaces(numRectangles, TRFaceType.Rectangle, TRGameVersion.TR5);
+            List<TRMeshFace> tris = reader.ReadMeshFaces(numTriangles, TRFaceType.Triangle, TRGameVersion.TR5);
+
+            foreach (TRMeshFace face in rects.Concat(tris))
+            {
+                for (int j = 0; j < face.Vertices.Count; j++)
+                {
+                    face.Vertices[j] += (ushort)room.Mesh.Vertices.Count;
+                }
+            }
+
+            room.Mesh.Vertices.AddRange(vertices);
+            room.Mesh.Rectangles.AddRange(rects);
+            room.Mesh.Triangles.AddRange(tris);
+        }
+
+        reader.ReadUInt32();
+        return room;
+    }
+
+    private static TR5Room ReadClassicRoom(TRLevelReader reader)
     {
         string xela = new(reader.ReadChars(4));
         Debug.Assert(xela == _xela);
@@ -118,7 +191,7 @@ public class TR5RoomBuilder
         reader.ReadUntil(dataStartPos + header.VerticesStartOffset);
         foreach (TR5Roomlet roomlet in roomlets)
         {
-            roomlet.Vertices = ReadVertices(reader, roomlet.NumVertices);
+            roomlet.Vertices = ReadVertices(reader, roomlet.NumVertices, false);
 
             if (room.Mesh.Vertices.Count > 0)
             {
@@ -293,7 +366,7 @@ public class TR5RoomBuilder
         return meshes;
     }
 
-    private static List<TR5RoomVertex> ReadVertices(TRLevelReader reader, long numVertices)
+    private static List<TR5RoomVertex> ReadVertices(TRLevelReader reader, long numVertices, bool remastered)
     {
         List<TR5RoomVertex> vertices = new();
         for (int i = 0; i < numVertices; i++)
@@ -309,22 +382,81 @@ public class TR5RoomBuilder
                     Z = (short)vertex.Z,
                 },
                 Normal = reader.ReadTR5Vertex(),
-                Colour = new(reader.ReadUInt32())
+                Colour = remastered ? reader.ReadRGBA() : new(reader.ReadUInt32())
             });
         }
         return vertices;
     }
 
-    public static void WriteRooms(TRLevelWriter writer, List<TR5Room> rooms)
+    public static void WriteRooms(TRLevelWriter writer, List<TR5Room> rooms, bool remastered)
     {
-        writer.Write((uint)rooms.Count);
-        foreach (TR5Room room in rooms)
+        if (remastered)
         {
-            WriteRoom(writer, room);
+            writer.Write((ushort)rooms.Count);
+            rooms.ForEach(r => WriteRemasteredRoom(writer, r));
+        }
+        else
+        {
+            writer.Write((uint)rooms.Count);
+            rooms.ForEach(r => WriteClassicRoom(writer, r));
         }
     }
 
-    private static void WriteRoom(TRLevelWriter writer, TR5Room room)
+    private static void WriteRemasteredRoom(TRLevelWriter writer, TR5Room room)
+    {
+        writer.Write(room.Info, TRGameVersion.TR4);
+        writer.Write((ushort)room.Portals.Count);
+        writer.Write(room.Portals);
+        writer.Write(room.NumZSectors);
+        writer.Write(room.NumXSectors);
+        writer.Write(room.Sectors, TRGameVersion.TR5);
+        writer.Write(room.Colour);
+
+        writer.Write((ushort)room.Lights.Count);
+        WriteLights(writer, room.Lights);
+
+        List<TR5FogBulb> fogBulbs = room.Lights.Where(l => l is TR5FogBulb).Cast<TR5FogBulb>().ToList();
+        writer.Write(fogBulbs.Count);
+        WriteFogBulbs(writer, fogBulbs);
+
+        writer.Write((ushort)room.StaticMeshes.Count);
+        WriteStaticMeshes(writer, room.StaticMeshes);
+
+        writer.Write(room.AlternateRoom);
+        writer.Write((short)room.Flags);
+        writer.Write((byte)room.WaterScheme);
+        writer.Write((byte)room.ReverbMode);
+        writer.Write(room.AlternateGroup);
+
+        writer.Write((uint)1); // One roomlet
+        writer.Write((ushort)room.Mesh.Vertices.Count);
+        writer.Write(Enumerable.Repeat((ushort)0, 2)); // waterVertCount, shoreVertCount
+        writer.Write((ushort)room.Mesh.Rectangles.Count);
+        writer.Write((ushort)room.Mesh.Triangles.Count);
+        writer.Write(Enumerable.Repeat((ushort)0, 2)); // waterRectCount, waterTriCount
+
+        // Min/max bounds
+        writer.Write(new TR5Vertex
+        {
+            X = TRConsts.Step4,
+            Y = room.Info.YTop,
+            Z = TRConsts.Step4,
+        });
+        writer.Write(new TR5Vertex
+        {
+            X = (room.NumXSectors - 1) * TRConsts.Step4 - 1,
+            Y = room.Info.YBottom,
+            Z = (room.NumZSectors - 1) * TRConsts.Step4 - 1,
+        });
+
+        WriteVertices(writer, room.Mesh.Vertices, true);
+        writer.Write(ConvertToMeshFaces(room.Mesh.Rectangles), TRGameVersion.TR5);
+        writer.Write(ConvertToMeshFaces(room.Mesh.Triangles), TRGameVersion.TR5);
+
+        writer.Write((uint)0);
+    }
+
+    private static void WriteClassicRoom(TRLevelWriter writer, TR5Room room)
     {
         TR5RoomHeader header = new()
         {
@@ -410,7 +542,7 @@ public class TR5RoomBuilder
         writer.Write(ConvertToMeshFaces(room.Mesh.Triangles), TRGameVersion.TR5);
 
         header.VerticesStartOffset = (uint)writer.BaseStream.Position;
-        WriteVertices(writer, room.Mesh.Vertices);
+        WriteVertices(writer, room.Mesh.Vertices, false);
     }
 
     private static void WriteHeader(TRLevelWriter writer, TR5RoomHeader header)
@@ -570,7 +702,7 @@ public class TR5RoomBuilder
         }
     }
 
-    private static void WriteVertices(TRLevelWriter writer, List<TR5RoomVertex> vertices)
+    private static void WriteVertices(TRLevelWriter writer, List<TR5RoomVertex> vertices, bool remastered)
     {
         foreach (TR5RoomVertex vertex in vertices)
         {
@@ -578,7 +710,14 @@ public class TR5RoomBuilder
             writer.Write((float)vertex.Vertex.Y);
             writer.Write((float)vertex.Vertex.Z);
             writer.Write(vertex.Normal);
-            writer.Write(vertex.Colour.ToARGB());
+            if (remastered)
+            {
+                writer.Write(vertex.Colour);
+            }
+            else
+            {
+                writer.Write(vertex.Colour.ToARGB());
+            }
         }
     }
 
