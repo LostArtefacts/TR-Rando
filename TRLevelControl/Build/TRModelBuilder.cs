@@ -10,6 +10,8 @@ public class TRModelBuilder<T>
     private readonly TRGameVersion _version;
     private readonly TRModelDataType _dataType;
     private readonly ITRLevelObserver _observer;
+    private readonly bool _remastered;
+         
 
     private List<TRAnimation> _animations;
     private List<TRAnimDispatch> _dispatches;
@@ -24,11 +26,12 @@ public class TRModelBuilder<T>
     private Dictionary<TRAnimDispatch, short> _dispatchToAnimMap;
     private Dictionary<TRAnimDispatch, short> _dispatchFrameBase;
 
-    public TRModelBuilder(TRGameVersion version, TRModelDataType dataType, ITRLevelObserver observer = null)
+    public TRModelBuilder(TRGameVersion version, TRModelDataType dataType, ITRLevelObserver observer = null, bool remastered = false)
     {
         _version = version;
         _dataType = dataType;
         _observer = observer;
+        _remastered = remastered;
     }
 
     public TRDictionary<T, TRModel> ReadModelData(TRLevelReader reader, IMeshProvider meshProvider)
@@ -197,7 +200,7 @@ public class TRModelBuilder<T>
                 Animation = reader.ReadUInt16()
             });
 
-            if (_version == TRGameVersion.TR5)
+            if (_version == TRGameVersion.TR5 && !_remastered)
             {
                 reader.ReadUInt16(); // Skip padding
             }
@@ -882,7 +885,7 @@ public class TRModelBuilder<T>
             writer.Write(placeholderModel.FrameOffset);
             writer.Write(placeholderModel.Animation);
 
-            if (_version == TRGameVersion.TR5)
+            if (_version == TRGameVersion.TR5 && !_remastered)
             {
                 writer.Write(_tr5ModelPadding);
             }

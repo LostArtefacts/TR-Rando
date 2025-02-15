@@ -16,13 +16,13 @@ public class TRSpriteBuilder<T> : ISpriteProvider<T>
         _version = version;
     }
 
-    public TRDictionary<T, TRSpriteSequence> ReadSprites(TRLevelReader reader)
+    public TRDictionary<T, TRSpriteSequence> ReadSprites(TRLevelReader reader, bool remastered = false)
     {
         if (_version >= TRGameVersion.TR4)
         {
             string sprMarker = new(reader.ReadChars(_sprMarker.Length));
             Debug.Assert(sprMarker == _sprMarker);
-            if (_version == TRGameVersion.TR5)
+            if (_version == TRGameVersion.TR5 && !remastered)
             {
                 byte end = reader.ReadByte();
                 Debug.Assert(end == 0);
@@ -55,12 +55,12 @@ public class TRSpriteBuilder<T> : ISpriteProvider<T>
         return sprites;
     }
 
-    public void WriteSprites(TRLevelWriter writer, TRDictionary<T, TRSpriteSequence> sprites)
+    public void WriteSprites(TRLevelWriter writer, TRDictionary<T, TRSpriteSequence> sprites, bool remastered = false)
     {
         if (_version >= TRGameVersion.TR4)
         {
             writer.Write(_sprMarker.ToCharArray());
-            if (_version == TRGameVersion.TR5)
+            if (_version == TRGameVersion.TR5 && !remastered)
             {
                 writer.Write((byte)0);
             }

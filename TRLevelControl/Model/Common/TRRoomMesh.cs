@@ -4,10 +4,10 @@ public class TRRoomMesh<T, V> : ICloneable
     where T : Enum
     where V : TRRoomVertex
 {
-    public List<V> Vertices { get; set; }
-    public List<TRFace> Rectangles { get; set; }
-    public List<TRFace> Triangles { get; set; }
-    public List<TRRoomSprite<T>> Sprites { get; set; }
+    public List<V> Vertices { get; set; } = new();
+    public List<TRFace> Rectangles { get; set; } = new();
+    public List<TRFace> Triangles { get; set; } = new();
+    public List<TRRoomSprite<T>> Sprites { get; set; } = new();
 
     public IEnumerable<TRFace> Faces => Rectangles.Concat(Triangles);
 

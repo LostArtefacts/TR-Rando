@@ -17,13 +17,13 @@ public class TRTextureBuilder
         _observer = observer;
     }
 
-    public List<TRObjectTexture> ReadObjectTextures(TRLevelReader reader)
+    public List<TRObjectTexture> ReadObjectTextures(TRLevelReader reader, bool remastered = false)
     {
         if (_version >= TRGameVersion.TR4)
         {
             string texMarker = new(reader.ReadChars(_texMarker.Length));
             Debug.Assert(texMarker == _texMarker);
-            if (_version == TRGameVersion.TR5)
+            if (_version == TRGameVersion.TR5 && !remastered)
             {
                 byte end = reader.ReadByte();
                 Debug.Assert(end == 0);
@@ -35,7 +35,7 @@ public class TRTextureBuilder
 
         for (int i = 0; i < numTextures; i++)
         {
-            textures.Add(Read(reader, i));
+            textures.Add(Read(reader, i, remastered));
         }
 
         return textures;
@@ -66,12 +66,12 @@ public class TRTextureBuilder
         return textures;
     }
 
-    public void Write(TRLevelWriter writer, List<TRObjectTexture> textures)
+    public void Write(TRLevelWriter writer, List<TRObjectTexture> textures, bool remastered = false)
     {
         if (_version >= TRGameVersion.TR4)
         {
             writer.Write(_texMarker.ToCharArray());
-            if (_version == TRGameVersion.TR5)
+            if (_version == TRGameVersion.TR5 && !remastered)
             {
                 writer.Write((byte)0);
             }
@@ -81,7 +81,7 @@ public class TRTextureBuilder
 
         for (int i = 0; i < textures.Count; i++)
         {
-            Write(writer, textures[i], i);
+            Write(writer, textures[i], i, remastered);
         }
     }
 
@@ -118,7 +118,7 @@ public class TRTextureBuilder
         }
     }
 
-    private TRObjectTexture Read(TRLevelReader reader, int index)
+    private TRObjectTexture Read(TRLevelReader reader, int index, bool remastered)
     {
         TRObjectTexture texture = new()
         {
@@ -155,7 +155,7 @@ public class TRTextureBuilder
             reader.ReadUInt32();
             reader.ReadUInt32();
 
-            if (_version == TRGameVersion.TR5)
+            if (_version == TRGameVersion.TR5 && !remastered)
             {
                 // Padding
                 reader.ReadUInt16();
@@ -165,7 +165,7 @@ public class TRTextureBuilder
         return texture;
     }
 
-    private void Write(TRLevelWriter writer, TRObjectTexture texture, int index)
+    private void Write(TRLevelWriter writer, TRObjectTexture texture, int index, bool remastered)
     {
         TRBlendingMode blendingMode = texture.BlendingMode;
         if ((blendingMode == TRBlendingMode.AlphaBlending && _version < TRGameVersion.TR3)
@@ -212,7 +212,7 @@ public class TRTextureBuilder
             writer.Write(originalUV.Item2);
 
             Size size = texture.Size;
-            if (_version == TRGameVersion.TR4)
+            if (_version == TRGameVersion.TR4 || remastered)
             {
                 writer.Write((uint)(size.Width - 1));
                 writer.Write((uint)(size.Height - 1));
@@ -222,8 +222,11 @@ public class TRTextureBuilder
                 writer.Write((uint)((size.Width - 1) << 16));
                 writer.Write((uint)((size.Height - 1) << 16));
 
-                // Padding
-                writer.Write((ushort)0);
+                if (!remastered)
+                {
+                    // Padding
+                    writer.Write((ushort)0);
+                }
             }
         }
     }

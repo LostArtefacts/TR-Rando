@@ -200,6 +200,17 @@ public class TRLevelReader : BinaryReader
         return colours;
     }
 
+    public TRColour4 ReadRGBA()
+    {
+        return new()
+        {
+            Red = ReadByte(),
+            Green = ReadByte(),
+            Blue = ReadByte(),
+            Alpha = ReadByte()
+        };
+    }
+
     public TR5Colour ReadTR5Colour()
     {
         return new()
