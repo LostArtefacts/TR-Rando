@@ -8,6 +8,8 @@ public interface ITRLevelObserver
     void OnChunkWritten(long startPosition, long endPosition, TRChunkType chunkType, byte[] data);
     bool UseTR5RawRooms { get; }
     bool UseOriginalFloorData { get; }
+    void OnFloorDataRead(ushort[] data);
+    ushort[] GetFloorData();
     void OnRawTR5RoomsRead(List<byte> data);
     List<byte> GetTR5Rooms();
     void OnMeshPaddingRead(uint meshPointer, List<byte> values);

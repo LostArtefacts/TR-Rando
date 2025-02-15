@@ -17,6 +17,7 @@ public class TRFDBuilder
     {
         uint numFloorData = reader.ReadUInt32();
         ushort[] data = reader.ReadUInt16s(numFloorData);
+        _observer?.OnFloorDataRead(data);
 
         FDControl floorData = new(_version, _observer, data.Length == 0 ? (ushort)0 : data[0]);
         if (_observer?.UseOriginalFloorData ?? false)
