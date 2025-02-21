@@ -207,6 +207,15 @@ public class TRModelBuilder<T>
         }
 
         List<PlaceholderModel> animatedModels = _placeholderModels.FindAll(m => m.Animation != TRConsts.NoAnimation);
+        if (_dataType == TRModelDataType.PDP && _version == TRGameVersion.TR5)
+        {
+            // TR5 PDP has entries for what seem like null models, with no animations, frames or meshes. These are not setup in the conventional way
+            // per OG, with jumps in anim idx, so we address this here to avoid skewing other animation counts below.
+            List<PlaceholderModel> invalidAnimModels = animatedModels.FindAll(m => m.ID > (uint)TR5Type.Lara && m.Animation == 0);
+            invalidAnimModels.ForEach(m => m.Animation = TRConsts.NoAnimation);
+            animatedModels.RemoveAll(invalidAnimModels.Contains);
+        }
+
         for (int i = 0; i < animatedModels.Count; i++)
         {
             PlaceholderModel model = animatedModels[i];
@@ -511,6 +520,14 @@ public class TRModelBuilder<T>
                     : GetSingleRotation(rot0);
             }
 
+            if (_dataType == TRModelDataType.PDP && _version > TRGameVersion.TR3)
+            {
+                // Some TR4+ rots are marked as all despite only having one value set, so when we write
+                // them back, we restore this mode to keep tests happy. If changing values otherwise, care
+                // should be taken to set the mode to Auto.
+                rot.Mode = rotMode;
+            }
+
             switch (rotMode)
             {
                 case TRAngleMode.X:
@@ -548,16 +565,42 @@ public class TRModelBuilder<T>
         }
     }
 
-    private void DeconstructModel(T type, TRModel model)
+    private PlaceholderModel CreateDeconstructedModel(T type, TRModel model)
     {
-        PlaceholderModel placeholderModel = new()
+        PlaceholderModel placeholder = new()
         {
             ID = (uint)(object)type,
-            Animation = model.Animations.Count == 0 ? TRConsts.NoAnimation : (ushort)_placeholderAnimations.Count,
-            FrameOffset = (_dataType == TRModelDataType.PDP || _observer == null)
-                && model.Animations.Count == 0 ? 0 : (uint)_frames.Count * sizeof(short),
             NumMeshes = (ushort)model.Meshes.Count,
         };
+
+        if (model.Animations.Count == 0)
+        {
+            if (_dataType == TRModelDataType.PDP && _version == TRGameVersion.TR5 && model.Meshes.Count == 0)
+            {
+                placeholder.Animation = 0;
+                placeholder.IsNullTR5Model = true;
+            }
+            else
+            {
+                placeholder.Animation = TRConsts.NoAnimation;
+            }
+
+            placeholder.FrameOffset = _dataType == TRModelDataType.PDP || _observer == null
+                ? 0
+                : (uint)_frames.Count * sizeof(short);
+        }
+        else
+        {
+            placeholder.Animation = (ushort)_placeholderAnimations.Count;
+            placeholder.FrameOffset = (uint)_frames.Count * sizeof(short);
+        }
+
+        return placeholder;
+    }
+
+    private void DeconstructModel(T type, TRModel model)
+    {
+        PlaceholderModel placeholderModel = CreateDeconstructedModel(type, model);
         _placeholderModels.Add(placeholderModel);
 
         _trees.AddRange(model.MeshTrees);
@@ -880,8 +923,8 @@ public class TRModelBuilder<T>
 
             writer.Write(placeholderModel.ID);
             writer.Write(placeholderModel.NumMeshes);
-            writer.Write(startingMesh);
-            writer.Write(treePointer);
+            writer.Write(placeholderModel.IsNullTR5Model ? (ushort)0 : startingMesh);
+            writer.Write(placeholderModel.IsNullTR5Model ? 0 : treePointer);
             writer.Write(placeholderModel.FrameOffset);
             writer.Write(placeholderModel.Animation);
 
@@ -897,6 +940,11 @@ public class TRModelBuilder<T>
 
     private TRAngleMode GetMode(TRAnimFrameRotation rot)
     {
+        if (rot.Mode != TRAngleMode.Auto)
+        {
+            return rot.Mode;
+        }
+
         if (rot.X == 0 && rot.Y == 0)
         {
             // OG TR2+ levels (and TRR levels) use Z here, PDP uses X. Makes no difference
@@ -961,6 +1009,7 @@ public class TRModelBuilder<T>
         public uint FrameOffset { get; set; }
         public ushort Animation { get; set; }
         public int AnimCount { get; set; }
+        public bool IsNullTR5Model { get; set; }
     }
 
     class PlaceholderAnimation
