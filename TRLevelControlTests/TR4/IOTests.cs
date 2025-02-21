@@ -26,6 +26,13 @@ public class IOTests : TestBase
 
     [TestMethod]
     [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
+    public void TestPDPReadWrite(string levelName)
+    {
+        ReadWritePDP(levelName, TRGameVersion.TR4);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(GetAllLevels), DynamicDataSourceType.Method)]
     public void TestAgressiveFloorData(string levelName)
     {
         TR4Level level = GetTR4Level(levelName);

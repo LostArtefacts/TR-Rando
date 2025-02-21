@@ -202,6 +202,20 @@ public class TestBase
                 control3.Write(models3, outputStream);
                 break;
 
+            case TRGameVersion.TR4:
+                observer = new TR4Observer(true);
+                TR4PDPControl control4 = new(observer);
+                TRDictionary<TR4Type, TRModel> models4 = control4.Read(inputStream);
+                control4.Write(models4, outputStream);
+                break;
+
+            case TRGameVersion.TR5:
+                observer = new TR5Observer(true);
+                TR5PDPControl control5 = new(observer);
+                TRDictionary<TR5Type, TRModel> models5 = control5.Read(inputStream);
+                control5.Write(models5, outputStream);
+                break;
+
             default:
                 throw new NotImplementedException();
         }
