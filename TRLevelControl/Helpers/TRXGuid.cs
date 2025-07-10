@@ -478,6 +478,9 @@ public static class TRXGuid
             [(int)TR2Type.LaraCutscenePlacement_N]  = new("604407b7-fce9-4042-9268-9269a191f615"),
             [(int)TR2Type.ShotgunShowerAnimation_H] = new("c3c56053-16cd-4bff-9892-dc2f816d8897"),
             [(int)TR2Type.DragonExplosionEmitter_N] = new("78bde34c-13f0-4fb0-8407-c7dfc3c2e3fb"),
+            [(int)TR2Type.Bear]                     = new("fbf6c19f-80aa-4790-baba-9dadb09d4f82"),
+            [(int)TR2Type.Wolf]                     = new("6b3b8413-7ac3-4728-9e4b-e15e64e1e40c"),
+            [(int)TR2Type.MonkWithNoShadow]         = new("28271d92-b65b-44a2-9156-24ab1a7c41b2"),
         },
     };
 }
