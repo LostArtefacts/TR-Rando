@@ -275,10 +275,15 @@ public enum TR2Type : uint
     ShotgunShowerAnimation_H = 263,
     DragonExplosionEmitter_N = 264,
 
-    // Scenery
-    Plant0                   = 265,
-    Plant1                   = 266,
-    Plant2                   = 267,
+    // TRX
+    Bear                     = 265,
+    Wolf                     = 266,
+    MonkWithNoShadow         = 267,
+
+    // Scenery - TODO: get rid of defined statics
+    Plant0                   = Bear,
+    Plant1                   = Wolf,
+    Plant2                   = MonkWithNoShadow,
     Plant3                   = 268,
     Plant4                   = 269,
     Plant5                   = 270,
@@ -326,7 +331,7 @@ public enum TR2Type : uint
     Debris7                  = 312,
     Debris8                  = 313,
     Debris9                  = 314,
-    SceneryBase              = Plant0,
+    SceneryBase              = Bear,
 
     // Alias entries
     BengalTiger                   = 1000,
