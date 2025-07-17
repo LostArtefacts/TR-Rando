@@ -88,18 +88,18 @@ class Program
         }
         else if (levelType.EndsWith(".phd"))
         {
-            ExportAllTextures(args[0], _reader1.Read(args[0]), mode);
+            ExportAllTextures(args[0], _reader1.Read(args[0]), mode, args);
         }
         else if (levelType.EndsWith(".tr2"))
         {
             TRFileVersion version = DetectVersion(args[0]);
             if (version == TRFileVersion.TR2)
             {
-                ExportAllTextures(args[0], _reader2.Read(args[0]), mode);
+                ExportAllTextures(args[0], _reader2.Read(args[0]), mode, args);
             }
             else if (version == TRFileVersion.TR3a || version == TRFileVersion.TR3b)
             {
-                ExportAllTextures(args[0], _reader3.Read(args[0]), mode);
+                ExportAllTextures(args[0], _reader3.Read(args[0]), mode, args);
             }
         }
         else if (levelType == "tr1")
@@ -108,7 +108,7 @@ class Program
             {
                 if (File.Exists(lvl))
                 {
-                    ExportAllTextures(lvl, _reader1.Read(lvl), mode);
+                    ExportAllTextures(lvl, _reader1.Read(lvl), mode, args);
                 }
             }
         }
@@ -118,7 +118,7 @@ class Program
             {
                 if (File.Exists(lvl))
                 {
-                    ExportAllTextures(lvl, _reader1.Read(lvl), mode);
+                    ExportAllTextures(lvl, _reader1.Read(lvl), mode, args);
                 }
             }
         }
@@ -128,7 +128,7 @@ class Program
             {
                 if (File.Exists(lvl))
                 {
-                    ExportAllTextures(lvl, _reader2.Read(lvl), mode);
+                    ExportAllTextures(lvl, _reader2.Read(lvl), mode, args);
                 }
             }
         }
@@ -138,7 +138,7 @@ class Program
             {
                 if (File.Exists(lvl))
                 {
-                    ExportAllTextures(lvl, _reader3.Read(lvl), mode);
+                    ExportAllTextures(lvl, _reader3.Read(lvl), mode, args);
                 }
             }
         }
@@ -148,7 +148,7 @@ class Program
             {
                 if (File.Exists(lvl))
                 {
-                    ExportAllTextures(lvl, _reader3.Read(lvl), mode);
+                    ExportAllTextures(lvl, _reader3.Read(lvl), mode, args);
                 }
             }
         }
@@ -158,7 +158,7 @@ class Program
             {
                 if (File.Exists(lvl))
                 {
-                    ExportAllTextures(lvl, _reader2.Read(lvl), mode);
+                    ExportAllTextures(lvl, _reader2.Read(lvl), mode, args);
                 }
             }
         }
@@ -170,7 +170,7 @@ class Program
         return (TRFileVersion)reader.ReadUInt32();
     }
 
-    static void ExportAllTextures(string lvl, TR1Level inst, Mode mode)
+    static void ExportAllTextures(string lvl, TR1Level inst, Mode mode, string[] args)
     {
         switch (mode)
         {
@@ -181,7 +181,7 @@ class Program
                 HtmlExporter.Export(inst, lvl);
                 break;
             case Mode.Faces:
-                FaceMapper.DrawFaces(inst, lvl, GetRoomArgs());
+                FaceMapper.DrawFaces(inst, lvl, GetRoomArgs(args[2], inst.Rooms.Count), args.Length > 3);
                 break;
             case Mode.Dependencies:
                 DependencyExporter.Export(inst, lvl);
@@ -192,7 +192,7 @@ class Program
         }
     }
 
-    static void ExportAllTextures(string lvl, TR2Level inst, Mode mode)
+    static void ExportAllTextures(string lvl, TR2Level inst, Mode mode, string[] args)
     {
         switch (mode)
         {
@@ -206,10 +206,10 @@ class Program
                 SegmentExporter.Export(inst, lvl);
                 break;
             case Mode.Faces:
-                FaceMapper.DrawFaces(inst, lvl, GetRoomArgs());
+                FaceMapper.DrawFaces(inst, lvl, GetRoomArgs(args[2], inst.Rooms.Count), args.Length > 3);
                 break;
             case Mode.Boxes:
-                FaceMapper.DrawBoxes(inst, lvl, GetRoomArgs());
+                FaceMapper.DrawBoxes(inst, lvl, GetRoomArgs(args[2], inst.Rooms.Count));
                 break;
             case Mode.Dependencies:
                 DependencyExporter.Export(inst, lvl);
@@ -220,7 +220,7 @@ class Program
         }
     }
 
-    static void ExportAllTextures(string lvl, TR3Level inst, Mode mode)
+    static void ExportAllTextures(string lvl, TR3Level inst, Mode mode, string[] args)
     {
         switch (mode)
         {
@@ -234,7 +234,7 @@ class Program
                 SegmentExporter.Export(inst, lvl);
                 break;
             case Mode.Faces:
-                FaceMapper.DrawFaces(inst, lvl, GetRoomArgs());
+                FaceMapper.DrawFaces(inst, lvl, GetRoomArgs(args[2], inst.Rooms.Count), args.Length > 3);
                 break;
             case Mode.Dependencies:
                 DependencyExporter.Export(inst, lvl);
@@ -245,18 +245,16 @@ class Program
         }
     }
 
-    static int[] GetRoomArgs()
+    static IEnumerable<int> GetRoomArgs(string arg, int fallbackCount)
     {
-        string[] args = Environment.GetCommandLineArgs()[3].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-        List<int> rooms = new();
-        foreach (string rm in args)
+        if (string.Equals(arg, "all", StringComparison.CurrentCultureIgnoreCase))
         {
-            if (int.TryParse(rm.Trim(), out int r))
-            {
-                rooms.Add(r);
-            }
+            return Enumerable.Range(0, fallbackCount);
         }
-        return rooms.ToArray();
+        return arg.Split(',', StringSplitOptions.RemoveEmptyEntries)
+            .Select(i => i.Trim())
+            .Where(i => int.TryParse(i, out int _))
+            .Select(i => int.Parse(i));
     }
 
     static void Usage()
@@ -280,7 +278,7 @@ class Program
         Console.WriteLine("\tpng      - Export each texture tile to PNG. Default Option.");
         Console.WriteLine("\thtml     - Export all tiles to a single HTML document.");
         Console.WriteLine("\tsegments - Export each object and sprite texture to individual PNG files.");
-        Console.WriteLine("\tfaces    - Create a new texture for every face in a room and mark its index.");
+        Console.WriteLine("\tfaces    - Create a new texture for every face in a room and mark its index. ALL can be used in place of room number list. Add additional arg to use black background.");
         Console.WriteLine("\tboxes    - Similar to faces, but mark box extents for a list of rooms.");
         Console.WriteLine("\tdepend   - Calculate which textures are shared between models and generate the JSON used in the main randomizer.");
         Console.WriteLine("\tdds      - Convert DDS files to PNG.");
