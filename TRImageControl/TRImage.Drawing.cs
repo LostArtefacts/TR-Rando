@@ -185,19 +185,17 @@ public partial class TRImage
         ReplaceFrom(img);
     }
 
+    public static Size MeasureString(string text, string fontName, float size)
+    {
+        var options = GetTextOptions(fontName, size);
+        var box = TextMeasurer.MeasureSize(text, options);
+        return new((int)box.Width, (int)box.Height);
+    }
+
     public void DrawString(string text, string fontName, float size, Color colour, int x, int y)
     {
-        if (!SystemFonts.TryGet(fontName, out FontFamily fontFamily))
-        {
-            throw new Exception($"Couldn't find font {fontName}");
-        }
-
-        Font font = fontFamily.CreateFont(size, FontStyle.Regular);
-        RichTextOptions options = new(font)
-        {
-            Origin = new(x, y),
-            Dpi = 72
-        };
+        var options = GetTextOptions(fontName, size);
+        options.Origin = new(x, y);
 
         using var img = ToImage();
         img.Mutate(ctx =>
@@ -206,5 +204,19 @@ public partial class TRImage
         });
 
         ReplaceFrom(img);
+    }
+
+    private static RichTextOptions GetTextOptions(string fontName, float size)
+    {
+        if (!SystemFonts.TryGet(fontName, out FontFamily fontFamily))
+        {
+            throw new Exception($"Couldn't find font {fontName}");
+        }
+
+        var font = fontFamily.CreateFont(size, FontStyle.Regular);
+        return new(font)
+        {
+            Dpi = 72,
+        };
     }
 }
