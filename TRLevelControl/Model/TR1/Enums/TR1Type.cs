@@ -200,6 +200,11 @@ public enum TR1Type : uint
     Unused04               = 187,
     Unused05               = 188,
     
+    // TR1X
+    Skybox_H               = Unused01,
+    PickupAid_S_H          = Unused02,
+    Glow_S_H               = Unused03,
+
     LaraPonytail_H_U       = 189,
     FontGraphics_S_H       = 190,
 
