@@ -147,13 +147,11 @@ public class TRTextureBuilder
 
         if (_version >= TRGameVersion.TR4)
         {
-            uint originalU = reader.ReadUInt32();
-            uint originalV = reader.ReadUInt32();
-            _observer?.OnOrignalUVRead(index, new(originalU, originalV));
-
-            // Width-1 and Height-1
-            reader.ReadUInt32();
-            reader.ReadUInt32();
+            // These values are U,V,W-1 and H-1 but are seemingly discarded in-game as altering has no effect.
+            // Width and height generally match actual tex size in all but a couple of cases in TR4R.
+            // Just observe for tests.
+            var uv = reader.ReadUInt32s(4);
+            _observer?.OnOriginalUVRead(index, uv);
 
             if (_version == TRGameVersion.TR5 && !remastered)
             {
@@ -206,16 +204,16 @@ public class TRTextureBuilder
 
         if (_version >= TRGameVersion.TR4)
         {
-            // Discarded in game, so only written back as OG for tests.
-            Tuple<uint, uint> originalUV = _observer?.GetOrignalUV(index) ?? new(0, 0);
-            writer.Write(originalUV.Item1);
-            writer.Write(originalUV.Item2);
-
             Size size = texture.Size;
+            var uv = _observer?.GetOriginalUV(index)
+                ?? [0, 0, (uint)size.Width - 1, (uint)size.Height - 1];
+            writer.Write(uv[0]);
+            writer.Write(uv[1]);
+            
             if (_version == TRGameVersion.TR4 || remastered)
             {
-                writer.Write((uint)(size.Width - 1));
-                writer.Write((uint)(size.Height - 1));
+                writer.Write(uv[2]);
+                writer.Write(uv[3]);
             }
             else
             {
