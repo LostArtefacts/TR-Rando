@@ -85,10 +85,10 @@ public class ObserverBase : ITRLevelObserver
     public virtual ushort? GetBadOverlap()
         => null;
 
-    public virtual void OnOrignalUVRead(int index, Tuple<uint, uint> uv)
+    public virtual void OnOriginalUVRead(int index, uint[] uv)
     { }
 
-    public virtual Tuple<uint, uint> GetOrignalUV(int index)
+    public virtual uint[] GetOriginalUV(int index)
         => null;
 
     public virtual void OnSampleIndicesRead(uint[] sampleIndices)
