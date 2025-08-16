@@ -4,7 +4,7 @@ using TRLevelControl;
 
 namespace TRImageControl.Packing;
 
-public class DefaultTexturePacker : AbstractPacker<TRTextile, TRTextileRegion>
+public class DefaultTexturePacker : BasePacker<TRTextile, TRTextileRegion>
 {
     public DefaultTexturePacker()
     {
