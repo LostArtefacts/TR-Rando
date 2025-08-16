@@ -7,9 +7,9 @@ using TRLevelControl.Model;
 
 namespace TRImageControl.Packing;
 
-public abstract class TRTexturePacker : AbstractPacker<TRTextile, TRTextileRegion>
+public abstract class TRTexturePacker : BasePacker<TRTextile, TRTextileRegion>
 {
-    private readonly List<TRTextileSegment> _allSegments;
+    private readonly List<TRTextileSegment> _allSegments = [];
     public abstract int NumLevelImages { get; }
 
     public TRTexturePacker(int maximumTiles)
@@ -27,8 +27,6 @@ public abstract class TRTexturePacker : AbstractPacker<TRTextile, TRTextileRegio
             GroupMode = PackingGroupMode.None,
             StartMethod = PackingStartMethod.EndTile
         };
-
-        _allSegments = new();
     }
 
     protected void LoadLevel()

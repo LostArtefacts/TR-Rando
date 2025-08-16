@@ -1,7 +1,7 @@
 ﻿using BCnEncoder.Decoder;
 using BCnEncoder.Shared;
 using BCnEncoder.Shared.ImageFiles;
-using Microsoft.Toolkit.HighPerformance;
+using CommunityToolkit.HighPerformance;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Gif;
 using SixLabors.ImageSharp.Formats.Jpeg;
