@@ -140,9 +140,23 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
 
     private void ApplyPostRandomization(TR2RCombinedLevel level)
     {
+        AdjustDivingAreaEnd(level);
         RestoreHSHDog(level);
         MakeChickensUnconditional(level);
         AddUnarmedItems(level);
+    }
+
+    private static void AdjustDivingAreaEnd(TR2RCombinedLevel level)
+    {
+        if (!level.Is(TR2LevelNames.DA))
+        {
+            return;
+        }
+
+        // TR2R crashes at the end of DA in some cases because of presumably hard-coded dying monk
+        // checks. Change the monk's type to allow environment mods to detect the change and make
+        // further adjustments.
+        level.Data.Entities[117].TypeID = TR2Type.PushButtonSwitch;
     }
 
     private static void RestoreHSHDog(TR2RCombinedLevel level)

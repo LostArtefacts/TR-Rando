@@ -2587,6 +2587,77 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If the end monk is no longer of that type, it's been done to avoid TR2R crashing. Add further tweaks to end the level.",
+        "ConditionType": 0,
+        "EntityIndex": 117,
+        "EntityType": 256
+      },
+      "OnFalse": [
+        {
+          "EMType": 71,
+          "Tags": [
+            13
+          ],
+          "Locations": [
+            {
+              "X": 54784,
+              "Y": 3072,
+              "Z": 61952,
+              "Room": 5
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 117
+          }
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 117,
+          "NewEntityType": 103
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 116,
+          "NewEntityType": 67
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 117,
+          "TargetLocation": {
+            "X": 55808,
+            "Y": 4608,
+            "Z": 61952,
+            "Room": 77
+          }
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 116,
+          "TargetLocation": {
+            "X": 57856,
+            "Y": 5632,
+            "Z": 61952,
+            "Room": 77
+          }
+        },
+        {
+          "EMType": 61,
+          "EntityLocation": 117,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": 117,
+            "Actions": [
+              {
+                "Action": 7
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],
