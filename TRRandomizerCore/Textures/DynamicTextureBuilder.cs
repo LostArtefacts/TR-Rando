@@ -46,7 +46,7 @@ public class DynamicTextureBuilder
     {
         TR1Type.LavaParticles_S_H, TR1Type.Flame_S_H, TR1Type.Explosion1_S_H,
         TR1Type.DartEffect_S_H, TR1Type.WaterRipples1_S_H, TR1Type.WaterRipples2_S_H,
-        TR1Type.FontGraphics_S_H, TR1Type.Ricochet_S_H, TR1Type.Sparkles_S_H
+        TR1Type.FontGraphics_S_H, TR1Type.Ricochet_S_H, TR1Type.Sparkles_S_H, TR1Type.PickupAid_S_H
     };
 
     public TextureMonitor<TR1Type> TextureMonitor { get; set; }

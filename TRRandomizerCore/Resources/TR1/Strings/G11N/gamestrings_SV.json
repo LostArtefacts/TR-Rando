@@ -28,124 +28,126 @@
       "UwU",
       "Ändra saker"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Doktor!",
-      "Tjockt medicinpack",
-      "Hel hälsa givare",
-      "Mega",
-      "Bättre än ett litet medicinpack"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Du borde gå norr",
-      "Snurrig sak",
-      "Bara en magnet",
-      "Funkar detta?",
-      "Vem använder det här?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Ergonomi",
-      "Hur man spelar",
-      "Tangentbord är bäst",
-      "Kontroller är bäst",
-      "Vilken knapp är det?"
-    ],
-    "INV_ITEM_DETAILS": [
-      "John Lennon kostym",
-      "Solglasögon",
-      "/o-o/",
-      "Rosa färgade glasögon",
-      "Glasögon"
-    ],
-    "INV_ITEM_GAME": [
-      "ID",
-      "Resedokument",
-      "Referenser",
-      "Pixelerad bok",
-      "Pass"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Slicka inte",
-      "För tungt att bära",
-      "Fel material",
-      "Lite giftigt",
-      "Lägg på Midas hand"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Bättre pistoler",
-      "Pistoler i svart",
-      "Ganska tråkig",
-      "Skada per sekund",
-      "Något djupare ljud"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Glass clip",
-      "Hershey bar",
-      "50 kulor",
-      "Choklad",
-      "Inte lika bra som Uzi klipp"
-    ],
-    "INV_ITEM_MEDI": [
-      "Inte tjockt medicinpack",
-      "Mini",
-      "Halv hälsa givare",
-      "Det är något",
-      "Värre än ett stort medicinpack"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Pistolen",
-      "Svagaste builden",
-      "Gamle trofast",
-      "Vem behöver ammunition?",
-      "Oändlig pew pew"
-    ],
-    "INV_ITEM_SCION": [
-      "Rund sak",
-      "Skjut mig inte",
-      "Du behöver tre",
-      "Det är skii-on",
-      "Det är saj-on"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Helt ackurat",
-      "Bara använd pistoler",
-      "Bästa skadan",
-      "Klumpigt",
-      "Stor bang bazooka"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Inte tillräckligt med ammunition",
-      "Bara 2 patroner var",
-      "Definition av träffsäkerhet",
-      "Inte värt att ta upp",
-      "Knall patron"
-    ],
-    "INV_ITEM_SOUND": [
-      "Mixer",
-      "Tyst eller högt?",
-      "catJAM",
-      "Hörlurar",
-      "Ljud polisen"
-    ],
-    "INV_ITEM_UZI": [
-      "RATATATATATA",
-      "MAC-10",
-      "Maskingevär",
-      "Pew pew",
-      "Behöver nerf"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Bästa ammunitionen",
-      "100 kulor",
-      "Dessa träffar iaf fienden",
-      "Ammunition chillar i urgamla gravar",
-      "Pew pew ammunition"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "Du är hisnande",
       "För närvarande värdelös",
       "Rädda våra själar",
       "Personligt sparande",
       "Spara över mig"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Inte tjockt medicinpack",
+      "Mini",
+      "Halv hälsa givare",
+      "Det är något",
+      "Värre än ett stort medicinpack"
+    ],
+    "large_medipack": [
+      "Doktor!",
+      "Tjockt medicinpack",
+      "Hel hälsa givare",
+      "Mega",
+      "Bättre än ett litet medicinpack"
+    ],
+    "compass": [
+      "Du borde gå norr",
+      "Snurrig sak",
+      "Bara en magnet",
+      "Funkar detta?",
+      "Vem använder det här?"
+    ],
+    "controls": [
+      "Ergonomi",
+      "Hur man spelar",
+      "Tangentbord är bäst",
+      "Kontroller är bäst",
+      "Vilken knapp är det?"
+    ],
+    "graphics": [
+      "John Lennon kostym",
+      "Solglasögon",
+      "/o-o/",
+      "Rosa färgade glasögon",
+      "Glasögon"
+    ],
+    "passport": [
+      "ID",
+      "Resedokument",
+      "Referenser",
+      "Pixelerad bok",
+      "Pass"
+    ],
+    "lead_bar": [
+      "Slicka inte",
+      "För tungt att bära",
+      "Fel material",
+      "Lite giftigt",
+      "Lägg på Midas hand"
+    ],
+    "magnums": [
+      "Bättre pistoler",
+      "Pistoler i svart",
+      "Ganska tråkig",
+      "Skada per sekund",
+      "Något djupare ljud"
+    ],
+    "magnums_ammo": [
+      "Glass clip",
+      "Hershey bar",
+      "50 kulor",
+      "Choklad",
+      "Inte lika bra som Uzi klipp"
+    ],
+    "pistols": [
+      "Pistolen",
+      "Svagaste builden",
+      "Gamle trofast",
+      "Vem behöver ammunition?",
+      "Oändlig pew pew"
+    ],
+    "scion": [
+      "Rund sak",
+      "Skjut mig inte",
+      "Du behöver tre",
+      "Det är skii-on",
+      "Det är saj-on"
+    ],
+    "shotgun": [
+      "Helt ackurat",
+      "Bara använd pistoler",
+      "Bästa skadan",
+      "Klumpigt",
+      "Stor bang bazooka"
+    ],
+    "shotgun_ammo": [
+      "Inte tillräckligt med ammunition",
+      "Bara 2 patroner var",
+      "Definition av träffsäkerhet",
+      "Inte värt att ta upp",
+      "Knall patron"
+    ],
+    "sound": [
+      "Mixer",
+      "Tyst eller högt?",
+      "catJAM",
+      "Hörlurar",
+      "Ljud polisen"
+    ],
+    "uzis": [
+      "RATATATATATA",
+      "MAC-10",
+      "Maskingevär",
+      "Pew pew",
+      "Behöver nerf"
+    ],
+    "uzis_ammo": [
+      "Bästa ammunitionen",
+      "100 kulor",
+      "Dessa träffar iaf fienden",
+      "Ammunition chillar i urgamla gravar",
+      "Pew pew ammunition"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Vilcabanga Staden"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Qwop nyckel",
           "Varg nyckel",
           "Glöm inte Idolen",
           "Fly vargarna för fler vargar",
           "Grej till höger"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Docka",
           "Indiana's figur",
           "Antagligen värdefullt",
@@ -201,7 +203,7 @@
         "Dinosauriefristad"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 är det magiska numret",
           "KUGGERS",
           "Kugghjul",
@@ -219,7 +221,7 @@
         "Lara har sönder saker"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 är det magiska numret",
           "KUGGERS",
           "Kugghjul",
@@ -237,28 +239,28 @@
         "En mängd olika hål"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Vatten nyckel",
           "Jag är faktiskt Romare",
           "Falsk Poseidon",
           "Hela vägen ner för dig",
           "Låt oss simma"
         ],
-        "key2": [
+        "Key2": [
           "Många många kartor",
           "En sann dam skjuter alltid",
           "Jävla gorilla",
           "Gigantisk sten nyckel",
           "Glad att du inte blev mosad"
         ],
-        "key3": [
+        "Key3": [
           "Akta ditt steg",
           "Inte ens en gud",
           "Dags för en promenad",
           "Akta svärden",
           "Inkommande"
         ],
-        "key4": [
+        "Key4": [
           "Inte ens Grekisk",
           "Mjölnir Nyckel",
           "Hammar Nyckel",
@@ -276,7 +278,7 @@
         "Menageriet"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Din väg ut",
           "Varför är nyckeln här?",
           "Vad är detta för rum?",
@@ -294,7 +296,7 @@
         "Tillbaka till apa"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Din biljett ut",
           "Inte giftigt",
           "Rätt material",
@@ -312,21 +314,21 @@
         "råttPARTY"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Fan äntligen",
           "Ooo.. skinande",
           "Nästan där",
           "Sista Nyckeln",
           "Bättre än silver"
         ],
-        "key2": [
+        "Key2": [
           "Bättre än rostigt",
           "Sämre än guld",
           "För många dörrar att öppna",
           "Du behöver två",
           "Behöver något bättre"
         ],
-        "key3": [
+        "Key3": [
           "Använd för mer nycklar",
           "Första av många nycklar",
           "Sämre än silver",
@@ -344,21 +346,21 @@
         "Pierre's sista ställning"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Hur gör nyckeln så?",
           "Det är inte en hemlighet",
           "Gör hemlighets ljud",
           "Använd i guldhålet",
           "Glittrande nyckel"
         ],
-        "key2": [
+        "Key2": [
           "Råttor i överflöd",
           "Akta för gorillor",
           "Missa inte hemligheten",
           "Du behöver en till nyckel",
           "Funkar bara på höger lås"
         ],
-        "key3": [
+        "Key3": [
           "Sätt i nyckelhålet",
           "Behövs 2 nycklar för 1 dörr",
           "Knuffa blocket mer",
@@ -376,7 +378,7 @@
         "Mona's Hem"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Hjärnoperation",
           "Mona's nyckel",
           "Använd i Sfinxen",
@@ -394,35 +396,35 @@
         "Egyptisk Guds saker"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Öppnar två dörrar",
           "Blå ädelstensnyckel",
           "Aluminiumoxid nyckel",
           "Varför är en dörr där?",
           "Krokodil nyckel"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Ögat av Seth's skurk",
           "Vi ses",
           "Vakar alltid",
           "Falkens ögonglob",
           "Sluta titta på mig"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Bara en bugg",
           "Heracross",
           "Khepri",
           "Dyngbagge",
           "Önskar du hade detta nästa nivå"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Anpu's sigill",
           "Schakalen's sigill",
           "Bara något klotter",
           "Rosettastenen",
           "Potatis"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Detta är inte TR4",
           "Vart är Seth?",
           "Lägg tillbaka den där",
@@ -440,21 +442,21 @@
         "En glad stund"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Använd på bron",
           "Släpp lös Kentauren",
           "Använd för att få Ankh",
           "Enda nyckeln i nivån",
           "Hur är den inte rostig?"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Lägg på sfinxen",
           "Behöver två",
           "Vart är Seth?",
           "Slå mig baby en gång till",
           "Kentaur bajs"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Bara en bugg",
           "Skapa några fiender",
           "Ta dig ur den här nivån",
@@ -472,14 +474,14 @@
         "Natla's Memes"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Vem la den här",
           "Zap!",
           "Vill du ha vapen?",
           "Varför funkar dessa än?",
           "Elektrisk pincett"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Väldigt unik nyckel",
           "Din väg ut",
           "Nån Egyptisk triangel",
@@ -515,7 +517,7 @@
         "Du kommer att behöva de medicinerna!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Smörnyckel",
           "Inte guldnyckel",
           "Glänsande nyckel",
@@ -533,7 +535,7 @@
         "Hundar stannar ute"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "För många av dessa",
           "Snygg nyckel",
           "Hur många fler?",

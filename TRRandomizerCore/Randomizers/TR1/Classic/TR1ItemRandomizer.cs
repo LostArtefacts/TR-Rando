@@ -56,12 +56,9 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             }
         }
 
-        if (Settings.UseRecommendedCommunitySettings)
-        {
-            TR1Script script = ScriptEditor.Script as TR1Script;
-            script.ConvertDroppedGuns = true;
-            ScriptEditor.SaveScript();
-        }
+        TR1Script script = ScriptEditor.Script as TR1Script;
+        script.ConvertDroppedGuns = true;
+        ScriptEditor.SaveScript();
     }
 
     public void FinalizeRandomization()

@@ -28,124 +28,126 @@
       "UwU",
       "Tee muutoksia"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Iso",
-      "Kun laastari ei riitä",
-      "Käytä hengenvaarassa",
-      "Täysi elämä",
-      "Auttaa paljon"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Suuntaa pohjoiseen",
-      "Pyörivä härveli",
-      "Magneettikyhäelmä",
-      "Miten tämä toimii?",
-      "Käyttääkö tätä kukaan?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Ergonomia",
-      "Näin pelataan",
-      "Näppäimistö on paras",
-      "Peliohjain on paras",
-      "Mitä nappia pitää painaa?"
-    ],
-    "INV_ITEM_DETAILS": [
-      "John Lennon -asu",
-      "Arskat",
-      "Aurinkolasit",
-      "Vaaleanpunaiset lasit",
-      "Miltä näyttää?"
-    ],
-    "INV_ITEM_GAME": [
-      "Henkkarit",
-      "Matkustusasiakirja",
-      "Henkilötiedot",
-      "Pikselöitynyt kirja",
-      "Passi"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Älä nuole",
-      "Liian painava",
-      "Väärä materiaali",
-      "Hieman myrkyllinen",
-      "Laita kädelle"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Magnumit",
-      "Paremmat pistoolit",
-      "Paukkuu kovempaa",
-      "Mustat pistoolit",
-      "Ne suklaa-aseet"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Suklaapatukat",
-      "Jätskipatukat",
-      "50 luotia",
-      "Suklaata",
-      "Paukkuja"
-    ],
-    "INV_ITEM_MEDI": [
-      "Pieni",
-      "Puolikas elämä",
-      "Auttaa hieman",
-      "Laiha apu",
-      "Laastari"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Pistoolit",
-      "Peruspyssyt",
-      "Perushyvät",
-      "Loputtomat panokset",
-      "Heikoimmat aseet"
-    ],
-    "INV_ITEM_SCION": [
-      "Pyöreä jutska",
-      "Älä ammu minua",
-      "Kolme samanlaista",
-      "Se lausutaan Skii-on",
-      "Se lausutaan Sai-on"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Tarkkuusase",
-      "Eniten vahinkoa",
-      "Hidas ase",
-      "Iso pamaus",
-      "Ehkä osut, ehkä et"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Haulikon patruunat",
-      "Vain kaksi per paketti",
-      "Menee minne sattuu",
-      "Vaivaudutko keräämään?",
-      "Hauleja"
-    ],
-    "INV_ITEM_SOUND": [
-      "Ääni",
-      "Mikseri",
-      "Hiljaa vai kovalla?",
-      "Kuulokkeet",
-      "Kasettisoitin"
-    ],
-    "INV_ITEM_UZI": [
-      "Uzit",
-      "PRRRRR",
-      "Nopeat pistoolit",
-      "Luotisade",
-      "Pampampam"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Parhaat ammukset",
-      "100 luotia",
-      "Näillä osut vihollisiin",
-      "Haudoista löytämäsi luodit",
-      "Pampampam-ammukset"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "Tyhjä",
       "Tähän mahtuu",
       "Tallenna tähän",
       "Oma tallennuksesi tähän",
       "Ei vielä tallennusta"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Pieni",
+      "Puolikas elämä",
+      "Auttaa hieman",
+      "Laiha apu",
+      "Laastari"
+    ],
+    "large_medipack": [
+      "Iso",
+      "Kun laastari ei riitä",
+      "Käytä hengenvaarassa",
+      "Täysi elämä",
+      "Auttaa paljon"
+    ],
+    "compass": [
+      "Suuntaa pohjoiseen",
+      "Pyörivä härveli",
+      "Magneettikyhäelmä",
+      "Miten tämä toimii?",
+      "Käyttääkö tätä kukaan?"
+    ],
+    "controls": [
+      "Ergonomia",
+      "Näin pelataan",
+      "Näppäimistö on paras",
+      "Peliohjain on paras",
+      "Mitä nappia pitää painaa?"
+    ],
+    "graphics": [
+      "John Lennon -asu",
+      "Arskat",
+      "Aurinkolasit",
+      "Vaaleanpunaiset lasit",
+      "Miltä näyttää?"
+    ],
+    "passport": [
+      "Henkkarit",
+      "Matkustusasiakirja",
+      "Henkilötiedot",
+      "Pikselöitynyt kirja",
+      "Passi"
+    ],
+    "lead_bar": [
+      "Älä nuole",
+      "Liian painava",
+      "Väärä materiaali",
+      "Hieman myrkyllinen",
+      "Laita kädelle"
+    ],
+    "magnums": [
+      "Magnumit",
+      "Paremmat pistoolit",
+      "Paukkuu kovempaa",
+      "Mustat pistoolit",
+      "Ne suklaa-aseet"
+    ],
+    "magnums_ammo": [
+      "Suklaapatukat",
+      "Jätskipatukat",
+      "50 luotia",
+      "Suklaata",
+      "Paukkuja"
+    ],
+    "pistols": [
+      "Pistoolit",
+      "Peruspyssyt",
+      "Perushyvät",
+      "Loputtomat panokset",
+      "Heikoimmat aseet"
+    ],
+    "scion": [
+      "Pyöreä jutska",
+      "Älä ammu minua",
+      "Kolme samanlaista",
+      "Se lausutaan Skii-on",
+      "Se lausutaan Sai-on"
+    ],
+    "shotgun": [
+      "Tarkkuusase",
+      "Eniten vahinkoa",
+      "Hidas ase",
+      "Iso pamaus",
+      "Ehkä osut, ehkä et"
+    ],
+    "shotgun_ammo": [
+      "Haulikon patruunat",
+      "Vain kaksi per paketti",
+      "Menee minne sattuu",
+      "Vaivaudutko keräämään?",
+      "Hauleja"
+    ],
+    "sound": [
+      "Ääni",
+      "Mikseri",
+      "Hiljaa vai kovalla?",
+      "Kuulokkeet",
+      "Kasettisoitin"
+    ],
+    "uzis": [
+      "Uzit",
+      "PRRRRR",
+      "Nopeat pistoolit",
+      "Luotisade",
+      "Pampampam"
+    ],
+    "uzis_ammo": [
+      "Parhaat ammukset",
+      "100 luotia",
+      "Näillä osut vihollisiin",
+      "Haudoista löytämäsi luodit",
+      "Pampampam-ammukset"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Vilgabanga"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "QWOP-avain",
           "Susiavain",
           "Älä unohda idolia",
           "Lisää susia",
           "Esine oikealla"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Nukke",
           "Indianan Idoli",
           "Varmaan arvokas",
@@ -201,7 +203,7 @@
         "Kadonnut laakso"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Tarvitset kolme",
           "Laita pyörimään!",
           "Korjaa koneisto",
@@ -219,7 +221,7 @@
         "Lara tuhoaa haudan"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Tarvitset kolme",
           "Laita pyörimään!",
           "Korjaa koneisto",
@@ -237,28 +239,28 @@
         "Paljon koloja"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Vesiavain",
           "Itseasiassa roomalainen",
           "Feikki-Poseidon",
           "Syvyyksistä",
           "Uintihetki"
         ],
-        "key2": [
+        "Key2": [
           "Lukuisia karttoja",
           "Aito leidi ampuu aina",
           "Samperin gorilla",
           "Vierivän kiven avain",
           "Hyvä ettet jäänyt alle!"
         ],
-        "key3": [
+        "Key3": [
           "Varo mihin astut",
           "Ei edes jumala",
           "Mennään kävelylle",
           "Varo miekkoja",
           "Ne tulee!"
         ],
-        "key4": [
+        "Key4": [
           "Ei edes kreikkalainen",
           "Mjölnir-avain",
           "Vasara-avain",
@@ -276,7 +278,7 @@
         "Näytös alkaa pian"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Ulospääsy",
           "Miksi tämä on täällä?",
           "Mikä tämä huone on?",
@@ -294,7 +296,7 @@
         "Apinoiden taso"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Tällä pääsee pois",
           "Ei myrkyllinen",
           "Oikea materiaali",
@@ -312,21 +314,21 @@
         "Rottabileet"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Vihdoin!",
           "Ooh, se kiiltää",
           "Melkein perillä",
           "Viimeinen avain",
           "Parempi kuin hopeinen"
         ],
-        "key2": [
+        "Key2": [
           "Parempi kuin ruosteinen",
           "Huonompi kuin kultainen",
           "Liian monta suljettua ovea",
           "Tarvitset kaksi",
           "Tarvitset paremman"
         ],
-        "key3": [
+        "Key3": [
           "Tällä saat lisää avaimia",
           "Ensimmäinen monista avaimista",
           "Huonompi kuin hopeinen",
@@ -344,21 +346,21 @@
         "Pierren viimeinen kohtaaminen"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Miten avain tekee tämän?",
           "Tämä ei ole salaisuus",
           "Onko se salaisuus?",
           "Sopii kultaiseen avaimenreikään",
           "Kimalteleva avain"
         ],
-        "key2": [
+        "Key2": [
           "Runsaasti rottia",
           "Varo gorilloja",
           "Älä missaa salaisuutta",
           "Tarvitset toisenkin",
           "Käy vain oikeaan lukkoon"
         ],
-        "key3": [
+        "Key3": [
           "Laita avaimenreikään",
           "Kaksi avainta yhteen oveen",
           "Siirrä lohkaretta lisää",
@@ -376,7 +378,7 @@
         "Monan koti"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Aivokirurgiaa",
           "Monan avain",
           "Käytä Sfinksissä",
@@ -394,35 +396,35 @@
         "Egyptin jumalien juttuja"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Avaa kaksi ovea",
           "Sininen jalokiviavain",
           "Safiiriavain",
           "Miksi täällä on ovi?",
           "Krokotiiliavain"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Sethin vihollisen silmä",
           "Näkyillään",
           "Se silmäilee",
           "Haukan katse",
           "Lakkaa tuijottamasta!"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Ötökkäamuletti",
           "Skarabee",
           "Khepri",
           "Pillerinpyörittäjä",
           "Saisitpa pitää tämän seuraavaa tasoa varten"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Mitä siinä lukee?",
           "Sakaalin sinetti",
           "Jotain kirjoituksia",
           "Rosettan kivi",
           "Peruna"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Tämä ei ole TR4",
           "Missä on Seth?",
           "Paras laittaa se takaisin",
@@ -440,21 +442,21 @@
         "Jättisfinksi"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Käytä sillalla",
           "Vapauta kentauri",
           "Tällä saat Ankhin",
           "Tason ainut avain",
           "Ruostumaton!"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Käytä Sfinksin päällä",
           "Tarvitset kaksi",
           "Missä on Seth?",
           "Yksi ei riitä!",
           "Kentaurinkakka"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Ötökkä",
           "Viholliset tulee!",
           "Pääset ulos täältä",
@@ -472,14 +474,14 @@
         "Natlan miinat"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Miten tämä tänne joutui?",
           "Sähköä!",
           "Haluatko aseet?",
           "Miten nämä vielä toimivat?",
           "Älä polta"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Ainutlaatuinen avain",
           "Tällä pääset ulos",
           "Joku egyptiläinen kolmio",
@@ -515,7 +517,7 @@
         "Tarvitset Kaikki Lääkepakkaukset!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Voi Avain",
           "Esi-Kulta Avain",
           "Kiiltävä Avain",
@@ -533,7 +535,7 @@
         "Koira Ihmiset Pysykää Loitolla"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Liian Monta",
           "Hieno Avain",
           "Kuinka Monta Lisää?",

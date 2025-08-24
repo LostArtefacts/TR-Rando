@@ -28,124 +28,126 @@
       "UwU",
       "Change Things"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Medic!",
-      "Thicc Medi Pack",
-      "Full Health Giver",
-      "Mega",
-      "Better than a Small Med"
-    ],
-    "INV_ITEM_COMPASS": [
-      "You Should Go North",
-      "Spinny Thingy",
-      "Just a Magnet",
-      "Does This Work?",
-      "Who Uses This?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Ergonomics",
-      "How to Play",
-      "Keyboard is Best",
-      "Controller is Best",
-      "Which button is it?"
-    ],
-    "INV_ITEM_DETAILS": [
-      "John Lennon Costume",
-      "Shades",
-      "/o-o/",
-      "Rose-tinted Goggles",
-      "Glasses"
-    ],
-    "INV_ITEM_GAME": [
-      "ID",
-      "Travel Document",
-      "Credentials",
-      "Pixelated Book",
-      "Passport"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Don't Lick",
-      "Too Heavy to Carry",
-      "Wrong Material",
-      "Slightly Toxic",
-      "Put on Midas Hand"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Better Pistols",
-      "Pistols",
-      "Kinda Boring",
-      "DPS",
-      "Slightly Deeper Sounding"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Ice Cream Clips",
-      "Hershey Bar",
-      "50 bullets",
-      "Chocolate",
-      "Not as good as Uzi Clips"
-    ],
-    "INV_ITEM_MEDI": [
-      "Not Thicc Medi Pack",
-      "Mini",
-      "Half Health Giver",
-      "It's Something",
-      "Worse than a Large Med"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Browning Hi-Powers",
-      "Weakest build",
-      "Ol' Reliable",
-      "Who needs ammo?",
-      "Infinite Pew Pew"
-    ],
-    "INV_ITEM_SCION": [
-      "Round Thingy",
-      "Don't Shoot Me",
-      "You Need Three",
-      "It's Skee-On",
-      "It's Sigh-On"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Perfectly Accurate",
-      "Just Use Pistols",
-      "Best Damage",
-      "Clunky",
-      "Big Boom Bazooka"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Not Enough Ammo",
-      "Only 2 Shells Each",
-      "Definition of Accuracy",
-      "Not Worth Picking Up",
-      "Bang Shell"
-    ],
-    "INV_ITEM_SOUND": [
-      "Mixer",
-      "Quiet or Loud?",
-      "catJAM",
-      "Headphones",
-      "Earache Police"
-    ],
-    "INV_ITEM_UZI": [
-      "BRRRRRR",
-      "MAC-10",
-      "Blowback Operated Machine Pistol",
-      "Pew Pew",
-      "Needs Nerf"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Best Ammo",
-      "100 bullets",
-      "At least these hit the enemies",
-      "Ammo Chilling in Ancient Tombs",
-      "Pew Pew Ammo"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "You're Breathtaking",
       "Currently Useless",
       "Save Our Souls",
       "Personal Savings",
       "Save Over Me"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Not Thicc Medi Pack",
+      "Mini",
+      "Half Health Giver",
+      "It's Something",
+      "Worse than a Large Med"
+    ],
+    "large_medipack": [
+      "Medic!",
+      "Thicc Medi Pack",
+      "Full Health Giver",
+      "Mega",
+      "Better than a Small Med"
+    ],
+    "compass": [
+      "You Should Go North",
+      "Spinny Thingy",
+      "Just a Magnet",
+      "Does This Work?",
+      "Who Uses This?"
+    ],
+    "controls": [
+      "Ergonomics",
+      "How to Play",
+      "Keyboard is Best",
+      "Controller is Best",
+      "Which button is it?"
+    ],
+    "graphics": [
+      "John Lennon Costume",
+      "Shades",
+      "/o-o/",
+      "Rose-tinted Goggles",
+      "Glasses"
+    ],
+    "passport": [
+      "ID",
+      "Travel Document",
+      "Credentials",
+      "Pixelated Book",
+      "Passport"
+    ],
+    "lead_bar": [
+      "Don't Lick",
+      "Too Heavy to Carry",
+      "Wrong Material",
+      "Slightly Toxic",
+      "Put on Midas Hand"
+    ],
+    "magnums": [
+      "Better Pistols",
+      "Pistols",
+      "Kinda Boring",
+      "DPS",
+      "Slightly Deeper Sounding"
+    ],
+    "magnums_ammo": [
+      "Ice Cream Clips",
+      "Hershey Bar",
+      "50 bullets",
+      "Chocolate",
+      "Not as good as Uzi Clips"
+    ],
+    "pistols": [
+      "Browning Hi-Powers",
+      "Weakest build",
+      "Ol' Reliable",
+      "Who needs ammo?",
+      "Infinite Pew Pew"
+    ],
+    "scion": [
+      "Round Thingy",
+      "Don't Shoot Me",
+      "You Need Three",
+      "It's Skee-On",
+      "It's Sigh-On"
+    ],
+    "shotgun": [
+      "Perfectly Accurate",
+      "Just Use Pistols",
+      "Best Damage",
+      "Clunky",
+      "Big Boom Bazooka"
+    ],
+    "shotgun_ammo": [
+      "Not Enough Ammo",
+      "Only 2 Shells Each",
+      "Definition of Accuracy",
+      "Not Worth Picking Up",
+      "Bang Shell"
+    ],
+    "sound": [
+      "Mixer",
+      "Quiet or Loud?",
+      "catJAM",
+      "Headphones",
+      "Earache Police"
+    ],
+    "uzis": [
+      "BRRRRRR",
+      "MAC-10",
+      "Blowback Operated Machine Pistol",
+      "Pew Pew",
+      "Needs Nerf"
+    ],
+    "uzis_ammo": [
+      "Best Ammo",
+      "100 bullets",
+      "At least these hit the enemies",
+      "Ammo Chilling in Ancient Tombs",
+      "Pew Pew Ammo"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Town of Vilcabanga"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Qwop Key",
           "Wolf Key",
           "Don't Forget the Idol",
           "Escape the Wolves for more Wolves",
           "Item on the Right"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Doll",
           "Indiana's Idol",
           "Probably Valuable",
@@ -201,7 +203,7 @@
         "Dinosaur Sanctuary"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 Is The Magic Number",
           "COGGERS",
           "Gear",
@@ -219,7 +221,7 @@
         "Lara Breaks S**t"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 Is The Magic Number",
           "COGGERS",
           "Gear",
@@ -237,28 +239,28 @@
         "A Variety of Holes"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Water Key",
           "Hey, I'm Actually Roman",
           "Fake Poseidon",
           "All the way down you go",
           "Let's go for a swim"
         ],
-        "key2": [
+        "Key2": [
           "Many Many Maps",
           "A True Lady Always Shoots",
           "Damn Gorilla",
           "Massive Boulder Key",
           "Glad You Didn't Get Squished"
         ],
-        "key3": [
+        "Key3": [
           "Watch Your Step",
           "Not Even a God",
           "Time for a Stroll",
           "Watch the Swords",
           "Incoming"
         ],
-        "key4": [
+        "Key4": [
           "Not Even Greek",
           "Mjölnir Key",
           "Hammer Key",
@@ -276,7 +278,7 @@
         "The Menagerie"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Your Way Out",
           "Why is this Key In Here?",
           "What is this room?",
@@ -294,7 +296,7 @@
         "Return to Monke"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Your Ticket Out",
           "Not Toxic",
           "Right Material",
@@ -312,21 +314,21 @@
         "ratJAM"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Freaking Finally",
           "Ooooo...shiny",
           "Almost There",
           "Last Key",
           "Better than Silver"
         ],
-        "key2": [
+        "Key2": [
           "Better Than Rusty",
           "Worse Than Gold",
           "Too Many Doors to Open",
           "You'll Need Two",
           "Need Something Better"
         ],
-        "key3": [
+        "Key3": [
           "Use to Get More Keys",
           "First of Many Keys",
           "Worse Than Silver",
@@ -344,21 +346,21 @@
         "Pierre's Last Stand"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "How does this key do this?",
           "This Isn't a Secret",
           "Makes Secret Chime",
           "Use in Gold Keyhole",
           "Sparkly Key"
         ],
-        "key2": [
+        "Key2": [
           "Rats are Abound",
           "Watch for Gorillas",
           "Don't Miss the Secret",
           "You Need Another Key",
           "Only Works on the Right Lock"
         ],
-        "key3": [
+        "Key3": [
           "Put in Keyhole",
           "Need 2 Keys for 1 Door",
           "Push the Block Around More",
@@ -376,7 +378,7 @@
         "Mona's Home"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Brain Surgery",
           "Mona's Key",
           "Use in the Sphinx",
@@ -394,35 +396,35 @@
         "Egyptian God's Stuff"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Opens Two Doors",
           "Blue Gemstone Key",
           "Aluminium Oxide Key",
           "Why is There a Door There?",
           "Crocodile Key"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Eye of Seth's Villain",
           "See You Around",
           "Always Watching",
           "Falcon's Eyeball",
           "Stop Looking At Me"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Just a Bug",
           "Heracross",
           "Khepri",
           "Dung Beetle",
           "Wish You Had This for Next Level"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Seal of Anpu",
           "Seal of the Jackal",
           "Just Some Scribbles",
           "The Rosetta Stone",
           "Potato"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "This Isn't TR4",
           "Where is Seth?",
           "You Better Put That Back",
@@ -440,21 +442,21 @@
         "A Joyous Time"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Use on the Bridge",
           "Unleash the Centaur",
           "Use to get Ankh",
           "Only Key in this Level",
           "How is This Not Rusty?"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Put on the Sphinx",
           "Need Two",
           "Where is Seth?",
           "Hit Me Baby One More Time",
           "Centaur Poop"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Just a Bug",
           "Spawns Some Enemies",
           "Get Out of this Level",
@@ -472,14 +474,14 @@
         "Natla's Memes"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Who Put This Here",
           "Zap!",
           "You want guns?",
           "Why do these still work?",
           "Electric Tweezers"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Very Unique Key",
           "Your Way Out",
           "Some Egyptian Triangle",
@@ -518,7 +520,7 @@
         "You will need those meds!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Mind the Boulders",
           "Blue Room Access",
           "Sapphire Key",
@@ -544,7 +546,7 @@
         "Dog People keep out"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "You'll Need Seven",
           "Fancy Key",
           "Let Me In!",

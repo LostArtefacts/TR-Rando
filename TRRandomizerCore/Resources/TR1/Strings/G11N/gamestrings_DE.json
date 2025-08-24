@@ -28,124 +28,126 @@
       "uwu",
       "Ändere Dinge"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Sanitäter!",
-      "Dickes Medipack",
-      "Füll mich mit ganzem Leben",
-      "Etwas Großes",
-      "Besser als ein kleines Medipack"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Du solltest nach Norden gehen",
-      "Schleuderteil",
-      "Nur ein Magnet",
-      "Funktioniert das?",
-      "Wer benutzt das?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Ergonomie",
-      "Wie spielt man",
-      "Tastatur ist das Beste",
-      "Controller ist das Beste",
-      "Welche Taste ist es?"
-    ],
-    "INV_ITEM_DETAILS": [
-      "John Lennon Kostüm",
-      "Sonnenbrille",
-      "/o-o/",
-      "Rosarote Brille",
-      "Augengläser"
-    ],
-    "INV_ITEM_GAME": [
-      "Personalausweis",
-      "Reisedokument",
-      "Bescheinigung",
-      "Verpixeltes Buch",
-      "Reisepass"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Nicht anlecken!",
-      "Zu schwer zum Tragen",
-      "Falsches Material",
-      "Ein bisschen giftig",
-      "Leg es auf Midas Hand"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Bessere Pistolen",
-      "Pistolen in Schwarz",
-      "Bisschen langweilig",
-      "Schaden pro Sekunde",
-      "Bisschen Tieferer Ton"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Eiskrem Clips",
-      "Kinderriegel",
-      "50 Kugeln",
-      "Schokolade",
-      "Nicht soi gut wie Uzi Clips"
-    ],
-    "INV_ITEM_MEDI": [
-      "Kein dickes Medipack",
-      "Etwas Winziges",
-      "Füll mich mit halbem Leben",
-      "Wenigstens etwas",
-      "Schlechter als ein großes Medipack"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Pistolen 640",
-      "Schwächste Wahl",
-      "Die Zuverlässigen",
-      "Wer braucht Muni?",
-      "Unendliche Piffpaffs"
-    ],
-    "INV_ITEM_SCION": [
-      "Rundes Dingsda",
-      "Bitte nicht schießen!",
-      "Du brauchst Drei",
-      "Es heißt Ski-jon",
-      "Es heißt Sai-jon"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Sehr Präzise",
-      "Benutz lieber Pistolen",
-      "Bester Schaden",
-      "Klobig",
-      "Große Dröhnende Panzerfaust"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Nicht genug Muni",
-      "Nur 2x Schrot",
-      "Definition für Präzision",
-      "Nicht wert aufzuheben",
-      "Knaller"
-    ],
-    "INV_ITEM_SOUND": [
-      "Mischpult",
-      "Leise oder Laut?",
-      "catJAM",
-      "Kopfhörer",
-      "Gehörschutz Polizei"
-    ],
-    "INV_ITEM_UZI": [
-      "BRRRRRTTRRRTTRRT",
-      "MP 40",
-      "Rückschlag Maschinenpistole",
-      "Piffpaff",
-      "Braucht eine Drosselung"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Beste Muni",
-      "100 Kugeln",
-      "Wenigstens trifft die Muni",
-      "Altertümliche Munition",
-      "Piffpaff Muni"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "Du bist großartig!",
       "Gerade sinnlos",
       "Rettet unsere Seelen",
       "Ersparnisse",
       "Speichere Hier!"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Kein dickes Medipack",
+      "Etwas Winziges",
+      "Füll mich mit halbem Leben",
+      "Wenigstens etwas",
+      "Schlechter als ein großes Medipack"
+    ],
+    "large_medipack": [
+      "Sanitäter!",
+      "Dickes Medipack",
+      "Füll mich mit ganzem Leben",
+      "Etwas Großes",
+      "Besser als ein kleines Medipack"
+    ],
+    "compass": [
+      "Du solltest nach Norden gehen",
+      "Schleuderteil",
+      "Nur ein Magnet",
+      "Funktioniert das?",
+      "Wer benutzt das?"
+    ],
+    "controls": [
+      "Ergonomie",
+      "Wie spielt man",
+      "Tastatur ist das Beste",
+      "Controller ist das Beste",
+      "Welche Taste ist es?"
+    ],
+    "graphics": [
+      "John Lennon Kostüm",
+      "Sonnenbrille",
+      "/o-o/",
+      "Rosarote Brille",
+      "Augengläser"
+    ],
+    "passport": [
+      "Personalausweis",
+      "Reisedokument",
+      "Bescheinigung",
+      "Verpixeltes Buch",
+      "Reisepass"
+    ],
+    "lead_bar": [
+      "Nicht anlecken!",
+      "Zu schwer zum Tragen",
+      "Falsches Material",
+      "Ein bisschen giftig",
+      "Leg es auf Midas Hand"
+    ],
+    "magnums": [
+      "Bessere Pistolen",
+      "Pistolen in Schwarz",
+      "Bisschen langweilig",
+      "Schaden pro Sekunde",
+      "Bisschen Tieferer Ton"
+    ],
+    "magnums_ammo": [
+      "Eiskrem Clips",
+      "Kinderriegel",
+      "50 Kugeln",
+      "Schokolade",
+      "Nicht soi gut wie Uzi Clips"
+    ],
+    "pistols": [
+      "Pistolen 640",
+      "Schwächste Wahl",
+      "Die Zuverlässigen",
+      "Wer braucht Muni?",
+      "Unendliche Piffpaffs"
+    ],
+    "scion": [
+      "Rundes Dingsda",
+      "Bitte nicht schießen!",
+      "Du brauchst Drei",
+      "Es heißt Ski-jon",
+      "Es heißt Sai-jon"
+    ],
+    "shotgun": [
+      "Sehr Präzise",
+      "Benutz lieber Pistolen",
+      "Bester Schaden",
+      "Klobig",
+      "Große Dröhnende Panzerfaust"
+    ],
+    "shotgun_ammo": [
+      "Nicht genug Muni",
+      "Nur 2x Schrot",
+      "Definition für Präzision",
+      "Nicht wert aufzuheben",
+      "Knaller"
+    ],
+    "sound": [
+      "Mischpult",
+      "Leise oder Laut?",
+      "catJAM",
+      "Kopfhörer",
+      "Gehörschutz Polizei"
+    ],
+    "uzis": [
+      "BRRRRRTTRRRTTRRT",
+      "MP 40",
+      "Rückschlag Maschinenpistole",
+      "Piffpaff",
+      "Braucht eine Drosselung"
+    ],
+    "uzis_ammo": [
+      "Beste Muni",
+      "100 Kugeln",
+      "Wenigstens trifft die Muni",
+      "Altertümliche Munition",
+      "Piffpaff Muni"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Dörfchen Bumscabamba"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "QWOP Schlüssel",
           "Lupus Schlüssel",
           "Vergiss die Figur nicht!",
           "Flieh von den Wölfen für mehr Wölfe",
           "Gegenstand rechts"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Puppe",
           "Indiana's Goldfigur",
           "Wahrscheinlich Wertvoll",
@@ -201,7 +203,7 @@
         "Dinosaurier Schutzgebiet"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 ist die magische Zahl",
           "Viele kleine Zähnchen",
           "Gebissteile",
@@ -228,28 +230,28 @@
         "Eine Vielfalt an Löchern"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Wasserschlüssel",
           "Eigentlich Römisch",
           "Schwindelposeidon",
           "Und wieder ganz nach unten",
           "Lass uns schwimmen gehen"
         ],
-        "key2": [
+        "Key2": [
           "Viele viele Landkarten",
           "Eine echte Dame schießt immer",
           "Verdammter Gorilla",
           "Massiver Stein Schlüssel",
           "Juhu, du wurdest nicht zerquetscht!"
         ],
-        "key3": [
+        "Key3": [
           "Pass auf wo du hintrittst!",
           "Nicht mal ein Gott",
           "Zeit für einen Spaziergang",
           "Vorsicht! Schwert!",
           "Ich komme!"
         ],
-        "key4": [
+        "Key4": [
           "Nicht mal Griechisch",
           "Mjölnir Schlüssel",
           "Hammerschlüssel",
@@ -267,7 +269,7 @@
         "Die Tierschau"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Dein Ausweg",
           "Wieso ist dieser Schlüssel hier?",
           "Was ist das für ein Raum?",
@@ -285,7 +287,7 @@
         "Zurück zum Affen"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Dein Notausgang",
           "Nicht giftig",
           "Richtiges Material",
@@ -303,21 +305,21 @@
         "Rattentanz"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Na endlich!",
           "Oooo.. wie das funkelt!",
           "Fast da",
           "Letzter Schlüssel",
           "Besser als Silber"
         ],
-        "key2": [
+        "Key2": [
           "Besser als Rost",
           "Schlechter als Gold",
           "Zu viele Türen zum Öffnen",
           "Du wirst Zwei brauchen",
           "Besseres Gebraucht"
         ],
-        "key3": [
+        "Key3": [
           "Benutzen für mehr Schlüssel",
           "Der erste von vielen Schlüsseln",
           "Schlechter als Silber",
@@ -335,21 +337,21 @@
         "Pierres letztes Gefecht"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Wie funktioniert das?",
           "Das ist kein Geheimnis",
           "Löst ein Geheimnisgeräusch aus",
           "Benutz' es fürs goldene Schlüsselloch",
           "Glitzender Schlüssel"
         ],
-        "key2": [
+        "Key2": [
           "Ratten im Überfluss",
           "Achtung vor den Gorillas",
           "Vergiss nicht das Geheimnis",
           "Du braucht noch einen Schlüssel",
           "Finde das richtige Loch"
         ],
-        "key3": [
+        "Key3": [
           "Steck ihn ins Loch",
           "Du brauchst 2 Schlüssel für 1 Tür",
           "Schieb den Block ein bisschen mehr rum",
@@ -367,7 +369,7 @@
         "Monas Zuhause"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Gehirnoperation",
           "Monas Schlüssel",
           "Benutz ihn in der Sphinx",
@@ -385,35 +387,35 @@
         "Ägyptischer Götterzeug"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Öffnet zwei Türen",
           "Blauer Edelsteinschlüssel",
           "Aluminimoxid Schlüssel",
           "Wieso ist dort eine Tür?",
           "Krokodilsschlüssel"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Auge von Seth's Verbrecher",
           "Bis später!",
           "Immer Wachsam",
           "Falkenaugapfel",
           "Hör auf mich anzugucken"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Nur ein Käfer",
           "Skaraborn",
           "Chepre",
           "Mistkäfer",
           "Wünsch dir du hättest es fürs nächste Level"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Siegel des Anpu",
           "Siegel des Schakals",
           "Steingekritzel",
           "Stein von Rosette",
           "Kartoffel"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Das ist nicht TR4",
           "Wo ist Seth?",
           "Leg das lieber zurück",
@@ -431,21 +433,21 @@
         "Verbring eine tolle Zeit"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Nutze ihn auf der Brücke",
           "Entfessel den Zentaur",
           "Benutze fürs Anch",
           "Der einzige Schlüssel in diesem Level",
           "Wieso rostest das nicht?"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Schieb es in die Sphinx",
           "Du brauchst Zwei",
           "Wo ist Seth?",
           "Triff mich Baby noch einmal",
           "Zentaurenkacke"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Nur ein Käfer",
           "Aktiviere ein paar Gegner",
           "Flüchte aus diesem Level",
@@ -463,14 +465,14 @@
         "Natlas Feuchthöhlen"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Wer hat das hier hingelegt?",
           "ZZzzzZzztt!",
           "Willst du Waffen?",
           "Wieso funktioniert das noch?",
           "Elektrische Pinzette"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Einzigartiger Schlüssel",
           "Dein Ausweg",
           "Irgendein ägyptisches Dreieck",
@@ -506,7 +508,7 @@
         "Die Meds brauchst du noch!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Butter Schlüssel",
           "Vor-Gold Schlüssel",
           "Glänzender Schlüssel",
@@ -524,7 +526,7 @@
         "Hundemenschen draußen bleiben"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Zu viele davon",
           "Hübscher Schlüssel",
           "Wie viele noch?",

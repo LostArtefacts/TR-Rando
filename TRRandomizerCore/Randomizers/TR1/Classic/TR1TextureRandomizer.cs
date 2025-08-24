@@ -168,10 +168,9 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             _persistentWireColour = _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
         }
 
-        bool has3DPickups = (ScriptEditor as TR1ScriptEditor).Enable3dPickups;
         foreach (WireframeData<TR1Type> data in _wireframeData.Values)
         {
-            data.Has3DPickups = has3DPickups;
+            data.Has3DPickups = true;
             data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
             data.SolidInteractables = Settings.UseSolidInteractableWireframing;
             foreach (SpecialTextureHandling special in data.SpecialTextures)

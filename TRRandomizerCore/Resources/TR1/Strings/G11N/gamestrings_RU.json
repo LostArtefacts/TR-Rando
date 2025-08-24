@@ -28,124 +28,126 @@
       "UwU",
       "Izmeneniye veshchey"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Medik!",
-      "Tolstaya aptechka",
-      "Dayushchiy polnoye zdorov'ye",
-      "Mega",
-      "Luchshe, chem malen'kaya aptechka"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Vy dolzhny idti na sever",
-      "Vrashchayushchayasya shtuchka",
-      "Prosto magnit",
-      "Eto rabotayet?",
-      "Kto ispol'zuyet eto?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Ergonomika",
-      "Kak igrat'",
-      "Klaviatura luchshe",
-      "Geympad luchshe",
-      "Kakaya eto knopka?"
-    ],
-    "INV_ITEM_DETAILS": [
-      "Kostyum Dzhona Lennona",
-      "Solnechnyye ochki",
-      "/o-o/",
-      "Rozovyye tonirovannyye ochki",
-      "Ochki"
-    ],
-    "INV_ITEM_GAME": [
-      "Pasport",
-      "Proyezdnoy dokument",
-      "Svidetel'stvo",
-      "Piksel'naya kniga",
-      "Udostovereniye lichnosti"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Ne lizat'",
-      "Slishkom tyazhelyy chtoby nesti",
-      "Nepravil'nyy material",
-      "Slegka toksichnyy",
-      "Polozhi na ruku Midasa"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Luchshe pistoletov",
-      "Pistolety, s chernoy teksturoy",
-      "Nemnogo skuchno",
-      "Uron",
-      "Chut' boleye glubokoye zvuchaniye"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Gematogen",
-      "Detskiye batonchiki",
-      "50 pul'",
-      "Shokolad",
-      "Ne tak khorosho, kak patrony uzi"
-    ],
-    "INV_ITEM_MEDI": [
-      "Nebol'shaya aptechka",
-      "Malen'kiy",
-      "Dayushchiy polovinu zdorov'ya",
-      "Eto chto-to",
-      "Khuzhe, chem bol'shaya aptechka"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Oruzhiye 1-go urovnya",
-      "Samaya slabaya sborka",
-      "Staryy nadezhnyy",
-      "Komu nuzhny patrony?",
-      "Beskonechnoye piu piu"
-    ],
-    "INV_ITEM_SCION": [
-      "Kruglaya shtuka",
-      "Ne strelyay v menya",
-      "Vam nuzhno tri",
-      "Eto Skion",
-      "Echpochmak"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Sovershenno tochno",
-      "Prosto ispol'zuyte pistolety",
-      "Luchshiy uron",
-      "Neuklyuzhiy",
-      "Bazuka bol'shoy bum"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Nedostatochno patronov",
-      "Vsego po 2 snaryada",
-      "Opredeleniye tochnosti",
-      "Ne stoit brat'",
-      "Petardy"
-    ],
-    "INV_ITEM_SOUND": [
-      "Miksher",
-      "Tikho ili gromko?",
-      "kotJAM",
-      "Naushniki",
-      "Politsiya ushnogo iznasilovaniya"
-    ],
-    "INV_ITEM_UZI": [
-      "BRTTRTRTRTRTRTRTR",
-      "MP3",
-      "Pistolet-pulemet so svobodnym zatvorom",
-      "Piu piu",
-      "Nuzhdayetsya v ispravlenii"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Luchshiye boyepripasy",
-      "100 pul'",
-      "Po krayney mere, eti porazhayut vragov",
-      "Baldozh boyepripasov v drevnikh grobnitsakh",
-      "Traatatatatata boyepripasy"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "VY POTRYASAYUSHCHIY",
       "V NASTOYASHCHEYE VREMYA BESPOLEZEN",
       "SPASITE NASHI DUSHI",
       "LICHNYYE SBEREZHENIYA",
       "SOKHRANIS' NA MNE"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Nebol'shaya aptechka",
+      "Malen'kiy",
+      "Dayushchiy polovinu zdorov'ya",
+      "Eto chto-to",
+      "Khuzhe, chem bol'shaya aptechka"
+    ],
+    "large_medipack": [
+      "Medik!",
+      "Tolstaya aptechka",
+      "Dayushchiy polnoye zdorov'ye",
+      "Mega",
+      "Luchshe, chem malen'kaya aptechka"
+    ],
+    "compass": [
+      "Vy dolzhny idti na sever",
+      "Vrashchayushchayasya shtuchka",
+      "Prosto magnit",
+      "Eto rabotayet?",
+      "Kto ispol'zuyet eto?"
+    ],
+    "controls": [
+      "Ergonomika",
+      "Kak igrat'",
+      "Klaviatura luchshe",
+      "Geympad luchshe",
+      "Kakaya eto knopka?"
+    ],
+    "graphics": [
+      "Kostyum Dzhona Lennona",
+      "Solnechnyye ochki",
+      "/o-o/",
+      "Rozovyye tonirovannyye ochki",
+      "Ochki"
+    ],
+    "passport": [
+      "Pasport",
+      "Proyezdnoy dokument",
+      "Svidetel'stvo",
+      "Piksel'naya kniga",
+      "Udostovereniye lichnosti"
+    ],
+    "lead_bar": [
+      "Ne lizat'",
+      "Slishkom tyazhelyy chtoby nesti",
+      "Nepravil'nyy material",
+      "Slegka toksichnyy",
+      "Polozhi na ruku Midasa"
+    ],
+    "magnums": [
+      "Luchshe pistoletov",
+      "Pistolety, s chernoy teksturoy",
+      "Nemnogo skuchno",
+      "Uron",
+      "Chut' boleye glubokoye zvuchaniye"
+    ],
+    "magnums_ammo": [
+      "Gematogen",
+      "Detskiye batonchiki",
+      "50 pul'",
+      "Shokolad",
+      "Ne tak khorosho, kak patrony uzi"
+    ],
+    "pistols": [
+      "Oruzhiye 1-go urovnya",
+      "Samaya slabaya sborka",
+      "Staryy nadezhnyy",
+      "Komu nuzhny patrony?",
+      "Beskonechnoye piu piu"
+    ],
+    "scion": [
+      "Kruglaya shtuka",
+      "Ne strelyay v menya",
+      "Vam nuzhno tri",
+      "Eto Skion",
+      "Echpochmak"
+    ],
+    "shotgun": [
+      "Sovershenno tochno",
+      "Prosto ispol'zuyte pistolety",
+      "Luchshiy uron",
+      "Neuklyuzhiy",
+      "Bazuka bol'shoy bum"
+    ],
+    "shotgun_ammo": [
+      "Nedostatochno patronov",
+      "Vsego po 2 snaryada",
+      "Opredeleniye tochnosti",
+      "Ne stoit brat'",
+      "Petardy"
+    ],
+    "sound": [
+      "Miksher",
+      "Tikho ili gromko?",
+      "kotJAM",
+      "Naushniki",
+      "Politsiya ushnogo iznasilovaniya"
+    ],
+    "uzis": [
+      "BRTTRTRTRTRTRTRTR",
+      "MP3",
+      "Pistolet-pulemet so svobodnym zatvorom",
+      "Piu piu",
+      "Nuzhdayetsya v ispravlenii"
+    ],
+    "uzis_ammo": [
+      "Luchshiye boyepripasy",
+      "100 pul'",
+      "Po krayney mere, eti porazhayut vragov",
+      "Baldozh boyepripasov v drevnikh grobnitsakh",
+      "Traatatatatata boyepripasy"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Gorod Vilkabamba"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "QWOP klyuch",
           "Volchiy klyuch",
           "Ne zabud' ob idole",
           "Pobeg ot volkov dlya bol'shego kolichestva volkov",
           "Predmet sprava"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Kukla",
           "Idol Indiany",
           "Veroyatno tsennoye",
@@ -201,7 +203,7 @@
         "Svyatilishche dinozavrov"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 — magicheskoye chislo",
           "Shesternya mashiny",
           "Shesteronka",
@@ -228,28 +230,28 @@
         "Raznoobraziye otverstiy"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Vodnyy klyuch",
           "Ey, ya na samom dele rimskiy",
           "Poddel'nyy Poseydon",
           "Vy idote ves' put' vniz",
           "Poydem poplavayem"
         ],
-        "key2": [
+        "Key2": [
           "Mnogo mnogo kart",
           "Nastoyashchaya ledi vsegda strelyayet",
           "Proklyataya gorilla",
           "Klyuch ot massivnogo valuna",
           "Rad, chto tebya ne zadavili"
         ],
-        "key3": [
+        "Key3": [
           "Smotri pod nogi",
           "Dazhe ne Bog",
           "Vremya pokhodit'",
           "Ostorozhno, mechi",
           "Ostorozhnaya progulka"
         ],
-        "key4": [
+        "Key4": [
           "Dazhe ne grecheskiy",
           "Klyuch M'yol'nir",
           "Klyuch-molot",
@@ -267,7 +269,7 @@
         "Zverinets"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Tvoy put' na vykhod",
           "Pochemu etot klyuch zdes'?",
           "Chto eto za komnata?",
@@ -285,7 +287,7 @@
         "Vozvrashcheniye k makake"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Tvoy bilet na vykhod",
           "Ne toksichen",
           "Pravil'nyy material",
@@ -303,21 +305,21 @@
         "Krysinaya vecherinka"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Nakonets-to!",
           "Oooo... blestyashchiy",
           "Pochti tam",
           "Posledniy klyuch",
           "Luchshe, chem serebryanyy"
         ],
-        "key2": [
+        "Key2": [
           "Luchshe chem rzhavyy",
           "Khuzhe chem zolotoy",
           "Slishkom mnogo dverey, chtoby otkryt'",
           "Vam ponadobitsya dva",
           "Nuzhno chto-to luchshe"
         ],
-        "key3": [
+        "Key3": [
           "Ispol'zuyte, chtoby poluchit' bol'she klyuchey",
           "Pervyy iz mnogikh klyuchey",
           "Khuzhe, chem serebryanyy",
@@ -335,21 +337,21 @@
         "Posledniy boy P'yera"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Kak etot klyuch delayet eto?",
           "Eto ne sekret",
           "Delayet sekretnyy zvuk",
           "Ispol'zuyte v zolotoy zamochnoy skvazhine",
           "Sverkayushchiy klyuch"
         ],
-        "key2": [
+        "Key2": [
           "Krys v izobilii",
           "Ostorozhno, gorilly",
           "Ne propustite sekret",
           "Vam nuzhen yeshche odin klyuch",
           "Rabotayet tol'ko na pravom zamke"
         ],
-        "key3": [
+        "Key3": [
           "Vstav'te v zamochnuyu skvazhinu",
           "Nuzhno 2 klyucha na 1 dver'",
           "Tolkayte etot blok vokrug yeshcho",
@@ -367,7 +369,7 @@
         "Dom mumii"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Operatsiya na mozge",
           "Klyuch mumii",
           "Ispol'zuyte v Sfinkse",
@@ -385,35 +387,35 @@
         "Veshchi yegipetskikh bogov"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Otkryvayet dve dveri",
           "Klyuch s sinim dragotsennym kamnem",
           "Klyuch iz oksida alyuminiya",
           "Pochemu tam dver'?",
           "Krokodilovyy klyuch"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Glaz zlodeya Seta",
           "Uvidimsya",
           "Vsegda smotryashchiy",
           "Glaznoye yabloko",
           "Khvatit smotret' na menya"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Prosto bukashka",
           "Skarabey",
           "Zhuk",
           "Navoznyy zhuk",
           "Zhelayu vam imet' eto dlya sleduyushchego urovnya"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Pechat' Anpu",
           "Pechat' Shakala",
           "Prosto kakiye-to karakuli",
           "Rozettskiy kamen'",
           "Kartoshka"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Eto ne TR4",
           "Gde Seth?",
           "Tebe luchshe polozhit' eto na mesto",
@@ -431,21 +433,21 @@
         "Radostnoye vremya"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Ispol'zuyte na mostu",
           "Dayte volyu kentavru",
           "Ispol'zuyte, chtoby poluchit' Ankkh",
           "Yedinstvennyy klyuch na etom urovne",
           "Kak eto ne zarzhavelo?"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Ispol'zuyte na sfinkse",
           "Nuzhno dva",
           "Gde Set?",
           "Udar' menya detka yeshche odin raz",
           "Kakashka kentavra"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Prosto bukashka",
           "Porozhdayet nekotorykh vragov",
           "Vyydite iz etogo urovnya",
@@ -463,14 +465,14 @@
         "Memy Natly"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Kto polozhil eto syuda",
           "Bats!",
           "Vy khotite oruzhiye?",
           "Pochemu oni do sikh por rabotayut?",
           "Elektricheskiy pintset"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Ochen' unikal'nyy klyuch",
           "Tvoy put' na vykhod",
           "Kakoy-to yegipetskiy treugol'nik",
@@ -506,7 +508,7 @@
         "Vam nuzhny eti aptechki!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Maslyanyy klyuch",
           "Do Zolotogo Klyucha",
           "Blestyashchiy klyuch",
@@ -524,7 +526,7 @@
         "Sobachniki podal'she"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Sorokin klyuch",
           "Neobychnyy klyuch",
           "Na skol'ko bol'she?",

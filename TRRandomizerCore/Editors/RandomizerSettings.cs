@@ -176,9 +176,6 @@ public class RandomizerSettings
     public bool SnowyAssaultCourse { get; set; }
     public bool ColdAssaultCourse { get; set; }
 
-    public bool UseRecommendedCommunitySettings { get; set; }
-
-
     /// <summary>
     /// Randomisation mode used in ItemSpriteRandomizer
     /// </summary>
@@ -362,8 +359,6 @@ public class RandomizerSettings
         MinStartingHealth = config.GetUInt(nameof(MinStartingHealth), 1000);
         MaxStartingHealth = config.GetUInt(nameof(MaxStartingHealth), 1000);
 
-        UseRecommendedCommunitySettings = config.GetBool(nameof(UseRecommendedCommunitySettings), true);
-
         SpriteRandoMode = (SpriteRandoMode)config.GetEnum(nameof(SpriteRandoMode), typeof(SpriteRandoMode), SpriteRandoMode.Default);
         RandomizeItemSprites = config.GetBool(nameof(RandomizeItemSprites));
         RandomizeKeyItemSprites = config.GetBool(nameof(RandomizeKeyItemSprites));
@@ -535,8 +530,6 @@ public class RandomizerSettings
         config[nameof(HealthSeed)] = HealthSeed;
         config[nameof(MinStartingHealth)] = MinStartingHealth;
         config[nameof(MaxStartingHealth)] = MaxStartingHealth;
-
-        config[nameof(UseRecommendedCommunitySettings)] = UseRecommendedCommunitySettings;
 
         config[nameof(SpriteRandoMode)] = SpriteRandoMode;
         config[nameof(RandomizeItemSprites)] = RandomizeItemSprites;

@@ -28,124 +28,126 @@
       "UwU",
       "Promijeni stvari"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Prva pomoc",
-      "Velika prva pomoc",
-      "Daje cijelo zdravlje",
-      "Mega",
-      "Bolje od male pomoci"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Trebaš ici na sjever",
-      "Vrteca stvar",
-      "Samo je magnet",
-      "Radi li ovo?",
-      "Tko ovo koristi?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Ergonomika",
-      "Kako igrati",
-      "Tipkovnica je bolja",
-      "Kontroler je bolji",
-      "Koja je tipka?"
-    ],
-    "INV_ITEM_DETAILS": [
-      "John Lennon kostim",
-      "Sjene",
-      "\\o-o/",
-      "Ružicaste naocale",
-      "Naocake"
-    ],
-    "INV_ITEM_GAME": [
-      "Identifikacija",
-      "Putujuci dokument",
-      "Vjerodajnice",
-      "Pikselizirana knjiga",
-      "Putovnica"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Ne liži",
-      "Preteško za nošenje",
-      "Krivi materijal",
-      "Pomalo toksicno",
-      "Stavi na Midinu ruku"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Bolji pištolji",
-      "Pištolji ali crni",
-      "Pomalo dosadni",
-      "Šteta po sekundi",
-      "Zvuce dublje"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Sladoled",
-      "Snikers",
-      "50 metaka",
-      "Cokolada",
-      "Nije kao uzi klip"
-    ],
-    "INV_ITEM_MEDI": [
-      "Nije prva pomoc",
-      "Mini pomoc",
-      "Daje pola zdravlja",
-      "I to je nešto",
-      "Gore od velike pomoci"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Klasicni pištolji",
-      "Najslabije oružje",
-      "Staro ali pouzdano",
-      "Kome trebaju metci?",
-      "Beskonacno pucanje"
-    ],
-    "INV_ITEM_SCION": [
-      "Okrugla stvarcica",
-      "Ne pucaj me",
-      "Treba ti tri",
-      "Ski-jion",
-      "Uzd-ah"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Perfektno preczina",
-      "Iskoristi pištolje",
-      "Najbolja šteta",
-      "Nezgrapan",
-      "Velika bazuka"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Nedovoljno metaka",
-      "Samo 2 cahure",
-      "Definicija preciznosti",
-      "Ne vrijedi pokupiti",
-      "Najbolja cahura"
-    ],
-    "INV_ITEM_SOUND": [
-      "Mikser",
-      "Tiho ili glasno?",
-      "catJam",
-      "Slušalice",
-      "Bole uši"
-    ],
-    "INV_ITEM_UZI": [
-      "TRRRRRRRRRRR",
-      "Mac 10",
-      "Najjaci pištolj",
-      "Piju piju",
-      "Treba ga oslabiti"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Najbolji metci",
-      "100 metaka",
-      "Svi pogadaju neprijatelje",
-      "Predugo odmaraju",
-      "Puuu metci"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "Oduzimaš mi dah",
       "Trenutno beskorisno",
       "Sacuvaj dušu",
       "Osobna uštedevina",
       "Spremi preko mene"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Nije prva pomoc",
+      "Mini pomoc",
+      "Daje pola zdravlja",
+      "I to je nešto",
+      "Gore od velike pomoci"
+    ],
+    "large_medipack": [
+      "Prva pomoc",
+      "Velika prva pomoc",
+      "Daje cijelo zdravlje",
+      "Mega",
+      "Bolje od male pomoci"
+    ],
+    "compass": [
+      "Trebaš ici na sjever",
+      "Vrteca stvar",
+      "Samo je magnet",
+      "Radi li ovo?",
+      "Tko ovo koristi?"
+    ],
+    "controls": [
+      "Ergonomika",
+      "Kako igrati",
+      "Tipkovnica je bolja",
+      "Kontroler je bolji",
+      "Koja je tipka?"
+    ],
+    "graphics": [
+      "John Lennon kostim",
+      "Sjene",
+      "\\o-o/",
+      "Ružicaste naocale",
+      "Naocake"
+    ],
+    "passport": [
+      "Identifikacija",
+      "Putujuci dokument",
+      "Vjerodajnice",
+      "Pikselizirana knjiga",
+      "Putovnica"
+    ],
+    "lead_bar": [
+      "Ne liži",
+      "Preteško za nošenje",
+      "Krivi materijal",
+      "Pomalo toksicno",
+      "Stavi na Midinu ruku"
+    ],
+    "magnums": [
+      "Bolji pištolji",
+      "Pištolji ali crni",
+      "Pomalo dosadni",
+      "Šteta po sekundi",
+      "Zvuce dublje"
+    ],
+    "magnums_ammo": [
+      "Sladoled",
+      "Snikers",
+      "50 metaka",
+      "Cokolada",
+      "Nije kao uzi klip"
+    ],
+    "pistols": [
+      "Klasicni pištolji",
+      "Najslabije oružje",
+      "Staro ali pouzdano",
+      "Kome trebaju metci?",
+      "Beskonacno pucanje"
+    ],
+    "scion": [
+      "Okrugla stvarcica",
+      "Ne pucaj me",
+      "Treba ti tri",
+      "Ski-jion",
+      "Uzd-ah"
+    ],
+    "shotgun": [
+      "Perfektno preczina",
+      "Iskoristi pištolje",
+      "Najbolja šteta",
+      "Nezgrapan",
+      "Velika bazuka"
+    ],
+    "shotgun_ammo": [
+      "Nedovoljno metaka",
+      "Samo 2 cahure",
+      "Definicija preciznosti",
+      "Ne vrijedi pokupiti",
+      "Najbolja cahura"
+    ],
+    "sound": [
+      "Mikser",
+      "Tiho ili glasno?",
+      "catJam",
+      "Slušalice",
+      "Bole uši"
+    ],
+    "uzis": [
+      "TRRRRRRRRRRR",
+      "Mac 10",
+      "Najjaci pištolj",
+      "Piju piju",
+      "Treba ga oslabiti"
+    ],
+    "uzis_ammo": [
+      "Najbolji metci",
+      "100 metaka",
+      "Svi pogadaju neprijatelje",
+      "Predugo odmaraju",
+      "Puuu metci"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Grad Vilcabange"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Qwop kljuc",
           "Vuk kljuc",
           "Ne zaboravi figuricu",
           "Bježi od vukova",
           "Na desno ti je stvar"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Lutka",
           "Indianina figurica",
           "Vjerojatno vrijedi",
@@ -201,7 +203,7 @@
         "Svetište dinosaura"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 je magicni broj",
           "Zupcanici",
           "Kotac",
@@ -228,28 +230,28 @@
         "Pregršt rupa"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Vodeni kljuc",
           "Ja sam stvarno rimski",
           "Lažni Posejdon",
           "Sve do kraja",
           "Ajmo plivati"
         ],
-        "key2": [
+        "Key2": [
           "Puno puno mapa",
           "Prava dama uvijek puca",
           "Vražja gorila",
           "Ogromni kuglin kljuc",
           "Drago mi je što te nije zgnijecilo"
         ],
-        "key3": [
+        "Key3": [
           "Pazi gdje hodaš",
           "Cak nije ni bog",
           "Vrijeme je za šetnju",
           "Pazi na maceve",
           "Dolazi!"
         ],
-        "key4": [
+        "Key4": [
           "Nije ni Grcki",
           "Mjolnirski kljuc",
           "Cekic kljuc",
@@ -267,7 +269,7 @@
         "Zvjerinjak"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Tvoj put vani",
           "Zašto je ovaj kljuc ovdje",
           "Kakva je ovo soba?",
@@ -285,7 +287,7 @@
         "Potvratak majmuna"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Tvoja karta vani",
           "Nije toksicno",
           "Pravi materijal",
@@ -303,21 +305,21 @@
         "Štakor parti"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Konacno",
           "Oooo...sjajno",
           "Skoro tamo",
           "Zadnji kljuc",
           "Bolji nego srebrni"
         ],
-        "key2": [
+        "Key2": [
           "Bolji nego zahrdali",
           "Gori nego zlatni",
           "Previše vrata za otvaranje",
           "Treba ti dva",
           "Treba ti bolje"
         ],
-        "key3": [
+        "Key3": [
           "Iskoristi za više kljuceva",
           "Prvi od mnogo kljuceva",
           "Gori nego srebrni",
@@ -335,21 +337,21 @@
         "Pierrovo posljednje uporište"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Kako koristiti ovaj kljuc",
           "Ovo nije tajna",
           "Proizvodi zvuk tajne",
           "Iskoristi u zlatnu kljucanicu",
           "Svjetlucav kljuc"
         ],
-        "key2": [
+        "Key2": [
           "Dolaze štakori",
           "Pazi na gorile",
           "Ne propusti tajnu",
           "Potreban je još jedan kljuc",
           "Radi samo na tocnoj kljucanici"
         ],
-        "key3": [
+        "Key3": [
           "Stavi u kljucanicu",
           "Treba 2 kljuca za jedna vrata",
           "Guraj blok još okolo",
@@ -367,7 +369,7 @@
         "Monina kuca"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Operacija mozga",
           "Monin kljuc",
           "Iskoristi u sfingi",
@@ -385,35 +387,35 @@
         "Egipatsko božanstvo"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Otvara dva vrata",
           "Plavo kameni kljuc",
           "Oksidirani kljuc",
           "Zašto su vrata ovdje?",
           "Krokodilski kljuc"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Setovo oko",
           "Vidimo se",
           "Uvijek gledam",
           "Vidim vas",
           "Ne gledaj me"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Ma samo je bug",
           "Skarabej",
           "Kepri",
           "Balegar",
           "Treba ti za sljedeci level"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Pecat Anpua",
           "Pecat Jackala",
           "Neke škrabotine",
           "Rosetin kamen",
           "Krompir"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Ovo nije TR4",
           "Gdje je Seth?",
           "Vrati to nazad",
@@ -431,21 +433,21 @@
         "Radosno vrijeme"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Iskoristi na mostu",
           "Pusti kentaura",
           "Iskoristi za ankh",
           "Jedini kljuc na ovom levelu",
           "Kako nije zahrdao"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Stavi na Sfingu",
           "Treba ti dva",
           "Gdje je Seth?",
           "Nikad kraja",
           "Kentaurov izmet"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Samo bug",
           "Stvara neprijatelje",
           "Izadi s ovog levela",
@@ -463,14 +465,14 @@
         "Natlini memovi"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Tko je ovo stavio tu",
           "Iznenadenje!",
           "Želiš pištolje",
           "Zašto ovo još radi?",
           "Elektricne pincete"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Vrlo unikatan kljuc",
           "Tvoj izlaz vani",
           "Neki egiptaski trokut",
@@ -506,7 +508,7 @@
         "Trebat će ti prva pomoć"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Ključ od maslaca",
           "Pred zlatni ključ",
           "Sjajni ključ",
@@ -524,7 +526,7 @@
         "Psi pazite se"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Previše ovog",
           "Kul ključ",
           "Koliko još?",

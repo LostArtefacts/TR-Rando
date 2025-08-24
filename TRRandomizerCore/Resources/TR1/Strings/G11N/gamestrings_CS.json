@@ -28,124 +28,126 @@
       "OwO",
       "Zmente Veci"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Zavolej Doktora!",
-      "Tlusta Lekarna",
-      "Da Plny Zivot",
-      "Mega",
-      "Lepsi nez Mala Lekarna"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Jdi Na Sever",
-      "TociToci Vecicka",
-      "Jen Magnet",
-      "Funguje Vubec?",
-      "Kdo To Pouziva?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Ergonomika",
-      "Jak se Ovlada?",
-      "Klavesnice je Top",
-      "Ovladac je Top",
-      "Co dela Co"
-    ],
-    "INV_ITEM_DETAILS": [
-      "John Lennon volal a chce je",
-      "Nesnasim Slunce",
-      "\\o-o/",
-      "Ruzove Brejle",
-      "Brejlicky"
-    ],
-    "INV_ITEM_GAME": [
-      "ID",
-      "Cestovni Dokument",
-      "Cestovni Kniha",
-      "Pixelova Knizka",
-      "Pas"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Neolizovat",
-      "Moc Tezke, To Netaham",
-      "Spatnej Matros",
-      "Lehce Toxicky.",
-      "Vloz Na Ruku Midase"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Lepsi Pistole",
-      "Pistole v Cerne Kuzi",
-      "Bozsky Zvuk",
-      "Celkem Davaj",
-      "Ja Miluju Ten Zvuk"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Naboje pro Bozi Zvuk",
-      "Cokoladky",
-      "50 Naboju",
-      "DZZ DZZ Munice",
-      "Neni pro Uzi"
-    ],
-    "INV_ITEM_MEDI": [
-      "Neni Tlusta Lekarna",
-      "Mini",
-      "Da Jen 50 procent",
-      "Aspon Neco",
-      "Horsi nez Velka Lekarna"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Pal Pal nekonecno",
-      "Nejslabsi",
-      "Nekonecne??",
-      "Kdo Potrebuje Munici?",
-      "Nekonecne PalPal"
-    ],
-    "INV_ITEM_SCION": [
-      "Cosi Kulateho",
-      "Nestrilej na me",
-      "Potrebujes 3",
-      "Je to Skijoon",
-      "Je to Skipassion"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Perfektne Presne",
-      "Pouzij Pistole",
-      "Nejlepsi Poskozeni",
-      "Velky Rozptyl",
-      "Flusbrok"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Jen Po Dvou?",
-      "Nedostatek Munice",
-      "Definice Presnosti",
-      "Nesbirat",
-      "Rakety"
-    ],
-    "INV_ITEM_SOUND": [
-      "Mp3",
-      "Mp4",
-      "Mp5 ( uups chyba )",
-      "Sluchadla",
-      "Znasilneni Usi"
-    ],
-    "INV_ITEM_UZI": [
-      "RATATATATA",
-      "Uziny",
-      "PC Zvuk Je Hrozny",
-      "Uziky",
-      "Minigun"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Top Naboje",
-      "100 Naboju",
-      "Minimalni Rozptyl",
-      "Kde se to vzalo v hrobce?",
-      "Minigun Naboje"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "Strelba Naslepo",
       "Aktualne k Nicemu",
       "Zachrante Nase Duse",
       "Osobni Save",
       "Uloz Na Me"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Neni Tlusta Lekarna",
+      "Mini",
+      "Da Jen 50 procent",
+      "Aspon Neco",
+      "Horsi nez Velka Lekarna"
+    ],
+    "large_medipack": [
+      "Zavolej Doktora!",
+      "Tlusta Lekarna",
+      "Da Plny Zivot",
+      "Mega",
+      "Lepsi nez Mala Lekarna"
+    ],
+    "compass": [
+      "Jdi Na Sever",
+      "TociToci Vecicka",
+      "Jen Magnet",
+      "Funguje Vubec?",
+      "Kdo To Pouziva?"
+    ],
+    "controls": [
+      "Ergonomika",
+      "Jak se Ovlada?",
+      "Klavesnice je Top",
+      "Ovladac je Top",
+      "Co dela Co"
+    ],
+    "graphics": [
+      "John Lennon volal a chce je",
+      "Nesnasim Slunce",
+      "\\o-o/",
+      "Ruzove Brejle",
+      "Brejlicky"
+    ],
+    "passport": [
+      "ID",
+      "Cestovni Dokument",
+      "Cestovni Kniha",
+      "Pixelova Knizka",
+      "Pas"
+    ],
+    "lead_bar": [
+      "Neolizovat",
+      "Moc Tezke, To Netaham",
+      "Spatnej Matros",
+      "Lehce Toxicky.",
+      "Vloz Na Ruku Midase"
+    ],
+    "magnums": [
+      "Lepsi Pistole",
+      "Pistole v Cerne Kuzi",
+      "Bozsky Zvuk",
+      "Celkem Davaj",
+      "Ja Miluju Ten Zvuk"
+    ],
+    "magnums_ammo": [
+      "Naboje pro Bozi Zvuk",
+      "Cokoladky",
+      "50 Naboju",
+      "DZZ DZZ Munice",
+      "Neni pro Uzi"
+    ],
+    "pistols": [
+      "Pal Pal nekonecno",
+      "Nejslabsi",
+      "Nekonecne??",
+      "Kdo Potrebuje Munici?",
+      "Nekonecne PalPal"
+    ],
+    "scion": [
+      "Cosi Kulateho",
+      "Nestrilej na me",
+      "Potrebujes 3",
+      "Je to Skijoon",
+      "Je to Skipassion"
+    ],
+    "shotgun": [
+      "Perfektne Presne",
+      "Pouzij Pistole",
+      "Nejlepsi Poskozeni",
+      "Velky Rozptyl",
+      "Flusbrok"
+    ],
+    "shotgun_ammo": [
+      "Jen Po Dvou?",
+      "Nedostatek Munice",
+      "Definice Presnosti",
+      "Nesbirat",
+      "Rakety"
+    ],
+    "sound": [
+      "Mp3",
+      "Mp4",
+      "Mp5 ( uups chyba )",
+      "Sluchadla",
+      "Znasilneni Usi"
+    ],
+    "uzis": [
+      "RATATATATA",
+      "Uziny",
+      "PC Zvuk Je Hrozny",
+      "Uziky",
+      "Minigun"
+    ],
+    "uzis_ammo": [
+      "Top Naboje",
+      "100 Naboju",
+      "Minimalni Rozptyl",
+      "Kde se to vzalo v hrobce?",
+      "Minigun Naboje"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Mesto Hranatosti"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Qwop Klic",
           "Vlci Klic",
           "Nezapomen Zlatou Figuru",
           "VSUDE VLCI",
           "Predmet Napravo"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Panenka",
           "Indianova Panenka",
           "Asi je to cenne",
@@ -201,7 +203,7 @@
         "Svatyne Dinosauru"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 je magicke cislo",
           "Tutununu Kolesko",
           "KRUH",
@@ -228,28 +230,28 @@
         "Variace Klicu"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Vodni Klic",
           "Koukej, Jsem Riman",
           "Falesny Poseidon",
           "Az tam dolu",
           "Tak si tak plavu"
         ],
-        "key2": [
+        "Key2": [
           "Hodne mnoho map",
           "Prava Dama Strili",
           "Zatracena Gorila",
           "Klic Obrovske Koule",
           "Sem Rad Ze Nejsi Palacinka"
         ],
-        "key3": [
+        "Key3": [
           "Pozor Kam Slapes",
           "Ani To Neni Buh",
           "Cas Na Prochazku",
           "Pozor Na Mece",
           "PRICHAZIM"
         ],
-        "key4": [
+        "Key4": [
           "Ani Neni Z Recka",
           "Mjolnirsky Klic",
           "Kladivovej Klic",
@@ -267,7 +269,7 @@
         "Zverinec"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Tva Cesta Ven",
           "Co To Tu Dela",
           "Co To Je Za Mistnost",
@@ -285,7 +287,7 @@
         "Midasovo Ho***"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Tva Cesta Ven",
           "Neni Toxickej",
           "Spravny Material",
@@ -303,21 +305,21 @@
         "KrysoParty"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "No Konecne",
           "Oooo.. Leskle",
           "Skoro U Konce",
           "Posledni Klic",
           "Lepsi Nez Stribro"
         ],
-        "key2": [
+        "Key2": [
           "Lepsi Nez Rezave",
           "Horsi Nez Zlato",
           "Proc Tolik Dveri?",
           "Potrebujes Dva",
           "Potrebujes Neco Lepsiho"
         ],
-        "key3": [
+        "Key3": [
           "Pouzij Pro Vice Klicu",
           "Prvni Z Mnoha",
           "Horsi Nez Stribro",
@@ -335,21 +337,21 @@
         "Pierrovo Posledni Utociste"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Jak To Ten Klic Udelal?",
           "To Neni Tajemstvi",
           "Dela Zvuk Sekretu",
           "Pouzij Do Zlate Dirky",
           "Leskly Klicek"
         ],
-        "key2": [
+        "Key2": [
           "Krys je Mnoho",
           "Pozor Na Gorilky",
           "Nezapomen Tajemstvi",
           "Potrebujes Dalsi Klic",
           "Funguje Jen Na Pravej Zamek"
         ],
-        "key3": [
+        "Key3": [
           "Vlozte Do Diry",
           "2 Klice Pro 1 Dvere",
           "Vic Potahej Kostku",
@@ -367,7 +369,7 @@
         "To Ze Ma Byt Sfinga?"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Operace Mozku",
           "Sfingovej Klicek",
           "Vloz Mezi Nohy",
@@ -385,35 +387,35 @@
         "Egyptsky Nabytek"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Otevre Dvoje Dvere",
           "Diamklucik",
           "Opatlanej Kli",
           "Proc Tu Sou Dvere?",
           "Krokoklicek"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Kuk",
           "Navidenou",
           "Vsevidouci Oko",
           "Vidim VAS!!!",
           "Necum"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Brouk",
           "Hovnival",
           "Hnusnej Brouk",
           "Nejaka Kobyla? Asi.",
           "Pral Bych Si To Vzit Do Dalsiho Levelu"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Sakalova Pecet",
           "Anticka Placka",
           "Staroveka Palacinka",
           "Nejaky Planek",
           "Brambora Egyptskeho Typu"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Toto Neni Tr4",
           "Kde Je Seth",
           "Radeji To Vratte",
@@ -431,21 +433,21 @@
         "Nejlepsi Level EVER!!!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Pouzij Na Moste",
           "Vypustte Kentaura",
           "Pouzitim Ziskas Ankh",
           "Jediny Klic V Levelu",
           "Jakpakto Ze Neni Rezavej"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Dej Do Sfingy",
           "Potrebujes 2",
           "Kde Je Seth?",
           "Kentauri Pozlaceny Bobek",
           "Staroegyptska Pojistka"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Zase Nejakej Brouk",
           "Spusti Bossfight",
           "Pustite Me Ven?",
@@ -463,14 +465,14 @@
         "Natlino Memecko"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Kdo To Sem Dal?",
           "Harry, Jdu Do Baraku",
           "Chcete Zbrane?",
           "Jak Mohou Fungovat?",
           "Elektricka Pinzeta"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Unikatni Klic",
           "Tva Cesta Dal",
           "Nejakej Egyptskej Trojuhelnik",
@@ -506,7 +508,7 @@
         "Tyhle Lekarny Potrebujes"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Maslovej Klic",
           "Pred Zlaty Klic",
           "Leskly Klic",
@@ -524,7 +526,7 @@
         "Milovnici psu ZMIZTE"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Je jich proste moc",
           "Zazobancuv Klic",
           "Kolik jeste?",

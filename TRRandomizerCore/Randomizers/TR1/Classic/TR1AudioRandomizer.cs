@@ -40,16 +40,16 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             }
         }
 
-        TR1ScriptEditor script = (ScriptEditor as TR1ScriptEditor);
+        var script = ScriptEditor.Script as TR1Script;
         if (Settings.RandomizeWibble)
         {
-            script.EnablePitchedSounds = true;
+            script.EnforceConfig("enable_pitched_sounds", true);
         }
 
         if (Settings.SeparateSecretTracks && Settings.SecretRewardMode == Secrets.TRSecretRewardMode.Stack)
         {
-            script.FixSecretsKillingMusic = false;
-            script.FixSpeechesKillingMusic = false;
+            script.EnforceConfig("fix_secrets_killing_music", false);
+            script.EnforceConfig("fix_speeches_killing_music", false);
         }
 
         ScriptEditor.SaveScript();
@@ -155,18 +155,12 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
 
     private void ImportSpeechSFX(TR1Level level)
     {
-        if (!(ScriptEditor as TR1ScriptEditor).FixSpeechesKillingMusic)
-        {
-            return;
-        }
-
         // TR1X can play enemy speeches as SFX to avoid killing the current track, so ensure that
         // the required data is in the level if any of these are used on the floor.
-        List<ushort> usedSpeechTracks = level.FloorData.GetActionItems(FDTrigAction.PlaySoundtrack)
+        List<ushort> usedSpeechTracks = [.. level.FloorData.GetActionItems(FDTrigAction.PlaySoundtrack)
             .Select(action => (ushort)action.Parameter)
             .Distinct()
-            .Where(trackID => _speechTracks.Contains(trackID))
-            .ToList();
+            .Where(trackID => _speechTracks.Contains(trackID))];
 
         if (usedSpeechTracks.Count == 0)
         {

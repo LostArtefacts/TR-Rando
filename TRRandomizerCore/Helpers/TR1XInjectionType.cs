@@ -8,10 +8,9 @@ public enum TR1XInjectionType
     PSUziSFX,
     FDFix,
     LaraAnims,
-    LaraJumps,
     ItemRotation,
-    PS1Enemy,
-    DisableAnimSprite,
+    Item,
+    AlterAnimSprite,
     Skybox,
     PSCrystal,
 }

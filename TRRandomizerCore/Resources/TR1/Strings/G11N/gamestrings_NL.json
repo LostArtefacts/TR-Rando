@@ -28,124 +28,126 @@
       "uwu",
       "Verander dingen"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Doctor?",
-      "Dikke eerstehulp",
-      "Vol leven",
-      "Grote",
-      "Beter dan een kleintje"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Je moet naar t noorden",
-      "Draai ding",
-      "Gewoon een magneet",
-      "Werkt dit?",
-      "Wie gebruikt dit?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "ergonomie",
-      "Hoe te spelen",
-      "Keyboard is beter",
-      "Controller is beter",
-      "Welke knop is het?"
-    ],
-    "INV_ITEM_DETAILS": [
-      "John Lennon kostuum",
-      "Zonnebril",
-      "/o-o/",
-      "Roosgetinte glazen",
-      "Bril"
-    ],
-    "INV_ITEM_GAME": [
-      "Identiteits bewijs",
-      "reisdocument",
-      "gegevens",
-      "Pixel boekje",
-      "Paspoort"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Niet likken",
-      "Te zwaar om te dragen",
-      "Verkeerde materiaal",
-      "Lichtelijk giftig",
-      "Leg op de Midas hand"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Betere pistolen",
-      "Pistolen met zwarte skin",
-      "Soorvan saai",
-      "Schade",
-      "Klinkt dieper"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "ammunitie ijsje",
-      "Mars reep",
-      "50 kogels",
-      "Chocolade",
-      "Niet zo goed als uzi magazijn"
-    ],
-    "INV_ITEM_MEDI": [
-      "Slanke Eerstehulp",
-      "Kleintje",
-      "Half leven",
-      "Het is iets",
-      "Slechter dan een grote"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Pistolen",
-      "Zwakste uitrusting",
-      "Oud en betrouwbaar",
-      "Wie heeft er nou ammunitie nodig",
-      "Oneindige PiewPiew"
-    ],
-    "INV_ITEM_SCION": [
-      "Rond ding",
-      "Niet schieten!",
-      "Je hebt er 3 nodig",
-      "Het is Skie-on",
-      "Het is Saai-on"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Perfect accuraat",
-      "Gebruik gewoon pistolen",
-      "Beste schade",
-      "Klunkig",
-      "Grote Boem bazooka"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Niet genoeg ammunitie",
-      "maar 2 per doos?",
-      "de definitie van accuraat",
-      "het oppakken niet waard",
-      "Grote boem"
-    ],
-    "INV_ITEM_SOUND": [
-      "Mixpaneel",
-      "Zacht of hard?",
-      "catJAM",
-      "Hoofdtelefoon",
-      "Oorverkrachting"
-    ],
-    "INV_ITEM_UZI": [
-      "TRRRRRRRR",
-      "MAC-10",
-      "ijsje",
-      "PiewPiew",
-      "Heeft een nerf nodig"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Beste ammunitie",
-      "100 kogels",
-      "In elk geval raken deze de vijand",
-      "Magazijn chilt in oude tombe",
-      "PiewPiew Ammunitie"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "Jij bent adembenemend",
       "Momenteel nutteloos",
       "Red onze zielen",
       "Persoonlijke opslag",
       "Schrijf over mij heen"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Slanke Eerstehulp",
+      "Kleintje",
+      "Half leven",
+      "Het is iets",
+      "Slechter dan een grote"
+    ],
+    "large_medipack": [
+      "Doctor?",
+      "Dikke eerstehulp",
+      "Vol leven",
+      "Grote",
+      "Beter dan een kleintje"
+    ],
+    "compass": [
+      "Je moet naar t noorden",
+      "Draai ding",
+      "Gewoon een magneet",
+      "Werkt dit?",
+      "Wie gebruikt dit?"
+    ],
+    "controls": [
+      "ergonomie",
+      "Hoe te spelen",
+      "Keyboard is beter",
+      "Controller is beter",
+      "Welke knop is het?"
+    ],
+    "graphics": [
+      "John Lennon kostuum",
+      "Zonnebril",
+      "/o-o/",
+      "Roosgetinte glazen",
+      "Bril"
+    ],
+    "passport": [
+      "Identiteits bewijs",
+      "reisdocument",
+      "gegevens",
+      "Pixel boekje",
+      "Paspoort"
+    ],
+    "lead_bar": [
+      "Niet likken",
+      "Te zwaar om te dragen",
+      "Verkeerde materiaal",
+      "Lichtelijk giftig",
+      "Leg op de Midas hand"
+    ],
+    "magnums": [
+      "Betere pistolen",
+      "Pistolen met zwarte skin",
+      "Soorvan saai",
+      "Schade",
+      "Klinkt dieper"
+    ],
+    "magnums_ammo": [
+      "ammunitie ijsje",
+      "Mars reep",
+      "50 kogels",
+      "Chocolade",
+      "Niet zo goed als uzi magazijn"
+    ],
+    "pistols": [
+      "Pistolen",
+      "Zwakste uitrusting",
+      "Oud en betrouwbaar",
+      "Wie heeft er nou ammunitie nodig",
+      "Oneindige PiewPiew"
+    ],
+    "scion": [
+      "Rond ding",
+      "Niet schieten!",
+      "Je hebt er 3 nodig",
+      "Het is Skie-on",
+      "Het is Saai-on"
+    ],
+    "shotgun": [
+      "Perfect accuraat",
+      "Gebruik gewoon pistolen",
+      "Beste schade",
+      "Klunkig",
+      "Grote Boem bazooka"
+    ],
+    "shotgun_ammo": [
+      "Niet genoeg ammunitie",
+      "maar 2 per doos?",
+      "de definitie van accuraat",
+      "het oppakken niet waard",
+      "Grote boem"
+    ],
+    "sound": [
+      "Mixpaneel",
+      "Zacht of hard?",
+      "catJAM",
+      "Hoofdtelefoon",
+      "Oorverkrachting"
+    ],
+    "uzis": [
+      "TRRRRRRRR",
+      "MAC-10",
+      "ijsje",
+      "PiewPiew",
+      "Heeft een nerf nodig"
+    ],
+    "uzis_ammo": [
+      "Beste ammunitie",
+      "100 kogels",
+      "In elk geval raken deze de vijand",
+      "Magazijn chilt in oude tombe",
+      "PiewPiew Ammunitie"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Stad van vilcabanga"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "QWOP sleutel",
           "Wolf sleutel",
           "Vergeet het idool niet",
           "Van de wolven in de wolven",
           "object aan de rechter kant"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Pop",
           "Indiana's schat",
           "Waarschijnlijk waardevol",
@@ -201,7 +203,7 @@
         "Dinosaurus heiligdom"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 is het magische nummer",
           "COGGERS",
           "Tandwiel",
@@ -228,28 +230,28 @@
         "Een variëteit aan gaten"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Water sleutel",
           "Hey, ik ben eigenlijk romeins",
           "Nep poseidon",
           "Helemaal naar beneden",
           "Laten we gaan zwemmen!"
         ],
-        "key2": [
+        "Key2": [
           "Vele vele kaarten",
           "Een echte dame schiet altijd",
           "Vervloekte gorilla",
           "Massieve rots sleutel",
           "Blij dat je niet geplet bent"
         ],
-        "key3": [
+        "Key3": [
           "Pas op waar je loopt",
           "Niet eens een god",
           "Tijd voor een wandeling",
           "Pas op voor de zwaarden",
           "Inkomend"
         ],
-        "key4": [
+        "Key4": [
           "Niet eens grieks",
           "Mjölnir Sleutel",
           "Hammer Sleutel",
@@ -267,7 +269,7 @@
         "de menagerie"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Je weg naar buiten",
           "Waarom is deze sleutel hier",
           "Wat is deze kamer",
@@ -285,7 +287,7 @@
         "Terug naar Monke"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Je weg hier uit",
           "Niet giftig",
           "Juiste materiaal",
@@ -303,21 +305,21 @@
         "Ratten dans"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "pffff eindelijk",
           "Ooooh, glimmend",
           "We zijn er bijna",
           "Laatste sleutel",
           "Beter dan zilver"
         ],
-        "key2": [
+        "Key2": [
           "Beter dan roestig",
           "Slechter dan goud",
           "Te veel deuren om te openen",
           "Je hebt er twee nodig",
           "Hebben iets beters nodig"
         ],
-        "key3": [
+        "Key3": [
           "Gebruik voor meer apen",
           "eerste van vele sleutels",
           "Slechter dan zilver",
@@ -335,21 +337,21 @@
         "Pierre's laatste verzet"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Hoe werkt deze sleutel",
           "Dit is geen geheim",
           "Maakt geheim geluid",
           "Gebruik in goude slot",
           "Glimmende sleutel"
         ],
-        "key2": [
+        "Key2": [
           "Inkomende Ratten",
           "Pas op voor de gorillas",
           "vergeet het geheim niet",
           "Je hebt nog een sleutel nodig",
           "Rechtse slot sleutel"
         ],
-        "key3": [
+        "Key3": [
           "Stop in sleutelgat",
           "twee sleutels voor een deur",
           "duw het blok nog meer",
@@ -367,7 +369,7 @@
         "Mona's huis"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Hersen Operatie",
           "Mona's sleutel",
           "Gebruik in de sphinx",
@@ -385,35 +387,35 @@
         "Egyptische goden dingen"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Opent twee deuren",
           "Blauwe edelsteen sleutel",
           "Aluminium oxide sleutel",
           "Waarom is hier een deur?",
           "Krokodillensleutel"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Oog van Seth's vijand",
           "Zie je later",
           "Altijd waakzaam",
           "Valken oogbal",
           "Kijk niet naar me"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Gewoon een kever",
           "Heracross",
           "Kephri",
           "Mestkever",
           "Hoop dat je dit volgend level hebt"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Zegel van Anpu",
           "Zegel van de jakhals",
           "Gewoon scribbles",
           "De steen van Rosetta",
           "Aardapple"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Dit is niet TR4",
           "Waar is Seth?",
           "Beter leg je dat terug",
@@ -431,21 +433,21 @@
         "Een goeie tijd"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "gebruik op de brug",
           "Laat de centaurus los",
           "Gebruik om de ankh te krijgen",
           "Enige sleutel in dit level",
           "Hoe is die niet verroest"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Zet op de sphinx",
           "Twee nodig",
           "Waar is Seth",
           "Sla me baby nog een keer",
           "Centaurus poep"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Maar een beestje",
           "brengt vijanden voort",
           "Uit dit level",
@@ -463,14 +465,14 @@
         "Natla's grappen"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Wie heeft dit hier gelegd",
           "Zap!",
           "Wil je wapens?",
           "Waarom werken deze nog?",
           "Elektrische nagelknipper"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Erg unieke sleutel",
           "Je weg naar buiten",
           "Eenofandere egyptische driehoek",
@@ -506,7 +508,7 @@
         "Je heb die meds nodig!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Boter Sleutel",
           "Pre-Goud Sleutel",
           "Schijnende Sleutel",
@@ -524,7 +526,7 @@
         "Honden personen blijf buiten"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Te veel van deze",
           "Modieuse Sleutel",
           "Hoe veel meer nog?",
