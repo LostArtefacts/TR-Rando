@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Drawing;
+﻿using System.Drawing;
 using TRLevelControl.Model;
 
 namespace TRLevelControlTests.Common;

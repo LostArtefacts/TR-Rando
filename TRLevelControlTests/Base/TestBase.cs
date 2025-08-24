@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Text;
+﻿using System.Text;
 using TRLevelControl;
 using TRLevelControl.Model;
 
