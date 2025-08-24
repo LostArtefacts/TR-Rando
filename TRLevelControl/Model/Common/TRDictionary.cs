@@ -20,4 +20,11 @@ public class TRDictionary<TKey, TValue> : SortedDictionary<TKey, TValue>
         base[newKey] = value;
         return true;
     }
+
+    public void RemoveAll(Func<TKey, bool> predicate)
+    {
+        Keys.Where(predicate)
+            .ToList()
+            .ForEach(r => Remove(r));
+    }
 }

@@ -152,7 +152,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         if (_braidLevels.Count > 0)
         {
-            (ScriptEditor.Script as TR1Script).EnableBraid = true;
+            (ScriptEditor.Script as TR1Script).EnforceConfig("enable_braid", true);
         }
     }
 
@@ -366,7 +366,6 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             if (CutsceneSupportsBraid(level))
             {
                 ImportBraid(level.CutSceneLevel);
-                level.CutSceneLevel.Script.LaraType = (uint)TR1Type.CutsceneActor1;
             }
         }
         

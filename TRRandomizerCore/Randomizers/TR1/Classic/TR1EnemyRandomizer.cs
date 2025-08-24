@@ -42,11 +42,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         TR1Script script = ScriptEditor.Script as TR1Script;
-        script.DisableTrexCollision = true;
-        if (Settings.UseRecommendedCommunitySettings)
-        {
-            script.ConvertDroppedGuns = true;
-        }
+        script.EnforceConfig("disable_trex_collision", true);
+        script.ConvertDroppedGuns = true;
     }
 
     private void RandomizeExistingEnemies()

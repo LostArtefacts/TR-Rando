@@ -119,11 +119,11 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
         string backupDirectory = _io.BackupDirectory.FullName;
         string wipDirectory = _io.WIPOutputDirectory.FullName;
 
-        TR1ScriptEditor scriptEd = scriptEditor as TR1ScriptEditor;
         if (Settings.DevelopmentMode)
         {
-            scriptEd.EnableCheats = true;
-            scriptEd.EnableConsole = true;
+            var script = scriptEditor.Script as TR1Script;
+            script.EnforceConfig("enable_cheats", true);
+            script.EnforceConfig("enable_console", true);
             scriptEditor.SaveScript();
         }
 
@@ -380,17 +380,12 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
             bg.Import(badge, new(960 - badge.Width / 2, 540 - badge.Height / 2), true);
             bg.Save(creditFile);
 
-            TR1ScriptedLevel finalLevel = scriptEditor.Levels.ToList().Find(l => l.IsFinalLevel) as TR1ScriptedLevel;
-            if (finalLevel.HasCutScene)
-            {
-                finalLevel = finalLevel.CutSceneLevel as TR1ScriptedLevel;
-            }
-
-            finalLevel.AddSequenceBefore(LevelSequenceType.Total_Stats, new DisplayPictureLevelSequence
+            var finalLevel = scriptEditor.Levels.ToList().Find(l => l.IsFinalLevel) as TR1ScriptedLevel;
+            finalLevel.AddSequenceBefore(LevelSequenceType.Total_Stats, new DisplayPictureSequence
             {
                 Type = LevelSequenceType.Display_Picture,
                 DisplayTime = 5,
-                PicturePath = creditPath
+                Path = creditFile,
             });
 
             script.AddAdditionalBackupFile(creditPath);

@@ -28,124 +28,126 @@
       "UwU",
       "Mudar as coisas"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Médico!",
-      "Kit Medico menos Pequeno",
-      "Kit Medico Grande",
-      "Mega",
-      "Melhor que um Kit Medico Pequeno"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Devias ir para norte",
-      "Coisa giratória",
-      "Apenas um íman",
-      "Isto funciona?",
-      "Quem usa isto?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Ergonomia",
-      "Como jogar",
-      "Teclado é o melhor",
-      "Comando é o melhor",
-      "Qual é o botão?"
-    ],
-    "INV_ITEM_DETAILS": [
-      "Fato de John Lennon",
-      "Óculos de sol",
-      "/o-o/",
-      "Óculos de protecção rosa",
-      "Óculos"
-    ],
-    "INV_ITEM_GAME": [
-      "ID",
-      "Documento de viagem",
-      "Credenciais",
-      "Livro Pixelizado",
-      "Passaporte"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Não lamber",
-      "Demasiado pesado para transportar",
-      "Material Errado",
-      "Ligeiramente Tóxico",
-      "Colocar a mão de Midas"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Pistolas melhores",
-      "Pistolas, pele negra",
-      "Meio aborrecido",
-      "Danos",
-      "Som ligeiramente mais profundo"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Gelado de munição",
-      "Barra de chocolate Hershey",
-      "50 balas",
-      "Chocolate",
-      "Não tão bons como os carregadores Uzi"
-    ],
-    "INV_ITEM_MEDI": [
-      "Kit Medico",
-      "Kit Medico Pequeno",
-      "Kit Medico a médio",
-      "É algo",
-      "Pior do que um Kit Medico Grande"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Pistolas",
-      "Equipamento mais fraco",
-      "Velho e fiável",
-      "Quem precisa de munições?",
-      "Piu-piu infinito"
-    ],
-    "INV_ITEM_SCION": [
-      "Coisa redonda",
-      "Não dispare contra mim",
-      "Precisa de três",
-      "É Skee-On",
-      "É Sigh-On"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Perfeitamente exacto",
-      "Use apenas pistolas",
-      "Melhor dano",
-      "Desajeitado",
-      "Grande bazuca"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Munições insuficientes",
-      "Porquê tão poucos?",
-      "Definição de precisão",
-      "Não vale a pena apanhar",
-      "Grande explosão"
-    ],
-    "INV_ITEM_SOUND": [
-      "Misturador",
-      "Silencioso ou alto?",
-      "catJAM",
-      "Auscultadores",
-      "Nível de volume"
-    ],
-    "INV_ITEM_UZI": [
-      "Uzi",
-      "MAC-10",
-      "Pistola automática",
-      "Pew Pew",
-      "Precisa de Nerf"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Melhor munição",
-      "100 balas",
-      "Pelo menos estas atingem os inimigos",
-      "Munições a arrefecer em túmulos antigos",
-      "Munições Pew Pew"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "És de cortar a respiração",
       "Actualmente inútil",
       "Salvem as nossas almas",
       "Poupanças pessoais",
       "Salva sobre mim"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Kit Medico",
+      "Kit Medico Pequeno",
+      "Kit Medico a médio",
+      "É algo",
+      "Pior do que um Kit Medico Grande"
+    ],
+    "large_medipack": [
+      "Médico!",
+      "Kit Medico menos Pequeno",
+      "Kit Medico Grande",
+      "Mega",
+      "Melhor que um Kit Medico Pequeno"
+    ],
+    "compass": [
+      "Devias ir para norte",
+      "Coisa giratória",
+      "Apenas um íman",
+      "Isto funciona?",
+      "Quem usa isto?"
+    ],
+    "controls": [
+      "Ergonomia",
+      "Como jogar",
+      "Teclado é o melhor",
+      "Comando é o melhor",
+      "Qual é o botão?"
+    ],
+    "graphics": [
+      "Fato de John Lennon",
+      "Óculos de sol",
+      "/o-o/",
+      "Óculos de protecção rosa",
+      "Óculos"
+    ],
+    "passport": [
+      "ID",
+      "Documento de viagem",
+      "Credenciais",
+      "Livro Pixelizado",
+      "Passaporte"
+    ],
+    "lead_bar": [
+      "Não lamber",
+      "Demasiado pesado para transportar",
+      "Material Errado",
+      "Ligeiramente Tóxico",
+      "Colocar a mão de Midas"
+    ],
+    "magnums": [
+      "Pistolas melhores",
+      "Pistolas, pele negra",
+      "Meio aborrecido",
+      "Danos",
+      "Som ligeiramente mais profundo"
+    ],
+    "magnums_ammo": [
+      "Gelado de munição",
+      "Barra de chocolate Hershey",
+      "50 balas",
+      "Chocolate",
+      "Não tão bons como os carregadores Uzi"
+    ],
+    "pistols": [
+      "Pistolas",
+      "Equipamento mais fraco",
+      "Velho e fiável",
+      "Quem precisa de munições?",
+      "Piu-piu infinito"
+    ],
+    "scion": [
+      "Coisa redonda",
+      "Não dispare contra mim",
+      "Precisa de três",
+      "É Skee-On",
+      "É Sigh-On"
+    ],
+    "shotgun": [
+      "Perfeitamente exacto",
+      "Use apenas pistolas",
+      "Melhor dano",
+      "Desajeitado",
+      "Grande bazuca"
+    ],
+    "shotgun_ammo": [
+      "Munições insuficientes",
+      "Porquê tão poucos?",
+      "Definição de precisão",
+      "Não vale a pena apanhar",
+      "Grande explosão"
+    ],
+    "sound": [
+      "Misturador",
+      "Silencioso ou alto?",
+      "catJAM",
+      "Auscultadores",
+      "Nível de volume"
+    ],
+    "uzis": [
+      "Uzi",
+      "MAC-10",
+      "Pistola automática",
+      "Pew Pew",
+      "Precisa de Nerf"
+    ],
+    "uzis_ammo": [
+      "Melhor munição",
+      "100 balas",
+      "Pelo menos estas atingem os inimigos",
+      "Munições a arrefecer em túmulos antigos",
+      "Munições Pew Pew"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Cidade de Vilcabanga"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Chave Qwop",
           "Chave do lobo",
           "Não esqueça o Ídolo",
           "Fugir dos Lobos para mais lobos",
           "Item à direita"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Boneca",
           "Ídolo Indiana",
           "Provavelmente valioso",
@@ -201,7 +203,7 @@
         "Santuário dos Dinossauros"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 É O Número Mágico",
           "COGGERS",
           "Equipamento",
@@ -219,7 +221,7 @@
         "Lara estraga tudo"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 É O Número Mágico",
           "COGGERS",
           "Equipamento",
@@ -237,28 +239,28 @@
         "Uma variedade de buracos"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Chave da água",
           "Verdadeiro Romano",
           "Falso Poseidon",
           "Até ao fundo",
           "Vamos dar um mergulho"
         ],
-        "key2": [
+        "Key2": [
           "Muitos Muitos Mapas",
           "Uma verdadeira senhora dispara sempre",
           "Maldito Gorila",
           "Chave de pedra maciça",
           "Ainda bem que não foste esmagado"
         ],
-        "key3": [
+        "Key3": [
           "Cuidado por onde anda",
           "Nem mesmo um Deus",
           "Hora de um passeio",
           "Cuidado com as espadas",
           "A chegar"
         ],
-        "key4": [
+        "Key4": [
           "Nem sequer é grego",
           "Chave do Mjölnir",
           "Chave do Martelo",
@@ -276,7 +278,7 @@
         "Lutas de Gladiador"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "O seu caminho de saída",
           "Porque está aqui esta chave?",
           "Que sala é esta?",
@@ -294,7 +296,7 @@
         "Voltar ao Macaco"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "O seu bilhete de saída",
           "Não Tóxico",
           "Material correcto",
@@ -312,21 +314,21 @@
         "Problema de ratos"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Finalmente",
           "Ooooo... Brilhante",
           "Quase lá",
           "Última Chave",
           "Melhor do que Prata"
         ],
-        "key2": [
+        "Key2": [
           "Melhor que Ferrugem",
           "Pior que Ouro",
           "Demasiadas Portas para Abrir",
           "Vai precisar de dois",
           "Precisa de Algo Melhor"
         ],
-        "key3": [
+        "Key3": [
           "Uso para mais chaves",
           "Primeira de Muitas Chaves",
           "Pior que Prata",
@@ -344,21 +346,21 @@
         "A última resistência de Pierre"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Como é que esta chave faz isto?",
           "Isto não é um segredo",
           "Provoca um som misterioso",
           "Utilizá-lo para a fechadura dourada",
           "Chave cintilante"
         ],
-        "key2": [
+        "Key2": [
           "Os ratos são Abundantes",
           "Cuidado com os gorilas",
           "Não perca o segredo",
           "Precisa de outra chave",
           "Só funciona na fechadura correcta"
         ],
-        "key3": [
+        "Key3": [
           "Colocar na Fechadura",
           "Precisa de 2 chaves para 1 porta",
           "Empurre o bloco a volta mais",
@@ -376,7 +378,7 @@
         "Casa da Mona"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Cirurgia Cerebral",
           "Chave da Mona",
           "Use na Esfinge",
@@ -394,35 +396,35 @@
         "Coisas de Deus egípcio"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Abre Duas Portas",
           "Chave de pedra preciosa azul",
           "Chave Aluminimoxide",
           "Porque há uma porta ali?",
           "Chave Crocodilo"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Olho de Seth Villain",
           "Vemo-nos por aí",
           "Sempre a vigiar",
           "Olho de Falcão",
           "Pára de olhar para mim"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Apenas um insecto",
           "Heracross",
           "Khepri",
           "Escaravelho",
           "Desejava ter isto para o próximo nível"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Selo de Anpu",
           "Selo do Jackal",
           "Só alguns rabiscos",
           "A Pedra de Roseta",
           "Batata"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Isto não é TR4",
           "Onde está Seth?",
           "É melhor voltar a pôr isso no sítio",
@@ -440,21 +442,21 @@
         "Um Tempo de Alegria"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Use na ponte",
           "Liberte o Centauro",
           "Usar para obter Ankh",
           "Apenas uma chave neste nível",
           "Como é que isto não está enferrujado?"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Colocar na Esfinge",
           "Precisa de Dois",
           "Onde está Seth?",
           "Bate-me Bebé Mais Uma Vez",
           "Cocó de Centauro"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Apenas um Insecto",
           "Desperta alguns Inimigos",
           "Sai deste nível",
@@ -472,14 +474,14 @@
         "Natla's Memes"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Quem pôs isto aqui?",
           "Zap!",
           "Queres armas?",
           "Porque é que estas ainda funcionam?",
           "Pinças eléctricas"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Chave Muito rara",
           "O seu caminho de saída",
           "Algum Triângulo Egípcio",
@@ -515,7 +517,7 @@
         "Vais precisar desses curativos"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Chave de Manteiga",
           "Pré-Chave de Ouro",
           "Chave Brilhante",
@@ -533,7 +535,7 @@
         "Proibido a pessoas que gostam de cães"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Demasiado daquilo",
           "Chave Chique",
           "Quantos mais?",

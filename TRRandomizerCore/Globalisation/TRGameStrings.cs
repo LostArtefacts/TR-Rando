@@ -4,8 +4,9 @@ namespace TRRandomizerCore.Globalisation;
 
 public class TRGameStrings
 {
-    public Dictionary<TRStringKey, List<string>> GlobalStrings { get; set; }
-    public Dictionary<string, TRLevelStrings> LevelStrings { get; set; }
+    public Dictionary<TRStringKey, List<string>> GlobalStrings { get; set; } = [];
+    public Dictionary<string, List<string>> ObjectStrings { get; set; } = [];
+    public Dictionary<string, TRLevelStrings> LevelStrings { get; set; } = [];
 
     public static string Encode(string text)
     {

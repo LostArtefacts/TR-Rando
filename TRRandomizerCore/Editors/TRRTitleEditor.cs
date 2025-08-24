@@ -19,7 +19,7 @@ public class TRRTitleEditor
     public static void Stamp(TRRScript script, TRDirectoryIOArgs io)
     {
         IEnumerable<string> titleFiles = script.GetAdditionalBackupFiles()
-            .Select(f => Path.GetFileName(f))
+            .Select(f => Path.GetFileName(f.Key))
             .Where(f => _titleRegex.IsMatch(f));
         if (!titleFiles.Any())
         {

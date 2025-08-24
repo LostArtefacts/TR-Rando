@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.2...master) - xxxx-xx-xx
+- added support for TR1X 4.14 (now the minimum version supported) (#803)
 - added Spanish translations for TR1 (#800)
 - fixed a crash at the end of Diving Area in TR2R (#814)
 

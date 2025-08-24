@@ -356,6 +356,7 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         TR1Type.LavaParticles_S_H,
         TR1Type.Flame_S_H,
         TR1Type.FontGraphics_S_H,
+        TR1Type.PickupAid_S_H,
 
         TR1Type.SecretScion_S_P,
         TR1Type.SecretGoldIdol_S_P,

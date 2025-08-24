@@ -28,124 +28,126 @@
       "Karuzela ustawien",
       "Dostrajanie gierki"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "1000HP",
-      "Duza Apteczka",
-      "Duzy zasobnik z zyciem",
-      "Beczka Obfitosci",
-      "Znowu pelnia zycia"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Kompas",
-      "Roza wiatrow",
-      "Prosto przed siebie!",
-      "Quo Vadis?",
-      "Ktoredy na Atlantyde?"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Gameboy",
-      "Steam Deck wersja '96",
-      "Instrukcja obslugi",
-      "Jak grac Panie Premierze?",
-      "Klawiszologia"
-    ],
-    "INV_ITEM_DETAILS": [
-      "OkuLARY Lary",
-      "Ustawienia grafiki",
-      "Ikonka okularow",
-      "/o-o/",
-      "Bryle"
-    ],
-    "INV_ITEM_GAME": [
-      "Paszport",
-      "Papieren Bitte!",
-      "Dowod osobisty",
-      "Paszport kowidowy",
-      "List przewozowy"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Olowiana sztabka",
-      "Sztabka z olowiu",
-      "Olowiany rygielek",
-      "Pb - 82",
-      "Ciezkie jak cholera!"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Pistolety Magnum",
-      "Magnumsy",
-      "Glosne pukawki",
-      "Orzelki z TR3",
-      "Dwa Digule"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Bardzo glosna amunicja",
-      "Amunicja do Magnum",
-      "50 BMG",
-      "Powolne naboje",
-      "Gorzka czekolada"
-    ],
-    "INV_ITEM_MEDI": [
-      "500HP",
-      "Mala Apteczka",
-      "Maly zasobnik z zyciem",
-      "Soczek",
-      "Medyczna marihuana"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Pistolce",
-      "Pistolety",
-      "Najslabsza bron w grze",
-      "Pukawki",
-      "Plujki"
-    ],
-    "INV_ITEM_SCION": [
-      "Dzieciecie",
-      "Latorosl",
-      "Precelek",
-      "Ciasteczko",
-      "Barachlo"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Pompka",
-      "Srutowka",
-      "Szotgun",
-      "Strzelba",
-      "Mocna pukawka"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Amunicja do szotgunsa",
-      "Amunicja do srutowki",
-      "Amunicja do strzelby",
-      "Amunicja do giwery",
-      "Amunicja do pompki"
-    ],
-    "INV_ITEM_SOUND": [
-      ".mp3",
-      "Walkman",
-      "Ustawienia dzwieku",
-      "Ikonka Sluchawek",
-      "Poziom Glosnosci"
-    ],
-    "INV_ITEM_UZI": [
-      "Pistolety Uzi",
-      "PM-63 RAK",
-      "Szybkostrzelne pukawki",
-      "Uzisy",
-      "Automaty"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Bardzo szybka amunicja",
-      "Amunicja do Uzi",
-      "Duza ilosc pestek",
-      "Amunicja do Uzisow",
-      "Najlepsza amunicja"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "WOLNA PRZESTRZEN",
       "WOLNY OTWOR",
       "PUSTE MIEJSCE",
       "MIEJSCE NA ZAPIS",
       "TU NIC NIE MA"
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "500HP",
+      "Mala Apteczka",
+      "Maly zasobnik z zyciem",
+      "Soczek",
+      "Medyczna marihuana"
+    ],
+    "large_medipack": [
+      "1000HP",
+      "Duza Apteczka",
+      "Duzy zasobnik z zyciem",
+      "Beczka Obfitosci",
+      "Znowu pelnia zycia"
+    ],
+    "compass": [
+      "Kompas",
+      "Roza wiatrow",
+      "Prosto przed siebie!",
+      "Quo Vadis?",
+      "Ktoredy na Atlantyde?"
+    ],
+    "controls": [
+      "Gameboy",
+      "Steam Deck wersja '96",
+      "Instrukcja obslugi",
+      "Jak grac Panie Premierze?",
+      "Klawiszologia"
+    ],
+    "graphics": [
+      "OkuLARY Lary",
+      "Ustawienia grafiki",
+      "Ikonka okularow",
+      "/o-o/",
+      "Bryle"
+    ],
+    "passport": [
+      "Paszport",
+      "Papieren Bitte!",
+      "Dowod osobisty",
+      "Paszport kowidowy",
+      "List przewozowy"
+    ],
+    "lead_bar": [
+      "Olowiana sztabka",
+      "Sztabka z olowiu",
+      "Olowiany rygielek",
+      "Pb - 82",
+      "Ciezkie jak cholera!"
+    ],
+    "magnums": [
+      "Pistolety Magnum",
+      "Magnumsy",
+      "Glosne pukawki",
+      "Orzelki z TR3",
+      "Dwa Digule"
+    ],
+    "magnums_ammo": [
+      "Bardzo glosna amunicja",
+      "Amunicja do Magnum",
+      "50 BMG",
+      "Powolne naboje",
+      "Gorzka czekolada"
+    ],
+    "pistols": [
+      "Pistolce",
+      "Pistolety",
+      "Najslabsza bron w grze",
+      "Pukawki",
+      "Plujki"
+    ],
+    "scion": [
+      "Dzieciecie",
+      "Latorosl",
+      "Precelek",
+      "Ciasteczko",
+      "Barachlo"
+    ],
+    "shotgun": [
+      "Pompka",
+      "Srutowka",
+      "Szotgun",
+      "Strzelba",
+      "Mocna pukawka"
+    ],
+    "shotgun_ammo": [
+      "Amunicja do szotgunsa",
+      "Amunicja do srutowki",
+      "Amunicja do strzelby",
+      "Amunicja do giwery",
+      "Amunicja do pompki"
+    ],
+    "sound": [
+      ".mp3",
+      "Walkman",
+      "Ustawienia dzwieku",
+      "Ikonka Sluchawek",
+      "Poziom Glosnosci"
+    ],
+    "uzis": [
+      "Pistolety Uzi",
+      "PM-63 RAK",
+      "Szybkostrzelne pukawki",
+      "Uzisy",
+      "Automaty"
+    ],
+    "uzis_ammo": [
+      "Bardzo szybka amunicja",
+      "Amunicja do Uzi",
+      "Duza ilosc pestek",
+      "Amunicja do Uzisow",
+      "Najlepsza amunicja"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Zoo #1"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Srebrny kluczyk",
           "Mowa jest srebrem",
           "Bialy kluczyk",
           "Nie zapomnij o zlotej statuetce",
           "Ozdobny klucz"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Filmowy Oskar",
           "Zlota statuetka",
           "Paczamama",
@@ -201,7 +203,7 @@
         "Dolina Uciech"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Zebatka",
           "Kolo",
           "Do trzech razy sztuka!",
@@ -228,28 +230,28 @@
         "Greckie szalenstwo"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Klucz Neptuna",
           "Wodny Swiat",
           "Klucz Posejdona",
           "Droga na sam dol",
           "Chodzmy poplywac"
         ],
-        "key2": [
+        "Key2": [
           "Klucz Atlasa",
           "Atlas Farnezyjski",
           "Brawo nie dales sie splaszczyc!",
           "Pomachaj Panu Kulce",
           "Jeden z czterech kluczy"
         ],
-        "key3": [
+        "Key3": [
           "Klucz Damoklesa",
           "Miecz Damoklesa",
           "Uwaga na miecze!",
           "Spojrz w gore!",
           "Uwazaj na miecze!"
         ],
-        "key4": [
+        "Key4": [
           "Klucz Thora",
           "Klucz Hefajstosa",
           "Klucz Mjolnira",
@@ -267,7 +269,7 @@
         "Walki Gladiatorow"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Zardzewialy klucz",
           "Stary klucz",
           "Tajemniczy klucz",
@@ -285,7 +287,7 @@
         "Transmutacja"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Zlota sztabka",
           "Bursztyn",
           "TOMB-ak",
@@ -303,21 +305,21 @@
         "Raj Tadeusza Norka"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Zloty kluczyk",
           "Milczenie jest zlotem",
           "Blyszczacy klucz",
           "Zolty Klucz",
           "Juz prawie koniec!"
         ],
-        "key2": [
+        "Key2": [
           "Srebrny kluczyk",
           "Mowa jest srebrem",
           "Bialy kluczyk",
           "Potrzeba 2och takich",
           "Znajdz jeszcze jeden"
         ],
-        "key3": [
+        "Key3": [
           "Zardzewialy klucz",
           "Stary klucz",
           "Tajemniczy klucz",
@@ -335,21 +337,21 @@
         "Grobowiec Swietego"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Zloty kluczyk",
           "Milczenie jest zlotem",
           "Blyszczacy klucz",
           "Zolty Klucz",
           "Przepustka do Egiptu"
         ],
-        "key2": [
+        "Key2": [
           "Zardzewialy klucz",
           "Stary klucz",
           "Tajemniczy klucz",
           "Klucz #1",
           "Kawalek drutu"
         ],
-        "key3": [
+        "Key3": [
           "Zardzewialy klucz",
           "Stary klucz",
           "Tajemniczy klucz",
@@ -367,7 +369,7 @@
         "W pustyni i w piasku"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Szafirowy klucz",
           "Szlachetny klucz",
           "Magiczny klucz",
@@ -385,35 +387,35 @@
         "Obelisk egipskich bogow"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Szafirowy klucz",
           "Szlachetny klucz",
           "Diamentowy klucz",
           "Magiczny klucz",
           "Bardzo wazny klucz"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Oko Horusa",
           "Ja wszystko widze!",
           "Oko Barabasza",
           "CCTV",
           "Gapisz mi sie na bebech?"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Skarabeusz",
           "Klejnot rodowy",
           "Zuczek",
           "Robaczek",
           "Kamien nerkowy"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Pieczec Anubisa",
           "Pieczec Anus-bisa",
           "Stempel",
           "Klocek",
           "Pieczatka"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Ankh",
           "Amulet",
           "Talizman",
@@ -431,21 +433,21 @@
         "Piaski Czasu"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Szafirowy klucz",
           "Szlachetny klucz",
           "Magiczny klucz",
           "Diamentowy klucz",
           "Bardzo wazny klucz"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Ankh",
           "Amulet",
           "Talizman",
           "Znajdz jeszcze jeden",
           "Bibelot"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Skarabeusz",
           "Klejnot rodowy",
           "Zuczek",
@@ -463,14 +465,14 @@
         "Kopalnia Uciech"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Bezpiecznik",
           "Sloiczek",
           "Klucz do domku na linie",
           "1 Lara 3 Sloiki",
           "Skretka"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Klucz do piramidy",
           "Pomaranczowy trojkat",
           "Illuminati",
@@ -506,7 +508,7 @@
         "Lepiej zbieraj te apteczki!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Maślany Klucz",
           "Każdy ziom zbiera zło-to",
           "Błyszczący Klucz",
@@ -524,7 +526,7 @@
         "UWAGA - Koty"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Za dużo ich",
           "Ładny Klucz",
           "Ile ich jeszcze?",

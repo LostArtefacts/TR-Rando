@@ -1,4 +1,5 @@
 ﻿using TRGE.Core;
+using TRGE.Core.Item;
 using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.Globalisation;
@@ -34,8 +35,12 @@ public class GameStringAllocator
         _defaultGameStrings = _g11n.GetDefaultGameStrings();
 
         Dictionary<TRStringKey, string> globalStrings = GenerateGlobalStrings();
+        ProcessObjectStrings(script.Script);
         ProcessLevelStrings(script.AssaultLevel);
-        globalStrings[TRStringKey.INV_ITEM_LARAS_HOME] = script.AssaultLevel.Name;
+        if (script.Script is not TR1Script)
+        {
+            globalStrings[TRStringKey.INV_ITEM_LARAS_HOME] = script.AssaultLevel.Name;
+        }
 
         foreach (AbstractTRScriptedLevel level in script.EnabledScriptedLevels)
         {
@@ -56,6 +61,11 @@ public class GameStringAllocator
     protected List<string> GetGlobalStrings(TRStringKey key)
     {
         return GetGameStrings().GlobalStrings[key];
+    }
+
+    protected List<string> GetObjectStrings(string key)
+    {
+        return GetGameStrings().ObjectStrings[key];
     }
 
     protected TRLevelStrings GetLevelStrings(string lvlName)
@@ -83,6 +93,26 @@ public class GameStringAllocator
         }
 
         return result;
+    }
+
+    private void ProcessObjectStrings(AbstractTRScript script)
+    {
+        if (script is not TR1Script trxScript)
+        {
+            return;
+        }
+
+        var defaultObjectStrings = _defaultGameStrings.ObjectStrings;
+        foreach (var stringKey in defaultObjectStrings.Keys)
+        {
+            var options = GetObjectStrings(stringKey);
+            var type = TRXNaming.GetTR1Type(stringKey);
+            if (!trxScript.ObjectStrings.TryGetValue(type, out var objText))
+            {
+                trxScript.ObjectStrings[type] = objText = new();
+            }
+            objText.Name = Encode(options.RandomItem(Generator));
+        }
     }
 
     private void ProcessLevelStrings(AbstractTRScriptedLevel level)

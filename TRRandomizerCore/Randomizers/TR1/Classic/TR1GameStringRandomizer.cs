@@ -1,4 +1,5 @@
 ﻿using TRGE.Core;
+using TRGE.Core.Item.Enums;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Globalisation;
@@ -21,8 +22,10 @@ public class TR1GameStringRandomizer : BaseTR1Randomizer
         TR1Script script = ScriptEditor.Script as TR1Script;
         foreach (var (key, value) in globalStrings)
         {
-            script.Strings[key.ToString()] = value;
+            script.BaseStrings[key.ToString()] = value;
         }
+
+        script.ObjectStrings[TR1Items.LaraHomePhoto_M_H].Name = script.AssaultLevel.Name;
 
         AmendDefaultStrings();
 
@@ -32,15 +35,12 @@ public class TR1GameStringRandomizer : BaseTR1Randomizer
 
     private void AmendDefaultStrings()
     {
-        List<AbstractTRScriptedLevel> levels = ScriptEditor.Levels.ToList();
-        AbstractTRScriptedLevel cistern = levels.Find(l => l.Is(TR1LevelNames.CISTERN));
-        AbstractTRScriptedLevel mines = levels.Find(l => l.Is(TR1LevelNames.MINES));
-        if (cistern == null || mines == null)
+        var cistern = ScriptEditor.Levels.First(l => l.Is(TR1LevelNames.CISTERN));
+        var mines = ScriptEditor.Levels.First(l => l.Is(TR1LevelNames.MINES));
+        if (cistern != null && mines != null)
         {
-            return;
+            // Duplicate whatever Cistern has for "Rusty Key" into Mines
+            mines.Keys.Add(cistern.Keys.Count > 2 ? cistern.Keys[2] : "Rusty Key");
         }
-
-        // Duplicate whatever Cistern has for "Rusty Key" into Mines
-        mines.Keys.Add(cistern.Keys.Count > 2 ? cistern.Keys[2] : "Rusty Key");
     }
 }

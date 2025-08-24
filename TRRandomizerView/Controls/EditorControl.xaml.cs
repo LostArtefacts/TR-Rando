@@ -259,7 +259,7 @@ public partial class EditorControl : UserControl
 
     public bool CanEditCommunitySettings()
     {
-        return _options.IsTR1Main || _options.IsTR3Main;
+        return _options.IsTR3Main;
     }
 
     public void OpenBackupFolder()
@@ -452,20 +452,10 @@ public partial class EditorControl : UserControl
 
     public void EditCommunitySettings()
     {
-        if (_options.IsTR1Main)
-        {
-            LaunchTR1XSettings();
-        }
-        else if (_options.IsTR3Main)
+        if (_options.IsTR3Main)
         {
             LaunchTR3MainSettings();
         }
-    }
-
-    private void LaunchTR1XSettings()
-    {
-        TR1XWindow window = new(_options);
-        window.ShowDialog();
     }
 
     private void LaunchTR3MainSettings()

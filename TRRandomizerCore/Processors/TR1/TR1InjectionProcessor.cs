@@ -1,4 +1,7 @@
-﻿using TRGE.Core;
+﻿using TRDataControl;
+using TRGE.Core;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 
@@ -6,18 +9,20 @@ namespace TRRandomizerCore.Processors;
 
 public class TR1InjectionProcessor : TR1LevelProcessor
 {
-    private static readonly uint _tr1xMagic = 'T' | ('1' << 8) | ('M' << 16) | ('J' << 24);
-    private static readonly Version _minTR1XVersion = new(3, 0);
-    private static readonly List<TR1XInjectionType> _permittedInjections = new()
-    {
+    private static readonly uint _tr1xMagic = 'T' | ('R' << 8) | ('X' << 16) | ('J' << 24);
+    private static readonly Version _minTR1XVersion = new(4, 14);
+
+    private static readonly List<TR1Type> _injectReplaceTypes = [TR1Type.Map_M_U, TR1Type.FontGraphics_S_H, TR1Type.PickupAid_S_H];
+    private static readonly List<TR1XInjectionType> _permittedInjections =
+    [
         TR1XInjectionType.LaraAnims,
-        TR1XInjectionType.LaraJumps,
         TR1XInjectionType.Skybox,
         TR1XInjectionType.PSCrystal,
-    };
+    ];
 
     public void Run()
     {
+        var photoSfx = LoadLevelData(TR1LevelNames.CAVES).SoundEffects[TR1SFX.MenuChoose];
         TR1Script script = ScriptEditor.Script as TR1Script;
 
         bool tr1xVersionSupported = script.Edition.ExeVersion != null
@@ -25,33 +30,39 @@ public class TR1InjectionProcessor : TR1LevelProcessor
         script.Injections = tr1xVersionSupported ?
             GetSupportedInjections(script.Injections) : null;
 
-        foreach (TR1ScriptedLevel level in Levels)
+        Parallel.ForEach(Levels, (scriptedLevel, state) =>
         {
-            LoadLevelInstance(level);
-            AdjustInjections(_levelInstance, tr1xVersionSupported);
-            SaveLevelInstance();
+            AdjustInjections(scriptedLevel, tr1xVersionSupported);
 
+            var level = LoadCombinedLevel(scriptedLevel);
+            ImportData(level, photoSfx);
+            if (level.HasCutScene)
+            {
+                ImportData(level.CutSceneLevel, photoSfx);
+            }
+
+            SaveLevel(level);
             if (!TriggerProgress())
             {
-                return;
+                state.Break();
             }
-        }
+        });
 
         SaveScript();
     }
 
-    private void AdjustInjections(TR1CombinedLevel level, bool tr1xVersionSupported)
+    private void AdjustInjections(TR1ScriptedLevel level, bool tr1xVersionSupported)
     {
         if (!tr1xVersionSupported)
         {
-            level.Script.ResetInjections();
+            level.ResetInjections();
             return;
         }
 
-        level.Script.Injections = GetSupportedInjections(level.Script.Injections);
+        level.Injections = GetSupportedInjections(level.Injections);
         if (level.HasCutScene)
         {
-            TR1ScriptedLevel cutscene = level.CutSceneLevel.Script;
+            var cutscene = (level.CutSceneLevel as TR1ScriptedLevel);
             cutscene.InheritInjections = false;
             cutscene.Injections = GetSupportedInjections(cutscene.Injections);
         }
@@ -64,10 +75,10 @@ public class TR1InjectionProcessor : TR1LevelProcessor
             return injections;
         }
 
-        List<string> validInjections = new();
+        List<string> validInjections = [];
         foreach (string injection in injections)
         {
-            string path = Path.Combine(ScriptEditor.OriginalFile.DirectoryName, "../", injection);
+            string path = Path.Combine(ScriptEditor.OriginalFile.DirectoryName, "../../", injection);
             if (!File.Exists(path))
             {
                 continue;
@@ -86,6 +97,28 @@ public class TR1InjectionProcessor : TR1LevelProcessor
             }
         }
 
-        return validInjections.ToArray();
+        return [.. validInjections];
+    }
+
+    private static void ImportData(TR1CombinedLevel level, TR1SoundEffect photoSfx)
+    {
+        // Clear out objects that would normally be replaced by TRX injections and import
+        // them as standard to allow targeting in other rando classes.
+        level.Data.Models.Remove(TR1Type.LaraPonytail_H_U);
+        level.Data.Models.RemoveAll(_injectReplaceTypes.Contains);
+        level.Data.Sprites.RemoveAll(_injectReplaceTypes.Contains);
+
+        var importer = new TR1DataImporter
+        {
+            DataFolder = "Resources/TR1/Objects",
+            Level = level.Data,
+            TypesToImport = _injectReplaceTypes,
+        };
+        importer.Import();
+
+        if (photoSfx != null)
+        {
+            level.Data.SoundEffects[TR1SFX.MenuChoose] = photoSfx;
+        }
     }
 }

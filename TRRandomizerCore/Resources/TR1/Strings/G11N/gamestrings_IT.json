@@ -28,124 +28,126 @@
       "uwu",
       "Cambia roba"
     ],
-    "INV_ITEM_BIG_MEDI": [
-      "Sei in una simulazione svegliati",
-      "Kit medico non minuto",
-      "Kit medico in famiglia",
-      "Kit che Lara ha trovato 2",
-      "Kit che Lara ha rubato 2"
-    ],
-    "INV_ITEM_COMPASS": [
-      "Lo usi tu?",
-      "È rotto",
-      "Non funziona",
-      "Perdita di denaro",
-      "Vai a nord"
-    ],
-    "INV_ITEM_CONTROLS": [
-      "Controlli",
-      "Controllati",
-      "Controllanti",
-      "Controllatore",
-      "Controllatori"
-    ],
-    "INV_ITEM_DETAILS": [
-      "Begli occhiali",
-      "Occhiali rossi?",
-      "/o-o/",
-      "Occhiali da sole rossi",
-      "Occhiali"
-    ],
-    "INV_ITEM_GAME": [
-      "Passaporto",
-      "Dove vai Lara in bicicletta",
-      "Credenziali",
-      "Lara è inquietante",
-      "Passaporto"
-    ],
-    "INV_ITEM_LEADBAR": [
-      "Non leccare",
-      "Troppo pesante da portare",
-      "Materiale sbagliato",
-      "Un po' tossico",
-      "Sulle mani di Mida"
-    ],
-    "INV_ITEM_MAGNUM": [
-      "Pierre le rimpiange ogni dì",
-      "Come ci sono finite in un colosseo?",
-      "Magnum PI",
-      "Bel suono",
-      "Hanno un bel suono ammetto"
-    ],
-    "INV_ITEM_MAGNUM_AMMO": [
-      "Barrette al cioccolato",
-      "50 bossoli",
-      "Conviene",
-      "Come ci sono finiti questi bossoli qui?",
-      "Ho fame"
-    ],
-    "INV_ITEM_MEDI": [
-      "Kit Medico",
-      "Kit medico minuto",
-      "Kit medico a metà",
-      "Kit che Lara ha trovato",
-      "Kit che Lara ha rubato"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Pistole",
-      "Pistole vuoi che dica altro?",
-      "Pistole, ovvio",
-      "Pistole, due, in mano a lara",
-      "Due pistole che Lara ha in mano"
-    ],
-    "INV_ITEM_SCION": [
-      "Che cosa è?",
-      "Si dice Schi-on",
-      "Si dice Sai-On",
-      "Vuoi sapere come si legge?",
-      "Ciao roba strana"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Oh ciao fucile",
-      "Un fucile",
-      "Due munizioni a pacco? Ma che ladri!",
-      "Un fucile, non doppia canna",
-      "Trovato vicino ad un morto"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "2 di numero?",
-      "Perché così pochi?",
-      "Ladrata",
-      "Non accurati",
-      "Non prenderli"
-    ],
-    "INV_ITEM_SOUND": [
-      "Ascoltare musica?",
-      "Cuffie?",
-      "Piano o forte?",
-      "Pianoforte",
-      "Fortepiano"
-    ],
-    "INV_ITEM_UZI": [
-      "LE UZIIII",
-      "Suonano un po' rotte",
-      "Le migliori in assoluto",
-      "Come ci sono finite a volare?",
-      "Cosa ci facevano lì..?"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Il meglio del meglio",
-      "100 bossoli",
-      "Convenienti",
-      "Ma che ci fa sta roba in un tempio?",
-      "1000 anni indisturbati"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "Mi fai girare la testa",
       "Inutile",
       "Salva la tua anima",
       "Il tuo profilo di banca",
       "Sovrascrivimi paparino! Oddio..."
+    ]
+  },
+  "ObjectStrings": {
+    "small_medipack": [
+      "Kit Medico",
+      "Kit medico minuto",
+      "Kit medico a metà",
+      "Kit che Lara ha trovato",
+      "Kit che Lara ha rubato"
+    ],
+    "large_medipack": [
+      "Sei in una simulazione svegliati",
+      "Kit medico non minuto",
+      "Kit medico in famiglia",
+      "Kit che Lara ha trovato 2",
+      "Kit che Lara ha rubato 2"
+    ],
+    "compass": [
+      "Lo usi tu?",
+      "È rotto",
+      "Non funziona",
+      "Perdita di denaro",
+      "Vai a nord"
+    ],
+    "controls": [
+      "Controlli",
+      "Controllati",
+      "Controllanti",
+      "Controllatore",
+      "Controllatori"
+    ],
+    "graphics": [
+      "Begli occhiali",
+      "Occhiali rossi?",
+      "/o-o/",
+      "Occhiali da sole rossi",
+      "Occhiali"
+    ],
+    "passport": [
+      "Passaporto",
+      "Dove vai Lara in bicicletta",
+      "Credenziali",
+      "Lara è inquietante",
+      "Passaporto"
+    ],
+    "lead_bar": [
+      "Non leccare",
+      "Troppo pesante da portare",
+      "Materiale sbagliato",
+      "Un po' tossico",
+      "Sulle mani di Mida"
+    ],
+    "magnums": [
+      "Pierre le rimpiange ogni dì",
+      "Come ci sono finite in un colosseo?",
+      "Magnum PI",
+      "Bel suono",
+      "Hanno un bel suono ammetto"
+    ],
+    "magnums_ammo": [
+      "Barrette al cioccolato",
+      "50 bossoli",
+      "Conviene",
+      "Come ci sono finiti questi bossoli qui?",
+      "Ho fame"
+    ],
+    "pistols": [
+      "Pistole",
+      "Pistole vuoi che dica altro?",
+      "Pistole, ovvio",
+      "Pistole, due, in mano a lara",
+      "Due pistole che Lara ha in mano"
+    ],
+    "scion": [
+      "Che cosa è?",
+      "Si dice Schi-on",
+      "Si dice Sai-On",
+      "Vuoi sapere come si legge?",
+      "Ciao roba strana"
+    ],
+    "shotgun": [
+      "Oh ciao fucile",
+      "Un fucile",
+      "Due munizioni a pacco? Ma che ladri!",
+      "Un fucile, non doppia canna",
+      "Trovato vicino ad un morto"
+    ],
+    "shotgun_ammo": [
+      "2 di numero?",
+      "Perché così pochi?",
+      "Ladrata",
+      "Non accurati",
+      "Non prenderli"
+    ],
+    "sound": [
+      "Ascoltare musica?",
+      "Cuffie?",
+      "Piano o forte?",
+      "Pianoforte",
+      "Fortepiano"
+    ],
+    "uzis": [
+      "LE UZIIII",
+      "Suonano un po' rotte",
+      "Le migliori in assoluto",
+      "Come ci sono finite a volare?",
+      "Cosa ci facevano lì..?"
+    ],
+    "uzis_ammo": [
+      "Il meglio del meglio",
+      "100 bossoli",
+      "Convenienti",
+      "Ma che ci fa sta roba in un tempio?",
+      "1000 anni indisturbati"
     ]
   },
   "LevelStrings": {
@@ -176,14 +178,14 @@
         "Città di Vicavamba"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Doppiano in Italiano",
           "Chiave del Lupo",
           "No scherzo",
           "Non ti dimenticare l'idolo",
           "Prendi l'idolo"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Prendimi",
           "PRENDIMI",
           "Mi prendi?",
@@ -201,7 +203,7 @@
         "Estinzione"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "3 è il numero magico",
           "Ha senso dire COGGERS",
           "In perfette condizioni",
@@ -228,28 +230,28 @@
         "Cavolo! Che profondo!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Chiave d'Acqua",
           "Nettuno? In Frecia?",
           "Poseidone",
           "Che noia!!",
           "Ciao Larson"
         ],
-        "key2": [
+        "Key2": [
           "Dì ciao al masso",
           "Gorilla in Grecia?",
           "Ma ci sono gorilla in Grecia",
           "Ma dove siamo??",
           "Qualcuno mi speiga???"
         ],
-        "key3": [
+        "Key3": [
           "Bella stanza",
           "Molto interessante",
           "Non è un dio",
           "Attento alle spade",
           "ARRIVO!"
         ],
-        "key4": [
+        "Key4": [
           "Thor non è grego",
           "Thor ar inte grek",
           "Bel martello",
@@ -267,7 +269,7 @@
         "TANTI nemici.."
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Chiave arrigginita",
           "Tetano",
           "Attenzione al tetano",
@@ -285,7 +287,7 @@
         "Lara è crudele"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Tre di questi e via",
           "Non tossico",
           "Molto di valore",
@@ -303,21 +305,21 @@
         "Quante chiavi"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Chiave d'Oro",
           "Chiave di piombo, no scherzo",
           "Oro??",
           "Ultima chiave",
           "Belle chiavi, me le tengo"
         ],
-        "key2": [
+        "Key2": [
           "Chiave d'Argento",
           "Chiave arrugginita, ci sei cascato",
           "Perchè non posso riusare la chiave?",
           "Ne servono due?",
           "Avrai bisogno di altre"
         ],
-        "key3": [
+        "Key3": [
           "Tetano... LARA??",
           "Lara attenta al tetano!",
           "Il tetano è una cosa seria",
@@ -335,21 +337,21 @@
         "Pierre fa una brutta fine"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Ma quante ce ne sono?",
           "Non è un segreto",
           "È un segreto? No",
           "Da usare?",
           "Chiave brillante!!"
         ],
-        "key2": [
+        "Key2": [
           "Lara, per l'ultima volta, tetano",
           "Ma lo fai apposta Lara?? Tetano!",
           "Attenta al tetano",
           "Ce n'è un altra",
           "Fai attenzione al tetano"
         ],
-        "key3": [
+        "Key3": [
           "Lara? Ma lo fai apposta",
           "Ti prenderai il tetano!",
           "Lara basta, ti prendi il tetano!",
@@ -367,7 +369,7 @@
         "A Casa di Mona"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Operazione al cervello",
           "Chiave di Mona",
           "Sotto la Sfinge",
@@ -385,35 +387,35 @@
         "Ciao Sono Nanaki lol"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Due porte al prezzo di uno",
           "Aspetta io ti ho già visto!",
           "Zaffiro!",
           "Come mai c'è una porta qui?",
           "Era di un coccodrillo..."
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Ci vediamo",
           "Più dettagliato di quello di TR4",
           "Ti guardo",
           "Grande Horus ti guarda",
           "Smettila di guardarmi!"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "È uno scarabeo?",
           "Scarabeo di pietra",
           "Scarbeo della morte!",
           "Scarabeo, niente più",
           "Ti piacerebbe averlo nel prossimo livello"
         ],
-        "puzzle3": [
+        "Puzzle3": [
           "Stele di rosetta?",
           "È una pietra e niente più",
           "Carina, ma a che serve?",
           "Sigillo di Anubi??",
           "Patata"
         ],
-        "puzzle4": [
+        "Puzzle4": [
           "Questo non è TR4",
           "Dov'è set?",
           "METTILO VIA",
@@ -431,21 +433,21 @@
         "Un'altra sfinge?"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Ma quante chiavi uguali ci sono",
           "Un'altra chiave cosÌ",
           "Se la usi prendi l'Ankh",
           "L'unica chiave che userai qui",
           "Ben preservata, niente tetano"
         ],
-        "puzzle1": [
+        "Puzzle1": [
           "Un altro Ankh?",
           "Lara non prenderlo in TR4 credimi",
           "Ma dove caspita è SET?",
           "Mi rifiuto di tradurre, non scherzo",
           "Mi rifiuto anche qui hahah"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "È lo stesso oggetto di prima",
           "Ciao scarabeo",
           "Usalo per scappare via!!",
@@ -463,14 +465,14 @@
         "I Meme di Natla"
       ],
       "KeyItems": {
-        "puzzle1": [
+        "Puzzle1": [
           "Tre fusibili, le tue pistole",
           "Offerta di scambio",
           "Sono in posti assurdi",
           "Ma funzionano?",
           "Funzionano sì"
         ],
-        "puzzle2": [
+        "Puzzle2": [
           "Ma che bella chiave",
           "Usa per scappare via",
           "Un triangolo a caso",
@@ -506,7 +508,7 @@
         "Ti serviranno quei Kit medici!"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Chiave di burro",
           "Chiave semi-dorata",
           "Chiave splendente",
@@ -524,7 +526,7 @@
         "Cani, state lontani"
       ],
       "KeyItems": {
-        "key1": [
+        "Key1": [
           "Ce ne sono troppe",
           "Chiave elegante",
           "Quante ancora?",

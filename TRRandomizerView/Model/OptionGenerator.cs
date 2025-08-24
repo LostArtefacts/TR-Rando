@@ -166,10 +166,6 @@ public class OptionGenerator
         {
             RandomizeEnvironmentOptions();
         }
-        if (_options.IsTR1Main)
-        {
-            RandomizeTR1XOptions();
-        }
     }
 
     private void RandomizeLevelSequencingOptions()
@@ -341,33 +337,6 @@ public class OptionGenerator
         RandomizeBoolItems(_options.EnvironmentBoolItemControls);
         _options.MirroredLevelCount = GetRandomUInt(0, _options.MaximumLevelCount);
         _options.MirrorAssaultCourse = GetRandomBool();
-    }
-
-    private void RandomizeTR1XOptions()
-    {
-        _options.AirbarColor = GetRandomEnumValue<TRUIColour>(typeof(TRUIColour));
-        _options.AirbarLocation = GetRandomEnumValue<TRUILocation>(typeof(TRUILocation));
-        _options.AirbarShowingMode = GetRandomEnumValue<TRAirbarMode>(typeof(TRAirbarMode));
-        _options.EnableCine = GetRandomBool();
-        _options.EnableFmv = GetRandomBool();
-        _options.DisableMagnums = GetRandomBool();
-        _options.DisableShotgun = GetRandomBool();
-        _options.DisableUzis = GetRandomBool();
-        _options.EnableEnemyHealthbar = GetRandomBool();
-        _options.EnablePitchedSounds = GetRandomBool();
-        _options.EnableSaveCrystals = GetRandomBool();
-        _options.EnemyHealthbarColor = GetRandomEnumValue<TRUIColour>(typeof(TRUIColour));
-        _options.EnemyHealthbarLocation = GetRandomEnumValue<TRUILocation>(typeof(TRUILocation));
-        _options.HealthbarColor = GetRandomEnumValue<TRUIColour>(typeof(TRUIColour));
-        _options.HealthbarLocation = GetRandomEnumValue<TRUILocation>(typeof(TRUILocation));
-        _options.HealthbarShowingMode = GetRandomEnumValue<TRHealthbarMode>(typeof(TRHealthbarMode));
-        _options.MaximumSaveSlots = GetRandomInt(1, 100);
-        _options.MenuStyle = GetRandomEnumValue<TRMenuStyle>(typeof(TRMenuStyle));
-        _options.RevertToPistols = GetRandomBool();
-        _options.WalkToItems = GetRandomBool();
-        _options.WaterColorB = GetRandomDouble(30, 100, 2);
-        _options.WaterColorG = GetRandomDouble(30, 100, 2);
-        _options.WaterColorR = GetRandomDouble(30, 100, 2);
     }
 
     private int InterpretSeed(int seed)

@@ -99,33 +99,12 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
         _processingException?.Throw();
 
-        TR1Script script = ScriptEditor.Script as TR1Script;
-        script.FixPyramidSecretTrigger = false;
-
-        if (Settings.UseRecommendedCommunitySettings)
-        {
-            script.Enable3dPickups = false;
-            if (Settings.HardSecrets || Settings.GlitchedSecrets)
-            {
-                script.EnableBuffering = true;
-            }
-        }
-
         if (Settings.GlitchedSecrets)
         {
-            script.FixDescendingGlitch = false;
-            script.FixQwopGlitch = false;
-            script.FixWallJumpGlitch = false;
-            script.WalkToItems = false;
+            (ScriptEditor.Script as TR1Script).EnforceConfig("enable_walk_to_items", false);
         }
 
         ScriptEditor.SaveScript();
-    }
-
-    private bool Are3DPickupsEnabled()
-    {
-        return !Settings.UseRecommendedCommunitySettings
-            && (ScriptEditor.Script as TR1Script).Enable3dPickups;
     }
 
     private void SetSecretCounts()
@@ -295,7 +274,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             if (!level.Data.Rooms[secret.Location.Room].ContainsWater
                 && secret.Location.IsSlipperySlope(level.Data))
             {
-                (ScriptEditor as TR1ScriptEditor).WalkToItems = false;
+                (ScriptEditor.Script as TR1Script).EnforceConfig("enable_walk_to_items", false);
             }
 
             // This will either make a new entity or repurpose an old one. Ensure it is locked
@@ -455,7 +434,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         level.Data.Models.ChangeKey(secretModelType, puzzleModelType);
                         level.Data.Sprites.ChangeKey(secretPickupType, puzzlePickupType);
 
-                        if (secretModelType == TR1Type.SecretScion_M_H && _outer.Are3DPickupsEnabled())
+                        if (secretModelType == TR1Type.SecretScion_M_H)
                         {
                             // TR1X embeds scions into the ground when they are puzzle/key types in 3D mode,
                             // so we counteract that here to avoid uncollectable items.
