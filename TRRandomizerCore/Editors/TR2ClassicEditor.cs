@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using System.Drawing;
 using TRGE.Coord;
 using TRGE.Core;
+using TRImageControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
@@ -11,6 +13,8 @@ namespace TRRandomizerCore.Editors;
 
 public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 {
+    private static readonly Point _regularBadgePos = new(1467, 26);
+
     public RandomizerSettings Settings { get; private set; }
 
     public TR2ClassicEditor(TRDirectoryIOArgs args, TREdition edition)
@@ -370,5 +374,52 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing Sprites");
             itemRandomizer.RandomizeSprites();
         }
+
+        AmendTitleAndCredits(scriptEditor, monitor);
+    }
+
+    private void AmendTitleAndCredits(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
+    {
+        var script = scriptEditor.Script as TRXScript;
+
+        string mainMenuPic = Path.GetFileName(script.MainMenuPicture);
+        string backupTitle = Path.Combine(GetReadBasePath(), mainMenuPic);
+        if (File.Exists(backupTitle))
+        {
+            string editedTitle = Path.Combine(GetWriteBasePath(), "title.png");
+            TRImage bg = new(backupTitle);
+            TRImage badge = new("Resources/Shared/Graphics/tr2badge-small.png");
+            bg.Import(badge, _regularBadgePos, true);
+
+            bg.Save(editedTitle);
+
+            string titlePath = "data/title.png";
+            script.MainMenuPicture = titlePath;
+            script.AddAdditionalBackupFile(titlePath);
+        }
+
+        {
+            string creditFile = Path.Combine(_io.OutputDirectory.FullName, "trrando.png");
+            string creditPath = "data/trrando.png";
+
+            TRImage bg = new(1920, 1080);
+            TRImage badge = new("Resources/Shared/Graphics/tr2badge-large.png");
+            bg.Fill(Color.Black);
+            bg.Import(badge, new(960 - badge.Width / 2, 540 - badge.Height / 2), true);
+            bg.Save(creditFile);
+
+            var finalLevel = scriptEditor.Levels.ToList().Find(l => l.IsFinalLevel) as TRXScriptedLevel;
+            finalLevel.AddSequenceBefore(LevelSequenceType.Total_Stats, new DisplayPictureSequence
+            {
+                Type = LevelSequenceType.Display_Picture,
+                DisplayTime = 5,
+                Path = creditFile,
+            });
+
+            script.AddAdditionalBackupFile(creditPath);
+        }
+
+        scriptEditor.SaveScript();
+        monitor.FireSaveStateChanged(1);
     }
 }
