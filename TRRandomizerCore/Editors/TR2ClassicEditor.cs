@@ -111,25 +111,22 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 
     protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
     {
-        List<TR2ScriptedLevel> levels = new(
-            scriptEditor.EnabledScriptedLevels.Cast<TR2ScriptedLevel>().ToList()
-        );
-
+        var levels = scriptEditor.EnabledScriptedLevels.Cast<TRXScriptedLevel>().ToList();
         if (scriptEditor.GymAvailable)
         {
-            levels.Add(scriptEditor.AssaultLevel as TR2ScriptedLevel);
+            levels.Add(scriptEditor.AssaultLevel as TRXScriptedLevel);
         }
 
         // Each processor will have a reference to the script editor, so can
         // make on-the-fly changes as required.
-        TR23ScriptEditor tr23ScriptEditor = scriptEditor as TR23ScriptEditor;
         string backupDirectory = _io.BackupDirectory.FullName;
         string wipDirectory = _io.WIPOutputDirectory.FullName;
 
         if (Settings.DevelopmentMode)
         {
-            (tr23ScriptEditor.Script as TR23Script).LevelSelectEnabled = true;
-            (tr23ScriptEditor.Script as TR23Script).DozyEnabled = true;
+            var script = scriptEditor.Script as TRXScript;
+            script.EnforceConfig("enable_cheats", true);
+            script.EnforceConfig("enable_console", true);
             scriptEditor.SaveScript();
         }
 
@@ -141,7 +138,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 
         TR2ItemRandomizer itemRandomizer = new()
         {
-            ScriptEditor = tr23ScriptEditor,
+            ScriptEditor = scriptEditor,
             Levels = levels,
             BasePath = wipDirectory,
             BackupPath = backupDirectory,
@@ -153,7 +150,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 
         TR2EnvironmentRandomizer environmentRandomizer = new()
         {
-            ScriptEditor = tr23ScriptEditor,
+            ScriptEditor = scriptEditor,
             Levels = levels,
             BasePath = wipDirectory,
             BackupPath = backupDirectory,
@@ -170,7 +167,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting enemy entities");
             new TR2EnemyAdjuster
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -184,7 +181,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting game strings");
             new TR2GameStringRandomizer
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -199,7 +196,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Deduplicating textures");
             new TR2TextureDeduplicator
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -212,7 +209,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
             new TR2SecretRandomizer
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -230,7 +227,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting level models");
             new TR2ModelAdjuster
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -249,7 +246,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
             new TR2EnemyRandomizer
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -265,7 +262,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
             new TR2StartPositionRandomizer
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -297,7 +294,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
             new TR2AudioRandomizer
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -311,7 +308,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing outfits");
             new TR2OutfitRandomizer
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -326,7 +323,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
             new TR2NightModeRandomizer
             {
-                ScriptEditor = tr23ScriptEditor,
+                ScriptEditor = scriptEditor,
                 Levels = levels,
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
@@ -343,7 +340,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
                 new TR2TextureRandomizer
                 {
-                    ScriptEditor = tr23ScriptEditor,
+                    ScriptEditor = scriptEditor,
                     Levels = levels,
                     BasePath = wipDirectory,
                     BackupPath = backupDirectory,
@@ -357,7 +354,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode textures");
                 new TR2TextureRandomizer
                 {
-                    ScriptEditor = tr23ScriptEditor,
+                    ScriptEditor = scriptEditor,
                     Levels = levels,
                     BasePath = wipDirectory,
                     BackupPath = backupDirectory,

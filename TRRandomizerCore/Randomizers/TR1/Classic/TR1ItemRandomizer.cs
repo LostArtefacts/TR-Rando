@@ -25,7 +25,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
         _allocator.AllocateWeapons(Levels.Where(l => !l.Is(TR1LevelNames.ASSAULT)));
 
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
 
@@ -56,14 +56,14 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             }
         }
 
-        TR1Script script = ScriptEditor.Script as TR1Script;
+        var script = ScriptEditor.Script as TRXScript;
         script.ConvertDroppedGuns = true;
         ScriptEditor.SaveScript();
     }
 
     public void FinalizeRandomization()
     {
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             if (Settings.ItemMode == ItemMode.Shuffled || Settings.IncludeKeyItems)
             {

@@ -24,7 +24,7 @@ public class TR3GameStringRandomizer : BaseTR3Randomizer
 
     private void ConvertGlobalStrings(Dictionary<TRStringKey, string> globalStrings)
     {
-        TR23Script script = ScriptEditor.Script as TR23Script;
+        var script = ScriptEditor.Script as TR3Script;
         List<string> gameStrings1 = new(script.GameStrings1);
         List<string> gameStrings2 = new(script.GameStrings2);
 

@@ -37,7 +37,7 @@ public class GameStringAllocator
         Dictionary<TRStringKey, string> globalStrings = GenerateGlobalStrings();
         ProcessObjectStrings(script.Script);
         ProcessLevelStrings(script.AssaultLevel);
-        if (script.Script is not TR1Script)
+        if (script.Script is not TRXScript)
         {
             globalStrings[TRStringKey.INV_ITEM_LARAS_HOME] = script.AssaultLevel.Name;
         }
@@ -97,7 +97,7 @@ public class GameStringAllocator
 
     private void ProcessObjectStrings(AbstractTRScript script)
     {
-        if (script is not TR1Script trxScript)
+        if (script is not TRXScript trxScript)
         {
             return;
         }
@@ -106,7 +106,7 @@ public class GameStringAllocator
         foreach (var stringKey in defaultObjectStrings.Keys)
         {
             var options = GetObjectStrings(stringKey);
-            var type = TRXNaming.GetTR1Type(stringKey);
+            var type = TRXNaming.GetType(stringKey, trxScript.Edition.Version);
             if (!trxScript.ObjectStrings.TryGetValue(type, out var objText))
             {
                 trxScript.ObjectStrings[type] = objText = new();

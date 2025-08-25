@@ -116,7 +116,6 @@ public class ChecksumTester : IChecksumTester
         "1e7d0d88ff9d569e22982af761bb006b", // FLOATING.TR2 (Multipatch/EPC)
         "fd8c45efc3f5e690edd0796d350a28ba", // XIAN.TR2
         "b56c04ea52227eb7fdebd0665b45357a", // HOUSE.TR2
-        "2241125203a4af81fc4889ed844d5b22", // HOUSE.TR2 (rando-generated for texture optimisation)
         "04ad2f33e48081a6b27a7f0ebf90968d", // LEVEL1.TR2
         "d9b53b88dd70eec1e4b31182f3286bf5", // LEVEL2.TR2
         "ca4294e3bd8835ebf06e114b479a22c2", // LEVEL3.TR2

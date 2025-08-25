@@ -394,10 +394,8 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                     level.Data.Models.ChangeKey(TR3Type.Quest1_P, TR3Type.Key3_P);
                     level.Data.Models.ChangeKey(TR3Type.Quest1_M_H, TR3Type.Key3_M_H);
                     level.Script.Keys[2] = level.Script.Pickups[0];
-                    level.Script.SetStartInventoryItems(new()
-                    {
-                        [TR3Items.Key3] = 1
-                    });
+                    level.Script.ClearStartInventoryItems();
+                    level.Script.AddStartInventoryItem(TR3Items.Key3);
                 }
 
                 allocation.AvailablePickupModels.AddRange(_artefactReplacements.Keys

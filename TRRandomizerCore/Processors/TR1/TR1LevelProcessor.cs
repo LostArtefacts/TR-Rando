@@ -5,7 +5,7 @@ using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Processors;
 
-public class TR1LevelProcessor : AbstractLevelProcessor<TR1ScriptedLevel, TR1CombinedLevel>
+public class TR1LevelProcessor : AbstractLevelProcessor<TRXScriptedLevel, TR1CombinedLevel>
 {
     protected TR1LevelControl _control;
 
@@ -14,7 +14,7 @@ public class TR1LevelProcessor : AbstractLevelProcessor<TR1ScriptedLevel, TR1Com
         _control = new();
     }
 
-    protected override TR1CombinedLevel LoadCombinedLevel(TR1ScriptedLevel scriptedLevel)
+    protected override TR1CombinedLevel LoadCombinedLevel(TRXScriptedLevel scriptedLevel)
     {
         TR1CombinedLevel level = new()
         {
@@ -25,7 +25,7 @@ public class TR1LevelProcessor : AbstractLevelProcessor<TR1ScriptedLevel, TR1Com
 
         if (scriptedLevel.HasCutScene)
         {
-            level.CutSceneLevel = LoadCombinedLevel(scriptedLevel.CutSceneLevel as TR1ScriptedLevel);
+            level.CutSceneLevel = LoadCombinedLevel(scriptedLevel.CutSceneLevel as TRXScriptedLevel);
             level.CutSceneLevel.ParentLevel = level;
         }
 

@@ -396,8 +396,8 @@ public class TRRandomizerController
     #region TR1X Specifics
     public bool ConvertDroppedGuns
     {
-        get => (ScriptEditor as TR1ScriptEditor).ConvertDroppedGuns;
-        set => (ScriptEditor as TR1ScriptEditor).ConvertDroppedGuns = value;
+        get => (ScriptEditor as TRXScriptEditor).ConvertDroppedGuns;
+        set => (ScriptEditor as TRXScriptEditor).ConvertDroppedGuns = value;
     }
     #endregion
 

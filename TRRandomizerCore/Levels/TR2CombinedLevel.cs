@@ -14,7 +14,7 @@ public class TR2CombinedLevel
     /// <summary>
     /// The scripting information for the level stored in TOMBPC.dat.
     /// </summary>
-    public TR2ScriptedLevel Script { get; set; }
+    public TRXScriptedLevel Script { get; set; }
 
     /// <summary>
     /// The checksum of the backed up level file.

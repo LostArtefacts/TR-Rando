@@ -1,9 +1,7 @@
-﻿using TRGE.Core;
-using TRLevelControl.Helpers;
+﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
-using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers;
 
@@ -31,7 +29,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer
             DefaultItemShade = -1,
         };
 
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
             if (Settings.DevelopmentMode)
@@ -87,8 +85,8 @@ public class TR2SecretRandomizer : BaseTR2Randomizer
             easyDamageCount++;
         }
 
-        level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Type.LargeMed_S_P), hardDamageCount);
-        level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Type.SmallMed_S_P), easyDamageCount);
+        level.Script.AddStartInventoryItem(TR2Type.LargeMed_S_P, hardDamageCount);
+        level.Script.AddStartInventoryItem(TR2Type.SmallMed_S_P, easyDamageCount);
     }
 
     private static void FixSecretTextures(string levelName, TR2Level level)

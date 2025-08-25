@@ -17,7 +17,7 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
 
     internal TR1TextureMonitorBroker TextureMonitor { get; set; }
 
-    private List<TR1ScriptedLevel> _nightLevels;
+    private List<TRXScriptedLevel> _nightLevels;
 
     public override void Randomize(int seed)
     {
@@ -27,7 +27,7 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
 
         ChooseNightLevels();
 
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
 
@@ -46,8 +46,8 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
 
     private void ChooseNightLevels()
     {
-        TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
-        ISet<TR1ScriptedLevel> exlusions = new HashSet<TR1ScriptedLevel> { assaultCourse };
+        var assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
+        var exlusions = new HashSet<TRXScriptedLevel> { assaultCourse };
 
         _nightLevels = Levels.RandomSelection(_generator, (int)Settings.NightModeCount, exclusions: exlusions);
         if (Settings.NightModeAssaultCourse)

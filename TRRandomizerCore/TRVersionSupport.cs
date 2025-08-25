@@ -239,9 +239,9 @@ internal class TRVersionSupport
     private static readonly string _trrExe = "tomb123.exe";
     private static readonly Dictionary<TRVersion, List<string>> _versionExes = new()
     {
-        [TRVersion.TR1] = new() { "TR1X.exe" },
-        [TRVersion.TR2] = new() { "Tomb2.exe" },
-        [TRVersion.TR3] = new() { "Tomb3.exe" }
+        [TRVersion.TR1] = ["TR1X.exe"],
+        [TRVersion.TR2] = ["TR2X.exe"],
+        [TRVersion.TR3] = ["Tomb3.exe"]
     };
 
     public static bool IsRandomizationSupported(TREdition edition)
@@ -278,14 +278,14 @@ internal class TRVersionSupport
 
     public static List<string> GetExecutables(TREdition edition, string dataFolder)
     {
-        List<string> exes = new();
+        List<string> exes = [];
         if (edition.Remastered)
         {
             exes.Add(Path.GetFullPath(Path.Combine(dataFolder, "../../", _trrExe)));
         }
-        else if (_versionExes.ContainsKey(edition.Version))
+        else if (_versionExes.TryGetValue(edition.Version, out var verExes))
         {
-            exes.AddRange(_versionExes[edition.Version].Select(
+            exes.AddRange(verExes.Select(
                 p => Path.GetFullPath(Path.Combine(dataFolder, "../", p))));
         }
         return exes;

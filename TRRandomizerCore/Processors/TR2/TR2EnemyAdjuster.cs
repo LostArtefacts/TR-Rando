@@ -1,5 +1,4 @@
-﻿using TRGE.Core;
-using TRLevelControl.Helpers;
+﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
@@ -17,7 +16,7 @@ public class TR2EnemyAdjuster : TR2LevelProcessor
 
     public void AdjustEnemies()
     {
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             if (_enemyTargets.ContainsKey(lvl.LevelFileBaseName.ToUpper()))
             {

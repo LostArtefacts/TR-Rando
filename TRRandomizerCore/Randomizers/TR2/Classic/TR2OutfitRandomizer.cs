@@ -18,8 +18,8 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
 
     private TR2CombinedLevel _firstDragonLevel;
 
-    private List<TR2ScriptedLevel> _haircutLevels;
-    private List<TR2ScriptedLevel> _invisibleLevels;
+    private List<TRXScriptedLevel> _haircutLevels;
+    private List<TRXScriptedLevel> _invisibleLevels;
 
     public override void Randomize(int seed)
     {
@@ -35,7 +35,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         }
 
         List<TR2CombinedLevel> levels = new(Levels.Count);
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
             if (!TriggerProgress())
@@ -96,28 +96,28 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
 
     private void ChooseFilteredLevels()
     {
-        TR2ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR2LevelNames.ASSAULT));
-        ISet<TR2ScriptedLevel> exlusions = new HashSet<TR2ScriptedLevel> { assaultCourse };
+        var assaultCourse = Levels.Find(l => l.Is(TR2LevelNames.ASSAULT));
+        var exclusions = new HashSet<TRXScriptedLevel> { assaultCourse };
 
-        _haircutLevels = Levels.RandomSelection(_generator, (int)Settings.HaircutLevelCount, exclusions: exlusions);
+        _haircutLevels = Levels.RandomSelection(_generator, (int)Settings.HaircutLevelCount, exclusions: exclusions);
         if (Settings.AssaultCourseHaircut)
         {
             _haircutLevels.Add(assaultCourse);
         }
 
-        _invisibleLevels = Levels.RandomSelection(_generator, (int)Settings.InvisibleLevelCount, exclusions: exlusions);
+        _invisibleLevels = Levels.RandomSelection(_generator, (int)Settings.InvisibleLevelCount, exclusions: exclusions);
         if (Settings.AssaultCourseInvisible)
         {
             _invisibleLevels.Add(assaultCourse);
         }
     }
 
-    private bool IsHaircutLevel(TR2ScriptedLevel lvl)
+    private bool IsHaircutLevel(TRXScriptedLevel lvl)
     {
         return _haircutLevels.Contains(lvl);
     }
 
-    private bool IsInvisibleLevel(TR2ScriptedLevel lvl)
+    private bool IsInvisibleLevel(TRXScriptedLevel lvl)
     {
         return _invisibleLevels.Contains(lvl);
     }
@@ -253,7 +253,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 laraRemovals.AddRange(_laraRemovals);
             }
             
-            TR2DataImporter importer = new()
+            TR2DataImporter importer = new(isCommunityPatch: true)
             {
                 Level = level.Data,
                 LevelName = level.Name,

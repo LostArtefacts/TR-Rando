@@ -24,7 +24,7 @@ public class EMImportModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        TR2DataImporter importer = new()
+        TR2DataImporter importer = new(isCommunityPatch: true)
         {
             Level = level,
             TypesToImport = new(Models.Select(m => (TR2Type)m)),

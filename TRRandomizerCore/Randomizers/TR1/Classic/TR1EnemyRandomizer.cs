@@ -41,14 +41,14 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             RandomizeExistingEnemies();
         }
 
-        TR1Script script = ScriptEditor.Script as TR1Script;
+        var script = ScriptEditor.Script as TRXScript;
         script.EnforceConfig("disable_trex_collision", true);
         script.ConvertDroppedGuns = true;
     }
 
     private void RandomizeExistingEnemies()
     {
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
             EnemyRandomizationCollection<TR1Type> enemies = _allocator.RandomizeEnemiesNatively(_levelInstance.Name, _levelInstance.Data);
@@ -73,7 +73,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         List<TR1CombinedLevel> levels = new(Levels.Count);
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
             if (!TriggerProgress())

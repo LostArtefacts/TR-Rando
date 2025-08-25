@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TRDataControl;
-using TRGE.Core;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -17,7 +16,7 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
         int levelSplit = (int)(Levels.Count / _maxThreads);
 
         bool beginProcessing = true;
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             if (processors[^1].LevelCount == levelSplit)
             {

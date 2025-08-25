@@ -1,5 +1,4 @@
-﻿using TRGE.Core;
-using TRLevelControl.Helpers;
+﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Processors;
@@ -20,7 +19,7 @@ public class TR2ModelAdjuster : TR2LevelProcessor
 
     public void AdjustModels()
     {
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
 

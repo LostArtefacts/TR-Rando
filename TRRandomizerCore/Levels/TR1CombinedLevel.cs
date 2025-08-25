@@ -16,7 +16,7 @@ public class TR1CombinedLevel
     /// <summary>
     /// The scripting information for the level stored in TR1X_gameflow.json5.
     /// </summary>
-    public TR1ScriptedLevel Script { get; set; }
+    public TRXScriptedLevel Script { get; set; }
 
     /// <summary>
     /// The checksum of the backed up level file.
