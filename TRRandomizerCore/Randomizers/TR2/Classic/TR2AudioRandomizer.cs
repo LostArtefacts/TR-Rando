@@ -1,6 +1,4 @@
-﻿using TRGE.Core;
-
-namespace TRRandomizerCore.Randomizers;
+﻿namespace TRRandomizerCore.Randomizers;
 
 public class TR2AudioRandomizer : BaseTR2Randomizer
 {
@@ -15,7 +13,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         };
         allocator.Initialise(Levels.Select(l => l.LevelFileBaseName), BackupPath);
 
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
 

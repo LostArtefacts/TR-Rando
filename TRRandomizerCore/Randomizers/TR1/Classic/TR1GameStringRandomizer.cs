@@ -19,13 +19,13 @@ public class TR1GameStringRandomizer : BaseTR1Randomizer
 
         Dictionary<TRStringKey, string> globalStrings = allocator.Allocate(TRGameVersion.TR1, ScriptEditor);
 
-        TR1Script script = ScriptEditor.Script as TR1Script;
+        var script = ScriptEditor.Script as TRXScript;
         foreach (var (key, value) in globalStrings)
         {
             script.BaseStrings[key.ToString()] = value;
         }
 
-        script.ObjectStrings[TR1Items.LaraHomePhoto_M_H].Name = script.AssaultLevel.Name;
+        script.ObjectStrings[(int)TR1Items.LaraHomePhoto_M_H].Name = script.AssaultLevel.Name;
 
         AmendDefaultStrings();
 

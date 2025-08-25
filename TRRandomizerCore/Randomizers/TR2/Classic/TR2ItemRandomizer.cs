@@ -1,6 +1,4 @@
 ﻿using TRDataControl;
-using TRGE.Core;
-using TRGE.Core.Item.Enums;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -39,7 +37,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
         _allocator.AllocateWeapons(Levels.Where(l => !l.Is(TR2LevelNames.ASSAULT)));
 
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
 
@@ -56,7 +54,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     public void FinalizeRandomization()
     {
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             if (Settings.ItemMode == ItemMode.Shuffled || Settings.IncludeKeyItems)
             {
@@ -86,7 +84,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
     {
         // This remains separate as it must be performed following all other texture work due to
         // TR2 texture deduplication.
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
             _allocator.RandomizeSprites(_levelInstance.Data.Sprites, TR2TypeUtilities.GetKeyItemTypes(), TR2TypeUtilities.GetSecretTypes());
@@ -108,7 +106,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
         if (level.Is(TR2LevelNames.MONASTERY))
         {
-            TR2ScriptedLevel theDeck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
+            var theDeck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
             if ((theDeck == null || theDeck.Sequence > level.Sequence)
                 && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
             {
@@ -116,13 +114,13 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 // therefore allow it to be randomized.
                 TR2Entity seraph = ItemFactory.CreateItem(level.Name, level.Data.Entities, _barkhangSeraphLocation);
                 seraph.TypeID = TR2Type.Puzzle4_S_P;
-                level.Script.RemoveStartInventoryItem(TR2Items.Puzzle4);
+                level.Script.RemoveStartInventoryItem(TR2Type.Puzzle4_S_P);
             }
         }
         else if (level.Is(TR2LevelNames.TIBET))
         {
-            TR2ScriptedLevel deck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
-            TR2ScriptedLevel monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
+            var deck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
+            var monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
 
             // Deck not present => Barkhang pickup only
             // Deck present but Barkhang absent => Deck pickup, carried to Tibet if sequence is after
@@ -131,12 +129,12 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                (monastery == null && level.Script.Sequence < deck.Sequence) ||
                (monastery != null && (level.Script.Sequence < deck.Sequence || level.Script.Sequence > monastery.Sequence)))
             {
-                level.Script.RemoveStartInventoryItem(TR2Items.Puzzle4);
+                level.Script.RemoveStartInventoryItem(TR2Type.Puzzle4_S_P);
             }
         }
         else if (level.Is(TR2LevelNames.DECK))
         {
-            TR2ScriptedLevel monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
+            var monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
             if (monastery != null && monastery.Sequence < level.Sequence)
             {
                 // Anticlimactic regular item pickup to end the level
@@ -194,7 +192,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
         try
         {
-            TR2DataImporter importer = new()
+            TR2DataImporter importer = new(isCommunityPatch: true)
             {
                 Level = level.Data,
                 LevelName = level.Name,

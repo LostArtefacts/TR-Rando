@@ -71,7 +71,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
 
         List<TR1CombinedLevel> levels = new(Levels.Count);
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
             if (!TriggerProgress())
@@ -101,7 +101,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
         if (Settings.GlitchedSecrets)
         {
-            (ScriptEditor.Script as TR1Script).EnforceConfig("enable_walk_to_items", false);
+            (ScriptEditor.Script as TRXScript).EnforceConfig("enable_walk_to_items", false);
         }
 
         ScriptEditor.SaveScript();
@@ -109,13 +109,13 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     private void SetSecretCounts()
     {
-        List<TR1ScriptedLevel> levels = Levels.FindAll(l => !l.Is(TR1LevelNames.ASSAULT));
+        var levels = Levels.FindAll(l => !l.Is(TR1LevelNames.ASSAULT));
 
         switch (Settings.SecretCountMode)
         {
             case TRSecretCountMode.Shuffled:
                 List<ushort> defaultCounts = levels.Select(l => l.NumSecrets).ToList();
-                foreach (TR1ScriptedLevel level in levels)
+                foreach (var level in levels)
                 {
                     int countIndex = _generator.Next(0, defaultCounts.Count);
                     level.NumSecrets = defaultCounts[countIndex];
@@ -126,7 +126,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             case TRSecretCountMode.Customized:
                 int min = (int)Math.Max(1, Settings.MinSecretCount);
                 int max = (int)Math.Min(_maxSecretCount, Settings.MaxSecretCount) + 1;
-                foreach (TR1ScriptedLevel level in levels)
+                foreach (var level in levels)
                 {
                     level.NumSecrets = (ushort)_generator.Next(min, max);
                 }
@@ -274,7 +274,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             if (!level.Data.Rooms[secret.Location.Room].ContainsWater
                 && secret.Location.IsSlipperySlope(level.Data))
             {
-                (ScriptEditor.Script as TR1Script).EnforceConfig("enable_walk_to_items", false);
+                (ScriptEditor.Script as TRXScript).EnforceConfig("enable_walk_to_items", false);
             }
 
             // This will either make a new entity or repurpose an old one. Ensure it is locked

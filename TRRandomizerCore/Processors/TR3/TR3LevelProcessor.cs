@@ -10,7 +10,7 @@ public class TR3LevelProcessor : AbstractLevelProcessor<TR3ScriptedLevel, TR3Com
     /// <summary>
     /// EU version has 7 RPLs, JP has 5. This allows for determining if different mods are needed per level.
     /// </summary>
-    public bool IsJPVersion => (ScriptEditor.Script as TR23Script).NumRPLs == 5;
+    public bool IsJPVersion => (ScriptEditor.Script as TR3Script).NumRPLs == 5;
 
     protected TR3LevelControl _control;
 

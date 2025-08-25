@@ -27,10 +27,10 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
     internal TR1TextureMonitorBroker TextureMonitor { get; set; }
 
-    private List<TR1ScriptedLevel> _braidLevels;
-    private List<TR1ScriptedLevel> _invisibleLevels;
-    private List<TR1ScriptedLevel> _gymLevels, _partialGymLevels;
-    private List<TR1ScriptedLevel> _mauledLevels;
+    private List<TRXScriptedLevel> _braidLevels;
+    private List<TRXScriptedLevel> _invisibleLevels;
+    private List<TRXScriptedLevel> _gymLevels, _partialGymLevels;
+    private List<TRXScriptedLevel> _mauledLevels;
 
     private Dictionary<TR1SFX, TR1SoundEffect> _barefootSfx;
 
@@ -47,7 +47,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
         }
 
         List<TR1CombinedLevel> levels = new(Levels.Count);
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
             if (!TriggerProgress())
@@ -78,8 +78,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
     private void ChooseFilteredLevels()
     {
-        TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
-        ISet<TR1ScriptedLevel> exlusions = new HashSet<TR1ScriptedLevel> { assaultCourse };
+        var assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
+        var exlusions = new HashSet<TRXScriptedLevel> { assaultCourse };
 
         // "Haircut" settings = hair extensions in TR1
         _braidLevels = Levels.RandomSelection(_generator, (int)Settings.HaircutLevelCount, exclusions: exlusions);
@@ -124,7 +124,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         // Add a chance of Lara's mauled outfit being used.
         _mauledLevels = new();
-        foreach (TR1ScriptedLevel level in Levels)
+        foreach (var level in Levels)
         {
             if (IsInvisibleLevel(level) || IsGymLevel(level) || level.Is(TR1LevelNames.MIDAS))
             {
@@ -152,11 +152,11 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         if (_braidLevels.Count > 0)
         {
-            (ScriptEditor.Script as TR1Script).EnforceConfig("enable_braid", true);
+            (ScriptEditor.Script as TRXScript).EnforceConfig("enable_braid", true);
         }
     }
 
-    private bool LevelSupportsGymOutfit(TR1ScriptedLevel scriptedLevel)
+    private bool LevelSupportsGymOutfit(TRXScriptedLevel scriptedLevel)
     {
         if (IsInvisibleLevel(scriptedLevel))
         {
@@ -172,27 +172,27 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
         return !level.Data.Entities.Any(e => e.TypeID == TR1Type.TRex);
     }
 
-    private bool IsBraidLevel(TR1ScriptedLevel lvl)
+    private bool IsBraidLevel(TRXScriptedLevel lvl)
     {
         return _braidLevels.Contains(lvl);
     }
 
-    private bool IsInvisibleLevel(TR1ScriptedLevel lvl)
+    private bool IsInvisibleLevel(TRXScriptedLevel lvl)
     {
         return _invisibleLevels.Contains(lvl);
     }
 
-    private bool IsGymLevel(TR1ScriptedLevel lvl)
+    private bool IsGymLevel(TRXScriptedLevel lvl)
     {
         return _gymLevels != null && _gymLevels.Contains(lvl);
     }
 
-    private bool IsPartialGymLevel(TR1ScriptedLevel lvl)
+    private bool IsPartialGymLevel(TRXScriptedLevel lvl)
     {
         return _partialGymLevels != null && _partialGymLevels.Contains(lvl);
     }
 
-    private bool IsMauledLevel(TR1ScriptedLevel lvl)
+    private bool IsMauledLevel(TRXScriptedLevel lvl)
     {
         return _mauledLevels.Contains(lvl);
     }

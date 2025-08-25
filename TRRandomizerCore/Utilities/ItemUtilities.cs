@@ -6,24 +6,10 @@ namespace TRRandomizerCore.Utilities;
 public static class ItemUtilities
 {
     public static TR1Items ConvertToScriptItem(TR1Type entity)
-    {
-        return (TR1Items)entity;
-    }
+        => (TR1Items)entity;
 
     public static TR1Type ConvertToEntity(TR1Items item)
-    {
-        return (TR1Type)item;
-    }
-
-    public static TR2Items ConvertToScriptItem(TR2Type entity, TR2Items defaultItem = TR2Items.Pistols)
-    {
-        return Convert(entity, defaultItem, _tr2EntityToScriptItemMap);
-    }
-
-    public static TR2Type ConvertToEntity(TR2Items item, TR2Type defaultEntity = TR2Type.Pistols_S_P)
-    {
-        return Convert(item, defaultEntity, _tr2ScriptItemToEntitymap);
-    }
+        => (TR1Type)item;
 
     public static TR3Items ConvertToScriptItem(TR3Type entity, TR3Items defaultItem = TR3Items.Pistols)
     {
@@ -37,11 +23,7 @@ public static class ItemUtilities
 
     private static T Convert<T, S>(S item, T defaultItem, Dictionary<S, T> dictionary)
     {
-        if (dictionary.ContainsKey(item))
-        {
-            return dictionary[item];
-        }
-        return defaultItem;
+        return dictionary.TryGetValue(item, out T value) ? value : defaultItem;
     }
 
     public static void HideEntity<T>(TREntity<T> entity)
@@ -52,75 +34,6 @@ public static class ItemUtilities
         // Marking it invisible means it cannot be picked up, even if the new location can be reached.
         entity.Invisible = true;
     }
-
-    private static readonly Dictionary<TR2Type, TR2Items> _tr2EntityToScriptItemMap = new()
-    {
-        [TR2Type.Pistols_S_P]
-            = TR2Items.Pistols,
-        [TR2Type.PistolAmmo_S_P]
-            = TR2Items.PistolClips,
-
-        [TR2Type.Shotgun_S_P]
-            = TR2Items.Shotgun,
-        [TR2Type.ShotgunAmmo_S_P]
-            = TR2Items.ShotgunShells,
-
-        [TR2Type.Automags_S_P]
-            = TR2Items.AutoPistols,
-        [TR2Type.AutoAmmo_S_P]
-            = TR2Items.AutoClips,
-
-        [TR2Type.Uzi_S_P]
-            = TR2Items.Uzis,
-        [TR2Type.UziAmmo_S_P]
-            = TR2Items.UziClips,
-
-        [TR2Type.Harpoon_S_P]
-            = TR2Items.HarpoonGun,
-        [TR2Type.HarpoonAmmo_S_P]
-            = TR2Items.Harpoons,
-
-        [TR2Type.M16_S_P]
-            = TR2Items.M16,
-        [TR2Type.M16Ammo_S_P]
-            = TR2Items.M16Clips,
-
-        [TR2Type.GrenadeLauncher_S_P]
-            = TR2Items.GrenadeLauncher,
-        [TR2Type.Grenades_S_P]
-            = TR2Items.Grenades,
-
-        [TR2Type.SmallMed_S_P]
-            = TR2Items.SmallMedi,
-        [TR2Type.LargeMed_S_P]
-            = TR2Items.LargeMedi,
-
-        [TR2Type.Flares_S_P]
-            = TR2Items.Flare, // Single flare, not a pack
-
-        [TR2Type.Quest1_S_P]
-            = TR2Items.Pickup1,
-        [TR2Type.Quest2_S_P]
-             = TR2Items.Pickup2,
-
-        [TR2Type.Puzzle1_S_P]
-            = TR2Items.Puzzle1,
-        [TR2Type.Puzzle2_S_P]
-            = TR2Items.Puzzle2,
-        [TR2Type.Puzzle3_S_P]
-            = TR2Items.Puzzle3,
-        [TR2Type.Puzzle4_S_P]
-            = TR2Items.Puzzle4,
-
-        [TR2Type.Key1_S_P]
-            = TR2Items.Key1,
-        [TR2Type.Key2_S_P]
-            = TR2Items.Key2,
-        [TR2Type.Key3_S_P]
-            = TR2Items.Key3,
-        [TR2Type.Key4_S_P]
-            = TR2Items.Key4
-    };
 
     private static readonly Dictionary<TR3Type, TR3Items> _tr3EntityToScriptItemMap = new()
     {
@@ -197,12 +110,10 @@ public static class ItemUtilities
     };
 
     // The reverse of above for the sake of ConvertToEntity, but initialised dynamically.
-    private static readonly Dictionary<TR2Items, TR2Type> _tr2ScriptItemToEntitymap;
     private static readonly Dictionary<TR3Items, TR3Type> _tr3ScriptItemToEntitymap;
 
     static ItemUtilities()
     {
-        _tr2ScriptItemToEntitymap = _tr2EntityToScriptItemMap.ToDictionary(e => e.Value, e => e.Key);
         _tr3ScriptItemToEntitymap = _tr3EntityToScriptItemMap.ToDictionary(e => e.Value, e => e.Key);
     }
 }

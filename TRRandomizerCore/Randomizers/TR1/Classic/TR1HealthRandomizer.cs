@@ -11,7 +11,7 @@ public class TR1HealthRandomizer : BaseTR1Randomizer
         // For now we just set the global hitpoints value for lara. We could potentially adjust
         // meds per level based on difficulty.
 
-        (ScriptEditor.Script as TR1Script).StartLaraHitpoints = _generator.Next((int)Settings.MinStartingHealth, (int)Settings.MaxStartingHealth + 1);
+        (ScriptEditor.Script as TRXScript).StartLaraHitpoints = _generator.Next((int)Settings.MinStartingHealth, (int)Settings.MaxStartingHealth + 1);
         ScriptEditor.SaveScript();
 
         TriggerProgress(Levels.Count);

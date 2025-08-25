@@ -107,13 +107,10 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
 
     protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
     {
-        List<TR1ScriptedLevel> levels = new(
-            scriptEditor.EnabledScriptedLevels.Cast<TR1ScriptedLevel>().ToList()
-        );
-
+        var levels = scriptEditor.EnabledScriptedLevels.Cast<TRXScriptedLevel>().ToList();
         if (scriptEditor.GymAvailable)
         {
-            levels.Add(scriptEditor.AssaultLevel as TR1ScriptedLevel);
+            levels.Add(scriptEditor.AssaultLevel as TRXScriptedLevel);
         }
 
         string backupDirectory = _io.BackupDirectory.FullName;
@@ -121,7 +118,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
 
         if (Settings.DevelopmentMode)
         {
-            var script = scriptEditor.Script as TR1Script;
+            var script = scriptEditor.Script as TRXScript;
             script.EnforceConfig("enable_cheats", true);
             script.EnforceConfig("enable_console", true);
             scriptEditor.SaveScript();
@@ -346,7 +343,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
 
     private void AmendTitleAndCredits(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
     {
-        TR1Script script = scriptEditor.Script as TR1Script;
+        var script = scriptEditor.Script as TRXScript;
 
         string mainMenuPic = Path.GetFileName(script.MainMenuPicture);
         string backupTitle = Path.Combine(GetReadBasePath(), mainMenuPic);
@@ -380,7 +377,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
             bg.Import(badge, new(960 - badge.Width / 2, 540 - badge.Height / 2), true);
             bg.Save(creditFile);
 
-            var finalLevel = scriptEditor.Levels.ToList().Find(l => l.IsFinalLevel) as TR1ScriptedLevel;
+            var finalLevel = scriptEditor.Levels.ToList().Find(l => l.IsFinalLevel) as TRXScriptedLevel;
             finalLevel.AddSequenceBefore(LevelSequenceType.Total_Stats, new DisplayPictureSequence
             {
                 Type = LevelSequenceType.Display_Picture,

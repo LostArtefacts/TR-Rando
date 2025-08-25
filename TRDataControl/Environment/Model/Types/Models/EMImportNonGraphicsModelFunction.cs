@@ -35,7 +35,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             return;
         }
 
-        TR2DataImporter importer = new()
+        TR2DataImporter importer = new(isCommunityPatch: true)
         {
             Level = level,
             ClearUnusedSprites = false,

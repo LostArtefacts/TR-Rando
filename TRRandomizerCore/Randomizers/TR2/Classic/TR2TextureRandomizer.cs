@@ -21,8 +21,8 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
     private readonly object _drawLock;
     private TR2TextureDatabase _textureDatabase;
     private Dictionary<TextureCategory, bool> _textureOptions;
-    private List<TR2ScriptedLevel> _wireframeLevels;
-    private List<TR2ScriptedLevel> _solidLaraLevels;
+    private List<TRXScriptedLevel> _wireframeLevels;
+    private List<TRXScriptedLevel> _solidLaraLevels;
     private Color _persistentWireColour;
 
     internal bool NightModeOnly => !Settings.RandomizeTextures;
@@ -56,7 +56,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
         // texture category so potentially any other textures could also be targeted.
         _textureOptions = new Dictionary<TextureCategory, bool>();
 
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
 
@@ -108,7 +108,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
         int levelSplit = (int)(Levels.Count / _maxThreads);
 
         bool beginProcessing = true;
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             if (processors[^1].LevelCount >= levelSplit)
             {
@@ -145,10 +145,10 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
     private void ChooseWireframeLevels()
     {
-        TR2ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR2LevelNames.ASSAULT));
-        ISet<TR2ScriptedLevel> exlusions = new HashSet<TR2ScriptedLevel> { assaultCourse };
+        var assaultCourse = Levels.Find(l => l.Is(TR2LevelNames.ASSAULT));
+        var exclusions = new HashSet<TRXScriptedLevel> { assaultCourse };
 
-        _wireframeLevels = Levels.RandomSelection(_generator, (int)Settings.WireframeLevelCount, exclusions: exlusions);
+        _wireframeLevels = Levels.RandomSelection(_generator, (int)Settings.WireframeLevelCount, exclusions: exclusions);
         if (Settings.AssaultCourseWireframe)
         {
             _wireframeLevels.Add(assaultCourse);
@@ -156,7 +156,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
         if (Settings.UseSolidLaraWireframing)
         {
-            _solidLaraLevels = new List<TR2ScriptedLevel>(_wireframeLevels);
+            _solidLaraLevels = [.. _wireframeLevels];
         }
         else
         {

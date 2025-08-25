@@ -23,7 +23,7 @@ public class TR1InjectionProcessor : TR1LevelProcessor
     public void Run()
     {
         var photoSfx = LoadLevelData(TR1LevelNames.CAVES).SoundEffects[TR1SFX.MenuChoose];
-        TR1Script script = ScriptEditor.Script as TR1Script;
+        var script = ScriptEditor.Script as TRXScript;
 
         bool tr1xVersionSupported = script.Edition.ExeVersion != null
             && script.Edition.ExeVersion >= _minTR1XVersion;
@@ -51,7 +51,7 @@ public class TR1InjectionProcessor : TR1LevelProcessor
         SaveScript();
     }
 
-    private void AdjustInjections(TR1ScriptedLevel level, bool tr1xVersionSupported)
+    private void AdjustInjections(TRXScriptedLevel level, bool tr1xVersionSupported)
     {
         if (!tr1xVersionSupported)
         {
@@ -62,7 +62,7 @@ public class TR1InjectionProcessor : TR1LevelProcessor
         level.Injections = GetSupportedInjections(level.Injections);
         if (level.HasCutScene)
         {
-            var cutscene = (level.CutSceneLevel as TR1ScriptedLevel);
+            var cutscene = (level.CutSceneLevel as TRXScriptedLevel);
             cutscene.InheritInjections = false;
             cutscene.Injections = GetSupportedInjections(cutscene.Injections);
         }

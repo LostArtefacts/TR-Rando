@@ -14,7 +14,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
     internal bool EnforcedModeOnly => !Settings.RandomizeEnvironment;
     internal TR1TextureMonitorBroker TextureMonitor { get; set; }
 
-    private List<TR1ScriptedLevel> _levelsToMirror;
+    private List<TRXScriptedLevel> _levelsToMirror;
 
     public void AllocateMirroredLevels(int seed)
     {
@@ -25,8 +25,8 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
 
         _generator ??= new(seed);
 
-        TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
-        _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions: new HashSet<TR1ScriptedLevel>
+        var assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
+        _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions: new HashSet<TRXScriptedLevel>
         {
             assaultCourse
         });
@@ -44,7 +44,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
 
     public void SetIsMirrored(string levelName, bool mirrored)
     {
-        TR1ScriptedLevel level = Levels.Find(l => l.Is(levelName));
+        var level = Levels.Find(l => l.Is(levelName));
         if (level == null)
         {
             return;
@@ -67,7 +67,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
 
         AllocateMirroredLevels(seed);
 
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
             RandomizeEnvironment(_levelInstance);
@@ -84,7 +84,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
     {
         // This should be called following any other potential general changes such as
         // trigger or item shifting. It will execute ConditionalAll and Mirroring only.
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
             FinalizeEnvironment(_levelInstance);

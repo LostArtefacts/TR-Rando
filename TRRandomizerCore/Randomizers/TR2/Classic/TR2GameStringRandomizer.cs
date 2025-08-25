@@ -1,7 +1,7 @@
-﻿using TRRandomizerCore.Globalisation;
-using TRGE.Core;
+﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
+using TRRandomizerCore.Globalisation;
 
 namespace TRRandomizerCore.Randomizers;
 
@@ -17,7 +17,12 @@ public class TR2GameStringRandomizer : BaseTR2Randomizer
         };
 
         Dictionary<TRStringKey, string> globalStrings = allocator.Allocate(TRGameVersion.TR2, ScriptEditor);
-        ConvertGlobalStrings(globalStrings);
+
+        var script = ScriptEditor.Script as TRXScript;
+        foreach (var (key, value) in globalStrings)
+        {
+            script.BaseStrings[key.ToString()] = value;
+        }
 
         if (Settings.ReassignPuzzleItems)
         {
@@ -34,28 +39,6 @@ public class TR2GameStringRandomizer : BaseTR2Randomizer
         TriggerProgress();
     }
 
-    private void ConvertGlobalStrings(Dictionary<TRStringKey, string> globalStrings)
-    {
-        TR23Script script = ScriptEditor.Script as TR23Script;
-        List<string> gameStrings1 = new(script.GameStrings1);
-        List<string> gameStrings2 = new(script.GameStrings2);
-
-        foreach (var (key, value) in globalStrings)
-        {
-            if (_gameString1Map.ContainsKey(key))
-            {
-                gameStrings1[_gameString1Map[key]] = value;
-            }
-            else if (_gameString2Map.ContainsKey(key))
-            {
-                gameStrings2[_gameString2Map[key]] = value;
-            }
-        }
-
-        script.GameStrings1 = gameStrings1.ToArray();
-        script.GameStrings2 = gameStrings2.ToArray();
-    }
-
     private static void MoveAndReplacePuzzle(AbstractTRScriptedLevel level, int currentIndex, int newIndex, string replacement)
     {
         if (level.Puzzles[currentIndex] == replacement)
@@ -69,37 +52,4 @@ public class TR2GameStringRandomizer : BaseTR2Randomizer
         }
         level.Puzzles[currentIndex] = replacement;
     }
-
-    private static readonly Dictionary<TRStringKey, int> _gameString1Map = new()
-    {
-        [TRStringKey.HEADING_ITEMS] = 2,
-        [TRStringKey.HEADING_GAME_OVER] = 3,
-        
-        [TRStringKey.INV_ITEM_PISTOLS] = 36,
-        [TRStringKey.INV_ITEM_PISTOL_AMMO] = 44,
-        [TRStringKey.INV_ITEM_SHOTGUN] = 37,
-        [TRStringKey.INV_ITEM_SHOTGUN_AMMO] = 45,
-        [TRStringKey.INV_ITEM_AUTOS] = 38,
-        [TRStringKey.INV_ITEM_AUTO_AMMO] = 46,
-        [TRStringKey.INV_ITEM_UZI] = 39,
-        [TRStringKey.INV_ITEM_UZI_AMMO] = 47,
-        [TRStringKey.INV_ITEM_HARPOON] = 40,
-        [TRStringKey.INV_ITEM_HARPOON_AMMO] = 48,
-        [TRStringKey.INV_ITEM_M16] = 41,
-        [TRStringKey.INV_ITEM_M16_AMMO] = 49,
-        [TRStringKey.INV_ITEM_GRENADE_LAUNCHER] = 42,
-        [TRStringKey.INV_ITEM_GRENADE_AMMO] = 50,
-
-        [TRStringKey.INV_ITEM_FLARES] = 43,
-        [TRStringKey.INV_ITEM_MEDI] = 51,
-        [TRStringKey.INV_ITEM_BIG_MEDI] = 52,
-
-        [TRStringKey.INV_ITEM_COMPASS] = 35,
-        [TRStringKey.INV_ITEM_LARAS_HOME] = 57,
-    };
-
-    private static readonly Dictionary<TRStringKey, int> _gameString2Map = new()
-    {
-        [TRStringKey.MISC_EMPTY_SLOT_FMT] = 15,
-    };
 }

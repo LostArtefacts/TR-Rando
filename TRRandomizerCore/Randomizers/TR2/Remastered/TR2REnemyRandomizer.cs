@@ -308,7 +308,7 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
                 if (!level.IsAssault)
                 {
                     EnemyTransportCollection<TR2Type> enemies = _enemyMapping[level];
-                    TR2DataImporter importer = new(true)
+                    TR2DataImporter importer = new()
                     {
                         TypesToImport = enemies.TypesToImport,
                         TypesToRemove = enemies.TypesToRemove,

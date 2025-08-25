@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -17,7 +16,7 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
         _generator = new Random(seed);
         _startLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource("TR1/Locations/start_positions.json"));
 
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
             RandomizeStartPosition(_levelInstance);

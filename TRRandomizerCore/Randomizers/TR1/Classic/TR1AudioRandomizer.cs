@@ -24,7 +24,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         };
         _allocator.Initialise(Levels.Select(l => l.LevelFileBaseName), BackupPath);
 
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
 
@@ -40,7 +40,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
             }
         }
 
-        var script = ScriptEditor.Script as TR1Script;
+        var script = ScriptEditor.Script as TRXScript;
         if (Settings.RandomizeWibble)
         {
             script.EnforceConfig("enable_pitched_sounds", true);

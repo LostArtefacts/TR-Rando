@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TRDataControl;
-using TRGE.Core;
 using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -60,7 +59,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
     private void RandomizeExistingEnemies()
     {
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
             RandomizeEnemiesNatively(_levelInstance);
@@ -90,7 +89,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
 
         List<TR2CombinedLevel> levels = new(Levels.Count);
-        foreach (TR2ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
             if (!TriggerProgress())
@@ -310,7 +309,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
         else
         {
-            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(ammoType), ammoCount);
+            level.Script.AddStartInventoryItem(ammoType, ammoCount);
         }
     }
 
@@ -374,7 +373,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         {
             try
             {
-                TR2DataImporter importer = new()
+                TR2DataImporter importer = new(isCommunityPatch: true)
                 {
                     ClearUnusedSprites = true,
                     TypesToImport = enemies.TypesToImport,

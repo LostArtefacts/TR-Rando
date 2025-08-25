@@ -1,5 +1,4 @@
-﻿using TRGE.Core;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Randomizers;
@@ -18,7 +17,7 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
             Generator = _generator
         };
 
-        foreach (TR1ScriptedLevel lvl in Levels)
+        foreach (var lvl in Levels)
         {
             LoadLevelInstance(lvl);
             allocator.RandomizeRewards(_levelInstance.Name, _levelInstance.Data);
