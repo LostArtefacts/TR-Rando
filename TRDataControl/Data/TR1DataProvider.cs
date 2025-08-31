@@ -5,8 +5,8 @@ namespace TRDataControl;
 
 public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
 {
-    public int TextureTileLimit { get; set; } = 16;
-    public int TextureObjectLimit { get; set; } = 2048;
+    public int TextureTileLimit { get; set; } = 32;
+    public int TextureObjectLimit { get; set; } = 8192;
 
     public Dictionary<TR1Type, TR1Type> AliasPriority { get; set; }
 

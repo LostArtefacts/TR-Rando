@@ -14,8 +14,8 @@ public class TR2DataImporter : TRDataImporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         Data = new TR2DataProvider();
         if (isCommunityPatch)
         {
-            Data.TextureTileLimit = 32;
-            Data.TextureObjectLimit = 8192;
+            Data.TextureTileLimit = short.MaxValue;
+            Data.TextureObjectLimit = int.MaxValue;
         }
     }
 
