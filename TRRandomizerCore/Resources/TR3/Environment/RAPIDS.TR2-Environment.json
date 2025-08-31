@@ -4,7 +4,33 @@
   "AllWithin": [],
   "OneOf": [],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "ConditionType": 22,
+        "Location": {
+          "X": 68100,
+          "Y": -20736,
+          "Z": 39457,
+          "Room": 49
+        }
+      },
+      "OnTrue": [
+        {
+          "EMType": 70,
+          "Locations": [
+            {
+              "X": 68100,
+              "Y": -20736,
+              "Z": 39457,
+              "Room": 49
+            }
+          ],
+          "Remove": true
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": []
 }

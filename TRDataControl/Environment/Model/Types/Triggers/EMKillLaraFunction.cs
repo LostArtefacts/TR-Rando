@@ -5,6 +5,7 @@ namespace TRDataControl.Environment;
 public class EMKillLaraFunction : BaseEMFunction
 {
     public List<EMLocation> Locations { get; set; }
+    public bool Remove { get; set; }
 
     public override void ApplyToLevel(TR1Level level)
     {
@@ -13,7 +14,7 @@ public class EMKillLaraFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(location));
-            CreateTrigger(sector, level.FloorData);
+            AlterDeathTile(sector, level.FloorData);
         }
     }
 
@@ -24,7 +25,7 @@ public class EMKillLaraFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(location));
-            CreateTrigger(sector, level.FloorData);
+            AlterDeathTile(sector, level.FloorData);
         }
     }
 
@@ -35,20 +36,32 @@ public class EMKillLaraFunction : BaseEMFunction
         foreach (EMLocation location in Locations)
         {
             TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(location));
-            CreateTrigger(sector, level.FloorData);
+            AlterDeathTile(sector, level.FloorData);
         }
     }
 
-    private static void CreateTrigger(TRRoomSector sector, FDControl control)
+    private void AlterDeathTile(TRRoomSector sector, FDControl control)
     {
-        // If there is no floor data create the FD to begin with.
-        if (sector.FDIndex == 0)
+        if (sector.FDIndex == 0 && !Remove)
         {
             control.CreateFloorData(sector);
         }
 
-        List<FDEntry> entries = control[sector.FDIndex];
-        if (entries.FindIndex(e => e is FDKillLaraEntry) == -1)
+        if (sector.FDIndex == 0)
+        {
+            return;
+        }
+
+        var entries = control[sector.FDIndex];
+        var deathEntry = entries.FirstOrDefault(e => e is FDKillLaraEntry);
+        if (Remove)
+        {
+            if (deathEntry != null)
+            {
+                entries.Remove(deathEntry);
+            }
+        }
+        else if (deathEntry == null)
         {
             entries.Add(new FDKillLaraEntry());
         }
