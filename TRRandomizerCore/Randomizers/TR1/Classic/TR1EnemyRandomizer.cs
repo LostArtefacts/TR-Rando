@@ -177,7 +177,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         {
             // Whichever enemy has taken Pierre's place will drop the items. Move the pickups to the enemy for trview lookup.
             level.Script.AddItemDrops(TR1ItemAllocator.TihocanPierreIndex, TR1ItemAllocator.TihocanEndItems
-                .Select(e => ItemUtilities.ConvertToScriptItem(e.TypeID)));
+                .Select(e => e.TypeID));
             foreach (TR1Entity drop in TR1ItemAllocator.TihocanEndItems)
             {
                 level.Data.Entities.Add(new()
@@ -295,7 +295,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         _allocator.AddUnarmedLevelAmmo(level.Name, level.Data, true, (loc, type) =>
         {
-            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(type));
+            level.Script.AddStartInventoryItem(type);
         });
     }
 

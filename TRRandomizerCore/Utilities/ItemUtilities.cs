@@ -5,12 +5,6 @@ namespace TRRandomizerCore.Utilities;
 
 public static class ItemUtilities
 {
-    public static TR1Items ConvertToScriptItem(TR1Type entity)
-        => (TR1Items)entity;
-
-    public static TR1Type ConvertToEntity(TR1Items item)
-        => (TR1Type)item;
-
     public static TR3Items ConvertToScriptItem(TR3Type entity, TR3Items defaultItem = TR3Items.Pistols)
     {
         return Convert(entity, defaultItem, _tr3EntityToScriptItemMap);
