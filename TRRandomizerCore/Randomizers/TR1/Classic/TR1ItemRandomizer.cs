@@ -105,8 +105,8 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         // Remove his key and scion drops and place them as items so they can be randomized.
         if (level.Data.Entities[TR1ItemAllocator.TihocanPierreIndex].TypeID == TR1Type.Pierre)
         {
-            level.Script.ItemDrops.Find(d => d.EnemyNum == TR1ItemAllocator.TihocanPierreIndex)?.ObjectIds
-                .RemoveAll(e => TR1ItemAllocator.TihocanEndItems.Select(i => ItemUtilities.ConvertToScriptItem(i.TypeID)).Contains(e));
+            level.Script.ItemDrops.Find(d => d.EnemyNum == TR1ItemAllocator.TihocanPierreIndex)
+                ?.RemoveAll(TR1ItemAllocator.TihocanEndItems.Select(i => i.TypeID));
         }
         level.Data.Entities.AddRange(TR1ItemAllocator.TihocanEndItems);
     }
@@ -127,10 +127,10 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             TR1ItemDrop drop = level.Script.ItemDrops.Find(d => d.EnemyNum == enemyIndex);
             for (int i = 0; i < drop?.ObjectIds.Count; i++)
             {
-                TR1Type dropType = ItemUtilities.ConvertToEntity(drop.ObjectIds[i]);
+                var dropType = (TR1Type)drop.ObjectIds[i];
                 if (stdItemTypes.Contains(dropType))
                 {
-                    drop.ObjectIds[i] = ItemUtilities.ConvertToScriptItem(stdItemTypes[_generator.Next(0, stdItemTypes.Count)]);
+                    drop.Replace(i, stdItemTypes[_generator.Next(0, stdItemTypes.Count)]);
                 }
             }
         }
@@ -162,7 +162,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             }
             while (!TR1EnemyUtilities.CanDropItems(enemy, level));
 
-            level.Script.AddItemDrops(level.Data.Entities.IndexOf(enemy), ItemUtilities.ConvertToScriptItem(pickup.TypeID));
+            level.Script.AddItemDrops(level.Data.Entities.IndexOf(enemy), [pickup.TypeID]);
             ItemUtilities.HideEntity(pickup);
 
             // Retain the type for quick lookup in trview, but mark it as OOB for the stats.
