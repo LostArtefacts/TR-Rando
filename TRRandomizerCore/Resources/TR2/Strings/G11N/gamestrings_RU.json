@@ -1,139 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Bengal'skiy ogon'",
-      "Zazhigalka",
-      "Oslepitel'",
-      "Mertsayushchiy ogonok",
-      "Mini-plamya",
-      "Oke if like this?"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Strelyalki",
-      "Ruchnyye pistolety",
-      "Staryye vernyye",
-      "Piu-piu",
-      "Ya voz'mu dva"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Oboymy dlya strelyalok",
-      "Oboymy dlya ruchnykh pistoletov",
-      "Oboymy dlya starykh vernykh",
-      "Oboymy dlya piu piu",
-      "Oboymy dlya ya voz'mu dva"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Drobovichok",
-      "Mushket",
-      "Staryy vernyy",
-      "Nasmotrelsya?",
-      "Potroshitel' kishkov"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Patrony dlya drobovichka",
-      "Patrony dlya mushketa",
-      "Patrony dlya starogo vernogo",
-      "Patrony dlya nasmotrelsya?",
-      "Patrony dlya potroshitelya kishkov"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Avtomaty",
-      "Magnumy",
-      "Super-pistolety",
-      "P'yer poteryal eto",
-      "Vozvrashcheniye k P'yeru"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Oboymy dlya avtomatov",
-      "Oboymy dlya magnumov",
-      "Oboymy dlya super-pistoletov",
-      "Oboymy dlya P'yer poteryal eto",
-      "Oboymy dlya vozvrashcheniye k P'yeru"
-    ],
-    "INV_ITEM_UZI": [
-      "UwUzi",
-      "Drrrrrrrrrr",
-      "ChuvstvuyuSil'neye pushki",
-      "Boyepripasy Vampira",
-      "1000 vystrelov spustya..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Oboymy dlya UwUzi",
-      "Oboymy dlya drrrrrrrrrr",
-      "Oboymy dlya ChuvstvuyuSil'neye pushek",
-      "Oboymy dlya boyepripasov Vampira",
-      "Oboymy dlya 1000 vystrelov spustya"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Tik-tik-tik",
-      "Terpeniye",
-      "Strelomot",
-      "Bespoleznyy",
-      "Bessmyslennyy",
-      "Pochemu?",
-      "Net!",
-      "Zubochistkomot",
-      "Kopeynaya ustanovka"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Tik-tik-tiky",
-      "Boyepripasy dlya terpeniya",
-      "Strely",
-      "Bespoleznyye boyepripasy",
-      "Bessmyslennyye boyepripasy",
-      "Boyepripasy dlya pochemu",
-      "Boyepripasy dlya net",
-      "Zubochistki",
-      "Kop'ya"
-    ],
-    "INV_ITEM_M16": [
-      "MP3 Pleyer",
-      "MPEG",
-      "Ne MP5",
-      "Bol'shoye drrrrrrrrrr"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "Oboymy dlya MP3 pleyera",
-      "Oboymy dlya MPEG",
-      "Oboymy dlya ne MP5",
-      "Oboymy dlya bol'shogo drrrrrrrrrr"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "Granatnyy blaster",
-      "Vzryvchataya dostavka",
-      "Vrazheskaya zharovnya",
-      "Snaryadnaya ustanovka",
-      "Ananasomot",
-      "Bol'shoy khlopok",
-      "Bol'shoy bum",
-      "Vzorvi eto!"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Granaty",
-      "Vzryvchatka",
-      "Ognennyye shary",
-      "Snaryady",
-      "Ananasy",
-      "Bol'shiye khlopki",
-      "Bol'shiye bumy",
-      "Boyepripasy dlya vzorvi eto!"
-    ],
-    "INV_ITEM_MEDI": [
-      "Kroshechnaya aptechka",
-      "Kroshechnaya aptechka",
-      "Malen'kaya aptechka",
-      "Kompaktnaya aptechka",
-      "Aptechka-brosh'",
-      "Detskiy bo bo remontnik"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Gigantic Medi Pack",
-      "Gromadnaya aptechka",
-      "Titanicheskaya aptechka",
-      "Massivnaya aptechka",
-      "Ogromennaya aptechka",
-      "Bol'shoy bo bo remontnik"
-    ],
     "HEADING_ITEMS": [
       "VESHCHI",
       "SHMOTKI",
@@ -152,18 +18,154 @@
       "YAROSTNYY VYKHOD",
       "NLNMAS sleduyushchiy?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Staty",
-      "Zhiznenno vazhnyye staty",
-      "Schotchik khrusta",
-      "NET APTECHEK RAZRESHENO!",
-      "Otslezhivatel' sekretov!"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- NULEVOY -",
       "- NICHEGO ZDES' -",
       "- NEOPREDELENNYY -",
       "- OI, ETOT SLOT PUSTOY"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Bengal'skiy ogon'",
+      "Zazhigalka",
+      "Oslepitel'",
+      "Mertsayushchiy ogonok",
+      "Mini-plamya",
+      "Oke if like this?"
+    ],
+    "pistols": [
+      "Strelyalki",
+      "Ruchnyye pistolety",
+      "Staryye vernyye",
+      "Piu-piu",
+      "Ya voz'mu dva"
+    ],
+    "pistols_ammo": [
+      "Oboymy dlya strelyalok",
+      "Oboymy dlya ruchnykh pistoletov",
+      "Oboymy dlya starykh vernykh",
+      "Oboymy dlya piu piu",
+      "Oboymy dlya ya voz'mu dva"
+    ],
+    "shotgun": [
+      "Drobovichok",
+      "Mushket",
+      "Staryy vernyy",
+      "Nasmotrelsya?",
+      "Potroshitel' kishkov"
+    ],
+    "shotgun_ammo": [
+      "Patrony dlya drobovichka",
+      "Patrony dlya mushketa",
+      "Patrony dlya starogo vernogo",
+      "Patrony dlya nasmotrelsya?",
+      "Patrony dlya potroshitelya kishkov"
+    ],
+    "magnums": [
+      "Avtomaty",
+      "Magnumy",
+      "Super-pistolety",
+      "P'yer poteryal eto",
+      "Vozvrashcheniye k P'yeru"
+    ],
+    "magnums_ammo": [
+      "Oboymy dlya avtomatov",
+      "Oboymy dlya magnumov",
+      "Oboymy dlya super-pistoletov",
+      "Oboymy dlya P'yer poteryal eto",
+      "Oboymy dlya vozvrashcheniye k P'yeru"
+    ],
+    "uzis": [
+      "UwUzi",
+      "Drrrrrrrrrr",
+      "ChuvstvuyuSil'neye pushki",
+      "Boyepripasy Vampira",
+      "1000 vystrelov spustya..."
+    ],
+    "uzis_ammo": [
+      "Oboymy dlya UwUzi",
+      "Oboymy dlya drrrrrrrrrr",
+      "Oboymy dlya ChuvstvuyuSil'neye pushek",
+      "Oboymy dlya boyepripasov Vampira",
+      "Oboymy dlya 1000 vystrelov spustya"
+    ],
+    "harpoon_gun": [
+      "Tik-tik-tik",
+      "Terpeniye",
+      "Strelomot",
+      "Bespoleznyy",
+      "Bessmyslennyy",
+      "Pochemu?",
+      "Net!",
+      "Zubochistkomot",
+      "Kopeynaya ustanovka"
+    ],
+    "harpoon_gun_ammo": [
+      "Tik-tik-tiky",
+      "Boyepripasy dlya terpeniya",
+      "Strely",
+      "Bespoleznyye boyepripasy",
+      "Bessmyslennyye boyepripasy",
+      "Boyepripasy dlya pochemu",
+      "Boyepripasy dlya net",
+      "Zubochistki",
+      "Kop'ya"
+    ],
+    "m16": [
+      "MP3 Pleyer",
+      "MPEG",
+      "Ne MP5",
+      "Bol'shoye drrrrrrrrrr"
+    ],
+    "m16_ammo": [
+      "Oboymy dlya MP3 pleyera",
+      "Oboymy dlya MPEG",
+      "Oboymy dlya ne MP5",
+      "Oboymy dlya bol'shogo drrrrrrrrrr"
+    ],
+    "grenade_launcher": [
+      "Granatnyy blaster",
+      "Vzryvchataya dostavka",
+      "Vrazheskaya zharovnya",
+      "Snaryadnaya ustanovka",
+      "Ananasomot",
+      "Bol'shoy khlopok",
+      "Bol'shoy bum",
+      "Vzorvi eto!"
+    ],
+    "grenade_launcher_ammo": [
+      "Granaty",
+      "Vzryvchatka",
+      "Ognennyye shary",
+      "Snaryady",
+      "Ananasy",
+      "Bol'shiye khlopki",
+      "Bol'shiye bumy",
+      "Boyepripasy dlya vzorvi eto!"
+    ],
+    "small_medipack": [
+      "Kroshechnaya aptechka",
+      "Kroshechnaya aptechka",
+      "Malen'kaya aptechka",
+      "Kompaktnaya aptechka",
+      "Aptechka-brosh'",
+      "Detskiy bo bo remontnik"
+    ],
+    "large_medipack": [
+      "Gigantic Medi Pack",
+      "Gromadnaya aptechka",
+      "Titanicheskaya aptechka",
+      "Massivnaya aptechka",
+      "Ogromennaya aptechka",
+      "Bol'shoy bo bo remontnik"
+    ],
+    "compass": [
+      "Staty",
+      "Zhiznenno vazhnyye staty",
+      "Schotchik khrusta",
+      "NET APTECHEK RAZRESHENO!",
+      "Otslezhivatel' sekretov!"
     ]
   },
   "LevelStrings": {

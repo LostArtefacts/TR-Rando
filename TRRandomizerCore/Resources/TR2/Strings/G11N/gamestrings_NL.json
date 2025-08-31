@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Sparkler",
-      "Zippo",
-      "Dazzler",
-      "Flickerer",
-      "Mini-blaze"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Erwtenschieters",
-      "Handpistool",
-      "Old Faithfuls",
-      "Pew-Pews",
-      "I'll take two"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Erwtenschieter Magazijnen",
-      "Handpistool Magazijnen",
-      "Old Faithful Magezijnen",
-      "Pew-Pew Magezijnen",
-      "I'll take two Clips"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Shotty",
-      "Musket",
-      "Old Faithful",
-      "Genoeg gezien?",
-      "Gutbuster"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Shotty Patronen",
-      "Musket Patronen",
-      "Old Faithful Patronen",
-      "Genoeg gezien? Munitie",
-      "Gutbuster Munitie"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Auto's",
-      "Magnum's",
-      "SuperPistols",
-      "Pierre verloor deze",
-      "Ga terug naar Pierre"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Auto Magezijnen",
-      "Magnum Magezijnen",
-      "SuperPistol Magezijnen",
-      "Pierre verloor deze Magezijnen",
-      "Ga terug naar Pierre Magazijnen"
-    ],
-    "INV_ITEM_UZI": [
-      "UwUzis",
-      "Drrrrrrrrrr",
-      "Sterkervoelen Geweren",
-      "Munitie Vampier",
-      "1000 schoten later..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "UwUzi Magazijnen",
-      "Drrrrrrrrrr Magazijnen",
-      "Sterkervoelen Magezijnen",
-      "Munitie Vampier Magezijnen",
-      "1000 Shoten later Magezijnen"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Tik-tik-tik",
-      "Geduld",
-      "Pijl Werper",
-      "Nutteloos",
-      "Zinloos",
-      "Waarom?",
-      "Nee!",
-      "Tandenstoker Werper",
-      "Speer Lanceerder"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Tik-tik-tiks",
-      "Geduld Munitie",
-      "Pijlen",
-      "Nuttelose Munitie",
-      "Zinloose Munitie",
-      "Waarom? Munitie",
-      "Nee Munitie",
-      "Tandenstekers",
-      "Speren"
-    ],
-    "INV_ITEM_M16": [
-      "MP3 Speler",
-      "MPEG",
-      "Niet de MP5",
-      "Grote Drrrrrrrrrr"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "MP3 Magazijnen",
-      "MPEG Magazijnen",
-      "Niet de MP5 Magazijnen",
-      "Grote Drrrrrrrrrr Magazijnen"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "Nade Blaster",
-      "Explosieve Levering",
-      "Vijand Gebraden",
-      "Patronen Lanceerder",
-      "Ananas Verzonden",
-      "Grote Knal",
-      "Grote Gedonder",
-      "Blaas het op!"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Nades",
-      "Explosieven",
-      "Vuurballen",
-      "Patronen",
-      "Ananassen",
-      "Grote Knallen",
-      "Grote Gedonders",
-      "Blaas het op! Munitie"
-    ],
-    "INV_ITEM_MEDI": [
-      "Minuskuul Medi Pack",
-      "Wee Medi Pack",
-      "Kleine Medi Pack",
-      "Compact Medi Pack",
-      "Bijou Medi Pack",
-      "Baby Booboo Maker"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Gigantische Medi Pack",
-      "Enorme Medi Pack",
-      "Titanic Medi Pack",
-      "Massieve Medi Pack",
-      "Mahoosive Medi Pack",
-      "Grote Booboo Maker"
-    ],
     "HEADING_ITEMS": [
       "DINGEN",
       "SPULLEN",
@@ -151,18 +18,153 @@
       "WOEDE STOPPEN",
       "NLNMAS volgende?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Stats",
-      "Vitale Stats",
-      "Rekenwerk",
-      "GEEN MEDS TOEGESTAAN!",
-      "Geheim Spoorzoeker!"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- NUL -",
       "- NIKS HIER -",
       "- UNDEFINED -",
       "- HEY, DEZE SLOT IS VRIJ -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Sparkler",
+      "Zippo",
+      "Dazzler",
+      "Flickerer",
+      "Mini-blaze"
+    ],
+    "pistols": [
+      "Erwtenschieters",
+      "Handpistool",
+      "Old Faithfuls",
+      "Pew-Pews",
+      "I'll take two"
+    ],
+    "pistols_ammo": [
+      "Erwtenschieter Magazijnen",
+      "Handpistool Magazijnen",
+      "Old Faithful Magezijnen",
+      "Pew-Pew Magezijnen",
+      "I'll take two Clips"
+    ],
+    "shotgun": [
+      "Shotty",
+      "Musket",
+      "Old Faithful",
+      "Genoeg gezien?",
+      "Gutbuster"
+    ],
+    "shotgun_ammo": [
+      "Shotty Patronen",
+      "Musket Patronen",
+      "Old Faithful Patronen",
+      "Genoeg gezien? Munitie",
+      "Gutbuster Munitie"
+    ],
+    "magnums": [
+      "Auto's",
+      "Magnum's",
+      "SuperPistols",
+      "Pierre verloor deze",
+      "Ga terug naar Pierre"
+    ],
+    "magnums_ammo": [
+      "Auto Magezijnen",
+      "Magnum Magezijnen",
+      "SuperPistol Magezijnen",
+      "Pierre verloor deze Magezijnen",
+      "Ga terug naar Pierre Magazijnen"
+    ],
+    "uzis": [
+      "UwUzis",
+      "Drrrrrrrrrr",
+      "Sterkervoelen Geweren",
+      "Munitie Vampier",
+      "1000 schoten later..."
+    ],
+    "uzis_ammo": [
+      "UwUzi Magazijnen",
+      "Drrrrrrrrrr Magazijnen",
+      "Sterkervoelen Magezijnen",
+      "Munitie Vampier Magezijnen",
+      "1000 Shoten later Magezijnen"
+    ],
+    "harpoon_gun": [
+      "Tik-tik-tik",
+      "Geduld",
+      "Pijl Werper",
+      "Nutteloos",
+      "Zinloos",
+      "Waarom?",
+      "Nee!",
+      "Tandenstoker Werper",
+      "Speer Lanceerder"
+    ],
+    "harpoon_gun_ammo": [
+      "Tik-tik-tiks",
+      "Geduld Munitie",
+      "Pijlen",
+      "Nuttelose Munitie",
+      "Zinloose Munitie",
+      "Waarom? Munitie",
+      "Nee Munitie",
+      "Tandenstekers",
+      "Speren"
+    ],
+    "m16": [
+      "MP3 Speler",
+      "MPEG",
+      "Niet de MP5",
+      "Grote Drrrrrrrrrr"
+    ],
+    "m16_ammo": [
+      "MP3 Magazijnen",
+      "MPEG Magazijnen",
+      "Niet de MP5 Magazijnen",
+      "Grote Drrrrrrrrrr Magazijnen"
+    ],
+    "grenade_launcher": [
+      "Nade Blaster",
+      "Explosieve Levering",
+      "Vijand Gebraden",
+      "Patronen Lanceerder",
+      "Ananas Verzonden",
+      "Grote Knal",
+      "Grote Gedonder",
+      "Blaas het op!"
+    ],
+    "grenade_launcher_ammo": [
+      "Nades",
+      "Explosieven",
+      "Vuurballen",
+      "Patronen",
+      "Ananassen",
+      "Grote Knallen",
+      "Grote Gedonders",
+      "Blaas het op! Munitie"
+    ],
+    "small_medipack": [
+      "Minuskuul Medi Pack",
+      "Wee Medi Pack",
+      "Kleine Medi Pack",
+      "Compact Medi Pack",
+      "Bijou Medi Pack",
+      "Baby Booboo Maker"
+    ],
+    "large_medipack": [
+      "Gigantische Medi Pack",
+      "Enorme Medi Pack",
+      "Titanic Medi Pack",
+      "Massieve Medi Pack",
+      "Mahoosive Medi Pack",
+      "Grote Booboo Maker"
+    ],
+    "compass": [
+      "Stats",
+      "Vitale Stats",
+      "Rekenwerk",
+      "GEEN MEDS TOEGESTAAN!",
+      "Geheim Spoorzoeker!"
     ]
   },
   "LevelStrings": {

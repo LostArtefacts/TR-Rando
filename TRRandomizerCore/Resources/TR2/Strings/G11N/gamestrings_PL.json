@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Iskiernik",
-      "Zapalniczka",
-      "Oczojeb",
-      "Migotek",
-      "Mini-blaskacz"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Pistolce",
-      "Pistolety",
-      "Stare Wiarusy",
-      "Pukawki",
-      "Wezme dwa"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Naboje do pistolców",
-      "Naboje do pistoletów",
-      "Naboje do Starych Wiarusów",
-      "Naboje do pukawek",
-      "Naboje do dwóch"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Wybebeszacz",
-      "Muszkiet",
-      "Stary Wiarus",
-      "Strzelba, co widziala zbyt wiele",
-      "Rozflaczacz"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Naboje do wybebeszacza",
-      "Naboje do muszkietu",
-      "Naboje do Starego Wiarusa",
-      "Naboje, co widzialy zbyt wiele",
-      "Naboje do rozflaczacza"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Automaty",
-      "Magnumy",
-      "SuperPistolce",
-      "Broń Pierre'a",
-      "Oddać Pierre'owi"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Naboje do automatów",
-      "Naboje do magnumów",
-      "Naboje do SuperPistolców",
-      "Naboje Pierre'a",
-      "Naboje Pierre'a"
-    ],
-    "INV_ITEM_UZI": [
-      "UwUzi",
-      "Tetetki",
-      "Szybka broń",
-      "Wampir nabojowy",
-      "1000 strzalow później..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Magazynki do UwUzi",
-      "Naboje do Tetetek",
-      "Szybkie naboje",
-      "Naboje do wampira",
-      "1000 nabojów później"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Cyk-cyk-cyk",
-      "Cierpliwości",
-      "Strzalomiot",
-      "Bezużyteczny",
-      "Czyj to byl pomysl",
-      "Kto to wymyślil?",
-      "Byle co",
-      "Wykalaczacz",
-      "Dzidomiot"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Cyk-cyk-cyki",
-      "Cierpliwość",
-      "Strzaly",
-      "Bezużyteczna Amunicja",
-      "Czyje to harpuny",
-      "Kto wymyślil te harpuny",
-      "Amunicja do byle czego",
-      "Wykalaczki",
-      "Dzidy"
-    ],
-    "INV_ITEM_M16": [
-      "Odtwarzacz MP3",
-      "Konwerter żywych do martwych",
-      "Jeszcze nie MP5",
-      "Wielki Pepegun"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "Pliki MP3",
-      "Pliki MPEG",
-      "Pliki MP4",
-      "Naboje do wielkiego pepeguna"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "Granatnik",
-      "Wybuchowa dostawa",
-      "Przypiekacz",
-      "Wyrzutnia pocisków",
-      "Miotacz ananasów",
-      "Rozpierdalator",
-      "Rozjebywacz",
-      "Rozkurwiciel"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Granaty",
-      "Wybuchowe paczki",
-      "Kule ognia",
-      "Pocisk do wyrzutni",
-      "Sok z anananasa",
-      "Granat ostatecznego rozpierdolu",
-      "Jebuty",
-      "Rozkurwiacze"
-    ],
-    "INV_ITEM_MEDI": [
-      "Tycia apteczka",
-      "Maciupka apteczka",
-      "Olimpijska apteczka",
-      "Mikroskopijna apteczka",
-      "Mini apteczka",
-      "Na male kuku"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Ogromna apteczka",
-      "Zajebiście duża apteczka",
-      "Tytaniczna apteczka",
-      "Supermasywna apteczka",
-      "Maxi apteczka",
-      "Na duze kuku"
-    ],
     "HEADING_ITEMS": [
       "RZECZY",
       "KLAMOTY",
@@ -151,18 +18,153 @@
       "RAGE QUIT!",
       "To co, teraz NLNMAS?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Statystyki",
-      "Niepotrzebne liczby",
-      "Licznik polamanych zeber",
-      "Nadal zero apteczek?",
-      "Rejestrator sekretów"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- MIEJSCE NA SAVE -",
       "- NIEZAPISANY -",
       "- EJ, TU JEST MIEJSCE -",
       "- TU NA RAZIE JEST SCIERNISKO -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Iskiernik",
+      "Zapalniczka",
+      "Oczojeb",
+      "Migotek",
+      "Mini-blaskacz"
+    ],
+    "pistols": [
+      "Pistolce",
+      "Pistolety",
+      "Stare Wiarusy",
+      "Pukawki",
+      "Wezme dwa"
+    ],
+    "pistols_ammo": [
+      "Naboje do pistolców",
+      "Naboje do pistoletów",
+      "Naboje do Starych Wiarusów",
+      "Naboje do pukawek",
+      "Naboje do dwóch"
+    ],
+    "shotgun": [
+      "Wybebeszacz",
+      "Muszkiet",
+      "Stary Wiarus",
+      "Strzelba, co widziala zbyt wiele",
+      "Rozflaczacz"
+    ],
+    "shotgun_ammo": [
+      "Naboje do wybebeszacza",
+      "Naboje do muszkietu",
+      "Naboje do Starego Wiarusa",
+      "Naboje, co widzialy zbyt wiele",
+      "Naboje do rozflaczacza"
+    ],
+    "magnums": [
+      "Automaty",
+      "Magnumy",
+      "SuperPistolce",
+      "Broń Pierre'a",
+      "Oddać Pierre'owi"
+    ],
+    "magnums_ammo": [
+      "Naboje do automatów",
+      "Naboje do magnumów",
+      "Naboje do SuperPistolców",
+      "Naboje Pierre'a",
+      "Naboje Pierre'a"
+    ],
+    "uzis": [
+      "UwUzi",
+      "Tetetki",
+      "Szybka broń",
+      "Wampir nabojowy",
+      "1000 strzalow później..."
+    ],
+    "uzis_ammo": [
+      "Magazynki do UwUzi",
+      "Naboje do Tetetek",
+      "Szybkie naboje",
+      "Naboje do wampira",
+      "1000 nabojów później"
+    ],
+    "harpoon_gun": [
+      "Cyk-cyk-cyk",
+      "Cierpliwości",
+      "Strzalomiot",
+      "Bezużyteczny",
+      "Czyj to byl pomysl",
+      "Kto to wymyślil?",
+      "Byle co",
+      "Wykalaczacz",
+      "Dzidomiot"
+    ],
+    "harpoon_gun_ammo": [
+      "Cyk-cyk-cyki",
+      "Cierpliwość",
+      "Strzaly",
+      "Bezużyteczna Amunicja",
+      "Czyje to harpuny",
+      "Kto wymyślil te harpuny",
+      "Amunicja do byle czego",
+      "Wykalaczki",
+      "Dzidy"
+    ],
+    "m16": [
+      "Odtwarzacz MP3",
+      "Konwerter żywych do martwych",
+      "Jeszcze nie MP5",
+      "Wielki Pepegun"
+    ],
+    "m16_ammo": [
+      "Pliki MP3",
+      "Pliki MPEG",
+      "Pliki MP4",
+      "Naboje do wielkiego pepeguna"
+    ],
+    "grenade_launcher": [
+      "Granatnik",
+      "Wybuchowa dostawa",
+      "Przypiekacz",
+      "Wyrzutnia pocisków",
+      "Miotacz ananasów",
+      "Rozpierdalator",
+      "Rozjebywacz",
+      "Rozkurwiciel"
+    ],
+    "grenade_launcher_ammo": [
+      "Granaty",
+      "Wybuchowe paczki",
+      "Kule ognia",
+      "Pocisk do wyrzutni",
+      "Sok z anananasa",
+      "Granat ostatecznego rozpierdolu",
+      "Jebuty",
+      "Rozkurwiacze"
+    ],
+    "small_medipack": [
+      "Tycia apteczka",
+      "Maciupka apteczka",
+      "Olimpijska apteczka",
+      "Mikroskopijna apteczka",
+      "Mini apteczka",
+      "Na male kuku"
+    ],
+    "large_medipack": [
+      "Ogromna apteczka",
+      "Zajebiście duża apteczka",
+      "Tytaniczna apteczka",
+      "Supermasywna apteczka",
+      "Maxi apteczka",
+      "Na duze kuku"
+    ],
+    "compass": [
+      "Statystyki",
+      "Niepotrzebne liczby",
+      "Licznik polamanych zeber",
+      "Nadal zero apteczek?",
+      "Rejestrator sekretów"
     ]
   },
   "LevelStrings": {

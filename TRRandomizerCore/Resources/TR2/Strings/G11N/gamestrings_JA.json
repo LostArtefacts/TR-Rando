@@ -1,129 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Hikari-bae",
-      "Kira kira",
-      "Raito pachi-pachi",
-      "Shoumei Show"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Edamame Bang Bangs",
-      "Made in Lara",
-      "Hajimari",
-      "Futago"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Edamame",
-      "Makers in Lara",
-      "Kunrei dansou",
-      "Futago dansou"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Kubi-chan",
-      "Futori",
-      "Tayori",
-      "Mada iru no?",
-      "Harakiri"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Kubi-chan dansou",
-      "Futori dansou",
-      "Tayori dansou",
-      "Mada iru ka na?",
-      "Harakiri dansou"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Chotto Tsuyoi Juu",
-      "Kurogashi",
-      "Kogeta Hajimari",
-      "Nusumareta juu",
-      "Pierre-tte dare?"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Chotto Tsuyoi dansou",
-      "Kurogashi dansou",
-      "Kogeta Hajimari dansou",
-      "Nusumareta dansou",
-      "Pierre kara no dansou"
-    ],
-    "INV_ITEM_UZI": [
-      "UwUzi",
-      "Durarararara",
-      "Tsuyoku dekita juu",
-      "Betsu no wa Iranai",
-      "Mou Ikinaku"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "UwUzi dansou",
-      "Durarararara dansou",
-      "Tsuyoku dekita dansou",
-      "Betsu no wa Iranai dansou",
-      "Mou Ikinaku dansou"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Bochi-Bochi",
-      "Gamanjuu",
-      "Yumiya Bottakuri",
-      "Yaku Tatanai",
-      "Konna no wa?",
-      "Kuso",
-      "Tsumayouji juu",
-      "Hurricane"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Bochi-Bochi hari",
-      "Gaman no hari",
-      "Yumi janai kedo",
-      "Yaku Tatanai hari",
-      "Konna no hari",
-      "Kuso no hari",
-      "Tsumayouji",
-      "Hariken"
-    ],
-    "INV_ITEM_M16": [
-      "MP3",
-      "MP4",
-      "MP5 Janakute",
-      "Big Durarararara"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "MP3 Clip",
-      "MP4 Clip",
-      "MP5 Janakute dansou",
-      "Big Durarararara dansou"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "Onage",
-      "Haitatsu",
-      "Yakitori",
-      "Buttobi",
-      "Big Bang",
-      "Kowase!"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Onage Maru",
-      "Haitatsu Maru",
-      "Yakitori Maru",
-      "Buttobi Maru",
-      "Big Bang Maru",
-      "Kowase! Maru"
-    ],
-    "INV_ITEM_MEDI": [
-      "Chicchai Kyuukyuu AID",
-      "Puchi Pouch",
-      "Chiisai AID",
-      "Yowai Kyuukyuu AID",
-      "Kawaii Pouch",
-      "S Kizu Kiss"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Dekai Kyuukyuu AID",
-      "Grand Pouch",
-      "Ookii AID",
-      "Tsuyoi Kyuukyuu AID",
-      "Kyouryoku na Pouch",
-      "L Kizu Kiss"
-    ],
     "HEADING_ITEMS": [
       "SHOJIHIN",
       "AITEMU",
@@ -141,18 +17,144 @@
       "ZANNEN",
       "DAIJOUBU?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Yakutananai Toukei",
-      "Toukei",
-      "Keisanchuu",
-      "ENJO NASHI",
-      "Kakushimono wa...?"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- FILE NASHI -",
       "- KARAPPOI -",
       "- SHOUSEI NASHI -",
       "- SUKETEIRU -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Hikari-bae",
+      "Kira kira",
+      "Raito pachi-pachi",
+      "Shoumei Show"
+    ],
+    "pistols": [
+      "Edamame Bang Bangs",
+      "Made in Lara",
+      "Hajimari",
+      "Futago"
+    ],
+    "pistols_ammo": [
+      "Edamame",
+      "Makers in Lara",
+      "Kunrei dansou",
+      "Futago dansou"
+    ],
+    "shotgun": [
+      "Kubi-chan",
+      "Futori",
+      "Tayori",
+      "Mada iru no?",
+      "Harakiri"
+    ],
+    "shotgun_ammo": [
+      "Kubi-chan dansou",
+      "Futori dansou",
+      "Tayori dansou",
+      "Mada iru ka na?",
+      "Harakiri dansou"
+    ],
+    "magnums": [
+      "Chotto Tsuyoi Juu",
+      "Kurogashi",
+      "Kogeta Hajimari",
+      "Nusumareta juu",
+      "Pierre-tte dare?"
+    ],
+    "magnums_ammo": [
+      "Chotto Tsuyoi dansou",
+      "Kurogashi dansou",
+      "Kogeta Hajimari dansou",
+      "Nusumareta dansou",
+      "Pierre kara no dansou"
+    ],
+    "uzis": [
+      "UwUzi",
+      "Durarararara",
+      "Tsuyoku dekita juu",
+      "Betsu no wa Iranai",
+      "Mou Ikinaku"
+    ],
+    "uzis_ammo": [
+      "UwUzi dansou",
+      "Durarararara dansou",
+      "Tsuyoku dekita dansou",
+      "Betsu no wa Iranai dansou",
+      "Mou Ikinaku dansou"
+    ],
+    "harpoon_gun": [
+      "Bochi-Bochi",
+      "Gamanjuu",
+      "Yumiya Bottakuri",
+      "Yaku Tatanai",
+      "Konna no wa?",
+      "Kuso",
+      "Tsumayouji juu",
+      "Hurricane"
+    ],
+    "harpoon_gun_ammo": [
+      "Bochi-Bochi hari",
+      "Gaman no hari",
+      "Yumi janai kedo",
+      "Yaku Tatanai hari",
+      "Konna no hari",
+      "Kuso no hari",
+      "Tsumayouji",
+      "Hariken"
+    ],
+    "m16": [
+      "MP3",
+      "MP4",
+      "MP5 Janakute",
+      "Big Durarararara"
+    ],
+    "m16_ammo": [
+      "MP3 Clip",
+      "MP4 Clip",
+      "MP5 Janakute dansou",
+      "Big Durarararara dansou"
+    ],
+    "grenade_launcher": [
+      "Onage",
+      "Haitatsu",
+      "Yakitori",
+      "Buttobi",
+      "Big Bang",
+      "Kowase!"
+    ],
+    "grenade_launcher_ammo": [
+      "Onage Maru",
+      "Haitatsu Maru",
+      "Yakitori Maru",
+      "Buttobi Maru",
+      "Big Bang Maru",
+      "Kowase! Maru"
+    ],
+    "small_medipack": [
+      "Chicchai Kyuukyuu AID",
+      "Puchi Pouch",
+      "Chiisai AID",
+      "Yowai Kyuukyuu AID",
+      "Kawaii Pouch",
+      "S Kizu Kiss"
+    ],
+    "large_medipack": [
+      "Dekai Kyuukyuu AID",
+      "Grand Pouch",
+      "Ookii AID",
+      "Tsuyoi Kyuukyuu AID",
+      "Kyouryoku na Pouch",
+      "L Kizu Kiss"
+    ],
+    "compass": [
+      "Yakutananai Toukei",
+      "Toukei",
+      "Keisanchuu",
+      "ENJO NASHI",
+      "Kakushimono wa...?"
     ]
   },
   "LevelStrings": {

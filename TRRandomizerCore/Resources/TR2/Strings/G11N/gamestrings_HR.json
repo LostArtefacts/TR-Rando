@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Šibica",
-      "Baklja",
-      "Bengalka",
-      "Svijeća",
-      "Lampa"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Bacač graška",
-      "Ručni pištolj",
-      "Stari pištolj",
-      "Piju-piju",
-      "Uzeti ću dva"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Grašak",
-      "Ručni pištolj metci",
-      "Stari pištolj metci",
-      "Piju-piju metci",
-      "Uzeti ću dva metci"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Shotty",
-      "Mušketa",
-      "Stara sačma",
-      "Vidjeo/la si dovoljno?",
-      "Razarač iznutrica"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Shotty metci",
-      "Čahure za mušketu",
-      "Stara sačma metci",
-      "Vidjeo/la si dovoljno? čahure",
-      "Razarač iznutrica čahure"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Automatik pištolj",
-      "Magnum",
-      "SuperPištolj",
-      "Pierre je izgubio ove pištolje",
-      "Vrati Pierru"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Automatik metci",
-      "Magnum metci",
-      "SuperPištolj metci",
-      "Pierre je izgubio ove metke",
-      "Vrati metke Pierru"
-    ],
-    "INV_ITEM_UZI": [
-      "UwUzis",
-      "Drrrrrrrrrr",
-      "FeelStronger pištolj",
-      "Vampir",
-      "1000 pucnjeva kasnije..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "UwUzi metci",
-      "Drrrrrrrrrr metci",
-      "FeelStronger metci",
-      "Vampir metci",
-      "1000 pucnjeva kasnije metci"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Tik-tik-tik",
-      "Strpljene je vrlina",
-      "Bacač strijela",
-      "Beskorisno",
-      "Beskorisno",
-      "Zašto?",
-      "Ne!",
-      "Bacač čačkalica za zube",
-      "Bacač koplja"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Tik-tik-tiks",
-      "Strpljene je vrlina metci",
-      "Strijele",
-      "Beskorisno metci",
-      "Beskorisno metci",
-      "Zašto? metci",
-      "Ne metci!",
-      "Čačkalice za zube",
-      "Koplje"
-    ],
-    "INV_ITEM_M16": [
-      "MP3 Player",
-      "MPEG",
-      "Ovo nije MP5",
-      "Big Drrrrrrrrrr"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "MP3 metci",
-      "MPEG metci",
-      "Ovo nisu MP5 metci",
-      "Big Drrrrrrrrrr metci"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "Bacač mina",
-      "Explosive Delivery",
-      "Enemy Roaster",
-      "Shell Launcher",
-      "Pineapple Dispatch",
-      "Big Bang",
-      "Big Boom",
-      "Raznesi to!"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Mine",
-      "Ekspolzivi",
-      "Vatrene kugle",
-      "Čahure",
-      "Ananasi",
-      "Veliki prasak",
-      "Velika eksplozija",
-      "Raznesi to! metci"
-    ],
-    "INV_ITEM_MEDI": [
-      "Sićušna prva pomoć",
-      "Weee prva pomoć",
-      "Mala prva pomoć",
-      "Kompaktna prva pomoć",
-      "Bijou prva pomoć",
-      "Prva pomoć za bebe"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Gigantska prva pomoć",
-      "Ogromna prva pomoć",
-      "Titanska prva pomoć",
-      "Masivna prva pomoć",
-      "Mahoosivna prva pomoć",
-      "Prva pomoć za velike"
-    ],
     "HEADING_ITEMS": [
       "STVARI",
       "KRPE",
@@ -154,18 +21,153 @@
       "RAGE QUIT",
       "NLNMAS sljedeće?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Statistika",
-      "Vitalna statistika",
-      "Krhki brojevi",
-      "NEMA PRVE POMOĆI!",
-      "Tragač tajni!"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- NIŠTA -",
       "- NEMA NIČEGA -",
       "- NEDEFINIRANO -",
       "- EJ, OVO MJESTO JE SLOBODNO -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Šibica",
+      "Baklja",
+      "Bengalka",
+      "Svijeća",
+      "Lampa"
+    ],
+    "pistols": [
+      "Bacač graška",
+      "Ručni pištolj",
+      "Stari pištolj",
+      "Piju-piju",
+      "Uzeti ću dva"
+    ],
+    "pistols_ammo": [
+      "Grašak",
+      "Ručni pištolj metci",
+      "Stari pištolj metci",
+      "Piju-piju metci",
+      "Uzeti ću dva metci"
+    ],
+    "shotgun": [
+      "Shotty",
+      "Mušketa",
+      "Stara sačma",
+      "Vidjeo/la si dovoljno?",
+      "Razarač iznutrica"
+    ],
+    "shotgun_ammo": [
+      "Shotty metci",
+      "Čahure za mušketu",
+      "Stara sačma metci",
+      "Vidjeo/la si dovoljno? čahure",
+      "Razarač iznutrica čahure"
+    ],
+    "magnums": [
+      "Automatik pištolj",
+      "Magnum",
+      "SuperPištolj",
+      "Pierre je izgubio ove pištolje",
+      "Vrati Pierru"
+    ],
+    "magnums_ammo": [
+      "Automatik metci",
+      "Magnum metci",
+      "SuperPištolj metci",
+      "Pierre je izgubio ove metke",
+      "Vrati metke Pierru"
+    ],
+    "uzis": [
+      "UwUzis",
+      "Drrrrrrrrrr",
+      "FeelStronger pištolj",
+      "Vampir",
+      "1000 pucnjeva kasnije..."
+    ],
+    "uzis_ammo": [
+      "UwUzi metci",
+      "Drrrrrrrrrr metci",
+      "FeelStronger metci",
+      "Vampir metci",
+      "1000 pucnjeva kasnije metci"
+    ],
+    "harpoon_gun": [
+      "Tik-tik-tik",
+      "Strpljene je vrlina",
+      "Bacač strijela",
+      "Beskorisno",
+      "Beskorisno",
+      "Zašto?",
+      "Ne!",
+      "Bacač čačkalica za zube",
+      "Bacač koplja"
+    ],
+    "harpoon_gun_ammo": [
+      "Tik-tik-tiks",
+      "Strpljene je vrlina metci",
+      "Strijele",
+      "Beskorisno metci",
+      "Beskorisno metci",
+      "Zašto? metci",
+      "Ne metci!",
+      "Čačkalice za zube",
+      "Koplje"
+    ],
+    "m16": [
+      "MP3 Player",
+      "MPEG",
+      "Ovo nije MP5",
+      "Big Drrrrrrrrrr"
+    ],
+    "m16_ammo": [
+      "MP3 metci",
+      "MPEG metci",
+      "Ovo nisu MP5 metci",
+      "Big Drrrrrrrrrr metci"
+    ],
+    "grenade_launcher": [
+      "Bacač mina",
+      "Explosive Delivery",
+      "Enemy Roaster",
+      "Shell Launcher",
+      "Pineapple Dispatch",
+      "Big Bang",
+      "Big Boom",
+      "Raznesi to!"
+    ],
+    "grenade_launcher_ammo": [
+      "Mine",
+      "Ekspolzivi",
+      "Vatrene kugle",
+      "Čahure",
+      "Ananasi",
+      "Veliki prasak",
+      "Velika eksplozija",
+      "Raznesi to! metci"
+    ],
+    "small_medipack": [
+      "Sićušna prva pomoć",
+      "Weee prva pomoć",
+      "Mala prva pomoć",
+      "Kompaktna prva pomoć",
+      "Bijou prva pomoć",
+      "Prva pomoć za bebe"
+    ],
+    "large_medipack": [
+      "Gigantska prva pomoć",
+      "Ogromna prva pomoć",
+      "Titanska prva pomoć",
+      "Masivna prva pomoć",
+      "Mahoosivna prva pomoć",
+      "Prva pomoć za velike"
+    ],
+    "compass": [
+      "Statistika",
+      "Vitalna statistika",
+      "Krhki brojevi",
+      "NEMA PRVE POMOĆI!",
+      "Tragač tajni!"
     ]
   },
   "LevelStrings": {
