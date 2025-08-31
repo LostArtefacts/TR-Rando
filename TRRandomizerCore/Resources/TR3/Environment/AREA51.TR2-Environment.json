@@ -450,6 +450,25 @@
               120
             ]
           }
+        },
+        {
+          "Comments": "Ensure enemy 211 is still triggered.",
+          "EMType": 68,
+          "LocationExpander": {
+            "Location": {
+              "X": 40448,
+              "Y": -2048,
+              "Z": 41472,
+              "Room": 103
+            },
+            "ExpandX": 1,
+            "ExpandZ": 3
+          },
+          "Actions": [
+            {
+              "Parameter": 211
+            }
+          ]
         }
       ]
     }
