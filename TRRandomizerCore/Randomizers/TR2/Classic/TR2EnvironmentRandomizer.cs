@@ -187,5 +187,10 @@ public class TR2EnvironmentRandomizer : BaseTR2Randomizer, IMirrorControl
             TextureMonitor<TR2Type> monitor = TextureMonitor.CreateMonitor(level.Name);
             monitor.UseMirroring = true;
         }
+
+        if (ScriptEditor.Edition.IsCommunityPatch && !Settings.RandomizeAudio)
+        {
+            TR2AudioAllocator.FixMusicTracks(level.Data);
+        }
     }
 }

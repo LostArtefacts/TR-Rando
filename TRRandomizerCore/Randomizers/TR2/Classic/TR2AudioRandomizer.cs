@@ -20,6 +20,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
             allocator.RandomizeMusicTriggers(_levelInstance.Data);
             allocator.RandomizeSoundEffects(_levelInstance.Name, _levelInstance.Data);
             allocator.RandomizePitch(_levelInstance.Data.SoundEffects.Values);
+            TR2AudioAllocator.FixMusicTracks(_levelInstance.Data);
 
             SaveLevelInstance();
             if (!TriggerProgress())
