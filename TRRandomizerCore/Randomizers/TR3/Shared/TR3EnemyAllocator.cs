@@ -339,22 +339,20 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
                 }
             }
 
-            TR3Entity targetEntity = currentEntity;
-
             if (levelName == TR3LevelNames.CRASH && currentEntity.Room == 15)
             {
-                // Crash site raptor spawns need special treatment. The 3 entities in this (unreachable) room
-                // are normally raptors, and the game positions them to the spawn points. If we no longer have
-                // raptors, then replace the spawn points with the actual enemies. Otherwise, ensure they remain
-                // as raptors.
-                if (!enemies.Available.Contains(TR3Type.Raptor))
+                // Keep the raptor spawns as per OG if the model remains present, otherwise swap the spawn points
+                // with actual enemies and move the dummy enemies and their AI out of room 15.
+                if (enemies.Available.Contains(TR3Type.Raptor))
                 {
-                    TR3Entity raptorSpawn = level.Entities.Find(e => e.TypeID == TR3Type.RaptorRespawnPoint_N && e.Room != 15);
-                    if (raptorSpawn != null)
-                    {
-                        (targetEntity = raptorSpawn).TypeID = TR3TypeUtilities.TranslateAlias(newType);
-                        currentEntity.TypeID = TR3Type.RaptorRespawnPoint_N;
-                    }
+                    newType = TR3Type.Raptor;
+                }
+                else if (level.Entities.FirstOrDefault(e => e.TypeID == TR3Type.RaptorRespawnPoint_N)
+                    is TR3Entity raptorSpawn)
+                {
+                    UpdateRaptorSpawn(level, raptorSpawn, newType, currentEntity);
+                    UpdateRaptorSpawn(level, raptorSpawn, newType, level.Entities
+                        .FirstOrDefault(e => e.Room == 15 && e.TypeID == TR3Type.AIModify_N));
                 }
             }
             else if (levelName == TR3LevelNames.RXTECH
@@ -405,14 +403,14 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
                 currentEntity.Z -= TRConsts.Step4;
             }
 
-            if (targetEntity.TypeID == TR3Type.Cobra)
+            if (currentEntity.TypeID == TR3Type.Cobra)
             {
-                targetEntity.Invisible = false;
+                currentEntity.Invisible = false;
             }
 
             // Final step is to convert/set the type and ensure OneShot is set if needed (#146)
-            targetEntity.TypeID = TR3TypeUtilities.TranslateAlias(newType);
-            SetOneShot(targetEntity, level.Entities.IndexOf(targetEntity), level.FloorData);
+            currentEntity.TypeID = TR3TypeUtilities.TranslateAlias(newType);
+            SetOneShot(currentEntity, level.Entities.IndexOf(currentEntity), level.FloorData);
             _resultantEnemies.Add(newType);
         }
 
@@ -423,6 +421,26 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
             TR3ItemAllocator allocator = new();
             allocator.ExcludeEnemyKeyDrops(level.Entities);
         }
+    }
+
+    private static void UpdateRaptorSpawn(TR3Level level, TR3Entity spawnEntity, TR3Type newType, TR3Entity targetEntity)
+    {
+        if (targetEntity == null)
+        {
+            return;
+        }
+
+        spawnEntity.TypeID = TR3TypeUtilities.TranslateAlias(newType);
+        targetEntity.TypeID = TR3TypeUtilities.TranslateAlias(newType);
+        targetEntity.SetLocation(spawnEntity.GetLocation());
+
+        int spawnIndex = level.Entities.IndexOf(spawnEntity);
+        int entityIndex = level.Entities.IndexOf(targetEntity);
+        level.FloorData.GetEntityTriggers(spawnIndex)
+            .ForEach(t => t.Actions.Add(new()
+            {
+                Parameter = (short)entityIndex
+            }));
     }
 
     public List<Location> GetPistolLocations(string levelName)
