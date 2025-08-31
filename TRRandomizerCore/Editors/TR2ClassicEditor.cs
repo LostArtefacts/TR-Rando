@@ -77,7 +77,9 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             target += numLevels;
         }
 
-        // Deduplication
+        // TRX pre-processing
+        target += numLevels;
+        // Deduplication (TODO: merge into pre-processing)
         target += numLevels * 2;
 
         if (Settings.ReassignPuzzleItems)
@@ -192,6 +194,19 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 SaveMonitor = monitor,
                 Settings = Settings
             }.Randomize(Settings.GameStringsSeed);
+        }
+
+        if (!monitor.IsCancelled)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Validating data injections");
+            new TR2XPreProcessor
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+            }.Run();
         }
 
         if (!monitor.IsCancelled)
