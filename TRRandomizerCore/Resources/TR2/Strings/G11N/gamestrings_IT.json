@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Stella filante",
-      "Accendino",
-      "Splendore",
-      "Barlume",
-      "Mini-fiamma"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Cerbottana",
-      "Pistole",
-      "Sempre Fedeli",
-      "Pew-Pew",
-      "Ne Prendo Due"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Munizioni per Cerbottana",
-      "Munizioni per Pistola",
-      "Munizioni per Sempre Fedeli",
-      "Munizioni per Pew-Pew",
-      "Munizioni per Ne Prendo Due"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Pompa",
-      "Moschetto",
-      "Sempre Fedele",
-      "Sei Ancora Qui?",
-      "Spaccabudella"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Cartucce per Pompa",
-      "Cartucce per Moschetto",
-      "Cartucce per Sempre Fedele",
-      "Munizioni per Sei Ancora Qui?",
-      "Munizioni per Spaccabudella"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Automatiche",
-      "Magnum",
-      "SuperPistole",
-      "Le Ha Perse Pierre",
-      "Restituire a Pierre"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Munizioni per Automatiche",
-      "Munizioni per Magnum",
-      "Munizioni per SuperPistola",
-      "Munizioni per Le Ha Perse Pierre",
-      "Munizioni per Restituire a Pierre"
-    ],
-    "INV_ITEM_UZI": [
-      "UwUzi",
-      "Drrrrrrrrrr",
-      "Pistole Fortissime",
-      "MangiaColpi",
-      "1000 Colpi Dopo..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Munizioni per UwUzi",
-      "Munizioni per Drrrrrrrrrr",
-      "Munizioni per Pistole Fortissime",
-      "Munizioni per MangiaColpi",
-      "Munizioni per 1000 Colpi Dopo"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Tick-tick-tick",
-      "Pazienza",
-      "Lanciatore di Frecce",
-      "Inutile",
-      "Senza Senso",
-      "Perché?",
-      "No!",
-      "Lanciatore di Stuzzicadenti",
-      "Propulsore di Lance"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Tick-tick-tick",
-      "Munizioni per Pazienza",
-      "Frecce",
-      "Munizioni per Inutile",
-      "Munizioni per Senza Senso",
-      "Munizioni per Perché?",
-      "Munizioni per No!",
-      "Stuzzicadenti",
-      "Lance"
-    ],
-    "INV_ITEM_M16": [
-      "Lettore MP3",
-      "MPEG",
-      "Non l'MP5",
-      "Grande Drrrrrrrrrr"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "Munizioni per Lettore MP3",
-      "Munizioni per MPEG",
-      "Munizioni per Non l'MP5",
-      "Munizioni per Grande Drrrrrrrrrr"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "Esploditore di Granate",
-      "Consegna Esplosiva",
-      "Arrostitore di Nemici",
-      "Lanciatore di Bombe",
-      "Spedizione di Granate",
-      "Big Bang",
-      "Big Boom",
-      "Fallo Saltare!"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Granate",
-      "Esplosivi",
-      "Palle di Fuoco",
-      "Bombe",
-      "Granate",
-      "Big Bangs",
-      "Big Booms",
-      "Munizioni per Fallo Saltare!"
-    ],
-    "INV_ITEM_MEDI": [
-      "Medi-kit Minuscolo",
-      "Medi-kit Piccino",
-      "Medi-kit Piccolo",
-      "Medi-kit Minuto",
-      "Medi-kit Microscopico",
-      "Piccolo Cerotto per la bua"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Medi-kit Gigante",
-      "Medi-kit Enorme",
-      "Medi-kit Titanico",
-      "Medi-kit Massiccio",
-      "Medi-kit Smisurato",
-      "Grande Cerotto per la bua"
-    ],
     "HEADING_ITEMS": [
       "COSE",
       "ROBE",
@@ -151,18 +18,153 @@
       "RAGE QUIT!",
       "Pronto per la NLNMAS?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Statistiche",
-      "Statistiche Vitali",
-      "Numeri Macinati",
-      "NON PUOI CURARTI!",
-      "Dati Segreti!"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- NULL -",
       "- NON C'È NIENTE QUI -",
       "- NON DEFINITO -",
       "- HEY, QUESTO SLOT È LIBERO -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Stella filante",
+      "Accendino",
+      "Splendore",
+      "Barlume",
+      "Mini-fiamma"
+    ],
+    "pistols": [
+      "Cerbottana",
+      "Pistole",
+      "Sempre Fedeli",
+      "Pew-Pew",
+      "Ne Prendo Due"
+    ],
+    "pistols_ammo": [
+      "Munizioni per Cerbottana",
+      "Munizioni per Pistola",
+      "Munizioni per Sempre Fedeli",
+      "Munizioni per Pew-Pew",
+      "Munizioni per Ne Prendo Due"
+    ],
+    "shotgun": [
+      "Pompa",
+      "Moschetto",
+      "Sempre Fedele",
+      "Sei Ancora Qui?",
+      "Spaccabudella"
+    ],
+    "shotgun_ammo": [
+      "Cartucce per Pompa",
+      "Cartucce per Moschetto",
+      "Cartucce per Sempre Fedele",
+      "Munizioni per Sei Ancora Qui?",
+      "Munizioni per Spaccabudella"
+    ],
+    "magnums": [
+      "Automatiche",
+      "Magnum",
+      "SuperPistole",
+      "Le Ha Perse Pierre",
+      "Restituire a Pierre"
+    ],
+    "magnums_ammo": [
+      "Munizioni per Automatiche",
+      "Munizioni per Magnum",
+      "Munizioni per SuperPistola",
+      "Munizioni per Le Ha Perse Pierre",
+      "Munizioni per Restituire a Pierre"
+    ],
+    "uzis": [
+      "UwUzi",
+      "Drrrrrrrrrr",
+      "Pistole Fortissime",
+      "MangiaColpi",
+      "1000 Colpi Dopo..."
+    ],
+    "uzis_ammo": [
+      "Munizioni per UwUzi",
+      "Munizioni per Drrrrrrrrrr",
+      "Munizioni per Pistole Fortissime",
+      "Munizioni per MangiaColpi",
+      "Munizioni per 1000 Colpi Dopo"
+    ],
+    "harpoon_gun": [
+      "Tick-tick-tick",
+      "Pazienza",
+      "Lanciatore di Frecce",
+      "Inutile",
+      "Senza Senso",
+      "Perché?",
+      "No!",
+      "Lanciatore di Stuzzicadenti",
+      "Propulsore di Lance"
+    ],
+    "harpoon_gun_ammo": [
+      "Tick-tick-tick",
+      "Munizioni per Pazienza",
+      "Frecce",
+      "Munizioni per Inutile",
+      "Munizioni per Senza Senso",
+      "Munizioni per Perché?",
+      "Munizioni per No!",
+      "Stuzzicadenti",
+      "Lance"
+    ],
+    "m16": [
+      "Lettore MP3",
+      "MPEG",
+      "Non l'MP5",
+      "Grande Drrrrrrrrrr"
+    ],
+    "m16_ammo": [
+      "Munizioni per Lettore MP3",
+      "Munizioni per MPEG",
+      "Munizioni per Non l'MP5",
+      "Munizioni per Grande Drrrrrrrrrr"
+    ],
+    "grenade_launcher": [
+      "Esploditore di Granate",
+      "Consegna Esplosiva",
+      "Arrostitore di Nemici",
+      "Lanciatore di Bombe",
+      "Spedizione di Granate",
+      "Big Bang",
+      "Big Boom",
+      "Fallo Saltare!"
+    ],
+    "grenade_launcher_ammo": [
+      "Granate",
+      "Esplosivi",
+      "Palle di Fuoco",
+      "Bombe",
+      "Granate",
+      "Big Bangs",
+      "Big Booms",
+      "Munizioni per Fallo Saltare!"
+    ],
+    "small_medipack": [
+      "Medi-kit Minuscolo",
+      "Medi-kit Piccino",
+      "Medi-kit Piccolo",
+      "Medi-kit Minuto",
+      "Medi-kit Microscopico",
+      "Piccolo Cerotto per la bua"
+    ],
+    "large_medipack": [
+      "Medi-kit Gigante",
+      "Medi-kit Enorme",
+      "Medi-kit Titanico",
+      "Medi-kit Massiccio",
+      "Medi-kit Smisurato",
+      "Grande Cerotto per la bua"
+    ],
+    "compass": [
+      "Statistiche",
+      "Statistiche Vitali",
+      "Numeri Macinati",
+      "NON PUOI CURARTI!",
+      "Dati Segreti!"
     ]
   },
   "LevelStrings": {

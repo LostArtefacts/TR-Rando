@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "tähtisadetikku",
-      "sytkäri",
-      "häikäisin",
-      "taikasauva",
-      "Valotaikaa!"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "hernepyssyt",
-      "nallipyssyt",
-      "vanhassa vara parempi",
-      "piu piu piu",
-      "tupla"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "pakasteherneet",
-      "nallit",
-      "aivan hyvät panokset",
-      "piu piu pi-pi-piu",
-      "tuplasti panoksia"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "tussari",
-      "musketti",
-      "hehtaaripyssy",
-      "kameramiehenkaataja",
-      "karhunkaataja"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "tussarin panokset",
-      "musketin panokset",
-      "hehtaaripyssyn panokset",
-      "kameramiehenkaatajan panokset",
-      "karhunkaatajan panokset"
-    ],
-    "INV_ITEM_AUTOS": [
-      "automaagiset pistoolit",
-      "Magnum double caramel",
-      "superpistoolit",
-      "ei niin kuraa",
-      "Pierreltä lainatut"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "automaagiset panokset",
-      "magnumin panokset",
-      "superpistoolin panokset",
-      "semi-OK:t panokset",
-      "Pierreltä lainatut panokset"
-    ],
-    "INV_ITEM_UZI": [
-      "uzit",
-      "trrrrrrrrr",
-      "Pepega-pistoolit",
-      "ammussyöpöt",
-      "1000 laukausta myöhemmin"
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "uzin panokset",
-      "trrr trrrrrrrrrrr",
-      "Pepega-pistoolin panokset",
-      "teräsrehua",
-      "tuhansia panoksia"
-    ],
-    "INV_ITEM_HARPOON": [
-      "tiku tiku tiku",
-      "tamponinheitin",
-      "liitulakunheitin",
-      "hyödytön",
-      "turha",
-      "Miksi?",
-      "Ei.",
-      "hammastikunheitin",
-      "kääntäjän suosikki"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "taku taku taku",
-      "tamponit",
-      "liitulakut",
-      "hyödyttömät panokset",
-      "turhat panokset",
-      "Siksi.",
-      "ei panoksia",
-      "hammastikut",
-      "parasta mitä tiedän"
-    ],
-    "INV_ITEM_M16": [
-      "MP3",
-      "MPEG4",
-      "drrrrrrrrrrrr",
-      "SBRRR SBRRRRRR :----D"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "MP3:n panokset",
-      "hauskat kotivideot",
-      "drrrrr drr drrrrrrr",
-      "EBIN SURRURRURS :--DDD"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "naatinheitin",
-      "pommittus",
-      "SodaStream",
-      "Mentos",
-      "JAHVAT TULLOO!",
-      "alkuräjäytin",
-      "hiukkaskiihdytin",
-      "granaattiomenanheitin"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "naatit",
-      "pullotettua taikaa",
-      "Pepsi Max",
-      "Coca-Cola Light",
-      "mehukkaat appelsiinit",
-      "mustat aukot",
-      "partikkelipakkaukset",
-      "granaatit"
-    ],
-    "INV_ITEM_MEDI": [
-      "pientä loiventavaa",
-      "mini",
-      "pikkupikkuensiapupakkaus",
-      "kompakti ensiapupakkaus",
-      "Always",
-      "haa"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "laaja korjaussarja",
-      "maxi",
-      "järkälemäinen ensiapupakkaus",
-      "runsas ensiapupakkaus",
-      "Pampers",
-      "HAA"
-    ],
     "HEADING_ITEMS": [
       "AVAINJUTUT",
       "KAMAA",
@@ -151,18 +18,153 @@
       "NO OLIKO KIVAA?",
       "ALT + F4"
     ],
-    "INV_ITEM_COMPASS": [
-      "tilastotietoa",
-      "Tämä on tärkeää!",
-      "Lara lukuina",
-      "saavutukset",
-      "salaisuusträkkeri"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- TYHJMÄ -",
       "- NIMETÖN -",
       "- EPÄKUNNOSSA -",
       "- NO TÄÄHÄN OIS TYHJÄ -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "tähtisadetikku",
+      "sytkäri",
+      "häikäisin",
+      "taikasauva",
+      "Valotaikaa!"
+    ],
+    "pistols": [
+      "hernepyssyt",
+      "nallipyssyt",
+      "vanhassa vara parempi",
+      "piu piu piu",
+      "tupla"
+    ],
+    "pistols_ammo": [
+      "pakasteherneet",
+      "nallit",
+      "aivan hyvät panokset",
+      "piu piu pi-pi-piu",
+      "tuplasti panoksia"
+    ],
+    "shotgun": [
+      "tussari",
+      "musketti",
+      "hehtaaripyssy",
+      "kameramiehenkaataja",
+      "karhunkaataja"
+    ],
+    "shotgun_ammo": [
+      "tussarin panokset",
+      "musketin panokset",
+      "hehtaaripyssyn panokset",
+      "kameramiehenkaatajan panokset",
+      "karhunkaatajan panokset"
+    ],
+    "magnums": [
+      "automaagiset pistoolit",
+      "Magnum double caramel",
+      "superpistoolit",
+      "ei niin kuraa",
+      "Pierreltä lainatut"
+    ],
+    "magnums_ammo": [
+      "automaagiset panokset",
+      "magnumin panokset",
+      "superpistoolin panokset",
+      "semi-OK:t panokset",
+      "Pierreltä lainatut panokset"
+    ],
+    "uzis": [
+      "uzit",
+      "trrrrrrrrr",
+      "Pepega-pistoolit",
+      "ammussyöpöt",
+      "1000 laukausta myöhemmin"
+    ],
+    "uzis_ammo": [
+      "uzin panokset",
+      "trrr trrrrrrrrrrr",
+      "Pepega-pistoolin panokset",
+      "teräsrehua",
+      "tuhansia panoksia"
+    ],
+    "harpoon_gun": [
+      "tiku tiku tiku",
+      "tamponinheitin",
+      "liitulakunheitin",
+      "hyödytön",
+      "turha",
+      "Miksi?",
+      "Ei.",
+      "hammastikunheitin",
+      "kääntäjän suosikki"
+    ],
+    "harpoon_gun_ammo": [
+      "taku taku taku",
+      "tamponit",
+      "liitulakut",
+      "hyödyttömät panokset",
+      "turhat panokset",
+      "Siksi.",
+      "ei panoksia",
+      "hammastikut",
+      "parasta mitä tiedän"
+    ],
+    "m16": [
+      "MP3",
+      "MPEG4",
+      "drrrrrrrrrrrr",
+      "SBRRR SBRRRRRR :----D"
+    ],
+    "m16_ammo": [
+      "MP3:n panokset",
+      "hauskat kotivideot",
+      "drrrrr drr drrrrrrr",
+      "EBIN SURRURRURS :--DDD"
+    ],
+    "grenade_launcher": [
+      "naatinheitin",
+      "pommittus",
+      "SodaStream",
+      "Mentos",
+      "JAHVAT TULLOO!",
+      "alkuräjäytin",
+      "hiukkaskiihdytin",
+      "granaattiomenanheitin"
+    ],
+    "grenade_launcher_ammo": [
+      "naatit",
+      "pullotettua taikaa",
+      "Pepsi Max",
+      "Coca-Cola Light",
+      "mehukkaat appelsiinit",
+      "mustat aukot",
+      "partikkelipakkaukset",
+      "granaatit"
+    ],
+    "small_medipack": [
+      "pientä loiventavaa",
+      "mini",
+      "pikkupikkuensiapupakkaus",
+      "kompakti ensiapupakkaus",
+      "Always",
+      "haa"
+    ],
+    "large_medipack": [
+      "laaja korjaussarja",
+      "maxi",
+      "järkälemäinen ensiapupakkaus",
+      "runsas ensiapupakkaus",
+      "Pampers",
+      "HAA"
+    ],
+    "compass": [
+      "tilastotietoa",
+      "Tämä on tärkeää!",
+      "Lara lukuina",
+      "saavutukset",
+      "salaisuusträkkeri"
     ]
   },
   "LevelStrings": {

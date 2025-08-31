@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Jiskra v.1",
-      "Zippo",
-      "SSSSSSSSS",
-      "Blikatko",
-      "Mini-Plamenomet"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Kulickovky",
-      "Rucni Pistolky",
-      "Raritky",
-      "Pew-Pews",
-      "Beru Dve"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Kulickovky - Kulicky",
-      "Pistolky - Kulicky",
-      "Raritky - Kulicky",
-      "Pew-Pew - Kulicky",
-      "Beru Dve - Kulicky"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Flusbrok",
-      "Musketa",
-      "Stara Znama",
-      "Nestacilo?",
-      "Vykuchavacka"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Flusbrok Gule",
-      "Musketa Gule",
-      "Stara Znama Gule",
-      "Nestacilo? Dalsi",
-      "Vykuchavacka - Dalsi"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Automatky",
-      "Magnumky",
-      "SuperPistolky",
-      "Pierre to ztratil",
-      "Vrat Pierrovy"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Automatky - Aha",
-      "Magnumky - Aha",
-      "SuperPistolky - Aha",
-      "Pierre to ztratil - Aha",
-      "Vrat Pierrovi - Aha"
-    ],
-    "INV_ITEM_UZI": [
-      "RATATA",
-      "Drrrrrrrrrr",
-      "Zrout Munice",
-      "Nabojovy Upir",
-      "o 1000 Ran Pozdeji..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "RATATA Naboje",
-      "Drrrrrrrrrr Naboje",
-      "Zrout Munice - Pridavek",
-      "Nabojovy Upir - Dalsi",
-      "o 1000 Ran Pozdeji - Naboje"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Tick-tick-tick",
-      "Trpelivost",
-      "Vrhac Sipek",
-      "Zbytecnost",
-      "Bezvyznamne",
-      "Proc?",
-      "NE!",
-      "Paratkovac",
-      "Vrhac Kopi"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Tick-tick-ticks",
-      "Dalsi Trpelivost",
-      "Sipky?",
-      "Munice pro Zbytecnost",
-      "Vic Bezvyznamne",
-      "Proc? Naboje",
-      "Munice pro NE",
-      "Paratka",
-      "Dalsi Kopi"
-    ],
-    "INV_ITEM_M16": [
-      "MP3 Prehravac",
-      "MPEG",
-      "To Neni MP5",
-      "Velke Drrrrrrrrrr"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "MP3 Nahravky",
-      "MPEG Zasoba",
-      "To Neni MP5 Munice",
-      "Velke Drrrrrrrrrr Dalsi!"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "HubaBuba",
-      "Dodavka BUM",
-      "Rozhazovac",
-      "Zmizikovac",
-      "AnanasoVrhac",
-      "BumPrask",
-      "BUM!!!",
-      "Vybouchni!"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Dalsi HubaBuba",
-      "Dalsi BUM",
-      "Ohnive Gule",
-      "Zmizik",
-      "Ananasy",
-      "Vice BumPrask",
-      "Dalsi BUM!!!",
-      "Vybouchny! Olovo"
-    ],
-    "INV_ITEM_MEDI": [
-      "Nepatrna Lekarna",
-      "Takovy Drobecek",
-      "Lekarna - Clun",
-      "Kompaktni Lekarna",
-      "Ruzenec",
-      "Snez mne!"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Giganticka Lekarna",
-      "Uz Nejez!",
-      "Lekarna - Titanik",
-      "Masivni Lekarna",
-      "Jezisuv Kriz",
-      "Snez mne! Vazne!"
-    ],
     "HEADING_ITEMS": [
       "MOJE VECI",
       "MUJ BORDEL",
@@ -151,18 +18,153 @@
       "TROCHU ROZCUCHAN!",
       "NLNMAS je v Pr.?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Jak sem na tom",
-      "Zdravotni Karta",
-      "CISELNIK",
-      "NEDOVOLENE LEKARNY!",
-      "POCITADLO TAJEMSTVY!"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- NIC -",
       "- JAKOZE NIC -",
       "- NEURCENO -",
       "- OHH, TU JE VOLNO ZENO -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Jiskra v.1",
+      "Zippo",
+      "SSSSSSSSS",
+      "Blikatko",
+      "Mini-Plamenomet"
+    ],
+    "pistols": [
+      "Kulickovky",
+      "Rucni Pistolky",
+      "Raritky",
+      "Pew-Pews",
+      "Beru Dve"
+    ],
+    "pistols_ammo": [
+      "Kulickovky - Kulicky",
+      "Pistolky - Kulicky",
+      "Raritky - Kulicky",
+      "Pew-Pew - Kulicky",
+      "Beru Dve - Kulicky"
+    ],
+    "shotgun": [
+      "Flusbrok",
+      "Musketa",
+      "Stara Znama",
+      "Nestacilo?",
+      "Vykuchavacka"
+    ],
+    "shotgun_ammo": [
+      "Flusbrok Gule",
+      "Musketa Gule",
+      "Stara Znama Gule",
+      "Nestacilo? Dalsi",
+      "Vykuchavacka - Dalsi"
+    ],
+    "magnums": [
+      "Automatky",
+      "Magnumky",
+      "SuperPistolky",
+      "Pierre to ztratil",
+      "Vrat Pierrovy"
+    ],
+    "magnums_ammo": [
+      "Automatky - Aha",
+      "Magnumky - Aha",
+      "SuperPistolky - Aha",
+      "Pierre to ztratil - Aha",
+      "Vrat Pierrovi - Aha"
+    ],
+    "uzis": [
+      "RATATA",
+      "Drrrrrrrrrr",
+      "Zrout Munice",
+      "Nabojovy Upir",
+      "o 1000 Ran Pozdeji..."
+    ],
+    "uzis_ammo": [
+      "RATATA Naboje",
+      "Drrrrrrrrrr Naboje",
+      "Zrout Munice - Pridavek",
+      "Nabojovy Upir - Dalsi",
+      "o 1000 Ran Pozdeji - Naboje"
+    ],
+    "harpoon_gun": [
+      "Tick-tick-tick",
+      "Trpelivost",
+      "Vrhac Sipek",
+      "Zbytecnost",
+      "Bezvyznamne",
+      "Proc?",
+      "NE!",
+      "Paratkovac",
+      "Vrhac Kopi"
+    ],
+    "harpoon_gun_ammo": [
+      "Tick-tick-ticks",
+      "Dalsi Trpelivost",
+      "Sipky?",
+      "Munice pro Zbytecnost",
+      "Vic Bezvyznamne",
+      "Proc? Naboje",
+      "Munice pro NE",
+      "Paratka",
+      "Dalsi Kopi"
+    ],
+    "m16": [
+      "MP3 Prehravac",
+      "MPEG",
+      "To Neni MP5",
+      "Velke Drrrrrrrrrr"
+    ],
+    "m16_ammo": [
+      "MP3 Nahravky",
+      "MPEG Zasoba",
+      "To Neni MP5 Munice",
+      "Velke Drrrrrrrrrr Dalsi!"
+    ],
+    "grenade_launcher": [
+      "HubaBuba",
+      "Dodavka BUM",
+      "Rozhazovac",
+      "Zmizikovac",
+      "AnanasoVrhac",
+      "BumPrask",
+      "BUM!!!",
+      "Vybouchni!"
+    ],
+    "grenade_launcher_ammo": [
+      "Dalsi HubaBuba",
+      "Dalsi BUM",
+      "Ohnive Gule",
+      "Zmizik",
+      "Ananasy",
+      "Vice BumPrask",
+      "Dalsi BUM!!!",
+      "Vybouchny! Olovo"
+    ],
+    "small_medipack": [
+      "Nepatrna Lekarna",
+      "Takovy Drobecek",
+      "Lekarna - Clun",
+      "Kompaktni Lekarna",
+      "Ruzenec",
+      "Snez mne!"
+    ],
+    "large_medipack": [
+      "Giganticka Lekarna",
+      "Uz Nejez!",
+      "Lekarna - Titanik",
+      "Masivni Lekarna",
+      "Jezisuv Kriz",
+      "Snez mne! Vazne!"
+    ],
+    "compass": [
+      "Jak sem na tom",
+      "Zdravotni Karta",
+      "CISELNIK",
+      "NEDOVOLENE LEKARNY!",
+      "POCITADLO TAJEMSTVY!"
     ]
   },
   "LevelStrings": {

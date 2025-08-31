@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Cierge Magique",
-      "Briquet Zippo",
-      "Lumière !",
-      "Ça brille",
-      "P'tite flamme"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Sarbacanes",
-      "Revolvers",
-      "Vieux Flingues",
-      "Pan-Pan",
-      "La paire"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Boulettes pour Sarbacanes",
-      "Munitions pour Revolvers",
-      "Munitions pour Vieux Flingues",
-      "Munitions pour Pan-Pan",
-      "Munitions pour La paire"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Fusil",
-      "Mousquet",
-      "Le Vieux Fidèle",
-      "T'as ton Compte ?",
-      "Éclate Tripes"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Cartouche pour Fusil",
-      "Cartouche pour Mousquet",
-      "Cartouches pour Le Vieux Fidèle",
-      "Cartouches pour T'as ton Compte ?",
-      "Cartouches pour Éclate Tripes"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Au Tomates",
-      "Magnums",
-      "Supers Pistolets",
-      "Pistolets de Pierre",
-      "Souvenirs de Pierre"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Munitions pour Au Tomates",
-      "Munitions pour Magnum",
-      "Munitions pour Supers Pistolets",
-      "Munitions pour Pistolets de Pierre",
-      "Munitions pour Souvenirs de Pierre"
-    ],
-    "INV_ITEM_UZI": [
-      "UwUzis",
-      "Drrrrrrrrrr",
-      "Tatatatatata",
-      "Vide balles",
-      "1000 balles plus tard..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Munitions pour UwUzi",
-      "Munitions pour Drrrrrrrrrr",
-      "Munitions pour Tatatatatata",
-      "Munitions pour Vide balles",
-      "Munitions pour 1000 balles plus tard"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Tick-tick-tick",
-      "Patience",
-      "Arbalète",
-      "Je sers à rien",
-      "Inutile",
-      "Pourquoi ?",
-      "Non !",
-      "Lance Cure-dents",
-      "Lance Lances"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Ticks pour Tick-tick-tick",
-      "Munitions pour Patience",
-      "Carreaux pour Arbalète",
-      "Munitions qui servent à rien",
-      "Munitions Inutiles",
-      "Munitions Pourquoi faire ?",
-      "Pas de Munitions",
-      "Cure-dents",
-      "Lances pour Lance Lances"
-    ],
-    "INV_ITEM_M16": [
-      "MP3",
-      "MPEG",
-      "C'est pas un MP5",
-      "Drrrrrrrrrr"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "Piles AAA pour MP3",
-      "Munitions pour MPEG",
-      "Munitions pour le M16 et c'est tout",
-      "Munitions pour Drrrrrrrrrr"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "L'exploseur",
-      "Diarrhée Explosive",
-      "Lance Bombes",
-      "Lance Boules",
-      "Jet d'Ananas",
-      "Big Bang",
-      "Big Boom",
-      "Ça explose tout"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Grenades pour L'exploseur",
-      "Laxatif",
-      "Bombes",
-      "Boules",
-      "Ananas",
-      "Big Bangs",
-      "Big Booms",
-      "Grenades pour Ça explose tout"
-    ],
-    "INV_ITEM_MEDI": [
-      "Mini Trousse",
-      "P'tit Soin",
-      "Petite Trousse",
-      "Soin de poche",
-      "Aaaaw",
-      "Pansement"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Mega Trousse",
-      "Gros Soin",
-      "Énorme Trousse",
-      "Soin 2 en 1",
-      "Aaaaaaaaawwww",
-      "Compresse"
-    ],
     "HEADING_ITEMS": [
       "TRUCS",
       "MACHINS",
@@ -151,18 +18,153 @@
       "RAGE QUIT !",
       "ENCORE ?!"
     ],
-    "INV_ITEM_COMPASS": [
-      "Stats",
-      "Stats Vitals",
-      "Des nombres",
-      "PAS DE SOINS !",
-      "Secrets très secrets!"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- Rien -",
       "- Y a rien -",
       "- À remplir -",
       "- Emplacement libre -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Cierge Magique",
+      "Briquet Zippo",
+      "Lumière !",
+      "Ça brille",
+      "P'tite flamme"
+    ],
+    "pistols": [
+      "Sarbacanes",
+      "Revolvers",
+      "Vieux Flingues",
+      "Pan-Pan",
+      "La paire"
+    ],
+    "pistols_ammo": [
+      "Boulettes pour Sarbacanes",
+      "Munitions pour Revolvers",
+      "Munitions pour Vieux Flingues",
+      "Munitions pour Pan-Pan",
+      "Munitions pour La paire"
+    ],
+    "shotgun": [
+      "Fusil",
+      "Mousquet",
+      "Le Vieux Fidèle",
+      "T'as ton Compte ?",
+      "Éclate Tripes"
+    ],
+    "shotgun_ammo": [
+      "Cartouche pour Fusil",
+      "Cartouche pour Mousquet",
+      "Cartouches pour Le Vieux Fidèle",
+      "Cartouches pour T'as ton Compte ?",
+      "Cartouches pour Éclate Tripes"
+    ],
+    "magnums": [
+      "Au Tomates",
+      "Magnums",
+      "Supers Pistolets",
+      "Pistolets de Pierre",
+      "Souvenirs de Pierre"
+    ],
+    "magnums_ammo": [
+      "Munitions pour Au Tomates",
+      "Munitions pour Magnum",
+      "Munitions pour Supers Pistolets",
+      "Munitions pour Pistolets de Pierre",
+      "Munitions pour Souvenirs de Pierre"
+    ],
+    "uzis": [
+      "UwUzis",
+      "Drrrrrrrrrr",
+      "Tatatatatata",
+      "Vide balles",
+      "1000 balles plus tard..."
+    ],
+    "uzis_ammo": [
+      "Munitions pour UwUzi",
+      "Munitions pour Drrrrrrrrrr",
+      "Munitions pour Tatatatatata",
+      "Munitions pour Vide balles",
+      "Munitions pour 1000 balles plus tard"
+    ],
+    "harpoon_gun": [
+      "Tick-tick-tick",
+      "Patience",
+      "Arbalète",
+      "Je sers à rien",
+      "Inutile",
+      "Pourquoi ?",
+      "Non !",
+      "Lance Cure-dents",
+      "Lance Lances"
+    ],
+    "harpoon_gun_ammo": [
+      "Ticks pour Tick-tick-tick",
+      "Munitions pour Patience",
+      "Carreaux pour Arbalète",
+      "Munitions qui servent à rien",
+      "Munitions Inutiles",
+      "Munitions Pourquoi faire ?",
+      "Pas de Munitions",
+      "Cure-dents",
+      "Lances pour Lance Lances"
+    ],
+    "m16": [
+      "MP3",
+      "MPEG",
+      "C'est pas un MP5",
+      "Drrrrrrrrrr"
+    ],
+    "m16_ammo": [
+      "Piles AAA pour MP3",
+      "Munitions pour MPEG",
+      "Munitions pour le M16 et c'est tout",
+      "Munitions pour Drrrrrrrrrr"
+    ],
+    "grenade_launcher": [
+      "L'exploseur",
+      "Diarrhée Explosive",
+      "Lance Bombes",
+      "Lance Boules",
+      "Jet d'Ananas",
+      "Big Bang",
+      "Big Boom",
+      "Ça explose tout"
+    ],
+    "grenade_launcher_ammo": [
+      "Grenades pour L'exploseur",
+      "Laxatif",
+      "Bombes",
+      "Boules",
+      "Ananas",
+      "Big Bangs",
+      "Big Booms",
+      "Grenades pour Ça explose tout"
+    ],
+    "small_medipack": [
+      "Mini Trousse",
+      "P'tit Soin",
+      "Petite Trousse",
+      "Soin de poche",
+      "Aaaaw",
+      "Pansement"
+    ],
+    "large_medipack": [
+      "Mega Trousse",
+      "Gros Soin",
+      "Énorme Trousse",
+      "Soin 2 en 1",
+      "Aaaaaaaaawwww",
+      "Compresse"
+    ],
+    "compass": [
+      "Stats",
+      "Stats Vitals",
+      "Des nombres",
+      "PAS DE SOINS !",
+      "Secrets très secrets!"
     ]
   },
   "LevelStrings": {

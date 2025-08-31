@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Sparkler",
-      "Zippo",
-      "Dazzler",
-      "Flickerer",
-      "Mini-blaze"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Peashooters",
-      "Handguns",
-      "Old Faithfuls",
-      "Pew-Pews",
-      "I'll Take Two"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Peashooter Clips",
-      "Handgun Clips",
-      "Old Faithful Clips",
-      "Pew-Pew Clips",
-      "I'll Take Two Clips"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Shotty",
-      "Musket",
-      "Old Faithful",
-      "Seen Enough?",
-      "Gutbuster"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Shotty Shells",
-      "Musket Shells",
-      "Old Faithful Shells",
-      "Seen Enough Shells?",
-      "Gutbuster Shells"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Autos",
-      "Magnums",
-      "SuperPistols",
-      "Pierre Lost 'em",
-      "Return to Pierre"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Auto Clips",
-      "Magnum Clips",
-      "SuperPistol Clips",
-      "Pierre Lost 'em Clips",
-      "Clips to Return to Pierre"
-    ],
-    "INV_ITEM_UZI": [
-      "UwUzis",
-      "Drrrrrrrrrr",
-      "FeelStronger Guns",
-      "Ammo Vampire",
-      "1000 Shots Later..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "UwUzi Clips",
-      "Drrrrrrrrrr Clips",
-      "FeelStronger Clips",
-      "Ammo Vampire Clips",
-      "1000 Clips Later"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Tick-tick-tick",
-      "Patience",
-      "Arrow Thrower",
-      "Useless",
-      "Pointless",
-      "Why Bother?",
-      "No!",
-      "Toothpick Thrower",
-      "Spear Launcher"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Tick-tick-ticks",
-      "Patience Ammo",
-      "Arrows",
-      "Useless Ammo",
-      "Pointless Ammo",
-      "Why Bother Ammo?",
-      "No Ammo!",
-      "Toothpicks",
-      "Spears"
-    ],
-    "INV_ITEM_M16": [
-      "MP3 Player",
-      "MPEG",
-      "Not the MP5",
-      "Big Drrrrrrrrrr"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "MP3 Clips",
-      "MPEG Clips",
-      "Not MP5 Clips",
-      "Big Drrrrrrrrrr Clips"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "Nade Blaster",
-      "Explosive Delivery",
-      "Enemy Roaster",
-      "Shell Launcher",
-      "Pineapple Dispatch",
-      "Big Bang",
-      "Big Boom",
-      "Blow It Up"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Nades",
-      "Explosives",
-      "Fireballs",
-      "Shells",
-      "Pineapples",
-      "Big Bangs",
-      "Big Booms",
-      "Ammo to Blow It Up"
-    ],
-    "INV_ITEM_MEDI": [
-      "Tiny Medi Pack",
-      "Wee Medi Pack",
-      "Little Medi Pack",
-      "Compact Medi Pack",
-      "Bijou Medi Pack",
-      "Baby Booboo Fixer"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Gigantic Medi Pack",
-      "Enormous Medi Pack",
-      "Titanic Medi Pack",
-      "Massive Medi Pack",
-      "Mahoosive Medi Pack",
-      "Big Booboo Fixer"
-    ],
     "HEADING_ITEMS": [
       "THINGS",
       "STUFF",
@@ -154,18 +21,153 @@
       "RAGE QUIT",
       "NLNMAS Next?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Stats",
-      "Vital Stats",
-      "Number Crunching",
-      "No Meds Allowed",
-      "Secret Tracker"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- NULL -",
       "- NOTHING HERE -",
       "- UNDEFINED -",
       "- OI, THIS SLOT'S FREE -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Sparkler",
+      "Zippo",
+      "Dazzler",
+      "Flickerer",
+      "Mini-blaze"
+    ],
+    "pistols": [
+      "Peashooters",
+      "Handguns",
+      "Old Faithfuls",
+      "Pew-Pews",
+      "I'll Take Two"
+    ],
+    "pistols_ammo": [
+      "Peashooter Clips",
+      "Handgun Clips",
+      "Old Faithful Clips",
+      "Pew-Pew Clips",
+      "I'll Take Two Clips"
+    ],
+    "shotgun": [
+      "Shotty",
+      "Musket",
+      "Old Faithful",
+      "Seen Enough?",
+      "Gutbuster"
+    ],
+    "shotgun_ammo": [
+      "Shotty Shells",
+      "Musket Shells",
+      "Old Faithful Shells",
+      "Seen Enough Shells?",
+      "Gutbuster Shells"
+    ],
+    "magnums": [
+      "Autos",
+      "Magnums",
+      "SuperPistols",
+      "Pierre Lost 'em",
+      "Return to Pierre"
+    ],
+    "magnums_ammo": [
+      "Auto Clips",
+      "Magnum Clips",
+      "SuperPistol Clips",
+      "Pierre Lost 'em Clips",
+      "Clips to Return to Pierre"
+    ],
+    "uzis": [
+      "UwUzis",
+      "Drrrrrrrrrr",
+      "FeelStronger Guns",
+      "Ammo Vampire",
+      "1000 Shots Later..."
+    ],
+    "uzis_ammo": [
+      "UwUzi Clips",
+      "Drrrrrrrrrr Clips",
+      "FeelStronger Clips",
+      "Ammo Vampire Clips",
+      "1000 Clips Later"
+    ],
+    "harpoon_gun": [
+      "Tick-tick-tick",
+      "Patience",
+      "Arrow Thrower",
+      "Useless",
+      "Pointless",
+      "Why Bother?",
+      "No!",
+      "Toothpick Thrower",
+      "Spear Launcher"
+    ],
+    "harpoon_gun_ammo": [
+      "Tick-tick-ticks",
+      "Patience Ammo",
+      "Arrows",
+      "Useless Ammo",
+      "Pointless Ammo",
+      "Why Bother Ammo?",
+      "No Ammo!",
+      "Toothpicks",
+      "Spears"
+    ],
+    "m16": [
+      "MP3 Player",
+      "MPEG",
+      "Not the MP5",
+      "Big Drrrrrrrrrr"
+    ],
+    "m16_ammo": [
+      "MP3 Clips",
+      "MPEG Clips",
+      "Not MP5 Clips",
+      "Big Drrrrrrrrrr Clips"
+    ],
+    "grenade_launcher": [
+      "Nade Blaster",
+      "Explosive Delivery",
+      "Enemy Roaster",
+      "Shell Launcher",
+      "Pineapple Dispatch",
+      "Big Bang",
+      "Big Boom",
+      "Blow It Up"
+    ],
+    "grenade_launcher_ammo": [
+      "Nades",
+      "Explosives",
+      "Fireballs",
+      "Shells",
+      "Pineapples",
+      "Big Bangs",
+      "Big Booms",
+      "Ammo to Blow It Up"
+    ],
+    "small_medipack": [
+      "Tiny Medi Pack",
+      "Wee Medi Pack",
+      "Little Medi Pack",
+      "Compact Medi Pack",
+      "Bijou Medi Pack",
+      "Baby Booboo Fixer"
+    ],
+    "large_medipack": [
+      "Gigantic Medi Pack",
+      "Enormous Medi Pack",
+      "Titanic Medi Pack",
+      "Massive Medi Pack",
+      "Mahoosive Medi Pack",
+      "Big Booboo Fixer"
+    ],
+    "compass": [
+      "Stats",
+      "Vital Stats",
+      "Number Crunching",
+      "No Meds Allowed",
+      "Secret Tracker"
     ]
   },
   "LevelStrings": {

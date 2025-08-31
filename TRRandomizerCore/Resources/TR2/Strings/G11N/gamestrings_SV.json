@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Sparkler",
-      "Zippo",
-      "Dazzler",
-      "Flickerer",
-      "Mini-blaze"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Peashooter",
-      "Handpistol",
-      "Gammal Trogen",
-      "Pew-pew",
-      "Jag tar två"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Peashooter-magasin",
-      "Handpistol-Magasin",
-      "Gammal Trogen-magasin",
-      "Pew-Pew-Magasin",
-      "Jag tar två-magasin"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Shotty",
-      "Musköt",
-      "Gammal Trogen",
-      "Sett tillräkligt",
-      "Gutbuster"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Shotty-skott",
-      "Musköt-skott",
-      "Gammal Trogen-magasin",
-      "Sett tillträklig med ammunition",
-      "Gutbuster Magasin"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Auto",
-      "Magnum",
-      "Superpistol",
-      "Pierre förlorade den",
-      "Kom tillbaka till Pierre"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Auto-magasin",
-      "Magnum ammunition",
-      "Superpistol-magasin",
-      "Pierre förlorade den-magasin",
-      "Kom tillbaka till Pierre-magasin"
-    ],
-    "INV_ITEM_UZI": [
-      "Uwuzi",
-      "Brrrrrrrrrr",
-      "kännsStarkare Vapen",
-      "Vampyr skott",
-      "1000 skotts senare..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "Uwuz-Mowosin",
-      "Brrrrrrrrr-magasin",
-      "KännsStarkare-magasin",
-      "Vampyr skott-magasin",
-      "1000 skotts senare...-magasin"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Tick-tock-tick",
-      "Tålamod",
-      "Pil kastare",
-      "Värdelös",
-      "Meninglöst",
-      "Varför?",
-      "Nej!",
-      "Tandpetare vapen",
-      "Spjut skuttare"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Tick-tock-tick",
-      "Tålamod-magasin",
-      "Pil",
-      "Värdelös skott",
-      "Meninglös skott",
-      "Varför? skott",
-      "Ingen Ammunition",
-      "Tandpetare",
-      "Spjut"
-    ],
-    "INV_ITEM_M16": [
-      "MP3 Spelare",
-      "MPEG",
-      "Inte den MP5",
-      "Fet stor Drrrrrrrrr"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "MP3 Magasin",
-      "MPEG-Magasin",
-      "Inte den MP5-magasin",
-      "Fet stor Drrrrrrrr-magasin"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "Granat Spräng",
-      "Explosiv Leverans",
-      "Stekad Fiende",
-      "Skalavfyrare",
-      "Ananas kastare",
-      "Big bang",
-      "Stor explotion",
-      "Sprang den up!"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Granat",
-      "Explosiv skott",
-      "Eldboll",
-      "Skalbomber",
-      "Ananas",
-      "Big bang",
-      "Stor explotion",
-      "Sprang den up! ammunition"
-    ],
-    "INV_ITEM_MEDI": [
-      "Litten Medipack",
-      "småväxt Medipack",
-      "Pluttig MediPack",
-      "kort MediPack",
-      "För litten MediPack",
-      "Babis boo MediPack"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Gigantisk MediPack",
-      "Enormt stort MediPack",
-      "Kolossal MediPack",
-      "Nobel Medipack",
-      "FET STOR MediPack",
-      "Stor boo MediPack"
-    ],
     "HEADING_ITEMS": [
       "NÅGOTING",
       "GREJ",
@@ -151,18 +18,153 @@
       "RAGE QUIT!",
       "LMAO försök igen?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Statistik",
-      "Livsviktigt Stat",
-      "Nummer ??",
-      "INGE MEDS TILL LÅTEN!",
-      "Hemlig Spårare!"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "Noll",
       "INGET HÄR",
       "OIDENTIFIERAD",
       "OJ, DENNA PLATS ÄR LEDIGT"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Sparkler",
+      "Zippo",
+      "Dazzler",
+      "Flickerer",
+      "Mini-blaze"
+    ],
+    "pistols": [
+      "Peashooter",
+      "Handpistol",
+      "Gammal Trogen",
+      "Pew-pew",
+      "Jag tar två"
+    ],
+    "pistols_ammo": [
+      "Peashooter-magasin",
+      "Handpistol-Magasin",
+      "Gammal Trogen-magasin",
+      "Pew-Pew-Magasin",
+      "Jag tar två-magasin"
+    ],
+    "shotgun": [
+      "Shotty",
+      "Musköt",
+      "Gammal Trogen",
+      "Sett tillräkligt",
+      "Gutbuster"
+    ],
+    "shotgun_ammo": [
+      "Shotty-skott",
+      "Musköt-skott",
+      "Gammal Trogen-magasin",
+      "Sett tillträklig med ammunition",
+      "Gutbuster Magasin"
+    ],
+    "magnums": [
+      "Auto",
+      "Magnum",
+      "Superpistol",
+      "Pierre förlorade den",
+      "Kom tillbaka till Pierre"
+    ],
+    "magnums_ammo": [
+      "Auto-magasin",
+      "Magnum ammunition",
+      "Superpistol-magasin",
+      "Pierre förlorade den-magasin",
+      "Kom tillbaka till Pierre-magasin"
+    ],
+    "uzis": [
+      "Uwuzi",
+      "Brrrrrrrrrr",
+      "kännsStarkare Vapen",
+      "Vampyr skott",
+      "1000 skotts senare..."
+    ],
+    "uzis_ammo": [
+      "Uwuz-Mowosin",
+      "Brrrrrrrrr-magasin",
+      "KännsStarkare-magasin",
+      "Vampyr skott-magasin",
+      "1000 skotts senare...-magasin"
+    ],
+    "harpoon_gun": [
+      "Tick-tock-tick",
+      "Tålamod",
+      "Pil kastare",
+      "Värdelös",
+      "Meninglöst",
+      "Varför?",
+      "Nej!",
+      "Tandpetare vapen",
+      "Spjut skuttare"
+    ],
+    "harpoon_gun_ammo": [
+      "Tick-tock-tick",
+      "Tålamod-magasin",
+      "Pil",
+      "Värdelös skott",
+      "Meninglös skott",
+      "Varför? skott",
+      "Ingen Ammunition",
+      "Tandpetare",
+      "Spjut"
+    ],
+    "m16": [
+      "MP3 Spelare",
+      "MPEG",
+      "Inte den MP5",
+      "Fet stor Drrrrrrrrr"
+    ],
+    "m16_ammo": [
+      "MP3 Magasin",
+      "MPEG-Magasin",
+      "Inte den MP5-magasin",
+      "Fet stor Drrrrrrrr-magasin"
+    ],
+    "grenade_launcher": [
+      "Granat Spräng",
+      "Explosiv Leverans",
+      "Stekad Fiende",
+      "Skalavfyrare",
+      "Ananas kastare",
+      "Big bang",
+      "Stor explotion",
+      "Sprang den up!"
+    ],
+    "grenade_launcher_ammo": [
+      "Granat",
+      "Explosiv skott",
+      "Eldboll",
+      "Skalbomber",
+      "Ananas",
+      "Big bang",
+      "Stor explotion",
+      "Sprang den up! ammunition"
+    ],
+    "small_medipack": [
+      "Litten Medipack",
+      "småväxt Medipack",
+      "Pluttig MediPack",
+      "kort MediPack",
+      "För litten MediPack",
+      "Babis boo MediPack"
+    ],
+    "large_medipack": [
+      "Gigantisk MediPack",
+      "Enormt stort MediPack",
+      "Kolossal MediPack",
+      "Nobel Medipack",
+      "FET STOR MediPack",
+      "Stor boo MediPack"
+    ],
+    "compass": [
+      "Statistik",
+      "Livsviktigt Stat",
+      "Nummer ??",
+      "INGE MEDS TILL LÅTEN!",
+      "Hemlig Spårare!"
     ]
   },
   "LevelStrings": {

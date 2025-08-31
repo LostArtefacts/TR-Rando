@@ -1,138 +1,5 @@
-﻿{
+{
   "GlobalStrings": {
-    "INV_ITEM_FLARES": [
-      "Wunderkerze",
-      "Feuerzeug",
-      "Blender",
-      "Flackerer",
-      "Kleines Funkeln"
-    ],
-    "INV_ITEM_PISTOLS": [
-      "Erbsenkanone",
-      "Handwaffen",
-      "Alte Treue",
-      "Pew-Pews",
-      "Nimm Zwei"
-    ],
-    "INV_ITEM_PISTOL_AMMO": [
-      "Erbsenkanone Munition",
-      "Handwaffen Munition",
-      "Alte Treue Clips",
-      "Pew-Pew Clips",
-      "Nimm Zwei Clips"
-    ],
-    "INV_ITEM_SHOTGUN": [
-      "Schrotty",
-      "Muskete",
-      "Alte Treue",
-      "Bist du noch da?",
-      "Gutbuster"
-    ],
-    "INV_ITEM_SHOTGUN_AMMO": [
-      "Schrotty Munition",
-      "Muskete Munition",
-      "Alte Treue Munition",
-      "Bist Du Noch Da? Ammo",
-      "Gutbuster Ammo"
-    ],
-    "INV_ITEM_AUTOS": [
-      "Autos",
-      "Magnums",
-      "Super Pistolen",
-      "Pierre Hat Das Verloren",
-      "Gibs Pierre Zurück"
-    ],
-    "INV_ITEM_AUTO_AMMO": [
-      "Auto Munition",
-      "Magnum Munition",
-      "Super Pistolen Clips",
-      "Pierres Verlorene Clips",
-      "Gibs Pierre Zurück Clips"
-    ],
-    "INV_ITEM_UZI": [
-      "UwUzi",
-      "Drrrrrrrrrr",
-      "IchBinStärker Waffen",
-      "Munitionsvampir",
-      "1000 Schüsse Später..."
-    ],
-    "INV_ITEM_UZI_AMMO": [
-      "UwUzi Munition",
-      "Drrrrrrrrrr Clips",
-      "IchBinStärker Munition",
-      "Munitionsvampir Munition",
-      "1000 Schüsse Später, Munition"
-    ],
-    "INV_ITEM_HARPOON": [
-      "Tick-tick-tick",
-      "Geduld",
-      "Pfeilwerfer",
-      "Nutzlos",
-      "Zwecklos",
-      "Warum?",
-      "Nein!",
-      "Zahnstocher Werfer",
-      "Speerwerfer"
-    ],
-    "INV_ITEM_HARPOON_AMMO": [
-      "Tick-tick-ticks",
-      "Geduld Pfeile",
-      "Pfeile",
-      "Nutzlos Pfeile",
-      "Zwecklos Pfeile",
-      "Warum Pfeile?",
-      "Nein, Pfeile!",
-      "Zahnstocher",
-      "Speere"
-    ],
-    "INV_ITEM_M16": [
-      "MP3 Player",
-      "MPEG",
-      "Nicht die MP5",
-      "Big Drrrrrrrrrr"
-    ],
-    "INV_ITEM_M16_AMMO": [
-      "MP3 Munition",
-      "MPEG Munition",
-      "Nicht die MP5 Munition",
-      "Big Drrrrrrrrrr Munition"
-    ],
-    "INV_ITEM_GRENADE_LAUNCHER": [
-      "Nade Blaster",
-      "Explosions Überbringer",
-      "Gegner Verbrenner",
-      "Muschel Werfer",
-      "Ananas Versand",
-      "Großes Bang",
-      "Großes Boom",
-      "Jag Es Hoch!"
-    ],
-    "INV_ITEM_GRENADE_AMMO": [
-      "Nades",
-      "Explosionen",
-      "Feuerbälle",
-      "Muscheln",
-      "Ananas",
-      "Großes Bangs",
-      "Großes Booms",
-      "Jag Es Hoch! Munition"
-    ],
-    "INV_ITEM_MEDI": [
-      "Winziges Medipack",
-      "Klitzekleines Medipack",
-      "Kleines Medipack",
-      "Kompaktes Medipack",
-      "Schmuckes Medipack",
-      "Kleiner BooBoo Helfer"
-    ],
-    "INV_ITEM_BIG_MEDI": [
-      "Gigantisches Medipack",
-      "Riesiges Medipack",
-      "Titanisches Medipack",
-      "Massives Medipack",
-      "Riihiiieesiges Medipack",
-      "Großer BooBoo Helfer"
-    ],
     "HEADING_ITEMS": [
       "Dinger",
       "Irgendwas",
@@ -151,18 +18,153 @@
       "RAGE QUIT!",
       "NLNMAS Wann?"
     ],
-    "INV_ITEM_COMPASS": [
-      "Stats",
-      "Lebenszeichen",
-      "Nummern Knirschen",
-      "KEINE MEDS ERLAUBT",
-      "Geheimnis Tracker"
-    ],
     "MISC_EMPTY_SLOT_FMT": [
       "- NULL -",
       "- NICHTS -",
       "- NICHT DEFINIERT -",
       "- NUTZE DIESEN SLOT -"
+    ]
+  },
+  "ObjectStrings": {
+    "flare": [
+      "Wunderkerze",
+      "Feuerzeug",
+      "Blender",
+      "Flackerer",
+      "Kleines Funkeln"
+    ],
+    "pistols": [
+      "Erbsenkanone",
+      "Handwaffen",
+      "Alte Treue",
+      "Pew-Pews",
+      "Nimm Zwei"
+    ],
+    "pistols_ammo": [
+      "Erbsenkanone Munition",
+      "Handwaffen Munition",
+      "Alte Treue Clips",
+      "Pew-Pew Clips",
+      "Nimm Zwei Clips"
+    ],
+    "shotgun": [
+      "Schrotty",
+      "Muskete",
+      "Alte Treue",
+      "Bist du noch da?",
+      "Gutbuster"
+    ],
+    "shotgun_ammo": [
+      "Schrotty Munition",
+      "Muskete Munition",
+      "Alte Treue Munition",
+      "Bist Du Noch Da? Ammo",
+      "Gutbuster Ammo"
+    ],
+    "magnums": [
+      "Autos",
+      "Magnums",
+      "Super Pistolen",
+      "Pierre Hat Das Verloren",
+      "Gibs Pierre Zurück"
+    ],
+    "magnums_ammo": [
+      "Auto Munition",
+      "Magnum Munition",
+      "Super Pistolen Clips",
+      "Pierres Verlorene Clips",
+      "Gibs Pierre Zurück Clips"
+    ],
+    "uzis": [
+      "UwUzi",
+      "Drrrrrrrrrr",
+      "IchBinStärker Waffen",
+      "Munitionsvampir",
+      "1000 Schüsse Später..."
+    ],
+    "uzis_ammo": [
+      "UwUzi Munition",
+      "Drrrrrrrrrr Clips",
+      "IchBinStärker Munition",
+      "Munitionsvampir Munition",
+      "1000 Schüsse Später, Munition"
+    ],
+    "harpoon_gun": [
+      "Tick-tick-tick",
+      "Geduld",
+      "Pfeilwerfer",
+      "Nutzlos",
+      "Zwecklos",
+      "Warum?",
+      "Nein!",
+      "Zahnstocher Werfer",
+      "Speerwerfer"
+    ],
+    "harpoon_gun_ammo": [
+      "Tick-tick-ticks",
+      "Geduld Pfeile",
+      "Pfeile",
+      "Nutzlos Pfeile",
+      "Zwecklos Pfeile",
+      "Warum Pfeile?",
+      "Nein, Pfeile!",
+      "Zahnstocher",
+      "Speere"
+    ],
+    "m16": [
+      "MP3 Player",
+      "MPEG",
+      "Nicht die MP5",
+      "Big Drrrrrrrrrr"
+    ],
+    "m16_ammo": [
+      "MP3 Munition",
+      "MPEG Munition",
+      "Nicht die MP5 Munition",
+      "Big Drrrrrrrrrr Munition"
+    ],
+    "grenade_launcher": [
+      "Nade Blaster",
+      "Explosions Überbringer",
+      "Gegner Verbrenner",
+      "Muschel Werfer",
+      "Ananas Versand",
+      "Großes Bang",
+      "Großes Boom",
+      "Jag Es Hoch!"
+    ],
+    "grenade_launcher_ammo": [
+      "Nades",
+      "Explosionen",
+      "Feuerbälle",
+      "Muscheln",
+      "Ananas",
+      "Großes Bangs",
+      "Großes Booms",
+      "Jag Es Hoch! Munition"
+    ],
+    "small_medipack": [
+      "Winziges Medipack",
+      "Klitzekleines Medipack",
+      "Kleines Medipack",
+      "Kompaktes Medipack",
+      "Schmuckes Medipack",
+      "Kleiner BooBoo Helfer"
+    ],
+    "large_medipack": [
+      "Gigantisches Medipack",
+      "Riesiges Medipack",
+      "Titanisches Medipack",
+      "Massives Medipack",
+      "Riihiiieesiges Medipack",
+      "Großer BooBoo Helfer"
+    ],
+    "compass": [
+      "Stats",
+      "Lebenszeichen",
+      "Nummern Knirschen",
+      "KEINE MEDS ERLAUBT",
+      "Geheimnis Tracker"
     ]
   },
   "LevelStrings": {

@@ -1,4 +1,5 @@
 ﻿using TRGE.Core;
+using TRGE.Core.Item.Enums;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Globalisation;
@@ -24,6 +25,8 @@ public class TR2GameStringRandomizer : BaseTR2Randomizer
             script.BaseStrings[key.ToString()] = value;
         }
 
+        script.ObjectStrings[(int)TR2Items.LaraHomePhoto_M_H].Name = script.AssaultLevel.Name;
+
         if (Settings.ReassignPuzzleItems)
         {
             // This is specific to the Dagger of Xian if it appears in other levels with the dragon. We'll just
@@ -46,7 +49,7 @@ public class TR2GameStringRandomizer : BaseTR2Randomizer
             return;
         }
 
-        if (level.Puzzles[currentIndex] != "P" + (currentIndex + 1))
+        if (level.Puzzles[currentIndex].Length > 0)
         {
             level.Puzzles[newIndex] = level.Puzzles[currentIndex];
         }
