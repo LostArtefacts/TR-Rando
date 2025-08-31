@@ -168,7 +168,7 @@ public class TR1ClassicEditor : TR1LevelEditor, ISettingsProvider
         if (!monitor.IsCancelled)
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Validating data injections");
-            new TR1InjectionProcessor
+            new TR1XPreProcessor
             {
                 ScriptEditor = scriptEditor,
                 Levels = levels,

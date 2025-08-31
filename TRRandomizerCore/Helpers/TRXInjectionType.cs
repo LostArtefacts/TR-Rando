@@ -1,6 +1,6 @@
 ﻿namespace TRRandomizerCore.Helpers;
 
-public enum TR1XInjectionType
+public enum TRXInjectionType
 {
     General,
     Braid,
