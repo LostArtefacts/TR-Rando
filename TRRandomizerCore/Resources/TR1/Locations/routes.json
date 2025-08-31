@@ -4815,7 +4815,7 @@
       "Y": 1216,
       "Z": 15872,
       "Room": 2,
-      "KeyItemsLow": "19217,19193",
+      "KeyItemsLow": "19217",
       "Range": "Large"
     },
     {
@@ -5090,6 +5090,14 @@
       "Room": 52,
       "KeyItemsLow": "19193",
       "Range": "Medium"
+    },
+    {
+      "X": 56064,
+      "Y": 1024,
+      "Z": 25088,
+      "Room": 52,
+      "KeyItemsLow": "19193",
+      "Range": "Large"
     },
     {
       "X": 56832,
