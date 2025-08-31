@@ -184,4 +184,36 @@ public class TR2AudioAllocator : AudioAllocator
             }
         }
     }
+
+    public static void FixMusicTracks(TR2Level level)
+    {
+        foreach (var sector in level.Rooms.SelectMany(r => r.Sectors.Where(s => s.FDIndex != 0)))
+        {
+            var trigger = level.FloorData[sector.FDIndex]
+                .OfType<FDTriggerEntry>()
+                .FirstOrDefault();
+            trigger?.Actions.FindAll(a => a.Action == FDTrigAction.PlaySoundtrack)
+                .ForEach(a => a.Parameter = GetRealTrack(a.Parameter));
+        }
+    }
+
+    public static short GetRealTrack(short trackID)
+    {
+        short[] skippedIDs = { 2, 19, 20, 26, -1 };
+        short idx = 0;
+        short result = 2;
+
+        for (int i = 2; i < trackID; i++)
+        {
+            if ((skippedIDs[idx] >= 0) && (i == skippedIDs[idx]))
+            {
+                idx++;
+            }
+            else
+            {
+                result++;
+            }
+        }
+        return result;
+    }
 }
