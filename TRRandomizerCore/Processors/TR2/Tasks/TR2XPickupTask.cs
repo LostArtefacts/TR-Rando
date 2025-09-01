@@ -10,6 +10,8 @@ public class TR2XPickupTask : ITR2ProcessorTask
     private static readonly PickupInfo _info =
         JsonUtils.ReadFile<PickupInfo>("Resources/TR2/pickup_info.json");
 
+    public bool ReassignPuzzleItems { get; set; }
+
     public void Run(TR2CombinedLevel level)
     {
         var typeTargets = _info.LevelTargets.TryGetValue(level.Name, out var levelTypes)
@@ -20,6 +22,34 @@ public class TR2XPickupTask : ITR2ProcessorTask
             ScalePickup(type, level.Data.Models[type], factor);
             FixPickup(type, level.Data.Models[type], level.Name);
         }
+
+        AlterPuzzles(level);
+    }
+
+    private void AlterPuzzles(TR2CombinedLevel level)
+    {
+        if (level.Is(TR2LevelNames.LAIR) || !ReassignPuzzleItems)
+        {
+            return;
+        }
+
+        // P2 items are converted to P3 in case the dragon is present to ensure the dagger can be safely imported.
+        // OG P2 key items must be zoned based on being P3.
+        foreach (var (oldType, newType) in new Dictionary<TR2Type, TR2Type>
+        {
+            [TR2Type.Puzzle2_M_H] = TR2Type.Puzzle3_M_H,
+            [TR2Type.PuzzleHole2] = TR2Type.PuzzleHole3,
+            [TR2Type.PuzzleDone2] = TR2Type.PuzzleDone3,
+        })
+        {
+            level.Data.Models.ChangeKey(oldType, newType);
+            level.Data.Entities.FindAll(e => e.TypeID == oldType)
+                .ForEach(e => e.TypeID = newType);
+        }
+
+        level.Data.Sprites.ChangeKey(TR2Type.Puzzle2_S_P, TR2Type.Puzzle3_S_P);
+        level.Data.Entities.FindAll(e => e.TypeID == TR2Type.Puzzle2_S_P)
+                .ForEach(e => e.TypeID = TR2Type.Puzzle3_S_P);
     }
 
     public static void ScalePickup(TR2Type type, TRModel model, float factor)
