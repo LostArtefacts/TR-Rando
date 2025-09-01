@@ -6,6 +6,7 @@ using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
+using TRRandomizerCore.Processors.TR2.Tasks;
 using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Randomizers;
@@ -247,10 +248,14 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
 
             List<TR2Type> laraImport = new();
             List<TR2Type> laraRemovals = new();
-            if (lara != TR2TypeUtilities.GetAliasForLevel(level.Name, TR2Type.Lara))
+            var defaultAlias = TR2TypeUtilities.GetAliasForLevel(level.Name, TR2Type.Lara);
+            if (lara != defaultAlias)
             {
                 laraImport.Add(lara);
                 laraRemovals.AddRange(_laraRemovals);
+                var monitor = _outer.TextureMonitor.GetMonitor(level.Name);
+                monitor?.PreparedLevelMapping.Keys.Where(s => s.EntityTextureMap.ContainsKey(defaultAlias))
+                    .ToList().ForEach(s => monitor.PreparedLevelMapping.Remove(s));
             }
             
             TR2DataImporter importer = new(isCommunityPatch: true)
@@ -370,6 +375,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // its textures will have been removed.
                 TRModel laraMiscModel = level.Data.Models[TR2Type.LaraMiscAnim_H];
                 laraModel.Meshes[0].CopyInto(laraMiscModel.Meshes[0]);
+                TR2XFixLaraTask.FixHSHHands(level.Data);
             }
 
             if (_outer.Settings.RemoveRobeDagger)
@@ -384,13 +390,9 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 {
                     if (lara == TR2Type.LaraHome)
                     {
-                        MeshEditor editor = new()
-                        {
-                            Mesh = laraModel.Meshes[0]
-                        };
-
-                        editor.RemoveTexturedRectangleRange(9, 43);
-                        editor.RemoveTexturedTriangleRange(18, 38);
+                        var mesh = laraModel.Meshes[0];
+                        mesh.TexturedRectangles.RemoveAll(f => f.Vertices.All(v => v > 19));
+                        mesh.TexturedTriangles.RemoveAll(f => f.Vertices.All(v => v > 19));
                     }
 
                     // If it's HSH, go one step further and remove the model itself, so Lara is imagining what the dagger
@@ -399,21 +401,15 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                     {
                         // This removes it from the starting cutscene - mesh 10 is Lara's hand holding the dagger,
                         // so we basically just retain the hand.
-                        MeshEditor editor = new()
-                        {
-                            Mesh = level.Data.Models[TR2Type.LaraMiscAnim_H].Meshes[10]
-                        };
-
-                        editor.RemoveTexturedRectangleRange(6, 20);
-                        editor.ClearTexturedTriangles();
+                        level.Data.Models[TR2Type.LaraMiscAnim_H].Meshes[10] = level.Data.Models[TR2Type.Lara].Meshes[10].Clone();
 
                         // And hide it from the inventory
-                        foreach (TRMesh mesh in level.Data.Models[TR2Type.Puzzle1_M_H].Meshes)
-                        {
-                            editor.Mesh = mesh;
-                            editor.ClearTexturedRectangles();
-                            editor.ClearTexturedTriangles();
-                        }
+                        level.Data.Models[TR2Type.Puzzle1_M_H].Meshes
+                            .ForEach(m =>
+                            {
+                                m.TexturedRectangles.Clear();
+                                m.TexturedTriangles.Clear();
+                            });
                     }
                 }
             }

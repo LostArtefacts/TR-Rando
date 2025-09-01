@@ -422,15 +422,6 @@
       }
     ],
 
-    "Lara.Bobble": [
-      {
-        "Segment": 0,
-        "Tile": 11,
-        "X": 56,
-        "Y": 176
-      }
-    ],
-
     "Lara.Braid": [
       {
         "Segment": 0,
