@@ -448,6 +448,20 @@ public static class TR2TypeUtilities
         };
     }
 
+    public static List<TR2Type> GetGunModels()
+    {
+        return
+        [
+            TR2Type.Pistols_M_H,
+            TR2Type.Shotgun_M_H,
+            TR2Type.Autos_M_H,
+            TR2Type.Uzi_M_H,
+            TR2Type.Harpoon_M_H,
+            TR2Type.M16_M_H,
+            TR2Type.GrenadeLauncher_M_H,
+        ];
+    }
+
     public static bool IsGunType(TR2Type type)
     {
         return (type == TR2Type.Shotgun_S_P ||

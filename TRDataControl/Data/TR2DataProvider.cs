@@ -124,7 +124,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
     private static readonly Dictionary<TR2Type, List<TR2Type>> _typeDependencies = new()
     {
         [TR2Type.Autos_M_H] =
-            new() { TR2Type.LaraAutoAnim_H, TR2Type.Gunflare_H, TR2Type.Automags_S_P, TR2Type.AutoAmmo_M_H, TR2Type.AutoAmmo_S_P },
+            new() { TR2Type.Gunflare_H, TR2Type.Automags_S_P, TR2Type.AutoAmmo_M_H, TR2Type.AutoAmmo_S_P },
         [TR2Type.Boat] =
             new() { TR2Type.LaraBoatAnim_H, TR2Type.BoatWake_S_H, TR2Type.BoatBits },
         [TR2Type.BlackSnowmob] =
@@ -167,7 +167,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         [TR2Type.MercSnowmobDriver] =
             new() { TR2Type.BlackSnowmob },
         [TR2Type.Pistols_M_H] =
-            new() { TR2Type.LaraPistolAnim_H, TR2Type.Gunflare_H, TR2Type.Pistols_S_P },
+            new() { TR2Type.Gunflare_H, TR2Type.Pistols_S_P },
         [TR2Type.RedSnowmobile] =
             new() { TR2Type.SnowmobileBelt, TR2Type.LaraSnowmobAnim_H, TR2Type.SnowmobileWake_S_H },
         [TR2Type.Shotgun_M_H] =
@@ -181,7 +181,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         [TR2Type.TRex] =
             new() { TR2Type.LaraMiscAnim_H_Wall },
         [TR2Type.Uzi_M_H] =
-            new() { TR2Type.LaraUziAnim_H, TR2Type.Gunflare_H, TR2Type.Uzi_S_P, TR2Type.UziAmmo_M_H, TR2Type.Uzi_S_P },
+            new() { TR2Type.Gunflare_H, TR2Type.Uzi_S_P, TR2Type.UziAmmo_M_H, TR2Type.UziAmmo_S_P },
         [TR2Type.WaterfallMist_N]
             = new() { TR2Type.WaterRipples_S_H },
         [TR2Type.XianGuardSpear] =
