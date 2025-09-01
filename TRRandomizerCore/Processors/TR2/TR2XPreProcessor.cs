@@ -17,6 +17,7 @@ public class TR2XPreProcessor : TR2LevelProcessor
         {
             new TR2XDeduplicationTask(),
             new TR2XDataTask() { TextureMonitor = TextureMonitor },
+            new TR2XFixLaraTask() { TextureMonitor = TextureMonitor },
         };
 
         var commonProcessor = new TRXCommonProcessor(ScriptEditor, _minTR2XVersion);
