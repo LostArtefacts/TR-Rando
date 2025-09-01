@@ -1,6 +1,7 @@
 ﻿using TRDataControl;
 using TRLevelControl.Model;
 using TRRandomizerCore.Levels;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Processors.TR2.Tasks;
 
@@ -11,13 +12,15 @@ public class TR2XDataTask : ITR2ProcessorTask
         TR2Type.Map_M_U, TR2Type.FontGraphics_S_H,
     ];
 
+    public required TR2TextureMonitorBroker TextureMonitor { get; set; }
+
     public void Run(TR2CombinedLevel level)
     {
         ImportData(level);
         FixCutsceneSFX(level);
     }
 
-    private static void ImportData(TR2CombinedLevel level)
+    private void ImportData(TR2CombinedLevel level)
     {
         level.Data.Models.RemoveAll(_injectReplaceTypes.Contains);
         level.Data.Sprites.RemoveAll(_injectReplaceTypes.Contains);
@@ -28,6 +31,14 @@ public class TR2XDataTask : ITR2ProcessorTask
             Level = level.Data,
             TypesToImport = [.. _injectReplaceTypes],
         };
+
+        if (level.Data.Models.Remove(TR2Type.Boat))
+        {
+            // Replace the boat and add the restored exploding mesh bits to allow targeting textures
+            // during randomization.
+            importer.TypesToImport.Add(TR2Type.Boat);
+            importer.TextureMonitor = TextureMonitor.CreateMonitor(level.Name, [TR2Type.Boat]);
+        }
 
         importer.Import();
     }

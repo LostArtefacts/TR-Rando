@@ -204,6 +204,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
                 SaveMonitor = monitor,
+                TextureMonitor = textureMonitor,
             }.Run();
         }
 
