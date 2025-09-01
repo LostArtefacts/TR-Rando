@@ -156,7 +156,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             {
                 TR2Type.DragonExplosionEmitter_N, TR2Type.DragonExplosion1_H, TR2Type.DragonExplosion2_H, TR2Type.DragonExplosion3_H,
                 TR2Type.DragonFront_H, TR2Type.DragonBack_H, TR2Type.DragonBonesFront_H, TR2Type.DragonBonesBack_H, TR2Type.LaraMiscAnim_H_Xian,
-                TR2Type.Puzzle2_M_H_Dagger, TR2Type.Flame_S_H
+                TR2Type.Puzzle2_M_H_Dagger, TR2Type.Puzzle2_S_P, TR2Type.Flame_S_H
             },
         [TR2Type.MaskedGoon2] =
             new() { TR2Type.MaskedGoon1 },
