@@ -692,14 +692,6 @@ public class EMMirrorFunction : BaseEMFunction
                     entity.Z += TRConsts.Step4;
                 }
                 break;
-
-            case TR2Type.MarcoBartoli:
-                // InitialiseBartoli in Dragon.c always shifts Bartoli as follows,
-                // so we need to move him 512 in the +X to avoid him ending up either
-                // OOB or in mid-air.
-                // item->pos.x_pos -= STEP_L*2;
-                entity.X += TRConsts.Step2;
-                break;
         }
     }
 

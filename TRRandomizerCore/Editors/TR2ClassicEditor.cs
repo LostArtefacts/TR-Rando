@@ -107,9 +107,6 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
         // Environment randomizer always runs
         target += numLevels * 2;
 
-        // Enemy adjuster always runs
-        target += numLevels;
-
         return target;
     }
 
@@ -164,22 +161,6 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
         };
         environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed);
 
-        // Texture monitoring is needed between enemy and texture randomization
-        // to track where imported enemies are placed.
-        if (!monitor.IsCancelled)
-        {
-            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting enemy entities");
-            new TR2EnemyAdjuster
-            {
-                ScriptEditor = scriptEditor,
-                Levels = levels,
-                BasePath = wipDirectory,
-                BackupPath = backupDirectory,
-                SaveMonitor = monitor,
-                ItemFactory = itemFactory,
-            }.AdjustEnemies();
-        }
-
         if (!monitor.IsCancelled && (Settings.RandomizeGameStrings || Settings.ReassignPuzzleItems))
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting game strings");
@@ -205,6 +186,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 BackupPath = backupDirectory,
                 SaveMonitor = monitor,
                 TextureMonitor = textureMonitor,
+                ItemFactory = itemFactory,
             }.Run();
         }
 
