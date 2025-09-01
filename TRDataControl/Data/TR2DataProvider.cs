@@ -126,7 +126,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         [TR2Type.Autos_M_H] =
             new() { TR2Type.LaraAutoAnim_H, TR2Type.Gunflare_H, TR2Type.Automags_S_P, TR2Type.AutoAmmo_M_H, TR2Type.AutoAmmo_S_P },
         [TR2Type.Boat] =
-            new() { TR2Type.LaraBoatAnim_H, TR2Type.BoatWake_S_H },
+            new() { TR2Type.LaraBoatAnim_H, TR2Type.BoatWake_S_H, TR2Type.BoatBits },
         [TR2Type.BlackSnowmob] =
             new() { TR2Type.RedSnowmobile },
         [TR2Type.FlamethrowerGoon]
