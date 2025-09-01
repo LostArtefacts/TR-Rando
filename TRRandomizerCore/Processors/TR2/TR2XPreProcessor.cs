@@ -12,6 +12,7 @@ public class TR2XPreProcessor : TR2LevelProcessor
     {
         var tasks = new List<ITR2ProcessorTask>
         {
+            new TR2XDeduplicationTask(),
             new TR2XDataTask(),
         };
 

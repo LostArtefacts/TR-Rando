@@ -79,8 +79,6 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 
         // TRX pre-processing
         target += numLevels;
-        // Deduplication (TODO: merge into pre-processing)
-        target += numLevels * 2;
 
         if (Settings.ReassignPuzzleItems)
         {
@@ -207,20 +205,6 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 BackupPath = backupDirectory,
                 SaveMonitor = monitor,
             }.Run();
-        }
-
-        if (!monitor.IsCancelled)
-        {
-            // Deduplication is required so any further mods can reliably set texture data
-            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Deduplicating textures");
-            new TR2TextureDeduplicator
-            {
-                ScriptEditor = scriptEditor,
-                Levels = levels,
-                BasePath = wipDirectory,
-                BackupPath = backupDirectory,
-                SaveMonitor = monitor
-            }.Deduplicate();
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeSecrets)
