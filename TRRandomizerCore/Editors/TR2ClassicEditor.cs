@@ -80,12 +80,6 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
         // TRX pre-processing
         target += numLevels;
 
-        if (Settings.ReassignPuzzleItems)
-        {
-            // For TR2ModelAdjuster
-            target += numLevels;
-        }
-
         if (Settings.RandomizeEnemies)
         {
             // 3 for multithreading cross-level work
@@ -187,6 +181,7 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 SaveMonitor = monitor,
                 TextureMonitor = textureMonitor,
                 ItemFactory = itemFactory,
+                Settings = Settings,
             }.Run();
         }
 
@@ -204,21 +199,6 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
                 Mirrorer = environmentRandomizer,
                 ItemFactory = itemFactory,
             }.Randomize(Settings.SecretSeed);
-        }
-
-        if (!monitor.IsCancelled && Settings.ReassignPuzzleItems)
-        {
-            // P2 items are converted to P3 in case the dragon is present as the dagger type is hardcoded.
-            // Must take place before enemy randomization. OG P2 key items must be zoned based on being P3.
-            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting level models");
-            new TR2ModelAdjuster
-            {
-                ScriptEditor = scriptEditor,
-                Levels = levels,
-                BasePath = wipDirectory,
-                BackupPath = backupDirectory,
-                SaveMonitor = monitor
-            }.AdjustModels();
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeItems)
