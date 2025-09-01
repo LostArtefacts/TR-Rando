@@ -1,0 +1,91 @@
+{
+  "DefaultTargets": {
+    "AutoAmmo_M_H": 1.4,
+    "M16Ammo_M_H": 1.4,
+    "Grenades_M_H": 1.4,
+    "SmallMed_M_H": 1.0,
+    "LargeMed_M_H": 1.0
+  },
+  "LevelTargets": {
+    "RIG.TR2": {
+      "Key1_M_H": 0.65,
+      "Key2_M_H": 0.65,
+      "Key3_M_H": 0.65
+    },
+    "PLATFORM.TR2": {
+      "Key1_M_H": 0.65,
+      "Key4_M_H": 0.65
+    },
+    "KEEL.TR2": {
+      "Puzzle1_M_H": 0.75,
+      "Key1_M_H": 1.75
+    },
+    "LIVING.TR2": {
+      "Key1_M_H": 1.75
+    },
+    "DECK.TR2": {
+      "Key4_M_H": 1.75
+    },
+    "SKIDOO.TR2": {
+      "Key1_M_H": 1.25,
+      "Key2_M_H": 1.25
+    },
+    "MONASTRY.TR2": {
+      "Puzzle1_M_H": 0.5,
+      "Puzzle2_M_H": 2.6,
+      "Key3_M_H": 1.75
+    },
+    "EMPRTOMB.TR2": {
+      "Puzzle1_M_H": 1.8
+    },
+    "FLOATING.TR2": {
+      "Puzzle1_M_H": 1.0,
+      "Puzzle2_M_H": 1.0
+    },
+    "LEVEL2.TR2": {
+      "Key1_M_H": 0.65,
+      "Key4_M_H": 0.65
+    },
+    "LEVEL3.TR2": {
+      "Puzzle2_M_H": 2.6
+    }
+  },
+  "FrameInfo": {
+    "AutoAmmo_M_H": {
+      "Bounds": {
+        "MinX": -56,
+        "MaxX": 57,
+        "MinY": -35,
+        "MaxY": 33,
+        "MinZ": -40,
+        "MaxZ": 43
+      },
+      "OffsetX": -26,
+      "OffsetZ": -3
+    },
+    "M16Ammo_M_H": {
+      "Bounds": {
+        "MinX": -57,
+        "MaxX": 50,
+        "MinY": -29,
+        "MaxY": 8,
+        "MinZ": -50,
+        "MaxZ": 50
+      },
+      "OffsetX": 22
+    },
+    "Grenades_M_H": {
+      "Bounds": {
+        "MinX": -60,
+        "MaxX": 60,
+        "MinY": -37,
+        "MaxY": 38,
+        "MinZ": -19,
+        "MaxZ": 22
+      },
+      "OffsetX": 32,
+      "OffsetY": 17,
+      "OffsetZ": -18
+    }
+  }
+}
