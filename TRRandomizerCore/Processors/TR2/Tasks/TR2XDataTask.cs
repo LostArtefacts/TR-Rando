@@ -44,6 +44,10 @@ public class TR2XDataTask : ITR2ProcessorTask
         {
             importer.TypesToImport.Add(TR2Type.Pistols_S_P);
             importer.TypesToImport.AddRange(TR2TypeUtilities.GetGunTypes());
+            if (level.Is(TR2LevelNames.LAIR))
+            {
+                importer.TypesToImport.Add(TR2Type.Puzzle2_S_P);
+            }
         }
         else if (level.IsAssault || level.Is(TR2LevelNames.HOME))
         {
