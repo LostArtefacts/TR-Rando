@@ -1,22 +1,19 @@
-﻿using TRDataControl;
-using TRLevelControl.Helpers;
-using TRLevelControl.Model;
-using TRRandomizerCore.Levels;
-using TRRandomizerCore.Processors.Shared;
+﻿using TRRandomizerCore.Processors.Shared;
+using TRRandomizerCore.Processors.TR2;
+using TRRandomizerCore.Processors.TR2.Tasks;
 
 namespace TRRandomizerCore.Processors;
 
 public class TR2XPreProcessor : TR2LevelProcessor
 {
     private static readonly Version _minTR2XVersion = new(1, 4);
-    private static readonly List<TR2Type> _injectReplaceTypes =
-    [
-        TR2Type.Map_M_U, TR2Type.FontGraphics_S_H,
-    ];
 
     public void Run()
     {
-        var photoSfx = LoadLevelData(TR2LevelNames.GW).SoundEffects[TR2SFX.MenuLaraHome];
+        var tasks = new List<ITR2ProcessorTask>
+        {
+            new TR2XDataTask(),
+        };
 
         var commonProcessor = new TRXCommonProcessor(ScriptEditor, _minTR2XVersion);
         commonProcessor.AdjustScript();
@@ -26,11 +23,14 @@ public class TR2XPreProcessor : TR2LevelProcessor
             commonProcessor.AdjustInjections(scriptedLevel);
 
             var level = LoadCombinedLevel(scriptedLevel);
-            ImportData(level, photoSfx);
-            if (level.HasCutScene)
+            tasks.ForEach(t =>
             {
-                ImportData(level, photoSfx);
-            }
+                t.Run(level);
+                if (level.HasCutScene)
+                {
+                    t.Run(level.CutSceneLevel);
+                }
+            });
 
             SaveLevel(level);
             if (!TriggerProgress())
@@ -40,25 +40,5 @@ public class TR2XPreProcessor : TR2LevelProcessor
         });
 
         SaveScript();
-    }
-
-    private static void ImportData(TR2CombinedLevel level, TR2SoundEffect photoSfx)
-    {
-        level.Data.Models.RemoveAll(_injectReplaceTypes.Contains);
-        level.Data.Sprites.RemoveAll(_injectReplaceTypes.Contains);
-
-        var importer = new TR2DataImporter(isCommunityPatch: true)
-        {
-            DataFolder = "Resources/TR2/Objects",
-            Level = level.Data,
-            TypesToImport = [.. _injectReplaceTypes],
-        };
-
-        importer.Import();
-
-        if (photoSfx != null)
-        {
-            level.Data.SoundEffects[TR2SFX.MenuLaraHome] = photoSfx;
-        }
     }
 }
