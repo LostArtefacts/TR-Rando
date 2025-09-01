@@ -1,4 +1,5 @@
 ﻿using TRDataControl;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
@@ -38,6 +39,25 @@ public class TR2XDataTask : ITR2ProcessorTask
             // during randomization.
             importer.TypesToImport.Add(TR2Type.Boat);
             importer.TextureMonitor = TextureMonitor.CreateMonitor(level.Name, [TR2Type.Boat]);
+        }
+        else if (level.Is(TR2LevelNames.FLOATER) || level.Is(TR2LevelNames.LAIR))
+        {
+            importer.TypesToImport.Add(TR2Type.Pistols_S_P);
+            importer.TypesToImport.AddRange(TR2TypeUtilities.GetGunTypes());
+        }
+        else if (level.IsAssault || level.Is(TR2LevelNames.HOME))
+        {
+            var guns = TR2TypeUtilities.GetGunModels();
+            if (level.IsAssault)
+            {
+                level.Data.Models.Remove(TR2Type.LaraShotgunAnim_H);
+            }
+            else
+            {
+                guns.Remove(TR2Type.Shotgun_M_H);
+            }
+            level.Data.Models.RemoveAll(guns.Contains);
+            importer.TypesToImport.AddRange(guns);
         }
 
         importer.Import();
