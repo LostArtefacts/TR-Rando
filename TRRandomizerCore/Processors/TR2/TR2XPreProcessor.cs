@@ -1,4 +1,6 @@
-﻿using TRRandomizerCore.Processors.Shared;
+﻿using TRLevelControl.Model;
+using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Processors.Shared;
 using TRRandomizerCore.Processors.TR2;
 using TRRandomizerCore.Processors.TR2.Tasks;
 using TRRandomizerCore.Textures;
@@ -10,6 +12,7 @@ public class TR2XPreProcessor : TR2LevelProcessor
     private static readonly Version _minTR2XVersion = new(1, 4);
 
     public required TR2TextureMonitorBroker TextureMonitor { get; set; }
+    public required ItemFactory<TR2Entity> ItemFactory { get; set; }
 
     public void Run()
     {
@@ -18,6 +21,7 @@ public class TR2XPreProcessor : TR2LevelProcessor
             new TR2XDeduplicationTask(),
             new TR2XDataTask() { TextureMonitor = TextureMonitor },
             new TR2XFixLaraTask() { TextureMonitor = TextureMonitor },
+            new TR2XEnemyTask() { ItemFactory = ItemFactory },
         };
 
         var commonProcessor = new TRXCommonProcessor(ScriptEditor, _minTR2XVersion);
