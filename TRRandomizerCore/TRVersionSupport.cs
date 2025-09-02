@@ -117,7 +117,7 @@ internal class TRVersionSupport
         TRRandomizerType.ReturnPaths,
         TRRandomizerType.Secret,
         TRRandomizerType.SecretAudio,
-        //TRRandomizerType.SecretReward,
+        TRRandomizerType.SecretReward,
         TRRandomizerType.SecretTextures,
         TRRandomizerType.SFX,
         TRRandomizerType.ShortcutFixes,
