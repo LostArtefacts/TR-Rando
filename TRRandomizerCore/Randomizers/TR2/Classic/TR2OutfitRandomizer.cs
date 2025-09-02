@@ -1,6 +1,5 @@
 ﻿using TRDataControl;
 using TRGE.Core;
-using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -150,69 +149,47 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             TR2Type.LaraGrenadeAnim_H, TR2Type.LaraMiscAnim_H
         };
 
-        private readonly Dictionary<TR2CombinedLevel, List<TR2Type>> _outfitAllocations;
+        private readonly Dictionary<TR2CombinedLevel, TR2Type> _outfitAllocations;
 
         internal override int LevelCount => _outfitAllocations.Count;
 
         internal OutfitProcessor(TR2OutfitRandomizer outer)
             : base(outer)
         {
-            _outfitAllocations = new Dictionary<TR2CombinedLevel, List<TR2Type>>();
+            _outfitAllocations = [];
         }
 
         internal void AddLevel(TR2CombinedLevel level)
         {
-            _outfitAllocations.Add(level, new List<TR2Type>());
+            _outfitAllocations[level] = default;
         }
 
         protected override void StartImpl()
         {
             // Make the outfit selection outwith the processing thread to ensure consistent RNG.
-            // We select all potential Laras including the default for the level as there are
-            // only 5 to choose from (there is also Assault Course Lara, but when holstering pistols
-            // her trousers disappear, so she is excluded for the time being...).
-            List<TR2Type> allLaras = GetLaraTypes();
-            List<TR2CombinedLevel> levels = new(_outfitAllocations.Keys);
-
-            foreach (TR2CombinedLevel level in levels)
+            var allLaras = GetLaraTypes();
+            foreach (var level in _outfitAllocations.Keys.ToList())
             {
-                // If invisible is chosen for this level, this overrides persistent outfits
                 if (_outer.IsInvisibleLevel(level.Script))
                 {
-                    _outfitAllocations[level].Add(TR2Type.LaraInvisible);
+                    _outfitAllocations[level] = TR2Type.LaraInvisible;
+                }
+                else if (_outer.Settings.PersistOutfits)
+                {
+                    _outfitAllocations[level] = _outer._persistentOutfit;
                 }
                 else
                 {
-                    // Add the persistent outfit first, but we will populate the candidate
-                    // list regardless in case a level cannot support this choice.
-                    if (_outer.Settings.PersistOutfits)
-                    {
-                        _outfitAllocations[level].Add(_outer._persistentOutfit);
-                    }
-
-                    while (_outfitAllocations[level].Count < allLaras.Count)
-                    {
-                        TR2Type nextLara = allLaras[_outer._generator.Next(0, allLaras.Count)];
-                        if (!_outfitAllocations[level].Contains(nextLara))
-                        {
-                            _outfitAllocations[level].Add(nextLara);
-                        }
-                    }
+                    _outfitAllocations[level] = allLaras.RandomItem(_outer._generator);
                 }
             }
         }
 
         protected override void ProcessImpl()
         {
-            foreach (TR2CombinedLevel level in _outfitAllocations.Keys)
+            foreach (var (level, laraType) in _outfitAllocations)
             {
-                foreach (TR2Type lara in _outfitAllocations[level])
-                {
-                    if (Import(level, lara))
-                    {
-                        break;
-                    }
-                }
+                Import(level, laraType);
 
                 if (_outer.IsHaircutLevel(level.Script))
                 {
@@ -228,7 +205,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             }
         }
 
-        private bool Import(TR2CombinedLevel level, TR2Type lara)
+        private void Import(TR2CombinedLevel level, TR2Type lara)
         {
             TRModel laraModel = level.Data.Models[TR2Type.Lara];
             List<TRModel> laraClones = level.Data.Models
@@ -243,7 +220,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // No import needed, just clear each of Lara's meshes. A haircut is implied
                 // with this and we don't need to alter the outfit.
                 HideEntities(level, _invisibleLaraEntities);
-                return true;
+                return;
             }
 
             List<TR2Type> laraImport = new();
@@ -275,58 +252,44 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 importer.TextureRemapPath = remapPath;
             }
 
-            try
+            importer.Import();
+
+            if (lara == TR2TypeUtilities.GetAliasForLevel(level.Name, TR2Type.Lara))
             {
-                // Try to import the selected models into the level.
-                importer.Import();
+                // In case a previous attempt failed, we need to restore default texture mapping
+                _outer.TextureMonitor.GetMonitor(level.Name)?.RemovedTextures?.RemoveAll(t => t == TR2Type.Lara);
+            }
 
-                if (lara == TR2TypeUtilities.GetAliasForLevel(level.Name, TR2Type.Lara))
-                {
-                    // In case a previous attempt failed, we need to restore default texture mapping
-                    _outer.TextureMonitor.GetMonitor(level.Name)?.RemovedTextures?.RemoveAll(t => t == TR2Type.Lara);
-                }
+            if (level.IsCutScene)
+            {
+                // Restore original cutscene animations
+                level.Data.Models[TR2Type.Lara].Animations = laraModel.Animations;
+            }
 
-                if (level.IsCutScene)
+            // #314 Any clones of Lara should copy her new style
+            if (laraClones.Count > 0)
+            {
+                laraModel = level.Data.Models[TR2Type.Lara];
+                foreach (TRModel model in laraClones)
                 {
-                    // Restore original cutscene animations
-                    level.Data.Models[TR2Type.Lara].Animations = laraModel.Animations;
-                }
-
-                // #314 Any clones of Lara should copy her new style
-                if (laraClones.Count > 0)
-                {
-                    laraModel = level.Data.Models[TR2Type.Lara];
-                    foreach (TRModel model in laraClones)
+                    for (int i = 0; i < laraModel.Meshes.Count && i < model.Meshes.Count; i++)
                     {
-                        for (int i = 0; i < laraModel.Meshes.Count && i < model.Meshes.Count; i++)
+                        if (i < laraModel.MeshTrees.Count)
                         {
-                            if (i < laraModel.MeshTrees.Count)
-                            {
-                                model.MeshTrees[i] = laraModel.MeshTrees[i];
-                            }
-                            model.Meshes[i] = laraModel.Meshes[i];
+                            model.MeshTrees[i] = laraModel.MeshTrees[i];
                         }
+                        model.Meshes[i] = laraModel.Meshes[i];
                     }
                 }
-
-                // Apply any necessary tweaks to the outfit
-                AdjustOutfit(level, lara);
-
-                // Repeat the process if there is a cutscene after this level.
-                if (level.HasCutScene)
-                {
-                    Import(level.CutSceneLevel, lara);
-                }
-
-                return true;
             }
-            catch (PackingException)
+
+            // Apply any necessary tweaks to the outfit
+            AdjustOutfit(level, lara);
+
+            // Repeat the process if there is a cutscene after this level.
+            if (level.HasCutScene)
             {
-                // We need to reload the level to undo anything that may have changed.
-                _outer.ReloadLevelData(level);
-                // Tell the monitor to no longer track what we tried to import
-                _outer.TextureMonitor.ClearMonitor(level.Name, laraImport);
-                return false;
+                Import(level.CutSceneLevel, lara);
             }
         }
 
