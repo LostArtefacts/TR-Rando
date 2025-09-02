@@ -142,18 +142,10 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
     private void MakeChickensUnconditional(TR2Level level)
     {
-        if (!Settings.UnconditionalChickens)
+        if (Settings.UnconditionalChickens)
         {
-            return;
-        }
-
-        // #327 Trick the game into never reaching the final frame of the death animation.
-        // This results in a very abrupt death but avoids the level ending. For Ice Palace,
-        // environment modifications will be made to enforce an alternative ending.
-        TRAnimation birdDeathAnim = level.Models[TR2Type.BirdMonster]?.Animations[20];
-        if (birdDeathAnim != null)
-        {
-            birdDeathAnim.FrameEnd = -1;
+            level.Models[TR2Type.BirdMonster]?.Animations[20].Commands
+                .RemoveAll(c => c is TRFXCommand { EffectID: (short)TR2FX.EndLevel });
         }
     }
 

@@ -18,8 +18,22 @@ public class TR2XEnemyTask : ITR2ProcessorTask
 
     public void Run(TR2CombinedLevel level)
     {
+        AmendBirdMonster(level.Data);
         MoveBartoli(level.Data);
         RemoveEnemies(level);
+    }
+
+    private static void AmendBirdMonster(TR2Level level)
+    {
+        if (level.Models.TryGetValue(TR2Type.BirdMonster, out var birdMonster))
+        {
+            var endAnim = birdMonster.Animations[20];
+            endAnim.Commands.Add(new TRFXCommand
+            {
+                EffectID = (short)TR2FX.EndLevel,
+                FrameNumber = endAnim.FrameEnd,
+            });
+        }
     }
 
     private static void MoveBartoli(TR2Level level)

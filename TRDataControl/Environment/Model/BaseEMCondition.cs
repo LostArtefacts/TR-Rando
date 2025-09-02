@@ -3,7 +3,7 @@ using TRLevelControl.Model;
 
 namespace TRDataControl.Environment;
 
-public abstract class BaseEMCondition
+public abstract class BaseEMCondition : BaseEMObject
 {
     [JsonProperty(Order = -2)]
     public string Comments { get; set; }
