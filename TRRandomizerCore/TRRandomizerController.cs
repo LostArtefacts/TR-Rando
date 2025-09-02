@@ -218,42 +218,14 @@ public class TRRandomizerController
 
     public bool RandomizeSecretRewards
     {
-        get
-        {
-            if (ScriptEditor is ISecretRewardEditor rewardEditor)
-            {
-                return rewardEditor.SecretBonusOrganisation == Organisation.Random;
-            }
-            return LevelRandomizer.RandomizeSecretRewardsPhysical;
-        }
-        set
-        {
-            if (ScriptEditor is ISecretRewardEditor rewardEditor)
-            {
-                rewardEditor.SecretBonusOrganisation = value ? Organisation.Random : _extSecretRewardsOrganisation;
-            }
-            LevelRandomizer.RandomizeSecretRewardsPhysical = value;
-        }
+        get => LevelRandomizer.RandomizeSecretRewardsPhysical;
+        set => LevelRandomizer.RandomizeSecretRewardsPhysical = value;
     }
 
     public int SecretRewardSeed
     {
-        get
-        {
-            if (ScriptEditor is ISecretRewardEditor rewardEditor)
-            {
-                return rewardEditor.SecretBonusRNG.Value;
-            }
-            return LevelRandomizer.SecretRewardsPhysicalSeed;
-        }
-        set
-        {
-            if (ScriptEditor is ISecretRewardEditor rewardEditor)
-            {
-                rewardEditor.SecretBonusRNG = new RandomGenerator(value);
-            }
-            LevelRandomizer.SecretRewardsPhysicalSeed = value;
-        }
+        get => LevelRandomizer.SecretRewardsPhysicalSeed;
+        set => LevelRandomizer.SecretRewardsPhysicalSeed = value;
     }
 
     public bool RandomizeHealth

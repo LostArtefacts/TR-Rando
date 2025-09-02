@@ -58,6 +58,11 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             target += numLevels;
         }
 
+        if (Settings.RandomizeSecretRewardsPhysical)
+        {
+            target += numLevels;
+        }
+
         if (Settings.RandomizeAudio)
         {
             target += numLevels;
@@ -205,6 +210,20 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
             itemRandomizer.Randomize(Settings.ItemSeed);
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeSecretRewardsPhysical)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secret rewards");
+            new TR2SecretRewardRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings,
+            }.Randomize(Settings.SecretRewardsPhysicalSeed);
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeEnemies)
