@@ -6,7 +6,6 @@ public class EnemyTransportCollection<T>
     public List<T> TypesToImport { get; set; } = new();
     public List<T> TypesToRemove { get; set; } = new();
     public T BirdMonsterGuiser { get; set; }
-    public bool ImportResult { get; set; }
 }
 
 public class EnemyRandomizationCollection<T>

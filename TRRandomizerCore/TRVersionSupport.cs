@@ -97,7 +97,7 @@ internal class TRVersionSupport
         TRRandomizerType.DragonSpawn,
         TRRandomizerType.DynamicEnemyTextures,
         TRRandomizerType.DynamicTextures,
-        //TRRandomizerType.Enemy,
+        TRRandomizerType.Enemy,
         TRRandomizerType.Environment,
         TRRandomizerType.GeneralBugFixes,
         TRRandomizerType.GlitchedSecrets,

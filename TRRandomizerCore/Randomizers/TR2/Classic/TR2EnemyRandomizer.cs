@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TRDataControl;
-using TRImageControl.Packing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -307,9 +306,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
     internal class EnemyProcessor : AbstractProcessorThread<TR2EnemyRandomizer>
     {
-        private const int _maxPackingAttempts = 5;
-
-        private readonly Dictionary<TR2CombinedLevel, List<EnemyTransportCollection<TR2Type>>> _enemyMapping;
+        private readonly Dictionary<TR2CombinedLevel, EnemyTransportCollection<TR2Type>> _enemyMapping;
 
         internal override int LevelCount => _enemyMapping.Count;
 
@@ -326,14 +323,10 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         protected override void StartImpl()
         {
-            List<TR2CombinedLevel> levels = new(_enemyMapping.Keys);
-            foreach (TR2CombinedLevel level in levels)
+            foreach (var level in _enemyMapping.Keys.ToList())
             {
-                for (int i = 0; i < _maxPackingAttempts; i++)
-                {
-                    _enemyMapping[level].Add(_outer._allocator
-                        .SelectCrossLevelEnemies(level.Name, level.Data, i == _maxPackingAttempts - 1 ? 1 : 0));
-                }
+                _enemyMapping[level] = _outer._allocator
+                        .SelectCrossLevelEnemies(level.Name, level.Data);
             }
         }
 
@@ -343,15 +336,21 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             {
                 if (!level.IsAssault)
                 {
-                    for (int i = 0; i < _maxPackingAttempts; i++)
+                    var enemies = _enemyMapping[level];
+                    var importer = new TR2DataImporter(isCommunityPatch: true)
                     {
-                        EnemyTransportCollection<TR2Type> enemies = _enemyMapping[level][i];
-                        if (Import(level, enemies))
-                        {
-                            enemies.ImportResult = true;
-                            break;
-                        }
-                    }
+                        ClearUnusedSprites = true,
+                        TypesToImport = enemies.TypesToImport,
+                        TypesToRemove = enemies.TypesToRemove,
+                        Level = level.Data,
+                        LevelName = level.Name,
+                        DataFolder = _outer.GetResourcePath("TR2/Objects"),
+                        TextureRemapPath = _outer.GetResourcePath($"TR2/Textures/Deduplication/{level.JsonID}-TextureRemap.json"),
+                        TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport),
+                    };
+
+                    importer.Data.AliasPriority = TR2EnemyUtilities.GetAliasPriority(level.Name, enemies.TypesToImport);
+                    importer.Import();
                 }
 
                 if (!_outer.TriggerProgress())
@@ -361,77 +360,29 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             }
         }
 
-        private bool Import(TR2CombinedLevel level, EnemyTransportCollection<TR2Type> enemies)
-        {
-            try
-            {
-                TR2DataImporter importer = new(isCommunityPatch: true)
-                {
-                    ClearUnusedSprites = true,
-                    TypesToImport = enemies.TypesToImport,
-                    TypesToRemove = enemies.TypesToRemove,
-                    Level = level.Data,
-                    LevelName = level.Name,
-                    DataFolder = _outer.GetResourcePath("TR2/Objects"),
-                    TextureRemapPath = _outer.GetResourcePath($"TR2/Textures/Deduplication/{level.JsonID}-TextureRemap.json"),
-                    TextureMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.TypesToImport)
-                };
-
-                importer.Data.AliasPriority = TR2EnemyUtilities.GetAliasPriority(level.Name, enemies.TypesToImport);
-
-                importer.Import();
-                return true;
-            }
-            catch (PackingException)
-            {
-                // We need to reload the level to undo anything that may have changed.
-                _outer.ReloadLevelData(level);
-                _outer.TextureMonitor.ClearMonitor(level.Name, enemies.TypesToImport);
-                return false;
-            }
-        }
-
         internal void ApplyRandomization()
         {
             foreach (TR2CombinedLevel level in _enemyMapping.Keys)
             {
                 if (!level.IsAssault)
                 {
-                    EnemyTransportCollection<TR2Type> importedCollection = null;
-                    foreach (EnemyTransportCollection<TR2Type> enemies in _enemyMapping[level])
+                    var importedCollection = _enemyMapping[level];
+                    var enemies = new EnemyRandomizationCollection<TR2Type>
                     {
-                        if (enemies.ImportResult)
-                        {
-                            importedCollection = enemies;
-                            break;
-                        }
+                        Available = importedCollection.TypesToImport,
+                        Droppable = TR2TypeUtilities.FilterDroppableEnemies(importedCollection.TypesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.UnconditionalChickens),
+                        Water = TR2TypeUtilities.FilterWaterEnemies(importedCollection.TypesToImport),
+                        All = [.. importedCollection.TypesToImport],
+                    };
+
+                    if (_outer.Settings.DocileChickens && importedCollection.BirdMonsterGuiser != TR2Type.BirdMonster)
+                    {
+                        TR2EnemyAllocator.DisguiseType(level.Name, level.Data.Models, importedCollection.BirdMonsterGuiser, TR2Type.BirdMonster);
+                        enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
                     }
 
-                    if (importedCollection == null)
-                    {
-                        // Cross-level was not possible with the enemy combinations, so just go native.
-                        _outer.TextureMonitor.RemoveMonitor(level.Name);
-                        _outer.RandomizeEnemiesNatively(level);
-                    }
-                    else
-                    {
-                        EnemyRandomizationCollection<TR2Type> enemies = new()
-                        {
-                            Available = importedCollection.TypesToImport,
-                            Droppable = TR2TypeUtilities.FilterDroppableEnemies(importedCollection.TypesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.UnconditionalChickens),
-                            Water = TR2TypeUtilities.FilterWaterEnemies(importedCollection.TypesToImport),
-                            All = new(importedCollection.TypesToImport)
-                        };
-
-                        if (_outer.Settings.DocileChickens && importedCollection.BirdMonsterGuiser != TR2Type.BirdMonster)
-                        {
-                            TR2EnemyAllocator.DisguiseType(level.Name, level.Data.Models, importedCollection.BirdMonsterGuiser, TR2Type.BirdMonster);
-                            enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
-                        }
-
-                        _outer.RandomizeEnemies(level, enemies);
-                        _outer.SaveLevel(level);
-                    }
+                    _outer.RandomizeEnemies(level, enemies);
+                    _outer.SaveLevel(level);
                 }
 
                 if (!_outer.TriggerProgress())
