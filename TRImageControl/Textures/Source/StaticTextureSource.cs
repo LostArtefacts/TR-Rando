@@ -14,8 +14,9 @@ public class StaticTextureSource<E> : AbstractTextureSource
     public IEnumerable<E> ColourEntities => EntityColourMap?.Keys;
     public IEnumerable<E> TextureEntities => EntityTextureMap?.Keys;
     public Dictionary<string, List<Rectangle>> VariantMap { get; set; }
-    public override string[] Variants => VariantMap.Keys.ToArray();
-    public bool HasVariants => VariantMap.Count > 0;
+    public Dictionary<string, HSBOperation> DynamicMap { get; set; }
+    public override string[] Variants => VariantMap?.Keys.ToArray() ?? DynamicMap?.Keys.ToArray();
+    public bool HasVariants => VariantMap?.Count > 0 || DynamicMap?.Count > 0;
 
     private TRImage _image;
     public TRImage Image

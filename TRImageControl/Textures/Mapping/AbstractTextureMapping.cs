@@ -185,7 +185,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         RecolourDynamicTargets(target.ModelColourTargets, op);
     }
 
-    private void RedrawDynamicTargets(Dictionary<int, List<Rectangle>> targets, HSBOperation operation)
+    protected void RedrawDynamicTargets(Dictionary<int, List<Rectangle>> targets, HSBOperation operation)
     {
         foreach (int tileIndex in targets.Keys)
         {
@@ -256,7 +256,8 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         // For sprite sequence sources, the targets are mapped dynamically.
         if (source.IsSpriteSequence && (!StaticMapping.ContainsKey(source) || StaticMapping[source].Count == 0))
         {
-            GenerateSpriteSequenceTargets(source);
+            GenerateSpriteTargets(source, variant);
+            return;
         }
 
         // This can happen if we have a source grouped for this level, but the source is actually only
@@ -392,37 +393,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         }
     }
 
-    private void GenerateSpriteSequenceTargets(StaticTextureSource<E> source)
-    {
-        if (!source.HasVariants)
-        {
-            throw new ArgumentException(string.Format("SpriteSequence {0} cannot be dynamically mapped without at least one source rectangle.", source.SpriteSequence));
-        }
-
-        TRDictionary<E, TRSpriteSequence> spriteSequences = GetSpriteSequences();
-        TRSpriteSequence sequence = spriteSequences[source.SpriteSequence];
-        if (sequence == null)
-        {
-            return;
-        }
-
-        StaticMapping[source] = new();
-
-        // We only want to define targets for the number of source rectangles, rather
-        // than the total number of sprites.
-        int numTargets = source.VariantMap[source.Variants[0]].Count;
-        for (int j = 0; j < numTargets && j < sequence.Textures.Count; j++)
-        {
-            TRSpriteTexture sprite = sequence.Textures[j];
-            StaticMapping[source].Add(new()
-            {
-                Segment = j,
-                Tile = sprite.Atlas,
-                X = sprite.X,
-                Y = sprite.Y
-            });
-        }
-    }
+    protected virtual void GenerateSpriteTargets(StaticTextureSource<E> source, string variant) { }
 
     private TRImage GetImage(int tile)
     {

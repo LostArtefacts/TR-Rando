@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using TRImageControl.Packing;
 using TRLevelControl.Model;
 
 namespace TRImageControl.Textures;
@@ -57,5 +58,32 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Type, TR2Level>
     protected override void SetTile(int tileIndex, TRImage image)
     {
         _level.Images16[tileIndex].Pixels = image.ToRGB555();
+    }
+
+    protected override void GenerateSpriteTargets(StaticTextureSource<TR2Type> source, string variant)
+    {
+        // Temporary workaround until TR2 uses the same approach as TR1 for dynamic mapping.
+        // Only applies to font/UI frame.
+        var sprites = GetSpriteSequences();
+        if (!sprites.TryGetValue(source.SpriteSequence, out var sequence)
+            || source.DynamicMap == null || !source.DynamicMap.TryGetValue(variant, out var hsb))
+        {
+            return;
+        }
+
+        var target = new Dictionary<int, List<Rectangle>>();
+        var packer = new TR2TexturePacker(_level);
+
+        var regions = packer.GetSpriteRegions(sequence);
+        foreach (var tile in regions.Keys)
+        {
+            if (!target.TryGetValue(tile.Index, out var rects))
+            {
+                target[tile.Index] = rects = [];
+            }
+            rects.AddRange(regions[tile].Select(s => s.Bounds));
+        }
+        
+        RedrawDynamicTargets(target, hsb);
     }
 }

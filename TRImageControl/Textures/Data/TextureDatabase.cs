@@ -93,7 +93,7 @@ public class TextureDatabase<E>
         // PNG paths may be set within the data, but if not look for the file in the same folder.
         source.PNGPath ??= Path.Combine(dir, _staticPngFile);
 
-        if (!File.Exists(source.PNGPath))
+        if (!File.Exists(source.PNGPath) && source.DynamicMap == null)
         {
             throw new IOException(string.Format("Missing texture pack source PNG ({0})", source.PNGPath));
         }
