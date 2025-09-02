@@ -4,7 +4,7 @@ using TRLevelControl.Model;
 
 namespace TRDataControl.Environment;
 
-public abstract class BaseEMFunction
+public abstract class BaseEMFunction : BaseEMObject
 {
     [JsonProperty(Order = -2)]
     public string Comments { get; set; }
@@ -14,17 +14,9 @@ public abstract class BaseEMFunction
     public BaseEMFunction HardVariant { get; set; }
     public List<EMTag> Tags { get; set; }
 
-    protected bool _isCommunityPatch, _isRemastered;
-
     public abstract void ApplyToLevel(TR1Level level);
     public abstract void ApplyToLevel(TR2Level level);
     public abstract void ApplyToLevel(TR3Level level);
-
-    public void SetCommunityPatch(bool isCommunityPatch)
-        => _isCommunityPatch = isCommunityPatch;
-
-    public void SetRemastered(bool isRemasterd)
-        => _isRemastered = isRemasterd;
 
     /// <summary>
     /// Gets the expected vertices for a flat tile.

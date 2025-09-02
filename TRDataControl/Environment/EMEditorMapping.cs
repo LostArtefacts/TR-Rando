@@ -66,34 +66,40 @@ public class EMEditorMapping
     public void SetRemastered(bool isRemastered)
         => Scan(e => e.SetRemastered(isRemastered));
 
-    public List<BaseEMFunction> FindAll(Predicate<BaseEMFunction> predicate = null)
-    {
-        List<BaseEMFunction> results = new();
-        Scan(e =>
-        {
-            if (predicate == null || predicate(e))
-            {
-                results.Add(e);
-            }
-        });
-        return results;
-    }
-
-    public void Scan(Action<BaseEMFunction> callback)
+    public void Scan(Action<BaseEMObject> callback)
     {
         All?.ForEach(e => callback(e));
-        ConditionalAll?.ForEach(s => s.OnFalse?.ForEach(e => callback(e)));
-        ConditionalAll?.ForEach(s => s.OnTrue?.ForEach(e => callback(e)));
         Any?.ForEach(e => e.ForEach(a => callback(a)));
         AllWithin?.ForEach(a => a.ForEach(s => s.ForEach(e => callback(e))));
-        ConditionalAllWithin?.ForEach(s => s.OnFalse?.ForEach(a => a.ForEach(e => callback(e))));
-        ConditionalAllWithin?.ForEach(s => s.OnTrue?.ForEach(a => a.ForEach(e => callback(e))));
-        OneOf?.ForEach(s => s.Leader.ForEach(e => callback(e)));
-        OneOf?.ForEach(s => s.Followers.ForEach(e => e.ForEach(a => callback(a))));
-        ConditionalOneOf?.ForEach(s => s.OnFalse?.Leader.ForEach(e => callback(e)));
-        ConditionalOneOf?.ForEach(s => s.OnFalse?.Followers.ForEach(e => e.ForEach(a => callback(a))));
-        ConditionalOneOf?.ForEach(s => s.OnTrue?.Leader.ForEach(e => callback(e)));
-        ConditionalOneOf?.ForEach(s => s.OnTrue?.Followers.ForEach(e => e.ForEach(a => callback(a))));
         Mirrored?.ForEach(e => callback(e));
+
+        OneOf?.ForEach(s =>
+        {
+            s.Leader.ForEach(e => callback(e));
+            s.Followers.ForEach(e => e.ForEach(a => callback(a)));
+        });
+
+        ConditionalAll?.ForEach(s =>
+        {
+            callback(s.Condition);
+            s.OnFalse?.ForEach(e => callback(e));
+            s.OnTrue?.ForEach(e => callback(e));
+        });
+
+        ConditionalAllWithin?.ForEach(s =>
+        {
+            callback(s.Condition);
+            s.OnFalse?.ForEach(a => a.ForEach(e => callback(e)));
+            s.OnTrue?.ForEach(a => a.ForEach(e => callback(e)));
+        });
+
+        ConditionalOneOf?.ForEach(s =>
+        {
+            callback(s.Condition);
+            s.OnFalse?.Leader.ForEach(e => callback(e));
+            s.OnFalse?.Followers.ForEach(e => e.ForEach(a => callback(a)));
+            s.OnTrue?.Leader.ForEach(e => callback(e));
+            s.OnTrue?.Followers.ForEach(e => e.ForEach(a => callback(a)));
+        });
     }
 }
