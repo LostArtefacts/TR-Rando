@@ -124,7 +124,7 @@ internal class TRVersionSupport
         TRRandomizerType.StartPosition,
         TRRandomizerType.Sunset,
         TRRandomizerType.Text,
-        //TRRandomizerType.Texture,
+        TRRandomizerType.Texture,
         TRRandomizerType.Unarmed,
         TRRandomizerType.ItemSprite,
         TRRandomizerType.Vehicles,
