@@ -33,6 +33,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
     public List<string> DragonLevels { get; set; }
     public ItemFactory<TR2Entity> ItemFactory { get; set; }
+    public bool Remastered { get; set; }
 
     protected override Dictionary<TR2Type, List<string>> GetGameTracker()
         => TR2EnemyUtilities.PrepareEnemyGameTracker(Settings.DocileChickens, Settings.RandoEnemyDifficulty);
@@ -351,13 +352,13 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         List<TR2Entity> enemyEntities = GetEnemyEntities(level);
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
-        if (levelName == TR2LevelNames.HOME && !enemies.Available.Contains(TR2Type.Doberman))
+        if (Remastered && levelName == TR2LevelNames.HOME && !enemies.Available.Contains(TR2Type.Doberman))
         {
             // The game requires 15 items of type dog, stick goon or masked goon. The models will have been
             // eliminated at this stage, so just create a placeholder to trigger the correct HSH behaviour.
             level.Models[TR2Type.Doberman] = new()
             {
-                Meshes = new() { level.Models[TR2Type.Lara].Meshes.First() }
+                Meshes = [level.Models[TR2Type.Lara].Meshes.First()]
             };
 
             short angleDiff = (short)Math.Ceiling(ushort.MaxValue / (_hshPlaceholderCount + 1d));
