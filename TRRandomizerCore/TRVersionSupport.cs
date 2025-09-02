@@ -112,7 +112,7 @@ internal class TRVersionSupport
         TRRandomizerType.LevelSequence,
         TRRandomizerType.MeshSwaps,
         TRRandomizerType.NightMode,
-        //TRRandomizerType.Outfit,
+        TRRandomizerType.Outfit,
         TRRandomizerType.OutfitDagger,
         TRRandomizerType.ReturnPaths,
         TRRandomizerType.Secret,
