@@ -17,6 +17,30 @@
       }
     },
     {
+      "Comments": "Switch off flame 23 when the map flips.",
+      "EMType": 68,
+      "Tags": [
+        10
+      ],
+      "EntityLocation": 1,
+      "Actions": [
+        {
+          "Parameter": 23
+        }
+      ]
+    },
+    {
+      "Comments": "Fix seweed collision.",
+      "EMType": 147,
+      "Tags": [
+        10
+      ],
+      "StaticIDs": [
+        16,
+        17
+      ]
+    },
+    {
       "Comments": "Adjust rectangle heights to make way for a doorway between rooms 18 and 33.",
       "EMType": 23,
       "Tags": [

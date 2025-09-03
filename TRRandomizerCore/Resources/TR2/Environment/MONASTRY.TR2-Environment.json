@@ -24,6 +24,72 @@
         "Room": 54
       },
       "TrigType": 1
+    },
+    {
+      "Comments": "Fix slope softlock in room 96.",
+      "EMType": 7,
+      "Tags": [
+        10
+      ],
+      "Locations": [
+        {
+          "X": 46592,
+          "Y": -768,
+          "Z": 12800,
+          "Room": 96
+        }
+      ],
+      "SlantType": 2,
+      "XSlant": -1,
+      "ZSlant": 3
+    },
+    {
+      "Comments": "Vertex shifts for above.",
+      "EMType": 23,
+      "Tags": [
+        10
+      ],
+      "Modifications": [
+        {
+          "RoomNumber": 96,
+          "FaceIndex": 133,
+          "VertexChanges": {
+            "1": {
+              "Y": -512
+            },
+            "3": {
+              "Y": 512
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Remove stale faces for above.",
+      "EMType": 22,
+      "Tags": [
+        10
+      ],
+      "GeometryMap": {
+        "96": {
+          "Triangles": [
+            38,
+            40
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Fix bridge collision.",
+      "EMType": 147,
+      "Tags": [
+        10
+      ],
+      "StaticIDs": [
+        21,
+        22,
+        23
+      ]
     }
   ],
   "Any": [
