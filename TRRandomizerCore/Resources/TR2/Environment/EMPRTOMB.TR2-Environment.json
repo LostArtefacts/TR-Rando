@@ -1,6 +1,17 @@
 {
   "All": [
     {
+      "Comments": "Fix bridge collision.",
+      "EMType": 147,
+      "Tags": [
+        10
+      ],
+      "StaticIDs": [
+        31,
+        32
+      ]
+    },
+    {
       "Comments": "Convert door 191's activation if key item rando is enabled.",
       "EMType": 48,
       "Tags": [
