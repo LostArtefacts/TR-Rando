@@ -27,6 +27,8 @@ public enum EMType
     ImportTexture = 33,
     CreateStaticMesh = 34,
     CreateTexture = 36,
+    AddInvertedFace = 37,
+    CopyVertex = 38,
 
     // Entity types 41-60
     MoveSlot = 41,
