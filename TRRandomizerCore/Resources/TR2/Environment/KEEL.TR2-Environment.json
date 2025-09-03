@@ -186,6 +186,260 @@
       "FloorTexture": 1718,
       "SideTexture": 1718,
       "Flags": 6
+    },
+    {
+      "Comments": "Create vertices to fix gaps near catwalks.",
+      "EMType": 38,
+      "Shift": {
+        "Y": 256
+      },
+      "RoomVertices": {
+        "71": [
+          37,
+          62,
+          81,
+          78,
+          75,
+          73,
+          70,
+          69,
+          47,
+          18,
+          19,
+          20,
+          26,
+          29,
+          32,
+          36,
+          37
+        ]
+      }
+    },
+    {
+      "Comments": "Add missing faces near catwalks.",
+      "EMType": 26,
+      "Quads": {
+        "71": [
+          {
+            "Type": 4,
+            "Vertices": [
+              37,
+              62,
+              99,
+              98
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              62,
+              81,
+              100,
+              99
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              81,
+              78,
+              101,
+              100
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              78,
+              75,
+              102,
+              101
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              75,
+              73,
+              103,
+              102
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              73,
+              70,
+              104,
+              103
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              70,
+              69,
+              105,
+              104
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              69,
+              47,
+              106,
+              105
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              47,
+              18,
+              107,
+              106
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              18,
+              19,
+              108,
+              107
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              19,
+              20,
+              109,
+              108
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              20,
+              26,
+              110,
+              109
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              26,
+              29,
+              111,
+              110
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              29,
+              32,
+              112,
+              111
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              32,
+              36,
+              113,
+              112
+            ],
+            "Texture": 1866
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              36,
+              37,
+              114,
+              113
+            ],
+            "Texture": 1866
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Add inverted catwalk faces.",
+      "EMType": 37,
+      "RoomFaces": {
+        "1": [
+          0,
+          3,
+          5,
+          7,
+          9,
+          12,
+          14,
+          15,
+          16,
+          18,
+          20,
+          21,
+          22,
+          23
+        ],
+        "71": [
+          35,
+          36,
+          40,
+          53,
+          0,
+          8,
+          13,
+          16,
+          21,
+          29,
+          32,
+          37,
+          41,
+          44,
+          49,
+          51,
+          54,
+          57
+        ],
+        "72": [
+          1,
+          5,
+          8,
+          11,
+          14,
+          18,
+          21,
+          27,
+          30,
+          34,
+          37,
+          40,
+          43,
+          46
+        ]
+      }
     }
   ],
   "Any": [
