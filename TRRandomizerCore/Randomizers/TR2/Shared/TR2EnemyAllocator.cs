@@ -54,7 +54,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         }
 
         List<TR2Type> oldTypes = TR2TypeUtilities.GetEnemyTypeDictionary()[levelName];
-        int enemyCount = oldTypes.Count + TR2EnemyUtilities.GetEnemyAdjustmentCount(levelName);
+        int enemyCount = oldTypes.Count + TR2EnemyUtilities.GetEnemyAdjustmentCount(levelName, Settings.IsRemastered);
         List<TR2Type> newTypes = new(enemyCount);
 
         List<TR2Type> chickenGuisers = TR2EnemyUtilities.GetEnemyGuisers(TR2Type.BirdMonster);
