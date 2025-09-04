@@ -16,6 +16,7 @@ public class TR3RemasteredEditor : TR3ClassicEditor
     protected override void ApplyConfig(Config config)
     {
         base.ApplyConfig(config);
+        Settings.IsRemastered = true;
         Settings.AllowReturnPathLocations = false;
         Settings.AddReturnPaths = false;
         Settings.FixOGBugs = false;

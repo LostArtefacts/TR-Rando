@@ -25,7 +25,7 @@ public abstract class ItemAllocator<T, E>
     protected ItemSpriteRandomizer<T> _spriteRandomizer;
 
     public Random Generator { get; set; }
-    public RandomizerSettings Settings { get; set; }
+    public required RandomizerSettings Settings { get; set; }
     public ItemFactory<E> ItemFactory { get; set; }
 
     public ItemAllocator(TRGameVersion gameVersion)

@@ -9,6 +9,7 @@ namespace TRRandomizerCore.Editors;
 
 public class RandomizerSettings
 {
+    public bool IsRemastered { get; set; }
     public bool RandomizeGameMode { get; set; }
     public bool RandomizeSecrets { get; set; }
     public bool RandomizeItems { get; set; }

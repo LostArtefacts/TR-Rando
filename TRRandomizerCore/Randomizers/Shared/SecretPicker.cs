@@ -19,7 +19,7 @@ public class SecretPicker<T>
     private int _proxEvaluationCount;
     private float _distanceDivisor;
 
-    public RandomizerSettings Settings { get; set; }
+    public required RandomizerSettings Settings { get; set; }
     public Random Generator { get; set; }
     public IMirrorControl Mirrorer { get; set; }
     public ItemFactory<T> ItemFactory { get; set; }
