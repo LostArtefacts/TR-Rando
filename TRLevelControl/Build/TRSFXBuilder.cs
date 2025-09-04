@@ -4,8 +4,13 @@ namespace TRLevelControl.Build;
 
 public static class TRSFXBuilder
 {
-    public static List<short> ReadSoundMap(TRLevelReader reader)
+    public static List<short> ReadSoundMap(TRLevelReader reader, int length)
     {
+        if (length > 0)
+        {
+            return [.. reader.ReadInt16s(length)];
+        }
+
         List<short> map = new();
         while (reader.PeekUInt() >= ushort.MaxValue)
         {
