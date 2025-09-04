@@ -136,19 +136,9 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
             testedTypes.Add(type);
 
-            int adjustmentCount = TR2EnemyUtilities.GetTargetEnemyAdjustmentCount(levelName, type);
-            if (!Settings.OneEnemyMode && adjustmentCount != 0)
-            {
-                while (newTypes.Count > 0 && newTypes.Count >= newTypes.Capacity + adjustmentCount)
-                {
-                    newTypes.RemoveAt(newTypes.Count - 1);
-                }
-                newTypes.Capacity += adjustmentCount;
-            }
-
             // Check if the use of this enemy triggers an overwrite of the pool, for example
             // the dragon in HSH. Null means nothing special has been defined.
-            List<List<TR2Type>> restrictedCombinations = TR2EnemyUtilities.GetPermittedCombinations(levelName, type, difficulty);
+            var restrictedCombinations = TR2EnemyUtilities.GetPermittedCombinations(levelName, type, difficulty, Settings.IsRemastered);
             if (restrictedCombinations != null)
             {
                 do
