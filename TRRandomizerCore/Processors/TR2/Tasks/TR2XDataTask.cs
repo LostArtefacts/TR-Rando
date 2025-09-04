@@ -62,6 +62,9 @@ public class TR2XDataTask : ITR2ProcessorTask
             }
             level.Data.Models.RemoveAll(guns.Contains);
             importer.TypesToImport.AddRange(guns);
+
+            level.Data.Models.Remove(TR2Type.BreakableWindow1);
+            importer.TypesToImport.Add(TR2Type.BreakableWindow1);
         }
 
         importer.Import();

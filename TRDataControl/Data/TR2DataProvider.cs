@@ -355,7 +355,8 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             TR2SFX.WinstonGrunt2,
             TR2SFX.WinstonGrunt3,
             TR2SFX.WinstonCups,
-        }
+        },
+        [TR2Type.BreakableWindow1] = [TR2SFX.GlassBreak],
     };
 
     private static readonly List<TR2Type> _spriteTypes = new()
