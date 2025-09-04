@@ -70,7 +70,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
         if (TR2EnemyUtilities.IsDroppableEnemyRequired(level))
         {
-            List<TR2Type> droppableEnemies = TR2TypeUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.UnconditionalChickens);
+            List<TR2Type> droppableEnemies = TR2TypeUtilities.GetDropperEnemies(!Settings.ProtectMonks, Settings.UnconditionalChickens, Settings.IsRemastered);
             newTypes.Add(SelectRequiredEnemy(droppableEnemies, levelName, difficulty));
         }
 
@@ -221,7 +221,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         Dictionary<TR2Type, List<int>> restrictedRoomEnemies = TR2EnemyUtilities.GetRestrictedEnemyRooms(levelName, difficulty);
         if (restrictedRoomEnemies != null && newTypes.All(e => restrictedRoomEnemies.ContainsKey(e)))
         {
-            List<TR2Type> pool = TR2TypeUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.UnconditionalChickens);
+            List<TR2Type> pool = TR2TypeUtilities.GetDropperEnemies(!Settings.ProtectMonks, Settings.UnconditionalChickens, Settings.IsRemastered);
             do
             {
                 TR2Type fallbackEnemy;
@@ -243,7 +243,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             if (_friendlyLimitLevels.Contains(levelName) && newTypes.All(friends.Contains))
             {
                 // Add an additional "safe" enemy - so pick from the droppable range, monks and chickens excluded
-                List<TR2Type> droppableEnemies = TR2TypeUtilities.GetCrossLevelDroppableEnemies(false, false);
+                List<TR2Type> droppableEnemies = TR2TypeUtilities.GetDropperEnemies(false, false, Settings.IsRemastered);
                 newTypes.Add(SelectRequiredEnemy(droppableEnemies, levelName, difficulty));
             }
         }
@@ -414,7 +414,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
                 .Any(item => TR2EnemyUtilities.HasDropItem(currentEntity, item));
 
             if (hasPickupItem
-                && !TR2TypeUtilities.CanDropPickups(newType, !Settings.ProtectMonks, Settings.UnconditionalChickens))
+                && !TR2TypeUtilities.CanDropPickups(newType, !Settings.ProtectMonks, Settings.UnconditionalChickens, Settings.IsRemastered))
             {
                 newType = enemies.Droppable[Generator.Next(0, enemies.Droppable.Count)];
             }
