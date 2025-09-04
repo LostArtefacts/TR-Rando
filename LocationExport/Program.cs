@@ -206,7 +206,7 @@ class Program
 
         foreach (TR2Entity entity in level.Entities)
         {
-            if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID))
+            if (!TR2TypeUtilities.CanSharePickupSpace(entity.TypeID, false))
             {
                 exclusions.Add(entity.GetFloorLocation(loc => level.GetRoomSector(loc)));
             }

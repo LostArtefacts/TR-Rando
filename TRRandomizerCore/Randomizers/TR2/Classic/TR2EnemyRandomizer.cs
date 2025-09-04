@@ -364,10 +364,11 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 if (!level.IsAssault)
                 {
                     var importedCollection = _enemyMapping[level];
+                    var settings = _outer.Settings;
                     var enemies = new EnemyRandomizationCollection<TR2Type>
                     {
                         Available = importedCollection.TypesToImport,
-                        Droppable = TR2TypeUtilities.FilterDroppableEnemies(importedCollection.TypesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.UnconditionalChickens),
+                        Droppable = TR2TypeUtilities.FilterDropperEnemies(importedCollection.TypesToImport, !settings.ProtectMonks, settings.UnconditionalChickens, settings.IsRemastered),
                         Water = TR2TypeUtilities.FilterWaterEnemies(importedCollection.TypesToImport),
                         All = [.. importedCollection.TypesToImport],
                     };

@@ -228,10 +228,10 @@ public static class TR2TypeUtilities
         };
     }
 
-    public static List<TR2Type> GetCrossLevelDroppableEnemies(bool monksAreKillable, bool unconditionalChickens)
+    public static List<TR2Type> GetDropperEnemies(bool monksAreKillable, bool unconditionalChickens, bool remastered)
     {
-        List<TR2Type> types = new()
-        {
+        List<TR2Type> types =
+        [
             TR2Type.BengalTiger,
             TR2Type.Doberman,
             TR2Type.FlamethrowerGoonOG,
@@ -260,7 +260,7 @@ public static class TR2TypeUtilities
             TR2Type.TRex,
             TR2Type.WhiteTiger,
             TR2Type.Yeti
-        };
+        ];
 
         // #131 Provides an option to exclude monks as having to be killed
         if (monksAreKillable)
@@ -272,6 +272,18 @@ public static class TR2TypeUtilities
         if (unconditionalChickens)
         {
             types.Add(TR2Type.BirdMonster);
+        }
+
+        if (!remastered)
+        {
+            types.Add(TR2Type.BarracudaIce);
+            types.Add(TR2Type.BarracudaUnwater);
+            types.Add(TR2Type.BarracudaXian);
+            types.Add(TR2Type.Crow);
+            types.Add(TR2Type.Eagle);
+            types.Add(TR2Type.MercSnowmobDriver);
+            types.Add(TR2Type.ScubaDiver);
+            types.Add(TR2Type.Shark);
         }
 
         return types;
@@ -722,9 +734,10 @@ public static class TR2TypeUtilities
         return waterTypes;
     }
 
-    public static bool CanDropPickups(TR2Type type, bool monksAreKillable, bool unconditionalChickens)
+    public static bool CanDropPickups(TR2Type type, bool monksAreKillable, bool unconditionalChickens, bool remastered)
     {
-        return GetCrossLevelDroppableEnemies(monksAreKillable, unconditionalChickens).Contains(type);
+        return (type == TR2Type.MarcoBartoli && !remastered)
+            || GetDropperEnemies(monksAreKillable, unconditionalChickens, remastered).Contains(type);
     }
 
     public static bool IsMonk(TR2Type type)
@@ -732,17 +745,9 @@ public static class TR2TypeUtilities
         return type == TR2Type.MonkWithKnifeStick || type == TR2Type.MonkWithLongStick;
     }
 
-    public static List<TR2Type> FilterDroppableEnemies(List<TR2Type> types, bool monksAreKillable, bool unconditionalChickens)
+    public static List<TR2Type> FilterDropperEnemies(List<TR2Type> types, bool monksAreKillable, bool unconditionalChickens, bool remastered)
     {
-        List<TR2Type> droppableTypes = new();
-        foreach (TR2Type type in types)
-        {
-            if (CanDropPickups(type, monksAreKillable, unconditionalChickens))
-            {
-                droppableTypes.Add(type);
-            }
-        }
-        return droppableTypes;
+        return types.FindAll(t => CanDropPickups(t, monksAreKillable, unconditionalChickens, remastered));
     }
 
     public static List<TR2Type> DoorTypes()
@@ -841,12 +846,12 @@ public static class TR2TypeUtilities
         return VehicleTypes().Contains(type);
     }
 
-    public static bool CanSharePickupSpace(TR2Type type)
+    public static bool CanSharePickupSpace(TR2Type type, bool remastered)
     {
         // Can we place a standard pickup on the same tile as this entity type?
         return IsAnyPickupType(type)
-            || CanDropPickups(type, false, false)
-            || (TypeFamilies.ContainsKey(type) && TypeFamilies[type].Any(e => CanDropPickups(e, false, false)))
+            || CanDropPickups(type, false, false, remastered)
+            || (TypeFamilies.ContainsKey(type) && TypeFamilies[type].Any(e => CanDropPickups(e, false, false, remastered)))
             || (IsSwitchType(type) && type != TR2Type.UnderwaterSwitch)
             || IsKeyholeType(type)
             || IsSlotType(type)
