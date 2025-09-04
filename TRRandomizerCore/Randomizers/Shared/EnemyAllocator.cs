@@ -14,7 +14,7 @@ public abstract class EnemyAllocator<T>
     protected List<T> _excludedEnemies;
     protected HashSet<T> _resultantEnemies;
 
-    public RandomizerSettings Settings { get; set; }
+    public required RandomizerSettings Settings { get; set; }
     public Random Generator { get; set; }
     public IEnumerable<string> GameLevels { get; set; }
 

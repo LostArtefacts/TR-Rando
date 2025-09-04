@@ -33,7 +33,6 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
     public List<string> DragonLevels { get; set; }
     public ItemFactory<TR2Entity> ItemFactory { get; set; }
-    public bool Remastered { get; set; }
 
     protected override Dictionary<TR2Type, List<string>> GetGameTracker()
         => TR2EnemyUtilities.PrepareEnemyGameTracker(Settings.DocileChickens, Settings.RandoEnemyDifficulty);
@@ -352,7 +351,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         List<TR2Entity> enemyEntities = GetEnemyEntities(level);
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
-        if (Remastered && levelName == TR2LevelNames.HOME && !enemies.Available.Contains(TR2Type.Doberman))
+        if (Settings.IsRemastered && levelName == TR2LevelNames.HOME && !enemies.Available.Contains(TR2Type.Doberman))
         {
             // The game requires 15 items of type dog, stick goon or masked goon. The models will have been
             // eliminated at this stage, so just create a placeholder to trigger the correct HSH behaviour.
@@ -569,7 +568,10 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         if (!Settings.AllowEnemyKeyDrops)
         {
             // Referenced here in case item randomization is not enabled.
-            TR2ItemAllocator allocator = new();
+            TR2ItemAllocator allocator = new()
+            {
+                Settings = Settings,
+            };
             allocator.ExcludeEnemyKeyDrops(level.Entities);
         }
     }

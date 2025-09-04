@@ -51,7 +51,6 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
             Generator = _generator,
             GameLevels = Levels.Select(l => l.LevelFileBaseName),
             DragonLevels = _dragonLevels,
-            Remastered = true,
         };
         _allocator.Initialise();
 

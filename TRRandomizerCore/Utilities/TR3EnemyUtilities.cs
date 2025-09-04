@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
+using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Utilities;
@@ -417,7 +418,7 @@ public static class TR3EnemyUtilities
         );
     }
 
-    public static void CheckMonkeyPickups(TR3Level level, bool remastered)
+    public static void CheckMonkeyPickups(TR3Level level, RandomizerSettings settings)
     {
         // Do a global check for monkeys that may be sitting on more than one pickup.
         // This has to happen after item, enemy and environment rando to account for
@@ -430,7 +431,7 @@ public static class TR3EnemyUtilities
                     e.Z == monkey.Z &&
                     TR3TypeUtilities.IsAnyPickupType(e.TypeID));
 
-            if (remastered)
+            if (settings.IsRemastered)
             {
                 // For TRR, we exclude all monkey pickups because the behaviour can lead to crashes.
                 pickups.ForEach(e => ++e.X);
