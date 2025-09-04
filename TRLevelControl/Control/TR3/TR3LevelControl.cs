@@ -308,7 +308,21 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
     private void ReadSoundEffects(TRLevelReader reader)
     {
-        List<short> soundMap = TRSFXBuilder.ReadSoundMap(reader);
+        long startPos = reader.BaseStream.Position;
+        try
+        {
+            ReadSoundEffects(reader, -1);
+        }
+        catch
+        {
+            reader.BaseStream.Position = startPos;
+            ReadSoundEffects(reader, Enum.GetValues<TR3SFX>().Length);
+        }
+    }
+
+    private void ReadSoundEffects(TRLevelReader reader, int mapLength)
+    {
+        List<short> soundMap = TRSFXBuilder.ReadSoundMap(reader, mapLength);
 
         uint numSoundDetails = reader.ReadUInt32();
         List<TR3SoundEffect> sfx = new();
