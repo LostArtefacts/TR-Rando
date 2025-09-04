@@ -20,17 +20,6 @@ public static class TR2EnemyUtilities
         return 0;
     }
 
-    // Similar to above, but allows for a collection to be resized if a specific
-    // enemy model is chosen.
-    public static int GetTargetEnemyAdjustmentCount(string lvlName, TR2Type enemy)
-    {
-        if (_targetEnemyAdjustmentCount.ContainsKey(enemy) && _targetEnemyAdjustmentCount[enemy].ContainsKey(lvlName))
-        {
-            return _targetEnemyAdjustmentCount[enemy][lvlName];
-        }
-        return 0;
-    }
-
     public static bool IsWaterEnemyRequired(TR2Level level)
     {
         return level.Entities.Any(e => TR2TypeUtilities.IsWaterCreature(e.TypeID));
@@ -151,19 +140,28 @@ public static class TR2EnemyUtilities
         return _restrictedEnemyLevelCountsTechnical.Count;
     }
 
-    public static List<List<TR2Type>> GetPermittedCombinations(string lvl, TR2Type entity, RandoDifficulty difficulty)
+    public static List<List<TR2Type>> GetPermittedCombinations(
+        string levelName, TR2Type type, RandoDifficulty difficulty, bool remastered)
     {
-        if (_specialEnemyCombinations.ContainsKey(lvl) && _specialEnemyCombinations[lvl].ContainsKey(entity))
+        if (!remastered)
         {
-            if (_specialEnemyCombinations[lvl][entity].ContainsKey(difficulty))
+            return null;
+        }
+
+        if (_specialEnemyCombinations.TryGetValue(levelName, out var typeDict)
+            && typeDict.TryGetValue(type, out var difficultyDict))
+        {
+            if (difficultyDict.TryGetValue(difficulty, out var result))
             {
-                return _specialEnemyCombinations[lvl][entity][difficulty];
+                return result;
             }
-            else if (_specialEnemyCombinations[lvl][entity].ContainsKey(RandoDifficulty.DefaultOrNoRestrictions))
+
+            if (difficultyDict.TryGetValue(RandoDifficulty.DefaultOrNoRestrictions, out result))
             {
-                return _specialEnemyCombinations[lvl][entity][RandoDifficulty.DefaultOrNoRestrictions];
+                return result;
             }
         }
+
         return null;
     }
 
@@ -420,20 +418,6 @@ public static class TR2EnemyUtilities
         [TR2LevelNames.CHICKEN] = 1,
         [TR2LevelNames.FLOATER] = 1,
         [TR2LevelNames.LAIR] = 1
-    };
-
-    // Trigger a redim of the imported enemy count if one of these entities is selected
-    private static readonly Dictionary<TR2Type, Dictionary<string, int>> _targetEnemyAdjustmentCount = new()
-    {
-        [TR2Type.MarcoBartoli] = new Dictionary<string, int>
-        {
-            [TR2LevelNames.VENICE] = -2,
-            [TR2LevelNames.BARTOLI] = -2,
-            [TR2LevelNames.OPERA] = -2,
-            [TR2LevelNames.DA] = -1,
-            [TR2LevelNames.TIBET] = -1,
-            [TR2LevelNames.FLOATER] = -1,
-        }
     };
 
     public static List<TR2Type> GetEnemyGuisers(TR2Type entity)
