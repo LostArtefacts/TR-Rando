@@ -53,7 +53,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             return null;
         }
 
-        List<TR2Type> oldTypes = TR2TypeUtilities.GetEnemyTypeDictionary()[levelName];
+        List<TR2Type> oldTypes = GetCurrentEnemyTypes(level);
         int enemyCount = oldTypes.Count + TR2EnemyUtilities.GetEnemyAdjustmentCount(levelName, Settings.IsRemastered);
         List<TR2Type> newTypes = new(enemyCount);
 
@@ -262,6 +262,14 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         return level.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
     }
 
+    public static List<TR2Type> GetCurrentEnemyTypes(TR2Level level)
+    {
+        var allTypes = TR2TypeUtilities.GetFullListOfEnemies();
+        return [.. level.Entities.Select(e => e.TypeID)
+            .Where(allTypes.Contains)
+            .Distinct()];
+    }
+
     public EnemyRandomizationCollection<TR2Type> RandomizeEnemiesNatively(string levelName, TR2Level level)
     {
         if (levelName == TR2LevelNames.ASSAULT)
@@ -269,9 +277,10 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             return null;
         }
 
-        List<TR2Type> availableEnemyTypes = TR2TypeUtilities.GetEnemyTypeDictionary()[levelName];
-        List<TR2Type> droppableEnemies = TR2TypeUtilities.DroppableEnemyTypes()[levelName];
+        List<TR2Type> availableEnemyTypes = GetCurrentEnemyTypes(level);
         List<TR2Type> waterEnemies = TR2TypeUtilities.FilterWaterEnemies(availableEnemyTypes);
+        List<TR2Type> droppableEnemies = TR2TypeUtilities.FilterDropperEnemies(availableEnemyTypes,
+            !Settings.ProtectMonks, Settings.UnconditionalChickens, Settings.IsRemastered);
 
         if (Settings.DocileChickens && levelName == TR2LevelNames.CHICKEN)
         {
