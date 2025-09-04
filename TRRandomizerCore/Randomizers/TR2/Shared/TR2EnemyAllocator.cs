@@ -38,7 +38,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         => TR2EnemyUtilities.PrepareEnemyGameTracker(Settings.DocileChickens, Settings.RandoEnemyDifficulty);
 
     protected override bool IsEnemySupported(string levelName, TR2Type type, RandoDifficulty difficulty)
-        => TR2EnemyUtilities.IsEnemySupported(levelName, type, difficulty, Settings.ProtectMonks);
+        => TR2EnemyUtilities.IsEnemySupported(levelName, type, difficulty, Settings.ProtectMonks, Settings.IsRemastered);
 
     protected override Dictionary<TR2Type, List<int>> GetRestrictedRooms(string levelName, RandoDifficulty difficulty)
         => TR2EnemyUtilities.GetRestrictedEnemyRooms(levelName, RandoDifficulty.Default);
@@ -98,7 +98,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
         // Get all other candidate supported enemies
         List<TR2Type> allEnemies = TR2TypeUtilities.GetCandidateCrossLevelEnemies()
-            .FindAll(e => TR2EnemyUtilities.IsEnemySupported(levelName, e, difficulty, Settings.ProtectMonks));
+            .FindAll(e => TR2EnemyUtilities.IsEnemySupported(levelName, e, difficulty, Settings.ProtectMonks, Settings.IsRemastered));
 
         if (Settings.OneEnemyMode
             || Settings.IncludedEnemies.Count < newTypes.Capacity
@@ -125,7 +125,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             TR2Type type;
             if (Settings.DragonSpawnType == DragonSpawnType.Maximum
                 && !newTypes.Contains(TR2Type.MarcoBartoli)
-                && TR2EnemyUtilities.IsEnemySupported(levelName, TR2Type.MarcoBartoli, difficulty, Settings.ProtectMonks))
+                && TR2EnemyUtilities.IsEnemySupported(levelName, TR2Type.MarcoBartoli, difficulty, Settings.ProtectMonks, Settings.IsRemastered))
             {
                 type = TR2Type.MarcoBartoli;
             }
@@ -221,7 +221,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
                 }
                 while ((_excludedEnemies.Contains(fallbackEnemy) && pool.Any(e => !_excludedEnemies.Contains(e)))
                 || newTypes.Contains(fallbackEnemy)
-                || !TR2EnemyUtilities.IsEnemySupported(levelName, fallbackEnemy, difficulty, Settings.ProtectMonks));
+                || !TR2EnemyUtilities.IsEnemySupported(levelName, fallbackEnemy, difficulty, Settings.ProtectMonks, Settings.IsRemastered));
                 newTypes.Add(fallbackEnemy);
             }
             while (newTypes.All(e => restrictedRoomEnemies.ContainsKey(e)));

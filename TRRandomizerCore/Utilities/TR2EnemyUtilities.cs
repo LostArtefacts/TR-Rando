@@ -40,21 +40,27 @@ public static class TR2EnemyUtilities
             && item.Z == enemy.Z;
     }
 
-    public static bool IsEnemySupported(string lvlName, TR2Type entity, RandoDifficulty difficulty, bool protectMonks)
+    public static bool IsEnemySupported(
+        string lvlName, TR2Type type, RandoDifficulty difficulty, bool protectMonks, bool remastered)
     {
-        if (lvlName == TR2LevelNames.HOME && TR2TypeUtilities.IsMonk(entity))
+        if (lvlName == TR2LevelNames.HOME)
         {
-            // Monks are excluded from HSH by default unless the player is happy
-            // with having to kill them.
-            return !protectMonks;
+            if (TR2TypeUtilities.IsMonk(type))
+            {
+                return !protectMonks;
+            }
+            if (type == TR2Type.MercSnowmobDriver)
+            {
+                return !remastered;
+            }
         }
 
-        bool isEnemyTechnicallySupported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesTechnical);
+        bool isEnemyTechnicallySupported = IsEnemySupported(lvlName, type, _unsupportedEnemiesTechnical);
         bool isEnemySupported = isEnemyTechnicallySupported;
 
         if (difficulty == RandoDifficulty.Default)
         {
-            bool isEnemyDefaultSupported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesDefault);
+            bool isEnemyDefaultSupported = IsEnemySupported(lvlName, type, _unsupportedEnemiesDefault);
 
             // a level may exist in both technical and difficulty dicts, so we check both
             isEnemySupported &= isEnemyDefaultSupported;
