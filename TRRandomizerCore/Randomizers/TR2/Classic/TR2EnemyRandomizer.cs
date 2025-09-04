@@ -97,9 +97,6 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             }
         }
 
-        // Sort the levels so each thread has a fairly equal weight in terms of import cost/time
-        levels.Sort(new TR2LevelTextureWeightComparer());
-
         int processorIndex = 0;
         foreach (TR2CombinedLevel level in levels)
         {
