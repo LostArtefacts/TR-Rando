@@ -551,6 +551,11 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
     private void LimitSkidooEntities(string levelName, TR2Level level)
     {
+        if (!Settings.IsRemastered)
+        {
+            return;
+        }
+
         // Ensure that the total implied enemy count does not exceed that of the original
         // level. The limit actually varies depending on the number of traps and other objects
         // so for those levels with high entity counts, we further restrict the limit.
@@ -608,6 +613,11 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
     private void LimitFriendlyEnemies(TR2Level level, List<TR2Type> pool, List<TR2Type> friends)
     {
+        if (!Settings.IsRemastered)
+        {
+            return;
+        }
+
         List<TR2Entity> levelFriends = level.Entities.FindAll(e => friends.Contains(e.TypeID));
         while (levelFriends.Count > _friendlyEnemyLimit)
         {
