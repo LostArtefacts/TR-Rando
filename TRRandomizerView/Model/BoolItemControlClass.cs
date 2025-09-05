@@ -40,7 +40,18 @@ public class BoolItemControlClass : DependencyObject, INotifyPropertyChanged
     }
 
     public string Title { get; set; }
-    public string Description { get; set; }
+
+    private string _description;
+    public string Description
+    {
+        get => _description;
+        set
+        {
+            _description = value;
+            FirePropertyChanged();
+        }
+    }
+
     public string HelpURL { get; set; } = string.Empty;
     public bool HasHelpURL => HelpURL?.Length > 0;
 

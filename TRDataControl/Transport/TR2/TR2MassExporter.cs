@@ -20,11 +20,12 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         {
             TR2Type.Pistols_M_H, TR2Type.Shotgun_M_H, TR2Type.Uzi_M_H, TR2Type.Autos_M_H, TR2Type.Harpoon_M_H, TR2Type.M16_M_H, TR2Type.GrenadeLauncher_M_H,
             TR2Type.LaraSun, TR2Type.Crow, TR2Type.Spider, TR2Type.BengalTiger, TR2Type.TRex,
-            TR2Type.RollingBall
+            TR2Type.RollingBall, TR2Type.PushBlock1,
         },
         [TR2LevelNames.VENICE] = new()
         {
-            TR2Type.Boat, TR2Type.Doberman, TR2Type.MaskedGoon1, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.Rat, TR2Type.StickWieldingGoon1BodyWarmer
+            TR2Type.Boat, TR2Type.Doberman, TR2Type.MaskedGoon1, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.Rat, TR2Type.StickWieldingGoon1BodyWarmer,
+            TR2Type.Trapdoor1,
         },
         [TR2LevelNames.BARTOLI] = new()
         {
@@ -68,7 +69,7 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         },
         [TR2LevelNames.CHICKEN] = new()
         {
-            TR2Type.BirdMonster, TR2Type.WhiteTiger
+            TR2Type.BirdMonster, TR2Type.WhiteTiger, TR2Type.TibetanBell,
         },
         [TR2LevelNames.XIAN] = new()
         {

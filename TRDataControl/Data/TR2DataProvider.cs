@@ -363,6 +363,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             TR2SFX.WinstonCups,
         },
         [TR2Type.BreakableWindow1] = [TR2SFX.GlassBreak],
+        [TR2Type.PushBlock1] = [TR2SFX.TRexFeet],
     };
 
     private static readonly List<TR2Type> _spriteTypes = new()

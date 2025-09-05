@@ -2502,7 +2502,164 @@
       ]
     }
   ],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If the dragon isn't present, make an alternate way to escape.",
+        "ConditionType": 0,
+        "EntityIndex": 43,
+        "EntityType": 40
+      },
+      "OnFalse": [
+        {
+          "Comments": "Clear the heavy triggers.",
+          "EMType": 62,
+          "Rooms": [
+            16,
+            18,
+            19,
+            20
+          ],
+          "TrigTypes": [
+            5
+          ]
+        },
+        {
+          "Comments": "Import the pushblock and trapdoor models (re-skinned).",
+          "EMType": 145,
+          "Data": [
+            {
+              "ModelID": 67,
+              "TexturedFace4": 1448
+            },
+            {
+              "ModelID": 114,
+              "TexturedFace4": 1070
+            }
+          ]
+        },
+        {
+          "Comments": "Import the bell model.",
+          "EMType": 141,
+          "Models": [
+            88
+          ]
+        },
+        {
+          "Comments": "Add one of each.",
+          "EMType": 51,
+          "TypeID": 114,
+          "Flags": 15872,
+          "Intensity": -1,
+          "Location": {
+            "X": 47616,
+            "Y": -9216,
+            "Z": 36352,
+            "Room": 18
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 67,
+          "Intensity": -1,
+          "Location": {
+            "X": 47616,
+            "Y": -10496,
+            "Z": 41472,
+            "Room": 18
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 88,
+          "Intensity": -1,
+          "Location": {
+            "X": 54784,
+            "Y": -10240,
+            "Z": 38912,
+            "Room": 18,
+            "Angle": -16384
+          }
+        },
+        {
+          "Comments": "Switch for the trapdoor and pushblock.",
+          "EMType": 51,
+          "TypeID": 104,
+          "Intensity": -1,
+          "Location": {
+            "X": 47616,
+            "Y": -7168,
+            "Z": 34304,
+            "Room": 18
+          }
+        },
+        {
+          "Comments": "Trigger for the switch, timed for added fun.",
+          "EMType": 61,
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "Timer": 10,
+            "SwitchOrKeyRef": -1,
+            "Actions": [
+              {
+                "Parameter": -3
+              },
+              {
+                "Parameter": -4
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Dummy trigger for the trapdoor.",
+          "EMType": 61,
+          "EntityLocation": -4,
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -4
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Restore the heavy trigger under the bell.",
+          "EMType": 61,
+          "EntityLocation": -2,
+          "Trigger": {
+            "TrigType": 5,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 45
+              },
+              {
+                "Parameter": 64
+              },
+              {
+                "Parameter": 65
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 65,
+          "LookAtItem": 44,
+          "AttachToItems": [
+            -2
+          ],
+          "CameraAction": {
+            "Timer": 4,
+            "Once": true
+          }
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": []
 }

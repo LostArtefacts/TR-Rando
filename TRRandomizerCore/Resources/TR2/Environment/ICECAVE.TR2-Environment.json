@@ -1217,308 +1217,6 @@
           1564
         ]
       }
-    ],
-    [
-      {
-        "Comments": "Perform some refacing for the exit portal and the chicken room.",
-        "EMType": 21,
-        "TextureMap": {
-          "994": {
-            "13": {
-              "Rectangles": [
-                51,
-                53
-              ]
-            },
-            "140": {
-              "Rectangles": [
-                8,
-                14
-              ]
-            }
-          }
-        }
-      },
-      {
-        "Comments": "Adjust rectangle heights to make way for a doorway between rooms 13 and 140.",
-        "EMType": 23,
-        "Modifications": [
-          {
-            "RoomNumber": 13,
-            "FaceIndex": 52,
-            "VertexChanges": {
-              "2": {
-                "Y": -1024
-              },
-              "3": {
-                "Y": -1024
-              }
-            }
-          },
-          {
-            "RoomNumber": 140,
-            "FaceIndex": 11,
-            "VertexChanges": {
-              "2": {
-                "Y": -1024
-              },
-              "3": {
-                "Y": -1024
-              }
-            }
-          }
-        ]
-      },
-      {
-        "Comments": "Make collisional portals between rooms 13 & 140.",
-        "EMType": 82,
-        "Portals": {
-          "13": {
-            "140": [
-              {
-                "X": 50245,
-                "Y": 7168,
-                "Z": 40406
-              }
-            ]
-          },
-          "140": {
-            "13": [
-              {
-                "X": 50090,
-                "Y": 7168,
-                "Z": 40374
-              }
-            ]
-          }
-        }
-      },
-      {
-        "Comments": "Make a ladder to reach the portal.",
-        "EMType": 0,
-        "Tags": [
-          3
-        ],
-        "TextureMap": {
-          "1387": {
-            "139": {
-              "Rectangles": [
-                6,
-                7
-              ]
-            }
-          },
-          "1491": {
-            "138": {
-              "Rectangles": [
-                51
-              ]
-            }
-          },
-          "1516": {
-            "140": {
-              "Rectangles": [
-                10
-              ]
-            }
-          }
-        },
-        "Location": {
-          "X": 50760,
-          "Y": 12105,
-          "Z": 40279,
-          "Room": 138
-        },
-        "IsNegativeX": true
-      },
-      {
-        "Comments": "Make a block to be able to climb onto the ladder.",
-        "EMType": 1,
-        "Location": {
-          "X": 52810,
-          "Y": 11520,
-          "Z": 40523,
-          "Room": 138
-        },
-        "Clicks": -2,
-        "FloorTexture": 65535,
-        "SideTexture": 1426,
-        "Flags": 15
-      },
-      {
-        "Comments": "Convert the CoT slot into an empty one.",
-        "EMType": 45,
-        "EntityIndex": 10,
-        "NewEntityType": 182
-      },
-      {
-        "Comments": "Reposition it to the gong area.",
-        "EMType": 44,
-        "EntityIndex": 10,
-        "TargetLocation": {
-          "X": 58880,
-          "Y": 6656,
-          "Z": 31232,
-          "Room": 10,
-          "Angle": 16384
-        }
-      },
-      {
-        "Comments": "Convert one of the CoT doors into a smaller door.",
-        "EMType": 45,
-        "EntityIndex": 16,
-        "NewEntityType": 108
-      },
-      {
-        "Comments": "Reposition it to the chicken room.",
-        "EMType": 44,
-        "EntityIndex": 16,
-        "TargetLocation": {
-          "X": 50688,
-          "Y": 7168,
-          "Z": 40448,
-          "Room": 13,
-          "Angle": 16384
-        }
-      },
-      {
-        "Comments": "Convert one of the CoT doors into a mask.",
-        "EMType": 45,
-        "EntityIndex": 15,
-        "NewEntityType": 174
-      },
-      {
-        "Comments": "Reposition it to the chicken room (for now).",
-        "EMType": 44,
-        "EntityIndex": 15,
-        "TargetLocation": {
-          "X": 67072,
-          "Y": 11520,
-          "Z": 42496,
-          "Room": 143
-        }
-      },
-      {
-        "Comments": "Delete the old unused trigger.",
-        "EMType": 62,
-        "Locations": [
-          {
-            "X": 45608,
-            "Y": 9984,
-            "Z": 48480,
-            "Room": 14
-          }
-        ]
-      },
-      {
-        "Comments": "Make a new trigger to open the final door and play some music.",
-        "EMType": 61,
-        "Locations": [
-          {
-            "X": 58880,
-            "Y": 6656,
-            "Z": 31232,
-            "Room": 10
-          }
-        ],
-        "Trigger": {
-          "TrigType": 3,
-          "Mask": 31,
-          "SwitchOrKeyRef": 10,
-          "Actions": [
-            {
-              "Parameter": 16
-            },
-            {
-              "Action": 8,
-              "Parameter": 39
-            }
-          ]
-        }
-      },
-      {
-        "Comments": "Add a camera for above",
-        "EMType": 65,
-        "Camera": {
-          "X": 47428,
-          "Y": 6308,
-          "Z": 42755,
-          "Room": 13
-        },
-        "LookAtItem": 16,
-        "AttachToItems": [
-          10
-        ],
-        "CameraAction": {
-          "Timer": 2
-        }
-      },
-      {
-        "Comments": "Borrow some spikes and convert them into a yeti (for now).",
-        "EMType": 45,
-        "EntityIndex": 50,
-        "NewEntityType": 45
-      },
-      {
-        "Comments": "Move the new enemy to the chicken room.",
-        "EMType": 44,
-        "EntityIndex": 50,
-        "TargetLocation": {
-          "X": 65024,
-          "Y": 11520,
-          "Z": 42496,
-          "Room": 143,
-          "Angle": -16384
-        }
-      },
-      {
-        "Comments": "Update the talion pickup to trigger the new enemy as well.",
-        "EMType": 68,
-        "Location": {
-          "X": 57856,
-          "Y": 9984,
-          "Z": 30208,
-          "Room": 127
-        },
-        "Actions": [
-          {
-            "Parameter": 50
-          }
-        ]
-      },
-      {
-        "Comments": "Replace the chicken and its ally with another enemy type.",
-        "EMType": 47,
-        "EntityIndices": [
-          50,
-          148
-        ],
-        "NewEnemyType": 1,
-        "Exclusions": [
-          40,
-          46
-        ]
-      },
-      {
-        "Comments": "And finally, make an end trigger.",
-        "EMType": 61,
-        "Locations": [
-          {
-            "X": 49649,
-            "Y": 7168,
-            "Z": 40450,
-            "Room": 13
-          }
-        ],
-        "Trigger": {
-          "Mask": 31,
-          "Actions": [
-            {
-              "Action": 7
-            }
-          ]
-        }
-      }
     ]
   ],
   "AllWithin": [
@@ -2378,11 +2076,12 @@
   "ConditionalAll": [
     {
       "Condition": {
-        "Comments": "If chickens are unconditional and there is still one at the end of the level, make an alternate ending.",
+        "Comments": "If chickens are unconditional or there isn't one in the final area, make an alternate ending",
         "ConditionType": 42,
-        "And": [
+        "Or": [
           {
             "ConditionType": 0,
+            "Negate": true,
             "EntityIndex": 148,
             "EntityType": 46
           }
@@ -2673,49 +2372,60 @@
           }
         },
         {
-          "Comments": "Delete the old pickup trigger.",
-          "EMType": 62,
-          "Locations": [
-            {
-              "X": 57856,
-              "Y": 9984,
-              "Z": 30208,
-              "Room": 127
-            }
-          ]
+          "Comments": "Move the old talion trigger closer to the boss.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 57856,
+            "Y": 9984,
+            "Z": 30208,
+            "Room": 127
+          },
+          "NewLocation": {
+            "X": 62976,
+            "Y": 11520,
+            "Z": 40448,
+            "Room": 138
+          }
         },
         {
-          "Comments": "Place new triggers for the boss.",
-          "EMType": 61,
-          "ExpandedLocations": {
-            "Location": {
+          "Comments": "Make it a normal trigger.",
+          "EMType": 69,
+          "Location": {
+            "X": 62976,
+            "Y": 11520,
+            "Z": 40448,
+            "Room": 138
+          },
+          "TrigType": 0
+        },
+        {
+          "Comments": "Extend the trigger.",
+          "EMType": 63,
+          "Locations": [
+            {
               "X": 62976,
               "Y": 11520,
-              "Z": 40448,
+              "Z": 41472,
               "Room": 138
             },
-            "ExpandX": 1,
-            "ExpandZ": 4
-          },
-          "Trigger": {
-            "Mask": 31,
-            "Actions": [
-              {
-                "Parameter": 153
-              },
-              {
-                "Parameter": 155
-              },
-              {
-                "Parameter": 154
-              },
-              {
-                "Parameter": 152
-              },
-              {
-                "Parameter": 148
-              }
-            ]
+            {
+              "X": 62976,
+              "Y": 11520,
+              "Z": 42496,
+              "Room": 138
+            },
+            {
+              "X": 62976,
+              "Y": 11520,
+              "Z": 43520,
+              "Room": 138
+            }
+          ],
+          "BaseLocation": {
+            "X": 62976,
+            "Y": 11520,
+            "Z": 40448,
+            "Room": 138
           }
         }
       ]
