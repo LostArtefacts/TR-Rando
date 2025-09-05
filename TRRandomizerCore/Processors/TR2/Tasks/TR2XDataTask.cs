@@ -55,6 +55,9 @@ public class TR2XDataTask : ITR2ProcessorTask
             if (level.IsAssault)
             {
                 level.Data.Models.Remove(TR2Type.LaraShotgunAnim_H);
+                importer.TypesToImport.Add(TR2Type.Key1_M_H);
+                importer.TypesToImport.Add(TR2Type.LargeMed_M_H);
+                importer.TypesToImport.Add(TR2Type.SmallMed_M_H);
             }
             else
             {

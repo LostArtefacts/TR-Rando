@@ -4,6 +4,170 @@
   "AllWithin": [],
   "OneOf": [],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If the key model is present, add an easter egg in Lara's closet.",
+        "ConditionType": 0,
+        "ModelID": 197
+      },
+      "OnTrue": [
+        {
+          "EMType": 51,
+          "TypeID": 260,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 256,
+            "Z": 65024,
+            "Room": 60,
+            "Angle": 7282
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 260,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 256,
+            "Z": 65024,
+            "Room": 60,
+            "Angle": 14564
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 260,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 256,
+            "Z": 65024,
+            "Room": 60,
+            "Angle": 21846
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 260,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 256,
+            "Z": 65024,
+            "Room": 60,
+            "Angle": 29128
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 260,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 256,
+            "Z": 65024,
+            "Room": 60,
+            "Angle": -29126
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 260,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 256,
+            "Z": 65024,
+            "Room": 60,
+            "Angle": -21844
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 260,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 256,
+            "Z": 65024,
+            "Room": 60,
+            "Angle": -14562
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 260,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 256,
+            "Z": 65024,
+            "Room": 60,
+            "Angle": -7280
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 260,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 256,
+            "Z": 65024,
+            "Room": 60,
+            "Angle": 2
+          }
+        },
+        {
+          "EMType": 61,
+          "EntityLocation": 22,
+          "Trigger": {
+            "TrigType": 3,
+            "Mask": 31,
+            "SwitchOrKeyRef": 22,
+            "Actions": [
+              {
+                "Parameter": 21
+              },
+              {
+                "Action": 8,
+                "Parameter": 42
+              },
+              {
+                "Parameter": -1
+              },
+              {
+                "Parameter": -2
+              },
+              {
+                "Parameter": -3
+              },
+              {
+                "Parameter": -4
+              },
+              {
+                "Parameter": -5
+              },
+              {
+                "Parameter": -6
+              },
+              {
+                "Parameter": -7
+              },
+              {
+                "Parameter": -8
+              },
+              {
+                "Parameter": -9
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "ConditionalOneOf": [],
   "Mirrored": []
 }

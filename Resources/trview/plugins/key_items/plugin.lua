@@ -73,6 +73,7 @@ m_KeyNames[1][26206] = "K1 Ornate Key (cat statue)"
 
 -- TR2
 m_KeyNames[2] = {}
+m_KeyNames[2][9259]  = "K1 Closet Key"
 m_KeyNames[2][10291] = "K1 Guardhouse Key"
 m_KeyNames[2][10250] = "K2 Rusty Key"
 m_KeyNames[2][11210] = "K1 Boathouse Key"

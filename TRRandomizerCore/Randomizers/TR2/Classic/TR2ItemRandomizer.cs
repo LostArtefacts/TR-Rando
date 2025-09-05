@@ -41,6 +41,10 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         {
             LoadLevelInstance(lvl);
 
+            if (_levelInstance.IsAssault)
+            {
+                AddGymItems(_levelInstance);
+            }
             _allocator.RandomizeItems(_levelInstance.Name, _levelInstance.Data, _levelInstance.Script);
             RandomizeVehicles(_levelInstance);
 
@@ -50,6 +54,29 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 break;
             }
         }
+    }
+
+    private void AddGymItems(TR2CombinedLevel level)
+    {
+        level.Script.AddStartInventoryItem(TR2Type.Pistols_S_P);
+
+        var items = new List<TR2Type>
+        {
+            TR2Type.Key1_S_P,
+        };
+        items.AddRange(TR2TypeUtilities.GetGunTypes());
+        foreach (var type in TR2TypeUtilities.GetAmmoTypes())
+        {
+            items.AddRange(Enumerable.Repeat(type, _generator.Next(1, 8)));
+        }
+
+        var baseItem = level.Data.Entities.First(e => e.TypeID == TR2Type.Lara);
+        level.Data.Entities.AddRange(items.Select(type =>
+        {
+            var item = baseItem.Clone() as TR2Entity;
+            item.TypeID = type;
+            return item;
+        }));
     }
 
     public void FinalizeRandomization()

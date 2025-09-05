@@ -414,6 +414,8 @@ public enum TR2Type : uint
     Puzzle2_M_H_Dagger            = 3514,
 
     // Key item aliases
+    Gym_K1_ClosetKey              = 9259,
+
     GW_K1_GuardhouseKey           = 10291,
     GW_K2_RustyKey                = 10250,
 

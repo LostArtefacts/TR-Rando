@@ -135,8 +135,14 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             new() { TR2Type.LaraGrenadeAnim_H, TR2Type.GrenadeProjectile_H, TR2Type.GrenadeLauncher_S_P, TR2Type.Grenades_M_H, TR2Type.Grenades_S_P, TR2Type.Explosion_S_H },
         [TR2Type.Harpoon_M_H] =
             new() { TR2Type.LaraHarpoonAnim_H, TR2Type.HarpoonProjectile_H, TR2Type.Harpoon_S_P, TR2Type.HarpoonAmmo_M_H, TR2Type.HarpoonAmmo_S_P },
+        [TR2Type.Key1_M_H]
+            = new() { TR2Type.Key1_S_P },
         [TR2Type.Key2_M_H]
             = new() { TR2Type.Key2_S_P },
+        [TR2Type.LargeMed_M_H]
+            = new() { TR2Type.LargeMed_S_P },
+        [TR2Type.SmallMed_M_H]
+            = new() { TR2Type.SmallMed_S_P },
         [TR2Type.Knifethrower] =
             new() { TR2Type.KnifeProjectile_H },
         [TR2Type.LaraSun] =
