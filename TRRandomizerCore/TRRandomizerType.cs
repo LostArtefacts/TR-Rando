@@ -51,7 +51,7 @@ public enum TRRandomizerType
     HiddenEnemies,
     ItemSprite,
     SecretModels,
-    LarsonBehaviour,
+    ReplaceRequiredEnemies,
     DynamicTextures,
     MeshSwaps,
     HardEnvironment,

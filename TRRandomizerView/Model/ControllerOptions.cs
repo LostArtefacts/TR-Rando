@@ -39,7 +39,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private bool _useRewardRoomCameras;
     private uint _minSecretCount, _maxSecretCount;
     private BoolItemControlClass _includeKeyItems, _randomizeVehicles, _allowReturnPathLocations, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations, _allowEnemyKeyDrops, _maintainKeyContinuity, _oneItemDifficulty;
-    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems, _relocateAwkwardEnemies, _hideDeadTrexes, _unrestrictedEnemyDifficulty;
+    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _replaceRequiredEnemies, _giveUnarmedItems, _relocateAwkwardEnemies, _hideDeadTrexes, _unrestrictedEnemyDifficulty;
     private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures, _retainLaraTextures;
     private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
     private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
@@ -1806,12 +1806,12 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
-    public BoolItemControlClass RemoveLevelEndingLarson
+    public BoolItemControlClass ReplaceRequiredEnemies
     {
-        get => _removeLevelEndingLarson;
+        get => _replaceRequiredEnemies;
         set
         {
-            _removeLevelEndingLarson = value;
+            _replaceRequiredEnemies = value;
             FirePropertyChanged();
         }
     }
@@ -2431,12 +2431,11 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "Most enemies will not be visible until they are triggered."
         };
         BindingOperations.SetBinding(HideEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
-        RemoveLevelEndingLarson = new BoolItemControlClass
+        ReplaceRequiredEnemies = new BoolItemControlClass
         {
             Title = "Replace required enemies",
-            Description = "Replaces the normally required Larson in Tomb of Qualopec and Torso in Great Pyramid with randomized enemies."
         };
-        BindingOperations.SetBinding(RemoveLevelEndingLarson, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+        BindingOperations.SetBinding(ReplaceRequiredEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
         GiveUnarmedItems = new()
         {
             Title = "Give unarmed level items",
@@ -2712,7 +2711,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         EnemyBoolItemControls = new()
         {
-            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _relocateAwkwardEnemies, _hideDeadTrexes, _removeLevelEndingLarson, _giveUnarmedItems,_allowEnemyKeyDrops, _unrestrictedEnemyDifficulty
+            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _relocateAwkwardEnemies, _hideDeadTrexes, _replaceRequiredEnemies, _giveUnarmedItems,_allowEnemyKeyDrops, _unrestrictedEnemyDifficulty
         };
         TextureBoolItemControls = new()
         {
@@ -2829,7 +2828,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _retainEnemyTextures.IsAvailable = IsDynamicEnemyTexturesTypeSupported;
         _allowEmptyEggs.IsAvailable = IsAtlanteanEggBehaviourTypeSupported;
         _hideEnemies.IsAvailable = IsHiddenEnemiesTypeSupported;
-        _removeLevelEndingLarson.IsAvailable = IsLarsonBehaviourTypeSupported;
+        _replaceRequiredEnemies.IsAvailable = IsReplaceRequiredEnemyTypeSupported;
 
         _randomizeLadders.IsAvailable = !IsTR1;
         _randomizeTraps.IsAvailable = IsTrapsTypeSupported;
@@ -2950,7 +2949,7 @@ public class ControllerOptions : INotifyPropertyChanged
         SwapEnemyAppearance.Value = _controller.SwapEnemyAppearance;
         AllowEmptyEggs.Value = _controller.AllowEmptyEggs;
         HideEnemies.Value = _controller.HideEnemiesUntilTriggered;
-        RemoveLevelEndingLarson.Value = _controller.RemoveLevelEndingLarson;
+        ReplaceRequiredEnemies.Value = _controller.ReplaceRequiredEnemies;
         GiveUnarmedItems.Value = _controller.GiveUnarmedItems;
         UnrestrictedEnemyDifficulty.Value = _controller.RandoEnemyDifficulty == RandoDifficulty.NoRestrictions;
         UseEnemyExclusions = _controller.UseEnemyExclusions;
@@ -3199,7 +3198,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
         _controller.AllowEmptyEggs = AllowEmptyEggs.Value;
         _controller.HideEnemiesUntilTriggered = HideEnemies.Value;
-        _controller.RemoveLevelEndingLarson = RemoveLevelEndingLarson.Value;
+        _controller.ReplaceRequiredEnemies = ReplaceRequiredEnemies.Value;
         _controller.GiveUnarmedItems = GiveUnarmedItems.Value;
         _controller.RandoEnemyDifficulty = UnrestrictedEnemyDifficulty.Value ? RandoDifficulty.NoRestrictions : RandoDifficulty.Default;
         _controller.UseEnemyExclusions = UseEnemyExclusions;
@@ -3368,7 +3367,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsAtlanteanEggBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.AtlanteanEggBehaviour);
     public bool IsHideDeadTrexesTypeSupported => IsRandomizationSupported(TRRandomizerType.HideDeadTrexes);
     public bool IsHiddenEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.HiddenEnemies);
-    public bool IsLarsonBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.LarsonBehaviour);
+    public bool IsReplaceRequiredEnemyTypeSupported => IsRandomizationSupported(TRRandomizerType.ReplaceRequiredEnemies);
     public bool IsClonedEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.ClonedEnemies);
     public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
     public bool IsItemSpriteTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemSprite);
@@ -3394,6 +3393,10 @@ public class ControllerOptions : INotifyPropertyChanged
 
         FirePropertyChanged(nameof(IsTR1Main));
         FirePropertyChanged(nameof(IsTR3Main));
+
+        _replaceRequiredEnemies.Description = IsTR1
+            ? "Replaces the normally required Larson in Tomb of Qualopec and Torso in Great Pyramid with randomized enemy types."
+            : "Replaces the normally required bird monster in Ice Palace and dragon in Dragon's Lair with randomized enemy types.";
 
         if (IsTR2)
         {

@@ -79,12 +79,9 @@ public static class TR2EnemyUtilities
 
     public static List<TR2Type> GetRequiredEnemies(string lvlName)
     {
-        List<TR2Type> entities = new();
-        if (_requiredEnemies.ContainsKey(lvlName))
-        {
-            entities.AddRange(_requiredEnemies[lvlName]);
-        }
-        return entities;
+        return _requiredEnemies.TryGetValue(lvlName, out var value)
+            ? [.. value]
+            : [];
     }
 
     // this returns a set of ALLOWED rooms

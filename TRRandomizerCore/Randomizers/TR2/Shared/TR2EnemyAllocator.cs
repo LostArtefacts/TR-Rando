@@ -81,11 +81,14 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             newTypes.Add(SelectRequiredEnemy(droppableEnemies, levelName, difficulty));
         }
 
-        foreach (TR2Type type in TR2EnemyUtilities.GetRequiredEnemies(levelName))
+        if (!Settings.ReplaceRequiredEnemies || levelName == TR2LevelNames.HOME)
         {
-            if (!newTypes.Contains(type))
+            foreach (TR2Type type in TR2EnemyUtilities.GetRequiredEnemies(levelName))
             {
-                newTypes.Add(type);
+                if (!newTypes.Contains(type))
+                {
+                    newTypes.Add(type);
+                }
             }
         }
 
@@ -412,8 +415,13 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             int enemyIndex = level.Entities.IndexOf(currentEntity);
 
             // If it's an existing enemy that has to remain in the same spot, skip it
-            if (TR2EnemyUtilities.IsEnemyRequired(levelName, currentType)
-                || ItemFactory.IsItemLocked(levelName, enemyIndex))
+            if ((!Settings.ReplaceRequiredEnemies || levelName == TR2LevelNames.HOME)
+                && TR2EnemyUtilities.IsEnemyRequired(levelName, currentType))
+            {
+                continue;
+            }
+
+            if (ItemFactory.IsItemLocked(levelName, enemyIndex))
             {
                 continue;
             }
