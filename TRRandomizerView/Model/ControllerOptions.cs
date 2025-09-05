@@ -2708,7 +2708,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         ItemBoolItemControls = new()
         {
-            _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _allowReturnPathLocations, _allowEnemyKeyDrops, _randomizeVehicles, _oneItemDifficulty, _maintainKeyContinuity, _includeExtraPickups
+            _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _allowReturnPathLocations, _allowEnemyKeyDrops, _randomizeVehicles, _oneItemDifficulty, _includeExtraPickups, _maintainKeyContinuity
         };
         EnemyBoolItemControls = new()
         {

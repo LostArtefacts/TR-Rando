@@ -8,6 +8,22 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
 {
+    private static readonly Dictionary<string, int> _extraItemCounts = new()
+    {
+        [TR2LevelNames.GW]
+            = 13, // Default = 5
+        [TR2LevelNames.VENICE]
+            = 4,  // Default = 20
+        [TR2LevelNames.BARTOLI]
+            = 4, // Default = 20
+        [TR2LevelNames.RIG]
+            = 2,  // Default = 22
+        [TR2LevelNames.FATHOMS]
+            = 13, // Default = 7
+        [TR2LevelNames.LQ]
+            = 10, // Default = 8
+    };
+
     public short DefaultItemShade { get; set; }
 
     public TR2ItemAllocator()
@@ -45,6 +61,7 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
         }
 
         InitialisePicker(levelName, level, Settings.ItemMode == ItemMode.Default ? LocationMode.Default : LocationMode.ExistingItems);
+        AddExtraPickups(levelName, level.Entities);
 
         if (Settings.ItemMode == ItemMode.Default)
         {
@@ -130,5 +147,20 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
 
         TR2LocationGenerator generator = new();
         return generator.Generate(level, exclusions, keyItemMode);
+    }
+
+    private void AddExtraPickups(string levelName, List<TR2Entity> allItems)
+    {
+        if (!Settings.IncludeExtraPickups || !_extraItemCounts.TryGetValue(levelName, out var count))
+        {
+            return;
+        }
+
+        var types = TR2TypeUtilities.GetAmmoTypes();
+        for (int i = 0; i < count; i++)
+        {
+            var item = ItemFactory.CreateItem(levelName, allItems, _picker.GetRandomLocation());
+            item.TypeID = types.RandomItem(Generator);
+        }
     }
 }

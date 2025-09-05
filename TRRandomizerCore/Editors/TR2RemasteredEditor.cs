@@ -19,6 +19,7 @@ public class TR2RemasteredEditor : TR2ClassicEditor
         Settings.AllowReturnPathLocations = false;
         Settings.AddReturnPaths = false;
         Settings.FixOGBugs = false;
+        Settings.IncludeExtraPickups = false;
         Settings.ReplaceRequiredEnemies = false;
         Settings.SwapEnemyAppearance = false;
     }
