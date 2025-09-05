@@ -228,7 +228,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 laraImport.Add(lara);
                 laraRemovals.AddRange(_laraRemovals);
                 var monitor = _outer.TextureMonitor.GetMonitor(level.Name);
-                monitor?.PreparedLevelMapping.Keys.Where(s => s.EntityTextureMap.ContainsKey(defaultAlias))
+                monitor?.PreparedLevelMapping?.Keys.Where(s => s.EntityTextureMap.ContainsKey(defaultAlias))
                     .ToList().ForEach(s => monitor.PreparedLevelMapping.Remove(s));
             }
             
