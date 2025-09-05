@@ -25,6 +25,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
     private static readonly double _cloneChance = 0.5;
     private static readonly double _easyPistolChance = 0.2;
+    private static readonly uint _maxClones = 8;
 
     private Dictionary<string, List<Location>> _pistolLocations;
     private TR2EnemyAllocator _allocator;
@@ -133,6 +134,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
     {
         MakeChickensUnconditional(level.Data);
         RandomizeEnemyMeshes(level, enemies);
+        CloneEnemies(level);
         AddUnarmedItems(level);
     }
 
@@ -205,6 +207,45 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         if (enemies.All.Contains(enemyType) && _generator.NextDouble() < _cloneChance)
         {
             cloneCollection.Add(enemyType);
+        }
+    }
+
+    private void CloneEnemies(TR2CombinedLevel level)
+    {
+        if (!Settings.UseEnemyClones)
+        {
+            return;
+        }
+
+        var enemies = level.Data.Entities
+            .Where(e => TR2TypeUtilities.IsEnemyType(e.TypeID))
+            .Where(e => Settings.RandoEnemyDifficulty == RandoDifficulty.NoRestrictions
+                        || e.TypeID != TR2Type.MarcoBartoli)
+            .ToList();
+
+        var cloneCount = Math.Max(2, Math.Min(_maxClones, Settings.EnemyMultiplier)) - 1;
+        var rotationStep = (short)Math.Ceiling(ushort.MaxValue / (cloneCount + 1d));
+
+        foreach (var enemy in enemies)
+        {
+            var triggers = level.Data.FloorData.GetEntityTriggers(level.Data.Entities.IndexOf(enemy));
+            if (triggers.Count == 0)
+            {
+                continue;
+            }
+
+            for (int i = 0; i < cloneCount; i++)
+            {
+                var action = new FDActionItem
+                {
+                    Parameter = (short)level.Data.Entities.Count,
+                };
+                triggers.ForEach(t => t.Actions.Add(action.Clone()));
+
+                var clone = enemy.Clone() as TR2Entity;
+                level.Data.Entities.Add(clone);
+                clone.Angle -= (short)((i + 1) * rotationStep);
+            }
         }
     }
 

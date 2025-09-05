@@ -92,6 +92,7 @@ internal class TRVersionSupport
         TRRandomizerType.BirdMonsterBehaviour,
         TRRandomizerType.BlankTracks,
         TRRandomizerType.Braid,
+        TRRandomizerType.ClonedEnemies,
         TRRandomizerType.DocileBirdMonster,
         TRRandomizerType.DisableDemos,
         TRRandomizerType.DragonSpawn,

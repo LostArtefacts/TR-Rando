@@ -11,6 +11,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
     private const int _hshPlaceholderCount = 15;
     private const int _platformEndRoom = 77;
 
+    private static readonly EnemyTransportCollection<TR2Type> _emptyEnemies = new();
     private static readonly List<int> _floaterFlameEnemies = new() { 34, 35 };
     private static readonly TR2Entity _hshPlaceholderDog = new()
     {
@@ -51,6 +52,12 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         if (levelName == TR2LevelNames.ASSAULT)
         {
             return null;
+        }
+
+        if (!Settings.IsRemastered && Settings.UseEnemyClones && Settings.CloneOriginalEnemies)
+        {
+            // Skip import altogether for OG clone mode
+            return _emptyEnemies;
         }
 
         List<TR2Type> oldTypes = GetCurrentEnemyTypes(level);
@@ -277,24 +284,23 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             return null;
         }
 
-        List<TR2Type> availableEnemyTypes = GetCurrentEnemyTypes(level);
-        List<TR2Type> waterEnemies = TR2TypeUtilities.FilterWaterEnemies(availableEnemyTypes);
-        List<TR2Type> droppableEnemies = TR2TypeUtilities.FilterDropperEnemies(availableEnemyTypes,
-            !Settings.ProtectMonks, Settings.UnconditionalChickens, Settings.IsRemastered);
-
         if (Settings.DocileChickens && levelName == TR2LevelNames.CHICKEN)
         {
             DisguiseType(levelName, level.Models, TR2Type.MaskedGoon1, TR2Type.BirdMonster);
         }
 
-        EnemyRandomizationCollection<TR2Type> enemies = new()
+        var enemies = new EnemyRandomizationCollection<TR2Type>
         {
-            Available = availableEnemyTypes,
-            Droppable = droppableEnemies,
-            Water = waterEnemies,
-            All = new(availableEnemyTypes),
             BirdMonsterGuiser = TR2Type.MaskedGoon1,
         };
+
+        if (Settings.IsRemastered || !Settings.UseEnemyClones || !Settings.CloneOriginalEnemies)
+        {
+            enemies.Available.AddRange(GetCurrentEnemyTypes(level));
+            enemies.Water.AddRange(TR2TypeUtilities.FilterWaterEnemies(enemies.Available));
+            enemies.Droppable.AddRange(TR2TypeUtilities.FilterDropperEnemies(enemies.Available,
+                !Settings.ProtectMonks, Settings.UnconditionalChickens, Settings.IsRemastered));
+        }
 
         RandomizeEnemies(levelName, level, enemies);
 
@@ -396,6 +402,11 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
         foreach (TR2Entity currentEntity in enemyEntities)
         {
+            if (enemies.Available.Count == 0)
+            {
+                continue;
+            }
+
             TR2Type currentType = currentEntity.TypeID;
             TR2Type newType = currentType;
             int enemyIndex = level.Entities.IndexOf(currentEntity);
