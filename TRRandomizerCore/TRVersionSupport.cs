@@ -99,6 +99,7 @@ internal class TRVersionSupport
         TRRandomizerType.DynamicTextures,
         TRRandomizerType.Enemy,
         TRRandomizerType.Environment,
+        TRRandomizerType.ExtraPickups,
         TRRandomizerType.GeneralBugFixes,
         TRRandomizerType.GlitchedSecrets,
         TRRandomizerType.HardSecrets,
