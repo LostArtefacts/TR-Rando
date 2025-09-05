@@ -2,6 +2,7 @@
 - added support for TR1X 4.14 (now the minimum version supported) (#803)
 - added support TR2X (#821)
 - added Spanish translations for TR1 (#800)
+- added pickup items to Lara's Home for item randomization in TR2X (#832)
 - fixed a crash at the end of Diving Area in TR2R (#814)
 - fixed a potential key softlock in City of Khamoon if "large" range is selected and either return paths are disabled in classic, or playing remastered (#820)
 - fixed the raptor spawns in Crash Site when enemies are randomized to guarantee that some appear when using the turret (#818)
