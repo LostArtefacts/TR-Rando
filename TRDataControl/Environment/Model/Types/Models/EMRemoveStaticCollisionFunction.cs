@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 
 namespace TRDataControl.Environment;
 

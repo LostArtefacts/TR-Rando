@@ -14,6 +14,8 @@ namespace TRRandomizerCore.Editors;
 public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
 {
     private static readonly Point _regularBadgePos = new(1467, 26);
+    private static readonly Point _goldBadgePos = new(1719, 718);
+    private static readonly Point _comboBadgePos = new(29, 880);
 
     public RandomizerSettings Settings { get; private set; }
 
@@ -370,7 +372,13 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             string editedTitle = Path.Combine(GetWriteBasePath(), "title.png");
             TRImage bg = new(backupTitle);
             TRImage badge = new("Resources/Shared/Graphics/tr2badge-small.png");
-            bg.Import(badge, _regularBadgePos, true);
+            bg.Import(badge, scriptEditor.GameMode == GameMode.Gold ? _goldBadgePos : _regularBadgePos, true);
+
+            if (scriptEditor.GameMode == GameMode.Combined)
+            {
+                TRImage comboBadge = new("Resources/Shared/Graphics/mask-of-xian.png");
+                bg.Import(comboBadge, _comboBadgePos, true);
+            }
 
             bg.Save(editedTitle);
 
