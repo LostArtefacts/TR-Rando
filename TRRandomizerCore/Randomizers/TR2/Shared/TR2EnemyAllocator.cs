@@ -240,7 +240,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         else
         {
             // #345 Barkhang/Opera with only Winstons causes freezing issues
-            List<TR2Type> friends = TR2EnemyUtilities.GetFriendlyEnemies();
+            List<TR2Type> friends = TR2TypeUtilities.GetAllies();
             if (_friendlyLimitLevels.Contains(levelName) && newTypes.All(friends.Contains))
             {
                 // Add an additional "safe" enemy - so pick from the droppable range, monks and chickens excluded
@@ -549,7 +549,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         }
 
         // Or too many friends - #345
-        List<TR2Type> friends = TR2EnemyUtilities.GetFriendlyEnemies();
+        List<TR2Type> friends = TR2TypeUtilities.GetAllies();
         if (_friendlyLimitLevels.Contains(levelName) && enemies.Available.Any(friends.Contains))
         {
             LimitFriendlyEnemies(level, enemies.Available.Except(friends).ToList(), friends);
