@@ -16,7 +16,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         {
             return TRBlobType.Sprite;
         }
-        if (type >= TR2Type.SceneryBase && type < TR2Type.BengalTiger)
+        if (type > TR2Type.MonkWithNoShadow && type < TR2Type.BengalTiger)
         {
             return TRBlobType.StaticMesh;
         }

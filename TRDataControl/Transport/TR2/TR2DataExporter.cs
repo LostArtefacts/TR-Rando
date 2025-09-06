@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
 using TRImageControl.Packing;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TRDataControl;
@@ -33,6 +34,9 @@ public class TR2DataExporter : TRDataExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
 
     protected override TRMesh GetDummyMesh()
         => Level.Models[TR2Type.Lara].Meshes[0];
+
+    protected override string GetTypeName(TR2Type type)
+        => TR2TypeUtilities.GetName(type);
 
     protected override void StoreColour(ushort index, TR2Blob blob)
     {
@@ -70,14 +74,6 @@ public class TR2DataExporter : TRDataExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
             case TR2Type.DragonExplosion2_H:
                 ScaleSphereOfDoom(blob);
                 break;
-            case TR2Type.Gunman1TopixtorORC:
-            case TR2Type.Gunman1TopixtorCAC:
-                //AmendDXtre3DTextures(blob);
-                break;
-            case TR2Type.FlamethrowerGoonTopixtor:
-                //AmendDXtre3DTextures(blob);
-                //AmendDXtre3DFlameTextures(blob);
-                break;
 
         }
     }
@@ -98,68 +94,4 @@ public class TR2DataExporter : TRDataExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         region.GenerateID();
         region.Segments.ForEach(s => s.Texture.Size = clip.Size);
     }
-
-    //protected void AmendDXtre3DTextures(TR2Blob definition)
-    //{
-    //    // Dxtre3D can produce faulty UV mapping which can cause casting issues
-    //    // when used in model IO, so fix coordinates at this stage.
-    //    // This may no longer be the case...
-    //    foreach (List<IndexedTRObjectTexture> textureList in definition.ObjectTextures.Values)
-    //    {
-    //        foreach (IndexedTRObjectTexture texture in textureList)
-    //        {
-    //            Dictionary<TRObjectTextureVert, Point> points = new();
-    //            foreach (TRObjectTextureVert vertex in texture.Texture.Vertices)
-    //            {
-    //                int x = vertex.XCoordinate.Fraction;
-    //                if (vertex.XCoordinate.Whole == byte.MaxValue)
-    //                {
-    //                    x++;
-    //                }
-
-    //                int y = vertex.YCoordinate.Fraction;
-    //                if (vertex.YCoordinate.Whole == byte.MaxValue)
-    //                {
-    //                    y++;
-    //                }
-    //                points[vertex] = new Point(x, y);
-    //            }
-
-    //            int maxX = points.Values.Max(p => p.X);
-    //            int maxY = points.Values.Max(p => p.Y);
-    //            foreach (TRObjectTextureVert vertex in texture.Texture.Vertices)
-    //            {
-    //                Point p = points[vertex];
-    //                if (p.X == maxX && maxX != byte.MaxValue)
-    //                {
-    //                    vertex.XCoordinate.Fraction--;
-    //                    vertex.XCoordinate.Whole = byte.MaxValue;
-    //                }
-    //                if (p.Y == maxY && maxY != byte.MaxValue)
-    //                {
-    //                    vertex.YCoordinate.Fraction--;
-    //                    vertex.YCoordinate.Whole = byte.MaxValue;
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
-    //private static void AmendDXtre3DFlameTextures(TR2Blob definition)
-    //{
-    //    if (!definition.SpriteSequences.ContainsKey(TR2Type.Flame_S_H))
-    //    {
-    //        return;
-    //    }
-
-    //    // Ensures the flame sprite is aligned to OG - required for texture monitoring
-    //    Dictionary<int, List<IndexedTRSpriteTexture>> defaultSprites = definition.SpriteTextures[TR2Type.Flame_S_H];
-    //    foreach (int id in defaultSprites.Keys)
-    //    {
-    //        foreach (IndexedTRSpriteTexture sprite in defaultSprites[id])
-    //        {
-    //            sprite.Index += 22;
-    //        }
-    //    }
-    //}
 }

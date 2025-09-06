@@ -20,12 +20,12 @@ public abstract class TRDataTransport<L, T, S, B>
     public void StoreBlob(B blob)
     {
         Directory.CreateDirectory(DataFolder);
-        TRBlobControl.Write(blob, Path.Combine(DataFolder, blob.Alias.ToString().ToUpper() + _blobExt));
+        TRBlobControl.Write(blob, Path.Combine(DataFolder, GetTypeName(blob.Alias).ToUpper() + _blobExt));
     }
 
     public B LoadBlob(T type)
     {
-        return TRBlobControl.Read<B>(Path.Combine(DataFolder, type.ToString().ToUpper() + _blobExt));
+        return TRBlobControl.Read<B>(Path.Combine(DataFolder, GetTypeName(type).ToUpper() + _blobExt));
     }
 
     protected abstract TRTexturePacker CreatePacker();
@@ -36,4 +36,6 @@ public abstract class TRDataTransport<L, T, S, B>
     protected abstract TRDictionary<T, TRStaticMesh> StaticMeshes { get; }
     protected abstract TRDictionary<T, TRSpriteSequence> SpriteSequences { get; }
     protected abstract List<TRCinematicFrame> CinematicFrames { get; }
+    protected virtual string GetTypeName(T type)
+        => type.ToString();
 }
