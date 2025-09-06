@@ -254,6 +254,8 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             TR2Type.BarracudaIce, TR2Type.BarracudaUnwater, TR2Type.BarracudaXian
         },
 
+        [TR2Type.Shark] = [TR2Type.SharkOG, TR2Type.SharkGM],
+
         [TR2Type.Puzzle1_M_H] = new()
         {
             TR2Type.Puzzle1_M_H_CircuitBoard, TR2Type.Puzzle1_M_H_CircuitBreaker, TR2Type.Puzzle1_M_H_Dagger, TR2Type.Puzzle1_M_H_DragonSeal, TR2Type.Puzzle1_M_H_MysticPlaque,

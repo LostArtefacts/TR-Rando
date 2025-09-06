@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
 using TRImageControl.Packing;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
@@ -66,6 +67,16 @@ public class TR2DataExporter : TRDataExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
     protected override List<TRCinematicFrame> CinematicFrames
         => Level.CinematicFrames;
 
+    protected override void PreCreation(TR2Level level, TR2Type type, TRBlobType blobType)
+    {
+        switch (type)
+        {
+            case TR2Type.SharkGM:
+                FixSharkSFX(level);
+                break;
+        }
+    }
+
     protected override void PostCreation(TR2Blob blob)
     {
         switch (blob.Alias)
@@ -74,7 +85,20 @@ public class TR2DataExporter : TRDataExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
             case TR2Type.DragonExplosion2_H:
                 ScaleSphereOfDoom(blob);
                 break;
+        }
+    }
 
+    private static void FixSharkSFX(TR2Level level)
+    {
+        var fathoms = new TR2LevelControl().Read(TR2LevelNames.FATHOMS);
+        var ogShark = fathoms.Models[TR2Type.Shark];
+        var gmShark = level.Models[TR2Type.Shark];
+
+        for (int i = 0; i < ogShark.Animations.Count; i++)
+        {
+            gmShark.Animations[i].Commands.RemoveAll(c => c is TRSFXCommand);
+            gmShark.Animations[i].Commands
+                .AddRange(ogShark.Animations[i].Commands.OfType<TRSFXCommand>());
         }
     }
 

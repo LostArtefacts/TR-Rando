@@ -62,7 +62,7 @@ public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
         [TR2Type.FlamethrowerGoonOG] = TR2LevelNames.DA,
 
         [TR2Type.BarracudaUnwater] = TR2LevelNames.FATHOMS,
-        [TR2Type.Shark] = TR2LevelNames.FATHOMS,
+        [TR2Type.SharkOG] = TR2LevelNames.FATHOMS,
         [TR2Type.LaraMiscAnim_H_Unwater] = TR2LevelNames.FATHOMS,
 
         [TR2Type.StickWieldingGoon1GreenVest] = TR2LevelNames.DORIA,

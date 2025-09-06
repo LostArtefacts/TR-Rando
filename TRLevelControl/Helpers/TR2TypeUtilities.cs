@@ -43,6 +43,11 @@ public static class TR2TypeUtilities
             [TR2Type.BarracudaXian] =
                 new() { TR2LevelNames.XIAN }
         },
+        [TR2Type.Shark] = new()
+        {
+            [TR2Type.SharkOG] = [TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.DECK],
+            [TR2Type.SharkGM] = [TR2LevelNames.COLDWAR],
+        },
         [TR2Type.StickWieldingGoon1] = new()
         {
             [TR2Type.StickWieldingGoon1Bandana] =
@@ -97,6 +102,7 @@ public static class TR2TypeUtilities
         {
             TR2Type.BarracudaIce, TR2Type.BarracudaUnwater, TR2Type.BarracudaXian
         },
+        [TR2Type.Shark] = [TR2Type.SharkOG, TR2Type.SharkGM],
         [TR2Type.StickWieldingGoon1] = new()
         {
             TR2Type.StickWieldingGoon1Bandana, TR2Type.StickWieldingGoon1BlackJacket, TR2Type.StickWieldingGoon1BodyWarmer,
@@ -221,7 +227,7 @@ public static class TR2TypeUtilities
             TR2Type.MonkWithLongStick,
             TR2Type.Rat,
             TR2Type.ScubaDiver,
-            TR2Type.Shark,
+            TR2Type.SharkOG,
             TR2Type.ShotgunGoon,
             TR2Type.SnowLeopard,
             TR2Type.Spider,
@@ -251,6 +257,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Gunman1TopixtorORC);
             types.Add(TR2Type.Gunman1TopixtorCAC);
             types.Add(TR2Type.Gunman1GM);
+            types.Add(TR2Type.SharkGM);
         }
 
         return types;
@@ -313,7 +320,8 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Eagle);
             types.Add(TR2Type.MercSnowmobDriver);
             types.Add(TR2Type.ScubaDiver);
-            types.Add(TR2Type.Shark);
+            types.Add(TR2Type.SharkOG);
+            types.Add(TR2Type.SharkGM);
             types.Add(TR2Type.Wolf);
 
             types.Add(TR2Type.FlamethrowerGoonTopixtor);
@@ -368,6 +376,8 @@ public static class TR2TypeUtilities
             TR2Type.Rat,
             TR2Type.ScubaDiver,
             TR2Type.Shark,
+            TR2Type.SharkOG,
+            TR2Type.SharkGM,
             TR2Type.ShotgunGoon,
             TR2Type.SnowLeopard,
             TR2Type.Spider,
@@ -627,16 +637,18 @@ public static class TR2TypeUtilities
 
     public static bool IsWaterCreature(TR2Type type)
     {
-        return (type == TR2Type.Shark || type == TR2Type.YellowMorayEel || type == TR2Type.BlackMorayEel ||
-            type == TR2Type.Barracuda || type == TR2Type.BarracudaIce || type == TR2Type.BarracudaUnwater ||
-            type == TR2Type.BarracudaXian || type == TR2Type.ScubaDiver);
+        return type == TR2Type.Shark || type == TR2Type.SharkOG || type == TR2Type.SharkGM
+            || type == TR2Type.YellowMorayEel || type == TR2Type.BlackMorayEel
+            || type == TR2Type.Barracuda || type == TR2Type.BarracudaIce || type == TR2Type.BarracudaUnwater
+            || type == TR2Type.BarracudaXian || type == TR2Type.ScubaDiver;
     }
 
     public static List<TR2Type> WaterCreatures()
     {
         return new()
         {
-            TR2Type.Shark,
+            TR2Type.SharkOG,
+            TR2Type.SharkGM,
             TR2Type.BarracudaIce,
             TR2Type.BarracudaUnwater,
             TR2Type.BarracudaXian,
@@ -650,7 +662,8 @@ public static class TR2TypeUtilities
     {
         return new()
         {
-            TR2Type.Shark,
+            TR2Type.SharkOG,
+            TR2Type.SharkGM,
             TR2Type.BarracudaIce,
             TR2Type.BarracudaUnwater,
             TR2Type.BarracudaXian,
