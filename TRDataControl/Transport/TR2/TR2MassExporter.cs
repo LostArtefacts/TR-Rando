@@ -100,7 +100,7 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
             TR2Type.Gunman1TopixtorCAC
         },
         [TR2LevelNames.COLDWAR] = [TR2Type.MonkWithNoShadow],
-        [TR2LevelNames.FOOLGOLD] = [TR2Type.FlamethrowerGoonGM],
+        [TR2LevelNames.FOOLGOLD] = [TR2Type.FlamethrowerGoonGM, TR2Type.Gunman1GM],
         [TR2LevelNames.FURNACE] = [TR2Type.Wolf, TR2Type.Bear],
     };
 }

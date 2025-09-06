@@ -81,7 +81,9 @@ public static class TR2TypeUtilities
             [TR2Type.Gunman1TopixtorORC]
                 = new() { },
             [TR2Type.Gunman1TopixtorCAC]
-                = new() { }
+                = new() { },
+            [TR2Type.Gunman1GM]
+                = [TR2LevelNames.FOOLGOLD]
         }
     };
 
@@ -110,7 +112,7 @@ public static class TR2TypeUtilities
         },
         [TR2Type.Gunman1] = new()
         {
-            TR2Type.Gunman1OG, TR2Type.Gunman1TopixtorORC, TR2Type.Gunman1TopixtorCAC
+            TR2Type.Gunman1OG, TR2Type.Gunman1TopixtorORC, TR2Type.Gunman1TopixtorCAC, TR2Type.Gunman1GM,
         }
     };
 
@@ -248,6 +250,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.FlamethrowerGoonGM);
             types.Add(TR2Type.Gunman1TopixtorORC);
             types.Add(TR2Type.Gunman1TopixtorCAC);
+            types.Add(TR2Type.Gunman1GM);
         }
 
         return types;
@@ -317,6 +320,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.FlamethrowerGoonGM);
             types.Add(TR2Type.Gunman1TopixtorORC);
             types.Add(TR2Type.Gunman1TopixtorCAC);
+            types.Add(TR2Type.Gunman1GM);
         }
 
         return types;
@@ -348,6 +352,7 @@ public static class TR2TypeUtilities
             TR2Type.Gunman1OG,
             TR2Type.Gunman1TopixtorORC,
             TR2Type.Gunman1TopixtorCAC,
+            TR2Type.Gunman1GM,
             TR2Type.Gunman2,
             TR2Type.Knifethrower,
             TR2Type.MarcoBartoli,
