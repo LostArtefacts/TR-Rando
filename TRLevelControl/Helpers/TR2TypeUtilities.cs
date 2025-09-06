@@ -70,7 +70,9 @@ public static class TR2TypeUtilities
             [TR2Type.FlamethrowerGoonOG]
                 = new() { TR2LevelNames.DA, TR2LevelNames.DECK },
             [TR2Type.FlamethrowerGoonTopixtor]
-                = new() { }
+                = new() { },
+            [TR2Type.FlamethrowerGoonGM]
+                = [TR2LevelNames.FOOLGOLD],
         },
         [TR2Type.Gunman1] = new()
         {
@@ -104,7 +106,7 @@ public static class TR2TypeUtilities
         },
         [TR2Type.FlamethrowerGoon] = new()
         {
-            TR2Type.FlamethrowerGoonOG, TR2Type.FlamethrowerGoonTopixtor
+            TR2Type.FlamethrowerGoonOG, TR2Type.FlamethrowerGoonTopixtor, TR2Type.FlamethrowerGoonGM,
         },
         [TR2Type.Gunman1] = new()
         {
@@ -243,6 +245,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Wolf);
 
             types.Add(TR2Type.FlamethrowerGoonTopixtor);
+            types.Add(TR2Type.FlamethrowerGoonGM);
             types.Add(TR2Type.Gunman1TopixtorORC);
             types.Add(TR2Type.Gunman1TopixtorCAC);
         }
@@ -311,6 +314,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Wolf);
 
             types.Add(TR2Type.FlamethrowerGoonTopixtor);
+            types.Add(TR2Type.FlamethrowerGoonGM);
             types.Add(TR2Type.Gunman1TopixtorORC);
             types.Add(TR2Type.Gunman1TopixtorCAC);
         }
@@ -338,6 +342,7 @@ public static class TR2TypeUtilities
             TR2Type.FlamethrowerGoon,
             TR2Type.FlamethrowerGoonOG,
             TR2Type.FlamethrowerGoonTopixtor,
+            TR2Type.FlamethrowerGoonGM,
             TR2Type.GiantSpider,
             TR2Type.Gunman1,
             TR2Type.Gunman1OG,

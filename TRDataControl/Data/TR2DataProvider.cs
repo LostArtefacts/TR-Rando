@@ -241,7 +241,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
 
         [TR2Type.FlamethrowerGoon] = new()
         {
-            TR2Type.FlamethrowerGoonOG, TR2Type.FlamethrowerGoonTopixtor
+            TR2Type.FlamethrowerGoonOG, TR2Type.FlamethrowerGoonTopixtor, TR2Type.FlamethrowerGoonGM,
         },
 
         [TR2Type.Gunman1] = new()
