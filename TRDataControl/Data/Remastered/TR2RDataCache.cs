@@ -50,6 +50,7 @@ public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
         [TR2Type.StickWieldingGoon1BodyWarmer] = TR2LevelNames.VENICE,
 
         [TR2Type.StickWieldingGoon1WhiteVest] = TR2LevelNames.BARTOLI,
+        [TR2Type.StickWieldingGoon1GM] = TR2LevelNames.BARTOLI,
 
         [TR2Type.ShotgunGoon] = TR2LevelNames.OPERA,
 
@@ -133,5 +134,6 @@ public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
         [TR2Type.WhiteTiger] = TR2RAlias.TIGER_ICECAVE,
         [TR2Type.BarracudaXian] = TR2RAlias.BARACUDDA_EMPRTOMB,
         [TR2Type.StickWieldingGoon1BlackJacket] = TR2RAlias.WORKER3_HOUSE,
+        [TR2Type.StickWieldingGoon1GM] = TR2RAlias.WORKER3_BOAT,
     };
 }

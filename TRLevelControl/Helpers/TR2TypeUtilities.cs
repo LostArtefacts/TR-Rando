@@ -58,8 +58,8 @@ public static class TR2TypeUtilities
                 new() { TR2LevelNames.VENICE },
             [TR2Type.StickWieldingGoon1GreenVest] =
                 new() { TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.LQ, TR2LevelNames.DECK },
-            [TR2Type.StickWieldingGoon1WhiteVest] =
-                new() { TR2LevelNames.BARTOLI, TR2LevelNames.OPERA }
+            [TR2Type.StickWieldingGoon1WhiteVest] = [TR2LevelNames.BARTOLI, TR2LevelNames.OPERA],
+            [TR2Type.StickWieldingGoon1GM] = [TR2LevelNames.FOOLGOLD, TR2LevelNames.VEGAS],
         },
         [TR2Type.TigerOrSnowLeopard] = new()
         {
@@ -126,7 +126,7 @@ public static class TR2TypeUtilities
         [TR2Type.StickWieldingGoon1] = new()
         {
             TR2Type.StickWieldingGoon1Bandana, TR2Type.StickWieldingGoon1BlackJacket, TR2Type.StickWieldingGoon1BodyWarmer,
-            TR2Type.StickWieldingGoon1GreenVest, TR2Type.StickWieldingGoon1WhiteVest
+            TR2Type.StickWieldingGoon1GreenVest, TR2Type.StickWieldingGoon1WhiteVest, TR2Type.StickWieldingGoon1GM,
         },
         [TR2Type.TigerOrSnowLeopard] = new()
         {
@@ -260,6 +260,7 @@ public static class TR2TypeUtilities
             TR2Type.StickWieldingGoon1BodyWarmer,
             TR2Type.StickWieldingGoon1GreenVest,
             TR2Type.StickWieldingGoon1WhiteVest,
+            TR2Type.StickWieldingGoon1GM,
             TR2Type.StickWieldingGoon2,
             TR2Type.TRex,
             TR2Type.WhiteTiger,
@@ -315,6 +316,7 @@ public static class TR2TypeUtilities
             TR2Type.StickWieldingGoon1BodyWarmer,
             TR2Type.StickWieldingGoon1GreenVest,
             TR2Type.StickWieldingGoon1WhiteVest,
+            TR2Type.StickWieldingGoon1GM,
             TR2Type.StickWieldingGoon2,
             TR2Type.TRex,
             TR2Type.WhiteTiger,
@@ -423,6 +425,7 @@ public static class TR2TypeUtilities
             TR2Type.StickWieldingGoon1BodyWarmer,
             TR2Type.StickWieldingGoon1GreenVest,
             TR2Type.StickWieldingGoon1WhiteVest,
+            TR2Type.StickWieldingGoon1GM,
             TR2Type.StickWieldingGoon2,
             TR2Type.TigerOrSnowLeopard,
             TR2Type.TRex,
