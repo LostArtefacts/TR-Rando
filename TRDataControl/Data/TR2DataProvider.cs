@@ -168,8 +168,8 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             new() { TR2Type.MaskedGoon1 },
         [TR2Type.MaskedGoon3] =
             new() { TR2Type.MaskedGoon1 },
-        [TR2Type.Mercenary3] =
-            new() { TR2Type.Mercenary2 },
+        [TR2Type.Mercenary3OG] = [TR2Type.Mercenary2OG],
+        [TR2Type.Mercenary3GM] = [TR2Type.Mercenary2GM],
         [TR2Type.MercSnowmobDriver] =
             new() { TR2Type.BlackSnowmob },
         [TR2Type.Pistols_M_H] =
@@ -249,6 +249,9 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             TR2Type.Gunman1OG, TR2Type.Gunman1TopixtorORC, TR2Type.Gunman1TopixtorCAC, TR2Type.Gunman1GM,
         },
 
+        [TR2Type.Mercenary2] = [TR2Type.Mercenary2OG, TR2Type.Mercenary2GM],
+        [TR2Type.Mercenary3] = [TR2Type.Mercenary3OG, TR2Type.Mercenary3GM],
+
         [TR2Type.Barracuda] = new()
         {
             TR2Type.BarracudaIce, TR2Type.BarracudaUnwater, TR2Type.BarracudaXian
@@ -283,7 +286,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
 
     private static readonly List<TR2Type> _nonGraphicsDependencies = new()
     {
-        TR2Type.StickWieldingGoon1GreenVest, TR2Type.MaskedGoon1, TR2Type.Mercenary2
+        TR2Type.StickWieldingGoon1GreenVest, TR2Type.MaskedGoon1, TR2Type.Mercenary2OG, TR2Type.Mercenary2GM
     };
 
     private static readonly Dictionary<TR2Type, List<TR2SFX>> _hardcodedSFX = new()
