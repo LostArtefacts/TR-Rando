@@ -75,7 +75,8 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             newTypes.Add(SelectRequiredEnemy(waterEnemies, levelName, difficulty));
         }
 
-        if (TR2EnemyUtilities.IsDroppableEnemyRequired(level))
+        if (TR2EnemyUtilities.IsDroppableEnemyRequired(level)
+            && !newTypes.Any(t => TR2TypeUtilities.CanDropPickups(t, !Settings.ProtectMonks, Settings.UnconditionalChickens, Settings.IsRemastered)))
         {
             List<TR2Type> droppableEnemies = TR2TypeUtilities.GetDropperEnemies(!Settings.ProtectMonks, Settings.UnconditionalChickens, Settings.IsRemastered);
             newTypes.Add(SelectRequiredEnemy(droppableEnemies, levelName, difficulty));
