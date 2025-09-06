@@ -72,6 +72,8 @@ public class TR2CombinedLevel
         }
     }
 
+    public bool IsExpansion => TR2LevelNames.AsListGold.Contains(Name);
+
     /// <summary>
     /// Returns {Name}-UKBox if this level is for UKBox, otherwise just {Name}.
     /// </summary>

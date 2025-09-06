@@ -69,6 +69,10 @@ public class TR2XDataTask : ITR2ProcessorTask
             level.Data.Models.Remove(TR2Type.BreakableWindow1);
             importer.TypesToImport.Add(TR2Type.BreakableWindow1);
         }
+        else if (level.Is(TR2LevelNames.VEGAS))
+        {
+            importer.TypesToImport.AddRange([TR2Type.M16_M_H, TR2Type.GrenadeLauncher_M_H, TR2Type.Harpoon_M_H,]);
+        }
 
         importer.Import();
     }
