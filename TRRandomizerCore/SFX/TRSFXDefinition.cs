@@ -12,6 +12,7 @@ public class TRSFXDefinition<T, E>
     public TRSFXCreatureCategory Creature { get; set; }
     public List<TRSFXGeneralCategory> Categories { get; set; }
     public string SourceLevel { get; set; }
+    public uint? GoldSampleRemap { get; set; }
 
     [JsonIgnore]
     public E SoundEffect { get; set; }
