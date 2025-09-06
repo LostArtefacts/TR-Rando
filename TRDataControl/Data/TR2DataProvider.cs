@@ -194,9 +194,8 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             new() { TR2Type.LaraMiscAnim_H_Xian, TR2Type.XianGuardSpearStatue },
         [TR2Type.XianGuardSword] =
             new() { TR2Type.XianGuardSwordStatue, TR2Type.XianGuardSparkles_S_H },
-        [TR2Type.Yeti] =
-            new() { TR2Type.LaraMiscAnim_H_Ice },
-        
+        [TR2Type.YetiOG] = [TR2Type.LaraMiscAnim_H_Ice],
+        [TR2Type.YetiGM] = [TR2Type.LaraMiscAnim_H_Ice],
     };
 
     private static readonly List<TR2Type> _cinematicTypes = new()
@@ -255,6 +254,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         [TR2Type.MercSnowmobDriver] = [TR2Type.MercSnowmobDriverOG, TR2Type.MercSnowmobDriverGM],
         [TR2Type.BlackSnowmob] = [TR2Type.BlackSnowmobOG, TR2Type.BlackSnowmobGM],
         [TR2Type.MonkWithKnifeStick] = [TR2Type.MonkWithKnifeStickOG, TR2Type.MonkWithKnifeStickGM],
+        [TR2Type.Yeti] = [TR2Type.YetiOG, TR2Type.YetiGM],
 
         [TR2Type.Barracuda] = new()
         {
