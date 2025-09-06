@@ -31,8 +31,9 @@ public class TR2GameStringRandomizer : BaseTR2Randomizer
         {
             // This is specific to the Dagger of Xian if it appears in other levels with the dragon. We'll just
             // use whatever has already been allocated as the dagger name in Lair.
-            string daggerName = ScriptEditor.ScriptedLevels.ToList().Find(l => l.Is(TR2LevelNames.LAIR)).Puzzles[1];
-            foreach (AbstractTRScriptedLevel level in ScriptEditor.ScriptedLevels)
+            var daggerName = script.Levels.FirstOrDefault(l => l.Is(TR2LevelNames.LAIR))
+                ?.Puzzles[1] ?? "Dagger of Xian";
+            foreach (var level in script.Levels)
             {
                 MoveAndReplacePuzzle(level, 1, 2, daggerName);
             }
