@@ -581,7 +581,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 76
   },
   {
     "InternalIndex": 67,
@@ -590,7 +591,8 @@
     "Categories": [
       53
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 77
   },
   {
     "InternalIndex": 68,
@@ -600,7 +602,8 @@
       51,
       52
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 78
   },
   {
     "InternalIndex": 69,
@@ -609,7 +612,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 79
   },
   {
     "InternalIndex": 70,
@@ -619,7 +623,8 @@
       171,
       201
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 82
   },
   {
     "InternalIndex": 71,
@@ -628,7 +633,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 83
   },
   {
     "InternalIndex": 72,
@@ -637,7 +643,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 84
   },
   {
     "InternalIndex": 73,
@@ -646,7 +653,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 85
   },
   {
     "InternalIndex": 74,
@@ -656,7 +664,8 @@
       171,
       201
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 86
   },
   {
     "InternalIndex": 75,
@@ -666,7 +675,8 @@
       171,
       201
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 87
   },
   {
     "InternalIndex": 76,
@@ -676,7 +686,8 @@
       171,
       201
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 88
   },
   {
     "InternalIndex": 77,
@@ -685,7 +696,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 89
   },
   {
     "InternalIndex": 78,
@@ -694,7 +706,8 @@
     "Categories": [
       22
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 90
   },
   {
     "InternalIndex": 79,
@@ -703,7 +716,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 91
   },
   {
     "InternalIndex": 80,
@@ -730,7 +744,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 94
   },
   {
     "InternalIndex": 83,
@@ -739,7 +754,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 95
   },
   {
     "InternalIndex": 84,
@@ -748,7 +764,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 96
   },
   {
     "InternalIndex": 85,
@@ -757,7 +774,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 97
   },
   {
     "InternalIndex": 86,
@@ -766,7 +784,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 100
   },
   {
     "InternalIndex": 87,
@@ -775,7 +794,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 101
   },
   {
     "InternalIndex": 88,
@@ -784,7 +804,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 104
   },
   {
     "InternalIndex": 89,
@@ -793,7 +814,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 105
   },
   {
     "InternalIndex": 90,
@@ -802,7 +824,8 @@
     "Categories": [
       141
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 108
   },
   {
     "InternalIndex": 91,
@@ -811,7 +834,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 109
   },
   {
     "InternalIndex": 92,
@@ -820,7 +844,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 112
   },
   {
     "InternalIndex": 93,
@@ -829,7 +854,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 113
   },
   {
     "InternalIndex": 94,
@@ -839,7 +865,8 @@
       141,
       201
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 114
   },
   {
     "InternalIndex": 95,
@@ -848,7 +875,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 115
   },
   {
     "InternalIndex": 96,
@@ -857,7 +885,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 116
   },
   {
     "InternalIndex": 97,
@@ -867,7 +896,8 @@
       171,
       201
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 117
   },
   {
     "InternalIndex": 98,
@@ -876,7 +906,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 119
   },
   {
     "InternalIndex": 99,
@@ -930,7 +961,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 125
   },
   {
     "InternalIndex": 105,
@@ -939,7 +971,8 @@
     "Categories": [
       51
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 126
   },
   {
     "InternalIndex": 106,
@@ -948,7 +981,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 128
   },
   {
     "InternalIndex": 107,
@@ -966,7 +1000,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 130
   },
   {
     "InternalIndex": 109,
@@ -975,7 +1010,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 131
   },
   {
     "InternalIndex": 111,
@@ -984,7 +1020,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 132
   },
   {
     "InternalIndex": 112,
@@ -993,7 +1030,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 133
   },
   {
     "InternalIndex": 113,
@@ -1002,7 +1040,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 134
   },
   {
     "InternalIndex": 114,
@@ -1011,7 +1050,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 135
   },
   {
     "InternalIndex": 115,
@@ -1020,7 +1060,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 136
   },
   {
     "InternalIndex": 116,
@@ -1029,7 +1070,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 137
   },
   {
     "InternalIndex": 117,
@@ -1038,7 +1080,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 138
   },
   {
     "InternalIndex": 118,
@@ -1047,7 +1090,8 @@
     "Categories": [
       21
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 142
   },
   {
     "InternalIndex": 119,
@@ -1056,7 +1100,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 144
   },
   {
     "InternalIndex": 120,
@@ -1065,7 +1110,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 145
   },
   {
     "InternalIndex": 121,
@@ -1074,7 +1120,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "BOAT.TR2"
+    "SourceLevel": "BOAT.TR2",
+    "GoldSampleRemap": 146
   },
   {
     "InternalIndex": 122,
@@ -1092,7 +1139,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 148
   },
   {
     "InternalIndex": 124,
@@ -1101,7 +1149,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 149
   },
   {
     "InternalIndex": 125,
@@ -1110,7 +1159,8 @@
     "Categories": [
       21
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 150
   },
   {
     "InternalIndex": 126,
@@ -1119,7 +1169,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 151
   },
   {
     "InternalIndex": 127,
@@ -1146,7 +1197,8 @@
     "Categories": [
       171
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 154
   },
   {
     "InternalIndex": 130,
@@ -1155,7 +1207,8 @@
     "Categories": [
       261
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 155
   },
   {
     "InternalIndex": 131,
@@ -1164,7 +1217,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 156
   },
   {
     "InternalIndex": 132,
@@ -1173,7 +1227,8 @@
     "Categories": [
       171
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 157
   },
   {
     "InternalIndex": 133,
@@ -1182,7 +1237,8 @@
     "Categories": [
       261
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 158
   },
   {
     "InternalIndex": 134,
@@ -1191,7 +1247,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 159
   },
   {
     "InternalIndex": 135,
@@ -1200,7 +1257,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 160
   },
   {
     "InternalIndex": 136,
@@ -1281,7 +1339,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 169
   },
   {
     "InternalIndex": 146,
@@ -1290,7 +1349,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 170
   },
   {
     "InternalIndex": 147,
@@ -1299,7 +1359,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 171
   },
   {
     "InternalIndex": 148,
@@ -1326,7 +1387,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 174
   },
   {
     "InternalIndex": 152,
@@ -1335,7 +1397,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 175
   },
   {
     "InternalIndex": 153,
@@ -1344,7 +1407,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 176
   },
   {
     "InternalIndex": 154,
@@ -1353,7 +1417,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 177
   },
   {
     "InternalIndex": 155,
@@ -1362,7 +1427,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 178
   },
   {
     "InternalIndex": 156,
@@ -1371,7 +1437,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 179
   },
   {
     "InternalIndex": 157,
@@ -1380,7 +1447,8 @@
     "Categories": [
       21
     ],
-    "SourceLevel": "RIG.TR2"
+    "SourceLevel": "RIG.TR2",
+    "GoldSampleRemap": 180
   },
   {
     "InternalIndex": 158,
@@ -1389,7 +1457,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "RIG.TR2"
+    "SourceLevel": "RIG.TR2",
+    "GoldSampleRemap": 181
   },
   {
     "InternalIndex": 159,
@@ -1398,7 +1467,8 @@
     "Categories": [
       141
     ],
-    "SourceLevel": "RIG.TR2"
+    "SourceLevel": "RIG.TR2",
+    "GoldSampleRemap": 182
   },
   {
     "InternalIndex": 160,
@@ -1407,7 +1477,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "RIG.TR2"
+    "SourceLevel": "RIG.TR2",
+    "GoldSampleRemap": 183
   },
   {
     "InternalIndex": 161,
@@ -1417,7 +1488,8 @@
       282,
       281
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 184
   },
   {
     "InternalIndex": 162,
@@ -1427,7 +1499,8 @@
       283,
       281
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 185
   },
   {
     "InternalIndex": 163,
@@ -1436,7 +1509,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 186
   },
   {
     "InternalIndex": 164,
@@ -1445,7 +1519,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 188
   },
   {
     "InternalIndex": 165,
@@ -1454,7 +1529,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 189
   },
   {
     "InternalIndex": 166,
@@ -1463,7 +1539,8 @@
     "Categories": [
       171
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 190
   },
   {
     "InternalIndex": 167,
@@ -1472,7 +1549,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 191
   },
   {
     "InternalIndex": 168,
@@ -1481,7 +1559,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 192
   },
   {
     "InternalIndex": 169,
@@ -1490,7 +1569,8 @@
     "Categories": [
       141
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 193
   },
   {
     "InternalIndex": 170,
@@ -1499,7 +1579,8 @@
     "Categories": [
       141
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 194
   },
   {
     "InternalIndex": 171,
@@ -1508,7 +1589,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 195
   },
   {
     "InternalIndex": 172,
@@ -1517,7 +1599,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 196
   },
   {
     "InternalIndex": 173,
@@ -1526,7 +1609,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 197
   },
   {
     "InternalIndex": 174,
@@ -1535,7 +1619,8 @@
     "Categories": [
       141
     ],
-    "SourceLevel": "PLATFORM.TR2"
+    "SourceLevel": "PLATFORM.TR2",
+    "GoldSampleRemap": 199
   },
   {
     "InternalIndex": 175,
@@ -1544,7 +1629,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "PLATFORM.TR2"
+    "SourceLevel": "PLATFORM.TR2",
+    "GoldSampleRemap": 200
   },
   {
     "InternalIndex": 176,
@@ -1553,7 +1639,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "PLATFORM.TR2"
+    "SourceLevel": "PLATFORM.TR2",
+    "GoldSampleRemap": 201
   },
   {
     "InternalIndex": 177,
@@ -1562,7 +1649,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "PLATFORM.TR2"
+    "SourceLevel": "PLATFORM.TR2",
+    "GoldSampleRemap": 202
   },
   {
     "InternalIndex": 178,
@@ -1571,7 +1659,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "PLATFORM.TR2"
+    "SourceLevel": "PLATFORM.TR2",
+    "GoldSampleRemap": 203
   },
   {
     "InternalIndex": 179,
@@ -1580,7 +1669,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "PLATFORM.TR2"
+    "SourceLevel": "PLATFORM.TR2",
+    "GoldSampleRemap": 204
   },
   {
     "InternalIndex": 180,
@@ -1625,7 +1715,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "RIG.TR2"
+    "SourceLevel": "RIG.TR2",
+    "GoldSampleRemap": 209
   },
   {
     "InternalIndex": 186,
@@ -1752,7 +1843,8 @@
       1,
       52
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 223
   },
   {
     "InternalIndex": 202,
@@ -1762,7 +1854,8 @@
       1,
       52
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 224
   },
   {
     "InternalIndex": 203,
@@ -1772,7 +1865,8 @@
       1,
       52
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 225
   },
   {
     "InternalIndex": 204,
@@ -1781,7 +1875,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 226
   },
   {
     "InternalIndex": 205,
@@ -1790,7 +1885,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 227
   },
   {
     "InternalIndex": 206,
@@ -1871,7 +1967,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "RIG.TR2"
+    "SourceLevel": "RIG.TR2",
+    "GoldSampleRemap": 237
   },
   {
     "InternalIndex": 217,
@@ -1889,7 +1986,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "OPERA.TR2"
+    "SourceLevel": "OPERA.TR2",
+    "GoldSampleRemap": 239
   },
   {
     "InternalIndex": 219,
@@ -1925,7 +2023,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "OPERA.TR2"
+    "SourceLevel": "OPERA.TR2",
+    "GoldSampleRemap": 243
   },
   {
     "InternalIndex": 223,
@@ -1934,7 +2033,8 @@
     "Categories": [
       52
     ],
-    "SourceLevel": "OPERA.TR2"
+    "SourceLevel": "OPERA.TR2",
+    "GoldSampleRemap": 244
   },
   {
     "InternalIndex": 224,
@@ -1970,7 +2070,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "RIG.TR2"
+    "SourceLevel": "RIG.TR2",
+    "GoldSampleRemap": 248
   },
   {
     "InternalIndex": 228,
@@ -1979,7 +2080,8 @@
     "Categories": [
       52
     ],
-    "SourceLevel": "RIG.TR2"
+    "SourceLevel": "RIG.TR2",
+    "GoldSampleRemap": 249
   },
   {
     "InternalIndex": 229,
@@ -2006,7 +2108,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 252
   },
   {
     "InternalIndex": 232,
@@ -2015,7 +2118,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 253
   },
   {
     "InternalIndex": 233,
@@ -2024,7 +2128,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 254
   },
   {
     "InternalIndex": 234,
@@ -2070,7 +2175,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 259
   },
   {
     "InternalIndex": 239,
@@ -2079,7 +2185,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 263
   },
   {
     "InternalIndex": 240,
@@ -2088,7 +2195,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 264
   },
   {
     "InternalIndex": 241,
@@ -2097,7 +2205,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 265
   },
   {
     "InternalIndex": 242,
@@ -2106,7 +2215,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 268
   },
   {
     "InternalIndex": 243,
@@ -2115,7 +2225,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 271
   },
   {
     "InternalIndex": 244,
@@ -2124,7 +2235,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 274
   },
   {
     "InternalIndex": 245,
@@ -2133,7 +2245,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 277
   },
   {
     "InternalIndex": 246,
@@ -2143,7 +2256,8 @@
       141,
       201
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 279
   },
   {
     "InternalIndex": 247,
@@ -2170,7 +2284,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 282
   },
   {
     "InternalIndex": 250,
@@ -2179,7 +2294,8 @@
     "Categories": [
       21
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 285
   },
   {
     "InternalIndex": 251,
@@ -2188,7 +2304,8 @@
     "Categories": [
       21
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 286
   },
   {
     "InternalIndex": 252,
@@ -2197,7 +2314,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 287
   },
   {
     "InternalIndex": 253,
@@ -2206,7 +2324,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 288
   },
   {
     "InternalIndex": 254,
@@ -2346,7 +2465,8 @@
       285,
       286
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 311
   },
   {
     "InternalIndex": 278,
@@ -2364,7 +2484,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 313
   },
   {
     "InternalIndex": 280,
@@ -2373,7 +2494,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 314
   },
   {
     "InternalIndex": 281,
@@ -2382,7 +2504,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 315
   },
   {
     "InternalIndex": 282,
@@ -2428,7 +2551,8 @@
       282,
       281
     ],
-    "SourceLevel": "OPERA.TR2"
+    "SourceLevel": "OPERA.TR2",
+    "GoldSampleRemap": 320
   },
   {
     "InternalIndex": 287,
@@ -2438,7 +2562,8 @@
       283,
       281
     ],
-    "SourceLevel": "OPERA.TR2"
+    "SourceLevel": "OPERA.TR2",
+    "GoldSampleRemap": 321
   },
   {
     "InternalIndex": 288,
@@ -2474,7 +2599,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "ICECAVE.TR2"
+    "SourceLevel": "ICECAVE.TR2",
+    "GoldSampleRemap": 325
   },
   {
     "InternalIndex": 292,
@@ -2483,7 +2609,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "ICECAVE.TR2"
+    "SourceLevel": "ICECAVE.TR2",
+    "GoldSampleRemap": 326
   },
   {
     "InternalIndex": 293,
@@ -2492,7 +2619,8 @@
     "Categories": [
       141
     ],
-    "SourceLevel": "ICECAVE.TR2"
+    "SourceLevel": "ICECAVE.TR2",
+    "GoldSampleRemap": 329
   },
   {
     "InternalIndex": 294,
@@ -2501,7 +2629,8 @@
     "Categories": [
       82
     ],
-    "SourceLevel": "ICECAVE.TR2"
+    "SourceLevel": "ICECAVE.TR2",
+    "GoldSampleRemap": 330
   },
   {
     "InternalIndex": 295,
@@ -2510,7 +2639,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "ICECAVE.TR2"
+    "SourceLevel": "ICECAVE.TR2",
+    "GoldSampleRemap": 331
   },
   {
     "InternalIndex": 296,
@@ -2528,7 +2658,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 333
   },
   {
     "InternalIndex": 298,
@@ -2720,7 +2851,8 @@
       282,
       281
     ],
-    "SourceLevel": "PLATFORM.TR2"
+    "SourceLevel": "PLATFORM.TR2",
+    "GoldSampleRemap": 359
   },
   {
     "InternalIndex": 320,
@@ -2729,7 +2861,8 @@
     "Categories": [
       52
     ],
-    "SourceLevel": "MONASTRY.TR2"
+    "SourceLevel": "MONASTRY.TR2",
+    "GoldSampleRemap": 360
   },
   {
     "InternalIndex": 321,
@@ -2765,7 +2898,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 367
   },
   {
     "InternalIndex": 325,
@@ -2774,7 +2908,8 @@
     "Categories": [
       82
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 368
   },
   {
     "InternalIndex": 326,
@@ -2783,7 +2918,8 @@
     "Categories": [
       201
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 369
   },
   {
     "InternalIndex": 327,
@@ -2792,7 +2928,8 @@
     "Categories": [
       111
     ],
-    "SourceLevel": "WALL.TR2"
+    "SourceLevel": "WALL.TR2",
+    "GoldSampleRemap": 370
   },
   {
     "InternalIndex": 329,
@@ -2810,7 +2947,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "OPERA.TR2"
+    "SourceLevel": "OPERA.TR2",
+    "GoldSampleRemap": 374
   },
   {
     "InternalIndex": 331,
@@ -2891,7 +3029,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "OPERA.TR2"
+    "SourceLevel": "OPERA.TR2",
+    "GoldSampleRemap": 383
   },
   {
     "InternalIndex": 340,
@@ -2900,7 +3039,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "OPERA.TR2"
+    "SourceLevel": "OPERA.TR2",
+    "GoldSampleRemap": 384
   },
   {
     "InternalIndex": 341,
@@ -2918,7 +3058,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "ASSAULT.TR2"
+    "SourceLevel": "ASSAULT.TR2",
+    "GoldSampleRemap": 386
   },
   {
     "InternalIndex": 343,
@@ -2927,7 +3068,8 @@
     "Categories": [
       81
     ],
-    "SourceLevel": "ASSAULT.TR2"
+    "SourceLevel": "ASSAULT.TR2",
+    "GoldSampleRemap": 387
   },
   {
     "InternalIndex": 344,
@@ -2939,7 +3081,8 @@
       141,
       201
     ],
-    "SourceLevel": "ASSAULT.TR2"
+    "SourceLevel": "ASSAULT.TR2",
+    "GoldSampleRemap": 388
   },
   {
     "InternalIndex": 345,
@@ -2951,7 +3094,8 @@
       141,
       201
     ],
-    "SourceLevel": "ASSAULT.TR2"
+    "SourceLevel": "ASSAULT.TR2",
+    "GoldSampleRemap": 393
   },
   {
     "InternalIndex": 346,
@@ -2963,7 +3107,8 @@
       141,
       201
     ],
-    "SourceLevel": "ASSAULT.TR2"
+    "SourceLevel": "ASSAULT.TR2",
+    "GoldSampleRemap": 397
   },
   {
     "InternalIndex": 347,
@@ -2972,7 +3117,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "ASSAULT.TR2"
+    "SourceLevel": "ASSAULT.TR2",
+    "GoldSampleRemap": 399
   },
   {
     "InternalIndex": 348,
@@ -2983,7 +3129,8 @@
       52,
       53
     ],
-    "SourceLevel": "SKIDOO.TR2"
+    "SourceLevel": "SKIDOO.TR2",
+    "GoldSampleRemap": 401
   },
   {
     "InternalIndex": 349,
@@ -3001,7 +3148,8 @@
     "Categories": [
       1
     ],
-    "SourceLevel": "UNWATER.TR2"
+    "SourceLevel": "UNWATER.TR2",
+    "GoldSampleRemap": 403
   },
   {
     "InternalIndex": 351,

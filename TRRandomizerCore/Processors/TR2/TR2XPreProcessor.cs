@@ -21,6 +21,7 @@ public class TR2XPreProcessor : TR2LevelProcessor
         var tasks = new List<ITR2ProcessorTask>
         {
             new TR2XDeduplicationTask(),
+            new TR2XSFXTask(),
             new TR2XDataTask() { TextureMonitor = TextureMonitor },
             new TR2XFixLaraTask() { TextureMonitor = TextureMonitor },
             new TR2XEnemyTask() { ItemFactory = ItemFactory },
