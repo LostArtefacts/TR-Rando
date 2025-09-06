@@ -254,6 +254,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         [TR2Type.Mercenary3] = [TR2Type.Mercenary3OG, TR2Type.Mercenary3GM],
         [TR2Type.MercSnowmobDriver] = [TR2Type.MercSnowmobDriverOG, TR2Type.MercSnowmobDriverGM],
         [TR2Type.BlackSnowmob] = [TR2Type.BlackSnowmobOG, TR2Type.BlackSnowmobGM],
+        [TR2Type.MonkWithKnifeStick] = [TR2Type.MonkWithKnifeStickOG, TR2Type.MonkWithKnifeStickGM],
 
         [TR2Type.Barracuda] = new()
         {

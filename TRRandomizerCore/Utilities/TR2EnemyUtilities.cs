@@ -444,18 +444,8 @@ public static class TR2EnemyUtilities
     {
         [TR2Type.BirdMonster] = new List<TR2Type>
         {
-            TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick
+            TR2Type.MonkWithKnifeStickOG, TR2Type.MonkWithLongStick
         }
-    };
-
-    public static List<TR2Type> GetFriendlyEnemies()
-    {
-        return new List<TR2Type>(_friendlyEnemies);
-    }
-
-    private static readonly List<TR2Type> _friendlyEnemies = new()
-    {
-        TR2Type.Winston, TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick
     };
 
     public static Dictionary<TR2Type, TR2Type> GetAliasPriority(string lvlName, List<TR2Type> importEntities)

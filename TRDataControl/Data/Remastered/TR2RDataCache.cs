@@ -83,7 +83,7 @@ public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
         [TR2Type.SnowLeopard] = TR2LevelNames.TIBET,
 
         [TR2Type.Mercenary1] = TR2LevelNames.MONASTERY,
-        [TR2Type.MonkWithKnifeStick] = TR2LevelNames.MONASTERY,
+        [TR2Type.MonkWithKnifeStickOG] = TR2LevelNames.MONASTERY,
         [TR2Type.MonkWithLongStick] = TR2LevelNames.MONASTERY,
 
         [TR2Type.BarracudaIce] = TR2LevelNames.COT,

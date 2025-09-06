@@ -110,6 +110,11 @@ public static class TR2TypeUtilities
             [TR2Type.BlackSnowmobOG] = [TR2LevelNames.TIBET],
             [TR2Type.BlackSnowmobGM] = [TR2LevelNames.COLDWAR, TR2LevelNames.FOOLGOLD],
         },
+        [TR2Type.MonkWithKnifeStick] = new()
+        {
+            [TR2Type.MonkWithKnifeStickOG] = [TR2LevelNames.MONASTERY],
+            [TR2Type.MonkWithKnifeStickGM] = [TR2LevelNames.FURNACE, TR2LevelNames.KINGDOM],
+        },
     };
 
     public static readonly Dictionary<TR2Type, List<TR2Type>> TypeFamilies = new()
@@ -144,6 +149,7 @@ public static class TR2TypeUtilities
         [TR2Type.Mercenary3] = [TR2Type.Mercenary3OG, TR2Type.Mercenary3GM],
         [TR2Type.MercSnowmobDriver] = [TR2Type.MercSnowmobDriverOG, TR2Type.MercSnowmobDriverGM],
         [TR2Type.BlackSnowmob] = [TR2Type.BlackSnowmobOG, TR2Type.BlackSnowmobGM],
+        [TR2Type.MonkWithKnifeStick] = [TR2Type.MonkWithKnifeStickOG, TR2Type.MonkWithKnifeStickGM],
     };
 
     public static string GetName(TR2Type type)
@@ -247,7 +253,7 @@ public static class TR2TypeUtilities
             TR2Type.Mercenary2OG,
             TR2Type.Mercenary3OG,
             TR2Type.MercSnowmobDriverOG,
-            TR2Type.MonkWithKnifeStick,
+            TR2Type.MonkWithKnifeStickOG,
             TR2Type.MonkWithLongStick,
             TR2Type.Rat,
             TR2Type.ScubaDiver,
@@ -286,6 +292,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Mercenary2GM);
             types.Add(TR2Type.Mercenary3GM);
             types.Add(TR2Type.MercSnowmobDriverGM);
+            types.Add(TR2Type.MonkWithKnifeStickGM);
         }
 
         return types;
@@ -326,10 +333,11 @@ public static class TR2TypeUtilities
         // #131 Provides an option to exclude monks as having to be killed
         if (monksAreKillable)
         {
-            types.Add(TR2Type.MonkWithKnifeStick);
+            types.Add(TR2Type.MonkWithKnifeStickOG);
             types.Add(TR2Type.MonkWithLongStick);
             if (!remastered)
             {
+                types.Add(TR2Type.MonkWithKnifeStickGM);
                 types.Add(TR2Type.MonkWithNoShadow);
             }
         }
@@ -410,6 +418,8 @@ public static class TR2TypeUtilities
             TR2Type.MercSnowmobDriverOG,
             TR2Type.MercSnowmobDriverGM,
             TR2Type.MonkWithKnifeStick,
+            TR2Type.MonkWithKnifeStickOG,
+            TR2Type.MonkWithKnifeStickGM,
             TR2Type.MonkWithLongStick,
             TR2Type.Rat,
             TR2Type.ScubaDiver,
@@ -741,7 +751,24 @@ public static class TR2TypeUtilities
 
     public static bool IsMonk(TR2Type type)
     {
-        return type == TR2Type.MonkWithKnifeStick || type == TR2Type.MonkWithLongStick || type == TR2Type.MonkWithNoShadow;
+        return GetMonkTypes().Contains(type);
+    }
+
+    public static List<TR2Type> GetMonkTypes()
+    {
+        return
+        [
+            TR2Type.MonkWithKnifeStick,
+            TR2Type.MonkWithKnifeStickOG,
+            TR2Type.MonkWithKnifeStickGM,
+            TR2Type.MonkWithLongStick,
+            TR2Type.MonkWithNoShadow,
+        ];
+    }
+
+    public static List<TR2Type> GetAllies()
+    {
+        return [TR2Type.Winston, .. GetMonkTypes()];
     }
 
     public static List<TR2Type> FilterDropperEnemies(List<TR2Type> types, bool monksAreKillable, bool unconditionalChickens, bool remastered)
