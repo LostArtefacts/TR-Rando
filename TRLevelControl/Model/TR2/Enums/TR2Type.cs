@@ -355,6 +355,10 @@ public enum TR2Type : uint
     Gunman1GM                     = 1017,
     SharkOG                       = 1018,
     SharkGM                       = 1019,
+    Mercenary2OG                  = 1020,
+    Mercenary2GM                  = 1021,
+    Mercenary3OG                  = 1022,
+    Mercenary3GM                  = 1023,
 
     // Extra Lara animations
     LaraMiscAnim_H_Ice            = 2000, // Death-by-Yeti, Gong action

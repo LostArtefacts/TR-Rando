@@ -89,7 +89,17 @@ public static class TR2TypeUtilities
                 = new() { },
             [TR2Type.Gunman1GM]
                 = [TR2LevelNames.FOOLGOLD]
-        }
+        },
+        [TR2Type.Mercenary2] = new()
+        {
+            [TR2Type.Mercenary2OG] = [TR2LevelNames.TIBET, TR2LevelNames.MONASTERY, TR2LevelNames.COT],
+            [TR2Type.Mercenary2GM] = [TR2LevelNames.COLDWAR, TR2LevelNames.FOOLGOLD, TR2LevelNames.KINGDOM],
+        },
+        [TR2Type.Mercenary3] = new()
+        {
+            [TR2Type.Mercenary3OG] = [TR2LevelNames.TIBET],
+            [TR2Type.Mercenary3GM] = [TR2LevelNames.COLDWAR],
+        },
     };
 
     public static readonly Dictionary<TR2Type, List<TR2Type>> TypeFamilies = new()
@@ -119,7 +129,9 @@ public static class TR2TypeUtilities
         [TR2Type.Gunman1] = new()
         {
             TR2Type.Gunman1OG, TR2Type.Gunman1TopixtorORC, TR2Type.Gunman1TopixtorCAC, TR2Type.Gunman1GM,
-        }
+        },
+        [TR2Type.Mercenary2] = [TR2Type.Mercenary2OG, TR2Type.Mercenary2GM],
+        [TR2Type.Mercenary3] = [TR2Type.Mercenary3OG, TR2Type.Mercenary3GM],
     };
 
     public static string GetName(TR2Type type)
@@ -220,8 +232,8 @@ public static class TR2TypeUtilities
             TR2Type.MaskedGoon2,
             TR2Type.MaskedGoon3,
             TR2Type.Mercenary1,
-            TR2Type.Mercenary2,
-            TR2Type.Mercenary3,
+            TR2Type.Mercenary2OG,
+            TR2Type.Mercenary3OG,
             TR2Type.MercSnowmobDriver,
             TR2Type.MonkWithKnifeStick,
             TR2Type.MonkWithLongStick,
@@ -258,6 +270,8 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Gunman1TopixtorCAC);
             types.Add(TR2Type.Gunman1GM);
             types.Add(TR2Type.SharkGM);
+            types.Add(TR2Type.Mercenary2GM);
+            types.Add(TR2Type.Mercenary3GM);
         }
 
         return types;
@@ -278,8 +292,8 @@ public static class TR2TypeUtilities
             TR2Type.MaskedGoon2,
             TR2Type.MaskedGoon3,
             TR2Type.Mercenary1,
-            TR2Type.Mercenary2,
-            TR2Type.Mercenary3,
+            TR2Type.Mercenary2OG,
+            TR2Type.Mercenary3OG,
             TR2Type.Rat,
             TR2Type.ShotgunGoon,
             TR2Type.SnowLeopard,
@@ -329,6 +343,8 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Gunman1TopixtorORC);
             types.Add(TR2Type.Gunman1TopixtorCAC);
             types.Add(TR2Type.Gunman1GM);
+            types.Add(TR2Type.Mercenary2GM);
+            types.Add(TR2Type.Mercenary3GM);
         }
 
         return types;
@@ -370,6 +386,10 @@ public static class TR2TypeUtilities
             TR2Type.Mercenary1,
             TR2Type.Mercenary2,
             TR2Type.Mercenary3,
+            TR2Type.Mercenary2OG,
+            TR2Type.Mercenary2GM,
+            TR2Type.Mercenary3OG,
+            TR2Type.Mercenary3GM,
             TR2Type.MercSnowmobDriver,
             TR2Type.MonkWithKnifeStick,
             TR2Type.MonkWithLongStick,
