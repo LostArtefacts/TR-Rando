@@ -1,6 +1,7 @@
 ﻿using TRDataControl;
 using TRGE.Core;
 using TRLevelControl;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
@@ -16,6 +17,14 @@ public class TR2RemasteredEditor : TR2ClassicEditor
     protected override void ApplyConfig(Config config)
     {
         base.ApplyConfig(config);
+
+        // Don't allow classic-only enemies to be selected in the UI
+        var validEnemyTypes = TR2TypeUtilities.GetCandidateCrossLevelEnemies(remastered: true);
+        Settings.ExcludableEnemies.Keys
+            .Except(validEnemyTypes.Select(t => (short)t))
+            .ToList()
+            .ForEach(t => Settings.ExcludableEnemies.Remove(t));
+
         Settings.IsRemastered = true;
         Settings.AllowReturnPathLocations = false;
         Settings.AddReturnPaths = false;

@@ -98,6 +98,8 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         ["TOPICAC.TR2"] = new()
         {
             TR2Type.Gunman1TopixtorCAC
-        }
+        },
+        [TR2LevelNames.COLDWAR] = [TR2Type.MonkWithNoShadow],
+        [TR2LevelNames.FURNACE] = [TR2Type.Wolf, TR2Type.Bear],
     };
 }

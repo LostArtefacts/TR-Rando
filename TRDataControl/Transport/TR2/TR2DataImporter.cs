@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using TRImageControl;
 using TRImageControl.Packing;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TRDataControl;
@@ -33,6 +34,9 @@ public class TR2DataImporter : TRDataImporter<TR2Level, TR2Type, TR2SFX, TR2Blob
 
     protected override TRMesh GetDummyMesh()
         => Level.Models[TR2Type.Lara].Meshes[0];
+
+    protected override string GetTypeName(TR2Type type)
+        => TR2TypeUtilities.GetName(type);
 
     protected override TRTexturePacker CreatePacker()
         => new TR2TexturePacker(Level, Data.TextureTileLimit);

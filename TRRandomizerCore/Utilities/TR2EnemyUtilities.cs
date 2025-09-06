@@ -354,12 +354,11 @@ public static class TR2EnemyUtilities
         [EnemyDifficulty.VeryEasy] = new List<TR2Type>
         {
             TR2Type.Barracuda, TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick,
-            TR2Type.Rat, TR2Type.Spider, TR2Type.Winston
+            TR2Type.Rat, TR2Type.Spider, TR2Type.Winston, TR2Type.MonkWithNoShadow,
         },
         [EnemyDifficulty.Easy] = new List<TR2Type>
         {
-            TR2Type.Crow, TR2Type.Eagle, TR2Type.ScubaDiver,
-            TR2Type.YellowMorayEel
+            TR2Type.Crow, TR2Type.Eagle, TR2Type.ScubaDiver, TR2Type.YellowMorayEel, TR2Type.Wolf,
         },
         [EnemyDifficulty.Medium] = new List<TR2Type>
         {
@@ -367,7 +366,7 @@ public static class TR2EnemyUtilities
             TR2Type.Gunman2, TR2Type.Knifethrower, TR2Type.MaskedGoon1,
             TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.Shark,
             TR2Type.StickWieldingGoon1, TR2Type.StickWieldingGoon2, TR2Type.TigerOrSnowLeopard,
-            TR2Type.TRex
+            TR2Type.TRex, TR2Type.Bear,
         },
         [EnemyDifficulty.Hard] = new List<TR2Type>
         {

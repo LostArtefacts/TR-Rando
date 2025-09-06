@@ -112,6 +112,18 @@ public static class TR2TypeUtilities
         }
     };
 
+    public static string GetName(TR2Type type)
+    {
+        // TODO: remove once static mesh enum entries are removed
+        return type switch
+        {
+            TR2Type.Bear => "Bear",
+            TR2Type.MonkWithNoShadow => "MonkWithNoShadow",
+            TR2Type.Wolf => "Wolf",
+            _ => type.ToString(),
+        };
+    }
+
     public static TR2Type TranslateAlias(TR2Type type)
     {
         foreach (TR2Type parentType in TypeFamilies.Keys)
@@ -175,10 +187,10 @@ public static class TR2TypeUtilities
         };
     }
 
-    public static List<TR2Type> GetCandidateCrossLevelEnemies()
+    public static List<TR2Type> GetCandidateCrossLevelEnemies(bool remastered)
     {
-        return new()
-        {
+        List<TR2Type> types =
+        [
             TR2Type.BarracudaIce,
             TR2Type.BarracudaUnwater,
             TR2Type.BarracudaXian,
@@ -225,7 +237,16 @@ public static class TR2TypeUtilities
             TR2Type.XianGuardSword,
             TR2Type.YellowMorayEel,
             TR2Type.Yeti
-        };
+        ];
+
+        if (!remastered)
+        {
+            types.Add(TR2Type.Bear);
+            types.Add(TR2Type.MonkWithNoShadow);
+            types.Add(TR2Type.Wolf);
+        }
+
+        return types;
     }
 
     public static List<TR2Type> GetDropperEnemies(bool monksAreKillable, bool unconditionalChickens, bool remastered)
@@ -267,6 +288,10 @@ public static class TR2TypeUtilities
         {
             types.Add(TR2Type.MonkWithKnifeStick);
             types.Add(TR2Type.MonkWithLongStick);
+            if (!remastered)
+            {
+                types.Add(TR2Type.MonkWithNoShadow);
+            }
         }
 
         if (unconditionalChickens)
@@ -279,11 +304,13 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.BarracudaIce);
             types.Add(TR2Type.BarracudaUnwater);
             types.Add(TR2Type.BarracudaXian);
+            types.Add(TR2Type.Bear);
             types.Add(TR2Type.Crow);
             types.Add(TR2Type.Eagle);
             types.Add(TR2Type.MercSnowmobDriver);
             types.Add(TR2Type.ScubaDiver);
             types.Add(TR2Type.Shark);
+            types.Add(TR2Type.Wolf);
         }
 
         return types;
@@ -650,7 +677,7 @@ public static class TR2TypeUtilities
 
     public static bool IsMonk(TR2Type type)
     {
-        return type == TR2Type.MonkWithKnifeStick || type == TR2Type.MonkWithLongStick;
+        return type == TR2Type.MonkWithKnifeStick || type == TR2Type.MonkWithLongStick || type == TR2Type.MonkWithNoShadow;
     }
 
     public static List<TR2Type> FilterDropperEnemies(List<TR2Type> types, bool monksAreKillable, bool unconditionalChickens, bool remastered)

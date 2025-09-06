@@ -107,7 +107,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         }
 
         // Get all other candidate supported enemies
-        List<TR2Type> allEnemies = TR2TypeUtilities.GetCandidateCrossLevelEnemies()
+        List<TR2Type> allEnemies = TR2TypeUtilities.GetCandidateCrossLevelEnemies(Settings.IsRemastered)
             .FindAll(e => TR2EnemyUtilities.IsEnemySupported(levelName, e, difficulty, Settings.ProtectMonks, Settings.IsRemastered));
 
         if (Settings.OneEnemyMode
