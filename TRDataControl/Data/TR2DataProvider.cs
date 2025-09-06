@@ -246,7 +246,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
 
         [TR2Type.Gunman1] = new()
         {
-            TR2Type.Gunman1OG, TR2Type.Gunman1TopixtorORC, TR2Type.Gunman1TopixtorCAC
+            TR2Type.Gunman1OG, TR2Type.Gunman1TopixtorORC, TR2Type.Gunman1TopixtorCAC, TR2Type.Gunman1GM,
         },
 
         [TR2Type.Barracuda] = new()
