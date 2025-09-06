@@ -20,7 +20,7 @@ public class TR2XPickupTask : ITR2ProcessorTask
         foreach (var (type, factor) in typeTargets)
         {
             ScalePickup(type, level.Data.Models[type], factor);
-            FixPickup(type, level.Data.Models[type], level.Name);
+            FixPickup(type, level);
         }
 
         AlterPuzzles(level);
@@ -85,55 +85,77 @@ public class TR2XPickupTask : ITR2ProcessorTask
         }
     }
 
-    public static void FixPickup(TR2Type type, TRModel model, string levelName)
+    public static void FixPickup(TR2Type type, TR2CombinedLevel level)
     {
-        if (model == null)
+        if (!level.Data.Models.TryGetValue(type, out var model))
         {
             return;
         }
 
         if (type == TR2Type.SmallMed_M_H)
         {
-            FixSmallMed(model);
+            FixSmallMed(model, level);
         }
         else if (type == TR2Type.LargeMed_M_H)
         {
-            FixLargeMed(model);
+            FixLargeMed(model, level);
         }
         else if (type == TR2Type.Grenades_M_H)
         {
             FixGrenades(model);
         }
-        else if ((levelName == TR2LevelNames.RIG || levelName == TR2LevelNames.DA || levelName == TR2LevelNames.FOOLGOLD)
+        else if ((level.Is(TR2LevelNames.RIG) || level.Is(TR2LevelNames.DA) || level.Is(TR2LevelNames.FOOLGOLD))
             && type >= TR2Type.Key1_M_H && type <= TR2Type.Key4_M_H)
         {
             FixYaw(model);
         }
-        else if (levelName == TR2LevelNames.XIAN && type == TR2Type.Puzzle1_M_H)
+        else if (level.Is(TR2LevelNames.XIAN) && type == TR2Type.Puzzle1_M_H)
         {
             FixYaw(model);
         }
-        else if (levelName == TR2LevelNames.FLOATER && (type == TR2Type.Puzzle1_M_H || type == TR2Type.Puzzle2_M_H))
+        else if (level.Is(TR2LevelNames.FLOATER) && (type == TR2Type.Puzzle1_M_H || type == TR2Type.Puzzle2_M_H))
         {
             FixYaw(model);
         }
     }
 
-    private static void FixSmallMed(TRModel model)
+    private static void FixSmallMed(TRModel model, TR2CombinedLevel level)
     {
         var meshIds = new[] { 1, 5, 6 };
         foreach (var mesh in meshIds.Select(m => model.Meshes[m]))
         {
-            mesh.ColouredRectangles[2].Texture = mesh.ColouredRectangles[1].Texture;
+            if (level.IsExpansion && mesh.ColouredRectangles.Count == 1)
+            {
+                var face = mesh.ColouredRectangles[0];
+                face.Texture = mesh.TexturedRectangles[0].Texture;
+                mesh.TexturedRectangles.Add(face);
+                mesh.ColouredRectangles.Clear();
+            }
+            else
+            {
+                mesh.ColouredRectangles[2].Texture = mesh.ColouredRectangles[1].Texture;
+            }
         }
     }
 
-    private static void FixLargeMed(TRModel model)
+    private static void FixLargeMed(TRModel model, TR2CombinedLevel level)
     {
         var mesh = model.Meshes[1];
         foreach (var faceIdx in new[] { 9, 15 })
         {
             mesh.ColouredRectangles[faceIdx].Texture = mesh.ColouredRectangles[8].Texture;
+        }
+
+        if (level.IsExpansion)
+        {
+            var smallMedTex = level.Data.Models[TR2Type.SmallMed_M_H].Meshes[5].TexturedRectangles[0].Texture;
+            for (int i = 17; i >= 6; i--)
+            {
+                var face = mesh.ColouredRectangles[i];
+                face.Texture = smallMedTex;
+                mesh.TexturedRectangles.Add(face);
+                mesh.ColouredRectangles.RemoveAt(i);
+            }            
         }
     }
 
