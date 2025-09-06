@@ -128,7 +128,8 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
         (
             TR2TypeUtilities.GetAliasForLevel(levelName, enemy.TypeID),
             Settings.RandomizeEnemies && !Settings.ProtectMonks,
-            Settings.RandomizeEnemies && Settings.UnconditionalChickens
+            Settings.RandomizeEnemies && Settings.UnconditionalChickens,
+            Settings.IsRemastered
         )
         && level.FloorData.GetTriggerRooms(level.Entities.IndexOf(enemy), level.Rooms).Any(roomPool.Contains));
     }
@@ -142,7 +143,7 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
         }
 
         exclusions.AddRange(level.Entities
-            .Where(e => !TR2TypeUtilities.CanSharePickupSpace(e.TypeID))
+            .Where(e => !TR2TypeUtilities.CanSharePickupSpace(e.TypeID, Settings.IsRemastered))
             .Select(e => e.GetFloorLocation(loc => level.GetRoomSector(loc))));
 
         TR2LocationGenerator generator = new();

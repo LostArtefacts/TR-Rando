@@ -4,6 +4,14 @@
 - added Spanish translations for TR1 (#800)
 - added an option to include extra pickups in certain levels in TR2X (#832)
 - added pickup items to Lara's Home for item randomization in TR2X (#832)
+- improved enemy randomization for TR2X (#830)
+    - added an option to clone enemies
+    - added an option to replace required enemies (bird monster in Ice Palace, dragon in Dragon's Lair)
+    - added support for skidoo drivers in Home Sweet Home
+    - added support for more enemy variety in each level as standard
+    - changed all enemy types (except eels) to have the ability to drop items
+    - removed restrictions on enemy combinations when the dragon is present
+    - removed skidoo driver and monk limits
 - fixed a crash at the end of Diving Area in TR2R (#814)
 - fixed a potential key softlock in City of Khamoon if "large" range is selected and either return paths are disabled in classic, or playing remastered (#820)
 - fixed the raptor spawns in Crash Site when enemies are randomized to guarantee that some appear when using the turret (#818)

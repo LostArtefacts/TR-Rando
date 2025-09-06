@@ -1831,6 +1831,7 @@
 
                     <Border
                         Grid.Row="2"
+                        Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource BoolToCollapsedConverter}}"
                         IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
                         <CheckBox
                             IsChecked="{Binding ControllerProxy.UseKillableClonePierres, Mode=TwoWay}"
@@ -1844,6 +1845,7 @@
                     <Border
                         Grid.Column="1"
                         Grid.Row="2"
+                        Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource BoolToCollapsedConverter}}"
                         IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
                         <Label 
                             Style="{StaticResource OptionDescriptionStyle}"

@@ -7,28 +7,10 @@ namespace TRRandomizerCore.Utilities;
 
 public static class TR2EnemyUtilities
 {
-    // This allows us to alter the default number of enemy types per level
-    // given that some can support many more but others have difficulty 
-    // when it comes to cross-level texture packing. The return value is
-    // a signed int and should be used to adjust the current count.
-    public static int GetEnemyAdjustmentCount(string lvlName)
+    public static int GetEnemyAdjustmentCount(string lvlName, bool remastered)
     {
-        if (_enemyAdjustmentCount.ContainsKey(lvlName))
-        {
-            return _enemyAdjustmentCount[lvlName];
-        }
-        return 0;
-    }
-
-    // Similar to above, but allows for a collection to be resized if a specific
-    // enemy model is chosen.
-    public static int GetTargetEnemyAdjustmentCount(string lvlName, TR2Type enemy)
-    {
-        if (_targetEnemyAdjustmentCount.ContainsKey(enemy) && _targetEnemyAdjustmentCount[enemy].ContainsKey(lvlName))
-        {
-            return _targetEnemyAdjustmentCount[enemy][lvlName];
-        }
-        return 0;
+        var dict = remastered ? _remasteredAdjustmentCount : _classicAdjustmentCount;
+        return dict.TryGetValue(lvlName, out var count) ? count : 0;
     }
 
     public static bool IsWaterEnemyRequired(TR2Level level)
@@ -51,21 +33,27 @@ public static class TR2EnemyUtilities
             && item.Z == enemy.Z;
     }
 
-    public static bool IsEnemySupported(string lvlName, TR2Type entity, RandoDifficulty difficulty, bool protectMonks)
+    public static bool IsEnemySupported(
+        string lvlName, TR2Type type, RandoDifficulty difficulty, bool protectMonks, bool remastered)
     {
-        if (lvlName == TR2LevelNames.HOME && TR2TypeUtilities.IsMonk(entity))
+        if (lvlName == TR2LevelNames.HOME)
         {
-            // Monks are excluded from HSH by default unless the player is happy
-            // with having to kill them.
-            return !protectMonks;
+            if (TR2TypeUtilities.IsMonk(type))
+            {
+                return !protectMonks;
+            }
+            if (type == TR2Type.MercSnowmobDriver)
+            {
+                return !remastered;
+            }
         }
 
-        bool isEnemyTechnicallySupported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesTechnical);
+        bool isEnemyTechnicallySupported = IsEnemySupported(lvlName, type, _unsupportedEnemiesTechnical);
         bool isEnemySupported = isEnemyTechnicallySupported;
 
         if (difficulty == RandoDifficulty.Default)
         {
-            bool isEnemyDefaultSupported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesDefault);
+            bool isEnemyDefaultSupported = IsEnemySupported(lvlName, type, _unsupportedEnemiesDefault);
 
             // a level may exist in both technical and difficulty dicts, so we check both
             isEnemySupported &= isEnemyDefaultSupported;
@@ -91,12 +79,9 @@ public static class TR2EnemyUtilities
 
     public static List<TR2Type> GetRequiredEnemies(string lvlName)
     {
-        List<TR2Type> entities = new();
-        if (_requiredEnemies.ContainsKey(lvlName))
-        {
-            entities.AddRange(_requiredEnemies[lvlName]);
-        }
-        return entities;
+        return _requiredEnemies.TryGetValue(lvlName, out var value)
+            ? [.. value]
+            : [];
     }
 
     // this returns a set of ALLOWED rooms
@@ -151,19 +136,28 @@ public static class TR2EnemyUtilities
         return _restrictedEnemyLevelCountsTechnical.Count;
     }
 
-    public static List<List<TR2Type>> GetPermittedCombinations(string lvl, TR2Type entity, RandoDifficulty difficulty)
+    public static List<List<TR2Type>> GetPermittedCombinations(
+        string levelName, TR2Type type, RandoDifficulty difficulty, bool remastered)
     {
-        if (_specialEnemyCombinations.ContainsKey(lvl) && _specialEnemyCombinations[lvl].ContainsKey(entity))
+        if (!remastered)
         {
-            if (_specialEnemyCombinations[lvl][entity].ContainsKey(difficulty))
+            return null;
+        }
+
+        if (_specialEnemyCombinations.TryGetValue(levelName, out var typeDict)
+            && typeDict.TryGetValue(type, out var difficultyDict))
+        {
+            if (difficultyDict.TryGetValue(difficulty, out var result))
             {
-                return _specialEnemyCombinations[lvl][entity][difficulty];
+                return result;
             }
-            else if (_specialEnemyCombinations[lvl][entity].ContainsKey(RandoDifficulty.DefaultOrNoRestrictions))
+
+            if (difficultyDict.TryGetValue(RandoDifficulty.DefaultOrNoRestrictions, out result))
             {
-                return _specialEnemyCombinations[lvl][entity][RandoDifficulty.DefaultOrNoRestrictions];
+                return result;
             }
         }
+
         return null;
     }
 
@@ -387,30 +381,22 @@ public static class TR2EnemyUtilities
         }
     };
 
-    /**
-     * This is based loosely on the number of used tiles and the object texture count of each level.
-     * LVL : CurrentEnemies UsedTiles   TextureCount
-     * ---------------------------------------------
-     * WALL: 4, 11, 1357
-     * VENI: 6, 15, 1730
-     * BART: 6, 16, 1775
-     * OPER: 7, 15, 1898
-     * RIG : 5, 15, 1748
-     * PLAT: 6, 16, 2022
-     * FATH: 5, 11, 1492
-     * KEEL: 7, 15, 1896
-     * LQRT: 6, 13, 1702
-     * DECK: 6, 14, 1734
-     * SKID: 5, 12, 1510
-     * BARK: 5, 16, 1822
-     * CATA: 5, 13, 1473
-     * ICEP: 4, 14, 1576
-     * XIAN: 5, 16, 1745
-     * FLOA: 3, 15, 1878
-     * LAIR: 3, 12, 1517
-     * HSH : N/A
-     */
-    private static readonly Dictionary<string, int> _enemyAdjustmentCount = new()
+    // Adjustments for the number of enemy types per level
+    private static readonly Dictionary<string, int> _classicAdjustmentCount = new()
+    {
+        [TR2LevelNames.GW] = 2,
+        [TR2LevelNames.RIG] = 1,
+        [TR2LevelNames.FATHOMS] = 1,
+        [TR2LevelNames.TIBET] = 2,
+        [TR2LevelNames.MONASTERY] = 1,
+        [TR2LevelNames.COT] = 1,
+        [TR2LevelNames.CHICKEN] = 3,
+        [TR2LevelNames.FLOATER] = 3,
+        [TR2LevelNames.LAIR] = 3,
+        [TR2LevelNames.HOME] = 3,
+    };
+
+    private static readonly Dictionary<string, int> _remasteredAdjustmentCount = new()
     {
         [TR2LevelNames.GW] = 2,
         [TR2LevelNames.OPERA] = -1,
@@ -420,20 +406,6 @@ public static class TR2EnemyUtilities
         [TR2LevelNames.CHICKEN] = 1,
         [TR2LevelNames.FLOATER] = 1,
         [TR2LevelNames.LAIR] = 1
-    };
-
-    // Trigger a redim of the imported enemy count if one of these entities is selected
-    private static readonly Dictionary<TR2Type, Dictionary<string, int>> _targetEnemyAdjustmentCount = new()
-    {
-        [TR2Type.MarcoBartoli] = new Dictionary<string, int>
-        {
-            [TR2LevelNames.VENICE] = -2,
-            [TR2LevelNames.BARTOLI] = -2,
-            [TR2LevelNames.OPERA] = -2,
-            [TR2LevelNames.DA] = -1,
-            [TR2LevelNames.TIBET] = -1,
-            [TR2LevelNames.FLOATER] = -1,
-        }
     };
 
     public static List<TR2Type> GetEnemyGuisers(TR2Type entity)

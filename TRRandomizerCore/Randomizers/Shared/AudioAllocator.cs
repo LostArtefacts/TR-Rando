@@ -15,7 +15,7 @@ public abstract class AudioAllocator
     private List<string> _uncontrolledLevels;
 
     public Random Generator { get; set; }
-    public RandomizerSettings Settings { get; set; }
+    public required RandomizerSettings Settings { get; set; }
     public List<TRSFXGeneralCategory> Categories { get; private set; }
 
     public AudioAllocator(IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> tracks)

@@ -228,10 +228,10 @@ public static class TR2TypeUtilities
         };
     }
 
-    public static List<TR2Type> GetCrossLevelDroppableEnemies(bool monksAreKillable, bool unconditionalChickens)
+    public static List<TR2Type> GetDropperEnemies(bool monksAreKillable, bool unconditionalChickens, bool remastered)
     {
-        List<TR2Type> types = new()
-        {
+        List<TR2Type> types =
+        [
             TR2Type.BengalTiger,
             TR2Type.Doberman,
             TR2Type.FlamethrowerGoonOG,
@@ -260,7 +260,7 @@ public static class TR2TypeUtilities
             TR2Type.TRex,
             TR2Type.WhiteTiger,
             TR2Type.Yeti
-        };
+        ];
 
         // #131 Provides an option to exclude monks as having to be killed
         if (monksAreKillable)
@@ -272,6 +272,18 @@ public static class TR2TypeUtilities
         if (unconditionalChickens)
         {
             types.Add(TR2Type.BirdMonster);
+        }
+
+        if (!remastered)
+        {
+            types.Add(TR2Type.BarracudaIce);
+            types.Add(TR2Type.BarracudaUnwater);
+            types.Add(TR2Type.BarracudaXian);
+            types.Add(TR2Type.Crow);
+            types.Add(TR2Type.Eagle);
+            types.Add(TR2Type.MercSnowmobDriver);
+            types.Add(TR2Type.ScubaDiver);
+            types.Add(TR2Type.Shark);
         }
 
         return types;
@@ -341,98 +353,6 @@ public static class TR2TypeUtilities
     public static bool IsEnemyType(TR2Type type)
     {
         return GetFullListOfEnemies().Contains(type);
-    }
-
-    public static Dictionary<string, List<TR2Type>> GetEnemyTypeDictionary()
-    {
-        return new Dictionary<string, List<TR2Type>>
-        {
-            { TR2LevelNames.GW,
-                new(){ TR2Type.Crow, TR2Type.TigerOrSnowLeopard, TR2Type.Spider, TR2Type.TRex }
-            },
-
-            { TR2LevelNames.VENICE,
-                new(){ TR2Type.Doberman, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.StickWieldingGoon1, TR2Type.Rat, TR2Type.MaskedGoon1 }
-            },
-
-            { TR2LevelNames.BARTOLI,
-                new(){ TR2Type.StickWieldingGoon1, TR2Type.Doberman, TR2Type.MaskedGoon1, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.Rat }
-            },
-
-            { TR2LevelNames.OPERA,
-                new(){ TR2Type.Doberman, TR2Type.MaskedGoon1, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.Rat, TR2Type.StickWieldingGoon1, TR2Type.ShotgunGoon }
-            },
-
-            { TR2LevelNames.RIG,
-                new(){ TR2Type.Gunman2, TR2Type.StickWieldingGoon1, TR2Type.Doberman, TR2Type.Gunman1, TR2Type.ScubaDiver }
-            },
-
-            { TR2LevelNames.DA,
-                new(){ TR2Type.FlamethrowerGoon, TR2Type.StickWieldingGoon1, TR2Type.Doberman, TR2Type.Gunman1, TR2Type.Gunman2, TR2Type.ScubaDiver }
-            },
-
-            { TR2LevelNames.FATHOMS,
-                new(){ TR2Type.Shark, TR2Type.ScubaDiver, TR2Type.Gunman1, TR2Type.Barracuda, TR2Type.StickWieldingGoon1 }
-            },
-
-            { TR2LevelNames.DORIA,
-                new(){ TR2Type.Shark, TR2Type.ScubaDiver, TR2Type.Gunman1, TR2Type.Barracuda, TR2Type.StickWieldingGoon1, TR2Type.YellowMorayEel, TR2Type.Gunman2 }
-            },
-
-            { TR2LevelNames.LQ,
-                new(){ TR2Type.StickWieldingGoon2, TR2Type.StickWieldingGoon1, TR2Type.Gunman1, TR2Type.ScubaDiver, TR2Type.BlackMorayEel, TR2Type.Barracuda }
-            },
-
-            { TR2LevelNames.DECK,
-                new(){ TR2Type.StickWieldingGoon1, TR2Type.FlamethrowerGoon, TR2Type.Barracuda, TR2Type.ScubaDiver, TR2Type.Shark, TR2Type.Gunman1 }
-            },
-
-            { TR2LevelNames.TIBET,
-                new(){ TR2Type.Eagle, TR2Type.Mercenary2, TR2Type.Mercenary3, TR2Type.TigerOrSnowLeopard, TR2Type.MercSnowmobDriver }
-            },
-
-            { TR2LevelNames.MONASTERY,
-                new(){ TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick, TR2Type.Mercenary1, TR2Type.Crow, TR2Type.Mercenary2 }
-            },
-
-            { TR2LevelNames.COT,
-                new(){ TR2Type.TigerOrSnowLeopard, TR2Type.Mercenary1, TR2Type.Mercenary2, TR2Type.Yeti, TR2Type.Barracuda }
-            },
-
-            { TR2LevelNames.CHICKEN,
-                new(){ TR2Type.TigerOrSnowLeopard, TR2Type.Barracuda, TR2Type.Yeti, TR2Type.BirdMonster }
-            },
-
-            { TR2LevelNames.XIAN,
-                new(){ TR2Type.Barracuda, TR2Type.TigerOrSnowLeopard, TR2Type.Eagle, TR2Type.Spider, TR2Type.GiantSpider }
-            },
-
-            { TR2LevelNames.FLOATER,
-                new(){ TR2Type.XianGuardSword, TR2Type.XianGuardSpear, TR2Type.Knifethrower }
-            },
-
-            { TR2LevelNames.LAIR,
-                new(){ TR2Type.Knifethrower, TR2Type.XianGuardSpear, TR2Type.MarcoBartoli }
-            },
-
-            { TR2LevelNames.HOME,
-                new(){ TR2Type.Doberman, TR2Type.MaskedGoon1, TR2Type.StickWieldingGoon1, TR2Type.ShotgunGoon }
-            },
-
-            { TR2LevelNames.ASSAULT,
-                new(){ }
-            },
-
-            { "all",
-                new(){ TR2Type.Crow, TR2Type.TigerOrSnowLeopard, TR2Type.Spider, TR2Type.TRex,
-                TR2Type.Doberman, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.StickWieldingGoon1, TR2Type.MaskedGoon1, TR2Type.Rat, TR2Type.ShotgunGoon,
-                TR2Type.Gunman2, TR2Type.Gunman1, TR2Type.ScubaDiver, TR2Type.FlamethrowerGoon, TR2Type.Shark, TR2Type.Barracuda, TR2Type.YellowMorayEel,
-                TR2Type.StickWieldingGoon2, TR2Type.BlackMorayEel, TR2Type.Eagle, TR2Type.Mercenary2, TR2Type.Mercenary3, TR2Type.MercSnowmobDriver,
-                TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick, TR2Type.Mercenary1, TR2Type.Yeti, TR2Type.GiantSpider,
-                TR2Type.XianGuardSword, TR2Type.XianGuardSpear, TR2Type.Knifethrower
-                }
-            }
-        };
     }
 
     public static List<TR2Type> GetGunTypes()
@@ -722,9 +642,10 @@ public static class TR2TypeUtilities
         return waterTypes;
     }
 
-    public static bool CanDropPickups(TR2Type type, bool monksAreKillable, bool unconditionalChickens)
+    public static bool CanDropPickups(TR2Type type, bool monksAreKillable, bool unconditionalChickens, bool remastered)
     {
-        return GetCrossLevelDroppableEnemies(monksAreKillable, unconditionalChickens).Contains(type);
+        return (type == TR2Type.MarcoBartoli && !remastered)
+            || GetDropperEnemies(monksAreKillable, unconditionalChickens, remastered).Contains(type);
     }
 
     public static bool IsMonk(TR2Type type)
@@ -732,17 +653,9 @@ public static class TR2TypeUtilities
         return type == TR2Type.MonkWithKnifeStick || type == TR2Type.MonkWithLongStick;
     }
 
-    public static List<TR2Type> FilterDroppableEnemies(List<TR2Type> types, bool monksAreKillable, bool unconditionalChickens)
+    public static List<TR2Type> FilterDropperEnemies(List<TR2Type> types, bool monksAreKillable, bool unconditionalChickens, bool remastered)
     {
-        List<TR2Type> droppableTypes = new();
-        foreach (TR2Type type in types)
-        {
-            if (CanDropPickups(type, monksAreKillable, unconditionalChickens))
-            {
-                droppableTypes.Add(type);
-            }
-        }
-        return droppableTypes;
+        return types.FindAll(t => CanDropPickups(t, monksAreKillable, unconditionalChickens, remastered));
     }
 
     public static List<TR2Type> DoorTypes()
@@ -841,12 +754,12 @@ public static class TR2TypeUtilities
         return VehicleTypes().Contains(type);
     }
 
-    public static bool CanSharePickupSpace(TR2Type type)
+    public static bool CanSharePickupSpace(TR2Type type, bool remastered)
     {
         // Can we place a standard pickup on the same tile as this entity type?
         return IsAnyPickupType(type)
-            || CanDropPickups(type, false, false)
-            || (TypeFamilies.ContainsKey(type) && TypeFamilies[type].Any(e => CanDropPickups(e, false, false)))
+            || CanDropPickups(type, false, false, remastered)
+            || (TypeFamilies.ContainsKey(type) && TypeFamilies[type].Any(e => CanDropPickups(e, false, false, remastered)))
             || (IsSwitchType(type) && type != TR2Type.UnderwaterSwitch)
             || IsKeyholeType(type)
             || IsSlotType(type)
@@ -869,90 +782,5 @@ public static class TR2TypeUtilities
             || type == TR2Type.ZiplineHandle
             || type == TR2Type.Discgun
             || type == TR2Type.StatueWithKnifeBlade;
-    }
-
-    public static Dictionary<string, List<TR2Type>> DroppableEnemyTypes()
-    {
-        return new Dictionary<string, List<TR2Type>>
-        {
-            { TR2LevelNames.GW,
-                new(){ }
-            },
-
-            { TR2LevelNames.VENICE,
-                new(){ TR2Type.Doberman, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.StickWieldingGoon1, TR2Type.MaskedGoon1 }
-            },
-
-            { TR2LevelNames.BARTOLI,
-                new(){ TR2Type.StickWieldingGoon1, TR2Type.Doberman, TR2Type.MaskedGoon1, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.StickWieldingGoon1 }
-            },
-
-            { TR2LevelNames.OPERA,
-                new(){ TR2Type.StickWieldingGoon1, TR2Type.Doberman, TR2Type.MaskedGoon1, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.Rat, TR2Type.StickWieldingGoon1, TR2Type.ShotgunGoon }
-            },
-
-            { TR2LevelNames.RIG,
-                new(){ TR2Type.Gunman2, TR2Type.StickWieldingGoon1, TR2Type.Doberman, TR2Type.Gunman1 }
-            },
-
-            { TR2LevelNames.DA,
-                new(){ TR2Type.FlamethrowerGoon, TR2Type.StickWieldingGoon1, TR2Type.Doberman, TR2Type.Gunman1, TR2Type.Gunman2 }
-            },
-
-            { TR2LevelNames.FATHOMS,
-                new(){ TR2Type.Gunman1, TR2Type.StickWieldingGoon1 }
-            },
-
-            { TR2LevelNames.DORIA,
-                new(){ TR2Type.Gunman1, TR2Type.StickWieldingGoon1, TR2Type.Gunman2 }
-            },
-
-            { TR2LevelNames.LQ,
-                new(){ TR2Type.StickWieldingGoon2, TR2Type.StickWieldingGoon1, TR2Type.Gunman1 }
-            },
-
-            { TR2LevelNames.DECK,
-                new(){ TR2Type.StickWieldingGoon1, TR2Type.FlamethrowerGoon, TR2Type.Gunman1 }
-            },
-
-            { TR2LevelNames.TIBET,
-                new(){ TR2Type.Mercenary2, TR2Type.Mercenary3 }
-            },
-
-            { TR2LevelNames.MONASTERY,
-                new(){ TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick, TR2Type.Mercenary1, TR2Type.Mercenary2 }
-            },
-
-            { TR2LevelNames.COT,
-                new(){ TR2Type.Mercenary1, TR2Type.Mercenary2 }
-            },
-
-            { TR2LevelNames.CHICKEN,
-                new(){ }
-            },
-
-            { TR2LevelNames.XIAN,
-                new(){ }
-            },
-
-            { TR2LevelNames.FLOATER,
-                new(){ TR2Type.Knifethrower }
-            },
-
-            { TR2LevelNames.LAIR,
-                new(){ TR2Type.Knifethrower }
-            },
-
-            { TR2LevelNames.HOME,
-                new(){ TR2Type.Doberman, TR2Type.MaskedGoon1, TR2Type.ShotgunGoon, TR2Type.StickWieldingGoon1 }
-            },
-
-            { "all",
-                new(){ TR2Type.Doberman, TR2Type.MaskedGoon1, TR2Type.ShotgunGoon, TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.Rat,
-                TR2Type.StickWieldingGoon1, TR2Type.Gunman2, TR2Type.Gunman1, TR2Type.FlamethrowerGoon, TR2Type.StickWieldingGoon2,
-                TR2Type.Mercenary2, TR2Type.Mercenary3, TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick, TR2Type.Mercenary1, TR2Type.Knifethrower
-                }
-            }
-        };
     }
 }

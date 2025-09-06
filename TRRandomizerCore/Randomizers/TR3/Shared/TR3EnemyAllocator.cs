@@ -33,7 +33,7 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
     protected override bool IsOneShotType(TR3Type type)
         => false;
 
-    public EnemyTransportCollection<TR3Type> SelectCrossLevelEnemies(string levelName, TR3Level level, int levelSequence, bool remastered)
+    public EnemyTransportCollection<TR3Type> SelectCrossLevelEnemies(string levelName, TR3Level level, int levelSequence)
     {
         if (levelName == TR3LevelNames.ASSAULT)
         {
@@ -68,7 +68,7 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
             }
         }
 
-        if (remastered && (levelName == TR3LevelNames.HSC || levelName == TR3LevelNames.AREA51))
+        if (Settings.IsRemastered && (levelName == TR3LevelNames.HSC || levelName == TR3LevelNames.AREA51))
         {
             // TRR prisoners have to remain because of (presumably) the way the game fixes them not being friendly.
             if (!newTypes.Contains(TR3Type.Prisoner))
@@ -418,7 +418,10 @@ public class TR3EnemyAllocator : EnemyAllocator<TR3Type>
 
         if (!Settings.AllowEnemyKeyDrops)
         {
-            TR3ItemAllocator allocator = new();
+            TR3ItemAllocator allocator = new()
+            {
+                Settings = Settings,
+            };
             allocator.ExcludeEnemyKeyDrops(level.Entities);
         }
     }

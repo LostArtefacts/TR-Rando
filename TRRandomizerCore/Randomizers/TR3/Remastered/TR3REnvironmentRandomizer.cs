@@ -77,6 +77,6 @@ public class TR3REnvironmentRandomizer : BaseTR3RRandomizer
             }
         }
 
-        TR3EnemyUtilities.CheckMonkeyPickups(level.Data, true);
+        TR3EnemyUtilities.CheckMonkeyPickups(level.Data, Settings);
     }
 }

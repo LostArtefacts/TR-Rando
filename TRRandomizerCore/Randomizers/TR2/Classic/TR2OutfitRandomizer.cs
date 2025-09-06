@@ -55,9 +55,6 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             _firstDragonLevel = levels.Find(l => l.Data.Entities.Any(e => e.TypeID == TR2Type.MarcoBartoli));
         }
 
-        // Sort the levels so each thread has a fairly equal weight in terms of import cost/time
-        levels.Sort(new TR2LevelTextureWeightComparer());
-
         int processorIndex = 0;
         foreach (TR2CombinedLevel level in levels)
         {
@@ -231,7 +228,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 laraImport.Add(lara);
                 laraRemovals.AddRange(_laraRemovals);
                 var monitor = _outer.TextureMonitor.GetMonitor(level.Name);
-                monitor?.PreparedLevelMapping.Keys.Where(s => s.EntityTextureMap.ContainsKey(defaultAlias))
+                monitor?.PreparedLevelMapping?.Keys.Where(s => s.EntityTextureMap.ContainsKey(defaultAlias))
                     .ToList().ForEach(s => monitor.PreparedLevelMapping.Remove(s));
             }
             

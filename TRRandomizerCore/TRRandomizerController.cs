@@ -865,7 +865,7 @@ public class TRRandomizerController
         set => LevelRandomizer.HideEnemiesUntilTriggered = value;
     }
 
-    public bool RemoveLevelEndingLarson
+    public bool ReplaceRequiredEnemies
     {
         get => LevelRandomizer.ReplaceRequiredEnemies;
         set => LevelRandomizer.ReplaceRequiredEnemies = value;

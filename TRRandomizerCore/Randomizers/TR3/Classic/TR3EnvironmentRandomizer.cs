@@ -193,6 +193,6 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
             monitor.UseMirroring = true;
         }
 
-        TR3EnemyUtilities.CheckMonkeyPickups(level.Data, false);
+        TR3EnemyUtilities.CheckMonkeyPickups(level.Data, Settings);
     }
 }
