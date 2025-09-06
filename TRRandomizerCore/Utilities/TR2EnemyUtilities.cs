@@ -2,6 +2,7 @@
 using TRRandomizerCore.Helpers;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
+using TRDataControl;
 
 namespace TRRandomizerCore.Utilities;
 
@@ -36,6 +37,8 @@ public static class TR2EnemyUtilities
     public static bool IsEnemySupported(
         string lvlName, TR2Type type, RandoDifficulty difficulty, bool protectMonks, bool remastered)
     {
+        type = TR2TypeUtilities.TranslateAlias(type);
+
         if (lvlName == TR2LevelNames.HOME)
         {
             if (TR2TypeUtilities.IsMonk(type))
@@ -109,21 +112,21 @@ public static class TR2EnemyUtilities
         return null;
     }
 
-    public static int GetRestrictedEnemyLevelCount(TR2Type entity, RandoDifficulty difficulty)
+    public static int GetRestrictedEnemyLevelCount(TR2Type type, RandoDifficulty difficulty)
     {
         // Remember that technical count is MAXIMUM allowed, and there may be overlap.
         // For example, maybe technically Dragon is allowed once, but an Easy difficulty might have that set to 0.
         // So we check difficulties first, then check technical last.
-        if (difficulty == RandoDifficulty.Default)
+        type = TR2TypeUtilities.TranslateAlias(type);
+
+        if (difficulty == RandoDifficulty.Default
+            && _restrictedEnemyLevelCountsDefault.TryGetValue(type, out var count))
         {
-            if (_restrictedEnemyLevelCountsDefault.ContainsKey(entity))
-                return _restrictedEnemyLevelCountsDefault[entity];
+            return count;
         }
 
-        if (_restrictedEnemyLevelCountsTechnical.ContainsKey(entity))
-            return _restrictedEnemyLevelCountsTechnical[entity];
-
-        return -1;
+        return _restrictedEnemyLevelCountsTechnical.TryGetValue(type, out count)
+            ? count : -1;
     }
 
     public static int GetRestrictedEnemyTotalTypeCount(RandoDifficulty difficulty)
@@ -347,6 +350,26 @@ public static class TR2EnemyUtilities
         (
             File.ReadAllText("Resources/TR2/Restrictions/enemy_restrictions_special.json")
         );
+
+        ExpandZones(_restrictedEnemyZonesDefault.Select(z => z.Value));
+        ExpandZones(_restrictedEnemyZonesTechnical.Select(z => z.Value));
+    }
+
+    private static void ExpandZones(IEnumerable<Dictionary<TR2Type, List<int>>> zones)
+    {
+        var data = new TR2DataProvider();
+        foreach (var zone in zones)
+        {
+            var expansions = zone.Keys
+                .Where(data.HasAliases)
+                .SelectMany(t => data.GetAliases(t).Select(alias => new { alias, type = t }))
+                .ToList();
+
+            foreach (var e in expansions)
+            {
+                zone[e.alias] = zone[e.type];
+            }
+        }
     }
 
     private static readonly Dictionary<EnemyDifficulty, List<TR2Type>> _enemyDifficulties = new()

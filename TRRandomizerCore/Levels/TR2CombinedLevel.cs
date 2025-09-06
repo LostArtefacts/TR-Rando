@@ -89,43 +89,4 @@ public class TR2CombinedLevel
         List<TR2Type> allEnemies = TR2TypeUtilities.GetFullListOfEnemies();
         return Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
     }
-
-    public int GetMaximumEntityLimit()
-    {
-        int limit = 256;
-
-        // #153 The game creates a black skidoo for each skidoo driver when the level
-        // is loaded, so there needs to be space in the entity array for these.
-        limit -= Data.Entities.FindAll(e => e.TypeID == TR2Type.MercSnowmobDriver).Count;
-
-        // If there is a dragon, we need an extra 7 slots for the front bones, 
-        // back bones etc. This is going by what's seen in Dragon.c
-        if (Data.Entities.Any(e => e.TypeID == TR2Type.MarcoBartoli))
-        {
-            limit -= 7;
-        }
-
-        return limit;
-    }
-
-    public int GetActualEntityCount()
-    {
-        int count = 0;
-        foreach (TR2Entity entity in Data.Entities)
-        {
-            switch (entity.TypeID)
-            {
-                case TR2Type.MercSnowmobDriver:
-                    count += 2;
-                    break;
-                case TR2Type.MarcoBartoli:
-                    count += 7;
-                    break;
-                default:
-                    count++;
-                    break;
-            }
-        }
-        return count;
-    }
 }
