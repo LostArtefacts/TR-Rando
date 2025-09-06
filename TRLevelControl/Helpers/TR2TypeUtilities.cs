@@ -201,11 +201,8 @@ public static class TR2TypeUtilities
             TR2Type.Doberman,
             TR2Type.Eagle,
             TR2Type.FlamethrowerGoonOG,
-            TR2Type.FlamethrowerGoonTopixtor,
             TR2Type.GiantSpider,
             TR2Type.Gunman1OG,
-            TR2Type.Gunman1TopixtorORC,
-            TR2Type.Gunman1TopixtorCAC,
             TR2Type.Gunman2,
             TR2Type.Knifethrower,
             TR2Type.MarcoBartoli, // catch-all for Marco, the explosion when the dragon spawns, and the various dragon front/back pieces
@@ -244,6 +241,10 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Bear);
             types.Add(TR2Type.MonkWithNoShadow);
             types.Add(TR2Type.Wolf);
+
+            types.Add(TR2Type.FlamethrowerGoonTopixtor);
+            types.Add(TR2Type.Gunman1TopixtorORC);
+            types.Add(TR2Type.Gunman1TopixtorCAC);
         }
 
         return types;
@@ -256,11 +257,8 @@ public static class TR2TypeUtilities
             TR2Type.BengalTiger,
             TR2Type.Doberman,
             TR2Type.FlamethrowerGoonOG,
-            TR2Type.FlamethrowerGoonTopixtor,
             TR2Type.GiantSpider,
             TR2Type.Gunman1OG,
-            TR2Type.Gunman1TopixtorORC,
-            TR2Type.Gunman1TopixtorCAC,
             TR2Type.Gunman2,
             TR2Type.Knifethrower,
             TR2Type.MaskedGoon1,
@@ -311,6 +309,10 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.ScubaDiver);
             types.Add(TR2Type.Shark);
             types.Add(TR2Type.Wolf);
+
+            types.Add(TR2Type.FlamethrowerGoonTopixtor);
+            types.Add(TR2Type.Gunman1TopixtorORC);
+            types.Add(TR2Type.Gunman1TopixtorCAC);
         }
 
         return types;

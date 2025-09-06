@@ -54,15 +54,12 @@ public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
         [TR2Type.ShotgunGoon] = TR2LevelNames.OPERA,
 
         [TR2Type.Gunman1OG] = TR2LevelNames.RIG,
-        [TR2Type.Gunman1TopixtorCAC] = TR2LevelNames.RIG,
-        [TR2Type.Gunman1TopixtorORC] = TR2LevelNames.RIG,
         [TR2Type.Gunman2] = TR2LevelNames.RIG,
         [TR2Type.ScubaDiver] = TR2LevelNames.RIG,
         [TR2Type.ScubaHarpoonProjectile_H] = TR2LevelNames.RIG,
         [TR2Type.StickWieldingGoon1Bandana] = TR2LevelNames.RIG,
 
         [TR2Type.FlamethrowerGoonOG] = TR2LevelNames.DA,
-        [TR2Type.FlamethrowerGoonTopixtor] = TR2LevelNames.DA,
 
         [TR2Type.BarracudaUnwater] = TR2LevelNames.FATHOMS,
         [TR2Type.Shark] = TR2LevelNames.FATHOMS,
