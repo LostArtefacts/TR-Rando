@@ -353,6 +353,8 @@ public enum TR2Type : uint
     FlamethrowerGoonTopixtor      = 1015,
     FlamethrowerGoonGM            = 1016,
     Gunman1GM                     = 1017,
+    SharkOG                       = 1018,
+    SharkGM                       = 1019,
 
     // Extra Lara animations
     LaraMiscAnim_H_Ice            = 2000, // Death-by-Yeti, Gong action
