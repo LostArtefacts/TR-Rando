@@ -100,6 +100,16 @@ public static class TR2TypeUtilities
             [TR2Type.Mercenary3OG] = [TR2LevelNames.TIBET],
             [TR2Type.Mercenary3GM] = [TR2LevelNames.COLDWAR],
         },
+        [TR2Type.MercSnowmobDriver] = new()
+        {
+            [TR2Type.MercSnowmobDriverOG] = [TR2LevelNames.TIBET],
+            [TR2Type.MercSnowmobDriverGM] = [TR2LevelNames.COLDWAR, TR2LevelNames.FOOLGOLD],
+        },
+        [TR2Type.BlackSnowmob] = new()
+        {
+            [TR2Type.BlackSnowmobOG] = [TR2LevelNames.TIBET],
+            [TR2Type.BlackSnowmobGM] = [TR2LevelNames.COLDWAR, TR2LevelNames.FOOLGOLD],
+        },
     };
 
     public static readonly Dictionary<TR2Type, List<TR2Type>> TypeFamilies = new()
@@ -132,6 +142,8 @@ public static class TR2TypeUtilities
         },
         [TR2Type.Mercenary2] = [TR2Type.Mercenary2OG, TR2Type.Mercenary2GM],
         [TR2Type.Mercenary3] = [TR2Type.Mercenary3OG, TR2Type.Mercenary3GM],
+        [TR2Type.MercSnowmobDriver] = [TR2Type.MercSnowmobDriverOG, TR2Type.MercSnowmobDriverGM],
+        [TR2Type.BlackSnowmob] = [TR2Type.BlackSnowmobOG, TR2Type.BlackSnowmobGM],
     };
 
     public static string GetName(TR2Type type)
@@ -234,7 +246,7 @@ public static class TR2TypeUtilities
             TR2Type.Mercenary1,
             TR2Type.Mercenary2OG,
             TR2Type.Mercenary3OG,
-            TR2Type.MercSnowmobDriver,
+            TR2Type.MercSnowmobDriverOG,
             TR2Type.MonkWithKnifeStick,
             TR2Type.MonkWithLongStick,
             TR2Type.Rat,
@@ -272,6 +284,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.SharkGM);
             types.Add(TR2Type.Mercenary2GM);
             types.Add(TR2Type.Mercenary3GM);
+            types.Add(TR2Type.MercSnowmobDriverGM);
         }
 
         return types;
@@ -332,7 +345,8 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Bear);
             types.Add(TR2Type.Crow);
             types.Add(TR2Type.Eagle);
-            types.Add(TR2Type.MercSnowmobDriver);
+            types.Add(TR2Type.MercSnowmobDriverOG);
+            types.Add(TR2Type.MercSnowmobDriverGM);
             types.Add(TR2Type.ScubaDiver);
             types.Add(TR2Type.SharkOG);
             types.Add(TR2Type.SharkGM);
@@ -391,6 +405,8 @@ public static class TR2TypeUtilities
             TR2Type.Mercenary3OG,
             TR2Type.Mercenary3GM,
             TR2Type.MercSnowmobDriver,
+            TR2Type.MercSnowmobDriverOG,
+            TR2Type.MercSnowmobDriverGM,
             TR2Type.MonkWithKnifeStick,
             TR2Type.MonkWithLongStick,
             TR2Type.Rat,

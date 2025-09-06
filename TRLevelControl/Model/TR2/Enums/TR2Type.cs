@@ -359,6 +359,10 @@ public enum TR2Type : uint
     Mercenary2GM                  = 1021,
     Mercenary3OG                  = 1022,
     Mercenary3GM                  = 1023,
+    MercSnowmobDriverOG           = 1024,
+    MercSnowmobDriverGM           = 1025,
+    BlackSnowmobOG                = 1026,
+    BlackSnowmobGM                = 1027,
 
     // Extra Lara animations
     LaraMiscAnim_H_Ice            = 2000, // Death-by-Yeti, Gong action
