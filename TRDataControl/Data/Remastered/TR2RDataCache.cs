@@ -87,7 +87,7 @@ public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
         [TR2Type.MonkWithLongStick] = TR2LevelNames.MONASTERY,
 
         [TR2Type.BarracudaIce] = TR2LevelNames.COT,
-        [TR2Type.Yeti] = TR2LevelNames.COT,
+        [TR2Type.YetiOG] = TR2LevelNames.COT,
         [TR2Type.LaraMiscAnim_H_Ice] = TR2LevelNames.COT,
 
         [TR2Type.BirdMonster] = TR2LevelNames.CHICKEN,

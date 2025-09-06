@@ -115,6 +115,11 @@ public static class TR2TypeUtilities
             [TR2Type.MonkWithKnifeStickOG] = [TR2LevelNames.MONASTERY],
             [TR2Type.MonkWithKnifeStickGM] = [TR2LevelNames.FURNACE, TR2LevelNames.KINGDOM],
         },
+        [TR2Type.Yeti] = new()
+        {
+            [TR2Type.YetiOG] = [TR2LevelNames.COT, TR2LevelNames.CHICKEN],
+            [TR2Type.YetiGM] = [TR2LevelNames.KINGDOM],
+        },
     };
 
     public static readonly Dictionary<TR2Type, List<TR2Type>> TypeFamilies = new()
@@ -150,6 +155,7 @@ public static class TR2TypeUtilities
         [TR2Type.MercSnowmobDriver] = [TR2Type.MercSnowmobDriverOG, TR2Type.MercSnowmobDriverGM],
         [TR2Type.BlackSnowmob] = [TR2Type.BlackSnowmobOG, TR2Type.BlackSnowmobGM],
         [TR2Type.MonkWithKnifeStick] = [TR2Type.MonkWithKnifeStickOG, TR2Type.MonkWithKnifeStickGM],
+        [TR2Type.Yeti] = [TR2Type.YetiOG, TR2Type.YetiGM],
     };
 
     public static string GetName(TR2Type type)
@@ -274,7 +280,7 @@ public static class TR2TypeUtilities
             TR2Type.XianGuardSpear,
             TR2Type.XianGuardSword,
             TR2Type.YellowMorayEel,
-            TR2Type.Yeti
+            TR2Type.YetiOG,
         ];
 
         if (!remastered)
@@ -293,6 +299,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Mercenary3GM);
             types.Add(TR2Type.MercSnowmobDriverGM);
             types.Add(TR2Type.MonkWithKnifeStickGM);
+            types.Add(TR2Type.YetiGM);
         }
 
         return types;
@@ -327,7 +334,7 @@ public static class TR2TypeUtilities
             TR2Type.StickWieldingGoon2,
             TR2Type.TRex,
             TR2Type.WhiteTiger,
-            TR2Type.Yeti
+            TR2Type.YetiOG,
         ];
 
         // #131 Provides an option to exclude monks as having to be killed
@@ -369,6 +376,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Gunman1GM);
             types.Add(TR2Type.Mercenary2GM);
             types.Add(TR2Type.Mercenary3GM);
+            types.Add(TR2Type.YetiGM);
         }
 
         return types;
@@ -444,7 +452,9 @@ public static class TR2TypeUtilities
             TR2Type.XianGuardSpear,
             TR2Type.XianGuardSword,
             TR2Type.YellowMorayEel,
-            TR2Type.Yeti
+            TR2Type.Yeti,
+            TR2Type.YetiOG,
+            TR2Type.YetiGM,
         };
     }
 

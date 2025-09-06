@@ -366,6 +366,8 @@ public enum TR2Type : uint
     StickWieldingGoon1GM          = 1028,
     MonkWithKnifeStickOG          = 1029,
     MonkWithKnifeStickGM          = 1030,
+    YetiOG                        = 1031,
+    YetiGM                        = 1032,
 
     // Extra Lara animations
     LaraMiscAnim_H_Ice            = 2000, // Death-by-Yeti, Gong action
