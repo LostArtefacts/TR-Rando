@@ -363,6 +363,7 @@ public enum TR2Type : uint
     MercSnowmobDriverGM           = 1025,
     BlackSnowmobOG                = 1026,
     BlackSnowmobGM                = 1027,
+    StickWieldingGoon1GM          = 1028,
 
     // Extra Lara animations
     LaraMiscAnim_H_Ice            = 2000, // Death-by-Yeti, Gong action

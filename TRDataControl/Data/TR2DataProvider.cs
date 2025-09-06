@@ -236,7 +236,8 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
 
         [TR2Type.StickWieldingGoon1] = new()
         {
-            TR2Type.StickWieldingGoon1Bandana, TR2Type.StickWieldingGoon1BlackJacket, TR2Type.StickWieldingGoon1BodyWarmer, TR2Type.StickWieldingGoon1GreenVest, TR2Type.StickWieldingGoon1WhiteVest
+            TR2Type.StickWieldingGoon1Bandana, TR2Type.StickWieldingGoon1BlackJacket, TR2Type.StickWieldingGoon1BodyWarmer,
+            TR2Type.StickWieldingGoon1GreenVest, TR2Type.StickWieldingGoon1WhiteVest, TR2Type.StickWieldingGoon1GM,
         },
 
         [TR2Type.FlamethrowerGoon] = new()
@@ -342,6 +343,12 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             TR2SFX.EnemyThump,
         },
         [TR2Type.StickWieldingGoon1BlackJacket] = new()
+        {
+            TR2SFX.EnemyHit1,
+            TR2SFX.EnemyHit2,
+            TR2SFX.EnemyThump,
+        },
+        [TR2Type.StickWieldingGoon1GM] = new()
         {
             TR2SFX.EnemyHit1,
             TR2SFX.EnemyHit2,
