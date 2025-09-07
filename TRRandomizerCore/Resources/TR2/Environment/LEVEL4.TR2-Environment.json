@@ -1,0 +1,520 @@
+{
+  "All": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If chickens are unconditional or there isn't one in the final area, make an alternate ending.",
+        "ConditionType": 42,
+        "Or": [
+          {
+            "ConditionType": 0,
+            "Negate": true,
+            "EntityIndex": 127,
+            "EntityType": 46
+          }
+        ]
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make an exit room.",
+          "EMType": 126,
+          "Location": {
+            "X": 24576,
+            "Y": 9984,
+            "Z": 29696
+          },
+          "LinkedLocation": {
+            "X": 29184,
+            "Y": 4864,
+            "Z": 31232,
+            "Room": 68
+          },
+          "Textures": {
+            "Floor": 1437,
+            "Ceiling": 1437,
+            "WallAlignment": 4,
+            "Wall4": 1437,
+            "RandomRotationSeed": 69228
+          },
+          "AmbientLighting": 7392,
+          "DefaultVertex": {
+            "Lighting": 5956,
+            "Lighting2": 6000,
+            "Attributes": 16
+          },
+          "Lights": [
+            {
+              "X": 4608,
+              "Y": -3584,
+              "Z": 1536,
+              "Intensity1": 3072,
+              "Intensity2": 3072,
+              "Fade1": 2048,
+              "Fade2": 2048
+            }
+          ],
+          "Height": 20,
+          "Width": 6,
+          "Depth": 3,
+          "FloorHeights": {
+            "-12": [
+              13
+            ],
+            "-8": [
+              10
+            ],
+            "-4": [
+              7
+            ]
+          },
+          "CeilingHeights": {
+            "4": [
+              10
+            ],
+            "8": [
+              7
+            ],
+            "12": [
+              4
+            ]
+          }
+        },
+        {
+          "Comments": "Coll portal",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 29184,
+            "Y": 4864,
+            "Z": 31232,
+            "Room": 68
+          },
+          "Floor": {
+            "X": 29184,
+            "Y": 4864,
+            "Z": 31232,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Vis portal",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 68,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": 4864,
+                  "Z": 2048
+                },
+                {
+                  "X": 3072,
+                  "Y": 4864,
+                  "Z": 2048
+                },
+                {
+                  "X": 3072,
+                  "Y": 4864,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": 4864,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": 68,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 4096,
+                  "Y": 4864,
+                  "Z": 2048
+                },
+                {
+                  "X": 5120,
+                  "Y": 4864,
+                  "Z": 2048
+                },
+                {
+                  "X": 5120,
+                  "Y": 4864,
+                  "Z": 1024
+                },
+                {
+                  "X": 4096,
+                  "Y": 4864,
+                  "Z": 1024
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Add a ladder.",
+          "EMType": 0,
+          "TextureMap": {
+            "1630": {
+              "-1": {
+                "Rectangles": [
+                  28,
+                  29
+                ]
+              }
+            }
+          },
+          "Location": {
+            "X": 29184,
+            "Y": 6912,
+            "Z": 31232,
+            "Room": -1
+          },
+          "IsPositiveZ": true
+        },
+        {
+          "Comments": "Remove faces for portals.",
+          "EMType": 22,
+          "GeometryMap": {
+            "-1": {
+              "Rectangles": [
+                26
+              ]
+            },
+            "68": {
+              "Rectangles": [
+                26
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Light the room.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1
+          ]
+        },
+        {
+          "Comments": "Import key and keyhole models.",
+          "EMType": 141,
+          "Models": [
+            197,
+            201
+          ]
+        },
+        {
+          "Comments": "Whatever the final enemy is will drop a key.",
+          "EMType": 51,
+          "TypeID": 193,
+          "Intensity": -1,
+          "Location": {
+            "X": 45568,
+            "Y": -2048,
+            "Z": 35328,
+            "Room": 65
+          }
+        },
+        {
+          "Comments": "Add a keyhole.",
+          "EMType": 51,
+          "TypeID": 201,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": 4864,
+            "Z": 31232,
+            "Room": 68,
+            "Angle": -32768
+          }
+        },
+        {
+          "Comments": "Add a trapdoor.",
+          "EMType": 51,
+          "TypeID": 114,
+          "Intensity": -1,
+          "Location": {
+            "X": 29184,
+            "Y": 4864,
+            "Z": 31232,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Keyhole trigger.",
+          "EMType": 61,
+          "EntityLocation": -2,
+          "Trigger": {
+            "TrigType": 3,
+            "Mask": 31,
+            "SwitchOrKeyRef": -2,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Trapdoor dummy trigger.",
+          "EMType": 61,
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Final pickup...",
+          "EMType": 51,
+          "TypeID": 174,
+          "Intensity": -1,
+          "Location": {
+            "X": 26112,
+            "Y": 9984,
+            "Z": 31232,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "...ends the level.",
+          "EMType": 61,
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 4,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              },
+              {
+                "Action": 7
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If the final enemy is the dragon, adjust the trigger otherwise the windows don't break.",
+        "ConditionType": 0,
+        "EntityIndex": 127,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make an unreachable room for a boulder.",
+          "EMType": 126,
+          "Location": {
+            "X": 79872,
+            "Y": 1280,
+            "Z": 76800
+          },
+          "LinkedLocation": {
+            "X": 77312,
+            "Y": 1280,
+            "Z": 74240,
+            "Room": 46
+          },
+          "DefaultVertex": {
+            "Lighting": 7000,
+            "Lighting2": 7000,
+            "Attributes": 16
+          },
+          "Lights": [],
+          "Height": 4,
+          "Width": 3,
+          "Depth": 4
+        },
+        {
+          "Comments": "Import the boulder model.",
+          "EMType": 145,
+          "Data": [
+            {
+              "ModelID": 60,
+              "TexturedFace3": 1646,
+              "TexturedFace4": 1509
+            }
+          ]
+        },
+        {
+          "Comments": "Add a boulder.",
+          "EMType": 51,
+          "TypeID": 60,
+          "Intensity": -1,
+          "Location": {
+            "X": 81408,
+            "Y": 1280,
+            "Z": 78336,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Move the trigger to the boulder.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 25088,
+            "Y": 2048,
+            "Z": 35328,
+            "Room": 75
+          },
+          "NewLocation": {
+            "X": 81408,
+            "Y": 1280,
+            "Z": 78336,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Make it heavy.",
+          "EMType": 69,
+          "Location": {
+            "X": 81408,
+            "Y": 1280,
+            "Z": 78336,
+            "Room": -1
+          },
+          "TrigType": 5
+        },
+        {
+          "Comments": "Remove the window actions.",
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 81408,
+              "Y": 1280,
+              "Z": 78336,
+              "Room": -1
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 128
+          }
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 81408,
+              "Y": 1280,
+              "Z": 78336,
+              "Room": -1
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 129
+          }
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 81408,
+              "Y": 1280,
+              "Z": 78336,
+              "Room": -1
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 130
+          }
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 81408,
+              "Y": 1280,
+              "Z": 78336,
+              "Room": -1
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 131
+          }
+        },
+        {
+          "Comments": "Trigger the windows on a separate tile.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 81408,
+              "Y": 1280,
+              "Z": 79360,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "TrigType": 5,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 128
+              },
+              {
+                "Parameter": 129
+              },
+              {
+                "Parameter": 130
+              },
+              {
+                "Parameter": 131
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Trigger the boulder from the original spot.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 25088,
+              "Y": 2048,
+              "Z": 35328,
+              "Room": 75
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Move the camera.",
+          "EMType": 129,
+          "CameraIndex": 12,
+          "NewLocation": {
+            "X": 40448,
+            "Y": -3584,
+            "Z": 33280,
+            "Room": 65
+          }
+        }
+      ]
+    }
+  ],
+  "ConditionalOneOf": [],
+  "Mirrored": []
+}

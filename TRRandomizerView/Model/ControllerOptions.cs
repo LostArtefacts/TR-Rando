@@ -3396,7 +3396,7 @@ public class ControllerOptions : INotifyPropertyChanged
 
         _replaceRequiredEnemies.Description = IsTR1
             ? "Replaces the normally required Larson in Tomb of Qualopec and Torso in Great Pyramid with randomized enemy types."
-            : "Replaces the normally required bird monster in Ice Palace and dragon in Dragon's Lair with randomized enemy types.";
+            : "Replaces the normally required bird monsters and dragon with randomized enemy types.";
 
         if (IsTR2)
         {

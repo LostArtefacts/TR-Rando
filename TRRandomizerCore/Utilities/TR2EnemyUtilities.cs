@@ -83,7 +83,7 @@ public static class TR2EnemyUtilities
     public static List<TR2Type> GetRequiredEnemies(string lvlName)
     {
         return _requiredEnemies.TryGetValue(lvlName, out var value)
-            ? [.. value]
+            ? [.. value.Select(t => TR2TypeUtilities.GetAliasForLevel(lvlName, t))]
             : [];
     }
 
@@ -284,12 +284,11 @@ public static class TR2EnemyUtilities
 
     private static readonly Dictionary<string, List<TR2Type>> _requiredEnemies = new()
     {
-        [TR2LevelNames.CHICKEN] =
-            new List<TR2Type> { TR2Type.BirdMonster },  // #60 - Ice Palace chicken man must remain to avoid softlock.
-        [TR2LevelNames.LAIR] =
-            new List<TR2Type> { TR2Type.MarcoBartoli }, // #97 - Marco/Dragon to remain in the same place to trigger door opening
-        [TR2LevelNames.HOME] =
-            new List<TR2Type> { TR2Type.ShotgunGoon }  // #62 - Avoid randomizing shotgun goon in HSH
+        [TR2LevelNames.CHICKEN] = [TR2Type.BirdMonster],
+        [TR2LevelNames.LAIR] = [TR2Type.MarcoBartoli],
+        [TR2LevelNames.HOME] = [TR2Type.ShotgunGoon],
+        [TR2LevelNames.KINGDOM] = [TR2Type.BirdMonster],
+        [TR2LevelNames.VEGAS] = [TR2Type.BirdMonster],
     };
 
     // We restrict some enemies to specific rooms in levels, for example the dragon does not work well in small

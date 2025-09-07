@@ -1,0 +1,266 @@
+{
+  "All": [
+    {
+      "Comments": "Move the guardian triggers as otherwise they can be skipped easily and cause softlock.",
+      "EMType": 67,
+      "BaseLocation": {
+        "X": 44544,
+        "Y": -256,
+        "Z": 55808,
+        "Room": 7
+      },
+      "NewLocation": {
+        "X": 46592,
+        "Y": -256,
+        "Z": 49664,
+        "Room": 27
+      }
+    },
+    {
+      "EMType": 67,
+      "BaseLocation": {
+        "X": 44544,
+        "Y": -256,
+        "Z": 59904,
+        "Room": 7
+      },
+      "NewLocation": {
+        "X": 46592,
+        "Y": -256,
+        "Z": 50688,
+        "Room": 27
+      }
+    },
+    {
+      "Comments": "Fix flipmap triggers.",
+      "EMType": 61,
+      "ExpandedLocations": {
+        "Location": {
+          "X": 47616,
+          "Y": 8192,
+          "Z": 62976,
+          "Room": 33
+        },
+        "ExpandX": 4,
+        "ExpandZ": 1
+      },
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 4,
+            "Parameter": 1
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 61,
+      "ExpandedLocations": {
+        "Location": {
+          "X": 48640,
+          "Y": 12032,
+          "Z": 62976,
+          "Room": 35
+        },
+        "ExpandX": 2,
+        "ExpandZ": 1
+      },
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 4,
+            "Parameter": 1
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 61,
+      "ExpandedLocations": {
+        "Location": {
+          "X": 47616,
+          "Y": 11648,
+          "Z": 64000,
+          "Room": 72
+        },
+        "ExpandX": 4,
+        "ExpandZ": 1
+      },
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 5,
+            "Parameter": 1
+          }
+        ]
+      }
+    }
+  ],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If chickens are unconditional or there isn't one in the final area, make an alternate ending.",
+        "ConditionType": 42,
+        "Or": [
+          {
+            "ConditionType": 0,
+            "Negate": true,
+            "EntityIndex": 127,
+            "EntityType": 46
+          }
+        ]
+      },
+      "OnTrue": [
+        {
+          "Comments": "Add a pushblock.",
+          "EMType": 51,
+          "TypeID": 67,
+          "Intensity": -1,
+          "Location": {
+            "X": 36352,
+            "Y": -2304,
+            "Z": 55808,
+            "Room": 6
+          }
+        },
+        {
+          "Comments": "Add a switch.",
+          "EMType": 51,
+          "TypeID": 93,
+          "Intensity": -1,
+          "Location": {
+            "X": 36352,
+            "Y": -256,
+            "Z": 59904,
+            "Room": 6,
+            "Angle": 16384
+          }
+        },
+        {
+          "Comments": "And another switch.",
+          "EMType": 51,
+          "TypeID": 103,
+          "Intensity": -1,
+          "Location": {
+            "X": 31232,
+            "Y": -1280,
+            "Z": 55808,
+            "Room": 6,
+            "Angle": -16384
+          }
+        },
+        {
+          "Comments": "First switch triggers the block.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 36352,
+              "Y": -256,
+              "Z": 59904,
+              "Room": 63
+            }
+          ],
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": -2,
+            "Actions": [
+              {
+                "Parameter": -3
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Use the block to reach the second; it ends the level.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 31232,
+              "Y": -1280,
+              "Z": 55808,
+              "Room": 63
+            }
+          ],
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": -1,
+            "Actions": [
+              {
+                "Action": 7
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If the final enemy is the dragon, adjust the trigger so he doesn't spawn until in the same area.",
+        "ConditionType": 0,
+        "EntityIndex": 6,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "Comments": "Move the triggers to the flipped gated area.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 46592,
+            "Y": -256,
+            "Z": 49664,
+            "Room": 27
+          },
+          "NewLocation": {
+            "X": 27136,
+            "Y": -1408,
+            "Z": 59904,
+            "Room": 61
+          }
+        },
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 46592,
+            "Y": -256,
+            "Z": 50688,
+            "Room": 27
+          },
+          "NewLocation": {
+            "X": 26112,
+            "Y": -1408,
+            "Z": 59904,
+            "Room": 61
+          }
+        },
+        {
+          "EMType": 63,
+          "Locations": [
+            {
+              "X": 25088,
+              "Y": -1408,
+              "Z": 59904,
+              "Room": 61
+            }
+          ],
+          "BaseLocation": {
+            "X": 26112,
+            "Y": -1408,
+            "Z": 59904,
+            "Room": 61
+          }
+        }
+      ]
+    }
+  ],
+  "ConditionalOneOf": [],
+  "Mirrored": []
+}

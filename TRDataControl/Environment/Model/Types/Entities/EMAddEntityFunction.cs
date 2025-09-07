@@ -41,7 +41,8 @@ public class EMAddEntityFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        if (level.Entities.Count < _defaultEntityLimit)
+        int limit = _isCommunityPatch ? 10240 : _defaultEntityLimit;
+        if (level.Entities.Count < limit)
         {
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
