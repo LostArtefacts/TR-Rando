@@ -416,6 +416,11 @@ public static class TR2EnemyUtilities
         [TR2LevelNames.FLOATER] = 3,
         [TR2LevelNames.LAIR] = 3,
         [TR2LevelNames.HOME] = 3,
+        [TR2LevelNames.COLDWAR] = 2,
+        [TR2LevelNames.FURNACE] = 1,
+        [TR2LevelNames.KINGDOM] = 1,
+        [TR2LevelNames.VEGAS] = 2,
+
     };
 
     private static readonly Dictionary<string, int> _remasteredAdjustmentCount = new()
