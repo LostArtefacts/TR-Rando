@@ -255,6 +255,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         [TR2Type.BlackSnowmob] = [TR2Type.BlackSnowmobOG, TR2Type.BlackSnowmobGM],
         [TR2Type.MonkWithKnifeStick] = [TR2Type.MonkWithKnifeStickOG, TR2Type.MonkWithKnifeStickGM],
         [TR2Type.Yeti] = [TR2Type.YetiOG, TR2Type.YetiGM],
+        [TR2Type.BirdMonster] = [TR2Type.BirdMonsterOG, TR2Type.BirdMonsterGM],
 
         [TR2Type.Barracuda] = new()
         {
