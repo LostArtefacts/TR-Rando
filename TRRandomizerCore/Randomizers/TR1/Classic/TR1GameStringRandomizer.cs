@@ -35,8 +35,8 @@ public class TR1GameStringRandomizer : BaseTR1Randomizer
 
     private void AmendDefaultStrings()
     {
-        var cistern = ScriptEditor.Levels.First(l => l.Is(TR1LevelNames.CISTERN));
-        var mines = ScriptEditor.Levels.First(l => l.Is(TR1LevelNames.MINES));
+        var cistern = ScriptEditor.Levels.FirstOrDefault(l => l.Is(TR1LevelNames.CISTERN));
+        var mines = ScriptEditor.Levels.FirstOrDefault(l => l.Is(TR1LevelNames.MINES));
         if (cistern != null && mines != null)
         {
             // Duplicate whatever Cistern has for "Rusty Key" into Mines
