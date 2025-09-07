@@ -29,7 +29,7 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         },
         [TR2LevelNames.BARTOLI] = new()
         {
-            TR2Type.StickWieldingGoon1WhiteVest, TR2Type.Key1_M_H, TR2Type.LargeMed_M_H, TR2Type.SmallMed_M_H
+            TR2Type.StickWieldingGoon1WhiteVest, TR2Type.Key1_M_H, TR2Type.Keyhole1, TR2Type.LargeMed_M_H, TR2Type.SmallMed_M_H,
         },
         [TR2LevelNames.OPERA] = new()
         {
