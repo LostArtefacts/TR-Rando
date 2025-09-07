@@ -1,0 +1,118 @@
+{
+  "All": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If item #16 is not in its default position, get rid of the pickup trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 16,
+        "X": 70144,
+        "Y": -2304,
+        "Z": 66048,
+        "Room": 4
+      },
+      "OnFalse": [
+        {
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 70144,
+              "Y": -2304,
+              "Z": 66048,
+              "Room": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #59 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 59,
+        "X": 43520,
+        "Y": -9472,
+        "Z": 69120,
+        "Room": 25
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 43520,
+              "Y": -9472,
+              "Z": 69120,
+              "Room": 25
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #80 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 80,
+        "X": 73216,
+        "Y": -2304,
+        "Z": 64000,
+        "Room": 33
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 73216,
+              "Y": -2304,
+              "Z": 64000,
+              "Room": 33
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #154 is not in its default position, add something else for the flipmap trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 154,
+        "X": 22016,
+        "Y": -11520,
+        "Z": 15872,
+        "Room": 80
+      },
+      "OnFalse": [
+        {
+          "EMType": 51,
+          "TypeID": 149,
+          "Intensity": -1,
+          "Location": {
+            "X": 22016,
+            "Y": -11520,
+            "Z": 15872,
+            "Room": 80
+          }
+        },
+        {
+          "EMType": 66,
+          "EntityLocations": [
+            -1
+          ],
+          "Action": {
+            "Parameter": -1
+          }
+        }
+      ]
+    }
+  ],
+  "ConditionalOneOf": [],
+  "Mirrored": []
+}
