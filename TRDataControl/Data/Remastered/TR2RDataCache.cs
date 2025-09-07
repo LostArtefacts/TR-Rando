@@ -90,7 +90,7 @@ public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
         [TR2Type.YetiOG] = TR2LevelNames.COT,
         [TR2Type.LaraMiscAnim_H_Ice] = TR2LevelNames.COT,
 
-        [TR2Type.BirdMonster] = TR2LevelNames.CHICKEN,
+        [TR2Type.BirdMonsterOG] = TR2LevelNames.CHICKEN,
         [TR2Type.WhiteTiger] = TR2LevelNames.CHICKEN,
 
         [TR2Type.BarracudaXian] = TR2LevelNames.XIAN,

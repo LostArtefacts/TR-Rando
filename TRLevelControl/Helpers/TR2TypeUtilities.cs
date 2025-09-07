@@ -120,6 +120,11 @@ public static class TR2TypeUtilities
             [TR2Type.YetiOG] = [TR2LevelNames.COT, TR2LevelNames.CHICKEN],
             [TR2Type.YetiGM] = [TR2LevelNames.KINGDOM],
         },
+        [TR2Type.BirdMonster] = new()
+        {
+            [TR2Type.BirdMonsterOG] = [TR2LevelNames.CHICKEN],
+            [TR2Type.BirdMonsterGM] = [TR2LevelNames.KINGDOM, TR2LevelNames.VEGAS],
+        },
     };
 
     public static readonly Dictionary<TR2Type, List<TR2Type>> TypeFamilies = new()
@@ -156,6 +161,7 @@ public static class TR2TypeUtilities
         [TR2Type.BlackSnowmob] = [TR2Type.BlackSnowmobOG, TR2Type.BlackSnowmobGM],
         [TR2Type.MonkWithKnifeStick] = [TR2Type.MonkWithKnifeStickOG, TR2Type.MonkWithKnifeStickGM],
         [TR2Type.Yeti] = [TR2Type.YetiOG, TR2Type.YetiGM],
+        [TR2Type.BirdMonster] = [TR2Type.BirdMonsterOG, TR2Type.BirdMonsterGM],
     };
 
     public static string GetName(TR2Type type)
@@ -241,7 +247,7 @@ public static class TR2TypeUtilities
             TR2Type.BarracudaUnwater,
             TR2Type.BarracudaXian,
             TR2Type.BengalTiger,
-            TR2Type.BirdMonster,
+            TR2Type.BirdMonsterOG,
             TR2Type.BlackMorayEel,
             TR2Type.Crow,
             TR2Type.Doberman,
@@ -288,7 +294,6 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.Bear);
             types.Add(TR2Type.MonkWithNoShadow);
             types.Add(TR2Type.Wolf);
-
             types.Add(TR2Type.FlamethrowerGoonTopixtor);
             types.Add(TR2Type.FlamethrowerGoonGM);
             types.Add(TR2Type.Gunman1TopixtorORC);
@@ -300,6 +305,7 @@ public static class TR2TypeUtilities
             types.Add(TR2Type.MercSnowmobDriverGM);
             types.Add(TR2Type.MonkWithKnifeStickGM);
             types.Add(TR2Type.YetiGM);
+            types.Add(TR2Type.BirdMonsterGM);
         }
 
         return types;
@@ -351,7 +357,11 @@ public static class TR2TypeUtilities
 
         if (unconditionalChickens)
         {
-            types.Add(TR2Type.BirdMonster);
+            types.Add(TR2Type.BirdMonsterOG);
+            if (!remastered)
+            {
+                types.Add(TR2Type.BirdMonsterGM);
+            }
         }
 
         if (!remastered)
@@ -395,6 +405,8 @@ public static class TR2TypeUtilities
             TR2Type.BarracudaXian,
             TR2Type.BengalTiger,
             TR2Type.BirdMonster,
+            TR2Type.BirdMonsterOG,
+            TR2Type.BirdMonsterGM,
             TR2Type.BlackMorayEel,
             TR2Type.Crow,
             TR2Type.Doberman,
@@ -774,6 +786,11 @@ public static class TR2TypeUtilities
             TR2Type.MonkWithLongStick,
             TR2Type.MonkWithNoShadow,
         ];
+    }
+
+    public static bool IsBirdMonsterType(TR2Type type)
+    {
+        return TranslateAlias(type) == TR2Type.BirdMonster;
     }
 
     public static List<TR2Type> GetAllies()

@@ -69,7 +69,7 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         },
         [TR2LevelNames.CHICKEN] = new()
         {
-            TR2Type.BirdMonster, TR2Type.WhiteTiger, TR2Type.TibetanBell,
+            TR2Type.BirdMonsterOG, TR2Type.WhiteTiger, TR2Type.TibetanBell,
         },
         [TR2LevelNames.XIAN] = new()
         {
@@ -102,6 +102,6 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         [TR2LevelNames.COLDWAR] = [TR2Type.MonkWithNoShadow, TR2Type.SharkGM, TR2Type.Mercenary2GM, TR2Type.Mercenary3GM, TR2Type.MercSnowmobDriverGM],
         [TR2LevelNames.FOOLGOLD] = [TR2Type.FlamethrowerGoonGM, TR2Type.Gunman1GM, TR2Type.StickWieldingGoon1GM],
         [TR2LevelNames.FURNACE] = [TR2Type.Wolf, TR2Type.Bear, TR2Type.MonkWithKnifeStickGM],
-        [TR2LevelNames.KINGDOM] = [TR2Type.YetiGM],
+        [TR2LevelNames.KINGDOM] = [TR2Type.YetiGM, TR2Type.BirdMonsterGM],
     };
 }

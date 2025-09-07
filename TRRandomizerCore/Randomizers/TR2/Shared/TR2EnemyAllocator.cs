@@ -159,13 +159,14 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
                     newTypes.Clear();
                     newTypes.AddRange(restrictedCombinations[Generator.Next(0, restrictedCombinations.Count)]);
                 }
-                while (Settings.DocileChickens && newTypes.Contains(TR2Type.BirdMonster) && chickenGuisers.All(g => newTypes.Contains(g))
+                while (Settings.DocileChickens && newTypes.Any(TR2TypeUtilities.IsBirdMonsterType) && chickenGuisers.All(g => newTypes.Contains(g))
                     || (newTypes.Any(_excludedEnemies.Contains) && restrictedCombinations.Any(c => !c.Any(_excludedEnemies.Contains))));
                 break;
             }
 
             // If it's the chicken in HSH with default behaviour, we don't want it ending the level
-            if (Settings.DefaultChickens && type == TR2Type.BirdMonster && levelName == TR2LevelNames.HOME && allEnemies.Except(newTypes).Count() > 1)
+            if (Settings.DefaultChickens && TR2TypeUtilities.IsBirdMonsterType(type)
+                && levelName == TR2LevelNames.HOME && allEnemies.Except(newTypes).Count() > 1)
             {
                 continue;
             }
@@ -173,11 +174,12 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             // If this is a tracked enemy throughout the game, we only allow it if the number
             // of unique levels is within the limit. Bear in mind we are collecting more than
             // one group of enemies per level.
-            if (_gameEnemyTracker.ContainsKey(type) && !_gameEnemyTracker[type].Contains(levelName))
+            var actualType = TR2TypeUtilities.TranslateAlias(type);
+            if (_gameEnemyTracker.TryGetValue(actualType, out var levels) && !levels.Contains(levelName))
             {
-                if (_gameEnemyTracker[type].Count < _gameEnemyTracker[type].Capacity)
+                if (levels.Count < levels.Capacity)
                 {
-                    _gameEnemyTracker[type].Add(levelName);
+                    levels.Add(levelName);
                 }
                 else
                 {
@@ -198,14 +200,14 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
                 if (Settings.DocileChickens)
                 {
                     bool guisersAvailable = !chickenGuisers.All(newTypes.Contains);
-                    if (!guisersAvailable && type == TR2Type.BirdMonster)
+                    if (!guisersAvailable && TR2TypeUtilities.IsBirdMonsterType(type))
                     {
                         continue;
                     }
 
                     // If the selected type is a potential guiser, it can only be added if it's not
                     // the last available guiser. Otherwise, it will become the guiser.
-                    if (chickenGuisers.Contains(type) && newTypes.Contains(TR2Type.BirdMonster))
+                    if (chickenGuisers.Contains(type) && newTypes.Any(TR2TypeUtilities.IsBirdMonsterType))
                     {
                         if (newTypes.FindAll(chickenGuisers.Contains).Count == chickenGuisers.Count - 1)
                         {
@@ -250,7 +252,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         }
 
         // #144 Decide at this point who will be guising unless it has already been decided above (e.g. HSH)          
-        if (Settings.DocileChickens && newTypes.Contains(TR2Type.BirdMonster) && chickenGuiser == TR2Type.BirdMonster)
+        if (Settings.DocileChickens && newTypes.Any(TR2TypeUtilities.IsBirdMonsterType) && chickenGuiser == TR2Type.BirdMonster)
         {
             int guiserIndex = chickenGuisers.FindIndex(g => !newTypes.Contains(g));
             if (guiserIndex != -1)
@@ -313,6 +315,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
     public static void DisguiseType(string levelName, TRDictionary<TR2Type, TRModel> modelData, TR2Type guiser, TR2Type targetType)
     {
+        guiser = TR2TypeUtilities.TranslateAlias(guiser);
         if (targetType == TR2Type.BirdMonster && levelName == TR2LevelNames.CHICKEN)
         {
             // We have to keep the original model for the boss, so in
@@ -515,7 +518,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             }
 
             // Final step is to convert/set the type and ensure OneShot is set if needed (#146)
-            if (Settings.DocileChickens && newType == TR2Type.BirdMonster)
+            if (Settings.DocileChickens && TR2TypeUtilities.IsBirdMonsterType(newType))
             {
                 newType = enemies.BirdMonsterGuiser;
             }
