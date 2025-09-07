@@ -507,4 +507,20 @@ public enum TR2Type : uint
     Floater_P2_MysticPlaqueEast   = 25160,
 
     Lair_P1_MysticPlaque          = 26145,
+
+    ColdWar_K1_GuardRoom          = 28163,
+    ColdWar_K2_ShaftB             = 28270,
+
+    FoolsGold_K1_End              = 29225,
+    FoolsGold_K1_Skidoo           = 29466,
+    FoolsGold_K4_CardKey2         = 29234,
+    FoolsGold_P1_CircuitBoard     = 29211,
+
+    Furnace_P1_Mask               = 30243,
+    Furnace_P3_GoldNugget         = 30242,
+
+    Vegas_K1_Winston              = 32256,
+    Vegas_K1_Pool                 = 32324,
+    Vegas_P1_ElevatorJunction     = 32362,
+    Vegas_P3_CircuitBoard         = 32361,
 }

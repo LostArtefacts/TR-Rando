@@ -74,7 +74,7 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
         }
         else
         {
-            ShuffleItems(levelName, level.Entities, scriptedLevel.RemovesWeapons, scriptedLevel.OriginalSequence,
+            ShuffleItems(levelName, level.Entities, scriptedLevel.RemovesWeapons, GetKeyItemLevelSequence(levelName, scriptedLevel.OriginalSequence),
                 e => LocationUtilities.HasPickupTriger(e, level.Entities.IndexOf(e), level));
         }
     }
@@ -82,6 +82,7 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
     public void RandomizeKeyItems(string levelName, TR2Level level, int originalSequence)
     {
         InitialisePicker(levelName, level, LocationMode.KeyItems);
+        originalSequence = GetKeyItemLevelSequence(levelName, originalSequence);
 
         for (int i = 0; i < level.Entities.Count; i++)
         {
@@ -114,6 +115,15 @@ public class TR2ItemAllocator : ItemAllocator<TR2Type, TR2Entity>
             pool = new(itemLocations.Where(i => pool.Any(e => level.GetRoomSector(i) == level.GetRoomSector(e))));
         }
         _picker.Initialise(levelName, pool, Settings, Generator);
+    }
+
+    private int GetKeyItemLevelSequence(string levelName, int originalSequence)
+    {
+        if (Settings.GameMode != GameMode.Normal && TR2LevelNames.AsListGold.Contains(levelName))
+        {
+            originalSequence += TR2LevelNames.AsList.Count;
+        }
+        return originalSequence;
     }
 
     private bool TestKeyItemLocation(Location location, bool hasPickupTrigger, List<short> roomPool, string levelName, TR2Level level)
