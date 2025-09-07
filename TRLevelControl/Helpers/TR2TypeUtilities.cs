@@ -397,12 +397,13 @@ public static class TR2TypeUtilities
     // an enemy and can be replaced.
     public static List<TR2Type> GetFullListOfEnemies()
     {
-        return new()
-        {
+        return
+        [
             TR2Type.Barracuda,
             TR2Type.BarracudaIce,
             TR2Type.BarracudaUnwater,
             TR2Type.BarracudaXian,
+            TR2Type.Bear,
             TR2Type.BengalTiger,
             TR2Type.BirdMonster,
             TR2Type.BirdMonsterOG,
@@ -441,6 +442,7 @@ public static class TR2TypeUtilities
             TR2Type.MonkWithKnifeStickOG,
             TR2Type.MonkWithKnifeStickGM,
             TR2Type.MonkWithLongStick,
+            TR2Type.MonkWithNoShadow,
             TR2Type.Rat,
             TR2Type.ScubaDiver,
             TR2Type.Shark,
@@ -459,6 +461,7 @@ public static class TR2TypeUtilities
             TR2Type.StickWieldingGoon2,
             TR2Type.TigerOrSnowLeopard,
             TR2Type.TRex,
+            TR2Type.Wolf,
             TR2Type.WhiteTiger,
             TR2Type.Winston,
             TR2Type.XianGuardSpear,
@@ -467,7 +470,7 @@ public static class TR2TypeUtilities
             TR2Type.Yeti,
             TR2Type.YetiOG,
             TR2Type.YetiGM,
-        };
+        ];
     }
 
     public static bool IsEnemyType(TR2Type type)
