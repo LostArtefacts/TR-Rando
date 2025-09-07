@@ -132,18 +132,41 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
     private void ApplyPostRandomization(TR2CombinedLevel level, EnemyRandomizationCollection<TR2Type> enemies)
     {
-        MakeChickensUnconditional(level.Data);
+        AmendChickenBehaviour(level.Data, TR2Type.BirdMonster);
+        if (enemies.BirdMonsterGuiser != TR2Type.BirdMonster)
+        {
+            AmendChickenBehaviour(level.Data, TR2TypeUtilities.TranslateAlias(enemies.BirdMonsterGuiser));
+        }
+
         RandomizeEnemyMeshes(level, enemies);
         CloneEnemies(level);
         AddUnarmedItems(level);
     }
 
-    private void MakeChickensUnconditional(TR2Level level)
+    private void AmendChickenBehaviour(TR2Level level, TR2Type type)
     {
-        if (Settings.UnconditionalChickens)
+        if (level.Models[type]?.Animations[20] is not TRAnimation endAnim)
         {
-            level.Models[TR2Type.BirdMonster]?.Animations[20].Commands
-                .RemoveAll(c => c is TRFXCommand { EffectID: (short)TR2FX.EndLevel });
+            return;
+        }
+
+        var endCommand = endAnim.Commands
+            .OfType<TRFXCommand>()
+            .FirstOrDefault(c => c.EffectID == (short)TR2FX.EndLevel);
+        if (Settings.DefaultChickens)
+        {
+            if (endCommand == null)
+            {
+                endAnim.Commands.Add(new TRFXCommand
+                {
+                    EffectID = (short)TR2FX.EndLevel,
+                    FrameNumber = endAnim.FrameEnd,
+                });
+            }
+        }
+        else if (endCommand != null)
+        {
+            endAnim.Commands.Remove(endCommand);
         }
     }
 
