@@ -131,6 +131,18 @@ m_KeyNames[2][25443] = "P1 Mystic Plaque (alt ending)"
 m_KeyNames[2][25232] = "P1 Mystic Plaque (west)"
 m_KeyNames[2][25160] = "P3 Mystic Plaque (east)"
 m_KeyNames[2][26145] = "P1 Mystic Plaque"
+m_KeyNames[2][28163] = "K1 Guardroom Key"
+m_KeyNames[2][28270] = "K2 Shaft B Key"
+m_KeyNames[2][29225] = "K1 CardKey 1 (end)"
+m_KeyNames[2][29466] = "K1 CardKey 1 (skidoo room)"
+m_KeyNames[2][29234] = "K4 CardKey2"
+m_KeyNames[2][29211] = "P1 Circuit Board"
+m_KeyNames[2][30243] = "P1 Mask of Tornarsuk"
+m_KeyNames[2][30242] = "P3 Gold Nugget"
+m_KeyNames[2][32256] = "K1 Hotel Key (Winston)"
+m_KeyNames[2][32324] = "K1 Hotel Key (pool)"
+m_KeyNames[2][32362] = "P1 Elevator Junction"
+m_KeyNames[2][32361] = "P3 Circuit Board"
 
 -- TR3
 m_KeyNames[3] = {}
