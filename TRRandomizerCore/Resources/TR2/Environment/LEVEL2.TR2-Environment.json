@@ -1,0 +1,172 @@
+{
+  "All": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #29 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 29,
+        "X": 50688,
+        "Y": 1024,
+        "Z": 40448,
+        "Room": 8
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 50688,
+            "Y": 1024,
+            "Z": 40448,
+            "Room": 8
+          },
+          "EntityLocation": 29
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #43 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 43,
+        "X": 51712,
+        "Y": -3328,
+        "Z": 37376,
+        "Room": 23
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 51712,
+            "Y": -3328,
+            "Z": 37376,
+            "Room": 23
+          },
+          "EntityLocation": 43
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #104 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 104,
+        "X": 92672,
+        "Y": -4096,
+        "Z": 49664,
+        "Room": 47
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 92672,
+            "Y": -4096,
+            "Z": 49664,
+            "Room": 47
+          },
+          "EntityLocation": 104
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #130 is not in its default positions, add something else to open the doors.",
+        "ConditionType": 0,
+        "EntityIndex": 130,
+        "X": 89600,
+        "Y": -1536,
+        "Z": 18944,
+        "Room": 60
+      },
+      "OnFalse": [
+        {
+          "EMType": 51,
+          "TypeID": 93,
+          "Intensity": -1,
+          "Location": {
+            "X": 89600,
+            "Y": -1536,
+            "Z": 18944,
+            "Room": 60
+          }
+        },
+        {
+          "EMType": 61,
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": -1,
+            "Actions": [
+              {
+                "Parameter": 128
+              },
+              {
+                "Parameter": 131
+              }
+            ]
+          },
+          "Replace": true
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #152 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 152,
+        "X": 42496,
+        "Y": -3328,
+        "Z": 42496,
+        "Room": 78
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 42496,
+              "Y": -3328,
+              "Z": 42496,
+              "Room": 78
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #184 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 184,
+        "X": 20992,
+        "Y": 12544,
+        "Z": 38400,
+        "Room": 93
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 20992,
+              "Y": 12544,
+              "Z": 38400,
+              "Room": 93
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    }
+  ],
+  "ConditionalOneOf": [],
+  "Mirrored": []
+}
