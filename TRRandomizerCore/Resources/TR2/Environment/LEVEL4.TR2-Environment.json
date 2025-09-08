@@ -513,6 +513,131 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #19 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 19,
+        "X": 47616,
+        "Y": 2560,
+        "Z": 54784,
+        "Room": 10
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 47616,
+              "Y": 2560,
+              "Z": 54784,
+              "Room": 10
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #73 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 73,
+        "X": 65024,
+        "Y": 1024,
+        "Z": 72192,
+        "Room": 45
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 65024,
+              "Y": 1024,
+              "Z": 72192,
+              "Room": 45
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #87 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 87,
+        "X": 70144,
+        "Y": 3328,
+        "Z": 47616,
+        "Room": 53
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 70144,
+              "Y": 3328,
+              "Z": 47616,
+              "Room": 53
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #139 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 139,
+        "X": 46592,
+        "Y": 3072,
+        "Z": 36352,
+        "Room": 66
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 46592,
+              "Y": 3072,
+              "Z": 36352,
+              "Room": 66
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #169 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 169,
+        "X": 56832,
+        "Y": 3840,
+        "Z": 57856,
+        "Room": 82
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 56832,
+              "Y": 3840,
+              "Z": 57856,
+              "Room": 82
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],
