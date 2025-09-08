@@ -78,7 +78,7 @@ class Program
         }
         else if (levelType == "TR2")
         {
-            foreach (string lvl in TR2LevelNames.AsList)
+            foreach (string lvl in TR2LevelNames.AsListWithGold)
             {
                 if (File.Exists(lvl))
                 {
