@@ -1,0 +1,77 @@
+{
+  "All": [
+    {
+      "Comments": "Merge the flip triggers under the mask to make moving it easier.",
+      "EMType": 73,
+      "Tags": [
+        12
+      ],
+      "BaseLocation": {
+        "X": 42496,
+        "Y": -2048,
+        "Z": 39424,
+        "Room": 114
+      },
+      "TargetLocation": {
+        "X": 42496,
+        "Y": -2048,
+        "Z": 39424
+      }
+    }
+  ],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #7 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 7,
+        "X": 42496,
+        "Y": -2048,
+        "Z": 39424,
+        "Room": 0
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 42496,
+            "Y": -2048,
+            "Z": 39424
+          },
+          "EntityLocation": 7
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #88 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 88,
+        "X": 24064,
+        "Y": -12672,
+        "Z": 61952,
+        "Room": 34
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 24064,
+              "Y": -12672,
+              "Z": 61952,
+              "Room": 34
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    }
+  ],
+  "ConditionalOneOf": [],
+  "Mirrored": []
+}
