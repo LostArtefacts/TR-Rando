@@ -45,6 +45,8 @@ public static class TR2LevelNames
         .Prepend(ASSAULT)
         .ToList();
 
+    public static List<string> AsListWithGold => [.. AsList, .. AsListGold];
+
     public static List<string> AsOrderedList => GreatWallWithCutscenes
         .Prepend(ASSAULT)
         .Concat(ItalyWithCutscenes)
