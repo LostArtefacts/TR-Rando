@@ -97,6 +97,34 @@
           }
         ]
       }
+    },
+    {
+      "Comments": "Open the trapdoor at the base of the sculpture without having to go back to the top. Keys may be in here.",
+      "EMType": 51,
+      "TypeID": 103,
+      "Intensity": -1,
+      "Location": {
+        "X": 44544,
+        "Y": 12288,
+        "Z": 57856,
+        "Room": 35,
+        "Angle": 16384
+      }
+    },
+    {
+      "EMType": 61,
+      "EntityLocation": -1,
+      "Trigger": {
+        "TrigType": 2,
+        "Mask": 31,
+        "Timer": 5,
+        "SwitchOrKeyRef": -1,
+        "Actions": [
+          {
+            "Parameter": 64
+          }
+        ]
+      }
     }
   ],
   "Any": [],
@@ -104,6 +132,180 @@
   "OneOf": [],
   "ConditionalAllWithin": [],
   "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #74 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 74,
+        "X": 45568,
+        "Y": 14336,
+        "Z": 47616,
+        "Room": 37
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 45568,
+            "Y": 14336,
+            "Z": 47616,
+            "Room": 37
+          },
+          "EntityLocation": 74
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #94 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 94,
+        "X": 62976,
+        "Y": 12288,
+        "Z": 35328,
+        "Room": 49
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 62976,
+            "Y": 12288,
+            "Z": 35328,
+            "Room": 49
+          },
+          "EntityLocation": 94
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #133 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 133,
+        "X": 48640,
+        "Y": 7680,
+        "Z": 66048,
+        "Room": 73
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 48640,
+            "Y": 7680,
+            "Z": 66048,
+            "Room": 73
+          },
+          "EntityLocation": 133
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #0 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "X": 37376,
+        "Y": -1280,
+        "Z": 52736,
+        "Room": 1
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 37376,
+              "Y": -1280,
+              "Z": 52736,
+              "Room": 1
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #97 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 97,
+        "X": 49664,
+        "Y": 11520,
+        "Z": 29184,
+        "Room": 51
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 49664,
+              "Y": 11520,
+              "Z": 29184,
+              "Room": 51
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #142 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 142,
+        "X": 48640,
+        "Y": 12032,
+        "Z": 83456,
+        "Room": 74
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 48640,
+              "Y": 12032,
+              "Z": 83456,
+              "Room": 74
+            },
+            {
+              "X": 48640,
+              "Y": 12032,
+              "Z": 83456,
+              "Room": 74
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #167 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 167,
+        "X": 70144,
+        "Y": 12032,
+        "Z": 35328,
+        "Room": 87
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 70144,
+              "Y": 12032,
+              "Z": 35328,
+              "Room": 87
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
     {
       "Condition": {
         "Comments": "If chickens are unconditional or there isn't one in the final area, make an alternate ending.",
