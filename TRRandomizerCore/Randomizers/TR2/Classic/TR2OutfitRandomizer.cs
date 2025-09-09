@@ -335,8 +335,9 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 // its textures will have been removed.
                 TRModel laraMiscModel = level.Data.Models[TR2Type.LaraMiscAnim_H];
                 laraModel.Meshes[0].CopyInto(laraMiscModel.Meshes[0]);
-                TR2XFixLaraTask.FixHSHHands(level.Data);
             }
+
+            TR2XFixLaraTask.FixHands(level.Data, lara);
 
             if (_outer.Settings.RemoveRobeDagger)
             {

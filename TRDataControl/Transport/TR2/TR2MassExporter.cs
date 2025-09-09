@@ -103,5 +103,6 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         [TR2LevelNames.FOOLGOLD] = [TR2Type.FlamethrowerGoonGM, TR2Type.Gunman1GM, TR2Type.StickWieldingGoon1GM],
         [TR2LevelNames.FURNACE] = [TR2Type.Wolf, TR2Type.Bear, TR2Type.MonkWithKnifeStickGM],
         [TR2LevelNames.KINGDOM] = [TR2Type.YetiGM, TR2Type.BirdMonsterGM],
+        [TR2LevelNames.VEGAS] = [TR2Type.LaraVegas, TR2Type.StickWieldingGoon1Vegas], // Only in alpha version
     };
 }
