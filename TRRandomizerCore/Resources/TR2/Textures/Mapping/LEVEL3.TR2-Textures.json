@@ -1,0 +1,230 @@
+{
+  "Static": {
+    "Fire.Explosion": [
+      {
+        "Tile": 6,
+        "X": 92,
+        "Y": 66
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 4,
+        "Y": 66
+      },
+      {
+        "Segment": 2,
+        "Tile": 14,
+        "X": 161
+      },
+      {
+        "Segment": 3,
+        "Tile": 14,
+        "X": 2,
+        "Y": 41
+      },
+      {
+        "Segment": 4,
+        "Tile": 6,
+        "X": 1,
+        "Y": 132
+      },
+      {
+        "Segment": 5,
+        "Tile": 6,
+        "X": 81,
+        "Y": 128
+      },
+      {
+        "Segment": 6,
+        "Tile": 6,
+        "X": 170,
+        "Y": 130
+      },
+      {
+        "Segment": 7,
+        "Tile": 6,
+        "X": 80,
+        "Y": 184
+      },
+      {
+        "Segment": 8,
+        "Tile": 6,
+        "Y": 192
+      },
+      {
+        "Segment": 9,
+        "Tile": 14,
+        "X": 169,
+        "Y": 53
+      },
+      {
+        "Segment": 10,
+        "Tile": 14,
+        "X": 2,
+        "Y": 120
+      },
+      {
+        "Segment": 11,
+        "Tile": 14,
+        "X": 68,
+        "Y": 129
+      },
+      {
+        "Segment": 12,
+        "Tile": 14,
+        "X": 100,
+        "Y": 206
+      },
+      {
+        "Segment": 13,
+        "Tile": 15,
+        "X": 96,
+        "Y": 6
+      }
+    ],
+    "Fire.Flame": [
+      {
+        "Segment": 0,
+        "Tile": 15,
+        "X": 166,
+        "Y": 48
+      },
+      {
+        "Segment": 1,
+        "Tile": 15,
+        "X": 190,
+        "Y": 48
+      },
+      {
+        "Segment": 2,
+        "Tile": 15,
+        "X": 214,
+        "Y": 48
+      },
+      {
+        "Segment": 3,
+        "Tile": 15,
+        "X": 40,
+        "Y": 56
+      },
+      {
+        "Segment": 4,
+        "Tile": 15,
+        "X": 64,
+        "Y": 56
+      },
+      {
+        "Segment": 5,
+        "Tile": 15,
+        "X": 88,
+        "Y": 56
+      }
+    ],
+    "Fire.Flare": [
+      {
+        "Tile": 13,
+        "X": 128,
+        "Y": 168
+      },
+      {
+        "Tile": 13,
+        "X": 88,
+        "Y": 216,
+        "Clip": "0, 16, 8, 8"
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 32,
+        "Y": 184
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 208,
+        "Y": 160
+      },
+      {
+        "Segment": 3,
+        "Tile": 13,
+        "X": 144,
+        "Y": 160
+      },
+      {
+        "Segment": 4,
+        "Tile": 13,
+        "X": 219,
+        "Y": 227
+      },
+      {
+        "Segment": 5,
+        "Tile": 13,
+        "X": 184,
+        "Y": 24
+      }
+    ],
+    "Inventory.Background": [
+      {
+        "Tile": 8,
+        "X": 40,
+        "Y": 64
+      }
+    ],
+    "Inventory.Passport": [
+      {
+        "Tile": 7,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 208,
+        "Y": 120
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "Y": 216
+      }
+    ],
+    "Lara.Braid": [
+      {
+        "Tile": 12,
+        "X": 104,
+        "Y": 171
+      }
+    ],
+    "Secrets": [
+      {
+        "Tile": 14,
+        "X": 200,
+        "Y": 173,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 14,
+        "X": 200,
+        "Y": 122,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 14,
+        "Y": 194,
+        "Clear": true
+      }
+    ],
+    "Water": [
+      {
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "X": 128,
+        "Y": 64
+      }
+    ]
+  }
+}

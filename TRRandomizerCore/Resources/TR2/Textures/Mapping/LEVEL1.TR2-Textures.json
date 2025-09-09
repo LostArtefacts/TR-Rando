@@ -1,0 +1,213 @@
+{
+  "Static": {
+    "ColdWar.Sky": [
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 128
+      },
+      {
+        "Segment": 2,
+        "Tile": 5,
+        "X": 192,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 6,
+        "X": 64
+      },
+      {
+        "Segment": 4,
+        "Tile": 6
+      }
+    ],
+    "Fire.Explosion": [
+      {
+        "Tile": 4,
+        "X": 92,
+        "Y": 66
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 4,
+        "Y": 66
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 144,
+        "Y": 8
+      },
+      {
+        "Segment": 3,
+        "Tile": 13,
+        "X": 2,
+        "Y": 49
+      },
+      {
+        "Segment": 4,
+        "Tile": 4,
+        "X": 1,
+        "Y": 132
+      },
+      {
+        "Segment": 5,
+        "Tile": 4,
+        "X": 81,
+        "Y": 128
+      },
+      {
+        "Segment": 6,
+        "Tile": 4,
+        "X": 170,
+        "Y": 130
+      },
+      {
+        "Segment": 7,
+        "Tile": 4,
+        "X": 80,
+        "Y": 184
+      },
+      {
+        "Segment": 8,
+        "Tile": 4,
+        "Y": 192
+      },
+      {
+        "Segment": 9,
+        "Tile": 13,
+        "X": 80,
+        "Y": 53
+      },
+      {
+        "Segment": 10,
+        "Tile": 13,
+        "X": 115,
+        "Y": 125
+      },
+      {
+        "Segment": 11,
+        "Tile": 13,
+        "X": 181,
+        "Y": 129
+      },
+      {
+        "Segment": 12,
+        "Tile": 14,
+        "Y": 4
+      },
+      {
+        "Segment": 13,
+        "Tile": 13,
+        "X": 218,
+        "Y": 14
+      }
+    ],
+    "Fire.Flare": [
+      {
+        "Tile": 12,
+        "X": 72,
+        "Y": 208
+      },
+      {
+        "Tile": 13,
+        "Clip": "0, 16, 8, 8"
+      },
+      {
+        "Segment": 1,
+        "Tile": 12,
+        "X": 152,
+        "Y": 216
+      },
+      {
+        "Segment": 2,
+        "Tile": 12,
+        "X": 32,
+        "Y": 200
+      },
+      {
+        "Segment": 3,
+        "Tile": 12,
+        "X": 16,
+        "Y": 200
+      },
+      {
+        "Segment": 4,
+        "Tile": 14,
+        "X": 123,
+        "Y": 3
+      },
+      {
+        "Segment": 5,
+        "Tile": 12,
+        "X": 48,
+        "Y": 80
+      }
+    ],
+    "Inventory.Background": [
+      {
+        "Tile": 5,
+        "X": 64,
+        "Y": 184
+      }
+    ],
+    "Inventory.Passport": [
+      {
+        "Tile": 5
+      },
+      {
+        "Segment": 1,
+        "Tile": 12,
+        "X": 208,
+        "Y": 152
+      },
+      {
+        "Segment": 2,
+        "Tile": 12,
+        "X": 192,
+        "Y": 248
+      }
+    ],
+    "Lara.Braid": [
+      {
+        "Tile": 11,
+        "X": 136,
+        "Y": 211
+      }
+    ],
+    "Secrets": [
+      {
+        "Tile": 13,
+        "X": 83,
+        "Y": 194,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 195,
+        "Y": 170,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 127,
+        "Y": 194,
+        "Clear": true
+      }
+    ],
+    "Water": [
+      {
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "X": 128,
+        "Y": 64
+      }
+    ]
+  }
+}
