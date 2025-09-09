@@ -9,11 +9,11 @@ public static class TR2TypeUtilities
         [TR2Type.Lara] = new()
         {
             [TR2Type.LaraSun] =
-                new() { TR2LevelNames.GW, TR2LevelNames.GW_CUT, TR2LevelNames.VENICE, TR2LevelNames.BARTOLI, TR2LevelNames.OPERA, TR2LevelNames.OPERA_CUT, TR2LevelNames.RIG, TR2LevelNames.DA, TR2LevelNames.DA_CUT, TR2LevelNames.XIAN, TR2LevelNames.XIAN_CUT, TR2LevelNames.FLOATER, TR2LevelNames.LAIR },
+                new() { TR2LevelNames.GW, TR2LevelNames.GW_CUT, TR2LevelNames.VENICE, TR2LevelNames.BARTOLI, TR2LevelNames.OPERA, TR2LevelNames.OPERA_CUT, TR2LevelNames.RIG, TR2LevelNames.DA, TR2LevelNames.DA_CUT, TR2LevelNames.XIAN, TR2LevelNames.XIAN_CUT, TR2LevelNames.FLOATER, TR2LevelNames.LAIR, TR2LevelNames.VEGAS },
             [TR2Type.LaraUnwater] =
                 new() { TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.LQ, TR2LevelNames.DECK },
             [TR2Type.LaraSnow] =
-                new() { TR2LevelNames.TIBET, TR2LevelNames.MONASTERY, TR2LevelNames.COT, TR2LevelNames.CHICKEN },
+                new() { TR2LevelNames.TIBET, TR2LevelNames.MONASTERY, TR2LevelNames.COT, TR2LevelNames.CHICKEN, TR2LevelNames.COLDWAR, TR2LevelNames.FOOLGOLD, TR2LevelNames.FURNACE, TR2LevelNames.KINGDOM },
             [TR2Type.LaraHome] =
                 new() { TR2LevelNames.HOME },
             [TR2Type.LaraAssault] =
@@ -22,13 +22,13 @@ public static class TR2TypeUtilities
         [TR2Type.LaraMiscAnim_H] = new()
         {
             [TR2Type.LaraMiscAnim_H_Wall] = 
-                new() { TR2LevelNames.GW },
+                new() { TR2LevelNames.GW, TR2LevelNames.VEGAS },
             [TR2Type.LaraMiscAnim_H_Venice] = 
                 new() { TR2LevelNames.BARTOLI },
             [TR2Type.LaraMiscAnim_H_Unwater] =
-                new() { TR2LevelNames.RIG, TR2LevelNames.DA, TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.DECK },
+                new() { TR2LevelNames.RIG, TR2LevelNames.DA, TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.DECK, TR2LevelNames.COLDWAR },
             [TR2Type.LaraMiscAnim_H_Ice] = 
-                new() { TR2LevelNames.COT, TR2LevelNames.CHICKEN },
+                new() { TR2LevelNames.COT, TR2LevelNames.CHICKEN, TR2LevelNames.KINGDOM },
             [TR2Type.LaraMiscAnim_H_Xian] =
                 new() { TR2LevelNames.FLOATER, TR2LevelNames.LAIR },
             [TR2Type.LaraMiscAnim_H_HSH] =
