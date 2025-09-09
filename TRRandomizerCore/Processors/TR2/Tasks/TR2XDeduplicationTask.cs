@@ -17,6 +17,11 @@ public class TR2XDeduplicationTask : ITR2ProcessorTask
             level.IsUKBox = true;
         }
 
+        if (level.Is(TR2LevelNames.FOOLGOLD))
+        {
+            level.Data.Sprites[TR2Type.FireBlast_S_H] = level.Data.Sprites[TR2Type.Explosion_S_H].Clone();
+        }
+
         var dedupPath = $"Resources/TR2/Textures/Deduplication/{level.JsonID}-TextureRemap.json";
         if (!File.Exists(dedupPath))
         {
