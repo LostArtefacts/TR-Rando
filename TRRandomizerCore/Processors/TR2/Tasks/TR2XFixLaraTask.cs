@@ -28,29 +28,21 @@ public class TR2XFixLaraTask : ITR2ProcessorTask
 
     public void Run(TR2CombinedLevel level)
     {
-        if (level.IsAssault)
+        if (level.IsCutScene)
         {
-            FixGymLara(level);
+            return;
         }
-        else if (level.Is(TR2LevelNames.HOME))
+
+        ImportLara(level, TR2TypeUtilities.GetAliasForLevel(level.Name, TR2Type.Lara));
+        if (level.Is(TR2LevelNames.HOME))
         {
             FixHSHLara(level);
             FixHSHCutscene(level.Data);
         }
-        else if (level.IsExpansion)
-        {
-            FixGoldenMaskLara(level);
-        }
     }
 
-    private void FixGymLara(TR2CombinedLevel level)
+    private static void FixHSHLara(TR2CombinedLevel level)
     {
-        ImportLara(level, TR2Type.LaraAssault);
-    }
-
-    private void FixHSHLara(TR2CombinedLevel level)
-    {
-        ImportLara(level, TR2Type.LaraHome);
         FixHands(level.Data, TR2Type.LaraHome);
 
         // Clear the dagger from Lara's hips in the misc anim set
@@ -60,11 +52,6 @@ public class TR2XFixLaraTask : ITR2ProcessorTask
         hips.Vertices.RemoveRange(20, hips.Vertices.Count - 20);
         hips.Normals.RemoveRange(20, hips.Normals.Count - 20);
         level.Data.Models[TR2Type.LaraMiscAnim_H].Meshes[0] = hips;
-    }
-
-    private void FixGoldenMaskLara(TR2CombinedLevel level)
-    {
-        ImportLara(level, TR2TypeUtilities.GetAliasForLevel(level.Name, TR2Type.Lara));
     }
 
     private void ImportLara(TR2CombinedLevel level, TR2Type type)
