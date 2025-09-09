@@ -314,7 +314,7 @@
           {
             "ConditionType": 0,
             "Negate": true,
-            "EntityIndex": 127,
+            "EntityIndex": 6,
             "EntityType": 46
           }
         ]
