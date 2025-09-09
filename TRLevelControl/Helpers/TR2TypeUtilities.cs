@@ -131,7 +131,7 @@ public static class TR2TypeUtilities
     {
         [TR2Type.Lara] = new()
         {
-            TR2Type.LaraSun, TR2Type.LaraSnow, TR2Type.LaraUnwater, TR2Type.LaraHome, TR2Type.LaraAssault
+            TR2Type.LaraSun, TR2Type.LaraSnow, TR2Type.LaraUnwater, TR2Type.LaraHome, TR2Type.LaraAssault, TR2Type.LaraVegas,
         },
         [TR2Type.Barracuda] = new()
         {
@@ -141,7 +141,7 @@ public static class TR2TypeUtilities
         [TR2Type.StickWieldingGoon1] = new()
         {
             TR2Type.StickWieldingGoon1Bandana, TR2Type.StickWieldingGoon1BlackJacket, TR2Type.StickWieldingGoon1BodyWarmer,
-            TR2Type.StickWieldingGoon1GreenVest, TR2Type.StickWieldingGoon1WhiteVest, TR2Type.StickWieldingGoon1GM,
+            TR2Type.StickWieldingGoon1GreenVest, TR2Type.StickWieldingGoon1WhiteVest, TR2Type.StickWieldingGoon1GM, TR2Type.StickWieldingGoon1Vegas,
         },
         [TR2Type.TigerOrSnowLeopard] = new()
         {
@@ -233,10 +233,7 @@ public static class TR2TypeUtilities
 
     public static List<TR2Type> GetLaraTypes()
     {
-        return new()
-        {
-            TR2Type.LaraSun, TR2Type.LaraUnwater, TR2Type.LaraSnow, TR2Type.LaraHome, TR2Type.LaraInvisible, TR2Type.LaraAssault
-        };
+        return [.. TypeFamilies[TR2Type.Lara]];
     }
 
     public static List<TR2Type> GetCandidateCrossLevelEnemies(bool remastered)
@@ -279,6 +276,7 @@ public static class TR2TypeUtilities
             TR2Type.StickWieldingGoon1GreenVest,
             TR2Type.StickWieldingGoon1WhiteVest,
             TR2Type.StickWieldingGoon1GM,
+            TR2Type.StickWieldingGoon1Vegas,
             TR2Type.StickWieldingGoon2,
             TR2Type.TRex,
             TR2Type.WhiteTiger,
@@ -337,6 +335,7 @@ public static class TR2TypeUtilities
             TR2Type.StickWieldingGoon1GreenVest,
             TR2Type.StickWieldingGoon1WhiteVest,
             TR2Type.StickWieldingGoon1GM,
+            TR2Type.StickWieldingGoon1Vegas,
             TR2Type.StickWieldingGoon2,
             TR2Type.TRex,
             TR2Type.WhiteTiger,
@@ -458,6 +457,7 @@ public static class TR2TypeUtilities
             TR2Type.StickWieldingGoon1GreenVest,
             TR2Type.StickWieldingGoon1WhiteVest,
             TR2Type.StickWieldingGoon1GM,
+            TR2Type.StickWieldingGoon1Vegas,
             TR2Type.StickWieldingGoon2,
             TR2Type.TigerOrSnowLeopard,
             TR2Type.TRex,

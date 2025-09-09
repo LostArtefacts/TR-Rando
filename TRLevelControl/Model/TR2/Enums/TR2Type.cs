@@ -370,6 +370,7 @@ public enum TR2Type : uint
     YetiGM                        = 1032,
     BirdMonsterOG                 = 1033,
     BirdMonsterGM                 = 1034,
+    StickWieldingGoon1Vegas       = 1035,
 
     // Extra Lara animations
     LaraMiscAnim_H_Ice            = 2000, // Death-by-Yeti, Gong action
@@ -406,6 +407,11 @@ public enum TR2Type : uint
     LaraPistolAnim_H_Assault      = 3451,
     LaraAutoAnim_H_Assault        = 3452,
     LaraUziAnim_H_Assault         = 3453,
+
+    LaraVegas                     = 3470,
+    LaraPistolAnim_H_Vegas        = 3471,
+    LaraAutoAnim_H_Vegas          = 3472,
+    LaraUziAnim_H_Vegas           = 3473,
 
     // Puzzle and quest aliases
     Puzzle1_M_H_RelayBox          = 3500,
