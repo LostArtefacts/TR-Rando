@@ -468,84 +468,12 @@
       }
     ],
 
-    "Lara.Bobble": [
-      {
-        "Segment": 0,
-        "Tile": 9,
-        "X": 0,
-        "Y": 184
-      }
-    ],
-
     "Lara.Braid": [
       {
         "Segment": 0,
         "Tile": 8,
         "X": 184,
         "Y": 235
-      }
-    ],
-
-    "Lara.DivingSuit": [
-      {
-        "Segment": 0,
-        "Tile": 5,
-        "X": 240,
-        "Y": 128
-      },
-      {
-        "Segment": 1,
-        "Tile": 7,
-        "X": 144,
-        "Y": 152
-      },
-      {
-        "Segment": 2,
-        "Tile": 9,
-        "X": 224,
-        "Y": 144
-      },
-      {
-        "Segment": 3,
-        "Tile": 7,
-        "X": 32,
-        "Y": 88
-      },
-      {
-        "Segment": 4,
-        "Tile": 7,
-        "X": 32,
-        "Y": 160
-      },
-      {
-        "Segment": 5,
-        "Tile": 5,
-        "X": 48,
-        "Y": 96
-      },
-      {
-        "Segment": 6,
-        "Tile": 5,
-        "X": 48,
-        "Y": 110
-      },
-      {
-        "Segment": 6,
-        "Tile": 6,
-        "X": 216,
-        "Y": 238
-      },
-      {
-        "Segment": 7,
-        "Tile": 9,
-        "X": 160,
-        "Y": 176
-      },
-      {
-        "Segment": 8,
-        "Tile": 9,
-        "X": 128,
-        "Y": 176
       }
     ],
 
