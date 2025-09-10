@@ -20,6 +20,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
     private readonly Dictionary<string, WireframeData<TR2Type>> _wireframeData;
     private readonly object _drawLock;
     private TR2TextureDatabase _textureDatabase;
+    private TRXTextureAllocator _textureAllocator;
     private Dictionary<TextureCategory, bool> _textureOptions;
     private List<TRXScriptedLevel> _wireframeLevels;
     private List<TRXScriptedLevel> _solidLaraLevels;
@@ -39,6 +40,11 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
     {
         _generator = new(seed);
         _textureDatabase = new();
+        _textureAllocator = new()
+        {
+            Settings = Settings,
+            Generator = _generator,
+        };
         if (NightModeOnly)
         {
             RandomizeNightModeTextures();
@@ -421,6 +427,16 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
             if (isWireframe)
             {
                 _wireframer.Apply(level.Data, _outer.GetWireframeData(level));
+            }
+        }
+
+        protected override void JoinImpl()
+        {
+            foreach (var level in _holders.Keys)
+            {
+                var monitor = _outer.TextureMonitor.GetMonitor(level.Name);
+                _outer._textureAllocator.RandomizeWaterColour(level.Script,
+                    _outer.IsWireframeLevel(level), monitor?.UseNightTextures ?? false);
             }
         }
     }

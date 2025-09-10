@@ -20,6 +20,11 @@
     <ProjectReference Include="..\TRRandomizerCore\TRRandomizerCore.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="TRGE.Core">
+      <HintPath>..\Deps\TRGE.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
   <PropertyGroup>

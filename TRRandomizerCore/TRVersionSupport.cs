@@ -132,6 +132,7 @@ internal class TRVersionSupport
         TRRandomizerType.Unarmed,
         TRRandomizerType.ItemSprite,
         TRRandomizerType.Vehicles,
+        TRRandomizerType.WaterColour,
         TRRandomizerType.Wireframe,
     };
 
