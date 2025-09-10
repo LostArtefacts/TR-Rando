@@ -7,7 +7,7 @@ using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Randomizers;
 
-public class TextureAllocator<T, R>
+public class TRRTextureAllocator<T, R>
     where T : Enum
     where R : Enum
 {
@@ -19,7 +19,7 @@ public class TextureAllocator<T, R>
     public RandomizerSettings Settings { get; set; }
     public List<TRArea> AvailableAreas => new(_texInfo.GameAreas.Keys);
 
-    public TextureAllocator(TRGameVersion version)
+    public TRRTextureAllocator(TRGameVersion version)
     {
         _texInfo = JsonConvert.DeserializeObject<TRTexInfo<T>>(File.ReadAllText($"Resources/{version}/Textures/texinfo.json"));
         _trgData = new();

@@ -479,9 +479,9 @@ public class TRRandomizerController
         {
             return _editor.Edition.Version switch
             {
-                TRVersion.TR1 => new TextureAllocator<LC.TR1Type, LC.TR1RAlias>(LC.TRGameVersion.TR1).AvailableAreas,
-                TRVersion.TR2 => new TextureAllocator<LC.TR2Type, LC.TR2RAlias>(LC.TRGameVersion.TR2).AvailableAreas,
-                TRVersion.TR3 => new TextureAllocator<LC.TR3Type, LC.TR3RAlias>(LC.TRGameVersion.TR3).AvailableAreas,
+                TRVersion.TR1 => new TRRTextureAllocator<LC.TR1Type, LC.TR1RAlias>(LC.TRGameVersion.TR1).AvailableAreas,
+                TRVersion.TR2 => new TRRTextureAllocator<LC.TR2Type, LC.TR2RAlias>(LC.TRGameVersion.TR2).AvailableAreas,
+                TRVersion.TR3 => new TRRTextureAllocator<LC.TR3Type, LC.TR3RAlias>(LC.TRGameVersion.TR3).AvailableAreas,
                 _ => null,
             };
         }

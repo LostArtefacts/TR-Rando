@@ -7,7 +7,7 @@ public class TR3RTextureRandomizer : BaseTR3RRandomizer
 {
     public override void Randomize(int seed)
     {
-        TextureAllocator<TR3Type, TR3RAlias> allocator = new(TRGameVersion.TR3)
+        TRRTextureAllocator<TR3Type, TR3RAlias> allocator = new(TRGameVersion.TR3)
         {
             Generator = new(seed),
             Settings = Settings,
