@@ -20,6 +20,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
     private readonly Dictionary<string, WireframeData<TR1Type>> _wireframeData;
     private readonly object _drawLock;
     private TR1TextureDatabase _textureDatabase;
+    private TRXTextureAllocator _textureAllocator;
     private Dictionary<TextureCategory, bool> _textureOptions;
     private List<TRXScriptedLevel> _wireframeLevels;
     private List<TRXScriptedLevel> _solidLaraLevels;
@@ -39,6 +40,11 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
     {
         _generator = new(seed);
         _textureDatabase = new();
+        _textureAllocator = new()
+        {
+            Settings = Settings,
+            Generator = _generator,
+        };
         if (NightModeOnly)
         {
             RandomizeNightModeTextures();
@@ -263,34 +269,6 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
     }
 
-    private void RandomizeWater(TR1CombinedLevel level)
-    {
-        if (!Settings.RandomizeWaterColour)
-        {
-            return;
-        }
-
-        if (level.IsCutScene)
-        {
-            level.Script.WaterColor = level.ParentLevel.Script.WaterColor;
-        }
-        else
-        {
-            int minValue = IsWireframeLevel(level) ? 30 : 10;
-            TextureMonitor<TR1Type> monitor = TextureMonitor.GetMonitor(level.Name);
-            if (monitor != null && monitor.UseNightTextures)
-            {
-                minValue += 10;
-            }
-
-            level.Script.WaterColor = new double[3];
-            for (int i = 0; i < 3; i++)
-            {
-                level.Script.WaterColor[i] = Math.Round(_generator.Next(minValue, 101) * Math.Pow(10, -2), 2);
-            }
-        }
-    }
-
     internal class TextureProcessor : AbstractProcessorThread<TR1TextureRandomizer>
     {
         private readonly Dictionary<TR1CombinedLevel, TextureHolder<TR1Type, TR1Level>> _holders;
@@ -467,8 +445,16 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             {
                 _wireframer.Apply(level.Data, _outer.GetWireframeData(level));
             }
+        }
 
-            _outer.RandomizeWater(level);
+        protected override void JoinImpl()
+        {
+            foreach (var level in _holders.Keys)
+            {
+                var monitor = _outer.TextureMonitor.GetMonitor(level.Name);
+                _outer._textureAllocator.RandomizeWaterColour(level.Script,
+                    _outer.IsWireframeLevel(level), monitor?.UseNightTextures ?? false);
+            }
         }
     }
 }
