@@ -176,6 +176,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
         foreach (WireframeData<TR2Type> data in _wireframeData.Values)
         {
+            data.Has3DPickups = true;
             data.HighlightLadders = Settings.UseWireframeLadders;
             data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
             data.SolidInteractables = Settings.UseSolidInteractableWireframing;

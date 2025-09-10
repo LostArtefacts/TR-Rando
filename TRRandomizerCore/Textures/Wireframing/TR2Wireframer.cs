@@ -25,6 +25,15 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         TR2Type.DragonFront_H, TR2Type.DragonBack_H, TR2Type.XianGuardSpearStatue, TR2Type.XianGuardSwordStatue
     };
 
+    private static readonly List<TR2Type> _pickupModels =
+    [
+        TR2Type.Pistols_M_H, TR2Type.Shotgun_M_H, TR2Type.Autos_M_H, TR2Type.Uzi_M_H, TR2Type.Harpoon_M_H,
+        TR2Type.M16_M_H, TR2Type.GrenadeLauncher_M_H, TR2Type.ShotgunAmmo_M_H, TR2Type.AutoAmmo_M_H, TR2Type.UziAmmo_M_H,
+        TR2Type.HarpoonAmmo_M_H, TR2Type.M16Ammo_M_H, TR2Type.Grenades_M_H, TR2Type.SmallMed_M_H, TR2Type.LargeMed_M_H,
+        TR2Type.Flares_M_H, TR2Type.Puzzle1_M_H, TR2Type.Puzzle2_M_H, TR2Type.Puzzle3_M_H, TR2Type.Puzzle4_M_H,
+        TR2Type.Key1_M_H, TR2Type.Key2_M_H, TR2Type.Key3_M_H, TR2Type.Key4_M_H, TR2Type.Quest1_M_H, TR2Type.Quest2_M_H,
+    ];
+
     private TRPalette16Control _paletteTracker;
 
     protected override TRTexturePacker CreatePacker(TR2Level level)
@@ -43,6 +52,11 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
             || TR2TypeUtilities.IsKeyholeType(type)
             || TR2TypeUtilities.IsSlotType(type)
             || TR2TypeUtilities.IsPushblockType(type);
+    }
+
+    protected override bool ShouldSolidifyModel(TR2Type type)
+    {
+        return _data.Has3DPickups && _pickupModels.Contains(type);
     }
 
     protected override int GetBlackPaletteIndex(TR2Level level)
