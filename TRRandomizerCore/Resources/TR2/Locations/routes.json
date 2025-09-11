@@ -14206,6 +14206,15 @@
       "RequiresReturnPath": true
     },
     {
+      "X": 83200,
+      "Y": -2048,
+      "Z": 62208,
+      "Room": 32,
+      "KeyItemsLow": "28270",
+      "Range": "Large",
+      "RequiresReturnPath": true
+    },
+    {
       "X": 83456,
       "Y": 2816,
       "Z": 65024,
@@ -14389,6 +14398,7 @@
       "Z": 40704,
       "Room": 37,
       "KeyItemsHigh": "28163",
+      "KeyItemsLow": "28270",
       "Range": "Medium",
       "RequiresReturnPath": true
     },
@@ -14427,8 +14437,7 @@
       "Z": 48384,
       "Room": 11,
       "KeyItemsLow": "28270",
-      "Range": "Large",
-      "RequiresReturnPath": true
+      "Range": "Medium"
     },
     {
       "X": 32256,
@@ -14596,18 +14605,7 @@
       "X": 23040,
       "Y": -13824,
       "Z": 42496,
-      "Room": 30,
-      "KeyItemsLow": "28270",
-      "Range": "Medium"
-    },
-    {
-      "X": 23296,
-      "Y": -13824,
-      "Z": 42496,
-      "Room": 30,
-      "KeyItemsLow": "28270",
-      "Range": "Medium",
-      "RequiresReturnPath": true
+      "Room": 30
     },
     {
       "X": 25088,
@@ -15621,53 +15619,10 @@
       "Room": 63
     },
     {
-      "X": 67840,
-      "Y": 0,
-      "Z": 22016,
-      "Room": 3,
-      "KeyItemsLow": "30243"
-    },
-    {
       "X": 68096,
       "Y": 0,
       "Z": 22016,
-      "Room": 3,
-      "KeyItemsLow": "30243",
-      "Range": "Medium"
-    },
-    {
-      "X": 68352,
-      "Y": 0,
-      "Z": 22016,
-      "Room": 3,
-      "KeyItemsLow": "30243",
-      "Range": "Large"
-    },
-    {
-      "X": 68352,
-      "Y": 0,
-      "Z": 22272,
-      "Room": 3,
-      "KeyItemsLow": "30243",
-      "RequiresReturnPath": true
-    },
-    {
-      "X": 68096,
-      "Y": 0,
-      "Z": 22272,
-      "Room": 3,
-      "KeyItemsLow": "30243",
-      "Range": "Medium",
-      "RequiresReturnPath": true
-    },
-    {
-      "X": 67840,
-      "Y": 0,
-      "Z": 22272,
-      "Room": 3,
-      "KeyItemsLow": "30243,30242",
-      "Range": "Large",
-      "RequiresReturnPath": true
+      "Room": 3
     },
     {
       "X": 68096,
@@ -15676,10 +15631,53 @@
       "Room": 1
     },
     {
+      "X": 67840,
+      "Y": 0,
+      "Z": 39424,
+      "Room": 66,
+      "KeyItemsLow": "30243"
+    },
+    {
       "X": 68096,
       "Y": 0,
       "Z": 39424,
-      "Room": 66
+      "Room": 66,
+      "KeyItemsLow": "30243",
+      "Range": "Medium"
+    },
+    {
+      "X": 68352,
+      "Y": 0,
+      "Z": 39424,
+      "Room": 66,
+      "KeyItemsLow": "30243",
+      "Range": "Large"
+    },
+    {
+      "X": 68352,
+      "Y": 0,
+      "Z": 39168,
+      "Room": 66,
+      "KeyItemsLow": "30243",
+      "RequiresReturnPath": true
+    },
+    {
+      "X": 68096,
+      "Y": 0,
+      "Z": 39168,
+      "Room": 66,
+      "KeyItemsLow": "30243",
+      "Range": "Medium",
+      "RequiresReturnPath": true
+    },
+    {
+      "X": 67840,
+      "Y": 0,
+      "Z": 39168,
+      "Room": 66,
+      "KeyItemsLow": "30243,30242",
+      "Range": "Large",
+      "RequiresReturnPath": true
     },
     {
       "X": 69120,
@@ -15902,7 +15900,10 @@
       "X": 18944,
       "Y": -7552,
       "Z": 55808,
-      "Room": 32
+      "Room": 32,
+      "KeyItemsLow": "30242",
+      "Range": "Medium",
+      "RequiresReturnPath": true
     },
     {
       "X": 25088,
@@ -15945,6 +15946,14 @@
       "Y": -15360,
       "Z": 42496,
       "Room": 49
+    },
+    {
+      "X": 65024,
+      "Y": -13319,
+      "Z": 34560,
+      "Room": 52,
+      "KeyItemsLow": "30242",
+      "Range": "Medium"
     },
     {
       "X": 65024,
@@ -16024,18 +16033,7 @@
       "X": 66048,
       "Y": -16896,
       "Z": 44544,
-      "Room": 78,
-      "KeyItemsLow": "30242",
-      "Range": "Medium"
-    },
-    {
-      "X": 66048,
-      "Y": -16896,
-      "Z": 44800,
-      "Room": 78,
-      "KeyItemsLow": "30242",
-      "Range": "Medium",
-      "RequiresReturnPath": true
+      "Room": 78
     },
     {
       "X": 59904,
