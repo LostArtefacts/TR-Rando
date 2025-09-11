@@ -93,7 +93,7 @@ public static class TR2TypeUtilities
         [TR2Type.Mercenary2] = new()
         {
             [TR2Type.Mercenary2OG] = [TR2LevelNames.TIBET, TR2LevelNames.MONASTERY, TR2LevelNames.COT],
-            [TR2Type.Mercenary2GM] = [TR2LevelNames.COLDWAR, TR2LevelNames.FOOLGOLD, TR2LevelNames.KINGDOM],
+            [TR2Type.Mercenary2GM] = [TR2LevelNames.COLDWAR, TR2LevelNames.FURNACE, TR2LevelNames.KINGDOM],
         },
         [TR2Type.Mercenary3] = new()
         {
