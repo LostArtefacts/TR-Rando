@@ -74,6 +74,9 @@ public class TR2DataExporter : TRDataExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
             case TR2Type.SharkGM:
                 FixSharkSFX(level);
                 break;
+            case TR2Type.Drawbridge:
+                FixDrawbridge(level);
+                break;
         }
     }
 
@@ -100,6 +103,18 @@ public class TR2DataExporter : TRDataExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
             gmShark.Animations[i].Commands
                 .AddRange(ogShark.Animations[i].Commands.OfType<TRSFXCommand>());
         }
+    }
+
+    private static void FixDrawbridge(TR2Level level)
+    {
+        var mesh = level.Models[TR2Type.Drawbridge].Meshes[0];
+        mesh.TexturedRectangles.AddRange(mesh.TexturedRectangles.ToList().Select(f =>
+        {
+            var face = f.Clone();
+            face.SwapVertices(0, 1);
+            face.SwapVertices(2, 3);
+            return face;
+        }));
     }
 
     private static void ScaleSphereOfDoom(TR2Blob blob)

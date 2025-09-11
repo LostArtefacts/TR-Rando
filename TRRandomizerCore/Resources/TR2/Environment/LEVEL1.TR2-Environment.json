@@ -1,5 +1,373 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Create a return path from the second keyhole back to the floor below.",
+      "EMType": 126,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 39936,
+        "Y": -15360,
+        "Z": 38912
+      },
+      "LinkedLocation": {
+        "X": 41472,
+        "Y": -17664,
+        "Z": 40448,
+        "Room": 64
+      },
+      "Textures": {
+        "Floor": 1369,
+        "Ceiling": 1343,
+        "WallAlignment": 4,
+        "Wall4": 1536,
+        "Wall1": 1629
+      },
+      "AmbientLighting": 8160,
+      "DefaultVertex": {
+        "Lighting": 8160,
+        "Lighting2": 6000,
+        "Attributes": 16
+      },
+      "Lights": [
+        {
+          "X": 1536,
+          "Y": -512,
+          "Z": 1536,
+          "Intensity1": 3072,
+          "Intensity2": 3072,
+          "Fade1": 2048,
+          "Fade2": 2048
+        }
+      ],
+      "Height": 9,
+      "Width": 3,
+      "Depth": 3
+    },
+    {
+      "EMType": 83,
+      "Tags": [
+        9
+      ],
+      "Ceiling": {
+        "X": 41472,
+        "Y": -15360,
+        "Z": 40448,
+        "Room": -1
+      },
+      "Floor": {
+        "X": 41472,
+        "Y": -15360,
+        "Z": 40448,
+        "Room": 37
+      },
+      "InheritFloorBox": true
+    },
+    {
+      "EMType": 83,
+      "Tags": [
+        9
+      ],
+      "Ceiling": {
+        "X": 41472,
+        "Y": -17664,
+        "Z": 40448,
+        "Room": 64
+      },
+      "Floor": {
+        "X": 41472,
+        "Y": -17664,
+        "Z": 40448,
+        "Room": -1
+      },
+      "InheritFloorBox": true
+    },
+    {
+      "EMType": 81,
+      "Tags": [
+        9
+      ],
+      "Portals": [
+        {
+          "BaseRoom": 64,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "Y": -1
+          },
+          "Vertices": [
+            {
+              "X": 3072,
+              "Y": -17664,
+              "Z": 10240
+            },
+            {
+              "X": 4096,
+              "Y": -17664,
+              "Z": 10240
+            },
+            {
+              "X": 4096,
+              "Y": -17664,
+              "Z": 9216
+            },
+            {
+              "X": 3072,
+              "Y": -17664,
+              "Z": 9216
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": 64,
+          "Normal": {
+            "Y": 1
+          },
+          "Vertices": [
+            {
+              "X": 2048,
+              "Y": -17664,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -17664,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -17664,
+              "Z": 2048
+            },
+            {
+              "X": 2048,
+              "Y": -17664,
+              "Z": 2048
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": 37,
+          "Normal": {
+            "Y": -1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": -15360,
+              "Z": 2048
+            },
+            {
+              "X": 2048,
+              "Y": -15360,
+              "Z": 2048
+            },
+            {
+              "X": 2048,
+              "Y": -15360,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -15360,
+              "Z": 1024
+            }
+          ]
+        },
+        {
+          "BaseRoom": 37,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "Y": 1
+          },
+          "Vertices": [
+            {
+              "X": 3072,
+              "Y": -15360,
+              "Z": 2048
+            },
+            {
+              "X": 4096,
+              "Y": -15360,
+              "Z": 2048
+            },
+            {
+              "X": 4096,
+              "Y": -15360,
+              "Z": 1024
+            },
+            {
+              "X": 3072,
+              "Y": -15360,
+              "Z": 1024
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 41472,
+        "Y": -13312,
+        "Z": 40448,
+        "Room": 37
+      },
+      "IsNegativeZ": true
+    },
+    {
+      "EMType": 36,
+      "Tags": [
+        9
+      ],
+      "Data": [
+        {
+          "Background": 1362,
+          "Overlay": "Resources/TR2/Textures/Source/Static/ColdWar/ladder.png",
+          "GeometryMap": {
+            "-1": {
+              "Rectangles": [
+                11,
+                12
+              ]
+            },
+            "37": {
+              "Rectangles": [
+                32,
+                33
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "EMType": 23,
+      "Tags": [
+        9
+      ],
+      "Rotations": [
+        {
+          "RoomNumber": 37,
+          "FaceIndices": [
+            33
+          ],
+          "VertexRemap": {
+            "0": 3,
+            "1": 0,
+            "2": 1,
+            "3": 2
+          }
+        },
+        {
+          "RoomNumber": 37,
+          "FaceIndices": [
+            32
+          ],
+          "VertexRemap": {
+            "0": 2,
+            "1": 3,
+            "2": 0,
+            "3": 1
+          }
+        }
+      ]
+    },
+    {
+      "EMType": 128,
+      "Tags": [
+        9
+      ],
+      "RoomIndices": [
+        -1
+      ]
+    },
+    {
+      "EMType": 22,
+      "Tags": [
+        9
+      ],
+      "GeometryMap": {
+        "64": {
+          "Rectangles": [
+            68
+          ]
+        },
+        "37": {
+          "Rectangles": [
+            31
+          ]
+        },
+        "-1": {
+          "Rectangles": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "EMType": 51,
+      "Tags": [
+        9
+      ],
+      "TypeID": 114,
+      "Intensity": -1,
+      "Location": {
+        "X": 41472,
+        "Y": -17664,
+        "Z": 40448,
+        "Room": -1,
+        "Angle": -32768
+      }
+    },
+    {
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 41472,
+          "Y": -13312,
+          "Z": 40448,
+          "Room": 37
+        }
+      ],
+      "Trigger": {
+        "TrigType": 8,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 68,
+      "Tags": [
+        9
+      ],
+      "Location": {
+        "X": 40448,
+        "Y": -17664,
+        "Z": 41472,
+        "Room": 64
+      },
+      "Actions": [
+        {
+          "Parameter": -1
+        }
+      ]
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

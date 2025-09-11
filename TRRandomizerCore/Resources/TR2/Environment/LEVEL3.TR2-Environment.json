@@ -17,6 +17,148 @@
         "Y": -2048,
         "Z": 39424
       }
+    },
+    {
+      "Comments": "Add a ladder as a return path from room 8.",
+      "EMType": 26,
+      "Tags": [
+        9
+      ],
+      "Quads": {
+        "8": [
+          {
+            "Type": 4,
+            "Vertices": [
+              156,
+              155,
+              121,
+              129
+            ],
+            "Texture": 1745
+          },
+          {
+            "Type": 4,
+            "Vertices": [
+              129,
+              121,
+              125,
+              126
+            ],
+            "Texture": 1745
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 0,
+      "Tags": [
+        9
+      ],
+      "TextureMap": {},
+      "Location": {
+        "X": 25088,
+        "Y": -1792,
+        "Z": 57856,
+        "Room": 8
+      },
+      "IsPositiveX": true
+    },
+    {
+      "EMType": 22,
+      "Tags": [
+        9
+      ],
+      "GeometryMap": {
+        "8": {
+          "Rectangles": [
+            129
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Add a drawbridge in room 42 as a return path.",
+      "EMType": 145,
+      "Tags": [
+        9
+      ],
+      "Data": [
+        {
+          "ModelID": 63,
+          "TexturedFace4": 1488,
+          "TextureMap": {
+            "1173": 1488,
+            "1174": 1027
+          }
+        }
+      ]
+    },
+    {
+      "EMType": 51,
+      "Tags": [
+        9
+      ],
+      "TypeID": 63,
+      "Location": {
+        "X": 59904,
+        "Y": -15360,
+        "Z": 66048,
+        "Room": 42,
+        "Angle": 16384
+      }
+    },
+    {
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 58880,
+          "Y": -15360,
+          "Z": 66048,
+          "Room": 42,
+          "Angle": -16384
+        },
+        {
+          "X": 57856,
+          "Y": -15360,
+          "Z": 66048,
+          "Room": 42,
+          "Angle": -16384
+        }
+      ],
+      "Trigger": {
+        "TrigType": 8,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 61,
+      "Tags": [
+        9
+      ],
+      "Locations": [
+        {
+          "X": 66048,
+          "Y": -12288,
+          "Z": 32256,
+          "Room": 53
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
     }
   ],
   "Any": [],
