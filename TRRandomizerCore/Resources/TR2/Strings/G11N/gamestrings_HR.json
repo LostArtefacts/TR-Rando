@@ -996,6 +996,138 @@
           "Excaliburov mali brat O.o"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Skidoo avantura",
+        "Skidoo manija",
+        "U dubokom kraju",
+        "Puno gruda",
+        "Da, hladno je"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Ključ sobe za odmor",
+          "Ključ natopljen u zlatu",
+          "Ključ za dnevni boravak",
+          "Ključ za grobnicu",
+          "Ključ okna 'B'"
+        ],
+        "Key2": [
+          "Ključ do prekidača",
+          "Ključ - vrata - poluga - vrata",
+          "Ključ čuvarske sobe",
+          "Ključ za otvoriti nešto",
+          "Možda otvara vrata"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Ta jedna tamna soba",
+        "Iznenadni napad pushbloka",
+        "Skidoo-i zabranjeni",
+        "Piri",
+        "Zlato DJ Fulla"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 od 2",
+          "2 od 2",
+          "Winstonova kartica",
+          "Mastercard",
+          "Viza"
+        ],
+        "Key4": [
+          "1 od 2",
+          "2 od 2",
+          "Kartica zlobnika",
+          "Nemogu platiti ovim",
+          "Kartica odbijena"
+        ],
+        "Puzzle1": [
+          "SEGA Saturn Tomb Raider 2 port",
+          "Sypro ili Crash Bandicoot?",
+          "Sims 1",
+          "Tko je otvorio Playstation",
+          "3dfx grafička kartica"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Sirna fontana",
+        "Nemoj uzeti suvenir",
+        "Pjesma Spandau Balet",
+        "Plivanje u zlatnoj vodi",
+        "Ulice zlata"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grenlandski demon",
+          "Medvjeđa maska",
+          "Maska lijepote",
+          "Make up maska",
+          "Lice zlata"
+        ],
+        "Puzzle2": [
+          "Pileći medaljoni",
+          "Ne vrijedi puno",
+          "Lažni pileći medaljon",
+          "Uhh... sjajno!",
+          "Tamatoa želi to"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Pjesma No Downstait",
+        "Jetiji u zlatnom gradu",
+        "Jetiji i kokoš",
+        "Oslijepljujuća tajna",
+        "Neko zlato je sigurno"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grenlandski demon",
+          "Medvjeđa maska",
+          "Maska lijepote",
+          "Make up maska",
+          "Lice zlata"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva Las Lara",
+        "Show velike ptice",
+        "Jurski park: Las Vegas",
+        "Kokoši i dinosauri",
+        "Čudni snovi"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Nemoj izgubiti ovo",
+          "Soba broj 666",
+          "Holivudski hotel",
+          "Toranj terora",
+          "Soba bez minibara"
+        ],
+        "Puzzle1": [
+          "Dizalo za održavanje",
+          "Zona sumraka",
+          "Zašto je ovo polomljeno",
+          "Ne staj!",
+          "Slobodni pad!"
+        ],
+        "Puzzle2": [
+          "Matična ploča",
+          "Je li ovaj run proklet?",
+          "PCB ploča",
+          "Streamerska kartica za snimanje",
+          "Kada nemaš ključ"
+        ]
+      }
     }
   }
 }

@@ -995,6 +995,138 @@
           "Mladshiy brat Ekskalibura O.o"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Priklucheniya snegohoda 2",
+        "Bezumie na snegohode",
+        "Na dne",
+        "Zaval snezhnih komyev",
+        "Da, zdes' slishkom holodno"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klyuch ot komnati otdiha",
+          "Klyuch v zolote",
+          "Propusk v razdevalku",
+          "Klyuch ot grobnici... to yest' komnati",
+          "Klyuch ot shahti B"
+        ],
+        "Key2": [
+          "Klyuch k richagu",
+          "Klyuch - dver' - richag - dver'",
+          "Klyuch ot storozhki",
+          "Klyuch ot chego-to",
+          "Navernoe, eto ot dveri..."
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Ta samaya temnaya komnata",
+        "Vnezapnaya ataka kubov",
+        "Snegohodam viezd zapreshen",
+        "Pirit",
+        "Zoloto DJ Fulla"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 iz 2",
+          "2 iz 2",
+          "Kreditka Uinstona",
+          "Mir - eto platezhnaya sistema",
+          "Karta Visa"
+        ],
+        "Key4": [
+          "1 iz 2",
+          "2 iz 2",
+          "Kreditka mordovorota",
+          "Karti k oplate ne prinimaem!",
+          "Platezh otklonen"
+        ],
+        "Puzzle1": [
+          "Port TR2 dlya Saturna",
+          "Spyro ili Crash?",
+          "The Sims 1",
+          "Kto vskril ih Playstation?",
+          "Uskoritel' Voodoo"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Sirnie fontani",
+        "Ne berite suveniri",
+        "Singl Spandau Ballet",
+        "Zapliv v zolotoi vode",
+        "Zolotie ulici"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grenlandskii demon",
+          "Medvezhya maska",
+          "Masochka s kollagenom",
+          "Nakladnoe lico",
+          "Lico iz zolota"
+        ],
+        "Puzzle2": [
+          "Maknaggets",
+          "Deshevka",
+          "Yakobi zolotoy samorodok",
+          "Ohhh... shaini!",
+          "Tamatoa eto zaberet!"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Korolevstvo bez krivih zerkal",
+        "Yeti na rayone",
+        "Yeti i kurica",
+        "Oslepitelnii sekret",
+        "Sokrovischa v bezopasnosti"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grenlandskii demon",
+          "Medvezhya maska",
+          "Masochka s kollagenom",
+          "Nakladnoe lico",
+          "Lico iz zolota"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva la Lara",
+        "Benefis gigantskoi ptici",
+        "Park las-vegasskogo perioda",
+        "Kuri i dinozavri",
+        "Strannie sni"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Ne teryat'",
+          "Komnata nomer 666",
+          "Gollivudskii otel'",
+          "Bashnya uzhasa",
+          "Nomer bez mini-bara"
+        ],
+        "Puzzle1": [
+          "Sluzhebnii lift",
+          "Vhod v sumerechnuyu zonu",
+          "Pochemu ono slomano?",
+          "Tol'ko ne padai!",
+          "Eto vam ne tarzanka!"
+        ],
+        "Puzzle2": [
+          "Materinka ot kompa",
+          "A Doom na etom zavedetsya?",
+          "Samaya bolshaya mikroshema",
+          "Strimerskaya plata videozahvata",
+          "Eto ne tvoi klyuch"
+        ]
+      }
     }
   }
 }

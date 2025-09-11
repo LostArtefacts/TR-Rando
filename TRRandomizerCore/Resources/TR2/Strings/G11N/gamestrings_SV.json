@@ -991,6 +991,138 @@
           "Excalibur's lillebror O.o"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Skidoo Äventyr 2",
+        "Skidoo Mania",
+        "In The Deep End",
+        "Så många snöbollar",
+        "Ja, det är väldigt kallt"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Fikarumsnyckel",
+          "Nyckel doppad i guld",
+          "Personalrumsnycke",
+          "En nyckel till en grav... Jag menar rum",
+          "Axel B-Nyckel"
+        ],
+        "Key2": [
+          "En nyckel till en spak",
+          "Nyckel - dörr - spak- dörr",
+          "Vaktrumsnyckel",
+          "Nyckel för att öppna någonting",
+          "Öppnar möjligtvis en dörr"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Det mörke rummet",
+        "Inget guld här",
+        "Inga Skidoos Inomhus",
+        "Pyrite",
+        "DJ Fulls Guld"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 av 2",
+          "2 av 2",
+          "Winstons kreditkort",
+          "Mastercard",
+          "Visa-kort"
+        ],
+        "Key4": [
+          "1 av 2",
+          "2 av 2",
+          "Onda grabbens kreditkort",
+          "Kan inte betala med det här!",
+          "Kreditkort nekat"
+        ],
+        "Puzzle1": [
+          "SEGA Saturn Tomb Raider 2 port",
+          "Spyro eller Crash Bandicoot?",
+          "Sims 1",
+          "Vem öppnade deras PlayStation?",
+          "3dfx Grafikkort"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Ostfontäner",
+        "Ta inte en souvenir",
+        "Spandau balletsång",
+        "Guldvattensim",
+        "Gatur av guld"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grönlänningsdemon",
+          "Björnens Mask",
+          "Skönhetsmask",
+          "Sminkmask",
+          "Ansikte av guld"
+        ],
+        "Puzzle2": [
+          "Chicken nugget",
+          "Inte värt mycket",
+          "Falsk guldklimp",
+          "Uuuh... glänsande!",
+          "Tamatoa vill ha den!"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Ingen Downstait-låt",
+        "Yetis i Guldstad",
+        "Yetis och en kyckling",
+        "Bländande Hemlighet",
+        "Lite guld är säkert"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grönlänningsdemon",
+          "Björnens Mask",
+          "Skönhetsmask",
+          "Sminkmask",
+          "Ansikte av guld"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Länge leve Lara",
+        "Big Bird's stora show",
+        "Jurassic Park: Las Vegas",
+        "Kycklingar och Dinosaurier",
+        "Konstiga Drömmar"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Förlora ej den här",
+          "Rum nummer 666",
+          "Hollywood Tornhotell",
+          "Torn av skräck",
+          "Rum utan minibar"
+        ],
+        "Puzzle1": [
+          "Underhållshiss",
+          "Skymningszonentré",
+          "Varför är den här trasig",
+          "Tappa ej, tack!",
+          "Inget fritt fall-torn anslutet!"
+        ],
+        "Puzzle2": [
+          "PC Moderkort",
+          "Kan den här köra Doom?",
+          "PCB-kort",
+          "Streamer inspelningskort",
+          "När du inte har en nyckel"
+        ]
+      }
     }
   }
 }

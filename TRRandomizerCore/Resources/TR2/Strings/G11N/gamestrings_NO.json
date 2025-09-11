@@ -1,0 +1,138 @@
+{
+  "GlobalStrings": {},
+  "ObjectStrings": {},
+  "LevelStrings": {
+    "LEVEL1.TR2": {
+      "Names": [
+        "Skidoo Eventyr 2",
+        "Skidoo Mani",
+        "I den dype enden",
+        "Så mange snøballer",
+        "Ja, Det er veldig kaldt"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Pauseromsnøkkel",
+          "Nøkkel Dyppet i Gull",
+          "Personalnøkkel",
+          "En nøkkel til en grav... Jeg mener et rom",
+          "Aksel 'B' Nøkkel"
+        ],
+        "Key2": [
+          "En nøkkel til en spak",
+          "Nøkkel - Dør - Spak - Dør",
+          "Vaktromnøkkel",
+          "Nøkkel til å åpne noe",
+          "Åpner muligens en dør"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Det Ene Mørke Rommet",
+        "Overaskelses skyveblokk angrep",
+        "Ingen Skidoos innendørs",
+        "Pyritt",
+        "DJ Fulls Gull"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 av 2",
+          "2 av 2",
+          "Winstons Kredittkort",
+          "Mastercard",
+          "Visa kort"
+        ],
+        "Key4": [
+          "1 av 2",
+          "2 av 2",
+          "Kredittkort for onde menn",
+          "Kan ikke betale med dette!",
+          "Kredittkort Avvist"
+        ],
+        "Puzzle1": [
+          "SEGA Saturn Tomb Raider 2 port",
+          "Spyro eller Crash Bandicoot?",
+          "Sims 1",
+          "Hvem åpnet playstation sin?",
+          "3sfx Grafikkort"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Ostefontener",
+        "Ikke ta med en Suvenir",
+        "Spandau Ballettsang",
+        "Gullvannssvømming",
+        "Gater av Gull"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grønnlands Demon",
+          "Bjørnens Maske",
+          "Skjønnhetsmaske",
+          "Sminkemaske",
+          "Ansikt av Gull"
+        ],
+        "Puzzle2": [
+          "Kylling Nugget",
+          "Ikke Verdt Mye",
+          "Falske Gullklumper",
+          "uhh... Skinnende",
+          "Tamatoa vil ha den"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Ingen Downstate Sang",
+        "Yetis i Gullbyen",
+        "Yetis og en Kylling",
+        "Blendende Hemmelighet",
+        "Noe Gull er Trygt"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grønnlands Demon",
+          "Bjørnens Maske",
+          "Skjønnhetsmaske",
+          "Sminkemaske",
+          "ansikt av Gull"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva Las Lara",
+        "Big Bird's Store Show",
+        "Jurassic Park: Las Vegas",
+        "Kyllinger og Dinosaurer",
+        "Rare Drømmer"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Ikke mist dette",
+          "rom nr. 666",
+          "Hollywood Tårnhotell",
+          "Skrekktårnet",
+          "Rommet uten minibar"
+        ],
+        "Puzzle1": [
+          "Vedlikeholdsheis",
+          "skumringssoneinngang",
+          "Hvorfor er denne ødelagt?",
+          "Vnnlighst ikke slipp!",
+          "ingen frittfallstårn festet!"
+        ],
+        "Puzzle2": [
+          "PC Hovedkort",
+          "Kan denne kjøre Doom?",
+          "PCB-kort",
+          "Strømmers capture card",
+          "Når du ikke har en nøkkel"
+        ]
+      }
+    }
+  }
+}

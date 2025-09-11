@@ -991,6 +991,138 @@
           "Excalibruv mladsi bratr O.o"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Dobrodruzstvi na Skutrech 2",
+        "Manie na Sneznem Skutru",
+        "Na Hlubokem Konci",
+        "Prilis Mnoho Sneznych Kouli",
+        "Ano, Opravdu tu Mrzne"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klic od Odpocivarny",
+          "Klic Namoceny ve Zlate",
+          "Klic k Zamestnaneckemu Pokoji",
+          "Klic od Hrobky...Chtel Jsem rict od Mistnosti",
+          "Klic od Sachty 'B'"
+        ],
+        "Key2": [
+          "Klic k pace",
+          "Klic - dvere - paka - dvere",
+          "Klic od Straznice",
+          "Klic co nekde neco otevira",
+          "Asi to otevira dvere"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Ta Jedna Tmava Mistnost",
+        "Prepadovka za posuvnym blokem",
+        "Skutrum Vstup Zakazan",
+        "Pyrit",
+        "Zlato DJ Fulla"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 ze 2",
+          "2 ze 2",
+          "Winstonova Kreditka",
+          "Mastercard",
+          "Karta Spolecnosti Visa"
+        ],
+        "Key4": [
+          "1 ze 2",
+          "2 ze 2",
+          "Kreditka Zaporaku",
+          "Timhle Nelze Zaplatit",
+          "Platebni Karta Zamitnuta"
+        ],
+        "Puzzle1": [
+          "Tomb Raider 2 Port na SEGA Saturn",
+          "Spyro nebo Crash Bandicoot?",
+          "The Sims 1",
+          "Kdo Otevrel Jejich PlayStation?",
+          "Graficka Karta 3dfx"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Syrova Fontana",
+        "Neodnasej si Suvenir",
+        "Pisen od Spandau Ballet",
+        "Plavba ve Zlate Vode",
+        "Ulice ze Zlata"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Gronsky Demon",
+          "Maska Medveda",
+          "Maska Krasy",
+          "Pletova Maska",
+          "Oblicej ze Zlata"
+        ],
+        "Puzzle2": [
+          "Kureci Nugetka",
+          "Nestoji za moc",
+          "Hrudka Falesneho Zlata",
+          "Uhh... Leskle!",
+          "Tohle chce Tamatoa!"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Nenalezena zadna pisen od Downstait",
+        "Yetiove ve Zlatem Mestecku",
+        "Yetiove a Kure",
+        "Oslepujici Tajemstvi",
+        "Nejake Zlato Je v Bezpeci"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Gronsky Demon",
+          "Maska Medveda",
+          "Maska Krasy",
+          "Pletova Maska",
+          "Oblicej ze Zlata"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva Las Lara",
+        "Veliky Ptak Velka Sou",
+        "Jursky Park: Las Vegas",
+        "Kurata a Dinosauri",
+        "Podivne Sny"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Neztrat To",
+          "Mistnost c. 666",
+          "Hollywoodsky Vezovy Hotel",
+          "Vez Hruzy",
+          "Mistnost Bez Minibaru"
+        ],
+        "Puzzle1": [
+          "Vytah pro Udrzbare",
+          "Brana do Soumrakove Zony",
+          "Proc Je To Rozbite",
+          "Prosim Neurvi se",
+          "Chybi Vez Volneho Padu"
+        ],
+        "Puzzle2": [
+          "Zakladova Deska Pocitace",
+          "Rozjede to DOOM?",
+          "Deska Plosnych Spoju",
+          "Streamovaci Zaznamova Karta",
+          "Kdyz Nemas Klic"
+        ]
+      }
     }
   }
 }
