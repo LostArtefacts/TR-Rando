@@ -992,6 +992,138 @@
           "Il fratellino di Excalibur O.o"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Pendici tibetiane 2",
+        "Gatto delle nevi",
+        "Nel profondo",
+        "Palle di neve",
+        "Sì, fa freddo"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Chiave dello staff",
+          "Chiave immersa nell'oro",
+          "Chiave caffetteria",
+          "Chiave per una danza... no, stanza",
+          "Chiave tunnel 'B'"
+        ],
+        "Key2": [
+          "Dalla chiave alla leva",
+          "Chiave - porta - leva - porta",
+          "Chiave ripostiglio guardie",
+          "Sicuramente apre qualcosa",
+          "Credo apra una porta"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Quella stanza scura",
+        "Attacco a sorpresa blocchi",
+        "Niente gatto delle nevi",
+        "Pirite",
+        "DJ Full Gold"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 su 2",
+          "2 su 2",
+          "Carta di credito di Winston",
+          "Mastercard",
+          "Carta Visa"
+        ],
+        "Key4": [
+          "1 su 2",
+          "2 su 2",
+          "Carta di credito dei cattivi",
+          "Non posso pagare con questa!",
+          "Pagamento rifiutato"
+        ],
+        "Puzzle1": [
+          "Port SEGA Saturn TR 2",
+          "Spyro o Crash Bandicoot?",
+          "The Sims 1",
+          "Chi ha aperto la playstation",
+          "Scheda video 3dfx"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Fontana di formaggio",
+        "Vietato prendere souvenir",
+        "Oro bollente, che caldo",
+        "Vietato nuotare nell'oro",
+        "Strada d'oro"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Demone della Groellandia",
+          "Maschera dell'orso",
+          "Maschera di bellezza",
+          "Maschera di Makeup",
+          "Faccia d'oro"
+        ],
+        "Puzzle2": [
+          "Pepita di pollo",
+          "Non che valga molto",
+          "Finta pepita d'oro",
+          "Ohh... luuuucida",
+          "Vuoi portartela a casa?"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Come fa a non prendere fuoco",
+        "Oh no, gli Yeti, di nuovo",
+        "Yeti e un pollo",
+        "Niente incendi forestali",
+        "Oro colato e raffreddato"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Demone della Groellandia",
+          "Maschera dell'orso",
+          "Maschera di bellezza",
+          "Maschera di Makeup",
+          "Faccia d'oro"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Vivaaaaa las Lara",
+        "Incubo febbrile",
+        "Jurassic Park: Las Vegas",
+        "Polli e dinosauri",
+        "Stranissimo sogno"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Non perdere anche questa chiave",
+          "Stanza numero 666",
+          "Hollywood Tower Hotel",
+          "Torre del terrore",
+          "Ma che... niente minibar?"
+        ],
+        "Puzzle1": [
+          "Ascensore in manutenzione",
+          "Entrata della Twilight zone",
+          "È rotto, non pensarci neanche",
+          "Non cadere!",
+          "È vietato sporgersi"
+        ],
+        "Puzzle2": [
+          "Scheda madre",
+          "Può far girare DOOM",
+          "Scheda PCB",
+          "Scheda video??",
+          "Quando non hai una chiave"
+        ]
+      }
     }
   }
 }

@@ -991,6 +991,138 @@
           "Excaliburin pikkuveli"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Moottorikelkkaseikkailu osa 2",
+        "Moottorikelkkahullutus",
+        "Syvässä päädyssä",
+        "Niin paljon lumipalloja",
+        "Jep, kylmä on"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Taukohuoneen avain",
+          "Kultaan kastettu avain",
+          "Henkilökunnan tilat",
+          "Avain hautaholviin... eikun huoneeseen",
+          "B-kuilun avain"
+        ],
+        "Key2": [
+          "Vivun avain",
+          "Avain - ovi - vipu - ovi",
+          "Vahtihuoneen avain",
+          "Jonkin avain",
+          "Avaa ehkä oven"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Se pimeä huone",
+        "Työntöpalikkayllätyshyökkäys",
+        "Ei moottorikelkkoja sisälle",
+        "Rikkikiisu",
+        "DJ Fullin kulta"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Ensimmäinen kahdesta",
+          "Toinen kahdesta",
+          "Winstonin luottokortti",
+          "Mastercard",
+          "Visa"
+        ],
+        "Key4": [
+          "Ensimmäinen kahdesta",
+          "Toinen kahdesta",
+          "Pahiksen luottokortti",
+          "Ei tällä voi maksaa!",
+          "Maksu hylätty"
+        ],
+        "Puzzle1": [
+          "SEGA Saturn Tomb Raider 2 porttaus",
+          "Spyro vai Crash Bandicoot?",
+          "The Sims 1",
+          "Kuka purki pleikkansa?",
+          "3dfx grafiikkakortti"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Juustofondue",
+        "Älä ota matkamuistoja",
+        "Spandau Ballet -kappale",
+        "Kullassa uinti",
+        "Kultaiset kadut"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grönlannin demoni",
+          "Karhumaski",
+          "Kauneusmaski",
+          "Meikkinaamio",
+          "Kullatut kasvot"
+        ],
+        "Puzzle2": [
+          "Kananugetti",
+          "Ei paljonkaan arvoinen",
+          "Feikkikultanugetti",
+          "Öh... se kimaltaa!",
+          "Tamatoa haluaa tämän!"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Ei Downstaitin kappale",
+        "Lumimiehet kultakaupungissa",
+        "Lumimiehet ja kana",
+        "Sokeuttava salaisuus",
+        "Osa kullasta tallessa"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grönlannin demoni",
+          "Karhumaski",
+          "Kauneusmaski",
+          "Meikkinaamio",
+          "Kullatut kasvot"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva Las Lara",
+        "Tipu Tilavan iso show",
+        "Jurassic Park: Las Vegas",
+        "Kanoja ja dinoja",
+        "Outoja unia"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Älä hukkaa tätä",
+          "Huone 666",
+          "Hollywood Tower Hotel",
+          "Tower of Terror",
+          "Huone ilman minibaaria"
+        ],
+        "Puzzle1": [
+          "Huoltohissi",
+          "Sisäänkäynti Twilight Zoneen",
+          "Miksi tämä on rikki",
+          "Älä putoa!",
+          "Ei sisällä vapaapudotustornia!"
+        ],
+        "Puzzle2": [
+          "Emolevy",
+          "Pyörittääkö tää Doomia?",
+          "Piirilevy",
+          "Striimaajan videokaappauskortti",
+          "Kun avain puuttuu"
+        ]
+      }
     }
   }
 }

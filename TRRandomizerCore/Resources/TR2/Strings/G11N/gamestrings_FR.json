@@ -990,6 +990,138 @@
           "Le Petit Frère de Escalibur"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "L'aventure moto-neige 2",
+        "Moto-neige mania",
+        "A la toute fin",
+        "Trop de boules de neige",
+        "Oui, il fait vraiment froid"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Clé de la pause boughazi",
+          "Une clé qui trempe dans l'or",
+          "La clé du personnel",
+          "Une clé d'une tombe... Pardon d'une salle",
+          "La clé de secours"
+        ],
+        "Key2": [
+          "Une clé d'un levier",
+          "Clé - Porte - Levier - Porte",
+          "Clé des guardes",
+          "Une clé pour ouvrir quelque chose",
+          "Potentielle ouverture d'une porte"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Cette salle sombre",
+        "Attaque surprise du bloc",
+        "Moto interdite à l'intérieur",
+        "Vitriol",
+        "DJ Fulls Gold"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 sur 2",
+          "2 sur 2",
+          "La carte bleue de Winston",
+          "Mastercard",
+          "Carte Visa"
+        ],
+        "Key4": [
+          "1 sur 2",
+          "2 sur 2",
+          "La carte bleue du méchant",
+          "On ne peut pas payer avec !",
+          "Carte refusée"
+        ],
+        "Puzzle1": [
+          "Port Sega Saturn de Tomb Raider 2",
+          "Spyro ou Crash Bandicoot ?",
+          "Les Sims 1",
+          "Qui a allumé la PlayStation ?",
+          "Carte graphique 3dfx"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Cascades de fromage",
+        "Ne ramenez pas un souvenir",
+        "Le ballet de Spandau",
+        "Nage dans l'eau dorée",
+        "Les rues de l'or"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Le démon de la campagne",
+          "Le mask de l'ours",
+          "Un masque de beauté",
+          "Maquillage",
+          "Le visage de l'or"
+        ],
+        "Puzzle2": [
+          "Le nugget de poulet",
+          "Ca ne vaut pas grand chose",
+          "Un nugget de faux or",
+          "Ohhhh... Ca brille !",
+          "Tamatoa le veut !"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Pas de chanson de Downstait",
+        "Des yetis dans la ville dorée",
+        "Les yetis et un poulet",
+        "Un secret éblouissant",
+        "Un matelas de sécurité"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Le démon de la campagne",
+          "Le mask de l'ours",
+          "Un masque de beauté",
+          "Maquillage",
+          "Le visage de l'or"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva Las Lara",
+        "Grand oiseau, grand spectacle",
+        "Jurassic Park : Las Vegas",
+        "Des poulets et des dinosaures",
+        "Des rêves étranges"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Ne perdez pas ça",
+          "Chambre numéro 666",
+          "Hollywood Tower Hotel",
+          "La tour de terreur",
+          "Une chambre sans minibar"
+        ],
+        "Puzzle1": [
+          "Ascenceur de maintenance",
+          "Entrée de la zone sombre",
+          "Pourquoi est-ce que c'est cassé?",
+          "Ne le faites pas tomber !",
+          "Pas de dragonne de sécurité !"
+        ],
+        "Puzzle2": [
+          "Carte mère du PC",
+          "Ca peut faire marcher DOOM?",
+          "PCB Board",
+          "La carte de capture du streamer",
+          "Quand tu n'as pas de clé"
+        ]
+      }
     }
   }
 }

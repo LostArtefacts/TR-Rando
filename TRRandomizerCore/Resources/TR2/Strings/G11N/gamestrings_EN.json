@@ -1005,6 +1005,138 @@
           "Excalibur's Little Brother"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Skidoo Adventure 2",
+        "Skidoo Mania",
+        "In The Deep End",
+        "So Many Snowballs",
+        "Yes, It Is Very Cold"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Break Room Key",
+          "Key Dipped In Gold",
+          "Staff Lounge Key",
+          "A Key To A Tomb...I mean Room",
+          "Shaft 'B' Key"
+        ],
+        "Key2": [
+          "A key to a lever",
+          "Key - door - lever - door",
+          "Guardroom Key",
+          "Key to open something",
+          "Possibly opens a door"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "That One Dark Room",
+        "Surprise Pushblock Attack",
+        "No Skidoos Indoors",
+        "Pyrite",
+        "DJ Fulls Gold"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 of 2",
+          "2 of 2",
+          "Winstons Credit Card",
+          "Mastercard",
+          "Visa Card"
+        ],
+        "Key4": [
+          "1 of 2",
+          "2 of 2",
+          "Evil Guys Credit Card",
+          "Cant pay with this!",
+          "Credit card got declined"
+        ],
+        "Puzzle1": [
+          "SEGA Saturn Tomb Raider 2 port",
+          "Spyro or Crash Bandicoot?",
+          "The Sims 1",
+          "Who Opened Their PlayStation?",
+          "3dfx Graphics Card"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Cheese Fountains",
+        "Don't Take A Souvenir",
+        "Spandau Ballet Song",
+        "Gold Water Swim",
+        "Streets of Gold"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Greenland Demon",
+          "Mask of the Bear",
+          "Beauty Mask",
+          "Make Up Mask",
+          "Face of Gold"
+        ],
+        "Puzzle2": [
+          "Chicken Nugget",
+          "Not worth much",
+          "Fake Gold Nugget",
+          "Uhh.... shiny!",
+          "Tamatoa wants it!"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "No Downstait Song",
+        "Yetis in Goldtown",
+        "Yetis and a Chicken",
+        "Blinding Secret",
+        "Some Gold Is Safe"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Greenland Demon",
+          "Mask of the Bear",
+          "Beauty Mask",
+          "Make Up Mask",
+          "Face of Gold"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva Las Lara",
+        "Big Bird's Big Show",
+        "Jurassic Park: Las Vegas",
+        "Chickens and Dinos",
+        "Weird Dreams"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Don't Lose This",
+          "Room No. 666",
+          "Hollywood Tower Hotel",
+          "Tower of Terror",
+          "Room With No Minibar"
+        ],
+        "Puzzle1": [
+          "Maintenance Elevator",
+          "Twilight Zone Entry",
+          "Why Is This Broken",
+          "Please dont drop!",
+          "No freefall tower attached!"
+        ],
+        "Puzzle2": [
+          "PC Motherboard",
+          "Can This Run Doom?",
+          "PCB Board",
+          "Streamer Capture Card",
+          "When You Don't Have A Key"
+        ]
+      }
     }
   }
 }

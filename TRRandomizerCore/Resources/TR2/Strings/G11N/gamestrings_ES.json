@@ -1,0 +1,138 @@
+{
+  "GlobalStrings": {},
+  "ObjectStrings": {},
+  "LevelStrings": {
+    "LEVEL1.TR2": {
+      "Names": [
+        "Aventura del Skidoo 2",
+        "Locura de Skidoo",
+        "En lo más profundo",
+        "Son demasiadas bolas de nieve",
+        "Sí, hace mucho frío"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Llave de la sala de descanso",
+          "Llave sumergida en oro",
+          "Llave de la sala del personal",
+          "Llave de una tumba... quiero decir, habitación",
+          "Llave del eje B"
+        ],
+        "Key2": [
+          "Una llave para una palanca",
+          "Llave - puerta - palanca - puerta",
+          "Llave de la sala del guardia",
+          "Llave para abrir algo",
+          "Puede que abra una puerta"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Esa habitación oscura",
+        "Ataque sorpresa de bloque",
+        "No hay skidoos en el interior",
+        "Pirita",
+        "DJ Fulls Gold"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 de 2",
+          "2 de 2",
+          "Tarjeta de crédito de Winston",
+          "Mastercard",
+          "Tarjeta Visa"
+        ],
+        "Key4": [
+          "1 de 2",
+          "2 de 2",
+          "Tarjeta de crédito de los tipos malos",
+          "No puedo pagar con esto!",
+          "Tarjeta de crédito rechazada"
+        ],
+        "Puzzle1": [
+          "Port de TR2 para la SEGA Saturn",
+          "Spyro o Crash!?",
+          "Los Sims 1",
+          "¿Quién abrió su PlayStation?",
+          "Tarjeta gráfica 3dfx"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Fuentes de queso",
+        "No cojas un regalo para recuerdo",
+        "Canción de Spandau Ballet",
+        "Buceo en agua dorada",
+        "Calles de Oro"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Demonio de Groenlandia",
+          "La máscara del oso",
+          "Máscara preciosa",
+          "Máscara de maquillaje",
+          "Cara de oro"
+        ],
+        "Puzzle2": [
+          "Pepita de pollo",
+          "No vale mucho",
+          "Pepita de oro falsa",
+          "Ohh... brillante!",
+          "Tamatoa lo quiere!"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "No a la canción de Downstait",
+        "Yetis en Goldtown",
+        "Yetis en un pollo",
+        "Secreto deslumbrante",
+        "Algo de oro está a salvo"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Demonio de Groenlandia",
+          "Máscara del oso",
+          "Máscara preciosa",
+          "Máscara de maquillaje",
+          "Cara de oro"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva la Lara",
+        "El gran show del gran pájaro",
+        "Parque Jurásico: Las Vegas",
+        "Pollos y dinosaurios",
+        "Sueños extraños"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "No pierdas esto",
+          "Habitación número 666",
+          "Hotel de la Torre de Hollywood",
+          "Torre del terror",
+          "Habitación sin minibar"
+        ],
+        "Puzzle1": [
+          "Ascensor de mantenimiento",
+          "Entrada a la zona del crepúsculo",
+          "¿Por qué está esto roto?",
+          "Por favor, no te caigas",
+          "Torre de caída libre no adjunta"
+        ],
+        "Puzzle2": [
+          "Placa base de ordenador",
+          "¿Esto puede correr Doom?",
+          "Circuito impreso",
+          "Capturadora de streamer",
+          "Cuando no dispones de una llave"
+        ]
+      }
+    }
+  }
+}

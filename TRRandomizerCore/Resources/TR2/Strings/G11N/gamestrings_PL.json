@@ -991,6 +991,138 @@
           "Braciszek Excalibura O.o"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Święta wojna",
+        "Za dużo skuretów śnieżnych",
+        "Wycieczka szkolna na Syberię",
+        "Wojna śnieżkowa",
+        "Lody Algida"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Klucz - Wykluczenie",
+          "Klucz na przerwę, klucz na KitKat",
+          "Klucz do pokoju nauczycielskiego",
+          "Klucz się klucz, bo nauka do potęgi ucz",
+          "Był sobie klucz..."
+        ],
+        "Key2": [
+          "Klucz 2 - Odkluczenie",
+          "Klucz do drzwi z wajchą",
+          "Klucz drugiej szansy",
+          "Klucz do serca",
+          "Otwarta osobowość"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "FeS2",
+        "Szklarska Poręba, sztolnie pirytu",
+        "Powrót napalmowców",
+        "Stalingrad Zdrój",
+        "Full's Gold"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Karta Lenina",
+          "Karta bolszewika",
+          "Żółte papiery",
+          "Karta Lidla",
+          "POLOkarta"
+        ],
+        "Key4": [
+          "Karta Stalina",
+          "Karta czerwonoarmisty",
+          "Karta Biedronki",
+          "Delikarta",
+          "Tesco ClubCard"
+        ],
+        "Puzzle1": [
+          "RTX",
+          "Rdzeń CUDA",
+          "8 kilo RAMu",
+          "To na złom?",
+          "Płyta główna"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Rzeka miodu",
+        "Rosół bez makaronu",
+        "Złoty środek",
+        "System jaskiń Mylna-Raptawicka",
+        "Miasto Inuitów"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Zbieram takie ryje",
+          "Gęba z Ferdydyrke",
+          "Odzyskana stracona twarz",
+          "Przyzywacz kurczaka",
+          "Nie używać"
+        ],
+        "Puzzle2": [
+          "W końcu go widać",
+          "Dynamiczny kryształ",
+          "Nuggetsy z kurczaka",
+          "Nie mogłaby z tym pływać",
+          "1 złoty"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Kurestwo",
+        "Zakazany las",
+        "Puszcza Knyszyńska",
+        "Las (ale jeszcze nie Vegas)",
+        "Drzwi do lasu"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Zbieram takie ryje",
+          "Gęba z Ferdydyrke",
+          "Odzyskana stracona twarz",
+          "Przyzywacz kurczaka",
+          "Nie używać"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Koszmar w Adobe Premiere",
+        "Kac Wawa",
+        "Park Jurajski: Las Vegas",
+        "Kac Vegas",
+        "Dino, najbliżej Ciebie"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Nie zgub tego!",
+          "Klucz Winstona",
+          "Klucz z odpływu",
+          "Kolejny klucz...",
+          "Klucznik zamku"
+        ],
+        "Puzzle1": [
+          "Złącze typu 'Ślimak'",
+          "Wejdź na wyższy poziom",
+          "Winda na rozbieg",
+          "Złom",
+          "Tego nie było w poradniku"
+        ],
+        "Puzzle2": [
+          "Gwiezdny Klucz",
+          "Klucz do miasta",
+          "Klucz od wyjścia",
+          "Klucz od hotelu",
+          "Klucz do bosfajtu"
+        ]
+      }
     }
   }
 }

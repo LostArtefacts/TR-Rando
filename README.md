@@ -80,15 +80,16 @@ For keeping track of levels while you play, check out the [TRRandoTracker](https
 * Ralodosmovo - For providing an assortment of custom textures, and lots of ideas for the rando.
 * Lilly Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, mirrored levels, and providing great continuous feedback. Lilly was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
     * Croatian - Erackk
-    * Czech - Sabatu
-    * Dutch - BeardedBogle, Dokus, LordMeShine, & Dutchyraider
-    * Finnish - Riku, mawia, & Footi
-    * French - Hedteur, LeonHeart, & Towandaa
-    * German - Lilly Jericho & Radgryd
-    * Italian - Diego, Nanaki, & Warpy
+    * Czech - Sabatu, Dronespencer
+    * Dutch - BeardedBogle, Dokus, LordMeShine, Dutchyraider
+    * Finnish - Riku, mawia, Footi, stellarCaptain
+    * French - Hedteur, LeonHeart, Towandaa
+    * German - Lilly Jericho, Radgryd
+    * Italian - Diego, Nanaki, Warpy
     * Japanese - ChiburuTV
-    * Polish - DJ_Full, NaBu, & Nickelony
-    * Portuguese - Fuse & Jumica
-    * Russian - Ayiluy
-    * Spanish - liveshh
-    * Swedish - Pikkufighter, Woof Smit, & Zahnac
+    * Norwegian - BodillaBee
+    * Polish - DJ_Full, NaBu, Nickelony
+    * Portuguese - Fuse, Jumica
+    * Russian - Ayiluy, Lwmte
+    * Spanish - liveshh, MrJavi94
+    * Swedish - Pikkufighter, Woof Smit, Zahnac, Cheapguacamole

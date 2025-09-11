@@ -994,6 +994,138 @@
           "Irmãzinha da Excalibur O.o"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Aventura Skidoo 2",
+        "Skidoo Mania",
+        "No fundo do poço",
+        "Tantas bolas de neve",
+        "Sim, está muito frio"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Chave da sala de descanso",
+          "Chave mergulhada em ouro",
+          "Chave da sala dos funcionários",
+          "Uma Chave para um Túmulo...Quero dizer, Quarto",
+          "Chave do eixo 'B'"
+        ],
+        "Key2": [
+          "Uma chave para uma alavanca",
+          "Chave - porta - alavanca - porta",
+          "Chave da Sala dos Guardas",
+          "Chave para abrir algo",
+          "Possivelmente abre uma porta"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Aquele quarto escuro",
+        "Ataque de bloqueio surpresa",
+        "Proibido Skidoos em ambientes fechados",
+        "Pirita",
+        "DJ Fulls Gold"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 de 2",
+          "2 de 2",
+          "Cartão de Crédito Winstons",
+          "Mastercard",
+          "Visa Card"
+        ],
+        "Key4": [
+          "1 de 2",
+          "2 de 2",
+          "Cartão de Crédito dos Maus",
+          "Não dá para pagar com isto!",
+          "Cartão de crédito foi recusado"
+        ],
+        "Puzzle1": [
+          "Porta SEGA Saturn Tomb Raider 2",
+          "Spyro ou Crash Bandicoot?",
+          "Sims 1",
+          "Quem abriu a PlayStation deles?",
+          "3dfx Placa Gráfica"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Fontes de Queijo",
+        "Não Leve Lembranças",
+        "Spandau Ballet Song",
+        "Natação em Água Dourada",
+        "Ruas de Ouro"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Demônio da Groenlândia",
+          "Máscara do Urso",
+          "Máscara de beleza",
+          "Máscara de maquiagem",
+          "Cara de Ouro"
+        ],
+        "Puzzle2": [
+          "Chicken Nugget",
+          "Não vale muito",
+          "Pepita de ouro falsa",
+          "Ohh... brilhante!",
+          "Tamatoa quer!"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Nenhuma música lá embaixo",
+        "Yetis na Cidade do Ouro",
+        "Yetis e uma galinha",
+        "Segredo Cegante",
+        "Um pouco de ouro é seguro"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Demônio da Groenlândia",
+          "Máscara do Urso",
+          "Máscara de beleza",
+          "Máscara de maquiagem",
+          "Cara de Ouro"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva La Lara",
+        "O Grande Show do Pássaro",
+        "Parque Jurásico: Las Vegas",
+        "Galinhas e Dinossauros",
+        "Sonhos estranhos"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Não perca isto",
+          "Quarto nº 666",
+          "Hotel Torre Hollywood",
+          "Torre do Terror",
+          "Quarto sem minbar"
+        ],
+        "Puzzle1": [
+          "Elevador de manutenção",
+          "Entrada da Zona Crepuscular",
+          "Porque isto está quebrado?",
+          "Por favor, não caias!",
+          "Nenhuma torre de queda livre anexada!"
+        ],
+        "Puzzle2": [
+          "Placa-mãe do PC",
+          "Isto pode rodar Doom?",
+          "Placa PCB",
+          "Placa de captura",
+          "Quando você não tem uma chave"
+        ]
+      }
     }
   }
 }

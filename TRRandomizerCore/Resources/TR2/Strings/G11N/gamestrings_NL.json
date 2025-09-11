@@ -992,6 +992,138 @@
           "Excalibur's kleine broertje"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Skidoo Avontuur 2",
+        "Skidoo Mania",
+        "In Het Diepe Einde",
+        "Zoveel Sneeuwballen",
+        "Ja, Het Is Erg Koud"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Sleutel Van De Pauze Kamer",
+          "Sleutel Gedoopt In Goud",
+          "Sleutel Voor Personeelslounge",
+          "Een Sleutel tot een Tombe... Ik Bedoel Kamer",
+          "Schacht 'B' Sleutel"
+        ],
+        "Key2": [
+          "Een Sleutel voor een hefboom",
+          "Sleutel - deur - hefboom - deur",
+          "Wachtkamer sleutel",
+          "Sleutel om iets te openen",
+          "Opent mogelijk een deur"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Die ene donkere kamer",
+        "Verrassingsduwblokaanval",
+        "Geen sneeuwscooters binnen",
+        "Pyriet",
+        "DJ Fulls Goud"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 van de 2",
+          "2 van de 2",
+          "Winstons Creditcard",
+          "Meesterkaart",
+          "Visa Kaart"
+        ],
+        "Key4": [
+          "1 van de 2",
+          "2 van de 2",
+          "Slechte man's credit card",
+          "Kan hier niet mee betalen!",
+          "Creditkaart werd geweigerd"
+        ],
+        "Puzzle1": [
+          "SEGA Saturn Tomb Raider 2-poort",
+          "Spyro of Crash Bandicoot?",
+          "De Sims 1",
+          "Wie heeft zijn PlayStation geopend?",
+          "3dfx grafische kaart"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Kaasfonteinen",
+        "Neem geen souvenir mee",
+        "Spandau Balletlied",
+        "Goudwaterzwemmen",
+        "Straten van goud"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Groenlandse demon",
+          "Masker van de beer",
+          "Schoonheidsmasker",
+          "Make-up masker",
+          "Gezicht van goud"
+        ],
+        "Puzzle2": [
+          "Kipnuggets",
+          "Niet veel waard",
+          "Nep goudklompje",
+          "Uhh.... glanzend!",
+          "Tamatoa wil het!"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Geen Downstait-lied",
+        "Yeti's in Goldtown",
+        "Yeti's en een kip",
+        "Verblindend geheim",
+        "Een beetje goud is veilig"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Groenlandse demon",
+          "Masker van de beer",
+          "Schoonheidsmasker",
+          "Make-up masker",
+          "Gezicht van goud"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Leve Las Lara",
+        "Grote Vogel's Grote Show",
+        "Jurassic Park: Las Vegas",
+        "Kippen en dino's",
+        "Vreemde dromen"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Verlies dit niet",
+          "Kamer nr. 666",
+          "Hollywood Toren Hotel",
+          "Toren van Terreur",
+          "Kamer zonder minibar"
+        ],
+        "Puzzle1": [
+          "Onderhoud Lift",
+          "Ingang schemerzone",
+          "Waarom is dit kapot",
+          "Val Alsjeblieft niet!",
+          "Geen vrijevaltoren bevestigd!"
+        ],
+        "Puzzle2": [
+          "PC-moederbord",
+          "Kan dit DOOM spelen?",
+          "Printplaat",
+          "Streamer Capture-kaart",
+          "Als je geen sleutel hebt"
+        ]
+      }
     }
   }
 }

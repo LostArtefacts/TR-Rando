@@ -992,6 +992,138 @@
           "Excaliburs kleiner Bruder O.o"
         ]
       }
+    },
+    "LEVEL1.TR2": {
+      "Names": [
+        "Schneemobil Abenteuer 2",
+        "Schneemobil Mania",
+        "Am tiefen Ende",
+        "So viele Schneebälle",
+        "Ja, es ist sehr kalt hier"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Pausenraum Schlüssel",
+          "Schlüssel in Gold getaucht",
+          "Mitarbeiter Lounge Schlüssel ",
+          "Ein Schlüssel zu einem Grab",
+          "Schacht 'B' Schlüssel"
+        ],
+        "Key2": [
+          "Ein Schlüssel zu einem Schalter ",
+          "Schlüssel - Tür - Schalter",
+          "Aufpassraum Schlüssel",
+          "Schlüssel der etwas öffnet",
+          "Öffnet vielleicht eine Tür"
+        ]
+      }
+    },
+    "LEVEL2.TR2": {
+      "Names": [
+        "Der eine finstere Raum",
+        "Überraschungsblock schieben ",
+        "Skidoos drinnen verboten",
+        "Katzengold",
+        "DJ Fulls Gold"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "1 von 2",
+          "2von 2",
+          "Winstons Kreditkarte",
+          "Mastercard",
+          "Visa Card"
+        ],
+        "Key4": [
+          "1 von 2",
+          "2 von 2",
+          "Kreditkarte des bösen Typen",
+          "Hiermit kann man nichts bezahlen!",
+          "Kreditkarte wurde abgelehnt!"
+        ],
+        "Puzzle1": [
+          "SEGA Saturn Tomb Raider 2 Port",
+          "Spyro oder Crash Bandicoot?",
+          "Die Sims 1",
+          "Wer hat die Playstation angemacht?",
+          "3dfx Grafikkarte"
+        ]
+      }
+    },
+    "LEVEL3.TR2": {
+      "Names": [
+        "Käsefondue",
+        "Keine Souvenirs mitnehmen!",
+        "Spandau Ballet Song",
+        "Im Goldwasser schwimmen ",
+        "Goldene Straßen"
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grünland Dämon",
+          "Maske des Bären",
+          "Schönheitsmaske",
+          "Make Up Maske",
+          "Gesicht aus Gold"
+        ],
+        "Puzzle2": [
+          "Chicken Nugget",
+          "Nicht viel wert",
+          "Fake Gold Nugget",
+          "Uhhh... glänzend!",
+          "Tamatoa verlangt dies!"
+        ]
+      }
+    },
+    "LEVEL4.TR2": {
+      "Names": [
+        "Kein Downstait Song",
+        "Yetis in der Goldstadt!",
+        "Yetis und Hühnchen",
+        "Blendendes Secret",
+        "Manches Gold ist sicher "
+      ],
+      "KeyItems": {
+        "Puzzle1": [
+          "Grünland Dämon",
+          "Maske des Bären",
+          "Schönheitsmaske",
+          "Make Up Maske",
+          "Gesicht aus Gold"
+        ]
+      }
+    },
+    "LEVEL5.TR2": {
+      "Names": [
+        "Viva Las Lara",
+        "Des großen Vogels große Show ",
+        "Jurassic Park: Las Vegas",
+        "Hühnchen und Dinos",
+        "Wilde Träume"
+      ],
+      "KeyItems": {
+        "Key1": [
+          "Nicht verlieren!",
+          "Zimmer Nummer 666",
+          "Hollywood Tower Hotel",
+          "Tower of Terror",
+          "Raum ohne Spiegel"
+        ],
+        "Puzzle1": [
+          "Wartungsaufzugsschlüssel",
+          "Twilight Zonen Eingang",
+          "Warum ist es kaputt?",
+          "Bitte nicht fallen!",
+          "Kein Freefall Tower"
+        ],
+        "Puzzle2": [
+          "PC Motherboard",
+          "Kann ich damit DOOM spielen?",
+          "PCB Board",
+          "Streamer Capture Card",
+          "Wenn du keinen Schlüssel hast"
+        ]
+      }
     }
   }
 }
