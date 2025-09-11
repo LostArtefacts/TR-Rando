@@ -42,7 +42,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             ItemFactory = ItemFactory,
             Generator = _generator,
             GameLevels = Levels.Select(l => l.LevelFileBaseName),
-            DragonLevels = TR2LevelNames.AsList,
+            DragonLevels = TR2LevelNames.AsListWithGold,
         };
         _allocator.Initialise();
 

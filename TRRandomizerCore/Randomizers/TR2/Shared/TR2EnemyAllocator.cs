@@ -112,7 +112,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             .FindAll(e => TR2EnemyUtilities.IsEnemySupported(levelName, e, difficulty, Settings.ProtectMonks, Settings.IsRemastered));
 
         if (Settings.OneEnemyMode
-            || Settings.IncludedEnemies.Count < newTypes.Capacity
+            || (Settings.UseEnemyExclusions && Settings.IncludedEnemies.Count < newTypes.Capacity)
             || Settings.DragonSpawnType == DragonSpawnType.Minimum
             || !DragonLevels.Contains(levelName))
         {
