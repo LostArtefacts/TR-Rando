@@ -26,7 +26,7 @@ public class GameStringAllocator
         }
         
         _g11n = new(version);
-        _encodingRequired = script is not TRRScriptEditor;
+        _encodingRequired = script is TR3ScriptEditor;
 
         if (!Settings.GameStringLanguage.IsHybrid)
         {
@@ -45,6 +45,12 @@ public class GameStringAllocator
         foreach (AbstractTRScriptedLevel level in script.EnabledScriptedLevels)
         {
             ProcessLevelStrings(level);
+        }
+
+        if (script.Script is TRXScript trxScript)
+        {
+            // We don't write to all possible TRX language files, so just hide the UI option.
+            trxScript.EnforceConfig("language", "en", true);
         }
 
         return globalStrings;

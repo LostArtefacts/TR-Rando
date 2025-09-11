@@ -8,7 +8,8 @@ public class Language : IComparable<Language>
     public string Name { get; set; }
     public string Tag { get; set; }
 
-    public bool IsHybrid => Tag.ToUpper().Equals(HybridTag);
+    public bool IsHybrid => string.Equals(Tag, HybridTag, StringComparison.InvariantCultureIgnoreCase);
+    public bool IsDefault => string.Equals(Tag, DefaultTag, StringComparison.InvariantCultureIgnoreCase);
 
     public int CompareTo(Language other)
     {
