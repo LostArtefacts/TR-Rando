@@ -1,14 +1,17 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.2...master) - xxxx-xx-xx
 - added support for TR1X 4.14 (now the minimum version supported) (#803)
 - added support TR2X (#821)
+- added support for The Golden Mask in TR2X and playing in combined mode (see Level Sequencing options) (#59)
 - added Spanish translations for TR1 (#800)
 - added an option to include extra pickups in certain levels in TR2X (#832)
 - added pickup items to Lara's Home for item randomization in TR2X (#832)
+- added a new outfit for Lara in TR2X (#59)
 - improved enemy randomization for TR2X (#830)
     - added an option to clone enemies
     - added an option to replace required enemies (bird monster in Ice Palace, dragon in Dragon's Lair)
     - added support for skidoo drivers in Home Sweet Home
     - added support for more enemy variety in each level as standard
+    - added support for all enemy variants from The Golden Mask in the base game levels and vice-versa
     - changed all enemy types (except eels) to have the ability to drop items
     - removed restrictions on enemy combinations when the dragon is present
     - removed skidoo driver and monk limits
