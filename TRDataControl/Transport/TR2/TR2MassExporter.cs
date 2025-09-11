@@ -77,7 +77,7 @@ public class TR2MassExporter : TRMassExporter<TR2Level, TR2Type, TR2SFX, TR2Blob
         },
         [TR2LevelNames.FLOATER] = new()
         {
-            TR2Type.Knifethrower, TR2Type.XianGuardSword, TR2Type.XianGuardSpear
+            TR2Type.Knifethrower, TR2Type.XianGuardSword, TR2Type.XianGuardSpear, TR2Type.Drawbridge,
         },
         [TR2LevelNames.LAIR] = new()
         {

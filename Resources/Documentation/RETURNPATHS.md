@@ -48,6 +48,11 @@ Following are details on the return paths that are available. See `Global Settin
 | Floating Islands | _Not required_ |
 | Dragon's Lair | Slopes adjusted in room 2 to allow exiting the main arena. |
 | Home Sweet Home | _Not required_ |
+| The Cold War | Link room added between rooms 37 and 64. |
+| Fool's Gold | _Not required_ |
+| Furnace of the Gods | Ladder added to room 8 for room 25; drawbridge added in room 42. |
+| Kingdom | _Not required_ |
+| Nightmare in Vegas | _Not required_ |
 
 ## TR3
 | Level | Description |

@@ -10,8 +10,8 @@ public class EMCreateTextureFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        TR1TexturePacker packer = new(level);
-        List<TRObjectTexture> textures = new(level.ObjectTextures);
+        var data = new TR1DataImporter(_isCommunityPatch);
+        var packer = new TR1TexturePacker(level, data.Data.TextureTileLimit);
 
         List<EMTextureMap> mapping = BuildAndPackTextures(packer, level.ObjectTextures);
         mapping.ForEach(m => new EMRefaceFunction
@@ -22,8 +22,8 @@ public class EMCreateTextureFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        TR2TexturePacker packer = new(level);
-        List<TRObjectTexture> textures = new(level.ObjectTextures);
+        var data = new TR2DataImporter(_isCommunityPatch);
+        var packer = new TR2TexturePacker(level, data.Data.TextureTileLimit);
 
         List<EMTextureMap> mapping = BuildAndPackTextures(packer, level.ObjectTextures);
         mapping.ForEach(m => new EMRefaceFunction
