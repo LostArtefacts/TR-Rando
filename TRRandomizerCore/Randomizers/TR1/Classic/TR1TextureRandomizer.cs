@@ -380,6 +380,11 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
                                 data.ModelColours[type] = _outer.GetWireframeVariant();
                             }
                         }
+
+                        // TODO: handle properly in #797
+                        var injections = level.Script.Injections.ToList();
+                        injections.RemoveAll(i => i.Contains("_skybox", StringComparison.InvariantCultureIgnoreCase));
+                        level.Script.Injections = [.. injections];
                     }
                 }
                 else
