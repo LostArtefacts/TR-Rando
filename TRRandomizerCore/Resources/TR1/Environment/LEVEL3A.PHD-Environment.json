@@ -59,7 +59,7 @@
       ]
     },
     {
-      "Comments": "Add the missing underwater texture when entering the tomb and at the top of the waterfall.",
+      "Comments": "Add missing faces.",
       "EMType": 26,
       "Tags": [
         10
@@ -100,6 +100,26 @@
               74
             ],
             "Texture": 52
+          }
+        ],
+        "25": [
+          {
+            "Type": 3,
+            "Vertices": [
+              224,
+              225,
+              206
+            ],
+            "Texture": 21
+          },
+          {
+            "Type": 3,
+            "Vertices": [
+              210,
+              207,
+              225
+            ],
+            "Texture": 21
           }
         ]
       }
