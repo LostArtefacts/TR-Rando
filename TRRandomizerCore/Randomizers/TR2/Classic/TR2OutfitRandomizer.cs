@@ -337,7 +337,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 laraModel.Meshes[0].CopyInto(laraMiscModel.Meshes[0]);
             }
 
-            TR2XFixLaraTask.FixHands(level.Data, lara);
+            TR2XFixLaraTask.FixHands(level.Data);
 
             if (_outer.Settings.RemoveRobeDagger)
             {
@@ -370,6 +370,8 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                             {
                                 m.TexturedRectangles.Clear();
                                 m.TexturedTriangles.Clear();
+                                m.ColouredRectangles.Clear();
+                                m.ColouredTriangles.Clear();
                             });
                     }
                 }

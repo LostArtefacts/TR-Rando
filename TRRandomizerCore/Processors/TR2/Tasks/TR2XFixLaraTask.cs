@@ -8,11 +8,7 @@ namespace TRRandomizerCore.Processors.TR2.Tasks;
 
 public class TR2XFixLaraTask : ITR2ProcessorTask
 {
-    private static readonly List<TR2Type> _handFixLaraTypes =
-    [
-        TR2Type.LaraHome,
-        TR2Type.LaraVegas,
-    ];
+    private static readonly int[] _handMeshIds = [10, 13];
 
     private static readonly List<TR2Type> _handFixModels =
     [
@@ -43,8 +39,6 @@ public class TR2XFixLaraTask : ITR2ProcessorTask
 
     private static void FixHSHLara(TR2CombinedLevel level)
     {
-        FixHands(level.Data, TR2Type.LaraHome);
-
         // Clear the dagger from Lara's hips in the misc anim set
         var hips = level.Data.Models[TR2Type.Lara].Meshes[0].Clone();
         hips.TexturedRectangles.RemoveAll(f => f.Vertices.All(v => v > 19));
@@ -64,18 +58,24 @@ public class TR2XFixLaraTask : ITR2ProcessorTask
         };
         importer.TextureMonitor = TextureMonitor.CreateMonitor(level.Name, importer.TypesToImport);
         importer.Import();
+
+        FixHands(level.Data);
     }
 
-    public static void FixHands(TR2Level level, TR2Type laraAlias)
+    public static void FixHands(TR2Level level)
     {
-        if (!_handFixLaraTypes.Contains(laraAlias))
-        {
-            return;
-        }
-
         // Copy the faces from Lara's hands into all other Lara models, avoiding any dummy meshes.
         var lara = level.Models[TR2Type.Lara];
-        var meshIds = new[] { 10, 13 };
+        var dummyMesh = lara.Meshes[0];
+
+        var faceListGetters = new Func<TRMesh, List<TRMeshFace>>[]
+        {
+            m => m.TexturedRectangles,
+            m => m.TexturedTriangles,
+            m => m.ColouredRectangles,
+            m => m.ColouredTriangles,
+        };
+
         foreach (var type in _handFixModels)
         {
             if (!level.Models.TryGetValue(type, out var model))
@@ -83,20 +83,22 @@ public class TR2XFixLaraTask : ITR2ProcessorTask
                 continue;
             }
 
-            foreach (var meshIdx in meshIds)
+            foreach (var meshIdx in _handMeshIds)
             {
                 var mesh = model.Meshes[meshIdx];
-                if (mesh == lara.Meshes[0])
+                if (mesh == dummyMesh)
                 {
                     continue;
                 }
 
-                mesh.TexturedRectangles.RemoveAll(f => f.Vertices.All(v => v < 8));
-                mesh.TexturedTriangles.RemoveAll(f => f.Vertices.All(v => v < 8));
-                mesh.TexturedRectangles.AddRange(lara.Meshes[meshIdx].TexturedRectangles
-                    .Where(f => f.Vertices.All(v => v < 8)));
-                mesh.TexturedTriangles.AddRange(lara.Meshes[meshIdx].TexturedTriangles
-                    .Where(f => f.Vertices.All(v => v < 8)));
+                foreach (var getFaces in faceListGetters)
+                {
+                    var targetFaces = getFaces(mesh);
+                    var sourceFaces = getFaces(lara.Meshes[meshIdx]);
+
+                    targetFaces.RemoveAll(f => f.Vertices.All(v => v < 8));
+                    targetFaces.AddRange(sourceFaces.Where(f => f.Vertices.All(v => v < 8)));
+                }
             }
         }
     }
