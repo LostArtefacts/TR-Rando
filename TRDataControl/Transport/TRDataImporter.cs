@@ -408,62 +408,90 @@ public abstract class TRDataImporter<L, T, S, B> : TRDataTransport<L, T, S, B>
             }
         }
 
-        Dictionary<T, List<PositionedTexture>> texturePositions = new();
-
+        var texturePositions = new Dictionary<T, List<PositionedTexture>>();
         foreach (B blob in blobs)
         {
             if (blob.IsDependencyOnly)
+            {
                 continue;
-
-            Dictionary<int, int> remap = new();
-            foreach (TRTextileRegion region in blob.Textures)
-            {
-                foreach (int oldIndex in globalRemap[region.ID].Keys)
-                {
-                    remap[oldIndex] = globalRemap[region.ID][oldIndex];
-                }
             }
 
-            List<TRMesh> meshes = new();
-            if (blob.Model != null)
+            if (blob.Type == TRBlobType.Sprite)
             {
-                meshes.AddRange(blob.Model.Meshes);
+                MapSpriteTextures(blob, texturePositions);
             }
-            if (blob.StaticMesh != null)
+            else
             {
-                meshes.Add(blob.StaticMesh.Mesh);
-            }
-
-            IEnumerable<TRMeshFace> faces = meshes
-                .Where(m => m != null)
-                .SelectMany(m => m.TexturedFaces);
-            foreach (TRMeshFace face in faces)
-            {
-                face.Texture = (ushort)remap[face.Texture];
-            }
-
-            faces = meshes
-                .Where(m => m != null)
-                .SelectMany(m => m.ColouredFaces);
-            foreach (TRMeshFace face in faces)
-            {
-                face.Texture = ImportColour(blob, face.Texture);
-            }
-
-            texturePositions[blob.Alias] = new();
-            foreach (var (oldIndex, newIndex) in remap)
-            {
-                TRObjectTexture texture = Level.ObjectTextures[newIndex];
-                texturePositions[blob.Alias].Add(new()
-                {
-                    OriginalIndex = oldIndex,
-                    TileIndex = texture.Atlas,
-                    Position = texture.Position
-                });
+                MapObjectTextures(blob, globalRemap, texturePositions);
             }
         }
 
         TextureMonitor?.OnTexturesPositioned(texturePositions);
+    }
+
+    private static void MapSpriteTextures(B blob, Dictionary<T, List<PositionedTexture>> texturePositions)
+    {
+        texturePositions[blob.Alias] = [];
+        foreach (var segment in blob.Textures.SelectMany(t => t.Segments))
+        {
+            texturePositions[blob.Alias].Add(new()
+            {
+                OriginalIndex = segment.Index,
+                TileIndex = segment.Atlas,
+                Position = segment.Position,
+            });
+        }
+    }
+
+    private void MapObjectTextures(B blob,Dictionary<string, Dictionary<int, int>> globalRemap,
+        Dictionary<T, List<PositionedTexture>> texturePositions)
+    {
+        var remap = new Dictionary<int, int>();
+        foreach (var region in blob.Textures)
+        {
+            foreach (int oldIndex in globalRemap[region.ID].Keys)
+            {
+                remap[oldIndex] = globalRemap[region.ID][oldIndex];
+            }
+        }
+
+        var meshes = new List<TRMesh>();
+        if (blob.Model != null)
+        {
+            meshes.AddRange(blob.Model.Meshes);
+        }
+        if (blob.StaticMesh != null)
+        {
+            meshes.Add(blob.StaticMesh.Mesh);
+        }
+
+        var faces = meshes
+            .Where(m => m != null)
+            .SelectMany(m => m.TexturedFaces);
+        foreach (var face in faces)
+        {
+            face.Texture = (ushort)remap[face.Texture];
+        }
+
+        faces = meshes
+            .Where(m => m != null)
+            .SelectMany(m => m.ColouredFaces);
+        foreach (var face in faces)
+        {
+            face.Texture = ImportColour(blob, face.Texture);
+        }
+
+        texturePositions[blob.Alias] = [];
+        foreach (var (oldIndex, newIndex) in remap)
+        {
+            var texture = Level.ObjectTextures[newIndex];
+            texturePositions[blob.Alias].Add(new()
+            {
+                OriginalIndex = oldIndex,
+                TileIndex = texture.Atlas,
+                Position = texture.Position,
+            });
+        }
     }
 
     protected void ImportData(List<B> blobs, TRMesh oldDummyMesh)
