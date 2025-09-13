@@ -21,6 +21,7 @@
 - fixed enemy 211 in Area 51 potentially being untriggerable, and hence a potential softlock if carrying a key item (#816)
 - fixed an unreachable secret in TR3R Madubu Gorge (#819)
 - fixed uncontrolled SFX in TR2 and TR3 causing an error message during randomization (#827)
+- fixed cloned enemies in TR1X being left behind if a room is flooded and the original enemy is moved on land (#842)
 
 ## [V1.10.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.1...V1.10.2) - 2024-12-06
 - added support for TR1X 4.6 (#796)
