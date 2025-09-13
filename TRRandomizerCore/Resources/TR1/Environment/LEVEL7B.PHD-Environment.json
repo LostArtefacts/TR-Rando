@@ -30,6 +30,20 @@
       "Tags": [
         10
       ],
+      "Modifications": [
+        {
+          "RoomNumber": 104,
+          "FaceIndex": 64,
+          "VertexChanges": {
+            "0": {
+              "Y": 256
+            },
+            "3": {
+              "Y": -768
+            }
+          }
+        }
+      ],
       "Rotations": [
         {
           "RoomNumber": 89,
