@@ -10,85 +10,65 @@ public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        TR1Entity enemy = level.Entities[EntityIndex];
-        TR1Type enemyEntity = enemy.TypeID;
-        bool isWaterEnemy = TR1TypeUtilities.IsWaterLandCreatureEquivalent(enemyEntity);
-
-        // If the index doesn't point to an enemy or if we only want to move land creatures
-        // but the enemy is a water creature (and vice-versa), bail out.
-        if (!TR1TypeUtilities.IsEnemyType(enemyEntity) || (IfLandCreature && isWaterEnemy) || (!IfLandCreature && !isWaterEnemy))
+        var sectorEnemies = GetSectorEnemies<TR1Entity, TR1Type>(level.Entities);
+        if (ShouldMoveEnemies<TR1Entity, TR1Type>(sectorEnemies, level.Entities,
+            TR1TypeUtilities.IsEnemyType, TR1TypeUtilities.IsWaterCreature))
         {
-            return;
+            sectorEnemies.ForEach(e => RepositionTriggerable(e, level));
         }
-
-        // If the level has water creatures available, and we want to switch it, do so.
-        if (AttemptWaterCreature)
-        {
-            TR1Entity waterEnemy = level.Entities.Find(e => TR1TypeUtilities.IsWaterCreature(e.TypeID));
-            if (waterEnemy != null)
-            {
-                enemy.TypeID = waterEnemy.TypeID;
-                return;
-            }
-        }
-
-        // Otherwise, reposition the enemy and its triggers.
-        RepositionTriggerable(enemy, level);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        TR2Entity enemy = level.Entities[EntityIndex];
-        TR2Type enemyEntity = enemy.TypeID;
-        bool isWaterEnemy = TR2TypeUtilities.IsWaterCreature(enemyEntity);
-
-        // If the index doesn't point to an enemy or if we only want to move land creatures
-        // but the enemy is a water creature (and vice-versa), bail out.
-        if (!TR2TypeUtilities.IsEnemyType(enemyEntity) || (IfLandCreature && isWaterEnemy) || (!IfLandCreature && !isWaterEnemy))
+        var sectorEnemies = GetSectorEnemies<TR2Entity, TR2Type>(level.Entities);
+        if (ShouldMoveEnemies<TR2Entity, TR2Type>(sectorEnemies, level.Entities,
+            TR2TypeUtilities.IsEnemyType, TR2TypeUtilities.IsWaterCreature))
         {
-            return;
+            sectorEnemies.ForEach(e => RepositionTriggerable(e, level));
         }
-
-        // If the level has water creatures available, and we want to switch it, do so.
-        if (AttemptWaterCreature)
-        {
-            TR2Entity waterEnemy = level.Entities.Find(e => TR2TypeUtilities.IsWaterCreature(e.TypeID));
-            if (waterEnemy != null)
-            {
-                enemy.TypeID = waterEnemy.TypeID;
-                return;
-            }
-        }
-
-        // Otherwise, reposition the enemy and its triggers.
-        RepositionTriggerable(enemy, level);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        TR3Entity enemy = level.Entities[EntityIndex];
-        TR3Type enemyEntity = enemy.TypeID;
-        bool isWaterEnemy = TR3TypeUtilities.IsWaterCreature(enemyEntity);
-
-        // If the index doesn't point to an enemy or if we only want to move land creatures
-        // but the enemy is a water creature (and vice-versa), bail out.
-        if (!TR3TypeUtilities.IsEnemyType(enemyEntity) || (IfLandCreature && isWaterEnemy) || (!IfLandCreature && !isWaterEnemy))
+        var sectorEnemies = GetSectorEnemies<TR3Entity, TR3Type>(level.Entities);
+        if (ShouldMoveEnemies<TR3Entity, TR3Type>(sectorEnemies, level.Entities,
+            TR3TypeUtilities.IsEnemyType, TR3TypeUtilities.IsWaterCreature))
         {
-            return;
+            sectorEnemies.ForEach(e => RepositionTriggerable(e, level));
+        }
+    }
+
+    private List<E> GetSectorEnemies<E, T>(List<E> allEntities)
+        where E : TREntity<T>
+        where T : Enum
+    {
+        var baseEnemy = allEntities[EntityIndex];
+        return allEntities.FindAll(
+            e => EqualityComparer<T>.Default.Equals(e.TypeID, baseEnemy.TypeID)
+            && e.X == baseEnemy.X
+            && e.Y == baseEnemy.Y
+            && e.Z == baseEnemy.Z
+            && e.Room == baseEnemy.Room);
+    }
+
+    private bool ShouldMoveEnemies<E, T>(List<E> enemies, List<E> allEntities, Func<T, bool> isEnemy, Func<T, bool> isWaterCreature)
+        where E : TREntity<T>
+        where T : Enum
+    {
+        var currentType = enemies.First().TypeID;
+        if (!isEnemy(currentType)
+            || IfLandCreature != !isWaterCreature(currentType))
+        {
+            return false;
         }
 
-        // If the level has water creatures available, and we want to switch it, do so.
-        if (AttemptWaterCreature)
+        if (AttemptWaterCreature
+            && allEntities.Find(e => isWaterCreature(e.TypeID)) is E waterEnemy)
         {
-            TR3Entity waterEnemy = level.Entities.Find(e => TR3TypeUtilities.IsWaterCreature(e.TypeID));
-            if (waterEnemy != null)
-            {
-                enemy.TypeID = waterEnemy.TypeID;
-                return;
-            }
+            enemies.ForEach(e => e.TypeID = waterEnemy.TypeID);
+            return false;
         }
 
-        // Otherwise, reposition the enemy and its triggers.
-        RepositionTriggerable(enemy, level);
+        return true;
     }
 }
