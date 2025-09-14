@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using TRDataControl;
+using TRDataControl.Environment;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -138,6 +139,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             AmendChickenBehaviour(level.Data, TR2TypeUtilities.TranslateAlias(enemies.BirdMonsterGuiser));
         }
 
+        AdjustFurnaceBlockRoom(level);
         RandomizeEnemyMeshes(level, enemies);
         CloneEnemies(level);
         AddUnarmedItems(level);
@@ -167,6 +169,83 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         else if (endCommand != null)
         {
             endAnim.Commands.Remove(endCommand);
+        }
+    }
+
+    private record TriggerSpec(List<FDActionItem> Actions,
+        List<TRRoomSector> Sectors,
+        FDTrigType TrigType = FDTrigType.Trigger);
+
+    private void AdjustFurnaceBlockRoom(TR2CombinedLevel level)
+    {
+        if (!level.Is(TR2LevelNames.FURNACE) || !Settings.CrossLevelEnemies
+            || Settings.RandoEnemyDifficulty == RandoDifficulty.NoRestrictions)
+        {
+            return;
+        }
+
+        var enemyTrigActions = level.Data.Entities
+            .Select((entity, idx) => (entity, idx))
+            .Where(x => x.entity.Room == 11 && TR2TypeUtilities.IsEnemyType(x.entity.TypeID))
+            .Select(x => new FDActionItem
+            {
+                Action = FDTrigAction.Object,
+                Parameter = (short)x.idx,
+            }).ToList();
+        enemyTrigActions.Shuffle(_generator);
+        var actionGroups = enemyTrigActions.Split(4);
+
+        // Clear all existing triggers
+        new EMRemoveTriggerFunction { Rooms = [11] }.ApplyToLevel(level.Data);
+
+        var specs = new[]
+        {
+            // Trigger first group when emerging from the pool
+            new TriggerSpec
+            (
+                actionGroups[0],
+                level.Data.Rooms[14].GetPerimeterSectors(1, 1, 3, 3)
+            ),
+            // Trigger second group on the pool perimiter
+            new TriggerSpec
+            (
+                actionGroups[1],
+                level.Data.Rooms[11].GetPerimeterSectors(2, 2, 6, 6)
+            ),
+            // Trigger third group after pulling the exit block once
+            new TriggerSpec
+            (
+                actionGroups[2],
+                [level.Data.Rooms[11].GetSector(7, 4, TRUnit.Sector)],
+                FDTrigType.HeavyTrigger
+            ),
+            // Trigger fourth group after pushing the block to either side
+            new TriggerSpec
+            (
+                actionGroups[3],
+                [
+                    level.Data.Rooms[11].GetSector(7, 3, TRUnit.Sector),
+                    level.Data.Rooms[11].GetSector(7, 5, TRUnit.Sector),
+                ],
+                FDTrigType.HeavyTrigger
+            ),
+        };
+
+        foreach (var spec in specs)
+        {
+            var trigger = new FDTriggerEntry
+            {
+                TrigType = spec.TrigType,
+                Actions = spec.Actions,
+            };
+            foreach (var sector in spec.Sectors)
+            {
+                if (sector.FDIndex == 0)
+                {
+                    level.Data.FloorData.CreateFloorData(sector);
+                }
+                level.Data.FloorData[sector.FDIndex].Add(trigger.Clone());
+            }
         }
     }
 

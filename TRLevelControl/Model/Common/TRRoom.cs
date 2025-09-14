@@ -63,4 +63,23 @@ public abstract class TRRoom
         }
         return Sectors[x * NumZSectors + z];
     }
+
+    public List<TRRoomSector> GetPerimeterSectors(int xMin, int zMin, int xMax, int zMax)
+    {
+        var sectors = new List<TRRoomSector>();
+
+        for (int x = xMin; x <= xMax; x++)
+        {
+            sectors.Add(GetSector(x, zMin, TRUnit.Sector));
+            sectors.Add(GetSector(x, zMax, TRUnit.Sector));
+        }
+
+        for (int z = zMin + 1; z < zMax; z++)
+        {
+            sectors.Add(GetSector(xMin, z, TRUnit.Sector));
+            sectors.Add(GetSector(xMax, z, TRUnit.Sector));
+        }
+
+        return sectors;
+    }
 }
