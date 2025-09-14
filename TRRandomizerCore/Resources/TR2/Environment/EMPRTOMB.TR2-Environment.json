@@ -111,35 +111,7 @@
       ]
     },
     {
-      "Comments": "It's entirely possible to softlock in OG in the main chamber area, so prevent that by adjusting some triggers for trapdoors 79 and 144.",
-      "EMType": 71,
-      "Locations": [
-        {
-          "X": 25088,
-          "Y": -1792,
-          "Z": 67072,
-          "Room": 90
-        }
-      ],
-      "ActionItem": {
-        "Parameter": 79
-      }
-    },
-    {
-      "EMType": 71,
-      "Locations": [
-        {
-          "X": 25088,
-          "Y": -1792,
-          "Z": 67072,
-          "Room": 90
-        }
-      ],
-      "ActionItem": {
-        "Parameter": 145
-      }
-    },
-    {
+      "Comments": "It's entirely possible to softlock in OG in the main chamber area, so prevent that by adding extra triggers for trapdoors 79 and 145.",
       "EMType": 61,
       "Locations": [
         {
