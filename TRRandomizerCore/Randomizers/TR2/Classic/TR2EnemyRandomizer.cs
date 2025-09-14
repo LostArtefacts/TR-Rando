@@ -217,11 +217,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             && _generator.NextDouble() < _cloneChance)
         {
             // Make Marco look and behave like Winston, until Lara gets too close
-            TRModel marcoModel = level.Data.Models[TR2Type.MarcoBartoli];
-            TRModel winnieModel = level.Data.Models[TR2Type.Winston];
-            marcoModel.Animations = winnieModel.Animations;
-            marcoModel.MeshTrees = winnieModel.MeshTrees;
-            marcoModel.Meshes = winnieModel.Meshes;
+            level.Data.Models[TR2Type.MarcoBartoli] = level.Data.Models[TR2Type.Winston].Clone();
         }
     }
 
