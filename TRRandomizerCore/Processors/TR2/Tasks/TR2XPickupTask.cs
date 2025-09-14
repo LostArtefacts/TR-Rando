@@ -24,6 +24,8 @@ public class TR2XPickupTask : ITR2ProcessorTask
         }
 
         AlterPuzzles(level);
+        AlterStopwatch(level);
+        AlterGuns(level);
     }
 
     private void AlterPuzzles(TR2CombinedLevel level)
@@ -50,6 +52,27 @@ public class TR2XPickupTask : ITR2ProcessorTask
         level.Data.Sprites.ChangeKey(TR2Type.Puzzle2_S_P, TR2Type.Puzzle3_S_P);
         level.Data.Entities.FindAll(e => e.TypeID == TR2Type.Puzzle2_S_P)
                 .ForEach(e => e.TypeID = TR2Type.Puzzle3_S_P);
+    }
+
+    private static void AlterStopwatch(TR2CombinedLevel level)
+    {
+        if (level.Data.Models.TryGetValue(TR2Type.Stopwatch_M_H, out var model))
+        {
+            model.Meshes[7].TexturedRectangles.Clear();
+            model.Meshes[7].TexturedTriangles.Clear();
+        }
+    }
+
+    private static void AlterGuns(TR2CombinedLevel level)
+    {
+        var gunModels = new[] { TR2Type.Pistols_M_H, TR2Type.Autos_M_H, TR2Type.Uzi_M_H };
+        foreach (var model in gunModels.Select(t => level.Data.Models[t]).Where(m => m != null))
+        {
+            model.Meshes[0].ColouredRectangles.Clear();
+            model.Meshes[0].ColouredTriangles.Clear();
+            model.Meshes[0].TexturedRectangles.Clear();
+            model.Meshes[0].TexturedTriangles.Clear();
+        }
     }
 
     public static void ScalePickup(TR2Type type, TRModel model, float factor)
