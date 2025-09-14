@@ -334,7 +334,7 @@ public static class TRXGuid
             [(int)TR2Type.BridgeTilt1]              = new("665e0462-2921-4a63-946d-f2410319ad22"),
             [(int)TR2Type.BridgeTilt2]              = new("f1ee4a7e-c879-4831-942b-aa1d3b496936"),
             [(int)TR2Type.PassportOpen_M_H]         = new("e6842379-7041-4faa-98ea-8a0181d3064c"),
-            [(int)TR2Type.SilverSecret_M_H]         = new("5fd00b18-8405-49a0-b5bb-7137c2b9d5ef"),
+            [(int)TR2Type.Stopwatch_M_H]            = new("5fd00b18-8405-49a0-b5bb-7137c2b9d5ef"),
             [(int)TR2Type.LaraHomePhoto_M_H]        = new("52af777a-2e36-48e9-933a-f7350f56573f"),
             [(int)TR2Type.CutsceneActor4]           = new("c4f95631-4ff5-4150-8a05-a10e99c61a09"),
             [(int)TR2Type.CutsceneActor5]           = new("c48f9fa9-f9c9-49cf-87d3-7b08cd895ff7"),
