@@ -51,6 +51,66 @@
       "TrigType": 9
     },
     {
+      "Comments": "Undo flipmap 0 triggers at the start of the level as it can break later areas.",
+      "EMType": 62,
+      "Locations": [
+        {
+          "X": 7680,
+          "Y": -23296,
+          "Z": 61952,
+          "Room": 17
+        },
+        {
+          "X": 6656,
+          "Y": -23296,
+          "Z": 61952,
+          "Room": 17
+        },
+        {
+          "X": 8704,
+          "Y": -23296,
+          "Z": 61952,
+          "Room": 17
+        },
+        {
+          "X": 7680,
+          "Y": -23296,
+          "Z": 60928,
+          "Room": 17
+        },
+        {
+          "X": 7680,
+          "Y": -23296,
+          "Z": 62976,
+          "Room": 17
+        },
+        {
+          "X": 6656,
+          "Y": -23296,
+          "Z": 60928,
+          "Room": 17
+        },
+        {
+          "X": 6656,
+          "Y": -23296,
+          "Z": 62976,
+          "Room": 17
+        },
+        {
+          "X": 8704,
+          "Y": -23296,
+          "Z": 60928,
+          "Room": 17
+        },
+        {
+          "X": 8704,
+          "Y": -23296,
+          "Z": 62976,
+          "Room": 17
+        }
+      ]
+    },
+    {
       "Comments": "It's entirely possible to softlock in OG in the main chamber area, so prevent that by adjusting some triggers for trapdoors 79 and 144.",
       "EMType": 71,
       "Locations": [
