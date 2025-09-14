@@ -638,6 +638,43 @@
           "TrigType": 0
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If item #56 is not in its default position, make its pickup trigger a switch.",
+        "ConditionType": 0,
+        "EntityIndex": 56,
+        "X": 45568,
+        "Y": 6912,
+        "Z": 64000,
+        "Room": 35
+      },
+      "OnFalse": [
+        {
+          "EMType": 51,
+          "TypeID": 104,
+          "Location": {
+            "X": 45568,
+            "Y": 6912,
+            "Z": 64000,
+            "Room": 35,
+            "Angle": -16384
+          }
+        },
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 45568,
+              "Y": 6912,
+              "Z": 64000,
+              "Room": 35
+            }
+          ],
+          "TrigType": 2,
+          "SwitchOrKeyRef": -1
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],
