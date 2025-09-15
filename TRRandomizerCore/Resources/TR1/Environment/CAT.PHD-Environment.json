@@ -710,6 +710,25 @@
         }
       ],
       "TrigType": 0
+    },
+    {
+      "Comments": "Add wind to outside rooms.",
+      "EMType": 121,
+      "Rooms": [
+        0,
+        2,
+        4,
+        23,
+        31,
+        74,
+        75,
+        77,
+        98,
+        101,
+        102,
+        105
+      ],
+      "IsWindy": true
     }
   ],
   "Any": [

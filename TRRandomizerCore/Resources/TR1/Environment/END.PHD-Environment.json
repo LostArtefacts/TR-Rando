@@ -839,6 +839,15 @@
           "Room": 24
         }
       ]
+    },
+    {
+      "Comments": "Add wind to outside rooms.",
+      "EMType": 121,
+      "Rooms": [
+        4,
+        13
+      ],
+      "IsWindy": true
     }
   ],
   "Any": [
