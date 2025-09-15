@@ -11,32 +11,27 @@ public class EMModifyRoomFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        throw new NotSupportedException();
+        var data = GetData(level);
+        ModifyRooms(data, i => level.Rooms[i]);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        EMLevelData data = GetData(level);
-        foreach (int roomNumber in Rooms)
-        {
-            TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-            if (IsSkyboxVisible.HasValue)
-            {
-                room.IsSkyboxVisible = IsSkyboxVisible.Value;
-            }
-            if (IsWindy.HasValue)
-            {
-                room.IsWindy = IsWindy.Value;
-            }
-        }
+        var data = GetData(level);
+        ModifyRooms(data, i => level.Rooms[i]);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        EMLevelData data = GetData(level);
+        var data = GetData(level);
+        ModifyRooms(data, i => level.Rooms[i]);
+    }
+
+    private void ModifyRooms(EMLevelData data, Func<int, TRRoom> roomGetter)
+    {
         foreach (int roomNumber in Rooms)
         {
-            TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
+            var room = roomGetter(data.ConvertRoom(roomNumber));
             if (IsSkyboxVisible.HasValue)
             {
                 room.IsSkyboxVisible = IsSkyboxVisible.Value;
