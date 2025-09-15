@@ -24,6 +24,7 @@
 - fixed cloned enemies in TR1X being left behind if a room is flooded and the original enemy is moved on land (#842)
 - fixed Lara potentially starting beyond initial enemy triggers in The Great Wall if the first area is flooded
 - fixed flame sprites in some TR2 levels not being targeted for texture randomization (#844)
+- fixed Lara's meshes in TR1X unintentionally being overwritten with Midas death meshes in certain scenarios (#847)
 
 ## [V1.10.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.1...V1.10.2) - 2024-12-06
 - added support for TR1X 4.6 (#796)

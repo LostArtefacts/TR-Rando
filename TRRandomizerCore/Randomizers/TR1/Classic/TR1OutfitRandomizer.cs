@@ -711,23 +711,18 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 importer.TextureRemapPath = remapPath;
             }
 
-            try
-            {
-                importer.Import();
-                // If we already have an existing model, restore the animation and frames
-                // e.g. for Adam death animation and scion pickups.
-                if (existingModel != null)
-                {
-                    TRModel newModel = level.Data.Models[TR1Type.LaraMiscAnim_H];
-                    newModel.Animations = existingModel.Animations;
-                }
-
-                return true;
-            }
-            catch
+            var result = importer.Import();
+            if (result.ImportedTypes.Count == 0)
             {
                 return false;
             }
+
+            if (existingModel != null)
+            {
+                level.Data.Models[TR1Type.LaraMiscAnim_H].Animations = existingModel.Animations;
+            }
+
+            return true;
         }
 
         private static void CopyMeshParts(MeshCopyData data)
