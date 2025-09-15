@@ -14,22 +14,9 @@ public class TR4Observer : TR3Observer
     private readonly Dictionary<byte, List<byte>> _flybyIndices = new();
 
     private uint[] _sampleIndices;
-    protected readonly bool _remastered;
-    private ushort[] _floorData;
 
-    public TR4Observer(bool remastered)
-    {
-        _remastered = remastered;
-    }
-
-    public override bool UseOriginalFloorData => _remastered;
-
-    public override void OnFloorDataRead(ushort[] data)
-    {
-        _floorData = data;
-    }
-
-    public override ushort[] GetFloorData() => _floorData;
+    public TR4Observer(bool useOriginalFloorData)
+        : base(useOriginalFloorData) { }
 
     public override void TestOutput(byte[] input, byte[] output)
     {

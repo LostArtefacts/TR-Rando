@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using TRLevelControl;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TRLevelControlTests;
@@ -100,7 +101,8 @@ public class TestBase
                 control2.Write(level2, outputStream);
                 break;
             case TRGameVersion.TR3:
-                observer = new TR3Observer();
+                bool originalFD = UseOriginalTR3FD(levelName, remastered);
+                observer = new TR3Observer(originalFD);
                 TR3LevelControl control3 = new(observer);
                 TR3Level level3 = control3.Read(pathI);
                 control3.Write(level3, outputStream);
@@ -122,6 +124,12 @@ public class TestBase
         }
 
         observer.TestOutput(inputData, outputStream.ToArray());
+    }
+
+    private static bool UseOriginalTR3FD(string levelName, bool remastered)
+    {
+        return levelName == TR3LevelNames.ANTARC
+            || (remastered && (levelName == TR3LevelNames.JUNGLE_CUT || levelName == TR3LevelNames.MADUBU));
     }
 
     public static TR1Level WriteReadTempLevel(TR1Level level)

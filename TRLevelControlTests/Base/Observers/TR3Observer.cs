@@ -3,7 +3,24 @@
 public class TR3Observer : TR2Observer
 {
     private readonly Dictionary<int, Tuple<ushort, ushort>> _animLinks = new();
+    private readonly bool _useOriginalFloorData;
     private ushort? _badOverlap;
+    private ushort[] _floorData;
+
+    public TR3Observer(bool useOriginalFD = false)
+    {
+        _useOriginalFloorData = useOriginalFD;
+    }
+
+    public override bool UseOriginalFloorData => _useOriginalFloorData;
+
+    public override void OnFloorDataRead(ushort[] data)
+    {
+        _floorData = data;
+    }
+
+    public override ushort[] GetFloorData() =>
+        _useOriginalFloorData ? _floorData : null;
 
     public override void OnBadAnimLinkRead(int animIndex, ushort animLink, ushort frameLink)
     {

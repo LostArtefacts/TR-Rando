@@ -4,6 +4,8 @@ namespace TRLevelControl.Build;
 
 public class TRFDBuilder
 {
+    private static readonly FDEntryComparer _fdComparer = new();
+
     private readonly TRGameVersion _version;
     private readonly ITRLevelObserver _observer;
 
@@ -221,6 +223,8 @@ public class TRFDBuilder
 
     public List<ushort> Flatten(List<FDEntry> entries)
     {
+        entries = Normalise(entries);
+
         List<ushort> data = new();
 
         for (int i = 0; i < entries.Count; i++)
@@ -289,6 +293,29 @@ public class TRFDBuilder
         return data;
     }
 
+    private static List<FDEntry> Normalise(List<FDEntry> entries)
+    {
+        entries = [.. entries];
+
+        // Combine ladders and eliminate ones with no direction
+        var ladders = entries.OfType<FDClimbEntry>();
+        var combinedDirection = ladders
+                .Select(e => e.Direction)
+                .Aggregate((FDClimbDirection)0, (acc, dir) => acc | dir);
+
+        entries.RemoveAll(ladders.Contains);
+        if (combinedDirection != 0)
+        {
+            entries.Add(new FDClimbEntry
+            {
+                Direction = combinedDirection,
+            });
+        }
+
+        entries.Sort(_fdComparer);
+        return entries;
+    }
+
     private bool IsValidEntry(FDEntry entry)
     {
         return entry switch
@@ -345,5 +372,39 @@ public class TRFDBuilder
 
         data[^1] |= 0x8000;
         return data;
+    }
+
+    private class FDEntryComparer : IComparer<FDEntry>
+    {
+        private static readonly List<FDFunction> _functionOrder =
+        [
+            FDFunction.FloorSlant,
+            FDFunction.FloorTriangulationNWSE_Solid,
+            FDFunction.FloorTriangulationNESW_Solid,
+            FDFunction.FloorTriangulationNWSE_SW,
+            FDFunction.FloorTriangulationNWSE_NE,
+            FDFunction.FloorTriangulationNESW_SE,
+            FDFunction.FloorTriangulationNESW_NW,
+            FDFunction.CeilingSlant,
+            FDFunction.CeilingTriangulationNW_Solid,
+            FDFunction.CeilingTriangulationNE_Solid,
+            FDFunction.CeilingTriangulationNW_SW,
+            FDFunction.CeilingTriangulationNW_NE,
+            FDFunction.CeilingTriangulationNE_NW,
+            FDFunction.CeilingTriangulationNE_SE,
+            FDFunction.PortalSector,
+            FDFunction.KillLara,
+            FDFunction.ClimbableWalls,
+            FDFunction.Monkeyswing,
+            FDFunction.DeferredTrigOrMinecartRotateLeft,
+            FDFunction.MechBeetleOrMinecartRotateRight,
+            FDFunction.Trigger,
+        ];
+
+        public int Compare(FDEntry e1, FDEntry e2)
+        {
+            return _functionOrder.IndexOf(e1.GetFunction())
+                .CompareTo(_functionOrder.IndexOf(e2.GetFunction()));
+        }
     }
 }

@@ -12,69 +12,59 @@ public class EMLadderFunction : EMRefaceFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        throw new NotSupportedException();
+        var data = GetData(level);
+        ModifyLadder(level.FloorData, loc => level.GetRoomSector(data.ConvertLocation(loc)));
+
+        base.ApplyToLevel(level);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        EMLevelData data = GetData(level);
-
-        TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(Location));
-        ModifyLadder(sector, level.FloorData);
+        var data = GetData(level);
+        ModifyLadder(level.FloorData, loc => level.GetRoomSector(data.ConvertLocation(loc)));
 
         base.ApplyToLevel(level);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        EMLevelData data = GetData(level);
-
-        TRRoomSector sector = level.GetRoomSector(data.ConvertLocation(Location));
-        ModifyLadder(sector, level.FloorData);
+        var data = GetData(level);
+        ModifyLadder(level.FloorData, loc => level.GetRoomSector(data.ConvertLocation(loc)));
 
         base.ApplyToLevel(level);
     }
 
-    private void ModifyLadder(TRRoomSector sector, FDControl control)
+    private void ModifyLadder(FDControl floorData, Func<EMLocation, TRRoomSector> sectorGetter)
     {
-        // Rosetta: Collisional floordata functions should always come first in sequence, with floor
-        // collision function strictly being first and ceiling collision function strictly being second.
-        // The reason is hardcoded floordata collision parser which always expects these two functions
-        // to be first in sequence.
-        // ...so for now put the climb entry at 0 for testing in GW but FDControl should really validate
-        // the order.
-
+        var sector = sectorGetter(Location);
         bool removeAll = !IsPositiveX && !IsPositiveZ && !IsNegativeX && !IsNegativeZ;
-
-        if (!removeAll && sector.FDIndex == 0)
+        if (removeAll && sector.FDIndex == 0)
         {
-            control.CreateFloorData(sector);
+            return;
         }
 
+        if (sector.FDIndex == 0)
+        {
+            floorData.CreateFloorData(sector);
+        }
+
+        var entries = floorData[sector.FDIndex];
         if (removeAll)
         {
-            if (sector.FDIndex != 0)
-            {
-                // remove the climbable entry and if it leaves an empty list, remove the FD
-                List<FDEntry> entries = control[sector.FDIndex];
-                entries.RemoveAll(e => e is FDClimbEntry);
-            }
+            entries.RemoveAll(e => e is FDClimbEntry);
+            return;
         }
-        else
+
+        var ladder = entries.OfType<FDClimbEntry>().FirstOrDefault();
+        if (ladder == null)
         {
-            FDClimbEntry climbEntry = new()
-            {
-                IsPositiveX = IsPositiveX,
-                IsPositiveZ = IsPositiveZ,
-                IsNegativeX = IsNegativeX,
-                IsNegativeZ = IsNegativeZ
-            };
-
-            // We have to add climbable entries after portal, slant and kill Lara entries.
-            List<FDEntry> entries = control[sector.FDIndex];
-            int index = entries.FindLastIndex(e => e is FDPortalEntry || e is FDSlantEntry || e is FDKillLaraEntry || e is FDTriangulationEntry);
-
-            control[sector.FDIndex].Insert(index + 1, climbEntry);
+            ladder = new FDClimbEntry();
+            floorData[sector.FDIndex].Add(ladder);
         }
+
+        ladder.IsPositiveX = IsPositiveX;
+        ladder.IsPositiveZ = IsPositiveZ;
+        ladder.IsNegativeX = IsNegativeX;
+        ladder.IsNegativeZ = IsNegativeZ;
     }
 }
