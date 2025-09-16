@@ -1,4 +1,5 @@
-﻿using TRLevelControl;
+﻿using System.Numerics;
+using TRLevelControl;
 using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Utilities;
@@ -149,7 +150,7 @@ public static class FaceUtilities
 
                 if (IsWallMatch(vertMatches, faceVertices))
                 {
-                    faces.Add(face, faceVertices);
+                    faces.Add(face, [.. room.Mesh.Vertices.Select(v => v.Vertex)]);
                 }
             }
 
@@ -200,7 +201,7 @@ public static class FaceUtilities
 
                 if (IsWallMatch(vertMatches, faceVertices))
                 {
-                    faces.Add(face, faceVertices);
+                    faces.Add(face, [.. room.Mesh.Vertices.Select(v => v.Vertex)]);
                 }
             }
 
@@ -382,5 +383,67 @@ public static class FaceUtilities
         // Is this a floor and is every vertex in the sector check part of this face?
         return faceVertices.All(v => v.Y >= floorY) &&
             sectorVertices.All(v1 => faceVertices.Any(v2 => v1.X == v2.X && v1.Z == v2.Z));
+    }
+
+    public static void NormaliseWallQuad(TRFace face, List<TRVertex> allVertices)
+    {
+        if (face.Type != TRFaceType.Rectangle)
+        {
+            return;
+        }
+
+        var vertices = face.Vertices.Select(v => allVertices[v]).ToList();
+        var normal = GetNormal(vertices);
+        if (normal.Y != 0)
+        {
+            return;
+        }
+
+        var sortedByY = vertices.OrderBy(v => v.Y).ToList();
+        var top = sortedByY.Take(2).ToList();
+        var bottom = sortedByY.Skip(2).ToList();
+        
+        if (normal.X != 0)
+        {
+            top = [.. top.OrderBy(v => v.Z)];
+            bottom = [.. bottom.OrderBy(v => v.Z)];
+            if (normal.X > 0)
+            {
+                top.Reverse();
+                bottom.Reverse();
+            }
+        }
+        else
+        {
+            top = [.. top.OrderBy(v => v.X)];
+            bottom = [.. bottom.OrderBy(v => v.X)];
+            if (normal.Z < 0)
+            {
+                top.Reverse();
+                bottom.Reverse();
+            }
+        }
+
+        face.Vertices[0] = (ushort)allVertices.IndexOf(top[0]);
+        face.Vertices[1] = (ushort)allVertices.IndexOf(top[1]);
+        face.Vertices[2] = (ushort)allVertices.IndexOf(bottom[1]);
+        face.Vertices[3] = (ushort)allVertices.IndexOf(bottom[0]);
+    }
+
+    public static Vector3 GetNormal(List<TRVertex> vertices)
+    {
+        if (vertices.Count < 3)
+        {
+            throw new Exception();
+        }
+
+        var v0 = new Vector3(vertices[0].X, vertices[0].Y, vertices[0].Z);
+        var v1 = new Vector3(vertices[1].X, vertices[1].Y, vertices[1].Z);
+        var v2 = new Vector3(vertices[2].X, vertices[2].Y, vertices[2].Z);
+
+        Vector3 edge1 = v1 - v0;
+        Vector3 edge2 = v2 - v0;
+
+        return Vector3.Normalize(Vector3.Cross(edge1, edge2));
     }
 }

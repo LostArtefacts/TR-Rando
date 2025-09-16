@@ -4,6 +4,7 @@ using TRDataControl;
 using TRImageControl;
 using TRImageControl.Packing;
 using TRLevelControl.Model;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Textures;
 
@@ -410,21 +411,10 @@ public abstract class AbstractTRWireframer<E, L>
             }
         }
 
-        foreach (TRFace face in _ladderFace4s.Keys)
+        foreach (var (face, vertices) in _ladderFace4s)
         {
             face.Texture = ladderIndex;
-
-            // Ensure the ladder isn't sideways - if the first two vertices don't have
-            // the same Y val and it's a wall, rotate the face once.
-            List<TRVertex> vertices = _ladderFace4s[face];
-            if (vertices.Count > 1 &&
-                vertices[0].Y != vertices[1].Y &&
-                (vertices.All(v => v.X == vertices[0].X) || vertices.All(v => v.Z == vertices[0].Z)))
-            {
-                Queue<ushort> vertIndices = new(face.Vertices);
-                vertIndices.Enqueue(vertIndices.Dequeue());
-                face.Vertices = new(vertIndices);
-            }
+            FaceUtilities.NormaliseWallQuad(face, vertices);
         }
 
         foreach (TRFace face in _triggerFaces)
