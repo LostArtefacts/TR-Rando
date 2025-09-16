@@ -42,8 +42,6 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         TR1Type.ScionPiece_M_H, TR1Type.LeadBar_M_H
     };
 
-    public override bool Is8BitPalette => true;
-
     private TR1TexturePacker _packer;
 
     protected override TRTexturePacker CreatePacker(TR1Level level)
