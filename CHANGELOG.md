@@ -15,6 +15,7 @@
     - changed all enemy types (except eels) to have the ability to drop items
     - removed restrictions on enemy combinations when the dragon is present
     - removed skidoo driver and monk limits
+- improved textures and ladder face rotation in wireframe mode (#852)
 - fixed a crash at the end of Diving Area in TR2R (#814)
 - fixed a potential key softlock in City of Khamoon if "large" range is selected and either return paths are disabled in classic, or playing remastered (#820)
 - fixed the raptor spawns in Crash Site when enemies are randomized to guarantee that some appear when using the turret (#818)
@@ -26,6 +27,7 @@
 - fixed flame sprites in some TR2 levels not being targeted for texture randomization (#844)
 - fixed Lara's meshes in TR1X unintentionally being overwritten with Midas death meshes in certain scenarios (#847)
 - fixed an uncollectible secret in Natla's Mines (#849)
+- fixed models all using the same highlight colour in wireframe mode (#852)
 
 ## [V1.10.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.1...V1.10.2) - 2024-12-06
 - added support for TR1X 4.6 (#796)
