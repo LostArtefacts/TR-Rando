@@ -257,7 +257,7 @@ public abstract class AbstractTRWireframer<E, L>
         {
             int y = i * rungSplit;
             // Horizontal bar for the rung
-            frame.DrawLine(colour, 0, y, size.W, y);
+            frame.DrawLine(colour, 0, y, size.W, y, 2);
             // Diagonal bar to the next rung
             frame.DrawLine(colour, 0, y, size.W, y + rungSplit);
         }
@@ -363,9 +363,11 @@ public abstract class AbstractTRWireframer<E, L>
     {
         TRImage image = new(width, height);
         image.DrawRectangle(colour, 0, 0, width - 1, height - 1);
+        image.DrawRectangle(colour, 0, 0, width - 2, height - 2);
+
         if (addDiagonal)
         {
-            image.DrawLine(colour, 0, 0, width, height);
+            image.DrawLine(colour, 0, 0, width, height, 2);
         }
         return image;
     }

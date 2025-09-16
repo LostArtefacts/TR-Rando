@@ -130,17 +130,17 @@ public partial class TRImage
         Import(image, new(0, 0), true);
     }
 
-    public void DrawLine(Color colour, int x1, int y1, int x2, int y2)
+    public void DrawLine(Color colour, int x1, int y1, int x2, int y2, int w = 1)
     {
         using var img = ToImage();
         img.Mutate(ctx =>
         {
-            SolidPen linePen = new(IS.Color.FromRgba(colour.R, colour.G, colour.B, colour.A), 1);
-            ctx.DrawLine(linePen, new IS.PointF[]
-            {
+            SolidPen linePen = new(IS.Color.FromRgba(colour.R, colour.G, colour.B, colour.A), w);
+            ctx.DrawLine(linePen,
+            [
                 new(x1, y1),
                 new(x2, y2),
-            });
+            ]);
         });
 
         ReplaceFrom(img);
