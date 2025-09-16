@@ -187,7 +187,6 @@ public static class ColorUtilities
             Color.DarkSalmon,
             Color.DarkSeaGreen,
             Color.DarkSlateBlue,
-            Color.DarkSlateGray,
             Color.DarkTurquoise,
             Color.DarkViolet,
             Color.DeepPink,

@@ -469,13 +469,12 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void TidyModels(L level)
     {
-        int blackIndex = GetBlackPaletteIndex(level);
+        int blackIndex = ImportColour(level, Color.Black);
 
         // For most meshes, replace any colours with the default background
         foreach (TRMesh mesh in level.DistinctMeshes)
         {
-            SetFace4Colours(mesh.ColouredRectangles, blackIndex);
-            SetFace3Colours(mesh.ColouredTriangles, blackIndex);
+            SetFaceColours(mesh.ColouredFaces, blackIndex);
         }
 
         HashSet<TRMesh> processedModelMeshes = new();
@@ -520,8 +519,7 @@ public abstract class AbstractTRWireframer<E, L>
                         mesh.ColouredRectangles.AddRange(mesh.TexturedRectangles);
                         mesh.ColouredTriangles.AddRange(mesh.TexturedTriangles);
 
-                        SetFace4Colours(mesh.ColouredRectangles, paletteIndex);
-                        SetFace3Colours(mesh.ColouredTriangles, paletteIndex);
+                        SetFaceColours(mesh.ColouredFaces, paletteIndex);
 
                         mesh.TexturedRectangles.Clear();
                         mesh.TexturedTriangles.Clear();
@@ -534,19 +532,11 @@ public abstract class AbstractTRWireframer<E, L>
         ResetPaletteTracking(level);
     }
 
-    private void SetFace4Colours(IEnumerable<TRMeshFace> faces, int colourIndex)
+    private static void SetFaceColours(IEnumerable<TRMeshFace> faces, int colourIndex)
     {
-        foreach (TRMeshFace face in faces)
+        foreach (var face in faces)
         {
-            face.Texture = (ushort)(Is8BitPalette ? colourIndex : (colourIndex << 8 | (face.Texture & 0xFF)));
-        }
-    }
-
-    private void SetFace3Colours(IEnumerable<TRMeshFace> faces, int colourIndex)
-    {
-        foreach (TRMeshFace face in faces)
-        {
-            face.Texture = (ushort)(Is8BitPalette ? colourIndex : (colourIndex << 8 | (face.Texture & 0xFF)));
+            face.Texture = (ushort)colourIndex;
         }
     }
 
@@ -587,6 +577,5 @@ public abstract class AbstractTRWireframer<E, L>
     protected virtual bool ShouldSolidifyModel(E type) => false;
     protected abstract void SetSkyboxVisible(L level);
 
-    public virtual bool Is8BitPalette { get; }
     protected virtual void ResetPaletteTracking(L level) { }
 }

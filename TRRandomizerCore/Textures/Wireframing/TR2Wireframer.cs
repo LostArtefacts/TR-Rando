@@ -95,6 +95,11 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return _paletteTracker.Import(c);
     }
 
+    protected override void ResetPaletteTracking(TR2Level level)
+    {
+        _paletteTracker = null;
+    }
+
     protected override bool IsLaraModel(TR2Type type)
     {
         return _laraEntities.Contains(type);
