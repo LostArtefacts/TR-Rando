@@ -252,14 +252,22 @@ public abstract class AbstractTRWireframer<E, L>
         TRTextileSegment texture = CreateSegment(new(0, 0, size.W, size.H));
         TRImage frame = CreateFrame(size.W, size.H, colour, false);
 
-        int rungSplit = size.H / _ladderRungs;
-        for (int i = 0; i < _ladderRungs; i++)
         {
-            int y = i * rungSplit;
-            // Horizontal bar for the rung
-            frame.DrawLine(colour, 0, y, size.W, y, 2);
-            // Diagonal bar to the next rung
-            frame.DrawLine(colour, 0, y, size.W, y + rungSplit);
+            // Vertical "support" bars
+            int left = size.W / 5;
+            int right = left * 4;
+            frame.DrawLine(colour, left, 0, left, size.H, 1);
+            frame.DrawLine(colour, right, 0, right, size.H, 1);
+        }
+
+        {
+            // Horizontal rungs
+            int rungSplit = size.H / _ladderRungs;
+            for (int i = 0; i < _ladderRungs; i++)
+            {
+                int y = i * rungSplit;
+                frame.DrawLine(colour, 0, y, size.W, y, 2);
+            }
         }
 
         packer.AddRectangle(new(texture, frame));
