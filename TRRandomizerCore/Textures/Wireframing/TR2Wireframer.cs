@@ -34,6 +34,12 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         TR2Type.Key1_M_H, TR2Type.Key2_M_H, TR2Type.Key3_M_H, TR2Type.Key4_M_H, TR2Type.Quest1_M_H, TR2Type.Quest2_M_H,
     ];
 
+    private static readonly List<TR2Type> _inventoryTypes =
+    [
+        TR2Type.Sunglasses_M_H, TR2Type.Map_M_U, TR2Type.DirectionKeys_M_H, TR2Type.PassportOpen_M_H, TR2Type.PassportClosed_M_H,
+        TR2Type.CDPlayer_M_H, TR2Type.Stopwatch_M_H,
+    ];
+
     private TRPalette16Control _paletteTracker;
 
     protected override TRTexturePacker CreatePacker(TR2Level level)
@@ -51,7 +57,9 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
         return TR2TypeUtilities.IsSwitchType(type)
             || TR2TypeUtilities.IsKeyholeType(type)
             || TR2TypeUtilities.IsSlotType(type)
-            || TR2TypeUtilities.IsPushblockType(type);
+            || TR2TypeUtilities.IsPushblockType(type)
+            || TR2TypeUtilities.IsVehicleType(type) || type == TR2Type.SnowmobileBelt
+            || _inventoryTypes.Contains(type);
     }
 
     protected override bool ShouldSolidifyModel(TR2Type type)
