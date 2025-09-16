@@ -479,6 +479,42 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Add a camera hint for a sneaky secret.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 90624,
+          "Y": -1152,
+          "Z": 55808,
+          "Room": 32
+        }
+      },
+      "OnTrue": [
+        {
+          "EMType": 65,
+          "Camera": {
+            "X": 89600,
+            "Y": 428,
+            "Z": 53760,
+            "Room": 31
+          },
+          "LookAtItem": 65535,
+          "AttachToLocations": [
+            {
+              "X": 88576,
+              "Y": 4864,
+              "Z": 57856,
+              "Room": 31
+            }
+          ],
+          "CameraAction": {
+            "Timer": 3,
+            "Once": true
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],
