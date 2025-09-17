@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using TRLevelControl.IO;
 using TRLevelControl.Model;
 
 namespace TRLevelControl;
@@ -24,6 +25,7 @@ public abstract class TRLevelControlBase<L>
         _level = CreateLevel((TRFileVersion)reader.ReadUInt32());
         Initialise();
         Read(reader);
+        _level.TRXData = TRXInjector.Read(reader);
 
         Debug.Assert(reader.BaseStream.Position == reader.BaseStream.Length);
         return _level;
@@ -41,6 +43,7 @@ public abstract class TRLevelControlBase<L>
         _level = level;
         Initialise();
         Write(writer);
+        TRXInjector.Write(level.TRXData, writer);
     }
 
     protected abstract L CreateLevel(TRFileVersion version);

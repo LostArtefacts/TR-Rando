@@ -1,4 +1,6 @@
-﻿namespace TRLevelControl.Model;
+﻿using TRLevelControl.Model.TRX;
+
+namespace TRLevelControl.Model;
 
 public abstract class TRLevelBase
 {
@@ -9,4 +11,5 @@ public abstract class TRLevelBase
     public List<TRObjectTexture> ObjectTextures { get; set; }
     public List<TRAnimatedTexture> AnimatedTextures { get; set; }
     public abstract IEnumerable<TRMesh> DistinctMeshes { get; }
+    public TRXInjectionData TRXData { get; set; }
 }
