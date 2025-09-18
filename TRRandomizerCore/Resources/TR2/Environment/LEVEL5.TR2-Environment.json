@@ -48,8 +48,7 @@
         "Mask": 31,
         "Actions": [
           {
-            "Action": 4,
-            "Parameter": 1
+            "Action": 5
           }
         ]
       }
@@ -70,22 +69,130 @@
         "Mask": 31,
         "Actions": [
           {
-            "Action": 4,
-            "Parameter": 1
+            "Action": 5
           }
         ]
+      }
+    },
+    {
+      "EMType": 62,
+      "Locations": [
+        {
+          "X": 48640,
+          "Y": 12032,
+          "Z": 64000,
+          "Room": 72
+        },
+        {
+          "X": 49664,
+          "Y": 12032,
+          "Z": 64000,
+          "Room": 72
+        }
+      ]
+    },
+    {
+      "EMType": 61,
+      "ExpandedLocations": {
+        "Location": {
+          "X": 46592,
+          "Y": 12032,
+          "Z": 64000,
+          "Room": 72
+        },
+        "ExpandX": 6,
+        "ExpandZ": 1
+      },
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 4
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 62,
+      "Locations": [
+        {
+          "X": 48640,
+          "Y": 12288,
+          "Z": 45568,
+          "Room": 36
+        },
+        {
+          "X": 49664,
+          "Y": 12288,
+          "Z": 45568,
+          "Room": 36
+        },
+        {
+          "X": 48640,
+          "Y": 12288,
+          "Z": 44544,
+          "Room": 38
+        },
+        {
+          "X": 49664,
+          "Y": 12288,
+          "Z": 44544,
+          "Room": 38
+        }
+      ]
+    },
+    {
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 48640,
+          "Y": 12288,
+          "Z": 45568,
+          "Room": 36
+        },
+        {
+          "X": 49664,
+          "Y": 12288,
+          "Z": 45568,
+          "Room": 36
+        }
+      ],
+      "Trigger": {
+        "OneShot": true,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 8,
+            "Parameter": 58
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 71,
+      "Locations": [
+        {
+          "X": 50688,
+          "Y": 12288,
+          "Z": 46592,
+          "Room": 36
+        }
+      ],
+      "ActionItem": {
+        "Action": 3,
+        "Parameter": 1
       }
     },
     {
       "EMType": 61,
       "ExpandedLocations": {
         "Location": {
-          "X": 47616,
-          "Y": 11648,
-          "Z": 64000,
-          "Room": 72
+          "X": 44544,
+          "Y": 12288,
+          "Z": 44544,
+          "Room": 38
         },
-        "ExpandX": 4,
+        "ExpandX": 10,
         "ExpandZ": 1
       },
       "Trigger": {
@@ -99,32 +206,143 @@
       }
     },
     {
-      "Comments": "Open the trapdoor at the base of the sculpture without having to go back to the top. Keys may be in here.",
-      "EMType": 51,
-      "TypeID": 103,
-      "Intensity": -1,
-      "Location": {
-        "X": 44544,
-        "Y": 12288,
-        "Z": 57856,
-        "Room": 35,
-        "Angle": 16384
+      "EMType": 61,
+      "ExpandedLocations": {
+        "Location": {
+          "X": 44544,
+          "Y": 12288,
+          "Z": 43520,
+          "Room": 38
+        },
+        "ExpandX": 10,
+        "ExpandZ": 1
+      },
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 3,
+            "Parameter": 1
+          }
+        ]
       }
     },
     {
       "EMType": 61,
-      "EntityLocation": -1,
+      "ExpandedLocations": {
+        "Location": {
+          "X": 54784,
+          "Y": 12032,
+          "Z": 57856,
+          "Room": 45
+        },
+        "ExpandX": 1,
+        "ExpandZ": 2
+      },
       "Trigger": {
-        "TrigType": 2,
         "Mask": 31,
-        "Timer": 5,
-        "SwitchOrKeyRef": -1,
         "Actions": [
           {
-            "Parameter": 64
+            "Action": 5,
+            "Parameter": 1
           }
         ]
       }
+    },
+    {
+      "EMType": 62,
+      "Locations": [
+        {
+          "X": 44544,
+          "Y": -5888,
+          "Z": 64000,
+          "Room": 44
+        },
+        {
+          "X": 45568,
+          "Y": -5888,
+          "Z": 64000,
+          "Room": 44
+        }
+      ]
+    },
+    {
+      "EMType": 61,
+      "ExpandedLocations": {
+        "Location": {
+          "X": 44544,
+          "Y": -5888,
+          "Z": 64000,
+          "Room": 44
+        },
+        "ExpandX": 2,
+        "ExpandZ": 1
+      },
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 5,
+            "Parameter": 2
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 61,
+      "ExpandedLocations": {
+        "Location": {
+          "X": 43520,
+          "Y": -5760,
+          "Z": 61952,
+          "Room": 44
+        },
+        "ExpandX": 4,
+        "ExpandZ": 2
+      },
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 3,
+            "Parameter": 2
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 61,
+      "ExpandedLocations": {
+        "Location": {
+          "X": 56832,
+          "Y": 12032,
+          "Z": 57856,
+          "Room": 45
+        },
+        "ExpandX": 1,
+        "ExpandZ": 2
+      },
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 4,
+            "Parameter": 1
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Remove the timer and one-shot flag from the trapdoor at the base of the sculpture. Keys may be in here.",
+      "EMType": 69,
+      "Location": {
+        "X": 45568,
+        "Y": 9600,
+        "Z": 57856,
+        "Room": 35
+      },
+      "OneShot": false,
+      "Timer": 0
     }
   ],
   "Any": [],
