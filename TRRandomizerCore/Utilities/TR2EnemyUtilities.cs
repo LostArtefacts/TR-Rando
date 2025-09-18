@@ -317,10 +317,7 @@ public static class TR2EnemyUtilities
     {
         [TR2Type.Winston] = 2,
     };
-    private static readonly Dictionary<TR2Type, int> _restrictedEnemyGameCountsDefault = new()
-    {
-        [TR2Type.BirdMonster] = 3,
-    };
+    private static readonly Dictionary<TR2Type, int> _restrictedEnemyGameCountsDefault = [];
 
     // Predefined absolute limits for skidoo drivers
     private static readonly Dictionary<string, int> _skidooLimits = new()
