@@ -349,88 +349,71 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
     private void AddUnarmedItems(TR2CombinedLevel level)
     {
-        if (!level.Script.RemovesWeapons || !Settings.GiveUnarmedItems)
+        if (!level.Script.RemovesWeapons || !Settings.CrossLevelEnemies || !Settings.GiveUnarmedItems)
         {
             return;
         }
 
-        TR2Entity weapon = level.Data.Entities.Find(e =>
-            (e.TypeID == TR2Type.Pistols_S_P || TR2TypeUtilities.IsGunType(e.TypeID))
+        var weaponTypes = TR2TypeUtilities.GetGunTypes();
+        var weaponItem = level.Data.Entities.Find(e =>
+            weaponTypes.Contains(e.TypeID)
             && _pistolLocations[level.Name].Any(l => l.IsEquivalent(e.GetLocation())));
-        if (weapon == null)
+
+        if (weaponItem == null)
         {
             return;
         }
 
         if (level.Is(TR2LevelNames.HOME) && Settings.RandomizeItems && Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
         {
-            weapon.TypeID = TR2Type.Pistols_S_P;
+            weaponItem.TypeID = TR2Type.Pistols_S_P;
             return;
         }
 
-        List<TR2Type> replacementWeapons = TR2TypeUtilities.GetGunTypes();
-        replacementWeapons.Add(TR2Type.Pistols_S_P);
-        TR2Type weaponType = replacementWeapons[_generator.Next(0, replacementWeapons.Count)];
-        weapon.TypeID = weaponType;
+        weaponItem.TypeID = weaponTypes.RandomItem(_generator);
 
-        void AddItem(TR2Type type)
-        {
-            if (ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
+        var difficulty = TR2EnemyUtilities.GetEnemyDifficulty(level.GetEnemyEntities());
+        if (difficulty > EnemyDifficulty.Easy
+            || weaponItem.TypeID == TR2Type.Harpoon_S_P
+            || weaponItem.TypeID == TR2Type.GrenadeLauncher_S_P
+            || _generator.NextDouble() < _easyPistolChance)
+        {            
+            if (!level.Data.Entities.Any(e => e.TypeID == TR2Type.Pistols_S_P))
             {
-                TR2Entity item = ItemFactory.CreateItem(level.Name, level.Data.Entities, weapon.GetLocation());
-                item.TypeID = type;
+                var item = ItemFactory.CreateItem(level.Name, level.Data.Entities,
+                weaponItem.GetLocation(), allowLimitBreak: true);
+                item.TypeID = TR2Type.Pistols_S_P;
             }
         }
 
-        uint ammoCount = _unarmedAmmoCounts[weaponType];
-        if (Settings.CrossLevelEnemies)
+        if (difficulty == EnemyDifficulty.Medium || difficulty == EnemyDifficulty.Hard)
         {
-            // Create a score based on the number and difficulty of triggered enemies.
-            List<TR2Entity> enemies = level.Data.Entities.FindAll(e => TR2TypeUtilities.IsEnemyType(e.TypeID));
-            enemies.RemoveAll(e => !level.Data.FloorData.GetEntityTriggers(level.Data.Entities.IndexOf(e)).Any());
-            if (level.Is(TR2LevelNames.HOME))
-            {
-                enemies.Add(new() { TypeID = TR2Type.ShotgunGoon });
-            }
-
-            EnemyDifficulty difficulty = TR2EnemyUtilities.GetEnemyDifficulty(level.GetEnemyEntities());
-            ammoCount *= (uint)difficulty;
-
-            if (difficulty > EnemyDifficulty.Easy
-                || weaponType == TR2Type.Harpoon_S_P
-                || (weaponType == TR2Type.GrenadeLauncher_S_P && (level.Is(TR2LevelNames.CHICKEN) || level.Is(TR2LevelNames.HOME)))
-                || _generator.NextDouble() < _easyPistolChance)
-            {
-                AddItem(TR2Type.Pistols_S_P);
-            }
-
-            if (difficulty == EnemyDifficulty.Medium || difficulty == EnemyDifficulty.Hard)
-            {
-                AddItem(TR2Type.SmallMed_S_P);
-            }
-            if (difficulty > EnemyDifficulty.Medium)
-            {
-                AddItem(TR2Type.LargeMed_S_P);
-            }
-            if (difficulty == EnemyDifficulty.VeryHard)
-            {
-                AddItem(TR2Type.LargeMed_S_P);
-            }
+            level.Script.AddStartInventoryItem(TR2Type.SmallMed_S_P);
         }
-        else if (level.Is(TR2LevelNames.LAIR))
+        if (difficulty > EnemyDifficulty.Medium)
         {
-            ammoCount *= 6;
+            level.Script.AddStartInventoryItem(TR2Type.LargeMed_S_P);
+        }
+        if (difficulty == EnemyDifficulty.VeryHard)
+        {
+            level.Script.AddStartInventoryItem(TR2Type.LargeMed_S_P, 2);
         }
 
+        var ammoCount = _unarmedAmmoCounts[weaponItem.TypeID];
+        ammoCount *= (uint)difficulty;
         if (ammoCount == 0)
         {
             return;
         }
+        
+        if (level.Is(TR2LevelNames.LAIR))
+        {
+            ammoCount *= 6;
+        }
 
-        TR2Type ammoType = TR2TypeUtilities.GetWeaponAmmo(weaponType);
+        var ammoType = TR2TypeUtilities.GetWeaponAmmo(weaponItem.TypeID);
         if (level.Is(TR2LevelNames.HOME))
         {
-            // Just convert every ammo pickup to match the gun, no need for script extras
             level.Data.Entities.FindAll(e => TR2TypeUtilities.IsAmmoType(e.TypeID))
                 .ForEach(e => e.TypeID = ammoType);
         }
