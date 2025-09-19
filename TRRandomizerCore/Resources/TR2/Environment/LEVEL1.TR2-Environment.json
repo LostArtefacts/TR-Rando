@@ -449,6 +449,31 @@
     },
     {
       "Condition": {
+        "Comments": "If item #155 is not in its default position, make its pickup trigger a normal one.",
+        "ConditionType": 0,
+        "EntityIndex": 155,
+        "X": 22016,
+        "Y": -4096,
+        "Z": 16896,
+        "Room": 81
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Locations": [
+            {
+              "X": 22016,
+              "Y": -4096,
+              "Z": 16896,
+              "Room": 81
+            }
+          ],
+          "TrigType": 0
+        }
+      ]
+    },
+    {
+      "Condition": {
         "Comments": "If item #154 is not in its default position, add something else for the flipmap trigger.",
         "ConditionType": 0,
         "EntityIndex": 154,

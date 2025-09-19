@@ -1,5 +1,46 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Guarantee the return path gate will open regardless of item rando.",
+      "EMType": 67,
+      "BaseLocation": {
+        "X": 46592,
+        "Y": 3072,
+        "Z": 36352,
+        "Room": 66
+      },
+      "NewLocation": {
+        "X": 48640,
+        "Y": 4480,
+        "Z": 38400,
+        "Room": 66
+      }
+    },
+    {
+      "EMType": 69,
+      "Location": {
+        "X": 48640,
+        "Y": 4480,
+        "Z": 38400,
+        "Room": 66
+      },
+      "TrigType": 0
+    },
+    {
+      "EMType": 68,
+      "Location": {
+        "X": 48640,
+        "Y": 4480,
+        "Z": 38400,
+        "Room": 66
+      },
+      "Actions": [
+        {
+          "Parameter": 6
+        }
+      ]
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
@@ -561,6 +602,23 @@
             }
           ],
           "TrigType": 0
+        },
+        {
+          "EMType": 63,
+          "Locations": [
+            {
+              "X": 65024,
+              "Y": 1024,
+              "Z": 71168,
+              "Room": 45
+            }
+          ],
+          "BaseLocation": {
+            "X": 65024,
+            "Y": 1024,
+            "Z": 72192,
+            "Room": 45
+          }
         }
       ]
     },

@@ -6,63 +6,70 @@ public class EMMergeTriggersFunction : BaseEMFunction
 {
     public EMLocation BaseLocation { get; set; }
     public EMLocation TargetLocation { get; set; }
+    public List<EMLocation> TargetLocations { get; set; }
 
     public override void ApplyToLevel(TR1Level level)
     {
-        EMLevelData data = GetData(level);
-        MergeTriggers(level.GetRoomSector(data.ConvertLocation(BaseLocation)),
-            level.GetRoomSector(data.ConvertLocation(TargetLocation)),
-            level.FloorData);
+        var data = GetData(level);
+        MergeTriggers(level.FloorData, loc => level.GetRoomSector(data.ConvertLocation(loc)));
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        EMLevelData data = GetData(level);
-        MergeTriggers(level.GetRoomSector(data.ConvertLocation(BaseLocation)),
-            level.GetRoomSector(data.ConvertLocation(TargetLocation)),
-            level.FloorData);
+        var data = GetData(level);
+        MergeTriggers(level.FloorData, loc => level.GetRoomSector(data.ConvertLocation(loc)));
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        EMLevelData data = GetData(level);
-        MergeTriggers(level.GetRoomSector(data.ConvertLocation(BaseLocation)),
-            level.GetRoomSector(data.ConvertLocation(TargetLocation)),
-            level.FloorData);
+        var data = GetData(level);
+        MergeTriggers(level.FloorData, loc => level.GetRoomSector(data.ConvertLocation(loc)));
     }
 
-    private static void MergeTriggers(TRRoomSector baseSector, TRRoomSector targetSector, FDControl floorData)
+    private void MergeTriggers(FDControl floorData, Func<EMLocation, TRRoomSector> getSector)
     {
-        FDEntry baseEntry;
+        var baseSector = getSector(BaseLocation);
         if (baseSector.FDIndex == 0
-            || baseSector == targetSector
-            || (baseEntry = floorData[baseSector.FDIndex].Find(e => e is FDTriggerEntry)) == null)
+            || floorData[baseSector.FDIndex].OfType<FDTriggerEntry>().FirstOrDefault() is not FDTriggerEntry baseTrigger)
         {
             return;
         }
 
-        if (targetSector.FDIndex == 0)
+        var targets = new List<EMLocation>();
+        if (TargetLocations != null)
         {
-            floorData.CreateFloorData(targetSector);
+            targets.AddRange(TargetLocations);
+        }
+        if (TargetLocation != null)
+        {
+            targets.Add(TargetLocation); // Legacy
         }
 
-        FDEntry targetEntry = floorData[targetSector.FDIndex].Find(e => e is FDTriggerEntry);
-        if (targetEntry == null)
+        foreach (var location in targets)
         {
-            floorData[targetSector.FDIndex].Add(baseEntry);
-        }
-        else
-        {
-            FDTriggerEntry baseTrigger = baseEntry as FDTriggerEntry;
-            FDTriggerEntry targetTrigger = targetEntry as FDTriggerEntry;
-
-            targetTrigger.Actions.AddRange(baseTrigger.Actions);
-            if (baseTrigger.OneShot)
+            var targetSector = getSector(location);
+            if (baseSector == targetSector)
             {
-                targetTrigger.OneShot = true;
+                continue;
+            }
+
+            if (targetSector.FDIndex == 0)
+            {
+                floorData.CreateFloorData(targetSector);
+            }
+
+            if (floorData[targetSector.FDIndex].
+                OfType<FDTriggerEntry>().FirstOrDefault() is not FDTriggerEntry targetTrigger)
+            {
+                floorData[targetSector.FDIndex].Add(baseTrigger);
+            }
+            else
+            {
+                targetTrigger.Actions.AddRange(baseTrigger.Actions);
+                targetTrigger.OneShot |= baseTrigger.OneShot;
             }
         }
 
-        floorData[baseSector.FDIndex].Remove(baseEntry);
+        floorData[baseSector.FDIndex].Remove(baseTrigger);
     }
 }

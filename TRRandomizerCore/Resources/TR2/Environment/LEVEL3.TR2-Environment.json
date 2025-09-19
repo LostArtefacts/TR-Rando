@@ -19,6 +19,18 @@
       }
     },
     {
+      "Comments": "Remove a stale pickup trigger under item 57, it's triggered elsewhere.",
+      "EMType": 62,
+      "Locations": [
+        {
+          "X": 51712,
+          "Y": -4736,
+          "Z": 8704,
+          "Room": 19
+        }
+      ]
+    },
+    {
       "Comments": "Add a ladder as a return path from room 8.",
       "EMType": 26,
       "Tags": [
