@@ -49,9 +49,9 @@ Following are details on the return paths that are available. See `Global Settin
 | Dragon's Lair | Slopes adjusted in room 2 to allow exiting the main arena. |
 | Home Sweet Home | _Not required_ |
 | The Cold War | Link room added between rooms 37 and 64. |
-| Fool's Gold | _Not required_ |
+| Fool's Gold | Door 143 will remain open after Lara goes through it. |
 | Furnace of the Gods | Ladder added to room 8 for room 25; drawbridge added in room 42. |
-| Kingdom | _Not required_ |
+| Kingdom | Doors 6 and 22 will be guaranteed to be open on arrival in room 66. |
 | Nightmare in Vegas | _Not required_ |
 
 ## TR3

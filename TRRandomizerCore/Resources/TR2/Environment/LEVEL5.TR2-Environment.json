@@ -470,7 +470,7 @@
     },
     {
       "Condition": {
-        "Comments": "If item #142 is not in its default position, make its pickup trigger a normal one.",
+        "Comments": "If item #142 is not in its default position, trigger the enemies along with the others in this area.",
         "ConditionType": 0,
         "EntityIndex": 142,
         "X": 48640,
@@ -480,22 +480,49 @@
       },
       "OnFalse": [
         {
-          "EMType": 69,
-          "Locations": [
+          "EMType": 73,
+          "BaseLocation": {
+            "X": 48640,
+            "Y": 12032,
+            "Z": 83456,
+            "Room": 74
+          },
+          "TargetLocations": [
             {
-              "X": 48640,
-              "Y": 12032,
-              "Z": 83456,
-              "Room": 74
+              "X": 47616,
+              "Y": 12800,
+              "Z": 76288,
+              "Room": 75
             },
             {
               "X": 48640,
-              "Y": 12032,
-              "Z": 83456,
-              "Room": 74
+              "Y": 12800,
+              "Z": 76288,
+              "Room": 75
+            },
+            {
+              "X": 49664,
+              "Y": 12800,
+              "Z": 76288,
+              "Room": 75
+            },
+            {
+              "X": 50688,
+              "Y": 12800,
+              "Z": 76288,
+              "Room": 75
             }
-          ],
-          "TrigType": 0
+          ]
+        },
+        {
+          "EMType": 129,
+          "CameraIndex": 6,
+          "NewLocation": {
+            "X": 53760,
+            "Y": 9984,
+            "Z": 84480,
+            "Room": 74
+          }
         }
       ]
     },

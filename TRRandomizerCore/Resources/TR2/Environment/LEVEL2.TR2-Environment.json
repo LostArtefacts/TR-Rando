@@ -64,6 +64,21 @@
         35
       ],
       "IsSkyboxVisible": true
+    },
+    {
+      "Comments": "Keep door 143 open once Lara gets through.",
+      "EMType": 68,
+      "Location": {
+        "X": 44544,
+        "Y": 1024,
+        "Z": 40448,
+        "Room": 69
+      },
+      "Actions": [
+        {
+          "Parameter": 143
+        }
+      ]
     }
   ],
   "Any": [],
