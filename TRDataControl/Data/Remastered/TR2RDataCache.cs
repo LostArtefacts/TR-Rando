@@ -75,7 +75,7 @@ public class TR2RDataCache : BaseTRRDataCache<TR2Type, TR2RAlias>
 
         [TR2Type.Eagle] = TR2LevelNames.TIBET,
         [TR2Type.Mercenary2OG] = TR2LevelNames.TIBET,
-        [TR2Type.Mercenary3] = TR2LevelNames.TIBET,
+        [TR2Type.Mercenary3OG] = TR2LevelNames.TIBET,
         [TR2Type.MercSnowmobDriverOG] = TR2LevelNames.TIBET,
         [TR2Type.BlackSnowmobOG] = TR2LevelNames.TIBET,
         [TR2Type.RedSnowmobile] = TR2LevelNames.TIBET,
