@@ -13,16 +13,10 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR2REnemyRandomizer : BaseTR2RRandomizer
 {
-    private static readonly List<string> _dragonLevels = new()
-    {
-        TR2LevelNames.GW,
-        TR2LevelNames.DORIA,
-        TR2LevelNames.DECK,
-        TR2LevelNames.TIBET,
-        TR2LevelNames.COT,
-        TR2LevelNames.CHICKEN,
+    private static readonly List<string> _dragonLevels =
+    [
         TR2LevelNames.XIAN,
-    };
+    ];
 
     private const int _hshShellCount = 16;
     private static readonly List<Location> _hshShellLocations = new()

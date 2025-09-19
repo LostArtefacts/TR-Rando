@@ -147,23 +147,6 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
             testedTypes.Add(type);
 
-            // Check if the use of this enemy triggers an overwrite of the pool, for example
-            // the dragon in HSH. Null means nothing special has been defined.
-            var restrictedCombinations = TR2EnemyUtilities.GetPermittedCombinations(levelName, type, difficulty, Settings.IsRemastered);
-            if (restrictedCombinations != null)
-            {
-                do
-                {
-                    // Pick a combination, ensuring we honour docile bird monsters if present,
-                    // and try to select a group that doesn't contain an excluded enemy.
-                    newTypes.Clear();
-                    newTypes.AddRange(restrictedCombinations[Generator.Next(0, restrictedCombinations.Count)]);
-                }
-                while (Settings.DocileChickens && newTypes.Any(TR2TypeUtilities.IsBirdMonsterType) && chickenGuisers.All(g => newTypes.Contains(g))
-                    || (newTypes.Any(_excludedEnemies.Contains) && restrictedCombinations.Any(c => !c.Any(_excludedEnemies.Contains))));
-                break;
-            }
-
             // If it's the chicken in HSH with default behaviour, we don't want it ending the level
             if (Settings.DefaultChickens && TR2TypeUtilities.IsBirdMonsterType(type)
                 && levelName == TR2LevelNames.HOME && allEnemies.Except(newTypes).Count() > 1)

@@ -139,31 +139,6 @@ public static class TR2EnemyUtilities
         return _restrictedEnemyLevelCountsTechnical.Count;
     }
 
-    public static List<List<TR2Type>> GetPermittedCombinations(
-        string levelName, TR2Type type, RandoDifficulty difficulty, bool remastered)
-    {
-        if (!remastered)
-        {
-            return null;
-        }
-
-        if (_specialEnemyCombinations.TryGetValue(levelName, out var typeDict)
-            && typeDict.TryGetValue(type, out var difficultyDict))
-        {
-            if (difficultyDict.TryGetValue(difficulty, out var result))
-            {
-                return result;
-            }
-
-            if (difficultyDict.TryGetValue(RandoDifficulty.DefaultOrNoRestrictions, out result))
-            {
-                return result;
-            }
-        }
-
-        return null;
-    }
-
     public static Dictionary<TR2Type, List<string>> PrepareEnemyGameTracker(bool docileBirdMonster, RandoDifficulty difficulty)
     {
         Dictionary<TR2Type, List<string>> tracker = new();
@@ -296,10 +271,6 @@ public static class TR2EnemyUtilities
     private static readonly Dictionary<string, Dictionary<TR2Type, List<int>>> _restrictedEnemyZonesDefault;
     private static readonly Dictionary<string, Dictionary<TR2Type, List<int>>> _restrictedEnemyZonesTechnical;
 
-    // This allows us to define specific combinations of enemies if the leader is chosen for the rando pool. For
-    // example, the dragon in HSH will only work with 20 possible combinations.
-    private static readonly Dictionary<string, Dictionary<TR2Type, Dictionary<RandoDifficulty, List<List<TR2Type>>>>> _specialEnemyCombinations;
-
     // We also limit the count for some - more than 1 dragon tends to cause crashes if they spawn close together.
     // Winston is an easter egg so maybe keep it low.
     private static readonly Dictionary<TR2Type, int> _restrictedEnemyLevelCountsTechnical = new()
@@ -341,10 +312,6 @@ public static class TR2EnemyUtilities
         _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Type, List<int>>>>
         (
             File.ReadAllText("Resources/TR2/Restrictions/enemy_restrictions_technical.json")
-        );
-        _specialEnemyCombinations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Type, Dictionary<RandoDifficulty, List<List<TR2Type>>>>>>
-        (
-            File.ReadAllText("Resources/TR2/Restrictions/enemy_restrictions_special.json")
         );
 
         ExpandZones(_restrictedEnemyZonesDefault.Select(z => z.Value));

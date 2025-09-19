@@ -29,6 +29,7 @@
 - fixed an uncollectible secret in Natla's Mines (#849)
 - fixed models all using the same highlight colour in wireframe mode (#852)
 - fixed the Temple of Xian Dragon Seal room (default placement) sometimes being flipped on arrival, leading to potential softlocks (OG bug)
+- removed support for the dragon (TR2 Remastered only) in all levels except Dragon's Lair (may revisit)
 
 ## [V1.10.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.1...V1.10.2) - 2024-12-06
 - added support for TR1X 4.6 (#796)
