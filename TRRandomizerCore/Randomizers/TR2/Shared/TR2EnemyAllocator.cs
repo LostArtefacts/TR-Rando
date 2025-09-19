@@ -71,7 +71,7 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
 
         if (TR2EnemyUtilities.IsWaterEnemyRequired(level))
         {
-            List<TR2Type> waterEnemies = TR2TypeUtilities.KillableWaterCreatures();
+            List<TR2Type> waterEnemies = TR2TypeUtilities.KillableWaterCreatures(Settings.IsRemastered);
             newTypes.Add(SelectRequiredEnemy(waterEnemies, levelName, difficulty));
         }
 

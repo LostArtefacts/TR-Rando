@@ -717,32 +717,23 @@ public static class TR2TypeUtilities
             || type == TR2Type.BarracudaXian || type == TR2Type.ScubaDiver;
     }
 
-    public static List<TR2Type> WaterCreatures()
+    public static List<TR2Type> KillableWaterCreatures(bool remastered)
     {
-        return new()
+        var types = new List<TR2Type>
         {
             TR2Type.SharkOG,
-            TR2Type.SharkGM,
             TR2Type.BarracudaIce,
             TR2Type.BarracudaUnwater,
             TR2Type.BarracudaXian,
-            TR2Type.YellowMorayEel,
-            TR2Type.BlackMorayEel,
             TR2Type.ScubaDiver
         };
-    }
 
-    public static List<TR2Type> KillableWaterCreatures()
-    {
-        return new()
+        if (!remastered)
         {
-            TR2Type.SharkOG,
-            TR2Type.SharkGM,
-            TR2Type.BarracudaIce,
-            TR2Type.BarracudaUnwater,
-            TR2Type.BarracudaXian,
-            TR2Type.ScubaDiver
-        };
+            types.Add(TR2Type.SharkGM);
+        }
+
+        return types;
     }
 
     public static bool IsStaticCreature(TR2Type type)
