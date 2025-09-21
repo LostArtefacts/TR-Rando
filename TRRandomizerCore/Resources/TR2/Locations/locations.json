@@ -1669,6 +1669,7 @@
       "Z": 32665,
       "Room": 104,
       "Difficulty": "Hard",
+      "EntityIndex": 78,
       "PackID": "Eycore"
     },
     {
@@ -7308,6 +7309,33 @@
       "Room": 32
     },
     {
+      "X": 82362,
+      "Y": -1890,
+      "Z": 68569,
+      "Room": 32,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 93696,
+      "Y": -2176,
+      "Z": 66048,
+      "Room": 32,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 94117,
+      "Y": -1282,
+      "Z": 54305,
+      "Room": 32,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 51153,
+      "Y": -14332,
+      "Z": 31973,
+      "Room": 17
+    },
+    {
       "X": 70580,
       "Y": -1536,
       "Z": 57291,
@@ -7627,6 +7655,13 @@
       "Y": 17920,
       "Z": 36864,
       "Room": 96
+    },
+    {
+      "X": 23489,
+      "Y": 2363,
+      "Z": 37940,
+      "Room": 33,
+      "Difficulty": "Hard"
     }
   ],
   "LEVEL3.TR2": [
@@ -7642,6 +7677,15 @@
       "Y": -6096,
       "Z": 22464,
       "Room": 64
+    },
+    {
+      "X": 66621,
+      "Y": -1024,
+      "Z": 36799,
+      "Room": 1,
+      "Difficulty": "Hard",
+      "RequiresDamage": true,
+      "RequiresGlitch": true
     },
     {
       "X": 30752,
@@ -7710,6 +7754,13 @@
       "Y": -2048,
       "Z": 59483,
       "Room": 24
+    },
+    {
+      "X": 11214,
+      "Y": -2636,
+      "Z": 55335,
+      "Room": 30,
+      "RequiresDamage": true
     },
     {
       "X": 30622,
