@@ -47,6 +47,26 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
     protected override bool IsOneShotType(TR2Type type)
         => type == TR2Type.MarcoBartoli;
 
+    protected override void RelocationsLoaded()
+    {
+        foreach (var locations in _relocations.Values)
+        {
+            var blackLocations = locations.FindAll(l => l.TargetType == (short)TR2Type.BlackMorayEel);
+            foreach (var blackEel in blackLocations)
+            {
+                var hasYellowEel = locations.Any(l => l.IsEquivalent(blackEel)
+                    && l.EntityIndex == blackEel.EntityIndex
+                    && l.TargetType == (short)TR2Type.YellowMorayEel);
+                if (!hasYellowEel)
+                {
+                    var yellowEel = blackEel.Clone();
+                    yellowEel.TargetType = (short)TR2Type.YellowMorayEel;
+                    locations.Add(yellowEel);
+                }
+            }
+        }
+    }
+
     public EnemyTransportCollection<TR2Type> SelectCrossLevelEnemies(string levelName, TR2Level level)
     {
         if (levelName == TR2LevelNames.ASSAULT)
