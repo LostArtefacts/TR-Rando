@@ -143,7 +143,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             TR2Type.Lara, TR2Type.LaraPonytail_H, TR2Type.LaraFlareAnim_H,
             TR2Type.LaraPistolAnim_H, TR2Type.LaraShotgunAnim_H, TR2Type.LaraAutoAnim_H,
             TR2Type.LaraUziAnim_H, TR2Type.LaraM16Anim_H, TR2Type.LaraHarpoonAnim_H,
-            TR2Type.LaraGrenadeAnim_H, TR2Type.LaraMiscAnim_H
+            TR2Type.LaraGrenadeAnim_H, TR2Type.LaraMiscAnim_H, TR2Type.CutsceneActor3,
         };
 
         private readonly Dictionary<TR2CombinedLevel, TR2Type> _outfitAllocations;
