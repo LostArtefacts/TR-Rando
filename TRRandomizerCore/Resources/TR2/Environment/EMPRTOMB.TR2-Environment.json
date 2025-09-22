@@ -111,6 +111,27 @@
       ]
     },
     {
+      "Comments": "Switch off flipmap 3 after leaving that area.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 30208,
+          "Y": 29696,
+          "Z": 35328,
+          "Room": 57
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Action": 5,
+            "Parameter": 3
+          }
+        ]
+      }
+    },
+    {
       "Comments": "It's entirely possible to softlock in OG in the main chamber area, so prevent that by adding extra triggers for trapdoors 79 and 145.",
       "EMType": 61,
       "Locations": [
