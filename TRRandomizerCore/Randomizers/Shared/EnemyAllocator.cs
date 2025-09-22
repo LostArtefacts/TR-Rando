@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Utilities;
@@ -22,9 +21,12 @@ public abstract class EnemyAllocator<T>
     {
         string relocFile = $"Resources/{version}/Locations/enemy_relocations.json";
         _relocations = File.Exists(relocFile)
-            ? JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(relocFile))
-            : new();
+            ? JsonUtils.ReadFile<Dictionary<string, List<Location>>>(relocFile)
+            : [];
+        RelocationsLoaded();
     }
+
+    protected virtual void RelocationsLoaded() { }
 
     public void Initialise()
     {
