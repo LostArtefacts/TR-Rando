@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using TRDataControl;
 using TRDataControl.Environment;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
@@ -184,14 +185,26 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             return;
         }
 
-        var enemyTrigActions = level.Data.Entities
+        var enemies = level.Data.Entities
             .Select((entity, idx) => (entity, idx))
-            .Where(x => x.entity.Room == 11 && TR2TypeUtilities.IsEnemyType(x.entity.TypeID))
-            .Select(x => new FDActionItem
+            .Where(x => x.entity.Room == 11 && TR2TypeUtilities.IsEnemyType(x.entity.TypeID));
+        foreach (var enemy in enemies.Select(x => x.entity))
+        {
+            var x = (enemy.X - level.Data.Rooms[11].Info.X) / TRConsts.Step4;
+            var z = (enemy.Z - level.Data.Rooms[11].Info.Z) / TRConsts.Step4;
+            enemy.Angle = (x, z) switch
             {
-                Action = FDTrigAction.Object,
-                Parameter = (short)x.idx,
-            }).ToList();
+                (1, _) => -16384,
+                (_, 1) => -32768,
+                _ => 0,
+            };
+        }
+
+        var enemyTrigActions = enemies.Select(x => new FDActionItem
+        {
+            Action = FDTrigAction.Object,
+            Parameter = (short)x.idx,
+        }).ToList();
         enemyTrigActions.Shuffle(_generator);
         var actionGroups = enemyTrigActions.Split(4);
 
