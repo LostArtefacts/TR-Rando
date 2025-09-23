@@ -29,6 +29,15 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
         TR2LevelNames.MONASTERY,
     };
 
+    private static readonly List<TR2Type> _furnaceBlockRoomRestrictedTypes =
+    [
+        .. TR2TypeUtilities.GetFamily(TR2Type.BirdMonsterOG),
+        .. TR2TypeUtilities.GetFamily(TR2Type.FlamethrowerGoonOG),
+        TR2Type.ShotgunGoon,
+        TR2Type.TRex,
+        TR2Type.XianGuardSpear,
+    ];
+
     public TR2EnemyAllocator()
         : base(TRGameVersion.TR2) { }
 
@@ -483,6 +492,13 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
                 }
             }
 
+            if (levelName == TR2LevelNames.FURNACE && currentEntity.Room == 11
+                && difficulty == RandoDifficulty.Default)
+            {
+                newType = SelectFurnaceBlockRoomType(newType, enemyPool,
+                    enemyEntities.FindAll(e => e.Room == 11 && e != currentEntity));
+            }
+
             // If we are restricting count per level for this enemy and have reached that count, pick
             // something else. This applies when we are restricting by in-level count, but not by room
             // (e.g. Winston).
@@ -552,6 +568,19 @@ public class TR2EnemyAllocator : EnemyAllocator<TR2Type>
             };
             allocator.ExcludeEnemyKeyDrops(level.Entities);
         }
+    }
+
+    private TR2Type SelectFurnaceBlockRoomType(TR2Type selectedType, List<TR2Type> pool, List<TR2Entity> neighbours)
+    {
+        var safePool = pool.Except(_furnaceBlockRoomRestrictedTypes).ToList();
+        if (!_furnaceBlockRoomRestrictedTypes.Contains(selectedType) || safePool.Count == 0)
+        {
+            return selectedType;
+        }
+
+        return neighbours.Any(e => e.TypeID == TR2TypeUtilities.TranslateAlias(selectedType))
+            ? safePool.RandomItem(Generator)
+            : selectedType;
     }
 
     private void LimitSkidooEntities(string levelName, TR2Level level)
