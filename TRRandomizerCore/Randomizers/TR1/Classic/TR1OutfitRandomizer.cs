@@ -19,6 +19,7 @@ namespace TRRandomizerCore.Randomizers;
 public class TR1OutfitRandomizer : BaseTR1Randomizer
 {
     private static readonly string _gymOutfitHash = "6523d69dbf1f0ab671f5f877afe6ff35";
+    private static readonly string _mauledOutfitHash = "ab52e600b2f4fa7edfd3e9a32d1a5582";
     private static readonly Version _minBraidCutsceneVersion = new(2, 13, 0);
     private static readonly TR1SFX[] _barefootSfxIDs = new TR1SFX[] { TR1SFX.LaraFeet, TR1SFX.LaraLand };
     private static readonly double _mauledLaraChance = (double)1 / 3;
@@ -802,6 +803,11 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             List<TRMesh> lara = level.Data.Models[(level.IsCutScene ? TR1Type.CutsceneActor1 : TR1Type.Lara)].Meshes;
             List<TRMesh> laraShotgun = level.Data.Models[TR1Type.LaraShotgunAnim_H]?.Meshes;
             List<TRMesh> laraMisc = level.Data.Models[TR1Type.LaraMiscAnim_H]?.Meshes;
+
+            if (laraMisc == null || laraMisc.ComputeSkeletonHash() != _mauledOutfitHash)
+            {
+                return;
+            }
 
             if (level.Is(TR1LevelNames.QUALOPEC_CUT))
             {
