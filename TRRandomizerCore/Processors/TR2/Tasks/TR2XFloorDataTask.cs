@@ -41,5 +41,12 @@ public class TR2XFloorDataTask : ITR2ProcessorTask
         {
             level.Data.Cameras[7].Y -= TRConsts.Step2 + 16;
         }
+
+        if (level.Is(TR2LevelNames.CHICKEN))
+        {
+            var sector = level.Data.Rooms[48].GetSector(5, 4, TRUnit.Sector);
+            var zone = level.Data.Boxes[sector.BoxIndex].Zone;
+            zone.FlipOnZone = zone.FlipOffZone.Clone();
+        }
     }
 }
