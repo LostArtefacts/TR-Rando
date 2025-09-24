@@ -1,4 +1,15 @@
 {
+  "Landmarks": {
+    "Landmarks.NevByte": {
+      "0": [
+        {
+          "RoomNumber": 23,
+          "RectangleIndices": [ 76 ],
+          "BackgroundIndex": 44
+        }
+      ]
+    }
+  },
   "Static": {
     "Lara.Bobble": [
       {

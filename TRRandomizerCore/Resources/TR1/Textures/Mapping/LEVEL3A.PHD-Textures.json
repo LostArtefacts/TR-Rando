@@ -8,6 +8,15 @@
           "BackgroundIndex": 3
         }
       ]
+    },
+    "Landmarks.GMSryBut": {
+      "0": [
+        {
+          "RoomNumber": 61,
+          "RectangleIndices": [ 7 ],
+          "BackgroundIndex": 5
+        }
+      ]
     }
   },
 

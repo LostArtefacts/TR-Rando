@@ -1,4 +1,15 @@
 {
+  "Landmarks": {
+    "Landmarks.ReptiliaDraconia": {
+      "0": [
+        {
+          "RoomNumber": 17,
+          "RectangleIndices": [ 43 ],
+          "BackgroundIndex": 1494
+        }
+      ]
+    }
+  },
   "Static": {
     "ColdWar.Sky": [
       {

@@ -7,6 +7,15 @@
           "RectangleIndices": [ 60 ]
         }
       ]
+    },
+    "Landmarks.chreden": {
+      "0": [
+        {
+          "RoomNumber": 106,
+          "RectangleIndices": [ 21 ],
+          "BackgroundIndex": 1552
+        }
+      ]
     }
   },
 

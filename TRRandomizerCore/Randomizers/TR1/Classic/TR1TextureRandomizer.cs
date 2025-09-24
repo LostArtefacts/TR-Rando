@@ -281,10 +281,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             : base(outer)
         {
             _holders = new();
-            _landmarkImporter = new()
-            {
-                IsCommunityPatch = true
-            };
+            _landmarkImporter = new();
             _wireframer = new();
         }
 

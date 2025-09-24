@@ -10,14 +10,11 @@ namespace TRRandomizerCore.Textures;
 
 public abstract class AbstractLandmarkImporter<E, L>
     where E : Enum
-    where L : class
+    where L : TRLevelBase
 {
-    public bool IsCommunityPatch { get; set; }
-
     protected abstract int MaxTextures { get; }
 
     protected abstract TRTexturePacker CreatePacker(L level);
-    protected abstract List<TRObjectTexture> GetObjectTextures(L level);
     protected abstract void SetRoomTexture(L level, int roomIndex, int rectangleIndex, ushort textureIndex);
     protected abstract short? GetRoomFromPortal(L level, PortalSector portalSector, bool isLevelMirrored);
 
@@ -27,7 +24,7 @@ public abstract class AbstractLandmarkImporter<E, L>
         mapping.CommitGraphics();
 
         // If we are already at the maximum number of textures, bail out.
-        List<TRObjectTexture> textures = GetObjectTextures(level);
+        var textures = level.ObjectTextures;
         if (textures.Count == MaxTextures)
         {
             return false;
