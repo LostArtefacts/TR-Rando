@@ -6,16 +6,11 @@ namespace TRRandomizerCore.Textures;
 
 public class TR2LandmarkImporter : AbstractLandmarkImporter<TR2Type, TR2Level>
 {
-    protected override int MaxTextures => 2048;
+    protected override int MaxTextures => int.MaxValue;
 
     protected override TRTexturePacker CreatePacker(TR2Level level)
     {
-        return new TR2TexturePacker(level);
-    }
-
-    protected override List<TRObjectTexture> GetObjectTextures(TR2Level level)
-    {
-        return level.ObjectTextures;
+        return new TR2TexturePacker(level, maximumTiles: short.MaxValue);
     }
 
     protected override void SetRoomTexture(TR2Level level, int roomIndex, int rectangleIndex, ushort textureIndex)

@@ -7,6 +7,24 @@
           "RectangleIndices": [ 22 ]
         }
       ]
+    },
+    "Landmarks.XeNoN3560": {
+      "0": [
+        {
+          "RoomNumber": 0,
+          "RectangleIndices": [ 3 ],
+          "BackgroundIndex": 1622
+        }
+      ]
+    },
+    "Landmarks.GMSryBut": {
+      "0": [
+        {
+          "RoomNumber": 22,
+          "RectangleIndices": [ 15 ],
+          "BackgroundIndex": 1624
+        }
+      ]
     }
   },
 
