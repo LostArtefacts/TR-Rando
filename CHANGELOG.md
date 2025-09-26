@@ -32,6 +32,7 @@
 - fixed a glitchless secret in Bartoli's Hideout not always being obtainable without using glitches
 - fixed Lara not being invisible in the Diving Area cutscene if she was invisible in the level itself
 - fixed an error message during TR1 outfit randomization
+- fixed the imported dragon room in Floating Islands using the wrong textures
 - removed support for the dragon (TR2 Remastered only) in all levels except Dragon's Lair (may revisit)
 
 ## [V1.10.2](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.1...V1.10.2) - 2024-12-06
