@@ -169,6 +169,10 @@ public class TR2EnvironmentRandomizer : BaseTR2Randomizer, IMirrorControl
 
         if (mapping != null)
         {
+            if (level.IsUKBox)
+            {
+                mapping.AlternateTextures();
+            }
             mapping.SetCommunityPatch(ScriptEditor.Edition.IsCommunityPatch);
 
             foreach (EMConditionalSingleEditorSet mod in mapping.ConditionalAll)
