@@ -2276,16 +2276,23 @@
           }
         },
         {
-          "Comments": "Convert the CoT slot into an empty one.",
-          "EMType": 45,
-          "EntityIndex": 10,
-          "NewEntityType": 182
+          "Comments": "Clone puzzle 1 objects into puzzle 4.",
+          "EMType": 148,
+          "ModelMap": {
+            "178": 181,
+            "182": 185,
+            "186": 189
+          },
+          "SpriteMap": {
+            "174": 177
+          }
         },
         {
-          "Comments": "Reposition it to the ladder.",
-          "EMType": 44,
-          "EntityIndex": 10,
-          "TargetLocation": {
+          "Comments": "Add a slot4 at the base of the ladder.",
+          "EMType": 51,
+          "TypeID": 185,
+          "Intensity": -1,
+          "Location": {
             "X": 62976,
             "Y": 11520,
             "Z": 44544,
@@ -2294,16 +2301,11 @@
           }
         },
         {
-          "Comments": "Convert one of the CoT doors into a smaller door.",
-          "EMType": 45,
-          "EntityIndex": 16,
-          "NewEntityType": 108
-        },
-        {
-          "Comments": "Reposition it to the exit.",
-          "EMType": 44,
-          "EntityIndex": 16,
-          "TargetLocation": {
+          "Comments": "Add a door.",
+          "EMType": 51,
+          "TypeID": 108,
+          "Intensity": -1,
+          "Location": {
             "X": 62976,
             "Y": 7424,
             "Z": 43520,
@@ -2312,35 +2314,30 @@
           }
         },
         {
-          "Comments": "Convert one of the CoT doors into a mask.",
-          "EMType": 45,
-          "EntityIndex": 15,
-          "NewEntityType": 174
+          "Comments": "Make a trigger to open the final door.",
+          "EMType": 61,
+          "EntityLocation": -2,
+          "Trigger": {
+            "TrigType": 3,
+            "Mask": 31,
+            "SwitchOrKeyRef": -2,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
         },
         {
-          "Comments": "The chicken stole it.",
-          "EMType": 44,
-          "EntityIndex": 15,
-          "TargetLocation": {
+          "Comments": "Whatever the chicken is will drop a mask.",
+          "EMType": 51,
+          "TypeID": 177,
+          "Intensity": -1,
+          "Location": {
             "X": 66048,
             "Y": 11520,
             "Z": 41472,
             "Room": 143
-          }
-        },
-        {
-          "Comments": "Make a new trigger to open the final door.",
-          "EMType": 61,
-          "EntityLocation": 10,
-          "Trigger": {
-            "TrigType": 3,
-            "Mask": 31,
-            "SwitchOrKeyRef": 10,
-            "Actions": [
-              {
-                "Parameter": 16
-              }
-            ]
           }
         },
         {

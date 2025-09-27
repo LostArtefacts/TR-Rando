@@ -127,6 +127,7 @@ public class EMConverter : JsonConverter
             EMType.ImportNonGraphicsModel => JsonConvert.DeserializeObject<EMImportNonGraphicsModelFunction>(jo.ToString(), this),
             EMType.CopySpriteSequence => JsonConvert.DeserializeObject<EMCopySpriteSequenceFunction>(jo.ToString(), this),
             EMType.RemoveStaticCollision => JsonConvert.DeserializeObject<EMRemoveStaticCollisionFunction>(jo.ToString(), this),
+            EMType.CloneType => JsonConvert.DeserializeObject<EMCloneTypeFunction>(jo.ToString(), this),
 
             // NOOP
             EMType.NOOP => JsonConvert.DeserializeObject<EMPlaceholderFunction>(jo.ToString(), this),

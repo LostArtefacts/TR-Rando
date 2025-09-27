@@ -96,6 +96,7 @@ public enum EMType
     ImportNonGraphicsModel = 145,
     CopySpriteSequence = 146,
     RemoveStaticCollision = 147,
+    CloneType = 148,
 
     // NOOP/Placeholder
     NOOP = 1000
