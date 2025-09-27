@@ -353,7 +353,8 @@ public class TR2REnemyRandomizer : BaseTR2RRandomizer
                     {
                         TR2EnemyAllocator.DisguiseType(level.Name, level.Data.Models, importedCollection.BirdMonsterGuiser, TR2Type.BirdMonster);
                         TR2EnemyAllocator.DisguiseType(level.Name, level.PDPData, importedCollection.BirdMonsterGuiser, TR2Type.BirdMonster);
-                        level.MapData[importedCollection.BirdMonsterGuiser] = _birdMonsterTypes.RandomItem(_outer._generator);
+                        level.MapData[TR2TypeUtilities.TranslateAlias(importedCollection.BirdMonsterGuiser)]
+                            = _birdMonsterTypes.RandomItem(_outer._generator);
                         enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
                     }
 
