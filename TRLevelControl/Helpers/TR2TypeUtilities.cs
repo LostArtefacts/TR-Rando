@@ -908,7 +908,6 @@ public static class TR2TypeUtilities
             || IsUnrenderedType(type)
             || IsVehicleType(type)
             || IsBreakableWindowType(type)
-            || IsBridgeType(type)
             || type == TR2Type.Lara
             || type == TR2Type.Drawbridge
             || type == TR2Type.FallingBlock
