@@ -526,7 +526,6 @@ public static class TR1TypeUtilities
             || IsKeyholeType(type)
             || IsSlotType(type)
             || IsEnemyType(type)
-            || IsBridge(type)
             || IsTrapdoor(type)
             || IsDoorType(type)
             || IsPushblockType(type)
