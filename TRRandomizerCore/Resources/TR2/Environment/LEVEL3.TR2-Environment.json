@@ -31,6 +31,25 @@
       ]
     },
     {
+      "Comments": "Ensure slot 118 triggers the doors in the unflipped state.",
+      "EMType": 61,
+      "EntityLocation": 118,
+      "Trigger": {
+        "TrigType": 3,
+        "Mask": 31,
+        "SwitchOrKeyRef": 118,
+        "Actions": [
+          {
+            "Parameter": 117
+          },
+          {
+            "Parameter": 116
+          }
+        ]
+      },
+      "Replace": true
+    },
+    {
       "Comments": "Add a ladder as a return path from room 8.",
       "EMType": 26,
       "Tags": [
