@@ -2586,9 +2586,9 @@
             "EMType": 44,
             "EntityIndex": 2,
             "TargetLocation": {
-              "X": 36842,
+              "X": 36352,
               "Y": -512,
-              "Z": 48100,
+              "Z": 47616,
               "Angle": -16384
             }
           },
