@@ -20,7 +20,6 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 {
     private static readonly string _gymOutfitHash = "6523d69dbf1f0ab671f5f877afe6ff35";
     private static readonly string _mauledOutfitHash = "ab52e600b2f4fa7edfd3e9a32d1a5582";
-    private static readonly Version _minBraidCutsceneVersion = new(2, 13, 0);
     private static readonly TR1SFX[] _barefootSfxIDs = new TR1SFX[] { TR1SFX.LaraFeet, TR1SFX.LaraLand };
     private static readonly double _mauledLaraChance = (double)1 / 3;
     private static readonly double _partialGymChance = (double)1 / 3;
@@ -454,16 +453,9 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
         }
 
-        private bool CutsceneSupportsBraid(TR1CombinedLevel parentLevel)
+        private static bool CutsceneSupportsBraid(TR1CombinedLevel parentLevel)
         {
             if (!parentLevel.HasCutScene || parentLevel.Is(TR1LevelNames.MINES))
-            {
-                return false;
-            }
-
-            // Not supported before 2.13, so don't make any changes to Lara here.
-            Version tr1xVersion = _outer.ScriptEditor.Edition.ExeVersion;
-            if (tr1xVersion == null || tr1xVersion < _minBraidCutsceneVersion)
             {
                 return false;
             }
