@@ -276,18 +276,19 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
             environmentRandomizer.FinalizeEnvironment();
         }
 
+        var audioRandomizer = new TR2AudioRandomizer
+        {
+            ScriptEditor = scriptEditor,
+            Levels = levels,
+            BasePath = wipDirectory,
+            BackupPath = backupDirectory,
+            SaveMonitor = monitor,
+            Settings = Settings
+        };
         if (!monitor.IsCancelled && Settings.RandomizeAudio)
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
-            new TR2AudioRandomizer
-            {
-                ScriptEditor = scriptEditor,
-                Levels = levels,
-                BasePath = wipDirectory,
-                BackupPath = backupDirectory,
-                SaveMonitor = monitor,
-                Settings = Settings
-            }.Randomize(Settings.AudioSeed);
+            audioRandomizer.Randomize(Settings.AudioSeed);
         }
 
         if (!monitor.IsCancelled && Settings.RandomizeOutfits)
@@ -356,6 +357,12 @@ public class TR2ClassicEditor : TR2LevelEditor, ISettingsProvider
         {
             monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing Sprites");
             itemRandomizer.RandomizeSprites();
+        }
+
+        if (!monitor.IsCancelled && Settings.RandomizeAudio)
+        {
+            monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Embedding sound effects");
+            audioRandomizer.EmbedSamples();
         }
 
         AmendTitleAndCredits(scriptEditor, monitor);
