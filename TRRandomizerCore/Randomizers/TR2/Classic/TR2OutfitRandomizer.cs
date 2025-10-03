@@ -389,6 +389,21 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 actorLara.MeshTrees = realLara.MeshTrees;
                 actorLara.Meshes = realLara.Meshes;
             }
+
+            if ((lara == TR2Type.LaraUnwater || lara == TR2Type.LaraHome)
+                && level.Data.SoundEffects.TryGetValue(TR2SFX.LaraFeet, out var feet))
+            {
+                level.Data.TRXData ??= new();
+                level.Data.TRXData.SFX.RemoveAll(s => s.ID == (short)TR2SFX.LaraFeet);
+                level.Data.TRXData.SFX.Add(new()
+                {
+                    ID = (short)TR2SFX.LaraFeet,
+                    Chance = feet.Chance,
+                    Flags = feet.GetFlags(),
+                    Volume = feet.Volume,
+                    Data = [.. Enumerable.Range(0, 4).Select(i => File.ReadAllBytes($"Resources/TR2/Audio/Barefoot/{i}.wav"))],
+                });
+            }
         }
     }
 }
