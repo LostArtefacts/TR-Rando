@@ -29,14 +29,12 @@ Following is a brief video explanation of the setup, but be sure to read each of
 Before you launch the randomizer for the first time, you should carry out a few steps as follows.
 ***
 > ### TR1
-> You must use [TR1X](https://github.com/LostArtefacts/TR1X) to be able to randomize Tomb Raider 1. Follow the installation guide on the TR1X GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs) for guidance. Note that if using the TR1X installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
+> You must use [TR1X](https://github.com/LostArtefacts/TRX) to be able to randomize Tomb Raider 1. Follow the installation guide on the TR1X GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs) for guidance. Note that if using the TR1X installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
 > 
 > You must also ensure that you have the Unfinished Business levels files in your installation. These are available when using the TR1X installer, and we recommend that you choose the set that contains music triggers. The level files are also available to download manually from https://lostartefacts.dev/aux/tr1x/trub-music.zip - you can then simply extract the files into your TR1X data folder.
 ***
 > ### TR2
-> Use the [Version Swapper](https://github.com/TombRunners/tr2-version-swapper) or install and configure [TR2Main](https://github.com/Arsunt/TR2Main).
->
-> _This step is entirely optional based  on your own preference of gameplay._
+> You must use [TR2X](https://github.com/LostArtefacts/TRX) to be able to randomize Tomb Raider 2. Follow the installation guide on the TR2X GitHub page. Note that if using the TR2X installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
 ***
 > ### TR3
 > Use the [Version Swapper](https://github.com/TombRunners/tr3-version-swapper) or install and configure [tomb3](https://github.com/Trxyebeep/tomb3). Using tomb3 is recommended to enable all features in the randomizer, plus to enjoy all of the benefits of the improved game. See https://github.com/Trxyebeep/tomb3/blob/master/USING.md for detailed installation steps.
@@ -131,7 +129,7 @@ You may see the following error message when you try to launch the randomizer - 
 
 If however the randomizer doesn't launch, but you don't see the above error, you can install the runtime manually using the link below.
 
-- https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x64.exe
+- https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x64.exe
 
 ### General issues
 If you encounter error messages during randomization, the most likely cause is unclean data files. In this case, you should follow these steps.
