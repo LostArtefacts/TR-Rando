@@ -25,6 +25,61 @@
       }
     },
     {
+      "Comments": "Fix a hole in the wall in room 2.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 2,
+          "FaceIndex": 2,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 2,
+          "FaceIndex": 1,
+          "VertexChanges": {
+            "2": {
+              "X": 1024,
+              "Y": -256
+            }
+          }
+        }
+      ]
+    },
+    {
+      "EMType": 26,
+      "Triangles": {
+        "2": [
+          {
+            "Type": 3,
+            "Vertices": [
+              4,
+              152,
+              153
+            ],
+            "Texture": 16
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 2,
+          "FaceIndex": 1,
+          "VertexChanges": {
+            "2": {
+              "X": -1024
+            }
+          }
+        }
+      ]
+    },
+    {
       "Comments": "Add wind to outside rooms.",
       "EMType": 121,
       "Rooms": [
