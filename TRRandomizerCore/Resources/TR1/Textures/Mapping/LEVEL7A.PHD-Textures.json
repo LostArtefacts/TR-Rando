@@ -8,6 +8,15 @@
           "BackgroundIndex": 15
         }
       ]
+    },
+    "Landmarks.Rylael": {
+      "0": [
+        {
+          "RoomNumber": 5,
+          "RectangleIndices": [ 21 ],
+          "BackgroundIndex": 30
+        }
+      ]
     }
   },
 
