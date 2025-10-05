@@ -1,4 +1,6 @@
-## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.2...master) - xxxx-xx-xx
+## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.11.0...master) - xxxx-xx-xx
+
+## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.2...V1.11.0) - 2025-10-05
 - added support for TR1X 4.15 (now the minimum version supported) (#803)
 - added support for TR2X (#821)
 - added support for The Golden Mask in TR2X and playing in combined mode (see Level Sequencing options) (#59)
