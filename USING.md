@@ -29,18 +29,20 @@ Following is a brief video explanation of the setup, but be sure to read each of
 Before you launch the randomizer for the first time, you should carry out a few steps as follows.
 ***
 > ### TR1
-> You must use [TR1X](https://github.com/LostArtefacts/TRX) to be able to randomize Tomb Raider 1. Follow the installation guide on the TR1X GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs) for guidance. Note that if using the TR1X installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
+> You must use [TR1X 4.15.1](https://github.com/LostArtefacts/TRX/releases/tag/tr1-4.15.1) to be able to randomize Tomb Raider 1. Follow the installation guide on the TR1X GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs) for guidance. Note that if using the TR1X installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
 > 
 > You must also ensure that you have the Unfinished Business levels files in your installation. These are available when using the TR1X installer, and we recommend that you choose the set that contains music triggers. The level files are also available to download manually from https://lostartefacts.dev/aux/tr1x/trub-music.zip - you can then simply extract the files into your TR1X data folder.
 ***
 > ### TR2
-> You must use [TR2X](https://github.com/LostArtefacts/TRX) to be able to randomize Tomb Raider 2. Follow the installation guide on the TR2X GitHub page. Note that if using the TR2X installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
+> You must use [TR2X 1.5.1](https://github.com/LostArtefacts/TRX/releases/tag/tr2-1.5.1) to be able to randomize Tomb Raider 2. Follow the installation guide on the TR2X GitHub page. Note that if using the TR2X installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
 ***
 > ### TR3
 > Use the [Version Swapper](https://github.com/TombRunners/tr3-version-swapper) or install and configure [tomb3](https://github.com/Trxyebeep/tomb3). Using tomb3 is recommended to enable all features in the randomizer, plus to enjoy all of the benefits of the improved game. See https://github.com/Trxyebeep/tomb3/blob/master/USING.md for detailed installation steps.
 >
 > _This step is entirely optional based on your own preference of gameplay._
 ***
+
+**_Note that you cannot yet use the combined TRX engine for the randomizer. We will update this in due course; please only use the linked TR1X/TR2X versions above in the meantime._**
 
 It is recommended at this point that you create a copy of your game folder. If you choose to use the original folder and decide later that you want to revert the changes made by the randomizer, see the [relevant point below](USING.md#reverting).
 
