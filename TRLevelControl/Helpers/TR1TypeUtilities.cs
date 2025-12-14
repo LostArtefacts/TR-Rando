@@ -62,6 +62,35 @@ public static class TR1TypeUtilities
         }
     };
 
+    public static string GetName(TR1Type type)
+    {
+        // TODO: remove once static mesh enum entries are removed
+        return type switch
+        {
+            TR1Type.LaraFlareAnim_H => "LaraFlareAnim_H",
+            TR1Type.Flare_H => "Flare_H",
+            TR1Type.FlareSparks_M_H => "FlareSparks_M_H",
+            TR1Type.Flares_S_P => "Flares_S_P",
+            TR1Type.Flares_M_H => "Flares_M_H",
+
+            TR1Type.LaraM16Anim_H => "LaraM16Anim_H",
+            TR1Type.LaraGrenadeAnim_H => "LaraGrenadeAnim_H",
+            TR1Type.LaraHarpoonAnim_H => "LaraHarpoonAnim_H",
+
+            TR1Type.M16_M_H => "M16_M_H",
+            TR1Type.GrenadeLauncher_M_H => "GrenadeLauncher_M_H",
+            TR1Type.Harpoon_M_H => "Harpoon_M_H",
+            TR1Type.M16Ammo_M_H => "M16Ammo_M_H",
+            TR1Type.Grenades_M_H => "Grenades_M_H",
+            TR1Type.HarpoonAmmo_M_H => "HarpoonAmmo_M_H",
+
+            TR1Type.M16Gunflare_H => "M16Gunflare_H",
+            TR1Type.GrenadeProjectile_H => "GrenadeProjectile_H",
+            TR1Type.HarpoonProjectile_H => "HarpoonProjectile_H",
+            _ => type.ToString(),
+        };
+    }
+
     public static TR1Type TranslateAlias(TR1Type type)
     {
         foreach (TR1Type parentType in TypeFamilies.Keys)

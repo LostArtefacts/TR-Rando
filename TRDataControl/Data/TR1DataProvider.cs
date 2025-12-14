@@ -16,7 +16,7 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         {
             return TRBlobType.Sprite;
         }
-        if (type >= TR1Type.SceneryBase && type < TR1Type.SecretScion_M_H)
+        if (type > TR1Type.HarpoonProjectile_H && type < TR1Type.M16_S_P)
         {
             return TRBlobType.StaticMesh;
         }
@@ -123,6 +123,22 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
 
     private static readonly Dictionary<TR1Type, List<TR1Type>> _typeDependencies = new()
     {
+        [TR1Type.LaraFlareAnim_H] = new()
+        {
+            TR1Type.FlareSparks_M_H, TR1Type.Flares_M_H, TR1Type.Flare_H, TR1Type.Flares_S_P
+        },
+        [TR1Type.LaraM16Anim_H] = new()
+        {
+            TR1Type.M16Gunflare_H, TR1Type.M16_M_H, TR1Type.M16Ammo_M_H, TR1Type.M16_S_P, TR1Type.M16Ammo_S_P,
+        },
+        [TR1Type.LaraGrenadeAnim_H] = new()
+        {
+            TR1Type.GrenadeProjectile_H, TR1Type.GrenadeLauncher_M_H, TR1Type.Grenades_M_H, TR1Type.GrenadeLauncher_S_P, TR1Type.Grenades_S_P,
+        },
+        [TR1Type.LaraHarpoonAnim_H] = new()
+        {
+            TR1Type.HarpoonProjectile_H, TR1Type.Harpoon_M_H, TR1Type.HarpoonAmmo_M_H, TR1Type.Harpoon_S_P, TR1Type.HarpoonAmmo_S_P,
+        },
         [TR1Type.Adam]
             = new() { TR1Type.LaraMiscAnim_H_Pyramid, TR1Type.Explosion1_S_H },
         [TR1Type.AtlanteanLava]
@@ -363,6 +379,14 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         TR1Type.SecretLeadBar_S_P,
         TR1Type.SecretGoldBar_S_P,
         TR1Type.SecretAnkh_S_P,
+
+        TR1Type.Flares_S_P,
+        TR1Type.M16_S_P,
+        TR1Type.GrenadeLauncher_S_P,
+        TR1Type.Harpoon_S_P,
+        TR1Type.M16Ammo_S_P,
+        TR1Type.Grenades_S_P,
+        TR1Type.HarpoonAmmo_S_P,
     };
 
     #endregion
