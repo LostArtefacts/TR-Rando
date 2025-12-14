@@ -16,7 +16,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         {
             return TRBlobType.Sprite;
         }
-        if (type > TR2Type.MonkWithNoShadow && type < TR2Type.BengalTiger)
+        if (type > TR2Type.SecretOption3 && type < TR2Type.BengalTiger)
         {
             return TRBlobType.StaticMesh;
         }
@@ -438,6 +438,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         TR2Type.Flame_S_H,
         TR2Type.FontGraphics_S_H,
         TR2Type.AssaultNumbers,
+        TR2Type.PickupAid,
     };
 
     #endregion

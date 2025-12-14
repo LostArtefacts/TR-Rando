@@ -19,4 +19,7 @@ public enum TR1FX : short
     DrawRightGun  = 14,
     Chainblock    = 15,
     Flicker       = 16,
+    HideItem      = 17,
+    ShadowOn      = 18,
+    ShadowOff     = 19,
 }

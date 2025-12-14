@@ -32,4 +32,6 @@ public enum TR2FX : short
     AssaultStop      = 29,
     AssaultStart     = 30,
     AssaultEnd       = 31,
+    ShadowOn         = 32,
+    ShadowOff        = 33,
 }
