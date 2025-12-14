@@ -71,4 +71,5 @@ public enum TRRandomizerType
     Wireframe,
     HideDeadTrexes,
     Vehicles,
+    RemoveCrystals,
 }

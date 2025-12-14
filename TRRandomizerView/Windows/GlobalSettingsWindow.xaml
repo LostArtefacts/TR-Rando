@@ -54,6 +54,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -104,6 +105,18 @@
                 Grid.Column="1"
                 Visibility="{Binding IsGeneralBugFixesTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                 Text="Fix original level bugs and oversights, such as missing textures or untriggered enemies."/>
+
+            <CheckBox
+                Grid.Row="4"
+                Visibility="{Binding IsRemoveCrystalsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                IsChecked="{Binding RemoveCrystals, Mode=TwoWay}"
+                Content="Remove crystals"/>
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                Visibility="{Binding IsRemoveCrystalsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}">
+                Removes all savegame/healing crystal items.
+            </TextBlock>
         </Grid>
         
         <Border

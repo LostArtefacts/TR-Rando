@@ -180,6 +180,7 @@ internal class TRVersionSupport
         TRRandomizerType.LevelSequence,
         TRRandomizerType.NightMode,
         TRRandomizerType.Outfit,
+        TRRandomizerType.RemoveCrystals,
         TRRandomizerType.ReturnPaths,
         TRRandomizerType.RewardRooms,
         TRRandomizerType.Secret,

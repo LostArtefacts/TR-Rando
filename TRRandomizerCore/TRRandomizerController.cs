@@ -1211,6 +1211,12 @@ public class TRRandomizerController
         set => LevelRandomizer.FixOGBugs = value;
     }
 
+    public bool RemoveCrystals
+    {
+        get => LevelRandomizer.RemoveCrystals;
+        set => LevelRandomizer.RemoveCrystals = value;
+    }
+
     public bool RandomizeVfx
     {
         get => LevelRandomizer.RandomizeVfx;

@@ -149,6 +149,7 @@ public class RandomizerSettings
     public bool AutoLaunchGame { get; set; }
     public bool AddReturnPaths { get; set; }
     public bool FixOGBugs { get; set; }
+    public bool RemoveCrystals { get; set; }
 
     public bool RandomizeItemTypes { get; set; }
     public bool RandomizeItemPositions { get; set; }
@@ -343,6 +344,7 @@ public class RandomizerSettings
         AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
         AddReturnPaths = config.GetBool(nameof(AddReturnPaths), true);
         FixOGBugs = config.GetBool(nameof(FixOGBugs), true);
+        RemoveCrystals = config.GetBool(nameof(RemoveCrystals));
 
         RandomizeSecretRewardsPhysical = config.GetBool(nameof(RandomizeSecretRewardsPhysical));
         SecretRewardsPhysicalSeed = config.GetInt(nameof(SecretRewardsPhysicalSeed), defaultSeed);
@@ -515,6 +517,7 @@ public class RandomizerSettings
         config[nameof(AutoLaunchGame)] = AutoLaunchGame;
         config[nameof(AddReturnPaths)] = AddReturnPaths;
         config[nameof(FixOGBugs)] = FixOGBugs;
+        config[nameof(RemoveCrystals)] = RemoveCrystals;
 
         config[nameof(RandomizeSecretRewardsPhysical)] = RandomizeSecretRewardsPhysical;
         config[nameof(SecretRewardsPhysicalSeed)] = SecretRewardsPhysicalSeed;

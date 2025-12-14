@@ -28,7 +28,7 @@ public class ControllerOptions : INotifyPropertyChanged
 
     private GameMode _gameMode;
     private GameMode[] _gameModes;
-    private bool _addReturnPaths, _fixOGBugs, _disableDemos, _autoLaunchGame;
+    private bool _addReturnPaths, _fixOGBugs, _disableDemos, _autoLaunchGame, _removeCrystals;
 
     private BoolItemControlClass _randomizeLevelSequencing;
     private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRandomSecretModels, _enableUWCornerSecrets;
@@ -1548,6 +1548,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public bool RemoveCrystals
+    {
+        get => _removeCrystals;
+        set
+        {
+            _removeCrystals = value;
+            FirePropertyChanged();
+        }
+    }
+
     public bool DisableDemos
     {
         get => _disableDemos;
@@ -3056,6 +3066,7 @@ public class ControllerOptions : INotifyPropertyChanged
         AutoLaunchGame = _controller.AutoLaunchGame;
         AddReturnPaths = _controller.AddReturnPaths;
         FixOGBugs = _controller.FixOGBugs;
+        RemoveCrystals = _controller.RemoveCrystals;
 
         SpriteRandoModes = Enum.GetValues<SpriteRandoMode>();
         SpriteRandoMode = _controller.SpriteRandoMode;
@@ -3289,6 +3300,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.AutoLaunchGame = AutoLaunchGame;
         _controller.AddReturnPaths = AddReturnPaths;
         _controller.FixOGBugs = FixOGBugs;
+        _controller.RemoveCrystals = RemoveCrystals;
 
         _controller.SpriteRandoMode = SpriteRandoMode;
         _controller.RandomizeItemSprites = RandomizeItemSprites;
@@ -3373,6 +3385,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsItemSpriteTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemSprite);
     public bool IsReturnPathsTypeSupported => IsRandomizationSupported(TRRandomizerType.ReturnPaths);
     public bool IsGeneralBugFixesTypeSupported => IsRandomizationSupported(TRRandomizerType.GeneralBugFixes);
+    public bool IsRemoveCrystalsTypeSupported => IsRandomizationSupported(TRRandomizerType.RemoveCrystals);
 
     private bool IsRandomizationSupported(TRRandomizerType randomizerType)
     {

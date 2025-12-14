@@ -148,6 +148,19 @@ public class TR3SequenceProcessor : TR3LevelProcessor
                 }
             }
         }
+
+        if (Settings.RemoveCrystals)
+        {
+            for (int i = 0; i < level.Data.Entities.Count; i++)
+            {
+                var item = level.Data.Entities[i];
+                if (item.TypeID == TR3Type.SaveCrystal_P)
+                {
+                    item.TypeID = TR3Type.LookAtItem_H;
+                    ItemFactory.FreeItem(level.Name, i);
+                }
+            }
+        }
     }
 
     private void ImportUPV(TR3CombinedLevel level)
