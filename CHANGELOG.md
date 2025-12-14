@@ -1,4 +1,5 @@
 ## [Unreleased](https://github.com/LostArtefacts/TR-Rando/compare/V1.11.0...master) - xxxx-xx-xx
+- added an option to remove crystals in classic TR3
 
 ## [V1.11.0](https://github.com/LostArtefacts/TR-Rando/compare/V1.10.2...V1.11.0) - 2025-10-05
 - added support for TR1X 4.15 (now the minimum version supported) (#803)
