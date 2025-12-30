@@ -237,6 +237,10 @@ public enum TR1Type : uint
     GrenadeProjectile_H    = 211,
     HarpoonProjectile_H    = 212,
 
+    LaraAutoAnim_H         = 213,
+    Autos_M_H              = 214,
+    AutoAmmo_M_H           = 215,
+
     // Scenery
     Plant0                 = Winston,
     Plant1                 = LaraFlareAnim_H,
@@ -260,9 +264,9 @@ public enum TR1Type : uint
     Furniture9             = M16Gunflare_H,
     Rock0                  = GrenadeProjectile_H,
     Rock1                  = HarpoonProjectile_H,
-    Rock2                  = 213,
-    Rock3                  = 214,
-    Rock4                  = 215,
+    Rock2                  = LaraAutoAnim_H,
+    Rock3                  = Autos_M_H,
+    Rock4                  = AutoAmmo_M_H,
     Rock5                  = 216,
     Rock6                  = 217,
     Rock7                  = 218,
@@ -296,6 +300,9 @@ public enum TR1Type : uint
     M16Ammo_S_P            = 244,
     Grenades_S_P           = 245,
     HarpoonAmmo_S_P        = 246,
+    FontGraphicsSmall_S_H  = 247,
+    Automags_S_P           = 248,
+    AutoAmmo_S_P           = 249,
 
     // Unused models, so repurposed as duplicate puzzle items for importing as secret pickups
     SecretScion_M_H        = 700,

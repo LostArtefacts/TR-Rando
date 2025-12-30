@@ -352,6 +352,7 @@ public class TR3DataProvider : IDataProvider<TR3Type, TR3SFX>
         TR3Type.Glow2_S_H,
         TR3Type.FontGraphics_S_H,
         TR3Type.TimerFontGraphics_S_H,
+        TR3Type.FontGraphicsSmall_S_H,
     };
 
     #endregion

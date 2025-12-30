@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using TRImageControl;
 using TRImageControl.Packing;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TRDataControl;
@@ -31,6 +32,9 @@ public class TR1DataImporter : TRDataImporter<TR1Level, TR1Type, TR1SFX, TR1Blob
 
     protected override TRTextureRemapper<TR1Level> CreateRemapper(TR1Level level)
         => new TR1TextureRemapper(level);
+
+    protected override string GetTypeName(TR1Type type)
+        => TR1TypeUtilities.GetName(type);
 
     protected override TRTextureRemapGroup<TR1Type, TR1Level> GetRemapGroup()
         => JsonConvert.DeserializeObject<TR1TextureRemapGroup>(File.ReadAllText(TextureRemapPath));

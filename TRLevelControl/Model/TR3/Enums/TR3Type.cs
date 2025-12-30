@@ -384,10 +384,13 @@ public enum TR3Type : uint
     ExtraFX5                   = 372,
     ElectricalSwitchBox        = 373,
 
+    // TRX
+    FontGraphicsSmall_S_H      = 376,
+
     // Scenery
     Plant0                     = 374,
     Plant1                     = 375,
-    Plant2                     = 376,
+    Plant2                     = FontGraphicsSmall_S_H,
     Plant3                     = 377,
     Plant4                     = 378,
     Plant5                     = 379,

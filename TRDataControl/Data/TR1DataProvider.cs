@@ -16,7 +16,7 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         {
             return TRBlobType.Sprite;
         }
-        if (type > TR1Type.HarpoonProjectile_H && type < TR1Type.M16_S_P)
+        if (type > TR1Type.AutoAmmo_M_H && type < TR1Type.M16_S_P)
         {
             return TRBlobType.StaticMesh;
         }
@@ -138,6 +138,10 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         [TR1Type.LaraHarpoonAnim_H] = new()
         {
             TR1Type.HarpoonProjectile_H, TR1Type.Harpoon_M_H, TR1Type.HarpoonAmmo_M_H, TR1Type.Harpoon_S_P, TR1Type.HarpoonAmmo_S_P,
+        },
+        [TR1Type.LaraAutoAnim_H] = new()
+        {
+            TR1Type.Autos_M_H, TR1Type.AutoAmmo_M_H, TR1Type.Automags_S_P, TR1Type.AutoAmmo_S_P,
         },
         [TR1Type.Adam]
             = new() { TR1Type.LaraMiscAnim_H_Pyramid, TR1Type.Explosion1_S_H },
@@ -387,6 +391,9 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         TR1Type.M16Ammo_S_P,
         TR1Type.Grenades_S_P,
         TR1Type.HarpoonAmmo_S_P,
+        TR1Type.FontGraphicsSmall_S_H,
+        TR1Type.Automags_S_P,
+        TR1Type.AutoAmmo_S_P,
     };
 
     #endregion

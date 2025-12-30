@@ -16,7 +16,7 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         {
             return TRBlobType.Sprite;
         }
-        if (type > TR2Type.SecretOption3 && type < TR2Type.BengalTiger)
+        if (type > TR2Type.MagnumAmmo_S_P && type < TR2Type.BengalTiger)
         {
             return TRBlobType.StaticMesh;
         }
@@ -157,6 +157,8 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
             new() { TR2Type.LaraPistolAnim_H_Assault, TR2Type.LaraAutoAnim_H_Assault, TR2Type.LaraUziAnim_H_Assault },
         [TR2Type.LaraVegas] =
             [TR2Type.LaraPistolAnim_H_Vegas, TR2Type.LaraAutoAnim_H_Vegas, TR2Type.LaraUziAnim_H_Vegas],
+        [TR2Type.LaraMagnumAnim_H] =
+            [TR2Type.Magnums_M_H, TR2Type.MagnumAmmo_M_H, TR2Type.Magnums_S_P, TR2Type.MagnumAmmo_S_P],
         [TR2Type.M16_M_H] =
             new() { TR2Type.LaraM16Anim_H, TR2Type.M16Gunflare_H, TR2Type.M16_S_P, TR2Type.M16Ammo_M_H, TR2Type.M16Ammo_S_P },
         [TR2Type.MarcoBartoli] =
@@ -439,6 +441,9 @@ public class TR2DataProvider : IDataProvider<TR2Type, TR2SFX>
         TR2Type.FontGraphics_S_H,
         TR2Type.AssaultNumbers,
         TR2Type.PickupAid,
+        TR2Type.FontGraphicsSmall_S_H,
+        TR2Type.Magnums_S_P,
+        TR2Type.MagnumAmmo_S_P,
     };
 
     #endregion

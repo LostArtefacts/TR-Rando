@@ -87,6 +87,10 @@ public static class TR1TypeUtilities
             TR1Type.M16Gunflare_H => "M16Gunflare_H",
             TR1Type.GrenadeProjectile_H => "GrenadeProjectile_H",
             TR1Type.HarpoonProjectile_H => "HarpoonProjectile_H",
+
+            TR1Type.LaraAutoAnim_H => "LaraAutoAnim_H",
+            TR1Type.Autos_M_H => "Autos_M_H",
+            TR1Type.AutoAmmo_M_H => "AutoAmmo_M_H",
             _ => type.ToString(),
         };
     }

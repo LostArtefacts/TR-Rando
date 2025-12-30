@@ -34,6 +34,9 @@ public class TR1DataExporter : TRDataExporter<TR1Level, TR1Type, TR1SFX, TR1Blob
     protected override TRMesh GetDummyMesh()
         => Level.Models[TR1Type.Lara].Meshes[0];
 
+    protected override string GetTypeName(TR1Type type)
+        => TR1TypeUtilities.GetName(type);
+
     protected override void StoreColour(ushort index, TR1Blob blob)
     {
         blob.Palette8[index] = Level.Palette[index];

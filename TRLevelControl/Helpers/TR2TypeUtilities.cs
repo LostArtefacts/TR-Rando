@@ -172,6 +172,12 @@ public static class TR2TypeUtilities
             TR2Type.Bear => "Bear",
             TR2Type.MonkWithNoShadow => "MonkWithNoShadow",
             TR2Type.Wolf => "Wolf",
+            TR2Type.FontGraphicsSmall_S_H => "FontGraphicsSmall_S_H",
+            TR2Type.LaraMagnumAnim_H => "LaraMagnumAnim_H",
+            TR2Type.Magnums_M_H => "Magnums_M_H",
+            TR2Type.MagnumAmmo_M_H => "MagnumAmmo_M_H",
+            TR2Type.Magnums_S_P => "Magnums_S_P",
+            TR2Type.MagnumAmmo_S_P => "MagnumAmmo_S_P",
             _ => type.ToString(),
         };
     }
