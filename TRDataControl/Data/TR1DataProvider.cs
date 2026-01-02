@@ -16,7 +16,7 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         {
             return TRBlobType.Sprite;
         }
-        if (type > TR1Type.AutoAmmo_M_H && type < TR1Type.M16_S_P)
+        if (type > TR1Type.RocketProjectile_H && type < TR1Type.M16_S_P)
         {
             return TRBlobType.StaticMesh;
         }
@@ -142,6 +142,18 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         [TR1Type.LaraAutoAnim_H] = new()
         {
             TR1Type.Autos_M_H, TR1Type.AutoAmmo_M_H, TR1Type.Automags_S_P, TR1Type.AutoAmmo_S_P,
+        },
+        [TR1Type.LaraDeagleAnim_H] = new()
+        {
+            TR1Type.Deagle_M_H, TR1Type.DeagleAmmo_M_H, TR1Type.Deagle_S_P, TR1Type.DeagleAmmo_S_P,
+        },
+        [TR1Type.LaraMP5Anim_H] = new()
+        {
+            TR1Type.MP5_M_H, TR1Type.MP5Ammo_M_H, TR1Type.MP5_S_P, TR1Type.MP5Ammo_S_P,
+        },
+        [TR1Type.LaraRocketAnim_H] = new()
+        {
+            TR1Type.RocketLauncher_M_H, TR1Type.RocketAmmo_M_H, TR1Type.RocketLauncher_S_P, TR1Type.RocketAmmo_S_P, TR1Type.RocketProjectile_H,
         },
         [TR1Type.Adam]
             = new() { TR1Type.LaraMiscAnim_H_Pyramid, TR1Type.Explosion1_S_H },
@@ -394,6 +406,14 @@ public class TR1DataProvider : IDataProvider<TR1Type, TR1SFX>
         TR1Type.FontGraphicsSmall_S_H,
         TR1Type.Automags_S_P,
         TR1Type.AutoAmmo_S_P,
+        TR1Type.Snowflake_S_H,
+        TR1Type.Deagle_S_P,
+        TR1Type.DeagleAmmo_S_P,
+        TR1Type.MP5_S_P,
+        TR1Type.MP5Ammo_S_P,
+        TR1Type.RocketLauncher_S_P,
+        TR1Type.RocketAmmo_S_P,
+        TR1Type.Shadow_S_H,
     };
 
     #endregion

@@ -52,6 +52,32 @@ public static class TR3TypeUtilities
         },
     };
 
+    public static string GetName(TR3Type type)
+    {
+        // TODO: remove once static mesh enum entries are removed
+        return type switch
+        {
+            TR3Type.FontGraphicsSmall_S_H => "FontGraphicsSmall_S_H",
+            TR3Type.Snowflake_S_H => "Snowflake_S_H",
+            TR3Type.LaraMagnumAnim_H => "LaraMagnumAnim_H",
+            TR3Type.Magnums_M_H => "Magnums_M_H",
+            TR3Type.MagnumAmmo_M_H => "MagnumAmmo_M_H",
+            TR3Type.Magnums_S_P => "Magnums_S_P",
+            TR3Type.MagnumAmmo_S_P => "MagnumAmmo_S_P",
+            TR3Type.LaraAutoAnim_H => "LaraAutoAnim_H",
+            TR3Type.Autos_M_H => "Autos_M_H",
+            TR3Type.AutoAmmo_M_H => "AutoAmmo_M_H",
+            TR3Type.Automags_S_P => "Automags_S_P",
+            TR3Type.AutoAmmo_S_P => "AutoAmmo_S_P",
+            TR3Type.LaraM16Anim_H => "LaraM16Anim_H",
+            TR3Type.M16_M_H => "M16_M_H",
+            TR3Type.M16Ammo_M_H => "M16Ammo_M_H",
+            TR3Type.M16_S_P => "M16_S_P",
+            TR3Type.M16Ammo_S_P => "M16Ammo_S_P",
+            _ => type.ToString(),
+        };
+    }
+
     public static List<TR3Type> GetFamily(TR3Type type)
     {
         foreach (TR3Type parentType in LevelAliases.Keys)

@@ -16,7 +16,7 @@ public class TR3DataProvider : IDataProvider<TR3Type, TR3SFX>
         {
             return TRBlobType.Sprite;
         }
-        if (type >= TR3Type.SceneryBase && type < TR3Type.CobraIndia)
+        if (type >= TR3Type.M16Ammo_S_P && type < TR3Type.CobraIndia)
         {
             return TRBlobType.StaticMesh;
         }
@@ -201,6 +201,13 @@ public class TR3DataProvider : IDataProvider<TR3Type, TR3SFX>
             new() { TR3Type.SmallMed_M_H },
         [TR3Type.LargeMed_P] =
             new() { TR3Type.LargeMed_M_H },
+
+        [TR3Type.LaraMagnumAnim_H] =
+            [TR3Type.Magnums_M_H, TR3Type.MagnumAmmo_M_H, TR3Type.Magnums_S_P, TR3Type.MagnumAmmo_S_P],
+        [TR3Type.LaraAutoAnim_H] =
+            [TR3Type.Autos_M_H, TR3Type.AutoAmmo_M_H, TR3Type.Automags_S_P, TR3Type.AutoAmmo_S_P],
+        [TR3Type.LaraM16Anim_H] =
+            [TR3Type.M16_M_H, TR3Type.M16Ammo_M_H, TR3Type.M16_S_P, TR3Type.M16Ammo_S_P],
     };
 
     private static readonly Dictionary<TR3Type, List<TR3Type>> _typeAliases = new()
@@ -353,6 +360,13 @@ public class TR3DataProvider : IDataProvider<TR3Type, TR3SFX>
         TR3Type.FontGraphics_S_H,
         TR3Type.TimerFontGraphics_S_H,
         TR3Type.FontGraphicsSmall_S_H,
+        TR3Type.Snowflake_S_H,
+        TR3Type.Magnums_S_P,
+        TR3Type.MagnumAmmo_S_P,
+        TR3Type.Automags_S_P,
+        TR3Type.AutoAmmo_S_P,
+        TR3Type.M16_S_P,
+        TR3Type.M16Ammo_S_P,
     };
 
     #endregion

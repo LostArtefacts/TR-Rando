@@ -1,4 +1,5 @@
 ﻿using TRImageControl.Packing;
+using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TRDataControl;
@@ -31,6 +32,9 @@ public class TR3DataExporter : TRDataExporter<TR3Level, TR3Type, TR3SFX, TR3Blob
 
     protected override TRMesh GetDummyMesh()
         => Level.Models[TR3Type.Lara].Meshes[0];
+
+    protected override string GetTypeName(TR3Type type)
+        => TR3TypeUtilities.GetName(type);
 
     protected override void StoreColour(ushort index, TR3Blob blob)
     {
