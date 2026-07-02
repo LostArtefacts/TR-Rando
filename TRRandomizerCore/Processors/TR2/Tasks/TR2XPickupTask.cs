@@ -211,7 +211,7 @@ public class TR2XPickupTask : ITR2ProcessorTask
         // Make models face the correct way in the inventory
         foreach (var frame in model.Animations.SelectMany(a => a.Frames))
         {
-            frame.Rotations.ForEach(r => r.Y = (short)(r.Y == 0 ? 512 : 0));
+            frame.Rotations.ForEach(r => r.Y = r.Y == 0 ? 180 : 0);
         }
     }
 

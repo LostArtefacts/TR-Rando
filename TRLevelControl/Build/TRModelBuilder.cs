@@ -1,4 +1,5 @@
-﻿using TRLevelControl.Model;
+﻿using TRLevelControl.Helpers;
+using TRLevelControl.Model;
 
 namespace TRLevelControl.Build;
 
@@ -6,6 +7,7 @@ public class TRModelBuilder<T>
     where T : Enum
 {
     private static readonly ushort _tr5ModelPadding = 0xFFEF;
+    private static readonly float _rotEpsilon = 1.0f / 2048;
 
     private readonly TRGameVersion _version;
     private readonly TRModelDataType _dataType;
@@ -531,13 +533,13 @@ public class TRModelBuilder<T>
             switch (rotMode)
             {
                 case TRAngleMode.X:
-                    rot.X = rot1;
+                    rot.X = TRAngleUtils.FromGame(rot1, _version);
                     break;
                 case TRAngleMode.Y:
-                    rot.Y = rot1;
+                    rot.Y = TRAngleUtils.FromGame(rot1, _version);
                     break;
                 case TRAngleMode.Z:
-                    rot.Z = rot1;
+                    rot.Z = TRAngleUtils.FromGame(rot1, _version);
                     break;
                 default:
                     UnpackRotation(rot, rot0, rot1);
@@ -697,15 +699,11 @@ public class TRModelBuilder<T>
 
         foreach (TRAnimFrameRotation rot in frame.Rotations)
         {
-            int rotX = rot.X & 0x03FF;
-            int rotY = rot.Y & 0x03FF;
-            int rotZ = rot.Z & 0x03FF;
-
             if (_version == TRGameVersion.TR1)
             {
                 // Reverse order
-                frames.Add(PackYZRotation(rotY, rotZ));
-                frames.Add(PackXYRotation(rotX, rotY));
+                frames.Add(PackYZRotation(rot.Y, rot.Z));
+                frames.Add(PackXYRotation(rot.X, rot.Y));
             }
             else
             {
@@ -722,8 +720,8 @@ public class TRModelBuilder<T>
                         frames.Add(MaskSingleRotation(rot.Z, mode));
                         break;
                     default:
-                        frames.Add(PackXYRotation(rotX, rotY));
-                        frames.Add(PackYZRotation(rotY, rotZ));
+                        frames.Add(PackXYRotation(rot.X, rot.Y));
+                        frames.Add(PackYZRotation(rot.Y, rot.Z));
                         break;
                 }
             }
@@ -945,17 +943,21 @@ public class TRModelBuilder<T>
             return rot.Mode;
         }
 
-        if (rot.X == 0 && rot.Y == 0)
+        var zeroX = Math.Abs(rot.X) <= _rotEpsilon;
+        var zeroY = Math.Abs(rot.Y) <= _rotEpsilon;
+        var zeroZ = Math.Abs(rot.Z) <= _rotEpsilon;
+
+        if (zeroX && zeroY)
         {
             // OG TR2+ levels (and TRR levels) use Z here, PDP uses X. Makes no difference
             // in game, but keeps tests happy.
-            return _dataType == TRModelDataType.PDP && rot.Z == 0 ? TRAngleMode.X : TRAngleMode.Z;
+            return _dataType == TRModelDataType.PDP && zeroZ ? TRAngleMode.X : TRAngleMode.Z;
         }
-        if (rot.X == 0 && rot.Z == 0)
+        if (zeroX && zeroZ)
         {
             return TRAngleMode.Y;
         }
-        if (rot.Y == 0 && rot.Z == 0)
+        if (zeroY && zeroZ)
         {
             return TRAngleMode.X;
         }
@@ -964,39 +966,35 @@ public class TRModelBuilder<T>
 
     private static void UnpackRotation(TRAnimFrameRotation rot, short rot0, short rot1)
     {
-        rot.X = (short)((rot0 & 0x3FF0) >> 4);
-        rot.Y = (short)(((rot0 & 0x000F) << 6) | ((rot1 & 0xFC00) >> 10));
-        rot.Z = (short)(rot1 & 0x03FF);
+        rot.X = TRAngleUtils.FromGame((short)((rot0 & 0x3FF0) >> 4));
+        rot.Y = TRAngleUtils.FromGame((short)(((rot0 & 0x000F) << 6) | ((rot1 & 0xFC00) >> 10)));
+        rot.Z = TRAngleUtils.FromGame((short)(rot1 & 0x03FF));
     }
 
-    private static short PackXYRotation(int x, int y)
+    private static short PackXYRotation(float x, float y)
     {
-        return (short)((x << 4) | ((y & 0x0FC0) >> 6));
+        var gameX = TRAngleUtils.ToGame(x);
+        var gameY = TRAngleUtils.ToGame(y);
+        return (short)((gameX << 4) | ((gameY & 0x0FC0) >> 6));
     }
 
-    private static short PackYZRotation(int y, int z)
+    private static short PackYZRotation(float y, float z)
     {
-        return (short)(((y & 0x003F) << 10) | (z & 0x03FF));
+        var gameY = TRAngleUtils.ToGame(y);
+        var gameZ = TRAngleUtils.ToGame(z);
+        return (short)(((gameY & 0x003F) << 10) | (gameZ & 0x03FF));
     }
 
     private short GetSingleRotation(int angle)
     {
-        if (_version < TRGameVersion.TR4)
-        {
-            return (short)(angle & 0x03FF);
-        }
-
-        return (short)(angle & 0x0FFF);
+        var range = TRAngleUtils.GetRange(_version);
+        return (short)(angle & (range - 1));
     }
 
-    private short MaskSingleRotation(int angle, TRAngleMode mode)
+    private short MaskSingleRotation(float angle, TRAngleMode mode)
     {
-        if (_version < TRGameVersion.TR4)
-        {
-            return (short)((angle & 0x03FF) | (int)mode);
-        }
-
-        return (short)((angle & 0x0FFF) | (int)mode);
+        var gameAngle = TRAngleUtils.ToGame(angle, _version);
+        return (short)(gameAngle | (short)mode);
     }
 
     // Information we need for building, but do not want to retain.
