@@ -4,17 +4,17 @@ public class TRAnimation : ICloneable
 {
     public byte FrameRate { get; set; }
     public ushort StateID { get; set; }
-    public TRFixedFloat32 Speed { get; set; }
-    public TRFixedFloat32 Accel { get; set; }
-    public TRFixedFloat32 SpeedLateral { get; set; }
-    public TRFixedFloat32 AccelLateral { get; set; }
+    public TRFixedFloat32 Speed { get; set; } = new();
+    public TRFixedFloat32 Accel { get; set; } = new();
+    public TRFixedFloat32 SpeedLateral { get; set; } = new();
+    public TRFixedFloat32 AccelLateral { get; set; } = new();
     public short FrameStart { get; set; }
     public short FrameEnd { get; set; }
     public ushort NextAnimation { get; set; }
     public ushort NextFrame { get; set; }
-    public List<TRStateChange> Changes { get; set; } = new();
-    public List<TRAnimCommand> Commands { get; set; } = new();
-    public List<TRAnimFrame> Frames { get; set; } = new();
+    public List<TRStateChange> Changes { get; set; } = [];
+    public List<TRAnimCommand> Commands { get; set; } = [];
+    public List<TRAnimFrame> Frames { get; set; } = [];
 
     public int TotalDispatchCount => Changes.Sum(c => c.Dispatches.Count);
 
