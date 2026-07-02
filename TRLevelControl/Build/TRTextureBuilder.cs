@@ -165,14 +165,7 @@ public class TRTextureBuilder
 
     private void Write(TRLevelWriter writer, TRObjectTexture texture, int index, bool remastered)
     {
-        TRBlendingMode blendingMode = texture.BlendingMode;
-        if ((blendingMode == TRBlendingMode.AlphaBlending && _version < TRGameVersion.TR3)
-            || (blendingMode == TRBlendingMode.ForcedAlpha && _version < TRGameVersion.TR4))
-        {
-            blendingMode = TRBlendingMode.AlphaTesting;
-        }
-
-        writer.Write((ushort)blendingMode);
+        writer.Write((ushort)texture.BlendingMode);
 
         ushort flags = texture.Atlas;
         if (_version >= TRGameVersion.TR4)
