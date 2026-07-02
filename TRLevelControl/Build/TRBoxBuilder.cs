@@ -86,6 +86,8 @@ public class TRBoxBuilder
                     boxNumber &= 0x7FFF;
                 }
                 box.Overlaps.Add(boxNumber);
+                if (index >= overlaps.Length)
+                    done = true;
             }
             while (!done);
         }
