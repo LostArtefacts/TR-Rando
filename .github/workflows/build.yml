@@ -17,17 +17,17 @@ jobs:
       - name: Install .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '6.0'
+          dotnet-version: '8.0'
           
       - name: Build the solution
         run: |
           dotnet restore
           dotnet test --filter TestCategory!=OriginalIO
-          dotnet publish TRRandomizerView -c Release -a x64 --property:PublishDir=build --self-contained false
+          dotnet publish TRRandomizerView -c Release -r win-x64 --self-contained false -o build
           
       - name: Package the build
         run: |
-          cd TRRandomizerView/build
+          cd build
           dir
           Compress-Archive -Path (Get-ChildItem -Exclude *.pdb) -DestinationPath TRRando-x64.zip
           
@@ -35,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: TRRando-x64
-          path: TRRandomizerView/build/TRRando-x64.zip
+          path: build/TRRando-x64.zip
