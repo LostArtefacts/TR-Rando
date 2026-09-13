@@ -1,7 +1,11 @@
 # Development guidelines
 
-The solution is built using Visual Studio. When you fork or copy the repository
-and then build the solution for the first time, Visual Studio should restore all
+The solution is built using Visual Studio. The shared IO libraries
+(TRLevelControl, TRImageControl, TRDataControl and related tools) live in the
+[TombIO](https://github.com/LostArtefacts/TombIO) repository, included here as
+a git submodule, so clone with `--recursive` or run
+`git submodule update --init --recursive` after cloning. When you then build
+the solution for the first time, Visual Studio should restore all other
 dependencies, but these are listed as follows for reference.
 
 ### NuGet packages
@@ -11,7 +15,8 @@ dependencies, but these are listed as follows for reference.
 
 ### Additional dependencies
 * https://github.com/LostArtefacts/TRGameflowEditor/releases/latest
-* https://github.com/lahm86/RectanglePacker/releases/latest
+* https://github.com/lahm86/RectanglePacker (built from source as a submodule
+  of TombIO)
 
 ## Coding conventions
 

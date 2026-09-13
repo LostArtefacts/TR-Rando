@@ -3,33 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelControl", "TRLevelControl\TRLevelControl.csproj", "{226C4A3A-4FBB-4C15-AED4-C9248EB3A144}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelControl", "TombIO\TRLevelControl\TRLevelControl.csproj", "{226C4A3A-4FBB-4C15-AED4-C9248EB3A144}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelControlTests", "TRLevelControlTests\TRLevelControlTests.csproj", "{4364B084-8063-4D82-A12C-008D6482E3E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelControlTests", "TombIO\TRLevelControlTests\TRLevelControlTests.csproj", "{4364B084-8063-4D82-A12C-008D6482E3E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{5F1A11E5-F541-4E3B-B331-93574EE4C629}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextureExport", "TextureExport\TextureExport.csproj", "{108D4840-3E84-466F-B5DE-AF00EECA8103}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRImageControl", "TRImageControl\TRImageControl.csproj", "{29F10C62-F4D8-4ACA-91ED-6920AE3F1AC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRImageControl", "TombIO\TRImageControl\TRImageControl.csproj", "{29F10C62-F4D8-4ACA-91ED-6920AE3F1AC0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRRandomizerView", "TRRandomizerView\TRRandomizerView.csproj", "{6CE82358-524D-4B12-A514-0903521ED13C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRRandomizerCore", "TRRandomizerCore\TRRandomizerCore.csproj", "{B657D758-A095-44B5-AEF1-C77C30667DAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRDataControl", "TRDataControl\TRDataControl.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRDataControl", "TombIO\TRDataControl\TRDataControl.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFXExport", "SFXExport\SFXExport.csproj", "{D3662F36-C8D8-471C-8F43-192CE748B04E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFXExport", "TombIO\SFXExport\SFXExport.csproj", "{D3662F36-C8D8-471C-8F43-192CE748B04E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelExport", "ModelExport\ModelExport.csproj", "{62336986-BC9F-447E-A046-E24E8153C5AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelExport", "TombIO\ModelExport\ModelExport.csproj", "{62336986-BC9F-447E-A046-E24E8153C5AF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationExport", "LocationExport\LocationExport.csproj", "{D69A8033-C014-421E-9DFA-29D5B8A547B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelToolset", "TRLevelToolset\TRLevelToolset.csproj", "{4B75F7F5-A3D4-465F-A8B8-F5142057FD97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelToolset", "TombIO\TRLevelToolset\TRLevelToolset.csproj", "{4B75F7F5-A3D4-465F-A8B8-F5142057FD97}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRImageControlTests", "TRImageControlTests\TRImageControlTests.csproj", "{D9278559-10CF-4533-9A05-8FCB76193DE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRImageControlTests", "TombIO\TRImageControlTests\TRImageControlTests.csproj", "{D9278559-10CF-4533-9A05-8FCB76193DE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRDataControlTests", "TRDataControlTests\TRDataControlTests.csproj", "{265F4AB1-4E10-41A1-89B8-CC10644510B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRDataControlTests", "TombIO\TRDataControlTests\TRDataControlTests.csproj", "{265F4AB1-4E10-41A1-89B8-CC10644510B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRRandomizerCoreTests", "TRRandomizerCoreTests\TRRandomizerCoreTests.csproj", "{DE326EEC-57C6-43C4-986E-80F2498A3270}"
 EndProject

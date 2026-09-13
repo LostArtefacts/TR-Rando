@@ -7,10 +7,6 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RectanglePacker, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Deps\RectanglePacker.dll</HintPath>
-    </Reference>
     <Reference Include="TRGE.Coord">
       <HintPath>..\Deps\TRGE.Coord.dll</HintPath>
     </Reference>
@@ -22,9 +18,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TRDataControl\TRDataControl.csproj" />
-    <ProjectReference Include="..\TRImageControl\TRImageControl.csproj" />
-    <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
+    <ProjectReference Include="..\TombIO\RectanglePacker\RectanglePacker\RectanglePacker.csproj" />
+    <ProjectReference Include="..\TombIO\TRDataControl\TRDataControl.csproj" />
+    <ProjectReference Include="..\TombIO\TRImageControl\TRImageControl.csproj" />
+    <ProjectReference Include="..\TombIO\TRLevelControl\TRLevelControl.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\**">

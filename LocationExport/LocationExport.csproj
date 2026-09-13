@@ -9,7 +9,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
+    <ProjectReference Include="..\TombIO\TRLevelControl\TRLevelControl.csproj" />
     <ProjectReference Include="..\TRRandomizerCore\TRRandomizerCore.csproj" />
   </ItemGroup>
   <PropertyGroup>
